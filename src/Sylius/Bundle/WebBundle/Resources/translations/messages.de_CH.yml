@@ -84,8 +84,6 @@ sylius:
     billing_address: Rechnungsadresse
     id: ID
     number: Nummer
-    adjustments:
-      label: Bezeichnung
   route:
     id: ID
     name: Name
@@ -99,6 +97,7 @@ sylius:
     sku: Bestandseinheit
   channel:
     code: Code
+    currency_default: Standardwährung
     enabled: Aktiviert
     id: ID
     name: Name
@@ -124,6 +123,8 @@ sylius:
     id: ID
     name: Name
   promotion_coupon:
+    code: Code
+  product_attribute:
     code: Code
   report:
     name: Name
@@ -165,3 +166,5 @@ sylius:
     firstName: Vorname
     message: Nachricht
     topic: Betreff
+  ui:
+    code: Code

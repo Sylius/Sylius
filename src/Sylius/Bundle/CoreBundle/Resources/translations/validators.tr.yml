@@ -13,6 +13,9 @@ sylius:
     price:
       min: Fiyat negatif olamaz.
       not_blank: Lütfen fiyatı giriniz.
+  product_translation:
+    short_description:
+      max: 'Kısa açıklama daha sonra {{ limit }} karakter olmalıdır.'
 sylius_shipping:
   method:
     zone:

@@ -10,15 +10,20 @@ sylius:
       id: Id
       publish_end_date: Date de dépublication
       publish_start_date: Date de début de publication
+      publishable: Publié
     imagine_block:
       filter: Filtrer
       image: Image
       internal_name: Nom interne
       label: Label
+      link_url: Lien URL
       parent: Parent
       publish_end_date: Date de dépublication
       publish_start_date: Date de début de publication
+      publishable: Publié
+      slideshow_small: Carrousel Petit (latéral)
       slideshow_medium: Carrousel moyen (contenu)
+      slideshow_large: Grand Carrousel (pleine largeur)
     menu:
       childrens: Enfants
       display: Afficher
@@ -28,6 +33,7 @@ sylius:
       parent: Parent
       publish_end_date: Date de dépublication
       publish_start_date: Date de début de publication
+      publishable: Publié
       route: Route
       uri: URI
     menu_block:
@@ -36,6 +42,7 @@ sylius:
       name: Nom
       publish_end_date: Date de dépublication
       publish_start_date: Date de début de publication
+      publishable: Publié
     menu_node_block:
       content: Contenu
       display: Afficher
@@ -45,6 +52,7 @@ sylius:
       link_type: Type de lien
       publish_end_date: Date de dépublication
       publish_start_date: Date de début de publication
+      publishable: Publié
       route: Route
       uri: URI
     redirect_route:
@@ -57,6 +65,7 @@ sylius:
       id: Id
       publish_end_date: Date de dépublication
       publish_start_date: Date de début de publication
+      publishable: Publié
       title: Titre
     route:
       content: Contenu
@@ -68,13 +77,16 @@ sylius:
       parent: Parent
       publish_end_date: Date de dépublication
       publish_start_date: Date de début de publication
+      publishable: Publié
       title: Titre
     slideshow_block:
+      add_slide: Ajouter une diapositive
       childrens: Enfants
       internal_name: Nom interne
       parent: Parent
       publish_end_date: Date de dépublication
       publish_start_date: Date de début de publication
+      publishable: Publié
       title: Titre
     static_content:
       body: Corps
@@ -84,6 +96,7 @@ sylius:
       parent: Parent
       publish_end_date: Date de dépublication
       publish_start_date: Date de début de publication
+      publishable: Publié
       routes: Chemins
       title: Titre
     string_block:
@@ -92,3 +105,4 @@ sylius:
       name: Nom
       publish_end_date: Date de dépublication
       publish_start_date: Date de début de publication
+      publishable: Publié

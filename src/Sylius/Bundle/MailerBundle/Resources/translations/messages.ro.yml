@@ -4,6 +4,5 @@
 sylius:
   form:
     email:
-      code: Cod
       enabled: Activat
       content: Conţinut

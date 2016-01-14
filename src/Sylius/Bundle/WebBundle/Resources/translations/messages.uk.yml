@@ -4,7 +4,17 @@
 sylius:
   emails:
     order_confirmation:
+      name: Підтвердження замовлення
       subject: Дякуємо за замовлення!
+    order_comment:
+      name: Коментар до замовлення
+      subject: Новий коментар, доданий до замовлення
+    shipment_confirmation:
+      name: Підтвердження відвантаження
+      subject: Ваше замовлення вже даставлене!
+    user_confirmation:
+      name: Підтвердження користувача
+      subject: Ласкаво просимо до нашого магазину!
   account:
     address:
       action:
@@ -19,12 +29,15 @@ sylius:
         no_billing: Немає платіжної адреси за замовчуванням
         no_shipping: Немає адреси доставки за замовчуванням
         shipping: Адреса доставки за замовчуванням
+      empty: Ви не вказали адресу.
       list: Усі ваші адреси
       update: Редагувати мою адресу
     home:
+      id: 'ID клієнта :'
       outline: Користуйтеся всіма функціями, що доступні в вашому особистому просторі для перегляду, відстеження та керування вашими даними.
       since: Ви є клієнтом з
       welcome: Ласкаво просимо до вашого простору
+      last5orders: 5 останніх замовлень
     order:
       created_at: Розміщено
       details: Деталі вашого замовлення
@@ -32,6 +45,8 @@ sylius:
       empty: Ви поки не розмістили жодного замовлення.
       invoice: Рахунок
       list: Всі ваші замовлення
+      number: 'Номер:'
+      payment_mode: 'Форма оплати :'
       placed_at: 'Розміщене %at%'
       shipment:
         pending: В очікуванні
@@ -71,6 +86,7 @@ sylius:
       add_product: Новий товар
       orders: Останні замовлення
       products: Ваші продукти
+      customers: Клієнти
     statistics:
       orders_this_month: Всього замовлень
       registrations_this_month: Всього реєстрацій
@@ -82,23 +98,27 @@ sylius:
     imagine:
       id: ID
       label: Назва
+      publishable: Опублікований
       title: Назва
       updated_at: Останнє оновлення
     simple:
       body: Тіло
       id: ID
       label: Назва
+      publishable: Опублікований
       title: Назва
       updated_at: Останнє оновлення
     slideshow:
       body: Тіло
       id: ID
+      publishable: Опублікований
       title: Назва
       updated_at: Останнє оновлення
     string:
       body: Тіло
       id: ID
       label: Назва
+      publishable: Опублікований
       title: Назва
       updated_at: Останнє оновлення
   breadcrumb:
@@ -110,6 +130,10 @@ sylius:
     content: Зміст
     country:
       index: Країни
+    section:
+      customer: Клієнт
+    customer:
+      index: Клієнти
     dashboard: Панель керування
     edit: Редагувати
     general_settings: Загальні налаштування
@@ -120,6 +144,9 @@ sylius:
       index: Інвентаризація
     locale:
       index: Локалі
+    marketing: Маркетинг
+    menu:
+      index: Меню
     menu_node:
       index: Елементи меню
     new: Новий
@@ -139,6 +166,8 @@ sylius:
       index: Промо-акції
     promotion_coupon:
       index: Купони
+    report:
+      index: Звіти
     route:
       index: Маршрути
     sales: Продажі
@@ -148,6 +177,7 @@ sylius:
       index: Категорії доставки
     shipping_method:
       index: Методи доставки
+    support: Служба підтримки
     tax_category:
       index: Категорії оподаткування
     tax_rate:
@@ -155,7 +185,13 @@ sylius:
     taxation_settings: Налаштування оподаткування
     taxonomy:
       index: Категоризація
+    email:
+      index: Повідомлення електронної пошти
+    channel:
+      index: Канали
     update: Редагувати
+    permission:
+      index: Дозволи
     role:
       index: Ролі
     zone:
@@ -253,6 +289,7 @@ sylius:
     code: Код
     id: ID
     description: Опис
+    index_header: Дозволи
     updated_at: Останнє оновлення
   role:
     code: Код
@@ -337,6 +374,8 @@ sylius:
   manage: Управління
   menu:
     id: ID
+    index_header: Меню
+    publishable: Опублікований
     title: Назва
   menu_node:
     id: ID
@@ -397,7 +436,7 @@ sylius:
     currency: Валюта
     promotion_coupons: Купони
     adjustments:
-      label: Назва
+      type: Тип
       description: Опис
       amount: Кількість
     comment:
@@ -435,8 +474,10 @@ sylius:
   channel:
     created_at: Створено
     code: Код
+    currency_default: Валюта за замовчуванням
     enabled: Увімкнено
     id: ID
+    index_header: Канали
     name: Ім’я
     update: Редагувати
     updated_at: Останнє оновлення
@@ -452,6 +493,7 @@ sylius:
     create: Створити нову сторінку
     id: ID
     index_header: Сторінки
+    publishable: Опублікований
     routes: Маршрути
     title: Назва
   password: Пароль
@@ -525,6 +567,7 @@ sylius:
       images: Зображення
       options: Опції
       product: Товар
+      channels: Канали
       pricing: Ціноутворення
     tax_category: Категорія податку
     unavailable: Недоступно
@@ -576,9 +619,11 @@ sylius:
     configuration: Конфігурація
     type: Тип
   product_attribute:
+    code: Код
     name: ім’я
     updated_at: останнє оновлення
   archetype:
+    index_header: Прототипи продуктів
     name: ім’я
     updated_at: останнє оновлення
   province:
@@ -590,6 +635,7 @@ sylius:
     code: Код
     description: Опис
     manage: Управління
+    index_header: Звіти
   save_changes: Зберегти зміни
   search: Пошук
   security:
@@ -597,6 +643,7 @@ sylius:
       button: Логін
   settings:
     general_header: Загальні налаштування
+    security_header: Налаштування безпеки
     taxation_header: Налаштування оподаткування
   shipment_category:
     manage: Управління категоріями доставки
@@ -616,7 +663,6 @@ sylius:
     category: Категорія
     create: Створити спосіб доставки
     create_header: Новий спосіб доставки
-    enabled: Включений?
     id: ID
     index_header: Методи доставки
     manage: Керувати методами доставки
@@ -752,3 +798,6 @@ sylius:
     message: Повідомлення
     topic: Тема
     updated_at: Останнє оновлення
+  ui:
+    links: Посилання
+    code: Код

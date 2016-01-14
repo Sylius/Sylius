@@ -15,7 +15,7 @@ sylius:
         pending: Čakajúca
         ready: Pripravená
         shipped: Odoslané
-        returned: Vrátený tovar
+        returned: Vrátené
         cancelled: Zrušené
       tracking_code: Sledovací kód
     shipping_calculator:
@@ -32,7 +32,7 @@ sylius:
         amount: Suma
       weight_rate_configuration:
         label: Sadzba podľa hmotnosti
-        fixed: Fixná suma
+        fixed: Pevná sadzba
         variable: Variabilná suma
         division: Delenie
       volume_rate_configuration:
@@ -47,5 +47,5 @@ sylius:
       category: Kategória
       category_requirement: Podmienka pre kategóriu doručenia
       configuration: Konfigurácia
-      enabled: Povolené
+      enabled: Zapnuté
       name: Názov

@@ -13,6 +13,9 @@ sylius:
     price:
       min: Le tarif ne peut pas être négatif.
       not_blank: Veuillez entrer un prix.
+  product_translation:
+    short_description:
+      max: 'La description brève ne doit pas dépasser {{ limit }} caractères.'
 sylius_shipping:
   method:
     zone:

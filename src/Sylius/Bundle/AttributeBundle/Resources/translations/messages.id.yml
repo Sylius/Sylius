@@ -4,5 +4,5 @@
 sylius:
   form:
     attribute:
-      name: Nama internal
-      presentation: Presentasi
+      code: Kode
+      name: Nama

@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  channel:
+    code:
+      not_blank: الرجاء إدخال رمز القناة.
+      unique: رمز القناة يجب أن يكون بدون نظير.
+    name:
+      not_blank: الرجاء إدخال اسم القناة.

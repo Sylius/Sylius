@@ -80,18 +80,29 @@ sylius:
     index_header: Tömbök
     no_results: Nincsenek blokkok a megjelenítéséhez.
     imagine:
+      id: Azonosító
+      label: Címke
+      publishable: Megjelent
       title: Cím
       updated_at: Utolsó frissítés
     simple:
       body: Törzs
+      id: Azonosító
+      label: Címke
+      publishable: Megjelent
       title: Cím
       updated_at: Utolsó frissítés
     slideshow:
       body: Törzs
+      id: Azonosító
+      publishable: Megjelent
       title: Cím
       updated_at: Utolsó frissítés
     string:
       body: Törzs
+      id: Azonosító
+      label: Címke
+      publishable: Megjelent
       title: Cím
       updated_at: Utolsó frissítés
   breadcrumb:
@@ -113,6 +124,8 @@ sylius:
       index: Leltár
     locale:
       index: Területi beállítások
+    menu_node:
+      index: Menüpont hozzáadása
     new: Új
     option:
       index: Beállítások
@@ -130,6 +143,8 @@ sylius:
       index: Promóciók
     promotion_coupon:
       index: Kuponok
+    route:
+      index: Útvonalak
     sales: Értékesítés
     shipment:
       index: Szállítmányok
@@ -255,6 +270,7 @@ sylius:
     id: Azonosító
     name: Név
     enabled: Engedélyezve
+    exchange_rate: Árfolyam
     updated_at: Utolsó frissítés
   filter: Szűrő
   form:
@@ -325,9 +341,11 @@ sylius:
   manage: Kezelés
   menu:
     id: Azonosító
+    publishable: Megjelent
     title: Cím
   menu_node:
     id: Azonosító
+    index_header: Menüpont hozzáadása
     parent: Szülő
     title: Cím
   meta:
@@ -384,6 +402,7 @@ sylius:
     currency: Pénznem
     promotion_coupons: Kuponok
     adjustments:
+      type: Típus
       description: Leírás
       amount: Összeg
     comment:
@@ -392,6 +411,7 @@ sylius:
       state: Állapot
   route:
     id: Azonosító
+    index_header: Útvonalak
     name: Név
     title: Cím
   redirect_route:
@@ -420,6 +440,7 @@ sylius:
   channel:
     created_at: Készítetve
     code: Kód
+    currency_default: Alapértelmezett pénznem
     enabled: Engedélyezve
     id: Azonosító
     name: Név
@@ -437,6 +458,8 @@ sylius:
     create: Új oldal létrehozása
     id: Azonosító
     index_header: Oldalak
+    publishable: Megjelent
+    routes: Útvonalak
     title: Cím
   password: Jelszó
   payment:
@@ -561,6 +584,7 @@ sylius:
     configuration: Konfiguráció
     type: Típus
   product_attribute:
+    code: Kód
     name: név
     updated_at: Utolsó frissítés
   archetype:
@@ -601,7 +625,6 @@ sylius:
     category: Kategória
     create: Szállítási mód létrehozása
     create_header: Új szállítási mód
-    enabled: Engedélyezve?
     id: Azonosító
     index_header: Szállítási módok
     manage: Szállítás módok kezelése
@@ -739,3 +762,5 @@ sylius:
     message: Üzenet
     topic: Téma
     updated_at: Utolsó frissítés
+  ui:
+    code: Kód

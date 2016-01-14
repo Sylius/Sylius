@@ -12,6 +12,7 @@ sylius:
     gd: GD
     help: 'Nainstalujte a povolte %extension% rozšíření.'
     iconv: Iconv
+    exif: EXIF
     icu: ICU
     intl: Intl
     json_encode: JSON

@@ -6,6 +6,5 @@ sylius:
     report:
       name: Nome
       description: Descrição
-      code: Código
       chart:
         type: Tipo

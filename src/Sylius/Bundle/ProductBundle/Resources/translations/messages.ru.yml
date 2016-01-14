@@ -6,6 +6,7 @@ sylius:
     product:
       name: Название
       description: Описание
+      attributes: Атрибуты
       options: Список опций
       meta_keywords: Ключевые слова метаданных
       meta_description: Описание метаданных
@@ -14,4 +15,5 @@ sylius:
     product_archetype:
       name: Название
       parent: Родитель
+      attributes: Атрибуты
       options: Список опций

@@ -6,6 +6,8 @@ sylius:
     rule:
       item_count_configuration:
         count: Nombre
+        equal: Égal à
+      type: Type de règle
     shipment:
       state: État
       states:
@@ -18,16 +20,23 @@ sylius:
       tracking_code: Code de suivi
     shipping_calculator:
       flat_rate_configuration:
+        label: Taux fixe par envoi
         amount: Montant
       flexible_rate_configuration:
+        label: Taux variable
         additional_item_cost: "Coût d'un article supplémentaire"
         additional_item_limit: Limite des articles supplémentaires
         first_item_cost: Coût du premier article
       per_item_rate_configuration:
+        label: Taux fixe par produit
         amount: Montant
       weight_rate_configuration:
+        label: Taux basé sur le poids
+        fixed: Montant fixe
+        variable: Montant variable
         division: Division
       volume_rate_configuration:
+        label: Taux basé sur la quantité
         amount: Montant
         division: Division
     shipping_category:

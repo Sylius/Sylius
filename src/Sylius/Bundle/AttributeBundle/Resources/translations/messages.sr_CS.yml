@@ -4,5 +4,4 @@
 sylius:
   form:
     attribute:
-      name: Интерни назив
-      presentation: Приказ
+      name: Ime

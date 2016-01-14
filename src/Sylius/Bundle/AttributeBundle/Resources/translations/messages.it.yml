@@ -4,6 +4,10 @@
 sylius:
   form:
     attribute:
-      name: Nome interno
-      presentation: Presentazione
+      add: Aggiungi
+      choices: Scelte
+      code: Codice
+      name: Nome
       type: Tipo
+  attribute_type:
+    configuration: Configurazione

@@ -101,8 +101,6 @@ sylius:
     number: Nomor
     shipping_address: Alamat pengiriman
     currency: Mata Uang
-    adjustments:
-      label: Label
   route:
     id: ID
     index_header: Rute
@@ -117,6 +115,7 @@ sylius:
     sku: SKU
   channel:
     code: Kode
+    currency_default: Mata uang default
     enabled: Diaktifkan
     id: ID
     name: Nama
@@ -150,6 +149,8 @@ sylius:
     id: ID
     name: Nama
   promotion_coupon:
+    code: Kode
+  product_attribute:
     code: Kode
   report:
     name: Nama
@@ -200,3 +201,5 @@ sylius:
     lastName: Nama belakang
     message: Pesan
     topic: Topik
+  ui:
+    code: Kode

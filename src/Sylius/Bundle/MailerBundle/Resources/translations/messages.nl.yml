@@ -4,6 +4,10 @@
 sylius:
   form:
     email:
-      code: Code
       enabled: Toegestaan
+      subject: Onderwerp
+      sender_name: Afzendernaam
+      sender_address: Afzenderadres
       content: Inhoud
+      template: Sjabloon
+      no_template: Gebruik aangepaste sjabloon

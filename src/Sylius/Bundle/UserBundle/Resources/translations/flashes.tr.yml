@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  user:
+    email:
+      not_exist: Bu e-posta adresi ile kayıtlı bir kullanıcı yok.
+    password:
+      invalid: Yanlış şifre.
+      reset:
+        success: Şifreniz başarı ile sıfırlandı!
+      change:
+        success: Şifreniz başarıyla değiştirildi!

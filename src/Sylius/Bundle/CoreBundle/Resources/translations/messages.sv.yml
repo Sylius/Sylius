@@ -21,6 +21,8 @@ sylius:
     group:
       name: Namn
       roles: Roller
+    channel:
+      currency_default: Standardvaluta
     image:
       file: Bild
     locale:

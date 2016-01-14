@@ -8,8 +8,8 @@ sylius:
       unique: Tento jazyk už existuje.
   product_variant:
     onHand:
-      min: 'Na sklade musí byť viac ako {{ limit }}.'
-      not_blank: Prosím zadajte sklad.
+      min: 'Počet položiek na sklade musí byť viac ako {{ limit }}.'
+      not_blank: Prosím zadajte počet položiek na sklade.
     price:
       min: Cena nemôže obsahovať záporné hodnoty.
       not_blank: Zadajte cenu.
@@ -19,8 +19,8 @@ sylius:
 sylius_shipping:
   method:
     zone:
-      not_blank: Zadajte spôsob doručenia.
+      not_blank: Zadajte zónu pre spôsob doručenia.
 sylius_taxation:
   rate:
     zone:
-      not_blank: Zadajte zónu zdaňovania.
+      not_blank: Zadajte zónu pre sadzby dane.

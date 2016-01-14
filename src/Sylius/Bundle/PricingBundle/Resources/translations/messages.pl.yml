@@ -9,9 +9,15 @@ sylius:
       configuration: Konfiguracja
     pricing:
       volume_based:
+        label: Ustawienie cennika
+        min: Ilość min.
+        max: Ilość maks.
         price: Cena
   pricing:
     volume_based:
+      min: Ilość min.
+      max: Ilość maks.
       price: Cena
+      no_results: Brak cennika
       button:
         add: Dodaj

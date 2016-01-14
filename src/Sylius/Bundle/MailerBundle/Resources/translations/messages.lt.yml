@@ -4,7 +4,6 @@
 sylius:
   form:
     email:
-      code: Kodas
       enabled: Įjungta
       subject: Tema
       sender_name: Siuntėjo pavadinimas

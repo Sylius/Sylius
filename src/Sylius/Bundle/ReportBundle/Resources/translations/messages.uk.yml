@@ -6,6 +6,5 @@ sylius:
     report:
       name: Ім’я
       description: Опис
-      code: Код
       chart:
         type: Тип

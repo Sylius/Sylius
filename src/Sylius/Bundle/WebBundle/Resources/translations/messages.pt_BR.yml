@@ -82,23 +82,27 @@ sylius:
     imagine:
       id: Id
       label: Rótulo
+      publishable: Publicado
       title: Título
       updated_at: Data de modificação
     simple:
       body: Texto
       id: Id
       label: Rótulo
+      publishable: Publicado
       title: Título
       updated_at: Data de modificação
     slideshow:
       body: Texto
       id: Id
+      publishable: Publicado
       title: Título
       updated_at: Data de modificação
     string:
       body: Texto
       id: Id
       label: Rótulo
+      publishable: Publicado
       title: Título
       updated_at: Data de modificação
   breadcrumb:
@@ -337,6 +341,7 @@ sylius:
   manage: Gerenciar
   menu:
     id: ID
+    publishable: Publicado
     title: Título
   menu_node:
     id: ID
@@ -397,7 +402,7 @@ sylius:
     currency: Moeda
     promotion_coupons: Cupons
     adjustments:
-      label: Rótulo
+      type: Tipo
       description: Descrição
       amount: Quantidade
     comment:
@@ -435,6 +440,7 @@ sylius:
   channel:
     created_at: Criado em
     code: Código
+    currency_default: Moeda padrão
     enabled: Ativado
     id: ID
     name: Nome
@@ -452,6 +458,7 @@ sylius:
     create: Cria nova página
     id: ID
     index_header: Páginas
+    publishable: Publicado
     routes: Rotas
     title: Título
   password: Senha
@@ -579,6 +586,7 @@ sylius:
     configuration: Configuração
     type: Tipo
   product_attribute:
+    code: Código
     name: nome
     updated_at: última atualização
   archetype:
@@ -619,7 +627,6 @@ sylius:
     category: Categoria
     create: Criar método de envio
     create_header: Novo método de envio
-    enabled: Habilitado?
     id: ID
     index_header: Métodos de envio
     manage: Gerenciar métodos de envio
@@ -757,3 +764,5 @@ sylius:
     message: Mensagem
     topic: Tópico
     updated_at: Data de modificação
+  ui:
+    code: Código

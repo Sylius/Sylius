@@ -1,26 +1,83 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+auto: auto
+route: rutt
 sylius:
   form:
+    action_block:
+      id: Id
+      publish_end_date: Publicera slut-datum
+      publish_start_date: Publicera start-datum
+      publishable: Publicerad
     imagine_block:
       image: Bild
       internal_name: Internt namn
+      link_url: Länk url
+      publish_end_date: Publicera slut-datum
+      publish_start_date: Publicera start-datum
+      publishable: Publicerad
+      slideshow_small: Litet bildspel (sida)
+      slideshow_medium: Mellanstort bildspel (innehåll)
+      slideshow_large: Stort bildspel (full bredd)
     menu:
+      childrens: Barnens
+      display: Visa
+      display_children: Visa barn
       name: Namn
+      publish_end_date: Publicera slut-datum
+      publish_start_date: Publicera start-datum
+      publishable: Publicerad
+      route: Rutt
+      uri: URI
     menu_block:
+      id: Id
       name: Namn
+      publish_end_date: Publicera slut-datum
+      publish_start_date: Publicera start-datum
+      publishable: Publicerad
     menu_node_block:
+      display: Visa
+      display_children: Visa barn
       internal_name: Internt namn
+      link_type: Länk-typ
+      publish_end_date: Publicera slut-datum
+      publish_start_date: Publicera start-datum
+      publishable: Publicerad
+      route: Rutt
+      uri: URI
     redirect_route:
+      id: Id
       name: Namn
+      route_name: Rutt_namn
+      uri: URI
+    reference_block:
+      id: Id
+      publish_end_date: Publicera slut-datum
+      publish_start_date: Publicera start-datum
+      publishable: Publicerad
     route:
       name: Namn
     simple_block:
       internal_name: Internt namn
+      publish_end_date: Publicera slut-datum
+      publish_start_date: Publicera start-datum
+      publishable: Publicerad
     slideshow_block:
+      childrens: Barnens
       internal_name: Internt namn
+      publish_end_date: Publicera slut-datum
+      publish_start_date: Publicera start-datum
+      publishable: Publicerad
     static_content:
+      id: Id
       internal_name: Internt namn
+      publish_end_date: Publicera slut-datum
+      publish_start_date: Publicera start-datum
+      publishable: Publicerad
+      routes: Rutter
     string_block:
       name: Namn
+      publish_end_date: Publicera slut-datum
+      publish_start_date: Publicera start-datum
+      publishable: Publicerad

@@ -397,7 +397,7 @@ sylius:
     currency: Valuta
     promotion_coupons: Kuponi
     adjustments:
-      label: Oznaka
+      type: Vrsta
       description: Opis
       amount: Iznos
     comment:
@@ -435,6 +435,7 @@ sylius:
   channel:
     created_at: Dodano
     code: ISO kod
+    currency_default: Zadana valuta
     enabled: Omogući
     id: ID
     name: Naziv grupe
@@ -579,6 +580,7 @@ sylius:
     configuration: Podeševanje
     type: Tip
   product_attribute:
+    code: ISO kod
     name: Naziv
     updated_at: Ažurirano
   archetype:
@@ -619,7 +621,6 @@ sylius:
     category: Kategorija
     create: Novi način dostave
     create_header: Novi način dostave
-    enabled: Aktivno?
     id: ID
     index_header: Načini dostave
     manage: Upravljajte načinima dostave
@@ -757,3 +758,5 @@ sylius:
     message: Poruka
     topic: Tema
     updated_at: Posljednji
+  ui:
+    code: ISO kod

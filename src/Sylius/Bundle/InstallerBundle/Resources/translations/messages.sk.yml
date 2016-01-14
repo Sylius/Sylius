@@ -22,7 +22,7 @@ sylius:
         port: Port
         user: Používateľ
       locale:
-        header: Miestne nastavenia
+        header: Jazykové nastavenia
         currency: Mena
         locale: Jazyk
       mailer:
@@ -46,12 +46,12 @@ sylius:
       check:
         button:
           back: Späť
-          install: Inštalovať
+          install: Nainštalovať
           next: Ďalej
-        header: 'Kontrola systémových požiadaviek <small>Inštalátora Sylius</small>'
+        header: 'Kontrola systémových požiadaviek <small>Sylius Inštalátor</small>'
         table:
           current: Aktuálny
-          required: Požadovaný
+          required: povinný
           status: stav
       configure:
         header: 'Konfigurácia <small>inštalátora Sylius</small>'

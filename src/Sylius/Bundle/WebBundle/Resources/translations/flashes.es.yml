@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  account:
+    address:
+      create: Su dirección se ha añadido correctamente.
+      update: Su dirección se ha modificado correctamente.
+      delete: Su dirección se ha eliminado correctamente.
+      set_as_billing: Su dirección de facturación ha sido cambiada.
+      set_as_shipping: Su dirección de envío ha sido cambiada.
+    password:
+      change_success: La contraseña ha sido cambiada
+      invalid: La contraseña actual es incorrecta
+  channel:
+    error:
+      at_least_one: El canal no puede ser eliminado, debe haber al menos un canal habilitado.

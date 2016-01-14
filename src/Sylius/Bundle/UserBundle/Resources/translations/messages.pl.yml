@@ -7,24 +7,39 @@ sylius:
     register: Zarejestruj
     login: Zaloguj
     logout: Wyloguj
+    logged_in_as: 'Zalogowany jako %username%'
+    reset_password: Zmień hasło
+    reset: Reset
+    password:
+      reset:
+        header: Zmień hasło
+        button: Reset
+    profile: Profil
     change_password: Zmiana hasła
     account_panel_outline: sylius.account.home.outline
+    customer_since: Jesteś naszym klientem od
+    welcome: Witaj
+    customer:
+      id: ID klienta
   form:
     group:
       name: Nazwa
       roles: Role
     user:
       email: Email
-      enabled: Aktywne
+      enabled: Włączone
       password:
         label: Hasło
-      shipping_address: Adres wysyłkowy
+        confirmation: Weryfikacja
+      remember_me: Zapamiętaj mnie
+      shipping_address: Adres dostawy
     customer:
       first_name: Imię
       groups: Grupy
       last_name: Nazwisko
       email: Email
-      billing_address: Adres rozliczeniowy
+      birthday: Data urodzenia
+      billing_address: Adres do rachunku
       different_billing_address: Użyć innego adresu do rozliczeń?
     user_filter:
       query: Szukaj

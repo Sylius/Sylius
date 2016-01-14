@@ -26,3 +26,11 @@ sylius:
       max_length: 'Der Name der Zahlungsmethode muss {{ limit }} oder weniger Zeichen lang sein.'
       min_length: 'Der Name der Zahlungsmethode muss mindestens {{ limit }} Zeichen lang sein.'
       not_blank: Bitte geben Sie einen Namen für die Zahlungsmethode an.
+    fee_calculator_configuration:
+      amount:
+        greater_than_or_equal: 'Die Gebühr kann nicht weniger als {{ compared_value }} betragen.'
+        not_blank: Bitte geben Sie die Höhe der Gebühr ein.
+      percent:
+        max_range: 'Prozentuale Gebühr darf nicht höher als {{ limit }} sein.'
+        min_range: 'Prozentuale Gebühr darf nicht unter {{ limit }} sein.'
+        not_blank: Bitte geben Sie die prozentuale Gebühr ein.

@@ -4,7 +4,17 @@
 sylius:
   emails:
     order_confirmation:
+      name: Potwierdzenie zamówienia
       subject: Dziękujemy za zamówienie!
+    order_comment:
+      name: Uwagi dotyczące zamówienia
+      subject: Nowy komentarz do zamówienia
+    shipment_confirmation:
+      name: Potwierdzenie dostawy
+      subject: Twoje zamówienie zostało wysłane!
+    user_confirmation:
+      name: Potwierdzenia przez użytkownika
+      subject: Zapraszamy do naszego sklepu!
   account:
     address:
       action:
@@ -19,12 +29,16 @@ sylius:
         no_billing: Brak domyślnego adresu rozliczeniowego
         no_shipping: Brak domyślnego adresu wysyłkowego
         shipping: Domyślny adres wysyłkowy
+      empty: Nie masz ustawionych adresów.
       list: Wszystkie Twoje adresy
       update: Edytuj adres
     home:
+      email: 'E-mail :'
+      id: 'ID klienta :'
       outline: sylius.account.home.outline
       since: Jesteś naszym klientem od
       welcome: Witaj w swoim panelu
+      last5orders: 5 ostatnich zamówień
     order:
       created_at: Umieszczone w
       details: 'Szczegóły  Twojego zamówienia'
@@ -32,12 +46,16 @@ sylius:
       empty: Nie dokonałeś jeszcze żadnego zamówienia.
       invoice: Faktura
       list: Wszystkie Twoje zamówienia
+      number: 'Numer :'
+      payment_mode: 'Metoda płatności:'
       placed_at: 'Umieszczone w %at%'
       shipment:
         pending: Oczekujące
         ready: 'Gotowy od %at%'
         returned: 'Zwrócone %at%'
         shipped: 'Wysłane %at%'
+      shipment_mode: 'Metoda dostawy:'
+      state: 'Status :'
       total: Ogółem
       tracking_number: Numer śledzenia
     title: Moje konto
@@ -71,7 +89,9 @@ sylius:
       add_product: Nowy produkt
       orders: Najnowsze zamówienia
       products: Twoje produkty
+      customers: Klienci
     statistics:
+      header: Statystyki bieżącego miesiąca
       orders_this_month: Zamówienia
       registrations_this_month: Rejestracje
       sales_this_month: Sprzedaż
@@ -79,39 +99,94 @@ sylius:
   block:
     index_header: Bloki
     no_results: Brak bloków do wyświetlenia.
+    simple_blocks: Zwykłe bloki
+    string_blocks: Bloki tekstowe
+    imagine_blocks: Bloki zdjęciowe
+    slideshow_blocks: Bloki pokazu slajdów
     imagine:
+      create: Utwórz blok zdjęciowy
+      create_header: Tworzenie nowego bloku zdjęciowego
+      end_date: Data zakończenia
       id: Id
+      index: Bloki zdjęciowe
+      index_header: Bloki zdjęciowe
       label: Etykieta
+      publishable: Opublikowany
+      start_date: Data rozpoczęcia
       title: Tytuł
+      update_header: Edycja bloku zdjęciowego
       updated_at: Zmodyfikowano
     simple:
       body: Zawartość
+      create: Tworzenie zwykłego bloku
+      create_header: Tworzenie nowego zwykłego bloku
+      end_date: Data zakończenia
       id: Id
+      index: Zwykłe bloki
+      index_header: Zwykłe bloki
       label: Etykieta
+      publishable: Opublikowany
+      start_date: Data rozpoczęcia
       title: Tytuł
+      update_header: Edycja zwykłego bloku
       updated_at: Zmodyfikowano
     slideshow:
       body: Zawartość
+      create: 'Utwórz blok - pokaz slajdów'
+      create_header: 'Tworzenie nowego bloku - pokaz slajdów'
+      end_date: Data zakończenia
       id: Id
+      index: Bloki pokazu slajdów
+      index_header: Bloki pokazu slajdów
+      publishable: Opublikowany
+      start_date: Data rozpoczęcia
       title: Tytuł
+      update_header: 'Edycja bloku - pokaz slajdów'
       updated_at: Zmodyfikowano
     string:
       body: Zawartość
+      create: Utwórz blok tekstowy
+      create_header: Tworzenie bloku tekstowego
+      end_date: Data zakończenia
       id: Id
+      index: Bloki tekstowe
+      index_header: Bloki tekstowe
       label: Etykieta
+      publishable: Opublikowany
+      start_date: Data rozpoczęcia
       title: Tytuł
+      update_header: Edycja bloku tekstowego
       updated_at: Zmodyfikowano
   breadcrumb:
     assortment: Asortyment
     block:
+      imagine:
+        index: Bloki zdjęciowe
       index: Bloki
+      simple:
+        index: Zwykłe bloki
+      slideshow:
+        index: Bloki pokazu slajdów
+      string:
+        index: Bloki tekstowe
     build: Zbuduj
     configuration: Konfiguracja
     content: Treść
     country:
       index: Kraje
+    section:
+      customer: Klient
+    customer:
+      index: Klienci
     dashboard: Panel
     edit: Edytuj
+    contact_request:
+      index: Prośby o kontakt
+      show: Prośba o kontakt
+    contact_topic:
+      index: Tematy
+    currency:
+      index: Waluty
     general_settings: Ustawienia ogólne
     generate: Wygeneruj
     group:
@@ -120,6 +195,9 @@ sylius:
       index: Zapasy
     locale:
       index: Ustawienia regionalne
+    marketing: Marketing
+    menu:
+      index: Menu
     menu_node:
       index: Węzły menu
     new: Nowy
@@ -127,6 +205,7 @@ sylius:
       index: Warianty
     order:
       index: Zamówienia
+      adjustments: Dostosowanie
     page:
       index: Strony
     payment:
@@ -139,6 +218,12 @@ sylius:
       index: Promocje
     promotion_coupon:
       index: Kupony
+    attribute:
+      index: Cechy
+    archetype:
+      index: szablony
+    report:
+      index: Raporty
     route:
       index: Ścieżki
     sales: Sprzedaż
@@ -148,6 +233,7 @@ sylius:
       index: Kategorie wysyłki
     shipping_method:
       index: Metody wysyłki
+    support: Wsparcie techniczne
     tax_category:
       index: Kategorie podatkowe
     tax_rate:
@@ -155,7 +241,13 @@ sylius:
     taxation_settings: Ustawienia podatków
     taxonomy:
       index: Kategorie
+    email:
+      index: Adresy email
+    channel:
+      index: Kanały
     update: Edytuj
+    permission:
+      index: Uprawnienia
     role:
       index: Role
     zone:
@@ -221,6 +313,7 @@ sylius:
       login: Zaloguj
       new_customer: Nowy Klient
       register: Rejestracja
+      guest: Gość
     shipping:
       error: Przepraszamy, ale nasz sklep nie jest w stanie zapewnić wysyłki produktu do kraju który wybrałeś.
       header: Metoda wysyłki
@@ -239,34 +332,53 @@ sylius:
     no_results: Żaden kraj nie został skonfigurowany.
     show_header: Szczegóły kraju
     update_header: Edycja kraju
-    enabled: Aktywne
+    enabled: Włączone
   email:
+    index_header: Szablony e-mail
+    update_header: Edycja wiadomości E-mail
     code: Kod
     enabled: Aktywna?
+    subject: Temat
     updated_at: Zmodyfikowano
   create: Utwórz
   created_at: Utworzono
   delete: usuń
   deleted: Usunięto
   edit: edytuj
+  move_up: Przenieś w górę
+  move_down: przenieś w dół
   permission:
+    create: Dodaj nowe uprawnienia
+    create_header: Nowe uprawnienia
     code: Kod
     id: ID
     description: Opis
+    index_header: Uprawnienia
+    no_results: Nie ma żadnych zdefiniowanych uprawnień.
+    update_header: Edycja uprawnienia
     updated_at: Zmodyfikowano
   role:
+    create: Dodawanie nowej roli
+    create_header: Nowa rola
     code: Kod
     id: ID
     name: Nazwa
     description: Opis
     index_header: Role
+    no_results: Nie ma żadnych zdefiniowanych uprawnień.
+    update_header: Edycja roli
     updated_at: Zmodyfikowano
   currency:
+    create: Utwórz walutę
+    create_header: Nowa waluta
     code: Kod
     id: ID
     name: Nazwa
-    enabled: Aktywne
+    enabled: Włączone
+    index_header: Waluty
+    no_results: Nie ma żadnych walut do wyświetlenia.
     exchange_rate: Kurs wymiany
+    update_header: Edycja waluty
     updated_at: Zmodyfikowano
   filter: Filtruj
   form:
@@ -284,17 +396,23 @@ sylius:
     login:
       email: Email
       password: Hasło
+    menu:
+      add_menu_node: Dodaj element menu
     option_value:
       add_value: Dodaj wartość
     profile:
       email: Email
       firstName: Imię
       lastName: Nazwisko
+    comment:
+      comment: Komentarz
+      notify_customer: Powiadomić klienta?
   gallery:
     next: Następne
     previous: Poprzednie
     slideshow: Pokaz slajdów
   generate: Generuj
+  go_to_dashboard: Przejdź do panelu
   group:
     create: Dodaj grupę
     id: ID
@@ -305,9 +423,11 @@ sylius:
     update_header: Edytuj grupę
   hide_deleted: Ukryj usunięte
   history:
+    header: Historia
     action: Akcja
     author: Autor
     data: Dane
+    empty: Brak
   homepage:
     splash:
       headline: Witaj w Sylius
@@ -336,8 +456,15 @@ sylius:
   logo: Sylius
   manage: Zarządzaj
   menu:
+    create: Utwórz Menu
+    create_header: Tworzenie menu
+    end_date: Data zakończenia
     id: ID
+    index_header: Menu
+    publishable: Opublikowany
+    start_date: Data rozpoczęcia
     title: Tytuł
+    update_header: Edycja menu
   menu_node:
     id: ID
     index_header: Węzły menu
@@ -350,6 +477,7 @@ sylius:
   na: N/D
   newest: Najnowsze produkty
   "no": false
+  no_results: Brak wyników
   product_option:
     manage: Warianty
     name: nazwa
@@ -364,6 +492,8 @@ sylius:
     index_header: Aktualne zamówienia
     inventory_tracking: Śledzenie sprzedaży
     items_total: Produkty łącznie
+    items: Produkty
+    channel: Kanał
     manage: Zarządzaj zamówieniami
     no_items: To zamówienie nie posiada żadnych produktów
     no_results: Brak nowych zamówień
@@ -371,6 +501,7 @@ sylius:
     no_shipping_charges: Brak opłaty za wysyłkę
     no_taxes: Brak podatku
     number: Numer
+    order_state: Stan zamówienia
     payment: Płatności
     payment_state: Status płatności
     payment_states:
@@ -389,29 +520,52 @@ sylius:
     shipping_address: Adres do wysyłki
     shipping_charges: Koszty przesyłki
     shipping_total: Koszt wysyłki
+    show_header: 'Zamówienie #%number%'
     state: Status
     tax_total: Podatek łącznie
     taxes: Podatki
     total: Łącznie
     update_header: Edycja zamówienia
+    customer: klient
     currency: Waluta
     promotion_coupons: Kupony
     adjustments:
-      label: Etykieta
+      type: Typ
       description: Opis
       amount: Kwota
+      locked: Zablokowany?
+      lock: Blokada
+      unlock: Odblokuj
     comment:
+      header: Uwagi dotyczące zamówienia
+      comment: Komentarz
       author: Autor
       created_at: Utworzono
+      notify: Powiadomienie
       state: Status
+      customer:
+        notified: Klient powiadomiony
+        not_notified: Klient nie został powiadomiony
+      no_comment: Bez komentarza
   route:
+    create: Utwórz trasę
+    create_header: Tworzenie trasy
     id: ID
     index_header: Ścieżki
     name: Nazwa
+    no_results: Nie ma żadnych tras do wyświetlenia.
+    page: Strona
     title: Tytuł
+    update_header: Edycja trasy
+    view: Widok
   redirect_route:
+    create: Utwórz przekierowanie
+    create_header: Tworzenie przekierowania
     id: ID
+    index_header: Przekieruj trasę
+    no_results: Nie ma żadnych przekierowań do wyświetlenia.
     title: Tytuł
+    update_header: Edycja przekierowania
   shipment:
     ship: Dostawa
     created_at: data utworzenia
@@ -433,12 +587,19 @@ sylius:
     update_header: Edytuj wysyłkę
     updated_at: ostatnia aktualizacja
   channel:
+    create: Dodaj kanał
     created_at: Utworzono
     code: Kod
-    enabled: Aktywne
+    currency_default: Domyślna waluta
+    enabled: Włączone
     id: ID
+    index_header: Kanały
+    manage: Zarządzanie kanałami
+    create_header: Dodaj kanał
     name: Nazwa
+    url: URL
     update: Edytuj
+    update_header: Edycja kanału
     updated_at: Zmodyfikowano
   order_item:
     product: Element
@@ -450,10 +611,17 @@ sylius:
   page:
     body: Zawartość
     create: Dodaj nową stronę
+    create_header: Tworzenie nowej strony
     id: ID
     index_header: Strony
+    no_results: Nie ma żadnych stron do wyświetlenia.
+    no_route: Treści nie będą wyświetlane na stronie jeśli trasa nie jest zdefiniowana
+    publishable: Opublikowany
+    start_date: Data rozpoczęcia
+    end_date: Data zakończenia
     routes: Ścieżki
     title: Tytuł
+    update_header: Edycja strony
   password: Hasło
   payment:
     order: zamówienie
@@ -492,12 +660,14 @@ sylius:
     update_header: Edycja metody płatności
     updated_at: Ostatnia aktualizacja
   product:
+    add_attribute: Dodaj cechę
     available_on: Dostępny od
     available_on_demand: Dostępny na zamówienie
     categorization: Kategoria
     contain_variants: Zawiera Warianty
     create: Dodaj produkt
     create_header: Nowy produkt
+    archetype: Szablon
     description: Opis
     generate_variants: Generuj warianty
     index_by_taxon_header: 'Produkty <small>Należące do taksonomii "%taxon%"</small>'
@@ -507,6 +677,7 @@ sylius:
     no_description: '<i>Brak opisu...</i>'
     no_images: Brak zdjęć dla tego produktu
     no_options: Brak wariantów dla tego produktu
+    no_attributes: Ten produkt nie posiada żadnych zdefiniowanych cech
     no_results: Brak produktów do wyświetlenia.
     no_shipping_category: Brak kategorii wysyłki
     no_short_description: '<i>Brak krótkiego opisu</i>'
@@ -514,8 +685,11 @@ sylius:
     no_tax_category: Brak kategorii podatkowej
     no_taxons: Brak przypisanych kategorii
     options: Warianty
+    variants: Warianty
     price: Cena detaliczna
+    attributes: Cechy
     restricted_zone: Strefa zamknięta
+    remove_attribute: Usuń cechę
     shipping_category: Kategoria wysyłki
     show: Zobacz więcej
     show_header: 'Szczegóły produktu <small>Oglądasz produkt "<strong>%product%</strong>"</small>'
@@ -527,6 +701,8 @@ sylius:
       images: Zdjęcia
       options: Warianty
       product: Produkt
+      attributes: Cechy
+      channels: Kanały
       pricing: Cennik
     tax_category: Kategoria podatkowa
     unavailable: Niedostępne
@@ -535,6 +711,8 @@ sylius:
     variant_selection_method: Metoda wyboru wariantu
     view_details: 'Zobacz szczegóły %product%.'
     volume_based:
+      qty_min: Ilość min.
+      qty_max: Ilość maks.
       price: Cena
   product_not_available_in_zone: Niedostępne w Twoim kraju
   promotion:
@@ -560,6 +738,7 @@ sylius:
     updated_at: Data aktualizacji
     usage_limit: Limit użycia
     used: Użyto
+    exclusive: Ekskluzywny
   promotion_action:
     configuration: Konfiguracja
     type: Typ
@@ -575,24 +754,32 @@ sylius:
     total_results:
       Total: '%total%'
     update_header: Edytowanie kupony promocyjnego
+    expires_at: Wygasa dnia
   promotion_rule:
     configuration: Konfiguracja
     type: Typ
   product_attribute:
+    code: Kod
     name: nazwa
     updated_at: ostatnia aktualizacja
   archetype:
+    index_header: Szablony produktów
     name: nazwa
+    parent: rodzic
     updated_at: ostatnia aktualizacja
   province:
     provinces: Województwa
   remember_me: Zapamiętaj mnie?
   report:
+    create: Utwórz raport
+    create_header: Utwórz nowy raport
+    show_header: Szczegóły raportu
     details: szczegóły
     name: Nazwa
     code: Kod
     description: Opis
     manage: Zarządzaj
+    index_header: Raporty
   save_changes: Zapisz zmiany
   search: Szukaj
   security:
@@ -600,6 +787,7 @@ sylius:
       button: Zaloguj
   settings:
     general_header: Ustawienia ogólne
+    security_header: Ustawienia bezpieczeństwa
     taxation_header: Podatek
   shipment_category:
     manage: Zarządzaj kategoriami wysyłki
@@ -619,7 +807,6 @@ sylius:
     category: Kategoria
     create: Dodaj metodę wysyłki
     create_header: Nowa metoda wysyłki
-    enabled: Aktywna?
     id: ID
     index_header: Metody wysyłki
     manage: Zarządzaj metodami wysyłki
@@ -691,13 +878,23 @@ sylius:
   total_quantity: Całkowita ilość
   unknown: Nieznany
   customer:
-    billing_address: Adres rozliczeniowy
+    billing_address: Adres do rachunku
     email: Email
     first_name: Imię
     id: ID
     last_name: Nazwisko
-    shipping_address: Adres wysyłkowy
+    manage: zarządzanie klientami
+    no_results: Nie ma żadnych klientów do wyświetlenia.
+    order:
+      no_results: Nie ma żadnych żadnych zamówień dla tego klienta do wyświetlenia.
+    orders: Zamówienia klienta
+    recent_header: Ostatni klienci
+    creation_date: Data utworzenia
+    shipping_address: Adres dostawy
+    show_header: Dane Klienta
+    update_header: Edycja klienta
     groups: Grupy
+    no_groups: Nie ma żadnych grup dla tego klienta.
   user:
     create: dodaj użytkownika
     create_header: Nowy użytkownik
@@ -709,10 +906,14 @@ sylius:
     impersonate: Zaloguj się jako użytkownik
     manage: zarządzaj użytkownikami
     no_results: Brak użytkowników.
+    oauth:
+      identifier: Identyfikator
+      access_token: Token dostępowy
     recent_header: Ostatnio zarejestrowani użytkownicy
     registration_date: Data rejestracji
     register:
       button: Zarejestruj
+      header: 'Rejestracja, <small>Załóż konto w sklepie</small>'
     show_header: Szczegóły użytkownika
     update_header: Edycja użytkownika
     username: Nazwa użytkownika
@@ -746,14 +947,30 @@ sylius:
   zone_member:
     members: Kraje należące do strefy
   contact_topic:
+    create_header: Nowy temat kontaktu
     id: ID
     title: Tytuł
+    index_header: Tematy
     updated_at: Zmodyfikowano
   contact_request:
+    create: Utwórz prośbę o kontakt
+    create_header: Nowa prośba o kontakt
     id: ID
     firstName: Imię
     lastName: Nazwisko
     email: Email
     message: Treść wiadomości
     topic: Temat wiadomości
+    index_header: Prośby o kontakt
+    no_results: Nie ma nowych próśb o kontakt.
+    update_header: Edycja prośby o kontakt
     updated_at: Zmodyfikowano
+    show_header: Szczegóły prośby o kontakt
+  gender:
+    male: Mężczyzna
+    female: Kobieta
+  enable: Włącz
+  disable: Wyłącz
+  ui:
+    links: Linki
+    code: Kod

@@ -30,7 +30,6 @@ sylius:
         country: País
       type: Tipo
     coupon:
-      code: Código
       usage_limit: Limite de utilização
     coupon_generate_instruction:
       amount: Quantidade

@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  tax_category:
+    name:
+      not_blank: Fut emrin e kategorisë së taksës.
+  tax_rate:
+    category:
+      not_blank: Zgjidh kategorinë e taksës.
+    name:
+      not_blank: Fut emrin e normës së taksës.
+    amount:
+      not_blank: Fur shumën e normës së taksës.
+    calculator:
+      not_blank: Zgjidh llogaritësin e taksës.

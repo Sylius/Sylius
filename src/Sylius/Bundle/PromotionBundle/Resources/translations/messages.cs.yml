@@ -26,18 +26,29 @@ sylius:
         equal: Rovno
       nth_order_configuration:
         nth: -tý
+      customer_loyalty_configuration:
+        time: Čas
+        unit:
+          days: Dny
+          weeks: Týdny
+          months: Měsíce
+          years: Roky
+          header: Jednotka
+        after: Uživatelem vytvořené po tomto období
       shipping_country_configuration:
         country: Země
       type: Typ
     coupon:
-      code: Kód
       usage_limit: Omezení použití
+      expires_at: Končí v
     coupon_generate_instruction:
       amount: Částka
       usage_limit: Omezení použití
+      expires_at: Končí v
     promotion:
       actions: Akce
       coupon_based: Kupón na bázi
+      exclusive: Exkluzivní
       description: Popis
       ends_at: Končí
       name: Jméno

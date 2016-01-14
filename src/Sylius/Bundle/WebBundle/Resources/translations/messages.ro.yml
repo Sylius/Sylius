@@ -82,23 +82,27 @@ sylius:
     imagine:
       id: Id
       label: Label
+      publishable: Publicat
       title: Titlu
       updated_at: Data modificării
     simple:
       body: Corp
       id: Id
       label: Label
+      publishable: Publicat
       title: Titlu
       updated_at: Data modificării
     slideshow:
       body: Corp
       id: Id
+      publishable: Publicat
       title: Titlu
       updated_at: Data modificării
     string:
       body: Corp
       id: Id
       label: Label
+      publishable: Publicat
       title: Titlu
       updated_at: Data modificării
   breadcrumb:
@@ -139,6 +143,8 @@ sylius:
       index: Promoţii
     promotion_coupon:
       index: Coduri promoționale
+    attribute:
+      index: Atribute
     route:
       index: Rute
     sales: Vânzări
@@ -337,6 +343,7 @@ sylius:
   manage: Gestionare
   menu:
     id: Id
+    publishable: Publicat
     title: Titlu
   menu_node:
     id: Id
@@ -397,7 +404,7 @@ sylius:
     currency: Monedă
     promotion_coupons: Coduri promoționale
     adjustments:
-      label: Label
+      type: Tip
       description: Descriere
       amount: Valoare
     comment:
@@ -435,6 +442,7 @@ sylius:
   channel:
     created_at: Creat la
     code: Cod
+    currency_default: Moneda implicită
     enabled: Activat
     id: Id
     name: Nume
@@ -452,6 +460,7 @@ sylius:
     create: Creeare pagină nouă
     id: Id
     index_header: Pagini
+    publishable: Publicat
     routes: Rute
     title: Titlu
   password: Parolă
@@ -515,6 +524,7 @@ sylius:
     no_taxons: Fără categorie
     options: Opţiuni
     price: Preţ
+    attributes: Atribute
     restricted_zone: Zonă restricționată
     shipping_category: Categoria de livrare
     show: Detalii
@@ -527,6 +537,7 @@ sylius:
       images: Imagini
       options: Opţiuni
       product: Produs
+      attributes: Atribute
       pricing: Calculator
     tax_category: Categoria de taxă
     unavailable: Indisponibil
@@ -579,6 +590,7 @@ sylius:
     configuration: Configurare
     type: Tip
   product_attribute:
+    code: Cod
     name: nume
     updated_at: ultima actualizare
   archetype:
@@ -619,7 +631,6 @@ sylius:
     category: Categorie
     create: Creeare metodă de livrare
     create_header: Metodă de livrare nouă
-    enabled: Este activat?
     id: Id
     index_header: Metode de livrare
     manage: Gestionare metode de livrare
@@ -757,3 +768,5 @@ sylius:
     message: Mesaj
     topic: Subiect
     updated_at: Data modificării
+  ui:
+    code: Cod

@@ -6,6 +6,14 @@ sylius:
     report:
       name: Naam
       description: Omschrijving
-      code: Code
+      data_fetcher: Gegevens ophaler
+      renderer:
+        label: Renderer
+        template: Sjabloon
       chart:
         type: Type
+      user_registration:
+        start: Begindatum
+        end: Einddatum
+        period: Tijd Periode
+        empty_records: Lege regels afdrukken?

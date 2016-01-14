@@ -30,7 +30,6 @@ sylius:
         country: ประเทศ
       type: ชนิด
     coupon:
-      code: รหัส
       usage_limit: ขีดจำกัดการใช้งาน
     coupon_generate_instruction:
       amount: ยอดรวม

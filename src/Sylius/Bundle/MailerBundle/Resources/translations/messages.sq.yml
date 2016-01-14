@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    email:
+      enabled: E aktivizuar
+      subject: Subjekti
+      sender_name: Emri i dërguesit
+      sender_address: Adresa e dërguesit
+      content: Përmbajtja
+      template: Modeli
+      no_template: Përdor modelin e personalizuar

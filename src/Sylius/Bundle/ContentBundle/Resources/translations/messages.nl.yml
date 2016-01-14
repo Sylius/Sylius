@@ -10,15 +10,20 @@ sylius:
       id: Id
       publish_end_date: Einddatum publiceren
       publish_start_date: Begindatum publiceren
+      publishable: Gepubliceerd
     imagine_block:
       filter: Filter
       image: Afbeelding
       internal_name: Interne naam
       label: Label
+      link_url: Link URL
       parent: Ouder
       publish_end_date: Einddatum publiceren
       publish_start_date: Begindatum publiceren
+      publishable: Gepubliceerd
+      slideshow_small: Slideshow Klein (kant)
       slideshow_medium: Slideshow medium (inhoud)
+      slideshow_large: Slideshow Groot (volledige breedte)
     menu:
       childrens: Kinderen
       display: Weergeven
@@ -28,6 +33,7 @@ sylius:
       parent: Ouder
       publish_end_date: Einddatum publiceren
       publish_start_date: Begindatum publiceren
+      publishable: Gepubliceerd
       route: Route
       uri: URI
     menu_block:
@@ -36,6 +42,7 @@ sylius:
       name: Naam
       publish_end_date: Einddatum publiceren
       publish_start_date: Begindatum publiceren
+      publishable: Gepubliceerd
     menu_node_block:
       content: Inhoud
       display: Weergeven
@@ -45,6 +52,7 @@ sylius:
       link_type: Koppelingstype
       publish_end_date: Einddatum publiceren
       publish_start_date: Begindatum publiceren
+      publishable: Gepubliceerd
       route: Route
       uri: URI
     redirect_route:
@@ -57,6 +65,7 @@ sylius:
       id: Id
       publish_end_date: Einddatum publiceren
       publish_start_date: Begindatum publiceren
+      publishable: Gepubliceerd
       title: Titel
     route:
       content: Inhoud
@@ -68,13 +77,16 @@ sylius:
       parent: Ouder
       publish_end_date: Einddatum publiceren
       publish_start_date: Begindatum publiceren
+      publishable: Gepubliceerd
       title: Titel
     slideshow_block:
+      add_slide: Dia toevoegen
       childrens: Kinderen
       internal_name: Interne naam
       parent: Ouder
       publish_end_date: Einddatum publiceren
       publish_start_date: Begindatum publiceren
+      publishable: Gepubliceerd
       title: Titel
     static_content:
       body: Inhoud
@@ -84,6 +96,7 @@ sylius:
       parent: Ouder
       publish_end_date: Einddatum publiceren
       publish_start_date: Begindatum publiceren
+      publishable: Gepubliceerd
       routes: Routes
       title: Titel
     string_block:
@@ -92,3 +105,4 @@ sylius:
       name: Naam
       publish_end_date: Einddatum publiceren
       publish_start_date: Begindatum publiceren
+      publishable: Gepubliceerd

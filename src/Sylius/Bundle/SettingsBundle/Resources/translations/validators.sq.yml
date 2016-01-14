@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  parameter:
+    namespace:
+      max_length: Namespace i një parametri nuk duhet të përmbajë më shumë se 255 karaktere.
+      min_length: Namespace i një karakteri duhet të përmbajë të paktën 2 karaktere.
+      not_blank: Zgjidh një namespace për këtë parametër.
+    name:
+      max_length: Emri i një parametri nuk duhet të përmbajë më shumë se 255 karaktere.
+      min_length: Emri i një parametri duhet të përmbajë të paktën 2 karaktere.
+      not_blank: Fut një emër për këtë parametër.

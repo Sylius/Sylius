@@ -7,6 +7,7 @@ sylius:
       code: Kod
       name: Ad
       description: Açıklama
+      permissions: İzinler
       parent: Üst
     permission:
       code: Kod

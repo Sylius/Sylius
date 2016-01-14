@@ -12,6 +12,7 @@ sylius:
     gd: GD
     help: '%extension% uzantısını yükelyin ve aktif edin.'
     iconv: Iconv
+    exif: Exif
     icu: ICU
     intl: Intl
     json_encode: JSON

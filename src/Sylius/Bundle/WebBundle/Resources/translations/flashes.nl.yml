@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  account:
+    address:
+      create: Uw adres is succesvol toegevoegd.
+      update: Uw adres is succesvol bijgewerkt.
+      delete: Uw adres is succesvol verwijderd.
+      set_as_billing: Uw factuuradres is veranderd.
+      set_as_shipping: Je verzendadres is veranderd.
+    password:
+      change_success: Het wachtwoord is gewijzigd
+      invalid: Verkeerde huidige wachtwoord
+  channel:
+    error:
+      at_least_one: Het kanaal kan niet worden verwijderd, ten minste één ingeschakelde kanaal is vereist.

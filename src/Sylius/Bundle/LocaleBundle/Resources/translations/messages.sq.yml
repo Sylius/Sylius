@@ -3,6 +3,6 @@
 
 sylius:
   form:
-    attribute:
-      name: Interne naam
-      presentation: Weergawe
+    locale:
+      enabled: E aktivizuar
+      name: Emri

@@ -6,6 +6,5 @@ sylius:
     report:
       name: Név
       description: Leírás
-      code: Kód
       chart:
         type: Típus

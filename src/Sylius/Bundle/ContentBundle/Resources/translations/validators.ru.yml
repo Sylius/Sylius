@@ -1,0 +1,84 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  imagine_block:
+    name:
+      not_blank: Пожалуйста, введите название imagine блока.
+    label:
+      not_blank: Пожалуйста, задайте метку imagine блока.
+    filter:
+      not_blank: Пожалуйста, задайте фильтр imagine блока.
+    image:
+      not_blank: Пожалуйста, выберите изображение imagine блока.
+    start_date:
+      invalid_date: Недопустимая дата начала публикации.
+    end_date:
+      invalid_date: Недопустимая дата окончания публикации.
+  menu:
+    name:
+      not_blank: Пожалуйста, введите название меню.
+    label:
+      not_blank: Пожалуйста, введите метку меню.
+    start_date:
+      invalid_date: Недопустимая дата начала публикации.
+    end_date:
+      invalid_date: Недопустимая дата окончания публикации.
+  menu_node:
+    name:
+      not_blank: Пожалуйста, введите название элемента меню.
+    label:
+      not_blank: Пожалуйста, введите метку элемента меню.
+    start_date:
+      invalid_date: Недопустимая дата начала публикации.
+    end_date:
+      invalid_date: Недопустимая дата окончания публикации.
+  route:
+    name:
+      not_blank: Пожалуйста, введите имя маршрута.
+    content:
+      not_blank: Пожалуйста, введите контент маршрута.
+    start_date:
+      invalid_date: Недопустимая дата начала публикации.
+    end_date:
+      invalid_date: Недопустимая дата окончания публикации.
+  slideshow_block:
+    name:
+      not_blank: Пожалуйста, введите имя слайд-шоу.
+    title:
+      not_blank: Пожалуйста, введите заголовок слайд-шоу.
+    start_date:
+      invalid_date: Недопустимая дата начала публикации.
+    end_date:
+      invalid_date: Недопустимая дата окончания публикации.
+  simple_block:
+    name:
+      not_blank: Пожалуйста, введите имя простого блока.
+    title:
+      not_blank: Пожалуйста, введите заголовок простого блока.
+    body:
+      not_blank: Пожалуйста, введите содержимое простого блока.
+    start_date:
+      invalid_date: Недопустимая дата начала публикации.
+    end_date:
+      invalid_date: Недопустимая дата окончания публикации.
+  string_block:
+    name:
+      not_blank: Пожалуйста, введите имя простого блока.
+    body:
+      not_blank: Пожалуйста, введите содержимое простого блока.
+    start_date:
+      invalid_date: Недопустимая дата начала публикации.
+    end_date:
+      invalid_date: Недопустимая дата окончания публикации.
+  static_content:
+    name:
+      not_blank: Пожалуйста, введите название статического контента.
+    title:
+      not_blank: Пожалуйста, введите заголовок статического контента.
+    body:
+      not_blank: Пожалуйста, введите содержимое статического контента.
+    start_date:
+      invalid_date: Недопустимая дата начала публикации.
+    end_date:
+      invalid_date: Недопустимая дата окончания публикации.

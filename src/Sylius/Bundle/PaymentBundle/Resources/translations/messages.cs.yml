@@ -13,10 +13,12 @@ sylius:
     payment:
       amount: Platební částka
       method: Způsob platby
+      fee_calculator: Kalkulačka poplatků
       state:
         header: Stav platby
         checkout: Objednat
         completed: Dokončeno
+        authorized: Autorizováno
         failed: Neúspěšné
         new: Nový
         pending: Čekající
@@ -33,3 +35,5 @@ sylius:
       fee_calculator:
         fixed:
           amount: Částka
+        percent:
+          percent: '%'

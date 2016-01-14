@@ -4,7 +4,17 @@
 sylius:
   emails:
     order_confirmation:
+      name: Bestellbestätigung
       subject: Danke für Ihre Bestellung!
+    order_comment:
+      name: Kommentar
+      subject: Neuer Kommentar zu einer Bestellung
+    shipment_confirmation:
+      name: Versandbestätigung
+      subject: Ihre Bestellung wurde versandt!
+    user_confirmation:
+      name: Bestätigung durch den Benutzer
+      subject: Willkommen Sie in unserem Shop!
   account:
     address:
       action:
@@ -19,12 +29,16 @@ sylius:
         no_billing: Keine Standard-Rechnungsadresse
         no_shipping: Keine Standard-Lieferadresse
         shipping: Standard-Lieferadresse
+      empty: Sie haben keine Adressen angelegt.
       list: Alle Adressen
       update: Adresse bearbeiten
     home:
+      email: 'E-Mail :'
+      id: 'Kunden-Nr :'
       outline: Dies ist dein persönlicher Bereich. Hier kannst du alle deine Bestellungen verfolgen, deine persönlichen Daten bearbeiten, sowie neue Adressen hinzufügen.
       since: Kunde seit
       welcome: Willkommen in deinem persönlichen Bereich
+      last5orders: Ihre letzten 5 Bestellungen
     order:
       created_at: Bestellt am
       details: Bestelldetails
@@ -32,12 +46,16 @@ sylius:
       empty: Noch keine Bestellungen vorhanden.
       invoice: Rechnung
       list: Alle Bestellungen
+      number: 'Nummer :'
+      payment_mode: 'Zahlungsweise :'
       placed_at: 'Bestellt am %at%'
       shipment:
         pending: Ausstehend
         ready: 'Bereit seit %at%'
         returned: 'Retour am %at%'
         shipped: 'Geliefert am %at%'
+      shipment_mode: 'Versandart:'
+      state: 'Status :'
       total: Total
       tracking_number: Sendungsnummer
     title: Mein Account
@@ -71,7 +89,9 @@ sylius:
       add_product: Neues Produkt
       orders: Letzte Bestellungen
       products: Ihre Produkte
+      customers: Kunden
     statistics:
+      header: Statistiken dieses Monats
       orders_this_month: Gesamtbestellungen
       registrations_this_month: Gesamteregistrierungen
       sales_this_month: Verkäufe
@@ -79,39 +99,94 @@ sylius:
   block:
     index_header: Blöcke
     no_results: Keine Blocks zum anzeigen vorhanden.
+    simple_blocks: Einfache Elemente
+    string_blocks: Zeichenketten–Elemente
+    imagine_blocks: Bild Blöcke
+    slideshow_blocks: Slideshow Blöcke
     imagine:
+      create: Slideshow Block erstellen
+      create_header: Neuen Bild-Block erstellen
+      end_date: End–Datum
       id: ID
+      index: Imagine Blöcke
+      index_header: Bild Blöcke
       label: Bezeichnung
+      publishable: Veröffentlicht
+      start_date: Start–Datum
       title: Titel
+      update_header: Bild-Element editieren
       updated_at: Geändert
     simple:
       body: Inhalt
+      create: Einfaches Element erstellen
+      create_header: Einfaches Element erstellen
+      end_date: End–Datum
       id: ID
+      index: Einfache Elemente
+      index_header: Einfache Elemente
       label: Bezeichnung
+      publishable: Veröffentlicht
+      start_date: Start–Datum
       title: Titel
+      update_header: Einfaches Element editieren
       updated_at: Geändert
     slideshow:
       body: Inhalt
+      create: Slideshow–Element erstellen
+      create_header: Neues Slideshow–Element erstellen
+      end_date: End–Datum
       id: ID
+      index: Slideshow–Elemente
+      index_header: Slideshow Blöcke
+      publishable: Veröffentlicht
+      start_date: Start–Datum
       title: Titel
+      update_header: Slideshow Block bearbeiten
       updated_at: Geändert
     string:
       body: Inhalt
+      create: String Block erstellen
+      create_header: Neuen String Block erstellen
+      end_date: End–Datum
       id: ID
+      index: Zeichenketten–Elemente
+      index_header: Zeichenketten–Elemente
       label: Bezeichnung
+      publishable: Veröffentlicht
+      start_date: Start–Datum
       title: Titel
+      update_header: String block editieren
       updated_at: Geändert
   breadcrumb:
     assortment: Sortiment
     block:
+      imagine:
+        index: Imagine Blöcke
       index: Blöcke
+      simple:
+        index: Simple Blöcke
+      slideshow:
+        index: Slideshow–Elemente
+      string:
+        index: String Blöcke
     build: Erstellen
     configuration: Konfiguration
     content: Inhalt
     country:
       index: Länder
+    section:
+      customer: Kunde
+    customer:
+      index: Kunden
     dashboard: Dashboard
     edit: Bearbeiten
+    contact_request:
+      index: Kontaktanfragen
+      show: Kontaktanfrage
+    contact_topic:
+      index: Supportthemen
+    currency:
+      index: Währungen
     general_settings: Allgemeine Einstellungen
     generate: Generieren
     group:
@@ -120,6 +195,9 @@ sylius:
       index: Lagerbestände
     locale:
       index: Gebietsschemata
+    marketing: Marketing
+    menu:
+      index: Menüpunkte
     menu_node:
       index: Menüpunkte
     new: Neu
@@ -127,6 +205,7 @@ sylius:
       index: Optionen
     order:
       index: Bestellungen
+      adjustments: Änderungen
     page:
       index: Seiten
     payment:
@@ -139,15 +218,25 @@ sylius:
       index: Aktionen
     promotion_coupon:
       index: Gutscheine
+    attribute:
+      index: Attribute
+    archetype:
+      index: Archetypen
+    redirect_route:
+      index: Umleitungen (Redirects)
+    report:
+      index: Berichte
     route:
       index: Pfade
     sales: Verkäufe
+    security_settings: Sicherheitseinstellungen
     shipment:
       index: Lieferungen
     shipping_category:
       index: Versandgruppen
     shipping_method:
       index: Versandmethoden
+    support: Support
     tax_category:
       index: Steuerkategorien
     tax_rate:
@@ -155,7 +244,13 @@ sylius:
     taxation_settings: Gruppeneinstellungen
     taxonomy:
       index: Klassifizierungen
+    email:
+      index: E-Mails
+    channel:
+      index: Ausgabekanäle
     update: Bearbeiten
+    permission:
+      index: Berechtigungen
     role:
       index: Rollen
     zone:
@@ -180,6 +275,8 @@ sylius:
     addressing:
       header: Lieferadresse
     back: Zurück
+    credit_card:
+      header: Zahlungsdetails
     finalize:
       address:
         city: Stadt
@@ -197,6 +294,8 @@ sylius:
         no_promotion: Keine Reklame
         no_shipping_charges: Keine Versandkosten
         no_taxes: Keine Steuern
+        payment_charges: Zahlungsgebühren
+        payment_total: Gesamtbetrag
         promotion_discount: Rabatt
         promotion_total: Vergünstigung
         shipping_address: Lieferadresse
@@ -221,6 +320,8 @@ sylius:
       login: Login
       new_customer: Neuer Benutzer
       register: Registrieren
+      guest: Gastbestellung
+      proceed_order: Mit der Bestellung fortfahren
     shipping:
       error: Leider ist die Lieferung in das von Ihnen gewählte Land nicht möglich.
       header: Lieferverfahren
@@ -241,32 +342,55 @@ sylius:
     update_header: Land editieren
     enabled: Aktiviert
   email:
+    create: Neue E-Mail hinzufügen
+    create_header: Neue E-Mail hinzufügen
+    index_header: E-Mail Templates
+    manage: E-Mails verwalten
+    no_results: Es wurden noch keine E-Mails konfiguriert.
+    update_header: E-Mail editieren
     code: Code
     enabled: Aktiviert?
+    subject: Betreff
     updated_at: Geändert
   create: Erstellen
   created_at: Erstellt am
   delete: Löschen
   deleted: Gelöscht
   edit: Bearbeiten
+  move_up: nach oben
+  move_down: nach unten
   permission:
+    create: Neue Berechtigung hinzufügen
+    create_header: neue Berechtigung
     code: Code
     id: ID
     description: Beschreibung
+    index_header: Berechtigungen
+    no_results: Es wurden noch keine Berechtigungen erstellt.
+    update_header: Berechtigung editieren
     updated_at: Geändert
   role:
+    create: Neue Rolle hinzufügen
+    create_header: Neue Rolle
     code: Code
     id: ID
     name: Name
     description: Beschreibung
     index_header: Rollen
+    no_results: Es wurden noch keine Rollen definiert.
+    update_header: Rolle editieren
     updated_at: Geändert
   currency:
+    create: Währung erstellen
+    create_header: Neue Währung
     code: Code
     id: ID
     name: Name
     enabled: Aktiviert
+    index_header: Währungen
+    no_results: Es wurden noch keine Währungen erstellt.
     exchange_rate: Wechselkurs
+    update_header: Währung editieren
     updated_at: Geändert
   filter: Filtern
   form:
@@ -284,19 +408,26 @@ sylius:
     login:
       email: E-Mail
       password: Passwort
+    menu:
+      add_menu_node: Menü Element hinzufügen
     option_value:
       add_value: Wert hinzufügen
     profile:
       email: E-Mail
       firstName: Vorname
       lastName: Nachname
+    comment:
+      comment: Anmerkung
+      notify_customer: Kunde benachrichtigen?
   gallery:
     next: Nächstes Bild
     previous: Vorheriges Bild
     slideshow: Slideshow
   generate: Generieren
+  go_to_dashboard: Zum Dashboard
   group:
     create: Gruppe anlegen
+    create_header: Neue Kundengruppe hinzufügen
     id: ID
     index_header: Gruppen
     name: Name
@@ -305,9 +436,14 @@ sylius:
     update_header: Gruppe bearbeiten
   hide_deleted: Gelöschte Elemente ausblenden
   history:
+    header: Verlauf
     action: Aktion
     author: Autor
     data: Daten
+    logged_at: geloggt am (version)
+    revert: Wiederherstellen
+    no_results: Es wurden noch keine Ereignisse geloggt.
+    empty: Leeren
   homepage:
     splash:
       headline: Willkommen bei Sylius
@@ -336,34 +472,58 @@ sylius:
   logo: Sylius
   manage: Verwaltung
   menu:
-    id: ID
-    title: Titel
-  menu_node:
+    create: Menü hinzufügen
+    create_header: Menü hinzufügen
+    end_date: End–Datum
     id: ID
     index_header: Menüpunkte
+    no_results: Es wurden noch keine Menüs hinzugefügt.
+    publishable: Veröffentlicht
+    start_date: Startdatum
+    title: Titel
+    update_header: Menü editieren
+  menu_node:
+    create: Menüpunkt erstellen
+    create_header: Erstelle einen Menüpunkt
+    id: ID
+    index_header: Menüpunkte
+    no_results: Es wurden noch keine Menüpunkte hinzugefügt.
     parent: Übergeordnet
     title: Titel
+    update_header: Menüpunkt editieren
   meta:
+    backend_title: Sylius Dashboard
     frontend_description: Beschreibung
     frontend_keywords: Keywords
     frontend_title: Titel
   na: Nicht verfügbar
   newest: Neueste Produkte
   "no": false
+  no_results: Keine Ergebnisse für diese Anfrage gefunden
   product_option:
+    create: Option erstellen
+    create_header: Neue Produktoption
+    index_header: Produktoptionen
     manage: Produktoptionen verwalten
     name: Name
+    no_results: Es sind keine Optionen konfiguriert.
+    presentation: Anzeigename
     updated_at: Zuletzt geändert
+    values: Werte
   order:
     billing_address: Rechnungsadresse
     create: Bestellreihenfolge
     create_header: Neue Bestellung
     created_at: Erstellungszeit
+    details: Bestelldetails
     general_info: Allgemeine info
+    guest: Gast Kunde
     id: ID
     index_header: Aktuelle Bestellungen
     inventory_tracking: Warenbestandsverfolgung
     items_total: Gesamtanzahl
+    items: Artikel
+    channel: Promotionskanäle
     manage: Bestellungsverwaltung
     no_items: Diese Bestellung hat keine Artikel
     no_results: Sie haben keine neuen Bestellungen
@@ -371,6 +531,7 @@ sylius:
     no_shipping_charges: Keine Versandkosten
     no_taxes: Keine Steuern
     number: Nummer
+    order_state: Bestellstatus
     payment: Zahlung
     payment_state: Zahlungsstatus
     payment_states:
@@ -389,29 +550,57 @@ sylius:
     shipping_address: Lieferadresse
     shipping_charges: Versandkosten
     shipping_total: Versandkosten gesamt
+    show_header: 'Bestellung #%number%'
     state: Versandstatus
     tax_total: Steuern gesamt
     taxes: Steuern
     total: Total
     update_header: Bestellung editieren
+    customer: Kunde
     currency: Währung
+    immutable_warning: Bereits ausgelieferte Bestellungen sind unveränderlich.
     promotion_coupons: Gutscheine
+    no_promotion: Keine Gutscheine aktiv
     adjustments:
-      label: Bezeichnung
+      manage: Verwalten von Anpassungen
+      type: Typ
       description: Beschreibung
       amount: Anzahl
+      locked: Gesperrt?
+      lock: Sperren
+      unlock: Entsperren
+      lock_all: Sperre alle Anpassungen
+      unlock_all: Entsperre alle Anpassungen
     comment:
+      header: Kommentar
+      comment: Anmerkung
       author: Autor
       created_at: Erstellt am
+      notify: Benachrichtigung
       state: Versandstatus
+      customer:
+        notified: Kunde benachrichtigt
+        not_notified: Kunde nicht benachrichtigt
+      no_comment: Kein Kommentar
   route:
+    create: Route erstellen
+    create_header: Route erstellen
     id: ID
     index_header: Pfade
     name: Name
+    no_results: Es gibt keine Routen.
+    page: Seite
     title: Titel
+    update_header: Route bearbeiten
+    view: Anzeigen
   redirect_route:
+    create: Umleitung anlegen
+    create_header: Umleitung anlegen
     id: ID
+    index_header: Umleitung
+    no_results: Es gibt noch keine Umleitungen.
     title: Titel
+    update_header: Umleitung bearbeiten
   shipment:
     ship: Lieferung
     created_at: Erstellt am
@@ -433,12 +622,20 @@ sylius:
     update_header: Lieferung bearbeiten
     updated_at: Geändert
   channel:
+    create: Kanal hinzufügen
     created_at: Erstellt am
     code: Code
+    currency_default: Standardwährung
     enabled: Aktiviert
     id: ID
+    index_header: Ausgabekanäle
+    manage: Kanäle verwalten
+    create_header: Kanal hinzufügen
     name: Name
+    url: URL
+    no_results: Es wurden noch keine Channel konfiguriert.
     update: Bearbeiten
+    update_header: Channel editieren
     updated_at: Geändert
   order_item:
     product: Produkt
@@ -450,10 +647,17 @@ sylius:
   page:
     body: Inhalt
     create: Neue Seite erstellen
+    create_header: Neue Seite erstellen
     id: ID
     index_header: Seiten
+    no_results: Es wurden noch keine Seiten erstellt.
+    no_route: Die Seite wird nicht im Frontend angezeigt, da keine Route definiert worden ist
+    publishable: Veröffentlicht
+    start_date: Start–Datum
+    end_date: End–Datum
     routes: Pfade
     title: Titel
+    update_header: Seite editieren
   password: Passwort
   payment:
     order: Reihenfolge
@@ -492,12 +696,14 @@ sylius:
     update_header: Zahlart editieren
     updated_at: Geändert
   product:
+    add_attribute: Attribut hinzufügen
     available_on: Verfügbar ab
     available_on_demand: Auf Nachfrage verfügbar
     categorization: Kategorisierung
     contain_variants: Enthält Varianten
     create: Produkt erstellen
     create_header: Neues Produkt
+    archetype: Archetypen
     description: Produktbeschreibung
     generate_variants: Generiere Varianten
     index_by_taxon_header: 'Produkte <small>kategorisiert als "%taxon%</small>"'
@@ -507,6 +713,7 @@ sylius:
     no_description: '<i>Keine Beschreibung...</i>'
     no_images: Keine Bilder für dieses Produkt vorhanden
     no_options: Es gibt keine Optionen für dieses Produkt
+    no_attributes: Für dieses Produkt wurden keine Attribute definiert
     no_results: Keine Produkte anzeigbar.
     no_shipping_category: Keine Versandkategorie
     no_short_description: '<i>Keine Kurzbeschreibung</i>'
@@ -514,8 +721,11 @@ sylius:
     no_tax_category: Keine Steuerkategorie
     no_taxons: Keine Klassifizierungen
     options: Optionen
+    variants: Varianten
     price: Listenpreis
+    attributes: Attribute
     restricted_zone: Eingeschränktes Versandgebiet
+    remove_attribute: Attribute entfernen
     shipping_category: Versandkategorie
     show: Mehr anzeigen
     show_header: 'Produktdetails <small> Anzeige von Produkt "<strong>%product%</strong>"</small>'
@@ -527,6 +737,8 @@ sylius:
       images: Bilder
       options: Optionen
       product: Produkt
+      attributes: Attribute
+      channels: Ausgabekanäle
       pricing: Preisgestaltung
     tax_category: Steuerkategorie
     unavailable: Nicht verfügbar
@@ -534,7 +746,10 @@ sylius:
     updated_at: Zuletzt geändert
     variant_selection_method: Variantenauswahlmethode
     view_details: '%product% Details ansehen.'
+    volume_price: Mengenbasierte Preise (Volume based)
     volume_based:
+      qty_min: Mindestanzahl
+      qty_max: Maximal Anzahl
       price: Preis
   product_not_available_in_zone: In Ihrem Land nicht verfügbar
   promotion:
@@ -560,6 +775,8 @@ sylius:
     updated_at: Geändert
     usage_limit: Aktionslimit
     used: Aktion wird verwendet
+    priority: Priorität
+    exclusive: Exklusiv
   promotion_action:
     configuration: Aktionskonfiguration
     type: Aktionstyp
@@ -575,35 +792,72 @@ sylius:
     total_results:
       Total: '%total%'
     update_header: Gutschein editieren
+    expires_at: Verfällt am
   promotion_rule:
     configuration: Aktionsregeln konfigurieren
     type: Aktionsregeltyp
   product_attribute:
+    add_choice: Auswahl hinzufügen
+    code: Code
+    create: Produkt Attribute hinzufügen
+    create_header: Neues Produkt Attribut
+    index_header: Produkt Attribute
+    manage: Attribute verwalten
     name: Name
+    no_results: Es wurden noch keine Attribute konfiguriert.
+    type: Typ
+    update_header: Attribute editieren
     updated_at: Zuletzt geändert
   archetype:
+    build: Archetype erstellen
+    build_header: Produkt aus Archetype erstellen
+    create: Archetype hinzufügen
+    create_header: Neuer Archetype
+    index_header: Produkt-Vorlagen
     name: Name
+    no_results: Es wurden noch keine Archetypen hinzufügen.
+    options: Optionen
+    attributes: Attribute
+    parent: Parent
+    update_header: Archetype editieren
     updated_at: Zuletzt geändert
   province:
     provinces: Bundesländer
   remember_me: Eingeloggt bleiben
   report:
+    create: Bericht erstellen
+    create_header: Neuen Report erstellen
+    no_results: Es wurden noch keine Berichte erstellt.
+    show_header: Berichtdetails
     details: Details
+    id: ID
     name: Name
     code: Code
     description: Beschreibung
     manage: Verwaltung
+    update_header: Bericht editieren
+    renderer: Renderer-Typ
+    data_fetcher: Datenquelle Typ
+    index_header: Berichte
+    no_data: Es sind keine Daten zum Anzeigen vorhanden.
+    no_report: Es sind keine Berichte vorhanden.
   save_changes: Änderungen speichern
   search: Suchen
   security:
     login:
+      header: 'Login <small>Sylius Webshop</small>'
+      info: 'Bitte logge Dich mit folgen Daten ein. E-Mail: <b>"sylius@example.com"</b> und Passwort: <b>"sylius"</b>'
+      no_account: Noch kein Account erstellt?
+      forgot_password: Passwort vergessen?
       button: Anmelden
   settings:
     general_header: Allgemeine Einstellungen
+    security_header: Sicherheitseinstellungen
     taxation_header: Steuereinstellungen
   shipment_category:
     manage: Versandkategorie verwalten
   shipping_address: Lieferadresse
+  billing_address: Rechnung an
   shipping_category:
     create: Versandkategorie erstellen
     create_header: Neue Versandkategorie
@@ -619,7 +873,6 @@ sylius:
     category: Kategorie
     create: Versandmethode erstellen
     create_header: Neue Versandart
-    enabled: Aktiv?
     id: ID
     index_header: Versandarten
     manage: Versandarten verwalten
@@ -692,11 +945,28 @@ sylius:
   unknown: Unbekannt
   customer:
     billing_address: Rechnungsadresse
+    create: Kundenkonto erstellen
+    create_header: Neue Kunde
     email: E-Mail
+    filter:
+      all: Alle Kunden anzeigen
+      registered: Registrierte Kunden anzeigen
+      unconfirmed: Unbestätigte Kunden anzeigen
+    general_info: 'Allgemeine Kundeninformation : "%fullName%"'
     first_name: Vorname
     id: ID
+    index_header: 'Kunden<small>Liste aller Kunden</small>'
     last_name: Nachname
+    manage: Kunden verwalten
+    no_results: Es sind keine Kunden vorhanden.
+    order:
+      no_results: Es gibt keine Bestellungen.
+    orders: Kundenbestellungen
+    recent_header: Neuste Kunden
+    creation_date: Erstellt am
     shipping_address: Lieferadresse
+    show_header: Kundendetails
+    update_header: Kunde bearbeiten
     groups: Gruppen
   user:
     create: Benutzer hinzufügen
@@ -748,6 +1018,7 @@ sylius:
   contact_topic:
     id: ID
     title: Titel
+    index_header: Supportthemen
     updated_at: Geändert
   contact_request:
     id: ID
@@ -756,4 +1027,8 @@ sylius:
     email: E-Mail
     message: Nachricht
     topic: Thema
+    index_header: Kontaktanfragen
     updated_at: Geändert
+  ui:
+    links: Links
+    code: Code

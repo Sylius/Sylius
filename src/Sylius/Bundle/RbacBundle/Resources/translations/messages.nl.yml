@@ -7,6 +7,7 @@ sylius:
       code: Code
       name: Naam
       description: Omschrijving
+      permissions: Machtigingen
       parent: Ouder
     permission:
       code: Code

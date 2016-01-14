@@ -28,6 +28,7 @@ sylius:
     channel:
       taxonomies: Categorizări
       locales: Setări regionale
+      currency_default: Moneda implicită
       shipping_methods: Metode de livrare
       payment_methods: Metode de plată
     image:

@@ -6,6 +6,5 @@ sylius:
     report:
       name: Ονομασία
       description: Περιγραφή
-      code: Κώδικος
       chart:
         type: Τύπος

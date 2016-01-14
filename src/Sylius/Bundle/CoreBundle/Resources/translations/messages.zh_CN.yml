@@ -28,6 +28,7 @@ sylius:
     channel:
       taxonomies: 分类
       locales: 区域设置
+      currency_default: 默认货币：
       shipping_methods: 发货方式
       payment_methods: 支付方式
     image:

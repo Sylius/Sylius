@@ -5,3 +5,5 @@ sylius:
   form:
     contact_request:
       first_name: Förnamn
+      message: Meddelande
+      topic: Ämne

@@ -13,10 +13,12 @@ sylius:
     payment:
       amount: Ammontare del pagamento
       method: Metodo di pagamento
+      fee_calculator: Calcolatore di tasse
       state:
         header: Stato pagamento
         checkout: Checkout
         completed: Completato
+        authorized: Autorizzato
         failed: Fallimento
         new: Nuovo
         pending: In attesa
@@ -33,3 +35,5 @@ sylius:
       fee_calculator:
         fixed:
           amount: Valore
+        percent:
+          percent: '%'

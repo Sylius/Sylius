@@ -7,4 +7,5 @@ sylius:
       code: Kod
       name: Nazwa
       parent: Rodzic
+      attributes: Cechy
       options: Warianty

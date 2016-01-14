@@ -1,0 +1,84 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  imagine_block:
+    name:
+      not_blank: "Merci d'entrer le nom de l'image."
+    label:
+      not_blank: "Merci d'entrer le libellé de l'image."
+    filter:
+      not_blank: "Merci de choisir le filtre de l'image."
+    image:
+      not_blank: Merci de choisir une image.
+    start_date:
+      invalid_date: La date de début de publication est invalide.
+    end_date:
+      invalid_date: La date de fin de publication est invalide.
+  menu:
+    name:
+      not_blank: "Merci d'entrer le nom du menu."
+    label:
+      not_blank: "Merci d'entrer le libellé du menu."
+    start_date:
+      invalid_date: La date de début de publication est invalide.
+    end_date:
+      invalid_date: La date de fin de publication est invalide.
+  menu_node:
+    name:
+      not_blank: "Merci d'entrer le nom de l'élément de menu."
+    label:
+      not_blank: "Merci d'entrer le libellé de l'élément de menu."
+    start_date:
+      invalid_date: La date de début de publication est invalide.
+    end_date:
+      invalid_date: La date de fin de publication est invalide.
+  route:
+    name:
+      not_blank: "Merci d'entrer le nom de la route."
+    content:
+      not_blank: Merci de choisir le contenu vers lequel pointe la route.
+    start_date:
+      invalid_date: La date de début de publication est invalide.
+    end_date:
+      invalid_date: La date de fin de publication est invalide.
+  slideshow_block:
+    name:
+      not_blank: "Merci d'entrer le nom du diaporama."
+    title:
+      not_blank: "Merci d'entrer le titre du diaporama."
+    start_date:
+      invalid_date: La date de début de publication est invalide.
+    end_date:
+      invalid_date: La date de fin de publication est invalide.
+  simple_block:
+    name:
+      not_blank: "Merci d'entrer le nom du bloc."
+    title:
+      not_blank: "Merci d'entrer le titre du bloc."
+    body:
+      not_blank: "Merci d'entrer le texte du bloc."
+    start_date:
+      invalid_date: La date de début de publication est invalide.
+    end_date:
+      invalid_date: La date de fin de publication est invalide.
+  string_block:
+    name:
+      not_blank: "Merci d'entrer le nom du bloc."
+    body:
+      not_blank: "Merci d'entrer le texte du bloc."
+    start_date:
+      invalid_date: La date de début de publication est invalide.
+    end_date:
+      invalid_date: La date de fin de publication est invalide.
+  static_content:
+    name:
+      not_blank: "Merci d'entrer le nom de la page."
+    title:
+      not_blank: "Merci d'entrer le titre de la page."
+    body:
+      not_blank: "Merci d'entrer le texte de la page."
+    start_date:
+      invalid_date: La date de début de publication est invalide.
+    end_date:
+      invalid_date: La date de fin de publication est invalide.

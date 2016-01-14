@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  pricing:
+    volume_based:
+      button:
+        add: اضافة

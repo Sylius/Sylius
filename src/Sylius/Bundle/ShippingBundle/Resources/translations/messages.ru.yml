@@ -6,6 +6,8 @@ sylius:
     rule:
       item_count_configuration:
         count: Кол-во
+        equal: Равно
+      type: Тип измерения
     shipment:
       state: Cтатус
       states:
@@ -18,16 +20,23 @@ sylius:
       tracking_code: Код отслеживания
     shipping_calculator:
       flat_rate_configuration:
+        label: Фиксированная ставка за доставку
         amount: Сумма
       flexible_rate_configuration:
+        label: Гибкий курс
         additional_item_cost: Стоимость дополнительного товара
         additional_item_limit: Лимитировать дополнительные позиции
         first_item_cost: Стоимость первого товара
       per_item_rate_configuration:
+        label: Фиксированная ставка за единицу
         amount: Сумма
       weight_rate_configuration:
+        label: Ставка основная на весе
+        fixed: Фиксированная сумма
+        variable: Динамическая сумма
         division: Деление
       volume_rate_configuration:
+        label: Ставка на основе
         amount: Сумма
         division: Деление
     shipping_category:

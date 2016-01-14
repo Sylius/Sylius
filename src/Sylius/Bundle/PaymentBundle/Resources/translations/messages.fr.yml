@@ -13,10 +13,12 @@ sylius:
     payment:
       amount: Montant du paiement
       method: Moyen de paiement
+      fee_calculator: Calculateur de taxes
       state:
         header: Etat du paiement
         checkout: Paiement
         completed: Complété
+        authorized: Autorisé
         failed: Échoué
         new: Nouveau
         pending: En attente
@@ -33,3 +35,5 @@ sylius:
       fee_calculator:
         fixed:
           amount: Montant
+        percent:
+          percent: '%'

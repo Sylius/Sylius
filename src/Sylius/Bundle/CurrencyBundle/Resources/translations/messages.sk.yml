@@ -4,6 +4,5 @@
 sylius:
   form:
     currency:
-      code: Kód
       exchange_rate: Výmenný kurz
-      enabled: Povolené
+      enabled: Zapnuté

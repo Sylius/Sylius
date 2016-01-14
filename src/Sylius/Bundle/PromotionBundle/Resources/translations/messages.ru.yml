@@ -26,18 +26,29 @@ sylius:
         equal: Равно
       nth_order_configuration:
         nth: Количество
+      customer_loyalty_configuration:
+        time: Время
+        unit:
+          days: Дней
+          weeks: Недель
+          months: Месяцев
+          years: Лет
+          header: Единиц
+        after: Пользователь создан после этого периода
       shipping_country_configuration:
         country: Страна
       type: Тип
     coupon:
-      code: Код
       usage_limit: Предел использования
+      expires_at: Истекает
     coupon_generate_instruction:
       amount: Количество
       usage_limit: Предел использования
+      expires_at: Истекает
     promotion:
       actions: Действия
       coupon_based: Основана на купонах
+      exclusive: Эксклюзив
       description: Описание
       ends_at: Конец
       name: Название

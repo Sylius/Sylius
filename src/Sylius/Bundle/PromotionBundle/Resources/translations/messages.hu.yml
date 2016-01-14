@@ -30,7 +30,6 @@ sylius:
         country: Ország
       type: Típus
     coupon:
-      code: Kód
       usage_limit: Felhasználhatóság korlátozása
     coupon_generate_instruction:
       amount: Összeg

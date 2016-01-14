@@ -6,6 +6,14 @@ sylius:
     report:
       name: Nazwa
       description: Opis
-      code: Kod
+      data_fetcher: Źródło danych
+      renderer:
+        label: Obrazowanie
+        template: Szablon
       chart:
         type: Typ
+      user_registration:
+        start: Data rozpoczęcia
+        end: Data zakończenia
+        period: Okres
+        empty_records: Wydrukować puste rekordy?

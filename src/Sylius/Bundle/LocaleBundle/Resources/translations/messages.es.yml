@@ -4,6 +4,5 @@
 sylius:
   form:
     locale:
-      code: Código
       enabled: Activado
       name: Nombre

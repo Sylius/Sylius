@@ -16,6 +16,7 @@ sylius:
       max_length: 'Il codice del coupon non deve essere più lungo di 1 carattere. |Il codice del coupon non deve essere più lungo di {{ limit }} caratteri.'
       min_length: 'Il codice del coupon deve essere lungo almeno 1 carattere. |Il codice del coupon deve essere lungo almeno {{ limit }} caratteri.'
       not_blank: Per favore inserisci il codice coupon.
+      unique: Questo coupon esiste già.
     usage_limit:
       min: 'Il limite di utilizzo dei coupon deve essere minimo {{ limit }}.'
   promotion_coupon_generate_instruction:

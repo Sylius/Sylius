@@ -13,10 +13,12 @@ sylius:
     payment:
       amount: Сумма платежа
       method: Метод платежа
+      fee_calculator: Калькулятор комиссии
       state:
         header: Статус платежа
         checkout: Сверка
         completed: Завершен
+        authorized: Авторизовано
         failed: Провален
         new: Новый
         pending: Ожидает
@@ -33,3 +35,5 @@ sylius:
       fee_calculator:
         fixed:
           amount: Сумма
+        percent:
+          percent: '%'

@@ -4,6 +4,5 @@
 sylius:
   form:
     currency:
-      code: Valuuttakoodi
       exchange_rate: Vaihtokurssi
       enabled: Aktiivinen

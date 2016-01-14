@@ -24,6 +24,8 @@ sylius:
     group:
       name: Ονομασία
       roles: Ρόλοι
+    channel:
+      currency_default: Προεπιλεγμένο νόμισμα
     image:
       file: Εικόνα
     locale:

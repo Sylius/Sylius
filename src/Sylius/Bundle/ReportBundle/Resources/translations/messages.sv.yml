@@ -5,4 +5,3 @@ sylius:
   form:
     report:
       name: Namn
-      code: Kod

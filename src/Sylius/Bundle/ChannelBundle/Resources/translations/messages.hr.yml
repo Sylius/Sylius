@@ -4,7 +4,6 @@
 sylius:
   form:
     channel:
-      code: ISO kod
       name: Naziv grupe
       description: Opis
       enabled: Omogući

@@ -9,6 +9,7 @@ sylius:
       country: Land
       first_name: Förnamn
       last_name: Efternamn
+      phone_number: Telefonnummer
       postcode: Postnummer
       street: Gatuadress
       province: Län

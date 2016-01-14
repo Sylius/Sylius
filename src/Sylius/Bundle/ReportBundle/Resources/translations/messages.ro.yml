@@ -6,6 +6,5 @@ sylius:
     report:
       name: Nume
       description: Descriere
-      code: Cod
       chart:
         type: Tip

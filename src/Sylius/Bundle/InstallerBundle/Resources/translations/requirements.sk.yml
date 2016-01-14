@@ -6,7 +6,7 @@ sylius:
     header: Rozšírenia
     accelerator:
       header: Akcelerátor
-      help: Nainštalujte a povoľte PHP akcelerátor ako APC (vysoko odporúčané).
+      help: Nainštalujte a povoľte PHP akcelerátor, napríklad APC (veľmi odporúčané).
     apc: APC
     ctype: Ctype
     gd: GD
@@ -33,7 +33,7 @@ sylius:
         To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     exists: existuje
     logs:
-      header: logy
+      header: záznamy
       help:
         To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     not_exists: neexistuje

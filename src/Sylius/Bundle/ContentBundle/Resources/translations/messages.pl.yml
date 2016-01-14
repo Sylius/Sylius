@@ -10,24 +10,30 @@ sylius:
       id: Id
       publish_end_date: Data zakończenia publikacji
       publish_start_date: Data publikacji
+      publishable: Opublikowany
     imagine_block:
       filter: Filtruj
       image: Zdjęcie
       internal_name: Nazwa w systemie
       label: Etykieta
+      link_url: Link URL
       parent: Rodzic
       publish_end_date: Data zakończenia publikacji
       publish_start_date: Data publikacji
+      publishable: Opublikowany
+      slideshow_small: 'Pokaz slajdów - Mały (z boku)'
       slideshow_medium: Pokaz slajdów Średni (treść)
+      slideshow_large: 'Pokaz slajdów - Duży (pełna szerokość)'
     menu:
-      childrens: Dzieci
-      display: Wyświetl
+      childrens: Podmenu
+      display: Pokaż
       display_children: Wyświetl dzieci
       label: Etykieta
       name: Nazwa
       parent: Rodzic
       publish_end_date: Data zakończenia publikacji
       publish_start_date: Data publikacji
+      publishable: Opublikowany
       route: Ścieżka
       uri: URI
     menu_block:
@@ -36,6 +42,7 @@ sylius:
       name: Nazwa
       publish_end_date: Data zakończenia publikacji
       publish_start_date: Data publikacji
+      publishable: Opublikowany
     menu_node_block:
       content: Treść
       display: Wyświetl
@@ -45,18 +52,20 @@ sylius:
       link_type: Typ łącza
       publish_end_date: Data zakończenia publikacji
       publish_start_date: Data publikacji
+      publishable: Opublikowany
       route: Ścieżka
       uri: URI
     redirect_route:
       id: Id
       name: Nazwa
-      route_name: Nazwa_ścieżki
+      route_name: Nazwa ścieżki
       uri: URI
     reference_block:
       body: Zawartość
       id: Id
       publish_end_date: Data zakończenia publikacji
       publish_start_date: Data publikacji
+      publishable: Opublikowany
       title: Tytuł
     route:
       content: Treść
@@ -68,13 +77,16 @@ sylius:
       parent: Rodzic
       publish_end_date: Data zakończenia publikacji
       publish_start_date: Data publikacji
+      publishable: Opublikowany
       title: Tytuł
     slideshow_block:
+      add_slide: Dodaj slajd
       childrens: Dzieci
       internal_name: Nazwa w systemie
       parent: Rodzic
       publish_end_date: Data zakończenia publikacji
       publish_start_date: Data publikacji
+      publishable: Opublikowany
       title: Tytuł
     static_content:
       body: Zawartość
@@ -84,6 +96,7 @@ sylius:
       parent: Rodzic
       publish_end_date: Data zakończenia publikacji
       publish_start_date: Data publikacji
+      publishable: Opublikowany
       routes: Ścieżki
       title: Tytuł
     string_block:
@@ -92,3 +105,4 @@ sylius:
       name: Nazwa
       publish_end_date: Data zakończenia publikacji
       publish_start_date: Data publikacji
+      publishable: Opublikowany

@@ -6,6 +6,5 @@ sylius:
     report:
       name: Naziv grupe
       description: Opis
-      code: ISO kod
       chart:
         type: Vrsta

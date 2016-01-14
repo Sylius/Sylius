@@ -29,6 +29,8 @@ sylius:
         country: البلد
         province: مقاطعة
         zone: المنطقة
+      scope: نطاق
+      select_scope: اختر النطاق
     zone_member_country:
       country: البلد
     zone_member_province:

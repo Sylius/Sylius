@@ -4,5 +4,4 @@
 sylius:
   form:
     email:
-      code: Codi
       enabled: Activat

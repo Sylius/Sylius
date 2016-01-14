@@ -6,6 +6,8 @@ sylius:
     name:
       not_blank: Angiv attributtens navn.
       min_length: 'Attributnavn skal være mindst 1 tegn langt. | Attributnavn skal være mindst {{ limit }} tegn langt.'
+    presentation:
+      min_length: 'Attributten præsentation skal være mindst 1 tegn langt. | Attributten præsentation skal være mindst {{ limit }} tegn.'
   attribute_value:
     attribute:
       not_blank: Vælg venligst attributten.

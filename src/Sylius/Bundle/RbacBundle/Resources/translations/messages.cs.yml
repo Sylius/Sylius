@@ -7,6 +7,7 @@ sylius:
       code: Kód
       name: Jméno
       description: Popis
+      permissions: Oprávnění
       parent: Rodič
     permission:
       code: Kód

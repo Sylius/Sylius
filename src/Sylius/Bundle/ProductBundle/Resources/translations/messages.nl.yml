@@ -6,6 +6,7 @@ sylius:
     product:
       name: Naam
       description: Omschrijving
+      attributes: Attributen
       options: Opties
       meta_keywords: Meta sleutelwoorden
       meta_description: Meta omschrijving
@@ -14,4 +15,5 @@ sylius:
     product_archetype:
       name: Naam
       parent: Ouder
+      attributes: Attributen
       options: Opties

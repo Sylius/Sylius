@@ -4,6 +4,10 @@
 sylius:
   form:
     email:
-      code: Code
       enabled: Aktiviert
+      subject: Betreff
+      sender_name: Absender Name
+      sender_address: Absenderadresse
       content: Inhalt
+      template: Vorlage
+      no_template: Benutzerdefinierte Vorlage verwenden

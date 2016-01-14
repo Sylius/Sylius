@@ -28,6 +28,7 @@ sylius:
     channel:
       taxonomies: Taxonómiák
       locales: Területi beállítások
+      currency_default: Alapértelmezett pénznem
       shipping_methods: Szállítási módok
       payment_methods: Fizetési módok
     image:

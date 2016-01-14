@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  locale:
+    code:
+      not_blank: Zgjidh një kod lokal.
+      unique: Kodi lokal duhet të jetë unik.

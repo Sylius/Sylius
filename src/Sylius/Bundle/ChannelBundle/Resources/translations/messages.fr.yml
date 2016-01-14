@@ -4,7 +4,6 @@
 sylius:
   form:
     channel:
-      code: Code
       name: Nom
       description: Description
       url: URL

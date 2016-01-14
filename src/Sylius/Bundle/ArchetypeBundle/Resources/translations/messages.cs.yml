@@ -7,4 +7,5 @@ sylius:
       code: Kód
       name: Jméno
       parent: Rodič
+      attributes: Atributy
       options: Možnosti
