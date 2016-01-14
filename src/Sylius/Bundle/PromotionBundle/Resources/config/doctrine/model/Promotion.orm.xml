@@ -37,12 +37,12 @@
                 <cascade-all />
             </cascade>
         </one-to-many>
-        <one-to-many field="rules" target-entity="Sylius\Component\Promotion\Model\RuleInterface" mapped-by="promotion">
+        <one-to-many field="rules" target-entity="Sylius\Component\Promotion\Model\RuleInterface" mapped-by="promotion" orphan-removal="true">
             <cascade>
                 <cascade-all />
             </cascade>
         </one-to-many>
-        <one-to-many field="actions" target-entity="Sylius\Component\Promotion\Model\ActionInterface" mapped-by="promotion">
+        <one-to-many field="actions" target-entity="Sylius\Component\Promotion\Model\ActionInterface" mapped-by="promotion" orphan-removal="true">
             <cascade>
                 <cascade-all />
             </cascade>
