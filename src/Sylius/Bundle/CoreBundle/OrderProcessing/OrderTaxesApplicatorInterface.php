@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\OrderProcessing;
+namespace Sylius\Bundle\CoreBundle\OrderProcessing;
 
 use Sylius\Component\Core\Model\OrderInterface;
 
