@@ -62,15 +62,13 @@ class ParentArchetypeListener implements EventSubscriberInterface
         );
 
         if (null != $currentArchetype->getId()) {
-            $parentOptions = array(
-                'query_builder' => function (RepositoryInterface $repository) use ($currentArchetype) {
-                    return $repository
-                        ->createQueryBuilder('o')
-                        ->where('o.id != :id')
-                        ->setParameter('id', $currentArchetype->getId())
-                    ;
-                }
-            );
+            $parentOptions['query_builder'] = function (RepositoryInterface $repository) use ($currentArchetype) {
+                return $repository
+                    ->createQueryBuilder('o')
+                    ->where('o.id != :id')
+                    ->setParameter('id', $currentArchetype->getId())
+                ;
+            };
         }
 
         $form->add('parent', sprintf('sylius_%s_archetype_choice', $this->subject), $parentOptions);
