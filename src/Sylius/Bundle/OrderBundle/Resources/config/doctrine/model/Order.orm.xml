@@ -24,6 +24,8 @@
 
         <field name="number" column="number" type="string" unique="true" nullable="true" />
 
+        <field name="additionalInformation" column="additional_information" type="string" nullable="true" length="1000" />
+
         <field name="state" column="state" type="string" />
         <field name="completedAt" column="completed_at" type="datetime" nullable="true" />
 

@@ -43,6 +43,11 @@ class CartTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
+        $builder
+            ->add('additionalInformation')
+            ->willReturn($builder)
+        ;
+
         $this->buildForm($builder, array());
     }
 
