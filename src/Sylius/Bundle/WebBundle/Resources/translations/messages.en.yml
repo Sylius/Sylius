@@ -787,6 +787,7 @@ sylius:
         stock: Current stock
         tabs:
             attributes: Attributes
+            associations: Associations
             categorization: Categorization
             channels: Channels
             images: Images

@@ -115,6 +115,8 @@ class Association implements AssociationInterface
 
     /**
      * @param Associatable $associatedObject
+     *
+     * @return bool
      */
     public function hasAssociatedObject(Associatable $associatedObject)
     {
@@ -130,4 +132,4 @@ class Association implements AssociationInterface
             $this->associatedObjects->add($associatedObject);
         }
     }
-} 
+}

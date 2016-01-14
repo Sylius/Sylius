@@ -102,11 +102,12 @@ sylius_product:
                         default: Sylius\Bundle\CoreBundle\Form\Type\ProductTranslationType
 
 sylius_association:
-    classes:
+    resources:
         product:
             subject: Sylius\Component\Core\Model\Product
             association:
-                model: Sylius\Component\Product\Model\ProductAssociation
+                classes:
+                    model: Sylius\Component\Product\Model\ProductAssociation
 
 sylius_archetype:
     resources:

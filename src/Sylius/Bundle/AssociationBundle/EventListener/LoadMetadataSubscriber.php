@@ -53,7 +53,7 @@ class LoadMetadataSubscriber implements EventSubscriber
         $metadataFactory = $eventArgs->getEntityManager()->getMetadataFactory();
 
         foreach ($this->subjects as $subject => $class) {
-            if ($class['association']['model'] !== $metadata->getName()) {
+            if ($class['association']['classes']['model'] !== $metadata->getName()) {
                 continue;
             }
 
@@ -86,7 +86,7 @@ class LoadMetadataSubscriber implements EventSubscriber
 
             $metadata->mapManyToMany($associationMapping);
 
-            $associationModel = $class['association_type']['model'];
+            $associationModel = $class['association_type']['classes']['model'];
             $associationMetadata = $metadataFactory->getMetadataFor($associationModel);
             $associationTypeMapping = array(
                 'fieldName'     => 'type',

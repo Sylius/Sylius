@@ -11,7 +11,12 @@
 
 namespace Sylius\Bundle\AssociationBundle\DependencyInjection;
 
+use Sylius\Bundle\AssociationBundle\Form\Type\AssociationType;
+use Sylius\Bundle\AssociationBundle\Form\Type\AssociationTypeType;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Association\Model\AssociationType as AssociationTypeModel;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -36,8 +41,7 @@ class Configuration implements ConfigurationInterface
             ->end()
         ;
 
-        $this->addClassesSection($rootNode);
-        $this->addValidationGroupsSection($rootNode);
+        $this->addResourcesSection($rootNode);
 
         return $treeBuilder;
     }
@@ -45,35 +49,11 @@ class Configuration implements ConfigurationInterface
     /**
      * @param ArrayNodeDefinition $node
      */
-    private function addValidationGroupsSection(ArrayNodeDefinition $node)
+    private function addResourcesSection(ArrayNodeDefinition $node)
     {
         $node
             ->children()
-                ->arrayNode('validation_groups')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->arrayNode('association_type')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('association')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                    ->end()
-                ->end()
-            ->end()
-        ;
-    }
-
-    /**
-     * @param ArrayNodeDefinition $node
-     */
-    private function addClassesSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('classes')
+                ->arrayNode('resources')
                     ->useAttributeAsKey('name')
                     ->prototype('array')
                         ->children()
@@ -82,12 +62,26 @@ class Configuration implements ConfigurationInterface
                                 ->isRequired()
                                 ->addDefaultsIfNotSet()
                                 ->children()
-                                    ->scalarNode('model')->isRequired()->end()
-                                    ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                    ->arrayNode('form')
+                                    ->arrayNode('classes')
                                         ->addDefaultsIfNotSet()
                                         ->children()
-                                            ->scalarNode('default')->defaultValue('Sylius\Bundle\AssociationBundle\Form\Type\AssociationType')->end()
+                                            ->scalarNode('model')->isRequired()->end()
+                                            ->scalarNode('controller')->defaultValue(ResourceController::class)->end()
+                                            ->arrayNode('form')
+                                                ->addDefaultsIfNotSet()
+                                                ->children()
+                                                    ->scalarNode('default')->defaultValue(AssociationType::class)->end()
+                                                ->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                    ->arrayNode('validation_groups')
+                                        ->addDefaultsIfNotSet()
+                                        ->children()
+                                            ->arrayNode('default')
+                                                ->prototype('scalar')->end()
+                                                ->defaultValue(array('sylius'))
+                                            ->end()
                                         ->end()
                                     ->end()
                                 ->end()
@@ -95,12 +89,27 @@ class Configuration implements ConfigurationInterface
                             ->arrayNode('association_type')
                                 ->addDefaultsIfNotSet()
                                 ->children()
-                                    ->scalarNode('model')->defaultValue('Sylius\Component\Association\Model\AssociationType')->end()
-                                    ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                    ->arrayNode('form')
+                                    ->arrayNode('classes')
                                         ->addDefaultsIfNotSet()
                                         ->children()
-                                            ->scalarNode('default')->defaultValue('Sylius\Bundle\AssociationBundle\Form\Type\AssociationTypeType')->end()
+                                            ->scalarNode('model')->defaultValue(AssociationTypeModel::class)->end()
+                                            ->scalarNode('controller')->defaultValue(ResourceController::class)->end()
+                                            ->arrayNode('form')
+                                                ->addDefaultsIfNotSet()
+                                                ->children()
+                                                    ->scalarNode('default')->defaultValue(AssociationTypeType::class)->end()
+                                                    ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
+                                                ->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                    ->arrayNode('validation_groups')
+                                        ->addDefaultsIfNotSet()
+                                        ->children()
+                                            ->arrayNode('default')
+                                                ->prototype('scalar')->end()
+                                                ->defaultValue(array('sylius'))
+                                            ->end()
                                         ->end()
                                     ->end()
                                 ->end()

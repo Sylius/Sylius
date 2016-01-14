@@ -13,8 +13,10 @@ namespace Sylius\Bundle\AssociationBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -27,57 +29,57 @@ class SyliusAssociationExtension extends AbstractResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $config = $this->configure(
-            $config,
-            new Configuration(),
-            $container,
-            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_TRANSLATIONS | self::CONFIGURE_FORMS
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+
+        $configFiles = array(
+            'services.xml',
         );
 
-        foreach ($config['classes'] as $name => $parameters) {
-            $formDefinition = $container->getDefinition('sylius.form.type.'.$name);
-            $formDefinition->addArgument($parameters['subject']);
+        foreach ($configFiles as $configFile) {
+            $loader->load($configFile);
+        }
+
+        $config = $this->processConfiguration(new Configuration(), $config);
+        $this->registerResources('sylius', $config['driver'], $this->resolveResources($config['resources'], $container), $container);
+
+        foreach ($config['resources'] as $subjectName => $subjectConfig) {
+            foreach ($subjectConfig as $resourceName => $resourceConfig) {
+                if (!is_array($resourceConfig)) {
+                    continue;
+                }
+
+                $formDefinition = $container->getDefinition('sylius.form.type.' . $subjectName . '_' . $resourceName);
+                $formDefinition->addArgument($subjectName);
+            }
         }
     }
 
     /**
-     * {@inheritdoc}
+     * @param array $resources
+     * @param ContainerBuilder $container
+     *
+     * @return array
      */
-    public function process(array $config, ContainerBuilder $container)
+    private function resolveResources(array $resources, ContainerBuilder $container)
     {
         $subjects = array();
-        $convertedConfig = array();
+        $resolvedResources = array();
 
-        foreach ($config['classes'] as $subject => $parameters) {
+        foreach ($resources as $subject => $parameters) {
             $subjects[$subject] = $parameters;
-            unset($parameters['subject']);
-
-            foreach ($parameters as $resource => $classes) {
-                $convertedConfig[$subject.'_'.$resource] = $classes;
-                $convertedConfig[$subject.'_'.$resource]['subject'] = $subject;
-            }
-
-            if (!isset($config['validation_groups'][$subject]['association'])) {
-                $config['validation_groups'][$subject]['association'] = array('sylius');
-            }
-            if (!isset($config['validation_groups'][$subject]['association_type'])) {
-                $config['validation_groups'][$subject]['association_type'] = array('sylius');
-            }
         }
 
         $container->setParameter('sylius.association.subjects', $subjects);
 
-        $config['classes'] = $convertedConfig;
-        $convertedConfig = array();
-
-        foreach ($config['validation_groups'] as $subject => $parameters) {
-            foreach ($parameters as $resource => $validationGroups) {
-                $convertedConfig[$subject.'_'.$resource] = $validationGroups;
+        foreach ($resources as $subjectName => $subjectConfig) {
+            foreach ($subjectConfig as $resourceName => $resourceConfig) {
+                if (is_array($resourceConfig)) {
+                    $resolvedResources[$subjectName.'_'.$resourceName] = $resourceConfig;
+                    $resolvedResources[$subjectName.'_'.$resourceName]['subject'] = $subjectName;
+                }
             }
         }
 
-        $config['validation_groups'] = $convertedConfig;
-
-        return parent::process($config, $container);
+        return $resolvedResources;
     }
 }
