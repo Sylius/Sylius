@@ -4,6 +4,10 @@
 sylius:
   form:
     email:
-      code: Kod
       enabled: Etkin
+      subject: Konu
+      sender_name: Gönderen adı
+      sender_address: Gönderen adresi
       content: İçerik
+      template: Şablon
+      no_template: Özel şablonu kullan

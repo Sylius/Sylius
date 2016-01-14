@@ -4,5 +4,4 @@
 sylius:
   form:
     currency:
-      code: 代码
       enabled: 已启用

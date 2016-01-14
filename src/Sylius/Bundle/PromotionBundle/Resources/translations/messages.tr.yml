@@ -26,18 +26,29 @@ sylius:
         equal: Eşit
       nth_order_configuration:
         nth: "n'inci"
+      customer_loyalty_configuration:
+        time: Zaman
+        unit:
+          days: Gün
+          weeks: Hafta
+          months: Ay
+          years: Yıl
+          header: Birim
+        after: Bu sürenin sonunda oluşturulan kullanıcı
       shipping_country_configuration:
         country: Ülke
       type: Tür
     coupon:
-      code: Kod
       usage_limit: Kullanım sınırı
+      expires_at: Süre sonu: 
     coupon_generate_instruction:
       amount: Miktar
       usage_limit: Kullanım sınırı
+      expires_at: Süre sonu: 
     promotion:
       actions: Eylemler
       coupon_based: Kupona dayalı
+      exclusive: Özel
       description: Açıklama
       ends_at: Sona erdi
       name: Ad

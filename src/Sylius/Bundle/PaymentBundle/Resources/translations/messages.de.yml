@@ -13,10 +13,12 @@ sylius:
     payment:
       amount: Zahlungsbetrag
       method: Zahlungsweise
+      fee_calculator: Gebührenrechner
       state:
         header: Zahlungsstatus
         checkout: Zur Kasse
         completed: Abgeschlossen
+        authorized: Autorisiert
         failed: Fehlgeschlagen
         new: Neu
         pending: Ausstehend
@@ -33,3 +35,5 @@ sylius:
       fee_calculator:
         fixed:
           amount: Anzahl
+        percent:
+          percent: '%'

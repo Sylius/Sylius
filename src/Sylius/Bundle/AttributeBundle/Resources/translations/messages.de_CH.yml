@@ -4,5 +4,5 @@
 sylius:
   form:
     attribute:
-      name: Interner Name
-      presentation: Präsentation
+      code: Code
+      name: Name

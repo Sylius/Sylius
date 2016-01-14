@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    attribute:
+      add: Shto
+      choices: Zgjedhjet
+      code: Kodi
+      name: Emri
+      type: Lloji
+  attribute_type:
+    configuration: Konfigurimi

@@ -188,6 +188,7 @@ sylius:
     update: Editar
   channel:
     code: Codi
+    currency_default: Moneda predeterminada
     enabled: Activat
     id: ID
     name: Nom
@@ -233,6 +234,8 @@ sylius:
     id: ID
     name: Nom
   promotion_coupon:
+    code: Codi
+  product_attribute:
     code: Codi
   report:
     name: Nom
@@ -288,3 +291,5 @@ sylius:
     lastName: Cognoms
     email: Correu electrònic
     message: Missatge
+  ui:
+    code: Codi

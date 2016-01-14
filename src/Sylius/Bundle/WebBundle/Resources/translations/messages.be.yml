@@ -385,6 +385,7 @@ sylius:
     currency: Валюта
     promotion_coupons: Купоны
     adjustments:
+      type: Тып
       description: Апісанне
       amount: Сума
     comment:
@@ -421,6 +422,7 @@ sylius:
   channel:
     created_at: Створана на
     code: Код
+    currency_default: Галоўная валюта
     enabled: Уключана
     id: ID
     name: Імя
@@ -564,6 +566,7 @@ sylius:
     configuration: Канфігурацыя
     type: Тып
   product_attribute:
+    code: Код
     name: Назва
     updated_at: апошняе абнаўленне
   archetype:
@@ -604,7 +607,6 @@ sylius:
     category: Катэгорыя
     create: Стварыць метад дастаўкі
     create_header: Новы метад дастаўкі
-    enabled: Актывізаваны?
     id: ID
     index_header: Метады дастаўкі
     manage: Кіраваць метадамі дастаўкі
@@ -740,3 +742,5 @@ sylius:
     lastName: Прозвішча
     email: Email
     updated_at: Апошняе абнаўленне
+  ui:
+    code: Код

@@ -4,6 +4,5 @@
 sylius:
   form:
     email:
-      code: 代码
       enabled: 已启用
       content: 内容

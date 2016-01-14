@@ -18,10 +18,10 @@ sylius:
       not_blank: Zadajte kód kupónu.
       unique: Tento kupón už existuje.
     usage_limit:
-      min: 'Limit použitia kupónu musí byť najmenej {{ limit }}.'
+      min: 'Limit pre použitie kupónu musí byť najmenej {{ limit }}.'
   promotion_coupon_generate_instruction:
     amount:
       min: 'Počet kupónov na vygenerovanie musí byť minimálne {{ limit }}.'
       not_blank: Zadajte počet kupónov na vygenerovanie.
     usage_limit:
-      min: 'Limit použitia generovaných kupónov musí byť najmenej {{ limit }}.'
+      min: 'Limit pre použitie generovaných kupónov musí byť najmenej {{ limit }}.'

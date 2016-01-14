@@ -15,4 +15,4 @@ sylius:
     name:
       max_length: 'Názov spôsobu doručenia nesmie byť dlhší ako {{ limit }} znakov.'
       min_length: 'Názov spôsobu doručenia musí byť aspoň {{ limit }} znakov.'
-      not_blank: Zadajte spôsob doručenia.
+      not_blank: Zadajte názov spôsobu doručenia.

@@ -389,7 +389,6 @@ sylius:
     category: Categoria
     create: Criar método de envio
     create_header: Novo método de envio
-    enabled: Habilitado?
     index_header: Métodos de envio
     manage: Gerenciar métodos de envio
     name: Nome

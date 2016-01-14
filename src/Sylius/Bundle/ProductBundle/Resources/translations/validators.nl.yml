@@ -17,3 +17,8 @@ sylius:
     sku:
       not_blank: Voer een variant SKU in.
       unique: Variant SKU moet uniek zijn.
+  archetype:
+    name:
+      not_blank: Voer archetype naam in.
+      min_length: 'Prototype naam moet minstens 1 teken lang zijn.|Prototype naam moet minstens {{ limit }} tekens lang zijn.'
+      max_length: 'Prototype naam mag niet langer zijn dan 1 teken.|Prototype naam mag niet langer zijn dan {{ limit }} tekens.'

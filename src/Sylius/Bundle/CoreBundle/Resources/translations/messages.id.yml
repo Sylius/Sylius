@@ -25,6 +25,8 @@ sylius:
     group:
       name: Nama
       roles: Peran
+    channel:
+      currency_default: Mata uang default
     image:
       file: Gambar
     locale:

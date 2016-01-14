@@ -28,6 +28,7 @@ sylius:
     channel:
       taxonomies: Kategorisering
       locales: Nasjonale innstillinger
+      currency_default: Standard valuta
       shipping_methods: Fraktalternativ
       payment_methods: Betalingsmetoder
     image:

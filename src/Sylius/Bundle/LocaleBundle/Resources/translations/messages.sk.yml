@@ -4,6 +4,5 @@
 sylius:
   form:
     locale:
-      code: Kód
-      enabled: Povolené
+      enabled: Zapnuté
       name: Názov

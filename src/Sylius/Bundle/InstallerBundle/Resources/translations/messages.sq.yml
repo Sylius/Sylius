@@ -1,0 +1,63 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+$: '$'
+sylius:
+  flashes:
+    installed: Sylius u instalua me sukses.
+  form:
+    configuration:
+      database:
+        header: Lidhje me database-n
+        driver:
+          header: Driver
+          microsoft_sql_server: Microsoft SQL Server
+          mysql: MySQL
+          oracle: Oracle
+          postgresql: PostgreSQL
+          sqlite: SQLite
+        host: Host
+        name: Emri
+        password: Fjalëkalimi
+        port: Porta
+        user: Përdoruesi
+      locale:
+        header: Parametrat e lokalizimit
+        currency: Monedha
+        locale: Lokalizimi
+      mailer:
+        header: Parametrat Mailer
+        host: Host
+        password: Fjalëkalimi
+        transport:
+          header: Transporti
+          gmail: Gmail
+          mail: Mail
+          sendmail: Sendmail
+          smtp: SMTP
+        user: Përdoruesi
+    setup:
+      email: Email
+      load_fixtures: Ngarko fixtures
+      plain_password: Fjalëkalimi
+      username: Username
+  process:
+    step:
+      check:
+        button:
+          back: Ktheu prapa
+          install: Instalo
+          next: Hapi tjetër
+        header: 'Kërkesat e sistemit check <small>Sylius installer</small>'
+        table:
+          current: Aktuale
+          required: E detyrueshme
+          status: Statusi
+      configure:
+        header: 'Configurimi <small>Sylius installer</small>'
+      setup:
+        header: 'Setup i administratorit <small>Sylius installer</small>'
+      welcome:
+        content: '<p>Mirë se vini në Sylius installer.</p>'
+        header: 'Mirë se vini në <small>Sylius installer</small>'
+€: €

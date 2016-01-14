@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  user:
+    email:
+      not_exist: No existe ningún usuario con este correo electrónico.
+    password:
+      invalid: La contraseña actual es incorrecta.
+      reset:
+        success: ¡Tu contraseña se ha restablecido con éxito!
+      change:
+        success: ¡Tu contraseña ha sido cambiada exitosamente!

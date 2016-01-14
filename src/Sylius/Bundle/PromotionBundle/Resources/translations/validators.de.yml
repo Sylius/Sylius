@@ -16,6 +16,7 @@ sylius:
       max_length: 'Der Gutscheincode darf nicht länger als 1 Zeichen sein.|Der Gutscheincode darf nicht länger als {{ limit }} sein.'
       min_length: 'Der Gutscheincode muss mindestens 1 Zeichen lang sein.|Der Gutscheincode muss mindestens {{ limit }} Zeichen lang sein.'
       not_blank: Bitte geben Sie einen Gutscheincode an.
+      unique: Dieser Gutschein ist bereits vorhanden.
     usage_limit:
       min: 'Das Nutzungslimit eines Gutscheincodes muss mindestens {{ limit }} sein.'
   promotion_coupon_generate_instruction:

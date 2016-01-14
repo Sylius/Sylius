@@ -4,5 +4,6 @@
 sylius:
   form:
     attribute:
-      name: Internt namn
-      presentation: Presentation
+      choices: Val
+      code: Kod
+      name: Namn

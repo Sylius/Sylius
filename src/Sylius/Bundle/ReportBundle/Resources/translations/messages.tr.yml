@@ -6,6 +6,14 @@ sylius:
     report:
       name: Ad
       description: Açıklama
-      code: Kod
+      data_fetcher: Veri alıcısı
+      renderer:
+        label: Yorumlayıcı
+        template: Şablon
       chart:
         type: Türü
+      user_registration:
+        start: Başlangıç tarihi
+        end: Bitiş Tarihi
+        period: Zaman aralığı
+        empty_records: Boş kayıtlar yazdırılsın mı?

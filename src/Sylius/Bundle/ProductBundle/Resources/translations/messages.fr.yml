@@ -6,6 +6,7 @@ sylius:
     product:
       name: Nom
       description: Description
+      attributes: Attributs
       options: Options
       meta_keywords: Meta mots-clés
       meta_description: Méta description
@@ -14,4 +15,5 @@ sylius:
     product_archetype:
       name: Nom
       parent: Parent
+      attributes: Attributs
       options: Options

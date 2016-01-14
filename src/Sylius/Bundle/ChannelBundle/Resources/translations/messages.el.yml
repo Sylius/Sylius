@@ -4,7 +4,6 @@
 sylius:
   form:
     channel:
-      code: Κώδικος
       name: Ονομασία
       description: Περιγραφή
       enabled: Ενεργοποιημένο

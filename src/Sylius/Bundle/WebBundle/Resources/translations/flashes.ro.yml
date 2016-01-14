@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  account:
+    address:
+      create: Adresa ta a fost adăugată cu succes.
+      update: Adresa ta a fost actualizată cu succes.
+      delete: Adresa ta a fost ștearsă cu succes.
+      set_as_billing: Adresa ta de facturare a fost schimbată.
+      set_as_shipping: Adresa ta de livrare a fost schimbată.
+    password:
+      change_success: Parola a fost schimbată
+      invalid: Parola curentă greșită
+  channel:
+    error:
+      at_least_one: Canalul nu poate fi șters. Este necesar cel puțin un canal activ.

@@ -33,6 +33,7 @@ sylius:
     channel:
       taxonomies: Taksonomijos
       locales: Lokalės
+      currency_default: Numatytoji valiuta
       currencies: Valiutos
       shipping_methods: Pristatymo būdai
       payment_methods: Mokėjimo būdai

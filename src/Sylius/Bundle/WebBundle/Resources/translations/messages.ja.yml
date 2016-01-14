@@ -299,6 +299,7 @@ sylius:
     state: 出荷ステータス
     updated_at: 最終更新日時
   channel:
+    currency_default: デフォルトの通貨
     updated_at: 最終更新日
   order_item:
     product: sylius.order_item.product
@@ -442,7 +443,6 @@ sylius:
     category: 配送カテゴリ
     create: 配送方法を登録する
     create_header: 配送方法を登録
-    enabled: 有効
     index_header: 配送方法管理
     manage: 配送方法管理
     name: 配送方法名

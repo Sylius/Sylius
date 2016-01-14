@@ -11,6 +11,7 @@ sylius:
         price: Stückpreis
         quantity: Stückzahl
         variant: Variante
+      customer_group: Kundengruppe
     block:
       body: Inhalt
       id: ID
@@ -22,12 +23,18 @@ sylius:
         different_billing_address: Eine andere Rechnungsadresse benutzen?
       payment_method: Zahlungsmethode
       shipping_method: Versandarten
+    promotion:
+      channels: Promotionskanäle
+    coupon:
+      per_customer_usage_limit: Nutzungsbeschränkung pro Kunde
     group:
       name: Name
       roles: Rollen
     channel:
       taxonomies: Klassifizierungen
       locales: Gebietsschemata
+      currency_default: Standardwährung
+      currencies: Währungen
       shipping_methods: Versandmethoden
       payment_methods: Zahlungsmethoden
     image:
@@ -42,6 +49,7 @@ sylius:
       total_from: Von
       total_to: Bis
       payment_state: Zahlungsstatus
+      channel: Alle Kanäle
     page:
       body: Inhalt
       id: ID
@@ -62,17 +70,24 @@ sylius:
         meta_description: Metabeschreibung
         meta_keywords: Metastichwörter
         title: Seitentitel
+        tracking_code:
+          Tracking code (for example: Google Analytics Tracking Code)
       taxation:
         default_tax_zone: Standard Steuerzone
+      security:
+        enabled: Aktiv?
     shipment_filter:
       created_at_from: Von
       created_at_to: Bis
       number: Bestellnummer
       shipping_address: Liefern an
+      channel: Alle Kanäle
     payment_filter:
       created_at_from: Von
       created_at_to: Bis
       number: Bestellnummer
+      billing_address: Rechnungsadresse
+      channel: Alle Kanäle
     shipping_method:
       zone: Versandgebiet
     taxon:
@@ -103,6 +118,7 @@ sylius:
       width: Breite
     attribute:
       product_attribute_value:
+        attribute: Attribut
         value: Wert
     guest:
       email: E-Mail

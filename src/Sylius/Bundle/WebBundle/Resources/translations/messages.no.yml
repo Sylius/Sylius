@@ -397,7 +397,7 @@ sylius:
     currency: Valuta
     promotion_coupons: Kuponger
     adjustments:
-      label: Etikett
+      type: Type
       description: Beskrivelse
       amount: Beløp
     comment:
@@ -435,6 +435,7 @@ sylius:
   channel:
     created_at: Opprettet på
     code: Kode
+    currency_default: Standard valuta
     enabled: Aktivert
     id: ID
     name: Navn
@@ -579,6 +580,7 @@ sylius:
     configuration: Konfigurasjon
     type: Type
   product_attribute:
+    code: Kode
     name: navn
     updated_at: Sist oppdatert
   archetype:
@@ -619,7 +621,6 @@ sylius:
     category: Kategori
     create: Opprett fraktmetode
     create_header: Ny fraktmetode
-    enabled: Er aktivert?
     id: ID
     index_header: Leveringsmetoder
     manage: Behandle fraktmetoder
@@ -757,3 +758,5 @@ sylius:
     message: Melding
     topic: Emne
     updated_at: Sist oppdatert
+  ui:
+    code: Kode

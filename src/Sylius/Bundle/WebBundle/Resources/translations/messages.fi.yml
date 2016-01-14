@@ -30,8 +30,6 @@ sylius:
   "no": false
   order:
     currency: Valuutta
-    adjustments:
-      label: Otsikko
   product:
     tabs:
       pricing: Hinnoittelu

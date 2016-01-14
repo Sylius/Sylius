@@ -6,6 +6,5 @@ sylius:
     report:
       name: ชื่อ
       description: คำอธิบาย
-      code: รหัส
       chart:
         type: ชนิด

@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  account:
+    address:
+      create: Ваш адрес был успешно добавлен.
+      update: Ваш адрес был успешно обновлен.
+      delete: Ваш адрес успешно удалён.
+      set_as_billing: Ваш платежный адрес изменен.
+      set_as_shipping: Ваш почтовый адрес изменен.
+    password:
+      change_success: Пароль успешно изменен
+      invalid: Неправильный текущий пароль
+  channel:
+    error:
+      at_least_one: Канал не может быть удален, требуется по крайней мере один активный канал.

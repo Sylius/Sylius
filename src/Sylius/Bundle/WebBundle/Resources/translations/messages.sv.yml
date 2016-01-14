@@ -4,9 +4,24 @@
 sylius:
   address:
     firstname: Förnamn
+  block:
+    imagine:
+      id: Id
+      publishable: Publicerad
+    simple:
+      id: Id
+      publishable: Publicerad
+    slideshow:
+      id: Id
+      publishable: Publicerad
+    string:
+      id: Id
+      publishable: Publicerad
   breadcrumb:
     group:
       index: Grupper
+    route:
+      index: Rutter
     role:
       index: Roller
   checkout:
@@ -46,21 +61,28 @@ sylius:
     name: Namn
     code: Kod
     enabled: Aktiverad
+  menu:
+    publishable: Publicerad
   "no": false
   order:
     billing_address: Faktureringsadress
     number: Nummer
   route:
+    index_header: Rutter
     name: Namn
   shipment:
     name: Namn
     sku: SKU
   channel:
     code: Kod
+    currency_default: Standardvaluta
     enabled: Aktiverad
     name: Namn
   order_item:
     unit_price: Enhetspris
+  page:
+    publishable: Publicerad
+    routes: Rutter
   payment_method:
     name: Namn
   product:
@@ -71,6 +93,8 @@ sylius:
   promotion:
     name: Namn
   promotion_coupon:
+    code: Kod
+  product_attribute:
     code: Kod
   report:
     name: Namn
@@ -101,3 +125,7 @@ sylius:
     scope: Omfattning
   contact_request:
     firstName: Förnamn
+    message: Meddelande
+    topic: Ämne
+  ui:
+    code: Kod

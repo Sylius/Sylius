@@ -427,7 +427,6 @@ sylius:
     category: Kategorija
     create: Novi način dostave
     create_header: Novi način dostave
-    enabled: Aktivno?
     id: ID
     index_header: Načini dostave
     manage: Upravljajte načinima dostave

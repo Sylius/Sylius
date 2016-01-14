@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  channel:
+    code:
+      not_blank: Bitte gib den Kode des Kanals ein.
+      unique: Der Kode des Kanals muss einzigartig sein.
+    name:
+      not_blank: Bitte gib den Namen des Kanals ein.

@@ -4,4 +4,4 @@
 sylius:
   shipment:
     ship:
-      success: Doručenie ukončené.
+      success: Doručené.

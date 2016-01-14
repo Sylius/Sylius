@@ -4,6 +4,5 @@
 sylius:
   form:
     email:
-      code: รหัส
       enabled: เปิดใช้งานแล้ว
       content: เนื้อหา

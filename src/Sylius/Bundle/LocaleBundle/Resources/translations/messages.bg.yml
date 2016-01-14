@@ -4,5 +4,4 @@
 sylius:
   form:
     locale:
-      code: Код
       enabled: Разрешено

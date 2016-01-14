@@ -13,6 +13,9 @@ sylius:
     price:
       min: Cena nesmí být záporná.
       not_blank: Prosím vložte cenu.
+  product_translation:
+    short_description:
+      max: 'Stručný popis nesmí být delší než {{ limit }} znaků.'
 sylius_shipping:
   method:
     zone:

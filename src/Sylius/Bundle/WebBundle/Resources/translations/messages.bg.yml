@@ -358,8 +358,6 @@ sylius:
     total: Общо
     update_header: Редактиране на поръчка
     promotion_coupons: Купони
-    adjustments:
-      label: Етикет
     comment:
       author: Автор
       created_at: Създаден на
@@ -558,7 +556,6 @@ sylius:
     category: Категория
     create: Създаване на метод на доставка
     create_header: Нов начин за доставка
-    enabled: Е разрешено?
     id: ID
     index_header: Начин на доставка
     manage: Управление на методи за доставка

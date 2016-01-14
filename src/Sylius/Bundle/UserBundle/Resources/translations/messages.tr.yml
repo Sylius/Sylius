@@ -7,8 +7,22 @@ sylius:
     register: Üye ol
     login: Giriş
     logout: Çıkış yap
+    logged_in_as: '%username% olarak giriş yapıldı'
+    no_account: Hesabınız yok mu?
+    forgot_password: Şifrenizi mi unuttunuz?
+    reset_password: Parolayı sıfırla
+    reset: Sıfırlama
+    password:
+      reset:
+        header: Parolayı sıfırla
+        button: Sıfırlama
+    profile: Profil
     change_password: Parolanızı değiştirin
     account_panel_outline: Kişisel alanınızda görüntülemek, izlemek ve tüm verilerinizi yönetmek için kullanılabilen tüm özelliklerin keyfini çıkarın.
+    customer_since: Den beri müşterisiniz
+    welcome: Hoşgeldiniz
+    customer:
+      id: Müşteri No
   form:
     group:
       name: Ad
@@ -18,12 +32,15 @@ sylius:
       enabled: Etkin
       password:
         label: Şifre
+        confirmation: Doğrulama
+      remember_me: Beni hatırla
       shipping_address: Teslimat adresi
     customer:
       first_name: Ad
       groups: Gruplar
       last_name: Soyad
       email: E-posta
+      birthday: Doğum Günü
       billing_address: Fatura adresi
       different_billing_address: Fatura için farklı bir adres kullanmak ister misiniz?
     user_filter:

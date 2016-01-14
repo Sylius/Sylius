@@ -430,7 +430,6 @@ sylius:
     category: Категорија
     create: Нови начин доставе
     create_header: Нови начин доставе
-    enabled: Активно?
     id: ИД
     index_header: Начини доставе
     manage: Управљајте начинима доставе

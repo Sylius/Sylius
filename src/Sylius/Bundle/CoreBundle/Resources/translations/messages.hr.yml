@@ -28,6 +28,7 @@ sylius:
     channel:
       taxonomies: Glavne kategorije
       locales: Lokaliteti
+      currency_default: Zadana valuta
       shipping_methods: Načini slanja
       payment_methods: Načini plaćanja
     image:

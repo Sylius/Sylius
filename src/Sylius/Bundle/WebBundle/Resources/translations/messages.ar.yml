@@ -6,12 +6,28 @@ sylius:
     country: البلد
     firstname: الاسم الأول
     lastname: اسم العائلة
+  block:
+    imagine:
+      label: ملصق
+      publishable: تم النشر
+    simple:
+      label: ملصق
+      publishable: تم النشر
+    slideshow:
+      publishable: تم النشر
+    string:
+      label: ملصق
+      publishable: تم النشر
   breadcrumb:
     country:
       index: البلدان
+    menu_node:
+      index: عقدة القائمة
     new: جديد
     page:
       index: الصفحات
+    route:
+      index: طرق
   checkout:
     finalize:
       address:
@@ -41,8 +57,13 @@ sylius:
     name: الاسم
   locale:
     name: الاسم
+  menu:
+    publishable: تم النشر
+  menu_node:
+    index_header: عقدة القائمة
   "no": false
   route:
+    index_header: طرق
     name: الاسم
   shipment:
     name: الاسم
@@ -50,6 +71,8 @@ sylius:
     name: الاسم
   page:
     index_header: الصفحات
+    publishable: تم النشر
+    routes: طرق
   password: كلمة السر
   payment:
     state:
@@ -81,7 +104,10 @@ sylius:
   "yes": true
   zone:
     name: الاسم
+    scope: نطاق
   contact_request:
     firstName: الاسم الأول
     lastName: اسم العائلة
     email: البريد الإلكتروني
+    message: الرسالة
+    topic: الموضوع

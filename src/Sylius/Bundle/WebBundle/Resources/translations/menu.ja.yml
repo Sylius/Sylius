@@ -23,11 +23,12 @@ sylius:
         shipments: 出荷管理
         shipping_categories: 配送カテゴリ管理
         shipping_methods: 配送方法管理
+        slideshow: スライドショー
         stockables: 在庫チェック
-        tax_categories: 税区分管理
-        tax_rates: 税管理
         taxation_settings: 課税地域設定
         taxonomies: カテゴリ管理
+        tax_categories: 税区分管理
+        tax_rates: 税管理
         zones: 地域
       sidebar:
         assortment: 商品管理
@@ -40,8 +41,8 @@ sylius:
         new_promotion: 新しいプロモーションを登録
         options: 商品オプションの管理
         orders: 現在の注文
-        payment_methods: 支払い方法の管理
         payments: 入金管理
+        payment_methods: 支払い方法の管理
         products: 商品管理
         promotions: プロモーション管理
         sales: 注文管理

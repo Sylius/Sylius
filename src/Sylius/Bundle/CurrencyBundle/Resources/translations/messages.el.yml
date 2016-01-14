@@ -4,5 +4,4 @@
 sylius:
   form:
     currency:
-      code: Κώδικος
       enabled: Ενεργοποιημένο

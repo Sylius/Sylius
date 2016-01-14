@@ -20,12 +20,12 @@ sylius:
         payments: Thanh toán
         products: Sản phẩm
         promotions: Chương trình khuyến mãi
+        roles: Vai trò
         sales: Đơn đặt hàng
         shipments: Vận chuyển
         shipping_categories: Thể loại
         shipping_methods: Phương thức vận chuyển
         stockables: Mức độ hàng trong kho
-        roles: Vai trò
       sidebar:
         countries: Quốc gia
         dashboard: Bảng điều khiển
@@ -35,16 +35,16 @@ sylius:
         new_order: Thêm trật tự mới
         new_promotion: Thêm khuyến mãi mới
         orders: Đơn đặt hàng hiện tại
-        payment_methods: Phương thức thanh toán
         payments: Thanh toán
+        payment_methods: Phương thức thanh toán
         products: Sản phẩm
         promotions: Chương trình khuyến mãi
+        roles: Vai trò
         sales: Đơn đặt hàng
         shipments: Vận chuyển
         shipping_categories: Thể loại
         shipping_methods: Phương thức vận chuyển
         stockables: Mức độ hàng trong kho
-        roles: Vai trò
   frontend:
     menu:
       social:

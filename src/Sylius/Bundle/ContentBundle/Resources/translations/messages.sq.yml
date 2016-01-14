@@ -1,0 +1,108 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+auto: auto
+route: rruga
+sylius:
+  form:
+    action_block:
+      action_name: Emri i veprimit
+      id: Id
+      publish_end_date: Publikuar per herë të fundit
+      publish_start_date: Publikuar per herë të parë
+      publishable: Publikuar
+    imagine_block:
+      filter: Filtri
+      image: Imazhi
+      internal_name: Emri i brendshëm
+      label: Etiketa
+      link_url: Linku URL
+      parent: Prind
+      publish_end_date: Publikuar per herë të fundit
+      publish_start_date: Publikuar per herë të parë
+      publishable: Publikuar
+      slideshow_small: Figurë e vogël (anash)
+      slideshow_medium: Figurë mesatare (përmbajtja)
+      slideshow_large: Figurë e madhe (në gjithë gjerësinë)
+    menu:
+      childrens: Fëmijët
+      display: Pamja
+      display_children: Pamja për fëmijë
+      label: Etiketa
+      name: Emri
+      parent: Prind
+      publish_end_date: Publikuar per herë të fundit
+      publish_start_date: Publikuar per herë të parë
+      publishable: Publikuar
+      route: Rruga
+      uri: URI
+    menu_block:
+      body: Përmbajtja e porosisë
+      id: Id
+      name: Emri
+      publish_end_date: Publikuar per herë të fundit
+      publish_start_date: Publikuar per herë të parë
+      publishable: Publikuar
+    menu_node_block:
+      content: Përmbajtja
+      display: Pamja
+      display_children: Pamja për fëmijë
+      internal_name: Emri i brendshëm
+      label: Etiketa
+      link_type: Lloji i linkut
+      publish_end_date: Publikuar per herë të fundit
+      publish_start_date: Publikuar per herë të parë
+      publishable: Publikuar
+      route: Rruga
+      uri: URI
+    redirect_route:
+      id: Id
+      name: Emri
+      route_name: Route_name
+      uri: URI
+    reference_block:
+      body: Përmbajtja e porosisë
+      id: Id
+      publish_end_date: Publikuar per herë të fundit
+      publish_start_date: Publikuar per herë të parë
+      publishable: Publikuar
+      title: Titulli
+    route:
+      content: Përmbajtja
+      name: Emri
+      parent: Prind
+    simple_block:
+      body: Përmbajtja e porosisë
+      internal_name: Emri i brendshëm
+      parent: Prind
+      publish_end_date: Publikuar per herë të fundit
+      publish_start_date: Publikuar per herë të parë
+      publishable: Publikuar
+      title: Titulli
+    slideshow_block:
+      add_slide: Shto pamje
+      childrens: Fëmijët
+      internal_name: Emri i brendshëm
+      parent: Prind
+      publish_end_date: Publikuar per herë të fundit
+      publish_start_date: Publikuar per herë të parë
+      publishable: Publikuar
+      title: Titulli
+    static_content:
+      body: Përmbajtja e porosisë
+      id: Id
+      internal_name: Emri i brendshëm
+      menu_nodes: Nyjet e menusë
+      parent: Prind
+      publish_end_date: Publikuar per herë të fundit
+      publish_start_date: Publikuar per herë të parë
+      publishable: Publikuar
+      routes: Rrugët
+      title: Titulli
+    string_block:
+      body: Përmbajtja e porosisë
+      id: ID
+      name: Emri
+      publish_end_date: Publikuar per herë të fundit
+      publish_start_date: Publikuar per herë të parë
+      publishable: Publikuar

@@ -2,13 +2,32 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+  group:
+    name:
+      max: 'Groepsnaam mag niet meer dan {{ limit }} karakters zijn.'
+      min: 'Groepsnaam moet ten minste {{ limit }} karakters lang zijn.'
+      not_blank: Voer de groepsnaam in.
   user:
     email:
       not_blank: Vul uw e-mailadres in.
+      invalid: Deze e-mail is ongeldig.
+    plainPassword:
+      not_blank: Voer uw wachtwoord in.
+      mismatch: De ingevoerde wachtwoorden komen niet overeen
   customer:
     first_name:
+      max: 'Voornaam mag niet meer dan {{ limit }} karakters bevatten.'
+      min: 'Voornaam moet ten minste {{ limit }} karakters lang zijn.'
       not_blank: Vul uw voornaam in.
     last_name:
+      max: 'Achternaam mag niet meer dan {{ limit }} karakters zijn.'
+      min: 'Achternaam moet ten minste {{ limit }} karakters lang zijn.'
       not_blank: Vul uw achternaam in.
     email:
+      already_used: Dit e-mailadres is al in gebruik, gelieve in te loggen of wachtwoord vergeten gebruiken.
+      max: 'E-mail mag niet meer dan {{ limit }} karakters zijn.'
+      min: 'E-mail moet ten minste {{ limit }} karakters lang zijn.'
       not_blank: Vul uw e-mailadres in.
+      invalid: Deze e-mail is ongeldig.
+      unique: Deze e-mail wordt al reeds gebruikt.
+      registered: Dit e-mailadres is al in gebruik, gelieve in te loggen of wachtwoord vergeten gebruiken.

@@ -6,6 +6,14 @@ sylius:
     report:
       name: Nombre
       description: Descripción
-      code: Código
+      data_fetcher: Obtención de datos
+      renderer:
+        label: Renderizador
+        template: Plantilla
       chart:
         type: Tipo
+      user_registration:
+        start: Fecha de inicio
+        end: Fecha fin
+        period: Periodo de tiempo
+        empty_records: ¿Imprimir registros vacíos?

@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  user:
+    email:
+      not_exist: Gebruiker met deze email bestaat niet.
+    password:
+      invalid: Huidige wachtwoord is verkeerd.
+      reset:
+        success: Uw wachtwoord is succesvol gereset!
+      change:
+        success: Uw wachtwoord is succesvol veranderd!

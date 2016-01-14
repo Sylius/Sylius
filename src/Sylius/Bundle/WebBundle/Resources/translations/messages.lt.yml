@@ -564,7 +564,7 @@ sylius:
     no_promotion: 'Nebuvo panaudota jokių kuponų:'
     adjustments:
       manage: Valdyti patikslinimus
-      label: Etiketė
+      type: Tipas
       description: Aprašymas
       amount: Suma
       locked: Užrakintas?
@@ -626,6 +626,7 @@ sylius:
     create: Pridėti kanalą
     created_at: Sukurta
     code: Kodas
+    currency_default: Numatytoji valiuta
     enabled: Įjungta
     id: ID
     index_header: Kanalai
@@ -798,13 +799,13 @@ sylius:
     type: Tipas
   product_attribute:
     add_choice: Pridėti pasirinkimą
+    code: Kodas
     create: Sukurti produkto atributą
     create_header: Naujas produktas atributas
     index_header: Produkto atributai
     manage: Valdyti atributus
     name: pavadinimas
     no_results: Nėra sukonfigūruotų atributų.
-    presentation: prezentacija
     type: tipas
     update_header: Atributo redagavimas
     updated_at: paskutins atnaujinimas
@@ -814,7 +815,6 @@ sylius:
     create: Sukurti archetipą
     create_header: Naujas archetipas
     index_header: Produkto archetipai
-    code: kodas
     name: pavadinimas
     no_results: Nėra archetipų.
     options: parinktys
@@ -865,7 +865,6 @@ sylius:
     category: Kategorija
     create: Sukurti pristatymo būdą
     create_header: Naujas pristatymo būdas
-    enabled: Įgalintas?
     id: ID
     index_header: Pristatymo būdai
     manage: Valdyti pristatymo būdus
@@ -1005,3 +1004,5 @@ sylius:
     topic: Tema
     index_header: Kontaktų užklausos
     updated_at: Paskutinis atnaujinimas
+  ui:
+    code: Kodas

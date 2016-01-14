@@ -5,4 +5,4 @@ sylius:
   payment:
     complete: Płatność została zakończona.
     cancel: Płatność została anulowana.
-    transition_fail: Działania nie mogą być wykonywane, biorąc pod uwagę aktualny stan płatności
+    transition_fail: Działanie nie może być wykonane, z powodu aktualnego stanu płatności

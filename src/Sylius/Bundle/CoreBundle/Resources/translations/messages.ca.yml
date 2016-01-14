@@ -25,6 +25,8 @@ sylius:
     group:
       name: Nom
       roles: Rols
+    channel:
+      currency_default: Moneda predeterminada
     image:
       file: Imatge
     locale:

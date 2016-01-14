@@ -235,6 +235,7 @@ sylius:
   promotion_coupon:
     code: Mã
   product_attribute:
+    code: Mã
     name: Tên
   archetype:
     name: Tên
@@ -290,3 +291,5 @@ sylius:
   contact_request:
     id: ID
     updated_at: Cập nhật lần cuối
+  ui:
+    code: Mã

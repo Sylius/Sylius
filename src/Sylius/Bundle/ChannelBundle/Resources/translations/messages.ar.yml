@@ -5,3 +5,5 @@ sylius:
   form:
     channel:
       name: الاسم
+      url: عنوان URL
+      color: اللون

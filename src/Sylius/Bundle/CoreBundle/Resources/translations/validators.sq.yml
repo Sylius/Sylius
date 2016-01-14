@@ -1,0 +1,26 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  locale:
+    code:
+      not_blank: Shkruaj kodin lokal.
+      unique: Ky kod lokal ekziston tashmë.
+  product_variant:
+    onHand:
+      min: 'Drejtimi duhet të jetë më i madh se {{ limit }}.'
+      not_blank: Shkruaj drejtimin.
+    price:
+      min: Çmimi nuk duhet të jetë negativ.
+      not_blank: Shkruaj çmimin.
+  product_translation:
+    short_description:
+      max: 'Përshkrimi i shkurtër nuk duhet të përmbajë më shumë se {{ limit }} karaktere.'
+sylius_shipping:
+  method:
+    zone:
+      not_blank: Shkruaj mënyrën e dërgimit të zonës.
+sylius_taxation:
+  rate:
+    zone:
+      not_blank: Shkruaj masën e taksimit të zonës.

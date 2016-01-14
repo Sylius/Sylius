@@ -6,6 +6,10 @@ sylius:
     report:
       name: Nome
       description: Descrizione
-      code: Codice
+      renderer:
+        template: Modello
       chart:
         type: Tipo
+      user_registration:
+        start: Data di inizio
+        end: Data di fine

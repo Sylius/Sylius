@@ -11,6 +11,7 @@ sylius:
         price: Prix unitaire
         quantity: Quantité
         variant: Variante
+      customer_group: Groupe clients
     block:
       body: Corps
       id: ID
@@ -22,12 +23,18 @@ sylius:
         different_billing_address: Utiliser une adresse différente pour la facturation ?
       payment_method: Moyen de paiement
       shipping_method: Mode de livraison
+    promotion:
+      channels: Canal 
+    coupon:
+      per_customer_usage_limit: "Limite d'utilisation par client"
     group:
       name: Nom
       roles: Rôles
     channel:
       taxonomies: Taxonomies
       locales: Locales
+      currency_default: Devise par défaut
+      currencies: Devises
       shipping_methods: Modes de livraison
       payment_methods: Moyens de paiement
     image:
@@ -42,6 +49,7 @@ sylius:
       total_from: De
       total_to: À
       payment_state: Etat du paiement
+      channel: Tous les canaux
     page:
       body: Corps
       id: ID
@@ -62,17 +70,24 @@ sylius:
         meta_description: Méta description
         meta_keywords: Meta mots-clés
         title: Titre de la page
+        tracking_code:
+          Tracking code (for example: Clé Google Analytics)
       taxation:
         default_tax_zone: Zone de taxe par défaut
+      security:
+        enabled: Activer ?
     shipment_filter:
       created_at_from: De
       created_at_to: À
       number: Numéro de commande
       shipping_address: Expédié à
+      channel: Tous les canaux
     payment_filter:
       created_at_from: De
       created_at_to: À
       number: Numéro de commande
+      billing_address: Adresse de facturation
+      channel: Tous les canaux
     shipping_method:
       zone: Zone
     taxon:
@@ -103,6 +118,7 @@ sylius:
       width: Largeur
     attribute:
       product_attribute_value:
+        attribute: Propriété
         value: Valeur
     guest:
       email: E-mail

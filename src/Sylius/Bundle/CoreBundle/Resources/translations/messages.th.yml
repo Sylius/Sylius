@@ -28,6 +28,7 @@ sylius:
     channel:
       taxonomies: การจัดประเภท
       locales: ภาษาที่ใช้
+      currency_default: สกุลเงินหลัก
       shipping_methods: วิธีการจัดส่ง
       payment_methods: วิธีการชำระเงิน
     image:

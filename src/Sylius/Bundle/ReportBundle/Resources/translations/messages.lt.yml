@@ -3,16 +3,10 @@
 
 sylius:
   form:
-    rule:
-      item_count_configuration:
-        count: Kiekis
-        equal: Atitinka
-      type: Tipas
     report:
       name: Pavadinimas
       description: Aprašymas
       data_fetcher: Duomenų gavėjas
-      code: Kodas
       renderer:
         label: Vaizdo generatorius
         template: Šablonas

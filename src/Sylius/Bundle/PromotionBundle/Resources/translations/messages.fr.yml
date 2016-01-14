@@ -26,18 +26,29 @@ sylius:
         equal: Supérieur ou égal
       nth_order_configuration:
         nth: Nième
+      customer_loyalty_configuration:
+        time: Temps
+        unit:
+          days: Jours
+          weeks: Semaines
+          months: Mois
+          years: Années
+          header: Unité
+        after: Utilisateur inscrit après cette période
       shipping_country_configuration:
         country: Pays
       type: Type
     coupon:
-      code: Code
       usage_limit: "Limite d'utilisation"
+      expires_at: Expire le
     coupon_generate_instruction:
       amount: Montant
       usage_limit: "Limite d'utilisation"
+      expires_at: Expire le
     promotion:
       actions: Actions
       coupon_based: Comprend des coupons
+      exclusive: Exclusif
       description: Description
       ends_at: Se termine le
       name: Nom

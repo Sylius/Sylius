@@ -72,6 +72,7 @@ sylius:
       orders: Seneste ordrer
       products: Dine produkter
     statistics:
+      header: Statistik for denne måned
       orders_this_month: Totale ordrer
       registrations_this_month: Totale registreringer
       sales_this_month: Salg
@@ -385,6 +386,7 @@ sylius:
     currency: Valuta
     promotion_coupons: Kuponer
     adjustments:
+      type: Type
       description: Beskrivelse
       amount: Beløb
     comment:
@@ -421,6 +423,7 @@ sylius:
   channel:
     created_at: Oprettet den
     code: Kode
+    currency_default: Standard valuta
     enabled: Aktiveret
     id: ID
     name: Navn
@@ -561,6 +564,7 @@ sylius:
     configuration: Konfiguration
     type: Type
   product_attribute:
+    code: Kode
     name: navn
     updated_at: seneste opdatering
   archetype:
@@ -601,7 +605,6 @@ sylius:
     category: Kategori
     create: Opret forsendelsesmetode
     create_header: Ny forsendelsesmetode
-    enabled: Er aktiveret?
     id: ID
     index_header: Fragtmetoder
     manage: Administrer forsendelsesmetoder
@@ -739,3 +742,5 @@ sylius:
     message: Besked
     topic: Emne
     updated_at: Sidste opdatering
+  ui:
+    code: Kode

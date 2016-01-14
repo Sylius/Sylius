@@ -4,7 +4,17 @@
 sylius:
   emails:
     order_confirmation:
+      name: Подтверждение заказа
       subject: Спасибо за Ваш заказ!
+    order_comment:
+      name: Комментарий к заказу
+      subject: Новый комментарий, добавленный к заказу
+    shipment_confirmation:
+      name: Подтверждение посылки
+      subject: Ваш заказ был отправлен!
+    user_confirmation:
+      name: Подтверждение пользователя
+      subject: Добро пожаловать в наш магазин!
   account:
     address:
       action:
@@ -19,12 +29,16 @@ sylius:
         no_billing: sylius.account.address.default.no_billing
         no_shipping: sylius.account.address.default.no_shipping
         shipping: sylius.account.address.default.shipping
+      empty: Вы не указали адрес.
       list: sylius.account.address.list
       update: sylius.account.address.update
     home:
+      email: 'Эл. адрес :'
+      id: 'Идентификатор клиента :'
       outline: Воспользуйтесь всеми возможными преимуществами для просмотра, отслеживания и управления своими заказами.
       since: Вы являетесь клиентом с
       welcome: Добро пожаловать в ваш кабинет
+      last5orders: 5 последних заказов
     order:
       created_at: Создан
       details: Детали вашего заказа
@@ -32,12 +46,16 @@ sylius:
       empty: Вы еще не делали заказов.
       invoice: Счет-фактура
       list: Все ваши заказы
+      number: 'Номер :'
+      payment_mode: 'Способ оплаты:'
       placed_at: 'Заказано %at%'
       shipment:
         pending: Ожидает
         ready: 'Готово с %at%'
         returned: 'Возвращено %at%'
         shipped: 'Доставлено %at%'
+      shipment_mode: 'Способ доставки :'
+      state: 'Статус :'
       total: Итого
       tracking_number: Номер для отслеживания
     title: Моя учетная запись
@@ -71,7 +89,9 @@ sylius:
       add_product: Добавить товар
       orders: Заказы
       products: Товары
+      customers: Клиенты
     statistics:
+      header: Статистика за этот месяц
       orders_this_month: Заказов в этом месяце
       registrations_this_month: Регистраций в этом месяце
       sales_this_month: Продаж в этом месяце
@@ -79,39 +99,94 @@ sylius:
   block:
     index_header: Блоки
     no_results: Нет блоков для отображения.
+    simple_blocks: Простые блок
+    string_blocks: Текстовые блоки
+    imagine_blocks: Блоки изображений
+    slideshow_blocks: Слайд-шоу блоки
     imagine:
+      create: Создать блок-изображение
+      create_header: Создание нового блока-изображения
+      end_date: Дата окончания
       id: ID
+      index: Блоки изображений
+      index_header: Блоки изображений
       label: Заголовок
+      publishable: Опубликовано
+      start_date: Дата начала
       title: Название
+      update_header: Редактирование блока изображения
       updated_at: Изменено
     simple:
       body: Содержание
+      create: Создать простой блок
+      create_header: Создание нового простого блока
+      end_date: Дата окончания
       id: ID
+      index: Простые блок
+      index_header: Простые блок
       label: Заголовок
+      publishable: Опубликовано
+      start_date: Дата начала
       title: Название
+      update_header: Редактирование простого блока
       updated_at: Изменено
     slideshow:
       body: Содержание
+      create: Создать слайд-шоу блок
+      create_header: Создание нового слайд-шоу блока
+      end_date: Дата окончания
       id: ID
+      index: Слайд-шоу блоки
+      index_header: Слайд-шоу блоки
+      publishable: Опубликовано
+      start_date: Дата начала
       title: Название
+      update_header: Редактирование слайд-шоу блока
       updated_at: Изменено
     string:
       body: Содержание
+      create: Создать строковой блок
+      create_header: Создание нового стрового блока
+      end_date: Дата окончания
       id: ID
+      index: Текстовые блоки
+      index_header: Текстовые блоки
       label: Заголовок
+      publishable: Опубликовано
+      start_date: Дата начала
       title: Название
+      update_header: Редактирование строкового блока
       updated_at: Изменено
   breadcrumb:
     assortment: Ассортимент
     block:
+      imagine:
+        index: Блоки изображений
       index: Блоки
+      simple:
+        index: Простые блоки
+      slideshow:
+        index: Слайд-шоу блоки
+      string:
+        index: Строковые блоки
     build: Построить
     configuration: Конфигурация
     content: Контент
     country:
       index: Список стран
+    section:
+      customer: Клиент
+    customer:
+      index: Клиенты
     dashboard: Приборная панель
     edit: Редактирование
+    contact_request:
+      index: Запросы контактов
+      show: Запрос контактов
+    contact_topic:
+      index: Темы обращений
+    currency:
+      index: Валюты
     general_settings: Общие настройки
     generate: Сгенерировать
     group:
@@ -120,6 +195,9 @@ sylius:
       index: Запасы
     locale:
       index: Языки
+    marketing: Маркетинг
+    menu:
+      index: Элементы меню
     menu_node:
       index: Узлы меню
     new: Новый
@@ -127,6 +205,7 @@ sylius:
       index: Список опций
     order:
       index: Список заказов
+      adjustments: Корректировки
     page:
       index: Страницы
     payment:
@@ -139,15 +218,25 @@ sylius:
       index: Список рекламных акций
     promotion_coupon:
       index: sylius.breadcrumb.promotion_coupon.index
+    attribute:
+      index: Атрибуты
+    archetype:
+      index: прототипы
+    redirect_route:
+      index: Перенаправление маршрутов
+    report:
+      index: Отчеты
     route:
       index: Маршруты
     sales: Продажи
+    security_settings: Настройки безопасности
     shipment:
       index: Список посылок
     shipping_category:
       index: Список категорий доставки
     shipping_method:
       index: Список способов доставки
+    support: Поддержка
     tax_category:
       index: Список налоговых категорий
     tax_rate:
@@ -155,7 +244,13 @@ sylius:
     taxation_settings: Настройки налогооблажения
     taxonomy:
       index: Список каталогов
+    email:
+      index: Emails
+    channel:
+      index: Каналы
     update: sylius.breadcrumb.update
+    permission:
+      index: Права доступа
     role:
       index: Роли
     zone:
@@ -180,6 +275,8 @@ sylius:
     addressing:
       header: Адрес
     back: Назад
+    credit_card:
+      header: Детали платежа
     finalize:
       address:
         city: Город
@@ -221,6 +318,7 @@ sylius:
       login: Войти
       new_customer: Новый клиент
       register: Зарегистрироваться
+      guest: Гость
     shipping:
       error: Извините, но наш магазин не способен обеспечить доставку продукта в страну, которую вы выбрали.
       header: Способ доставки
@@ -253,6 +351,7 @@ sylius:
     code: Код
     id: ID
     description: Описание
+    index_header: Права доступа
     updated_at: Изменено
   role:
     code: Код
@@ -266,6 +365,7 @@ sylius:
     id: ID
     name: Название
     enabled: Активен
+    index_header: Валюты
     exchange_rate: Обменный курс
     updated_at: Изменено
   filter: Фильтр
@@ -336,7 +436,10 @@ sylius:
   logo: Sylius
   manage: Управление
   menu:
+    end_date: Дата окончания
     id: ID
+    index_header: Элементы меню
+    publishable: Опубликовано
     title: Название
   menu_node:
     id: ID
@@ -364,6 +467,7 @@ sylius:
     index_header: Активные заказы
     inventory_tracking: Отслеживание продаж
     items_total: Всего товаров
+    channel: Канал
     manage: Управление заказами
     no_items: Заказ не содержит товаров
     no_results: У вас нет новых заказов
@@ -397,7 +501,7 @@ sylius:
     currency: Валюта
     promotion_coupons: sylius.breadcrumb.promotion_coupon.index
     adjustments:
-      label: Заголовок
+      type: Тип
       description: Описание
       amount: Сумма
     comment:
@@ -435,8 +539,10 @@ sylius:
   channel:
     created_at: Создано
     code: Код
+    currency_default: Валюта по умолчанию
     enabled: Активен
     id: ID
+    index_header: Каналы
     name: Название
     update: Редактировать
     updated_at: Изменено
@@ -452,6 +558,9 @@ sylius:
     create: Создать новую страницу
     id: ID
     index_header: Страницы
+    publishable: Опубликовано
+    start_date: Дата начала
+    end_date: Дата окончания
     routes: Маршруты
     title: Название
   password: Пароль
@@ -515,6 +624,7 @@ sylius:
     no_taxons: У этого товара не заданы категории
     options: Опции
     price: Розничная цена
+    attributes: Атрибуты
     restricted_zone: Зона ограничений
     shipping_category: Категория доставки
     show: Посмотреть больше
@@ -527,6 +637,8 @@ sylius:
       images: Изображения
       options: Опции
       product: Товар
+      attributes: Атрибуты
+      channels: Каналы
       pricing: ценообразование
     tax_category: Категория налогов
     unavailable: Недоступен
@@ -560,6 +672,7 @@ sylius:
     updated_at: Последнее обновление
     usage_limit: Предел
     used: Использован
+    exclusive: Эксклюзив
   promotion_action:
     configuration: Конфигурация
     type: Тип
@@ -575,13 +688,16 @@ sylius:
     total_results:
       Total: '%total%'
     update_header: Редактирование купона
+    expires_at: Истекает
   promotion_rule:
     configuration: Конфигурация
     type: Тип
   product_attribute:
+    code: Код
     name: Название
     updated_at: последнее изменение
   archetype:
+    index_header: Прототипы продукта
     name: Название
     updated_at: последнее изменение
   province:
@@ -593,6 +709,7 @@ sylius:
     code: Код
     description: Описание
     manage: Управление
+    index_header: Отчеты
   save_changes: Сохранить изменения
   search: Поиск
   security:
@@ -600,6 +717,7 @@ sylius:
       button: Вход
   settings:
     general_header: Общие настройки
+    security_header: Настройки безопасности
     taxation_header: Настройки налогооблажения
   shipment_category:
     manage: Редактировать категории доставки
@@ -619,7 +737,6 @@ sylius:
     category: Категория
     create: Создать способ доставки
     create_header: Новый способ доставки
-    enabled: Включен?
     id: ID
     index_header: Способы доставки
     manage: Редактировать способы доставки
@@ -748,6 +865,7 @@ sylius:
   contact_topic:
     id: ID
     title: Название
+    index_header: Темы обращений
     updated_at: Изменено
   contact_request:
     id: ID
@@ -756,4 +874,8 @@ sylius:
     email: Email
     message: Сообщение
     topic: Тема
+    index_header: Запросы контактов
     updated_at: Изменено
+  ui:
+    links: Ссылки
+    code: Код

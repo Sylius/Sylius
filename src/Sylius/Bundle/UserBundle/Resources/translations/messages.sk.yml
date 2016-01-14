@@ -26,10 +26,10 @@ sylius:
   form:
     group:
       name: Názov
-      roles: Rola
+      roles: Role
     user:
       email: Email
-      enabled: Povolené
+      enabled: Zapnuté
       password:
         label: Heslo
         confirmation: Overenie

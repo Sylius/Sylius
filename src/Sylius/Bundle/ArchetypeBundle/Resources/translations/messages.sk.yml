@@ -6,6 +6,6 @@ sylius:
     archetype:
       code: Kód
       name: Názov
-      parent: Nadradená kategória
-      attributes: Vlastnosti
+      parent: Nadradený prototyp
+      attributes: Produktové vlastnosti
       options: Produktové voľby

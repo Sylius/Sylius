@@ -3,5 +3,6 @@
 
 sylius:
   form:
-    email:
+    attribute:
       code: Mã
+      name: Tên

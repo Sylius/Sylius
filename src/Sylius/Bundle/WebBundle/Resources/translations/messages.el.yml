@@ -238,6 +238,7 @@ sylius:
     total: Σύνολο
     currency: Νόμισμα
     adjustments:
+      type: Τύπος
       description: Περιγραφή
       amount: Ποσό
     comment:
@@ -263,6 +264,7 @@ sylius:
     updated_at: Τροποποιήθηκε την
   channel:
     code: Κώδικος
+    currency_default: Προεπιλεγμένο νόμισμα
     enabled: Ενεργοποιημένο
     id: ID
     name: Ονομασία
@@ -335,6 +337,8 @@ sylius:
   promotion_rule:
     configuration: Παραμετροποίηση
     type: Τύπος
+  product_attribute:
+    code: Κώδικος
   report:
     name: Ονομασία
     code: Κώδικος
@@ -414,3 +418,5 @@ sylius:
     lastName: Επώνυμο
     email: Ηλεκτρονικό ταχυδρομείο
     updated_at: Τροποποιήθηκε την
+  ui:
+    code: Κώδικος

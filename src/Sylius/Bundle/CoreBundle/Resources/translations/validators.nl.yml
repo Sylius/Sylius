@@ -13,6 +13,9 @@ sylius:
     price:
       min: Prijs mag niet negatief zijn.
       not_blank: Voer de prijs in.
+  product_translation:
+    short_description:
+      max: 'Korte omschrijving mag niet langer zijn dan {{ limit }} tekens bevatten.'
 sylius_shipping:
   method:
     zone:

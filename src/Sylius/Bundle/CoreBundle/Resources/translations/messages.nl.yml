@@ -11,6 +11,7 @@ sylius:
         price: Stukprijs
         quantity: Hoeveelheid
         variant: Variant
+      customer_group: Gebruikersgroep
     block:
       body: Inhoud
       id: ID
@@ -22,12 +23,18 @@ sylius:
         different_billing_address: Gebruik een ander factuuradres?
       payment_method: Betalingsmethode
       shipping_method: Verzendmethode
+    promotion:
+      channels: Kanalen
+    coupon:
+      per_customer_usage_limit: Gebruikslimiet per klant
     group:
       name: Naam
       roles: Rollen
     channel:
       taxonomies: Taxonomieën
       locales: "Talen/Regio's"
+      currency_default: Standaard valuta
+      currencies: "Valuta's"
       shipping_methods: Verzendmethodes
       payment_methods: Betaalmethodes
     image:
@@ -42,6 +49,7 @@ sylius:
       total_from: Van
       total_to: Tot
       payment_state: Betaalstatus
+      channel: Alle kanalen
     page:
       body: Inhoud
       id: ID
@@ -62,17 +70,24 @@ sylius:
         meta_description: Meta omschrijving
         meta_keywords: Meta sleutelwoorden
         title: Pagina titel
+        tracking_code:
+          Tracking code (for example: Tracking Code (bijvoorbeeld Google Analytics)
       taxation:
         default_tax_zone: Standaard belastingzone
+      security:
+        enabled: Inschakelen?
     shipment_filter:
       created_at_from: Van
       created_at_to: Tot
       number: Ordernummer
       shipping_address: Verzend naar naam
+      channel: Alle kanalen
     payment_filter:
       created_at_from: Van
       created_at_to: Tot
       number: Ordernummer
+      billing_address: Facturatie aan gebruiker
+      channel: Alle kanalen
     shipping_method:
       zone: Zone
     taxon:
@@ -103,6 +118,7 @@ sylius:
       width: Breedte
     attribute:
       product_attribute_value:
+        attribute: Attribuut
         value: Waarde
     guest:
       email: E-mail

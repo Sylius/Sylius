@@ -107,6 +107,8 @@ sylius:
     content: 内容
     country:
       index: 国家
+    section:
+      customer: 客户
     dashboard: 仪表板
     edit: 编辑
     general_settings: 常规设置
@@ -148,6 +150,8 @@ sylius:
     taxation_settings: 税收的设置
     taxonomy:
       index: 分类
+    channel:
+      index: 频道
     update: 编辑
     role:
       index: 角色
@@ -389,8 +393,10 @@ sylius:
   channel:
     created_at: 创建于
     code: 代码
+    currency_default: 默认货币：
     enabled: 已启用
     id: ID
+    index_header: 频道
     name: 名称
     update: 编辑
     updated_at: 最后一次更新
@@ -443,6 +449,7 @@ sylius:
       images: 图像
       options: 选项
       product: 产品
+      channels: 频道
     tax_category: 税类别
     updated_at: 最后一次更新
     variant_selection_method: 变量选择方法
@@ -458,6 +465,7 @@ sylius:
     code: 代码
     index_header: 优惠券
   product_attribute:
+    code: 代码
     name: 名称
     updated_at: 最后一次更新
   archetype:
@@ -564,3 +572,5 @@ sylius:
     message: 消息
     topic: 主题
     updated_at: 最后一次更新
+  ui:
+    code: 代码

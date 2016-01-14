@@ -4,5 +4,4 @@
 sylius:
   form:
     channel:
-      code: Mã
       name: Tên

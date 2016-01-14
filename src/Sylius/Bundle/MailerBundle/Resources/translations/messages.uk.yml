@@ -4,6 +4,5 @@
 sylius:
   form:
     email:
-      code: Код
       enabled: Увімкнено
       content: Зміст

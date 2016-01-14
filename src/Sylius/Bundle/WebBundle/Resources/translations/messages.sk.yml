@@ -18,7 +18,7 @@ sylius:
   account:
     address:
       action:
-        billing: Nastaviť ako predvolenú doručovaciu adresu
+        billing: Nastaviť ako predvolenú fakturačnú adresu
         create: Vytvoriť novú adresu
         delete: Odstrániť
         edit: Upraviť
@@ -26,8 +26,8 @@ sylius:
       create: Vytvoriť novú adresu
       default:
         billing: Predvolená fakturačná adresa
-        no_billing: Žiadna predvolená fakturačná adresa
-        no_shipping: Žiadna predvolená doručovacia adresa
+        no_billing: Nemáte predvolenú fakturačnú adresu
+        no_shipping: Nemáte predvolenú doručovaciu adresu
         shipping: Predvolaná doručovacia adresa
       empty: Nemáte uložené žiadne adresy.
       list: Všetky vaše adresy
@@ -62,7 +62,7 @@ sylius:
   add_to_cart: Pridať do košíka
   address:
     city: Mesto
-    company: Firma
+    company: Spoločnosť
     country: Štát
     firstname: Meno
     lastname: Priezvisko
@@ -110,7 +110,7 @@ sylius:
       id: Id
       index: Obrazové bloky
       index_header: Obrazové bloky
-      label: Označenie
+      label: Popis
       publishable: Uverejnené
       start_date: Dátum začiatku zverejnenia
       title: Názov
@@ -124,7 +124,7 @@ sylius:
       id: Id
       index: Obsahové bloky
       index_header: Obsahové bloky
-      label: Označenie
+      label: Popis
       publishable: Uverejnené
       start_date: Dátum začiatku zverejnenia
       title: Názov
@@ -151,7 +151,7 @@ sylius:
       id: Id
       index: Textové bloky
       index_header: Textové bloky
-      label: Označenie
+      label: Popis
       publishable: Uverejnené
       start_date: Dátum začiatku zverejnenia
       title: Názov
@@ -192,14 +192,14 @@ sylius:
     group:
       index: Skupiny
     inventory:
-      index: Inventár
+      index: Skladové zásoby
     locale:
       index: Jazyky
     marketing: Marketing
     menu:
       index: Menu
     menu_node:
-      index: Uzly menu
+      index: Menu elementy
     new: Nový
     option:
       index: Produktové voľby
@@ -227,7 +227,7 @@ sylius:
     report:
       index: Reporty
     route:
-      index: Trasy
+      index: URL cesty
     sales: Predaj
     security_settings: Bezpečnostné nastavenia
     shipment:
@@ -238,12 +238,12 @@ sylius:
       index: Spôsoby doručenia
     support: Podpora
     tax_category:
-      index: Kategórie daní
+      index: Daňové kategórie
     tax_rate:
       index: Sadzby dane
     taxation_settings: Nastavenie zdaňovania
     taxonomy:
-      index: Taxonómie
+      index: Triedenia
     email:
       index: E-maily
     channel:
@@ -252,16 +252,16 @@ sylius:
     permission:
       index: Oprávnenia
     role:
-      index: Rola
+      index: Role
     zone:
       index: Zóny
-  browse_products: Prehľadávať produkty
+  browse_products: Prezerať produkty
   cancel: Zrušiť
   cart:
     empty: Váš košík je prázdny
     summary:
       add_coupon: Pridať kupón
-      checkout: Objednať
+      checkout: Košík
       clear: Vyprázdniť košík
       grand_total: Celkový súčet
       product: Produkt
@@ -340,7 +340,7 @@ sylius:
     no_results: Neexistujú žiadne nakonfigurované krajiny.
     show_header: Podrobnosti o krajine
     update_header: Úprava krajiny
-    enabled: Povolené
+    enabled: Zapnuté
   email:
     create: Pridať nový e-mail
     create_header: Pridánie nového e-mailu
@@ -349,7 +349,7 @@ sylius:
     no_results: Nie sú nastavené žiadne e-maily.
     update_header: Úprava e-mailu
     code: Kód
-    enabled: Povolené?
+    enabled: Zapnuté?
     subject: Predmet
     updated_at: Posledná aktualizácia
   create: Vytvoriť
@@ -376,7 +376,7 @@ sylius:
     id: ID
     name: Názov
     description: Popis
-    index_header: Rola
+    index_header: Role
     no_results: Nie sú definované žiadne role.
     update_header: Úprava role
     updated_at: Posledná aktualizácia
@@ -386,7 +386,7 @@ sylius:
     code: Kód
     id: ID
     name: Názov
-    enabled: Povolené
+    enabled: Zapnuté
     index_header: Meny
     no_results: Nie sú definováne žiadne meny.
     exchange_rate: Výmenný kurz
@@ -426,7 +426,7 @@ sylius:
   generate: Vygenerovať
   go_to_dashboard: Prejsť na administračný panel
   group:
-    create: Vytvorenie skupiny
+    create: Vytvoriť skupinu
     create_header: Pridanie novej zákazníckej skupiny
     id: ID
     index_header: Skupiny
@@ -450,21 +450,21 @@ sylius:
       subheadline: Moderný internetový obchod pre Symfony2
   inventory_unit:
     created_at: Vytvorené
-    inventory_state: Stav zásob
+    inventory_state: Stav skladových zásob
     name: Názov
-    no_results: Neexistujú žiadne zásobovacie jednotky k zobrazeniu.
+    no_results: Nie sú žiadne skladové položky k zobrazeniu.
     shipping_state: Stav dodania
-    sku: Kód
+    sku: Skladový kód (SKU)
     updated_at: Posledná aktualizácia
   locale:
     id: ID
     name: Názov
     code: Kód
     create: Vytvoriť jazyk
-    create_header: Pridávam nové národné prostredie
-    enabled: Povolené
-    index_header: Zoznam všetkých národných prostredí
-    no_results: Neexistujú žiadne národné prostredia.
+    create_header: Pridávam nový jazyk
+    enabled: Zapnuté
+    index_header: Zoznam všetkých jazykov
+    no_results: Neexistujú žiadne jazyky na zobrazenie.
     update_header: Upraviť jazyk
     updated_at: Posledná aktualizácia
   login: Prihlásenie
@@ -473,7 +473,7 @@ sylius:
   manage: Správa
   menu:
     create: Vytvoriť menu
-    create_header: Vytvorenie menu
+    create_header: Vytvárenie menu
     end_date: Dátum ukončenia zverejnenia
     id: ID
     index_header: Menu
@@ -486,7 +486,7 @@ sylius:
     create: Vytvoriť prvok menu
     create_header: Vytvaranie prvku menu
     id: ID
-    index_header: Uzly menu
+    index_header: Menu elementy
     no_results: Nie sú žiadne prvky menu na zobraznie.
     parent: Nadradená kategória
     title: Názov
@@ -521,7 +521,7 @@ sylius:
     guest: Návšetvník
     id: ID
     index_header: Aktuálne objednávky
-    inventory_tracking: Sledovanie zásob
+    inventory_tracking: Sledovanie skladových zásob
     items_total: Položiek celkom
     items: Položky
     channel: Kanál
@@ -543,10 +543,10 @@ sylius:
     shipment_states:
       pending: Čakajúce
     shipments: Zásielky
-    release_inventory: Uvolnenie zásob
+    release_inventory: Uvolnenie skladových položkiek
     inventory_unit:
-      backorder: Doobjednať
-      fulfill: Vyplniť
+      backorder: Predobjednať
+      fulfill: Vybaviť
       return: Vrátiť
     shipping_address: Doručovacia adresa
     shipping_charges: Poplatky za dopravu
@@ -564,7 +564,7 @@ sylius:
     no_promotion: Neboli použité žiadne kupóny
     adjustments:
       manage: Spravovať úpravy
-      label: Označenie
+      type: Typ
       description: Popis
       amount: Suma
       locked: Zamknuté?
@@ -587,7 +587,7 @@ sylius:
     create: Vytvoriť URL cestu
     create_header: Vytvorenie URL cesty
     id: ID
-    index_header: Trasy
+    index_header: URL cesty
     name: Názov
     no_results: Nie sú žiadne URL cesty na zobrazenie.
     page: Stránka
@@ -596,7 +596,7 @@ sylius:
     view: Zobraziť
   redirect_route:
     create: Vytvoriť presmerovanie
-    create_header: Vytvoranie presmerovania
+    create_header: Vytváranie presmerovania
     id: ID
     index_header: Presmerovania
     no_results: Nie sú žiadne presmerovania na zobrazenie.
@@ -607,16 +607,16 @@ sylius:
     created_at: Vytvorené
     id: ID
     index_header: Zásielky
-    inventory_state: Stav zásob
+    inventory_state: Stav skladových zásob
     manage: Spravovať dodania
-    method: Metóda
+    method: Spôsob
     modified: Upravené
     name: Názov
     no_items: Neexistujú žiadne položky na zobrazenie.
     no_results: Neexistujú žiadne zásielky na zobrazenie.
     order: Objednávka
     show_header: Detaily zásielky
-    sku: Kód
+    sku: Skladový kód (SKU)
     state: Stav
     tracking_code: Sledovací kód
     update: Upraviť
@@ -626,7 +626,8 @@ sylius:
     create: Pridať kanál
     created_at: Vytvorené
     code: Kód
-    enabled: Povolené
+    currency_default: Predvolená mena
+    enabled: Zapnuté
     id: ID
     index_header: Kanály
     manage: Správa kanálov
@@ -647,7 +648,7 @@ sylius:
   page:
     body: Obsah
     create: Vytvoriť novú stránku
-    create_header: Vytvorenie novej stránky
+    create_header: Vytvárenie novej stránky
     id: ID
     index_header: Stránky
     no_results: Nie sú žiadne stránky na zobrazenie.
@@ -655,7 +656,7 @@ sylius:
     publishable: Uverejnené
     start_date: Dátum začiatku zverejnenia
     end_date: Dátum ukončenia zverejnenia
-    routes: Trasy
+    routes: URL cesty
     title: Názov
     update_header: Úpravy stránky
   password: Heslo
@@ -668,7 +669,7 @@ sylius:
     id: ID
     index_header: Platby
     manage: Spravovať platby
-    method: Metóda
+    method: Spôsob
     no_results: Nie sú nakonfigurované žiadne platby.
     state:
       header: Stav
@@ -679,7 +680,7 @@ sylius:
       new: Nový
       pending: Čakajúca
       processing: Spracováva sa
-      refunded: Vrátené
+      refunded: Vrátené peniaze
       unknown: Neznáme
       void: Neplatné
     update_header: Úprava platby
@@ -687,7 +688,7 @@ sylius:
   payment_method:
     create: Vytvoriť spôsob platby
     create_header: Nový spôsob platby
-    enabled: Povolený?
+    enabled: Zapnuté?
     gateway: Brána
     id: ID
     index_header: Spôsoby platby
@@ -700,13 +701,13 @@ sylius:
     available_on: Dostupný od
     available_on_demand: Na objednávku
     categorization: Kategórie
-    contain_variants: Pridať varianty
+    contain_variants: Obsahuje produktové varianty
     create: Vytvoriť produkt
     create_header: Nový produkt
     archetype: Produktový prototyp
     description: Popis
-    generate_variants: Generaovať varianty
-    index_by_taxon_header: 'Produkty <small>kategorizované pod taxonom "%taxon%"</small>'
+    generate_variants: Generaovať produktové varianty
+    index_by_taxon_header: 'Produkty <small>kategorizované pod "%taxon%"</small>'
     index_header: 'Produkty <small>zoznam všetkých produktov vo Vašom obchode</small>'
     manage: Spravovať produkty
     name: Názov
@@ -717,8 +718,8 @@ sylius:
     no_results: Neexistujú žiadne produkty na zobrazenie.
     no_shipping_category: Žiadna kategória doručenia
     no_short_description: '<i>Žiadny stručný popis</i>'
-    no_sku: Žiadny Kód
-    no_tax_category: Žiadna kategória pre daň
+    no_sku: Žiadny skladový kód (SKU)
+    no_tax_category: Žiadna daňová kategória
     no_taxons: Pre produkt neexistujú žiadne kategórie
     options: Produktové voľby
     variants: Varianty
@@ -730,8 +731,8 @@ sylius:
     show: Zobraziť viac
     show_header: 'Detail produktu <small>pre "<strong>%product%</strong>"</small>'
     show_in_store: zobraziť v obchode
-    sku: Kód
-    stock: Aktuálne skladom
+    sku: Skladový kód (SKU)
+    stock: Položiek na sklade
     tabs:
       categorization: Kategorizácia
       images: Obrázky
@@ -744,7 +745,7 @@ sylius:
     unavailable: Nedostupný
     update_header: Úprava produktu
     updated_at: Posledná aktualizácia
-    variant_selection_method: Metóda výberu variantu
+    variant_selection_method: Spôsob výberu produktového variantu
     view_details: 'Zobraziť podrobnosti pre %product%.'
     volume_price: Cena podľa objemu
     volume_based:
@@ -761,7 +762,7 @@ sylius:
     create_header: Nové propagácia
     created_at: Vytvorené
     description: Popis
-    ends_at: Končí
+    ends_at: Koniec
     general_info: Všeobecné informácie
     id: ID
     index_header: Aktuálne propagácie
@@ -770,7 +771,7 @@ sylius:
     no_results: Nie sú nakonfigurované žiadne propagácie.
     rules: Pravidlá
     show_header: Detail propagácie
-    starts_at: Začína
+    starts_at: Začiatok
     update_header: Upraviť propagáciu
     updated_at: Posledná aktualizácia
     usage_limit: Limit použitia
@@ -798,13 +799,13 @@ sylius:
     type: Typ
   product_attribute:
     add_choice: Pridať výber
+    code: Kód
     create: Vytvoriť produktovú vlastnosť
     create_header: Nová produktová vlastnosť
     index_header: Produktové vlastnosti
     manage: Správa produktových vlastnosti
     name: Názov
     no_results: Nie sú nakonfigurované žiadne produktové vlastnosti.
-    presentation: Verejný názov
     type: Typ
     update_header: Úprava produktovej vlastnosti
     updated_at: Posledná aktualizácia
@@ -814,7 +815,6 @@ sylius:
     create: Vytvoriť produktový prototyp
     create_header: Nový produktový prototyp
     index_header: Produktové prototypy
-    code: kód
     name: názov
     no_results: Nie sú žiadne produktové prototypy.
     options: produktové voľby
@@ -853,7 +853,7 @@ sylius:
       button: Prihlásenie
   settings:
     general_header: Základné nastavenia
-    security_header: Bezpečnostné nastavenia
+    security_header: Nastavenia bezpečnosti
     taxation_header: Nastavenie zdaňovania
   shipment_category:
     manage: Spravovať kategórie dopravy
@@ -874,7 +874,6 @@ sylius:
     category: Kategória
     create: Vytvoriť spôsob dopravy
     create_header: Nový spôsob doručenia
-    enabled: Povolený?
     id: ID
     index_header: Spôsoby doručenia
     manage: Správa spôsoby dopravy
@@ -889,19 +888,19 @@ sylius:
   show_all: Zobraziť všetky
   show_deleted: Zobraziť odstránené
   stockable:
-    index_header: 'Inventár <small> prehľad skladových zásob</small>'
+    index_header: 'Skladové zásoby <small> prehľad skladových položiek</small>'
     name: názov
-    no_results: Neexistujú žiadne položky skladových zásob.
-    on_hand: na sklade
+    no_results: Neexistujú žiadne kladové položky na zobrazenie.
+    on_hand: Položiek na sklade
     on_hold: pozastavené
-    sku: kód
+    sku: skladový kód (SKU)
     updated_at: posledná aktualizácia
   tax_category:
     create: Vytvoriť daňovú kategoriu
     create_header: Nová daňová kategoria
     description: Popis
     id: ID
-    index_header: Kategórie zdaňovania
+    index_header: Daňové kategórie
     manage: Správovať daňové kategorie
     name: Názov
     no_description: Žiadny popis
@@ -914,7 +913,7 @@ sylius:
     category: Kategória
     create: Vytvoriť sadzbu dane
     create_header: Nová sadzba dane
-    included_in_price: V cene?
+    included_in_price: Zahrnutá v cene?
     index_header: Daňové sadzby
     manage: Spravovať sadzby dane
     name: Názov
@@ -1006,8 +1005,8 @@ sylius:
     no_results: Žiadne variatny na zobrazenie.
     options: Produktové voľby
     price: Cena
-    sku: Kód
-    stock: Aktuálne skladom
+    sku: Skladový kód (SKU)
+    stock: Položiek na sklade
     update_header: Upravujem variantu
   "yes": true
   zone:
@@ -1021,7 +1020,7 @@ sylius:
     show_header: Detaily zóny
     type: Typ
     update_header: Upravujem zónu
-    scope: Rozsah pôsobnosti
+    scope: Rozsah
   zone_member:
     members: Používatelia
   contact_topic:
@@ -1054,3 +1053,4 @@ sylius:
   disable: Vypnúť
   ui:
     links: Odkazy
+    code: Kód

@@ -30,7 +30,6 @@ sylius:
         country: Țară
       type: Tip
     coupon:
-      code: Cod
       usage_limit: Limita de utilizare
     coupon_generate_instruction:
       amount: Valoare

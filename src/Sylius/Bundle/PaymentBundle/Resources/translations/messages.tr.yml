@@ -13,10 +13,12 @@ sylius:
     payment:
       amount: Ödeme tutarı
       method: Ödeme tipi
+      fee_calculator: Ücret hesaplama
       state:
         header: Ödeme durumu
         checkout: 'Ödeme  yap'
         completed: Tamamlandı
+        authorized: Yetkili
         failed: Başarısız oldu
         new: Yeni
         pending: Beklemede
@@ -33,3 +35,5 @@ sylius:
       fee_calculator:
         fixed:
           amount: Miktar
+        percent:
+          percent: '%'

@@ -13,10 +13,12 @@ sylius:
     payment:
       amount: Importe del pago
       method: Modo de pago
+      fee_calculator: Calculadora de tasas
       state:
         header: Estado del pago
         checkout: Completar pedido
         completed: Completado
+        authorized: Autorizado
         failed: Fallido
         new: Nuevo
         pending: Pendiente
@@ -33,3 +35,5 @@ sylius:
       fee_calculator:
         fixed:
           amount: Cantidad
+        percent:
+          percent: '%'

@@ -7,8 +7,20 @@ sylius:
     register: Регистрация
     login: Вход
     logout: Выход
+    logged_in_as: 'Вы вошли в систему как %username%'
+    reset_password: Сбросить пароль
+    reset: Сбросить
+    password:
+      reset:
+        header: Сбросить пароль
+        button: Сбросить
+    profile: Профиль
     change_password: Change my password
     account_panel_outline: Воспользуйтесь всеми возможными преимуществами для просмотра, отслеживания и управления своими заказами.
+    customer_since: Вы являетесь клиентом с
+    welcome: Добро пожаловать
+    customer:
+      id: ID клиента
   form:
     group:
       name: Название
@@ -18,12 +30,15 @@ sylius:
       enabled: Активен
       password:
         label: Пароль
+        confirmation: Верификация
+      remember_me: Запомнить меня
       shipping_address: Адрес доставки
     customer:
       first_name: Имя
       groups: Группы
       last_name: Фамилия
       email: Email
+      birthday: День рождения
       billing_address: Адрес для выставления счета
       different_billing_address: Использовать другой адрес для составления счета?
     user_filter:

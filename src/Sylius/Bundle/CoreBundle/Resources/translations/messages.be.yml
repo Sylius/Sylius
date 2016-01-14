@@ -28,6 +28,7 @@ sylius:
     channel:
       taxonomies: Катэгорыі
       locales: Месцы размяшчэння
+      currency_default: Галоўная валюта
       shipping_methods: Метады дастаўкі
       payment_methods: Метады аплаты
     image:

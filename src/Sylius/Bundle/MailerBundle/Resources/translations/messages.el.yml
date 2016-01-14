@@ -4,6 +4,5 @@
 sylius:
   form:
     email:
-      code: Κώδικος
       enabled: Ενεργοποιημένο
       content: Περιεχόμενο

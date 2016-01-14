@@ -39,7 +39,6 @@ sylius:
         country: Šalis
       type: Tipas
     coupon:
-      code: Kodas
       usage_limit: Naudojimo limitas
       expires_at: Nustoja galioti
     coupon_generate_instruction:

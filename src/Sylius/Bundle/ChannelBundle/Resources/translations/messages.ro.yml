@@ -4,7 +4,8 @@
 sylius:
   form:
     channel:
-      code: Cod
       name: Nume
       description: Descriere
+      url: Adresă
       enabled: Activat
+      color: Culoare

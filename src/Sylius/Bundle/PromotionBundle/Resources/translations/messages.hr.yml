@@ -30,7 +30,6 @@ sylius:
         country: Država
       type: Tip
     coupon:
-      code: Kod za popust
       usage_limit: Ograničenje koda za popust
     coupon_generate_instruction:
       amount: Iznos

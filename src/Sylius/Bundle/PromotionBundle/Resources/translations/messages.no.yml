@@ -30,7 +30,6 @@ sylius:
         country: Land
       type: Type
     coupon:
-      code: Kode
       usage_limit: Bruksgrense
     coupon_generate_instruction:
       amount: Beløp

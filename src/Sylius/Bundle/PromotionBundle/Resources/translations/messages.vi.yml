@@ -6,7 +6,5 @@ sylius:
     rule:
       contains_product_configuration:
         variants: Sản phẩm
-    coupon:
-      code: Mã
     promotion:
       name: Tên

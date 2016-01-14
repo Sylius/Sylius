@@ -4,5 +4,4 @@
 sylius:
   form:
     locale:
-      code: Mã
       name: Tên

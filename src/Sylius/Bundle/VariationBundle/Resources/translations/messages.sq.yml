@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    variant:
+      presentation: Prezantimi
+    option:
+      name: Emri i brendshëm
+      presentation: Prezantimi
+      values: Vlera të mundshme
+    option_value:
+      add_value: Shto vlerën
+      value: Vlera

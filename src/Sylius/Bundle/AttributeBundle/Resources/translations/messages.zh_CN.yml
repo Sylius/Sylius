@@ -4,5 +4,5 @@
 sylius:
   form:
     attribute:
-      name: 内部名称
-      presentation: 演示
+      code: 代码
+      name: 名称
