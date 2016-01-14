@@ -22,9 +22,9 @@ concerning customer's address and as default has the following properties:
 +-------------+------------------------------------+
 | company     | Company name                       |
 +-------------+------------------------------------+
-| country     | Reference to a **Country** object  |
+| country     | Country's ISO code                 |
 +-------------+------------------------------------+
-| province    | Reference to a **Province** object |
+| province    | Province's code                    |
 +-------------+------------------------------------+
 | street      | Address' street                    |
 +-------------+------------------------------------+
@@ -57,7 +57,7 @@ It should contain all data concerning a country and as default has the following
 +===========+======================================+
 | id        | Unique id of the country             |
 +-----------+--------------------------------------+
-| isoName   | Country's ISO code                   |
+| code      | Country's ISO code                   |
 +-----------+--------------------------------------+
 | provinces | Collection of **Province** objects   |
 +-----------+--------------------------------------+
@@ -65,7 +65,8 @@ It should contain all data concerning a country and as default has the following
 +-----------+--------------------------------------+
 
 .. note::
-   This model implements the :ref:`component_addressing_model_country-interface`. |br|
+   This model implements the :ref:`component_addressing_model_country-interface`
+   and :ref:`component_resource_code-aware-interface`. |br|
    For more detailed information go to `Sylius API Country`_.
 
 .. _Sylius API Country: http://api.sylius.org/Sylius/Component/Addressing/Model/Country.html
@@ -84,15 +85,16 @@ It should contain all data concerning a province and as default has the followin
 +==========+==============================================+
 | id       | Unique id of the province                    |
 +----------+----------------------------------------------+
-| name     | Province's name                              |
+| code     | Unique code of the province                  |
 +----------+----------------------------------------------+
-| isoName  | Province's ISO code                          |
+| name     | Province's name                              |
 +----------+----------------------------------------------+
 | country  | The **Country** this province is assigned to |
 +----------+----------------------------------------------+
 
 .. note::
-   This model implements the :ref:`component_addressing_model_province-interface`. |br|
+   This model implements the :ref:`component_addressing_model_province-interface`
+   and :ref:`component_resource_code-aware-interface`. |br|
    For more detailed information go to `Sylius API Province`_.
 
 .. _Sylius API Province: http://api.sylius.org/Sylius/Component/Addressing/Model/Province.html
@@ -110,6 +112,8 @@ It should contain all data concerning a zone and as default has the following pr
 +==========+=========================================================+
 | id       | Unique id of the zone                                   |
 +----------+---------------------------------------------------------+
+| code     | Unique code of the zone                                 |
++----------+---------------------------------------------------------+
 | name     | Zone's name                                             |
 +----------+---------------------------------------------------------+
 | type     | Zone's type                                             |
@@ -120,7 +124,8 @@ It should contain all data concerning a zone and as default has the following pr
 +----------+---------------------------------------------------------+
 
 .. note::
-   This model implements the :ref:`component_addressing_model_zone-interface`. |br|
+   This model implements the :ref:`component_addressing_model_zone-interface`
+   and :ref:`component_resource_code-aware-interface`. |br|
    For more detailed information go to `Sylius API Zone`_.
 
 .. _Sylius API Zone: http://api.sylius.org/Sylius/Component/Addressing/Model/Zone.html
@@ -130,89 +135,23 @@ It should contain all data concerning a zone and as default has the following pr
 ZoneMember
 ----------
 
-In order to add a member to a zone, a class must extend abstract **ZoneMember**.
+In order to add a specific location to a **Zone**,
+an instance of **ZoneMember** must be created with that location's code.
 On default this model has the following properties:
 
-+-----------+-----------------------------------------+
-| Property  | Description                             |
-+===========+=========================================+
-| id        | Unique id of the zone member            |
-+-----------+-----------------------------------------+
-| belongsTo | The **Zone** this member is assigned to |
-+-----------+-----------------------------------------+
++-----------+------------------------------------------------------+
+| Property  | Description                                          |
++===========+======================================================+
+| id        | Unique id of the zone member                         |
++-----------+------------------------------------------------------+
+| code      | Unique code of affiliated member i.e. country's code |
++-----------+------------------------------------------------------+
+| belongsTo | The **Zone** this member is assigned to              |
++-----------+------------------------------------------------------+
 
 .. note::
-   This model implements :ref:`component_addressing_model_zone-member-interface` |br|
+   This model implements :ref:`component_addressing_model_zone-member-interface`
+   and :ref:`component_resource_code-aware-interface`. |br|
    For more detailed information go to `Sylius API ZoneMember`_.
 
 .. _Sylius API ZoneMember: http://api.sylius.org/Sylius/Component/Addressing/Model/ZoneMember.html
-
-.. note::
-   Each **ZoneMember** instance holds a reference to the **Zone** object and
-   an appropriate area entity, for example a **Country**.
-
-There are three default zone member models:
-
-* :ref:`component_addressing_model_zone-member-country`
-* :ref:`component_addressing_model_zone-member-province`
-* :ref:`component_addressing_model_zone-member-zone`
-
-.. tip::
-   Feel free to implement your own custom zone members!
-
-.. _component_addressing_model_zone-member-country:
-
-ZoneMemberCountry
------------------
-
-Country member of a zone is represented by a **ZoneMemberCountry** model.
-It has all the properties of :ref:`component_addressing_model_zone-member` and one additional:
-
-+----------+--------------------------------------------------+
-| Property | Description                                      |
-+==========+==================================================+
-| country  | The **Country** associated with this zone member |
-+----------+--------------------------------------------------+
-
-.. note::
-   For more detailed information go to `Sylius API ZoneMemberCountry`_.
-
-.. _Sylius API ZoneMemberCountry: http://api.sylius.org/Sylius/Component/Addressing/Model/ZoneMemberCountry.html
-
-.. _component_addressing_model_zone-member-province:
-
-ZoneMemberProvince
-------------------
-
-Province member of a zone is represented by a **ZoneMemberProvince** model.
-It has all the properties of :ref:`component_addressing_model_zone-member` and one additional:
-
-+----------+---------------------------------------------------+
-| Property | Description                                       |
-+==========+===================================================+
-| province | The **Province** associated with this zone member |
-+----------+---------------------------------------------------+
-
-.. note::
-   For more detailed information go to `Sylius API ZoneMemberProvince`_.
-
-.. _Sylius API ZoneMemberProvince: http://api.sylius.org/Sylius/Component/Addressing/Model/ZoneMemberProvince.html
-
-.. _component_addressing_model_zone-member-zone:
-
-ZoneMemberZone
---------------
-
-Zone member of a zone is represented by a **ZoneMemberZone** model.
-It has all the properties of :ref:`component_addressing_model_zone-member` and one additional:
-
-+----------+-----------------------------------------------+
-| Property | Description                                   |
-+==========+===============================================+
-| zone     | The **Zone** associated with this zone member |
-+----------+-----------------------------------------------+
-
-.. note::
-   For more detailed information go to `Sylius API ZoneMemberZone`_.
-
-.. _Sylius API ZoneMemberZone: http://api.sylius.org/Sylius/Component/Addressing/Model/ZoneMemberZone.html

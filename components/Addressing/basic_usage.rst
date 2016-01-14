@@ -24,23 +24,24 @@ First lets make some preparations.
    <?php
 
    use Sylius\Component\Addressing\Model\Address;
-   use Sylius\Component\Addressing\Model\Country;
    use Sylius\Component\Addressing\Model\Zone;
-   use Sylius\Component\Addressing\Model\ZoneMemberCountry;
+   use Sylius\Component\Addressing\Model\ZoneInterface;
+   use Sylius\Component\Addressing\Model\ZoneMember;
+   use Sylius\Component\Resource\Repository\InMemoryRepository;
 
+   $zoneRepository = new InMemoryRepository(ZoneInterface::class);
    $zone = new Zone();
-   $zoneMember = new ZoneMemberCountry();
-
-   $country = new Country();
-   $country->setIsoName('USA');
+   $zoneMember = new ZoneMember();
 
    $address = new Address();
-   $address->setCountry($country);
+   $address->setCountry('US');
 
-   $zoneMember->setCountry($country);
+   $zoneMember->setCode('US');
    $zoneMember->setBelongsTo($zone);
 
    $zone->addMember($zoneMember);
+
+   $zoneRepository->add($zone);
 
 Now that we have all the needed parts lets match something.
 
@@ -50,7 +51,6 @@ Now that we have all the needed parts lets match something.
 
    use Sylius\Component\Addressing\Matcher\ZoneMatcher;
 
-   $zoneRepository = // get the zone repository
    $zoneMatcher = new ZoneMatcher($zoneRepository);
 
    $zoneMatcher->match($address); // returns the best matching zone
