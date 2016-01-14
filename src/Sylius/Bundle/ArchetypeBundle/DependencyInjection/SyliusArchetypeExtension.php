@@ -104,7 +104,7 @@ class SyliusArchetypeExtension extends AbstractResourceExtension
     private function createPrototypeBuilder(ContainerBuilder $container, $subjectName)
     {
         $builderDefinition = new Definition(ArchetypeBuilder::class);
-        $builderDefintiion
+        $builderDefinition
             ->setArguments(array(new Reference(sprintf('sylius.factory.%s_attribute_value', $subjectName))))
         ;
 
