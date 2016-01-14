@@ -112,15 +112,15 @@ class AdjustmentSpec extends ObjectBehavior
         $this->getType()->shouldReturn('some type');
     }
 
-    function it_has_no_description_by_default()
+    function it_has_no_label_by_default()
     {
-        $this->getDescription()->shouldReturn(null);
+        $this->getLabel()->shouldReturn(null);
     }
 
-    function its_description_is_mutable()
+    function its_label_is_mutable()
     {
-        $this->setDescription('Clothing tax (12%)');
-        $this->getDescription()->shouldReturn('Clothing tax (12%)');
+        $this->setLabel('Clothing tax (12%)');
+        $this->getLabel()->shouldReturn('Clothing tax (12%)');
     }
 
     function it_has_amount_equal_to_0_by_default()

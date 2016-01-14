@@ -121,18 +121,18 @@ class LoadPromotionsData extends DataFixture
      *
      * @param string $code
      * @param string $name
-     * @param string $description
+     * @param string $label
      * @param array  $rules
      * @param array  $actions
      *
      * @return PromotionInterface
      */
-    protected function createPromotion($code, $name, $description, array $rules, array $actions)
+    protected function createPromotion($code, $name, $label, array $rules, array $actions)
     {
         /** @var $promotion PromotionInterface */
         $promotion = $this->getPromotionFactory()->createNew();
         $promotion->setName($name);
-        $promotion->setDescription($description);
+        $promotion->setLabel($label);
         $promotion->setCode($code);
 
         foreach ($rules as $rule) {

@@ -54,7 +54,7 @@ class FixedDiscountActionSpec extends ObjectBehavior
 
         $adjustment->setAmount(-500)->shouldBeCalled();
         $adjustment->setType(AdjustmentInterface::PROMOTION_ADJUSTMENT)->shouldBeCalled();
-        $adjustment->setDescription('promotion description')->shouldBeCalled();
+        $adjustment->setLabel('promotion description')->shouldBeCalled();
 
         $originator->setOrigin($adjustment, $promotion)->shouldBeCalled();
 

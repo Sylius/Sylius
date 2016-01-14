@@ -42,12 +42,12 @@ interface AdjustmentInterface extends TimestampableInterface, OriginAwareInterfa
     /**
      * @return string
      */
-    public function getDescription();
+    public function getLabel();
 
     /**
-     * @param string $description
+     * @param string $label
      */
-    public function setDescription($description);
+    public function setLabel($label);
 
     /**
      * @return int

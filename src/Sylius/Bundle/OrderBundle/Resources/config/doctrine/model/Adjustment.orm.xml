@@ -23,7 +23,7 @@
         </id>
 
         <field name="type" column="type" type="string" />
-        <field name="description" column="description" type="string" nullable="true" />
+        <field name="label" column="label" type="string" nullable="true" />
         <field name="amount" column="amount" type="integer" />
         <field name="neutral" column="is_neutral" type="boolean" />
         <field name="locked" column="is_locked" type="boolean" />

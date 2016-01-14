@@ -78,7 +78,7 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
 
         $adjustment->setAmount(450)->shouldBeCalled();
         $adjustment->setType(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
-        $adjustment->setDescription('FedEx')->shouldBeCalled();
+        $adjustment->setLabel('FedEx')->shouldBeCalled();
 
         $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
         $order->addAdjustment($adjustment)->shouldBeCalled();

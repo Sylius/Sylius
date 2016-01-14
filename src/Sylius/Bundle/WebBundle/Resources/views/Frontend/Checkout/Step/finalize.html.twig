@@ -56,8 +56,8 @@
             <td colspan="4">
             <p><strong>{{ 'sylius.checkout.finalize.order.taxes'|trans }}</strong></p>
             <ul>
-            {% for taxDescription, taxAmount in sylius_aggregate_adjustments(order.getAdjustmentsRecursively(taxAdjustment)) %}
-                <li>{{ taxDescription }} {{ taxAmount|sylius_price }} </li>
+            {% for taxLabel, taxAmount in sylius_aggregate_adjustments(order.getAdjustmentsRecursively(taxAdjustment)) %}
+                <li>{{ taxLabel }} {{ taxAmount|sylius_price }} </li>
             {% else %}
                 <li><span class="label label-info">{{ 'sylius.checkout.finalize.order.no_taxes'|trans }}</span></li>
             {% endfor %}
@@ -74,7 +74,7 @@
             <p><strong>{{ 'sylius.checkout.finalize.order.shipping_charges'|trans }}</strong></p>
             <ul>
             {% for adjustment in order.adjustments(shippingAdjustment) %}
-                <li>{{ adjustment.description }} {{ adjustment.amount|sylius_price }} </li>
+                <li>{{ adjustment.label }} {{ adjustment.amount|sylius_price }} </li>
             {% else %}
                 <li><span class="label label-info">{{ 'sylius.checkout.finalize.order.no_shipping_charges'|trans }}</span></li>
             {% endfor %}
@@ -93,7 +93,7 @@
                 <p><strong>{{ 'sylius.checkout.finalize.order.promotion_discount'|trans }}</strong></p>
                 <ul>
                 {% for adjustment in order.adjustments(promotionAdjustment) %}
-                    <li>{{ adjustment.description }} {{ adjustment.amount|sylius_price }} </li>
+                    <li>{{ adjustment.label }} {{ adjustment.amount|sylius_price }} </li>
                 {% endfor %}
                 </ul>
                 </td>
