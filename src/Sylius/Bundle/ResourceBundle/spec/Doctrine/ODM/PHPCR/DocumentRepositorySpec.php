@@ -9,7 +9,7 @@ use Doctrine\ODM\PHPCR\UnitOfWork;
 use Pagerfanta\Pagerfanta;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Core\Model\Product;
+use spec\Sylius\Bundle\ResourceBundle\Fixture\Document\Foo;
 
 class DocumentRepositorySpec extends ObjectBehavior
 {
@@ -18,7 +18,7 @@ class DocumentRepositorySpec extends ObjectBehavior
         $this->beConstructedWith($dm, $class);
         $dm->getUnitOfWork()->shouldBeCalled()->willReturn($uow);
 
-        $class->name = Product::class;
+        $class->name = Foo::class;
     }
 
     function it_is_initializable()
