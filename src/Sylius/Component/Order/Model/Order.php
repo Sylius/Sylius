@@ -296,18 +296,6 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function recalculateTotal()
-    {
-        $this->total = $this->itemsTotal + $this->adjustmentsTotal;
-
-        if ($this->total < 0) {
-            $this->total = 0;
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getCreatedAt()
     {
         return $this->createdAt;
@@ -530,7 +518,6 @@ class Order implements OrderInterface
     public function clearAdjustments()
     {
         $this->adjustments->clear();
-
         $this->recalculateAdjustmentsTotal();
     }
 
@@ -548,6 +535,19 @@ class Order implements OrderInterface
         }
 
         $this->recalculateTotal();
+    }
+
+    /**
+     * Calculate total.
+     * Items total + Adjustments total.
+     */
+    protected function recalculateTotal()
+    {
+        $this->total = $this->itemsTotal + $this->adjustmentsTotal;
+
+        if ($this->total < 0) {
+            $this->total = 0;
+        }
     }
 
     /**

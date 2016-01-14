@@ -94,12 +94,6 @@ interface OrderInterface extends
     public function getTotal();
 
     /**
-     * Calculate total.
-     * Items total + Adjustments total.
-     */
-    public function recalculateTotal();
-
-    /**
      * Alias of {@link countItems()}.
      *
      * @deprecated To be removed in 1.0. Use {@link countItems()} instead.

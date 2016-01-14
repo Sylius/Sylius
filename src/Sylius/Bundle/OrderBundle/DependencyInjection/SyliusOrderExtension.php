@@ -15,6 +15,7 @@ use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceE
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -40,9 +41,7 @@ class SyliusOrderExtension extends AbstractResourceExtension
             $loader->load($configFile);
         }
 
-        $orderItemQuantityDataMapper = $container->getDefinition('sylius.form.data_mapper.order_item_quantity');
         $orderItemType = $container->getDefinition('sylius.form.type.order_item');
-
-        $orderItemType->addArgument($orderItemQuantityDataMapper);
+        $orderItemType->addArgument(new Reference('sylius.data_mapper.order_item_quantity'));
     }
 }
