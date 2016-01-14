@@ -82,30 +82,25 @@ class AddressSpec extends ObjectBehavior
         $this->getCountry()->shouldReturn(null);
     }
 
-    function its_country_is_mutable(CountryInterface $country)
+    function its_country_is_mutable()
     {
-        $this->setCountry($country);
-        $this->getCountry()->shouldReturn($country);
+        $this->setCountry('IE');
+        $this->getCountry()->shouldReturn('IE');
     }
 
-    function it_allows_to_unset_the_country(CountryInterface $country)
+    function it_allows_to_unset_the_country()
     {
-        $this->setCountry($country);
-        $this->getCountry()->shouldReturn($country);
+        $this->setCountry('IE');
+        $this->getCountry()->shouldReturn('IE');
 
         $this->setCountry(null);
         $this->getCountry()->shouldReturn(null);
     }
 
-    function it_unsets_the_province_when_erasing_the_country(
-        CountryInterface $country,
-        ProvinceInterface $province
-    )
+    function it_unsets_the_province_when_erasing_the_country()
     {
-        $country->hasProvince($province)->willReturn(true);
-
-        $this->setCountry($country);
-        $this->setProvince($province);
+        $this->setCountry('IE');
+        $this->setProvince('DU');
 
         $this->setCountry(null);
 
@@ -118,43 +113,19 @@ class AddressSpec extends ObjectBehavior
         $this->getProvince()->shouldReturn(null);
     }
 
-    function it_throws_exception_if_trying_to_define_province_without_country(ProvinceInterface $province)
+    function it_ignores_province_when_there_is_no_country()
     {
-        $this
-            ->shouldThrow(new \BadMethodCallException('Cannot define province on address without assigned country'))
-            ->duringSetProvince($province)
-        ;
+        $this->setCountry(null);
+        $this->setProvince('DU');
+        $this->getProvince()->shouldReturn(null);
     }
 
-    function its_province_is_mutable(
-        CountryInterface $country,
-        ProvinceInterface $province
-    )
+    function its_province_is_mutable()
     {
-        $country->hasProvince($province)->willReturn(true);
-        $this->setCountry($country);
+        $this->setCountry("IE");
 
-        $this->setProvince($province);
-        $this->getProvince()->shouldReturn($province);
-    }
-
-    function it_throws_if_trying_to_define_province_which_does_not_belong_to_country(
-        CountryInterface $country,
-        ProvinceInterface $province
-    )
-    {
-        $country->hasProvince($province)->willReturn(false);
-        $this->setCountry($country);
-
-        $country->getName()->willReturn('United States');
-        $province->getName()->willReturn('Quebec');
-
-        $expectedExceptionMessage = 'Cannot set province "Quebec", because it does not belong to country "United States"';
-
-        $this
-            ->shouldThrow(new \InvalidArgumentException($expectedExceptionMessage))
-            ->duringSetProvince($province)
-        ;
+        $this->setProvince('DU');
+        $this->getProvince()->shouldReturn('DU');
     }
 
     function it_has_no_company_by_default()

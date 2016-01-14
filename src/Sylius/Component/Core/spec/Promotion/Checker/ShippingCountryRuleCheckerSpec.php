@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
 
 /**
@@ -22,6 +23,11 @@ use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
  */
 class ShippingCountryRuleCheckerSpec extends ObjectBehavior
 {
+    function let(RepositoryInterface $countryRepository)
+    {
+        $this->beConstructedWith($countryRepository);
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Core\Promotion\Checker\ShippingCountryRuleChecker');
@@ -34,7 +40,7 @@ class ShippingCountryRuleCheckerSpec extends ObjectBehavior
 
     function it_should_recognize_no_shipping_address_as_not_eligible(OrderInterface $subject)
     {
-        $subject->getShippingAddress()->shouldBeCalled()->willReturn(null);
+        $subject->getShippingAddress()->willReturn(null);
 
         $this->isEligible($subject, array())->shouldReturn(false);
     }
@@ -42,11 +48,15 @@ class ShippingCountryRuleCheckerSpec extends ObjectBehavior
     function it_should_recognize_subject_as_not_eligible_if_country_does_not_match(
         OrderInterface $subject,
         AddressInterface $address,
-        CountryInterface $country
+        CountryInterface $country,
+        RepositoryInterface $countryRepository
     ) {
-        $subject->getShippingAddress()->shouldBeCalled()->willReturn($address);
-        $address->getCountry()->shouldBeCalled()->willReturn($country);
-        $country->getId()->shouldBeCalled()->willReturn(2);
+        $country->getCode()->willReturn('IE');
+        $address->getCountry()->willReturn('IE');
+        $subject->getShippingAddress()->willReturn($address);
+
+        $countryRepository->findOneBy(array('code' => 'IE'))->willReturn($country);
+        $country->getId()->willReturn(2);
 
         $this->isEligible($subject, array('country' => 1))->shouldReturn(false);
     }
@@ -54,11 +64,15 @@ class ShippingCountryRuleCheckerSpec extends ObjectBehavior
     function it_should_recognize_subject_as_eligible_if_country_match(
         OrderInterface $subject,
         AddressInterface $address,
-        CountryInterface $country
+        CountryInterface $country,
+        RepositoryInterface $countryRepository
     ) {
-        $subject->getShippingAddress()->shouldBeCalled()->willReturn($address);
-        $address->getCountry()->shouldBeCalled()->willReturn($country);
-        $country->getId()->shouldBeCalled()->willReturn(1);
+        $country->getCode()->willReturn('IE');
+        $address->getCountry()->willReturn('IE');
+        $subject->getShippingAddress()->willReturn($address);
+
+        $country->getId()->willReturn(1);
+        $countryRepository->findOneBy(array('code' => 'IE'))->willReturn($country);
 
         $this->isEligible($subject, array('country' => 1))->shouldReturn(true);
     }

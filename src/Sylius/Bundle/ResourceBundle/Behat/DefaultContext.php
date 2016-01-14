@@ -185,9 +185,9 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
 
             switch ($key) {
                 case 'country':
-                    $isoName = $this->getCountryCodeByEnglishCountryName(trim($value));
+                    $countryCode = $this->getCountryCodeByEnglishCountryName(trim($value));
 
-                    $configuration[$key] = $this->getRepository('country')->findOneBy(array('isoName' => $isoName))->getId();
+                    $configuration[$key] = $this->getRepository('country')->findOneBy(array('code' => $countryCode))->getId();
                     break;
 
                 case 'taxons':
@@ -520,15 +520,15 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     protected function getCountryCodeByEnglishCountryName($name)
     {
         $names = Intl::getRegionBundle()->getCountryNames('en');
-        $isoName = array_search(trim($name), $names);
+        $countryCode = array_search(trim($name), $names);
 
-        if (null === $isoName) {
+        if (null === $countryCode) {
             throw new \InvalidArgumentException(sprintf(
                 'Country "%s" not found! Available names: %s.', $name, join(', ', $names)
             ));
         }
 
-        return $isoName;
+        return $countryCode;
     }
 
     /**

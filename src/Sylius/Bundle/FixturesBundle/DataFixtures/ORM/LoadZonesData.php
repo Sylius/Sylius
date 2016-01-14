@@ -26,9 +26,8 @@ class LoadZonesData extends DataFixture
 {
     protected $euCountries = array(
         'BE', 'BG', 'CZ', 'DK', 'DE', 'EE', 'IE', 'GR', 'ES',
-        'FR', 'IT', 'CY', 'LV', 'LV', 'LT', 'LU', 'HU', 'MT',
-        'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE',
-        'GB',
+        'FR', 'IT', 'CY', 'LV', 'LT', 'LU', 'HU', 'MT', 'NL',
+        'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE', 'GB',
     );
 
     /**
@@ -41,10 +40,10 @@ class LoadZonesData extends DataFixture
             array_merge($this->euCountries, ['US'])
         );
 
-        $manager->persist($eu = $this->createZone('EU', ZoneInterface::TYPE_COUNTRY, $this->euCountries));
-        $manager->persist($this->createZone('USA', ZoneInterface::TYPE_COUNTRY, array('US')));
-        $manager->persist($this->createZone('EU + USA', ZoneInterface::TYPE_ZONE, array('EU', 'USA')));
-        $manager->persist($this->createZone('Rest of World', ZoneInterface::TYPE_COUNTRY, $restOfWorldCountries));
+        $manager->persist($eu = $this->createZone('EU', 'European Union', ZoneInterface::TYPE_COUNTRY, $this->euCountries));
+        $manager->persist($this->createZone('USA', 'United States of America', ZoneInterface::TYPE_COUNTRY, array('US')));
+        $manager->persist($this->createZone('EUSA', 'EU + USA', ZoneInterface::TYPE_ZONE, array('EU', 'USA')));
+        $manager->persist($this->createZone('RoW', 'Rest of World', ZoneInterface::TYPE_COUNTRY, $restOfWorldCountries));
 
         $manager->flush();
 
@@ -65,31 +64,30 @@ class LoadZonesData extends DataFixture
     /**
      * Create a new zone instance of given type.
      *
+     * @param string $code
      * @param string $name
      * @param string $type
      * @param array  $members
      *
      * @return ZoneInterface
      */
-    protected function createZone($name, $type, array $members)
+    protected function createZone($code, $name, $type, array $members)
     {
         /* @var $zone ZoneInterface */
         $zone = $this->getZoneFactory()->createNew();
+        $zone->setCode($code);
         $zone->setName($name);
         $zone->setType($type);
 
-        foreach ($members as $id) {
+        foreach ($members as $memberCode) {
             /* @var $zoneMember ZoneMemberInterface */
-            $zoneMember = $this->getZoneMemberFactory($type)->createNew();
-
-            if ($this->hasReference('Sylius.'.ucfirst($type).'.'.$id)) {
-                $zoneMember->{'set'.ucfirst($type)}($this->getReference('Sylius.'.ucfirst($type).'.'.$id));
-            }
+            $zoneMember = $this->getZoneMemberFactory()->createNew();
+            $zoneMember->setCode($memberCode);
 
             $zone->addMember($zoneMember);
         }
 
-        $this->setReference('Sylius.Zone.'.$name, $zone);
+        $this->setReference('Sylius.Zone.'.$code, $zone);
 
         return $zone;
     }

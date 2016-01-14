@@ -26,7 +26,7 @@
 
 {{ form_errors(form) }}
 
-<form action="{{ path('sylius_backend_zone_create', {'id': zone.id}) }}" method="post" class="form-horizontal">
+<form action="{{ path('sylius_backend_zone_create', {'id': zone.id, 'type': app.request.get('type') }) }}" method="post" class="form-horizontal">
     {% include 'SyliusWebBundle:Backend/Zone:_form.html.twig' %}
     {{ create() }}
 </form>

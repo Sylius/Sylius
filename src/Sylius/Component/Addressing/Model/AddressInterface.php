@@ -60,24 +60,24 @@ interface AddressInterface extends TimestampableInterface, ResourceInterface
     public function setCompany($company);
 
     /**
-     * @return CountryInterface
+     * @return string
      */
     public function getCountry();
 
     /**
-     * @param CountryInterface $country
+     * @param string $country
      */
-    public function setCountry(CountryInterface $country = null);
+    public function setCountry($country = null);
 
     /**
-     * @return ProvinceInterface
+     * @return string
      */
     public function getProvince();
 
     /**
-     * @param ProvinceInterface $province
+     * @param string $province
      */
-    public function setProvince(ProvinceInterface $province = null);
+    public function setProvince($province = null);
 
     /**
      * @return string

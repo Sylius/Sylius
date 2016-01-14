@@ -15,15 +15,14 @@
 
     <mapped-superclass name="Sylius\Component\Addressing\Model\Country" table="sylius_country">
         <indexes>
-            <index columns="iso_name" />
+            <index columns="code" />
         </indexes>
 
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
 
-        <field name="isoName" column="iso_name" type="string" length="3" unique="true"/>
-
+        <field name="code" column="code" type="string" length="2" unique="true"/>
         <field name="enabled" column="enabled" type="boolean" />
 
         <one-to-many field="provinces" target-entity="Sylius\Component\Addressing\Model\ProvinceInterface" mapped-by="country">

@@ -99,19 +99,19 @@
 
     <class name="Sylius\Component\Addressing\Model\Country">
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
-            <option name="fields">isoName</option>
-            <option name="message">sylius.country.iso_name.unique</option>
+            <option name="fields">code</option>
+            <option name="message">sylius.country.code.unique</option>
             <option name="groups">sylius</option>
         </constraint>
-        <property name="isoName">
+        <property name="code">
             <constraint name="NotBlank">
-                <option name="message">sylius.country.iso_name.not_blank</option>
+                <option name="message">sylius.country.code.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="max">2</option>
-                <option name="exactMessage">sylius.country.iso_name.exact_length</option>
+                <option name="exactMessage">sylius.country.code.exact_length</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>
@@ -121,6 +121,26 @@
     </class>
 
     <class name="Sylius\Component\Addressing\Model\Province">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">
+                <value>name</value>
+                <value>country</value>
+            </option>
+            <option name="errorPath">name</option>
+            <option name="message">sylius.province.name.unique</option>
+            <option name="groups">sylius</option>
+        </constraint>
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">code</option>
+            <option name="message">sylius.province.code.unique</option>
+            <option name="groups">sylius</option>
+        </constraint>
+        <property name="code">
+            <constraint name="NotBlank">
+                <option name="message">sylius.province.code.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.province.name.not_blank</option>
@@ -137,6 +157,17 @@
     </class>
 
     <class name="Sylius\Component\Addressing\Model\Zone">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">code</option>
+            <option name="message">sylius.zone.code.unique</option>
+            <option name="groups">sylius</option>
+        </constraint>
+        <property name="code">
+            <constraint name="NotBlank">
+                <option name="message">sylius.zone.code.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.zone.name.not_blank</option>
@@ -155,6 +186,24 @@
             <constraint name="Count">
                 <option name="min">1</option>
                 <option name="minMessage">sylius.zone.members.min_count</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="Sylius\Component\Addressing\Model\ZoneMember">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">
+                <value>code</value>
+                <value>belongsTo</value>
+            </option>
+            <option name="errorPath">code</option>
+            <option name="message">sylius.zone_member.unique</option>
+            <option name="groups">sylius</option>
+        </constraint>
+        <property name="code">
+            <constraint name="NotBlank">
+                <option name="message">sylius.zone_member.code.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>

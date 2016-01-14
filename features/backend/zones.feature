@@ -25,50 +25,41 @@ Feature: Zones
           And I am on the zone index page
          Then I should see "There are no zones configured"
 
+    @javascript
     Scenario: Accessing the zone creation form
-        Given I am on the dashboard page
-         When I follow "Zones"
-          And I follow "Create zone"
-         Then I should be on the zone creation page
+        Given I am on the zone index page
+          And I want to create a country zone
+         When I follow "Create"
+         Then I should be on the zone creation page for type "country"
 
     Scenario: Submitting invalid form
-        Given I am on the zone creation page
+        Given I am on the zone creation page for type "country"
          When I press "Create"
-         Then I should still be on the zone creation page
+         Then I should still be on the zone creation page for type "country"
           And I should see "Please enter zone name."
+          And I should see "Please enter zone code."
 
     Scenario: Creating new zone requires adding at least 1 member
-        Given I am on the zone creation page
-          And I fill in "Name" with "EU"
+        Given I am on the zone creation page for type "country"
+          And I fill in "Name" with "European Union"
+          And I fill in "Code" with "EU"
          When I press "Create"
-         Then I should still be on the zone creation page
+         Then I should still be on the zone creation page for type "country"
           And I should see "Please add at least 1 zone member."
 
     @javascript
-    Scenario: Updating the collection form type prototype
-        Given I am on the zone creation page
-          And I click "Add member"
-          And "Country" should appear on the page
-          And I select "Province" from "Type"
-          And I click "Add member"
-          And "Province" should appear on the page
-          And I select "Zone" from "Type"
-          And I click "Add member"
-          And "Zone" should appear on the page
-
-    @javascript
     Scenario: Creating new zone built from countries
-        Given I am on the zone creation page
-          And I fill in "Name" with "EU"
-          And I select "Country" from "Type"
+        Given I am on the zone creation page for type "country"
+          And I fill in "Name" with "European Union"
+          And I fill in "Code" with "EU"
           And I select "shipping" from "Scope"
           And I add zone member "Estonia"
           And I add zone member "Germany"
          When I press "Create"
-         Then I should be on the page of zone "EU"
+         Then I should be on the page of zone "European Union"
           And I should see "Zone has been successfully created."
-          And "Estonia" should appear on the page
-          And "Germany" should appear on the page
+          And "EE" should appear on the page
+          And "DE" should appear on the page
           And "shipping" should appear on the page
 
     Scenario: Created zones appear in the list
@@ -91,11 +82,15 @@ Feature: Zones
     Scenario: Updating the zone
         Given I am editing zone "USA GMT-8"
          When I fill in "Name" with "USA GMT-9"
-          And I remove the first country
+          And I remove the first province
           And I press "Save changes"
          Then I should be on the page of zone "USA GMT-9"
           And I should see "Zone has been successfully updated."
-          And "Washington" should not appear on the page
+          And "California" should not appear on the page
+
+    Scenario: Cannot edit zone code
+         When I am editing zone "USA GMT-8"
+         Then the code field should be disabled
 
     Scenario: Updating the zone
         Given I am editing zone "USA GMT-8"
@@ -107,12 +102,13 @@ Feature: Zones
 
     @javascript
     Scenario: Adding zone member to the existing zone
-        Given I am editing zone "Baltic states"
-         When I add zone member "Estonia"
+        Given there is country "Poland"
+          And I am editing zone "Baltic states"
+         When I add zone member "Poland"
           And I press "Save changes"
          Then I should be on the page of zone "Baltic states"
           And I should see "Zone has been successfully updated."
-          And "Estonia" should appear on the page
+          And "PL" should appear on the page
 
     @javascript
     Scenario: Deleting zone

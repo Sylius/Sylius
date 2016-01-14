@@ -12,16 +12,28 @@
 namespace Sylius\Bundle\AddressingBundle\Validator\Constraints;
 
 use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 /**
- * Validator which validates if a province is valid.
- *
  * @author Julien Janvier <j.janvier@gmail.com>
  */
 class ProvinceAddressConstraintValidator extends ConstraintValidator
 {
+    /**
+     * @var RepositoryInterface
+     */
+    private $countryRepository;
+
+    /**
+     * @param RepositoryInterface $countryRepository
+     */
+    public function __construct(RepositoryInterface $countryRepository)
+    {
+        $this->countryRepository = $countryRepository;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -47,15 +59,14 @@ class ProvinceAddressConstraintValidator extends ConstraintValidator
     }
 
     /**
-     * Override this method to implement your logic.
-     *
      * @param AddressInterface $address
      *
      * @return bool
      */
     protected function isProvinceValid(AddressInterface $address)
     {
-        if (null === $country = $address->getCountry()) {
+        $countryCode = $address->getCountry();
+        if (null === $country = $this->countryRepository->findOneBy(array('code' => $countryCode))) {
             return true;
         }
 

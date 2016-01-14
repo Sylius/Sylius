@@ -38,6 +38,7 @@ class SyliusAddressingExtension extends AbstractResourceExtension
 
         $configFiles = array(
             'services.xml',
+            'twig.xml',
         );
 
         foreach ($configFiles as $configFile) {
@@ -54,9 +55,30 @@ class SyliusAddressingExtension extends AbstractResourceExtension
         ;
 
         $container
+            ->getDefinition('sylius.form.type.province_code_choice')
+            ->setArguments(array(
+                new Reference('sylius.repository.province'),
+            ))
+        ;
+
+        $container
             ->getDefinition('sylius.form.type.country_choice')
             ->setArguments(array(
                 new Reference('sylius.repository.country'),
+            ))
+        ;
+
+        $container
+            ->getDefinition('sylius.form.type.country_code_choice')
+            ->setArguments(array(
+                new Reference('sylius.repository.country'),
+            ))
+        ;
+
+        $container
+            ->getDefinition('sylius.form.type.zone_code_choice')
+            ->setArguments(array(
+                new Reference('sylius.repository.zone'),
             ))
         ;
 

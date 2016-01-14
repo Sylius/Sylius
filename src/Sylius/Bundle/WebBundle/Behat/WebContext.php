@@ -540,6 +540,14 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     }
 
     /**
+     * @When I want to create a :type zone
+     */
+    public function iWantToCreateZoneOfType($type)
+    {
+        $this->selectOption('zone_type', $type);
+    }
+
+    /**
      * @When /^I add zone member "([^"]+)"$/
      */
     public function iAddZoneMember($zoneMember)

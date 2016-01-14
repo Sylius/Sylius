@@ -14,14 +14,16 @@ namespace spec\Sylius\Bundle\AddressingBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberType;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
+use Sylius\Component\Addressing\Model\ZoneMember;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @author Julien Janvier <j.janvier@gmail.com>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class ZoneMemberCountryTypeSpec extends ObjectBehavior
+class ZoneMemberTypeSpec extends ObjectBehavior
 {
     function let()
     {
@@ -30,7 +32,7 @@ class ZoneMemberCountryTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberCountryType');
+        $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberType');
     }
 
     function it_is_a_form_type()
@@ -45,32 +47,30 @@ class ZoneMemberCountryTypeSpec extends ObjectBehavior
 
     function it_has_a_valid_name()
     {
-        $this->getName()->shouldReturn('sylius_zone_member_country');
+        $this->getName()->shouldReturn('sylius_zone_member');
     }
 
     function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
-            ->add('country', 'sylius_country_choice', Argument::any())
-            ->willReturn($builder);
+            ->add('code', 'sylius_zone_code_choice', Argument::any())
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
 
-        $builder
-            ->add('_type', 'hidden', Argument::any())
-            ->willReturn($builder);
-
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, array('zone_type' => 'zone'));
     }
 
-    function it_defines_assigned_data_class(OptionsResolver $resolver)
+    function it_configures_options(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(
-                array(
-                    'data_class'        => 'ZoneMember',
-                    'validation_groups' => array('sylius')
-                )
-            )
-            ->shouldBeCalled();
+            ->setDefaults(array(
+                'empty_value' => 'sylius.form.zone_member.select',
+                'data_class'  => ZoneMember::class,
+                'zone_type'   => 'country',
+            ))
+            ->shouldBeCalled()
+        ;
 
         $this->configureOptions($resolver);
     }

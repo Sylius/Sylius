@@ -89,11 +89,6 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
         return call_user_func_array(array($this, $method), $arguments);
     }
 
-    protected function getZoneMemberFactory($zoneType)
-    {
-        return $this->get('sylius.factory.zone_member_'.$zoneType);
-    }
-
     /**
      * @return VariantGenerator
      */
@@ -103,15 +98,15 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
     }
 
     /**
-     * Get zone reference by its name.
+     * Get zone reference by its code.
      *
-     * @param string $name
+     * @param string $code
      *
      * @return ZoneInterface
      */
-    protected function getZoneByName($name)
+    protected function getZoneByCode($code)
     {
-        return $this->getReference('Sylius.Zone.'.$name);
+        return $this->getReference('Sylius.Zone.'.$code);
     }
 
     /**
@@ -151,14 +146,17 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
         $address->setPostcode($this->faker->postcode);
 
         /** @var CountryInterface $country */
-        $countries = Intl::getRegionBundle()->getCountryNames($this->defaultLocale);
-        $isoName = array_rand($countries);
-        $country = $this->getReference("Sylius.Country." . $isoName);
+        $allCountries = Intl::getRegionBundle()->getCountryNames($this->defaultLocale);
+        $countries = array_slice($allCountries, 0, count($allCountries) - 5, true);
 
-        $province = $country->hasProvinces() ? $this->faker->randomElement($country->getProvinces()->toArray()) : null;
+        $countryCode = array_rand($countries);
+        $country = $this->getReference("Sylius.Country." . $countryCode);
 
-        $address->setCountry($country);
-        $address->setProvince($province);
+        if ($province = $country->hasProvinces() ? $this->faker->randomElement($country->getProvinces()->toArray()) : null) {
+            $address->setProvince($province->getCode());
+        }
+
+        $address->setCountry($countryCode);
 
         return $address;
     }

@@ -570,6 +570,29 @@ class WebContext extends DefaultContext
     }
 
     /**
+     * @Given /^I am on the zone creation page for type "([^"]*)"$/
+     */
+    public function iAmOnTheZoneCreationPageForType($type)
+    {
+        $this->getSession()->visit($this->generatePageUrl('zone creation', array('type' => $type)));
+        $this->iShouldSeeSelectWithOption('Type', ucfirst($type));
+    }
+
+    /**
+     * @Then /^I should be on the zone creation page for type "([^"]*)"$/
+     * @Then /^I should still be on the zone creation page for type "([^"]*)"$/
+     */
+    public function iShouldBeOnTheZoneCreationPageForType($type)
+    {
+        $this->assertSession()->addressEquals($this->generatePageUrl('zone creation', array('type' => $type)));
+
+        try {
+            $this->assertStatusCodeEquals(200);
+        } catch (UnsupportedDriverActionException $e) {
+        }
+    }
+
+    /**
      * @Then /^I should see select "([^"]*)" with "([^"]*)" option selected$/
      */
     public function iShouldSeeSelectWithOptionSelected($fieldName, $fieldOption)
@@ -597,9 +620,9 @@ class WebContext extends DefaultContext
      */
     private function iAmOnTheCountryPageByName($name)
     {
-        $isoName = $this->getCountryCodeByEnglishCountryName($name);
+        $countrycode = $this->getCountryCodeByEnglishCountryName($name);
 
-        $this->iAmOnTheResourcePage('country', 'isoName', $isoName);
+        $this->iAmOnTheResourcePage('country', 'code', $countrycode);
     }
 
     /**
@@ -608,9 +631,9 @@ class WebContext extends DefaultContext
      */
     private function iShouldBeDoingSomethingWithCountryByName($action, $name)
     {
-        $isoName = $this->getCountryCodeByEnglishCountryName($name);
+        $countryCode = $this->getCountryCodeByEnglishCountryName($name);
 
-        $this->iShouldBeDoingSomethingWithResource($action, 'country', 'isoName', $isoName);
+        $this->iShouldBeDoingSomethingWithResource($action, 'country', 'code', $countryCode);
     }
 
     /**
@@ -619,9 +642,9 @@ class WebContext extends DefaultContext
      */
     private function iAmDoingSomethingWithCountryByName($action, $name)
     {
-        $isoName = $this->getCountryCodeByEnglishCountryName($name);
+        $countryCode = $this->getCountryCodeByEnglishCountryName($name);
 
-        $this->iAmDoingSomethingWithResource($action, 'country', 'isoName', $isoName);
+        $this->iAmDoingSomethingWithResource($action, 'country', 'code', $countryCode);
     }
 
     /**
@@ -629,9 +652,9 @@ class WebContext extends DefaultContext
      */
     private function iShouldBeOnTheCountryPageByName($name)
     {
-        $isoName = $this->getCountryCodeByEnglishCountryName($name);
+        $countryCode = $this->getCountryCodeByEnglishCountryName($name);
 
-        $this->iShouldBeOnTheResourcePage('country', 'isoName', $isoName);
+        $this->iShouldBeOnTheResourcePage('country', 'code', $countryCode);
     }
 
     /**

@@ -57,14 +57,14 @@ class CountryType extends AbstractResourceType
                 );
 
                 $country = $event->getData();
-                if ($country instanceof CountryInterface && null !== $country->getIsoName()) {
+                if ($country instanceof CountryInterface && null !== $country->getCode()) {
                     $nameOptions['disabled'] = true;
                 } else {
                     $nameOptions['choices'] = $this->getAvailableCountries();
                 }
 
                 $form = $event->getForm();
-                $form->add('isoName', 'country', $nameOptions);
+                $form->add('code', 'country', $nameOptions);
             }
         );
 
@@ -101,7 +101,7 @@ class CountryType extends AbstractResourceType
         /** @var CountryInterface[] $definedCountries */
         $definedCountries = $this->countryRepository->findAll();
         foreach ($definedCountries as $country) {
-            unset($availableCountries[$country->getIsoName()]);
+            unset($availableCountries[$country->getCode()]);
         }
 
         return $availableCountries;

@@ -340,7 +340,6 @@ sylius:
         create_header: New country
         id: ID
         index_header: Countries
-        iso_name: ISO name
         manage: Manage countries
         name: Name
         no_results: There are no countries configured.

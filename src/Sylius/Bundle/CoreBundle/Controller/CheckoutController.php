@@ -193,8 +193,6 @@ class CheckoutController extends FOSRestController
     }
 
     /**
-     * Get object manager.
-     *
      * @return ObjectManager
      */
     protected function getManager()
@@ -203,8 +201,6 @@ class CheckoutController extends FOSRestController
     }
 
     /**
-     * Get zone matcher.
-     *
      * @return ZoneMatcherInterface
      */
     protected function getZoneMatcher()
@@ -213,8 +209,6 @@ class CheckoutController extends FOSRestController
     }
 
     /**
-     * Is user logged in?
-     *
      * @return Boolean
      */
     protected function isUserLoggedIn()
@@ -227,8 +221,6 @@ class CheckoutController extends FOSRestController
     }
 
     /**
-     * Dispatch event.
-     *
      * @param string $name
      * @param Event  $event
      */
@@ -238,8 +230,6 @@ class CheckoutController extends FOSRestController
     }
 
     /**
-     * Dispatch checkout event.
-     *
      * @param string         $name
      * @param OrderInterface $order
      */

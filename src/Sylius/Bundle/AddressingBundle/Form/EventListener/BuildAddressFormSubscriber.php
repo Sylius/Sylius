@@ -12,15 +12,19 @@
 namespace Sylius\Bundle\AddressingBundle\Form\EventListener;
 
 use Doctrine\Common\Persistence\ObjectRepository;
+use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
 
 /**
  * This listener adds the province field to form if needed.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
 class BuildAddressFormSubscriber implements EventSubscriberInterface
 {
@@ -30,22 +34,18 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
     private $countryRepository;
 
     /**
-     * Form factory.
-     *
      * @var FormFactoryInterface
      */
-    private $factory;
+    private $formFactory;
 
     /**
-     * Constructor.
-     *
      * @param ObjectRepository     $countryRepository
      * @param FormFactoryInterface $factory
      */
     public function __construct(ObjectRepository $countryRepository, FormFactoryInterface $factory)
     {
         $this->countryRepository = $countryRepository;
-        $this->factory = $factory;
+        $this->formFactory = $factory;
     }
 
     /**
@@ -71,16 +71,19 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $country = $address->getCountry();
+        $countryCode = $address->getCountry();
+        if (null === $countryCode) {
+            return;
+        }
+
+        /* @var CountryInterface $country */
+        $country = $this->countryRepository->findOneBy(array('code' => $countryCode));
         if (null === $country) {
             return;
         }
 
         if ($country->hasProvinces()) {
-            $event->getForm()->add($this->factory->createNamed('province', 'sylius_province_choice', $address->getProvince(), array(
-                'country' => $country,
-                'auto_initialize' => false,
-            )));
+            $event->getForm()->add($this->createProvinceCodeChoiceForm($country, $address->getProvince()));
         }
     }
 
@@ -96,16 +99,36 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $country = $this->countryRepository->find($data['country']);
+        if ('' === $data['country']) {
+            return;
+        }
+
+        /* @var CountryInterface $country */
+        $country = $this->countryRepository->findOneBy(array('code' => $data['country']));
         if (null === $country) {
             return;
         }
 
         if ($country->hasProvinces()) {
-            $event->getForm()->add($this->factory->createNamed('province', 'sylius_province_choice', null, array(
-                'country'  => $country,
-                'auto_initialize' => false,
-            )));
+            $event->getForm()->add($this->createProvinceCodeChoiceForm($country));
         }
+    }
+
+    /**
+     * @param CountryInterface $country
+     * @param ProvinceInterface|null $province
+     *
+     * @return FormInterface
+     */
+    private function createProvinceCodeChoiceForm(CountryInterface $country, ProvinceInterface $province = null)
+    {
+        return
+            $this
+                ->formFactory
+                    ->createNamed('province', 'sylius_province_code_choice', $province, array(
+                    'country'  => $country,
+                    'auto_initialize' => false,
+            ))
+        ;
     }
 }

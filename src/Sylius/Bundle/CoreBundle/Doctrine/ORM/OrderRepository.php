@@ -24,7 +24,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
      * Create customer orders paginator.
      *
      * @param CustomerInterface $customer
-     * @param array         $sorting
+     * @param array             $sorting
      *
      * @return Pagerfanta
      */
@@ -39,7 +39,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
      * Gets orders for customer.
      *
      * @param CustomerInterface $customer
-     * @param array         $sorting
+     * @param array             $sorting
      *
      * @return array
      */
@@ -79,9 +79,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
             ->leftJoin('variant.options', 'optionValue')
             ->leftJoin('optionValue.option', 'option')
             ->leftJoin('o.billingAddress', 'billingAddress')
-            ->leftJoin('billingAddress.country', 'billingCountry')
             ->leftJoin('o.shippingAddress', 'shippingAddress')
-            ->leftJoin('shippingAddress.country', 'shippingCountry')
             ->addSelect('adjustment')
             ->addSelect('customer')
             ->addSelect('itemUnit')
@@ -95,9 +93,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
             ->addSelect('option')
             ->addSelect('optionValue')
             ->addSelect('billingAddress')
-            ->addSelect('billingCountry')
             ->addSelect('shippingAddress')
-            ->addSelect('shippingCountry')
             ->andWhere($queryBuilder->expr()->eq('o.id', ':id'))
             ->setParameter('id', $id)
         ;

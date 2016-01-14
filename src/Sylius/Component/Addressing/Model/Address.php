@@ -42,12 +42,12 @@ class Address implements AddressInterface
     protected $company;
 
     /**
-     * @var CountryInterface
+     * @var string
      */
     protected $country;
 
     /**
-     * @var ProvinceInterface
+     * @var string
      */
     protected $province;
 
@@ -172,7 +172,7 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function setCountry(CountryInterface $country = null)
+    public function setCountry($country = null)
     {
         if (null === $country) {
             $this->province = null;
@@ -192,18 +192,10 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function setProvince(ProvinceInterface $province = null)
+    public function setProvince($province = null)
     {
         if (null === $this->country) {
-            throw new \BadMethodCallException('Cannot define province on address without assigned country');
-        }
-
-        if (null !== $province && !$this->country->hasProvince($province)) {
-            throw new \InvalidArgumentException(sprintf(
-                'Cannot set province "%s", because it does not belong to country "%s"',
-                $province->getName(),
-                $this->country->getName()
-            ));
+            return;
         }
 
         $this->province = $province;

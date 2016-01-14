@@ -29,7 +29,7 @@ Feature: Countries and provinces
         Given I am on the dashboard page
          When I follow "Countries"
          Then I should be on the country index page
-          And I should see country with iso name "FR" in the list
+          And I should see country with code "FR" in the list
 
     Scenario: Seeing empty index of countries
         Given there are no countries
@@ -68,6 +68,15 @@ Feature: Countries and provinces
           And "Łódź" should appear on the page
           And "Lubusz" should appear on the page
 
+    @javascript
+    Scenario: Editing country with duplicated province
+        Given I am editing country "France"
+         When I click "Add province"
+          And I fill in the 5th province with "Lyon"
+          And I press "Save changes"
+         Then I should see "Province name must be unique."
+          And I should see "Province code must be unique."
+
     Scenario: Created countries appear in the list
         Given I created country "Poland"
          When I go to the country index page
@@ -84,6 +93,10 @@ Feature: Countries and provinces
          When I click "edit" near "China"
          Then I should be editing country "China"
 
+    Scenario: Cannot edit country code
+         When I am editing country "China"
+         Then the code field should be disabled
+
     Scenario: Accessing country details via the list
         Given I am on the country index page
          When I click "China"
@@ -97,11 +110,11 @@ Feature: Countries and provinces
 
     @javascript
     Scenario: Deleting province
-        Given I am on the page of country "France"
-         When I press "delete" near "Toulouse"
-          And I click "delete" from the confirmation modal
-         Then I should still be on the page of country "France"
-          And "Toulouse" should not appear on the page
+        Given I am editing country "France"
+         When I remove the first province
+          And I press "Save changes"
+         Then I should be on the page of country "France"
+          And "Nancy" should not appear on the page
 
     Scenario: Enabling country
         Given there is a disabled country "Poland"

@@ -11,27 +11,25 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Zone form type.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
 class ZoneType extends AbstractResourceType
 {
     /**
-     * Scopes.
-     *
      * @var array
      */
     protected $scopeChoices;
 
     /**
-     * Constructor.
-     *
      * @param string   $dataClass
      * @param string[] $validationGroups
      * @param string[] $scopeChoices
@@ -48,27 +46,49 @@ class ZoneType extends AbstractResourceType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $zoneType = $builder->getData()->getType();
+
         $builder
+            ->addEventSubscriber(new AddCodeFormSubscriber())
             ->add('name', 'text', array(
                 'label' => 'sylius.form.zone.name',
             ))
-            ->add('type', 'sylius_zone_type_choice')
-            ->add('members', 'sylius_zone_member_collection', array(
-                'label'            => false,
+            ->add('type', 'sylius_zone_type_choice', array(
+                'disabled' => true,
+            ))
+            ->add('members', 'collection', array(
+                'type' => 'sylius_zone_member',
                 'button_add_label' => 'sylius.zone.add_member',
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'delete_empty' => true,
+                'options' => array(
+                    'zone_type' => $zoneType,
+                ),
             ))
         ;
 
         if (!empty($this->scopeChoices)) {
             $builder
                 ->add('scope', 'choice', array(
-                    'label'       => 'sylius.form.zone.scope',
+                    'label' => 'sylius.form.zone.scope',
                     'empty_value' => 'sylius.form.zone.select_scope',
-                    'required'    => false,
-                    'choices'     => $this->scopeChoices,
+                    'required' => false,
+                    'choices' => $this->scopeChoices,
                 ))
             ;
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        parent::configureOptions($resolver);
+
+        $resolver->setDefault('zone_type', ZoneInterface::TYPE_COUNTRY);
     }
 
     /**

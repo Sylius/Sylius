@@ -12,23 +12,24 @@
 namespace spec\Sylius\Component\Addressing\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMember;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class ZoneMemberZoneSpec extends ObjectBehavior
+class ZoneMemberSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Addressing\Model\ZoneMemberZone');
+        $this->shouldHaveType('Sylius\Component\Addressing\Model\ZoneMember');
     }
 
-    function it_implements_Sylius_zone_member_interface()
+    function it_implements_zone_member_interface()
     {
-        $this->shouldHaveType(ZoneMember::class);
         $this->shouldImplement(ZoneMemberInterface::class);
     }
 
@@ -37,27 +38,25 @@ class ZoneMemberZoneSpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
-    function it_has_no_zone_by_default()
+    function it_has_no_code_by_default()
     {
-        $this->getZone()->shouldReturn(null);
+        $this->getCode()->shouldReturn(null);
     }
 
-    function it_does_not_belong_to_any_zone_by_default()
+    function its_code_is_mutable()
+    {
+        $this->setCode('IE');
+        $this->getCode()->shouldReturn('IE');
+    }
+
+    function it_doesnt_belong_to_any_zone_by_default()
     {
         $this->getBelongsTo()->shouldReturn(null);
     }
 
-    function its_zone_is_mutable(ZoneInterface $zone)
+    function it_can_belong_to_a_zone(ZoneInterface $zone)
     {
-        $this->setZone($zone);
-        $this->getZone()->shouldReturn($zone);
-    }
-
-    function it_returns_zone_name(ZoneInterface $zone)
-    {
-        $zone->getName()->willReturn('USA');
-        $this->setZone($zone);
-
-        $this->getName()->shouldReturn('USA');
+        $this->setBelongsTo($zone);
+        $this->getBelongsTo()->shouldReturn($zone);
     }
 }
