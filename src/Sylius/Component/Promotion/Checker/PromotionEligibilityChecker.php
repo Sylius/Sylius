@@ -55,6 +55,10 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
      */
     public function isEligible(PromotionSubjectInterface $subject, PromotionInterface $promotion)
     {
+        if (!$promotion->isEnabled()) {
+            return false;
+        }
+
         if (!$this->isEligibleToDates($promotion)) {
             return false;
         }
