@@ -9,7 +9,7 @@ sylius:
 
         order_comment:
             name: Order comment
-            subject: New comment posted on order #{{ order.number }}
+            subject: New comment posted on order
 
         shipment_confirmation:
             name: Shipment confirmation
@@ -575,7 +575,7 @@ sylius:
         state: State
         immutable_warning: Already shipped orders are immutable.
         promotion_coupons: Coupons
-        no_promotion: No coupons were used.order:
+        no_promotion: No coupons were used:
         adjustments:
             manage: Manage adjustments
             type: Type
