@@ -39,6 +39,11 @@ class Currency implements CurrencyInterface
     protected $enabled = true;
 
     /**
+     * @var bool
+     */
+    protected $base = false;
+
+    /**
      * @var \DateTime
      */
     protected $createdAt;
@@ -171,5 +176,21 @@ class Currency implements CurrencyInterface
     public function disable()
     {
         $this->enabled = false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isBase()
+    {
+        return $this->base;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setBase($base)
+    {
+        $this->base = $base;
     }
 }

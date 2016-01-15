@@ -91,6 +91,17 @@ class CurrencySpec extends ObjectBehavior
         $this->shouldNotBeEnabled();
     }
 
+    function it_is_not_base_currency_by_default()
+    {
+        $this->shouldNotBeBase();
+    }
+
+    function it_can_can_be_base_currency()
+    {
+        $this->setBase(true);
+        $this->shouldBeBase();
+    }
+
     function it_initializes_creation_date_by_default()
     {
         $this->getCreatedAt()->shouldHaveType(\DateTime::class);
