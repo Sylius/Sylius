@@ -33,12 +33,12 @@ class TextAttributeConfigurationTypeSpec extends ObjectBehavior
     function it_builds_validations_form(FormBuilderInterface $formBuilder)
     {
         $formBuilder
-            ->add('min', 'number', array('label' => 'sylius.attribute_type_validation.text.min'))
+            ->add('min', 'number', array('label' => 'sylius.form.attribute_type_configuration.text.min'))
             ->willReturn($formBuilder)
         ;
 
         $formBuilder
-            ->add('max', 'number', array('label' => 'sylius.attribute_type_validation.text.max'))
+            ->add('max', 'number', array('label' => 'sylius.form.attribute_type_configuration.text.max'))
             ->willReturn($formBuilder)
         ;
 

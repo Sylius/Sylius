@@ -33,7 +33,7 @@ class DatetimeAttributeConfigurationTypeSpec extends ObjectBehavior
     function it_builds_configuration_form(FormBuilderInterface $builder)
     {
         $builder
-            ->add('format', 'text', array('label' => 'sylius.attribute_type_configuration.datetime.format'))
+            ->add('format', 'text', array('label' => 'sylius.form.attribute_type_configuration.datetime.format'))
             ->willReturn($builder)
         ;
 

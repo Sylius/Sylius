@@ -8,23 +8,22 @@ sylius:
             name: Name
             translations: Translations
             type: Type
-    attribute_type:
-        checkbox: Checkbox
-        configuration: Configuration
-        date: Date
-        datetime: Datetime
-        integer: Integer
-        percent: Percent
-        text: Text
-        textarea: Textarea
-        title: Attribute types
-        validation: Validation
-    attribute_type_configuration:
-        datetime:
-            format: Format
-        date:
-            format: Format
-    attribute_type_validation:
-        text:
-            min: Min length
-            max: Max length
+        attribute_type:
+            checkbox: Checkbox
+            configuration: Configuration
+            date: Date
+            datetime: Datetime
+            integer: Integer
+            percent: Percent
+            text: Text
+            textarea: Textarea
+            title: Attribute types
+            validation: Validation
+        attribute_type_configuration:
+            datetime:
+                format: Format
+            date:
+                format: Format
+            text:
+                min: Min length
+                max: Max length
