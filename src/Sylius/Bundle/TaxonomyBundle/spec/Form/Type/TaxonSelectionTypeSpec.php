@@ -67,6 +67,7 @@ class TaxonSelectionTypeSpec extends ObjectBehavior
                 'save_objects' => false,
             ),
             'multiple' => true,
+            'render_label' => true,
         ));
     }
 
@@ -80,7 +81,7 @@ class TaxonSelectionTypeSpec extends ObjectBehavior
         $resolver->setDefaults(array(
             'data_class'         => null,
             'multiple'           => true,
-            'render_label'       => false,
+            'render_label'       => true,
             'model_transformer'  => TaxonSelectionToCollectionTransformer::class,
         ))->shouldBeCalled();
 
