@@ -45,7 +45,7 @@ class ShipmentType extends AbstractType
         $channel  = $options['channel'];
 
         $notBlank = new NotBlank(array('groups' => array('sylius')));
-        $notBlank->message = $this->translator->trans('sylius.checkout.shipping_method.not_blank');
+        $notBlank->message = $this->translator->trans('sylius.checkout.shipping_method.not_blank', [], 'validators');
 
         $builder
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($notBlank, $criteria, $channel) {

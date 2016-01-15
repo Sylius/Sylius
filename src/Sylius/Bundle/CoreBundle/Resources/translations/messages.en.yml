@@ -1,7 +1,4 @@
 sylius:
-    checkout:
-        shipping_method:
-            not_blank: Please select shipping method.
     form:
         action:
             add_product_configuration:

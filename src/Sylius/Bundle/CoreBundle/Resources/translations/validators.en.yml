@@ -1,4 +1,7 @@
 sylius:
+    checkout:
+        shipping_method:
+            not_blank: Please select shipping method.
     locale:
         code:
             not_blank: Please enter locale code.
