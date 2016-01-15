@@ -46,8 +46,8 @@ class CollectionExtension extends AbstractTypeExtension
         ));
 
         $resolver->setDefaults(array(
-            'button_add_label' => 'form.collection.add',
-            'button_delete_label' => 'form.collection.delete',
+            'button_add_label' => 'sylius.form.collection.add',
+            'button_delete_label' => 'sylius.form.collection.delete',
         ));
     }
 
