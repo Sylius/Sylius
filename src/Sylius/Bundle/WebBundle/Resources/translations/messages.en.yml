@@ -1076,3 +1076,11 @@ sylius:
     ui:
         links: Links
         code:  Code
+    pricing:
+        volume_based:
+            min: Min Volume
+            max: Max Volume
+            price: Price
+            no_results: No pricing configuration
+            button:
+                add: Add
