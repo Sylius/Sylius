@@ -16,11 +16,3 @@ sylius:
   product_translation:
     short_description:
       max: 'Përshkrimi i shkurtër nuk duhet të përmbajë më shumë se {{ limit }} karaktere.'
-sylius_shipping:
-  method:
-    zone:
-      not_blank: Shkruaj mënyrën e dërgimit të zonës.
-sylius_taxation:
-  rate:
-    zone:
-      not_blank: Shkruaj masën e taksimit të zonës.

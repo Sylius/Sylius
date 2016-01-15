@@ -10,10 +10,3 @@ sylius:
       permalink: Permalink
     taxonomy:
       name: Nume
-  taxon:
-    create_taxon: Creează categorie
-    delete_taxonomy: Şterge categorizare
-    manage_taxonomies: Gestionați categorizările
-    no_taxonomies: Nu există categorizare de afișat.
-    no_taxons: Nu există categorii de afișat.
-    update_taxonomy: Modifică categorizare

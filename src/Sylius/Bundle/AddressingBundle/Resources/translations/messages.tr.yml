@@ -14,7 +14,6 @@ sylius:
       street: Sokak
       province: Eyalet
     country:
-      iso_name: Ülke kodu
       name: Ülke adı
       provinces: İller
       select: Ülke seçin
@@ -30,10 +29,7 @@ sylius:
         province: Eyalet
         zone: Bölge
       scope: Kapsam
+      select: Ülke seçin
       select_scope: Ölçek seçiniz
-    zone_member_country:
-      country: Ülke
-    zone_member_province:
-      province: Eyalet
-    zone_member_zone:
-      zone: Bölge
+    zone_member:
+      select: Ülke seçin

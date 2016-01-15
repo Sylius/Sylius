@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  checkout:
-    shipping_method:
-      not_blank: Odaberite način dostave
   form:
     action:
       add_product_configuration:
@@ -106,4 +103,4 @@ sylius:
       product_attribute_value:
         value: Vrijednost
     guest:
-      email: Email
+      email: E-mail

@@ -16,11 +16,3 @@ sylius:
   product_translation:
     short_description:
       max: 'Краткое описание не должно быть длинее {{ limit }} символов.'
-sylius_shipping:
-  method:
-    zone:
-      not_blank: Зона не может быть пустой
-sylius_taxation:
-  rate:
-    zone:
-      not_blank: Пожалуйста введите налоговую зону.

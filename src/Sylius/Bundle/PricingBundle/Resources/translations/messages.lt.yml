@@ -13,11 +13,3 @@ sylius:
         min: Min kiekis
         max: Maks. kiekis
         price: Kaina
-  pricing:
-    volume_based:
-      min: Min kiekis
-      max: Maks. kiekis
-      price: Kaina
-      no_results: Nėra kainų nustatymo konfigūracijos
-      button:
-        add: Pridėti

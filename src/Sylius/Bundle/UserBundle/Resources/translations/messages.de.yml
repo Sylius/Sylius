@@ -2,27 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    email: E-Mail
-    register: Registrieren
-    login: Anmelden
-    logout: Abmelden
-    logged_in_as: 'Angemeldet als %username%'
-    no_account: Noch kein Account erstellt?
-    forgot_password: Passwort vergessen?
-    reset_password: Passwörter zurücksetzen
-    reset: Zurücksetzen
-    password:
-      reset:
-        header: Passwörter zurücksetzen
-        button: Zurücksetzen
-    profile: Profil
-    change_password: Passwort ändern
-    account_panel_outline: Dies ist dein persönlicher Bereich. Hier kannst du alle deine Bestellungen verfolgen, deine persönlichen Daten bearbeiten, sowie neue Adressen hinzufügen.
-    customer_since: Sie sind Kunde seit
-    welcome: Wilkommen
-    customer:
-      id: Kunden-Nr
   form:
     group:
       name: Name

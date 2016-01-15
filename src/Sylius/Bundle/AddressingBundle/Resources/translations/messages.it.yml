@@ -14,7 +14,6 @@ sylius:
       street: Indirizzo
       province: Provincia
     country:
-      iso_name: Nome ISO
       name: Nome
       provinces: Provincia
       select: Scegli
@@ -30,10 +29,7 @@ sylius:
         province: Provincia
         zone: Zona
       scope: Ambito
+      select: Scegli
       select_scope: Selezionare il campo di applicazione
-    zone_member_country:
-      country: Nazione
-    zone_member_province:
-      province: Provincia
-    zone_member_zone:
-      zone: Zona
+    zone_member:
+      select: Scegli

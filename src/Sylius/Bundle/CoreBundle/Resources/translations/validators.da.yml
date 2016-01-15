@@ -6,11 +6,3 @@ sylius:
     code:
       not_blank: Venligst angiv landekode.
       unique: Denne landekode eksisterer allerede.
-sylius_shipping:
-  method:
-    zone:
-      not_blank: Angiv forsendelses metode zone.
-sylius_taxation:
-  rate:
-    zone:
-      not_blank: Angiv moms sats zone.

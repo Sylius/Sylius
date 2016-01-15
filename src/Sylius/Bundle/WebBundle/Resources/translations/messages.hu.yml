@@ -237,7 +237,6 @@ sylius:
     create_header: Új ország
     id: Azonosító
     index_header: Országok
-    iso_name: ISO-név
     manage: Országok kezelése
     name: Név
     no_results: Nincsenek konfigurált országok.
@@ -763,4 +762,15 @@ sylius:
     topic: Téma
     updated_at: Utolsó frissítés
   ui:
+    email: E-mail
+    register: Regisztráció
+    login: Belépés
+    logout: Kilépés
+    change_password: Jelszó módosítása
+    account_panel_outline: Élvezze az összes rendelkezésre álló funkciót, nyomon követheti, kezelheti az összes adatát.
     code: Kód
+  pricing:
+    volume_based:
+      price: Ár
+      button:
+        add: Hozzáadás

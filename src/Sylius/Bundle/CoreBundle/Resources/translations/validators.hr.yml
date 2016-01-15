@@ -13,11 +13,3 @@ sylius:
     price:
       min: Cijena ne smije biti negativna.
       not_blank: Molim unesite cijenu.
-sylius_shipping:
-  method:
-    zone:
-      not_blank: Niste odabrali način dostave.
-sylius_taxation:
-  rate:
-    zone:
-      not_blank: Odaberite porez.

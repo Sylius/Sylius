@@ -2,13 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    email: E-mail
-    register: Regisztráció
-    login: Belépés
-    logout: Kilépés
-    change_password: Jelszó módosítása
-    account_panel_outline: Élvezze az összes rendelkezésre álló funkciót, nyomon követheti, kezelheti az összes adatát.
   form:
     group:
       name: Név

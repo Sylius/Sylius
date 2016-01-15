@@ -2,25 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    email: Email
-    register: Zarejestruj
-    login: Zaloguj
-    logout: Wyloguj
-    logged_in_as: 'Zalogowany jako %username%'
-    reset_password: Zmień hasło
-    reset: Reset
-    password:
-      reset:
-        header: Zmień hasło
-        button: Reset
-    profile: Profil
-    change_password: Zmiana hasła
-    account_panel_outline: sylius.account.home.outline
-    customer_since: Jesteś naszym klientem od
-    welcome: Witaj
-    customer:
-      id: ID klienta
   form:
     group:
       name: Nazwa

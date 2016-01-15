@@ -331,7 +331,6 @@ sylius:
     create_header: Добавить страну
     id: ID
     index_header: Страны
-    iso_name: ISO название
     manage: Управление странами
     name: Название
     no_results: Ни одна страна не была настроена
@@ -877,5 +876,18 @@ sylius:
     index_header: Запросы контактов
     updated_at: Изменено
   ui:
+    email: Email
+    register: Регистрация
+    login: Вход
+    logout: Выход
+    change_password: Change my password
+    account_panel_outline: Воспользуйтесь всеми возможными преимуществами для просмотра, отслеживания и управления своими заказами.
     links: Ссылки
     code: Код
+  pricing:
+    volume_based:
+      min: Мин. часть
+      max: Макс. часть
+      price: Цена
+      button:
+        add: Добавить

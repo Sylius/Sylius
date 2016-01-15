@@ -2,13 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    email: Email
-    register: Зарэгістравацца
-    login: Увайсці
-    logout: Выйсці
-    change_password: Змяніць пароль
-    account_panel_outline: Карыстайцеся ўсімі даступнымі вам магчымасцямі, сачыце за сваімі звесткамі і кіруйце імі.
   form:
     group:
       name: Імя

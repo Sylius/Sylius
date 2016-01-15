@@ -14,7 +14,6 @@ sylius:
       street: Ulica
       province: Pokrajina
     country:
-      iso_name: ISO naziv
       name: Naziv Države
       provinces: Pokrajine
       select: Odaberite
@@ -30,10 +29,7 @@ sylius:
         province: Županija
         zone: Regija
       scope: Djelokrug
+      select: Odaberite
       select_scope: Odaberite doseg
-    zone_member_country:
-      country: Država
-    zone_member_province:
-      province: Pokrajina
-    zone_member_zone:
-      zone: Regija
+    zone_member:
+      select: Odaberite

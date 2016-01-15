@@ -334,7 +334,6 @@ sylius:
     create_header: Nové země
     id: ID
     index_header: Země
-    iso_name: ISO kód
     manage: Správa zemí
     name: Jméno
     no_results: Nejsou nastaveny žádné země.
@@ -561,7 +560,6 @@ sylius:
     currency: Měna
     immutable_warning: Expedované objednávky nelze změnit.
     promotion_coupons: Kupóny
-    no_promotion: 'Žádný kupóny nebyly použity.objednávka:'
     adjustments:
       manage: Správa nastavení
       type: Typ
@@ -1011,5 +1009,18 @@ sylius:
   enable: Povolit
   disable: Zakázat
   ui:
+    email: Email
+    register: Registrace
+    login: Přihlásit
+    logout: Odhlásit
+    change_password: Změnit heslo
+    account_panel_outline: Užijte si všechny funkce, které jsou dostupné ve vašem osobním prostoru k prohlížení, sledování a spravování všech vašich dat.
     links: Odkazy
     code: Kód
+  pricing:
+    volume_based:
+      min: Minimální objem
+      max: Maximální objem
+      price: Cena
+      button:
+        add: Přidat

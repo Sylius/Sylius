@@ -151,7 +151,6 @@ sylius:
     create: Criar país
     create_header: Novo país
     index_header: Países
-    iso_name: ISO
     manage: Gerenciar países
     name: Nome
     no_results: Não há países cadastrados
@@ -482,3 +481,10 @@ sylius:
     message: Mensagem
     topic: Assunto
     updated_at: Data de modificação
+  ui:
+    login: Login
+    logout: Sair
+  pricing:
+    volume_based:
+      button:
+        add: Adicionar

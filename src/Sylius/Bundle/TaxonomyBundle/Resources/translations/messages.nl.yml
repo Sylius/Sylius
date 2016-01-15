@@ -10,10 +10,3 @@ sylius:
       permalink: Permalink
     taxonomy:
       name: Naam
-  taxon:
-    create_taxon: Creëer Taxon
-    delete_taxonomy: Verwijder Taxonomie
-    manage_taxonomies: Beheer Taxonomieën
-    no_taxonomies: Geen taxonomieën om weer te geven.
-    no_taxons: Geen taxons om weer te geven.
-    update_taxonomy: Taxonomie bijwerken

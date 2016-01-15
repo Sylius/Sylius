@@ -229,7 +229,6 @@ sylius:
     create_header: 新建国家
     id: ID
     index_header: 国家
-    iso_name: ISO名称
     manage: 管理国家
     name: 名称
     no_results: 没有配置国家
@@ -573,4 +572,13 @@ sylius:
     topic: 主题
     updated_at: 最后一次更新
   ui:
+    email: 电子邮件
+    register: 注册
+    login: 登录
+    logout: 注销
+    change_password: 更改您的密码
+    account_panel_outline: 在您的个人空间查看、 跟踪和管理您的所有数据的所有功能。
     code: 代码
+  pricing:
+    volume_based:
+      price: 价格

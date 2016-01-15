@@ -2,27 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    email: E-mail
-    register: Registreren
-    login: Inloggen
-    logout: Uitloggen
-    logged_in_as: 'Ingelogd als %username%'
-    no_account: Nog geen account?
-    forgot_password: Wachtwoord vergeten?
-    reset_password: Reset wachtwoord
-    reset: Reset
-    password:
-      reset:
-        header: Reset wachtwoord
-        button: Reset
-    profile: Profiel
-    change_password: Verander uw wachtwoord
-    account_panel_outline: Geniet van alle functies die beschikbaar zijn in uw persoonlijke ruimte om al uw gegevens te bekijken, bij te houden en te beheren.
-    customer_since: U bent al klant sinds
-    welcome: Welkom
-    customer:
-      id: Klant-ID
   form:
     group:
       name: Naam

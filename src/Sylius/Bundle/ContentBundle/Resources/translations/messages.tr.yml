@@ -1,8 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-auto: Otomatik
-route: rota
 sylius:
   form:
     action_block:

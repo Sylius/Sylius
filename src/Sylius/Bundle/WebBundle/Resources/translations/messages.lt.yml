@@ -334,7 +334,6 @@ sylius:
     create_header: Naujas šalis
     id: ID
     index_header: Šalys
-    iso_name: ISO pavadinimas
     manage: Valdyti šalis
     name: Pavadinimas
     no_results: Nėra šalių.
@@ -561,7 +560,6 @@ sylius:
     currency: Valiuta
     immutable_warning: Išsiųsti užsakymai yra neredaguojami.
     promotion_coupons: Kuponai
-    no_promotion: 'Nebuvo panaudota jokių kuponų:'
     adjustments:
       manage: Valdyti patikslinimus
       type: Tipas
@@ -1005,4 +1003,17 @@ sylius:
     index_header: Kontaktų užklausos
     updated_at: Paskutinis atnaujinimas
   ui:
+    email: Elektroninis paštas
+    register: Užsiregistruoti
+    login: Prisijungti
+    logout: Atsijungti
+    change_password: Pakeisti savo slaptažodį
+    account_panel_outline: Mėgaukitės visomis funkcijomis, kurias galima pasiekti per savo asmeninę erdvę tam, kad peržiūrėti, stebėti ir valdyti visus savo duomenis.
     code: Kodas
+  pricing:
+    volume_based:
+      min: Min kiekis
+      max: Maks. kiekis
+      price: Kaina
+      button:
+        add: Pridėti

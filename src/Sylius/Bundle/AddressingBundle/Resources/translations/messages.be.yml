@@ -14,7 +14,6 @@ sylius:
       street: Вуліца
       province: Вобласць
     country:
-      iso_name: ISO код
       name: Назва
       provinces: Вобласці
       select: Выбярыце
@@ -30,9 +29,6 @@ sylius:
         province: Вобласць
         zone: Зона
       scope: Абсяг
-    zone_member_country:
-      country: Краіна
-    zone_member_province:
-      province: Вобласць
-    zone_member_zone:
-      zone: Зона
+      select: Выбярыце
+    zone_member:
+      select: Выбярыце

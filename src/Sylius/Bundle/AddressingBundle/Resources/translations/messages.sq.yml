@@ -14,7 +14,6 @@ sylius:
       street: Rruga
       province: Rajoni
     country:
-      iso_name: Emri ISO
       name: Emri
       provinces: Rajonet
       select: Zgjidh
@@ -30,10 +29,7 @@ sylius:
         province: Rajoni
         zone: Zona
       scope: Zona
+      select: Zgjidh
       select_scope: Zgjidh zonën
-    zone_member_country:
-      country: Vendi
-    zone_member_province:
-      province: Rajoni
-    zone_member_zone:
-      zone: Zona
+    zone_member:
+      select: Zgjidh

@@ -2,27 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    email: Email
-    register: Regjistrohu
-    login: Futu
-    logout: Dil
-    logged_in_as: 'Loguar si %username%'
-    no_account: Ende nuk ke krijuar account?
-    forgot_password: Harrove fjalëkalimin?
-    reset_password: Rivendos fjalëkalimin
-    reset: Rivendos
-    password:
-      reset:
-        header: Rivendos fjalëkalimin
-        button: Rivendos
-    profile: Profili
-    change_password: Ndrysho fjalëkalimin
-    account_panel_outline: Shijo të gjitha vetitë që shfaqen në hapësirën tënde personale, gjurmo dhe kontrollo të gjitha të dhënat.
-    customer_since: Ti je blerës qysh prej
-    welcome: Mirë se vjen
-    customer:
-      id: ID-ja e blerësit
   form:
     group:
       name: Emri

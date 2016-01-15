@@ -2,27 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    email: E-mail
-    register: Créer un compte
-    login: Connexion
-    logout: Déconnexion
-    logged_in_as: 'Connecté en tant que %username%'
-    no_account: Pas encore de compte ?
-    forgot_password: Mot de passe oublié ?
-    reset_password: Réinitialisation du mot de passe
-    reset: Réinitialiser
-    password:
-      reset:
-        header: Réinitialisation du mot de passe
-        button: Réinitialiser
-    profile: Profil
-    change_password: Modifier votre mot de passe
-    account_panel_outline: Profitez de toutes les fonctionnalités qui sont disponibles sur votre espace personnel pour visualiser, suivre et gérer toutes vos données.
-    customer_since: Vous êtes client depuis
-    welcome: Bienvenue
-    customer:
-      id: ID Client
   form:
     group:
       name: Nom

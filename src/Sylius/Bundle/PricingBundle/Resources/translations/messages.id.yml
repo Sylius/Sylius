@@ -8,6 +8,3 @@ sylius:
     pricing:
       volume_based:
         price: Harga
-  pricing:
-    volume_based:
-      price: Harga

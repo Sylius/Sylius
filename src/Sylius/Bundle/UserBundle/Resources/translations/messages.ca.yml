@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    email: Correu electrònic
-    account_panel_outline: Gaudeix de totes les característiques disponibles al teu espai personal. Pots veure, fer un seguiment i gestionar totes les teves dades.
   form:
     group:
       name: Nom

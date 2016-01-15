@@ -292,4 +292,9 @@ sylius:
     email: Correu electrònic
     message: Missatge
   ui:
+    email: Correu electrònic
+    account_panel_outline: Gaudeix de totes les característiques disponibles al teu espai personal. Pots veure, fer un seguiment i gestionar totes les teves dades.
     code: Codi
+  pricing:
+    volume_based:
+      price: Preu

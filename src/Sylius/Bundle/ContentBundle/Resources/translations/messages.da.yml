@@ -1,7 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-auto: auto
 sylius:
   form:
     imagine_block:

@@ -6,14 +6,3 @@ sylius:
     code:
       not_blank: Introduïu un codi local.
       unique: Aquest codi local ja existeix.
-sylius_shipping:
-  method:
-    zone:
-      not_blank: "Introduïu la zona de mètode d'enviament."
-sylius_taxation:
-  rate:
-    zone:
-      not_blank: |
-        Introduïu la zona d'impost.
-        
-        

@@ -13,3 +13,5 @@ sylius:
     attribute:
       product_attribute_value:
         value: Стойност
+    guest:
+      email: Имейл

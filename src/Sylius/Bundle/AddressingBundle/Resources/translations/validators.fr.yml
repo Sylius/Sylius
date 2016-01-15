@@ -28,12 +28,6 @@ sylius:
       min_length: "L'adresse doit comporter au moins 2 caractères."
       not_blank: Veuillez entrer une adresse.
     not_shippable: "Cette adresse n'est pas une destination d'envoi valide."
-  country:
-    iso_name:
-      not_blank: Veuillez entrer le code ISO du pays.
-    name:
-      max_length: Le nom du pays ne doit pas contenir plus de 255 caractères.
-      not_blank: Veuillez entrer le nom du pays.
   province:
     name:
       max_length: Le nom de la région ne doit pas dépasser les 255 caractères.

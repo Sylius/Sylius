@@ -6,6 +6,6 @@ sylius:
     contact_request:
       first_name: ชื่อ
       last_name: นามสกุล
-      email: Email
+      email: อีเมล
     contact_topic:
       title: หัวข้อ

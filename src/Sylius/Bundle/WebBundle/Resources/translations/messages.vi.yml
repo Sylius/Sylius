@@ -114,7 +114,6 @@ sylius:
     create_header: Tạo quốc gia mới
     id: ID
     index_header: Quốc gia
-    iso_name: Mã ISO
     manage: Quản lý quốc gia
     name: Tên
   email:
@@ -293,3 +292,6 @@ sylius:
     updated_at: Cập nhật lần cuối
   ui:
     code: Mã
+  pricing:
+    volume_based:
+      price: Giá

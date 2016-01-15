@@ -185,7 +185,6 @@ sylius:
     create: 国を登録する
     create_header: 国を登録
     index_header: 国の管理
-    iso_name: ISO略称
     manage: 国の管理
     name: 国名
     no_results: 国は登録されていません。
@@ -508,6 +507,7 @@ sylius:
     update_header: カテゴリを編集
   customer:
     billing_address: ご請求先住所
+    email: メールアドレス
     first_name: 名
     last_name: 姓
     shipping_address: 配送先住所
@@ -558,4 +558,15 @@ sylius:
   contact_request:
     firstName: 名
     lastName: 姓
+    email: メールアドレス
     updated_at: 最終更新日
+  ui:
+    email: メールアドレス
+    register: お客様登録
+    login: ログイン
+    logout: ログアウト
+    change_password: パスワードの変更
+    account_panel_outline: お客様情報の確認と変更を行うことができます。
+  pricing:
+    volume_based:
+      price: 価格

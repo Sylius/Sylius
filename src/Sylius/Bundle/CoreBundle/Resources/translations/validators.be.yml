@@ -13,11 +13,3 @@ sylius:
     price:
       min: Кошт не можа быць адмоўным.
       not_blank: Калі ласка, увядзіце кошт.
-sylius_shipping:
-  method:
-    zone:
-      not_blank: Калі ласка, увядзіце зону метада дастаўкі.
-sylius_taxation:
-  rate:
-    zone:
-      not_blank: Калі ласка, увядзіце падатковую зону.

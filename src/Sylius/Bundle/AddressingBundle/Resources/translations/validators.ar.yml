@@ -28,12 +28,6 @@ sylius:
       min_length: يحب على اسم الشارع ان يحتوي على رفين على الاقل.
       not_blank: الرجاء إدخال الشارع.
     not_shippable: هذا العنوان ليس وجهة شحن صالحة.
-  country:
-    iso_name:
-      not_blank: الرجاء إدخال رمز ISO للبلد.
-    name:
-      max_length: اسم البلد يجب أن لا يتعدى طوله 255 حرفاً.
-      not_blank: الرجاء إدخال اسم البلد.
   province:
     name:
       not_blank: الرجاء إدخال اسم المقاطعة.

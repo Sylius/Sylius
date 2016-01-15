@@ -14,7 +14,6 @@ sylius:
       street: Straße
       province: Bundesland
     country:
-      iso_name: ISO-Name
       name: Name
       provinces: Bundesländer
       select: Bundesland auswählen
@@ -30,10 +29,7 @@ sylius:
         province: Region
         zone: Versandgebiet
       scope: Umfang
+      select: Bundesland auswählen
       select_scope: Bereich wählen
-    zone_member_country:
-      country: Land
-    zone_member_province:
-      province: Bundesland
-    zone_member_zone:
-      zone: Zone
+    zone_member:
+      select: Bundesland auswählen
