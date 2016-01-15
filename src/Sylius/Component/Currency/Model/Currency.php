@@ -111,6 +111,10 @@ class Currency implements CurrencyInterface
      */
     public function setExchangeRate($rate)
     {
+        if ($this->isBase()) {
+            throw new \LogicException('You cannot change the exchange rate of the base currency!');
+        }
+
         $this->exchangeRate = $rate;
     }
 
@@ -127,6 +131,10 @@ class Currency implements CurrencyInterface
      */
     public function setEnabled($enabled)
     {
+        if ($this->isBase()) {
+            throw new \LogicException('You cannot change the enabled status of the base currency!');
+        }
+
         $this->enabled = (bool) $enabled;
     }
 
@@ -175,6 +183,10 @@ class Currency implements CurrencyInterface
      */
     public function disable()
     {
+        if ($this->isBase()) {
+            throw new \LogicException('You cannot change the enabled status of the base currency!');
+        }
+
         $this->enabled = false;
     }
 
