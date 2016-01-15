@@ -56,17 +56,17 @@ class CliContext extends DefaultContext
     );
 
     /**
-     * @When /^I run a command "([^"]+)"$/
+     * @When I run Sylius CLI installer
      */
-    public function iRunACommand($name)
+    public function iRunSyliusCommandLineInstaller()
     {
         $this->application = new Application($this->getKernel());
         $this->application->add(new SetupCommand());
 
-        $this->command = $this->application->find($name);
+        $this->command = $this->application->find('sylius:install:setup');
         $this->tester = new CommandTester($this->command);
 
-        $this->iExecuteCommandWithInputChoices($name);
+        $this->iExecuteCommandWithInputChoices('sylius:install:setup');
     }
 
     /**
@@ -158,8 +158,8 @@ class CliContext extends DefaultContext
     {
         $fullParameters = array_merge(array('command' => $name));
         $this->dialog = $this->command->getHelper('dialog');
-        $inputString = join("\n", $this->inputChoices);
-        $this->dialog->setInputStream($this->getInputStream($inputString."\n"));
+        $inputString = join(PHP_EOL, $this->inputChoices);
+        $this->dialog->setInputStream($this->getInputStream($inputString.PHP_EOL));
 
         $this->tester->execute($fullParameters);
     }

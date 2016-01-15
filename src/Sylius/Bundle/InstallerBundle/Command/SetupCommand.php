@@ -125,9 +125,10 @@ EOT
 
             $valid = true;
 
-                if (0 !== count($errors = $this->validate(trim($code), [new Currency()]))) {
-                    $valid = false;
-                }
+            if (0 !== count($errors = $this->validate(trim($code), [new Currency()]))) {
+                $valid = false;
+            }
+
 
                 $this->writeErrors($output, $errors);
         } while (!$valid);
@@ -144,8 +145,11 @@ EOT
 
 
         $currency = $currencyFactory->createNew();
+
+        $currency->setBase(true);
         $currency->setCode($code);
         $currency->setExchangeRate(1);
+
         $this->currency = $currency;
 
         $currencyManager->persist($currency);
