@@ -1,6 +1,3 @@
-auto: auto
-route: route
-
 sylius:
     form:
         action_block:
@@ -115,4 +112,3 @@ sylius:
             publish_end_date: Publish end date
             publish_start_date: Publish start date
             publishable: Published
-            
