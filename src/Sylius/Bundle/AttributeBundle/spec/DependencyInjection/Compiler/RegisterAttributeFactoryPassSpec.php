@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\AttributeBundle\DependencyInjection\Compiler;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Attribute\Factory\AttributeFactory;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -42,6 +43,7 @@ class RegisterAttributeFactoryPassSpec extends ObjectBehavior
         $container->getDefinition('sylius.registry.attribute_type')->willReturn($attributeTypeRegistryDefinition);
 
         $container->getParameter('sylius.attribute.subjects')->willReturn(['product' => []]);
+        $container->getParameter('sylius.factory.product_attribute.class')->willReturn(AttributeFactory::class);
 
         $container->getDefinition('sylius.factory.product_attribute')->willReturn($oldAttributeFactoryDefinition);
 
