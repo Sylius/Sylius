@@ -15,6 +15,7 @@ use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceE
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Content extension.
@@ -40,5 +41,8 @@ class SyliusContentExtension extends AbstractResourceExtension
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
         }
+        
+        $imagineBlock = $container->getDefinition('sylius.form.type.imagine_block');
+        $imagineBlock->addArgument(new Reference('liip_imagine.filter.configuration'));
     }
 }
