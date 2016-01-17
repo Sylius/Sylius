@@ -17,6 +17,7 @@
 /bin/*
 !/bin/install
 !/bin/sylius-cs-fixer
+
 /vendor
 /node_modules
 

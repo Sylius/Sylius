@@ -1,0 +1,59 @@
+@import "node_modules/bootstrap/less/mixins.less";
+@import "node_modules/bootstrap/less/variables.less";
+@import "node_modules/admin-lte/build/less/mixins.less";
+@import "node_modules/admin-lte/build/less/variables.less";
+
+@sylius: #1abb9c;
+
+.skin-sylius {
+    a:link {
+        color: @sylius;
+    }
+    a:visited {
+        color: @sylius;
+    }
+    a:hover {
+        color: lighten(@sylius, 5%);
+    }
+
+    .main-header {
+        .navbar {
+            .navbar-variant(@sylius; #fff);
+            .sidebar-toggle {
+                color: #fff;
+                &:hover {
+                    background-color: darken(@sylius, 5%);
+                }
+            }
+            @media (max-width: @screen-header-collapse) {
+                .dropdown-menu {
+                    li {
+                        &.divider {
+                            background-color: rgba(255, 255, 255, 0.1);
+                        }
+                        a {
+                            color: #fff;
+                            &:hover {
+                                background: darken(@sylius, 5%);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .logo {
+            .logo-variant(darken(@sylius, 5%));
+        }
+
+        li.user-header {
+            background-color: @sylius;
+        }
+    }
+
+    .content-header {
+        background: transparent;
+    }
+
+    .skin-dark-sidebar(@sylius);
+}
