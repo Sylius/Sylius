@@ -8,5 +8,5 @@ sylius:
       code: Kód
       name: Név
       type: Típus
-  attribute_type:
-    configuration: Konfiguráció
+    attribute_type:
+      configuration: Konfiguráció

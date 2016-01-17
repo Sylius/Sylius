@@ -13,11 +13,3 @@ sylius:
         min: Volumen mínimo
         max: Volumen máximo
         price: Precio
-  pricing:
-    volume_based:
-      min: Volumen mínimo
-      max: Volumen máximo
-      price: Precio
-      no_results: No hay configuración de precios
-      button:
-        add: Añadir

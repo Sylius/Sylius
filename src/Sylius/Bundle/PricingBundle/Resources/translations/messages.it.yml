@@ -10,8 +10,3 @@ sylius:
     pricing:
       volume_based:
         price: Prezzo
-  pricing:
-    volume_based:
-      price: Prezzo
-      button:
-        add: Aggiungi

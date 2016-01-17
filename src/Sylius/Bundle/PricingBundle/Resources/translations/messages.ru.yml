@@ -13,11 +13,3 @@ sylius:
         min: Мин. часть
         max: Макс. часть
         price: Цена
-  pricing:
-    volume_based:
-      min: Мин. часть
-      max: Макс. часть
-      price: Цена
-      no_results: Нет настроенных цен
-      button:
-        add: Добавить

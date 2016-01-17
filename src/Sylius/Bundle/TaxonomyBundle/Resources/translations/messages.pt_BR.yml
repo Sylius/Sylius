@@ -10,10 +10,3 @@ sylius:
       permalink: Link Permanente
     taxonomy:
       name: Nome
-  taxon:
-    create_taxon: Criar taxas
-    delete_taxonomy: Excluir a taxonomia
-    manage_taxonomies: Gerenciar taxonomias
-    no_taxonomies: Sem taxonomias para mostrar.
-    no_taxons: Sem taxas para mostrar.
-    update_taxonomy: Atualizar taxonomia

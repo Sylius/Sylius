@@ -2,25 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    email: Email
-    register: Registrace
-    login: Přihlásit
-    logout: Odhlásit
-    logged_in_as: 'Přihlášen jako %username%'
-    reset_password: Obnovení hesla
-    reset: Obnovit
-    password:
-      reset:
-        header: Obnovení hesla
-        button: Obnovit
-    profile: Profil
-    change_password: Změnit heslo
-    account_panel_outline: Užijte si všechny funkce, které jsou dostupné ve vašem osobním prostoru k prohlížení, sledování a spravování všech vašich dat.
-    customer_since: Jste zákazníkem od
-    welcome: Vítejte
-    customer:
-      id: ID zákazníka
   form:
     group:
       name: Jméno

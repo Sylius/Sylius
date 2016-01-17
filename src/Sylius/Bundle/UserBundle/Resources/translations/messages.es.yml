@@ -2,33 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    email: Correo electrónico
-    register: Registrarse
-    login: Iniciar sesión
-    logout: Cerrar sesión
-    logged_in_as: 'Logueado como %username%'
-    no_account: ¿Sin cuenta todavía?
-    forgot_password: ¿Olvido su contraseña?
-    reset_password: Restablecer contraseña
-    reset: Restablecer
-    password:
-      reset:
-        header: Restablecer contraseña
-        button: Restablecer
-    profile: Perfil
-    change_password: Cambiar mi contraseña
-    account_panel_outline: Disfruta de todas las características disponibles en tu espacio personal para ver, seguir y gestionar toda tu información.
-    customer_since: Eres cliente desde
-    welcome: Bienvenido
-    customer:
-      id: ID del cliente
   form:
     group:
       name: Nombre
       roles: Roles
     user:
-      email: Correo electrónico
+      email: Dirección de correo electrónico
       enabled: Activado
       password:
         label: Contraseña
@@ -39,7 +18,7 @@ sylius:
       first_name: Nombre
       groups: Grupos
       last_name: Apellidos
-      email: Correo electrónico
+      email: Dirección de correo electrónico
       birthday: Fecha de nacimiento
       billing_address: Dirección de facturación
       different_billing_address: ¿Usar una dirección diferente para la facturación?

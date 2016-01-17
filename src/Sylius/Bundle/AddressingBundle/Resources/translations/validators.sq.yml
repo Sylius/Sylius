@@ -28,12 +28,6 @@ sylius:
       min_length: 'Rruga duhet të përmbajë të paktën 2 karaktere.|Rruga duhet të përmbajë të paktën {{limit}} karaktere.'
       not_blank: Shkruaj emrin e rrugës.
     not_shippable: Kjo adresë nuk është e vlefshme si destinacion dërgimi.
-  country:
-    iso_name:
-      not_blank: Shkruaj kodin ISO të vendit.
-    name:
-      max_length: 'Emri i vendit nuk duhet të përmbajë më shumë se 255 karaktere.|Emri i vendit nuk duhet të përmbajë më shumë se {{ limit }} karaktere.'
-      not_blank: Shkruaj emrin e vendit.
   province:
     name:
       max_length: 'Emri i qarkut nuk duhet të përmbajë më shumë se 255 karaktere.|Emri i qarkut nuk duhet të përmbajë më shumë se {{ limit }} karaktere.'

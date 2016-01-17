@@ -8,5 +8,5 @@ sylius:
       code: ISO kod
       name: Naziv grupe
       type: Vrsta
-  attribute_type:
-    configuration: Postavke
+    attribute_type:
+      configuration: Postavke

@@ -16,11 +16,3 @@ sylius:
   product_translation:
     short_description:
       max: 'Korte omschrijving mag niet langer zijn dan {{ limit }} tekens bevatten.'
-sylius_shipping:
-  method:
-    zone:
-      not_blank: Voer een verzendmethode zone in.
-sylius_taxation:
-  rate:
-    zone:
-      not_blank: Voer een zone voor het belastingtarief in.

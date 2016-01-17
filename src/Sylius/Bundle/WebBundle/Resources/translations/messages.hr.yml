@@ -233,7 +233,6 @@ sylius:
     create_header: Nova država
     id: ID
     index_header: Države
-    iso_name: ISO naziv
     manage: Upravljaj državama
     name: Naziv
     no_results: Nema postavljenih država.
@@ -693,7 +692,7 @@ sylius:
   unknown: Nepoznato
   customer:
     billing_address: Adresa za dostavu
-    email: Email
+    email: E-mail
     first_name: Ime
     id: ID
     last_name: Prezime
@@ -754,9 +753,20 @@ sylius:
     id: ID
     firstName: Ime
     lastName: Prezime
-    email: Email
+    email: E-mail
     message: Poruka
     topic: Tema
     updated_at: Posljednji
   ui:
+    email: E-mail
+    register: Registracija
+    login: Prijavi se
+    logout: Odjavi se
+    change_password: Promijenite lozinku
+    account_panel_outline: Uživajte u svim opcijama koje su vam dostupne.
     code: ISO kod
+  pricing:
+    volume_based:
+      price: Cijena
+      button:
+        add: Dodaj

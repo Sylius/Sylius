@@ -8,5 +8,5 @@ sylius:
       code: Kode
       name: Navn
       type: Type
-  attribute_type:
-    configuration: Konfiguration
+    attribute_type:
+      configuration: Konfiguration

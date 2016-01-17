@@ -10,7 +10,3 @@ sylius:
       permalink: Pysyvä linkki
     taxonomy:
       name: Nimi
-  taxon:
-    create_taxon: Luo taksoni
-    delete_taxonomy: Poista taksonomia
-    manage_taxonomies: Hallitse Taksonomioita

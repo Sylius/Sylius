@@ -227,6 +227,7 @@ sylius:
     route:
       index: Ścieżki
     sales: Sprzedaż
+    security_settings: Ustawienia bezpieczeństwa
     shipment:
       index: Wysyłka
     shipping_category:
@@ -272,6 +273,8 @@ sylius:
     addressing:
       header: Adres
     back: Wróć
+    credit_card:
+      header: Szczegóły płatności
     finalize:
       address:
         city: Miejscowość
@@ -297,6 +300,7 @@ sylius:
         tax_total: Podatek
         taxes: Podatki
         total: Łącznie
+        additional_information: Dodatkowe informacje
       order_item:
         quantity: Ilość
         total: Łącznie
@@ -326,7 +330,6 @@ sylius:
     create_header: Nowy kraj
     id: ID
     index_header: Kraje
-    iso_name: Kod ISO
     manage: Zarządzaj krajami
     name: Nazwa
     no_results: Żaden kraj nie został skonfigurowany.
@@ -487,6 +490,8 @@ sylius:
     create: Dodaj zamówienie
     create_header: Nowe zamówienie
     created_at: Data zamówienia
+    details: Szczegóły zamówienia
+    additional_information: Dodatkowe informacje
     general_info: Informacje ogólne
     id: ID
     index_header: Aktualne zamówienia
@@ -738,6 +743,7 @@ sylius:
     updated_at: Data aktualizacji
     usage_limit: Limit użycia
     used: Użyto
+    priority: Priorytet
     exclusive: Ekskluzywny
   promotion_action:
     configuration: Konfiguracja
@@ -759,10 +765,13 @@ sylius:
     configuration: Konfiguracja
     type: Typ
   product_attribute:
+    add_choice: Dodaj wybór
     code: Kod
     name: nazwa
+    update_header: Edytowanie atrybutu
     updated_at: ostatnia aktualizacja
   archetype:
+    create: Stwórz archetyp
     index_header: Szablony produktów
     name: nazwa
     parent: rodzic
@@ -780,6 +789,7 @@ sylius:
     description: Opis
     manage: Zarządzaj
     index_header: Raporty
+  restore: Przywróć
   save_changes: Zapisz zmiany
   search: Szukaj
   security:
@@ -880,6 +890,8 @@ sylius:
   customer:
     billing_address: Adres do rachunku
     email: Email
+    filter:
+      unconfirmed: Pokaż niepotwierdzone konta
     first_name: Imię
     id: ID
     last_name: Nazwisko
@@ -972,5 +984,18 @@ sylius:
   enable: Włącz
   disable: Wyłącz
   ui:
+    email: Email
+    register: Zarejestruj
+    login: Zaloguj
+    logout: Wyloguj
+    change_password: Zmiana hasła
+    account_panel_outline: sylius.account.home.outline
     links: Linki
     code: Kod
+  pricing:
+    volume_based:
+      min: Ilość min.
+      max: Ilość maks.
+      price: Cena
+      button:
+        add: Dodaj

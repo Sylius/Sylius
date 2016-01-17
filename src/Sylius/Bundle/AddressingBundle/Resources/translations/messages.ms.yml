@@ -18,5 +18,3 @@ sylius:
       types:
         country: Negara
         province: Wilayah
-    zone_member_country:
-      country: Negara

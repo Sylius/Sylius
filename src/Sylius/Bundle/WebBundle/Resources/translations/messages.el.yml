@@ -132,7 +132,6 @@ sylius:
     create_header: Νέα χώρα
     id: ID
     index_header: Χώρες
-    iso_name: Όνομα ISO
     manage: Διαχείριση χωρών
     name: Ονομασία
     no_results: Δεν έχει ρυθμιστεί κάποια χώρα
@@ -419,4 +418,8 @@ sylius:
     email: Ηλεκτρονικό ταχυδρομείο
     updated_at: Τροποποιήθηκε την
   ui:
+    email: Ηλεκτρονικό ταχυδρομείο
     code: Κώδικος
+  pricing:
+    volume_based:
+      price: Τιμή

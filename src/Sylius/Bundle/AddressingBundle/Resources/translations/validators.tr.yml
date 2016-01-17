@@ -28,12 +28,6 @@ sylius:
       min_length: Sokak adı en az 2 karakter uzunluğunda olmalıdır | Sokak adı en az 2 karakter uzunluğunda olmalıdır.
       not_blank: Lütfen sokak adı yazınız.
     not_shippable: Bu adres uygun bir kargo varış adresi değildir.
-  country:
-    iso_name:
-      not_blank: Lütfen ülke kodunuzu yazınız.
-    name:
-      max_length: Ülke adı 255 karakterden uzun olmamalıdır | Ülke adı 255 karakterden uzun olmamalıdır.
-      not_blank: Lütfen ülke adını yazınız.
   province:
     name:
       max_length: Şehir adı 255 karakterden uzun olmamalıdır | Şehir adı 255 karakterden uzun olmamalıdır.

@@ -28,12 +28,6 @@ sylius:
       min_length: Gatuadressen måste vara minst 2 tecken lång|Gatuadressen måste vara minst 2 tecken lång.
       not_blank: Ange gatuadress.
     not_shippable: Denna adress är inte en giltig fraktadress.
-  country:
-    iso_name:
-      not_blank: Ange landets ISOkod.
-    name:
-      max_length: Landets namn får inte vara längre än 255 tecken|Landets namn får inte vara längre än 255 tecken.
-      not_blank: Ange land.
   province:
     name:
       max_length: Länets namn får inte vara längre än 255 tecken|Länets namn får inte vara längre än 255 tecken.

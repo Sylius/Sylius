@@ -8,6 +8,3 @@ sylius:
     pricing:
       volume_based:
         price: Giá
-  pricing:
-    volume_based:
-      price: Giá

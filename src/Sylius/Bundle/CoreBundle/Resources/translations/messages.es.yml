@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  checkout:
-    shipping_method:
-      not_blank: Por favor seleccione el método de envío.
   form:
     action:
       add_product_configuration:
@@ -121,4 +118,4 @@ sylius:
         attribute: Atributo
         value: Valor
     guest:
-      email: Correo electrónico
+      email: Dirección de correo electrónico

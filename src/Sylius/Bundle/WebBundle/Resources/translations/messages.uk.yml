@@ -269,7 +269,6 @@ sylius:
     create_header: Нова країна
     id: ID
     index_header: Країни
-    iso_name: ISO код
     manage: Управління країнами
     name: Ім’я
     no_results: Немає налаштованих країн.
@@ -799,5 +798,16 @@ sylius:
     topic: Тема
     updated_at: Останнє оновлення
   ui:
+    email: Email
+    register: Зареєструватися
+    login: Логін
+    logout: Вихід
+    change_password: Змінити пароль
+    account_panel_outline: Користуйтеся всіма функціями, що доступні в вашому особистому просторі для перегляду, відстеження та керування вашими даними.
     links: Посилання
     code: Код
+  pricing:
+    volume_based:
+      price: Ціна
+      button:
+        add: Додати

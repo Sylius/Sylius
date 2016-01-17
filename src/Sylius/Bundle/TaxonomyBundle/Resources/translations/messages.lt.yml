@@ -10,10 +10,3 @@ sylius:
       permalink: Nuolatinė nuoroda
     taxonomy:
       name: Pavadinimas
-  taxon:
-    create_taxon: Sukurti taksoną
-    delete_taxonomy: Pašalinti taksonomiją
-    manage_taxonomies: Valdyti taksonomijas
-    no_taxonomies: Nėra taksonomijų.
-    no_taxons: Nėra taksonų.
-    update_taxonomy: Atnaujinti taksonomiją

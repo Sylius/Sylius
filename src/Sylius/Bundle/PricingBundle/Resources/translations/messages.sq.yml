@@ -13,11 +13,3 @@ sylius:
         min: Sasia minimale
         max: Sasia maksimale
         price: Çmimi
-  pricing:
-    volume_based:
-      min: Sasia minimale
-      max: Sasia maksimale
-      price: Çmimi
-      no_results: Asnjë konfigurim për çmimin
-      button:
-        add: Shto

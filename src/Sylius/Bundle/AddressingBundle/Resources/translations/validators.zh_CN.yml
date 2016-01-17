@@ -28,12 +28,6 @@ sylius:
       min_length: 街道名必须至少 2 个字符长。
       not_blank: 请输入街道。
     not_shippable: 此地址不是一个有效的送货目的地。
-  country:
-    iso_name:
-      not_blank: 请输入国家的 ISO 代码。
-    name:
-      max_length: 国家/地区名称不能超过 255 个字符。
-      not_blank: 请输入国家/地区名称。
   province:
     name:
       max_length: 省名不能超过 255 个字符。

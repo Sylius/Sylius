@@ -13,11 +13,3 @@ sylius:
     price:
       min: ราคาต้องไม่เป็นค่าลบ
       not_blank: กรุณาระบุราคา
-sylius_shipping:
-  method:
-    zone:
-      not_blank: กรุณาระบุวิธีจัดส่งสำหรับโซน
-sylius_taxation:
-  rate:
-    zone:
-      not_blank: กรุณาระบุอัตราภาษีสำหรับโซน

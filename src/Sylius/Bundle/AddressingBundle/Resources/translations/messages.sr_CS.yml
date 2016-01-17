@@ -14,7 +14,6 @@ sylius:
       street: Ulica
       province: Pokrajina
     country:
-      iso_name: ISO kod
       name: Ime
       provinces: Provincije
       select: Izaberite
@@ -30,10 +29,7 @@ sylius:
         province: Provincija
         zone: Zona
       scope: Adresa isporuke
+      select: Izaberite
       select_scope: Izaberite adresu isporuke
-    zone_member_country:
-      country: Zemlja
-    zone_member_province:
-      province: Provincija
-    zone_member_zone:
-      zone: Zona
+    zone_member:
+      select: Izaberite

@@ -7,5 +7,5 @@ sylius:
       code: Κώδικος
       name: Ονομασία
       type: Τύπος
-  attribute_type:
-    configuration: Παραμετροποίηση
+    attribute_type:
+      configuration: Παραμετροποίηση

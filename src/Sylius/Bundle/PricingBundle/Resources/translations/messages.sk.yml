@@ -13,11 +13,3 @@ sylius:
         min: Min. objem
         max: Max. objem
         price: Cena
-  pricing:
-    volume_based:
-      min: Min. objem
-      max: Max. objem
-      price: Cena
-      no_results: Žiadna cenová konfigurácia
-      button:
-        add: Pridať
