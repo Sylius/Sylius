@@ -12,7 +12,7 @@ To make the calculator able to calculate the price of subject, it needs to imple
 .. note::
     For more detailed information go to `Sylius API's CalculatorInterface`_.
 
-.. _Sylius API's Calculator Interface: http://api.sylius.org/Sylius/Component/Pricing/Calculator/CalculatorInterface.html
+.. _Sylius API's CalculatorInterface: http://api.sylius.org/Sylius/Component/Pricing/Calculator/CalculatorInterface.html
 
 DelegatingCalculatorInterface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
