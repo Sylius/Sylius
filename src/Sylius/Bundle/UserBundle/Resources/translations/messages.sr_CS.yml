@@ -2,10 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    register: Registracija
-    login: Prijavi se
-    logout: Odjavi se
   form:
     group:
       name: Ime

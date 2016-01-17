@@ -9,5 +9,5 @@ sylius:
       code: Codice
       name: Nome
       type: Tipo
-  attribute_type:
-    configuration: Configurazione
+    attribute_type:
+      configuration: Configurazione

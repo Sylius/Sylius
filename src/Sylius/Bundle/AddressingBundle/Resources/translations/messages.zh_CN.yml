@@ -14,7 +14,6 @@ sylius:
       street: 街道
       province: 省/直辖市/自治区
     country:
-      iso_name: ISO 名称
       name: 名称
       provinces: 省份
       select: 请选择
@@ -30,10 +29,7 @@ sylius:
         province: 省/直辖市/自治区
         zone: 区域
       scope: 范围
+      select: 请选择
       select_scope: 选择范围
-    zone_member_country:
-      country: 国家
-    zone_member_province:
-      province: 省/直辖市/自治区
-    zone_member_zone:
-      zone: 区域
+    zone_member:
+      select: 请选择

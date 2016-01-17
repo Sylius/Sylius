@@ -203,3 +203,6 @@ sylius:
     topic: Topik
   ui:
     code: Kode
+  pricing:
+    volume_based:
+      price: Harga

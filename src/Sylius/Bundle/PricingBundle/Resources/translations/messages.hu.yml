@@ -10,8 +10,3 @@ sylius:
     pricing:
       volume_based:
         price: Ár
-  pricing:
-    volume_based:
-      price: Ár
-      button:
-        add: Hozzáadás

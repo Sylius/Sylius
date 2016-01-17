@@ -16,11 +16,3 @@ sylius:
   product_translation:
     short_description:
       max: 'Stručný popis nesmie byť dlhší ako {{ limit }} znakov.'
-sylius_shipping:
-  method:
-    zone:
-      not_blank: Zadajte zónu pre spôsob doručenia.
-sylius_taxation:
-  rate:
-    zone:
-      not_blank: Zadajte zónu pre sadzby dane.

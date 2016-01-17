@@ -28,12 +28,6 @@ sylius:
       min_length: Gateadresse må inneholde minst to tegn|Gateadresse må inneholde minst to tegn.
       not_blank: Vennligst oppgi gateadresse.
     not_shippable: Denne adressen er ikke en gyldig fraktdestinasjon.
-  country:
-    iso_name:
-      not_blank: Vennligst oppgi ISO-kode.
-    name:
-      max_length: Navnet på landet kan ikke være lengre enn 255 tegn|Navnet på landet kan ikke være lengre enn 255 tegn.
-      not_blank: Vennligst oppgi navn på landet.
   province:
     name:
       max_length: Fylkesnavnet kan ikke være lengre enn 255 characters|Fylkesnavnet kan ikke være lengre enn 255 tegn.

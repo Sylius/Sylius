@@ -13,11 +13,3 @@ sylius:
         min: Mindestmenge
         max: Maximale Menge
         price: Preis
-  pricing:
-    volume_based:
-      min: Mindestmenge
-      max: Maximale Menge
-      price: Preis
-      no_results: Keine Preiskonfiguration vorhanden
-      button:
-        add: Hinzufügen

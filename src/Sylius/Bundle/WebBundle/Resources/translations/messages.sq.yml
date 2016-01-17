@@ -334,7 +334,6 @@ sylius:
     create_header: Vend i ri
     id: ID
     index_header: Vendet
-    iso_name: Emri ISO
     manage: Kontrollo vendet
     name: Emri
     no_results: Nuk ka asnjë vend të konfiguruar.
@@ -561,7 +560,6 @@ sylius:
     currency: Monedha
     immutable_warning: Porositë e nisura nuk ndryshohen dot më.
     promotion_coupons: Kuponat
-    no_promotion: 'Nuk është përdorur asnjë kupon. porosia:'
     adjustments:
       manage: Kontrollo parametrat
       type: Lloji
@@ -969,7 +967,6 @@ sylius:
     show_header: Hollësi të blerësit
     update_header: Duke afishuar blerësin
     groups: Grupet
-    no_groups: "Nuk ka asnjë grup për këtë blerës për t'u shfaqur."
   user:
     create: Krijo përdorues
     create_header: Përdorues i ri
@@ -1052,5 +1049,20 @@ sylius:
   enable: Aktivizo
   disable: Çaktivizo
   ui:
+    email: Email
+    register: Regjistrohu
+    login: Futu
+    logout: Dil
+    no_account: Ende nuk ke krijuar account?
+    forgot_password: Harrove fjalëkalimin?
+    change_password: Ndrysho fjalëkalimin
+    account_panel_outline: Shijo të gjitha vetitë që shfaqen në hapësirën tënde personale, gjurmo dhe kontrollo të gjitha të dhënat.
     links: Linket
     code: Kodi
+  pricing:
+    volume_based:
+      min: Sasia minimale
+      max: Sasia maksimale
+      price: Çmimi
+      button:
+        add: Shto

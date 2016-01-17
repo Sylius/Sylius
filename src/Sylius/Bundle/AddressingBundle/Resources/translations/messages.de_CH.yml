@@ -14,7 +14,6 @@ sylius:
       street: Strasse / Nr.
       province: Kanton
     country:
-      iso_name: ISO Name
       name: Name
       provinces: Kantone
       select: Auswählen
@@ -30,10 +29,7 @@ sylius:
         province: Kanton
         zone: Zone
       scope: Umfang
+      select: Auswählen
       select_scope: Bereich auswählen
-    zone_member_country:
-      country: Land
-    zone_member_province:
-      province: Kanton
-    zone_member_zone:
-      zone: Zone
+    zone_member:
+      select: Auswählen

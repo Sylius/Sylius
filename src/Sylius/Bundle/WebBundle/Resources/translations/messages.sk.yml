@@ -334,7 +334,6 @@ sylius:
     create_header: Nová krajina
     id: ID
     index_header: Krajiny
-    iso_name: ISO názov
     manage: Spravovať krajiny
     name: Názov
     no_results: Neexistujú žiadne nakonfigurované krajiny.
@@ -561,7 +560,6 @@ sylius:
     currency: Mena
     immutable_warning: Objednávky, ktoré boli odoslané sú nemenné.
     promotion_coupons: Kupóny
-    no_promotion: Neboli použité žiadne kupóny
     adjustments:
       manage: Spravovať úpravy
       type: Typ
@@ -969,7 +967,6 @@ sylius:
     show_header: Detail zákazníka
     update_header: Úprava zákazníka
     groups: Skupiny
-    no_groups: Tento používateľ nepatrí do žiadnych zákaznickych skupín.
   user:
     create: vytvoriť používateľa
     create_header: Nový používateľ
@@ -1052,5 +1049,20 @@ sylius:
   enable: Zapnúť
   disable: Vypnúť
   ui:
+    email: Email
+    register: Registrovať
+    login: Prihlásenie
+    logout: Odhlásiť
+    no_account: Ešte nemáte konto?
+    forgot_password: Zabudli ste heslo?
+    change_password: Zmena hesla
+    account_panel_outline: Užite si všetky funkcie, ktoré sú k dispozícií k zobrazeniu, sledovaniu a spravovaniu vašich dát na vašom osobnom priestore.
     links: Odkazy
     code: Kód
+  pricing:
+    volume_based:
+      min: Min. objem
+      max: Max. objem
+      price: Cena
+      button:
+        add: Pridať

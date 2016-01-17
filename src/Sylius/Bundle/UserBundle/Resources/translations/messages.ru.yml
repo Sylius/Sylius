@@ -2,25 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    email: Email
-    register: Регистрация
-    login: Вход
-    logout: Выход
-    logged_in_as: 'Вы вошли в систему как %username%'
-    reset_password: Сбросить пароль
-    reset: Сбросить
-    password:
-      reset:
-        header: Сбросить пароль
-        button: Сбросить
-    profile: Профиль
-    change_password: Change my password
-    account_panel_outline: Воспользуйтесь всеми возможными преимуществами для просмотра, отслеживания и управления своими заказами.
-    customer_since: Вы являетесь клиентом с
-    welcome: Добро пожаловать
-    customer:
-      id: ID клиента
   form:
     group:
       name: Название

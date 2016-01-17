@@ -334,7 +334,6 @@ sylius:
     create_header: Nouveau pays
     id: ID
     index_header: Pays
-    iso_name: Code ISO
     manage: Gérer les pays
     name: Nom
     no_results: Aucun pays configuré
@@ -561,7 +560,6 @@ sylius:
     currency: Devise
     immutable_warning: Les commandes déjà expédiés sont immuables.
     promotion_coupons: Coupons de réduction
-    no_promotion: 'Aucun coupon à été utilisé pour cette commande :'
     adjustments:
       manage: Gérer les ajustements
       type: Type
@@ -970,7 +968,6 @@ sylius:
     show_header: Informations sur le client
     update_header: Modifier client
     groups: Groupes
-    no_groups: "Il n'y a pas de groupes à afficher pour ce client."
   user:
     create: créer un utilisateur
     create_header: Nouvel utilisateur
@@ -1054,5 +1051,20 @@ sylius:
   enable: Activer
   disable: Desactiver
   ui:
+    email: E-mail
+    register: Créer un compte
+    login: Connexion
+    logout: Déconnexion
+    no_account: Pas encore de compte ?
+    forgot_password: Mot de passe oublié ?
+    change_password: Modifier votre mot de passe
+    account_panel_outline: Profitez de toutes les fonctionnalités qui sont disponibles sur votre espace personnel pour visualiser, suivre et gérer toutes vos données.
     links: Liens
     code: Code
+  pricing:
+    volume_based:
+      min: Volume minimum
+      max: Volume maximum
+      price: Prix
+      button:
+        add: Ajouter

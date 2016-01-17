@@ -318,7 +318,6 @@ sylius:
     create_header: NIeuw land toevoegen
     id: ID
     index_header: Landen
-    iso_name: ISO naam
     manage: Beheer landen
     name: Naam
     no_results: Er zijn geen landen geconfigureerd
@@ -930,7 +929,6 @@ sylius:
     show_header: Klantgegevens
     update_header: Klant bewerken
     groups: Groepen
-    no_groups: Er zijn geen groepen voor deze klant om weer te geven.
   user:
     create: Nieuwe gebruiker
     create_header: Nieuwe gebruiker toevoegen
@@ -1013,5 +1011,20 @@ sylius:
   enable: Inschakelen
   disable: Uitschakelen
   ui:
+    email: E-mail
+    register: Registreren
+    login: Inloggen
+    logout: Uitloggen
+    no_account: Nog geen account?
+    forgot_password: Wachtwoord vergeten?
+    change_password: Verander uw wachtwoord
+    account_panel_outline: Geniet van alle functies die beschikbaar zijn in uw persoonlijke ruimte om al uw gegevens te bekijken, bij te houden en te beheren.
     links: Links
     code: Code
+  pricing:
+    volume_based:
+      min: Minimum Volume
+      max: Maximum Volume
+      price: Prijs
+      button:
+        add: Toevoegen

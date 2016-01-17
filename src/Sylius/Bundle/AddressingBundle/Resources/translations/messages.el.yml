@@ -13,7 +13,6 @@ sylius:
       street: Οδός
       province: Επαρχία
     country:
-      iso_name: Όνομα ISO
       name: Ονομασία
       provinces: Επαρχίες
       select: Επιλέξτε
@@ -28,9 +27,6 @@ sylius:
         country: Χώρα
         province: Επαρχία
         zone: Ζώνη
-    zone_member_country:
-      country: Χώρα
-    zone_member_province:
-      province: Επαρχία
-    zone_member_zone:
-      zone: Ζώνη
+      select: Επιλέξτε
+    zone_member:
+      select: Επιλέξτε

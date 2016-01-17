@@ -334,7 +334,6 @@ sylius:
     create_header: Neues Land
     id: ID
     index_header: Länder
-    iso_name: ISO Name
     manage: Länder verwalten
     name: Name
     no_results: Es sind noch keine Länder konfiguriert.
@@ -560,7 +559,6 @@ sylius:
     currency: Währung
     immutable_warning: Bereits ausgelieferte Bestellungen sind unveränderlich.
     promotion_coupons: Gutscheine
-    no_promotion: Keine Gutscheine aktiv
     adjustments:
       manage: Verwalten von Anpassungen
       type: Typ
@@ -1030,5 +1028,20 @@ sylius:
     index_header: Kontaktanfragen
     updated_at: Geändert
   ui:
+    email: E-Mail
+    register: Registrieren
+    login: Anmelden
+    logout: Abmelden
+    no_account: Noch kein Account erstellt?
+    forgot_password: Passwort vergessen?
+    change_password: Passwort ändern
+    account_panel_outline: Dies ist dein persönlicher Bereich. Hier kannst du alle deine Bestellungen verfolgen, deine persönlichen Daten bearbeiten, sowie neue Adressen hinzufügen.
     links: Links
     code: Code
+  pricing:
+    volume_based:
+      min: Mindestmenge
+      max: Maximale Menge
+      price: Preis
+      button:
+        add: Hinzufügen

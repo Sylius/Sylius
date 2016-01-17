@@ -14,7 +14,6 @@ sylius:
       street: Улица
       province: Провинција
     country:
-      iso_name: ИСО код
       name: Име
       provinces: Провинције
       select: Изаберите
@@ -30,10 +29,7 @@ sylius:
         province: Провинција
         zone: Зона
       scope: Обухват
+      select: Изаберите
       select_scope: Изабери обухват
-    zone_member_country:
-      country: Земља
-    zone_member_province:
-      province: Провинција
-    zone_member_zone:
-      zone: Област
+    zone_member:
+      select: Изаберите

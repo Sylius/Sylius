@@ -5,9 +5,15 @@ sylius:
   form:
     attribute:
       add: Shto
+      add_attributes: Shto atribut
       choices: Zgjedhjet
       code: Kodi
       name: Emri
+      translations: Përkthime
       type: Lloji
-  attribute_type:
-    configuration: Konfigurimi
+    attribute_type:
+      checkbox: Checkbox
+      configuration: Konfigurimi
+      date: Data
+      datetime: Data dhe koha
+      integer: Numër i plotë

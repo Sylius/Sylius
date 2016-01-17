@@ -6,11 +6,3 @@ sylius:
     code:
       not_blank: Masukkan kode lokal.
       unique: Lokal ini sudah ada.
-sylius_shipping:
-  method:
-    zone:
-      not_blank: Masukkan zona metode pengiriman.
-sylius_taxation:
-  rate:
-    zone:
-      not_blank: Masukkan zona tarif pajak.

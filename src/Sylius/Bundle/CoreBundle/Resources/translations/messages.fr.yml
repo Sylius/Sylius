@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  checkout:
-    shipping_method:
-      not_blank: Veuillez sélectionner un mode de livraison.
   form:
     action:
       add_product_configuration:

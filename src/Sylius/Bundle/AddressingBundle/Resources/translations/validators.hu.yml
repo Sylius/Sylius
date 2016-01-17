@@ -28,12 +28,6 @@ sylius:
       min_length: Az utcanévnek legalább 2 karakter hosszúnak kell lennie.
       not_blank: Kérjük, hogy adja meg az utca nevét.
     not_shippable: Ez a cím nem egy érvényes szállítási cím.
-  country:
-    iso_name:
-      not_blank: Kérjük, írja be az ország ISO-kódját.
-    name:
-      max_length: Az ország neve nem lehet hosszabb, mint 255 karakter.
-      not_blank: Kérjük, írja be az ország nevét.
   province:
     name:
       max_length: A megye/tartomány neve nem lehet hosszabb, mint 255 karakter.

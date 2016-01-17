@@ -13,7 +13,6 @@ sylius:
       street: Straat
       province: Provinsie
     country:
-      iso_name: ISO Land kode
       name: Naam
       provinces: Provinsies
       select: Kies
@@ -29,9 +28,6 @@ sylius:
         province: Provinsie
         zone: Area
       scope: Gebied
-    zone_member_country:
-      country: Land
-    zone_member_province:
-      province: Provinsie
-    zone_member_zone:
-      zone: Area
+      select: Kies
+    zone_member:
+      select: Kies

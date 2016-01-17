@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  checkout:
-    shipping_method:
-      not_blank: 発送方法を選択してください。
   form:
     checkout:
       addressing:
@@ -65,3 +62,5 @@ sylius:
       images: 画像
       on_hand: 在庫
       price: 価格
+    guest:
+      email: メールアドレス
