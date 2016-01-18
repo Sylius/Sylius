@@ -40,7 +40,7 @@ Feature: Cart
           And I follow "T-Shirts"
          When I press "Add to cart"
          Then I should be on the cart summary page
-          And I should see "Item has been added to cart."
+          And I should see "Item has been added to cart"
 
     Scenario: Adding simple product to cart via product page
         Given I am on the store homepage
@@ -48,7 +48,7 @@ Feature: Cart
           And I click "Git T-Shirt"
          When I press "Add to cart"
          Then I should be on the cart summary page
-          And I should see "Item has been added to cart."
+          And I should see "Item has been added to cart"
 
     Scenario: Added simple products appear on the cart summary
         Given I am on the store homepage
@@ -100,7 +100,7 @@ Feature: Cart
          When I select "M" from "Size"
           And I press "Add to cart"
          Then I should be on the cart summary page
-          And I should see "Item has been added to cart."
+          And I should see "Item has been added to cart"
 
     Scenario: Adding product to cart by selecting multiple options
         Given I am on the store homepage
@@ -110,7 +110,7 @@ Feature: Cart
           And I select "Blue" from "Color"
           And I press "Add to cart"
          Then I should be on the cart summary page
-          And I should see "Item has been added to cart."
+          And I should see "Item has been added to cart"
 
     Scenario: Products added by selecting options appear on the cart summary
         Given I am on the store homepage

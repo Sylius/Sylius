@@ -22,7 +22,7 @@ Feature: Product variants
 
     Scenario: Viewing a product without options
         Given I am on the product index page
-        When I click "details" near "Sticker"
+        When I click "Sticker"
         Then I should see "There are no options for this product"
 
     Scenario: Viewing a product with options but without variants
@@ -38,12 +38,12 @@ Feature: Product variants
     Scenario: Submitting form without the price
         Given I am creating variant of "Black T-Shirt"
         When I press "Create"
-        Then I should see "Please enter the price."
+        Then I should see "Please enter the price"
 
     Scenario: Trying to create variant with existing options combination
         Given I am creating variant of "Super T-Shirt"
         When I press "Create"
-        Then I should see "Variant with this option set already exists."
+        Then I should see "Variant with this option set already exists"
 
     Scenario: Trying to create product variant with invalid price
         Given I am creating variant of "Black T-Shirt"
@@ -67,7 +67,7 @@ Feature: Product variants
         Given I am viewing product "Black T-Shirt"
         When I press "Generate variants"
         Then I should still be on the page of product with name "Black T-Shirt"
-        And I should see "Variants have been successfully generated."
+        And I should see "Variants have been successfully generated"
         And I should see 3 variants in the list
 
     Scenario: Generating only missing variants of product
@@ -77,14 +77,14 @@ Feature: Product variants
         And I press "Create"
         And I press "Generate variants"
         Then I should still be on the page of product with name "Black T-Shirt"
-        And I should see "Variants have been successfully generated."
+        And I should see "Variants have been successfully generated"
         And I should see 3 variants in the list
 
     Scenario: Generating all possible variants of product with multiple options
         Given I am viewing product "Sylius T-Shirt"
         When I press "Generate variants"
         Then I should still be on the page of product with name "Sylius T-Shirt"
-        And I should see "Variants have been successfully generated."
+        And I should see "Variants have been successfully generated"
         And I should see 9 variants in the list
 
     Scenario: Generating only missing variants of product with multiple options
@@ -95,7 +95,7 @@ Feature: Product variants
         And I press "Create"
         And I press "Generate variants"
         Then I should still be on the page of product with name "Sylius T-Shirt"
-        And I should see "Variants have been successfully generated."
+        And I should see "Variants have been successfully generated"
         And I should see 9 variants in the list
 
     Scenario: Creating a product variant by selecting option
@@ -104,7 +104,7 @@ Feature: Product variants
         And I select "L" from "Size"
         And I press "Create"
         Then I should be on the page of product "Black T-Shirt"
-        And I should see "Variant has been successfully created."
+        And I should see "Variant has been successfully created"
 
     Scenario: Creating a product variant by selecting multiple options
         Given I am creating variant of "Sylius T-Shirt"
@@ -113,22 +113,22 @@ Feature: Product variants
         And I select "Red" from "Color"
         And I press "Create"
         Then I should be on the page of product "Sylius T-Shirt"
-        And I should see "Variant has been successfully created."
+        And I should see "Variant has been successfully created"
 
     Scenario: Updating the variant price
         Given product "Black T-Shirt" is available in all variations
         And I am on the page of product "Black T-Shirt"
-        When I click "edit" near "Size: L"
+        When I click "Edit" near "Size: L"
         And I fill in "Price" with "33.99"
         And I press "Save changes"
         Then I should be on the page of product "Black T-Shirt"
-        And I should see "Variant has been successfully updated."
+        And I should see "Variant has been successfully updated"
 
     @javascript
     Scenario: Deleting product variant
         Given product "Black T-Shirt" is available in all variations
         And I am on the page of product "Black T-Shirt"
-        When I click "delete" near "Size: L"
-        And I click "delete" from the confirmation modal
+        When I click "Delete" near "Size: L"
+        And I click "Delete" from the confirmation modal
         Then I should be on the page of product "Black T-Shirt"
-        And I should see "Variant has been successfully deleted."
+        And I should see "Variant has been successfully deleted"

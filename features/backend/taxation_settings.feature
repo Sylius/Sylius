@@ -21,11 +21,11 @@ Feature: Taxation settings
         Given I am on the taxation settings page
          When I press "Save changes"
          Then I should still be on the taxation settings page
-          And I should see "Settings have been successfully updated."
+          And I should see "Settings have been successfully updated"
 
     Scenario: Editing the default tax zone
         Given I am on the taxation settings page
          When I select "USA" from "Default tax zone"
           And I press "Save changes"
          Then I should still be on the taxation settings page
-          And I should see "Settings have been successfully updated."
+          And I should see "Settings have been successfully updated"

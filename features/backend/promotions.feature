@@ -60,7 +60,7 @@ Feature: Promotions
         Given I am on the promotion creation page
          When I press "Create"
          Then I should still be on the promotion creation page
-          And I should see "Please enter promotion name."
+          And I should see "Please enter promotion name"
 
     @javascript
     Scenario: Creating new promotion with item total rule
@@ -73,7 +73,7 @@ Feature: Promotions
         And I fill in "Amount" with "5000"
         And I press "Create"
         Then I should see "Behat Training"
-        And I should see "Promotion has been successfully created."
+        And I should see "Promotion has been successfully created"
 
     @javascript
     Scenario: Creating new promotion with item count rule
@@ -86,7 +86,7 @@ Feature: Promotions
         And I fill in "Count" with "10"
         And I press "Create"
         Then I should see "Behat Training"
-        And I should see "Promotion has been successfully created."
+        And I should see "Promotion has been successfully created"
 
     @javascript
     Scenario: Creating new promotion with fixed discount action
@@ -99,7 +99,7 @@ Feature: Promotions
         And I fill in "Amount" with "100"
         And I press "Create"
         Then I should see "Behat Training"
-        And I should see "Promotion has been successfully created."
+        And I should see "Promotion has been successfully created"
 
     @javascript
     Scenario: Creating new promotion with percentage discount action
@@ -112,7 +112,7 @@ Feature: Promotions
          And I fill in "Percentage" with "10"
          And I press "Create"
          Then I should see "Sylius Training"
-         And I should see "Promotion has been successfully created."
+         And I should see "Promotion has been successfully created"
 
     Scenario: Adding coupon manually
         Given I am on the page of promotion "Press Campaign"
@@ -120,7 +120,7 @@ Feature: Promotions
          When I fill in "Code" with "SPECIAL"
           And I press "Create"
          Then I should be on the page of promotion "Press Campaign"
-          And I should see "Promotion coupon has been successfully created."
+          And I should see "Promotion coupon has been successfully created"
 
     Scenario: Added coupon appears on the list of coupons
         Given I am on the page of promotion "Press Campaign"
@@ -134,14 +134,14 @@ Feature: Promotions
         Given I am on the page of promotion "Press Campaign"
           And I follow "Add coupon"
          When I press "Create"
-         Then I should see "Please enter coupon code."
+         Then I should see "Please enter coupon code"
 
     Scenario: Coupon usage limit must be at least 1
         Given I am on the page of promotion "Press Campaign"
           And I follow "Add coupon"
           And I fill in "Usage limit" with "-2"
          When I press "Create"
-         Then I should see "Coupon usage limit must be at least 1."
+         Then I should see "Coupon usage limit must be at least 1"
 
     Scenario: Adding coupon with usage limit
         Given I am on the page of promotion "Press Campaign"
@@ -150,14 +150,14 @@ Feature: Promotions
           And I fill in "Usage limit" with "5"
           And I press "Create"
          Then I should be on the page of promotion "Press Campaign"
-          And I should see "Promotion coupon has been successfully created."
+          And I should see "Promotion coupon has been successfully created"
 
     Scenario: Generating coupons
         Given I am on the page of promotion "Press Campaign"
           And I follow "Generate coupons"
          When I fill in "Amount" with "50"
           And I press "Generate"
-         Then I should see "Promotion coupons have been successfully generated."
+         Then I should see "Promotion coupons have been successfully generated"
 
     Scenario: Generating coupons with usage limit
         Given I am on the page of promotion "Press Campaign"
@@ -165,14 +165,14 @@ Feature: Promotions
          When I fill in "Amount" with "5"
           And I fill in "Usage limit" with "5"
           And I press "Generate"
-         Then I should see "Promotion coupons have been successfully generated."
+         Then I should see "Promotion coupons have been successfully generated"
 
     Scenario: Generated coupon appears on the list of coupons
         Given I am on the page of promotion "Press Campaign"
           And I follow "Generate coupons"
           And I fill in "Amount" with "50"
           And I press "Generate"
-         Then I should see "Promotion coupons have been successfully generated."
+         Then I should see "Promotion coupons have been successfully generated"
           And I should see "Total: 55"
 
     Scenario: Amount of coupons to generate is required
@@ -180,21 +180,21 @@ Feature: Promotions
           And I follow "Generate coupons"
           And I leave "Amount" field blank
          When I press "Generate"
-         Then I should see "Please enter amount of coupons to generate."
+         Then I should see "Please enter amount of coupons to generate"
 
     Scenario: Amount of coupons to generate must be at least 1
         Given I am on the page of promotion "Press Campaign"
           And I follow "Generate coupons"
           And I fill in "Amount" with "-4"
          When I press "Generate"
-         Then I should see "Amount of coupons to generate must be at least 1."
+         Then I should see "Amount of coupons to generate must be at least 1"
 
     Scenario: Usage limit of coupons generated must be at least 1
         Given I am on the page of promotion "Press Campaign"
           And I follow "Generate coupons"
           And I fill in "Usage limit" with "-4"
          When I press "Generate"
-         Then I should see "Usage limit of generated coupons must be at least 1."
+         Then I should see "Usage limit of generated coupons must be at least 1"
 
     @javascript
     Scenario: Creating promotion with usage limit
@@ -208,7 +208,7 @@ Feature: Promotions
         And I fill in "Usage limit" with "5"
         And I press "Create"
         Then I should see "First 5 pay half!"
-        And I should see "Promotion has been successfully created."
+        And I should see "Promotion has been successfully created"
 
     Scenario: Created promotions appear in the list
         Given I am on the promotion creation page
@@ -222,12 +222,12 @@ Feature: Promotions
 
     Scenario: Accessing the promotion editing form
         Given I am on the page of promotion "New Year"
-         When I follow "edit"
+         When I follow "Edit"
          Then I should be editing promotion "New Year"
 
     Scenario: Accessing the editing form from the list
         Given I am on the promotion index page
-         When I click "edit" near "New Year"
+         When I click "Edit" near "New Year"
          Then I should be editing promotion "New Year"
 
     Scenario: Updating the promotion
@@ -238,48 +238,48 @@ Feature: Promotions
 
     Scenario: Setting promotion priorities
         Given I am on the promotion index page
-         When I press "move down"
+         When I press "Move down"
          Then I should be on the promotion index page
-          And I should see "Promotion has been successfully moved."
+          And I should see "Promotion has been successfully moved"
 
     @javascript
     Scenario: Deleting promotion with
         Given I am on the page of promotion "New Year"
-         When I press "delete"
-          And I click "delete" from the confirmation modal
+         When I press "Delete"
+          And I click "Delete" from the confirmation modal
          Then I should be on the promotion index page
-          And I should see "Promotion has been successfully deleted."
+          And I should see "Promotion has been successfully deleted"
 
     @javascript
     Scenario: Deleted promotion disappears from the list
         Given I am on the page of promotion "New Year"
-         When I press "delete"
-          And I click "delete" from the confirmation modal
+         When I press "Delete"
+          And I click "Delete" from the confirmation modal
          Then I should be on the promotion index page
           And I should not see promotion with name "New Year" in that list
 
     @javascript
     Scenario: Deleting promotion via list with
         Given I am on the promotion index page
-         When I click "delete" near "Press Campaign"
-          And I click "delete" from the confirmation modal
+         When I click "Delete" near "Press Campaign"
+          And I click "Delete" from the confirmation modal
          Then I should be on the promotion index page
-          And I should see "Promotion has been successfully deleted."
+          And I should see "Promotion has been successfully deleted"
 
     @javascript
     Scenario: Deleting promotion rule
         Given I am on the page of promotion "Christmas"
-         When I press "delete" near "Item total"
-          And I click "delete" from the confirmation modal
-         Then I should see "Promotion rule has been successfully deleted."
+         When I press "Delete" near "Item total"
+          And I click "Delete" from the confirmation modal
+         Then I should see "Promotion rule has been successfully deleted"
           And I should not see "Order total"
 
     @javascript
     Scenario: Deleting promotion action
         Given I am on the page of promotion "Christmas"
-         When I press "delete" near "Fixed discount"
-          And I click "delete" from the confirmation modal
-         Then I should see "Promotion action has been successfully deleted."
+         When I press "Delete" near "Fixed discount"
+          And I click "Delete" from the confirmation modal
+         Then I should see "Promotion action has been successfully deleted"
           And I should not see "Fixed discount"
 
     Scenario: Cannot update promotion code
@@ -292,19 +292,19 @@ Feature: Promotions
         And I fill in "Name" with "Behat Training"
         And I press "Create"
         Then I should still be on the promotion creation page
-        And I should see "The promotion with given code already exists."
+        And I should see "The promotion with given code already exists"
 
     Scenario: Submitting invalid form without code
         Given I am on the promotion creation page
         When I fill in "Name" with "Behat Training"
         And I press "Create"
         Then I should still be on the promotion creation page
-        And I should see "Please enter promotion code."
+        And I should see "Please enter promotion code"
 
     Scenario: Cannot update coupon code
         Given I am on the page of promotion "Press Campaign"
         When I follow "List coupons"
-        And I click "edit" near "XD0001"
+        And I click "Edit" near "XD0001"
         Then I should see disabled code field
 
     Scenario: Try add coupon with existing code
@@ -312,4 +312,4 @@ Feature: Promotions
         And I follow "Add coupon"
         When I fill in "Code" with "XD0001"
         And I press "Create"
-        Then I should see "This coupon already exists."
+        Then I should see "This coupon already exists"

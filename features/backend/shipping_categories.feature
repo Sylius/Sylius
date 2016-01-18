@@ -42,7 +42,7 @@ Feature: Shipping categories
         And I fill in "Code" with "SC32"
         And I press "Create"
         Then I should be on the shipping category index page
-        And I should see "Shipping category has been successfully created."
+        And I should see "Shipping category has been successfully created"
 
     Scenario: Created shipping categories appear in the list
         Given I created shipping category "Light" with code "SC3"
@@ -52,7 +52,7 @@ Feature: Shipping categories
 
     Scenario: Accessing the editing form from the list
         Given I am on the shipping category index page
-         When I click "edit" near "Heavy"
+         When I click "Edit" near "Heavy"
          Then I should be editing shipping category "Heavy"
 
     Scenario: Updating the shipping category
@@ -60,7 +60,7 @@ Feature: Shipping categories
          When I fill in "Name" with "Light"
           And I press "Save changes"
          Then I should be on the shipping category index page
-          And I should see "Shipping category has been successfully updated."
+          And I should see "Shipping category has been successfully updated"
 
     Scenario: Cannot update shipping category code
          When I am editing shipping category "Heavy"
@@ -84,8 +84,8 @@ Feature: Shipping categories
     @javascript
     Scenario: Deleting shipping category from list
         Given I am on the shipping category index page
-         When I click "delete" near "Heavy"
-          And I click "delete" from the confirmation modal
+         When I click "Delete" near "Heavy"
+          And I click "Delete" from the confirmation modal
          Then I should be on the shipping category index page
-          And I should see "Shipping category has been successfully deleted."
+          And I should see "Shipping category has been successfully deleted"
           And I should not see shipping category with name "Heavy" in that list

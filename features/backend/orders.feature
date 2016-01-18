@@ -57,42 +57,42 @@ Feature: Orders management
 
     Scenario: Accessing the order editing form
         Given I am viewing order with number "000000001"
-         When I follow "edit"
+         When I follow "Edit"
          Then I should be editing order with number "000000001"
 
     Scenario: Accessing the editing form from the list
         Given I am on the order index page
-         When I click "edit" near "#000000002"
+         When I click "Edit" near "#000000002"
          Then I should be editing order with number "000000002"
 
     @javascript
     Scenario: Deleting the order
         Given I am viewing order with number "000000001"
-         When I press "delete"
-          And I click "delete" from the confirmation modal
+         When I press "Delete"
+          And I click "Delete" from the confirmation modal
          Then I should be on the order index page
-          And I should see "Order has been successfully deleted."
+          And I should see "Order has been successfully deleted"
           And I should not see order with number "#000000001" in the list
 
     @javascript
     Scenario: Deleting the order via list
         Given I am on the order index page
-         When I press "delete" near "#000000001"
-          And I click "delete" from the confirmation modal
+         When I press "Delete" near "#000000001"
+          And I click "Delete" from the confirmation modal
          Then I should be on the order index page
-          And I should see "Order has been successfully deleted."
+          And I should see "Order has been successfully deleted"
 
     Scenario: Order integrity is preserved after deleting a product
         Given I have deleted the product "Mug"
           And I go to the order index page
-         When I click "details" near "#000000001"
+         When I click "Details" near "#000000001"
          Then I should be viewing order with number "000000001"
           And I should see "Mug"
           And I should see "Total: €14.74"
 
     Scenario: Accessing the order details page from list
         Given I am on the order index page
-         When I click "details" near "#000000001"
+         When I click "Details" near "#000000001"
          Then I should be viewing order with number "000000001"
 
     Scenario: Accessing the order details page by clicking the number
@@ -112,7 +112,7 @@ Feature: Orders management
         Given I am viewing order with number "000000002"
          Then I should see "Tax total: €10.58"
 
-    Scenario: Sorting order table by appropriate column
+    Scenario: Sorting order list by appropriate column
         Given I am on the order index page
-         When I follow "customer"
-         Then I should see table of orders sorted by lastName
+         When I follow "Customer"
+         Then I should see the orders list sorted by customers' last names

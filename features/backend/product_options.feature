@@ -35,8 +35,8 @@ Feature: Product options
         Given I am on the product option creation page
         When I press "Create"
         Then I should still be on the product option creation page
-        And I should see "Please enter option name."
-        And I should see "Please enter option presentation."
+        And I should see "Please enter option name"
+        And I should see "Please enter option presentation"
 
     Scenario: Trying to create option without at least 2 values
         Given I am on the product option creation page
@@ -45,7 +45,7 @@ Feature: Product options
         And I fill in "Presentation" with "Color"
         And I press "Create"
         Then I should still be on the product option creation page
-        And I should see "Please add at least 2 option values."
+        And I should see "Please add at least 2 option values"
 
     @javascript
     Scenario: Creating option with 4 possible values
@@ -60,7 +60,7 @@ Feature: Product options
             | OV10 | Purple |
         And I press "Create"
         Then I should be on the product option index page
-        And I should see "Option has been successfully created."
+        And I should see "Option has been successfully created"
 
     @javascript
     Scenario: Values are listed after creating the option
@@ -84,7 +84,7 @@ Feature: Product options
             | OV8 | XXL |
         And I press "Save changes"
         Then I should be on the product option index page
-        And "Option has been successfully updated." should appear on the page
+        And "Option has been successfully updated" should appear on the page
         And I should see option with value containing "XXL" in the list
 
     Scenario: Created options appear in the list
@@ -95,17 +95,17 @@ Feature: Product options
 
     Scenario: Updating the option
         Given I am on the product option index page
-        And I click "edit" near "T-Shirt color"
+        And I click "Edit" near "T-Shirt color"
         When I fill in "Internal name" with "T-Shirt sex"
         And I press "Save changes"
         Then I should be on the product option index page
-        And I should see "Option has been successfully updated."
+        And I should see "Option has been successfully updated"
 
     @javascript
     Scenario: Deleted option disappears from the list
         Given I am on the product option index page
-        When I click "delete" near "T-Shirt color"
-        And I click "delete" from the confirmation modal
+        When I click "Delete" near "T-Shirt color"
+        And I click "Delete" from the confirmation modal
         Then I should be on the product option index page
         And I should not see option with name "T-Shirt color" in that list
 
@@ -123,7 +123,7 @@ Feature: Product options
             | OV8 | White  |
         And I press "Create"
         Then I should still be on the product option creation page
-        And I should see "Please enter option code."
+        And I should see "Please enter option code"
 
     @javascript
     Scenario: Try add product option with existing code
@@ -136,7 +136,7 @@ Feature: Product options
             | OV8 | White  |
         And I press "Create"
         Then I should still be on the product option creation page
-        And I should see "The option with given code already exists."
+        And I should see "The option with given code already exists"
 
     @javascript
     Scenario: Try add product option values without code
@@ -148,7 +148,7 @@ Feature: Product options
         And I add option value "White"
         And I press "Create"
         Then I should still be on the product option creation page
-        And I should see "Please enter option value code."
+        And I should see "Please enter option value code"
 
     @javascript
     Scenario: Try add product option value with existing code
@@ -161,4 +161,4 @@ Feature: Product options
             | OV8 | White  |
         And I press "Create"
         Then I should still be on the product option creation page
-        And I should see "The option value with given code already exists."
+        And I should see "The option value with given code already exists"

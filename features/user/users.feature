@@ -56,30 +56,30 @@ Feature: Customers management
 
     Scenario: Accessing the customer details page from customers list
         Given I am on the customer index page
-         When I click "details" near "john@foo.com"
+         When I click "Details" near "john@foo.com"
          Then I should be on the page of customer with email "john@foo.com"
           And I should see 1 orders in the list
 
     Scenario: Prevent self-deletion possibility for current logged user on details page
         Given I am on the customer index page
-         When I click "details" near "sylius@example.com"
+         When I click "Details" near "sylius@example.com"
          Then I should be on the page of customer with email "sylius@example.com"
-          And I should not see "delete" button
+          And I should not see "Delete" button
 
     Scenario: Prevent self-deletion possibility for current logged customer on customer index page
         Given I am on the customer index page
-         Then I should not see "delete" button near "sylius@example.com" in "customers" table
+         Then I should not see "Delete" button near "sylius@example.com" in "customers" table
 
     Scenario: Accessing the customer creation form
         Given I am on the customer index page
-         When I follow "create customer"
+         When I follow "Create customer"
          Then I should be on the customer creation page
 
     Scenario: Submitting empty form
         Given I am on the customer creation page
          When I press "Create"
          Then I should still be on the customer creation page
-          And I should see "Please enter your first name."
+          And I should see "Please enter your first name"
 
     Scenario: Creating customer
         Given I am on the customer creation page
@@ -90,16 +90,16 @@ Feature: Customers management
             | Email      | umpirsky@gmail.com |
           And I press "Create"
          Then I should be on the page of customer with email "umpirsky@gmail.com"
-          And I should see "Customer has been successfully created."
+          And I should see "Customer has been successfully created"
 
     Scenario: Accessing the customer editing form
         Given I am on the page of customer with email "rick@foo.com"
-         When I follow "edit"
+         When I follow "Edit"
          Then I should be editing customer with email "rick@foo.com"
 
     Scenario: Accessing the editing form from the list
         Given I am on the customer index page
-         When I click "edit" near "rick@foo.com"
+         When I click "Edit" near "rick@foo.com"
          Then I should be editing customer with email "rick@foo.com"
 
     Scenario: Updating the customer
@@ -107,7 +107,7 @@ Feature: Customers management
          When I fill in "Email" with "umpirsky@gmail.com"
           And I press "Save changes"
          Then I should be on the page of customer with email "umpirsky@gmail.com"
-          And "Customer has been successfully updated." should appear on the page
+          And "Customer has been successfully updated" should appear on the page
           And "umpirsky@gmail.com" should appear on the page
 
     Scenario: Changing customer's password and logging in with new one
@@ -123,32 +123,32 @@ Feature: Customers management
         Given I deleted customer with email "rick@foo.com"
           And I am on the customer index page
           And I view deleted elements
-         When I click "details" near "rick@foo.com"
+         When I click "Details" near "rick@foo.com"
          Then I should be on the page of customer with email "rick@foo.com"
           And I should see 1 orders in the list
 
     Scenario: Deleting customer
         Given I am on the page of customer with email "rick@foo.com"
-         When I press "delete"
+         When I press "Delete"
          Then I should see "Do you want to delete this item"
-         When I press "delete"
+         When I press "Delete"
          Then I should be on the customer index page
-          And I should see "Customer has been successfully deleted."
+          And I should see "Customer has been successfully deleted"
 
     @javascript
     Scenario: Deleting customer
         Given I am on the page of customer with email "rick@foo.com"
-         When I press "delete"
-          And I click "delete" from the confirmation modal
+         When I press "Delete"
+          And I click "Delete" from the confirmation modal
          Then I should be on the customer index page
-          And I should see "Customer has been successfully deleted."
+          And I should see "Customer has been successfully deleted"
           And I should not see customer with email "rick@foo.com" in that list
 
     @javascript
     Scenario: Deleting customer from the list
         Given I am on the customer index page
-         When I click "delete" near "rick@foo.com"
-          And I click "delete" from the confirmation modal
+         When I click "Delete" near "rick@foo.com"
+          And I click "Delete" from the confirmation modal
          Then I should still be on the customer index page
-          And "Customer has been successfully deleted." should appear on the page
+          And "Customer has been successfully deleted" should appear on the page
           But I should not see customer with email "rick@foo.com" in that list

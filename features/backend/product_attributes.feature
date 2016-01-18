@@ -50,7 +50,7 @@ Feature: Product attributes
         And I fill in "Code" with "isbn"
         And I press "Create"
         Then I should be on the product attribute index page
-        And I should see "Attribute has been successfully created."
+        And I should see "Attribute has been successfully created"
         And I should see 3 attributes in the list
         And I should see attribute with name "ISBN number" in that list
 
@@ -62,7 +62,7 @@ Feature: Product attributes
             | Format | d/m/Y        |
         And I press "Create"
         Then I should be on the product attribute index page
-        And I should see "Attribute has been successfully created."
+        And I should see "Attribute has been successfully created"
         And I should see 3 attributes in the list
         And I should see attribute with name "Released at" in that list
 
@@ -75,13 +75,13 @@ Feature: Product attributes
             | Max length | 255         |
          And I press "Create"
          Then I should be on the product attribute index page
-         And I should see "Attribute has been successfully created."
+         And I should see "Attribute has been successfully created"
          And I should see 3 attributes in the list
          And I should see attribute with name "Music genre" in that list
 
     Scenario: Accessing the editing form from the list
         Given I am on the product attribute index page
-        When I click "edit" near "Book author"
+        When I click "Edit" near "Book author"
         Then I should be editing product attribute "Book author"
 
     Scenario: Updating the attribute
@@ -89,13 +89,13 @@ Feature: Product attributes
         When I fill in "Name" with "Author"
         And I press "Save changes"
         Then I should still be on the product attribute index page
-        And I should see "Attribute has been successfully updated."
+        And I should see "Attribute has been successfully updated"
 
     @javascript
     Scenario: Deleting attribute from the list
         Given I am on the product attribute index page
-        When I click "delete" near "Book author"
-        And I click "delete" from the confirmation modal
+        When I click "Delete" near "Book author"
+        And I click "Delete" from the confirmation modal
         Then I should still be on the product attribute index page
-        And I should see "Attribute has been successfully deleted."
+        And I should see "Attribute has been successfully deleted"
         And I should not see attribute with name "Book author" in that list

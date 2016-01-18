@@ -27,36 +27,36 @@ Feature: Inventory tracking
     Scenario: Seeing empty index of inventory
         Given there are no products
          When I am on the inventory index page
-         Then I should see "There are no products to display."
+         Then I should see "There are no products to display"
 
     Scenario: Updating product stock level
         Given I am editing product "Sticker"
          When I fill in "Current stock" with "10"
           And I press "Save changes"
          Then I should be on the page of product "Sticker"
-          And I should see "Product has been successfully updated."
+          And I should see "Product has been successfully updated"
 
     Scenario: Making product not available on demand
         Given I am editing product "Sticker"
          When I uncheck "Available on demand"
           And I press "Save changes"
          Then I should be on the page of product "Sticker"
-          And I should see "Product has been successfully updated."
+          And I should see "Product has been successfully updated"
 
     Scenario: Updating variant stock level
         Given product "Black T-Shirt" is available in all variations
           And I am on the page of product "Black T-Shirt"
-         When I click "edit" near "Size: L"
+         When I click "Edit" near "Size: L"
           And I fill in "Current stock" with "10"
           And I press "Save changes"
          Then I should be on the page of product "Black T-Shirt"
-          And I should see "Variant has been successfully updated."
+          And I should see "Variant has been successfully updated"
 
     Scenario: Making variant not available on demand
         Given product "Black T-Shirt" is available in all variations
           And I am on the page of product "Black T-Shirt"
-         When I click "edit" near "Size: L"
+         When I click "Edit" near "Size: L"
           And I uncheck "Available on demand"
           And I press "Save changes"
          Then I should be on the page of product "Black T-Shirt"
-          And I should see "Variant has been successfully updated."
+          And I should see "Variant has been successfully updated"

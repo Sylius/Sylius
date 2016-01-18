@@ -52,7 +52,7 @@ Feature: Product archetypes
         Given I am on the product archetype creation page
         When I press "Create"
         Then I should still be on the product archetype creation page
-        And I should see "Please enter archetype name."
+        And I should see "Please enter archetype name"
 
     Scenario: Creating Bag archetype with color as option
               and material as attribute
@@ -63,7 +63,7 @@ Feature: Product archetypes
         And I select "Bag material" from "Attributes"
         And I press "Create"
         Then I should be on the product archetype index page
-        And I should see "Archetype has been successfully created."
+        And I should see "Archetype has been successfully created"
 
     Scenario: Creating simple T-Shirt archetype with color and size
               as options but without attributes
@@ -74,7 +74,7 @@ Feature: Product archetypes
         And I additionally select "T-Shirt size" from "Options"
         And I press "Create"
         Then I should be on the product archetype index page
-        And I should see "Archetype has been successfully created."
+        And I should see "Archetype has been successfully created"
 
     @javascript
     Scenario: Creating a product by building archetype
@@ -90,7 +90,7 @@ Feature: Product archetypes
             | T-Shirt collection | Champions League '11    |
         And I press "Create"
         Then I should be on the page of product "Manchester United tee"
-        And I should see "Product has been successfully created."
+        And I should see "Product has been successfully created"
         And "T-Shirt fabric" should appear on the page
 
     Scenario: Updating the archetype
@@ -98,7 +98,7 @@ Feature: Product archetypes
         When I fill in "Name" with "Turbo T-Shirt"
         And I press "Save changes"
         Then I should be on the product archetype index page
-        And I should see "Archetype has been successfully updated."
+        And I should see "Archetype has been successfully updated"
 
     Scenario: Parent archetype choices list
         Given I am editing product archetype "T-Shirt"
@@ -114,13 +114,13 @@ Feature: Product archetypes
         And I select "Coffee caffeine" from "Attributes"
         And I press "Create"
         Then I should be on the product archetype index page
-        And I should see "Archetype has been successfully created."
+        And I should see "Archetype has been successfully created"
 
     @javascript
     Scenario: Deleted archetype disappears from the list
         Given I am on the product archetype index page
-        When I click "delete" near "T-Shirt"
-        And I click "delete" from the confirmation modal
+        When I click "Delete" near "T-Shirt"
+        And I click "Delete" from the confirmation modal
         Then I should be on the product archetype index page
         And I should see "Archetype has been successfully deleted"
         And I should not see archetype with name "T-Shirt" in the list
@@ -135,11 +135,11 @@ Feature: Product archetypes
         And I fill in "Code" with "Arch1"
         And I press "Create"
         Then I should still be on the product archetype creation page
-        And I should see "Archetype with given code already exists."
+        And I should see "Archetype with given code already exists"
 
     Scenario: Try create archetype without code
         Given I am on the product archetype creation page
         When I fill in "Name" with "Coffee"
         And I press "Create"
         Then I should still be on the product archetype creation page
-        And I should see "Please enter archetype code."
+        And I should see "Please enter archetype code"

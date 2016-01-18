@@ -400,6 +400,7 @@ default:
     extensions:
         Lakion\Behat\MinkDebugExtension:
             directory: etc/build
+            clean_start: false
         Behat\MinkExtension:
             sessions:
                 default:

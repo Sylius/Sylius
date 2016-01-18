@@ -34,7 +34,7 @@ Feature: Orm indexer event listener
             | Price       | 29.99                   |
           And I press "Create"
          Then I should be on the page of product "Index test product"
-          And I should see "Product has been successfully created."
+          And I should see "Product has been successfully created"
           And I should find an indexed entry for "Interesting description"
 
     Scenario: Updating the product description and update the index accordingly
@@ -47,7 +47,7 @@ Feature: Orm indexer event listener
 
     Scenario: Deleting product should delete the index as well
         Given I am on the page of product "Sylius Tee"
-         When I press "delete"
+         When I press "Delete"
          Then I should be on the product index page
-          And I should see "Product has been successfully deleted."
+          And I should see "Product has been successfully deleted"
           And I should not find an indexed entry for "a very nice php t-shirt"

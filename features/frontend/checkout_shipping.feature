@@ -80,7 +80,7 @@ Feature: Checkout shipping
           And I fill in the shipping address to United States
           And I press "Continue"
          When I press "Continue"
-         Then I should see "Please select shipping method."
+         Then I should see "Please select shipping method"
 
     Scenario: Shipping costs affect the order total
         Given I go to the checkout start page

@@ -626,7 +626,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
 
         $column = null;
         foreach ($rows as $key => $row) {
-            if ($row->getText() === $property) {
+            if (strtolower(trim($row->getText())) === strtolower(trim($property))) {
                 $column = $key;
                 break;
             }
@@ -646,22 +646,32 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     }
 
     /**
-     * @Then I should see table of :id sorted by lastName
+     * @Then I should see the orders list sorted by customers' last names
      */
-    public function iShouldSeeTableSortedByLastName($id)
+    public function iShouldSeeOrdersListSortedByLastName()
     {
-        $allNames = $this->getSession()->getPage()->findAll('css', '#'.$id.' > tbody > tr > td > p');
-        $allSurnames = array();
+        /** @var NodeElement[] $nameElements */
+        $nameElements = $this->getSession()->getPage()->findAll('css', '#orders > tbody > tr > td > p');
 
-        foreach ($allNames as $name) {
-            $spacePosition = strpos($name->getText(), ' ');
-            $surname = substr($name->getText(), $spacePosition + 1);
-            $allSurnames[] .= $surname;
+        $lastNames = [];
+        foreach ($nameElements as $nameElement) {
+            $lastNames[] = substr($nameElement->getText(), strrpos($nameElement->getText(), ' ') + 1);
         }
 
-        sort($allSurnames);
+        $sortedLastNames = $lastNames;
+        sort($sortedLastNames);
 
-        $this->assertSession()->elementTextContains('css', '#'.$id.' > tbody > tr > td > p', $allSurnames[0]);
+        if (array_values($sortedLastNames) === array_values($lastNames)) {
+            return;
+        }
+
+        throw new \InvalidArgumentException(sprintf(
+            'Orders should be sorted by customers\' last names.' . PHP_EOL .
+            'The customers last names were found in the following order: %s' . PHP_EOL .
+            'Expected: %s',
+            implode(', ', $lastNames),
+            implode(', ', $sortedLastNames)
+        ));
     }
 
     /**

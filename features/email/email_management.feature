@@ -36,27 +36,27 @@ Feature: Managing emails
         And I fill in "Subject" with "You get a coupon!"
         And I press "Create"
         Then I should be editing email with code "promotion_coupon"
-        And I should see "Email has been successfully created."
+        And I should see "Email has been successfully created"
 
     Scenario: Email codes have to be unique
         Given I am on the email creation page
         When I fill in "Code" with "order_confirmation"
         And I press "Create"
         Then I should still be on the email creation page
-        And I should see "Email code must be unique."
+        And I should see "Email code must be unique"
 
     Scenario: Updating the email
         Given I am on the email index page
-        And I click "edit" near "order_confirmation"
+        And I click "Edit" near "order_confirmation"
         When I fill in "Subject" with "A great purchase!"
         And I press "Save changes"
-        Then I should see "Email has been successfully updated."
+        Then I should see "Email has been successfully updated"
 
     Scenario: Deleting email from list
         Given I am on the email index page
-        When I click "delete" near "order_confirmation"
+        When I click "Delete" near "order_confirmation"
         Then I should be on the email index page
-        And I should see "Email has been successfully deleted."
+        And I should see "Email has been successfully deleted"
         And I should not see email with code "order_confirmation" in that list
 
     Scenario: Email code is required
@@ -64,7 +64,7 @@ Feature: Managing emails
         When I fill in "Subject" with "You get a coupon!"
         And I press "Create"
         Then I should still be on the email creation page
-        And I should see "Please enter email code."
+        And I should see "Please enter email code"
 
     Scenario: Cannot update email code
         When I am editing email with code "user_confirmation"
