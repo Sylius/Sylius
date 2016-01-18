@@ -703,7 +703,7 @@ class WebContext extends DefaultContext
     public function permalinkOfTaxonInTaxonomyHasBeenChangedTo($taxon, $taxonomy, $newPermalink)
     {
         $this->iAmOnTheResourcePage('taxonomy', 'name', $taxonomy);
-        $this->iClickNear('edit', $taxon);
+        $this->iClickNear('Edit', $taxon);
         $this->fillField('Permalink', $newPermalink);
         $this->pressButton('Save changes');
     }

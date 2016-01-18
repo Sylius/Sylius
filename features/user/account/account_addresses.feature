@@ -66,7 +66,7 @@ Feature: User account addresses page
     @javascript
     Scenario: Deleting an address
       Given I press "Delete" near "GERMANY"
-       When I click "delete" from the confirmation modal
+       When I click "Delete" from the confirmation modal
        Then I should see 2 addresses in the list
         And I should not see "GERMANY"
         And I should still be on my account addresses page
@@ -102,13 +102,13 @@ Feature: User account addresses page
       Given I press "Set as default billing address" near "AUSTRIA"
        Then I should not see "No default billing address"
         And I should see a "#defaultBillingAddress" element near "AUSTRIA"
-        And I should see "Your billing address has been changed."
+        And I should see "Your billing address has been changed"
 
     Scenario: Setting an address as the default shipping address
       Given I press "Set as default shipping address" near "POLAND"
        Then I should not see "No default shipping address"
         And I should see a "#defaultShippingAddress" element near "POLAND"
-        And I should see "Your shipping address has been changed."
+        And I should see "Your shipping address has been changed"
 
     Scenario: Showing only enabled countries
        When I am on my account address creation page

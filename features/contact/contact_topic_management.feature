@@ -23,7 +23,7 @@ Feature: Contact topics management
     Scenario: Seeing empty index of contact topics
         Given there are no contact topics
         When I am on the contact topic index page
-        Then I should see "There are no contact topics to display."
+        Then I should see "There are no contact topics to display"
 
     Scenario: Accessing the contact topic creation form
         Given I am on the dashboard page
@@ -35,19 +35,19 @@ Feature: Contact topics management
         Given I am on the contact topic creation page
         When I press "Create"
         Then I should still be on the contact topic creation page
-        And I should see "Please enter title."
+        And I should see "Please enter title"
 
     Scenario: Creating new contact topic
         Given I am on the contact topic creation page
         When I fill in "Title" with "Product request"
         And I press "Create"
         Then I should be on the contact topic index page
-        And I should see "Contact topic has been successfully created."
+        And I should see "Contact topic has been successfully created"
         And I should see topic with title "Product request" in the list
 
     Scenario: Accessing the contact topic edit form
         Given I am on the contact topic index page
-        When I click "edit" near "Order return"
+        When I click "Edit" near "Order return"
         Then I should be editing contact topic with title "Order return"
 
     Scenario: Updating the contact topic title
@@ -59,7 +59,7 @@ Feature: Contact topics management
 
     Scenario: Deleting a contact topic
         Given I am on the contact topic index page
-        When I press "delete" near "Delivery"
+        When I press "Delete" near "Delivery"
         Then I should still be on the contact topic index page
-        And I should see "Contact topic has been successfully deleted."
+        And I should see "Contact topic has been successfully deleted"
         And I should not see contact topic with title "Delivery" in the list

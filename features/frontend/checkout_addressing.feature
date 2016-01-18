@@ -81,4 +81,4 @@ Feature: Checkout addressing
           And I fill in guest email with "example@example.com"
           And I press "Proceed with your order"
           And I press "Continue"
-         Then I should see "Please select country."
+         Then I should see "Please select country"

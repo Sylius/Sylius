@@ -36,24 +36,24 @@ Feature: Shipments
     @javascript
     Scenario: Deleting shipment
         Given I am on the shipment page with method "DHL"
-         When I press "delete"
-          And I click "delete" from the confirmation modal
+         When I press "Delete"
+          And I click "Delete" from the confirmation modal
          Then I should be on the shipment index page
-          And I should see "Shipment has been successfully deleted."
+          And I should see "Shipment has been successfully deleted"
           And I should not see shipment with method "DHL" in that list
 
     @javascript
     Scenario: Deleting shipment from the list
         Given I am on the shipment index page
-         When I click "delete" near "DHL"
-          And I click "delete" from the confirmation modal
+         When I click "Delete" near "DHL"
+          And I click "Delete" from the confirmation modal
          Then I should still be on the shipment index page
-          And I should see "Shipment has been successfully deleted."
+          And I should see "Shipment has been successfully deleted"
           And I should not see shipment with method "DHL" in that list
 
     Scenario: Accessing shipment details page via list
         Given I am on the shipment index page
-         When I click "details" near "DHL"
+         When I click "Details" near "DHL"
          Then I should be on the shipment page with method "DHL"
 
     Scenario: Displaying the shipment state on details page

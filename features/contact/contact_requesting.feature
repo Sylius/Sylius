@@ -17,7 +17,7 @@ Feature: Contact requesting
         Given I am on the contact page
         When I press "Send"
         Then I should still be on the contact page
-        And I should see "Please enter first name."
+        And I should see "Please enter first name"
 
     Scenario: Submitting contact form
         Given I am on the contact page
@@ -28,4 +28,4 @@ Feature: Contact requesting
         And I select "Delivery" from "Topic"
         And I press "Send"
         Then I should be on the contact page
-        And I should see "Contact has been successfully sent."
+        And I should see "Contact has been successfully sent"

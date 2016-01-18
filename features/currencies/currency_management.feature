@@ -24,7 +24,7 @@ Feature: Currency management
     Scenario: Seeing empty index of currencies
         Given there are no currencies
         When I am on the currency index page
-        Then I should see "There are no currencies to display."
+        Then I should see "There are no currencies to display"
 
     Scenario: Accessing the currency creation form
         Given I am on the dashboard page
@@ -36,7 +36,7 @@ Feature: Currency management
         Given I am on the currency creation page
         When I press "Create"
         Then I should still be on the currency creation page
-        And I should see "Please enter exchange rate."
+        And I should see "Please enter exchange rate"
 
     Scenario: Creating new currency
         Given I am on the currency creation page
@@ -44,11 +44,11 @@ Feature: Currency management
         And I fill in "Exchange rate" with "0.235654"
         And I press "Create"
         Then I should be on the currency index page
-        And I should see "currency has been successfully created."
+        And I should see "currency has been successfully created"
 
     Scenario: Accessing the currency edit form
         Given I am on the currency index page
-        When I click "edit" near "US Dollar"
+        When I click "Edit" near "US Dollar"
         Then I should be editing currency with code "USD"
 
     Scenario: Updating the currency exchange rate
@@ -82,4 +82,4 @@ Feature: Currency management
         And I fill in "Exchange rate" with "0.235654"
         And I press "Create"
         Then I should still be on the currency creation page
-        And I should see "Currency code must be unique."
+        And I should see "Currency code must be unique"

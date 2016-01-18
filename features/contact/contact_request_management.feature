@@ -27,7 +27,7 @@ Feature: Contact requests management
     Scenario: Seeing empty index of contact requests
         Given there are no contact requests
         When I am on the contact request index page
-        Then I should see "There are no contact requests to display."
+        Then I should see "There are no contact requests to display"
 
     Scenario: Accessing the contact request creation form
         Given I am on the dashboard page
@@ -39,7 +39,7 @@ Feature: Contact requests management
         Given I am on the contact request creation page
         When I press "Create"
         Then I should still be on the contact request creation page
-        And I should see "Please enter first name."
+        And I should see "Please enter first name"
 
     Scenario: Creating new contact request
         Given I am on the contact request creation page
@@ -50,12 +50,12 @@ Feature: Contact requests management
         And I fill in "Message" with "Example message"
         And I press "Create"
         Then I should be on the contact request index page
-        And I should see "Contact request has been successfully created."
+        And I should see "Contact request has been successfully created"
         And I should see contact request with email "john@example.com" in the list
 
     Scenario: Accessing the contact request edit form
         Given I am on the contact request index page
-        When I click "edit" near "john@doe.com"
+        When I click "Edit" near "john@doe.com"
         Then I should be editing contact request with email "john@doe.com"
 
     Scenario: Updating the contact request
@@ -67,7 +67,7 @@ Feature: Contact requests management
 
     Scenario: Deleting a contact request
         Given I am on the contact request index page
-        When I press "delete" near "john@doe.com"
+        When I press "Delete" near "john@doe.com"
         Then I should still be on the contact request index page
-        And I should see "Contact request has been successfully deleted."
+        And I should see "Contact request has been successfully deleted"
         And I should not see contact request with email "jonh@doe.com" in the list

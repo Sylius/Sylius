@@ -48,7 +48,7 @@ Feature: User account orders page
 
   Scenario: Viewing the detail of an order
     Given I am on my account orders page
-     When I click "details" near "000000001"
+     When I click "Details" near "000000001"
      Then I should see "Details of your order"
       And I should be on the order show page for 000000001
       And I should see 2 items in the list

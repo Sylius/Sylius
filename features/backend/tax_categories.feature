@@ -41,7 +41,7 @@ Feature: Tax categories
         And I fill in "Name" with "Taxable goods"
         And I press "Create"
         Then I should be on the tax category index page
-        And I should see "Tax category has been successfully created."
+        And I should see "Tax category has been successfully created"
 
     Scenario: Created tax categories appear in the list
         Given I created tax category "Food" with code "TC3"
@@ -51,7 +51,7 @@ Feature: Tax categories
 
     Scenario: Accessing the editing form from the list
         Given I am on the tax category index page
-         When I click "edit" near "Clothing"
+         When I click "Edit" near "Clothing"
          Then I should be editing tax category "Clothing"
 
     Scenario: Updating the tax category
@@ -59,21 +59,21 @@ Feature: Tax categories
          When I fill in "Name" with "Clothing & Accessories"
           And I press "Save changes"
          Then I should be on the tax category index page
-          And I should see "Tax category has been successfully updated."
+          And I should see "Tax category has been successfully updated"
 
     @javascript
     Scenario: Deleting tax category
         Given I am on the tax category index page
-         When I click "delete" near "Clothing"
-          And I click "delete" from the confirmation modal
+         When I click "Delete" near "Clothing"
+          And I click "Delete" from the confirmation modal
          Then I should be on the tax category index page
-          And I should see "Tax category has been successfully deleted."
+          And I should see "Tax category has been successfully deleted"
 
     @javascript
     Scenario: Deleted tax category disappears from the list
         Given I am on the tax category index page
-         When I click "delete" near "Clothing"
-          And I click "delete" from the confirmation modal
+         When I click "Delete" near "Clothing"
+          And I click "Delete" from the confirmation modal
          Then I should be on the tax category index page
           And I should not see tax category with name "Clothing" in that list
 
@@ -94,4 +94,4 @@ Feature: Tax categories
         When I fill in "Name" with "Computers"
         And I press "Create"
         Then I should still be on the tax category creation page
-        And I should see "Please enter tax category code."
+        And I should see "Please enter tax category code"

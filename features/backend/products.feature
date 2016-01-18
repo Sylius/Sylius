@@ -58,9 +58,9 @@ Feature: Products
         And I follow "Create product"
         When I press "Create"
         Then I should still be on the product creation page
-        And I should see "Please enter product name."
-        And I should see "Please enter product description."
-        And I should see "Please enter the price."
+        And I should see "Please enter product name"
+        And I should see "Please enter product description"
+        And I should see "Please enter the price"
 
     Scenario: Trying to create a product with invalid price
         Given I am on the product creation page
@@ -68,7 +68,7 @@ Feature: Products
         And I fill in "Price" with "-0.01"
         And I press "Create"
         Then I should still be on the product creation page
-        And I should see "Price must not be negative."
+        And I should see "Price must not be negative"
 
     Scenario: Creating simple product without any attributes and options
         Given I am on the product creation page
@@ -78,7 +78,7 @@ Feature: Products
             | Price       | 29.99                   |
         And I press "Create"
         Then I should be on the page of product "Book about Everything"
-        And I should see "Product has been successfully created."
+        And I should see "Product has been successfully created"
 
     Scenario: Prices are saved correctly
         Given I am on the product creation page
@@ -88,7 +88,7 @@ Feature: Products
             | Price       | 4.10                    |
         And I press "Create"
         Then I should be on the page of product "Book about Everything"
-        And I should see "Product has been successfully created."
+        And I should see "Product has been successfully created"
         And I should see "4.10"
 
     Scenario: Creating product with options
@@ -100,7 +100,7 @@ Feature: Products
         And I select "T-Shirt size" from "Options"
         And I press "Create"
         Then I should be on the page of product "Manchester United tee"
-        And "Product has been successfully created." should appear on the page
+        And "Product has been successfully created" should appear on the page
         And I should see "T-Shirt size"
 
     @javascript
@@ -115,7 +115,7 @@ Feature: Products
         And I fill in "T-Shirt fabric" with "Polyester"
         When I press "Create"
         Then I should be on the page of product "Manchester United tee"
-        And "Product has been successfully created." should appear on the page
+        And "Product has been successfully created" should appear on the page
 
     @javascript
     Scenario: Creating product with checkbox attribute
@@ -129,7 +129,7 @@ Feature: Products
         And I check "T-Shirt fare trade"
         When I press "Create"
         Then I should be on the page of product "Manchester United tee"
-        And "Product has been successfully created." should appear on the page
+        And "Product has been successfully created" should appear on the page
 
     @javascript
     Scenario: Creating product with multiple attributes
@@ -146,7 +146,7 @@ Feature: Products
         And I check "T-Shirt fare trade"
         When I press "Create"
         Then I should be on the page of product "FC Barcelona tee"
-        And "Product has been successfully created." should appear on the page
+        And "Product has been successfully created" should appear on the page
         And I should see "T-Shirt fabric"
         And I should see "T-Shirt fare trade"
 
@@ -163,7 +163,7 @@ Feature: Products
         When I press "Create"
         Then I should still be on the product creation page
         When I go to "Attributes" tab
-        And I should see "This value is too short. It should have 2 characters or more."
+        And I should see "This value is too short. It should have 2 characters or more"
 
     Scenario: Created products appear in the list
         Given I am on the product creation page
@@ -178,7 +178,7 @@ Feature: Products
 
     Scenario: Accessing the editing form from the list
         Given I am on the product index page
-        When I click "edit" near "Mug"
+        When I click "Edit" near "Mug"
         Then I should be editing product "Mug"
 
     Scenario: Updating the product data
@@ -187,7 +187,7 @@ Feature: Products
         And I fill in "Description" with "This sticker is awesome"
         And I press "Save changes"
         Then I should be on the page of product "Big Sticker"
-        And I should see "Product has been successfully updated."
+        And I should see "Product has been successfully updated"
 
     @javascript
     Scenario: Modifying product attributes
@@ -206,7 +206,7 @@ Feature: Products
         When I select "Print" from "Tax category"
         And I press "Save changes"
         Then I should be on the page of product "Sticker"
-        And I should see "Product has been successfully updated."
+        And I should see "Product has been successfully updated"
         And "Print" should appear on the page
 
     @javascript
@@ -218,16 +218,16 @@ Feature: Products
         And I additionally select "New" from "Special"
         And I press "Save changes"
         Then I should be on the page of product "Black T-Shirt"
-        And I should see "Product has been successfully updated."
+        And I should see "Product has been successfully updated"
         And "Featured" should appear on the page
 
     @javascript
     Scenario: Deleting product
         Given I am on the page of product "Mug"
-        When I press "delete"
-        And I click "delete" from the confirmation modal
+        When I press "Delete"
+        And I click "Delete" from the confirmation modal
         Then I should be on the product index page
-        And I should see "Product has been successfully deleted."
+        And I should see "Product has been successfully deleted"
         And I should not see product with name "Mug" in that list
 
     Scenario: Accessing the product details page from list
@@ -246,7 +246,7 @@ Feature: Products
         And I select "New" from "Main taxon"
         And I press "Create"
         Then I should be on the page of product "The best T-shirt"
-        And "Product has been successfully created." should appear on the page
+        And "Product has been successfully created" should appear on the page
         And "New" should appear on the page
 
     @javascript
@@ -256,16 +256,16 @@ Feature: Products
         When I select "New" from "Main taxon"
         And I press "Save changes"
         Then I should be on the page of product "Black T-Shirt"
-        And I should see "Product has been successfully updated."
+        And I should see "Product has been successfully updated"
         And "New" should appear on the page
 
     @javascript
     Scenario: Deleting product with main taxon
         Given I am on the page of product "Sticker"
-        When I press "delete"
-        And I click "delete" from the confirmation modal
+        When I press "Delete"
+        And I click "Delete" from the confirmation modal
         Then I should be on the product index page
-        And I should see "Product has been successfully deleted."
+        And I should see "Product has been successfully deleted"
         And I should not see product with name "Sticker" in that list
 
     Scenario: Enabling product
@@ -273,11 +273,11 @@ Feature: Products
         And I am on the page of product "Mug"
         When I press "Enable"
         Then I should be on the product index page
-        And I should see "Product has been successfully enabled."
+        And I should see "Product has been successfully enabled"
 
     Scenario: Disabling product
         Given There is enabled product named "Mug"
         And I am on the page of product "Mug"
         When I press "Disable"
         Then I should be on the product index page
-        And I should see "Product has been successfully disabled."
+        And I should see "Product has been successfully disabled"

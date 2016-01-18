@@ -34,4 +34,4 @@ Feature: Browsing products by taxonomies
         Given I am on the taxonomy index page
         And I follow "Special"
         When I click "Browse products" near "Featured"
-        Then I should see "There are no products to display."
+        Then I should see "There are no products to display"

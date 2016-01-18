@@ -47,7 +47,7 @@ Feature: taxonomies
           And I fill in "Code" with "RTX3"
           And I press "Create"
          Then I should be on the page of taxonomy "Vendor"
-          And I should see "Taxonomy has been successfully created."
+          And I should see "Taxonomy has been successfully created"
 
     Scenario: Created taxonomies appear in the list
         Given I created taxonomy "Food" with code "RTX4"
@@ -57,7 +57,7 @@ Feature: taxonomies
 
     Scenario: Accessing the editing form from the list
         Given I am on the taxonomy index page
-         When I click "edit" near "Category"
+         When I click "Edit" near "Category"
          Then I should be editing taxonomy "Category"
 
     Scenario: Updating the taxonomy
@@ -65,21 +65,21 @@ Feature: taxonomies
          When I fill in "Name" with "Brands"
           And I press "Save changes"
          Then I should be on the page of taxonomy "Brands"
-          And I should see "Taxonomy has been successfully updated."
+          And I should see "Taxonomy has been successfully updated"
 
     @javascript
     Scenario: Deleting taxonomy
         Given I am on the taxonomy index page
-         When I click "delete" near "Brand"
-          And I click "delete" from the confirmation modal
+         When I click "Delete" near "Brand"
+          And I click "Delete" from the confirmation modal
          Then I should be on the taxonomy index page
-          And I should see "Taxonomy has been successfully deleted."
+          And I should see "Taxonomy has been successfully deleted"
 
     @javascript
     Scenario: Deleted taxonomy disappears from the list
         Given I am on the taxonomy index page
-         When I click "delete" near "Category"
-          And I click "delete" from the confirmation modal
+         When I click "Delete" near "Category"
+          And I click "Delete" from the confirmation modal
          Then I should be on the taxonomy index page
           And I should not see taxonomy with name "Category" in that list
 
@@ -101,14 +101,14 @@ Feature: taxonomies
           And I fill in "Code" with "TX9"
           And I press "Create"
          Then I should be on the page of taxonomy "Category"
-          And I should see "Taxon has been successfully created."
+          And I should see "Taxon has been successfully created"
 #    TODO
 #    Scenario: Creating new taxon with existing name under given taxonomy
 #        Given I am on the page of taxonomy "Category"
 #          And I follow "Create taxon"
 #         When I fill in "Name" with "Electronics"
 #          And I press "Create"
-#          And I should see "Name already in use in the parent taxon."
+#          And I should see "Name already in use in the parent taxon"
 
     Scenario: Creating new taxon with existing name under different taxon
         Given I am on the page of taxonomy "Category"
@@ -118,7 +118,7 @@ Feature: taxonomies
         And   I select "Clothing" from "Parent"
         And   I press "Create"
         Then  I should be on the page of taxonomy "Category"
-        And   I should see "Taxon has been successfully created."
+        And   I should see "Taxon has been successfully created"
         And   I should see 9 taxons in the list
 
     Scenario: Creating new taxon with parent
@@ -129,43 +129,43 @@ Feature: taxonomies
           And I select "Electronics" from "Parent"
           And I press "Create"
          Then I should be on the page of taxonomy "Category"
-          And I should see "Taxon has been successfully created."
+          And I should see "Taxon has been successfully created"
 
     Scenario: Renaming the taxon
         Given I am on the page of taxonomy "Category"
-          And I click "edit" near "Clothing"
+          And I click "Edit" near "Clothing"
          When I fill in "Name" with "Clothing and accessories"
           And I press "Save changes"
          Then I should be on the page of taxonomy "Category"
-          And I should see "Taxon has been successfully updated."
+          And I should see "Taxon has been successfully updated"
 
     Scenario: Changing taxon slug
         Given permalink of taxon "Clothing" in "Category" taxonomy has been changed to "super-clothing"
           And I am on the page of taxonomy "Category"
-         When I click "edit" near "Clothing"
+         When I click "Edit" near "Clothing"
          Then I should see "category/super-clothing" in "Permalink" field
 
     Scenario: Changing taxon slug with parent slug prefix
         Given permalink of taxon "Clothing" in "Category" taxonomy has been changed to "category/super-clothing-category/best"
           And I am on the page of taxonomy "Category"
-         When I click "edit" near "Clothing"
+         When I click "Edit" near "Clothing"
          Then I should see "category/super-clothing-category-best" in "Permalink" field
 
     @javascript
     Scenario: Deleting taxons
         Given I am on the page of taxonomy "Category"
-         When I click "delete" near "Electronics"
-          And I click "delete" from the confirmation modal
+         When I click "Delete" near "Electronics"
+          And I click "Delete" from the confirmation modal
          Then I should still be on the page of taxonomy "Category"
-          And I should see "Taxon has been successfully deleted."
+          And I should see "Taxon has been successfully deleted"
 
     @javascript
     Scenario: Deleted taxons disappear from the list
         Given I am on the page of taxonomy "Category"
-         When I click "delete" near "Clothing"
-          And I click "delete" from the confirmation modal
+         When I click "Delete" near "Clothing"
+          And I click "Delete" from the confirmation modal
          Then I should still be on the page of taxonomy "Category"
-          And "Taxon has been successfully deleted." should appear on the page
+          And "Taxon has been successfully deleted" should appear on the page
           And I should see 5 taxons in the list
 
     Scenario: Cannot update taxon code
@@ -179,7 +179,7 @@ Feature: taxonomies
         And I fill in "Code" with "TX1"
         And I press "Create"
         Then I should still be on the taxon creation page from taxonomy "Category"
-        And I should see "Taxon with given code already exists."
+        And I should see "Taxon with given code already exists"
 
     Scenario: Try create taxon without code
         Given I am on the page of taxonomy "Category"
@@ -187,4 +187,4 @@ Feature: taxonomies
         When I fill in "Name" with "Cars"
         And I press "Create"
         Then I should still be on the taxon creation page from taxonomy "Category"
-        And I should see "Please enter taxon code."
+        And I should see "Please enter taxon code"

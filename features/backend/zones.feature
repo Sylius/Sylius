@@ -36,8 +36,8 @@ Feature: Zones
         Given I am on the zone creation page for type "country"
          When I press "Create"
          Then I should still be on the zone creation page for type "country"
-          And I should see "Please enter zone name."
-          And I should see "Please enter zone code."
+          And I should see "Please enter zone name"
+          And I should see "Please enter zone code"
 
     Scenario: Creating new zone requires adding at least 1 member
         Given I am on the zone creation page for type "country"
@@ -45,7 +45,7 @@ Feature: Zones
           And I fill in "Code" with "EU"
          When I press "Create"
          Then I should still be on the zone creation page for type "country"
-          And I should see "Please add at least 1 zone member."
+          And I should see "Please add at least 1 zone member"
 
     @javascript
     Scenario: Creating new zone built from countries
@@ -57,7 +57,7 @@ Feature: Zones
           And I add zone member "Germany"
          When I press "Create"
          Then I should be on the page of zone "European Union"
-          And I should see "Zone has been successfully created."
+          And I should see "Zone has been successfully created"
           And "EE" should appear on the page
           And "DE" should appear on the page
           And "shipping" should appear on the page
@@ -70,12 +70,12 @@ Feature: Zones
 
     Scenario: Accessing the zone edit form
         Given I am on the page of zone "USA GMT-8"
-         When I follow "edit"
+         When I follow "Edit"
          Then I should be editing zone "USA GMT-8"
 
     Scenario: Accessing the editing form from list
         Given I am on the zone index page
-         When I click "edit" near "USA GMT-8"
+         When I click "Edit" near "USA GMT-8"
          Then I should be editing zone "USA GMT-8"
 
     @javascript
@@ -85,7 +85,7 @@ Feature: Zones
           And I remove the first province
           And I press "Save changes"
          Then I should be on the page of zone "USA GMT-9"
-          And I should see "Zone has been successfully updated."
+          And I should see "Zone has been successfully updated"
           And "California" should not appear on the page
 
     Scenario: Cannot edit zone code
@@ -97,7 +97,7 @@ Feature: Zones
          When I fill in "Name" with "USA GMT-9"
           And I press "Save changes"
          Then I should be on the page of zone "USA GMT-9"
-          And I should see "Zone has been successfully updated."
+          And I should see "Zone has been successfully updated"
           But I should not see zone with name "USA GMT-8" in the list
 
     @javascript
@@ -107,23 +107,23 @@ Feature: Zones
          When I add zone member "Poland"
           And I press "Save changes"
          Then I should be on the page of zone "Baltic states"
-          And I should see "Zone has been successfully updated."
+          And I should see "Zone has been successfully updated"
           And "PL" should appear on the page
 
     @javascript
     Scenario: Deleting zone
         Given I am on the page of zone "Germany"
-         When I press "delete"
-          And I click "delete" from the confirmation modal
+         When I press "Delete"
+          And I click "Delete" from the confirmation modal
          Then I should be on the zone index page
-          And I should see "Zone has been successfully deleted."
+          And I should see "Zone has been successfully deleted"
           And I should not see zone with name "Germany" in that list
 
     @javascript
     Scenario: Deleting zone from list
         Given I am on the zone index page
-         When I click "delete" near "USA GMT-8"
-          And I click "delete" from the confirmation modal
+         When I click "Delete" near "USA GMT-8"
+          And I click "Delete" from the confirmation modal
          Then I should still be on the zone index page
-          And I should see "Zone has been successfully deleted."
+          And I should see "Zone has been successfully deleted"
           And I should not see zone with name "USA GMT-8" in that list

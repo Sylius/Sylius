@@ -60,27 +60,27 @@ Feature: Roles management
         And I select "Administrator" from "Parent"
         And I press "Create"
         Then I should be on the role index page
-        And I should see "Role has been successfully created."
+        And I should see "Role has been successfully created"
         And I should see 4 roles in the list
         And I should see role with name "Salesman" in that list
 
     Scenario: Cannot edit the parent of root node
         Given I am on the role index page
-        When I click "edit" near "root"
+        When I click "Edit" near "root"
         Then I should not see "Parent"
 
     Scenario: Updating the role
         Given I am on the role index page
-        And I click "edit" near "sylius.catalog_manager"
+        And I click "Edit" near "sylius.catalog_manager"
         When I fill in "Description" with "Manage products catalog"
         And I press "Save changes"
         Then I should be on the role index page
-        And I should see "Role has been successfully updated."
+        And I should see "Role has been successfully updated"
         And I should see "Manage products catalog"
 
     Scenario: Deleting role
         Given I am on the role index page
-        When I click "delete" near "sylius.catalog_manager"
+        When I click "Delete" near "sylius.catalog_manager"
         Then I should be on the role index page
-        And I should see "Role has been successfully deleted."
+        And I should see "Role has been successfully deleted"
         And I should not see role with name "Catalog Manager" in the list

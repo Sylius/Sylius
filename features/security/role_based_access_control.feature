@@ -67,7 +67,7 @@ Feature: Hierarchical Role based access control (HRBAC)
       | Price       | 29.99                   |
     And I press "Create"
     Then I should be on the page of product "Book about Everything"
-    And I should see "Product has been successfully created."
+    And I should see "Product has been successfully created"
 
   Scenario: Sales Manager cannot create products
     Given I am logged in as "Sales Manager"

@@ -56,28 +56,28 @@ Feature: Permissions management
         And I select "Manage products catalog" from "Parent"
         And I press "Create"
         Then I should be on the permission index page
-        And I should see "Permission has been successfully created."
+        And I should see "Permission has been successfully created"
         And I should see 13 permissions in the list
         And I should see permission with code containing "sylius.product.display_sales_stats" in that list
 
     Scenario: Cannot edit the parent of root node
         Given I am on the permission index page
-        When I click "edit" near "root"
+        When I click "Edit" near "root"
         Then I should not see "Parent"
 
     Scenario: Updating the permission
         Given I am on the permission index page
-        And I click "edit" near "sylius.product.index"
+        And I click "Edit" near "sylius.product.index"
         When I fill in "Description" with "Browse all product lists"
         And I press "Save changes"
         Then I should be on the permission index page
-        And I should see "Permission has been successfully updated."
+        And I should see "Permission has been successfully updated"
         And I should see "Browse all product lists"
         But I should not see "List all products"
 
     Scenario: Deleting permission
         Given I am on the permission index page
-        When I click "delete" near "Edit product"
+        When I click "Delete" near "Edit product"
         Then I should be on the permission index page
-        And I should see "Permission has been successfully deleted."
+        And I should see "Permission has been successfully deleted"
         And I should not see permission with code containing "sylius.product.edit" in the list

@@ -30,7 +30,7 @@ Feature: Reports
             | Description | Lorem ipsum dolor |
           And I press "Create"
          Then I should be on the page of report "Report1"
-          And I should see "Report has been successfully created."
+          And I should see "Report has been successfully created"
           And I should see 1 result in the list
 
     Scenario: Adding new report with custom end date option
@@ -45,7 +45,7 @@ Feature: Reports
           And I select "3" from "sylius_report_dataFetcherConfiguration_end_day"
           And I press "Create"
          Then I should be on the page of report "Report2"
-          And I should see "Report has been successfully created."
+          And I should see "Report has been successfully created"
           And I should see 2 results in the list
 
     Scenario: Adding new report with some custom options
@@ -61,7 +61,7 @@ Feature: Reports
           And I select "month" from "Time period"
           And I press "Create" 
          Then I should be on the page of report "Report3"
-          And I should see "Report has been successfully created."
+          And I should see "Report has been successfully created"
           And I should see 1 results in the list
 
     Scenario: Prevent adding new report with the same code that has been used before
@@ -72,7 +72,7 @@ Feature: Reports
             | Description | Lorem ipsum dolor |
           And I press "Create"
          Then I should still be on the report creation page
-          And I should see "This code is already in use."
+          And I should see "This code is already in use"
 
     Scenario: Prevent adding new report with multiple-word code
         Given I am on the report creation page
@@ -82,27 +82,27 @@ Feature: Reports
             | Description | Lorem ipsum dolor |
           And I press "Create"
          Then I should still be on the report creation page
-          And I should see "Report code should be a single word."
+          And I should see "Report code should be a single word"
 
     Scenario: Accessing report details page from list
         Given I am on the report index page
-         When I press "details" near "TableReport"
+         When I press "Details" near "TableReport"
          Then I should be on the page of report "TableReport"
   
     Scenario: Accessing report edit form from list
         Given I am on the report index page
-         When I press "edit" near "TableReport"
+         When I press "Edit" near "TableReport"
          Then I should be editing report with name "TableReport"
 
     Scenario: Accessing report with chart renderer details page
         Given I am on the report index page
-         When I press "details" near "BarChartReport"
+         When I press "Details" near "BarChartReport"
          Then I should be on the page of report "BarChartReport"
           And "canvas" should appear on the page
 
     Scenario: Accessing report edit form from details page
         Given I am on the page of report "TableReport"
-         When I click "edit"
+         When I click "Edit"
          Then I should be editing report with name "TableReport"
 
     Scenario: Updating the report
@@ -110,22 +110,22 @@ Feature: Reports
          When I fill in "Name" with "TableReportEdited"
           And I fill in "Description" with "Lorem ipsum dolor"
           And I press "Save changes"
-         Then I should see "Report has been successfully updated."
+         Then I should see "Report has been successfully updated"
           And "reportEdited" should appear on the page
           And "Lorem ipsum dolor" should appear on the page
 
     Scenario: Deleting report from index page
         Given I am on the report index page
-         When I press "delete" near "TableReport"
+         When I press "Delete" near "TableReport"
          Then I should be on the report index page
-          And I should see "Report has been successfully deleted."
+          And I should see "Report has been successfully deleted"
           And I should not see report with name "TableReport" in that list
 
     Scenario: Deleting report from details page
         Given I am on the page of report "TableReport"
-         When I press "delete"
+         When I press "Delete"
          Then I should be on the report index page
-          And I should see "Report has been successfully deleted."
+          And I should see "Report has been successfully deleted"
           And I should not see report with name "TableReport" in that list
 
     Scenario: Cannot update report code
@@ -139,4 +139,4 @@ Feature: Reports
            | Description | Lorem ipsum dolor |
         And I press "Create"
         Then I should still be on the report creation page
-        And I should see "Report code cannot be blank."
+        And I should see "Report code cannot be blank"

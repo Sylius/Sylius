@@ -26,13 +26,13 @@ Feature: General settings
          When I fill in "Page title" with ""
           And I press "Save changes"
          Then I should still be on the general settings page
-          And I should see "This value should not be blank."
+          And I should see "This value should not be blank"
 
     Scenario: Saving the configuration
         Given I am on the general settings page
          When I press "Save changes"
          Then I should still be on the general settings page
-          And I should see "Settings have been successfully updated."
+          And I should see "Settings have been successfully updated"
 
     Scenario: Editing the page title
         Given I am on the general settings page
@@ -40,7 +40,7 @@ Feature: General settings
           And I press "Save changes"
          Then I should still be on the general settings page
           And the "Page title" field should contain "SuperStore.com - SALE!"
-          And I should see "Settings have been successfully updated."
+          And I should see "Settings have been successfully updated"
 
     Scenario: Frontend store title changes after settings update
         Given I am on the general settings page
@@ -51,11 +51,11 @@ Feature: General settings
 
     Scenario: Editing the meta description
         Given I am on the general settings page
-         When I fill in "Meta description" with "Best fashion store on the web."
+         When I fill in "Meta description" with "Best fashion store on the web"
           And I press "Save changes"
          Then I should still be on the general settings page
-          And the "Meta description" field should contain "Best fashion store on the web."
-          And I should see "Settings have been successfully updated."
+          And the "Meta description" field should contain "Best fashion store on the web"
+          And I should see "Settings have been successfully updated"
 
     Scenario: Editing the meta keywords
         Given I am on the general settings page
@@ -63,7 +63,7 @@ Feature: General settings
           And I press "Save changes"
          Then I should still be on the general settings page
           And the "Meta keywords" field should contain "clothing, fashion, trends"
-          And I should see "Settings have been successfully updated."
+          And I should see "Settings have been successfully updated"
 
     Scenario: Changing default currency
         Given I am on the general settings page
@@ -71,7 +71,7 @@ Feature: General settings
           And I press "Save changes"
          Then I should still be on the general settings page
           And the "Default currency" field should contain "USD"
-          And I should see "Settings have been successfully updated."
+          And I should see "Settings have been successfully updated"
 
 #   Scenario: Changing language
 #       Given I am on the general settings page

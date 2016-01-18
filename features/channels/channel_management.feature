@@ -72,7 +72,7 @@ Feature: Channel management
 
     Scenario: Accessing the channel edit form
         Given I am on the channel index page
-         When I click "edit" near "WEB-US"
+         When I click "Edit" near "WEB-US"
          Then I should be editing channel with code "WEB-US"
 
     Scenario: Updating the channel
@@ -85,8 +85,8 @@ Feature: Channel management
     @javascript
     Scenario: Deleting a channel
         Given I am on the channel index page
-         When I press "delete" near "WEB-EU"
-          And I click "delete" from the confirmation modal
+         When I press "Delete" near "WEB-EU"
+          And I click "Delete" from the confirmation modal
          Then I should still be on the channel index page
           And I should see "Channel has been successfully deleted"
           And I should not see channel with name "mystore.eu" in the list
@@ -100,7 +100,7 @@ Feature: Channel management
         And I select "FedEx" from "Shipping Methods"
         When I press "Create"
         Then I should still be on the channel creation page
-        And I should see "Please enter channel code."
+        And I should see "Please enter channel code"
 
     Scenario: Cannot edit channel code
          When I am editing channel "mystore.us"
@@ -116,4 +116,4 @@ Feature: Channel management
         And I select "FedEx" from "Shipping Methods"
         When I press "Create"
         Then I should still be on the channel creation page
-        And I should see "Channel code has to be unique."
+        And I should see "Channel code has to be unique"

@@ -47,7 +47,7 @@ Feature: Countries and provinces
          When I select "Poland" from "Name"
           And I press "Create"
          Then I should be on the page of country "Poland"
-          And I should see "Country has been successfully created."
+          And I should see "Country has been successfully created"
 
     Scenario: Listing only available countries during creating a new country
         Given there is a disabled country "Germany"
@@ -64,7 +64,7 @@ Feature: Countries and provinces
           And I fill in the 1st province with "Lubusz"
           And I fill in the 2nd province with "Łódź"
           And I press "Create"
-         Then I should see "Country has been successfully created."
+         Then I should see "Country has been successfully created"
           And "Łódź" should appear on the page
           And "Lubusz" should appear on the page
 
@@ -74,8 +74,8 @@ Feature: Countries and provinces
          When I click "Add province"
           And I fill in the 5th province with "Lyon"
           And I press "Save changes"
-         Then I should see "Province name must be unique."
-          And I should see "Province code must be unique."
+         Then I should see "Province name must be unique"
+          And I should see "Province code must be unique"
 
     Scenario: Created countries appear in the list
         Given I created country "Poland"
@@ -85,12 +85,12 @@ Feature: Countries and provinces
 
     Scenario: Accessing the country editing form
         Given I am on the page of country "France"
-         When I follow "edit"
+         When I follow "Edit"
          Then I should be editing country "France"
 
     Scenario: Accessing the editing form from the list
         Given I am on the country index page
-         When I click "edit" near "China"
+         When I click "Edit" near "China"
          Then I should be editing country "China"
 
     Scenario: Cannot edit country code
