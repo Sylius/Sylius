@@ -1,3 +1,0 @@
-#!/bin/bash
-
-composer update --no-interaction --no-scripts --prefer-dist --lock doctrine/mongodb-odm

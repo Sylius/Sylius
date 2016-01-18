@@ -43,7 +43,6 @@ before_install:
     - if [[ ! -z "$GITHUB_OAUTH_TOKEN" ]]; then composer config -g github-oauth.github.com "$GITHUB_OAUTH_TOKEN" >/dev/null 2>&1; fi
 
 install:
-    - etc/travis/prepare-composer-doctrine-mongodb-odm
     - composer install --no-interaction --prefer-dist --no-scripts
 
     - composer run-script travis-build --no-interaction
