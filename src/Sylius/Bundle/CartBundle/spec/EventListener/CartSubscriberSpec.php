@@ -40,7 +40,7 @@ class CartSubscriberSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CartBundle\EventListener\CartSubscriber');
     }
 
-    function it_adds_a_item_to_a_cart_from_event_if_not_already_exist(
+    function it_adds_an_item_to_a_cart_from_event_if_does_not_already_exist(
         CartItemEvent $event,
         CartInterface $cart,
         CartItemInterface $cartItem,

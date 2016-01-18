@@ -14,6 +14,10 @@ UPGRADE
 
 * Introduced ``OrderItemUnit``, which represents every single unit in ``Order``;
 * Replaced ``InventoryUnit`` with ``OrderItemUnit`` in the core. This entity will be used as ``InventoryUnit`` and ``ShipmentItem``;
+* Removed ``setQuantity()`` method from ``OrderItem``
+* Introduced ``OrderItemUnitFactory`` creating unit for specific ``OrderItem`` by ``createForItem()`` method
+* Introduced ``OrderItemQuantityModifier`` that is used to control ``OrderItem`` quantity and units
+* Introduced ``OrderItemQuantityDataMapper``, which attached to ``OrderItemType`` uses proper service to modify ``OrderItem`` quantity
 
 ## From 0.15.0 to 0.16.x
 
