@@ -29,6 +29,7 @@ twig:
             - SyliusWebBundle:Common:forms.html.twig
             - SyliusResourceBundle::forms.html.twig
             - CmfMediaBundle:Form:fields.html.twig
+            - bootstrap_3_layout.html.twig
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
     paths:

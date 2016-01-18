@@ -101,6 +101,7 @@
     "replace": {
         "sylius/addressing": "self.version",
         "sylius/addressing-bundle": "self.version",
+        "sylius/admin-bundle": "self.version",
         "sylius/api-bundle": "self.version",
         "sylius/archetype": "self.version",
         "sylius/archetype-bundle": "self.version",
@@ -155,6 +156,7 @@
         "sylius/theme-bundle": "self.version",
         "sylius/translation": "self.version",
         "sylius/translation-bundle": "self.version",
+        "sylius/ui-bundle": "self.version",
         "sylius/user": "self.version",
         "sylius/user-bundle": "self.version",
         "sylius/variation": "self.version",

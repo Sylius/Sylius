@@ -5,7 +5,9 @@ var uglifycss = require('gulp-uglifycss');
 var concat = require('gulp-concat');
 var less = require('gulp-less');
 var sourcemaps = require('gulp-sourcemaps');
+var merge = require('merge-stream');
 var debug = require('gulp-debug');
+var livereload = require('gulp-livereload');
 
 var env = process.env.GULP_ENV;
 
@@ -20,8 +22,10 @@ var paths = {
     ],
     css: [
         'node_modules/bootstrap/dist/css/bootstrap.min.css',
-        'node_modules/admin-lte/dist/css/AdminLTE.min.css',
-        'web/test/*'
+        'node_modules/admin-lte/dist/css/AdminLTE.min.css'
+    ],
+    'img': [
+        'src/Sylius/Bundle/UiBundle/Resources/assets/img/**'
     ]
 };
 
@@ -34,28 +38,38 @@ gulp.task('js', function () {
     ;
 });
 
-gulp.task('less', function () {
-    return gulp.src(paths.less)
+gulp.task('css', function() {
+    var lessStream = gulp.src(paths.less)
         .pipe(less())
-        .pipe(concat('less-compiled.css'))
-        .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('web/test'))
+        .pipe(concat('less-files.less'))
     ;
-});
 
-gulp.task('css', function () {
-    return gulp.src(paths.css)
+    var cssStream = gulp.src(paths.css)
+        .pipe(concat('css-files.css'))
+    ;
+
+    return merge(lessStream, cssStream)
         .pipe(concat('style.css'))
         .pipe(gulpif('prod' === env, uglifycss()))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('web/css'))
+        .pipe(livereload())
+    ;
+});
+
+gulp.task('img', function () {
+    return gulp.src(paths.img)
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest('web/img'))
     ;
 });
 
 gulp.task('watch', function() {
+    livereload.listen();
     gulp.watch(paths.js, ['js']);
-    gulp.watch(paths.less, ['less', 'css']);
+    gulp.watch(paths.less, ['css']);
     gulp.watch(paths.css, ['css']);
+    gulp.watch(paths.img, ['img']);
 });
 
-gulp.task('default', ['watch', 'js', 'less', 'css']);
+gulp.task('default', ['watch', 'js', 'css', 'img']);

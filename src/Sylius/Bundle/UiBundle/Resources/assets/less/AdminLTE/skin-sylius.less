@@ -3,7 +3,7 @@
 @import "node_modules/admin-lte/build/less/mixins.less";
 @import "node_modules/admin-lte/build/less/variables.less";
 
-@sylius: #1abb9c;
+@import "../variables.less";
 
 .skin-sylius {
     a:link {
@@ -14,6 +14,18 @@
     }
     a:hover {
         color: lighten(@sylius, 5%);
+    }
+
+    input:focus {
+        border-color: @sylius;
+    }
+
+    .btn-primary {
+        background-color: @sylius;
+        border-color: darken(@sylius, 5%);
+    }
+    .btn-primary:focus {
+        background-color: darken(@sylius, 10%);
     }
 
     .main-header {

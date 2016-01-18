@@ -19,7 +19,7 @@ use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
  */
 final class MainMenuBuilder extends AbstractAdminMenuBuilder
 {
-    const EVENT_NAME = 'sylius.menu.main';
+    const EVENT_NAME = 'sylius.menu.admin.main';
 
     /**
      * @return ItemInterface
@@ -44,14 +44,6 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
             ->addChild('configuration')
             ->setLabel('sylius.menu.admin.main.configuration.header')
         ;
-
-        if ($this->authorizationChecker->isGranted('sylius.tax_category.index')) {
-            $child
-                ->addChild('tax_category_index', array('route' => 'sylius_admin_tax_category_index'))
-                ->setLabel('sylius.menu.admin.main.configuration.tax_category_index')
-                ->setLabelAttribute('icon', 'money')
-            ;
-        }
 
         if (!$child->hasChildren()) {
             $menu->removeChild('configuration');

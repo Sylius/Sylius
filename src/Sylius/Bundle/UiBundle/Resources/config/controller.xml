@@ -17,11 +17,13 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.controller.admin.dashboard.class">Sylius\Bundle\AdminBundle\Controller\DashboardController</parameter>
+        <parameter key="sylius.controller.security.class">Sylius\Bundle\UiBundle\Controller\SecurityController</parameter>
     </parameters>
 
     <services>
-        <service id="sylius.controller.admin.dashboard" class="%sylius.controller.admin.dashboard.class%">
+        <service id="sylius.controller.security" class="%sylius.controller.security.class%">
+            <argument type="service" id="security.authentication_utils" />
+            <argument type="service" id="form.factory" />
             <argument type="service" id="templating" />
         </service>
     </services>

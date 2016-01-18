@@ -52,7 +52,7 @@
         <parameter key="sylius.listener.user_reloader.class">Sylius\Bundle\UserBundle\EventListener\UserReloaderListener</parameter>
         <parameter key="sylius.listener.user_mailer_listener.class">Sylius\Bundle\UserBundle\EventListener\MailerListener</parameter>
 
-        <parameter key="sylius.controller.security.class">Sylius\Bundle\UserBundle\Controller\SecurityController</parameter>
+        <parameter key="sylius.controller.user_security.class">Sylius\Bundle\UserBundle\Controller\SecurityController</parameter>
 
         <parameter key="sylius.user.validator.unique_registered_user.class">Sylius\Bundle\UserBundle\Validator\Constraints\RegisteredUserValidator</parameter>
     </parameters>
@@ -65,7 +65,7 @@
         </service>
 
         <!-- Controllers -->
-        <service id="sylius.controller.security" class="%sylius.controller.security.class%">
+        <service id="sylius.controller.user_security" class="%sylius.controller.user_security.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>

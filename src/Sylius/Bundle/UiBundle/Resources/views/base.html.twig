@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>{% block title %}Sylius UI{% endblock %}</title>
+    <title>{% block title %}Sylius{% endblock %}</title>
 
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -13,14 +13,7 @@
     {% endblock %}
 
     {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+        {% include 'SyliusUiBundle::_stylesheets.html.twig' %}
     {% endblock %}
 </head>
 
@@ -28,10 +21,10 @@
 <div class="wrapper">
     <header class="main-header">
         {% block logo %}
-        <a href="#" class="logo">
-            <span class="logo-mini"><b>S</b></span>
-            <span class="logo-lg"><b>Sylius UI</b></span>
-        </a>
+            <a href="#" class="logo">
+                <span class="logo-mini"><b>S</b></span>
+                <span class="logo-lg"><b>Sylius UI</b></span>
+            </a>
         {% endblock %}
 
         <nav class="navbar navbar-static-top" role="navigation">
@@ -40,6 +33,7 @@
             </a>
             <div class="navbar-custom-menu">
                 {% block toolbar %}
+                    {% include 'SyliusUiBundle::_profile.html.twig' %}
                 {% endblock %}
             </div>
         </nav>
@@ -71,8 +65,7 @@
 </div>
 
 {% block javascripts %}
-<script src="{{ asset('js/javascript.js') }}"></script>
+    {% include 'SyliusUiBundle::_javascripts.html.twig' %}
 {% endblock %}
-
 </body>
 </html>

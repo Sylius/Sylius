@@ -4,4 +4,3 @@ sylius:
       main:
         configuration:
           header: Configuration
-          tax_category_index: Tax categories
