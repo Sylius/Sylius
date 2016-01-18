@@ -1,5 +1,0 @@
-#!/bin/bash
-
-echo "extension = mongo.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-
-composer require --no-interaction --no-update doctrine/mongodb-odm="^1.0.2"

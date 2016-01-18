@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ResourceBundle\Fixture\Document;
+namespace spec\Sylius\Bundle\ResourceBundle\Fixture;
+
+use spec\Sylius\Bundle\ResourceBundle\Fixture\FooInterface;
 
 /**
- * Foo document.
- *
- * @author Ivannis Suárez Jérez <ivannis.suarez@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class Foo
+class Foo implements FooInterface
 {
 }

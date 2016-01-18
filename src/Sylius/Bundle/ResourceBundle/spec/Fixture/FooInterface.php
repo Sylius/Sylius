@@ -9,11 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ResourceBundle\Fixture\Entity;
+namespace spec\Sylius\Bundle\ResourceBundle\Fixture;
 
 /**
- * Foo Interface.
- *
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
 interface FooInterface
