@@ -16,7 +16,7 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class Payment implements PaymentInterface, PaymentSubjectInterface
+class Payment implements PaymentInterface
 {
     /**
      * @var mixed

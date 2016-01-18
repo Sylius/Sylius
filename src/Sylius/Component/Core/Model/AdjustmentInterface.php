@@ -15,9 +15,8 @@ use Sylius\Component\Order\Model\AdjustmentInterface as BaseAdjustmentInterface;
 
 interface AdjustmentInterface extends BaseAdjustmentInterface
 {
-    // Labels for tax, shipping, payment and promotion adjustments.
+    // Labels for tax, shipping and promotion adjustments.
     const TAX_ADJUSTMENT       = 'tax';
     const SHIPPING_ADJUSTMENT  = 'shipping';
     const PROMOTION_ADJUSTMENT = 'promotion';
-    const PAYMENT_ADJUSTMENT   = "payment";
 }

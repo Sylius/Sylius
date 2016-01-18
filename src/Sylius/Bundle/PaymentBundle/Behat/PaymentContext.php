@@ -38,8 +38,6 @@ class PaymentContext extends DefaultContext
             $method->setCode(trim($data['code']));
             $method->setName(trim($data['name']));
             $method->setGateway(trim($data['gateway']));
-            $method->setFeeCalculator($data['calculator']);
-            $method->setFeeCalculatorConfiguration($this->getConfiguration($data['calculator_configuration']));
 
             $method->setEnabled(isset($data['enabled']) ? 'yes' === trim($data['enabled']) : true);
 

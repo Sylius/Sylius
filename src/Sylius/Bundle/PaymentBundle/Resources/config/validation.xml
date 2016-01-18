@@ -38,47 +38,6 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
-        <property name="feeCalculatorConfiguration">
-            <constraint name="Collection">
-                <option name="allowMissingFields">true</option>
-                <option name="fields">
-                    <value key="amount">
-                        <constraint name="NotBlank">
-                            <option name="message">
-                                sylius.payment_method.fee_calculator_configuration.amount.not_blank
-                            </option>
-                            <option name="groups">sylius</option>
-                        </constraint>
-                        <constraint name="GreaterThanOrEqual">
-                            <option name="value">0</option>
-                            <option name="message">
-                                sylius.payment_method.fee_calculator_configuration.amount.greater_than_or_equal
-                            </option>
-                            <option name="groups">sylius</option>
-                        </constraint>
-                    </value>
-                    <value key="percent">
-                        <constraint name="NotBlank">
-                            <option name="message">
-                                sylius.payment_method.fee_calculator_configuration.percent.not_blank
-                            </option>
-                            <option name="groups">sylius</option>
-                        </constraint>
-                        <constraint name="Range">
-                            <option name="min">0</option>
-                            <option name="minMessage">
-                                sylius.payment_method.fee_calculator_configuration.percent.min_range
-                            </option>
-                            <option name="max">100</option>
-                            <option name="maxMessage">
-                                sylius.payment_method.fee_calculator_configuration.percent.max_range
-                            </option>
-                            <option name="groups">sylius</option>
-                        </constraint>
-                    </value>
-                </option>
-            </constraint>
-        </property>
     </class>
 
     <class name="Sylius\Component\Payment\Model\PaymentMethodTranslation">

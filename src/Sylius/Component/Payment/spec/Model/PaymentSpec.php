@@ -31,11 +31,6 @@ class PaymentSpec extends ObjectBehavior
         $this->shouldImplement(PaymentInterface::class);
     }
 
-    function it_implements_sylius_subject_interface()
-    {
-        $this->shouldImplement('Sylius\Component\Payment\Model\PaymentSubjectInterface');
-    }
-
     function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);

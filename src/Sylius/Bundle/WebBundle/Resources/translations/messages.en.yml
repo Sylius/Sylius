@@ -313,8 +313,6 @@ sylius:
                 no_promotion: No promotion applied
                 no_shipping_charges: No shipping charges applied
                 no_taxes: No taxes applied
-                payment_charges: Payment charges
-                payment_total: Payment total
                 promotion_discount: Promotion discounts
                 promotion_total: Promotion total
                 shipping_address: Shipping address

@@ -7,9 +7,9 @@ Feature: Payment methods
     Background:
         Given store has default configuration
           And the following payment methods exist:
-            | code | name        | gateway | calculator | calculator_configuration |
-            | PM1  | Credit Card | stripe  | fixed      | amount: 10               |
-            | PM2  | PayPal      | paypal  | percent    | percent: 5               |
+            | code | name        | gateway |
+            | PM1  | Credit Card | stripe  |
+            | PM2  | PayPal      | paypal  |
           And I am logged in as administrator
 
     Scenario: Seeing index of all payment methods
@@ -40,7 +40,6 @@ Feature: Payment methods
         Given I am on the payment method creation page
         When I fill in "Code" with "PM3"
         And I fill in "Name" with "Google Checkout"
-        And I fill in "Amount" with "10"
         And I press "Create"
         Then I should be on the payment method index page
         And I should see "Payment method has been successfully created"
@@ -50,7 +49,6 @@ Feature: Payment methods
         When I fill in "Code" with "PM3"
         And I fill in "Name" with "Google Checkout"
         And I fill in "Description" with "Flexible checkout by Google!"
-        And I fill in "Amount" with "10"
         And I press "Create"
         Then I should be on the payment method index page
         And I should see "Payment method has been successfully created"
@@ -59,7 +57,6 @@ Feature: Payment methods
         Given I am on the payment method creation page
         When I fill in "Code" with "PM3"
         And I fill in "Name" with "PayU"
-        And I fill in "Amount" with "10"
         And I press "Create"
         Then I should be on the payment method index page
         And I should see payment method with name "PayU" in the list
@@ -72,50 +69,9 @@ Feature: Payment methods
     Scenario: Updating the payment method
         Given I am editing payment method "PayPal"
          When I fill in "Name" with "PayPal PRO"
-          And I fill in "%" with "10"
           And I press "Save changes"
          Then I should be on the payment method index page
           And I should see payment method with name "PayPal PRO" in the list
-
-    Scenario: Submitting invalid form without percent
-        Given I am editing payment method "PayPal"
-         When I fill in "Name" with "PayPal PRO"
-          And I leave "%" empty
-          And I press "Save changes"
-         Then I should be editing payment method "PayPal"
-          And I should see "Please enter the fee percent"
-
-    Scenario: Submitting invalid form with negative percent
-        Given I am editing payment method "PayPal"
-         When I fill in "Name" with "PayPal PRO"
-          And I fill in "%" with "-1"
-          And I press "Save changes"
-         Then I should be editing payment method "PayPal"
-          And I should see "Percent fee cannot be lower than 0"
-
-    Scenario: Submitting invalid form with percent over 100
-        Given I am editing payment method "PayPal"
-         When I fill in "Name" with "PayPal PRO"
-          And I fill in "%" with "120"
-          And I press "Save changes"
-         Then I should be editing payment method "PayPal"
-          And I should see "Percent fee cannot be greater than 100"
-
-    Scenario: Submitting invalid form without amount
-        Given I am editing payment method "Credit Card"
-         When I fill in "Name" with "Master Card"
-          And I leave "Amount" empty
-          And I press "Save changes"
-         Then I should be editing payment method "Credit Card"
-          And I should see "Please enter the fee amount"
-
-    Scenario: Submitting invalid form with negative amount
-        Given I am editing payment method "Credit Card"
-         When I fill in "Name" with "Master Card"
-          And I fill in "Amount" with "-1"
-          And I press "Save changes"
-         Then I should be editing payment method "Credit Card"
-          And I should see "The fee cannot be lower than 0"
 
     @javascript
     Scenario: Deleting payment method
