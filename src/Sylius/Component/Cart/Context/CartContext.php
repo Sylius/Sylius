@@ -13,6 +13,7 @@ namespace Sylius\Component\Cart\Context;
 
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Storage\StorageInterface;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -45,6 +46,10 @@ class CartContext implements CartContextInterface
      */
     public function setCurrentCartIdentifier(CartInterface $cart)
     {
+        if (null === $cart->getIdentifier()) {
+            throw new \UnexpectedValueException('Identifier on cart does not exist - unable to save');
+        }
+
         $this->storage->setData(self::STORAGE_KEY, $cart->getIdentifier());
     }
 
