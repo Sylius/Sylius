@@ -1,5 +1,5 @@
-The Order and OrderItem
-=======================
+The Order, OrderItem and OrderItemUnit
+======================================
 
 Here is a quick reference of what the default models can do for you.
 
@@ -43,7 +43,7 @@ Order totals
 
 An order has 3 basic totals, which are all persisted together with the order.
 
-The first total is the *items total*, it is calculated as the sum of all item totals.
+The first total is the *items total*, it is calculated as the sum of all item totals (including theirs adjustments).
 
 The second total is the *adjustments total*, you can read more about this in next chapter.
 
@@ -59,7 +59,10 @@ The second total is the *adjustments total*, you can read more about this in nex
 
 The main order total is a sum of the previously mentioned values.
 You can access the order total value using the ``->getTotal()`` method.
-Recalculation of totals can happen by calling ``->calculateTotal()`` method, using the simplest possible math. It will also update the item totals.
+
+.. note::
+
+   It's not needed to call ``calculateTotal()`` method, as both ``itemsTotal`` and ``adjustmentsTotal`` are automatically updated after each operation that can influence their values.
 
 Items management
 ----------------
@@ -97,18 +100,27 @@ The sellable object can be retrieved and set, using the following setter and get
 Just like for the order, the total is available via the same method, but the unit price is accessible using the ``->getUnitPrice()`` 
 Each item also can calculate its total, using the quantity (``->getQuantity()``) and the unit price.
 
+.. warning::
+
+   Concept of ``OrderItemUnit`` allows better management of ``OrderItem``'s quantity. Because of that, it's needed to use :ref:`bundle_order_order-item-quantity-modifier` to handle
+   quantity modification properly.
+
 .. code-block:: php
 
     <?php
 
     $item = $itemRepository->createNew();
-    $item
-        ->setVariant($book)
-        ->setUnitPrice(2000)
-        ->setQuantity(4)
-        ->calculateTotal()
-    ;
+    $item->setVariant($book);
+    $item->setUnitPrice(2000)
+
+    $orderItemQuantityModifier->modify($item, 4); //modifies item's quantity to 4
 
     echo $item->getTotal(); // 8000.
 
 An OrderItem can also hold adjustments.
+
+Units management
+----------------
+
+Each element from ``units`` collection in ``OrderItem`` represents single, separate unit from order. It's total is sum of its ``item`` unit price and totals' of each adjustments. Unit's can be added
+and removed using ``addUnit`` and ``removeUnit`` methods from ``OrderItem``, but it's highly recommended to use :ref:`bundle_order_order-item-quantity-modifier`.
