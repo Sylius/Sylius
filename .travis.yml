@@ -20,19 +20,18 @@ addons:
         packages:
             - google-chrome-stable
 
-matrix:
-    include:
-        - php: 5.6
-          services: [memcached, mongodb]
-        - php: 7.0
-          services: [memcached]
-        - php: 5.5
-          services: [memcached, mongodb]
+services:
+    - memcached
+
+php:
+    - 7.0
+    - 5.6
+    - 5.5
 
 before_install:
-    - mkdir -p $SYLIUS_CACHE_DIR
-
     - phpenv config-rm xdebug.ini || true
+
+    - mkdir -p $SYLIUS_CACHE_DIR
 
     - etc/travis/prepare-memcached-extension
 
@@ -43,13 +42,14 @@ before_install:
     # Add Github OAuth token to Composer config if that variable exists
     - if [[ ! -z "$GITHUB_OAUTH_TOKEN" ]]; then composer config -g github-oauth.github.com "$GITHUB_OAUTH_TOKEN" >/dev/null 2>&1; fi
 
+install:
     - etc/travis/prepare-composer-doctrine-mongodb-odm
     - composer install --no-interaction --prefer-dist --no-scripts
 
     - composer run-script travis-build --no-interaction
 
 before_script:
-    - phpenv config-add etc/travis/before-install-php.ini
+    - phpenv config-add etc/travis/before-script-php.ini
 
     - app/console doctrine:database:create --env=test_cached
 
