@@ -45,4 +45,5 @@ Feature: Checkout taxation
           And I select the "Dummy" radio button
          When I press "Continue"
          Then I should be on the checkout finalize step
+          And I should see "Shipping total: €57.50"
           And "Tax total: €45.00" should appear on the page
