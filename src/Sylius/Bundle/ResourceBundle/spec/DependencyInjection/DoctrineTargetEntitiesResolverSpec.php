@@ -12,9 +12,14 @@
 namespace spec\Sylius\Bundle\ResourceBundle\DependencyInjection;
 
 use PhpSpec\ObjectBehavior;
+use spec\Sylius\Bundle\ResourceBundle\Fixture\Foo;
+use spec\Sylius\Bundle\ResourceBundle\Fixture\FooInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+
+require_once __DIR__ . '/../Fixture/FooInterface.php';
+require_once __DIR__ . '/../Fixture/Foo.php';
 
 /**
  * Doctrine target entities resolver spec.
@@ -31,81 +36,53 @@ class DoctrineTargetEntitiesResolverSpec extends ObjectBehavior
 
     function it_should_get_interfaces_from_the_container(ContainerBuilder $container, Definition $resolverDefinition)
     {
-        $resolverDefinition->hasTag('doctrine.event_listener')
+        $resolverDefinition->hasTag('doctrine.event_listener')->willReturn(false);
+        $resolverDefinition->addTag('doctrine.event_listener', ['event' => 'loadClassMetadata'])->shouldBeCalled();
+
+        $container->hasDefinition('doctrine.orm.listeners.resolve_target_entity')->willReturn(true);
+        $container->findDefinition('doctrine.orm.listeners.resolve_target_entity')->willReturn($resolverDefinition);
+
+        $container->hasParameter('sylius.resource.interface')->willReturn(true);
+        $container->getParameter('sylius.resource.interface')->willReturn(FooInterface::class);
+
+        $container->hasParameter('sylius.resource.model')->willReturn(true);
+        $container->getParameter('sylius.resource.model')->willReturn(Foo::class);
+
+        $resolverDefinition
+            ->addMethodCall(
+                'addResolveTargetEntity',
+                [FooInterface::class, Foo::class, []]
+            )
             ->shouldBeCalled()
-            ->willReturn(false);
+        ;
 
-        $resolverDefinition->addTag('doctrine.event_listener', array('event' => 'loadClassMetadata'))
-            ->shouldBeCalled();
-
-        $container->hasDefinition('doctrine.orm.listeners.resolve_target_entity')
-            ->shouldBeCalled()
-            ->willReturn(true);
-
-        $container->findDefinition('doctrine.orm.listeners.resolve_target_entity')
-            ->shouldBeCalled()
-            ->willReturn($resolverDefinition);
-
-        $container->hasParameter('sylius.resource.interface')
-            ->shouldBeCalled()
-            ->willReturn(true);
-
-        $container->getParameter('sylius.resource.interface')
-            ->shouldBeCalled()
-            ->willReturn('spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\FooInterface');
-
-        $container->hasParameter('sylius.resource.model')
-            ->shouldBeCalled()
-            ->willReturn(true);
-
-        $container->getParameter('sylius.resource.model')
-            ->shouldBeCalled()
-            ->willReturn('spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo');
-
-        $resolverDefinition->addMethodCall(
-            'addResolveTargetEntity',
-            array(
-                'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\FooInterface', 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo', array()
-            ))->shouldBeCalled();
-
-        $this->resolve($container, array(
+        $this->resolve($container, [
             'sylius.resource.interface' => 'sylius.resource.model'
-        ));
+        ]);
     }
 
     function it_should_get_interfaces(ContainerBuilder $container, Definition $resolverDefinition)
     {
-        $resolverDefinition->hasTag('doctrine.event_listener')
+        $resolverDefinition->hasTag('doctrine.event_listener')->willReturn(false);
+        $resolverDefinition->addTag('doctrine.event_listener', ['event' => 'loadClassMetadata'])->shouldBeCalled();
+
+        $container->hasDefinition('doctrine.orm.listeners.resolve_target_entity')->willReturn(true);
+        $container->findDefinition('doctrine.orm.listeners.resolve_target_entity')->willReturn($resolverDefinition);
+
+        $container->hasParameter(RepositoryInterface::class)->willReturn(false);
+
+        $container->hasParameter(Foo::class)->willReturn(false);
+
+        $resolverDefinition
+            ->addMethodCall(
+                'addResolveTargetEntity',
+                [RepositoryInterface::class, Foo::class, []]
+            )
             ->shouldBeCalled()
-            ->willReturn(false);
+        ;
 
-        $resolverDefinition->addTag('doctrine.event_listener', array('event' => 'loadClassMetadata'))
-            ->shouldBeCalled();
-
-        $container->hasDefinition('doctrine.orm.listeners.resolve_target_entity')
-            ->shouldBeCalled()
-            ->willReturn(true);
-
-        $container->findDefinition('doctrine.orm.listeners.resolve_target_entity')
-            ->shouldBeCalled()
-            ->willReturn($resolverDefinition);
-
-        $container->hasParameter(RepositoryInterface::class)
-            ->shouldBeCalled()
-            ->willReturn(false);
-
-        $container->hasParameter('spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo')
-            ->shouldBeCalled()
-            ->willReturn(false);
-
-        $resolverDefinition->addMethodCall(
-            'addResolveTargetEntity',
-            array(
-                RepositoryInterface::class, 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo', array()
-            ))->shouldBeCalled();
-
-        $this->resolve($container, array(
-            RepositoryInterface::class => 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo'
-        ));
+        $this->resolve($container, [
+            RepositoryInterface::class => Foo::class
+        ]);
     }
 }
