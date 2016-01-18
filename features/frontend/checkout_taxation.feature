@@ -24,8 +24,8 @@ Feature: Checkout taxation
             | name    | price | taxons       | tax category  |
             | PHP Top | 250   | PHP T-Shirts | Taxable Goods |
           And the following shipping methods exist:
-            | code | zone | name        |
-            | SM1  | UK   | DHL Express |
+            | code | zone | name        | tax category  | calculator | configuration |
+            | SM1  | UK   | DHL Express | Taxable Goods | Flat rate  | Amount: 5000  |
           And the following payment methods exist:
             | code | name  | gateway | enabled |
             | PM1  | Dummy | dummy   | yes     |
@@ -45,4 +45,4 @@ Feature: Checkout taxation
           And I select the "Dummy" radio button
          When I press "Continue"
          Then I should be on the checkout finalize step
-          And "Tax total: €37.50" should appear on the page
+          And "Tax total: €45.00" should appear on the page
