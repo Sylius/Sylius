@@ -56,8 +56,8 @@ Feature: User account addresses page
         And I leave "First name" empty
         And I leave "Last name" empty
         And I leave "Country" empty
-        And I leave "Street" empty
-        And I leave "City" empty
+        And I leave "Locality" empty
+        And I leave "Address" empty
         And I leave "Postcode" empty
         And I press "Create"
        Then I should still be on my account address creation page
@@ -87,8 +87,8 @@ Feature: User account addresses page
         And I leave "First name" empty
         And I leave "Last name" empty
         And I leave "Country" empty
-        And I leave "Street" empty
-        And I leave "City" empty
+        And I leave "Locality" empty
+        And I leave "Address" empty
         And I leave "Postcode" empty
        When I press "Save changes"
        Then I should see 6 validation errors

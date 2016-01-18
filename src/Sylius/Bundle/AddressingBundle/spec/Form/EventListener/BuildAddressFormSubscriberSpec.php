@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Addressing\Model\ProvinceInterface;
+use Sylius\Component\Addressing\Model\AdministrativeAreaInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -25,12 +25,13 @@ use Symfony\Component\Form\FormInterface;
 
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
 class BuildAddressFormSubscriberSpec extends ObjectBehavior
 {
-    function let(ObjectRepository $countryRepository, FormFactoryInterface $factory)
+    function let(ObjectRepository $countryRepository, FormFactoryInterface $formFactory)
     {
-        $this->beConstructedWith($countryRepository, $factory);
+        $this->beConstructedWith($countryRepository, $formFactory);
     }
 
     function it_is_initializable()
@@ -51,36 +52,37 @@ class BuildAddressFormSubscriberSpec extends ObjectBehavior
         ));
     }
 
-    function it_adds_or_removes_provinces_on_pre_set_data(
-        $factory,
+    function it_adds_or_removes_administrative_areas_on_pre_set_data(
+        FormFactoryInterface $formFactory,
         FormEvent $event,
         FormInterface $form,
-        FormInterface $provinceForm,
+        FormInterface $administrativeAreaForm,
         AddressInterface $address,
         CountryInterface $country,
-        ProvinceInterface $province
+        AdministrativeAreaInterface $administrativeArea
     ) {
         $event->getForm()->willReturn($form);
 
         $event->getData()->willReturn($address);
         $country->getCode()->willReturn('IE');
         $address->getCountry()->willReturn('IE');
-        $country->hasProvinces()->willReturn(true);
-        $province->getCode()->willReturn('province');
-        $address->getProvince()->willReturn('province');
+        $country->hasAdministrativeAreas()->willReturn(true);
+        $administrativeArea->getCode()->willReturn('TB');
+        $address->getAdministrativeArea()->willReturn('TB');
 
-        $factory->createNamed('province', 'sylius_province_code_choice', 'province', Argument::withKey('country'))
-            ->willReturn($provinceForm);
+        $formFactory->createNamed('administrative_area', 'sylius_administrative_area_code_choice', 'TB', Argument::withKey('country'))
+            ->willReturn($administrativeAreaForm)
+        ;
 
         $this->preSetData($event);
     }
 
-    function it_adds_or_removes_provinces_on_pre_submit(
-        $factory,
-        $countryRepository,
+    function it_adds_or_removes_administrative_areas_on_pre_submit(
+        FormFactoryInterface $formFactory,
+        ObjectRepository $countryRepository,
         FormEvent $event,
         FormInterface $form,
-        FormInterface $provinceForm,
+        FormInterface $administrativeAreaForm,
         CountryInterface $country
     ) {
         $event->getForm()->willReturn($form);
@@ -89,12 +91,13 @@ class BuildAddressFormSubscriberSpec extends ObjectBehavior
         ));
 
         $countryRepository->findOneBy(array('code' => 'FR'))->willReturn($country);
-        $country->hasProvinces()->willReturn(true);
+        $country->hasAdministrativeAreas()->willReturn(true);
 
-        $factory->createNamed('province', 'sylius_province_code_choice', null, Argument::withKey('country'))
-            ->willReturn($provinceForm);
+        $formFactory->createNamed('administrative_area', 'sylius_administrative_area_code_choice', null, Argument::withKey('country'))
+            ->willReturn($administrativeAreaForm)
+        ;
 
-        $form->add($provinceForm)->shouldBeCalled();
+        $form->add($administrativeAreaForm)->shouldBeCalled();
 
         $this->preSubmit($event);
     }

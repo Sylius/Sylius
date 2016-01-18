@@ -29,6 +29,8 @@ class ZoneMemberType extends AbstractResourceType
     {
         $type = $options['zone_type'];
 
+        $type = implode('_', explode('-', $type));
+
         $builder
             ->add('code', 'sylius_'.$type.'_code_choice', array(
                 'label' => 'sylius.form.zone.types.'.$type,

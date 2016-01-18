@@ -1,16 +1,18 @@
-{{ form_row(form.company) }}
+{{ form_row(form.organization) }}
 {{ form_row(form.firstName) }}
 {{ form_row(form.lastName) }}
 {{ form_row(form.country, {'attr': {'class': 'select2 country-select'}}) }}
 
-<div class="province-container" data-url="{{ path('sylius_province_choice_form') }}">
-    {% if form.province is defined %}
-        {{ form_row(form.province, {'attr': {'class': 'select2'}}) }}
+<div class="administrative-area-container" data-url="{{ path('sylius_administrative_area_choice_form') }}">
+    {% if form.administrativeArea is defined %}
+        {{ form_row(form.administrativeArea, {'attr': {'class': 'select2'}}) }}
     {% endif %}
 </div>
 
-{{ form_row(form.street) }}
-{{ form_row(form.city) }}
+{{ form_row(form.locality) }}
+{{ form_row(form.dependentLocality) }}
+{{ form_row(form.firstAddressLine) }}
+{{ form_row(form.secondAddressLine) }}
 {{ form_row(form.postcode) }}
 {{ form_row(form.phoneNumber) }}
 {{ form_rest(form) }}

@@ -11,13 +11,13 @@
 
 namespace Sylius\Bundle\AddressingBundle\DependencyInjection;
 
-use Sylius\Bundle\AddressingBundle\Controller\ProvinceController;
+use Sylius\Bundle\AddressingBundle\Controller\AdministrativeAreaController;
 use Sylius\Bundle\AddressingBundle\Factory\ZoneFactory;
 use Sylius\Bundle\AddressingBundle\Form\Type\AddressType;
+use Sylius\Bundle\AddressingBundle\Form\Type\AdministrativeAreaChoiceType;
+use Sylius\Bundle\AddressingBundle\Form\Type\AdministrativeAreaType;
 use Sylius\Bundle\AddressingBundle\Form\Type\CountryChoiceType;
 use Sylius\Bundle\AddressingBundle\Form\Type\CountryType;
-use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceChoiceType;
-use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceType;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberType;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
@@ -25,10 +25,10 @@ use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Addressing\Model\Address;
 use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Addressing\Model\AdministrativeArea;
+use Sylius\Component\Addressing\Model\AdministrativeAreaInterface;
 use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Addressing\Model\Province;
-use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\Zone;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMember;
@@ -144,23 +144,23 @@ class Configuration implements ConfigurationInterface
                                 ->end()
                             ->end()
                         ->end()
-                        ->arrayNode('province')
+                        ->arrayNode('administrative_area')
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->variableNode('options')->end()
                                 ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('model')->defaultValue(Province::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('interface')->defaultValue(ProvinceInterface::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('controller')->defaultValue(ProvinceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('model')->defaultValue(AdministrativeArea::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(AdministrativeAreaInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(AdministrativeAreaController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()
                                             ->children()
-                                                ->scalarNode('default')->defaultValue(ProvinceType::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('choice')->defaultValue(ProvinceChoiceType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('default')->defaultValue(AdministrativeAreaType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('choice')->defaultValue(AdministrativeAreaChoiceType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
                                     ->end()

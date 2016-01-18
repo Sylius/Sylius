@@ -278,14 +278,6 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     }
 
     /**
-     * @Given /^I fill in province name with "([^"]*)"$/
-     */
-    public function iFillInProvinceNameWith($value)
-    {
-        $this->fillField('sylius_country[provinces][0][name]', $value);
-    }
-
-    /**
      * @Given /^I fill in the (billing|shipping) address to (.+)$/
      */
     public function iFillInCheckoutAddress($type, $country)
@@ -310,16 +302,6 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     public function iFillInUserAccountAddress($country)
     {
         $this->iFillInAddressFields('sylius_address', $country);
-    }
-
-    protected function iFillInAddressFields($base, $country)
-    {
-        $this->fillField($base.'[firstName]', 'John');
-        $this->fillField($base.'[lastName]', 'Doe');
-        $this->fillField($base.'[street]', 'Pvt. Street 15');
-        $this->fillField($base.'[city]', 'Lodz');
-        $this->fillField($base.'[postcode]', '95-253');
-        $this->selectOption($base.'[country]', $country);
     }
 
     /**
@@ -751,6 +733,16 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
             $this->assertStatusCodeEquals(200);
         } catch (UnsupportedDriverActionException $e) {
         }
+    }
+
+    protected function iFillInAddressFields($base, $country)
+    {
+        $this->fillField($base.'[firstName]', 'John');
+        $this->fillField($base.'[lastName]', 'Doe');
+        $this->fillField($base.'[firstAddressLine]', 'Pvt. Street 15');
+        $this->fillField($base.'[locality]', 'Lodz');
+        $this->fillField($base.'[postcode]', '95-253');
+        $this->selectOption($base.'[country]', $country);
     }
 
     /**

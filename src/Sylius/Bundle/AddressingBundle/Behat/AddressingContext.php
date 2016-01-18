@@ -14,7 +14,7 @@ namespace Sylius\Bundle\AddressingBundle\Behat;
 use Behat\Gherkin\Node\TableNode;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Addressing\Model\ProvinceInterface;
+use Sylius\Component\Addressing\Model\AdministrativeAreaInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 
@@ -27,11 +27,11 @@ class AddressingContext extends DefaultContext
     public function thereAreCountries(TableNode $table)
     {
         foreach ($table->getHash() as $data) {
-            $provinces = array_key_exists('provinces', $data) ? explode(',', $data['provinces']) : array();
+            $administrativeAreas = array_key_exists('administrative areas', $data) ? explode(',', $data['administrative areas']) : array();
 
             $enabled = isset($data['enabled']) ? 'no' !== $data['enabled'] : true;
 
-            $this->thereisCountry($data['name'], $enabled, $provinces, false);
+            $this->thereisCountry($data['name'], $enabled, $administrativeAreas, false);
         }
 
         $this->getEntityManager()->flush();
@@ -50,17 +50,17 @@ class AddressingContext extends DefaultContext
      * @Given /^there is country "([^""]*)"$/
      * @Given /^there is an enabled country "([^""]*)"$/
      */
-    public function thereIsCountry($name, $enabled = true, $provinces = null, $flush = true)
+    public function thereIsCountry($name, $enabled = true, $administrativeAreas = null, $flush = true)
     {
         $countryCode = $this->getCountryCodeByEnglishCountryName($name);
 
-        /* @var $country CountryInterface */
+        /** @var $country CountryInterface */
         if (null === $country = $this->getRepository('country')->findOneBy(array('code' => $countryCode))) {
             $country = $this->getFactory('country')->createNew();
             $country->setCode(trim($countryCode));
             $country->setEnabled($enabled);
 
-            $this->addProvincesToCountry($country, $provinces);
+            $this->addAdministrativeAreaToCountry($country, $administrativeAreas);
 
             $manager = $this->getEntityManager();
             $manager->persist($country);
@@ -103,21 +103,25 @@ class AddressingContext extends DefaultContext
     {
         $repository = $this->getRepository('zone');
 
-        /* @var $zone ZoneInterface */
+        /** @var $zone ZoneInterface */
         $zone = $this->getFactory('zone')->createNew();
         $zone->setName($name);
         $zone->setCode($name);
         $zone->setType($type);
         $zone->setScope($scope);
 
+        if (false !== strpos($type, '-')) {
+            $type = implode(explode('-', $type));
+        }
+
         foreach ($members as $memberName) {
             if (ZoneInterface::TYPE_ZONE === $type) {
                 $zoneable = $repository->findOneBy(array('name' => $memberName));
             } else {
-                $zoneable = call_user_func(array($this, 'thereIs'.ucfirst($type)), $memberName);
+                $zoneable = call_user_func(array($this, 'thereIs'.$type), $memberName);
             }
 
-            /* @var ZoneMemberInterface $member */
+            /** @var ZoneMemberInterface $member */
             $member = $this->getFactory('zone_member')->createNew();
             $member->setCode($zoneable->getCode());
             $zone->addMember($member);
@@ -133,18 +137,18 @@ class AddressingContext extends DefaultContext
     }
 
     /**
-     * @Given /^there is province "([^"]*)"$/
+     * @Given /^there is administrative area "([^"]*)"$/
      */
-    public function thereIsProvince($name)
+    public function thereIsAdministrativeArea($name)
     {
-        /* @var $province ProvinceInterface */
-        $province = $this->getFactory('province')->createNew();
-        $province->setName($name);
-        $province->setCode($name);
+        /** @var $administrativeArea AdministrativeAreaInterface */
+        $administrativeArea = $this->getFactory('administrative_area')->createNew();
+        $administrativeArea->setCode($name);
+        $administrativeArea->setName($name);
 
-        $this->getEntityManager()->persist($province);
+        $this->getEntityManager()->persist($administrativeArea);
 
-        return $province;
+        return $administrativeArea;
     }
 
     /**
@@ -165,14 +169,14 @@ class AddressingContext extends DefaultContext
 
     /**
      * @param CountryInterface $country
-     * @param TableNode|array $provinces
+     * @param TableNode|array $administrativeAreas
      */
-    private function addProvincesToCountry($country, $provinces)
+    private function addAdministrativeAreaToCountry($country, $administrativeAreas)
     {
-        if (null !== $provinces) {
-            $provinces = $provinces instanceof TableNode ? $provinces->getHash() : $provinces;
-            foreach ($provinces as $provinceName) {
-                $country->addProvince($this->thereisProvince($provinceName));
+        if (null !== $administrativeAreas) {
+            $administrativeAreas = $administrativeAreas instanceof TableNode ? $administrativeAreas->getHash() : $administrativeAreas;
+            foreach ($administrativeAreas as $administrativeAreaName) {
+                $country->addAdministrativeArea($this->thereIsAdministrativeArea($administrativeAreaName));
             }
         }
     }

@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-class ProvinceType extends AbstractResourceType
+class AdministrativeAreaType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
@@ -28,7 +28,7 @@ class ProvinceType extends AbstractResourceType
         $builder
             ->addEventSubscriber(new AddCodeFormSubscriber())
             ->add('name', 'text', array(
-                'label' => 'sylius.form.province.name',
+                'label' => 'sylius.form.administrative_area.name',
             ))
         ;
     }
@@ -38,6 +38,6 @@ class ProvinceType extends AbstractResourceType
      */
     public function getName()
     {
-        return 'sylius_province';
+        return 'sylius_administrative_area';
     }
 }

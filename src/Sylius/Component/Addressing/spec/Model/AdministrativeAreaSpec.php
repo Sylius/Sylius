@@ -13,22 +13,22 @@ namespace spec\Sylius\Component\Addressing\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Addressing\Model\ProvinceInterface;
+use Sylius\Component\Addressing\Model\AdministrativeAreaInterface;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ProvinceSpec extends ObjectBehavior
+class AdministrativeAreaSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Addressing\Model\Province');
+        $this->shouldHaveType('Sylius\Component\Addressing\Model\AdministrativeArea');
     }
 
-    function it_implements_Sylius_country_province_interface()
+    function it_implements_administrative_area_interface()
     {
-        $this->shouldImplement(ProvinceInterface::class);
+        $this->shouldImplement(AdministrativeAreaInterface::class);
     }
 
     function it_implements_code_aware_interface()
@@ -48,8 +48,8 @@ class ProvinceSpec extends ObjectBehavior
 
     function its_code_is_mutable()
     {
-        $this->setCode('IE');
-        $this->getCode()->shouldReturn('IE');
+        $this->setCode('DUB');
+        $this->getCode()->shouldReturn('DUB');
     }
 
     function it_has_no_name_by_default()
@@ -59,8 +59,8 @@ class ProvinceSpec extends ObjectBehavior
 
     function its_name_is_mutable()
     {
-        $this->setName('Texas');
-        $this->getName()->shouldReturn('Texas');
+        $this->setName('Dublin');
+        $this->getName()->shouldReturn('Dublin');
     }
 
     function it_does_not_belong_to_country_by_default()

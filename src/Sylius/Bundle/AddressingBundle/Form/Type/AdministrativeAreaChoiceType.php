@@ -20,20 +20,21 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class ProvinceChoiceType extends AbstractType
+class AdministrativeAreaChoiceType extends AbstractType
 {
     /**
      * @var RepositoryInterface
      */
-    protected $provinceRepository;
+    protected $administrativeAreaRepository;
 
     /**
-     * @param RepositoryInterface $provinceRepository
+     * @param RepositoryInterface $administrativeAreaRepository
      */
-    public function __construct(RepositoryInterface $provinceRepository)
+    public function __construct(RepositoryInterface $administrativeAreaRepository)
     {
-        $this->provinceRepository = $provinceRepository;
+        $this->administrativeAreaRepository = $administrativeAreaRepository;
     }
 
     /**
@@ -43,9 +44,9 @@ class ProvinceChoiceType extends AbstractType
     {
         $choices = function (Options $options) {
             if (null === $options['country']) {
-                $choices = $this->provinceRepository->findAll();
+                $choices = $this->administrativeAreaRepository->findAll();
             } else {
-                $choices = $options['country']->getProvinces();
+                $choices = $options['country']->getAdministrativeAreas();
             }
 
             return new ArrayChoiceList($choices);
@@ -55,8 +56,8 @@ class ProvinceChoiceType extends AbstractType
             ->setDefaults(array(
                 'choice_list' => $choices,
                 'country' => null,
-                'label' => 'sylius.form.address.province',
-                'empty_value' => 'sylius.form.province.select',
+                'label' => 'sylius.form.address.administrative_area',
+                'empty_value' => 'sylius.form.administrative_area.select',
             ))
         ;
         $resolver->addAllowedTypes('country', 'NULL');
@@ -76,6 +77,6 @@ class ProvinceChoiceType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_province_choice';
+        return 'sylius_administrative_area_choice';
     }
 }

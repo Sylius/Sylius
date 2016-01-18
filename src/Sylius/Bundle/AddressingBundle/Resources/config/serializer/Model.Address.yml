@@ -12,16 +12,25 @@ Sylius\Component\Addressing\Model\Address:
         lastName:
             expose: true
             type: string
-        street:
+        phoneNumber:
             expose: true
             type: string
-        city:
+        organization:
+            expose: true
+            type: string
+        locality:
+            expose: true
+            type: string
+        dependantLocality:
+            expose: true
+            type: string
+        firstAddressLine:
+            expose: true
+            type: string
+        secondAddressLine:
             expose: true
             type: string
         postcode:
-            expose: true
-            type: string
-        phoneNumber:
             expose: true
             type: string
         createdAt:
@@ -33,6 +42,6 @@ Sylius\Component\Addressing\Model\Address:
         country:
             expose: true
             type: string
-        province:
+        administrativeArea:
             expose: true
             type: string

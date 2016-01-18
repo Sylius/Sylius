@@ -33,22 +33,22 @@
         </tr>
     </tbody>
 </table>
-{% if country.hasProvinces %}
+{% if country.hasAdministrativeAreas %}
     <div class="page-header">
-        <h1>{{ 'sylius.province.provinces'|trans|raw }}</h1>
+        <h1>{{ 'sylius.administrative_area.administrative_areas'|trans|raw }}</h1>
     </div>
-    <table id="provinces" class="table table-bordered table-condensed">
+    <table id="administrative-areas" class="table table-bordered table-condensed">
         <thead>
             <tr>
-                <th>{{ 'sylius.form.province.name'|trans }}</th>
+                <th>{{ 'sylius.form.administrative_area.name'|trans }}</th>
                 <th>{{ 'sylius.ui.code'|trans }}</th>
             </tr>
         </thead>
         <tbody>
-            {% for province in country.provinces %}
-                <tr id="{{ province.id }}">
-                    <td>{{ province.name }}</td>
-                    <td>{{ province.code }}</td>
+            {% for administrativeArea in country.administrativeAreas %}
+                <tr id="{{ administrativeArea.id }}">
+                    <td>{{ administrativeArea.name }}</td>
+                    <td>{{ administrativeArea.code }}</td>
                 </tr>
             {% endfor %}
         </tbody>

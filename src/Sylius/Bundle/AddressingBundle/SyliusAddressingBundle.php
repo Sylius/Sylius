@@ -16,7 +16,7 @@ use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Addressing\Model\ProvinceInterface;
+use Sylius\Component\Addressing\Model\AdministrativeAreaInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -55,11 +55,11 @@ class SyliusAddressingBundle extends AbstractResourceBundle
     protected function getModelInterfaces()
     {
         return array(
-            AddressInterface::class    => 'sylius.model.address.class',
-            CountryInterface::class    => 'sylius.model.country.class',
-            ProvinceInterface::class   => 'sylius.model.province.class',
-            ZoneInterface::class       => 'sylius.model.zone.class',
-            ZoneMemberInterface::class => 'sylius.model.zone_member.class',
+            AddressInterface::class              => 'sylius.model.address.class',
+            CountryInterface::class              => 'sylius.model.country.class',
+            AdministrativeAreaInterface::class   => 'sylius.model.administrative_area.class',
+            ZoneInterface::class                 => 'sylius.model.zone.class',
+            ZoneMemberInterface::class           => 'sylius.model.zone_member.class',
         );
     }
 

@@ -34,9 +34,9 @@ class Country implements CountryInterface
     protected $code;
 
     /**
-     * @var Collection|ProvinceInterface[]
+     * @var Collection|AdministrativeAreaInterface[]
      */
-    protected $provinces;
+    protected $administrativeAreas;
 
     /**
      * @var bool
@@ -45,7 +45,7 @@ class Country implements CountryInterface
 
     public function __construct()
     {
-        $this->provinces = new ArrayCollection();
+        $this->administrativeAreas = new ArrayCollection();
     }
 
     /**
@@ -83,55 +83,55 @@ class Country implements CountryInterface
     /**
      * {@inheritdoc}
      */
-    public function getProvinces()
+    public function getAdministrativeAreas()
     {
-        return $this->provinces;
+        return $this->administrativeAreas;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setProvinces(Collection $provinces)
+    public function setAdministrativeAreas(Collection $administrativeAreas)
     {
-        $this->provinces = $provinces;
+        $this->administrativeAreas = $administrativeAreas;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasProvinces()
+    public function hasAdministrativeAreas()
     {
-        return !$this->provinces->isEmpty();
+        return !$this->administrativeAreas->isEmpty();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addProvince(ProvinceInterface $province)
+    public function addAdministrativeArea(AdministrativeAreaInterface $administrativeArea)
     {
-        if (!$this->hasProvince($province)) {
-            $this->provinces->add($province);
-            $province->setCountry($this);
+        if (!$this->hasAdministrativeArea($administrativeArea)) {
+            $this->administrativeAreas->add($administrativeArea);
+            $administrativeArea->setCountry($this);
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function removeProvince(ProvinceInterface $province)
+    public function removeAdministrativeArea(AdministrativeAreaInterface $administrativeArea)
     {
-        if ($this->hasProvince($province)) {
-            $this->provinces->removeElement($province);
-            $province->setCountry(null);
+        if ($this->hasAdministrativeArea($administrativeArea)) {
+            $this->administrativeAreas->removeElement($administrativeArea);
+            $administrativeArea->setCountry(null);
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasProvince(ProvinceInterface $province)
+    public function hasAdministrativeArea(AdministrativeAreaInterface $administrativeArea)
     {
-        return $this->provinces->contains($province);
+        return $this->administrativeAreas->contains($administrativeArea);
     }
 
     /**

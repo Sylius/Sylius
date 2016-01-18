@@ -48,16 +48,16 @@ class SyliusAddressingExtension extends AbstractResourceExtension
         $container->setParameter('sylius.scope.zone', $config['scopes']);
 
         $container
-            ->getDefinition('sylius.form.type.province_choice')
+            ->getDefinition('sylius.form.type.administrative_area_choice')
             ->setArguments(array(
-                new Reference('sylius.repository.province'),
+                new Reference('sylius.repository.administrative_area'),
             ))
         ;
 
         $container
-            ->getDefinition('sylius.form.type.province_code_choice')
+            ->getDefinition('sylius.form.type.administrative_area_code_choice')
             ->setArguments(array(
-                new Reference('sylius.repository.province'),
+                new Reference('sylius.repository.administrative_area'),
             ))
         ;
 

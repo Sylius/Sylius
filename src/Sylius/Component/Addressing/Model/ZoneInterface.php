@@ -21,8 +21,8 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  */
 interface ZoneInterface extends ResourceInterface, CodeAwareInterface
 {
+    const TYPE_ADMINISTRATIVE_AREA = 'administrative-area';
     const TYPE_COUNTRY = 'country';
-    const TYPE_PROVINCE = 'province';
     const TYPE_ZONE = 'zone';
 
     /**

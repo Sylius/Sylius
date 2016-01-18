@@ -10,6 +10,8 @@ UPGRADE
 * Removed specific ``ZoneMembers`` i.e. ``ProvinceZoneMember`` in favor of a dynamic ``ZoneMember``;
 * https://github.com/Sylius/Sylius/pull/3696
 
+* Replaced ``Province`` with ``AdministrativeArea``
+
 ### Order and SyliusOrderBundle
 
 * Introduced ``OrderItemUnit``, which represents every single unit in ``Order``;

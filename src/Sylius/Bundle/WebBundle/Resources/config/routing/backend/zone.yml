@@ -22,7 +22,7 @@ sylius_backend_zone_create:
                 method: createTyped
                 arguments: [$type]
     requirements:
-        type: country|province|zone
+        type: country|administrative-area|zone
 
 sylius_backend_zone_update:
     path: /{id}/edit

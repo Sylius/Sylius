@@ -18,12 +18,12 @@ use Symfony\Component\Validator\Constraint;
  *
  * @author Julien Janvier <j.janvier@gmail.com>
  */
-class ProvinceAddressConstraint extends Constraint
+class AdministrativeAreaAddressConstraint extends Constraint
 {
     /**
      * @var string
      */
-    public $message = 'sylius.address.province.valid';
+    public $message = 'sylius.address.administrative_area.valid';
 
     /**
      * {@inheritdoc}
@@ -38,6 +38,6 @@ class ProvinceAddressConstraint extends Constraint
      */
     public function validatedBy()
     {
-        return 'sylius_province_address_validator';
+        return 'sylius_administrative_area_address_validator';
     }
 }

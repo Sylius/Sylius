@@ -13,14 +13,14 @@ namespace spec\Sylius\Bundle\AddressingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceChoiceType;
+use Sylius\Bundle\AddressingBundle\Form\Type\AdministrativeAreaChoiceType;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class ProvinceCodeChoiceTypeSpec extends ObjectBehavior
+class AdministrativeAreaCodeChoiceTypeSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $repository)
     {
@@ -29,17 +29,17 @@ class ProvinceCodeChoiceTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Form\Type\ProvinceCodeChoiceType');
+        $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Form\Type\AdministrativeAreaCodeChoiceType');
     }
 
     function it_extends_province_choice_type()
     {
-        $this->shouldHaveType(ProvinceChoiceType::class);
+        $this->shouldHaveType(AdministrativeAreaChoiceType::class);
     }
 
     function it_has_a_valid_name()
     {
-        $this->getName()->shouldReturn('sylius_province_code_choice');
+        $this->getName()->shouldReturn('sylius_administrative_area_code_choice');
     }
 
     function it_configures_options(OptionsResolver $resolver)

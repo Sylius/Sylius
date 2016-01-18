@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\AddressingBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\AddressingBundle\Validator\Constraints\ProvinceAddressConstraint;
+use Sylius\Bundle\AddressingBundle\Validator\Constraints\AdministrativeAreaAddressConstraint;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintViolation;
@@ -39,7 +39,7 @@ class ShippableAddressConstraintValidatorSpec extends ObjectBehavior
 
     function it_does_not_add_violation(
         AddressInterface $address,
-        ProvinceAddressConstraint $constraint,
+        AdministrativeAreaAddressConstraint $constraint,
         ExecutionContextInterface $context
     ) {
         $this->initialize($context);
@@ -56,7 +56,7 @@ class ShippableAddressConstraintValidatorSpec extends ObjectBehavior
 
     function it_adds_violation_because_address_is_shippable(
         AddressInterface $address,
-        ProvinceAddressConstraint $constraint,
+        AdministrativeAreaAddressConstraint $constraint,
         ExecutionContextInterface $context
     ) {
         $this->initialize($context);

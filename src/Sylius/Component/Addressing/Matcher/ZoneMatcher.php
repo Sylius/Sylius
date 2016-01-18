@@ -37,7 +37,7 @@ class ZoneMatcher implements ZoneMatcherInterface
      * @var array
      */
     protected $priorities = array(
-        ZoneInterface::TYPE_PROVINCE,
+        ZoneInterface::TYPE_ADMINISTRATIVE_AREA,
         ZoneInterface::TYPE_COUNTRY,
         ZoneInterface::TYPE_ZONE,
     );
@@ -118,8 +118,8 @@ class ZoneMatcher implements ZoneMatcherInterface
     {
         switch ($type = $member->getBelongsTo()->getType())
         {
-            case ZoneInterface::TYPE_PROVINCE:
-                return null !== $address->getProvince() && $address->getProvince() === $member->getCode();
+            case ZoneInterface::TYPE_ADMINISTRATIVE_AREA:
+                return null !== $address->getAdministrativeArea() && $address->getAdministrativeArea() === $member->getCode();
 
             case ZoneInterface::TYPE_COUNTRY:
                 return null !== $address->getCountry() && $address->getCountry() === $member->getCode();

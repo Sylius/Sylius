@@ -1,13 +1,19 @@
 <address>
     <strong>{{ address.firstName }} {{ address.lastName }}</strong><br/>
-    {% if address.company %}
-        {{ address.company }}<br/>
+    {% if address.organization %}
+        {{ address.organization }}<br/>
     {% endif %}
     {{ address.phoneNumber }}<br/>
-    {{ address.street }}<br/>
-    {{ address.city }}<br/>
-    {% if address.province %}
-        {{ address.province }}<br/>
+    {{ address.locality }}<br/>
+    {% if address.dependentLocality %}
+        {{ address.dependentLocality }}<br/>
+    {% endif %}
+    {{ address.firstAddressLine }}
+    {% if address.secondAddressLine %}
+        {{ address.secondAddressLine }}
+    {% endif %}
+    {% if address.administrativeArea %}
+        {{ address.administrativeArea }}<br/>
     {% endif %}
     {{ address.country|sylius_country_name|upper }} {{ address.postcode }}
 </address>

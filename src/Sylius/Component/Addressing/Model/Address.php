@@ -39,7 +39,7 @@ class Address implements AddressInterface
     /**
      * @var string
      */
-    protected $company;
+    protected $organization;
 
     /**
      * @var string
@@ -49,17 +49,27 @@ class Address implements AddressInterface
     /**
      * @var string
      */
-    protected $province;
+    protected $administrativeArea;
 
     /**
      * @var string
      */
-    protected $street;
+    protected $locality;
 
     /**
      * @var string
      */
-    protected $city;
+    protected $dependentLocality;
+
+    /**
+     * @var string
+     */
+    protected $firstAddressLine;
+
+    /**
+     * @var string
+     */
+    protected $secondAddressLine;
 
     /**
      * @var string
@@ -148,17 +158,17 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function getCompany()
+    public function getOrganization()
     {
-        return $this->company;
+        return $this->organization;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setCompany($company)
+    public function setOrganization($organization)
     {
-        $this->company = $company;
+        $this->organization = $organization;
     }
 
     /**
@@ -175,7 +185,7 @@ class Address implements AddressInterface
     public function setCountry($country = null)
     {
         if (null === $country) {
-            $this->province = null;
+            $this->administrativeArea = null;
         }
 
         $this->country = $country;
@@ -184,53 +194,85 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function getProvince()
+    public function getAdministrativeArea()
     {
-        return $this->province;
+        return $this->administrativeArea;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setProvince($province = null)
+    public function setAdministrativeArea($administrativeArea = null)
     {
         if (null === $this->country) {
             return;
         }
 
-        $this->province = $province;
+        $this->administrativeArea = $administrativeArea;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getStreet()
+    public function getLocality()
     {
-        return $this->street;
+        return $this->locality;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setStreet($street)
+    public function setLocality($locality)
     {
-        $this->street = $street;
+        $this->locality = $locality;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getCity()
+    public function getDependentLocality()
     {
-        return $this->city;
+        return $this->dependentLocality;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setCity($city)
+    public function setDependentLocality($dependentLocality)
     {
-        $this->city = $city;
+        $this->dependentLocality = $dependentLocality;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFirstAddressLine()
+    {
+        return $this->firstAddressLine;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setFirstAddressLine($firstAddressLine)
+    {
+        $this->firstAddressLine = $firstAddressLine;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSecondAddressLine()
+    {
+        return $this->secondAddressLine;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setSecondAddressLine($secondAddressLine)
+    {
+        $this->secondAddressLine = $secondAddressLine;
     }
 
     /**

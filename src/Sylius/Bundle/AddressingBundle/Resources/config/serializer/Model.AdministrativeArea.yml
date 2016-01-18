@@ -1,6 +1,6 @@
-Sylius\Component\Addressing\Model\Province:
+Sylius\Component\Addressing\Model\AdministrativeArea:
     exclusion_policy: ALL
-    xml_root_name: province
+    xml_root_name: administrative_area
     properties:
         id:
             expose: true
@@ -21,7 +21,7 @@ Sylius\Component\Addressing\Model\Province:
     relations:
         - rel: self
           href:
-                route: sylius_api_province_show
+                route: sylius_api_administrative_area_show
                 parameters:
                     countryId: expr(object.getCountry().getId())
                     id: expr(object.getId())
