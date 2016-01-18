@@ -42,7 +42,7 @@ Now, configure it under ``sylius_resource``:
             app.book:
                 classes:
                     model: AppBundle\Entity\Book
-                    forms:
+                    form:
                         default: AppBundle\Form\Type\BookType
 
 That's it. Your new class will be used for all forms!
