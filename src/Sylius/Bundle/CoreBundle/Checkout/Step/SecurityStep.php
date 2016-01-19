@@ -36,6 +36,8 @@ class SecurityStep extends CheckoutStep
     public function displayAction(ProcessContextInterface $context)
     {
         $order = $this->getCurrentCart();
+        $this->applyTransition('start', $order);
+
         // If user is already logged in, transparently jump to next step.
         if ($this->isUserLoggedIn()) {
             return $this->processUserLoggedIn($order);

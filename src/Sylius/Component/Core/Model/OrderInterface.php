@@ -31,12 +31,12 @@ interface OrderInterface extends
     CustomerAwareInterface,
     ChannelAwareInterface
 {
+    const CHECKOUT_STATE_ADDRESSED = 'addressed';
     const CHECKOUT_STATE_CART = 'cart';
-    const CHECKOUT_STATE_ADDRESSING = 'addressing';
-    const CHECKOUT_STATE_SHIPPING = 'shipping';
-    const CHECKOUT_STATE_PAYMENT = 'payment';
-    const CHECKOUT_STATE_FINALIZE = 'finalize';
-    const CHECKOUT_STATE_COMPLETED = 'completed';
+    const CHECKOUT_STATE_COMPLETED  = 'completed';
+    const CHECKOUT_STATE_PAYMENT_SELECTED = 'payment_selected';
+    const CHECKOUT_STATE_SHIPPING_SELECTED = 'shipping_selected';
+    const CHECKOUT_STATE_STARTED = 'started';
 
     /**
      * @return null|UserInterface

@@ -32,6 +32,8 @@ class PaymentStep extends CheckoutStep
         $order = $this->getCurrentCart();
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PAYMENT_INITIALIZE, $order);
 
+        $this->applyTransition('reselect_payment', $order, true);
+
         $form = $this->createCheckoutPaymentForm($order);
 
         return $this->renderStep($context, $order, $form);
@@ -52,6 +54,8 @@ class PaymentStep extends CheckoutStep
         if ($form->handleRequest($request)->isValid()) {
             $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PAYMENT_PRE_COMPLETE, $order);
 
+            $this->applyTransition('select_payment', $order);
+
             $this->getManager()->persist($order);
             $this->getManager()->flush();
 
@@ -63,6 +67,13 @@ class PaymentStep extends CheckoutStep
         return $this->renderStep($context, $order, $form);
     }
 
+    /**
+     * @param ProcessContextInterface $context
+     * @param OrderInterface $order
+     * @param FormInterface $form
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     protected function renderStep(ProcessContextInterface $context, OrderInterface $order, FormInterface $form)
     {
         return $this->render($this->container->getParameter(sprintf('sylius.checkout.step.%s.template', $this->getName())), [
@@ -72,6 +83,11 @@ class PaymentStep extends CheckoutStep
         ]);
     }
 
+    /**
+     * @param OrderInterface $order
+     *
+     * @return \Symfony\Component\Form\Form
+     */
     protected function createCheckoutPaymentForm(OrderInterface $order)
     {
         return $this->createForm('sylius_checkout_payment', $order);

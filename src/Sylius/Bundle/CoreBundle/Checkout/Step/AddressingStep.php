@@ -31,6 +31,9 @@ class AddressingStep extends CheckoutStep
     public function displayAction(ProcessContextInterface $context)
     {
         $order = $this->getCurrentCart();
+
+        $this->applyTransition('readdress', $order, true);
+
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::ADDRESSING_INITIALIZE, $order);
         $form = $this->createCheckoutAddressingForm($order, $this->getCustomer());
 
@@ -51,6 +54,8 @@ class AddressingStep extends CheckoutStep
         if ($form->handleRequest($request)->isValid()) {
             $this->dispatchCheckoutEvent(SyliusCheckoutEvents::ADDRESSING_PRE_COMPLETE, $order);
 
+            $this->applyTransition('address', $order);
+
             $this->getManager()->persist($order);
             $this->getManager()->flush();
 
@@ -62,6 +67,13 @@ class AddressingStep extends CheckoutStep
         return $this->renderStep($context, $order, $form);
     }
 
+    /**
+     * @param ProcessContextInterface $context
+     * @param OrderInterface $order
+     * @param FormInterface $form
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     protected function renderStep(ProcessContextInterface $context, OrderInterface $order, FormInterface $form)
     {
         return $this->render($this->container->getParameter(sprintf('sylius.checkout.step.%s.template', $this->getName())), [

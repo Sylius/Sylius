@@ -75,7 +75,7 @@ class Order extends Cart implements OrderInterface
     /**
      * @var string
      */
-    protected $checkoutState = OrderInterface::STATE_CART;
+    protected $checkoutState = OrderInterface::CHECKOUT_STATE_CART;
 
     /**
      * @var string
