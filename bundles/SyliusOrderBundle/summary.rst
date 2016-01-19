@@ -36,6 +36,12 @@ Configuration reference
                         default: Sylius\Bundle\OrderBundle\Form\Type\OrderItemType
                 validation_groups:
                      default: [ sylius ]
+            order_item_unit:
+                classes:
+                    model:      Sylius\Component\Order\Model\OrderItemUnit
+                    interface:  Sylius\Component\Order\Model\OrderItemUnit\Interface
+                    repository: ~
+                    factory:    Sylius\Bundle\OrderBundle\Factory\OrderItemUnitFactory
             order_identity:
                 classes:
                     model:     Sylius\Component\Order\Model\Identity
