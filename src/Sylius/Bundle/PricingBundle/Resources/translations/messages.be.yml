@@ -10,6 +10,3 @@ sylius:
     pricing:
       volume_based:
         price: Кошт
-  pricing:
-    volume_based:
-      price: Кошт

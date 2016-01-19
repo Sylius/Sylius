@@ -233,7 +233,6 @@ sylius:
     create_header: Nytt land
     id: ID
     index_header: Land
-    iso_name: ISO navn
     manage: Administrer land
     name: Navn
     no_results: Det er ingen land konfigurert.
@@ -759,4 +758,15 @@ sylius:
     topic: Emne
     updated_at: Sist oppdatert
   ui:
+    email: E-post
+    register: Registrer
+    login: Logg inn
+    logout: Logg ut
+    change_password: Endre passord
+    account_panel_outline: Nyt alle funksjonene som finnes på din personlige side til å vise, spore og administrere alle dine data.
     code: Kode
+  pricing:
+    volume_based:
+      price: Pris
+      button:
+        add: Legg til

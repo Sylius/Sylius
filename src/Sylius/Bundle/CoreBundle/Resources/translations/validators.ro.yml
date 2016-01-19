@@ -13,11 +13,3 @@ sylius:
     price:
       min: Preţul nu poate fi negativ.
       not_blank: Vă rugăm să completați preţul.
-sylius_shipping:
-  method:
-    zone:
-      not_blank: Vă rugăm să introduceţi zona pentru metoda de livrare.
-sylius_taxation:
-  rate:
-    zone:
-      not_blank: Vă rugăm să introduceţi zona de taxă.

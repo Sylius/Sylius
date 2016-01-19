@@ -334,7 +334,6 @@ sylius:
     create_header: Nuevo país
     id: ID
     index_header: Países
-    iso_name: Nombre ISO
     manage: Gestionar países
     name: Nombre
     no_results: No hay países configurados.
@@ -413,7 +412,7 @@ sylius:
     option_value:
       add_value: Añadir valor
     profile:
-      email: Correo electrónico
+      email: Dirección de correo electrónico
       firstName: Nombre
       lastName: Apellidos
     comment:
@@ -561,7 +560,6 @@ sylius:
     currency: Moneda
     immutable_warning: Los pedidos enviados ya no pueden ser modificados.
     promotion_coupons: sylius.breadcrumb.promotion_coupon.index
-    no_promotion: 'Sin cupones en used.order:'
     adjustments:
       manage: Manejar ajustes
       type: Tipo
@@ -948,7 +946,7 @@ sylius:
     billing_address: Dirección de facturación
     create: crear cliente
     create_header: Nuevo cliente
-    email: Correo electrónico
+    email: Dirección de correo electrónico
     filter:
       all: Mostrar todos los clientes
       registered: Mostrar clientes registrados
@@ -969,7 +967,6 @@ sylius:
     show_header: Detalles del cliente
     update_header: Editando cliente
     groups: Grupos
-    no_groups: No hay ningún grupo de este cliente para mostrar.
   user:
     create: Crear usuario
     create_header: Nuevo usuario
@@ -1038,7 +1035,7 @@ sylius:
     id: ID
     firstName: Nombre
     lastName: Apellidos
-    email: Correo electrónico
+    email: Dirección de correo electrónico
     message: Mensaje
     topic: Asunto
     index_header: Solicitud de contacto
@@ -1052,5 +1049,20 @@ sylius:
   enable: Activar
   disable: Desactivar
   ui:
+    email: Dirección de correo electrónico
+    register: Registrarse
+    login: Iniciar sesión
+    logout: Cerrar sesión
+    no_account: ¿Sin cuenta todavía?
+    forgot_password: ¿Olvido su contraseña?
+    change_password: Cambiar mi contraseña
+    account_panel_outline: Disfruta de todas las características disponibles en tu espacio personal para ver, seguir y gestionar toda tu información.
     links: Enlaces
     code: Código
+  pricing:
+    volume_based:
+      min: Volumen mínimo
+      max: Volumen máximo
+      price: Precio
+      button:
+        add: Añadir

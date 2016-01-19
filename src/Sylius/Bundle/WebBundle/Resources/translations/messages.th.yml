@@ -222,7 +222,6 @@ sylius:
     create_header: ประเทศใหม่
     id: ID
     index_header: ประเทศ
-    iso_name: ชื่อ ISO
     manage: จัดการประเทศ
     name: ชื่อ
     no_results: ไม่มีประเทศถูกกำหนดค่าไว้
@@ -679,7 +678,7 @@ sylius:
   unknown: ไม่ระบุ
   customer:
     billing_address: ที่อยู่สำหรับออกใบเสร็จ
-    email: Email
+    email: อีเมล
     first_name: ชื่อ
     id: ID
     last_name: นามสกุล
@@ -740,7 +739,16 @@ sylius:
     id: ID
     firstName: ชื่อ
     lastName: นามสกุล
-    email: Email
+    email: อีเมล
     updated_at: ปรับปรุงล่าสุด
   ui:
+    email: อีเมล
+    register: ลงทะเบียน
+    login: เข้าสู่ระบบ
+    logout: ออกจากระบบ
+    change_password: เปลี่ยนรหัสผ่านของคุณ
+    account_panel_outline: ยินดีด้วย คุณสามารถใช้งานคุณสมบัติของระบบได้ทั้งหมด
     code: รหัส
+  pricing:
+    volume_based:
+      price: ราคา

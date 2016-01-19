@@ -5,12 +5,14 @@ sylius:
   backend:
     menu:
       main:
+        api_clients: Klienci API
         archetypes: Szablony produktów
         assortment: Asortyment
         attributes: Konfigurowanie cech
         blocks: Bloki
         channels: Kanały
         configuration: Konfiguracja
+        contact_requests: Prośby o kontakt
         contact_topics: Konfiguruj tytuły
         content: Treść
         countries: Kraje
@@ -52,6 +54,7 @@ sylius:
         tax_rates: Stawki podatkowe
         zones: Strefy
       sidebar:
+        api_clients: Klienci API
         archetypes: Szablony produktów
         assortment: Asortyment
         attributes: Konfigurowanie cech

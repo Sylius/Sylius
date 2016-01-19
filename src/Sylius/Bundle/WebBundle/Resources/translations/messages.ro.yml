@@ -239,7 +239,6 @@ sylius:
     create_header: Țară nouă
     id: Id
     index_header: Țări
-    iso_name: Cod ISO
     manage: Gestionare ţări
     name: Nume
     no_results: Nu este configurată nici o țară.
@@ -769,4 +768,15 @@ sylius:
     topic: Subiect
     updated_at: Data modificării
   ui:
+    email: E-mail
+    register: Creează cont nou
+    login: Conectaţi-vă
+    logout: Deconectare
+    change_password: Modificare parolă
+    account_panel_outline: Bucuraţi-vă de toate facilitățile care sunt disponibile in contul personal, urmăriți şi gestionați toate datele dumneavoastră.
     code: Cod
+  pricing:
+    volume_based:
+      price: Preț
+      button:
+        add: Adăugați

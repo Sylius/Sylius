@@ -10,11 +10,3 @@ sylius:
     price:
       min: Az ár nem lehet negatív szám.
       not_blank: Kérjük, írja be az árat.
-sylius_shipping:
-  method:
-    zone:
-      not_blank: Kérjük, adjon meg szállítási módra vonatkozó sávot.
-sylius_taxation:
-  rate:
-    zone:
-      not_blank: Kérjük adjon meg adó sávot.

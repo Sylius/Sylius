@@ -16,11 +16,3 @@ sylius:
   product_translation:
     short_description:
       max: 'Trumpas aprašymas negali būti ilgesnis nei {{ limit }} simbolių.'
-sylius_shipping:
-  method:
-    zone:
-      not_blank: Įveskite siuntimo būdo zoną.
-sylius_taxation:
-  rate:
-    zone:
-      not_blank: Įveskite mokesčių tarifo zoną.

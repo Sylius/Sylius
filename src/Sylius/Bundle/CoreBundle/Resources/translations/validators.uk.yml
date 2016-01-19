@@ -13,11 +13,3 @@ sylius:
     price:
       min: Ціна не має бути негативною.
       not_blank: Будь ласка, введіть ціну.
-sylius_shipping:
-  method:
-    zone:
-      not_blank: Будь ласка, введіть зону доставки.
-sylius_taxation:
-  rate:
-    zone:
-      not_blank: Будь ласка, введіть зону оподаткування.

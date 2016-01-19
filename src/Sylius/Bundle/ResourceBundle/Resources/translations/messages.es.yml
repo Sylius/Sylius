@@ -1,7 +1,8 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-form:
-  collection:
-    add: Añadir
-    delete: Eliminar
+sylius:
+  form:
+    collection:
+      add: Añadir
+      delete: sylius.account.address.action.delete

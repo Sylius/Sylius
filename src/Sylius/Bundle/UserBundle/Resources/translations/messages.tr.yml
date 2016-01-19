@@ -2,27 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    email: E-posta
-    register: Üye ol
-    login: Giriş
-    logout: Çıkış yap
-    logged_in_as: '%username% olarak giriş yapıldı'
-    no_account: Hesabınız yok mu?
-    forgot_password: Şifrenizi mi unuttunuz?
-    reset_password: Parolayı sıfırla
-    reset: Sıfırlama
-    password:
-      reset:
-        header: Parolayı sıfırla
-        button: Sıfırlama
-    profile: Profil
-    change_password: Parolanızı değiştirin
-    account_panel_outline: Kişisel alanınızda görüntülemek, izlemek ve tüm verilerinizi yönetmek için kullanılabilen tüm özelliklerin keyfini çıkarın.
-    customer_since: Den beri müşterisiniz
-    welcome: Hoşgeldiniz
-    customer:
-      id: Müşteri No
   form:
     group:
       name: Ad

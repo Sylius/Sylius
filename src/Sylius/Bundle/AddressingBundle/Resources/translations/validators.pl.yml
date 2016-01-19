@@ -9,6 +9,7 @@ sylius:
       not_blank: Proszę podać miejscowość.
     country:
       not_blank: Proszę wybrać kraj.
+      disabled: Wybrany kraj jest wyłączony. Proszę wybrać inny.
     first_name:
       max_length: Imię nie powinno przekraczać 255 znaków|Imię nie powinno przekraczać 255 znaków.
       min_length: Imię powinno mieć co najmniej 2 znaki|Imię powinno mieć co najmniej 2 znaki.
@@ -28,12 +29,6 @@ sylius:
       min_length: Adres powinien mieć co najmniej 2 znaki|Adres powinien mieć co najmniej 2 znaki.
       not_blank: Proszę podać ulicę.
     not_shippable: Ten adres nie jest prawidłowym adresem dostawy.
-  country:
-    iso_name:
-      not_blank: Proszę podać kod ISO kraju.
-    name:
-      max_length: Nazwa kraju nie powinna przekraczać 255 znaków|Nazwa kraju nie powinna przekraczać 255 znaków.
-      not_blank: Proszę podać nazwę kraju.
   province:
     name:
       max_length: Nazwa województwa nie powinna przekraczać 255 znaków|Nazwa województwa nie powinna przekraczać 255 znaków.

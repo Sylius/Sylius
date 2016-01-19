@@ -334,7 +334,6 @@ sylius:
     create_header: Yeni ülke
     id: ID
     index_header: Ülkeler
-    iso_name: ISO adı
     manage: Ülkeleri yönetme
     name: Ad
     no_results: Yapılandırılmış hiçbir ülke bulunmamaktadır.
@@ -561,7 +560,6 @@ sylius:
     currency: Kur
     immutable_warning: Zaten sevk edilen siparişler değişmez.
     promotion_coupons: Kuponlar
-    no_promotion: 'No kupon used.order vardı:'
     adjustments:
       manage: Ayarları yönet
       type: Türü
@@ -969,7 +967,6 @@ sylius:
     show_header: Müşteri detayları
     update_header: Müşteri düzenleme
     groups: Gruplar
-    no_groups: Bu müşteriyi görüntülemek için grup yok.
   user:
     create: Kullanıcı oluşturma
     create_header: Yeni Kullanıcı
@@ -1052,5 +1049,20 @@ sylius:
   enable: Etkin
   disable: Devre dışı
   ui:
+    email: E-posta
+    register: Üye ol
+    login: Giriş
+    logout: Çıkış yap
+    no_account: Hesabınız yok mu?
+    forgot_password: Şifrenizi mi unuttunuz?
+    change_password: Parolanızı değiştirin
+    account_panel_outline: Kişisel alanınızda görüntülemek, izlemek ve tüm verilerinizi yönetmek için kullanılabilen tüm özelliklerin keyfini çıkarın.
     links: Linkler
     code: Kod
+  pricing:
+    volume_based:
+      min: Min birim
+      max: Max birim
+      price: Fiyatı
+      button:
+        add: Ekle

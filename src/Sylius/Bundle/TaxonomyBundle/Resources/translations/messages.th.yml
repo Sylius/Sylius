@@ -10,10 +10,3 @@ sylius:
       permalink: ลิงค์ถาวร
     taxonomy:
       name: ชื่อ
-  taxon:
-    create_taxon: สร้างรายการ
-    delete_taxonomy: ลบทิ้ง
-    manage_taxonomies: การจัดหมวดหมู่
-    no_taxonomies: ไม่มีรายการสำหรับแสดง
-    no_taxons: ไม่มีรายการสำหรับแสดง
-    update_taxonomy: แก้ไข

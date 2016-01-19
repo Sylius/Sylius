@@ -9,5 +9,5 @@ sylius:
       code: Код
       name: Ім’я
       type: Тип
-  attribute_type:
-    configuration: Конфігурація
+    attribute_type:
+      configuration: Конфігурація

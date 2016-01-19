@@ -151,7 +151,6 @@ sylius:
     create_header: Nova zemlja
     id: ID
     index_header: Zemlje
-    iso_name: ISO kod
     manage: Upravljaj zemljama
     name: Ime
     no_results: Nisu konfigurisane zemlje.
@@ -538,3 +537,7 @@ sylius:
   contact_request:
     id: ID
     updated_at: Ažurirano
+  ui:
+    register: Registracija
+    login: Prijavi se
+    logout: Odjavi se

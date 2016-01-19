@@ -16,11 +16,3 @@ sylius:
   product_translation:
     short_description:
       max: 'Kurzbeschreibung darf nicht länger als {{ limit }} Zeichen sein.'
-sylius_shipping:
-  method:
-    zone:
-      not_blank: Bitte Versandgebiet angeben.
-sylius_taxation:
-  rate:
-    zone:
-      not_blank: Bitte Steuerzone angeben.

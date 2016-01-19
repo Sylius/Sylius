@@ -332,7 +332,6 @@ sylius:
     create_header: Nuovo paese
     id: ID
     index_header: Paesi
-    iso_name: ISO
     manage: Amministra paesi
     name: Nome
     no_results: Non ci sono paesi configurati
@@ -923,5 +922,16 @@ sylius:
     index_header: Richieste di contatto
     updated_at: Modificato
   ui:
+    email: Email
+    register: Registrati
+    login: Login
+    logout: Logout
+    change_password: Modifica la password
+    account_panel_outline: Godetevi tutte le funzionalità che sono disponibili sul tuo spazio personale per visualizzare, tenere traccia e gestire tutti i dati.
     links: Link
     code: Codice
+  pricing:
+    volume_based:
+      price: Prezzo
+      button:
+        add: Aggiungi

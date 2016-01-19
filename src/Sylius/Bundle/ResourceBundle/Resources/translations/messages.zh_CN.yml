@@ -1,6 +1,7 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-form:
-  collection:
-    delete: 删除
+sylius:
+  form:
+    collection:
+      delete: 删除

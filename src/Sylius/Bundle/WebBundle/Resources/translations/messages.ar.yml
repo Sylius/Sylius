@@ -111,3 +111,9 @@ sylius:
     email: البريد الإلكتروني
     message: الرسالة
     topic: الموضوع
+  ui:
+    email: البريد الإلكتروني
+  pricing:
+    volume_based:
+      button:
+        add: اضافة

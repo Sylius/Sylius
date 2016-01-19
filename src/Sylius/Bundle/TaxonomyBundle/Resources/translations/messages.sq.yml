@@ -10,10 +10,3 @@ sylius:
       permalink: Permalink
     taxonomy:
       name: Emri
-  taxon:
-    create_taxon: Krijo kategori taksimi
-    delete_taxonomy: Fshi kategorinë e taksimit
-    manage_taxonomies: Kontrollo kategoritë e taksimit
-    no_taxonomies: "Nuk ka asnjë kategori taksimi për t'u shfaqur."
-    no_taxons: "Nuk ka asnjë taksë për t'u shfaqur."
-    update_taxonomy: Përditëso kategorinë e taksimit

@@ -2,13 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    email: Email
-    register: Registrati
-    login: Login
-    logout: Logout
-    change_password: Modifica la password
-    account_panel_outline: Godetevi tutte le funzionalità che sono disponibili sul tuo spazio personale per visualizzare, tenere traccia e gestire tutti i dati.
   form:
     group:
       name: Nome

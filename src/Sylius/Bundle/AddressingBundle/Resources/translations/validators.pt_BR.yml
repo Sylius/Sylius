@@ -28,12 +28,6 @@ sylius:
       min_length: O campo rua deve ter pelo menos 2 caracteres|O campo rua deve ter pelo menos 2 caracteres.
       not_blank: Por favor, digite a rua.
     not_shippable: Este endereço não é um endereço válido para envio.
-  country:
-    iso_name:
-      not_blank: Por favor, digite o código ISO do país.
-    name:
-      max_length: O nome do país deve ter no máximo 255 caracteres|O nome do país deve ter no máximo 255 caracteres.
-      not_blank: Por favor, digite o nome do país.
   province:
     name:
       max_length: O campo estado deve ter no máximo 255 caracteres|O campo estado deve ter no máximo 255 caracteres.

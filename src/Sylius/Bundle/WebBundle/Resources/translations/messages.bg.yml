@@ -221,7 +221,6 @@ sylius:
     create_header: Новата страна
     id: ID
     index_header: Страни
-    iso_name: Име ISO
     manage: Управление на страни
     name: Име
     no_results: Има няма конфигурирани страни .
@@ -626,6 +625,8 @@ sylius:
     update_header: Редактиране на класификация
   total_quantity: Общо количество
   unknown: Неизвестен
+  customer:
+    email: Имейл
   user:
     create: създаване на потребител
     create_header: Нов потребител
@@ -676,6 +677,18 @@ sylius:
   contact_topic:
     updated_at: Последно обновяване
   contact_request:
+    email: Имейл
     message: Съобщение
     topic: Тема
     updated_at: Последно обновяване
+  ui:
+    email: Имейл
+    register: Регистриране
+    login: Вход
+    logout: Изход
+    change_password: Смяна на парола
+    account_panel_outline: 'Насладете се на всички функции, които са налични  за преглед във вашето лично пространство, проследявайте и управлявайте всички ваши данни.'
+  pricing:
+    volume_based:
+      button:
+        add: добавяне

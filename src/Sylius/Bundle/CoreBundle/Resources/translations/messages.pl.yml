@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  checkout:
-    shipping_method:
-      not_blank: Wybierz metodę dostawy.
   form:
     action:
       add_product_configuration:
@@ -32,6 +29,7 @@ sylius:
       roles: Role
     channel:
       taxonomies: Kategorie
+      locale_default: Domyślne ustawienia regionalne
       locales: Ustawienia regionalne
       currency_default: Domyślna waluta
       currencies: Waluty
@@ -60,6 +58,7 @@ sylius:
       short_description: Krótki opis
       tax_category: Kategoria podatkowa
       variant_selection_method: Metody wyboru wariantu
+      main_taxon: Główne grupy
     product_filter:
       name: Nazwa
       sku: SKU
@@ -113,6 +112,7 @@ sylius:
       images: Zdjęcia
       on_hand: Dostępny
       price: Cena
+      original_price: Oryginalna cena
       sku: SKU
       weight: Waga
       width: Szerokość

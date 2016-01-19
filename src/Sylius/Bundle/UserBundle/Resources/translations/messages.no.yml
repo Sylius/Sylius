@@ -2,13 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    email: E-post
-    register: Registrer
-    login: Logg inn
-    logout: Logg ut
-    change_password: Endre passord
-    account_panel_outline: Nyt alle funksjonene som finnes på din personlige side til å vise, spore og administrere alle dine data.
   form:
     group:
       name: Navn

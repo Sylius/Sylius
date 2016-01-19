@@ -28,12 +28,6 @@ sylius:
       min_length: Název ulice musí být dlouhý nejméně 2 znaky|Název ulice musí být dlouhý nejméně 2 znaky.
       not_blank: Zadejte ulici.
     not_shippable: Tato adresa není platnou dodací destinací.
-  country:
-    iso_name:
-      not_blank: Zadejte prosím kód ISO země.
-    name:
-      max_length: Název země nesmí být delší než 255 znaků|Název země nesmí být delší než 255 znaků.
-      not_blank: Zadejte název země.
   province:
     name:
       max_length: Název státu nesmí být delší než 255 znaků|Název státu nesmí být delší než 255 znaků.

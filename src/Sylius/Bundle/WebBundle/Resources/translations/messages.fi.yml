@@ -42,3 +42,5 @@ sylius:
     email: Sähköpostiosoite
     message: Viesti
     topic: Aihe
+  ui:
+    email: Sähköpostiosoite

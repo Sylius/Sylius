@@ -6,7 +6,7 @@ sylius:
     contact_request:
       first_name: Nombre
       last_name: Apellidos
-      email: Correo electrónico
+      email: Dirección de correo electrónico
       message: Mensaje
       topic: Asunto
     contact_topic:

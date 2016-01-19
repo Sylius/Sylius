@@ -28,12 +28,6 @@ sylius:
       min_length: Adresa trebuie să conţină cel puţin 2 caractere|Adresa trebuie să conţină cel puţin 2 caractere.
       not_blank: Vă rugăm să completați adresa.
     not_shippable: Această adresă nu este o destinaţie de livrare validă.
-  country:
-    iso_name:
-      not_blank: Vă rugăm să completați codul ISO a ţării.
-    name:
-      max_length: Numele ţării nu poate depăși 255 de caractere|Numele ţării nu poate depăși 255 de caractere.
-      not_blank: Vă rugăm să completați numele ţării.
   province:
     name:
       max_length: Numele județului nu poate depăși 255 de caractere|Numele județului nu poate depăși 255 de caractere.
