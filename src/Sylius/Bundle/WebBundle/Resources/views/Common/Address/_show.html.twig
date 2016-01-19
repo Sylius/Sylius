@@ -7,7 +7,7 @@
     {{ address.street }}<br/>
     {{ address.city }}<br/>
     {% if address.province %}
-        {{ address.province }}<br/>
+        {{ address.province|sylius_province_name }}<br/>
     {% endif %}
     {{ address.country|sylius_country_name|upper }} {{ address.postcode }}
 </address>

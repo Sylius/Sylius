@@ -28,9 +28,9 @@ use Symfony\Component\Form\FormInterface;
  */
 class BuildAddressFormSubscriberSpec extends ObjectBehavior
 {
-    function let(ObjectRepository $countryRepository, FormFactoryInterface $factory)
+    function let(ObjectRepository $countryRepository, FormFactoryInterface $formFactory)
     {
-        $this->beConstructedWith($countryRepository, $factory);
+        $this->beConstructedWith($countryRepository, $formFactory);
     }
 
     function it_is_initializable()
@@ -52,7 +52,7 @@ class BuildAddressFormSubscriberSpec extends ObjectBehavior
     }
 
     function it_adds_or_removes_provinces_on_pre_set_data(
-        $factory,
+        FormFactoryInterface $formFactory,
         FormEvent $event,
         FormInterface $form,
         FormInterface $provinceForm,
@@ -69,15 +69,17 @@ class BuildAddressFormSubscriberSpec extends ObjectBehavior
         $province->getCode()->willReturn('province');
         $address->getProvince()->willReturn('province');
 
-        $factory->createNamed('province', 'sylius_province_code_choice', 'province', Argument::withKey('country'))
+        $formFactory->createNamed('province', 'sylius_province_code_choice', 'province', Argument::withKey('country'))
             ->willReturn($provinceForm);
+
+
 
         $this->preSetData($event);
     }
 
     function it_adds_or_removes_provinces_on_pre_submit(
-        $factory,
-        $countryRepository,
+        FormFactoryInterface $formFactory,
+        ObjectRepository $countryRepository,
         FormEvent $event,
         FormInterface $form,
         FormInterface $provinceForm,
@@ -91,7 +93,7 @@ class BuildAddressFormSubscriberSpec extends ObjectBehavior
         $countryRepository->findOneBy(array('code' => 'FR'))->willReturn($country);
         $country->hasProvinces()->willReturn(true);
 
-        $factory->createNamed('province', 'sylius_province_code_choice', null, Argument::withKey('country'))
+        $formFactory->createNamed('province', 'sylius_province_code_choice', null, Argument::withKey('country'))
             ->willReturn($provinceForm);
 
         $form->add($provinceForm)->shouldBeCalled();
