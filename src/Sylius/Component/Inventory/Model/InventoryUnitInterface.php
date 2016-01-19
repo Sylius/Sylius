@@ -33,16 +33,6 @@ interface InventoryUnitInterface extends TimestampableInterface
     public function getStockable();
 
     /**
-     * @param StockableInterface $stockable
-     */
-    public function setStockable(StockableInterface $stockable);
-
-    /**
-     * @return string
-     */
-    public function getSku();
-
-    /**
      * @return string
      */
     public function getInventoryName();

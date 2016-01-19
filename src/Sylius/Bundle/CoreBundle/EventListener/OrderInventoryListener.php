@@ -51,15 +51,8 @@ class OrderInventoryListener
     }
 
     /**
-     * Update the inventory units.
-     *
      * @param GenericEvent $event
      */
-    public function processInventoryUnits(GenericEvent $event)
-    {
-        $this->inventoryHandler->processInventoryUnits($this->getItem($event));
-    }
-
     public function resolveInventoryState(GenericEvent $event)
     {
         $orderItem = $this->getItem($event);
@@ -103,7 +96,7 @@ class OrderInventoryListener
     /**
      * @param GenericEvent $event
      *
-     * @return OrderInterface
+     * @return OrderItemInterface
      *
      * @throws UnexpectedTypeException
      */

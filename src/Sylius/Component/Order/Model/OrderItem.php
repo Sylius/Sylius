@@ -146,10 +146,6 @@ class OrderItem implements OrderItemInterface
 
         $this->unitPrice = $unitPrice;
         $this->recalculateUnitsTotal();
-
-        if (null !== $this->order) {
-            $this->order->calculateItemsTotal();
-        }
     }
 
     /**
@@ -158,18 +154,6 @@ class OrderItem implements OrderItemInterface
     public function getTotal()
     {
         return $this->total;
-    }
-
-    /**
-     *  Recalculates total after units total or adjustments total change.
-     */
-    public function recalculateTotal()
-    {
-        $this->total = $this->unitsTotal + $this->adjustmentsTotal;
-
-        if ($this->total < 0) {
-            $this->total = 0;
-        }
     }
 
     /**
@@ -249,10 +233,6 @@ class OrderItem implements OrderItemInterface
             $this->quantity++;
             $this->unitsTotal += $unit->getTotal();
             $this->recalculateTotal();
-
-            if (null !== $this->order) {
-                $this->order->calculateItemsTotal();
-            }
         }
     }
 
@@ -267,10 +247,6 @@ class OrderItem implements OrderItemInterface
             $this->quantity--;
             $this->unitsTotal -= $unit->getTotal();
             $this->recalculateTotal();
-
-            if (null !== $this->order) {
-                $this->order->calculateItemsTotal();
-            }
         }
     }
 
@@ -381,6 +357,25 @@ class OrderItem implements OrderItemInterface
         $this->recalculateAdjustmentsTotal();
     }
 
+    /**
+     *  Recalculates total after units total or adjustments total change.
+     */
+    protected function recalculateTotal()
+    {
+        $this->total = $this->unitsTotal + $this->adjustmentsTotal;
+
+        if ($this->total < 0) {
+            $this->total = 0;
+        }
+
+        if (null !== $this->order) {
+            $this->order->recalculateItemsTotal();
+        }
+    }
+
+    /**
+     * @param AdjustmentInterface $adjustment
+     */
     protected function addToAdjustmentsTotal(AdjustmentInterface $adjustment)
     {
         if (!$adjustment->isNeutral()) {
@@ -389,6 +384,9 @@ class OrderItem implements OrderItemInterface
         }
     }
 
+    /**
+     * @param AdjustmentInterface $adjustment
+     */
     protected function subtractFromAdjustmentsTotal(AdjustmentInterface $adjustment)
     {
         if (!$adjustment->isNeutral()) {

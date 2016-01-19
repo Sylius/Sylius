@@ -30,16 +30,4 @@ class OrderInventoryListenerSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\OrderInventoryListener');
     }
-
-    function it_creates_inventory_units(
-            InventoryHandlerInterface $inventoryHandler,
-            GenericEvent $event,
-            OrderItemInterface $item
-    ) {
-        $event->getSubject()->willReturn($item);
-
-        $inventoryHandler->processInventoryUnits($item)->shouldBeCalled();
-
-        $this->processInventoryUnits($event);
-    }
 }

@@ -17,22 +17,16 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * Order taxation listener.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderTaxationListener
 {
     /**
-     * Order taxation processor.
-     *
      * @var TaxationProcessorInterface
      */
     protected $taxationProcessor;
 
     /**
-     * Constructor.
-     *
      * @param TaxationProcessorInterface $taxationProcessor
      */
     public function __construct(TaxationProcessorInterface $taxationProcessor)
@@ -41,8 +35,6 @@ class OrderTaxationListener
     }
 
     /**
-     * Get the order from event and run the taxation processor on it.
-     *
      * @param GenericEvent $event
      *
      * @throws UnexpectedTypeException
@@ -59,7 +51,5 @@ class OrderTaxationListener
         }
 
         $this->taxationProcessor->applyTaxes($order);
-
-        $order->calculateTotal();
     }
 }

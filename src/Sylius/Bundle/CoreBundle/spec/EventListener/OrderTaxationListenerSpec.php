@@ -48,7 +48,6 @@ class OrderTaxationListenerSpec extends ObjectBehavior
     ) {
         $event->getSubject()->willReturn($order);
         $taxationProcessor->applyTaxes($order)->shouldBeCalled();
-        $order->calculateTotal()->shouldBeCalled();
 
         $this->applyTaxes($event);
     }

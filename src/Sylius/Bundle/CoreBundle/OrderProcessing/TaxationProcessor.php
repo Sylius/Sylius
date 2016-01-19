@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\OrderProcessing;
 
 use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\TaxationProcessorInterface;
@@ -31,8 +32,6 @@ class TaxationProcessor implements TaxationProcessorInterface
     protected $adjustmentFactory;
 
     /**
-     * Tax calculator.
-     *
      * @var CalculatorInterface
      */
     protected $calculator;
@@ -53,11 +52,11 @@ class TaxationProcessor implements TaxationProcessorInterface
     protected $settings;
 
     /**
-     * @param FactoryInterface         $adjustmentFactory
-     * @param CalculatorInterface      $calculator
+     * @param FactoryInterface $adjustmentFactory
+     * @param CalculatorInterface $calculator
      * @param TaxRateResolverInterface $taxRateResolver
-     * @param ZoneMatcherInterface     $zoneMatcher
-     * @param Settings                 $taxationSettings
+     * @param ZoneMatcherInterface $zoneMatcher
+     * @param Settings $taxationSettings
      */
     public function __construct(
         FactoryInterface $adjustmentFactory,
@@ -104,10 +103,14 @@ class TaxationProcessor implements TaxationProcessorInterface
         $taxes = $this->processTaxes($order, $zone);
 
         $this->addAdjustments($taxes, $order);
-
-        $order->calculateTotal();
     }
 
+    /**
+     * @param OrderInterface $order
+     * @param ZoneInterface $zone
+     *
+     * @return array
+     */
     protected function processTaxes(OrderInterface $order, $zone)
     {
         $taxes = array();
@@ -132,6 +135,10 @@ class TaxationProcessor implements TaxationProcessorInterface
         return $taxes;
     }
 
+    /**
+     * @param array $taxes
+     * @param OrderInterface $order
+     */
     protected function addAdjustments(array $taxes, OrderInterface $order)
     {
         foreach ($taxes as $description => $tax) {

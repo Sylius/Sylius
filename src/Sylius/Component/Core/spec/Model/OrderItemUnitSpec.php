@@ -89,14 +89,6 @@ class OrderItemUnitSpec extends ObjectBehavior
         $this->getStockable()->shouldReturn($variant);
     }
 
-    function its_sku_is_order_item_variant_sku(OrderItemInterface $orderItem, ProductVariantInterface $variant)
-    {
-        $variant->getSku()->willReturn('test_sku');
-        $orderItem->getVariant()->willReturn($variant);
-
-        $this->getSku()->shouldReturn('test_sku');
-    }
-
     function it_can_be_sold_or_backorderded()
     {
         $this->setInventoryState(InventoryUnitInterface::STATE_SOLD);

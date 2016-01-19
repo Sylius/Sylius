@@ -185,7 +185,7 @@ class Order implements OrderInterface
     {
         $this->items->clear();
 
-        $this->calculateItemsTotal();
+        $this->recalculateItemsTotal();
     }
 
     /**
@@ -205,12 +205,11 @@ class Order implements OrderInterface
             return;
         }
 
-        $itemTotal = $item->getTotal();
-        $this->itemsTotal = $this->itemsTotal + $itemTotal;
+        $this->itemsTotal += $item->getTotal();
         $this->items->add($item);
         $item->setOrder($this);
 
-        $this->calculateTotal();
+        $this->recalculateTotal();
     }
 
     /**
@@ -223,7 +222,7 @@ class Order implements OrderInterface
             $this->items->removeElement($item);
             $this->itemsTotal -= $item->getTotal();
 
-            $this->calculateTotal();
+            $this->recalculateTotal();
         }
     }
 
@@ -246,14 +245,14 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function calculateItemsTotal()
+    public function recalculateItemsTotal()
     {
         $this->itemsTotal = 0;
         foreach ($this->items as $item) {
             $this->itemsTotal += $item->getTotal();
         }
 
-        $this->calculateTotal();
+        $this->recalculateTotal();
     }
 
     /**
@@ -292,18 +291,6 @@ class Order implements OrderInterface
     public function getTotal()
     {
         return $this->total;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function calculateTotal()
-    {
-        $this->total = $this->itemsTotal + $this->adjustmentsTotal;
-
-        if ($this->total < 0) {
-            $this->total = 0;
-        }
     }
 
     /**
@@ -531,6 +518,7 @@ class Order implements OrderInterface
     public function clearAdjustments()
     {
         $this->adjustments->clear();
+        $this->recalculateAdjustmentsTotal();
     }
 
     /**
@@ -546,7 +534,20 @@ class Order implements OrderInterface
             }
         }
 
-        $this->calculateTotal();
+        $this->recalculateTotal();
+    }
+
+    /**
+     * Calculate total.
+     * Items total + Adjustments total.
+     */
+    protected function recalculateTotal()
+    {
+        $this->total = $this->itemsTotal + $this->adjustmentsTotal;
+
+        if ($this->total < 0) {
+            $this->total = 0;
+        }
     }
 
     /**
@@ -556,7 +557,7 @@ class Order implements OrderInterface
     {
         if (!$adjustment->isNeutral()) {
             $this->adjustmentsTotal += $adjustment->getAmount();
-            $this->calculateTotal();
+            $this->recalculateTotal();
         }
     }
 
@@ -567,7 +568,7 @@ class Order implements OrderInterface
     {
         if (!$adjustment->isNeutral()) {
             $this->adjustmentsTotal -= $adjustment->getAmount();
-            $this->calculateTotal();
+            $this->recalculateTotal();
         }
     }
 

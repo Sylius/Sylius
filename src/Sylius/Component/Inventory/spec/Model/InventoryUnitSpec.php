@@ -78,14 +78,6 @@ class InventoryUnitSpec extends ObjectBehavior
         $this->getInventoryName()->shouldReturn('[IPHONE5] iPhone 5');
     }
 
-    function it_returns_its_stockable_sku(StockableInterface $stockable)
-    {
-        $stockable->getSku()->willReturn('IPHONE5');
-        $this->setStockable($stockable);
-
-        $this->getSku()->shouldReturn('IPHONE5');
-    }
-
     function it_initializes_creation_date_by_default()
     {
         $this->getCreatedAt()->shouldHaveType('DateTime');

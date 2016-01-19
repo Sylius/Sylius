@@ -55,7 +55,7 @@ class LoadOrdersData extends DataFixture
                 $item->setVariant($variant);
                 $item->setUnitPrice($variant->getPrice());
 
-                $orderItemQuantityModifier->modify($item, rand(1, 5));
+                $orderItemQuantityModifier->modify($item, mt_rand(1, 5));
 
                 $order->addItem($item);
             }
@@ -69,7 +69,6 @@ class LoadOrdersData extends DataFixture
 
             $this->dispatchEvents($order);
 
-            $order->calculateTotal();
             $order->complete();
 
             $paymentState = PaymentInterface::STATE_COMPLETED;

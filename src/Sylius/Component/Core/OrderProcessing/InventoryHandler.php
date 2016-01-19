@@ -61,22 +61,6 @@ class InventoryHandler implements InventoryHandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function processInventoryUnits(OrderItemInterface $item)
-    {
-        $nbUnits = $item->getUnits()->count();
-
-        if ($item->getQuantity() > $nbUnits) {
-            $this->createInventoryUnits($item, $item->getQuantity() - $nbUnits);
-        } elseif ($item->getQuantity() < $nbUnits) {
-            foreach ($item->getUnits()->slice(0, $nbUnits - $item->getQuantity()) as $unit) {
-                $item->removeUnit($unit);
-            }
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function holdInventory(OrderInterface $order)
     {
         foreach ($order->getItems() as $item) {
@@ -119,23 +103,6 @@ class InventoryHandler implements InventoryHandlerInterface
 
             $this->inventoryOperator->release($item->getVariant(), $quantity);
             $this->inventoryOperator->decrease($units);
-        }
-    }
-
-    /**
-     * @param OrderItemInterface $item
-     * @param int $quantity
-     * @param string $state
-     */
-    protected function createInventoryUnits(OrderItemInterface $item, $quantity, $state = InventoryUnitInterface::STATE_CHECKOUT)
-    {
-        if ($quantity < 1) {
-            throw new \InvalidArgumentException('Quantity of units must be greater than 0.');
-        }
-
-        for ($i = 0; $i < $quantity; $i++) {
-            $unit = $this->orderItemUnitFactory->createForItem($item);
-            $unit->setInventoryState($state);
         }
     }
 
