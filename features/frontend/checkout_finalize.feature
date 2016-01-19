@@ -70,7 +70,7 @@ Feature: Checkout finalization
          When I go to the checkout start page
           And I fill in guest email with "john@example.com"
           And I press "Proceed with your order"
-         Then I should see "This email is already registered, please login or use forgotten password"
+         Then I should see "This email is already registered, please login or reset your password"
 
     Scenario: Placing the order as Guest
         Given I am not logged in
