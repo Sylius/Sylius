@@ -27,7 +27,7 @@
         "symfony/event-dispatcher": "^2.7",
         "symfony/property-access": "^2.7",
         "winzou/state-machine": "~0.1",
-        "white-october/pagerfanta-bundle": "^1.0"
+        "pagerfanta/pagerfanta": "^1.0"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.4"
