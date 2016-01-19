@@ -708,7 +708,7 @@ sylius_rbac:
             name: Administrator
             description: Administrator user
             permissions: [sylius.manage.settings, sylius.manage.locale, sylius.manage.currency, sylius.manage.country, sylius.manage.province, sylius.manage.zone, sylius.manage.payment_method, sylius.manage.channel]
-            security_roles: [ROLE_ADMINISTRATION_ACCESS]
+            security_roles: [ROLE_ADMINISTRATION_ACCESS, ROLE_ALLOWED_TO_SWITCH]
         catalog_manager:
             name: Catalog Manager
             description: Users responsible for catalog product management
@@ -728,7 +728,7 @@ sylius_rbac:
             name: Accounts Manager
             description: Users responsible for managing customer accounts
             permissions: [sylius.accounts]
-            security_roles: [ROLE_ADMINISTRATION_ACCESS]
+            security_roles: [ROLE_ADMINISTRATION_ACCESS, ROLE_ALLOWED_TO_SWITCH]
         shipping_manager:
             name: Shipping Manager
             description: Shipping Department people
@@ -762,7 +762,7 @@ sylius_rbac:
             name: Support
             description: Support Team
             permissions: [sylius.support, sylius.customer.show, sylius.customer.index]
-            security_roles: [ROLE_ADMINISTRATION_ACCESS]
+            security_roles: [ROLE_ADMINISTRATION_ACCESS, ROLE_ALLOWED_TO_SWITCH]
     roles_hierarchy:
         administrator: [catalog_manager, sales_manager, marketing_manager, accounts_manager, shipping_manager, content_editor, tax_manager, it, support]
         it: [security_auditor, developer]
