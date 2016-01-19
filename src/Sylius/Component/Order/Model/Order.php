@@ -185,7 +185,7 @@ class Order implements OrderInterface
     {
         $this->items->clear();
 
-        $this->calculateItemsTotal();
+        $this->recalculateItemsTotal();
     }
 
     /**

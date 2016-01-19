@@ -42,6 +42,6 @@ class SyliusOrderExtension extends AbstractResourceExtension
         }
 
         $orderItemType = $container->getDefinition('sylius.form.type.order_item');
-        $orderItemType->addArgument(new Reference('sylius.data_mapper.order_item_quantity'));
+        $orderItemType->addArgument(new Reference('sylius.form.data_mapper.order_item_quantity'));
     }
 }
