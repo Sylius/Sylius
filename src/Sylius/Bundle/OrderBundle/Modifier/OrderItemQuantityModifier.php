@@ -37,15 +37,15 @@ class OrderItemQuantityModifier implements OrderItemQuantityModifierInterface
      */
     public function modify(OrderItemInterface $orderItem, $targetQuantity)
     {
-        $itemQuantity = $orderItem->getQuantity();
-        if (0 >= $targetQuantity || $itemQuantity === $targetQuantity) {
+        $currentQuantity = $orderItem->getQuantity();
+        if (0 >= $targetQuantity || $currentQuantity === $targetQuantity) {
             return;
         }
 
-        if ($targetQuantity < $itemQuantity) {
-            $this->decreaseUnitsNumber($orderItem, $itemQuantity - $targetQuantity);
-        } else if ($targetQuantity > $itemQuantity) {
-            $this->increaseUnitsNumber($orderItem, $targetQuantity - $itemQuantity);
+        if ($targetQuantity < $currentQuantity) {
+            $this->decreaseUnitsNumber($orderItem, $currentQuantity - $targetQuantity);
+        } else if ($targetQuantity > $currentQuantity) {
+            $this->increaseUnitsNumber($orderItem, $targetQuantity - $currentQuantity);
         }
     }
 

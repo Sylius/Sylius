@@ -172,7 +172,7 @@ class CoreContext extends DefaultContext
     {
         $manager = $this->getEntityManager();
         $orderItemFactory = $this->getFactory('order_item');
-        $orderItemQuantityModifier = $this->getService('sylius.modifier.order_item_quantity');
+        $orderItemQuantityModifier = $this->getService('sylius.order_item_quantity_modifier');
 
         $order = $this->orders[$number];
 

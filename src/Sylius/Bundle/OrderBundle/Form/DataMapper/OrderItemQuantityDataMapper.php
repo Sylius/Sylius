@@ -53,7 +53,7 @@ class OrderItemQuantityDataMapper implements DataMapperInterface
      */
     public function mapFormsToData($forms, &$data)
     {
-        $nonQuantityForms = array();
+        $formsOtherThanQuantity = array();
         foreach ($forms as $key => $form) {
             if ('quantity' === $form->getName()) {
                 $targetQuantity = $form->getData();
@@ -62,11 +62,11 @@ class OrderItemQuantityDataMapper implements DataMapperInterface
                 continue;
             }
 
-            $nonQuantityForms[] = $form;
+            $formsOtherThanQuantity[] = $form;
         }
 
-        if (!empty($nonQuantityForms)) {
-            $this->propertyPathDataMapper->mapFormsToData($nonQuantityForms, $data);
+        if (!empty($formsOtherThanQuantity)) {
+            $this->propertyPathDataMapper->mapFormsToData($formsOtherThanQuantity, $data);
         }
     }
 }

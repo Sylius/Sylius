@@ -31,7 +31,7 @@ class LoadOrdersData extends DataFixture
     {
         $orderFactory = $this->getOrderFactory();
         $orderItemFactory = $this->getOrderItemFactory();
-        $orderItemQuantityModifier = $this->get('sylius.modifier.order_item_quantity');
+        $orderItemQuantityModifier = $this->get('sylius.order_item_quantity_modifier');
 
         $channels = array(
             'WEB-UK',

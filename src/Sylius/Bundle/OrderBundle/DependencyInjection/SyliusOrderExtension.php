@@ -40,7 +40,7 @@ class SyliusOrderExtension extends AbstractResourceExtension
             $loader->load($configFile);
         }
 
-        $orderItemQuantityDataMapper = $container->getDefinition('sylius.data_mapper.order_item_quantity');
+        $orderItemQuantityDataMapper = $container->getDefinition('sylius.form.data_mapper.order_item_quantity');
         $orderItemType = $container->getDefinition('sylius.form.type.order_item');
 
         $orderItemType->addArgument($orderItemQuantityDataMapper);
