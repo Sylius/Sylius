@@ -2,6 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+  checkout:
+    shipping_method:
+      not_blank: Zgjidh mënyrën e dërgesës.
   locale:
     code:
       not_blank: Shkruaj kodin lokal.
@@ -13,6 +16,8 @@ sylius:
     price:
       min: Çmimi nuk duhet të jetë negativ.
       not_blank: Shkruaj çmimin.
+    original_price:
+      min: çmimi fillestar nuk mund të jetë negativ.
   product_translation:
     short_description:
       max: 'Përshkrimi i shkurtër nuk duhet të përmbajë më shumë se {{ limit }} karaktere.'

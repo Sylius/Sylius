@@ -13,7 +13,6 @@ sylius:
     payment:
       amount: Betaal hoeveelheid
       method: Betaalmethode
-      fee_calculator: Kosten calculator
       state:
         header: Betaalstatus
         checkout: Afrekenen
@@ -32,8 +31,3 @@ sylius:
       enabled: Actief?
       gateway: Gateway
       name: Naam
-      fee_calculator:
-        fixed:
-          amount: Hoeveelheid
-        percent:
-          percent: '%'

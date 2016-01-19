@@ -33,10 +33,10 @@ sylius:
         shipping_methods: 发货方式
         slideshow: 幻灯片：
         stockables: 库存水平
-        taxation_settings: 税收的设置
-        taxonomies: 分类
         tax_categories: 征税类别
         tax_rates: 税率
+        taxation_settings: 税收的设置
+        taxonomies: 分类
         zones: 区域
       sidebar:
         assortment: 分类
@@ -56,8 +56,8 @@ sylius:
         options: 管理选项
         orders: 当前订单
         pages: 页
-        payments: 付款
         payment_methods: 付款方法
+        payments: 付款
         products: 产品
         promotions: 促销活动
         roles: 角色

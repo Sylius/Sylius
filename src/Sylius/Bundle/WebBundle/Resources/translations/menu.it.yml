@@ -12,6 +12,7 @@ sylius:
         blocks: Blocchi
         channels: Canali
         configuration: Configurazione
+        contact_requests: Richieste di contatto
         contact_topics: Configurazione argomenti
         content: Contenuto
         countries: Paesi
@@ -47,10 +48,10 @@ sylius:
         slideshow: Slideshow
         stockables: Livelli inventario
         support: Assistenza
-        taxation_settings: Impostazioni fiscali
-        taxonomies: Categorizzazione
         tax_categories: Categorie di tassazione
         tax_rates: Aliquote fiscali
+        taxation_settings: Impostazioni fiscali
+        taxonomies: Categorizzazione
         zones: Zone
       sidebar:
         api_clients: API dei client
@@ -80,8 +81,8 @@ sylius:
         options: Gestisci opzioni
         orders: Ordini correnti
         pages: Pagine
-        payments: Pagamenti
         payment_methods: Metodi di pagamento
+        payments: Pagamenti
         permissions: Autorizzazioni
         products: Prodotti
         promotions: Promozioni

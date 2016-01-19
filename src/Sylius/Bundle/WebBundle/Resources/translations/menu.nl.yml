@@ -46,10 +46,10 @@ sylius:
         slideshow: Slideshow
         stockables: Voorraad
         support: Helpdesk
-        taxation_settings: Belasting instellingen
-        taxonomies: Categorisering
         tax_categories: BTW-groepen
         tax_rates: BTW-tarieven
+        taxation_settings: Belasting instellingen
+        taxonomies: Categorisering
         zones: Zones
       sidebar:
         api_clients: API Klanten
@@ -78,8 +78,8 @@ sylius:
         options: Productopties
         orders: Huidige bestellingen
         pages: "Pagina's"
-        payments: Betalingen
         payment_methods: Betaalmethoden
+        payments: Betalingen
         permissions: Machtigingen
         products: Producten
         promotions: Promoties

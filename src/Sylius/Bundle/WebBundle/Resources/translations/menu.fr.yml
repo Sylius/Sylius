@@ -47,10 +47,10 @@ sylius:
         slideshow: Diaporama
         stockables: Stocks
         support: Support
-        taxation_settings: Configuration des taxes
-        taxonomies: Catégorisation
         tax_categories: Catégories de taxes
         tax_rates: Taux de taxe
+        taxation_settings: Configuration des taxes
+        taxonomies: Catégorisation
         zones: Zones
       sidebar:
         api_clients: Clients API
@@ -80,8 +80,8 @@ sylius:
         options: Gérer les options
         orders: Commandes
         pages: Pages
-        payments: Paiements
         payment_methods: Moyens de paiement
+        payments: Paiements
         permissions: "Droits d'accès"
         products: Produits
         promotions: Promotions

@@ -48,10 +48,10 @@ sylius:
         slideshow: Pokaz slajdów
         stockables: Magazyn
         support: Wsparcie techniczne
-        taxation_settings: Podatek
-        taxonomies: Taksonomia
         tax_categories: Kategorie podatkowe
         tax_rates: Stawki podatkowe
+        taxation_settings: Podatek
+        taxonomies: Taksonomia
         zones: Strefy
       sidebar:
         api_clients: Klienci API
@@ -81,8 +81,8 @@ sylius:
         options: Warianty
         orders: Aktualne zamówienia
         pages: Strony
-        payments: Płatności
         payment_methods: Metody płatności
+        payments: Płatności
         permissions: Uprawnienia
         products: Produkty
         promotions: Promocje

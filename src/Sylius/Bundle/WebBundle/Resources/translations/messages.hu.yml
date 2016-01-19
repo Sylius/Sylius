@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  emails:
-    order_confirmation:
-      subject: Köszönjük a rendelést!
   account:
     address:
       action:
@@ -22,22 +19,23 @@ sylius:
       list: Minden Ön által megadott cím
       update: Címem szerkesztése
     home:
-      outline: Élvezze az összes rendelkezésre álló funkciót, nyomon követheti, kezelheti az összes adatát.
+      email: E-mail
       since: Ön ügyfél
       welcome: Üdvözöljük az Ön tárhelyén
     order:
       created_at: Elhelyezve
       details: Az Ön rendelésének részletei
       download_invoice: Számla letöltése
-      empty: Ön még nem helyezte el a megrendelést.
       invoice: Számla
       list: Az Ön összes rendelése
+      number: Szám
       placed_at: 'Elhelyezve %at%'
       shipment:
         pending: Függőben lévő
         ready: 'Kész %at% óta'
         returned: 'Visszaadott %at%'
         shipped: 'Kiszállítva %at%'
+      state: Állapot
       total: Összesen
       tracking_number: Kiszállítási szám
     title: Az Ön fiókja
@@ -56,6 +54,11 @@ sylius:
     info: Információk
     success: Siker
     warning: Figyelmeztetés
+  archetype:
+    name: Név
+    options: Beállítások
+    parent: Szülő
+    updated_at: Utolsó frissítés
   backend:
     alert:
       info: Információk
@@ -75,16 +78,14 @@ sylius:
       orders_this_month: Rendelések összesen
       registrations_this_month: Regisztrációk összesen
       sales_this_month: Értékesítés
-  backend_welcome: 'Üdvözöljük <b>%name%</b>!'
   block:
-    index_header: Tömbök
-    no_results: Nincsenek blokkok a megjelenítéséhez.
     imagine:
       id: Azonosító
       label: Címke
       publishable: Megjelent
       title: Cím
       updated_at: Utolsó frissítés
+    index_header: Tömbök
     simple:
       body: Törzs
       id: Azonosító
@@ -143,6 +144,8 @@ sylius:
       index: Promóciók
     promotion_coupon:
       index: Kuponok
+    role:
+      index: Szerepek
     route:
       index: Útvonalak
     sales: Értékesítés
@@ -160,8 +163,6 @@ sylius:
     taxonomy:
       index: Taxonómiák
     update: Szerkesztés
-    role:
-      index: Szerepek
     zone:
       index: Zónák
   browse_products: Termékek böngészése
@@ -180,6 +181,15 @@ sylius:
       unit_price: Ár
     summary_header: A kosár végösszege
     total_items: '1 elem| % count % elemek'
+  channel:
+    code: Kód
+    created_at: Készítetve
+    currency_default: Alapértelmezett pénznem
+    enabled: Engedélyezve
+    id: Azonosító
+    name: Név
+    update: Szerkesztés
+    updated_at: Utolsó frissítés
   checkout:
     addressing:
       header: Címzési lépés
@@ -226,50 +236,55 @@ sylius:
       new_customer: Új ügyfél
       register: Regisztráció
     shipping:
-      error: Elnézést, de webáruházunk nem tudja beszerezni a kiválasztott terméket a választott országban.
       header: Szállítási mód
   confirmation:
-    message: Szeretné törölni ezt az elemet?
     title: Megerősítés
+  contact_request:
+    email: E-mail
+    firstName: Keresztnév
+    id: Azonosító
+    lastName: Vezetéknév
+    message: Üzenet
+    topic: Téma
+    updated_at: Utolsó frissítés
+  contact_topic:
+    id: Azonosító
+    title: Cím
+    updated_at: Utolsó frissítés
   country:
     add_province: Tartomány/megye hozzáadása
     create: Ország létrehozása
     create_header: Új ország
+    enabled: Engedélyezve
     id: Azonosító
     index_header: Országok
     manage: Országok kezelése
     name: Név
-    no_results: Nincsenek konfigurált országok.
     show_header: Ország részletek
     update_header: Ország szerkesztése
-    enabled: Engedélyezve
-  email:
-    code: Kód
-    enabled: Engedélyezve?
-    updated_at: Utolsó frissítés
   create: Létrehozás
   created_at: Készítetve
-  delete: törlés
-  deleted: Törölve
-  edit: szerkesztés
-  permission:
-    code: Kód
-    id: Azonosító
-    description: Leírás
-    updated_at: Utolsó frissítés
-  role:
-    code: Kód
-    id: Azonosító
-    name: Név
-    description: Leírás
-    index_header: Szerepek
-    updated_at: Utolsó frissítés
   currency:
     code: Kód
-    id: Azonosító
-    name: Név
     enabled: Engedélyezve
     exchange_rate: Árfolyam
+    id: Azonosító
+    name: Név
+    updated_at: Utolsó frissítés
+  customer:
+    billing_address: Számlázási cím
+    email: E-mail
+    first_name: Keresztnév
+    groups: Csoportok
+    id: Azonosító
+    last_name: Vezetéknév
+    shipping_address: Szállítási cím
+  delete: Törlés
+  deleted: Törölve
+  edit: Szerkesztés
+  email:
+    code: Kód
+    enabled: Engedélyezve
     updated_at: Utolsó frissítés
   filter: Szűrő
   form:
@@ -303,7 +318,6 @@ sylius:
     id: Azonosító
     index_header: Csoportok
     name: Név
-    no_results: Nincsenek megjeleníthető csoportok.
     roles: Szerepek
     update_header: Csoport szerkesztése
   hide_deleted: Törölt elem elrejtése
@@ -319,19 +333,17 @@ sylius:
     created_at: Készített
     inventory_state: Leltár állapota
     name: Név
-    no_results: Nincsenek készletegységek a megjelenítéséhez.
     shipping_state: Szállítás állapota
     sku: SKU
     updated_at: Utolsó frissítés
   locale:
-    id: Azonosító
-    name: Név
     code: Kód
     create: Terület létrehozása
     create_header: Új terület hozzáadása
     enabled: Engedélyezve
+    id: Azonosító
     index_header: Az összes konfigurált terület indexelése
-    no_results: Nincsenek konfigurált területek.
+    name: Név
     update_header: Terület szerkesztése
     updated_at: Utolsó frissítés
   login: Belépés
@@ -348,25 +360,32 @@ sylius:
     parent: Szülő
     title: Cím
   meta:
-    frontend_description: A Sylius egy modern, PHP / Symfony2 alapú e-bolt megoldás.
-    frontend_keywords: sylius, ecommerce, symfony2, shop, cart, webshop
     frontend_title: 'Sylius - modern ecommerce, Symfony2 alapokon'
   na: N/A
   newest: Legújabb termékek
   "no": false
-  product_option:
-    manage: Beállítások kezelése
-    name: név
-    updated_at: Utolsó frissítés
   order:
+    adjustments:
+      amount: Összeg
+      description: Leírás
+      type: Típus
     billing_address: Számlázási cím
+    comment:
+      author: Szerző
+      created_at: Készítetve
+      state: Állapot
     create: Rendelés létrehozása
     create_header: Új rendelés
     created_at: Létrehozás időpontja
+    currency: Pénznem
     general_info: Általános info
     id: Azonosító
     index_header: Aktuális rendelések
     inventory_tracking: Leltár követés
+    inventory_unit:
+      backorder: Előrendelés
+      fulfill: Teljesítés
+      return: Vissza
     items_total: Tételek összesen
     manage: Megrendelések kezelése
     no_items: Ez a rendelés nem tartalmaz elemeket
@@ -379,72 +398,26 @@ sylius:
     payment_state: Fizetés állapota
     payment_states:
       balance_due: Esedékesség
+    promotion_coupons: Kuponok
     promotion_total: A promóciók teljes összege
     recent_header: Legutóbbi rendelések
+    release_inventory: Kibocsáthatható készlet
     shipment_state: Szállítási állapot
     shipment_states:
       pending: Függőben
     shipments: Szállítások
-    release_inventory: Kibocsáthatható készlet
-    inventory_unit:
-      backorder: Előrendelés
-      fulfill: Teljesítés
-      return: Vissza
     shipping_address: Szállítási cím
     shipping_charges: Szállítási díjak
     shipping_total: Szállítási díj összesen
-    state: Állapot
+    show_header: Rendelés
+    state:
+      checkout: Fizetés
+      returned: Visszaküldött
+      shipped: Kiszállítva
     tax_total: Adó összesen
     taxes: Adók
     total: Összesen
     update_header: Rendelés szerkesztés
-    currency: Pénznem
-    promotion_coupons: Kuponok
-    adjustments:
-      type: Típus
-      description: Leírás
-      amount: Összeg
-    comment:
-      author: Szerző
-      created_at: Készítetve
-      state: Állapot
-  route:
-    id: Azonosító
-    index_header: Útvonalak
-    name: Név
-    title: Cím
-  redirect_route:
-    id: Azonosító
-    title: Cím
-  shipment:
-    ship: Szállítás
-    created_at: Készítetve
-    id: Azonosító
-    index_header: Szállítások
-    inventory_state: Leltár állapota
-    manage: Szállítások kezelése
-    method: Mód
-    modified: Módosítva
-    name: Név
-    no_items: Nincsenek megjeleníthető tételek.
-    no_results: Nincsenek megjeleníthető kiszállítások.
-    order: Rendelés
-    show_header: Szállítás részletei
-    sku: SKU
-    state: Állapot
-    tracking_code: Követési kód
-    update: Szerkesztés
-    update_header: Szállítás szerkesztése
-    updated_at: Utolsó frissítés
-  channel:
-    created_at: Készítetve
-    code: Kód
-    currency_default: Alapértelmezett pénznem
-    enabled: Engedélyezve
-    id: Azonosító
-    name: Név
-    update: Szerkesztés
-    updated_at: Utolsó frissítés
   order_item:
     product: Cikk
     quantity: Mennyiség
@@ -462,7 +435,6 @@ sylius:
     title: Cím
   password: Jelszó
   payment:
-    order: Rendelés
     amount: Összeg
     create: Fizetés létrehozása
     create_header: Új fizetés
@@ -471,12 +443,12 @@ sylius:
     index_header: Fizetések
     manage: Kifizetések kezelése
     method: Mód
-    no_results: Nincsenek beállított kifizetések.
+    order: Rendelés
     state:
-      header: Állapot
       checkout: Fizetés
       completed: Befejezve
       failed: Sikertelen
+      header: Állapot
       new: Új
       pending: Függőben
       processing: Feldolgozás alatt
@@ -487,14 +459,22 @@ sylius:
   payment_method:
     create: Fizetési mód létrehozása
     create_header: Új fizetési mód
-    enabled: Engedélyezve?
-    gateway: átjáró
+    gateway: Átjáró
     id: Azonosító
     index_header: Fizetési módok
     name: Név
-    no_results: Jelenleg nincs beállítva fizetési mód.
     update_header: Fizetési mód módosítása
     updated_at: Utolsó frissítés
+  permission:
+    code: Kód
+    description: Leírás
+    id: Azonosító
+    updated_at: Utolsó frissítés
+  pricing:
+    volume_based:
+      button:
+        add: Hozzáadás
+      price: Ár
   product:
     available_on: A rendelkezésre álló
     available_on_demand: Igény szerint rendelkezésre áll
@@ -511,7 +491,6 @@ sylius:
     no_description: '<i>Nincs leírás...</i>'
     no_images: Nincs kép a termékről
     no_options: Nincs a terméknek opciói
-    no_results: Nincsenek megjeleníthető termékek.
     no_shipping_category: Nincs szállítási kategória
     no_short_description: '<i>Nincs rövid leírás</i>'
     no_sku: Nincs SKU
@@ -523,29 +502,37 @@ sylius:
     shipping_category: Szállítási kategória
     show: Bővebben...
     show_header: 'Termék részletei <small>Termék megtekintése - "<strong>%product%</strong>"</small>'
-    show_in_store: megtekintés az áruházban
     sku: SKU
     stock: Aktuális készlet
     tabs:
       categorization: Kategorizálás
       images: Képek
       options: Beállítások
-      product: Termék
       pricing: Árazás
+      product: Termék
     tax_category: ÁFA-kategória
     unavailable: Nem elérhető
     update_header: Termék szerkesztése
     updated_at: Utolsó frissítés
     variant_selection_method: Változat kiválasztási módszer
-    view_details: '%product% részleteinek megtekintése.'
     volume_based:
       price: Ár
+  product_attribute:
+    code: Kód
+    name: Név
+    type: Típus
+    updated_at: Utolsó frissítés
   product_not_available_in_zone: Nem érhető el az Ön országában
+  product_option:
+    manage: Beállítások kezelése
+    name: Név
+    presentation: Bemutató
+    updated_at: Utolsó frissítés
   promotion:
     actions: Műveletek
     add_action: Művelet hozzáadása
     add_rule: Szabály hozzáadása
-    coupon_based: Kupon alapján?
+    coupon_based: Kupon alapján
     create: Promóció létrehozása
     create_header: Új promóció
     created_at: Készítetve
@@ -556,7 +543,6 @@ sylius:
     index_header: Aktuális promóciók
     manage: Promóciók kezelése
     name: Név
-    no_results: Nincsenek beállított promóciók.
     rules: Szabályok
     show_header: Promóció részletei
     starts_at: Kezdődik
@@ -575,29 +561,35 @@ sylius:
     generate_header: Kuponok generálása
     index: Kuponok listázása
     index_header: Kuponok
-    no_results: Nincsenek megjeleníthető kuponok
     total_results:
       Total: '%total%'
     update_header: Kupon szerkesztése
   promotion_rule:
     configuration: Konfiguráció
     type: Típus
-  product_attribute:
-    code: Kód
-    name: név
-    updated_at: Utolsó frissítés
-  archetype:
-    name: név
-    updated_at: Utolsó frissítés
   province:
     provinces: Tartományok
-  remember_me: Emlékezzen rám?
+  redirect_route:
+    id: Azonosító
+    title: Cím
   report:
-    details: részletek
-    name: Név
     code: Kód
     description: Leírás
+    id: Azonosító
     manage: Kezelés
+    name: Név
+  role:
+    code: Kód
+    description: Leírás
+    id: Azonosító
+    index_header: Szerepek
+    name: Név
+    updated_at: Utolsó frissítés
+  route:
+    id: Azonosító
+    index_header: Útvonalak
+    name: Név
+    title: Cím
   save_changes: Módosítások mentése
   search: Keresés
   security:
@@ -606,6 +598,24 @@ sylius:
   settings:
     general_header: Általános beállítások
     taxation_header: Adózás-beállítások
+  shipment:
+    created_at: Készítetve
+    id: Azonosító
+    index_header: Szállítások
+    inventory_state: Leltár állapota
+    manage: Szállítások kezelése
+    method: Mód
+    modified: Módosítva
+    name: Név
+    order: Rendelés
+    ship: Szállítás
+    show_header: Szállítás részletei
+    sku: SKU
+    state: Állapot
+    tracking_code: Követési kód
+    update: Szerkesztés
+    update_header: Szállítás szerkesztése
+    updated_at: Utolsó frissítés
   shipment_category:
     manage: Szállítási kategóriák kezelése
   shipping_address: Szállítási cím
@@ -616,7 +626,6 @@ sylius:
     index_header: Szállítási kategóriák
     manage: Szállítási kategóriák kezelése
     name: Név
-    no_results: Nincsenek konfigurált szállítási kategóriák.
     update_header: Szállítási kategória szerkesztése
     updated_at: Utolsó frissítés
   shipping_method:
@@ -624,26 +633,21 @@ sylius:
     category: Kategória
     create: Szállítási mód létrehozása
     create_header: Új szállítási mód
+    enabled: Engedélyezve
     id: Azonosító
     index_header: Szállítási módok
     manage: Szállítás módok kezelése
     name: Név
-    no_results: Nincsenek konfigurált szállítási módok.
     show_header: Szállítási mód részletei
     update_header: Szállítási mód szerkesztése
     updated_at: Utolsó frissítés
     zone: Zóna
   shop_by: 'Áruház:'
-  show: részletek
   show_all: Összes megjelenítése
   show_deleted: Töröltek megjelenítése
   stockable:
     index_header: 'Leltár <small>Az aktuális raktárkészlet</small>'
-    name: név
-    no_results: Nincsenek tételek raktárkészleten.
-    on_hand: Raktárkészlet
-    on_hold: viszatartva
-    sku: sku
+    name: Név
     updated_at: Utolsó frissítés
   tax_category:
     create: Adókategória létrehozása
@@ -654,7 +658,6 @@ sylius:
     manage: Adókategóriák kezelése
     name: Név
     no_description: Nincs Leírás
-    no_results: Nincsenek konfigurált adókategóriák.
     update_header: Adókategória kezelése
     updated_at: Utolsó frissítés
   tax_rate:
@@ -663,11 +666,9 @@ sylius:
     category: Kategória
     create: Adókulcs létrehozása
     create_header: Új adókulcs
-    included_in_price: Az ár tartalmazza?
     index_header: Adókulcsok
     manage: Adókulcsok kezelése
     name: Név
-    no_results: Nincsenek konfigurált adókulcsok.
     show_header: Adó mérték részletei
     update_header: Adókulcs frissítése
     updated_at: Utolsó frissítés
@@ -678,7 +679,6 @@ sylius:
     image: Kép választása
     name: Név
     no_image: Ehhez a taxonhoz nem tartozik kép
-    no_results: Nincsenek megjeleníthető taxonok.
     product_index_header: '"%name%" szerint kategorizált termékek'
     update_header: Taxon szerkesztése
   taxonomy:
@@ -689,34 +689,28 @@ sylius:
     manage: Taxonómiák kezelése
     name: Név
     no_image: Ehhez a taxonómiához nem tartozik kép
-    no_results: Nincsenek definiált taxonómiák.
     show_header: 'Taxonómia <small><strong>%name%</strong></small>'
     update_header: Taxonómia szerkesztése
   total_quantity: Össz mennyiség
-  unknown: Ismeretlen
-  customer:
-    billing_address: Számlázási cím
+  ui:
+    change_password: Jelszó módosítása
+    code: Kód
     email: E-mail
-    first_name: Keresztnév
-    id: Azonosító
-    last_name: Vezetéknév
-    shipping_address: Szállítási cím
-    groups: Csoportok
+    login: Belépés
+    logout: Kilépés
+    register: Regisztráció
+  unknown: Ismeretlen
   user:
-    create: felhasználó létrehozása
     create_header: Új felhasználó
-    enabled: Visszaigazolva?
     general_info: '"%username%" általános infó'
     id: Azonosító
+    impersonate: Bejelentkezés ezzel a felhasználóval
     index_header: 'Felhasználók <small>Az áruházban regisztált felhasználók</small>'
     last_login: Utolsó bejelentkezés
-    impersonate: Bejelentkezés ezzel a felhasználóval
-    manage: felhasználók kezelése
-    no_results: Nincsenek megjeleníthető felhasználók.
     recent_header: Legutóbbi felhasználók
-    registration_date: Regisztráció dátuma
     register:
       button: Regisztráció
+    registration_date: Regisztráció dátuma
     show_header: Felhasználói adatok
     update_header: Felhasználó szerkesztése
     username: Felhasználónév
@@ -728,7 +722,6 @@ sylius:
     create_header: Új termék változat
     delete_image: Kép törlése
     last_update: Utolsó frissítés
-    no_results: Nincsenek megjeleníthető változatok.
     options: Beállítások
     price: Ár
     sku: SKU
@@ -742,35 +735,9 @@ sylius:
     index_header: Zónák
     manage: Zónák kezelése
     name: Név
-    no_results: Nincsenek konfigulát zónák.
+    scope: Hatókör
     show_header: Zone részletek
     type: Típus
     update_header: Zóna szerkesztés
-    scope: Hatókör
   zone_member:
     members: Tagok
-  contact_topic:
-    id: Azonosító
-    title: Cím
-    updated_at: Utolsó frissítés
-  contact_request:
-    id: Azonosító
-    firstName: Keresztnév
-    lastName: Vezetéknév
-    email: E-mail
-    message: Üzenet
-    topic: Téma
-    updated_at: Utolsó frissítés
-  ui:
-    email: E-mail
-    register: Regisztráció
-    login: Belépés
-    logout: Kilépés
-    change_password: Jelszó módosítása
-    account_panel_outline: Élvezze az összes rendelkezésre álló funkciót, nyomon követheti, kezelheti az összes adatát.
-    code: Kód
-  pricing:
-    volume_based:
-      price: Ár
-      button:
-        add: Hozzáadás

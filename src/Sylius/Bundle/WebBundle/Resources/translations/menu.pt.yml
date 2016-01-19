@@ -24,9 +24,9 @@ sylius:
         shipping_categories: Categorias de envio
         shipping_methods: Métodos de envio
         stockables: Níveis de stock
-        taxonomies: Categorização
         tax_categories: Categorias de tributação
         tax_rates: Impostos
+        taxonomies: Categorização
         zones: Zonas
       sidebar:
         configuration: Configuração
@@ -41,8 +41,8 @@ sylius:
         options: Gerir opções
         orders: Encomendas atuais
         pages: Páginas
-        payments: Pagamentos
         payment_methods: Métodos de pagamento
+        payments: Pagamentos
         products: Produtos
         promotions: Promoções
         sales: Encomendas

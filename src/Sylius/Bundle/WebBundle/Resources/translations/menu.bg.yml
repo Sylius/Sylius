@@ -30,10 +30,10 @@ sylius:
         shipping_methods: Начин на доставка
         slideshow: Слайдшоу
         stockables: Нива на инвентара
-        taxation_settings: Настройки на данъчно облагане
-        taxonomies: Категоризация
         tax_categories: Категории такси
         tax_rates: Данъчни ставки
+        taxation_settings: Настройки на данъчно облагане
+        taxonomies: Категоризация
         zones: Зони
       sidebar:
         assortment: Асортимент
@@ -51,8 +51,8 @@ sylius:
         options: Управление на опциите
         orders: Текущи поръчки
         pages: Страници
-        payments: Плащания
         payment_methods: Начин на плащане
+        payments: Плащания
         products: Продукти
         promotions: Промоции
         routes: Маршрути

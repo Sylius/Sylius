@@ -47,10 +47,10 @@ sylius:
         slideshow: Slayt gösterisi
         stockables: Stok düzeyleri
         support: DESTEK
-        taxation_settings: 'Kdv  ayarları'
-        taxonomies: Sınıflandırma
         tax_categories: Kdv kategorileri
         tax_rates: Kdv oranları
+        taxation_settings: 'Kdv  ayarları'
+        taxonomies: Sınıflandırma
         zones: Bölgeler
       sidebar:
         api_clients: API İstemcileri
@@ -80,8 +80,8 @@ sylius:
         options: Seçeneklerini yönet
         orders: Şuanki siparişler
         pages: Sayfalar
-        payments: Ödemeler
         payment_methods: Ödeme tipleri
+        payments: Ödemeler
         permissions: İzinler
         products: Ürünler
         promotions: Promosyonlar

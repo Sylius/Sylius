@@ -29,6 +29,7 @@ sylius:
       roles: Role
     channel:
       taxonomies: Triedenia
+      locale_default: Predvolený jazyk
       locales: Jazyky
       currency_default: Predvolená mena
       currencies: Meny
@@ -57,6 +58,7 @@ sylius:
       short_description: Krátky popis
       tax_category: Daňová kategória
       variant_selection_method: Spôsob výberu produktového variantu
+      main_taxon: Hlavná kategória
     product_filter:
       name: Názov
       sku: Skladový kód (SKU)
@@ -94,13 +96,13 @@ sylius:
     user:
       billing_address: Fakturačná adresa
       different_billing_address: Použiť inú fakturačnú adresu?
-      enabled: Povolený
+      enabled: Zapnuté
       first_name: Meno
-      groups: Skupiny
+      groups: Zákaznícke skupiny
       roles: Role
       last_name: Priezvisko
       password: Heslo
-      shipping_address: Doručovacia adresa
+      shipping_address: Adresa doručenia
     user_filter:
       query: Vyhľadať
     variant:
@@ -110,6 +112,7 @@ sylius:
       images: Obrázky
       on_hand: Položiek na sklade
       price: Cena
+      original_price: Pôvodná cena
       sku: Skladový kód (SKU)
       weight: Hmotnosť
       width: Šírka

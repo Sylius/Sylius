@@ -3,15 +3,6 @@
 
 sylius:
   account:
-    address:
-      create: Vaše adresa byla úspěšně přidána.
-      update: Vaše adresa byla úspěšně aktualizována.
-      delete: Vaše adresa byla úspěšně odstraněna.
-      set_as_billing: Fakturační adresa se změnila.
-      set_as_shipping: Doručovací adresa se změnila.
     password:
       change_success: Heslo bylo změněno
       invalid: Chybné současné heslo
-  channel:
-    error:
-      at_least_one: Kanál nemůže být odstraněn, je třeba mít alespoň jeden povolený kanál.

@@ -12,6 +12,7 @@ sylius:
         blocks: Blloqet
         channels: Kanalet
         configuration: Konfigurimi
+        contact_requests: Kërkesë kontakti
         contact_topics: Konfiguro çështjet
         content: Përmbajtja
         countries: Vendet
@@ -47,10 +48,10 @@ sylius:
         slideshow: Slideshow
         stockables: Nivelet e listës
         support: Mbështetja
-        taxation_settings: Rregullat e taksimit
-        taxonomies: Kategorizimi
         tax_categories: Kategoritë e taksimit
         tax_rates: Normat e taksimit
+        taxation_settings: Rregullat e taksimit
+        taxonomies: Kategorizimi
         zones: Zonat
       sidebar:
         api_clients: Klientët API
@@ -80,8 +81,8 @@ sylius:
         options: Përdor opsionet
         orders: Porositë korrente
         pages: Faqet
-        payments: Pagesat
         payment_methods: Mënyrat e pagesës
+        payments: Pagesat
         permissions: Lejet
         products: Produktet
         promotions: Reklamat

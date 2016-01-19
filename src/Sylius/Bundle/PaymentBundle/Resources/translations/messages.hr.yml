@@ -30,6 +30,3 @@ sylius:
       enabled: Omogući?
       gateway: Gateway
       name: Naziv
-      fee_calculator:
-        fixed:
-          amount: Iznos

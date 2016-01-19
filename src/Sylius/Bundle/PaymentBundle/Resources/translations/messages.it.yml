@@ -13,7 +13,6 @@ sylius:
     payment:
       amount: Ammontare del pagamento
       method: Metodo di pagamento
-      fee_calculator: Calcolatore di tasse
       state:
         header: Stato pagamento
         checkout: Checkout
@@ -32,8 +31,3 @@ sylius:
       enabled: Abilitato?
       gateway: Gateway
       name: Nome
-      fee_calculator:
-        fixed:
-          amount: Valore
-        percent:
-          percent: '%'

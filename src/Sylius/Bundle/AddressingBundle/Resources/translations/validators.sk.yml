@@ -9,6 +9,7 @@ sylius:
       not_blank: Prosím zadajte mesto.
     country:
       not_blank: Prosím vyberte krajinu.
+      disabled: Vybraná krajina nie aktivovaná. Prosím vyberte inú.
     first_name:
       max_length: Meno nesmie byť dlhšie ako 255 znakov|Meno nesmie byť dlhšie ako 255 znakov.
       min_length: Meno musí mať minimálne 2 znaky|Meno musí mať minimálne 2 znaky.
@@ -28,14 +29,29 @@ sylius:
       min_length: Ulica musí obsahovať minimálne 2 znaky|Ulica musí obsahovať minimálne 2 znaky.
       not_blank: Prosím zadajte ulicu.
     not_shippable: Adresa nie je platná pre doručenie.
+  country:
+    code:
+      not_blank: Prosím zadajte ISO kód krajiny.
+      unique: ISO kód krajiny musí byť jedinečný.
   province:
+    code:
+      not_blank: Prosím zadajte kód provincie.
+      unique: Kód provincie musí byť jedinečný.
     name:
       max_length: Názov provincie nesmie byť dlhší ako 255 znakov|Názov provincie nesmie byť dlhší ako 255 znakov.
       min_length: Názov provincie musí obsahovať aspoň 2 znaky|Názov provincie musí obsahovať aspoň 2 znaky.
       not_blank: Prosím zadajte názov provincie.
+      unique: Názov provincie musí byť jedinečný.
   zone:
+    code:
+      not_blank: Prosím zadajte kód zóny.
+      unique: Kód zóny musí byť jedinečný.
     members:
       min_count: 'Prosím pridajte zóne aspoň {{ limit }} členov.'
     name:
       max_length: Názov zóny nesmie byť dlhší ako 255 znakov|Názov zóny nesmie byť dlhší ako 255 znakov.
       not_blank: Prosím zadajte názov zóny.
+  zone_member:
+    code:
+      not_blank: Prosím zvolte členom zóny.
+    unique: Vybraný člen zóny je už v tejto zóne.

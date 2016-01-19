@@ -46,10 +46,10 @@ sylius:
         slideshow: Слайд-шоу
         stockables: Рівні запасів
         support: Служба підтримки
-        taxation_settings: Налаштування оподаткування
-        taxonomies: Категоризація
         tax_categories: Категорії оподаткування
         tax_rates: Податкові ставки
+        taxation_settings: Налаштування оподаткування
+        taxonomies: Категоризація
         zones: Пояси
       sidebar:
         api_clients: API клієнти
@@ -78,8 +78,8 @@ sylius:
         options: Керування опціями
         orders: Поточний замовлень
         pages: Сторінки
-        payments: Платежі
         payment_methods: Варіанти оплати
+        payments: Платежі
         permissions: Дозволи
         products: Продукти
         promotions: Промо-акції

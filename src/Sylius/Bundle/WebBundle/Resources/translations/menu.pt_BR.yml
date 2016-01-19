@@ -32,10 +32,10 @@ sylius:
         shipping_methods: Métodos de envio
         slideshow: Apresentação de slides
         stockables: Níveis de estoque
-        taxation_settings: Configurações de taxas
-        taxonomies: Categorização
         tax_categories: Categorias de tributação
         tax_rates: Impostos
+        taxation_settings: Configurações de taxas
+        taxonomies: Categorização
         zones: Regiões
       sidebar:
         assortment: Sortimento
@@ -53,8 +53,8 @@ sylius:
         options: Gerenciar opções
         orders: Pedidos atuais
         pages: Páginas
-        payments: Pagamentos
         payment_methods: Meios de pagamentos
+        payments: Pagamentos
         products: Produtos
         promotions: Promoções
         roles: Papéis

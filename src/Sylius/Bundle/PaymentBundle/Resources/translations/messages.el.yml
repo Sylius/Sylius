@@ -20,6 +20,3 @@ sylius:
       description: Περιγραφή
       gateway: Πύλη
       name: Ονομασία
-      fee_calculator:
-        fixed:
-          amount: Ποσό

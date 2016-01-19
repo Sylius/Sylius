@@ -4,5 +4,5 @@
 sylius:
   account:
     password:
-      change_success: Fjalëkalimi u ndryshua
-      invalid: Fjalëkalimi aktual i gabuar
+      change_success: La password è stata cambiata
+      invalid: Password attuale errata

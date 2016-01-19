@@ -31,10 +31,10 @@ sylius:
         shipping_methods: Метады дастаўкі
         slideshow: Слайдшоў
         stockables: Колькасць на складзе
-        taxation_settings: Налады падаткаабкладання
-        taxonomies: Класіфікацыя
         tax_categories: Катэгорыі падаткаў
         tax_rates: Стаўка падатку
+        taxation_settings: Налады падаткаабкладання
+        taxonomies: Класіфікацыя
         zones: Зоны
       sidebar:
         assortment: Асартымент
@@ -52,8 +52,8 @@ sylius:
         options: Кіраваць опцыямі
         orders: Бягучыя замовы
         pages: Старонкі
-        payments: Плацяжы
         payment_methods: Метады аплаты
+        payments: Плацяжы
         products: Тавары
         promotions: Прамоцыі
         roles: Ролі

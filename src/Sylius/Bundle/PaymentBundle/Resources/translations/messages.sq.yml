@@ -13,7 +13,6 @@ sylius:
     payment:
       amount: Shuma e pagesës
       method: Mënyra e pagesës
-      fee_calculator: Llogaritësi i taksës
       state:
         header: Gjendja e pagesës
         checkout: Kontrolli
@@ -32,8 +31,3 @@ sylius:
       enabled: U mundësua?
       gateway: Gateway
       name: Emri
-      fee_calculator:
-        fixed:
-          amount: Shuma
-        percent:
-          percent: '%'

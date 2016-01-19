@@ -13,7 +13,6 @@ sylius:
     payment:
       amount: Kwota płatności
       method: Metoda płatności
-      fee_calculator: Kalkulator opłat
       state:
         header: Status płatności
         checkout: Koszyk
@@ -32,8 +31,3 @@ sylius:
       enabled: Aktywna?
       gateway: Bramka
       name: Nazwa
-      fee_calculator:
-        fixed:
-          amount: Kwota
-        percent:
-          percent: '%'

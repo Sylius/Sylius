@@ -13,7 +13,6 @@ sylius:
     payment:
       amount: Сумма платежа
       method: Метод платежа
-      fee_calculator: Калькулятор комиссии
       state:
         header: Статус платежа
         checkout: Сверка
@@ -32,8 +31,3 @@ sylius:
       enabled: Включен?
       gateway: Терминал
       name: Название
-      fee_calculator:
-        fixed:
-          amount: Сумма
-        percent:
-          percent: '%'

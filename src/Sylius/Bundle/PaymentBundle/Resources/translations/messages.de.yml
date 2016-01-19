@@ -13,7 +13,6 @@ sylius:
     payment:
       amount: Zahlungsbetrag
       method: Zahlungsweise
-      fee_calculator: Gebührenrechner
       state:
         header: Zahlungsstatus
         checkout: Zur Kasse
@@ -32,8 +31,3 @@ sylius:
       enabled: Aktiviert?
       gateway: Schnittstelle
       name: Name
-      fee_calculator:
-        fixed:
-          amount: Anzahl
-        percent:
-          percent: '%'

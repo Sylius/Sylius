@@ -12,6 +12,7 @@ sylius:
       meta_description: Meta përshkrim
     product_variant:
       available_on: Gati më
+      available_until: Në dispozicion deri në
     product_archetype:
       name: Emri
       parent: Prind

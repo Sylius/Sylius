@@ -7,6 +7,9 @@ sylius:
       max_length: 'Il nome della categoria non deve essere più lungo di {{ limit }} caratteri.'
       min_length: 'Il nome categoria deve essere lungo almeno {{ limit }} caratteri.'
       not_blank: Inserisci il nome di categoria della spedizione.
+    code:
+      not_blank: Inserisci il codice di categoria della spedizione.
+      unique: La categoria di spedizione con il codice dato esiste già.
   shipping_method:
     calculator:
       max_length: 'La lunghezza del nome della calcolatrice può essere al massimo di {{limit}} caratteri'
@@ -16,3 +19,6 @@ sylius:
       max_length: 'Il metodo di spedizione non deve essere più lungo di {{ limit }} caratteri.'
       min_length: 'Il metodo di spedizione deve essere lungo almeno {{ limit }} caratteri.'
       not_blank: Inserisci il nome del metodo di spedizione.
+    code:
+      not_blank: Inserisci il codice del metodo di spedizione.
+      unique: Il metodo di spedizione con il codice dato esiste già.

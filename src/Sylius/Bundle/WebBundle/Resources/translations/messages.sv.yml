@@ -2,8 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+  account:
+    order:
+      number: Nummer
   address:
     firstname: Förnamn
+  archetype:
+    name: Namn
   block:
     imagine:
       id: Id
@@ -20,10 +25,15 @@ sylius:
   breadcrumb:
     group:
       index: Grupper
-    route:
-      index: Rutter
     role:
       index: Roller
+    route:
+      index: Rutter
+  channel:
+    code: Kod
+    currency_default: Standardvaluta
+    enabled: Aktiverad
+    name: Namn
   checkout:
     finalize:
       address:
@@ -32,20 +42,23 @@ sylius:
         billing_address: Faktureringsadress
       product:
         name: Namn
+  contact_request:
+    firstName: Förnamn
+    message: Meddelande
+    topic: Ämne
   country:
-    name: Namn
     enabled: Aktiverad
-  email:
-    code: Kod
-  permission:
-    code: Kod
-  role:
-    code: Kod
     name: Namn
-    index_header: Roller
   currency:
     code: Kod
+    enabled: Aktiverad
     name: Namn
+  customer:
+    billing_address: Faktureringsadress
+    first_name: Förnamn
+    groups: Grupper
+  email:
+    code: Kod
     enabled: Aktiverad
   form:
     profile:
@@ -58,26 +71,15 @@ sylius:
     name: Namn
     sku: SKU
   locale:
-    name: Namn
     code: Kod
     enabled: Aktiverad
+    name: Namn
   menu:
     publishable: Publicerad
   "no": false
   order:
     billing_address: Faktureringsadress
     number: Nummer
-  route:
-    index_header: Rutter
-    name: Namn
-  shipment:
-    name: Namn
-    sku: SKU
-  channel:
-    code: Kod
-    currency_default: Standardvaluta
-    enabled: Aktiverad
-    name: Namn
   order_item:
     unit_price: Enhetspris
   page:
@@ -85,25 +87,45 @@ sylius:
     routes: Rutter
   payment_method:
     name: Namn
+  permission:
+    code: Kod
   product:
     name: Namn
     shipping_category: Kategori
     sku: SKU
     tax_category: Momskategori
+  product_attribute:
+    code: Kod
+    name: Namn
+  product_option:
+    name: Namn
+    presentation: Presentation
   promotion:
     name: Namn
   promotion_coupon:
     code: Kod
-  product_attribute:
-    code: Kod
   report:
-    name: Namn
     code: Kod
+    id: Id
+    name: Namn
+  role:
+    code: Kod
+    index_header: Roller
+    name: Namn
+  route:
+    index_header: Rutter
+    name: Namn
+  shipment:
+    name: Namn
+    sku: SKU
   shipping_category:
     name: Namn
   shipping_method:
+    enabled: Aktiverad
     name: Namn
     zone: Zon
+  stockable:
+    name: Namn
   tax_category:
     name: Namn
   tax_rate:
@@ -113,19 +135,11 @@ sylius:
     name: Namn
   taxonomy:
     name: Namn
-  customer:
-    billing_address: Faktureringsadress
-    first_name: Förnamn
-    groups: Grupper
+  ui:
+    code: Kod
   variant:
     sku: SKU
   "yes": true
   zone:
     name: Namn
     scope: Omfattning
-  contact_request:
-    firstName: Förnamn
-    message: Meddelande
-    topic: Ämne
-  ui:
-    code: Kod

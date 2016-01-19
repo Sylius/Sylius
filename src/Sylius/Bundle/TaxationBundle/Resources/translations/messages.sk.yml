@@ -11,4 +11,4 @@ sylius:
       name: Názov
       amount: Suma
       included_in_price: Zahrnutá v cene?
-      calculator: Kalkulačka
+      calculator: Spôsob vypočtu

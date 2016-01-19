@@ -29,6 +29,7 @@ sylius:
       roles: Funksionet
     channel:
       taxonomies: Kategorizimet
+      locale_default: Lokalizimi i parazgjedhur
       locales: Rajonet
       currency_default: Monedha e paracaktuar
       currencies: Monedhat
@@ -57,6 +58,7 @@ sylius:
       short_description: Përshkrim i shkurtër
       tax_category: Kategoria e taksimit
       variant_selection_method: Metoda rezervë e përzgjedhjes
+      main_taxon: Grupi kryesor
     product_filter:
       name: Emri
       sku: SKU
@@ -110,6 +112,7 @@ sylius:
       images: Imazhet
       on_hand: Fondi aktual
       price: Çmimi
+      original_price: Çmimi fillestar
       sku: SKU
       weight: Pesha
       width: Gjerësia

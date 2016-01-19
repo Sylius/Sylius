@@ -34,3 +34,6 @@ sylius:
         max_range: 'La percentuale della tassa non può essere maggiore di {{ limit }}.'
         min_range: 'La percentuale della tassa non può essere minore di {{ limit }}.'
         not_blank: Inserisci la percentuale della tassa.
+    code:
+      not_blank: Inserisci il codice del metodo di pagamento.
+      unique: Il metodo di pagamento con dato codice esiste già.
