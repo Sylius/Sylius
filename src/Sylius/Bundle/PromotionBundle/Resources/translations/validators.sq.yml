@@ -3,6 +3,9 @@
 
 sylius:
   promotion:
+    code:
+      unique: Oferta me kodin e dhënë tashmë egziston.
+      not_blank: Shto kodin e ofertës.
     description:
       max_length: 'Përshkrimi i promocionit nuk duhet të përmbajë më shumë se 1 karakter|Përshkrimi i promocionit nuk duhet të përmbajë më shumë se {{ limit }} karaktere.'
       min_length: 'Përshkrimi i promocionit duhet të përmbajë të paktën 1 karakter|Përshkrimi i promocionit duhet të përmbajë të paktën {{ limit }} karaktere.'

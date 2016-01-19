@@ -35,8 +35,8 @@ sylius:
         new_order: Thêm trật tự mới
         new_promotion: Thêm khuyến mãi mới
         orders: Đơn đặt hàng hiện tại
-        payments: Thanh toán
         payment_methods: Phương thức thanh toán
+        payments: Thanh toán
         products: Sản phẩm
         promotions: Chương trình khuyến mãi
         roles: Vai trò

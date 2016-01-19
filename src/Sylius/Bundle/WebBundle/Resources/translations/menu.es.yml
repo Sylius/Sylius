@@ -47,10 +47,10 @@ sylius:
         slideshow: Presentación
         stockables: Niveles de inventario
         support: Soporte
-        taxation_settings: Configuración de impuestos
-        taxonomies: Categorización
         tax_categories: Categorías de impuestos
         tax_rates: Tasas de impuestos
+        taxation_settings: Configuración de impuestos
+        taxonomies: Categorización
         zones: Zonas
       sidebar:
         api_clients: Clientes API
@@ -80,8 +80,8 @@ sylius:
         options: Administrar opciones de producto
         orders: Pedidos en curso
         pages: Páginas
-        payments: Pagos
         payment_methods: Modos de pago
+        payments: Pagos
         permissions: Permisos
         products: Productos
         promotions: Promociones

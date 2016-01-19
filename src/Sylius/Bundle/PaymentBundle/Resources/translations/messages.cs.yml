@@ -13,7 +13,6 @@ sylius:
     payment:
       amount: Platební částka
       method: Způsob platby
-      fee_calculator: Kalkulačka poplatků
       state:
         header: Stav platby
         checkout: Objednat
@@ -32,8 +31,3 @@ sylius:
       enabled: Povoleno?
       gateway: Brána
       name: Jméno
-      fee_calculator:
-        fixed:
-          amount: Částka
-        percent:
-          percent: '%'

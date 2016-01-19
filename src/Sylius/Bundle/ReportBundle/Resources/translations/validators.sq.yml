@@ -10,5 +10,6 @@ sylius:
     description:
       not_blank: Përshkrimi i raportit nuk mund të lihet bosh
     code:
+      not_blank: Kodi i raportit nuk mund të lihet bosh.
       unique: Ky kod është tashmë në përdorim.
       single_word: Kodi i raportit duhet të përbëhet nga një fjalë e vetme.

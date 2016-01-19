@@ -13,6 +13,7 @@ sylius:
     help: 'Instalo dhe aktivizo shtesën %extension%.'
     iconv: Iconv
     exif: Exif
+    fileinfo: Fileinfo
     icu: ICU
     intl: Intl
     json_encode: JSON

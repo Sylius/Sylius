@@ -12,6 +12,7 @@ sylius:
       meta_description: Meta popis
     product_variant:
       available_on: Dostupný od
+      available_until: Dostupný do
     product_archetype:
       name: Názov
       parent: Nadradená kategória

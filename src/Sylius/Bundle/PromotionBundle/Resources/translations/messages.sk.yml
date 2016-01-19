@@ -47,7 +47,7 @@ sylius:
       expires_at: Platnosť do
     promotion:
       actions: Akcie
-      coupon_based: Založená na kupónoch
+      coupon_based: Používať kupóny
       exclusive: Exkluzívne
       description: Popis
       ends_at: Koniec

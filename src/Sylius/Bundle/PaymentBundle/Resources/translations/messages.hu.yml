@@ -28,6 +28,3 @@ sylius:
       enabled: Engedélyezve?
       gateway: Átjáró
       name: Név
-      fee_calculator:
-        fixed:
-          amount: Összeg

@@ -32,10 +32,10 @@ sylius:
         shipping_methods: Metode de livrare
         slideshow: Slideshow
         stockables: Stocuri
-        taxation_settings: Setări taxe
-        taxonomies: Categorizare
         tax_categories: Categorii de taxe
         tax_rates: Taxe
+        taxation_settings: Setări taxe
+        taxonomies: Categorizare
         zones: Zone
       sidebar:
         assortment: Sortiment
@@ -53,8 +53,8 @@ sylius:
         options: Gestionare opţiuni
         orders: Comenzi curente
         pages: Pagini
-        payments: Plăți
         payment_methods: Metode de plată
+        payments: Plăți
         products: Produse
         promotions: Promoţii
         roles: Roluri

@@ -43,7 +43,7 @@ sylius:
       description: Popis
       name: Názov
     shipping_method:
-      calculator: Kalkulačka
+      calculator: Spôsob vypočtu
       category: Kategória
       category_requirement: Podmienka pre kategóriu doručenia
       configuration: Konfigurácia

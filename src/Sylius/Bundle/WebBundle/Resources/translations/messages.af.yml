@@ -3,6 +3,8 @@
 
 sylius:
   "no": false
+  product_option:
+    presentation: Weergawe
   "yes": true
   zone:
     scope: Gebied

@@ -32,10 +32,10 @@ sylius:
         shipping_methods: Szállítási módok
         slideshow: Diavetítés
         stockables: Készletszintek
-        taxation_settings: Adózás-beállítások
-        taxonomies: Kategorizálás
         tax_categories: Adózási kategóriák
         tax_rates: Adókulcsok
+        taxation_settings: Adózás-beállítások
+        taxonomies: Kategorizálás
         zones: Zónák
       sidebar:
         assortment: Választék
@@ -53,8 +53,8 @@ sylius:
         options: Beállítások kezelése
         orders: Függőben lévő rendelések
         pages: Oldalak
-        payments: Kifizetések
         payment_methods: Fizetési módok
+        payments: Kifizetések
         products: Termékek
         promotions: Promóciók
         roles: Szerepek

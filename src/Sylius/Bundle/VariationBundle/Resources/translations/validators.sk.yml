@@ -3,6 +3,9 @@
 
 sylius:
   option:
+    code:
+      not_blank: Zadajte kód produktovej volby.
+      unique: Produktová voľba zo zadaným kódom už existuje.
     name:
       not_blank: Prosím, zadajte názov voľby.
       min_length: 'Názov možnosti musí obsahovať aspoň 1 znak.|Názov možnosti musí obsahovať aspoň {{ limit }} znakov.'
@@ -14,6 +17,9 @@ sylius:
     values:
       min_count: 'Prosím pridajte aspoň {{ limit }} hodnotu pre produktovú voľbu. | Prosím pridajte aspoň {{ limit }} hodnôt pre produktové voľby.'
   option_value:
+    code:
+      not_blank: Prosím zadajte kód pre hodnotu produktovej voľby.
+      unique: Hodnota produktovej voľby zo zadaným kódom už existuje.
     value:
       not_blank: Prosím, zadajte hodnotu produktovej voľby.
   variant:

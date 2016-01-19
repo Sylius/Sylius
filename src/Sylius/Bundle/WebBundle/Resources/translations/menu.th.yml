@@ -31,10 +31,10 @@ sylius:
         shipping_methods: วิธีการจัดส่ง
         slideshow: ภาพสไลด์
         stockables: สินค้าคงคลัง
-        taxation_settings: การตั้งค่าภาษี
-        taxonomies: การจัดประเภท
         tax_categories: ประเภทภาษี
         tax_rates: อัตราภาษี
+        taxation_settings: การตั้งค่าภาษี
+        taxonomies: การจัดประเภท
         zones: โซน
       sidebar:
         assortment: จัดประเภท
@@ -52,8 +52,8 @@ sylius:
         options: จัดการตัวเลือก
         orders: ใบสั่งซื้อปัจจุบัน
         pages: หน้า
-        payments: การชำระเงิน
         payment_methods: วิธีการชำระเงิน
+        payments: การชำระเงิน
         products: สินค้า
         promotions: ส่งเสริมการขาย
         roles: Roles

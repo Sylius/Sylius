@@ -13,12 +13,13 @@ sylius:
         label: Heslo
         confirmation: Overenie
       remember_me: Zapamätať si ma
-      shipping_address: Doručovacia adresa
+      shipping_address: Adresa doručenia
     customer:
       first_name: Meno
-      groups: Skupiny
+      groups: Zákaznícke skupiny
       last_name: Priezvisko
       email: Email
+      gender: Pohlavie
       birthday: Dátum narodenia
       billing_address: Fakturačná adresa
       different_billing_address: Použiť inú fakturačnú adresu?

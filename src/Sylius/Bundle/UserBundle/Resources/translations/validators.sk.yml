@@ -11,9 +11,11 @@ sylius:
     email:
       not_blank: Zadajte Váš email.
       invalid: Tento email je neplatný.
+      not_registered: Používateľ s týmto e-mailom neexistuje. Prosím zaregistrujte sa.
     plainPassword:
       not_blank: Zadajte vaše heslo.
       mismatch: Zadané heslá sa nezhodujú
+      wrong_current: Zadané heslo sa nezhoduje zo súčasným.
   customer:
     first_name:
       max: 'Krstné meno nesmie byť dlhšie ako {{ limit }} znakov.'

@@ -22,3 +22,6 @@ sylius:
       not_blank: Zadajte názov prototypu.
       min_length: 'Názov produktového prototypu musí byť mať aspoň 1 znak. | Názov produktového prototypu musí mať aspoň {{ limit }} znakov.'
       max_length: 'Názov produktového prototypu nesmie byť dlhší než 1 znak. | Názov produktového prototypu nesmie byť dlhší než {{ limit }} znakov.'
+    code:
+      unique: Produktový prototyp zo zadaným kódom už existuje.
+      not_blank: Prosím, zadajte kód.

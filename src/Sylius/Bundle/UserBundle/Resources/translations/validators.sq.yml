@@ -11,9 +11,11 @@ sylius:
     email:
       not_blank: Shkruaj adresën e email-it.
       invalid: Ky email nuk është i vlefshëm.
+      not_registered: Përdoruesi me këtë email nuk egziston. Ju lutem me parë rregjistrohuni.
     plainPassword:
       not_blank: Fut fjalëkalimin tënd.
       mismatch: Fjalëkalimi i futur nuk përputhet
+      wrong_current: Fjalëkalimi i shtuar është ndryshe nga ai egzistues.
   customer:
     first_name:
       max: 'Emri nuk duhet të përmbajë më shumë se {{ limit }} karaktere.'

@@ -13,6 +13,7 @@ sylius:
     help: 'Nainštalujte a povoľte rozšírenie %extension%.'
     iconv: Iconv
     exif: Exif
+    fileinfo: Fileinfo
     icu: ICU
     intl: Intl
     json_encode: JSON

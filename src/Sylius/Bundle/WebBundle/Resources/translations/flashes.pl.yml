@@ -3,15 +3,6 @@
 
 sylius:
   account:
-    address:
-      create: Adres został pomyślnie dodany.
-      update: Adres został pomyślnie zaktualizowany.
-      delete: Adres został pomyślnie usunięty.
-      set_as_billing: Twój adres rozliczeniowy został zmieniony.
-      set_as_shipping: Twój adres dostawy został zmieniony.
     password:
       change_success: Hasło zostało zmienione
       invalid: Błędne hasło
-  channel:
-    error:
-      at_least_one: Kanał nie może być usunięty, wymagane jest aby co najmniej jeden kanał był włączony.

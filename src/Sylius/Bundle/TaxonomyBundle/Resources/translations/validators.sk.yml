@@ -6,6 +6,9 @@ sylius:
     name:
       max_length: Názov kategórie nesmie byť dlhší ako 255 znakov.
       not_blank: Zadajte názov kategórie.
+    code:
+      unique: Kategória s daným kódom už existuje.
+      not_blank: Prosím, zadajte kód kategórie.
   taxonomy:
     name:
       max_length: Názov triedenia nesmie byť dlhší ako 255 znakov.

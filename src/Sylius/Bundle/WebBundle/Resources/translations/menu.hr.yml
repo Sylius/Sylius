@@ -32,10 +32,10 @@ sylius:
         shipping_methods: Načini slanja
         slideshow: Automatski prikaz
         stockables: Stanje zaliha
-        taxation_settings: Postavke poreza
-        taxonomies: Kategorizacija
         tax_categories: Kategorije poreza
         tax_rates: Stope poreza
+        taxation_settings: Postavke poreza
+        taxonomies: Kategorizacija
         zones: Regije
       sidebar:
         assortment: Ponuda
@@ -53,8 +53,8 @@ sylius:
         options: Uredi opcije
         orders: Trenutne narudžbe
         pages: Stranice
-        payments: Plaćanja
         payment_methods: Načini plaćanja
+        payments: Plaćanja
         products: Proizvodi
         promotions: Akcije
         roles: Role (korisnička prava)

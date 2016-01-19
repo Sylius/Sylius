@@ -13,7 +13,6 @@ sylius:
     payment:
       amount: Ödeme tutarı
       method: Ödeme tipi
-      fee_calculator: Ücret hesaplama
       state:
         header: Ödeme durumu
         checkout: 'Ödeme  yap'
@@ -32,8 +31,3 @@ sylius:
       enabled: Etkin?
       gateway: Ağ Geçidi
       name: Ad
-      fee_calculator:
-        fixed:
-          amount: Miktar
-        percent:
-          percent: '%'

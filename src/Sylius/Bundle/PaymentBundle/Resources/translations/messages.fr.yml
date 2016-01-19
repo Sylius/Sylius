@@ -13,7 +13,6 @@ sylius:
     payment:
       amount: Montant du paiement
       method: Moyen de paiement
-      fee_calculator: Calculateur de taxes
       state:
         header: Etat du paiement
         checkout: Paiement
@@ -32,8 +31,3 @@ sylius:
       enabled: Activé ?
       gateway: Passerelle
       name: Nom
-      fee_calculator:
-        fixed:
-          amount: Montant
-        percent:
-          percent: '%'

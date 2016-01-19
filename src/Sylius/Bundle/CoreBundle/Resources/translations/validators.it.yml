@@ -2,6 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+  checkout:
+    shipping_method:
+      not_blank: Si prega di scegliere un metodo di spedizione.
   locale:
     code:
       not_blank: Per favore inserisci il CAP.
@@ -13,6 +16,8 @@ sylius:
     price:
       min: Il prezzo non può avere valore negativo.
       not_blank: Inserisci il prezzo.
+    original_price:
+      min: Il prezzo originale non deve essere negativo.
   product_translation:
     short_description:
       max: 'La descrizione breve non deve superare i {{ limit }} caratteri.'

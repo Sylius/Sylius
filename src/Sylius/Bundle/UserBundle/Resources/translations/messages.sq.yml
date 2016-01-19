@@ -19,6 +19,7 @@ sylius:
       groups: Grupet
       last_name: Mbiemri
       email: Email
+      gender: Gjinia
       birthday: Ditëlindja
       billing_address: Adresa e faturimit
       different_billing_address: Përdor adresë tjetër për faturën?

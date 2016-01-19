@@ -47,10 +47,10 @@ sylius:
         slideshow: Prezentace
         stockables: Sklady
         support: Podpora
-        taxation_settings: Daně
-        taxonomies: Kategorizace
         tax_categories: Typy zdanění
         tax_rates: Daňové sazby
+        taxation_settings: Daně
+        taxonomies: Kategorizace
         zones: Oblasti
       sidebar:
         api_clients: Klienti rozhraní API
@@ -80,8 +80,8 @@ sylius:
         options: Spravovat nastavení
         orders: Aktuální objednávky
         pages: Stránky
-        payments: Platby
         payment_methods: Způsoby plateb
+        payments: Platby
         permissions: Oprávnění
         products: Produkty
         promotions: Akce

@@ -44,10 +44,10 @@ sylius:
         shipping_methods: Pristatymo būdai
         slideshow: Skaidrių demonstracija
         stockables: Atsargų lygiai
-        taxation_settings: Apmokestinimo nustatymai
-        taxonomies: Skirstymas į kategorijas
         tax_categories: Apmokestinimo kategorijos
         tax_rates: Mokesčių tarifai
+        taxation_settings: Apmokestinimo nustatymai
+        taxonomies: Skirstymas į kategorijas
         zones: Zonos
       sidebar:
         api_clients: API klientai
@@ -74,8 +74,8 @@ sylius:
         options: Valdyti parinktis
         orders: Esami užsakymai
         pages: Puslapiai
-        payments: Mokėjimai
         payment_methods: Apmokėjimo būdai
+        payments: Mokėjimai
         permissions: Prieigos teisės
         products: Produktai
         promotions: Akcijos

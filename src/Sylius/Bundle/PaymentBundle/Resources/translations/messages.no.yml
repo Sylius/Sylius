@@ -30,6 +30,3 @@ sylius:
       enabled: Aktivert?
       gateway: Rute
       name: Navn
-      fee_calculator:
-        fixed:
-          amount: Beløp

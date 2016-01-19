@@ -31,10 +31,10 @@ sylius:
         shipping_methods: Fragtmetoder
         slideshow: Slideshow
         stockables: Lagerantal
-        taxation_settings: Indstillinger for moms
-        taxonomies: Kategorisering
         tax_categories: Moms kategorier
         tax_rates: Momssatser
+        taxation_settings: Indstillinger for moms
+        taxonomies: Kategorisering
         zones: Zoner
       sidebar:
         assortment: Sortiment
@@ -52,8 +52,8 @@ sylius:
         options: Administrer egenskaber
         orders: Nuværende ordrer
         pages: Sider
-        payments: Betalinger
         payment_methods: Betalingsmetoder
+        payments: Betalinger
         products: Produkter
         promotions: Kampagner
         roles: Roller

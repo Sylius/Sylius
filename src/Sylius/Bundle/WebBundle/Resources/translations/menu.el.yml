@@ -21,8 +21,8 @@ sylius:
         roles: Ρόλοι
         sales: Παραγγελίες
         shipments: Αποστολές
-        taxonomies: Κατηγοριοποίηση
         tax_rates: Φορολογικοί συντελεστές
+        taxonomies: Κατηγοριοποίηση
         zones: Ζώνες
       sidebar:
         assortment: Κατάταξη
@@ -37,8 +37,8 @@ sylius:
         options: Διαχείριση επιλογών
         orders: Τρέχουσες παραγγελίες
         pages: Σελίδες
-        payments: Πληρωμές
         payment_methods: Τρόποι πληρωμής
+        payments: Πληρωμές
         products: Προϊόντα
         promotions: Προσφορές
         roles: Ρόλοι

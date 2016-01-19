@@ -30,6 +30,3 @@ sylius:
       enabled: Activată?
       gateway: Gateway
       name: Nume
-      fee_calculator:
-        fixed:
-          amount: Valoare
