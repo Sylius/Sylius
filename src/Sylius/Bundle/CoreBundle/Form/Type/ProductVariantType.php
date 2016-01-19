@@ -15,8 +15,6 @@ use Sylius\Bundle\ProductBundle\Form\Type\VariantType as BaseVariantType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Product variant type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ProductVariantType extends BaseVariantType
@@ -66,6 +64,11 @@ class ProductVariantType extends BaseVariantType
             ->add('weight', 'number', [
                 'required' => false,
                 'label' => 'sylius.form.variant.weight',
+            ])
+            ->add('taxCategory', 'sylius_tax_category_choice', [
+                'required' => false,
+                'empty_value' => '---',
+                'label' => 'sylius.form.product_variant.tax_category',
             ])
         ;
     }

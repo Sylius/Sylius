@@ -17,8 +17,6 @@ use Sylius\Component\Channel\Model\ChannelsAwareInterface;
 use Sylius\Component\Metadata\Model\MetadataSubjectInterface;
 use Sylius\Component\Product\Model\ProductInterface as BaseProductInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
-use Sylius\Component\Taxation\Model\TaxableInterface;
-use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonsAwareInterface;
 
 /**
@@ -27,7 +25,6 @@ use Sylius\Component\Taxonomy\Model\TaxonsAwareInterface;
  */
 interface ProductInterface extends
     BaseProductInterface,
-    TaxableInterface,
     TaxonsAwareInterface,
     ChannelsAwareInterface,
     MetadataSubjectInterface
@@ -46,106 +43,71 @@ interface ProductInterface extends
     const METADATA_CLASS_IDENTIFIER = 'Product';
 
     /**
-     * Get product SKU.
-     *
      * @return string
      */
     public function getSku();
 
     /**
-     * Set product SKU.
-     *
      * @param string $sku
      */
     public function setSku($sku);
 
     /**
-     * Get the variant selection method.
-     *
      * @return string
      */
     public function getVariantSelectionMethod();
 
     /**
-     * Set variant selection method.
-     *
      * @param string $variantSelectionMethod
      */
     public function setVariantSelectionMethod($variantSelectionMethod);
 
     /**
-     * Check if variant is selectable by simple variant choice.
-     *
      * @return bool
      */
     public function isVariantSelectionMethodChoice();
 
     /**
-     * Get pretty label for variant selection method.
-     *
      * @return string
      */
     public function getVariantSelectionMethodLabel();
 
     /**
-     * Get product short description.
-     *
      * @return string
      */
     public function getShortDescription();
 
     /**
-     * Set product short description.
-     *
      * @param string $shortDescription
      */
     public function setShortDescription($shortDescription);
 
     /**
-     * Set taxation category.
-     *
-     * @param TaxCategoryInterface $category
-     */
-    public function setTaxCategory(TaxCategoryInterface $category = null);
-
-    /**
-     * Get product shipping category.
-     *
      * @return ShippingCategoryInterface
      */
     public function getShippingCategory();
 
     /**
-     * Set product shipping category.
-     *
      * @param ShippingCategoryInterface $category
      */
     public function setShippingCategory(ShippingCategoryInterface $category = null);
 
     /**
-     * Get address zone restriction.
-     *
      * @return ZoneInterface
      */
     public function getRestrictedZone();
 
     /**
-     * Set address zone restriction.
-     *
      * @param ZoneInterface $zone
      */
     public function setRestrictedZone(ZoneInterface $zone = null);
 
     /**
-     * Get all product images.
-     *
      * @return Collection|ImageInterface[]
      */
     public function getImages();
 
     /**
-     * Get product main image.
-     *
      * @return ImageInterface
      */
     public function getImage();

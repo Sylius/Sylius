@@ -15,6 +15,8 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
+use Sylius\Component\Taxation\Model\TaxableInterface;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -29,6 +31,11 @@ class ProductVariantSpec extends ObjectBehavior
     function it_implements_Sylius_product_variant_interface()
     {
         $this->shouldImplement(ProductVariantInterface::class);
+    }
+
+    function it_implements_Sylius_taxable_interface()
+    {
+        $this->shouldImplement(TaxableInterface::class);
     }
 
     function it_extends_Sylius_product_variant_model()
@@ -190,5 +197,25 @@ class ProductVariantSpec extends ObjectBehavior
 
         $this->setSku($sku);
         $this->getSku()->shouldReturn($sku);
+    }
+
+    function it_does_not_have_tax_category_by_default()
+    {
+        $this->getTaxCategory()->shouldReturn(null);
+    }
+
+    function it_allows_setting_the_tax_category(TaxCategoryInterface $taxCategory)
+    {
+        $this->setTaxCategory($taxCategory);
+        $this->getTaxCategory()->shouldReturn($taxCategory);
+    }
+
+    function it_allows_resetting_the_tax_category(TaxCategoryInterface $taxCategory)
+    {
+        $this->setTaxCategory($taxCategory);
+        $this->getTaxCategory()->shouldReturn($taxCategory);
+
+        $this->setTaxCategory(null);
+        $this->getTaxCategory()->shouldReturn(null);
     }
 }

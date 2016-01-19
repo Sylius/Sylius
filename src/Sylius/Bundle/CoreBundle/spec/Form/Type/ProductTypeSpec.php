@@ -38,7 +38,7 @@ class ProductTypeSpec extends ObjectBehavior
         $this->shouldHaveType(ProductType::class);
     }
 
-    function it_bulids_form(FormBuilderInterface $builder)
+    function it_builds_form(FormBuilderInterface $builder)
     {
         $builder
             ->add('masterVariant', 'sylius_product_variant', Argument::cetera())
@@ -62,11 +62,6 @@ class ProductTypeSpec extends ObjectBehavior
         ;
         $builder
             ->add('translations', 'a2lix_translationsForms', Argument::cetera())
-            ->shouldBeCalled()
-            ->willReturn($builder)
-        ;
-        $builder
-            ->add('taxCategory', 'sylius_tax_category_choice', Argument::cetera())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;

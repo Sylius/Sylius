@@ -17,10 +17,10 @@ use Sylius\Component\Metadata\Model\MetadataSubjectInterface;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 use Sylius\Component\Product\Model\VariantInterface as BaseVariantInterface;
 use Sylius\Component\Shipping\Model\ShippableInterface;
+use Sylius\Component\Taxation\Model\TaxableInterface;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 /**
- * Sylius core product Variant interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface ProductVariantInterface extends
@@ -28,13 +28,12 @@ interface ProductVariantInterface extends
     ShippableInterface,
     StockableInterface,
     PriceableInterface,
-    MetadataSubjectInterface
+    MetadataSubjectInterface,
+    TaxableInterface
 {
     const METADATA_CLASS_IDENTIFIER = 'ProductVariant';
 
     /**
-     * Get images.
-     *
      * @return Collection|ProductVariantImageInterface[]
      */
     public function getImages();
@@ -48,8 +47,6 @@ interface ProductVariantInterface extends
     public function getImage();
 
     /**
-     * Checks if product has image.
-     *
      * @param ProductVariantImageInterface $image
      *
      * @return bool
@@ -57,15 +54,11 @@ interface ProductVariantInterface extends
     public function hasImage(ProductVariantImageInterface $image);
 
     /**
-     * Add image.
-     *
      * @param ProductVariantImageInterface $image
      */
     public function addImage(ProductVariantImageInterface $image);
 
     /**
-     * Remove image.
-     *
      * @param ProductVariantImageInterface $image
      */
     public function removeImage(ProductVariantImageInterface $image);
@@ -134,4 +127,9 @@ interface ProductVariantInterface extends
      * @return bool
      */
     public function isPriceReduced();
+
+    /**
+     * @param TaxCategoryInterface $category
+     */
+    public function setTaxCategory(TaxCategoryInterface $category = null);
 }

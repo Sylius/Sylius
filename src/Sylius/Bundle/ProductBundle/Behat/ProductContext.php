@@ -73,7 +73,7 @@ class ProductContext extends DefaultContext
             }
 
             if (isset($data['tax category'])) {
-                $product->setTaxCategory($this->findOneByName('tax_category', trim($data['tax category'])));
+                $product->getMasterVariant()->setTaxCategory($this->findOneByName('tax_category', trim($data['tax category'])));
             }
 
             if (isset($data['taxons'])) {

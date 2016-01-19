@@ -34,11 +34,6 @@ class ProductType extends BaseProductType
                 'form_type' => 'sylius_product_translation',
                 'label' => 'sylius.form.product.translations',
             ])
-            ->add('taxCategory', 'sylius_tax_category_choice', [
-                'required' => false,
-                'empty_value' => '---',
-                'label' => 'sylius.form.product.tax_category',
-            ])
             ->add('shippingCategory', 'sylius_shipping_category_choice', [
                 'required' => false,
                 'empty_value' => '---',

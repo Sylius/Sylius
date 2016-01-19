@@ -84,8 +84,6 @@ class LoadProductsData extends DataFixture
     }
 
     /**
-     * Creates t-shirt product.
-     *
      * @param int $i
      *
      * @return ProductInterface
@@ -93,7 +91,6 @@ class LoadProductsData extends DataFixture
     protected function createTShirt($i)
     {
         $product = $this->createProduct();
-        $product->setTaxCategory($this->getTaxCategory('Taxable goods'));
 
         $translatedNames = [
             $this->defaultLocale => sprintf('T-Shirt "%s"', $this->faker->word),
@@ -142,8 +139,6 @@ class LoadProductsData extends DataFixture
     {
         $product = $this->createProduct();
 
-        $product->setTaxCategory($this->getTaxCategory('Taxable goods'));
-
         $translatedNames = [
             $this->defaultLocale => sprintf('Sticker "%s"', $this->faker->word),
             'es_ES' => sprintf('Pegatina "%s"', $this->fakers['es_ES']->word),
@@ -186,8 +181,6 @@ class LoadProductsData extends DataFixture
     {
         $product = $this->createProduct();
 
-        $product->setTaxCategory($this->getTaxCategory('Taxable goods'));
-
         $translatedNames = [
             $this->defaultLocale => sprintf('Mug "%s"', $this->faker->word),
             'es_ES' => sprintf('Taza "%s"', $this->fakers['es_ES']->word),
@@ -225,8 +218,6 @@ class LoadProductsData extends DataFixture
 
         $author = $this->faker->name;
         $isbn = $this->getUniqueISBN();
-
-        $product->setTaxCategory($this->getTaxCategory('Taxable goods'));
 
         $translatedNames = [
             $this->defaultLocale => sprintf('Book "%s" by "%s"', ucfirst($this->faker->word), $author),
@@ -287,6 +278,7 @@ class LoadProductsData extends DataFixture
         $variant->setSku(null === $sku ? $this->getUniqueSku() : $sku);
         $variant->setAvailableOn($this->faker->dateTimeThisYear);
         $variant->setOnHand($this->faker->randomNumber(1));
+        $variant->setTaxCategory($this->getTaxCategory('Taxable goods'));
 
         $productName = explode(' ', $product->getName());
         $image = clone $this->getReference(

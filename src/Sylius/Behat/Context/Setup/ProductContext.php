@@ -107,7 +107,7 @@ final class ProductContext implements Context
      */
     public function productBelongsToTaxCategory(ProductInterface $product, TaxCategoryInterface $taxCategory)
     {
-        $product->setTaxCategory($taxCategory);
+        $product->getMasterVariant()->setTaxCategory($taxCategory);
         $this->productManager->flush($product);
     }
 

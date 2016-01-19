@@ -30,10 +30,10 @@
             {% endif %}
 
             <hr />
-            {{ form_row(form.taxCategory) }}
             {{ form_row(form.shippingCategory) }}
         </div>
         <div class="col-md-6">
+            {{ form_row(form.masterVariant.taxCategory) }}
             {{ form_row(form.masterVariant.width) }}
             {{ form_row(form.masterVariant.height) }}
             {{ form_row(form.masterVariant.depth) }}

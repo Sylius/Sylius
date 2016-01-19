@@ -71,7 +71,7 @@ class OrderItemsTaxesByZoneApplicator implements OrderItemsTaxesByZoneApplicator
                 continue;
             }
 
-            $taxRate = $this->taxRateResolver->resolve($item->getProduct(), ['zone' => $zone]);
+            $taxRate = $this->taxRateResolver->resolve($item->getVariant(), ['zone' => $zone]);
 
             if (null === $taxRate) {
                 continue;
