@@ -351,6 +351,13 @@ sylius_rbac:
         sylius.channel.update: Edit channel
         sylius.channel.delete: Delete channel
 
+        sylius.manage.user: Manage users
+        sylius.user.show: Show user
+        sylius.user.index: List user
+        sylius.user.create: Create user
+        sylius.user.update: Edit user
+        sylius.user.delete: Delete user
+
         sylius.manage.role: Manage roles
         sylius.role.show: Show role
         sylius.role.index: List roles
@@ -648,6 +655,7 @@ sylius_rbac:
     permissions_hierarchy:
         sylius.manage.channel: [sylius.channel.show, sylius.channel.index, sylius.channel.create, sylius.channel.update, sylius.channel.delete]
         sylius.manage.customer: [sylius.customer.show, sylius.customer.index, sylius.customer.create, sylius.customer.update, sylius.customer.delete]
+        sylius.manage.user: [sylius.user.show, sylius.user.index, sylius.user.create, sylius.user.update, sylius.user.delete]
         sylius.manage.group: [sylius.group.show, sylius.group.index, sylius.group.create, sylius.group.update, sylius.group.delete]
         sylius.manage.role: [sylius.role.show, sylius.role.index, sylius.role.create, sylius.role.update, sylius.role.delete]
         sylius.manage.permission: [sylius.permission.show, sylius.permission.index, sylius.permission.create, sylius.permission.update, sylius.permission.delete]
@@ -695,7 +703,7 @@ sylius_rbac:
         sylius.marketing: [sylius.manage.promotion, sylius.manage.promotion_coupon, sylius.manage.email]
         sylius.shipping: [sylius.manage.shipment, sylius.manage.shipping_method, sylius.manage.shipping_category]
         sylius.content: [sylius.manage.static_content, sylius.manage.route, sylius.manage.simple_block, sylius.manage.menu, sylius.manage.slideshow, sylius.manage.string_block, sylius.manage.slideshow_block, sylius.manage.imagine_block]
-        sylius.security: [sylius.manage.permission, sylius.manage.role, sylius.manage.customer, sylius.manage.group, sylius.accounts]
+        sylius.security: [sylius.manage.user, sylius.manage.permission, sylius.manage.role, sylius.manage.customer, sylius.manage.group, sylius.accounts]
         sylius.accounts: [sylius.manage.customer, sylius.manage.group]
         sylius.taxes: [sylius.manage.tax_rate, sylius.manage.tax_category]
         sylius.support: [sylius.manage.contact_request, sylius.manage.contact_topic]
@@ -707,7 +715,7 @@ sylius_rbac:
         administrator:
             name: Administrator
             description: Administrator user
-            permissions: [sylius.manage.settings, sylius.manage.locale, sylius.manage.currency, sylius.manage.country, sylius.manage.province, sylius.manage.zone, sylius.manage.payment_method, sylius.manage.channel]
+            permissions: [sylius.manage.settings, sylius.manage.locale, sylius.manage.currency, sylius.manage.country, sylius.manage.province, sylius.manage.zone, sylius.manage.payment_method, sylius.manage.channel, sylius.manage.user]
             security_roles: [ROLE_ADMINISTRATION_ACCESS]
         catalog_manager:
             name: Catalog Manager
