@@ -67,6 +67,7 @@
         <service id="sylius.form.type.cart_item" class="%sylius.form.type.cart_item.class%">
             <argument>%sylius.model.cart_item.class%</argument>
             <argument>%sylius.validation_groups.cart_item%</argument>
+            <argument type="service" id="sylius.form.data_mapper.order_item_quantity" />
             <tag name="form.type" alias="sylius_cart_item" />
         </service>
 
@@ -86,6 +87,7 @@
             <argument type="service" id="sylius.manager.cart" />
             <argument type="service" id="validator" />
             <argument type="service" id="sylius.cart_provider" />
+            <argument type="service" id="sylius.order_item_quantity_modifier" />
         </service>
 
         <service id="sylius.listener.cart_flash" class="%sylius.listener.cart_flash.class%">

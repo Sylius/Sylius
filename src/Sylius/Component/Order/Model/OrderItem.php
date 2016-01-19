@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\Collection;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class OrderItem implements OrderItemInterface
 {
@@ -32,7 +33,7 @@ class OrderItem implements OrderItemInterface
     /**
      * @var int
      */
-    protected $quantity = 1;
+    protected $quantity = 0;
 
     /**
      * @var int
@@ -53,6 +54,11 @@ class OrderItem implements OrderItemInterface
      * @var Collection|OrderItemUnitInterface[]
      */
     protected $units;
+
+    /**
+     * @var int
+     */
+    protected $unitsTotal = 0;
 
     /**
      * @var Collection|AdjustmentInterface[]
@@ -89,18 +95,6 @@ class OrderItem implements OrderItemInterface
     /**
      * {@inheritdoc}
      */
-    public function setQuantity($quantity)
-    {
-        if (0 > $quantity) {
-            throw new \OutOfRangeException('Quantity must be greater than 0.');
-        }
-
-        $this->quantity = $quantity;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getOrder()
     {
         return $this->order;
@@ -111,7 +105,26 @@ class OrderItem implements OrderItemInterface
      */
     public function setOrder(OrderInterface $order = null)
     {
+        $currentOrder = $this->getOrder();
+        if ($currentOrder === $order) {
+            return;
+        }
+
+        $this->order = null;
+
+        if (null !== $currentOrder) {
+            $currentOrder->removeItem($this);
+        }
+
+        if (null === $order) {
+            return;
+        }
+
         $this->order = $order;
+
+        if (!$order->hasItem($this)) {
+            $order->addItem($this);
+        }
     }
 
     /**
@@ -130,7 +143,13 @@ class OrderItem implements OrderItemInterface
         if (!is_int($unitPrice)) {
             throw new \InvalidArgumentException('Unit price must be an integer.');
         }
+
         $this->unitPrice = $unitPrice;
+        $this->recalculateUnitsTotal();
+
+        if (null !== $this->order) {
+            $this->order->calculateItemsTotal();
+        }
     }
 
     /**
@@ -142,24 +161,11 @@ class OrderItem implements OrderItemInterface
     }
 
     /**
-     * {@inheritdoc}
+     *  Recalculates total after units total or adjustments total change.
      */
-    public function setTotal($total)
+    public function recalculateTotal()
     {
-        if (!is_int($total)) {
-            throw new \InvalidArgumentException('Total must be an integer.');
-        }
-        $this->total = $total;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function calculateTotal()
-    {
-        $this->calculateAdjustmentsTotal();
-
-        $this->total = ($this->quantity * $this->unitPrice) + $this->adjustmentsTotal;
+        $this->total = $this->unitsTotal + $this->adjustmentsTotal;
 
         if ($this->total < 0) {
             $this->total = 0;
@@ -169,23 +175,39 @@ class OrderItem implements OrderItemInterface
     /**
      * {@inheritdoc}
      */
-    public function equals(OrderItemInterface $orderItem)
+    public function recalculateAdjustmentsTotal()
     {
-        return $this === $orderItem;
+        $this->adjustmentsTotal = 0;
+
+        foreach ($this->adjustments as $adjustment) {
+            if (!$adjustment->isNeutral()) {
+                $this->adjustmentsTotal += $adjustment->getAmount();
+            }
+        }
+
+        $this->recalculateTotal();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function merge(OrderItemInterface $orderItem, $throwOnInvalid = true)
+    public function recalculateUnitsTotal()
     {
-        if ($throwOnInvalid && !$orderItem->equals($this)) {
-            throw new \RuntimeException('Given item cannot be merged.');
+        $this->unitsTotal = 0;
+
+        foreach ($this->units as $unit) {
+            $this->unitsTotal += $unit->getTotal();
         }
 
-        if ($this !== $orderItem) {
-            $this->quantity += $orderItem->getQuantity();
-        }
+        $this->recalculateTotal();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function equals(OrderItemInterface $orderItem)
+    {
+        return $this === $orderItem;
     }
 
     /**
@@ -217,9 +239,20 @@ class OrderItem implements OrderItemInterface
      */
     public function addUnit(OrderItemUnitInterface $unit)
     {
+        if ($this !== $unit->getOrderItem()) {
+            throw new \LogicException('This order item unit is assigned to a different order item.');
+        }
+
         if (!$this->hasUnit($unit)) {
-            $unit->setOrderItem($this);
             $this->units->add($unit);
+
+            $this->quantity++;
+            $this->unitsTotal += $unit->getTotal();
+            $this->recalculateTotal();
+
+            if (null !== $this->order) {
+                $this->order->calculateItemsTotal();
+            }
         }
     }
 
@@ -229,8 +262,15 @@ class OrderItem implements OrderItemInterface
     public function removeUnit(OrderItemUnitInterface $unit)
     {
         if ($this->hasUnit($unit)) {
-            $unit->setOrderItem(null);
             $this->units->removeElement($unit);
+
+            $this->quantity--;
+            $this->unitsTotal -= $unit->getTotal();
+            $this->recalculateTotal();
+
+            if (null !== $this->order) {
+                $this->order->calculateItemsTotal();
+            }
         }
     }
 
@@ -241,6 +281,7 @@ class OrderItem implements OrderItemInterface
     {
         return $this->units->contains($unit);
     }
+
     /**
      * {@inheritdoc}
      */
@@ -263,6 +304,7 @@ class OrderItem implements OrderItemInterface
         if (!$this->hasAdjustment($adjustment)) {
             $adjustment->setAdjustable($this);
             $this->adjustments->add($adjustment);
+            $this->addToAdjustmentsTotal($adjustment);
         }
     }
 
@@ -274,6 +316,7 @@ class OrderItem implements OrderItemInterface
         if (!$adjustment->isLocked() && $this->hasAdjustment($adjustment)) {
             $adjustment->setAdjustable(null);
             $this->adjustments->removeElement($adjustment);
+            $this->subtractFromAdjustmentsTotal($adjustment);
         }
     }
 
@@ -305,6 +348,19 @@ class OrderItem implements OrderItemInterface
     /**
      * {@inheritdoc}
      */
+    public function getAdjustmentsTotalRecursively($type = null)
+    {
+        $total = $this->getAdjustmentsTotal($type);
+        foreach ($this->units as $unit) {
+            $total += $unit->getAdjustmentsTotal($type);
+        }
+
+        return $total;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function removeAdjustments($type)
     {
         foreach ($this->getAdjustments($type) as $adjustment) {
@@ -322,19 +378,22 @@ class OrderItem implements OrderItemInterface
     public function clearAdjustments()
     {
         $this->adjustments->clear();
+        $this->recalculateAdjustmentsTotal();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function calculateAdjustmentsTotal()
+    protected function addToAdjustmentsTotal(AdjustmentInterface $adjustment)
     {
-        $this->adjustmentsTotal = 0;
+        if (!$adjustment->isNeutral()) {
+            $this->adjustmentsTotal += $adjustment->getAmount();
+            $this->recalculateTotal();
+        }
+    }
 
-        foreach ($this->adjustments as $adjustment) {
-            if (!$adjustment->isNeutral()) {
-                $this->adjustmentsTotal += $adjustment->getAmount();
-            }
+    protected function subtractFromAdjustmentsTotal(AdjustmentInterface $adjustment)
+    {
+        if (!$adjustment->isNeutral()) {
+            $this->adjustmentsTotal -= $adjustment->getAmount();
+            $this->recalculateTotal();
         }
     }
 }

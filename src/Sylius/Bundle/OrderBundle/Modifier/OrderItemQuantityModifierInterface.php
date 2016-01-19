@@ -9,25 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Order\Model;
+namespace Sylius\Bundle\OrderBundle\Modifier;
+
+use Sylius\Component\Order\Model\OrderItemInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface OrderItemUnitInterface extends AdjustableInterface
+interface OrderItemQuantityModifierInterface
 {
     /**
-     * @return mixed
+     * @param OrderItemInterface $orderItem
+     * @param int $targetQuantity
      */
-    public function getId();
-
-    /**
-     * @return int
-     */
-    public function getTotal();
-
-    /**
-     * @return OrderItemInterface
-     */
-    public function getOrderItem();
+    public function modify(OrderItemInterface $orderItem, $targetQuantity);
 }

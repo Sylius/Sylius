@@ -187,6 +187,18 @@ class Adjustment implements AdjustmentInterface
         }
 
         $this->amount = $amount;
+        $this->recalculateAdjustable();
+    }
+
+    protected function recalculateAdjustable()
+    {
+        if (null !== $this->order) {
+            $this->order->recalculateAdjustmentsTotal();
+        } elseif (null !== $this->orderItem) {
+            $this->orderItem->recalculateAdjustmentsTotal();
+        } elseif (null !== $this->orderItemUnit) {
+            $this->orderItemUnit->recalculateAdjustmentsTotal();
+        }
     }
 
     /**

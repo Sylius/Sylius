@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\OrderBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -22,9 +23,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class OrderItemTypeSpec extends ObjectBehavior
 {
-    function let()
+    function let(DataMapperInterface $orderItemQuantityDataMapper)
     {
-        $this->beConstructedWith('OrderItem', array('sylius'));
+        $this->beConstructedWith('OrderItem', array('sylius'), $orderItemQuantityDataMapper);
     }
 
     function it_is_initializable()
@@ -37,16 +38,24 @@ class OrderItemTypeSpec extends ObjectBehavior
         $this->shouldHaveType(AbstractType::class);
     }
 
-    function it_builds_form_with_quantity_and_unit_price_fields(FormBuilderInterface $builder)
+    function it_builds_form_with_quantity_and_unit_price_fields($orderItemQuantityDataMapper, FormBuilderInterface $builder)
     {
         $builder
             ->add('quantity', 'integer', Argument::any())
             ->willReturn($builder)
+            ->shouldBeCalled()
         ;
 
         $builder
             ->add('unitPrice', 'sylius_money', Argument::any())
             ->willReturn($builder)
+            ->shouldBeCalled()
+        ;
+
+        $builder
+            ->setDataMapper($orderItemQuantityDataMapper)
+            ->willReturn($builder)
+            ->shouldBeCalled()
         ;
 
         $this->buildForm($builder, array());

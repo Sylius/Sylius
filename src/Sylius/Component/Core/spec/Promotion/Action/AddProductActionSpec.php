@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Core\Promotion\Action;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\OrderBundle\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -22,12 +23,13 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class AddProductActionSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $itemFactory, RepositoryInterface $variantRepository)
+    function let(FactoryInterface $itemFactory, RepositoryInterface $variantRepository, OrderItemQuantityModifierInterface $orderItemQuantityModifier)
     {
-        $this->beConstructedWith($itemFactory, $variantRepository);
+        $this->beConstructedWith($itemFactory, $variantRepository, $orderItemQuantityModifier);
     }
 
     function it_is_initializable()
@@ -41,31 +43,32 @@ class AddProductActionSpec extends ObjectBehavior
     }
 
     function it_adds_product_as_promotion(
-        FactoryInterface $itemFactory,
+        $orderItemQuantityModifier,
         $variantRepository,
+        FactoryInterface $itemFactory,
         OrderInterface $order,
         OrderItemInterface $item,
         ProductVariantInterface $variant,
         PromotionInterface $promotion
     ) {
-        $configuration = array('variant' => 500, 'quantity' => 2, 'price' => 0);
-
-        $variantRepository->find($configuration['variant'])->willReturn($variant);
+        $variantRepository->find(500)->willReturn($variant);
 
         $itemFactory->createNew()->willReturn($item);
-        $item->setUnitPrice($configuration['price'])->willReturn($item);
+        $item->setUnitPrice(0)->willReturn($item);
         $item->setVariant($variant)->willReturn($item);
-        $item->setQuantity($configuration['quantity'])->willReturn($item);
+        $orderItemQuantityModifier->modify($item, 2)->shouldBeCalled();
+
         $item->setImmutable(true)->shouldBeCalled();
 
         $order->getItems()->willReturn(array());
 
         $order->addItem($item)->shouldBeCalled();
 
-        $this->execute($order, $configuration, $promotion);
+        $this->execute($order, array('variant' => 500, 'quantity' => 2, 'price' => 0), $promotion);
     }
 
     function it_does_not_add_product_if_exists(
+        $orderItemQuantityModifier,
         $variantRepository,
         FactoryInterface $itemFactory,
         OrderInterface $order,
@@ -73,24 +76,23 @@ class AddProductActionSpec extends ObjectBehavior
         ProductVariantInterface $variant,
         PromotionInterface $promotion
     ) {
-        $configuration = array('variant' => 500, 'quantity' => 2, 'price' => 1);
-
-        $variantRepository->find($configuration['variant'])->willReturn($variant);
+        $variantRepository->find(500)->willReturn($variant);
 
         $itemFactory->createNew()->willReturn($item);
-        $item->setUnitPrice($configuration['price'])->willReturn($item);
+        $item->setUnitPrice(1)->willReturn($item);
         $item->setVariant($variant)->willReturn($item);
-        $item->setQuantity($configuration['quantity'])->willReturn($item);
+        $orderItemQuantityModifier->modify($item, 2)->shouldBeCalled();
         $item->equals($item)->willReturn(true);
 
         $order->getItems()->willReturn(array($item));
 
         $order->addItem($item)->shouldNotBeCalled();
 
-        $this->execute($order, $configuration, $promotion);
+        $this->execute($order, array('variant' => 500, 'quantity' => 2, 'price' => 1), $promotion);
     }
 
     function it_reverts_product(
+        $orderItemQuantityModifier,
         $variantRepository,
         FactoryInterface $itemFactory,
         OrderInterface $order,
@@ -98,14 +100,12 @@ class AddProductActionSpec extends ObjectBehavior
         ProductVariantInterface $variant,
         PromotionInterface $promotion
     ) {
-        $configuration = array('variant' => 500, 'quantity' => 3, 'price' => 2);
-
-        $variantRepository->find($configuration['variant'])->willReturn($variant);
+        $variantRepository->find(500)->willReturn($variant);
 
         $itemFactory->createNew()->willReturn($item);
-        $item->setUnitPrice($configuration['price'])->willReturn($item);
+        $item->setUnitPrice(2)->willReturn($item);
         $item->setVariant($variant)->willReturn($item);
-        $item->setQuantity($configuration['quantity'])->willReturn($item);
+        $orderItemQuantityModifier->modify($item, 3)->shouldBeCalled();
         $item->equals($item)->willReturn(true);
         $item->setImmutable(true)->shouldBeCalled();
 
@@ -113,6 +113,6 @@ class AddProductActionSpec extends ObjectBehavior
 
         $order->removeItem($item)->shouldBeCalled();
 
-        $this->revert($order, $configuration, $promotion);
+        $this->revert($order, array('variant' => 500, 'quantity' => 3, 'price' => 2), $promotion);
     }
 }

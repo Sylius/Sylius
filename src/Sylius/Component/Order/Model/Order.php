@@ -181,17 +181,11 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setItems(Collection $items)
-    {
-        $this->items = $items;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function clearItems()
     {
         $this->items->clear();
+
+        $this->calculateItemsTotal();
     }
 
     /**
@@ -211,16 +205,12 @@ class Order implements OrderInterface
             return;
         }
 
-        foreach ($this->items as $existingItem) {
-            if ($item->equals($existingItem)) {
-                $existingItem->merge($item, false);
-
-                return;
-            }
-        }
-
-        $item->setOrder($this);
+        $itemTotal = $item->getTotal();
+        $this->itemsTotal = $this->itemsTotal + $itemTotal;
         $this->items->add($item);
+        $item->setOrder($this);
+
+        $this->calculateTotal();
     }
 
     /**
@@ -231,6 +221,9 @@ class Order implements OrderInterface
         if ($this->hasItem($item)) {
             $item->setOrder(null);
             $this->items->removeElement($item);
+            $this->itemsTotal -= $item->getTotal();
+
+            $this->calculateTotal();
         }
     }
 
@@ -253,28 +246,14 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setItemsTotal($itemsTotal)
-    {
-        if (!is_int($itemsTotal)) {
-            throw new \InvalidArgumentException('Items total must be an integer.');
-        }
-        $this->itemsTotal = $itemsTotal;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function calculateItemsTotal()
     {
-        $itemsTotal = 0;
-
+        $this->itemsTotal = 0;
         foreach ($this->items as $item) {
-            $item->calculateTotal();
-
-            $itemsTotal += $item->getTotal();
+            $this->itemsTotal += $item->getTotal();
         }
 
-        $this->itemsTotal = $itemsTotal;
+        $this->calculateTotal();
     }
 
     /**
@@ -318,22 +297,8 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setTotal($total)
-    {
-        if (!is_int($total)) {
-            throw new \InvalidArgumentException('Total must be an integer.');
-        }
-        $this->total = $total;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function calculateTotal()
     {
-        $this->calculateItemsTotal();
-        $this->calculateAdjustmentsTotal();
-
         $this->total = $this->itemsTotal + $this->adjustmentsTotal;
 
         if ($this->total < 0) {
@@ -505,6 +470,7 @@ class Order implements OrderInterface
         if (!$this->hasAdjustment($adjustment)) {
             $adjustment->setAdjustable($this);
             $this->adjustments->add($adjustment);
+            $this->addToAdjustmentsTotal($adjustment);
         }
     }
 
@@ -516,6 +482,7 @@ class Order implements OrderInterface
         if (!$adjustment->isLocked() && $this->hasAdjustment($adjustment)) {
             $adjustment->setAdjustable(null);
             $this->adjustments->removeElement($adjustment);
+            $this->subtractFromAdjustmentsTotal($adjustment);
         }
     }
 
@@ -569,7 +536,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function calculateAdjustmentsTotal()
+    public function recalculateAdjustmentsTotal()
     {
         $this->adjustmentsTotal = 0;
 
@@ -577,6 +544,30 @@ class Order implements OrderInterface
             if (!$adjustment->isNeutral()) {
                 $this->adjustmentsTotal += $adjustment->getAmount();
             }
+        }
+
+        $this->calculateTotal();
+    }
+
+    /**
+     * @param AdjustmentInterface $adjustment
+     */
+    protected function addToAdjustmentsTotal(AdjustmentInterface $adjustment)
+    {
+        if (!$adjustment->isNeutral()) {
+            $this->adjustmentsTotal += $adjustment->getAmount();
+            $this->calculateTotal();
+        }
+    }
+
+    /**
+     * @param AdjustmentInterface $adjustment
+     */
+    protected function subtractFromAdjustmentsTotal(AdjustmentInterface $adjustment)
+    {
+        if (!$adjustment->isNeutral()) {
+            $this->adjustmentsTotal -= $adjustment->getAmount();
+            $this->calculateTotal();
         }
     }
 

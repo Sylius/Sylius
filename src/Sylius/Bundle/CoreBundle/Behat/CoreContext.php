@@ -172,6 +172,7 @@ class CoreContext extends DefaultContext
     {
         $manager = $this->getEntityManager();
         $orderItemFactory = $this->getFactory('order_item');
+        $orderItemQuantityModifier = $this->getService('sylius.order_item_quantity_modifier');
 
         $order = $this->orders[$number];
 
@@ -182,7 +183,8 @@ class CoreContext extends DefaultContext
             $item = $orderItemFactory->createNew();
             $item->setVariant($product->getMasterVariant());
             $item->setUnitPrice($product->getMasterVariant()->getPrice());
-            $item->setQuantity($data['quantity']);
+
+            $orderItemQuantityModifier->modify($item, $data['quantity']);
 
             $order->addItem($item);
         }

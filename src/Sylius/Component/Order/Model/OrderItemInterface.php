@@ -27,11 +27,6 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
     public function getQuantity();
 
     /**
-     * @param int $quantity
-     */
-    public function setQuantity($quantity);
-
-    /**
      * @return int
      */
     public function getUnitPrice();
@@ -49,15 +44,9 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
     public function getTotal();
 
     /**
-     * @param int $total
+     * Recalculate totals. Should be used after every unit change.
      */
-    public function setTotal($total);
-
-    /**
-     * Calculate total based on quantity and unit price.
-     * Take adjustments into account.
-     */
-    public function calculateTotal();
+    public function recalculateUnitsTotal();
 
     /**
      * Checks whether the item given as argument corresponds to
@@ -68,15 +57,6 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
      * @return bool
      */
     public function equals(OrderItemInterface $orderItem);
-
-    /**
-     * Merge the item given as argument corresponding to
-     * the same cart item.
-     *
-     * @param OrderItemInterface $orderItem
-     * @param bool               $throwOnInvalid
-     */
-    public function merge(OrderItemInterface $orderItem, $throwOnInvalid = true);
 
     /**
      * @return bool

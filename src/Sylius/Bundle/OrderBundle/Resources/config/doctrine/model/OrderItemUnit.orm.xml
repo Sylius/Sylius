@@ -21,7 +21,6 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="total" column="total" type="integer" />
         <field name="adjustmentsTotal" column="adjustments_total" type="integer" />
 
         <many-to-one field="orderItem" target-entity="Sylius\Component\Order\Model\OrderItemInterface" inversed-by="units">

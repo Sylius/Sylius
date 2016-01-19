@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Promotion\Action;
 
+use Sylius\Bundle\OrderBundle\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Promotion\Action\PromotionActionInterface;
@@ -33,20 +34,25 @@ class AddProductAction implements PromotionActionInterface
     protected $itemFactory;
 
     /**
-     * Variant repository.
-     *
      * @var RepositoryInterface
      */
     protected $variantRepository;
 
     /**
+     * @var OrderItemQuantityModifierInterface
+     */
+    protected $orderItemQuantityModifier;
+
+    /**
      * @param FactoryInterface $itemFactory
      * @param RepositoryInterface $variantRepository
+     * @param OrderItemQuantityModifierInterface $orderItemQuantityModifier
      */
-    public function __construct(FactoryInterface $itemFactory, RepositoryInterface $variantRepository)
+    public function __construct(FactoryInterface $itemFactory, RepositoryInterface $variantRepository, OrderItemQuantityModifierInterface $orderItemQuantityModifier)
     {
         $this->itemFactory = $itemFactory;
         $this->variantRepository = $variantRepository;
+        $this->orderItemQuantityModifier = $orderItemQuantityModifier;
     }
 
     /**
@@ -107,8 +113,6 @@ class AddProductAction implements PromotionActionInterface
     }
 
     /**
-     * Create promotion item
-     *
      * @param array $configuration
      *
      * @return OrderItemInterface
@@ -119,8 +123,9 @@ class AddProductAction implements PromotionActionInterface
 
         $promotionItem = $this->itemFactory->createNew();
         $promotionItem->setVariant($variant);
-        $promotionItem->setQuantity((int) $configuration['quantity']);
         $promotionItem->setUnitPrice((int) $configuration['price']);
+
+        $this->orderItemQuantityModifier->modify($promotionItem, (int) $configuration['quantity']);
 
         return $promotionItem;
     }

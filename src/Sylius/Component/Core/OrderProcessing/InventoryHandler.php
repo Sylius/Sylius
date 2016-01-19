@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\OrderProcessing;
 
 use Doctrine\Common\Collections\Collection;
 use SM\Factory\FactoryInterface as StateMachineFactoryInteraface;
+use Sylius\Bundle\OrderBundle\Factory\OrderItemUnitFactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
@@ -33,7 +34,7 @@ class InventoryHandler implements InventoryHandlerInterface
     protected $inventoryOperator;
 
     /**
-     * @var FactoryInterface
+     * @var OrderItemUnitFactoryInterface
      */
     protected $orderItemUnitFactory;
 
@@ -44,12 +45,12 @@ class InventoryHandler implements InventoryHandlerInterface
 
     /**
      * @param InventoryOperatorInterface $inventoryOperator
-     * @param FactoryInterface $orderItemUnitFactory
+     * @param OrderItemUnitFactoryInterface $orderItemUnitFactory
      * @param StateMachineFactoryInteraface $stateMachineFactory
      */
     public function __construct(
         InventoryOperatorInterface $inventoryOperator,
-        FactoryInterface $orderItemUnitFactory,
+        OrderItemUnitFactoryInterface $orderItemUnitFactory,
         StateMachineFactoryInteraface $stateMachineFactory
     ) {
         $this->inventoryOperator    = $inventoryOperator;
@@ -69,12 +70,6 @@ class InventoryHandler implements InventoryHandlerInterface
         } elseif ($item->getQuantity() < $nbUnits) {
             foreach ($item->getUnits()->slice(0, $nbUnits - $item->getQuantity()) as $unit) {
                 $item->removeUnit($unit);
-            }
-        }
-
-        foreach ($item->getUnits() as $unit) {
-            if ($unit->getStockable() !== $item->getVariant()) {
-                $unit->setStockable($item->getVariant());
             }
         }
     }
@@ -139,10 +134,8 @@ class InventoryHandler implements InventoryHandlerInterface
         }
 
         for ($i = 0; $i < $quantity; $i++) {
-            $unit = $this->orderItemUnitFactory->createNew();
+            $unit = $this->orderItemUnitFactory->createForItem($item);
             $unit->setInventoryState($state);
-
-            $item->addUnit($unit);
         }
     }
 

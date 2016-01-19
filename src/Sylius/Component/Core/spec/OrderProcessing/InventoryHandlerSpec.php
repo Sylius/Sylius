@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Core\OrderProcessing;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
+use Sylius\Bundle\OrderBundle\Factory\OrderItemUnitFactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
@@ -22,7 +23,6 @@ use Sylius\Component\Core\OrderProcessing\InventoryHandlerInterface;
 use Sylius\Component\Inventory\InventoryUnitTransitions;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 
 /**
@@ -34,7 +34,7 @@ class InventoryHandlerSpec extends ObjectBehavior
 {
     function let(
         InventoryOperatorInterface $inventoryOperator,
-        FactoryInterface $orderItemUnitFactory,
+        OrderItemUnitFactoryInterface $orderItemUnitFactory,
         StateMachineFactoryInterface $stateMachineFactory
     ) {
         $this->beConstructedWith($inventoryOperator, $orderItemUnitFactory, $stateMachineFactory);
@@ -61,13 +61,10 @@ class InventoryHandlerSpec extends ObjectBehavior
         $item->getQuantity()->willReturn(2);
 
         $item->getUnits()->willReturn(new ArrayCollection());
-        $orderItemUnitFactory->createNew()->willReturn($unit1, $unit2);
+        $orderItemUnitFactory->createForItem($item)->willReturn($unit1, $unit2);
 
         $unit1->setInventoryState(InventoryUnitInterface::STATE_CHECKOUT)->shouldBeCalled();
         $unit2->setInventoryState(InventoryUnitInterface::STATE_CHECKOUT)->shouldBeCalled();
-
-        $item->addUnit($unit1)->shouldBeCalled();
-        $item->addUnit($unit2)->shouldBeCalled();
 
         $this->processInventoryUnits($item);
     }
@@ -87,13 +84,10 @@ class InventoryHandlerSpec extends ObjectBehavior
         $item->getQuantity()->willReturn(2);
 
         $item->getUnits()->willReturn(new ArrayCollection());
-        $orderItemUnitFactory->createNew()->willReturn($unit2);
+        $orderItemUnitFactory->createForItem($item)->willReturn($unit2);
 
         $unit1->setInventoryState(InventoryUnitInterface::STATE_CHECKOUT)->shouldNotBeCalled();
         $unit2->setInventoryState(InventoryUnitInterface::STATE_CHECKOUT)->shouldBeCalled();
-
-        $item->addUnit($unit1)->shouldNotBeCalled();
-        $item->addUnit($unit2)->shouldBeCalled();
 
         $this->processInventoryUnits($item);
     }
