@@ -1,0 +1,11 @@
+imports:
+    - { resource: ./../config/default.yml }
+
+services:
+    sylius_test_theme_setter:
+        class: Sylius\Bundle\ThemeBundle\Tests\Functional\app\DefaultTestCase\RequestListener
+        arguments:
+            - @sylius.theme.repository
+            - @sylius.theme.context
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
