@@ -107,26 +107,6 @@ class InventoryHandler implements InventoryHandlerInterface
     }
 
     /**
-<<<<<<< HEAD
-=======
-     * @param OrderItemInterface $item
-     * @param int $quantity
-     * @param string $state
-     */
-    protected function createInventoryUnits(OrderItemInterface $item, $quantity, $state = InventoryUnitInterface::STATE_CHECKOUT)
-    {
-        if ($quantity < 1) {
-            throw new \InvalidArgumentException('Quantity of units must be greater than 0.');
-        }
-
-        for ($i = 0; $i < $quantity; $i++) {
-            $unit = $this->orderItemUnitFactory->createForItem($item);
-            $unit->setInventoryState($state);
-        }
-    }
-
-    /**
->>>>>>> [Order] PR review fixes vol.2
      * Apply and count a transition on all given units
      *
      * @param Collection $units
