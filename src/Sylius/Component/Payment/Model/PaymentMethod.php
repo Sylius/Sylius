@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Payment\Model;
 
-use Sylius\Component\Payment\Calculator\DefaultFeeCalculators;
 use Sylius\Component\Translation\Model\AbstractTranslatable;
 
 /**
@@ -53,16 +52,6 @@ class PaymentMethod extends AbstractTranslatable implements PaymentMethodInterfa
      * @var string
      */
     protected $environment;
-
-    /**
-     * @var string
-     */
-    protected $feeCalculator = DefaultFeeCalculators::FIXED;
-
-    /**
-     * @var array
-     */
-    protected $feeCalculatorConfiguration = array();
 
     /**
      * @var \DateTime
@@ -195,38 +184,6 @@ class PaymentMethod extends AbstractTranslatable implements PaymentMethodInterfa
     public function setEnvironment($environment)
     {
         $this->environment = $environment;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFeeCalculator()
-    {
-        return $this->feeCalculator;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setFeeCalculator($feeCalculator)
-    {
-        $this->feeCalculator = $feeCalculator;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFeeCalculatorConfiguration()
-    {
-        return $this->feeCalculatorConfiguration;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setFeeCalculatorConfiguration(array $feeCalculatorConfiguration)
-    {
-        $this->feeCalculatorConfiguration = $feeCalculatorConfiguration;
     }
 
     /**

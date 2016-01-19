@@ -18,53 +18,12 @@
 
     <parameters>
         <parameter key="sylius.form.type.payment_gateway_choice.class">Sylius\Bundle\PaymentBundle\Form\Type\PaymentGatewayChoiceType</parameter>
-
-        <parameter key="sylius.registry.fee_calculator.class">Sylius\Component\Registry\ServiceRegistry</parameter>
-        <parameter key="sylius.form.type.payment_method.class">Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType</parameter>
-
-        <parameter key="sylius.form.type.fee_calculator_choice.class">Sylius\Bundle\PaymentBundle\Form\Type\Calculator\FeeCalculatorChoiceType</parameter>
-
-        <parameter key="sylius.payment.delegating_fee_calculator.class">Sylius\Component\Payment\Calculator\DelegatingFeeCalculator</parameter>
-
-        <parameter key="sylius.form.type.payment.fee_calculator.fixed.class">Sylius\Component\Payment\Calculator\FixedFeeCalculator</parameter>
-        <parameter key="sylius.form.type.payment.fee_calculator.fixed_configuration.class">Sylius\Bundle\PaymentBundle\Form\Type\Calculator\FixedFeeCalculatorConfigurationType</parameter>
-
-        <parameter key="sylius.form.type.payment.fee_calculator.percent.class">Sylius\Component\Payment\Calculator\PercentFeeCalculator</parameter>
-        <parameter key="sylius.form.type.payment.fee_calculator.percent_configuration.class">Sylius\Bundle\PaymentBundle\Form\Type\Calculator\PercentFeeCalculatorConfigurationType</parameter>
     </parameters>
 
     <services>
         <service id="sylius.form.type.payment_gateway_choice" class="%sylius.form.type.payment_gateway_choice.class%">
             <argument>%sylius.payment_gateways%</argument>
             <tag name="form.type" alias="sylius_payment_gateway_choice" />
-        </service>
-
-        <service id="sylius.registry.payment.fee_calculator" class="%sylius.registry.fee_calculator.class%">
-            <argument>Sylius\Component\Payment\Calculator\FeeCalculatorInterface</argument>
-        </service>
-
-        <service id="sylius.payment.delegating_fee_calculator" class="%sylius.payment.delegating_fee_calculator.class%">
-            <argument type="service" id="sylius.registry.payment.fee_calculator" />
-        </service>
-
-        <service id="sylius.form.type.fee_calculator_choice" class="%sylius.form.type.fee_calculator_choice.class%">
-            <argument>%sylius.payment.fee_calculators%</argument>
-            <tag name="form.type" alias="sylius_fee_calculator_choice" />
-        </service>
-
-        <service id="sylius.form.type.payment.fee_calculator.fixed" class="%sylius.form.type.payment.fee_calculator.fixed.class%">
-            <tag name="sylius.payment.fee_calculator" calculator="fixed" label="Fixed fee" />
-        </service>
-        <service id="sylius.form.type.payment.fee_calculator.fixed_configuration" class="%sylius.form.type.payment.fee_calculator.fixed_configuration.class%">
-            <argument type="service" id="sylius.context.currency" />
-            <tag name="form.type" alias="sylius_fee_calculator_fixed" />
-        </service>
-
-        <service id="sylius.form.type.payment.fee_calculator.percent" class="%sylius.form.type.payment.fee_calculator.percent.class%">
-            <tag name="sylius.payment.fee_calculator" calculator="percent" label="Percent fee" />
-        </service>
-        <service id="sylius.form.type.payment.fee_calculator.percent_configuration" class="%sylius.form.type.payment.fee_calculator.percent_configuration.class%">
-            <tag name="form.type" alias="sylius_fee_calculator_percent" />
         </service>
     </services>
 

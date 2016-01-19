@@ -15,7 +15,6 @@ use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceE
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Payments extension.
@@ -43,16 +42,5 @@ class SyliusPaymentExtension extends AbstractResourceExtension
         }
 
         $container->setParameter('sylius.payment_gateways', $config['gateways']);
-
-        $container
-            ->getDefinition('sylius.form.type.payment_method')
-            ->addArgument(new Reference('sylius.registry.payment.fee_calculator'))
-        ;
-
-        $container
-            ->getDefinition('sylius.form.type.payment_method_choice')
-            ->addArgument(new Reference('sylius.registry.payment.fee_calculator'))
-            ->addArgument(new Reference('sylius.repository.payment'))
-        ;
     }
 }

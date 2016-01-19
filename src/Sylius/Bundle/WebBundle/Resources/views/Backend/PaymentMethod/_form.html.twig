@@ -5,20 +5,6 @@
     {{ form_row(form.code) }}
     {{ form_row(form.gateway) }}
     {{ form_row(form.enabled) }}
-    <div class="col-xs-12">
-        {{ form_row(form.feeCalculator)  }}
-        {% for name, feeCalculatorConfiguration in form.vars.feeCalculatorsConfigurations%}
-            <div id="{{ form.feeCalculator.vars.id }}_{{ name }}" data-container="#fee_calculator.configuration" data-prototype="{{ form_widget(feeCalculatorConfiguration)|e }}">
-            </div>
-        {% endfor %}
-        <div id="fee_calculator" class="configuration">
-            {% if form.feeCalculatorConfiguration is defined %}
-                {% for field in form.feeCalculatorConfiguration %}
-                    {{ form_row(field) }}
-                {% endfor %}
-            {% endif %}
-        </div>
-    </div>
 </fieldset>
 
 {{ form_rest(form) }}

@@ -27,12 +27,12 @@ class LoadPaymentMethodsData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $manager->persist($this->createPaymentMethod('PM1', 'Dummy', 'dummy', 'fixed', array('amount' => 0)));
-        $manager->persist($this->createPaymentMethod('PM2', 'PaypalExpressCheckout', 'paypal_express_checkout', 'fixed', array('amount' => 1000)));
-        $manager->persist($this->createPaymentMethod('PM3', 'Be2bill', 'be2bill_direct', 'fixed', array('amount' => 100)));
-        $manager->persist($this->createPaymentMethod('PM4', 'Be2billOffsite', 'be2bill_offsite', 'percent', array('percent' => 7)));
-        $manager->persist($this->createPaymentMethod('PM5', 'StripeCheckout', 'stripe_checkout', 'percent', array('percent' => 5)));
-        $manager->persist($this->createPaymentMethod('PM6', 'Offline', 'offline', 'fixed', array('amount' => 500)));
+        $manager->persist($this->createPaymentMethod('PM1', 'Dummy', 'dummy'));
+        $manager->persist($this->createPaymentMethod('PM2', 'PaypalExpressCheckout', 'paypal_express_checkout'));
+        $manager->persist($this->createPaymentMethod('PM3', 'Be2bill', 'be2bill_direct'));
+        $manager->persist($this->createPaymentMethod('PM4', 'Be2billOffsite', 'be2bill_offsite'));
+        $manager->persist($this->createPaymentMethod('PM5', 'StripeCheckout', 'stripe_checkout'));
+        $manager->persist($this->createPaymentMethod('PM6', 'Offline', 'offline', 'fixed'));
 
         $manager->flush();
     }
@@ -50,13 +50,11 @@ class LoadPaymentMethodsData extends DataFixture
      * @param string  $code
      * @param string  $name
      * @param string  $gateway
-     * @param string  $feeCalculator
-     * @param array   $feeCalculatorConfiguration
      * @param boolean $enabled
      *
      * @return PaymentMethodInterface
      */
-    protected function createPaymentMethod($code, $name, $gateway, $feeCalculator, array $feeCalculatorConfiguration, $enabled = true)
+    protected function createPaymentMethod($code, $name, $gateway, $enabled = true)
     {
         /* @var $method PaymentMethodInterface */
         $method = $this->getPaymentMethodFactory()->createNew();
@@ -69,8 +67,6 @@ class LoadPaymentMethodsData extends DataFixture
 
         $method->setGateway($gateway);
         $method->setEnabled($enabled);
-        $method->setFeeCalculator($feeCalculator);
-        $method->setFeeCalculatorConfiguration($feeCalculatorConfiguration);
         $method->setCode($code);
 
         $this->setReference('Sylius.PaymentMethod.'.$name, $method);

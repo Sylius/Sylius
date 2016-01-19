@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Core\OrderProcessing;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -32,21 +31,13 @@ class PaymentProcessor implements PaymentProcessorInterface
     protected $paymentFactory;
 
     /**
-     * Payment Manager
-     *
-     * @var ObjectManager
-     */
-    protected $paymentManager;
-
-    /**
      * Constructor.
      *
      * @param FactoryInterface $paymentFactory
      */
-    public function __construct(FactoryInterface $paymentFactory, ObjectManager $paymentManager)
+    public function __construct(FactoryInterface $paymentFactory)
     {
         $this->paymentFactory = $paymentFactory;
-        $this->paymentManager = $paymentManager;
     }
 
     /**
@@ -54,8 +45,6 @@ class PaymentProcessor implements PaymentProcessorInterface
      */
     public function createPayment(OrderInterface $order)
     {
-        $this->updateExistingPaymentsStates($order);
-
         /** @var $payment PaymentInterface */
         $payment = $this->paymentFactory->createNew();
         $payment->setCurrency($order->getCurrency());
@@ -64,27 +53,5 @@ class PaymentProcessor implements PaymentProcessorInterface
         $order->addPayment($payment);
 
         return $payment;
-    }
-
-    /**
-     * @param OrderInterface $order
-     */
-    private function updateExistingPaymentsStates(OrderInterface $order)
-    {
-        foreach ($order->getPayments() as $payment) {
-            $this->cancelPaymentStateIfNotStarted($payment);
-        }
-
-        $this->paymentManager->flush();
-    }
-
-    /**
-     * @param PaymentInterface $payment
-     */
-    private function cancelPaymentStateIfNotStarted(PaymentInterface $payment)
-    {
-        if (PaymentInterface::STATE_NEW === $payment->getState()) {
-            $payment->setState(PaymentInterface::STATE_CANCELLED);
-        }
     }
 }

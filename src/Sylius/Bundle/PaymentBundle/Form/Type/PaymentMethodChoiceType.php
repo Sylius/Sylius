@@ -33,31 +33,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class PaymentMethodChoiceType extends ResourceChoiceType
 {
     /**
-     * @var ServiceRegistryInterface
-     */
-    private $feeCalculatorRegistry;
-
-    /**
-     * @var RepositoryInterface
-     */
-    private $paymentRepository;
-
-    /**
-     * @param string                   $className
-     * @param string                   $driver
-     * @param string                   $name
-     * @param ServiceRegistryInterface $feeCalculatorRegistry
-     * @param RepositoryInterface      $paymentRepository
-     */
-    public function __construct($className, $driver, $name, ServiceRegistryInterface $feeCalculatorRegistry, RepositoryInterface $paymentRepository)
-    {
-        parent::__construct($className, $driver, $name);
-
-        $this->feeCalculatorRegistry = $feeCalculatorRegistry;
-        $this->paymentRepository = $paymentRepository;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
@@ -80,35 +55,6 @@ class PaymentMethodChoiceType extends ResourceChoiceType
                 'disabled'      => false,
             ))
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function buildView(FormView $view, FormInterface $form, array $options)
-    {
-        if (!$parent = $view->parent->vars['value'] instanceof Order) {
-            return;
-        }
-
-        $paymentCosts = array();
-
-        $payment = $view->parent->vars['value']->getPayments()->last();
-
-        foreach ($view->vars['choices'] as $choiceView) {
-            $method = $choiceView->data;
-
-            if (!$method instanceof PaymentMethodInterface) {
-                throw new UnexpectedTypeException($method, PaymentMethodInterface::class);
-            }
-
-            $feeCalculator = $this->feeCalculatorRegistry->get($method->getFeeCalculator());
-            $payment->setMethod($method);
-
-            $paymentCosts[$choiceView->value] = $feeCalculator->calculate($payment, $method->getFeeCalculatorConfiguration());
-        }
-
-        $view->vars['paymentCosts'] = $paymentCosts;
     }
 
     /**
