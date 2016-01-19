@@ -16,6 +16,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Sylius\Component\Core\SyliusOrderEvents;
 use Sylius\Component\Order\OrderTransitions;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -51,7 +52,7 @@ class FinalizeStep extends CheckoutStep
      * @param ProcessContextInterface $context
      * @param OrderInterface $order
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     protected function renderStep(ProcessContextInterface $context, OrderInterface $order)
     {

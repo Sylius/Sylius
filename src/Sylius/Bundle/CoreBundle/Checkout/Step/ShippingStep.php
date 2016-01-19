@@ -16,6 +16,7 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Based on the user address, we present the available shipping methods,
@@ -61,7 +62,7 @@ class ShippingStep extends CheckoutStep
 
         $form = $this->createCheckoutShippingForm($order);
 
-         if ($form->handleRequest($request)->isValid()) {
+        if ($form->handleRequest($request)->isValid()) {
             $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SHIPPING_PRE_COMPLETE, $order);
 
             $this->applyTransition('select_shipping', $order);
@@ -82,7 +83,7 @@ class ShippingStep extends CheckoutStep
      * @param OrderInterface $order
      * @param FormInterface $form
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     protected function renderStep(ProcessContextInterface $context, OrderInterface $order, FormInterface $form)
     {
@@ -96,7 +97,7 @@ class ShippingStep extends CheckoutStep
     /**
      * @param OrderInterface $order
      *
-     * @return \Symfony\Component\Form\Form
+     * @return FormInterface
      */
     protected function createCheckoutShippingForm(OrderInterface $order)
     {

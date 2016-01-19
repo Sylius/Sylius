@@ -16,6 +16,7 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * The addressing step of checkout.
@@ -72,7 +73,7 @@ class AddressingStep extends CheckoutStep
      * @param OrderInterface $order
      * @param FormInterface $form
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     protected function renderStep(ProcessContextInterface $context, OrderInterface $order, FormInterface $form)
     {

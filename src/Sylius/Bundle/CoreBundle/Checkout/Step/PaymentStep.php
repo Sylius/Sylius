@@ -15,6 +15,7 @@ use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * The payment step of checkout.
@@ -72,7 +73,7 @@ class PaymentStep extends CheckoutStep
      * @param OrderInterface $order
      * @param FormInterface $form
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     protected function renderStep(ProcessContextInterface $context, OrderInterface $order, FormInterface $form)
     {
@@ -86,7 +87,7 @@ class PaymentStep extends CheckoutStep
     /**
      * @param OrderInterface $order
      *
-     * @return \Symfony\Component\Form\Form
+     * @return FormInterface
      */
     protected function createCheckoutPaymentForm(OrderInterface $order)
     {
