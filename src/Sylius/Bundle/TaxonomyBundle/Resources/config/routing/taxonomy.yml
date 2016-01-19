@@ -21,7 +21,7 @@ sylius_taxonomy_update:
 
 sylius_taxonomy_delete:
     path: /{id}
-    methods: [POST]
+    methods: [DELETE]
     defaults:
         _controller: sylius.controller.taxonomy:deleteAction
 

@@ -21,6 +21,7 @@ sylius_address_update:
 
 sylius_address_delete:
     path: /{id}/delete
+    methods: [DELETE]
     defaults:
         _controller: sylius.controller.address:deleteAction
 

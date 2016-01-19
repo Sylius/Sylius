@@ -13,6 +13,7 @@ parameters:
     sylius.mailer.user:               ~
     sylius.mailer.password:           ~
 
+    sylius.csrf_intention:            EDITME
     sylius.secret:                    EDITME
 
     sylius.locale:                    en_US

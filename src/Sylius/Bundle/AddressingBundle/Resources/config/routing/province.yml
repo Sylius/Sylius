@@ -15,6 +15,7 @@ sylius_province_update:
 
 sylius_province_delete:
     path: /{id}/delete
+    methods: [DELETE]
     defaults:
         _controller: sylius.controller.province:deleteAction
 

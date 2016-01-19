@@ -30,6 +30,7 @@
 {% else %}
 <form action="{{ url }}" method="post" class="delete-action-form" novalidate>
     <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_csrf_token" value="{{ sylius_generate_csrf_token() }}" />
     <button class="btn btn-danger{% if modal %} btn-confirm{% endif %}" type="submit">
         <i class="glyphicon glyphicon-trash"></i> <span>{{ message is empty ? 'sylius.delete'|trans : message }}</span>
     </button>

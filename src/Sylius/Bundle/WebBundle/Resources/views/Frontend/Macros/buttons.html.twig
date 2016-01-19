@@ -47,6 +47,7 @@
 {% else %}
 <form action="{{ url }}" method="post" style="display: inline;">
     <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_csrf_token" value="{{ sylius_generate_csrf_token() }}" />
     <button class="btn btn-danger btn-confirm" type="submit">
         <i class="icon-trash"></i> <span>{{ message is empty ? 'sylius.delete'|trans : message }}</span>
     </button>
