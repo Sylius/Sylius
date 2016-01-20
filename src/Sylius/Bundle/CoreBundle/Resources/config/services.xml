@@ -107,6 +107,28 @@
     </parameters>
 
     <services>
+        <!-- todo -->
+        <service id="sylius.view_handler.default" class="Sylius\Bundle\CoreBundle\View\ViewHandler" decorates="fos_rest.view_handler.default">
+            <argument>%fos_rest.formats%</argument>
+            <argument>%fos_rest.failed_validation%</argument>
+            <argument>%fos_rest.empty_content%</argument>
+            <argument>%fos_rest.serialize_null%</argument>
+            <argument>%fos_rest.force_redirects%</argument>
+            <argument>%fos_rest.default_engine%</argument>
+            <call method="setExclusionStrategyGroups">
+                <argument>%fos_rest.serializer.exclusion_strategy.groups%</argument>
+            </call>
+            <call method="setExclusionStrategyVersion">
+                <argument>%fos_rest.serializer.exclusion_strategy.version%</argument>
+            </call>
+            <call method="setSerializeNullStrategy">
+                <argument>%fos_rest.serializer.serialize_null%</argument>
+            </call>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
         <!-- settings schemas -->
         <service id="sylius.settings_schema.general" class="%sylius.settings_schema.general.class%">
             <argument type="collection">

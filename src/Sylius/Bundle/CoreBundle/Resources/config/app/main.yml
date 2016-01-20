@@ -78,6 +78,8 @@ fos_rest:
         rules:
             - { path: '^/api', priorities: ['json', 'xml'], fallback_format: json, prefer_extension: true }
             - { path: '^/', stop: true }
+    service:
+        view_handler: sylius.view_handler.default
 
 hwi_oauth:
     firewall_name: main
