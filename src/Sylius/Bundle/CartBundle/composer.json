@@ -24,7 +24,7 @@
 
         "sylius/cart": "0.17.*",
         "sylius/order-bundle": "0.17.*",
-        "symfony/framework-bundle": "^2.7.5"
+        "symfony/framework-bundle": "^2.7.7"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.4",
