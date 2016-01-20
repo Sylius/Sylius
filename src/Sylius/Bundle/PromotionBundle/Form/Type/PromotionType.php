@@ -54,11 +54,11 @@ class PromotionType extends AbstractResourceType
             ))
             ->add('rules', 'sylius_promotion_rule_collection', array(
                 'label' => 'sylius.form.promotion.rules',
-                'button_add_label' => 'sylius.promotion.add_rule',
+                'button_add_label' => 'sylius.form.promotion.add_rule',
             ))
             ->add('actions', 'sylius_promotion_action_collection', array(
                 'label' => 'sylius.form.promotion.actions',
-                'button_add_label' => 'sylius.promotion.add_action',
+                'button_add_label' => 'sylius.form.promotion.add_action',
             ))
             ->addEventSubscriber(new AddCodeFormSubscriber())
         ;

@@ -46,6 +46,8 @@ sylius:
             expires_at: Expires at
         promotion:
             actions: Actions
+            add_action: Add action
+            add_rule: Add rule
             coupon_based: Coupon based
             exclusive: Exclusive
             description: Description
