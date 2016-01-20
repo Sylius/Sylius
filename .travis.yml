@@ -66,6 +66,8 @@ before_script:
     - php -i | grep -v GITHUB_OAUTH_TOKEN
 
 script:
+    - composer validate
+
     - bin/phpspec run --no-interaction -f dot
     - bin/phpunit
     - bin/behat --strict -f progress -p cached
