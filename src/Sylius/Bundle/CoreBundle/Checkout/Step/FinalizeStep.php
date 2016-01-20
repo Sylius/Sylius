@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Sylius\Component\Core\SyliusOrderEvents;
 use Sylius\Component\Order\OrderTransitions;
@@ -74,7 +75,7 @@ class FinalizeStep extends CheckoutStep
         $this->dispatchCheckoutEvent(SyliusOrderEvents::PRE_CREATE, $order);
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::FINALIZE_PRE_COMPLETE, $order);
 
-        $this->applyTransition('complete', $order);
+        $this->applyTransition(OrderCheckoutTransitions::TRANSITION_COMPLETE, $order);
         $this->get('sm.factory')->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_CREATE, true);
         if ($order->getCurrency() !== $currencyProvider->getBaseCurrency()) {
             $currencyRepository = $this->get('sylius.repository.currency');

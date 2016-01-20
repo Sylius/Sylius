@@ -15,6 +15,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\Controller\FOSRestController;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Sylius\Component\Core\SyliusOrderEvents;
@@ -33,7 +34,7 @@ class CheckoutController extends FOSRestController
         $order = $this->findOrderOr404($orderId);
         $state = $order->getCheckoutState();
 
-        if (OrderInterface::CHECKOUT_STATE_COMPLETED === $state) {
+        if (OrderCheckoutStates::STATE_COMPLETED === $state) {
             throw new \Exception('Order is already completed.');
         }
 
@@ -48,16 +49,16 @@ class CheckoutController extends FOSRestController
         }
 
         switch ($transition) {
-            case OrderCheckoutTransitions::SYLIUS_ADDRESSING:
+            case OrderCheckoutTransitions::TRANSITION_ADDRESS:
                 return $this->addressingAction($request, $order);
 
-            case OrderCheckoutTransitions::SYLIUS_SHIPPING:
+            case OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING:
                 return $this->shippingAction($request, $order);
 
-            case OrderCheckoutTransitions::SYLIUS_PAYMENT:
+            case OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT:
                 return $this->paymentAction($request, $order);
 
-            case OrderCheckoutTransitions::SYLIUS_FINALIZE:
+            case OrderCheckoutTransitions::TRANSITION_COMPLETE:
                 return $this->finalizeAction($request, $order);
         }
 
@@ -82,7 +83,7 @@ class CheckoutController extends FOSRestController
             $this->dispatchCheckoutEvent(SyliusCheckoutEvents::ADDRESSING_PRE_COMPLETE, $order);
 
             $stateMachine = $this->get('sm.factory')->get($order, OrderCheckoutTransitions::GRAPH);
-            $stateMachine->apply(OrderCheckoutTransitions::SYLIUS_ADDRESSING);
+            $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_ADDRESS);
 
             $this->getManager()->persist($order);
             $this->getManager()->flush();
@@ -119,7 +120,7 @@ class CheckoutController extends FOSRestController
             $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SHIPPING_PRE_COMPLETE, $order);
 
             $stateMachine = $this->get('sm.factory')->get($order, OrderCheckoutTransitions::GRAPH);
-            $stateMachine->apply(OrderCheckoutTransitions::SYLIUS_SHIPPING);
+            $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
 
             $this->getManager()->persist($order);
             $this->getManager()->flush();
@@ -153,7 +154,7 @@ class CheckoutController extends FOSRestController
             $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PAYMENT_PRE_COMPLETE, $order);
 
             $stateMachine = $this->get('sm.factory')->get($order, OrderCheckoutTransitions::GRAPH);
-            $stateMachine->apply(OrderCheckoutTransitions::SYLIUS_PAYMENT);
+            $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
 
             $this->getManager()->persist($order);
             $this->getManager()->flush();
@@ -180,7 +181,7 @@ class CheckoutController extends FOSRestController
         $this->get('sm.factory')->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_CREATE, true);
 
         $stateMachine = $this->get('sm.factory')->get($order, OrderCheckoutTransitions::GRAPH);
-        $stateMachine->apply(OrderCheckoutTransitions::SYLIUS_FINALIZE);
+        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_COMPLETE);
 
         $manager = $this->get('sylius.manager.order');
         $manager->persist($order);

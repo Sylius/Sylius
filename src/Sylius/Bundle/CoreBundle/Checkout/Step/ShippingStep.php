@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,7 +40,7 @@ class ShippingStep extends CheckoutStep
         $order = $this->getCurrentCart();
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SHIPPING_INITIALIZE, $order);
 
-        $this->applyTransition('reselect_shipping', $order, true);
+        $this->applyTransition(OrderCheckoutTransitions::TRANSITION_RESELECT_SHIPPING, $order, true);
 
         $form = $this->createCheckoutShippingForm($order);
 
@@ -65,7 +66,7 @@ class ShippingStep extends CheckoutStep
         if ($form->handleRequest($request)->isValid()) {
             $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SHIPPING_PRE_COMPLETE, $order);
 
-            $this->applyTransition('select_shipping', $order);
+            $this->applyTransition(OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING, $order);
 
             $this->getManager()->persist($order);
             $this->getManager()->flush();

@@ -11,13 +11,19 @@
 
 namespace Sylius\Component\Core;
 
+/**
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ */
 class OrderCheckoutTransitions
 {
     const GRAPH = 'sylius_order_checkout';
 
-    const SYLIUS_ADDRESSING = 'addressing';
-    const SYLIUS_PAYMENT = 'payment';
-    const SYLIUS_SHIPPING = 'shipping';
-    const SYLIUS_FINALIZE = 'finalize';
-    const SYLIUS_COMPLETE = 'complete';
+    const TRANSITION_ADDRESS = 'address';
+    const TRANSITION_COMPLETE = 'complete';
+    const TRANSITION_READDRESS = 'readdress';
+    const TRANSITION_RESELECT_PAYMENT = 'reselect_payment';
+    const TRANSITION_RESELECT_SHIPPING = 'reselect_shipping';
+    const TRANSITION_SELECT_PAYMENT = 'select_payment';
+    const TRANSITION_SELECT_SHIPPING = 'select_shipping';
+    const TRANSITION_START = 'start';
 }

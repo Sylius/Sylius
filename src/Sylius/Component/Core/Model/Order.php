@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Cart\Model\Cart;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
+use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
@@ -75,7 +76,7 @@ class Order extends Cart implements OrderInterface
     /**
      * @var string
      */
-    protected $checkoutState = OrderInterface::CHECKOUT_STATE_CART;
+    protected $checkoutState = OrderCheckoutStates::STATE_CART;
 
     /**
      * @var string
