@@ -35,7 +35,6 @@
         "php": "^5.5.9|^7.0",
 
         "sylius/user": "0.17.*",
-        "sylius/cart": "0.17.*",
         "sylius/resource-bundle": "0.17.*",
         "sylius/mailer-bundle": "0.17.*",
         "symfony/framework-bundle": "^2.7.5",

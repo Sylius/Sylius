@@ -9,34 +9,26 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\UserBundle\EventListener;
+namespace Sylius\Bundle\CoreBundle\EventListener;
 
+use Sylius\Bundle\UserBundle\EventListener\CustomerAwareListener as BaseCustomerAwareListener;
+use Sylius\Component\Cart\Event\CartEvent;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Sylius\Component\User\Context\CustomerContextInterface;
 use Sylius\Component\User\Model\CustomerAwareInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
-class CustomerAwareListener
+class CustomerAwareListener extends BaseCustomerAwareListener
 {
-    /**
-     * @var CustomerContextInterface
-     */
-    protected $customerContext;
-
-    /**
-     * @param CustomerContextInterface $securityContext
-     */
-    public function __construct(CustomerContextInterface $securityContext)
-    {
-        $this->customerContext = $securityContext;
-    }
-
     /**
      * @param GenericEvent $event
      */
     public function setCustomer(GenericEvent $event)
     {
-        $resource = $event->getSubject();
+        if ($event instanceof CartEvent) {
+            $resource = $event->getCart();
+        } else {
+            $resource = $event->getSubject();
+        }
 
         if (!$resource instanceof CustomerAwareInterface) {
             throw new UnexpectedTypeException($resource, CustomerAwareInterface::class);
