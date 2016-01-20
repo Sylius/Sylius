@@ -11,6 +11,7 @@ sylius:
             street: Street
             province: Province
         country:
+            add_province: Add province
             name: Name
             provinces: Provinces
             select: Select
@@ -18,6 +19,7 @@ sylius:
             name: Name
             select: Select
         zone:
+            add_member: Add member
             members: Members
             name: Name
             type: Type
