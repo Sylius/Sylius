@@ -316,7 +316,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function revenueBetweenDatesGroupByDate(array $configuration = array())
+    public function revenueBetweenDatesGroupByDate(array $configuration = array(), $baseCurrency)
     {
         $groupBy = '';
         foreach ($configuration['groupBy'] as $groupByArray) {
@@ -330,8 +330,9 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
             $configuration['end'],
             $groupBy);
 
+        $baseCurrencyCode = $baseCurrency ? 'in ' . $baseCurrency->getCode() : '';
         $queryBuilder
-            ->select('DATE(o.completed_at) as date', 'TRUNCATE(SUM(o.total)/ 100,2) as "total sum"')
+            ->select('DATE(o.completed_at) as date', 'TRUNCATE(SUM(o.total * o.exchange_rate)/ 100,2) as "total sum ' . $baseCurrencyCode . '"')
         ;
 
         return $queryBuilder

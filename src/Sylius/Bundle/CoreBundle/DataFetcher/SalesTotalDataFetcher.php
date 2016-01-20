@@ -13,12 +13,14 @@ namespace Sylius\Bundle\CoreBundle\DataFetcher;
 
 use Sylius\Bundle\ReportBundle\DataFetcher\TimePeriod;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
 use Sylius\Component\Report\DataFetcher\DefaultDataFetchers;
 
 /**
  * Sales total data fetcher
  *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Fernando Caraballo Ortiz <caraballo.ortiz@gmail.com>
  */
 class SalesTotalDataFetcher extends TimePeriod
 {
@@ -28,11 +30,18 @@ class SalesTotalDataFetcher extends TimePeriod
     private $orderRepository;
 
     /**
-     * @param OrderRepositoryInterface $orderRepository
+     * @var CurrencyProviderInterface
      */
-    public function __construct(OrderRepositoryInterface $orderRepository)
+    private $currencyProvider;
+
+    /**
+     * @param OrderRepositoryInterface  $orderRepository
+     * @param CurrencyProviderInterface $currencyProvider
+     */
+    public function __construct(OrderRepositoryInterface $orderRepository, CurrencyProviderInterface $currencyProvider)
     {
-        $this->orderRepository = $orderRepository;
+        $this->orderRepository  = $orderRepository;
+        $this->currencyProvider = $currencyProvider;
     }
 
     /**
@@ -40,7 +49,9 @@ class SalesTotalDataFetcher extends TimePeriod
      */
     protected function getData(array $configuration = array())
     {
-        return $this->orderRepository->revenueBetweenDatesGroupByDate($configuration);
+        return $this->orderRepository->revenueBetweenDatesGroupByDate(
+            $configuration, $this->currencyProvider->getBaseCurrency()
+        );
     }
 
     /**

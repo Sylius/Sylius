@@ -296,6 +296,7 @@
         </service>
         <service id="sylius.listener.order_currency" class="%sylius.listener.order_currency.class%">
             <argument type="service" id="sylius.context.currency" />
+            <argument type="service" id="sylius.repository.currency" />
             <tag name="kernel.event_listener" event="sylius.cart.initialize" method="processOrderCurrency" />
         </service>
         <service id="sylius.listener.customer_aware" class="%sylius.listener.customer_aware.class%">

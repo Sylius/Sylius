@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ReportBundle\DataFetcher\TimePeriod;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
 use Sylius\Component\Report\DataFetcher\Data;
 use Sylius\Component\Report\DataFetcher\DataFetcherInterface;
 use Sylius\Component\Report\DataFetcher\DefaultDataFetchers;
@@ -39,9 +40,9 @@ class SalesTotalDataFetcherSpec extends ObjectBehavior
         $this->shouldImplement(DataFetcherInterface::class);
     }
 
-    public function let(OrderRepositoryInterface $orderRepository)
+    public function let(OrderRepositoryInterface $orderRepository, CurrencyProviderInterface $currencyProvider)
     {
-        $this->beConstructedWith($orderRepository);
+        $this->beConstructedWith($orderRepository, $currencyProvider);
     }
 
     public function it_has_type()
@@ -59,7 +60,7 @@ class SalesTotalDataFetcherSpec extends ObjectBehavior
             'period' => 'day',
             'empty_records' => false, );
 
-        $orderRepository->revenueBetweenDatesGroupByDate(Argument::type('array'))->willReturn($rawData);
+        $orderRepository->revenueBetweenDatesGroupByDate(Argument::type('array'), null)->willReturn($rawData);
 
         $data = new Data();
         $data->setLabels(array_keys($rawData[0]));
@@ -78,7 +79,7 @@ class SalesTotalDataFetcherSpec extends ObjectBehavior
             'period' => 'month',
             'empty_records' => false, );
 
-        $orderRepository->revenueBetweenDatesGroupByDate(Argument::type('array'))->willReturn($rawData);
+        $orderRepository->revenueBetweenDatesGroupByDate(Argument::type('array'), null)->willReturn($rawData);
 
         $data = new Data();
         $data->setLabels(array_keys($rawData[0]));
@@ -97,7 +98,7 @@ class SalesTotalDataFetcherSpec extends ObjectBehavior
             'period' => 'year',
             'empty_records' => false, );
 
-        $orderRepository->revenueBetweenDatesGroupByDate(Argument::type('array'))->willReturn($rawData);
+        $orderRepository->revenueBetweenDatesGroupByDate(Argument::type('array'), null)->willReturn($rawData);
 
         $data = new Data();
         $data->setLabels(array_keys($rawData[0]));
@@ -116,7 +117,7 @@ class SalesTotalDataFetcherSpec extends ObjectBehavior
             'period' => 'month',
             'empty_records' => true, );
 
-        $orderRepository->revenueBetweenDatesGroupByDate(Argument::type('array'))->willReturn($rawData);
+        $orderRepository->revenueBetweenDatesGroupByDate(Argument::type('array'), null)->willReturn($rawData);
 
         $data = new Data();
         $data->setLabels(array_keys($rawData[0]));
@@ -125,7 +126,7 @@ class SalesTotalDataFetcherSpec extends ObjectBehavior
         $this->fetch($configuration)->shouldBeLike($data);
     }
 
-    public function it_does_not_allowed_wrond_data_period($orderRepository, Data $data)
+    public function it_does_not_allowed_wrond_data_period()
     {
         $configuration = array(
             'start' => new \DateTime('2010-01-01 00:00:00.000000'),

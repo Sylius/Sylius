@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -20,14 +21,28 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  * Sets currently selected currency on order object.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Fernando Caraballo Ortiz <caraballo.ortiz@gmail.com>
  */
 class OrderCurrencyListener
 {
+    /**
+     * @var CurrencyContextInterface
+     */
     protected $currencyContext;
 
-    public function __construct(CurrencyContextInterface $currencyContext)
+    /**
+     * @var EntityRepository
+     */
+    protected $currencyRepository;
+
+    /**
+     * @param CurrencyContextInterface $currencyContext
+     * @param EntityRepository         $currencyRepository
+     */
+    public function __construct(CurrencyContextInterface $currencyContext, EntityRepository $currencyRepository)
     {
-        $this->currencyContext = $currencyContext;
+        $this->currencyContext    = $currencyContext;
+        $this->currencyRepository = $currencyRepository;
     }
 
     /**
@@ -46,6 +61,12 @@ class OrderCurrencyListener
                 $order,
                 OrderInterface::class
             );
+        }
+
+        $currency = $this->currencyRepository->findOneBy(['code' => $this->currencyContext->getCurrency()]);
+
+        if ($this->currencyContext->getDefaultCurrency() !== $exchangeRate = $currency->getCode()) {
+            $order->setExchangeRate($currency->getExchangeRate());
         }
 
         $order->setCurrency($this->currencyContext->getCurrency());
