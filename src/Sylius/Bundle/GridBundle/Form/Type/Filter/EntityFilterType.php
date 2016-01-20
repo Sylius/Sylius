@@ -50,6 +50,9 @@ class EntityFilterType extends AbstractType
             ->setRequired(array(
                 'class'
             ))
+            ->setOptional(array(
+                'field',
+            ))
             ->setAllowedTypes(array(
                 'class'    => array('string'),
                 'multiple' => array('bool')

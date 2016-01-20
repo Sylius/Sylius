@@ -75,9 +75,10 @@ class ExpressionBuilder implements ExpressionBuilderInterface
      */
     public function equals($field, $value)
     {
-        $this->queryBuilder->setParameter($field, $value);
+        $parameterName = str_replace('.', '_', $field);
+        $this->queryBuilder->setParameter($parameterName, $value);
 
-        return $this->queryBuilder->expr()->eq($this->getFieldName($field), ':'.$field);
+        return $this->queryBuilder->expr()->eq($this->getFieldName($field), ':'.$parameterName);
     }
 
     /**
