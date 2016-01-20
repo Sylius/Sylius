@@ -12,12 +12,12 @@
 namespace Sylius\Bundle\CoreBundle\Provider;
 
 use Sylius\Bundle\SettingsBundle\Model\Settings;
-use Sylius\Component\Core\Provider\DefaultTaxZoneProviderInterface;
+use Sylius\Component\Core\Provider\ZoneProviderInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class DefaultTaxZoneProvider implements DefaultTaxZoneProviderInterface
+class DefaultTaxZoneProvider implements ZoneProviderInterface
 {
     /**
      * @var Settings

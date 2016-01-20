@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Provider;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Core\Provider\DefaultTaxZoneProviderInterface;
+use Sylius\Component\Core\Provider\ZoneProviderInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -33,7 +33,7 @@ class DefaultTaxZoneProviderSpec extends ObjectBehavior
 
     function it_implements_default_tax_zone_provider_interface()
     {
-        $this->shouldImplement(DefaultTaxZoneProviderInterface::class);
+        $this->shouldImplement(ZoneProviderInterface::class);
     }
 
     function it_provides_default_tax_zone_from_settings($settings, ZoneInterface $defaultTaxZone)

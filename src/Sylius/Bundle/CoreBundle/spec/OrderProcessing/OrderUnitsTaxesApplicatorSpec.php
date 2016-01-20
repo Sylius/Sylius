@@ -71,7 +71,7 @@ class OrderUnitsTaxesApplicatorSpec extends ObjectBehavior
         $units->get(0)->willReturn($unit1);
         $units->get(1)->willReturn($unit2);
 
-        $distributor->distribute(2, 100)->willReturn(array(50, 50));
+        $distributor->distribute(100, 2)->willReturn(array(50, 50));
 
         $adjustmentsFactory->createNew()->willReturn($taxAdjustment1, $taxAdjustment2);
 

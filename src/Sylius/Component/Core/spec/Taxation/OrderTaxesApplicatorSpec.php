@@ -26,7 +26,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Model\TaxRateInterface;
-use Sylius\Component\Core\Provider\DefaultTaxZoneProviderInterface;
+use Sylius\Component\Core\Provider\ZoneProviderInterface;
 use Sylius\Component\Core\Taxation\OrderTaxesApplicatorInterface;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
@@ -36,7 +36,7 @@ use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 class OrderTaxesApplicatorSpec extends ObjectBehavior
 {
     function let(
-        DefaultTaxZoneProviderInterface $defaultTaxZoneProvider,
+        ZoneProviderInterface $defaultTaxZoneProvider,
         OrderShipmentTaxesApplicatorInterface $orderShipmentTaxesApplicator,
         OrderUnitsTaxesApplicatorInterface $orderUnitsTaxesApplicator,
         TaxRateResolverInterface $taxRateResolver,

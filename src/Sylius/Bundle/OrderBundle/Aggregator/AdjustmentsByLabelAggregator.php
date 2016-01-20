@@ -23,12 +23,12 @@ class AdjustmentsByLabelAggregator implements AdjustmentsAggregatorInterface
      */
     public function aggregate(array $adjustments)
     {
+        foreach ($adjustments as $adjustment) {
+            $this->assertElementIsAdjustment($adjustment);
+        }
+
         $aggregatedAdjustments = array();
         foreach ($adjustments as $adjustment) {
-            if (!$adjustment instanceof AdjustmentInterface) {
-                throw new \InvalidArgumentException('Each adjustments array element must implement '.AdjustmentInterface::class.'.');
-            }
-
             if (!isset($aggregatedAdjustments[$adjustment->getDescription()])) {
                 $aggregatedAdjustments[$adjustment->getDescription()] = 0;
             }
@@ -37,5 +37,17 @@ class AdjustmentsByLabelAggregator implements AdjustmentsAggregatorInterface
         }
 
         return $aggregatedAdjustments;
+    }
+
+    /**
+     * @param mixed $adjustment
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function assertElementIsAdjustment($adjustment)
+    {
+        if (!$adjustment instanceof AdjustmentInterface) {
+            throw new \InvalidArgumentException('Each adjustments array element must implement ' . AdjustmentInterface::class . '.');
+        }
     }
 }

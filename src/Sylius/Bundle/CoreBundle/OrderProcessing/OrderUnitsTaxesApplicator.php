@@ -15,6 +15,7 @@ use Sylius\Bundle\CoreBundle\Distributor\TaxesDistributorInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
@@ -65,7 +66,7 @@ class OrderUnitsTaxesApplicator implements OrderUnitsTaxesApplicatorInterface
         $totalTaxAmount = $this->calculator->calculate($item->getTotal(), $taxRate);
         $label = sprintf('%s (%s%%)', $taxRate->getName(), (float) $percentageAmount);
 
-        $splitTaxes = $this->distributor->distribute($item->getUnits()->count(), $totalTaxAmount);
+        $splitTaxes = $this->distributor->distribute($totalTaxAmount, $item->getUnits()->count());
 
         foreach ($splitTaxes as $key => $tax) {
             $this->addAdjustment($units->get($key), $tax, $label, $taxRate->isIncludedInPrice());
@@ -73,20 +74,20 @@ class OrderUnitsTaxesApplicator implements OrderUnitsTaxesApplicatorInterface
     }
 
     /**
-     * @param OrderInterface $order
+     * @param OrderItemUnitInterface $unit
      * @param int $taxAmount
      * @param string $label
      * @param bool $included
      */
-    private function addAdjustment($order, $taxAmount, $label, $included)
+    private function addAdjustment(OrderItemUnitInterface $unit, $taxAmount, $label, $included)
     {
-        /** @var AdjustmentInterface $shippingTaxAdjustment */
-        $shippingTaxAdjustment = $this->adjustmentFactory->createNew();
-        $shippingTaxAdjustment->setType(AdjustmentInterface::TAX_ADJUSTMENT);
-        $shippingTaxAdjustment->setDescription($label);
-        $shippingTaxAdjustment->setAmount($taxAmount);
-        $shippingTaxAdjustment->setNeutral($included);
+        /** @var AdjustmentInterface $unitTaxAdjustment */
+        $unitTaxAdjustment = $this->adjustmentFactory->createNew();
+        $unitTaxAdjustment->setType(AdjustmentInterface::TAX_ADJUSTMENT);
+        $unitTaxAdjustment->setDescription($label);
+        $unitTaxAdjustment->setAmount($taxAmount);
+        $unitTaxAdjustment->setNeutral($included);
 
-        $order->addAdjustment($shippingTaxAdjustment);
+        $unit->addAdjustment($unitTaxAdjustment);
     }
 }

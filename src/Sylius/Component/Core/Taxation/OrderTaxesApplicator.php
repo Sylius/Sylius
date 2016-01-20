@@ -18,7 +18,7 @@ use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Provider\DefaultTaxZoneProviderInterface;
+use Sylius\Component\Core\Provider\ZoneProviderInterface;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
 /**
@@ -28,7 +28,7 @@ use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 class OrderTaxesApplicator implements OrderTaxesApplicatorInterface
 {
     /**
-     * @var DefaultTaxZoneProviderInterface
+     * @var ZoneProviderInterface
      */
     protected $defaultTaxZoneProvider;
 
@@ -53,14 +53,14 @@ class OrderTaxesApplicator implements OrderTaxesApplicatorInterface
     protected $zoneMatcher;
 
     /**
-     * @param DefaultTaxZoneProviderInterface $defaultTaxZoneProvider
+     * @param ZoneProviderInterface $defaultTaxZoneProvider
      * @param OrderShipmentTaxesApplicatorInterface $orderShipmentTaxesApplicator
      * @param OrderUnitsTaxesApplicatorInterface $orderUnitsTaxesApplicator
      * @param TaxRateResolverInterface $taxRateResolver
      * @param ZoneMatcherInterface $zoneMatcher
      */
     public function __construct(
-        DefaultTaxZoneProviderInterface $defaultTaxZoneProvider,
+        ZoneProviderInterface $defaultTaxZoneProvider,
         OrderShipmentTaxesApplicatorInterface $orderShipmentTaxesApplicator,
         OrderUnitsTaxesApplicatorInterface $orderUnitsTaxesApplicator,
         TaxRateResolverInterface $taxRateResolver,

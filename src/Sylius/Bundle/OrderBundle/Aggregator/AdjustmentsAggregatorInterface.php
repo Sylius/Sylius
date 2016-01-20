@@ -19,7 +19,7 @@ use Sylius\Component\Order\Model\AdjustmentInterface;
 interface AdjustmentsAggregatorInterface
 {
     /**
-     * @param array|AdjustmentInterface[] $adjustments
+     * @param AdjustmentInterface[] $adjustments
      *
      * @return array
      */
