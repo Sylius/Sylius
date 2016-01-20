@@ -62,7 +62,7 @@ class AttributeController extends ResourceController
         $attributeRepository = $this->get('sylius.repository.'.$this->config->getResourceName());
         $forms = array();
 
-        $choices = ($request->query->has(sprintf('sylius_%s_choice', $this->config->getResourceName()))) ? $request->query->get(sprintf('sylius_%s_choice', $this->config->getResourceName())) : array();
+        $choices = $request->query->get(sprintf('sylius_%s_choice', $this->config->getResourceName()), array());
 
         $attributes = $attributeRepository->findBy(array('id' => $choices));
         foreach ($attributes as $attribute) {
