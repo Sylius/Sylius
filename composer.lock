@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "608452b183f82dab1d3b49507710fd88",
-    "content-hash": "b9fd13e26a30b0d68c73f020cf54d421",
+    "hash": "a5f092674e0c71c684765d612ab6b82f",
+    "content-hash": "64dec9562cf51236c97f1514c66b2737",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -8625,7 +8625,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/coduo/php-matcher/zipball/c4917b16314900eb186de2422f81191afb7125a3",
+                "url": "https://api.github.com/repos/coduo/php-matcher/zipball/ae724fdf812140066a54e6db2c971fce6364d488",
                 "reference": "c4917b16314900eb186de2422f81191afb7125a3",
                 "shasum": ""
             },
@@ -8842,7 +8842,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Lakion/ApiTestCase/zipball/09a30d30795b4356802eb14502af84a69b517b88",
+                "url": "https://api.github.com/repos/Lakion/ApiTestCase/zipball/a600794587791e940ac276b02fd4c9dc2b53d61e",
                 "reference": "466bd22a228c96a2dba971045ac8c0b0400df6d1",
                 "shasum": ""
             },
