@@ -56,6 +56,7 @@
         <parameter key="sylius.listener.insufficient_stock_exception.class">Sylius\Bundle\CoreBundle\EventListener\InsufficientStockExceptionListener</parameter>
         <parameter key="sylius.listener.image_upload.class">Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener</parameter>
         <parameter key="sylius.listener.channel.class">Sylius\Bundle\CoreBundle\EventListener\ChannelDeletionListener</parameter>
+        <parameter key="sylius.listener.customer_aware.class">Sylius\Bundle\CoreBundle\EventListener\CustomerAwareListener</parameter>
 
         <parameter key="sylius.promotion_processor.class">Sylius\Bundle\CoreBundle\OrderProcessing\PromotionProcessor</parameter>
         <parameter key="sylius.promotion_rule_checker.nth_order.class">Sylius\Component\Core\Promotion\Checker\NthOrderRuleChecker</parameter>
