@@ -17,13 +17,14 @@ use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class SyliusResourceExtension extends Extension
+class SyliusResourceExtension extends Extension implements PrependExtensionInterface
 {
     /**
      * {@inheritdoc}
@@ -42,16 +43,9 @@ class SyliusResourceExtension extends Extension
             'twig.xml'
         );
 
+
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
-        }
-
-        $container->setAlias('sylius.resource_controller.authorization_checker', 'sylius.resource_controller.authorization_checker.disabled');
-
-        if (class_exists('Sylius\Bundle\RbacBundle\SyliusRbacBundle')) {
-            $loader->load('rbac.xml');
-
-            $container->setAlias('sylius.resource_controller.authorization_checker', 'sylius.resource_controller.authorization_checker.rbac');
         }
 
         foreach ($config['resources'] as $alias => $resourceConfig) {
@@ -78,5 +72,20 @@ class SyliusResourceExtension extends Extension
         }
 
         $container->setParameter('sylius.resource.settings', $config['settings']);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prepend(ContainerBuilder $container)
+    {
+        $container->setAlias('sylius.resource_controller.authorization_checker', 'sylius.resource_controller.authorization_checker.disabled');
+
+        if ($container->hasExtension('sylius_rbac')) {
+            $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+            $loader->load('rbac.xml');
+
+            $container->setAlias('sylius.resource_controller.authorization_checker', 'sylius.resource_controller.authorization_checker.rbac');
+        }
     }
 }

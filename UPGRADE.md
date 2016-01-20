@@ -5,6 +5,7 @@ UPGRADE
 
 ### Resource and SyliusResourceBundle 
 
+ * All resources must implement ``Sylius\Component\Resource\Model\ResourceInterface``;
  * ResourceController has been rewritten from scratch but should maintain 100% of previous functionality;
  * ``$this->config`` is no longer available and you should create it manually in every action;
  
