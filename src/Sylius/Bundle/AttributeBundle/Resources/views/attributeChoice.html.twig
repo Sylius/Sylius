@@ -10,9 +10,9 @@
                     <div class="list-group row">
                         {% for attributeField in form %}
                             {% if attributeField.vars.name != '_token' %}
-                            <a oldhref class="list-group-item col-xs-12 col-md-6">
+                            <div class="list-group-item col-xs-12 col-md-6" style="cursor: default;">
                                 {{ attributeField.vars.label }} {{ form_widget(attributeField, { 'id': attributeField.vars.label~' attribute' }) }}
-                            </a>
+                            </div>
                             {% endif %}
                         {% endfor %}
                     </div>

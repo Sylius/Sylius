@@ -82,15 +82,6 @@ class AttributeValueSpec extends ObjectBehavior
         $this->getValue()->shouldReturn('XXL');
     }
 
-    function it_returns_its_value_when_converted_to_string(AttributeInterface $attribute)
-    {
-        $attribute->getStorageType()->willReturn('text');
-        $this->setAttribute($attribute);
-
-        $this->setValue('S');
-        $this->__toString()->shouldReturn('S');
-    }
-
     function it_throws_exception_when_trying_to_get_name_without_attribute_defined()
     {
         $this
