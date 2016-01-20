@@ -455,9 +455,9 @@ class Order implements OrderInterface
     public function addAdjustment(AdjustmentInterface $adjustment)
     {
         if (!$this->hasAdjustment($adjustment)) {
-            $adjustment->setAdjustable($this);
             $this->adjustments->add($adjustment);
             $this->addToAdjustmentsTotal($adjustment);
+            $adjustment->setAdjustable($this);
         }
     }
 
@@ -467,9 +467,9 @@ class Order implements OrderInterface
     public function removeAdjustment(AdjustmentInterface $adjustment)
     {
         if (!$adjustment->isLocked() && $this->hasAdjustment($adjustment)) {
-            $adjustment->setAdjustable(null);
             $this->adjustments->removeElement($adjustment);
             $this->subtractFromAdjustmentsTotal($adjustment);
+            $adjustment->setAdjustable(null);
         }
     }
 
