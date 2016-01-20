@@ -22,6 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Fernando Caraballo Ortiz <caraballo.ortiz@gmail.com>
  */
 class ReportController extends ResourceController
 {
@@ -63,6 +64,8 @@ class ReportController extends ResourceController
      */
     public function embedAction(Request $request, $report, array $configuration = array())
     {
+        $currencyProvider = $this->get('sylius.currency_provider');
+
         if (!$report instanceof ReportInterface) {
             $report = $this->getReportRepository()->findOneBy(array('code' => $report));
         }
@@ -72,6 +75,8 @@ class ReportController extends ResourceController
         }
 
         $configuration = $request->query->get('configuration', $configuration);
+        $configuration['baseCurrency'] = $currencyProvider->getBaseCurrency();
+
         $data = $this->getReportDataFetcher()->fetch($report, $configuration);
 
         return new Response($this->getReportRenderer()->render($report, $data));

@@ -468,6 +468,7 @@
 
         <service id="sylius.currency_provider" class="%sylius.currency_provider.class%">
             <argument type="service" id="sylius.context.channel" />
+            <argument type="service" id="sylius.repository.currency" />
         </service>
 
         <service id="sylius.channel_aware_locale_provider" class="%sylius.channel_aware_locale_provider.class%">
