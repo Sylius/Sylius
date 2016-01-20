@@ -64,10 +64,10 @@ class BuildAddressFormSubscriberSpec extends ObjectBehavior
 
         $event->getData()->willReturn($address);
         $country->getCode()->willReturn('IE');
-        $address->getCountry()->willReturn('IE');
+        $address->getCountryCode()->willReturn('IE');
         $country->hasProvinces()->willReturn(true);
         $province->getCode()->willReturn('province');
-        $address->getProvince()->willReturn('province');
+        $address->getProvinceCode()->willReturn('province');
 
         $formFactory->createNamed('province', 'sylius_province_code_choice', 'province', Argument::withKey('country'))
             ->willReturn($provinceForm);

@@ -77,53 +77,53 @@ class AddressSpec extends ObjectBehavior
 
     function it_has_no_country_by_default()
     {
-        $this->getCountry()->shouldReturn(null);
+        $this->getCountryCode()->shouldReturn(null);
     }
 
-    function its_country_is_mutable()
+    function its_country_code_is_mutable()
     {
-        $this->setCountry('IE');
-        $this->getCountry()->shouldReturn('IE');
+        $this->setCountryCode('IE');
+        $this->getCountryCode()->shouldReturn('IE');
     }
 
-    function it_allows_to_unset_the_country()
+    function it_allows_to_unset_the_country_code()
     {
-        $this->setCountry('IE');
-        $this->getCountry()->shouldReturn('IE');
+        $this->setCountryCode('IE');
+        $this->getCountryCode()->shouldReturn('IE');
 
-        $this->setCountry(null);
-        $this->getCountry()->shouldReturn(null);
+        $this->setCountryCode(null);
+        $this->getCountryCode()->shouldReturn(null);
     }
 
-    function it_unsets_the_province_when_erasing_the_country()
+    function it_unsets_the_province_code_when_erasing_country_code()
     {
-        $this->setCountry('IE');
-        $this->setProvince('DU');
+        $this->setCountryCode('IE');
+        $this->setProvinceCode('DU');
 
-        $this->setCountry(null);
+        $this->setCountryCode(null);
 
-        $this->getCountry()->shouldReturn(null);
-        $this->getProvince()->shouldReturn(null);
+        $this->getCountryCode()->shouldReturn(null);
+        $this->getProvinceCode()->shouldReturn(null);
     }
 
-    function it_has_no_province_by_default()
+    function it_has_no_province_code_by_default()
     {
-        $this->getProvince()->shouldReturn(null);
+        $this->getProvinceCode()->shouldReturn(null);
     }
 
-    function it_ignores_province_when_there_is_no_country()
+    function it_ignores_province_code_when_there_is_no_country_code()
     {
-        $this->setCountry(null);
-        $this->setProvince('DU');
-        $this->getProvince()->shouldReturn(null);
+        $this->setCountryCode(null);
+        $this->setProvinceCode('DU');
+        $this->getProvinceCode()->shouldReturn(null);
     }
 
-    function its_province_is_mutable()
+    function its_province_code_is_mutable()
     {
-        $this->setCountry("IE");
+        $this->setCountryCode("IE");
 
-        $this->setProvince('DU');
-        $this->getProvince()->shouldReturn('DU');
+        $this->setProvinceCode('DU');
+        $this->getProvinceCode()->shouldReturn('DU');
     }
 
     function it_has_no_company_by_default()

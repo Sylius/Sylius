@@ -71,7 +71,7 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $countryCode = $address->getCountry();
+        $countryCode = $address->getCountryCode();
         if (null === $countryCode) {
             return;
         }

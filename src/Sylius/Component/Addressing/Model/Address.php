@@ -44,12 +44,12 @@ class Address implements AddressInterface
     /**
      * @var string
      */
-    protected $country;
+    protected $countryCode;
 
     /**
      * @var string
      */
-    protected $province;
+    protected $provinceCode;
 
     /**
      * @var string
@@ -164,41 +164,41 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function getCountry()
+    public function getCountryCode()
     {
-        return $this->country;
+        return $this->countryCode;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setCountry($country = null)
+    public function setCountryCode($countryCode = null)
     {
-        if (null === $country) {
-            $this->province = null;
+        if (null === $countryCode) {
+            $this->provinceCode = null;
         }
 
-        $this->country = $country;
+        $this->countryCode = $countryCode;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getProvince()
+    public function getProvinceCode()
     {
-        return $this->province;
+        return $this->provinceCode;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setProvince($province = null)
+    public function setProvinceCode($provinceCode = null)
     {
-        if (null === $this->country) {
+        if (null === $this->countryCode) {
             return;
         }
 
-        $this->province = $province;
+        $this->provinceCode = $provinceCode;
     }
 
     /**

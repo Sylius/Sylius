@@ -69,11 +69,11 @@ class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         RepositoryInterface $repository
     ) {
         $country->getCode()->willReturn('IE');
-        $address->getCountry()->willreturn('IE');
+        $address->getCountryCode()->willreturn('IE');
         $repository->findOneBy(array('code' => 'IE'))->willReturn($country);
 
         $country->hasProvinces()->willreturn(true);
-        $address->getProvince()->willreturn(null);
+        $address->getProvinceCode()->willreturn(null);
         $this->initialize($context);
 
         $context->getPropertyPath()->willReturn('property_path');
