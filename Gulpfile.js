@@ -3,29 +3,34 @@ var gulpif = require('gulp-if');
 var uglify = require('gulp-uglify');
 var uglifycss = require('gulp-uglifycss');
 var concat = require('gulp-concat');
-var less = require('gulp-less');
+var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var merge = require('merge-stream');
 var debug = require('gulp-debug');
 var livereload = require('gulp-livereload');
 
 var env = process.env.GULP_ENV;
+var rootPath = 'web/assets/';
 
 var paths = {
     js: [
         'node_modules/jquery/dist/jquery.min.js',
         'node_modules/bootstrap/dist/js/bootstrap.min.js',
-        'node_modules/admin-lte/dist/js/app.min.js'
+        'node_modules/admin-lte/dist/js/app.min.js',
     ],
-    'less': [
-        'src/Sylius/Bundle/UiBundle/Resources/assets/less/**'
+    'sass': [
+        'src/Sylius/Bundle/UiBundle/Resources/assets/sass/**',
     ],
     css: [
         'node_modules/bootstrap/dist/css/bootstrap.min.css',
-        'node_modules/admin-lte/dist/css/AdminLTE.min.css'
+        'node_modules/admin-lte/dist/css/AdminLTE.min.css',
+        'node_modules/font-awesome/css/font-awesome.min.css',
+    ],
+    fonts: [
+        'node_modules/font-awesome/fonts/**',
     ],
     'img': [
-        'src/Sylius/Bundle/UiBundle/Resources/assets/img/**'
+        'src/Sylius/Bundle/UiBundle/Resources/assets/img/**',
     ]
 };
 
@@ -34,42 +39,49 @@ gulp.task('js', function () {
         .pipe(concat('javascript.js'))
         .pipe(gulpif('prod' === env, uglify()))
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('web/js'))
+        .pipe(gulp.dest(rootPath + 'js'))
     ;
 });
 
 gulp.task('css', function() {
-    var lessStream = gulp.src(paths.less)
-        .pipe(less())
-        .pipe(concat('less-files.less'))
+    var sassStream = gulp.src(paths.sass)
+        .pipe(sass())
+        .pipe(concat('sass-files.scss'))
     ;
 
     var cssStream = gulp.src(paths.css)
         .pipe(concat('css-files.css'))
     ;
 
-    return merge(lessStream, cssStream)
+    return merge(sassStream, cssStream)
         .pipe(concat('style.css'))
         .pipe(gulpif('prod' === env, uglifycss()))
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('web/css'))
+        .pipe(gulp.dest(rootPath + 'css'))
         .pipe(livereload())
+    ;
+});
+
+gulp.task('fonts', function () {
+    return gulp.src(paths.fonts)
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest(rootPath + 'fonts'))
     ;
 });
 
 gulp.task('img', function () {
     return gulp.src(paths.img)
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('web/img'))
+        .pipe(gulp.dest(rootPath + 'img'))
     ;
 });
 
 gulp.task('watch', function() {
     livereload.listen();
     gulp.watch(paths.js, ['js']);
-    gulp.watch(paths.less, ['css']);
+    gulp.watch(paths.sass, ['css']);
     gulp.watch(paths.css, ['css']);
     gulp.watch(paths.img, ['img']);
 });
 
-gulp.task('default', ['watch', 'js', 'css', 'img']);
+gulp.task('default', ['watch', 'js', 'css', 'fonts', 'img']);

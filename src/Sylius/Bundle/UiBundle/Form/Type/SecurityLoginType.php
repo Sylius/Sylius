@@ -33,6 +33,7 @@ class SecurityLoginType extends AbstractType
             ))
             ->add('_remember_me', 'checkbox', array(
                 'label' => 'sylius.form.login.remember_me',
+                'required' => false,
             ))
         ;
     }

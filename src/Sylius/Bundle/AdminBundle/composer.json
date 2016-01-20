@@ -26,6 +26,9 @@
         "sylius/core-bundle": "^0.17.0",
         "symfony/framework-bundle": "^2.7.7"
     },
+    "require-dev": {
+        "phpspec/phpspec": "^2.4"
+    },
     "config": {
         "bin-dir": "bin"
     },

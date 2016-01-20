@@ -9,9 +9,10 @@
 /app/config/*.local.yml
 
 /web/bundles
-/web/css
-/web/js
-/web/img
+/web/assets/css
+/web/assets/js
+/web/assets/fonts
+/web/assets/img
 /web/assets/compiled
 /web/media
 
