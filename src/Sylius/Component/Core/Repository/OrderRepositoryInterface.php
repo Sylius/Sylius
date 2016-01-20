@@ -54,11 +54,12 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
      * Gets revenue group by date
      * between particular dates
      *
-     * @param array $configuration
+     * @param array  $configuration
+     * @param string $baseCurrency
      *
      * @return array
      */
-    public function revenueBetweenDatesGroupByDate(array $configuration = array());
+    public function revenueBetweenDatesGroupByDate(array $configuration = array(), $baseCurrency);
 
     /**
      * Gets number of orders group by date

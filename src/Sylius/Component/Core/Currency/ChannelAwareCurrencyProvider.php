@@ -19,6 +19,7 @@ use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
  * Currency provider, which returns currencies enabled for this channel.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Fernando Caraballo Ortiz <caraballo.ortiz@gmail.com.org>
  */
 class ChannelAwareCurrencyProvider implements CurrencyProviderInterface
 {
@@ -47,5 +48,19 @@ class ChannelAwareCurrencyProvider implements CurrencyProviderInterface
         return $currentChannel->getCurrencies()->filter(function (CurrencyInterface $currency) {
             return $currency->isEnabled();
         });
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBaseCurrency()
+    {
+        $currentChannel =  $this->channelContext->getChannel();
+
+        foreach ($currentChannel->getCurrencies() as $currency) {
+            if ($currency->isBase()) return $currency;
+        }
+
+        return;
     }
 }

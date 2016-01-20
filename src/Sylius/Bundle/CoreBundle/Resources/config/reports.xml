@@ -30,6 +30,7 @@
 
         <service id="sylius.report.data_fetcher.sales_total" class="%sylius.report.data_fetcher.sales_total.class%">
             <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.currency_provider" />
             <tag name="sylius.report.data_fetcher" fetcher="sales_total" label="Sales Total" />
         </service>
 

@@ -40,6 +40,12 @@ class LoadOrdersData extends DataFixture
             'MOBILE',
         );
 
+        $currencyExchangeRates = array(
+            'GBP' => 0.8,
+            'USD' => 1.2,
+            'EUR' => 1.0
+        );
+
         for ($i = 1; $i <= 50; $i++) {
             /* @var $order OrderInterface */
             $order = $orderFactory->createNew();
@@ -62,7 +68,8 @@ class LoadOrdersData extends DataFixture
 
             $this->createShipment($order);
 
-            $order->setCurrency($this->faker->randomElement(array('EUR', 'USD', 'GBP')));
+            $order->setCurrency($this->faker->randomElement(array_keys($currencyExchangeRates)));
+            $order->setExchangeRate($currencyExchangeRates[$order->getCurrency()]);
             $order->setShippingAddress($this->createAddress());
             $order->setBillingAddress($this->createAddress());
             $order->setCreatedAt($this->faker->dateTimeBetween('1 year ago', 'now'));

@@ -11,6 +11,7 @@
             <gedmo:versioned />
         </field>
 
+        <field name="exchangeRate" column="exchange_rate" type="decimal" precision="10" scale="5" />
         <field type="string" name="checkoutState" column="checkout_state" />
         <field type="string" name="paymentState" column="payment_state" />
         <field type="string" name="shippingState" column="shipping_state" />

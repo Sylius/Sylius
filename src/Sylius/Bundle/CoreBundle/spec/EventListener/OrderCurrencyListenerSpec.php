@@ -12,15 +12,17 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
+use Sylius\Component\Currency\Model\Currency;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 class OrderCurrencyListenerSpec extends ObjectBehavior
 {
-    function let(CurrencyContextInterface $currencyContext)
+    function let(CurrencyContextInterface $currencyContext, EntityRepository $currencyRepository)
     {
-        $this->beConstructedWith($currencyContext);
+        $this->beConstructedWith($currencyContext, $currencyRepository);
     }
 
     function it_is_initializable()
@@ -44,11 +46,19 @@ class OrderCurrencyListenerSpec extends ObjectBehavior
     function it_sets_currency_on_order(
         $currencyContext,
         GenericEvent $event,
-        OrderInterface $order
+        OrderInterface $order,
+        EntityRepository $currencyRepository,
+        Currency $currency
     )
     {
         $event->getSubject()->willReturn($order);
         $currencyContext->getCurrency()->shouldBeCalled()->willReturn('PLN');
+
+        $currencyRepository->findOneBy(['code' => 'PLN'])->shouldBeCalled()->willReturn($currency);
+
+        $currency->getCode()->willReturn('EUR');
+
+        $currencyContext->getDefaultCurrency()->willReturn('EUR');
 
         $this->processOrderCurrency($event);
     }
