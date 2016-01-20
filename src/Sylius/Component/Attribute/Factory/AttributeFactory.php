@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Attribute\Factory;
 
-use Sylius\Component\Product\Model\Attribute;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
@@ -41,9 +40,7 @@ class AttributeFactory implements AttributeFactoryInterface
     }
 
     /**
-     * @param string $type
-     *
-     * @return Attribute
+     * {@inheritdoc}
      */
     public function createTyped($type)
     {
@@ -55,7 +52,7 @@ class AttributeFactory implements AttributeFactoryInterface
     }
 
     /**
-     * @return Attribute
+     * {@inheritdoc}
      */
     public function createNew()
     {

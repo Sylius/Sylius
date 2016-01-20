@@ -41,7 +41,7 @@ class AttributeController extends ResourceController
     public function renderAttributesAction()
     {
         $form = $this->get('form.factory')->create(
-            'sylius_product_attribute_choice',
+            sprintf('sylius_%s_choice', $this->config->getResourceName()),
             null,
             array(
                 'expanded' => true,
@@ -59,10 +59,10 @@ class AttributeController extends ResourceController
      */
     public function renderAttributeValueFormsAction(Request $request)
     {
-        $attributeRepository = $this->get('sylius.repository.product_attribute');
+        $attributeRepository = $this->get('sylius.repository.'.$this->config->getResourceName());
         $forms = array();
 
-        $choices = ($request->query->has('sylius_product_attribute_choice')) ? $request->query->get('sylius_product_attribute_choice') : array();
+        $choices = ($request->query->has(sprintf('sylius_%s_choice', $this->config->getResourceName()))) ? $request->query->get(sprintf('sylius_%s_choice', $this->config->getResourceName())) : array();
 
         $attributes = $attributeRepository->findBy(array('id' => $choices));
         foreach ($attributes as $attribute) {
