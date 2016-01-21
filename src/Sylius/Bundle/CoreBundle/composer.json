@@ -55,7 +55,7 @@
         "sylius/taxonomy-bundle": "0.17.*",
         "sylius/user-bundle": "0.17.*",
         "sylius/variation-bundle": "0.17.*",
-        "symfony/framework-bundle": "^2.7.5",
+        "symfony/framework-bundle": "^2.7.7",
         "symfony-cmf/routing-bundle": "~1.2",
         "swiftmailer/swiftmailer": "~5.0",
         "winzou/state-machine-bundle": "~0.2"

@@ -27,7 +27,7 @@
         "sylius/channel": "0.17.*",
         "sylius/product-bundle": "0.17.*",
         "sylius/resource-bundle": "0.17.*",
-        "symfony/framework-bundle": "^2.7.5",
+        "symfony/framework-bundle": "^2.7.7",
         "symfony/property-access": "^2.7",
         "twig/twig": "~1.11"
     },

@@ -24,7 +24,7 @@
 
         "jackalope/jackalope-doctrine-dbal": "^1.1.2",
         "sylius/resource-bundle": "0.17.*",
-        "symfony/framework-bundle": "^2.7.5",
+        "symfony/framework-bundle": "^2.7.7",
         "symfony-cmf/block-bundle": "~1.2",
         "symfony-cmf/content-bundle": "~1.2",
         "symfony-cmf/create-bundle": "~1.2",

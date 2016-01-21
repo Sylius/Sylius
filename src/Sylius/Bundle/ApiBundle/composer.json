@@ -24,7 +24,7 @@
 
         "friendsofsymfony/oauth-server-bundle": "~1.4",
         "sylius/resource-bundle": "0.17.*",
-        "symfony/framework-bundle": "^2.7.5"
+        "symfony/framework-bundle": "^2.7.7"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.4",
