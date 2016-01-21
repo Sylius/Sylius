@@ -11,36 +11,35 @@
 
 namespace Sylius\Bundle\FlowBundle\Storage;
 
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Sylius\Component\Storage\SessionStorage as BaseSessionStorage;
 
 /**
  * Session storage.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Adam Elsodaney <adam.elso@gmail.com>
  */
-class SessionStorage extends AbstractStorage
+class SessionStorage extends BaseSessionStorage implements StorageInterface
 {
     /**
-     * Session.
+     * Storage domain.
      *
-     * @var SessionInterface
+     * @var string
      */
-    protected $session;
+    protected $domain;
 
     /**
-     * Constructor.
-     *
-     * @param SessionInterface $session
+     * {@inheritdoc}
      */
-    public function __construct(SessionInterface $session)
+    public function initialize($domain)
     {
-        $this->session = $session;
+        $this->domain = $domain;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function get($key, $default = null)
+    public function getData($key, $default = null)
     {
         return $this->getBag()->get($this->resolveKey($key), $default);
     }
@@ -48,7 +47,7 @@ class SessionStorage extends AbstractStorage
     /**
      * {@inheritdoc}
      */
-    public function set($key, $value)
+    public function setData($key, $value)
     {
         $this->getBag()->set($this->resolveKey($key), $value);
     }
@@ -56,7 +55,7 @@ class SessionStorage extends AbstractStorage
     /**
      * {@inheritdoc}
      */
-    public function has($key)
+    public function hasData($key)
     {
         return $this->getBag()->has($this->resolveKey($key));
     }
@@ -64,7 +63,7 @@ class SessionStorage extends AbstractStorage
     /**
      * {@inheritdoc}
      */
-    public function remove($key)
+    public function removeData($key)
     {
         $this->getBag()->remove($this->resolveKey($key));
     }

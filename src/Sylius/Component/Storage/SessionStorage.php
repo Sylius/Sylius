@@ -25,6 +25,9 @@ class SessionStorage implements StorageInterface
      */
     protected $session;
 
+    /**
+     * @param SessionInterface $session
+     */
     public function __construct(SessionInterface $session)
     {
         $this->session = $session;

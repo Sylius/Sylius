@@ -30,42 +30,55 @@ class SessionStorageSpec extends ObjectBehavior
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\FlowBundle\Storage\SessionStorage');
-        $this->shouldHaveType('Sylius\Bundle\FlowBundle\Storage\AbstractStorage');
+    }
+
+    function it_is_a_Sylius_storage()
+    {
+        $this->shouldImplement('Sylius\Component\Storage\StorageInterface');
+    }
+
+    function it_is_a_Sylius_Flow_storage()
+    {
         $this->shouldImplement('Sylius\Bundle\FlowBundle\Storage\StorageInterface');
     }
 
-    function itd_message_is_mutable($bag)
+    function it_is_a_Sylius_session_storage()
+    {
+        $this->shouldImplement('Sylius\Component\Storage\SessionStorage');
+    }
+
+    function itd_message_is_mutable(SessionFlowsBag $bag)
     {
         $bag->set('domain/message_key', 'message_value')->shouldBeCalled();
 
-        $this->set('message_key', 'message_value');
+        $this->setData('message_key', 'message_value');
     }
 
-    function it_has_message($bag)
+    function it_has_message(SessionFlowsBag $bag)
     {
         $bag->get('domain/message_key', null)->shouldBeCalled();
 
-        $this->get('message_key');
+        $this->getData('message_key');
     }
 
-    function it_checks_is_the_message_exists($bag)
+    function it_checks_is_the_message_exists(SessionFlowsBag $bag)
     {
         $bag->has('domain/message_key')->shouldBeCalled();
 
-        $this->has('message_key');
+        $this->hasData('message_key');
     }
 
-    function it_removes_a_message($bag)
+    function it_removes_a_message(SessionFlowsBag $bag)
     {
         $bag->remove('domain/message_key')->shouldBeCalled();
 
-        $this->remove('message_key');
+        $this->removeData('message_key');
     }
 
-    function it_removes_all_messages($bag)
+    function it_removes_all_messages(SessionFlowsBag $bag)
     {
         $bag->remove('domain/message_key')->shouldBeCalled();
 
-        $this->remove('message_key');
+        $this->removeData('message_key');
     }
 }
