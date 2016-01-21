@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Distributor;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class TaxesDistributor implements TaxesDistributorInterface
+class IntegerDistributor implements IntegerDistributorInterface
 {
     /**
      * {@inheritdoc}

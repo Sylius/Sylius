@@ -44,14 +44,12 @@ class CartItemTypeSpec extends ObjectBehavior
             ->add('quantity', 'integer', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
-            ->shouldBeCalled()
         ;
 
         $builder
             ->setDataMapper($orderItemQuantityDataMapper)
             ->shouldBeCalled()
             ->willReturn($builder)
-            ->shouldBeCalled()
         ;
 
         $this->buildForm($builder, array());

@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\CoreBundle\OrderProcessing;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\Distributor\TaxesDistributorInterface;
+use Sylius\Bundle\CoreBundle\Distributor\IntegerDistributorInterface;
 use Sylius\Bundle\CoreBundle\OrderProcessing\OrderTaxesApplicatorInterface;
 use Sylius\Bundle\CoreBundle\Provider\DefaultTaxZoneProviderInterface;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
@@ -39,7 +39,7 @@ class OrderTaxesApplicatorSpec extends ObjectBehavior
         CalculatorInterface $calculator,
         DefaultTaxZoneProviderInterface $defaultTaxZoneProvider,
         FactoryInterface $adjustmentFactory,
-        TaxesDistributorInterface $orderUnitTaxesDistributor,
+        IntegerDistributorInterface $integerDistributor,
         TaxRateResolverInterface $taxRateResolver,
         ZoneMatcherInterface $zoneMatcher
     ) {
@@ -47,7 +47,7 @@ class OrderTaxesApplicatorSpec extends ObjectBehavior
             $calculator,
             $defaultTaxZoneProvider,
             $adjustmentFactory,
-            $orderUnitTaxesDistributor,
+            $integerDistributor,
             $taxRateResolver,
             $zoneMatcher
         );
@@ -66,7 +66,7 @@ class OrderTaxesApplicatorSpec extends ObjectBehavior
     function it_distributes_calculated_taxes_for_items_units(
         $adjustmentFactory,
         $calculator,
-        $orderUnitTaxesDistributor,
+        $integerDistributor,
         $taxRateResolver,
         $zoneMatcher,
         AddressInterface $address,
@@ -83,8 +83,9 @@ class OrderTaxesApplicatorSpec extends ObjectBehavior
         TaxRateInterface $taxRate,
         ZoneInterface $zone
     ) {
+        $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
         $order->getItems()->willReturn($items);
-        $items->isEmpty()->willReturn(false);
+        $order->isEmpty()->willReturn(false);
 
         $items->count()->willReturn(1);
         $items->getIterator()->willReturn($iterator, $iterator);
@@ -109,9 +110,9 @@ class OrderTaxesApplicatorSpec extends ObjectBehavior
         $calculator->calculate(1000, $taxRate)->willReturn(200);
 
         $orderItem->getUnits()->willReturn($units);
-        $units->count()->willReturn(2);
+        $orderItem->getQuantity()->willReturn(2);
 
-        $orderUnitTaxesDistributor->distribute(2, 200)->willReturn(array(100, 100));
+        $integerDistributor->distribute(2, 200)->willReturn(array(100, 100));
 
         $units->get(0)->willReturn($unit1);
         $units->get(1)->willReturn($unit2);
@@ -136,8 +137,9 @@ class OrderTaxesApplicatorSpec extends ObjectBehavior
 
     function it_does_not_apply_taxes_if_there_is_no_order_item(Collection $items, OrderInterface $order)
     {
-        $order->getItems()->willReturn($items);
-        $items->isEmpty()->willReturn(true);
+        $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
+        $order->getItems()->willReturn(array());
+        $order->isEmpty()->willReturn(true);
 
         $order->getShippingAddress()->shouldNotBeCalled();
 
@@ -154,8 +156,9 @@ class OrderTaxesApplicatorSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem
     ) {
+        $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
         $order->getItems()->willReturn($items);
-        $items->isEmpty()->willReturn(false);
+        $order->isEmpty()->willReturn(false);
 
         $items->count()->willReturn(1);
         $items->getIterator()->willReturn($iterator);
@@ -176,7 +179,7 @@ class OrderTaxesApplicatorSpec extends ObjectBehavior
     }
 
     function it_does_not_apply_taxes_to_item_units_if_tax_rate_cannot_be_resolved(
-        $orderUnitTaxesDistributor,
+        $integerDistributor,
         $taxRateResolver,
         $zoneMatcher,
         AddressInterface $address,
@@ -187,8 +190,9 @@ class OrderTaxesApplicatorSpec extends ObjectBehavior
         ProductInterface $product,
         ZoneInterface $zone
     ) {
+        $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
         $order->getItems()->willReturn($items);
-        $items->isEmpty()->willReturn(false);
+        $order->isEmpty()->willReturn(false);
 
         $items->count()->willReturn(1);
         $items->getIterator()->willReturn($iterator);
@@ -205,7 +209,7 @@ class OrderTaxesApplicatorSpec extends ObjectBehavior
 
         $taxRateResolver->resolve($product, array('zone' => $zone))->willReturn(null);
 
-        $orderUnitTaxesDistributor->distribute(Argument::any())->shouldNotBeCalled();
+        $integerDistributor->distribute(Argument::any())->shouldNotBeCalled();
 
         $this->apply($order);
     }

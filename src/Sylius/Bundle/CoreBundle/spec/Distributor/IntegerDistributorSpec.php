@@ -13,22 +13,22 @@ namespace spec\Sylius\Bundle\CoreBundle\Distributor;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Distributor\TaxesDistributorInterface;
+use Sylius\Bundle\CoreBundle\Distributor\IntegerDistributorInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class TaxesDistributorSpec extends ObjectBehavior
+class IntegerDistributorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Distributor\TaxesDistributor');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Distributor\IntegerDistributor');
     }
 
     function it_implements_order_unit_taxes_distributor_interface()
     {
-        $this->shouldImplement(TaxesDistributorInterface::class);
+        $this->shouldImplement(IntegerDistributorInterface::class);
     }
 
     function it_distributes_simple_taxes()

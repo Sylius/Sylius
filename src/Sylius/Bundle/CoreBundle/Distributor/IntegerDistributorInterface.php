@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Distributor;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface TaxesDistributorInterface
+interface IntegerDistributorInterface
 {
     /**
      * @param int $taxItems

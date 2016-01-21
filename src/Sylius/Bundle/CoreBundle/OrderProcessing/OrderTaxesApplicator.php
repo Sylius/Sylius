@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\OrderProcessing;
 
-use Sylius\Bundle\CoreBundle\Distributor\TaxesDistributorInterface;
+use Sylius\Bundle\CoreBundle\Distributor\IntegerDistributorInterface;
 use Sylius\Bundle\CoreBundle\Provider\DefaultTaxZoneProviderInterface;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
@@ -32,7 +32,7 @@ class OrderTaxesApplicator implements OrderTaxesApplicatorInterface
     /**
      * @var CalculatorInterface
      */
-    protected $calculator;
+    protected $taxCalculator;
 
     /**
      * @var DefaultTaxZoneProviderInterface
@@ -45,9 +45,9 @@ class OrderTaxesApplicator implements OrderTaxesApplicatorInterface
     protected $adjustmentFactory;
 
     /**
-     * @var TaxesDistributorInterface
+     * @var IntegerDistributorInterface
      */
-    protected $orderUnitTaxesDistributor;
+    protected $integerDistributor;
 
     /**
      * @var TaxRateResolverInterface
@@ -60,25 +60,25 @@ class OrderTaxesApplicator implements OrderTaxesApplicatorInterface
     protected $zoneMatcher;
 
     /**
-     * @param CalculatorInterface $calculator
+     * @param CalculatorInterface $taxCalculator
      * @param DefaultTaxZoneProviderInterface $defaultTaxZoneProvider
      * @param FactoryInterface $adjustmentFactory
-     * @param TaxesDistributorInterface $orderUnitTaxesDistributor
+     * @param IntegerDistributorInterface $integerDistributor
      * @param TaxRateResolverInterface $taxRateResolver
      * @param ZoneMatcherInterface $zoneMatcher
      */
     public function __construct(
-        CalculatorInterface $calculator,
+        CalculatorInterface $taxCalculator,
         DefaultTaxZoneProviderInterface $defaultTaxZoneProvider,
         FactoryInterface $adjustmentFactory,
-        TaxesDistributorInterface $orderUnitTaxesDistributor,
+        IntegerDistributorInterface $integerDistributor,
         TaxRateResolverInterface $taxRateResolver,
         ZoneMatcherInterface $zoneMatcher
     ) {
-        $this->calculator = $calculator;
+        $this->taxCalculator = $taxCalculator;
         $this->defaultTaxZoneProvider = $defaultTaxZoneProvider;
         $this->adjustmentFactory = $adjustmentFactory;
-        $this->orderUnitTaxesDistributor = $orderUnitTaxesDistributor;
+        $this->integerDistributor = $integerDistributor;
         $this->taxRateResolver = $taxRateResolver;
         $this->zoneMatcher = $zoneMatcher;
     }
@@ -88,11 +88,11 @@ class OrderTaxesApplicator implements OrderTaxesApplicatorInterface
      */
     public function apply(OrderInterface $order)
     {
-        if ($order->getItems()->isEmpty()) {
+        $this->clearTaxes($order);
+        if ($order->isEmpty()) {
             return;
         }
 
-        $this->clearAdjustments($order);
         $zone = $this->provideTaxZone($order->getShippingAddress());
 
         if (null === $zone) {
@@ -116,10 +116,10 @@ class OrderTaxesApplicator implements OrderTaxesApplicatorInterface
             }
 
             $percentageAmount = $rate->getAmountAsPercentage();
-            $totalTaxAmount = $this->calculator->calculate($item->getTotal(), $rate);
+            $totalTaxAmount = $this->taxCalculator->calculate($item->getTotal(), $rate);
             $label = sprintf('%s (%s%%)', $rate->getName(), (float) $percentageAmount);
 
-            $splitTaxes = $this->orderUnitTaxesDistributor->distribute($item->getUnits()->count(), $totalTaxAmount);
+            $splitTaxes = $this->integerDistributor->distribute($item->getQuantity(), $totalTaxAmount);
 
             foreach ($splitTaxes as $key => $tax) {
                 $this->addAdjustment($item->getUnits()->get($key), $tax, $label, $rate->isIncludedInPrice());
@@ -166,8 +166,9 @@ class OrderTaxesApplicator implements OrderTaxesApplicatorInterface
     /**
      * @param OrderInterface $order
      */
-    private function clearAdjustments(OrderInterface $order)
+    private function clearTaxes(OrderInterface $order)
     {
+        $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT);
         foreach ($order->getItems() as $item) {
             $item->removeAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT);
         }
