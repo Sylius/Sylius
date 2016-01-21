@@ -65,5 +65,6 @@ suites:
     UserBundle: { namespace: Sylius\Bundle\UserBundle, psr4_prefix: Sylius\Bundle\UserBundle, spec_path: src/Sylius/Bundle/UserBundle, src_path: src/Sylius/Bundle/UserBundle }
     VariationBundle: { namespace: Sylius\Bundle\VariationBundle, psr4_prefix: Sylius\Bundle\VariationBundle, spec_path: src/Sylius/Bundle/VariationBundle, src_path: src/Sylius/Bundle/VariationBundle }
 
+    SyliusBehat: { namespace: Sylius\Behat, psr4_prefix: Sylius\Behat, spec_path: src/Sylius/Behat, src_path: src/Sylius/Behat }
 extensions:
     - Akeneo\SkipExampleExtension

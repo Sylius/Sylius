@@ -42,8 +42,7 @@ Feature: Checkout finalization
           And I select the "Dummy" radio button
           And I press "Continue"
          When I click "Place order"
-         Then I should be on the store homepage
-          And I should see "Thank you for your order!"
+         Then I should see "Thank you"
           And I am on my account orders page
           And I should see "All your orders"
           And I should see 1 orders in the list
@@ -85,5 +84,4 @@ Feature: Checkout finalization
           And I select the "Dummy" radio button
           And I press "Continue"
          When I click "Place order"
-         Then I should be on the store homepage
-          And I should see "Thank you for your order!"
+         Then I should see "Thank you"

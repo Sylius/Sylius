@@ -11,9 +11,11 @@
 
 namespace Sylius\Bundle\ChannelBundle;
 
+use Sylius\Bundle\ChannelBundle\DependencyInjection\Compiler\RegisterChannelFactoryPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Channel\Model\ChannelInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Channels bundle.
@@ -30,6 +32,16 @@ class SyliusChannelBundle extends AbstractResourceBundle
         return array(
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+
+        $container->addCompilerPass(new RegisterChannelFactoryPass());
     }
 
     /**

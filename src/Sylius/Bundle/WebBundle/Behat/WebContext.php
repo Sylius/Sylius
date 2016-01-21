@@ -613,7 +613,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
         $this->iSelectTheRadioButton('Credit Card');
         $this->pressButton('Continue');
         $this->iClick('Place order');
-        $this->assertSession()->pageTextContains('Thank you for your order!');
+        $this->assertSession()->pageTextContains('Thank you');
     }
 
     /**

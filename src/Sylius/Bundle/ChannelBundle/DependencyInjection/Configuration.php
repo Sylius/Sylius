@@ -15,6 +15,7 @@ use Sylius\Bundle\ChannelBundle\Form\Type\ChannelType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Channel\Factory\ChannelFactory;
 use Sylius\Component\Channel\Model\Channel;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Resource\Factory\Factory;
@@ -72,7 +73,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('interface')->defaultValue(ChannelInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
-                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->scalarNode('factory')->defaultValue(ChannelFactory::class)->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()
                                             ->children()
