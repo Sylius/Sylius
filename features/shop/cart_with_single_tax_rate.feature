@@ -7,9 +7,10 @@ Feature: Cart with single tax rate
     Background:
         Given that store is operating on the France channel
         And default currency is "EUR"
-        And tax rate "EU VAT" with 23% rate belongs to "Taxable Goods" category
         And there is user "john@example.com" identified by "password123"
-        And catalog has a product "PHP T-Shirt" priced at €100.00 with "Taxable Goods" as tax category
+        And store has "EU VAT" tax rate of 23% for "Clothes" in "EU" zone
+        And catalog has a product "PHP T-Shirt" priced at €100.00
+        And "PHP T-Shirt" tax category is "Clothes"
         And store has free shipping method
         And store allows paying offline
         And I am logged in as "john@example.com"

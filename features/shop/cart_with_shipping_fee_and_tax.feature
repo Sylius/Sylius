@@ -8,10 +8,11 @@ Feature: Cart shipping with taxes
         Given that store is operating on the France channel
         And default currency is "EUR"
         And there is user "john@example.com" identified by "password123"
-        And tax rate "EU VAT" with 23% rate belongs to "Taxable Goods" category for "EU" zone
-        And tax rate "Low tax" with 10% rate belongs to "Taxable Goods" category for "Rest of world" zone
-        And catalog has a product "PHP T-Shirt" priced at €100.00 with no tax category
-        And store has "DHL" shipping method with "€10.00" fee and "Taxable goods" tax category
+        And store has "EU VAT" tax rate of 23% for "Clothes" in "EU" zone
+        And store has "Low tax" tax rate of 10% for "Clothes" in "Rest of world" zone
+        And catalog has a product "PHP T-Shirt" priced at €100.00
+        And store has "DHL" shipping method with "€10.00" fee
+        And "DHL" tax category is "Clothes"
         And I am logged in as "john@example.com"
 
     Scenario: Proper shipping fee and tax

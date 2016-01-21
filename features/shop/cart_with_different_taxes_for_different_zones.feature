@@ -7,12 +7,14 @@ Feature: Cart with different tax rates for different time zones
     Background:
         Given that store is operating on the France channel
         And default currency is "EUR"
-        And tax rate "EU VAT" with 23% rate belongs to "Taxable Goods" category for "EU" zone
-        And tax rate "No tax" with 0% rate belongs to "Taxable Goods" category for "Rest of World" zone
-        And tax rate "Low VAT" with 5% rate belongs to "Low-taxed Goods"
+        And store has "EU VAT" tax rate of 23% for "Clothes" in "EU" zone
+        And store has "No tax" tax rate of 0% for "Clothes" in "Rest of World" zone
+        And store has "Low VAT" tax rate of 5% for "Mugs" in "EU" zone
         And there is user "john@example.com" identified by "password123"
-        And catalog has a product "PHP T-Shirt" priced at €100.00 with "Taxable Goods" as tax category
-        And catalog has a product "Symfony Mug" priced at €50.00 with "Low-taxed Goods" as tax category
+        And catalog has a product "PHP T-Shirt" priced at €100.00
+        And "PHP T-Shirt" tax category is "Clothes"
+        And catalog has a product "Symfony Mug" priced at €50.00
+        And "Symfony T-Shirt" tax category is "Mugs"
         And store has free shipping method
         And store allows paying offline
         And I am logged in as "john@example.com"
