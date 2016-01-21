@@ -15,7 +15,7 @@ use SplFileInfo;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Sylius\Bundle\ThemeBundle\Translation\Loader\ThemeAwareLoader;
-use Sylius\Bundle\ThemeBundle\Translation\TranslationFilesFinderInterface;
+use Sylius\Bundle\ThemeBundle\Translation\Finder\TranslationFilesFinderInterface;
 use Symfony\Component\Config\Resource\DirectoryResource;
 use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;

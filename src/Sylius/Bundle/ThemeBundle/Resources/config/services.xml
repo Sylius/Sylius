@@ -36,7 +36,7 @@
         <parameter key="sylius.theme.asset.path_resolver.class">Sylius\Bundle\ThemeBundle\Asset\PathResolver</parameter>
 
         <parameter key="sylius.theme.translation.translator.class">Sylius\Bundle\ThemeBundle\Translation\Translator</parameter>
-        <parameter key="sylius.theme.translation.files_finder.class">Sylius\Bundle\ThemeBundle\Translation\TranslationFilesFinder</parameter>
+        <parameter key="sylius.theme.translation.files_finder.class">Sylius\Bundle\ThemeBundle\Translation\Finder\TranslationFilesFinder</parameter>
 
         <parameter key="sylius.theme.templating.locator.class">Sylius\Bundle\ThemeBundle\Templating\Locator\TemplateLocator</parameter>
         <parameter key="sylius.theme.templating.locator.cached.class">Sylius\Bundle\ThemeBundle\Templating\Locator\CachedTemplateLocator</parameter>
