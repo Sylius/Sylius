@@ -19,7 +19,7 @@ var paths = {
         'node_modules/admin-lte/dist/js/app.min.js',
     ],
     'sass': [
-        'src/Sylius/Bundle/UiBundle/Resources/assets/sass/**',
+        'src/Sylius/Bundle/UiBundle/Resources/private/sass/**',
     ],
     css: [
         'node_modules/bootstrap/dist/css/bootstrap.min.css',
@@ -30,7 +30,7 @@ var paths = {
         'node_modules/font-awesome/fonts/**',
     ],
     'img': [
-        'src/Sylius/Bundle/UiBundle/Resources/assets/img/**',
+        'src/Sylius/Bundle/UiBundle/Resources/private/img/**',
     ]
 };
 

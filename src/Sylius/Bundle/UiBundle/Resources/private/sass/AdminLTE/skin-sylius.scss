@@ -10,38 +10,39 @@ $sidebar-dark-submenu-color: lighten($sidebar-dark-submenu-bg, 40%);
 $sidebar-dark-submenu-hover-color: #fff;
 
 .skin-sylius.login-page {
-    background-color: #ecf0f5;
+    background-color: $color-gray-lighter;
 }
 
 .skin-sylius {
     a:link {
-        color: $sylius;
+        color: $color-link;
     }
     a:visited {
-        color: $sylius;
+        color: $color-link;
     }
     a:hover {
-        color: lighten($sylius, 5%);
-    }
-
-    .btn-primary:hover {
-        background-color: lighten($sylius, 2%);
+        color: $color-link-hover;
     }
 
     input:focus {
-        border-color: $sylius;
+        border-color: $input-border-focus;
     }
 
     .btn-primary {
-        background-color: $sylius;
-        border-color: darken($sylius, 5%);
+        background-color: $btn-primary-bg;
+        border-color: $btn-primary-border;
+    }
+    .btn-primary:hover {
+        background-color: $btn-primary-bg-hover;
+        border-color: $btn-primary-border-hover;
     }
     .btn-primary:focus {
-        background-color: darken($sylius, 10%);
+        background-color: $btn-primary-bg-focus;
+        border-color: $btn-primary-border-focus;
     }
 
     .main-header {
-        background-color: $sylius;
+        background-color: $color-sylius;
 
         .nav > li > a {
             color: #fff;
@@ -54,7 +55,7 @@ $sidebar-dark-submenu-hover-color: #fff;
         .nav .open > a:hover,
         .nav .open > a:focus,
         .nav > .active > a {
-            background: darken($sylius, 2%);
+            background: $color-sylius-dark;
             color: #fff;
         }
 
@@ -62,22 +63,22 @@ $sidebar-dark-submenu-hover-color: #fff;
             .sidebar-toggle {
                 color: #fff;
                 &:hover {
-                    background-color: darken($sylius, 5%);
+                    background-color: $color-sylius-dark;
                 }
             }
         }
 
         .logo {
-            background-color: darken($sylius, 5%);
+            background-color: $color-sylius-dark;
             color: #fff;
 
             &:hover {
-                background-color: darken($sylius, 4%);
+                background-color: $color-sylius-dark;
             }
         }
 
         li.user-header {
-            background-color: $sylius;
+            background-color: $color-sylius-dark;
         }
     }
 
@@ -94,7 +95,7 @@ $sidebar-dark-submenu-hover-color: #fff;
     .sidebar-menu > li {
         &.header {
             color: lighten($sidebar-dark-bg, 20%);
-            background: darken($sidebar-dark-bg, 4%);
+            background: darken($sidebar-dark-bg, 5%);
         }
         > a {
             border-left: 3px solid transparent;
@@ -102,7 +103,7 @@ $sidebar-dark-submenu-hover-color: #fff;
         &:hover > a, &.active > a {
             color: $sidebar-dark-hover-color;
             background: $sidebar-dark-hover-bg;
-            border-left-color: $sylius;
+            border-left-color: $color-sylius;
         }
         > .treeview-menu {
             margin: 0 1px;
