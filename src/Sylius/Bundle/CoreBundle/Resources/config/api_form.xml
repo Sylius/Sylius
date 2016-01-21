@@ -30,6 +30,8 @@
         </service>
         <service id="sylius.form.type.api.order_item" class="%sylius.form.type.api.order_item.class%">
             <argument>%sylius.model.order_item.class%</argument>
+            <argument type="collection"/>
+            <argument type="service" id="sylius.form.data_mapper.order_item_quantity"/>
             <tag name="form.type" alias="sylius_api_order_item" />
         </service>
         <service id="sylius.form.type.api.taxon" class="%sylius.form.type.api.taxon.class%">
