@@ -35,7 +35,11 @@ final class OrderingTranslationFilesFinder implements TranslationFilesFinderInte
     {
         $files = $this->translationFilesFinder->findTranslationFiles($theme);
 
-        usort($files, function ($firstFile, $secondFile) use ($theme) {
+        /**
+         * PHP 5.* bug, fixed in PHP 7: https://bugs.php.net/bug.php?id=50688
+         * "usort(): Array was modified by the user comparison function"
+         */
+        @usort($files, function ($firstFile, $secondFile) use ($theme) {
             $firstFile = str_replace($theme->getPath(), '', $firstFile);
             $secondFile = str_replace($theme->getPath(), '', $secondFile);
 
