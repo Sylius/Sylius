@@ -37,6 +37,7 @@
 
         <parameter key="sylius.theme.translation.translator.class">Sylius\Bundle\ThemeBundle\Translation\Translator</parameter>
         <parameter key="sylius.theme.translation.files_finder.class">Sylius\Bundle\ThemeBundle\Translation\Finder\TranslationFilesFinder</parameter>
+        <parameter key="sylius.theme.translation.files_finder.ordering.class">Sylius\Bundle\ThemeBundle\Translation\Finder\OrderingTranslationFilesFinder</parameter>
 
         <parameter key="sylius.theme.templating.locator.class">Sylius\Bundle\ThemeBundle\Templating\Locator\TemplateLocator</parameter>
         <parameter key="sylius.theme.templating.locator.cached.class">Sylius\Bundle\ThemeBundle\Templating\Locator\CachedTemplateLocator</parameter>
@@ -120,6 +121,10 @@
 
         <service id="sylius.theme.translation.files_finder" class="%sylius.theme.translation.files_finder.class%" public="false">
             <argument type="service" id="sylius.theme.finder_factory" />
+        </service>
+
+        <service id="sylius.theme.translation.files_finder.ordering" class="%sylius.theme.translation.files_finder.ordering.class%" decorates="sylius.theme.translation.files_finder" public="false">
+            <argument type="service" id="sylius.theme.translation.files_finder.ordering.inner" />
         </service>
 
         <service id="sylius.theme.templating.cache" class="Doctrine\Common\Cache\ArrayCache" />
