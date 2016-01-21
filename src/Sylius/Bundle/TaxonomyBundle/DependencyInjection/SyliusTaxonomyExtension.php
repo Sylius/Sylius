@@ -12,18 +12,16 @@
 namespace Sylius\Bundle\TaxonomyBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
-use Symfony\Component\Config\FileLocator;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\Translation\Factory\TranslatableFactory;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Parameter;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Taxonomy extension.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SyliusTaxonomyExtension extends AbstractResourceExtension
@@ -74,5 +72,16 @@ class SyliusTaxonomyExtension extends AbstractResourceExtension
         );
 
         $container->setDefinition('sylius.factory.taxonomy', $decoratedTaxonomyFactoryDefinition);
+
+        $taxonFactoryDefinition = $container->getDefinition('sylius.factory.taxon');
+        $taxonFactoryClass = $taxonFactoryDefinition->getClass();
+        $taxonFactoryDefinition->setClass(TranslatableFactory::class);
+
+        $decoratedTaxonFactoryDefinition = new Definition($taxonFactoryClass);
+        $decoratedTaxonFactoryDefinition
+            ->addArgument($taxonFactoryDefinition)
+            ->addArgument(new Reference('sylius.repository.taxonomy'))
+        ;
+        $container->setDefinition('sylius.factory.taxon', $decoratedTaxonFactoryDefinition);
     }
 }

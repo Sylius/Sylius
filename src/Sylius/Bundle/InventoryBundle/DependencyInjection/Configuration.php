@@ -13,7 +13,6 @@ namespace Sylius\Bundle\InventoryBundle\DependencyInjection;
 
 use Sylius\Bundle\InventoryBundle\Controller\InventoryUnitController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Inventory\Factory\InventoryUnitFactory;
 use Sylius\Component\Inventory\Model\InventoryUnit;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Resource\Factory\Factory;

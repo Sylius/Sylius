@@ -34,6 +34,11 @@ interface MetadataInterface
     /**
      * @return string
      */
+    public function getHumanizedName();
+
+    /**
+     * @return string
+     */
     public function getPluralName();
 
     /**
@@ -84,4 +89,11 @@ interface MetadataInterface
      * @return string
      */
     public function getServiceId($serviceName);
+
+    /**
+     * @param string $permissionName
+     *
+     * @return string
+     */
+    public function getPermissionCode($permissionName);
 }

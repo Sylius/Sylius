@@ -12,8 +12,10 @@
 namespace Sylius\Bundle\PromotionBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 
@@ -42,6 +44,17 @@ class SyliusPromotionExtension extends AbstractResourceExtension
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
         }
+
+        $couponFactoryDefinition = $container->getDefinition('sylius.factory.promotion_coupon');
+        $couponFactoryClass = $couponFactoryDefinition->getClass();
+        $couponFactoryDefinition->setClass(Factory::class);
+
+        $decoratedCouponFactoryDefinition = new Definition($couponFactoryClass);
+        $decoratedCouponFactoryDefinition
+            ->addArgument($couponFactoryDefinition)
+            ->addArgument(new Reference('sylius.repository.promotion'))
+        ;
+        $container->setDefinition('sylius.factory.promotion_coupon', $decoratedCouponFactoryDefinition);
 
         $container
             ->getDefinition('sylius.form.type.promotion_action')

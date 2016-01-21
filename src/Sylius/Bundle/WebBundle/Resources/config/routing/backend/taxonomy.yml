@@ -9,7 +9,7 @@ sylius_backend_taxonomy_index:
         _sylius:
             template: SyliusWebBundle:Backend/Taxonomy:index.html.twig
             sortable: true
-            paginate: 50
+            paginate: false
             sorting:
                 name: asc
 

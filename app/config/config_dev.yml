@@ -28,3 +28,6 @@ assetic:
 doctrine:
     dbal:
         dbname: %sylius.database.name%_dev
+
+swiftmailer:
+    disable_delivery: true

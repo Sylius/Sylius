@@ -29,9 +29,11 @@ class CurrencyController extends ResourceController
      */
     public function changeAction(Request $request, $currency)
     {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
         $this->getCurrencyContext()->setCurrency($currency);
 
-        return $this->redirect($request->headers->get('referer'));
+        return $this->redirectHandler->redirectToReferer($configuration);
     }
 
     /**
@@ -39,6 +41,6 @@ class CurrencyController extends ResourceController
      */
     protected function getCurrencyContext()
     {
-        return $this->get('sylius.context.currency');
+        return $this->container->get('sylius.context.currency');
     }
 }

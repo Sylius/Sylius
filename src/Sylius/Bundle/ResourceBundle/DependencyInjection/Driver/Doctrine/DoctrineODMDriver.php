@@ -72,6 +72,13 @@ class DoctrineODMDriver extends AbstractDoctrineDriver
     /**
      * {@inheritdoc}
      */
+    protected function addDefaultForm(ContainerBuilder $container, MetadataInterface $metadata)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getManagerServiceId(MetadataInterface $metadata)
     {
         return sprintf('doctrine_mongodb.odm.%s_document_manager', $this->getObjectManagerName($metadata));

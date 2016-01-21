@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\AttributeBundle\Controller;
 
+use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,27 +22,31 @@ use Symfony\Component\HttpFoundation\Response;
 class AttributeController extends ResourceController
 {
     /**
+     * @param Request $request
+     * @param string $template
+     *
      * @return Response
      */
-    public function getAttributeTypesAction($template)
+    public function getAttributeTypesAction(Request $request, $template)
     {
-        $view = $this
-            ->view()
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        $view = View::create()
             ->setTemplate($template)
-            ->setTemplateVar($this->config->getPluralResourceName())
+            ->setTemplateVar($this->metadata->getPluralName())
             ->setData(array('attributeTypes' => $this->get('sylius.registry.attribute_type')->all()))
         ;
 
-        return $this->handleView($view);
+        return $this->viewHandler->handle($configuration, $view);
     }
 
     /**
      * @return Response
      */
-    public function renderAttributesAction()
+    public function renderAttributesAction(Request $request)
     {
         $form = $this->get('form.factory')->create(
-            sprintf('sylius_%s_choice', $this->config->getResourceName()),
+            sprintf('sylius_%s_choice', $this->metadata->getName()),
             null,
             array(
                 'expanded' => true,
@@ -59,10 +64,12 @@ class AttributeController extends ResourceController
      */
     public function renderAttributeValueFormsAction(Request $request)
     {
-        $attributeRepository = $this->get('sylius.repository.'.$this->config->getResourceName());
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        $attributeRepository = $this->get($this->metadata->getServiceId('repository'));
         $forms = array();
 
-        $choices = $request->query->get(sprintf('sylius_%s_choice', $this->config->getResourceName()), array());
+        $choices = $request->query->get(sprintf('sylius_%s_choice', $this->metadata->getName()), array());
 
         $attributes = $attributeRepository->findBy(array('id' => $choices));
         foreach ($attributes as $attribute) {

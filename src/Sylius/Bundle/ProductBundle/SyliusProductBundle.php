@@ -27,12 +27,6 @@ use Sylius\Component\Product\Model\VariantInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * Product management bundle with highly flexible architecture.
- * Implements basic product model with properties support.
- *
- * Use *SyliusVariationBundle* to get variants, options and
- * customizations support.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
