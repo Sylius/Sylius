@@ -86,6 +86,7 @@ sylius:
                 payments: Payments
                 permissions: Permissions
                 products: Products
+                product_association_type: Product association types
                 promotions: Promotions
                 redirects: Redirects
                 report: Reports

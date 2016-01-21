@@ -22,3 +22,11 @@ sylius:
         code:
             unique: Archetype with given code already exists.
             not_blank: Please enter archetype code.
+    association:
+        name:
+            not_blank: Please enter association name.
+            min_length: Association name must be at least 1 character long.|Association name must be at least {{ limit }} characters long.
+            max_length: Association name must not be longer than 1 character.|Association name must not be longer than {{ limit }} characters.
+        code:
+            unique: Association with given code already exists.
+            not_blank: Please enter association code.

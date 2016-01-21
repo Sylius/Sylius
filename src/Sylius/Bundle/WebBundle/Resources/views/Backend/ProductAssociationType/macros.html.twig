@@ -8,7 +8,7 @@
         <thead>
             <tr>
                 <th>{{ sylius_resource_sort('id', '#id') }}</th>
-                <th>{{ sylius_resource_sort('name', 'sylius.product_association_type.name'|trans) }}</th>
+                <th>{{ sylius_resource_sort('name', 'sylius.ui.product_association_type_name'|trans) }}</th>
                 <th></th>
             </tr>
         </thead>
@@ -26,7 +26,7 @@
         </tbody>
     </table>
 {% else %}
-{{ alerts.info('sylius.product_association_type.no_results'|trans) }}
+{{ alerts.info('sylius.ui.no_association_types_to_display'|trans) }}
 {% endif %}
 
 {% endmacro %}

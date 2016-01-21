@@ -14,9 +14,9 @@
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_product_association_type_create'), 'sylius.product_association_type.create'|trans) }}
+        {{ buttons.create(path('sylius_backend_product_association_type_create'), 'sylius.ui.create_product_association_type'|trans) }}
     </div>
-    <h1><i class="glyphicon glyphicon-list-alt"></i> {{ 'sylius.product_association_type.index_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-list-alt"></i> {{ 'sylius.ui.product_association_types'|trans|raw }}</h1>
 </div>
 
 {{ pagination(product_association_types) }}
