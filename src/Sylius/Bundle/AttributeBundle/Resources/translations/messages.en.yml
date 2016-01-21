@@ -1,4 +1,6 @@
 sylius:
+    attribute_type:
+        configuration: Configuration
     form:
         attribute:
             add: Add
@@ -10,6 +12,7 @@ sylius:
             type: Type
         attribute_type:
             checkbox: Checkbox
+            choice: Choice
             configuration: Configuration
             date: Date
             datetime: Datetime
@@ -27,3 +30,6 @@ sylius:
             text:
                 min: Min length
                 max: Max length
+            choice:
+                options: Options
+                multiple: Multiple

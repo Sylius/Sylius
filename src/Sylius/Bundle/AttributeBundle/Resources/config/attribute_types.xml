@@ -27,6 +27,10 @@
         <parameter key="sylius.attribute_type.checkbox.class">Sylius\Component\Attribute\AttributeType\CheckboxAttributeType</parameter>
         <parameter key="sylius.form.type.attribute_type.checkbox.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\CheckboxAttributeType</parameter>
 
+        <parameter key="sylius.attribute_type.choice.class">Sylius\Component\Attribute\AttributeType\ChoiceAttributeType</parameter>
+        <parameter key="sylius.form.type.attribute_type.choice.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\ChoiceAttributeType</parameter>
+        <parameter key="sylius.form.type.attribute_type.configuration.choice.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\ChoiceAttributeConfigurationType</parameter>
+
         <parameter key="sylius.attribute_type.integer.class">Sylius\Component\Attribute\AttributeType\IntegerAttributeType</parameter>
         <parameter key="sylius.form.type.attribute_type.integer.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\IntegerAttributeType</parameter>
 
@@ -65,6 +69,16 @@
         </service>
         <service id="sylius.form.type.attribute_type.checkbox" class="%sylius.form.type.attribute_type.checkbox.class%">
             <tag name="form.type" alias="sylius_attribute_type_checkbox" />
+        </service>
+
+        <service id="sylius.attribute_type.choice" class="%sylius.attribute_type.choice.class%">
+            <tag name="sylius.attribute.type" attribute-type="choice" label="Choice" />
+        </service>
+        <service id="sylius.form.type.attribute_type.choice" class="%sylius.form.type.attribute_type.choice.class%">
+            <tag name="form.type" alias="sylius_attribute_type_choice" />
+        </service>
+        <service id="sylius.form.type.attribute_type.configuration.choice" class="%sylius.form.type.attribute_type.configuration.choice.class%">
+            <tag name="form.type" alias="sylius_attribute_type_configuration_choice" />
         </service>
 
         <service id="sylius.attribute_type.integer" class="%sylius.attribute_type.integer.class%">
