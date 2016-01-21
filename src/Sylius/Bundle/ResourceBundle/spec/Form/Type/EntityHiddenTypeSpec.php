@@ -54,6 +54,7 @@ class EntityHiddenTypeSpec extends ObjectBehavior
     {
         $resolver->setDefaults(array(
             'identifier' => 'id',
+            'property_path' => 'id',
         ))->shouldBeCalled($resolver);
 
         $this->configureOptions($resolver);
