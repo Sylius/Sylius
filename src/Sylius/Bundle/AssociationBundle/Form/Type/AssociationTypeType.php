@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\AssociationBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -44,6 +45,7 @@ class AssociationTypeType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->addEventSubscriber(new AddCodeFormSubscriber())
             ->add('name', 'text', array(
                 'label' => 'sylius.form.product_association_type.name',
                 'required' => true

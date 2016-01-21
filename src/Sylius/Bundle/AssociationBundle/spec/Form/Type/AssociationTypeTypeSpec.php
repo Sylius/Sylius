@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\AssociationBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -38,6 +39,7 @@ class AssociationTypeTypeSpec extends ObjectBehavior
     function it_builds_form(FormBuilderInterface $formBuilder)
     {
         $formBuilder->add('name', 'text', Argument::cetera())->shouldBeCalled()->willReturn($formBuilder);
+        $formBuilder->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))->shouldBeCalled()->willReturn($formBuilder);
 
         $this->buildForm($formBuilder, array());
     }

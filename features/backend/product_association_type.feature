@@ -16,9 +16,9 @@ Feature: Product association
 
     Scenario: Seeing index of association types
         Given there are following association types:
-            | name       |
-            | Cross sell |
-            | UP sell    |
+            | name       | code |
+            | Cross sell | PAs1 |
+            | UP sell    | PAs2 |
         And I am on the dashboard page
         When I am on the product association type index page
         Then I should see "Cross sell"
@@ -26,13 +26,13 @@ Feature: Product association
 
     Scenario: Creating association type
         Given I want to create new association type
-        When I create "Cross sell" association type
+        When I create "Cross sell" association type with PAsCS code
         And I should see "Association type has been successfully created"
 
     Scenario: Updating association type
         Given there are following association types:
-            | name       |
-            | Cross sell |
+            | name       | code |
+            | Cross sell | PAs1 |
         Given I am editing product association type "Cross sell"
         When I fill in "Name" with "Up sell"
         And I press "Save changes"

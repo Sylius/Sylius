@@ -25,6 +25,11 @@ class AssociationType implements AssociationTypeInterface
     /**
      * @var string
      */
+    protected $code;
+
+    /**
+     * @var string
+     */
     protected $name;
 
     /**
@@ -58,6 +63,22 @@ class AssociationType implements AssociationTypeInterface
     /**
      * {@inheritdoc}
      */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return $this->name;
@@ -67,7 +88,6 @@ class AssociationType implements AssociationTypeInterface
      */
     public function setName($name)
     {
-        $this->validateName($name);
         $this->name = $name;
     }
 
@@ -101,22 +121,6 @@ class AssociationType implements AssociationTypeInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return boolean
-     *
-     * @throws \InvalidArgumentException
-     */
-    private function validateName($name)
-    {
-        if (null === $name || !trim(str_replace(array("\n", "\t"), '', $name))) {
-            throw new \InvalidArgumentException('Association type name cannot be empty.');
-        }
-
-        return true;
     }
 
     public function __toString()

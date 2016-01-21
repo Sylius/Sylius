@@ -8,6 +8,7 @@
         <thead>
             <tr>
                 <th>{{ sylius_resource_sort('id', '#id') }}</th>
+                <th>{{ sylius_resource_sort('code', 'sylius.ui.code'|trans) }}</th>
                 <th>{{ sylius_resource_sort('name', 'sylius.ui.product_association_type_name'|trans) }}</th>
                 <th></th>
             </tr>
@@ -16,6 +17,7 @@
         {% for type in association_types %}
             <tr id="{{ type.id }}">
                 <td>{{ type.id }}</td>
+                <td>{{ type.code }}</td>
                 <td>{{ type.name }}</td>
                 <td class="center-text">
                     {{ buttons.edit(path('sylius_backend_product_association_type_update', {'id': type.id})) }}

@@ -19,6 +19,10 @@
             <generator strategy="AUTO" />
         </id>
 
+        <field name="code" column="code" type="string">
+            <gedmo:versioned />
+        </field>
+
         <field name="name" column="name" type="string">
             <gedmo:versioned />
         </field>
