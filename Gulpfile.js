@@ -18,7 +18,7 @@ var paths = {
         'node_modules/bootstrap/dist/js/bootstrap.min.js',
         'node_modules/admin-lte/dist/js/app.min.js',
     ],
-    'sass': [
+    sass: [
         'src/Sylius/Bundle/UiBundle/Resources/private/sass/**',
     ],
     css: [
@@ -29,7 +29,7 @@ var paths = {
     fonts: [
         'node_modules/font-awesome/fonts/**',
     ],
-    'img': [
+    img: [
         'src/Sylius/Bundle/UiBundle/Resources/private/img/**',
     ]
 };
