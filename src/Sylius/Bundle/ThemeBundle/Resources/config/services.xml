@@ -56,11 +56,7 @@
 
         <service id="sylius.theme.locator" class="%sylius.theme.locator.class%">
             <argument type="service" id="filesystem" />
-            <argument type="collection">
-                <argument>%kernel.root_dir%</argument>
-                <!--<argument>%kernel.root_dir%/../src</argument>-->
-                <!--<argument>%kernel.root_dir%/../vendor</argument>-->
-            </argument>
+            <argument>%sylius.theme.locations%</argument>
         </service>
 
         <service id="sylius.theme.loader" class="%sylius.theme.loader.class%">
