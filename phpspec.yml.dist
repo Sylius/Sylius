@@ -30,6 +30,7 @@ suites:
     Variation: { namespace: Sylius\Component\Variation, psr4_prefix: Sylius\Component\Variation, spec_path: src/Sylius/Component/Variation, src_path: src/Sylius/Component/Variation }
 
     AddressingBundle: { namespace: Sylius\Bundle\AddressingBundle, psr4_prefix: Sylius\Bundle\AddressingBundle, spec_path: src/Sylius/Bundle/AddressingBundle, src_path: src/Sylius/Bundle/AddressingBundle }
+    AdminBundle: { namespace: Sylius\Bundle\AdminBundle, psr4_prefix: Sylius\Bundle\AdminBundle, spec_path: src/Sylius/Bundle/AdminBundle, src_path: src/Sylius/Bundle/AdminBundle }
     ApiBundle: { namespace: Sylius\Bundle\ApiBundle, psr4_prefix: Sylius\Bundle\ApiBundle, spec_path: src/Sylius/Bundle/ApiBundle, src_path: src/Sylius/Bundle/ApiBundle }
     ArchetypeBundle: { namespace: Sylius\Bundle\ArchetypeBundle, psr4_prefix: Sylius\Bundle\ArchetypeBundle, spec_path: src/Sylius/Bundle/ArchetypeBundle, src_path: src/Sylius/Bundle/ArchetypeBundle }
     AttributeBundle: { namespace: Sylius\Bundle\AttributeBundle, psr4_prefix: Sylius\Bundle\AttributeBundle, spec_path: src/Sylius/Bundle/AttributeBundle, src_path: src/Sylius/Bundle/AttributeBundle }
@@ -62,6 +63,7 @@ suites:
     TaxonomyBundle: { namespace: Sylius\Bundle\TaxonomyBundle, psr4_prefix: Sylius\Bundle\TaxonomyBundle, spec_path: src/Sylius/Bundle/TaxonomyBundle, src_path: src/Sylius/Bundle/TaxonomyBundle }
     ThemeBundle: { namespace: Sylius\Bundle\ThemeBundle, psr4_prefix: Sylius\Bundle\ThemeBundle , spec_path: src/Sylius/Bundle/ThemeBundle, src_path: src/Sylius/Bundle/ThemeBundle }
     TranslationBundle: { namespace: Sylius\Bundle\TranslationBundle, psr4_prefix: Sylius\Bundle\TranslationBundle, spec_path: src/Sylius/Bundle/TranslationBundle, src_path: src/Sylius/Bundle/TranslationBundle }
+    UiBundle: { namespace: Sylius\Bundle\UiBundle, psr4_prefix: Sylius\Bundle\UiBundle, spec_path: src/Sylius/Bundle/UiBundle, src_path: src/Sylius/Bundle/UiBundle }
     UserBundle: { namespace: Sylius\Bundle\UserBundle, psr4_prefix: Sylius\Bundle\UserBundle, spec_path: src/Sylius/Bundle/UserBundle, src_path: src/Sylius/Bundle/UserBundle }
     VariationBundle: { namespace: Sylius\Bundle\VariationBundle, psr4_prefix: Sylius\Bundle\VariationBundle, spec_path: src/Sylius/Bundle/VariationBundle, src_path: src/Sylius/Bundle/VariationBundle }
 

@@ -19,7 +19,7 @@ sylius_user_security_login:
     path: /login
     methods: [GET]
     defaults:
-        _controller: sylius.controller.security:loginAction
+        _controller: sylius.controller.user_security:loginAction
         _sylius:
             template: SyliusWebBundle:Frontend/User:login.html.twig
 

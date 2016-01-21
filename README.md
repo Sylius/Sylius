@@ -33,9 +33,17 @@ $ wget http://getcomposer.org/composer.phar
 $ php composer.phar create-project sylius/sylius:v0.15.0
 $ cd sylius
 $ php app/console sylius:install
+$ php app/console server:run
 ```
 
 The install script will give you the option to run fixtures that make testing and development phases much easier.
+
+If you want to try out new Sylius UI, please run the following commands:
+
+```bash
+$ npm install 
+$ gulp
+```
 
 [Behat](http://behat.org) scenarios
 -----------------------------------
