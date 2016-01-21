@@ -32,11 +32,13 @@ class RegisterAttributeFactoryPass implements CompilerPassInterface
 
         $registry = $container->getDefinition('sylius.registry.attribute_type');
 
-        $oldAttributeFactory = $container->getDefinition('sylius.factory.product_attribute');
-        $attributeFactoryDefinition = new Definition(AttributeFactory::class);
+        foreach ($container->getParameter('sylius.attribute.subjects') as $subject => $configuration) {
+            $oldAttributeFactory = $container->getDefinition(sprintf('sylius.factory.%s_attribute', $subject));
+            $attributeFactoryDefinition = new Definition(AttributeFactory::class);
 
-        $attributeFactory = $container->setDefinition('sylius.factory.product_attribute', $attributeFactoryDefinition);
-        $attributeFactory->addArgument($oldAttributeFactory);
-        $attributeFactory->addArgument($registry);
+            $attributeFactory = $container->setDefinition(sprintf('sylius.factory.%s_attribute', $subject), $attributeFactoryDefinition);
+            $attributeFactory->addArgument($oldAttributeFactory);
+            $attributeFactory->addArgument($registry);
+        }
     }
 }
