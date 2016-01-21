@@ -21,6 +21,10 @@ Feature: Products
             | Black T-Shirt | 19.99 | T-Shirt size                | T-Shirt fabric:Cotton |
             | Mug           | 5.99  |                             |                       |
             | Sticker       | 10.00 |                             |                       |
+          And there are following association types:
+              | name       | code |
+              | Cross sell | PAs1 |
+              | Up sell    | PAs2 |
           And product "Super T-Shirt" is available in all variations
           And there are following tax categories:
             | code | name        |
@@ -102,6 +106,22 @@ Feature: Products
         Then I should be on the page of product "Manchester United tee"
         And "Product has been successfully created" should appear on the page
         And I should see "T-Shirt size"
+
+    @javascript
+    Scenario: Creating product with association
+        Given I am on the product creation page
+        When I fill in the following:
+            | Name        | Manchester United tee   |
+            | Description | Interesting description |
+            | Price       | 59.99                   |
+        And go to "Association" tab
+        And I click "Add association"
+        And I select "Up sell" from "Association Type"
+        And I select "Mug" from "Associated Product"
+        And I press "Create"
+        Then I should be on the page of product "Manchester United tee"
+        And "Product has been successfully created" should appear on the page
+        And I should see "Mug"
 
     @javascript
     Scenario: Creating product with string attribute

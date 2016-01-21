@@ -17,6 +17,7 @@ use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Association\Model\AssociationType as AssociationTypeModel;
+use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -67,6 +68,7 @@ class Configuration implements ConfigurationInterface
                                         ->children()
                                             ->scalarNode('model')->isRequired()->end()
                                             ->scalarNode('controller')->defaultValue(ResourceController::class)->end()
+                                            ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                             ->arrayNode('form')
                                                 ->addDefaultsIfNotSet()
                                                 ->children()
@@ -94,6 +96,7 @@ class Configuration implements ConfigurationInterface
                                         ->children()
                                             ->scalarNode('model')->defaultValue(AssociationTypeModel::class)->end()
                                             ->scalarNode('controller')->defaultValue(ResourceController::class)->end()
+                                            ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                             ->arrayNode('form')
                                                 ->addDefaultsIfNotSet()
                                                 ->children()

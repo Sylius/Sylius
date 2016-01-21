@@ -100,14 +100,6 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     }
 
     /**
-     * @Given I want to create new association type
-     */
-    public function iWantToCreateNewAssociationType()
-    {
-        $this->iAmOnThePage('product association type creation');
-    }
-
-    /**
      * @Given /^I am on my account homepage$/
      */
     public function iAmOnMyAccountHomepage()

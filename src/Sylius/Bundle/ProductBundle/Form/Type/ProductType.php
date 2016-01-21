@@ -43,7 +43,8 @@ class ProductType extends AbstractResourceType
                 'type'         => 'sylius_product_association',
                 'allow_add'    => true,
                 'allow_delete' => true,
-                'by_reference' => false
+                'by_reference' => false,
+                'button_add_label' => 'Add association'
             ))
             ->add('options', 'sylius_product_option_choice', array(
                 'required' => false,
