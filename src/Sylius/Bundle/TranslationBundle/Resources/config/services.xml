@@ -18,7 +18,7 @@
 
     <parameters>
         <parameter key="sylius.translation.translatable_listener.doctrine.orm.class">Sylius\Bundle\TranslationBundle\EventListener\ORMTranslatableListener</parameter>
-        <parameter key="sylius.translation.translatable_listener.doctrine.mongodb_odm.class">Sylius\Bundle\TranslationBundle\EventListener\MongoDBODMTranslatableListener</parameter>
+        <parameter key="sylius.translation.translatable_listener.doctrine.mongodb_odm.class">Sylius\Bundle\TranslationBundle\EventListener\ODMTranslatableListener</parameter>
         <parameter key="sylius.translation.locale_provider.request.class">Sylius\Bundle\TranslationBundle\Provider\RequestLocaleProvider</parameter>
     </parameters>
 
