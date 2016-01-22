@@ -1,17 +1,16 @@
 @ui-cart
 Feature: Cart shipping without taxes
-    In order to order with untaxed shipping method
+    In order to buy goods with correct shipping fees applied
     As a Customer
-    I want to be aware of shipping fees applied on my order
+    I want to have correct shipping fees applied to my order
 
     Background:
-        Given that store is operating on the France channel
+        Given the store is operating on a single "France" channel
         And default currency is "EUR"
         And there is user "john@example.com" identified by "password123"
-        And catalog has a product "PHP T-Shirt" priced at €100.00
+        And store has a product "PHP T-Shirt" priced at "€100.00"
         And store has "DHL" shipping method with "€10.00" fee
         And I am logged in as "john@example.com"
-
 
     Scenario: Adding proper shipping fee
         Given I am logged in as "john@example.com"
