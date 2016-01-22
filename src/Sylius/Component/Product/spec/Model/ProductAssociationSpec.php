@@ -14,8 +14,8 @@ namespace spec\Sylius\Component\Product\Model;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Association\Model\AssociationType;
-use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Association\Model\Association;
+use Sylius\Component\Product\Model\ProductAssociationInterface;
 
 /**
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
@@ -23,7 +23,6 @@ use Sylius\Component\Product\Model\ProductInterface;
  */
 class ProductAssociationSpec extends ObjectBehavior
 {
-
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Product\Model\ProductAssociation');
@@ -31,11 +30,11 @@ class ProductAssociationSpec extends ObjectBehavior
 
     function it_extends_an_association()
     {
-        $this->shouldHaveType('Sylius\Component\Association\Model\Association');
+        $this->shouldHaveType(Association::class);
     }
 
     function it_implements_product_association_interface()
     {
-        $this->shouldHaveType('Sylius\Component\Product\Model\AssociationInterface');
+        $this->shouldHaveType(ProductAssociationInterface::class);
     }
 }

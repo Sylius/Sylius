@@ -45,7 +45,7 @@
             <gedmo:versioned />
         </one-to-many>
 
-        <one-to-many field="associations" target-entity="Sylius\Component\Product\Model\AssociationInterface" mapped-by="owner" orphan-removal="true">
+        <one-to-many field="associations" target-entity="Sylius\Component\Product\Model\ProductAssociationInterface" mapped-by="owner" orphan-removal="true">
             <cascade>
                 <cascade-all />
             </cascade>

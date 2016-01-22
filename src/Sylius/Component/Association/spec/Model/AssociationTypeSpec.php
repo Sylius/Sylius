@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Association\Model;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Association\Model\AssociationTypeInterface;
 
 /**
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
@@ -27,21 +28,12 @@ class AssociationTypeSpec extends ObjectBehavior
 
     function it_implements_association_type_interface()
     {
-        $this->shouldImplement('Sylius\Component\Association\Model\AssociationTypeInterface');
+        $this->shouldImplement(AssociationTypeInterface::class);
     }
 
     function it_has_name()
     {
         $this->setName('Changed name');
         $this->getName()->shouldBe('Changed name');
-    }
-
-    function it_does_not_allow_to_change_name_to_empty_one()
-    {
-        $this->shouldThrow('\InvalidArgumentException')->during('setName', array(''));
-        $this->shouldThrow('\InvalidArgumentException')->during('setName', array('   '));
-        $this->shouldThrow('\InvalidArgumentException')->during('setName', array("\n"));
-        $this->shouldThrow('\InvalidArgumentException')->during('setName', array("\t"));
-        $this->shouldThrow('\InvalidArgumentException')->during('setName', array(null));
     }
 }

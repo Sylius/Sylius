@@ -12,7 +12,7 @@
 namespace Sylius\Component\Product\Model;
 
 use Sylius\Component\Archetype\Model\ArchetypeSubjectInterface;
-use Sylius\Component\Association\Model\Associatable;
+use Sylius\Component\Association\Model\AssociableInterface;
 use Sylius\Component\Resource\Model\SlugAwareInterface;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
@@ -29,7 +29,7 @@ interface ProductInterface extends
     TimestampableInterface,
     ToggleableInterface,
     ProductTranslationInterface,
-    Associatable
+    AssociableInterface
 {
     /**
      * @return bool
@@ -57,45 +57,17 @@ interface ProductInterface extends
     public function setAvailableUntil(\DateTime $availableUntil = null);
 
     /**
-     * Get meta keywords.
-     *
-     * @return string
+     * @param ProductAssociationInterface $association
      */
-    public function getMetaKeywords();
+    public function addAssociation(ProductAssociationInterface $association);
 
     /**
-     * Set meta keywords for the product.
-     *
-     * @param string $metaKeywords
-     */
-    public function setMetaKeywords($metaKeywords);
-
-    /**
-     * Get meta description.
-     *
-     * @return string
-     */
-    public function getMetaDescription();
-
-    /**
-     * Set meta description for the product.
-     *
-     * @param string $metaDescription
-     */
-    public function setMetaDescription($metaDescription);
-
-    /**
-     * @param AssociationInterface $association
-     */
-    public function addAssociation(AssociationInterface $association);
-
-    /**
-     * @param AssociationInterface[] $association
+     * @param ProductAssociationInterface[] $association
      */
     public function getAssociations();
 
     /**
-     * @param AssociationInterface $association
+     * @param ProductAssociationInterface $association
      */
-    public function removeAssociation(AssociationInterface $association);
+    public function removeAssociation(ProductAssociationInterface $association);
 }

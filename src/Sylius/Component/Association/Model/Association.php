@@ -13,6 +13,7 @@ namespace Sylius\Component\Association\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\TimestampableTrait;
 
 /**
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
@@ -20,6 +21,8 @@ use Doctrine\Common\Collections\Collection;
  */
 class Association implements AssociationInterface
 {
+    use TimestampableTrait;
+
     /**
      * @var int
      */
@@ -31,24 +34,14 @@ class Association implements AssociationInterface
     protected $type;
 
     /**
-     * @var Associatable
+     * @var AssociableInterface
      */
     protected $owner;
 
     /**
-     * @var Collection<Associatable>
+     * @var Collection<AssociableInterface>
      */
     protected $associatedObjects;
-
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
 
     public function __construct()
     {
@@ -82,7 +75,7 @@ class Association implements AssociationInterface
     }
 
     /**
-     * @return Associatable
+     * {@inheritdoc}
      */
     public function getOwner()
     {
@@ -90,9 +83,9 @@ class Association implements AssociationInterface
     }
 
     /**
-     * @param Associatable $owner
+     * {@inheritdoc}
      */
-    public function setOwner(Associatable $owner = null)
+    public function setOwner(AssociableInterface $owner = null)
     {
         $this->owner = $owner;
     }
@@ -106,30 +99,30 @@ class Association implements AssociationInterface
     }
 
     /**
-     * @param Collection $associatedObjects
+     * {@inheritdoc}
      */
-    public function setAssociatedObjects(Collection $associatedObjects)
-    {
-        $this->associatedObjects = $associatedObjects;
-    }
-
-    /**
-     * @param Associatable $associatedObject
-     *
-     * @return bool
-     */
-    public function hasAssociatedObject(Associatable $associatedObject)
+    public function hasAssociatedObject(AssociableInterface $associatedObject)
     {
         return $this->associatedObjects->contains($associatedObject);
     }
 
     /**
-     * @param Associatable $associatedObject
+     * {@inheritdoc}
      */
-    public function addAssociatedObject(Associatable $associatedObject)
+    public function addAssociatedObject(AssociableInterface $associatedObject)
     {
         if (!$this->hasAssociatedObject($associatedObject)) {
             $this->associatedObjects->add($associatedObject);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeAssociatedObject(AssociableInterface $associatedObject)
+    {
+        if (!$this->hasAssociatedObject($associatedObject)) {
+            $this->associatedObjects->removeElement($associatedObject);
         }
     }
 }

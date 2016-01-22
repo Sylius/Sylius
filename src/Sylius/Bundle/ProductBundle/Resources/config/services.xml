@@ -22,28 +22,17 @@
         <parameter key="sylius.generator.product_variant.class">Sylius\Bundle\ProductBundle\Generator\VariantGenerator</parameter>
 
         <parameter key="sylius.validator.product.unique.class">Sylius\Bundle\ProductBundle\Validator\ProductUniqueValidator</parameter>
-
-        <parameter key="sylius.form.type.product_choice.class">Sylius\Bundle\ProductBundle\Form\Type\ProductEntityType</parameter>
-
-        <parameter key="sylius.model.product_association.class">Sylius\Component\Product\Model\ProductAssociation</parameter>
-        <parameter key="sylius.form.type.product_association.class">Sylius\Bundle\ProductBundle\Form\Type\ProductAssociationType</parameter>
-
     </parameters>
 
     <services>
-        <service id="sylius.form.type.product_choice" class="%sylius.form.type.product_choice.class%">
-            <argument>%sylius.model.product.class%</argument>
-            <tag name="form.type" alias="sylius_product_choice" />
-        </service>
-
         <service id="sylius.set_builder.cartesian" class="%sylius.set_builder.cartesian.class%" />
-
         <service id="sylius.generator.product_variant" class="%sylius.generator.product_variant.class%">
             <argument type="service" id="sylius.factory.product_variant" />
             <argument type="service" id="sylius.set_builder.cartesian" />
             <argument type="service" id="validator" />
             <argument type="service" id="event_dispatcher"/>
         </service>
+
         <service id="sylius.validator.product.unique" class="%sylius.validator.product.unique.class%">
             <argument type="service" id="sylius.repository.product" />
             <tag name="validator.constraint_validator" alias="sylius.validator.product.unique" />
@@ -54,12 +43,6 @@
             <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="sylius.manager.product" />
             <tag name="kernel.event_listener" event="sylius.product_archetype.pre_update" method="onArchetypeUpdate" />
-        </service>
-
-        <service id="sylius.form.type.product_association" class="%sylius.form.type.product_association.class%">
-            <argument>%sylius.model.product_association.class%</argument>
-            <argument>%sylius.validation_group.product%</argument>
-            <tag name="form.type" alias="sylius_product_association" />
         </service>
     </services>
 

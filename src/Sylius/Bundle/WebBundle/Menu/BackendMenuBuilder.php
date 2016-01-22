@@ -158,7 +158,7 @@ class BackendMenuBuilder extends MenuBuilder
         $child->addChild('product_association types', array(
             'route' => 'sylius_backend_product_association_type_index',
             'labelAttributes' => array('icon' => 'glyphicon glyphicon-th-list'),
-        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.product_association_type', $section)));
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.association_types', $section)));
     }
 
     /**

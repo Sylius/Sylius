@@ -119,3 +119,8 @@ sylius:
                 value: Value
         guest:
             email: Email
+        product_association:
+            product: Associated product
+            type: Association type
+        product_association_type:
+            name: Name

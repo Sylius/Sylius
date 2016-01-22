@@ -14,7 +14,8 @@ namespace spec\Sylius\Component\Association\Model;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Association\Model\Associatable;
+use Sylius\Component\Association\Model\AssociableInterface;
+use Sylius\Component\Association\Model\AssociationInterface;
 use Sylius\Component\Association\Model\AssociationType;
 use Sylius\Component\Product\Model\ProductInterface;
 
@@ -24,7 +25,6 @@ use Sylius\Component\Product\Model\ProductInterface;
  */
 class AssociationSpec extends ObjectBehavior
 {
-
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Association\Model\Association');
@@ -32,7 +32,7 @@ class AssociationSpec extends ObjectBehavior
 
     function it_implements_association_interface()
     {
-        $this->shouldHaveType('Sylius\Component\Association\Model\AssociationInterface');
+        $this->shouldHaveType(AssociationInterface::class);
     }
 
     function it_has_owner_object(ProductInterface $product)
@@ -47,22 +47,18 @@ class AssociationSpec extends ObjectBehavior
         $this->getType()->shouldReturn($associationType);
     }
 
-    function it_has_association_objects(Collection $collection)
-    {
-        $this->setAssociatedObjects($collection);
-        $this->getAssociatedObjects()->shouldReturn($collection);
-    }
-
-    function it_adds_association_objects(Associatable $product)
+    function it_adds_association_objects(AssociableInterface $product)
     {
         $this->addAssociatedObject($product);
         $this->getAssociatedObjects()->shouldHaveCount(1);
     }
 
-    function it_checks_if_product_is_associated(Associatable $product)
+    function it_checks_if_product_is_associated(AssociableInterface $product)
     {
         $this->hasAssociatedObject($product)->shouldReturn(false);
         $this->addAssociatedObject($product);
         $this->hasAssociatedObject($product)->shouldReturn(true);
+        $this->removeAssociatedObject($product);
+        $this->hasAssociatedObject($product)->shouldReturn(false);
     }
 }

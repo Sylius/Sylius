@@ -1,8 +1,7 @@
 Association Component
 =====================
 
-The Sylius Association component efficiently manage product association for crosssell or upsell.
-
+The Sylius Association component efficiently manage any kind of associations. 
 
 Sylius
 ------
@@ -13,7 +12,6 @@ Documentation
 -------------
 
 Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/components/Association/index.html).
-
 
 Contributing
 ------------
@@ -41,7 +39,6 @@ MIT License
 -----------
 
 License can be found [here](https://github.com/Sylius/Association/blob/master/LICENSE).
-
 
 Authors
 -------

@@ -41,11 +41,6 @@ class ProductTypeSpec extends ObjectBehavior
     function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
-            ->add(Argument::cetera())
-            ->willReturn($builder)
-        ;
-
-        $builder
             ->add('masterVariant', 'sylius_product_variant', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
@@ -65,16 +60,7 @@ class ProductTypeSpec extends ObjectBehavior
 
         $builder
             ->add('associations', 'collection', Argument::withEntry('type', 'sylius_product_association'))
-            ->willReturn($builder)
-        ;
-
-        $builder
-            ->add('metaKeywords', 'text', Argument::any())
-            ->willReturn($builder)
-        ;
-
-        $builder
-            ->add('metaDescription', 'text', Argument::any())
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 

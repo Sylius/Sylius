@@ -11,12 +11,16 @@
 
 namespace Sylius\Component\Association\Model;
 
+use Sylius\Component\Resource\Model\TimestampableTrait;
+
 /**
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class AssociationType implements AssociationTypeInterface
 {
+    use TimestampableTrait;
+
     /**
      * @var int
      */
@@ -33,16 +37,6 @@ class AssociationType implements AssociationTypeInterface
     protected $name;
 
     /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
-
-    /**
      * @param string $name
      */
     public function __construct()
@@ -51,6 +45,13 @@ class AssociationType implements AssociationTypeInterface
         $this->updatedAt = new \DateTime();
     }
 
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     /**
      * {@inheritdoc}
@@ -90,43 +91,4 @@ class AssociationType implements AssociationTypeInterface
     {
         $this->name = $name;
     }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @param \DateTime $createdAt
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * @param \DateTime $updatedAt
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-    }
-
-    public function __toString()
-    {
-        return $this->name;
-    }
-
-
 }

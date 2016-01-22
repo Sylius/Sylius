@@ -28,11 +28,11 @@ class AssociationTypeType extends AbstractResourceType
     private $subject;
 
     /**
-     * @param string   $dataClass
-     * @param string[] $validationGroups
-     * @param string   $subject
+     * @param string $dataClass
+     * @param array $validationGroups
+     * @param string $subject
      */
-    public function __construct($dataClass, array $validationGroups = array(), $subject)
+    public function __construct($dataClass, array $validationGroups = [], $subject)
     {
         parent::__construct($dataClass, $validationGroups);
 
@@ -46,10 +46,9 @@ class AssociationTypeType extends AbstractResourceType
     {
         $builder
             ->addEventSubscriber(new AddCodeFormSubscriber())
-            ->add('name', 'text', array(
-                'label' => 'sylius.form.product_association_type.name',
-                'required' => true
-            ))
+            ->add('name', 'text', [
+                'label' => sprintf('sylius.form.%s_association_type.name', $this->subject),
+            ])
         ;
     }
 

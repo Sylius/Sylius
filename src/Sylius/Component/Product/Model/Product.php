@@ -56,8 +56,6 @@ class Product extends AbstractTranslatable implements ProductInterface
     protected $attributes;
 
     /**
-     * Product variants.
-     *
      * @var Collection|BaseVariantInterface[]
      */
     protected $variants;
@@ -68,7 +66,7 @@ class Product extends AbstractTranslatable implements ProductInterface
     protected $options;
 
     /**
-     * @var Collection|AssociationInterface[]
+     * @var Collection|ProductAssociationInterface[]
      */
     protected $associations;
 
@@ -84,6 +82,9 @@ class Product extends AbstractTranslatable implements ProductInterface
         $this->createdAt = new \DateTime();
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->getName();
@@ -475,26 +476,38 @@ class Product extends AbstractTranslatable implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function addAssociation(AssociationInterface $association)
-    {
-        $this->associations[] = $association;
-        $association->setOwner($this);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeAssociation(AssociationInterface $association)
-    {
-        $association->setOwner(null);
-        $this->associations->removeElement($association);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getAssociations()
     {
-        return $this->associations->toArray();
+        return $this->associations;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addAssociation(ProductAssociationInterface $association)
+    {
+        if (!$this->hasAssociation($association)) {
+            $this->associations->add($association);
+            $association->setOwner($this);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeAssociation(ProductAssociationInterface $association)
+    {
+        if ($this->hasAssociation($association)) {
+            $association->setOwner(null);
+            $this->associations->removeElement($association);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasAssociation(ProductAssociationInterface $association)
+    {
+        return $this->associations->contains($association);
     }
 }

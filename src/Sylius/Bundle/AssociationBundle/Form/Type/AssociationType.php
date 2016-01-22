@@ -22,18 +22,18 @@ class AssociationType extends AbstractResourceType
     /**
      * @var string
      */
-    protected $subject;
+    protected $subjectName;
 
     /**
      * @param string $dataClass
-     * @param array  $validationGroups
+     * @param array $validationGroups
      * @param string $subjectName
      */
     public function __construct($dataClass, array $validationGroups, $subjectName)
     {
         parent::__construct($dataClass, $validationGroups);
 
-        $this->subject = $subjectName;
+        $this->subjectName = $subjectName;
     }
 
     /**
@@ -42,15 +42,14 @@ class AssociationType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('type', sprintf('sylius_%s_association_type_choice', $this->subject), array(
-                'label' => sprintf('sylius.form.%s_association.type', $this->subject),
-            ))
-            ->add($this->subject, sprintf('sylius_%s_choice', $this->subject), array(
-                'label' => sprintf('sylius.form.%s_association.product', $this->subject),
+            ->add('type', sprintf('sylius_%s_association_type_choice', $this->subjectName), [
+                'label' => sprintf('sylius.form.%s_association.type', $this->subjectName),
+            ])
+            ->add($this->subjectName, sprintf('sylius_%s_choice', $this->subjectName), [
+                'label' => sprintf('sylius.form.%s_association.%s', $this->subjectName, $this->subjectName),
                 'property_path' => 'associatedObjects',
-                'expanded' => false,
                 'multiple' => true,
-            ))
+            ])
         ;
     }
 
@@ -59,6 +58,6 @@ class AssociationType extends AbstractResourceType
      */
     public function getName()
     {
-        return sprintf('sylius_%s_association', $this->subject);
+        return sprintf('sylius_%s_association', $this->subjectName);
     }
 }

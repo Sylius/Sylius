@@ -9,13 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Product\Model;
-
-use Sylius\Component\Association\Model\AssociationInterface as BaseAssociationInterface;
+namespace Sylius\Component\Association\Model;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-interface AssociationInterface extends BaseAssociationInterface
+interface AssociableInterface
 {
 }

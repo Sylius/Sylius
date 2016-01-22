@@ -14,6 +14,8 @@ namespace spec\Sylius\Bundle\AssociationBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
+use Sylius\Component\Association\Model\AssociationType;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -23,7 +25,7 @@ class AssociationTypeTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Sylius\Component\Association\Model\AssociationType', array('sylius'), 'product');
+        $this->beConstructedWith(AssociationType::class, ['sylius'], 'product');
     }
 
     function it_is_initializable()
@@ -33,15 +35,23 @@ class AssociationTypeTypeSpec extends ObjectBehavior
 
     function it_extends_abstract_resource_type()
     {
-        $this->shouldImplement('Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType');
+        $this->shouldImplement(AbstractResourceType::class);
     }
 
     function it_builds_form(FormBuilderInterface $formBuilder)
     {
-        $formBuilder->add('name', 'text', Argument::cetera())->shouldBeCalled()->willReturn($formBuilder);
-        $formBuilder->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))->shouldBeCalled()->willReturn($formBuilder);
+        $formBuilder
+            ->add('name', 'text', Argument::cetera())
+            ->shouldBeCalled()
+            ->willReturn($formBuilder)
+        ;
+        $formBuilder
+            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
+            ->shouldBeCalled()
+            ->willReturn($formBuilder)
+        ;
 
-        $this->buildForm($formBuilder, array());
+        $this->buildForm($formBuilder, []);
     }
 
     function it_has_name()

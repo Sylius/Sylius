@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Bundle\AssociationBundle\EventListener;
 
+use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadataFactory;
@@ -25,17 +26,17 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(array(
-            'product' => array(
+        $this->beConstructedWith([
+            'product' => [
                 'subject' => 'Some\App\Product\Entity\Product',
-                'association' => array(
+                'association' => [
                     'model' => 'Some\App\Product\Entity\EntityAssociation',
-                ),
-                'association_type' => array(
+                ],
+                'association_type' => [
                     'model' => 'Some\App\Product\Entity\AssociationType',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
     }
 
     function it_is_initializable()
@@ -45,12 +46,12 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
 
     function it_is_a_doctrine_event_subscriber()
     {
-        $this->shouldImplement('Doctrine\Common\EventSubscriber');
+        $this->shouldImplement(EventSubscriber::class);
     }
 
     function it_subscribes_a_doctrines_load_class_metadata_event()
     {
-        $this->getSubscribedEvents()->shouldReturn(array('loadClassMetadata'));
+        $this->getSubscribedEvents()->shouldReturn(['loadClassMetadata']);
     }
 
     function it_loads_class_metadata_for_associations(
@@ -63,46 +64,46 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
         $eventArguments->getClassMetadata()->willReturn($metadata)->shouldBeCalled();
         $eventArguments->getEntityManager()->willReturn($entityManager)->shouldBeCalled();
         $entityManager->getMetadataFactory()->willReturn($classMetadataFactory)->shouldBeCalled();
-        $classMetadataInfo->fieldMappings = array(
-            'id' => array(
-                'columnName' => 'id'
-            )
-        );
+        $classMetadataInfo->fieldMappings = [
+            'id' => [
+                'columnName' => 'id',
+            ],
+        ];
 
         $classMetadataFactory->getMetadataFor('Some\App\Product\Entity\Product')->willReturn($classMetadataInfo);
         $classMetadataFactory->getMetadataFor('Some\App\Product\Entity\AssociationType')->willReturn($classMetadataInfo);
 
-        $subjectMapping = array(
-            'fieldName'     => 'owner',
-            'targetEntity'  => 'Some\App\Product\Entity\Product',
-            'inversedBy'    => 'associations',
-            'joinColumns'   => array(array(
-                'name'                 => 'product_id',
+        $subjectMapping = [
+            'fieldName' => 'owner',
+            'targetEntity' => 'Some\App\Product\Entity\Product',
+            'inversedBy' => 'associations',
+            'joinColumns' => [[
+                'name' => 'product_id',
                 'referencedColumnName' => 'id',
-                'nullable'             => false,
-                'onDelete'             => 'CASCADE',
-            )),
-        );
-        $associationMapping = array(
-            'fieldName'     => 'associatedObjects',
-            'targetEntity'  => 'Some\App\Product\Entity\Product',
-            'joinColumns'   => array(array(
-                'name'                 => 'product_id',
+                'nullable' => false,
+                'onDelete' => 'CASCADE',
+            ]],
+        ];
+        $associationMapping = [
+            'fieldName' => 'associatedObjects',
+            'targetEntity' => 'Some\App\Product\Entity\Product',
+            'joinColumns' => [[
+                'name' => 'product_id',
                 'referencedColumnName' => 'id',
-                'nullable'             => false,
-                'onDelete'             => 'CASCADE',
-            )),
-        );
-        $associationTypeMapping = array(
-            'fieldName'     => 'type',
-            'targetEntity'  => 'Some\App\Product\Entity\AssociationType',
-            'joinColumns'   => array(array(
-                'name'                 => 'association_type_id',
+                'nullable' => false,
+                'onDelete' => 'CASCADE',
+            ]],
+        ];
+        $associationTypeMapping = [
+            'fieldName' => 'type',
+            'targetEntity' => 'Some\App\Product\Entity\AssociationType',
+            'joinColumns' => [[
+                'name' => 'association_type_id',
                 'referencedColumnName' => 'id',
-                'nullable'             => false,
-                'onDelete'             => 'CASCADE',
-            )),
-        );
+                'nullable' => false,
+                'onDelete' => 'CASCADE',
+            ]],
+        ];
 
         $metadata->getName()->willReturn('Some\App\Product\Entity\EntityAssociation');
         $metadata->mapManyToOne($subjectMapping)->shouldBeCalled();

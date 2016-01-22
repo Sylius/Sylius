@@ -12,17 +12,14 @@
 namespace Sylius\Component\Association\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-interface AssociationInterface
+interface AssociationInterface extends TimestampableInterface, ResourceInterface
 {
-    /**
-     * @return int
-     */
-    public function getId();
-
     /**
      * @return AssociationType
      */
@@ -34,34 +31,34 @@ interface AssociationInterface
     public function setType(AssociationTypeInterface $type);
 
     /**
-     * @return Associatable
+     * @return AssociableInterface
      */
     public function getOwner();
 
     /**
-     * @param Associatable
+     * @param AssociatableInterface
      */
-    public function setOwner(Associatable $associatedObject = null);
+    public function setOwner(AssociableInterface $owner = null);
 
     /**
-     * @return Associatable
+     * @return Collection
      */
     public function getAssociatedObjects();
 
     /**
-     * @param Collection
+     * @param AssociatableInterface
      */
-    public function setAssociatedObjects(Collection $associatedObjects);
+    public function addAssociatedObject(AssociableInterface $associatedObject);
 
     /**
-     * @param Associatable
+     * @param AssociatableInterface
      */
-    public function addAssociatedObject(Associatable $associatedObject);
+    public function removeAssociatedObject(AssociableInterface $associatedObject);
 
     /**
-     * @param Associatable
+     * @param AssociatableInterface
      *
      * @return bool
      */
-    public function hasAssociatedObject(Associatable $associatedObject);
+    public function hasAssociatedObject(AssociableInterface $associatedObject);
 }

@@ -7,6 +7,7 @@ sylius:
             main:
                 api_clients: API clients
                 archetypes: Product archetypes
+                association_types: Product association types
                 assortment: Assortment
                 attributes: Configure attributes
                 blocks: Blocks
@@ -58,7 +59,6 @@ sylius:
                 archetypes: Product archetypes
                 assortment: Assortment
                 attributes: Configure attributes
-                association_type: Association Types
                 blocks: Blocks
                 channels: Channels
                 configuration: Configuration
@@ -86,7 +86,6 @@ sylius:
                 payments: Payments
                 permissions: Permissions
                 products: Products
-                product_association_type: Product association types
                 promotions: Promotions
                 redirects: Redirects
                 report: Reports

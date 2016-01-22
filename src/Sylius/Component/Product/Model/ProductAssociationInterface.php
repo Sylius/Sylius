@@ -11,12 +11,11 @@
 
 namespace Sylius\Component\Product\Model;
 
-use Sylius\Component\Association\Model\Association;
+use Sylius\Component\Association\Model\AssociationInterface as BaseAssociationInterface;
 
 /**
- * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class ProductAssociation extends Association implements ProductAssociationInterface
+interface ProductAssociationInterface extends BaseAssociationInterface
 {
 }

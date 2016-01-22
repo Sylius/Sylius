@@ -36,7 +36,7 @@ class ProductAssociationContext extends DefaultContext
     public function thereAreFollowingAssociationTypes(TableNode $table)
     {
         foreach ($table->getHash() as $row) {
-            $associationType = new AssociationType();
+            $associationType = $this->getService('sylius.factory.product_association_type')->createNew();
             $associationType->setName($row['name']);
             $associationType->setCode($row['code']);
             $this->getEntityManager()->persist($associationType);

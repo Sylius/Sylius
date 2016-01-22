@@ -23,7 +23,7 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * @author Łuksaz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class Configuration implements ConfigurationInterface
 {
@@ -66,13 +66,14 @@ class Configuration implements ConfigurationInterface
                                     ->arrayNode('classes')
                                         ->addDefaultsIfNotSet()
                                         ->children()
-                                            ->scalarNode('model')->isRequired()->end()
-                                            ->scalarNode('controller')->defaultValue(ResourceController::class)->end()
-                                            ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                            ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
+                                            ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                            ->scalarNode('factory')->defaultValue(Factory::class)->cannotBeEmpty()->end()
+                                            ->scalarNode('repository')->cannotBeEmpty()->end()
                                             ->arrayNode('form')
                                                 ->addDefaultsIfNotSet()
                                                 ->children()
-                                                    ->scalarNode('default')->defaultValue(AssociationType::class)->end()
+                                                    ->scalarNode('default')->defaultValue(AssociationType::class)->cannotBeEmpty()->end()
                                                 ->end()
                                             ->end()
                                         ->end()
@@ -94,13 +95,14 @@ class Configuration implements ConfigurationInterface
                                     ->arrayNode('classes')
                                         ->addDefaultsIfNotSet()
                                         ->children()
-                                            ->scalarNode('model')->defaultValue(AssociationTypeModel::class)->end()
-                                            ->scalarNode('controller')->defaultValue(ResourceController::class)->end()
-                                            ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                            ->scalarNode('model')->defaultValue(AssociationTypeModel::class)->cannotBeEmpty()->end()
+                                            ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                            ->scalarNode('factory')->defaultValue(Factory::class)->cannotBeEmpty()->end()
+                                            ->scalarNode('repository')->cannotBeEmpty()->end()
                                             ->arrayNode('form')
                                                 ->addDefaultsIfNotSet()
                                                 ->children()
-                                                    ->scalarNode('default')->defaultValue(AssociationTypeType::class)->end()
+                                                    ->scalarNode('default')->defaultValue(AssociationTypeType::class)->cannotBeEmpty()->end()
                                                     ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
                                                 ->end()
                                             ->end()

@@ -59,5 +59,5 @@ License can be found [here](https://github.com/Sylius/SyliusArchetypeBundle/blob
 Authors
 -------
 
-The bundle was originally created by [Łukasz Chruściel](lukasz.chrusciel@lakion.com) based on [Leszek Prabucki](leszek.prabucki@gmail.com) work.
+The bundle was originally created by [Łukasz Chruściel](lukasz.chrusciel@lakion.com) based on initial work by[Leszek Prabucki](leszek.prabucki@gmail.com).
 See the list of [contributors](https://github.com/Sylius/SyliusAssociationBundle/contributors).

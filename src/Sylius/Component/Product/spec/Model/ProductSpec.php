@@ -13,8 +13,9 @@ namespace spec\Sylius\Component\Product\Model;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Association\Model\AssociableInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
-use Sylius\Component\Product\Model\AssociationInterface;
+use Sylius\Component\Product\Model\ProductAssociationInterface;
 use Sylius\Component\Product\Model\ArchetypeInterface;
 use Sylius\Component\Product\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\OptionInterface;
@@ -50,7 +51,7 @@ class ProductSpec extends ObjectBehavior
 
     function it_is_associatable()
     {
-        $this->shouldImplement('Sylius\Component\Association\Model\Associatable');
+        $this->shouldImplement(AssociableInterface::class);
     }
 
     function it_has_no_id_by_default()
@@ -315,15 +316,15 @@ class ProductSpec extends ObjectBehavior
         $this->shouldBeEnabled();
     }
 
-    function it_adds_association(AssociationInterface $association)
+    function it_adds_association(ProductAssociationInterface $association)
     {
         $association->setOwner($this)->shouldBeCalled();
         $this->addAssociation($association);
 
-        $this->getAssociations()->shouldReturn(array($association));
+        $this->hasAssociation($association)->shouldReturn(true);
     }
 
-    function it_allows_to_remove_association(AssociationInterface $association)
+    function it_allows_to_remove_association(ProductAssociationInterface $association)
     {
         $association->setOwner($this)->shouldBeCalled();
         $association->setOwner(null)->shouldBeCalled();
@@ -331,6 +332,6 @@ class ProductSpec extends ObjectBehavior
         $this->addAssociation($association);
         $this->removeAssociation($association);
 
-        $this->getAssociations()->shouldReturn(array());
+        $this->hasAssociation($association)->shouldReturn(false);
     }
 }

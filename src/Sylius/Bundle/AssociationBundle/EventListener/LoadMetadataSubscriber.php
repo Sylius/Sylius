@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\AssociationBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
+use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 
 /**
@@ -25,8 +26,6 @@ class LoadMetadataSubscriber implements EventSubscriber
     protected $subjects;
 
     /**
-     * Constructor.
-     *
      * @param array $subjects
      */
     public function __construct(array $subjects)
@@ -39,9 +38,9 @@ class LoadMetadataSubscriber implements EventSubscriber
      */
     public function getSubscribedEvents()
     {
-        return array(
+        return [
             'loadClassMetadata',
-        );
+        ];
     }
 
     /**
@@ -59,47 +58,76 @@ class LoadMetadataSubscriber implements EventSubscriber
 
             $associationEntity = $class['subject'];
             $associationEntityMetadata = $metadataFactory->getMetadataFor($associationEntity);
-            $subjectMapping = array(
-                'fieldName'     => 'owner',
-                'targetEntity'  => $associationEntity,
-                'inversedBy'    => 'associations',
-                'joinColumns'   => array(array(
-                    'name'                 => $subject.'_id',
-                    'referencedColumnName' => $associationEntityMetadata->fieldMappings['id']['columnName'],
-                    'nullable'             => false,
-                    'onDelete'             => 'CASCADE',
-                )),
-            );
 
-            $metadata->mapManyToOne($subjectMapping);
+            $associationTypeModel = $class['association_type']['classes']['model'];
+            $associationTypeMetadata = $metadataFactory->getMetadataFor($associationTypeModel);
 
-            $associationMapping = array(
-                'fieldName'     => 'associatedObjects',
-                'targetEntity'  => $associationEntity,
-                'joinColumns'   => array(array(
-                    'name'                 => $subject.'_id',
-                    'referencedColumnName' => $associationEntityMetadata->fieldMappings['id']['columnName'],
-                    'nullable'             => false,
-                    'onDelete'             => 'CASCADE',
-                )),
-            );
-
-            $metadata->mapManyToMany($associationMapping);
-
-            $associationModel = $class['association_type']['classes']['model'];
-            $associationMetadata = $metadataFactory->getMetadataFor($associationModel);
-            $associationTypeMapping = array(
-                'fieldName'     => 'type',
-                'targetEntity'  => $associationModel,
-                'joinColumns'   => array(array(
-                    'name'                 => 'association_type_id',
-                    'referencedColumnName' => $associationMetadata->fieldMappings['id']['columnName'],
-                    'nullable'             => false,
-                    'onDelete'             => 'CASCADE',
-                )),
-            );
-
-            $metadata->mapManyToOne($associationTypeMapping);
+            $metadata->mapManyToOne($this->createSubjectMapping($associationEntity, $subject, $associationEntityMetadata));
+            $metadata->mapManyToMany($this->createAssociationMapping($associationEntity, $subject, $associationEntityMetadata));
+            $metadata->mapManyToOne($this->createAssociationTypeMapping($associationTypeModel, $associationTypeMetadata));
         }
+    }
+
+    /**
+     * @param string $associationEntity
+     * @param string $subject
+     * @param ClassMetadata $associationEntityMetadata
+     *
+     * @return array
+     */
+    private function createSubjectMapping($associationEntity, $subject, ClassMetadata $associationEntityMetadata)
+    {
+        return [
+            'fieldName' => 'owner',
+            'targetEntity' => $associationEntity,
+            'inversedBy' => 'associations',
+            'joinColumns' => [[
+                'name' => $subject . '_id',
+                'referencedColumnName' => $associationEntityMetadata->fieldMappings['id']['columnName'],
+                'nullable' => false,
+                'onDelete' => 'CASCADE',
+            ]],
+        ];
+    }
+
+    /**
+     * @param string $associationEntity
+     * @param string $subject
+     * @param ClassMetadata $associationEntityMetadata
+     *
+     * @return array
+     */
+    private function createAssociationMapping($associationEntity, $subject, ClassMetadata $associationEntityMetadata)
+    {
+        return [
+            'fieldName' => 'associatedObjects',
+            'targetEntity' => $associationEntity,
+            'joinColumns' => [[
+                'name' => $subject . '_id',
+                'referencedColumnName' => $associationEntityMetadata->fieldMappings['id']['columnName'],
+                'nullable' => false,
+                'onDelete' => 'CASCADE',
+            ]],
+        ];
+    }
+
+    /**
+     * @param string $associationModel
+     * @param ClassMetadata $associationMetadata
+     *
+     * @return array
+     */
+    private function createAssociationTypeMapping($associationModel, ClassMetadata $associationMetadata)
+    {
+        return [
+            'fieldName' => 'type',
+            'targetEntity' => $associationModel,
+            'joinColumns' => [[
+                'name' => 'association_type_id',
+                'referencedColumnName' => $associationMetadata->fieldMappings['id']['columnName'],
+                'nullable' => false,
+                'onDelete' => 'CASCADE',
+            ]],
+        ];
     }
 }

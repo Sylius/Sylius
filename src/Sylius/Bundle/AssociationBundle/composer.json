@@ -7,40 +7,37 @@
     "license": "MIT",
     "authors": [
         {
-          "name": "Paweł Jędrzejewski",
-          "homepage": "http://pjedrzejewski.com"
+            "name": "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
         },
         {
-          "name": "Leszek Prabucki",
-          "email": "leszek.prabucki@gmail.com"
+            "name": "Leszek Prabucki",
+            "email": "leszek.prabucki@gmail.com"
         },
         {
-          "name": "Łukasz Chruściel",
-          "email": "lukasz.chrusciel@lakion.com"
+            "name": "Łukasz Chruściel",
+            "email": "lukasz.chrusciel@lakion.com"
         },
         {
-            "name":     "Sylius project",
+            "name": "Sylius project",
             "homepage": "http://sylius.org"
         },
         {
-            "name":     "Community contributions",
+            "name": "Community contributions",
             "homepage": "http://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
-        "php": ">=5.3.3",
+        "php": "^5.5.9|^7.0",
 
-        "symfony/framework-bundle":        "~2.3",
+        "symfony/framework-bundle": "^2.7.7",
         "stof/doctrine-extensions-bundle": "~1.1",
-        "sylius/resource-bundle":          "0.15.*@dev",
-        "sylius/archetype":                "0.15.*@dev",
-        "sylius/attribute-bundle":         "0.15.*@dev",
-        "sylius/variation-bundle":         "0.15.*@dev"
+        "symfony/form": "^2.7.7",
+        "symfony/validator": "^2.7.7",
+        "sylius/resource-bundle": "0.17"
     },
     "require-dev": {
-        "phpspec/phpspec":   "~2.0",
-        "symfony/form":      "~2.3",
-        "symfony/validator": "~2.3"
+        "phpspec/phpspec": "~2.4"
     },
     "config": {
         "bin-dir": "bin"
@@ -53,7 +50,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.15-dev"
+            "dev-master": "0.17-dev"
         }
     },
     "minimum-stability": "dev"

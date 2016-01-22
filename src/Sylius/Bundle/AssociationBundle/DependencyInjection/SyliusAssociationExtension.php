@@ -31,13 +31,7 @@ class SyliusAssociationExtension extends AbstractResourceExtension
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $configFiles = array(
-            'services.xml',
-        );
-
-        foreach ($configFiles as $configFile) {
-            $loader->load($configFile);
-        }
+        $loader->load('services.xml');
 
         $config = $this->processConfiguration(new Configuration(), $config);
         $this->registerResources('sylius', $config['driver'], $this->resolveResources($config['resources'], $container), $container);
@@ -62,8 +56,8 @@ class SyliusAssociationExtension extends AbstractResourceExtension
      */
     private function resolveResources(array $resources, ContainerBuilder $container)
     {
-        $subjects = array();
-        $resolvedResources = array();
+        $subjects = [];
+        $resolvedResources = [];
 
         foreach ($resources as $subject => $parameters) {
             $subjects[$subject] = $parameters;

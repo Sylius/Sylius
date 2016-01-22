@@ -1,7 +1,0 @@
-sylius:
-    form:
-        product_association:
-            product: Associated Product
-            type: Association Type
-        product_association_type:
-            name: Name
