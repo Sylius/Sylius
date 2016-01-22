@@ -16,7 +16,7 @@ use Sylius\Component\Order\Model\AdjustmentInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class AdjustmentsAggregator implements AdjustmentsAggregatorInterface
+class AdjustmentsByLabelAggregator implements AdjustmentsAggregatorInterface
 {
     /**
      * {@inheritdoc}

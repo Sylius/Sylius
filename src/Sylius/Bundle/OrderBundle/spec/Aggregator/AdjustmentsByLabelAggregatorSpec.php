@@ -18,11 +18,11 @@ use Sylius\Component\Order\Model\AdjustmentInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class AdjustmentsAggregatorSpec extends ObjectBehavior
+class AdjustmentsByLabelAggregatorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\OrderBundle\Aggregator\AdjustmentsAggregator');
+        $this->shouldHaveType('Sylius\Bundle\OrderBundle\Aggregator\AdjustmentsByLabelAggregator');
     }
 
     function it_implements_adjustments_aggregator_interface()

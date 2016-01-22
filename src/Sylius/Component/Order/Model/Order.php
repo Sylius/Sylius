@@ -504,6 +504,19 @@ class Order implements OrderInterface
         }
 
         $total = 0;
+        foreach ($this->getAdjustments($type) as $adjustment) {
+            $total += $adjustment->getAmount();
+        }
+
+        return $total;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAdjustmentsTotalRecursively($type = null)
+    {
+        $total = 0;
         foreach ($this->getAdjustmentsRecursively($type) as $adjustment) {
             $total += $adjustment->getAmount();
         }

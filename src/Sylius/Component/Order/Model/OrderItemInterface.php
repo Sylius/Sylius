@@ -93,7 +93,7 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
     /**
      * @param string|null $type
      *
-     * @return Collection
+     * @return array
      */
     public function getAdjustmentsRecursively($type = null);
 

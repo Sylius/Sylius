@@ -155,9 +155,16 @@ interface OrderInterface extends
     public function setAdditionalInformation($information);
 
     /**
-     * @param null $type
+     * @param string|null $type
      *
-     * @return Collection
+     * @return array
      */
     public function getAdjustmentsRecursively($type = null);
+
+    /**
+     * @param string|null $type
+     *
+     * @return int
+     */
+    public function getAdjustmentsTotalRecursively($type = null);
 }

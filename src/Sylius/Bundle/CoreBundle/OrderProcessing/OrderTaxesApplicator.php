@@ -122,6 +122,10 @@ class OrderTaxesApplicator implements OrderTaxesApplicatorInterface
             $splitTaxes = $this->integerDistributor->distribute($item->getQuantity(), $totalTaxAmount);
 
             foreach ($splitTaxes as $key => $tax) {
+                if (0 === $tax) {
+                    break;
+                }
+
                 $this->addAdjustment($item->getUnits()->get($key), $tax, $label, $rate->isIncludedInPrice());
             }
         }
@@ -156,11 +160,7 @@ class OrderTaxesApplicator implements OrderTaxesApplicatorInterface
             $zone = $this->zoneMatcher->match($shippingAddress);
         }
 
-        if (null === $zone) {
-            $zone = $this->defaultTaxZoneProvider->provide();
-        }
-
-        return $zone;
+        return $zone ?: $this->defaultTaxZoneProvider->provide();
     }
 
     /**

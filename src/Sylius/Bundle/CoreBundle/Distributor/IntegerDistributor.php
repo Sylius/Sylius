@@ -19,26 +19,26 @@ class IntegerDistributor implements IntegerDistributorInterface
     /**
      * {@inheritdoc}
      */
-    public function distribute($taxItems, $taxAmount)
+    public function distribute($numberOfTargets, $baseAmount)
     {
-        if (!is_int($taxItems) || 1 > $taxItems) {
-            throw new \InvalidArgumentException('Tax items number must be an integer, bigger than 0.');
+        if (!is_int($numberOfTargets) || 1 > $numberOfTargets) {
+            throw new \InvalidArgumentException('Number of targets must be an integer, bigger than 0.');
         }
 
-        $sign = ($taxAmount < 0) ? -1 : 1;
-        $amount = abs($taxAmount);
+        $sign = $baseAmount < 0 ? -1 : 1;
+        $amount = abs($baseAmount);
 
-        $low = intval($amount / $taxItems);
+        $low = intval($amount / $numberOfTargets);
         $high = $low + 1;
 
-        $remainder = $amount % $taxItems;
+        $remainder = $amount % $numberOfTargets;
         $result = array();
 
         for ($i = 0; $i < $remainder; $i++) {
             $result[] = $high * $sign;
         }
 
-        for ($i = $remainder; $i < $taxItems; $i++) {
+        for ($i = $remainder; $i < $numberOfTargets; $i++) {
             $result[] = $low * $sign;
         }
 

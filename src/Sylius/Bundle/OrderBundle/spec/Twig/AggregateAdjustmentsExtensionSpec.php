@@ -74,17 +74,14 @@ class AggregateAdjustmentsExtensionSpec extends ObjectBehavior
                     throw new FailureException('Key of "hasFunction" matcher must be \Twig_SimpleFunction object');
                 }
 
-                $contain = false;
                 /** @var \Twig_SimpleFunction $subjectElement */
                 foreach ($subject as $subjectElement) {
                     if ($subjectElement->getName() === $key->getName() && $subjectElement->getCallable()[1] === $key->getCallable()[1]) {
-                        $contain = true;
-
-                        break;
+                        return true;
                     }
                 }
 
-                return $contain;
+                return false;
             }
         ];
     }
