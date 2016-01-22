@@ -18,12 +18,18 @@
 
     <parameters>
         <parameter key="sylius.twig.extension.country_name.class">Sylius\Bundle\AddressingBundle\Twig\CountryNameExtension</parameter>
+        <parameter key="sylius.twig.extension.province_naming.class">Sylius\Bundle\AddressingBundle\Twig\ProvinceNamingExtension</parameter>
     </parameters>
 
     <services>
         <service id="sylius.twig.extension.country_name" class="%sylius.twig.extension.country_name.class%">
-            <argument type="string" id="isoCode"/>
+            <argument type="string" id="isoCode" />
             <tag name="twig.extension"/>
+        </service>
+        <service id="sylius.twig.extension.province_naming" class="%sylius.twig.extension.province_naming.class%">
+            <argument type="service" id="sylius.province_naming_provider" />
+            <argument type="string" id="provinceCode" />
+            <tag name="twig.extension" />
         </service>
     </services>
 

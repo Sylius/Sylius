@@ -62,22 +62,22 @@ interface AddressInterface extends TimestampableInterface, ResourceInterface
     /**
      * @return string
      */
-    public function getCountry();
+    public function getCountryCode();
 
     /**
-     * @param string $country
+     * @param string $countryCode
      */
-    public function setCountry($country = null);
+    public function setCountryCode($countryCode = null);
 
     /**
      * @return string
      */
-    public function getProvince();
+    public function getProvinceCode();
 
     /**
-     * @param string $province
+     * @param string $provinceCode
      */
-    public function setProvince($province = null);
+    public function setProvinceCode($provinceCode = null);
 
     /**
      * @return string

@@ -51,7 +51,7 @@ class ShippingCountryRuleChecker implements RuleCheckerInterface
             return false;
         }
 
-        $country = $this->countryRepository->findOneBy(array('code' => $address->getCountry()));
+        $country = $this->countryRepository->findOneBy(array('code' => $address->getCountryCode()));
 
         if (!$country instanceof CountryInterface) {
             return false;

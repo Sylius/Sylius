@@ -319,7 +319,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
         $this->fillField($base.'[street]', 'Pvt. Street 15');
         $this->fillField($base.'[city]', 'Lodz');
         $this->fillField($base.'[postcode]', '95-253');
-        $this->selectOption($base.'[country]', $country);
+        $this->selectOption($base.'[countryCode]', $country);
     }
 
     /**

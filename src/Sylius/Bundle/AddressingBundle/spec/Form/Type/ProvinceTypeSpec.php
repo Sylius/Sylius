@@ -52,6 +52,12 @@ class ProvinceTypeSpec extends ObjectBehavior
         ;
 
         $builder
+            ->add('abbreviation', 'text', Argument::any())
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+
+        $builder
             ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
             ->shouldBeCalled()
             ->willReturn($builder)

@@ -30,6 +30,9 @@ class ProvinceType extends AbstractResourceType
             ->add('name', 'text', array(
                 'label' => 'sylius.form.province.name',
             ))
+            ->add('abbreviation', 'text', array(
+                'label' => false,
+            ))
         ;
     }
 

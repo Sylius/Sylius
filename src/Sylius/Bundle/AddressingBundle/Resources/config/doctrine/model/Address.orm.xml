@@ -49,10 +49,10 @@
             <gedmo:timestampable on="update"/>
         </field>
 
-        <field name="country" column="country_code" type="string">
+        <field name="countryCode" column="country_code" type="string">
             <gedmo:versioned />
         </field>
-        <field name="province" column="province_code" type="string" nullable="true">
+        <field name="provinceCode" column="province_code" type="string" nullable="true">
             <gedmo:versioned />
         </field>
 

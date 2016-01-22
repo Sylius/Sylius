@@ -135,12 +135,12 @@ class AddressingContext extends DefaultContext
     /**
      * @Given /^there is province "([^"]*)"$/
      */
-    public function thereIsProvince($name)
+    public function thereIsProvince($name, $countryCode = null)
     {
         /* @var $province ProvinceInterface */
         $province = $this->getFactory('province')->createNew();
         $province->setName($name);
-        $province->setCode($name);
+        $province->setCode(sprintf('%s-%s', $countryCode, $name));
 
         $this->getEntityManager()->persist($province);
 
@@ -172,7 +172,7 @@ class AddressingContext extends DefaultContext
         if (null !== $provinces) {
             $provinces = $provinces instanceof TableNode ? $provinces->getHash() : $provinces;
             foreach ($provinces as $provinceName) {
-                $country->addProvince($this->thereisProvince($provinceName));
+                $country->addProvince($this->thereisProvince($provinceName, $country->getCode()));
             }
         }
     }

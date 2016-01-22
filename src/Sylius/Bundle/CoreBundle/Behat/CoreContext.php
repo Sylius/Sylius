@@ -579,7 +579,7 @@ class CoreContext extends DefaultContext
         $address->setStreet($addressData[1]);
         $address->setPostcode($addressData[2]);
         $address->setCity($addressData[3]);
-        $address->setCountry($this->getCountryCodeByEnglishCountryName($addressData[4]));
+        $address->setCountryCode($this->getCountryCodeByEnglishCountryName($addressData[4]));
         return $address;
     }
 

@@ -119,10 +119,10 @@ class ZoneMatcher implements ZoneMatcherInterface
         switch ($type = $member->getBelongsTo()->getType())
         {
             case ZoneInterface::TYPE_PROVINCE:
-                return null !== $address->getProvince() && $address->getProvince() === $member->getCode();
+                return null !== $address->getProvinceCode() && $address->getProvinceCode() === $member->getCode();
 
             case ZoneInterface::TYPE_COUNTRY:
-                return null !== $address->getCountry() && $address->getCountry() === $member->getCode();
+                return null !== $address->getCountryCode() && $address->getCountryCode() === $member->getCode();
 
             case ZoneInterface::TYPE_ZONE:
                 $zone = $this->getZoneByCode($member->getCode());

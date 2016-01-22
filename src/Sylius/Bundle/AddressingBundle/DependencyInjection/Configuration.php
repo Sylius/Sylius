@@ -62,6 +62,7 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
+                ->scalarNode('provider')->defaultValue('sylius.province_name_provider')->end()
             ->end()
         ;
 

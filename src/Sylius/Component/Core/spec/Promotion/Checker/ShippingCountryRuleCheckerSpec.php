@@ -52,7 +52,7 @@ class ShippingCountryRuleCheckerSpec extends ObjectBehavior
         RepositoryInterface $countryRepository
     ) {
         $country->getCode()->willReturn('IE');
-        $address->getCountry()->willReturn('IE');
+        $address->getCountryCode()->willReturn('IE');
         $subject->getShippingAddress()->willReturn($address);
 
         $countryRepository->findOneBy(array('code' => 'IE'))->willReturn($country);
@@ -68,7 +68,7 @@ class ShippingCountryRuleCheckerSpec extends ObjectBehavior
         RepositoryInterface $countryRepository
     ) {
         $country->getCode()->willReturn('IE');
-        $address->getCountry()->willReturn('IE');
+        $address->getCountryCode()->willReturn('IE');
         $subject->getShippingAddress()->willReturn($address);
 
         $country->getId()->willReturn(1);

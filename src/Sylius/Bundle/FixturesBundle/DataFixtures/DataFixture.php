@@ -153,10 +153,10 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
         $country = $this->getReference("Sylius.Country." . $countryCode);
 
         if ($province = $country->hasProvinces() ? $this->faker->randomElement($country->getProvinces()->toArray()) : null) {
-            $address->setProvince($province->getCode());
+            $address->setProvinceCode($province->getCode());
         }
 
-        $address->setCountry($countryCode);
+        $address->setCountryCode($countryCode);
 
         return $address;
     }

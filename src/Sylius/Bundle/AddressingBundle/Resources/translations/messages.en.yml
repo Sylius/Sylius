@@ -17,6 +17,7 @@ sylius:
             select: Select
         province:
             name: Name
+            abbreviation: Abbreviation
             select: Select
         zone:
             add_member: Add member
