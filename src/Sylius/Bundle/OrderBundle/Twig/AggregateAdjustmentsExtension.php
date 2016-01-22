@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\OrderBundle\Twig;
 
-use Sylius\Bundle\OrderBundle\Aggregator\AdjustmentsAggregatorInterface;
+use Sylius\Bundle\OrderBundle\Templating\Helper\AdjustmentsHelper;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -19,16 +19,16 @@ use Sylius\Bundle\OrderBundle\Aggregator\AdjustmentsAggregatorInterface;
 class AggregateAdjustmentsExtension extends \Twig_Extension
 {
     /**
-     * @var AdjustmentsAggregatorInterface
+     * @var AdjustmentsHelper
      */
-    private $adjustmentsAggregator;
+    private $adjustmentsHelper;
 
     /**
-     * @param AdjustmentsAggregatorInterface $adjustmentsAggregator
+     * @param AdjustmentsHelper $adjustmentsHelper
      */
-    public function __construct(AdjustmentsAggregatorInterface $adjustmentsAggregator)
+    public function __construct(AdjustmentsHelper $adjustmentsHelper)
     {
-        $this->adjustmentsAggregator = $adjustmentsAggregator;
+        $this->adjustmentsHelper = $adjustmentsHelper;
     }
 
     /**
@@ -48,7 +48,7 @@ class AggregateAdjustmentsExtension extends \Twig_Extension
      */
     public function aggregateAdjustments(array $adjustments)
     {
-        return $this->adjustmentsAggregator->aggregate($adjustments);
+        return $this->adjustmentsHelper->getAggregatedAdjustments($adjustments);
     }
 
     /**

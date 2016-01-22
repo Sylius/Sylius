@@ -9,14 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\OrderProcessing;
+namespace spec\Sylius\Component\Core\Taxation;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Distributor\IntegerDistributorInterface;
-use Sylius\Bundle\CoreBundle\OrderProcessing\OrderTaxesApplicatorInterface;
-use Sylius\Bundle\CoreBundle\Provider\DefaultTaxZoneProviderInterface;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -26,6 +24,8 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxRateInterface;
+use Sylius\Component\Core\Provider\DefaultTaxZoneProviderInterface;
+use Sylius\Component\Core\Taxation\OrderTaxesApplicatorInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
@@ -55,7 +55,7 @@ class OrderTaxesApplicatorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\OrderProcessing\OrderTaxesApplicator');
+        $this->shouldHaveType('Sylius\Component\Core\Taxation\OrderTaxesApplicator');
     }
 
     function it_implements_Sylius_taxation_processor_interface()
@@ -171,7 +171,7 @@ class OrderTaxesApplicatorSpec extends ObjectBehavior
 
         $order->getShippingAddress()->willReturn($address);
         $zoneMatcher->match($address)->willReturn(null);
-        $defaultTaxZoneProvider->provide()->willReturn(null);
+        $defaultTaxZoneProvider->getZone()->willReturn(null);
 
         $taxRateResolver->resolve(Argument::any())->shouldNotBeCalled();
 

@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Provider;
 
 use Sylius\Bundle\SettingsBundle\Model\Settings;
+use Sylius\Component\Core\Provider\DefaultTaxZoneProviderInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -34,7 +35,7 @@ class DefaultTaxZoneProvider implements DefaultTaxZoneProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function provide()
+    public function getZone()
     {
         if ($this->settings->has('default_tax_zone')) {
             return $this->settings->get('default_tax_zone');

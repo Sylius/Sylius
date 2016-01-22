@@ -12,9 +12,9 @@
 namespace spec\Sylius\Bundle\CoreBundle\Provider;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Provider\DefaultTaxZoneProviderInterface;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Provider\DefaultTaxZoneProviderInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -41,13 +41,13 @@ class DefaultTaxZoneProviderSpec extends ObjectBehavior
         $settings->has('default_tax_zone')->willReturn(true);
         $settings->get('default_tax_zone')->willReturn($defaultTaxZone);
 
-        $this->provide()->shouldReturn($defaultTaxZone);
+        $this->getZone()->shouldReturn($defaultTaxZone);
     }
 
     function it_returns_null_if_there_is_no_default_tax_zone_configured($settings)
     {
         $settings->has('default_tax_zone')->willReturn(false);
 
-        $this->provide()->shouldReturn(null);
+        $this->getZone()->shouldReturn(null);
     }
 }

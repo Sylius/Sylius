@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\OrderProcessing;
+namespace Sylius\Component\Core\Taxation;
 
 use Sylius\Bundle\CoreBundle\Distributor\IntegerDistributorInterface;
-use Sylius\Bundle\CoreBundle\Provider\DefaultTaxZoneProviderInterface;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
+use Sylius\Component\Core\Provider\DefaultTaxZoneProviderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
@@ -93,7 +93,7 @@ class OrderTaxesApplicator implements OrderTaxesApplicatorInterface
             return;
         }
 
-        $zone = $this->provideTaxZone($order->getShippingAddress());
+        $zone = $this->getTaxZone($order->getShippingAddress());
 
         if (null === $zone) {
             return;
@@ -153,14 +153,14 @@ class OrderTaxesApplicator implements OrderTaxesApplicatorInterface
      *
      * @return ZoneInterface|null
      */
-    private function provideTaxZone(AddressInterface $shippingAddress = null)
+    private function getTaxZone(AddressInterface $shippingAddress = null)
     {
         $zone = null;
         if (null !== $shippingAddress) {
             $zone = $this->zoneMatcher->match($shippingAddress);
         }
 
-        return $zone ?: $this->defaultTaxZoneProvider->provide();
+        return $zone ?: $this->defaultTaxZoneProvider->getZone();
     }
 
     /**

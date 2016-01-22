@@ -12,8 +12,8 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\OrderProcessing\OrderTaxesApplicatorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Taxation\OrderTaxesApplicatorInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**

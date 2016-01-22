@@ -15,6 +15,7 @@ use PhpSpec\Exception\Example\FailureException;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\OrderBundle\Aggregator\AdjustmentsAggregatorInterface;
+use Sylius\Bundle\OrderBundle\Templating\Helper\AdjustmentsHelper;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 
 /**
@@ -22,9 +23,9 @@ use Sylius\Component\Order\Model\AdjustmentInterface;
  */
 class AggregateAdjustmentsExtensionSpec extends ObjectBehavior
 {
-    function let(AdjustmentsAggregatorInterface $adjustmentsAggregator)
+    function let(AdjustmentsHelper $adjustmentsHelper)
     {
-        $this->beConstructedWith($adjustmentsAggregator);
+        $this->beConstructedWith($adjustmentsHelper);
     }
 
     function it_is_initializable()
@@ -42,14 +43,14 @@ class AggregateAdjustmentsExtensionSpec extends ObjectBehavior
         $this->getFunctions()->shouldHaveFunction(new \Twig_SimpleFunction('sylius_aggregate_adjustments', array($this, 'aggregateAdjustments')));
     }
 
-    function it_uses_aggregator_to_agregate_adjustments(
-        $adjustmentsAggregator,
+    function it_uses_helper_to_get_aggregated_adjustments(
+        $adjustmentsHelper,
         AdjustmentInterface $adjustment1,
         AdjustmentInterface $adjustment2,
         AdjustmentInterface $adjustment3
     ) {
-        $adjustmentsAggregator
-            ->aggregate(array($adjustment1, $adjustment2, $adjustment3))
+        $adjustmentsHelper
+            ->getAggregatedAdjustments(array($adjustment1, $adjustment2, $adjustment3))
             ->willReturn(array('tax 1' => 1000, 'tax2' => 500))
         ;
 

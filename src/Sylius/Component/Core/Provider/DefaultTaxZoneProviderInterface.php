@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Provider;
+namespace Sylius\Component\Core\Provider;
 
 use Sylius\Component\Addressing\Model\ZoneInterface;
 
@@ -21,5 +21,5 @@ interface DefaultTaxZoneProviderInterface
     /**
      * @return ZoneInterface|null
      */
-    public function provide();
+    public function getZone();
 }
