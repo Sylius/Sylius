@@ -12,6 +12,9 @@ Sylius\Component\Addressing\Model\Province:
         name:
             expose: true
             type: string
+        abbreviation:
+            expose: true
+            type: string
         createdAt:
             expose: true
             type: DateTime

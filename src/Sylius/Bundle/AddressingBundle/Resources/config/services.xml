@@ -24,7 +24,7 @@
 
         <parameter key="sylius.form.listener.address.class">Sylius\Bundle\AddressingBundle\Form\EventListener\BuildAddressFormSubscriber</parameter>
 
-        <parameter key="sylius.province_name_provider.class">Sylius\Component\Addressing\Provider\ProvinceNameProvider</parameter>
+        <parameter key="sylius.province_naming_provider.class">Sylius\Component\Addressing\Provider\ProvinceNamingProvider</parameter>
         <parameter key="sylius.zone_matcher.class">Sylius\Component\Addressing\Matcher\ZoneMatcher</parameter>
 
         <parameter key="sylius.validator.shippable_address.class">Sylius\Bundle\AddressingBundle\Validator\Constraints\ShippableAddressConstraintValidator</parameter>
@@ -53,7 +53,7 @@
             <argument type="service" id="form.factory" />
         </service>
 
-        <service id="sylius.province_name_provider" class="%sylius.province_name_provider.class%">
+        <service id="sylius.province_naming_provider" class="%sylius.province_naming_provider.class%">
             <argument type="service" id="sylius.repository.province" />
         </service>
         <service id="sylius.zone_matcher" class="%sylius.zone_matcher.class%">

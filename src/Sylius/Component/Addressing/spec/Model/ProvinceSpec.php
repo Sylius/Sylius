@@ -48,8 +48,8 @@ class ProvinceSpec extends ObjectBehavior
 
     function its_code_is_mutable()
     {
-        $this->setCode('IE');
-        $this->getCode()->shouldReturn('IE');
+        $this->setCode('US-TX');
+        $this->getCode()->shouldReturn('US-TX');
     }
 
     function it_has_no_name_by_default()
@@ -61,6 +61,17 @@ class ProvinceSpec extends ObjectBehavior
     {
         $this->setName('Texas');
         $this->getName()->shouldReturn('Texas');
+    }
+
+    function it_has_no_abbreviation_by_default()
+    {
+        $this->getAbbreviation()->shouldReturn(null);
+    }
+
+    function its_abbreviation_is_mutable()
+    {
+        $this->setAbbreviation('TEX');
+        $this->getAbbreviation()->shouldReturn('TEX');
     }
 
     function it_does_not_belong_to_country_by_default()

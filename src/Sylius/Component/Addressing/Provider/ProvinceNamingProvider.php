@@ -17,7 +17,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class ProvinceNameProvider implements ProvinceNameProviderInterface
+class ProvinceNamingProvider implements ProvinceNamingProviderInterface
 {
     /**
      * @var RepositoryInterface
@@ -35,15 +35,40 @@ class ProvinceNameProvider implements ProvinceNameProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function get($provinceCode)
+    public function getName($provinceCode)
     {
         /** @var ProvinceInterface $province */
-        $province = $this->provinceRepository->findOneBy(array('code' => $provinceCode));
-
-        if (null === $province) {
-            throw new \InvalidArgumentException(sprintf('Province with code "%s" not found.', $provinceCode));
-        }
+        $province = $this->getProvince($provinceCode);
 
         return $province->getName();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAbbreviation($provinceCode)
+    {
+        $province = $this->getProvince($provinceCode);
+
+        return $province->getAbbreviation();
+    }
+
+    /**
+     * @param string $code
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return ProvinceInterface
+     */
+    private function getProvince($code)
+    {
+        /** @var ProvinceInterface $province */
+        $province = $this->provinceRepository->findOneBy(array('code' => $code));
+
+        if (null === $province) {
+            throw new \InvalidArgumentException(sprintf('Province with code "%s" not found.', $code));
+        }
+
+        return $province;
     }
 }

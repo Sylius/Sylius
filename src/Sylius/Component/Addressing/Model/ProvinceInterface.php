@@ -30,6 +30,16 @@ interface ProvinceInterface extends ResourceInterface, CodeAwareInterface
     public function setName($name);
 
     /**
+     * @return string
+     */
+    public function getAbbreviation();
+
+    /**
+     * @param string $abbreviation
+     */
+    public function setAbbreviation($abbreviation);
+
+    /**
      * @return CountryInterface
      */
     public function getCountry();

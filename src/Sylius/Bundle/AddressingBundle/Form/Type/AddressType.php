@@ -59,7 +59,7 @@ class AddressType extends AbstractResourceType
                 'required' => false,
                 'label'    => 'sylius.form.address.company',
             ))
-            ->add('country', 'sylius_country_code_choice', array(
+            ->add('countryCode', 'sylius_country_code_choice', array(
                 'label' => 'sylius.form.address.country',
                 'enabled' => true,
             ))

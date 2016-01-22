@@ -6,8 +6,13 @@
     {{ address.phoneNumber }}<br/>
     {{ address.street }}<br/>
     {{ address.city }}<br/>
-    {% if address.province %}
-        {{ address.province|sylius_province_name }}<br/>
+    {% if address.provinceCode %}
+        {% set abbreviation = address.provinceCode|sylius_province_abbreviation %}
+        {% if '' == abbreviation %}
+            {{ address.provinceCode }}<br/>
+        {% else %}
+            {{ abbreviation }}<br/>
+        {% endif %}
     {% endif %}
-    {{ address.country|sylius_country_name|upper }} {{ address.postcode }}
+    {{ address.countryCode|sylius_country_name|upper }} {{ address.postcode }}
 </address>

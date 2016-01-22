@@ -32,6 +32,11 @@ class Province implements ProvinceInterface
     protected $name;
 
     /**
+     * @var string
+     */
+    protected $abbreviation;
+
+    /**
      * @var CountryInterface
      */
     protected $country;
@@ -82,6 +87,22 @@ class Province implements ProvinceInterface
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAbbreviation()
+    {
+        return $this->abbreviation;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAbbreviation($abbreviation)
+    {
+        $this->abbreviation = $abbreviation;
     }
 
     /**

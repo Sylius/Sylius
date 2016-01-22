@@ -14,12 +14,19 @@ namespace Sylius\Component\Addressing\Provider;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-interface ProvinceNameProviderInterface
+interface ProvinceNamingProviderInterface
 {
     /**
      * @param string $provinceCode
      *
      * @return string
      */
-    public function get($provinceCode);
+    public function getName($provinceCode);
+
+    /**
+     * @param string $provinceCode
+     *
+     * @return string
+     */
+    public function getAbbreviation($provinceCode);
 }

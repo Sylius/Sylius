@@ -119,14 +119,16 @@ class LoadCountriesData extends DataFixture
     protected function addUsStates(CountryInterface $country)
     {
         $provinceFactory = $this->getProvinceFactory();
+        $countryCode = $country->getCode();
 
-        foreach ($this->states as $provinceCode => $name) {
+        foreach ($this->states as $baseProvinceCode => $name) {
             $province = $provinceFactory->createNew();
             $province->setName($name);
-            $province->setCode($provinceCode);
+            $newProvinceCode = sprintf('%s-%s', $countryCode, $baseProvinceCode);
+            $province->setCode($newProvinceCode);
             $country->addProvince($province);
 
-            $this->setReference('Sylius.Province.'.$provinceCode, $province);
+            $this->setReference('Sylius.Province.'.$newProvinceCode, $province);
         }
     }
 }

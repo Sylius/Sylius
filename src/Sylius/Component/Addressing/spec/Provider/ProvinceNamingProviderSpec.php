@@ -13,13 +13,13 @@ namespace spec\Sylius\Component\Addressing\Provider;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
-use Sylius\Component\Addressing\Provider\ProvinceNameProviderInterface;
+use Sylius\Component\Addressing\Provider\ProvinceNamingProviderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class ProvinceNameProviderSpec extends ObjectBehavior
+class ProvinceNamingProviderSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $provinceRepository)
     {
@@ -28,12 +28,12 @@ class ProvinceNameProviderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Addressing\Provider\ProvinceNameProvider');
+        $this->shouldHaveType('Sylius\Component\Addressing\Provider\ProvinceNamingProvider');
     }
 
     function it_implements_province_name_provider_interface()
     {
-        $this->shouldHaveType(ProvinceNameProviderInterface::class);
+        $this->shouldHaveType(ProvinceNamingProviderInterface::class);
     }
 
     function it_throws_invalid_argument_exception_when_province_with_given_code_is_not_found(
@@ -41,7 +41,8 @@ class ProvinceNameProviderSpec extends ObjectBehavior
     ) {
         $provinceRepository->findOneBy(array('code' => 'ZZ-TOP'))->willReturn(null);
 
-        $this->shouldThrow(\InvalidArgumentException::class)->during('get', array('provinceCode' => 'ZZ-TOP'));
+        $this->shouldThrow(\InvalidArgumentException::class)->during('getName', array('provinceCode' => 'ZZ-TOP'));
+        $this->shouldThrow(\InvalidArgumentException::class)->during('getAbbreviation', array('provinceCode' => 'ZZ-TOP'));
     }
 
     function it_gets_province_name_by_its_code(
@@ -53,6 +54,19 @@ class ProvinceNameProviderSpec extends ObjectBehavior
 
         $provinceRepository->findOneBy(array('code' => 'IE-UL'))->willReturn($province);
 
-        $this->get('IE-UL')->shouldReturn('Ulster');
+        $this->getName('IE-UL')->shouldReturn('Ulster');
     }
+
+    function it_gets_province_abbreviation_by_its_code(
+        RepositoryInterface $provinceRepository,
+        ProvinceInterface $province
+    ) {
+        $province->getCode()->willReturn('IE-UL');
+        $province->getAbbreviation()->willReturn('ULS');
+
+        $provinceRepository->findOneBy(array('code' => 'IE-UL'))->willReturn($province);
+
+        $this->getAbbreviation('IE-UL')->shouldReturn('ULS');
+    }
+
 }

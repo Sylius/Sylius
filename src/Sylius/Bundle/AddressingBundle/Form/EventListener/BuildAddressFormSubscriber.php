@@ -95,16 +95,16 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
     public function preSubmit(FormEvent $event)
     {
         $data = $event->getData();
-        if (!is_array($data) || !array_key_exists('country', $data)) {
+        if (!is_array($data) || !array_key_exists('countryCode', $data)) {
             return;
         }
 
-        if ('' === $data['country']) {
+        if ('' === $data['countryCode']) {
             return;
         }
 
         /* @var CountryInterface $country */
-        $country = $this->countryRepository->findOneBy(array('code' => $data['country']));
+        $country = $this->countryRepository->findOneBy(array('code' => $data['countryCode']));
         if (null === $country) {
             return;
         }
@@ -125,7 +125,7 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
         return
             $this
                 ->formFactory
-                    ->createNamed('province', 'sylius_province_code_choice', $province, array(
+                    ->createNamed('provinceCode', 'sylius_province_code_choice', $province, array(
                     'country'  => $country,
                     'auto_initialize' => false,
             ))
