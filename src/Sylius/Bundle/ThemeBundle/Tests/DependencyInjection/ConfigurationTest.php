@@ -15,14 +15,14 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_uses_app_themes_as_default_themes_location()
+    public function it_uses_app_themes_filesystem_as_the_default_source()
     {
-        $this->assertProcessedConfigurationEquals(
-            [
-                [],
-            ],
-            ['locations' => ['%kernel.root_dir%/themes']]
-        );
+       $this->assertProcessedConfigurationEquals(
+           [
+               [],
+           ],
+           ['sources' => ['filesystem' => ['locations' => ['%kernel.root_dir%/themes']]]]
+       );
     }
 
     /**
@@ -32,9 +32,10 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertProcessedConfigurationEquals(
             [
-                ['locations' => ['/custom/path', '/custom/path2']],
+                ['sources' => ['filesystem' => ['locations' => ['/custom/path', '/custom/path2']]]],
             ],
-            ['locations' => ['/custom/path', '/custom/path2']]
+            ['sources' => ['filesystem' => ['locations' => ['/custom/path', '/custom/path2']]]],
+            'sources.filesystem'
         );
     }
 
@@ -45,10 +46,11 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertProcessedConfigurationEquals(
             [
-                ['locations' => ['/custom/path', '/custom/path2']],
-                ['locations' => ['/last/custom/path']],
+                ['sources' => ['filesystem' => ['locations' => ['/custom/path', '/custom/path2']]]],
+                ['sources' => ['filesystem' => ['locations' => ['/last/custom/path']]]],
             ],
-            ['locations' => ['/last/custom/path']]
+            ['sources' => ['filesystem' => ['locations' => ['/last/custom/path']]]],
+            'sources.filesystem'
         );
     }
 
@@ -57,10 +59,11 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function it_is_invalid_to_pass_a_string_as_theme_locations()
     {
-        $this->assertConfigurationIsInvalid(
+        $this->assertPartialConfigurationIsInvalid(
             [
                 ['locations' => '/string/not/array'],
-            ]
+            ],
+            'sources.filesystem'
         );
     }
 
@@ -69,10 +72,11 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function it_throws_an_error_if_trying_to_set_theme_locations_to_an_empty_array()
     {
-        $this->assertConfigurationIsInvalid(
+        $this->assertPartialConfigurationIsInvalid(
             [
                 ['locations' => []],
-            ]
+            ],
+            'sources.filesystem'
         );
     }
 

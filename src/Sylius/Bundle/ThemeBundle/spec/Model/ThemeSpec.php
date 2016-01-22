@@ -42,24 +42,24 @@ class ThemeSpec extends ObjectBehavior
     {
         $this->getId()->shouldReturn(null);
 
-        $this->setSlug('slug');
+        $this->setName('slug');
         $this->getId()->shouldReturn('slug');
     }
 
     function it_has_name()
     {
-        $this->getName()->shouldReturn(null);
+        $this->getTitle()->shouldReturn(null);
 
-        $this->setName("Foo Bar");
-        $this->getName()->shouldReturn("Foo Bar");
+        $this->setTitle("Foo Bar");
+        $this->getTitle()->shouldReturn("Foo Bar");
     }
 
     function it_has_slug()
     {
-        $this->getSlug()->shouldReturn(null);
+        $this->getName()->shouldReturn(null);
 
-        $this->setSlug("foo/bar");
-        $this->getSlug()->shouldReturn("foo/bar");
+        $this->setName("foo/bar");
+        $this->getName()->shouldReturn("foo/bar");
     }
 
     function it_has_path()
@@ -80,7 +80,7 @@ class ThemeSpec extends ObjectBehavior
 
     function it_has_code_based_on_md5ed_slug()
     {
-        $this->setSlug('slug');
+        $this->setName('slug');
 
         $this->getCode()->shouldReturn(substr(md5('slug'), 0, 8));
     }

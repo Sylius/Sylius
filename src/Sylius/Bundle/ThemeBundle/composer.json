@@ -24,17 +24,14 @@
 
         "sylius/resource": "0.17.*@dev",
 
-        "symfony/framework-bundle": "^2.7.7 <2.8",
-        "symfony/property-access": "^2.7.7",
-        "symfony/options-resolver": "^2.7.7",
-        "symfony/browser-kit": "^2.7.7"
+        "symfony/symfony": "^2.7.7, <2.8"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.4",
         "phpunit/phpunit": "^4.1",
         "matthiasnoback/symfony-config-test": "^1.4.0",
         "matthiasnoback/symfony-dependency-injection-test": "^0.7.6",
-        "symfony/twig-bundle": "^3.0"
+        "symfony/twig-bundle": "^2.7.7, <2.8"
     },
     "config": {
         "bin-dir": "bin"

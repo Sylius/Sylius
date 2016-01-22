@@ -8,6 +8,9 @@
 /app/config/parameters.yml
 /app/config/*.local.yml
 
+/app/themes/vendor/*
+!/app/themes/vendor/.gitkeep
+
 /web/bundles
 /web/assets/css
 /web/assets/js

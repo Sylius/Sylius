@@ -27,7 +27,7 @@ class ResourceNotFoundException extends \RuntimeException
         parent::__construct(sprintf(
             'Could not find resource "%s" using theme "%s".',
             $resourceName,
-            $theme->getSlug()
+            $theme->getName()
         ));
     }
 }

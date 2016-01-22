@@ -11,7 +11,8 @@
 
 namespace Sylius\Bundle\ThemeBundle\DependencyInjection\Compiler;
 
-use Symfony\Component\Config\Resource\FileResource;
+use Sylius\Bundle\ThemeBundle\Factory\ThemeFactoryInterface;
+use Sylius\Bundle\ThemeBundle\Loader\ConfigurationProviderInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -27,21 +28,22 @@ class ThemeRepositoryPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $definition = $container->findDefinition('sylius.theme.repository');
+        /** @var ConfigurationProviderInterface|CompilerPassInterface $configurationProvider */
+        $configurationProvider = $container->get('sylius.theme.configuration.provider');
 
-        $loader = $container->get('sylius.theme.loader');
+        /** @var ThemeFactoryInterface $themeFactory */
+        $themeFactory = $container->get('sylius.theme.factory');
 
-        $serializedThemes = [];
-        try {
-            $themeFiles = $container->get('sylius.theme.locator')->locate('theme.json', null, false);
-            foreach ($themeFiles as $themeFile) {
-                $serializedThemes[] = serialize($loader->load($themeFile));
-                $container->addResource(new FileResource($themeFile));
-            }
+        $themeRepositoryDefinition = $container->findDefinition('sylius.theme.repository');
 
-            $definition->addArgument($serializedThemes);
-        } catch (\InvalidArgumentException $e) {
-            // No files found.
+        foreach ($configurationProvider->provideAll() as $themeConfiguration) {
+            $theme = $themeFactory->createFromArray($themeConfiguration);
+
+            $themeRepositoryDefinition->addMethodCall('addSerialized', [serialize($theme)]);
+        }
+
+        if ($configurationProvider instanceof CompilerPassInterface) {
+            $configurationProvider->process($container);
         }
     }
 }

@@ -20,5 +20,7 @@ twig:
     strict_variables: false
 
 sylius_theme:
-    locations:
-        - "%kernel.root_dir%/../../Fixtures/themes"
+    sources:
+        filesystem:
+            locations:
+                - "%kernel.root_dir%/../../Fixtures/themes"

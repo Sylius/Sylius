@@ -24,19 +24,9 @@ interface ThemeInterface extends ResourceInterface
     public function getName();
     
     /**
-     * @param string $name
-     */
-    public function setName($name);
-
-    /**
-     * @return string
-     */
-    public function getSlug();
-    
-    /**
      * @param string $slug
      */
-    public function setSlug($slug);
+    public function setName($name);
 
     /**
      * @return string
@@ -51,6 +41,16 @@ interface ThemeInterface extends ResourceInterface
     /**
      * @return string
      */
+    public function getTitle();
+
+    /**
+     * @param string $title
+     */
+    public function setTitle($title);
+
+    /**
+     * @return string
+     */
     public function getDescription();
 
     /**
@@ -58,15 +58,17 @@ interface ThemeInterface extends ResourceInterface
      */
     public function setDescription($description);
 
+    // TODO: Authors
+
     /**
      * @return array
      */
-    public function getParentsSlugs();
+    public function getParentsNames();
 
     /**
      * @param array $parentsSlugs
      */
-    public function setParentsSlugs(array $parentsSlugs);
+    public function setParentsNames(array $parentsSlugs);
 
     /**
      * Should match /^[a-zA-Z0-9-_]{6,32}$/

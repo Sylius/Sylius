@@ -28,9 +28,19 @@ class SyliusThemeExtension extends Extension
     {
         $config = $this->processConfiguration(new Configuration(), $configs);
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/services'));
+        $loader->load('assets.xml');
+        $loader->load('configuration.xml');
+        $loader->load('resource_locators.xml');
         $loader->load('services.xml');
+        $loader->load('templating.xml');
+        $loader->load('translations.xml');
 
-        $container->setParameter('sylius.theme.locations', $config['locations']);
+        // TODO: Interfaces ready for filesystem decoupling, configuration not ready yet
+        $loader->load('filesystem_configuration.xml');
+        $container->setAlias('sylius.theme.configuration.loader', 'sylius.theme.configuration.loader.json_file');
+        $container->setAlias('sylius.theme.configuration.provider', 'sylius.theme.configuration.provider.filesystem');
+
+        $container->setParameter('sylius.theme.configuration.filesystem.locations', $config['sources']['filesystem']['locations']);
     }
 }

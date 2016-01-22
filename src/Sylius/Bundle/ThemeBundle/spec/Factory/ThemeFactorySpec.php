@@ -15,6 +15,8 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeFactory;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeFactoryInterface;
+use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
 /**
@@ -24,13 +26,11 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
  */
 class ThemeFactorySpec extends ObjectBehavior
 {
-    function let(
-        $themeClassName = 'Sylius\Bundle\ThemeBundle\Model\Theme',
-        PropertyAccessorInterface $propertyAccessor
-    ) {
-        $this->beConstructedWith($themeClassName, $propertyAccessor);
+    function let(FactoryInterface $basicThemeFactory)
+    {
+        $this->beConstructedWith($basicThemeFactory);
     }
-    
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Factory\ThemeFactory');
@@ -41,26 +41,36 @@ class ThemeFactorySpec extends ObjectBehavior
         $this->shouldImplement(ThemeFactoryInterface::class);
     }
 
-    function it_creates_theme_from_valid_array($themeClassName, PropertyAccessorInterface $propertyAccessor)
+    function it_creates_theme_based_on_array_data(FactoryInterface $basicThemeFactory, ThemeInterface $theme)
     {
-        $data = [
-            'name' => 'Foo bar',
-            'slug' => 'foo/bar',
-        ];
+        $basicThemeFactory->createNew()->willReturn($theme);
 
-        $propertyAccessor->setValue(Argument::any(), 'name', 'Foo bar')->shouldBeCalled();
-        $propertyAccessor->setValue(Argument::any(), 'slug', 'foo/bar')->shouldBeCalled();
-        $propertyAccessor->setValue(Argument::any(), 'parentsSlugs', [])->shouldBeCalled();
+        $theme->setName('example/theme')->shouldBeCalled();
+        $theme->setPath('/theme/path')->shouldBeCalled();
 
-        $this->createFromArray($data)->shouldHaveType($themeClassName);
+        $this->createFromArray(['name' => 'example/theme', 'path' => '/theme/path'])->shouldReturn($theme);
     }
 
-    function it_throws_exception_if_given_array_is_invalid()
-    {
-        $data = [
-            'name' => 'Foo bar',
-        ];
+    function it_creates_theme_with_optional_properties_based_on_array_data(
+        FactoryInterface $basicThemeFactory,
+        ThemeInterface $theme
+    ) {
+        $basicThemeFactory->createNew()->willReturn($theme);
 
-        $this->shouldThrow('\Exception')->duringCreateFromArray($data);
+        $theme->setName('example/theme')->shouldBeCalled();
+        $theme->setPath('/theme/path')->shouldBeCalled();
+
+        $theme->setTitle('Example theme')->shouldBeCalled();
+        $theme->setDescription('The best theme all around the world')->shouldBeCalled();
+        $theme->setParentsNames(['example/parent-theme'])->shouldBeCalled();
+
+        $this->createFromArray([
+            'name' => 'example/theme',
+            'path' => '/theme/path',
+//            'authors' => [['name' => 'Ryszard Rynkowski']], TODO: Authors
+            'title' => 'Example theme',
+            'description' => 'The best theme all around the world',
+            'parents' => ['example/parent-theme'],
+        ])->shouldReturn($theme);
     }
 }

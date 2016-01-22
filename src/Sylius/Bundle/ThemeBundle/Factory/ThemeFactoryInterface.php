@@ -22,6 +22,8 @@ interface ThemeFactoryInterface
      * @param array $themeData
      *
      * @return ThemeInterface
+     *
+     * @throws \InvalidArgumentException If factory is unable to create theme instance out of given data
      */
     public function createFromArray(array $themeData);
 }

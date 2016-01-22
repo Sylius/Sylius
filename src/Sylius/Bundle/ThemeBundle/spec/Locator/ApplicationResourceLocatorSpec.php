@@ -52,7 +52,7 @@ class ApplicationResourceLocatorSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_resource_can_not_be_located(Filesystem $filesystem, ThemeInterface $theme)
     {
-        $theme->getSlug()->willReturn('theme/slug');
+        $theme->getName()->willReturn('theme/slug');
         $theme->getPath()->willReturn('/theme/path');
 
         $filesystem->exists('/theme/path/resource')->willReturn(false);

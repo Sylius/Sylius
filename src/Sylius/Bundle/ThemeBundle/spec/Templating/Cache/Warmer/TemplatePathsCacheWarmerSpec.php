@@ -62,7 +62,7 @@ class TemplatePathsCacheWarmerSpec extends ObjectBehavior
 
         $themeRepository->findAll()->willReturn([$theme]);
 
-        $theme->getSlug()->willReturn('theme/slug');
+        $theme->getName()->willReturn('theme/slug');
         $firstTemplate->getLogicalName()->willReturn('Logical:Name:First');
         $secondTemplate->getLogicalName()->willReturn('Logical:Name:Second');
 

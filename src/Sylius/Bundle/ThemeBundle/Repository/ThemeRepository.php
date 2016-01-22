@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ThemeBundle\Repository;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\InMemoryRepository;
 
 /**
@@ -19,20 +20,17 @@ use Sylius\Component\Resource\Repository\InMemoryRepository;
  */
 final class ThemeRepository extends InMemoryRepository implements ThemeRepositoryInterface
 {
-    /**
-     * @param array|ThemeInterface[] $themes Can be an array of serialized themes
-     */
-    public function __construct(array $themes = [])
+    public function __construct()
     {
         parent::__construct(ThemeInterface::class);
+    }
 
-        foreach ($themes as $theme) {
-            if (!$theme instanceof ThemeInterface) {
-                $theme = unserialize($theme);
-            }
-
-            $this->add($theme);
-        }
+    /**
+     * @param string $serializedTheme
+     */
+    public function addSerialized($serializedTheme)
+    {
+        $this->add(unserialize($serializedTheme));
     }
 
     /**
@@ -40,15 +38,15 @@ final class ThemeRepository extends InMemoryRepository implements ThemeRepositor
      */
     public function find($id)
     {
-        return $this->findOneBySlug($id);
+        return $this->findOneByName($id);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function findOneBySlug($slug)
+    public function findOneByName($name)
     {
-        return $this->findOneBy(['slug' => $slug]);
+        return $this->findOneBy(['name' => $name]);
     }
 
     /**

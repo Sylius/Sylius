@@ -52,7 +52,7 @@ class ThemeDebugCommand extends ContainerAwareCommand
         $table->setHeaders(['Name', 'Slug', 'Path']);
 
         foreach ($themes as $theme) {
-            $table->addRow([$theme->getName(), $theme->getSlug(), $theme->getPath()]);
+            $table->addRow([$theme->getTitle(), $theme->getName(), $theme->getPath()]);
         }
 
         $table->setStyle('borderless');

@@ -25,7 +25,7 @@ class ResourceNotFoundExceptionSpec extends ObjectBehavior
 {
     function let(ThemeInterface $theme)
     {
-        $theme->getSlug()->willReturn('theme/slug');
+        $theme->getName()->willReturn('theme/slug');
 
         $this->beConstructedWith('resource name', $theme);
     }

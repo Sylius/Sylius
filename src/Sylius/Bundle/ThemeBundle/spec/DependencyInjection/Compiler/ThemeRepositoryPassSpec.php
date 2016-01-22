@@ -14,6 +14,8 @@ namespace spec\Sylius\Bundle\ThemeBundle\DependencyInjection\Compiler;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\DependencyInjection\Compiler\ThemeRepositoryPass;
+use Sylius\Bundle\ThemeBundle\Factory\ThemeFactoryInterface;
+use Sylius\Bundle\ThemeBundle\Loader\ConfigurationProviderInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Config\Loader\LoaderInterface;
@@ -38,39 +40,56 @@ class ThemeRepositoryPassSpec extends ObjectBehavior
         $this->shouldImplement(CompilerPassInterface::class);
     }
 
-    function it_adds_themes_to_theme_repository(
-        ContainerBuilder $containerBuilder,
+    function it_adds_serialized_theme_instances_to_theme_repository_constructor(
+        ContainerBuilder $container,
+        ConfigurationProviderInterface $configurationProvider,
+        ThemeFactoryInterface $themeFactory,
         Definition $themeRepositoryDefinition,
-        LoaderInterface $themeLoader,
-        FileLocatorInterface $themeLocator,
         ThemeInterface $theme
     ) {
-        $themeRepositoryDefinition->addArgument(Argument::type('array'))->shouldBeCalled();
+        $container->get('sylius.theme.configuration.provider')->willReturn($configurationProvider);
+        $container->get('sylius.theme.factory')->willReturn($themeFactory);
 
-        $themeLocator->locate("theme.json", Argument::any(), false)->shouldBeCalled()->willReturn(["foo/bar/theme.json"]);
+        $container->findDefinition('sylius.theme.repository')->willReturn($themeRepositoryDefinition);
 
-        $themeLoader->load("foo/bar/theme.json")->shouldBeCalled()->willReturn($theme);
+        $configurationProvider->provideAll()->willReturn([
+            ['name' => 'example/sylius-theme'],
+        ]);
 
-        $containerBuilder->findDefinition("sylius.theme.repository")->shouldBeCalled()->willReturn($themeRepositoryDefinition);
-        $containerBuilder->get("sylius.theme.locator")->shouldBeCalled()->willReturn($themeLocator);
-        $containerBuilder->get("sylius.theme.loader")->shouldBeCalled()->willReturn($themeLoader);
-        $containerBuilder->addResource(Argument::type('Symfony\Component\Config\Resource\FileResource'))->shouldBeCalled();
+        $themeFactory->createFromArray(['name' => 'example/sylius-theme'])->willReturn($theme);
 
-        $this->process($containerBuilder);
+        $themeRepositoryDefinition
+            ->addMethodCall('addSerialized', [serialize($theme->getWrappedObject())])
+            ->shouldBeCalled()
+        ;
+
+        $this->process($container);
     }
 
-    function it_does_not_crash_if_themes_not_found(
-        ContainerBuilder $containerBuilder,
+    function it_also_runs_process_on_configuration_provider_if_it_implements_compiler_pass_interface(
+        ContainerBuilder $container,
+        ConfigurationProviderInterface $configurationProvider,
+        ThemeFactoryInterface $themeFactory,
         Definition $themeRepositoryDefinition,
-        LoaderInterface $themeLoader,
-        FileLocatorInterface $themeLocator
+        ThemeInterface $theme
     ) {
-        $themeLocator->locate("theme.json", Argument::any(), false)->shouldBeCalled()->willThrow(new \InvalidArgumentException());
+        /** @var ConfigurationProviderInterface|CompilerPassInterface $configurationProvider */
+        $configurationProvider->implement(CompilerPassInterface::class);
 
-        $containerBuilder->findDefinition("sylius.theme.repository")->shouldBeCalled()->willReturn($themeRepositoryDefinition);
-        $containerBuilder->get("sylius.theme.locator")->shouldBeCalled()->willReturn($themeLocator);
-        $containerBuilder->get("sylius.theme.loader")->shouldBeCalled()->willReturn($themeLoader);
+        $container->get('sylius.theme.configuration.provider')->willReturn($configurationProvider);
+        $container->get('sylius.theme.factory')->willReturn($themeFactory);
 
-        $this->process($containerBuilder);
+        $container->findDefinition('sylius.theme.repository')->willReturn($themeRepositoryDefinition);
+
+        $configurationProvider->provideAll()->willReturn([
+            ['name' => 'example/sylius-theme'],
+        ]);
+
+        $themeFactory->createFromArray(Argument::cetera())->willReturn($theme);
+        $themeRepositoryDefinition->addMethodCall(Argument::cetera())->willReturn();
+
+        $configurationProvider->process($container)->shouldBeCalled();
+
+        $this->process($container);
     }
 }

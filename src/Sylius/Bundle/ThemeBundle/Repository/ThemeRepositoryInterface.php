@@ -20,11 +20,16 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 interface ThemeRepositoryInterface extends RepositoryInterface
 {
     /**
-     * @param string $slug
+     * @param string $serializedTheme
+     */
+    public function addSerialized($serializedTheme);
+
+    /**
+     * @param string $name
      *
      * @return ThemeInterface|null
      */
-    public function findOneBySlug($slug);
+    public function findOneByName($name);
 
     /**
      * @param string $path

@@ -1,7 +1,0 @@
-{
-  "name": "First Test Theme",
-  "slug": "sylius/first-test-theme",
-  "parents": [
-    "sylius/second-test-theme"
-  ]
-}

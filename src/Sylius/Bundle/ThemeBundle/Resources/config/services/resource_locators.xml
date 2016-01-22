@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="sylius.theme.locator.resource.class">Sylius\Bundle\ThemeBundle\Locator\ResourceLocator</parameter>
+        <parameter key="sylius.theme.locator.application_resource.class">Sylius\Bundle\ThemeBundle\Locator\ApplicationResourceLocator</parameter>
+        <parameter key="sylius.theme.locator.bundle_resource.class">Sylius\Bundle\ThemeBundle\Locator\BundleResourceLocator</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.theme.locator.resource" class="%sylius.theme.locator.resource.class%" public="false">
+            <argument type="service" id="sylius.theme.locator.application_resource" />
+            <argument type="service" id="sylius.theme.locator.bundle_resource" />
+        </service>
+
+        <service id="sylius.theme.locator.application_resource" class="%sylius.theme.locator.application_resource.class%">
+            <argument type="service" id="filesystem" />
+        </service>
+
+        <service id="sylius.theme.locator.bundle_resource" class="%sylius.theme.locator.bundle_resource.class%">
+            <argument type="service" id="filesystem" />
+            <argument type="service" id="kernel" />
+        </service>
+    </services>
+</container>

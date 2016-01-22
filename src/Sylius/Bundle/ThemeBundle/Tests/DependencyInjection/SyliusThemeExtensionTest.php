@@ -24,9 +24,9 @@ class SyliusThemeExtensionTest extends AbstractExtensionTestCase
      */
     public function it_sets_configured_theme_locations_as_parameter()
     {
-        $this->load(['locations' => ['/my/path']]);
+        $this->load(['sources' => ['filesystem' => ['locations' => ['/my/path']]]]);
 
-        $this->assertContainerBuilderHasParameter('sylius.theme.locations', ['/my/path']);
+        $this->assertContainerBuilderHasParameter('sylius.theme.configuration.filesystem.locations', ['/my/path']);
     }
 
     /**
