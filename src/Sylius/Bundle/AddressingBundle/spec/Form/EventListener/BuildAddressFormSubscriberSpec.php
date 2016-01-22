@@ -72,8 +72,6 @@ class BuildAddressFormSubscriberSpec extends ObjectBehavior
         $formFactory->createNamed('provinceCode', 'sylius_province_code_choice', 'province', Argument::withKey('country'))
             ->willReturn($provinceForm);
 
-
-
         $this->preSetData($event);
     }
 

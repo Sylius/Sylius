@@ -7,12 +7,7 @@
     {{ address.street }}<br/>
     {{ address.city }}<br/>
     {% if address.provinceCode %}
-        {% set abbreviation = address.provinceCode|sylius_province_abbreviation %}
-        {% if '' == abbreviation %}
-            {{ address.provinceCode }}<br/>
-        {% else %}
-            {{ abbreviation }}<br/>
-        {% endif %}
+        {{ address.provinceCode|sylius_province_abbreviation }}<br/>
     {% endif %}
     {{ address.countryCode|sylius_country_name|upper }} {{ address.postcode }}
 </address>

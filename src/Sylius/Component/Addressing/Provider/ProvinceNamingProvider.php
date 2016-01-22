@@ -50,7 +50,11 @@ class ProvinceNamingProvider implements ProvinceNamingProviderInterface
     {
         $province = $this->getProvince($provinceCode);
 
-        return $province->getAbbreviation();
+        if (null !== $provinceAbbreviation = $province->getAbbreviation()) {
+            return $provinceAbbreviation;
+        }
+
+        return $provinceCode;
     }
 
     /**

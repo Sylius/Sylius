@@ -69,4 +69,16 @@ class ProvinceNamingProviderSpec extends ObjectBehavior
         $this->getAbbreviation('IE-UL')->shouldReturn('ULS');
     }
 
+    function it_gets_province_code_if_its_abbreviation_is_not_set(
+        RepositoryInterface $provinceRepository,
+        ProvinceInterface $province
+    )
+    {
+        $province->getCode()->willReturn('IE-UL');
+        $province->getAbbreviation()->willReturn(null);
+
+        $provinceRepository->findOneBy(array('code' => 'IE-UL'))->willReturn($province);
+
+        $this->getAbbreviation('IE-UL')->shouldReturn('IE-UL');
+    }
 }

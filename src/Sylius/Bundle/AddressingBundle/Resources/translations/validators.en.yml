@@ -32,7 +32,9 @@ sylius:
             unique: Country ISO code must be unique.
     province:
         code:
+            min_length: Province code must be at least 5 characters long|Province code must be at least 5 characters long.
             not_blank: Please enter province code.
+            regex: Province code should have the following format XX-XX (e.g. US-FL).
             unique: Province code must be unique.
         name:
             max_length: Province name must not be longer than 255 characters|Province name must not be longer than 255 characters.
