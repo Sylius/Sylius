@@ -2,9 +2,7 @@ framework:
     secret:          test
     router:
         resource: "%kernel.root_dir%/%kernel.test_case%/routing.yml"
-    form:            ~
     csrf_protection: ~
-    validation:      { enable_annotations: true }
     templating:
         engines: ['twig']
     default_locale:  en
@@ -23,4 +21,4 @@ twig:
 
 sylius_theme:
     locations:
-        - %kernel.root_dir%/../../Fixtures/themes
+        - "%kernel.root_dir%/../../Fixtures/themes"
