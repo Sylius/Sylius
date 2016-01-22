@@ -201,6 +201,32 @@ class OrderSpec extends ObjectBehavior
         $this->hasAdjustment($adjustment)->shouldReturn(false);
     }
 
+    function it_returns_adjustments_recursively(
+        AdjustmentInterface $orderAdjustment,
+        AdjustmentInterface $itemAdjustment1,
+        AdjustmentInterface $itemAdjustment2,
+        OrderItemInterface $item1,
+        OrderItemInterface $item2
+    ) {
+        $item1->setOrder($this)->shouldBeCalled();
+        $item1->getTotal()->willReturn(100);
+        $item1->getAdjustmentsRecursively(null)->willReturn(array($itemAdjustment1));
+
+        $item2->setOrder($this)->shouldBeCalled();
+        $item2->getTotal()->willReturn(100);
+        $item2->getAdjustmentsRecursively(null)->willReturn(array($itemAdjustment2));
+
+        $this->addItem($item1);
+        $this->addItem($item2);
+
+        $orderAdjustment->setAdjustable($this)->shouldBeCalled();
+        $orderAdjustment->isNeutral()->willReturn(true);
+
+        $this->addAdjustment($orderAdjustment);
+
+        $this->getAdjustmentsRecursively()->shouldReturn(array($orderAdjustment, $itemAdjustment1, $itemAdjustment2));
+    }
+
     function it_has_adjustments_total_equal_to_0_by_default()
     {
         $this->getAdjustmentsTotal()->shouldReturn(0);
@@ -225,6 +251,29 @@ class OrderSpec extends ObjectBehavior
         $this->addAdjustment($adjustment3);
 
         $this->getAdjustmentsTotal()->shouldReturn(6930);
+    }
+
+    function it_returns_adjustments_total_recursively(
+        AdjustmentInterface $itemAdjustment,
+        AdjustmentInterface $orderAdjustment,
+        OrderItemInterface $orderItem
+    ) {
+        $itemAdjustment->getAmount()->willReturn(10000);
+        $orderAdjustment->getAmount()->willReturn(5000);
+
+        $itemAdjustment->isNeutral()->willReturn(false);
+        $orderAdjustment->isNeutral()->willReturn(false);
+
+        $orderAdjustment->setAdjustable($this)->shouldBeCalled();
+
+        $orderItem->getAdjustmentsRecursively(null)->willReturn(array($itemAdjustment));
+        $orderItem->setOrder($this)->shouldBeCalled();
+        $orderItem->getTotal()->willReturn(15000);
+
+        $this->addItem($orderItem);
+        $this->addAdjustment($orderAdjustment);
+
+        $this->getAdjustmentsTotalRecursively()->shouldReturn(15000);
     }
 
     function it_has_total_equal_to_0_by_default()

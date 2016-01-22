@@ -106,7 +106,7 @@ Feature: Orders management
 
     Scenario: Displaying correct items total on order page
         Given I am viewing order with number "000000002"
-         Then I should see "Items total: €45.99"
+         Then I should see "Items total: €56.57"
 
     Scenario: Displaying correct tax total on order page
         Given I am viewing order with number "000000002"

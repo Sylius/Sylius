@@ -9,22 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\OrderProcessing;
+namespace Sylius\Component\Core\Taxation;
 
 use Sylius\Component\Core\Model\OrderInterface;
 
 /**
- * Order taxation processor.
- * Service implementing this service should apply taxes to given order.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface TaxationProcessorInterface
+interface OrderTaxesApplicatorInterface
 {
     /**
-     * Apply taxes to given order.
-     *
      * @param OrderInterface $order
      */
-    public function applyTaxes(OrderInterface $order);
+    public function apply(OrderInterface $order);
 }

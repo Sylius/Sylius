@@ -130,10 +130,11 @@
         <tr class="taxes">
             <td colspan="2">
                 <h5>{{ 'sylius.order.taxes'|trans }}</h5>
-                {% if not order.adjustments(taxAdjustment).isEmpty() %}
+                {% set allOrderAdjustments = order.getAdjustmentsRecursively(taxAdjustment) %}
+                {% if not allOrderAdjustments is empty %}
                     <ul class="list-unstyled">
-                        {% for taxAdjustment in order.adjustments(taxAdjustment) %}
-                            <li>{{ taxAdjustment.description }} {{ taxAdjustment.amount|sylius_price(order.currency) }} </li>
+                        {% for taxDescription, taxAmount in sylius_aggregate_adjustments(allOrderAdjustments) %}
+                            <li>{{ taxDescription }} {{ taxAmount|sylius_price(order.currency) }} </li>
                         {% endfor %}
                     </ul>
                 {% else %}
@@ -142,7 +143,7 @@
             </td>
             <td class="text-right" colspan="3">
                 <strong>{{ 'sylius.order.tax_total'|trans }}</strong>:
-                <span class="amount">{{ order.adjustmentsTotal(taxAdjustment)|sylius_price(order.currency) }}</span>
+                <span class="amount">{{ order.getAdjustmentsTotalRecursively(taxAdjustment)|sylius_price(order.currency) }}</span>
             </td>
         </tr>
         <tr class="shipping-charges">
