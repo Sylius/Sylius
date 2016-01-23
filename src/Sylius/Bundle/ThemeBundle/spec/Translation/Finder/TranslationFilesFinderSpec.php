@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ThemeBundle\Translation;
+namespace spec\Sylius\Bundle\ThemeBundle\Translation\Finder;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Factory\FinderFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-use Sylius\Bundle\ThemeBundle\Translation\TranslationFilesFinder;
-use Sylius\Bundle\ThemeBundle\Translation\TranslationFilesFinderInterface;
+use Sylius\Bundle\ThemeBundle\Translation\Finder\TranslationFilesFinder;
+use Sylius\Bundle\ThemeBundle\Translation\Finder\TranslationFilesFinderInterface;
 use Symfony\Component\Finder\Finder;
 
 /**
@@ -33,7 +33,7 @@ class TranslationFilesFinderSpec extends ObjectBehavior
     
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Translation\TranslationFilesFinder');
+        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Translation\Finder\TranslationFilesFinder');
     }
 
     function it_implements_translation_resource_finder_interface()

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ThemeBundle\Translation;
+namespace Sylius\Bundle\ThemeBundle\Translation\Finder;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
