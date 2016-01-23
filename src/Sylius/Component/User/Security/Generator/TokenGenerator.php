@@ -18,13 +18,16 @@ namespace Sylius\Component\User\Security\Generator;
 class TokenGenerator implements GeneratorInterface
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
+     *
+     * @throws \InvalidArgumentException
      */
     public function generate($length)
     {
         if (!is_int($length)) {
             throw new \InvalidArgumentException('The value of token length has to be an integer.');
         }
+
         if ((0 >= $length) || (40 < $length)) {
             throw new \InvalidArgumentException('The value of token length has to be in range between 1 to 40.');
         }
@@ -35,5 +38,4 @@ class TokenGenerator implements GeneratorInterface
 
         return substr($hash, $startPosition, $length);
     }
-
 }
