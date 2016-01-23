@@ -10,6 +10,7 @@
  */
 
 namespace Sylius\Component\Addressing\Model;
+use Sylius\Component\Resource\Model\CodeAwareTrait;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -17,15 +18,12 @@ namespace Sylius\Component\Addressing\Model;
  */
 class ZoneMember implements ZoneMemberInterface
 {
+    use CodeAwareTrait;
+
     /**
      * @var mixed
      */
     protected $id;
-
-    /**
-     * @var string
-     */
-    protected $code;
 
     /**
      * @var ZoneInterface
@@ -38,22 +36,6 @@ class ZoneMember implements ZoneMemberInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCode()
-    {
-        return $this->code;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCode($code)
-    {
-        $this->code = $code;
     }
 
     /**

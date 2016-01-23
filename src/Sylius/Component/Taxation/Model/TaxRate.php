@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Taxation\Model;
 
+use Sylius\Component\Resource\Model\CodeAwareTrait;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
 /**
@@ -18,17 +19,12 @@ use Sylius\Component\Resource\Model\TimestampableTrait;
  */
 class TaxRate implements TaxRateInterface
 {
-    use TimestampableTrait;
+    use CodeAwareTrait, TimestampableTrait;
 
     /**
      * @var mixed
      */
     protected $id;
-
-    /**
-     * @var string
-     */
-    protected $code;
 
     /**
      * @var TaxCategoryInterface
@@ -70,22 +66,6 @@ class TaxRate implements TaxRateInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCode()
-    {
-        return $this->code;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCode($code)
-    {
-        $this->code = $code;
     }
 
     /**

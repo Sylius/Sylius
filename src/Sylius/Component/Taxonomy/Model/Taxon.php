@@ -13,6 +13,7 @@ namespace Sylius\Component\Taxonomy\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\CodeAwareTrait;
 use Sylius\Component\Resource\Model\SoftDeletableTrait;
 use Sylius\Component\Translation\Model\AbstractTranslatable;
 
@@ -22,17 +23,12 @@ use Sylius\Component\Translation\Model\AbstractTranslatable;
  */
 class Taxon extends AbstractTranslatable implements TaxonInterface
 {
-    use SoftDeletableTrait;
+    use CodeAwareTrait, SoftDeletableTrait;
 
     /**
      * @var mixed
      */
     protected $id;
-
-    /**
-     * @var string
-     */
-    protected $code;
 
     /**
      * @var TaxonomyInterface
@@ -85,22 +81,6 @@ class Taxon extends AbstractTranslatable implements TaxonInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCode()
-    {
-        return $this->code;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCode($code)
-    {
-        $this->code = $code;
     }
 
     /**

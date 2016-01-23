@@ -10,21 +10,19 @@
  */
 
 namespace Sylius\Component\Variation\Model;
+use Sylius\Component\Resource\Model\CodeAwareTrait;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OptionValue implements OptionValueInterface
 {
+    use CodeAwareTrait;
+
     /**
      * @var mixed
      */
     protected $id;
-
-    /**
-     * @var string
-     */
-    protected $code;
 
     /**
      * @var string
@@ -50,22 +48,6 @@ class OptionValue implements OptionValueInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCode()
-    {
-        return $this->code;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCode($code)
-    {
-        $this->code = $code;
     }
 
     /**

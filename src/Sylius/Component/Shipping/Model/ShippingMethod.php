@@ -13,6 +13,7 @@ namespace Sylius\Component\Shipping\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\CodeAwareTrait;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Translation\Model\AbstractTranslatable;
@@ -23,17 +24,12 @@ use Sylius\Component\Translation\Model\AbstractTranslatable;
  */
 class ShippingMethod extends AbstractTranslatable implements ShippingMethodInterface
 {
-    use TimestampableTrait, ToggleableTrait;
+    use CodeAwareTrait, TimestampableTrait, ToggleableTrait;
 
     /**
      * @var mixed
      */
     protected $id;
-
-    /**
-     * @var string
-     */
-    protected $code;
 
     /**
      * @var ShippingCategoryInterface
@@ -84,22 +80,6 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCode()
-    {
-        return $this->code;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCode($code)
-    {
-        $this->code = $code;
     }
 
     /**
