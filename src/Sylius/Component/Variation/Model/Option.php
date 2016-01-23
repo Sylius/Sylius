@@ -13,6 +13,7 @@ namespace Sylius\Component\Variation\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Translation\Model\AbstractTranslatable;
 
 /**
@@ -21,6 +22,8 @@ use Sylius\Component\Translation\Model\AbstractTranslatable;
  */
 class Option extends AbstractTranslatable implements OptionInterface
 {
+    use TimestampableTrait;
+
     /**
      * @var mixed
      */
@@ -50,19 +53,10 @@ class Option extends AbstractTranslatable implements OptionInterface
      */
     protected $values;
 
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
-
     public function __construct()
     {
         parent::__construct();
+
         $this->values = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }
@@ -175,37 +169,5 @@ class Option extends AbstractTranslatable implements OptionInterface
     public function hasValue(OptionValueInterface $value)
     {
         return $this->values->contains($value);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
     }
 }

@@ -13,6 +13,8 @@ namespace Sylius\Component\Shipping\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\TimestampableTrait;
+use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Translation\Model\AbstractTranslatable;
 
 /**
@@ -21,6 +23,8 @@ use Sylius\Component\Translation\Model\AbstractTranslatable;
  */
 class ShippingMethod extends AbstractTranslatable implements ShippingMethodInterface
 {
+    use TimestampableTrait, ToggleableTrait;
+
     /**
      * @var mixed
      */
@@ -44,11 +48,6 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
     protected $categoryRequirement = ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY;
 
     /**
-     * @var bool
-     */
-    protected $enabled = true;
-
-    /**
      * @var string
      */
     protected $calculator;
@@ -62,16 +61,6 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
      * @var Collection|RuleInterface[]
      */
     protected $rules;
-
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
 
     public function __construct()
     {
@@ -150,25 +139,7 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
      */
     public function getCategoryRequirementLabel()
     {
-        $labels = self::getCategoryRequirementLabels();
-
-        return $labels[$this->categoryRequirement];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isEnabled()
-    {
-        return $this->enabled;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setEnabled($enabled)
-    {
-        $this->enabled = (bool) $enabled;
+        return self::getCategoryRequirementLabels()[$this->categoryRequirement];
     }
 
     /**
@@ -253,38 +224,6 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
     {
         $rule->setMethod(null);
         $this->rules->removeElement($rule);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
     }
 
     /**

@@ -11,6 +11,8 @@
 
 namespace Sylius\Component\Currency\Model;
 
+use Sylius\Component\Resource\Model\TimestampableTrait;
+use Sylius\Component\Resource\Model\ToggleableTrait;
 use Symfony\Component\Intl\Intl;
 
 /**
@@ -18,6 +20,8 @@ use Symfony\Component\Intl\Intl;
  */
 class Currency implements CurrencyInterface
 {
+    use TimestampableTrait, ToggleableTrait;
+
     /**
      * @var mixed
      */
@@ -36,22 +40,7 @@ class Currency implements CurrencyInterface
     /**
      * @var bool
      */
-    protected $enabled = true;
-
-    /**
-     * @var bool
-     */
     protected $base = false;
-
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
 
     public function __construct()
     {
@@ -121,14 +110,6 @@ class Currency implements CurrencyInterface
     /**
      * {@inheritdoc}
      */
-    public function isEnabled()
-    {
-        return $this->enabled;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function setEnabled($enabled)
     {
         if ($this->isBase()) {
@@ -136,46 +117,6 @@ class Currency implements CurrencyInterface
         }
 
         $this->enabled = (bool) $enabled;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function enable()
-    {
-        $this->enabled = true;
     }
 
     /**

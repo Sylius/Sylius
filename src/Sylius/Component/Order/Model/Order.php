@@ -13,12 +13,16 @@ namespace Sylius\Component\Order\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\SoftDeletableTrait;
+use Sylius\Component\Resource\Model\TimestampableTrait;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Order implements OrderInterface
 {
+    use SoftDeletableTrait, TimestampableTrait;
+
     /**
      * @var mixed
      */
@@ -76,21 +80,6 @@ class Order implements OrderInterface
      * @var int
      */
     protected $total = 0;
-
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $deletedAt;
 
     /**
      * @var string
@@ -291,62 +280,6 @@ class Order implements OrderInterface
     public function getTotal()
     {
         return $this->total;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isDeleted()
-    {
-        return null !== $this->deletedAt && new \DateTime() >= $this->deletedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDeletedAt()
-    {
-        return $this->deletedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDeletedAt(\DateTime $deletedAt = null)
-    {
-        $this->deletedAt = $deletedAt;
     }
 
     /**

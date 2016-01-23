@@ -11,11 +11,15 @@
 
 namespace Sylius\Component\Shipping\Model;
 
+use Sylius\Component\Resource\Model\TimestampableTrait;
+
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ShipmentItem implements ShipmentItemInterface
 {
+    use TimestampableTrait;
+
     /**
      * @var mixed
      */
@@ -35,16 +39,6 @@ class ShipmentItem implements ShipmentItemInterface
      * @var string
      */
     protected $shippingState = ShipmentInterface::STATE_READY;
-
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
 
     public function __construct()
     {
@@ -113,37 +107,5 @@ class ShipmentItem implements ShipmentItemInterface
     public function setShippingState($state)
     {
         $this->shippingState = $state;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
     }
 }

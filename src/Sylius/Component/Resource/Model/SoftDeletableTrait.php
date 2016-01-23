@@ -14,20 +14,34 @@ namespace Sylius\Component\Resource\Model;
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
-interface SoftDeletableInterface
+trait SoftDeletableTrait
 {
+    /**
+     * @var \DateTime|null
+     */
+    protected $deletedAt;
+
     /**
      * @return bool
      */
-    public function isDeleted();
+    public function isDeleted()
+    {
+        return null !== $this->deletedAt && new \DateTime() >= $this->deletedAt;
+    }
 
     /**
      * @return \DateTime
      */
-    public function getDeletedAt();
+    public function getDeletedAt()
+    {
+        return $this->deletedAt;
+    }
 
     /**
      * @param \DateTime $deletedAt
      */
-    public function setDeletedAt(\DateTime $deletedAt = null);
+    public function setDeletedAt(\DateTime $deletedAt = null)
+    {
+        $this->deletedAt = $deletedAt;
+    }
 }

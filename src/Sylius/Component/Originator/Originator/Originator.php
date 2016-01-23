@@ -63,6 +63,8 @@ class Originator implements OriginatorInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \InvalidArgumentException
      */
     public function setOrigin(OriginAwareInterface $originAware, $origin)
     {
@@ -71,10 +73,7 @@ class Originator implements OriginatorInterface
         }
 
         if (null === $id = $this->accessor->getValue($origin, $this->identifier)) {
-            throw new \InvalidArgumentException(sprintf(
-                'Origin %s is not set.',
-                $this->identifier
-            ));
+            throw new \InvalidArgumentException(sprintf('Origin %s is not set.', $this->identifier));
         }
 
         $originAware->setOriginId($id);

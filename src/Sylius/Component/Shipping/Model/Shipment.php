@@ -13,13 +13,15 @@ namespace Sylius\Component\Shipping\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\TimestampableTrait;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class Shipment implements ShipmentInterface, TimestampableInterface
+class Shipment implements ShipmentInterface
 {
+    use TimestampableTrait;
+
     /**
      * @var mixed
      */
@@ -44,16 +46,6 @@ class Shipment implements ShipmentInterface, TimestampableInterface
      * @var string
      */
     protected $tracking;
-
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
 
     public function __construct()
     {
@@ -191,38 +183,6 @@ class Shipment implements ShipmentInterface, TimestampableInterface
     /**
      * {@inheritdoc}
      */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getShippingWeight()
     {
         $weight = 0;
@@ -248,11 +208,17 @@ class Shipment implements ShipmentInterface, TimestampableInterface
         return $volume;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getShippingItemCount()
     {
         return $this->items->count();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getShippingItemTotal()
     {
         return 0;

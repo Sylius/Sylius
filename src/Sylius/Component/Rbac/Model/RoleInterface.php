@@ -44,7 +44,7 @@ interface RoleInterface extends CodeAwareInterface, TimestampableInterface, Reso
     public function setDescription($description);
 
     /**
-     * @return Collection
+     * @return Collection|PermissionInterface[]
      */
     public function getPermissions();
 
@@ -61,7 +61,7 @@ interface RoleInterface extends CodeAwareInterface, TimestampableInterface, Reso
     /**
      * @param PermissionInterface $permission
      *
-     * @return boolean
+     * @return bool
      */
     public function hasPermission(PermissionInterface $permission);
 
@@ -76,12 +76,12 @@ interface RoleInterface extends CodeAwareInterface, TimestampableInterface, Reso
     public function setParent(RoleInterface $role);
 
     /**
-     * @return Collection
+     * @return Collection|RoleInterface[]
      */
     public function getChildren();
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function hasChildren();
 
@@ -98,7 +98,7 @@ interface RoleInterface extends CodeAwareInterface, TimestampableInterface, Reso
     /**
      * @param RoleInterface $role
      *
-     * @return boolean
+     * @return bool
      */
     public function hasChild(RoleInterface $role);
 
