@@ -36,7 +36,7 @@ class TokenProvider implements TokenProviderInterface
     private $generator;
 
     /**
-     * @var integer
+     * @var int
      */
     private $tokenLength;
 
@@ -44,13 +44,14 @@ class TokenProvider implements TokenProviderInterface
      * @param RepositoryInterface    $repository
      * @param EntityManagerInterface $manager
      * @param GeneratorInterface     $generator
+     * @param int                    $tokenLength
      */
     public function __construct(RepositoryInterface $repository, EntityManagerInterface $manager, GeneratorInterface $generator, $tokenLength)
     {
         $this->repository = $repository;
         $this->manager = $manager;
         $this->generator = $generator;
-        $this->tokenLength = $tokenLength;
+        $this->tokenLength = (int) $tokenLength;
     }
 
     /**
@@ -58,9 +59,13 @@ class TokenProvider implements TokenProviderInterface
      */
     public function generateUniqueToken()
     {
+        $this->manager->getFilters()->disable('softdeleteable');
+
         do {
             $token = $this->generator->generate($this->tokenLength);
         } while ($this->isUsedCode($token));
+
+        $this->manager->getFilters()->enable('softdeleteable');
 
         return $token;
     }
@@ -68,16 +73,10 @@ class TokenProvider implements TokenProviderInterface
     /**
      * @param string $token
      *
-     * @return Boolean
+     * @return bool
      */
     protected function isUsedCode($token)
     {
-        $this->manager->getFilters()->disable('softdeleteable');
-
-        $isUsed = null !== $this->repository->findOneBy(array('confirmationToken' => $token));
-
-        $this->manager->getFilters()->enable('softdeleteable');
-
-        return $isUsed;
+        return null !== $this->repository->findOneBy(array('confirmationToken' => $token));
     }
 }
