@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\ThemeBundle\Loader;
 
 use Sylius\Bundle\ThemeBundle\Factory\ThemeFactoryInterface;
-use Sylius\Bundle\ThemeBundle\Filesystem\Filesystem;
 use Sylius\Bundle\ThemeBundle\Filesystem\FilesystemInterface;
 use Symfony\Component\Config\Loader\Loader;
 

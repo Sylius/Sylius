@@ -10,6 +10,7 @@
  */
 
 namespace Sylius\Component\Addressing\Model;
+
 use Sylius\Component\Resource\Model\CodeAwareTrait;
 
 /**

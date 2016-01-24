@@ -11,10 +11,8 @@
 
 namespace spec\Sylius\Bundle\CoreBundle\Distributor;
 
-use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Distributor\IntegerDistributorInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>

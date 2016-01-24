@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\CoreBundle\Context;
 
+use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Channel\ChannelContextInterface;
 use Sylius\Component\Core\Channel\ChannelResolverInterface;
-use Sylius\Component\Channel\Model\ChannelInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 

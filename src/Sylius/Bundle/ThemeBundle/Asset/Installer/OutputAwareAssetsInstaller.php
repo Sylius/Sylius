@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\ThemeBundle\Asset\Installer;
 
-use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>

@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Doctrine;
 
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\AbstractDriver;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\AbstractDriver;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**

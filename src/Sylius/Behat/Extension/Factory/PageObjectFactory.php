@@ -13,12 +13,12 @@ namespace Sylius\Behat\Extension\Factory;
 
 use Behat\Mink\Mink;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Element;
+use SensioLabs\Behat\PageObjectExtension\PageObject\Factory;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Factory\ClassNameResolver;
 use SensioLabs\Behat\PageObjectExtension\PageObject\InlineElement;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Page;
 use SensioLabs\Behat\PageObjectExtension\PageObject\PageObject;
 use Symfony\Cmf\Component\Routing\ChainRouterInterface;
-use SensioLabs\Behat\PageObjectExtension\PageObject\Factory;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>

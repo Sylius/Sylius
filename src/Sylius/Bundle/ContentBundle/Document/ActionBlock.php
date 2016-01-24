@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\ContentBundle\Document;
 
-use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ActionBlock as BaseActionBlock;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ActionBlock as BaseActionBlock;
 
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>

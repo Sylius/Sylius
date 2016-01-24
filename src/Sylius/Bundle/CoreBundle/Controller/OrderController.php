@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\Controller;
 
-use Gedmo\Loggable\Entity\LogEntry;
 use FOS\RestBundle\View\View;
+use Gedmo\Loggable\Entity\LogEntry;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
