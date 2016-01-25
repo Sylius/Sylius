@@ -9,26 +9,24 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\OrderBundle\Aggregator;
+namespace Sylius\Component\Order\Aggregator;
 
 use Sylius\Component\Order\Model\AdjustmentInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class AdjustmentsByLabelAggregator implements AdjustmentsAggregatorInterface
+final class AdjustmentsByLabelAggregator implements AdjustmentsAggregatorInterface
 {
     /**
      * {@inheritdoc}
      */
     public function aggregate(array $adjustments)
     {
-        foreach ($adjustments as $adjustment) {
-            $this->assertElementIsAdjustment($adjustment);
-        }
-
         $aggregatedAdjustments = array();
         foreach ($adjustments as $adjustment) {
+            $this->assertElementIsAdjustment($adjustment);
+
             if (!isset($aggregatedAdjustments[$adjustment->getDescription()])) {
                 $aggregatedAdjustments[$adjustment->getDescription()] = 0;
             }

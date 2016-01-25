@@ -39,8 +39,8 @@
         <parameter key="sylius.order_processing.shipping_processor.class">Sylius\Component\Core\OrderProcessing\ShippingChargesProcessor</parameter>
 
         <parameter key="sylius.taxation.order_taxes_applicator.class">Sylius\Component\Core\Taxation\OrderTaxesApplicator</parameter>
-        <parameter key="sylius.taxation.order_shipment_by_zone_taxes_applicator.class">Sylius\Component\Core\Taxation\OrderShipmentByZoneTaxesApplicator</parameter>
-        <parameter key="sylius.taxation.order_items_by_zone_taxes_applicator.class">Sylius\Component\Core\Taxation\OrderItemsByZoneTaxesApplicator</parameter>
+        <parameter key="sylius.taxation.order_shipment_taxes_by_zone_applicator.class">Sylius\Component\Core\Taxation\OrderShipmentTaxesByZoneApplicator</parameter>
+        <parameter key="sylius.taxation.order_items_taxes_by_zone_applicator.class">Sylius\Component\Core\Taxation\OrderItemsTaxesByZoneApplicator</parameter>
 
         <parameter key="sylius.listener.cart_blamer.class">Sylius\Bundle\CoreBundle\EventListener\CartBlamerListener</parameter>
         <parameter key="sylius.listener.order_currency.class">Sylius\Bundle\CoreBundle\EventListener\OrderCurrencyListener</parameter>
@@ -217,12 +217,12 @@
             <argument type="service" id="sylius.factory.payment" />
         </service>
 
-        <service id="sylius.taxation.order_shipment_by_zone_taxes_applicator" class="%sylius.taxation.order_shipment_by_zone_taxes_applicator.class%">
+        <service id="sylius.taxation.order_shipment_taxes_by_zone_applicator" class="%sylius.taxation.order_shipment_taxes_by_zone_applicator.class%">
             <argument type="service" id="sylius.tax_calculator" />
             <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.tax_rate_resolver" />
         </service>
-        <service id="sylius.taxation.order_items_by_zone_taxes_applicator" class="%sylius.taxation.order_items_by_zone_taxes_applicator.class%">
+        <service id="sylius.taxation.order_items_taxes_by_zone_applicator" class="%sylius.taxation.order_items_taxes_by_zone_applicator.class%">
             <argument type="service" id="sylius.tax_calculator" />
             <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.distributor.order_unit_taxes" />
@@ -230,8 +230,8 @@
         </service>
         <service id="sylius.taxation.order_taxes_applicator" class="%sylius.taxation.order_taxes_applicator.class%">
             <argument type="service" id="sylius.provider.default_zone_provider" />
-            <argument type="service" id="sylius.taxation.order_shipment_by_zone_taxes_applicator" />
-            <argument type="service" id="sylius.taxation.order_items_by_zone_taxes_applicator" />
+            <argument type="service" id="sylius.taxation.order_shipment_taxes_by_zone_applicator" />
+            <argument type="service" id="sylius.taxation.order_items_taxes_by_zone_applicator" />
             <argument type="service" id="sylius.zone_matcher" />
         </service>
 

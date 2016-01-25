@@ -44,7 +44,7 @@ class AdjustmentFactory implements AdjustmentFactoryInterface
      */
     public function createWithData($type, $label, $amount, $neutral)
     {
-        $adjustment = $this->adjustmentFactory->createNew();
+        $adjustment = $this->createNew();
         $adjustment->setType($type);
         $adjustment->setDescription($label);
         $adjustment->setAmount($amount);

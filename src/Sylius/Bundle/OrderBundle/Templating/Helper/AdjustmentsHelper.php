@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\OrderBundle\Templating\Helper;
 
-use Sylius\Bundle\OrderBundle\Aggregator\AdjustmentsAggregatorInterface;
+use Sylius\Component\Order\Aggregator\AdjustmentsAggregatorInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
 /**

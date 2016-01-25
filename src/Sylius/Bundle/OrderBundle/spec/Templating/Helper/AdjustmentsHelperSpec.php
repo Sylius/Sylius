@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\OrderBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\OrderBundle\Aggregator\AdjustmentsAggregatorInterface;
+use Sylius\Component\Order\Aggregator\AdjustmentsAggregatorInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Symfony\Component\Templating\Helper\Helper;
 

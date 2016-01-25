@@ -17,10 +17,13 @@ use Sylius\Component\Core\Model\OrderInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface OrderTaxesByZoneApplicatorInterface
+interface OrderShipmentTaxesByZoneApplicatorInterface
 {
     /**
      * @param OrderInterface $order
+     * @param ZoneInterface $zone
+     *
+     * @return
      */
     public function apply(OrderInterface $order, ZoneInterface $zone);
 }

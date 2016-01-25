@@ -30,12 +30,12 @@ class OrderTaxesApplicator implements OrderTaxesApplicatorInterface
     protected $defaultTaxZoneProvider;
 
     /**
-     * @var OrderTaxesByZoneApplicatorInterface
+     * @var OrderShipmentTaxesByZoneApplicatorInterface
      */
     protected $orderShipmentTaxesApplicator;
 
     /**
-     * @var OrderTaxesByZoneApplicatorInterface
+     * @var OrderItemsTaxesByZoneApplicatorInterface
      */
     protected $orderItemsTaxesApplicator;
 
@@ -46,14 +46,14 @@ class OrderTaxesApplicator implements OrderTaxesApplicatorInterface
 
     /**
      * @param ZoneProviderInterface $defaultTaxZoneProvider
-     * @param OrderTaxesByZoneApplicatorInterface $orderShipmentTaxesApplicator
-     * @param OrderTaxesByZoneApplicatorInterface $orderItemsTaxesApplicator
+     * @param OrderShipmentTaxesByZoneApplicatorInterface $orderShipmentTaxesApplicator
+     * @param OrderItemsTaxesByZoneApplicatorInterface $orderItemsTaxesApplicator
      * @param ZoneMatcherInterface $zoneMatcher
      */
     public function __construct(
         ZoneProviderInterface $defaultTaxZoneProvider,
-        OrderTaxesByZoneApplicatorInterface $orderShipmentTaxesApplicator,
-        OrderTaxesByZoneApplicatorInterface $orderItemsTaxesApplicator,
+        OrderShipmentTaxesByZoneApplicatorInterface $orderShipmentTaxesApplicator,
+        OrderItemsTaxesByZoneApplicatorInterface $orderItemsTaxesApplicator,
         ZoneMatcherInterface $zoneMatcher
     ) {
         $this->defaultTaxZoneProvider = $defaultTaxZoneProvider;

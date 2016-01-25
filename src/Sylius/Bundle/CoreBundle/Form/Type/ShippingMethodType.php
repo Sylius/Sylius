@@ -31,9 +31,9 @@ class ShippingMethodType extends BaseShippingMethodType
                 'label' => 'sylius.form.shipping_method.zone'
             ))
             ->add('taxCategory', 'sylius_tax_category_choice', array(
-                'required'    => false,
+                'required' => false,
                 'empty_value' => '---',
-                'label'       => 'sylius.form.shipping_method.tax_category'
+                'label' => 'sylius.form.shipping_method.tax_category'
             ))
         ;
     }

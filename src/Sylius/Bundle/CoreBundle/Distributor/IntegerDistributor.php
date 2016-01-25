@@ -19,14 +19,14 @@ class IntegerDistributor implements IntegerDistributorInterface
     /**
      * {@inheritdoc}
      */
-    public function distribute($baseAmount, $numberOfTargets)
+    public function distribute($amount, $numberOfTargets)
     {
-        if (!$this->validateTaxItems($numberOfTargets)) {
+        if (!$this->validateNumberOfTargets($numberOfTargets)) {
             throw new \InvalidArgumentException('Number of targets must be an integer, bigger than 0.');
         }
 
-        $sign = $baseAmount < 0 ? -1 : 1;
-        $amount = abs($baseAmount);
+        $sign = $amount < 0 ? -1 : 1;
+        $amount = abs($amount);
 
         $low = (int) ($amount / $numberOfTargets);
         $high = $low + 1;
@@ -50,7 +50,7 @@ class IntegerDistributor implements IntegerDistributorInterface
      *
      * @return bool
      */
-    private function validateTaxItems($numberOfTargets)
+    private function validateNumberOfTargets($numberOfTargets)
     {
         return (is_int($numberOfTargets) && 1 <= $numberOfTargets);
     }

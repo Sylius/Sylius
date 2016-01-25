@@ -19,7 +19,7 @@ use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Core\Taxation\OrderShipmentByZoneTaxesApplicator;
+use Sylius\Component\Core\Taxation\OrderShipmentTaxesByZoneApplicatorInterface;
 use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
@@ -28,7 +28,7 @@ use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class OrderShipmentByZoneTaxesApplicatorSpec extends ObjectBehavior
+class OrderShipmentTaxesByZoneApplicatorSpec extends ObjectBehavior
 {
     function let(
         CalculatorInterface $calculator,
@@ -40,12 +40,12 @@ class OrderShipmentByZoneTaxesApplicatorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Taxation\OrderShipmentByZoneTaxesApplicator');
+        $this->shouldHaveType('Sylius\Component\Core\Taxation\OrderShipmentTaxesByZoneApplicator');
     }
 
     function it_implements_order_shipment_taxes_applicator_interface()
     {
-        $this->shouldImplement(OrderShipmentByZoneTaxesApplicator::class);
+        $this->shouldImplement(OrderShipmentTaxesByZoneApplicatorInterface::class);
     }
 
     function it_applies_shipment_taxes_on_order_based_on_shipment_adjustments_and_rate(
@@ -89,8 +89,9 @@ class OrderShipmentByZoneTaxesApplicatorSpec extends ObjectBehavior
         $this->apply($order, $zone);
     }
 
-    function it_does_nothing_if_tax_rate_cannot_be_resolver(
+    function it_does_nothing_if_tax_rate_cannot_be_resolved(
         $taxRateResolver,
+        Collection $shippingAdjustments,
         OrderInterface $order,
         ShipmentInterface $shipment,
         ShippingMethodInterface $shippingMethod,
@@ -99,25 +100,21 @@ class OrderShipmentByZoneTaxesApplicatorSpec extends ObjectBehavior
         $order->getLastShipment()->willReturn($shipment);
         $shipment->getMethod()->willReturn($shippingMethod);
 
-        $taxRateResolver->resolve($shippingMethod, array('zone' => $zone))->willReturn(null);
+        $order->getAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->willReturn($shippingAdjustments);
+        $shippingAdjustments->isEmpty()->willReturn(false);
 
-        $order->getAdjustments(Argument::any())->shouldNotBeCalled();
+        $taxRateResolver->resolve($shippingMethod, array('zone' => $zone))->willReturn(null);
 
         $this->apply($order, $zone);
     }
 
     function it_does_nothing_if_order_has_no_shipping_adjustments(
-        $taxRateResolver,
         Collection $shippingAdjustments,
         OrderInterface $order,
-        TaxRateInterface $taxRate,
         ShipmentInterface $shipment,
-        ShippingMethodInterface $shippingMethod,
         ZoneInterface $zone
     ) {
         $order->getLastShipment()->willReturn($shipment);
-        $shipment->getMethod()->willReturn($shippingMethod);
-        $taxRateResolver->resolve($shippingMethod, array('zone' => $zone))->willReturn($taxRate);
 
         $order->getAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->willReturn($shippingAdjustments);
         $shippingAdjustments->isEmpty()->willReturn(true);

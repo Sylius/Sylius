@@ -21,7 +21,7 @@ use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class OrderShipmentByZoneTaxesApplicator implements OrderTaxesByZoneApplicatorInterface
+class OrderShipmentTaxesByZoneApplicator implements OrderShipmentTaxesByZoneApplicatorInterface
 {
     /**
      * @var CalculatorInterface
@@ -60,19 +60,18 @@ class OrderShipmentByZoneTaxesApplicator implements OrderTaxesByZoneApplicatorIn
             return;
         }
 
-        $taxRate = $this->taxRateResolver->resolve($lastShipment->getMethod(), array('zone' => $zone));
-
-        if (null === $taxRate) {
-            return;
-        }
-
         $shippingAdjustments = $order->getAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT);
         if ($shippingAdjustments->isEmpty()) {
             return;
         }
 
-        $lastShipping = $shippingAdjustments->last();
-        $taxAmount = $this->calculator->calculate($lastShipping->getAmount(), $taxRate);
+        $taxRate = $this->taxRateResolver->resolve($lastShipment->getMethod(), array('zone' => $zone));
+        if (null === $taxRate) {
+            return;
+        }
+
+        $lastShippingAdjustment = $shippingAdjustments->last();
+        $taxAmount = $this->calculator->calculate($lastShippingAdjustment->getAmount(), $taxRate);
 
         $this->addAdjustment($order, $taxAmount, $taxRate->getLabel(), $taxRate->isIncludedInPrice());
     }

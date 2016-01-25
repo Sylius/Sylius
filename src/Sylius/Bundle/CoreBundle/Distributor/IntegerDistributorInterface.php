@@ -17,10 +17,10 @@ namespace Sylius\Bundle\CoreBundle\Distributor;
 interface IntegerDistributorInterface
 {
     /**
-     * @param float $baseAmount
+     * @param float $amount
      * @param int $numberOfTargets
      *
      * @return array
      */
-    public function distribute($baseAmount, $numberOfTargets);
+    public function distribute($amount, $numberOfTargets);
 }

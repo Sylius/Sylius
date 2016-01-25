@@ -11,7 +11,6 @@
 
 namespace spec\Sylius\Component\Order\Model;
 
-use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Order\Model\AdjustableInterface;

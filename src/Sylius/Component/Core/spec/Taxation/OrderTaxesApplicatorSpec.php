@@ -21,8 +21,9 @@ use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Provider\ZoneProviderInterface;
+use Sylius\Component\Core\Taxation\OrderItemsTaxesByZoneApplicatorInterface;
+use Sylius\Component\Core\Taxation\OrderShipmentTaxesByZoneApplicatorInterface;
 use Sylius\Component\Core\Taxation\OrderTaxesApplicatorInterface;
-use Sylius\Component\Core\Taxation\OrderTaxesByZoneApplicatorInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -31,8 +32,8 @@ class OrderTaxesApplicatorSpec extends ObjectBehavior
 {
     function let(
         ZoneProviderInterface $defaultTaxZoneProvider,
-        OrderTaxesByZoneApplicatorInterface $orderShipmentTaxesApplicator,
-        OrderTaxesByZoneApplicatorInterface $orderItemsTaxesApplicator,
+        OrderShipmentTaxesByZoneApplicatorInterface $orderShipmentTaxesApplicator,
+        OrderItemsTaxesByZoneApplicatorInterface $orderItemsTaxesApplicator,
         ZoneMatcherInterface $zoneMatcher
     ) {
         $this->beConstructedWith(

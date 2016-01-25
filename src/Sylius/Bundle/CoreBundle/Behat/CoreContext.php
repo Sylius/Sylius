@@ -35,6 +35,7 @@ use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
 use Sylius\Component\Shipping\Calculator\DefaultCalculators;
 use Sylius\Component\Shipping\ShipmentTransitions;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\User\Model\GroupableInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -439,7 +440,7 @@ class CoreContext extends DefaultContext
      * @Given /^There is shipping method "([^""]*)" with code "([^""]*)" and zone "([^""]*)"$/
      * @Given /^there is an enabled shipping method "([^""]*)" with code "([^""]*)" and zone "([^""]*)"$/
      */
-    public function thereIsShippingMethod($name, $code, $zoneName, $calculator = DefaultCalculators::PER_ITEM_RATE, $taxCategory = null, array $configuration = null, $enabled = true, $flush = true)
+    public function thereIsShippingMethod($name, $code, $zoneName, $calculator = DefaultCalculators::PER_ITEM_RATE, TaxCategoryInterface $taxCategory = null, array $configuration = null, $enabled = true, $flush = true)
     {
         $repository = $this->getRepository('shipping_method');
         $factory = $this->getFactory('shipping_method');

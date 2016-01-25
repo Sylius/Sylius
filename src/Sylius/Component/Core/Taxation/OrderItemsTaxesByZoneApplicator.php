@@ -23,7 +23,7 @@ use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class OrderItemsByZoneTaxesApplicator implements OrderTaxesByZoneApplicatorInterface
+class OrderItemsTaxesByZoneApplicator implements OrderItemsTaxesByZoneApplicatorInterface
 {
     /**
      * @var CalculatorInterface
@@ -65,21 +65,26 @@ class OrderItemsByZoneTaxesApplicator implements OrderTaxesByZoneApplicatorInter
     public function apply(OrderInterface $order, ZoneInterface $zone)
     {
         foreach ($order->getItems() as $item) {
+            $quantity =  $item->getQuantity();
+            if (0 === $quantity) {
+                continue;
+            }
+
             $taxRate = $this->taxRateResolver->resolve($item->getProduct(), array('zone' => $zone));
 
             if (null === $taxRate) {
                 continue;
             }
 
-            $units = $item->getUnits();
-            if ($units->isEmpty()) {
-                continue;
-            }
-
             $totalTaxAmount = $this->calculator->calculate($item->getTotal(), $taxRate);
-            $splitTaxes = $this->distributor->distribute($totalTaxAmount, $item->getUnits()->count());
+            $splitTaxes = $this->distributor->distribute($totalTaxAmount, $quantity);
 
+            $units = $item->getUnits();
             foreach ($splitTaxes as $key => $tax) {
+                if (0 === $tax) {
+                    continue;
+                }
+
                 $this->addAdjustment($units->get($key), $tax, $taxRate->getLabel(), $taxRate->isIncludedInPrice());
             }
         }

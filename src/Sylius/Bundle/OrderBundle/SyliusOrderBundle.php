@@ -32,16 +32,6 @@ class SyliusOrderBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    public function build(ContainerBuilder $container)
-    {
-        parent::build($container);
-
-        $container->addCompilerPass(new RegisterAdjustmentFactoryPass());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public static function getSupportedDrivers()
     {
         return array(
