@@ -175,4 +175,12 @@ class TaxRate implements TaxRateInterface
     {
         $this->calculator = $calculator;
     }
+
+    /**
+     * @return string
+     */
+    public function getLabel()
+    {
+        return sprintf('%s (%s%%)', $this->name, (float) $this->getAmountAsPercentage());
+    }
 }

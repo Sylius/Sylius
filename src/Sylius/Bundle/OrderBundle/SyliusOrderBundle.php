@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\OrderBundle;
 
+use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\RegisterAdjustmentFactoryPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Order\Model\AdjustmentInterface;
@@ -19,6 +20,7 @@ use Sylius\Component\Order\Model\IdentityInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Model\OrderItemUnitInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Sales order management bundle.
@@ -27,6 +29,16 @@ use Sylius\Component\Order\Model\OrderItemUnitInterface;
  */
 class SyliusOrderBundle extends AbstractResourceBundle
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+
+        $container->addCompilerPass(new RegisterAdjustmentFactoryPass());
+    }
+
     /**
      * {@inheritdoc}
      */

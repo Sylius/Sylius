@@ -13,14 +13,14 @@ namespace Sylius\Component\Core\Taxation;
 
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class OrderShipmentTaxesApplicator implements OrderShipmentTaxesApplicatorInterface
+final class OrderShipmentTaxesApplicator implements OrderShipmentTaxesApplicatorInterface
 {
     /**
      * @var CalculatorInterface
@@ -28,15 +28,15 @@ class OrderShipmentTaxesApplicator implements OrderShipmentTaxesApplicatorInterf
     private $calculator;
 
     /**
-     * @var FactoryInterface
+     * @var AdjustmentFactoryInterface
      */
     private $adjustmentFactory;
 
     /**
      * @param CalculatorInterface $calculator
-     * @param FactoryInterface $adjustmentFactory
+     * @param AdjustmentFactoryInterface $adjustmentFactory
      */
-    public function __construct(CalculatorInterface $calculator, FactoryInterface $adjustmentFactory)
+    public function __construct(CalculatorInterface $calculator, AdjustmentFactoryInterface $adjustmentFactory)
     {
         $this->calculator = $calculator;
         $this->adjustmentFactory = $adjustmentFactory;
@@ -53,12 +53,9 @@ class OrderShipmentTaxesApplicator implements OrderShipmentTaxesApplicatorInterf
         }
 
         $lastShipping = $shippingAdjustments->last();
-
-        $percentageAmount = $taxRate->getAmountAsPercentage();
         $taxAmount = $this->calculator->calculate($lastShipping->getAmount(), $taxRate);
-        $label = sprintf('%s (%s%%)', $taxRate->getName(), (float) $percentageAmount);
 
-        $this->addAdjustment($order, $taxAmount, $label, $taxRate->isIncludedInPrice());
+        $this->addAdjustment($order, $taxAmount, $taxRate->getLabel(), $taxRate->isIncludedInPrice());
     }
 
     /**
@@ -70,12 +67,7 @@ class OrderShipmentTaxesApplicator implements OrderShipmentTaxesApplicatorInterf
     private function addAdjustment($order, $taxAmount, $label, $included)
     {
         /** @var AdjustmentInterface $shippingTaxAdjustment */
-        $shippingTaxAdjustment = $this->adjustmentFactory->createNew();
-        $shippingTaxAdjustment->setType(AdjustmentInterface::TAX_ADJUSTMENT);
-        $shippingTaxAdjustment->setDescription($label);
-        $shippingTaxAdjustment->setAmount($taxAmount);
-        $shippingTaxAdjustment->setNeutral($included);
-
+        $shippingTaxAdjustment = $this->adjustmentFactory->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, $label, $taxAmount, $included);
         $order->addAdjustment($shippingTaxAdjustment);
     }
 }

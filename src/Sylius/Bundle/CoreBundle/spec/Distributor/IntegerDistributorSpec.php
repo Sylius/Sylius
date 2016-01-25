@@ -46,7 +46,7 @@ class IntegerDistributorSpec extends ObjectBehavior
 
     function it_throws_exception_if_number_of_targets_is_not_integer_or_below_1()
     {
-        $this->shouldThrow(new \InvalidArgumentException('Tax items number must be an integer, bigger than 0.'))->during('distribute', array(1000, 'test'));
-        $this->shouldThrow(new \InvalidArgumentException('Tax items number must be an integer, bigger than 0.'))->during('distribute', array(1000, 0));
+        $this->shouldThrow(new \InvalidArgumentException('Number of targets must be an integer, bigger than 0.'))->during('distribute', array(1000, 'test'));
+        $this->shouldThrow(new \InvalidArgumentException('Number of targets must be an integer, bigger than 0.'))->during('distribute', array(1000, 0));
     }
 }

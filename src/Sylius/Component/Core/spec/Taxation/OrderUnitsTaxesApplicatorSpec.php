@@ -13,11 +13,12 @@ namespace spec\Sylius\Component\Core\Taxation;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Distributor\TaxesDistributorInterface;
+use Sylius\Bundle\CoreBundle\Distributor\IntegerDistributorInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Taxation\OrderUnitsTaxesApplicatorInterface;
+use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
@@ -29,8 +30,8 @@ class OrderUnitsTaxesApplicatorSpec extends ObjectBehavior
 {
     function let(
         CalculatorInterface $calculator,
-        FactoryInterface $adjustmentsFactory,
-        TaxesDistributorInterface $distributor
+        AdjustmentFactoryInterface $adjustmentsFactory,
+        IntegerDistributorInterface $distributor
     ) {
         $this->beConstructedWith($calculator, $adjustmentsFactory, $distributor);
     }
@@ -57,8 +58,7 @@ class OrderUnitsTaxesApplicatorSpec extends ObjectBehavior
         OrderItemUnitInterface $unit2,
         TaxRateInterface $taxRate
     ) {
-        $taxRate->getAmountAsPercentage()->willReturn(10);
-        $taxRate->getName()->willReturn('Simple tax');
+        $taxRate->getLabel()->willReturn('Simple tax (10%)');
         $taxRate->isIncludedInPrice()->willReturn(false);
 
         $orderItem->getTotal()->willReturn(1000);
@@ -73,17 +73,7 @@ class OrderUnitsTaxesApplicatorSpec extends ObjectBehavior
 
         $distributor->distribute(100, 2)->willReturn(array(50, 50));
 
-        $adjustmentsFactory->createNew()->willReturn($taxAdjustment1, $taxAdjustment2);
-
-        $taxAdjustment1->setDescription('Simple tax (10%)')->shouldBeCalled();
-        $taxAdjustment1->setAmount(50)->shouldBeCalled();
-        $taxAdjustment1->setType(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
-        $taxAdjustment1->setNeutral(false)->shouldBeCalled();
-
-        $taxAdjustment2->setDescription('Simple tax (10%)')->shouldBeCalled();
-        $taxAdjustment2->setAmount(50)->shouldBeCalled();
-        $taxAdjustment2->setType(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
-        $taxAdjustment2->setNeutral(false)->shouldBeCalled();
+        $adjustmentsFactory->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, 'Simple tax (10%)', 50, false)->willReturn($taxAdjustment1, $taxAdjustment2);
 
         $unit1->addAdjustment($taxAdjustment1)->shouldBeCalled();
         $unit2->addAdjustment($taxAdjustment2)->shouldBeCalled();

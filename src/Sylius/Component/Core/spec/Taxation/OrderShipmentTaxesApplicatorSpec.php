@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Taxation\OrderShipmentTaxesApplicatorInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 
@@ -27,7 +27,7 @@ class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
 {
     function let(
         CalculatorInterface $calculator,
-        FactoryInterface $adjustmentsFactory
+        AdjustmentFactoryInterface $adjustmentsFactory
     ) {
         $this->beConstructedWith($calculator, $adjustmentsFactory);
     }
@@ -51,8 +51,7 @@ class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
         OrderInterface $order,
         TaxRateInterface $taxRate
     ) {
-        $taxRate->getAmountAsPercentage()->willReturn(10);
-        $taxRate->getName()->willReturn('Simple tax');
+        $taxRate->getLabel()->willReturn('Simple tax (10%)');
         $taxRate->isIncludedInPrice()->willReturn(false);
 
         $order->getAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->willReturn($shippingAdjustments);
@@ -62,12 +61,7 @@ class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
 
         $calculator->calculate(1000, $taxRate)->willReturn(100);
 
-        $adjustmentsFactory->createNew()->willReturn($shippingTaxAdjustment);
-        $shippingTaxAdjustment->setDescription('Simple tax (10%)')->shouldBeCalled();
-        $shippingTaxAdjustment->setAmount(100)->shouldBeCalled();
-        $shippingTaxAdjustment->setType(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
-        $shippingTaxAdjustment->setNeutral(false)->shouldBeCalled();
-
+        $adjustmentsFactory->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, 'Simple tax (10%)', 100, false)->willReturn($shippingTaxAdjustment);
         $order->addAdjustment($shippingTaxAdjustment)->shouldBeCalled();
 
         $this->apply($order, $taxRate);

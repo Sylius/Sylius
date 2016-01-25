@@ -11,12 +11,11 @@
 
 namespace Sylius\Component\Core\Taxation;
 
-use Sylius\Bundle\CoreBundle\Distributor\TaxesDistributorInterface;
+use Sylius\Bundle\CoreBundle\Distributor\IntegerDistributorInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
-use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 
@@ -31,21 +30,21 @@ class OrderUnitsTaxesApplicator implements OrderUnitsTaxesApplicatorInterface
     private $calculator;
 
     /**
-     * @var FactoryInterface
+     * @var AdjustmentFactoryInterface
      */
     private $adjustmentFactory;
 
     /**
-     * @var TaxesDistributorInterface
+     * @var IntegerDistributorInterface
      */
     private $distributor;
 
     /**
      * @param CalculatorInterface $calculator
-     * @param FactoryInterface $adjustmentFactory
-     * @param TaxesDistributorInterface $distributor
+     * @param AdjustmentFactoryInterface $adjustmentFactory
+     * @param IntegerDistributorInterface $distributor
      */
-    public function __construct(CalculatorInterface $calculator, FactoryInterface $adjustmentFactory, TaxesDistributorInterface $distributor)
+    public function __construct(CalculatorInterface $calculator, AdjustmentFactoryInterface $adjustmentFactory, IntegerDistributorInterface $distributor)
     {
         $this->calculator = $calculator;
         $this->adjustmentFactory = $adjustmentFactory;
@@ -62,14 +61,11 @@ class OrderUnitsTaxesApplicator implements OrderUnitsTaxesApplicatorInterface
             return;
         }
 
-        $percentageAmount = $taxRate->getAmountAsPercentage();
         $totalTaxAmount = $this->calculator->calculate($item->getTotal(), $taxRate);
-        $label = sprintf('%s (%s%%)', $taxRate->getName(), (float) $percentageAmount);
-
         $splitTaxes = $this->distributor->distribute($totalTaxAmount, $item->getUnits()->count());
 
         foreach ($splitTaxes as $key => $tax) {
-            $this->addAdjustment($units->get($key), $tax, $label, $taxRate->isIncludedInPrice());
+            $this->addAdjustment($units->get($key), $tax, $taxRate->getLabel(), $taxRate->isIncludedInPrice());
         }
     }
 
@@ -81,13 +77,7 @@ class OrderUnitsTaxesApplicator implements OrderUnitsTaxesApplicatorInterface
      */
     private function addAdjustment(OrderItemUnitInterface $unit, $taxAmount, $label, $included)
     {
-        /** @var AdjustmentInterface $unitTaxAdjustment */
-        $unitTaxAdjustment = $this->adjustmentFactory->createNew();
-        $unitTaxAdjustment->setType(AdjustmentInterface::TAX_ADJUSTMENT);
-        $unitTaxAdjustment->setDescription($label);
-        $unitTaxAdjustment->setAmount($taxAmount);
-        $unitTaxAdjustment->setNeutral($included);
-
+        $unitTaxAdjustment = $this->adjustmentFactory->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, $label, $taxAmount, $included);
         $unit->addAdjustment($unitTaxAdjustment);
     }
 }

@@ -460,19 +460,6 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getAdjustmentsTotalRecursively($type = null)
-    {
-        $total = 0;
-        foreach ($this->getAdjustmentsRecursively($type) as $adjustment) {
-            $total += $adjustment->getAmount();
-        }
-
-        return $total;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function removeAdjustments($type)
     {
         foreach ($this->getAdjustments($type) as $adjustment) {

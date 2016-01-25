@@ -206,8 +206,9 @@ class OrderTaxesApplicatorSpec extends ObjectBehavior
         TaxRateInterface $itemTaxRate,
         ZoneInterface $zone
     ) {
+        $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
         $order->getItems()->willReturn($items);
-        $items->isEmpty()->willReturn(false);
+        $order->isEmpty()->willReturn(false);
 
         $items->count()->willReturn(1);
         $items->getIterator()->willReturn($iterator, $iterator);
@@ -249,8 +250,9 @@ class OrderTaxesApplicatorSpec extends ObjectBehavior
         TaxRateInterface $itemTaxRate,
         ZoneInterface $zone
     ) {
+        $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
         $order->getItems()->willReturn($items);
-        $items->isEmpty()->willReturn(false);
+        $order->isEmpty()->willReturn(false);
 
         $items->count()->willReturn(1);
         $items->getIterator()->willReturn($iterator, $iterator);
