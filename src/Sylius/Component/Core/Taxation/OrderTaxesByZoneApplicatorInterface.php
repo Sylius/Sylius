@@ -11,17 +11,16 @@
 
 namespace Sylius\Component\Core\Taxation;
 
+use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Taxation\Model\TaxRateInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface OrderShipmentTaxesApplicatorInterface
+interface OrderTaxesByZoneApplicatorInterface
 {
     /**
      * @param OrderInterface $order
-     * @param TaxRateInterface $taxRate
      */
-    public function apply(OrderInterface $order, TaxRateInterface $taxRate);
+    public function apply(OrderInterface $order, ZoneInterface $zone);
 }

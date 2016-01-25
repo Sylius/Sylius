@@ -12,17 +12,18 @@
 namespace Sylius\Component\Core\Taxation;
 
 use Sylius\Bundle\CoreBundle\Distributor\IntegerDistributorInterface;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
-use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
-use Sylius\Component\Taxation\Model\TaxRateInterface;
+use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class OrderUnitsTaxesApplicator implements OrderUnitsTaxesApplicatorInterface
+class OrderItemsByZoneTaxesApplicator implements OrderTaxesByZoneApplicatorInterface
 {
     /**
      * @var CalculatorInterface
@@ -40,32 +41,47 @@ class OrderUnitsTaxesApplicator implements OrderUnitsTaxesApplicatorInterface
     private $distributor;
 
     /**
+     * @var TaxRateResolverInterface
+     */
+    private $taxRateResolver;
+
+    /**
      * @param CalculatorInterface $calculator
      * @param AdjustmentFactoryInterface $adjustmentFactory
      * @param IntegerDistributorInterface $distributor
+     * @param TaxRateResolverInterface $taxRateResolver
      */
-    public function __construct(CalculatorInterface $calculator, AdjustmentFactoryInterface $adjustmentFactory, IntegerDistributorInterface $distributor)
+    public function __construct(CalculatorInterface $calculator, AdjustmentFactoryInterface $adjustmentFactory, IntegerDistributorInterface $distributor, TaxRateResolverInterface $taxRateResolver)
     {
         $this->calculator = $calculator;
         $this->adjustmentFactory = $adjustmentFactory;
         $this->distributor = $distributor;
+        $this->taxRateResolver = $taxRateResolver;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function apply(OrderItemInterface $item, TaxRateInterface $taxRate)
+    public function apply(OrderInterface $order, ZoneInterface $zone)
     {
-        $units = $item->getUnits();
-        if ($units->isEmpty()) {
-            return;
-        }
+        foreach ($order->getItems() as $item) {
+            $taxRate = $this->taxRateResolver->resolve($item->getProduct(), array('zone' => $zone));
 
-        $totalTaxAmount = $this->calculator->calculate($item->getTotal(), $taxRate);
-        $splitTaxes = $this->distributor->distribute($totalTaxAmount, $item->getUnits()->count());
+            if (null === $taxRate) {
+                continue;
+            }
 
-        foreach ($splitTaxes as $key => $tax) {
-            $this->addAdjustment($units->get($key), $tax, $taxRate->getLabel(), $taxRate->isIncludedInPrice());
+            $units = $item->getUnits();
+            if ($units->isEmpty()) {
+                continue;
+            }
+
+            $totalTaxAmount = $this->calculator->calculate($item->getTotal(), $taxRate);
+            $splitTaxes = $this->distributor->distribute($totalTaxAmount, $item->getUnits()->count());
+
+            foreach ($splitTaxes as $key => $tax) {
+                $this->addAdjustment($units->get($key), $tax, $taxRate->getLabel(), $taxRate->isIncludedInPrice());
+            }
         }
     }
 

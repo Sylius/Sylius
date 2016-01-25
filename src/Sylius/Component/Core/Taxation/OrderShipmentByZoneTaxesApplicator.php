@@ -11,16 +11,17 @@
 
 namespace Sylius\Component\Core\Taxation;
 
+use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
-use Sylius\Component\Taxation\Model\TaxRateInterface;
+use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class OrderShipmentTaxesApplicator implements OrderShipmentTaxesApplicatorInterface
+class OrderShipmentByZoneTaxesApplicator implements OrderTaxesByZoneApplicatorInterface
 {
     /**
      * @var CalculatorInterface
@@ -33,20 +34,38 @@ final class OrderShipmentTaxesApplicator implements OrderShipmentTaxesApplicator
     private $adjustmentFactory;
 
     /**
+     * @var TaxRateResolverInterface
+     */
+    private $taxRateResolver;
+
+    /**
      * @param CalculatorInterface $calculator
      * @param AdjustmentFactoryInterface $adjustmentFactory
+     * @param TaxRateResolverInterface $taxRateResolver
      */
-    public function __construct(CalculatorInterface $calculator, AdjustmentFactoryInterface $adjustmentFactory)
+    public function __construct(CalculatorInterface $calculator, AdjustmentFactoryInterface $adjustmentFactory, TaxRateResolverInterface $taxRateResolver)
     {
         $this->calculator = $calculator;
         $this->adjustmentFactory = $adjustmentFactory;
+        $this->taxRateResolver = $taxRateResolver;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function apply(OrderInterface $order, TaxRateInterface $taxRate)
+    public function apply(OrderInterface $order, ZoneInterface $zone)
     {
+        $lastShipment = $order->getLastShipment();
+        if (!$lastShipment) {
+            return;
+        }
+
+        $taxRate = $this->taxRateResolver->resolve($lastShipment->getMethod(), array('zone' => $zone));
+
+        if (null === $taxRate) {
+            return;
+        }
+
         $shippingAdjustments = $order->getAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT);
         if ($shippingAdjustments->isEmpty()) {
             return;

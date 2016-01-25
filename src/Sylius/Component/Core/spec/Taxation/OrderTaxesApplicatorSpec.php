@@ -20,15 +20,9 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\ShipmentInterface;
-use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Core\Model\TaxRateInterface;
 use Sylius\Component\Core\Provider\ZoneProviderInterface;
-use Sylius\Component\Core\Taxation\OrderShipmentTaxesApplicatorInterface;
 use Sylius\Component\Core\Taxation\OrderTaxesApplicatorInterface;
-use Sylius\Component\Core\Taxation\OrderUnitsTaxesApplicatorInterface;
-use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
+use Sylius\Component\Core\Taxation\OrderTaxesByZoneApplicatorInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -37,16 +31,14 @@ class OrderTaxesApplicatorSpec extends ObjectBehavior
 {
     function let(
         ZoneProviderInterface $defaultTaxZoneProvider,
-        OrderShipmentTaxesApplicatorInterface $orderShipmentTaxesApplicator,
-        OrderUnitsTaxesApplicatorInterface $orderUnitsTaxesApplicator,
-        TaxRateResolverInterface $taxRateResolver,
+        OrderTaxesByZoneApplicatorInterface $orderShipmentTaxesApplicator,
+        OrderTaxesByZoneApplicatorInterface $orderItemsTaxesApplicator,
         ZoneMatcherInterface $zoneMatcher
     ) {
         $this->beConstructedWith(
             $defaultTaxZoneProvider,
             $orderShipmentTaxesApplicator,
-            $orderUnitsTaxesApplicator,
-            $taxRateResolver,
+            $orderItemsTaxesApplicator,
             $zoneMatcher
         );
     }
@@ -63,19 +55,13 @@ class OrderTaxesApplicatorSpec extends ObjectBehavior
 
     function it_applies_taxes_for_order_items_units_and_shipment(
         $orderShipmentTaxesApplicator,
-        $orderUnitsTaxesApplicator,
-        $taxRateResolver,
+        $orderItemsTaxesApplicator,
         $zoneMatcher,
         AddressInterface $address,
         \Iterator $iterator,
         Collection $items,
         OrderInterface $order,
         OrderItemInterface $orderItem,
-        ProductInterface $product,
-        ShipmentInterface $shipment,
-        ShippingMethodInterface $shippingMethod,
-        TaxRateInterface $itemTaxRate,
-        TaxRateInterface $shippingTaxRate,
         ZoneInterface $zone
     ) {
         $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
@@ -94,21 +80,13 @@ class OrderTaxesApplicatorSpec extends ObjectBehavior
         $order->getShippingAddress()->willReturn($address);
         $zoneMatcher->match($address)->willReturn($zone);
 
-        $orderItem->getProduct()->willReturn($product);
-        $taxRateResolver->resolve($product, array('zone' => $zone))->willReturn($itemTaxRate);
-
-        $orderUnitsTaxesApplicator->apply($orderItem, $itemTaxRate)->shouldBeCalled();
-
-        $order->getLastShipment()->willReturn($shipment);
-        $shipment->getMethod()->willReturn($shippingMethod);
-        $taxRateResolver->resolve($shippingMethod, array('zone' => $zone))->willReturn($shippingTaxRate);
-
-        $orderShipmentTaxesApplicator->apply($order, $shippingTaxRate)->shouldBeCalled();
+        $orderItemsTaxesApplicator->apply($order, $zone)->shouldBeCalled();
+        $orderShipmentTaxesApplicator->apply($order, $zone)->shouldBeCalled();
 
         $this->apply($order);
     }
 
-    function it_does_not_apply_taxes_if_there_is_no_order_item(Collection $items, OrderInterface $order)
+    function it_does_not_apply_taxes_if_there_is_no_order_item(OrderInterface $order)
     {
         $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
         $order->getItems()->willReturn(array());
@@ -121,8 +99,8 @@ class OrderTaxesApplicatorSpec extends ObjectBehavior
 
     function it_does_not_apply_taxes_if_there_is_no_tax_zone(
         $defaultTaxZoneProvider,
-        $taxRateResolver,
         $zoneMatcher,
+        $orderItemsTaxesApplicator,
         AddressInterface $address,
         \Iterator $iterator,
         Collection $items,
@@ -146,136 +124,7 @@ class OrderTaxesApplicatorSpec extends ObjectBehavior
         $zoneMatcher->match($address)->willReturn(null);
         $defaultTaxZoneProvider->getZone()->willReturn(null);
 
-        $taxRateResolver->resolve(Argument::any())->shouldNotBeCalled();
-
-        $this->apply($order);
-    }
-
-    function it_does_not_apply_taxes_to_item_units_if_tax_rate_cannot_be_resolved(
-        $orderShipmentTaxesApplicator,
-        $orderUnitsTaxesApplicator,
-        $taxRateResolver,
-        $zoneMatcher,
-        AddressInterface $address,
-        \Iterator $iterator,
-        Collection $items,
-        OrderInterface $order,
-        OrderItemInterface $orderItem,
-        ProductInterface $product,
-        ZoneInterface $zone
-    ) {
-        $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
-        $order->getItems()->willReturn($items);
-        $order->isEmpty()->willReturn(false);
-
-        $items->count()->willReturn(1);
-        $items->getIterator()->willReturn($iterator);
-        $iterator->rewind()->shouldBeCalled();
-        $iterator->valid()->willReturn(true, false)->shouldBeCalled();
-        $iterator->current()->willReturn($orderItem);
-        $iterator->next()->shouldBeCalled();
-
-        $orderItem->removeAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
-
-        $order->getShippingAddress()->willReturn($address);
-        $zoneMatcher->match($address)->willReturn($zone);
-        $orderItem->getProduct()->willReturn($product);
-
-        $taxRateResolver->resolve($product, array('zone' => $zone))->willReturn(null);
-
-        $orderUnitsTaxesApplicator->apply(Argument::any())->shouldNotBeCalled();
-
-        $order->getLastShipment()->willReturn(false);
-
-        $orderShipmentTaxesApplicator->apply(Argument::any())->shouldNotBeCalled();
-
-        $this->apply($order);
-    }
-
-    function it_does_not_apply_shipment_taxes_if_there_is_no_shipment(
-        $orderShipmentTaxesApplicator,
-        $orderUnitsTaxesApplicator,
-        $taxRateResolver,
-        $zoneMatcher,
-        AddressInterface $address,
-        \Iterator $iterator,
-        Collection $items,
-        OrderInterface $order,
-        OrderItemInterface $orderItem,
-        ProductInterface $product,
-        TaxRateInterface $itemTaxRate,
-        ZoneInterface $zone
-    ) {
-        $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
-        $order->getItems()->willReturn($items);
-        $order->isEmpty()->willReturn(false);
-
-        $items->count()->willReturn(1);
-        $items->getIterator()->willReturn($iterator, $iterator);
-        $iterator->rewind()->shouldBeCalled();
-        $iterator->valid()->willReturn(true, false, true, false)->shouldBeCalled();
-        $iterator->current()->willReturn($orderItem, $orderItem);
-        $iterator->next()->shouldBeCalled();
-
-        $orderItem->removeAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
-
-        $order->getShippingAddress()->willReturn($address);
-        $zoneMatcher->match($address)->willReturn($zone);
-
-        $orderItem->getProduct()->willReturn($product);
-        $taxRateResolver->resolve($product, array('zone' => $zone))->willReturn($itemTaxRate);
-
-        $orderUnitsTaxesApplicator->apply($orderItem, $itemTaxRate)->shouldBeCalled();
-
-        $order->getLastShipment()->willReturn(false);
-
-        $orderShipmentTaxesApplicator->apply(Argument::any())->shouldNotBeCalled();
-
-        $this->apply($order);
-    }
-
-    function it_does_not_apply_taxes_for_shipment_if_shipment_tax_rate_cannot_be_resolved(
-        $orderShipmentTaxesApplicator,
-        $orderUnitsTaxesApplicator,
-        $taxRateResolver,
-        $zoneMatcher,
-        AddressInterface $address,
-        \Iterator $iterator,
-        Collection $items,
-        OrderInterface $order,
-        OrderItemInterface $orderItem,
-        ProductInterface $product,
-        ShipmentInterface $shipment,
-        ShippingMethodInterface $shippingMethod,
-        TaxRateInterface $itemTaxRate,
-        ZoneInterface $zone
-    ) {
-        $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
-        $order->getItems()->willReturn($items);
-        $order->isEmpty()->willReturn(false);
-
-        $items->count()->willReturn(1);
-        $items->getIterator()->willReturn($iterator, $iterator);
-        $iterator->rewind()->shouldBeCalled();
-        $iterator->valid()->willReturn(true, false, true, false)->shouldBeCalled();
-        $iterator->current()->willReturn($orderItem, $orderItem);
-        $iterator->next()->shouldBeCalled();
-
-        $orderItem->removeAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
-
-        $order->getShippingAddress()->willReturn($address);
-        $zoneMatcher->match($address)->willReturn($zone);
-
-        $orderItem->getProduct()->willReturn($product);
-        $taxRateResolver->resolve($product, array('zone' => $zone))->willReturn($itemTaxRate);
-
-        $orderUnitsTaxesApplicator->apply($orderItem, $itemTaxRate)->shouldBeCalled();
-
-        $order->getLastShipment()->willReturn($shipment);
-        $shipment->getMethod()->willReturn($shippingMethod);
-        $taxRateResolver->resolve($shippingMethod, array('zone' => $zone))->willReturn(null);
-
-        $orderShipmentTaxesApplicator->apply(Argument::any())->shouldNotBeCalled();
+        $orderItemsTaxesApplicator->apply(Argument::any())->shouldNotBeCalled();
 
         $this->apply($order);
     }

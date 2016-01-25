@@ -17,7 +17,6 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Provider\ZoneProviderInterface;
-use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -31,19 +30,14 @@ class OrderTaxesApplicator implements OrderTaxesApplicatorInterface
     protected $defaultTaxZoneProvider;
 
     /**
-     * @var OrderShipmentTaxesApplicatorInterface
+     * @var OrderTaxesByZoneApplicatorInterface
      */
     protected $orderShipmentTaxesApplicator;
 
     /**
-     * @var OrderUnitsTaxesApplicatorInterface
+     * @var OrderTaxesByZoneApplicatorInterface
      */
-    protected $orderUnitsTaxesApplicator;
-
-    /**
-     * @var TaxRateResolverInterface
-     */
-    protected $taxRateResolver;
+    protected $orderItemsTaxesApplicator;
 
     /**
      * @var ZoneMatcherInterface
@@ -52,22 +46,19 @@ class OrderTaxesApplicator implements OrderTaxesApplicatorInterface
 
     /**
      * @param ZoneProviderInterface $defaultTaxZoneProvider
-     * @param OrderShipmentTaxesApplicatorInterface $orderShipmentTaxesApplicator
-     * @param OrderUnitsTaxesApplicatorInterface $orderUnitsTaxesApplicator
-     * @param TaxRateResolverInterface $taxRateResolver
+     * @param OrderTaxesByZoneApplicatorInterface $orderShipmentTaxesApplicator
+     * @param OrderTaxesByZoneApplicatorInterface $orderItemsTaxesApplicator
      * @param ZoneMatcherInterface $zoneMatcher
      */
     public function __construct(
         ZoneProviderInterface $defaultTaxZoneProvider,
-        OrderShipmentTaxesApplicatorInterface $orderShipmentTaxesApplicator,
-        OrderUnitsTaxesApplicatorInterface $orderUnitsTaxesApplicator,
-        TaxRateResolverInterface $taxRateResolver,
+        OrderTaxesByZoneApplicatorInterface $orderShipmentTaxesApplicator,
+        OrderTaxesByZoneApplicatorInterface $orderItemsTaxesApplicator,
         ZoneMatcherInterface $zoneMatcher
     ) {
         $this->defaultTaxZoneProvider = $defaultTaxZoneProvider;
         $this->orderShipmentTaxesApplicator = $orderShipmentTaxesApplicator;
-        $this->orderUnitsTaxesApplicator = $orderUnitsTaxesApplicator;
-        $this->taxRateResolver = $taxRateResolver;
+        $this->orderItemsTaxesApplicator = $orderItemsTaxesApplicator;
         $this->zoneMatcher = $zoneMatcher;
     }
 
@@ -87,45 +78,8 @@ class OrderTaxesApplicator implements OrderTaxesApplicatorInterface
             return;
         }
 
-        $this->processUnitsTaxes($order, $zone);
-        $this->processShipmentTaxes($order, $zone);
-    }
-
-    /**
-     * @param OrderInterface $order
-     * @param ZoneInterface $zone
-     */
-    protected function processUnitsTaxes(OrderInterface $order, ZoneInterface $zone)
-    {
-        foreach ($order->getItems() as $item) {
-            $rate = $this->taxRateResolver->resolve($item->getProduct(), array('zone' => $zone));
-
-            if (null === $rate) {
-                continue;
-            }
-
-            $this->orderUnitsTaxesApplicator->apply($item, $rate);
-        }
-    }
-
-    /**
-     * @param OrderInterface $order
-     * @param ZoneInterface $zone
-     */
-    protected function processShipmentTaxes(OrderInterface $order, ZoneInterface $zone)
-    {
-        $lastShipment = $order->getLastShipment();
-        if (!$lastShipment) {
-            return;
-        }
-
-        $rate = $this->taxRateResolver->resolve($lastShipment->getMethod(), array('zone' => $zone));
-
-        if (null === $rate) {
-            return;
-        }
-
-        $this->orderShipmentTaxesApplicator->apply($order, $rate);
+        $this->orderItemsTaxesApplicator->apply($order, $zone);
+        $this->orderShipmentTaxesApplicator->apply($order, $zone);
     }
 
     /**
