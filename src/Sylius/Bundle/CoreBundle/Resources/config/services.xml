@@ -115,6 +115,8 @@
         <parameter key="sylius.translation.locale_provider.contextual.class">Sylius\Bundle\CoreBundle\Locale\TranslationLocaleProvider</parameter>
 
         <parameter key="sylius.based_on_id_invoice_number_generator.class" >Sylius\Component\Core\Payment\IdBasedInvoiceNumberGenerator</parameter>
+
+        <parameter key="sylius.form.type.product_review.class">Sylius\Bundle\CoreBundle\Form\Type\ProductReviewType</parameter>
     </parameters>
 
     <services>
@@ -392,15 +394,15 @@
             <tag name="kernel.event_listener" event="sylius.taxonomy.pre_create" method="uploadTaxonomyImage" />
             <tag name="kernel.event_listener" event="sylius.taxonomy.pre_update" method="uploadTaxonomyImage" />
         </service>
-        <service id="sylius.listener.product_delete" class="%sylius.listener.product_delete.class%">
-            <argument type="service" id="sylius.manager.product_review" />
-            <tag name="kernel.event_listener" event="sylius.product.post_delete" method="removeProductReviews" />
-        </service>
         <service id="sylius.listener.customer_delete" class="%sylius.listener.customer_delete.class%">
             <argument type="service" id="sylius.repository.product_review" />
             <argument type="service" id="sylius.manager.product_review" />
             <argument type="service" id="sylius.review.calculator.average_rating" />
             <tag name="kernel.event_listener" event="sylius.customer.pre_delete" method="removeCustomerReviews" />
+        </service>
+        <service id="sylius.listener.product_delete" class="%sylius.listener.product_delete.class%">
+            <argument type="service" id="service_container"/>
+            <tag name="doctrine.event_listener" event="postSoftDelete" method="postSoftDelete" />
         </service>
 
         <service id="sylius.image_uploader" class="%sylius.image_uploader.class%">
@@ -585,6 +587,11 @@
         <service id="sylius.validator.has_enabled_entity" class="%sylius.validator.has_enabled_entity.class%">
             <argument type="service" id="doctrine" />
             <tag name="validator.constraint_validator" alias="sylius_has_enabled_entity" />
+        </service>
+
+        <service id="sylius.form.type.product_review" class="%sylius.form.type.product_review.class%">
+            <argument>%sylius.model.product_review.class%</argument>
+            <tag name="form.type" alias="sylius_product_review" />
         </service>
     </services>
 

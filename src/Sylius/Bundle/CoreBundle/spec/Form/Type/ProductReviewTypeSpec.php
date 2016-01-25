@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ProductBundle\Form\Type;
+namespace spec\Sylius\Bundle\CoreBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 
@@ -25,7 +25,7 @@ class ProductReviewTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ProductBundle\Form\Type\ProductReviewType');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\ProductReviewType');
     }
 
     function it_extends_review_type()

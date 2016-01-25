@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Product\Model;
+namespace Sylius\Bundle\CoreBundle\Form\Type;
 
-use Sylius\Component\Review\Model\ReviewableInterface;
+use Sylius\Bundle\ReviewBundle\Form\Type\ReviewType;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
-interface ReviewableProductInterface extends ReviewableInterface
+class  ProductReviewType extends ReviewType
 {
 }

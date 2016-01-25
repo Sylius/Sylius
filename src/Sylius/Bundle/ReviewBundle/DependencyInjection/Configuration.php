@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ReviewBundle\DependencyInjection;
 
+use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -22,6 +23,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  * sections are normalized, and merged.
  *
  * @author Daniel Richter <nexyz9@gmail.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 class Configuration implements ConfigurationInterface
 {
@@ -40,8 +42,7 @@ class Configuration implements ConfigurationInterface
             ->end()
         ;
 
-        $this->addClassesSection($rootNode);
-        $this->addValidationGroupsSection($rootNode);
+        $this->addResourcesSection($rootNode);
 
         return $treeBuilder;
     }
@@ -49,58 +50,73 @@ class Configuration implements ConfigurationInterface
     /**
      * @param ArrayNodeDefinition $node
      */
-    private function addValidationGroupsSection(ArrayNodeDefinition $node)
+    private function addResourcesSection(ArrayNodeDefinition $node)
     {
         $node
             ->children()
-                ->arrayNode('validation_groups')
-                ->addDefaultsIfNotSet()
+            ->arrayNode('resources')
+                ->useAttributeAsKey('name')
+                ->prototype('array')
                     ->children()
+                        ->scalarNode('subject')->isRequired()->end()
                         ->arrayNode('review')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius', 'sylius_review'))
-                        ->end()
-                        ->arrayNode('review_admin')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                    ->end()
-                ->end()
-            ->end()
-        ;
-    }
-
-    /**
-     * @param ArrayNodeDefinition $node
-     */
-    private function addClassesSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('classes')
-                    ->useAttributeAsKey('name')
-                    ->prototype('array')
-                        ->children()
-                            ->scalarNode('subject')->isRequired()->end()
-                            ->arrayNode('review')
-                                ->isRequired()
-                                ->addDefaultsIfNotSet()
-                                ->children()
-                                    ->scalarNode('model')->isRequired()->end()
-                                    ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                    ->arrayNode('form')
-                                        ->addDefaultsIfNotSet()
-                                        ->children()
-                                            ->scalarNode('default')->defaultValue('Sylius\Bundle\ReviewBundle\Form\Type\ReviewType')->end()
-                                            ->scalarNode('admin')->isRequired()->end()
+                            ->isRequired()
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->isRequired()->end()
+                                        ->scalarNode('interface')->defaultValue('Sylius\Component\Review\Model\ReviewInterface')->end()
+                                        ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->arrayNode('form')
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                                ->scalarNode('default')->defaultValue('Sylius\Bundle\ReviewBundle\Form\Type\ReviewType')->cannotBeEmpty()->end()
+                                                ->scalarNode('admin')->isRequired()->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('validation_groups')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->arrayNode('default')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(array('sylius', 'sylius_review'))
+                                        ->end()
+                                        ->arrayNode('admin')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(array('sylius'))
                                         ->end()
                                     ->end()
                                 ->end()
                             ->end()
-                            ->arrayNode('reviewer')
-                                ->addDefaultsIfNotSet()
-                                ->children()
-                                    ->scalarNode('model')->isRequired()->end()
+                        ->end()
+                        ->arrayNode('reviewer')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->isRequired()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('validation_groups')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->arrayNode('default')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(array('sylius', 'sylius_review'))
+                                        ->end()
+                                        ->arrayNode('admin')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(array('sylius'))
+                                        ->end()
+                                    ->end()
                                 ->end()
                             ->end()
                         ->end()

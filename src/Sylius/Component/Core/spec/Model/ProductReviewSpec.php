@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Product\Model;
+namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
 
@@ -20,7 +20,7 @@ class ProductReviewSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Product\Model\ProductReview');
+        $this->shouldHaveType('Sylius\Component\Core\Model\ProductReview');
     }
 
     function it_extends_review()

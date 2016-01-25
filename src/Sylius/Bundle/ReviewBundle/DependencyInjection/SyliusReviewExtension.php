@@ -12,10 +12,13 @@
 namespace Sylius\Bundle\ReviewBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 class SyliusReviewExtension extends AbstractResourceExtension
 {
@@ -29,49 +32,53 @@ class SyliusReviewExtension extends AbstractResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $config = $this->configure(
-            $config,
-            new Configuration(),
-            $container,
-            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_FORMS
-        );
+        $config = $this->processConfiguration(new Configuration(), $config);
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        foreach ($config['classes'] as $name => $parameters) {
+        $this->registerResources('sylius', $config['driver'], $this->resolveResources($config['resources'], $container), $container);
+
+        foreach ($config['resources'] as $name => $parameters) {
             $this->addRequiredArgumentsToForms($name, $parameters, $container);
         }
+
         foreach ($this->reviewSubjects as $subject) {
             $this->addProperTagToReviewDeleteListener($subject, $container);
+        }
+
+        $configFiles = array(
+            'services.xml',
+        );
+
+        foreach ($configFiles as $configFile) {
+            $loader->load($configFile);
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function process(array $config, ContainerBuilder $container)
+    private function resolveResources(array $resources, ContainerBuilder $container)
     {
         $subjects = array();
-        $convertedConfig = array();
 
-        foreach ($config['classes'] as $subject => $parameters) {
+        foreach ($resources as $subject => $parameters) {
             $this->reviewSubjects[] = $subject;
-
             $subjects[$subject] = $parameters;
-            unset($parameters['subject']);
-
-            $convertedConfig = array_merge($convertedConfig, $this->formatClassesConfiguration($parameters, $subject));
-            $config['validation_groups'] = $this->modifyValidationGroups($config['validation_groups'], $subject);
         }
+
         $container->setParameter('sylius.review.subjects', $subjects);
-        $config['classes'] = $convertedConfig;
 
-        $convertedConfig = array();
-        foreach ($config['validation_groups'] as $subject => $parameters) {
-            $convertedConfig = array_merge($convertedConfig, $this->formatValidationGroups($parameters, $subject));
+        $resolvedResources = array();
+
+        foreach ($resources as $subjectName => $subjectConfig) {
+            foreach ($subjectConfig as $resourceName => $resourceConfig) {
+                if (is_array($resourceConfig)) {
+                    $resolvedResources[$subjectName.'_'.$resourceName] = $resourceConfig;
+                }
+            }
         }
 
-        $config['validation_groups'] = $convertedConfig;
-
-        return parent::process($config, $container);
+        return $resolvedResources;
     }
 
     /**
@@ -81,14 +88,15 @@ class SyliusReviewExtension extends AbstractResourceExtension
      */
     private function addRequiredArgumentsToForms($name, array $parameters, ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('sylius.form.type.'.$name)) {
+        if (!$container->hasDefinition('sylius.form.type.'.$name.'_review')) {
             return;
         }
 
-        foreach ($parameters['form'] as $formName => $form) {
-            $formKey = ('default' === $formName) ? $name : $name.'_'.$formName;
+        $container->getDefinition('sylius.form.type.'.$name.'_review')->addArgument($name);
 
-            $container->getDefinition('sylius.form.type.'.$formKey)->addArgument($parameters['subject']);
+        foreach ($parameters['review']['classes']['form'] as $formName => $form) {
+            $formKey = ('default' === $formName) ? $name.'_review' : $name.'_review_'.$formName;
+            $container->getDefinition('sylius.form.type.'.$formKey)->addArgument($name);
         }
     }
 
@@ -104,58 +112,5 @@ class SyliusReviewExtension extends AbstractResourceExtension
 
         $listenerDefinition = $container->getDefinition('sylius.listener.review_delete');
         $listenerDefinition->addTag('kernel.event_listener', array('event' => 'sylius.'.$resourceName.'_review.post_delete', 'method' => 'recalculateSubjectRating'));
-    }
-
-    /**
-     * @param array  $parameters
-     * @param string $subject
-     *
-     * @return array
-     */
-    private function formatClassesConfiguration(array $parameters, $subject)
-    {
-        $convertedConfig = array();
-        foreach ($parameters as $resource => $classes) {
-            $convertedConfig[$subject.'_'.$resource] = $classes;
-            $convertedConfig[$subject.'_'.$resource]['subject'] = $subject;
-        }
-
-        return $convertedConfig;
-    }
-
-    /**
-     * @param array  $validationGroups
-     * @param string $subject
-     *
-     * @return mixed
-     */
-    private function modifyValidationGroups(array $validationGroups, $subject)
-    {
-        if (!isset($validationGroups[$subject]['review'])) {
-            $validationGroups[$subject]['review'] = array('sylius', 'sylius_review');
-        }
-        if (!isset($validationGroups[$subject]['review_admin'])) {
-            $validationGroups[$subject]['review_admin'] = array('sylius');
-        }
-
-        return $validationGroups;
-    }
-
-    /**
-     * @param array  $parameters
-     * @param string $subject
-     *
-     * @return array
-     */
-    private function formatValidationGroups(array $parameters, $subject)
-    {
-        $convertedConfig = array();
-        foreach ($parameters as $resource => $validationGroups) {
-            if (!is_int($resource)) {
-                $convertedConfig[$subject.'_'.$resource] = $validationGroups;
-            }
-        }
-
-        return $convertedConfig;
     }
 }

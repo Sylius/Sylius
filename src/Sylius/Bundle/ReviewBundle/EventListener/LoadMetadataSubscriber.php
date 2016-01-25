@@ -49,12 +49,12 @@ class LoadMetadataSubscriber implements EventSubscriber
         $metadataFactory = $eventArguments->getEntityManager()->getMetadataFactory();
 
         foreach ($this->subjects as $subject => $class) {
-            if ($class['review']['model'] !== $metadata->getName()) {
+            if ($class['review']['classes']['model'] !== $metadata->getName()) {
                 continue;
             }
 
             $reviewableEntity = $class['subject'];
-            $reviewerEntity = $class['reviewer']['model'];
+            $reviewerEntity = $class['reviewer']['classes']['model'];
             $reviewableEntityMetadata = $metadataFactory->getMetadataFor($reviewableEntity);
             $reviewerEntityMetadata = $metadataFactory->getMetadataFor($reviewerEntity);
 

@@ -45,7 +45,7 @@ class ReviewContext extends DefaultContext
     {
         $subjectType = (isset($reviewHash['subject type'])) ? $reviewHash['subject type'].'_' : '';
 
-        $reviewRepository = $this->getRepository($subjectType.'review');
+        $reviewRepository = $this->getFactory($subjectType.'review');
 
         $review = $reviewRepository->createNew();
 

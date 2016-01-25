@@ -11,44 +11,49 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Event\LifecycleEventArgs;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 class ProductDeleteListener
 {
     /**
-     * @var ObjectManager
+     * @var ContainerInterface
      */
-    private $reviewManager;
+    protected $container;
 
     /**
-     * @param ObjectManager $reviewManager
+     * @param ContainerInterface $container
      */
-    public function __construct(ObjectManager $reviewManager)
+    public function __construct(ContainerInterface $container)
     {
-        $this->reviewManager = $reviewManager;
+        $this->container = $container;
     }
 
     /**
-     * @param GenericEvent $event
+     * @param LifecycleEventArgs $args
      */
-    public function removeProductReviews(GenericEvent $event)
+    public function postSoftDelete(LifecycleEventArgs $args)
     {
-        if (!(($product = $event->getSubject()) instanceof ProductInterface)) {
-            throw new UnexpectedTypeException($product, 'Sylius\Component\Core\Model\ProductInterface');
+        if (!($product = $args->getEntity()) instanceof ProductInterface) {
+            return;
+        }
+
+        $reviewManager = $args->getEntityManager();
+        $reviewRepository = $this->container->get('sylius.repository.product_review');
+        $reviews = $reviewRepository->findBy(array('reviewSubject' => $product));
+
+        foreach ($reviews as $review) {
+            $reviewManager->remove($review);
         }
 
         $product->setAverageRating(null);
-        foreach ($product->getReviews() as $review) {
-            $this->reviewManager->remove($review);
-        }
 
-        $this->reviewManager->flush();
+        $reviewManager->flush();
     }
 }

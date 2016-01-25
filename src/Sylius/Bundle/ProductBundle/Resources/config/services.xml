@@ -23,37 +23,24 @@
 
         <parameter key="sylius.validator.product.unique.class">Sylius\Bundle\ProductBundle\Validator\ProductUniqueValidator</parameter>
         <parameter key="sylius.form.type.product_translation.class">Sylius\Bundle\ProductBundle\Form\Type\ProductTranslationType</parameter>
-
-        <parameter key="sylius.form.type.product_review.class">Sylius\Bundle\ProductBundle\Form\Type\ProductReviewType</parameter>
     </parameters>
 
     <services>
         <!--Forms-->
         <service id="sylius.form.type.product" class="%sylius.form.type.product.class%">
             <argument>%sylius.model.product.class%</argument>
-            <argument>%sylius.validation_group.product%</argument>
+            <argument>%sylius.validation_groups.product%</argument>
             <tag name="form.type" alias="sylius_product" />
         </service>
         <service id="sylius.form.type.product_archetype" class="%sylius.form.type.product_archetype.class%">
             <argument>%sylius.model.product_archetype.class%</argument>
-            <argument>%sylius.validation_group.product_archetype%</argument>
+            <argument>%sylius.validation_groups.product_archetype%</argument>
             <tag name="form.type" alias="sylius_product_archetype" />
         </service>
         <service id="sylius.form.type.product_translation" class="%sylius.form.type.product_translation.class%">
             <argument>%sylius.model.product.class%</argument>
-            <argument>%sylius.validation_group.product%</argument>
+            <argument>%sylius.validation_groups.product%</argument>
             <tag name="form.type" alias="sylius_product_translation" />
-        </service>
-        <service id="sylius.form.type.product_review" class="%sylius.form.type.product_review.class%">
-            <argument>%sylius.model.product_review.class%</argument>
-            <tag name="form.type" alias="sylius_product_review" />
-        </service>
-
-        <service id="sylius.builder.product" class="%sylius.builder.product.class%">
-            <argument type="service" id="sylius.manager.product" />
-            <argument type="service" id="sylius.repository.product" />
-            <argument type="service" id="sylius.repository.product_attribute" />
-            <argument type="service" id="sylius.repository.product_attribute_value" />
         </service>
 
         <service id="sylius.set_builder.cartesian" class="%sylius.set_builder.cartesian.class%" />

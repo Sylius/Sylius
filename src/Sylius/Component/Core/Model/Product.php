@@ -25,7 +25,7 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class Product extends BaseProduct implements ProductInterface
+class Product extends BaseProduct implements ProductInterface, ReviewableProductInterface
 {
     /**
      * @var string

@@ -17,7 +17,7 @@
 
 	{{ form_errors(form) }}
 
-	<form action="{{ path('sylius_backend_product_review_create') }}" method="post" class="form-horizontal" {{ form_enctype(form) }} novalidate>
+	<form action="{{ path('sylius_backend_product_review_create') }}" method="post" class="form-horizontal" {{ form_enctype(form) }} novalidate>nie zbywa
 	    {% include 'SyliusWebBundle:Backend/Review:_form.html.twig' %}
 	    {{ create() }}
 	</form>

@@ -29,12 +29,16 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
             'reviewable' => array(
                 'subject' => 'AcmeBundle\Entity\ReviewableModel',
                 'review' => array(
-                    'model' => 'AcmeBundle\Entity\ReviewModel',
+                    'classes'  => array(
+                        'model' => 'AcmeBundle\Entity\ReviewModel',
+                    ),
                 ),
                 'reviewer' => array(
-                    'model' => 'AcmeBundle\Entity\ReviewerModel',
-                )
-            )
+                    'classes'  => array(
+                        'model' => 'AcmeBundle\Entity\ReviewerModel',
+                    ),
+                ),
+            ),
         ));
     }
 
@@ -108,12 +112,16 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
             'reviewable' => array(
                 'subject' => 'AcmeBundle\Entity\ReviewableModel',
                 'review' => array(
-                    'model' => 'AcmeBundle\Entity\BadReviewModel',
+                    'classes'  => array(
+                        'model' => 'AcmeBundle\Entity\BadReviewModel',
+                    ),
                 ),
                 'reviewer' => array(
-                    'model' => 'AcmeBundle\Entity\ReviewerModel',
-                )
-            )
+                    'classes'  => array(
+                        'model' => 'AcmeBundle\Entity\ReviewerModel',
+                    ),
+                ),
+            ),
         ));
 
         $eventArguments->getClassMetadata()->willReturn($metadata)->shouldBeCalled();

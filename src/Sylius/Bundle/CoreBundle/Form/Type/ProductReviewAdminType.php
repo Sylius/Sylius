@@ -11,13 +11,15 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
-use Sylius\Bundle\ProductBundle\Form\Type\ProductReviewAdminType as BaseProductReviewAdminType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
+ * @author Daniel Richter <nexyz9@gmail.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class ProductReviewAdminType extends BaseProductReviewAdminType
+class ProductReviewAdminType extends ProductReviewType
 {
     /**
      * {@inheritdoc}
@@ -29,11 +31,36 @@ class ProductReviewAdminType extends BaseProductReviewAdminType
         $builder->get('author')->resetModelTransformers();
 
         $builder
+            ->add('reviewSubject', 'entity', array(
+                'class'    => 'Sylius\Component\Core\Model\Product',
+                'label'    => 'sylius.form.review.product',
+                'property' => 'name',
+            ))
             ->add('author', 'entity', array(
                 'class'    => 'Sylius\Component\Core\Model\Customer',
                 'label'    => 'sylius.form.review.author',
                 'property' => 'email',
             ))
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'rating_steps'      => 5,
+            'data_class'        => $this->dataClass,
+            'validation_groups' => $this->validationGroups,
+        ));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return sprintf('sylius_%s_review_admin', $this->subject);
     }
 }

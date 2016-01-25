@@ -29,7 +29,9 @@
         {% for review in reviews %}
             <tr>
                 <td>{{ review.id }}</td>
-                <td><a href="{{ path('sylius_backend_product_show', { 'id': review.reviewSubject.id }) }}">{{ review.reviewSubject.name }}</a></td>
+                <td>
+                    <a href="{{ path('sylius_backend_product_show', { 'id': review.reviewSubject.id }) }}">{{ review.reviewSubject.id }}</a>
+                </td>
                 <td>{{ review.title }}</td>
                 <td><label class="label label-{{ review_macros.moderation_label(review) }}">{{ review.status }}</label></td>
                 <td><label class="label label-default">{{ review.rating }}</label></td>

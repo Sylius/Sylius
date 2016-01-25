@@ -12,20 +12,23 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\Event\LifecycleEventArgs;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Review\Model\ReviewInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 class ProductDeleteListenerSpec extends ObjectBehavior
 {
-    function let(ObjectManager $reviewManager)
+    function let(ContainerInterface $container)
     {
-        $this->beConstructedWith($reviewManager);
+        $this->beConstructedWith($container);
     }
 
     function it_is_initializable()
@@ -34,26 +37,25 @@ class ProductDeleteListenerSpec extends ObjectBehavior
     }
 
     function it_removes_soft_deleted_product_reviews(
-        $reviewManager,
-        GenericEvent $event,
+        $container,
+        EntityRepository $reviewRepository,
+        ObjectManager $reviewManager,
+        LifecycleEventArgs $args,
         Product $product,
         ReviewInterface $review
     ) {
-        $event->getSubject()->willReturn($product)->shouldBeCalled();
+        $args->getEntity()->willReturn($product)->shouldBeCalled();
 
-        $product->getReviews()->willReturn(array($review))->shouldBeCalled();
-        $product->setAverageRating(null)->shouldBeCalled();
+        $args->getEntityManager()->willReturn($reviewManager)->shouldBeCalled();
+        $container->get('sylius.repository.product_review')->willReturn($reviewRepository)->shouldBeCalled();
+
+        $reviewRepository->findBy(array('reviewSubject' => $product))->willReturn(array($review))->shouldBeCalled();
 
         $reviewManager->remove($review)->shouldBeCalled();
         $reviewManager->flush()->shouldBeCalled();
 
-        $this->removeProductReviews($event);
-    }
+        $product->setAverageRating(null)->shouldBeCalled();
 
-    function it_throws_exception_if_event_subject_is_not_product_object(GenericEvent $event)
-    {
-        $event->getSubject()->willReturn('badObject')->shouldBeCalled();
-
-        $this->shouldThrow(new UnexpectedTypeException('badObject', 'Sylius\Component\Core\Model\ProductInterface'))->during('removeProductReviews', array($event));
+        $this->postSoftDelete($args);
     }
 }

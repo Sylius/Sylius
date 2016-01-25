@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Product\Model;
+namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Review\Model\Review;
 

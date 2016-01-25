@@ -56,12 +56,6 @@
         <many-to-one field="mainTaxon" target-entity="Sylius\Component\Taxonomy\Model\TaxonInterface">
             <join-column name="main_taxon_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
-
-        <one-to-many field="reviews" target-entity="Sylius\Component\Review\Model\ReviewInterface" mapped-by="reviewSubject">
-            <cascade>
-                <cascade-all/>
-            </cascade>
-        </one-to-many>
         <gedmo:loggable />
     </mapped-superclass>
 

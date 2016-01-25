@@ -32,7 +32,7 @@ class ProductReviewAdminTypeSpec extends ObjectBehavior
 
     function it_extends_product_review_admin_type()
     {
-        $this->shouldHaveType('Sylius\Bundle\ProductBundle\Form\Type\ProductReviewAdminType');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\ProductReviewType');
     }
 
     function it_builds_form(FormBuilderInterface $builder)
@@ -99,5 +99,10 @@ class ProductReviewAdminTypeSpec extends ObjectBehavior
         ;
 
         $this->buildForm($builder, array('rating_steps' => 5));
+    }
+
+    function it_has_name()
+    {
+        $this->getName()->shouldReturn('sylius_product_review_admin');
     }
 }

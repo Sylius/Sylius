@@ -809,13 +809,15 @@ sylius_user:
                 controller: Sylius\Bundle\CoreBundle\Controller\CustomerController
 
 sylius_review:
-    classes:
+    resources:
         product:
-            subject: Sylius\Component\Core\Model\Product
+            subject: %sylius.model.product.class%
             review:
-                model: Sylius\Component\Product\Model\ProductReview
-                form:
-                    default: Sylius\Bundle\ProductBundle\Form\Type\ProductReviewType
-                    admin: Sylius\Bundle\CoreBundle\Form\Type\ProductReviewAdminType
+                classes:
+                    model: Sylius\Component\Core\Model\ProductReview
+                    form:
+                        default: Sylius\Bundle\CoreBundle\Form\Type\ProductReviewType
+                        admin: Sylius\Bundle\CoreBundle\Form\Type\ProductReviewAdminType
             reviewer:
-                model: Sylius\Component\Core\Model\Customer
+                classes:
+                    model: Sylius\Component\Core\Model\Customer
