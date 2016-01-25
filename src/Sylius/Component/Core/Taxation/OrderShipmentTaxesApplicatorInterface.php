@@ -9,19 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\OrderProcessing;
+namespace Sylius\Component\Core\Taxation;
 
-use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
-interface OrderUnitsTaxesApplicatorInterface
+interface OrderShipmentTaxesApplicatorInterface
 {
     /**
-     * @param OrderItemInterface $item
+     * @param OrderInterface $order
      * @param TaxRateInterface $taxRate
      */
-    public function apply(OrderItemInterface $item, TaxRateInterface $taxRate);
+    public function apply(OrderInterface $order, TaxRateInterface $taxRate);
 }

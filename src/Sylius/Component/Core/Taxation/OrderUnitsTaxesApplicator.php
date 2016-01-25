@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\OrderProcessing;
+namespace Sylius\Component\Core\Taxation;
 
 use Sylius\Bundle\CoreBundle\Distributor\TaxesDistributorInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
