@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c1a8c1d140f860adba29bd37105b76d8",
-    "content-hash": "af4e5ed1dbfc9cc0bbdb158c2f352425",
+    "hash": "0365707650606c8106eab7d6f6305cf5",
+    "content-hash": "eead5e54d1e4e983a3eb02a20a7dea6a",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -6872,45 +6872,47 @@
         },
         {
             "name": "symfony-cmf/routing-bundle",
-            "version": "1.3.5",
+            "version": "1.4.0-RC1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony-cmf/RoutingBundle.git",
-                "reference": "c4950dda9c4f60d2186d24bf7c7e1b4c05f5daf6"
+                "reference": "827703c49b81dd34833aca8b493ab717a38e5afa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony-cmf/RoutingBundle/zipball/c4950dda9c4f60d2186d24bf7c7e1b4c05f5daf6",
-                "reference": "c4950dda9c4f60d2186d24bf7c7e1b4c05f5daf6",
+                "url": "https://api.github.com/repos/symfony-cmf/RoutingBundle/zipball/827703c49b81dd34833aca8b493ab717a38e5afa",
+                "reference": "827703c49b81dd34833aca8b493ab717a38e5afa",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3",
+                "php": "^5.3.9|^7.0",
                 "symfony-cmf/routing": "~1.2",
                 "symfony/framework-bundle": "~2.3"
             },
             "require-dev": {
+                "doctrine/data-fixtures": "^1.0.0-alpha3",
                 "doctrine/orm": "~2.3",
-                "matthiasnoback/symfony-config-test": "0.*",
-                "matthiasnoback/symfony-dependency-injection-test": "0.*",
-                "sonata-project/doctrine-phpcr-admin-bundle": "~1.1",
+                "doctrine/phpcr-odm": "~1.3",
+                "matthiasnoback/symfony-config-test": "^1.3.1",
+                "matthiasnoback/symfony-dependency-injection-test": "~0.6",
+                "phpunit/php-code-coverage": "@stable",
+                "sonata-project/doctrine-phpcr-admin-bundle": "^1.1",
                 "symfony-cmf/core-bundle": "~1.1",
-                "symfony-cmf/testing": "~1.1",
-                "symfony/monolog-bundle": "~2.3",
-                "symfony/symfony": "2.6.*"
+                "symfony-cmf/testing": "~1.3@dev",
+                "symfony/monolog-bundle": "~2.3"
             },
             "suggest": {
-                "doctrine/orm": "To enable support for the ORM entities",
+                "doctrine/orm": "To enable support for the ORM entities (^2.3)",
                 "doctrine/phpcr-bundle": "To enable support for the PHPCR ODM documents",
-                "doctrine/phpcr-odm": "To enable support for the PHPCR ODM documents",
-                "sonata-project/doctrine-phpcr-admin-bundle": "To provide an admin interface for the PHPCR ODM documents",
+                "doctrine/phpcr-odm": "To enable support for the PHPCR ODM documents (^1.3)",
+                "sonata-project/doctrine-phpcr-admin-bundle": "To provide an admin interface for the PHPCR ODM documents (^1.1)",
                 "symfony-cmf/content-bundle": "To optionally use the configured value for 'content_basepath' from the CoreBundle",
-                "symfony-cmf/core-bundle": "To use the provided Doctrine\\Phpcr documents and for easier configuration"
+                "symfony-cmf/core-bundle": "To use the provided Doctrine\\Phpcr documents and for easier configuration (^1.1)"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.3-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
@@ -6934,7 +6936,7 @@
                 "database",
                 "routing"
             ],
-            "time": "2015-06-23 19:16:42"
+            "time": "2016-01-21 16:20:40"
         },
         {
             "name": "symfony/assetic-bundle",
@@ -8625,7 +8627,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/coduo/php-matcher/zipball/ae724fdf812140066a54e6db2c971fce6364d488",
+                "url": "https://api.github.com/repos/coduo/php-matcher/zipball/9ad59b1653829fd44515da6dc5e236df6241dd8e",
                 "reference": "c4917b16314900eb186de2422f81191afb7125a3",
                 "shasum": ""
             },
@@ -9101,7 +9103,7 @@
             ],
             "authors": [
                 {
-                    "name": "Pádraic Brady",
+                    "name": "Padraic Brady",
                     "email": "padraic.brady@gmail.com",
                     "homepage": "http://blog.astrumfutura.com"
                 },
@@ -10256,7 +10258,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/BehatPageObjectExtension/zipball/58404070265f58ca40a13b62bb3b69b83e27de20",
+                "url": "https://api.github.com/repos/sensiolabs/BehatPageObjectExtension/zipball/faf0a08d55cb8179fb66317fc8f66a9896be0332",
                 "reference": "58404070265f58ca40a13b62bb3b69b83e27de20",
                 "shasum": ""
             },
@@ -10314,6 +10316,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "symfony-cmf/routing-bundle": 5,
         "lakion/api-test-case": 20,
         "coduo/php-matcher": 20,
         "sensiolabs/behat-page-object-extension": 20
