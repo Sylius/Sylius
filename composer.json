@@ -96,7 +96,9 @@
         "lakion/api-test-case": "^1.0@dev",
         "coduo/php-matcher": "^2.1@dev",
         "sensiolabs/behat-page-object-extension": "^2.0@dev",
-        "phpunit/phpunit": "~4.1"
+        "phpunit/phpunit": "~4.1",
+        "matthiasnoback/symfony-config-test": "^1.4",
+        "matthiasnoback/symfony-dependency-injection-test": "^0.7.6"
     },
     "replace": {
         "sylius/addressing": "self.version",

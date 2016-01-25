@@ -20,3 +20,7 @@ framework:
 twig:
     debug:            false
     strict_variables: false
+
+sylius_theme:
+    locations:
+        - %kernel.root_dir%/../../Fixtures/themes
