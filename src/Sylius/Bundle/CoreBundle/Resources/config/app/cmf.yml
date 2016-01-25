@@ -42,6 +42,7 @@ cmf_routing:
         persistence:
             phpcr:
                 enabled: true
+                enable_initializer: true
                 route_basepath: /cms/routes
 
 doctrine_cache:
