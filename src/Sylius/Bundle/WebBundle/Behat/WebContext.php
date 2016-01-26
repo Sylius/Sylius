@@ -753,6 +753,22 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
         $this->assertSession()->elementAttributeContains('css', '[id$="code"]', 'disabled', 'disabled');
     }
 
+    /**
+     * @Then the customer should have username :username
+     */
+    public function theCustomerWithEmailShouldHaveUsername($username)
+    {
+        $this->assertSession()->elementContains('css', '#username', $username);
+    }
+
+    /**
+     * @Then the customer should be enabled
+     */
+    public function theCustomerShouldBeEnabled()
+    {
+        $this->assertSession()->elementContains('css', '#enabled', 'yes');
+    }
+
     private function assertRoute($route)
     {
         $this->assertSession()->addressEquals($this->generatePageUrl($route));
