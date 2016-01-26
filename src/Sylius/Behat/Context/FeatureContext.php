@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Context;
 
 use SensioLabs\Behat\PageObjectExtension\Context\PageObjectContext;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Behat\Mink\Driver\Selenium2Driver;
 use Behat\MinkExtension\Context\MinkAwareContext;
 use Behat\Mink\Mink;
 use Behat\Mink\Session;
@@ -67,5 +67,18 @@ abstract class FeatureContext extends PageObjectContext implements MinkAwareCont
     public function assertSession($name = null)
     {
         return $this->mink->assertSession($name);
+    }
+
+    protected function prepareSessionIfNeeded()
+    {
+        if (!$this->getSession()->getDriver() instanceof Selenium2Driver) {
+            return;
+        }
+
+        if (false !== strpos($this->getSession()->getCurrentUrl(), $this->minkParameters['base_url'])) {
+            return;
+        }
+
+        $this->getPage('Shop\HomePage')->open();
     }
 }

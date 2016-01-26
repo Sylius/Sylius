@@ -423,7 +423,7 @@ default:
                 - Sylius\Behat\Context\Setup\PaymentContext:
                     paymentMethodRepository: '@sylius.repository.payment_method'
                     sharedStorage: '@sylius.behat.shared_storage'
-                    paymentMethodFactory: '@sylius.factory.payment_method'
+                    paymentMethodFactory: '@sylius.behat.factory.payment_method'
                 - Sylius\Behat\Context\Setup\SecurityContext:
                     sharedStorage: '@sylius.behat.shared_storage'
                     securityService: '@sylius.behat.security'
@@ -440,6 +440,8 @@ default:
                     sharedStorage: '@sylius.behat.shared_storage'
                     productRepository: '@sylius.repository.product'
                     orderRepository: '@sylius.repository.order'
+                    paypalAccountName: '%%sylius.behat.paypal_account_name%%'
+                    paypalAccountPassword: '%%sylius.behat.paypal_account_password%%'
                 - Sylius\Behat\Context\Hook\DoctrineORMContext:
                     entityManager: '@doctrine.orm.entity_manager'
                 - Sylius\Behat\Context\Setup\ShippingContext:
@@ -493,6 +495,7 @@ default:
             directory: etc/build
             clean_start: false
         Behat\MinkExtension:
+            base_url: http://localhost:8080/app_test.php/
             sessions:
                 default:
                     symfony2: ~
@@ -515,7 +518,7 @@ javascript:
         Lakion\Behat\MinkDebugExtension:
             screenshot: true
         Behat\MinkExtension:
-            base_url: http://localhost:8080/
+            base_url: http://localhost:8080/app_test.php/
             selenium2:
                 capabilities:
                     browserName: chrome

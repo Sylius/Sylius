@@ -45,6 +45,7 @@ class SecurityContext extends FeatureContext
      */
     public function iAmLoggedInAs($email)
     {
+        $this->prepareSessionIfNeeded();
         $this->securityService->logIn($email, 'main', $this->getSession());
     }
 }

@@ -10,7 +10,7 @@ Feature: Checkout with offline payment
           And there is user "john@example.com" identified by "password123"
           And store has a product "PHP T-Shirt" priced at "$19.99"
           And store ships everything for free
-          And store allows paying offline
+          And store allows paying Offline
 
     Scenario: Successfully placing an order
         Given I am logged in as "john@example.com"

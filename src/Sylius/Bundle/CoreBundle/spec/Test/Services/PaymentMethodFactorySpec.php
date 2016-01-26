@@ -64,6 +64,7 @@ class PaymentMethodFactorySpec extends ObjectBehavior
     function it_prevents_creation_with_bad_gateway()
     {
         $parameters = [
+            'name' => 'Offline',
             'gateway' => 'silly',
         ];
 
@@ -74,6 +75,7 @@ class PaymentMethodFactorySpec extends ObjectBehavior
     {
         $parameters = [
             'productName' => 'Star wars mug',
+            'name' => 'Offline',
             'gateway' => 'dummy',
         ];
 
@@ -84,12 +86,26 @@ class PaymentMethodFactorySpec extends ObjectBehavior
         $this->shouldThrow(new UnexpectedTypeException(null, $propertyPath->getWrappedObject(), 0))->during('createFromArray', array($parameters));
     }
 
-    function it_throws_exception_when_gatway_is_not_set()
+    function it_tries_resolve_gateway_name_from_payment_method_name_if_gateway_is_not_set($defaultFactory, PaymentMethodInterface $paymentMethod)
+    {
+        $parameters = [
+            'name' => 'Offline',
+            'code' => 'PM1',
+        ];
+        $defaultFactory->createNew()->willReturn($paymentMethod);
+        $paymentMethod->setGateway('dummy')->shouldBeCalled();
+        $paymentMethod->setCode('PM1')->shouldBeCalled();
+        $paymentMethod->setName('Offline')->shouldBeCalled();
+
+        $this->createFromArray($parameters);
+    }
+
+    function it_throws_exception_if_payment_method_name_is_not_set()
     {
         $parameters = [
             'code' => 'PM1',
         ];
 
-        $this->shouldThrow(new \InvalidArgumentException('Gateway parameter is not set'))->during('createFromArray', array($parameters));
+        $this->shouldThrow(new \InvalidArgumentException(sprintf('Name cannot be empty')))->during('createFromArray', array($parameters));
     }
 }

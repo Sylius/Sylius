@@ -20,14 +20,6 @@ use Behat\Mink\Exception\ElementNotFoundException;
 class CheckoutAddressingStep extends SymfonyPage
 {
     /**
-     * @return string
-     */
-    public function getRouteName()
-    {
-        return 'sylius_checkout_addressing';
-    }
-
-    /**
      * @param array $addressingDetails
      *
      * @throws ElementNotFoundException
@@ -41,5 +33,13 @@ class CheckoutAddressingStep extends SymfonyPage
         $this->fillField('City', $addressingDetails['city']);
         $this->fillField('Postcode', $addressingDetails['postcode']);
         $this->fillField('Phone number', $addressingDetails['phoneNumber']);
+    }
+
+    /**
+     * @return string
+     */
+    protected function getRouteName()
+    {
+        return 'sylius_checkout_addressing';
     }
 }
