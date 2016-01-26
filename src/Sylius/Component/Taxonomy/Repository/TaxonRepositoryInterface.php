@@ -8,26 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Sylius\Component\Taxonomy\Repository;
 
-use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
-use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 
-interface TaxonRepositoryInterface
+interface TaxonRepositoryInterface extends RepositoryInterface
 {
     /**
-     * Get all taxons that belong to given taxonomy.
+     * @param TaxonInterface $taxon
      *
-     * @param $taxonomy TaxonomyInterface
-     *
-     * @return Collection|TaxonInterface[]
+     * @return array
      */
-    public function getTaxonsAsList(TaxonomyInterface $taxonomy);
+    public function findChildren(TaxonInterface $taxon);
 
     /**
-     * @return Collection|TaxonInterface[]
+     * @return array
      */
-    public function getNonRootTaxons();
+    public function findRootNodes();
 }

@@ -115,11 +115,11 @@ class BackendMenuBuilder extends MenuBuilder
             ->setLabel($this->translate(sprintf('sylius.backend.menu.%s.assortment', $section)))
         ;
 
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.taxonomy.index')) {
-            $child->addChild('taxonomies', [
-                'route' => 'sylius_backend_taxonomy_index',
+        if ($this->rbacAuthorizationChecker->isGranted('sylius.taxon.index')) {
+            $child->addChild('taxons', [
+                'route' => 'sylius_backend_taxon_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-folder-close'],
-            ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.taxonomies', $section)));
+            ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.taxons', $section)));
         }
 
         if ($this->rbacAuthorizationChecker->isGranted('sylius.product.index')) {

@@ -22,10 +22,6 @@
             <generator strategy="AUTO" />
         </id>
 
-        <many-to-one field="taxonomy" target-entity="Sylius\Component\Taxonomy\Model\TaxonomyInterface">
-            <join-column name="taxonomy_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
-        </many-to-one>
-
         <many-to-one field="parent" target-entity="Sylius\Component\Taxonomy\Model\TaxonInterface" inversed-by="children">
             <join-column name="parent_id" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
             <gedmo:tree-parent />
@@ -44,7 +40,7 @@
             <order-by-field name="left" direction="ASC" />
         </order-by>
 
-        <field name="code" column="code" type="string" unique="true"/>
+        <field name="code" column="code" type="string" unique="true" />
         <field name="left" column="tree_left" type="integer">
             <gedmo:tree-left />
         </field>

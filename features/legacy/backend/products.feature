@@ -31,14 +31,14 @@ Feature: Products
             | TC1  | Clothing    |
             | TC2  | Electronics |
             | TC3  | Print       |
-        And there are following taxonomies defined:
+        And there are following taxons defined:
             | code | name     |
             | RTX1 | Category |
             | RTX2 | Special  |
-        And taxonomy "Category" has following taxons:
+        And taxon "Category" has following children:
             | Clothing[TX1] > T-Shirts[TX2]         |
             | Clothing[TX1] > Premium T-Shirts[TX3] |
-        And taxonomy "Special" has following taxons:
+        And taxon "Special" has following children:
             | Featured[TX4] |
             | New[TX5]      |
         And product "Sticker" has main taxon "New"
@@ -233,9 +233,8 @@ Feature: Products
     Scenario: Selecting the categorization taxons
         Given I am editing product "Black T-Shirt"
         And go to "Categorization" tab
-        When I select "Premium T-Shirts" from "Category"
-        And I select "Featured" from "Special"
-        And I additionally select "New" from "Special"
+        When I select "T-Shirts" from "Taxons"
+        And I additionally select "Featured" from "Taxons"
         And I press "Save changes"
         Then I should be on the page of product "Black T-Shirt"
         And I should see "Product has been successfully updated"

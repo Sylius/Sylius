@@ -128,7 +128,7 @@ class ChannelContext extends DefaultContext
                 isset($data['currencies']) ? $data['currencies'] : null,
                 isset($data['shipping']) ? $data['shipping'] : null,
                 isset($data['payment']) ? $data['payment'] : null,
-                isset($data['taxonomy']) ? $data['taxonomy'] : null
+                isset($data['taxon']) ? $data['taxon'] : null
             );
         }
 
@@ -165,7 +165,7 @@ class ChannelContext extends DefaultContext
         return $channel;
     }
 
-    private function configureChannel(ChannelInterface $channel, $localeCodes = null, $currencyCodes = null, $shippingMethodNames = null, $paymentMethodNames = null, $taxonomyNames = null)
+    private function configureChannel(ChannelInterface $channel, $localeCodes = null, $currencyCodes = null, $shippingMethodNames = null, $paymentMethodNames = null, $taxonNames = null)
     {
         if ($shippingMethodNames) {
             $shippingMethodNames = array_map('trim', explode(',', $shippingMethodNames));
@@ -199,12 +199,11 @@ class ChannelContext extends DefaultContext
             }
         }
 
-        if ($taxonomyNames) {
-            $taxonomyNames = array_map('trim', explode(',', $taxonomyNames));
-
-            foreach ($taxonomyNames as $taxonomyName) {
-                $taxonomy = $this->getRepository('taxonomy')->findOneBy(['name' => $taxonomyName]);
-                $channel->addTaxonomy($taxonomy);
+        if ($taxonNames) {
+            $taxonNames = array_map('trim', explode(',', $taxonNames));
+            foreach ($taxonNames as $taxonName) {
+                $taxon = $this->getRepository('taxon')->findOneBy(['name' => $taxonName]);
+                $channel->addTaxon($taxon);
             }
         }
     }

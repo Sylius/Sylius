@@ -18,96 +18,76 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 class TaxonomyContext extends DefaultContext
 {
     /**
-     * @Given /^there are following taxonomies defined:$/
+     * @Given /^there are following taxons defined:$/
      */
-    public function thereAreFollowingTaxonomies(TableNode $table)
+    public function thereAreFollowingTaxons(TableNode $table)
     {
         foreach ($table->getHash() as $data) {
-            $this->thereIsTaxonomy($data['name'], $data['code'], false);
+            $this->thereIsTaxon($data['name'], $data['code'], false);
         }
 
         $this->getEntityManager()->flush();
     }
 
     /**
-     * @Given /^I created taxonomy "([^""]*)" with code "([^""]*)"$/
+     * @Given /^I created taxon "([^""]*)" with code "([^""]*)"$/
      */
-    public function thereIsTaxonomy($name, $code, $flush = true)
+    public function thereIsTaxon($name, $code, $flush = true)
     {
-        $taxonomy = $this->getFactory('taxonomy')->createNew();
-        $taxonomy->getRoot()->setCode($code);
-        $taxonomy->setName($name);
+        /** @var TaxonInterface $taxon */
+        $taxon = $this->getFactory('taxon')->createNew();
+        $taxon->setName($name);
+        $taxon->setCode($code);
 
-        if (null === $taxonomy->getCurrentLocale()) {
-            $taxonomy->setCurrentLocale('en_US');
-        }
-
-        $this->getEntityManager()->persist($taxonomy);
+        $this->getEntityManager()->persist($taxon);
         if ($flush) {
             $this->getEntityManager()->flush();
         }
     }
 
     /**
-     * @Given /^taxonomy "([^""]*)" has following taxons:$/
+     * @Given /^taxon "([^""]*)" has following children:$/
      */
-    public function taxonomyHasFollowingTaxons($taxonomyName, TableNode $taxonsTable)
+    public function taxonHasFollowingChildren($taxonName, TableNode $childrenTable)
     {
-        $taxonomy = $this->findOneByName('taxonomy', $taxonomyName);
+        /* @var $taxon TaxonInterface */
+        $taxon = $this->findOneByName('taxon', $taxonName);
         $manager = $this->getEntityManager();
 
-        $taxons = [];
+        $children = array();
 
-        foreach ($taxonsTable->getRows() as $node) {
+        foreach ($childrenTable->getRows() as $node) {
             $taxonList = explode('>', $node[0]);
+
+            /* @var $parent TaxonInterface */
             $parent = null;
 
-            foreach ($taxonList as $taxon) {
-                $taxon = trim($taxon);
-                $taxonData = preg_split('[\\[|\\]]', $taxon, -1, PREG_SPLIT_NO_EMPTY);
+            foreach ($taxonList as $item) {
+                $item = trim($item);
+                $childData = preg_split("[\\[|\\]]", $item, -1, PREG_SPLIT_NO_EMPTY);
 
-                if (!isset($taxons[$taxonData[0]])) {
-                    /* @var $taxon TaxonInterface */
-                    $taxon = $this->getFactory('taxon')->createNew();
-                    $taxon->setName($taxonData[0]);
-                    $taxon->setCode($taxonData[1]);
+                if (!isset($children[$childData[0]])) {
+                    /* @var $child TaxonInterface */
+                    $child = $this->getFactory('taxon')->createNew();
+                    $child->setName($childData[0]);
+                    $child->setCode($childData[1]);
 
-                    $taxons[$taxonData[0]] = $taxon;
+                    $children[$childData[0]] = $child;
                 }
 
-                $taxon = $taxons[$taxonData[0]];
+                $child = $children[$childData[0]];
 
                 if (null !== $parent) {
-                    $parent->addChild($taxon);
+                    $parent->addChild($child);
                 } else {
-                    $taxonomy->addTaxon($taxon);
+                    $taxon->addChild($child);
                 }
 
-                $parent = $taxon;
+                $parent = $child;
             }
         }
 
-        $manager->persist($taxonomy);
-        $manager->flush();
-    }
-
-    /**
-     * @Given the following taxonomy translations exist:
-     */
-    public function theFollowingTaxonomyTranslationsExist(TableNode $table)
-    {
-        $manager = $this->getEntityManager();
-
-        foreach ($table->getHash() as $data) {
-            $taxonomyTranslation = $this->findOneByName('taxonomy_translation', $data['taxonomy']);
-
-            $taxonomy = $taxonomyTranslation->getTranslatable();
-            $taxonomy->setCurrentLocale($data['locale']);
-            $taxonomy->setFallbackLocale($data['locale']);
-
-            $taxonomy->setName($data['name']);
-        }
-
+        $manager->persist($taxon);
         $manager->flush();
     }
 
@@ -119,6 +99,7 @@ class TaxonomyContext extends DefaultContext
         foreach ($table->getHash() as $data) {
             $taxonTranslation = $this->findOneByName('taxon_translation', $data['taxon']);
 
+            /** @var TaxonInterface $taxon */
             $taxon = $taxonTranslation->getTranslatable();
             $taxon->setCurrentLocale($data['locale']);
             $taxon->setFallbackLocale($data['locale']);

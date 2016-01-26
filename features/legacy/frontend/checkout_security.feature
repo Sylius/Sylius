@@ -6,10 +6,10 @@ Feature: Checkout security
 
     Background:
         Given store has default configuration
-        And there are following taxonomies defined:
+          And there are following taxons defined:
             | code | name     |
             | RTX1 | Category |
-        And taxonomy "Category" has following taxons:
+          And taxon "Category" has following children:
             | Clothing[TX1] > PHP T-Shirts[TX2] |
         And the following products exist:
             | name    | price | taxons       |
@@ -24,15 +24,15 @@ Feature: Checkout security
         And the following shipping methods exist:
             | code | zone | name        |
             | SM1  | UK   | DHL Express |
-        And the following payment methods exist:
-            | code | name    | gateway | enabled |
-            | PM1  | Offline | offline | yes     |
-        And all products are assigned to the default channel
-        And the default channel has following configuration:
-            | taxonomy | payment | shipping    |
+          And the following payment methods exist:
+            | code | name  | gateway | enabled |
+            | PM1  | Offline | offline   | yes     |
+          And all products are assigned to the default channel
+          And the default channel has following configuration:
+            | taxon    | payment | shipping    |
             | Category | Offline | DHL Express |
-        And I added product "PHP Top" to cart
-        And I go to the checkout start page
+          And I added product "PHP Top" to cart
+          And I go to the checkout start page
 
     Scenario: Trying to sign in with bad credentials
             during the checkout

@@ -8,4 +8,4 @@ call bin\behat --strict -f progress -s inventory
 call bin\behat --strict -f progress -s localization
 call bin\behat --strict -f progress -s oauth
 call bin\behat --strict -f progress -s reports
-call bin\behat --strict -f progress -s taxonomies
+call bin\behat --strict -f progress -s taxonomy

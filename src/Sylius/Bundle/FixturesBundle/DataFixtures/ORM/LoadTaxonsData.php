@@ -14,23 +14,22 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
-use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 
 /**
- * Default taxonomies to play with Sylius.
+ * Default taxons to play with Sylius.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class LoadTaxonomiesData extends DataFixture
+class LoadTaxonsData extends DataFixture
 {
     /**
      * {@inheritdoc}
      */
     public function load(ObjectManager $manager)
     {
-        $manager->persist($this->createTaxonomy(
-            'RTX1', [$this->defaultLocale => 'Category', 'es_ES' => 'Categoria'],
+        $manager->persist($this->createTaxons(
+            'CATEGORY', [$this->defaultLocale => 'Category', 'es_ES' => 'Categoria'],
             [
                 ['code' => 'TX1', 'locales' => [$this->defaultLocale => 'T-Shirts', 'es_ES' => 'Camisetas']],
                 ['code' => 'TX2', 'locales' => [$this->defaultLocale => 'Stickers', 'es_ES' => 'Pegatinas']],
@@ -38,8 +37,8 @@ class LoadTaxonomiesData extends DataFixture
                 ['code' => 'TX4', 'locales' => [$this->defaultLocale => 'Books', 'es_ES' => 'Libros']],
             ]));
 
-        $manager->persist($this->createTaxonomy(
-            'RTX2', [$this->defaultLocale => 'Brand', 'es_ES' => 'Marca'],
+        $manager->persist($this->createTaxons(
+            'BRAND', [$this->defaultLocale => 'Brand', 'es_ES' => 'Marca'],
             [
                 ['code' => 'TX5', 'locales' => [$this->defaultLocale => 'SuperTees', 'es_ES' => 'SuperCamisetas']],
                 ['code' => 'TX6', 'locales' => [$this->defaultLocale => 'Stickypicky', 'es_ES' => 'Pegapicky']],
@@ -59,36 +58,35 @@ class LoadTaxonomiesData extends DataFixture
     }
 
     /**
-     * Create and save taxonomy with given taxons.
+     * Create and save taxon with given taxons.
      *
-     * @param array $taxonomyName
-     * @param array $taxonsArray
+     * @param string $code
+     * @param array $rootTaxonName
+     * @param array $childrenArray
      *
-     * @internal param string $name
-     * @internal param array $taxons
-     *
-     * @return TaxonomyInterface
+     * @return TaxonInterface
      */
-    protected function createTaxonomy($code, array $taxonomyName, array $taxonsArray)
+    protected function createTaxons($code, array $rootTaxonName, array $childrenArray)
     {
-        /* @var $taxonomy TaxonomyInterface */
-        $taxonomy = $this->getTaxonomyFactory()->createNew();
-        $taxonomy->getRoot()->setCode($code);
+        /* @var $rootTaxon TaxonInterface */
+        $rootTaxon = $this->getTaxonFactory()->createNew();
+        $rootTaxon->setCode($code);
 
-        foreach ($taxonomyName as $locale => $name) {
-            $taxonomy->setCurrentLocale($locale);
-            $taxonomy->setFallbackLocale($locale);
-            $taxonomy->setName($name);
+        foreach ($rootTaxonName as $locale => $name) {
+            $rootTaxon->setCurrentLocale($locale);
+            $rootTaxon->setFallbackLocale($locale);
+            $rootTaxon->setName($name);
 
             if ($this->defaultLocale === $locale) {
-                $this->setReference('Sylius.Taxonomy.'.$name, $taxonomy);
+                $this->setReference('Sylius.Taxon.'.$name, $rootTaxon);
             }
         }
 
-        foreach ($taxonsArray as $taxonArray) {
+        foreach ($childrenArray as $taxonArray) {
             /* @var $taxon TaxonInterface */
             $taxon = $this->getTaxonFactory()->createNew();
             $taxon->setCode($taxonArray['code']);
+
             foreach ($taxonArray['locales'] as $locale => $taxonName) {
                 $taxon->setCurrentLocale($locale);
                 $taxon->setFallbackLocale($locale);
@@ -99,9 +97,10 @@ class LoadTaxonomiesData extends DataFixture
                     $this->setReference('Sylius.Taxon.'.$taxonName, $taxon);
                 }
             }
-            $taxonomy->addTaxon($taxon);
+
+            $rootTaxon->addChild($taxon);
         }
 
-        return $taxonomy;
+        return $rootTaxon;
     }
 }

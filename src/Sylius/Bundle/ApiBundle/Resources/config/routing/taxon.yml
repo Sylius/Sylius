@@ -9,19 +9,12 @@ sylius_api_taxon_index:
             paginate: $limit
             sortable: true
             filterable: true
-            criteria:
-                taxonomy: $taxonomyId
 
 sylius_api_taxon_show:
     path: /{id}
     methods: [GET]
     defaults:
         _controller: sylius.controller.taxon:showAction
-        _sylius:
-            filterable: true
-            criteria:
-                taxonomy: $taxonomyId
-                id: $id
 
 sylius_api_taxon_create:
     path: /

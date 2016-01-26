@@ -6,10 +6,10 @@ Feature: Standard pricing
 
     Background:
         Given store has default configuration
-        And there are following taxonomies defined:
+          And there are following taxons defined:
             | code | name     |
             | RTX1 | Category |
-        And taxonomy "Category" has following taxons:
+          And taxon "Category" has following children:
             | Clothing[TX1] > PHP T-Shirts[TX2] |
         And the following zones are defined:
             | name | type    | members        |
@@ -25,9 +25,9 @@ Feature: Standard pricing
             | name        | price | taxons       | tax category  |
             | PHP Top     | 49.99 | PHP T-Shirts | Taxable Goods |
             | Symfony Tee | 69.00 | PHP T-Shirts | Taxable Goods |
-        And all products are assigned to the default channel
-        And the default channel has following configuration:
-            | taxonomy |
+          And all products are assigned to the default channel
+          And the default channel has following configuration:
+            | taxon |
             | Category |
 
     Scenario: Flat price is calculated for products

@@ -11,12 +11,15 @@
 
 namespace Sylius\Bundle\TaxonomyBundle\Form\Type;
 
-use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\ChoiceList\View\ChoiceView;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -53,6 +56,46 @@ class TaxonChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
+        /** @var ChoiceView $choice */
+        foreach ($view->vars['choices'] as $choice) {
+            $choice->label = str_repeat('— ' , $choice->data->getLevel()).$choice->label;
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function buildTreeChoices($choices , $level = 0)
+    {
+        $result = array();
+
+        /** @var TaxonInterface $choice */
+        foreach ($choices as $choice) {
+
+            $result[] = new ChoiceView(
+                str_repeat('-' , $level).' '.$choice->getName(),
+                $choice->getId(),
+                $choice,
+                []
+            );
+
+            if (!$choice->getChildren()->isEmpty()) {
+                $result = array_merge(
+                    $result,
+                    $this->buildTreeChoices($choice->getChildren(), $level + 1)
+                );
+            }
+
+        }
+
+        return $result;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getParent()
     {
         return 'choice';
@@ -65,26 +108,27 @@ class TaxonChoiceType extends AbstractType
     {
         $repository = $this->taxonRepository;
         $choiceList = function (Options $options) use ($repository) {
-            $taxons = $repository->getNonRootTaxons();
-
-            if (null !== $options['taxonomy']) {
-                $taxons = $repository->getTaxonsAsList($options['taxonomy']);
+            /** @var TaxonRepositoryInterface $repository */
+            if (null !== $options['root']) {
+                $taxons = $repository->findChildren($options['root']);
+            } else {
+                $taxons = $repository->findAll();
             }
 
             if (null !== $options['filter']) {
                 $taxons = array_filter($taxons, $options['filter']);
             }
 
-            return new ObjectChoiceList($taxons, null, [], 'taxonomy', 'id');
+            return new ObjectChoiceList($taxons, null, [], null, 'id');
         };
 
         $resolver
             ->setDefaults([
                 'choice_list' => $choiceList,
-                'taxonomy' => null,
+                'root' => null,
                 'filter' => null,
             ])
-            ->setAllowedTypes('taxonomy', [TaxonomyInterface::class, 'null'])
+            ->setAllowedTypes('root', [TaxonInterface::class, 'null'])
             ->setAllowedTypes('filter', ['callable', 'null'])
         ;
     }

@@ -6,10 +6,10 @@ Feature: Browse products, categories, attributes and options in preferred langua
 
     Background:
         Given store has default configuration
-        And there are following taxonomies defined:
+          And there are following taxons defined:
             | code | name     |
             | RTX1 | Category |
-        And taxonomy "Category" has following taxons:
+          And taxon "Category" has following children:
             | Clothing[TX1] > T-Shirts[TX2]     |
             | Clothing[TX1] > PHP T-Shirts[TX3] |
         And there are following options:
@@ -30,11 +30,9 @@ Feature: Browse products, categories, attributes and options in preferred langua
         And the following product translations exist:
             | product       | name           | locale |
             | Super T-Shirt | Camiseta Super | es_ES  |
-        And the following taxonomy translations exist:
-            | taxonomy | name      | locale |
-            | Category | Categoria | es_ES  |
         And the following taxon translations exist:
             | taxon    | name      | locale |
+            | Category | Categoria | es_ES  |
             | Clothing | Ropa      | es_ES  |
             | T-Shirts | Camisetas | es_ES  |
         And the following attribute translations exist:

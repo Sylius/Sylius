@@ -71,7 +71,7 @@ class ProductTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
         $builder
-            ->add('taxons', 'sylius_taxon_selection', Argument::any())
+            ->add('taxons', 'sylius_taxon_choice', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;

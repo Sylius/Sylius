@@ -17,10 +17,10 @@ Feature: Checkout promotions with multiple rules and actions
             | type                | configuration |
             | Fixed discount      | Amount: 20    |
             | Percentage discount | Percentage: 5 |
-        And there are following taxonomies defined:
+          And there are following taxons defined:
             | code | name     |
             | RTX1 | Category |
-        And taxonomy "Category" has following taxons:
+          And taxon "Category" has following children:
             | Clothing[TX1] > Debian T-Shirts[TX2] |
         And the following products exist:
             | name   | price | taxons          |

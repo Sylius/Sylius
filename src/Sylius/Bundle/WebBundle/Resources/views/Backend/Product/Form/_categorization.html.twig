@@ -2,7 +2,5 @@
 
 <div class="tab-pane" id="categorization">
     {{ form_row(form.mainTaxon) }}
-{% for taxonomyForm in form.taxons %}
-    {{ form_row(taxonomyForm) }}
-{% endfor %}
+    {{ form_row(form.taxons) }}
 </div>

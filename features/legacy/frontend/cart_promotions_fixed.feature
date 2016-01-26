@@ -10,10 +10,10 @@ Feature: Checkout fixed discount promotions
             | name    |
             | Germany |
             | Poland  |
-        And there are following taxonomies defined:
+          And there are following taxons defined:
             | code | name     |
             | RTX1 | Category |
-        And taxonomy "Category" has following taxons:
+          And taxon "Category" has following children:
             | Clothing[TX1] > Ubuntu T-Shirts[TX2] |
             | Clothing[TX1] > Debian T-Shirts[TX3] |
         And the following products exist:
@@ -52,10 +52,10 @@ Feature: Checkout fixed discount promotions
         And promotion "Shipping to Germany" has following actions defined:
             | type           | configuration |
             | Fixed discount | Amount: 40    |
-        And promotion "Ubuntu T-Shirts" has following rules defined:
-            | type     | configuration                      |
-            | Taxonomy | Taxons: Ubuntu T-Shirts,Exclude: 0 |
-        And promotion "Ubuntu T-Shirts" has following actions defined:
+          And promotion "Ubuntu T-Shirts" has following rules defined:
+            | type  | configuration                      |
+            | Taxon | Taxons: Ubuntu T-Shirts,Exclude: 0 |
+          And promotion "Ubuntu T-Shirts" has following actions defined:
             | type           | configuration |
             | Fixed discount | Amount: 40    |
         And promotion "3rd order" has following rules defined:

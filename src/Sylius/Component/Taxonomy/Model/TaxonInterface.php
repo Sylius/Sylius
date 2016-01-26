@@ -27,16 +27,6 @@ interface TaxonInterface extends
     TranslatableInterface
 {
     /**
-     * @return TaxonomyInterface
-     */
-    public function getTaxonomy();
-
-    /**
-     * @param null|TaxonomyInterface $taxonomy
-     */
-    public function setTaxonomy(TaxonomyInterface $taxonomy = null);
-
-    /**
      * @return bool
      */
     public function isRoot();

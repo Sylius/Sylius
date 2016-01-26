@@ -6,10 +6,10 @@ Feature: Checkout shipping
 
     Background:
         Given store has default configuration
-        And there are following taxonomies defined:
+          And there are following taxons defined:
             | code | name     |
             | RTX1 | Category |
-        And taxonomy "Category" has following taxons:
+          And taxon "Category" has following children:
             | Clothing[TX1] > PHP T-Shirts[TX2] |
         And the following products exist:
             | name    | price | taxons       |
@@ -30,15 +30,15 @@ Feature: Checkout shipping
             | SM2  | USA          | FedEx         | Flat rate  | Amount: 6500  | yes     |
             | SM3  | USA          | FedEx Premium | Flat rate  | Amount: 10000 | yes     |
             | SM4  | UK + Germany | UPS Ground    | Flat rate  | Amount: 20000 | no      |
-        And the following payment methods exist:
-            | code | name    | gateway | enabled |
-            | PM1  | Offline | offline | yes     |
-        And all products are assigned to the default channel
-        And the default channel has following configuration:
-            | taxonomy | payment | shipping                                      |
+          And the following payment methods exist:
+            | code | name  | gateway | enabled |
+            | PM1  | Offline | offline   | yes     |
+          And all products are assigned to the default channel
+          And the default channel has following configuration:
+            | taxon    | payment | shipping                                      |
             | Category | Offline | DHL Express, FedEx, FedEx Premium, UPS Ground |
-        And I am logged in user
-        And I added product "PHP Top" to cart
+          And I am logged in user
+          And I added product "PHP Top" to cart
 
     Scenario: Only enabled and available methods are displayed to user for zone
             depending on the shipping address zone

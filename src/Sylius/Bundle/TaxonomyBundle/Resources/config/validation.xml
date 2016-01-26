@@ -16,26 +16,6 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
                                         http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
-    <class name="Sylius\Component\Taxonomy\Model\Taxonomy">
-        <property name="translations">
-            <constraint name="Valid" />
-        </property>
-    </class>
-
-    <class name="Sylius\Component\Taxonomy\Model\TaxonomyTranslation">
-        <getter property="name">
-            <constraint name="NotBlank">
-                <option name="message">sylius.taxonomy.name.not_blank</option>
-                <option name="groups">sylius</option>
-            </constraint>
-            <constraint name="Length">
-                <option name="max">255</option>
-                <option name="maxMessage">sylius.taxonomy.name.max_length</option>
-                <option name="groups">sylius</option>
-            </constraint>
-        </getter>
-    </class>
-
     <class name="Sylius\Component\Taxonomy\Model\Taxon">
         <property name="translations">
             <constraint name="Valid" />

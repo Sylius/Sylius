@@ -14,6 +14,7 @@ namespace Sylius\Bundle\SearchBundle\Controller;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\SearchBundle\Query\SearchStringQuery;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -91,15 +92,14 @@ class SearchController extends ResourceController
         $filters = [];
 
         if ($this->container->getParameter('sylius_search.pre_search_filter.enabled')) {
-            $taxonomy = $this->container->get('sylius.repository.taxonomy')
-                ->findOneBy([
-                    'name' => strtoupper($this->container->getParameter('sylius_search.pre_search_filter.taxon')),
-                ])
-            ;
+            $rootTaxon = $this->get('sylius.repository.taxon')->findOneBy([
+                'code' => $this->container->getParameter('sylius_search.pre_search_filter.taxon'),
+            ]);
 
-            $filters = [];
-            if ($taxonomy) {
-                foreach ($taxonomy->getTaxons() as $taxon) {
+            $filters = array();
+            if ($rootTaxon) {
+                /** @var TaxonInterface $rootTaxon */
+                foreach ($rootTaxon->getChildren() as $taxon) {
                     $filters[] = $taxon->getName();
                 }
             }

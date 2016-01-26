@@ -9,17 +9,17 @@ Feature: Cart
         And there are following users:
             | email       | password | enabled |
             | bar@foo.com | foo1     | yes     |
-        And there are following taxonomies defined:
+        And there are following taxons defined:
             | code | name     |
             | RTX1 | Category |
-        And taxonomy "Category" has following taxons:
+        And taxon "Category" has following children:
             | Clothing[TX1] > PHP T-Shirts[TX2] |
         And the following products exist:
             | name    | price | taxons       |
             | PHP Top | 85    | PHP T-Shirts |
         And all products are assigned to the default channel
         And the default channel has following configuration:
-            | taxonomy |
+            | taxon |
             | Category |
 
     Scenario: The cart is maintained after user log in

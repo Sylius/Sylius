@@ -2,7 +2,7 @@ call bin\behat --strict -f progress -s products features/backend/products.featur
 call bin\behat --strict -f progress -s products features/backend/product_attributes.feature
 call bin\behat --strict -f progress -s products features/backend/product_options.feature
 call bin\behat --strict -f progress -s products features/backend/product_archetypes.feature
-call bin\behat --strict -f progress -s products features/backend/product_taxonomies.feature
+call bin\behat --strict -f progress -s products features/backend/product_taxons.feature
 call bin\behat --strict -f progress -s products features/backend/product_variants.feature
 call bin\behat --strict -f progress -s products features/backend/products_filter.feature
 call bin\behat --strict -f progress -s products features/frontend/products.feature

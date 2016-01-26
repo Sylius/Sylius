@@ -6,11 +6,12 @@ Feature: Tax included in price
 
     Background:
         Given store has default configuration
-        And there are following taxonomies defined:
+        And there are following taxons defined:
             | code | name     |
             | RTX1 | Category |
-        And taxonomy "Category" has following taxons:
-            | Clothing[TX1] > PHP T-Shirts[TX2] |
+        And taxon "Category" has following children:
+            | Clothing[TX1] > T-Shirts[TX2]     |
+            | Clothing[TX1] > PHP T-Shirts[TX3] |
         And the following zones are defined:
             | name    | type    | members |
             | Germany | country | Germany |
@@ -23,9 +24,9 @@ Feature: Tax included in price
         And the following products exist:
             | name    | price | taxons       | tax category  |
             | PHP Top | 85    | PHP T-Shirts | Taxable Goods |
-        And all products are assigned to the default channel
-        And the default channel has following configuration:
-            | taxonomy |
+          And all products are assigned to the default channel
+          And the default channel has following configuration:
+            | taxon |
             | Category |
         And the default tax zone is "Germany"
 

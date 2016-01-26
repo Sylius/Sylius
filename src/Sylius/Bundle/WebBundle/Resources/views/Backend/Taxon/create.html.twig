@@ -5,8 +5,7 @@
 {% block topbar %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
-    <li><a href="{{ path('sylius_backend_taxonomy_index') }}">{{ 'sylius.breadcrumb.taxonomy.index'|trans }}</a></li>
-    <li><a href="{{ path('sylius_backend_taxonomy_show', {'id': taxon.taxonomy.id}) }}">{{ taxon.taxonomy.name }}</a></li>
+    <li><a href="{{ path('sylius_backend_taxon_index') }}">{{ 'sylius.breadcrumb.taxon.index'|trans }}</a></li>
     <li>{{ 'sylius.breadcrumb.new'|trans }}</li>
 </ol>
 {% endblock %}
@@ -18,7 +17,7 @@
 
 {{ form_errors(form) }}
 
-<form action="{{ path('sylius_backend_taxon_create', {'taxonomyId': taxon.taxonomy.id}) }}" method="post" class="form-horizontal" {{ form_enctype(form) }} novalidate>
+<form action="{{ path('sylius_backend_taxon_create') }}" method="post" class="form-horizontal" {{ form_enctype(form) }} novalidate>
     {% include 'SyliusWebBundle:Backend/Taxon:_form.html.twig' %}
     {{ create() }}
 </form>

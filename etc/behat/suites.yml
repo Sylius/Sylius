@@ -28,7 +28,7 @@ imports:
     - suites/legacy/settings.yml
     - suites/legacy/shipping.yml
     - suites/legacy/taxation.yml
-    - suites/legacy/taxonomies.yml
+    - suites/legacy/taxonomy.yml
     - suites/legacy/users.yml
 
     - suites/ui_cart.yml

@@ -18,11 +18,11 @@ use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
- * Checks if order contains products with given taxonomy.
+ * Checks if order contains products with given taxon.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class TaxonomyRuleChecker implements RuleCheckerInterface
+class TaxonRuleChecker implements RuleCheckerInterface
 {
     /**
      * {@inheritdoc}
@@ -50,6 +50,6 @@ class TaxonomyRuleChecker implements RuleCheckerInterface
      */
     public function getConfigurationFormType()
     {
-        return 'sylius_promotion_rule_taxonomy_configuration';
+        return 'sylius_promotion_rule_taxon_configuration';
     }
 }

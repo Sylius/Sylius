@@ -69,7 +69,7 @@
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="sylius.authorization_checker" />
             <argument type="service" id="sylius.currency_provider" />
-            <argument type="service" id="sylius.repository.taxonomy" />
+            <argument type="service" id="sylius.repository.taxon" />
             <argument type="service" id="sylius.cart_provider" />
             <argument type="service" id="sylius.templating.helper.currency" />
             <argument type="service" id="sylius.context.channel" />
@@ -110,9 +110,9 @@
         <service id="sylius.menu.frontend.locale" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.locale" factory-method="createMenu">
             <tag name="knp_menu.menu" alias="sylius.frontend.locale" />
         </service>
-        <service id="sylius.menu.frontend.taxonomies" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.frontend" factory-method="createTaxonomiesMenu" scope="request">
+        <service id="sylius.menu.frontend.taxons" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.frontend" factory-method="createTaxonsMenu" scope="request">
             <argument type="service" id="request" />
-            <tag name="knp_menu.menu" alias="sylius.frontend.taxonomies" />
+            <tag name="knp_menu.menu" alias="sylius.frontend.taxons" />
         </service>
         <service id="sylius.menu.frontend.account" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.frontend" factory-method="createAccountMenu" scope="request">
             <argument type="service" id="request" />
