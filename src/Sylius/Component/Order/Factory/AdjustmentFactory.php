@@ -46,7 +46,7 @@ class AdjustmentFactory implements AdjustmentFactoryInterface
     {
         $adjustment = $this->createNew();
         $adjustment->setType($type);
-        $adjustment->setDescription($label);
+        $adjustment->setLabel($label);
         $adjustment->setAmount($amount);
         $adjustment->setNeutral($neutral);
 

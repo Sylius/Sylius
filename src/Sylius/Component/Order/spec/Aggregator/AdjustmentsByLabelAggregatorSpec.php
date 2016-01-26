@@ -36,14 +36,14 @@ class AdjustmentsByLabelAggregatorSpec extends ObjectBehavior
         AdjustmentInterface $adjustment3,
         AdjustmentInterface $adjustment4
     ) {
-        $adjustment1->getDescription()->willReturn('tax 1');
+        $adjustment1->getLabel()->willReturn('tax 1');
         $adjustment1->getAmount()->willReturn(1000);
-        $adjustment2->getDescription()->willReturn('tax 1');
+        $adjustment2->getLabel()->willReturn('tax 1');
         $adjustment2->getAmount()->willReturn(3000);
 
-        $adjustment3->getDescription()->willReturn('tax 2');
+        $adjustment3->getLabel()->willReturn('tax 2');
         $adjustment3->getAmount()->willReturn(4000);
-        $adjustment4->getDescription()->willReturn('tax 2');
+        $adjustment4->getLabel()->willReturn('tax 2');
         $adjustment4->getAmount()->willReturn(-2000);
 
         $this->aggregate(array($adjustment1, $adjustment2, $adjustment3, $adjustment4))->shouldReturn(array(
@@ -56,9 +56,9 @@ class AdjustmentsByLabelAggregatorSpec extends ObjectBehavior
         AdjustmentInterface $adjustment1,
         AdjustmentInterface $adjustment2
     ) {
-        $adjustment1->getDescription()->willReturn('tax 1');
+        $adjustment1->getLabel()->willReturn('tax 1');
         $adjustment1->getAmount()->willReturn(1000);
-        $adjustment2->getDescription()->willReturn('tax 1');
+        $adjustment2->getLabel()->willReturn('tax 1');
         $adjustment2->getAmount()->willReturn(3000);
 
         $this
