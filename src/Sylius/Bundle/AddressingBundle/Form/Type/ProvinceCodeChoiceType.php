@@ -54,7 +54,7 @@ class ProvinceCodeChoiceType extends ProvinceChoiceType
      *
      * @return array
      */
-    private function getProvinceCodes(array $provinces)
+    private function getProvinceCodes($provinces)
     {
         $provincesCodes = array();
 

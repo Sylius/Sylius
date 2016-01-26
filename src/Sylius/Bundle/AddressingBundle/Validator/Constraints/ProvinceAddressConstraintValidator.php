@@ -27,11 +27,18 @@ class ProvinceAddressConstraintValidator extends ConstraintValidator
     private $countryRepository;
 
     /**
-     * @param RepositoryInterface $countryRepository
+     * @var RepositoryInterface
      */
-    public function __construct(RepositoryInterface $countryRepository)
+    private $provinceRepository;
+
+    /**
+     * @param RepositoryInterface $countryRepository
+     * @param RepositoryInterface $provinceRepository
+     */
+    public function __construct(RepositoryInterface $countryRepository, RepositoryInterface $provinceRepository)
     {
         $this->countryRepository = $countryRepository;
+        $this->provinceRepository = $provinceRepository;
     }
 
     /**
@@ -78,7 +85,11 @@ class ProvinceAddressConstraintValidator extends ConstraintValidator
             return false;
         }
 
-        if ($country->hasProvince($address->getProvinceCode())) {
+        if (null === $province = $this->provinceRepository->findOneBy(array('code' => $address->getProvinceCode()))) {
+            return false;
+        }
+
+        if ($country->hasProvince($province)) {
             return true;
         }
 
