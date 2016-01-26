@@ -45,6 +45,10 @@ final class ThemeFactory implements ThemeFactoryInterface
         $theme->setName($themeData['name']);
         $theme->setPath($themeData['path']);
 
+        if (isset($themeData['authors'])) {
+            $theme->setAuthors($themeData['authors']);
+        }
+
         if (isset($themeData['title'])) {
             $theme->setTitle($themeData['title']);
         }
@@ -56,8 +60,6 @@ final class ThemeFactory implements ThemeFactoryInterface
         if (isset($themeData['parents'])) {
             $theme->setParentsNames($themeData['parents']);
         }
-
-        // TODO: Authors
 
         return $theme;
     }

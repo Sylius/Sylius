@@ -39,6 +39,16 @@ interface ThemeInterface extends ResourceInterface
     public function setPath($path);
 
     /**
+     * @return array
+     */
+    public function getAuthors();
+
+    /**
+     * @param array $authors
+     */
+    public function setAuthors(array $authors);
+
+    /**
      * @return string
      */
     public function getTitle();
@@ -57,8 +67,6 @@ interface ThemeInterface extends ResourceInterface
      * @param string $description
      */
     public function setDescription($description);
-
-    // TODO: Authors
 
     /**
      * @return array

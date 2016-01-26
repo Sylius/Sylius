@@ -60,6 +60,7 @@ class ThemeFactorySpec extends ObjectBehavior
         $theme->setName('example/theme')->shouldBeCalled();
         $theme->setPath('/theme/path')->shouldBeCalled();
 
+        $theme->setAuthors([['name' => 'Ryszard Rynkowski']])->shouldBeCalled();
         $theme->setTitle('Example theme')->shouldBeCalled();
         $theme->setDescription('The best theme all around the world')->shouldBeCalled();
         $theme->setParentsNames(['example/parent-theme'])->shouldBeCalled();
@@ -67,7 +68,7 @@ class ThemeFactorySpec extends ObjectBehavior
         $this->createFromArray([
             'name' => 'example/theme',
             'path' => '/theme/path',
-//            'authors' => [['name' => 'Ryszard Rynkowski']], TODO: Authors
+            'authors' => [['name' => 'Ryszard Rynkowski']],
             'title' => 'Example theme',
             'description' => 'The best theme all around the world',
             'parents' => ['example/parent-theme'],

@@ -19,17 +19,22 @@ class Theme implements ThemeInterface
     /**
      * @var string
      */
-    protected $title;
-
-    /**
-     * @var string
-     */
     protected $name;
 
     /**
      * @var string
      */
     protected $path;
+
+    /**
+     * @var array
+     */
+    protected $authors = [];
+
+    /**
+     * @var string
+     */
+    protected $title;
 
     /**
      * @var string
@@ -85,6 +90,22 @@ class Theme implements ThemeInterface
     public function setPath($path)
     {
         $this->path = $path;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAuthors()
+    {
+        return $this->authors;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAuthors(array $authors)
+    {
+        $this->authors = $authors;
     }
 
     /**
