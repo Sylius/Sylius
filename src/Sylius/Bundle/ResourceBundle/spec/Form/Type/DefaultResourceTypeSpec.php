@@ -13,8 +13,8 @@ namespace spec\Sylius\Bundle\ResourceBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ResourceBundle\Form\Type\DefaultResourceType;
 use Sylius\Bundle\ResourceBundle\Form\Builder\DefaultFormBuilderInterface;
+use Sylius\Bundle\ResourceBundle\Form\Type\DefaultResourceType;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

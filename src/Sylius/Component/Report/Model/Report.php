@@ -13,6 +13,7 @@ namespace Sylius\Component\Report\Model;
 
 use Sylius\Component\Report\DataFetcher\DefaultDataFetchers;
 use Sylius\Component\Report\Renderer\DefaultRenderers;
+use Sylius\Component\Resource\Model\CodeAwareTrait;
 
 /**
  * @author Łukasz Chruściel <lchrusciel@gmail.com>
@@ -20,15 +21,12 @@ use Sylius\Component\Report\Renderer\DefaultRenderers;
  */
 class Report implements ReportInterface
 {
+    use CodeAwareTrait;
+
     /**
      * @var mixed
      */
     protected $id;
-
-    /**
-     * @var string
-     */
-    protected $code;
 
     /**
      * @var string
@@ -70,22 +68,6 @@ class Report implements ReportInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCode()
-    {
-        return $this->code;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCode($code)
-    {
-        $this->code = $code;
     }
 
     /**

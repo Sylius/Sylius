@@ -11,12 +11,11 @@
 
 namespace spec\Sylius\Bundle\ResourceBundle\Form\EventSubscriber;
 
-use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Form\FormConfigInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;

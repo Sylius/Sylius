@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\RbacBundle\Form\EventSubscriber;
 
-use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Sylius\Component\Rbac\Model\PermissionInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 

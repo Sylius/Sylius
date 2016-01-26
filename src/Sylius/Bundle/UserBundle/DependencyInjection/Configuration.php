@@ -11,28 +11,28 @@
 
 namespace Sylius\Bundle\UserBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\UserBundle\Controller\CustomerController;
 use Sylius\Bundle\UserBundle\Controller\UserController;
-use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
-use Sylius\Bundle\UserBundle\Form\Type\CustomerType;
+use Sylius\Bundle\UserBundle\Form\Type\CustomerGuestType;
 use Sylius\Bundle\UserBundle\Form\Type\CustomerProfileType;
 use Sylius\Bundle\UserBundle\Form\Type\CustomerRegistrationType;
 use Sylius\Bundle\UserBundle\Form\Type\CustomerSimpleRegistrationType;
-use Sylius\Bundle\UserBundle\Form\Type\CustomerGuestType;
-use Sylius\Bundle\UserBundle\Form\Type\UserType;
-use Sylius\Bundle\UserBundle\Form\Type\UserRegistrationType;
+use Sylius\Bundle\UserBundle\Form\Type\CustomerType;
 use Sylius\Bundle\UserBundle\Form\Type\GroupType;
+use Sylius\Bundle\UserBundle\Form\Type\UserRegistrationType;
+use Sylius\Bundle\UserBundle\Form\Type\UserType;
+use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\User\Model\Customer;
 use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\User\Model\Group;
+use Sylius\Component\User\Model\GroupInterface;
 use Sylius\Component\User\Model\User;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Model\UserOAuth;
 use Sylius\Component\User\Model\UserOAuthInterface;
-use Sylius\Component\User\Model\Group;
-use Sylius\Component\User\Model\GroupInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

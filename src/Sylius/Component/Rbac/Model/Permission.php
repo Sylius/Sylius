@@ -13,6 +13,7 @@ namespace Sylius\Component\Rbac\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\CodeAwareTrait;
 use Sylius\Component\Resource\Model\SoftDeletableTrait;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
@@ -23,17 +24,12 @@ use Sylius\Component\Resource\Model\TimestampableTrait;
  */
 class Permission implements PermissionInterface
 {
-    use SoftDeletableTrait, TimestampableTrait;
+    use CodeAwareTrait, SoftDeletableTrait, TimestampableTrait;
 
     /**
      * @var mixed
      */
     protected $id;
-
-    /**
-     * @var string
-     */
-    protected $code;
 
     /**
      * @var string
@@ -88,22 +84,6 @@ class Permission implements PermissionInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCode()
-    {
-        return $this->code;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCode($code)
-    {
-        $this->code = $code;
     }
 
     /**

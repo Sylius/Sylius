@@ -14,7 +14,6 @@ namespace spec\Sylius\Bundle\AddressingBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberType;
-use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Component\Addressing\Model\ZoneMember;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormTypeInterface;

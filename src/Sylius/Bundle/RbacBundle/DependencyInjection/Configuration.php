@@ -11,16 +11,16 @@
 
 namespace Sylius\Bundle\RbacBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Bundle\RbacBundle\Form\Type\PermissionType;
+use Sylius\Bundle\RbacBundle\Form\Type\RoleType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
-use Sylius\Bundle\RbacBundle\Form\Type\RoleType;
-use Sylius\Bundle\RbacBundle\Form\Type\PermissionType;
-use Sylius\Component\Rbac\Model\Role;
-use Sylius\Component\Rbac\Model\RoleInterface;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Rbac\Model\Permission;
 use Sylius\Component\Rbac\Model\PermissionInterface;
+use Sylius\Component\Rbac\Model\Role;
+use Sylius\Component\Rbac\Model\RoleInterface;
+use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

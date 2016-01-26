@@ -11,8 +11,8 @@
 
 namespace Sylius\Component\Taxation\Model;
 
-use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**

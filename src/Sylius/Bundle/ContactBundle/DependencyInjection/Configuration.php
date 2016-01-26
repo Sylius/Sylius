@@ -11,21 +11,21 @@
 
 namespace Sylius\Bundle\ContactBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Resource\Factory\Factory;
-use Sylius\Component\Translation\Factory\TranslatableFactory;
-use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository;
 use Sylius\Bundle\ContactBundle\Form\Type\RequestType;
-use Sylius\Bundle\ContactBundle\Form\Type\TopicType;
 use Sylius\Bundle\ContactBundle\Form\Type\TopicTranslationType;
+use Sylius\Bundle\ContactBundle\Form\Type\TopicType;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository;
 use Sylius\Component\Contact\Model\Request;
 use Sylius\Component\Contact\Model\RequestInterface;
 use Sylius\Component\Contact\Model\Topic;
 use Sylius\Component\Contact\Model\TopicInterface;
 use Sylius\Component\Contact\Model\TopicTranslation;
 use Sylius\Component\Contact\Model\TopicTranslationInterface;
+use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Component\Translation\Factory\TranslatableFactory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

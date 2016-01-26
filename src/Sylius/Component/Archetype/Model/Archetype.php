@@ -13,11 +13,10 @@ namespace Sylius\Component\Archetype\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Attribute\Model\AttributeInterface as BaseAttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeInterface;
+use Sylius\Component\Resource\Model\CodeAwareTrait;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Translation\Model\AbstractTranslatable;
-use Sylius\Component\Variation\Model\OptionInterface as BaseOptionInterface;
 use Sylius\Component\Variation\Model\OptionInterface;
 
 /**
@@ -29,17 +28,12 @@ use Sylius\Component\Variation\Model\OptionInterface;
  */
 class Archetype extends AbstractTranslatable implements ArchetypeInterface
 {
-    use TimestampableTrait;
+    use CodeAwareTrait, TimestampableTrait;
 
     /**
      * @var mixed
      */
     protected $id;
-
-    /**
-     * @var string
-     */
-    protected $code;
 
     /**
      * @var Collection|AttributeInterface[]
@@ -83,22 +77,6 @@ class Archetype extends AbstractTranslatable implements ArchetypeInterface
     /**
      * {@inheritdoc}
      */
-    public function getCode()
-    {
-        return $this->code;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCode($code)
-    {
-        $this->code = $code;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getAttributes()
     {
         if (!$this->hasParent()) {
@@ -119,7 +97,7 @@ class Archetype extends AbstractTranslatable implements ArchetypeInterface
     /**
      * {@inheritdoc}
      */
-    public function addAttribute(BaseAttributeInterface $attribute)
+    public function addAttribute(AttributeInterface $attribute)
     {
         $this->attributes->add($attribute);
     }
@@ -127,7 +105,7 @@ class Archetype extends AbstractTranslatable implements ArchetypeInterface
     /**
      * {@inheritdoc}
      */
-    public function removeAttribute(BaseAttributeInterface $attribute)
+    public function removeAttribute(AttributeInterface $attribute)
     {
         $this->attributes->removeElement($attribute);
     }
@@ -135,7 +113,7 @@ class Archetype extends AbstractTranslatable implements ArchetypeInterface
     /**
      * {@inheritdoc}
      */
-    public function hasAttribute(BaseAttributeInterface $attribute)
+    public function hasAttribute(AttributeInterface $attribute)
     {
         return $this->attributes->contains($attribute);
     }
@@ -163,7 +141,7 @@ class Archetype extends AbstractTranslatable implements ArchetypeInterface
     /**
      * {@inheritdoc}
      */
-    public function addOption(BaseOptionInterface $option)
+    public function addOption(OptionInterface $option)
     {
         $this->options->add($option);
     }
@@ -171,7 +149,7 @@ class Archetype extends AbstractTranslatable implements ArchetypeInterface
     /**
      * {@inheritdoc}
      */
-    public function removeOption(BaseOptionInterface $option)
+    public function removeOption(OptionInterface $option)
     {
         $this->options->removeElement($option);
     }
@@ -179,7 +157,7 @@ class Archetype extends AbstractTranslatable implements ArchetypeInterface
     /**
      * {@inheritdoc}
      */
-    public function hasOption(BaseOptionInterface $option)
+    public function hasOption(OptionInterface $option)
     {
         return $this->options->contains($option);
     }

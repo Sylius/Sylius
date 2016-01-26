@@ -11,8 +11,6 @@
 
 namespace spec\Sylius\Bundle\ResourceBundle\Fixture;
 
-use spec\Sylius\Bundle\ResourceBundle\Fixture\FooInterface;
-
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */

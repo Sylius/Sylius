@@ -12,9 +12,9 @@
 namespace Sylius\Bundle\ThemeBundle\Asset\Installer;
 
 use Sylius\Bundle\ThemeBundle\Asset\PathResolverInterface;
+use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProviderInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
-use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProviderInterface;
 use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;

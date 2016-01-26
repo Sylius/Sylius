@@ -12,12 +12,9 @@
 namespace Sylius\Bundle\PaymentBundle\Form\Type;
 
 use Sylius\Bundle\PaymentBundle\Form\Type\EventListener\BuildPaymentMethodFeeCalculatorFormSubscriber;
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Component\Registry\ServiceRegistryInterface;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormView;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * Payment method form type.

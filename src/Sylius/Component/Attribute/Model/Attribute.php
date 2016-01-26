@@ -14,6 +14,7 @@ namespace Sylius\Component\Attribute\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Attribute\AttributeType\TextAttributeType;
+use Sylius\Component\Resource\Model\CodeAwareTrait;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Translation\Model\AbstractTranslatable;
 
@@ -24,17 +25,12 @@ use Sylius\Component\Translation\Model\AbstractTranslatable;
  */
 class Attribute extends AbstractTranslatable implements AttributeInterface
 {
-    use TimestampableTrait;
+    use CodeAwareTrait, TimestampableTrait;
 
     /**
      * @var mixed
      */
     protected $id;
-
-    /**
-     * @var string
-     */
-    protected $code;
 
     /**
      * @var string
@@ -78,22 +74,6 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCode()
-    {
-        return $this->code;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCode($code)
-    {
-        $this->code = $code;
     }
 
     /**

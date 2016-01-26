@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\ContentBundle\Document;
 
-use Symfony\Cmf\Bundle\ContentBundle\Doctrine\Phpcr\StaticContent as BaseStaticContent;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Symfony\Cmf\Bundle\ContentBundle\Doctrine\Phpcr\StaticContent as BaseStaticContent;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

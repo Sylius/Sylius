@@ -12,8 +12,8 @@
 namespace Sylius\Behat\Context\Hook;
 
 use Behat\Behat\Context\Context;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>

@@ -11,7 +11,6 @@
 
 namespace Sylius\Behat\Page\Product;
 
-use SensioLabs\Behat\PageObjectExtension\PageObject\Factory;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Component\Product\Model\ProductInterface;
 

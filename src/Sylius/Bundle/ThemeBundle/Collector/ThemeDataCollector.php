@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\ThemeBundle\Collector;
 
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
-use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProviderInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;

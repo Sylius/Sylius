@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Shipping\Model;
 
+use Sylius\Component\Resource\Model\CodeAwareTrait;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
 /**
@@ -18,17 +19,12 @@ use Sylius\Component\Resource\Model\TimestampableTrait;
  */
 class ShippingCategory implements ShippingCategoryInterface
 {
-    use TimestampableTrait;
+    use CodeAwareTrait, TimestampableTrait;
 
     /**
      * @var mixed
      */
     protected $id;
-
-    /**
-     * @var string
-     */
-    protected $code;
 
     /**
      * @var string
@@ -59,22 +55,6 @@ class ShippingCategory implements ShippingCategoryInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCode()
-    {
-        return $this->code;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCode($code)
-    {
-        $this->code = $code;
     }
 
     /**

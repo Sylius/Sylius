@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\ContentBundle\Document;
 
-use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode as BaseMenuNode;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode as BaseMenuNode;
 
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>

@@ -13,8 +13,8 @@ namespace Sylius\Bundle\ResourceBundle\Form;
 
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\ORM\Mapping\ClassMetadataInfo as ORMClassMetadataInfo;
 use Doctrine\ODM\MongoDB\Mapping\ClassMetadataInfo as ODMClassMetadataInfo;
+use Doctrine\ORM\Mapping\ClassMetadataInfo as ORMClassMetadataInfo;
 use Symfony\Component\Form\FormFactoryInterface;
 
 /**

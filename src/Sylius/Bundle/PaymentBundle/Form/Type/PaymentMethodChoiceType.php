@@ -12,14 +12,7 @@
 namespace Sylius\Bundle\PaymentBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
-use Sylius\Component\Core\Model\Order;
-use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
-use Sylius\Component\Registry\ServiceRegistryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Symfony\Component\Form\Exception\UnexpectedTypeException;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

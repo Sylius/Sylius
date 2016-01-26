@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Channel\Model;
 
+use Sylius\Component\Resource\Model\CodeAwareTrait;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 
@@ -19,17 +20,12 @@ use Sylius\Component\Resource\Model\ToggleableTrait;
  */
 class Channel implements ChannelInterface
 {
-    use TimestampableTrait, ToggleableTrait;
+    use CodeAwareTrait, TimestampableTrait, ToggleableTrait;
 
     /**
      * @var mixed
      */
     protected $id;
-
-    /**
-     * @var string
-     */
-    protected $code;
 
     /**
      * @var string
@@ -70,22 +66,6 @@ class Channel implements ChannelInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCode()
-    {
-        return $this->code;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCode($code)
-    {
-        $this->code = $code;
     }
 
     /**

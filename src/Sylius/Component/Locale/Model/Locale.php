@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Locale\Model;
 
+use Sylius\Component\Resource\Model\CodeAwareTrait;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Symfony\Component\Intl\Intl;
@@ -20,17 +21,12 @@ use Symfony\Component\Intl\Intl;
  */
 class Locale implements LocaleInterface
 {
-    use TimestampableTrait, ToggleableTrait;
+    use CodeAwareTrait, TimestampableTrait, ToggleableTrait;
 
     /**
      * @var integer
      */
     protected $id;
-
-    /**
-     * @var string
-     */
-    protected $code;
 
     public function __construct()
     {
@@ -48,22 +44,6 @@ class Locale implements LocaleInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCode()
-    {
-        return $this->code;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCode($code)
-    {
-        $this->code = $code;
     }
 
     /**

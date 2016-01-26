@@ -12,9 +12,9 @@
 namespace Sylius\Bundle\ResourceBundle\Behat;
 
 use Behat\Behat\Context\Context;
-use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
