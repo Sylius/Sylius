@@ -3,9 +3,31 @@ Configuring Your Resources
 
 Now you need to configure your first resource. Let's assume you have a *Book* entity in your application and it has simple fields:
 
+* id
 * title
 * author
 * description
+
+In your class, you need to implement a simple interface:
+
+.. code-block:: php
+
+    <?php
+
+    namespace AppBundle\Entity;
+
+    use Sylius\Component\Resource\Model\ResourceInterface;
+
+    class Book implements ResourceInterface
+    {
+        // Most of the time you have the code below already in your class.
+        protected $id;
+
+        public function getId()
+        {
+            return $this->id;
+        }
+    }
 
 In your ``app/config/config.yml`` add:
 
