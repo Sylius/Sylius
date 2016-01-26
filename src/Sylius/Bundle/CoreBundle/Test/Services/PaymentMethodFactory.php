@@ -27,7 +27,13 @@ class PaymentMethodFactory implements PaymentMethodFactoryInterface
     /**
      * @var array
      */
-    private $expectedGateways;
+    private $expectedGateways = [
+        'paypal_express_checkout' => 'PayPal Express Checkout',
+        'be2bill_direct' => 'Be2bill Direct',
+        'be2bill_offsite' => 'Be2bill Offsite',
+        'stripe_checkout' => 'Stripe Checkout',
+        'dummy' => 'Offline',
+    ];
 
     /**
      * {@inheritdoc}
@@ -35,13 +41,6 @@ class PaymentMethodFactory implements PaymentMethodFactoryInterface
     public function __construct(FactoryInterface $defaultFactory)
     {
         $this->defaultFactory = $defaultFactory;
-        $this->expectedGateways = [
-            'paypal_express_checkout' => 'PayPal Express Checkout',
-            'be2bill_direct' => 'Be2bill Direct',
-            'be2bill_offsite' => 'Be2bill Offsite',
-            'stripe_checkout' => 'Stripe Checkout',
-            'dummy' => 'Offline',
-        ];
     }
 
     /**
@@ -57,7 +56,7 @@ class PaymentMethodFactory implements PaymentMethodFactoryInterface
      */
     public function createFromArray(array $parameters)
     {
-        $this->checkGateway($parameters);
+        $this->paymentMethodNameToGateway($parameters);
         $paymentMethod = $this->defaultFactory->createNew();
 
         $accessor = PropertyAccess::createPropertyAccessor();
@@ -70,13 +69,15 @@ class PaymentMethodFactory implements PaymentMethodFactoryInterface
 
     /**
      * @param array $parameters
-     *
-     * @throws \InvalidArgumentException
      */
-    private function checkGateway(array $parameters)
+    private function paymentMethodNameToGateway(array &$parameters)
     {
+        if (!isset($parameters['name'])) {
+            throw new \InvalidArgumentException(sprintf('Name cannot be empty'));
+        }
+
         if (!isset($parameters['gateway'])) {
-            throw new \InvalidArgumentException('Gateway parameter is not set');
+            $parameters['gateway'] = array_search($parameters['name'], $this->expectedGateways);
         }
 
         if (!array_key_exists($parameters['gateway'], $this->expectedGateways)) {

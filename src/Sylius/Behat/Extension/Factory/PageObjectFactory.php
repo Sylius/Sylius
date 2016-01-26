@@ -131,7 +131,7 @@ class PageObjectFactory implements Factory
     private function instantiatePage($pageClass)
     {
         if (!is_subclass_of($pageClass, 'Sylius\Behat\Page\SymfonyPage')) {
-            throw new \InvalidArgumentException(sprintf('Invalid page object class: %s, to use this factory you need to extend SymfonyPage', $pageClass));
+            return $this->defaultFactory->create($pageClass);
         }
 
         return new $pageClass($this->mink->getSession(), $this, $this->pageParameters, $this->router);

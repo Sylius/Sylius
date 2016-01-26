@@ -21,7 +21,7 @@ class CheckoutFinalizeStep extends SymfonyPage
     /**
      * @return string
      */
-    public function getRouteName()
+    protected function getRouteName()
     {
         return 'sylius_checkout_finalize';
     }

@@ -18,10 +18,17 @@ use Sylius\Behat\Page\SymfonyPage;
  */
 class CheckoutThankYouPage extends SymfonyPage
 {
+    public function waitForPaypalRedirect()
+    {
+        $this->waitFor(10, function() {
+            return $this->isOpen();
+        });
+    }
+
     /**
      * @return string
      */
-    public function getRouteName()
+    protected function getRouteName()
     {
         return 'sylius_checkout_thank_you';
     }

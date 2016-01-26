@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Proxies\__CG__\Sylius\Component\Payment\Model\PaymentMethod;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -37,9 +38,9 @@ class PaymentContext implements Context
     private $paymentMethodFactory;
 
     /**
-     * @param $paymentMethodRepository
-     * @param $sharedStorage
-     * @param $paymentMethodFactory
+     * @param RepositoryInterface $paymentMethodRepository
+     * @param SharedStorageInterface $sharedStorage
+     * @param FactoryInterface $paymentMethodFactory
      */
     public function __construct(RepositoryInterface $paymentMethodRepository, SharedStorageInterface $sharedStorage, FactoryInterface $paymentMethodFactory)
     {
@@ -49,15 +50,17 @@ class PaymentContext implements Context
     }
 
     /**
-     * @Given store allows paying offline
+     * @Given store allows paying :paymentMethodName
      */
-    public function storeAllowsPayingOffline()
+    public function storeAllowsPaying($paymentMethodName)
     {
-        $paymentMethod = $this->paymentMethodFactory->createNew();
-        $paymentMethod->setCode('PM1');
-        $paymentMethod->setGateway('dummy');
-        $paymentMethod->setName('Offline');
-        $paymentMethod->setDescription('Offline payment method');
+        $properties = [
+            'code' => 'PM1',
+            'name' => $paymentMethodName,
+            'description' => 'Payment method'
+        ];
+
+        $paymentMethod = $this->paymentMethodFactory->createFromArray($properties);
 
         $channel = $this->sharedStorage->getCurrentResource('channel');
         $channel->addPaymentMethod($paymentMethod);
