@@ -45,7 +45,7 @@ class AdjustmentTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('description', 'text', Argument::any())
+            ->add('label', 'text', Argument::any())
             ->willReturn($builder)
         ;
 

@@ -47,7 +47,7 @@ class AdjustmentFactorySpec extends ObjectBehavior
     {
         $adjustmentFactory->createNew()->willReturn($adjustment);
         $adjustment->setType('tax')->shouldBeCalled();
-        $adjustment->setDescription('Tax description')->shouldBeCalled();
+        $adjustment->setLabel('Tax description')->shouldBeCalled();
         $adjustment->setAmount(1000)->shouldBeCalled();
         $adjustment->setNeutral(false)->shouldBeCalled();
 

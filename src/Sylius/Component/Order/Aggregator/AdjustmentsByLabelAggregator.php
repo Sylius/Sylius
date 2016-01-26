@@ -27,11 +27,11 @@ final class AdjustmentsByLabelAggregator implements AdjustmentsAggregatorInterfa
         foreach ($adjustments as $adjustment) {
             $this->assertElementIsAdjustment($adjustment);
 
-            if (!isset($aggregatedAdjustments[$adjustment->getDescription()])) {
-                $aggregatedAdjustments[$adjustment->getDescription()] = 0;
+            if (!isset($aggregatedAdjustments[$adjustment->getLabel()])) {
+                $aggregatedAdjustments[$adjustment->getLabel()] = 0;
             }
 
-            $aggregatedAdjustments[$adjustment->getDescription()] += $adjustment->getAmount();
+            $aggregatedAdjustments[$adjustment->getLabel()] += $adjustment->getAmount();
         }
 
         return $aggregatedAdjustments;
