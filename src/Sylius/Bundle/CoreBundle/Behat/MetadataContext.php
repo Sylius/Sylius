@@ -274,11 +274,10 @@ class MetadataContext extends DefaultContext
      */
     private function assertItIsMetadataCustomizationPage(ElementInterface $element, $regexp)
     {
-        if ($this->isItMetadataCustomizationPage($element, $regexp)) {
-            return;
+        if (!$this->isItMetadataCustomizationPage($element, $regexp)) {
+            throw new \Exception(sprintf("It is not metadata customziation page (regexp: %s)", $regexp));
         }
 
-        throw new \Exception(sprintf("It is not metadata customziation page (regexp: %s)", $regexp));
     }
 
     /**
@@ -299,7 +298,7 @@ class MetadataContext extends DefaultContext
             return false;
         }
 
-        if (!preg_match($regexp, $header->getText())) {
+        if (false === (bool) preg_match($regexp, $header->getText())) {
             return false;
         }
 
@@ -314,11 +313,9 @@ class MetadataContext extends DefaultContext
      */
     private function assertThereIsFormWithFields(ElementInterface $element, array $fields)
     {
-        if (null !== $this->getFormWithFields($element, $fields)) {
-            return;
+        if (null === $this->getFormWithFields($element, $fields)) {
+            throw new \Exception(sprintf("Could not found table with fields: %s", implode(', ', $fields)));
         }
-
-        throw new \Exception(sprintf("Could not found table with fields: %s", join(', ', $fields)));
     }
 
     /**

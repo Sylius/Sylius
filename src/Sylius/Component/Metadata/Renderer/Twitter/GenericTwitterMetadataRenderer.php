@@ -67,7 +67,7 @@ final class GenericTwitterMetadataRenderer implements MetadataRendererInterface
      */
     public function render(MetadataInterface $metadata, array $options = [])
     {
-        return implode("\n", $this->renderProperties(
+        return implode(PHP_EOL, $this->renderProperties(
             $metadata,
             $this->optionsResolver->resolve($options)
         ));

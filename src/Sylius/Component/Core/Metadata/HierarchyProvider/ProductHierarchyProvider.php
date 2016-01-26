@@ -23,12 +23,11 @@ class ProductHierarchyProvider implements MetadataHierarchyProviderInterface
 {
     /**
      * {@inheritdoc}
+     *
+     * @param ProductInterface|MetadataSubjectInterface $product
      */
-    public function getHierarchyByMetadataSubject(MetadataSubjectInterface $metadataSubject)
+    public function getHierarchyByMetadataSubject(MetadataSubjectInterface $product)
     {
-        /** @var ProductInterface $product */
-        $product = $metadataSubject;
-
         $hierarchy = [
             $product->getMetadataIdentifier(),
         ];
@@ -40,7 +39,6 @@ class ProductHierarchyProvider implements MetadataHierarchyProviderInterface
         }
 
         $hierarchy[] = $product->getMetadataClassIdentifier();
-
         $hierarchy[] = 'DefaultPage';
 
         return $hierarchy;

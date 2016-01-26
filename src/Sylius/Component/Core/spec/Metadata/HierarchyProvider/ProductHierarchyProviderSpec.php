@@ -12,12 +12,14 @@
 namespace spec\Sylius\Component\Core\Metadata\HierarchyProvider;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Metadata\HierarchyProvider\ProductHierarchyProvider;
 use Sylius\Component\Core\Model\ArchetypeInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Metadata\HierarchyProvider\MetadataHierarchyProviderInterface;
 use Sylius\Component\Metadata\Model\MetadataSubjectInterface;
 
 /**
- * @mixin \Sylius\Component\Core\Metadata\HierarchyProvider\ProductHierarchyProvider
+ * @mixin ProductHierarchyProvider
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
@@ -30,7 +32,7 @@ class ProductHierarchyProviderSpec extends ObjectBehavior
 
     function it_implements_Sylius_Metadata_Hierarchy_Provider_interface()
     {
-        $this->shouldImplement('Sylius\Component\Metadata\HierarchyProvider\MetadataHierarchyProviderInterface');
+        $this->shouldImplement(MetadataHierarchyProviderInterface::class);
     }
 
     function it_supports_Sylius_Core_Product(
@@ -60,7 +62,7 @@ class ProductHierarchyProviderSpec extends ObjectBehavior
         ]);
     }
 
-    function it_generates_correct_hierarchy_when_product_does_not_archetype(
+    function it_generates_correct_hierarchy_when_product_does_not_have_archetype(
         ProductInterface $product
     ) {
         $product->getMetadataIdentifier()->shouldBeCalled()->willReturn('Product-42');

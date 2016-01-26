@@ -1,6 +1,6 @@
 @metadata @ui
 Feature: Metadata customization
-  In order to customize metadatas
+  In order to customize metadata
   As a store owner
   I want to have user-friendly metadata customization form
 

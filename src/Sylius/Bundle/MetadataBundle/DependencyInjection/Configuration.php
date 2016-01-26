@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\MetadataBundle\DependencyInjection;
 
+use Sylius\Bundle\MetadataBundle\Controller\MetadataController;
 use Sylius\Bundle\MetadataBundle\Form\Type\MetadataContainerType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
@@ -74,7 +75,7 @@ class Configuration implements ConfigurationInterface
                         ->children()
                             ->scalarNode('model')->defaultValue(MetadataContainer::class)->cannotBeEmpty()->end()
                             ->scalarNode('interface')->defaultValue(MetadataContainerInterface::class)->cannotBeEmpty()->end()
-                            ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                            ->scalarNode('controller')->defaultValue(MetadataController::class)->cannotBeEmpty()->end()
                             ->scalarNode('repository')->cannotBeEmpty()->end()
                             ->scalarNode('factory')->defaultValue(MetadataContainerFactory::class)->end()
                             ->arrayNode('form')

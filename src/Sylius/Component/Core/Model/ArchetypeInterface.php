@@ -20,4 +20,3 @@ use Sylius\Component\Metadata\Model\MetadataSubjectInterface;
 interface ArchetypeInterface extends BaseArchetypeInterface, MetadataSubjectInterface
 {
 }
-

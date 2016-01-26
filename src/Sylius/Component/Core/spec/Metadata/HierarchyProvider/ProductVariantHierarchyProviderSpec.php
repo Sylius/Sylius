@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ArchetypeInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Metadata\HierarchyProvider\MetadataHierarchyProviderInterface;
 use Sylius\Component\Metadata\Model\MetadataSubjectInterface;
 
 /**
@@ -31,7 +32,7 @@ class ProductVariantHierarchyProviderSpec extends ObjectBehavior
 
     function it_implements_Sylius_Metadata_Hierarchy_Provider_interface()
     {
-        $this->shouldImplement('Sylius\Component\Metadata\HierarchyProvider\MetadataHierarchyProviderInterface');
+        $this->shouldImplement(MetadataHierarchyProviderInterface::class);
     }
 
     function it_supports_Sylius_Core_ProductVariant(
@@ -67,7 +68,7 @@ class ProductVariantHierarchyProviderSpec extends ObjectBehavior
         ]);
     }
 
-    function it_generates_correct_hierarchy_when_product_variant_does_not_archetype(
+    function it_generates_correct_hierarchy_when_product_variant_does_not_have_archetype(
         ProductVariantInterface $productVariant,
         ProductInterface $product
     ) {

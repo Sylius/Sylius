@@ -35,15 +35,17 @@ abstract class AbstractMetadata implements MetadataInterface
 
         $inheritedVariables = get_object_vars($metadata);
         foreach ($inheritedVariables as $inheritedKey => $inheritedValue) {
-            if (null !== $this->$inheritedKey) {
+            if ($this->{$inheritedKey} instanceof MetadataInterface) {
+                $this->{$inheritedKey}->merge($inheritedValue);
+
                 continue;
             }
 
-            if ($this->$inheritedKey instanceof MetadataInterface) {
-                $this->$inheritedKey->merge($inheritedValue);
-            } else {
-                $this->$inheritedKey = $inheritedValue;
+            if (null !== $this->{$inheritedKey}) {
+                continue;
             }
+
+            $this->{$inheritedKey} = $inheritedValue;
         }
     }
 

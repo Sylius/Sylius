@@ -11,10 +11,12 @@
 
 namespace Sylius\Component\Metadata\Model;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
+
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-interface MetadataContainerInterface
+interface MetadataContainerInterface extends ResourceInterface
 {
     /**
      * @return string

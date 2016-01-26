@@ -789,9 +789,3 @@ sylius_user:
             classes:
                 model: Sylius\Component\Core\Model\Customer
                 controller: Sylius\Bundle\CoreBundle\Controller\CustomerController
-
-sylius_metadata:
-    resources:
-        metadata_container:
-            classes:
-                controller: Sylius\Bundle\WebBundle\Controller\Backend\MetadataController

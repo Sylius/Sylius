@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\WebBundle\Controller\Backend;
+namespace Sylius\Bundle\MetadataBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;

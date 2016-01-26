@@ -208,7 +208,7 @@ sylius:
         menu_node:
             index: Menu nodes
         metadata:
-            index: Metadatas
+            index: Metadata
         new: New
         option:
             index: Options
@@ -565,7 +565,7 @@ sylius:
         customize: Customize metadata
         manage: Manage metadata
         content: Content
-        index_metadata: Metadatas
+        index_metadata: Metadata
         default_page:
             group_customize: Customize default metadata
         product:

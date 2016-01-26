@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Product\Model\Archetype as BaseArchetype;
+use Sylius\Component\Product\Model\ArchetypeTranslation;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -39,6 +40,6 @@ class Archetype extends BaseArchetype implements ArchetypeInterface
      */
     public static function getTranslationClass()
     {
-        return 'Sylius\Component\Product\Model\ArchetypeTranslation';
+        return ArchetypeTranslation::class;
     }
 }
