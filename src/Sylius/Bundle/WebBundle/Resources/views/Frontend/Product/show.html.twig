@@ -3,6 +3,14 @@
 {% set form = sylius_cart_form({'product': product}) %}
 {% from 'SyliusWebBundle:Frontend/Product:macros.html.twig' import sylius_display_price %}
 
+{% block head %}
+    {{ sylius_metadata_render(product, null, { 'defaults': {
+        'title': settings.title|default('sylius.meta.frontend_title'|trans),
+        'description': settings.meta_description|default('sylius.meta.frontend_description'|trans),
+        'keywords': settings.meta_description|default('sylius.meta.frontend_keywords'|trans)
+    } })|raw }}
+{% endblock %}
+
 {% block content %}
 <div class="row">
     <div class="col-md-3">

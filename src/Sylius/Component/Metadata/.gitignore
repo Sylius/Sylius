@@ -1,0 +1,7 @@
+vendor/
+bin/
+
+composer.phar
+composer.lock
+
+phpspec.yml

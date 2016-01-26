@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 use Sylius\Component\Product\Model\VariantInterface as BaseVariantInterface;
+use Sylius\Component\Metadata\Model\MetadataSubjectInterface;
 use Sylius\Component\Shipping\Model\ShippableInterface;
 
 /**
@@ -26,8 +27,11 @@ interface ProductVariantInterface extends
     BaseVariantInterface,
     ShippableInterface,
     StockableInterface,
-    PriceableInterface
+    PriceableInterface,
+    MetadataSubjectInterface
 {
+    const METADATA_CLASS_IDENTIFIER = 'ProductVariant';
+
     /**
      * Get images.
      *

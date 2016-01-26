@@ -77,6 +77,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
             'reports.xml',
             'state_machine.xml',
             'email.xml',
+            'metadata.xml',
         );
 
         $env = $container->getParameter('kernel.environment');

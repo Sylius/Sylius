@@ -50,8 +50,11 @@
             <td>
                 <div class="pull-right">
                 {% if not variant.deleted %}
-                {{ buttons.edit(path('sylius_backend_product_variant_update', {'productId': product.id, 'id': variant.id})) }}
-                {{ buttons.delete(path('sylius_backend_product_variant_delete', {'productId': product.id, 'id': variant.id})) }}
+                    <a href="{{ path('sylius_backend_metadata_container_customize', { 'id': variant.metadataIdentifier }) }}" class="btn btn-default">
+                        <i class="glyphicon glyphicon-file"></i><span>{{ 'sylius.metadata.product_variant.single_customize'|trans }}</span>
+                    </a>
+                    {{ buttons.edit(path('sylius_backend_product_variant_update', {'productId': product.id, 'id': variant.id})) }}
+                    {{ buttons.delete(path('sylius_backend_product_variant_delete', {'productId': product.id, 'id': variant.id})) }}
                 {% endif %}
                 </div>
             </td>
