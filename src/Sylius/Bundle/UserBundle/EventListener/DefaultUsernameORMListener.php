@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\UserBundle\EventListener;
 
-use Doctrine\ORM\Event\OnFlushEventArgs;
+use Doctrine\ORM\Event\LifecycleEventArgs;
 use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\User\Model\UserInterface;
 
 /**
  * Keeps user's username synchronized with email.
@@ -22,30 +23,39 @@ use Sylius\Component\User\Model\CustomerInterface;
 class DefaultUsernameORMListener
 {
     /**
-     * @param OnFlushEventArgs $onFlushEventArgs
+     * @param LifecycleEventArgs $event
      */
-    public function onFlush(OnFlushEventArgs $onFlushEventArgs)
+    public function prePersist(LifecycleEventArgs $event)
     {
-        $entityManager = $onFlushEventArgs->getEntityManager();
-        $unitOfWork = $entityManager->getUnitOfWork();
+        $user = $event->getEntity();
 
-        $entities = array_merge(
-            $unitOfWork->getScheduledEntityInsertions(),
-            $unitOfWork->getScheduledEntityUpdates()
-        );
+        if (!$user instanceof UserInterface) {
+            return;
+        }
 
-        foreach ($entities as $entity) {
-            if (!$entity instanceof CustomerInterface) {
-                continue;
-            }
+        $customer = $user->getCustomer();
+        if (null !== $customer && $customer->getEmail() !== $user->getUsername()) {
+            $user->setUsername($customer->getEmail());
+        }
+    }
 
-            $user = $entity->getUser();
-            if (null !== $user && $entity->getEmail() !== $user->getUsername()) {
-                $user->setUsername($entity->getEmail());
-                $entityManager->persist($user);
-                $userMetadata = $entityManager->getClassMetadata(get_class($user));
-                $unitOfWork->recomputeSingleEntityChangeSet($userMetadata, $user);
-            }
+    /**
+     * @param LifecycleEventArgs $event
+     */
+    public function preUpdate(LifecycleEventArgs $event)
+    {
+        $customer = $event->getEntity();
+
+        if (!$customer instanceof CustomerInterface) {
+            return;
+        }
+
+        $user = $customer->getUser();
+        if (null !== $user && $user->getUsername() !== $customer->getEmail()) {
+            $user->setUsername($customer->getEmail());
+            $entityManager = $event->getEntityManager();
+            $entityManager->persist($user);
+            $entityManager->flush($user);
         }
     }
 }

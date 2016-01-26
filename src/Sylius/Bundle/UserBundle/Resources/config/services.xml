@@ -113,7 +113,8 @@
             <tag name="kernel.event_subscriber" />
         </service>
         <service id="sylius.listener.default_username" class="%sylius.listener.default_username.class%">
-            <tag name="doctrine.event_listener" event="onFlush" />
+            <tag name="doctrine.event_listener" event="prePersist" priority="10" />
+            <tag name="doctrine.event_listener" event="preUpdate" priority="10" />
         </service>
         <service id="sylius.listener.user_auto_login" class="%sylius.listener.user_auto_login.class%">
             <argument type="service" id="sylius.security.user_login" />
