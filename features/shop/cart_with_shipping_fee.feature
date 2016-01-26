@@ -14,7 +14,7 @@ Feature: Cart shipping without taxes
 
     Scenario: Adding proper shipping fee
         Given I am logged in as "john@example.com"
-        And I added product "PHP T-Shirt" to the cart
+        And I add product "PHP T-Shirt" to the cart
         When I proceed selecting "DHL" shipping method
-        Then my cart shipping fee should be "€10.00"
-        And my cart total should be "€110.00"
+        Then my cart total should be "€110.00"
+        And my cart shipping fee should be "€10.00"

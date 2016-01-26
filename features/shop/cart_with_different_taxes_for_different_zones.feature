@@ -20,31 +20,31 @@ Feature: Apply taxes based on zone and tax rate
         And I am logged in customer
 
     Scenario: Displaying correct tax before specifying shipping address
-        When I added product "PHP T-Shirt" to the cart
-        Then my cart taxes should be "€23.00"
-        And my cart total should be "€123.00"
+        When I add product "PHP T-Shirt" to the cart
+        Then my cart total should be "€123.00"
+        And my cart taxes should be "€23.00"
 
     Scenario: Displaying correct tax after specifying shipping address
-        When I added product "PHP T-Shirt" to the cart
+        When I add product "PHP T-Shirt" to the cart
         And I proceed selecting "Offline" payment method and "Uzbekistan" as shipping country
-        Then my cart taxes should be "€0.00"
-        And my cart total should be "€100.00"
+        Then my cart total should be "€100.00"
+        And my cart taxes should be "€0.00"
 
     Scenario: Displaying correct taxes for multiple products after specifying shipping address
-        When I added 3 products "PHP T-Shirt" to the cart
+        When I add 3 products "PHP T-Shirt" to the cart
         And I proceed selecting "Offline" payment method and "Uzbekistan" as shipping country
-        Then my cart taxes should be "€0.00"
-        And my cart total should be "€300.00"
+        Then my cart total should be "€300.00"
+        And my cart taxes should be "€0.00"
 
     Scenario: Displaying correct taxes for multiple products from different zones before specifying shipping address
-        When I added product "PHP T-Shirt" to the cart
-        And I added 2 products "Symfony Mug" to the cart
-        Then my cart taxes should be "€28.00"
-        And my cart total should be "€228.00"
+        When I add product "PHP T-Shirt" to the cart
+        And I add 2 products "Symfony Mug" to the cart
+        Then my cart total should be "€228.00"
+        And my cart taxes should be "€28.00"
 
     Scenario: Displaying correct taxes for multiple products from different zones after specifying shipping address
-        When I added product "PHP T-Shirt" to the cart
-        And I added 2 products "Symfony Mug" to the cart
+        When I add product "PHP T-Shirt" to the cart
+        And I add 2 products "Symfony Mug" to the cart
         And I proceed selecting "Offline" payment method and "Uzbekistan" as shipping country
-        Then my cart taxes should be "€23.00"
-        And my cart total should be "€223.00"
+        Then my cart total should be "€223.00"
+        And my cart taxes should be "€23.00"

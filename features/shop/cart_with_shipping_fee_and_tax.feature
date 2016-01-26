@@ -18,16 +18,16 @@ Feature: Cart shipping with taxes
 
     Scenario: Proper shipping fee and tax
         Given I am logged in as "john@example.com"
-        And I added product "PHP T-Shirt" to the cart
+        And I add product "PHP T-Shirt" to the cart
         When I proceed selecting "DHL" shipping method
         Then my cart shipping fee should be "€12.30"
         And my cart taxes should be "€2.30"
-        And my cart total should be "€112.30"
+        Then my cart total should be "€112.30"
 
     Scenario: Proper shipping fee and tax after addressing
         Given I am logged in as "john@example.com"
-        And I added product "PHP T-Shirt" to the cart
+        And I add product "PHP T-Shirt" to the cart
         And I proceed selecting "DHL" shipping method and "Uzbekistan" as shipping country
         Then my cart shipping fee should be "€11.00"
         And my cart taxes should be "€1.00"
-        And my cart total should be "€111.00"
+        Then my cart total should be "€111.00"

@@ -14,11 +14,11 @@ Feature: Cart without taxes
         And I am logged in as "john@example.com"
 
     Scenario: Proper taxes for untaxed product
-        When I added product "PHP T-Shirt" to the cart
-        Then my cart taxes should be "€0.00"
-        And my cart total should be "€100.00"
+        When I add product "PHP T-Shirt" to the cart
+        Then my cart total should be "€100.00"
+        And my cart taxes should be "€0.00"
 
     Scenario: Proper taxes for multiple untaxed products
-        When I added 3 products "PHP T-Shirt" to the cart
-        Then my cart taxes should be "€0.00"
-        And my cart total should be "€300.00"
+        When I add 3 products "PHP T-Shirt" to the cart
+        Then my cart total should be "€300.00"
+        And my cart taxes should be "€0.00"

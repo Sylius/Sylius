@@ -14,7 +14,7 @@ Feature: Checkout with offline payment
 
     Scenario: Successfully placing an order
         Given I am logged in as "john@example.com"
-        And I added product "PHP T-Shirt" to the cart
+        And I add product "PHP T-Shirt" to the cart
         When I proceed selecting "Offline" payment method
         And I confirm my order
         Then I should see the thank you page
