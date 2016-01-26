@@ -39,6 +39,15 @@ class ProductShowPage extends SymfonyPage
     }
 
     /**
+     * @param string $quantity
+     */
+    public function addToCartWithQuantity($quantity)
+    {
+        $this->fillField('Quantity', $quantity);
+        $this->pressButton('Add to cart');
+    }
+
+    /**
      * @return null
      */
     public function getRouteName()

@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Context\Ui;
 
 use Sylius\Behat\Context\FeatureContext;
+use Sylius\Behat\Page\Product\ProductShowPage;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -50,14 +51,21 @@ class CheckoutContext extends FeatureContext
 
     /**
      * @Given I added product :name to the cart
+     * @When I add product :name to the cart
      */
-    public function iAddedProductToTheCart($name)
+    public function iAddProductToTheCart($name)
     {
-        /** @var ProductInterface $product */
-        $product = $this->productRepository->findOneBy(array('name' => $name));
-
-        $productShowPage = $this->getPage('Product\ProductShowPage')->openSpecificProductPage($product);
+        $productShowPage = $this->openProductPage($name);
         $productShowPage->addToCart();
+    }
+
+    /**
+     * @When /^I add (\d+) products "([^"]*)" to the cart$/
+     */
+    public function iAddProductsToTheCart($quantity, $name)
+    {
+        $productShowPage = $this->openProductPage($name);
+        $productShowPage->addToCartWithQuantity($quantity);
     }
 
     /**
@@ -107,5 +115,23 @@ class CheckoutContext extends FeatureContext
         $thankYouPage = $this->getPage('Checkout\CheckoutThankYouPage');
         $thankYouPage->assertRoute();
         $this->assertSession()->elementTextContains('css', '#thanks', sprintf('Thank you %s', $customer->getFullName()));
+    }
+
+    /**
+     * @param $productName
+     *
+     * @return ProductShowPage
+     *
+     * @throws \Exception
+     */
+    private function openProductPage($productName)
+    {
+        /** @var ProductInterface $product */
+        $product = $this->productRepository->findOneBy(array('name' => $productName));
+        if (null === $product) {
+            throw new \Exception('Store has no product with name "'.$productName.'".');
+        }
+
+        return $this->getPage('Product\ProductShowPage')->openSpecificProductPage($product);
     }
 }

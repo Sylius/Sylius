@@ -49,13 +49,13 @@ class ProductContext implements Context
     }
 
     /**
-     * @Given catalog has a product :productName priced at $:price
+     * @Given /^store has a product "([^"]*)" priced at "(€|£|\$)([^"]*)"$/
      */
-    public function catalogHasAProductPricedAt($productName, $price)
+    public function catalogHasAProductPricedAt($productName, $currency, $price)
     {
         $product = $this->productFactory->createNew();
         $product->setName($productName);
-        $product->setPrice((int) $price);
+        $product->setPrice((int) $price * 100);
         $product->setDescription('Awesome star wars mug');
 
         $channel = $this->sharedStorage->getCurrentResource('channel');
