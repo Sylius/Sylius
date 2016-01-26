@@ -18,7 +18,6 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
  */
 interface CalculatorInterface
 {
-
     /**
      * @param ShippingSubjectInterface $subject
      * @param array                    $configuration

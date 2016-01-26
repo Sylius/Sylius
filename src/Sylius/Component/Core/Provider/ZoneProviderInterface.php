@@ -16,7 +16,7 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface DefaultTaxZoneProviderInterface
+interface ZoneProviderInterface
 {
     /**
      * @return ZoneInterface|null

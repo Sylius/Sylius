@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\OrderBundle\Aggregator;
+namespace Sylius\Component\Order\Aggregator;
 
 use Sylius\Component\Order\Model\AdjustmentInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class AdjustmentsByLabelAggregator implements AdjustmentsAggregatorInterface
+final class AdjustmentsByLabelAggregator implements AdjustmentsAggregatorInterface
 {
     /**
      * {@inheritdoc}
@@ -25,9 +25,7 @@ class AdjustmentsByLabelAggregator implements AdjustmentsAggregatorInterface
     {
         $aggregatedAdjustments = array();
         foreach ($adjustments as $adjustment) {
-            if (!$adjustment instanceof AdjustmentInterface) {
-                throw new \InvalidArgumentException('Each adjustments array element must implement '.AdjustmentInterface::class.'.');
-            }
+            $this->assertElementIsAdjustment($adjustment);
 
             if (!isset($aggregatedAdjustments[$adjustment->getDescription()])) {
                 $aggregatedAdjustments[$adjustment->getDescription()] = 0;
@@ -37,5 +35,17 @@ class AdjustmentsByLabelAggregator implements AdjustmentsAggregatorInterface
         }
 
         return $aggregatedAdjustments;
+    }
+
+    /**
+     * @param mixed $adjustment
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function assertElementIsAdjustment($adjustment)
+    {
+        if (!$adjustment instanceof AdjustmentInterface) {
+            throw new \InvalidArgumentException('Each adjustments array element must implement ' . AdjustmentInterface::class . '.');
+        }
     }
 }

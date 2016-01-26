@@ -14,7 +14,6 @@ namespace spec\Sylius\Bundle\OrderBundle\Twig;
 use PhpSpec\Exception\Example\FailureException;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\OrderBundle\Aggregator\AdjustmentsAggregatorInterface;
 use Sylius\Bundle\OrderBundle\Templating\Helper\AdjustmentsHelper;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 

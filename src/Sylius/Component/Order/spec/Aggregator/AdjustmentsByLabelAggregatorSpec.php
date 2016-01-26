@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\OrderBundle\Aggregator;
+namespace spec\Sylius\Component\Order\Aggregator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\OrderBundle\Aggregator\AdjustmentsAggregatorInterface;
+use Sylius\Component\Order\Aggregator\AdjustmentsAggregatorInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 
 /**
@@ -22,7 +22,7 @@ class AdjustmentsByLabelAggregatorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\OrderBundle\Aggregator\AdjustmentsByLabelAggregator');
+        $this->shouldHaveType('Sylius\Component\Order\Aggregator\AdjustmentsByLabelAggregator');
     }
 
     function it_implements_adjustments_aggregator_interface()

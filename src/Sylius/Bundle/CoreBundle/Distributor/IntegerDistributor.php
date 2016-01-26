@@ -19,16 +19,16 @@ class IntegerDistributor implements IntegerDistributorInterface
     /**
      * {@inheritdoc}
      */
-    public function distribute($numberOfTargets, $baseAmount)
+    public function distribute($amount, $numberOfTargets)
     {
-        if (!is_int($numberOfTargets) || 1 > $numberOfTargets) {
+        if (!$this->validateNumberOfTargets($numberOfTargets)) {
             throw new \InvalidArgumentException('Number of targets must be an integer, bigger than 0.');
         }
 
-        $sign = $baseAmount < 0 ? -1 : 1;
-        $amount = abs($baseAmount);
+        $sign = $amount < 0 ? -1 : 1;
+        $amount = abs($amount);
 
-        $low = intval($amount / $numberOfTargets);
+        $low = (int) ($amount / $numberOfTargets);
         $high = $low + 1;
 
         $remainder = $amount % $numberOfTargets;
@@ -43,5 +43,15 @@ class IntegerDistributor implements IntegerDistributorInterface
         }
 
         return $result;
+    }
+
+    /**
+     * @param int $numberOfTargets
+     *
+     * @return bool
+     */
+    private function validateNumberOfTargets($numberOfTargets)
+    {
+        return (is_int($numberOfTargets) && 1 <= $numberOfTargets);
     }
 }

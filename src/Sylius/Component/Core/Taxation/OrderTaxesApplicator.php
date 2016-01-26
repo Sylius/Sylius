@@ -11,17 +11,12 @@
 
 namespace Sylius\Component\Core\Taxation;
 
-use Sylius\Bundle\CoreBundle\Distributor\IntegerDistributorInterface;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderItemUnitInterface;
-use Sylius\Component\Core\Provider\DefaultTaxZoneProviderInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Taxation\Calculator\CalculatorInterface;
-use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
+use Sylius\Component\Core\Provider\ZoneProviderInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -30,29 +25,19 @@ use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 class OrderTaxesApplicator implements OrderTaxesApplicatorInterface
 {
     /**
-     * @var CalculatorInterface
-     */
-    protected $taxCalculator;
-
-    /**
-     * @var DefaultTaxZoneProviderInterface
+     * @var ZoneProviderInterface
      */
     protected $defaultTaxZoneProvider;
 
     /**
-     * @var FactoryInterface
+     * @var OrderShipmentTaxesByZoneApplicatorInterface
      */
-    protected $adjustmentFactory;
+    protected $orderShipmentTaxesApplicator;
 
     /**
-     * @var IntegerDistributorInterface
+     * @var OrderItemsTaxesByZoneApplicatorInterface
      */
-    protected $integerDistributor;
-
-    /**
-     * @var TaxRateResolverInterface
-     */
-    protected $taxRateResolver;
+    protected $orderItemsTaxesApplicator;
 
     /**
      * @var ZoneMatcherInterface
@@ -60,26 +45,20 @@ class OrderTaxesApplicator implements OrderTaxesApplicatorInterface
     protected $zoneMatcher;
 
     /**
-     * @param CalculatorInterface $taxCalculator
-     * @param DefaultTaxZoneProviderInterface $defaultTaxZoneProvider
-     * @param FactoryInterface $adjustmentFactory
-     * @param IntegerDistributorInterface $integerDistributor
-     * @param TaxRateResolverInterface $taxRateResolver
+     * @param ZoneProviderInterface $defaultTaxZoneProvider
+     * @param OrderShipmentTaxesByZoneApplicatorInterface $orderShipmentTaxesApplicator
+     * @param OrderItemsTaxesByZoneApplicatorInterface $orderItemsTaxesApplicator
      * @param ZoneMatcherInterface $zoneMatcher
      */
     public function __construct(
-        CalculatorInterface $taxCalculator,
-        DefaultTaxZoneProviderInterface $defaultTaxZoneProvider,
-        FactoryInterface $adjustmentFactory,
-        IntegerDistributorInterface $integerDistributor,
-        TaxRateResolverInterface $taxRateResolver,
+        ZoneProviderInterface $defaultTaxZoneProvider,
+        OrderShipmentTaxesByZoneApplicatorInterface $orderShipmentTaxesApplicator,
+        OrderItemsTaxesByZoneApplicatorInterface $orderItemsTaxesApplicator,
         ZoneMatcherInterface $zoneMatcher
     ) {
-        $this->taxCalculator = $taxCalculator;
         $this->defaultTaxZoneProvider = $defaultTaxZoneProvider;
-        $this->adjustmentFactory = $adjustmentFactory;
-        $this->integerDistributor = $integerDistributor;
-        $this->taxRateResolver = $taxRateResolver;
+        $this->orderShipmentTaxesApplicator = $orderShipmentTaxesApplicator;
+        $this->orderItemsTaxesApplicator = $orderItemsTaxesApplicator;
         $this->zoneMatcher = $zoneMatcher;
     }
 
@@ -99,53 +78,8 @@ class OrderTaxesApplicator implements OrderTaxesApplicatorInterface
             return;
         }
 
-        $this->processTaxes($order, $zone);
-    }
-
-    /**
-     * @param OrderInterface $order
-     * @param ZoneInterface $zone
-     */
-    protected function processTaxes(OrderInterface $order, ZoneInterface $zone)
-    {
-        foreach ($order->getItems() as $item) {
-            $rate = $this->taxRateResolver->resolve($item->getProduct(), array('zone' => $zone));
-
-            if (null === $rate) {
-                continue;
-            }
-
-            $percentageAmount = $rate->getAmountAsPercentage();
-            $totalTaxAmount = $this->taxCalculator->calculate($item->getTotal(), $rate);
-            $label = sprintf('%s (%s%%)', $rate->getName(), (float) $percentageAmount);
-
-            $splitTaxes = $this->integerDistributor->distribute($item->getQuantity(), $totalTaxAmount);
-
-            foreach ($splitTaxes as $key => $tax) {
-                if (0 === $tax) {
-                    break;
-                }
-
-                $this->addAdjustment($item->getUnits()->get($key), $tax, $label, $rate->isIncludedInPrice());
-            }
-        }
-    }
-
-    /**
-     * @param OrderItemUnitInterface $unit
-     * @param int $amount
-     * @param string $label
-     * @param bool $included
-     */
-    protected function addAdjustment(OrderItemUnitInterface $unit, $amount, $label, $included)
-    {
-        $adjustment = $this->adjustmentFactory->createNew();
-        $adjustment->setType(AdjustmentInterface::TAX_ADJUSTMENT);
-        $adjustment->setAmount($amount);
-        $adjustment->setDescription($label);
-        $adjustment->setNeutral($included);
-
-        $unit->addAdjustment($adjustment);
+        $this->orderItemsTaxesApplicator->apply($order, $zone);
+        $this->orderShipmentTaxesApplicator->apply($order, $zone);
     }
 
     /**

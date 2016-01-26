@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\OrderBundle\Aggregator;
+namespace Sylius\Component\Order\Aggregator;
 
 use Sylius\Component\Order\Model\AdjustmentInterface;
 
@@ -19,7 +19,7 @@ use Sylius\Component\Order\Model\AdjustmentInterface;
 interface AdjustmentsAggregatorInterface
 {
     /**
-     * @param array|AdjustmentInterface[] $adjustments
+     * @param AdjustmentInterface[] $adjustments
      *
      * @return array
      */

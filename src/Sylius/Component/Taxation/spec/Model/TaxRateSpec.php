@@ -122,4 +122,12 @@ class TaxRateSpec extends ObjectBehavior
     {
         $this->getUpdatedAt()->shouldReturn(null);
     }
+
+    function it_has_label()
+    {
+        $this->setName('Test tax');
+        $this->setAmount(0.23);
+
+        $this->getLabel()->shouldReturn('Test tax (23%)');
+    }
 }

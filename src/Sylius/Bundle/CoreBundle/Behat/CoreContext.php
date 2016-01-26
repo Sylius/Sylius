@@ -35,6 +35,7 @@ use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
 use Sylius\Component\Shipping\Calculator\DefaultCalculators;
 use Sylius\Component\Shipping\ShipmentTransitions;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\User\Model\GroupableInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -422,12 +423,13 @@ class CoreContext extends DefaultContext
         foreach ($table->getHash() as $data) {
             $calculator = array_key_exists('calculator', $data) ? str_replace(' ', '_', strtolower($data['calculator'])) : DefaultCalculators::PER_ITEM_RATE;
             $configuration = array_key_exists('configuration', $data) ? $this->getConfiguration($data['configuration']) : null;
+            $taxCategory = (isset($data['tax category'])) ? $this->findOneByName('tax_category', trim($data['tax category'])) : null;
 
             if (!isset($data['enabled'])) {
                 $data['enabled'] = 'yes';
             }
 
-            $this->thereIsShippingMethod($data['name'], $data['code'], $data['zone'], $calculator, $configuration, 'yes' === $data['enabled'], false);
+            $this->thereIsShippingMethod($data['name'], $data['code'], $data['zone'], $calculator, $taxCategory, $configuration, 'yes' === $data['enabled'], false);
         }
 
         $this->getEntityManager()->flush();
@@ -438,7 +440,7 @@ class CoreContext extends DefaultContext
      * @Given /^There is shipping method "([^""]*)" with code "([^""]*)" and zone "([^""]*)"$/
      * @Given /^there is an enabled shipping method "([^""]*)" with code "([^""]*)" and zone "([^""]*)"$/
      */
-    public function thereIsShippingMethod($name, $code, $zoneName, $calculator = DefaultCalculators::PER_ITEM_RATE, array $configuration = null, $enabled = true, $flush = true)
+    public function thereIsShippingMethod($name, $code, $zoneName, $calculator = DefaultCalculators::PER_ITEM_RATE, TaxCategoryInterface $taxCategory = null, array $configuration = null, $enabled = true, $flush = true)
     {
         $repository = $this->getRepository('shipping_method');
         $factory = $this->getFactory('shipping_method');
@@ -450,6 +452,7 @@ class CoreContext extends DefaultContext
             $method->setCode($code);
             $method->setZone($this->findOneByName('zone', $zoneName));
             $method->setCalculator($calculator);
+            $method->setTaxCategory($taxCategory);
             $method->setConfiguration($configuration ?: array('amount' => 2500));
         };
 
@@ -469,7 +472,7 @@ class CoreContext extends DefaultContext
      */
     public function thereIsDisabledShippingMethod($name, $code, $zoneName)
     {
-        $this->thereIsShippingMethod($name, $code, $zoneName, DefaultCalculators::PER_ITEM_RATE, null, false);
+        $this->thereIsShippingMethod($name, $code, $zoneName, DefaultCalculators::PER_ITEM_RATE, null, null, false);
     }
 
     /**

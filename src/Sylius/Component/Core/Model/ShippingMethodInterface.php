@@ -13,25 +13,26 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface as BaseShippingMethodInterface;
+use Sylius\Component\Taxation\Model\TaxableInterface;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 /**
- * Shipping method interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface ShippingMethodInterface extends BaseShippingMethodInterface
+interface ShippingMethodInterface extends BaseShippingMethodInterface, TaxableInterface
 {
     /**
-     * Get zone.
-     *
      * @return ZoneInterface
      */
     public function getZone();
 
     /**
-     * Set zone.
-     *
      * @param ZoneInterface $zone
      */
     public function setZone(ZoneInterface $zone);
+
+    /**
+     * @param TaxCategoryInterface $category
+     */
+    public function setTaxCategory(TaxCategoryInterface $category = null);
 }
