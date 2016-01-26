@@ -560,6 +560,30 @@ class CoreContext extends DefaultContext
     }
 
     /**
+     * @Then the customer with email :email should have username :username
+     */
+    public function theCustomerWithEmailShouldHaveUsername($email, $username)
+    {
+        $user = $this->getUserWithEmail($email);
+
+        if ($username !== $user->getUsername()) {
+            throw new \Exception(sprintf('The username should be %s but is %s', $username, $user->getUsername()));
+        }
+    }
+
+    /**
+     * @Then the customer with email :email should be enabled
+     */
+    public function theCustomerWithEmailShouldBeEnabled($email)
+    {
+        $user = $this->getUserWithEmail($email);
+
+        if (!$user->isEnabled()) {
+            throw new \Exception('The account is disabled.');
+        }
+    }
+
+    /**
      * Create an address instance from string.
      *
      * @param string $string
@@ -797,5 +821,26 @@ class CoreContext extends DefaultContext
         }
 
         $this->visitPath('/');
+    }
+
+    /**
+     * @param $email
+     *
+     * @return \Sylius\Component\User\Model\UserInterface
+     * @throws \Exception
+     */
+    private function getUserWithEmail($email)
+    {
+        $customer = $this->getRepository('customer')->findOneBy(array('email' => $email));
+
+        if (null === $customer) {
+            throw new \Exception(sprintf('Customer with email %s does not exist.', $email));
+        }
+
+        if (null === $user = $customer->getUser()) {
+            throw new \Exception(sprintf('Customer with email %s does not have associated user.', $email));
+        }
+
+        return $user;
     }
 }
