@@ -9,20 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Page\Checkout;
+namespace Sylius\Behat\Page\Shop;
 
 use Sylius\Behat\Page\SymfonyPage;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class CheckoutShippingStep extends SymfonyPage
+class HomePage extends SymfonyPage
 {
-    /**
-     * @return string
-     */
-    protected function getRouteName()
+    public function getRouteName()
     {
-        return 'sylius_checkout_shipping';
+        return 'sylius_homepage';
     }
 }

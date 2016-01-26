@@ -104,8 +104,43 @@ class CheckoutContext extends FeatureContext
     {
         $user = $this->sharedStorage->getCurrentResource('user');
         $customer = $user->getCustomer();
-        $thankYouPage = $this->getPage('Checkout\CheckoutThankYouPage');
-        $thankYouPage->assertRoute();
         $this->assertSession()->elementTextContains('css', '#thanks', sprintf('Thank you %s', $customer->getFullName()));
+    }
+
+    /**
+     * @Then I should be redirected to PayPal Express Checkout page
+     */
+    public function iShouldBeRedirectedToPaypalExpressCheckoutPage()
+    {
+        $this->getPage('External\PaypalPage')->assertRoute();
+    }
+
+    /**
+     * @When I sign in to PayPal and pay successfully
+     */
+    public function iSignInToPaypalAndPaySuccessfully()
+    {
+        $paypalPage = $this->getPage('External\PaypalPage');
+        $paypalPage->logIn('mike.ehrmantraut@gmail.com', 'goodman123');
+        $paypalPage->pay();
+    }
+
+    /**
+     * @Then I should be redirected back to the thank you page
+     */
+    public function iShouldBeRedirectedBackToTheThankYouPage()
+    {
+        $thankYouPage = $this->getPage('Checkout\CheckoutThankYouPage');
+        $thankYouPage->waitForPaypalRedirect();
+        $thankYouPage->assertRoute();
+    }
+
+    /**
+     * @When I cancel my PayPal payment
+     */
+    public function iCancelMyPaypalPayment()
+    {
+        $paypalPage = $this->getPage('External\PaypalPage');
+        $paypalPage->cancel();
     }
 }

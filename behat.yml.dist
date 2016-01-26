@@ -409,7 +409,7 @@ default:
                 - Sylius\Behat\Context\Setup\PaymentContext:
                     paymentMethodRepository: '@sylius.repository.payment_method'
                     sharedStorage: '@sylius.behat.shared_storage'
-                    paymentMethodFactory: '@sylius.factory.payment_method'
+                    paymentMethodFactory: '@sylius.behat.factory.payment_method'
                 - Sylius\Behat\Context\Setup\SecurityContext:
                     sharedStorage: '@sylius.behat.shared_storage'
                     securityService: '@sylius.behat.security'

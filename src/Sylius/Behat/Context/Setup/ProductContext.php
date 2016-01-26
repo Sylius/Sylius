@@ -55,7 +55,7 @@ class ProductContext implements Context
     {
         $product = $this->productFactory->createNew();
         $product->setName($productName);
-        $product->setPrice((int) $price);
+        $product->setPrice((int) $price * 100);
         $product->setDescription('Awesome star wars mug');
 
         $channel = $this->sharedStorage->getCurrentResource('channel');

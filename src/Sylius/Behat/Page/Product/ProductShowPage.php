@@ -28,6 +28,7 @@ class ProductShowPage extends SymfonyPage
     public function openSpecificProductPage(ProductInterface $product)
     {
         $url = $this->router->generate($product);
+        $url = $this->makePathAbsoluteWithBehatParameter($url);
         $this->getSession()->visit($url);
 
         return $this;
@@ -41,7 +42,7 @@ class ProductShowPage extends SymfonyPage
     /**
      * @return null
      */
-    public function getRouteName()
+    protected function getRouteName()
     {
         return null;
     }
