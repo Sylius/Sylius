@@ -12,5 +12,5 @@ before_script:
     - composer install --prefer-source --no-interaction
 
 script:
-    - bin/phpspec run -f dot
-    - bin/phpunit ./
+    - vendor/bin/phpspec run -f dot
+    - vendor/bin/phpunit ./

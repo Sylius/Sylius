@@ -15,6 +15,8 @@ use Sylius\Bundle\ThemeBundle\Factory\ThemeFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Loader\ConfigurationProviderInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -31,15 +33,16 @@ class ThemeRepositoryPass implements CompilerPassInterface
         /** @var ConfigurationProviderInterface|CompilerPassInterface $configurationProvider */
         $configurationProvider = $container->get('sylius.theme.configuration.provider');
 
-        /** @var ThemeFactoryInterface $themeFactory */
-        $themeFactory = $container->get('sylius.theme.factory');
-
         $themeRepositoryDefinition = $container->findDefinition('sylius.theme.repository');
-
         foreach ($configurationProvider->provideAll() as $themeConfiguration) {
-            $theme = $themeFactory->createFromArray($themeConfiguration);
+            $themeDefinition = new Definition(null, [$themeConfiguration]);
 
-            $themeRepositoryDefinition->addMethodCall('addSerialized', [serialize($theme)]);
+            $themeDefinition->setFactory([
+                new Reference('sylius.theme.factory'),
+                'createFromArray',
+            ]);
+
+            $themeRepositoryDefinition->addMethodCall('add', [$themeDefinition]);
         }
 
         if ($configurationProvider instanceof CompilerPassInterface) {

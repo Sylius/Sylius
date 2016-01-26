@@ -33,9 +33,6 @@
         "matthiasnoback/symfony-dependency-injection-test": "^0.7.6",
         "symfony/twig-bundle": "^2.7.7, <2.8"
     },
-    "config": {
-        "bin-dir": "bin"
-    },
     "autoload": {
         "psr-4": { "Sylius\\Bundle\\ThemeBundle\\": "" }
     },

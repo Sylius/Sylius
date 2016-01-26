@@ -16,6 +16,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\DependencyInjection\Compiler\ThemeRepositoryPass;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Loader\ConfigurationProviderInterface;
+use Sylius\Bundle\ThemeBundle\Model\Theme;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -38,15 +39,12 @@ class ThemeRepositoryPassSpec extends ObjectBehavior
         $this->shouldImplement(CompilerPassInterface::class);
     }
 
-    function it_adds_serialized_theme_instances_to_theme_repository_constructor(
+    function it_adds_themes_definitions_to_theme_repository_constructor(
         ContainerBuilder $container,
         ConfigurationProviderInterface $configurationProvider,
-        ThemeFactoryInterface $themeFactory,
-        Definition $themeRepositoryDefinition,
-        ThemeInterface $theme
+        Definition $themeRepositoryDefinition
     ) {
         $container->get('sylius.theme.configuration.provider')->willReturn($configurationProvider);
-        $container->get('sylius.theme.factory')->willReturn($themeFactory);
 
         $container->findDefinition('sylius.theme.repository')->willReturn($themeRepositoryDefinition);
 
@@ -54,10 +52,23 @@ class ThemeRepositoryPassSpec extends ObjectBehavior
             ['name' => 'example/sylius-theme'],
         ]);
 
-        $themeFactory->createFromArray(['name' => 'example/sylius-theme'])->willReturn($theme);
+        $themeDefinitionArgument = Argument::that(function (array $arguments) {
+            $definition = current($arguments);
+
+            if (!$definition instanceof Definition) {
+                return false;
+            }
+
+            $arguments = $definition->getArgument(0);
+            if ($arguments !== ['name' => 'example/sylius-theme']) {
+                return false;
+            }
+
+            return true;
+        });
 
         $themeRepositoryDefinition
-            ->addMethodCall('addSerialized', [serialize($theme->getWrappedObject())])
+            ->addMethodCall('add', $themeDefinitionArgument)
             ->shouldBeCalled()
         ;
 
@@ -67,15 +78,12 @@ class ThemeRepositoryPassSpec extends ObjectBehavior
     function it_also_runs_process_on_configuration_provider_if_it_implements_compiler_pass_interface(
         ContainerBuilder $container,
         ConfigurationProviderInterface $configurationProvider,
-        ThemeFactoryInterface $themeFactory,
-        Definition $themeRepositoryDefinition,
-        ThemeInterface $theme
+        Definition $themeRepositoryDefinition
     ) {
         /** @var ConfigurationProviderInterface|CompilerPassInterface $configurationProvider */
         $configurationProvider->implement(CompilerPassInterface::class);
 
         $container->get('sylius.theme.configuration.provider')->willReturn($configurationProvider);
-        $container->get('sylius.theme.factory')->willReturn($themeFactory);
 
         $container->findDefinition('sylius.theme.repository')->willReturn($themeRepositoryDefinition);
 
@@ -83,7 +91,6 @@ class ThemeRepositoryPassSpec extends ObjectBehavior
             ['name' => 'example/sylius-theme'],
         ]);
 
-        $themeFactory->createFromArray(Argument::cetera())->willReturn($theme);
         $themeRepositoryDefinition->addMethodCall(Argument::cetera())->willReturn();
 
         $configurationProvider->process($container)->shouldBeCalled();

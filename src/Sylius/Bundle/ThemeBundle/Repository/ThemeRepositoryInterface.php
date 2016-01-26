@@ -20,11 +20,6 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 interface ThemeRepositoryInterface extends RepositoryInterface
 {
     /**
-     * @param string $serializedTheme
-     */
-    public function addSerialized($serializedTheme);
-
-    /**
      * @param string $name
      *
      * @return ThemeInterface|null

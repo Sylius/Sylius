@@ -25,14 +25,6 @@ final class ThemeRepository extends InMemoryRepository implements ThemeRepositor
     }
 
     /**
-     * @param string $serializedTheme
-     */
-    public function addSerialized($serializedTheme)
-    {
-        $this->add(unserialize($serializedTheme));
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function find($id)
