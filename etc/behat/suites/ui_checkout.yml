@@ -18,6 +18,7 @@ default:
 
                 - sylius.behat.context.ui.checkout
                 - sylius.behat.context.ui.cart
+                - sylius.behat.context.ui.paypal
 
             filters:
                 tags: @checkout && @ui

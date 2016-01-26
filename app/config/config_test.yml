@@ -3,6 +3,7 @@
 
 imports:
     - { resource: config.yml }
+    - { resource: config_test.php }
 
 parameters:
     sylius.order.allow_guest_order: true

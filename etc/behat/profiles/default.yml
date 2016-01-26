@@ -16,21 +16,26 @@ default:
 
         Behat\MinkExtension:
             base_url: http://localhost:8080/
+            default_session: symfony
+            javascript_session: chrome
             sessions:
-                default:
+                symfony:
                     symfony2: ~
-                javascript:
-                    selenium2: ~
-            selenium2:
-                capabilities:
-                    browserName: chrome
-                    browser: chrome
-                    version: ""
-                    chrome:
-                        switches:
-                            - "start-fullscreen"
-                            - "no-sandbox"
-            browser_name: chrome
+                chrome:
+                    selenium2:
+                        browser: chrome
+                        capabilities:
+                            browserName: chrome
+                            browser: chrome
+                            version: ""
+                            chrome:
+                                switches:
+                                    - "start-fullscreen"
+                                    - "start-maximized"
+                                    - "no-sandbox"
+                firefox:
+                    selenium2:
+                        browser: firefox
             show_auto: false
 
         Behat\Symfony2Extension:
@@ -46,4 +51,4 @@ default:
 
     gherkin:
         filters:
-            tags: "~@todo"
+            tags: "~@todo && ~@paypal"

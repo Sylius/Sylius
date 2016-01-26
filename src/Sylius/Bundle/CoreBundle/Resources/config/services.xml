@@ -110,6 +110,8 @@
 
         <parameter key="sylius.authorization_checker.toggleable.class">Sylius\Bundle\CoreBundle\Authorization\ToggleableAuthorizationChecker</parameter>
         <parameter key="sylius.translation.locale_provider.contextual.class">Sylius\Bundle\CoreBundle\Locale\TranslationLocaleProvider</parameter>
+
+        <parameter key="sylius.based_on_id_invoice_number_generator.class" >Sylius\Component\Core\Payment\IdBasedInvoiceNumberGenerator</parameter>
     </parameters>
 
     <services>
@@ -206,6 +208,8 @@
             </argument>
         </service>
         <service id="sylius.distributor.order_unit_taxes" class="%sylius.distributor.order_unit_taxes.class%" />
+
+        <service id="sylius.invoice_number_generator" class="%sylius.based_on_id_invoice_number_generator.class%" />
 
         <!-- order processing -->
         <service id="sylius.order_processing.inventory_handler" class="%sylius.order_processing.inventory_handler.class%">

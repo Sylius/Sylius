@@ -9,20 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Page\Shop;
-
-use Sylius\Behat\Page\SymfonyPage;
+namespace Sylius\Bundle\CoreBundle\Test\Services;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class HomePage extends SymfonyPage
+interface PaymentMethodNameToGatewayConverterInterface
 {
     /**
-     * {@inheritdoc}
+     * @param string $name
+     *
+     * @return string
      */
-    public function getRouteName()
-    {
-        return 'sylius_homepage';
-    }
+    public function convert($name);
 }
