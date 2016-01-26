@@ -12,10 +12,10 @@
 namespace spec\Sylius\Bundle\ThemeBundle\Resolver;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProvider;
 use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProviderInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
-use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProvider;
 
 /**
  * @mixin ThemeHierarchyProvider

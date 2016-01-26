@@ -62,15 +62,15 @@ class TemplatePathsCacheWarmerSpec extends ObjectBehavior
 
         $themeRepository->findAll()->willReturn([$theme]);
 
-        $theme->getName()->willReturn('theme/slug');
+        $theme->getName()->willReturn('theme/name');
         $firstTemplate->getLogicalName()->willReturn('Logical:Name:First');
         $secondTemplate->getLogicalName()->willReturn('Logical:Name:Second');
 
         $templateLocator->locateTemplate($firstTemplate, $theme)->willReturn('/First/Theme/index.html.twig');
         $templateLocator->locateTemplate($secondTemplate, $theme)->willThrow(ResourceNotFoundException::class);
 
-        $cache->save('Logical:Name:First|theme/slug', '/First/Theme/index.html.twig')->shouldBeCalled();
-        $cache->save('Logical:Name:Second|theme/slug', null)->shouldBeCalled();
+        $cache->save('Logical:Name:First|theme/name', '/First/Theme/index.html.twig')->shouldBeCalled();
+        $cache->save('Logical:Name:Second|theme/name', null)->shouldBeCalled();
 
         $this->warmUp(null);
     }

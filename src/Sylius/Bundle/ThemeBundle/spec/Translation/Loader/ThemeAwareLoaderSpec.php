@@ -52,7 +52,7 @@ class ThemeAwareLoaderSpec extends ObjectBehavior
         $this->load('/theme/resource.en.xml', 'en', 'messages')->shouldReturn($messageCatalogue);
     }
 
-    function it_adds_theme_slug_to_keys_if_given_file_is_included_in_theme(
+    function it_adds_theme_name_to_keys_if_given_file_is_included_in_theme(
         LoaderInterface $loader,
         ThemeRepositoryInterface $themeRepository,
         MessageCatalogueInterface $messageCatalogue,

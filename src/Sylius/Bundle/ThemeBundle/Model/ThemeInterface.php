@@ -24,7 +24,7 @@ interface ThemeInterface extends ResourceInterface
     public function getName();
     
     /**
-     * @param string $slug
+     * @param string $name
      */
     public function setName($name);
 
@@ -74,9 +74,9 @@ interface ThemeInterface extends ResourceInterface
     public function getParentsNames();
 
     /**
-     * @param array $parentsSlugs
+     * @param array $parentsNames
      */
-    public function setParentsNames(array $parentsSlugs);
+    public function setParentsNames(array $parentsNames);
 
     /**
      * Should match /^[a-zA-Z0-9-_]{6,32}$/

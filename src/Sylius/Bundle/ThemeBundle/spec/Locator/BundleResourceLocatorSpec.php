@@ -75,7 +75,7 @@ class BundleResourceLocatorSpec extends ObjectBehavior
         $childBundle->getName()->willReturn('ChildBundle');
         $parentBundle->getName()->willReturn('ParentBundle');
 
-        $theme->getName()->willReturn('theme/slug');
+        $theme->getName()->willReturn('theme/name');
         $theme->getPath()->willReturn('/theme/path');
 
         $filesystem->exists('/theme/path/ChildBundle/views/index.html.twig')->shouldBeCalled()->willReturn(false);

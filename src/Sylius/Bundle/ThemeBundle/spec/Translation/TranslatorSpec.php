@@ -76,10 +76,10 @@ class TranslatorSpec extends ObjectBehavior
         ThemeContextInterface $themeContext,
         ThemeInterface $theme
     ) {
-        $theme->getName()->willReturn('theme/slug');
+        $theme->getName()->willReturn('theme/name');
         $themeContext->getThemeHierarchy()->willReturn([$theme]);
 
-        $translator->trans('id|theme/slug', Argument::cetera())->willReturn('Theme translation');
+        $translator->trans('id|theme/name', Argument::cetera())->willReturn('Theme translation');
         $translator->trans('id', Argument::cetera())->shouldNotBeCalled();
 
         $this->trans('id')->shouldReturn('Theme translation');
@@ -90,10 +90,10 @@ class TranslatorSpec extends ObjectBehavior
         ThemeContextInterface $themeContext,
         ThemeInterface $theme
     ) {
-        $theme->getName()->willReturn('theme/slug');
+        $theme->getName()->willReturn('theme/name');
         $themeContext->getThemeHierarchy()->willReturn([$theme]);
 
-        $translator->trans('id|theme/slug', Argument::cetera())->willReturn('id|theme/slug');
+        $translator->trans('id|theme/name', Argument::cetera())->willReturn('id|theme/name');
         $translator->trans('id', Argument::cetera())->willReturn('Default translation');
 
         $this->trans('id')->shouldReturn('Default translation');
@@ -104,10 +104,10 @@ class TranslatorSpec extends ObjectBehavior
         ThemeContextInterface $themeContext,
         ThemeInterface $theme
     ) {
-        $theme->getName()->willReturn('theme/slug');
+        $theme->getName()->willReturn('theme/name');
         $themeContext->getThemeHierarchy()->willReturn([$theme]);
 
-        $translator->trans('id|theme/slug', Argument::cetera())->willReturn('id|theme/slug');
+        $translator->trans('id|theme/name', Argument::cetera())->willReturn('id|theme/name');
         $translator->trans('id', Argument::cetera())->willReturn('id');
 
         $this->trans('id')->shouldReturn('id');
@@ -118,10 +118,10 @@ class TranslatorSpec extends ObjectBehavior
         ThemeContextInterface $themeContext,
         ThemeInterface $theme
     ) {
-        $theme->getName()->willReturn('theme/slug');
+        $theme->getName()->willReturn('theme/name');
         $themeContext->getThemeHierarchy()->willReturn([$theme]);
 
-        $translator->transChoice('id|theme/slug', 42, Argument::cetera())->willReturn('Theme translation');
+        $translator->transChoice('id|theme/name', 42, Argument::cetera())->willReturn('Theme translation');
         $translator->transChoice('id', 42, Argument::cetera())->shouldNotBeCalled();
 
         $this->transChoice('id', 42)->shouldReturn('Theme translation');
@@ -132,10 +132,10 @@ class TranslatorSpec extends ObjectBehavior
         ThemeContextInterface $themeContext,
         ThemeInterface $theme
     ) {
-        $theme->getName()->willReturn('theme/slug');
+        $theme->getName()->willReturn('theme/name');
         $themeContext->getThemeHierarchy()->willReturn([$theme]);
 
-        $translator->transChoice('id|theme/slug', 42, Argument::cetera())->willReturn('id|theme/slug');
+        $translator->transChoice('id|theme/name', 42, Argument::cetera())->willReturn('id|theme/name');
         $translator->transChoice('id', 42, Argument::cetera())->willReturn('Default translation');
 
         $this->transChoice('id', 42)->shouldReturn('Default translation');
@@ -146,10 +146,10 @@ class TranslatorSpec extends ObjectBehavior
         ThemeContextInterface $themeContext,
         ThemeInterface $theme
     ) {
-        $theme->getName()->willReturn('theme/slug');
+        $theme->getName()->willReturn('theme/name');
         $themeContext->getThemeHierarchy()->willReturn([$theme]);
 
-        $translator->transChoice('id|theme/slug', 42, Argument::cetera())->willReturn('id|theme/slug');
+        $translator->transChoice('id|theme/name', 42, Argument::cetera())->willReturn('id|theme/name');
         $translator->transChoice('id', 42, Argument::cetera())->willReturn('id');
 
         $this->transChoice('id', 42)->shouldReturn('id');

@@ -25,7 +25,7 @@ class ResourceNotFoundExceptionSpec extends ObjectBehavior
 {
     function let(ThemeInterface $theme)
     {
-        $theme->getName()->willReturn('theme/slug');
+        $theme->getName()->willReturn('theme/name');
 
         $this->beConstructedWith('resource name', $theme);
     }
@@ -42,6 +42,6 @@ class ResourceNotFoundExceptionSpec extends ObjectBehavior
 
     function it_has_custom_message()
     {
-        $this->getMessage()->shouldReturn('Could not find resource "resource name" using theme "theme/slug".');
+        $this->getMessage()->shouldReturn('Could not find resource "resource name" using theme "theme/name".');
     }
 }

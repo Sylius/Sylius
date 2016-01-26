@@ -38,8 +38,8 @@ final class ThemeHierarchyProvider implements ThemeHierarchyProviderInterface
     public function getThemeHierarchy(ThemeInterface $theme)
     {
         $parents = [];
-        $parentsSlugs = $theme->getParentsNames();
-        foreach ($parentsSlugs as $parentName) {
+        $parentsNames = $theme->getParentsNames();
+        foreach ($parentsNames as $parentName) {
             $parents = array_merge(
                 $parents,
                 $this->getThemeHierarchy($this->getTheme($parentName))

@@ -49,10 +49,10 @@ class CachedTemplateLocatorSpec extends ObjectBehavior
         ThemeInterface $theme
     ) {
         $template->getLogicalName()->willReturn('Logical:Name');
-        $theme->getName()->willReturn('theme/slug');
+        $theme->getName()->willReturn('theme/name');
 
-        $cache->contains('Logical:Name|theme/slug')->willReturn(true);
-        $cache->fetch('Logical:Name|theme/slug')->willReturn('/template.html.twig');
+        $cache->contains('Logical:Name|theme/name')->willReturn(true);
+        $cache->fetch('Logical:Name|theme/name')->willReturn('/template.html.twig');
 
         $decoratedTemplateLocator->locateTemplate(Argument::cetera())->shouldNotBeCalled();
 
@@ -66,9 +66,9 @@ class CachedTemplateLocatorSpec extends ObjectBehavior
         ThemeInterface $theme
     ) {
         $template->getLogicalName()->willReturn('Logical:Name');
-        $theme->getName()->willReturn('theme/slug');
+        $theme->getName()->willReturn('theme/name');
 
-        $cache->contains('Logical:Name|theme/slug')->willReturn(false);
+        $cache->contains('Logical:Name|theme/name')->willReturn(false);
         $cache->fetch(Argument::cetera())->shouldNotBeCalled();
 
         $decoratedTemplateLocator->locateTemplate($template, $theme)->willReturn('/template.html.twig');
@@ -84,10 +84,10 @@ class CachedTemplateLocatorSpec extends ObjectBehavior
     ) {
         $template->getLogicalName()->willReturn('Logical:Name');
         $template->getPath()->willReturn('@Acme/template.html.twig');
-        $theme->getName()->willReturn('theme/slug');
+        $theme->getName()->willReturn('theme/name');
 
-        $cache->contains('Logical:Name|theme/slug')->willReturn(true);
-        $cache->fetch('Logical:Name|theme/slug')->willReturn(null);
+        $cache->contains('Logical:Name|theme/name')->willReturn(true);
+        $cache->fetch('Logical:Name|theme/name')->willReturn(null);
 
         $decoratedTemplateLocator->locateTemplate(Argument::cetera())->shouldNotBeCalled();
 

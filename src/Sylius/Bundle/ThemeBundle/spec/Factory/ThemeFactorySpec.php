@@ -17,7 +17,6 @@ use Sylius\Bundle\ThemeBundle\Factory\ThemeFactory;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
 /**
  * @mixin ThemeFactory

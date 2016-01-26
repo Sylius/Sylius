@@ -14,7 +14,7 @@
                 <ul>
                     {% for theme in collector.themeHierarchy %}
                         <li>
-                            {{ theme.name }} <small>({{ theme.slug }})</small>
+                            {{ theme.name }} <small>({{ theme.name }})</small>
                         </li>
                     {% endfor %}
                 </ul>
@@ -47,14 +47,14 @@
     <table>
         <tr>
             <th>Name</th>
-            <th>Slug</th>
+            <th>Name</th>
             <th>Path</th>
             <th>Description</th>
         </tr>
         {% for theme in themes %}
             <tr>
                 <td>{{ theme.name }}</td>
-                <td>{{ theme.slug }}</td>
+                <td>{{ theme.name }}</td>
                 <td>{{ theme.path }}</td>
                 <td>{{ theme.description }}</td>
             </tr>

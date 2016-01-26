@@ -42,8 +42,8 @@ class ThemeSpec extends ObjectBehavior
     {
         $this->getId()->shouldReturn(null);
 
-        $this->setName('slug');
-        $this->getId()->shouldReturn('slug');
+        $this->setName('name');
+        $this->getId()->shouldReturn('name');
     }
 
     function it_has_name()
