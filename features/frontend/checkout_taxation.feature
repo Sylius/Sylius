@@ -28,11 +28,11 @@ Feature: Checkout taxation
             | SM1  | UK   | DHL Express | Taxable Goods | Flat rate  | Amount: 5000  |
           And the following payment methods exist:
             | code | name  | gateway | enabled |
-            | PM1  | Dummy | dummy   | yes     |
+            | PM1  | Offline | offline   | yes     |
           And all products are assigned to the default channel
           And the default channel has following configuration:
             | taxonomy | payment | shipping    |
-            | Category | Dummy   | DHL Express |
+            | Category | Offline   | DHL Express |
           And I am logged in user
           And I added product "PHP Top" to cart
           And I go to the checkout start page
@@ -42,7 +42,7 @@ Feature: Checkout taxation
           And I press "Continue"
           And I select the "DHL Express" radio button
           And I press "Continue"
-          And I select the "Dummy" radio button
+          And I select the "Offline" radio button
          When I press "Continue"
          Then I should be on the checkout finalize step
           And I should see "Shipping total: €57.50"

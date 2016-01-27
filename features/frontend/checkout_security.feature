@@ -26,11 +26,11 @@ Feature: Checkout security
             | SM1  | UK   | DHL Express |
           And the following payment methods exist:
             | code | name  | gateway | enabled |
-            | PM1  | Dummy | dummy   | yes     |
+            | PM1  | Offline | offline   | yes     |
           And all products are assigned to the default channel
           And the default channel has following configuration:
             | taxonomy | payment | shipping    |
-            | Category | Dummy   | DHL Express |
+            | Category | Offline   | DHL Express |
           And I added product "PHP Top" to cart
           And I go to the checkout start page
 
@@ -71,7 +71,7 @@ Feature: Checkout security
           And I press "Continue"
           And I select the "DHL Express" radio button
           And I press "Continue"
-          And I select the "Dummy" radio button
+          And I select the "Offline" radio button
           And I press "Continue"
           And I click "Place order"
          Then I should be on the checkout thank you page

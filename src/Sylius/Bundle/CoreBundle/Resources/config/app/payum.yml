@@ -35,6 +35,5 @@ payum:
             stripe_checkout:
                 publishable_key: %stripe.publishable_key%
                 secret_key: %stripe.secret_key%
-
-        dummy:
+        offline:
             offline: ~

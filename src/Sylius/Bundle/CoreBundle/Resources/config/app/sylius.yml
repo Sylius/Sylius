@@ -188,7 +188,6 @@ sylius_payment:
                 form:
                     choice: Sylius\Bundle\CoreBundle\Form\Type\Payment\PaymentMethodChoiceType
     gateways:
-        dummy: Test
         offline: Offline
         stripe: Stripe
         be2bill: Be2Bill
