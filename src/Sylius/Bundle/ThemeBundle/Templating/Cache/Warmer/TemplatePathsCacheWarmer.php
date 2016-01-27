@@ -118,6 +118,6 @@ final class TemplatePathsCacheWarmer implements CacheWarmerInterface
      */
     private function getCacheKey(TemplateReferenceInterface $template, ThemeInterface $theme)
     {
-        return $template->getLogicalName() . '|' . $theme->getSlug();
+        return $template->getLogicalName() . '|' . $theme->getName();
     }
 }

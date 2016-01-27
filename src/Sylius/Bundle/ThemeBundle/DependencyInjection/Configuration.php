@@ -18,15 +18,18 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('sylius_theme');
 
-        $rootNode
-            ->addDefaultsIfNotSet()
-            ->fixXmlConfig('location')
-                ->children()
-                    ->arrayNode('locations')
-                        ->requiresAtLeastOneElement()
-                        ->performNoDeepMerging()
-                        ->defaultValue(['%kernel.root_dir%/themes'])
-                        ->prototype('scalar')
+        $sourcesNodeBuilder = $rootNode->addDefaultsIfNotSet()->fixXmlConfig('source')->children()->arrayNode('sources')->addDefaultsIfNotSet()->children();
+
+        $sourcesNodeBuilder
+            ->arrayNode('filesystem')
+                ->addDefaultsIfNotSet()
+                ->fixXmlConfig('location')
+                    ->children()
+                        ->arrayNode('locations')
+                            ->requiresAtLeastOneElement()
+                            ->performNoDeepMerging()
+                            ->defaultValue(['%kernel.root_dir%/themes', '%kernel.root_dir%/../vendor/sylius/themes'])
+                            ->prototype('scalar')
         ;
 
         return $treeBuilder;

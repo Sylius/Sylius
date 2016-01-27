@@ -31,22 +31,32 @@ interface ThemeInterface extends ResourceInterface
     /**
      * @return string
      */
-    public function getSlug();
-    
-    /**
-     * @param string $slug
-     */
-    public function setSlug($slug);
-
-    /**
-     * @return string
-     */
     public function getPath();
 
     /**
      * @param string $path
      */
     public function setPath($path);
+
+    /**
+     * @return array
+     */
+    public function getAuthors();
+
+    /**
+     * @param array $authors
+     */
+    public function setAuthors(array $authors);
+
+    /**
+     * @return string
+     */
+    public function getTitle();
+
+    /**
+     * @param string $title
+     */
+    public function setTitle($title);
 
     /**
      * @return string
@@ -61,12 +71,12 @@ interface ThemeInterface extends ResourceInterface
     /**
      * @return array
      */
-    public function getParentsSlugs();
+    public function getParentsNames();
 
     /**
-     * @param array $parentsSlugs
+     * @param array $parentsNames
      */
-    public function setParentsSlugs(array $parentsSlugs);
+    public function setParentsNames(array $parentsNames);
 
     /**
      * Should match /^[a-zA-Z0-9-_]{6,32}$/

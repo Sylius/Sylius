@@ -35,29 +35,30 @@ class ThemeRepositorySpec extends ObjectBehavior
     
     function it_returns_themes(ThemeInterface $theme)
     {
-        $theme->getSlug()->willReturn("foo/bar");
+        $theme->getName()->willReturn('example/theme');
 
-        $this->beConstructedWith([$theme]);
+        $this->add($theme);
         
         $this->findAll()->shouldReturn([$theme]);
     }
 
-    function it_returns_theme_by_its_slug(ThemeInterface $firstTheme, ThemeInterface $secondTheme)
+    function it_returns_theme_by_its_name(ThemeInterface $firstTheme, ThemeInterface $secondTheme)
     {
-        $firstTheme->getSlug()->willReturn("foo/bar1");
-        $secondTheme->getSlug()->willReturn("foo/bar2");
+        $firstTheme->getName()->willReturn('example/frist-theme');
+        $secondTheme->getName()->willReturn('example/second-theme');
 
-        $this->beConstructedWith([$firstTheme, $secondTheme]);
+        $this->add($firstTheme);
+        $this->add($secondTheme);
 
-        $this->findOneBySlug("foo/bar2")->shouldReturn($secondTheme);
+        $this->findOneByName('example/second-theme')->shouldReturn($secondTheme);
     }
 
-    function it_returns_null_if_theme_with_given_slug_is_not_found(ThemeInterface $theme)
+    function it_returns_null_if_theme_with_given_name_is_not_found(ThemeInterface $theme)
     {
-        $theme->getSlug()->willReturn("foo/bar");
+        $theme->getName()->willReturn('example/default-theme');
 
-        $this->beConstructedWith([$theme]);
+        $this->add($theme);
 
-        $this->findOneBySlug("blah/blah")->shouldReturn(null);
+        $this->findOneByName('example/cristopher-theme')->shouldReturn(null);
     }
 }

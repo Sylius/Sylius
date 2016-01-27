@@ -24,12 +24,17 @@ class Theme implements ThemeInterface
     /**
      * @var string
      */
-    protected $slug;
+    protected $path;
+
+    /**
+     * @var array
+     */
+    protected $authors = [];
 
     /**
      * @var string
      */
-    protected $path;
+    protected $title;
 
     /**
      * @var string
@@ -39,7 +44,7 @@ class Theme implements ThemeInterface
     /**
      * @var array
      */
-    protected $parentsSlugs;
+    protected $parentsNames = [];
 
     /**
      * @var string
@@ -51,7 +56,7 @@ class Theme implements ThemeInterface
      */
     public function getId()
     {
-        return $this->getSlug();
+        return $this->getName();
     }
 
     /**
@@ -68,23 +73,7 @@ class Theme implements ThemeInterface
     public function setName($name)
     {
         $this->name = $name;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-        $this->code = substr(md5($slug), 0, 8);
+        $this->code = substr(md5($name), 0, 8);
     }
 
     /**
@@ -106,6 +95,38 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
+    public function getAuthors()
+    {
+        return $this->authors;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAuthors(array $authors)
+    {
+        $this->authors = $authors;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getDescription()
     {
         return $this->description;
@@ -122,17 +143,17 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function getParentsSlugs()
+    public function getParentsNames()
     {
-        return $this->parentsSlugs;
+        return $this->parentsNames;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setParentsSlugs(array $parentsSlugs)
+    public function setParentsNames(array $parentsNames)
     {
-        $this->parentsSlugs = $parentsSlugs;
+        $this->parentsNames = $parentsNames;
     }
 
     /**

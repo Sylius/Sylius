@@ -52,7 +52,7 @@ class ThemeAwareLoaderSpec extends ObjectBehavior
         $this->load('/theme/resource.en.xml', 'en', 'messages')->shouldReturn($messageCatalogue);
     }
 
-    function it_adds_theme_slug_to_keys_if_given_file_is_included_in_theme(
+    function it_adds_theme_name_to_keys_if_given_file_is_included_in_theme(
         LoaderInterface $loader,
         ThemeRepositoryInterface $themeRepository,
         MessageCatalogueInterface $messageCatalogue,
@@ -61,7 +61,7 @@ class ThemeAwareLoaderSpec extends ObjectBehavior
         $loader->load('/theme/resource.en.xml', 'en', 'messages')->willReturn($messageCatalogue);
     
         $themeRepository->findOneByPath('/theme/resource.en.xml')->willReturn($theme);
-        $theme->getSlug()->willReturn('sylius/sample-theme');
+        $theme->getName()->willReturn('sylius/sample-theme');
 
         $messageCatalogue->all('messages')->willReturn(['key' => 'value']);
         $messageCatalogue->replace(['key|sylius/sample-theme' => 'value'], 'messages')->shouldBeCalled();

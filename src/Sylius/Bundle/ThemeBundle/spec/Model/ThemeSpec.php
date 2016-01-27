@@ -38,28 +38,20 @@ class ThemeSpec extends ObjectBehavior
         $this->shouldImplement(ResourceInterface::class);
     }
 
-    function its_id_is_slug()
+    function its_id_is_name()
     {
         $this->getId()->shouldReturn(null);
 
-        $this->setSlug('slug');
-        $this->getId()->shouldReturn('slug');
+        $this->setName('name');
+        $this->getId()->shouldReturn('name');
     }
 
     function it_has_name()
     {
         $this->getName()->shouldReturn(null);
 
-        $this->setName("Foo Bar");
-        $this->getName()->shouldReturn("Foo Bar");
-    }
-
-    function it_has_slug()
-    {
-        $this->getSlug()->shouldReturn(null);
-
-        $this->setSlug("foo/bar");
-        $this->getSlug()->shouldReturn("foo/bar");
+        $this->setName("foo/bar");
+        $this->getName()->shouldReturn("foo/bar");
     }
 
     function it_has_path()
@@ -70,6 +62,22 @@ class ThemeSpec extends ObjectBehavior
         $this->getPath()->shouldReturn("/foo/bar");
     }
 
+    function it_has_authors()
+    {
+        $this->getAuthors()->shouldReturn([]);
+
+        $this->setAuthors([['name' => 'Richard Rinkowsky']]);
+        $this->getAuthors()->shouldReturn([['name' => 'Richard Rinkowsky']]);
+    }
+
+    function it_has_title()
+    {
+        $this->getTitle()->shouldReturn(null);
+
+        $this->setTitle("Foo Bar");
+        $this->getTitle()->shouldReturn("Foo Bar");
+    }
+
     function it_has_description()
     {
         $this->getDescription()->shouldReturn(null);
@@ -78,10 +86,18 @@ class ThemeSpec extends ObjectBehavior
         $this->getDescription()->shouldReturn("Lorem ipsum.");
     }
 
-    function it_has_code_based_on_md5ed_slug()
+    function it_has_parents_names()
     {
-        $this->setSlug('slug');
+        $this->getParentsNames()->shouldReturn([]);
 
-        $this->getCode()->shouldReturn(substr(md5('slug'), 0, 8));
+        $this->setParentsNames(['example/sylius-theme']);
+        $this->getParentsNames()->shouldReturn(['example/sylius-theme']);
+    }
+
+    function it_has_code_based_on_md5ed_name()
+    {
+        $this->setName('name');
+
+        $this->getCode()->shouldReturn(substr(md5('name'), 0, 8));
     }
 }

@@ -11,9 +11,11 @@
 
 namespace Sylius\Bundle\ThemeBundle\DependencyInjection\Compiler;
 
-use Symfony\Component\Config\Resource\FileResource;
+use Sylius\Bundle\ThemeBundle\Loader\ConfigurationProviderInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -21,27 +23,27 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class ThemeRepositoryPass implements CompilerPassInterface
 {
     /**
-     * Adds serialized themes to theme repository.
-     *
      * {@inheritdoc}
      */
     public function process(ContainerBuilder $container)
     {
-        $definition = $container->findDefinition('sylius.theme.repository');
+        /** @var ConfigurationProviderInterface $configurationProvider */
+        $configurationProvider = $container->get('sylius.theme.configuration.provider');
 
-        $loader = $container->get('sylius.theme.loader');
+        $themeRepositoryDefinition = $container->findDefinition('sylius.theme.repository');
+        foreach ($configurationProvider->getConfigurations() as $themeConfiguration) {
+            $themeDefinition = new Definition(null, [$themeConfiguration]);
 
-        $serializedThemes = [];
-        try {
-            $themeFiles = $container->get('sylius.theme.locator')->locate('theme.json', null, false);
-            foreach ($themeFiles as $themeFile) {
-                $serializedThemes[] = serialize($loader->load($themeFile));
-                $container->addResource(new FileResource($themeFile));
-            }
+            $themeDefinition->setFactory([
+                new Reference('sylius.theme.factory'),
+                'createFromArray',
+            ]);
 
-            $definition->addArgument($serializedThemes);
-        } catch (\InvalidArgumentException $e) {
-            // No files found.
+            $themeRepositoryDefinition->addMethodCall('add', [$themeDefinition]);
+        }
+
+        foreach ($configurationProvider->getResources() as $resource) {
+            $container->addResource($resource);
         }
     }
 }

@@ -14,9 +14,11 @@ namespace spec\Sylius\Bundle\ThemeBundle\DependencyInjection\Compiler;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\DependencyInjection\Compiler\ThemeRepositoryPass;
+use Sylius\Bundle\ThemeBundle\Factory\ThemeFactoryInterface;
+use Sylius\Bundle\ThemeBundle\Loader\ConfigurationProviderInterface;
+use Sylius\Bundle\ThemeBundle\Model\Theme;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-use Symfony\Component\Config\FileLocatorInterface;
-use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\Config\Resource\ResourceInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -38,39 +40,41 @@ class ThemeRepositoryPassSpec extends ObjectBehavior
         $this->shouldImplement(CompilerPassInterface::class);
     }
 
-    function it_adds_themes_to_theme_repository(
-        ContainerBuilder $containerBuilder,
+    function it_adds_themes_definitions_to_theme_repository_constructor(
+        ContainerBuilder $container,
+        ConfigurationProviderInterface $configurationProvider,
         Definition $themeRepositoryDefinition,
-        LoaderInterface $themeLoader,
-        FileLocatorInterface $themeLocator,
-        ThemeInterface $theme
+        ResourceInterface $resource
     ) {
-        $themeRepositoryDefinition->addArgument(Argument::type('array'))->shouldBeCalled();
+        $container->get('sylius.theme.configuration.provider')->willReturn($configurationProvider);
 
-        $themeLocator->locate("theme.json", Argument::any(), false)->shouldBeCalled()->willReturn(["foo/bar/theme.json"]);
+        $container->findDefinition('sylius.theme.repository')->willReturn($themeRepositoryDefinition);
 
-        $themeLoader->load("foo/bar/theme.json")->shouldBeCalled()->willReturn($theme);
+        $configurationProvider->getConfigurations()->willReturn([
+            ['name' => 'example/sylius-theme'],
+        ]);
 
-        $containerBuilder->findDefinition("sylius.theme.repository")->shouldBeCalled()->willReturn($themeRepositoryDefinition);
-        $containerBuilder->get("sylius.theme.locator")->shouldBeCalled()->willReturn($themeLocator);
-        $containerBuilder->get("sylius.theme.loader")->shouldBeCalled()->willReturn($themeLoader);
-        $containerBuilder->addResource(Argument::type('Symfony\Component\Config\Resource\FileResource'))->shouldBeCalled();
+        $configurationProvider->getResources()->willReturn([$resource]);
 
-        $this->process($containerBuilder);
-    }
+        $themeDefinitionArgument = Argument::that(function (array $arguments) {
+            $definition = current($arguments);
 
-    function it_does_not_crash_if_themes_not_found(
-        ContainerBuilder $containerBuilder,
-        Definition $themeRepositoryDefinition,
-        LoaderInterface $themeLoader,
-        FileLocatorInterface $themeLocator
-    ) {
-        $themeLocator->locate("theme.json", Argument::any(), false)->shouldBeCalled()->willThrow(new \InvalidArgumentException());
+            if (!$definition instanceof Definition) {
+                return false;
+            }
 
-        $containerBuilder->findDefinition("sylius.theme.repository")->shouldBeCalled()->willReturn($themeRepositoryDefinition);
-        $containerBuilder->get("sylius.theme.locator")->shouldBeCalled()->willReturn($themeLocator);
-        $containerBuilder->get("sylius.theme.loader")->shouldBeCalled()->willReturn($themeLoader);
+            $arguments = $definition->getArgument(0);
+            if ($arguments !== ['name' => 'example/sylius-theme']) {
+                return false;
+            }
 
-        $this->process($containerBuilder);
+            return true;
+        });
+
+        $themeRepositoryDefinition->addMethodCall('add', $themeDefinitionArgument)->shouldBeCalled();
+
+        $container->addResource($resource)->shouldBeCalled();
+
+        $this->process($container);
     }
 }

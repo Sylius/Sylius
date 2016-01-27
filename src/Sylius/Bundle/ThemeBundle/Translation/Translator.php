@@ -140,7 +140,7 @@ final class Translator implements TranslatorInterface, TranslatorBagInterface, W
         $themes = $this->themeContext->getThemeHierarchy();
 
         foreach ($themes as $theme) {
-            yield $id . "|" . $theme->getSlug();
+            yield $id . "|" . $theme->getName();
         }
 
         yield $id;

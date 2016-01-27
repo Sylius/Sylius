@@ -11,8 +11,6 @@
 
 namespace Sylius\Bundle\ThemeBundle\Translation\Loader;
 
-use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Symfony\Component\Translation\Loader\LoaderInterface;
 
@@ -54,7 +52,7 @@ final class ThemeAwareLoader implements LoaderInterface
 
             foreach ($messages as $key => $value) {
                 unset($messages[$key]);
-                $messages[$key . '|' . $theme->getSlug()] = $value;
+                $messages[$key . '|' . $theme->getName()] = $value;
             }
 
             $messageCatalogue->replace($messages, $domain);

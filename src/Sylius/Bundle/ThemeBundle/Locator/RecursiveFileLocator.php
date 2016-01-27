@@ -11,8 +11,7 @@
 
 namespace Sylius\Bundle\ThemeBundle\Locator;
 
-use Symfony\Component\Config\FileLocatorInterface;
-use Symfony\Component\Filesystem\Filesystem;
+use Sylius\Bundle\ThemeBundle\Factory\FinderFactoryInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
@@ -22,9 +21,9 @@ use Symfony\Component\Finder\SplFileInfo;
 final class RecursiveFileLocator implements FileLocatorInterface
 {
     /**
-     * @var Filesystem
+     * @var FinderFactoryInterface
      */
-    private $filesystem;
+    private $finderFactory;
 
     /**
      * @var array
@@ -32,62 +31,79 @@ final class RecursiveFileLocator implements FileLocatorInterface
     private $paths;
 
     /**
-     * @param Filesystem $filesystem
-     * @param string|array $paths A path or an array of paths where to look for resources
+     * @param FinderFactoryInterface $finderFactory
+     * @param array $paths An array of paths where to look for resources
      */
-    public function __construct(Filesystem $filesystem, $paths = [])
+    public function __construct(FinderFactoryInterface $finderFactory, array $paths)
     {
-        $this->filesystem = $filesystem;
-        $this->paths = (array) $paths;
+        $this->finderFactory = $finderFactory;
+        $this->paths = $paths;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function locate($name, $currentPath = null, $first = true)
+    public function locateFileNamed($name)
     {
-        if (empty($name)) {
-            throw new \InvalidArgumentException('An empty file name is not valid to be located.');
-        }
+        return $this->doLocateFilesNamed($name)->current();
+    }
 
-        if ($this->filesystem->isAbsolutePath($name)) {
-            if (!$this->filesystem->exists($name)) {
-                throw new \InvalidArgumentException(sprintf('The file "%s" does not exist.', $name));
-            }
+    /**
+     * {@inheritdoc}
+     */
+    public function locateFilesNamed($name)
+    {
+        return iterator_to_array($this->doLocateFilesNamed($name));
+    }
 
-            return $name;
-        }
+    /**
+     * @param string $name
+     *
+     * @return \Generator
+     */
+    private function doLocateFilesNamed($name)
+    {
+        $this->assertNameIsNotEmpty($name);
 
-        $directories = $this->paths;
-        if (null !== $currentPath) {
-            $directories[] = $currentPath;
-
-            $directories = array_values(array_unique($directories));
-        }
-
-        $filepaths = [];
-
-        $finder = new Finder();
+        $finder = $this->finderFactory->create();
         $finder
             ->files()
             ->name($name)
             ->ignoreUnreadableDirs()
-            ->in($directories)
-        ;
+            ->in($this->paths);
+
+        $this->assertThatAtLeastOneFileWasFound($finder, $name);
 
         /** @var SplFileInfo $file */
-        if ($first && null !== $file = $finder->getIterator()->current()) {
-            return $file->getPathname();
-        }
-
         foreach ($finder as $file) {
-            $filepaths[] = $file->getPathname();
+            yield $file->getPathname();
         }
+    }
 
-        if (!$filepaths) {
-            throw new \InvalidArgumentException(sprintf('The file "%s" does not exist (in: %s).', $name, implode(', ', $directories)));
+    /**
+     * @param string $name
+     */
+    private function assertNameIsNotEmpty($name)
+    {
+        if (null === $name || '' === $name) {
+            throw new \InvalidArgumentException(
+                'An empty file name is not valid to be located.'
+            );
         }
+    }
 
-        return array_values(array_unique($filepaths));
+    /**
+     * @param Finder $finder
+     * @param string $name
+     */
+    private function assertThatAtLeastOneFileWasFound(Finder $finder, $name)
+    {
+        if (0 === $finder->count()) {
+            throw new \InvalidArgumentException(sprintf(
+                'The file "%s" does not exist (searched in the following directories: %s).',
+                $name,
+                implode(', ', $this->paths)
+            ));
+        }
     }
 }

@@ -49,10 +49,10 @@ class ThemeDebugCommand extends ContainerAwareCommand
         $output->writeln('<question>Succesfully loaded themes:</question>');
 
         $table = new Table($output);
-        $table->setHeaders(['Name', 'Slug', 'Path']);
+        $table->setHeaders(['Title', 'Name', 'Path']);
 
         foreach ($themes as $theme) {
-            $table->addRow([$theme->getName(), $theme->getSlug(), $theme->getPath()]);
+            $table->addRow([$theme->getTitle(), $theme->getName(), $theme->getPath()]);
         }
 
         $table->setStyle('borderless');

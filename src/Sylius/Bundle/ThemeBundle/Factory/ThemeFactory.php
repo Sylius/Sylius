@@ -12,8 +12,7 @@
 namespace Sylius\Bundle\ThemeBundle\Factory;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -21,39 +20,16 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 final class ThemeFactory implements ThemeFactoryInterface
 {
     /**
-     * @var string
+     * @var FactoryInterface
      */
-    private $themeClassName;
+    private $basicThemeFactory;
 
     /**
-     * @var PropertyAccessorInterface
+     * @param FactoryInterface $basicThemeFactory
      */
-    private $propertyAccessor;
-
-    /**
-     * @var OptionsResolver
-     */
-    private $optionsResolver;
-
-    /**
-     * @param string $themeClassName
-     * @param PropertyAccessorInterface $propertyAccessor
-     */
-    public function __construct($themeClassName, PropertyAccessorInterface $propertyAccessor)
+    public function __construct(FactoryInterface $basicThemeFactory)
     {
-        $this->themeClassName = $themeClassName;
-        $this->propertyAccessor = $propertyAccessor;
-
-        $this->optionsResolver = new OptionsResolver();
-        $this->optionsResolver
-            ->setRequired([
-                'name',
-                'slug',
-            ])
-            ->setDefined('description')
-            ->setDefault('parents', [])
-            ->setAllowedTypes('parents', 'array')
-        ;
+        $this->basicThemeFactory = $basicThemeFactory;
     }
 
     /**
@@ -62,28 +38,27 @@ final class ThemeFactory implements ThemeFactoryInterface
     public function createFromArray(array $themeData)
     {
         /** @var ThemeInterface $theme */
-        $theme = new $this->themeClassName();
+        $theme = $this->basicThemeFactory->createNew();
 
-        $themeData = $this->optionsResolver->resolve($themeData);
+        $theme->setName($themeData['name']);
+        $theme->setPath($themeData['path']);
 
-        foreach ($themeData as $attributeKey => $attributeValue) {
-            $this->propertyAccessor->setValue($theme, $this->normalizeAttributeKey($attributeKey), $attributeValue);
+        if (isset($themeData['authors'])) {
+            $theme->setAuthors($themeData['authors']);
+        }
+
+        if (isset($themeData['title'])) {
+            $theme->setTitle($themeData['title']);
+        }
+
+        if (isset($themeData['description'])) {
+            $theme->setDescription($themeData['description']);
+        }
+
+        if (isset($themeData['parents'])) {
+            $theme->setParentsNames($themeData['parents']);
         }
 
         return $theme;
-    }
-
-    /**
-     * @param string $attributeKey
-     *
-     * @return string
-     */
-    private function normalizeAttributeKey($attributeKey)
-    {
-        if ('parents' === $attributeKey) {
-            $attributeKey = 'parentsSlugs';
-        }
-
-        return $attributeKey;
     }
 }
