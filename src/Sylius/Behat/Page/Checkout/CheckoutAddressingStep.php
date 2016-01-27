@@ -42,4 +42,9 @@ class CheckoutAddressingStep extends SymfonyPage
         $this->fillField('Postcode', $addressingDetails['postcode']);
         $this->fillField('Phone number', $addressingDetails['phoneNumber']);
     }
+
+    public function forward()
+    {
+        $this->pressButton('Continue');
+    }
 }

@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -53,20 +54,80 @@ class ShippingContext implements Context
     }
 
     /**
+     * @Transform :shippingMethodName shipping method
+     * @Transform shipping method :shippingMethodName
+     */
+    public function castShippingMethodNameToShippingMethod($shippingMethodName)
+    {
+        if (null === $shippingMethod = $this->shippingMethodRepository->findOneBy(['name' => $shippingMethodName])) {
+            throw new \Exception('Shipping method with name "'.$shippingMethodName.'" does not exist');
+        }
+
+        return $shippingMethod;
+    }
+
+    /**
      * @Given store ships everything for free
      */
     public function storeShipsEverythingForFree()
     {
-        $zone = $this->sharedStorage->getCurrentResource('zone');
+        $this->createShippingMethod('Free');
+    }
+
+    /**
+     * @Given /^store has "([^"]*)" shipping method with "(?:€|£|\$)([^"]*)" fee$/
+     */
+    public function storeHasShippingMethodWithFee($shippingMethodName, $fee)
+    {
+        $this->createShippingMethod($shippingMethodName, 'en', ['amount' => $this->getFeeFromString($fee)]);
+    }
+
+    /**
+     * @param string $name
+     * @param string $locale
+     * @param array $configuration
+     * @param string $calculator
+     * @param ZoneInterface|null $zone
+     */
+    private function createShippingMethod(
+        $name,
+        $locale = 'en',
+        $configuration = ['amount' => 0],
+        $calculator = DefaultCalculators::PER_ITEM_RATE,
+        $zone = null
+    ) {
+        if (null === $zone) {
+            $zone = $this->sharedStorage->getCurrentResource('zone');
+        }
 
         $shippingMethod = $this->shippingMethodFactory->createNew();
-        $shippingMethod->setCode('SM1');
-        $shippingMethod->setName('Free');
-        $shippingMethod->setCurrentLocale('FR');
-        $shippingMethod->setConfiguration(['amount' => 0]);
-        $shippingMethod->setCalculator(DefaultCalculators::PER_ITEM_RATE);
+        $shippingMethod->setCode($this->getCodeFromName($name));
+        $shippingMethod->setName($name);
+        $shippingMethod->setCurrentLocale($locale);
+        $shippingMethod->setConfiguration($configuration);
+        $shippingMethod->setCalculator($calculator);
         $shippingMethod->setZone($zone);
 
         $this->shippingMethodRepository->add($shippingMethod);
+    }
+
+    /**
+     * @param string $shippingMethodName
+     *
+     * @return string
+     */
+    private function getCodeFromName($shippingMethodName)
+    {
+        return str_replace(' ', '_', strtolower($shippingMethodName));
+    }
+
+    /**
+     * @param string $shippingMethodFee
+     *
+     * @return string
+     */
+    private function getFeeFromString($shippingMethodFee)
+    {
+        return ((int) $shippingMethodFee) * 100;
     }
 }

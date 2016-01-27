@@ -55,6 +55,7 @@ class CheckoutContext extends FeatureContext
     /**
      * @Given I added product :name to the cart
      * @When I add product :name to the cart
+     * @When I have product :name in the cart
      */
     public function iAddProductToTheCart($name)
     {
@@ -96,15 +97,35 @@ class CheckoutContext extends FeatureContext
             'phoneNumber' => '321123456',
         ];
         $checkoutAddressingPage->fillAddressingDetails($addressingDetails);
-        $checkoutAddressingPage->pressButton('Continue');
+        $checkoutAddressingPage->forward();
 
         $checkoutShippingPage = $this->getPage('Checkout\CheckoutShippingStep');
-        $checkoutShippingPage->pressRadio('Free');
-        $checkoutShippingPage->pressButton('Continue');
+        $checkoutShippingPage->selectShippingMethod('Free');
 
         $checkoutPaymentPage = $this->getPage('Checkout\CheckoutPaymentStep');
-        $checkoutPaymentPage->pressRadio($paymentMethodName);
-        $checkoutPaymentPage->pressButton('Continue');
+        $checkoutPaymentPage->selectPaymentMethod($paymentMethodName);
+    }
+
+    /**
+     * @When /^I proceed selecting "([^"]+)" shipping method$/
+     */
+    public function iProceedSelectingShippingMethod($shippingMethod)
+    {
+        $checkoutAddressingPage = $this->getPage('Checkout\CheckoutAddressingStep')->open();
+        $addressingDetails = [
+            'firstName' => 'John',
+            'lastName' => 'Doe',
+            'country' => 'France',
+            'street' => '0635 Myron Hollow Apt. 711',
+            'city' => 'North Bridget',
+            'postcode' => '93-554',
+            'phoneNumber' => '321123456',
+        ];
+        $checkoutAddressingPage->fillAddressingDetails($addressingDetails);
+        $checkoutAddressingPage->forward();
+
+        $checkoutShippingPage = $this->getPage('Checkout\CheckoutShippingStep');
+        $checkoutShippingPage->selectShippingMethod($shippingMethod);
     }
 
     /**
