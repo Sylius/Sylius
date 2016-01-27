@@ -51,7 +51,7 @@ class ProductContext implements Context
     /**
      * @Given /^store has a product "([^"]*)" priced at "(€|£|\$)([^"]*)"$/
      */
-    public function catalogHasAProductPricedAt($productName, $currency, $price)
+    public function storeHasAProductPricedAt($productName, $currency, $price)
     {
         $product = $this->productFactory->createNew();
         $product->setName($productName);

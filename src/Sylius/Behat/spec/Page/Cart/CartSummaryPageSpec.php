@@ -24,11 +24,8 @@ use Symfony\Component\Routing\RouterInterface;
  */
 class CartSummaryPageSpec extends ObjectBehavior
 {
-    function let(Session $session, Factory $factory, RouterInterface $router, DriverInterface $driver, SelectorsHandler $selectorsHandler)
+    function let(Session $session, Factory $factory, RouterInterface $router)
     {
-        $session->getDriver()->willReturn($driver);
-        $session->getSelectorsHandler()->willReturn($selectorsHandler);
-
         $this->beConstructedWith($session, $factory, array(), $router);
     }
 
@@ -42,16 +39,8 @@ class CartSummaryPageSpec extends ObjectBehavior
         $this->shouldHaveType(SymfonyPage::class);
     }
 
-    function it_opens_cart_summary_page($session, $router)
-    {
-        $router->generate('sylius_cart_summary')->willReturn('http://sylius.dev/cart');
-        $session->visit('http://sylius.dev/cart')->shouldBeCalled();
-
-        $this->openPage();
-    }
-
     function it_has_route_name()
     {
-        $this->getRouteName('sylius_cart_summary');
+        $this->getRouteName()->shouldReturn('sylius_cart_summary');
     }
 }

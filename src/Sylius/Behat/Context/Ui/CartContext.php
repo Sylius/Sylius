@@ -26,9 +26,9 @@ class CartContext extends FeatureContext
     {
         /** @var CartSummaryPage $cartSummaryPage */
         $cartSummaryPage = $this->getPage('Cart\CartSummaryPage');
-        $cartSummaryPage->openPage();
+        $cartSummaryPage->open();
 
-        $this->assertSession()->elementTextContains('css', 'body', 'Grand total: '.$total);
+        $this->assertSession()->elementTextContains('css', '#cart-summary', 'Grand total: '.$total);
     }
 
     /**
@@ -38,8 +38,8 @@ class CartContext extends FeatureContext
     {
         /** @var CartSummaryPage $cartSummaryPage */
         $cartSummaryPage = $this->getPage('Cart\CartSummaryPage');
-        $cartSummaryPage->openPage();
+        $cartSummaryPage->open();
 
-        $this->assertSession()->elementTextContains('css', 'body', 'Tax total: '.$taxesTotal);
+        $this->assertSession()->elementTextContains('css', '#cart-summary', 'Tax total: '.$taxesTotal);
     }
 }

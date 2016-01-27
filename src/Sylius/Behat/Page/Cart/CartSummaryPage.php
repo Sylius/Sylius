@@ -18,12 +18,6 @@ use Sylius\Behat\Page\SymfonyPage;
  */
 class CartSummaryPage extends SymfonyPage
 {
-    public function openPage()
-    {
-        $url = $this->router->generate($this->getRouteName());
-        $this->getSession()->visit($url);
-    }
-
     /**
      * @return string
      */

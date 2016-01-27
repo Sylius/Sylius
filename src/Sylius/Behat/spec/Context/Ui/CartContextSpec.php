@@ -42,10 +42,10 @@ class CartContextSpec extends ObjectBehavior
     function it_checks_if_cart_has_given_total($pageObjectFactory, $mink, CartSummaryPage $cartSummaryPage, WebAssert $assert)
     {
         $pageObjectFactory->createPage('Cart\CartSummaryPage')->willReturn($cartSummaryPage);
-        $cartSummaryPage->openPage()->shouldBeCalled();
+        $cartSummaryPage->open()->shouldBeCalled();
 
         $mink->assertSession(null)->willReturn($assert);
-        $assert->elementTextContains('css', 'body', 'Grand total: $100.00')->shouldBeCalled();
+        $assert->elementTextContains('css', '#cart-summary', 'Grand total: $100.00')->shouldBeCalled();
 
         $this->myCartTotalShouldBe('$100.00');
     }
@@ -53,10 +53,10 @@ class CartContextSpec extends ObjectBehavior
     function it_checks_if_cart_has_given_tax_total($pageObjectFactory, $mink, CartSummaryPage $cartSummaryPage, WebAssert $assert)
     {
         $pageObjectFactory->createPage('Cart\CartSummaryPage')->willReturn($cartSummaryPage);
-        $cartSummaryPage->openPage()->shouldBeCalled();
+        $cartSummaryPage->open()->shouldBeCalled();
 
         $mink->assertSession(null)->willReturn($assert);
-        $assert->elementTextContains('css', 'body', 'Tax total: $50.00')->shouldBeCalled();
+        $assert->elementTextContains('css', '#cart-summary', 'Tax total: $50.00')->shouldBeCalled();
 
         $this->myCartTaxesShouldBe('$50.00');
     }
