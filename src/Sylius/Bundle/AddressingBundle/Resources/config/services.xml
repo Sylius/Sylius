@@ -65,6 +65,7 @@
         </service>
         <service id="sylius.validator.valid_province_address" class="%sylius.validator.valid_province_address.class%">
             <argument type="service" id="sylius.repository.country" />
+            <argument type="service" id="sylius.repository.province" />
             <tag name="validator.constraint_validator" alias="sylius_province_address_validator" />
         </service>
     </services>
