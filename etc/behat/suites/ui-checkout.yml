@@ -24,8 +24,10 @@ default:
                     sharedStorage: "@sylius.behat.shared_storage"
                     userFactory: "@sylius.factory.user"
                     customerFactory: "@sylius.factory.customer"
+                    addressFactory: "@sylius.factory.address"
                 - Sylius\Behat\Context\Setup\ProductContext:
                     productRepository: "@sylius.repository.product"
+                    taxCategoryRepository: "@sylius.repository.tax_category"
                     sharedStorage: "@sylius.behat.shared_storage"
                     productFactory: "@sylius.factory.product"
                 - Sylius\Behat\Context\Ui\CheckoutContext:

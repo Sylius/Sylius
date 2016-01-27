@@ -62,30 +62,20 @@ class LoadZonesData extends DataFixture
     }
 
     /**
-     * Create a new zone instance of given type.
-     *
      * @param string $code
      * @param string $name
      * @param string $type
-     * @param array  $members
+     * @param array $members
      *
      * @return ZoneInterface
      */
     protected function createZone($code, $name, $type, array $members)
     {
         /* @var $zone ZoneInterface */
-        $zone = $this->getZoneFactory()->createNew();
+        $zone = $this->getZoneFactory()->createWithMembers($members);
         $zone->setCode($code);
         $zone->setName($name);
         $zone->setType($type);
-
-        foreach ($members as $memberCode) {
-            /* @var $zoneMember ZoneMemberInterface */
-            $zoneMember = $this->getZoneMemberFactory()->createNew();
-            $zoneMember->setCode($memberCode);
-
-            $zone->addMember($zoneMember);
-        }
 
         $this->setReference('Sylius.Zone.'.$code, $zone);
 
