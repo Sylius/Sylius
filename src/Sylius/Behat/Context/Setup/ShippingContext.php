@@ -53,9 +53,9 @@ class ShippingContext implements Context
     }
 
     /**
-     * @Given store has free shipping method
+     * @Given store ships everything for free
      */
-    public function storeHasFreeShippingMethod()
+    public function storeShipsEverythingForFree()
     {
         $zone = $this->sharedStorage->getCurrentResource('zone');
 

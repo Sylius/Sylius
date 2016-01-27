@@ -43,9 +43,9 @@ class ChannelContext implements Context
     }
 
     /**
-     * @Given that store is operating on the France channel
+     * @Given the store is operating on a single "France" channel
      */
-    public function thatStoreIsOperatingOnTheFranceChannel()
+    public function thatStoreIsOperatingOnASingleFranceChannel()
     {
         $defaultData = $this->defaultFranceChannelFactory->create();
         $this->sharedStorage->setClipboard($defaultData);
