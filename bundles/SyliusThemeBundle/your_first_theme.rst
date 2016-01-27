@@ -4,18 +4,16 @@ Your first theme
 Themes location and definition
 ------------------------------
 
-Themes should be added to ``app/themes`` directory by default. Each theme should define configuration file called ``theme.json``. 
-It's structure has two required parameters - ``name`` and ``logical_name``. Example:
+Private themes should be added to ``app/themes`` directory by default. Every theme should have a default confguration
+located in ``composer.json`` file. The only required parameter is ``name``, but it is worth to define other.
 
 .. code-block:: json
 
     {
-      "name": "Human-readable name",
-      "logical_name": "vendor/theme-name"
+      "name": "vendor/default-theme"
     }
 
-
-When adding, modifying or removing theme, it's necessary to rebuild the container (same as adding new translation files in Symfony2) by clearing the cache (`app/console cache:clear`).
+When adding or removing theme, it's necessary to rebuild the container (same as adding new translation files in Symfony2) by clearing the cache (`app/console cache:clear`).
 
 Theme structure
 ---------------
@@ -89,36 +87,47 @@ While you can't set two themes active at once, you can make use of multiple inhe
 .. code-block:: json
 
     {
-        "name": "Child theme",
-        "logical_name": "vendor/child-theme",
-        "parents": [
-            "vendor/first-parent-theme",
-            "vendor/seecond-parent-theme"
-        ]
+        "name": "vendor/child-theme",
+        "extra": {
+            "sylius-theme": {
+                "title": "Child theme",
+                "parents": ["vendor/first-parent-theme", "vendor/second-parent-theme"]
+            }
+        }
     }
 
 .. code-block:: json
 
     {
-        "name": "First parent theme",
-        "logical_name": "vendor/first-parent-theme",
-        "parents": [
-            "vendor/grandparent-theme"
-        ]
+        "name": "vendor/first-parent-theme",
+        "extra": {
+            "sylius-theme": {
+                "title": "First parent theme",
+                "parents": ["vendor/grand-parent-theme"]
+            }
+        }
     }
 
 .. code-block:: json
 
     {
-        "name": "Second parent theme",
-        "logical_name": "vendor/second-parent-theme"
+        "name": "vendor/grand-parent-theme",
+        "extra": {
+            "sylius-theme": {
+                "title": "Grandparent theme"
+            }
+        }
     }
 
 .. code-block:: json
 
     {
-        "name": "Grandparent theme",
-        "logical_name": "vendor/grandparent-theme"
+        "name": "vendor/second-parent-theme",
+        "extra": {
+            "sylius-theme": {
+                "title": "Second parent theme",
+            }
+        }
     }
 
 Configuration showed below will result in given order:

@@ -6,9 +6,9 @@ Tests
 
 .. code-block:: bash
 
-    $ composer install --dev --prefer-dist
-    $ bin/phpspec run -fpretty --verbose
-    $ bin/phpunit .
+    $ composer install --prefer-dist
+    $ bin/phpspec run -f pretty
+    $ bin/phpunit
 
 Bug tracking
 ------------
