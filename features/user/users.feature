@@ -110,6 +110,22 @@ Feature: Customers management
           And "Customer has been successfully updated" should appear on the page
           And "umpirsky@gmail.com" should appear on the page
 
+    Scenario: Username should be the same as email after email change
+        Given I am editing customer with email "rick@foo.com"
+        When I fill in "Email" with "umpirsky@gmail.com"
+        And I press "Save changes"
+        Then "Customer has been successfully updated" should appear on the page
+        And the customer should have username "umpirsky@gmail.com"
+
+    Scenario: Updating user properties during email change
+        Given I am editing customer with email "rick@foo.com"
+        When I fill in "Email" with "umpirsky@gmail.com"
+        And I check "Enabled"
+        And I press "Save changes"
+        Then "Customer has been successfully updated" should appear on the page
+        And the customer should have username "umpirsky@gmail.com"
+        And the customer should be enabled
+
     Scenario: Changing customer's password and logging in with new one
         Given I am editing customer with email "dale@foo.com"
           And I fill in "Password" with "Sylius!"
