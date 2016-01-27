@@ -25,11 +25,11 @@ Feature: Checkout finalization
             | SM1  | UK   | DHL Express |
           And the following payment methods exist:
             | code | name  | gateway | enabled |
-            | PM1  | Dummy | dummy   | yes     |
+            | PM1  | Offline | offline   | yes     |
           And all products are assigned to the default channel
           And the default channel has following configuration:
             | taxonomy | payment | shipping    |
-            | Category | Dummy   | DHL Express |
+            | Category | Offline   | DHL Express |
 
     Scenario: Placing the order
         Given I am logged in user
@@ -39,7 +39,7 @@ Feature: Checkout finalization
           And I press "Continue"
           And I select the "DHL Express" radio button
           And I press "Continue"
-          And I select the "Dummy" radio button
+          And I select the "Offline" radio button
           And I press "Continue"
          When I click "Place order"
          Then I should see "Thank you"
@@ -81,7 +81,7 @@ Feature: Checkout finalization
           And I press "Continue"
           And I select the "DHL Express" radio button
           And I press "Continue"
-          And I select the "Dummy" radio button
+          And I select the "Offline" radio button
           And I press "Continue"
          When I click "Place order"
          Then I should see "Thank you"

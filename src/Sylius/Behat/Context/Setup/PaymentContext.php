@@ -55,7 +55,7 @@ class PaymentContext implements Context
     {
         $paymentMethod = $this->paymentMethodFactory->createNew();
         $paymentMethod->setCode('PM1');
-        $paymentMethod->setGateway('dummy');
+        $paymentMethod->setGateway('offline');
         $paymentMethod->setName('Offline');
         $paymentMethod->setDescription('Offline payment method');
 

@@ -32,11 +32,11 @@ Feature: Checkout shipping
             | SM4  | UK + Germany | UPS Ground    | Flat rate  | Amount: 20000 | no      |
           And the following payment methods exist:
             | code | name  | gateway | enabled |
-            | PM1  | Dummy | dummy   | yes     |
+            | PM1  | Offline | offline   | yes     |
           And all products are assigned to the default channel
           And the default channel has following configuration:
             | taxonomy | payment | shipping                                      |
-            | Category | Dummy   | DHL Express, FedEx, FedEx Premium, UPS Ground |
+            | Category | Offline   | DHL Express, FedEx, FedEx Premium, UPS Ground |
           And I am logged in user
           And I added product "PHP Top" to cart
 
@@ -88,7 +88,7 @@ Feature: Checkout shipping
           And I press "Continue"
           And I select the "FedEx" radio button
           And I press "Continue"
-          And I select the "Dummy" radio button
+          And I select the "Offline" radio button
          When I press "Continue"
          Then I should be on the checkout finalize step
           And "Shipping total: €65.00" should appear on the page
