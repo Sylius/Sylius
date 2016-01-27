@@ -13,7 +13,6 @@ namespace Sylius\Component\Taxonomy\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Resource\Model\SoftDeletableTrait;
 use Sylius\Component\Translation\Model\TranslatableTrait;
 
 /**
@@ -22,7 +21,6 @@ use Sylius\Component\Translation\Model\TranslatableTrait;
  */
 class Taxon implements TaxonInterface
 {
-    use SoftDeletableTrait;
     use TranslatableTrait {
         __construct as private initializeTranslationsCollection;
     }

@@ -22,7 +22,6 @@ use Sylius\Component\Translation\Model\TranslatableInterface;
  */
 interface TaxonInterface extends
     CodeAwareInterface,
-    SoftDeletableInterface,
     TaxonTranslationInterface,
     TranslatableInterface
 {
