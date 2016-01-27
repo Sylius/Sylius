@@ -21,6 +21,7 @@ use Sylius\Component\Order\OrderTransitions;
  * Final checkout step.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Fernando Caraballo Ortiz <caraballo.ortiz@gmail.com>
  */
 class FinalizeStep extends CheckoutStep
 {
@@ -64,11 +65,19 @@ class FinalizeStep extends CheckoutStep
     protected function completeOrder(OrderInterface $order)
     {
         $this->get('session')->set('sylius_order_id', $order->getId());
+
+        $currencyProvider = $this->get('sylius.currency_provider');
+
         $this->dispatchCheckoutEvent(SyliusOrderEvents::PRE_CREATE, $order);
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::FINALIZE_PRE_COMPLETE, $order);
 
         $this->get('sm.factory')->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_CREATE, true);
-
+        if ($order->getCurrency() !== $currencyProvider->getBaseCurrency()) {
+            $currencyRepository = $this->get('sylius.repository.currency');
+            $currency = $currencyRepository->findOneBy(['code' => $order->getCurrency()]);
+            $order->setExchangeRate($currency->getExchangeRate());
+        }
+        
         $manager = $this->get('sylius.manager.order');
         $manager->persist($order);
         $manager->flush();

@@ -226,6 +226,7 @@ class BookController extends ResourceController
 * Removed ``Address`` relations to ``Country`` and ``Province`` objects, their unique ``code`` is used instead;
 * Removed specific ``ZoneMembers`` i.e. ``ProvinceZoneMember`` in favor of a dynamic ``ZoneMember``;
 * https://github.com/Sylius/Sylius/pull/3696
+* ``exchangeRate`` is now recorded for ``Order`` at time of purchase for accurate cross-currency reporting.
 
 ### Order and SyliusOrderBundle
 

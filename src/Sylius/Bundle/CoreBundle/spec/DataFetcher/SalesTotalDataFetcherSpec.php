@@ -125,7 +125,7 @@ class SalesTotalDataFetcherSpec extends ObjectBehavior
         $this->fetch($configuration)->shouldBeLike($data);
     }
 
-    public function it_does_not_allowed_wrond_data_period($orderRepository, Data $data)
+    public function it_does_not_allowed_wrond_data_period()
     {
         $configuration = array(
             'start' => new \DateTime('2010-01-01 00:00:00.000000'),

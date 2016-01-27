@@ -13,27 +13,30 @@ namespace Sylius\Component\Core\Currency;
 
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
-use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
+use Sylius\Component\Currency\Provider\CurrencyProvider;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * Currency provider, which returns currencies enabled for this channel.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Fernando Caraballo Ortiz <caraballo.ortiz@gmail.com>
  */
-class ChannelAwareCurrencyProvider implements CurrencyProviderInterface
+class ChannelAwareCurrencyProvider extends CurrencyProvider
 {
     /**
-     * Channel context.
-     *
      * @var ChannelContextInterface
      */
     protected $channelContext;
 
     /**
      * @param ChannelContextInterface $channelContext
+     * @param RepositoryInterface $currencyRepository
      */
-    public function __construct(ChannelContextInterface $channelContext)
+    public function __construct(ChannelContextInterface $channelContext, RepositoryInterface $currencyRepository)
     {
+        parent::__construct($currencyRepository);
+
         $this->channelContext = $channelContext;
     }
 
