@@ -17,6 +17,7 @@ use Sylius\Bundle\ThemeBundle\Loader\ConfigurationProviderInterface;
 use Sylius\Bundle\ThemeBundle\Loader\Filesystem\FilesystemConfigurationProvider;
 use Sylius\Bundle\ThemeBundle\Loader\LoaderInterface;
 use Sylius\Bundle\ThemeBundle\Locator\FileLocatorInterface;
+use Symfony\Component\Config\Resource\ResourceInterface;
 
 /**
  * @mixin FilesystemConfigurationProvider
@@ -50,7 +51,7 @@ class FilesystemConfigurationProviderSpec extends ObjectBehavior
         $loader->load('/cristopher/configurationfile.json')->willReturn(['name' => 'cristopher/sylus-theme']);
         $loader->load('/richard/configurationfile.json')->willReturn(['name' => 'richard/sylus-theme']);
 
-        $this->provideAll()->shouldReturn([
+        $this->getConfigurations()->shouldReturn([
             ['name' => 'cristopher/sylus-theme'],
             ['name' => 'richard/sylus-theme'],
         ]);
@@ -60,6 +61,41 @@ class FilesystemConfigurationProviderSpec extends ObjectBehavior
     {
         $fileLocator->locateFilesNamed('configurationfile.json')->willThrow(\InvalidArgumentException::class);
 
-        $this->provideAll()->shouldReturn([]);
+        $this->getConfigurations()->shouldReturn([]);
+    }
+
+    function it_provides_a_list_of_symfony_config_resources_used(FileLocatorInterface $fileLocator)
+    {
+        $fileLocator->locateFilesNamed('configurationfile.json')->willReturn([
+            '/cristopher/configurationfile.json',
+            '/richard/configurationfile.json',
+        ]);
+
+        $this->getResources()->shouldHaveAllElementsOf(ResourceInterface::class);
+    }
+
+    function it_provides_an_empty_list_of_symfony_config_resources_used_if_there_arent_any_found(FileLocatorInterface $fileLocator)
+    {
+        $fileLocator->locateFilesNamed('configurationfile.json')->willThrow(\InvalidArgumentException::class);
+
+        $this->getResources()->shouldReturn([]);
+    }
+
+    /**
+     * @return array
+     */
+    public function getMatchers()
+    {
+        return [
+            'haveAllElementsOf' => function (array $subject, $type) {
+                foreach ($subject as $element) {
+                    if ($type === get_class($element) || is_subclass_of($element, $type)) {
+                        return true;
+                    }
+                }
+
+                return false;
+            },
+        ];
     }
 }

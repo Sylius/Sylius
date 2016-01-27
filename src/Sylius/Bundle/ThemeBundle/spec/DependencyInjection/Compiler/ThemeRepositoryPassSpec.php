@@ -18,6 +18,7 @@ use Sylius\Bundle\ThemeBundle\Factory\ThemeFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Loader\ConfigurationProviderInterface;
 use Sylius\Bundle\ThemeBundle\Model\Theme;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
+use Symfony\Component\Config\Resource\ResourceInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -42,15 +43,18 @@ class ThemeRepositoryPassSpec extends ObjectBehavior
     function it_adds_themes_definitions_to_theme_repository_constructor(
         ContainerBuilder $container,
         ConfigurationProviderInterface $configurationProvider,
-        Definition $themeRepositoryDefinition
+        Definition $themeRepositoryDefinition,
+        ResourceInterface $resource
     ) {
         $container->get('sylius.theme.configuration.provider')->willReturn($configurationProvider);
 
         $container->findDefinition('sylius.theme.repository')->willReturn($themeRepositoryDefinition);
 
-        $configurationProvider->provideAll()->willReturn([
+        $configurationProvider->getConfigurations()->willReturn([
             ['name' => 'example/sylius-theme'],
         ]);
+
+        $configurationProvider->getResources()->willReturn([$resource]);
 
         $themeDefinitionArgument = Argument::that(function (array $arguments) {
             $definition = current($arguments);
@@ -67,33 +71,9 @@ class ThemeRepositoryPassSpec extends ObjectBehavior
             return true;
         });
 
-        $themeRepositoryDefinition
-            ->addMethodCall('add', $themeDefinitionArgument)
-            ->shouldBeCalled()
-        ;
+        $themeRepositoryDefinition->addMethodCall('add', $themeDefinitionArgument)->shouldBeCalled();
 
-        $this->process($container);
-    }
-
-    function it_also_runs_process_on_configuration_provider_if_it_implements_compiler_pass_interface(
-        ContainerBuilder $container,
-        ConfigurationProviderInterface $configurationProvider,
-        Definition $themeRepositoryDefinition
-    ) {
-        /** @var ConfigurationProviderInterface|CompilerPassInterface $configurationProvider */
-        $configurationProvider->implement(CompilerPassInterface::class);
-
-        $container->get('sylius.theme.configuration.provider')->willReturn($configurationProvider);
-
-        $container->findDefinition('sylius.theme.repository')->willReturn($themeRepositoryDefinition);
-
-        $configurationProvider->provideAll()->willReturn([
-            ['name' => 'example/sylius-theme'],
-        ]);
-
-        $themeRepositoryDefinition->addMethodCall(Argument::cetera())->willReturn();
-
-        $configurationProvider->process($container)->shouldBeCalled();
+        $container->addResource($resource)->shouldBeCalled();
 
         $this->process($container);
     }

@@ -14,6 +14,7 @@ namespace Sylius\Bundle\ThemeBundle\Loader\Filesystem;
 use Sylius\Bundle\ThemeBundle\Loader\ConfigurationProviderInterface;
 use Sylius\Bundle\ThemeBundle\Loader\LoaderInterface;
 use Sylius\Bundle\ThemeBundle\Locator\FileLocatorInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -21,7 +22,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class FilesystemConfigurationProvider implements ConfigurationProviderInterface, CompilerPassInterface
+final class FilesystemConfigurationProvider implements ConfigurationProviderInterface
 {
     /**
      * @var FileLocatorInterface
@@ -53,40 +54,36 @@ final class FilesystemConfigurationProvider implements ConfigurationProviderInte
     /**
      * {@inheritdoc}
      */
-    public function provideAll()
+    public function getConfigurations()
     {
-        try {
-            $configurationFiles = $this->fileLocator->locateFilesNamed($this->configurationFilename);
-
-            return iterator_to_array($this->loadConfigurationFiles($configurationFiles));
-        } catch (\InvalidArgumentException $exception) {
-            return [];
-        }
+        return $this->processFileResources(function($file) {
+            return $this->loader->load($file);
+        });
     }
 
     /**
      * {@inheritdoc}
      */
-    public function process(ContainerBuilder $container)
+    public function getResources()
     {
-        try {
-            $configurationFiles = $this->fileLocator->locateFilesNamed($this->configurationFilename);
-        } catch (\InvalidArgumentException $exception) {
-            return;
-        }
-
-        foreach ($configurationFiles as $configurationFile) {
-            $container->addResource(new FileResource($configurationFile));
-        }
+        return $this->processFileResources(function ($file) {
+            return new FileResource($file);
+        });
     }
 
     /**
-     * @return \Generator
+     * @param callable $callback
+     *
+     * @return array
      */
-    private function loadConfigurationFiles(array $configurationFiles)
+    private function processFileResources(callable $callback)
     {
-        foreach ($configurationFiles as $configurationFile) {
-            yield $this->loader->load($configurationFile);
+        try {
+            $configurationFiles = $this->fileLocator->locateFilesNamed($this->configurationFilename);
+
+            return array_map($callback, $configurationFiles);
+        } catch (\InvalidArgumentException $exception) {
+            return [];
         }
     }
 }

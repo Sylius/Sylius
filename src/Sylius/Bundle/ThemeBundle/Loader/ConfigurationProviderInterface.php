@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\ThemeBundle\Loader;
 
+use Symfony\Component\Config\Resource\ResourceInterface;
+
 /**
- * Provides configuration of all known themes, runs while building containers.
- * Instances of this interface can also implement CompilerPassInterface
- * to interfere with ContainerBuilder (e.g. add a FileResource)
+ * Provides configuration of all known themes, runs while building the container.
  *
  * @see \Sylius\Bundle\ThemeBundle\DependencyInjection\Compiler\ThemeRepositoryPass
  *
@@ -25,5 +25,12 @@ interface ConfigurationProviderInterface
     /**
      * @return array
      */
-    public function provideAll();
+    public function getConfigurations();
+
+    /**
+     * Used for cache regenerating.
+     *
+     * @return ResourceInterface[]
+     */
+    public function getResources();
 }
