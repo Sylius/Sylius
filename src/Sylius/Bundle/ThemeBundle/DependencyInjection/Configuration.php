@@ -28,7 +28,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('locations')
                             ->requiresAtLeastOneElement()
                             ->performNoDeepMerging()
-                            ->defaultValue(['%kernel.root_dir%/themes'])
+                            ->defaultValue(['%kernel.root_dir%/themes', '%kernel.root_dir%/../vendor/sylius/themes'])
                             ->prototype('scalar')
         ;
 
