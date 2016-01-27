@@ -1,0 +1,33 @@
+@ui-cart
+Feature: Cart shipping with taxes
+    In order to buy goods with correct shipping fees and shipping taxes applied
+    As a Customer
+    I want to have correct shipping fees and taxes applied to my order
+
+    Background:
+        Given the store is operating on a single "France" channel
+        And default currency is "EUR"
+        And default tax zone is "EU"
+        And there is user "john@example.com" identified by "password123"
+        And store has "EU VAT" tax rate of 23% for "Clothes" within "EU" zone
+        And store has "Low tax" tax rate of 10% for "Clothes" for the rest of the world
+        And store has a product "PHP T-Shirt" priced at "€100.00"
+        And store has "DHL" shipping method with "€10.00" fee
+        And shipping method "DHL" belongs to "Clothes" tax category
+        And I am logged in as "john@example.com"
+
+    Scenario: Proper shipping fee and tax
+        Given I am logged in as "john@example.com"
+        And I add product "PHP T-Shirt" to the cart
+        When I proceed selecting "DHL" shipping method
+        Then my cart shipping fee should be "€12.30"
+        And my cart taxes should be "€2.30"
+        Then my cart total should be "€112.30"
+
+    Scenario: Proper shipping fee and tax after addressing
+        Given I am logged in as "john@example.com"
+        And I add product "PHP T-Shirt" to the cart
+        And I proceed selecting "DHL" shipping method and "Uzbekistan" as shipping country
+        Then my cart shipping fee should be "€11.00"
+        And my cart taxes should be "€1.00"
+        Then my cart total should be "€111.00"
