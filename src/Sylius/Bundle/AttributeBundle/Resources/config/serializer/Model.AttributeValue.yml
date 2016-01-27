@@ -6,9 +6,6 @@ Sylius\Component\Attribute\Model\AttributeValue:
             expose: true
             type: integer
             xml_attribute: true
-        value:
-            expose: true
-            type: string
         createdAt:
             expose: true
             type: DateTime
@@ -16,7 +13,9 @@ Sylius\Component\Attribute\Model\AttributeValue:
             expose: true
             type: DateTime
     virtual_properties:
+        getCode:
+            serialized_name: code
         getName:
             serialized_name: name
-        getPresentation:
-            serialized_name: presentation
+        getValue:
+            serialized_name: value
