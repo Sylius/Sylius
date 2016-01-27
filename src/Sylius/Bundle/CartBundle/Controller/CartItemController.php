@@ -13,6 +13,8 @@ namespace Sylius\Bundle\CartBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Component\Cart\Event\CartItemEvent;
+use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Cart\Model\CartItemInterface;
 use Sylius\Component\Cart\Resolver\ItemResolvingException;
 use Sylius\Component\Cart\SyliusCartEvents;
 use Sylius\Component\Resource\Event\FlashEvent;
@@ -64,7 +66,7 @@ class CartItemController extends Controller
             // Write flash message
             $eventDispatcher->dispatch(SyliusCartEvents::ITEM_ADD_ERROR, new FlashEvent($exception->getMessage()));
 
-            return $this->redirectAfterAdd($configuration);
+            return $this->responseAfterAdd($configuration);
         }
 
         $event = new CartItemEvent($cart, $item);
@@ -77,17 +79,20 @@ class CartItemController extends Controller
         // Write flash message
         $eventDispatcher->dispatch(SyliusCartEvents::ITEM_ADD_COMPLETED, new FlashEvent());
 
-        return $this->redirectAfterAdd($configuration);
+        $item = $this->getEqualCartItemFromCart($cart, $item);
+
+        return $this->responseAfterAdd($configuration, ['item' => $item]);
     }
 
     /**
      * Redirect to specific URL or to cart.
      *
-     * @param Request $request
+     * @param RequestConfiguration $configuration
+     * @param array $context
      *
      * @return RedirectResponse
      */
-    private function redirectAfterAdd(RequestConfiguration $configuration)
+    protected function responseAfterAdd(RequestConfiguration $configuration, array $context = [])
     {
         $request = $configuration->getRequest();
 
@@ -105,8 +110,7 @@ class CartItemController extends Controller
      * If the item is found and the current user cart contains that item,
      * it will be removed and the cart - refreshed and saved.
      *
-     * @param mixed $id
-     *
+     * @param Request $request
      * @return Response
      */
     public function removeAction(Request $request)
@@ -122,7 +126,7 @@ class CartItemController extends Controller
             // Write flash message
             $eventDispatcher->dispatch(SyliusCartEvents::ITEM_REMOVE_ERROR, new FlashEvent());
 
-            return $this->redirectToCartSummary($configuration);
+            return $this->responseAfterRemove($configuration, ['cart' => $cart]);
         }
 
         $event = new CartItemEvent($cart, $item);
@@ -135,6 +139,46 @@ class CartItemController extends Controller
         // Write flash message
         $eventDispatcher->dispatch(SyliusCartEvents::ITEM_REMOVE_COMPLETED, new FlashEvent());
 
+        return $this->responseAfterRemove($configuration, ['item' => $item]);
+    }
+
+    /**
+     * Response that will be returned after removing item from cart.
+     * Could be
+     *
+     * @param RequestConfiguration $configuration
+     * @param array $context
+     *
+     * @return RedirectResponse
+     */
+    protected function responseAfterRemove(RequestConfiguration $configuration, array $context = [])
+    {
+        $request = $configuration->getRequest();
+
+        if ($request->query->has('_redirect_to')) {
+            return $this->redirectHandler->redirect($configuration, $request->query->get('_redirect_to'));
+        }
+
         return $this->redirectToCartSummary($configuration);
+    }
+
+    /**
+     * Find item from cart if it exists, or return supplied item.
+     *
+     * @todo workaround until better way will be supplied
+     *
+     * @param CartInterface     $cart
+     * @param CartItemInterface $item
+     *
+     * @return CartItemInterface
+     */
+    protected function getEqualCartItemFromCart(CartInterface $cart, CartItemInterface $item)
+    {
+        foreach ($cart->getItems() as $existingItem) {
+            if ($item->equals($existingItem)) {
+                return $existingItem;
+            }
+        }
+        return $item;
     }
 }
