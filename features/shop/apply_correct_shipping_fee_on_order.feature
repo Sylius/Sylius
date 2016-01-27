@@ -10,6 +10,7 @@ Feature: Apply correct shipping fee on order
         And store has a product "PHP T-Shirt" priced at "€100.00"
         And store has "DHL" shipping method with "€10.00" fee
         And store has "FedEx" shipping method with "€30.00" fee
+        And store allows paying offline
         And there is user "john@example.com" identified by "password123"
         And I am logged in as "john@example.com"
 

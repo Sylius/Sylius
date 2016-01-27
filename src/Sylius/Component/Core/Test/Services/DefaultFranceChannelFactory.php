@@ -25,6 +25,11 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class DefaultFranceChannelFactory implements DefaultStoreDataInterface
 {
     /**
+     * @var array
+     */
+    private $defaultCountries = ['FR', 'GB', 'US', 'CN', 'AU'];
+
+    /**
      * @var RepositoryInterface
      */
     private $channelRepository;
@@ -94,15 +99,20 @@ class DefaultFranceChannelFactory implements DefaultStoreDataInterface
         $this->zoneFactory = $zoneFactory;
     }
 
+    /**
+     * @return mixed
+     */
     public function create()
     {
         $defaultData['channel'] = $this->createChannel();
-        $defaultData['country'] = $this->createCountry();
         $defaultData['zone_member'] = $this->createZoneMember();
         $defaultData['zone'] = $this->createZone($defaultData['zone_member']);
 
         $this->channelRepository->add($defaultData['channel']);
-        $this->countryRepository->add($defaultData['country']);
+
+        foreach ($this->defaultCountries as $country) {
+            $this->countryRepository->add($this->createCountry($country));
+        }
         $this->zoneRepository->add($defaultData['zone']);
         $this->zoneMemberRepository->add($defaultData['zone_member']);
 
@@ -121,12 +131,14 @@ class DefaultFranceChannelFactory implements DefaultStoreDataInterface
     }
 
     /**
+     * @param string $code
+     *
      * @return CountryInterface
      */
-    private function createCountry()
+    private function createCountry($code)
     {
         $country = $this->countryFactory->createNew();
-        $country->setCode('FR');
+        $country->setCode($code);
 
         return $country;
     }

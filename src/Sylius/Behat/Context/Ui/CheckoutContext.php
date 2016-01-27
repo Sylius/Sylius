@@ -105,15 +105,16 @@ final class CheckoutContext implements Context
 
     /**
      * @When /^I proceed selecting "([^"]+)" shipping method$/
+     * @When /^I proceed selecting "([^"]*)" shipping method and "([^"]*)" as shipping country$/
      * @Given /^I chose "([^"]*)" shipping method$/
      */
-    public function iProceedSelectingShippingMethod($shippingMethodName)
+    public function iProceedSelectingShippingMethodAndShippingCountry($shippingMethodName, $shippingCountry = null)
     {
         $this->checkoutAddressingStep->open();
         $this->checkoutAddressingStep->fillAddressingDetails([
             'firstName' => 'John',
             'lastName' => 'Doe',
-            'country' => 'France',
+            'country' => (null === $shippingCountry) ? 'France' : $shippingCountry,
             'street' => '0635 Myron Hollow Apt. 711',
             'city' => 'North Bridget',
             'postcode' => '93-554',
@@ -123,6 +124,9 @@ final class CheckoutContext implements Context
 
         $this->checkoutShippingStep->selectShippingMethod($shippingMethodName);
         $this->checkoutShippingStep->continueCheckout();
+
+        $this->checkoutPaymentStep->selectPaymentMethod('Offline');
+        $this->checkoutPaymentStep->continueCheckout();
     }
 
     /**

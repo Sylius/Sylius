@@ -66,19 +66,31 @@ class DefaultFranceChannelFactorySpec extends ObjectBehavior
         $countryFactory,
         $zoneMemberFactory,
         $zoneFactory,
-        CountryInterface $country,
+        CountryInterface $france,
+        CountryInterface $unitedKingdom,
+        CountryInterface $unitedStates,
+        CountryInterface $china,
+        CountryInterface $australia,
         ZoneMemberInterface $zoneMember,
         ZoneInterface $zone,
         ChannelInterface $channel
     ) {
         $channel->getName()->willReturn('France');
         $channelFactory->createNamed('France')->willReturn($channel);
-        $countryFactory->createNew()->willReturn($country);
+
+        $countryFactory->createNew()->willReturn($france, $unitedKingdom, $unitedStates, $china, $australia);
+
         $zoneMemberFactory->createNew()->willReturn($zoneMember);
         $zoneFactory->createNew()->willReturn($zone);
 
         $channel->setCode('WEB-FR')->shouldBeCalled();
-        $country->setCode('FR')->shouldBeCalled();
+
+        $france->setCode('FR')->shouldBeCalled();
+        $unitedKingdom->setCode('GB')->shouldBeCalled();
+        $unitedStates->setCode('US')->shouldBeCalled();
+        $china->setCode('CN')->shouldBeCalled();
+        $australia->setCode('AU')->shouldBeCalled();
+
         $zoneMember->setCode('FR')->shouldBeCalled();
         $zone->setCode('FR')->shouldBeCalled();
         $zone->setName('France')->shouldBeCalled();
@@ -86,7 +98,13 @@ class DefaultFranceChannelFactorySpec extends ObjectBehavior
         $zone->addMember($zoneMember)->shouldBeCalled();
 
         $channelRepository->add($channel)->shouldBeCalled();
-        $countryRepository->add($country)->shouldBeCalled();
+
+        $countryRepository->add($france)->shouldBeCalled();
+        $countryRepository->add($unitedKingdom)->shouldBeCalled();
+        $countryRepository->add($unitedStates)->shouldBeCalled();
+        $countryRepository->add($china)->shouldBeCalled();
+        $countryRepository->add($australia)->shouldBeCalled();
+
         $zoneRepository->add($zone)->shouldBeCalled();
         $zoneMemberRepository->add($zoneMember)->shouldBeCalled();
 

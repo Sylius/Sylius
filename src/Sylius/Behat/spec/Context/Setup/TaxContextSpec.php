@@ -55,12 +55,11 @@ class TaxContextSpec extends ObjectBehavior
         $taxCategoryFactory,
         $taxRateRepository,
         $taxCategoryRepository,
-        $zoneRepository,
         TaxCategoryInterface $taxCategory,
         TaxRateInterface $taxRate,
         ZoneInterface $zone
     ) {
-        $zoneRepository->findOneBy(['code' => 'EU'])->willReturn($zone);
+        $taxCategoryRepository->findOneBy(['name' => 'Clothes'])->willReturn(null);
 
         $taxCategoryFactory->createNew()->willReturn($taxCategory);
         $taxCategory->setName('Clothes')->shouldBeCalled();
@@ -85,7 +84,7 @@ class TaxContextSpec extends ObjectBehavior
     {
         $taxCategoryRepository->findOneBy(['name' => 'TaxCategory'])->willReturn($taxCategory);
 
-        $this->castTaxCategoryNameToTaxCategory('TaxCategory')->shouldReturn($taxCategory);
+        $this->getTaxCategoryByName('TaxCategory')->shouldReturn($taxCategory);
     }
 
     function it_throws_exception_if_there_is_no_tax_category_with_name_given_to_casting($taxCategoryRepository)
@@ -93,8 +92,8 @@ class TaxContextSpec extends ObjectBehavior
         $taxCategoryRepository->findOneBy(['name' => 'TaxCategory'])->willReturn(null);
 
         $this
-            ->shouldThrow(new \Exception('Tax category with name "TaxCategory" does not exist'))
-            ->during('castTaxCategoryNameToTaxCategory', ['TaxCategory'])
+            ->shouldThrow(new \InvalidArgumentException('Tax category with name "TaxCategory" does not exist'))
+            ->during('getTaxCategoryByName', ['TaxCategory'])
         ;
     }
 }
