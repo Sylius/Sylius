@@ -16,6 +16,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\AddressingBundle\Validator\Constraints\ProvinceAddressConstraint;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\Country;
+use Sylius\Component\Addressing\Model\Province;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintViolation;
@@ -26,9 +27,9 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  */
 class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $repository)
+    function let(RepositoryInterface $countryRepository, RepositoryInterface $provinceRepository)
     {
-        $this->beConstructedWith($repository);
+        $this->beConstructedWith($countryRepository, $provinceRepository);
     }
 
     function it_is_initializable()
@@ -66,14 +67,14 @@ class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         Country $country,
         ProvinceAddressConstraint $constraint,
         ExecutionContextInterface $context,
-        RepositoryInterface $repository
+        RepositoryInterface $countryRepository
     ) {
         $country->getCode()->willReturn('IE');
-        $address->getCountryCode()->willreturn('IE');
-        $repository->findOneBy(array('code' => 'IE'))->willReturn($country);
+        $address->getCountryCode()->willReturn('IE');
+        $countryRepository->findOneBy(array('code' => 'IE'))->willReturn($country);
 
-        $country->hasProvinces()->willreturn(true);
-        $address->getProvinceCode()->willreturn(null);
+        $country->hasProvinces()->willReturn(true);
+        $address->getProvinceCode()->willReturn(null);
         $this->initialize($context);
 
         $context->getPropertyPath()->willReturn('property_path');
@@ -82,6 +83,70 @@ class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         )));
 
         $context->addViolation(Argument::any())->shouldBeCalled();
+
+        $this->validate($address, $constraint);
+    }
+
+    function it_adds_violation_because_address_province_does_not_belong_to_country(
+        AddressInterface $address,
+        Country $country,
+        Province $province,
+        ProvinceAddressConstraint $constraint,
+        ExecutionContextInterface $context,
+        RepositoryInterface $countryRepository,
+        RepositoryInterface $provinceRepository
+    ) {
+        $country->getCode()->willReturn('US');
+        $address->getCountryCode()->willReturn('US');
+        $countryRepository->findOneBy(array('code' => 'US'))->willReturn($country);
+
+        $country->hasProvinces()->willReturn(true);
+        $address->getProvinceCode()->willReturn('US-AK');
+
+        $province->getCode()->willReturn('US-AK');
+        $provinceRepository->findOneBy(array('code' => 'US-AK'))->willReturn($province);
+        $country->hasProvince($province)->willReturn(false);
+
+        $this->initialize($context);
+
+        $context->getPropertyPath()->willReturn('property_path');
+        $context->getViolations()->willReturn(new \ArrayIterator(array(
+            $this->createViolation('other_property_path')
+        )));
+
+        $context->addViolation(Argument::any())->shouldBeCalled();
+
+        $this->validate($address, $constraint);
+    }
+
+    function it_does_not_add_a_violation_if_province_is_valid(
+        AddressInterface $address,
+        Country $country,
+        Province $province,
+        ProvinceAddressConstraint $constraint,
+        ExecutionContextInterface $context,
+        RepositoryInterface $countryRepository,
+        RepositoryInterface $provinceRepository
+    ) {
+        $country->getCode()->willReturn('US');
+        $address->getCountryCode()->willReturn('US');
+        $countryRepository->findOneBy(array('code' => 'US'))->willReturn($country);
+
+        $country->hasProvinces()->willReturn(true);
+        $address->getProvinceCode()->willReturn('US-AK');
+
+        $province->getCode()->willReturn('US-AK');
+        $provinceRepository->findOneBy(array('code' => 'US-AK'))->willReturn($province);
+        $country->hasProvince($province)->willReturn(true);
+
+        $this->initialize($context);
+
+        $context->getPropertyPath()->willReturn('property_path');
+        $context->getViolations()->willReturn(new \ArrayIterator(array(
+            $this->createViolation('other_property_path')
+        )));
+
+        $context->addViolation(Argument::any())->shouldNotBeCalled();
 
         $this->validate($address, $constraint);
     }
