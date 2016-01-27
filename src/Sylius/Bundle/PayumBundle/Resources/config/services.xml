@@ -19,6 +19,7 @@
     <services>
         <!-- Generic -->
         <service id="sylius.payum.action.capture_payment" class="Sylius\Bundle\PayumBundle\Action\CapturePaymentAction">
+            <argument type="service" id="sylius.currency_converter" />
             <tag name="payum.action" all="true" alias="sylius.capture_payment" />
         </service>
         <service id="sylius.payum.action.execute_same_request_with_payment_details" class="Sylius\Bundle\PayumBundle\Action\ExecuteSameRequestWithPaymentDetailsAction">

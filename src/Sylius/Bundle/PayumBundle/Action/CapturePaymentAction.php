@@ -19,9 +19,23 @@ use Payum\Core\Request\Capture;
 use Payum\Core\Request\Convert;
 use Sylius\Bundle\PayumBundle\Request\GetStatus;
 use Sylius\Component\Core\Model\PaymentInterface as SyliusPaymentInterface;
+use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 
 class CapturePaymentAction extends GatewayAwareAction
 {
+    /**
+     * @var CurrencyConverterInterface
+     */
+    private $currencyConverter;
+
+    /**
+     * @param CurrencyConverterInterface $currencyConverter
+     */
+    public function __construct(CurrencyConverterInterface $currencyConverter)
+    {
+        $this->currencyConverter = $currencyConverter;
+    }
+
     /**
      * {@inheritDoc}
      *
@@ -34,6 +48,7 @@ class CapturePaymentAction extends GatewayAwareAction
         /** @var $payment SyliusPaymentInterface */
         $payment = $request->getModel();
         $order = $payment->getOrder();
+        $totalAmountInCurrency = $this->currencyConverter->convert($order->getTotal(), $order->getCurrency());
 
         $this->gateway->execute($status = new GetStatus($payment));
         if ($status->isNew()) {
@@ -43,7 +58,7 @@ class CapturePaymentAction extends GatewayAwareAction
             } catch (RequestNotSupportedException $e) {
                 $payumPayment = new PayumPayment();
                 $payumPayment->setNumber($order->getNumber());
-                $payumPayment->setTotalAmount($order->getTotal());
+                $payumPayment->setTotalAmount($totalAmountInCurrency);
                 $payumPayment->setCurrencyCode($order->getCurrency());
                 $payumPayment->setClientEmail($order->getCustomer()->getEmail());
                 $payumPayment->setClientId($order->getCustomer()->getId());
