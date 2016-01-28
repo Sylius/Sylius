@@ -133,6 +133,29 @@ class CheckoutContext extends FeatureContext
     }
 
     /**
+     * @When /^I proceed selecting "([^"]*)" shipping method$/
+     */
+    public function iProceedSelectingShippingMethod($shippingMethod)
+    {
+        $checkoutAddressingPage = $this->getPage('Checkout\CheckoutAddressingStep')->open();
+        $addressingDetails = array(
+            'firstName' => 'John',
+            'lastName' => 'Doe',
+            'country' => 'France',
+            'street' => '0635 Myron Hollow Apt. 711',
+            'city' => 'North Bridget',
+            'postcode' => '93-554',
+            'phoneNumber' => '321123456'
+        );
+        $checkoutAddressingPage->fillAddressingDetails($addressingDetails);
+        $checkoutAddressingPage->pressButton('Continue');
+
+        $checkoutShippingPage = $this->getPage('Checkout\CheckoutShippingStep');
+        $checkoutShippingPage->pressRadio($shippingMethod);
+        $checkoutShippingPage->pressButton('Continue');
+    }
+
+    /**
      * @When I confirm my order
      */
     public function iConfirmMyOrder()
