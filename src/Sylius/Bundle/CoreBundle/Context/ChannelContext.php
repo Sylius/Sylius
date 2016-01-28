@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Context;
 
-use Sylius\Component\Core\Channel\ChannelContextInterface;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Channel\ChannelResolverInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
  * @author Kristian Løvstrøm <kristian@loevstroem.dk>
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ChannelContext implements ChannelContextInterface
+class ChannelContext implements ChannelContextInterface
 {
     /**
      * @var ChannelInterface
@@ -81,6 +81,38 @@ final class ChannelContext implements ChannelContextInterface
     public function setChannel(ChannelInterface $channel)
     {
         $this->channel = $channel;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRequestStack()
+    {
+        return $this->requestStack;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getChannelResolver()
+    {
+        return $this->channelResolver;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLatestHostname($latestHostname)
+    {
+        $this->latestHostname = $latestHostname;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLatestHostname()
+    {
+        return $this->latestHostname;
     }
 
     /**

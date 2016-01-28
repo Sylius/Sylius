@@ -12,11 +12,14 @@
 namespace Sylius\Component\Channel\Context;
 
 use Sylius\Component\Channel\Model\ChannelInterface;
+use Sylius\Component\Core\Channel\ChannelResolverInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Provides the context of currently used channel.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
 interface ChannelContextInterface
 {
@@ -29,4 +32,24 @@ interface ChannelContextInterface
      * @param ChannelInterface $channel
      */
     public function setChannel(ChannelInterface $channel);
+
+    /**
+     * @return string
+     */
+    public function getLatestHostname();
+
+    /**
+     * @param string $hostname
+     */
+    public function setLatestHostname($hostname);
+
+    /**
+     * @return ChannelResolverInterface
+     */
+    public function getChannelResolver();
+
+    /**
+     * @return RequestStack
+     */
+    public function getRequestStack();
 }

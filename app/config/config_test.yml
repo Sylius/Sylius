@@ -49,3 +49,10 @@ monolog:
 
 twig:
     exception_controller: 'Sylius\Bundle\CoreBundle\Controller\VerboseExceptionController::showAction'
+
+services:
+    sylius.context.channel.test:
+        class: Sylius\Bundle\CoreBundle\Context\TestChannelContext
+        public: false
+        decorates: sylius.context.channel
+        arguments: ["@sylius.context.channel.test.inner"]
