@@ -6,6 +6,6 @@ Feature: Store homepage
 
     Scenario: Viewing the homepage at website root
         Given store has default configuration
-         When I go to the website root
-         Then I should be on the homepage
-          And I should see "Modern ecommerce for Symfony2"
+        When I go to the website root
+        Then I should be on the homepage
+        And I should see "Modern ecommerce for Symfony2"

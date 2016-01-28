@@ -6,9 +6,9 @@ Feature: Metadata management
 
     Background:
         Given store has default configuration
-          And I am logged in as administrator
+        And I am logged in as administrator
 
     Scenario: Accessing default metadata customization page
         Given I am on the metadata container index page
-         When I click "Customize default metadata"
-         Then I should be customizing default metadata
+        When I click "Customize default metadata"
+        Then I should be customizing default metadata

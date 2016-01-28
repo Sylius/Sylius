@@ -6,25 +6,25 @@ Feature: Metadata rendering
 
     Background:
         Given store has default configuration
-          And there are products:
+        And there are products:
             | name   | price |
             | Banana | 4.20  |
-          And product "Banana" has the following page metadata:
+        And product "Banana" has the following page metadata:
             | Title         | Tasty banana                  |
             | Description   | The best you have ever eaten! |
             | Keywords      | banana, fruit, healthy food   |
             | Twitter.Card  | Summary                       |
             | Twitter.Site  | @example                      |
             | Twitter.Image | http://example.com/image.jpg  |
-          And all products are assigned to the default channel
+        And all products are assigned to the default channel
 
     Scenario: Rendering page metadata
-         When I am on the product page for "Banana"
-         Then I should see "Tasty banana" as page title
-          And the page keywords should contain "fruit"
+        When I am on the product page for "Banana"
+        Then I should see "Tasty banana" as page title
+        And the page keywords should contain "fruit"
 
     Scenario: Rendering page Twitter metadata
-         When I am on the product page for "Banana"
-         Then there should be Twitter summary card metadata on this page
-          And Twitter site should be "@example"
-          And Twitter image should be "http://example.com/image.jpg"
+        When I am on the product page for "Banana"
+        Then there should be Twitter summary card metadata on this page
+        And Twitter site should be "@example"
+        And Twitter image should be "http://example.com/image.jpg"

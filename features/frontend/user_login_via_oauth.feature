@@ -6,12 +6,12 @@ Feature: Sign in to the store via OAuth
 
     Background:
         Given store has default configuration
-          And I am not logged in
-          And I am on the store homepage
+        And I am not logged in
+        And I am on the store homepage
 
     Scenario Outline: Get to the OAuth login page
-         When I follow "Login"
-         Then I should see the connect with "<oauth>" button
+        When I follow "Login"
+        Then I should see the connect with "<oauth>" button
 
         Examples:
           | oauth    |
