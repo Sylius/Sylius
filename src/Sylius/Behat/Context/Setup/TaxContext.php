@@ -92,7 +92,7 @@ final class TaxContext implements Context
 
         $taxRate = $this->taxRateFactory->createNew();
         $taxRate->setName($taxRateName);
-        $taxRate->setCode($this->getCodeFromName($taxRateName));
+        $taxRate->setCode($this->getCodeFromNameAndZoneCode($taxRateName, $zone->getCode()));
         $taxRate->setZone($zone);
         $taxRate->setAmount($this->getAmountFromString($taxRateAmount));
         $taxRate->setCategory($taxCategory);
@@ -124,7 +124,7 @@ final class TaxContext implements Context
     {
         $taxCategory = $this->taxCategoryFactory->createNew();
         $taxCategory->setName($taxCategoryName);
-        $taxCategory->setCode($this->getCodeFromName($taxCategoryName));
+        $taxCategory->setCode($this->getCodeFromNameAndZoneCode($taxCategoryName));
 
         $this->taxCategoryRepository->add($taxCategory);
 
@@ -146,8 +146,12 @@ final class TaxContext implements Context
      *
      * @return string
      */
-    private function getCodeFromName($taxRateName)
+    private function getCodeFromNameAndZoneCode($taxRateName, $zoneCode = null)
     {
-        return str_replace(' ', '_', strtolower($taxRateName));
+        if (null === $zoneCode) {
+            return str_replace(' ', '_', strtolower($taxRateName));
+        }
+
+        return str_replace(' ', '_', strtolower($taxRateName)).'_'.$zoneCode;
     }
 }

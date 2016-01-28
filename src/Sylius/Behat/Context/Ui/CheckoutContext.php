@@ -15,9 +15,9 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Checkout\CheckoutAddressingStep;
 use Sylius\Behat\Page\Checkout\CheckoutFinalizeStep;
 use Sylius\Behat\Page\Checkout\CheckoutPaymentStep;
+use Sylius\Behat\Page\Checkout\CheckoutSecurityStep;
 use Sylius\Behat\Page\Checkout\CheckoutShippingStep;
 use Sylius\Behat\Page\Checkout\CheckoutThankYouPage;
-use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
 /**
@@ -29,6 +29,11 @@ final class CheckoutContext implements Context
      * @var SharedStorageInterface
      */
     private $sharedStorage;
+
+    /**
+     * @var CheckoutSecurityStep
+     */
+    private $checkoutSecurityStep;
 
     /**
      * @var CheckoutAddressingStep
@@ -57,6 +62,7 @@ final class CheckoutContext implements Context
 
     /**
      * @param SharedStorageInterface $sharedStorage
+     * @param CheckoutSecurityStep $checkoutSecurityStep
      * @param CheckoutAddressingStep $checkoutAddressingStep
      * @param CheckoutShippingStep $checkoutShippingStep
      * @param CheckoutPaymentStep $checkoutPaymentStep
@@ -65,6 +71,7 @@ final class CheckoutContext implements Context
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
+        CheckoutSecurityStep $checkoutSecurityStep,
         CheckoutAddressingStep $checkoutAddressingStep,
         CheckoutShippingStep $checkoutShippingStep,
         CheckoutPaymentStep $checkoutPaymentStep,
@@ -72,6 +79,7 @@ final class CheckoutContext implements Context
         CheckoutThankYouPage $checkoutThankYouPage
     ) {
         $this->sharedStorage = $sharedStorage;
+        $this->checkoutSecurityStep = $checkoutSecurityStep;
         $this->checkoutAddressingStep = $checkoutAddressingStep;
         $this->checkoutShippingStep = $checkoutShippingStep;
         $this->checkoutPaymentStep = $checkoutPaymentStep;
@@ -120,6 +128,26 @@ final class CheckoutContext implements Context
         $this->checkoutShippingStep->open();
         $this->checkoutShippingStep->selectShippingMethod($shippingMethodName);
         $this->checkoutShippingStep->continueCheckout();
+    }
+
+    /**
+     * @Given /^I proceed without selecting shipping address$/
+     */
+    public function iProceedWithoutSelectingShippingAddress()
+    {
+        $this->checkoutAddressingStep->open();
+        $this->checkoutAddressingStep->continueCheckout();
+    }
+
+    /**
+     * @Given /^I proceed logging as "([^"]*)" with "([^"]*)" password$/
+     */
+    public function iProceedLoggingAs($login, $password)
+    {
+        $this->checkoutSecurityStep->open();
+        $this->checkoutSecurityStep->logInExistingUser($login, $password);
+
+        $this->checkoutAddressingStep->continueCheckout();
     }
 
     /**

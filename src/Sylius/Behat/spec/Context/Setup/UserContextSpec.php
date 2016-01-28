@@ -62,6 +62,7 @@ class UserContextSpec extends ObjectBehavior
         $user->setUsername('test@example.com')->shouldBeCalled();
         $user->setEmail('test@example.com')->shouldBeCalled();
         $user->setPlainPassword('pa$$word')->shouldBeCalled();
+        $user->enable()->shouldBeCalled();
 
         $sharedStorage->setCurrentResource('user', $user)->shouldBeCalled();
         $userRepository->add($user)->shouldBeCalled();
@@ -91,6 +92,7 @@ class UserContextSpec extends ObjectBehavior
         $user->setUsername('test@example.com')->shouldBeCalled();
         $user->setEmail('test@example.com')->shouldBeCalled();
         $user->setPlainPassword('pa$$word')->shouldBeCalled();
+        $user->enable()->shouldBeCalled();
 
         $addressFactory->createNew()->willReturn($address);
         $address->setFirstName('John')->shouldBeCalled();
