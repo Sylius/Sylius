@@ -8,7 +8,7 @@ Feature: Apply correct tax for items with different tax rates
         Given the store is operating on a single "France" channel
         And there is "EU" zone containing all members of European Union
         And default currency is "EUR"
-        And default zone is "EU"
+        And default tax zone is "EU"
         And store has "EU VAT" tax rate of 23% for "Clothes" within "EU" zone
         And store has "Low VAT" tax rate of 5% for "Mugs" within "EU" zone
         And there is user "john@example.com" identified by "password123"

@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -45,21 +46,29 @@ class ProductContext implements Context
     private $productFactory;
 
     /**
+     * @var ObjectManager
+     */
+    private $productManager;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param RepositoryInterface $productRepository
      * @param RepositoryInterface $taxCategoryRepository
      * @param FactoryInterface $productFactory
+     * @param ObjectManager $productManager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         RepositoryInterface $productRepository,
         RepositoryInterface $taxCategoryRepository,
-        FactoryInterface $productFactory
+        FactoryInterface $productFactory,
+        ObjectManager $productManager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->productRepository = $productRepository;
         $this->taxCategoryRepository = $taxCategoryRepository;
         $this->productFactory = $productFactory;
+        $this->productManager = $productManager;
     }
 
     /**
@@ -98,6 +107,6 @@ class ProductContext implements Context
     public function productBelongsToTaxCategory(ProductInterface $product, TaxCategoryInterface $taxCategory)
     {
         $product->setTaxCategory($taxCategory);
-        $this->productRepository->add($product);
+        $this->productManager->flush($product);
     }
 }
