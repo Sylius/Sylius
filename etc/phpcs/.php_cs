@@ -23,13 +23,14 @@ EOF;
 
 HeaderCommentFixer::setHeader($header);
 
-$finder = Symfony\CS\Finder\DefaultFinder::create()
-    ->notName('*.yml')
-    ->notName('*.xml')
+$finder = Symfony\Component\Finder\Finder::create()
+    ->files()
     ->notName('*Spec.php')
-    ->exclude('app')
+    ->name('*.php')
+    ->in(['app/migrations','src'])
 ;
 
 return Symfony\CS\Config\Config::create()
         ->fixers(array('header_comment'))
-        ->finder($finder);
+        ->finder($finder)
+;
