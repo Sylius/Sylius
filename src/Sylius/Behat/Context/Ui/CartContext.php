@@ -20,7 +20,7 @@ use Sylius\Behat\Page\Cart\CartSummaryPage;
 class CartContext extends FeatureContext
 {
     /**
-     * @Then /^my cart total should be "([^"]*)"$/
+     * @Then /^my cart total should be "([^"]+)"$/
      */
     public function myCartTotalShouldBe($total)
     {
@@ -32,7 +32,7 @@ class CartContext extends FeatureContext
     }
 
     /**
-     * @Given /^my cart taxes should be "([^"]*)"$/
+     * @Given /^my cart taxes should be "([^"]+)"$/
      */
     public function myCartTaxesShouldBe($taxesTotal)
     {

@@ -31,6 +31,6 @@ Feature: Cart with single tax rate
 
     Scenario: Proper taxes for multiple different products with the same tax rate
         When I add 3 products "PHP T-Shirt" to the cart
-        When I add 2 products "Symfony Hat" to the cart
+        And I add 2 products "Symfony Hat" to the cart
         Then my cart total should be "€442.80"
         And my cart taxes should be "€82.80"

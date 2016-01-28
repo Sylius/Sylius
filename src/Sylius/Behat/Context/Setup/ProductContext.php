@@ -12,12 +12,15 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class ProductContext implements Context
 {
@@ -60,7 +63,20 @@ class ProductContext implements Context
     }
 
     /**
-     * @Given /^store has a product "([^"]*)" priced at "(€|£|\$)([^"]*)"$/
+     * @Transform /^product "([^"]+)"$/
+     * @Transform /^"([^"]+)" product$/
+     */
+    public function castProductNameToProduct($productName)
+    {
+        if (null === $product = $this->productRepository->findOneBy(array('name' => $productName))) {
+            throw new \Exception('Product with name "'.$product.'" does not exist');
+        }
+
+        return $product;
+    }
+
+    /**
+     * @Given /^store has a product "([^"]+)" priced at "(€|£|\$)([^"]+)"$/
      */
     public function storeHasAProductPricedAt($productName, $currency, $price)
     {
@@ -76,18 +92,10 @@ class ProductContext implements Context
     }
 
     /**
-     * @Given /^product "([^"]*)" belongs to "([^"]*)" tax category$/
+     * @Given /^(product "[^"]+") belongs to ("[^"]+" tax category)$/
      */
-    public function productBelongsToTaxCategory($product, $taxCategory)
+    public function productBelongsToTaxCategory(ProductInterface $product, $taxCategory)
     {
-        if (null === $product = $this->productRepository->findOneBy(array('name' => $product))) {
-            throw new \Exception('Product with name "'.$product.'" does not exist');
-        }
-
-        if (null === $taxCategory = $this->taxCategoryRepository->findOneBy(array('name' => $taxCategory))) {
-            throw new \Exception('Tax category with name "'.$product.'" does not exist');
-        }
-
         $product->setTaxCategory($taxCategory);
     }
 }

@@ -60,7 +60,7 @@ class CheckoutContext extends FeatureContext
     }
 
     /**
-     * @When /^I add (\d+) products "([^"]*)" to the cart$/
+     * @When /^I add (\d+) products "([^"]+)" to the cart$/
      */
     public function iAddProductsToTheCart($quantity, $name)
     {

@@ -59,6 +59,19 @@ class ZoneContext implements Context
     }
 
     /**
+     * @Transform /^"([^"]+)" zone$/
+     * @Transform /^zone "([^"]+)"$/
+     */
+    public function castZoneCodeToZone($zoneCode)
+    {
+        if (null === $zone = $this->zoneRepository->findOneBy(array('code' => $zoneCode))) {
+            throw new \Exception('Zone with code "'.$zoneCode.'" does not exist');
+        }
+
+        return $zone;
+    }
+
+    /**
      * @Given /^there is "EU" zone containing all members of European Union$/
      */
     public function thereIsEUZoneContainingAllMembersOfEuropeanUnion()
@@ -72,7 +85,7 @@ class ZoneContext implements Context
     }
 
     /**
-     * @Given /^default zone is "([^"]*)"$/
+     * @Given /^default zone is "([^"]+)"$/
      */
     public function defaultZoneIs($zoneCode)
     {

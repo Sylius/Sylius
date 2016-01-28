@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\TaxRateInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -68,14 +69,23 @@ class TaxContext implements Context
     }
 
     /**
-     * @Given /^store has "([^"]*)" tax rate of ([^"]*)% for "([^"]*)" within "([^"]*)" zone$/
+     * @Transform /^"([^"]+)" tax category$/
+     * @Transform /^tax category "([^"]+)"$/
      */
-    public function storeHasTaxRateWithinZone($taxRateName, $taxRateAmount, $taxCategoryName, $taxZone)
+    public function castTaxCategoryNameToTaxCategory($taxCategoryName)
     {
-        if (null === $zone = $this->zoneRepository->findOneBy(array('code' => $taxZone))) {
-            throw new \Exception('There is no zone with code "'.$taxZone.'" configured');
+        if (null === $taxCategory = $this->taxCategoryRepository->findOneBy(array('name' => $taxCategoryName))) {
+            throw new \Exception('Tax category with name "'.$taxCategoryName.'" does not exist');
         }
 
+        return $taxCategory;
+    }
+
+    /**
+     * @Given /^store has "([^"]+)" tax rate of ([^"]+)% for "([^"]+)" within ("([^"]+)" zone)$/
+     */
+    public function storeHasTaxRateWithinZone($taxRateName, $taxRateAmount, $taxCategoryName, ZoneInterface $taxZone)
+    {
         $taxCategory = $this->taxCategoryFactory->createNew();
         $taxCategory->setName($taxCategoryName);
         $taxCategory->setCode($this->getCodeFromName($taxCategoryName));
@@ -85,7 +95,7 @@ class TaxContext implements Context
         $taxRate = $this->taxRateFactory->createNew();
         $taxRate->setName($taxRateName);
         $taxRate->setCode($this->getCodeFromName($taxRateName));
-        $taxRate->setZone($zone);
+        $taxRate->setZone($taxZone);
         $taxRate->setAmount($this->getAmountFromString($taxRateAmount));
         $taxRate->setCategory($taxCategory);
         $taxRate->setCalculator('default');
