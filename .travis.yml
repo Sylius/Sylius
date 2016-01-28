@@ -67,6 +67,7 @@ before_script:
 
 script:
     - composer validate
+    - if [[ $TRAVIS_PHP_VERSION = 7.* ]]; then etc/travis/check-sylius-cs; fi;
 
     - bin/phpspec run --no-interaction -f dot
     - bin/phpunit

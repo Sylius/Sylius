@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -e
+
+bin/php-cs-fixer fix --dry-run --diff . --config-file etc/phpcs/.php_cs
+bin/php-cs-fixer fix --dry-run --diff . --config-file etc/phpcs/.phpspec_cs
