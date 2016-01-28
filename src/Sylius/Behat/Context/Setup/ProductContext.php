@@ -98,5 +98,6 @@ class ProductContext implements Context
     public function productBelongsToTaxCategory(ProductInterface $product, TaxCategoryInterface $taxCategory)
     {
         $product->setTaxCategory($taxCategory);
+        $this->productRepository->add($product);
     }
 }
