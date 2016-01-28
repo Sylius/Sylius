@@ -111,8 +111,3 @@ Feature: Orders management
     Scenario: Displaying correct tax total on order page
         Given I am viewing order with number "000000002"
          Then I should see "Tax total: €10.58"
-
-    Scenario: Sorting order list by appropriate column
-        Given I am on the order index page
-         When I follow "Customer"
-         Then I should see the orders list sorted by customers' last names
