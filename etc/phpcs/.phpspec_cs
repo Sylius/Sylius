@@ -22,5 +22,6 @@ $finder = Symfony\Component\Finder\Finder::create()
 
 
 return Symfony\CS\Config\Config::create()
+        ->setUsingCache(true)
         ->fixers(array('header_comment', '-visibility'))
         ->finder($finder);

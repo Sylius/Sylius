@@ -31,6 +31,7 @@ $finder = Symfony\Component\Finder\Finder::create()
 ;
 
 return Symfony\CS\Config\Config::create()
+        ->setUsingCache(true)
         ->fixers(array('header_comment'))
         ->finder($finder)
 ;
