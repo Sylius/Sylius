@@ -15,7 +15,10 @@ use Sylius\Bundle\AttributeBundle\Controller\AttributeController;
 use Sylius\Bundle\AttributeBundle\Form\Type\AttributeTranslationType;
 use Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
 use Sylius\Bundle\AttributeBundle\Form\Type\AttributeValueType;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Configuration\ResourceConfigurationBuilder;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Configuration\ResourceConfigurationBuilderInterface;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Configuration\SyliusResource;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Configuration\SyliusTranslationResource;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository;
@@ -23,9 +26,9 @@ use Sylius\Component\Attribute\Model\Attribute;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeTranslation;
 use Sylius\Component\Attribute\Model\AttributeTranslationInterface;
-use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\Translation\Factory\TranslatableFactory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+use Symfony\Component\Config\Definition\Builder\NodeBuilder;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -60,120 +63,64 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * @param ArrayNodeDefinition $node
+     * @param ArrayNodeDefinition $rootDefinition
      */
-    private function addResourcesSection(ArrayNodeDefinition $node)
+    private function addResourcesSection(ArrayNodeDefinition $rootDefinition)
     {
-        $node
-            ->children()
-                ->arrayNode('resources')
-                    ->useAttributeAsKey('name')
-                    ->prototype('array')
-                        ->children()
-                            ->scalarNode('subject')->isRequired()->end()
-                            ->arrayNode('attribute')
-                                ->addDefaultsIfNotSet()
-                                ->children()
-                                    ->variableNode('options')->end()
-                                    ->arrayNode('classes')
-                                        ->addDefaultsIfNotSet()
-                                        ->children()
-                                            ->scalarNode('model')->defaultValue(Attribute::class)->cannotBeEmpty()->end()
-                                            ->scalarNode('interface')->defaultValue(AttributeInterface::class)->cannotBeEmpty()->end()
-                                            ->scalarNode('controller')->defaultValue(AttributeController::class)->cannotBeEmpty()->end()
-                                            ->scalarNode('repository')->defaultValue(TranslatableResourceRepository::class)->cannotBeEmpty()->end()
-                                            ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->end()
-                                            ->arrayNode('form')
-                                                ->addDefaultsIfNotSet()
-                                                ->children()
-                                                    ->scalarNode('default')->defaultValue(AttributeType::class)->cannotBeEmpty()->end()
-                                                    ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
-                                                ->end()
-                                            ->end()
-                                        ->end()
-                                    ->end()
-                                    ->arrayNode('validation_groups')
-                                        ->addDefaultsIfNotSet()
-                                        ->children()
-                                            ->arrayNode('default')
-                                                ->prototype('scalar')->end()
-                                                ->defaultValue(array('sylius'))
-                                            ->end()
-                                        ->end()
-                                    ->end()
-                                    ->arrayNode('translation')
-                                        ->addDefaultsIfNotSet()
-                                        ->children()
-                                            ->variableNode('options')->end()
-                                            ->arrayNode('classes')
-                                                ->addDefaultsIfNotSet()
-                                                ->children()
-                                                    ->scalarNode('model')->defaultValue(AttributeTranslation::class)->cannotBeEmpty()->end()
-                                                    ->scalarNode('interface')->defaultValue(AttributeTranslationInterface::class)->cannotBeEmpty()->end()
-                                                    ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                                    ->scalarNode('repository')->cannotBeEmpty()->end()
-                                                    ->scalarNode('factory')->defaultValue(Factory::class)->end()
-                                                    ->arrayNode('form')
-                                                        ->addDefaultsIfNotSet()
-                                                        ->children()
-                                                            ->scalarNode('default')->defaultValue(AttributeTranslationType::class)->cannotBeEmpty()->end()
-                                                        ->end()
-                                                    ->end()
-                                                ->end()
-                                            ->end()
-                                            ->arrayNode('validation_groups')
-                                                ->addDefaultsIfNotSet()
-                                                ->children()
-                                                    ->arrayNode('default')
-                                                        ->prototype('scalar')->end()
-                                                        ->defaultValue(array('sylius'))
-                                                    ->end()
-                                                ->end()
-                                            ->end()
-                                            ->arrayNode('fields')
-                                                ->prototype('scalar')->end()
-                                                ->defaultValue(array('name'))
-                                            ->end()
-                                        ->end()
-                                    ->end()
-                                ->end()
-                            ->end()
-                            ->arrayNode('attribute_value')
-                                ->isRequired()
-                                ->addDefaultsIfNotSet()
-                                ->children()
-                                    ->variableNode('options')->end()
-                                    ->arrayNode('classes')
-                                        ->addDefaultsIfNotSet()
-                                        ->children()
-                                            ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
-                                            ->scalarNode('interface')->isRequired()->cannotBeEmpty()->end()
-                                            ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                            ->scalarNode('repository')->cannotBeEmpty()->end()
-                                            ->scalarNode('factory')->defaultValue(Factory::class)->end()
-                                            ->arrayNode('form')
-                                                ->addDefaultsIfNotSet()
-                                                ->children()
-                                                    ->scalarNode('default')->defaultValue(AttributeValueType::class)->cannotBeEmpty()->end()
-                                                ->end()
-                                            ->end()
-                                        ->end()
-                                    ->end()
-                                    ->arrayNode('validation_groups')
-                                        ->addDefaultsIfNotSet()
-                                        ->children()
-                                            ->arrayNode('default')
-                                                ->prototype('scalar')->end()
-                                                ->defaultValue(array('sylius'))
-                                            ->end()
-                                        ->end()
-                                    ->end()
-                                ->end()
-                            ->end()
-                        ->end()
-                    ->end()
-                ->end()
-            ->end()
-        ;
+        $resourceConfigurationGenerator = new ResourceConfigurationBuilder();
+
+        $resourcesDefinition = $resourceConfigurationGenerator->initResourcesConfiguration($rootDefinition);
+        $resourcesDefinition->useAttributeAsKey('name');
+
+        /** @var ArrayNodeDefinition $resourcesPrototypeDefinition */
+        $resourcesPrototypeDefinition = $resourcesDefinition->prototype('array');
+        $resourcesPrototypeDefinition->children()->scalarNode('subject')->isRequired();
+
+        $this->addAttributeResource($resourceConfigurationGenerator, $resourcesPrototypeDefinition);
+        $this->addAttributeValueResource($resourceConfigurationGenerator, $resourcesPrototypeDefinition);
+    }
+
+    /**
+     * @param ResourceConfigurationBuilderInterface $resourceConfigurationGenerator
+     * @param ArrayNodeDefinition $resourcesDefinition
+     */
+    private function addAttributeResource(
+        ResourceConfigurationBuilderInterface $resourceConfigurationGenerator,
+        ArrayNodeDefinition $resourcesDefinition
+    ) {
+        $attributeResource = new SyliusResource('attribute', Attribute::class, AttributeInterface::class);
+        $attributeResource->useController(AttributeController::class);
+        $attributeResource->useDefaultRepository();
+        $attributeResource->useDefaultTranslatableFactory();
+        $attributeResource->addForm('default', AttributeType::class, ['sylius']);
+        $attributeResource->addForm('choice', ResourceChoiceType::class);
+
+        $attributeTranslationResource = new SyliusTranslationResource(AttributeTranslation::class, AttributeTranslationInterface::class);
+        $attributeTranslationResource->useDefaultController();
+        $attributeTranslationResource->useDefaultRepository();
+        $attributeTranslationResource->useDefaultFactory();
+        $attributeTranslationResource->addForm('default', AttributeTranslationType::class, ['sylius']);
+        $attributeTranslationResource->setTranslatableFields(['name']);
+
+        $attributeResource->useTranslationResource($attributeTranslationResource);
+
+        $resourceConfigurationGenerator->addSyliusResource($resourcesDefinition, $attributeResource);
+    }
+
+    /**
+     * @param ResourceConfigurationBuilderInterface $resourceConfigurationGenerator
+     * @param ArrayNodeDefinition $resourcesDefinition
+     */
+    private function addAttributeValueResource(
+        ResourceConfigurationBuilderInterface $resourceConfigurationGenerator,
+        ArrayNodeDefinition $resourcesDefinition
+    ) {
+        $attributeValueResource = new SyliusResource('attribute_value', null, null);
+        $attributeValueResource->useDefaultController();
+        $attributeValueResource->useDefaultRepository();
+        $attributeValueResource->useDefaultFactory();
+        $attributeValueResource->addForm('default', AttributeValueType::class, ['sylius']);
+
+        $resourceConfigurationGenerator->addSyliusResource($resourcesDefinition, $attributeValueResource);
     }
 }
