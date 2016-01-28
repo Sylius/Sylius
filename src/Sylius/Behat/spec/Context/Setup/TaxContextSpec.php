@@ -60,7 +60,7 @@ class TaxContextSpec extends ObjectBehavior
         TaxRateInterface $taxRate,
         ZoneInterface $zone
     ) {
-        $zoneRepository->findOneBy(array('code' => 'EU'))->willReturn($zone);
+        $zoneRepository->findOneBy(['code' => 'EU'])->willReturn($zone);
 
         $taxCategoryFactory->createNew()->willReturn($taxCategory);
         $taxCategory->setName('Clothes')->shouldBeCalled();
@@ -96,12 +96,5 @@ class TaxContextSpec extends ObjectBehavior
             ->shouldThrow(new \Exception('Tax category with name "TaxCategory" does not exist'))
             ->during('castTaxCategoryNameToTaxCategory', ['TaxCategory'])
         ;
-    }
-
-    function it_throws_exception_if_zone_with_given_code_does_not_exist($zoneRepository)
-    {
-        $zoneRepository->findOneBy(array('code' => 'EU'))->willReturn(null);
-
-        $this->shouldThrow(new \Exception('There is no zone with code "EU" configured'))->during('storeHasTaxRateWithinZone', array('EU VAT', '23%', 'Clothes', 'EU'));
     }
 }
