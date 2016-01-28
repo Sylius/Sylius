@@ -1,18 +1,17 @@
 <?php
 
-use Symfony\CS\FixerInterface;
-use Symfony\CS\Fixer\Contrib\HeaderCommentFixer;
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-$header = <<<EOF
-This file is part of the Sylius package.
+$fixers = include 'common.php';
 
-(c) Paweł Jędrzejewski
-
-For the full copyright and license information, please view the LICENSE
-file that was distributed with this source code.
-EOF;
-
-HeaderCommentFixer::setHeader($header);
+$fixers[] = '-visibility';
 
 $finder = Symfony\Component\Finder\Finder::create()
     ->files()
@@ -20,8 +19,8 @@ $finder = Symfony\Component\Finder\Finder::create()
     ->in('src')
 ;
 
-
 return Symfony\CS\Config\Config::create()
         ->setUsingCache(true)
-        ->fixers(array('header_comment', '-visibility'))
-        ->finder($finder);
+        ->fixers($fixers)
+        ->finder($finder)
+;
