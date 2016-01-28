@@ -58,7 +58,7 @@ EOT
         $user = $this->getUserRepository()->findOneByEmail($email);
 
         if (null === $user) {
-            throw new \InvalidArgumentException(sprintf('Could not find user by email "%s"', $email));
+            throw new \InvalidArgumentException(sprintf('Could not find user identified by email "%s"', $email));
         }
 
         $this->changePassword($user, $password);
