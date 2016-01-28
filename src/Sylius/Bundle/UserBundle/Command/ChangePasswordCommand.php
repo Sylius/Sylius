@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\UserBundle\Command;
 
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -38,10 +38,10 @@ class ChangePasswordCommand extends ContainerAwareCommand
             ))
             ->setHelp(<<<EOT
 The <info>sylius:user:change-password</info> command changes the password of a user:
-  <info>php app/console sylius:user:change-password matthieu</info>
+  <info>php app/console sylius:user:change-password matthieu@email.com</info>
 This interactive shell will first ask you for a password.
 You can alternatively specify the password as a second argument:
-  <info>php app/console fos:user:change-password matthieu mypassword</info>
+  <info>php app/console fos:user:change-password matthieu@email.com mypassword</info>
 EOT
             );
     }
@@ -62,7 +62,6 @@ EOT
         }
 
         $this->changePassword($user, $password);
-        $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush();
 
         $output->writeln(sprintf('Change password user <comment>%s</comment>', $email));
@@ -77,11 +76,11 @@ EOT
             $email = $this->getHelper('dialog')->askAndValidate(
                 $output,
                 'Please enter an email:',
-                function($username) {
-                    if (empty($username)) {
+                function($email) {
+                    if (empty($email)) {
                         throw new \Exception('Email can not be empty');
                     }
-                    return $username;
+                    return $email;
                 }
             );
 
@@ -115,7 +114,7 @@ EOT
     }
 
     /**
-     * @return EntityManagerInterface
+     * @return ObjectManager
      */
     protected function getEntityManager()
     {
