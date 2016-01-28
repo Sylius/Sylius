@@ -12,8 +12,8 @@ Feature: Tax included in price
           And taxonomy "Category" has following taxons:
             | Clothing[TX1] > PHP T-Shirts[TX2] |
           And the following zones are defined:
-            | name    | type    | members        |
-            | Germany | country | Germany        |
+            | name    | type    | members |
+            | Germany | country | Germany |
           And there are following tax categories:
             | code | name          |
             | TC1  | Taxable Goods |

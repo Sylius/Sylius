@@ -12,10 +12,10 @@ Feature: Shipments
             | UK + Poland  | country | United Kingdom, Poland        |
             | USA          | country | United States                 |
           And the following shipping methods exist:
-            | code | category | zone         | name        |
-            | SM1  | Regular  | USA          | FedEx       |
-            | SM2  | Heavy    | UK + Poland  | DHL         |
-            | SM3  |          | UK + Poland  | DHL Express |
+            | code | category | zone        | name        |
+            | SM1  | Regular  | USA         | FedEx       |
+            | SM2  | Heavy    | UK + Poland | DHL         |
+            | SM3  |          | UK + Poland | DHL Express |
           And the following orders were placed:
             | customer          | address                                                | shipment |
             | klaus@example.com | Klaus Schmitt, Heine-Straße 12, 99734, Berlin, Germany | FedEx    |

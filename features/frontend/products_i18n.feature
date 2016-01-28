@@ -13,9 +13,9 @@ Feature: Browse products, categories, attributes and options in preferred langua
             | Clothing[TX1] > T-Shirts[TX2]     |
             | Clothing[TX1] > PHP T-Shirts[TX3] |
           And there are following options:
-            | code | name         | presentation  | values                          |
-            | O1   |T-Shirt color | Color         | Red[OV1], Blue[OV2], Green[OV3] |
-            | O2   |T-Shirt size  | Size          | S[OV4], M[OV5], L[OV6]          |
+            | code | name          | presentation | values                          |
+            | O1   | T-Shirt color | Color        | Red[OV1], Blue[OV2], Green[OV3] |
+            | O2   | T-Shirt size  | Size         | S[OV4], M[OV5], L[OV6]          |
           And there are following attributes:
             | name           | presentation | type | choices |
             | T-Shirt fabric | Fabric       | text |         |
@@ -29,7 +29,7 @@ Feature: Browse products, categories, attributes and options in preferred langua
             | es_ES |
           And the following product translations exist:
             | product       | name           | locale |
-            | Super T-Shirt | Camiseta Super | es_ES   |
+            | Super T-Shirt | Camiseta Super | es_ES  |
           And the following taxonomy translations exist:
             | taxonomy | name      | locale |
             | Category | Categoria | es_ES  |

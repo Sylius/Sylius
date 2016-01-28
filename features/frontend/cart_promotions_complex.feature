@@ -23,13 +23,13 @@ Feature: Checkout promotions with multiple rules and actions
           And taxonomy "Category" has following taxons:
             | Clothing[TX1] > Debian T-Shirts[TX2] |
           And the following products exist:
-            | name    | price | taxons          |
-            | Buzz    | 500   | Debian T-Shirts |
-            | Potato  | 200   | Debian T-Shirts |
-            | Woody   | 125   | Debian T-Shirts |
-            | Sarge   | 25    | Debian T-Shirts |
-            | Etch    | 20    | Debian T-Shirts |
-            | Lenny   | 15    | Debian T-Shirts |
+            | name   | price | taxons          |
+            | Buzz   | 500   | Debian T-Shirts |
+            | Potato | 200   | Debian T-Shirts |
+            | Woody  | 125   | Debian T-Shirts |
+            | Sarge  | 25    | Debian T-Shirts |
+            | Etch   | 20    | Debian T-Shirts |
+            | Lenny  | 15    | Debian T-Shirts |
           And all products are assigned to the default channel
           And all promotions are assigned to the default channel
 

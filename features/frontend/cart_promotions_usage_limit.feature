@@ -28,13 +28,13 @@ Feature: Checkout usage limited promotions
           And taxonomy "Category" has following taxons:
             | Clothing[TX1] > Debian T-Shirts[TX2] |
           And the following products exist:
-            | name    | price | taxons          |
-            | Buzz    | 500   | Debian T-Shirts |
-            | Potato  | 200   | Debian T-Shirts |
-            | Woody   | 125   | Debian T-Shirts |
-            | Sarge   | 25    | Debian T-Shirts |
-            | Etch    | 20    | Debian T-Shirts |
-            | Lenny   | 15    | Debian T-Shirts |
+            | name   | price | taxons          |
+            | Buzz   | 500   | Debian T-Shirts |
+            | Potato | 200   | Debian T-Shirts |
+            | Woody  | 125   | Debian T-Shirts |
+            | Sarge  | 25    | Debian T-Shirts |
+            | Etch   | 20    | Debian T-Shirts |
+            | Lenny  | 15    | Debian T-Shirts |
           And all products are assigned to the default channel
           And all promotions are assigned to the default channel
 
@@ -49,7 +49,7 @@ Feature: Checkout usage limited promotions
     Scenario: Promotion with usage limit is applied when the
     number of usage is not reached
         Given I am on the store homepage
-        And I added product "Woody" to cart, with quantity "3"
-        Then I should be on the cart summary page
-        And "Promotion total: -€93.75" should appear on the page
-        And "Grand total: €281.25" should appear on the page
+          And I added product "Woody" to cart, with quantity "3"
+         Then I should be on the cart summary page
+          And "Promotion total: -€93.75" should appear on the page
+          And "Grand total: €281.25" should appear on the page

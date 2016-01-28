@@ -45,7 +45,7 @@ Feature: Customer groups management
     Scenario: Creating group
         Given I am on the group creation page
          When I fill in the following:
-            | Name  | Dealers                   |
+            | Name | Dealers |
           And I press "Create"
          Then I should be on the group index page
           And I should see group with name "Dealers" in the list

@@ -14,12 +14,12 @@ Feature: Products
             | Clothing[TX1] > PHP T-Shirts[TX3] |
             | Clothing[TX1] > Gloves[TX4]       |
           And there are following channels configured:
-            | code   | name       | currencies | locales             | url          |
-            | WEB-US | mystore.us | EUR, GBP   | en_US               |              |
-            | WEB-EU | mystore.eu | USD        | en_GB, fr_FR, de_DE | localhost    |
+            | code   | name       | currencies | locales             | url       |
+            | WEB-US | mystore.us | EUR, GBP   | en_US               |           |
+            | WEB-EU | mystore.eu | USD        | en_GB, fr_FR, de_DE | localhost |
           And there are following attributes:
-            | name               | type     |
-            | T-Shirt fabric     | text     |
+            | name           | type |
+            | T-Shirt fabric | text |
           And the following products exist:
             | name             | price | taxons       | pricing calculator | calculator configuration | attributes          |
             | Super T-Shirt    | 19.99 | T-Shirts     | channel_based      | WEB-EU:15.99             | T-Shirt fabric:Wool |
@@ -42,32 +42,32 @@ Feature: Products
 
     Scenario: Browsing products by taxon
         Given I am on the store homepage
-        When I follow "T-Shirts"
-        Then I should see there 1 products
-        And I should see "Super T-Shirt"
+         When I follow "T-Shirts"
+         Then I should see there 1 products
+          And I should see "Super T-Shirt"
 
     Scenario: Empty index of products
         Given there are no products
-        And I am on the store homepage
-        When I follow "Gloves"
-        Then I should see "There are no products to display"
+          And I am on the store homepage
+         When I follow "Gloves"
+         Then I should see "There are no products to display"
 
     Scenario: Accessing product page via title
         Given I am on the store homepage
-        And I follow "PHP T-Shirts"
-        When I click "Symfony T-Shirt"
-        Then I should be on the product page for "Symfony T-Shirt"
+          And I follow "PHP T-Shirts"
+         When I click "Symfony T-Shirt"
+         Then I should be on the product page for "Symfony T-Shirt"
 
     Scenario: Display only products for current channel
         Given I am on the store homepage
-        Then I should see "Super T-Shirt"
-        But I should not see "Black T-Shirt"
+         Then I should see "Super T-Shirt"
+          But I should not see "Black T-Shirt"
 
     Scenario: Display proper product price for specific channel
         Given I am on the store homepage
-        Then I should see "Super T-shirt"
-        And I should see "€15.99"
+         Then I should see "Super T-shirt"
+          And I should see "€15.99"
 
     Scenario: Display product attributes
         Given I am on the product page for "Super T-shirt"
-        Then I should see "Wool"
+         Then I should see "Wool"

@@ -13,8 +13,8 @@ Feature: Checkout starting
             | Clothing[TX1] > T-Shirts[TX2]     |
             | Clothing[TX1] > PHP T-Shirts[TX3] |
           And there are following options:
-            | code | name         | presentation  | values                          |
-            | O1   |T-Shirt color | Color         | Red[OV1], Blue[OV2], Green[OV3] |
+            | code | name          | presentation | values                          |
+            | O1   | T-Shirt color | Color        | Red[OV1], Blue[OV2], Green[OV3] |
           And the following products exist:
             | name          | price | options       | taxons       | variants selection |
             | Super T-Shirt | 20.00 | T-Shirt color | T-Shirts     | match              |
@@ -33,7 +33,7 @@ Feature: Checkout starting
         Given I added product "PHP Top" to cart
          When I go to the cart summary page
          Then I should see 1 cart item in the list
-         And I should see "Checkout"
+          And I should see "Checkout"
 
     Scenario: Accessing checkout via cart
         Given I added product "PHP Top" to cart
@@ -42,14 +42,14 @@ Feature: Checkout starting
          Then I should be on the checkout security step
 
     Scenario: Logged in users are starting checkout
-              from the addressing step
+        from the addressing step
         Given I am logged in user
           And I added product "PHP Top" to cart
          When I go to the checkout start page
          Then I should be redirected to the checkout addressing step
 
     Scenario: Not logged in users need to authenticate or register
-              new account in the store or be able to checkout as guest
+        new account in the store or be able to checkout as guest
         Given I added product "PHP Top" to cart
          When I go to the checkout start page
          Then I should be redirected to the checkout security step
@@ -58,7 +58,7 @@ Feature: Checkout starting
           And I should see "Guest"
 
     Scenario: Not logged in users are starting checkout
-              can checkout using only email without registration
+        can checkout using only email without registration
         Given I added product "PHP Top" to cart
          When I go to the checkout start page
           And I fill in guest email with "example@example.com"

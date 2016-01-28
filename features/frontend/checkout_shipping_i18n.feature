@@ -48,4 +48,3 @@ Feature: Checkout shipping in preferred language
          Then I should be on the checkout shipping step
           And I should see "UPS Land"
           And I should not see "UPS Ground"
-

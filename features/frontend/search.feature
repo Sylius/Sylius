@@ -9,7 +9,6 @@ Feature: Search products
           And there are following taxonomies defined:
             | code | name     |
             | RTX1 | Category |
-
           And taxonomy "Category" has following taxons:
             | Clothing[TX1] > T-Shirts[TX2]     |
             | Clothing[TX1] > PHP T-Shirts[TX3] |
@@ -72,4 +71,3 @@ Feature: Search products
           And I press "search-button"
          Then I should be on "/search/"
           And I should see "There are no products to display"
-

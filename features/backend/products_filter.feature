@@ -16,18 +16,18 @@ Feature: Products filter
 
     Scenario: Filtering products by name
         Given I am on the product index page
-        When I fill in "Name" with "T-Shirt"
-        And I press "Filter"
-        Then I should be on the product index page
-        And I should see 2 products in the list
-        And I should not see "Orange"
-        But I should see "Black T-Shirt"
+         When I fill in "Name" with "T-Shirt"
+          And I press "Filter"
+         Then I should be on the product index page
+          And I should see 2 products in the list
+          And I should not see "Orange"
+          But I should see "Black T-Shirt"
 
     Scenario: Filtering products by SKU
         Given I am on the product index page
-        When I fill in "SKU" with "555"
-        And I press "Filter"
-        Then I should be on the product index page
-        And I should see 1 product in the list
-        And I should see "Sticker"
-        But I should not see "T-Shirt"
+         When I fill in "SKU" with "555"
+          And I press "Filter"
+         Then I should be on the product index page
+          And I should see 1 product in the list
+          And I should see "Sticker"
+          But I should not see "T-Shirt"

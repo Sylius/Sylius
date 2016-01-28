@@ -31,35 +31,35 @@ Feature: Payment methods
 
     Scenario: Submitting form without specifying the required values
         Given I am on the payment method creation page
-        When I press "Create"
-        Then I should still be on the payment method creation page
-        And I should see "Please enter payment method name"
-        And I should see "Please enter payment method code"
+         When I press "Create"
+         Then I should still be on the payment method creation page
+          And I should see "Please enter payment method name"
+          And I should see "Please enter payment method code"
 
     Scenario: Creating new payment method with flexible rate
         Given I am on the payment method creation page
-        When I fill in "Code" with "PM3"
-        And I fill in "Name" with "Google Checkout"
-        And I press "Create"
-        Then I should be on the payment method index page
-        And I should see "Payment method has been successfully created"
+         When I fill in "Code" with "PM3"
+          And I fill in "Name" with "Google Checkout"
+          And I press "Create"
+         Then I should be on the payment method index page
+          And I should see "Payment method has been successfully created"
 
     Scenario: Describing the payment method
         Given I am on the payment method creation page
-        When I fill in "Code" with "PM3"
-        And I fill in "Name" with "Google Checkout"
-        And I fill in "Description" with "Flexible checkout by Google!"
-        And I press "Create"
-        Then I should be on the payment method index page
-        And I should see "Payment method has been successfully created"
+         When I fill in "Code" with "PM3"
+          And I fill in "Name" with "Google Checkout"
+          And I fill in "Description" with "Flexible checkout by Google!"
+          And I press "Create"
+         Then I should be on the payment method index page
+          And I should see "Payment method has been successfully created"
 
     Scenario: Created methods appear in the list
         Given I am on the payment method creation page
-        When I fill in "Code" with "PM3"
-        And I fill in "Name" with "PayU"
-        And I press "Create"
-        Then I should be on the payment method index page
-        And I should see payment method with name "PayU" in the list
+         When I fill in "Code" with "PM3"
+          And I fill in "Name" with "PayU"
+          And I press "Create"
+         Then I should be on the payment method index page
+          And I should see payment method with name "PayU" in the list
 
     Scenario: Accessing the editing form from the list
         Given I am on the payment method index page
@@ -90,13 +90,13 @@ Feature: Payment methods
           And I should not see payment method with name "PayPal" in that list
 
     Scenario: Cannot update payment method code
-        When I am editing payment method "PayPal"
-        Then the code field should be disabled
+         When I am editing payment method "PayPal"
+         Then the code field should be disabled
 
     Scenario: Try add payment method with existing code
         Given I am on the payment method creation page
-        When I fill in "Code" with "PM1"
-        And I fill in "Name" with "Master Card"
-        And I press "Create"
-        Then I should still be on the payment method creation page
-        And I should see "The payment method with given code already exists"
+         When I fill in "Code" with "PM1"
+          And I fill in "Name" with "Master Card"
+          And I press "Create"
+         Then I should still be on the payment method creation page
+          And I should see "The payment method with given code already exists"

@@ -12,23 +12,23 @@ Feature: Checkout Payment
           And taxonomy "Category" has following taxons:
             | Clothing[TX1] > PHP T-Shirts[TX2] |
           And the following products exist:
-            | name          | price | taxons       |
-            | PHP Top       | 5.99  | PHP T-Shirts |
+            | name    | price | taxons       |
+            | PHP Top | 5.99  | PHP T-Shirts |
           And the following zones are defined:
-            | name  | type    | members        |
-            | UK    | country | United Kingdom |
+            | name | type    | members        |
+            | UK   | country | United Kingdom |
           And the following shipping methods exist:
             | code | zone | name        |
             | SM1  | UK   | DHL Express |
           And the following payment methods exist:
-            | code | name            | gateway    | enabled |
-            | PM1  | Credit Card     | stripe     | yes     |
-            | PM2  | PayPal          | paypal     | yes     |
-            | PM3  | PayPal PRO      | paypal_pro | no      |
+            | code | name        | gateway    | enabled |
+            | PM1  | Credit Card | stripe     | yes     |
+            | PM2  | PayPal      | paypal     | yes     |
+            | PM3  | PayPal PRO  | paypal_pro | no      |
           And all products are assigned to the default channel
           And the default channel has following configuration:
-            | taxonomy | payment                           | shipping    |
-            | Category | PayPal, PayPal PRO, Credit Card   | DHL Express |
+            | taxonomy | payment                         | shipping    |
+            | Category | PayPal, PayPal PRO, Credit Card | DHL Express |
           And I am logged in user
           And I added product "PHP Top" to cart
           And I go to the checkout start page

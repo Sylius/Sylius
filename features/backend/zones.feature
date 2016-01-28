@@ -7,11 +7,11 @@ Feature: Zones
     Background:
         Given store has default configuration
           And there are following zones:
-            | name                      | type     | members                                       | scope      |
-            | Baltic states             | country  | Lithuania, Latvia, Estonia                    | content    |
-            | USA GMT-8                 | province | Washington, Oregon, Nevada, Idaho, California | shipping   |
-            | Baltic states + USA GMT-8 | zone     | Baltic states, USA GMT-8                      |            |
-            | Germany                   | country  | Germany                                       | price      |
+            | name                      | type     | members                                       | scope    |
+            | Baltic states             | country  | Lithuania, Latvia, Estonia                    | content  |
+            | USA GMT-8                 | province | Washington, Oregon, Nevada, Idaho, California | shipping |
+            | Baltic states + USA GMT-8 | zone     | Baltic states, USA GMT-8                      |          |
+            | Germany                   | country  | Germany                                       | price    |
           And I am logged in as administrator
 
     Scenario: Seeing index of all zones

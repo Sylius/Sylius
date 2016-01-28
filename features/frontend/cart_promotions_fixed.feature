@@ -17,14 +17,14 @@ Feature: Checkout fixed discount promotions
             | Clothing[TX1] > Ubuntu T-Shirts[TX2] |
             | Clothing[TX1] > Debian T-Shirts[TX3] |
           And the following products exist:
-            | name    | price | taxons          |
-            | Buzz    | 500   | Debian T-Shirts |
-            | Potato  | 200   | Debian T-Shirts |
-            | Woody   | 125   | Debian T-Shirts |
-            | Sarge   | 25    | Debian T-Shirts |
-            | Etch    | 20    | Debian T-Shirts |
-            | Lenny   | 15    | Debian T-Shirts |
-            | Ubu     | 200   | Ubuntu T-Shirts |
+            | name   | price | taxons          |
+            | Buzz   | 500   | Debian T-Shirts |
+            | Potato | 200   | Debian T-Shirts |
+            | Woody  | 125   | Debian T-Shirts |
+            | Sarge  | 25    | Debian T-Shirts |
+            | Etch   | 20    | Debian T-Shirts |
+            | Lenny  | 15    | Debian T-Shirts |
+            | Ubu    | 200   | Ubuntu T-Shirts |
           And the following promotions exist:
             | code | name                | description                                              |
             | P1   | 3 items             | 15 EUR Discount for orders with at least 3 items         |
@@ -47,7 +47,7 @@ Feature: Checkout fixed discount promotions
             | type           | configuration |
             | Fixed discount | Amount: 40    |
           And promotion "Shipping to Germany" has following rules defined:
-            | type             | configuration |
+            | type             | configuration    |
             | Shipping country | Country: Germany |
           And promotion "Shipping to Germany" has following actions defined:
             | type           | configuration |
@@ -136,29 +136,29 @@ Feature: Checkout fixed discount promotions
 
     Scenario: Nth order promotion is applied when user have enough orders before
         Given the following zones are defined:
-          | name         | type    | members                       |
-          | German lands | country | Germany, Austria, Switzerland |
-        And there are following tax categories:
-          | code | name    |
-          | TC1  | General |
-        And there are products:
-          | name          | price | tax category |
-          | Mug           | 5.99  | General      |
-          | Sticker       | 10.00 | General      |
-        And the following tax rates exist:
-          | code | category | zone         | name | amount |
-          | TR1  | General  | German lands | VAT  | 23     |
-        And the following orders were placed:
-          | customer          | address                                                |
-          | klaus@example.com | Klaus Schmitt, Heine-Straße 12, 99734, Berlin, Germany |
-          | klaus@example.com | Klaus Schmitt, Heine-Straße 12, 99734, Berlin, Germany |
-        And order #000000001 has following items:
-          | product | quantity |
-          | Mug     | 2        |
-        And order #000000002 has following items:
-          | product | quantity |
-          | Mug     | 1        |
-          | Sticker | 4        |
+            | name         | type    | members                       |
+            | German lands | country | Germany, Austria, Switzerland |
+          And there are following tax categories:
+            | code | name    |
+            | TC1  | General |
+          And there are products:
+            | name    | price | tax category |
+            | Mug     | 5.99  | General      |
+            | Sticker | 10.00 | General      |
+          And the following tax rates exist:
+            | code | category | zone         | name | amount |
+            | TR1  | General  | German lands | VAT  | 23     |
+          And the following orders were placed:
+            | customer          | address                                                |
+            | klaus@example.com | Klaus Schmitt, Heine-Straße 12, 99734, Berlin, Germany |
+            | klaus@example.com | Klaus Schmitt, Heine-Straße 12, 99734, Berlin, Germany |
+          And order #000000001 has following items:
+            | product | quantity |
+            | Mug     | 2        |
+          And order #000000002 has following items:
+            | product | quantity |
+            | Mug     | 1        |
+            | Sticker | 4        |
           And I am on the store homepage
          When I add product "Lenny" to cart, with quantity "1"
           And I go to the checkout start page

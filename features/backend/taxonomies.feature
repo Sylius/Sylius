@@ -112,14 +112,14 @@ Feature: taxonomies
 
     Scenario: Creating new taxon with existing name under different taxon
         Given I am on the page of taxonomy "Category"
-        And   I follow "Create taxon"
-        When  I fill in "Name" with "Electronics"
-        And I fill in "Code" with "TX9"
-        And   I select "Clothing" from "Parent"
-        And   I press "Create"
-        Then  I should be on the page of taxonomy "Category"
-        And   I should see "Taxon has been successfully created"
-        And   I should see 9 taxons in the list
+          And I follow "Create taxon"
+         When I fill in "Name" with "Electronics"
+          And I fill in "Code" with "TX9"
+          And I select "Clothing" from "Parent"
+          And I press "Create"
+         Then I should be on the page of taxonomy "Category"
+          And I should see "Taxon has been successfully created"
+          And I should see 9 taxons in the list
 
     Scenario: Creating new taxon with parent
         Given I am on the page of taxonomy "Category"
@@ -169,22 +169,22 @@ Feature: taxonomies
           And I should see 5 taxons in the list
 
     Scenario: Cannot update taxon code
-        When I am editing taxon "Electronics" from taxonomy "Category"
-        Then the code field should be disabled
+         When I am editing taxon "Electronics" from taxonomy "Category"
+         Then the code field should be disabled
 
     Scenario: Try create taxon with existing code
         Given I am on the page of taxonomy "Category"
-        And I follow "Create taxon"
-        When I fill in "Name" with "Cars"
-        And I fill in "Code" with "TX1"
-        And I press "Create"
-        Then I should still be on the taxon creation page from taxonomy "Category"
-        And I should see "Taxon with given code already exists"
+          And I follow "Create taxon"
+         When I fill in "Name" with "Cars"
+          And I fill in "Code" with "TX1"
+          And I press "Create"
+         Then I should still be on the taxon creation page from taxonomy "Category"
+          And I should see "Taxon with given code already exists"
 
     Scenario: Try create taxon without code
         Given I am on the page of taxonomy "Category"
-        And I follow "Create taxon"
-        When I fill in "Name" with "Cars"
-        And I press "Create"
-        Then I should still be on the taxon creation page from taxonomy "Category"
-        And I should see "Please enter taxon code"
+          And I follow "Create taxon"
+         When I fill in "Name" with "Cars"
+          And I press "Create"
+         Then I should still be on the taxon creation page from taxonomy "Category"
+          And I should see "Please enter taxon code"

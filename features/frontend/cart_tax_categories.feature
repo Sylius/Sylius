@@ -11,10 +11,10 @@ Feature: Tax categories
             | RTX1 | Category |
           And taxonomy "Category" has following taxons:
             | Clothing[TX1] > PHP T-Shirts[TX2] |
-            | Food[TX3]  > Fruits[TX4]  |
+            | Food[TX3]  > Fruits[TX4]          |
           And the following zones are defined:
-            | name  | type    | members        |
-            | UK      | country | United Kingdom |
+            | name | type    | members        |
+            | UK   | country | United Kingdom |
           And there are following tax categories:
             | code | name     |
             | TC1  | Clothing |

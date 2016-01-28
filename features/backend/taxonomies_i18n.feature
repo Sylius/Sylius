@@ -23,10 +23,10 @@ Feature: Taxonomies internationalization
             | Long Sleeve | Manga Larga | es_ES  |
 
     Scenario: Creating a taxon generates the proper permalink
-        Then taxon translation "Long Sleeve" should have permalink "category/clothing/shirts/long-sleeve"
-         And taxon translation "Manga Larga" should have permalink "categoria/ropa/camisas/manga-larga"
+         Then taxon translation "Long Sleeve" should have permalink "category/clothing/shirts/long-sleeve"
+          And taxon translation "Manga Larga" should have permalink "categoria/ropa/camisas/manga-larga"
 
     Scenario: Updating a taxon updates children permalinks only for the given locale
-        When I change then name of taxon translation "Shirts" to "New Shirts"
-        Then taxon translation "Long Sleeve" should have permalink "category/clothing/new-shirts/long-sleeve"
-         And taxon translation "Manga Larga" should have permalink "categoria/ropa/camisas/manga-larga"
+         When I change then name of taxon translation "Shirts" to "New Shirts"
+         Then taxon translation "Long Sleeve" should have permalink "category/clothing/new-shirts/long-sleeve"
+          And taxon translation "Manga Larga" should have permalink "categoria/ropa/camisas/manga-larga"

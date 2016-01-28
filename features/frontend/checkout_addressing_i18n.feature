@@ -19,9 +19,9 @@ Feature: Checkout addressing in preferred language
             | Germany | country | Germany       |
             | USA     | country | United States |
           And there are following countries:
-            | name           |
-            | United States  |
-            | Germany        |
+            | name          |
+            | United States |
+            | Germany       |
           And the following shipping methods exist:
             | code | zone    | name        |
             | SM1  | Germany | DHL Express |

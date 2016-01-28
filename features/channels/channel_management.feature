@@ -93,14 +93,14 @@ Feature: Channel management
 
     Scenario: Cannot add channel without code
         Given I am on the channel creation page
-        And I fill in "Name" with "Mobile US"
-        And I select "English (United States)" from "Locales"
-        And I select "USD" from "Currencies"
-        And I select "PayPal" from "Payment Methods"
-        And I select "FedEx" from "Shipping Methods"
-        When I press "Create"
-        Then I should still be on the channel creation page
-        And I should see "Please enter channel code"
+          And I fill in "Name" with "Mobile US"
+          And I select "English (United States)" from "Locales"
+          And I select "USD" from "Currencies"
+          And I select "PayPal" from "Payment Methods"
+          And I select "FedEx" from "Shipping Methods"
+         When I press "Create"
+         Then I should still be on the channel creation page
+          And I should see "Please enter channel code"
 
     Scenario: Cannot edit channel code
          When I am editing channel "mystore.us"
@@ -108,12 +108,12 @@ Feature: Channel management
 
     Scenario: Try add channel with existing code
         Given I am on the channel creation page
-        And I fill in "Code" with "WEB-US"
-        And I fill in "Name" with "Mobile US"
-        And I select "English (United States)" from "Locales"
-        And I select "USD" from "Currencies"
-        And I select "PayPal" from "Payment Methods"
-        And I select "FedEx" from "Shipping Methods"
-        When I press "Create"
-        Then I should still be on the channel creation page
-        And I should see "Channel code has to be unique"
+          And I fill in "Code" with "WEB-US"
+          And I fill in "Name" with "Mobile US"
+          And I select "English (United States)" from "Locales"
+          And I select "USD" from "Currencies"
+          And I select "PayPal" from "Payment Methods"
+          And I select "FedEx" from "Shipping Methods"
+         When I press "Create"
+         Then I should still be on the channel creation page
+          And I should see "Channel code has to be unique"

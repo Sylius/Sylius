@@ -7,9 +7,9 @@ Feature: Checkout coupon promotions
     Background:
         Given store has default configuration
           And the following promotions exist:
-            | code | name                      | description            |
-            | P1   | Press campaign            | Coupon based promotion |
-            | P2   | New Year campaign         | Coupon based promotion |
+            | code | name              | description            |
+            | P1   | Press campaign    | Coupon based promotion |
+            | P2   | New Year campaign | Coupon based promotion |
           And promotion "Press campaign" has following rules defined:
             | type       | configuration |
             | Item total | Amount: 100   |
@@ -34,13 +34,13 @@ Feature: Checkout coupon promotions
           And taxonomy "Category" has following taxons:
             | Clothing[TX1] > Debian T-Shirts[TX2] |
           And the following products exist:
-            | name    | price | taxons          |
-            | Buzz    | 500   | Debian T-Shirts |
-            | Potato  | 200   | Debian T-Shirts |
-            | Woody   | 125   | Debian T-Shirts |
-            | Sarge   | 25    | Debian T-Shirts |
-            | Etch    | 20    | Debian T-Shirts |
-            | Lenny   | 1     | Debian T-Shirts |
+            | name   | price | taxons          |
+            | Buzz   | 500   | Debian T-Shirts |
+            | Potato | 200   | Debian T-Shirts |
+            | Woody  | 125   | Debian T-Shirts |
+            | Sarge  | 25    | Debian T-Shirts |
+            | Etch   | 20    | Debian T-Shirts |
+            | Lenny  | 1     | Debian T-Shirts |
           And all products are assigned to the default channel
           And all promotions are assigned to the default channel
 

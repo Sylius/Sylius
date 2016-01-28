@@ -10,9 +10,9 @@ Feature: Store dashboard
             | name         | type    | members                       |
             | German lands | country | Germany, Austria, Switzerland |
           And there are products:
-            | name          | price |
-            | Mug           | 5.99  |
-            | Sticker       | 10.00 |
+            | name    | price |
+            | Mug     | 5.99  |
+            | Sticker | 10.00 |
           And the following orders were placed:
             | customer          | address                                                |
             | klaus@example.com | Klaus Schmitt, Heine-Straße 12, 99734, Berlin, Germany |
@@ -27,8 +27,8 @@ Feature: Store dashboard
           And I am logged in as administrator
 
     Scenario: Viewing the dashboard at website root
-       Given I am on the dashboard page
-        Then I should see "Administration dashboard"
+        Given I am on the dashboard page
+         Then I should see "Administration dashboard"
 
     Scenario: Viewing recent orders
         Given I am on the dashboard page

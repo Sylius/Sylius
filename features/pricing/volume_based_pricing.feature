@@ -12,8 +12,8 @@ Feature: Volume based pricing
           And taxonomy "Category" has following taxons:
             | Clothing[TX1] > PHP T-Shirts[TX2] |
           And the following zones are defined:
-            | name    | type    | members        |
-            | UK      | country | United Kingdom |
+            | name | type    | members        |
+            | UK   | country | United Kingdom |
           And there are following tax categories:
             | code | name          |
             | TC1  | Taxable Goods |

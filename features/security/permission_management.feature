@@ -32,52 +32,52 @@ Feature: Permissions management
 
     Scenario: Seeing index of all permissions
         Given I am on the dashboard page
-        When I follow "Permissions"
-        Then I should be on the permission index page
-        And I should see 12 permissions in the list
+         When I follow "Permissions"
+         Then I should be on the permission index page
+          And I should see 12 permissions in the list
 
     Scenario: Permission is validated
         Given I am on the permission creation page
-        When I press "Create"
-        Then I should still be on the permission creation page
-        And I should see "Please enter code"
+         When I press "Create"
+         Then I should still be on the permission creation page
+          And I should see "Please enter code"
 
     Scenario: Permission code must be unique
         Given I am on the permission creation page
-        When I fill in "Code" with "sylius.product.index"
-        And I press "Create"
-        Then I should still be on the permission creation page
-        And I should see "Code must be unique"
+         When I fill in "Code" with "sylius.product.index"
+          And I press "Create"
+         Then I should still be on the permission creation page
+          And I should see "Code must be unique"
 
     Scenario: Creating new permission under tree
         Given I am on the permission creation page
-        When I fill in "Code" with "sylius.product.display_sales_stats"
-        And I fill in "Description" with "View sales statistics"
-        And I select "Manage products catalog" from "Parent"
-        And I press "Create"
-        Then I should be on the permission index page
-        And I should see "Permission has been successfully created"
-        And I should see 13 permissions in the list
-        And I should see permission with code containing "sylius.product.display_sales_stats" in that list
+         When I fill in "Code" with "sylius.product.display_sales_stats"
+          And I fill in "Description" with "View sales statistics"
+          And I select "Manage products catalog" from "Parent"
+          And I press "Create"
+         Then I should be on the permission index page
+          And I should see "Permission has been successfully created"
+          And I should see 13 permissions in the list
+          And I should see permission with code containing "sylius.product.display_sales_stats" in that list
 
     Scenario: Cannot edit the parent of root node
         Given I am on the permission index page
-        When I click "Edit" near "root"
-        Then I should not see "Parent"
+         When I click "Edit" near "root"
+         Then I should not see "Parent"
 
     Scenario: Updating the permission
         Given I am on the permission index page
-        And I click "Edit" near "sylius.product.index"
-        When I fill in "Description" with "Browse all product lists"
-        And I press "Save changes"
-        Then I should be on the permission index page
-        And I should see "Permission has been successfully updated"
-        And I should see "Browse all product lists"
-        But I should not see "List all products"
+          And I click "Edit" near "sylius.product.index"
+         When I fill in "Description" with "Browse all product lists"
+          And I press "Save changes"
+         Then I should be on the permission index page
+          And I should see "Permission has been successfully updated"
+          And I should see "Browse all product lists"
+          But I should not see "List all products"
 
     Scenario: Deleting permission
         Given I am on the permission index page
-        When I click "Delete" near "Edit product"
-        Then I should be on the permission index page
-        And I should see "Permission has been successfully deleted"
-        And I should not see permission with code containing "sylius.product.edit" in the list
+         When I click "Delete" near "Edit product"
+         Then I should be on the permission index page
+          And I should see "Permission has been successfully deleted"
+          And I should not see permission with code containing "sylius.product.edit" in the list

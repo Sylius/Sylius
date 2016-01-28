@@ -13,11 +13,11 @@ Feature: User registration
             | email              |
             | customer@email.com |
           And the following zones are defined:
-            | name         | type    | members |
-            | Poland       | country | Poland  |
+            | name   | type    | members |
+            | Poland | country | Poland  |
           And the following orders exist:
-            | customer                | address                                        |
-            | customer@email.com      | Jan Kowalski, Wawel 5 , 31-001, Kraków, Poland |
+            | customer           | address                                        |
+            | customer@email.com | Jan Kowalski, Wawel 5 , 31-001, Kraków, Poland |
 
     Scenario: Successfully creating account in store
         Given I am on the store homepage
@@ -70,16 +70,16 @@ Feature: User registration
           And I should see "The entered passwords don't match"
 
     Scenario: Trying to register without email
-       Given I am on the store homepage
-         And I follow "Register"
-        When I fill in the following:
-            | First name   | John        |
-            | Last name    | Doe         |
-            | Password     | bar1        |
-            | Verification | bar1        |
-         And I press "Register"
-        Then I should be on registration page
-         And I should see "Please enter your email"
+        Given I am on the store homepage
+          And I follow "Register"
+         When I fill in the following:
+            | First name   | John |
+            | Last name    | Doe  |
+            | Password     | bar1 |
+            | Verification | bar1 |
+          And I press "Register"
+         Then I should be on registration page
+          And I should see "Please enter your email"
 
     Scenario: Trying to register with already existing email
         Given I am on the store homepage
@@ -111,9 +111,9 @@ Feature: User registration
         Given I am on the store homepage
           And I follow "Register"
          When I fill in the following:
-            | Email        | foo@bar.com  |
-            | Password     | bar1         |
-            | Verification | bar1         |
+            | Email        | foo@bar.com |
+            | Password     | bar1        |
+            | Verification | bar1        |
           And I press "Register"
          Then I should be on registration page
           And I should see "Please enter your first name"

@@ -37,11 +37,11 @@ Feature: Tax categories
 
     Scenario: Creating new tax category
         Given I am on the tax category creation page
-        When I fill in "Code" with "TC3"
-        And I fill in "Name" with "Taxable goods"
-        And I press "Create"
-        Then I should be on the tax category index page
-        And I should see "Tax category has been successfully created"
+         When I fill in "Code" with "TC3"
+          And I fill in "Name" with "Taxable goods"
+          And I press "Create"
+         Then I should be on the tax category index page
+          And I should see "Tax category has been successfully created"
 
     Scenario: Created tax categories appear in the list
         Given I created tax category "Food" with code "TC3"
@@ -83,15 +83,15 @@ Feature: Tax categories
 
     Scenario: Try add tax category  with existing code
         Given I am on the tax category creation page
-        When I fill in "Code" with "TC1"
-        And I fill in "Name" with "Computers"
-        And I press "Create"
-        Then I should still be on the tax category creation page
-        And I should see "The tax category with given code already exists"
+         When I fill in "Code" with "TC1"
+          And I fill in "Name" with "Computers"
+          And I press "Create"
+         Then I should still be on the tax category creation page
+          And I should see "The tax category with given code already exists"
 
     Scenario: Trying to create tax category leaving the code field blank
         Given I am on the tax category creation page
-        When I fill in "Name" with "Computers"
-        And I press "Create"
-        Then I should still be on the tax category creation page
-        And I should see "Please enter tax category code"
+         When I fill in "Name" with "Computers"
+          And I press "Create"
+         Then I should still be on the tax category creation page
+          And I should see "Please enter tax category code"

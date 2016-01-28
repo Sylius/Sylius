@@ -7,9 +7,9 @@ Feature: Checkout percentage discount promotions
     Background:
         Given store has default configuration
           And the following promotions exist:
-            | code | name              | description                                   |
-            | PR1  | 3 items           | 25% Discount for orders with at least 3 items |
-            | PR2  | 300 EUR           | 10% Discount for orders over 300 EUR          |
+            | code | name    | description                                   |
+            | PR1  | 3 items | 25% Discount for orders with at least 3 items |
+            | PR2  | 300 EUR | 10% Discount for orders over 300 EUR          |
           And promotion "3 items" has following rules defined:
             | type       | configuration        |
             | item_count | Count: 3,Equal: true |
@@ -20,7 +20,7 @@ Feature: Checkout percentage discount promotions
             | type       | configuration |
             | Item total | Amount: 300   |
           And promotion "300 EUR" has following actions defined:
-            | type                | configuration |
+            | type                | configuration  |
             | Percentage discount | percentage: 10 |
           And there are following taxonomies defined:
             | code | name     |
@@ -28,13 +28,13 @@ Feature: Checkout percentage discount promotions
           And taxonomy "Category" has following taxons:
             | Clothing[TX1] > Debian T-Shirts[TX2] |
           And the following products exist:
-            | name    | price | taxons          |
-            | Buzz    | 500   | Debian T-Shirts |
-            | Potato  | 200   | Debian T-Shirts |
-            | Woody   | 125   | Debian T-Shirts |
-            | Sarge   | 25    | Debian T-Shirts |
-            | Etch    | 20    | Debian T-Shirts |
-            | Lenny   | 15    | Debian T-Shirts |
+            | name   | price | taxons          |
+            | Buzz   | 500   | Debian T-Shirts |
+            | Potato | 200   | Debian T-Shirts |
+            | Woody  | 125   | Debian T-Shirts |
+            | Sarge  | 25    | Debian T-Shirts |
+            | Etch   | 20    | Debian T-Shirts |
+            | Lenny  | 15    | Debian T-Shirts |
           And all products are assigned to the default channel
           And all promotions are assigned to the default channel
 

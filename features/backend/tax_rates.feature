@@ -49,32 +49,32 @@ Feature: Tax rates
     Scenario: Trying to create tax leaving the amount field blank
         Given I am on the tax rate creation page
          When I fill in "Code" with "TR5"
-         And I fill in "Name" with "US Food Tax"
-         And I leave "Amount" empty
-         And I press "Create"
+          And I fill in "Name" with "US Food Tax"
+          And I leave "Amount" empty
+          And I press "Create"
          Then I should still be on the tax rate creation page
-         And I should see "Please enter tax rate amount"
+          And I should see "Please enter tax rate amount"
 
     Scenario: Creating new tax rate
         Given I am on the tax rate creation page
          When I fill in "Code" with "TR5"
-         And I fill in "Name" with "US Food Tax"
-         And I fill in "Amount" with "30"
-         And I select "USA" from "Zone"
+          And I fill in "Name" with "US Food Tax"
+          And I fill in "Amount" with "30"
+          And I select "USA" from "Zone"
          When I press "Create"
          Then I should be on the page of tax rate "US Food Tax"
-         And I should see "Tax rate has been successfully created"
+          And I should see "Tax rate has been successfully created"
 
     Scenario: Creating tax rate included in price
         Given I am on the tax rate creation page
          When I fill in "Code" with "TR5"
-         And I fill in "Name" with "EU VAT"
-         And I fill in "Amount" with "19"
-         And I select "UK + Germany" from "Zone"
-         And I check "Included in price?"
+          And I fill in "Name" with "EU VAT"
+          And I fill in "Amount" with "19"
+          And I select "UK + Germany" from "Zone"
+          And I check "Included in price?"
          When I press "Create"
          Then I should be on the page of tax rate "EU VAT"
-         And I should see "Tax rate has been successfully created"
+          And I should see "Tax rate has been successfully created"
 
     Scenario: Created tax rates appear in the list
         Given I created 18% tax "Food Tax" with code "TR5" for category "Food" with zone "USA"
@@ -147,17 +147,17 @@ Feature: Tax rates
 
     Scenario: Try add tax rate  with existing code
         Given I am on the tax rate creation page
-        When I fill in "Code" with "TR1"
-        And I fill in "Name" with "US Food Tax"
-        And I fill in "Amount" with "30"
-        And I press "Create"
-        Then I should still be on the tax rate creation page
-        And I should see "The tax rate with given code already exists"
+         When I fill in "Code" with "TR1"
+          And I fill in "Name" with "US Food Tax"
+          And I fill in "Amount" with "30"
+          And I press "Create"
+         Then I should still be on the tax rate creation page
+          And I should see "The tax rate with given code already exists"
 
     Scenario: Trying to create tax rate leaving the code field blank
         Given I am on the tax rate creation page
-        When I fill in "Name" with "US Food Tax"
-        And I fill in "Amount" with "30"
-        And I press "Create"
-        Then I should still be on the tax rate creation page
-        And I should see "Please enter tax rate code"
+         When I fill in "Name" with "US Food Tax"
+          And I fill in "Amount" with "30"
+          And I press "Create"
+         Then I should still be on the tax rate creation page
+          And I should see "Please enter tax rate code"

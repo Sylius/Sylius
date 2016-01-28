@@ -16,8 +16,8 @@ Feature: Checkout product promotion
             | Sarge  | 25    |
             | Ubu    | 200   |
           And the following promotions exist:
-            | code | name                | description                      |
-            | P1   | Free product        | Almost free product over 100 eur |
+            | code | name         | description                      |
+            | P1   | Free product | Almost free product over 100 eur |
           And promotion "Free product" has following rules defined:
             | type       | configuration |
             | Item total | Amount: 100   |

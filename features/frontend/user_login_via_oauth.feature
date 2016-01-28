@@ -13,8 +13,8 @@ Feature: Sign in to the store via OAuth
          When I follow "Login"
          Then I should see the connect with "<oauth>" button
 
-    Examples:
-        | oauth    |
-        | Amazon   |
-        | Facebook |
-        | Google   |
+        Examples:
+          | oauth    |
+          | Amazon   |
+          | Facebook |
+          | Google   |

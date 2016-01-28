@@ -12,12 +12,12 @@ Feature: Checkout addressing
           And taxonomy "Category" has following taxons:
             | Clothing[TX1] > PHP T-Shirts[TX2] |
           And the following products exist:
-            | name          | price | taxons       |
-            | PHP Top       | 5.99  | PHP T-Shirts |
+            | name    | price | taxons       |
+            | PHP Top | 5.99  | PHP T-Shirts |
           And there are following users:
-            | email             | password | enabled |
-            | john@example.com  | foo1     | yes     |
-            | rick@example.com  | bar1     | yes     |
+            | email            | password | enabled |
+            | john@example.com | foo1     | yes     |
+            | rick@example.com | bar1     | yes     |
           And the following zones are defined:
             | name         | type    | members                 |
             | UK + Germany | country | United Kingdom, Germany |
@@ -29,9 +29,9 @@ Feature: Checkout addressing
             | Poland         |
             | Germany        |
           And the following shipping methods exist:
-            | code | zone         | name          | calculator | configuration |
-            | SM1  | UK + Germany | DHL Express   | Flat rate  | Amount: 5000  |
-            | SM2  | USA          | FedEx         | Flat rate  | Amount: 6500  |
+            | code | zone         | name        | calculator | configuration |
+            | SM1  | UK + Germany | DHL Express | Flat rate  | Amount: 5000  |
+            | SM2  | USA          | FedEx       | Flat rate  | Amount: 6500  |
           And all products are assigned to the default channel
 
     Scenario: Filling the shipping address

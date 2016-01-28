@@ -138,20 +138,20 @@ Feature: Shipping methods
           And I should see "Shipping method has been successfully disabled"
 
     Scenario: Cannot update shipping method code
-        When I am editing shipping method "FedEx"
-        Then the code field should be disabled
+         When I am editing shipping method "FedEx"
+         Then the code field should be disabled
 
     Scenario: Try add shipping method with existing code
         Given I am on the shipping method creation page
-        When I fill in "Name" with "MegaPackage"
-        And I fill in "Code" with "SM1"
-        And I press "Create"
-        Then I should still be on the shipping method creation page
-        And I should see "The shipping method with given code already exists"
+         When I fill in "Name" with "MegaPackage"
+          And I fill in "Code" with "SM1"
+          And I press "Create"
+         Then I should still be on the shipping method creation page
+          And I should see "The shipping method with given code already exists"
 
     Scenario: Submitting invalid form without code
-      Given I am on the shipping method creation page
-      When I fill in "Name" with "MegaPackage"
-      And I press "Create"
-      Then I should still be on the shipping method creation page
-      And I should see "Please enter shipping method code"
+        Given I am on the shipping method creation page
+         When I fill in "Name" with "MegaPackage"
+          And I press "Create"
+         Then I should still be on the shipping method creation page
+          And I should see "Please enter shipping method code"

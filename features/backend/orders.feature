@@ -13,9 +13,9 @@ Feature: Orders management
             | code | name    |
             | TC1  | General |
           And there are products:
-            | name          | price | tax category |
-            | Mug           | 5.99  | General      |
-            | Sticker       | 10.00 | General      |
+            | name    | price | tax category |
+            | Mug     | 5.99  | General      |
+            | Sticker | 10.00 | General      |
           And the following tax rates exist:
             | code | category | zone         | name | amount |
             | TR1  | General  | German lands | VAT  | 23     |

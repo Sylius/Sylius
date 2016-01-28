@@ -20,20 +20,20 @@ Feature: Customers management
             | rick@foo.com   | no      | Klaus Schmitt, Heine-Straße 12, 99734, Berlin, Germany |
             | dale@foo.com   | yes     | Lars Meine, Fun-Straße 1, 90032, Vienna, Austria       |
           And there are following customers:
-            | email          | address                                                 |
-            | john@foo.com   | Klaus Schmitt, Heine-Straße 122, 99134, Berlin, Germany |
-            | doe@foo.com    | Lars Meine, Fun-Straße 13, 90332, Vienna, Austria       |
+            | email        | address                                                 |
+            | john@foo.com | Klaus Schmitt, Heine-Straße 122, 99134, Berlin, Germany |
+            | doe@foo.com  | Lars Meine, Fun-Straße 13, 90332, Vienna, Austria       |
           And the following orders were placed:
             | customer     | address                                        |
             | john@foo.com | Jan Kowalski, Wawel 5 , 31-001, Kraków, Poland |
             | rick@foo.com | Rick Foo, Wawel 5 , 31-001, Kraków, Poland     |
-        And order #000000001 has following items:
+          And order #000000001 has following items:
             | product | quantity |
             | Mug     | 2        |
-        And order #000000002 has following items:
+          And order #000000002 has following items:
             | product | quantity |
             | Mug     | 3        |
-        And I am logged in as administrator
+          And I am logged in as administrator
 
     Scenario: Seeing index of all customers
         Given I am on the dashboard page
@@ -112,19 +112,19 @@ Feature: Customers management
 
     Scenario: Username should be the same as email after email change
         Given I am editing customer with email "rick@foo.com"
-        When I fill in "Email" with "umpirsky@gmail.com"
-        And I press "Save changes"
-        Then "Customer has been successfully updated" should appear on the page
-        And the customer should have username "umpirsky@gmail.com"
+         When I fill in "Email" with "umpirsky@gmail.com"
+          And I press "Save changes"
+         Then "Customer has been successfully updated" should appear on the page
+          And the customer should have username "umpirsky@gmail.com"
 
     Scenario: Updating user properties during email change
         Given I am editing customer with email "rick@foo.com"
-        When I fill in "Email" with "umpirsky@gmail.com"
-        And I check "Enabled"
-        And I press "Save changes"
-        Then "Customer has been successfully updated" should appear on the page
-        And the customer should have username "umpirsky@gmail.com"
-        And the customer should be enabled
+         When I fill in "Email" with "umpirsky@gmail.com"
+          And I check "Enabled"
+          And I press "Save changes"
+         Then "Customer has been successfully updated" should appear on the page
+          And the customer should have username "umpirsky@gmail.com"
+          And the customer should be enabled
 
     Scenario: Changing customer's password and logging in with new one
         Given I am editing customer with email "dale@foo.com"

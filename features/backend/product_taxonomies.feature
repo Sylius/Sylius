@@ -26,12 +26,12 @@ Feature: Browsing products by taxonomies
 
     Scenario: Seeing index of all products for given taxonomy
         Given I am on the taxonomy index page
-        And I follow "Category"
-        When I click "Browse products" near "T-Shirts"
-        Then I should see 2 products in the list
+          And I follow "Category"
+         When I click "Browse products" near "T-Shirts"
+         Then I should see 2 products in the list
 
     Scenario: Category does not contain any products
         Given I am on the taxonomy index page
-        And I follow "Special"
-        When I click "Browse products" near "Featured"
-        Then I should see "There are no products to display"
+          And I follow "Special"
+         When I click "Browse products" near "Featured"
+         Then I should see "There are no products to display"
