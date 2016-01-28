@@ -22,4 +22,11 @@ EOF;
 
 HeaderCommentFixer::setHeader($header);
 
-return array('header_comment');
+return [
+    'header_comment',
+    'short_array_syntax',
+    'ordered_use',
+    '-empty_return',
+    '-phpdoc_params',
+    '-phpdoc_short_description',
+];
