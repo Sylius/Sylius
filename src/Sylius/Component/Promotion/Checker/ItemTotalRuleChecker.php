@@ -20,16 +20,26 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  */
 class ItemTotalRuleChecker implements RuleCheckerInterface
 {
+    use CountComparisonTrait;
+
     /**
      * {@inheritdoc}
      */
     public function isEligible(PromotionSubjectInterface $subject, array $configuration)
     {
-        if (isset($configuration['equal']) && $configuration['equal']) {
-            return $subject->getPromotionSubjectTotal() >= $configuration['amount'];
+        if (!isset($configuration['equal'])) {
+            return static::comparison($subject->getPromotionSubjectTotal(), $configuration['amount']);
         }
 
-        return $subject->getPromotionSubjectTotal() > $configuration['amount'];
+        if (is_bool($configuration['equal'])) {
+            if ($configuration['equal']) {
+                return static::comparison($subject->getPromotionSubjectTotal(), $configuration['amount']);
+            }
+
+            return static::comparison($subject->getPromotionSubjectTotal(), $configuration['amount'], 'more_than');
+        }
+
+        return static::comparison($subject->getPromotionSubjectTotal(), $configuration['amount'], $configuration['equal']);
     }
 
     /**

@@ -14,8 +14,6 @@ namespace Sylius\Component\Promotion\Checker;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
- * Promotion rule checker interface.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 interface RuleCheckerInterface
@@ -24,7 +22,7 @@ interface RuleCheckerInterface
      * @param PromotionSubjectInterface $subject
      * @param array                     $configuration
      *
-     * @return Boolean
+     * @return bool
      */
     public function isEligible(PromotionSubjectInterface $subject, array $configuration);
 

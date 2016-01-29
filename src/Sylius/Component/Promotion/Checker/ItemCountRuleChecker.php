@@ -21,6 +21,8 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  */
 class ItemCountRuleChecker implements RuleCheckerInterface
 {
+    use CountComparisonTrait;
+
     /**
      * {@inheritdoc}
      */
@@ -30,11 +32,19 @@ class ItemCountRuleChecker implements RuleCheckerInterface
             return false;
         }
 
-        if (isset($configuration['equal']) && $configuration['equal']) {
-            return $subject->getPromotionSubjectCount() >= $configuration['count'];
+        if (!isset($configuration['equal'])) {
+            return static::comparison($subject->getPromotionSubjectCount(), $configuration['count']);
         }
 
-        return $subject->getPromotionSubjectCount() > $configuration['count'];
+        if (is_bool($configuration['equal'])) {
+            if ($configuration['equal']) {
+                return static::comparison($subject->getPromotionSubjectCount(), $configuration['count']);
+            }
+
+            return static::comparison($subject->getPromotionSubjectCount(), $configuration['count'], 'more_than');
+        }
+
+        return static::comparison($subject->getPromotionSubjectCount(), $configuration['count'], $configuration['equal']);
     }
 
     /**
