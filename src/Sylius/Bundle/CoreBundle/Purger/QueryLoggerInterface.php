@@ -24,6 +24,7 @@ interface QueryLoggerInterface extends SQLLogger
     public function getLoggedQueries();
 
     /**
+     * @return void
      */
     public function clearLoggedQueries();
 }

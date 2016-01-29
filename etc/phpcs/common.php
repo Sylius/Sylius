@@ -27,6 +27,7 @@ return [
     'short_array_syntax',
     'ordered_use',
     '-empty_return',
+    '-phpdoc_no_empty_return',
     '-phpdoc_params',
     '-phpdoc_short_description',
 ];
