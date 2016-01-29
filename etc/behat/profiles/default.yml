@@ -1,0 +1,31 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    formatters:
+        pretty:
+            verbose:  true
+            paths:    false
+            snippets: false
+
+    extensions:
+        Lakion\Behat\MinkDebugExtension:
+            directory: etc/build
+            clean_start: false
+        Behat\MinkExtension:
+            sessions:
+                default:
+                    symfony2: ~
+        Behat\Symfony2Extension:
+            kernel:
+                class: TestKernel
+                path: app/TestKernel.php
+        Sylius\Behat\Symfony2Extension: ~
+        SensioLabs\Behat\PageObjectExtension:
+            namespaces:
+                page: [Sylius\Behat\Page]
+        Sylius\Behat\PageObjectExtension: ~
+
+    gherkin:
+        filters:
+            tags: "~@javascript && ~@contact"

@@ -1,0 +1,28 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+javascript_cached:
+    extensions:
+        Lakion\Behat\MinkDebugExtension:
+            screenshot: true
+        Behat\MinkExtension:
+            base_url: http://localhost:8080/
+            selenium2:
+                capabilities:
+                    browserName: chrome
+                    browser: chrome
+                    version: ""
+                    chrome:
+                        switches:
+                            - "start-fullscreen"
+                            - "no-sandbox"
+            browser_name: chrome
+            show_auto: false
+        Behat\Symfony2Extension:
+            kernel:
+                env: test_cached
+                debug: false
+
+    gherkin:
+        filters:
+            tags: "@javascript && ~@contact"
