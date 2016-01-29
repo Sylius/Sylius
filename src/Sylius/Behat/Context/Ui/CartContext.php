@@ -36,7 +36,7 @@ class CartContext extends FeatureContext
     }
 
     /**
-     * @Given /^my cart shipping fee should be "([^"]*)"$/
+     * @Given /^my cart shipping fee should be "([^"]+)"$/
      */
     public function myCartShippingFeeShouldBe($shippingTotal)
     {

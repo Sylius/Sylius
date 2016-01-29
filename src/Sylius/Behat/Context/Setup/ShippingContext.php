@@ -60,7 +60,7 @@ class ShippingContext implements Context
      */
     public function castShippingMethodNameToShippingMethod($shippingMethodName)
     {
-        if (null === $shippingMethod = $this->shippingMethodRepository->findOneBy(array('name' => $shippingMethodName))) {
+        if (null === $shippingMethod = $this->shippingMethodRepository->findOneBy(['name' => $shippingMethodName])) {
             throw new \Exception('Shipping method with name "'.$shippingMethodName.'" does not exist');
         }
 
@@ -80,7 +80,7 @@ class ShippingContext implements Context
      */
     public function storeHasShippingMethodWithFee($shippingMethodName, $currency, $fee)
     {
-        $this->createShippingMethod($shippingMethodName, 'FR', array('amount' => $this->getFeeFromString($fee)));
+        $this->createShippingMethod($shippingMethodName, 'FR', ['amount' => $this->getFeeFromString($fee)]);
     }
 
     /**
@@ -93,7 +93,7 @@ class ShippingContext implements Context
     private function createShippingMethod(
         $name,
         $locale = 'FR',
-        $configuration = array('amount' => 0),
+        $configuration = ['amount' => 0],
         $calculator = DefaultCalculators::PER_ITEM_RATE,
         $zone = null
     ) {

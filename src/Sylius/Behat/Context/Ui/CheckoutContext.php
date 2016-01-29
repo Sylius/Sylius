@@ -13,7 +13,6 @@ namespace Sylius\Behat\Context\Ui;
 
 use Sylius\Behat\Context\FeatureContext;
 use Sylius\Behat\Page\Product\ProductShowPage;
-use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -97,24 +96,22 @@ class CheckoutContext extends FeatureContext
             'phoneNumber' => '321123456',
         ];
         $checkoutAddressingPage->fillAddressingDetails($addressingDetails);
-        $checkoutAddressingPage->pressButton('Continue');
+        $checkoutAddressingPage->forward();
 
         $checkoutShippingPage = $this->getPage('Checkout\CheckoutShippingStep');
-        $checkoutShippingPage->pressRadio('Free');
-        $checkoutShippingPage->pressButton('Continue');
+        $checkoutShippingPage->selectShippingMethod('Free');
 
         $checkoutPaymentPage = $this->getPage('Checkout\CheckoutPaymentStep');
-        $checkoutPaymentPage->pressRadio($paymentMethodName);
-        $checkoutPaymentPage->pressButton('Continue');
+        $checkoutPaymentPage->selectPaymentMethod($paymentMethodName);
     }
 
     /**
-     * @When /^I proceed selecting "([^"]*)" shipping method$/
+     * @When /^I proceed selecting "([^"]+)" shipping method$/
      */
     public function iProceedSelectingShippingMethod($shippingMethod)
     {
         $checkoutAddressingPage = $this->getPage('Checkout\CheckoutAddressingStep')->open();
-        $addressingDetails = array(
+        $addressingDetails = [
             'firstName' => 'John',
             'lastName' => 'Doe',
             'country' => 'France',
@@ -122,13 +119,12 @@ class CheckoutContext extends FeatureContext
             'city' => 'North Bridget',
             'postcode' => '93-554',
             'phoneNumber' => '321123456'
-        );
+        ];
         $checkoutAddressingPage->fillAddressingDetails($addressingDetails);
-        $checkoutAddressingPage->pressButton('Continue');
+        $checkoutAddressingPage->forward();
 
         $checkoutShippingPage = $this->getPage('Checkout\CheckoutShippingStep');
-        $checkoutShippingPage->pressRadio($shippingMethod);
-        $checkoutShippingPage->pressButton('Continue');
+        $checkoutShippingPage->selectShippingMethod($shippingMethod);
     }
 
     /**

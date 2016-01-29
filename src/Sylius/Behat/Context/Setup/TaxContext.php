@@ -68,7 +68,6 @@ class TaxContext implements Context
     }
 
     /**
-<<<<<<< HEAD
      * @Transform /^"([^"]+)" tax category$/
      * @Transform /^tax category "([^"]+)"$/
      */

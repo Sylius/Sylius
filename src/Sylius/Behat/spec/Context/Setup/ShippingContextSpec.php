@@ -54,7 +54,7 @@ class ShippingContextSpec extends ObjectBehavior
         $shippingMethod->setCode('free')->shouldBeCalled();
         $shippingMethod->setName('Free')->shouldBeCalled();
         $shippingMethod->setCurrentLocale('FR')->shouldBeCalled();
-        $shippingMethod->setConfiguration(array('amount' => 0))->shouldBeCalled();
+        $shippingMethod->setConfiguration(['amount' => 0])->shouldBeCalled();
         $shippingMethod->setCalculator(DefaultCalculators::PER_ITEM_RATE)->shouldBeCalled();
         $shippingMethod->setZone($zone)->shouldBeCalled();
 
@@ -76,7 +76,7 @@ class ShippingContextSpec extends ObjectBehavior
         $shippingMethod->setCode('test_shipping_method')->shouldBeCalled();
         $shippingMethod->setName('Test shipping method')->shouldBeCalled();
         $shippingMethod->setCurrentLocale('FR')->shouldBeCalled();
-        $shippingMethod->setConfiguration(array('amount' => 1000))->shouldBeCalled();
+        $shippingMethod->setConfiguration(['amount' => 1000])->shouldBeCalled();
         $shippingMethod->setCalculator(DefaultCalculators::PER_ITEM_RATE)->shouldBeCalled();
         $shippingMethod->setZone($zone)->shouldBeCalled();
 
@@ -87,15 +87,15 @@ class ShippingContextSpec extends ObjectBehavior
 
     function it_casts_shipping_method_name_to_string($shippingMethodRepository, ShippingMethodInterface $shippingMethod)
     {
-        $shippingMethodRepository->findOneBy(array('name' => 'DHL'))->willReturn($shippingMethod);
+        $shippingMethodRepository->findOneBy(['name' => 'DHL'])->willReturn($shippingMethod);
 
         $this->castShippingMethodNameToShippingMethod('DHL')->shouldReturn($shippingMethod);
     }
 
     function it_throws_exception_if_there_is_no_shipping_method_with_name_passed_to_casting($shippingMethodRepository)
     {
-        $shippingMethodRepository->findOneBy(array('name' => 'DHL'))->willReturn(null);
+        $shippingMethodRepository->findOneBy(['name' => 'DHL'])->willReturn(null);
 
-        $this->shouldThrow(new \Exception('Shipping method with name "DHL" does not exist'))->during('castShippingMethodNameToShippingMethod', array('DHL'));
+        $this->shouldThrow(new \Exception('Shipping method with name "DHL" does not exist'))->during('castShippingMethodNameToShippingMethod', ['DHL']);
     }
 }
