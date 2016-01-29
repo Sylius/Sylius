@@ -30,7 +30,7 @@ Quick Installation
 
 ```bash
 $ wget http://getcomposer.org/composer.phar
-$ php composer.phar create-project sylius/sylius:v0.15.0
+$ php composer.phar create-project sylius/sylius
 $ cd sylius
 $ php app/console sylius:install
 $ php app/console server:run
@@ -48,18 +48,22 @@ $ gulp
 [Behat](http://behat.org) scenarios
 -----------------------------------
 
-You need to copy Behat default configuration file and enter your specific ``base_url``
-option there:
+By default Behat uses `http://localhost:8080/` as your application base url. If your one is different, 
+you need to create `behat.yml` files that will overwrite it with your custom url:
 
-```bash
-$ cp behat.yml.dist behat.yml
-$ vi behat.yml
+```yaml
+imports: ["behat.yml.dist"]
+
+default:
+    extensions:
+        Behat\MinkExtension:
+            base_url: http://my.custom.url
 ```
 
 Then download [Selenium Server](http://seleniumhq.org/download/), and run it:
 
 ```bash
-$ java -jar selenium-server-standalone-2.41.0.jar
+$ java -jar selenium-server-standalone.jar
 ```
 
 Then setup your test database:
@@ -72,8 +76,7 @@ $ php app/console doctrine:schema:create --env=test
 You can run Behat using the following commands:
 
 ```bash
-$ bin/behat # In order to run tests which don't need JS support
-$ bin/behat -p javascript # In order to run tests which need JS support
+$ bin/behat
 ```
 
 Troubleshooting

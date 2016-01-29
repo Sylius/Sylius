@@ -10,4 +10,4 @@ cached:
 
     gherkin:
         filters:
-            tags: "~@javascript && ~@contact"
+            tags: "~@ignore"

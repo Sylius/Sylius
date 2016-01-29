@@ -1,4 +1,4 @@
-@contact
+@contact @ignore
 Feature: Contact requesting
     In order to get help from customer support
     As a visitor

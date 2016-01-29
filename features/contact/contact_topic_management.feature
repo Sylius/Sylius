@@ -1,4 +1,4 @@
-@contact
+@contact @ignore
 Feature: Contact topics management
     In order to improve customer support
     As a store owner
