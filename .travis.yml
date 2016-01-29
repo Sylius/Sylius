@@ -70,10 +70,9 @@ script:
 
     - bin/phpspec run --no-interaction -f dot
     - bin/phpunit
-    - bin/behat --strict -f progress -p cached
 
     - etc/travis/prepare-javascript
-    - bin/behat --strict -f progress -p javascript_cached || bin/behat --strict -f progress -p javascript_cached --rerun
+    - bin/behat --strict -f progress -p cached || bin/behat --strict -f progress -p cached --rerun
 
 before_cache:
     - yes 'Y' | rm -fr vendor/symfony-cmf/create-bundle/Resources/public/vendor/*
