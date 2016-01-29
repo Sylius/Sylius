@@ -11,8 +11,8 @@
 
 namespace Sylius\Behat\Page\Checkout;
 
+use Sylius\Behat\SymfonyPageObjectExtension\Page\SymfonyPage;
 use Behat\Mink\Exception\ElementNotFoundException;
-use Sylius\Behat\PageObjectExtension\Page\SymfonyPage;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>

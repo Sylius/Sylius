@@ -9,18 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\PageObjectExtension\Factory;
+namespace Sylius\Behat\SymfonyPageObjectExtension\Factory;
 
 use Behat\Mink\Mink;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Factory;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Factory\ClassNameResolver;
-use Sylius\Behat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\SymfonyPageObjectExtension\Page\SymfonyPage;
 use Symfony\Cmf\Component\Routing\ChainRouterInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class PageObjectFactory implements Factory
+final class SymfonyPageObjectFactory implements Factory
 {
     /**
      * @var Factory

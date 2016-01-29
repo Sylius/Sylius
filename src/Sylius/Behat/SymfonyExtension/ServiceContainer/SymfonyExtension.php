@@ -9,21 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Symfony2Extension\ServiceContainer;
+namespace Sylius\Behat\SymfonyExtension\ServiceContainer;
 
 use Behat\MinkExtension\ServiceContainer\MinkExtension;
-use Behat\Symfony2Extension\ServiceContainer\Symfony2Extension as BaseSymfony2Extension;
+use Behat\Symfony2Extension\ServiceContainer\Symfony2Extension;
 use Behat\Testwork\ServiceContainer\Extension;
 use Behat\Testwork\ServiceContainer\ExtensionManager;
-use Sylius\Behat\Symfony2Extension\Factory\IsolatedSymfonyFactory;
+use Sylius\Behat\SymfonyExtension\Factory\IsolatedSymfonyFactory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class Symfony2Extension implements Extension
+final class SymfonyExtension implements Extension
 {
+    const KERNEL_ID = Symfony2Extension::KERNEL_ID;
     const DRIVER_KERNEL_ID = 'sylius_symfony2_extension.kernel';
 
     /**
@@ -31,7 +32,7 @@ final class Symfony2Extension implements Extension
      */
     public function getConfigKey()
     {
-        return 'sylius_symfony2';
+        return 'sylius_symfony';
     }
 
     /**
@@ -63,7 +64,7 @@ final class Symfony2Extension implements Extension
     public function load(ContainerBuilder $container, array $config)
     {
         // Duplicates application kernel in order to separate contexts' container from driver's container
-        $container->setDefinition(self::DRIVER_KERNEL_ID, $container->getDefinition(BaseSymfony2Extension::KERNEL_ID));
+        $container->setDefinition(self::DRIVER_KERNEL_ID, $container->findDefinition(self::KERNEL_ID));
     }
 
     /**
