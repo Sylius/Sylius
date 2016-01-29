@@ -3,7 +3,4 @@
 
 imports:
     - profiles/default.yml
-    - profiles/javascript.yml
-
     - profiles/cached.yml
-    - profiles/javascript_cached.yml
