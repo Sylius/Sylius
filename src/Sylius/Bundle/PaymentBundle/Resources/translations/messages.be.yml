@@ -14,7 +14,7 @@ sylius:
       amount: Сума плацяжу
       method: Метад аплаты
       state:
-        0: Статус аплаты
+        header: Статус аплаты
         checkout: Афрмленне замовы
         completed: Завершана
         failed: Памылка
@@ -30,3 +30,6 @@ sylius:
       enabled: Уключана?
       gateway: Шлюз
       name: Назва
+      fee_calculator:
+        fixed:
+          amount: Сума

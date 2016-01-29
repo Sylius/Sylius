@@ -39,7 +39,7 @@ class UserRegistrationFormListener implements EventSubscriberInterface
     {
         $customer = $event->getData();
         if (!$customer instanceof CustomerInterface) {
-            throw new UnexpectedTypeException($customer, 'Sylius\Component\User\Model\CustomerInterface');
+            throw new UnexpectedTypeException($customer, CustomerInterface::class);
         }
 
         if (null !== $user = $customer->getUser()) {

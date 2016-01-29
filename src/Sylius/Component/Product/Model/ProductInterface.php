@@ -15,6 +15,7 @@ use Sylius\Component\Archetype\Model\ArchetypeSubjectInterface;
 use Sylius\Component\Resource\Model\SlugAwareInterface;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\ToggleableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -25,6 +26,7 @@ interface ProductInterface extends
     SlugAwareInterface,
     SoftDeletableInterface,
     TimestampableInterface,
+    ToggleableInterface,
     ProductTranslationInterface
 {
     /**
@@ -41,4 +43,14 @@ interface ProductInterface extends
      * @param null|\DateTime $availableOn
      */
     public function setAvailableOn(\DateTime $availableOn = null);
+
+    /**
+     * @return \DateTime
+     */
+    public function getAvailableUntil();
+
+    /**
+     * @param null|\DateTime $availableUntil
+     */
+    public function setAvailableUntil(\DateTime $availableUntil = null);
 }

@@ -6,3 +6,4 @@ sylius:
     locale:
       code: Codi
       enabled: Activat
+      name: Nom

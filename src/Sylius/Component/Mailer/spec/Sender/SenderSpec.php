@@ -17,9 +17,9 @@ use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Mailer\Provider\DefaultSettingsProviderInterface;
 use Sylius\Component\Mailer\Provider\EmailProvider;
 use Sylius\Component\Mailer\Provider\EmailProviderInterface;
+use Sylius\Component\Mailer\Renderer\Adapter\AdapterInterface as RendererAdapterInterface;
 use Sylius\Component\Mailer\Renderer\RenderedEmail;
 use Sylius\Component\Mailer\Sender\Adapter\AdapterInterface as SenderAdapterInterface;
-use Sylius\Component\Mailer\Renderer\Adapter\AdapterInterface as RendererAdapterInterface;
 
 
 /**

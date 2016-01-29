@@ -11,12 +11,12 @@
 
 namespace Sylius\Bundle\LocaleBundle\Controller;
 
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Component\Locale\Context\LocaleContextInterface;
+use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Sylius\Component\Locale\Provider\LocaleProviderInterface;
-use Sylius\Component\Locale\Context\LocaleContextInterface;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

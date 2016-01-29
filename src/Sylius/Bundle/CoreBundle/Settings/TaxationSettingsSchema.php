@@ -15,6 +15,7 @@ use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
 use Sylius\Bundle\SettingsBundle\Transformer\ObjectToIdentifierTransformer;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -51,7 +52,7 @@ class TaxationSettingsSchema implements SchemaInterface
                 'default_tax_zone'
             ))
             ->setAllowedTypes(array(
-                'default_tax_zone' => array('null', 'Sylius\Component\Addressing\Model\ZoneInterface'),
+                'default_tax_zone' => array('null', ZoneInterface::class),
             ))
             ->setTransformer('default_tax_zone', new ObjectToIdentifierTransformer($this->zoneRepository))
         ;

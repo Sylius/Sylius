@@ -13,10 +13,12 @@ sylius:
     payment:
       amount: Suma platby
       method: Spôsob platby
+      fee_calculator: Vypočet poplatku
       state:
-        0: Stav platby
+        header: Stav platby
         checkout: Košík
         completed: Dokončené
+        authorized: Povolené
         failed: Neúspešné
         new: Nová
         pending: Čakajúca
@@ -30,3 +32,8 @@ sylius:
       enabled: Povolené?
       gateway: Brána
       name: Názov
+      fee_calculator:
+        fixed:
+          amount: Suma
+        percent:
+          percent: '%'

@@ -6,24 +6,24 @@ sylius:
     menu:
       main:
         assortment: Utvalg
+        blocks: Blokker
         configuration: Konfigurasjon
         countries: Land
-        customer: Kunder
+        content: Innhold
         dashboard: Panel
-        exchange_rates: Valutakurser
         general_settings: Generelle instillinger
+        groups: Grupper
         homepage: Butikken
         locales: Nasjonale innstillinger
         new_order: Legg til ny ordre
         new_promotion: Legg til ny kampanje
         options: Administrere produktalternativer
         orders: Gjeldende ordrer
+        pages: Sider
         payment_methods: Betalingsmetoder
         payments: Betalinger
         products: Produkter
         promotions: Kampanjer
-        properties: Konfigurer egenskaper
-        prototypes: Produktprototyper
         sales: Bestillinger
         shipments: Forsendelser
         shipping_categories: Fraktkategorier
@@ -33,17 +33,15 @@ sylius:
         tax_rates: Skattesatser
         taxation_settings: Beskatningsinnstillinger
         taxonomies: Kategorisering
-        users: Brukere
         zones: Soner
+        roles: Roller
       sidebar:
         assortment: Utvalg
         blocks: Blokker
         configuration: Konfigurasjon
         content: Innhold
         countries: Land
-        customer: Kunder
         dashboard: Panel
-        exchange_rates: Valutakurser
         general_settings: Generelle instillinger
         groups: Grupper
         homepage: Tilbake til frontend
@@ -53,23 +51,23 @@ sylius:
         options: Endre innstillinger
         orders: Gjeldende ordrer
         pages: Sider
+        routes: Ruter
         payment_methods: Betalingsmetoder
         payments: Betalinger
         products: Produkter
         promotions: Kampanjer
-        properties: Konfigurer egenskaper
-        prototypes: Produktprototyper
         sales: Bestillinger
         shipments: Forsendelser
         shipping_categories: Fraktkategorier
         shipping_methods: Leveringsmetoder
+        slideshow: Lysbildevisning
         stockables: Lagernivåer
         tax_categories: Beskatningskategorier
         tax_rates: Skattesatser
         taxation_settings: Beskatningsinnstillinger
         taxonomies: Kategorisering
-        users: Brukere
         zones: Soner
+        roles: Roller
   frontend:
     menu:
       account:

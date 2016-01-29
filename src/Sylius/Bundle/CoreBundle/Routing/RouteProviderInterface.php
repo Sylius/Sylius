@@ -11,7 +11,6 @@
 namespace Sylius\Bundle\CoreBundle\Routing;
 
 use Symfony\Cmf\Component\Routing\RouteProviderInterface as BaseRouteProviderInterface;
-use Doctrine\Common\Persistence\ObjectRepository;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>

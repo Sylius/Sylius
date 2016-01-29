@@ -13,31 +13,32 @@ namespace spec\Sylius\Bundle\InstallerBundle\Requirement;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\InstallerBundle\Requirement\Requirement;
+use Sylius\Bundle\InstallerBundle\Requirement\RequirementCollection;
 
 class RequirementCollectionSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('PHP version and settings');
+        $this->beConstructedWith('PHP Version and Settings');
     }
 
     function it_is_a_iterator_aggregate()
     {
-        $this->shouldBeAnInstanceOf('IteratorAggregate');
+        $this->shouldBeAnInstanceOf(\IteratorAggregate::class);
     }
 
     function it_gets_label()
     {
-        $this->getLabel()->shouldReturn('PHP version and settings');
+        $this->getLabel()->shouldReturn('PHP Version and Settings');
     }
 
     function it_gets_iterator()
     {
-        $this->getIterator()->shouldHaveType('ArrayIterator');
+        $this->getIterator()->shouldHaveType(\ArrayIterator::class);
     }
 
     function its_add_should_have_fluent_interface(Requirement $requirement)
     {
-        $this->add($requirement)->shouldHaveType('Sylius\Bundle\InstallerBundle\Requirement\RequirementCollection');
+        $this->add($requirement)->shouldHaveType(RequirementCollection::class);
     }
 }

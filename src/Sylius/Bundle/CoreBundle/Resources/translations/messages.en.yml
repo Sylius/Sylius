@@ -30,7 +30,9 @@ sylius:
             roles: Roles
         channel:
             taxonomies: Taxonomies
+            locale_default: Default locale
             locales: Locales
+            currency_default: Default currency
             currencies: Currencies
             shipping_methods: Shipping Methods
             payment_methods: Payment Methods
@@ -57,6 +59,7 @@ sylius:
             short_description: Short description
             tax_category: Tax category
             variant_selection_method: Variant selection method
+            main_taxon: Main taxon
         product_filter:
             name: Name
             sku: SKU
@@ -116,6 +119,7 @@ sylius:
             images: Images
             on_hand: Current stock
             price: Price
+            original_price: Original price
             sku: SKU
             weight: Weight
             width: Width

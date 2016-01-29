@@ -13,8 +13,11 @@ namespace spec\Sylius\Bundle\ArchetypeBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ArchetypeBundle\Form\EventListener\ParentArchetypeListener;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Symfony\Component\Form\FormBuilder;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\FormTypeInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Adam Elsodaney <adam.elso@gmail.com>
@@ -33,18 +36,23 @@ class ArchetypeTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
-            ->add('code', 'text', Argument::any())
+            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
             ->willReturn($builder)
         ;
 
         $builder
             ->add('translations', 'a2lix_translationsForms', Argument::any())
+            ->willReturn($builder)
+        ;
+
+        $builder
+            ->addEventSubscriber(Argument::type(ParentArchetypeListener::class))
             ->willReturn($builder)
         ;
 
@@ -66,7 +74,7 @@ class ArchetypeTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
+    function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
@@ -74,7 +82,7 @@ class ArchetypeTypeSpec extends ObjectBehavior
                 'validation_groups' => array('sylius')
             ))->shouldBeCalled();
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 
     function it_has_valid_name()

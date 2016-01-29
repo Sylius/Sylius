@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    menu:
+      name: Ime
+    menu_block:
+      name: Ime
+    redirect_route:
+      name: Ime
+    route:
+      name: Ime
+    string_block:
+      id: ID
+      name: Ime

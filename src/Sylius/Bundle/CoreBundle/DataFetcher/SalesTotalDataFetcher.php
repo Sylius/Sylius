@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\DataFetcher;
 
-use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Bundle\ReportBundle\DataFetcher\TimePeriod;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Report\DataFetcher\DefaultDataFetchers;
 
 /**

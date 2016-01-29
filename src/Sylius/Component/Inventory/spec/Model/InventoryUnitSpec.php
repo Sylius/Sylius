@@ -27,7 +27,7 @@ class InventoryUnitSpec extends ObjectBehavior
 
     function it_implements_Sylius_inventory_unit_interface()
     {
-        $this->shouldImplement('Sylius\Component\Inventory\Model\InventoryUnitInterface');
+        $this->shouldImplement(InventoryUnitInterface::class);
     }
 
     function it_has_no_id_by_default()

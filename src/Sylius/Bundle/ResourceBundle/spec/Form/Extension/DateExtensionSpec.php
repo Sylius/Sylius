@@ -13,9 +13,10 @@ namespace spec\Sylius\Bundle\ResourceBundle\Form\Extension;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DateExtensionSpec extends ObjectBehavior
 {
@@ -26,7 +27,7 @@ class DateExtensionSpec extends ObjectBehavior
 
     function it_should_extends_abstract_type_extension()
     {
-        $this->shouldHaveType('Symfony\Component\Form\AbstractTypeExtension');
+        $this->shouldHaveType(AbstractTypeExtension::class);
     }
 
     function it_should_build_the_view_by_default(FormView $view, FormInterface $form)
@@ -40,23 +41,21 @@ class DateExtensionSpec extends ObjectBehavior
         ));
     }
 
-    function it_should_configure_the_resolver(OptionsResolverInterface $resolver)
+    function it_should_configure_the_resolver(OptionsResolver $resolver)
     {
         $resolver->setDefaults(Argument::type('array'))->shouldBeCalled();
 
-        $resolver->setOptional(array(
+        $resolver->setDefined(array(
             'placeholder',
             'language',
             'leading_zero',
         ))->shouldBeCalled();
 
-        $resolver->setAllowedTypes(array(
-            'placeholder' => array('string'),
-            'language' => array('string'),
-            'leading_zero' => array('bool'),
-        ))->shouldBeCalled();
+        $resolver->setAllowedTypes('placeholder', 'string')->shouldBeCalled();
+        $resolver->setAllowedTypes('language', 'string')->shouldBeCalled();
+        $resolver->setAllowedTypes('leading_zero', 'bool')->shouldBeCalled();
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 
     function it_has_extended_type()

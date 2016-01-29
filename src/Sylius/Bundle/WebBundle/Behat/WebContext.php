@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\WebBundle\Behat;
 
+use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Element\DocumentElement;
 use Behat\Mink\Element\NodeElement;
@@ -18,7 +19,6 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Sylius\Bundle\ResourceBundle\Behat\WebContext as BaseWebContext;
 use Symfony\Component\Intl\Intl;
-use Behat\Behat\Context\SnippetAcceptingContext;
 
 /**
  * Web context.
@@ -46,11 +46,24 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     }
 
     /**
-     * @Given /^go to "([^""]*)" tab$/
+     * @Given /^(?:|I )go to "([^""]*)" tab$/
      */
     public function goToTab($tabLabel)
     {
-        $this->getSession()->getPage()->find('css', sprintf('.nav-tabs a:contains("%s")', $tabLabel))->click();
+        $tabContainer = $this->getSession()->getPage()->find('css', sprintf('.nav-tabs li:contains("%s")', $tabLabel));
+        $tabContainer->find('css', 'a')->click();
+
+        $this->waitForTabToActivate($tabContainer);
+    }
+
+    /**
+     * @param NodeElement $tabContainer
+     */
+    protected function waitForTabToActivate($tabContainer)
+    {
+        $this->waitFor(function () use ($tabContainer) {
+            return false !== strpos($tabContainer->getAttribute('class'), 'active');
+        });
     }
 
     /**
@@ -480,7 +493,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iAmNotAuthenticated()
     {
-        $this->getSecurityContext()->setToken(null);
+        $this->getTokenStorage()->setToken(null);
         $this->getContainer()->get('session')->invalidate();
     }
 
@@ -501,10 +514,20 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iAddFollowingOptionValues(TableNode $table)
     {
-        foreach ($table->getRows() as $i => $value) {
+        foreach ($table->getRows() as $value) {
             $newItem = $this->addNewItemToFormCollection($this->getSession()->getPage(), 'option_values');
-            $newItem->fillField('Value', $value[0]);
+            $newItem->fillField('Value', $value[1]);
+            $newItem->fillField('Code', $value[0]);
         }
+    }
+
+     /**
+      * @When /^I add option value "([^""]*)"$/
+      */
+    public function iAddOptionValue($optionValue)
+    {
+        $newItem = $this->addNewItemToFormCollection($this->getSession()->getPage(), 'option_values');
+        $newItem->fillField('Value', $optionValue);
     }
 
     /**
@@ -701,6 +724,15 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
         $this->fillField('New password', $newPassword);
         $this->fillField('Confirmation', $newPassword);
         $this->pressButton('Save changes');
+    }
+
+    /**
+     * @Then the code field should be disabled
+     * @Then I should see disabled code field
+     */
+    public function theCodeFieldShouldBeDisabled()
+    {
+        $this->assertSession()->elementAttributeContains('css', '[id$="code"]', 'disabled', 'disabled');
     }
 
     private function assertRoute($route)

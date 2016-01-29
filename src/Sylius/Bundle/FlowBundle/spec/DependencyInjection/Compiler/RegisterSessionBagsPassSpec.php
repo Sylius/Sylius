@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\FlowBundle\DependencyInjection\Compiler;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
@@ -25,7 +26,7 @@ class RegisterSessionBagsPassSpec extends ObjectBehavior
 
     function it_is_compiler_pass()
     {
-        $this->shouldImplement('Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface');
+        $this->shouldImplement(CompilerPassInterface::class);
     }
 
     function it_processes(ContainerBuilder $container, Definition $session)

@@ -11,11 +11,11 @@
 
 namespace spec\Sylius\Bundle\UserBundle\EventListener;
 
-use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Sylius\Component\Mailer\Sender\SenderInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
-use Sylius\Component\Mailer\Sender\SenderInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>

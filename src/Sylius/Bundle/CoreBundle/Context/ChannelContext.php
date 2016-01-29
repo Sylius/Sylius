@@ -11,31 +11,53 @@
 
 namespace Sylius\Bundle\CoreBundle\Context;
 
-use Sylius\Component\Channel\Context\ChannelContext as BaseChannelContext;
 use Sylius\Component\Core\Channel\ChannelContextInterface;
 use Sylius\Component\Core\Channel\ChannelResolverInterface;
-use Symfony\Component\HttpKernel\Event\KernelEvent;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
-
+use Sylius\Component\Channel\Model\ChannelInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Core channel context, which is aware of multiple channels.
  *
  * @author Kristian Løvstrøm <kristian@loevstroem.dk>
+ * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ChannelContext extends BaseChannelContext implements ChannelContextInterface
+final class ChannelContext implements ChannelContextInterface
 {
+    /**
+     * @var ChannelInterface
+     */
+    private $channel;
+
+    /**
+     * @var string
+     */
+    private $latestHostname = null;
+
+    /**
+     * @var bool
+     */
+    private $isFresh = false;
+
     /**
      * @var ChannelResolverInterface
      */
-    protected $channelResolver;
+    private $channelResolver;
+
+    /**
+     * @var RequestStack
+     */
+    private $requestStack;
 
     /**
      * @param ChannelResolverInterface $channelResolver
+     * @param RequestStack $requestStack
      */
-    public function __construct(ChannelResolverInterface $channelResolver)
+    public function __construct(ChannelResolverInterface $channelResolver, RequestStack $requestStack)
     {
         $this->channelResolver = $channelResolver;
+        $this->requestStack = $requestStack;
     }
 
     /**
@@ -43,19 +65,39 @@ class ChannelContext extends BaseChannelContext implements ChannelContextInterfa
      */
     public function getChannel()
     {
-        if (null === $this->channel) {
-            $this->channel = $this->channelResolver->resolve();
+        $this->scheduleRefreshIfHostnameHaveChanged($this->requestStack->getMasterRequest());
+
+        if (false === $this->isFresh) {
+            $this->channel = $this->channelResolver->resolve($this->latestHostname);
+            $this->isFresh = true;
         }
+
         return $this->channel;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function onKernelRequest(KernelEvent $event)
+    public function setChannel(ChannelInterface $channel)
     {
-        if ($event->getRequestType() === HttpKernelInterface::MASTER_REQUEST) {
-            $this->channel = $this->channelResolver->resolve($event->getRequest()->getHost());
+        $this->channel = $channel;
+    }
+
+    /**
+     * @param Request $request
+     */
+    private function scheduleRefreshIfHostnameHaveChanged(Request $request = null)
+    {
+        if (null === $request) {
+            return;
         }
+
+        $hostname = $request->getHost();
+        if ($this->latestHostname === $hostname) {
+            return;
+        }
+
+        $this->latestHostname = $hostname;
+        $this->isFresh = false;
     }
 }

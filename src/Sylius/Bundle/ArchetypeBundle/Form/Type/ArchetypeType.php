@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\ArchetypeBundle\Form\Type;
 
+use Sylius\Bundle\ArchetypeBundle\Form\EventListener\ParentArchetypeListener;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -45,17 +47,11 @@ class ArchetypeType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('code', 'text', array(
-                'label' => 'sylius.form.archetype.code'
-            ))
+            ->addEventSubscriber(new ParentArchetypeListener($this->subject))
+            ->addEventSubscriber(new AddCodeFormSubscriber())
             ->add('translations', 'a2lix_translationsForms', array(
                 'form_type' => sprintf('sylius_%s_archetype_translation', $this->subject),
                 'label'    => 'sylius.form.archetype.name'
-            ))
-            ->add('parent', sprintf('sylius_%s_archetype_choice', $this->subject), array(
-                'required' => false,
-                'label' => 'sylius.form.archetype.parent',
-                'property' => 'name'
             ))
             ->add('attributes', sprintf('sylius_%s_attribute_choice', $this->subject), array(
                 'required' => false,

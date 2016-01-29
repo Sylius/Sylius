@@ -7,15 +7,15 @@ Feature: Browsing products by taxonomies
     Background:
         Given store has default configuration
           And there are following taxonomies defined:
-            | name     |
-            | Category |
-            | Special  |
+            | code | name     |
+            | TRX1 | Category |
+            | TRX2 | Special  |
           And taxonomy "Category" has following taxons:
-            | Clothing > T-Shirts |
-            | Clothing > Shorts   |
+            | Clothing[TX1] > T-Shirts[TX2] |
+            | Clothing[TX1] > Shorts[TX3]   |
           And taxonomy "Special" has following taxons:
-            | Featured |
-            | New      |
+            | Featured[TX4] |
+            | New[TX5]      |
           And the following products exist:
             | name          | price | taxons   |
             | Super T-Shirt | 19.99 | T-Shirts |

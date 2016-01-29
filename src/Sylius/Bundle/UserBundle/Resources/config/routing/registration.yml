@@ -7,5 +7,5 @@ sylius_user_registration:
             form: sylius_customer_registration
             event: register
             template: SyliusUserBundle::register.html.twig
-            redirect: referrer
+            redirect: referer
             permission: false

@@ -13,9 +13,11 @@ namespace spec\Sylius\Component\Product\Model;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Resource\Model\ToggleableInterface;
 use Sylius\Component\Product\Model\ArchetypeInterface;
 use Sylius\Component\Product\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\OptionInterface;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\VariantInterface;
 
 /**
@@ -37,7 +39,12 @@ class ProductSpec extends ObjectBehavior
 
     function it_implements_Sylius_product_interface()
     {
-        $this->shouldImplement('Sylius\Component\Product\Model\ProductInterface');
+        $this->shouldImplement(ProductInterface::class);
+    }
+
+    function it_implements_toggleable_interface()
+    {
+        $this->shouldImplement(ToggleableInterface::class);
     }
 
     function it_has_no_id_by_default()
@@ -91,7 +98,7 @@ class ProductSpec extends ObjectBehavior
 
     function it_initializes_availability_date_by_default()
     {
-        $this->getAvailableOn()->shouldHaveType('DateTime');
+        $this->getAvailableOn()->shouldHaveType(\DateTime::class);
     }
 
     function it_is_available_by_default()
@@ -233,7 +240,7 @@ class ProductSpec extends ObjectBehavior
 
     function it_initializes_creation_date_by_default()
     {
-        $this->getCreatedAt()->shouldHaveType('DateTime');
+        $this->getCreatedAt()->shouldHaveType(\DateTime::class);
     }
 
     function its_creation_date_is_mutable()
@@ -286,5 +293,19 @@ class ProductSpec extends ObjectBehavior
 
         $this->setDeletedAt($deletedAt);
         $this->shouldNotBeDeleted();
+    }
+
+    function it_is_enabled_by_default()
+    {
+        $this->shouldBeEnabled();
+    }
+
+    function it_is_toggleable()
+    {
+        $this->disable();
+        $this->shouldNotBeEnabled();
+
+        $this->enable();
+        $this->shouldBeEnabled();
     }
 }

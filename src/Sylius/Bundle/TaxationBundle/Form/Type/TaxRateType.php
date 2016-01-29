@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\TaxationBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -43,6 +44,7 @@ class TaxRateType extends AbstractResourceType
             ->add('calculator', 'sylius_tax_calculator_choice', array(
                 'label' => 'sylius.form.tax_rate.calculator',
             ))
+            ->addEventSubscriber(new AddCodeFormSubscriber())
         ;
     }
 

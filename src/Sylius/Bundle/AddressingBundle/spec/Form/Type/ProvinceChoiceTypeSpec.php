@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\AddressingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Symfony\Component\Form\FormTypeInterface;
 
 /**
  * @author Julien Janvier <j.janvier@gmail.com>
@@ -31,7 +32,7 @@ class ProvinceChoiceTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_has_a_valid_name()

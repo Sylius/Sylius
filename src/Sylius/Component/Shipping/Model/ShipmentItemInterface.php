@@ -11,18 +11,14 @@
 
 namespace Sylius\Component\Shipping\Model;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface ShipmentItemInterface extends TimestampableInterface
+interface ShipmentItemInterface extends TimestampableInterface, ResourceInterface
 {
-    /**
-     * @return mixed
-     */
-    public function getId();
-
     /**
      * @return ShipmentInterface
      */

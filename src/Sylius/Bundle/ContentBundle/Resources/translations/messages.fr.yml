@@ -8,12 +8,17 @@ sylius:
     action_block:
       action_name: "Nom de l'action"
       id: Id
+      publish_end_date: Date de dépublication
+      publish_start_date: Date de début de publication
     imagine_block:
-      parent: Parent
+      filter: Filtrer
+      image: Image
       internal_name: Nom interne
-      slideshow_small: Grand Carrousel (largeur max.)
+      label: Label
+      parent: Parent
+      publish_end_date: Date de dépublication
+      publish_start_date: Date de début de publication
       slideshow_medium: Carrousel moyen (contenu)
-      slideshow_large: Carrousel Petit (latéral)
     menu:
       childrens: Enfants
       display: Afficher
@@ -21,12 +26,16 @@ sylius:
       label: Label
       name: Nom
       parent: Parent
+      publish_end_date: Date de dépublication
+      publish_start_date: Date de début de publication
       route: Route
       uri: URI
     menu_block:
       body: Corps
       id: Id
       name: Nom
+      publish_end_date: Date de dépublication
+      publish_start_date: Date de début de publication
     menu_node_block:
       content: Contenu
       display: Afficher
@@ -34,9 +43,8 @@ sylius:
       internal_name: Nom interne
       label: Label
       link_type: Type de lien
-      publish_end_date: Date de fin publication
+      publish_end_date: Date de dépublication
       publish_start_date: Date de début de publication
-      publishable: Publiable
       route: Route
       uri: URI
     redirect_route:
@@ -47,6 +55,8 @@ sylius:
     reference_block:
       body: Corps
       id: Id
+      publish_end_date: Date de dépublication
+      publish_start_date: Date de début de publication
       title: Titre
     route:
       content: Contenu
@@ -56,11 +66,15 @@ sylius:
       body: Corps
       internal_name: Nom interne
       parent: Parent
+      publish_end_date: Date de dépublication
+      publish_start_date: Date de début de publication
       title: Titre
     slideshow_block:
       childrens: Enfants
       internal_name: Nom interne
       parent: Parent
+      publish_end_date: Date de dépublication
+      publish_start_date: Date de début de publication
       title: Titre
     static_content:
       body: Corps
@@ -68,12 +82,13 @@ sylius:
       internal_name: Nom interne
       menu_nodes: Nœuds de menu
       parent: Parent
-      publish_end_date: Date de fin publication
+      publish_end_date: Date de dépublication
       publish_start_date: Date de début de publication
-      publishable: Publiable
       routes: Chemins
       title: Titre
     string_block:
       body: Corps
       id: ID
       name: Nom
+      publish_end_date: Date de dépublication
+      publish_start_date: Date de début de publication

@@ -12,19 +12,22 @@
 namespace Sylius\Bundle\ResourceBundle\Behat;
 
 use Behat\Behat\Context\Context;
+use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
-use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory as FakerFactory;
 use Faker\Generator;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Intl\Intl;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 abstract class DefaultContext extends RawMinkContext implements Context, KernelAwareContext
@@ -52,7 +55,12 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     /**
      * @var KernelInterface
      */
-    protected $kernel;
+    private $kernel;
+
+    /**
+     * @var KernelInterface
+     */
+    private static $sharedKernel;
 
     public function __construct($applicationName = null)
     {
@@ -71,6 +79,11 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     public function setKernel(KernelInterface $kernel)
     {
         $this->kernel = $kernel;
+
+        if (null === self::$sharedKernel) {
+            self::$sharedKernel = clone $kernel;
+            self::$sharedKernel->boot();
+        }
     }
 
     /**
@@ -116,6 +129,16 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     protected function getRepository($resourceName)
     {
         return $this->getService($this->applicationName.'.repository.'.$resourceName);
+    }
+
+    /**
+     * @param string $resourceName
+     *
+     * @return FactoryInterface
+     */
+    protected function getFactory($resourceName)
+    {
+        return $this->getService($this->applicationName.'.factory.'.$resourceName);
     }
 
     /**
@@ -205,7 +228,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
         }
 
         $route  = str_replace(' ', '_', trim($page));
-        $routes = $this->getContainer()->get('router')->getRouteCollection();
+        $routes = $this->getRouter()->getRouteCollection();
 
         if (null === $routes->get($route)) {
             $route = $this->applicationName.'_'.$route;
@@ -230,7 +253,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      */
     protected function getUser()
     {
-        $token = $this->getSecurityContext()->getToken();
+        $token = $this->getTokenStorage()->getToken();
 
         if (null === $token) {
             throw new \Exception('No token found in security context.');
@@ -240,11 +263,19 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     }
 
     /**
-     * @return SecurityContextInterface
+     * @return TokenStorageInterface
      */
-    protected function getSecurityContext()
+    protected function getTokenStorage()
     {
-        return $this->getContainer()->get('security.context');
+        return $this->getContainer()->get('security.token_storage');
+    }
+
+    /**
+     * @return AuthorizationCheckerInterface
+     */
+    protected function getAuthorizationChecker()
+    {
+        return $this->getContainer()->get('security.authorization_checker');
     }
 
     /**
@@ -256,7 +287,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      */
     protected function generateUrl($route, array $parameters = array(), $absolute = false)
     {
-        return $this->locatePath($this->getService('router')->generate($route, $parameters, $absolute));
+        return $this->locatePath($this->getRouter()->generate($route, $parameters, $absolute));
     }
 
     /**
@@ -456,8 +487,6 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     }
 
     /**
-     * Callback can return any value, to stop waiting use anonymous function provided as first argument.
-     *
      * @param callable $callback
      * @param int $limit
      * @param int $delay In miliseconds
@@ -466,12 +495,12 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      *
      * @throws \RuntimeException If timeout was reached
      */
-    protected function waitFor(callable $callback, $limit = 10, $delay = 100)
+    protected function waitFor(callable $callback, $limit = 30, $delay = 100)
     {
         for ($i = 0; $i < $limit; ++$i) {
             $payload = $callback();
 
-            if (null !== $payload) {
+            if (!empty($payload)) {
                 return $payload;
             }
 
@@ -521,5 +550,39 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
         }
 
         return $code;
+    }
+
+    /**
+     * @return RouterInterface
+     */
+    protected function getRouter()
+    {
+        return $this->getSharedService('router');
+    }
+
+    /**
+     * @return KernelInterface
+     */
+    protected function getKernel()
+    {
+        return $this->kernel;
+    }
+
+    /**
+     * @return KernelInterface
+     */
+    protected function getSharedKernel()
+    {
+        return self::$sharedKernel;
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return object
+     */
+    protected function getSharedService($id)
+    {
+        return self::$sharedKernel->getContainer()->get($id);
     }
 }

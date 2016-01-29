@@ -11,12 +11,14 @@
 
 namespace Sylius\Component\Taxation\Model;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface TaxRateInterface extends TimestampableInterface
+interface TaxRateInterface extends CodeAwareInterface, TimestampableInterface, ResourceInterface
 {
     /**
      * @return TaxCategoryInterface

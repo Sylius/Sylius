@@ -25,4 +25,9 @@ interface TaxonRepositoryInterface
      * @return Collection|TaxonInterface[]
      */
     public function getTaxonsAsList(TaxonomyInterface $taxonomy);
+
+    /**
+     * @return Collection|TaxonInterface[]
+     */
+    public function getNonRootTaxons();
 }

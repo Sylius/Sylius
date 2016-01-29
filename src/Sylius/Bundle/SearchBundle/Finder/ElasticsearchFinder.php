@@ -194,7 +194,7 @@ class ElasticsearchFinder extends AbstractFinder
             $channelFilter = new \Elastica\Filter\Terms();
             $channelFilter->setTerms('channels', array((string)$channel));
             $boolFilter->addMust($channelFilter);
-            $elasticaQuery->setFilter($boolFilter);
+            $elasticaQuery->setPostFilter($boolFilter);
         }
 
         $query = new \Elastica\Query\Filtered();

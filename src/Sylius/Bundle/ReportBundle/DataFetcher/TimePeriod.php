@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\ReportBundle\DataFetcher;
 
-use Sylius\Component\Report\DataFetcher\DataFetcherInterface;
 use Sylius\Component\Report\DataFetcher\Data;
+use Sylius\Component\Report\DataFetcher\DataFetcherInterface;
 
 /**
  * Abstract class to provide time periods logic.

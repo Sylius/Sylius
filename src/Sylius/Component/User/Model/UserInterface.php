@@ -14,6 +14,7 @@
 namespace Sylius\Component\User\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
@@ -23,13 +24,15 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-interface UserInterface extends AdvancedUserInterface, \Serializable, TimestampableInterface, SoftDeletableInterface
+interface UserInterface extends
+    AdvancedUserInterface,
+    CredentialsHolderInterface,
+    \Serializable,
+    TimestampableInterface,
+    SoftDeletableInterface,
+    ResourceInterface
 {
     const DEFAULT_ROLE = 'ROLE_USER';
-    /**
-     * @return int
-     */
-    public function getId();
 
     /**
      * @return string
@@ -79,23 +82,6 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
      * @param string $usernameCanonical
      */
     public function setUsernameCanonical($usernameCanonical);
-
-    /**
-     * @return string
-     */
-    public function getPlainPassword();
-
-    /**
-     * @param string $password
-     */
-    public function setPlainPassword($password);
-
-    /**
-     * Sets the hashed password.
-     *
-     * @param string $password
-     */
-    public function setPassword($password);
 
     /**
      * @param boolean $enabled

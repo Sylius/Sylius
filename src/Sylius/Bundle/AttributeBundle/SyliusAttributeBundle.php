@@ -11,8 +11,11 @@
 
 namespace Sylius\Bundle\AttributeBundle;
 
+use Sylius\Bundle\AttributeBundle\DependencyInjection\Compiler\RegisterAttributeFactoryPass;
+use Sylius\Bundle\AttributeBundle\DependencyInjection\Compiler\RegisterAttributeTypePass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -28,6 +31,17 @@ class SyliusAttributeBundle extends AbstractResourceBundle
         return array(
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+
+        $container->addCompilerPass(new RegisterAttributeTypePass());
+        $container->addCompilerPass(new RegisterAttributeFactoryPass());
     }
 
     /**

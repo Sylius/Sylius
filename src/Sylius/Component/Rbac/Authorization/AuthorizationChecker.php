@@ -14,7 +14,6 @@ namespace Sylius\Component\Rbac\Authorization;
 use Sylius\Component\Rbac\Model\IdentityInterface;
 use Sylius\Component\Rbac\Provider\CurrentIdentityProviderInterface;
 use Sylius\Component\Rbac\Resolver\RolesResolverInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Default authorization checker.

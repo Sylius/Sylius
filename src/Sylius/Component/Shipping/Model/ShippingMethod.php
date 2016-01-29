@@ -27,6 +27,11 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
     protected $id;
 
     /**
+     * @var string
+     */
+    protected $code;
+
+    /**
      * @var ShippingCategoryInterface
      */
     protected $category;
@@ -90,6 +95,22 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
     }
 
     /**
@@ -276,5 +297,15 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
             ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY  => 'At least 1 item have to match method category',
             ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ALL  => 'All items have to match method category',
         );
+    }
+
+    public function enable()
+    {
+        $this->enabled = true;
+    }
+
+    public function disable()
+    {
+        $this->enabled = false;
     }
 }

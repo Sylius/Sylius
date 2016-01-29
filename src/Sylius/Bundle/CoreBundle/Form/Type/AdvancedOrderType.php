@@ -11,8 +11,6 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
-use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class AdvancedOrderType extends OrderType

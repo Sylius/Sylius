@@ -12,6 +12,8 @@
 namespace spec\Sylius\Component\Product\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Attribute\Model\AttributeValue;
+use Sylius\Component\Product\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 
 /**
@@ -26,12 +28,12 @@ class AttributeValueSpec extends ObjectBehavior
 
     function it_extends_Sylius_attribute_value_model()
     {
-        $this->shouldHaveType('Sylius\Component\Attribute\Model\AttributeValue');
+        $this->shouldHaveType(AttributeValue::class);
     }
 
     function it_implements_Sylius_product_attribute_value_interface()
     {
-        $this->shouldImplement('Sylius\Component\Product\Model\AttributeValueInterface');
+        $this->shouldImplement(AttributeValueInterface::class);
     }
 
     function it_does_not_belong_to_a_product_by_default()

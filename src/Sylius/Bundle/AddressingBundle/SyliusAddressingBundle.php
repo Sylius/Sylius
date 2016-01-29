@@ -13,6 +13,11 @@ namespace Sylius\Bundle\AddressingBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Addressing\Model\ProvinceInterface;
+use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 
 /**
  * Sylius addressing and zones management bundle.
@@ -38,11 +43,11 @@ class SyliusAddressingBundle extends AbstractResourceBundle
     protected function getModelInterfaces()
     {
         return array(
-            'Sylius\Component\Addressing\Model\AddressInterface'    => 'sylius.model.address.class',
-            'Sylius\Component\Addressing\Model\CountryInterface'    => 'sylius.model.country.class',
-            'Sylius\Component\Addressing\Model\ProvinceInterface'   => 'sylius.model.province.class',
-            'Sylius\Component\Addressing\Model\ZoneInterface'       => 'sylius.model.zone.class',
-            'Sylius\Component\Addressing\Model\ZoneMemberInterface' => 'sylius.model.zone_member.class',
+            AddressInterface::class    => 'sylius.model.address.class',
+            CountryInterface::class    => 'sylius.model.country.class',
+            ProvinceInterface::class   => 'sylius.model.province.class',
+            ZoneInterface::class       => 'sylius.model.zone.class',
+            ZoneMemberInterface::class => 'sylius.model.zone_member.class',
         );
     }
 

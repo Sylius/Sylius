@@ -6,47 +6,14 @@ sylius:
     menu:
       main:
         assortment: Ассортимент
-        configuration: Настройки
-        countries: Страны
-        customer: Клиенты
-        dashboard: Приборная панель
-        exchange_rates: Курс валют
-        general_settings: Общие настройки
-        homepage: Ваш магазин
-        locales: Языки
-        new_order: Создать заказ
-        new_promotion: Создать рекламную акцию
-        options: Настройка опций
-        orders: Текущие заказы
-        payment_methods: Методы оплаты
-        payments: Платежи
-        products: Товары
-        promotions: Рекламные акции
-        properties: Настройка свойств
-        prototypes: Прототипы товаров
-        sales: Заказы
-        shipments: Посылки
-        shipping_categories: Категории доставки
-        shipping_methods: Методы доставки
-        stockables: Уровень запасов
-        tax_categories: Налоговые категории
-        tax_rates: Налоговые ставки
-        taxation_settings: Настройки налогообложения
-        taxonomies: Каталоги
-        users: Пользователи
-        zones: Зоны
-      sidebar:
-        assortment: Ассортимент
         blocks: Блоки
         configuration: Настройки
-        content: Контент
         countries: Страны
-        customer: Клиенты
+        content: Контент
         dashboard: Приборная панель
-        exchange_rates: Курсы валют
         general_settings: Общие настройки
         groups: Группы
-        homepage: Вернуться к магазину
+        homepage: Ваш магазин
         locales: Языки
         new_order: Создать заказ
         new_promotion: Создать рекламную акцию
@@ -57,19 +24,50 @@ sylius:
         payments: Платежи
         products: Товары
         promotions: Рекламные акции
-        properties: Настройка свойств
-        prototypes: Прототипы товаров
         sales: Заказы
         shipments: Посылки
         shipping_categories: Категории доставки
-        shipping_methods: Способы доставки
+        shipping_methods: Методы доставки
         stockables: Уровень запасов
         tax_categories: Налоговые категории
         tax_rates: Налоговые ставки
         taxation_settings: Настройки налогообложения
         taxonomies: Каталоги
-        users: Пользователи
         zones: Зоны
+        roles: Роли
+      sidebar:
+        assortment: Ассортимент
+        blocks: Блоки
+        configuration: Настройки
+        content: Контент
+        countries: Страны
+        dashboard: Приборная панель
+        general_settings: Общие настройки
+        groups: Группы
+        homepage: Вернуться к магазину
+        locales: Языки
+        new_order: Создать заказ
+        new_promotion: Создать рекламную акцию
+        options: Настройка опций
+        orders: Текущие заказы
+        pages: Страницы
+        routes: Маршруты
+        payment_methods: Методы оплаты
+        payments: Платежи
+        products: Товары
+        promotions: Рекламные акции
+        sales: Заказы
+        shipments: Посылки
+        shipping_categories: Категории доставки
+        shipping_methods: Способы доставки
+        slideshow: Слайд-шоу
+        stockables: Уровень запасов
+        tax_categories: Налоговые категории
+        tax_rates: Налоговые ставки
+        taxation_settings: Настройки налогообложения
+        taxonomies: Каталоги
+        zones: Зоны
+        roles: Роли
   frontend:
     menu:
       account:

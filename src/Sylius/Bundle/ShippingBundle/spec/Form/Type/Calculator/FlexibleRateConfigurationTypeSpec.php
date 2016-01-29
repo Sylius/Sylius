@@ -13,19 +13,15 @@ namespace spec\Sylius\Bundle\ShippingBundle\Form\Type\Calculator;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Test\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Arnaud Langlade <arn0d.dev@gamil.com>
  */
 class FlexibleRateConfigurationTypeSpec extends ObjectBehavior
 {
-    function let()
-    {
-        $this->beConstructedWith(array('sylius'));
-    }
-
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Form\Type\Calculator\FlexibleRateConfigurationType');
@@ -33,7 +29,7 @@ class FlexibleRateConfigurationTypeSpec extends ObjectBehavior
 
     function it_is_a_form()
     {
-        $this->shouldHaveType('Symfony\Component\Form\AbstractType');
+        $this->shouldHaveType(AbstractType::class);
     }
 
     function it_builds_a_form(FormBuilderInterface $builder)
@@ -45,18 +41,17 @@ class FlexibleRateConfigurationTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_has_options(OptionsResolverInterface $resolver)
+    function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => null,
-            'validation_groups' => array('sylius')
         ))->shouldBeCalled();
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 
     function it_has_a_name()
     {
-        $this->getName()->shouldReturn('sylius_shipping_calculator_flexible_rate_configuration');
+        $this->getName()->shouldReturn('sylius_shipping_calculator_flexible_rate');
     }
 }

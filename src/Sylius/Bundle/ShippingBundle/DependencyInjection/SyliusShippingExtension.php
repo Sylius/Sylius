@@ -12,7 +12,9 @@
 namespace Sylius\Bundle\ShippingBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -27,18 +29,26 @@ class SyliusShippingExtension extends AbstractResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $this->configure(
-            $config,
-            new Configuration(),
-            $container,
-            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_TRANSLATIONS | self::CONFIGURE_FORMS
+        $config = $this->processConfiguration(new Configuration(), $config);
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+
+        $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
+        $this->mapFormValidationGroupsParameters($config, $container);
+
+        $configFiles = array(
+            'services.xml',
         );
 
+        foreach ($configFiles as $configFile) {
+            $loader->load($configFile);
+        }
+
         $shippingMethod = $container->getDefinition('sylius.form.type.shipping_method');
-        $shippingMethod->addArgument(new Reference('sylius.shipping_calculator_registry'));
-        $shippingMethod->addArgument(new Reference('sylius.shipping_rule_checker_registry'));
+        $shippingMethod->addArgument(new Reference('sylius.registry.shipping_calculator'));
+        $shippingMethod->addArgument(new Reference('sylius.registry.shipping_rule_checker'));
+        $shippingMethod->addArgument(new Reference('form.registry'));
 
         $shippingMethod = $container->getDefinition('sylius.form.type.shipping_method_rule');
-        $shippingMethod->addArgument(new Reference('sylius.shipping_rule_checker_registry'));
+        $shippingMethod->addArgument(new Reference('sylius.registry.shipping_rule_checker'));
     }
 }

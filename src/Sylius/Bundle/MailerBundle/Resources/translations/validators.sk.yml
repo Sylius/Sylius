@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  email:
+    code:
+      not_blank: Zadajte prosím kód e-mailu.
+      unique: E-mailový kód musí byť jedinečný.
+    subject:
+      not_blank: Zadajte predmet e-mailu.

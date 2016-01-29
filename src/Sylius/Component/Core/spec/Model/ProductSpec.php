@@ -15,10 +15,13 @@ use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\Product;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Product\Model\Product as SyliusProduct;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
-use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface as VariantInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -26,6 +29,15 @@ use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
  */
 class ProductSpec extends ObjectBehavior
 {
+    function let(VariantInterface $masterVariant)
+    {
+        $masterVariant->setMaster(true)->shouldBeCalled();
+        $masterVariant->setProduct($this)->shouldBeCalled();
+        $masterVariant->isMaster()->willReturn(true);
+
+        $this->setMasterVariant($masterVariant);
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Core\Model\Product');
@@ -33,17 +45,17 @@ class ProductSpec extends ObjectBehavior
 
     function it_implements_Sylius_core_product_interface()
     {
-        $this->shouldImplement('Sylius\Component\Core\Model\ProductInterface');
+        $this->shouldImplement(ProductInterface::class);
     }
 
     function it_extends_Sylius_product_model()
     {
-        $this->shouldHaveType('Sylius\Component\Product\Model\Product');
+        $this->shouldHaveType(SyliusProduct::class);
     }
 
     function it_initializes_taxon_collection_by_default()
     {
-        $this->getTaxons()->shouldHaveType('Doctrine\Common\Collections\Collection');
+        $this->getTaxons()->shouldHaveType(Collection::class);
     }
 
     function its_taxons_are_mutable(Collection $taxons)
@@ -75,8 +87,11 @@ class ProductSpec extends ObjectBehavior
         $this->getTaxons('brand')->shouldHaveCount(1);
     }
 
-    function its_price_is_mutable()
+    function its_price_is_mutable(VariantInterface $masterVariant)
     {
+        $masterVariant->setPrice(499)->shouldBeCalled();
+        $masterVariant->getPrice()->willReturn(499);
+
         $this->setPrice(499);
         $this->getPrice()->shouldReturn(499);
     }
@@ -144,5 +159,16 @@ class ProductSpec extends ObjectBehavior
     {
         $this->setRestrictedZone($zone);
         $this->getRestrictedZone()->shouldReturn($zone);
+    }
+
+    function it_has_no_main_taxon_by_default()
+    {
+      $this->getMainTaxon()->shouldReturn(null);
+    }
+
+    function it_sets_main_taxon(TaxonInterface $taxon)
+    {
+        $this->setMainTaxon($taxon);
+        $this->getMainTaxon()->shouldReturn($taxon);
     }
 }

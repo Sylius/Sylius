@@ -7,10 +7,10 @@ Feature: Checkout Payment
     Background:
         Given store has default configuration
           And there are following taxonomies defined:
-            | name     |
-            | Category |
+            | code | name     |
+            | RTX1 | Category |
           And taxonomy "Category" has following taxons:
-            | Clothing > PHP T-Shirts |
+            | Clothing[TX1] > PHP T-Shirts[TX2] |
           And the following products exist:
             | name          | price | taxons       |
             | PHP Top       | 5.99  | PHP T-Shirts |
@@ -18,14 +18,14 @@ Feature: Checkout Payment
             | name  | type    | members        |
             | UK    | country | United Kingdom |
           And the following shipping methods exist:
-            | zone | name        |
-            | UK   | DHL Express |
+            | code | zone | name        |
+            | SM1  | UK   | DHL Express |
           And the following payment methods exist:
-            | name            | gateway    | enabled | calculator | calculator_configuration |
-            | Credit Card     | stripe     | yes     | fixed      | amount: 0                |
-            | Credit Card PRO | stripe     | yes     | percent    | percent: 0               |
-            | PayPal          | paypal     | yes     | fixed      | amount: 50               |
-            | PayPal PRO      | paypal_pro | no      | percent    | percent: 10              |
+            | code | name            | gateway    | enabled | calculator | calculator_configuration |
+            | PM1  | Credit Card     | stripe     | yes     | fixed      | amount: 0                |
+            | PM2  | Credit Card PRO | stripe     | yes     | percent    | percent: 0               |
+            | PM3  | PayPal          | paypal     | yes     | fixed      | amount: 50               |
+            | PM4  | PayPal PRO      | paypal_pro | no      | percent    | percent: 10              |
           And all products are assigned to the default channel
           And the default channel has following configuration:
             | taxonomy | payment                                            | shipping    |

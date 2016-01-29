@@ -6,3 +6,4 @@ sylius:
     attribute:
       name: Внутреннее название
       presentation: Публичное название
+      type: Тип

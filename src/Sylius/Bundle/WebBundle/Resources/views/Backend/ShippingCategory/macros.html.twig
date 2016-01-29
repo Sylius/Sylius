@@ -8,6 +8,7 @@
         <thead>
             <tr>
                 <th>{{ sylius_resource_sort('id', 'sylius.shipping_category.id'|trans) }}</th>
+                <th>{{ sylius_resource_sort('code', 'sylius.ui.code'|trans) }}</th>
                 <th>{{ sylius_resource_sort('name', 'sylius.shipping_category.name'|trans) }}</th>
                 <th>{{ sylius_resource_sort('updatedAt', 'sylius.shipping_category.updated_at'|trans) }}</th>
                 <th></th>
@@ -17,6 +18,7 @@
         {% for shipping_category in shipping_categories %}
             <tr id="{{ shipping_category.id }}">
                 <td>{{ shipping_category.id }}</td>
+                <td>{{ shipping_category.code }}</td>
                 <td>{{ shipping_category.name }}</td>
                 <td>{{ shipping_category.updatedAt|date }}</td>
                 <td>

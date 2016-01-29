@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\Checker;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Addressing\Checker\RestrictedZoneCheckerInterface;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -33,7 +34,7 @@ class RestrictedZoneCheckerSpec extends ObjectBehavior
 
     function it_implements_Sylius_cart_item_resolver_interface()
     {
-        $this->shouldImplement('Sylius\Component\Addressing\Checker\RestrictedZoneCheckerInterface');
+        $this->shouldImplement(RestrictedZoneCheckerInterface::class);
     }
 
     function it_is_not_restricted_if_customer_is_not_authenticated(ProductInterface $product, $customerContext)

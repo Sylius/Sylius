@@ -2,17 +2,18 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  label:
+  form:
     product:
       name: Názov
       description: Popis
-      properties: Vlastnosti
-      available_on: Dostupný od
+      attributes: Produktové vlastnosti
+      options: Produktové voľby
       meta_keywords: Meta kľúčové slová
       meta_description: Meta popis
-    property:
-      name: Interný názov
-      presentation: Verejný názov
-    prototype:
+    product_variant:
+      available_on: Dostupný od
+    product_archetype:
       name: Názov
-      properties: Vlastnosti
+      parent: Nadradená kategória
+      attributes: Produktové vlastnosti
+      options: Produktové voľby

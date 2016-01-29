@@ -11,7 +11,10 @@ imports:
 twig:
     exception_controller: 'FOS\RestBundle\Controller\ExceptionController::showAction'
 
-doctrine_cache: ~
+doctrine_cache:
+    providers:
+        sylius_settings: %sylius.cache%
+        sylius_rbac: %sylius.cache%
 
 knp_gaufrette:
     adapters:
@@ -88,6 +91,7 @@ hwi_oauth:
             client_id:     %sylius.oauth.facebook.clientid%
             client_secret: %sylius.oauth.facebook.clientsecret%
             scope:         "email"
+            infos_url:     "https://graph.facebook.com/me?fields=id,name,email"
             options:
                 display: popup
         google:

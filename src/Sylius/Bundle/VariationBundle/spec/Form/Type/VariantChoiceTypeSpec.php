@@ -13,8 +13,11 @@ namespace spec\Sylius\Bundle\VariationBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Variation\Model\VariableInterface;
+use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\FormTypeInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class VariantChoiceTypeSpec extends ObjectBehavior
 {
@@ -30,13 +33,13 @@ class VariantChoiceTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_builds_a_form(FormBuilderInterface $builder)
     {
         $builder->addViewTransformer(Argument::type(
-            'Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer'
+            CollectionToArrayTransformer::class
         ))->shouldBeCalled();
 
         $this->buildForm($builder, array(
@@ -44,7 +47,7 @@ class VariantChoiceTypeSpec extends ObjectBehavior
         ));
     }
 
-    function it_has_options(OptionsResolverInterface $resolver)
+    function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(Argument::withKey('choice_list'))->shouldBeCalled()->willReturn($resolver);
 
@@ -52,11 +55,9 @@ class VariantChoiceTypeSpec extends ObjectBehavior
             'variable'
         ))->shouldBeCalled()->willReturn($resolver);
 
-        $resolver->setAllowedTypes(array(
-            'variable' => array('Sylius\Component\Variation\Model\VariableInterface')
-        ))->shouldBeCalled()->willReturn($resolver);
+        $resolver->setAllowedTypes('variable', VariableInterface::class)->shouldBeCalled()->willReturn($resolver);
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 
     function it_has_a_name()

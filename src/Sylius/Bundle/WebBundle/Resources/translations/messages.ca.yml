@@ -1,10 +1,10 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-email:
-  order_confirmation:
-    subject: email.order_confirmation.subject
 sylius:
+  emails:
+    order_confirmation:
+      subject: Gràcies per la seva comanda!
   account:
     address:
       action:
@@ -19,12 +19,9 @@ sylius:
         no_billing: Cap adreça de facturació per defecte
         no_shipping: "Cap adreça d'enviament per defecte"
         shipping: "Adreça d'enviament per defecte"
-      empty: Encara no heu creat cap adreça.
       list: Totes les teves adreces
       update: Editar la meva adreça
     home:
-      email: ""
-      id: ""
       outline: Gaudeix de totes les característiques disponibles al teu espai personal. Pots veure, fer un seguiment i gestionar totes les teves dades.
       since: Ets client des de
       welcome: Benvingut al teu espai
@@ -35,16 +32,12 @@ sylius:
       empty: Encara Ja heu fet cap comanda.
       invoice: Factura
       list: Totes les seves comandes
-      number: ""
-      payment_mode: ""
       placed_at: 'Situat a %at%'
       shipment:
         pending: Pendent
         ready: 'Preparat des de %at%'
         returned: 'Retornat %at%'
         shipped: 'Enviat %at%'
-      shipment_mode: ""
-      state: ""
       total: Total
       tracking_number: Número de seguiment
     title: El meu compte
@@ -73,15 +66,25 @@ sylius:
       orders: Comandes de la setmana passada
       revenue: Ingressos de la setmana passada
   block:
-    body: Cos
-    id: ID
-    title: Títol
+    imagine:
+      title: Títol
+    simple:
+      body: Cos
+      title: Títol
+    slideshow:
+      body: Cos
+      title: Títol
+    string:
+      body: Cos
+      title: Títol
   breadcrumb:
     edit: Editar
     group:
       index: Grups
     new: Nou
     update: Editar
+    role:
+      index: Rols
   cart:
     summary:
       checkout: Realitza la compra
@@ -110,8 +113,25 @@ sylius:
   country:
     id: ID
     name: Nom
-  exchange_rate:
+    enabled: Activat
+  email:
+    code: Codi
+    enabled: Activat?
+  permission:
+    code: Codi
     id: ID
+    description: Descripció
+  role:
+    code: Codi
+    id: ID
+    name: Nom
+    description: Descripció
+    index_header: Rols
+  currency:
+    code: Codi
+    id: ID
+    name: Nom
+    enabled: Activat
   form:
     login:
       email: Correu electrònic
@@ -131,8 +151,16 @@ sylius:
     name: Nom
     sku: SKU
   locale:
+    id: ID
+    name: Nom
     code: Codi
     enabled: Activat
+  menu:
+    id: ID
+    title: Títol
+  menu_node:
+    id: ID
+    title: Títol
   "no": false
   order:
     billing_address: Adreça de facturació
@@ -142,14 +170,27 @@ sylius:
     shipment_states:
       pending: Pendent
     shipping_address: "Adreça d'enviament"
-    state:
-      checkout: Realitza la compra
     total: Total
-    user: Usuari
+    currency: Moneda
+    adjustments:
+      description: Descripció
+  route:
+    id: ID
+    name: Nom
+    title: Títol
+  redirect_route:
+    id: ID
+    title: Títol
   shipment:
     id: ID
     name: Nom
     sku: SKU
+    update: Editar
+  channel:
+    code: Codi
+    enabled: Activat
+    id: ID
+    name: Nom
     update: Editar
   order_item:
     total: Total
@@ -185,10 +226,18 @@ sylius:
       images: Imatges
     tax_category: "Categoria d'impost"
     variant_selection_method: Mètode de selecció de variant
+    volume_based:
+      price: Preu
   promotion:
     description: Descripció
     id: ID
     name: Nom
+  promotion_coupon:
+    code: Codi
+  report:
+    name: Nom
+    code: Codi
+    description: Descripció
   search: Cerca
   shipping_address: "Adreça d'enviament"
   shipping_category:
@@ -210,12 +259,16 @@ sylius:
   taxonomy:
     name: Nom
   unknown: Desconegut
-  user:
+  customer:
     billing_address: Adreça de facturació
+    email: Correu electrònic
     first_name: Nom
     id: ID
     last_name: Cognoms
     shipping_address: "Adreça d'enviament"
+    groups: Grups
+  user:
+    id: ID
     username: "Nom d'usuari"
   variant:
     available_on_demand: Disponible sota demanda
@@ -225,3 +278,13 @@ sylius:
   "yes": true
   zone:
     name: Nom
+    scope: "Àmbit d'aplicació"
+  contact_topic:
+    id: ID
+    title: Títol
+  contact_request:
+    id: ID
+    firstName: Nom
+    lastName: Cognoms
+    email: Correu electrònic
+    message: Missatge

@@ -13,8 +13,10 @@ namespace spec\Sylius\Bundle\TaxationBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Symfony\Component\Form\FormBuilder;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\FormTypeInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Julien Janvier <j.janvier@gmail.com>
@@ -33,7 +35,7 @@ class TaxRateTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_has_a_valid_name()
@@ -68,10 +70,15 @@ class TaxRateTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
+        $builder
+            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
+            ->willReturn($builder)
+        ;
+
         $this->buildForm($builder, array());
     }
 
-    function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
+    function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults(
@@ -82,6 +89,6 @@ class TaxRateTypeSpec extends ObjectBehavior
             )
             ->shouldBeCalled();
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 }

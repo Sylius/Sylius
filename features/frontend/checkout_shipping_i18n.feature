@@ -7,10 +7,10 @@ Feature: Checkout shipping in preferred language
     Background:
         Given store has default configuration
           And there are following taxonomies defined:
-            | name     |
-            | Category |
+            | code | name     |
+            | RTX1 | Category |
           And taxonomy "Category" has following taxons:
-            | Clothing > PHP T-Shirts |
+            | Clothing[TX1] > PHP T-Shirts[TX2] |
           And the following products exist:
             | name    | price | taxons       |
             | PHP Top | 5.99  | PHP T-Shirts |
@@ -23,9 +23,9 @@ Feature: Checkout shipping in preferred language
             | United States |
             | Germany       |
           And the following shipping methods exist:
-            | zone    | name       |
-            | USA     | FedEx      |
-            | Germany | UPS Ground |
+            | code | zone    | name       |
+            | SM1  | USA     | FedEx      |
+            | SM2  | Germany | UPS Ground |
           And all products are assigned to the default channel
           And there are following locales configured and assigned to the default channel:
             | code  |

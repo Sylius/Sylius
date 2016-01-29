@@ -15,9 +15,10 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ObjectToIdentifierTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EntityHiddenTypeSpec extends ObjectBehavior
 {
@@ -36,12 +37,12 @@ class EntityHiddenTypeSpec extends ObjectBehavior
         $manager->getRepository('data_class')->willReturn($repository);
 
         $builder->addViewTransformer(
-            Argument::type('Sylius\Bundle\ResourceBundle\Form\DataTransformer\ObjectToIdentifierTransformer')
+            Argument::type(ObjectToIdentifierTransformer::class)
         )->willReturn($builder);
 
         $builder->setAttribute('data_class', 'data_class')->willReturn($builder);
-        $builder->addEventListener(FormEvents::PRE_SUBMIT, Argument::type('\Closure'))->willReturn($builder);
-        $builder->addEventListener(FormEvents::SUBMIT, Argument::type('\Closure'))->willReturn($builder);
+        $builder->addEventListener(FormEvents::PRE_SUBMIT, Argument::type(\Closure::class))->willReturn($builder);
+        $builder->addEventListener(FormEvents::SUBMIT, Argument::type(\Closure::class))->willReturn($builder);
 
         $this->buildForm($builder, array(
             'data_class' => 'data_class',
@@ -49,13 +50,13 @@ class EntityHiddenTypeSpec extends ObjectBehavior
         ));
     }
 
-    function it_has_options(OptionsResolverInterface $resolver)
+    function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'identifier' => 'id',
         ))->shouldBeCalled($resolver);
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 
     function it_has_a_name()

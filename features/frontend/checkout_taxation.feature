@@ -7,28 +7,28 @@ Feature: Checkout taxation
     Background:
         Given store has default configuration
           And there are following taxonomies defined:
-            | name     |
-            | Category |
+            | code | name     |
+            | RTX1  | Category |
           And taxonomy "Category" has following taxons:
-            | Clothing > PHP T-Shirts |
+            | Clothing[TX1] > PHP T-Shirts[TX2] |
           And the following zones are defined:
             | name  | type    | members        |
             | UK    | country | United Kingdom |
           And there are following tax categories:
-            | name          |
-            | Taxable Goods |
+            | code | name          |
+            | TC1  | Taxable Goods |
           And the following tax rates exist:
-            | category      | zone | name   | amount |
-            | Taxable Goods | UK   | UK Tax | 15%    |
+            | code | category      | zone | name   | amount |
+            | TR1  | Taxable Goods | UK   | UK Tax | 15%    |
           And the following products exist:
             | name    | price | taxons       | tax category  |
             | PHP Top | 250   | PHP T-Shirts | Taxable Goods |
           And the following shipping methods exist:
-            | zone | name        |
-            | UK   | DHL Express |
+            | code | zone | name        |
+            | SM1  | UK   | DHL Express |
           And the following payment methods exist:
-            | name  | gateway | enabled | calculator | calculator_configuration |
-            | Dummy | dummy   | yes     | fixed      | amount: 0                |
+            | code | name  | gateway | enabled | calculator | calculator_configuration |
+            | PM1  | Dummy | dummy   | yes     | fixed      | amount: 0                |
           And all products are assigned to the default channel
           And the default channel has following configuration:
             | taxonomy | payment | shipping    |

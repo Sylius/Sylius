@@ -1,0 +1,37 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  ui:
+    email: E-mail
+    register: Registreren
+    login: Inloggen
+    logout: Uitloggen
+    change_password: Verander uw wachtwoord
+    account_panel_outline: Geniet van alle functies die beschikbaar zijn in uw persoonlijke ruimte om al uw gegevens te bekijken, bij te houden en te beheren.
+  form:
+    group:
+      name: Naam
+      roles: Rollen
+    user:
+      email: E-mail
+      enabled: Toegestaan
+      password:
+        label: Wachtwoord
+      shipping_address: Bezorgadres
+    customer:
+      first_name: Voornaam
+      groups: Groepen
+      last_name: Achternaam
+      email: E-mail
+      billing_address: Factuuradres
+      different_billing_address: Gebruik een ander factuuradres?
+    user_filter:
+      query: Zoeken
+    user_change_password:
+      confirmation: Bevestiging
+      current: Huidig wachtwoord
+      new: Nieuw wachtwoord
+    user_reset_password:
+      confirmation: Bevestiging
+      new: Nieuw wachtwoord

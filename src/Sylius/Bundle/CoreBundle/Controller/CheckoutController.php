@@ -11,7 +11,9 @@
 
 namespace Sylius\Bundle\CoreBundle\Controller;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\Controller\FOSRestController;
+use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\SyliusCheckoutEvents;
@@ -65,7 +67,7 @@ class CheckoutController extends FOSRestController
     public function addressingAction(Request $request, OrderInterface $order)
     {
         if ($order->isEmpty()) {
-            //return new Response('Order cannot be empty!', 400);
+            return new Response('Order cannot be empty!', 400);
         }
 
         if ($request->isMethod('GET')) {
@@ -218,7 +220,7 @@ class CheckoutController extends FOSRestController
     protected function isUserLoggedIn()
     {
         try {
-            return $this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED');
+            return $this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED');
         } catch (AuthenticationCredentialsNotFoundException $e) {
             return false;
         }

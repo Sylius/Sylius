@@ -11,12 +11,11 @@
 
 namespace Sylius\Bundle\ChannelBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Sylius channel form type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ChannelType extends AbstractResourceType
@@ -27,9 +26,7 @@ class ChannelType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('code', 'text', array(
-                'label'    => 'sylius.form.channel.code',
-            ))
+            ->addEventSubscriber(new AddCodeFormSubscriber())
             ->add('name', 'text', array(
                 'label' => 'sylius.form.channel.name',
             ))

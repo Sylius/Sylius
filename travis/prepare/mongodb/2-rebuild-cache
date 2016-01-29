@@ -1,3 +1,0 @@
-#!/bin/bash
-
-composer require doctrine/mongodb-odm="^1.0.2"

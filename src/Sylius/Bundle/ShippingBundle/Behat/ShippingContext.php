@@ -26,21 +26,22 @@ class ShippingContext extends DefaultContext
     public function thereAreShippingCategories(TableNode $table)
     {
         foreach ($table->getHash() as $data) {
-            $this->thereIsShippingCategory($data['name'], false);
+            $this->thereIsShippingCategory($data['name'], $data['code'], false);
         }
 
         $this->getEntityManager()->flush();
     }
 
     /**
-     * @Given /^I created shipping category "([^""]*)"$/
-     * @Given /^there is shipping category "([^""]*)"$/
+     * @Given /^I created shipping category "([^""]*)" with code "([^""]*)"$/
+     * @Given /^there is shipping category "([^""]*)" with code "([^""]*)"$/
      */
-    public function thereIsShippingCategory($name, $flush = true)
+    public function thereIsShippingCategory($name, $code, $flush = true)
     {
         /* @var $category ShippingCategoryInterface */
-        $category = $this->getRepository('shipping_category')->createNew();
+        $category = $this->getFactory('shipping_category')->createNew();
         $category->setName($name);
+        $category->setCode($code);
 
         $manager = $this->getEntityManager();
         $manager->persist($category);
@@ -59,11 +60,11 @@ class ShippingContext extends DefaultContext
         $shippingMethod = $this->findOneByName('shipping_method', $name);
 
         $manager = $this->getEntityManager();
-        $repository = $this->getRepository('shipping_method_rule');
+        $factory = $this->getFactory('shipping_method_rule');
 
         foreach ($table->getHash() as $data) {
             /* @var $rule RuleInterface */
-            $rule = $repository->createNew();
+            $rule = $factory->createNew();
             $rule->setType(strtolower(str_replace(' ', '_', $data['type'])));
             $rule->setConfiguration($this->getConfiguration($data['configuration']));
 

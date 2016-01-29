@@ -13,15 +13,22 @@ namespace spec\Sylius\Bundle\ResourceBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Exception\UnknownDriverException;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\FormTypeInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ResourceChoiceTypeSpec extends ObjectBehavior
 {
     function let()
     {
         $this->beConstructedWith('CountryModel', SyliusResourceBundle::DRIVER_DOCTRINE_ORM, 'sylius_country_choice');
+    }
+
+    function it_throws_unknown_driver_exception_when_constructing_with_invalid_driver()
+    {
+        $this->shouldThrow(UnknownDriverException::class)
+            ->during('__construct', array('CountryModel', 'badDriver', 'sylius_country_choice'));
     }
 
     function it_is_initializable()
@@ -36,7 +43,7 @@ class ResourceChoiceTypeSpec extends ObjectBehavior
 
     function it_should_be_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_has_a_parent_type_for_orm_driver()
@@ -68,7 +75,7 @@ class ResourceChoiceTypeSpec extends ObjectBehavior
         $this->getParent()->shouldReturn('phpcr_document');
     }
 
-    function it_defines_resource_options(OptionsResolverInterface $resolver)
+    function it_defines_resource_options(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults(array(
@@ -77,10 +84,10 @@ class ResourceChoiceTypeSpec extends ObjectBehavior
             ->willReturn($resolver)
         ;
         $resolver
-            ->setNormalizers(Argument::any())
+            ->setNormalizer('class', Argument::type('callable'))
             ->willReturn($resolver)
         ;
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 }

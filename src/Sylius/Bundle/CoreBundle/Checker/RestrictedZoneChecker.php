@@ -17,7 +17,6 @@ use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\User\Context\CustomerContextInterface;
-use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class RestrictedZoneChecker implements RestrictedZoneCheckerInterface
 {
@@ -36,7 +35,7 @@ class RestrictedZoneChecker implements RestrictedZoneCheckerInterface
     public function isRestricted($subject, AddressInterface $address = null)
     {
         if (!$subject instanceof ProductInterface) {
-            throw new UnexpectedTypeException($subject, 'Sylius\Component\Core\Model\ProductInterface');
+            throw new UnexpectedTypeException($subject, ProductInterface::class);
         }
 
         if (null === $customer = $this->customerContext->getCustomer()) {

@@ -9,7 +9,6 @@ sylius:
         configuration: 設定
         countries: 国の設定
         dashboard: ダッシュボード
-        exchange_rates: 為替レートの設定
         general_settings: 一般的な設定
         homepage: ショップを見る
         new_order: 新しい注文を登録
@@ -20,8 +19,6 @@ sylius:
         payments: 入金管理
         products: 商品管理
         promotions: プロモーション管理
-        properties: 商品プロパティ管理
-        prototypes: 商品プロトタイプ管理
         sales: 注文管理
         shipments: 出荷管理
         shipping_categories: 配送カテゴリ管理
@@ -36,9 +33,7 @@ sylius:
         assortment: 商品管理
         configuration: ショップ設定
         countries: 国の管理
-        customer: 顧客管理
         dashboard: ダッシュボード
-        exchange_rates: 為替レートの設定
         general_settings: 一般的な設定
         homepage: ショップに戻る
         new_order: 新しい注文を登録
@@ -49,18 +44,16 @@ sylius:
         payments: 入金管理
         products: 商品管理
         promotions: プロモーション管理
-        properties: 商品プロパティ管理
-        prototypes: 商品プロトタイプ管理
         sales: 注文管理
         shipments: 出荷管理
         shipping_categories: 配送カテゴリ管理
         shipping_methods: 配送方法管理
+        slideshow: スライドショー
         stockables: 在庫チェック
         tax_categories: 税区分管理
         tax_rates: 税管理
         taxation_settings: 課税地域設定
         taxonomies: カテゴリ管理
-        users: 顧客管理
         zones: 地域の管理
   frontend:
     menu:

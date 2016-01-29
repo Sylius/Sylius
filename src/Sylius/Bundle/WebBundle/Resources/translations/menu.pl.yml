@@ -6,44 +6,11 @@ sylius:
     menu:
       main:
         assortment: Asortyment
-        configuration: Konfiguracja
-        countries: Kraje
-        customer: Klienci
-        dashboard: Panel
-        exchange_rates: Kursy walut
-        general_settings: Ogólne ustawienia
-        homepage: Wróć do sklepu
-        locales: Ustawienia regionalne
-        new_order: Dodaj nowe zamówienie
-        new_promotion: Dodaj nową promocję
-        options: Warianty
-        orders: Aktualne zamówienia
-        payment_methods: Metody płatności
-        payments: Płatności
-        products: Produkty
-        promotions: Promocje
-        properties: Właściwości
-        prototypes: Prototypy
-        sales: Zamówienia
-        shipments: Przesyłki
-        shipping_categories: Kategorie wysyłki
-        shipping_methods: Metody wysyłki
-        stockables: Magazyn
-        tax_categories: Kategorie podatkowe
-        tax_rates: Stawki podatkowe
-        taxation_settings: Podatek
-        taxonomies: Taksonomia
-        users: Użytkownicy
-        zones: Strefy
-      sidebar:
-        assortment: Asortyment
         blocks: Bloki
         configuration: Konfiguracja
-        content: Treść
         countries: Kraje
-        customer: Klienci
+        content: Treść
         dashboard: Panel
-        exchange_rates: Kursy walut
         general_settings: Ogólne ustawienia
         groups: Grupy
         homepage: Wróć do sklepu
@@ -57,8 +24,6 @@ sylius:
         payments: Płatności
         products: Produkty
         promotions: Promocje
-        properties: Właściwości
-        prototypes: Prototypy
         sales: Zamówienia
         shipments: Przesyłki
         shipping_categories: Kategorie wysyłki
@@ -68,8 +33,41 @@ sylius:
         tax_rates: Stawki podatkowe
         taxation_settings: Podatek
         taxonomies: Taksonomia
-        users: Użytkownicy
         zones: Strefy
+        roles: Role
+      sidebar:
+        assortment: Asortyment
+        blocks: Bloki
+        configuration: Konfiguracja
+        content: Treść
+        countries: Kraje
+        dashboard: Panel
+        general_settings: Ogólne ustawienia
+        groups: Grupy
+        homepage: Wróć do sklepu
+        locales: Ustawienia regionalne
+        new_order: Dodaj nowe zamówienie
+        new_promotion: Dodaj nową promocję
+        options: Warianty
+        orders: Aktualne zamówienia
+        pages: Strony
+        routes: Ścieżki
+        payment_methods: Metody płatności
+        payments: Płatności
+        products: Produkty
+        promotions: Promocje
+        sales: Zamówienia
+        shipments: Przesyłki
+        shipping_categories: Kategorie wysyłki
+        shipping_methods: Metody wysyłki
+        slideshow: Pokaz slajdów
+        stockables: Magazyn
+        tax_categories: Kategorie podatkowe
+        tax_rates: Stawki podatkowe
+        taxation_settings: Podatek
+        taxonomies: Taksonomia
+        zones: Strefy
+        roles: Role
   frontend:
     menu:
       account:

@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Pricing\Calculator;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Pricing\Calculator\CalculatorInterface;
 use Sylius\Component\Pricing\Calculator\Calculators;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 
@@ -27,7 +28,7 @@ class StandardCalculatorSpec extends ObjectBehavior
 
     function it_implements_Sylius_pricing_calculator_interface()
     {
-        $this->shouldImplement('Sylius\Component\Pricing\Calculator\CalculatorInterface');
+        $this->shouldImplement(CalculatorInterface::class);
     }
 
     function it_returns_the_default_price_stored_on_the_priceable_object(PriceableInterface $priceable)

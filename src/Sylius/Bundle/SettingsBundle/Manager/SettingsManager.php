@@ -17,6 +17,7 @@ use Sylius\Bundle\SettingsBundle\Event\SettingsEvent;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilder;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
@@ -44,12 +45,17 @@ class SettingsManager implements SettingsManagerInterface
     protected $parameterRepository;
 
     /**
+     * @var FactoryInterface
+     */
+    protected $parameterFactory;
+
+    /**
      * @var Cache
      */
     protected $cache;
 
     /**
-     * Runtime cache for resolved parameters
+     * Runtime cache for resolved parameters.
      *
      * @var Settings[]
      */
@@ -69,6 +75,7 @@ class SettingsManager implements SettingsManagerInterface
      * @param SchemaRegistryInterface  $schemaRegistry
      * @param ObjectManager            $parameterManager
      * @param RepositoryInterface      $parameterRepository
+     * @param FactoryInterface         $parameterFactory
      * @param Cache                    $cache
      * @param ValidatorInterface       $validator
      * @param EventDispatcherInterface $eventDispatcher
@@ -77,6 +84,7 @@ class SettingsManager implements SettingsManagerInterface
         SchemaRegistryInterface $schemaRegistry,
         ObjectManager $parameterManager,
         RepositoryInterface $parameterRepository,
+        FactoryInterface $parameterFactory,
         Cache $cache,
         ValidatorInterface $validator,
         EventDispatcherInterface $eventDispatcher
@@ -84,6 +92,7 @@ class SettingsManager implements SettingsManagerInterface
         $this->schemaRegistry = $schemaRegistry;
         $this->parameterManager = $parameterManager;
         $this->parameterRepository = $parameterRepository;
+        $this->parameterFactory = $parameterFactory;
         $this->cache = $cache;
         $this->validator = $validator;
         $this->eventDispatcher = $eventDispatcher;
@@ -92,7 +101,7 @@ class SettingsManager implements SettingsManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function loadSettings($namespace)
+    public function loadSettings($namespace, $ignoreUnknown = true)
     {
         if (isset($this->resolvedSettings[$namespace])) {
             return $this->resolvedSettings[$namespace];
@@ -110,6 +119,15 @@ class SettingsManager implements SettingsManagerInterface
         $settingsBuilder = new SettingsBuilder();
         $schema->buildSettings($settingsBuilder);
 
+        // Remove unknown settings' parameters (e.g. From a previous version of the settings schema)
+        if (true === $ignoreUnknown) {
+            foreach ($parameters as $name => $value) {
+                if (!$settingsBuilder->isDefined($name)) {
+                    unset($parameters[$name]);
+                }
+            }
+        }
+
         $parameters = $this->transformParameters($settingsBuilder, $parameters);
         $parameters = $settingsBuilder->resolve($parameters);
 
@@ -118,6 +136,7 @@ class SettingsManager implements SettingsManagerInterface
 
     /**
      * {@inheritdoc}
+     *
      * @throws ValidatorException
      */
     public function saveSettings($namespace, Settings $settings)
@@ -153,7 +172,7 @@ class SettingsManager implements SettingsManagerInterface
             if (isset($persistedParametersMap[$name])) {
                 $persistedParametersMap[$name]->setValue($value);
             } else {
-                $parameter = $this->parameterRepository->createNew();
+                $parameter = $this->parameterFactory->createNew();
 
                 $parameter->setNamespace($namespace);
                 $parameter->setName($name);

@@ -13,8 +13,9 @@ namespace spec\Sylius\Component\Report\DataFetcher;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use Sylius\Component\Report\Model\ReportInterface;
 use Sylius\Component\Report\DataFetcher\DataFetcherInterface;
+use Sylius\Component\Report\DataFetcher\DelegatingDataFetcherInterface;
+use Sylius\Component\Report\Model\ReportInterface;
 
 /**
  * @author Łukasz Chruściel <lchrusciel@gmail.com>
@@ -33,7 +34,7 @@ class DelegatingDataFetcherSpec extends ObjectBehavior
 
     public function it_implements_delegating_data_fetcher_interface()
     {
-        $this->shouldImplement('Sylius\Component\Report\DataFetcher\DelegatingDataFetcherInterface');
+        $this->shouldImplement(DelegatingDataFetcherInterface::class);
     }
 
     public function it_delegates_data_fetcher_to_report(

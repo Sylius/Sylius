@@ -7,21 +7,21 @@ Feature: Cart taxation
     Background:
         Given store has default configuration
           And there are following taxonomies defined:
-            | name     |
-            | Category |
+            | code | name     |
+            | RTX1 | Category |
           And taxonomy "Category" has following taxons:
-            | Clothing > PHP T-Shirts |
+            | Clothing[TX1] > PHP T-Shirts[TX2] |
           And the following zones are defined:
             | name    | type    | members        |
             | UK      | country | United Kingdom |
             | Germany | country | Germany        |
           And there are following tax categories:
-            | name          |
-            | Taxable Goods |
+            | code | name          |
+            | TC1  | Taxable Goods |
           And the following tax rates exist:
-            | category      | zone    | name        | amount |
-            | Taxable Goods | UK      | UK Tax      | 15%    |
-            | Taxable Goods | Germany | Germany VAT | 23%    |
+            | code | category      | zone    | name        | amount |
+            | TR1  | Taxable Goods | UK      | UK Tax      | 15%    |
+            | TR2  | Taxable Goods | Germany | Germany VAT | 23%    |
           And the following products exist:
             | name    | price | taxons       | tax category  |
             | PHP Top | 50    | PHP T-Shirts | Taxable Goods |

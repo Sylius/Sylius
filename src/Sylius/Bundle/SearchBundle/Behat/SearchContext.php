@@ -11,9 +11,13 @@
 
 namespace Sylius\Bundle\SearchBundle\Behat;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
+use Sylius\Bundle\SearchBundle\Command\IndexCommand;
+use Sylius\Bundle\SearchBundle\Model\SearchIndex;
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\DomCrawler\Crawler;
-use Symfony\Component\Process\Process;
 
 /**
  * @author Argyrios Gounaris <agounaris@gmail.com>
@@ -25,15 +29,13 @@ class SearchContext extends DefaultContext
      */
     public function iPopulateTheIndex()
     {
-        $command = $this->kernel->getRootDir() . "/console sylius:search:index --env=test";
-        $process = new Process($command);
-        $process->run();
+        $command = new IndexCommand();
+        $command->setContainer($this->getContainer());
 
-        if (!$process->isSuccessful()) {
-            throw new \RuntimeException($process->getErrorOutput());
+        $output = new BufferedOutput();
+        if ($command->run(new ArgvInput(['env' => 'test']), $output)) { //return code is not zero
+            throw new \RuntimeException($output->fetch());
         }
-
-        print $process->getOutput();
     }
 
     /**
@@ -53,22 +55,26 @@ class SearchContext extends DefaultContext
     /**
      * @Given /^I should find an indexed entry for "([^""]*)"$/
      */
-    public function iCreateAndIndex($id)
+    public function iShouldFindAnIndexedEntry($id)
     {
+        /** @var EntityManagerInterface $em */
         $em = $this->getContainer()->get('doctrine')->getManager();
+
         $queryBuilder = $em->createQueryBuilder();
-        $queryBuilder
+        $query = $queryBuilder
             ->select('u')
-            ->from('Sylius\Bundle\SearchBundle\Model\SearchIndex', 'u')
+            ->from(SearchIndex::class, 'u')
             ->where('u.value LIKE :id')
             ->setParameter('id', '%'.$id.'%')
+            ->getQuery()
         ;
 
-        $result = $queryBuilder->getQuery()->getResult();
-        if (!$result) {
-            throw new \Exception(
-                "The entry does not exist in the index"
-            );
+        $result = $this->waitFor(function () use ($query) {
+            return $query->getResult();
+        });
+
+        if (empty($result)) {
+            throw new \Exception("The entry does not exist in the index");
         }
 
         return true;
@@ -77,24 +83,26 @@ class SearchContext extends DefaultContext
     /**
      * @Given /^I should not find an indexed entry for "([^""]*)"$/
      */
-    public function iDeleteAnIndex($id)
+    public function iShouldNotFindAnIndexedEntry($id)
     {
+        /** @var EntityManagerInterface $em */
         $em = $this->getContainer()->get('doctrine')->getManager();
+
         $queryBuilder = $em->createQueryBuilder();
-        $queryBuilder
+        $query = $queryBuilder
             ->select('u')
-            ->from('Sylius\Bundle\SearchBundle\Model\SearchIndex', 'u')
+            ->from(SearchIndex::class, 'u')
             ->where('u.value LIKE :id')
             ->setParameter('id', '%'.$id.'%')
+            ->getQuery()
         ;
 
-        $result = $queryBuilder->getQuery()->getResult();
-        if (!empty($result)) {
-            throw new \Exception(
-                "The entry does exist in the index"
-            );
+        try {
+            $this->waitFor(function () use ($query) {
+                return 0 === count($query->getResult()) ? true : false;
+            });
+        } catch (\RuntimeException $exception) {
+            throw new \Exception("The entry does exist in the index", 0, $exception);
         }
-
-        return true;
     }
 }

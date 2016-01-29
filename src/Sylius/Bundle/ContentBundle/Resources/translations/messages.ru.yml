@@ -8,12 +8,17 @@ sylius:
     action_block:
       action_name: Действие
       id: ID
+      publish_end_date: Публиковать до
+      publish_start_date: Публиковать от
     imagine_block:
-      parent: Родитель
+      filter: Фильтр
+      image: Изображение
       internal_name: Внутреннее название
-      slideshow_small: Большое слайдшоу (полноразмерное)
+      label: Заголовок
+      parent: Родитель
+      publish_end_date: Публиковать до
+      publish_start_date: Публиковать от
       slideshow_medium: Среднее слайдшоу (контент)
-      slideshow_large: Малое слайдшоу (сайдбар)
     menu:
       childrens: Потомки
       display: Отображать
@@ -21,12 +26,16 @@ sylius:
       label: Заголовок
       name: Название
       parent: Родитель
+      publish_end_date: Публиковать до
+      publish_start_date: Публиковать от
       route: Маршрут
       uri: URI
     menu_block:
       body: Содержание
       id: ID
       name: Название
+      publish_end_date: Публиковать до
+      publish_start_date: Публиковать от
     menu_node_block:
       content: Контент
       display: Отображать
@@ -36,7 +45,6 @@ sylius:
       link_type: Тип ссылки
       publish_end_date: Публиковать до
       publish_start_date: Публиковать от
-      publishable: Опубликованый
       route: Маршрут
       uri: URI
     redirect_route:
@@ -47,6 +55,8 @@ sylius:
     reference_block:
       body: Содержание
       id: ID
+      publish_end_date: Публиковать до
+      publish_start_date: Публиковать от
       title: Название
     route:
       content: Контент
@@ -56,11 +66,15 @@ sylius:
       body: Содержание
       internal_name: Внутреннее название
       parent: Родитель
+      publish_end_date: Публиковать до
+      publish_start_date: Публиковать от
       title: Название
     slideshow_block:
       childrens: Потомки
       internal_name: Внутреннее название
       parent: Родитель
+      publish_end_date: Публиковать до
+      publish_start_date: Публиковать от
       title: Название
     static_content:
       body: Содержание
@@ -70,10 +84,11 @@ sylius:
       parent: Родитель
       publish_end_date: Публиковать до
       publish_start_date: Публиковать от
-      publishable: Опубликованый
       routes: Маршруты
       title: Название
     string_block:
       body: Содержание
       id: ID
       name: Название
+      publish_end_date: Публиковать до
+      publish_start_date: Публиковать от

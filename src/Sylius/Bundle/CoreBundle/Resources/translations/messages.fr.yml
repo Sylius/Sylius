@@ -22,11 +22,14 @@ sylius:
         different_billing_address: Utiliser une adresse différente pour la facturation ?
       payment_method: Moyen de paiement
       shipping_method: Mode de livraison
-    coupon:
-      per_user_usage_limit: "Coupon limité à l'usage"
     group:
       name: Nom
       roles: Rôles
+    channel:
+      taxonomies: Taxonomies
+      locales: Locales
+      shipping_methods: Modes de livraison
+      payment_methods: Moyens de paiement
     image:
       file: Image
     locale:
@@ -66,6 +69,10 @@ sylius:
       created_at_to: À
       number: Numéro de commande
       shipping_address: Expédié à
+    payment_filter:
+      created_at_from: De
+      created_at_to: À
+      number: Numéro de commande
     shipping_method:
       zone: Zone
     taxon:
@@ -78,6 +85,7 @@ sylius:
       enabled: Activé
       first_name: Prénom
       groups: Groupes
+      roles: Rôles
       last_name: Nom
       password: Mot de passe
       shipping_address: Adresse de livraison
@@ -93,3 +101,8 @@ sylius:
       sku: Référence
       weight: Poids
       width: Largeur
+    attribute:
+      product_attribute_value:
+        value: Valeur
+    guest:
+      email: E-mail

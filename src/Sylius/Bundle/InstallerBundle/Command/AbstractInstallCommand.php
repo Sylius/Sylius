@@ -12,13 +12,14 @@
 namespace Sylius\Bundle\InstallerBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Helper\ProgressHelper;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Validator\ConstraintViolationList;
 
 abstract class AbstractInstallCommand extends ContainerAwareCommand
 {
+    const APP_CACHE                 = 'app/cache/';
     const WEB_ASSETS_DIRECTORY      = 'web/assets/';
     const WEB_BUNDLES_DIRECTORY     = 'web/bundles/';
     const WEB_MEDIA_DIRECTORY       = 'web/media/';
@@ -89,16 +90,16 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
      * @param OutputInterface $output
      * @param int $length
      *
-     * @return ProgressHelper
+     * @return ProgressBar
      */
     protected function createProgressBar(OutputInterface $output, $length = 10)
     {
-        $progress = $this->getHelper('progress');
+        $progress = new ProgressBar($output);
         $progress->setBarCharacter('<info>|</info>');
         $progress->setEmptyBarCharacter(' ');
         $progress->setProgressCharacter('|');
 
-        $progress->start($output, $length);
+        $progress->start($length);
 
         return $progress;
     }
@@ -241,67 +242,10 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
      */
     protected function ensureDirectoryExistsAndIsWritable($directory, OutputInterface $output)
     {
-        $this->ensureDirectoryExists($directory, $output);
-        $this->ensureDirectoryIsWritable($directory, $output);
-    }
+        $checker = $this->get('sylius.installer.checker.command_directory');
+        $checker->setCommandName($this->getName());
 
-    /**
-     * @param string $directory
-     * @param OutputInterface $output
-     */
-    private function ensureDirectoryExists($directory, OutputInterface $output)
-    {
-        if (!is_dir($directory)) {
-            if (!mkdir($directory, 0755, true)) {
-                $output->writeln($this->createUnexisitingDirectoryMessage($directory));
-
-                throw new \RuntimeException("Failed while trying to create directory.");
-            }
-
-            $output->writeln(sprintf('<comment>Created "%s" directory.</comment>', $directory));
-        }
-    }
-
-    /**
-     * @param string $directory
-     *
-     * @return string
-     */
-    protected function createUnexisitingDirectoryMessage($directory)
-    {
-        return
-            '<error>Cannot run command due to unexisting directory (tried to create it automatically, failed).</error>' . PHP_EOL .
-            sprintf('Create directory "%s" and run command "<comment>%s</comment>"', $directory, $this->getName())
-            ;
-    }
-
-    /**
-     * @param string $directory
-     * @param OutputInterface $output
-     */
-    protected function ensureDirectoryIsWritable($directory, OutputInterface $output)
-    {
-        if (!is_writable($directory)) {
-            if (!chmod($directory, 0755)) {
-                $output->writeln($this->createBadPermissionsMessage($directory));
-
-                throw new \RuntimeException("Failed while trying to change directory permissions.");
-            }
-
-            $output->writeln(sprintf('<comment>Changed "%s" permissions to 0755.</comment>', $directory));
-        }
-    }
-
-    /**
-     * @param string $directory
-     *
-     * @return string
-     */
-    protected function createBadPermissionsMessage($directory)
-    {
-        return
-            '<error>Cannot run command due to bad directory permissions (tried to change permissions to 0755).</error>' . PHP_EOL .
-            sprintf('Set directory "%s" writable and run command "<comment>%s</comment>"', $directory, $this->getName())
-            ;
+        $checker->ensureDirectoryExists($directory, $output);
+        $checker->ensureDirectoryIsWritable($directory, $output);
     }
 }

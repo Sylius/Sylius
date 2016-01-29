@@ -7,37 +7,37 @@ Feature: Products
     Background:
         Given store has default configuration
           And there are following options:
-            | name          | presentation | values           |
-            | T-Shirt color | Color        | Red, Blue, Green |
-            | T-Shirt size  | Size         | S, M, L          |
+            | code | name         | presentation  | values                          |
+            | O1   |T-Shirt color | Color         | Red[OV1], Blue[OV2], Green[OV3] |
+            | O2   |T-Shirt size  | Size          | S[OV4], M[OV5], L[OV6]          |
           And there are following attributes:
-            | name               | presentation      | type     | choices   |
-            | T-Shirt fabric     | T-Shirt           | text     |           |
-            | T-Shirt fare trade | Faretrade product | checkbox |           |
-            | Color              | color             | choice   | red, blue |
-            | Size               | size              | number   |           |
+            | name               | type     | configuration |
+            | T-Shirt fabric     | text     | min:2,max:255 |
+            | T-Shirt fare trade | checkbox |               |
+            | Size               | integer  |               |
           And the following products exist:
-            | name          | price | options                     | attributes             |
-            | Super T-Shirt | 19.99 | T-Shirt size, T-Shirt color | T-Shirt fabric: Wool   |
-            | Black T-Shirt | 19.99 | T-Shirt size                | T-Shirt fabric: Cotton |
-            | Mug           | 5.99  |                             |                        |
-            | Sticker       | 10.00 |                             |                        |
+            | name          | price | options                     | attributes            |
+            | Super T-Shirt | 19.99 | T-Shirt size, T-Shirt color | T-Shirt fabric:Wool   |
+            | Black T-Shirt | 19.99 | T-Shirt size                | T-Shirt fabric:Cotton |
+            | Mug           | 5.99  |                             |                       |
+            | Sticker       | 10.00 |                             |                       |
           And product "Super T-Shirt" is available in all variations
           And there are following tax categories:
-            | name        |
-            | Clothing    |
-            | Electronics |
-            | Print       |
+            | code | name        |
+            | TC1  | Clothing    |
+            | TC2  | Electronics |
+            | TC3  | Print       |
           And there are following taxonomies defined:
-            | name     |
-            | Category |
-            | Special  |
+            | code | name     |
+            | RTX1 | Category |
+            | RTX2 | Special  |
           And taxonomy "Category" has following taxons:
-            | Clothing > T-Shirts         |
-            | Clothing > Premium T-Shirts |
+            | Clothing[TX1] > T-Shirts[TX2]         |
+            | Clothing[TX1] > Premium T-Shirts[TX3] |
           And taxonomy "Special" has following taxons:
-            | Featured |
-            | New      |
+            | Featured[TX4] |
+            | New[TX5]      |
+          And product "Sticker" has main taxon "New"
           And I am logged in as administrator
 
     Scenario: Seeing index of all products with simple prices
@@ -111,28 +111,59 @@ Feature: Products
             | Description | Interesting description |
             | Price       | 59.99                   |
         And go to "Attributes" tab
-        And I click "Add"
-        And I select "T-Shirt fabric" from "Attribute"
-        And I fill in "Value" with "Cotton"
-        And I press "Create"
+        And I add "T-Shirt fabric" attribute
+        And I fill in "T-Shirt fabric" with "Polyester"
+        When I press "Create"
         Then I should be on the page of product "Manchester United tee"
         And "Product has been successfully created." should appear on the page
-        And I should see "Cotton"
 
     @javascript
-    Scenario: Creating product with number attribute
+    Scenario: Creating product with checkbox attribute
         Given I am on the product creation page
         When I fill in the following:
             | Name        | Manchester United tee   |
             | Description | Interesting description |
             | Price       | 59.99                   |
         And go to "Attributes" tab
-        And I click "Add"
-        And I select "Color" from "Attribute"
-        And I fill in "Value" with "12"
+        And I add "T-Shirt fare trade" attribute
+        And I check "T-Shirt fare trade"
         When I press "Create"
         Then I should be on the page of product "Manchester United tee"
         And "Product has been successfully created." should appear on the page
+
+    @javascript
+    Scenario: Creating product with multiple attributes
+        Given I am on the product creation page
+        When I fill in the following:
+            | Name        | FC Barcelona tee        |
+            | Description | Interesting description |
+            | Price       | 59.99                   |
+        And go to "Attributes" tab
+        And I add following attributes:
+            | T-Shirt fabric     |
+            | T-Shirt fare trade |
+        And I fill in "T-Shirt fabric" with "Polyester"
+        And I check "T-Shirt fare trade"
+        When I press "Create"
+        Then I should be on the page of product "FC Barcelona tee"
+        And "Product has been successfully created." should appear on the page
+        And I should see "T-Shirt fabric"
+        And I should see "T-Shirt fare trade"
+
+    @javascript
+    Scenario: Created product does not pass validation
+        Given I am on the product creation page
+        When I fill in the following:
+            | Name        | FC Barcelona tee        |
+            | Description | Interesting description |
+            | Price       | 59.99                   |
+        And I go to "Attributes" tab
+        And I add "T-Shirt fabric" attribute
+        And I fill in "T-Shirt fabric" with "X"
+        When I press "Create"
+        Then I should still be on the product creation page
+        When I go to "Attributes" tab
+        And I should see "This value is too short. It should have 2 characters or more."
 
     Scenario: Created products appear in the list
         Given I am on the product creation page
@@ -158,6 +189,18 @@ Feature: Products
         Then I should be on the page of product "Big Sticker"
         And I should see "Product has been successfully updated."
 
+    @javascript
+    Scenario: Modifying product attributes
+        Given I am editing product "Super T-Shirt"
+        And I go to "Attributes" tab
+        When I delete "T-Shirt fabric" attribute
+        And I add "T-Shirt fare trade" attribute
+        And I check "T-Shirt fare trade"
+        And I press "Save changes"
+        Then I should be on the page of product "Super T-Shirt"
+        And I should see "T-Shirt fare trade"
+        And I should not see "Wool"
+
     Scenario: Selecting the product tax category
         Given I am editing product "Sticker"
         When I select "Print" from "Tax category"
@@ -166,6 +209,7 @@ Feature: Products
         And I should see "Product has been successfully updated."
         And "Print" should appear on the page
 
+    @javascript
     Scenario: Selecting the categorization taxons
         Given I am editing product "Black T-Shirt"
         And go to "Categorization" tab
@@ -190,3 +234,50 @@ Feature: Products
         Given I am on the product index page
         When I click "Mug"
         Then I should be on the page of product "Mug"
+
+    @javascript
+    Scenario: Creating product with main taxon
+        Given I am on the product creation page
+        And I fill in the following:
+            | Name        | The best T-shirt        |
+            | Description | Interesting description |
+            | Price       | 2.99                    |
+        And go to "Categorization" tab
+        And I select "New" from "Main taxon"
+        And I press "Create"
+        Then I should be on the page of product "The best T-shirt"
+        And "Product has been successfully created." should appear on the page
+        And "New" should appear on the page
+
+    @javascript
+    Scenario: Selecting the main taxon of product
+        Given I am editing product "Black T-Shirt"
+        And go to "Categorization" tab
+        When I select "New" from "Main taxon"
+        And I press "Save changes"
+        Then I should be on the page of product "Black T-Shirt"
+        And I should see "Product has been successfully updated."
+        And "New" should appear on the page
+
+    @javascript
+    Scenario: Deleting product with main taxon
+        Given I am on the page of product "Sticker"
+        When I press "delete"
+        And I click "delete" from the confirmation modal
+        Then I should be on the product index page
+        And I should see "Product has been successfully deleted."
+        And I should not see product with name "Sticker" in that list
+
+    Scenario: Enabling product
+        Given There is disabled product named "Mug"
+        And I am on the page of product "Mug"
+        When I press "Enable"
+        Then I should be on the product index page
+        And I should see "Product has been successfully enabled."
+
+    Scenario: Disabling product
+        Given There is enabled product named "Mug"
+        And I am on the page of product "Mug"
+        When I press "Disable"
+        Then I should be on the product index page
+        And I should see "Product has been successfully disabled."

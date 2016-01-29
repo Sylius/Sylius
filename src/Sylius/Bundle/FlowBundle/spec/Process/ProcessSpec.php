@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\FlowBundle\Process;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\FlowBundle\Process\ProcessInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 use Sylius\Bundle\FlowBundle\Validator\ProcessValidatorInterface;
 
@@ -25,7 +26,7 @@ class ProcessSpec extends ObjectBehavior
 
     function it_is_a_process()
     {
-        $this->shouldImplement('Sylius\Bundle\FlowBundle\Process\ProcessInterface');
+        $this->shouldImplement(ProcessInterface::class);
     }
 
     function its_forward_route_is_mutable()

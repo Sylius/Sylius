@@ -15,6 +15,9 @@ sylius:
       taxonomy_configuration:
         taxons: Taksonai
         exclude: Neįtraukti
+      contains_product_configuration:
+        variants: Produktai
+        exclude: Neįtraukti
       item_count_configuration:
         count: Kiekis
         equal: Lygus
@@ -23,14 +26,14 @@ sylius:
         equal: Lygus
       nth_order_configuration:
         nth: N-tasis
-      user_loyality_configuration:
+      customer_loyalty_configuration:
         time: Laikas
         unit:
           days: Dienos
           weeks: Savaitės
           months: Mėnesiai
           years: Metai
-          0: Vienetas
+          header: Vienetas
         after: Vartotojas sukurtas pasibaigus šiam laikotarpiui
       shipping_country_configuration:
         country: Šalis
@@ -38,12 +41,15 @@ sylius:
     coupon:
       code: Kodas
       usage_limit: Naudojimo limitas
+      expires_at: Nustoja galioti
     coupon_generate_instruction:
       amount: Suma
       usage_limit: Naudojimo limitas
+      expires_at: Nustoja galioti
     promotion:
       actions: Veiksmai
       coupon_based: Pagal kuponą
+      exclusive: Išskirtinis
       description: Aprašymas
       ends_at: Baigiasi
       name: Pavadinimas

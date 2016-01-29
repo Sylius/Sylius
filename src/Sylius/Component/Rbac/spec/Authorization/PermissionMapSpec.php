@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Rbac\Authorization;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Rbac\Authorization\PermissionMapInterface;
 use Sylius\Component\Rbac\Model\PermissionInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
 use Sylius\Component\Rbac\Provider\PermissionProviderInterface;
@@ -35,7 +36,7 @@ class PermissionMapSpec extends ObjectBehavior
 
     function it_is_a_permission_map()
     {
-        $this->shouldHaveType('Sylius\Component\Rbac\Authorization\PermissionMapInterface');
+        $this->shouldHaveType(PermissionMapInterface::class);
     }
 
     function it_uses_permissions_resolver_to_obtain_whole_tree_of_permissions(

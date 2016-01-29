@@ -12,7 +12,8 @@
 namespace spec\Sylius\Bundle\MoneyBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\FormTypeInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -31,7 +32,7 @@ class MoneyTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_has_money_type_as_parent()
@@ -39,7 +40,7 @@ class MoneyTypeSpec extends ObjectBehavior
         $this->getParent()->shouldReturn('money');
     }
 
-    function it_defines_assigned_currency_and_sets_divisor_to_100(OptionsResolverInterface $resolver)
+    function it_defines_assigned_currency_and_sets_divisor_to_100(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults(array(
@@ -48,6 +49,6 @@ class MoneyTypeSpec extends ObjectBehavior
             )
             ->shouldBeCalled();
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 }

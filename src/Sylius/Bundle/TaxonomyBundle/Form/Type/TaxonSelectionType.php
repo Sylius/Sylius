@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\TaxonomyBundle\Form\Type;
 
-use JMS\TranslationBundle\Annotation\Ignore;
+use Sylius\Bundle\TaxonomyBundle\Form\DataTransformer\TaxonSelectionToCollectionTransformer;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
@@ -19,7 +19,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Taxon selection form.
@@ -79,36 +79,34 @@ class TaxonSelectionType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults(array(
                 'data_class'         => null,
                 'multiple'           => true,
                 'render_label'       => false,
-                'model_transformer'  => 'Sylius\Bundle\TaxonomyBundle\Form\DataTransformer\TaxonSelectionToCollectionTransformer',
+                'model_transformer'  => TaxonSelectionToCollectionTransformer::class,
             ))
         ;
 
-        $resolver->setNormalizers(array(
-            'model_transformer' => function (Options $options, $value) {
-                if (!is_array($value)) {
-                    $value = array(
-                        'class'        => $value,
-                        'save_objects' => true,
-                    );
-                } else {
-                    if (!isset($value['class'])) {
-                        $value['class'] = 'Sylius\Bundle\TaxonomyBundle\Form\DataTransformer\TaxonSelectionToCollectionTransformer';
-                    }
-                    if (!isset($value['save_objects'])) {
-                        $value['save_objects'] = true;
-                    }
+        $resolver->setNormalizer('model_transformer', function (Options $options, $value) {
+            if (!is_array($value)) {
+                $value = array(
+                    'class'        => $value,
+                    'save_objects' => true,
+                );
+            } else {
+                if (!isset($value['class'])) {
+                    $value['class'] = TaxonSelectionToCollectionTransformer::class;
                 }
+                if (!isset($value['save_objects'])) {
+                    $value['save_objects'] = true;
+                }
+            }
 
-                return $value;
-            },
-        ));
+            return $value;
+        });
     }
 
     /**

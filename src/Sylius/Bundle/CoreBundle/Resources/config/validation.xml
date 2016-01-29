@@ -42,6 +42,13 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <property name="originalPrice">
+            <constraint name="Range">
+                <option name="min">0.00</option>
+                <option name="minMessage">sylius.product_variant.original_price.min</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
         <property name="onHand">
             <constraint name="NotBlank">
                 <option name="message">sylius.product_variant.onHand.not_blank</option>

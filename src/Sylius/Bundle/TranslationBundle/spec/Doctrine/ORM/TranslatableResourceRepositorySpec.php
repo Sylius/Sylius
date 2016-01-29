@@ -14,11 +14,13 @@ namespace spec\Sylius\Bundle\TranslationBundle\Doctrine\ORM;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Query\Expr;
+use Doctrine\ORM\QueryBuilder;
+use Pagerfanta\Pagerfanta;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Translation\Provider\LocaleProviderInterface;
+use Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface;
 
 require_once __DIR__.'/../../../../ResourceBundle/spec/Fixture/Entity/TranslatableFoo.php';
 
@@ -73,18 +75,7 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
 
     public function it_implements_Sylius_translatable_repository_interface()
     {
-        $this->shouldImplement('Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface');
-    }
-
-    public function it_sets_current_locale_on_created_object(LocaleProviderInterface $localeProvider)
-    {
-        $localeProvider->getCurrentLocale()->willReturn('en_US');
-        $localeProvider->getFallbackLocale()->willReturn('en_US');
-
-        $this->setLocaleProvider($localeProvider);
-
-        $this->createNew()->getCurrentLocale()->shouldReturn('en_US');
-        $this->createNew()->getFallbackLocale()->shouldReturn('en_US');
+        $this->shouldImplement(TranslatableResourceRepositoryInterface::class);
     }
 
     public function it_applies_criteria_when_finding_one($queryBuilder, Expr $expr)
@@ -273,13 +264,12 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
     {
         $this
             ->createPaginator()
-            ->shouldHaveType('Pagerfanta\Pagerfanta')
+            ->shouldHaveType(Pagerfanta::class)
         ;
     }
 
     public function it_has_fluent_interface(LocaleProviderInterface $localeProvider)
     {
-        $this->setLocaleProvider($localeProvider)->shouldReturn($this);
         $this->setTranslatableFields(array('name'))->shouldReturn($this);
     }
 }

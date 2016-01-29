@@ -33,7 +33,7 @@
         <field name="immutable" column="is_immutable" type="boolean" />
 
         <many-to-one field="order" target-entity="Sylius\Component\Order\Model\OrderInterface" inversed-by="items">
-            <join-column name="order_id" referenced-column-name="id" nullable="false" />
+            <join-column name="order_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
         </many-to-one>
 
         <one-to-many field="adjustments" target-entity="Sylius\Component\Order\Model\AdjustmentInterface" mapped-by="orderItem" orphan-removal="true">

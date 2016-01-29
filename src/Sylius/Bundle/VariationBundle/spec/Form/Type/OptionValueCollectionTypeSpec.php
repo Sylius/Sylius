@@ -13,9 +13,10 @@ namespace spec\Sylius\Bundle\VariationBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Product\Model\OptionInterface;
+use Sylius\Component\Variation\Model\OptionInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\FormTypeInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class OptionValueCollectionTypeSpec extends ObjectBehavior
 {
@@ -31,7 +32,7 @@ class OptionValueCollectionTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_builds_a_form_using_option_presenation_as_label_if_possible(
@@ -73,13 +74,13 @@ class OptionValueCollectionTypeSpec extends ObjectBehavior
         ));
     }
 
-    function it_has_options(OptionsResolverInterface $resolver)
+    function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'options' => null
         ))->shouldBeCalled();
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 
     function it_has_a_name()

@@ -2,17 +2,16 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  label:
+  form:
     product:
       name: Ім’я
       description: Опис
-      properties: Властивості
-      available_on: Доступно
+      options: Опції
       meta_keywords: Мета ключові слова
       meta_description: Мета-опис
-    property:
-      name: "Внутрішнє ім'я"
-      presentation: Презентація
-    prototype:
+    product_variant:
+      available_on: Доступно
+    product_archetype:
       name: Ім’я
-      properties: Властивості
+      parent: "Батьківський об'єкт"
+      options: Опції

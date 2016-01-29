@@ -1,12 +1,19 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
----: ---
 sylius:
   form:
     taxon:
       description: Popis
       name: Názov
-      parent: Rodič
+      parent: Nadradená kategória
+      permalink: Permalink
     taxonomy:
       name: Názov
+  taxon:
+    create_taxon: Vytvoriť kategóriu
+    delete_taxonomy: Odstrániť triedenie
+    manage_taxonomies: Spravovať triedenia
+    no_taxonomies: Neexistujú žiadne triedenia na zobrazenie.
+    no_taxons: Neexistujú žiadne kategórie na zobrazenie.
+    update_taxonomy: Upraviť triedenie

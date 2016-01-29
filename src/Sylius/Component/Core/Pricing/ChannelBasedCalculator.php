@@ -11,17 +11,48 @@
 
 namespace Sylius\Component\Core\Pricing;
 
+use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Pricing\Calculator\CalculatorInterface;
+use Sylius\Component\Pricing\Model\PriceableInterface;
 
 /**
- * Channel based calculator.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ChannelBasedCalculator extends AbstractCalculator implements CalculatorInterface
+class ChannelBasedCalculator implements CalculatorInterface
 {
-    protected $parameterName = 'channel';
-    protected $className     = 'Sylius\Component\Core\Model\ChannelInterface';
+    /**
+     * @var ChannelContextInterface
+     */
+    private $channelContext;
+
+    /**
+     * @param ChannelContextInterface $channelContext
+     */
+    public function __construct(ChannelContextInterface $channelContext)
+    {
+        $this->channelContext = $channelContext;
+    }
+
+    /**
+     * @param PriceableInterface $subject
+     * @param array              $configuration
+     * @param array              $context
+     *
+     * @return integer
+     */
+    public function calculate(PriceableInterface $subject, array $configuration, array $context = array())
+    {
+        $currentChannel = $this->channelContext->getChannel();
+        $calculatorConfiguration = $subject->getPricingConfiguration();
+
+        if (!isset($calculatorConfiguration[$currentChannel->getId()])) {
+            return $subject->getPrice();
+        }
+
+        return $calculatorConfiguration[$currentChannel->getId()];
+    }
+
 
     /**
      * {@inheritdoc}

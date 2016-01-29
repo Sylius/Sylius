@@ -27,6 +27,11 @@ class Promotion implements PromotionInterface
     /**
      * @var string
      */
+    protected $code;
+
+    /**
+     * @var string
+     */
     protected $name;
 
     /**
@@ -117,6 +122,22 @@ class Promotion implements PromotionInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
     }
 
     /**
@@ -454,7 +475,7 @@ class Promotion implements PromotionInterface
     /**
      * {@inheritdoc}
      */
-    public function setDeletedAt(\DateTime $deletedAt)
+    public function setDeletedAt(\DateTime $deletedAt = null)
     {
         $this->deletedAt = $deletedAt;
     }

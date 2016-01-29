@@ -12,18 +12,19 @@
 namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\Image;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
 class ProductVariantImageSpec extends ObjectBehavior
 {
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Core\Model\ProductVariantImage');
     }
 
     function it_should_be_Sylius_Image()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Model\Image');
+        $this->shouldHaveType(Image::class);
     }
 
     function it_does_not_have_variant_by_default()

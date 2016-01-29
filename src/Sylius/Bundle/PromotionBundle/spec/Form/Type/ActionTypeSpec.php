@@ -13,11 +13,14 @@ namespace spec\Sylius\Bundle\PromotionBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildActionFormSubscriber;
+use Sylius\Bundle\PromotionBundle\Form\Type\ActionType;
+use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType;
 use Sylius\Component\Promotion\Model\ActionInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -27,17 +30,17 @@ class ActionTypeSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $actionRegistry)
     {
-        $this->beConstructedWith('Action', array('sylius'), $actionRegistry);
+        $this->beConstructedWith('Action', $actionRegistry);
     }
 
     function it_is_initializabled()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\ActionType');
+        $this->shouldHaveType(ActionType::class);
     }
 
     function it_is_configuration_form_type()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType');
+        $this->shouldHaveType(AbstractConfigurationType::class);
     }
 
     function it_builds_form(
@@ -51,7 +54,7 @@ class ActionTypeSpec extends ObjectBehavior
 
         $builder->getFormFactory()->willReturn($factory);
         $builder->addEventSubscriber(
-            Argument::type('Sylius\Bundle\PromotionBundle\Form\EventListener\BuildActionFormSubscriber')
+            Argument::type(BuildActionFormSubscriber::class)
         )->shouldBeCalled();
 
         $this->buildForm($builder, array(
@@ -59,17 +62,20 @@ class ActionTypeSpec extends ObjectBehavior
         ));
     }
 
-    function it_should_define_assigned_data_class(OptionsResolverInterface $resolver)
+    function it_should_define_assigned_data_class(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Action',
-            'validation_groups' => array('sylius'),
-        ))->shouldBeCalled();
+        $resolver
+            ->setDefaults(array(
+                'data_class' => 'Action',
+                'validation_groups' => array('Default'),
+            ))
+            ->shouldBeCalled()
+        ;
 
-        $resolver->setOptional(array('configuration_type'))->shouldBeCalled();
+        $resolver->setDefined(array('configuration_type'))->shouldBeCalled();
         $resolver->setDefaults(array('configuration_type' => ActionInterface::TYPE_FIXED_DISCOUNT))->shouldBeCalled();
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 
     function it_has_a_name()

@@ -13,7 +13,7 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type\Core;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
@@ -25,9 +25,9 @@ abstract class AbstractConfigurationType extends AbstractResourceType
      */
     protected $registry;
 
-    public function __construct($dataClass, array $validationGroups, ServiceRegistryInterface $registry)
+    public function __construct($dataClass, ServiceRegistryInterface $registry)
     {
-        parent::__construct($dataClass, $validationGroups);
+        parent::__construct($dataClass, array('Default'));
 
         $this->registry = $registry;
     }
@@ -35,11 +35,11 @@ abstract class AbstractConfigurationType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
 
-        $resolver->setOptional(array(
+        $resolver->setDefined(array(
             'configuration_type',
         ));
     }

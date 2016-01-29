@@ -28,6 +28,9 @@ Sylius\Component\Shipping\Model\ShippingMethod:
         updatedAt:
             expose: true
             type: DateTime
+        code:
+            expose: true
+            type: string
     relations:
         - rel: self
           href:

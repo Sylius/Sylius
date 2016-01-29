@@ -12,7 +12,7 @@
 namespace spec\Sylius\Component\Order\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Order\Model\AdjustableInterface;
+use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 
@@ -29,7 +29,7 @@ class AdjustmentSpec extends ObjectBehavior
 
     function it_implements_Sylius_adjustment_interface()
     {
-        $this->shouldImplement('Sylius\Component\Order\Model\AdjustmentInterface');
+        $this->shouldImplement(AdjustmentInterface::class);
     }
 
     function it_has_no_id_by_default()
@@ -66,15 +66,15 @@ class AdjustmentSpec extends ObjectBehavior
         $this->getAdjustable()->shouldReturn(null);
     }
 
-    function it_has_no_label_by_default()
+    function it_has_no_type_by_default()
     {
-        $this->getLabel()->shouldReturn(null);
+        $this->getType()->shouldReturn(null);
     }
 
-    function its_label_is_mutable()
+    function its_type_is_mutable()
     {
-        $this->setLabel('Shipping Fee');
-        $this->getLabel()->shouldReturn('Shipping Fee');
+        $this->setType('some type');
+        $this->getType()->shouldReturn('some type');
     }
 
     function it_has_no_description_by_default()
@@ -103,11 +103,11 @@ class AdjustmentSpec extends ObjectBehavior
     {
         $this->setAmount(4498);
         $this->getAmount()->shouldBeInteger();
-        $this->shouldThrow('\InvalidArgumentException')->duringSetAmount(44.98 * 100);
-        $this->shouldThrow('\InvalidArgumentException')->duringSetAmount('4498');
-        $this->shouldThrow('\InvalidArgumentException')->duringSetAmount(round(44.98 * 100));
-        $this->shouldThrow('\InvalidArgumentException')->duringSetAmount(array(4498));
-        $this->shouldThrow('\InvalidArgumentException')->duringSetAmount(new \stdClass());
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetAmount(44.98 * 100);
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetAmount('4498');
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetAmount(round(44.98 * 100));
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetAmount(array(4498));
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetAmount(new \stdClass());
     }
 
     function it_is_not_neutral_by_default()

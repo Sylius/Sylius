@@ -11,28 +11,34 @@
 
 namespace spec\Sylius\Bundle\UserBundle\OAuth;
 
+use Doctrine\Common\Persistence\ObjectManager;
+use HWI\Bundle\OAuthBundle\Connect\AccountConnectorInterface;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwnerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
+use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\UserBundle\Doctrine\ORM\CustomerRepository;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Model\UserOAuthInterface;
-use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 class UserProviderSpec extends ObjectBehavior
 {
     function let(
+        FactoryInterface $customerFactory,
         CustomerRepository $customerRepository,
+        FactoryInterface $userFactory,
         UserRepositoryInterface $userRepository,
+        FactoryInterface $oauthFactory,
         RepositoryInterface $oauthRepository,
         ObjectManager $userManager,
         CanonicalizerInterface $canonicalizer
     ) {
-        $this->beConstructedWith($customerRepository, $userRepository, $oauthRepository, $userManager, $canonicalizer);
+        $this->beConstructedWith($customerFactory, $customerRepository, $userFactory, $userRepository, $oauthFactory, $oauthRepository, $userManager, $canonicalizer);
     }
 
     function it_is_initializable()
@@ -42,17 +48,17 @@ class UserProviderSpec extends ObjectBehavior
 
     function it_implements_Hwi_oauth_aware_user_provider_interface()
     {
-        $this->shouldImplement('HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface');
+        $this->shouldImplement(OAuthAwareUserProviderInterface::class);
     }
 
     function it_implements_account_connector_interface()
     {
-        $this->shouldImplement('HWI\Bundle\OAuthBundle\Connect\AccountConnectorInterface');
+        $this->shouldImplement(AccountConnectorInterface::class);
     }
 
     function it_should_connect_oauth_account_with_given_user(
         $userManager,
-        $oauthRepository,
+        FactoryInterface $oauthFactory,
         UserInterface $user,
         UserResponseInterface $response,
         ResourceOwnerInterface $resourceOwner,
@@ -65,7 +71,7 @@ class UserProviderSpec extends ObjectBehavior
         $response->getResourceOwner()->willReturn($resourceOwner);
         $response->getAccessToken()->willReturn('access_token');
 
-        $oauthRepository->createNew()->willReturn($oauth);
+        $oauthFactory->createNew()->willReturn($oauth);
 
         $oauth->setIdentifier('username');
         $oauth->setProvider('google');
@@ -100,7 +106,8 @@ class UserProviderSpec extends ObjectBehavior
     function it_should_update_user_when_he_was_found_by_email(
         $userManager,
         $userRepository,
-        $oauthRepository,
+        FactoryInterface $oauthFactory,
+        RepositoryInterface $oauthRepository,
         UserInterface $user,
         UserResponseInterface $response,
         ResourceOwnerInterface $resourceOwner,
@@ -114,7 +121,7 @@ class UserProviderSpec extends ObjectBehavior
         $response->getAccessToken()->willReturn('access_token');
 
         $oauthRepository->findOneBy(array('provider' => 'google', 'identifier' => 'username'))->willReturn(null);
-        $oauthRepository->createNew()->willReturn($oauth);
+        $oauthFactory->createNew()->willReturn($oauth);
 
         $userRepository->findOneByEmail('username@email')->willReturn($user);
 
@@ -132,9 +139,10 @@ class UserProviderSpec extends ObjectBehavior
 
     function it_should_create_new_user_when_none_was_found(
         $userManager,
-        $customerRepository,
-        $userRepository,
-        $oauthRepository,
+        FactoryInterface $customerFactory,
+        FactoryInterface $userFactory,
+        FactoryInterface $oauthFactory,
+        RepositoryInterface $oauthRepository,
         CustomerInterface $customer,
         UserInterface $user,
         UserResponseInterface $response,
@@ -150,10 +158,10 @@ class UserProviderSpec extends ObjectBehavior
         $response->getAccessToken()->willReturn('access_token');
 
         $oauthRepository->findOneBy(array('provider' => 'google', 'identifier' => 'username'))->willReturn(null);
-        $oauthRepository->createNew()->willReturn($oauth);
+        $oauthFactory->createNew()->willReturn($oauth);
 
-        $userRepository->createNew()->willReturn($user);
-        $customerRepository->createNew()->willReturn($customer);
+        $userFactory->createNew()->willReturn($user);
+        $customerFactory->createNew()->willReturn($customer);
 
         $oauth->setIdentifier('username');
         $oauth->setProvider('google');

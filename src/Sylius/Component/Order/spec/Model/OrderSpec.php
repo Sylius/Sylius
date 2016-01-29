@@ -13,9 +13,12 @@ namespace spec\Sylius\Component\Order\Model;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Order\Model\AdjustableInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Order\Model\IdentityInterface;
+use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
+use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -29,17 +32,17 @@ class OrderSpec extends ObjectBehavior
 
     function it_implements_Sylius_order_interface()
     {
-        $this->shouldImplement('Sylius\Component\Order\Model\OrderInterface');
+        $this->shouldImplement(OrderInterface::class);
     }
 
     function it_implements_Sylius_adjustable_interface()
     {
-        $this->shouldImplement('Sylius\Component\Order\Model\AdjustableInterface');
+        $this->shouldImplement(AdjustableInterface::class);
     }
 
     function it_implements_Sylius_timestampable_interface()
     {
-        $this->shouldImplement('Sylius\Component\Resource\Model\TimestampableInterface');
+        $this->shouldImplement(TimestampableInterface::class);
     }
 
     function it_has_no_id_by_default()
@@ -146,11 +149,11 @@ class OrderSpec extends ObjectBehavior
     {
         $this->setItemsTotal(4498);
         $this->getItemsTotal()->shouldBeInteger();
-        $this->shouldThrow('\InvalidArgumentException')->duringSetItemsTotal(44.98 * 100);
-        $this->shouldThrow('\InvalidArgumentException')->duringSetItemsTotal('4498');
-        $this->shouldThrow('\InvalidArgumentException')->duringSetItemsTotal(round(44.98 * 100));
-        $this->shouldThrow('\InvalidArgumentException')->duringSetItemsTotal(array(4498));
-        $this->shouldThrow('\InvalidArgumentException')->duringSetItemsTotal(new \stdClass());
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetItemsTotal(44.98 * 100);
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetItemsTotal('4498');
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetItemsTotal(round(44.98 * 100));
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetItemsTotal(array(4498));
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetItemsTotal(new \stdClass());
     }
 
     function it_calculates_correct_items_total(
@@ -250,11 +253,11 @@ class OrderSpec extends ObjectBehavior
     {
         $this->setTotal(4498);
         $this->getTotal()->shouldBeInteger();
-        $this->shouldThrow('\InvalidArgumentException')->duringSetTotal(44.98 * 100);
-        $this->shouldThrow('\InvalidArgumentException')->duringSetTotal('4498');
-        $this->shouldThrow('\InvalidArgumentException')->duringSetTotal(round(44.98 * 100));
-        $this->shouldThrow('\InvalidArgumentException')->duringSetTotal(array(4498));
-        $this->shouldThrow('\InvalidArgumentException')->duringSetTotal(new \stdClass());
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetTotal(44.98 * 100);
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetTotal('4498');
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetTotal(round(44.98 * 100));
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetTotal(array(4498));
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetTotal(new \stdClass());
     }
 
     function it_calculates_correct_total(OrderItemInterface $item1, OrderItemInterface $item2, AdjustmentInterface $adjustment1, AdjustmentInterface $adjustment2)

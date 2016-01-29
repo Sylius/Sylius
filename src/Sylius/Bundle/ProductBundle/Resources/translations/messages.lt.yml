@@ -2,17 +2,18 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  label:
+  form:
     product:
       name: Pavadinimas
       description: Aprašymas
-      properties: Ypatybės
-      available_on: Prieinamas nuo
+      attributes: Atributai
+      options: Parinktys
       meta_keywords: Meta raktažodžiai
       meta_description: Meta aprašymas
-    property:
-      name: Vidinis pavadinimas
-      presentation: Prezentacija
-    prototype:
+    product_variant:
+      available_on: Prieinamas nuo
+    product_archetype:
       name: Pavadinimas
-      properties: Ypatybės
+      parent: Motininis elementas
+      attributes: Atributai
+      options: Parinktys

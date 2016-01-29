@@ -12,8 +12,8 @@
 namespace Sylius\Component\User\Security;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\User\Security\Generator\GeneratorInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>

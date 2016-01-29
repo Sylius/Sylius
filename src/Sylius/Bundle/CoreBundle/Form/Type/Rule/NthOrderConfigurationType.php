@@ -13,24 +13,14 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Rule;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * Nth order rule configuration form type.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 abstract class NthOrderConfigurationType extends AbstractType
 {
-    protected $validationGroups;
-
-    public function __construct(array $validationGroups)
-    {
-        $this->validationGroups = $validationGroups;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -43,18 +33,6 @@ abstract class NthOrderConfigurationType extends AbstractType
                     new NotBlank(),
                     new Type(array('type' => 'numeric')),
                 )
-            ))
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'validation_groups' => $this->validationGroups,
             ))
         ;
     }

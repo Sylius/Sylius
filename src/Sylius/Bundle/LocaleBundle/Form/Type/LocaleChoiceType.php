@@ -11,13 +11,13 @@
 
 namespace Sylius\Bundle\LocaleBundle\Form\Type;
 
-use Doctrine\Common\Persistence\ObjectRepository;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -25,14 +25,14 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class LocaleChoiceType extends AbstractType
 {
     /**
-     * @var ObjectRepository
+     * @var RepositoryInterface
      */
     protected $localeRepository;
 
     /**
-     * @param ObjectRepository $repository
+     * @param RepositoryInterface $repository
      */
-    public function __construct(ObjectRepository $repository)
+    public function __construct(RepositoryInterface $repository)
     {
         $this->localeRepository = $repository;
     }
@@ -44,21 +44,21 @@ class LocaleChoiceType extends AbstractType
     {
         parent::buildForm($builder, $options);
 
-        $builder->addViewTransformer(new CollectionToArrayTransformer(), true);
+        if (true === $options['multiple']) {
+            $builder->addViewTransformer(new CollectionToArrayTransformer(), true);
+        }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $localeRepository = $this->localeRepository;
-
-        $choiceList = function (Options $options) use ($localeRepository) {
+        $choiceList = function (Options $options) {
             if (null === $options['enabled']) {
-                $choices = $localeRepository->findAll();
+                $choices = $this->localeRepository->findAll();
             } else {
-                $choices = $localeRepository->findBy(array('enabled' => $options['enabled']));
+                $choices = $this->localeRepository->findBy(array('enabled' => $options['enabled']));
             }
 
             return new ObjectChoiceList($choices, null, array(), null, 'id');

@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ContentBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Static content choice type for phpcr_document choice form types.
@@ -24,9 +24,9 @@ class StaticContentChoiceType extends ResourceChoiceType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
 
         $resolver->setDefaults(
             array(

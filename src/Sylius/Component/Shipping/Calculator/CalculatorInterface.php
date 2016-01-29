@@ -12,17 +12,12 @@
 namespace Sylius\Component\Shipping\Calculator;
 
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface CalculatorInterface
 {
-    /**
-     * @return bool
-     */
-    public function isConfigurable();
 
     /**
      * @param ShippingSubjectInterface $subject
@@ -35,10 +30,7 @@ interface CalculatorInterface
     /**
      * @return string
      */
-    public function getConfigurationFormType();
+    public function getType();
 
-    /**
-     * @param OptionsResolverInterface $resolver
-     */
-    public function setConfiguration(OptionsResolverInterface $resolver);
+
 }

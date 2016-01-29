@@ -282,7 +282,7 @@ class Order implements OrderInterface
         }
 
         return $this->adjustments->filter(function (AdjustmentInterface $adjustment) use ($type) {
-            return $type === $adjustment->getLabel();
+            return $type === $adjustment->getType();
         });
     }
 

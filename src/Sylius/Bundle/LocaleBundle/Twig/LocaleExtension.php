@@ -34,7 +34,7 @@ class LocaleExtension extends \Twig_Extension
     /**
      * {@inheritdoc}
      */
-    public function getFilters()
+    public function getFunctions()
     {
         return array(
             new \Twig_SimpleFunction('sylius_locale', array($this, 'getCurrentLocale')),

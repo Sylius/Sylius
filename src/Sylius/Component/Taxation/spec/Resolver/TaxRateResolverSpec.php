@@ -16,6 +16,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxation\Model\TaxableInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
+use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -34,7 +35,7 @@ class TaxRateResolverSpec extends ObjectBehavior
 
     function it_implements_Sylius_tax_rate_resolver_interface()
     {
-        $this->shouldImplement('Sylius\Component\Taxation\Resolver\TaxRateResolverInterface');
+        $this->shouldImplement(TaxRateResolverInterface::class);
     }
 
     function it_returns_tax_rate_for_given_taxable_category(

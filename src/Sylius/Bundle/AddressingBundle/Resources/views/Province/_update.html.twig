@@ -1,9 +1,0 @@
-{% import 'SyliusResourceBundle:Macros:actions.html.twig' as actions %}
-
-<h1>Province updating <small>Use this form to edit existing province</small></h1>
-<hr />
-
-<form action="{{ path('sylius_province_update', {'countryId': province.country.id, 'id': province.id}) }}" method="post" class="form-horizontal" novalidate>
-    {% include 'SyliusAddressingBundle:Province:_form.html.twig' %}
-    {{ actions.update(path('sylius_country_list')) }}
-</form>

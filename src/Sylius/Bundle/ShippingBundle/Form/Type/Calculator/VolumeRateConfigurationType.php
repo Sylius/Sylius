@@ -13,34 +13,15 @@ namespace Sylius\Bundle\ShippingBundle\Form\Type\Calculator;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * Volume rate calculator configuration form.
- *
  * @author Antonio Peric <antonio@locastic.com>
  */
 class VolumeRateConfigurationType extends AbstractType
 {
-    /**
-     * Validation groups.
-     *
-     * @var array
-     */
-    protected $validationGroups;
-
-    /**
-     * Constructor.
-     *
-     * @param array $validationGroups
-     */
-    public function __construct(array $validationGroups)
-    {
-        $this->validationGroups = $validationGroups;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -67,12 +48,11 @@ class VolumeRateConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults(array(
                 'data_class' => null,
-                'validation_groups' => $this->validationGroups,
             ))
         ;
     }
@@ -82,6 +62,6 @@ class VolumeRateConfigurationType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_shipping_calculator_volume_rate_configuration';
+        return 'sylius_shipping_calculator_volume_rate';
     }
 }

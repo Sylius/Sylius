@@ -5,18 +5,16 @@ sylius:
   form:
     rule:
       item_count_configuration:
-        count: Ograničenja na količinu
-        equal: Ograničenja na količinu jednaku
-      type: Tip ograničenja
+        count: Brojač
     shipment:
       state: Stanje
       states:
         checkout: Blagajna
-        dispatched: Poslano
         pending: Na čekanju
         ready: Spremno
         shipped: Poslano
         returned: Vraćeno
+        cancelled: Otkazano
       tracking_code: Kod za praćenje
     shipping_calculator:
       flat_rate_configuration:
@@ -28,6 +26,8 @@ sylius:
       per_item_rate_configuration:
         amount: Iznos
       weight_rate_configuration:
+        division: Odjel
+      volume_rate_configuration:
         amount: Iznos
         division: Odjel
     shipping_category:
@@ -38,5 +38,5 @@ sylius:
       category: Kategorija
       category_requirement: Zahtjevi kategorije
       configuration: Postavke
-      enabled: Omogući?
+      enabled: Omogući
       name: Naziv

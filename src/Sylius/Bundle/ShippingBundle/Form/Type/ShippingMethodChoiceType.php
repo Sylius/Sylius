@@ -11,9 +11,11 @@
 
 namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ObjectToIdentifierTransformer;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
+use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 use Sylius\Component\Shipping\Resolver\MethodsResolverInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
@@ -23,7 +25,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * A select form which allows the user to select
@@ -41,7 +43,7 @@ class ShippingMethodChoiceType extends AbstractType
     protected $resolver;
 
     /**
-     * @var CalculatorRegistryInterface
+     * @var ServiceRegistryInterface
      */
     protected $calculators;
 
@@ -51,15 +53,13 @@ class ShippingMethodChoiceType extends AbstractType
     protected $repository;
 
     /**
-     * Constructor.
-     *
      * @param MethodsResolverInterface    $resolver
-     * @param CalculatorRegistryInterface $calculators
-     * @param Repositoryinterface         $repository
+     * @param ServiceRegistryInterface    $calculators
+     * @param RepositoryInterface         $repository
      */
     public function __construct(
         MethodsResolverInterface $resolver,
-        CalculatorRegistryInterface $calculators,
+        ServiceRegistryInterface $calculators,
         RepositoryInterface $repository
     ) {
         $this->resolver = $resolver;
@@ -72,24 +72,19 @@ class ShippingMethodChoiceType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if ($options['multiple']) {
-            $builder->addModelTransformer(new CollectionToArrayTransformer());
-        }
+        $builder->addModelTransformer($this->getProperTransformer($options));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $methodsResolver = $this->resolver;
-        $repository = $this->repository;
-
-        $choiceList = function (Options $options) use ($methodsResolver, $repository) {
+        $choiceList = function (Options $options) {
             if (isset($options['subject'])) {
-                $methods = $methodsResolver->getSupportedMethods($options['subject'], $options['criteria']);
+                $methods = $this->resolver->getSupportedMethods($options['subject'], $options['criteria']);
             } else {
-                $methods = $repository->findBy($options['criteria']);
+                $methods = $this->repository->findBy($options['criteria']);
             }
 
             return new ObjectChoiceList($methods, null, array(), null, 'id');
@@ -100,13 +95,11 @@ class ShippingMethodChoiceType extends AbstractType
                 'choice_list' => $choiceList,
                 'criteria'    => array(),
             ))
-            ->setOptional(array(
+            ->setDefined(array(
                 'subject',
             ))
-            ->setAllowedTypes(array(
-                'subject'  => array('Sylius\Component\Shipping\Model\ShippingSubjectInterface'),
-                'criteria' => array('array'),
-            ))
+            ->setAllowedTypes('subject', ShippingSubjectInterface::class)
+            ->setAllowedTypes('criteria', 'array')
         ;
     }
 
@@ -129,7 +122,7 @@ class ShippingMethodChoiceType extends AbstractType
                 throw new UnexpectedTypeException($method, 'ShippingMethodInterface');
             }
 
-            $calculator = $this->calculators->getCalculator($method->getCalculator());
+            $calculator = $this->calculators->get($method->getCalculator());
             $shippingCosts[$choiceView->value] = $calculator->calculate($subject, $method->getConfiguration());
         }
 
@@ -150,5 +143,19 @@ class ShippingMethodChoiceType extends AbstractType
     public function getName()
     {
         return 'sylius_shipping_method_choice';
+    }
+
+    /**
+     * @param array $options
+     *
+     * @return ObjectToIdentifierTransformer|CollectionToArrayTransformer
+     */
+    private function getProperTransformer(array $options)
+    {
+        if ($options['multiple']) {
+            return new CollectionToArrayTransformer();
+        }
+
+        return new ObjectToIdentifierTransformer($this->repository);
     }
 }

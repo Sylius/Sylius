@@ -11,10 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Shipping;
 
+use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodChoiceType as BaseShippingMethodType;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodChoiceType as BaseShippingMethodType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * A select form which allows the user to select
@@ -27,18 +28,15 @@ class ShippingMethodChoiceType extends BaseShippingMethodType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
 
-        $methodsResolver = $this->resolver;
-        $repository = $this->repository;
-
-        $choiceList = function (Options $options) use ($methodsResolver, $repository) {
+        $choiceList = function (Options $options) {
             if (isset($options['subject'])) {
-                $methods = $methodsResolver->getSupportedMethods($options['subject'], $options['criteria']);
+                $methods = $this->resolver->getSupportedMethods($options['subject'], $options['criteria']);
             } else {
-                $methods = $repository->findBy($options['criteria']);
+                $methods = $this->repository->findBy($options['criteria']);
             }
 
             if ($options['channel']) {
@@ -61,9 +59,7 @@ class ShippingMethodChoiceType extends BaseShippingMethodType
                 'criteria'    => array(),
                 'channel'     => null
             ))
-            ->setAllowedTypes(array(
-                'channel'  => array('Sylius\Component\Channel\Model\ChannelInterface', 'null'),
-            ))
+            ->setAllowedTypes('channel', [ChannelInterface::class, 'null'])
         ;
     }
 }

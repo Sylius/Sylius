@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -46,7 +46,7 @@ class OrderChannelListener
         if (!$order instanceof OrderInterface) {
             throw new UnexpectedTypeException(
                 $order,
-                'Sylius\Component\Core\Model\OrderInterface'
+                OrderInterface::class
             );
         }
 

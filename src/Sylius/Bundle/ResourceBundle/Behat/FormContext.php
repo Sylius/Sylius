@@ -14,6 +14,7 @@ namespace Sylius\Bundle\ResourceBundle\Behat;
 use Behat\Mink\Element\Element;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Mink\Selector\Xpath\Escaper;
 use Behat\MinkExtension\Context\RawMinkContext;
 
 /**
@@ -184,9 +185,11 @@ abstract class FormContext extends RawMinkContext
      */
     protected function findField($locator, Element $container = null)
     {
+        $escaper = new Escaper();
+
         if (null !== $container) {
             $field = $container->find('named', array(
-                'field', $this->getSession()->getSelectorsHandler()->xpathLiteral($locator),
+                'field', $escaper->escapeLiteral($locator),
             ));
         } else {
             $field = $this->getSession()->getPage()->findField($locator);
@@ -197,7 +200,7 @@ abstract class FormContext extends RawMinkContext
                 $this->getSession(),
                 'element',
                 'xpath',
-                $this->getSession()->getSelectorsHandler()->xpathLiteral($locator)
+                $escaper->escapeLiteral($locator)
             );
         }
 
@@ -215,6 +218,7 @@ abstract class FormContext extends RawMinkContext
      */
     protected function findElement($locator, $selector = 'xpath', Element $container = null)
     {
+        $escaper = new Escaper();
         if (null !== $container) {
             $field = $container->find($selector, $locator);
         } else {
@@ -226,7 +230,7 @@ abstract class FormContext extends RawMinkContext
                 $this->getSession(),
                 'element',
                 'xpath',
-                $this->getSession()->getSelectorsHandler()->xpathLiteral($locator)
+                $escaper->escapeLiteral($locator)
             );
         }
 

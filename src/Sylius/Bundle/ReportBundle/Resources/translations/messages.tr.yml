@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    report:
+      name: Ad
+      description: Açıklama
+      code: Kod
+      chart:
+        type: Türü

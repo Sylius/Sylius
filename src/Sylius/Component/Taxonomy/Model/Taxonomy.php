@@ -50,6 +50,22 @@ class Taxonomy extends AbstractTranslatable implements TaxonomyInterface
     /**
      * {@inheritdoc}
      */
+    public function getCode()
+    {
+        return $this->root->getCode();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCode($code)
+    {
+        $this->root->setCode($code);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return $this->translate()->getName();

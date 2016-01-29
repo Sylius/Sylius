@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  resource:
+    not_enabled: Zdroj je vypnutý
+    not_disabled: Zdroj je zapnutý

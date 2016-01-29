@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\FlowBundle\Process\Coordinator;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilderInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
+use Sylius\Bundle\FlowBundle\Process\Coordinator\CoordinatorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class CoordinatorSpec extends ObjectBehavior
@@ -30,6 +31,6 @@ class CoordinatorSpec extends ObjectBehavior
 
     function it_is_process_builder()
     {
-        $this->shouldImplement('Sylius\Bundle\FlowBundle\Process\Coordinator\CoordinatorInterface');
+        $this->shouldImplement(CoordinatorInterface::class);
     }
 }

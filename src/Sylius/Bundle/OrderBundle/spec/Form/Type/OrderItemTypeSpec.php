@@ -13,8 +13,9 @@ namespace spec\Sylius\Bundle\OrderBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -33,7 +34,7 @@ class OrderItemTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldHaveType('Symfony\Component\Form\AbstractType');
+        $this->shouldHaveType(AbstractType::class);
     }
 
     function it_builds_form_with_quantity_and_unit_price_fields(FormBuilderInterface $builder)
@@ -51,7 +52,7 @@ class OrderItemTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
+    function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults(array(
@@ -61,7 +62,7 @@ class OrderItemTypeSpec extends ObjectBehavior
             ->shouldBeCalled()
         ;
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 
     function it_has_valid_name()

@@ -6,3 +6,4 @@ sylius:
     attribute:
       name: Belső név
       presentation: Bemutató
+      type: Típus

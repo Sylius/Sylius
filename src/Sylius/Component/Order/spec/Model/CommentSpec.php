@@ -12,6 +12,8 @@
 namespace spec\Sylius\Component\Order\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Order\Model\CommentInterface;
+use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
  * @author Myke Hines <myke@webhines.com>
@@ -25,12 +27,12 @@ class CommentSpec extends ObjectBehavior
 
     function it_implements_Sylius_comment_interface()
     {
-        $this->shouldImplement('Sylius\Component\Order\Model\CommentInterface');
+        $this->shouldImplement(CommentInterface::class);
     }
 
     function it_implements_Sylius_timestampable_interface()
     {
-        $this->shouldImplement('Sylius\Component\Resource\Model\TimestampableInterface');
+        $this->shouldImplement(TimestampableInterface::class);
     }
 
     function it_has_no_id_by_default()

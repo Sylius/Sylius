@@ -674,7 +674,7 @@ sylius:
         no_promotion: No coupons were used.order:
         adjustments:
             manage: Manage adjustments
-            label: Label
+            type: Type
             description: Description
             amount: Amount
             locked: Locked?
@@ -736,9 +736,11 @@ sylius:
         create: Add channel
         created_at: Created at
         code: Code
+        currency_default: Default currency
         enabled: Enabled
         id: ID
         index_header: Channels
+        locale_default: Default locale
         manage: Manage channels
         create_header: Add channel
         name: Name
@@ -808,6 +810,7 @@ sylius:
     product:
         add_attribute: Add attribute
         available_on: Available on
+        available_until: Available until
         available_on_demand: Available on demand
         categorization: Categorization
         contain_variants: Contain Variants
@@ -830,13 +833,16 @@ sylius:
         no_sku: No SKU
         no_tax_category: No tax category
         no_taxons: There are no taxons for this product
+        no_taxon: There is no main taxon for this product
         options: Options
         variants: Variants
         price: Retail price
+        original_price: Original price
         attributes: Attributes
         restricted_zone: Restricted zone
         remove_attribute: Remove attribute
         shipping_category: Shipping category
+        main_taxon: Main taxon
         show: View more
         show_header: Product details <small>Viewing product "<strong>%product%</strong>"</small>
         show_in_store: show in store
@@ -861,7 +867,6 @@ sylius:
             qty_min: Qty min
             qty_max: Qty max
             price: Price
-        delete_revert: Undelete
     product_not_available_in_zone: Not available in your country
     promotion:
         actions: Actions
@@ -908,13 +913,13 @@ sylius:
         type: Type
     product_attribute:
         add_choice: Add choice
+        code: Code
         create: Create product attribute
         create_header: New product attribute
         index_header: Product attributes
         manage: Manage attributes
         name: name
         no_results: There are no attributes configured.
-        presentation: presentation
         type: type
         update_header: Editing attribute
         updated_at: last update
@@ -924,7 +929,6 @@ sylius:
         create: Create archetype
         create_header: New archetype
         index_header: Product archetypes
-        code: code
         name: name
         no_results: There are no archetypes defined.
         options: options
@@ -952,6 +956,7 @@ sylius:
         index_header: Reports
         no_data: There is no data to display.
         no_report: There is no report to display.
+    restore: Restore
     save_changes: Save changes
     search: Search
     security:
@@ -985,7 +990,7 @@ sylius:
         category: Category
         create: Create shipping method
         create_header: New shipping method
-        enabled: Is enabled?
+        enabled: enabled
         id: ID
         index_header: Shipping methods
         manage: Manage shipping methods
@@ -1117,6 +1122,7 @@ sylius:
         no_results: There are no variants to display.
         options: Options
         price: Price
+        original_price: Original price
         sku: SKU
         stock: Current stock
         update_header: Editing variant
@@ -1165,3 +1171,4 @@ sylius:
     disable: Disable
     ui:
         links: Links
+        code:  Code

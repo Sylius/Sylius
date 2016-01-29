@@ -13,6 +13,10 @@ sylius:
       type: Typ
     rule:
       taxonomy_configuration:
+        taxons: Kategórie
+        exclude: Vylúčiť
+      contains_product_configuration:
+        variants: Produkty
         exclude: Vylúčiť
       item_count_configuration:
         count: Počet
@@ -22,26 +26,30 @@ sylius:
         equal: Rovný
       nth_order_configuration:
         nth: N-ty
-      user_loyality_configuration:
+      customer_loyalty_configuration:
         time: Čas
         unit:
           days: Dní
           weeks: Týždňov
           months: Mesiacov
           years: Rokov
-          0: Jednotka
+          header: Jednotka
+        after: Používateľ vytvorený po období
       shipping_country_configuration:
         country: Krajina
       type: Typ
     coupon:
       code: Kód
       usage_limit: Limit použitia
+      expires_at: Platnosť do
     coupon_generate_instruction:
       amount: Suma
       usage_limit: Limit použitia
+      expires_at: Platnosť do
     promotion:
       actions: Akcie
       coupon_based: Založená na kupónoch
+      exclusive: Exkluzívne
       description: Popis
       ends_at: Končí
       name: Názov

@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Addressing\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 
@@ -27,7 +28,7 @@ class AddressSpec extends ObjectBehavior
 
     function it_implements_Sylius_address_interface()
     {
-        $this->shouldImplement('Sylius\Component\Addressing\Model\AddressInterface');
+        $this->shouldImplement(AddressInterface::class);
     }
 
     function it_has_no_id_by_default()
@@ -202,7 +203,7 @@ class AddressSpec extends ObjectBehavior
 
     function its_creation_time_is_initialized_by_default()
     {
-        $this->getCreatedAt()->shouldHaveType('DateTime');
+        $this->getCreatedAt()->shouldHaveType(\DateTime::class);
     }
 
     function its_last_update_time_is_undefined_by_default()

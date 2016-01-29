@@ -13,10 +13,12 @@ namespace spec\Sylius\Bundle\VariationBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Product\Model\OptionInterface;
+use Sylius\Bundle\VariationBundle\Form\DataTransformer\VariantToCombinationTransformer;
+use Sylius\Component\Variation\Model\OptionInterface;
 use Sylius\Component\Variation\Model\VariableInterface;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Form\Test\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class VariantMatchTypeSpec extends ObjectBehavior
 {
@@ -32,7 +34,7 @@ class VariantMatchTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_builds_a_form(FormBuilderInterface $builder, VariableInterface $variable, OptionInterface $option)
@@ -48,24 +50,21 @@ class VariantMatchTypeSpec extends ObjectBehavior
         ))->shouldBeCalled();
 
         $builder->addModelTransformer(
-            Argument::type('Sylius\Bundle\VariationBundle\Form\DataTransformer\VariantToCombinationTransformer')
+            Argument::type(VariantToCombinationTransformer::class)
         )->shouldBeCalled();
 
         $this->buildForm($builder, array('variable' => $variable));
     }
 
-    function it_has_options(OptionsResolverInterface $resolver)
+    function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setRequired(array(
             'variable'
         ))->shouldBeCalled()->willReturn($resolver);
 
-        $resolver->setAllowedTypes(array(
-            'variable' => 'Sylius\Component\Variation\Model\VariableInterface'
-        ))->shouldBeCalled()->willReturn($resolver);
+        $resolver->setAllowedTypes('variable', VariableInterface::class)->shouldBeCalled()->willReturn($resolver);
 
-
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 
     function it_has_a_name()

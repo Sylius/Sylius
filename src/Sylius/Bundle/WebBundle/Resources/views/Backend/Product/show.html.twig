@@ -17,6 +17,11 @@
 <div class="page-header">
     <div class="actions-menu">
     {{ buttons.manage(path('sylius_backend_product_index'), 'sylius.product.manage'|trans) }}
+    {% if product.enabled %}
+        {{ buttons.disable(path('sylius_backend_product_disable', {'id': product.id})) }}
+    {% else %}
+        {{ buttons.enable(path('sylius_backend_product_enable', {'id': product.id})) }}
+    {% endif %}
     {% if not product.deleted %}
     {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}
     {{ buttons.delete(path('sylius_backend_product_delete', {'id': product.id}), null, false, true) }}
@@ -25,7 +30,7 @@
         {{ 'sylius.product.show_in_store'|trans }}
     </a>
     {% else %}
-        {{ buttons.patch(path('sylius_backend_product_delete_restore', {'id': product.id}), 'sylius.product.delete_restore', null, 'btn btn-primary') }}
+        {{ buttons.patch(path('sylius_backend_product_delete_restore', {'id': product.id}), 'sylius.restore'|trans, null, 'btn btn-primary') }}
     {% endif %}
     <a href="{{ path('sylius_backend_product_history', {'id': product.id}) }}" class="btn btn-info">
        <i class="glyphicon glyphicon-calendar"></i>
@@ -77,6 +82,12 @@
                     <td>{{ 'sylius.product.available_on'|trans }}</td>
                     <td><span class="label label-{{ product.available ? 'success' : 'danger' }}">{{ product.availableOn|date }}</span></td>
                 </tr>
+                {% if product.availableUntil %}
+                <tr>
+                    <td>{{ 'sylius.product.available_until'|trans }}</td>
+                    <td><span class="label label-{{ product.available ? 'success' : 'danger' }}">{{ product.availableUntil|date }}</span></td>
+                </tr>
+                {% endif %}
                 <tr>
                     <td>{{ 'sylius.product.options'|trans }}</td>
                     <td>
@@ -110,6 +121,16 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>{{ 'sylius.product.main_taxon'|trans }}</td>
+                    <td>
+                        {%  if product.mainTaxon is not null %}
+                            {{ product.mainTaxon }}
+                        {%  else %}
+                            {{ 'sylius.product.no_taxon'|trans }}
+                        {%  endif %}
+                    </td>
+                </tr>
+                <tr>
                     <td>{{ 'sylius.product.tax_category'|trans }}</td>
                     <td>{{ product.taxCategory|default('sylius.product.no_tax_category'|trans) }}</td>
                 </tr>
@@ -136,8 +157,16 @@
                     <td><span class="label label-{{ product.masterVariant.inStock ? 'success' : 'important' }}">{{ product.masterVariant.onHand }}</span></td>
                 </tr>
                 <tr>
+                    <td></td>
+                    <td><span class="label label-{{ product.enabled ? 'success' : 'important'}}">{{ product.enabled ? 'Enabled' : 'Disabled' }}</span></td>
+                </tr>
+                <tr>
                     <td>{{ 'sylius.product.price'|trans }}</td>
                     <td>{{ product.masterVariant.price|sylius_price }}</td>
+                </tr>
+                <tr>
+                    <td>{{ 'sylius.product.original_price'|trans }}</td>
+                    <td>{{ product.masterVariant.originalPrice|sylius_price }}</td>
                 </tr>
                 {% if product.masterVariant.pricingCalculator == 'volume_based' %}
                 <tr>
@@ -188,7 +217,11 @@
                 {% for attribute in product.attributes %}
                 <tr>
                     <td><strong>{{ attribute.name }}</strong></td>
-                    <td>{{ attribute.value }}</td>
+                    {% if attribute.value.timestamp is defined %}
+                        <td>{{ attribute.value|date('Y/m/d H:i:s') }}</td>
+                    {% else %}
+                        <td>{{ attribute.value }}</td>
+                    {% endif %}
                 </tr>
                 {% else %}
                 <tr>

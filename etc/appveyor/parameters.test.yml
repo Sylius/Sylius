@@ -1,0 +1,2 @@
+parameters:
+    sylius.database.password: "Password12!"

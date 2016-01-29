@@ -11,11 +11,11 @@
 
 namespace Sylius\Component\Archetype\Builder;
 
-use Sylius\Component\Archetype\Model\ArchetypeSubjectInterface;
 use Sylius\Component\Archetype\Model\ArchetypeInterface;
+use Sylius\Component\Archetype\Model\ArchetypeSubjectInterface;
 use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Variation\Model\VariableInterface;
 
 /**
@@ -27,18 +27,18 @@ class ArchetypeBuilder implements ArchetypeBuilderInterface
     /**
      * Attribute value repository.
      *
-     * @var RepositoryInterface
+     * @var FactoryInterface
      */
-    protected $attributeValueRepository;
+    protected $attributeValueFactory;
 
     /**
      * Constructor.
      *
-     * @param RepositoryInterface $attributeValueRepository
+     * @param FactoryInterface $attributeValueFactory
      */
-    public function __construct(RepositoryInterface $attributeValueRepository)
+    public function __construct(FactoryInterface $attributeValueFactory)
     {
-        $this->attributeValueRepository = $attributeValueRepository;
+        $this->attributeValueFactory = $attributeValueFactory;
     }
 
     /**
@@ -61,9 +61,9 @@ class ArchetypeBuilder implements ArchetypeBuilderInterface
     private function createAndAssignAttributes(ArchetypeInterface $archetype, AttributeSubjectInterface $subject)
     {
         foreach ($archetype->getAttributes() as $attribute) {
-            if (null === $subject->getAttributeByName($attribute->getName())) {
+            if (null === $subject->getAttributeByCode($attribute->getCode())) {
                 /** @var AttributeValueInterface $attributeValue */
-                $attributeValue = $this->attributeValueRepository->createNew();
+                $attributeValue = $this->attributeValueFactory->createNew();
                 $attributeValue->setAttribute($attribute);
 
                 $subject->addAttribute($attributeValue);

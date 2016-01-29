@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Inventory\Checker;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
 
@@ -32,7 +33,7 @@ class AvailabilityCheckerSpec extends ObjectBehavior
 
     function it_implements_Sylius_inventory_availability_checker_interface()
     {
-        $this->shouldImplement('Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface');
+        $this->shouldImplement(AvailabilityCheckerInterface::class);
     }
 
     function it_recognizes_any_stockable_as_available_if_backorders_are_enabled(StockableInterface $stockable)

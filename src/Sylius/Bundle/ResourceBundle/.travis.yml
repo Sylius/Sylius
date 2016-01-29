@@ -1,22 +1,13 @@
 language: php
 
 php:
-  - 5.3
-  - 5.4
   - 5.5
-
-services: mongodb
+  - 5.6
+  - 7.0
 
 before_script:
-    - echo '' > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
-    - echo "extension = mongo.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+    - echo "memory_limit=2048M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+    - phpenv config-rm xdebug.ini || true
+    - composer install --no-interaction --prefer-source --ignore-platform-reqs
 
-    - composer require doctrine/mongodb-odm="1.0.*@dev" --no-update
-    - composer require jmikola/geojson="~1.0" --no-update
-    - composer install --prefer-source --no-interaction
-
-script: php bin/phpspec run -f pretty
-
-notifications:
-    email: "travis-ci@sylius.org"
-    irc:   "irc.freenode.org#sylius-dev"
+script: bin/phpspec run -fpretty --verbose

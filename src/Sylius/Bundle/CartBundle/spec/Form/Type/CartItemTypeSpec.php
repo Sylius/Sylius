@@ -14,7 +14,8 @@ namespace spec\Sylius\Bundle\CartBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Form\FormBuilder;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\FormTypeInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -33,7 +34,7 @@ class CartItemTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_builds_form_with_quantity_field(FormBuilder $builder)
@@ -47,7 +48,7 @@ class CartItemTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
+    function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults(array(
@@ -57,6 +58,6 @@ class CartItemTypeSpec extends ObjectBehavior
             ->shouldBeCalled()
         ;
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 }

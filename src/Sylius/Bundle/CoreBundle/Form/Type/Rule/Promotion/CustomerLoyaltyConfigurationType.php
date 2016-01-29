@@ -13,24 +13,14 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Rule\Promotion;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * Nth order rule configuration form type.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class CustomerLoyaltyConfigurationType extends AbstractType
 {
-    protected $validationGroups;
-
-    public function __construct(array $validationGroups)
-    {
-        $this->validationGroups = $validationGroups;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -58,18 +48,6 @@ class CustomerLoyaltyConfigurationType extends AbstractType
             ))
             ->add('after', 'checkbox', array(
                 'label' => 'sylius.form.rule.customer_loyalty_configuration.after',
-            ))
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'validation_groups' => $this->validationGroups,
             ))
         ;
     }

@@ -13,6 +13,8 @@ namespace spec\Sylius\Bundle\CoreBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\UserBundle\Form\Type\UserType;
+use Sylius\Component\Core\Model\User;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -23,7 +25,7 @@ class UserTypeSpec extends ObjectBehavior
 {
     function let(CanonicalizerInterface $canonicalizer)
     {
-        $this->beConstructedWith('Sylius\Component\Core\Model\User', array('sylius'), $canonicalizer);
+        $this->beConstructedWith(User::class, array('sylius'), $canonicalizer);
     }
 
     function it_is_initializable()
@@ -33,7 +35,7 @@ class UserTypeSpec extends ObjectBehavior
 
     function it_extends_user_type_from_user_bundle()
     {
-        $this->shouldHaveType('Sylius\Bundle\UserBundle\Form\Type\UserType');
+        $this->shouldHaveType(UserType::class);
     }
 
     function it_has_name()

@@ -11,10 +11,11 @@
 
 namespace Sylius\Bundle\VariationBundle\Form\Type;
 
+use Sylius\Component\Variation\Model\OptionInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
@@ -38,7 +39,7 @@ class OptionValueChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $choiceList = function (Options $options) {
             return new ObjectChoiceList(
@@ -59,7 +60,7 @@ class OptionValueChoiceType extends AbstractType
                 'option',
             ))
             ->addAllowedTypes(array(
-                'option' => 'Sylius\Component\Variation\Model\OptionInterface',
+                'option' => OptionInterface::class,
             ))
         ;
     }

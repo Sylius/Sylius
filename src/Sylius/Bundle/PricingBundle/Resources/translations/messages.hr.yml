@@ -7,3 +7,11 @@ sylius:
       price: Cijena
       calculator: Određivanje cijene
       configuration: Postavke
+    pricing:
+      volume_based:
+        price: Cijena
+  pricing:
+    volume_based:
+      price: Cijena
+      button:
+        add: Dodaj

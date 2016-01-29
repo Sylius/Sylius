@@ -16,10 +16,9 @@ use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 /**
- * Base taxon repository.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
+ * @author Anna Walasek <anna.walasek@lakion.com>
  */
 class TaxonRepository extends TranslatableResourceRepository implements TaxonRepositoryInterface
 {
@@ -42,5 +41,17 @@ class TaxonRepository extends TranslatableResourceRepository implements TaxonRep
             ->orderBy($this->getAlias().'.left')
             ->getQuery()
             ->getOneOrNullResult();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getNonRootTaxons()
+    {
+        return $this->getQueryBuilder()
+            ->where($this->getAlias().'.parent IS NOT NULL')
+            ->orderBy($this->getAlias().'.left')
+            ->getQuery()
+            ->getResult();
     }
 }

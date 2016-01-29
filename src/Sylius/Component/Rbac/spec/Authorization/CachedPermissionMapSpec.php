@@ -15,7 +15,6 @@ use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Rbac\Authorization\PermissionMapInterface;
-use Sylius\Component\Rbac\Model\PermissionInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
 
 /**
@@ -35,7 +34,7 @@ class CachedPermissionMapSpec extends ObjectBehavior
 
     function it_is_a_permission_map()
     {
-        $this->shouldHaveType('Sylius\Component\Rbac\Authorization\PermissionMapInterface');
+        $this->shouldHaveType(PermissionMapInterface::class);
     }
 
     function it_uses_another_map_to_get_all_permissions($map, Collection $permissions, RoleInterface $role)

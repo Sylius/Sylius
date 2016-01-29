@@ -11,12 +11,13 @@
 
 namespace Sylius\Component\Payment\Model;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface CreditCardInterface extends PaymentSourceInterface, TimestampableInterface
+interface CreditCardInterface extends PaymentSourceInterface, TimestampableInterface, ResourceInterface
 {
     /**
      * Supported CC brands.

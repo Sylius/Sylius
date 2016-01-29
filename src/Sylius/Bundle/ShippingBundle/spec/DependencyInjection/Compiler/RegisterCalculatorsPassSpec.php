@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
@@ -25,13 +26,13 @@ class RegisterCalculatorsPassSpec extends ObjectBehavior
 
     function it_is_a_compiler_pass()
     {
-        $this->shouldImplement('Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface');
+        $this->shouldImplement(CompilerPassInterface::class);
     }
 
     function it_processes_the_calculators_services(ContainerBuilder $container, Definition $calculator)
     {
-        $container->hasDefinition('sylius.shipping_calculator_registry')->shouldBeCalled()->willReturn(true);
-        $container->getDefinition('sylius.shipping_calculator_registry')->shouldBeCalled()->willReturn($calculator);
+        $container->hasDefinition('sylius.registry.shipping_calculator')->shouldBeCalled()->willReturn(true);
+        $container->getDefinition('sylius.registry.shipping_calculator')->shouldBeCalled()->willReturn($calculator);
 
         $container->findTaggedServiceIds('sylius.shipping_calculator')->shouldBeCalled()->willReturn(array(
             'calculator_id' => array(
@@ -43,7 +44,7 @@ class RegisterCalculatorsPassSpec extends ObjectBehavior
         ));
 
         $calculator->addMethodCall(
-            'registerCalculator',
+            'register',
             Argument::type('array')
         )->shouldBeCalled();
 

@@ -16,14 +16,13 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\ChannelsAwareInterface;
 use Sylius\Component\Product\Model\ProductInterface as BaseProductInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
-use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxableInterface;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonsAwareInterface;
 
 /**
- * Product interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Anna Walasek <anna.walasek@lakion.com>
  */
 interface ProductInterface extends
     BaseProductInterface,
@@ -146,4 +145,14 @@ interface ProductInterface extends
      * @return ImageInterface
      */
     public function getImage();
+
+    /**
+     * @return TaxonInterface
+     */
+    public function getMainTaxon();
+
+    /**
+     * @param TaxonInterface $mainTaxon
+     */
+    public function setMainTaxon(TaxonInterface $mainTaxon = null);
 }

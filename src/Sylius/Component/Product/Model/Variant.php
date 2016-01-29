@@ -24,6 +24,11 @@ class Variant extends BaseVariant implements VariantInterface
      */
     protected $availableOn;
 
+    /**
+     * @var \DateTime
+     */
+    protected $availableUntil;
+
     public function __construct()
     {
         parent::__construct();
@@ -52,7 +57,7 @@ class Variant extends BaseVariant implements VariantInterface
      */
     public function isAvailable()
     {
-        return new \DateTime() >= $this->availableOn;
+        return (new DateRange($this->availableOn, $this->availableUntil))->isInRange();
     }
 
     /**
@@ -72,6 +77,26 @@ class Variant extends BaseVariant implements VariantInterface
 
         if ($this->isMaster() && null !== $this->object) {
             $this->getProduct()->setAvailableOn($availableOn);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAvailableUntil()
+    {
+        return $this->availableUntil;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAvailableUntil(\DateTime $availableUntil = null)
+    {
+        $this->availableUntil = $availableUntil;
+
+        if ($this->isMaster() && null !== $this->object) {
+            $this->getProduct()->setAvailableUntil($availableUntil);
         }
     }
 

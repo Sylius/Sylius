@@ -24,6 +24,11 @@ class OptionValue implements OptionValueInterface
     /**
      * @var string
      */
+    protected $code;
+
+    /**
+     * @var string
+     */
     protected $value;
 
     /**
@@ -45,6 +50,22 @@ class OptionValue implements OptionValueInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
     }
 
     /**

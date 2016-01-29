@@ -7,14 +7,14 @@ Feature: Checkout starting
     Background:
         Given store has default configuration
           And there are following taxonomies defined:
-            | name     |
-            | Category |
+            | code | name     |
+            | RTX1 | Category |
           And taxonomy "Category" has following taxons:
-            | Clothing > T-Shirts     |
-            | Clothing > PHP T-Shirts |
+            | Clothing[TX1] > T-Shirts[TX2]     |
+            | Clothing[TX1] > PHP T-Shirts[TX3] |
           And there are following options:
-            | name          | presentation | values           |
-            | T-Shirt color | Color        | Red, Blue, Green |
+            | code | name         | presentation  | values                          |
+            | O1   |T-Shirt color | Color         | Red[OV1], Blue[OV2], Green[OV3] |
           And the following products exist:
             | name          | price | options       | taxons       | variants selection |
             | Super T-Shirt | 20.00 | T-Shirt color | T-Shirts     | match              |

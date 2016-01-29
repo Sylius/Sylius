@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\InventoryBundle\Templating\Helper;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
+use Symfony\Component\Templating\Helper\Helper;
 
 class InventoryHelperSpec extends ObjectBehavior
 {
@@ -29,7 +30,7 @@ class InventoryHelperSpec extends ObjectBehavior
 
     function it_is_a_twig_extension()
     {
-        $this->shouldHaveType('Symfony\Component\Templating\Helper\Helper');
+        $this->shouldHaveType(Helper::class);
     }
 
     function it_delegates_the_stock_availability_checking_to_the_checker(

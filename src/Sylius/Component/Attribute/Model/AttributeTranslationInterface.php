@@ -10,24 +10,20 @@
 
 namespace Sylius\Component\Attribute\Model;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
+
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface AttributeTranslationInterface
+interface AttributeTranslationInterface extends ResourceInterface
 {
-    /**
-     * @return mixed
-     */
-    public function getId();
-
     /**
      * @return string
      */
-    public function getPresentation();
+    public function getName();
 
     /**
-     * @param string $presentation
+     * @param string $name
      */
-    public function setPresentation($presentation);
-
-} 
+    public function setName($name);
+}

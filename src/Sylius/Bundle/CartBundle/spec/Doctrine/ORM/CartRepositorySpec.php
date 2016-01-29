@@ -2,15 +2,15 @@
 
 namespace spec\Sylius\Bundle\CartBundle\Doctrine\ORM;
 
+use Doctrine\ORM\AbstractQuery;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Query\Expr;
+use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Doctrine\ORM\Mapping\ClassMetadata;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\AbstractQuery;
-use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Cart\Model\CartInterface;
-use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderInterface;
 
 class CartRepositorySpec extends ObjectBehavior
 {
@@ -43,7 +43,7 @@ class CartRepositorySpec extends ObjectBehavior
         $builder->addSelect('item')->shouldBeCalled()->willReturn($builder);
         $builder->andWhere(Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->andWhere(Argument::any())->shouldBeCalled()->willReturn($builder);
-        $builder->setParameter('now', Argument::type('\DateTime'))->shouldBeCalled()->willReturn($builder);
+        $builder->setParameter('now', Argument::type(\DateTime::class))->shouldBeCalled()->willReturn($builder);
         $builder->setParameter('state', OrderInterface::STATE_CART)->shouldBeCalled()->willReturn($builder);
 
         $builder->getQuery()->shouldBeCalled()->willReturn($query);

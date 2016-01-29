@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\CoreBundle\Authorization;
 
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
-use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
+use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface;
 
 /**
  * Test (toggleable) authorization checker.

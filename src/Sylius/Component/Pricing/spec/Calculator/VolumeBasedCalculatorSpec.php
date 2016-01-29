@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Pricing\Calculator;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Pricing\Calculator\CalculatorInterface;
 use Sylius\Component\Pricing\Calculator\Calculators;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 
@@ -27,7 +28,7 @@ class VolumeBasedCalculatorSpec extends ObjectBehavior
 
     function it_implements_Sylius_pricing_calculator_interface()
     {
-        $this->shouldImplement('Sylius\Component\Pricing\Calculator\CalculatorInterface');
+        $this->shouldImplement(CalculatorInterface::class);
     }
 
     function it_assumes_quantity_is_1_if_not_provided_in_context(PriceableInterface $priceable)

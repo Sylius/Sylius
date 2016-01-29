@@ -2,15 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  account:
-    home:
-      email: ""
-      id: ""
-    order:
-      number: ""
-      payment_mode: ""
-      shipment_mode: ""
-      state: ""
+  emails:
+    order_confirmation:
+      subject: Xin cảm ơn vì đã đặt hàng với chúng tôi!
   address:
     city: Thành phố
     company: Công ty
@@ -33,20 +27,24 @@ sylius:
       chart_order_total: Giá trị đơn đặt hàng
       orders: Đơn đặt hàng tuần trước
       revenue: Doanh thu tuần trước
-    quick_links:
-      users: Người dùng
   block:
-    id: ID
-    title: Tiêu đề
-    update_header: Chỉnh sửa khối nội dung
-    updated_at: Cập nhật lần cuối
+    imagine:
+      title: Tiêu đề
+      updated_at: Cập nhật lần cuối
+    simple:
+      title: Tiêu đề
+      updated_at: Cập nhật lần cuối
+    slideshow:
+      title: Tiêu đề
+      updated_at: Cập nhật lần cuối
+    string:
+      title: Tiêu đề
+      updated_at: Cập nhật lần cuối
   breadcrumb:
     country:
       index: Quốc gia
-    customers: Khách hàng
+    dashboard: Bảng điều khiển
     edit: Chỉnh sửa
-    exchange_rate:
-      index: Tỷ giá ngoại tệ
     general_settings: Cài đặt chung
     generate: Tạo
     group:
@@ -60,8 +58,6 @@ sylius:
       index: Tùy chọn
     order:
       index: Đơn đặt hàng
-    page:
-      index: Các trang tĩnh
     payment:
       index: Thanh toán
     payment_method:
@@ -72,8 +68,8 @@ sylius:
       index: Chương trình khuyến mãi
     shipment:
       index: Vận chuyển
-    user:
-      index: Người dùng
+    role:
+      index: Vai trò
   cart:
     summary:
       quantity: Số lượng
@@ -121,21 +117,29 @@ sylius:
     iso_name: Mã ISO
     manage: Quản lý quốc gia
     name: Tên
+  email:
+    code: Mã
+    updated_at: Cập nhật lần cuối
   create: Tạo
   created_at: Được tạo vào lúc
   delete: xóa
   deleted: Đã bị xoá
   edit: chỉnh sửa
-  email: Email
-  exchange_rate:
-    create: Tự tạo tỷ giá ngoại tệ
-    create_header: Tỷ giá ngoại tệ mới
-    currency: Tiền tệ
+  permission:
+    code: Mã
     id: ID
-    index_header: Tỷ giá ngoại tệ
-    no_results: Chưa có tỷ giá ngoại tệ nào để hiển thị.
-    rate: tỷ giá
-    update_header: Chỉnh sửa tỷ giá hối đoái
+    updated_at: Cập nhật lần cuối
+  role:
+    code: Mã
+    id: ID
+    name: Tên
+    index_header: Vai trò
+    updated_at: Cập nhật lần cuối
+  currency:
+    code: Mã
+    id: ID
+    name: Tên
+    updated_at: Cập nhật lần cuối
   form:
     frontend:
       password:
@@ -153,27 +157,37 @@ sylius:
     sku: MÃ SẢN PHẨM
     updated_at: Cập nhật lần cuối
   locale:
+    id: ID
+    name: Tên
     code: Mã
     enabled: Đã được kích hoạt
     updated_at: Cập nhật lần cuối
   logo: Sylius
   manage: Quản lý
+  menu:
+    id: ID
+    title: Tiêu đề
+  menu_node:
+    id: ID
+    title: Tiêu đề
   newest: Sản phẩm mới nhất
   "no": false
-  option:
-    create: Tạo tùy chọn
-    create_header: Tạo tuỳ chọn sản phẩm mới
-    index_header: Tuỳ chọn cho sản phẩm
-    manage: Quản lý tuỳ chọn
+  product_option:
     name: Tên
-    presentation: trình bày
-    update_header: Chỉnh sửa tùy chọn
-    updated_at: Cập nhật lần cuối
   order:
     id: ID
     index_header: Đơn đặt hàng hiện tại
     shipments: Vận chuyển
     taxes: Thuế
+    comment:
+      created_at: Được tạo vào lúc
+  route:
+    id: ID
+    name: Tên
+    title: Tiêu đề
+  redirect_route:
+    id: ID
+    title: Tiêu đề
   shipment:
     created_at: Được tạo vào lúc
     id: ID
@@ -181,12 +195,17 @@ sylius:
     name: Tên
     sku: MÃ SẢN PHẨM
     updated_at: Cập nhật lần cuối
+  channel:
+    created_at: Được tạo vào lúc
+    code: Mã
+    id: ID
+    name: Tên
+    updated_at: Cập nhật lần cuối
   order_item:
     quantity: Số lượng
   page:
     id: ID
     title: Tiêu đề
-    update_header: Cập nhật lần cuối
   password: Mật khẩu
   payment:
     created_at: Được tạo vào lúc
@@ -206,17 +225,23 @@ sylius:
       images: Hình ảnh
       options: Tùy chọn
     updated_at: Cập nhật lần cuối
+    volume_based:
+      price: Giá
   promotion:
     created_at: Được tạo vào lúc
     id: ID
     name: Tên
     updated_at: Cập nhật lần cuối
-  property:
+  promotion_coupon:
+    code: Mã
+  product_attribute:
     name: Tên
-    presentation: trình bày
-  prototype:
-    index_header: Sản phẩm mẫu
+  archetype:
     name: Tên
+  report:
+    name: Tên
+    code: Mã
+    manage: Quản lý
   search: Tìm kiếm
   settings:
     general_header: Cài đặt chung
@@ -244,8 +269,10 @@ sylius:
     name: Tên
   taxonomy:
     name: Tên
+  customer:
+    id: ID
+    groups: Nhóm
   user:
-    email: Email
     id: ID
   variant:
     last_update: Cập nhật lần cuối
@@ -255,3 +282,11 @@ sylius:
   "yes": true
   zone:
     name: Tên
+    scope: Phạm vi
+  contact_topic:
+    id: ID
+    title: Tiêu đề
+    updated_at: Cập nhật lần cuối
+  contact_request:
+    id: ID
+    updated_at: Cập nhật lần cuối

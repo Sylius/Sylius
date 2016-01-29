@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\MailerBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Form choice type for email templates.
@@ -37,7 +37,7 @@ class EmailTemplateChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'choices' => array_flip($this->templates),

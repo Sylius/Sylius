@@ -7,19 +7,19 @@ Feature: Group based pricing
     Background:
         Given store has default configuration
           And there are following taxonomies defined:
-            | name     |
-            | Category |
+            | code | name     |
+            | RTX1 | Category |
           And taxonomy "Category" has following taxons:
-            | Clothing > PHP T-Shirts |
+            | Clothing[TX1] > PHP T-Shirts[TX2] |
           And the following zones are defined:
             | name    | type    | members        |
             | UK      | country | United Kingdom |
           And there are following tax categories:
-            | name          |
-            | Taxable Goods |
+            | code | name          |
+            | TC1  | Taxable Goods |
           And the following tax rates exist:
-            | category      | zone    | name        | amount |
-            | Taxable Goods | UK      | UK Tax      | 15%    |
+            | code | category      | zone    | name        | amount |
+            | TR1  | Taxable Goods | UK      | UK Tax      | 15%    |
           And the default tax zone is "UK"
           And there are following groups:
             | name                |

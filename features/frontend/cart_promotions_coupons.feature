@@ -7,9 +7,9 @@ Feature: Checkout coupon promotions
     Background:
         Given store has default configuration
           And the following promotions exist:
-            | name                      | description            |
-            | Press campaign            | Coupon based promotion |
-            | New Year campaign         | Coupon based promotion |
+            | code | name                      | description            |
+            | P1   | Press campaign            | Coupon based promotion |
+            | P2   | New Year campaign         | Coupon based promotion |
           And promotion "Press campaign" has following rules defined:
             | type       | configuration |
             | Item total | Amount: 100   |
@@ -29,10 +29,10 @@ Feature: Checkout coupon promotions
             | code   | usage limit | used |
             | XD0002 | 1           | 1    |
           And there are following taxonomies defined:
-            | name     |
-            | Category |
+            | code | name     |
+            | RTX2 | Category |
           And taxonomy "Category" has following taxons:
-            | Clothing > Debian T-Shirts |
+            | Clothing[TX1] > Debian T-Shirts[TX2] |
           And the following products exist:
             | name    | price | taxons          |
             | Buzz    | 500   | Debian T-Shirts |

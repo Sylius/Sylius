@@ -12,7 +12,8 @@
 namespace spec\Sylius\Bundle\VariationBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\FormTypeInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -31,10 +32,10 @@ class VariantTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
-    function it_defines_assigned_data_class_and_validation_groups(OptionsResolverInterface $resolver)
+    function it_defines_assigned_data_class_and_validation_groups(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults(array(
@@ -49,7 +50,7 @@ class VariantTypeSpec extends ObjectBehavior
             ))
             ->shouldBeCalled();
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 
     function it_has_valid_name()

@@ -29,8 +29,8 @@ class LoadOrdersData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $orderRepository = $this->getOrderRepository();
-        $orderItemRepository = $this->getOrderItemRepository();
+        $orderFactory = $this->getOrderFactory();
+        $orderItemFactory = $this->getOrderItemFactory();
 
         $channels = array(
             'WEB-UK',
@@ -41,7 +41,7 @@ class LoadOrdersData extends DataFixture
 
         for ($i = 1; $i <= 50; $i++) {
             /* @var $order OrderInterface */
-            $order = $orderRepository->createNew();
+            $order = $orderFactory->createNew();
             $channel = $this->getReference('Sylius.Channel.'.$this->faker->randomElement($channels));
 
             $order->setChannel($channel);
@@ -50,7 +50,7 @@ class LoadOrdersData extends DataFixture
                 $variant = $this->getReference('Sylius.Variant-'.rand(1, SYLIUS_FIXTURES_TOTAL_VARIANTS - 1));
 
                 /* @var $item OrderItemInterface */
-                $item = $orderItemRepository->createNew();
+                $item = $orderItemFactory->createNew();
                 $item->setVariant($variant);
                 $item->setUnitPrice($variant->getPrice());
                 $item->setQuantity(rand(1, 5));
@@ -101,7 +101,7 @@ class LoadOrdersData extends DataFixture
     protected function createPayment(OrderInterface $order, $state = null)
     {
         /* @var $payment PaymentInterface */
-        $payment = $this->getPaymentRepository()->createNew();
+        $payment = $this->getPaymentFactory()->createNew();
         $payment->setOrder($order);
         $payment->setMethod($this->getReference('Sylius.PaymentMethod.StripeCheckout'));
         $payment->setAmount($order->getTotal());
@@ -117,7 +117,7 @@ class LoadOrdersData extends DataFixture
     protected function createShipment(OrderInterface $order)
     {
         /* @var $shipment ShipmentInterface */
-        $shipment = $this->getShipmentRepository()->createNew();
+        $shipment = $this->getShipmentFactory()->createNew();
         $shipment->setMethod($this->getReference('Sylius.ShippingMethod.UPS Ground'));
         $shipment->setState($this->getShipmentState());
 

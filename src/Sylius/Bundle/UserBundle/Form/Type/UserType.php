@@ -14,7 +14,7 @@ namespace Sylius\Bundle\UserBundle\Form\Type;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -39,20 +39,21 @@ class UserType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $groups = $this->validationGroups;
-        $resolver->setDefaults(array(
-            'data_class' => $this->dataClass,
-            'validation_groups' => function (FormInterface $form) use ($groups) {
-                $data = $form->getData();
-                if ($data && !$data->getId()) {
-                    $groups[] = 'user_create';
-                }
+        $resolver
+            ->setDefaults(array(
+                'data_class' => $this->dataClass,
+                'validation_groups' => function (FormInterface $form) {
+                    $data = $form->getData();
+                    if ($data && !$data->getId()) {
+                        $this->validationGroups[] = 'sylius_user_create';
+                    }
 
-                return $groups;
-            },
-        ));
+                    return $this->validationGroups;
+                },
+            ))
+        ;
     }
 
     /**

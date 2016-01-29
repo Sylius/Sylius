@@ -20,7 +20,7 @@ namespace Sylius\Component\User\Model;
 class Group implements GroupInterface
 {
     /**
-     * @var int
+     * @var mixed
      */
     protected $id;
 

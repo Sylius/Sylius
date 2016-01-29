@@ -11,9 +11,9 @@
 
 namespace Sylius\Component\Report\Renderer;
 
-use Sylius\Component\Report\Model\ReportInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Report\DataFetcher\Data;
+use Sylius\Component\Report\Model\ReportInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>

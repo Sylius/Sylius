@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  user:
+    email:
+      not_exist: "Cet email n'est associé avec aucun utilisateur."
+    password:
+      invalid: Le mot de passe actuel est invalide.
+      reset:
+        success: Votre mot de passe a été réinitialisé avec succès !
+        failed: Echec de la réinitialisation du mot de passe.
+      change:
+        success: Votre mot de passe a été mise à jour avec succès !

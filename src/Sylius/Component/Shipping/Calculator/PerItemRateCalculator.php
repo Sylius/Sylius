@@ -12,12 +12,11 @@
 namespace Sylius\Component\Shipping\Calculator;
 
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PerItemRateCalculator extends Calculator
+class PerItemRateCalculator implements CalculatorInterface
 {
     /**
      * {@inheritdoc}
@@ -30,31 +29,8 @@ class PerItemRateCalculator extends Calculator
     /**
      * {@inheritdoc}
      */
-    public function isConfigurable()
+    public function getType()
     {
-        return true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getConfigurationFormType()
-    {
-        return 'sylius_shipping_calculator_per_item_rate_configuration';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setConfiguration(OptionsResolverInterface $resolver)
-    {
-        $resolver
-            ->setRequired(array(
-                'amount'
-            ))
-            ->setAllowedTypes(array(
-                'amount' => array('numeric')
-            ))
-        ;
+        return 'per_item_rate';
     }
 }

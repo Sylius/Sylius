@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\LocaleBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Form\FormBuilder;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -23,7 +23,7 @@ class LocaleTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Locale', array('sylius'));
+        $this->beConstructedWith(\Locale::class, array('sylius'));
     }
 
     function it_is_initializable()
@@ -51,16 +51,16 @@ class LocaleTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_should_define_assigned_data_class_and_validation_groups(OptionsResolverInterface $resolver)
+    function it_should_define_assigned_data_class_and_validation_groups(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults(array(
-                'data_class' => 'Locale',
+                'data_class' => \Locale::class,
                 'validation_groups' => array('sylius')
             ))
             ->shouldBeCalled();
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 
     function it_has_valid_name()

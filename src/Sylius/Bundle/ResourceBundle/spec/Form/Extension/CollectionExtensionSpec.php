@@ -12,9 +12,8 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Form\Extension;
 
 use PhpSpec\ObjectBehavior;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormView;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\AbstractTypeExtension;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
@@ -28,7 +27,7 @@ class CollectionExtensionSpec extends ObjectBehavior
 
     function it_should_extends_abstract_type_extension()
     {
-        $this->shouldHaveType('Symfony\Component\Form\AbstractTypeExtension');
+        $this->shouldHaveType(AbstractTypeExtension::class);
     }
 
     function it_should_have_collection_as_extended_type()
@@ -36,9 +35,9 @@ class CollectionExtensionSpec extends ObjectBehavior
         $this->getExtendedType()->shouldReturn('collection');
     }
 
-    function it_should_have_default_option(OptionsResolverInterface $resolver)
+    function it_should_have_default_option(OptionsResolver $resolver)
     {
-        $resolver->setOptional(array(
+        $resolver->setDefined(array(
             'button_add_label',
             'button_delete_label',
         ))->shouldBeCalled();
@@ -48,6 +47,6 @@ class CollectionExtensionSpec extends ObjectBehavior
             'button_delete_label' => 'form.collection.delete',
         ))->shouldBeCalled();
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 }

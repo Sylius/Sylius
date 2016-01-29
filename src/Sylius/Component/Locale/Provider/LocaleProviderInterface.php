@@ -11,8 +11,6 @@
 
 namespace Sylius\Component\Locale\Provider;
 
-use Sylius\Component\Locale\Model\LocaleInterface;
-
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */

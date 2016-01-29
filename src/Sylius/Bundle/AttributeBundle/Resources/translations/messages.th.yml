@@ -6,3 +6,4 @@ sylius:
     attribute:
       name: ชื่อภายใน
       presentation: แสดงหน้าเว็บ
+      type: ชนิด

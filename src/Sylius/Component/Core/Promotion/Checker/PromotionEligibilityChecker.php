@@ -13,7 +13,6 @@ namespace Sylius\Component\Core\Promotion\Checker;
 
 use Sylius\Component\Core\Model\CouponInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\User\Model\CustomerAwareInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Promotion\Checker\PromotionEligibilityChecker as BasePromotionEligibilityChecker;
 use Sylius\Component\Promotion\Model\PromotionCouponAwareSubjectInterface;
@@ -22,6 +21,7 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\SyliusPromotionEvents;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Sylius\Component\User\Model\CustomerAwareInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 

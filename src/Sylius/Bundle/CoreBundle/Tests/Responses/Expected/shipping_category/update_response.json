@@ -1,0 +1,8 @@
+{
+    "id": @integer@,
+    "code": "SC1",
+    "name": "Light",
+    "description": "Light weight items",
+    "created_at": "@string@.isDateTime()",
+    "updated_at": "@string@.isDateTime()"
+}

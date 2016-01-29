@@ -13,16 +13,10 @@
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
-        xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Sylius\Component\Core\Model\User" table="sylius_user">
-        <one-to-many field="oauthAccounts" target-entity="Sylius\Component\Core\Model\UserOAuthInterface" mapped-by="user">
-            <cascade>
-                <cascade-all />
-            </cascade>
-        </one-to-many>
 
         <many-to-many field="authorizationRoles" target-entity="Sylius\Component\Rbac\Model\RoleInterface">
             <join-table name="sylius_user_role">
@@ -35,7 +29,6 @@
             </join-table>
         </many-to-many>
 
-        <gedmo:soft-deleteable field-name="deletedAt" />
     </mapped-superclass>
 
 </doctrine-mapping>

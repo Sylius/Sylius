@@ -14,8 +14,9 @@ namespace Sylius\Bundle\WebBundle\Controller\Frontend\Account;
 use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\Controller\FOSRestController;
 use Sylius\Component\Addressing\Model\AddressInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -52,7 +53,7 @@ class AddressController extends FOSRestController
     public function createAction(Request $request)
     {
         $customer = $this->getCustomer();
-        $address = $this->getAddressRepository()->createNew();
+        $address = $this->getAddressFactory()->createNew();
         $form = $this->getAddressForm($address);
 
         if ($form->handleRequest($request)->isValid()) {
@@ -195,6 +196,14 @@ class AddressController extends FOSRestController
     protected function getAddressRepository()
     {
         return $this->get('sylius.repository.address');
+    }
+
+    /**
+     * @return FactoryInterface
+     */
+    protected function getAddressFactory()
+    {
+        return $this->get('sylius.factory.address');
     }
 
     protected function redirectToIndex()

@@ -12,10 +12,11 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
 use Sylius\Bundle\OrderBundle\Form\Type\OrderItemType as BaseOrderItemType;
+use Sylius\Component\Core\Model\ProductVariant;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Order item type.
@@ -46,12 +47,12 @@ class OrderItemType extends BaseOrderItemType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
 
         $resolver->setDefaults(array(
-            'variant_data_class' => 'Sylius\Component\Core\Model\ProductVariant',
+            'variant_data_class' => ProductVariant::class,
         ));
     }
 }

@@ -3,8 +3,8 @@
 namespace Sylius\Bundle\CoreBundle\Locale;
 
 use A2lix\TranslationFormBundle\Locale\LocaleProviderInterface as A2lixLocaleProviderInterface;
-use Sylius\Component\Locale\Provider\LocaleProviderInterface as SyliusLocaleProviderInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface as SyliusLocaleContextInterface;
+use Sylius\Component\Locale\Provider\LocaleProviderInterface as SyliusLocaleProviderInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>

@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\PaymentBundle\Form\Type\Calculator;
 
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -26,7 +27,7 @@ class PercentFeeCalculatorConfigurationTypeSpec extends ObjectBehavior
 
     function it_is_abstract_type_object()
     {
-        $this->shouldHaveType('Symfony\Component\Form\AbstractType');
+        $this->shouldHaveType(AbstractType::class);
     }
 
     function it_builds_form(FormBuilderInterface $builder)

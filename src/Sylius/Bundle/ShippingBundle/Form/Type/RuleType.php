@@ -13,7 +13,7 @@ namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ShippingBundle\Form\EventListener\BuildRuleFormSubscriber;
-use Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistryInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -23,9 +23,17 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class RuleType extends AbstractResourceType
 {
+    /**
+     * @var ServiceRegistryInterface
+     */
     protected $checkerRegistry;
 
-    public function __construct($dataClass, array $validationGroups, RuleCheckerRegistryInterface $checkerRegistry)
+    /**
+     * @param string                   $dataClass
+     * @param array                    $validationGroups
+     * @param ServiceRegistryInterface $checkerRegistry
+     */
+    public function __construct($dataClass, array $validationGroups, ServiceRegistryInterface $checkerRegistry)
     {
         parent::__construct($dataClass, $validationGroups);
 

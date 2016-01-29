@@ -11,18 +11,14 @@
 
 namespace Sylius\Component\Addressing\Model;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-interface AddressInterface extends TimestampableInterface
+interface AddressInterface extends TimestampableInterface, ResourceInterface
 {
-    /**
-     * @return mixed
-     */
-    public function getId();
-
     /**
      * @return string
      */

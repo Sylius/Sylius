@@ -18,7 +18,7 @@ use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\Country;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintViolation;
-use Symfony\Component\Validator\ExecutionContextInterface;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
@@ -32,7 +32,7 @@ class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
 
     function it_throws_exception_if_the_value_is_not_an_address(Constraint $constraint)
     {
-        $this->shouldThrow('\InvalidArgumentException')->during('validate', array(
+        $this->shouldThrow(\InvalidArgumentException::class)->during('validate', array(
             '',
             $constraint
         ));

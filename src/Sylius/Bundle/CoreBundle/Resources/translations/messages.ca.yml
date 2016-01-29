@@ -62,6 +62,10 @@ sylius:
       created_at_to: A
       number: Número de comanda
       shipping_address: Enviar al nom
+    payment_filter:
+      created_at_from: Des de
+      created_at_to: A
+      number: Número de comanda
     shipping_method:
       zone: Zona
     taxon:
@@ -74,6 +78,7 @@ sylius:
       enabled: Activat
       first_name: Nom
       groups: Grups
+      roles: Rols
       last_name: Cognoms
       password: Contrasenya
       shipping_address: "Adreça d'enviament"
@@ -89,3 +94,5 @@ sylius:
       sku: SKU
       weight: Pes
       width: Amplada
+    guest:
+      email: Correu electrònic

@@ -16,11 +16,11 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Affiliate\Model\ReferralInterface;
 use Sylius\Component\Cart\Model\Cart;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
-use Sylius\Component\User\Model\CustomerInterface as BaseCustomerInterface;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface as BasePromotionInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Sylius\Component\User\Model\CustomerInterface as BaseCustomerInterface;
 
 /**
  * Order entity.
@@ -426,7 +426,7 @@ class Order extends Cart implements OrderInterface
         }
 
         if (!$coupon instanceof BaseCouponInterface) {
-            throw new UnexpectedTypeException($coupon, 'Sylius\Component\Promotion\Model\CouponInterface');
+            throw new UnexpectedTypeException($coupon, CouponInterface::class);
         }
 
         if (!$this->hasPromotionCoupon($coupon)) {
@@ -446,7 +446,7 @@ class Order extends Cart implements OrderInterface
         }
 
         if (!$coupon instanceof BaseCouponInterface) {
-            throw new UnexpectedTypeException($coupon, 'Sylius\Component\Promotion\Model\CouponInterface');
+            throw new UnexpectedTypeException($coupon, CouponInterface::class);
         }
 
         if ($this->hasPromotionCoupon($coupon)) {

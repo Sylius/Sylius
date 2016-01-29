@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\PaymentBundle\Form\Type\Calculator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Context\CurrencyContext;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -20,11 +20,6 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class FixedFeeCalculatorConfigurationTypeSpec extends ObjectBehavior
 {
-    function let(CurrencyContext $currencyContext)
-    {
-        $this->beConstructedWith($currencyContext);
-    }
-
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PaymentBundle\Form\Type\Calculator\FixedFeeCalculatorConfigurationType');
@@ -32,17 +27,14 @@ class FixedFeeCalculatorConfigurationTypeSpec extends ObjectBehavior
 
     function it_is_abstract_type_object()
     {
-        $this->shouldHaveType('Symfony\Component\Form\AbstractType');
+        $this->shouldHaveType(AbstractType::class);
     }
 
-    function it_builds_form($currencyContext, FormBuilderInterface $builder)
+    function it_builds_form(FormBuilderInterface $builder)
     {
-        $currencyContext->getCurrency()->willReturn('USD')->shouldBeCalled();
-
         $builder
             ->add('amount', 'sylius_money', array(
-                'label'    => 'sylius.form.payment_method.fee_calculator.fixed.amount',
-                'currency' => 'USD',
+                'label' => 'sylius.form.payment_method.fee_calculator.fixed.amount',
             ))
             ->willReturn($builder)
             ->shouldBeCalled()

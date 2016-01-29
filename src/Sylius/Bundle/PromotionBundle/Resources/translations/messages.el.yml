@@ -12,18 +12,12 @@ sylius:
         percentage: Ποσοστό
       type: Τύπος
     rule:
+      contains_product_configuration:
+        variants: Προϊόντα
       item_count_configuration:
         count: Πλήθος
       item_total_configuration:
         amount: Ποσό
-      user_loyality_configuration:
-        time: Ώρα
-        unit:
-          days: Ημέρες
-          weeks: Εβδομάδες
-          months: Μήνες
-          years: Έτη
-          0: Μονάδα
       shipping_country_configuration:
         country: Χώρα
       type: Τύπος

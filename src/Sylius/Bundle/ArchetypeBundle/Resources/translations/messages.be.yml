@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    archetype:
+      code: Код
+      name: Імя
+      parent: "Бацькоўскі аб'ект"
+      options: Опцыі

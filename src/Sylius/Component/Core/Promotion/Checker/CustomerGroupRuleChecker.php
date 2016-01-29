@@ -15,8 +15,8 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
 use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\User\Model\GroupInterface;
 use Sylius\Component\User\Model\GroupableInterface;
+use Sylius\Component\User\Model\GroupInterface;
 
 /**
  * Checks if customer is part of Group.
@@ -31,7 +31,7 @@ class CustomerGroupRuleChecker implements RuleCheckerInterface
     public function isEligible(PromotionSubjectInterface $subject, array $configuration)
     {
         if (!$subject instanceof OrderInterface) {
-            throw new UnsupportedTypeException($subject, 'Sylius\Component\Core\Model\OrderInterface');
+            throw new UnsupportedTypeException($subject, OrderInterface::class);
         }
 
         if (null === $customer = $subject->getCustomer()) {

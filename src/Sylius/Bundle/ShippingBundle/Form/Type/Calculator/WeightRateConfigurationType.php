@@ -13,34 +13,15 @@ namespace Sylius\Bundle\ShippingBundle\Form\Type\Calculator;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * Weight rate calculator configuration form.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class WeightRateConfigurationType extends AbstractType
 {
-    /**
-     * Validation groups.
-     *
-     * @var array
-     */
-    protected $validationGroups;
-
-    /**
-     * Constructor.
-     *
-     * @param array $validationGroups
-     */
-    public function __construct(array $validationGroups)
-    {
-        $this->validationGroups = $validationGroups;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -74,12 +55,11 @@ class WeightRateConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults(array(
                 'data_class' => null,
-                'validation_groups' => $this->validationGroups,
             ))
         ;
     }
@@ -89,6 +69,6 @@ class WeightRateConfigurationType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_shipping_calculator_weight_rate_configuration';
+        return 'sylius_shipping_calculator_weight_rate';
     }
 }

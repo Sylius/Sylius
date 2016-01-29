@@ -12,9 +12,9 @@
 namespace Sylius\Bundle\UserBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**

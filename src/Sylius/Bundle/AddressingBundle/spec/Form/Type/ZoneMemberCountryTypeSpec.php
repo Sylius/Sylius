@@ -13,8 +13,10 @@ namespace spec\Sylius\Bundle\AddressingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberType;
 use Symfony\Component\Form\FormBuilder;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\FormTypeInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Julien Janvier <j.janvier@gmail.com>
@@ -33,12 +35,12 @@ class ZoneMemberCountryTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_is_a_Sylius_zone_member_type()
     {
-        $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberType');
+        $this->shouldHaveType(ZoneMemberType::class);
     }
 
     function it_has_a_valid_name()
@@ -59,7 +61,7 @@ class ZoneMemberCountryTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
+    function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults(
@@ -70,6 +72,6 @@ class ZoneMemberCountryTypeSpec extends ObjectBehavior
             )
             ->shouldBeCalled();
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 }

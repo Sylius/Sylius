@@ -7,10 +7,10 @@ Feature: Checkout shipping
     Background:
         Given store has default configuration
           And there are following taxonomies defined:
-            | name     |
-            | Category |
+            | code | name     |
+            | RTX1 | Category |
           And taxonomy "Category" has following taxons:
-            | Clothing > PHP T-Shirts |
+            | Clothing[TX1] > PHP T-Shirts[TX2] |
           And the following products exist:
             | name          | price | taxons       |
             | PHP Top       | 5.99  | PHP T-Shirts |
@@ -25,14 +25,14 @@ Feature: Checkout shipping
             | Poland         |
             | Germany        |
           And the following shipping methods exist:
-            | zone         | name          | calculator | configuration | enabled |
-            | UK + Germany | DHL Express   | Flat rate  | Amount: 5000  | yes     |
-            | USA          | FedEx         | Flat rate  | Amount: 6500  | yes     |
-            | USA          | FedEx Premium | Flat rate  | Amount: 10000 | yes     |
-            | UK + Germany | UPS Ground    | Flat rate  | Amount: 20000 | no      |
+            | code | zone         | name          | calculator | configuration | enabled |
+            | SM1  | UK + Germany | DHL Express   | Flat rate  | Amount: 5000  | yes     |
+            | SM2  | USA          | FedEx         | Flat rate  | Amount: 6500  | yes     |
+            | SM3  | USA          | FedEx Premium | Flat rate  | Amount: 10000 | yes     |
+            | SM4  | UK + Germany | UPS Ground    | Flat rate  | Amount: 20000 | no      |
           And the following payment methods exist:
-            | name  | gateway | enabled | calculator | calculator_configuration |
-            | Dummy | dummy   | yes     | fixed      | amount: 0                |
+            | code | name  | gateway | enabled | calculator | calculator_configuration |
+            | PM1  | Dummy | dummy   | yes     | fixed      | amount: 0                |
           And all products are assigned to the default channel
           And the default channel has following configuration:
             | taxonomy | payment | shipping                                      |
@@ -100,3 +100,12 @@ Feature: Checkout shipping
          When I press "Continue"
          Then I should be on the checkout addressing step
           And "We're sorry" should appear on the page
+
+    Scenario: Returning to shipping method page
+        Given I go to the checkout start page
+          And I fill in the shipping address to United States
+          And I press "Continue"
+         When I select the "FedEx" radio button
+          And I press "Continue"
+          And I click "Back"
+         Then I should see "FedEx"

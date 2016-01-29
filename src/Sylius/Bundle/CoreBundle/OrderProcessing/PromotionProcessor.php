@@ -14,8 +14,8 @@ namespace Sylius\Bundle\CoreBundle\OrderProcessing;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Promotion\Action\PromotionApplicatorInterface;
 use Sylius\Component\Promotion\Checker\PromotionEligibilityCheckerInterface;
-use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 use Sylius\Component\Promotion\Processor\PromotionProcessor as BasePromotionProcessor;
+use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 
 /**
  * Process all active promotions.

@@ -16,8 +16,8 @@ Feature: Checkout product promotion
             | Sarge  | 25    |
             | Ubu    | 200   |
           And the following promotions exist:
-            | name                | description                      |
-            | Free product        | Almost free product over 100 eur |
+            | code | name                | description                      |
+            | P1   | Free product        | Almost free product over 100 eur |
           And promotion "Free product" has following rules defined:
             | type       | configuration |
             | Item total | Amount: 100   |
@@ -32,7 +32,7 @@ Feature: Checkout product promotion
         Given I am on the store homepage
          When I add product "Etch" to cart, with quantity "1"
          Then I should be on the cart summary page
-          And "Ubu" should not appear on the page
+          And I should not see product "Ubu" in the cart summary
           And "Grand total: €20.00" should appear on the page
 
     Scenario: Free product is applied when the cart has the
@@ -40,5 +40,5 @@ Feature: Checkout product promotion
         Given I am on the store homepage
          When I add product "Potato" to cart, with quantity "3"
          Then I should be on the cart summary page
-          And "Ubu" should appear on the page
+          And I should see product "Ubu" in the cart summary
           And "Grand total: €610.00" should appear on the page

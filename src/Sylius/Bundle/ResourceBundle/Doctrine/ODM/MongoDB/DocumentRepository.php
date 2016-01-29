@@ -15,6 +15,7 @@ use Doctrine\MongoDB\Query\Builder as QueryBuilder;
 use Doctrine\ODM\MongoDB\DocumentRepository as BaseDocumentRepository;
 use Pagerfanta\Adapter\DoctrineODMMongoDBAdapter;
 use Pagerfanta\Pagerfanta;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -24,16 +25,6 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class DocumentRepository extends BaseDocumentRepository implements RepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function createNew()
-    {
-        $className = $this->getClassName();
-
-        return new $className();
-    }
-
     /**
      * @param int $id
      *
@@ -118,6 +109,26 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         $this->applySorting($queryBuilder, $sorting);
 
         return $this->getPaginator($queryBuilder);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function add(ResourceInterface $resource)
+    {
+        $this->dm->persist($resource);
+        $this->dm->flush();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function remove(ResourceInterface $resource)
+    {
+        if (null !== $this->find($resource->getId())) {
+            $this->dm->remove($resource);
+            $this->dm->flush();
+        }
     }
 
     /**

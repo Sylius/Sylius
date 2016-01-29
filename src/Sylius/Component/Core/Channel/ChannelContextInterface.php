@@ -11,8 +11,8 @@
 
 namespace Sylius\Component\Core\Channel;
 
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface as BaseChannelContextInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 
 /**
  * Interface for service defining the currently used channel.

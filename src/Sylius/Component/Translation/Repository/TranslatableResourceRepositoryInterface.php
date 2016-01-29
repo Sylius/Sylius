@@ -12,20 +12,12 @@
 namespace Sylius\Component\Translation\Repository;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\Translation\Provider\LocaleProviderInterface;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 interface TranslatableResourceRepositoryInterface extends RepositoryInterface
 {
-    /**
-     * @param LocaleProviderInterface $localeProvider
-     *
-     * @return self
-     */
-    public function setLocaleProvider(LocaleProviderInterface $localeProvider);
-
     /**
      * @param array $translatableFields
      *

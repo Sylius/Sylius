@@ -48,7 +48,7 @@ class ConfigurationSpec extends ObjectBehavior
 
     function it_has_parameters()
     {
-        $this->getParameters()->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\Parameters');
+        $this->getParameters()->shouldHaveType(Parameters::class);
     }
 
     function its_parameter_is_mutable(Parameters $parameters)
@@ -164,6 +164,7 @@ class ConfigurationSpec extends ObjectBehavior
 
     function it_generates_redirect_route(Parameters $parameters)
     {
+        $parameters->get('section')->willReturn(null);
         $parameters->get('redirect')->willReturn(null);
         $this->getRedirectRoute('index')->shouldReturn('sylius_product_index');
 

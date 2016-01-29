@@ -12,11 +12,12 @@
 namespace Sylius\Component\Shipping\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface ShipmentInterface extends ShippingSubjectInterface
+interface ShipmentInterface extends ShippingSubjectInterface, ResourceInterface
 {
     // Shipment default states.
     const STATE_CHECKOUT    = 'checkout';
@@ -27,11 +28,6 @@ interface ShipmentInterface extends ShippingSubjectInterface
     const STATE_SHIPPED     = 'shipped';
     const STATE_RETURNED    = 'returned';
     const STATE_CANCELLED   = 'cancelled';
-
-    /**
-     * @return mixed
-     */
-    public function getId();
 
     /**
      * @return string

@@ -12,12 +12,13 @@
 namespace spec\Sylius\Component\User\Security;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Query\FilterCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Doctrine\ORM\Query\FilterCollection;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
+use Sylius\Component\User\Security\TokenProviderInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -36,7 +37,7 @@ class TokenProviderSpec extends ObjectBehavior
 
     public function it_implements_token_provider_interface()
     {
-        $this->shouldImplement('Sylius\Component\User\Security\TokenProviderInterface');
+        $this->shouldImplement(TokenProviderInterface::class);
     }
 
     public function it_generates_random_token($repository, $manager, FilterCollection $filter, $generator)

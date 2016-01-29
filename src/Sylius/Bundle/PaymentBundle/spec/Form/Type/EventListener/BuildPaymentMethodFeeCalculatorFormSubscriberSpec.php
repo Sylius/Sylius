@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Payment\Calculator\FeeCalculatorInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -37,7 +38,7 @@ class BuildPaymentMethodFeeCalculatorFormSubscriberSpec extends ObjectBehavior
 
     function it_implements_event_subscriber_interface()
     {
-        $this->shouldImplement('Symfony\Component\EventDispatcher\EventSubscriberInterface');
+        $this->shouldImplement(EventSubscriberInterface::class);
     }
 
     function it_pre_sets_data(
@@ -85,7 +86,7 @@ class BuildPaymentMethodFeeCalculatorFormSubscriberSpec extends ObjectBehavior
     {
         $event->getData()->willReturn('badObject')->shouldBeCalled();
 
-        $this->shouldThrow(new UnexpectedTypeException('badObject', 'Sylius\Component\Payment\Model\PaymentMethodInterface'))->during('preSetData', array($event));
+        $this->shouldThrow(new UnexpectedTypeException('badObject', PaymentMethodInterface::class))->during('preSetData', array($event));
     }
 
     function it_is_triggered_pre_bind(

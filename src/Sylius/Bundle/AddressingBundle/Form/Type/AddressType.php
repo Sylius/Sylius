@@ -15,11 +15,9 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Address form type.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
 class AddressType extends AbstractResourceType
@@ -30,8 +28,6 @@ class AddressType extends AbstractResourceType
     protected $eventListener;
 
     /**
-     * Constructor.
-     *
      * @param string                   $dataClass
      * @param string[]                 $validationGroups
      * @param EventSubscriberInterface $eventListener
@@ -49,7 +45,6 @@ class AddressType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->addEventSubscriber($this->eventListener)
             ->add('firstName', 'text', array(
                 'label' => 'sylius.form.address.first_name',
             ))
@@ -78,32 +73,29 @@ class AddressType extends AbstractResourceType
             ->add('postcode', 'text', array(
                 'label' => 'sylius.form.address.postcode',
             ))
+            ->addEventSubscriber($this->eventListener)
         ;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
-
-        $validationGroups = $this->validationGroups;
+        parent::configureOptions($resolver);
 
         $resolver
             ->setDefaults(array(
-                'validation_groups' => function (Options $options) use ($validationGroups) {
+                'validation_groups' => function (Options $options) {
                     if ($options['shippable']) {
-                        $validationGroups[] = 'shippable';
+                        $this->validationGroups[] = 'shippable';
                     }
 
-                    return $validationGroups;
+                    return $this->validationGroups;
                 },
-                'shippable'         => false,
+                'shippable' => false,
             ))
-            ->setAllowedTypes(array(
-                'shippable' => 'bool',
-            ))
+            ->setAllowedTypes('shippable', 'bool')
         ;
     }
 

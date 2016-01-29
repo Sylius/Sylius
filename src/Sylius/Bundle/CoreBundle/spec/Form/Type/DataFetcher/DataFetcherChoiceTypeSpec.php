@@ -12,7 +12,8 @@
 namespace spec\Sylius\Bundle\CoreBundle\Form\Type\DataFetcher;
 
 use PhpSpec\ObjectBehavior;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -34,7 +35,7 @@ class DataFetcherChoiceTypeSpec extends ObjectBehavior
 
     function it_extends_abstract_type()
     {
-        $this->shouldHaveType('Symfony\Component\Form\AbstractType');
+        $this->shouldHaveType(AbstractType::class);
     }
 
     function it_has_name()
@@ -47,7 +48,7 @@ class DataFetcherChoiceTypeSpec extends ObjectBehavior
         $this->getParent()->shouldReturn('choice');
     }
 
-    function it_defines_data_fetcher_choices(OptionsResolverInterface $resolver)
+    function it_defines_data_fetcher_choices(OptionsResolver $resolver)
     {
         $dataFetchers = array(
             'user_registration' => 'User Registration',
@@ -55,6 +56,6 @@ class DataFetcherChoiceTypeSpec extends ObjectBehavior
 
         $resolver->setDefaults(array('choices' => $dataFetchers))->shouldBeCalled();
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 }

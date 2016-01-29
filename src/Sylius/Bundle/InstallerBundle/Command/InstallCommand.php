@@ -68,6 +68,8 @@ EOT
         $output->writeln('<info>Installing Sylius...</info>');
         $output->writeln('');
 
+        $this->ensureDirectoryExistsAndIsWritable(self::APP_CACHE, $output);
+
         foreach ($this->commands as $step => $command) {
             try {
                 $output->writeln(sprintf('<comment>Step %d of %d.</comment> <info>%s</info>', $step+1, count($this->commands), $command['message']));

@@ -1,7 +1,7 @@
 SyliusInstallerBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusInstallerBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusInstallerBundle)
-======================
+=====================
 
-Web and command line installer for [Sylius](http://github.com/Sylius/Sylius).
+Command Line Interface installer for [Sylius](http://github.com/Sylius/Sylius).
 
 Sylius
 ------

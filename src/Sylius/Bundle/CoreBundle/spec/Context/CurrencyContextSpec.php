@@ -18,14 +18,10 @@ use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
-use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Model\UserInterface;
-use Sylius\Component\Currency\Context\CurrencyContextInterface;
+use Sylius\Component\Currency\Context\CurrencyContext as SyliusCurrencyContext;
 use Sylius\Component\Storage\StorageInterface;
 use Sylius\Component\User\Context\CustomerContextInterface;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class CurrencyContextSpec extends ObjectBehavior
 {
@@ -50,7 +46,7 @@ class CurrencyContextSpec extends ObjectBehavior
 
     function it_extends_Sylius_currency_context()
     {
-        $this->shouldHaveType('Sylius\Component\Currency\Context\CurrencyContext');
+        $this->shouldHaveType(SyliusCurrencyContext::class);
     }
 
     function it_gets_default_currency()

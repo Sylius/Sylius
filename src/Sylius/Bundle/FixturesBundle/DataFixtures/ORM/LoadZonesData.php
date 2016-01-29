@@ -24,7 +24,7 @@ use Symfony\Component\Intl\Intl;
  */
 class LoadZonesData extends DataFixture
 {
-    private $euCountries = array(
+    protected $euCountries = array(
         'BE', 'BG', 'CZ', 'DK', 'DE', 'EE', 'IE', 'GR', 'ES',
         'FR', 'IT', 'CY', 'LV', 'LV', 'LT', 'LU', 'HU', 'MT',
         'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE',
@@ -38,7 +38,7 @@ class LoadZonesData extends DataFixture
     {
         $restOfWorldCountries = array_diff(
             array_keys(Intl::getRegionBundle()->getCountryNames($this->container->getParameter('sylius.locale'))),
-            $this->euCountries + array('US')
+            array_merge($this->euCountries, ['US'])
         );
 
         $manager->persist($eu = $this->createZone('EU', ZoneInterface::TYPE_COUNTRY, $this->euCountries));
@@ -74,13 +74,13 @@ class LoadZonesData extends DataFixture
     protected function createZone($name, $type, array $members)
     {
         /* @var $zone ZoneInterface */
-        $zone = $this->getZoneRepository()->createNew();
+        $zone = $this->getZoneFactory()->createNew();
         $zone->setName($name);
         $zone->setType($type);
 
         foreach ($members as $id) {
             /* @var $zoneMember ZoneMemberInterface */
-            $zoneMember = $this->getZoneMemberRepository($type)->createNew();
+            $zoneMember = $this->getZoneMemberFactory($type)->createNew();
 
             if ($this->hasReference('Sylius.'.ucfirst($type).'.'.$id)) {
                 $zoneMember->{'set'.ucfirst($type)}($this->getReference('Sylius.'.ucfirst($type).'.'.$id));

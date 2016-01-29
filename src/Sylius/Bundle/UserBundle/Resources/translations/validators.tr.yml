@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  user:
+    email:
+      not_blank: Lütfen e-posta adresinizi girin.
+  customer:
+    first_name:
+      not_blank: Lütfen adınızı giriniz.
+    last_name:
+      not_blank: Lütfen soyadınızı giriniz.
+    email:
+      not_blank: Lütfen e-posta adresinizi girin.

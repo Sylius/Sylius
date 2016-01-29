@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -30,7 +30,7 @@ class CheckoutAddressingListener
         if (!$order instanceof OrderInterface) {
             throw new UnexpectedTypeException(
                 $order,
-                'Sylius\Component\Core\Model\OrderInterface'
+                OrderInterface::class
             );
         }
         /** @var CustomerInterface $customer */

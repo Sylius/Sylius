@@ -13,8 +13,10 @@ namespace spec\Sylius\Bundle\CurrencyBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Symfony\Component\Form\FormBuilder;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\FormTypeInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -33,30 +35,25 @@ class CurrencyTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_should_build_form_with_proper_fields(FormBuilder $builder)
     {
-        $builder
-            ->add('code', 'currency', Argument::any())
-            ->willReturn($builder)
-        ;
-
         $builder
             ->add('exchangeRate', 'number', Argument::any())
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('enabled', 'checkbox', Argument::any())
+            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
             ->willReturn($builder)
         ;
 
         $this->buildForm($builder, array());
     }
 
-    function it_should_define_assigned_data_class_and_validation_groups(OptionsResolverInterface $resolver)
+    function it_should_define_assigned_data_class_and_validation_groups(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults(array(
@@ -65,7 +62,7 @@ class CurrencyTypeSpec extends ObjectBehavior
             ))
             ->shouldBeCalled();
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 
     function it_has_valid_name()

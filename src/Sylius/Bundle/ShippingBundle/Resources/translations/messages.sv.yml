@@ -6,4 +6,5 @@ sylius:
     shipping_category:
       name: Namn
     shipping_method:
+      enabled: Aktiverad
       name: Namn

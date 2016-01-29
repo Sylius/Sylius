@@ -27,7 +27,7 @@ class RuleSpec extends ObjectBehavior
 
     function it_implements_Sylius_shipping_method_rule_interface()
     {
-        $this->shouldImplement('Sylius\Component\Shipping\Model\RuleInterface');
+        $this->shouldImplement(RuleInterface::class);
     }
 
     function it_has_no_id_by_default()

@@ -15,9 +15,9 @@ use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Bundle\UserBundle\UserEvents;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 
 /**
@@ -27,9 +27,9 @@ use Symfony\Component\Security\Core\User\UserCheckerInterface;
 class UserLogin implements UserLoginInterface
 {
     /**
-     * @var SecurityContextInterface
+     * @var TokenStorageInterface
      */
-    private $securityContext;
+    private $tokenStorage;
 
     /**
      * @var UserCheckerInterface
@@ -42,13 +42,13 @@ class UserLogin implements UserLoginInterface
     private $eventDispatcher;
 
     /**
-     * @param SecurityContextInterface $securityContext
+     * @param TokenStorageInterface $tokenStorage
      * @param UserCheckerInterface     $userChecker
      * @param EventDispatcherInterface $eventDispatcher
      */
-    public function __construct(SecurityContextInterface $securityContext, UserCheckerInterface $userChecker, EventDispatcherInterface $eventDispatcher)
+    public function __construct(TokenStorageInterface $tokenStorage, UserCheckerInterface $userChecker, EventDispatcherInterface $eventDispatcher)
     {
-        $this->securityContext = $securityContext;
+        $this->tokenStorage = $tokenStorage;
         $this->userChecker = $userChecker;
         $this->eventDispatcher = $eventDispatcher;
     }
@@ -66,7 +66,7 @@ class UserLogin implements UserLoginInterface
             throw new AuthenticationException('Unauthenticated token');
         }
 
-        $this->securityContext->setToken($token);
+        $this->tokenStorage->setToken($token);
         $this->eventDispatcher->dispatch(UserEvents::SECURITY_IMPLICIT_LOGIN, new UserEvent($user));
     }
 

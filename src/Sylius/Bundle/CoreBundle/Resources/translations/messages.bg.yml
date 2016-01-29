@@ -1,3 +1,15 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    channel:
+      taxonomies: Категоризация
+      locales: Езикови променливи
+      shipping_methods: Начин на доставка
+      payment_methods: Методи на плащане
+    order_filter:
+      payment_state: Състояние на плащане
+    attribute:
+      product_attribute_value:
+        value: Стойност

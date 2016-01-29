@@ -7,10 +7,10 @@ Feature: Checkout addressing
     Background:
         Given store has default configuration
           And there are following taxonomies defined:
-            | name     |
-            | Category |
+            | code | name     |
+            | RTX1 | Category |
           And taxonomy "Category" has following taxons:
-            | Clothing > PHP T-Shirts |
+            | Clothing[TX1] > PHP T-Shirts[TX2] |
           And the following products exist:
             | name          | price | taxons       |
             | PHP Top       | 5.99  | PHP T-Shirts |
@@ -29,9 +29,9 @@ Feature: Checkout addressing
             | Poland         |
             | Germany        |
           And the following shipping methods exist:
-            | zone         | name          | calculator | configuration |
-            | UK + Germany | DHL Express   | Flat rate  | Amount: 5000  |
-            | USA          | FedEx         | Flat rate  | Amount: 6500  |
+            | code | zone         | name          | calculator | configuration |
+            | SM1  | UK + Germany | DHL Express   | Flat rate  | Amount: 5000  |
+            | SM2  | USA          | FedEx         | Flat rate  | Amount: 6500  |
           And all products are assigned to the default channel
 
     Scenario: Filling the shipping address

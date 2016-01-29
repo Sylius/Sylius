@@ -18,6 +18,7 @@ use Sylius\Component\Core\Model\OrderShippingStates;
 use Sylius\Component\Core\Model\Payment;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Core\OrderProcessing\StateResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -31,7 +32,7 @@ class StateResolverSpec extends ObjectBehavior
 
     function it_implements_Sylius_order_state_resolver_interface()
     {
-        $this->shouldImplement('Sylius\Component\Core\OrderProcessing\StateResolverInterface');
+        $this->shouldImplement(StateResolverInterface::class);
     }
 
     function it_marks_order_as_a_backorders_if_it_contains_backordered_units(OrderInterface $order)

@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
 
 /**
@@ -27,7 +28,7 @@ class UserSpec extends ObjectBehavior
 
     function it_implements_user_component_interface()
     {
-        $this->shouldImplement('Sylius\Component\Core\Model\UserInterface');
+        $this->shouldImplement(UserInterface::class);
     }
 
     function its_authorization_roles_are_mutable(RoleInterface $role)

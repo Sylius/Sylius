@@ -18,6 +18,6 @@ sylius:
       not_blank: Bitte geben Sie Ihre Nachricht ein.
   contact_topic:
     title:
-      not_blank: Bitte geben Sie einen Betreff ein.
+      not_blank: Bitte geben Sie einen Titel ein.
       min_length: Ihr Titel ist zu kurz.
       max_length: Ihr Titel ist zu lang.

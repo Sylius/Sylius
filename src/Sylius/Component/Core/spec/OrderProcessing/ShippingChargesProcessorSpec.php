@@ -15,22 +15,22 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Core\OrderProcessing\ShippingChargesProcessorInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 
 /**
+ * @mixin \Sylius\Component\Core\OrderProcessing\ShippingChargesProcessor
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ShippingChargesProcessorSpec extends ObjectBehavior
 {
-    function let(
-        RepositoryInterface $adjustmentRepository,
-        DelegatingCalculatorInterface $calculator
-    )
+    function let(FactoryInterface $adjustmentFactory, DelegatingCalculatorInterface $calculator)
     {
-        $this->beConstructedWith($adjustmentRepository, $calculator);
+        $this->beConstructedWith($adjustmentFactory, $calculator);
     }
 
     function it_is_initializable()
@@ -40,7 +40,7 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
 
     function it_implements_Sylius_shipping_charges_processor_interface()
     {
-        $this->shouldImplement('Sylius\Component\Core\OrderProcessing\ShippingChargesProcessorInterface');
+        $this->shouldImplement(ShippingChargesProcessorInterface::class);
     }
 
     function it_removes_existing_shipping_adjustments(OrderInterface $order)
@@ -65,14 +65,14 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
     }
 
     function it_applies_calculated_shipping_charge_for_each_shipment_associated_with_the_order(
-        $adjustmentRepository,
+        FactoryInterface $adjustmentFactory,
         $calculator,
         AdjustmentInterface $adjustment,
         OrderInterface $order,
         ShipmentInterface $shipment,
         ShippingMethodInterface $shippingMethod
     ) {
-        $adjustmentRepository->createNew()->willReturn($adjustment);
+        $adjustmentFactory->createNew()->willReturn($adjustment);
         $order->getShipments()->willReturn(array($shipment));
 
         $calculator->calculate($shipment)->willReturn(450);
@@ -81,7 +81,7 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
         $shippingMethod->getName()->willReturn('FedEx');
 
         $adjustment->setAmount(450)->shouldBeCalled();
-        $adjustment->setLabel(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
+        $adjustment->setType(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
         $adjustment->setDescription('FedEx')->shouldBeCalled();
 
         $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();

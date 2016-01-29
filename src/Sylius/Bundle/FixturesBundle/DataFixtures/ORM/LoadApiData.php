@@ -13,10 +13,10 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use FOS\OAuthServerBundle\Model\ClientManagerInterface;
-use Sylius\Component\Core\Model\UserInterface;
 use OAuth2\OAuth2;
 use Sylius\Bundle\ApiBundle\Model\Client;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Component\Core\Model\UserInterface;
 
 /**
  * Api fixtures.
@@ -74,8 +74,8 @@ class LoadApiData extends DataFixture
         $canonicalizer = $this->get('sylius.user.canonicalizer');
 
         /* @var $user UserInterface */
-        $user = $this->getUserRepository()->createNew();
-        $customer = $this->getCustomerRepository()->createNew();
+        $user = $this->getUserFactory()->createNew();
+        $customer = $this->getCustomerFactory()->createNew();
         $customer->setFirstname($this->faker->firstName);
         $customer->setLastname($this->faker->lastName);
         $customer->setCurrency($currency);

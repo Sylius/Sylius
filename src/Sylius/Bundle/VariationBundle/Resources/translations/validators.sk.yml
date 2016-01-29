@@ -5,5 +5,16 @@ sylius:
   option:
     name:
       not_blank: Prosím, zadajte názov voľby.
+      min_length: 'Názov možnosti musí obsahovať aspoň 1 znak.|Názov možnosti musí obsahovať aspoň {{ limit }} znakov.'
+      max_length: 'Názov možnosti nesmie byť dlhší ako 1 znak.|Názov možnosti nesmie byť dlhší ako {{ limit }} znakov.'
+    presentation:
+      not_blank: Prosím, zadajte prezentácie názov možnosti.
+      min_length: 'Prezentáčný názov musí mať aspoň 1 znak. | Prezentáčný názov musí byť dlhý aspoň {{ limit }} znakov.'
+      max_length: 'Prezentáčný názov nesmie byť dlhší ako 1 znak. | Prezentáčný názov nesmie byť dlhší ako {{ limit }} znakov.'
+    values:
+      min_count: 'Prosím pridajte aspoň {{ limit }} hodnotu pre možnost. | Prosím pridajte aspoň {{ limit }} hodnôt pre možnost.'
+  option_value:
+    value:
+      not_blank: Prosím, vyplňte hodnotu.
   variant:
     combination: Variant s touto sadou možností už existuje.

@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\FlowBundle\Process\Step;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
 /**
  * Container aware step.
@@ -22,18 +22,5 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 abstract class AbstractContainerAwareStep extends AbstractStep implements ContainerAwareInterface
 {
-    /**
-     * Container.
-     *
-     * @var ContainerInterface
-     */
-    protected $container;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
-    }
+    use ContainerAwareTrait;
 }

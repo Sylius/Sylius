@@ -13,14 +13,14 @@ namespace spec\Sylius\Bundle\PromotionBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Promotion\Model\ActionInterface;
-use Sylius\Component\Promotion\Model\RuleInterface;
+use Sylius\Bundle\PromotionBundle\Form\Type\ActionCollectionType;
+use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationCollectionType;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormConfigInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
@@ -34,12 +34,12 @@ class ActionCollectionTypeSpec extends ObjectBehavior
 
     function it_is_initializabled()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\ActionCollectionType');
+        $this->shouldHaveType(ActionCollectionType::class);
     }
 
     function it_is_configuration_collection_type()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationCollectionType');
+        $this->shouldHaveType(AbstractConfigurationCollectionType::class);
     }
 
     function it_builds_prototypes(
@@ -79,7 +79,7 @@ class ActionCollectionTypeSpec extends ObjectBehavior
         $this->buildView($view, $form, array());
     }
 
-    function it_should_have_default_option(OptionsResolverInterface $resolver)
+    function it_should_have_default_option(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults(array(
@@ -89,7 +89,7 @@ class ActionCollectionTypeSpec extends ObjectBehavior
                 'by_reference' => false,
             ))->shouldBeCalled()
         ;
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 
     function it_has_collection_as_parent()

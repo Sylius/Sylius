@@ -11,13 +11,12 @@
 
 namespace Sylius\Component\Variation\Model;
 
-use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface OptionTranslationInterface
+interface OptionTranslationInterface extends ResourceInterface
 {
     /**
      * The name displayed to user.

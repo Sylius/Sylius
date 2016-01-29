@@ -11,16 +11,13 @@
 
 namespace Sylius\Component\Taxonomy\Model;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
+
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface TaxonomyTranslationInterface
+interface TaxonomyTranslationInterface extends ResourceInterface
 {
-    /**
-     * @return mixed
-     */
-    public function getId();
-
     /**
      * @return string
      */

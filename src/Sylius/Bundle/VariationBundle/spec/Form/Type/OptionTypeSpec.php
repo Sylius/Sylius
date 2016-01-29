@@ -13,8 +13,10 @@ namespace spec\Sylius\Bundle\VariationBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Symfony\Component\Form\FormBuilder;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\FormTypeInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -34,30 +36,39 @@ class OptionTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
             ->add('name', 'text', Argument::any())
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('translations', 'a2lix_translationsForms', Argument::any())
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('values', 'collection', Argument::any())
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+
+        $builder
+            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $this->buildForm($builder, array());
     }
 
-    function it_defines_assigned_data_class_and_validation_groups(OptionsResolverInterface $resolver)
+    function it_defines_assigned_data_class_and_validation_groups(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults(array(
@@ -66,7 +77,7 @@ class OptionTypeSpec extends ObjectBehavior
             ))
             ->shouldBeCalled();
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 
     function it_has_valid_name()

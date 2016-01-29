@@ -7,3 +7,11 @@ sylius:
       price: Precio
       calculator: Fijación de precios
       configuration: Configuración
+    pricing:
+      volume_based:
+        price: Precio
+  pricing:
+    volume_based:
+      price: Precio
+      button:
+        add: Añadir

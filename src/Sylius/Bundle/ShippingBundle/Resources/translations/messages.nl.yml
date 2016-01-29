@@ -6,17 +6,15 @@ sylius:
     rule:
       item_count_configuration:
         count: Aantal
-        equal: Gelijk aan
-      type: Type
     shipment:
       state: Status
       states:
         checkout: Afrekenen
-        dispatched: Verzonden
         pending: Wachtende
         ready: Klaar
         shipped: Verzonden
         returned: Geretourneerd
+        cancelled: Geannuleerd
       tracking_code: Tracking Code
     shipping_calculator:
       flat_rate_configuration:
@@ -28,6 +26,8 @@ sylius:
       per_item_rate_configuration:
         amount: Hoeveelheid
       weight_rate_configuration:
+        division: Divisie
+      volume_rate_configuration:
         amount: Hoeveelheid
         division: Divisie
     shipping_category:
@@ -38,5 +38,5 @@ sylius:
       category: Categorie
       category_requirement: Categorie vereisten
       configuration: Configuratie
-      enabled: Actief
+      enabled: Toegestaan
       name: Naam

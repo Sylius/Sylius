@@ -12,28 +12,30 @@
 namespace spec\Sylius\Bundle\CoreBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
-use Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistryInterface;
+use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType;
+use Sylius\Component\Registry\ServiceRegistryInterface;
+use Symfony\Component\Form\FormRegistryInterface;
+use Symfony\Component\Form\FormTypeInterface;
 
 class ShippingMethodTypeSpec extends ObjectBehavior
 {
-    function let(CalculatorRegistryInterface $calculatorRegistry, RuleCheckerRegistryInterface $checkerRegistry)
+    function let(ServiceRegistryInterface $calculatorRegistry, ServiceRegistryInterface $checkerRegistry, FormRegistryInterface $formRegistry)
     {
-        $this->beConstructedWith('ShippingMethod', array('sylius'), $calculatorRegistry, $checkerRegistry);
+        $this->beConstructedWith('ShippingMethod', array('sylius'), $calculatorRegistry, $checkerRegistry, $formRegistry);
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\ShippingMethodType');
     }
 
     function it_should_be_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_should_extend_Sylius_shipping_method_form_type()
     {
-        $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType');
+        $this->shouldHaveType(ShippingMethodType::class);
     }
 }

@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\UserBundle\EventListener;
 
-use Sylius\Component\User\Model\UserInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Event\ResourceEvent;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
  * User delete listener.
@@ -27,9 +27,9 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
 class UserDeleteListener
 {
     /**
-     * @var SecurityContextInterface
+     * @var TokenStorageInterface
      */
-    protected $securityContext;
+    protected $tokenStorage;
 
     /**
      * @var SessionInterface
@@ -37,12 +37,12 @@ class UserDeleteListener
     protected $session;
 
     /**
-     * @param SecurityContextInterface $securityContext
+     * @param TokenStorageInterface $tokenStorage
      * @param SessionInterface         $session
      */
-    public function __construct(SecurityContextInterface $securityContext, SessionInterface $session)
+    public function __construct(TokenStorageInterface $tokenStorage, SessionInterface $session)
     {
-        $this->securityContext = $securityContext;
+        $this->tokenStorage = $tokenStorage;
         $this->session = $session;
     }
 
@@ -56,11 +56,11 @@ class UserDeleteListener
         if (!$user instanceof UserInterface) {
             throw new UnexpectedTypeException(
                 $user,
-                'Sylius\Component\User\Model\UserInterface'
+                UserInterface::class
             );
         }
 
-        if (($token = $this->securityContext->getToken()) && ($loggedUser = $token->getUser()) && ($loggedUser->getId() === $user->getId())) {
+        if (($token = $this->tokenStorage->getToken()) && ($loggedUser = $token->getUser()) && ($loggedUser->getId() === $user->getId())) {
             $event->stopPropagation();
             $this->session->getBag('flashes')->add('error', 'Cannot remove currently logged in user.');
         }

@@ -12,12 +12,12 @@
 namespace spec\Sylius\Component\Rbac\Authorization;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface;
 use Sylius\Component\Rbac\Authorization\PermissionMapInterface;
 use Sylius\Component\Rbac\Model\IdentityInterface;
 use Sylius\Component\Rbac\Model\PermissionInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
 use Sylius\Component\Rbac\Provider\CurrentIdentityProviderInterface;
-use Sylius\Component\Rbac\Provider\PermissionProviderInterface;
 use Sylius\Component\Rbac\Resolver\RolesResolverInterface;
 
 /**
@@ -41,7 +41,7 @@ class AuthorizationCheckerSpec extends ObjectBehavior
 
     function it_implements_Sylius_Rbac_authorization_checker_interface()
     {
-        $this->shouldImplement('Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface');
+        $this->shouldImplement(AuthorizationCheckerInterface::class);
     }
 
     function it_obtains_the_current_identity_and_returns_false_if_none_available($currentIdentityProvider)

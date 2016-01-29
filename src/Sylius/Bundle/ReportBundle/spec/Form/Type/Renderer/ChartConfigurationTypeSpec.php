@@ -12,8 +12,9 @@
 namespace spec\Sylius\Bundle\ReportBundle\Form\Type\Renderer;
 
 use PhpSpec\ObjectBehavior;
-use Symfony\Component\Form\FormBuilder;
 use Prophecy\Argument;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilder;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -27,7 +28,7 @@ class ChartConfigurationTypeSpec extends ObjectBehavior
 
     function it_should_be_abstract_type_object()
     {
-        $this->shouldHaveType('Symfony\Component\Form\AbstractType');
+        $this->shouldHaveType(AbstractType::class);
     }
 
     function it_has_name()

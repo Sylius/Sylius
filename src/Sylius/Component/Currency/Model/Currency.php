@@ -62,7 +62,7 @@ class Currency implements CurrencyInterface
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -155,5 +155,21 @@ class Currency implements CurrencyInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function enable()
+    {
+        $this->enabled = true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function disable()
+    {
+        $this->enabled = false;
     }
 }

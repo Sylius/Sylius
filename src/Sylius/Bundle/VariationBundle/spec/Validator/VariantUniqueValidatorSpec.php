@@ -16,7 +16,8 @@ use Prophecy\Argument;
 use Sylius\Bundle\VariationBundle\Validator\Constraint\VariantUnique;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Variation\Model\VariantInterface;
-use Symfony\Component\Validator\ExecutionContextInterface;
+use Symfony\Component\Validator\ConstraintValidator;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -38,7 +39,7 @@ class VariantUniqueValidatorSpec extends ObjectBehavior
 
     function it_is_a_constraint_validator()
     {
-        $this->shouldImplement('Symfony\Component\Validator\ConstraintValidator');
+        $this->shouldImplement(ConstraintValidator::class);
     }
 
     function it_should_add_violation_if_variant_with_given_property_value_already_exists(

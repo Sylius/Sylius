@@ -11,11 +11,12 @@
 
 namespace spec\Sylius\Bundle\UserBundle\Doctrine\ORM;
 
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Doctrine\ORM\Mapping\ClassMetadata;
-use Doctrine\ORM\EntityManager;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 class GroupRepositorySpec extends ObjectBehavior
 {
@@ -31,7 +32,7 @@ class GroupRepositorySpec extends ObjectBehavior
 
     function it_is_a_repository()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository');
+        $this->shouldHaveType(EntityRepository::class);
     }
 
     function it_has_a_form_query_buidler($em, QueryBuilder $builder)

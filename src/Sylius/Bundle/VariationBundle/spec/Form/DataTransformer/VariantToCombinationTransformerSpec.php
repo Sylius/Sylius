@@ -15,6 +15,8 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Variation\Model\OptionValueInterface;
 use Sylius\Component\Variation\Model\VariableInterface;
 use Sylius\Component\Variation\Model\VariantInterface;
+use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 class VariantToCombinationTransformerSpec extends ObjectBehavior
 {
@@ -30,7 +32,7 @@ class VariantToCombinationTransformerSpec extends ObjectBehavior
 
     function it_is_a_form_data_transformer()
     {
-        $this->shouldImplement('Symfony\Component\Form\DataTransformerInterface');
+        $this->shouldImplement(DataTransformerInterface::class);
     }
 
     function it_should_transform_null_into_array()
@@ -40,7 +42,7 @@ class VariantToCombinationTransformerSpec extends ObjectBehavior
 
     function it_should_not_transform_not_supported_data_and_throw_exception()
     {
-        $this->shouldThrow('Symfony\Component\Form\Exception\UnexpectedTypeException')->duringTransform(array());
+        $this->shouldThrow(UnexpectedTypeException::class)->duringTransform(array());
     }
 
     function it_should_transform_variant_into_variant_options(VariantInterface $variant)
@@ -62,7 +64,7 @@ class VariantToCombinationTransformerSpec extends ObjectBehavior
 
     function it_should_not_reverse_transform_not_supported_data_and_throw_exception()
     {
-        $this->shouldThrow('Symfony\Component\Form\Exception\UnexpectedTypeException')
+        $this->shouldThrow(UnexpectedTypeException::class)
             ->duringReverseTransform(new \stdClass());
     }
 

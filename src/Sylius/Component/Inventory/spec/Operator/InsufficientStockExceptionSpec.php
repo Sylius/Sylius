@@ -31,7 +31,7 @@ class InsufficientStockExceptionSpec extends ObjectBehavior
 
     function it_is_an_uderflow_exception()
     {
-        $this->shouldHaveType('\UnderflowException');
+        $this->shouldHaveType(\UnderflowException::class);
     }
 
     function it_returns_its_stockable()

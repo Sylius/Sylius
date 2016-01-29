@@ -22,11 +22,14 @@ sylius:
         different_billing_address: ¿Usar una dirección diferente para la facturación?
       payment_method: Método de pago
       shipping_method: Método de envío
-    coupon:
-      per_user_usage_limit: Límite de uso por usuario
     group:
       name: Nombre
       roles: Roles
+    channel:
+      taxonomies: Categorización
+      locales: Idiomas
+      shipping_methods: Métodos de envío
+      payment_methods: Métodos de pago
     image:
       file: Imagen
     locale:
@@ -66,6 +69,10 @@ sylius:
       created_at_to: Hasta
       number: Número de pedido
       shipping_address: Enviar a
+    payment_filter:
+      created_at_from: Desde
+      created_at_to: Hasta
+      number: Número de pedido
     shipping_method:
       zone: Zona
     taxon:
@@ -78,6 +85,7 @@ sylius:
       enabled: Activado
       first_name: Nombre
       groups: Grupos
+      roles: Roles
       last_name: Apellidos
       password: Contraseña
       shipping_address: Dirección de envío
@@ -93,3 +101,8 @@ sylius:
       sku: SKU
       weight: Peso
       width: Ancho
+    attribute:
+      product_attribute_value:
+        value: Valor
+    guest:
+      email: Correo electrónico

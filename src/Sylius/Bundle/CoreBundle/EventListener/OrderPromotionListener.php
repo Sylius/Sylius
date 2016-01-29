@@ -44,29 +44,21 @@ class OrderPromotionListener
     protected $translator;
 
     /**
-     * @var Boolean
-     */
-    protected $itemBased;
-
-    /**
      * Constructor.
      *
      * @param PromotionProcessorInterface $promotionProcessor
      * @param SessionInterface            $session
      * @param TranslatorInterface         $translator
-     * @param Boolean                     $itemBased
      */
     public function __construct(
         PromotionProcessorInterface $promotionProcessor,
         SessionInterface $session,
-        TranslatorInterface $translator,
-        $itemBased
+        TranslatorInterface $translator
     )
     {
         $this->promotionProcessor = $promotionProcessor;
         $this->session = $session;
         $this->translator = $translator;
-        $this->itemBased = $itemBased;
     }
 
     /**
@@ -83,17 +75,11 @@ class OrderPromotionListener
         if (!$order instanceof OrderInterface) {
             throw new UnexpectedTypeException(
                 $order,
-                'Sylius\Component\Core\Model\OrderInterface'
+                OrderInterface::class
             );
         }
 
         $this->promotionProcessor->process($order);
-
-        if ($this->itemBased) {
-            foreach ($order->getItems() as $item) {
-                $this->promotionProcessor->process($item);
-            }
-        }
 
         $order->calculateTotal();
     }

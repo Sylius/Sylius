@@ -13,8 +13,10 @@ namespace spec\Sylius\Bundle\ChannelBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Symfony\Component\Form\FormBuilder;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\FormTypeInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -33,13 +35,13 @@ class ChannelTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_should_build_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
-            ->add('code', 'text', Argument::any())
+            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
@@ -77,11 +79,11 @@ class ChannelTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_should_define_assigned_data_class(OptionsResolverInterface $resolver)
+    function it_should_define_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array('data_class' => 'Channel', 'validation_groups' => array('sylius')))->shouldBeCalled();
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 
     function it_has_valid_name()

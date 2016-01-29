@@ -11,16 +11,16 @@
 
 namespace spec\Sylius\Bundle\SequenceBundle\Doctrine\ORM;
 
-use Doctrine\ORM\EntityManager;
-use PhpSpec\ObjectBehavior;
-use Doctrine\ORM\Events;
-use Doctrine\ORM\Event\PreFlushEventArgs;
 use Doctrine\Common\EventManager;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Event\PreFlushEventArgs;
+use Doctrine\ORM\Events;
+use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Sequence\Model\Sequence;
 use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
-use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Sequence\Number\GeneratorInterface;
 use Sylius\Component\Sequence\SyliusSequenceEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -39,7 +39,7 @@ class NumberListenerSpec extends ObjectBehavior
             $registry,
             $eventManager,
             $eventDispatcher,
-            'Sylius\Component\Sequence\Model\Sequence'
+            Sequence::class
         );
     }
 
@@ -72,7 +72,7 @@ class NumberListenerSpec extends ObjectBehavior
 
         $entity->getSequenceType()->willReturn('sequence_type');
 
-        $entityManager->getRepository('Sylius\Component\Sequence\Model\Sequence')->willReturn($sequenceRepository);
+        $entityManager->getRepository(Sequence::class)->willReturn($sequenceRepository);
         $sequenceRepository->findOneBy(array('type' => 'sequence_type'))->willReturn($sequence);
 
         $eventDispatcher->dispatch(

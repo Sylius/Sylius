@@ -7,31 +7,36 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Paweł Jędrzejewski",
+            "name":     "Paweł Jędrzejewski",
             "homepage": "http://pjedrzejewski.com"
         },
         {
-            "name": "Sylius project",
+            "name":     "Sylius project",
             "homepage": "http://sylius.org"
         },
         {
-            "name": "Community contributions",
+            "name":     "Community contributions",
             "homepage": "http://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
-        "php": ">=5.5.9",
+        "php": "^5.5.9|^7.0",
  
-        "sylius/resource":    "0.16.*",
-        "sylius/archetype":   "0.16.*",
-        "sylius/attribute":   "0.16.*",
-        "sylius/variation":   "0.16.*",
-        "sylius/translation": "0.16.*"
+        "sylius/archetype": "0.16.*",
+        "sylius/attribute": "0.16.*",
+        "sylius/resource": "0.16.*",
+        "sylius/translation": "0.16.*",
+        "sylius/variation": "0.16.*",
+        "symfony/polyfill-iconv": "~1.0"
     },
     "require-dev": {
-        "phpspec/phpspec":         "~2.1",
-
-        "symfony/property-access": "~2.3"
+        "phpspec/phpspec": "^2.4"
+    },
+    "suggest": {
+        "ext-iconv": "For better performance than using Symfony Polyfill Component"
+    },
+    "config": {
+        "bin-dir": "bin"
     },
     "autoload": {
         "psr-4": { "Sylius\\Component\\Product\\": "" }

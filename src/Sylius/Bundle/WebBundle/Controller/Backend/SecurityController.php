@@ -15,7 +15,6 @@ use Sylius\Bundle\UserBundle\Controller\SecurityController as BaseSecurityContro
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Security\Core\SecurityContext;
 
 /**
  * Backend security controller.
@@ -36,7 +35,7 @@ class SecurityController extends BaseSecurityController
      */
     public function exitUserSwitchAction($username)
     {
-        if (!$this->get('security.context')->isGranted('ROLE_SYLIUS_ADMIN')) {
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ALLOWED_TO_SWITCH')) {
             throw new AccessDeniedException();
         }
 

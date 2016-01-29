@@ -13,10 +13,12 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
+use Gedmo\Loggable\Entity\LogEntry;
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 use Sylius\Bundle\ResourceBundle\Form\DefaultFormFactory;
 use Sylius\Component\Resource\Event\ResourceEvent;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormInterface;
@@ -228,7 +230,7 @@ class ResourceController extends FOSRestController
         $form     = $this->getForm($resource);
 
         if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
-            $this->domainManager->update($resource);
+            $resource = $this->domainManager->update($resource);
 
             if ($this->config->isApiRequest()) {
                 if ($resource instanceof ResourceEvent) {
@@ -335,7 +337,7 @@ class ResourceController extends FOSRestController
     {
         $resource   = $this->findOr404($request);
         $em         = $this->get('doctrine.orm.entity_manager');
-        $repository = $em->getRepository('Gedmo\Loggable\Entity\LogEntry');
+        $repository = $em->getRepository(LogEntry::class);
         $repository->revert($resource, $version);
 
         $this->domainManager->update($resource, 'revert');
@@ -399,7 +401,7 @@ class ResourceController extends FOSRestController
      */
     public function createNew()
     {
-        return $this->resourceResolver->createResource($this->getRepository(), 'createNew');
+        return $this->resourceResolver->createResource($this->getFactory(), 'createNew');
     }
 
     /**
@@ -438,9 +440,9 @@ class ResourceController extends FOSRestController
      */
     public function findOr404(Request $request, array $criteria = array())
     {
-        if ($request->get('slug')) {
+        if ($request->attributes->has('slug') || $request->query->has('slug')) {
             $default = array('slug' => $request->get('slug'));
-        } elseif ($request->get('id')) {
+        } elseif ($request->attributes->has('id') || $request->query->has('id')) {
             $default = array('id' => $request->get('id'));
         } else {
             $default = array();
@@ -470,6 +472,14 @@ class ResourceController extends FOSRestController
     public function getRepository()
     {
         return $this->get($this->config->getServiceName('repository'));
+    }
+
+    /**
+     * @return FactoryInterface
+     */
+    public function getFactory()
+    {
+        return $this->get($this->config->getServiceName('factory'));
     }
 
     /**

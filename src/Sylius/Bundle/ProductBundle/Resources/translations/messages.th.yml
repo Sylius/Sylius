@@ -2,17 +2,16 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  label:
+  form:
     product:
       name: ชื่อ
       description: คำอธิบาย
-      properties: คุณสมบัติ
-      available_on: พร้อมจำหน่ายเมื่อ
+      options: ตัวเลือก
       meta_keywords: Meta Keywords
       meta_description: Meta Description
-    property:
-      name: ชื่อภายใน
-      presentation: สื่อถึง
-    prototype:
+    product_variant:
+      available_on: พร้อมจำหน่ายเมื่อ
+    product_archetype:
       name: ชื่อ
-      properties: คุณสมบัติ
+      parent: หมวดแม่
+      options: ตัวเลือก

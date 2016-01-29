@@ -18,7 +18,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
-/*
+/**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class CartBlamerListener
@@ -48,17 +48,21 @@ class CartBlamerListener
      */
     public function blame(UserEvent $userEvent)
     {
+        if (!$this->cartProvider->hasCart()) {
+            return;
+        }
+
         $cart = $this->cartProvider->getCart();
 
         if (!$cart instanceof OrderInterface) {
-            throw new UnexpectedTypeException($cart, 'Sylius\Component\Core\Model\OrderInterface');
+            throw new UnexpectedTypeException($cart, OrderInterface::class);
         }
 
         $customer = $userEvent->getUser()->getCustomer();
         $cart->setCustomer($customer);
 
         $this->cartManager->persist($cart);
-        $this->cartManager->flush($cart);
+        $this->cartManager->flush();
     }
 
     /**
@@ -66,10 +70,14 @@ class CartBlamerListener
      */
     public function interactiveBlame(InteractiveLoginEvent $interactiveLoginEvent)
     {
+        if (!$this->cartProvider->hasCart()) {
+            return;
+        }
+
         $cart = $this->cartProvider->getCart();
 
         if (!$cart instanceof OrderInterface) {
-            throw new UnexpectedTypeException($cart, 'Sylius\Component\Core\Model\OrderInterface');
+            throw new UnexpectedTypeException($cart, OrderInterface::class);
         }
 
         $user = $interactiveLoginEvent->getAuthenticationToken()->getUser();
@@ -80,6 +88,6 @@ class CartBlamerListener
         $cart->setCustomer($user->getCustomer());
 
         $this->cartManager->persist($cart);
-        $this->cartManager->flush($cart);
+        $this->cartManager->flush();
     }
 }

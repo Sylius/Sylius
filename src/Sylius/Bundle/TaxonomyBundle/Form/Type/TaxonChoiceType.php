@@ -11,25 +11,23 @@
 
 namespace Sylius\Bundle\TaxonomyBundle\Form\Type;
 
+use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Taxon choice form form.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Anna Walasek <anna.walasek@lakion.com>
  */
 class TaxonChoiceType extends AbstractType
 {
     /**
-     * Taxonon repository.
-     *
      * @var TaxonRepositoryInterface
      */
     protected $taxonRepository;
@@ -63,31 +61,31 @@ class TaxonChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $repository = $this->taxonRepository;
         $choiceList = function (Options $options) use ($repository) {
-            $taxons = $repository->getTaxonsAsList($options['taxonomy']);
+            $taxons = $repository->getNonRootTaxons();
+
+            if (null !== $options['taxonomy']) {
+                $taxons = $repository->getTaxonsAsList($options['taxonomy']);
+            }
 
             if (null !== $options['filter']) {
                 $taxons = array_filter($taxons, $options['filter']);
             }
 
-            return new ObjectChoiceList($taxons, null, array(), null, 'id');
+            return new ObjectChoiceList($taxons, null, array(), 'taxonomy', 'id');
         };
 
         $resolver
             ->setDefaults(array(
                 'choice_list' => $choiceList,
+                'taxonomy' => null,
+                'filter' => null,
             ))
-            ->setRequired(array(
-                'taxonomy',
-                'filter',
-            ))
-            ->setAllowedTypes(array(
-                'taxonomy' => array('Sylius\Component\Taxonomy\Model\TaxonomyInterface'),
-                'filter' => array('\Closure', 'null'),
-            ))
+            ->setAllowedTypes('taxonomy', [TaxonomyInterface::class, 'null'])
+            ->setAllowedTypes('filter', ['callable', 'null'])
         ;
     }
 

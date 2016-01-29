@@ -6,3 +6,4 @@ sylius:
     locale:
       code: Kód
       enabled: Povolené
+      name: Názov

@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Payment\Model;
 
+use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
@@ -18,7 +19,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface PaymentMethodInterface extends TimestampableInterface
+interface PaymentMethodInterface extends CodeAwareInterface, TimestampableInterface, PaymentMethodTranslationInterface
 {
     /**
      * @return Boolean
@@ -51,6 +52,8 @@ interface PaymentMethodInterface extends TimestampableInterface
     public function setDescription($description);
 
     /**
+     * Set the payment gateway to use.
+     *
      * @return string
      */
     public function getGateway();

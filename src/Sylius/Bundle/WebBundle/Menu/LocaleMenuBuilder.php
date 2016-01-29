@@ -14,10 +14,10 @@ namespace Sylius\Bundle\WebBundle\Menu;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
-use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface;
+use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface as RbacAuthorizationCheckerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Intl\Intl;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
@@ -33,21 +33,22 @@ class LocaleMenuBuilder extends MenuBuilder
     protected $localeProvider;
 
     /**
-     * @param FactoryInterface         $factory
-     * @param SecurityContextInterface $securityContext
-     * @param TranslatorInterface      $translator
+     * @param FactoryInterface $factory
+     * @param AuthorizationCheckerInterface $authorizationChecker
+     * @param TranslatorInterface $translator
      * @param EventDispatcherInterface $eventDispatcher
-     * @param LocaleProviderInterface  $localeProvider
+     * @param LocaleProviderInterface $localeProvider
+     * @param RbacAuthorizationCheckerInterface $rbacAuthorizationChecker
      */
     public function __construct(
-        FactoryInterface          $factory,
-        SecurityContextInterface  $securityContext,
-        TranslatorInterface       $translator,
-        EventDispatcherInterface  $eventDispatcher,
-        LocaleProviderInterface   $localeProvider,
-        AuthorizationCheckerInterface $authorizationChecker
+        FactoryInterface $factory,
+        AuthorizationCheckerInterface $authorizationChecker,
+        TranslatorInterface $translator,
+        EventDispatcherInterface $eventDispatcher,
+        LocaleProviderInterface $localeProvider,
+        RbacAuthorizationCheckerInterface $rbacAuthorizationChecker
     ) {
-        parent::__construct($factory, $securityContext, $translator, $eventDispatcher, $authorizationChecker);
+        parent::__construct($factory, $authorizationChecker, $translator, $eventDispatcher, $rbacAuthorizationChecker);
 
         $this->localeProvider = $localeProvider;
     }

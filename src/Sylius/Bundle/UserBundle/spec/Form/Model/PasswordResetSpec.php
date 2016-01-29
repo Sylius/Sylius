@@ -23,9 +23,9 @@ class PasswordResetSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\UserBundle\Form\Model\PasswordReset');
     }
 
-    function it_has_email()
+    function it_has_new_password()
     {
-        $this->setEmail('test@example.com');
-        $this->getEmail()->shouldReturn('test@example.com');
+        $this->setPassword('testPassword');
+        $this->getPassword()->shouldReturn('testPassword');
     }
 }

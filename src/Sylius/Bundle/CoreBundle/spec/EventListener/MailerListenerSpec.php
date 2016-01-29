@@ -6,9 +6,9 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 use Sylius\Component\Order\Model\CommentInterface;
-use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -37,7 +37,7 @@ class MailerListenerSpec extends ObjectBehavior
 
         $exception = new UnexpectedTypeException(
             $customerClass,
-            'Sylius\Component\Core\Model\CustomerInterface'
+            CustomerInterface::class
         );
 
         $this->shouldThrow($exception)->duringSendUserConfirmationEmail($event);

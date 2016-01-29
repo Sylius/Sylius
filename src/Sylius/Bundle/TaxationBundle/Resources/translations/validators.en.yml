@@ -2,6 +2,9 @@ sylius:
     tax_category:
         name:
             not_blank: Please enter tax category name.
+        code:
+            not_blank: Please enter tax category code.
+            unique: The tax category with given code already exists.
     tax_rate:
         category:
             not_blank: Please select tax category.
@@ -11,3 +14,6 @@ sylius:
             not_blank: Please enter tax rate amount.
         calculator:
             not_blank: Please select tax calculator.
+        code:
+            not_blank: Please enter tax rate code.
+            unique: The tax rate with given code already exists.

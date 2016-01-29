@@ -3,6 +3,6 @@
 
 sylius:
   resource:
-    create: '%resource% je uspešno kreiran.'
-    update: '%resource% je uspešno ažuriran.'
-    delete: '%resource% je uspešno obrisan.'
+    create: '%resource% је успешно креиран.'
+    update: '%resource% је успешно ажуриран.'
+    delete: '%resource% је успешно обрисан.'

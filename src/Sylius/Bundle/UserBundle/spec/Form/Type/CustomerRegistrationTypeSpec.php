@@ -13,9 +13,12 @@ namespace spec\Sylius\Bundle\UserBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Bundle\UserBundle\Form\EventListener\CustomerRegistrationFormListener;
+use Sylius\Bundle\UserBundle\Form\EventListener\UserRegistrationFormListener;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\Test\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CustomerRegistrationTypeSpec extends ObjectBehavior
 {
@@ -31,7 +34,7 @@ class CustomerRegistrationTypeSpec extends ObjectBehavior
 
     function it_is_a_form()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType');
+        $this->shouldHaveType(AbstractResourceType::class);
     }
 
     function it_builds_a_form(FormBuilderInterface $builder)
@@ -41,17 +44,17 @@ class CustomerRegistrationTypeSpec extends ObjectBehavior
         $builder->add('email', 'email', Argument::type('array'))->shouldbeCalled()->willReturn($builder);
         $builder->add('user', 'sylius_user_registration', Argument::type('array'))->shouldbeCalled()->willReturn($builder);
         $builder->addEventSubscriber(
-            Argument::type('Sylius\Bundle\UserBundle\Form\EventListener\CustomerRegistrationFormListener')
+            Argument::type(CustomerRegistrationFormListener::class)
         )->shouldbeCalled()->willReturn($builder);
         $builder->addEventSubscriber(
-            Argument::type('Sylius\Bundle\UserBundle\Form\EventListener\UserRegistrationFormListener')
+            Argument::type(UserRegistrationFormListener::class)
         )->shouldbeCalled()->willReturn($builder);
         $builder->setDataLocked(false)->shouldbeCalled()->willReturn($builder);
 
         $this->buildForm($builder);
     }
 
-    function it_has_options(OptionsResolverInterface $resolver)
+    function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'Customer',
@@ -59,7 +62,7 @@ class CustomerRegistrationTypeSpec extends ObjectBehavior
             'cascade_validation' => true
         ))->shouldBeCalled();
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 
     function it_has_a_name()

@@ -85,3 +85,19 @@ sylius_backend_product_show:
             repository:
                 method: findForDetailsPage
                 arguments: [$id]
+
+sylius_backend_product_enable:
+    path: /{id}/enable
+    methods: [PATCH]
+    defaults:
+        _controller: sylius.controller.product:enableAction
+        _sylius:
+            redirect: sylius_backend_product_index
+
+sylius_backend_product_disable:
+    path: /{id}/disable
+    methods: [PATCH]
+    defaults:
+        _controller: sylius.controller.product:disableAction
+        _sylius:
+            redirect: sylius_backend_product_index

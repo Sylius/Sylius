@@ -6,3 +6,4 @@ sylius:
     locale:
       code: Kodas
       enabled: Įjungta
+      name: Pavadinimas

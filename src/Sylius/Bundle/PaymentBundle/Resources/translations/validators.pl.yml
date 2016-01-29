@@ -4,15 +4,15 @@
 sylius:
   credit_card:
     cardholder_name:
-      min_length: sylius.credit_card.cardholder_name.min_length
-      not_blank: sylius.credit_card.cardholder_name.not_blank
+      min_length: 'Nazwisko posiadacza karty musi mieć co najmniej {{ limit }} znaków.'
+      not_blank: Podaj nazwisko posiadacza karty.
     expiry_month:
-      max_range: sylius.credit_card.expiry_month.max_range
-      min_range: sylius.credit_card.expiry_month.min_range
+      max_range: 'Miesiąc wygaśnięcia karty kredytowej musi być między {{ min }} i {{ max }}.'
+      min_range: 'Miesiąc wygaśnięcia karty kredytowej musi być między {{ min }} i {{ max }}.'
       not_blank: Proszę wybrać miesiąc wygaśnięcia.
     number:
       not_blank: Proszę wprowadzić numer karty.
-      luhn: sylius.credit_card.number.luhn
+      luhn: Podany numer karty kredytowej jest nieprawidłowy.
     security_code:
       not_blank: Proszę wprowadzić kod zabezpieczający.
       max_length: 'Kod CVV karty kredytowej może zawierać maksymalnie {{ limit }} cyfr.'

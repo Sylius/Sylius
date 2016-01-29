@@ -40,6 +40,7 @@
         <parameter key="sylius.form.type.user_request_password_reset.class">Sylius\Bundle\UserBundle\Form\Type\UserRequestPasswordResetType</parameter>
         <parameter key="sylius.form.type.user_reset_password.class">Sylius\Bundle\UserBundle\Form\Type\UserResetPasswordType</parameter>
         <parameter key="sylius.form.type.user_change_password.class">Sylius\Bundle\UserBundle\Form\Type\UserChangePasswordType</parameter>
+        <parameter key="sylius.form.type.gender.class">Sylius\Bundle\UserBundle\Form\Type\GenderType</parameter>
 
         <parameter key="sylius.listener.default_username.class">Sylius\Bundle\UserBundle\EventListener\DefaultUsernameORMListener</parameter>
         <parameter key="sylius.listener.customer_aware.class">Sylius\Bundle\UserBundle\EventListener\CustomerAwareListener</parameter>
@@ -52,12 +53,15 @@
         <parameter key="sylius.listener.user_mailer_listener.class">Sylius\Bundle\UserBundle\EventListener\MailerListener</parameter>
 
         <parameter key="sylius.controller.security.class">Sylius\Bundle\UserBundle\Controller\SecurityController</parameter>
+
+        <parameter key="sylius.user.validator.unique_registered_user.class">Sylius\Bundle\UserBundle\Validator\Constraints\RegisteredUserValidator</parameter>
     </parameters>
 
     <services>
         <!-- Customer context -->
         <service id="sylius.context.customer" class="%sylius.context.customer.class%">
-            <argument type="service" id="security.context" />
+            <argument type="service" id="security.token_storage" />
+            <argument type="service" id="security.authorization_checker" />
         </service>
 
         <!-- Controllers -->
@@ -95,7 +99,7 @@
             <argument type="service" id="service_container" />
         </service>
         <service id="sylius.security.user_login" class="%sylius.security.user_login.class%">
-            <argument type="service" id="security.context" />
+            <argument type="service" id="security.token_storage" />
             <argument type="service" id="security.user_checker" />
             <argument type="service" id="event_dispatcher" />
         </service>
@@ -140,7 +144,7 @@
             <tag name="kernel.event_listener" event="sylius.user.password_reset.request.token" method="sendResetPasswordTokenEmail" />
         </service>
         <service id="sylius.listener.user_delete" class="%sylius.listener.user_delete.class%">
-            <argument type="service" id="security.context" />
+            <argument type="service" id="security.token_storage" />
             <argument type="service" id="session" />
             <tag name="kernel.event_listener" event="sylius.user.pre_delete" method="deleteUser" />
         </service>
@@ -150,7 +154,7 @@
             <argument type="service" id="sylius.repository.user" />
             <argument type="service" id="sylius.user.canonicalizer" />
         </service>
-        <service id="sylius.user_provider.name_or_email" class="%sylius.user_provider.name_or_email.class%">
+        <service id="sylius.user_provider.name_or_email" class="%sylius.user_provider.name_or_email.class%" lazy="true">
             <argument type="service" id="sylius.repository.user" />
             <argument type="service" id="sylius.user.canonicalizer" />
         </service>
@@ -158,9 +162,12 @@
             <argument type="service" id="sylius.repository.user" />
             <argument type="service" id="sylius.user.canonicalizer" />
         </service>
-        <service id="sylius.oauth.user_provider" class="%sylius.oauth.user_provider.class%">
+        <service id="sylius.oauth.user_provider" class="%sylius.oauth.user_provider.class%" lazy="true">
+            <argument type="service" id="sylius.factory.customer" />
             <argument type="service" id="sylius.repository.customer" />
+            <argument type="service" id="sylius.factory.user" />
             <argument type="service" id="sylius.repository.user" />
+            <argument type="service" id="sylius.factory.user_oauth" />
             <argument type="service" id="sylius.repository.user_oauth" />
             <argument type="service" id="sylius.manager.user" />
             <argument type="service" id="sylius.user.canonicalizer" />
@@ -179,12 +186,12 @@
         <service id="sylius.form.type.user_change_password" class="%sylius.form.type.user_change_password.class%">
             <tag name="form.type" alias="sylius_user_change_password" />
         </service>
-        <service id="sylius.form.type.gender" class="Sylius\Bundle\UserBundle\Form\Type\GenderType">
+        <service id="sylius.form.type.gender" class="%sylius.form.type.gender.class%">
             <tag name="form.type" alias="sylius_gender" />
         </service>
 
         <!-- Validators -->
-        <service id="validator.unique.registered_user" class="Sylius\Bundle\UserBundle\Validator\Constraints\RegisteredUserValidator">
+        <service id="validator.unique.registered_user" class="%sylius.user.validator.unique_registered_user.class%">
             <argument type="service" id="sylius.repository.customer" />
             <tag name="validator.constraint_validator" alias="registered_user_validator" />
         </service>

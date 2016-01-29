@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    shipment:
+      states:
+        checkout: 结账
+        pending: 等待中
+    shipping_category:
+      description: 描述
+      name: 名称
+    shipping_method:
+      enabled: 已启用
+      name: 名称

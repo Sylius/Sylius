@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -50,15 +51,15 @@ class ResourceResolver
     /**
      * Create resource.
      *
-     * @param RepositoryInterface $repository
-     * @param string              $defaultMethod
-     * @param array               $defaultArguments
+     * @param FactoryInterface $factory
+     * @param string           $defaultMethod
+     * @param array            $defaultArguments
      *
      * @return mixed
      */
-    public function createResource(RepositoryInterface $repository, $defaultMethod, array $defaultArguments = array())
+    public function createResource(FactoryInterface $factory, $defaultMethod, array $defaultArguments = array())
     {
-        $callable = array($repository, $this->config->getFactoryMethod($defaultMethod));
+        $callable = array($factory, $this->config->getFactoryMethod($defaultMethod));
         $arguments = $this->config->getFactoryArguments($defaultArguments);
 
         return call_user_func_array($callable, $arguments);

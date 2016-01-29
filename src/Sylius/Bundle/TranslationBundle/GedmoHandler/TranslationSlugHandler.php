@@ -10,13 +10,14 @@
 
 namespace Sylius\Bundle\TranslationBundle\GedmoHandler;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
-use Gedmo\Sluggable\SluggableListener;
-use Gedmo\Sluggable\Mapping\Event\SluggableAdapter;
-use Gedmo\Tool\Wrapper\AbstractWrapper;
+use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Gedmo\Exception\InvalidMappingException;
 use Gedmo\Sluggable\Handler\SlugHandlerInterface;
+use Gedmo\Sluggable\Mapping\Event\SluggableAdapter;
+use Gedmo\Sluggable\SluggableListener;
+use Gedmo\Tool\Wrapper\AbstractWrapper;
 
 /**
  * This is the handler for the permalink fields that are in translation entities
@@ -128,6 +129,8 @@ class TranslationSlugHandler implements SlugHandlerInterface
                 }
             }
         }
+
+        $slug = $this->deleteUnnecessaryParentSlug($slug);
     }
 
     /**
@@ -135,8 +138,14 @@ class TranslationSlugHandler implements SlugHandlerInterface
      */
     public static function validate(array $options, ClassMetadata $meta)
     {
+        // Since we cannot know, whether children of this mapped superclass
+        // have or have not given association.
+        if ($meta instanceof ClassMetadataInfo && $meta->isMappedSuperclass) {
+            return;
+        }
+
         if (!$meta->isSingleValuedAssociation($options['relationField'])) {
-            throw new InvalidMappingException("Unable to find tree parent slug relation through field - [{$options['relationParentRelationField']}] in class - {$meta->name}");
+            throw new InvalidMappingException("Unable to find tree parent slug relation through field - [{$options['relationField']}] in class - {$meta->name}");
         }
 //      TODO Check parent relation in translatable entity is single valued
 //      (Note: don't know if that's possible here as we need the relationField class metadada)
@@ -147,7 +156,7 @@ class TranslationSlugHandler implements SlugHandlerInterface
      */
     public function onSlugCompletion(SluggableAdapter $ea, array &$config, $object, &$slug)
     {
-        $slug = $this->transliterate($slug, $config['separator'], $object);
+        $slug = $this->transliterate($slug);
 
         if (!$this->isInsert) {
             $wrapped = AbstractWrapper::wrap($object, $this->om);
@@ -183,21 +192,16 @@ class TranslationSlugHandler implements SlugHandlerInterface
      * by collection of parent slugs.
      *
      * @param string $text
-     * @param string $separator
-     * @param object $object
      *
      * @return string
      */
-    public function transliterate($text, $separator, $object)
+    public function transliterate($text)
     {
         if (!empty($this->parentSlug)) {
-            $text = $this->parentSlug.$this->usedPathSeparator.$text.$this->suffix;
-        } else {
-            // if no parentSlug, apply our prefix
-            $text = $this->prefix.$text;
+            return $this->parentSlug.$this->usedPathSeparator.$text.$this->suffix;
         }
 
-        return $text;
+        return $this->prefix.$text;
     }
 
     /**
@@ -206,5 +210,15 @@ class TranslationSlugHandler implements SlugHandlerInterface
     public function handlesUrlization()
     {
         return false;
+    }
+
+    /**
+     * @param string $slug
+     *
+     * @return string
+     */
+    private function deleteUnnecessaryParentSlug($slug)
+    {
+        return preg_replace('/^' . preg_quote($this->parentSlug.$this->usedPathSeparator, '/') . '/', '', $slug);
     }
 }
