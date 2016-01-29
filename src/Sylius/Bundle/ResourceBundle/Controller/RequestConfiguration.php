@@ -93,6 +93,7 @@ class RequestConfiguration
 
     /**
      * @param $name
+     *
      * @return null|string
      */
     public function getDefaultTemplate($name)
@@ -102,6 +103,7 @@ class RequestConfiguration
 
     /**
      * @param $name
+     *
      * @return mixed|null
      */
     public function getTemplate($name)
@@ -125,6 +127,7 @@ class RequestConfiguration
 
     /**
      * @param $name
+     *
      * @return string
      */
     public function getRouteName($name)
@@ -206,7 +209,7 @@ class RequestConfiguration
         $redirect = $this->parameters->get('redirect');
 
         if (!is_array($redirect) || empty($redirect['parameters'])) {
-            $redirect = array('parameters' => array());
+            $redirect = ['parameters' => []];
         }
 
         $parameters = $redirect['parameters'];
@@ -269,9 +272,9 @@ class RequestConfiguration
      *
      * @return array
      */
-    public function getCriteria(array $criteria = array())
+    public function getCriteria(array $criteria = [])
     {
-        $defaultCriteria = array_merge($this->parameters->get('criteria', array()), $criteria);
+        $defaultCriteria = array_merge($this->parameters->get('criteria', []), $criteria);
 
         if ($this->isFilterable()) {
             return $this->getRequestParameter('criteria', $defaultCriteria);
@@ -290,16 +293,17 @@ class RequestConfiguration
 
     /**
      * @param array $sorting
+     *
      * @return array
      */
-    public function getSorting(array $sorting = array())
+    public function getSorting(array $sorting = [])
     {
-        $defaultSorting = array_merge($this->parameters->get('sorting', array()), $sorting);
+        $defaultSorting = array_merge($this->parameters->get('sorting', []), $sorting);
 
         if ($this->isSortable()) {
             $sorting = $this->getRequestParameter('sorting');
             foreach ($defaultSorting as $key => $value) {
-                if (!isset($sorting[$key])){
+                if (!isset($sorting[$key])) {
                     $sorting[$key] = $value;
                 }
             }
@@ -316,11 +320,11 @@ class RequestConfiguration
      *
      * @return array
      */
-    public function getRequestParameter($parameter, $defaults = array())
+    public function getRequestParameter($parameter, $defaults = [])
     {
         return array_replace_recursive(
             $defaults,
-            $this->request->get($parameter, array())
+            $this->request->get($parameter, [])
         );
     }
 
@@ -344,16 +348,16 @@ class RequestConfiguration
     public function getRepositoryArguments()
     {
         if (!$this->parameters->has('repository')) {
-            return array();
+            return [];
         }
 
         $repository = $this->parameters->get('repository');
 
         if (!isset($repository['arguments'])) {
-            return array();
+            return [];
         }
 
-        return is_array($repository['arguments']) ? $repository['arguments'] : array($repository['arguments']);
+        return is_array($repository['arguments']) ? $repository['arguments'] : [$repository['arguments']];
     }
 
     /**
@@ -376,20 +380,21 @@ class RequestConfiguration
     public function getFactoryArguments()
     {
         if (!$this->parameters->has('factory')) {
-            return array();
+            return [];
         }
 
         $factory = $this->parameters->get('factory');
 
         if (!isset($factory['arguments'])) {
-            return array();
+            return [];
         }
 
-        return is_array($factory['arguments']) ? $factory['arguments'] : array($factory['arguments']);
+        return is_array($factory['arguments']) ? $factory['arguments'] : [$factory['arguments']];
     }
 
     /**
      * @param null $message
+     *
      * @return mixed|null
      */
     public function getFlashMessage($message)
@@ -410,7 +415,7 @@ class RequestConfiguration
      */
     public function getSerializationGroups()
     {
-        return $this->parameters->get('serialization_groups', array());
+        return $this->parameters->get('serialization_groups', []);
     }
 
     /**
@@ -476,7 +481,7 @@ class RequestConfiguration
             return $this->getRequest()->isXmlHttpRequest();
         }
 
-        return (bool)$redirect['header'];
+        return (bool) $redirect['header'];
     }
 
     /**
@@ -490,7 +495,7 @@ class RequestConfiguration
         $accessor = PropertyAccess::createPropertyAccessor();
 
         if (empty($parameters)) {
-            return array('id' => $accessor->getValue($resource, 'id'));
+            return ['id' => $accessor->getValue($resource, 'id')];
         }
 
         foreach ($parameters as $key => $value) {

@@ -25,7 +25,7 @@ class UserTypeSpec extends ObjectBehavior
 {
     function let(CanonicalizerInterface $canonicalizer)
     {
-        $this->beConstructedWith(User::class, array('sylius'), $canonicalizer);
+        $this->beConstructedWith(User::class, ['sylius'], $canonicalizer);
     }
 
     function it_is_initializable()
@@ -48,6 +48,6 @@ class UserTypeSpec extends ObjectBehavior
         $builder->add('plainPassword', 'password', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('enabled', 'checkbox', Argument::any())->shouldBeCalled()->willReturn($builder);
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 }

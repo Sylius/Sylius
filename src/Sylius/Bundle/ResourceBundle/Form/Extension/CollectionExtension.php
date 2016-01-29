@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the NIM package.
+ * This file is part of the Sylius package.
  *
- * (c) Langlade Arnaud
+ * (c) Paweł Jędrzejewski
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -40,15 +40,15 @@ class CollectionExtension extends AbstractTypeExtension
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefined(array(
+        $resolver->setDefined([
             'button_add_label',
             'button_delete_label',
-        ));
+        ]);
 
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'button_add_label' => 'sylius.form.collection.add',
             'button_delete_label' => 'sylius.form.collection.delete',
-        ));
+        ]);
     }
 
     /**

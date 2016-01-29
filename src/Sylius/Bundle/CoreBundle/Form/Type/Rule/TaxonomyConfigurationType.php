@@ -25,15 +25,15 @@ class TaxonomyConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('taxons', 'sylius_taxon_selection', array(
-                'label'             => 'sylius.form.rule.taxonomy_configuration.taxons',
-                'model_transformer' => array(
+            ->add('taxons', 'sylius_taxon_selection', [
+                'label' => 'sylius.form.rule.taxonomy_configuration.taxons',
+                'model_transformer' => [
                     'save_objects' => false,
-                ),
-            ))
-            ->add('exclude', 'checkbox', array(
+                ],
+            ])
+            ->add('exclude', 'checkbox', [
                 'label' => 'sylius.form.rule.taxonomy_configuration.exclude',
-            ))
+            ])
         ;
     }
 

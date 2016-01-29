@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\SingleResourceProviderInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -29,7 +28,7 @@ class SingleResourceProviderSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\SingleResourceProvider');
     }
-    
+
     function it_implements_single_resource_provider_interface()
     {
         $this->shouldImplement(SingleResourceProviderInterface::class);
@@ -40,16 +39,15 @@ class SingleResourceProviderSpec extends ObjectBehavior
         Request $request,
         ParameterBag $requestAttributes,
         RepositoryInterface $repository
-    )
-    {
+    ) {
         $requestConfiguration->getRepositoryMethod()->willReturn(null);
         $requestConfiguration->getRequest()->willReturn($request);
         $request->attributes = $requestAttributes;
         $requestAttributes->has('id')->willReturn(true);
         $requestAttributes->has('slug')->willReturn(false);
         $requestAttributes->get('id')->willReturn(5);
-        
-        $repository->findOneBy(array('id' => 5))->willReturn(null);
+
+        $repository->findOneBy(['id' => 5])->willReturn(null);
 
         $this->get($requestConfiguration, $repository)->shouldReturn(null);
     }
@@ -60,8 +58,7 @@ class SingleResourceProviderSpec extends ObjectBehavior
         ParameterBag $requestAttributes,
         RepositoryInterface $repository,
         ResourceInterface $resource
-    )
-    {
+    ) {
         $requestConfiguration->getRepositoryMethod()->willReturn(null);
         $requestConfiguration->getRequest()->willReturn($request);
         $request->attributes = $requestAttributes;
@@ -69,7 +66,7 @@ class SingleResourceProviderSpec extends ObjectBehavior
         $requestAttributes->has('slug')->willReturn(false);
         $requestAttributes->get('id')->willReturn(3);
 
-        $repository->findOneBy(array('id' => 3))->willReturn($resource);
+        $repository->findOneBy(['id' => 3])->willReturn($resource);
 
         $this->get($requestConfiguration, $repository)->shouldReturn($resource);
     }
@@ -80,8 +77,7 @@ class SingleResourceProviderSpec extends ObjectBehavior
         ParameterBag $requestAttributes,
         RepositoryInterface $repository,
         ResourceInterface $resource
-    )
-    {
+    ) {
         $requestConfiguration->getRepositoryMethod()->willReturn(null);
         $requestConfiguration->getRequest()->willReturn($request);
         $request->attributes = $requestAttributes;
@@ -89,7 +85,7 @@ class SingleResourceProviderSpec extends ObjectBehavior
         $requestAttributes->has('slug')->willReturn(true);
         $requestAttributes->get('slug')->willReturn('the-most-awesome-hat');
 
-        $repository->findOneBy(array('slug' => 'the-most-awesome-hat'))->willReturn($resource);
+        $repository->findOneBy(['slug' => 'the-most-awesome-hat'])->willReturn($resource);
 
         $this->get($requestConfiguration, $repository)->shouldReturn($resource);
     }
@@ -100,10 +96,10 @@ class SingleResourceProviderSpec extends ObjectBehavior
         ResourceInterface $resource
     ) {
         $requestConfiguration->getRepositoryMethod()->willReturn('findAll');
-        $requestConfiguration->getRepositoryArguments()->willReturn(array('foo'));
+        $requestConfiguration->getRepositoryArguments()->willReturn(['foo']);
 
         $repository->findAll('foo')->willReturn($resource);
-       
+
         $this->get($requestConfiguration, $repository)->shouldReturn($resource);
     }
 }

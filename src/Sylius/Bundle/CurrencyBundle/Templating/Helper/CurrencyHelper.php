@@ -38,8 +38,8 @@ class CurrencyHelper extends Helper
     public function __construct(CurrencyContextInterface $currencyContext, CurrencyConverterInterface $converter, MoneyHelper $moneyHelper)
     {
         $this->currencyContext = $currencyContext;
-        $this->converter       = $converter;
-        $this->moneyHelper     = $moneyHelper;
+        $this->converter = $converter;
+        $this->moneyHelper = $moneyHelper;
     }
 
     /**

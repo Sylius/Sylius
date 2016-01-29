@@ -27,7 +27,7 @@ class RoleRepository extends EntityRepository implements RoleRepositoryInterface
      */
     public function getChildRoles(RoleInterface $role)
     {
-        $queryBuilder =  $this->createQueryBuilder('o');
+        $queryBuilder = $this->createQueryBuilder('o');
 
         return $queryBuilder
             ->where($queryBuilder->expr()->lt('o.left', $role->getRight()))

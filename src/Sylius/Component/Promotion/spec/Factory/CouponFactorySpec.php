@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Promotion\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Promotion\Factory\CouponFactoryInterface;
 use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
@@ -33,12 +32,12 @@ class CouponFactorySpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Component\Promotion\Factory\CouponFactory');
     }
-    
+
     function it_is_a_resource_factory()
     {
         $this->shouldImplement(FactoryInterface::class);
     }
-    
+
     function it_implements_coupon_factory_interface()
     {
         $this->shouldImplement(CouponFactoryInterface::class);
@@ -47,17 +46,17 @@ class CouponFactorySpec extends ObjectBehavior
     function it_creates_new_coupon(FactoryInterface $factory, CouponInterface $coupon)
     {
         $factory->createNew()->willReturn($coupon);
-        
+
         $this->createNew()->shouldReturn($coupon);
     }
-    
+
     function it_throws_an_exception_when_promotion_is_not_found(PromotionRepositoryInterface $promotionRepository)
     {
         $promotionRepository->find(15)->willReturn(null);
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('createForPromotion', array(15))
+            ->during('createForPromotion', [15])
         ;
     }
 
@@ -66,8 +65,7 @@ class CouponFactorySpec extends ObjectBehavior
         PromotionRepositoryInterface $promotionRepository,
         PromotionInterface $promotion,
         CouponInterface $coupon
-    )
-    {
+    ) {
         $factory->createNew()->willReturn($coupon);
         $promotionRepository->find(13)->willReturn($promotion);
         $coupon->setPromotion($promotion)->shouldBeCalled();

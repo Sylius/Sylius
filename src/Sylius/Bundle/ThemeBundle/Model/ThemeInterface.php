@@ -22,7 +22,7 @@ interface ThemeInterface extends ResourceInterface
      * @return string
      */
     public function getName();
-    
+
     /**
      * @param string $name
      */

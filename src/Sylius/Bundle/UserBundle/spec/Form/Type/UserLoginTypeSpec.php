@@ -41,6 +41,6 @@ class UserLoginTypeSpec extends ObjectBehavior
         $builder->add('_username', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('_password', 'password', Argument::any())->shouldBeCalled()->willReturn($builder);
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is an addition to the Sylius package.
+ * This file is part of the Sylius package.
  *
  * (c) Paweł Jędrzejewski
  *
@@ -24,7 +24,7 @@ class CreditCardTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('CreditCard', array('sylius'));
+        $this->beConstructedWith('CreditCard', ['sylius']);
     }
 
     function it_is_a_form_type()
@@ -64,16 +64,16 @@ class CreditCardTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_defines_assigned_data_class_and_validation_groups(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
-                'data_class'        => 'CreditCard',
-                'validation_groups' => array('sylius'),
-            ))
+            ->setDefaults([
+                'data_class' => 'CreditCard',
+                'validation_groups' => ['sylius'],
+            ])
             ->shouldBeCalled()
         ;
 

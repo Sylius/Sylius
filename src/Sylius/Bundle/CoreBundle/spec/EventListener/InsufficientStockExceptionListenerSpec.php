@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
@@ -58,10 +67,10 @@ class InsufficientStockExceptionListenerSpec extends ObjectBehavior
 
         $translator->trans(
             'sylius.checkout.out_of_stock',
-            array(
+            [
                 '%quantity%' => '30',
-                '%name%'     => 'Inventory Name',
-            ),
+                '%name%' => 'Inventory Name',
+            ],
             'flashes'
         )->shouldBeCalled()->willReturn('message translated');
 

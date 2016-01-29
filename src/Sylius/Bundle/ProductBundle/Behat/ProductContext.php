@@ -13,8 +13,8 @@ namespace Sylius\Bundle\ProductBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
 use Doctrine\Common\Collections\ArrayCollection;
-use Sylius\Component\Attribute\AttributeType\CheckboxAttributeType;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
+use Sylius\Component\Attribute\AttributeType\CheckboxAttributeType;
 use Sylius\Component\Core\Model\ProductInterface;
 
 class ProductContext extends DefaultContext
@@ -48,7 +48,7 @@ class ProductContext extends DefaultContext
                 $attribute = explode(':', $data['attributes']);
 
                 $productAttribute = $this->findOneByName('product_attribute', trim($attribute[0]));
-                $attributeValue =  $this->getFactory('product_attribute_value')->createNew();
+                $attributeValue = $this->getFactory('product_attribute_value')->createNew();
 
                 $attributeValue->setAttribute($productAttribute);
                 $attributeValue->setValue($attribute[1]);
@@ -133,7 +133,7 @@ class ProductContext extends DefaultContext
         $archetype = $this->findOneByName('product_archetype_translation', $archetypeName);
 
         if (!$archetype->getLocale() === $locale) {
-            throw new \Exception('There is no translation for product archetype'. $archetypeName . ' in '.$locale . 'locale');
+            throw new \Exception('There is no translation for product archetype'.$archetypeName.' in '.$locale.'locale');
         }
     }
 
@@ -162,9 +162,8 @@ class ProductContext extends DefaultContext
         $option->setName($name);
         $option->setPresentation($presentation ?: $name);
 
-        foreach(explode(',', $values) as $valueData) {
-
-            $valueData = preg_split("[\\[|\\]]", $valueData, -1, PREG_SPLIT_NO_EMPTY);
+        foreach (explode(',', $values) as $valueData) {
+            $valueData = preg_split('[\\[|\\]]', $valueData, -1, PREG_SPLIT_NO_EMPTY);
             $optionValue = $optionValueFactory->createNew();
             $optionValue->setValue(trim($valueData[0]));
             $optionValue->setCode(trim($valueData[1]));
@@ -253,7 +252,7 @@ class ProductContext extends DefaultContext
         $product = $this->findOneByName('product_translation', $productName);
 
         if (!$product->getLocale() === $locale) {
-            throw new \Exception('There is no translation for product'. $productName . ' in '.$locale . 'locale');
+            throw new \Exception('There is no translation for product'.$productName.' in '.$locale.'locale');
         }
     }
 
@@ -315,13 +314,13 @@ class ProductContext extends DefaultContext
     {
         $calculatorConfiguration = $this->getConfiguration($data['calculator configuration']);
 
-        $finalCalculatorConfiguration = array();
+        $finalCalculatorConfiguration = [];
         $channelRepository = $this->getRepository('channel');
 
         foreach ($calculatorConfiguration as $channelCode => $price) {
-            $channel = $channelRepository->findOneBy(array('code' => $channelCode));
+            $channel = $channelRepository->findOneBy(['code' => $channelCode]);
 
-            $finalCalculatorConfiguration[$channel->getId()] = (int)round($price * 100);
+            $finalCalculatorConfiguration[$channel->getId()] = (int) round($price * 100);
         }
 
         return $finalCalculatorConfiguration;
@@ -355,7 +354,7 @@ class ProductContext extends DefaultContext
      */
     public function iShouldBeOnTheProductAttributeCreationPageForType($type)
     {
-        $this->assertSession()->addressEquals($this->generatePageUrl('product attribute creation', array('type' => $type)));
+        $this->assertSession()->addressEquals($this->generatePageUrl('product attribute creation', ['type' => $type]));
     }
 
     /**
@@ -363,7 +362,7 @@ class ProductContext extends DefaultContext
      */
     public function thereIsProduct($enabled, $name)
     {
-        $product = $this->getRepository('product')->findOneBy(array('name' => $name));
+        $product = $this->getRepository('product')->findOneBy(['name' => $name]);
 
         if (null === $product) {
             $product = $this->getRepository('product')->createNew();

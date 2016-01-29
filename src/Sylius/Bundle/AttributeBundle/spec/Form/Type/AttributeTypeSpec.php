@@ -30,7 +30,7 @@ class AttributeTypeSpec extends ObjectBehavior
 {
     function let(FormBuilder $builder, FormFactoryInterface $formFactory, ServiceRegistryInterface $attributeTypeRegistry)
     {
-        $this->beConstructedWith('Attribute', array('sylius'), 'server', $attributeTypeRegistry);
+        $this->beConstructedWith('Attribute', ['sylius'], 'server', $attributeTypeRegistry);
 
         $builder->getFormFactory()->willReturn($formFactory);
     }
@@ -51,7 +51,7 @@ class AttributeTypeSpec extends ObjectBehavior
             ->addEventSubscriber(Argument::type(BuildAttributeFormSubscriber::class))
             ->willReturn($builder)
         ;
-        
+
         $builder
             ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
             ->willReturn($builder)
@@ -64,20 +64,20 @@ class AttributeTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('type', 'sylius_attribute_type_choice', array(
-                'label'    => 'sylius.form.attribute.type',
+            ->add('type', 'sylius_attribute_type_choice', [
+                'label' => 'sylius.form.attribute.type',
                 'disabled' => true,
-            ))
+            ])
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array('data_class' => 'Attribute', 'validation_groups' => array('sylius')))->shouldBeCalled();
+        $resolver->setDefaults(['data_class' => 'Attribute', 'validation_groups' => ['sylius']])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

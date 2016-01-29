@@ -28,9 +28,9 @@ class RbacInitializer
     private $permissionFactory;
     private $permissionRepository;
 
-    private $permissionsByCode = array(
+    private $permissionsByCode = [
         'root' => null,
-    );
+    ];
 
     private $roles;
     private $rolesHierarchy;
@@ -77,7 +77,7 @@ class RbacInitializer
 
     protected function initializePermissions(OutputInterface $output = null)
     {
-        if (null === $root = $this->permissionRepository->findOneBy(array('code' => 'root'))) {
+        if (null === $root = $this->permissionRepository->findOneBy(['code' => 'root'])) {
             $root = $this->permissionFactory->createNew();
             $root->setCode('root');
             $root->setDescription('Root');
@@ -89,7 +89,7 @@ class RbacInitializer
         $this->permissionsByCode['root'] = $root;
 
         foreach ($this->permissions as $code => $description) {
-            if (null === $permission = $this->permissionRepository->findOneBy(array('code' => $code))) {
+            if (null === $permission = $this->permissionRepository->findOneBy(['code' => $code])) {
                 $permission = $this->permissionFactory->createNew();
                 $permission->setCode($code);
                 $permission->setDescription($description);
@@ -120,7 +120,7 @@ class RbacInitializer
             return;
         }
 
-        if (null === $root = $this->roleRepository->findOneBy(array('code' => 'root'))) {
+        if (null === $root = $this->roleRepository->findOneBy(['code' => 'root'])) {
             $root = $this->roleFactory->createNew();
             $root->setCode('root');
             $root->setName('Root');
@@ -131,10 +131,10 @@ class RbacInitializer
             $this->roleManager->flush();
         }
 
-        $rolesByCode = array('root' => $root);
+        $rolesByCode = ['root' => $root];
 
         foreach ($this->roles as $code => $data) {
-            if (null === $role = $this->roleRepository->findOneBy(array('code' => $code))) {
+            if (null === $role = $this->roleRepository->findOneBy(['code' => $code])) {
                 $role = $this->roleFactory->createNew();
                 $role->setCode($code);
                 $role->setName($data['name']);
@@ -160,7 +160,6 @@ class RbacInitializer
             $role->setSecurityRoles($data['security_roles']);
 
             $this->roleManager->persist($role);
-
 
             $rolesByCode[$code] = $role;
         }

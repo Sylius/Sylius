@@ -14,7 +14,6 @@ namespace spec\Sylius\Bundle\AddressingBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberType;
-use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Component\Addressing\Model\ZoneMember;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormTypeInterface;
@@ -27,7 +26,7 @@ class ZoneMemberTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('ZoneMember', array('sylius'));
+        $this->beConstructedWith('ZoneMember', ['sylius']);
     }
 
     function it_is_initializable()
@@ -58,17 +57,17 @@ class ZoneMemberTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array('zone_type' => 'zone'));
+        $this->buildForm($builder, ['zone_type' => 'zone']);
     }
 
     function it_configures_options(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'empty_value' => 'sylius.form.zone_member.select',
-                'data_class'  => ZoneMember::class,
-                'zone_type'   => 'country',
-            ))
+                'data_class' => ZoneMember::class,
+                'zone_type' => 'country',
+            ])
             ->shouldBeCalled()
         ;
 

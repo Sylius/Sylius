@@ -24,7 +24,7 @@ class CustomerTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(Customer::class, array('sylius'));
+        $this->beConstructedWith(Customer::class, ['sylius']);
     }
 
     function it_is_initializable()
@@ -52,6 +52,6 @@ class CustomerTypeSpec extends ObjectBehavior
         $builder->add('groups', 'sylius_group_choice', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('user', 'sylius_user', Argument::any())->shouldBeCalled()->willReturn($builder);
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 }

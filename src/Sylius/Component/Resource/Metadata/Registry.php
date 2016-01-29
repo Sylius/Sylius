@@ -19,7 +19,7 @@ class Registry implements RegistryInterface
     /**
      * @var array
      */
-    private $metadata = array();
+    private $metadata = [];
 
     /**
      * {@inheritdoc}

@@ -1,13 +1,13 @@
 <?php
 
 /*
-* This file is part of the Sylius package.
-*
-* (c) Paweł Jędrzejewski
-*
-* For the full copyright and license information, please view the LICENSE
-* file that was distributed with this source code.
-*/
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
@@ -39,7 +39,7 @@ class PurchaseStep extends CheckoutStep
             $payment->getMethod()->getGateway(),
             $payment,
             $context->getProcess()->getForwardRoute(),
-            array('stepName' => $this->getName())
+            ['stepName' => $this->getName()]
         );
 
         return new RedirectResponse($captureToken->getTargetUrl());

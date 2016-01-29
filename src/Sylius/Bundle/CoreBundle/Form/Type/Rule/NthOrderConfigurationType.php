@@ -27,13 +27,13 @@ class NthOrderConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nth', 'integer', array(
+            ->add('nth', 'integer', [
                 'label' => 'sylius.form.rule.nth_order_configuration.nth',
-                'constraints' => array(
+                'constraints' => [
                     new NotBlank(),
-                    new Type(array('type' => 'numeric')),
-                )
-            ))
+                    new Type(['type' => 'numeric']),
+                ],
+            ])
         ;
     }
 

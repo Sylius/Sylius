@@ -9,10 +9,18 @@
  * file that was distributed with this source code.
  */
 
+$fixers = include 'common.php';
+
+$fixers[] = '-visibility';
+
 $finder = Symfony\Component\Finder\Finder::create()
     ->files()
     ->name('*Spec.php')
-    ->in(__DIR__.'/src')
+    ->in('src')
 ;
 
-return Symfony\CS\Config\Config::create()->finder($finder);
+return Symfony\CS\Config\Config::create()
+        ->setUsingCache(true)
+        ->fixers($fixers)
+        ->finder($finder)
+;

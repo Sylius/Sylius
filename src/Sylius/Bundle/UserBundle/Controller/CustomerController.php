@@ -37,7 +37,7 @@ class CustomerController extends ResourceController
 
         return $this->container->get('templating')->renderResponse(
             $configuration->getTemplate('showProfile.html'),
-            array($this->metadata->getName() => $customer)
+            [$this->metadata->getName() => $customer]
         );
     }
 
@@ -53,7 +53,7 @@ class CustomerController extends ResourceController
         $customer = $this->getCustomer();
         $form = $this->resourceFormFactory->create($configuration, $customer);
 
-        if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
+        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $customer);
             $this->manager->flush();
             $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $customer);
@@ -73,15 +73,16 @@ class CustomerController extends ResourceController
 
         return $this->container->get('templating')->renderResponse(
             $configuration->getTemplate('updateProfile.html'),
-            array(
+            [
                 $this->metadata->getName() => $customer,
                 'form' => $form->createView(),
-            )
+            ]
         );
     }
 
     /**
      * @return CustomerInterface
+     *
      * @throws AccessDeniedException - When user is not logged in.
      */
     protected function getCustomer()

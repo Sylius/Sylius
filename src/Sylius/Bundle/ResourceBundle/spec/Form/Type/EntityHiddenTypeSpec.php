@@ -44,17 +44,17 @@ class EntityHiddenTypeSpec extends ObjectBehavior
         $builder->addEventListener(FormEvents::PRE_SUBMIT, Argument::type(\Closure::class))->willReturn($builder);
         $builder->addEventListener(FormEvents::SUBMIT, Argument::type(\Closure::class))->willReturn($builder);
 
-        $this->buildForm($builder, array(
+        $this->buildForm($builder, [
             'data_class' => 'data_class',
             'identifier' => 'identifier',
-        ));
+        ]);
     }
 
     function it_has_options(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'identifier' => 'id',
-        ))->shouldBeCalled($resolver);
+        ])->shouldBeCalled($resolver);
 
         $this->configureOptions($resolver);
     }

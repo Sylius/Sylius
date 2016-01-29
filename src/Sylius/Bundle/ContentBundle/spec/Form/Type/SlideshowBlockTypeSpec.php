@@ -22,7 +22,7 @@ class SlideshowBlockTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('My\Resource\Model', array('validation_group'));
+        $this->beConstructedWith('My\Resource\Model', ['validation_group']);
     }
 
     function it_is_initializable()

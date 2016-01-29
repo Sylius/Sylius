@@ -76,10 +76,10 @@ class InsufficientStockExceptionListener
             'notice',
             $this->translator->trans(
                 'sylius.checkout.out_of_stock',
-                array(
+                [
                     '%quantity%' => $exception->getStockable()->getOnHand(),
-                    '%name%'     => $exception->getStockable()->getInventoryName(),
-                ),
+                    '%name%' => $exception->getStockable()->getInventoryName(),
+                ],
                 'flashes'
             )
         );

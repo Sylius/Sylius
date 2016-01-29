@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\SearchBundle\Indexer;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Kernel\Kernel;
 use Sylius\Bundle\SearchBundle\Indexer\IndexerInterface;
 
@@ -23,8 +22,7 @@ class ElasticsearchIndexerSpec extends ObjectBehavior
 {
     function let(
         Kernel $kernel
-    )
-    {
+    ) {
         $this->beConstructedWith(
             $kernel
         );

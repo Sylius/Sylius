@@ -25,7 +25,7 @@ interface PermissionMapInterface
      * @param RoleInterface $role
      * @param string        $permissionCode
      *
-     * @return boolean
+     * @return bool
      */
     public function hasPermission(RoleInterface $role, $permissionCode);
 

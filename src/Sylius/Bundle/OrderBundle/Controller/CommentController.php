@@ -44,7 +44,7 @@ class CommentController extends ResourceController
 
             $this->repository->add($resource);
 
-            return $this->redirectHandler->redirectToRoute('sylius_backend_order_show', array('id' => $order->getId()));
+            return $this->redirectHandler->redirectToRoute('sylius_backend_order_show', ['id' => $order->getId()]);
         }
 
         if (!$configuration->isHtmlRequest()) {
@@ -53,10 +53,10 @@ class CommentController extends ResourceController
 
         $view = View::create()
             ->setTemplate($configuration->getTemplate('create.html'))
-            ->setData(array(
+            ->setData([
                 $this->metadata->getName() => $resource,
                 'form' => $form->createView(),
-            ))
+            ])
         ;
 
         return $this->viewHandler->handle($configuration, $view);

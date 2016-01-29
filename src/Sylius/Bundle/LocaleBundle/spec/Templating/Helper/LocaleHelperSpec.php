@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\LocaleBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Symfony\Component\Templating\Helper\Helper;
 

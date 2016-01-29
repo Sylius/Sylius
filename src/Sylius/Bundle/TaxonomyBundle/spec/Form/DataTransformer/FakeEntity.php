@@ -27,11 +27,11 @@ class FakeEntity
 
     public function getTaxons()
     {
-        return array();
+        return [];
     }
 
     public function getChildren()
     {
-        return array();
+        return [];
     }
 }

@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\ApiBundle\Model;
 
 use Doctrine\ORM\EntityManager;
@@ -8,7 +17,6 @@ use FOS\OAuthServerBundle\Entity\ClientManager;
 use FOS\OAuthServerBundle\Model\ClientInterface;
 use FOS\OAuthServerBundle\Model\ClientManagerInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class ClientManagerSpec extends ObjectBehavior
 {
@@ -35,7 +43,7 @@ class ClientManagerSpec extends ObjectBehavior
 
     function it_finds_client_by_public_id(ClientInterface $client, $repository)
     {
-        $repository->findOneBy(array('randomId'  => 'random_string'))->shouldBeCalled()->willReturn($client);
+        $repository->findOneBy(['randomId' => 'random_string'])->shouldBeCalled()->willReturn($client);
 
         $this->findClientByPublicId('random_string')->shouldReturn($client);
     }

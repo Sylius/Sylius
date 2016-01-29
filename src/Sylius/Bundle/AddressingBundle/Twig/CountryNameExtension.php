@@ -24,9 +24,9 @@ class CountryNameExtension extends \Twig_Extension
      */
     public function getFilters()
     {
-        return array(
-            new \Twig_SimpleFilter('sylius_country_name', array($this, 'translateCountryIsoCode')),
-        );
+        return [
+            new \Twig_SimpleFilter('sylius_country_name', [$this, 'translateCountryIsoCode']),
+        ];
     }
 
     /**

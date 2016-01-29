@@ -76,6 +76,6 @@ class FlashHelper implements FlashHelperInterface
      */
     private function translateMessage($flashMessage, MetadataInterface $metadata)
     {
-        return $this->translator->trans($flashMessage, array('%resource%' => ucfirst($metadata->getHumanizedName())), 'flashes');
+        return $this->translator->trans($flashMessage, ['%resource%' => ucfirst($metadata->getHumanizedName())], 'flashes');
     }
 }

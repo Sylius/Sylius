@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\FlashHelper;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
@@ -39,7 +38,7 @@ class FlashHelperSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\FlashHelper');
     }
-    
+
     function it_implements_flash_helper_interface()
     {
         $this->shouldImplement('Sylius\Bundle\ResourceBundle\Controller\FlashHelperInterface');
@@ -52,8 +51,7 @@ class FlashHelperSpec extends ObjectBehavior
         MetadataInterface $metadata,
         RequestConfiguration $requestConfiguration,
         ResourceInterface $resource
-    )
-    {
+    ) {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
         $metadata->getHumanizedName()->willReturn('product');
@@ -63,7 +61,7 @@ class FlashHelperSpec extends ObjectBehavior
 
         $session->getBag('flashes')->willReturn($flashBag);
         $requestConfiguration->getFlashMessage(ResourceActions::CREATE)->willReturn('sylius.product.create');
-        $translator->trans('sylius.product.create', array('%resource%' => 'Product'), 'flashes')->willReturn('Product has been created successfully, bueno!');
+        $translator->trans('sylius.product.create', ['%resource%' => 'Product'], 'flashes')->willReturn('Product has been created successfully, bueno!');
 
         $flashBag->add('success', 'Product has been created successfully, bueno!')->shouldBeCalled();
 
@@ -77,8 +75,7 @@ class FlashHelperSpec extends ObjectBehavior
         MetadataInterface $metadata,
         RequestConfiguration $requestConfiguration,
         ResourceInterface $resource
-    )
-    {
+    ) {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
         $metadata->getHumanizedName()->willReturn('product');
@@ -88,8 +85,8 @@ class FlashHelperSpec extends ObjectBehavior
 
         $session->getBag('flashes')->willReturn($flashBag);
         $requestConfiguration->getFlashMessage(ResourceActions::CREATE)->willReturn('sylius.product.create');
-        $translator->trans('sylius.product.create', array('%resource%' => 'Product'), 'flashes')->willReturn('sylius.product.create');
-        $translator->trans('sylius.resource.create', array('%resource%' => 'Product'), 'flashes')->willReturn('Product has been successfully created.');
+        $translator->trans('sylius.product.create', ['%resource%' => 'Product'], 'flashes')->willReturn('sylius.product.create');
+        $translator->trans('sylius.resource.create', ['%resource%' => 'Product'], 'flashes')->willReturn('Product has been successfully created.');
 
         $flashBag->add('success', 'Product has been successfully created.')->shouldBeCalled();
 
@@ -102,14 +99,13 @@ class FlashHelperSpec extends ObjectBehavior
         TranslatorInterface $translator,
         RequestConfiguration $requestConfiguration,
         ResourceControllerEvent $event
-    )
-    {
+    ) {
         $event->getMessage()->willReturn('sylius.channel.cannot_be_deleted');
         $event->getMessageType()->willReturn(ResourceControllerEvent::TYPE_WARNING);
-        $event->getMessageParameters()->willReturn(array('%name%' => 'Germany Sylius Webshop'));
+        $event->getMessageParameters()->willReturn(['%name%' => 'Germany Sylius Webshop']);
 
         $session->getBag('flashes')->willReturn($flashBag);
-        $translator->trans('sylius.channel.cannot_be_deleted', array('%name%' => 'Germany Sylius Webshop'), 'flashes')->willReturn('Channel "Germany Sylius Webshop" cannot be deleted.');
+        $translator->trans('sylius.channel.cannot_be_deleted', ['%name%' => 'Germany Sylius Webshop'], 'flashes')->willReturn('Channel "Germany Sylius Webshop" cannot be deleted.');
 
         $flashBag->add(ResourceControllerEvent::TYPE_WARNING, 'Channel "Germany Sylius Webshop" cannot be deleted.')->shouldBeCalled();
 

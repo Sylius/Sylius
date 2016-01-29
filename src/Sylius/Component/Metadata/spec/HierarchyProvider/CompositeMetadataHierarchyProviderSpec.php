@@ -12,8 +12,8 @@
 namespace spec\Sylius\Component\Metadata\HierarchyProvider;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Metadata\Model\MetadataSubjectInterface;
 use Sylius\Component\Metadata\HierarchyProvider\MetadataHierarchyProviderInterface;
+use Sylius\Component\Metadata\Model\MetadataSubjectInterface;
 
 /**
  * @mixin \Sylius\Component\Metadata\HierarchyProvider\CompositeMetadataHierarchyProvider

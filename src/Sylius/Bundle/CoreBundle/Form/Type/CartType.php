@@ -44,13 +44,13 @@ class CartType extends BaseCartType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('promotionCoupons', 'collection', array(
-                'type'         => 'sylius_promotion_coupon_to_code',
-                'allow_add'    => true,
+            ->add('promotionCoupons', 'collection', [
+                'type' => 'sylius_promotion_coupon_to_code',
+                'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'label'        => 'sylius.form.cart.coupon',
-            ))
+                'label' => 'sylius.form.cart.coupon',
+            ])
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
                 $data = $event->getData();
 

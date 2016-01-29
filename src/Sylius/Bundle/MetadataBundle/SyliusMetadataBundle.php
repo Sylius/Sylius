@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\MetadataBundle;
 
-use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
-use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\MetadataBundle\DependencyInjection\Compiler\DynamicFormsChoicesMapCompilerPass;
 use Sylius\Bundle\MetadataBundle\DependencyInjection\Compiler\MetadataHierarchyProviderCompilerPass;
 use Sylius\Bundle\MetadataBundle\DependencyInjection\Compiler\MetadataRendererCompilerPass;
+use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Metadata\Model\MetadataContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 

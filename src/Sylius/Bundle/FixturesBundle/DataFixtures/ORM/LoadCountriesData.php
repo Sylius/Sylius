@@ -24,7 +24,7 @@ use Symfony\Component\Intl\Intl;
  */
 class LoadCountriesData extends DataFixture
 {
-    protected $states = array(
+    protected $states = [
         'AL' => 'Alabama',
         'AK' => 'Alaska',
         'AZ' => 'Arizona',
@@ -76,7 +76,7 @@ class LoadCountriesData extends DataFixture
         'WV' => 'West Virginia',
         'WI' => 'Wisconsin',
         'WY' => 'Wyoming',
-    );
+    ];
 
     /**
      * {@inheritdoc}

@@ -29,23 +29,23 @@ class RoleType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', array(
+            ->add('name', 'text', [
                 'label' => 'sylius.form.role.name',
-            ))
-            ->add('description', 'textarea', array(
+            ])
+            ->add('description', 'textarea', [
                 'required' => false,
-                'label'    => 'sylius.form.role.description',
-            ))
-            ->add('securityRoles', 'sylius_security_role_choice', array(
+                'label' => 'sylius.form.role.description',
+            ])
+            ->add('securityRoles', 'sylius_security_role_choice', [
                 'required' => false,
-                'label'    => 'sylius.form.role.security_roles',
-            ))
-            ->add('permissions', 'sylius_permission_choice', array(
+                'label' => 'sylius.form.role.security_roles',
+            ])
+            ->add('permissions', 'sylius_permission_choice', [
                 'required' => false,
                 'multiple' => true,
                 'expanded' => true,
-                'label'    => 'sylius.form.role.permissions',
-            ))
+                'label' => 'sylius.form.role.permissions',
+            ])
             ->addEventSubscriber(new AddCodeFormSubscriber())
             ->addEventSubscriber(new AddParentFormSubscriber('role'))
         ;

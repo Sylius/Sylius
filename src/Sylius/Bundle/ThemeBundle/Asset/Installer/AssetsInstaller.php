@@ -31,12 +31,12 @@ class AssetsInstaller implements AssetsInstallerInterface
      * @var Filesystem
      */
     protected $filesystem;
-    
+
     /**
      * @var KernelInterface
      */
     protected $kernel;
-    
+
     /**
      * @var ThemeRepositoryInterface
      */
@@ -79,7 +79,7 @@ class AssetsInstaller implements AssetsInstallerInterface
     public function installAssets($targetDir, $symlinkMask)
     {
         // Create the bundles directory otherwise symlink will fail.
-        $targetDir = rtrim($targetDir, '/') . '/bundles/';
+        $targetDir = rtrim($targetDir, '/').'/bundles/';
         $this->filesystem->mkdir($targetDir);
 
         $effectiveSymlinkMask = $symlinkMask;
@@ -138,7 +138,7 @@ class AssetsInstaller implements AssetsInstallerInterface
 
         /** @var SplFileInfo[] $finder */
         foreach ($finder as $originFile) {
-            $targetFile = $targetDir . '/' . $originFile->getRelativePathname();
+            $targetFile = $targetDir.'/'.$originFile->getRelativePathname();
             $targetFile = $this->pathResolver->resolve($targetFile, $theme);
 
             if (file_exists($targetFile)) {
@@ -216,6 +216,7 @@ class AssetsInstaller implements AssetsInstallerInterface
     {
         if ($symlink) {
             $this->doSymlinkAsset($origin, $target);
+
             return;
         }
 
@@ -233,13 +234,13 @@ class AssetsInstaller implements AssetsInstallerInterface
         $sources = [];
 
         foreach ($themes as $theme) {
-            $sourceDir = $theme->getPath() . '/' . $bundle->getName() . '/public';
+            $sourceDir = $theme->getPath().'/'.$bundle->getName().'/public';
             if (is_dir($sourceDir)) {
                 $sources[] = $sourceDir;
             }
         }
 
-        $sourceDir = $bundle->getPath() . '/Resources/public';
+        $sourceDir = $bundle->getPath().'/Resources/public';
         if (is_dir($sourceDir)) {
             $sources[] = $sourceDir;
         }

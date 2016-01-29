@@ -27,13 +27,13 @@ abstract class AbstractResourceType extends AbstractType
     /**
      * @var string[]
      */
-    protected $validationGroups = array();
+    protected $validationGroups = [];
 
     /**
      * @param string   $dataClass        FQCN
      * @param string[] $validationGroups
      */
-    public function __construct($dataClass, array $validationGroups = array())
+    public function __construct($dataClass, array $validationGroups = [])
     {
         $this->dataClass = $dataClass;
         $this->validationGroups = $validationGroups;
@@ -44,9 +44,9 @@ abstract class AbstractResourceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => $this->dataClass,
             'validation_groups' => $this->validationGroups,
-        ));
+        ]);
     }
 }

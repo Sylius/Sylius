@@ -210,11 +210,11 @@ class OrderSpec extends ObjectBehavior
     ) {
         $item1->setOrder($this)->shouldBeCalled();
         $item1->getTotal()->willReturn(100);
-        $item1->getAdjustmentsRecursively(null)->willReturn(array($itemAdjustment1));
+        $item1->getAdjustmentsRecursively(null)->willReturn([$itemAdjustment1]);
 
         $item2->setOrder($this)->shouldBeCalled();
         $item2->getTotal()->willReturn(100);
-        $item2->getAdjustmentsRecursively(null)->willReturn(array($itemAdjustment2));
+        $item2->getAdjustmentsRecursively(null)->willReturn([$itemAdjustment2]);
 
         $this->addItem($item1);
         $this->addItem($item2);
@@ -224,7 +224,7 @@ class OrderSpec extends ObjectBehavior
 
         $this->addAdjustment($orderAdjustment);
 
-        $this->getAdjustmentsRecursively()->shouldReturn(array($orderAdjustment, $itemAdjustment1, $itemAdjustment2));
+        $this->getAdjustmentsRecursively()->shouldReturn([$orderAdjustment, $itemAdjustment1, $itemAdjustment2]);
     }
 
     function it_has_adjustments_total_equal_to_0_by_default()
@@ -266,7 +266,7 @@ class OrderSpec extends ObjectBehavior
 
         $orderAdjustment->setAdjustable($this)->shouldBeCalled();
 
-        $orderItem->getAdjustmentsRecursively(null)->willReturn(array($itemAdjustment));
+        $orderItem->getAdjustmentsRecursively(null)->willReturn([$itemAdjustment]);
         $orderItem->setOrder($this)->shouldBeCalled();
         $orderItem->getTotal()->willReturn(15000);
 

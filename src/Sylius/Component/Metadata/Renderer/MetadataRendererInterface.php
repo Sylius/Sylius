@@ -30,7 +30,7 @@ interface MetadataRendererInterface
      * @param MetadataInterface $metadata
      * @param array $options
      *
-     * @return boolean
+     * @return bool
      */
     public function supports(MetadataInterface $metadata, array $options = []);
 }

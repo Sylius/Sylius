@@ -1,3 +1,5 @@
+/.php_cs.cache
+
 /app/*.cache
 /app/cache
 /app/logs

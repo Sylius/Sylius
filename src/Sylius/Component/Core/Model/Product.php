@@ -100,7 +100,7 @@ class Product extends BaseProduct implements ProductInterface
      */
     public function getMetadataIdentifier()
     {
-        return $this->getMetadataClassIdentifier() . '-' . $this->getId();
+        return $this->getMetadataClassIdentifier().'-'.$this->getId();
     }
 
     /**
@@ -134,7 +134,7 @@ class Product extends BaseProduct implements ProductInterface
      */
     public function setVariantSelectionMethod($variantSelectionMethod)
     {
-        if (!in_array($variantSelectionMethod, array(self::VARIANT_SELECTION_CHOICE, self::VARIANT_SELECTION_MATCH))) {
+        if (!in_array($variantSelectionMethod, [self::VARIANT_SELECTION_CHOICE, self::VARIANT_SELECTION_MATCH])) {
             throw new \InvalidArgumentException(sprintf('Wrong variant selection method "%s" given.', $variantSelectionMethod));
         }
 
@@ -356,10 +356,10 @@ class Product extends BaseProduct implements ProductInterface
      */
     public static function getVariantSelectionMethodLabels()
     {
-        return array(
+        return [
             self::VARIANT_SELECTION_CHOICE => 'Variant choice',
-            self::VARIANT_SELECTION_MATCH  => 'Options matching',
-        );
+            self::VARIANT_SELECTION_MATCH => 'Options matching',
+        ];
     }
 
     /**
@@ -376,6 +376,7 @@ class Product extends BaseProduct implements ProductInterface
     public function setShortDescription($shortDescription)
     {
         $this->translate()->setShortDescription($shortDescription);
+
         return $this;
     }
 
@@ -384,7 +385,7 @@ class Product extends BaseProduct implements ProductInterface
      */
     public function getMainTaxon()
     {
-       return $this->mainTaxon;
+        return $this->mainTaxon;
     }
 
     /**

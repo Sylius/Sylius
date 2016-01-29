@@ -51,7 +51,7 @@ class ArchetypeUpdateListenerSpec extends ObjectBehavior
         GenericEvent $event, ArchetypeInterface $archetype, ArchetypeBuilderInterface $builder, ObjectRepository $productRepository, ObjectManager $productManager, ProductInterface $productA, ProductInterface $productB
     ) {
         $event->getSubject()->willReturn($archetype);
-        $productRepository->findBy(array('archetype' => $archetype))->willReturn(array($productA, $productB));
+        $productRepository->findBy(['archetype' => $archetype])->willReturn([$productA, $productB]);
 
         $builder->build($productA)->shouldBeCalled();
         $builder->build($productB)->shouldBeCalled();

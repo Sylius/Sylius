@@ -9,19 +9,14 @@
  * file that was distributed with this source code.
  */
 
-
 namespace spec\Sylius\Component\Metadata\Provider;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Metadata\Processor\MetadataProcessorInterface;
-use Sylius\Component\Metadata\Provider\MetadataProviderInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\Metadata\Compiler\MetadataCompilerInterface;
-use Sylius\Component\Metadata\HierarchyProvider\MetadataHierarchyProviderInterface;
 use Sylius\Component\Metadata\Model\MetadataInterface;
 use Sylius\Component\Metadata\Model\MetadataSubjectInterface;
-use Sylius\Component\Metadata\Model\MetadataContainerInterface;
+use Sylius\Component\Metadata\Processor\MetadataProcessorInterface;
+use Sylius\Component\Metadata\Provider\MetadataProviderInterface;
 
 /**
  * @mixin \Sylius\Component\Metadata\Provider\ProcessedMetadataProvider

@@ -79,7 +79,7 @@ class OriginatorSpec extends ObjectBehavior
 
         $manager->getRepository('Sylius\Component\Originator\Model\FakeEntity')->willReturn($repository);
 
-        $repository->findOneBy(array('id' => 5))->willReturn($entity);
+        $repository->findOneBy(['id' => 5])->willReturn($entity);
 
         $this->getOrigin($originAware)->shouldReturn($entity);
     }

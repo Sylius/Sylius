@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\ArchetypeBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
@@ -11,7 +20,7 @@ class ArchetypeTranslationTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('ArchetypeTranslation', array('sylius'), 'subject');
+        $this->beConstructedWith('ArchetypeTranslation', ['sylius'], 'subject');
     }
 
     function it_is_initializable()
@@ -28,7 +37,7 @@ class ArchetypeTranslationTypeSpec extends ObjectBehavior
     {
         $builder->add('name', 'text', Argument::type('array'))->shouldBeCalled();
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_has_a_name()

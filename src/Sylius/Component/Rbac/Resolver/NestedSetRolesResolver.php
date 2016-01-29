@@ -25,7 +25,7 @@ use Sylius\Component\Rbac\Repository\RoleRepositoryInterface;
 class NestedSetRolesResolver implements RolesResolverInterface
 {
     private $roleRepository;
-    private $cache = array();
+    private $cache = [];
 
     public function __construct(RoleRepositoryInterface $roleRepository)
     {

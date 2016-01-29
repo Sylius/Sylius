@@ -45,33 +45,33 @@ class AddressType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstName', 'text', array(
+            ->add('firstName', 'text', [
                 'label' => 'sylius.form.address.first_name',
-            ))
-            ->add('lastName', 'text', array(
+            ])
+            ->add('lastName', 'text', [
                 'label' => 'sylius.form.address.last_name',
-            ))
-            ->add('phoneNumber', 'text', array(
+            ])
+            ->add('phoneNumber', 'text', [
                 'required' => false,
-                'label'    => 'sylius.form.address.phone_number',
-            ))
-            ->add('company', 'text', array(
+                'label' => 'sylius.form.address.phone_number',
+            ])
+            ->add('company', 'text', [
                 'required' => false,
-                'label'    => 'sylius.form.address.company',
-            ))
-            ->add('countryCode', 'sylius_country_code_choice', array(
+                'label' => 'sylius.form.address.company',
+            ])
+            ->add('countryCode', 'sylius_country_code_choice', [
                 'label' => 'sylius.form.address.country',
                 'enabled' => true,
-            ))
-            ->add('street', 'text', array(
+            ])
+            ->add('street', 'text', [
                 'label' => 'sylius.form.address.street',
-            ))
-            ->add('city', 'text', array(
+            ])
+            ->add('city', 'text', [
                 'label' => 'sylius.form.address.city',
-            ))
-            ->add('postcode', 'text', array(
+            ])
+            ->add('postcode', 'text', [
                 'label' => 'sylius.form.address.postcode',
-            ))
+            ])
             ->addEventSubscriber($this->eventListener)
         ;
     }
@@ -84,7 +84,7 @@ class AddressType extends AbstractResourceType
         parent::configureOptions($resolver);
 
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'validation_groups' => function (Options $options) {
                     if ($options['shippable']) {
                         $this->validationGroups[] = 'shippable';
@@ -93,7 +93,7 @@ class AddressType extends AbstractResourceType
                     return $this->validationGroups;
                 },
                 'shippable' => false,
-            ))
+            ])
             ->setAllowedTypes('shippable', 'bool')
         ;
     }

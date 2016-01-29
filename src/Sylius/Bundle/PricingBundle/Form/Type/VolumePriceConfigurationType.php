@@ -24,18 +24,18 @@ class VolumePriceConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options = array())
+    public function buildForm(FormBuilderInterface $builder, array $options = [])
     {
         $builder
-            ->add('min', 'number', array(
-                'label' => 'sylius.form.pricing.volume_based.min'
-            ))
-            ->add('max', 'number', array(
-                'label' => 'sylius.form.pricing.volume_based.max'
-            ))
-            ->add('price', 'sylius_money', array(
-                'label' => 'sylius.form.pricing.volume_based.price'
-            ))
+            ->add('min', 'number', [
+                'label' => 'sylius.form.pricing.volume_based.min',
+            ])
+            ->add('max', 'number', [
+                'label' => 'sylius.form.pricing.volume_based.max',
+            ])
+            ->add('price', 'sylius_money', [
+                'label' => 'sylius.form.pricing.volume_based.price',
+            ])
         ;
     }
 

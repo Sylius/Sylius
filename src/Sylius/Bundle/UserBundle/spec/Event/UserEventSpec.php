@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\UserBundle\Event;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\User\Model\UserInterface;
 
 class UserEventSpec extends ObjectBehavior

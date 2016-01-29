@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sylius\Migrations;
 
 use Doctrine\DBAL\Migrations\AbstractMigration;
@@ -18,7 +27,7 @@ class Version20150127131103 extends AbstractMigration implements ContainerAwareI
     public function setContainer(ContainerInterface $container = null)
     {
         if (null !== $container) {
-            $this->container     = $container;
+            $this->container = $container;
             $this->defaultLocale = $container->getParameter('sylius.locale');
         }
     }
@@ -32,11 +41,11 @@ class Version20150127131103 extends AbstractMigration implements ContainerAwareI
 
         $archetypes = $this->connection->fetchAll('SELECT * FROM sylius_product_archetype');
         foreach ($archetypes as $archetype) {
-            $this->connection->insert('sylius_product_archetype_translation', array(
-                'name'    => $archetype['name'],
+            $this->connection->insert('sylius_product_archetype_translation', [
+                'name' => $archetype['name'],
                 'translatable_id' => $archetype['id'],
-                'locale'          => $this->defaultLocale
-            ));
+                'locale' => $this->defaultLocale,
+            ]);
         }
 
         $this->addSql('ALTER TABLE sylius_product_archetype DROP name');
@@ -48,12 +57,12 @@ class Version20150127131103 extends AbstractMigration implements ContainerAwareI
 
         $this->connection->executeQuery('ALTER TABLE sylius_product_archetype ADD name VARCHAR(255) NOT NULL COLLATE utf8_unicode_ci');
 
-        $archetypeTranslations = $this->connection->fetchAll('SELECT * FROM sylius_product_archetype_translation WHERE locale="' . $this->defaultLocale . '"');;
+        $archetypeTranslations = $this->connection->fetchAll('SELECT * FROM sylius_product_archetype_translation WHERE locale="'.$this->defaultLocale.'"');
         foreach ($archetypeTranslations as $archetypeTranslation) {
             $this->connection->update(
                 'sylius_product_archetype',
-                array('name' => $archetypeTranslation['name']),
-                array('id' => $archetypeTranslation['translatable_id'])
+                ['name' => $archetypeTranslation['name']],
+                ['id' => $archetypeTranslation['translatable_id']]
             );
         }
 

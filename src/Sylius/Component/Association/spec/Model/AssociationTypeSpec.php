@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Association\Model;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Association\Model\AssociationTypeInterface;
 
 /**

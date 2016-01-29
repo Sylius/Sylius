@@ -73,7 +73,7 @@ class TaxCategory implements TaxCategoryInterface
      */
     public function getCode()
     {
-         return $this->code;
+        return $this->code;
     }
 
     /**

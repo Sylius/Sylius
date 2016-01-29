@@ -23,13 +23,13 @@ class SearchElementExtension extends \Twig_Extension
      */
     public function getFunctions()
     {
-        return array(
+        return [
             'getsearchresultsnippet' => new \Twig_SimpleFunction('getSearchResultSnippet', function ($object) {
-                $pathArray = explode('\\',get_class($object));
+                $pathArray = explode('\\', get_class($object));
 
                 return 'SyliusSearchBundle:SearchResultSnippets:'.lcfirst(array_pop($pathArray)).'.html.twig';
             }),
-        );
+        ];
     }
 
     /**

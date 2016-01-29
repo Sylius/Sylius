@@ -22,10 +22,10 @@ class RendererChoiceTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $choices = array(
+        $choices = [
             'table' => 'Table renderer',
             'chart' => 'Chart renderer',
-        );
+        ];
 
         $this->beConstructedWith($choices);
     }
@@ -42,12 +42,12 @@ class RendererChoiceTypeSpec extends ObjectBehavior
 
     function it_sets_default_options(OptionsResolver $resolver)
     {
-        $choices = array(
+        $choices = [
             'table' => 'Table renderer',
             'chart' => 'Chart renderer',
-        );
+        ];
 
-        $resolver->setDefaults(array('choices' => $choices))->shouldBeCalled();
+        $resolver->setDefaults(['choices' => $choices])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

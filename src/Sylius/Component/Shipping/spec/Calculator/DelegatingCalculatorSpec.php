@@ -58,11 +58,11 @@ class DelegatingCalculatorSpec extends ObjectBehavior
         $shipment->getMethod()->willReturn($method);
 
         $method->getCalculator()->willReturn('default');
-        $method->getConfiguration()->willReturn(array());
+        $method->getConfiguration()->willReturn([]);
 
         $registry->get('default')->willReturn($calculator);
-        $calculator->calculate($shipment, array())->shouldBeCalled()->willReturn(1000);
+        $calculator->calculate($shipment, [])->shouldBeCalled()->willReturn(1000);
 
-        $this->calculate($shipment, array())->shouldReturn(1000);
+        $this->calculate($shipment, [])->shouldReturn(1000);
     }
 }

@@ -43,9 +43,9 @@ class TaxonChoiceTypeSpec extends ObjectBehavior
             Argument::type(CollectionToArrayTransformer::class)
         )->shouldBeCalled();
 
-        $this->buildForm($builder, array(
-            'multiple' => true
-        ));
+        $this->buildForm($builder, [
+            'multiple' => true,
+        ]);
     }
 
     function it_has_options(OptionsResolver $resolver)
@@ -57,7 +57,7 @@ class TaxonChoiceTypeSpec extends ObjectBehavior
         $resolver->setAllowedTypes('taxonomy', [TaxonomyInterface::class, 'null'])->shouldBeCalled()->willReturn($resolver);
         $resolver->setAllowedTypes('filter', ['callable', 'null'])->shouldBeCalled()->willReturn($resolver);
 
-        $this->configureOptions($resolver, array());
+        $this->configureOptions($resolver, []);
     }
 
     function it_has_a_name()

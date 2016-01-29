@@ -61,7 +61,7 @@ class CartHelperSpec extends ObjectBehavior
         $itemFactory->createNew()->shouldBeCalled()->willReturn($item);
         $orderItemQuantityModifier->modify($item, 1)->shouldBeCalled();
 
-        $formFactory->create('sylius_cart_item', $item, array())->shouldBeCalled()->willReturn($form);
+        $formFactory->create('sylius_cart_item', $item, [])->shouldBeCalled()->willReturn($form);
         $form->createView()->willReturn($formView);
 
         $this->getItemFormView()->shouldReturn($formView);
@@ -78,9 +78,9 @@ class CartHelperSpec extends ObjectBehavior
         $itemFactory->createNew()->shouldBeCalled()->willReturn($item);
         $orderItemQuantityModifier->modify($item, 1)->shouldBeCalled();
 
-        $formFactory->create('sylius_cart_item', $item, array('foo' => 'bar'))->shouldBeCalled()->willReturn($form);
+        $formFactory->create('sylius_cart_item', $item, ['foo' => 'bar'])->shouldBeCalled()->willReturn($form);
         $form->createView()->willReturn($formView);
 
-        $this->getItemFormView(array('foo' => 'bar'))->shouldReturn($formView);
+        $this->getItemFormView(['foo' => 'bar'])->shouldReturn($formView);
     }
 }

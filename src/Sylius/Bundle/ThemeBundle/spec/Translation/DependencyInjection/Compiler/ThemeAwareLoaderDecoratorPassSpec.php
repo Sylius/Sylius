@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\ThemeAwareLoaderDecoratorPass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
@@ -33,5 +32,3 @@ class ThemeAwareLoaderDecoratorPassSpec extends ObjectBehavior
         $this->shouldImplement(CompilerPassInterface::class);
     }
 }
-
-

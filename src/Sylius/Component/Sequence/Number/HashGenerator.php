@@ -39,7 +39,7 @@ class HashGenerator extends AbstractGenerator implements GeneratorInterface
     protected function generateNumber($index, SequenceSubjectInterface $order)
     {
         do {
-            $number = $this->generateSegment(3) . '-' . $this->generateSegment(7) . '-' . $this->generateSegment(7);
+            $number = $this->generateSegment(3).'-'.$this->generateSegment(7).'-'.$this->generateSegment(7);
         } while ($this->subjectRepository->isNumberUsed($number));
 
         return $number;
@@ -47,7 +47,9 @@ class HashGenerator extends AbstractGenerator implements GeneratorInterface
 
     /**
      * Generates a randomized segment
+     *
      * @param  int    $length
+     *
      * @return string Random characters
      */
     protected function generateSegment($length)

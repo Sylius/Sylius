@@ -30,7 +30,7 @@ class PasswordUpdater implements PasswordUpdaterInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function updatePassword(CredentialsHolderInterface $user)
     {

@@ -51,7 +51,7 @@ class PathPackageSpec extends ObjectBehavior
         $themeContext->getTheme()->shouldBeCalled()->willReturn(null);
         $versionStrategy->applyVersion($path)->shouldBeCalled()->willReturn($path);
 
-        $this->getUrl($path)->shouldReturn('/' . $path);
+        $this->getUrl($path)->shouldReturn('/'.$path);
     }
 
     function it_returns_modified_url_if_there_is_active_theme(
@@ -68,6 +68,6 @@ class PathPackageSpec extends ObjectBehavior
         $pathResolver->resolve($path, $theme)->shouldBeCalled()->willReturn($themeAssetPath);
         $versionStrategy->applyVersion($themeAssetPath)->shouldBeCalled()->willReturn($themeAssetPath);
 
-        $this->getUrl($path)->shouldReturn('/' . $themeAssetPath);
+        $this->getUrl($path)->shouldReturn('/'.$themeAssetPath);
     }
 }

@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\FlowBundle\Validator;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class ProcessValidatorExceptionSpec extends ObjectBehavior

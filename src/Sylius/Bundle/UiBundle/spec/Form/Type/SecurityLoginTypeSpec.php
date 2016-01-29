@@ -46,7 +46,7 @@ class SecurityLoginTypeSpec extends ObjectBehavior
         $builder->add('_password', 'password', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('_remember_me', 'checkbox', Argument::any())->shouldBeCalled()->willReturn($builder);
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_has_a_name()

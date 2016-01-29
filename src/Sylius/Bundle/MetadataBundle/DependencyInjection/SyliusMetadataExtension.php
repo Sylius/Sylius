@@ -16,7 +16,6 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -71,7 +70,7 @@ class SyliusMetadataExtension extends AbstractResourceExtension implements Prepe
      */
     private function addDynamicChoiceTagToForm(ContainerBuilder $container, $group, $formName)
     {
-        $serviceName = 'sylius.form.type.' . $formName;
+        $serviceName = 'sylius.form.type.'.$formName;
 
         if (!$container->hasDefinition($serviceName)) {
             throw new \InvalidArgumentException(sprintf(
@@ -83,7 +82,7 @@ class SyliusMetadataExtension extends AbstractResourceExtension implements Prepe
         $formDefinition = $container->getDefinition($serviceName);
         $formDefinition->addTag('sylius.metadata.dynamic_form_choice', [
             'group' => $group,
-            'label' => 'sylius.metadata.type.' . $formName,
+            'label' => 'sylius.metadata.type.'.$formName,
             'class' => $formDefinition->getArgument(0),
         ]);
     }

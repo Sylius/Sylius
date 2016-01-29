@@ -26,7 +26,7 @@ class TaxonomyTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Taxonomy', array('sylius'));
+        $this->beConstructedWith('Taxonomy', ['sylius']);
     }
 
     function it_is_initializable()
@@ -52,16 +52,16 @@ class TaxonomyTypeSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($builder);
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_defines_data_class(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
-                'data_class'        => 'Taxonomy',
-                'validation_groups' => array('sylius'),
-            ))
+            ->setDefaults([
+                'data_class' => 'Taxonomy',
+                'validation_groups' => ['sylius'],
+            ])
             ->shouldBeCalled()
         ;
 

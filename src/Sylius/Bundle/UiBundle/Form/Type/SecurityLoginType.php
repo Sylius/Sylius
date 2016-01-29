@@ -25,16 +25,16 @@ class SecurityLoginType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('_username', 'text', array(
+            ->add('_username', 'text', [
                 'label' => 'sylius.form.login.username',
-            ))
-            ->add('_password', 'password', array(
+            ])
+            ->add('_password', 'password', [
                 'label' => 'sylius.form.login.password',
-            ))
-            ->add('_remember_me', 'checkbox', array(
+            ])
+            ->add('_remember_me', 'checkbox', [
                 'label' => 'sylius.form.login.remember_me',
                 'required' => false,
-            ))
+            ])
         ;
     }
 

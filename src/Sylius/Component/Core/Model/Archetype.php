@@ -32,7 +32,7 @@ class Archetype extends BaseArchetype implements ArchetypeInterface
      */
     public function getMetadataIdentifier()
     {
-        return $this->getMetadataClassIdentifier() . '-' . $this->getId();
+        return $this->getMetadataClassIdentifier().'-'.$this->getId();
     }
 
     /**

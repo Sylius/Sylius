@@ -29,44 +29,44 @@ class ProductVariantType extends BaseVariantType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('sku', 'text', array(
-                'label' => 'sylius.form.variant.sku'
-            ))
-            ->add('price', 'sylius_money', array(
-                'label' => 'sylius.form.variant.price'
-            ))
-            ->add('originalPrice', 'sylius_money', array(
-                'label' => 'sylius.form.variant.original_price'
-            ))
-            ->add('availableOnDemand', 'checkbox', array(
-                'label' => 'sylius.form.variant.available_on_demand'
-            ))
-            ->add('onHand', 'integer', array(
-                'label' => 'sylius.form.variant.on_hand'
-            ))
-            ->add('images', 'collection', array(
-                'type'         => 'sylius_image',
-                'allow_add'    => true,
+            ->add('sku', 'text', [
+                'label' => 'sylius.form.variant.sku',
+            ])
+            ->add('price', 'sylius_money', [
+                'label' => 'sylius.form.variant.price',
+            ])
+            ->add('originalPrice', 'sylius_money', [
+                'label' => 'sylius.form.variant.original_price',
+            ])
+            ->add('availableOnDemand', 'checkbox', [
+                'label' => 'sylius.form.variant.available_on_demand',
+            ])
+            ->add('onHand', 'integer', [
+                'label' => 'sylius.form.variant.on_hand',
+            ])
+            ->add('images', 'collection', [
+                'type' => 'sylius_image',
+                'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'label'        => 'sylius.form.variant.images'
-            ))
-            ->add('width', 'number', array(
+                'label' => 'sylius.form.variant.images',
+            ])
+            ->add('width', 'number', [
                 'required' => false,
-                'label'    => 'sylius.form.variant.width'
-            ))
-            ->add('height', 'number', array(
+                'label' => 'sylius.form.variant.width',
+            ])
+            ->add('height', 'number', [
                 'required' => false,
-                'label'    => 'sylius.form.variant.height'
-            ))
-            ->add('depth', 'number', array(
+                'label' => 'sylius.form.variant.height',
+            ])
+            ->add('depth', 'number', [
                 'required' => false,
-                'label'    => 'sylius.form.variant.depth'
-            ))
-            ->add('weight', 'number', array(
+                'label' => 'sylius.form.variant.depth',
+            ])
+            ->add('weight', 'number', [
                 'required' => false,
-                'label'    => 'sylius.form.variant.weight'
-            ))
+                'label' => 'sylius.form.variant.weight',
+            ])
         ;
     }
 }

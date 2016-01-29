@@ -53,10 +53,10 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT   => 'preSubmit',
-        );
+            FormEvents::PRE_SUBMIT => 'preSubmit',
+        ];
     }
 
     /**
@@ -77,7 +77,7 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
         }
 
         /* @var CountryInterface $country */
-        $country = $this->countryRepository->findOneBy(array('code' => $countryCode));
+        $country = $this->countryRepository->findOneBy(['code' => $countryCode]);
         if (null === $country) {
             return;
         }
@@ -104,7 +104,7 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
         }
 
         /* @var CountryInterface $country */
-        $country = $this->countryRepository->findOneBy(array('code' => $data['countryCode']));
+        $country = $this->countryRepository->findOneBy(['code' => $data['countryCode']]);
         if (null === $country) {
             return;
         }
@@ -125,10 +125,10 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
         return
             $this
                 ->formFactory
-                    ->createNamed('provinceCode', 'sylius_province_code_choice', $province, array(
-                    'country'  => $country,
+                    ->createNamed('provinceCode', 'sylius_province_code_choice', $province, [
+                    'country' => $country,
                     'auto_initialize' => false,
-            ))
+            ])
         ;
     }
 }

@@ -62,7 +62,7 @@ class VariantGenerator extends BaseVariantGenerator
      */
     public function process(VariableInterface $variable, VariantInterface $variant)
     {
-        if (0 < count($this->validator->validate($variant, array('sylius')))) {
+        if (0 < count($this->validator->validate($variant, ['sylius']))) {
             $variable->removeVariant($variant);
         } else {
             $this->eventDispatcher->dispatch('sylius.variant.pre_create', new GenericEvent($variant));

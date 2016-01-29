@@ -14,7 +14,6 @@ namespace spec\Sylius\Bundle\ThemeBundle\Templating\Cache\Clearer;
 use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Cache\ClearableCache;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Templating\Cache\Clearer\TemplatePathsCacheClearer;
 use Symfony\Component\HttpKernel\CacheClearer\CacheClearerInterface;
 

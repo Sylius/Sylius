@@ -27,17 +27,17 @@ class TaxonTranslationType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', array(
+            ->add('name', 'text', [
                 'label' => 'sylius.form.taxon.name',
-            ))
-            ->add('permalink', 'text', array(
+            ])
+            ->add('permalink', 'text', [
                 'required' => false,
                 'label' => 'sylius.form.taxon.permalink',
-            ))
-            ->add('description', 'textarea', array(
+            ])
+            ->add('description', 'textarea', [
                 'required' => false,
                 'label' => 'sylius.form.taxon.description',
-            ))
+            ])
         ;
     }
 

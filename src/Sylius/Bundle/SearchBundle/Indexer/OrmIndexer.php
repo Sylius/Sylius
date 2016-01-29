@@ -52,7 +52,7 @@ class OrmIndexer implements IndexerInterface
      */
     public function __construct(array $config, ModelToElasticaAutoTransformer $transformer)
     {
-        $this->config      = $config;
+        $this->config = $config;
         $this->transformer = $transformer;
     }
 
@@ -106,7 +106,7 @@ class OrmIndexer implements IndexerInterface
             $this->createIndex($index['class'], $index['mappings']);
         }
 
-        $index = new Index('fulltext_search_idx', array('value'), false, false, array('fulltext'));
+        $index = new Index('fulltext_search_idx', ['value'], false, false, ['fulltext']);
         $sm->createIndex($index, 'sylius_search_index');
 
         return $this;
@@ -241,10 +241,10 @@ class OrmIndexer implements IndexerInterface
         // TODO maybe I can use the property accessor here
         $content = '';
         foreach (array_keys(array_slice($fields, 1)) as $field) {
-            $func = 'get' . ucfirst($field);
-            
+            $func = 'get'.ucfirst($field);
+
             if (method_exists($element, $func)) {
-               $content .= $element->$func() . self::SPACER;
+                $content .= $element->$func().self::SPACER;
             }
         }
 

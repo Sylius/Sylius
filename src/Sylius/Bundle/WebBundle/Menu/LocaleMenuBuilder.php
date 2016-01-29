@@ -61,11 +61,11 @@ class LocaleMenuBuilder extends MenuBuilder
     public function createMenu()
     {
         $locales = $this->localeProvider->getAvailableLocales();
-        $menu = $this->factory->createItem('root', array(
-            'childrenAttributes' => array(
-                'class' => 'nav nav-pills'
-            )
-        ));
+        $menu = $this->factory->createItem('root', [
+            'childrenAttributes' => [
+                'class' => 'nav nav-pills',
+            ],
+        ]);
 
         if (1 === count($locales)) {
             $menu->setDisplay(false);
@@ -74,10 +74,10 @@ class LocaleMenuBuilder extends MenuBuilder
         }
 
         foreach ($locales as $locale) {
-            $menu->addChild($locale, array(
+            $menu->addChild($locale, [
                 'route' => 'sylius_locale_change',
-                'routeParameters' => array('locale' => $locale),
-            ))->setLabel(Intl::getLocaleBundle()->getLocaleName($locale));
+                'routeParameters' => ['locale' => $locale],
+            ])->setLabel(Intl::getLocaleBundle()->getLocaleName($locale));
         }
 
         return $menu;

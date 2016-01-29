@@ -36,7 +36,7 @@ class TaxonomyFactorySpec extends ObjectBehavior
     {
         $this->shouldImplement(FactoryInterface::class);
     }
-    
+
     function it_creates_new_taxonomy_with_root(
         TaxonInterface $taxon,
         TaxonomyInterface $taxonomy,
@@ -44,10 +44,10 @@ class TaxonomyFactorySpec extends ObjectBehavior
         TranslatableFactoryInterface $translatableFactory
     ) {
         $taxonFactory->createNew()->shouldBeCalled()->willReturn($taxon);
-        
+
         $translatableFactory->createNew()->shouldBeCalled()->willReturn($taxonomy);
         $taxonomy->setRoot($taxon)->shouldBeCalled();
-        
+
         $this->createNew()->shouldReturn($taxonomy);
     }
 }

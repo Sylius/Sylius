@@ -33,7 +33,7 @@ abstract class AbstractCalculator
     /**
      * {@inheritdoc}
      */
-    public function calculate(PriceableInterface $subject, array $configuration, array $context = array())
+    public function calculate(PriceableInterface $subject, array $configuration, array $context = [])
     {
         if (!array_key_exists($this->parameterName, $context)) {
             return $subject->getPrice();

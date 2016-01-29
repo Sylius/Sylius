@@ -25,12 +25,12 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class ResolveDoctrineTargetEntitiesPass implements CompilerPassInterface
 {
     /**
-     * @var array $interfaces
+     * @var array
      */
     private $interfaces;
 
     /**
-     * @var string $bundlePrefix
+     * @var string
      */
     private $bundlePrefix;
 

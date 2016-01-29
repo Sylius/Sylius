@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\ParametersParser;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactory;
@@ -50,17 +49,16 @@ class RequestConfigurationFactorySpec extends ObjectBehavior
         ParametersParser $parametersParser,
         ParameterBag $headersBag,
         ParameterBag $attributesBag
-    )
-    {
+    ) {
         $request->headers = $headersBag;
         $request->attributes = $attributesBag;
 
         $headersBag->has('Accept')->willReturn(false);
         $headersBag->has('Accept')->willReturn(false);
 
-        $configuration = array('template' => ':Product:show.html.twig');
+        $configuration = ['template' => ':Product:show.html.twig'];
 
-        $attributesBag->get('_sylius', array())->shouldBeCalled()->willReturn($configuration);
+        $attributesBag->get('_sylius', [])->shouldBeCalled()->willReturn($configuration);
         $parametersParser->parseRequestValues($configuration, $request)->willReturn($configuration);
 
         $this->create($metadata, $request)->shouldHaveType(RequestConfiguration::class);

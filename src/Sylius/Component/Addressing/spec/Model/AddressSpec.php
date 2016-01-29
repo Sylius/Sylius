@@ -120,7 +120,7 @@ class AddressSpec extends ObjectBehavior
 
     function its_province_code_is_mutable()
     {
-        $this->setCountryCode("IE");
+        $this->setCountryCode('IE');
 
         $this->setProvinceCode('DU');
         $this->getProvinceCode()->shouldReturn('DU');

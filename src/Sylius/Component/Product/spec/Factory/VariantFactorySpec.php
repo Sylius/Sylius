@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Product\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Product\Factory\VariantFactoryInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\VariantInterface;
@@ -33,12 +32,12 @@ class VariantFactorySpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Component\Product\Factory\VariantFactory');
     }
-    
+
     function it_is_a_resource_factory()
     {
         $this->shouldImplement(FactoryInterface::class);
     }
-    
+
     function it_implements_variant_factory_interface()
     {
         $this->shouldImplement(VariantFactoryInterface::class);
@@ -47,17 +46,17 @@ class VariantFactorySpec extends ObjectBehavior
     function it_creates_new_variant(FactoryInterface $factory, VariantInterface $variant)
     {
         $factory->createNew()->willReturn($variant);
-        
+
         $this->createNew()->shouldReturn($variant);
     }
-    
+
     function it_throws_an_exception_when_product_is_not_found(RepositoryInterface $productRepository)
     {
         $productRepository->find(15)->willReturn(null);
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('createForProduct', array(15))
+            ->during('createForProduct', [15])
         ;
     }
 
@@ -66,8 +65,7 @@ class VariantFactorySpec extends ObjectBehavior
         RepositoryInterface $productRepository,
         ProductInterface $product,
         VariantInterface $variant
-    )
-    {
+    ) {
         $factory->createNew()->willReturn($variant);
         $productRepository->find(13)->willReturn($product);
         $variant->setProduct($product)->shouldBeCalled();

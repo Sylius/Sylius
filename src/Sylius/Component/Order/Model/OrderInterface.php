@@ -28,14 +28,14 @@ interface OrderInterface extends
     SequenceSubjectInterface,
     TimestampableInterface
 {
-    const STATE_CART        = 'cart';
+    const STATE_CART = 'cart';
     const STATE_CART_LOCKED = 'cart_locked';
-    const STATE_PENDING     = 'pending';
-    const STATE_CONFIRMED   = 'confirmed';
-    const STATE_SHIPPED     = 'shipped';
-    const STATE_ABANDONED   = 'abandoned';
-    const STATE_CANCELLED   = 'cancelled';
-    const STATE_RETURNED    = 'returned';
+    const STATE_PENDING = 'pending';
+    const STATE_CONFIRMED = 'confirmed';
+    const STATE_SHIPPED = 'shipped';
+    const STATE_ABANDONED = 'abandoned';
+    const STATE_CANCELLED = 'cancelled';
+    const STATE_RETURNED = 'returned';
 
     /**
      * @return bool

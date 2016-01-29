@@ -16,12 +16,12 @@ use Sylius\Bundle\ProductBundle\DependencyInjection\Compiler\ValidatorPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Product\Model\ArchetypeInterface;
-use Sylius\Component\Product\Model\ProductAssociationInterface;
 use Sylius\Component\Product\Model\AttributeInterface;
 use Sylius\Component\Product\Model\AttributeTranslationInterface;
 use Sylius\Component\Product\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\OptionInterface;
 use Sylius\Component\Product\Model\OptionValueInterface;
+use Sylius\Component\Product\Model\ProductAssociationInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductTranslationInterface;
 use Sylius\Component\Product\Model\VariantInterface;
@@ -38,9 +38,9 @@ class SyliusProductBundle extends AbstractResourceBundle
      */
     public static function getSupportedDrivers()
     {
-        return array(
+        return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        );
+        ];
     }
 
     /**
@@ -59,18 +59,18 @@ class SyliusProductBundle extends AbstractResourceBundle
      */
     protected function getModelInterfaces()
     {
-        return array(
-            ProductInterface::class              => 'sylius.model.product.class',
-            ProductTranslationInterface::class   => 'sylius.model.product_translation.class',
-            AttributeInterface::class            => 'sylius.model.product_attribute.class',
+        return [
+            ProductInterface::class => 'sylius.model.product.class',
+            ProductTranslationInterface::class => 'sylius.model.product_translation.class',
+            AttributeInterface::class => 'sylius.model.product_attribute.class',
             AttributeTranslationInterface::class => 'sylius.model.product_attribute_translation.class',
-            AttributeValueInterface::class       => 'sylius.model.product_attribute_value.class',
-            VariantInterface::class              => 'sylius.model.product_variant.class',
-            OptionInterface::class               => 'sylius.model.product_option.class',
-            OptionValueInterface::class          => 'sylius.model.product_option_value.class',
-            ArchetypeInterface::class            => 'sylius.model.product_archetype.class',
-            ProductAssociationInterface::class          => 'sylius.model.product_association.class',
-        );
+            AttributeValueInterface::class => 'sylius.model.product_attribute_value.class',
+            VariantInterface::class => 'sylius.model.product_variant.class',
+            OptionInterface::class => 'sylius.model.product_option.class',
+            OptionValueInterface::class => 'sylius.model.product_option_value.class',
+            ArchetypeInterface::class => 'sylius.model.product_archetype.class',
+            ProductAssociationInterface::class => 'sylius.model.product_association.class',
+        ];
     }
 
     /**

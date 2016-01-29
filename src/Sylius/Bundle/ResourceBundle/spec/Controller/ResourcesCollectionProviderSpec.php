@@ -41,7 +41,7 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\ResourcesCollectionProvider');
     }
-    
+
     function it_implements_resources_finder_interface()
     {
         $this->shouldImplement(ResourcesCollectionProviderInterface::class);
@@ -52,17 +52,16 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
         RepositoryInterface $repository,
         ResourceInterface $firstResource,
         ResourceInterface $secondResource
-    )
-    {
+    ) {
         $requestConfiguration->isHtmlRequest()->willReturn(true);
         $requestConfiguration->getRepositoryMethod(null)->willReturn(null);
 
         $requestConfiguration->isPaginated()->willReturn(false);
         $requestConfiguration->isLimited()->willReturn(false);
-        
-        $repository->findAll()->willReturn(array($firstResource, $secondResource));
-        
-        $this->get($requestConfiguration, $repository)->shouldReturn(array($firstResource, $secondResource));
+
+        $repository->findAll()->willReturn([$firstResource, $secondResource]);
+
+        $this->get($requestConfiguration, $repository)->shouldReturn([$firstResource, $secondResource]);
     }
 
     function it_finds_resources_by_criteria_if_not_paginated(
@@ -71,40 +70,38 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
         ResourceInterface $firstResource,
         ResourceInterface $secondResource,
         ResourceInterface $thirdResource
-    )
-    {
+    ) {
         $requestConfiguration->isHtmlRequest()->willReturn(true);
         $requestConfiguration->getRepositoryMethod(null)->willReturn(null);
 
         $requestConfiguration->isPaginated()->willReturn(false);
         $requestConfiguration->isLimited()->willReturn(true);
         $requestConfiguration->getLimit()->willReturn(15);
-        
-        $requestConfiguration->getCriteria()->willReturn(array('custom' => 'criteria'));
-        $requestConfiguration->getSorting()->willReturn(array('name' => 'desc'));
 
-        $repository->findBy(array('custom' => 'criteria'), array('name' => 'desc'), 15)->willReturn(array($firstResource, $secondResource, $thirdResource));
+        $requestConfiguration->getCriteria()->willReturn(['custom' => 'criteria']);
+        $requestConfiguration->getSorting()->willReturn(['name' => 'desc']);
 
-        $this->get($requestConfiguration, $repository)->shouldReturn(array($firstResource, $secondResource, $thirdResource));
+        $repository->findBy(['custom' => 'criteria'], ['name' => 'desc'], 15)->willReturn([$firstResource, $secondResource, $thirdResource]);
+
+        $this->get($requestConfiguration, $repository)->shouldReturn([$firstResource, $secondResource, $thirdResource]);
     }
 
     function it_uses_custom_method_and_arguments_if_specified(
         RequestConfiguration $requestConfiguration,
         RepositoryInterface $repository,
         ResourceInterface $firstResource
-    )
-    {
+    ) {
         $requestConfiguration->isHtmlRequest()->willReturn(true);
         $requestConfiguration->getRepositoryMethod()->willReturn('findAll');
-        $requestConfiguration->getRepositoryArguments()->willReturn(array('foo'));
+        $requestConfiguration->getRepositoryArguments()->willReturn(['foo']);
 
         $requestConfiguration->isPaginated()->willReturn(false);
         $requestConfiguration->isLimited()->willReturn(true);
         $requestConfiguration->getLimit()->willReturn(15);
 
-        $repository->findAll('foo')->willReturn(array($firstResource));
+        $repository->findAll('foo')->willReturn([$firstResource]);
 
-        $this->get($requestConfiguration, $repository)->shouldReturn(array($firstResource));
+        $this->get($requestConfiguration, $repository)->shouldReturn([$firstResource]);
     }
 
     function it_creates_paginator_by_default(
@@ -113,19 +110,17 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
         Pagerfanta $paginator,
         Request $request,
         ParameterBag $queryParameters
-    )
-    {
-
+    ) {
         $requestConfiguration->isHtmlRequest()->willReturn(true);
         $requestConfiguration->getRepositoryMethod()->willReturn(null);
 
         $requestConfiguration->isPaginated()->willReturn(true);
         $requestConfiguration->isLimited()->willReturn(false);
-        $requestConfiguration->getCriteria()->willReturn(array());
-        $requestConfiguration->getSorting()->willReturn(array());
+        $requestConfiguration->getCriteria()->willReturn([]);
+        $requestConfiguration->getSorting()->willReturn([]);
 
-        $repository->createPaginator(array(), array())->willReturn($paginator);
-       
+        $repository->createPaginator([], [])->willReturn($paginator);
+
         $requestConfiguration->getRequest()->willReturn($request);
         $request->query = $queryParameters;
         $queryParameters->get('page', 1)->willReturn(6);
@@ -144,25 +139,24 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
         ParameterBag $requestAttributes,
         PagerfantaFactory $pagerfantaRepresentationFactory,
         PaginatedRepresentation $paginatedRepresentation
-    )
-    {
+    ) {
         $requestConfiguration->isHtmlRequest()->willReturn(false);
         $requestConfiguration->getRepositoryMethod()->willReturn(null);
 
         $requestConfiguration->isPaginated()->willReturn(true);
         $requestConfiguration->isLimited()->willReturn(false);
-        $requestConfiguration->getCriteria()->willReturn(array());
-        $requestConfiguration->getSorting()->willReturn(array());
+        $requestConfiguration->getCriteria()->willReturn([]);
+        $requestConfiguration->getSorting()->willReturn([]);
 
-        $repository->createPaginator(array(), array())->willReturn($paginator);
+        $repository->createPaginator([], [])->willReturn($paginator);
 
         $requestConfiguration->getRequest()->willReturn($request);
         $request->query = $queryParameters;
         $queryParameters->get('page', 1)->willReturn(6);
-        $queryParameters->all()->willReturn(array('foo' => 2, 'bar' => 15));
+        $queryParameters->all()->willReturn(['foo' => 2, 'bar' => 15]);
         $request->attributes = $requestAttributes;
         $requestAttributes->get('_route')->willReturn('sylius_product_index');
-        $requestAttributes->get('_route_params')->willReturn(array('slug' => 'foo-bar'));
+        $requestAttributes->get('_route_params')->willReturn(['slug' => 'foo-bar']);
 
         $paginator->setCurrentPage(6)->shouldBeCalled();
 

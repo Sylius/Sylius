@@ -16,8 +16,8 @@ class OrderCheckoutTransitions
     const GRAPH = 'sylius_order_checkout';
 
     const SYLIUS_ADDRESSING = 'addressing';
-    const SYLIUS_PAYMENT    = 'payment';
-    const SYLIUS_SHIPPING   = 'shipping';
-    const SYLIUS_FINALIZE   = 'finalize';
-    const SYLIUS_COMPLETE   = 'complete';
+    const SYLIUS_PAYMENT = 'payment';
+    const SYLIUS_SHIPPING = 'shipping';
+    const SYLIUS_FINALIZE = 'finalize';
+    const SYLIUS_COMPLETE = 'complete';
 }

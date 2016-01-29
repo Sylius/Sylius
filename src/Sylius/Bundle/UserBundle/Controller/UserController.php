@@ -46,7 +46,7 @@ class UserController extends ResourceController
         $formType = $request->attributes->get('_sylius[form]', 'sylius_user_change_password', true);
         $form = $this->createResourceForm($configuration, $formType, $changePassword);
 
-        if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
+        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             return $this->handleChangePassword($configuration, $user, $changePassword->getNewPassword());
         }
 
@@ -56,7 +56,7 @@ class UserController extends ResourceController
 
         return $this->container->get('templating')->renderResponse(
             $configuration->getTemplate('changePassword.html'),
-            array('form' => $form->createView())
+            ['form' => $form->createView()]
         );
     }
 
@@ -88,7 +88,7 @@ class UserController extends ResourceController
         $formType = $request->attributes->get('_sylius[form]', 'sylius_user_reset_password', true);
         $form = $this->createResourceForm($configuration, $formType, $changePassword);
 
-        if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
+        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             return $this->handleResetPassword($user, $changePassword->getPassword());
         }
 
@@ -98,10 +98,10 @@ class UserController extends ResourceController
 
         return $this->container->get('templating')->renderResponse(
             $configuration->getTemplate('resetPassword.html'),
-            array(
+            [
                 'form' => $form->createView(),
                 'user' => $user,
-            )
+            ]
         );
     }
 
@@ -113,7 +113,7 @@ class UserController extends ResourceController
         $formType = $request->attributes->get('_sylius[form]', 'sylius_user_request_password_reset', true);
         $form = $this->createResourceForm($configuration, $formType, $passwordReset);
 
-        if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
+        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             $user = $this->repository->findOneByEmail($passwordReset->getEmail());
             if (null !== $user) {
                 $this->handleResetPasswordRequest($generator, $user, $senderEvent);
@@ -134,22 +134,22 @@ class UserController extends ResourceController
 
         return $this->container->get('templating')->renderResponse(
             $configuration->getTemplate('requestPasswordReset.html'),
-            array(
+            [
                 'form' => $form->createView(),
-            )
+            ]
         );
     }
 
     protected function addFlash($type, $message)
     {
         $translator = $this->container->get('translator');
-        $this->container->get('session')->getFlashBag()->add($type, $translator->trans($message, array(), 'flashes'));
+        $this->container->get('session')->getFlashBag()->add($type, $translator->trans($message, [], 'flashes'));
     }
 
     protected function createResourceForm(RequestConfiguration $configuration, $type, $resource)
     {
         if (!$configuration->isHtmlRequest()) {
-            return $this->container->get('form.factory')->createNamed('', $type, $resource, array('csrf_protection' => false));
+            return $this->container->get('form.factory')->createNamed('', $type, $resource, ['csrf_protection' => false]);
         }
 
         return $this->container->get('form.factory')->create($type, $resource);
@@ -191,7 +191,7 @@ class UserController extends ResourceController
         $user->setConfirmationToken($generator->generateUniqueToken());
         $user->setPasswordRequestedAt(new \DateTime());
 
-        /** I have to use doctrine manager directly, because domain manager functions add a flash messages. I can't get rid of them.*/
+        /* I have to use doctrine manager directly, because domain manager functions add a flash messages. I can't get rid of them.*/
         $manager = $this->container->get('doctrine.orm.default_entity_manager');
         $manager->persist($user);
         $manager->flush();
@@ -261,7 +261,7 @@ class UserController extends ResourceController
      */
     protected function findUserByToken($token)
     {
-        $user = $this->repository->findOneBy(array('confirmationToken' => $token));
+        $user = $this->repository->findOneBy(['confirmationToken' => $token]);
         if (null === $user) {
             throw new NotFoundHttpException('This token does not exist');
         }

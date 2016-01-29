@@ -25,7 +25,7 @@ class AssetTest extends ThemeBundleTestCase
      */
     public function testAssets($symlinkMask)
     {
-        $webDirectory = $this->getTmpDirPath(self::TEST_CASE) . '/web';
+        $webDirectory = $this->getTmpDirPath(self::TEST_CASE).'/web';
         if (!is_dir($webDirectory)) {
             mkdir($webDirectory, 0777, true);
         }
@@ -43,9 +43,9 @@ class AssetTest extends ThemeBundleTestCase
                 continue;
             }
 
-            list($expectedText, $assetFile) = explode(": ", $line);
+            list($expectedText, $assetFile) = explode(': ', $line);
 
-            $contents = file_get_contents($webDirectory . $assetFile);
+            $contents = file_get_contents($webDirectory.$assetFile);
 
             $this->assertEquals($expectedText, trim($contents));
         }

@@ -39,28 +39,28 @@ class VariantMatchTypeSpec extends ObjectBehavior
 
     function it_builds_a_form(FormBuilderInterface $builder, VariableInterface $variable, OptionInterface $option)
     {
-        $variable->getOptions()->shouldBeCalled()->willReturn(array($option));
+        $variable->getOptions()->shouldBeCalled()->willReturn([$option]);
         $option->getName()->shouldBeCalled()->willReturn('option_name');
         $option->getPresentation()->shouldBeCalled()->willReturn('option_presentation');
 
-        $builder->add('option-name', 'sylius_varibale_name_option_value_choice', array(
-            'label'         => 'option_presentation',
-            'option'        => $option,
-            'property_path' => '[0]'
-        ))->shouldBeCalled();
+        $builder->add('option-name', 'sylius_varibale_name_option_value_choice', [
+            'label' => 'option_presentation',
+            'option' => $option,
+            'property_path' => '[0]',
+        ])->shouldBeCalled();
 
         $builder->addModelTransformer(
             Argument::type(VariantToCombinationTransformer::class)
         )->shouldBeCalled();
 
-        $this->buildForm($builder, array('variable' => $variable));
+        $this->buildForm($builder, ['variable' => $variable]);
     }
 
     function it_has_options(OptionsResolver $resolver)
     {
-        $resolver->setRequired(array(
-            'variable'
-        ))->shouldBeCalled()->willReturn($resolver);
+        $resolver->setRequired([
+            'variable',
+        ])->shouldBeCalled()->willReturn($resolver);
 
         $resolver->setAllowedTypes('variable', VariableInterface::class)->shouldBeCalled()->willReturn($resolver);
 

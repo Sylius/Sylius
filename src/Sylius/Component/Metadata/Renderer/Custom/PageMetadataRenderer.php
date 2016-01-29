@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sylius\Component\Metadata\Renderer\Custom;
 
 use Sylius\Component\Metadata\Model\Custom\PageMetadataInterface;
@@ -164,7 +173,7 @@ final class PageMetadataRenderer implements MetadataRendererInterface
         });
 
         $this->addSubrenderer('keywords', function ($value) {
-            return sprintf('<meta name="keywords" content="%s" />', join(', ', $value));
+            return sprintf('<meta name="keywords" content="%s" />', implode(', ', $value));
         });
 
         $this->addSubrenderer('charset', function ($value) {

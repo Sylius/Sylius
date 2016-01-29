@@ -15,12 +15,8 @@ use Doctrine\Common\Collections\Collection;
 use SM\Factory\FactoryInterface as StateMachineFactoryInteraface;
 use Sylius\Bundle\OrderBundle\Factory\OrderItemUnitFactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Inventory\InventoryUnitTransitions;
-use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -53,9 +49,9 @@ class InventoryHandler implements InventoryHandlerInterface
         OrderItemUnitFactoryInterface $orderItemUnitFactory,
         StateMachineFactoryInteraface $stateMachineFactory
     ) {
-        $this->inventoryOperator    = $inventoryOperator;
+        $this->inventoryOperator = $inventoryOperator;
         $this->orderItemUnitFactory = $orderItemUnitFactory;
-        $this->stateMachineFactory  = $stateMachineFactory;
+        $this->stateMachineFactory = $stateMachineFactory;
     }
 
     /**
@@ -95,7 +91,7 @@ class InventoryHandler implements InventoryHandlerInterface
                 $stateMachine = $this->stateMachineFactory->get($unit, InventoryUnitTransitions::GRAPH);
                 if ($stateMachine->can(InventoryUnitTransitions::SYLIUS_SELL)) {
                     if ($stateMachine->can(InventoryUnitTransitions::SYLIUS_RELEASE)) {
-                        $quantity++;
+                        ++$quantity;
                     }
                     $stateMachine->apply(InventoryUnitTransitions::SYLIUS_SELL);
                 }
@@ -122,7 +118,7 @@ class InventoryHandler implements InventoryHandlerInterface
             $stateMachine = $this->stateMachineFactory->get($unit, InventoryUnitTransitions::GRAPH);
             if ($stateMachine->can($transition)) {
                 $stateMachine->apply($transition);
-                $quantity++;
+                ++$quantity;
             }
         }
 

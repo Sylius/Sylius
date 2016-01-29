@@ -27,15 +27,15 @@ class UserChangePasswordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('currentPassword', 'password', array(
+            ->add('currentPassword', 'password', [
                 'label' => 'sylius.form.user.password.current',
-            ))
-            ->add('newPassword', 'repeated', array(
-                'type'            => 'password',
-                'first_options'   => array('label' => 'sylius.form.user.password.label'),
-                'second_options'  => array('label' => 'sylius.form.user.password.confirmation'),
+            ])
+            ->add('newPassword', 'repeated', [
+                'type' => 'password',
+                'first_options' => ['label' => 'sylius.form.user.password.label'],
+                'second_options' => ['label' => 'sylius.form.user.password.confirmation'],
                 'invalid_message' => 'sylius.user.plainPassword.mismatch',
-            ))
+            ])
         ;
     }
 
@@ -44,10 +44,10 @@ class UserChangePasswordType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => ChangePassword::class,
-            'validation_groups' => array('sylius'),
-        ));
+            'validation_groups' => ['sylius'],
+        ]);
     }
 
     /**

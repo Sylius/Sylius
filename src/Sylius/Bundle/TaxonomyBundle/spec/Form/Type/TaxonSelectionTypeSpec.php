@@ -49,8 +49,8 @@ class TaxonSelectionTypeSpec extends ObjectBehavior
         Taxonomy $taxonomy,
         Taxon $taxon
     ) {
-        $taxonomyRepository->findAll()->shouldBeCalled()->willReturn(array($taxonomy));
-        $taxonRepository->getTaxonsAsList($taxonomy)->shouldBeCalled()->willReturn(array($taxon));
+        $taxonomyRepository->findAll()->shouldBeCalled()->willReturn([$taxonomy]);
+        $taxonRepository->getTaxonsAsList($taxonomy)->shouldBeCalled()->willReturn([$taxon]);
 
         $taxonomy->getId()->shouldBeCalled()->willreturn(12);
         $taxonomy->getName()->shouldBeCalled()->willReturn('taxonomy name');
@@ -61,13 +61,13 @@ class TaxonSelectionTypeSpec extends ObjectBehavior
 
         $builder->add(12, 'choice', Argument::withKey('choice_list'))->shouldBeCalled();
 
-        $this->buildForm($builder, array(
-            'model_transformer' => array(
+        $this->buildForm($builder, [
+            'model_transformer' => [
                 'class' => $dataTransformer,
                 'save_objects' => false,
-            ),
+            ],
             'multiple' => true,
-        ));
+        ]);
     }
 
     function it_is_a_form()
@@ -77,12 +77,12 @@ class TaxonSelectionTypeSpec extends ObjectBehavior
 
     function it_has_options(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class'         => null,
-            'multiple'           => true,
-            'render_label'       => false,
-            'model_transformer'  => TaxonSelectionToCollectionTransformer::class,
-        ))->shouldBeCalled();
+        $resolver->setDefaults([
+            'data_class' => null,
+            'multiple' => true,
+            'render_label' => false,
+            'model_transformer' => TaxonSelectionToCollectionTransformer::class,
+        ])->shouldBeCalled();
 
         $resolver->setNormalizer('model_transformer', Argument::type('callable'))->shouldBeCalled();
 

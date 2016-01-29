@@ -1,13 +1,13 @@
 <?php
 
 /*
-* This file is part of the Sylius package.
-*
-* (c) Paweł Jędrzejewski
-*
-* For the full copyright and license information, please view the LICENSE
-* file that was distributed with this source code.
-*/
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Sylius\Bundle\PayumBundle\Model;
 
@@ -48,7 +48,7 @@ class PaymentSecurityToken implements TokenInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setDetails($details)
     {
@@ -56,7 +56,7 @@ class PaymentSecurityToken implements TokenInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @return IdentityInterface|null
      */
@@ -66,7 +66,7 @@ class PaymentSecurityToken implements TokenInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getHash()
     {
@@ -74,7 +74,7 @@ class PaymentSecurityToken implements TokenInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setHash($hash)
     {
@@ -82,7 +82,7 @@ class PaymentSecurityToken implements TokenInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getTargetUrl()
     {
@@ -90,7 +90,7 @@ class PaymentSecurityToken implements TokenInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setTargetUrl($targetUrl)
     {
@@ -98,7 +98,7 @@ class PaymentSecurityToken implements TokenInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getAfterUrl()
     {
@@ -106,7 +106,7 @@ class PaymentSecurityToken implements TokenInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setAfterUrl($afterUrl)
     {
@@ -114,7 +114,7 @@ class PaymentSecurityToken implements TokenInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getGatewayName()
     {
@@ -122,7 +122,7 @@ class PaymentSecurityToken implements TokenInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setGatewayName($gatewayName)
     {

@@ -34,10 +34,10 @@ abstract class AbstractResourceExtension extends Extension
 
         foreach ($resources as $resourceName => $resourceConfig) {
             $alias = $applicationName.'.'.$resourceName;
-            $resourceConfig = array_merge(array('driver' => $driver), $resourceConfig);
+            $resourceConfig = array_merge(['driver' => $driver], $resourceConfig);
 
-            $resources = $container->hasParameter('sylius.resources') ? $container->getParameter('sylius.resources') : array();
-            $resources = array_merge($resources, array($alias => $resourceConfig));
+            $resources = $container->hasParameter('sylius.resources') ? $container->getParameter('sylius.resources') : [];
+            $resources = array_merge($resources, [$alias => $resourceConfig]);
             $container->setParameter('sylius.resources', $resources);
 
             $metadata = Metadata::fromAliasAndConfiguration($alias, $resourceConfig);
@@ -46,10 +46,10 @@ abstract class AbstractResourceExtension extends Extension
 
             if ($metadata->hasParameter('translation')) {
                 $alias = $alias.'_translation';
-                $resourceConfig = array_merge(array('driver' => $driver), $resourceConfig['translation']);
+                $resourceConfig = array_merge(['driver' => $driver], $resourceConfig['translation']);
 
-                $resources = $container->hasParameter('sylius.resources') ? $container->getParameter('sylius.resources') : array();
-                $resources = array_merge($resources, array($alias => $resourceConfig));
+                $resources = $container->hasParameter('sylius.resources') ? $container->getParameter('sylius.resources') : [];
+                $resources = array_merge($resources, [$alias => $resourceConfig]);
                 $container->setParameter('sylius.resources', $resources);
 
                 $metadata = Metadata::fromAliasAndConfiguration($alias, $resourceConfig);
@@ -58,7 +58,6 @@ abstract class AbstractResourceExtension extends Extension
             }
         }
     }
-
 
     /**
      * @param array $config

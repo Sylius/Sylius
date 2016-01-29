@@ -11,7 +11,18 @@
 
 namespace Sylius\Bundle\ContentBundle\DependencyInjection;
 
+use Sylius\Bundle\ContentBundle\Document\ActionBlock;
+use Sylius\Bundle\ContentBundle\Document\ImagineBlock;
+use Sylius\Bundle\ContentBundle\Document\Menu;
+use Sylius\Bundle\ContentBundle\Document\MenuBlock;
+use Sylius\Bundle\ContentBundle\Document\MenuNode;
+use Sylius\Bundle\ContentBundle\Document\RedirectRoute;
+use Sylius\Bundle\ContentBundle\Document\ReferenceBlock;
+use Sylius\Bundle\ContentBundle\Document\Route;
+use Sylius\Bundle\ContentBundle\Document\SimpleBlock;
+use Sylius\Bundle\ContentBundle\Document\SlideshowBlock;
 use Sylius\Bundle\ContentBundle\Document\StaticContent;
+use Sylius\Bundle\ContentBundle\Document\StringBlock;
 use Sylius\Bundle\ContentBundle\Form\Type\ActionBlockType;
 use Sylius\Bundle\ContentBundle\Form\Type\ImagineBlockType;
 use Sylius\Bundle\ContentBundle\Form\Type\MenuBlockType;
@@ -28,17 +39,6 @@ use Sylius\Bundle\ContentBundle\Form\Type\StringBlockType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Factory\Factory;
-use Sylius\Bundle\ContentBundle\Document\ActionBlock;
-use Sylius\Bundle\ContentBundle\Document\ImagineBlock;
-use Sylius\Bundle\ContentBundle\Document\SimpleBlock;
-use Sylius\Bundle\ContentBundle\Document\SlideshowBlock;
-use Sylius\Bundle\ContentBundle\Document\StringBlock;
-use Sylius\Bundle\ContentBundle\Document\MenuBlock;
-use Sylius\Bundle\ContentBundle\Document\ReferenceBlock;
-use Sylius\Bundle\ContentBundle\Document\Menu;
-use Sylius\Bundle\ContentBundle\Document\MenuNode;
-use Sylius\Bundle\ContentBundle\Document\Route;
-use Sylius\Bundle\ContentBundle\Document\RedirectRoute;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -99,7 +99,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -129,7 +129,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -159,7 +159,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -189,7 +189,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -219,7 +219,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -249,7 +249,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -279,7 +279,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -309,7 +309,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -339,7 +339,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -369,7 +369,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -399,7 +399,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -430,7 +430,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()

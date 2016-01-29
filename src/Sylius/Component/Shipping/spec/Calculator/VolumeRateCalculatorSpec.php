@@ -1,9 +1,17 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Component\Shipping\Calculator;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
@@ -28,13 +36,13 @@ class VolumeRateCalculatorSpec extends ObjectBehavior
     {
         $subject->getShippingVolume()->willReturn(100);
 
-        $this->calculate($subject, array('amount' => 500, 'division' => 2))->shouldReturn(500 * 100/2);
+        $this->calculate($subject, ['amount' => 500, 'division' => 2])->shouldReturn(500 * 100 / 2);
     }
 
     function its_calculated_value_should_be_an_integer(ShippingSubjectInterface $subject)
     {
         $subject->getShippingVolume()->willReturn(100);
 
-        $this->calculate($subject, array('amount' => 500, 'division' => 2))->shouldBeInteger();
+        $this->calculate($subject, ['amount' => 500, 'division' => 2])->shouldBeInteger();
     }
 }

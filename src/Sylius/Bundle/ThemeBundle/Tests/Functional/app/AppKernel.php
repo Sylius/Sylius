@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the Symfony package.
+ * This file is part of the Sylius package.
  *
- * (c) Fabien Potencier <fabien@symfony.com>
+ * (c) Paweł Jędrzejewski
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,18 +17,18 @@ $lastDir = null;
 while ($dir !== $lastDir) {
     $lastDir = $dir;
 
-    if (file_exists($dir . '/autoload.php')) {
-        require_once $dir . '/autoload.php';
+    if (file_exists($dir.'/autoload.php')) {
+        require_once $dir.'/autoload.php';
         break;
     }
 
-    if (file_exists($dir . '/autoload.php.dist')) {
-        require_once $dir . '/autoload.php.dist';
+    if (file_exists($dir.'/autoload.php.dist')) {
+        require_once $dir.'/autoload.php.dist';
         break;
     }
 
-    if (file_exists($dir . '/vendor/autoload.php')) {
-        require_once $dir . '/vendor/autoload.php';
+    if (file_exists($dir.'/vendor/autoload.php')) {
+        require_once $dir.'/vendor/autoload.php';
         break;
     }
 
@@ -51,13 +51,13 @@ class AppKernel extends Kernel
 
     public function __construct($testCase, $rootConfig, $environment, $debug)
     {
-        if (!is_dir(__DIR__ . '/' . $testCase)) {
+        if (!is_dir(__DIR__.'/'.$testCase)) {
             throw new \InvalidArgumentException(sprintf('The test case "%s" does not exist.', $testCase));
         }
         $this->testCase = $testCase;
 
         $fs = new Filesystem();
-        if (!$fs->isAbsolutePath($rootConfig) && !file_exists($rootConfig = __DIR__ . '/' . $testCase . '/' . $rootConfig)) {
+        if (!$fs->isAbsolutePath($rootConfig) && !file_exists($rootConfig = __DIR__.'/'.$testCase.'/'.$rootConfig)) {
             throw new \InvalidArgumentException(sprintf('The root config "%s" does not exist.', $rootConfig));
         }
         $this->rootConfig = $rootConfig;
@@ -67,7 +67,7 @@ class AppKernel extends Kernel
 
     public function registerBundles()
     {
-        if (!file_exists($filename = $this->getRootDir() . '/' . $this->testCase . '/bundles.php')) {
+        if (!file_exists($filename = $this->getRootDir().'/'.$this->testCase.'/bundles.php')) {
             throw new \RuntimeException(sprintf('The bundles file "%s" does not exist.', $filename));
         }
 
@@ -81,12 +81,12 @@ class AppKernel extends Kernel
 
     public function getCacheDir()
     {
-        return sys_get_temp_dir() . '/' . Kernel::VERSION . '/' . $this->testCase . '/cache/' . $this->environment;
+        return sys_get_temp_dir().'/'.Kernel::VERSION.'/'.$this->testCase.'/cache/'.$this->environment;
     }
 
     public function getLogDir()
     {
-        return sys_get_temp_dir() . '/' . Kernel::VERSION . '/' . $this->testCase . '/logs';
+        return sys_get_temp_dir().'/'.Kernel::VERSION.'/'.$this->testCase.'/logs';
     }
 
     public function registerContainerConfiguration(LoaderInterface $loader)

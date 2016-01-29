@@ -31,9 +31,9 @@ class ResourceControllerEventSpec extends ObjectBehavior
 
     function it_stops_event_propagation()
     {
-        $this->stop('message', ResourceEvent::TYPE_SUCCESS, array('parameter'));
+        $this->stop('message', ResourceEvent::TYPE_SUCCESS, ['parameter']);
         $this->getMessageType()->shouldReturn(ResourceEvent::TYPE_SUCCESS);
-        $this->getMessageParameters()->shouldReturn(array('parameter'));
+        $this->getMessageParameters()->shouldReturn(['parameter']);
         $this->getMessage()->shouldReturn('message');
         $this->isPropagationStopped()->shouldReturn(true);
     }
@@ -69,12 +69,12 @@ class ResourceControllerEventSpec extends ObjectBehavior
 
     function it_has_empty_message_parameters_by_default()
     {
-        $this->getMessageParameters()->shouldReturn(array());
+        $this->getMessageParameters()->shouldReturn([]);
     }
 
     function its_message_parameter_is_mutable()
     {
-        $this->setMessageParameters(array('parameters'));
-        $this->getMessageParameters()->shouldReturn(array('parameters'));
+        $this->setMessageParameters(['parameters']);
+        $this->getMessageParameters()->shouldReturn(['parameters']);
     }
 }

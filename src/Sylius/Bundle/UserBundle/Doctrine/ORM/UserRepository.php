@@ -31,7 +31,7 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
      *
      * @return Pagerfanta
      */
-    public function createFilterPaginator($criteria = array(), $sorting = array(), $deleted = false)
+    public function createFilterPaginator($criteria = [], $sorting = [], $deleted = false)
     {
         $queryBuilder = parent::getCollectionQueryBuilder();
 
@@ -58,7 +58,7 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
 
         if (empty($sorting)) {
             if (!is_array($sorting)) {
-                $sorting = array();
+                $sorting = [];
             }
             $sorting['updatedAt'] = 'desc';
         }
@@ -71,7 +71,7 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
     /**
      * Get the user data for the details page.
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return null|UserInterface
      */
@@ -126,7 +126,7 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
      *
      * @return array
      */
-    public function getRegistrationStatistic(array $configuration = array())
+    public function getRegistrationStatistic(array $configuration = [])
     {
         $groupBy = '';
         foreach ($configuration['groupBy'] as $groupByArray) {

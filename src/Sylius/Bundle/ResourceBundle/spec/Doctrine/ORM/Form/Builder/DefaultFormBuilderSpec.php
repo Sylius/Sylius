@@ -37,7 +37,7 @@ class DefaultFormBuilderSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Doctrine\ORM\Form\Builder\DefaultFormBuilder');
     }
-    
+
     function it_is_a_default_form_builder()
     {
         $this->shouldImplement(DefaultFormBuilderInterface::class);
@@ -48,15 +48,14 @@ class DefaultFormBuilderSpec extends ObjectBehavior
         FormBuilderInterface $formBuilder,
         EntityManagerInterface $entityManager,
         ClassMetadataInfo $classMetadataInfo
-    )
-    {
+    ) {
         $metadata->getClass('model')->willReturn('AppBundle\Entity\Book');
         $entityManager->getClassMetadata('AppBundle\Entity\Book')->willReturn($classMetadataInfo);
-        $classMetadataInfo->identifier = array('id', 'slug');
+        $classMetadataInfo->identifier = ['id', 'slug'];
 
         $this
             ->shouldThrow(\RuntimeException::class)
-            ->during('build', array($metadata, $formBuilder, array()))
+            ->during('build', [$metadata, $formBuilder, []])
         ;
     }
 
@@ -65,25 +64,24 @@ class DefaultFormBuilderSpec extends ObjectBehavior
         FormBuilderInterface $formBuilder,
         EntityManagerInterface $entityManager,
         ClassMetadataInfo $classMetadataInfo
-    )
-    {
+    ) {
         $metadata->getClass('model')->willReturn('AppBundle\Entity\Book');
         $entityManager->getClassMetadata('AppBundle\Entity\Book')->willReturn($classMetadataInfo);
-        $classMetadataInfo->fieldNames = array('id', 'name', 'description', 'enabled');
-        $classMetadataInfo->identifier = array('id');
+        $classMetadataInfo->fieldNames = ['id', 'name', 'description', 'enabled'];
+        $classMetadataInfo->identifier = ['id'];
         $classMetadataInfo->isIdentifierNatural()->willReturn(false);
-        $classMetadataInfo->getAssociationMappings()->willReturn(array());
+        $classMetadataInfo->getAssociationMappings()->willReturn([]);
 
         $classMetadataInfo->getTypeOfField('name')->willReturn(Type::STRING);
         $classMetadataInfo->getTypeOfField('description')->willReturn(Type::TEXT);
         $classMetadataInfo->getTypeOfField('enabled')->willReturn(Type::BOOLEAN);
 
         $formBuilder->add('id', Argument::cetera())->shouldNotBeCalled();
-        $formBuilder->add('name', null, array())->shouldBeCalled();
-        $formBuilder->add('description', null, array())->shouldBeCalled();
-        $formBuilder->add('enabled', null, array())->shouldBeCalled();
+        $formBuilder->add('name', null, [])->shouldBeCalled();
+        $formBuilder->add('description', null, [])->shouldBeCalled();
+        $formBuilder->add('enabled', null, [])->shouldBeCalled();
 
-        $this->build($metadata, $formBuilder, array());
+        $this->build($metadata, $formBuilder, []);
     }
 
     function it_does_not_exclude_natural_identifier_from_the_field_list(
@@ -91,26 +89,25 @@ class DefaultFormBuilderSpec extends ObjectBehavior
         FormBuilderInterface $formBuilder,
         EntityManagerInterface $entityManager,
         ClassMetadataInfo $classMetadataInfo
-    )
-    {
+    ) {
         $metadata->getClass('model')->willReturn('AppBundle\Entity\Book');
         $entityManager->getClassMetadata('AppBundle\Entity\Book')->willReturn($classMetadataInfo);
-        $classMetadataInfo->fieldNames = array('id', 'name', 'description', 'enabled');
-        $classMetadataInfo->identifier = array('id');
+        $classMetadataInfo->fieldNames = ['id', 'name', 'description', 'enabled'];
+        $classMetadataInfo->identifier = ['id'];
         $classMetadataInfo->isIdentifierNatural()->willReturn(true);
-        $classMetadataInfo->getAssociationMappings()->willReturn(array());
+        $classMetadataInfo->getAssociationMappings()->willReturn([]);
 
         $classMetadataInfo->getTypeOfField('id')->willReturn(Type::INTEGER);
         $classMetadataInfo->getTypeOfField('name')->willReturn(Type::STRING);
         $classMetadataInfo->getTypeOfField('description')->willReturn(Type::TEXT);
         $classMetadataInfo->getTypeOfField('enabled')->willReturn(Type::BOOLEAN);
 
-        $formBuilder->add('id', null, array())->shouldBeCalled();
-        $formBuilder->add('name', null, array())->shouldBeCalled();
-        $formBuilder->add('description', null, array())->shouldBeCalled();
-        $formBuilder->add('enabled', null, array())->shouldBeCalled();
+        $formBuilder->add('id', null, [])->shouldBeCalled();
+        $formBuilder->add('name', null, [])->shouldBeCalled();
+        $formBuilder->add('description', null, [])->shouldBeCalled();
+        $formBuilder->add('enabled', null, [])->shouldBeCalled();
 
-        $this->build($metadata, $formBuilder, array());
+        $this->build($metadata, $formBuilder, []);
     }
 
     function it_uses_metadata_to_create_appropriate_fields(
@@ -118,23 +115,22 @@ class DefaultFormBuilderSpec extends ObjectBehavior
         FormBuilderInterface $formBuilder,
         EntityManagerInterface $entityManager,
         ClassMetadataInfo $classMetadataInfo
-    )
-    {
+    ) {
         $metadata->getClass('model')->willReturn('AppBundle\Entity\Book');
         $entityManager->getClassMetadata('AppBundle\Entity\Book')->willReturn($classMetadataInfo);
-        $classMetadataInfo->fieldNames = array('name', 'description', 'enabled');
+        $classMetadataInfo->fieldNames = ['name', 'description', 'enabled'];
         $classMetadataInfo->isIdentifierNatural()->willReturn(true);
-        $classMetadataInfo->getAssociationMappings()->willReturn(array());
+        $classMetadataInfo->getAssociationMappings()->willReturn([]);
 
         $classMetadataInfo->getTypeOfField('name')->willReturn(Type::STRING);
         $classMetadataInfo->getTypeOfField('description')->willReturn(Type::TEXT);
         $classMetadataInfo->getTypeOfField('enabled')->willReturn(Type::BOOLEAN);
 
-        $formBuilder->add('name', null, array())->shouldBeCalled();
-        $formBuilder->add('description', null, array())->shouldBeCalled();
-        $formBuilder->add('enabled', null, array())->shouldBeCalled();
+        $formBuilder->add('name', null, [])->shouldBeCalled();
+        $formBuilder->add('description', null, [])->shouldBeCalled();
+        $formBuilder->add('enabled', null, [])->shouldBeCalled();
 
-        $this->build($metadata, $formBuilder, array());
+        $this->build($metadata, $formBuilder, []);
     }
 
     function it_uses_single_text_widget_for_datetime_field(
@@ -142,25 +138,24 @@ class DefaultFormBuilderSpec extends ObjectBehavior
         FormBuilderInterface $formBuilder,
         EntityManagerInterface $entityManager,
         ClassMetadataInfo $classMetadataInfo
-    )
-    {
+    ) {
         $metadata->getClass('model')->willReturn('AppBundle\Entity\Book');
         $entityManager->getClassMetadata('AppBundle\Entity\Book')->willReturn($classMetadataInfo);
-        $classMetadataInfo->fieldNames = array('name', 'description', 'enabled', 'publishedAt');
+        $classMetadataInfo->fieldNames = ['name', 'description', 'enabled', 'publishedAt'];
         $classMetadataInfo->isIdentifierNatural()->willReturn(true);
-        $classMetadataInfo->getAssociationMappings()->willReturn(array());
+        $classMetadataInfo->getAssociationMappings()->willReturn([]);
 
         $classMetadataInfo->getTypeOfField('name')->willReturn(Type::STRING);
         $classMetadataInfo->getTypeOfField('description')->willReturn(Type::TEXT);
         $classMetadataInfo->getTypeOfField('enabled')->willReturn(Type::BOOLEAN);
         $classMetadataInfo->getTypeOfField('publishedAt')->willReturn(Type::DATETIME);
 
-        $formBuilder->add('name', null, array())->shouldBeCalled();
-        $formBuilder->add('description', null, array())->shouldBeCalled();
-        $formBuilder->add('enabled', null, array())->shouldBeCalled();
-        $formBuilder->add('publishedAt', null, array('widget' => 'single_text'))->shouldBeCalled();
+        $formBuilder->add('name', null, [])->shouldBeCalled();
+        $formBuilder->add('description', null, [])->shouldBeCalled();
+        $formBuilder->add('enabled', null, [])->shouldBeCalled();
+        $formBuilder->add('publishedAt', null, ['widget' => 'single_text'])->shouldBeCalled();
 
-        $this->build($metadata, $formBuilder, array());
+        $this->build($metadata, $formBuilder, []);
     }
 
     function it_also_creates_fields_for_relations_other_than_one_to_many(
@@ -168,30 +163,29 @@ class DefaultFormBuilderSpec extends ObjectBehavior
         FormBuilderInterface $formBuilder,
         EntityManagerInterface $entityManager,
         ClassMetadataInfo $classMetadataInfo
-    )
-    {
+    ) {
         $metadata->getClass('model')->willReturn('AppBundle\Entity\Book');
         $entityManager->getClassMetadata('AppBundle\Entity\Book')->willReturn($classMetadataInfo);
-        $classMetadataInfo->fieldNames = array('name', 'description', 'enabled', 'publishedAt');
+        $classMetadataInfo->fieldNames = ['name', 'description', 'enabled', 'publishedAt'];
         $classMetadataInfo->isIdentifierNatural()->willReturn(true);
-        $classMetadataInfo->getAssociationMappings()->willReturn(array(
-            'category' => array('type' => ClassMetadataInfo::MANY_TO_ONE),
-            'users' => array('type' => ClassMetadataInfo::ONE_TO_MANY),
-        ));
+        $classMetadataInfo->getAssociationMappings()->willReturn([
+            'category' => ['type' => ClassMetadataInfo::MANY_TO_ONE],
+            'users' => ['type' => ClassMetadataInfo::ONE_TO_MANY],
+        ]);
 
         $classMetadataInfo->getTypeOfField('name')->willReturn(Type::STRING);
         $classMetadataInfo->getTypeOfField('description')->willReturn(Type::TEXT);
         $classMetadataInfo->getTypeOfField('enabled')->willReturn(Type::BOOLEAN);
         $classMetadataInfo->getTypeOfField('publishedAt')->willReturn(Type::DATETIME);
 
-        $formBuilder->add('name', null, array())->shouldBeCalled();
-        $formBuilder->add('description', null, array())->shouldBeCalled();
-        $formBuilder->add('enabled', null, array())->shouldBeCalled();
-        $formBuilder->add('publishedAt', null, array('widget' => 'single_text'))->shouldBeCalled();
-        $formBuilder->add('category', null, array('property' => 'id'))->shouldBeCalled();
+        $formBuilder->add('name', null, [])->shouldBeCalled();
+        $formBuilder->add('description', null, [])->shouldBeCalled();
+        $formBuilder->add('enabled', null, [])->shouldBeCalled();
+        $formBuilder->add('publishedAt', null, ['widget' => 'single_text'])->shouldBeCalled();
+        $formBuilder->add('category', null, ['property' => 'id'])->shouldBeCalled();
         $formBuilder->add('users', Argument::cetera())->shouldNotBeCalled();
 
-        $this->build($metadata, $formBuilder, array());
+        $this->build($metadata, $formBuilder, []);
     }
 
     function it_excludes_common_fields_like_createdAt_updatedAt_and_deletedAt(
@@ -199,13 +193,12 @@ class DefaultFormBuilderSpec extends ObjectBehavior
         FormBuilderInterface $formBuilder,
         EntityManagerInterface $entityManager,
         ClassMetadataInfo $classMetadataInfo
-    )
-    {
+    ) {
         $metadata->getClass('model')->willReturn('AppBundle\Entity\Book');
         $entityManager->getClassMetadata('AppBundle\Entity\Book')->willReturn($classMetadataInfo);
-        $classMetadataInfo->fieldNames = array('name', 'description', 'enabled', 'createdAt', 'updatedAt', 'deletedAt');
+        $classMetadataInfo->fieldNames = ['name', 'description', 'enabled', 'createdAt', 'updatedAt', 'deletedAt'];
         $classMetadataInfo->isIdentifierNatural()->willReturn(true);
-        $classMetadataInfo->getAssociationMappings()->willReturn(array());
+        $classMetadataInfo->getAssociationMappings()->willReturn([]);
 
         $classMetadataInfo->getTypeOfField('name')->willReturn(Type::STRING);
         $classMetadataInfo->getTypeOfField('description')->willReturn(Type::TEXT);
@@ -214,13 +207,13 @@ class DefaultFormBuilderSpec extends ObjectBehavior
         $classMetadataInfo->getTypeOfField('updatedAt')->willReturn(Type::DATETIME);
         $classMetadataInfo->getTypeOfField('deletedAt')->willReturn(Type::DATETIME);
 
-        $formBuilder->add('name', null, array())->shouldBeCalled();
-        $formBuilder->add('description', null, array())->shouldBeCalled();
-        $formBuilder->add('enabled', null, array())->shouldBeCalled();
+        $formBuilder->add('name', null, [])->shouldBeCalled();
+        $formBuilder->add('description', null, [])->shouldBeCalled();
+        $formBuilder->add('enabled', null, [])->shouldBeCalled();
         $formBuilder->add('createdAt', Argument::cetera())->shouldNotBeCalled();
         $formBuilder->add('updatedAt', Argument::cetera())->shouldNotBeCalled();
         $formBuilder->add('deletedAt', Argument::cetera())->shouldNotBeCalled();
 
-        $this->build($metadata, $formBuilder, array());
+        $this->build($metadata, $formBuilder, []);
     }
 }

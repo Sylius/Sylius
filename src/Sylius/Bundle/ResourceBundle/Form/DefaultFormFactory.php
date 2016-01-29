@@ -13,8 +13,8 @@ namespace Sylius\Bundle\ResourceBundle\Form;
 
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\ORM\Mapping\ClassMetadataInfo as ORMClassMetadataInfo;
 use Doctrine\ODM\MongoDB\Mapping\ClassMetadataInfo as ODMClassMetadataInfo;
+use Doctrine\ORM\Mapping\ClassMetadataInfo as ORMClassMetadataInfo;
 use Symfony\Component\Form\FormFactoryInterface;
 
 /**
@@ -41,16 +41,16 @@ class DefaultFormFactory
             throw new \RuntimeException('The default form factory does not support entity classes with multiple primary keys.');
         }
 
-        $builder = $this->formFactory->createNamedBuilder('', 'form', $resource, array('csrf_protection' => false));
+        $builder = $this->formFactory->createNamedBuilder('', 'form', $resource, ['csrf_protection' => false]);
 
         foreach ($this->getFieldsFromMetadata($metadata) as $field => $type) {
-            $options = array();
+            $options = [];
 
-            if (in_array($type, array('date', 'datetime'))) {
-                $options = array('widget' => 'single_text');
+            if (in_array($type, ['date', 'datetime'])) {
+                $options = ['widget' => 'single_text'];
             }
             if ('relation' === $type) {
-                $options = array('property' => 'id');
+                $options = ['property' => 'id'];
             }
 
             $builder->add($field, null, $options);
@@ -69,13 +69,13 @@ class DefaultFormFactory
      */
     private function getFieldsFromMetadata(ClassMetadata $metadata)
     {
-        $fields = (array)$metadata->getFieldNames();
+        $fields = (array) $metadata->getFieldNames();
 
         if (!$this->isIdentifierNatural($metadata)) {
             $fields = array_diff($fields, $metadata->getIdentifier());
         }
 
-        $fieldsMapping = array();
+        $fieldsMapping = [];
 
         foreach ($fields as $field) {
             $fieldsMapping[$field] = $metadata->getTypeOfField($field);
@@ -95,6 +95,7 @@ class DefaultFormFactory
      * for ORM and ODM.
      *
      * @param ClassMetadata $metadata
+     *
      * @return bool
      */
     private function isIdentifierNatural(ClassMetadata $metadata)
@@ -105,6 +106,7 @@ class DefaultFormFactory
         if ($metadata instanceof ODMClassMetadataInfo) {
             return $metadata->generatorType === ODMClassMetadataInfo::GENERATOR_TYPE_NONE;
         }
+
         return true;
     }
 }

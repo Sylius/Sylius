@@ -34,7 +34,7 @@ class FlexibleRateCalculator implements CalculatorInterface
             $additionalItems = $additionalItemLimit >= $additionalItems ? $additionalItems : $additionalItemLimit;
         }
 
-        return (int)($firstItemCost + ($additionalItems * $additionalItemCost));
+        return (int) ($firstItemCost + ($additionalItems * $additionalItemCost));
     }
 
     /**

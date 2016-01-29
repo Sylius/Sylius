@@ -12,12 +12,9 @@
 namespace Sylius\Bundle\AssociationBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
-use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -42,7 +39,7 @@ class SyliusAssociationExtension extends AbstractResourceExtension
                     continue;
                 }
 
-                $formDefinition = $container->getDefinition('sylius.form.type.' . $subjectName . '_' . $resourceName);
+                $formDefinition = $container->getDefinition('sylius.form.type.'.$subjectName.'_'.$resourceName);
                 $formDefinition->addArgument($subjectName);
             }
         }

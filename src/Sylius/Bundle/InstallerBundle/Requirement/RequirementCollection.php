@@ -17,7 +17,7 @@ use IteratorAggregate;
 class RequirementCollection implements IteratorAggregate
 {
     protected $label;
-    protected $requirements = array();
+    protected $requirements = [];
 
     public function __construct($label)
     {

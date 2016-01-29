@@ -25,7 +25,7 @@ class TaxonTranslationTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('TaxonTranslation', array('sylius'));
+        $this->beConstructedWith('TaxonTranslation', ['sylius']);
     }
 
     function it_is_initializable()
@@ -59,16 +59,16 @@ class TaxonTranslationTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
-                'data_class'        => 'TaxonTranslation',
-                'validation_groups' => array('sylius'),
-            ))
+            ->setDefaults([
+                'data_class' => 'TaxonTranslation',
+                'validation_groups' => ['sylius'],
+            ])
             ->shouldBeCalled()
         ;
 

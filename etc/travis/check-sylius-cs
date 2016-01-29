@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Argument 1: cs fixer config
+function run
+{
+    restore_cs_fixer_cache_from_cache "$1"
+    bin/php-cs-fixer fix --dry-run --diff . --config-file "etc/phpcs/.$1_cs"
+    ret=$?
+    store_cs_fixer_cache_in_cache "$1"
+    return $ret
+}
+
+# Argument 1: Cache file postfix
+function store_cs_fixer_cache_in_cache
+{
+    if [ -f .php_cs.cache ]; then
+        cp .php_cs.cache "$SYLIUS_CACHE_DIR/.php_cs.cache-$1"
+    fi
+}
+
+# Argument 1: Cache file postfix
+function restore_cs_fixer_cache_from_cache
+{
+    if [ -f "$SYLIUS_CACHE_DIR/.php_cs.cache-$1" ]; then
+        cp "$SYLIUS_CACHE_DIR/.php_cs.cache-$1" .php_cs.cache
+    fi
+}
+
+run "php"
+php=$?
+
+run "phpspec"
+phpspec=$?
+
+if [ $php -ne 0 ] || [ $phpspec -ne 0 ]; then
+    exit 1
+fi

@@ -31,10 +31,10 @@ class ORMTranslatableListener extends AbstractTranslatableListener implements Ev
      */
     public function getSubscribedEvents()
     {
-        return array(
+        return [
             Events::loadClassMetadata,
             Events::postLoad,
-        );
+        ];
     }
 
     /**
@@ -45,7 +45,7 @@ class ORMTranslatableListener extends AbstractTranslatableListener implements Ev
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
         $classMetadata = $eventArgs->getClassMetadata();
-        $reflection    = $classMetadata->reflClass;
+        $reflection = $classMetadata->reflClass;
 
         if (!$reflection || $reflection->isAbstract()) {
             return;
@@ -81,15 +81,15 @@ class ORMTranslatableListener extends AbstractTranslatableListener implements Ev
 
         $translationResourceMetadata = $this->registry->get($resourceMetadata->getAlias().'_translation');
 
-        $metadata->mapOneToMany(array(
-            'fieldName'     => 'translations',
-            'targetEntity'  => $translationResourceMetadata->getClass('model'),
-            'mappedBy'      => 'translatable',
-            'fetch'         => ClassMetadataInfo::FETCH_EXTRA_LAZY,
-            'indexBy'       => 'locale',
-            'cascade'       => array('persist', 'merge', 'remove'),
+        $metadata->mapOneToMany([
+            'fieldName' => 'translations',
+            'targetEntity' => $translationResourceMetadata->getClass('model'),
+            'mappedBy' => 'translatable',
+            'fetch' => ClassMetadataInfo::FETCH_EXTRA_LAZY,
+            'indexBy' => 'locale',
+            'cascade' => ['persist', 'merge', 'remove'],
             'orphanRemoval' => true,
-        ));
+        ]);
     }
 
     /**
@@ -109,42 +109,42 @@ class ORMTranslatableListener extends AbstractTranslatableListener implements Ev
 
         $translatableResourceMetadata = $this->registry->get(str_replace('_translation', '', $resourceMetadata->getAlias()));
 
-        $metadata->mapManyToOne(array(
-            'fieldName'    => 'translatable' ,
+        $metadata->mapManyToOne([
+            'fieldName' => 'translatable',
             'targetEntity' => $translatableResourceMetadata->getClass('model'),
-            'inversedBy'   => 'translations' ,
-            'joinColumns'  => array(array(
-                'name'                 => 'translatable_id',
+            'inversedBy' => 'translations',
+            'joinColumns' => [[
+                'name' => 'translatable_id',
                 'referencedColumnName' => 'id',
-                'onDelete'             => 'CASCADE',
-                'nullable'             => false,
-            )),
-        ));
+                'onDelete' => 'CASCADE',
+                'nullable' => false,
+            ]],
+        ]);
 
         if (!$metadata->hasField('locale')) {
-            $metadata->mapField(array(
+            $metadata->mapField([
                 'fieldName' => 'locale',
-                'type'      => 'string',
-                'nullable'  => false,
-            ));
+                'type' => 'string',
+                'nullable' => false,
+            ]);
         }
 
         // Map unique index.
-        $columns = array(
+        $columns = [
             $metadata->getSingleAssociationJoinColumnName('translatable'),
-            'locale'
-        );
+            'locale',
+        ];
 
         if (!$this->hasUniqueConstraint($metadata, $columns)) {
-            $constraints = isset($metadata->table['uniqueConstraints']) ? $metadata->table['uniqueConstraints'] : array();
+            $constraints = isset($metadata->table['uniqueConstraints']) ? $metadata->table['uniqueConstraints'] : [];
 
-            $constraints[$metadata->getTableName().'_uniq_trans'] = array(
+            $constraints[$metadata->getTableName().'_uniq_trans'] = [
                 'columns' => $columns,
-            );
+            ];
 
-            $metadata->setPrimaryTable(array(
+            $metadata->setPrimaryTable([
                 'uniqueConstraints' => $constraints,
-            ));
+            ]);
         }
     }
 

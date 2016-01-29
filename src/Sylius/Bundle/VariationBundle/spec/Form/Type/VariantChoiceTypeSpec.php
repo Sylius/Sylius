@@ -42,18 +42,18 @@ class VariantChoiceTypeSpec extends ObjectBehavior
             CollectionToArrayTransformer::class
         ))->shouldBeCalled();
 
-        $this->buildForm($builder, array(
-            'multiple' => true
-        ));
+        $this->buildForm($builder, [
+            'multiple' => true,
+        ]);
     }
 
     function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(Argument::withKey('choice_list'))->shouldBeCalled()->willReturn($resolver);
 
-        $resolver->setRequired(array(
-            'variable'
-        ))->shouldBeCalled()->willReturn($resolver);
+        $resolver->setRequired([
+            'variable',
+        ])->shouldBeCalled()->willReturn($resolver);
 
         $resolver->setAllowedTypes('variable', VariableInterface::class)->shouldBeCalled()->willReturn($resolver);
 

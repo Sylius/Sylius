@@ -24,13 +24,13 @@ class ObjectSelectionToIdentifierCollectionTransformer implements DataTransforme
     protected $objects;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $saveObjects;
 
     /**
      * @param object[] $objects
-     * @param boolean  $saveObjects
+     * @param bool  $saveObjects
      */
     public function __construct(array $objects, $saveObjects = true)
     {
@@ -44,7 +44,7 @@ class ObjectSelectionToIdentifierCollectionTransformer implements DataTransforme
     public function transform($value)
     {
         if (null === $value) {
-            return array();
+            return [];
         }
 
         if (!$value instanceof Collection) {

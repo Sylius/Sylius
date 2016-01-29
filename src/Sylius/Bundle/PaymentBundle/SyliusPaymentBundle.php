@@ -29,22 +29,21 @@ class SyliusPaymentBundle extends AbstractResourceBundle
      */
     public static function getSupportedDrivers()
     {
-        return array(
+        return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        );
+        ];
     }
-
 
     /**
      * {@inheritdoc}
      */
     protected function getModelInterfaces()
     {
-        return array(
-            CreditCardInterface::class    => 'sylius.model.credit_card.class',
-            PaymentInterface::class       => 'sylius.model.payment.class',
+        return [
+            CreditCardInterface::class => 'sylius.model.credit_card.class',
+            PaymentInterface::class => 'sylius.model.payment.class',
             PaymentMethodInterface::class => 'sylius.model.payment_method.class',
-        );
+        ];
     }
 
     /**

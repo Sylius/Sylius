@@ -13,7 +13,6 @@ namespace Sylius\Bundle\OrderBundle\Form\DataMapper;
 
 use Sylius\Bundle\OrderBundle\Modifier\OrderItemQuantityModifierInterface;
 use Symfony\Component\Form\DataMapperInterface;
-use Symfony\Component\Form\Exception;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -53,7 +52,7 @@ class OrderItemQuantityDataMapper implements DataMapperInterface
      */
     public function mapFormsToData($forms, &$data)
     {
-        $formsOtherThanQuantity = array();
+        $formsOtherThanQuantity = [];
         foreach ($forms as $key => $form) {
             if ('quantity' === $form->getName()) {
                 $targetQuantity = $form->getData();

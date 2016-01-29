@@ -14,14 +14,14 @@ namespace Sylius\Bundle\VariationBundle\DependencyInjection;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Resource\Factory\Factory;
-use Sylius\Component\Translation\Factory\TranslatableFactory;
+use Sylius\Bundle\VariationBundle\Form\Type\OptionTranslationType;
 use Sylius\Bundle\VariationBundle\Form\Type\OptionType;
 use Sylius\Bundle\VariationBundle\Form\Type\OptionValueType;
+use Sylius\Bundle\VariationBundle\Form\Type\VariantType;
+use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Component\Translation\Factory\TranslatableFactory;
 use Sylius\Component\Variation\Model\OptionTranslation;
 use Sylius\Component\Variation\Model\OptionTranslationInterface;
-use Sylius\Bundle\VariationBundle\Form\Type\OptionTranslationType;
-use Sylius\Bundle\VariationBundle\Form\Type\VariantType;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -94,7 +94,7 @@ class Configuration implements ConfigurationInterface
                                         ->children()
                                             ->arrayNode('default')
                                                 ->prototype('scalar')->end()
-                                                ->defaultValue(array('sylius'))
+                                                ->defaultValue(['sylius'])
                                                 ->cannotBeEmpty()
                                             ->end()
                                         ->end()
@@ -128,7 +128,7 @@ class Configuration implements ConfigurationInterface
                                         ->children()
                                             ->arrayNode('default')
                                                 ->prototype('scalar')->end()
-                                                ->defaultValue(array('sylius'))
+                                                ->defaultValue(['sylius'])
                                                 ->cannotBeEmpty()
                                             ->end()
                                         ->end()
@@ -160,13 +160,13 @@ class Configuration implements ConfigurationInterface
                                                 ->children()
                                                     ->arrayNode('default')
                                                         ->prototype('scalar')->end()
-                                                        ->defaultValue(array('sylius'))
+                                                        ->defaultValue(['sylius'])
                                                     ->end()
                                                 ->end()
                                             ->end()
                                             ->arrayNode('fields')
                                                 ->prototype('scalar')->end()
-                                                ->defaultValue(array('presentation'))
+                                                ->defaultValue(['presentation'])
                                             ->end()
                                         ->end()
                                     ->end()
@@ -198,7 +198,7 @@ class Configuration implements ConfigurationInterface
                                         ->children()
                                             ->arrayNode('default')
                                                 ->prototype('scalar')->end()
-                                                ->defaultValue(array('sylius'))
+                                                ->defaultValue(['sylius'])
                                             ->end()
                                         ->end()
                                     ->end()

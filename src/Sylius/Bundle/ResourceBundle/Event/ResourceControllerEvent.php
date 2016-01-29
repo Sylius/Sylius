@@ -18,9 +18,9 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class ResourceControllerEvent extends GenericEvent
 {
-    const TYPE_ERROR   = 'error';
+    const TYPE_ERROR = 'error';
     const TYPE_WARNING = 'warning';
-    const TYPE_INFO    = 'info';
+    const TYPE_INFO = 'info';
     const TYPE_SUCCESS = 'success';
 
     /**
@@ -36,10 +36,10 @@ class ResourceControllerEvent extends GenericEvent
     /**
      * @var array
      */
-    protected $messageParameters = array();
+    protected $messageParameters = [];
 
     /**
-     * @var integer
+     * @var int
      */
     protected $errorCode = 500;
 
@@ -50,7 +50,7 @@ class ResourceControllerEvent extends GenericEvent
      * @param string $type
      * @param array  $parameters
      */
-    public function stop($message, $type = self::TYPE_ERROR, $parameters = array(), $errorCode = 500)
+    public function stop($message, $type = self::TYPE_ERROR, $parameters = [], $errorCode = 500)
     {
         $this->messageType = $type;
         $this->message = $message;

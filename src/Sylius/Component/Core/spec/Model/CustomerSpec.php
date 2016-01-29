@@ -17,7 +17,6 @@ use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 
 /**
-
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
 class CustomerSpec extends ObjectBehavior

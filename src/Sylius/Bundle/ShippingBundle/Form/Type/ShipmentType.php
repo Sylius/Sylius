@@ -26,21 +26,21 @@ class ShipmentType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('state', 'choice', array(
-                'label'   => 'sylius.form.shipment.state',
-                'choices' => array(
-                    ShipmentInterface::STATE_CHECKOUT   => 'sylius.form.shipment.states.checkout',
-                    ShipmentInterface::STATE_PENDING    => 'sylius.form.shipment.states.pending',
-                    ShipmentInterface::STATE_READY      => 'sylius.form.shipment.states.ready',
-                    ShipmentInterface::STATE_SHIPPED    => 'sylius.form.shipment.states.shipped',
-                    ShipmentInterface::STATE_RETURNED   => 'sylius.form.shipment.states.returned',
-                    ShipmentInterface::STATE_CANCELLED  => 'sylius.form.shipment.states.cancelled',
-                ),
-            ))
-            ->add('tracking', 'text', array(
-                'label'    => 'sylius.form.shipment.tracking_code',
+            ->add('state', 'choice', [
+                'label' => 'sylius.form.shipment.state',
+                'choices' => [
+                    ShipmentInterface::STATE_CHECKOUT => 'sylius.form.shipment.states.checkout',
+                    ShipmentInterface::STATE_PENDING => 'sylius.form.shipment.states.pending',
+                    ShipmentInterface::STATE_READY => 'sylius.form.shipment.states.ready',
+                    ShipmentInterface::STATE_SHIPPED => 'sylius.form.shipment.states.shipped',
+                    ShipmentInterface::STATE_RETURNED => 'sylius.form.shipment.states.returned',
+                    ShipmentInterface::STATE_CANCELLED => 'sylius.form.shipment.states.cancelled',
+                ],
+            ])
+            ->add('tracking', 'text', [
+                'label' => 'sylius.form.shipment.tracking_code',
                 'required' => false,
-            ))
+            ])
         ;
     }
 

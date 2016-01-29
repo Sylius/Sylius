@@ -47,9 +47,9 @@ class RuleType extends AbstractResourceType
     {
         $builder
             ->addEventSubscriber(new BuildRuleFormSubscriber($this->checkerRegistry, $builder->getFormFactory()))
-            ->add('type', 'sylius_shipping_rule_choice', array(
+            ->add('type', 'sylius_shipping_rule_choice', [
                 'label' => 'sylius.form.rule.type',
-            ))
+            ])
         ;
     }
 

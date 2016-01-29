@@ -26,7 +26,7 @@ class EuropeanCentralBankImporter extends AbstractImporter
     /**
      * {@inheritdoc}
      */
-    public function configure(array $options = array())
+    public function configure(array $options = [])
     {
         if (!isset($options['base_currency'])) {
             throw new \InvalidArgumentException('"base_currency" must be set in order to use EuropeanCentralBankImporter.');
@@ -38,7 +38,7 @@ class EuropeanCentralBankImporter extends AbstractImporter
     /**
      * {@inheritdoc}
      */
-    public function import(array $managedCurrencies = array())
+    public function import(array $managedCurrencies = [])
     {
         $xml = @simplexml_load_file($this->url);
         if ($xml instanceof \SimpleXMLElement) {

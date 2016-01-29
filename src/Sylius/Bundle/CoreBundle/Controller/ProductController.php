@@ -60,7 +60,7 @@ class ProductController extends ResourceController
             }
         }
 
-        /**
+        /*
          * when using elastic search if you want to setup multiple indexes and control
          * them separately you can do so by adding the index service with a setter
          *
@@ -73,9 +73,9 @@ class ProductController extends ResourceController
          */
         $finder = $this->container->get('sylius_search.finder')
             ->setFacetGroup('categories_set')
-            ->find(new TaxonQuery($taxon, $request->query->get('filters', array())));
+            ->find(new TaxonQuery($taxon, $request->query->get('filters', [])));
 
-        $config = $this->container->getParameter("sylius_search.config");
+        $config = $this->container->getParameter('sylius_search.config');
 
         $paginator = $finder->getPaginator();
 
@@ -98,7 +98,7 @@ class ProductController extends ResourceController
      * List products categorized under given taxon (fetch by its ID).
      *
      * @param Request $request
-     * @param integer $id
+     * @param int $id
      *
      * @return Response
      *
@@ -166,7 +166,6 @@ class ProductController extends ResourceController
         return $this->renderArchetypeResults($archetype, $paginator, 'productIndex.html', $request->query->get('page', 1));
     }
 
-
     /**
      * Show product details in frontend.
      *
@@ -218,17 +217,17 @@ class ProductController extends ResourceController
 
         $repository = $this->get('doctrine')->getManager()->getRepository(LogEntry::class);
 
-        $variants = array();
+        $variants = [];
         foreach ($product->getVariants() as $variant) {
             $variants[] = $repository->getLogEntries($variant);
         }
 
-        $attributes = array();
+        $attributes = [];
         foreach ($product->getAttributes() as $attribute) {
             $attributes[] = $repository->getLogEntries($attribute);
         }
 
-        $options = array();
+        $options = [];
         if (empty($variants)) {
             foreach ($product->getOptions() as $option) {
                 $options[] = $repository->getLogEntries($option);
@@ -237,15 +236,15 @@ class ProductController extends ResourceController
 
         $view = View::create()
             ->setTemplate($configuration->getTemplate('history.html'))
-            ->setData(array(
+            ->setData([
                 'product' => $product,
-                'logs'    => array(
-                    'product'    => $repository->getLogEntries($product),
-                    'variants'   => $variants,
+                'logs' => [
+                    'product' => $repository->getLogEntries($product),
+                    'variants' => $variants,
                     'attributes' => $attributes,
-                    'options'    => $options,
-                ),
-            ))
+                    'options' => $options,
+                ],
+            ])
         ;
 
         return $this->viewHandler->handle($configuration, $view);
@@ -260,9 +259,9 @@ class ProductController extends ResourceController
      */
     public function filterFormAction(Request $request)
     {
-        return $this->container->get('templating')->renderResponse('SyliusWebBundle:Backend/Product:filterForm.html.twig', array(
-            'form' => $this->container->get('form.factory')->createNamed('criteria', 'sylius_product_filter', $request->query->get('criteria'))->createView()
-        ));
+        return $this->container->get('templating')->renderResponse('SyliusWebBundle:Backend/Product:filterForm.html.twig', [
+            'form' => $this->container->get('form.factory')->createNamed('criteria', 'sylius_product_filter', $request->query->get('criteria'))->createView(),
+        ]);
     }
 
     // @todo refactor this when PRs about API & search get merged
@@ -272,20 +271,20 @@ class ProductController extends ResourceController
             throw new NotFoundHttpException();
         }
 
-        /** @var $products ProductInterface[] */
-        $results  = array();
+        /* @var $products ProductInterface[] */
+        $results = [];
         $products = $this->container->get('sylius.repository.product')->createFilterPaginator($request->query->get('criteria'));
-        $helper   = $this->container->get('sylius.templating.helper.currency');
+        $helper = $this->container->get('sylius.templating.helper.currency');
         foreach ($products as $product) {
-            $results[] = array(
-                'id'             => $product->getMasterVariant()->getId(),
-                'name'           => $product->getName(),
-                'image'          => $product->getImage()->getPath(),
-                'price'          => $helper->convertAndFormatAmount($product->getMasterVariant()->getPrice()),
+            $results[] = [
+                'id' => $product->getMasterVariant()->getId(),
+                'name' => $product->getName(),
+                'image' => $product->getImage()->getPath(),
+                'price' => $helper->convertAndFormatAmount($product->getMasterVariant()->getPrice()),
                 'original_price' => $helper->convertAndFormatAmount($product->getMasterVariant()->getOriginalPrice()),
-                'raw_price'      => $helper->convertAndFormatAmount($product->getMasterVariant()->getPrice(), null, true),
-                'desc'           => $product->getShortDescription(),
-            );
+                'raw_price' => $helper->convertAndFormatAmount($product->getMasterVariant()->getPrice(), null, true),
+                'desc' => $product->getShortDescription(),
+            ];
         }
 
         return new JsonResponse($results);
@@ -319,23 +318,22 @@ class ProductController extends ResourceController
         $searchTerm = null,
         $searchParam = null,
         $requestMethod = null
-    )
-    {
+    ) {
         $results->setCurrentPage($page, true, true);
         $results->setMaxPerPage($configuration->getPaginationMaxPerPage());
 
         $view = View::create()
             ->setTemplate($configuration->getTemplate($template))
-            ->setData(array(
-                'taxon'    => $taxon,
+            ->setData([
+                'taxon' => $taxon,
                 'products' => $results,
-                'facets'   => $facets,
+                'facets' => $facets,
                 'facetTags' => $facetTags,
                 'filters' => $filters,
                 'searchTerm' => $searchTerm,
                 'searchParam' => $searchParam,
-                'requestMethod' => $requestMethod
-            ))
+                'requestMethod' => $requestMethod,
+            ])
         ;
 
         return $this->viewHandler->handle($configuration, $view);
@@ -354,17 +352,17 @@ class ProductController extends ResourceController
         Pagerfanta $results,
         $template,
         $page
-    ){
+    ) {
         $results->setCurrentPage($page, true, true);
         $results->setMaxPerPage($this->config->getPaginationMaxPerPage());
 
         $view = $this
             ->view()
             ->setTemplate($this->config->getTemplate($template))
-            ->setData(array(
+            ->setData([
                 'archetype' => $archetype,
-                'products' => $results
-            ))
+                'products' => $results,
+            ])
         ;
 
         return $this->handleView($view);

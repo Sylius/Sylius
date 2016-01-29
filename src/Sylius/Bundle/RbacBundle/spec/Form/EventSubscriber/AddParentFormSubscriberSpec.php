@@ -15,10 +15,10 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Rbac\Model\RoleInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
@@ -27,7 +27,7 @@ class AddParentFormSubscriberSpec extends ObjectBehavior
 {
     function let()
     {
-       $this->beConstructedWith('role');
+        $this->beConstructedWith('role');
     }
 
     function it_is_initializable()
@@ -42,7 +42,7 @@ class AddParentFormSubscriberSpec extends ObjectBehavior
 
     function it_subscribes_to_event()
     {
-        $this::getSubscribedEvents()->shouldReturn(array(FormEvents::PRE_SET_DATA => 'preSetData'));
+        $this::getSubscribedEvents()->shouldReturn([FormEvents::PRE_SET_DATA => 'preSetData']);
     }
 
     function it_add_parent_if_it_is_not_set_and_resource_has_not_id(FormEvent $event, FormInterface $form, RoleInterface $role)

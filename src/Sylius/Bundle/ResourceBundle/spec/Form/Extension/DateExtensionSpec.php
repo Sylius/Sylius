@@ -32,24 +32,24 @@ class DateExtensionSpec extends ObjectBehavior
 
     function it_should_build_the_view_by_default(FormView $view, FormInterface $form)
     {
-        $this->buildView($view, $form, array(
+        $this->buildView($view, $form, [
             'widget' => 'single_text',
             'format' => 'M/d/y',
             'placeholder' => null,
             'language' => 'fr',
             'leading_zero' => false,
-        ));
+        ]);
     }
 
     function it_should_configure_the_resolver(OptionsResolver $resolver)
     {
         $resolver->setDefaults(Argument::type('array'))->shouldBeCalled();
 
-        $resolver->setDefined(array(
+        $resolver->setDefined([
             'placeholder',
             'language',
             'leading_zero',
-        ))->shouldBeCalled();
+        ])->shouldBeCalled();
 
         $resolver->setAllowedTypes('placeholder', 'string')->shouldBeCalled();
         $resolver->setAllowedTypes('language', 'string')->shouldBeCalled();

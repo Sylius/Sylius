@@ -63,7 +63,7 @@ class ShippingContext implements Context
         $shippingMethod->setCode('SM1');
         $shippingMethod->setName('Free');
         $shippingMethod->setCurrentLocale('FR');
-        $shippingMethod->setConfiguration(array('amount' => 0));
+        $shippingMethod->setConfiguration(['amount' => 0]);
         $shippingMethod->setCalculator(DefaultCalculators::PER_ITEM_RATE);
         $shippingMethod->setZone($zone);
 

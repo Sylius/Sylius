@@ -38,7 +38,7 @@ class EventDispatcherSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\EventDispatcher');
     }
-    
+
     function it_implements_event_dispatcher_interface()
     {
         $this->shouldImplement(ControllerEventDispatcherInterface::class);
@@ -49,8 +49,7 @@ class EventDispatcherSpec extends ObjectBehavior
         MetadataInterface $metadata,
         EventDispatcherInterface $eventDispatcher,
         ResourceInterface $resource
-    )
-    {
+    ) {
         $requestConfiguration->getEvent()->willReturn(null);
         $requestConfiguration->getMetadata()->willReturn($metadata);
         $metadata->getApplicationName()->willReturn('sylius');
@@ -66,8 +65,7 @@ class EventDispatcherSpec extends ObjectBehavior
         MetadataInterface $metadata,
         EventDispatcherInterface $eventDispatcher,
         ResourceInterface $resource
-    )
-    {
+    ) {
         $requestConfiguration->getEvent()->willReturn('register');
         $requestConfiguration->getMetadata()->willReturn($metadata);
         $metadata->getApplicationName()->willReturn('sylius');
@@ -83,8 +81,7 @@ class EventDispatcherSpec extends ObjectBehavior
         MetadataInterface $metadata,
         EventDispatcherInterface $eventDispatcher,
         ResourceInterface $resource
-    )
-    {
+    ) {
         $requestConfiguration->getEvent()->willReturn(null);
         $requestConfiguration->getMetadata()->willReturn($metadata);
         $metadata->getApplicationName()->willReturn('sylius');
@@ -100,8 +97,7 @@ class EventDispatcherSpec extends ObjectBehavior
         MetadataInterface $metadata,
         EventDispatcherInterface $eventDispatcher,
         ResourceInterface $resource
-    )
-    {
+    ) {
         $requestConfiguration->getEvent()->willReturn('register');
         $requestConfiguration->getMetadata()->willReturn($metadata);
         $metadata->getApplicationName()->willReturn('sylius');
@@ -117,8 +113,7 @@ class EventDispatcherSpec extends ObjectBehavior
         MetadataInterface $metadata,
         EventDispatcherInterface $eventDispatcher,
         ResourceInterface $resource
-    )
-    {
+    ) {
         $requestConfiguration->getEvent()->willReturn(null);
         $requestConfiguration->getMetadata()->willReturn($metadata);
         $metadata->getApplicationName()->willReturn('sylius');
@@ -134,8 +129,7 @@ class EventDispatcherSpec extends ObjectBehavior
         MetadataInterface $metadata,
         EventDispatcherInterface $eventDispatcher,
         ResourceInterface $resource
-    )
-    {
+    ) {
         $requestConfiguration->getEvent()->willReturn('register');
         $requestConfiguration->getMetadata()->willReturn($metadata);
         $metadata->getApplicationName()->willReturn('sylius');

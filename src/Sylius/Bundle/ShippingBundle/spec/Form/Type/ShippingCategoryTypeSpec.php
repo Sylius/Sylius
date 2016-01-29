@@ -25,7 +25,7 @@ class ShippingCategoryTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('ShippingCategory', array('sylius'));
+        $this->beConstructedWith('ShippingCategory', ['sylius']);
     }
 
     function it_is_initializable()
@@ -59,16 +59,16 @@ class ShippingCategoryTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
-                'data_class'        => 'ShippingCategory',
-                'validation_groups' => array('sylius'),
-            ))
+            ->setDefaults([
+                'data_class' => 'ShippingCategory',
+                'validation_groups' => ['sylius'],
+            ])
             ->shouldBeCalled()
         ;
 

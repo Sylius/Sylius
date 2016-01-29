@@ -28,9 +28,9 @@ class SyliusCartBundle extends AbstractResourceBundle
      */
     public static function getSupportedDrivers()
     {
-        return array(
+        return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        );
+        ];
     }
 
     /**
@@ -46,10 +46,10 @@ class SyliusCartBundle extends AbstractResourceBundle
      */
     protected function getModelInterfaces()
     {
-        return array(
-            CartInterface::class     => 'sylius.model.cart.class',
+        return [
+            CartInterface::class => 'sylius.model.cart.class',
             CartItemInterface::class => 'sylius.model.cart_item.class',
-        );
+        ];
     }
 
     /**

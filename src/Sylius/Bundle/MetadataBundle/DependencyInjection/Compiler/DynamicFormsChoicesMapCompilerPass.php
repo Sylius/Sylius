@@ -11,11 +11,9 @@
 
 namespace Sylius\Bundle\MetadataBundle\DependencyInjection\Compiler;
 
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -52,7 +50,7 @@ class DynamicFormsChoicesMapCompilerPass implements CompilerPassInterface
                 $tags[0]['group'],
                 $dataClass,
                 $formName,
-                isset($tags[0]['label']) ? $tags[0]['label'] : $formName
+                isset($tags[0]['label']) ? $tags[0]['label'] : $formName,
             ]);
         }
     }

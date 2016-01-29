@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 
@@ -30,7 +29,7 @@ class DisabledAuthorizationCheckerSpec extends ObjectBehavior
     {
         $this->shouldImplement(AuthorizationCheckerInterface::class);
     }
-    
+
     function it_always_returns_true(RequestConfiguration $requestConfiguration)
     {
         $this->isGranted($requestConfiguration, 'create')->shouldReturn(true);

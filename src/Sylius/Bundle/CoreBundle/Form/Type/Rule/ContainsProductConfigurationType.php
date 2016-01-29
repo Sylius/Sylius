@@ -41,33 +41,33 @@ class ContainsProductConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('variant', 'sylius_entity_to_identifier', array(
+            ->add('variant', 'sylius_entity_to_identifier', [
                 'label' => 'sylius.form.action.add_product_configuration.variant',
                 'class' => $this->variantRepository->getClassName(),
                 'query_builder' => function () {
                     return $this->variantRepository->getFormQueryBuilder();
                 },
-                'constraints'   => array(
+                'constraints' => [
                     new NotBlank(),
-                    new Type(array('type' => 'numeric')),
-                )
-            ))
-            ->add('count', 'integer', array(
+                    new Type(['type' => 'numeric']),
+                ],
+            ])
+            ->add('count', 'integer', [
                 'label' => 'sylius.form.rule.item_count_configuration.count',
-                'constraints' => array(
+                'constraints' => [
                     new NotBlank(),
-                    new Type(array('type' => 'numeric')),
-                ),
-            ))
-            ->add('equal', 'checkbox', array(
+                    new Type(['type' => 'numeric']),
+                ],
+            ])
+            ->add('equal', 'checkbox', [
                 'label' => 'sylius.form.rule.item_count_configuration.equal',
-                'constraints' => array(
-                    new Type(array('type' => 'bool')),
-                ),
-            ))
-            ->add('exclude', 'checkbox', array(
+                'constraints' => [
+                    new Type(['type' => 'bool']),
+                ],
+            ])
+            ->add('exclude', 'checkbox', [
                 'label' => 'sylius.form.rule.contains_product_configuration.exclude',
-            ))
+            ])
         ;
     }
 

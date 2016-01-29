@@ -38,7 +38,7 @@ class MailerListenerSpec extends ObjectBehavior
 
         $user->getEmail()->willReturn('test@example.com');
 
-        $sender->send('reset_password_token', array('test@example.com'), Argument::any())->shouldBeCalled();
+        $sender->send('reset_password_token', ['test@example.com'], Argument::any())->shouldBeCalled();
 
         $this->sendResetPasswordTokenEmail($event);
     }
@@ -49,7 +49,7 @@ class MailerListenerSpec extends ObjectBehavior
 
         $user->getEmail()->willReturn('test@example.com');
 
-        $sender->send('reset_password_pin', array('test@example.com'), Argument::any())->shouldBeCalled();
+        $sender->send('reset_password_pin', ['test@example.com'], Argument::any())->shouldBeCalled();
 
         $this->sendResetPasswordPinEmail($event);
     }

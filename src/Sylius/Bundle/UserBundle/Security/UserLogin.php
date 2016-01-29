@@ -54,7 +54,7 @@ class UserLogin implements UserLoginInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function login(UserInterface $user, $firewallName = 'main')
     {

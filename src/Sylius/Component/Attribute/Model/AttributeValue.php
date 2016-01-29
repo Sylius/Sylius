@@ -163,7 +163,7 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getBoolean()
     {
@@ -171,7 +171,7 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @param boolean $boolean
+     * @param bool $boolean
      */
     public function setBoolean($boolean)
     {

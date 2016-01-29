@@ -28,7 +28,7 @@ interface PaymentMethodsAwareInterface
     /**
      * @param PaymentMethodInterface $paymentMethod
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasPaymentMethod(PaymentMethodInterface $paymentMethod);
 

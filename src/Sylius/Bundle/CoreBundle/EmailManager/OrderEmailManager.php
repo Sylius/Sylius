@@ -38,6 +38,6 @@ class OrderEmailManager
      */
     public function sendConfirmationEmail(OrderInterface $order)
     {
-        $this->emailSender->send(Emails::ORDER_CONFIRMATION, array($order->getCustomer()->getEmail()), array('order' => $order));
+        $this->emailSender->send(Emails::ORDER_CONFIRMATION, [$order->getCustomer()->getEmail()], ['order' => $order]);
     }
 }

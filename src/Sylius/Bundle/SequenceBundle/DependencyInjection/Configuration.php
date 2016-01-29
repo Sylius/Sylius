@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\SequenceBundle\DependencyInjection;
 
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Factory\Factory;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Sequence\Model\Sequence;
 use Sylius\Component\Sequence\Model\SequenceInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;

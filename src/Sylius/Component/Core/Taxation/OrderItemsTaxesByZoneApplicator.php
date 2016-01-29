@@ -66,12 +66,12 @@ class OrderItemsTaxesByZoneApplicator implements OrderItemsTaxesByZoneApplicator
     public function apply(OrderInterface $order, ZoneInterface $zone)
     {
         foreach ($order->getItems() as $item) {
-            $quantity =  $item->getQuantity();
+            $quantity = $item->getQuantity();
             if (0 === $quantity) {
                 continue;
             }
 
-            $taxRate = $this->taxRateResolver->resolve($item->getProduct(), array('zone' => $zone));
+            $taxRate = $this->taxRateResolver->resolve($item->getProduct(), ['zone' => $zone]);
 
             if (null === $taxRate) {
                 continue;

@@ -65,8 +65,8 @@ class VariantGenerator implements VariantGeneratorInterface
             throw new \InvalidArgumentException('Cannot generate variants for an object without options.');
         }
 
-        $optionSet = array();
-        $optionMap = array();
+        $optionSet = [];
+        $optionMap = [];
 
         foreach ($variable->getOptions() as $k => $option) {
             foreach ($option->getValues() as $value) {

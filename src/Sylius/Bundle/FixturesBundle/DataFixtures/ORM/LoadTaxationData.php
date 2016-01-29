@@ -87,7 +87,7 @@ class LoadTaxationData extends DataFixture
      * @param string  $name
      * @param string  $zoneCode
      * @param float   $amount
-     * @param Boolean $includedInPrice
+     * @param bool $includedInPrice
      * @param string  $calculator
      *
      * @return TaxRateInterface

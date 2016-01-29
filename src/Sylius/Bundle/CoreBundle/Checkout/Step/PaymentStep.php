@@ -65,11 +65,11 @@ class PaymentStep extends CheckoutStep
 
     protected function renderStep(ProcessContextInterface $context, OrderInterface $order, FormInterface $form)
     {
-        return $this->render($this->container->getParameter(sprintf('sylius.checkout.step.%s.template', $this->getName())), array(
-            'order'   => $order,
-            'form'    => $form->createView(),
-            'context' => $context
-        ));
+        return $this->render($this->container->getParameter(sprintf('sylius.checkout.step.%s.template', $this->getName())), [
+            'order' => $order,
+            'form' => $form->createView(),
+            'context' => $context,
+        ]);
     }
 
     protected function createCheckoutPaymentForm(OrderInterface $order)

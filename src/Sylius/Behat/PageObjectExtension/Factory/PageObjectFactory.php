@@ -79,8 +79,8 @@ final class PageObjectFactory implements Factory
     }
 
     /**
-    * {@inheritdoc}
-    */
+     * {@inheritdoc}
+     */
     public function createElement($name)
     {
         return $this->decoratedFactory->createElement($name);

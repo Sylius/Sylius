@@ -46,10 +46,10 @@ class CartController extends Controller
 
         $view = View::create()
             ->setTemplate($configuration->getTemplate('summary.html'))
-            ->setData(array(
+            ->setData([
                 'cart' => $cart,
-                'form' => $form->createView()
-            ))
+                'form' => $form->createView(),
+            ])
         ;
 
         return $this->viewHandler->handle($configuration, $view);
@@ -91,10 +91,10 @@ class CartController extends Controller
 
         $view = View::create()
             ->setTemplate($configuration->getTemplate('summary.html'))
-            ->setData(array(
+            ->setData([
                 'cart' => $cart,
-                'form' => $form->createView()
-            ))
+                'form' => $form->createView(),
+            ])
         ;
 
         return $this->viewHandler->handle($configuration, $view);

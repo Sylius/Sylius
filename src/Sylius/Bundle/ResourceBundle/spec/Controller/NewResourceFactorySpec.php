@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\NewResourceFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -26,7 +25,7 @@ class NewResourceFactorySpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\NewResourceFactory');
     }
-    
+
     function it_implements_new_resource_factory_interface()
     {
         $this->shouldImplement(NewResourceFactoryInterface::class);
@@ -36,18 +35,18 @@ class NewResourceFactorySpec extends ObjectBehavior
     {
         $requestConfiguration->getFactoryMethod()->willReturn(null);
 
-        $factory->createNew()->willReturn(array('foo', 'bar'));
+        $factory->createNew()->willReturn(['foo', 'bar']);
 
-        $this->create($requestConfiguration, $factory)->shouldReturn(array('foo', 'bar'));
+        $this->create($requestConfiguration, $factory)->shouldReturn(['foo', 'bar']);
     }
 
     function it_calls_proper_factory_methods_based_on_configuration(RequestConfiguration $requestConfiguration, FactoryInterface $factory)
     {
         $requestConfiguration->getFactoryMethod()->willReturn('createNew');
-        $requestConfiguration->getFactoryArguments()->willReturn(array('00032'));
+        $requestConfiguration->getFactoryArguments()->willReturn(['00032']);
 
-        $factory->createNew('00032')->willReturn(array('foo', 'bar'));
+        $factory->createNew('00032')->willReturn(['foo', 'bar']);
 
-        $this->create($requestConfiguration, $factory)->shouldReturn(array('foo', 'bar'));
+        $this->create($requestConfiguration, $factory)->shouldReturn(['foo', 'bar']);
     }
 }

@@ -35,9 +35,9 @@ class SyliusApiExtension extends AbstractResourceExtension implements PrependExt
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $configFiles = array(
-            'services.xml'
-        );
+        $configFiles = [
+            'services.xml',
+        ];
 
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
@@ -58,17 +58,17 @@ class SyliusApiExtension extends AbstractResourceExtension implements PrependExt
         $config = $this->processConfiguration(new Configuration(), $container->getExtensionConfig($this->getAlias()));
         $resourcesConfig = $config['resources'];
 
-        $container->prependExtensionConfig('fos_oauth_server', array(
-            'db_driver'           => 'orm',
-            'client_class'        => $resourcesConfig['api_client']['classes']['model'],
-            'access_token_class'  => $resourcesConfig['api_access_token']['classes']['model'],
+        $container->prependExtensionConfig('fos_oauth_server', [
+            'db_driver' => 'orm',
+            'client_class' => $resourcesConfig['api_client']['classes']['model'],
+            'access_token_class' => $resourcesConfig['api_access_token']['classes']['model'],
             'refresh_token_class' => $resourcesConfig['api_refresh_token']['classes']['model'],
-            'auth_code_class'     => $resourcesConfig['api_auth_code']['classes']['model'],
+            'auth_code_class' => $resourcesConfig['api_auth_code']['classes']['model'],
 
-            'service'             => array(
-                'user_provider'  => 'sylius.user_provider.name_or_email',
+            'service' => [
+                'user_provider' => 'sylius.user_provider.name_or_email',
                 'client_manager' => 'sylius.oauth_server.client_manager',
-            ),
-        ));
+            ],
+        ]);
     }
 }

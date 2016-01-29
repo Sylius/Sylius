@@ -34,7 +34,7 @@ class RegisterResourcesPass implements CompilerPassInterface
         $registry = $container->getDefinition('sylius.resource_registry');
 
         foreach ($resources as $alias => $configuration) {
-            $registry->addMethodCall('addFromAliasAndConfiguration', array($alias, $configuration));
+            $registry->addMethodCall('addFromAliasAndConfiguration', [$alias, $configuration]);
         }
     }
 }

@@ -67,11 +67,11 @@ class PurchaseListenerSpec extends ObjectBehavior
         $payment->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
 
         $translator
-            ->trans('sylius.checkout.success', array(), 'flashes')
+            ->trans('sylius.checkout.success', [], 'flashes')
             ->shouldBeCalled()
             ->willReturn('translated.sylius.checkout.success')
         ;
-        $flashBag->add('success','translated.sylius.checkout.success')->shouldBeCalled();
+        $flashBag->add('success', 'translated.sylius.checkout.success')->shouldBeCalled();
 
         $this->addFlash($event);
     }
@@ -99,11 +99,11 @@ class PurchaseListenerSpec extends ObjectBehavior
         $payment->getState()->willReturn(PaymentInterface::STATE_PENDING);
 
         $translator
-            ->trans('sylius.checkout.processing', array(), 'flashes')
+            ->trans('sylius.checkout.processing', [], 'flashes')
             ->shouldBeCalled()
             ->willReturn('translated.sylius.checkout.processing')
         ;
-        $flashBag->add('notice','translated.sylius.checkout.processing')->shouldBeCalled();
+        $flashBag->add('notice', 'translated.sylius.checkout.processing')->shouldBeCalled();
 
         $this->addFlash($event);
     }
@@ -131,11 +131,11 @@ class PurchaseListenerSpec extends ObjectBehavior
         $payment->getState()->willReturn(PaymentInterface::STATE_PROCESSING);
 
         $translator
-            ->trans('sylius.checkout.processing', array(), 'flashes')
+            ->trans('sylius.checkout.processing', [], 'flashes')
             ->shouldBeCalled()
             ->willReturn('translated.sylius.checkout.processing')
         ;
-        $flashBag->add('notice','translated.sylius.checkout.processing')->shouldBeCalled();
+        $flashBag->add('notice', 'translated.sylius.checkout.processing')->shouldBeCalled();
 
         $this->addFlash($event);
     }
@@ -163,11 +163,11 @@ class PurchaseListenerSpec extends ObjectBehavior
         $payment->getState()->willReturn(PaymentInterface::STATE_VOID);
 
         $translator
-            ->trans('sylius.checkout.canceled', array(), 'flashes')
+            ->trans('sylius.checkout.canceled', [], 'flashes')
             ->shouldBeCalled()
             ->willReturn('translated.sylius.checkout.canceled')
         ;
-        $flashBag->add('notice','translated.sylius.checkout.canceled')->shouldBeCalled();
+        $flashBag->add('notice', 'translated.sylius.checkout.canceled')->shouldBeCalled();
 
         $this->addFlash($event);
     }
@@ -195,11 +195,11 @@ class PurchaseListenerSpec extends ObjectBehavior
         $payment->getState()->willReturn(PaymentInterface::STATE_FAILED);
 
         $translator
-            ->trans('sylius.checkout.failed', array(), 'flashes')
+            ->trans('sylius.checkout.failed', [], 'flashes')
             ->shouldBeCalled()
             ->willReturn('translated.sylius.checkout.failed')
         ;
-        $flashBag->add('error','translated.sylius.checkout.failed')->shouldBeCalled();
+        $flashBag->add('error', 'translated.sylius.checkout.failed')->shouldBeCalled();
 
         $this->addFlash($event);
     }
@@ -227,11 +227,11 @@ class PurchaseListenerSpec extends ObjectBehavior
         $payment->getState()->willReturn(PaymentInterface::STATE_UNKNOWN);
 
         $translator
-            ->trans('sylius.checkout.unknown', array(), 'flashes')
+            ->trans('sylius.checkout.unknown', [], 'flashes')
             ->shouldBeCalled()
             ->willReturn('translated.sylius.checkout.unknown')
         ;
-        $flashBag->add('error','translated.sylius.checkout.unknown')->shouldBeCalled();
+        $flashBag->add('error', 'translated.sylius.checkout.unknown')->shouldBeCalled();
 
         $this->addFlash($event);
     }

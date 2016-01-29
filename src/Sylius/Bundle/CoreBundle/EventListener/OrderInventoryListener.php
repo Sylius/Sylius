@@ -58,10 +58,10 @@ class OrderInventoryListener
         $orderItem = $this->getItem($event);
 
         $state = PropertyAccess::createPropertyAccessor()->getValue(
-            array(
+            [
                 OrderInterface::STATE_PENDING => InventoryUnitInterface::STATE_ONHOLD,
                 OrderInterface::STATE_SHIPPED => InventoryUnitInterface::STATE_SOLD,
-            ),
+            ],
             sprintf('[%s]', $orderItem->getOrder()->getState())
         );
 

@@ -29,10 +29,10 @@ class TaxonomyType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('translations', 'a2lix_translationsForms', array(
+            ->add('translations', 'a2lix_translationsForms', [
                 'form_type' => 'sylius_taxonomy_translation',
-                'label'    => 'sylius.form.taxonomy.name',
-            ))
+                'label' => 'sylius.form.taxonomy.name',
+            ])
             ->addEventSubscriber(new AddCodeFormSubscriber())
         ;
     }

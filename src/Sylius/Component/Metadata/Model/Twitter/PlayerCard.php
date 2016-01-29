@@ -44,12 +44,12 @@ class PlayerCard extends AbstractCard implements PlayerCardInterface
     protected $player;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $playerWidth;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $playerHeight;
 
@@ -120,7 +120,7 @@ class PlayerCard extends AbstractCard implements PlayerCardInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function setPlayer($player)
     {

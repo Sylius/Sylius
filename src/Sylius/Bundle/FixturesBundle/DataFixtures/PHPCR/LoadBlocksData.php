@@ -38,7 +38,7 @@ class LoadBlocksData extends DataFixture
 
         $manager->persist($contactBlock);
 
-        for ($i = 1; $i <= 3; $i++) {
+        for ($i = 1; $i <= 3; ++$i) {
             $block = $factory->createNew();
             $block->setParentDocument($parent);
             $block->setName('block-'.$i);

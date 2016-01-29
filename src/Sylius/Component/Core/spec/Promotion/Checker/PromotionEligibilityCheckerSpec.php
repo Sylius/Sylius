@@ -37,15 +37,14 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
 
     public function it_recognizes_subject_as_not_eligible_if_coupon_per_customer_limit_reached(
         $subjectRepository, OrderInterface $subject, PromotionInterface $promotion, CustomerInterface $customer, CouponInterface $coupon
-    )
-    {
+    ) {
         $subject->getCustomer()->willReturn($customer);
 
         $coupon->getCode()->willReturn('D0003');
         $coupon->getPerCustomerUsageLimit()->willReturn(1);
         $coupon->getPromotion()->willReturn($promotion);
 
-        $subject->getPromotionCoupons()->willReturn(array($coupon));
+        $subject->getPromotionCoupons()->willReturn([$coupon]);
 
         $promotion->hasRules()->willReturn(false);
         $promotion->getStartsAt()->willReturn(null);
@@ -54,7 +53,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $promotion->hasCoupons()->willReturn(true);
         $promotion->hasCoupon($coupon)->willReturn(true);
         $promotion->getUsageLimit()->willReturn(null);
-        $promotion->getCoupons()->willReturn(array($coupon));
+        $promotion->getCoupons()->willReturn([$coupon]);
 
         $subjectRepository->countByCustomerAndCoupon($customer, $coupon)->willReturn(2);
 
@@ -63,15 +62,14 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
 
     public function it_recognizes_subject_as_eligible_if_coupon_per_customer_limit_not_reached(
         $subjectRepository, OrderInterface $subject, PromotionInterface $promotion, CustomerInterface $customer, CouponInterface $coupon
-    )
-    {
+    ) {
         $subject->getCustomer()->willReturn($customer);
 
         $coupon->getCode()->willReturn('D0003');
         $coupon->getPerCustomerUsageLimit()->willReturn(1);
         $coupon->getPromotion()->willReturn($promotion);
 
-        $subject->getPromotionCoupons()->willReturn(array($coupon));
+        $subject->getPromotionCoupons()->willReturn([$coupon]);
 
         $promotion->hasRules()->willReturn(false);
         $promotion->getStartsAt()->willReturn(null);
@@ -80,7 +78,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $promotion->hasCoupons()->willReturn(true);
         $promotion->hasCoupon($coupon)->willReturn(true);
         $promotion->getUsageLimit()->willReturn(null);
-        $promotion->getCoupons()->willReturn(array($coupon));
+        $promotion->getCoupons()->willReturn([$coupon]);
 
         $subjectRepository->countByCustomerAndCoupon($customer, $coupon)->willReturn(0);
 
@@ -89,15 +87,14 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
 
     public function it_recognizes_subject_as_not_eligible_if_customer_not_linked_to_order_and_coupon_restricted_by_customer(
         OrderInterface $subject, PromotionInterface $promotion, CouponInterface $coupon
-    )
-    {
+    ) {
         $subject->getCustomer()->willReturn(null);
 
         $coupon->getCode()->willReturn('D0003');
         $coupon->getPerCustomerUsageLimit()->willReturn(1);
         $coupon->getPromotion()->willReturn($promotion);
 
-        $subject->getPromotionCoupons()->willReturn(array($coupon));
+        $subject->getPromotionCoupons()->willReturn([$coupon]);
 
         $promotion->hasRules()->willReturn(false);
         $promotion->getStartsAt()->willReturn(null);
@@ -106,22 +103,21 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $promotion->hasCoupons()->willReturn(true);
         $promotion->hasCoupon($coupon)->willReturn(true);
         $promotion->getUsageLimit()->willReturn(null);
-        $promotion->getCoupons()->willReturn(array($coupon));
+        $promotion->getCoupons()->willReturn([$coupon]);
 
         $this->isEligible($subject, $promotion)->shouldReturn(false);
     }
 
     public function it_recognizes_subject_as_eligible_if_customer_not_linked_to_order_and_coupon_not_restricted_by_customer(
         OrderInterface $subject, PromotionInterface $promotion, CouponInterface $coupon
-    )
-    {
+    ) {
         $subject->getCustomer()->willReturn(null);
 
         $coupon->getCode()->willReturn('D0003');
         $coupon->getPerCustomerUsageLimit()->willReturn(0);
         $coupon->getPromotion()->willReturn($promotion);
 
-        $subject->getPromotionCoupons()->willReturn(array($coupon));
+        $subject->getPromotionCoupons()->willReturn([$coupon]);
 
         $promotion->hasRules()->willReturn(false);
         $promotion->getStartsAt()->willReturn(null);
@@ -130,9 +126,8 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $promotion->hasCoupons()->willReturn(true);
         $promotion->hasCoupon($coupon)->willReturn(true);
         $promotion->getUsageLimit()->willReturn(null);
-        $promotion->getCoupons()->willReturn(array($coupon));
+        $promotion->getCoupons()->willReturn([$coupon]);
 
         $this->isEligible($subject, $promotion)->shouldReturn(true);
     }
-
 }

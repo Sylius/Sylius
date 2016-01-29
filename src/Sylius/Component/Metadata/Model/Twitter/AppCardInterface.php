@@ -38,7 +38,7 @@ interface AppCardInterface extends CardInterface
      * @return string
      */
     public function getAppNameIphone();
-    
+
     /**
      * The twitter:app:name:iphone property.
      *
@@ -52,7 +52,7 @@ interface AppCardInterface extends CardInterface
      * @return string
      */
     public function getAppIdIphone();
-    
+
     /**
      * The twitter:app:id:iphone property.
      *
@@ -66,7 +66,7 @@ interface AppCardInterface extends CardInterface
      * @return string
      */
     public function getAppUrlIphone();
-    
+
     /**
      * The twitter:app:url:iphone property.
      *

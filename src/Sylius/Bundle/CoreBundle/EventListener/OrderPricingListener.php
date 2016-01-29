@@ -47,14 +47,14 @@ class OrderPricingListener
             throw new UnexpectedTypeException($order, OrderInterface::class);
         }
 
-        $context = array();
+        $context = [];
         if (null !== $customer = $order->getCustomer()) {
             $context['customer'] = $customer;
             $context['groups'] = $customer->getGroups()->toArray();
         }
 
         if (null !== $order->getChannel()) {
-            $context['channel'] = array($order->getChannel());
+            $context['channel'] = [$order->getChannel()];
         }
 
         foreach ($order->getItems() as $item) {

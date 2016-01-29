@@ -46,7 +46,7 @@ class RequestConfigurationSpec extends ObjectBehavior
     {
         $this->getMetadata()->shouldReturn($metadata);
     }
-    
+
     function it_has_parameters(Parameters $parameters)
     {
         $this->getParameters()->shouldReturn($parameters);
@@ -113,7 +113,7 @@ class RequestConfigurationSpec extends ObjectBehavior
         $request->headers = $bag;
         $bag->get('referer')->willReturn('http://myurl.com');
 
-        $parameters->get('redirect')->willReturn(array('referer' => 'http://myurl.com'));
+        $parameters->get('redirect')->willReturn(['referer' => 'http://myurl.com']);
 
         $this->getRedirectReferer()->shouldReturn('http://myurl.com');
     }
@@ -127,7 +127,7 @@ class RequestConfigurationSpec extends ObjectBehavior
         $parameters->get('redirect')->willReturn(null);
         $this->getRedirectRoute('index')->shouldReturn('sylius_product_index');
 
-        $parameters->get('redirect')->willReturn(array('route' => 'myRoute'));
+        $parameters->get('redirect')->willReturn(['route' => 'myRoute']);
         $this->getRedirectRoute('show')->shouldReturn('myRoute');
 
         $parameters->get('redirect')->willReturn('myRoute');
@@ -143,7 +143,7 @@ class RequestConfigurationSpec extends ObjectBehavior
         $parameters->get('redirect')->willReturn(null);
         $this->getRedirectRoute('index')->shouldReturn('sylius_admin_product_index');
 
-        $parameters->get('redirect')->willReturn(array('route' => 'myRoute'));
+        $parameters->get('redirect')->willReturn(['route' => 'myRoute']);
         $this->getRedirectRoute('show')->shouldReturn('myRoute');
 
         $parameters->get('redirect')->willReturn('myRoute');
@@ -153,17 +153,17 @@ class RequestConfigurationSpec extends ObjectBehavior
     function it_returns_array_as_redirect_parameters(Parameters $parameters)
     {
         $parameters->get('redirect')->willReturn(null);
-        $this->getRedirectParameters()->shouldReturn(array());
+        $this->getRedirectParameters()->shouldReturn([]);
 
         $parameters->get('redirect')->willReturn('string');
-        $this->getRedirectParameters()->shouldReturn(array());
+        $this->getRedirectParameters()->shouldReturn([]);
 
-        $parameters->get('redirect')->willReturn(array('parameters' => array('myParameter')));
-        $this->getRedirectParameters()->shouldReturn(array('myParameter'));
+        $parameters->get('redirect')->willReturn(['parameters' => ['myParameter']]);
+        $this->getRedirectParameters()->shouldReturn(['myParameter']);
 
-        $parameters->get('redirect')->willReturn(array('parameters' => array('myParameter')));
+        $parameters->get('redirect')->willReturn(['parameters' => ['myParameter']]);
 
-        $this->getRedirectParameters('resource')->shouldReturn(array('myParameter'));
+        $this->getRedirectParameters('resource')->shouldReturn(['myParameter']);
     }
 
     function it_checks_if_limit_is_enabled(Parameters $parameters)
@@ -215,9 +215,9 @@ class RequestConfigurationSpec extends ObjectBehavior
 
     function it_has_no_filterable_parameter(Parameters $parameters)
     {
-        $defaultCriteria = array('property' => 'myValue');
+        $defaultCriteria = ['property' => 'myValue'];
 
-        $parameters->get('criteria', Argument::any())->willReturn(array());
+        $parameters->get('criteria', Argument::any())->willReturn([]);
         $parameters->get('filterable', false)->willReturn(false);
 
         $this->getCriteria($defaultCriteria)->shouldBeArray();
@@ -226,40 +226,40 @@ class RequestConfigurationSpec extends ObjectBehavior
 
     function it_has_criteria_parameter(Parameters $parameters, Request $request)
     {
-        $criteria = array('property' => 'myNewValue');
+        $criteria = ['property' => 'myNewValue'];
 
         $parameters->get('filterable', false)->willReturn(true);
-        $parameters->get('criteria', Argument::any())->willReturn(array());
-        $request->get('criteria', array())->willReturn($criteria);
+        $parameters->get('criteria', Argument::any())->willReturn([]);
+        $request->get('criteria', [])->willReturn($criteria);
         $this->getCriteria()->shouldReturn($criteria);
     }
 
     function it_allows_to_override_criteria_parameter_in_route(Parameters $parameters, Request $request)
     {
-        $criteria = array('property' => 'myValue');
-        $overriddenCriteria = array('other_property' => 'myNewValue');
-        $combinedCriteria = array('property' => 'myValue', 'other_property' => 'myNewValue');
+        $criteria = ['property' => 'myValue'];
+        $overriddenCriteria = ['other_property' => 'myNewValue'];
+        $combinedCriteria = ['property' => 'myValue', 'other_property' => 'myNewValue'];
 
         $parameters->get('filterable', false)->willReturn(true);
-        $parameters->get('criteria', array())->willReturn($criteria);
-        $request->get('criteria', array())->willReturn($overriddenCriteria);
+        $parameters->get('criteria', [])->willReturn($criteria);
+        $request->get('criteria', [])->willReturn($overriddenCriteria);
 
         $this->getCriteria()->shouldReturn($combinedCriteria);
 
-        $defaultCriteria = array('slug' => 'foo');
-        $combinedDefaultCriteria = array('property' => 'myValue', 'slug' => 'foo', 'other_property' => 'myNewValue');
+        $defaultCriteria = ['slug' => 'foo'];
+        $combinedDefaultCriteria = ['property' => 'myValue', 'slug' => 'foo', 'other_property' => 'myNewValue'];
 
         $parameters->get('filterable', false)->willReturn(true);
         $parameters->get('criteria', Argument::any())->willReturn($criteria);
-        $request->get('criteria', array())->willReturn($overriddenCriteria);
+        $request->get('criteria', [])->willReturn($overriddenCriteria);
 
         $this->getCriteria($defaultCriteria)->shouldReturn($combinedDefaultCriteria);
 
         $parameters->get('filterable', false)->willReturn(true);
-        $parameters->get('criteria', array())->willReturn(array('filter' => 'route'));
-        $request->get('criteria', array())->willReturn(array('filter' => 'request'));
+        $parameters->get('criteria', [])->willReturn(['filter' => 'route']);
+        $request->get('criteria', [])->willReturn(['filter' => 'request']);
 
-        $this->getCriteria(array('filter' => 'default'))->shouldReturn(array('filter' => 'request'));
+        $this->getCriteria(['filter' => 'default'])->shouldReturn(['filter' => 'request']);
     }
 
     function it_checks_if_the_resource_is_sortable(Parameters $parameters)
@@ -273,20 +273,20 @@ class RequestConfigurationSpec extends ObjectBehavior
 
     function it_has_sorting_parameter(Parameters $parameters, Request $request)
     {
-        $sorting = array('property' => 'asc');
+        $sorting = ['property' => 'asc'];
 
         $parameters->get('sortable', false)->willReturn(true);
         $parameters->get('sorting', Argument::any())->willReturn($sorting);
-        $request->get('sorting', array())->willReturn($sorting);
+        $request->get('sorting', [])->willReturn($sorting);
 
         $this->getSorting()->shouldReturn($sorting);
     }
 
     function it_has_no_sortable_parameter(Parameters $parameters)
     {
-        $defaultSorting = array('property' => 'desc');
+        $defaultSorting = ['property' => 'desc'];
 
-        $parameters->get('sorting', Argument::any())->willReturn(array());
+        $parameters->get('sorting', Argument::any())->willReturn([]);
         $parameters->get('sortable', false)->willReturn(false);
 
         $this->getSorting($defaultSorting)->shouldBeArray();
@@ -295,30 +295,30 @@ class RequestConfigurationSpec extends ObjectBehavior
 
     function it_allows_to_override_sorting_parameter_in_route(Parameters $parameters, Request $request)
     {
-        $sorting = array('property' => 'desc');
-        $overriddenSorting = array('other_property' => 'asc');
-        $combinedSorting = array('other_property' => 'asc', 'property' => 'desc');
+        $sorting = ['property' => 'desc'];
+        $overriddenSorting = ['other_property' => 'asc'];
+        $combinedSorting = ['other_property' => 'asc', 'property' => 'desc'];
 
         $parameters->get('sortable', false)->willReturn(true);
-        $parameters->get('sorting', array())->willReturn($sorting);
-        $request->get('sorting', array())->willReturn($overriddenSorting);
+        $parameters->get('sorting', [])->willReturn($sorting);
+        $request->get('sorting', [])->willReturn($overriddenSorting);
 
         $this->getSorting()->shouldReturn($combinedSorting);
 
-        $defaultSorting = array('foo' => 'bar');
-        $combinedDefaultSorting = array('other_property' => 'asc', 'property' => 'desc', 'foo' => 'bar');
+        $defaultSorting = ['foo' => 'bar'];
+        $combinedDefaultSorting = ['other_property' => 'asc', 'property' => 'desc', 'foo' => 'bar'];
 
         $parameters->get('sortable', false)->willReturn(true);
         $parameters->get('sorting', Argument::any())->willReturn($sorting);
-        $request->get('sorting', array())->willReturn($overriddenSorting);
+        $request->get('sorting', [])->willReturn($overriddenSorting);
 
         $this->getSorting($defaultSorting)->shouldReturn($combinedDefaultSorting);
 
         $parameters->get('sortable', false)->willReturn(true);
-        $parameters->get('sorting', array())->willReturn(array('sort' => 'route'));
-        $request->get('sorting', array())->willReturn(array('sort' => 'request'));
+        $parameters->get('sorting', [])->willReturn(['sort' => 'route']);
+        $request->get('sorting', [])->willReturn(['sort' => 'request']);
 
-        $this->getSorting(array('sort' => 'default'))->shouldReturn(array('sort' => 'request'));
+        $this->getSorting(['sort' => 'default'])->shouldReturn(['sort' => 'request']);
     }
 
     function it_has_repository_method_parameter(Parameters $parameters)
@@ -327,7 +327,7 @@ class RequestConfigurationSpec extends ObjectBehavior
         $this->getRepositoryMethod()->shouldReturn(null);
 
         $parameters->has('repository')->willReturn(true);
-        $parameters->get('repository')->willReturn(array('method' => 'findAllEnabled'));
+        $parameters->get('repository')->willReturn(['method' => 'findAllEnabled']);
 
         $this->getRepositoryMethod()->shouldReturn('findAllEnabled');
     }
@@ -335,19 +335,19 @@ class RequestConfigurationSpec extends ObjectBehavior
     function it_has_repository_arguments_parameter(Parameters $parameters)
     {
         $parameters->has('repository')->willReturn(false);
-        $this->getRepositoryArguments()->shouldReturn(array());
+        $this->getRepositoryArguments()->shouldReturn([]);
 
-        $repositoryConfiguration = array('arguments' => 'value');
+        $repositoryConfiguration = ['arguments' => 'value'];
         $parameters->has('repository')->willReturn(true);
         $parameters->get('repository')->willReturn($repositoryConfiguration);
 
-        $this->getRepositoryArguments()->shouldReturn(array('value'));
+        $this->getRepositoryArguments()->shouldReturn(['value']);
 
-        $repositoryConfiguration = array('arguments' => array('foo, bar'));
+        $repositoryConfiguration = ['arguments' => ['foo, bar']];
         $parameters->has('repository')->willReturn(true);
         $parameters->get('repository')->willReturn($repositoryConfiguration);
 
-        $this->getRepositoryArguments()->shouldReturn(array('foo, bar'));
+        $this->getRepositoryArguments()->shouldReturn(['foo, bar']);
     }
 
     function it_has_factory_method_parameter(Parameters $parameters)
@@ -356,7 +356,7 @@ class RequestConfigurationSpec extends ObjectBehavior
         $this->getFactoryMethod()->shouldReturn(null);
 
         $parameters->has('factory')->willReturn(true);
-        $parameters->get('factory')->willReturn(array('method' => 'createForPromotion'));
+        $parameters->get('factory')->willReturn(['method' => 'createForPromotion']);
 
         $this->getFactoryMethod()->shouldReturn('createForPromotion');
     }
@@ -364,19 +364,19 @@ class RequestConfigurationSpec extends ObjectBehavior
     function it_has_factory_arguments_parameter(Parameters $parameters)
     {
         $parameters->has('factory')->willReturn(false);
-        $this->getFactoryArguments()->shouldReturn(array());
+        $this->getFactoryArguments()->shouldReturn([]);
 
-        $factoryConfiguration = array('arguments' => 'value');
+        $factoryConfiguration = ['arguments' => 'value'];
         $parameters->has('factory')->willReturn(true);
         $parameters->get('factory')->willReturn($factoryConfiguration);
 
-        $this->getFactoryArguments()->shouldReturn(array('value'));
+        $this->getFactoryArguments()->shouldReturn(['value']);
 
-        $factoryConfiguration = array('arguments' => array('foo, bar'));
+        $factoryConfiguration = ['arguments' => ['foo, bar']];
         $parameters->has('factory')->willReturn(true);
         $parameters->get('factory')->willReturn($factoryConfiguration);
 
-        $this->getFactoryArguments()->shouldReturn(array('foo, bar'));
+        $this->getFactoryArguments()->shouldReturn(['foo, bar']);
     }
 
     function it_has_flash_message_parameter(MetadataInterface $metadata, Parameters $parameters)
@@ -399,7 +399,7 @@ class RequestConfigurationSpec extends ObjectBehavior
         $parameters->get('sortable_position', 'position')->willReturn('myPosition');
         $this->getSortablePosition()->shouldReturn('myPosition');
     }
-    
+
     function it_has_permission_unless_defined_as_false_in_parameters(Parameters $parameters)
     {
         $parameters->has('permission')->willReturn(false);
@@ -413,12 +413,12 @@ class RequestConfigurationSpec extends ObjectBehavior
         $parameters->get('permission')->willReturn(false);
         $this->shouldNotHavePermission();
     }
-    
+
     function it_generates_permission_name(MetadataInterface $metadata, Parameters $parameters)
     {
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
-        
+
         $parameters->has('permission')->willReturn(false);
 
         $this->getPermission('index')->shouldReturn('sylius.product.index');
@@ -439,10 +439,10 @@ class RequestConfigurationSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\LogicException::class)
-            ->during('getPermission', array('index'))
+            ->during('getPermission', ['index'])
         ;
     }
-    
+
     function it_has_event_name(Parameters $parameters)
     {
         $parameters->get('event')->willReturn('foo');

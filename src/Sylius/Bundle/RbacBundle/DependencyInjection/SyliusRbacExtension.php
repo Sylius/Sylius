@@ -34,11 +34,11 @@ class SyliusRbacExtension extends AbstractResourceExtension implements PrependEx
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $configFiles = array(
+        $configFiles = [
             'services.xml',
             'templating.xml',
             'twig.xml',
-        );
+        ];
 
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
@@ -66,10 +66,10 @@ class SyliusRbacExtension extends AbstractResourceExtension implements PrependEx
             throw new \RuntimeException('DoctrineCacheBundle must be registered!');
         }
 
-        $container->prependExtensionConfig('doctrine_cache', array(
-            'providers' => array(
+        $container->prependExtensionConfig('doctrine_cache', [
+            'providers' => [
                 'sylius_rbac' => '%sylius.cache%',
-            ),
-        ));
+            ],
+        ]);
     }
 }

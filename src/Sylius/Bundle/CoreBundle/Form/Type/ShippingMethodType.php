@@ -27,14 +27,14 @@ class ShippingMethodType extends BaseShippingMethodType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('zone', 'sylius_zone_choice', array(
-                'label' => 'sylius.form.shipping_method.zone'
-            ))
-            ->add('taxCategory', 'sylius_tax_category_choice', array(
+            ->add('zone', 'sylius_zone_choice', [
+                'label' => 'sylius.form.shipping_method.zone',
+            ])
+            ->add('taxCategory', 'sylius_tax_category_choice', [
                 'required' => false,
                 'empty_value' => '---',
-                'label' => 'sylius.form.shipping_method.tax_category'
-            ))
+                'label' => 'sylius.form.shipping_method.tax_category',
+            ])
         ;
     }
 }

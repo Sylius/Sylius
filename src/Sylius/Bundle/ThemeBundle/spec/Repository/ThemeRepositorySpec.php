@@ -32,13 +32,13 @@ class ThemeRepositorySpec extends ObjectBehavior
     {
         $this->shouldImplement(ThemeRepositoryInterface::class);
     }
-    
+
     function it_returns_themes(ThemeInterface $theme)
     {
         $theme->getName()->willReturn('example/theme');
 
         $this->add($theme);
-        
+
         $this->findAll()->shouldReturn([$theme]);
     }
 

@@ -13,8 +13,8 @@ namespace spec\Sylius\Component\Metadata\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Metadata\Model\MetadataContainer;
-use Sylius\Component\Metadata\Model\MetadataInterface;
 use Sylius\Component\Metadata\Model\MetadataContainerInterface;
+use Sylius\Component\Metadata\Model\MetadataInterface;
 
 /**
  * @mixin MetadataContainer

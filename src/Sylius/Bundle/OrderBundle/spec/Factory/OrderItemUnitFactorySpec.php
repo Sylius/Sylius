@@ -27,7 +27,7 @@ class OrderItemUnitFactorySpec extends ObjectBehavior
     {
         $this->beConstructedWith(OrderItemUnit::class);
     }
-    
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\OrderBundle\Factory\OrderItemUnitFactory');

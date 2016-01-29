@@ -30,7 +30,7 @@ class CartItemType extends AbstractResourceType
      * @param array $validationGroups
      * @param DataMapperInterface $orderItemQuantityDataMapper
      */
-    public function __construct($dataClass, array $validationGroups = array(), DataMapperInterface $orderItemQuantityDataMapper)
+    public function __construct($dataClass, array $validationGroups = [], DataMapperInterface $orderItemQuantityDataMapper)
     {
         parent::__construct($dataClass, $validationGroups);
 
@@ -43,11 +43,10 @@ class CartItemType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('quantity', 'integer', array(
-                'attr' => array('min' => 1)
-            ))
+            ->add('quantity', 'integer', [
+                'attr' => ['min' => 1],
+            ])
             ->setDataMapper($this->orderItemQuantityDataMapper);
-        ;
     }
 
     /**

@@ -63,7 +63,7 @@ class OrderShipmentTaxesByZoneApplicatorSpec extends ObjectBehavior
     ) {
         $order->getLastShipment()->willReturn($shipment);
         $shipment->getMethod()->willReturn($shippingMethod);
-        $taxRateResolver->resolve($shippingMethod, array('zone' => $zone))->willReturn($taxRate);
+        $taxRateResolver->resolve($shippingMethod, ['zone' => $zone])->willReturn($taxRate);
 
         $taxRate->getLabel()->willReturn('Simple tax (10%)');
         $taxRate->isIncludedInPrice()->willReturn(false);
@@ -103,7 +103,7 @@ class OrderShipmentTaxesByZoneApplicatorSpec extends ObjectBehavior
         $order->getAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->willReturn($shippingAdjustments);
         $shippingAdjustments->isEmpty()->willReturn(false);
 
-        $taxRateResolver->resolve($shippingMethod, array('zone' => $zone))->willReturn(null);
+        $taxRateResolver->resolve($shippingMethod, ['zone' => $zone])->willReturn(null);
 
         $this->apply($order, $zone);
     }

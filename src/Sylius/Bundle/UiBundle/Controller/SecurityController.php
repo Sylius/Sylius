@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\UiBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -61,11 +60,11 @@ final class SecurityController
         $formType = $request->attributes->get('_sylius[form]', 'sylius_security_login', true);
         $form = $this->formFactory->createNamed('', $formType);
 
-        return $this->templatingEngine->renderResponse($template, array(
+        return $this->templatingEngine->renderResponse($template, [
             'form' => $form->createView(),
             'last_username' => $lastUsername,
             'last_error' => $lastError,
-        ));
+        ]);
     }
 
     /**

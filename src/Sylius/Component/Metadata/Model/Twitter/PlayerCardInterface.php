@@ -77,28 +77,28 @@ interface PlayerCardInterface extends CardInterface
     /**
      * The twitter:player:width property.
      *
-     * @return integer
+     * @return int
      */
     public function getPlayerWidth();
 
     /**
      * The twitter:player:width property.
      *
-     * @param integer $playerWidth
+     * @param int $playerWidth
      */
     public function setPlayerWidth($playerWidth);
 
     /**
      * The twitter:player:height property.
      *
-     * @return integer
+     * @return int
      */
     public function getPlayerHeight();
 
     /**
      * The twitter:player:height property.
      *
-     * @param integer $playerHeight
+     * @param int $playerHeight
      */
     public function setPlayerHeight($playerHeight);
 

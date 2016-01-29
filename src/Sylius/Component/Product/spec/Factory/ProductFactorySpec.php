@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Product\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Archetype\Builder\ArchetypeBuilderInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Model\ArchetypeInterface;
@@ -51,8 +50,7 @@ class ProductFactorySpec extends ObjectBehavior
         ProductInterface $product,
         VariantInterface $variant,
         FactoryInterface $variantFactory
-    )
-    {
+    ) {
         $variantFactory->createNew()->willReturn($variant);
         $variant->setMaster(true)->shouldBeCalled();
 
@@ -77,7 +75,7 @@ class ProductFactorySpec extends ObjectBehavior
 
         $factory->createNew()->willReturn($product);
 
-        $archetypeRepository->findOneBy(array('code' => 'book'))->willReturn($archetype);
+        $archetypeRepository->findOneBy(['code' => 'book'])->willReturn($archetype);
         $product->setArchetype($archetype)->shouldBeCalled();
         $archetypeBuilder->build($product)->shouldBeCalled();
 
@@ -86,11 +84,11 @@ class ProductFactorySpec extends ObjectBehavior
 
     function it_throws_an_exception_if_archetype_does_not_exist(RepositoryInterface $archetypeRepository)
     {
-        $archetypeRepository->findOneBy(array('code' => 'book'))->willReturn(null);
+        $archetypeRepository->findOneBy(['code' => 'book'])->willReturn(null);
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('createFromArchetype', array('book'))
+            ->during('createFromArchetype', ['book'])
         ;
     }
 }

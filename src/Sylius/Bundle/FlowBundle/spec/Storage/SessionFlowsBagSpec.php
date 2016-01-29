@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\FlowBundle\Storage;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\FlowBundle\Storage\SessionFlowsBag;
 use Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag;
 

@@ -20,7 +20,7 @@ class Image implements ImageInterface
     /**
      * Id
      *
-     * @var integer
+     * @var int
      */
     protected $id;
 
@@ -46,7 +46,7 @@ class Image implements ImageInterface
     /**
      * Get id
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {

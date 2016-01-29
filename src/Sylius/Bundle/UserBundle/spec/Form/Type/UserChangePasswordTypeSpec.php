@@ -41,6 +41,6 @@ class UserChangePasswordTypeSpec extends ObjectBehavior
         $builder->add('currentPassword', 'password', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('newPassword', 'repeated', Argument::any())->shouldBeCalled()->willReturn($builder);
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 }

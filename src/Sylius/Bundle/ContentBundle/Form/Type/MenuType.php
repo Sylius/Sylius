@@ -25,61 +25,60 @@ class MenuType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options = array())
+    public function buildForm(FormBuilderInterface $builder, array $options = [])
     {
         $builder
-            ->add('parent', null, array(
+            ->add('parent', null, [
                 'required' => true,
-                'label' => 'sylius.form.menu.parent'
-            ))
-            ->add('label', 'text', array(
+                'label' => 'sylius.form.menu.parent',
+            ])
+            ->add('label', 'text', [
                 'required' => true,
-                'label' => 'sylius.form.menu.label'
-            ))
-            ->add('name', 'text', array(
+                'label' => 'sylius.form.menu.label',
+            ])
+            ->add('name', 'text', [
                 'required' => true,
-                'label' => 'sylius.form.menu.name'
-            ))
-            ->add('children', 'collection', array(
-                'type'             => 'sylius_menu_node',
-                'allow_add'        => true,
-                'allow_delete'     => true,
-                'by_reference'     => false,
-                'label'            => false,
+                'label' => 'sylius.form.menu.name',
+            ])
+            ->add('children', 'collection', [
+                'type' => 'sylius_menu_node',
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'label' => false,
                 'button_add_label' => 'sylius.form.menu.add_menu_node',
                 'cascade_validation' => true,
-             ))
-            ->add('uri', null, array(
+             ])
+            ->add('uri', null, [
                 'required' => false,
-                'label' => 'sylius.form.menu.uri'
-            ))
-            ->add('route', null, array(
+                'label' => 'sylius.form.menu.uri',
+            ])
+            ->add('route', null, [
                 'required' => false,
-                'label' => 'sylius.form.menu.route'
-            ))
-            ->add('display', null, array(
+                'label' => 'sylius.form.menu.route',
+            ])
+            ->add('display', null, [
                 'required' => false,
-                'label' => 'sylius.form.menu.display'
-            ))
-            ->add('displayChildren', null, array(
+                'label' => 'sylius.form.menu.display',
+            ])
+            ->add('displayChildren', null, [
                 'required' => false,
-                'label' => 'sylius.form.menu.display_children'
-            ))
-            ->add('publishable', null, array(
-                'label' => 'sylius.form.menu.publishable'
-                ))
-            ->add('publishStartDate', 'datetime', array(
+                'label' => 'sylius.form.menu.display_children',
+            ])
+            ->add('publishable', null, [
+                'label' => 'sylius.form.menu.publishable',
+                ])
+            ->add('publishStartDate', 'datetime', [
                 'label' => 'sylius.form.menu.publish_start_date',
-                'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'empty_value' => /* @Ignore */ ['year' => '-', 'month' => '-', 'day' => '-'],
                 'time_widget' => 'text',
-            ))
-            ->add('publishEndDate', 'datetime', array(
+            ])
+            ->add('publishEndDate', 'datetime', [
                 'label' => 'sylius.form.menu.publish_end_date',
-                'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'empty_value' => /* @Ignore */ ['year' => '-', 'month' => '-', 'day' => '-'],
                 'time_widget' => 'text',
-            ))
+            ])
         ;
-
     }
 
     /**
@@ -87,9 +86,9 @@ class MenuType extends AbstractResourceType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'cascade_validation' => true,
-        ));
+        ]);
 
         parent::configureOptions($resolver);
     }

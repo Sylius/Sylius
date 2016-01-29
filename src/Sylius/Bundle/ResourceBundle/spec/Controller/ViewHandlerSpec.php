@@ -15,7 +15,6 @@ use FOS\RestBundle\View\View;
 use FOS\RestBundle\View\ViewHandler as RestViewHandler;
 use JMS\Serializer\SerializationContext;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ViewHandler;
 use Sylius\Bundle\ResourceBundle\Controller\ViewHandlerInterface;
@@ -37,7 +36,7 @@ class ViewHandlerSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\ViewHandler');
     }
-    
+
     function it_implements_view_handler_interface()
     {
         $this->shouldImplement(ViewHandlerInterface::class);
@@ -47,8 +46,7 @@ class ViewHandlerSpec extends ObjectBehavior
         RequestConfiguration $requestConfiguration,
         RestViewHandler $restViewHandler,
         Response $response
-    )
-    {
+    ) {
         $requestConfiguration->isHtmlRequest()->willReturn(true);
         $view = View::create();
 
@@ -61,16 +59,15 @@ class ViewHandlerSpec extends ObjectBehavior
         RequestConfiguration $requestConfiguration,
         RestViewHandler $restViewHandler,
         Response $response
-    )
-    {
+    ) {
         $requestConfiguration->isHtmlRequest()->willReturn(false);
         $view = View::create();
         $view->setSerializationContext(new SerializationContext());
 
-        $requestConfiguration->getSerializationGroups()->willReturn(array('Detailed'));
+        $requestConfiguration->getSerializationGroups()->willReturn(['Detailed']);
         $requestConfiguration->getSerializationVersion()->willReturn('2.0.0');
 
-        $restViewHandler->setExclusionStrategyGroups(array('Detailed'))->shouldBeCalled();
+        $restViewHandler->setExclusionStrategyGroups(['Detailed'])->shouldBeCalled();
         $restViewHandler->setExclusionStrategyVersion('2.0.0')->shouldBeCalled();
 
         $restViewHandler->handle($view)->willReturn($response);

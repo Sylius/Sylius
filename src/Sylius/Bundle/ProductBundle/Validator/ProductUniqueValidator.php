@@ -54,13 +54,13 @@ class ProductUniqueValidator extends ConstraintValidator
         $product = $value;
         $accessor = PropertyAccess::createPropertyAccessor();
 
-        $criteria = array($constraint->property => $accessor->getValue($product, $constraint->property));
+        $criteria = [$constraint->property => $accessor->getValue($product, $constraint->property)];
         $conflictualProduct = $this->repository->findOneBy($criteria);
 
         if (null !== $conflictualProduct && $conflictualProduct != $product) {
-            $this->context->addViolationAt($constraint->property, $constraint->message, array(
-                '%property%' => $constraint->property
-            ));
+            $this->context->addViolationAt($constraint->property, $constraint->message, [
+                '%property%' => $constraint->property,
+            ]);
         }
     }
 }

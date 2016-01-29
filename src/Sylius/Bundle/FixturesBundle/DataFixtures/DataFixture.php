@@ -78,7 +78,7 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
 
     public function __call($method, $arguments)
     {
-        $matches = array();
+        $matches = [];
         if (preg_match('/^get(.*)Repository$/', $method, $matches)) {
             return $this->get('sylius.repository.'.$matches[1]);
         }
@@ -86,7 +86,7 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
             return $this->get('sylius.factory.'.$matches[1]);
         }
 
-        return call_user_func_array(array($this, $method), $arguments);
+        return call_user_func_array([$this, $method], $arguments);
     }
 
     /**
@@ -145,12 +145,12 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
         $address->setStreet($this->faker->streetAddress);
         $address->setPostcode($this->faker->postcode);
 
-        /** @var CountryInterface $country */
+        /* @var CountryInterface $country */
         $allCountries = Intl::getRegionBundle()->getCountryNames($this->defaultLocale);
         $countries = array_slice($allCountries, 0, count($allCountries) - 5, true);
 
         $countryCode = array_rand($countries);
-        $country = $this->getReference("Sylius.Country." . $countryCode);
+        $country = $this->getReference('Sylius.Country.'.$countryCode);
 
         if ($province = $country->hasProvinces() ? $this->faker->randomElement($country->getProvinces()->toArray()) : null) {
             $address->setProvinceCode($province->getCode());

@@ -11,9 +11,8 @@
 
 namespace spec\Sylius\Bundle\AdminBundle\Controller;
 
-use Sylius\Bundle\AdminBundle\Controller\DashboardController;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
+use Sylius\Bundle\AdminBundle\Controller\DashboardController;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

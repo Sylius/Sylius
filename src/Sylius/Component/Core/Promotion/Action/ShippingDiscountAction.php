@@ -35,7 +35,7 @@ class ShippingDiscountAction extends DiscountAction
 
         $adjustment = $this->createAdjustment($promotion);
         $adjustmentAmount = (int) round($subject->getAdjustmentsTotal(AdjustmentInterface::SHIPPING_ADJUSTMENT) * $configuration['percentage']);
-        $adjustment->setAmount(- $adjustmentAmount);
+        $adjustment->setAmount(-$adjustmentAmount);
 
         $subject->addAdjustment($adjustment);
     }

@@ -33,7 +33,7 @@ interface LocalesAwareInterface
     /**
      * @param LocaleInterface $locale
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasLocale(LocaleInterface $locale);
 
@@ -47,4 +47,3 @@ interface LocalesAwareInterface
      */
     public function removeLocale(LocaleInterface $locale);
 }
-

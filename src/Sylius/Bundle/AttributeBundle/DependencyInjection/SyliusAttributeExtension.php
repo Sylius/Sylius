@@ -28,10 +28,10 @@ class SyliusAttributeExtension extends AbstractResourceExtension
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $configFiles = array(
+        $configFiles = [
             'services.xml',
             'attribute_types.xml',
-        );
+        ];
 
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
@@ -71,7 +71,7 @@ class SyliusAttributeExtension extends AbstractResourceExtension
      */
     private function resolveResources(array $resources, ContainerBuilder $container)
     {
-        $subjects = array();
+        $subjects = [];
 
         foreach ($resources as $subject => $parameters) {
             $subjects[$subject] = $parameters;
@@ -79,7 +79,7 @@ class SyliusAttributeExtension extends AbstractResourceExtension
 
         $container->setParameter('sylius.attribute.subjects', $subjects);
 
-        $resolvedResources = array();
+        $resolvedResources = [];
 
         foreach ($resources as $subjectName => $subjectConfig) {
             foreach ($subjectConfig as $resourceName => $resourceConfig) {

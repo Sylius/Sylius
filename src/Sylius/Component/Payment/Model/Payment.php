@@ -38,7 +38,7 @@ class Payment implements PaymentInterface
     protected $currency;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $amount = 0;
 
@@ -55,7 +55,7 @@ class Payment implements PaymentInterface
     /**
      * @var array
      */
-    protected $details = array();
+    protected $details = [];
 
     /**
      * Constructor.

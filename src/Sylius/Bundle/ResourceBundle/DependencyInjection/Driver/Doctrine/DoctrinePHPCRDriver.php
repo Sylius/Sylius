@@ -40,14 +40,14 @@ class DoctrinePHPCRDriver extends AbstractDoctrineDriver
         $repositoryClass = new Parameter('sylius.phpcr_odm.repository.class');
 
         if ($metadata->hasClass('repository')) {
-            $repositoryClass  = $metadata->getClass('repository');
+            $repositoryClass = $metadata->getClass('repository');
         }
 
         $definition = new Definition($repositoryClass);
-        $definition->setArguments(array(
+        $definition->setArguments([
             new Reference($metadata->getServiceId('manager')),
             $this->getClassMetadataDefinition($metadata),
-        ));
+        ]);
 
         $container->setDefinition($metadata->getServiceId('repository'), $definition);
     }

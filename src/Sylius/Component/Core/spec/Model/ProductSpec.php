@@ -16,12 +16,12 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface as VariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\Product as SyliusProduct;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface as VariantInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -75,8 +75,7 @@ class ProductSpec extends ObjectBehavior
         TaxonInterface $taxon3,
         TaxonomyInterface $taxonomy1,
         TaxonomyInterface $taxonomy2
-    )
-    {
+    ) {
         $taxon1->getTaxonomy()->willReturn($taxonomy1);
         $taxon2->getTaxonomy()->willReturn($taxonomy1);
         $taxon3->getTaxonomy()->willReturn($taxonomy2);
@@ -168,7 +167,7 @@ class ProductSpec extends ObjectBehavior
 
     function it_has_no_main_taxon_by_default()
     {
-      $this->getMainTaxon()->shouldReturn(null);
+        $this->getMainTaxon()->shouldReturn(null);
     }
 
     function it_sets_main_taxon(TaxonInterface $taxon)

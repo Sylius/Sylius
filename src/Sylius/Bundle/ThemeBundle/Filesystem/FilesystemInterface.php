@@ -146,7 +146,7 @@ interface FilesystemInterface
      *
      * @throws IOException When file type is unknown
      */
-    public function mirror($originDir, $targetDir, \Traversable $iterator = null, $options = array());
+    public function mirror($originDir, $targetDir, \Traversable $iterator = null, $options = []);
 
     /**
      * Given an existing path, convert it to a path relative to a given starting path.

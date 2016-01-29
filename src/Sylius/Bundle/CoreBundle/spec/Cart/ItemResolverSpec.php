@@ -89,7 +89,7 @@ class ItemResolverSpec extends ObjectBehavior
         $request->isMethod('POST')->willReturn(true);
         $request->get('id')->willReturn(5);
 
-        $productRepository->findOneBy(array('id' => 5, 'channels' => null))->willReturn(null);
+        $productRepository->findOneBy(['id' => 5, 'channels' => null])->willReturn(null);
 
         $this
             ->shouldThrow(ItemResolvingException::class)

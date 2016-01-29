@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Resource\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use spec\Sylius\Component\Resource\Fixtures\SampleResource;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 

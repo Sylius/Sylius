@@ -46,7 +46,7 @@ class SettingsController extends FOSRestController
         } catch (MissingOptionsException $e) {
             // When a Settings is not persisted yet, it won't have any initial value in database,
             // so we create a new empty instance.
-            $settings = new Settings(array());
+            $settings = new Settings([]);
         }
 
         $view = $this
@@ -74,23 +74,23 @@ class SettingsController extends FOSRestController
         } catch (MissingOptionsException $e) {
             // When it is the first time that a Settings is being persisted,
             // it won't have any initial value in database, so we should create a new instance.
-            $settings = new Settings(array());
+            $settings = new Settings([]);
         }
 
         $isApiRequest = $this->isApiRequest($request);
 
         $form = $this
             ->getSettingsFormFactory()
-            ->create($namespace, $settings, $isApiRequest ? array('csrf_protection' => false) : array())
+            ->create($namespace, $settings, $isApiRequest ? ['csrf_protection' => false] : [])
         ;
 
         if ($form->handleRequest($request)->isValid()) {
             $messageType = 'success';
             try {
                 $manager->saveSettings($namespace, $form->getData());
-                $message = $this->getTranslator()->trans('sylius.settings.update', array(), 'flashes');
+                $message = $this->getTranslator()->trans('sylius.settings.update', [], 'flashes');
             } catch (ValidatorException $exception) {
-                $message = $this->getTranslator()->trans($exception->getMessage(), array(), 'validators');
+                $message = $this->getTranslator()->trans($exception->getMessage(), [], 'validators');
                 $messageType = 'error';
             }
 
@@ -105,10 +105,10 @@ class SettingsController extends FOSRestController
             }
         }
 
-        return $this->render($request->attributes->get('template', 'SyliusSettingsBundle:Settings:update.html.twig'), array(
+        return $this->render($request->attributes->get('template', 'SyliusSettingsBundle:Settings:update.html.twig'), [
             'settings' => $settings,
             'form' => $form->createView(),
-        ));
+        ]);
     }
 
     /**

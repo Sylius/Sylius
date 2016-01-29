@@ -22,7 +22,7 @@ class CalculatorChoiceTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(array('calc1', 'calc2'));
+        $this->beConstructedWith(['calc1', 'calc2']);
     }
 
     function it_is_initializable()
@@ -49,9 +49,9 @@ class CalculatorChoiceTypeSpec extends ObjectBehavior
     {
         $resolver
             ->setDefaults(
-                array(
-                    'choices' => array('calc1', 'calc2'),
-                )
+                [
+                    'choices' => ['calc1', 'calc2'],
+                ]
             )
             ->shouldBeCalled();
 

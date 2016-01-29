@@ -20,7 +20,7 @@ interface RuleInterface extends ResourceInterface
 {
     const TYPE_ITEM_TOTAL = 'item_total';
     const TYPE_ITEM_COUNT = 'item_count';
-    const TYPE_WEIGHT     = 'weight';
+    const TYPE_WEIGHT = 'weight';
 
     /**
      * @return string

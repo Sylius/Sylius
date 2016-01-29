@@ -51,17 +51,17 @@ class ShippingMethodChoiceTypeSpec extends ObjectBehavior
             Argument::type(CollectionToArrayTransformer::class)
         )->shouldBeCalled();
 
-        $this->buildForm($builder, array(
-            'multiple' => true
-        ));
+        $this->buildForm($builder, [
+            'multiple' => true,
+        ]);
     }
 
     function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(Argument::withKey('choice_list'))->shouldBeCalled()->willReturn($resolver);
-        $resolver->setDefined(array(
+        $resolver->setDefined([
             'subject',
-        ))->shouldBeCalled()->willReturn($resolver);
+        ])->shouldBeCalled()->willReturn($resolver);
 
         $resolver->setAllowedTypes('subject', ShippingSubjectInterface::class)->shouldBeCalled()->willReturn($resolver);
         $resolver->setAllowedTypes('criteria', 'array')->shouldBeCalled()->willReturn($resolver);

@@ -11,16 +11,16 @@
 
 namespace Sylius\Bundle\RbacBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Bundle\RbacBundle\Form\Type\PermissionType;
+use Sylius\Bundle\RbacBundle\Form\Type\RoleType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
-use Sylius\Bundle\RbacBundle\Form\Type\RoleType;
-use Sylius\Bundle\RbacBundle\Form\Type\PermissionType;
-use Sylius\Component\Rbac\Model\Role;
-use Sylius\Component\Rbac\Model\RoleInterface;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Rbac\Model\Permission;
 use Sylius\Component\Rbac\Model\PermissionInterface;
+use Sylius\Component\Rbac\Model\Role;
+use Sylius\Component\Rbac\Model\RoleInterface;
+use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -52,7 +52,7 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('security_roles')
                     ->useAttributeAsKey('id')
                     ->prototype('scalar')
-                    ->defaultValue(array())
+                    ->defaultValue([])
                 ->end()
             ->end()
         ;
@@ -100,7 +100,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -132,7 +132,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -162,7 +162,7 @@ class Configuration implements ConfigurationInterface
                             ->end()
                             ->arrayNode('security_roles')
                                 ->prototype('scalar')->end()
-                                ->defaultValue(array())
+                                ->defaultValue([])
                             ->end()
                         ->end()
                     ->end()
@@ -170,7 +170,7 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('roles_hierarchy')
                     ->useAttributeAsKey('id')
                     ->prototype('array')
-                        ->beforeNormalization()->ifString()->then(function ($v) { return array('value' => $v); })->end()
+                        ->beforeNormalization()->ifString()->then(function ($v) { return ['value' => $v]; })->end()
                         ->beforeNormalization()
                             ->ifTrue(function ($v) { return is_array($v) && isset($v['value']); })
                             ->then(function ($v) { return preg_split('/\s*,\s*/', $v['value']); })
@@ -192,13 +192,13 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('permissions')
                     ->useAttributeAsKey('id')
                     ->prototype('scalar')->end()
-                    ->defaultValue(array())
+                    ->defaultValue([])
                 ->end()
                 ->arrayNode('permissions_hierarchy')
                     ->useAttributeAsKey('id')
                     ->prototype('array')
                         ->performNoDeepMerging()
-                        ->beforeNormalization()->ifString()->then(function ($v) { return array('value' => $v); })->end()
+                        ->beforeNormalization()->ifString()->then(function ($v) { return ['value' => $v]; })->end()
                         ->beforeNormalization()
                             ->ifTrue(function ($v) { return is_array($v) && isset($v['value']); })
                             ->then(function ($v) { return preg_split('/\s*,\s*/', $v['value']); })

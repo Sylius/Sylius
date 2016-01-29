@@ -38,8 +38,8 @@ class CurrencyProviderSpec extends ObjectBehavior
 
     function it_returns_all_enabled_currencies(CurrencyInterface $currency, $currencyRepository)
     {
-        $currencyRepository->findBy(array('enabled' => true))->shouldBeCalled()->willReturn(array($currency));
+        $currencyRepository->findBy(['enabled' => true])->shouldBeCalled()->willReturn([$currency]);
 
-        $this->getAvailableCurrencies()->shouldReturn(array($currency));
+        $this->getAvailableCurrencies()->shouldReturn([$currency]);
     }
 }

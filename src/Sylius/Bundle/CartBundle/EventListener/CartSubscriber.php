@@ -68,12 +68,12 @@ class CartSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
-            SyliusCartEvents::ITEM_ADD_INITIALIZE    => 'addItem',
+        return [
+            SyliusCartEvents::ITEM_ADD_INITIALIZE => 'addItem',
             SyliusCartEvents::ITEM_REMOVE_INITIALIZE => 'removeItem',
-            SyliusCartEvents::CART_CLEAR_INITIALIZE  => 'clearCart',
-            SyliusCartEvents::CART_SAVE_INITIALIZE   => 'saveCart',
-        );
+            SyliusCartEvents::CART_CLEAR_INITIALIZE => 'clearCart',
+            SyliusCartEvents::CART_SAVE_INITIALIZE => 'saveCart',
+        ];
     }
 
     /**
@@ -122,7 +122,7 @@ class CartSubscriber implements EventSubscriberInterface
         $cart = $event->getCart();
 
         $errors = $this->validator->validate($cart);
-        $valid  = 0 === count($errors);
+        $valid = 0 === count($errors);
 
         if ($valid) {
             $this->cartManager->persist($cart);

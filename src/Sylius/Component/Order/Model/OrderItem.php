@@ -230,7 +230,7 @@ class OrderItem implements OrderItemInterface
         if (!$this->hasUnit($unit)) {
             $this->units->add($unit);
 
-            $this->quantity++;
+            ++$this->quantity;
             $this->unitsTotal += $unit->getTotal();
             $this->recalculateTotal();
         }
@@ -244,7 +244,7 @@ class OrderItem implements OrderItemInterface
         if ($this->hasUnit($unit)) {
             $this->units->removeElement($unit);
 
-            $this->quantity--;
+            --$this->quantity;
             $this->unitsTotal -= $unit->getTotal();
             $this->recalculateTotal();
         }

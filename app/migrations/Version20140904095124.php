@@ -24,7 +24,7 @@ class Version20140904095124 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql("ALTER TABLE sylius_address ADD phone_number VARCHAR(255) DEFAULT NULL");
+        $this->addSql('ALTER TABLE sylius_address ADD phone_number VARCHAR(255) DEFAULT NULL');
     }
 
     public function down(Schema $schema)
@@ -32,6 +32,6 @@ class Version20140904095124 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql("ALTER TABLE sylius_address DROP phone_number");
+        $this->addSql('ALTER TABLE sylius_address DROP phone_number');
     }
 }

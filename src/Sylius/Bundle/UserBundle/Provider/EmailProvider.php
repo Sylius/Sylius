@@ -17,7 +17,7 @@ namespace Sylius\Bundle\UserBundle\Provider;
 class EmailProvider extends AbstractUserProvider
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function findUser($email)
     {

@@ -25,7 +25,7 @@ class OrderItemTypeSpec extends ObjectBehavior
 {
     function let(DataMapperInterface $orderItemQuantityDataMapper)
     {
-        $this->beConstructedWith('OrderItem', array('sylius'), $orderItemQuantityDataMapper);
+        $this->beConstructedWith('OrderItem', ['sylius'], $orderItemQuantityDataMapper);
     }
 
     function it_is_initializable()
@@ -58,16 +58,16 @@ class OrderItemTypeSpec extends ObjectBehavior
             ->shouldBeCalled()
         ;
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
-                'data_class'        => 'OrderItem',
-                'validation_groups' => array('sylius'),
-            ))
+            ->setDefaults([
+                'data_class' => 'OrderItem',
+                'validation_groups' => ['sylius'],
+            ])
             ->shouldBeCalled()
         ;
 

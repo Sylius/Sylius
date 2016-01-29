@@ -1,13 +1,13 @@
 <?php
 
 /*
-* This file is part of the Sylius package.
-*
-* (c) Paweł Jędrzejewski
-*
-* For the full copyright and license information, please view the LICENSE
-* file that was distributed with this source code.
-*/
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
@@ -25,9 +25,9 @@ class AdvancedOrderType extends OrderType
         $builder
             ->add('currency', 'sylius_currency_choice')
             ->add('state', 'sylius_order_state_choice')
-            ->add('product', 'hidden', array(
-                'mapped'  => false,
-            ))
+            ->add('product', 'hidden', [
+                'mapped' => false,
+            ])
         ;
     }
 

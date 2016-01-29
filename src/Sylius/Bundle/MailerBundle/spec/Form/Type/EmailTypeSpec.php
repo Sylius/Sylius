@@ -25,7 +25,7 @@ class EmailTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Email', array('sylius'));
+        $this->beConstructedWith('Email', ['sylius']);
     }
 
     function it_is_initializable()
@@ -75,16 +75,16 @@ class EmailTypeSpec extends ObjectBehavior
             ->willreturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_should_define_assigned_data_class_and_validation_groups(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'data_class' => 'Email',
-                'validation_groups' => array('sylius')
-            ))
+                'validation_groups' => ['sylius'],
+            ])
             ->shouldBeCalled();
 
         $this->configureOptions($resolver);

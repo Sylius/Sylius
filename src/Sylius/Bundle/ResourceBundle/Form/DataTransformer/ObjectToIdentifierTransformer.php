@@ -72,7 +72,7 @@ class ObjectToIdentifierTransformer implements DataTransformerInterface
             return null;
         }
 
-        if (null === $entity = $this->repository->findOneBy(array($this->identifier => $value))) {
+        if (null === $entity = $this->repository->findOneBy([$this->identifier => $value])) {
             throw new TransformationFailedException(sprintf(
                 'Object "%s" with identifier "%s"="%s" does not exist.',
                 $this->repository->getClassName(),

@@ -46,8 +46,7 @@ class AuthorizationChecker implements AuthorizationCheckerInterface
         CurrentIdentityProviderInterface $currentIdentityProvider,
         PermissionMapInterface $permissionMap,
         RolesResolverInterface $rolesResolver
-    )
-    {
+    ) {
         $this->currentIdentityProvider = $currentIdentityProvider;
         $this->permissionMap = $permissionMap;
         $this->rolesResolver = $rolesResolver;

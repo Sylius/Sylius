@@ -11,15 +11,13 @@
 
 namespace Sylius\Bundle\PaymentBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Resource\Factory\Factory;
-use Sylius\Component\Translation\Factory\TranslatableFactory;
+use Sylius\Bundle\PaymentBundle\Form\Type\CreditCardType;
+use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodTranslationType;
+use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType;
+use Sylius\Bundle\PaymentBundle\Form\Type\PaymentType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
-use Sylius\Bundle\PaymentBundle\Form\Type\PaymentType;
-use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType;
-use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodTranslationType;
-use Sylius\Bundle\PaymentBundle\Form\Type\CreditCardType;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Payment\Model\CreditCard;
 use Sylius\Component\Payment\Model\CreditCardInterface;
 use Sylius\Component\Payment\Model\Payment;
@@ -28,6 +26,8 @@ use Sylius\Component\Payment\Model\PaymentMethod;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentMethodTranslation;
 use Sylius\Component\Payment\Model\PaymentMethodTranslationInterface;
+use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Component\Translation\Factory\TranslatableFactory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -102,7 +102,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -132,13 +132,13 @@ class Configuration implements ConfigurationInterface
                                             ->children()
                                                 ->arrayNode('default')
                                                     ->prototype('scalar')->end()
-                                                    ->defaultValue(array('sylius'))
+                                                    ->defaultValue(['sylius'])
                                                 ->end()
                                             ->end()
                                         ->end()
                                         ->arrayNode('fields')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('name', 'description'))
+                                            ->defaultValue(['name', 'description'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -169,7 +169,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -200,7 +200,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()

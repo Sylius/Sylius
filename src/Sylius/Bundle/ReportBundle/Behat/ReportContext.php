@@ -34,11 +34,11 @@ class ReportContext extends DefaultContext
             $this->thereIsReport(
                 $data['name'],
                 $data['description'],
-                $data["code"],
+                $data['code'],
                 $data['renderer'],
-                $data["renderer_configuration"],
-                $data["data_fetcher"],
-                $data["data_fetcher_configuration"],
+                $data['renderer_configuration'],
+                $data['data_fetcher'],
+                $data['data_fetcher_configuration'],
                 false
             );
         }
@@ -81,9 +81,9 @@ class ReportContext extends DefaultContext
         $report->setRendererConfiguration($this->getConfiguration($rendererConfiguration));
 
         $dataFetcherConfiguration = $this->getConfiguration($dataFetcherConfiguration);
-        $dataFetcherConfiguration["start"] = new \DateTime($dataFetcherConfiguration["start"]);
-        $dataFetcherConfiguration["end"] = new \DateTime($dataFetcherConfiguration["end"]);
-        $dataFetcherConfiguration["empty_records"] = isset($dataFetcherConfiguration["empty_records"]) ? false : true;
+        $dataFetcherConfiguration['start'] = new \DateTime($dataFetcherConfiguration['start']);
+        $dataFetcherConfiguration['end'] = new \DateTime($dataFetcherConfiguration['end']);
+        $dataFetcherConfiguration['empty_records'] = isset($dataFetcherConfiguration['empty_records']) ? false : true;
 
         $report->setDataFetcher($dataFetcherType);
         $report->setDataFetcherConfiguration($dataFetcherConfiguration);

@@ -43,9 +43,9 @@ class LoadMetadataSubscriber implements EventSubscriber
      */
     public function getSubscribedEvents()
     {
-        return array(
+        return [
             'loadClassMetadata',
-        );
+        ];
     }
 
     /**
@@ -66,7 +66,6 @@ class LoadMetadataSubscriber implements EventSubscriber
         }
     }
 
-
     /**
      * @param ClassMetadataInfo|ClassMetadata $metadata
      * @param array                           $class
@@ -74,28 +73,28 @@ class LoadMetadataSubscriber implements EventSubscriber
      */
     private function mapAttributes(ClassMetadataInfo $metadata, array $class, $subject)
     {
-        $attributeMapping = array(
-            'fieldName'    => 'attributes',
-            'type'         => ClassMetadataInfo::MANY_TO_MANY,
+        $attributeMapping = [
+            'fieldName' => 'attributes',
+            'type' => ClassMetadataInfo::MANY_TO_MANY,
             'targetEntity' => $class['attribute'],
-            'joinTable'    => array(
+            'joinTable' => [
                 'name' => sprintf('sylius_%s_archetype_attribute', $subject),
-                'joinColumns'   => array(array(
-                    'name'                 => 'archetype_id',
+                'joinColumns' => [[
+                    'name' => 'archetype_id',
                     'referencedColumnName' => 'id',
-                    'nullable'             => false,
-                    'unique'               => false,
-                    'onDelete'             => 'CASCADE',
-                )),
-                'inverseJoinColumns'   => array(array(
-                    'name'                 => 'attribute_id',
+                    'nullable' => false,
+                    'unique' => false,
+                    'onDelete' => 'CASCADE',
+                ]],
+                'inverseJoinColumns' => [[
+                    'name' => 'attribute_id',
                     'referencedColumnName' => 'id',
-                    'nullable'             => false,
-                    'unique'               => false,
-                    'onDelete'             => 'CASCADE',
-                ))
-            ),
-        );
+                    'nullable' => false,
+                    'unique' => false,
+                    'onDelete' => 'CASCADE',
+                ]],
+            ],
+        ];
 
         $metadata->mapManyToMany($attributeMapping);
     }
@@ -107,28 +106,28 @@ class LoadMetadataSubscriber implements EventSubscriber
      */
     private function mapOptions(ClassMetadataInfo $metadata, array $class, $subject)
     {
-        $optionMapping = array(
-            'fieldName'    => 'options',
-            'type'         => ClassMetadataInfo::MANY_TO_MANY,
+        $optionMapping = [
+            'fieldName' => 'options',
+            'type' => ClassMetadataInfo::MANY_TO_MANY,
             'targetEntity' => $class['option'],
-            'joinTable'    => array(
+            'joinTable' => [
                 'name' => sprintf('sylius_%s_archetype_option', $subject),
-                'joinColumns'   => array(array(
-                    'name'                 => sprintf('%s_archetype_id', $subject),
+                'joinColumns' => [[
+                    'name' => sprintf('%s_archetype_id', $subject),
                     'referencedColumnName' => 'id',
-                    'nullable'             => false,
-                    'unique'               => false,
-                    'onDelete'             => 'CASCADE',
-                )),
-                'inverseJoinColumns'   => array(array(
-                    'name'                 => 'option_id',
+                    'nullable' => false,
+                    'unique' => false,
+                    'onDelete' => 'CASCADE',
+                ]],
+                'inverseJoinColumns' => [[
+                    'name' => 'option_id',
                     'referencedColumnName' => 'id',
-                    'nullable'             => false,
-                    'unique'               => false,
-                    'onDelete'             => 'CASCADE',
-                ))
-            ),
-        );
+                    'nullable' => false,
+                    'unique' => false,
+                    'onDelete' => 'CASCADE',
+                ]],
+            ],
+        ];
 
         $metadata->mapManyToMany($optionMapping);
     }
@@ -139,17 +138,17 @@ class LoadMetadataSubscriber implements EventSubscriber
      */
     private function mapParent(ClassMetadataInfo $metadata, array $class)
     {
-        $parentMapping = array(
-            'fieldName'    => 'parent',
-            'type'         => ClassMetadataInfo::MANY_TO_ONE,
+        $parentMapping = [
+            'fieldName' => 'parent',
+            'type' => ClassMetadataInfo::MANY_TO_ONE,
             'targetEntity' => $class['archetype']['classes']['model'],
-            'joinColumn'   => array(
-                'name'                 => 'parent_id',
+            'joinColumn' => [
+                'name' => 'parent_id',
                 'referencedColumnName' => 'id',
-                'nullable'             => true,
-                'onDelete'             => 'SET NULL'
-            ),
-        );
+                'nullable' => true,
+                'onDelete' => 'SET NULL',
+            ],
+        ];
 
         $metadata->mapManyToOne($parentMapping);
     }

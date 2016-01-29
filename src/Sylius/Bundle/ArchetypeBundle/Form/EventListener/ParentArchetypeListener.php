@@ -41,7 +41,7 @@ class ParentArchetypeListener implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(FormEvents::PRE_SET_DATA => 'preSetData');
+        return [FormEvents::PRE_SET_DATA => 'preSetData'];
     }
 
     /**
@@ -55,11 +55,11 @@ class ParentArchetypeListener implements EventSubscriberInterface
         }
 
         $form = $event->getForm();
-        $parentOptions = array(
+        $parentOptions = [
             'required' => false,
             'label' => 'sylius.form.archetype.parent',
-            'property' => 'name'
-        );
+            'property' => 'name',
+        ];
 
         if (null != $currentArchetype->getId()) {
             $parentOptions['query_builder'] = function (RepositoryInterface $repository) use ($currentArchetype) {

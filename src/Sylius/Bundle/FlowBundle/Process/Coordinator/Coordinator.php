@@ -57,7 +57,7 @@ class Coordinator implements CoordinatorInterface
      *
      * @var array
      */
-    protected $scenarios = array();
+    protected $scenarios = [];
 
     /**
      * Constructor.
@@ -216,18 +216,18 @@ class Coordinator implements CoordinatorInterface
         if (null !== $route = $process->getDisplayRoute()) {
             $url = $this->router->generate($route, array_merge(
                 $process->getDisplayRouteParams(),
-                array('stepName' => $step->getName()),
-                $queryParameters ? $queryParameters->all() : array()
+                ['stepName' => $step->getName()],
+                $queryParameters ? $queryParameters->all() : []
             ));
 
             return new RedirectResponse($url);
         }
 
         // Default parameters for display route
-        $routeParameters = array(
+        $routeParameters = [
             'scenarioAlias' => $process->getScenarioAlias(),
-            'stepName'      => $step->getName(),
-        );
+            'stepName' => $step->getName(),
+        ];
 
         if (null !== $queryParameters) {
             $routeParameters = array_merge($queryParameters->all(), $routeParameters);

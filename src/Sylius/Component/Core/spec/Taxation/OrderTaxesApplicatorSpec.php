@@ -90,7 +90,7 @@ class OrderTaxesApplicatorSpec extends ObjectBehavior
     function it_does_not_apply_taxes_if_there_is_no_order_item(OrderInterface $order)
     {
         $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
-        $order->getItems()->willReturn(array());
+        $order->getItems()->willReturn([]);
         $order->isEmpty()->willReturn(true);
 
         $order->getShippingAddress()->shouldNotBeCalled();

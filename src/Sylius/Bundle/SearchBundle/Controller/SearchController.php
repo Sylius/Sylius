@@ -35,7 +35,7 @@ class SearchController extends ResourceController
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
-        /**
+        /*
          * when using elastic search if you want to setup multiple indexes and control
          * them separately you can do so by adding the index service with a setter
          *
@@ -57,7 +57,7 @@ class SearchController extends ResourceController
 
         $paginator = $finder->getPaginator();
 
-        $searchConfig = $this->container->getParameter("sylius_search.config");
+        $searchConfig = $this->container->getParameter('sylius_search.config');
 
         if ($paginator) {
             $paginator->setMaxPerPage($configuration->getPaginationMaxPerPage());
@@ -66,7 +66,7 @@ class SearchController extends ResourceController
 
         $view = View::create()
             ->setTemplate('SyliusSearchBundle::index.html.twig')
-            ->setData(array(
+            ->setData([
                 'results' => $paginator,
                 'facets' => $finder->getFacets(),
                 'facetTags' => $searchConfig['filters']['facets'],
@@ -74,7 +74,7 @@ class SearchController extends ResourceController
                 'searchTerm' => $this->container->get('sylius_search.request_handler')->getQuery(),
                 'searchParam' => $this->container->get('sylius_search.request_handler')->getSearchParam(),
                 'requestMethod' => $this->container->getParameter('sylius_search.request.method'),
-            ))
+            ])
         ;
 
         return $this->viewHandler->handle($configuration, $view);
@@ -88,16 +88,16 @@ class SearchController extends ResourceController
     public function formAction(Request $request)
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-        $filters = array();
+        $filters = [];
 
         if ($this->container->getParameter('sylius_search.pre_search_filter.enabled')) {
             $taxonomy = $this->container->get('sylius.repository.taxonomy')
-                ->findOneBy(array(
-                    'name' => strtoupper($this->container->getParameter('sylius_search.pre_search_filter.taxon'))
-                ))
+                ->findOneBy([
+                    'name' => strtoupper($this->container->getParameter('sylius_search.pre_search_filter.taxon')),
+                ])
             ;
 
-            $filters = array();
+            $filters = [];
             if ($taxonomy) {
                 foreach ($taxonomy->getTaxons() as $taxon) {
                     $filters[] = $taxon->getName();
@@ -109,12 +109,12 @@ class SearchController extends ResourceController
 
         $view = View::create()
             ->setTemplate($this->container->getParameter('sylius_search.search.template'))
-            ->setData(array(
+            ->setData([
                 'filters' => $filters,
                 'searchTerm' => $this->container->get('sylius_search.request_handler')->getQuery(),
                 'searchParam' => $this->container->get('sylius_search.request_handler')->getSearchParam(),
                 'requestMethod' => $this->container->getParameter('sylius_search.request.method'),
-            ))
+            ])
         ;
 
         return $this->viewHandler->handle($configuration, $view);

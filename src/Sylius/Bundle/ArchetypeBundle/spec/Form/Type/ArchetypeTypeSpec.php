@@ -26,7 +26,7 @@ class ArchetypeTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Archetype', array('sylius'), 'book');
+        $this->beConstructedWith('Archetype', ['sylius'], 'book');
     }
 
     function it_is_initializable()
@@ -71,16 +71,16 @@ class ArchetypeTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
+            [
                 'data_class' => 'Archetype',
-                'validation_groups' => array('sylius')
-            ))->shouldBeCalled();
+                'validation_groups' => ['sylius'],
+            ])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

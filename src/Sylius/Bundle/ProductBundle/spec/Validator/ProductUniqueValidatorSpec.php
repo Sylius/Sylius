@@ -46,13 +46,13 @@ class ProductUniqueValidatorSpec extends ObjectBehavior
         ProductInterface $conflictualProduct,
         $context
     ) {
-        $constraint = new ProductUnique(array(
+        $constraint = new ProductUnique([
             'property' => 'name',
-            'message'  => 'Product with given name already exists.'
-        ));
+            'message' => 'Product with given name already exists.',
+        ]);
 
         $product->getName()->willReturn('iPhone');
-        $productRepository->findOneBy(array('name' => 'iPhone'))->shouldBeCalled()->willReturn($conflictualProduct);
+        $productRepository->findOneBy(['name' => 'iPhone'])->shouldBeCalled()->willReturn($conflictualProduct);
 
         $context->addViolationAt('name', 'Product with given name already exists.', Argument::any())->shouldBeCalled();
 
@@ -64,13 +64,13 @@ class ProductUniqueValidatorSpec extends ObjectBehavior
         ProductInterface $product,
         $context
     ) {
-        $constraint = new ProductUnique(array(
+        $constraint = new ProductUnique([
             'property' => 'name',
-            'message'  => 'Product with given name already exists.'
-        ));
+            'message' => 'Product with given name already exists.',
+        ]);
 
         $product->getName()->willReturn('iPhone');
-        $productRepository->findOneBy(array('name' => 'iPhone'))->shouldBeCalled()->willReturn(null);
+        $productRepository->findOneBy(['name' => 'iPhone'])->shouldBeCalled()->willReturn(null);
 
         $context->addViolationAt(Argument::any())->shouldNotBeCalled();
 
@@ -82,13 +82,13 @@ class ProductUniqueValidatorSpec extends ObjectBehavior
         ProductInterface $product,
         $context
     ) {
-        $constraint = new ProductUnique(array(
+        $constraint = new ProductUnique([
             'property' => 'name',
-            'message'  => 'Product with given name already exists'
-        ));
+            'message' => 'Product with given name already exists',
+        ]);
 
         $product->getName()->willReturn('iPhone');
-        $productRepository->findOneBy(array('name' => 'iPhone'))->shouldBeCalled()->willReturn($product);
+        $productRepository->findOneBy(['name' => 'iPhone'])->shouldBeCalled()->willReturn($product);
 
         $context->addViolationAt(Argument::any())->shouldNotBeCalled();
 

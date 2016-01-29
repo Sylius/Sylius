@@ -14,8 +14,8 @@ namespace Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\ChannelsAwareInterface;
-use Sylius\Component\Product\Model\ProductInterface as BaseProductInterface;
 use Sylius\Component\Metadata\Model\MetadataSubjectInterface;
+use Sylius\Component\Product\Model\ProductInterface as BaseProductInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxableInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
@@ -41,7 +41,7 @@ interface ProductInterface extends
      *             User selects the values and we match them to variant.
      */
     const VARIANT_SELECTION_CHOICE = 'choice';
-    const VARIANT_SELECTION_MATCH  = 'match';
+    const VARIANT_SELECTION_MATCH = 'match';
 
     const METADATA_CLASS_IDENTIFIER = 'Product';
 
@@ -76,7 +76,7 @@ interface ProductInterface extends
     /**
      * Check if variant is selectable by simple variant choice.
      *
-     * @return Boolean
+     * @return bool
      */
     public function isVariantSelectionMethodChoice();
 

@@ -43,9 +43,9 @@ class MoneyTypeSpec extends ObjectBehavior
     function it_defines_assigned_currency_and_sets_divisor_to_100(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'currency' => 'PLN',
-                'divisor' => 100)
+                'divisor' => 100, ]
             )
             ->shouldBeCalled();
 

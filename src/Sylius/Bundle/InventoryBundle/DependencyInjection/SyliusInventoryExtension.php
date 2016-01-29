@@ -34,11 +34,11 @@ class SyliusInventoryExtension extends AbstractResourceExtension
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $configFiles = array(
+        $configFiles = [
             'twig.xml',
             'templating.xml',
             'services.xml',
-        );
+        ];
 
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
@@ -55,7 +55,7 @@ class SyliusInventoryExtension extends AbstractResourceExtension
             foreach ($config['events'] as $event) {
                 $listenerDefinition->addTag(
                     'kernel.event_listener',
-                    array('event' => $event, 'method' => 'onInventoryChange')
+                    ['event' => $event, 'method' => 'onInventoryChange']
                 );
             }
         }

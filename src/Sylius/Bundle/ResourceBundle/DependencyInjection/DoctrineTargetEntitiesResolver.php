@@ -34,16 +34,16 @@ class DoctrineTargetEntitiesResolver
 
         foreach ($interfaces as $interface => $model) {
             $resolveTargetEntityListener
-                ->addMethodCall('addResolveTargetEntity', array(
+                ->addMethodCall('addResolveTargetEntity', [
                     $this->getInterface($container, $interface),
                     $this->getClass($container, $model),
-                    array(),
-                ))
+                    [],
+                ])
             ;
         }
 
         if (!$resolveTargetEntityListener->hasTag('doctrine.event_listener')) {
-            $resolveTargetEntityListener->addTag('doctrine.event_listener', array('event' => 'loadClassMetadata'));
+            $resolveTargetEntityListener->addTag('doctrine.event_listener', ['event' => 'loadClassMetadata']);
         }
     }
 

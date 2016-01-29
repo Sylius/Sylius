@@ -54,14 +54,14 @@ class DefaultFormBuilder implements DefaultFormBuilderInterface
         }
 
         foreach ($fields as $fieldName) {
-            $options = array();
+            $options = [];
 
-            if (in_array($fieldName, array('createdAt', 'updatedAt', 'deletedAt'))) {
+            if (in_array($fieldName, ['createdAt', 'updatedAt', 'deletedAt'])) {
                 continue;
             }
 
             if (Type::DATETIME === $classMetadata->getTypeOfField($fieldName)) {
-                $options = array('widget' => 'single_text');
+                $options = ['widget' => 'single_text'];
             }
 
             $formBuilder->add($fieldName, null, $options);
@@ -69,7 +69,7 @@ class DefaultFormBuilder implements DefaultFormBuilderInterface
 
         foreach ($classMetadata->getAssociationMappings() as $fieldName => $associationMapping) {
             if (ClassMetadataInfo::ONE_TO_MANY !== $associationMapping['type']) {
-                $formBuilder->add($fieldName, null, array('property' => 'id'));
+                $formBuilder->add($fieldName, null, ['property' => 'id']);
             }
         }
     }

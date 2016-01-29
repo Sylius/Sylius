@@ -24,21 +24,20 @@ class RouteType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options = array())
+    public function buildForm(FormBuilderInterface $builder, array $options = [])
     {
         $builder
-            ->add('name', null, array(
-                'label' => 'sylius.form.route.name'
-            ))
-            ->add('parent', null, array(
-                'label' => 'sylius.form.route.parent'
-            ))
-            ->add('content', 'sylius_static_content_choice', array(
+            ->add('name', null, [
+                'label' => 'sylius.form.route.name',
+            ])
+            ->add('parent', null, [
+                'label' => 'sylius.form.route.parent',
+            ])
+            ->add('content', 'sylius_static_content_choice', [
                 'label' => 'sylius.form.route.content',
                 'property' => 'title',
-            ))
+            ])
         ;
-
     }
 
     /**

@@ -26,7 +26,7 @@ class DriverProvider
     /**
      * @var DriverInterface[]
      */
-    static private $drivers = array();
+    private static $drivers = [];
 
     /**
      * @param MetadataInterface $metadata

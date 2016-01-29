@@ -27,7 +27,7 @@ class PermissionRepository extends EntityRepository implements PermissionReposit
      */
     public function getChildPermissions(PermissionInterface $permission)
     {
-        $queryBuilder =  $this->createQueryBuilder('o');
+        $queryBuilder = $this->createQueryBuilder('o');
 
         return $queryBuilder
             ->where($queryBuilder->expr()->lt('o.left', $permission->getRight()))

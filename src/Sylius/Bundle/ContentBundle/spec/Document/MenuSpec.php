@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ContentBundle\Document;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\Menu;
 
@@ -30,7 +29,7 @@ class MenuSpec extends ObjectBehavior
     {
         $this->shouldHaveType(Menu::class);
     }
-    
+
     function it_is_a_Sylius_resource()
     {
         $this->shouldImplement(ResourceInterface::class);

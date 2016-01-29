@@ -26,7 +26,6 @@ class VolumeRateCalculator implements CalculatorInterface
         return (int) round($configuration['amount'] * ($subject->getShippingVolume() / $configuration['division']));
     }
 
-
     /**
      * {@inheritdoc}
      */

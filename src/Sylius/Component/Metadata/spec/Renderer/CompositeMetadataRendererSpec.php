@@ -27,7 +27,7 @@ class CompositeMetadataRendererSpec extends ObjectBehavior
     {
         $this->beConstructedWith([$firstRenderer, $secondRenderer]);
     }
-    
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Metadata\Renderer\CompositeMetadataRenderer');
@@ -37,7 +37,7 @@ class CompositeMetadataRendererSpec extends ObjectBehavior
     {
         $this->shouldImplement('Sylius\Component\Metadata\Renderer\MetadataRendererInterface');
     }
-    
+
     function it_check_if_given_renderer_supports_a_metadata(
         MetadataRendererInterface $firstRenderer,
         MetadataRendererInterface $secondRenderer,

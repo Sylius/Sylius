@@ -45,11 +45,10 @@ class LoadPaymentMethodsData extends DataFixture
     }
 
     /**
-     *
      * @param string  $code
      * @param string  $name
      * @param string  $gateway
-     * @param boolean $enabled
+     * @param bool $enabled
      *
      * @return PaymentMethodInterface
      */
@@ -58,10 +57,10 @@ class LoadPaymentMethodsData extends DataFixture
         /* @var $method PaymentMethodInterface */
         $method = $this->getPaymentMethodFactory()->createNew();
 
-        $translatedNames = array(
+        $translatedNames = [
             $this->defaultLocale => sprintf($name),
             'es_ES' => sprintf($this->fakers['es_ES']->word),
-        );
+        ];
         $this->addTranslatedFields($method, $translatedNames);
 
         $method->setGateway($gateway);

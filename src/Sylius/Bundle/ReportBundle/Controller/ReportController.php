@@ -48,11 +48,11 @@ class ReportController extends ResourceController
             $configurationForm->submit($request);
         }
 
-        return $this->container->get('templating')->renderResponse($configuration->getTemplate('show.html'), array(
+        return $this->container->get('templating')->renderResponse($configuration->getTemplate('show.html'), [
             'report' => $report,
             'form' => $configurationForm->createView(),
             'configuration' => $configurationForm->getData(),
-        ));
+        ]);
     }
 
     /**
@@ -62,12 +62,12 @@ class ReportController extends ResourceController
      *
      * @return Response
      */
-    public function embedAction(Request $request, $report, array $configuration = array())
+    public function embedAction(Request $request, $report, array $configuration = [])
     {
         $currencyProvider = $this->get('sylius.currency_provider');
 
         if (!$report instanceof ReportInterface) {
-            $report = $this->getReportRepository()->findOneBy(array('code' => $report));
+            $report = $this->getReportRepository()->findOneBy(['code' => $report]);
         }
 
         if (null === $report) {

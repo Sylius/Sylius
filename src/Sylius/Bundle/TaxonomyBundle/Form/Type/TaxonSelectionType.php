@@ -68,11 +68,11 @@ class TaxonSelectionType extends AbstractType
 
         foreach ($taxonomies as $taxonomy) {
             /* @var $taxonomy TaxonomyInterface */
-            $builder->add($taxonomy->getId(), 'choice', array(
-                'choice_list' => new ObjectChoiceList($this->taxonRepository->getTaxonsAsList($taxonomy), null, array(), null, 'id'),
-                'multiple'    => $options['multiple'],
-                'label'       => /* @Ignore */ $taxonomy->getName(),
-            ));
+            $builder->add($taxonomy->getId(), 'choice', [
+                'choice_list' => new ObjectChoiceList($this->taxonRepository->getTaxonsAsList($taxonomy), null, [], null, 'id'),
+                'multiple' => $options['multiple'],
+                'label' => /* @Ignore */ $taxonomy->getName(),
+            ]);
         }
     }
 
@@ -82,20 +82,20 @@ class TaxonSelectionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
-                'data_class'         => null,
-                'multiple'           => true,
-                'render_label'       => false,
-                'model_transformer'  => TaxonSelectionToCollectionTransformer::class,
-            ))
+            ->setDefaults([
+                'data_class' => null,
+                'multiple' => true,
+                'render_label' => false,
+                'model_transformer' => TaxonSelectionToCollectionTransformer::class,
+            ])
         ;
 
         $resolver->setNormalizer('model_transformer', function (Options $options, $value) {
             if (!is_array($value)) {
-                $value = array(
-                    'class'        => $value,
+                $value = [
+                    'class' => $value,
                     'save_objects' => true,
-                );
+                ];
             } else {
                 if (!isset($value['class'])) {
                     $value['class'] = TaxonSelectionToCollectionTransformer::class;

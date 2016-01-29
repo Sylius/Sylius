@@ -60,8 +60,8 @@ class ArchetypeBuilderSpec extends ObjectBehavior
         AttributeValueInterface $attributeValue,
         OptionInterface $option
     ) {
-        $archetype->getAttributes()->willReturn(array($attribute))->shouldBeCalled();
-        $archetype->getOptions()->willReturn(array($option))->shouldBeCalled();
+        $archetype->getAttributes()->willReturn([$attribute])->shouldBeCalled();
+        $archetype->getOptions()->willReturn([$option])->shouldBeCalled();
 
         $attribute->getCode()->willReturn('test');
         $subject->getAttributeByCode('test')->shouldBeCalled()->willReturn(null);
@@ -84,8 +84,8 @@ class ArchetypeBuilderSpec extends ObjectBehavior
         AttributeValueInterface $attributeValue,
         OptionInterface $option
     ) {
-        $archetype->getAttributes()->willReturn(array($attribute))->shouldBeCalled();
-        $archetype->getOptions()->willReturn(array($option))->shouldBeCalled();
+        $archetype->getAttributes()->willReturn([$attribute])->shouldBeCalled();
+        $archetype->getOptions()->willReturn([$option])->shouldBeCalled();
 
         $attribute->getCode()->willReturn('test');
         $subject->getAttributeByCode('test')->shouldBeCalled()->willReturn($attributeValue);

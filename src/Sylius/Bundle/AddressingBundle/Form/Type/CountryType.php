@@ -29,13 +29,13 @@ class CountryType extends AbstractResourceType
     {
         $builder
             ->addEventSubscriber(new AddCodeFormSubscriber('country'))
-            ->add('provinces', 'collection', array(
+            ->add('provinces', 'collection', [
                 'type' => 'sylius_province',
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
                 'button_add_label' => 'sylius.form.country.add_province',
-            ))
+            ])
         ;
     }
 

@@ -25,7 +25,7 @@ class TopicTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Contact', array('sylius'));
+        $this->beConstructedWith('Contact', ['sylius']);
     }
 
     function it_is_initializable()
@@ -45,16 +45,16 @@ class TopicTypeSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($builder);
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_should_define_assigned_data_class_and_validation_groups(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'data_class' => 'Contact',
-                'validation_groups' => array('sylius')
-            ))
+                'validation_groups' => ['sylius'],
+            ])
             ->shouldBeCalled();
 
         $this->configureOptions($resolver);
