@@ -60,16 +60,6 @@ Put this configuration inside your ``app/config/config.yml``.
     sylius_report:
         driver: doctrine/orm # Configure the doctrine orm driver used in the documentation.
 
-Routing configuration
----------------------
-
-Add the following to your ``app/config/routing.yml``.
-
-.. code-block:: yaml
-
-    sylius_report:
-        resource: @SyliusReportBundle/Resources/config/routing.yml
-
 Updating database schema
 ------------------------
 
