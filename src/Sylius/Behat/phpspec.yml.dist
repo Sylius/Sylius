@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Sylius\Behat
+        psr4_prefix: Sylius\Behat
+        src_path: .
