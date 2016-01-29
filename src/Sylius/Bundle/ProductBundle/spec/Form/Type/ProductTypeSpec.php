@@ -58,6 +58,12 @@ class ProductTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
+        $builder
+            ->add('associations', 'collection', Argument::withEntry('type', 'sylius_product_association'))
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+
         $this->buildForm($builder, array());
     }
 

@@ -47,6 +47,13 @@ sylius:
             tracking_number: Tracking number
         title: My account
     add_to_cart: Add to cart
+    association_type:
+        index_header: Association types
+        update_header: Edit Association type
+        create_header: Create Association type
+        name: Name
+        create: Create
+        update: Update
     address:
         city: City
         company: Company
@@ -225,10 +232,16 @@ sylius:
             index: Permissions
         product:
             index: Products
+        association_type:
+            index: Association types
         promotion:
             index: Promotions
         promotion_coupon:
             index: Coupons
+        product_association:
+            index: Association
+        product_association_type:
+            index: Association type
         redirect_route:
             index: Redirect routes
         report:
@@ -740,6 +753,7 @@ sylius:
         add_attribute: Add attribute
         archetype: Archetype
         attributes: Attributes
+        association: Association
         available_on: Available on
         available_on_demand: Available on demand
         available_until: Available until
@@ -778,6 +792,7 @@ sylius:
         stock: Current stock
         tabs:
             attributes: Attributes
+            associations: Associations
             categorization: Categorization
             channels: Channels
             images: Images
@@ -801,6 +816,17 @@ sylius:
         code: Code
         create: Create product attribute
         create_header: New product attribute
+        index_header: Product attributes
+        manage: Manage attributes
+        name: Name
+        no_results: There are no attributes configured
+        type: Type
+        update_header: Editing attribute
+        updated_at: Last update
+    product_association:
+        code: Code
+        create: Create product association
+        create_header: New product
         index_header: Product attributes
         manage: Manage attributes
         name: Name
@@ -1058,6 +1084,15 @@ sylius:
         reset: Reset
         reset_password: Reset password
         welcome: Welcome
+        add_association: Add association
+        product_associations: Product associations
+        create_product_association: Create product association
+        product_association_types: Product association types
+        create_product_association_type: Create product association type
+        update_product_association_type: Update product association type
+        no_association_types_to_display: There are no association types defined
+        name: Name
+        id: Id
     unknown: Unknown
     user:
         create: Create user

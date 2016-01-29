@@ -65,15 +65,29 @@ class Product extends AbstractTranslatable implements ProductInterface
      */
     protected $options;
 
+    /**
+     * @var Collection|ProductAssociationInterface[]
+     */
+    protected $associations;
+
     public function __construct()
     {
         parent::__construct();
 
         $this->availableOn = new \DateTime();
         $this->attributes = new ArrayCollection();
+        $this->associations = new ArrayCollection();
         $this->variants = new ArrayCollection();
         $this->options = new ArrayCollection();
         $this->createdAt = new \DateTime();
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getName();
     }
 
     /**
@@ -457,5 +471,43 @@ class Product extends AbstractTranslatable implements ProductInterface
         }
 
         $this->deletedAt = $deletedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAssociations()
+    {
+        return $this->associations;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addAssociation(ProductAssociationInterface $association)
+    {
+        if (!$this->hasAssociation($association)) {
+            $this->associations->add($association);
+            $association->setOwner($this);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeAssociation(ProductAssociationInterface $association)
+    {
+        if ($this->hasAssociation($association)) {
+            $association->setOwner(null);
+            $this->associations->removeElement($association);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasAssociation(ProductAssociationInterface $association)
+    {
+        return $this->associations->contains($association);
     }
 }
