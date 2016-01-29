@@ -1,3 +1,4 @@
+{% set subject = metadata.name|replace({'_attribute': ''}) %}
 {% for attributeId, form in forms %}
     <div data-form-collection="item"
          data-form-collection-index="{{ count }}"
@@ -14,9 +15,12 @@
             <div class="form-group">
                 {% set id = form.vars.label|replace(' ', '_')|lower %}
                 <label class="col-lg-2 control-label required" for="{{ id }}">{{ form.vars.label }}</label>
-                <input type="hidden" name="sylius_product[attributes][{{ count }}][attribute]" id="sylius_product_attributes_{{ count }}_attribute" value="{{ attributeId }}"/>
+                <input type="hidden"
+                       name="{{ metadata.applicationName }}_{{ subject }}[attributes][{{ count }}][attribute]"
+                       id="{{ metadata.applicationName }}_{{ subject }}_attributes_{{ count }}_attribute"
+                       value="{{ attributeId }}"/>
                 <div class="col-lg-10">
-                    {{ _self.formField(form, count, id, '') }}
+                    {{ _self.formField(form, count, id, '', subject, metadata.applicationName) }}
                 </div>
             </div>
 
@@ -25,7 +29,7 @@
     {% set count = count+1 %}
 {% endfor %}
 
-{% macro formField(item, count, id, prefix) %}
+{% macro formField(item, count, id, prefix, subject, applicationName) %}
     {% if item.children|length > 0 %}
         {% set prefix = prefix~'_'~item.vars.name %}
         {% for child in item.children %}
@@ -33,7 +37,7 @@
         {% endfor %}
     {% elseif item.vars.name != '_token' %}
         {% set namePrefix = prefix|replace({'_': ']['}) %}
-        {% set dataName = 'sylius_product[attributes]['~count~namePrefix~']['~item.vars.name~']' %}
+        {% set dataName = applicationName~'_'~subject~'[attributes]['~count~namePrefix~']['~item.vars.name~']' %}
 
         {{ form_widget(item, {'id': id, 'attr': {'data-name': dataName }}) }}
     {% endif %}
