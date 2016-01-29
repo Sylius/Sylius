@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Page;
+namespace Sylius\Behat\PageObjectExtension\Page;
 
 use Behat\Mink\Session;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Exception\ElementNotFoundException;
@@ -33,7 +33,7 @@ abstract class SymfonyPage extends Page
      * @param array $parameters
      * @param RouterInterface $router
      */
-    public function __construct(Session $session, Factory $factory, array $parameters = array(), RouterInterface $router)
+    public function __construct(Session $session, Factory $factory, array $parameters = [], RouterInterface $router)
     {
         parent::__construct($session, $factory, $parameters);
 
