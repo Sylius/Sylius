@@ -29,7 +29,7 @@ class EmailRenderEvent extends Event
      */
     protected $recipients;
 
-    public function __construct(RenderedEmail $renderedEmail, array $recipients = array())
+    public function __construct(RenderedEmail $renderedEmail, array $recipients = [])
     {
         $this->renderedEmail = $renderedEmail;
         $this->recipients = $recipients;

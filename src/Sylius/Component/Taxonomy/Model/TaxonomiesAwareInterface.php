@@ -31,7 +31,7 @@ interface TaxonomiesAwareInterface
     /**
      * @param TaxonomyInterface $taxonomy
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasTaxonomy(TaxonomyInterface $taxonomy);
 

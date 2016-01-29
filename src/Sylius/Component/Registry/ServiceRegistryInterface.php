@@ -43,7 +43,7 @@ interface ServiceRegistryInterface
     /**
      * @param string $type
      *
-     * @return Boolean
+     * @return bool
      */
     public function has($type);
 

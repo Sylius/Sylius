@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sylius package.
  *
@@ -72,7 +73,7 @@ class TranslationSlugHandler implements SlugHandlerInterface
     private $usedPathSeparator;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function __construct(SluggableListener $sluggable)
     {
@@ -80,7 +81,7 @@ class TranslationSlugHandler implements SlugHandlerInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function onChangeDecision(SluggableAdapter $ea, array &$config, $object, &$slug, &$needToChangeSlug)
     {
@@ -101,7 +102,7 @@ class TranslationSlugHandler implements SlugHandlerInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function postSlugBuild(SluggableAdapter $ea, array &$config, $object, &$slug)
     {
@@ -115,16 +116,15 @@ class TranslationSlugHandler implements SlugHandlerInterface
 
         $wrapped = AbstractWrapper::wrap($relation, $this->om);
         if ($parent = $wrapped->getPropertyValue($options['relationParentRelationField'])) {
-
-            $translation = call_user_func_array(array($parent,$options['translate']), array($locale));
+            $translation = call_user_func_array([$parent, $options['translate']], [$locale]);
 
             $this->parentSlug = $translation->{$options['parentFieldMethod']}();
 
             // if needed, remove suffix from parentSlug, so we can use it to prepend it to our slug
-            if(isset($options['suffix'])) {
+            if (isset($options['suffix'])) {
                 $suffix = $options['suffix'];
 
-                if(substr($this->parentSlug, -strlen($suffix)) === $suffix) { //endsWith
+                if (substr($this->parentSlug, -strlen($suffix)) === $suffix) { //endsWith
                     $this->parentSlug = substr_replace($this->parentSlug, '', -1 * strlen($suffix));
                 }
             }
@@ -134,7 +134,7 @@ class TranslationSlugHandler implements SlugHandlerInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public static function validate(array $options, ClassMetadata $meta)
     {
@@ -152,7 +152,7 @@ class TranslationSlugHandler implements SlugHandlerInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function onSlugCompletion(SluggableAdapter $ea, array &$config, $object, &$slug)
     {
@@ -205,7 +205,7 @@ class TranslationSlugHandler implements SlugHandlerInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function handlesUrlization()
     {
@@ -219,6 +219,6 @@ class TranslationSlugHandler implements SlugHandlerInterface
      */
     private function deleteUnnecessaryParentSlug($slug)
     {
-        return preg_replace('/^' . preg_quote($this->parentSlug.$this->usedPathSeparator, '/') . '/', '', $slug);
+        return preg_replace('/^'.preg_quote($this->parentSlug.$this->usedPathSeparator, '/').'/', '', $slug);
     }
 }

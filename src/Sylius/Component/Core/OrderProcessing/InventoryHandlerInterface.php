@@ -12,7 +12,6 @@
 namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderItemInterface;
 
 /**
  * Order inventory handler service interface.

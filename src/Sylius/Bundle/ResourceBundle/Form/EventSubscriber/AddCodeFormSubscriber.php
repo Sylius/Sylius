@@ -40,9 +40,9 @@ class AddCodeFormSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             FormEvents::PRE_SET_DATA => 'preSetData',
-        );
+        ];
     }
 
     /**
@@ -55,11 +55,11 @@ class AddCodeFormSubscriber implements EventSubscriberInterface
 
         if ($resource instanceof CodeAwareInterface) {
             $disabled = null !== $resource->getCode();
-        } else if (null !== $resource) {
+        } elseif (null !== $resource) {
             throw new UnexpectedTypeException($resource, CodeAwareInterface::class);
         }
 
         $form = $event->getForm();
-        $form->add('code', $this->type, array('label' => 'sylius.ui.code', 'disabled' => $disabled));
+        $form->add('code', $this->type, ['label' => 'sylius.ui.code', 'disabled' => $disabled]);
     }
 }

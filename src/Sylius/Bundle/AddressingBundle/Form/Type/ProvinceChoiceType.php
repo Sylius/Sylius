@@ -52,12 +52,12 @@ class ProvinceChoiceType extends AbstractType
         };
 
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'choice_list' => $choices,
                 'country' => null,
                 'label' => 'sylius.form.address.province',
                 'empty_value' => 'sylius.form.province.select',
-            ))
+            ])
         ;
         $resolver->addAllowedTypes('country', 'NULL');
         $resolver->addAllowedTypes('country', CountryInterface::class);

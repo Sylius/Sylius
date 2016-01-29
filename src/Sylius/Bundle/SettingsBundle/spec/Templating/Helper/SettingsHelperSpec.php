@@ -41,7 +41,7 @@ class SettingsHelperSpec extends ObjectBehavior
     }
 
     function it_should_return_settings_parameter_by_namespace_and_name(
-        SettingsManagerInterface$settingsManager,
+        SettingsManagerInterface $settingsManager,
         Settings $settings
     ) {
         $settingsManager->loadSettings('sylius_shipping')->shouldBeCalled()->willReturn($settings);

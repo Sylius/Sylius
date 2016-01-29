@@ -91,7 +91,7 @@ class OrderItemSpec extends ObjectBehavior
         $this->shouldThrow('\InvalidArgumentException')->duringSetUnitPrice(44.98 * 100);
         $this->shouldThrow('\InvalidArgumentException')->duringSetUnitPrice('4498');
         $this->shouldThrow('\InvalidArgumentException')->duringSetUnitPrice(round(44.98 * 100));
-        $this->shouldThrow('\InvalidArgumentException')->duringSetUnitPrice(array(4498));
+        $this->shouldThrow('\InvalidArgumentException')->duringSetUnitPrice([4498]);
         $this->shouldThrow('\InvalidArgumentException')->duringSetUnitPrice(new \stdClass());
     }
 
@@ -117,12 +117,12 @@ class OrderItemSpec extends ObjectBehavior
         $unit1->getOrderItem()->willReturn($this);
         $unit1->getTotal()->willReturn(100);
         $unit1->getAdjustments(null)->willReturn($unitAdjustments1);
-        $unitAdjustments1->toArray()->willReturn(array($unitAdjustment1));
+        $unitAdjustments1->toArray()->willReturn([$unitAdjustment1]);
 
         $unit2->getOrderItem()->willReturn($this);
         $unit2->getTotal()->willReturn(100);
         $unit2->getAdjustments(null)->willReturn($unitAdjustments2);
-        $unitAdjustments2->toArray()->willReturn(array($unitAdjustment2));
+        $unitAdjustments2->toArray()->willReturn([$unitAdjustment2]);
 
         $this->addUnit($unit1);
         $this->addUnit($unit2);
@@ -132,7 +132,7 @@ class OrderItemSpec extends ObjectBehavior
 
         $this->addAdjustment($itemAdjustment);
 
-        $this->getAdjustmentsRecursively()->shouldReturn(array($itemAdjustment, $unitAdjustment1, $unitAdjustment2));
+        $this->getAdjustmentsRecursively()->shouldReturn([$itemAdjustment, $unitAdjustment1, $unitAdjustment2]);
     }
 
     function it_adds_and_removes_units(OrderItemUnitInterface $orderItemUnit1, OrderItemUnitInterface $orderItemUnit2)

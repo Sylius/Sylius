@@ -57,23 +57,23 @@ class RuleTypeSpec extends ObjectBehavior
             Argument::type(BuildRuleFormSubscriber::class)
         )->shouldBeCalled();
 
-        $this->buildForm($builder, array(
-            'configuration_type' => 'configuration_form_type'
-        ));
+        $this->buildForm($builder, [
+            'configuration_type' => 'configuration_form_type',
+        ]);
     }
 
     function it_should_define_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'data_class' => 'Rule',
-                'validation_groups' => array('Default'),
-            ))
+                'validation_groups' => ['Default'],
+            ])
             ->shouldBeCalled()
         ;
 
-        $resolver->setDefined(array('configuration_type'))->shouldBeCalled();
-        $resolver->setDefaults(array('configuration_type' => RuleInterface::TYPE_ITEM_TOTAL))->shouldBeCalled();
+        $resolver->setDefined(['configuration_type'])->shouldBeCalled();
+        $resolver->setDefaults(['configuration_type' => RuleInterface::TYPE_ITEM_TOTAL])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

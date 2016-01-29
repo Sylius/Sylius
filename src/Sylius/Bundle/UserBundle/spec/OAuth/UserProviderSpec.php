@@ -97,7 +97,7 @@ class UserProviderSpec extends ObjectBehavior
         $response->getUsername()->willReturn('username');
         $response->getResourceOwner()->willReturn($resourceOwner);
 
-        $oauthRepository->findOneBy(array('provider' => 'google', 'identifier' => 'username'))->willReturn($oauth);
+        $oauthRepository->findOneBy(['provider' => 'google', 'identifier' => 'username'])->willReturn($oauth);
         $oauth->getUser()->willReturn($user);
 
         $this->loadUserByOAuthUserResponse($response)->shouldReturn($user);
@@ -120,7 +120,7 @@ class UserProviderSpec extends ObjectBehavior
         $response->getResourceOwner()->willReturn($resourceOwner);
         $response->getAccessToken()->willReturn('access_token');
 
-        $oauthRepository->findOneBy(array('provider' => 'google', 'identifier' => 'username'))->willReturn(null);
+        $oauthRepository->findOneBy(['provider' => 'google', 'identifier' => 'username'])->willReturn(null);
         $oauthFactory->createNew()->willReturn($oauth);
 
         $userRepository->findOneByEmail('username@email')->willReturn($user);
@@ -157,7 +157,7 @@ class UserProviderSpec extends ObjectBehavior
         $response->getResourceOwner()->willReturn($resourceOwner);
         $response->getAccessToken()->willReturn('access_token');
 
-        $oauthRepository->findOneBy(array('provider' => 'google', 'identifier' => 'username'))->willReturn(null);
+        $oauthRepository->findOneBy(['provider' => 'google', 'identifier' => 'username'])->willReturn(null);
         $oauthFactory->createNew()->willReturn($oauth);
 
         $userFactory->createNew()->willReturn($user);

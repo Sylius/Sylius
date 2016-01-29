@@ -13,7 +13,6 @@ namespace Sylius\Bundle\ProductBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
-use Sylius\Component\Association\Model\AssociationType;
 
 /**
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>

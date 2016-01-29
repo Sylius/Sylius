@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Translation\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use spec\Sylius\Component\Translation\Fixtures\SampleNonTranslatableResource;
 use spec\Sylius\Component\Translation\Fixtures\SampleTranslatableResource;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -39,7 +38,7 @@ class TranslatableFactorySpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Component\Translation\Factory\TranslatableFactory');
     }
-    
+
     function it_implements_translatable_factory_interface()
     {
         $this->shouldImplement(TranslatableFactoryInterface::class);

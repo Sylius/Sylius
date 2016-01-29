@@ -21,24 +21,24 @@ class InstallCommand extends AbstractInstallCommand
     /**
      * @var array
      */
-    private $commands = array(
-        array (
+    private $commands = [
+        [
             'command' => 'check-requirements',
             'message' => 'Checking system requirements.',
-        ),
-        array (
+        ],
+        [
             'command' => 'database',
             'message' => 'Setting up the database.',
-        ),
-        array (
+        ],
+        [
             'command' => 'setup',
             'message' => 'Shop configuration.',
-        ),
-        array (
+        ],
+        [
             'command' => 'assets',
             'message' => 'Installing assets.',
-        ),
-    );
+        ],
+    ];
 
     /**
      * @var bool
@@ -72,8 +72,8 @@ EOT
 
         foreach ($this->commands as $step => $command) {
             try {
-                $output->writeln(sprintf('<comment>Step %d of %d.</comment> <info>%s</info>', $step+1, count($this->commands), $command['message']));
-                $this->commandExecutor->runCommand('sylius:install:'.$command['command'], array(), $output);
+                $output->writeln(sprintf('<comment>Step %d of %d.</comment> <info>%s</info>', $step + 1, count($this->commands), $command['message']));
+                $this->commandExecutor->runCommand('sylius:install:'.$command['command'], [], $output);
                 $output->writeln('');
             } catch (RuntimeException $exception) {
                 $this->isErrored = true;
@@ -82,12 +82,12 @@ EOT
             }
         }
 
-        $map = array(
-            Kernel::ENV_DEV     => '/app_dev.php',
-            Kernel::ENV_TEST    => '/app_test.php',
+        $map = [
+            Kernel::ENV_DEV => '/app_dev.php',
+            Kernel::ENV_TEST => '/app_test.php',
             Kernel::ENV_STAGING => '/app_staging.php',
-            Kernel::ENV_PROD    => '/',
-        );
+            Kernel::ENV_PROD => '/',
+        ];
 
         $output->writeln($this->getProperFinalMessage());
         $output->writeln(sprintf('You can now open your store at the following path under the website root: <info>%s.</info>', $map[$this->getEnvironment()]));

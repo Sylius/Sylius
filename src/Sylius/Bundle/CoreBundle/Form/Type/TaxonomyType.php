@@ -29,10 +29,10 @@ class TaxonomyType extends BaseTaxonomyType
         $builder->add(
             'file',
             'file',
-            array(
+            [
                 'property_path' => 'root.file',
-                'label' => 'sylius.form.taxonomy.file'
-            )
+                'label' => 'sylius.form.taxonomy.file',
+            ]
         );
     }
 }

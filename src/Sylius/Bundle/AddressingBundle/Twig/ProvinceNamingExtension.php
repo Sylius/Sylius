@@ -36,10 +36,10 @@ class ProvinceNamingExtension extends \Twig_Extension
      */
     public function getFilters()
     {
-        return array(
-            new \Twig_SimpleFilter('sylius_province_name', array($this, 'getProvinceName')),
-            new \Twig_SimpleFilter('sylius_province_abbreviation', array($this, 'getProvinceAbbreviation')),
-        );
+        return [
+            new \Twig_SimpleFilter('sylius_province_name', [$this, 'getProvinceName']),
+            new \Twig_SimpleFilter('sylius_province_abbreviation', [$this, 'getProvinceAbbreviation']),
+        ];
     }
 
     /**

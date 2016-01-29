@@ -32,13 +32,13 @@ class IntegerDistributor implements IntegerDistributorInterface
         $high = $low + 1;
 
         $remainder = $amount % $numberOfTargets;
-        $result = array();
+        $result = [];
 
-        for ($i = 0; $i < $remainder; $i++) {
+        for ($i = 0; $i < $remainder; ++$i) {
             $result[] = $high * $sign;
         }
 
-        for ($i = $remainder; $i < $numberOfTargets; $i++) {
+        for ($i = $remainder; $i < $numberOfTargets; ++$i) {
             $result[] = $low * $sign;
         }
 
@@ -52,6 +52,6 @@ class IntegerDistributor implements IntegerDistributorInterface
      */
     private function validateNumberOfTargets($numberOfTargets)
     {
-        return (is_int($numberOfTargets) && 1 <= $numberOfTargets);
+        return is_int($numberOfTargets) && 1 <= $numberOfTargets;
     }
 }

@@ -55,7 +55,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      *
      * @var array
      */
-    protected $pricingConfiguration = array();
+    protected $pricingConfiguration = [];
 
     /**
      * On hold.
@@ -138,10 +138,10 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
             $string .= '(';
 
             foreach ($this->getOptions() as $option) {
-                $string .= $option->getOption()->getName() . ': ' . $option->getValue() . ', ';
+                $string .= $option->getOption()->getName().': '.$option->getValue().', ';
             }
 
-            $string = substr($string, 0, -2) . ')';
+            $string = substr($string, 0, -2).')';
         }
 
         return $string;
@@ -160,7 +160,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      */
     public function getMetadataIdentifier()
     {
-        return $this->getMetadataClassIdentifier() . '-' . $this->getId();
+        return $this->getMetadataClassIdentifier().'-'.$this->getId();
     }
 
     /**
@@ -318,7 +318,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      */
     public function setSold($sold)
     {
-        $this->sold = (int)$sold;
+        $this->sold = (int) $sold;
 
         return $this;
     }
@@ -344,7 +344,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      */
     public function setAvailableOnDemand($availableOnDemand)
     {
-        $this->availableOnDemand = (bool)$availableOnDemand;
+        $this->availableOnDemand = (bool) $availableOnDemand;
 
         return $this;
     }

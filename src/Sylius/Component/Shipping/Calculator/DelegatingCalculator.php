@@ -11,8 +11,8 @@
 
 namespace Sylius\Component\Shipping\Calculator;
 
-use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 /**
  * This class delegates the calculation of charge for particular shipping subject

@@ -14,10 +14,7 @@ namespace Sylius\Bundle\ThemeBundle\Loader\Filesystem;
 use Sylius\Bundle\ThemeBundle\Loader\ConfigurationProviderInterface;
 use Sylius\Bundle\ThemeBundle\Loader\LoaderInterface;
 use Sylius\Bundle\ThemeBundle\Locator\FileLocatorInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\Config\Resource\FileResource;
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -56,7 +53,7 @@ final class FilesystemConfigurationProvider implements ConfigurationProviderInte
      */
     public function getConfigurations()
     {
-        return $this->processFileResources(function($file) {
+        return $this->processFileResources(function ($file) {
             return $this->loader->load($file);
         });
     }

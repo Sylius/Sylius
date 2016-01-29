@@ -50,7 +50,7 @@ class TaxRate implements TaxRateInterface
     protected $amount = 0;
 
     /**
-     * @var Boolean
+     * @var bool
      */
     protected $includedInPrice = false;
 

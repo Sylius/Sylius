@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\VariationBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Variation\Model\OptionInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormTypeInterface;
@@ -43,15 +42,15 @@ class OptionValueCollectionTypeSpec extends ObjectBehavior
         $option->getPresentation()->shouldBeCalled()->willReturn(null);
         $option->getName()->shouldBeCalled()->willReturn('option_name');
 
-        $builder->add('3', 'sylius_varibale_name_option_value_choice', array(
-            'label'         => 'option_name',
-            'option'        => $option,
-            'property_path' => '[0]'
-        ))->shouldBeCalled();
+        $builder->add('3', 'sylius_varibale_name_option_value_choice', [
+            'label' => 'option_name',
+            'option' => $option,
+            'property_path' => '[0]',
+        ])->shouldBeCalled();
 
-        $this->buildForm($builder, array(
-            'options' => array($option)
-        ));
+        $this->buildForm($builder, [
+            'options' => [$option],
+        ]);
     }
 
     function it_builds_a_form_using_option_name_as_label_if_presentation_is_empty(
@@ -62,23 +61,22 @@ class OptionValueCollectionTypeSpec extends ObjectBehavior
         $option->getPresentation()->shouldBeCalled()->willReturn('option_presentation');
         $option->getName()->shouldNotBeCalled();
 
+        $builder->add('3', 'sylius_varibale_name_option_value_choice', [
+            'label' => 'option_presentation',
+            'option' => $option,
+            'property_path' => '[0]',
+        ])->shouldBeCalled();
 
-        $builder->add('3', 'sylius_varibale_name_option_value_choice', array(
-            'label'         => 'option_presentation',
-            'option'        => $option,
-            'property_path' => '[0]'
-        ))->shouldBeCalled();
-
-        $this->buildForm($builder, array(
-            'options' => array($option)
-        ));
+        $this->buildForm($builder, [
+            'options' => [$option],
+        ]);
     }
 
     function it_has_options(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'options' => null
-        ))->shouldBeCalled();
+        $resolver->setDefaults([
+            'options' => null,
+        ])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

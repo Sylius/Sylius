@@ -24,7 +24,7 @@ class CartSummaryPageSpec extends ObjectBehavior
 {
     function let(Session $session, Factory $factory, RouterInterface $router)
     {
-        $this->beConstructedWith($session, $factory, array(), $router);
+        $this->beConstructedWith($session, $factory, [], $router);
     }
 
     function it_is_initializable()

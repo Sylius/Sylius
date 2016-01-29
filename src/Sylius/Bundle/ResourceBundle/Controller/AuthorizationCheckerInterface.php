@@ -29,7 +29,7 @@ interface AuthorizationCheckerInterface
      * @param RequestConfiguration $configuration
      * @param $permission
      *
-     * @return boolean
+     * @return bool
      */
     public function isGranted(RequestConfiguration $configuration, $permission);
 }

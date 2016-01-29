@@ -12,12 +12,11 @@
 namespace spec\Sylius\Component\Taxonomy\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Component\Taxonomy\Factory\TaxonFactoryInterface;
-use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
-use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Taxonomy\Factory\TaxonFactoryInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -33,12 +32,12 @@ class TaxonFactorySpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Component\Taxonomy\Factory\TaxonFactory');
     }
-    
+
     function it_is_a_resource_factory()
     {
         $this->shouldImplement(FactoryInterface::class);
     }
-    
+
     function it_implements_taxon_factory_interface()
     {
         $this->shouldImplement(TaxonFactoryInterface::class);
@@ -47,17 +46,17 @@ class TaxonFactorySpec extends ObjectBehavior
     function it_creates_new_taxon(FactoryInterface $factory, TaxonInterface $taxon)
     {
         $factory->createNew()->willReturn($taxon);
-        
+
         $this->createNew()->shouldReturn($taxon);
     }
-    
+
     function it_throws_an_exception_when_taxonomy_is_not_found(RepositoryInterface $taxonomyRepository)
     {
         $taxonomyRepository->find(15)->willReturn(null);
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('createForTaxonomy', array(15))
+            ->during('createForTaxonomy', [15])
         ;
     }
 
@@ -66,8 +65,7 @@ class TaxonFactorySpec extends ObjectBehavior
         RepositoryInterface $taxonomyRepository,
         TaxonomyInterface $taxonomy,
         TaxonInterface $taxon
-    )
-    {
+    ) {
         $factory->createNew()->willReturn($taxon);
         $taxonomyRepository->find(13)->willReturn($taxonomy);
         $taxon->setTaxonomy($taxonomy)->shouldBeCalled();

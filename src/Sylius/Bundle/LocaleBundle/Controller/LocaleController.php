@@ -41,7 +41,7 @@ class LocaleController extends ResourceController
         $this->getLocaleContext()->setCurrentLocale($locale);
 
         if (!$configuration->isHtmlRequest()) {
-            $view = View::create(array('locale' => $locale));
+            $view = View::create(['locale' => $locale]);
 
             return $this->viewHandler->handle($configuration, $view);
         }

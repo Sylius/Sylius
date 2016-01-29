@@ -53,11 +53,11 @@ class WebContext extends DefaultContext
 
         $entityManager = $this->getEntityManager();
         $entityManager->getFilters()->disable('softdeleteable');
-        $resource = $this->findOneBy($type, array($property => $value));
+        $resource = $this->findOneBy($type, [$property => $value]);
         $entityManager->getFilters()->enable('softdeleteable');
 
         $this->getSession()->visit($this->generatePageUrl(
-            sprintf('%s_show', $type), array('id' => $resource->getId())
+            sprintf('%s_show', $type), ['id' => $resource->getId()]
         ));
     }
 
@@ -94,7 +94,7 @@ class WebContext extends DefaultContext
         $entityManager->getFilters()->enable('softdeleteable');
 
         $this->assertSession()->addressEquals($this->generatePageUrl(
-            sprintf('%s_show', $type), array('id' => $resource->getId())
+            sprintf('%s_show', $type), ['id' => $resource->getId()]
         ));
 
         $this->assertStatusCodeEquals(200);
@@ -123,10 +123,10 @@ class WebContext extends DefaultContext
         $type = str_replace(' ', '_', $type);
 
         $action = str_replace(array_keys($this->actions), array_values($this->actions), $action);
-        $resource = $this->findOneBy($type, array($property => $value));
+        $resource = $this->findOneBy($type, [$property => $value]);
 
         $this->getSession()->visit($this->generatePageUrl(
-            sprintf('%s_%s', $type, $action), array('id' => $resource->getId())
+            sprintf('%s_%s', $type, $action), ['id' => $resource->getId()]
         ));
     }
 
@@ -152,10 +152,10 @@ class WebContext extends DefaultContext
         $type = str_replace(' ', '_', $type);
 
         $action = str_replace(array_keys($this->actions), array_values($this->actions), $action);
-        $resource = $this->findOneBy($type, array($property => $value));
+        $resource = $this->findOneBy($type, [$property => $value]);
 
         $this->assertSession()->addressEquals($this->generatePageUrl(
-            sprintf('%s_%s', $type, $action), array('id' => $resource->getId())
+            sprintf('%s_%s', $type, $action), ['id' => $resource->getId()]
         ));
         $this->assertStatusCodeEquals(200);
     }
@@ -266,10 +266,10 @@ class WebContext extends DefaultContext
      */
     public function iShouldSeeResourceWithValueInThatList($columnName, $value)
     {
-        $tableNode = new TableNode(array(
-            array(trim($columnName)),
-            array(trim($value)),
-        ));
+        $tableNode = new TableNode([
+            [trim($columnName)],
+            [trim($value)],
+        ]);
 
         $this->iShouldSeeTheFollowingRow($tableNode);
     }
@@ -281,10 +281,10 @@ class WebContext extends DefaultContext
      */
     public function iShouldNotSeeResourceWithValueInThatList($columnName, $value)
     {
-        $tableNode = new TableNode(array(
-            array(trim($columnName)),
-            array(trim($value)),
-        ));
+        $tableNode = new TableNode([
+            [trim($columnName)],
+            [trim($value)],
+        ]);
 
         $this->iShouldNotSeeTheFollowingRow($tableNode);
     }
@@ -296,10 +296,10 @@ class WebContext extends DefaultContext
      */
     public function iShouldSeeResourceWithValueContainingInThatList($columnName, $value)
     {
-        $tableNode = new TableNode(array(
-            array(trim($columnName)),
-            array(trim('%' . $value . '%')),
-        ));
+        $tableNode = new TableNode([
+            [trim($columnName)],
+            [trim('%'.$value.'%')],
+        ]);
 
         $this->iShouldSeeTheFollowingRow($tableNode);
     }
@@ -311,10 +311,10 @@ class WebContext extends DefaultContext
      */
     public function iShouldNotSeeResourceWithValueContainingInThatList($columnName, $value)
     {
-        $tableNode = new TableNode(array(
-            array(trim($columnName)),
-            array(trim('%' . $value . '%')),
-        ));
+        $tableNode = new TableNode([
+            [trim($columnName)],
+            [trim('%'.$value.'%')],
+        ]);
 
         $this->iShouldNotSeeTheFollowingRow($tableNode);
     }
@@ -381,7 +381,7 @@ class WebContext extends DefaultContext
      */
     public function iAddFollowingAttributes(TableNode $attributes)
     {
-        $pickedAttributes = array();
+        $pickedAttributes = [];
         foreach ($attributes->getRows() as $attribute) {
             $pickedAttributes[] = $attribute[0];
         }
@@ -394,7 +394,7 @@ class WebContext extends DefaultContext
      */
     public function iAddAttribute($attribute)
     {
-        $this->addAttributes(array($attribute));
+        $this->addAttributes([$attribute]);
     }
 
     /**
@@ -442,7 +442,7 @@ class WebContext extends DefaultContext
      */
     public function iWait($time)
     {
-        $this->getSession()->wait($time*1000);
+        $this->getSession()->wait($time * 1000);
     }
 
     /**
@@ -458,10 +458,10 @@ class WebContext extends DefaultContext
      */
     public function iShouldSeeResourceInTheListAsEnabled($columnName, $value)
     {
-        $tableNode = new TableNode(array(
-            array(trim($columnName), 'Enabled'),
-            array(trim($value), 'YES')
-        ));
+        $tableNode = new TableNode([
+            [trim($columnName), 'Enabled'],
+            [trim($value), 'YES'],
+        ]);
 
         $this->iShouldSeeTheFollowingRow($tableNode);
     }
@@ -471,10 +471,10 @@ class WebContext extends DefaultContext
      */
     public function iShouldSeeResourceInTheListAsDisabled($columnName, $value)
     {
-        $tableNode = new TableNode(array(
-            array(trim($columnName), 'Enabled'),
-            array(trim($value), 'NO')
-        ));
+        $tableNode = new TableNode([
+            [trim($columnName), 'Enabled'],
+            [trim($value), 'NO'],
+        ]);
 
         $this->iShouldSeeTheFollowingRow($tableNode);
     }
@@ -545,7 +545,7 @@ class WebContext extends DefaultContext
     public function iShouldBeOnThePageWithGivenParent($page, $parentType, $parentName)
     {
         $parent = $this->findOneByName($parentType, $parentName);
-        $this->assertSession()->addressEquals($this->generatePageUrl($page, array(sprintf('%sId',$parentType) => $parent->getId())));
+        $this->assertSession()->addressEquals($this->generatePageUrl($page, [sprintf('%sId', $parentType) => $parent->getId()]));
 
         try {
             $this->assertStatusCodeEquals(200);
@@ -558,14 +558,14 @@ class WebContext extends DefaultContext
      */
     public function iAmDoingSomethingWithResourceByNameFromGivenCategory($action, $type, $name, $categoryType, $categoryName)
     {
-        $type = str_replace(' ','_', $type);
+        $type = str_replace(' ', '_', $type);
         $action = str_replace(array_keys($this->actions), array_values($this->actions), $action);
 
         $root = $this->findOneByName($categoryType, $categoryName);
         $resource = $this->findOneByName($type, $name);
 
         $this->getSession()->visit($this->generatePageUrl(
-            sprintf('%s_%s', $type, $action), array('id' => $resource->getId(), sprintf('%sId', $categoryType) => $root->getId())
+            sprintf('%s_%s', $type, $action), ['id' => $resource->getId(), sprintf('%sId', $categoryType) => $root->getId()]
         ));
     }
 
@@ -574,7 +574,7 @@ class WebContext extends DefaultContext
      */
     public function iAmOnTheZoneCreationPageForType($type)
     {
-        $this->getSession()->visit($this->generatePageUrl('zone creation', array('type' => $type)));
+        $this->getSession()->visit($this->generatePageUrl('zone creation', ['type' => $type]));
         $this->iShouldSeeSelectWithOption('Type', ucfirst($type));
     }
 
@@ -584,7 +584,7 @@ class WebContext extends DefaultContext
      */
     public function iShouldBeOnTheZoneCreationPageForType($type)
     {
-        $this->assertSession()->addressEquals($this->generatePageUrl('zone creation', array('type' => $type)));
+        $this->assertSession()->addressEquals($this->generatePageUrl('zone creation', ['type' => $type]));
 
         try {
             $this->assertStatusCodeEquals(200);
@@ -604,7 +604,7 @@ class WebContext extends DefaultContext
     /**
      * Assert that given code equals the current one.
      *
-     * @param integer $code
+     * @param int $code
      */
     protected function assertStatusCodeEquals($code)
     {
@@ -682,7 +682,7 @@ class WebContext extends DefaultContext
      */
     public function iAmOnTheProductAttributeCreationPageWithType($type)
     {
-        $this->getSession()->visit($this->generatePageUrl('product attribute creation', array('type' => $type)));
+        $this->getSession()->visit($this->generatePageUrl('product attribute creation', ['type' => $type]));
         $this->iShouldSeeSelectWithOptionSelected('Type', ucfirst($type));
     }
 

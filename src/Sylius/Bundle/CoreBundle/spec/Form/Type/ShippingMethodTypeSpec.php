@@ -29,7 +29,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $calculatorRegistry, ServiceRegistryInterface $checkerRegistry, FormRegistryInterface $formRegistry)
     {
-        $this->beConstructedWith('ShippingMethod', array('sylius'), $calculatorRegistry, $checkerRegistry, $formRegistry);
+        $this->beConstructedWith('ShippingMethod', ['sylius'], $calculatorRegistry, $checkerRegistry, $formRegistry);
     }
 
     function it_is_initializable()
@@ -49,8 +49,8 @@ class ShippingMethodTypeSpec extends ObjectBehavior
 
     function it_builds_form_with_proper_fields($calculatorRegistry, $checkerRegistry, FormBuilderInterface $builder, FormFactoryInterface $formFactory)
     {
-        $calculatorRegistry->all()->willReturn(array());
-        $checkerRegistry->all()->willReturn(array());
+        $calculatorRegistry->all()->willReturn([]);
+        $checkerRegistry->all()->willReturn([]);
 
         $builder->getFormFactory()->willReturn($formFactory);
 
@@ -103,6 +103,6 @@ class ShippingMethodTypeSpec extends ObjectBehavior
 
         $builder->setAttribute(Argument::any(), Argument::any())->shouldBeCalled();
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 }

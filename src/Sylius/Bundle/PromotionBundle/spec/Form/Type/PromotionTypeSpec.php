@@ -29,7 +29,7 @@ class PromotionTypeSpec extends ObjectBehavior
         ServiceRegistryInterface $checkerRegistry,
         ServiceRegistryInterface $actionRegistry
     ) {
-        $this->beConstructedWith('Promotion', array('sylius'), $checkerRegistry, $actionRegistry);
+        $this->beConstructedWith('Promotion', ['sylius'], $checkerRegistry, $actionRegistry);
     }
 
     function it_is_initializable()
@@ -94,16 +94,16 @@ class PromotionTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_should_define_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
-                'data_class'        => 'Promotion',
-                'validation_groups' => array('sylius'),
-            ))
+            ->setDefaults([
+                'data_class' => 'Promotion',
+                'validation_groups' => ['sylius'],
+            ])
             ->shouldBeCalled()
         ;
 

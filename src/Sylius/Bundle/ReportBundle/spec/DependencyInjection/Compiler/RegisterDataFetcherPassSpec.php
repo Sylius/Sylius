@@ -32,15 +32,15 @@ class RegisterDataFetcherPassSpec extends ObjectBehavior
         $container->hasDefinition('sylius.registry.report.data_fetcher')->willReturn(true);
         $container->getDefinition('sylius.registry.report.data_fetcher')->willReturn($dataFetcherDefinition);
 
-        $dataFetcherServices = array(
-            'sylius.form.type.data_fetcher.test' => array(
-                array('fetcher' => 'test', 'label' => 'Test data fetcher'),
-            ),
-        );
+        $dataFetcherServices = [
+            'sylius.form.type.data_fetcher.test' => [
+                ['fetcher' => 'test', 'label' => 'Test data fetcher'],
+            ],
+        ];
         $container->findTaggedServiceIds('sylius.report.data_fetcher')->willReturn($dataFetcherServices);
 
-        $dataFetcherDefinition->addMethodCall('register', array('test', new Reference('sylius.form.type.data_fetcher.test')))->shouldBeCalled();
-        $container->setParameter('sylius.report.data_fetchers', array('test' => 'Test data fetcher'))->shouldBeCalled();
+        $dataFetcherDefinition->addMethodCall('register', ['test', new Reference('sylius.form.type.data_fetcher.test')])->shouldBeCalled();
+        $container->setParameter('sylius.report.data_fetchers', ['test' => 'Test data fetcher'])->shouldBeCalled();
 
         $this->process($container);
     }
@@ -56,13 +56,13 @@ class RegisterDataFetcherPassSpec extends ObjectBehavior
         $container->hasDefinition('sylius.registry.report.data_fetcher')->willReturn(true);
         $container->getDefinition('sylius.registry.report.data_fetcher')->willReturn($dataFetcherDefinition);
 
-        $dataFetcherServices = array(
-            'sylius.form.type.data_fetcher.test' => array(
-                array('data_fetcher' => 'test'),
-            ),
-        );
+        $dataFetcherServices = [
+            'sylius.form.type.data_fetcher.test' => [
+                ['data_fetcher' => 'test'],
+            ],
+        ];
         $container->findTaggedServiceIds('sylius.report.data_fetcher')->willReturn($dataFetcherServices);
         $this->shouldThrow(new \InvalidArgumentException('Tagged report data fetchers needs to have `fetcher` and `label` attributes.'));
-        $dataFetcherDefinition->addMethodCall('register', array('test', new Reference('sylius.form.type.data_fetcher.test')))->shouldNotBeCalled();
+        $dataFetcherDefinition->addMethodCall('register', ['test', new Reference('sylius.form.type.data_fetcher.test')])->shouldNotBeCalled();
     }
 }

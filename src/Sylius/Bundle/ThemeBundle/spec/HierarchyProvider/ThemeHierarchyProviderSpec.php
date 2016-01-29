@@ -41,16 +41,15 @@ class ThemeHierarchyProviderSpec extends ObjectBehavior
 
     function it_returns_theme_list_in_hierarchized_order(ThemeRepositoryInterface $themeRepository, ThemeInterface $firstTheme, ThemeInterface $secondTheme)
     {
-        $firstTheme->getName()->willReturn("foo/bar1");
-        $firstTheme->getParentsNames()->willReturn(["foo/bar2"]);
+        $firstTheme->getName()->willReturn('foo/bar1');
+        $firstTheme->getParentsNames()->willReturn(['foo/bar2']);
 
-        $secondTheme->getName()->willReturn("foo/bar2");
+        $secondTheme->getName()->willReturn('foo/bar2');
         $secondTheme->getParentsNames()->willReturn([]);
 
-        $themeRepository->findOneByName("foo/bar1")->willReturn($firstTheme);
-        $themeRepository->findOneByName("foo/bar2")->willReturn($secondTheme);
+        $themeRepository->findOneByName('foo/bar1')->willReturn($firstTheme);
+        $themeRepository->findOneByName('foo/bar2')->willReturn($secondTheme);
 
         $this->getThemeHierarchy($firstTheme)->shouldReturn([$firstTheme, $secondTheme]);
     }
-
 }

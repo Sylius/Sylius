@@ -174,7 +174,7 @@ class AdjustmentSpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->during('setAmount', [44.98 * 100]);
         $this->shouldThrow(\InvalidArgumentException::class)->during('setAmount', ['4498']);
         $this->shouldThrow(\InvalidArgumentException::class)->during('setAmount', [round(44.98 * 100)]);
-        $this->shouldThrow(\InvalidArgumentException::class)->during('setAmount', [array(4498)]);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('setAmount', [[4498]]);
         $this->shouldThrow(\InvalidArgumentException::class)->during('setAmount', [new \stdClass()]);
     }
 

@@ -40,7 +40,7 @@ class ResourcesCollectionProvider implements ResourcesCollectionProviderInterfac
     public function get(RequestConfiguration $requestConfiguration, RepositoryInterface $repository)
     {
         if (null !== $repositoryMethod = $requestConfiguration->getRepositoryMethod()) {
-            $callable = array($repository, $repositoryMethod);
+            $callable = [$repository, $repositoryMethod];
 
             return call_user_func_array($callable, $requestConfiguration->getRepositoryArguments());
         }

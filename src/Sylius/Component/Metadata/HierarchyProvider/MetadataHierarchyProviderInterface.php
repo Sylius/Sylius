@@ -30,7 +30,7 @@ interface MetadataHierarchyProviderInterface
     /**
      * @param MetadataSubjectInterface $metadataSubject
      *
-     * @return boolean
+     * @return bool
      */
     public function supports(MetadataSubjectInterface $metadataSubject);
 }

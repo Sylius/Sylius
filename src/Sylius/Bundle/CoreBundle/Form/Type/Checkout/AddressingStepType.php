@@ -63,13 +63,13 @@ class AddressingStepType extends AbstractResourceType
                     $order->setBillingAddress($address);
                 }
             })
-            ->add('shippingAddress', 'sylius_address', array('shippable' => true))
+            ->add('shippingAddress', 'sylius_address', ['shippable' => true])
             ->add('billingAddress', 'sylius_address')
-            ->add('differentBillingAddress', 'checkbox', array(
-                'mapped'   => false,
+            ->add('differentBillingAddress', 'checkbox', [
+                'mapped' => false,
                 'required' => false,
-                'label'    => 'sylius.form.checkout.addressing.different_billing_address'
-            ))
+                'label' => 'sylius.form.checkout.addressing.different_billing_address',
+            ])
         ;
     }
 
@@ -81,10 +81,10 @@ class AddressingStepType extends AbstractResourceType
         parent::configureOptions($resolver);
 
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'customer' => null,
-                'cascade_validation' => true
-            ))
+                'cascade_validation' => true,
+            ])
         ;
     }
 

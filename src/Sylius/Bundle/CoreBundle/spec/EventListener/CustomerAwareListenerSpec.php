@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sylius package.
  *
@@ -11,7 +12,6 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\EventListener\CustomerAwareListener;
 use Sylius\Bundle\UserBundle\EventListener\CustomerAwareListener as BaseCustomerAwareListener;
 use Sylius\Component\Cart\Event\CartEvent;

@@ -71,7 +71,7 @@ class VariantController extends ResourceController
     /**
      * Get product or 404.
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return ProductInterface
      *

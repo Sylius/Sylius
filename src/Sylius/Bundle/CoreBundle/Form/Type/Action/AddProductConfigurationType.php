@@ -41,33 +41,33 @@ class AddProductConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('variant', 'sylius_entity_to_identifier', array(
-                'label'         => 'sylius.form.action.add_product_configuration.variant',
-                'class'         => $this->variantRepository->getClassName(),
+            ->add('variant', 'sylius_entity_to_identifier', [
+                'label' => 'sylius.form.action.add_product_configuration.variant',
+                'class' => $this->variantRepository->getClassName(),
                 'query_builder' => function () {
                     return $this->variantRepository->getFormQueryBuilder();
                 },
-                'constraints'   => array(
+                'constraints' => [
                     new NotBlank(),
-                    new Type(array('type' => 'numeric')),
-                )
-            ))
-            ->add('quantity', 'integer', array(
+                    new Type(['type' => 'numeric']),
+                ],
+            ])
+            ->add('quantity', 'integer', [
                 'label' => 'sylius.form.action.add_product_configuration.quantity',
-                'empty_data'  => 1,
-                'constraints' => array(
+                'empty_data' => 1,
+                'constraints' => [
                     new NotBlank(),
-                    new Type(array('type' => 'numeric')),
-                )
-            ))
-            ->add('price', 'sylius_money', array(
+                    new Type(['type' => 'numeric']),
+                ],
+            ])
+            ->add('price', 'sylius_money', [
                 'label' => 'sylius.form.action.add_product_configuration.price',
-                'empty_data'  => 0,
-                'constraints' => array(
+                'empty_data' => 0,
+                'constraints' => [
                     new NotBlank(),
-                    new Type(array('type' => 'numeric')),
-                )
-            ))
+                    new Type(['type' => 'numeric']),
+                ],
+            ])
         ;
     }
 

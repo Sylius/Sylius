@@ -73,7 +73,7 @@ class ProductVariantSpec extends ObjectBehavior
         $this->shouldThrow('\InvalidArgumentException')->duringSetPrice(4.1 * 100);
         $this->shouldThrow('\InvalidArgumentException')->duringSetPrice('410');
         $this->shouldThrow('\InvalidArgumentException')->duringSetPrice(round(4.1 * 100));
-        $this->shouldThrow('\InvalidArgumentException')->duringSetPrice(array(410));
+        $this->shouldThrow('\InvalidArgumentException')->duringSetPrice([410]);
         $this->shouldThrow('\InvalidArgumentException')->duringSetPrice(new \stdClass());
     }
 
@@ -82,7 +82,7 @@ class ProductVariantSpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice(3.1 * 100);
         $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice('310');
         $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice(round(3.1 * 100));
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice(array(310));
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice([310]);
         $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice(new \stdClass());
     }
 

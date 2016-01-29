@@ -51,10 +51,10 @@ class FinalizeStep extends CheckoutStep
 
     protected function renderStep(ProcessContextInterface $context, OrderInterface $order)
     {
-        return $this->render($this->container->getParameter(sprintf('sylius.checkout.step.%s.template', $this->getName())), array(
+        return $this->render($this->container->getParameter(sprintf('sylius.checkout.step.%s.template', $this->getName())), [
             'context' => $context,
-            'order'   => $order
-        ));
+            'order' => $order,
+        ]);
     }
 
     /**
@@ -77,7 +77,7 @@ class FinalizeStep extends CheckoutStep
             $currency = $currencyRepository->findOneBy(['code' => $order->getCurrency()]);
             $order->setExchangeRate($currency->getExchangeRate());
         }
-        
+
         $manager = $this->get('sylius.manager.order');
         $manager->persist($order);
         $manager->flush();

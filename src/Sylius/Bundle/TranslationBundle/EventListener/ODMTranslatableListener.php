@@ -71,10 +71,10 @@ class ODMTranslatableListener implements EventSubscriber
      */
     public function getSubscribedEvents()
     {
-        return array(
+        return [
             Events::loadClassMetadata,
             Events::postLoad,
-        );
+        ];
     }
 
     /**
@@ -85,7 +85,7 @@ class ODMTranslatableListener implements EventSubscriber
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
         $classMetadata = $eventArgs->getClassMetadata();
-        $reflection    = $classMetadata->reflClass;
+        $reflection = $classMetadata->reflClass;
 
         if (!$reflection || $reflection->isAbstract()) {
             return;
@@ -118,11 +118,11 @@ class ODMTranslatableListener implements EventSubscriber
         $config = $this->mappings[$metadata->name];
         $mapping = $config['translation']['mapping'];
 
-        $metadata->mapManyEmbedded(array(
-            'fieldName'      => $mapping['translatable']['translations'],
+        $metadata->mapManyEmbedded([
+            'fieldName' => $mapping['translatable']['translations'],
             'targetDocument' => $config['translation']['model'],
-            'strategy'       => 'set'
-        ));
+            'strategy' => 'set',
+        ]);
     }
 
     /**
@@ -147,22 +147,22 @@ class ODMTranslatableListener implements EventSubscriber
 
         // Map locale field.
         if (!$metadata->hasField($mapping['translation']['locale'])) {
-            $metadata->mapField(array(
+            $metadata->mapField([
                 'fieldName' => $mapping['translation']['locale'],
-                'type'      => 'string',
-            ));
+                'type' => 'string',
+            ]);
         }
 
         // Map unique index.
-        $keys = array(
+        $keys = [
             $mapping['translation']['translatable'] => 1,
-            $mapping['translation']['locale'] => 1
-        );
+            $mapping['translation']['locale'] => 1,
+        ];
 
         if (!$this->hasUniqueIndex($metadata, $keys)) {
-            $metadata->addIndex($keys, array(
-                'unique' => true
-            ));
+            $metadata->addIndex($keys, [
+                'unique' => true,
+            ]);
         }
     }
 

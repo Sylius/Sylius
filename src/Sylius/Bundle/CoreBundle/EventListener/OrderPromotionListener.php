@@ -92,6 +92,6 @@ class OrderPromotionListener
             $message = 'sylius.promotion_coupon.invalid';
         }
 
-        $this->session->getBag('flashes')->add($type, $this->translator->trans($message, array(), 'flashes'));
+        $this->session->getBag('flashes')->add($type, $this->translator->trans($message, [], 'flashes'));
     }
 }

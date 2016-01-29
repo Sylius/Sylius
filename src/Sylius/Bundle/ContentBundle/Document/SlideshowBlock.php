@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\ContentBundle\Document;
 
-use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SlideshowBlock as BaseSlideshowBlock;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SlideshowBlock as BaseSlideshowBlock;
 
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>

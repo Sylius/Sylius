@@ -22,12 +22,12 @@ use Symfony\Component\HttpKernel\Kernel as BaseKernel;
  */
 abstract class Kernel extends BaseKernel
 {
-    const VERSION         = '0.17.0-dev';
-    const VERSION_ID      = '00170';
-    const MAJOR_VERSION   = '0';
-    const MINOR_VERSION   = '17';
+    const VERSION = '0.17.0-dev';
+    const VERSION_ID = '00170';
+    const MAJOR_VERSION = '0';
+    const MINOR_VERSION = '17';
     const RELEASE_VERSION = '0';
-    const EXTRA_VERSION   = 'DEV';
+    const EXTRA_VERSION = 'DEV';
 
     const ENV_DEV = 'dev';
     const ENV_PROD = 'prod';
@@ -39,7 +39,7 @@ abstract class Kernel extends BaseKernel
      */
     public function registerBundles()
     {
-        $bundles = array(
+        $bundles = [
             new \Sylius\Bundle\TranslationBundle\SyliusTranslationBundle(),
             new \Sylius\Bundle\InstallerBundle\SyliusInstallerBundle(),
             new \Sylius\Bundle\OrderBundle\SyliusOrderBundle(),
@@ -123,7 +123,7 @@ abstract class Kernel extends BaseKernel
             new \Sylius\Bundle\FixturesBundle\SyliusFixturesBundle(),
             new \Sylius\Bundle\PayumBundle\SyliusPayumBundle(), // must be added after PayumBundle.
             new \Sylius\Bundle\ThemeBundle\SyliusThemeBundle(), // must be added after FrameworkBundle
-        );
+        ];
 
         return $bundles;
     }
@@ -167,7 +167,7 @@ abstract class Kernel extends BaseKernel
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     protected function isVagrantEnvironment()
     {

@@ -29,9 +29,9 @@ class PermissionType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('description', 'textarea', array(
+            ->add('description', 'textarea', [
                 'label' => 'sylius.form.permission.description',
-            ))
+            ])
             ->addEventSubscriber(new AddCodeFormSubscriber())
             ->addEventSubscriber(new AddParentFormSubscriber('permission'))
         ;

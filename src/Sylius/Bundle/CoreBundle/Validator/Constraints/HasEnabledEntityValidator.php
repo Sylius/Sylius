@@ -68,7 +68,7 @@ class HasEnabledEntityValidator extends ConstraintValidator
 
         $this->ensureEntityHasProvidedEnabledField($objectManager, $entity, $constraint->enabledPath);
 
-        $criteria = array($constraint->enabledPath => true);
+        $criteria = [$constraint->enabledPath => true];
 
         $repository = $objectManager->getRepository(get_class($entity));
         $results = $repository->{$constraint->repositoryMethod}($criteria);

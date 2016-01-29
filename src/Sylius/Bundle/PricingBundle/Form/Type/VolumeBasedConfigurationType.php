@@ -27,14 +27,14 @@ class VolumeBasedConfigurationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
-                'data_class'    => null,
-                'allow_add'     => true,
-                'allow_delete'  => true,
-                'by_reference'  => false,
-                'label'         => 'sylius.form.pricing.volume_based.label',
-                'type'          => 'sylius_price_calculator_volume_based_configuration'
-            ))
+            ->setDefaults([
+                'data_class' => null,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'label' => 'sylius.form.pricing.volume_based.label',
+                'type' => 'sylius_price_calculator_volume_based_configuration',
+            ])
         ;
     }
 

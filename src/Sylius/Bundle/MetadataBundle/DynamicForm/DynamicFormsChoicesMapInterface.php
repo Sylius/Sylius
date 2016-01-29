@@ -36,7 +36,6 @@ interface DynamicFormsChoicesMapInterface
      * @param string $dataClass
      *
      * @return string|null
-     *
      */
     public function getFormNameByGroupAndDataClass($group, $dataClass);
 

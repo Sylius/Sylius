@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ThemeBundle\Loader\Filesystem;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Filesystem\FilesystemInterface;
 use Sylius\Bundle\ThemeBundle\Loader\Filesystem\JsonFileLoader;
 use Sylius\Bundle\ThemeBundle\Loader\LoaderInterface;

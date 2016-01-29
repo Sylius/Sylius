@@ -13,7 +13,6 @@ namespace spec\Sylius\Bundle\OrderBundle\Twig;
 
 use PhpSpec\Exception\Example\FailureException;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\OrderBundle\Templating\Helper\AdjustmentsHelper;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 
@@ -39,7 +38,7 @@ class AggregateAdjustmentsExtensionSpec extends ObjectBehavior
 
     function it_has_functions()
     {
-        $this->getFunctions()->shouldHaveFunction(new \Twig_SimpleFunction('sylius_aggregate_adjustments', array($this, 'aggregateAdjustments')));
+        $this->getFunctions()->shouldHaveFunction(new \Twig_SimpleFunction('sylius_aggregate_adjustments', [$this, 'aggregateAdjustments']));
     }
 
     function it_uses_helper_to_get_aggregated_adjustments(
@@ -49,11 +48,11 @@ class AggregateAdjustmentsExtensionSpec extends ObjectBehavior
         AdjustmentInterface $adjustment3
     ) {
         $adjustmentsHelper
-            ->getAggregatedAdjustments(array($adjustment1, $adjustment2, $adjustment3))
-            ->willReturn(array('tax 1' => 1000, 'tax2' => 500))
+            ->getAggregatedAdjustments([$adjustment1, $adjustment2, $adjustment3])
+            ->willReturn(['tax 1' => 1000, 'tax2' => 500])
         ;
 
-        $this->aggregateAdjustments(array($adjustment1, $adjustment2, $adjustment3))->shouldReturn(array('tax 1' => 1000, 'tax2' => 500));
+        $this->aggregateAdjustments([$adjustment1, $adjustment2, $adjustment3])->shouldReturn(['tax 1' => 1000, 'tax2' => 500]);
     }
 
     function it_has_name()
@@ -82,7 +81,7 @@ class AggregateAdjustmentsExtensionSpec extends ObjectBehavior
                 }
 
                 return false;
-            }
+            },
         ];
     }
 }

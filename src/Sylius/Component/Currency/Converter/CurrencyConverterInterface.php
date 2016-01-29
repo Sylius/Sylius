@@ -21,10 +21,10 @@ interface CurrencyConverterInterface
     /**
      * Convert the given value to equal amount with different currency.
      *
-     * @param integer $value
+     * @param int $value
      * @param string  $code
      *
-     * @return integer
+     * @return int
      */
     public function convert($value, $code);
 }

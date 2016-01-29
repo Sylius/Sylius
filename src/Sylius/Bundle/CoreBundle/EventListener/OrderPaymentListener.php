@@ -55,9 +55,9 @@ class OrderPaymentListener
         EventDispatcherInterface $dispatcher,
         FactoryInterface $factory
     ) {
-        $this->paymentProcessor        = $paymentProcessor;
-        $this->dispatcher              = $dispatcher;
-        $this->factory                 = $factory;
+        $this->paymentProcessor = $paymentProcessor;
+        $this->dispatcher = $dispatcher;
+        $this->factory = $factory;
     }
 
     /**

@@ -76,7 +76,7 @@ class CartHelper extends Helper
      *
      * @return FormView
      */
-    public function getItemFormView(array $options = array())
+    public function getItemFormView(array $options = [])
     {
         $cartItem = $this->cartItemFactory->createNew();
         $this->orderItemQuantityModifier->modify($cartItem, 1);

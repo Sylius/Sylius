@@ -44,7 +44,7 @@ class OrderItemQuantityModifier implements OrderItemQuantityModifierInterface
 
         if ($targetQuantity < $currentQuantity) {
             $this->decreaseUnitsNumber($orderItem, $currentQuantity - $targetQuantity);
-        } else if ($targetQuantity > $currentQuantity) {
+        } elseif ($targetQuantity > $currentQuantity) {
             $this->increaseUnitsNumber($orderItem, $targetQuantity - $currentQuantity);
         }
     }
@@ -55,7 +55,7 @@ class OrderItemQuantityModifier implements OrderItemQuantityModifierInterface
      */
     private function increaseUnitsNumber(OrderItemInterface $orderItem, $increaseBy)
     {
-        for ($i = 0; $i < $increaseBy; $i++) {
+        for ($i = 0; $i < $increaseBy; ++$i) {
             $this->orderItemUnitFactory->createForItem($orderItem);
         }
     }

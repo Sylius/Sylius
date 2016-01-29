@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\FlowBundle\Process\Coordinator;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class InvalidArgumentExceptionSpec extends ObjectBehavior
 {

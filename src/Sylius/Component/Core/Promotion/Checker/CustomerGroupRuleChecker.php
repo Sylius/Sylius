@@ -44,7 +44,6 @@ class CustomerGroupRuleChecker implements RuleCheckerInterface
         /* @var GroupInterface $group */
         foreach ($customer->getGroups() as $group) {
             if ($configuration['groups'] == $group->getId()) {
-
                 return true;
             }
         }

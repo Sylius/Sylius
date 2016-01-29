@@ -11,28 +11,28 @@
 
 namespace Sylius\Bundle\UserBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\UserBundle\Controller\CustomerController;
 use Sylius\Bundle\UserBundle\Controller\UserController;
-use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
-use Sylius\Bundle\UserBundle\Form\Type\CustomerType;
+use Sylius\Bundle\UserBundle\Form\Type\CustomerGuestType;
 use Sylius\Bundle\UserBundle\Form\Type\CustomerProfileType;
 use Sylius\Bundle\UserBundle\Form\Type\CustomerRegistrationType;
 use Sylius\Bundle\UserBundle\Form\Type\CustomerSimpleRegistrationType;
-use Sylius\Bundle\UserBundle\Form\Type\CustomerGuestType;
-use Sylius\Bundle\UserBundle\Form\Type\UserType;
-use Sylius\Bundle\UserBundle\Form\Type\UserRegistrationType;
+use Sylius\Bundle\UserBundle\Form\Type\CustomerType;
 use Sylius\Bundle\UserBundle\Form\Type\GroupType;
+use Sylius\Bundle\UserBundle\Form\Type\UserRegistrationType;
+use Sylius\Bundle\UserBundle\Form\Type\UserType;
+use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\User\Model\Customer;
 use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\User\Model\Group;
+use Sylius\Component\User\Model\GroupInterface;
 use Sylius\Component\User\Model\User;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Model\UserOAuth;
 use Sylius\Component\User\Model\UserOAuthInterface;
-use Sylius\Component\User\Model\Group;
-use Sylius\Component\User\Model\GroupInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -105,23 +105,23 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->arrayNode('customer_profile')
                             ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius', 'sylius_customer_profile'))
+                            ->defaultValue(['sylius', 'sylius_customer_profile'])
                         ->end()
                         ->arrayNode('customer_registration')
                             ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius', 'sylius_customer_profile', 'sylius_user_registration'))
+                            ->defaultValue(['sylius', 'sylius_customer_profile', 'sylius_user_registration'])
                         ->end()
                         ->arrayNode('customer_simple_registration')
                             ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius', 'sylius_user_registration'))
+                            ->defaultValue(['sylius', 'sylius_user_registration'])
                         ->end()
                         ->arrayNode('customer_guest')
                             ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius_customer_guest'))
+                            ->defaultValue(['sylius_customer_guest'])
                         ->end()
                         ->arrayNode('user_registration')
                             ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius', 'sylius_user_registration'))
+                            ->defaultValue(['sylius', 'sylius_user_registration'])
                         ->end()
                     ->end()
                 ->end()
@@ -170,23 +170,23 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius', 'sylius_customer_profile'))
+                                            ->defaultValue(['sylius', 'sylius_customer_profile'])
                                         ->end()
                                         ->arrayNode('profile')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius', 'sylius_customer_profile'))
+                                            ->defaultValue(['sylius', 'sylius_customer_profile'])
                                         ->end()
                                         ->arrayNode('registration')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius', 'sylius_customer_profile', 'sylius_user_registration'))
+                                            ->defaultValue(['sylius', 'sylius_customer_profile', 'sylius_user_registration'])
                                         ->end()
                                         ->arrayNode('simple_registration')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius', 'sylius_user_registration'))
+                                            ->defaultValue(['sylius', 'sylius_user_registration'])
                                         ->end()
                                         ->arrayNode('guest')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius_customer_guest'))
+                                            ->defaultValue(['sylius_customer_guest'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -219,11 +219,11 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                         ->arrayNode('registration')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -271,7 +271,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()

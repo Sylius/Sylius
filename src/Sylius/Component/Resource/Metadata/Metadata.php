@@ -101,7 +101,7 @@ class Metadata implements MetadataInterface
      */
     public function getHumanizedName()
     {
-        return trim(strtolower(preg_replace(array('/([A-Z])/', '/[_\s]+/'), array('_$1', ' '), $this->name)));
+        return trim(strtolower(preg_replace(['/([A-Z])/', '/[_\s]+/'], ['_$1', ' '], $this->name)));
     }
 
     /**

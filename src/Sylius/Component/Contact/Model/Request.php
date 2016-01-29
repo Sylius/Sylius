@@ -23,7 +23,7 @@ class Request implements RequestInterface
     use TimestampableTrait;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $id;
 

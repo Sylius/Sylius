@@ -19,7 +19,6 @@ use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface as BasePromotionInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\User\Model\CustomerInterface as BaseCustomerInterface;
 
 /**
@@ -507,7 +506,7 @@ class Order extends Cart implements OrderInterface
     public function isInvoiceAvailable()
     {
         if (false !== $lastShipment = $this->getLastShipment()) {
-            return in_array($lastShipment->getState(), array(ShipmentInterface::STATE_RETURNED, ShipmentInterface::STATE_SHIPPED));
+            return in_array($lastShipment->getState(), [ShipmentInterface::STATE_RETURNED, ShipmentInterface::STATE_SHIPPED]);
         }
 
         return false;

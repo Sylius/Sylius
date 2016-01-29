@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Component\Metadata\Renderer\Custom;
 
 use PhpSpec\ObjectBehavior;
@@ -19,7 +28,7 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 class PageMetadataRendererSpec extends ObjectBehavior
 {
     private $defaultOptions = ['group' => 'head', 'defaults' => []];
-    
+
     function let(MetadataRendererInterface $universalRenderer, OptionsResolver $optionsResolver, PropertyAccessorInterface $propertyAccessor)
     {
         $this->beConstructedWith($universalRenderer, $optionsResolver, $propertyAccessor);
@@ -165,7 +174,7 @@ class PageMetadataRendererSpec extends ObjectBehavior
     {
         return [
             'containText' => function ($subject, $text) {
-                return false !== strpos($subject, $text);    
+                return false !== strpos($subject, $text);
             },
         ];
     }

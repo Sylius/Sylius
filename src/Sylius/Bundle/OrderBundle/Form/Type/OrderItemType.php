@@ -30,7 +30,7 @@ class OrderItemType extends AbstractResourceType
      * @param array $validationGroups
      * @param DataMapperInterface $orderItemQuantityDataMapper
      */
-    public function __construct($dataClass, array $validationGroups = array(), DataMapperInterface $orderItemQuantityDataMapper)
+    public function __construct($dataClass, array $validationGroups = [], DataMapperInterface $orderItemQuantityDataMapper)
     {
         parent::__construct($dataClass, $validationGroups);
 
@@ -43,12 +43,12 @@ class OrderItemType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('quantity', 'integer', array(
+            ->add('quantity', 'integer', [
                 'label' => 'sylius.form.order_item.quantity',
-            ))
-            ->add('unitPrice', 'sylius_money', array(
-                'label'   => 'sylius.form.order_item.unit_price'
-            ))
+            ])
+            ->add('unitPrice', 'sylius_money', [
+                'label' => 'sylius.form.order_item.unit_price',
+            ])
             ->setDataMapper($this->orderItemQuantityDataMapper)
         ;
     }

@@ -11,8 +11,8 @@
 
 namespace Sylius\Component\Core\Model;
 
-use Sylius\Component\Product\Model\ArchetypeInterface as BaseArchetypeInterface;
 use Sylius\Component\Metadata\Model\MetadataSubjectInterface;
+use Sylius\Component\Product\Model\ArchetypeInterface as BaseArchetypeInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>

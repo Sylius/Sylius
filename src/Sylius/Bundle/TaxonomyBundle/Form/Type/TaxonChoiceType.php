@@ -75,15 +75,15 @@ class TaxonChoiceType extends AbstractType
                 $taxons = array_filter($taxons, $options['filter']);
             }
 
-            return new ObjectChoiceList($taxons, null, array(), 'taxonomy', 'id');
+            return new ObjectChoiceList($taxons, null, [], 'taxonomy', 'id');
         };
 
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'choice_list' => $choiceList,
                 'taxonomy' => null,
                 'filter' => null,
-            ))
+            ])
             ->setAllowedTypes('taxonomy', [TaxonomyInterface::class, 'null'])
             ->setAllowedTypes('filter', ['callable', 'null'])
         ;

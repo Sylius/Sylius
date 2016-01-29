@@ -133,8 +133,7 @@ class ResourceController extends Controller
         FlashHelperInterface $flashHelper,
         AuthorizationCheckerInterface $authorizationChecker,
         EventDispatcherInterface $eventDispatcher
-    )
-    {
+    ) {
         $this->metadata = $metadata;
         $this->requestConfigurationFactory = $requestConfigurationFactory;
         $this->viewHandler = $viewHandler;
@@ -171,11 +170,11 @@ class ResourceController extends Controller
             $view
                 ->setTemplate($configuration->getTemplate(ResourceActions::SHOW))
                 ->setTemplateVar($this->metadata->getName())
-                ->setData(array(
+                ->setData([
                     'metadata' => $this->metadata,
                     'resource' => $resource,
-                    $this->metadata->getName() => $resource
-                ))
+                    $this->metadata->getName() => $resource,
+                ])
             ;
         }
 
@@ -200,11 +199,11 @@ class ResourceController extends Controller
             $view
                 ->setTemplate($configuration->getTemplate(ResourceActions::INDEX))
                 ->setTemplateVar($this->metadata->getPluralName())
-                ->setData(array(
+                ->setData([
                     'metadata' => $this->metadata,
                     'resources' => $resources,
-                    $this->metadata->getPluralName() => $resources
-                ))
+                    $this->metadata->getPluralName() => $resources,
+                ])
             ;
         }
 
@@ -256,12 +255,12 @@ class ResourceController extends Controller
         }
 
         $view = View::create()
-            ->setData(array(
+            ->setData([
                 'metadata' => $this->metadata,
                 'resource' => $newResource,
                 $this->metadata->getName() => $newResource,
-                'form' => $form->createView()
-            ))
+                'form' => $form->createView(),
+            ])
             ->setTemplate($configuration->getTemplate(ResourceActions::CREATE))
         ;
 
@@ -282,7 +281,7 @@ class ResourceController extends Controller
 
         $form = $this->resourceFormFactory->create($configuration, $resource);
 
-        if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
+        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             $resource = $form->getData();
 
             $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource);
@@ -313,12 +312,12 @@ class ResourceController extends Controller
         }
 
         $view = View::create()
-            ->setData(array(
+            ->setData([
                 'metadata' => $this->metadata,
                 'resource' => $resource,
                 $this->metadata->getName() => $resource,
-                'form' => $form->createView()
-            ))
+                'form' => $form->createView(),
+            ])
             ->setTemplate($configuration->getTemplate(ResourceActions::UPDATE))
         ;
 
@@ -429,7 +428,7 @@ class ResourceController extends Controller
 
     /**
      * @param Request $request
-     * @param integer $movement
+     * @param int $movement
      *
      * @return RedirectResponse
      */

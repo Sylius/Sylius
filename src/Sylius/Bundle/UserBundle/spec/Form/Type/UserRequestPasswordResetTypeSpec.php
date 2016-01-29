@@ -40,6 +40,6 @@ class UserRequestPasswordResetTypeSpec extends ObjectBehavior
     {
         $builder->add('email', 'email', Argument::any())->shouldBeCalled()->willReturn($builder);
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 }

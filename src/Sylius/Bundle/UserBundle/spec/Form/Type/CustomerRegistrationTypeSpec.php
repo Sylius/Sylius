@@ -24,7 +24,7 @@ class CustomerRegistrationTypeSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $customerRepository)
     {
-        $this->beConstructedWith('Customer', array('sylius'), $customerRepository);
+        $this->beConstructedWith('Customer', ['sylius'], $customerRepository);
     }
 
     function it_is_initializable()
@@ -56,11 +56,11 @@ class CustomerRegistrationTypeSpec extends ObjectBehavior
 
     function it_has_options(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'Customer',
-            'validation_groups' => array('sylius'),
-            'cascade_validation' => true
-        ))->shouldBeCalled();
+            'validation_groups' => ['sylius'],
+            'cascade_validation' => true,
+        ])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

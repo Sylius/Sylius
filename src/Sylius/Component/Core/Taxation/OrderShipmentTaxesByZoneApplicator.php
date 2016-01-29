@@ -65,7 +65,7 @@ class OrderShipmentTaxesByZoneApplicator implements OrderShipmentTaxesByZoneAppl
             return;
         }
 
-        $taxRate = $this->taxRateResolver->resolve($lastShipment->getMethod(), array('zone' => $zone));
+        $taxRate = $this->taxRateResolver->resolve($lastShipment->getMethod(), ['zone' => $zone]);
         if (null === $taxRate) {
             return;
         }

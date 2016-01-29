@@ -73,18 +73,18 @@ class ResourceExtension extends \Twig_Extension
      */
     public function getFunctions()
     {
-        return array(
+        return [
              new \Twig_SimpleFunction(
                  'sylius_resource_sort',
-                 array($this, 'renderSortingLink'),
-                 array('needs_environment' => true, 'is_safe' => array('html'))
+                 [$this, 'renderSortingLink'],
+                 ['needs_environment' => true, 'is_safe' => ['html']]
              ),
              new \Twig_SimpleFunction(
                  'sylius_resource_paginate',
-                 array($this, 'renderPaginateSelect'),
-                 array('needs_environment' => true, 'is_safe' => array('html'))
+                 [$this, 'renderPaginateSelect'],
+                 ['needs_environment' => true, 'is_safe' => ['html']]
              ),
-        );
+        ];
     }
 
     /**
@@ -108,7 +108,7 @@ class ResourceExtension extends \Twig_Extension
      *
      * @return string
      */
-    public function renderSortingLink(\Twig_Environment $twig, $property, $label = null, $order = 'asc', array $options = array())
+    public function renderSortingLink(\Twig_Environment $twig, $property, $label = null, $order = 'asc', array $options = [])
     {
         if (null === $label) {
             $label = $property;
@@ -123,28 +123,28 @@ class ResourceExtension extends \Twig_Extension
         }
 
         $options = $this->getOptions($options, $this->sortingTemplate);
-        $sorting = $this->request->query->get($this->getParameterName('sorting'), $this->parameters->get($this->getParameterName('sorting'), array('id' => 'asc')));
+        $sorting = $this->request->query->get($this->getParameterName('sorting'), $this->parameters->get($this->getParameterName('sorting'), ['id' => 'asc']));
         $currentOrder = null;
 
         if (isset($sorting[$property])) {
             $currentOrder = $sorting[$property];
-            $order        = 'asc' === $sorting[$property] ? 'desc' : 'asc';
+            $order = 'asc' === $sorting[$property] ? 'desc' : 'asc';
         }
 
         $url = $this->router->generate(
             $this->getRouteName($options['route']),
             $this->getRouteParams(
-                array($this->getParameterName('sorting') => array($property => $order)),
+                [$this->getParameterName('sorting') => [$property => $order]],
                 $options['route_params']
             )
         );
 
-        return $twig->render($options['template'], array(
-            'url'          => $url,
-            'label'        => $label,
-            'icon'         => $property == key($sorting),
+        return $twig->render($options['template'], [
+            'url' => $url,
+            'label' => $label,
+            'icon' => $property == key($sorting),
             'currentOrder' => $currentOrder,
-        ));
+        ]);
     }
 
     /**
@@ -155,7 +155,7 @@ class ResourceExtension extends \Twig_Extension
      *
      * @return string
      */
-    public function renderPaginateSelect(\Twig_Environment $twig, Pagerfanta $paginator, array $limitOptions = array(), array $options = array())
+    public function renderPaginateSelect(\Twig_Environment $twig, Pagerfanta $paginator, array $limitOptions = [], array $options = [])
     {
         $parameterName = $this->parameters->get('parameter_name');
         if (false !== $this->parameters->get('paginate') &&
@@ -164,10 +164,10 @@ class ResourceExtension extends \Twig_Extension
             $paginateName = $this->getParameterName('paginate');
             $limitOptions = !empty($limitOptions) ? $limitOptions : $this->parameters->get('allowed_paginate');
 
-            $limits = array();
+            $limits = [];
             foreach ($limitOptions as $limit) {
                 $routeParams = $this->getRouteParams(
-                    array($paginateName => $limit),
+                    [$paginateName => $limit],
                     $options['route_params']
                 );
 
@@ -181,10 +181,10 @@ class ResourceExtension extends \Twig_Extension
                 );
             }
 
-            return $twig->render($options['template'], array(
+            return $twig->render($options['template'], [
                 'paginator' => $paginator,
-                'limits'    => $limits,
-            ));
+                'limits' => $limits,
+            ]);
         }
 
         return '';
@@ -204,7 +204,7 @@ class ResourceExtension extends \Twig_Extension
      *
      * @return array
      */
-    private function getRouteParams(array $params = array(), array $default = array())
+    private function getRouteParams(array $params = [], array $default = [])
     {
         return array_merge(
             $this->request->query->all(),
@@ -240,7 +240,7 @@ class ResourceExtension extends \Twig_Extension
         }
 
         if (!array_key_exists('route_params', $options)) {
-            $options['route_params'] = array();
+            $options['route_params'] = [];
         }
 
         return $options;

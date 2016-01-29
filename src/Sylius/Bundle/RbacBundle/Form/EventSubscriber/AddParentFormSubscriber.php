@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\RbacBundle\Form\EventSubscriber;
 
-use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Sylius\Component\Rbac\Model\PermissionInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
@@ -33,7 +33,7 @@ class AddParentFormSubscriber implements EventSubscriberInterface
      */
     public function __construct($type)
     {
-        $this->type  = $type;
+        $this->type = $type;
     }
 
     /**
@@ -41,9 +41,9 @@ class AddParentFormSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             FormEvents::PRE_SET_DATA => 'preSetData',
-        );
+        ];
     }
 
     /**
@@ -62,14 +62,14 @@ class AddParentFormSubscriber implements EventSubscriberInterface
         }
 
         if (null !== $resource->getId() && null === $resource->getParent()) {
-           return;
+            return;
         }
 
         $form = $event->getForm();
         $form->add(
             'parent',
             sprintf('sylius_%s_choice', $this->type),
-            array('label' => sprintf('sylius.form.%s.parent', $this->type))
+            ['label' => sprintf('sylius.form.%s.parent', $this->type)]
         );
     }
 }

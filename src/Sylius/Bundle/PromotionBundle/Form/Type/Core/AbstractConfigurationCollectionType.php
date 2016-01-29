@@ -38,11 +38,11 @@ abstract class AbstractConfigurationCollectionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $prototypes = array();
+        $prototypes = [];
 
         foreach (array_keys($this->registry->all()) as $type) {
             $prototypeOptions = array_replace(
-                array('configuration_type' => $type),
+                ['configuration_type' => $type],
                 $options['options']
             );
             $form = $builder->create($options['prototype_name'], $options['type'], $prototypeOptions);
@@ -58,10 +58,10 @@ abstract class AbstractConfigurationCollectionType extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $view->vars['prototypes'] = array();
+        $view->vars['prototypes'] = [];
 
         foreach ($form->getConfig()->getAttribute('prototypes') as $type => $prototype) {
-            /** @var FormInterface $prototype */
+            /* @var FormInterface $prototype */
             $view->vars['prototypes'][$type] = $prototype->createView($view);
         }
     }
@@ -71,12 +71,12 @@ abstract class AbstractConfigurationCollectionType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'type' => $this->getFormTypeOption(),
             'allow_add' => true,
             'allow_delete' => true,
             'by_reference' => false,
-        ));
+        ]);
     }
 
     /**

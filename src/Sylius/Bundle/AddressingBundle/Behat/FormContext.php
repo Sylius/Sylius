@@ -30,7 +30,7 @@ class FormContext extends BaseFormContext
 
         while (0 !== $items) {
             $this->deleteCollectionItem($items);
-            $items--;
+            --$items;
         }
     }
 

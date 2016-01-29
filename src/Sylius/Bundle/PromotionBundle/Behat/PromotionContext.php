@@ -160,7 +160,7 @@ class PromotionContext extends DefaultContext
     {
         $element = $this->getSession()->getPage()->find('css', 'div:contains("Cart summary") > form > table');
         if (null === $element) {
-            throw new \Exception("Cart summary element cannot be found!");
+            throw new \Exception('Cart summary element cannot be found!');
         }
 
         return $element;

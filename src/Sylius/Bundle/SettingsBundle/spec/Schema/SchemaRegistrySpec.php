@@ -32,7 +32,7 @@ class SchemaRegistrySpec extends ObjectBehavior
 
     function it_should_initialize_schemas_array_by_default()
     {
-        $this->getSchemas()->shouldReturn(array());
+        $this->getSchemas()->shouldReturn([]);
     }
 
     function it_should_register_schema_properly(SchemaInterface $schema)

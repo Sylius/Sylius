@@ -41,9 +41,9 @@ class ShipmentEmailManager
         /** @var \Sylius\Component\Core\Model\OrderInterface $order */
         $order = $shipment->getOrder();
 
-        $this->emailSender->send(Emails::SHIPMENT_CONFIRMATION, array($order->getCustomer()->getEmail()), array(
+        $this->emailSender->send(Emails::SHIPMENT_CONFIRMATION, [$order->getCustomer()->getEmail()], [
             'shipment' => $shipment,
-            'order' => $order
-        ));
+            'order' => $order,
+        ]);
     }
 }

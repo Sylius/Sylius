@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sylius package.
  *
@@ -26,10 +27,10 @@ class ProductTranslationType extends BaseProductTranslationType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('shortDescription', 'textarea', array(
+            ->add('shortDescription', 'textarea', [
                 'required' => false,
-                'label'    => 'sylius.form.product.short_description'
-            ))
+                'label' => 'sylius.form.product.short_description',
+            ])
         ;
     }
 }

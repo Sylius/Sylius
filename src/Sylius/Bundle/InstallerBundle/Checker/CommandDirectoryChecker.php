@@ -60,7 +60,7 @@ class CommandDirectoryChecker
         } catch (AccessDeniedException $exception) {
             $output->writeln($this->createBadPermissionsMessage($exception->getMessage()));
 
-            throw new \RuntimeException("Failed while trying to change directory permissions.");
+            throw new \RuntimeException('Failed while trying to change directory permissions.');
         }
     }
 
@@ -81,9 +81,9 @@ class CommandDirectoryChecker
         try {
             $this->filesystem->mkdir($directory, 755);
         } catch (IOException $exception) {
-            $output->writeln($this->createUnexistingDirectoryMessage(getcwd() . '/' . $directory));
+            $output->writeln($this->createUnexistingDirectoryMessage(getcwd().'/'.$directory));
 
-            throw new \RuntimeException("Failed while trying to create directory.");
+            throw new \RuntimeException('Failed while trying to create directory.');
         }
 
         $output->writeln(sprintf('<comment>Created "%s" directory.</comment>', $directory));
@@ -137,7 +137,7 @@ class CommandDirectoryChecker
     private function createUnexistingDirectoryMessage($directory)
     {
         return
-            '<error>Cannot run command due to unexisting directory (tried to create it automatically, failed).</error>' . PHP_EOL .
+            '<error>Cannot run command due to unexisting directory (tried to create it automatically, failed).</error>'.PHP_EOL.
             sprintf('Create directory "%s" and run command "<comment>%s</comment>"', $directory, $this->name)
         ;
     }
@@ -150,7 +150,7 @@ class CommandDirectoryChecker
     private function createBadPermissionsMessage($directory)
     {
         return
-            '<error>Cannot run command due to bad directory permissions (tried to change permissions to 0755).</error>' . PHP_EOL .
+            '<error>Cannot run command due to bad directory permissions (tried to change permissions to 0755).</error>'.PHP_EOL.
             sprintf('Set "%s" writable recursively and run command "<comment>%s</comment>"', $directory, $this->name)
         ;
     }

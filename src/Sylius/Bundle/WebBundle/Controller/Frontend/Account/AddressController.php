@@ -38,10 +38,10 @@ class AddressController extends FOSRestController
         $view = $this
             ->view()
             ->setTemplate('SyliusWebBundle:Frontend/Account:Address/index.html.twig')
-            ->setData(array(
-                'customer'  => $this->getCustomer(),
+            ->setData([
+                'customer' => $this->getCustomer(),
                 'addresses' => $this->getCustomer()->getAddresses(),
-            ))
+            ])
         ;
 
         return $this->handleView($view);
@@ -71,10 +71,10 @@ class AddressController extends FOSRestController
         $view = $this
             ->view()
             ->setTemplate('SyliusWebBundle:Frontend/Account:Address/create.html.twig')
-            ->setData(array(
+            ->setData([
                 'customer' => $this->getCustomer(),
-                'form' => $form->createView()
-            ))
+                'form' => $form->createView(),
+            ])
         ;
 
         return $this->handleView($view);
@@ -102,11 +102,11 @@ class AddressController extends FOSRestController
         $view = $this
             ->view()
             ->setTemplate('SyliusWebBundle:Frontend/Account:Address/update.html.twig')
-            ->setData(array(
-                'customer'    => $this->getCustomer(),
+            ->setData([
+                'customer' => $this->getCustomer(),
                 'address' => $address,
-                'form'    => $form->createView()
-            ))
+                'form' => $form->createView(),
+            ])
         ;
 
         return $this->handleView($view);
@@ -169,7 +169,7 @@ class AddressController extends FOSRestController
     protected function addFlash($type, $message)
     {
         $translator = $this->get('translator');
-        $this->get('session')->getFlashBag()->add($type, $translator->trans($message, array(), 'flashes'));
+        $this->get('session')->getFlashBag()->add($type, $translator->trans($message, [], 'flashes'));
     }
 
     /**
@@ -214,7 +214,7 @@ class AddressController extends FOSRestController
     /**
      * Accesses address or throws 403/404
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return AddressInterface
      *

@@ -14,7 +14,6 @@ namespace spec\Sylius\Bundle\RbacBundle\EventListener;
 use Doctrine\Common\Cache\ClearableCache;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Rbac\Model\PermissionInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
 

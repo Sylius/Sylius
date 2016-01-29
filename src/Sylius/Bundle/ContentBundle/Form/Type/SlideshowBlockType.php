@@ -25,19 +25,19 @@ class SlideshowBlockType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options = array())
+    public function buildForm(FormBuilderInterface $builder, array $options = [])
     {
         $builder
-            ->add('parentDocument', null, array(
-                'label' => 'sylius.form.slideshow_block.parent'
-            ))
-            ->add('name', 'text', array(
-                'label' => 'sylius.form.slideshow_block.internal_name'
-            ))
-            ->add('title', 'text', array(
-                'label' => 'sylius.form.slideshow_block.title'
-            ))
-            ->add('children', 'collection', array(
+            ->add('parentDocument', null, [
+                'label' => 'sylius.form.slideshow_block.parent',
+            ])
+            ->add('name', 'text', [
+                'label' => 'sylius.form.slideshow_block.internal_name',
+            ])
+            ->add('title', 'text', [
+                'label' => 'sylius.form.slideshow_block.title',
+            ])
+            ->add('children', 'collection', [
                 'type' => 'sylius_imagine_block',
                 'allow_add' => true,
                 'allow_delete' => true,
@@ -45,35 +45,35 @@ class SlideshowBlockType extends AbstractResourceType
                 'label' => false,
                 'button_add_label' => 'sylius.form.slideshow_block.add_slide',
                 'cascade_validation' => true,
-            ))
-            ->add('publishable', null, array(
-                'label' => 'sylius.form.slideshow_block.publishable'
-            ))
-            ->add('publishStartDate', 'datetime', array(
+            ])
+            ->add('publishable', null, [
+                'label' => 'sylius.form.slideshow_block.publishable',
+            ])
+            ->add('publishStartDate', 'datetime', [
                 'label' => 'sylius.form.slideshow_block.publish_start_date',
-                'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'empty_value' => /* @Ignore */ ['year' => '-', 'month' => '-', 'day' => '-'],
                 'time_widget' => 'text',
-            ))
-            ->add('publishEndDate', 'datetime', array(
+            ])
+            ->add('publishEndDate', 'datetime', [
                 'label' => 'sylius.form.slideshow_block.publish_end_date',
-                'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'empty_value' => /* @Ignore */ ['year' => '-', 'month' => '-', 'day' => '-'],
                 'time_widget' => 'text',
-            ))
+            ])
         ;
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(            
+        $resolver->setDefaults([
             'cascade_validation' => true,
-        ));
-        
+        ]);
+
         parent::configureOptions($resolver);
     }
-    
+
     /**
      * {@inheritdoc}
      */

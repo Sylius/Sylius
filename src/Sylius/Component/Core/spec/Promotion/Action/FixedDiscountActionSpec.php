@@ -59,7 +59,7 @@ class FixedDiscountActionSpec extends ObjectBehavior
         $originator->setOrigin($adjustment, $promotion)->shouldBeCalled();
 
         $order->addAdjustment($adjustment)->shouldBeCalled();
-        $configuration = array('amount' => 500);
+        $configuration = ['amount' => 500];
 
         $this->execute($order, $configuration, $promotion);
     }

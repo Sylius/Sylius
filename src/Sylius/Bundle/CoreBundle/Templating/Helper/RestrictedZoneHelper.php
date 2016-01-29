@@ -35,7 +35,7 @@ class RestrictedZoneHelper extends Helper
     /**
      * @param ProductInterface $product
      *
-     * @return Boolean
+     * @return bool
      */
     public function isRestricted(ProductInterface $product)
     {

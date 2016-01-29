@@ -36,5 +36,4 @@ class CouponSpec extends ObjectBehavior
         $this->setPerCustomerUsageLimit(10);
         $this->getPerCustomerUsageLimit()->shouldReturn(10);
     }
-
 }

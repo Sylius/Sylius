@@ -14,8 +14,8 @@ namespace spec\Sylius\Bundle\AssociationBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
-use Sylius\Component\Association\Model\AssociationType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Component\Association\Model\AssociationType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**

@@ -46,9 +46,10 @@ final class DateRange
      */
     public function isInRange()
     {
-        if($this->start > new \DateTime() || ($this->end !== null && $this->end < new \DateTime())){
+        if ($this->start > new \DateTime() || ($this->end !== null && $this->end < new \DateTime())) {
             return false;
         }
+
         return true;
     }
 
@@ -84,4 +85,3 @@ final class DateRange
         return $this->end;
     }
 }
-

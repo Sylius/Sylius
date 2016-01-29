@@ -37,10 +37,10 @@ final class ThemeAwareLoaderDecoratorPass implements CompilerPassInterface
         $loaders = $container->findTaggedServiceIds('translation.loader');
         foreach (array_keys($loaders) as $id) {
             $container
-                ->register('sylius.theme.translation.loader.' . $id, ThemeAwareLoader::class)
+                ->register('sylius.theme.translation.loader.'.$id, ThemeAwareLoader::class)
                 ->setDecoratedService($id)
                 ->setArguments([
-                    new Reference('sylius.theme.translation.loader.' . $id . '.inner'),
+                    new Reference('sylius.theme.translation.loader.'.$id.'.inner'),
                     new Reference('sylius.theme.repository'),
                 ])
             ;

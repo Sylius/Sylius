@@ -26,11 +26,11 @@ class CustomerType extends CustomerProfileType
     {
         parent::buildForm($builder, $options);
         $builder
-            ->add('groups', 'sylius_group_choice', array(
-                'label'    => 'sylius.form.customer.groups',
+            ->add('groups', 'sylius_group_choice', [
+                'label' => 'sylius.form.customer.groups',
                 'multiple' => true,
                 'required' => false,
-            ))
+            ])
             ->add('user', 'sylius_user')
         ;
     }
@@ -40,11 +40,11 @@ class CustomerType extends CustomerProfileType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => $this->dataClass,
             'validation_groups' => $this->validationGroups,
             'cascade_validation' => true,
-        ));
+        ]);
     }
 
     /**

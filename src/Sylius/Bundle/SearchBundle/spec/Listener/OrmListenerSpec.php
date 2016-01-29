@@ -20,7 +20,6 @@ use Sylius\Bundle\SearchBundle\Indexer\OrmIndexer;
  */
 class OrmListenerSpec extends ObjectBehavior
 {
-
     function let(OrmIndexer $ormIndexer)
     {
         $this->beConstructedWith($ormIndexer);
@@ -51,5 +50,4 @@ class OrmListenerSpec extends ObjectBehavior
 
         $this->scheduledForDeletion->shouldBeArray();
     }
-
-} 
+}

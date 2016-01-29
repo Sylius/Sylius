@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Shipping\Processor;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use SM\Factory\FactoryInterface;
 use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
@@ -50,7 +49,7 @@ class ShipmentProcessorSpec extends ObjectBehavior
 
         $sm->apply('transition', true)->shouldBeCalled();
 
-        $this->updateShipmentStates(array($shipment), 'transition');
+        $this->updateShipmentStates([$shipment], 'transition');
     }
 
     function it_updates_item_states(
@@ -62,6 +61,6 @@ class ShipmentProcessorSpec extends ObjectBehavior
 
         $sm->apply('transition', true)->shouldBeCalled();
 
-        $this->updateItemStates(array($item), 'transition');
+        $this->updateItemStates([$item], 'transition');
     }
 }

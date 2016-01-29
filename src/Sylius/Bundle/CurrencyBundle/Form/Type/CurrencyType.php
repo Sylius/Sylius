@@ -27,9 +27,9 @@ class CurrencyType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('exchangeRate', 'number', array(
+            ->add('exchangeRate', 'number', [
                 'label' => 'sylius.form.currency.exchange_rate',
-            ))
+            ])
             ->addEventSubscriber(new AddCodeFormSubscriber('currency'))
         ;
     }

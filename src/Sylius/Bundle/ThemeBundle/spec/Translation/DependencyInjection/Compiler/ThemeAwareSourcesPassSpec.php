@@ -62,7 +62,7 @@ class ThemeAwareSourcesPassSpec extends ObjectBehavior
     ) {
         $containerBuilder->get('sylius.theme.repository')->willReturn($themeRepository);
         $themeRepository->findAll()->willReturn([$firstTheme, $secondTheme]);
-        
+
         $containerBuilder->get('sylius.theme.translation.files_finder')->willReturn($translationFilesFinder);
         $translationFilesFinder->findTranslationFiles($firstTheme)->willReturn([
             '/theme1/SampleBundle/translations/messages.en.yml',
@@ -91,7 +91,7 @@ class ThemeAwareSourcesPassSpec extends ObjectBehavior
                 'pl' => [
                     '/theme1/translations/messages.pl.yml',
                 ],
-            ]
+            ],
         ])->shouldBeCalled();
 
         $containerBuilder->addResource(Argument::type(FileResource::class))->shouldBeCalledTimes(3);

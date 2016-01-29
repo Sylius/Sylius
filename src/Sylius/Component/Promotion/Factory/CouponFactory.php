@@ -10,6 +10,7 @@
  */
 
 namespace Sylius\Component\Promotion\Factory;
+
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 

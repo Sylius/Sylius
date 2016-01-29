@@ -1,13 +1,13 @@
 <?php
 
 /*
-* This file is part of the Sylius package.
-*
-* (c) Paweł Jędrzejewski
-*
-* For the full copyright and license information, please view the LICENSE
-* file that was distributed with this source code.
-*/
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Sylius\Bundle\PayumBundle\Model;
 
@@ -37,7 +37,7 @@ class GatewayConfig implements GatewayConfigInterface
 
     public function __construct()
     {
-        $this->config = array();
+        $this->config = [];
     }
 
     /**
@@ -49,7 +49,7 @@ class GatewayConfig implements GatewayConfigInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getGatewayName()
     {
@@ -57,7 +57,7 @@ class GatewayConfig implements GatewayConfigInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setGatewayName($gatewayName)
     {
@@ -65,7 +65,7 @@ class GatewayConfig implements GatewayConfigInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getFactoryName()
     {
@@ -73,7 +73,7 @@ class GatewayConfig implements GatewayConfigInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setFactoryName($factoryName)
     {
@@ -81,7 +81,7 @@ class GatewayConfig implements GatewayConfigInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getConfig()
     {
@@ -89,7 +89,7 @@ class GatewayConfig implements GatewayConfigInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setConfig(array $config)
     {

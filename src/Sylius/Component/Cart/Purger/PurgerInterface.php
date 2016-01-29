@@ -21,7 +21,7 @@ interface PurgerInterface
     /**
      * Purge all expired carts.
      *
-     * @return Boolean
+     * @return bool
      */
     public function purge();
 }

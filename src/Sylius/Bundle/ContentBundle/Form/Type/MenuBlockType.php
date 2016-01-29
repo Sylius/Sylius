@@ -24,34 +24,33 @@ class MenuBlockType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options = array())
+    public function buildForm(FormBuilderInterface $builder, array $options = [])
     {
         $builder
-            ->add('id', 'text', array(
-                'label' => 'sylius.form.menu_block.id'
-            ))
-            ->add('name', 'text', array(
-                'label' => 'sylius.form.menu_block.name'
-            ))
-            ->add('body', 'textarea', array(
+            ->add('id', 'text', [
+                'label' => 'sylius.form.menu_block.id',
+            ])
+            ->add('name', 'text', [
+                'label' => 'sylius.form.menu_block.name',
+            ])
+            ->add('body', 'textarea', [
                 'required' => false,
-                'label'    => 'sylius.form.menu_block.body',
-            ))
-            ->add('publishable', null, array(
-                'label' => 'sylius.form.menu_block.publishable'
-                ))
-            ->add('publishStartDate', 'datetime', array(
+                'label' => 'sylius.form.menu_block.body',
+            ])
+            ->add('publishable', null, [
+                'label' => 'sylius.form.menu_block.publishable',
+                ])
+            ->add('publishStartDate', 'datetime', [
                 'label' => 'sylius.form.menu_block.publish_start_date',
-                'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'empty_value' => /* @Ignore */ ['year' => '-', 'month' => '-', 'day' => '-'],
                 'time_widget' => 'text',
-            ))
-            ->add('publishEndDate', 'datetime', array(
+            ])
+            ->add('publishEndDate', 'datetime', [
                 'label' => 'sylius.form.menu_block.publish_end_date',
-                'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'empty_value' => /* @Ignore */ ['year' => '-', 'month' => '-', 'day' => '-'],
                 'time_widget' => 'text',
-            ))
+            ])
         ;
-
     }
 
     /**

@@ -59,7 +59,7 @@ abstract class SymfonyPage extends Page
     /**
      * @param array $urlParameters
      */
-    public function assertRoute(array $urlParameters = array())
+    public function assertRoute(array $urlParameters = [])
     {
         $this->verify($urlParameters);
     }
@@ -69,7 +69,7 @@ abstract class SymfonyPage extends Page
      *
      * @return string
      */
-    protected function getUrl(array $urlParameters = array())
+    protected function getUrl(array $urlParameters = [])
     {
         if (null === $this->getRouteName()) {
             throw new \RuntimeException('You need to provide route name, null given');

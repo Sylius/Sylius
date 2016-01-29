@@ -52,7 +52,7 @@ final class ThemeAwareLoader implements LoaderInterface
 
             foreach ($messages as $key => $value) {
                 unset($messages[$key]);
-                $messages[$key . '|' . $theme->getName()] = $value;
+                $messages[$key.'|'.$theme->getName()] = $value;
             }
 
             $messageCatalogue->replace($messages, $domain);

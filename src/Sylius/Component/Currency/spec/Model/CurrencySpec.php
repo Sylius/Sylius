@@ -127,7 +127,7 @@ class CurrencySpec extends ObjectBehavior
         $this->setUpdatedAt($date);
         $this->getUpdatedAt()->shouldReturn($date);
     }
-    
+
     function its_exchange_rate_cannot_be_changed_if_it_is_base()
     {
         $this->setExchangeRate(1);

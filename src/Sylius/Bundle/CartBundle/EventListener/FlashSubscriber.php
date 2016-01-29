@@ -54,16 +54,16 @@ class FlashSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
-            SyliusCartEvents::CART_CLEAR_COMPLETED  => 'addSuccessFlash',
-            SyliusCartEvents::CART_SAVE_COMPLETED   => 'addSuccessFlash',
+        return [
+            SyliusCartEvents::CART_CLEAR_COMPLETED => 'addSuccessFlash',
+            SyliusCartEvents::CART_SAVE_COMPLETED => 'addSuccessFlash',
 
-            SyliusCartEvents::ITEM_ADD_COMPLETED    => 'addSuccessFlash',
+            SyliusCartEvents::ITEM_ADD_COMPLETED => 'addSuccessFlash',
             SyliusCartEvents::ITEM_REMOVE_COMPLETED => 'addSuccessFlash',
 
-            SyliusCartEvents::ITEM_ADD_ERROR        => 'addErrorFlash',
-            SyliusCartEvents::ITEM_REMOVE_ERROR     => 'addErrorFlash',
-        );
+            SyliusCartEvents::ITEM_ADD_ERROR => 'addErrorFlash',
+            SyliusCartEvents::ITEM_REMOVE_ERROR => 'addErrorFlash',
+        ];
     }
 
     /**
@@ -71,16 +71,16 @@ class FlashSubscriber implements EventSubscriberInterface
      */
     public function setMessages()
     {
-        $this->messages = array(
-            SyliusCartEvents::CART_SAVE_COMPLETED    => 'sylius.cart.cart_save_completed',
-            SyliusCartEvents::CART_CLEAR_COMPLETED   => 'sylius.cart.cart_clear_completed',
+        $this->messages = [
+            SyliusCartEvents::CART_SAVE_COMPLETED => 'sylius.cart.cart_save_completed',
+            SyliusCartEvents::CART_CLEAR_COMPLETED => 'sylius.cart.cart_clear_completed',
 
-            SyliusCartEvents::ITEM_ADD_COMPLETED     => 'sylius.cart.item_add_completed',
-            SyliusCartEvents::ITEM_REMOVE_COMPLETED  => 'sylius.cart.item_remove_completed',
+            SyliusCartEvents::ITEM_ADD_COMPLETED => 'sylius.cart.item_add_completed',
+            SyliusCartEvents::ITEM_REMOVE_COMPLETED => 'sylius.cart.item_remove_completed',
 
-            SyliusCartEvents::ITEM_ADD_ERROR         => 'sylius.cart.item_add_error',
-            SyliusCartEvents::ITEM_REMOVE_ERROR      => 'sylius.cart.item_remove_error'
-        );
+            SyliusCartEvents::ITEM_ADD_ERROR => 'sylius.cart.item_add_error',
+            SyliusCartEvents::ITEM_REMOVE_ERROR => 'sylius.cart.item_remove_error',
+        ];
 
         return $this;
     }
@@ -110,7 +110,7 @@ class FlashSubscriber implements EventSubscriberInterface
     {
         $this->session->getBag('flashes')->add(
             $type,
-            $message ?: $this->translator->trans($this->messages[$eventName], array(), 'flashes')
+            $message ?: $this->translator->trans($this->messages[$eventName], [], 'flashes')
         );
     }
 }

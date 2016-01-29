@@ -23,7 +23,7 @@ class ServiceRegistry implements ServiceRegistryInterface
      *
      * @var array
      */
-    protected $services = array();
+    protected $services = [];
 
     /**
      * Interface which is required by all services.

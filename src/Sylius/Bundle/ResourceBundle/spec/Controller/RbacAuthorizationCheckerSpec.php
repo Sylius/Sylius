@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface as RbacAuthorizationCheckerInterface;
@@ -31,7 +30,7 @@ class RbacAuthorizationCheckerSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\RbacAuthorizationChecker');
     }
-    
+
     function it_implements_resource_controller_authorization_checker_interface()
     {
         $this->shouldImplement(AuthorizationCheckerInterface::class);
@@ -46,8 +45,7 @@ class RbacAuthorizationCheckerSpec extends ObjectBehavior
     function it_uses_rbac_authorization_checker(
         RequestConfiguration $requestConfiguration,
         RbacAuthorizationCheckerInterface $rbacAuthorizationChecker
-    )
-    {
+    ) {
         $requestConfiguration->hasPermission()->willReturn(true);
         $requestConfiguration->getPermission('sylius.product.foo')->willReturn('sylius.product.foo');
         $rbacAuthorizationChecker->isGranted('sylius.product.foo')->willReturn(false);

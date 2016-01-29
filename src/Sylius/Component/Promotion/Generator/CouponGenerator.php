@@ -53,8 +53,8 @@ class CouponGenerator implements CouponGeneratorInterface
      */
     public function generate(PromotionInterface $promotion, Instruction $instruction)
     {
-        $generatedCoupons = array();
-        for ($i = 0, $amount = $instruction->getAmount(); $i < $amount; $i++) {
+        $generatedCoupons = [];
+        for ($i = 0, $amount = $instruction->getAmount(); $i < $amount; ++$i) {
             $coupon = $this->couponFactory->createNew();
             $coupon->setPromotion($promotion);
             $coupon->setCode($this->generateUniqueCode());
@@ -95,6 +95,6 @@ class CouponGenerator implements CouponGeneratorInterface
      */
     protected function isUsedCode($code)
     {
-        return null !== $this->repository->findOneBy(array('code' => $code));
+        return null !== $this->repository->findOneBy(['code' => $code]);
     }
 }

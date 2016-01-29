@@ -33,7 +33,7 @@ class ShippingStepType extends AbstractResourceType
      * @param array $validationGroups
      * @param ChannelContextInterface $channelContext
      */
-    public function __construct($dataClass, array $validationGroups = array(), ChannelContextInterface $channelContext)
+    public function __construct($dataClass, array $validationGroups = [], ChannelContextInterface $channelContext)
     {
         parent::__construct($dataClass, $validationGroups);
         $this->channelContext = $channelContext;
@@ -45,10 +45,10 @@ class ShippingStepType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('shipments', 'collection', array(
-                'type'    => 'sylius_checkout_shipment',
-                'options' => array('criteria' => $options['criteria'], 'channel' => $this->channelContext->getChannel())
-            ))
+            ->add('shipments', 'collection', [
+                'type' => 'sylius_checkout_shipment',
+                'options' => ['criteria' => $options['criteria'], 'channel' => $this->channelContext->getChannel()],
+            ])
         ;
     }
 
@@ -60,9 +60,9 @@ class ShippingStepType extends AbstractResourceType
         parent::configureOptions($resolver);
 
         $resolver
-            ->setDefined(array(
-                'criteria'
-            ))
+            ->setDefined([
+                'criteria',
+            ])
             ->setAllowedTypes('criteria', 'array')
         ;
     }

@@ -1,9 +1,17 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\AddressingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
@@ -36,14 +44,14 @@ class ZoneCodeChoiceTypeSpec extends ObjectBehavior
         $zone->getCode()->willReturn('EU');
         $zone->getName()->willReturn('European Union');
 
-        $repository->findAll()->willReturn(array($zone));
+        $repository->findAll()->willReturn([$zone]);
 
         $resolver
-            ->setDefaults(array(
-                'choices'     => array('EU' => 'European Union'),
-                'label'       => 'sylius.form.zone.types.zone',
+            ->setDefaults([
+                'choices' => ['EU' => 'European Union'],
+                'label' => 'sylius.form.zone.types.zone',
                 'empty_value' => 'sylius.form.zone.select',
-            ))
+            ])
             ->willReturn($resolver)
         ;
 

@@ -41,9 +41,9 @@ class LoadMetadataSubscriber implements EventSubscriber
      */
     public function getSubscribedEvents()
     {
-        return array(
+        return [
             'loadClassMetadata',
-        );
+        ];
     }
 
     /**
@@ -70,12 +70,12 @@ class LoadMetadataSubscriber implements EventSubscriber
                 continue;
             }
 
-            $mapping = array(
+            $mapping = [
                 'fieldName' => 'values',
                 'targetEntity' => $class['option_value']['classes']['model'],
                 'mappedBy' => 'option',
-                'cascade' => array('all'),
-            );
+                'cascade' => ['all'],
+            ];
 
             $metadata->mapOneToMany($mapping);
         }
@@ -91,17 +91,17 @@ class LoadMetadataSubscriber implements EventSubscriber
                 continue;
             }
 
-            $mapping = array(
+            $mapping = [
                 'fieldName' => 'option',
                 'targetEntity' => $class['option']['classes']['model'],
                 'inversedBy' => 'values',
-                'joinColumns' => array(array(
+                'joinColumns' => [[
                     'name' => 'option_id',
                     'referencedColumnName' => 'id',
                     'nullable' => false,
                     'onDelete' => 'CASCADE',
-                )),
-            );
+                ]],
+            ];
 
             $metadata->mapManyToOne($mapping);
         }
@@ -117,40 +117,40 @@ class LoadMetadataSubscriber implements EventSubscriber
                 continue;
             }
 
-            $metadata->mapManyToOne(array(
-                'fieldName'    => 'object',
+            $metadata->mapManyToOne([
+                'fieldName' => 'object',
                 'targetEntity' => $class['variable'],
-                'inversedBy'   => 'variants',
-                'joinColumns'  => array(array(
-                    'name'                 => $variable.'_id',
+                'inversedBy' => 'variants',
+                'joinColumns' => [[
+                    'name' => $variable.'_id',
                     'referencedColumnName' => 'id',
-                    'nullable'             => false,
-                    'onDelete'             => 'CASCADE',
-                )),
-            ));
+                    'nullable' => false,
+                    'onDelete' => 'CASCADE',
+                ]],
+            ]);
 
-            $metadata->mapManyToMany(array(
-                'fieldName'    => 'options',
-                'type'         => ClassMetadataInfo::MANY_TO_MANY,
+            $metadata->mapManyToMany([
+                'fieldName' => 'options',
+                'type' => ClassMetadataInfo::MANY_TO_MANY,
                 'targetEntity' => $class['option_value']['classes']['model'],
-                'joinTable'    => array(
-                    'name'               => sprintf('sylius_%s_variant_option_value', $variable),
-                    'joinColumns'        => array(array(
-                        'name'                 => 'variant_id',
+                'joinTable' => [
+                    'name' => sprintf('sylius_%s_variant_option_value', $variable),
+                    'joinColumns' => [[
+                        'name' => 'variant_id',
                         'referencedColumnName' => 'id',
-                        'unique'               => false,
-                        'nullable'             => false,
-                        'onDelete'             => 'CASCADE',
-                    )),
-                    'inverseJoinColumns' => array(array(
-                        'name'                 => 'option_value_id',
+                        'unique' => false,
+                        'nullable' => false,
+                        'onDelete' => 'CASCADE',
+                    ]],
+                    'inverseJoinColumns' => [[
+                        'name' => 'option_value_id',
                         'referencedColumnName' => 'id',
-                        'unique'               => false,
-                        'nullable'             => false,
-                        'onDelete'             => 'CASCADE',
-                    )),
-                ),
-            ));
+                        'unique' => false,
+                        'nullable' => false,
+                        'onDelete' => 'CASCADE',
+                    ]],
+                ],
+            ]);
         }
     }
 }

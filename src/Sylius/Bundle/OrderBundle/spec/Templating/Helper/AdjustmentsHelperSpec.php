@@ -43,11 +43,11 @@ class AdjustmentsHelperSpec extends ObjectBehavior
         AdjustmentInterface $adjustment3
     ) {
         $adjustmentsAggregator
-            ->aggregate(array($adjustment1, $adjustment2, $adjustment3))
-            ->willReturn(array('tax 1' => 1000, 'tax2' => 500))
+            ->aggregate([$adjustment1, $adjustment2, $adjustment3])
+            ->willReturn(['tax 1' => 1000, 'tax2' => 500])
         ;
 
-        $this->getAggregatedAdjustments(array($adjustment1, $adjustment2, $adjustment3))->shouldReturn(array('tax 1' => 1000, 'tax2' => 500));
+        $this->getAggregatedAdjustments([$adjustment1, $adjustment2, $adjustment3])->shouldReturn(['tax 1' => 1000, 'tax2' => 500]);
     }
 
     function it_has_name()

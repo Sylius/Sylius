@@ -34,7 +34,7 @@ class ResourceFormFactorySpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\ResourceFormFactory');
     }
-    
+
     function it_implements_resource_form_factory_interface()
     {
         $this->shouldImplement(ResourceFormFactoryInterface::class);
@@ -45,12 +45,11 @@ class ResourceFormFactorySpec extends ObjectBehavior
         ResourceInterface $resource,
         FormFactoryInterface $formFactory,
         FormInterface $form
-    )
-    {
+    ) {
         $requestConfiguration->isHtmlRequest()->willReturn(true);
         $requestConfiguration->getFormType()->willReturn('sylius_product_pricing');
         $formFactory->create('sylius_product_pricing', $resource)->willReturn($form);
-        
+
         $this->create($requestConfiguration, $resource)->shouldReturn($form);
     }
 
@@ -59,11 +58,10 @@ class ResourceFormFactorySpec extends ObjectBehavior
         ResourceInterface $resource,
         FormFactoryInterface $formFactory,
         FormInterface $form
-    )
-    {
+    ) {
         $requestConfiguration->isHtmlRequest()->willReturn(false);
         $requestConfiguration->getFormType()->willReturn('sylius_product_api');
-        $formFactory->createNamed('', 'sylius_product_api', $resource, array('csrf_protection' => false))->willReturn($form);
+        $formFactory->createNamed('', 'sylius_product_api', $resource, ['csrf_protection' => false])->willReturn($form);
 
         $this->create($requestConfiguration, $resource)->shouldReturn($form);
     }
@@ -73,8 +71,7 @@ class ResourceFormFactorySpec extends ObjectBehavior
         ResourceInterface $resource,
         FormFactoryInterface $formFactory,
         FormInterface $form
-    )
-    {
+    ) {
         $requestConfiguration->isHtmlRequest()->willReturn(true);
         $requestConfiguration->getFormType()->willReturn(TextType::class);
         $formFactory->create(Argument::type(TextType::class), $resource)->willReturn($form);

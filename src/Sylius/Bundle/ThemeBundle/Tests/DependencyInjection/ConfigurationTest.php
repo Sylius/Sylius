@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sylius\Bundle\ThemeBundle\Tests\DependencyInjection;
 
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
@@ -17,7 +26,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function it_uses_app_themes_filesystem_as_the_default_source()
     {
-       $this->assertProcessedConfigurationEquals(
+        $this->assertProcessedConfigurationEquals(
            [
                [],
            ],

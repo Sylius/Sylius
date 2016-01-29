@@ -22,6 +22,7 @@ interface HashSubjectRepositoryInterface
      * Is the given number used?
      *
      * @param $number string
+     *
      * @return bool
      */
     public function isNumberUsed($number);

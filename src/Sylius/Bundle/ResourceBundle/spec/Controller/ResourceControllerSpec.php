@@ -89,7 +89,7 @@ class ResourceControllerSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\ResourceController');
     }
-    
+
     function it_is_container_aware()
     {
         $this->shouldHaveType(ContainerAware::class);
@@ -106,8 +106,7 @@ class ResourceControllerSpec extends ObjectBehavior
         RequestConfiguration $configuration,
         Request $request,
         AuthorizationCheckerInterface $authorizationChecker
-    )
-    {
+    ) {
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::SHOW)->willReturn('sylius.product.show');
@@ -116,7 +115,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(new AccessDeniedException())
-            ->during('showAction', array($request))
+            ->during('showAction', [$request])
         ;
     }
 
@@ -128,8 +127,7 @@ class ResourceControllerSpec extends ObjectBehavior
         AuthorizationCheckerInterface $authorizationChecker,
         RepositoryInterface $repository,
         SingleResourceProviderInterface $singleResourceProvider
-    )
-    {
+    ) {
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::SHOW)->willReturn('sylius.product.show');
@@ -139,7 +137,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(new NotFoundHttpException())
-            ->during('showAction', array($request))
+            ->during('showAction', [$request])
         ;
     }
 
@@ -172,17 +170,17 @@ class ResourceControllerSpec extends ObjectBehavior
         $eventDispatcher->dispatch(ResourceActions::SHOW, $configuration, $resource)->shouldBeCalled();
 
         $expectedView = View::create()
-            ->setData(array(
+            ->setData([
                 'metadata' => $metadata,
                 'resource' => $resource,
-                'product'  => $resource
-            ))
+                'product' => $resource,
+            ])
             ->setTemplateVar('product')
             ->setTemplate('SyliusShopBundle:Product:show.html.twig')
         ;
 
         $viewHandler->handle($configuration, Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
-        
+
         $this->showAction($request)->shouldReturn($response);
     }
 
@@ -235,7 +233,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(new AccessDeniedException())
-            ->during('indexAction', array($request))
+            ->during('indexAction', [$request])
         ;
     }
 
@@ -264,14 +262,14 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $configuration->isHtmlRequest()->willReturn(true);
         $configuration->getTemplate(ResourceActions::INDEX)->willReturn('SyliusShopBundle:Product:index.html.twig');
-        $resourcesCollectionProvider->get($configuration, $repository)->willReturn(array($resource1, $resource2));
+        $resourcesCollectionProvider->get($configuration, $repository)->willReturn([$resource1, $resource2]);
 
         $expectedView = View::create()
-            ->setData(array(
+            ->setData([
                 'metadata' => $metadata,
-                'resources' => array($resource1, $resource2),
-                'products' => array($resource1, $resource2)
-            ))
+                'resources' => [$resource1, $resource2],
+                'products' => [$resource1, $resource2],
+            ])
             ->setTemplateVar('products')
             ->setTemplate('SyliusShopBundle:Product:index.html.twig')
         ;
@@ -296,7 +294,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(new AccessDeniedException())
-            ->during('createAction', array($request))
+            ->during('createAction', [$request])
         ;
     }
 
@@ -326,7 +324,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $configuration->isHtmlRequest()->willReturn(true);
         $configuration->getTemplate(ResourceActions::CREATE)->willReturn('SyliusShopBundle:Product:create.html.twig');
-        
+
         $newResourceFactory->create($configuration, $factory)->willReturn($newResource);
         $resourceFormFactory->create($configuration, $newResource)->willReturn($form);
 
@@ -334,12 +332,12 @@ class ResourceControllerSpec extends ObjectBehavior
         $form->createView()->willReturn($formView);
 
         $expectedView = View::create()
-            ->setData(array(
+            ->setData([
                 'metadata' => $metadata,
                 'resource' => $newResource,
-                'product'  => $newResource,
-                'form'     => $formView
-            ))
+                'product' => $newResource,
+                'form' => $formView,
+            ])
             ->setTemplate('SyliusShopBundle:Product:create.html.twig')
         ;
 
@@ -384,12 +382,12 @@ class ResourceControllerSpec extends ObjectBehavior
         $form->createView()->willReturn($formView);
 
         $expectedView = View::create()
-            ->setData(array(
+            ->setData([
                 'metadata' => $metadata,
                 'resource' => $newResource,
-                'product'  => $newResource,
-                'form'     => $formView
-            ))
+                'product' => $newResource,
+                'form' => $formView,
+            ])
             ->setTemplate('SyliusShopBundle:Product:create.html.twig')
         ;
 
@@ -532,7 +530,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource)->willReturn($event);
         $event->isStopped()->willReturn(false);
-        
+
         $repository->add($newResource)->shouldBeCalled();
         $eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource)->shouldBeCalled();
 
@@ -642,7 +640,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(new HttpException(500, 'You cannot add a new product right now.'))
-            ->during('createAction', array($request))
+            ->during('createAction', [$request])
         ;
     }
 
@@ -661,7 +659,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(new AccessDeniedException())
-            ->during('updateAction', array($request))
+            ->during('updateAction', [$request])
         ;
     }
 
@@ -683,7 +681,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(new NotFoundHttpException())
-            ->during('updateAction', array($request))
+            ->during('updateAction', [$request])
         ;
     }
 
@@ -724,12 +722,12 @@ class ResourceControllerSpec extends ObjectBehavior
         $form->createView()->willReturn($formView);
 
         $expectedView = View::create()
-            ->setData(array(
+            ->setData([
                 'metadata' => $metadata,
                 'resource' => $resource,
-                'product'  => $resource,
-                'form'     => $formView
-            ))
+                'product' => $resource,
+                'form' => $formView,
+            ])
             ->setTemplate('SyliusShopBundle:Product:update.html.twig')
         ;
 
@@ -770,19 +768,19 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $request->isMethod('PATCH')->willReturn(false);
         $request->getMethod()->willReturn('PUT');
-        
+
         $form->submit($request, true)->willReturn($form);
 
         $form->isValid()->willReturn(false);
         $form->createView()->willReturn($formView);
 
         $expectedView = View::create()
-            ->setData(array(
+            ->setData([
                 'metadata' => $metadata,
                 'resource' => $resource,
-                'product'  => $resource,
-                'form'     => $formView
-            ))
+                'product' => $resource,
+                'form' => $formView,
+            ])
             ->setTemplate('SyliusShopBundle:Product:update.html.twig')
         ;
 
@@ -815,7 +813,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
 
-        $singleResourceProvider->get($configuration, $repository)->willReturn($resource);;
+        $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
         $resourceFormFactory->create($configuration, $resource)->willReturn($form);
 
         $request->isMethod('PATCH')->willReturn(true);
@@ -1033,7 +1031,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(new HttpException(500, 'Cannot update this channel.'))
-            ->during('updateAction', array($request))
+            ->during('updateAction', [$request])
         ;
     }
 
@@ -1052,7 +1050,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(new AccessDeniedException())
-            ->during('deleteAction', array($request))
+            ->during('deleteAction', [$request])
         ;
     }
 
@@ -1074,7 +1072,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(new NotFoundHttpException())
-            ->during('deleteAction', array($request))
+            ->during('deleteAction', [$request])
         ;
     }
 
@@ -1107,13 +1105,13 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(false);
-        
+
         $repository->remove($resource)->shouldBeCalled();
         $eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource)->shouldBeCalled();
 
         $flashHelper->addSuccessFlash($configuration, ResourceActions::DELETE, $resource)->shouldBeCalled();
         $redirectHandler->redirectToIndex($configuration, $resource)->willReturn($redirectResponse);
-        
+
         $this->deleteAction($request)->shouldReturn($redirectResponse);
     }
 
@@ -1146,7 +1144,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(true);
-        
+
         $repository->remove($resource)->shouldNotBeCalled();
         $eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource)->shouldNotBeCalled();
         $flashHelper->addSuccessFlash($configuration, ResourceActions::DELETE, $resource)->shouldNotBeCalled();
@@ -1234,7 +1232,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(new HttpException(500, 'Cannot delete this product.'))
-            ->during('deleteAction', array($request))
+            ->during('deleteAction', [$request])
         ;
     }
 

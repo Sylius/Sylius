@@ -27,16 +27,16 @@ class CouponGenerateInstructionType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('amount', 'integer', array(
-                'label' => 'sylius.form.coupon_generate_instruction.amount'
-            ))
-            ->add('usageLimit', 'integer', array(
-                'label' => 'sylius.form.coupon_generate_instruction.usage_limit'
-            ))
-            ->add('expiresAt', 'date', array(
+            ->add('amount', 'integer', [
+                'label' => 'sylius.form.coupon_generate_instruction.amount',
+            ])
+            ->add('usageLimit', 'integer', [
+                'label' => 'sylius.form.coupon_generate_instruction.usage_limit',
+            ])
+            ->add('expiresAt', 'date', [
                 'label' => 'sylius.form.coupon_generate_instruction.expires_at',
-                'empty_value' => /** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
-            ))
+                'empty_value' => /* @Ignore */ ['year' => '-', 'month' => '-', 'day' => '-'],
+            ])
         ;
     }
 

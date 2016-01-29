@@ -47,7 +47,7 @@ class CoreContext extends DefaultContext
      *
      * @var OrderInterface[]
      */
-    protected $orders = array();
+    protected $orders = [];
 
     /**
      * @Given store has default configuration
@@ -86,7 +86,7 @@ class CoreContext extends DefaultContext
      */
     public function iAmLoggedInAsAuthorizationRole($role)
     {
-        $this->iAmLoggedInAsRole('ROLE_ADMINISTRATION_ACCESS', 'sylius@example.com', array($role));
+        $this->iAmLoggedInAsRole('ROLE_ADMINISTRATION_ACCESS', 'sylius@example.com', [$role]);
     }
 
     /**
@@ -219,9 +219,9 @@ class CoreContext extends DefaultContext
                 'ROLE_USER',
                 isset($data['enabled']) ? $data['enabled'] : true,
                 isset($data['address']) && !empty($data['address']) ? $data['address'] : null,
-                isset($data['groups']) && !empty($data['groups']) ? explode(',', $data['groups']) : array(),
+                isset($data['groups']) && !empty($data['groups']) ? explode(',', $data['groups']) : [],
                 false,
-                array(),
+                [],
                 isset($data['created at']) ? new \DateTime($data['created at']) : null
             );
         }
@@ -239,7 +239,7 @@ class CoreContext extends DefaultContext
             $this->thereIsCustomer(
                 $data['email'],
                 isset($data['address']) && !empty($data['address']) ? $data['address'] : null,
-                isset($data['groups']) && !empty($data['groups']) ? explode(',', $data['groups']) : array(),
+                isset($data['groups']) && !empty($data['groups']) ? explode(',', $data['groups']) : [],
                 false,
                 isset($data['created at']) ? new \DateTime($data['created at']) : null
             );
@@ -278,7 +278,7 @@ class CoreContext extends DefaultContext
         foreach ($table->getHash() as $data) {
             $address = $this->createAddress($data['address']);
 
-            $user = $this->thereIsUser($data['user'], 'sylius', 'ROLE_USER', 'yes', null, array());
+            $user = $this->thereIsUser($data['user'], 'sylius', 'ROLE_USER', 'yes', null, []);
             $user->getCustomer()->addAddress($address);
 
             $manager->persist($address);
@@ -288,7 +288,7 @@ class CoreContext extends DefaultContext
         $manager->flush();
     }
 
-    public function thereIsUser($email, $password, $role = null, $enabled = 'yes', $address = null, $groups = array(), $flush = true, array $authorizationRoles = array(), $createdAt = null)
+    public function thereIsUser($email, $password, $role = null, $enabled = 'yes', $address = null, $groups = [], $flush = true, array $authorizationRoles = [], $createdAt = null)
     {
         if (null !== $user = $this->getRepository('user')->findOneByEmail($email)) {
             return $user;
@@ -305,7 +305,7 @@ class CoreContext extends DefaultContext
         return $user;
     }
 
-    protected function thereIsCustomer($email, $address = null, $groups = array(), $flush = true, $createdAt = null)
+    protected function thereIsCustomer($email, $address = null, $groups = [], $flush = true, $createdAt = null)
     {
         if (null !== $customer = $this->getRepository('customer')->findOneByEmail($email)) {
             return $customer;
@@ -333,7 +333,7 @@ class CoreContext extends DefaultContext
 
         /* @var $masterVariant ProductVariantInterface */
         $masterVariant->setPricingCalculator(PriceCalculators::VOLUME_BASED);
-        $configuration = array();
+        $configuration = [];
 
         foreach ($table->getHash() as $data) {
             if (false !== strpos($data['range'], '+')) {
@@ -343,11 +343,11 @@ class CoreContext extends DefaultContext
                 list($min, $max) = array_map(function ($value) { return (int) trim($value); }, explode('-', $data['range']));
             }
 
-            $configuration[] = array(
+            $configuration[] = [
                 'min' => $min,
                 'max' => $max,
                 'price' => (int) ($data['price'] * 100),
-            );
+            ];
         }
 
         $masterVariant->setPricingConfiguration($configuration);
@@ -367,7 +367,7 @@ class CoreContext extends DefaultContext
 
         /* @var $masterVariant ProductVariantInterface */
         $masterVariant->setPricingCalculator(PriceCalculators::GROUP_BASED);
-        $configuration = array();
+        $configuration = [];
 
         foreach ($table->getHash() as $data) {
             $group = $this->findOneByName('group', trim($data['group']));
@@ -452,14 +452,14 @@ class CoreContext extends DefaultContext
         $factory = $this->getFactory('shipping_method');
 
         /* @var $method ShippingMethodInterface */
-        if (null === $method = $repository->findOneBy(array('name' => $name))) {
+        if (null === $method = $repository->findOneBy(['name' => $name])) {
             $method = $factory->createNew();
             $method->setName($name);
             $method->setCode($code);
             $method->setZone($this->findOneByName('zone', $zoneName));
             $method->setCalculator($calculator);
             $method->setTaxCategory($taxCategory);
-            $method->setConfiguration($configuration ?: array('amount' => 2500));
+            $method->setConfiguration($configuration ?: ['amount' => 2500]);
         };
 
         $method->setEnabled($enabled);
@@ -528,7 +528,7 @@ class CoreContext extends DefaultContext
         $this->thereAreLocales($table);
 
         /** @var ChannelInterface $defaultChannel */
-        $defaultChannel = $this->getRepository('channel')->findOneBy(array('code' => 'DEFAULT-WEB'));
+        $defaultChannel = $this->getRepository('channel')->findOneBy(['code' => 'DEFAULT-WEB']);
 
         /** @var LocaleInterface[] $locales */
         $locales = $this->getRepository('locale')->findAll();
@@ -589,6 +589,7 @@ class CoreContext extends DefaultContext
         $address->setPostcode($addressData[2]);
         $address->setCity($addressData[3]);
         $address->setCountryCode($this->getCountryCodeByEnglishCountryName($addressData[4]));
+
         return $address;
     }
 
@@ -637,7 +638,7 @@ class CoreContext extends DefaultContext
         $shipmentData = array_map('trim', $shipmentData);
 
         /* @var $shippingMethod ShippingMethodInterface */
-        $shippingMethod = $this->getRepository('shipping_method')->findOneBy(array('name' => $shipmentData[0]));
+        $shippingMethod = $this->getRepository('shipping_method')->findOneBy(['name' => $shipmentData[0]]);
 
         /* @var $shipment ShipmentInterface */
         $shipment = $this->getFactory('shipment')->createNew();
@@ -659,9 +660,9 @@ class CoreContext extends DefaultContext
      * @param string $email
      * @param array  $authorizationRoles
      */
-    private function iAmLoggedInAsRole($role, $email = 'sylius@example.com', array $authorizationRoles = array())
+    private function iAmLoggedInAsRole($role, $email = 'sylius@example.com', array $authorizationRoles = [])
     {
-        $user = $this->thereIsUser($email, 'sylius', $role, 'yes', null, array(), true, $authorizationRoles);
+        $user = $this->thereIsUser($email, 'sylius', $role, 'yes', null, [], true, $authorizationRoles);
 
         $token = new UsernamePasswordToken($user, $user->getPassword(), 'administration', $user->getRoles());
 
@@ -692,7 +693,7 @@ class CoreContext extends DefaultContext
      * @param array         $authorizationRoles
      * @param UserInterface $user
      */
-    protected function assignAuthorizationRoles(UserInterface $user, array $authorizationRoles = array())
+    protected function assignAuthorizationRoles(UserInterface $user, array $authorizationRoles = [])
     {
         foreach ($authorizationRoles as $role) {
             try {
@@ -714,7 +715,7 @@ class CoreContext extends DefaultContext
      *
      * @return CustomerInterface
      */
-    protected function createCustomer($email, $address = null, $groups = array(), $createdAt = null)
+    protected function createCustomer($email, $address = null, $groups = [], $createdAt = null)
     {
         $addressData = $this->processAddress($address);
 
@@ -744,7 +745,7 @@ class CoreContext extends DefaultContext
      *
      * @return UserInterface
      */
-    protected function createUser($email, $password, $role = null, $enabled = 'yes', $address = null, array $groups = array(), array $authorizationRoles = array(), $createdAt = null)
+    protected function createUser($email, $password, $role = null, $enabled = 'yes', $address = null, array $groups = [], array $authorizationRoles = [], $createdAt = null)
     {
         $user = $this->getFactory('user')->createNew();
         $customer = $this->createCustomer($email, $address, $groups, $createdAt);
@@ -776,7 +777,7 @@ class CoreContext extends DefaultContext
         $authorizationRole = $this->getFactory('role')->createNew();
         $authorizationRole->setCode($role);
         $authorizationRole->setName(ucfirst($role));
-        $authorizationRole->setSecurityRoles(array('ROLE_ADMINISTRATION_ACCESS'));
+        $authorizationRole->setSecurityRoles(['ROLE_ADMINISTRATION_ACCESS']);
 
         return $authorizationRole;
     }

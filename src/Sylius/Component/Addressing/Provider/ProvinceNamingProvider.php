@@ -67,7 +67,7 @@ class ProvinceNamingProvider implements ProvinceNamingProviderInterface
     private function getProvince($code)
     {
         /** @var ProvinceInterface $province */
-        $province = $this->provinceRepository->findOneBy(array('code' => $code));
+        $province = $this->provinceRepository->findOneBy(['code' => $code]);
 
         if (null === $province) {
             throw new \InvalidArgumentException(sprintf('Province with code "%s" not found.', $code));

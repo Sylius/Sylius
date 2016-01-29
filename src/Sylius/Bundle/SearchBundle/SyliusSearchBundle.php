@@ -28,9 +28,9 @@ class SyliusSearchBundle extends AbstractResourceBundle
      */
     public static function getSupportedDrivers()
     {
-        return array(
+        return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        );
+        ];
     }
 
     /**
@@ -38,10 +38,10 @@ class SyliusSearchBundle extends AbstractResourceBundle
      */
     protected function getModelInterfaces()
     {
-        return array(
+        return [
             SearchIndexInterface::class => 'sylius.model.search.class',
-            SearchLogInterface::class   => 'sylius.model.log.class',
-        );
+            SearchLogInterface::class => 'sylius.model.log.class',
+        ];
     }
 
     /**

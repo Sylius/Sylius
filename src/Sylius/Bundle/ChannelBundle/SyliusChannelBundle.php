@@ -29,9 +29,9 @@ class SyliusChannelBundle extends AbstractResourceBundle
      */
     public static function getSupportedDrivers()
     {
-        return array(
+        return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        );
+        ];
     }
 
     /**
@@ -49,9 +49,9 @@ class SyliusChannelBundle extends AbstractResourceBundle
      */
     protected function getModelInterfaces()
     {
-        return array(
+        return [
             ChannelInterface::class => 'sylius.model.channel.class',
-        );
+        ];
     }
 
     /**

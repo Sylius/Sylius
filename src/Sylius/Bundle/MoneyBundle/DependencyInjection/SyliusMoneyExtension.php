@@ -30,7 +30,7 @@ class SyliusMoneyExtension extends Extension
     public function load(array $config, ContainerBuilder $container)
     {
         $processor = new Processor();
-        $config    = $processor->processConfiguration(new Configuration(), $config);
+        $config = $processor->processConfiguration(new Configuration(), $config);
 
         $container->setParameter('sylius.money.locale', $config['locale']);
         $container->setParameter('sylius.money.currency', $config['currency']);

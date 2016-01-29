@@ -32,7 +32,7 @@ class RegisterPriceCalculatorsPass implements CompilerPassInterface
         }
 
         $registry = $container->getDefinition('sylius.registry.price_calculator');
-        $calculators = array();
+        $calculators = [];
 
         foreach ($container->findTaggedServiceIds('sylius.price_calculator') as $id => $attributes) {
             if (!isset($attributes[0]['type']) || !isset($attributes[0]['label'])) {
@@ -41,7 +41,7 @@ class RegisterPriceCalculatorsPass implements CompilerPassInterface
 
             $calculators[$attributes[0]['type']] = $attributes[0]['label'];
 
-            $registry->addMethodCall('register', array($attributes[0]['type'], new Reference($id)));
+            $registry->addMethodCall('register', [$attributes[0]['type'], new Reference($id)]);
         }
 
         $container->setParameter('sylius.price_calculators', $calculators);

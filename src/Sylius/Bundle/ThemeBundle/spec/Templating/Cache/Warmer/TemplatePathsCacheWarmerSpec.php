@@ -13,7 +13,6 @@ namespace spec\Sylius\Bundle\ThemeBundle\Templating\Cache\Warmer;
 
 use Doctrine\Common\Cache\Cache;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Locator\ResourceNotFoundException;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;

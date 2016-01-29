@@ -24,19 +24,19 @@ class SingleResourceProvider implements SingleResourceProviderInterface
     public function get(RequestConfiguration $requestConfiguration, RepositoryInterface $repository)
     {
         if (null !== $repositoryMethod = $requestConfiguration->getRepositoryMethod()) {
-            $callable = array($repository, $repositoryMethod);
+            $callable = [$repository, $repositoryMethod];
 
             return call_user_func_array($callable, $requestConfiguration->getRepositoryArguments());
         }
 
-        $criteria = array();
+        $criteria = [];
         $request = $requestConfiguration->getRequest();
 
         if ($request->attributes->has('id')) {
-            $criteria = array('id' => $request->attributes->get('id'));
+            $criteria = ['id' => $request->attributes->get('id')];
         }
         if ($request->attributes->has('slug')) {
-            $criteria = array('slug' => $request->attributes->get('slug'));
+            $criteria = ['slug' => $request->attributes->get('slug')];
         }
 
         return $repository->findOneBy($criteria);

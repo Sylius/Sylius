@@ -40,11 +40,11 @@ class ZoneCodeChoiceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'choices' => $this->getZoneCodes(),
                 'label' => 'sylius.form.zone.types.zone',
                 'empty_value' => 'sylius.form.zone.select',
-            ))
+            ])
         ;
     }
 
@@ -70,7 +70,7 @@ class ZoneCodeChoiceType extends AbstractType
     private function getZoneCodes()
     {
         $zoneObjects = $this->zoneRepository->findAll();
-        $zones = array();
+        $zones = [];
 
         /* @var ZoneInterface $zone */
         foreach ($zoneObjects as $zone) {

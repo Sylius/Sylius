@@ -60,7 +60,7 @@ class UsernameOrEmailProviderSpec extends ObjectBehavior
     {
         $canonicalizer->canonicalize('testUser')->willReturn('testuser');
 
-        $userRepository->findOneBy(array('usernameCanonical' => 'testuser'))->willReturn($user);
+        $userRepository->findOneBy(['usernameCanonical' => 'testuser'])->willReturn($user);
 
         $this->loadUserByUsername('testUser')->shouldReturn($user);
     }
@@ -69,10 +69,10 @@ class UsernameOrEmailProviderSpec extends ObjectBehavior
     {
         $canonicalizer->canonicalize('testUser')->willReturn('testuser');
 
-        $userRepository->findOneBy(array('usernameCanonical' => 'testuser'))->willReturn(null);
+        $userRepository->findOneBy(['usernameCanonical' => 'testuser'])->willReturn(null);
         $userRepository->findOneByEmail('testuser')->willReturn(null);
 
-        $this->shouldThrow(new UsernameNotFoundException('Username "testuser" does not exist.'))->during('loadUserByUsername', array('testUser'));
+        $this->shouldThrow(new UsernameNotFoundException('Username "testuser" does not exist.'))->during('loadUserByUsername', ['testUser']);
     }
 
     function it_loads_user_by_email($userRepository, $canonicalizer, UserInterface $user)

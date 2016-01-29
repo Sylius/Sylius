@@ -63,10 +63,10 @@ class DoctrineORMDriver extends AbstractDoctrineDriver
         }
 
         $definition = new Definition($repositoryClass);
-        $definition->setArguments(array(
+        $definition->setArguments([
             new Reference($metadata->getServiceId('manager')),
             $this->getClassMetadataDefinition($metadata),
-        ));
+        ]);
 
         if ($metadata->hasParameter('translation')) {
             $repositoryReflection = new \ReflectionClass($repositoryClass);
@@ -75,7 +75,7 @@ class DoctrineORMDriver extends AbstractDoctrineDriver
 
             if (interface_exists($translatableRepositoryInterface) && $repositoryReflection->implementsInterface($translatableRepositoryInterface)) {
                 if (isset($translationConfig['fields'])) {
-                    $definition->addMethodCall('setTranslatableFields', array($translationConfig['fields']));
+                    $definition->addMethodCall('setTranslatableFields', [$translationConfig['fields']]);
                 }
             }
         }
@@ -89,15 +89,15 @@ class DoctrineORMDriver extends AbstractDoctrineDriver
     protected function addDefaultForm(ContainerBuilder $container, MetadataInterface $metadata)
     {
         $defaultFormBuilderDefinition = new Definition(DefaultFormBuilder::class);
-        $defaultFormBuilderDefinition->setArguments(array(new Reference($metadata->getServiceId('manager'))));
+        $defaultFormBuilderDefinition->setArguments([new Reference($metadata->getServiceId('manager'))]);
 
         $definition = new Definition(DefaultResourceType::class);
         $definition
-            ->setArguments(array(
+            ->setArguments([
                 $this->getMetdataDefinition($metadata),
-                $defaultFormBuilderDefinition
-            ))
-            ->addTag('form.type', array('alias' => sprintf('%s_%s', $metadata->getApplicationName(), $metadata->getName())))
+                $defaultFormBuilderDefinition,
+            ])
+            ->addTag('form.type', ['alias' => sprintf('%s_%s', $metadata->getApplicationName(), $metadata->getName())])
         ;
 
         $container->setDefinition(sprintf('%s.form.type.%s', $metadata->getApplicationName(), $metadata->getName()), $definition);

@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ThemeBundle\Loader;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Loader\ConfigurationProcessingLoader;
 use Sylius\Bundle\ThemeBundle\Loader\ConfigurationProcessorInterface;
 use Sylius\Bundle\ThemeBundle\Loader\LoaderInterface;
@@ -28,7 +27,7 @@ class ConfigurationProcessingLoaderSpec extends ObjectBehavior
     {
         $this->beConstructedWith($decoratedLoader, $configurationProcessor);
     }
-    
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Loader\ConfigurationProcessingLoader');

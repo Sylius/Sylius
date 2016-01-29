@@ -30,6 +30,4 @@ interface CalculatorInterface
      * @return string
      */
     public function getType();
-
-
 }

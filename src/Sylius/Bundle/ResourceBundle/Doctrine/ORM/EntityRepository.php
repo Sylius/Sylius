@@ -78,7 +78,7 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
      *
      * @return array
      */
-    public function findBy(array $criteria, array $sorting = array(), $limit = null, $offset = null)
+    public function findBy(array $criteria, array $sorting = [], $limit = null, $offset = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
 
@@ -122,7 +122,7 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
     /**
      * {@inheritdoc}
      */
-    public function createPaginator(array $criteria = array(), array $sorting = array())
+    public function createPaginator(array $criteria = [], array $sorting = [])
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
 
@@ -173,7 +173,7 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
      * @param QueryBuilder $queryBuilder
      * @param array        $criteria
      */
-    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = array())
+    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = [])
     {
         foreach ($criteria as $property => $value) {
             $name = $this->getPropertyName($property);
@@ -195,7 +195,7 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
      * @param QueryBuilder $queryBuilder
      * @param array        $sorting
      */
-    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = array())
+    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = [])
     {
         foreach ($sorting as $property => $order) {
             if (!empty($order)) {

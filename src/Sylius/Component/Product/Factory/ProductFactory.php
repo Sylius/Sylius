@@ -74,7 +74,7 @@ class ProductFactory implements ProductFactoryInterface
      */
     public function createFromArchetype($archetypeCode)
     {
-        if (null === $archetype = $this->archetypeRepository->findOneBy(array('code' => $archetypeCode))) {
+        if (null === $archetype = $this->archetypeRepository->findOneBy(['code' => $archetypeCode])) {
             throw new \InvalidArgumentException(sprintf('Requested archetype does not exist with code "%s".', $archetypeCode));
         }
 

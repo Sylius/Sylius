@@ -50,7 +50,7 @@ class Report implements ReportInterface
     /**
      * @var array
      */
-    protected $rendererConfiguration = array();
+    protected $rendererConfiguration = [];
 
     /**
      * Data fetcher name.
@@ -62,7 +62,7 @@ class Report implements ReportInterface
     /**
      * @var array
      */
-    protected $dataFetcherConfiguration = array();
+    protected $dataFetcherConfiguration = [];
 
     /**
      * {@inheritdoc}

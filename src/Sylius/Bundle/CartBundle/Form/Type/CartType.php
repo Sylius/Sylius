@@ -28,9 +28,9 @@ class CartType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('items', 'collection', array(
+            ->add('items', 'collection', [
                 'type' => 'sylius_cart_item',
-            ))
+            ])
             ->add('additionalInformation')
         ;
     }

@@ -23,17 +23,17 @@ use Symfony\Component\Form\FormEvents;
 class UserRegistrationFormListener implements EventSubscriberInterface
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             FormEvents::SUBMIT => 'submit',
-        );
+        ];
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function submit(FormEvent $event)
     {

@@ -33,8 +33,8 @@ class LoadPromotionsData extends DataFixture
             'PR1',
             'New Year',
             'New Year Sale for 3 and more items.',
-            array($this->createRule(PromotionRuleInterface::TYPE_ITEM_COUNT, array('count' => 3, 'equal' => true))),
-            array($this->createAction(ActionInterface::TYPE_FIXED_DISCOUNT, array('amount' => 500)))
+            [$this->createRule(PromotionRuleInterface::TYPE_ITEM_COUNT, ['count' => 3, 'equal' => true])],
+            [$this->createAction(ActionInterface::TYPE_FIXED_DISCOUNT, ['amount' => 500])]
         );
 
         $manager->persist($promotion);
@@ -43,8 +43,8 @@ class LoadPromotionsData extends DataFixture
             'PR2',
             'Christmas',
             'Christmas Sale for orders over 100 EUR.',
-            array($this->createRule(PromotionRuleInterface::TYPE_ITEM_TOTAL, array('amount' => 10000, 'equal' => true))),
-            array($this->createAction(ActionInterface::TYPE_FIXED_DISCOUNT, array('amount' => 250)))
+            [$this->createRule(PromotionRuleInterface::TYPE_ITEM_TOTAL, ['amount' => 10000, 'equal' => true])],
+            [$this->createAction(ActionInterface::TYPE_FIXED_DISCOUNT, ['amount' => 250])]
         );
 
         $manager->persist($promotion);
@@ -53,8 +53,8 @@ class LoadPromotionsData extends DataFixture
             'PR3',
             '3rd order',
             'Discount for 3rd order',
-            array($this->createRule(PromotionRuleInterface::TYPE_NTH_ORDER, array('nth' => 3))),
-            array($this->createAction(ActionInterface::TYPE_FIXED_DISCOUNT, array('amount' => 500)))
+            [$this->createRule(PromotionRuleInterface::TYPE_NTH_ORDER, ['nth' => 3])],
+            [$this->createAction(ActionInterface::TYPE_FIXED_DISCOUNT, ['amount' => 500])]
         );
 
         $manager->persist($promotion);
@@ -63,8 +63,8 @@ class LoadPromotionsData extends DataFixture
             'PR4',
             'Shipping to Germany',
             'Discount for orders with shipping country Germany',
-            array($this->createRule(PromotionRuleInterface::TYPE_SHIPPING_COUNTRY, array('country' => $this->getReference('Sylius.Country.DE')->getId()))),
-            array($this->createAction(ActionInterface::TYPE_FIXED_DISCOUNT, array('amount' => 500)))
+            [$this->createRule(PromotionRuleInterface::TYPE_SHIPPING_COUNTRY, ['country' => $this->getReference('Sylius.Country.DE')->getId()])],
+            [$this->createAction(ActionInterface::TYPE_FIXED_DISCOUNT, ['amount' => 500])]
         );
 
         $manager->persist($promotion);

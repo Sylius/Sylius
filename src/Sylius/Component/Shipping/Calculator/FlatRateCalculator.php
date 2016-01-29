@@ -23,7 +23,7 @@ class FlatRateCalculator implements CalculatorInterface
      */
     public function calculate(ShippingSubjectInterface $subject, array $configuration)
     {
-        return (int)$configuration['amount'];
+        return (int) $configuration['amount'];
     }
     /**
      * {@inheritdoc}

@@ -32,12 +32,12 @@ class SyliusOrderExtension extends AbstractResourceExtension
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $configFiles = array(
+        $configFiles = [
             'services.xml',
             'templating.xml',
             'twig.xml',
-            sprintf('driver/%s.xml', $config['driver'])
-        );
+            sprintf('driver/%s.xml', $config['driver']),
+        ];
 
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);

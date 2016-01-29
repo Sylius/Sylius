@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
- 
+
 namespace spec\Sylius\Behat\Context\Setup;
- 
+
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -45,7 +45,7 @@ class ChannelContextSpec extends ObjectBehavior
         ChannelInterface $channel,
         ZoneInterface $zone
     ) {
-        $defaultData = array('channel' => $channel, 'zone' => $zone);
+        $defaultData = ['channel' => $channel, 'zone' => $zone];
         $defaultFranceChannelFactory->create()->willReturn($defaultData);
         $sharedStorage->setClipboard($defaultData)->shouldBeCalled();
 

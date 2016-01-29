@@ -69,7 +69,7 @@ class RedirectHandler implements RedirectHandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function redirectToRoute(RequestConfiguration $configuration, $route, array $parameters = array())
+    public function redirectToRoute(RequestConfiguration $configuration, $route, array $parameters = [])
     {
         if ('referer' === $route) {
             return $this->redirectToReferer($configuration);
@@ -84,9 +84,9 @@ class RedirectHandler implements RedirectHandlerInterface
     public function redirect(RequestConfiguration $configuration, $url, $status = 302)
     {
         if ($configuration->isHeaderRedirection()) {
-            return new Response('', 200, array(
+            return new Response('', 200, [
                 'X-SYLIUS-LOCATION' => $url.$configuration->getRedirectHash(),
-            ));
+            ]);
         }
 
         return new RedirectResponse($url.$configuration->getRedirectHash(), $status);

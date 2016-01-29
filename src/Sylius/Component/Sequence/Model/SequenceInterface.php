@@ -21,7 +21,7 @@ interface SequenceInterface extends ResourceInterface
     public function getType();
 
     /**
-     * @return integer
+     * @return int
      */
     public function getIndex();
 

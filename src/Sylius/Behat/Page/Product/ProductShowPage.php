@@ -11,7 +11,6 @@
 
 namespace Sylius\Behat\Page\Product;
 
-use SensioLabs\Behat\PageObjectExtension\PageObject\Factory;
 use Sylius\Behat\PageObjectExtension\Page\SymfonyPage;
 use Sylius\Component\Product\Model\ProductInterface;
 
@@ -48,7 +47,6 @@ class ProductShowPage extends SymfonyPage
     }
 
     /**
-     * @return null
      */
     public function getRouteName()
     {

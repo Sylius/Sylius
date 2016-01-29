@@ -23,7 +23,7 @@ class Locale implements LocaleInterface
     use TimestampableTrait, ToggleableTrait;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $id;
 
@@ -43,7 +43,7 @@ class Locale implements LocaleInterface
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getId()
     {

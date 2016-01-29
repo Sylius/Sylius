@@ -29,11 +29,11 @@ class PromotionType extends BasePromotionType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('channels', 'sylius_channel_choice', array(
-                'multiple'    => true,
-                'expanded'    => true,
-                'label'       => 'sylius.form.promotion.channels',
-            ))
+            ->add('channels', 'sylius_channel_choice', [
+                'multiple' => true,
+                'expanded' => true,
+                'label' => 'sylius.form.promotion.channels',
+            ])
         ;
     }
 }

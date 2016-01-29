@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ThemeBundle\Loader;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Loader\ConfigurationProcessorInterface;
 use Sylius\Bundle\ThemeBundle\Loader\SymfonyConfigurationProcessor;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -29,7 +28,7 @@ class SymfonyConfigurationProcessorSpec extends ObjectBehavior
     {
         $this->beConstructedWith($configuration, $processor);
     }
-    
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Loader\SymfonyConfigurationProcessor');

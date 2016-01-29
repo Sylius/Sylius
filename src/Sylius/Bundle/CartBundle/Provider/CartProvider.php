@@ -58,8 +58,7 @@ class CartProvider implements CartProviderInterface
         FactoryInterface $cartFactory,
         RepositoryInterface $cartRepository,
         EventDispatcherInterface $eventDispatcher
-    )
-    {
+    ) {
         $this->cartContext = $cartContext;
         $this->cartFactory = $cartFactory;
         $this->cartRepository = $cartRepository;
@@ -124,7 +123,7 @@ class CartProvider implements CartProviderInterface
         if ($cartIdentifier !== null) {
             $cart = $this->cartRepository->find($cartIdentifier);
 
-            if ($cart !== null ) {
+            if ($cart !== null) {
                 return $cart;
             }
         }

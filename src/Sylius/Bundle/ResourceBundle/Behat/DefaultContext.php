@@ -12,9 +12,9 @@
 namespace Sylius\Bundle\ResourceBundle\Behat;
 
 use Behat\Behat\Context\Context;
-use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -45,13 +45,13 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     /**
      * @var array
      */
-    protected $actions = array(
-        'viewing'       => 'show',
-        'creation'      => 'create',
-        'editing'       => 'update',
-        'building'      => 'build',
+    protected $actions = [
+        'viewing' => 'show',
+        'creation' => 'create',
+        'editing' => 'update',
+        'building' => 'build',
         'customization' => 'customize',
-    );
+    ];
 
     /**
      * @var KernelInterface
@@ -95,7 +95,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      */
     protected function findOneByName($type, $name)
     {
-        return $this->findOneBy($type, array('name' => trim($name)));
+        return $this->findOneBy($type, ['name' => trim($name)]);
     }
 
     /**
@@ -177,7 +177,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      */
     protected function getConfiguration($configurationString)
     {
-        $configuration = array();
+        $configuration = [];
         $list = explode(',', $configurationString);
 
         foreach ($list as $parameter) {
@@ -188,15 +188,15 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
                 case 'country':
                     $countryCode = $this->getCountryCodeByEnglishCountryName(trim($value));
 
-                    $configuration[$key] = $this->getRepository('country')->findOneBy(array('code' => $countryCode))->getId();
+                    $configuration[$key] = $this->getRepository('country')->findOneBy(['code' => $countryCode])->getId();
                     break;
 
                 case 'taxons':
-                    $configuration[$key] = new ArrayCollection(array($this->getRepository('taxon')->findOneBy(array('name' => trim($value)))->getId()));
+                    $configuration[$key] = new ArrayCollection([$this->getRepository('taxon')->findOneBy(['name' => trim($value)])->getId()]);
                     break;
 
                 case 'variant':
-                    $configuration[$key] = $this->getRepository('product')->findOneBy(array('name' => trim($value)))->getMasterVariant()->getId();
+                    $configuration[$key] = $this->getRepository('product')->findOneBy(['name' => trim($value)])->getMasterVariant()->getId();
                     break;
 
                 case 'amount':
@@ -222,13 +222,13 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      *
      * @return string
      */
-    protected function generatePageUrl($page, array $parameters = array())
+    protected function generatePageUrl($page, array $parameters = [])
     {
         if (is_object($page)) {
             return $this->generateUrl($page, $parameters);
         }
 
-        $route  = str_replace(' ', '_', trim($page));
+        $route = str_replace(' ', '_', trim($page));
         $routes = $this->getRouter()->getRouteCollection();
 
         if (null === $routes->get($route)) {
@@ -282,11 +282,11 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     /**
      * @param string  $route
      * @param array   $parameters
-     * @param Boolean $absolute
+     * @param bool $absolute
      *
      * @return string
      */
-    protected function generateUrl($route, array $parameters = array(), $absolute = false)
+    protected function generateUrl($route, array $parameters = [], $absolute = false)
     {
         return $this->locatePath($this->getRouter()->generate($route, $parameters, $absolute));
     }
@@ -363,7 +363,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      * @param NodeElement $table
      * @param string $columnName
      *
-     * @return integer
+     * @return int
      *
      * @throws \Exception If column was not found
      */
@@ -372,7 +372,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
         $rows = $table->findAll('css', 'tr');
 
         if (!isset($rows[0])) {
-            throw new \Exception("There are no rows!");
+            throw new \Exception('There are no rows!');
         }
 
         /** @var NodeElement $firstRow */
@@ -410,7 +410,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     /**
      * @param NodeElement $table
      * @param array $fields
-     * @param boolean $onlyFirstOccurence
+     * @param bool $onlyFirstOccurence
      *
      * @return NodeElement[]
      *
@@ -421,12 +421,12 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
         $rows = $table->findAll('css', 'tr');
 
         if (!isset($rows[0])) {
-            throw new \Exception("There are no rows!");
+            throw new \Exception('There are no rows!');
         }
 
         $fields = $this->replaceColumnNamesWithColumnIds($table, $fields);
 
-        $foundRows = array();
+        $foundRows = [];
 
         /** @var NodeElement[] $rows */
         $rows = $table->findAll('css', 'tr');
@@ -477,7 +477,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      */
     protected function replaceColumnNamesWithColumnIds(NodeElement $table, array $fields)
     {
-        $replacedFields = array();
+        $replacedFields = [];
         foreach ($fields as $columnName => $expectedValue) {
             $columnIndex = $this->getColumnIndex($table, $columnName);
 
@@ -525,7 +525,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
 
         if (null === $countryCode) {
             throw new \InvalidArgumentException(sprintf(
-                'Country "%s" not found! Available names: %s.', $name, join(', ', $names)
+                'Country "%s" not found! Available names: %s.', $name, implode(', ', $names)
             ));
         }
 
@@ -546,7 +546,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
 
         if (null === $code) {
             throw new \InvalidArgumentException(sprintf(
-                'Locale "%s" not found! Available names: %s.', $name, join(', ', $names)
+                'Locale "%s" not found! Available names: %s.', $name, implode(', ', $names)
             ));
         }
 

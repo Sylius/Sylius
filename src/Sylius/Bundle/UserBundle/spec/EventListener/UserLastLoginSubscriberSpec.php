@@ -13,7 +13,6 @@ namespace spec\Sylius\Bundle\UserBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Bundle\UserBundle\UserEvents;
 use Sylius\Component\User\Model\UserInterface;
@@ -40,10 +39,10 @@ class UserLastLoginSubscriberSpec extends ObjectBehavior
 
     function it_subscriber_to_event()
     {
-        $this::getSubscribedEvents()->shouldReturn(array(
+        $this::getSubscribedEvents()->shouldReturn([
             SecurityEvents::INTERACTIVE_LOGIN => 'onSecurityInteractiveLogin',
             UserEvents::SECURITY_IMPLICIT_LOGIN => 'onImplicitLogin',
-        ));
+        ]);
     }
 
     function it_updates_user_last_login_on_security_interactive_login(

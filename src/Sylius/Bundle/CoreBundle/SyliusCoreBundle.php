@@ -32,9 +32,9 @@ class SyliusCoreBundle extends AbstractResourceBundle
      */
     public static function getSupportedDrivers()
     {
-        return array(
+        return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        );
+        ];
     }
 
     /**
@@ -54,9 +54,9 @@ class SyliusCoreBundle extends AbstractResourceBundle
      */
     protected function getModelInterfaces()
     {
-        return array(
+        return [
             ProductVariantImageInterface::class => 'sylius.model.product_variant_image.class',
-        );
+        ];
     }
 
     /**

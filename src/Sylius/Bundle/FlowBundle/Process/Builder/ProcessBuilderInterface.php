@@ -52,7 +52,7 @@ interface ProcessBuilderInterface
      *
      * @param string $name
      *
-     * @return Boolean
+     * @return bool
      */
     public function has($name);
 

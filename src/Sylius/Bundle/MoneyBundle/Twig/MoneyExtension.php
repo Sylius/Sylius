@@ -38,15 +38,15 @@ class MoneyExtension extends \Twig_Extension
      */
     public function getFilters()
     {
-        return array(
-            new \Twig_SimpleFilter('sylius_money', array($this, 'formatAmount')),
-        );
+        return [
+            new \Twig_SimpleFilter('sylius_money', [$this, 'formatAmount']),
+        ];
     }
 
     /**
      * Format the money amount to nice display form.
      *
-     * @param integer     $amount
+     * @param int     $amount
      * @param string|null $currency
      *
      * @return string

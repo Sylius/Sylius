@@ -14,8 +14,6 @@ namespace Sylius\Bundle\MetadataBundle\DynamicForm\Type;
 use Sylius\Bundle\MetadataBundle\DynamicForm\DynamicFormsChoicesMapInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;

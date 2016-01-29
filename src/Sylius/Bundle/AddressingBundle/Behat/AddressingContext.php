@@ -27,7 +27,7 @@ class AddressingContext extends DefaultContext
     public function thereAreCountries(TableNode $table)
     {
         foreach ($table->getHash() as $data) {
-            $provinces = array_key_exists('provinces', $data) ? explode(',', $data['provinces']) : array();
+            $provinces = array_key_exists('provinces', $data) ? explode(',', $data['provinces']) : [];
 
             $enabled = isset($data['enabled']) ? 'no' !== $data['enabled'] : true;
 
@@ -55,7 +55,7 @@ class AddressingContext extends DefaultContext
         $countryCode = $this->getCountryCodeByEnglishCountryName($name);
 
         /* @var $country CountryInterface */
-        if (null === $country = $this->getRepository('country')->findOneBy(array('code' => $countryCode))) {
+        if (null === $country = $this->getRepository('country')->findOneBy(['code' => $countryCode])) {
             $country = $this->getFactory('country')->createNew();
             $country->setCode(trim($countryCode));
             $country->setEnabled($enabled);
@@ -99,7 +99,7 @@ class AddressingContext extends DefaultContext
      * @Given /^I created zone "([^"]*)"$/
      * @Given /^there is zone "([^"]*)"$/
      */
-    public function thereIsZone($name, $type = ZoneInterface::TYPE_COUNTRY, array $members = array(), $scope = null, $flush = true)
+    public function thereIsZone($name, $type = ZoneInterface::TYPE_COUNTRY, array $members = [], $scope = null, $flush = true)
     {
         $repository = $this->getRepository('zone');
 
@@ -112,9 +112,9 @@ class AddressingContext extends DefaultContext
 
         foreach ($members as $memberName) {
             if (ZoneInterface::TYPE_ZONE === $type) {
-                $zoneable = $repository->findOneBy(array('name' => $memberName));
+                $zoneable = $repository->findOneBy(['name' => $memberName]);
             } else {
-                $zoneable = call_user_func(array($this, 'thereIs'.ucfirst($type)), $memberName);
+                $zoneable = call_user_func([$this, 'thereIs'.ucfirst($type)], $memberName);
             }
 
             /* @var ZoneMemberInterface $member */
@@ -155,7 +155,7 @@ class AddressingContext extends DefaultContext
         $countryCode = $this->getCountryCodeByEnglishCountryName($name);
 
         /** @var CountryInterface $country */
-        $country = $this->getRepository("country")->findOneBy(array('code' => $countryCode));
+        $country = $this->getRepository('country')->findOneBy(['code' => $countryCode]);
         $country->setEnabled(false);
 
         $manager = $this->getEntityManager();

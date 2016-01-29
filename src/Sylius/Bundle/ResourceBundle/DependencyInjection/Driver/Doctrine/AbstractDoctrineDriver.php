@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Doctrine;
 
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\AbstractDriver;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\AbstractDriver;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -33,8 +33,8 @@ abstract class AbstractDoctrineDriver extends AbstractDriver
     {
         $definition = new Definition($this->getClassMetadataClassname());
         $definition
-            ->setFactory(array(new Reference($this->getManagerServiceId($metadata)), 'getClassMetadata'))
-            ->setArguments(array($metadata->getClass('model')))
+            ->setFactory([new Reference($this->getManagerServiceId($metadata)), 'getClassMetadata'])
+            ->setArguments([$metadata->getClass('model')])
             ->setPublic(false)
         ;
 
@@ -64,7 +64,7 @@ abstract class AbstractDoctrineDriver extends AbstractDriver
         if ($metadata->hasParameter('options') && isset($metadata->getParameter('options')['object_manager'])) {
             $objectManagerName = $metadata->getParameter('options')['object_manager'];
         }
-        
+
         return $objectManagerName;
     }
 

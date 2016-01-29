@@ -48,12 +48,12 @@ class TaxationSettingsSchema implements SchemaInterface
     public function buildSettings(SettingsBuilderInterface $builder)
     {
         $builder
-            ->setOptional(array(
-                'default_tax_zone'
-            ))
-            ->setAllowedTypes(array(
-                'default_tax_zone' => array('null', ZoneInterface::class),
-            ))
+            ->setOptional([
+                'default_tax_zone',
+            ])
+            ->setAllowedTypes([
+                'default_tax_zone' => ['null', ZoneInterface::class],
+            ])
             ->setTransformer('default_tax_zone', new ObjectToIdentifierTransformer($this->zoneRepository))
         ;
     }
@@ -64,10 +64,10 @@ class TaxationSettingsSchema implements SchemaInterface
     public function buildForm(FormBuilderInterface $builder)
     {
         $builder
-            ->add('default_tax_zone', 'sylius_zone_choice', array(
+            ->add('default_tax_zone', 'sylius_zone_choice', [
                 'required' => false,
-                'label'    => 'sylius.form.settings.taxation.default_tax_zone',
-            ))
+                'label' => 'sylius.form.settings.taxation.default_tax_zone',
+            ])
         ;
     }
 }

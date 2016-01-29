@@ -11,9 +11,7 @@
 
 namespace spec\Sylius\Component\Association\Model;
 
-use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Association\Model\AssociableInterface;
 use Sylius\Component\Association\Model\AssociationInterface;
 use Sylius\Component\Association\Model\AssociationType;

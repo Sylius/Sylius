@@ -52,11 +52,11 @@ class BuildRuleFormSubscriberSpec extends ObjectBehavior
 
     function it_subscribes_evetns()
     {
-        $this::getSubscribedEvents()->shouldReturn(array(
+        $this::getSubscribedEvents()->shouldReturn([
             FormEvents::PRE_SET_DATA => 'preSetData',
             FormEvents::POST_SET_DATA => 'postSetData',
             FormEvents::PRE_SUBMIT => 'preSubmit',
-        ));
+        ]);
     }
 
     function it_adds_configuration_fields_in_pre_set_data(
@@ -70,7 +70,7 @@ class BuildRuleFormSubscriberSpec extends ObjectBehavior
         $event->getForm()->willReturn($form);
 
         $rule->getType()->willReturn(RuleInterface::TYPE_ITEM_TOTAL);
-        $rule->getConfiguration()->willReturn(array());
+        $rule->getConfiguration()->willReturn([]);
 
         $factory->createNamed('configuration', 'sylius_promotion_rule_item_total_configuration', Argument::cetera())->shouldBeCalled()->willReturn($field);
         $form->add($field)->shouldBeCalled();
@@ -86,8 +86,7 @@ class BuildRuleFormSubscriberSpec extends ObjectBehavior
         Form $field
     ) {
         $event->getForm()->willReturn($form);
-        $event->getData()->willReturn(array('type' =>RuleInterface::TYPE_ITEM_TOTAL));
-
+        $event->getData()->willReturn(['type' => RuleInterface::TYPE_ITEM_TOTAL]);
 
         $factory->createNamed('configuration', 'sylius_promotion_rule_item_total_configuration', Argument::cetera())->shouldBeCalled()->willReturn($field);
         $form->add($field)->shouldBeCalled();

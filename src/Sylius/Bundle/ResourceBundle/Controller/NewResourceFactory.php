@@ -27,7 +27,7 @@ class NewResourceFactory implements NewResourceFactoryInterface
             return $factory->createNew();
         }
 
-        $callable = array($factory, $method);
+        $callable = [$factory, $method];
         $arguments = $requestConfiguration->getFactoryArguments();
 
         return call_user_func_array($callable, $arguments);

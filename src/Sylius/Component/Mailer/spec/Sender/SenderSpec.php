@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Mailer\Sender;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Mailer\Provider\DefaultSettingsProviderInterface;
 use Sylius\Component\Mailer\Provider\EmailProvider;
@@ -20,7 +19,6 @@ use Sylius\Component\Mailer\Provider\EmailProviderInterface;
 use Sylius\Component\Mailer\Renderer\Adapter\AdapterInterface as RendererAdapterInterface;
 use Sylius\Component\Mailer\Renderer\RenderedEmail;
 use Sylius\Component\Mailer\Sender\Adapter\AdapterInterface as SenderAdapterInterface;
-
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -53,12 +51,12 @@ class SenderSpec extends ObjectBehavior
         $email->getSenderAddress()->shouldBeCalled();
         $email->getSenderName()->shouldBeCalled();
 
-        $data = array('foo' => 2);
+        $data = ['foo' => 2];
 
-        $rendererAdapter->render($email, array('foo' => 2))->willReturn($renderedEmail);
-        $senderAdapter->send(array('jonh@example.com'), null, null, $renderedEmail, $email, $data)->shouldBeCalled();
+        $rendererAdapter->render($email, ['foo' => 2])->willReturn($renderedEmail);
+        $senderAdapter->send(['jonh@example.com'], null, null, $renderedEmail, $email, $data)->shouldBeCalled();
 
-        $this->send('bar', array('jonh@example.com'), $data);
+        $this->send('bar', ['jonh@example.com'], $data);
     }
 
     function it_does_not_send_disabled_emails(
@@ -70,9 +68,9 @@ class SenderSpec extends ObjectBehavior
         $provider->getEmail('bar')->shouldBeCalled()->willReturn($email);
         $email->isEnabled()->shouldBeCalled()->willReturn(false);
 
-        $rendererAdapter->render($email, array('foo' => 2))->shouldNotBeCalled();
-        $senderAdapter->send(array('jonh@example.com'), "mail@sylius.org", "Sylius Mailer", null, $email, array())->shouldNotBeCalled();
+        $rendererAdapter->render($email, ['foo' => 2])->shouldNotBeCalled();
+        $senderAdapter->send(['jonh@example.com'], 'mail@sylius.org', 'Sylius Mailer', null, $email, [])->shouldNotBeCalled();
 
-        $this->send('bar', array('jonh@example.com'), array('foo' => 2));
+        $this->send('bar', ['jonh@example.com'], ['foo' => 2]);
     }
 }

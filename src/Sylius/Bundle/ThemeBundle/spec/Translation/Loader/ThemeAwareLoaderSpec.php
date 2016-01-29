@@ -59,7 +59,7 @@ class ThemeAwareLoaderSpec extends ObjectBehavior
         ThemeInterface $theme
     ) {
         $loader->load('/theme/resource.en.xml', 'en', 'messages')->willReturn($messageCatalogue);
-    
+
         $themeRepository->findOneByPath('/theme/resource.en.xml')->willReturn($theme);
         $theme->getName()->willReturn('sylius/sample-theme');
 

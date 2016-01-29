@@ -24,7 +24,7 @@ class OptionTranslationTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Option', array(), 'server');
+        $this->beConstructedWith('Option', [], 'server');
     }
 
     function it_is_initializable()
@@ -44,16 +44,16 @@ class OptionTranslationTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_defines_assigned_data_class_and_validation_groups(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'data_class' => 'Option',
-                'validation_groups' => array()
-            ))
+                'validation_groups' => [],
+            ])
             ->shouldBeCalled();
 
         $this->configureOptions($resolver);

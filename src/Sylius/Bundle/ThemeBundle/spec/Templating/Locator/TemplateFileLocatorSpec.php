@@ -62,7 +62,7 @@ class TemplateFileLocatorSpec extends ObjectBehavior
 
         $templateLocator->locateTemplate($template, $firstTheme)->willThrow(ResourceNotFoundException::class);
         $templateLocator->locateTemplate($template, $secondTheme)->willReturn('/second/theme/template/path');
-        
+
         $this->locate($template)->shouldReturn('/second/theme/template/path');
     }
 

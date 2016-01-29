@@ -27,19 +27,19 @@ class ItemTotalConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('amount', 'sylius_money', array(
+            ->add('amount', 'sylius_money', [
                 'label' => 'sylius.form.rule.item_total_configuration.amount',
-                'constraints' => array(
+                'constraints' => [
                     new NotBlank(),
-                    new Type(array('type' => 'numeric')),
-                ),
-            ))
-            ->add('equal', 'checkbox', array(
+                    new Type(['type' => 'numeric']),
+                ],
+            ])
+            ->add('equal', 'checkbox', [
                 'label' => 'sylius.form.rule.item_total_configuration.equal',
-                'constraints' => array(
-                    new Type(array('type' => 'bool')),
-                ),
-            ))
+                'constraints' => [
+                    new Type(['type' => 'bool']),
+                ],
+            ])
         ;
     }
 

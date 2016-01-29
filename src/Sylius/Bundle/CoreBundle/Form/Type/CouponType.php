@@ -29,9 +29,9 @@ class CouponType extends BaseCouponType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('perCustomerUsageLimit', 'integer', array(
-                'label' => 'sylius.form.coupon.per_customer_usage_limit'
-            ))
+            ->add('perCustomerUsageLimit', 'integer', [
+                'label' => 'sylius.form.coupon.per_customer_usage_limit',
+            ])
         ;
     }
 }

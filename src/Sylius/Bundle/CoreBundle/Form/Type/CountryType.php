@@ -36,7 +36,7 @@ class CountryType extends AbstractResourceType
      *
      * @param RepositoryInterface $countryRepository
      */
-    public function __construct($dataClass, array $validationGroups = array(), RepositoryInterface $countryRepository)
+    public function __construct($dataClass, array $validationGroups = [], RepositoryInterface $countryRepository)
     {
         $this->countryRepository = $countryRepository;
 
@@ -52,9 +52,9 @@ class CountryType extends AbstractResourceType
             FormEvents::PRE_SET_DATA,
             function (FormEvent $event) {
                 // Adding dynamically created isoName field
-                $nameOptions = array(
+                $nameOptions = [
                     'label' => 'sylius.form.country.name',
-                );
+                ];
 
                 $country = $event->getData();
                 if ($country instanceof CountryInterface && null !== $country->getCode()) {
@@ -71,13 +71,13 @@ class CountryType extends AbstractResourceType
         );
 
         $builder
-            ->add('provinces', 'collection', array(
+            ->add('provinces', 'collection', [
                 'type' => 'sylius_province',
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
                 'button_add_label' => 'sylius.form.country.add_province',
-            ))
+            ])
         ;
     }
 

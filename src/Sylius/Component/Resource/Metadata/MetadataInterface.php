@@ -63,7 +63,7 @@ interface MetadataInterface
     /**
      * @param $name
      *
-     * @return boolean
+     * @return bool
      */
     public function hasParameter($name);
 
@@ -79,7 +79,7 @@ interface MetadataInterface
     /**
      * @param $name
      *
-     * @return boolean
+     * @return bool
      */
     public function hasClass($name);
 

@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
- 
+
 namespace spec\Sylius\Bundle\ChannelBundle\DependencyInjection\Compiler;
- 
+
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Factory\ChannelFactory;
 use Sylius\Component\Resource\Factory\Factory;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Parameter;
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>

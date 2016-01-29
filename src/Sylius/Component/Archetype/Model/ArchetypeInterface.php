@@ -58,7 +58,7 @@ interface ArchetypeInterface extends CodeAwareInterface, TimestampableInterface,
      *
      * @param BaseAttributeInterface $attribute
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasAttribute(BaseAttributeInterface $attribute);
 
@@ -93,12 +93,12 @@ interface ArchetypeInterface extends CodeAwareInterface, TimestampableInterface,
      *
      * @param BaseOptionInterface $option
      *
-     * @return boolean
+     * @return bool
      */
     public function hasOption(BaseOptionInterface $option);
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function hasParent();
 

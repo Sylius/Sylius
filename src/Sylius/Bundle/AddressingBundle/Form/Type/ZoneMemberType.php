@@ -30,9 +30,9 @@ class ZoneMemberType extends AbstractResourceType
         $type = $options['zone_type'];
 
         $builder
-            ->add('code', 'sylius_'.$type.'_code_choice', array(
+            ->add('code', 'sylius_'.$type.'_code_choice', [
                 'label' => 'sylius.form.zone.types.'.$type,
-            ))
+            ])
         ;
     }
 
@@ -42,11 +42,11 @@ class ZoneMemberType extends AbstractResourceType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'empty_value' => 'sylius.form.zone_member.select',
                 'data_class' => ZoneMember::class,
                 'zone_type' => ZoneInterface::TYPE_COUNTRY,
-            ))
+            ])
         ;
     }
 

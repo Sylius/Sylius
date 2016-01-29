@@ -11,9 +11,7 @@
 
 namespace spec\Sylius\Component\Product\Model;
 
-use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Association\Model\Association;
 use Sylius\Component\Product\Model\ProductAssociationInterface;
 

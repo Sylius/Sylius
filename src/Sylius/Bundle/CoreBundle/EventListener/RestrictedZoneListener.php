@@ -80,7 +80,7 @@ class RestrictedZoneListener
 
                 $this->session->getBag('flashes')->add(
                     'error',
-                    $this->translator->trans('sylius.cart.restricted_zone_removal', array('%product%' => $product->getName()), 'flashes')
+                    $this->translator->trans('sylius.cart.restricted_zone_removal', ['%product%' => $product->getName()], 'flashes')
                 );
             }
         }

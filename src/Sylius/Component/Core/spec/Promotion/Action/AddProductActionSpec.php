@@ -60,11 +60,11 @@ class AddProductActionSpec extends ObjectBehavior
 
         $item->setImmutable(true)->shouldBeCalled();
 
-        $order->getItems()->willReturn(array());
+        $order->getItems()->willReturn([]);
 
         $order->addItem($item)->shouldBeCalled();
 
-        $this->execute($order, array('variant' => 500, 'quantity' => 2, 'price' => 0), $promotion);
+        $this->execute($order, ['variant' => 500, 'quantity' => 2, 'price' => 0], $promotion);
     }
 
     function it_does_not_add_product_if_exists(
@@ -84,11 +84,11 @@ class AddProductActionSpec extends ObjectBehavior
         $orderItemQuantityModifier->modify($item, 2)->shouldBeCalled();
         $item->equals($item)->willReturn(true);
 
-        $order->getItems()->willReturn(array($item));
+        $order->getItems()->willReturn([$item]);
 
         $order->addItem($item)->shouldNotBeCalled();
 
-        $this->execute($order, array('variant' => 500, 'quantity' => 2, 'price' => 1), $promotion);
+        $this->execute($order, ['variant' => 500, 'quantity' => 2, 'price' => 1], $promotion);
     }
 
     function it_reverts_product(
@@ -109,10 +109,10 @@ class AddProductActionSpec extends ObjectBehavior
         $item->equals($item)->willReturn(true);
         $item->setImmutable(true)->shouldBeCalled();
 
-        $order->getItems()->willReturn(array($item));
+        $order->getItems()->willReturn([$item]);
 
         $order->removeItem($item)->shouldBeCalled();
 
-        $this->revert($order, array('variant' => 500, 'quantity' => 3, 'price' => 2), $promotion);
+        $this->revert($order, ['variant' => 500, 'quantity' => 3, 'price' => 2], $promotion);
     }
 }

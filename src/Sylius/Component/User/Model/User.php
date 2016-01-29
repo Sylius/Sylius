@@ -7,8 +7,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * This component was inspired by FOS User-Bundle
  */
 
 namespace Sylius\Component\User\Model;
@@ -89,7 +87,7 @@ class User implements UserInterface
     protected $passwordRequestedAt;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $locked = false;
 
@@ -108,7 +106,7 @@ class User implements UserInterface
      *
      * @var array
      */
-    protected $roles = array(UserInterface::DEFAULT_ROLE);
+    protected $roles = [UserInterface::DEFAULT_ROLE];
 
     /**
      * @var Collection|UserOAuth[]
@@ -363,7 +361,7 @@ class User implements UserInterface
      */
     public function setRoles(array $roles)
     {
-        $this->roles = array();
+        $this->roles = [];
 
         foreach ($roles as $role) {
             $this->addRole($role);
@@ -492,7 +490,7 @@ class User implements UserInterface
      */
     public function serialize()
     {
-        return serialize(array(
+        return serialize([
             $this->password,
             $this->salt,
             $this->usernameCanonical,
@@ -500,7 +498,7 @@ class User implements UserInterface
             $this->locked,
             $this->enabled,
             $this->id,
-        ));
+        ]);
     }
 
     /**
@@ -536,6 +534,7 @@ class User implements UserInterface
 
     /**
      * @param \DateTime $date
+     *
      * @return bool
      */
     protected function hasExpired(\DateTime $date = null)

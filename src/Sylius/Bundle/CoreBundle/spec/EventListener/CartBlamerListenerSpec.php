@@ -44,7 +44,7 @@ class CartBlamerListenerSpec extends ObjectBehavior
         $cartManager->persist($cart)->shouldNotBeCalled();
         $cartManager->flush()->shouldNotBeCalled();
 
-        $this->shouldThrow(UnexpectedTypeException::class)->during('blame', array($userEvent));
+        $this->shouldThrow(UnexpectedTypeException::class)->during('blame', [$userEvent]);
     }
 
     function it_blames_cart_on_user($cartManager, $cartProvider, OrderInterface $cart, UserEvent $userEvent, UserInterface $user, CustomerInterface $customer)

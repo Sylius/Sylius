@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\ContentBundle\Document;
 
-use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\RedirectRoute as BaseRedirectRoute;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\RedirectRoute as BaseRedirectRoute;
 
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>

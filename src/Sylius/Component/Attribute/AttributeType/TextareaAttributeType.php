@@ -40,5 +40,7 @@ class TextareaAttributeType implements AttributeTypeInterface
     /**
      * {@inheritdoc}
      */
-    public function validate(AttributeValueInterface $attributeValue, ExecutionContextInterface $context, array $configuration) { }
+    public function validate(AttributeValueInterface $attributeValue, ExecutionContextInterface $context, array $configuration)
+    {
+    }
 }

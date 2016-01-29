@@ -28,7 +28,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
      *
      * @return Pagerfanta
      */
-    public function createByCustomerPaginator(CustomerInterface $customer, array $sorting = array())
+    public function createByCustomerPaginator(CustomerInterface $customer, array $sorting = [])
     {
         $queryBuilder = $this->getCollectionQueryBuilderByCustomer($customer, $sorting);
 
@@ -43,7 +43,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
      *
      * @return array
      */
-    public function findByCustomer(CustomerInterface $customer, array $sorting = array())
+    public function findByCustomer(CustomerInterface $customer, array $sorting = [])
     {
         $queryBuilder = $this->getCollectionQueryBuilderByCustomer($customer, $sorting);
 
@@ -56,7 +56,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     /**
      * Get the order data for the details page.
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return OrderInterface|null
      */
@@ -109,11 +109,11 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
      *
      * @param array   $criteria
      * @param array   $sorting
-     * @param Boolean $deleted
+     * @param bool $deleted
      *
      * @return Pagerfanta
      */
-    public function createFilterPaginator($criteria = array(), $sorting = array(), $deleted = false)
+    public function createFilterPaginator($criteria = [], $sorting = [], $deleted = false)
     {
         $queryBuilder = parent::getCollectionQueryBuilder();
         $queryBuilder
@@ -171,7 +171,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
 
         if (empty($sorting)) {
             if (!is_array($sorting)) {
-                $sorting = array();
+                $sorting = [];
             }
             $sorting['updatedAt'] = 'desc';
         }
@@ -214,11 +214,11 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
      *
      * @param array   $criteria
      * @param array   $sorting
-     * @param Boolean $deleted
+     * @param bool $deleted
      *
      * @return Pagerfanta
      */
-    public function createCheckoutsPaginator($criteria = array(), $sorting = array(), $deleted = false)
+    public function createCheckoutsPaginator($criteria = [], $sorting = [], $deleted = false)
     {
         $queryBuilder = parent::getCollectionQueryBuilder();
         $queryBuilder->andWhere($queryBuilder->expr()->isNull('o.completedAt'));
@@ -248,7 +248,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
 
         if (empty($sorting)) {
             if (!is_array($sorting)) {
-                $sorting = array();
+                $sorting = [];
             }
             $sorting['updatedAt'] = 'desc';
         }
@@ -312,11 +312,10 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         ;
     }
 
-
     /**
      * {@inheritdoc}
      */
-    public function revenueBetweenDatesGroupByDate(array $configuration = array())
+    public function revenueBetweenDatesGroupByDate(array $configuration = [])
     {
         $groupBy = '';
         foreach ($configuration['groupBy'] as $groupByArray) {
@@ -330,9 +329,9 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
             $configuration['end'],
             $groupBy);
 
-        $baseCurrencyCode = $configuration['baseCurrency'] ? 'in ' . $configuration['baseCurrency']->getCode() : '';
+        $baseCurrencyCode = $configuration['baseCurrency'] ? 'in '.$configuration['baseCurrency']->getCode() : '';
         $queryBuilder
-            ->select('DATE(o.completed_at) as date', 'TRUNCATE(SUM(o.total * o.exchange_rate)/ 100,2) as "total sum ' . $baseCurrencyCode . '"')
+            ->select('DATE(o.completed_at) as date', 'TRUNCATE(SUM(o.total * o.exchange_rate)/ 100,2) as "total sum '.$baseCurrencyCode.'"')
         ;
 
         return $queryBuilder
@@ -343,7 +342,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function ordersBetweenDatesGroupByDate(array $configuration = array())
+    public function ordersBetweenDatesGroupByDate(array $configuration = [])
     {
         $groupBy = '';
 
@@ -415,7 +414,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         ;
     }
 
-    protected function getCollectionQueryBuilderByCustomer(CustomerInterface $customer, array $sorting = array())
+    protected function getCollectionQueryBuilderByCustomer(CustomerInterface $customer, array $sorting = [])
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
 

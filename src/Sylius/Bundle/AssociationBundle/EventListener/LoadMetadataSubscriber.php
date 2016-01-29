@@ -82,7 +82,7 @@ class LoadMetadataSubscriber implements EventSubscriber
             'targetEntity' => $associationEntity,
             'inversedBy' => 'associations',
             'joinColumns' => [[
-                'name' => $subject . '_id',
+                'name' => $subject.'_id',
                 'referencedColumnName' => $associationEntityMetadata->fieldMappings['id']['columnName'],
                 'nullable' => false,
                 'onDelete' => 'CASCADE',
@@ -103,7 +103,7 @@ class LoadMetadataSubscriber implements EventSubscriber
             'fieldName' => 'associatedObjects',
             'targetEntity' => $associationEntity,
             'joinColumns' => [[
-                'name' => $subject . '_id',
+                'name' => $subject.'_id',
                 'referencedColumnName' => $associationEntityMetadata->fieldMappings['id']['columnName'],
                 'nullable' => false,
                 'onDelete' => 'CASCADE',

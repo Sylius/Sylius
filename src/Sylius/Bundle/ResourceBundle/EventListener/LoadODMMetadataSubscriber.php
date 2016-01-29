@@ -42,9 +42,9 @@ class LoadODMMetadataSubscriber implements EventSubscriber
      */
     public function getSubscribedEvents()
     {
-        return array(
+        return [
             'loadClassMetadata',
-        );
+        ];
     }
 
     /**
@@ -124,12 +124,12 @@ class LoadODMMetadataSubscriber implements EventSubscriber
     {
         return in_array(
             $type,
-            array(
+            [
                 ClassMetadataInfo::REFERENCE_ONE,
                 ClassMetadataInfo::REFERENCE_MANY,
                 ClassMetadataInfo::EMBED_ONE,
                 ClassMetadataInfo::EMBED_MANY,
-            ),
+            ],
             true
         );
     }

@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Component\Resource\Event;
 
 use PhpSpec\ObjectBehavior;
@@ -19,9 +28,9 @@ class ResourceEventSpec extends ObjectBehavior
 
     function it_stops_event_propagation()
     {
-        $this->stop('message', ResourceEvent::TYPE_SUCCESS, array('parameter'));
+        $this->stop('message', ResourceEvent::TYPE_SUCCESS, ['parameter']);
         $this->getMessageType()->shouldReturn(ResourceEvent::TYPE_SUCCESS);
-        $this->getMessageParameters()->shouldReturn(array('parameter'));
+        $this->getMessageParameters()->shouldReturn(['parameter']);
         $this->getMessage()->shouldReturn('message');
         $this->isPropagationStopped()->shouldReturn(true);
     }
@@ -57,13 +66,12 @@ class ResourceEventSpec extends ObjectBehavior
 
     function it_has_not_message_parameter_by_default()
     {
-        $this->getMessageParameters()->shouldReturn(array());
+        $this->getMessageParameters()->shouldReturn([]);
     }
 
     function its_message_parameter_is_mutable()
     {
-        $this->setMessageParameters(array('parameters'))->shouldReturn($this);
-        $this->getMessageParameters()->shouldReturn(array('parameters'));
+        $this->setMessageParameters(['parameters'])->shouldReturn($this);
+        $this->getMessageParameters()->shouldReturn(['parameters']);
     }
-
 }

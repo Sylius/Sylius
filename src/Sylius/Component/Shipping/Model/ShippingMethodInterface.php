@@ -24,8 +24,8 @@ interface ShippingMethodInterface extends CodeAwareInterface, ShippingMethodTran
 {
     // Shippables requirement to match given method.
     const CATEGORY_REQUIREMENT_MATCH_NONE = 0;
-    const CATEGORY_REQUIREMENT_MATCH_ANY  = 1;
-    const CATEGORY_REQUIREMENT_MATCH_ALL  = 2;
+    const CATEGORY_REQUIREMENT_MATCH_ANY = 1;
+    const CATEGORY_REQUIREMENT_MATCH_ALL = 2;
 
     /**
      * @return null|ShippingCategoryInterface

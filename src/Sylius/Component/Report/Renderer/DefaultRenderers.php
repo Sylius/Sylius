@@ -21,10 +21,10 @@ final class DefaultRenderers
     /**
      * Table renderer
      */
-    const TABLE = "table";
+    const TABLE = 'table';
 
     /**
      * Chart renderer
      */
-    const CHART = "chart";
+    const CHART = 'chart';
 }

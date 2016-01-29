@@ -38,11 +38,11 @@ class SettingsExtension extends \Twig_Extension
      */
     public function getFunctions()
     {
-        return array(
-             new \Twig_SimpleFunction('sylius_settings_all', array($this, 'getSettings')),
-             new \Twig_SimpleFunction('sylius_settings_get', array($this, 'getSettingsParameter')),
-             new \Twig_SimpleFunction('sylius_settings_has', array($this, 'hasSettingsParameter')),
-        );
+        return [
+             new \Twig_SimpleFunction('sylius_settings_all', [$this, 'getSettings']),
+             new \Twig_SimpleFunction('sylius_settings_get', [$this, 'getSettingsParameter']),
+             new \Twig_SimpleFunction('sylius_settings_has', [$this, 'hasSettingsParameter']),
+        ];
     }
 
     /**

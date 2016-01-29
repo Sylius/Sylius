@@ -33,14 +33,14 @@ class LoadProductOptionData extends DataFixture
         $option = $this->createOption(
             'O1',
             'T-Shirt size',
-            array($this->defaultLocale => 'Size', 'es_ES' => 'Talla'),
-            array(
+            [$this->defaultLocale => 'Size', 'es_ES' => 'Talla'],
+            [
                 'OV1' => 'S',
                 'OV2' => 'M',
                 'OV3' => 'L',
                 'OV4' => 'XL',
                 'OV5' => 'XXL',
-            )
+            ]
         );
         $manager->persist($option);
 
@@ -48,12 +48,12 @@ class LoadProductOptionData extends DataFixture
         $option = $this->createOption(
             'O2',
             'T-Shirt color',
-            array($this->defaultLocale => 'Color'),
-            array(
+            [$this->defaultLocale => 'Color'],
+            [
                 'OV6' => 'Red',
                 'OV7' => 'Blue',
                 'OV8' => 'Green',
-            )
+            ]
         );
         $manager->persist($option);
 
@@ -61,12 +61,12 @@ class LoadProductOptionData extends DataFixture
         $option = $this->createOption(
             'O3',
             'Sticker size',
-            array($this->defaultLocale => 'Size', 'es_ES' => 'Talla'),
-            array(
+            [$this->defaultLocale => 'Size', 'es_ES' => 'Talla'],
+            [
                 'OV9' => '3"',
                 'OV10' => '5"',
                 'OV11' => '7"',
-            )
+            ]
         );
         $manager->persist($option);
 
@@ -74,12 +74,12 @@ class LoadProductOptionData extends DataFixture
         $option = $this->createOption(
             'O4',
             'Mug type',
-            array($this->defaultLocale => 'Type', 'es_ES' => 'Tipo'),
-            array(
+            [$this->defaultLocale => 'Type', 'es_ES' => 'Tipo'],
+            [
                 'OV12' => 'Medium mug',
                 'OV13' => 'Double mug',
                 'OV14' => 'MONSTER mug',
-            )
+            ]
         );
         $manager->persist($option);
 

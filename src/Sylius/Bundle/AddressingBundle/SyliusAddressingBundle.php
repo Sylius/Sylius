@@ -34,9 +34,9 @@ class SyliusAddressingBundle extends AbstractResourceBundle
      */
     public static function getSupportedDrivers()
     {
-        return array(
+        return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        );
+        ];
     }
 
     /**
@@ -54,13 +54,13 @@ class SyliusAddressingBundle extends AbstractResourceBundle
      */
     protected function getModelInterfaces()
     {
-        return array(
-            AddressInterface::class    => 'sylius.model.address.class',
-            CountryInterface::class    => 'sylius.model.country.class',
-            ProvinceInterface::class   => 'sylius.model.province.class',
-            ZoneInterface::class       => 'sylius.model.zone.class',
+        return [
+            AddressInterface::class => 'sylius.model.address.class',
+            CountryInterface::class => 'sylius.model.country.class',
+            ProvinceInterface::class => 'sylius.model.province.class',
+            ZoneInterface::class => 'sylius.model.zone.class',
             ZoneMemberInterface::class => 'sylius.model.zone_member.class',
-        );
+        ];
     }
 
     /**

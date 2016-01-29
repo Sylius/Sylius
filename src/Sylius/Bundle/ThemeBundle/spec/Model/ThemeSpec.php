@@ -50,16 +50,16 @@ class ThemeSpec extends ObjectBehavior
     {
         $this->getName()->shouldReturn(null);
 
-        $this->setName("foo/bar");
-        $this->getName()->shouldReturn("foo/bar");
+        $this->setName('foo/bar');
+        $this->getName()->shouldReturn('foo/bar');
     }
 
     function it_has_path()
     {
         $this->getPath()->shouldReturn(null);
 
-        $this->setPath("/foo/bar");
-        $this->getPath()->shouldReturn("/foo/bar");
+        $this->setPath('/foo/bar');
+        $this->getPath()->shouldReturn('/foo/bar');
     }
 
     function it_has_authors()
@@ -74,16 +74,16 @@ class ThemeSpec extends ObjectBehavior
     {
         $this->getTitle()->shouldReturn(null);
 
-        $this->setTitle("Foo Bar");
-        $this->getTitle()->shouldReturn("Foo Bar");
+        $this->setTitle('Foo Bar');
+        $this->getTitle()->shouldReturn('Foo Bar');
     }
 
     function it_has_description()
     {
         $this->getDescription()->shouldReturn(null);
 
-        $this->setDescription("Lorem ipsum.");
-        $this->getDescription()->shouldReturn("Lorem ipsum.");
+        $this->setDescription('Lorem ipsum.');
+        $this->getDescription()->shouldReturn('Lorem ipsum.');
     }
 
     function it_has_parents_names()

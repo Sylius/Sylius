@@ -42,7 +42,7 @@ interface RedirectHandlerInterface
      *
      * @return RedirectResponse
      */
-    public function redirectToRoute(RequestConfiguration $configuration, $route, array $parameters = array());
+    public function redirectToRoute(RequestConfiguration $configuration, $route, array $parameters = []);
 
     /**
      * @param RequestConfiguration $configuration

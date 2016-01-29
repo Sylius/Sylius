@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\CoreBundle\Behat;
 
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Element\ElementInterface;
 use Behat\Mink\Element\NodeElement;
@@ -263,7 +262,7 @@ class MetadataContext extends DefaultContext
      */
     public function iDeselectSelectField($fieldName)
     {
-        $this->selectOption($fieldName, "");
+        $this->selectOption($fieldName, '');
     }
 
     /**
@@ -275,9 +274,8 @@ class MetadataContext extends DefaultContext
     private function assertItIsMetadataCustomizationPage(ElementInterface $element, $regexp)
     {
         if (!$this->isItMetadataCustomizationPage($element, $regexp)) {
-            throw new \Exception(sprintf("It is not metadata customziation page (regexp: %s)", $regexp));
+            throw new \Exception(sprintf('It is not metadata customziation page (regexp: %s)', $regexp));
         }
-
     }
 
     /**
@@ -294,7 +292,7 @@ class MetadataContext extends DefaultContext
             return false;
         }
 
-        if (false === strpos($header->getText(), "Customizing metadata")) {
+        if (false === strpos($header->getText(), 'Customizing metadata')) {
             return false;
         }
 
@@ -314,7 +312,7 @@ class MetadataContext extends DefaultContext
     private function assertThereIsFormWithFields(ElementInterface $element, array $fields)
     {
         if (null === $this->getFormWithFields($element, $fields)) {
-            throw new \Exception(sprintf("Could not found table with fields: %s", implode(', ', $fields)));
+            throw new \Exception(sprintf('Could not found table with fields: %s', implode(', ', $fields)));
         }
     }
 
@@ -378,7 +376,7 @@ class MetadataContext extends DefaultContext
      * @param string $key
      * @param string $value
      *
-     * @return boolean True if created new metadata object
+     * @return bool True if created new metadata object
      */
     protected function createNewMetadataObjectIfNeeded(PageMetadataInterface $pageMetadata, $key, $value)
     {

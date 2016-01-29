@@ -55,7 +55,7 @@ class TokenProvider implements TokenProviderInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function generateUniqueToken()
     {
@@ -77,6 +77,6 @@ class TokenProvider implements TokenProviderInterface
      */
     protected function isUsedCode($token)
     {
-        return null !== $this->repository->findOneBy(array('confirmationToken' => $token));
+        return null !== $this->repository->findOneBy(['confirmationToken' => $token]);
     }
 }

@@ -36,7 +36,7 @@ class CurrencyConverterSpec extends ObjectBehavior
 
     function it_converts_to_any_currency(CurrencyInterface $currency, $currencyRepository)
     {
-        $currencyRepository->findOneBy(array('code' => 'USD'))->shouldBeCalled()->willReturn($currency);
+        $currencyRepository->findOneBy(['code' => 'USD'])->shouldBeCalled()->willReturn($currency);
         $currency->getExchangeRate()->shouldBeCalled()->willReturn(1.30);
 
         $this->convert(6555, 'USD')->shouldReturn(8522);
@@ -44,7 +44,7 @@ class CurrencyConverterSpec extends ObjectBehavior
 
     function it_throws_exception_if_currency_is_not_found($currencyRepository)
     {
-        $currencyRepository->findOneBy(array('code' => 'EUR'))->shouldBeCalled()->willReturn(null);
+        $currencyRepository->findOneBy(['code' => 'EUR'])->shouldBeCalled()->willReturn(null);
 
         $this
             ->shouldThrow(new UnavailableCurrencyException('EUR'))

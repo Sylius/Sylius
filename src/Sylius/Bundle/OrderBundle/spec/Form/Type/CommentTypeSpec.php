@@ -24,7 +24,7 @@ class CommentTypeSpec extends ObjectBehavior
 {
     public function let()
     {
-        $this->beConstructedWith('Comment', array('sylius'));
+        $this->beConstructedWith('Comment', ['sylius']);
     }
 
     public function it_is_initializable()
@@ -42,16 +42,16 @@ class CommentTypeSpec extends ObjectBehavior
         $builder->add('comment', 'textarea', Argument::any())->willReturn($builder);
         $builder->add('notifyCustomer', 'checkbox', Argument::any())->willReturn($builder);
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     public function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
-                'data_class'        => 'Comment',
-                'validation_groups' => array('sylius'),
-            ))
+            ->setDefaults([
+                'data_class' => 'Comment',
+                'validation_groups' => ['sylius'],
+            ])
             ->shouldBeCalled()
         ;
 

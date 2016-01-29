@@ -32,9 +32,9 @@ class DeleteUserCommand extends ContainerAwareCommand
         $this
             ->setName('sylius:user:delete')
             ->setDescription('Deletes a user/customer account.')
-            ->setDefinition(array(
+            ->setDefinition([
                 new InputArgument('email', InputArgument::REQUIRED, 'Email'),
-            ))
+            ])
             ->setHelp(<<<EOT
 The <info>%command.name%</info> command deletes a user account and it's customer information.
 EOT

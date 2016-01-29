@@ -37,11 +37,11 @@ class SyliusCartExtension extends AbstractResourceExtension implements PrependEx
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $configFiles = array(
+        $configFiles = [
             'services.xml',
             'templating.xml',
             'twig.xml',
-        );
+        ];
 
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
@@ -66,19 +66,19 @@ class SyliusCartExtension extends AbstractResourceExtension implements PrependEx
             throw new \RuntimeException('Please install and configure SyliusOrderBundle in order to use SyliusCartBundle.');
         }
 
-        $container->prependExtensionConfig('sylius_order', array(
-            'resources' => array(
-                'order' => array(
-                    'classes' => array(
+        $container->prependExtensionConfig('sylius_order', [
+            'resources' => [
+                'order' => [
+                    'classes' => [
                         'model' => Cart::class,
-                    ),
-                ),
-                'order_item' => array(
-                    'classes' => array(
+                    ],
+                ],
+                'order_item' => [
+                    'classes' => [
                         'model' => CartItem::class,
-                    ),
-                ),
-            ))
+                    ],
+                ],
+            ], ]
         );
     }
 }

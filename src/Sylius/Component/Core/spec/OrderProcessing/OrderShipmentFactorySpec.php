@@ -47,7 +47,6 @@ class OrderShipmentFactorySpec extends ObjectBehavior
         ShipmentInterface $shipment,
         OrderItemUnitInterface $itemUnit
     ) {
-
         $shipmentFactory
             ->createNew()
             ->willReturn($shipment)
@@ -61,7 +60,7 @@ class OrderShipmentFactorySpec extends ObjectBehavior
 
         $order
             ->getItemUnits()
-            ->willReturn(array($itemUnit))
+            ->willReturn([$itemUnit])
         ;
 
         $shipment
@@ -103,10 +102,10 @@ class OrderShipmentFactorySpec extends ObjectBehavior
 
         $order
             ->getItemUnits()
-            ->willReturn(array(
+            ->willReturn([
                 $itemUnit,
-                $itemUnitWithoutShipment
-            ))
+                $itemUnitWithoutShipment,
+            ])
         ;
 
         $order

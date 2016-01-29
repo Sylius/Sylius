@@ -96,6 +96,7 @@ class CurrencyContext extends BaseCurrencyContext
      * Get storage key for channel with given code.
      *
      * @param string $channelCode
+     *
      * @return string
      */
     private function getStorageKey($channelCode)

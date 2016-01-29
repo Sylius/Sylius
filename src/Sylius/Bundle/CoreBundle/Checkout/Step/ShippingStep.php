@@ -77,11 +77,11 @@ class ShippingStep extends CheckoutStep
 
     protected function renderStep(ProcessContextInterface $context, OrderInterface $order, FormInterface $form)
     {
-        return $this->render($this->container->getParameter(sprintf('sylius.checkout.step.%s.template', $this->getName())), array(
-            'order'   => $order,
-            'form'    => $form->createView(),
+        return $this->render($this->container->getParameter(sprintf('sylius.checkout.step.%s.template', $this->getName())), [
+            'order' => $order,
+            'form' => $form->createView(),
             'context' => $context,
-        ));
+        ]);
     }
 
     protected function createCheckoutShippingForm(OrderInterface $order)
@@ -92,13 +92,13 @@ class ShippingStep extends CheckoutStep
             $this->get('session')->getFlashBag()->add('error', 'sylius.checkout.shipping.error');
         }
 
-        return $this->createForm('sylius_checkout_shipping', $order, array(
-            'criteria' => array(
+        return $this->createForm('sylius_checkout_shipping', $order, [
+            'criteria' => [
                 'zone' => !empty($this->zones) ? array_map(function ($zone) {
                     return $zone->getId();
                 }, $this->zones) : null,
                 'enabled' => true,
-            )
-        ));
+            ],
+        ]);
     }
 }

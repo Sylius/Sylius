@@ -13,12 +13,12 @@ namespace Sylius\Component\Archetype\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Attribute\Model\AttributeInterface as BaseAttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeInterface;
+use Sylius\Component\Attribute\Model\AttributeInterface as BaseAttributeInterface;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Translation\Model\AbstractTranslatable;
-use Sylius\Component\Variation\Model\OptionInterface as BaseOptionInterface;
 use Sylius\Component\Variation\Model\OptionInterface;
+use Sylius\Component\Variation\Model\OptionInterface as BaseOptionInterface;
 
 /**
  * The archetype model.

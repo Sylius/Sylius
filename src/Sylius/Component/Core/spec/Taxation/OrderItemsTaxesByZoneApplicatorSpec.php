@@ -81,7 +81,7 @@ class OrderItemsTaxesByZoneApplicatorSpec extends ObjectBehavior
         $orderItem->getQuantity()->willReturn(2);
 
         $orderItem->getProduct()->willReturn($product);
-        $taxRateResolver->resolve($product, array('zone' => $zone))->willReturn($taxRate);
+        $taxRateResolver->resolve($product, ['zone' => $zone])->willReturn($taxRate);
 
         $orderItem->getTotal()->willReturn(1000);
         $calculator->calculate(1000, $taxRate)->willReturn(100);
@@ -94,7 +94,7 @@ class OrderItemsTaxesByZoneApplicatorSpec extends ObjectBehavior
         $units->current()->willReturn($unit1, $unit2);
         $units->next()->shouldBeCalledTimes(2);
 
-        $distributor->distribute(100, 2)->willReturn(array(50, 50));
+        $distributor->distribute(100, 2)->willReturn([50, 50]);
 
         $adjustmentsFactory->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, 'Simple tax (10%)', 50, false)->willReturn($taxAdjustment1, $taxAdjustment2);
 
@@ -148,7 +148,7 @@ class OrderItemsTaxesByZoneApplicatorSpec extends ObjectBehavior
         $orderItem->getQuantity()->willReturn(5);
 
         $orderItem->getProduct()->willReturn($product);
-        $taxRateResolver->resolve($product, array('zone' => $zone))->willReturn(null);
+        $taxRateResolver->resolve($product, ['zone' => $zone])->willReturn(null);
 
         $orderItem->getUnits()->shouldNotBeCalled();
 
@@ -183,7 +183,7 @@ class OrderItemsTaxesByZoneApplicatorSpec extends ObjectBehavior
         $orderItem->getQuantity()->willReturn(2);
 
         $orderItem->getProduct()->willReturn($product);
-        $taxRateResolver->resolve($product, array('zone' => $zone))->willReturn($taxRate);
+        $taxRateResolver->resolve($product, ['zone' => $zone])->willReturn($taxRate);
 
         $orderItem->getTotal()->willReturn(1000);
         $calculator->calculate(1000, $taxRate)->willReturn(0);
@@ -195,7 +195,7 @@ class OrderItemsTaxesByZoneApplicatorSpec extends ObjectBehavior
         $units->current()->shouldNotBeCalled();
         $units->next()->shouldNotBeCalled();
 
-        $distributor->distribute(0, 2)->willReturn(array(0, 0));
+        $distributor->distribute(0, 2)->willReturn([0, 0]);
 
         $adjustmentsFactory->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, 'Simple tax (0%)', 0, false)->willReturn($taxAdjustment1, $taxAdjustment2);
 

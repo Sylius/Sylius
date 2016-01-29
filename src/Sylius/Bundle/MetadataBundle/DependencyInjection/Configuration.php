@@ -13,9 +13,8 @@ namespace Sylius\Bundle\MetadataBundle\DependencyInjection;
 
 use Sylius\Bundle\MetadataBundle\Controller\MetadataController;
 use Sylius\Bundle\MetadataBundle\Form\Type\MetadataContainerType;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\MetadataBundle\Model\MetadataContainer;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Metadata\Factory\MetadataContainerFactory;
 use Sylius\Component\Metadata\Model\MetadataContainerInterface;
 use Sylius\Component\Resource\Factory\Factory;
@@ -91,7 +90,7 @@ class Configuration implements ConfigurationInterface
                         ->children()
                             ->arrayNode('default')
                                 ->prototype('scalar')->end()
-                                ->defaultValue(array('sylius'))
+                                ->defaultValue(['sylius'])
                             ->end()
                         ->end()
                     ->end()

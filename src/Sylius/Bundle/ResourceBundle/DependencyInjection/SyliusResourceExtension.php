@@ -35,14 +35,13 @@ class SyliusResourceExtension extends Extension implements PrependExtensionInter
         $config = $processor->processConfiguration(new Configuration(), $config);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $configFiles = array(
+        $configFiles = [
             'services.xml',
             'controller.xml',
             'storage.xml',
             'routing.xml',
-            'twig.xml'
-        );
-
+            'twig.xml',
+        ];
 
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
@@ -51,18 +50,18 @@ class SyliusResourceExtension extends Extension implements PrependExtensionInter
         foreach ($config['resources'] as $alias => $resourceConfig) {
             $metadata = Metadata::fromAliasAndConfiguration($alias, $resourceConfig);
 
-            $resources = $container->hasParameter('sylius.resources') ? $container->getParameter('sylius.resources') : array();
-            $resources = array_merge($resources, array($alias => $resourceConfig));
+            $resources = $container->hasParameter('sylius.resources') ? $container->getParameter('sylius.resources') : [];
+            $resources = array_merge($resources, [$alias => $resourceConfig]);
             $container->setParameter('sylius.resources', $resources);
 
             DriverProvider::get($metadata)->load($container, $metadata);
 
             if ($metadata->hasParameter('translation') && class_exists(SyliusTranslationBundle::class)) {
                 $alias = $alias.'_translation';
-                $resourceConfig = array_merge(array('driver' => $resourceConfig['driver']), $resourceConfig['translation']);
+                $resourceConfig = array_merge(['driver' => $resourceConfig['driver']], $resourceConfig['translation']);
 
-                $resources = $container->hasParameter('sylius.resources') ? $container->getParameter('sylius.resources') : array();
-                $resources = array_merge($resources, array($alias => $resourceConfig));
+                $resources = $container->hasParameter('sylius.resources') ? $container->getParameter('sylius.resources') : [];
+                $resources = array_merge($resources, [$alias => $resourceConfig]);
                 $container->setParameter('sylius.resources', $resources);
 
                 $metadata = Metadata::fromAliasAndConfiguration($alias, $resourceConfig);

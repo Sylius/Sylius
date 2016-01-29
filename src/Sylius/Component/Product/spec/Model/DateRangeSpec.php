@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Product\Model;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class DateRangeSpec extends ObjectBehavior
 {

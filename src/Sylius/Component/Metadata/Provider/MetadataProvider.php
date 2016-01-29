@@ -13,9 +13,9 @@ namespace Sylius\Component\Metadata\Provider;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Component\Metadata\Compiler\MetadataCompilerInterface;
-use Sylius\Component\Metadata\Model\MetadataSubjectInterface;
 use Sylius\Component\Metadata\HierarchyProvider\MetadataHierarchyProviderInterface;
 use Sylius\Component\Metadata\Model\MetadataContainerInterface;
+use Sylius\Component\Metadata\Model\MetadataSubjectInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>

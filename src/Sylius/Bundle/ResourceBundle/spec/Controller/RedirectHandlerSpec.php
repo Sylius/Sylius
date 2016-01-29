@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\RedirectHandler;
 use Sylius\Bundle\ResourceBundle\Controller\RedirectHandlerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
@@ -43,7 +42,7 @@ class RedirectHandlerSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\RedirectHandler');
     }
-    
+
     function it_implements_redirect_handler_interface()
     {
         $this->shouldImplement(RedirectHandlerInterface::class);
@@ -55,14 +54,13 @@ class RedirectHandlerSpec extends ObjectBehavior
         RouterInterface $router,
         RouteCollection $routes,
         Route $route
-    )
-    {
-        $configuration->getRedirectParameters($resource)->willReturn(array());
+    ) {
+        $configuration->getRedirectParameters($resource)->willReturn([]);
         $configuration->getRedirectRoute('show')->willReturn('my_route');
 
         $routes->get('my_route')->willReturn($route);
 
-        $router->generate('my_route', array())->shouldBeCalled()->willReturn('http://test.com');
+        $router->generate('my_route', [])->shouldBeCalled()->willReturn('http://test.com');
 
         $configuration->getRedirectHash()->willReturn(null);
         $configuration->isHeaderRedirection()->willReturn(false);
@@ -75,15 +73,14 @@ class RedirectHandlerSpec extends ObjectBehavior
         ResourceInterface $resource,
         RouterInterface $router,
         RouteCollection $routes
-    )
-    {
-        $configuration->getRedirectParameters($resource)->willReturn(array());
+    ) {
+        $configuration->getRedirectParameters($resource)->willReturn([]);
         $configuration->getRedirectRoute('show')->willReturn('app_product_show');
         $configuration->getRedirectRoute('index')->willReturn('app_product_index');
 
         $routes->get('app_product_show')->willReturn(null);
 
-        $router->generate('app_product_index', array())->shouldBeCalled()->willReturn('http://test.com');
+        $router->generate('app_product_index', [])->shouldBeCalled()->willReturn('http://test.com');
 
         $configuration->getRedirectHash()->willReturn(null);
         $configuration->isHeaderRedirection()->willReturn(false);
@@ -94,9 +91,9 @@ class RedirectHandlerSpec extends ObjectBehavior
     function it_redirects_to_index(RequestConfiguration $configuration, $router)
     {
         $configuration->getRedirectRoute('index')->willReturn('my_route');
-        $configuration->getRedirectParameters()->willReturn(array());
+        $configuration->getRedirectParameters()->willReturn([]);
 
-        $router->generate('my_route', array())->willReturn('http://myurl.com');
+        $router->generate('my_route', [])->willReturn('http://myurl.com');
 
         $configuration->getRedirectHash()->willReturn(null);
         $configuration->isHeaderRedirection()->willReturn(false);
@@ -106,10 +103,10 @@ class RedirectHandlerSpec extends ObjectBehavior
 
     function it_redirects_to_route(RequestConfiguration $configuration, $router)
     {
-        $router->generate('route', array('parameter' => 'value'))->willReturn('http://myurl.com');
+        $router->generate('route', ['parameter' => 'value'])->willReturn('http://myurl.com');
 
         $this
-            ->redirectToRoute($configuration, 'route', array('parameter' => 'value'))
+            ->redirectToRoute($configuration, 'route', ['parameter' => 'value'])
             ->shouldHaveType(RedirectResponse::class)
         ;
     }

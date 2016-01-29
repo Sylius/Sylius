@@ -44,7 +44,7 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     /**
      * @var array
      */
-    protected $configuration = array();
+    protected $configuration = [];
 
     /**
      * @var AttributeValueInterface[]|Collection

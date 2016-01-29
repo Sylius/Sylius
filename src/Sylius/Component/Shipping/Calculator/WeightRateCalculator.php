@@ -26,7 +26,6 @@ class WeightRateCalculator implements CalculatorInterface
         return (int) ($configuration['fixed'] + round($configuration['variable'] * ($subject->getShippingWeight() / $configuration['division'])));
     }
 
-
     /**
      * {@inheritdoc}
      */

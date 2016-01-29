@@ -11,12 +11,11 @@
 
 namespace Sylius\Behat\Context;
 
-use SensioLabs\Behat\PageObjectExtension\Context\PageObjectContext;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
-use Behat\MinkExtension\Context\MinkAwareContext;
 use Behat\Mink\Mink;
 use Behat\Mink\Session;
 use Behat\Mink\WebAssert;
+use Behat\MinkExtension\Context\MinkAwareContext;
+use SensioLabs\Behat\PageObjectExtension\Context\PageObjectContext;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>

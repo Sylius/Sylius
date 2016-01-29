@@ -31,8 +31,8 @@ class OrmListener implements EventSubscriber
     /**
      * Objects scheduled for insertion and replacement
      */
-    public $scheduledForInsertion = array();
-    public $scheduledForDeletion = array();
+    public $scheduledForInsertion = [];
+    public $scheduledForDeletion = [];
 
     /**
      * @param OrmIndexer $ormIndexer
@@ -47,12 +47,12 @@ class OrmListener implements EventSubscriber
      */
     public function getSubscribedEvents()
     {
-        return array(
+        return [
             'postFlush',
             'postPersist',
             'postUpdate',
             'preRemove',
-        );
+        ];
     }
 
     /**
@@ -111,7 +111,7 @@ class OrmListener implements EventSubscriber
         if (count($this->scheduledForInsertion)) {
             // trick to clear the array and avoid looping
             $scheduledForInsertion = $this->scheduledForInsertion;
-            $this->scheduledForInsertion = array();
+            $this->scheduledForInsertion = [];
 
             $this->ormIndexer->insertMany($scheduledForInsertion);
         }

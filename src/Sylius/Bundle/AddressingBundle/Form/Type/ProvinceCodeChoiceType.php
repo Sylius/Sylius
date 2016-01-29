@@ -56,7 +56,7 @@ class ProvinceCodeChoiceType extends ProvinceChoiceType
      */
     private function getProvinceCodes($provinces)
     {
-        $provincesCodes = array();
+        $provincesCodes = [];
 
         /* @var ProvinceInterface $province */
         foreach ($provinces as $province) {

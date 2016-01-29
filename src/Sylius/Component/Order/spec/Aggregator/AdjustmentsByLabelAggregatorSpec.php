@@ -46,10 +46,10 @@ class AdjustmentsByLabelAggregatorSpec extends ObjectBehavior
         $adjustment4->getLabel()->willReturn('tax 2');
         $adjustment4->getAmount()->willReturn(-2000);
 
-        $this->aggregate(array($adjustment1, $adjustment2, $adjustment3, $adjustment4))->shouldReturn(array(
+        $this->aggregate([$adjustment1, $adjustment2, $adjustment3, $adjustment4])->shouldReturn([
             'tax 1' => 4000,
             'tax 2' => 2000,
-        ));
+        ]);
     }
 
     function it_throws_exception_if_any_array_element_is_not_adjustment(
@@ -63,7 +63,7 @@ class AdjustmentsByLabelAggregatorSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(new \InvalidArgumentException('Each adjustments array element must implement '.AdjustmentInterface::class.'.'))
-            ->during('aggregate', array(array($adjustment1, $adjustment2, 'badObject')))
+            ->during('aggregate', [[$adjustment1, $adjustment2, 'badObject']])
         ;
     }
 }

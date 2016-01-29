@@ -17,7 +17,6 @@ use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadataFactory;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>

@@ -12,9 +12,7 @@
 namespace spec\Sylius\Bundle\UiBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\UiBundle\Controller\SecurityController;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -53,23 +51,23 @@ class SecurityControllerSpec extends ObjectBehavior
     ) {
         $authenticationUtils->getLastAuthenticationError()->willReturn('Bad credentials.');
         $authenticationUtils->getLastUsername()->willReturn('john.doe');
-        
+
         $request->attributes = $requestAttributes;
         $requestAttributes->get('_sylius[template]', 'SyliusUiBundle:Security:login.html.twig', true)->willReturn('CustomTemplateName');
         $requestAttributes->get('_sylius[form]', 'sylius_security_login', true)->willReturn('custom_form_type');
-        
+
         $formFactory->createNamed('', 'custom_form_type')->willReturn($form);
         $form->createView()->willReturn($formView);
 
         $templatingEngine
-            ->renderResponse('CustomTemplateName', array(
+            ->renderResponse('CustomTemplateName', [
                 'form' => $formView,
                 'last_username' => 'john.doe',
                 'last_error' => 'Bad credentials.',
-            ))
+            ])
             ->willReturn($response)
         ;
-        
+
         $this->loginAction($request)->shouldReturn($response);
     }
 
@@ -77,13 +75,13 @@ class SecurityControllerSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(new \RuntimeException('You must configure the check path to be handled by the firewall.'))
-            ->during('checkAction', array($request));
+            ->during('checkAction', [$request]);
     }
 
     function it_throws_an_exception_when_logout_action_is_accessed(Request $request)
     {
         $this
             ->shouldThrow(new \RuntimeException('You must configure the logout path to be handled by the firewall.'))
-            ->during('logoutAction', array($request));
+            ->during('logoutAction', [$request]);
     }
 }

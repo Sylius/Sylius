@@ -25,9 +25,9 @@ class LocaleType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('code', 'locale', array(
+            ->add('code', 'locale', [
                 'label' => 'sylius.form.locale.name',
-            ))
+            ])
         ;
     }
 

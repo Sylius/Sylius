@@ -23,9 +23,9 @@ class Version20140424094036 extends AbstractMigration
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != "mysql", "Migration can only be executed safely on 'mysql'.");
+        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', "Migration can only be executed safely on 'mysql'.");
 
-        $this->addSql("ALTER TABLE sylius_order CHANGE state state VARCHAR(255) NOT NULL");
+        $this->addSql('ALTER TABLE sylius_order CHANGE state state VARCHAR(255) NOT NULL');
 
         $this->addSql(sprintf("UPDATE sylius_order SET state = CASE state
             WHEN 1 THEN '%s'
@@ -51,7 +51,7 @@ class Version20140424094036 extends AbstractMigration
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != "mysql", "Migration can only be executed safely on 'mysql'.");
+        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', "Migration can only be executed safely on 'mysql'.");
 
         $this->addSql(sprintf("UPDATE sylius_order SET state = CASE state
             WHEN '%s' THEN 1
@@ -73,6 +73,6 @@ class Version20140424094036 extends AbstractMigration
             OrderInterface::STATE_RETURNED
         ));
 
-        $this->addSql("ALTER TABLE sylius_order CHANGE state state INT NOT NULL");
+        $this->addSql('ALTER TABLE sylius_order CHANGE state state INT NOT NULL');
     }
 }

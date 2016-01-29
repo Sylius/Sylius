@@ -20,10 +20,10 @@ use Symfony\Component\HttpFoundation\Request;
 class RequestConfigurationFactory implements RequestConfigurationFactoryInterface
 {
     const API_VERSION_HEADER = 'Accept';
-    const API_GROUPS_HEADER  = 'Accept';
+    const API_GROUPS_HEADER = 'Accept';
 
     const API_VERSION_REGEXP = '/(v|version)=(?P<version>[0-9\.]+)/i';
-    const API_GROUPS_REGEXP  = '/(g|groups)=(?P<groups>[a-z,_\s]+)/i';
+    const API_GROUPS_REGEXP = '/(g|groups)=(?P<groups>[a-z,_\s]+)/i';
 
     /**
      * @var ParametersParser
@@ -45,7 +45,7 @@ class RequestConfigurationFactory implements RequestConfigurationFactoryInterfac
      * @param string $configurationClass
      * @param array $defaultParameters
      */
-    public function __construct(ParametersParser $parametersParser, $configurationClass, array $defaultParameters = array())
+    public function __construct(ParametersParser $parametersParser, $configurationClass, array $defaultParameters = [])
     {
         $this->parametersParser = $parametersParser;
         $this->configurationClass = $configurationClass;
@@ -70,7 +70,7 @@ class RequestConfigurationFactory implements RequestConfigurationFactoryInterfac
      */
     private function parseApiParameters(Request $request)
     {
-        $parameters = array();
+        $parameters = [];
 
         if ($request->headers->has(self::API_VERSION_HEADER)) {
             if (preg_match(self::API_VERSION_REGEXP, $request->headers->get(self::API_VERSION_HEADER), $matches)) {
@@ -84,6 +84,6 @@ class RequestConfigurationFactory implements RequestConfigurationFactoryInterfac
             }
         }
 
-        return array_merge($request->attributes->get('_sylius', array()), $parameters);
+        return array_merge($request->attributes->get('_sylius', []), $parameters);
     }
 }

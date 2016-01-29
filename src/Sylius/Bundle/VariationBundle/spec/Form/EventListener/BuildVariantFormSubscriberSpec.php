@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\VariationBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Variation\Model\OptionInterface;
 use Sylius\Component\Variation\Model\OptionValueInterface;
 use Sylius\Component\Variation\Model\VariableInterface;
@@ -37,7 +36,7 @@ class BuildVariantFormSubscriberSpec extends ObjectBehavior
     function it_sucscriber_event()
     {
         $this::getSubscribedEvents()->shouldReturn(
-            array(FormEvents::PRE_SET_DATA => 'preSetData')
+            [FormEvents::PRE_SET_DATA => 'preSetData']
         );
     }
 
@@ -55,18 +54,18 @@ class BuildVariantFormSubscriberSpec extends ObjectBehavior
         $event->getData()->shouldBeCalled()->willReturn($variant);
 
         $variant->getObject()->shouldBeCalled()->willReturn($variable);
-        $variant->getOptions()->shouldBeCalled()->willReturn(array($optionValue));
-        $variable->getOptions()->shouldBeCalled()->willReturn(array($options));
+        $variant->getOptions()->shouldBeCalled()->willReturn([$optionValue]);
+        $variable->getOptions()->shouldBeCalled()->willReturn([$options]);
         $variable->hasOptions()->shouldBeCalled()->willReturn(true);
 
         $factory->createNamed(
             'options',
             'sylius_variable_name_option_value_collection',
-            array($optionValue),
-            array(
-                'options' => array($options),
-                'auto_initialize' => false
-            )
+            [$optionValue],
+            [
+                'options' => [$options],
+                'auto_initialize' => false,
+            ]
         )->shouldBeCalled()->willReturn($optionsForm);
 
         $form->add($optionsForm)->shouldBeCalled();

@@ -27,13 +27,13 @@ class ShippingDiscountConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('percentage', 'percent', array(
+            ->add('percentage', 'percent', [
                 'label' => 'sylius.form.action.shipping_discount_configuration.percentage',
-                'constraints' => array(
+                'constraints' => [
                     new NotBlank(),
-                    new Type(array('type' => 'numeric')),
-                )
-            ))
+                    new Type(['type' => 'numeric']),
+                ],
+            ])
         ;
     }
 

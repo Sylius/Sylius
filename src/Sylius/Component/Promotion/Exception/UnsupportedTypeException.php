@@ -15,5 +15,4 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 class UnsupportedTypeException extends UnexpectedTypeException
 {
-
 }

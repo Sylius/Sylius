@@ -29,19 +29,19 @@ class VariantType extends BaseVariantType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('availableOn', 'datetime', array(
+            ->add('availableOn', 'datetime', [
                 'date_format' => 'y-M-d',
                 'date_widget' => 'choice',
                 'time_widget' => 'text',
-                'label'       => 'sylius.form.product_variant.available_on'
-            ))
-            ->add('availableUntil', 'datetime', array(
+                'label' => 'sylius.form.product_variant.available_on',
+            ])
+            ->add('availableUntil', 'datetime', [
                 'date_format' => 'y-M-d',
                 'date_widget' => 'choice',
                 'time_widget' => 'text',
-                'required'    => false,
-                'label'       => 'sylius.form.product_variant.available_until'
-            ))
+                'required' => false,
+                'label' => 'sylius.form.product_variant.available_until',
+            ])
         ;
     }
 }

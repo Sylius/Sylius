@@ -43,7 +43,7 @@ class LocaleContextSpec extends ObjectBehavior
         $this->getDefaultLocale()->shouldReturn('pl_PL');
     }
 
-    function it_can_set_locale_to_storage(StorageInterface$storage)
+    function it_can_set_locale_to_storage(StorageInterface $storage)
     {
         $storage->setData(Argument::any(), 'en_GB')->shouldBeCalled();
 

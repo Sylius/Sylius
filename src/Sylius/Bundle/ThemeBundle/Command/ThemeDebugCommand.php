@@ -43,6 +43,7 @@ class ThemeDebugCommand extends ContainerAwareCommand
 
         if (0 === count($themes)) {
             $output->writeln('<error>There are no themes.</error>');
+
             return;
         }
 

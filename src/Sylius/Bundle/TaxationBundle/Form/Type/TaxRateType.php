@@ -28,22 +28,22 @@ class TaxRateType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('category', 'sylius_tax_category_choice', array(
+            ->add('category', 'sylius_tax_category_choice', [
                 'label' => 'sylius.form.tax_rate.category',
-            ))
-            ->add('name', 'text', array(
+            ])
+            ->add('name', 'text', [
                 'label' => 'sylius.form.tax_rate.name',
-            ))
-            ->add('amount', 'percent', array(
+            ])
+            ->add('amount', 'percent', [
                 'label' => 'sylius.form.tax_rate.amount',
                 'precision' => 3,
-            ))
-            ->add('includedInPrice', 'checkbox', array(
+            ])
+            ->add('includedInPrice', 'checkbox', [
                 'label' => 'sylius.form.tax_rate.included_in_price',
-            ))
-            ->add('calculator', 'sylius_tax_calculator_choice', array(
+            ])
+            ->add('calculator', 'sylius_tax_calculator_choice', [
                 'label' => 'sylius.form.tax_rate.calculator',
-            ))
+            ])
             ->addEventSubscriber(new AddCodeFormSubscriber())
         ;
     }

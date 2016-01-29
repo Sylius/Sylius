@@ -63,10 +63,10 @@ class BuildShippingMethodFormSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT   => 'preSubmit',
-        );
+            FormEvents::PRE_SUBMIT => 'preSubmit',
+        ];
     }
 
     /**
@@ -108,11 +108,11 @@ class BuildShippingMethodFormSubscriber implements EventSubscriberInterface
      * @param string        $calculatorName
      * @param array         $data
      */
-    protected function addConfigurationFields(FormInterface $form, $calculatorName, array $data = array())
+    protected function addConfigurationFields(FormInterface $form, $calculatorName, array $data = [])
     {
         $calculator = $this->calculatorRegistry->get($calculatorName);
 
-        $calculatorTypeName = sprintf("sylius_shipping_calculator_%s", $calculator->getType());
+        $calculatorTypeName = sprintf('sylius_shipping_calculator_%s', $calculator->getType());
 
         if (!$this->formRegistry->hasType($calculatorTypeName)) {
             return;
@@ -122,7 +122,7 @@ class BuildShippingMethodFormSubscriber implements EventSubscriberInterface
             'configuration',
             $calculatorTypeName,
             $data,
-            array('auto_initialize' => false)
+            ['auto_initialize' => false]
         );
 
         $form->add($configurationField);

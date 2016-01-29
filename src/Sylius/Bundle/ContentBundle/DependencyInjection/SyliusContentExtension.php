@@ -34,9 +34,9 @@ class SyliusContentExtension extends AbstractResourceExtension
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $configFiles = array(
+        $configFiles = [
             // ...
-        );
+        ];
 
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);

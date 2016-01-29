@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\CoreBundle\Locale;
 
 use A2lix\TranslationFormBundle\Locale\LocaleProviderInterface as A2lixLocaleProviderInterface;
@@ -31,7 +40,7 @@ class A2lixTranslationLocaleProviderSpec extends ObjectBehavior
 
     function it_returns_list_of_locales(LocaleProviderInterface $syliusLocaleProvider)
     {
-        $listOfLocales = array('en_US', 'pl_PL');
+        $listOfLocales = ['en_US', 'pl_PL'];
 
         $syliusLocaleProvider->getAvailableLocales()->shouldBeCalled()->willReturn($listOfLocales);
 
@@ -49,6 +58,6 @@ class A2lixTranslationLocaleProviderSpec extends ObjectBehavior
     {
         $syliusLocaleContext->getDefaultLocale()->shouldBeCalled()->willReturn('pl_PL');
 
-        $this->getRequiredLocales()->shouldReturn(array('pl_PL'));
+        $this->getRequiredLocales()->shouldReturn(['pl_PL']);
     }
 }

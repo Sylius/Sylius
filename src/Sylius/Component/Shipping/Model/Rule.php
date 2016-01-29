@@ -29,7 +29,7 @@ class Rule implements RuleInterface
     /**
      * @var array
      */
-    protected $configuration = array();
+    protected $configuration = [];
 
     /**
      * @var ShippingMethodInterface

@@ -27,7 +27,7 @@ class RuleTypeSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $checkerRegistry)
     {
-        $this->beConstructedWith('Rule', array('sylius'), $checkerRegistry);
+        $this->beConstructedWith('Rule', ['sylius'], $checkerRegistry);
     }
 
     function it_is_initializable()
@@ -61,7 +61,7 @@ class RuleTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_should_add_rule_event_subscriber(
@@ -83,16 +83,16 @@ class RuleTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_should_define_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
-                'data_class'        => 'Rule',
-                'validation_groups' => array('sylius'),
-            ))
+            ->setDefaults([
+                'data_class' => 'Rule',
+                'validation_groups' => ['sylius'],
+            ])
             ->shouldBeCalled()
         ;
 

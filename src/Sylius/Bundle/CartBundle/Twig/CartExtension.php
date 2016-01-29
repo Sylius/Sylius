@@ -42,11 +42,11 @@ class CartExtension extends \Twig_Extension
      */
     public function getFunctions()
     {
-        return array(
-             new \Twig_SimpleFunction('sylius_cart_exists', array($this, 'hasCart')),
-             new \Twig_SimpleFunction('sylius_cart_get', array($this, 'getCurrentCart')),
-             new \Twig_SimpleFunction('sylius_cart_form', array($this, 'getItemFormView')),
-        );
+        return [
+             new \Twig_SimpleFunction('sylius_cart_exists', [$this, 'hasCart']),
+             new \Twig_SimpleFunction('sylius_cart_get', [$this, 'getCurrentCart']),
+             new \Twig_SimpleFunction('sylius_cart_form', [$this, 'getItemFormView']),
+        ];
     }
 
     /**
@@ -62,7 +62,7 @@ class CartExtension extends \Twig_Extension
     /**
      * Check if a cart exists.
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasCart()
     {
@@ -76,7 +76,7 @@ class CartExtension extends \Twig_Extension
      *
      * @return FormView
      */
-    public function getItemFormView(array $options = array())
+    public function getItemFormView(array $options = [])
     {
         return $this->helper->getItemFormView($options);
     }

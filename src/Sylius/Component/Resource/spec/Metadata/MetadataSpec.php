@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Resource\Metadata;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Component\Product\Model\Product;
@@ -27,28 +26,28 @@ class MetadataSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedThrough('fromAliasAndConfiguration', array(
+        $this->beConstructedThrough('fromAliasAndConfiguration', [
             'app.product',
-            array(
+            [
                 'driver' => 'doctrine/orm',
                 'templates' => 'SyliusProductBundle:Product',
-                'classes' => array(
+                'classes' => [
                     'model' => Product::class,
-                    'form' => array(
+                    'form' => [
                         'default' => ProductType::class,
                         'choice' => ResourceChoiceType::class,
-                        'autocomplete' => 'Sylius\Bundle\ResourceBundle\Type\ResourceAutocompleteType'
-                    )
-                )
-            )
-        ));
+                        'autocomplete' => 'Sylius\Bundle\ResourceBundle\Type\ResourceAutocompleteType',
+                    ],
+                ],
+            ],
+        ]);
     }
 
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Resource\Metadata\Metadata');
     }
-    
+
     function it_implements_metadata_interface()
     {
         $this->shouldImplement(MetadataInterface::class);
@@ -68,7 +67,7 @@ class MetadataSpec extends ObjectBehavior
     {
         $this->getName()->shouldReturn('product');
     }
-    
+
     function it_humanizes_simple_names()
     {
         $this->getHumanizedName()->shouldReturn('product');
@@ -76,7 +75,7 @@ class MetadataSpec extends ObjectBehavior
 
     function it_humanizes_more_complex_names()
     {
-        $this->beConstructedThrough('fromAliasAndConfiguration', array('app.product_option', array('driver' => 'doctrine/orm')));
+        $this->beConstructedThrough('fromAliasAndConfiguration', ['app.product_option', ['driver' => 'doctrine/orm']]);
 
         $this->getHumanizedName()->shouldReturn('product option');
     }
@@ -90,7 +89,7 @@ class MetadataSpec extends ObjectBehavior
     {
         $this->getDriver()->shouldReturn('doctrine/orm');
     }
-    
+
     function it_has_templates_namespace()
     {
         $this->getTemplatesNamespace()->shouldReturn('SyliusProductBundle:Product');
@@ -100,7 +99,7 @@ class MetadataSpec extends ObjectBehavior
     {
         $this->getParameter('driver')->shouldReturn('doctrine/orm');
     }
-    
+
     function it_checks_if_specific_parameter_exists()
     {
         $this->hasParameter('foo')->shouldReturn(false);
@@ -111,7 +110,7 @@ class MetadataSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('getParameter', array('foo'))
+            ->during('getParameter', ['foo'])
         ;
     }
 
@@ -124,7 +123,7 @@ class MetadataSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('getClass', array('foo'))
+            ->during('getClass', ['foo'])
         ;
     }
 

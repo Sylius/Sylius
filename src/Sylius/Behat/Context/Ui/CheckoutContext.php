@@ -74,15 +74,15 @@ class CheckoutContext extends FeatureContext
     public function iProceedSelectingOfflinePaymentMethod($paymentMethodName)
     {
         $checkoutAddressingPage = $this->getPage('Checkout\CheckoutAddressingStep')->open();
-        $addressingDetails = array(
+        $addressingDetails = [
             'firstName' => 'John',
             'lastName' => 'Doe',
             'country' => 'France',
             'street' => '0635 Myron Hollow Apt. 711',
             'city' => 'North Bridget',
             'postcode' => '93-554',
-            'phoneNumber' => '321123456'
-        );
+            'phoneNumber' => '321123456',
+        ];
         $checkoutAddressingPage->fillAddressingDetails($addressingDetails);
         $checkoutAddressingPage->pressButton('Continue');
 
@@ -127,7 +127,7 @@ class CheckoutContext extends FeatureContext
     private function openProductPage($productName)
     {
         /** @var ProductInterface $product */
-        $product = $this->productRepository->findOneBy(array('name' => $productName));
+        $product = $this->productRepository->findOneBy(['name' => $productName]);
         if (null === $product) {
             throw new \Exception('Store has no product with name "'.$productName.'".');
         }

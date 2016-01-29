@@ -21,7 +21,7 @@ interface AuthorizationCheckerInterface
     /**
      * @param string $permissionCode
      *
-     * @return boolean
+     * @return bool
      */
     public function isGranted($permissionCode);
 }

@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ThemeBundle\Translation\Finder;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Translation\Finder\OrderingTranslationFilesFinder;
 use Sylius\Bundle\ThemeBundle\Translation\Finder\TranslationFilesFinderInterface;

@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\MetadataBundle\Form\Type\Custom;
 
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\MetadataBundle\DynamicForm\DynamicFormBuilderInterface;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -29,7 +29,7 @@ class PageMetadataType extends AbstractResourceType
     /**
      * {@inheritdoc}
      *
-     * @var DynamicFormBuilderInterface $dynamicFormBuilder
+     * @var DynamicFormBuilderInterface
      */
     public function __construct($dataClass, array $validationGroups = [], DynamicFormBuilderInterface $dynamicFormBuilder)
     {
@@ -84,7 +84,7 @@ class PageMetadataType extends AbstractResourceType
                     return '';
                 }
 
-                return join(', ', $originalKeywords);
+                return implode(', ', $originalKeywords);
             },
             function ($submittedKeywords) {
                 $keywords = explode(',', $submittedKeywords);

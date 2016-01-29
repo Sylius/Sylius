@@ -39,8 +39,8 @@ class OrderItemQuantityDataMapperSpec extends ObjectBehavior
 
     function it_uses_property_path_data_mapper_while_mapping_data_to_forms($propertyPathDataMapper, FormInterface $form, OrderItemInterface $orderItem)
     {
-        $propertyPathDataMapper->mapDataToForms($orderItem, array($form))->shouldBeCalled();
+        $propertyPathDataMapper->mapDataToForms($orderItem, [$form])->shouldBeCalled();
 
-        $this->mapDataToForms($orderItem, array($form));
+        $this->mapDataToForms($orderItem, [$form]);
     }
 }

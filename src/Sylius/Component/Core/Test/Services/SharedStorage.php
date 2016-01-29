@@ -21,7 +21,7 @@ class SharedStorage implements SharedStorageInterface
     /**
      * @var array
      */
-    private $clipboard = array();
+    private $clipboard = [];
 
     /**
      * @var string|null

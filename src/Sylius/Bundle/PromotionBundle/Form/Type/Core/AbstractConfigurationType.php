@@ -27,7 +27,7 @@ abstract class AbstractConfigurationType extends AbstractResourceType
 
     public function __construct($dataClass, ServiceRegistryInterface $registry)
     {
-        parent::__construct($dataClass, array('Default'));
+        parent::__construct($dataClass, ['Default']);
 
         $this->registry = $registry;
     }
@@ -39,9 +39,9 @@ abstract class AbstractConfigurationType extends AbstractResourceType
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefined(array(
+        $resolver->setDefined([
             'configuration_type',
-        ));
+        ]);
     }
 
     /**

@@ -30,7 +30,7 @@ class RouteFactory implements RouteFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createRoute($path, array $defaults = array(), array $requirements = array(), array $options = array(), $host = '', $schemes = array(), $methods = array(), $condition = '')
+    public function createRoute($path, array $defaults = [], array $requirements = [], array $options = [], $host = '', $schemes = [], $methods = [], $condition = '')
     {
         return new Route($path, $defaults, $requirements, $options, $host, $schemes, $methods, $condition);
     }

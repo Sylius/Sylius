@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the Symfony package.
+ * This file is part of the Sylius package.
  *
- * (c) Fabien Potencier <fabien@symfony.com>
+ * (c) Paweł Jędrzejewski
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -35,7 +35,7 @@ class WebTestCase extends BaseWebTestCase
 
     protected function getTmpDirPath($testCase)
     {
-        return sys_get_temp_dir() . '/' . Kernel::VERSION . '/' . $testCase;
+        return sys_get_temp_dir().'/'.Kernel::VERSION.'/'.$testCase;
     }
 
     protected static function getKernelClass()

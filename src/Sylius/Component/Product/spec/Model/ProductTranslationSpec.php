@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Product\Model;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Product\Model\ProductTranslationInterface;
 
 /**
@@ -84,5 +83,4 @@ class ProductTranslationSpec extends ObjectBehavior
         $this->setMetaDescription('Super product');
         $this->getMetaDescription()->shouldReturn('Super product');
     }
-
 }

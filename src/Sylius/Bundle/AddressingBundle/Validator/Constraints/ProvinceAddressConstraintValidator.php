@@ -73,7 +73,7 @@ class ProvinceAddressConstraintValidator extends ConstraintValidator
     protected function isProvinceValid(AddressInterface $address)
     {
         $countryCode = $address->getCountryCode();
-        if (null === $country = $this->countryRepository->findOneBy(array('code' => $countryCode))) {
+        if (null === $country = $this->countryRepository->findOneBy(['code' => $countryCode])) {
             return true;
         }
 
@@ -85,7 +85,7 @@ class ProvinceAddressConstraintValidator extends ConstraintValidator
             return false;
         }
 
-        if (null === $province = $this->provinceRepository->findOneBy(array('code' => $address->getProvinceCode()))) {
+        if (null === $province = $this->provinceRepository->findOneBy(['code' => $address->getProvinceCode()])) {
             return false;
         }
 

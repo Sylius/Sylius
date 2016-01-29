@@ -38,9 +38,9 @@ class SyliusTaxonomyExtension extends AbstractResourceExtension
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $configFiles = array(
+        $configFiles = [
             'services.xml',
-        );
+        ];
 
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
@@ -48,27 +48,27 @@ class SyliusTaxonomyExtension extends AbstractResourceExtension
 
         $factoryDefinition = new Definition(Factory::class);
         $factoryDefinition->setArguments(
-            array(
-                new Parameter('sylius.model.taxonomy.class')
-            )
+            [
+                new Parameter('sylius.model.taxonomy.class'),
+            ]
         );
 
         $translatableFactoryDefinition = $container->getDefinition('sylius.factory.taxonomy');
         $taxonomyFactoryClass = $translatableFactoryDefinition->getClass();
         $translatableFactoryDefinition->setClass(TranslatableFactory::class);
         $translatableFactoryDefinition->setArguments(
-            array(
+            [
                 $factoryDefinition,
-                new Reference('sylius.translation.locale_provider')
-            )
+                new Reference('sylius.translation.locale_provider'),
+            ]
         );
 
         $decoratedTaxonomyFactoryDefinition = new Definition($taxonomyFactoryClass);
         $decoratedTaxonomyFactoryDefinition->setArguments(
-            array(
+            [
                 $translatableFactoryDefinition,
-                new Reference('sylius.factory.taxon')
-            )
+                new Reference('sylius.factory.taxon'),
+            ]
         );
 
         $container->setDefinition('sylius.factory.taxonomy', $decoratedTaxonomyFactoryDefinition);

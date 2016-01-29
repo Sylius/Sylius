@@ -28,16 +28,16 @@ class ChartConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('type', 'choice', array(
+            ->add('type', 'choice', [
                 'label' => 'sylius.form.report.chart.type',
                 'choices' => ChartRenderer::getChartTypes(),
-            ))
-            ->add('template', 'choice', array(
+            ])
+            ->add('template', 'choice', [
                 'label' => 'sylius.form.report.renderer.template',
-                'choices' => array(
+                'choices' => [
                     'SyliusReportBundle:Chart:default.html.twig' => 'Default',
-                ),
-            ))
+                ],
+            ])
         ;
     }
 

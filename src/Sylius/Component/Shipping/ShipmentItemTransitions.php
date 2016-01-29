@@ -15,10 +15,10 @@ class ShipmentItemTransitions
 {
     const GRAPH = 'sylius_shipment_item';
 
-    const SYLIUS_HOLD      = 'hold';
-    const SYLIUS_RELEASE   = 'release';
+    const SYLIUS_HOLD = 'hold';
+    const SYLIUS_RELEASE = 'release';
     const SYLIUS_BACKORDER = 'backorder';
-    const SYLIUS_SHIP      = 'ship';
-    const SYLIUS_RETURN    = 'return';
-    const SYLIUS_CANCEL    = 'cancel';
+    const SYLIUS_SHIP = 'ship';
+    const SYLIUS_RETURN = 'return';
+    const SYLIUS_CANCEL = 'cancel';
 }

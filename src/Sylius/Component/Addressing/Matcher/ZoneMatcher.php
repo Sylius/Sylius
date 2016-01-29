@@ -36,11 +36,11 @@ class ZoneMatcher implements ZoneMatcherInterface
      *
      * @var array
      */
-    protected $priorities = array(
+    protected $priorities = [
         ZoneInterface::TYPE_PROVINCE,
         ZoneInterface::TYPE_COUNTRY,
         ZoneInterface::TYPE_ZONE,
-    );
+    ];
 
     /**
      * @param RepositoryInterface $zoneRepository
@@ -55,7 +55,7 @@ class ZoneMatcher implements ZoneMatcherInterface
      */
     public function match(AddressInterface $address, $scope = null)
     {
-        $zones = array();
+        $zones = [];
 
         /* @var ZoneInterface $zone */
         foreach ($availableZones = $this->getZones($scope) as $zone) {
@@ -78,7 +78,7 @@ class ZoneMatcher implements ZoneMatcherInterface
      */
     public function matchAll(AddressInterface $address, $scope = null)
     {
-        $zones = array();
+        $zones = [];
 
         foreach ($this->getZones($scope) as $zone) {
             if ($this->addressBelongsToZone($address, $zone)) {
@@ -116,8 +116,7 @@ class ZoneMatcher implements ZoneMatcherInterface
      */
     protected function addressBelongsToZoneMember(AddressInterface $address, ZoneMemberInterface $member)
     {
-        switch ($type = $member->getBelongsTo()->getType())
-        {
+        switch ($type = $member->getBelongsTo()->getType()) {
             case ZoneInterface::TYPE_PROVINCE:
                 return null !== $address->getProvinceCode() && $address->getProvinceCode() === $member->getCode();
 
@@ -145,7 +144,7 @@ class ZoneMatcher implements ZoneMatcherInterface
             return $this->zoneRepository->findAll();
         }
 
-        return $this->zoneRepository->findBy(array('scope' => $scope));
+        return $this->zoneRepository->findBy(['scope' => $scope]);
     }
 
     /**
@@ -155,6 +154,6 @@ class ZoneMatcher implements ZoneMatcherInterface
      */
     protected function getZoneByCode($code)
     {
-        return $this->zoneRepository->findOneBy(array('code' => $code));
+        return $this->zoneRepository->findOneBy(['code' => $code]);
     }
 }

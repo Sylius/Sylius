@@ -50,7 +50,7 @@ class MoneyContext extends DefaultContext
         $repository = $this->getRepository('currency');
         $factory = $this->getFactory('currency');
 
-        if (null === $currency = $this->getRepository('currency')->findOneBy(array('code' => $code))) {
+        if (null === $currency = $this->getRepository('currency')->findOneBy(['code' => $code])) {
             $currency = $factory->createNew();
             $currency->setCode($code);
             $currency->setExchangeRate($rate);

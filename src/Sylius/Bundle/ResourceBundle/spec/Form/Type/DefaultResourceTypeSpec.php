@@ -12,9 +12,8 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Bundle\ResourceBundle\Form\Type\DefaultResourceType;
 use Sylius\Bundle\ResourceBundle\Form\Builder\DefaultFormBuilderInterface;
+use Sylius\Bundle\ResourceBundle\Form\Type\DefaultResourceType;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -54,13 +53,12 @@ class DefaultResourceTypeSpec extends ObjectBehavior
         MetadataInterface $metadata,
         FormBuilderInterface $formBuilder,
         DefaultFormBuilderInterface $defaultFormBuilder
-    )
-    {
-        $defaultFormBuilder->build($metadata, $formBuilder, array())->shouldBeCalled();
+    ) {
+        $defaultFormBuilder->build($metadata, $formBuilder, [])->shouldBeCalled();
 
-        $this->buildForm($formBuilder, array());
+        $this->buildForm($formBuilder, []);
     }
-    
+
     function it_generates_name_from_metadata(MetadataInterface $metadata)
     {
         $this->getName()->shouldReturn('sylius_order_item');

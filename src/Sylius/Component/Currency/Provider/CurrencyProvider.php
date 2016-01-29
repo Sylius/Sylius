@@ -37,7 +37,7 @@ class CurrencyProvider implements CurrencyProviderInterface
      */
     public function getAvailableCurrencies()
     {
-        return $this->currencyRepository->findBy(array('enabled' => true));
+        return $this->currencyRepository->findBy(['enabled' => true]);
     }
 
     /**

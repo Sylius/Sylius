@@ -47,6 +47,6 @@ class ResourceFormFactory implements ResourceFormFactoryInterface
             return $this->formFactory->create($formType, $resource);
         }
 
-        return $this->formFactory->createNamed('', $formType, $resource, array('csrf_protection' => false));
+        return $this->formFactory->createNamed('', $formType, $resource, ['csrf_protection' => false]);
     }
 }

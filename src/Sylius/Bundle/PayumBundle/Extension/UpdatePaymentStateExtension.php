@@ -1,13 +1,13 @@
 <?php
 
 /*
-* This file is part of the Sylius package.
-*
-* (c) Paweł Jędrzejewski
-*
-* For the full copyright and license information, please view the LICENSE
-* file that was distributed with this source code.
-*/
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Sylius\Bundle\PayumBundle\Extension;
 
@@ -36,21 +36,21 @@ class UpdatePaymentStateExtension implements ExtensionInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function onPreExecute(Context $context)
     {
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function onExecute(Context $context)
     {
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function onPostExecute(Context $context)
     {

@@ -33,14 +33,14 @@ class OrderController extends FOSRestController
      */
     public function indexAction()
     {
-        $orders = $this->getOrderRepository()->findBy(array('customer' => $this->getCustomer()), array('updatedAt' => 'desc'));
+        $orders = $this->getOrderRepository()->findBy(['customer' => $this->getCustomer()], ['updatedAt' => 'desc']);
 
         $view = $this
             ->view()
             ->setTemplate('SyliusWebBundle:Frontend/Account:Order/index.html.twig')
-            ->setData(array(
+            ->setData([
                 'orders' => $orders,
-            ))
+            ])
         ;
 
         return $this->handleView($view);
@@ -63,9 +63,9 @@ class OrderController extends FOSRestController
         $view = $this
             ->view()
             ->setTemplate('SyliusWebBundle:Frontend/Account:Order/show.html.twig')
-            ->setData(array(
+            ->setData([
                 'order' => $order,
-            ))
+            ])
         ;
 
         return $this->handleView($view);
@@ -78,6 +78,7 @@ class OrderController extends FOSRestController
      * @param string  $number
      *
      * @return Response
+     *
      * @throws NotFoundHttpException
      * @throws AccessDeniedException
      */
@@ -89,29 +90,29 @@ class OrderController extends FOSRestController
             throw $this->createNotFoundException('The invoice can not yet be generated.');
         }
 
-        $html = $this->renderView('SyliusWebBundle:Frontend/Account:Order/invoice.html.twig', array(
-            'order' => $order
-        ));
+        $html = $this->renderView('SyliusWebBundle:Frontend/Account:Order/invoice.html.twig', [
+            'order' => $order,
+        ]);
 
         $generator = $this
             ->get('knp_snappy.pdf')
             ->getInternalGenerator();
 
-        $generator->setOptions(array(
+        $generator->setOptions([
             'footer-left' => '[title]',
             'footer-right' => '[page]/[topage]',
             'footer-line' => true,
             'footer-font-name' => '"Helvetica Neue",​Helvetica,​Arial,​sans-serif',
             'footer-font-size' => 10,
-        ));
+        ]);
 
         return new Response(
             $generator->getOutputFromHtml($html),
             200,
-            array(
-                'Content-Type'        => 'application/pdf',
-                'Content-Disposition' => 'attachment; filename="' . $order->getNumber() . '.pdf"'
-            )
+            [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'attachment; filename="'.$order->getNumber().'.pdf"',
+            ]
         );
     }
 
@@ -136,7 +137,7 @@ class OrderController extends FOSRestController
     protected function findOrderOr404($number)
     {
         /* @var $order OrderInterface */
-        if (null === $order = $this->getOrderRepository()->findOneBy(array('number' => $number))) {
+        if (null === $order = $this->getOrderRepository()->findOneBy(['number' => $number])) {
             throw $this->createNotFoundException('The order does not exist.');
         }
 

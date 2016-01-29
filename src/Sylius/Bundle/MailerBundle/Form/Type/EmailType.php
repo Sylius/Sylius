@@ -27,27 +27,27 @@ class EmailType extends AbstractResourceType
     {
         $builder
             ->addEventSubscriber(new AddCodeFormSubscriber())
-            ->add('enabled', 'checkbox', array(
+            ->add('enabled', 'checkbox', [
                 'required' => false,
-                'label'    => 'sylius.form.email.enabled',
-            ))
-            ->add('senderName', 'text', array(
+                'label' => 'sylius.form.email.enabled',
+            ])
+            ->add('senderName', 'text', [
                 'label' => 'sylius.form.email.sender_name',
-            ))
-            ->add('senderAddress', 'email', array(
+            ])
+            ->add('senderAddress', 'email', [
                 'label' => 'sylius.form.email.sender_address',
-            ))
-            ->add('subject', 'text', array(
+            ])
+            ->add('subject', 'text', [
                 'label' => 'sylius.form.email.subject',
-            ))
-            ->add('content', 'textarea', array(
+            ])
+            ->add('content', 'textarea', [
                 'label' => 'sylius.form.email.content',
-            ))
-            ->add('template', 'sylius_email_template_choice', array(
-                'label'       => 'sylius.form.email.template',
-                'required'    => false,
+            ])
+            ->add('template', 'sylius_email_template_choice', [
+                'label' => 'sylius.form.email.template',
+                'required' => false,
                 'empty_value' => 'sylius.form.email.no_template',
-            ))
+            ])
         ;
     }
 

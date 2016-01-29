@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\User\Security;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\User\Model\CredentialsHolderInterface;
 use Sylius\Component\User\Security\UserPasswordEncoderInterface;
 

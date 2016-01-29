@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
- 
+
 namespace spec\Sylius\Bundle\CoreBundle\Test\Services;
 
 use Behat\Mink\Session;
@@ -47,7 +47,7 @@ class SecurityServiceSpec extends ObjectBehavior
         Session $minkSession
     ) {
         $userRoles = ['ROLE_USER'];
-        $userRepository->findOneBy(array('username' => 'sylius@example.com'))->willReturn($user);
+        $userRepository->findOneBy(['username' => 'sylius@example.com'])->willReturn($user);
         $user->getRoles()->willReturn($userRoles);
         $user->getPassword()->willReturn('xyz');
         $user->serialize()->willReturn('serialized_user');
@@ -69,7 +69,7 @@ class SecurityServiceSpec extends ObjectBehavior
         Session $minkSession
     ) {
         $userRoles = ['ROLE_USER'];
-        $userRepository->findOneBy(array('username' => 'sylius@example.com'))->willReturn(null);
+        $userRepository->findOneBy(['username' => 'sylius@example.com'])->willReturn(null);
         $user->getRoles()->willReturn($userRoles);
         $user->getPassword()->willReturn('xyz');
         $user->serialize()->willReturn('serialized_user');
@@ -80,6 +80,6 @@ class SecurityServiceSpec extends ObjectBehavior
         $session->getId()->willReturn('xyzc123');
 
         $minkSession->setCookie('MOCKEDSID', 'xyzc123')->shouldNotBeCalled();
-        $this->shouldThrow(new \InvalidArgumentException(sprintf('There is no user with email sylius@example.com')))->during('logIn', array('sylius@example.com', 'default', $minkSession));
+        $this->shouldThrow(new \InvalidArgumentException(sprintf('There is no user with email sylius@example.com')))->during('logIn', ['sylius@example.com', 'default', $minkSession]);
     }
 }

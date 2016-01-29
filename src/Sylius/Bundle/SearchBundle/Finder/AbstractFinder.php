@@ -67,7 +67,7 @@ abstract class AbstractFinder implements FinderInterface
     /**
      * @var string[]
      */
-    protected $targetTypes = array();
+    protected $targetTypes = [];
 
     /**
      * @var ChannelContextInterface

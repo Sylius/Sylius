@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ThemeBundle\Loader\Filesystem;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Loader\ConfigurationProviderInterface;
 use Sylius\Bundle\ThemeBundle\Loader\Filesystem\FilesystemConfigurationProvider;
 use Sylius\Bundle\ThemeBundle\Loader\LoaderInterface;

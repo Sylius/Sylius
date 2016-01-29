@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
- 
+
 namespace spec\Sylius\Component\Core\Test\Services;
- 
+
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -50,7 +50,7 @@ class SharedStorageSpec extends ObjectBehavior
     {
         $this->setCurrentResource('channel', $channel);
 
-        $this->shouldThrow(new \RuntimeException('This key is already used, if you want override set override flag'))->during('setCurrentResource', array('channel', $channel1));
+        $this->shouldThrow(new \RuntimeException('This key is already used, if you want override set override flag'))->during('setCurrentResource', ['channel', $channel1]);
     }
 
     function it_overrides_existing_resource_key(ChannelInterface $channel, ChannelInterface $channel1)
@@ -65,13 +65,13 @@ class SharedStorageSpec extends ObjectBehavior
     {
         $this->setCurrentResource('channel', $channel);
 
-        $this->shouldThrow(new \RuntimeException('Clipboard is not empty, if you want override set override flag'))->during('setClipboard', array(array()));
+        $this->shouldThrow(new \RuntimeException('Clipboard is not empty, if you want override set override flag'))->during('setClipboard', [[]]);
     }
 
     function it_overrides_clipboard(ChannelInterface $channel)
     {
         $this->setCurrentResource('channel', $channel);
 
-        $this->setClipboard(array(), true);
+        $this->setClipboard([], true);
     }
 }

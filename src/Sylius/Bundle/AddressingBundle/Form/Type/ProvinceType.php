@@ -27,12 +27,12 @@ class ProvinceType extends AbstractResourceType
     {
         $builder
             ->addEventSubscriber(new AddCodeFormSubscriber())
-            ->add('name', 'text', array(
+            ->add('name', 'text', [
                 'label' => 'sylius.form.province.name',
-            ))
-            ->add('abbreviation', 'text', array(
+            ])
+            ->add('abbreviation', 'text', [
                 'label' => false,
-            ))
+            ])
         ;
     }
 

@@ -19,10 +19,10 @@ namespace Sylius\Component\Pricing\Calculator;
 class Calculators
 {
     // Standard pricing.
-    const STANDARD     = 'standard';
+    const STANDARD = 'standard';
 
     // Time based discount.
-    const TIME_BASED   = 'time_based';
+    const TIME_BASED = 'time_based';
 
     // Volume based pricing.
     const VOLUME_BASED = 'volume_based';

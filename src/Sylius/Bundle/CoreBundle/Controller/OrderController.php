@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\Controller;
 
-use Gedmo\Loggable\Entity\LogEntry;
 use FOS\RestBundle\View\View;
+use Gedmo\Loggable\Entity\LogEntry;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
@@ -24,7 +24,7 @@ class OrderController extends ResourceController
 {
     /**
      * @param Request $request
-     * @param integer $id
+     * @param int $id
      *
      * @return Response
      *
@@ -51,10 +51,10 @@ class OrderController extends ResourceController
         $paginator->getNbResults();
         $entityManager->getFilters()->enable('softdeleteable');
 
-        return $this->container->get('templating')->renderResponse('SyliusWebBundle:Backend/Order:indexByCustomer.html.twig', array(
+        return $this->container->get('templating')->renderResponse('SyliusWebBundle:Backend/Order:indexByCustomer.html.twig', [
             'customer' => $customer,
-            'orders'   => $paginator
-        ));
+            'orders' => $paginator,
+        ]);
     }
 
     /**
@@ -96,22 +96,22 @@ class OrderController extends ResourceController
 
         $repository = $this->get('doctrine')->getManager()->getRepository(LogEntry::class);
 
-        $items = array();
+        $items = [];
         foreach ($order->getItems() as $item) {
             $items[] = $repository->getLogEntries($item);
         }
 
         $view = View::create()
             ->setTemplate($configuration->getTemplate('history.html'))
-            ->setData(array(
+            ->setData([
                 'order' => $order,
-                'logs'  => array(
-                    'order'            => $repository->getLogEntries($order),
-                    'order_items'      => $items,
-                    'billing_address'  => $repository->getLogEntries($order->getBillingAddress()),
+                'logs' => [
+                    'order' => $repository->getLogEntries($order),
+                    'order_items' => $items,
+                    'billing_address' => $repository->getLogEntries($order->getBillingAddress()),
                     'shipping_address' => $repository->getLogEntries($order->getShippingAddress()),
-                ),
-            ))
+                ],
+            ])
         ;
 
         return $this->viewHandler->handle($configuration, $view);
