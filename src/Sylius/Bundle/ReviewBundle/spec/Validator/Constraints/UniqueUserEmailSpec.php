@@ -11,18 +11,18 @@
 
 namespace spec\Sylius\Bundle\ReviewBundle\Validator\Constraints;
 
-use Doctrine\ORM\EntityRepository;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Validator\Constraint;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class UniqueCustomerEmailSpec extends ObjectBehavior
+class UniqueUserEmailSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ReviewBundle\Validator\Constraints\UniqueCustomerEmail');
+        $this->shouldHaveType('Sylius\Bundle\ReviewBundle\Validator\Constraints\UniqueUserEmail');
     }
 
     function it_extends_contraint_class()
@@ -35,9 +35,9 @@ class UniqueCustomerEmailSpec extends ObjectBehavior
         $this->message->shouldReturn('sylius.review.author.already_exists');
     }
 
-    function it_is_validate_by_unique_customer_email_validator()
+    function it_is_validate_by_unique_user_email_validator()
     {
-        $this->validatedBy()->shouldReturn('unique_customer_email_validator');
+        $this->validatedBy()->shouldReturn('unique_user_email_validator');
     }
 
     function it_has_targets()

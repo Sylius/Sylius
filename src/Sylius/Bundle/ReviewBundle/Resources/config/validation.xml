@@ -42,7 +42,7 @@
                 </option>
             </constraint>
         </property>
-        <constraint name="Sylius\Bundle\ReviewBundle\Validator\Constraints\UniqueCustomerEmail" >
+        <constraint name="Sylius\Bundle\ReviewBundle\Validator\Constraints\UniqueUserEmail" >
             <option name="groups">sylius_review</option>
         </constraint>
     </class>

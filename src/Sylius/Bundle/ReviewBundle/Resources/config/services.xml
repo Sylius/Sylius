@@ -22,9 +22,11 @@
         </service>
 
         <!--Validators-->
-        <service id="sylius.review.validator.unique_customer_email" class="Sylius\Bundle\ReviewBundle\Validator\Constraints\UniqueCustomerEmailValidator">
-            <argument type="service" id="sylius.repository.customer" />
-            <tag name="validator.constraint_validator" alias="unique_customer_email_validator" />
+        <service id="sylius.review.validator.unique_user_email" class="Sylius\Bundle\ReviewBundle\Validator\Constraints\UniqueUserEmailValidator">
+            <argument type="service" id="sylius.repository.user" />
+            <argument type="service" id="security.token_storage" />
+            <argument type="service" id="security.authorization_checker" />
+            <tag name="validator.constraint_validator" alias="unique_user_email_validator" />
         </service>
 
         <!--Listeners-->

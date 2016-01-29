@@ -51,9 +51,8 @@ class ReviewType extends AbstractResourceType
                 'expanded' => true,
                 'multiple' => false,
             ))
-            ->add('author', 'text', array(
-                'label'    => 'sylius.form.review.author',
-                'required' => false,
+            ->add('author', 'sylius_customer_guest', array(
+                'label' => false,
             ))
             ->add('title', 'text', array(
                 'label'    => 'sylius.form.review.title',
@@ -62,8 +61,6 @@ class ReviewType extends AbstractResourceType
                 'label'    => 'sylius.form.review.comment',
             ))
         ;
-
-        $builder->get('author')->addModelTransformer(new ReviewerTransformer());
     }
 
     /**

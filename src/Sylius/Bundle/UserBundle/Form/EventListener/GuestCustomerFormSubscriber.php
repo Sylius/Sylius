@@ -70,8 +70,11 @@ class GuestCustomerFormSubscriber implements EventSubscriberInterface
         $rawData = $event->getData();
         $form = $event->getForm();
 
-        $customer = $this->getCustomerFromProperSource($rawData, $form);
+        if (null == $rawData) {
+            $rawData = array();
+        }
 
+        $customer = $this->getCustomerFromProperSource($rawData, $form);
         $form->setData($customer);
     }
 

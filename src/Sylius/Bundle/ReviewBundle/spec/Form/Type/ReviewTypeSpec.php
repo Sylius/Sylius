@@ -50,9 +50,8 @@ class ReviewTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('author', 'text', array(
-                'label'    => 'sylius.form.review.author',
-                'required' => false,
+            ->add('author', 'sylius_customer_guest', array(
+                'label'    => false,
             ))
             ->willReturn($builder)
             ->shouldBeCalled()
@@ -73,9 +72,6 @@ class ReviewTypeSpec extends ObjectBehavior
             ->willReturn($builder)
             ->shouldBeCalled()
         ;
-
-        $builder->get('author')->willReturn($builder)->shouldBeCalled();
-        $builder->addModelTransformer(Argument::type('Sylius\Bundle\ReviewBundle\Form\Transformer\ReviewerTransformer'))->willReturn($builder)->shouldBeCalled();
 
         $this->buildForm($builder, array('rating_steps' => 5));
     }

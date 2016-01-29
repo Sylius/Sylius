@@ -28,8 +28,6 @@ class ProductReviewAdminType extends ProductReviewType
     {
         parent::buildForm($builder, $options);
 
-        $builder->get('author')->resetModelTransformers();
-
         $builder
             ->add('reviewSubject', 'entity', array(
                 'class'    => 'Sylius\Component\Core\Model\Product',
