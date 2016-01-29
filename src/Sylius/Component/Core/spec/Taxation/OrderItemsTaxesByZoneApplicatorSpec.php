@@ -91,8 +91,8 @@ class OrderItemsTaxesByZoneApplicatorSpec extends ObjectBehavior
 
         $orderItem->getUnits()->willReturn($units);
 
-        $units->get(0)->willReturn($unit1);
-        $units->get(1)->willReturn($unit2);
+        $units->current()->willReturn($unit1, $unit2);
+        $units->next()->shouldBeCalledTimes(2);
 
         $distributor->distribute(100, 2)->willReturn(array(50, 50));
 
@@ -167,8 +167,6 @@ class OrderItemsTaxesByZoneApplicatorSpec extends ObjectBehavior
         \Iterator $iterator,
         OrderInterface $order,
         OrderItemInterface $orderItem,
-        OrderItemUnitInterface $unit1,
-        OrderItemUnitInterface $unit2,
         ProductInterface $product,
         TaxRateInterface $taxRate,
         ZoneInterface $zone
@@ -194,9 +192,8 @@ class OrderItemsTaxesByZoneApplicatorSpec extends ObjectBehavior
         $taxRate->isIncludedInPrice()->willReturn(false);
 
         $orderItem->getUnits()->willReturn($units);
-
-        $units->get(0)->willReturn($unit1);
-        $units->get(1)->willReturn($unit2);
+        $units->current()->shouldNotBeCalled();
+        $units->next()->shouldNotBeCalled();
 
         $distributor->distribute(0, 2)->willReturn(array(0, 0));
 
