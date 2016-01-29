@@ -14,8 +14,8 @@ namespace spec\Sylius\Behat\Context\Ui;
 use Behat\Mink\Mink;
 use Behat\Mink\WebAssert;
 use PhpSpec\ObjectBehavior;
+use SensioLabs\Behat\PageObjectExtension\PageObject\Factory;
 use Sylius\Behat\Context\FeatureContext;
-use Sylius\Behat\Extension\Factory\PageObjectFactory;
 use Sylius\Behat\Page\Cart\CartSummaryPage;
 
 /**
@@ -23,7 +23,7 @@ use Sylius\Behat\Page\Cart\CartSummaryPage;
  */
 class CartContextSpec extends ObjectBehavior
 {
-    function let(PageObjectFactory $pageObjectFactory, Mink $mink)
+    function let(Factory $pageObjectFactory, Mink $mink)
     {
         $this->setPageObjectFactory($pageObjectFactory);
         $this->setMink($mink);

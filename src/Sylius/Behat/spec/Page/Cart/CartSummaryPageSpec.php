@@ -11,12 +11,10 @@
 
 namespace spec\Sylius\Behat\Page\Cart;
 
-use Behat\Mink\Driver\DriverInterface;
-use Behat\Mink\Selector\SelectorsHandler;
 use Behat\Mink\Session;
 use PhpSpec\ObjectBehavior;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Factory;
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\PageObjectExtension\Page\SymfonyPage;
 use Symfony\Component\Routing\RouterInterface;
 
 /**

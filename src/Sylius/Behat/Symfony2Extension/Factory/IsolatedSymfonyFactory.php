@@ -9,14 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Extension\Factory;
+namespace Sylius\Behat\Symfony2Extension\Factory;
 
+use Behat\Mink\Driver\BrowserKitDriver;
 use Behat\MinkExtension\ServiceContainer\Driver\DriverFactory;
-use Sylius\Behat\Extension\SyliusPageObjectExtension;
+use Behat\Symfony2Extension\Driver\KernelDriver;
+use Sylius\Behat\Symfony2Extension\ServiceContainer\Symfony2Extension;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
-
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -51,15 +52,21 @@ final class IsolatedSymfonyFactory implements DriverFactory
      */
     public function buildDriver(array $config)
     {
-        if (!class_exists('Behat\Mink\Driver\BrowserKitDriver')) {
-            throw new \RuntimeException(
-                'Install MinkBrowserKitDriver in order to use the symfony2 driver.'
-            );
-        }
+        $this->assertMinkBrowserKitDriverIsAvailable();
 
-        return new Definition('Behat\Symfony2Extension\Driver\KernelDriver', array(
-            new Reference(SyliusPageObjectExtension::DRIVER_KERNEL_ID),
+        return new Definition(KernelDriver::class, [
+            new Reference(Symfony2Extension::DRIVER_KERNEL_ID),
             '%mink.base_url%',
-        ));
+        ]);
+    }
+
+    /**
+     * @throws \RuntimeException If MinkBrowserKitDriver is not available
+     */
+    private function assertMinkBrowserKitDriverIsAvailable()
+    {
+        if (!class_exists(BrowserKitDriver::class)) {
+            throw new \RuntimeException('Install MinkBrowserKitDriver in order to use the symfony2 driver.');
+        }
     }
 }
