@@ -165,6 +165,36 @@ class ChannelContext extends DefaultContext
         return $channel;
     }
 
+    /**
+     * @Given /^I am on the "([^""]*)" hostname$/
+     */
+    public function iAmOnHostname($hostname)
+    {
+        $channelContext = $this->getService('sylius.context.channel');
+
+        $channelContext->setCurrentHostname($hostname);
+        $channelContext->getChannel();
+    }
+
+    /**
+     * @Then /^I should be on the "([^""]*)" channel$/
+     */
+    public function iShouldBeOnChannel($channel)
+    {
+        $channelContext = $this->getService('sylius.context.channel');
+
+        $channelRepository = $this->getRepository('channel');
+        $channel = $channelRepository->findOneBy(array('code' => $channel));
+
+        $currentChannel = $channelContext->getChannel();
+
+        if ($channel === $currentChannel) {
+            return true;
+        }
+
+        throw new \InvalidArgumentException('Channel does not match the hostname!');
+    }
+
     private function configureChannel(ChannelInterface $channel, $localeCodes = null, $currencyCodes = null, $shippingMethodNames = null, $paymentMethodNames = null, $taxonomyNames = null)
     {
         if ($shippingMethodNames) {
