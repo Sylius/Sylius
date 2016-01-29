@@ -34,7 +34,10 @@ class AttributeController extends ResourceController
         $view = View::create()
             ->setTemplate($template)
             ->setTemplateVar($this->metadata->getPluralName())
-            ->setData(array('attributeTypes' => $this->get('sylius.registry.attribute_type')->all()))
+            ->setData(array(
+                'attributeTypes' => $this->get('sylius.registry.attribute_type')->all(),
+                'metadata' => $this->metadata,
+            ))
         ;
 
         return $this->viewHandler->handle($configuration, $view);
@@ -81,6 +84,10 @@ class AttributeController extends ResourceController
             $forms[$attribute->getId()] = $form->createView();
         }
 
-        return $this->render('SyliusAttributeBundle::attributeValueForms.html.twig', array('forms' => $forms, 'count' => $request->query->get('count')));
+        return $this->render('SyliusAttributeBundle::attributeValueForms.html.twig', array(
+            'forms' => $forms,
+            'count' => $request->query->get('count'),
+            'metadata' => $this->metadata,
+        ));
     }
 }
