@@ -10,6 +10,7 @@ Feature: Cart shipping without taxes
         And there is user "john@example.com" identified by "password123"
         And store has a product "PHP T-Shirt" priced at "€100.00"
         And store has "DHL" shipping method with "€10.00" fee
+        And store allows paying offline
         And I am logged in as "john@example.com"
 
     Scenario: Adding proper shipping fee

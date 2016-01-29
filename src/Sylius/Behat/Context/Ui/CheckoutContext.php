@@ -107,15 +107,16 @@ class CheckoutContext extends FeatureContext
     }
 
     /**
-     * @When /^I proceed selecting "([^"]+)" shipping method$/
+     * @When /^I proceed selecting "([^"]*)" shipping method$/
+     * @When /^I proceed selecting "([^"]*)" shipping method and "([^"]*)" as shipping country$/
      */
-    public function iProceedSelectingShippingMethod($shippingMethod)
+    public function iProceedSelectingShippingMethodAndShippingCountry($shippingMethod, $shippingCountry = null)
     {
         $checkoutAddressingPage = $this->getPage('Checkout\CheckoutAddressingStep')->open();
         $addressingDetails = [
             'firstName' => 'John',
             'lastName' => 'Doe',
-            'country' => 'France',
+            'country' => (null === $shippingCountry) ? 'France' : $shippingCountry,
             'street' => '0635 Myron Hollow Apt. 711',
             'city' => 'North Bridget',
             'postcode' => '93-554',
@@ -126,6 +127,9 @@ class CheckoutContext extends FeatureContext
 
         $checkoutShippingPage = $this->getPage('Checkout\CheckoutShippingStep');
         $checkoutShippingPage->selectShippingMethod($shippingMethod);
+
+        $checkoutPaymentPage = $this->getPage('Checkout\CheckoutPaymentStep');
+        $checkoutPaymentPage->selectPaymentMethod('Offline');
     }
 
     /**
