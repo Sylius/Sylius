@@ -133,7 +133,7 @@ class CheckoutContext extends FeatureContext
     }
 
     /**
-     * @When /^I proceed selecting "([^"]*)" shipping method$/
+     * @When /^I proceed selecting "([^"]+)" shipping method$/
      */
     public function iProceedSelectingShippingMethod($shippingMethod)
     {
@@ -148,11 +148,10 @@ class CheckoutContext extends FeatureContext
             'phoneNumber' => '321123456'
         );
         $checkoutAddressingPage->fillAddressingDetails($addressingDetails);
-        $checkoutAddressingPage->pressButton('Continue');
+        $checkoutAddressingPage->forward();
 
         $checkoutShippingPage = $this->getPage('Checkout\CheckoutShippingStep');
-        $checkoutShippingPage->pressRadio($shippingMethod);
-        $checkoutShippingPage->pressButton('Continue');
+        $checkoutShippingPage->selectShippingMethod($shippingMethod);
     }
 
     /**
