@@ -19,7 +19,7 @@
     </thead>
     <tbody>
         {% for customer in customers %}
-        <tr id="{{ customer.id }}" data-customer="{{ customer.email }}" {% if customer.deleted %} class="danger"{% endif %}>
+        <tr id="{{ customer.id }}" data-customer="{{ customer.email }}">
             <td>{{ customer.id }}</td>
             <td>{{ customer.firstName }}</td>
             <td>{{ customer.lastName }}</td>
@@ -37,17 +37,13 @@
             <td>
                 <div class="pull-right">
                     {{ buttons.show(path('sylius_backend_customer_show', {'id': customer.id})) }}
-                    {% if not customer.deleted %}
-                        {% if sylius_is_granted('sylius.customer.update') %}
-                            {{ buttons.edit(path('sylius_backend_customer_update', {'id': customer.id})) }}
-                        {% else  %}
-                            Not allowed to edit!
-                        {% endif %}
-                        {% if customer.user is null %}
-                            {{ buttons.delete(path('sylius_backend_customer_delete', {'id': customer.id})) }}
-                        {% elseif customer.user.id is not same as(app.user.id) %}
-                            {{ buttons.delete(path('sylius_backend_customer_delete', {'id': customer.id})) }}
-                        {% endif %}
+                    {% if sylius_is_granted('sylius.customer.update') %}
+                        {{ buttons.edit(path('sylius_backend_customer_update', {'id': customer.id})) }}
+                    {% else  %}
+                        Not allowed to edit!
+                    {% endif %}
+                    {% if customer.user is not null and customer.user.id is not same as(app.user.id)%}
+                        {{ buttons.delete(path('sylius_backend_user_delete', {'id': customer.user.id})) }}
                     {% endif %}
                 </div>
             </td>
@@ -78,7 +74,7 @@
     </thead>
     <tbody>
         {% for customer in customers %}
-        <tr id="{{ customer.id }}" data-customer="{{ customer.email }}" {% if customer.deleted %} class="danger"{% endif %}>
+        <tr id="{{ customer.id }}" data-customer="{{ customer.email }}">
             <td>
                 {{ customer.fullname }}<br>
                 <a href="{{ path('sylius_backend_customer_show', {'id': customer.id}) }}">
@@ -93,13 +89,9 @@
             <td>
                 <div class="pull-right">
                     {{ buttons.show(path('sylius_backend_customer_show', {'id': customer.id})) }}
-                    {% if not customer.deleted %}
-                        {{ buttons.edit(path('sylius_backend_customer_update', {'id': customer.id})) }}
-                        {% if customer.user is null %}
-                            {{ buttons.delete(path('sylius_backend_customer_delete', {'id': customer.id})) }}
-                        {% elseif customer.user.id is not same as(app.user.id) %}
-                            {{ buttons.delete(path('sylius_backend_customer_delete', {'id': customer.id})) }}
-                        {% endif %}
+                    {{ buttons.edit(path('sylius_backend_customer_update', {'id': customer.id})) }}
+                    {% if customer.user is not null and customer.user.id is not same as(app.user.id)%}
+                        {{ buttons.delete(path('sylius_backend_user_delete', {'id': customer.user.id})) }}
                     {% endif %}
                 </div>
             </td>

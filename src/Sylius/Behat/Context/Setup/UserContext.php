@@ -157,4 +157,35 @@ final class UserContext implements Context
 
         return $countryCode;
     }
+
+    /**
+     * @Given there is an administrator account
+     */
+    public function thereIsAdministratorAccount()
+    {
+        /** @var UserInterface $user */
+        $user = $this->userFactory->createNew();
+        $customer = $this->customerFactory->createNew();
+        $customer->setFirstName('Admin');
+        $customer->setLastName('Admin');
+
+        $user->setCustomer($customer);
+        $user->setUsername('Administrator Account');
+        $user->setEmail('admin@test.com');
+        $user->setPlainPassword('pswd1234');
+        $user->addRole('ROLE_ADMINISTRATION_ACCESS');
+
+        $this->sharedStorage->setCurrentResource('administrator', $user);
+        $this->userRepository->add($user);
+    }
+
+    /**
+     * @Given the account of :email was deleted
+     */
+    public function accountWasDeleted($email)
+    {
+        $user = $this->userRepository->findOneBy(array('username' => $email));
+
+        $this->userRepository->remove($user);
+    }
 }

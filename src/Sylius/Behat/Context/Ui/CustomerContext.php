@@ -12,17 +12,14 @@
 namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\User\LoginPage;
 use Sylius\Behat\Page\Customer\CustomerShowPage;
-use Sylius\Behat\Page\Customer\CustomersIndexPage;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class UserContext implements Context
+class CustomerContext implements Context
 {
     /**
      * @var SharedStorageInterface
@@ -35,69 +32,36 @@ class UserContext implements Context
     private $customerRepository;
 
     /**
-     * @var CustomersIndexPage
-     */
-    private $customersIndexPage;
-
-    /**
      * @var CustomerShowPage
      */
     private $customerShowPage;
 
     /**
-     * @var LoginPage
-     */
-    private $loginPage;
-
-    /**
      * @param SharedStorageInterface $sharedStorage
      * @param RepositoryInterface $customerRepository
-     * @param CustomersIndexPage $customersIndexPage
      * @param CustomerShowPage $customerShowPage
-     * @param LoginPage $loginPage
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         RepositoryInterface $customerRepository,
-        CustomersIndexPage $customersIndexPage,
-        CustomerShowPage $customerShowPage,
-        LoginPage $loginPage
+        CustomerShowPage $customerShowPage
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->customerRepository = $customerRepository;
-        $this->customersIndexPage = $customersIndexPage;
         $this->customerShowPage = $customerShowPage;
-        $this->loginPage = $loginPage;
     }
 
     /**
-     * @Given /^I log in as "([^"]*)" with "([^"]*)" password$/
+     * @Then there should be customer with email :email
      */
-    public function iLogInAs($login, $password)
-    {
-        $this->loginPage->open();
-        $this->loginPage->logIn($login, $password);
-    }
-
-    /**
-     * @When I delete the account of :email
-     */
-    public function iDeleteAccount($email)
-    {
-        $customersIndexPage = $this->customersIndexPage;
-        $customersIndexPage->open();
-        $customersIndexPage->deleteUser($email);
-    }
-
-    /**
-     * @Then there should be no account with email :email
-     */
-    public function thereShouldBeNoAccount($email)
+    public function thereShouldBeCustomerIdentifiedBy($email)
     {
         $customer = $this->customerRepository->findOneBy(array('email' =>$email));
 
         $this->customerShowPage->open(array('id' => $customer->getId()));
 
-        $this->customerShowPage->isThereAccountOf($email);
+        if (true === $this->customerShowPage->isThisCustomerRegistered($email)) {
+            throw new \InvalidArgumentException('This customer is a registered user, when it should not.');
+        }
     }
 }

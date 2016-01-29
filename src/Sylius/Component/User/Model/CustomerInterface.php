@@ -21,7 +21,6 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 interface CustomerInterface extends
     UserAwareInterface,
     TimestampableInterface,
-    SoftDeletableInterface,
     ResourceInterface
 {
     const UNKNOWN_GENDER = 'u';

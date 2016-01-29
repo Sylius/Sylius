@@ -28,7 +28,6 @@ interface UserInterface extends
     CredentialsHolderInterface,
     ResourceInterface,
     \Serializable,
-    SoftDeletableInterface,
     TimestampableInterface,
     ToggleableInterface
 {

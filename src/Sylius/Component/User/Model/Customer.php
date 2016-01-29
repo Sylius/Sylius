@@ -21,7 +21,7 @@ use Sylius\Component\Resource\Model\TimestampableTrait;
  */
 class Customer implements CustomerInterface, GroupableInterface
 {
-    use SoftDeletableTrait, TimestampableTrait;
+    use TimestampableTrait;
 
     /**
      * @var mixed

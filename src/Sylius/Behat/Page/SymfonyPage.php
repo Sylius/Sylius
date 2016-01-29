@@ -37,7 +37,9 @@ abstract class SymfonyPage extends Page
     }
 
     /**
-     * {@inheritdoc}
+     * @param array $urlParameters
+     *
+     * @return string
      */
     protected function getUrl(array $urlParameters = [])
     {

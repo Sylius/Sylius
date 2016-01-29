@@ -24,7 +24,7 @@ use Sylius\Component\Resource\Model\ToggleableTrait;
  */
 class User implements UserInterface
 {
-    use SoftDeletableTrait, TimestampableTrait, ToggleableTrait;
+    use TimestampableTrait, ToggleableTrait;
 
     /**
      * @var mixed

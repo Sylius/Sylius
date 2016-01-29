@@ -61,7 +61,7 @@ final class SecurityContext implements Context
     }
 
     /**
-     * @Given I am logged in as :email
+     * @Given /^I am logged in as "([^""]*)"$/
      */
     public function iAmLoggedInAs($email)
     {
