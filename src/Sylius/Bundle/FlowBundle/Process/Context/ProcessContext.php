@@ -251,7 +251,7 @@ class ProcessContext implements ProcessContextInterface
      */
     public function getStepHistory()
     {
-        return $this->storage->get('history', array());
+        return $this->storage->getData('history', []);
     }
 
     /**
@@ -259,7 +259,7 @@ class ProcessContext implements ProcessContextInterface
      */
     public function setStepHistory(array $history)
     {
-        $this->storage->set('history', $history);
+        $this->storage->setData('history', $history);
     }
 
     /**
