@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Taxation;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\CoreBundle\Distributor\IntegerDistributorInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
@@ -85,7 +86,8 @@ class OrderItemsTaxesByZoneApplicator implements OrderItemsTaxesByZoneApplicator
                     continue;
                 }
 
-                $this->addAdjustment($units->get($key), $tax, $taxRate->getLabel(), $taxRate->isIncludedInPrice());
+                $unit = $this->getNextUnit($units);
+                $this->addAdjustment($unit, $tax, $taxRate->getLabel(), $taxRate->isIncludedInPrice());
             }
         }
     }
@@ -100,5 +102,21 @@ class OrderItemsTaxesByZoneApplicator implements OrderItemsTaxesByZoneApplicator
     {
         $unitTaxAdjustment = $this->adjustmentFactory->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, $label, $taxAmount, $included);
         $unit->addAdjustment($unitTaxAdjustment);
+    }
+
+    /**
+     * @param Collection $units
+     *
+     * @return OrderItemUnitInterface
+     */
+    private function getNextUnit(Collection $units)
+    {
+        $unit = $units->current();
+        if (null === $unit) {
+            throw new \InvalidArgumentException('The number of tax items is greater than number of units.');
+        }
+        $units->next();
+
+        return $unit;
     }
 }
