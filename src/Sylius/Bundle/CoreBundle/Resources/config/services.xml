@@ -110,7 +110,7 @@
         <parameter key="sylius.form.type.data_fetcher.user_registration.class">Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\UserRegistrationType</parameter>
 
         <parameter key="sylius.authorization_checker.toggleable.class">Sylius\Bundle\CoreBundle\Authorization\ToggleableAuthorizationChecker</parameter>
-        <parameter key="sylius.translation.locale_provider.contextual.class">Sylius\Bundle\CoreBundle\Locale\TranslationLocaleProvider</parameter>
+        <parameter key="sylius.translation.locale_provider.contextual.class">Sylius\Component\Translation\Provider\TranslationLocaleProvider</parameter>
     </parameters>
 
     <services>

@@ -9,10 +9,9 @@
 * file that was distributed with this source code.
 */
 
-namespace Sylius\Bundle\CoreBundle\Locale;
+namespace Sylius\Component\Translation\Provider;
 
 use Sylius\Component\Locale\Context\LocaleContextInterface;
-use Sylius\Component\Translation\Provider\LocaleProviderInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
