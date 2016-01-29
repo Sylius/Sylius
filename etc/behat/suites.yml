@@ -1,0 +1,34 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+imports:
+    - suites/account.yml
+    - suites/addressing.yml
+    - suites/cart.yml
+    - suites/channels.yml
+    - suites/checkout.yml
+    - suites/contact.yml
+    - suites/currencies.yml
+    - suites/dashboard.yml
+    - suites/emails.yml
+    - suites/homepage.yml
+    - suites/i18n.yml
+    - suites/inventory.yml
+    - suites/localization.yml
+    - suites/metadata.yml
+    - suites/oauth.yml
+    - suites/orders.yml
+    - suites/payments.yml
+    - suites/pricing.yml
+    - suites/products.yml
+    - suites/promotions.yml
+    - suites/reports.yml
+    - suites/search.yml
+    - suites/security.yml
+    - suites/settings.yml
+    - suites/shipping.yml
+    - suites/taxation.yml
+    - suites/taxonomies.yml
+    - suites/ui-cart.yml
+    - suites/ui-checkout.yml
+    - suites/users.yml

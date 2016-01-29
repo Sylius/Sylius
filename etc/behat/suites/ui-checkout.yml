@@ -1,0 +1,42 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        ui-checkout:
+            contexts:
+                - Sylius\Behat\Context\Setup\ChannelContext:
+                    defaultFranceChannelFactory: "@sylius.behat.default_france_channel_factory"
+                    sharedStorage: "@sylius.behat.shared_storage"
+                - Sylius\Behat\Context\Setup\CurrencyContext:
+                    currencyRepository: "@sylius.repository.currency"
+                    sharedStorage: "@sylius.behat.shared_storage"
+                    currencyFactory: "@sylius.factory.currency"
+                - Sylius\Behat\Context\Setup\PaymentContext:
+                    paymentMethodRepository: "@sylius.repository.payment_method"
+                    sharedStorage: "@sylius.behat.shared_storage"
+                    paymentMethodFactory: "@sylius.factory.payment_method"
+                - Sylius\Behat\Context\Setup\SecurityContext:
+                    sharedStorage: "@sylius.behat.shared_storage"
+                    securityService: "@sylius.behat.security"
+                - Sylius\Behat\Context\Setup\UserContext:
+                    userRepository: "@sylius.repository.user"
+                    sharedStorage: "@sylius.behat.shared_storage"
+                    userFactory: "@sylius.factory.user"
+                    customerFactory: "@sylius.factory.customer"
+                - Sylius\Behat\Context\Setup\ProductContext:
+                    productRepository: "@sylius.repository.product"
+                    sharedStorage: "@sylius.behat.shared_storage"
+                    productFactory: "@sylius.factory.product"
+                - Sylius\Behat\Context\Ui\CheckoutContext:
+                    sharedStorage: "@sylius.behat.shared_storage"
+                    productRepository: "@sylius.repository.product"
+                    orderRepository: "@sylius.repository.order"
+                - Sylius\Behat\Context\Hook\DoctrineORMContext:
+                    entityManager: "@doctrine.orm.entity_manager"
+                - Sylius\Behat\Context\Setup\ShippingContext:
+                    shippingMethodRepository: "@sylius.repository.shipping_method"
+                    shippingMethodFactory: "@sylius.factory.shipping_method"
+                    sharedStorage: "@sylius.behat.shared_storage"
+            filters:
+                tags: "@ui-checkout"
