@@ -15,7 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\DependencyInjection\Compiler\ThemeRepositoryPass;
 use Sylius\Bundle\ThemeBundle\Loader\ConfigurationProviderInterface;
-use Sylius\Bundle\ThemeBundle\Model\Theme;
 use Symfony\Component\Config\Resource\ResourceInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
