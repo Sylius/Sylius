@@ -18,10 +18,15 @@ use Sylius\Behat\SymfonyPageObjectExtension\Page\SymfonyPage;
  */
 class CheckoutFinalizeStep extends SymfonyPage
 {
+    public function confirmOrder()
+    {
+        $this->getDocument()->pressButton('Place order');
+    }
+
     /**
      * @return string
      */
-    public function getRouteName()
+    protected function getRouteName()
     {
         return 'sylius_checkout_finalize';
     }

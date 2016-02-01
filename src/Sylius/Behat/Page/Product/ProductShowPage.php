@@ -25,7 +25,7 @@ class ProductShowPage extends SymfonyPage
      *
      * @return ProductShowPage
      */
-    public function openSpecificProductPage(ProductInterface $product)
+    public function open(ProductInterface $product)
     {
         $url = $this->router->generate($product);
         $this->getSession()->visit($url);
@@ -35,7 +35,7 @@ class ProductShowPage extends SymfonyPage
 
     public function addToCart()
     {
-        $this->pressButton('Add to cart');
+        $this->getDocument()->pressButton('Add to cart');
     }
 
     /**
@@ -43,15 +43,14 @@ class ProductShowPage extends SymfonyPage
      */
     public function addToCartWithQuantity($quantity)
     {
-        $this->fillField('Quantity', $quantity);
-        $this->pressButton('Add to cart');
+        $this->getDocument()->fillField('Quantity', $quantity);
+        $this->getDocument()->pressButton('Add to cart');
     }
 
     /**
-     * @return null
+     * {@inheritdoc}
      */
     public function getRouteName()
     {
-        return null;
     }
 }

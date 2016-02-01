@@ -11,16 +11,19 @@
 
 namespace Sylius\Behat\Context\Ui;
 
-use Sylius\Behat\Context\FeatureContext;
-use Sylius\Behat\Page\Product\ProductShowPage;
+use Behat\Behat\Context\Context;
+use Sylius\Behat\Page\Checkout\CheckoutAddressingStep;
+use Sylius\Behat\Page\Checkout\CheckoutFinalizeStep;
+use Sylius\Behat\Page\Checkout\CheckoutPaymentStep;
+use Sylius\Behat\Page\Checkout\CheckoutShippingStep;
+use Sylius\Behat\Page\Checkout\CheckoutThankYouPage;
+use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
-use Sylius\Component\Product\Model\ProductInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class CheckoutContext extends FeatureContext
+final class CheckoutContext implements Context
 {
     /**
      * @var SharedStorageInterface
@@ -28,57 +31,52 @@ class CheckoutContext extends FeatureContext
     private $sharedStorage;
 
     /**
-     * @var RepositoryInterface
+     * @var CheckoutAddressingStep
      */
-    private $productRepository;
+    private $checkoutAddressingStep;
 
     /**
-     * @var RepositoryInterface
+     * @var CheckoutShippingStep
      */
-    private $orderRepository;
+    private $checkoutShippingStep;
+
+    /**
+     * @var CheckoutPaymentStep
+     */
+    private $checkoutPaymentStep;
+
+    /**
+     * @var CheckoutFinalizeStep
+     */
+    private $checkoutFinalizeStep;
+
+    /**
+     * @var CheckoutThankYouPage
+     */
+    private $checkoutThankYouPage;
 
     /**
      * @param SharedStorageInterface $sharedStorage
-     * @param RepositoryInterface $productRepository
-     * @param RepositoryInterface $orderRepository
+     * @param CheckoutAddressingStep $checkoutAddressingStep
+     * @param CheckoutShippingStep $checkoutShippingStep
+     * @param CheckoutPaymentStep $checkoutPaymentStep
+     * @param CheckoutFinalizeStep $checkoutFinalizeStep
+     * @param CheckoutThankYouPage $checkoutThankYouPage
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        RepositoryInterface $productRepository,
-        RepositoryInterface $orderRepository
+        CheckoutAddressingStep $checkoutAddressingStep,
+        CheckoutShippingStep $checkoutShippingStep,
+        CheckoutPaymentStep $checkoutPaymentStep,
+        CheckoutFinalizeStep $checkoutFinalizeStep,
+        CheckoutThankYouPage $checkoutThankYouPage
     ) {
         $this->sharedStorage = $sharedStorage;
-        $this->productRepository = $productRepository;
-        $this->orderRepository = $orderRepository;
-    }
-
-    /**
-     * @Given I added product :name to the cart
-     * @When I add product :name to the cart
-     * @When I have product :name in the cart
-     */
-    public function iAddProductToTheCart($name)
-    {
-        $productShowPage = $this->openProductPage($name);
-        $productShowPage->addToCart();
-    }
-
-    /**
-     * @When /^I add (\d+) products "([^"]+)" to the cart$/
-     */
-    public function iAddProductsToTheCart($quantity, $name)
-    {
-        $productShowPage = $this->openProductPage($name);
-        $productShowPage->addToCartWithQuantity($quantity);
-    }
-
-    /**
-     * @Given /^I remove product "([^"]+)" from the cart$/
-     */
-    public function iRemoveProductFromTheCart($productName)
-    {
-        $cartSummaryPage = $this->getPage('Cart\CartSummaryPage')->open();
-        $cartSummaryPage->removeProduct($productName);
+        $this->checkoutAddressingStep = $checkoutAddressingStep;
+        $this->checkoutShippingStep = $checkoutShippingStep;
+        $this->checkoutPaymentStep = $checkoutPaymentStep;
+        $this->checkoutFinalizeStep = $checkoutFinalizeStep;
+        $this->checkoutThankYouPage = $checkoutThankYouPage;
     }
 
     /**
@@ -86,8 +84,8 @@ class CheckoutContext extends FeatureContext
      */
     public function iProceedSelectingOfflinePaymentMethod($paymentMethodName)
     {
-        $checkoutAddressingPage = $this->getPage('Checkout\CheckoutAddressingStep')->open();
-        $addressingDetails = [
+        $this->checkoutAddressingStep->open();
+        $this->checkoutAddressingStep->fillAddressingDetails([
             'firstName' => 'John',
             'lastName' => 'Doe',
             'country' => 'France',
@@ -96,21 +94,20 @@ class CheckoutContext extends FeatureContext
             'postcode' => '93-554',
             'phoneNumber' => '321123456',
         ];
-        $checkoutAddressingPage->fillAddressingDetails($addressingDetails);
-        $checkoutAddressingPage->forward();
+        $this->checkoutAddressingStep->continueCheckout();
 
-        $checkoutShippingPage = $this->getPage('Checkout\CheckoutShippingStep');
-        $checkoutShippingPage->selectShippingMethod('Free');
+        $this->checkoutShippingStep->selectShippingMethod('Free');
+        $this->checkoutShippingStep->continueCheckout();
 
-        $checkoutPaymentPage = $this->getPage('Checkout\CheckoutPaymentStep');
-        $checkoutPaymentPage->selectPaymentMethod($paymentMethodName);
+        $this->checkoutPaymentStep->selectPaymentMethod($paymentMethodName);
+        $this->checkoutPaymentStep->continueCheckout();
     }
 
     /**
      * @When /^I proceed selecting "([^"]+)" shipping method$/
      * @Given /^I chose "([^"]*)" shipping method$/
      */
-    public function iProceedSelectingShippingMethod($shippingMethod)
+    public function iProceedSelectingShippingMethod($shippingMethodName)
     {
         $checkoutAddressingPage = $this->getPage('Checkout\CheckoutAddressingStep')->open();
         $addressingDetails = [
@@ -126,16 +123,16 @@ class CheckoutContext extends FeatureContext
         $checkoutAddressingPage->forward();
 
         $checkoutShippingPage = $this->getPage('Checkout\CheckoutShippingStep');
-        $checkoutShippingPage->selectShippingMethod($shippingMethod);
+        $checkoutShippingPage->selectShippingMethod($shippingMethodName);
     }
 
     /**
      * @When /^I change shipping method to "([^"]*)"$/
      */
-    public function iChangeShippingMethod($shippingMethod)
+    public function iChangeShippingMethod($shippingMethodName)
     {
         $checkoutShippingPage = $this->getPage('Checkout\CheckoutShippingStep')->open();
-        $checkoutShippingPage->selectShippingMethod($shippingMethod);
+        $checkoutShippingPage->selectShippingMethod($shippingMethodName);
     }
 
     /**
@@ -143,9 +140,7 @@ class CheckoutContext extends FeatureContext
      */
     public function iConfirmMyOrder()
     {
-        $checkoutFinalizePage = $this->getPage('Checkout\CheckoutFinalizeStep');
-        $checkoutFinalizePage->assertRoute();
-        $checkoutFinalizePage->clickLink('Place order');
+        $this->checkoutFinalizeStep->confirmOrder();
     }
 
     /**
@@ -153,37 +148,10 @@ class CheckoutContext extends FeatureContext
      */
     public function iShouldSeeTheThankYouPage()
     {
+        /** @var UserInterface $user */
         $user = $this->sharedStorage->getCurrentResource('user');
         $customer = $user->getCustomer();
-        $thankYouPage = $this->getPage('Checkout\CheckoutThankYouPage');
-        $thankYouPage->assertRoute();
-        $this->assertSession()->elementTextContains('css', '#thanks', sprintf('Thank you %s', $customer->getFullName()));
-    }
 
-    /**
-     * @Given /^I change "([^"]+)" quantity to (\d+)$/
-     */
-    public function iChangeQuantityTo($productName, $quantity)
-    {
-        $cartSummaryPage = $this->getPage('Cart\CartSummaryPage')->open();
-        $cartSummaryPage->changeQuantity($productName, $quantity);
-    }
-
-    /**
-     * @param $productName
-     *
-     * @return ProductShowPage
-     *
-     * @throws \Exception
-     */
-    private function openProductPage($productName)
-    {
-        /** @var ProductInterface $product */
-        $product = $this->productRepository->findOneBy(['name' => $productName]);
-        if (null === $product) {
-            throw new \Exception('Store has no product with name "'.$productName.'".');
-        }
-
-        return $this->getPage('Product\ProductShowPage')->openSpecificProductPage($product);
+        expect($this->checkoutThankYouPage->hasThankYouMessageFor($customer->getFullName()))->toBe(true);
     }
 }

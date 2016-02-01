@@ -19,19 +19,25 @@ use Sylius\Behat\SymfonyPageObjectExtension\Page\SymfonyPage;
 class CheckoutShippingStep extends SymfonyPage
 {
     /**
-     * @return string
-     */
-    public function getRouteName()
-    {
-        return 'sylius_checkout_shipping';
-    }
-
-    /**
      * @param string $shippingMethod
      */
     public function selectShippingMethod($shippingMethod)
     {
-        $this->pressRadio($shippingMethod);
-        $this->pressButton('Continue');
+        $radio = $this->getDocument()->findField($shippingMethod);
+
+        $this->getDocument()->fillField($radio->getAttribute('name'), $radio->getAttribute('value'));
+    }
+
+    public function continueCheckout()
+    {
+        $this->getDocument()->pressButton('Continue');
+    }
+
+    /**
+     * @return string
+     */
+    protected function getRouteName()
+    {
+        return 'sylius_checkout_shipping';
     }
 }

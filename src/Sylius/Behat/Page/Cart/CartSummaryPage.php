@@ -19,6 +19,34 @@ use Sylius\Behat\SymfonyPageObjectExtension\Page\SymfonyPage;
 class CartSummaryPage extends SymfonyPage
 {
     /**
+     * @var array
+     */
+    protected $elements = [
+        'grand total' => '#cart-summary td:contains("Grand total")',
+        'tax total' => '#cart-summary td:contains("Tax total")',
+    ];
+
+    /**
+     * @return string
+     */
+    public function getGrandTotal()
+    {
+        $grandTotalElement = $this->getElement('grand total');
+
+        return trim(str_replace('Grand total:', '', $grandTotalElement->getText()));
+    }
+
+    /**
+     * @return string
+     */
+    public function getTaxTotal()
+    {
+        $taxTotalElement = $this->getElement('grand total');
+
+        return trim(str_replace('Tax total:', '', $taxTotalElement->getText()));
+    }
+
+    /**
      * @return string
      */
     public function getRouteName()

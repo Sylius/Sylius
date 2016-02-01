@@ -19,9 +19,28 @@ use Sylius\Behat\SymfonyPageObjectExtension\Page\SymfonyPage;
 class CheckoutThankYouPage extends SymfonyPage
 {
     /**
+     * @var array
+     */
+    protected $elements = [
+        'thank you message' => '#thanks',
+    ];
+
+    /**
+     * @param string $name
+     *
+     * @return bool
+     */
+    public function hasThankYouMessageFor($name)
+    {
+        $thankYouMessage = $this->getElement('thank you message')->getText();
+
+        return false !== strpos($thankYouMessage, sprintf('Thank you %s', $name));
+    }
+
+    /**
      * @return string
      */
-    public function getRouteName()
+    protected function getRouteName()
     {
         return 'sylius_checkout_thank_you';
     }
