@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\UserBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Bundle\UserBundle\Form\EventListener\CustomerRegistrationFormListener;
-use Sylius\Bundle\UserBundle\Form\EventListener\UserRegistrationFormListener;
+use Sylius\Bundle\UserBundle\Form\EventSubscriber\CustomerRegistrationFormSubscriber;
+use Sylius\Bundle\UserBundle\Form\EventSubscriber\UserRegistrationFormSubscriber;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -52,8 +52,8 @@ class CustomerSimpleRegistrationType extends AbstractResourceType
             ->add('user', 'sylius_user_registration', [
                 'label' => false,
             ])
-            ->addEventSubscriber(new CustomerRegistrationFormListener($this->customerRepository))
-            ->addEventSubscriber(new UserRegistrationFormListener())
+            ->addEventSubscriber(new CustomerRegistrationFormSubscriber($this->customerRepository))
+            ->addEventSubscriber(new UserRegistrationFormSubscriber())
             ->setDataLocked(false)
         ;
     }

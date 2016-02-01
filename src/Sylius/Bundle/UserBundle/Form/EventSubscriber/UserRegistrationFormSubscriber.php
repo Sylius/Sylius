@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\UserBundle\Form\EventListener;
+namespace Sylius\Bundle\UserBundle\Form\EventSubscriber;
 
 use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormEvents;
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class UserRegistrationFormListener implements EventSubscriberInterface
+class UserRegistrationFormSubscriber implements EventSubscriberInterface
 {
     /**
      * {@inheritdoc}
