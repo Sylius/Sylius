@@ -11,22 +11,22 @@
 
 namespace spec\Sylius\Behat\Context\Ui;
 
-use Behat\Mink\Mink;
-use Behat\Mink\WebAssert;
+use Behat\Behat\Context\Context;
 use PhpSpec\ObjectBehavior;
-use SensioLabs\Behat\PageObjectExtension\PageObject\Factory;
-use Sylius\Behat\Context\FeatureContext;
+use Sylius\Behat\Context\Ui\CartContext;
 use Sylius\Behat\Page\Cart\CartSummaryPage;
+use Sylius\Behat\Page\Product\ProductShowPage;
 
 /**
+ * @mixin CartContext
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class CartContextSpec extends ObjectBehavior
 {
-    function let(Factory $pageObjectFactory, Mink $mink)
+    public function let(ProductShowPage $productShowPage, CartSummaryPage $cartSummaryPage)
     {
-        $this->setPageObjectFactory($pageObjectFactory);
-        $this->setMink($mink);
+        $this->beConstructedWith($productShowPage, $cartSummaryPage);
     }
 
     function it_is_initializable()
@@ -34,29 +34,23 @@ class CartContextSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Behat\Context\Ui\CartContext');
     }
 
-    function it_is_feature_context()
+    function it_is_a_context()
     {
-        $this->shouldHaveType(FeatureContext::class);
+        $this->shouldImplement(Context::class);
     }
 
-    function it_checks_if_cart_has_given_total($pageObjectFactory, $mink, CartSummaryPage $cartSummaryPage, WebAssert $assert)
+    function it_checks_if_cart_has_given_total(CartSummaryPage $cartSummaryPage)
     {
-        $pageObjectFactory->createPage('Cart\CartSummaryPage')->willReturn($cartSummaryPage);
         $cartSummaryPage->open()->shouldBeCalled();
-
-        $mink->assertSession(null)->willReturn($assert);
-        $assert->elementTextContains('css', '#cart-summary', 'Grand total: $100.00')->shouldBeCalled();
+        $cartSummaryPage->getGrandTotal()->willReturn('$100.00');
 
         $this->myCartTotalShouldBe('$100.00');
     }
 
-    function it_checks_if_cart_has_given_tax_total($pageObjectFactory, $mink, CartSummaryPage $cartSummaryPage, WebAssert $assert)
+    function it_checks_if_cart_has_given_tax_total(CartSummaryPage $cartSummaryPage)
     {
-        $pageObjectFactory->createPage('Cart\CartSummaryPage')->willReturn($cartSummaryPage);
         $cartSummaryPage->open()->shouldBeCalled();
-
-        $mink->assertSession(null)->willReturn($assert);
-        $assert->elementTextContains('css', '#cart-summary', 'Tax total: $50.00')->shouldBeCalled();
+        $cartSummaryPage->getTaxTotal()->willReturn('$50.00');
 
         $this->myCartTaxesShouldBe('$50.00');
     }

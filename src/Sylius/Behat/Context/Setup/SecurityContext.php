@@ -11,14 +11,15 @@
 
 namespace Sylius\Behat\Context\Setup;
 
-use Sylius\Behat\Context\FeatureContext;
+use Behat\Behat\Context\Context;
+use Behat\Mink\Mink;
+use Behat\MinkExtension\Context\MinkAwareContext;
 use Sylius\Bundle\CoreBundle\Test\Services\SecurityServiceInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class SecurityContext extends FeatureContext
+final class SecurityContext implements Context, MinkAwareContext
 {
     /**
      * @var SecurityServiceInterface
@@ -26,18 +27,16 @@ class SecurityContext extends FeatureContext
     private $securityService;
 
     /**
-     * @var SharedStorageInterface
+     * @var Mink
      */
-    private $sharedStorage;
+    private $mink;
 
     /**
-     * @param SharedStorageInterface $sharedStorage
      * @param SecurityServiceInterface $securityService
      */
-    public function __construct(SharedStorageInterface $sharedStorage, SecurityServiceInterface $securityService)
+    public function __construct(SecurityServiceInterface $securityService)
     {
         $this->securityService = $securityService;
-        $this->sharedStorage = $sharedStorage;
     }
 
     /**
@@ -45,6 +44,21 @@ class SecurityContext extends FeatureContext
      */
     public function iAmLoggedInAs($email)
     {
-        $this->securityService->logIn($email, 'main', $this->getSession());
+        $this->securityService->logIn($email, 'main', $this->mink->getSession());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setMink(Mink $mink)
+    {
+        $this->mink = $mink;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setMinkParameters(array $parameters)
+    {
     }
 }

@@ -63,7 +63,6 @@ final class CartContext implements Context
         $this->cartSummaryPage->removeProduct($productName);
     }
 
-
     /**
      * @Given I change :productName quantity to :quantity
      */

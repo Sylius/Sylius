@@ -13,6 +13,8 @@ namespace Sylius\Behat\PageObjectExtension\ServiceContainer;
 
 use Behat\Testwork\ServiceContainer\Extension;
 use Behat\Testwork\ServiceContainer\ExtensionManager;
+use Sylius\Behat\PageObjectExtension\Context\Argument\PageObjectArgumentResolver;
+use Sylius\Behat\PageObjectExtension\PageObject\Factory\DefaultFactory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -55,5 +57,14 @@ final class PageObjectExtension implements Extension
      */
     public function process(ContainerBuilder $container)
     {
+        $container
+            ->findDefinition('sensio_labs.page_object_extension.page_factory')
+            ->setClass(DefaultFactory::class)
+        ;
+
+        $container
+            ->findDefinition('sensio_labs.page_object_extension.context.argument_resolver.page_object')
+            ->setClass(PageObjectArgumentResolver::class)
+        ;
     }
 }

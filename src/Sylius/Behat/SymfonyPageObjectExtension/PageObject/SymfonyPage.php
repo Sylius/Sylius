@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\SymfonyPageObjectExtension\Page;
+namespace Sylius\Behat\SymfonyPageObjectExtension\PageObject;
 
 use Behat\Mink\Session;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Factory;
-use Sylius\Behat\PageObjectExtension\Page\Page;
+use Sylius\Behat\PageObjectExtension\PageObject\Page;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -40,9 +40,7 @@ abstract class SymfonyPage extends Page
     }
 
     /**
-     * @param array $urlParameters
-     *
-     * @return string
+     * {@inheritdoc}
      */
     protected function getUrl(array $urlParameters = [])
     {
@@ -51,6 +49,15 @@ abstract class SymfonyPage extends Page
         }
 
         return $this->router->generate($this->getRouteName(), $urlParameters, true);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * Not used by Symfony page.
+     */
+    protected function getPath()
+    {
     }
 
     abstract protected function getRouteName();

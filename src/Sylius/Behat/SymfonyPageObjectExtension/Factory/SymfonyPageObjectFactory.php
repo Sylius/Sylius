@@ -14,7 +14,7 @@ namespace Sylius\Behat\SymfonyPageObjectExtension\Factory;
 use Behat\Mink\Mink;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Factory;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Factory\ClassNameResolver;
-use Sylius\Behat\SymfonyPageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\SymfonyPageObjectExtension\PageObject\SymfonyPage;
 use Symfony\Cmf\Component\Routing\ChainRouterInterface;
 
 /**

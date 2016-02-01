@@ -14,7 +14,7 @@ namespace spec\Sylius\Behat\Page\Cart;
 use Behat\Mink\Session;
 use PhpSpec\ObjectBehavior;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Factory;
-use Sylius\Behat\SymfonyPageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\SymfonyPageObjectExtension\PageObject\SymfonyPage;
 use Symfony\Component\Routing\RouterInterface;
 
 /**

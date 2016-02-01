@@ -74,6 +74,7 @@ class ProductContext implements Context
     /**
      * @Transform /^product "([^"]+)"$/
      * @Transform /^"([^"]+)" product$/
+     * @Transform :product
      */
     public function castProductNameToProduct($productName)
     {

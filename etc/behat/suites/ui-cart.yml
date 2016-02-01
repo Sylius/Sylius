@@ -5,52 +5,64 @@ default:
     suites:
         ui-cart:
             contexts:
+                - Sylius\Behat\Context\Hook\DoctrineORMContext:
+                    entityManager: "@doctrine.orm.entity_manager"
+
                 - Sylius\Behat\Context\Setup\ChannelContext:
                     defaultFranceChannelFactory: "@sylius.behat.default_france_channel_factory"
                     sharedStorage: "@sylius.behat.shared_storage"
+
                 - Sylius\Behat\Context\Setup\CurrencyContext:
                     currencyRepository: "@sylius.repository.currency"
                     sharedStorage: "@sylius.behat.shared_storage"
                     currencyFactory: "@sylius.factory.currency"
+
                 - Sylius\Behat\Context\Setup\PaymentContext:
                     paymentMethodRepository: "@sylius.repository.payment_method"
                     sharedStorage: "@sylius.behat.shared_storage"
                     paymentMethodFactory: "@sylius.factory.payment_method"
+
                 - Sylius\Behat\Context\Setup\SecurityContext:
-                    sharedStorage: "@sylius.behat.shared_storage"
                     securityService: "@sylius.behat.security"
+
                 - Sylius\Behat\Context\Setup\UserContext:
                     userRepository: "@sylius.repository.user"
                     sharedStorage: "@sylius.behat.shared_storage"
                     userFactory: "@sylius.factory.user"
                     customerFactory: "@sylius.factory.customer"
                     addressFactory: "@sylius.factory.address"
+
                 - Sylius\Behat\Context\Setup\ProductContext:
                     sharedStorage: "@sylius.behat.shared_storage"
                     productRepository: "@sylius.repository.product"
                     taxCategoryRepository: "@sylius.repository.tax_category"
                     productFactory: "@sylius.factory.product"
                     productManager: "@sylius.manager.product"
+
                 - Sylius\Behat\Context\Hook\DoctrineORMContext:
                     entityManager: "@doctrine.orm.entity_manager"
+
                 - Sylius\Behat\Context\Setup\ShippingContext:
                     shippingMethodRepository: "@sylius.repository.shipping_method"
                     shippingMethodFactory: "@sylius.factory.shipping_method"
                     sharedStorage: "@sylius.behat.shared_storage"
+
                 - Sylius\Behat\Context\Ui\CheckoutContext:
                     sharedStorage: "@sylius.behat.shared_storage"
-                    productRepository: "@sylius.repository.product"
-                    orderRepository: "@sylius.repository.order"
-                - Sylius\Behat\Context\Ui\CartContext
+
+                - Sylius\Behat\Context\Ui\CartContext: ~
+
                 - Sylius\Behat\Context\Setup\ZoneContext:
                     zoneRepository: "@sylius.repository.zone"
                     settingsManager: "@sylius.settings.manager"
                     zoneFactory: "@sylius.factory.zone"
+
                 - Sylius\Behat\Context\Setup\TaxContext:
                     taxRateFactory: "@sylius.factory.tax_rate"
                     taxCategoryFactory: "@sylius.factory.tax_category"
                     taxRateRepository: "@sylius.repository.tax_rate"
                     taxCategoryRepository: "@sylius.repository.tax_category"
                     zoneRepository: "@sylius.repository.zone"
+
             filters:
                 tags: "@ui-cart"

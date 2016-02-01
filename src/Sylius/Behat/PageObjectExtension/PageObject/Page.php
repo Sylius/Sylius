@@ -1,6 +1,15 @@
 <?php
 
-namespace Sylius\Behat\PageObjectExtension\Page;
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Sylius\Behat\PageObjectExtension\PageObject;
 
 use Behat\Mink\Driver\DriverInterface;
 use Behat\Mink\Element\DocumentElement;
@@ -8,7 +17,6 @@ use Behat\Mink\Exception\DriverException;
 use Behat\Mink\Session;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Element;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Exception\ElementNotFoundException;
-use SensioLabs\Behat\PageObjectExtension\PageObject\Exception\PathNotProvidedException;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Exception\UnexpectedPageException;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Factory;
 use SensioLabs\Behat\PageObjectExtension\PageObject\PageObject;
@@ -16,8 +24,13 @@ use SensioLabs\Behat\PageObjectExtension\PageObject\PageObject;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class Page implements PageObject
+abstract class Page implements PageObject
 {
+    /**
+     * @var array
+     */
+    protected $elements = [];
+
     /**
      * @var Session
      */
@@ -31,22 +44,12 @@ class Page implements PageObject
     /**
      * @var array
      */
-    private $parameters = [];
+    private $parameters;
 
     /**
      * @var DocumentElement
      */
     private $document;
-
-    /**
-     * @var string
-     */
-    protected $path;
-
-    /**
-     * @var array
-     */
-    protected $elements = [];
 
     /**
      * @param Session $session
@@ -80,6 +83,16 @@ class Page implements PageObject
 
     /**
      * @param array $urlParameters
+     */
+    public function verify(array $urlParameters)
+    {
+        $this->verifyResponse();
+        $this->verifyUrl($urlParameters);
+        $this->verifyPage();
+    }
+
+    /**
+     * @param array $urlParameters
      *
      * @return bool
      */
@@ -95,64 +108,9 @@ class Page implements PageObject
     }
 
     /**
-     * @param string $name
-     *
-     * @return Element
+     * @return string
      */
-    public function getElement($name)
-    {
-        $element = $this->createElement($name);
-
-        if (!$this->getDocument()->has('xpath', $element->getXpath())) {
-            throw new ElementNotFoundException(sprintf('"%s" element is not present on the page', $name));
-        }
-
-        return $element;
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return Page
-     */
-    protected function getPage($name)
-    {
-        return $this->factory->createPage($name);
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return bool
-     */
-    protected function hasElement($name)
-    {
-        return $this->getDocument()->has('xpath', $this->createElement($name)->getXpath());
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return Element
-     */
-    protected function createElement($name)
-    {
-        if (isset($this->elements[$name])) {
-            return $this->factory->createInlineElement($this->elements[$name]);
-        }
-
-        return $this->factory->createElement($name);
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return string|null
-     */
-    protected function getParameter($name)
-    {
-        return isset($this->parameters[$name]) ? $this->parameters[$name] : null;
-    }
+    abstract protected function getPath();
 
     /**
      * @return string
@@ -163,20 +121,6 @@ class Page implements PageObject
     }
 
     /**
-     * @throws PathNotProvidedException
-     *
-     * @return string
-     */
-    protected function getPath()
-    {
-        if (null === $this->path) {
-            throw new PathNotProvidedException('You must add a path property to your page object');
-        }
-
-        return $this->path;
-    }
-
-    /**
      * @param array $urlParameters
      *
      * @return string
@@ -184,16 +128,6 @@ class Page implements PageObject
     protected function getUrl(array $urlParameters = [])
     {
         return $this->makeSurePathIsAbsolute($this->unmaskUrl($urlParameters));
-    }
-
-    /**
-     * @param array $urlParameters
-     */
-    public function verify(array $urlParameters)
-    {
-        $this->verifyResponse();
-        $this->verifyUrl($urlParameters);
-        $this->verifyPage();
     }
 
     /**
@@ -235,13 +169,87 @@ class Page implements PageObject
     }
 
     /**
-     * @param string $statusCode
+     * @param int $statusCode
      *
      * @return bool
      */
     protected function isErrorResponse($statusCode)
     {
-        return in_array(substr($statusCode, 0, 1), ['4', '5'], true);
+        return 400 <= $statusCode && $statusCode < 600;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return string|null
+     */
+    protected function getParameter($name)
+    {
+        return isset($this->parameters[$name]) ? $this->parameters[$name] : null;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return Element
+     */
+    public function getElement($name)
+    {
+        $element = $this->createElement($name);
+
+        if (!$this->getDocument()->has('xpath', $element->getXpath())) {
+            throw new ElementNotFoundException(sprintf('"%s" element is not present on the page', $name));
+        }
+
+        return $element;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return bool
+     */
+    protected function hasElement($name)
+    {
+        return $this->getDocument()->has('xpath', $this->createElement($name)->getXpath());
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return Element
+     */
+    protected function createElement($name)
+    {
+        if (isset($this->elements[$name])) {
+            return $this->factory->createInlineElement($this->elements[$name]);
+        }
+
+        return $this->factory->createElement($name);
+    }
+
+    /**
+     * @return Session
+     */
+    protected function getSession()
+    {
+        return $this->session;
+    }
+
+    /**
+     * @return DriverInterface
+     */
+    protected function getDriver()
+    {
+        return $this->session->getDriver();
+    }
+
+    /**
+     * @return DocumentElement
+     */
+    protected function getDocument()
+    {
+        return $this->document;
     }
 
     /**
@@ -270,29 +278,5 @@ class Page implements PageObject
         }
 
         return $url;
-    }
-
-    /**
-     * @return Session
-     */
-    protected function getSession()
-    {
-        return $this->session;
-    }
-
-    /**
-     * @return DriverInterface
-     */
-    protected function getDriver()
-    {
-        return $this->session->getDriver();
-    }
-
-    /**
-     * @return DocumentElement
-     */
-    protected function getDocument()
-    {
-        return $this->document;
     }
 }

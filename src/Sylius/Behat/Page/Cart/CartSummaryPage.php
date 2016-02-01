@@ -11,7 +11,7 @@
 
 namespace Sylius\Behat\Page\Cart;
 
-use Sylius\Behat\SymfonyPageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\SymfonyPageObjectExtension\PageObject\SymfonyPage;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -29,6 +29,14 @@ class CartSummaryPage extends SymfonyPage
     /**
      * @return string
      */
+    public function getRouteName()
+    {
+        return 'sylius_cart_summary';
+    }
+
+    /**
+     * @return string
+     */
     public function getGrandTotal()
     {
         $grandTotalElement = $this->getElement('grand total');
@@ -41,17 +49,9 @@ class CartSummaryPage extends SymfonyPage
      */
     public function getTaxTotal()
     {
-        $taxTotalElement = $this->getElement('grand total');
+        $taxTotalElement = $this->getElement('tax total');
 
         return trim(str_replace('Tax total:', '', $taxTotalElement->getText()));
-    }
-
-    /**
-     * @return string
-     */
-    public function getRouteName()
-    {
-        return 'sylius_cart_summary';
     }
 
     /**
@@ -59,7 +59,7 @@ class CartSummaryPage extends SymfonyPage
      */
     public function removeProduct($productName)
     {
-        $item = $this->find('css', sprintf('#cart-summary tbody tr:contains("%s")', $productName));
+        $item = $this->getDocument()->find('css', sprintf('#cart-summary tbody tr:contains("%s")', $productName));
         $item->find('css', 'a.btn-danger')->click();
     }
 
@@ -69,10 +69,10 @@ class CartSummaryPage extends SymfonyPage
      */
     public function changeQuantity($productName, $quantity)
     {
-        $item = $this->find('css', sprintf('#cart-summary tbody tr:contains("%s")', $productName));
+        $item = $this->getDocument()->find('css', sprintf('#cart-summary tbody tr:contains("%s")', $productName));
         $field = $item->find('css', 'input[type=number]');
         $field->setValue($quantity);
 
-        $this->pressButton('Save');
+        $this->getDocument()->pressButton('Save');
     }
 }

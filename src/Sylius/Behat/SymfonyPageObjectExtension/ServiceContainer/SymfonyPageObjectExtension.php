@@ -38,7 +38,6 @@ class SymfonyPageObjectExtension implements Extension
      */
     public function initialize(ExtensionManager $extensionManager)
     {
-
     }
 
     /**
@@ -46,7 +45,6 @@ class SymfonyPageObjectExtension implements Extension
      */
     public function configure(ArrayNodeDefinition $builder)
     {
-
     }
 
     /**
@@ -54,7 +52,6 @@ class SymfonyPageObjectExtension implements Extension
      */
     public function load(ContainerBuilder $container, array $config)
     {
-
     }
 
     /**

@@ -93,7 +93,7 @@ final class CheckoutContext implements Context
             'city' => 'North Bridget',
             'postcode' => '93-554',
             'phoneNumber' => '321123456',
-        ];
+        ]);
         $this->checkoutAddressingStep->continueCheckout();
 
         $this->checkoutShippingStep->selectShippingMethod('Free');

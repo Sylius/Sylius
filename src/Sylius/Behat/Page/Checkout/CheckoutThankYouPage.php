@@ -11,7 +11,7 @@
 
 namespace Sylius\Behat\Page\Checkout;
 
-use Sylius\Behat\SymfonyPageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\SymfonyPageObjectExtension\PageObject\SymfonyPage;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>

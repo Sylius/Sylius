@@ -11,9 +11,7 @@
 
 namespace Sylius\Behat\Page\Product;
 
-use SensioLabs\Behat\PageObjectExtension\PageObject\Factory;
-use Sylius\Behat\SymfonyPageObjectExtension\Page\SymfonyPage;
-use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Behat\SymfonyPageObjectExtension\PageObject\SymfonyPage;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -21,13 +19,13 @@ use Sylius\Component\Product\Model\ProductInterface;
 class ProductShowPage extends SymfonyPage
 {
     /**
-     * @param ProductInterface $product
+     * @param array $urlParameters
      *
      * @return ProductShowPage
      */
-    public function open(ProductInterface $product)
+    public function open(array $urlParameters = [])
     {
-        $url = $this->router->generate($product);
+        $url = $this->router->generate($urlParameters['product']);
         $this->getSession()->visit($url);
 
         return $this;
