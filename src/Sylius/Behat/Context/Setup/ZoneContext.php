@@ -79,7 +79,7 @@ class ZoneContext implements Context
      */
     public function castRestOfTheWorldToZone()
     {
-        if (null === $zone = $this->zoneRepository->findOneBy(array('code' => 'RoW'))) {
+        if (null === $zone = $this->zoneRepository->findOneBy(['code' => 'RoW'])) {
             throw new \Exception('Rest of the world zone does not exist');
         }
 

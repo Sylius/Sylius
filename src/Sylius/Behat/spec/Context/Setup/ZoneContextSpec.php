@@ -103,28 +103,28 @@ class ZoneContextSpec extends ObjectBehavior
 
     function it_casts_zone_code_to_zone($zoneRepository, ZoneInterface $zone)
     {
-        $zoneRepository->findOneBy(array('code' => 'EU'))->willReturn($zone);
+        $zoneRepository->findOneBy(['code' => 'EU'])->willReturn($zone);
 
         $this->getZoneByCode('EU')->shouldReturn($zone);
     }
 
     function it_throws_exception_if_there_is_no_zone_with_given_code_to_cast($zoneRepository)
     {
-        $zoneRepository->findOneBy(array('code' => 'EU'))->willReturn(null);
+        $zoneRepository->findOneBy(['code' => 'EU'])->willReturn(null);
 
-        $this->shouldThrow(new \Exception('Zone with code "EU" does not exist'))->during('getZoneByCode', array('EU'));
+        $this->shouldThrow(new \Exception('Zone with code "EU" does not exist'))->during('getZoneByCode', ['EU']);
     }
 
     function it_casts_rest_of_the_world($zoneRepository, ZoneInterface $zone)
     {
-        $zoneRepository->findOneBy(array('code' => 'RoW'))->willReturn($zone);
+        $zoneRepository->findOneBy(['code' => 'RoW'])->willReturn($zone);
 
         $this->castRestOfTheWorldToZone()->shouldReturn($zone);
     }
 
     function it_throws_exception_if_there_is_no_rest_of_the_world_zone($zoneRepository)
     {
-        $zoneRepository->findOneBy(array('code' => 'RoW'))->willReturn(null);
+        $zoneRepository->findOneBy(['code' => 'RoW'])->willReturn(null);
 
         $this->shouldThrow(new \Exception('Rest of the world zone does not exist'))->during('castRestOfTheWorldToZone');
     }

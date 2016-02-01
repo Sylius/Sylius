@@ -108,7 +108,7 @@ class TaxContext implements Context
      */
     private function getTaxCategory($taxCategoryName)
     {
-        if (null !== $existingTaxCategory = $this->taxCategoryRepository->findOneBy(array('name' => $taxCategoryName))) {
+        if (null !== $existingTaxCategory = $this->taxCategoryRepository->findOneBy(['name' => $taxCategoryName])) {
             return $existingTaxCategory;
         }
 

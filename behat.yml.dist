@@ -4,4 +4,3 @@
 imports:
     - etc/behat/profiles.yml
     - etc/behat/suites.yml
-

@@ -84,7 +84,7 @@ class ShippingContext implements Context
      */
     public function storeHasShippingMethodWithFee($shippingMethodName, $currency, $fee, ZoneInterface $zone = null)
     {
-        $this->createShippingMethod($shippingMethodName, 'FR', ['amount' => $this->getFeeFromString($fee)]);
+        $this->createShippingMethod($shippingMethodName, $zone, 'FR', ['amount' => $this->getFeeFromString($fee)]);
     }
 
     /**
@@ -107,7 +107,7 @@ class ShippingContext implements Context
         $name,
         $zone = null,
         $locale = 'FR',
-        $configuration = array('amount' => 0),
+        $configuration = ['amount' => 0],
         $calculator = DefaultCalculators::PER_ITEM_RATE
     ) {
         if (null === $zone) {
@@ -132,7 +132,7 @@ class ShippingContext implements Context
      */
     private function getCodeFromName($shippingMethodName)
     {
-        return str_replace(array(' ', '-'), '_', strtolower($shippingMethodName));
+        return str_replace([' ', '-'], '_', strtolower($shippingMethodName));
     }
 
     /**
