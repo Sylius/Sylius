@@ -1,0 +1,4 @@
+sylius_shop_homepage:
+    path: /
+    defaults:
+        _controller: sylius.controller.shop.homepage:indexAction
