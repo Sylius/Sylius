@@ -14,7 +14,6 @@ namespace Sylius\Component\Rbac\Model;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
-use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
@@ -22,7 +21,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface PermissionInterface extends CodeAwareInterface, SoftDeletableInterface, TimestampableInterface, ResourceInterface
+interface PermissionInterface extends CodeAwareInterface, TimestampableInterface, ResourceInterface
 {
     /**
      * @return string
