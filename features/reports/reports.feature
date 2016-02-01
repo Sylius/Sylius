@@ -42,6 +42,8 @@ Feature: Reports
             | Description  | Lorem ipsum dolor |
           And I select "2010" from "sylius_report_dataFetcherConfiguration_start_year"
           And I select "2010" from "sylius_report_dataFetcherConfiguration_end_year"
+          And I select "Jan" from "sylius_report_dataFetcherConfiguration_start_month"
+          And I select "Jan" from "sylius_report_dataFetcherConfiguration_end_month"
           And I select "1" from "sylius_report_dataFetcherConfiguration_start_day"
           And I select "3" from "sylius_report_dataFetcherConfiguration_end_day"
           And I press "Create"
@@ -57,6 +59,8 @@ Feature: Reports
             | Description  | Lorem ipsum dolor |
           And I select "2010" from "sylius_report_dataFetcherConfiguration_start_year"
           And I select "2010" from "sylius_report_dataFetcherConfiguration_end_year"
+          And I select "Jan" from "sylius_report_dataFetcherConfiguration_start_month"
+          And I select "Jan" from "sylius_report_dataFetcherConfiguration_end_month"
           And I select "1" from "sylius_report_dataFetcherConfiguration_start_day"
           And I select "3" from "sylius_report_dataFetcherConfiguration_end_day"
           And I select "month" from "Time period"
