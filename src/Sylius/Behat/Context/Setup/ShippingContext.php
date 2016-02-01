@@ -108,7 +108,7 @@ class ShippingContext implements Context
         $zone = null,
         $locale = 'FR',
         $configuration = ['amount' => 0],
-        $calculator = DefaultCalculators::PER_ITEM_RATE
+        $calculator = DefaultCalculators::FLAT_RATE
     ) {
         if (null === $zone) {
             $zone = $this->sharedStorage->getCurrentResource('zone');
