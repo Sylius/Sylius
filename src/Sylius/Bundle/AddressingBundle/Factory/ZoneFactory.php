@@ -25,11 +25,18 @@ class ZoneFactory implements ZoneFactoryInterface
     private $factory;
 
     /**
-     * @param FactoryInterface $factory
+     * @var FactoryInterface
      */
-    public function __construct(FactoryInterface $factory)
+    private $zoneMemberFactory;
+
+    /**
+     * @param FactoryInterface $factory
+     * @param FactoryInterface $zoneMemberFactory
+     */
+    public function __construct(FactoryInterface $factory, FactoryInterface $zoneMemberFactory)
     {
         $this->factory = $factory;
+        $this->zoneMemberFactory = $zoneMemberFactory;
     }
 
     /**
@@ -48,6 +55,23 @@ class ZoneFactory implements ZoneFactoryInterface
         /* @var ZoneInterface $zone */
         $zone = $this->createNew();
         $zone->setType($type);
+
+        return $zone;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createWithMembers(array $members)
+    {
+        /* @var ZoneInterface $zone */
+        $zone = $this->createNew();
+        foreach ($members as $member) {
+            $zoneMember = $this->zoneMemberFactory->createNew();
+            $zoneMember->setCode($member);
+
+            $zone->addMember($zoneMember);
+        }
 
         return $zone;
     }

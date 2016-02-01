@@ -35,17 +35,24 @@ class RegisterZoneFactoryPass implements CompilerPassInterface
             Factory::class,
             [
                 new Parameter('sylius.model.zone.class'),
-            ])
-        ;
+            ]
+        );
+
+        $zoneMemberFactoryDefinition = new Definition(
+            $container->getParameter('sylius.factory.zone_member.class'),
+            [
+                new Parameter('sylius.model.zone_member.class'),
+            ]
+        );
 
         $zoneFactoryDefinition = new Definition(
             $container->getParameter('sylius.factory.zone.class'),
             [
                 $baseZoneFactoryDefinition,
-            ])
-        ;
+                $zoneMemberFactoryDefinition,
+            ]
+        );
 
-        $zoneFactory = $container->setDefinition('sylius.factory.zone', $zoneFactoryDefinition);
-        $zoneFactory->addArgument($baseZoneFactoryDefinition);
+        $container->setDefinition('sylius.factory.zone', $zoneFactoryDefinition);
     }
 }

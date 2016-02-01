@@ -42,8 +42,11 @@ class CheckoutContext extends FeatureContext
      * @param RepositoryInterface $productRepository
      * @param RepositoryInterface $orderRepository
      */
-    public function __construct(SharedStorageInterface $sharedStorage, RepositoryInterface $productRepository, RepositoryInterface $orderRepository)
-    {
+    public function __construct(
+        SharedStorageInterface $sharedStorage,
+        RepositoryInterface $productRepository,
+        RepositoryInterface $orderRepository
+    ) {
         $this->sharedStorage = $sharedStorage;
         $this->productRepository = $productRepository;
         $this->orderRepository = $orderRepository;
@@ -60,12 +63,21 @@ class CheckoutContext extends FeatureContext
     }
 
     /**
-     * @When /^I add (\d+) products "([^"]*)" to the cart$/
+     * @When /^I add (\d+) products "([^"]+)" to the cart$/
      */
     public function iAddProductsToTheCart($quantity, $name)
     {
         $productShowPage = $this->openProductPage($name);
         $productShowPage->addToCartWithQuantity($quantity);
+    }
+
+    /**
+     * @Given /^I remove product "([^"]+)" from the cart$/
+     */
+    public function iRemoveProductFromTheCart($productName)
+    {
+        $cartSummaryPage = $this->getPage('Cart\CartSummaryPage')->open();
+        $cartSummaryPage->removeProduct($productName);
     }
 
     /**
@@ -115,6 +127,15 @@ class CheckoutContext extends FeatureContext
         $thankYouPage = $this->getPage('Checkout\CheckoutThankYouPage');
         $thankYouPage->assertRoute();
         $this->assertSession()->elementTextContains('css', '#thanks', sprintf('Thank you %s', $customer->getFullName()));
+    }
+
+    /**
+     * @Given /^I change "([^"]+)" quantity to (\d+)$/
+     */
+    public function iChangeQuantityTo($productName, $quantity)
+    {
+        $cartSummaryPage = $this->getPage('Cart\CartSummaryPage')->open();
+        $cartSummaryPage->changeQuantity($productName, $quantity);
     }
 
     /**

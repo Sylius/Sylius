@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\AddressingBundle\Factory;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\AddressingBundle\Factory\ZoneFactoryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
@@ -21,9 +22,9 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 class ZoneFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $factory)
+    function let(FactoryInterface $factory, FactoryInterface $zoneMemberFactory)
     {
-        $this->beConstructedWith($factory);
+        $this->beConstructedWith($factory, $zoneMemberFactory);
     }
 
     function it_is_initializable()
@@ -47,5 +48,24 @@ class ZoneFactorySpec extends ObjectBehavior
         $zone->setType('country')->shouldBeCalled();
 
         $this->createTyped('country')->shouldReturn($zone);
+    }
+
+    function it_creates_zone_with_members(
+        FactoryInterface $factory,
+        FactoryInterface $zoneMemberFactory,
+        ZoneInterface $zone,
+        ZoneMemberInterface $zoneMember1,
+        ZoneMemberInterface $zoneMember2
+    ) {
+        $factory->createNew()->willReturn($zone);
+        $zoneMemberFactory->createNew()->willReturn($zoneMember1, $zoneMember2);
+
+        $zoneMember1->setCode('GB')->shouldBeCalled();
+        $zoneMember2->setCode('PL')->shouldBeCalled();
+
+        $zone->addMember($zoneMember1)->shouldBeCalled();
+        $zone->addMember($zoneMember2)->shouldBeCalled();
+
+        $this->createWithMembers(['GB', 'PL'])->shouldReturn($zone);
     }
 }
