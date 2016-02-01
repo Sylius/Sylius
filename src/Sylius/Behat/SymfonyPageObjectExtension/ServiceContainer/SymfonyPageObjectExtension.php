@@ -1,37 +1,57 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sylius\Behat\SymfonyPageObjectExtension\ServiceContainer;
 
 use Behat\Testwork\ServiceContainer\Extension;
 use Behat\Testwork\ServiceContainer\ExtensionManager;
-use Sylius\Behat\SymfonyPageObjectExtension\Factory\SymfonyPageObjectFactory;
 use Sylius\Behat\SymfonyExtension\ServiceContainer\SymfonyExtension;
+use Sylius\Behat\SymfonyPageObjectExtension\Factory\SymfonyPageObjectFactory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\Routing\RouterInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 class SymfonyPageObjectExtension implements Extension
 {
+    /**
+     * {@inheritdoc}
+     */
     public function getConfigKey()
     {
         return 'sylius_symfony_page_object';
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function initialize(ExtensionManager $extensionManager)
     {
 
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function configure(ArrayNodeDefinition $builder)
     {
 
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function load(ContainerBuilder $container, array $config)
     {
 
@@ -42,8 +62,6 @@ class SymfonyPageObjectExtension implements Extension
      */
     public function process(ContainerBuilder $container)
     {
-        $router = $this->extractSymfonyApplicationRouter($container);
-
         $container
             ->register('sylius.page_object.factory', SymfonyPageObjectFactory::class)
             ->setArguments([
@@ -51,7 +69,7 @@ class SymfonyPageObjectExtension implements Extension
                 new Reference('mink'),
                 new Reference('sensio_labs.page_object_extension.class_name_resolver'),
                 '%sensio_labs.page_object_extension.page_factory.page_parameters%',
-                $router,
+                $this->getSymfonyApplicationServiceDefinition('router'),
             ])
             ->setDecoratedService('sensio_labs.page_object_extension.page_factory')
             ->setPublic(false)
@@ -59,25 +77,15 @@ class SymfonyPageObjectExtension implements Extension
     }
 
     /**
-     * @param ContainerBuilder $container
+     * @param string $serviceId
      *
-     * @return RouterInterface
+     * @return Definition
      */
-    private function extractSymfonyApplicationRouter(ContainerBuilder $container)
+    private function getSymfonyApplicationServiceDefinition($serviceId)
     {
-        return $this->extractSymfonyApplicationContainer($container)->get('router');
-    }
-
-    /**
-     * @param ContainerBuilder $container
-     *
-     * @return ContainerInterface
-     */
-    private function extractSymfonyApplicationContainer(ContainerBuilder $container)
-    {
-        $applicationKernel = $container->get(SymfonyExtension::KERNEL_ID);
-        $applicationContainer = $applicationKernel->getContainer();
-
-        return clone $applicationContainer;
+        return (new Definition(null, [$serviceId]))->setFactory([
+            new Reference(SymfonyExtension::SHARED_KERNEL_CONTAINER_ID),
+            'get',
+        ]);
     }
 }
