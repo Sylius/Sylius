@@ -13,7 +13,6 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Core\Model\TaxRateInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -74,7 +73,8 @@ class TaxContext implements Context
      */
     public function castTaxCategoryNameToTaxCategory($taxCategoryName)
     {
-        if (null === $taxCategory = $this->taxCategoryRepository->findOneBy(array('name' => $taxCategoryName))) {
+        $taxCategory = $this->taxCategoryRepository->findOneBy(['name' => $taxCategoryName]);
+        if (null === $taxCategory) {
             throw new \Exception('Tax category with name "'.$taxCategoryName.'" does not exist');
         }
 

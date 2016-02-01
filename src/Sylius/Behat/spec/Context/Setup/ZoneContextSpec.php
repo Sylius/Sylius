@@ -24,8 +24,11 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class ZoneContextSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $zoneRepository, SettingsManagerInterface $settingsManager, ZoneFactoryInterface $zoneFactory)
-    {
+    function let(
+        RepositoryInterface $zoneRepository,
+        SettingsManagerInterface $settingsManager,
+        ZoneFactoryInterface $zoneFactory
+    ) {
         $this->beConstructedWith($zoneRepository, $settingsManager, $zoneFactory);
     }
 
@@ -44,11 +47,11 @@ class ZoneContextSpec extends ObjectBehavior
         $zoneFactory,
         ZoneInterface $zone
     ) {
-        $zoneFactory->createWithMembers(array(
+        $zoneFactory->createWithMembers([
             'BE', 'BG', 'CZ', 'DK', 'DE', 'EE', 'IE', 'GR', 'ES',
             'FR', 'IT', 'CY', 'LV', 'LT', 'LU', 'HU', 'MT', 'NL',
             'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE', 'GB',
-        ))->willReturn($zone);
+        ])->willReturn($zone);
 
         $zone->setType(ZoneInterface::TYPE_COUNTRY)->shouldBeCalled();
         $zone->setName('European Union')->shouldBeCalled();
@@ -59,21 +62,21 @@ class ZoneContextSpec extends ObjectBehavior
         $this->thereIsEUZoneContainingAllMembersOfEuropeanUnion();
     }
 
-    function it_sets_default_zone($zoneRepository, $settingsManager, Settings $settings, ZoneInterface $zone)
+    function it_sets_default_tax_zone($zoneRepository, $settingsManager, Settings $settings, ZoneInterface $zone)
     {
-        $zoneRepository->findOneBy(array('code' => 'EU'))->willReturn($zone);
+        $zoneRepository->findOneBy(['code' => 'EU'])->willReturn($zone);
 
         $settingsManager->loadSettings('sylius_taxation')->willReturn($settings);
         $settings->set('default_tax_zone', $zone)->shouldBeCalled();
         $settingsManager->saveSettings('sylius_taxation', $settings)->shouldBeCalled();
 
-        $this->defaultZoneIs('EU');
+        $this->defaultTaxZoneIs('EU');
     }
 
     function it_throws_exception_if_zone_with_given_code_does_not_exist($zoneRepository)
     {
-        $zoneRepository->findOneBy(array('code' => 'EU'))->willReturn(null);
+        $zoneRepository->findOneBy(['code' => 'EU'])->willReturn(null);
 
-        $this->shouldThrow(new \Exception('Zone with code "EU" does not exist'))->during('defaultZoneIs', array('EU'));
+        $this->shouldThrow(new \InvalidArgumentException('Zone with code "EU" does not exist'))->during('defaultTaxZoneIs', ['EU']);
     }
 }

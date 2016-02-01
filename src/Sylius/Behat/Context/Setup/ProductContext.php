@@ -25,6 +25,11 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 class ProductContext implements Context
 {
     /**
+     * @var SharedStorageInterface
+     */
+    private $sharedStorage;
+
+    /**
      * @var RepositoryInterface
      */
     private $productRepository;
@@ -35,30 +40,25 @@ class ProductContext implements Context
     private $taxCategoryRepository;
 
     /**
-     * @var SharedStorageInterface
-     */
-    private $sharedStorage;
-
-    /**
      * @var FactoryInterface
      */
     private $productFactory;
 
     /**
+     * @param SharedStorageInterface $sharedStorage
      * @param RepositoryInterface $productRepository
      * @param RepositoryInterface $taxCategoryRepository
-     * @param SharedStorageInterface $sharedStorage
      * @param FactoryInterface $productFactory
      */
     public function __construct(
+        SharedStorageInterface $sharedStorage,
         RepositoryInterface $productRepository,
         RepositoryInterface $taxCategoryRepository,
-        SharedStorageInterface $sharedStorage,
         FactoryInterface $productFactory
     ) {
+        $this->sharedStorage = $sharedStorage;
         $this->productRepository = $productRepository;
         $this->taxCategoryRepository = $taxCategoryRepository;
-        $this->sharedStorage = $sharedStorage;
         $this->productFactory = $productFactory;
     }
 
@@ -68,17 +68,18 @@ class ProductContext implements Context
      */
     public function castProductNameToProduct($productName)
     {
-        if (null === $product = $this->productRepository->findOneBy(array('name' => $productName))) {
-            throw new \Exception('Product with name "'.$product.'" does not exist');
+        $product = $this->productRepository->findOneBy(['name' => $productName]);
+        if (null === $product) {
+            throw new \InvalidArgumentException('Product with name "'.$productName.'" does not exist');
         }
 
         return $product;
     }
 
     /**
-     * @Given /^store has a product "([^"]+)" priced at "(€|£|\$)([^"]+)"$/
+     * @Given /^store has a product "([^"]+)" priced at "(?:€|£|\$)([^"]+)"$/
      */
-    public function storeHasAProductPricedAt($productName, $currency, $price)
+    public function storeHasAProductPricedAt($productName, $price)
     {
         $product = $this->productFactory->createNew();
         $product->setName($productName);
@@ -94,7 +95,7 @@ class ProductContext implements Context
     /**
      * @Given /^(product "[^"]+") belongs to ("[^"]+" tax category)$/
      */
-    public function productBelongsToTaxCategory(ProductInterface $product, $taxCategory)
+    public function productBelongsToTaxCategory(ProductInterface $product, TaxCategoryInterface $taxCategory)
     {
         $product->setTaxCategory($taxCategory);
     }

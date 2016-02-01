@@ -25,11 +25,11 @@ class ZoneContext implements Context
     /**
      * @var array
      */
-    private $euMembers = array(
+    private $euMembers = [
         'BE', 'BG', 'CZ', 'DK', 'DE', 'EE', 'IE', 'GR', 'ES',
         'FR', 'IT', 'CY', 'LV', 'LT', 'LU', 'HU', 'MT', 'NL',
         'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE', 'GB',
-    );
+    ];
 
     /**
      * @var RepositoryInterface
@@ -59,16 +59,17 @@ class ZoneContext implements Context
     }
 
     /**
-     * @Transform /^"([^"]+)" zone$/
-     * @Transform /^zone "([^"]+)"$/
+     * @Transform :zone zone
+     * @Transform zone :zone
      */
-    public function castZoneCodeToZone($zoneCode)
+    public function getZoneByCode($zone)
     {
-        if (null === $zone = $this->zoneRepository->findOneBy(array('code' => $zoneCode))) {
-            throw new \Exception('Zone with code "'.$zoneCode.'" does not exist');
+        $existingZone = $this->zoneRepository->findOneBy(['code' => $zone]);
+        if (null === $existingZone) {
+            throw new \InvalidArgumentException(sprintf('Zone with code "%s" does not exist', $zone));
         }
 
-        return $zone;
+        return $existingZone;
     }
 
     /**
@@ -85,13 +86,11 @@ class ZoneContext implements Context
     }
 
     /**
-     * @Given /^default zone is "([^"]+)"$/
+     * @Given default tax zone is :taxZone
      */
-    public function defaultZoneIs($zoneCode)
+    public function defaultTaxZoneIs($taxZone)
     {
-        if (null === $zone = $this->zoneRepository->findOneBy(array('code' => $zoneCode))) {
-            throw new \Exception('Zone with code "'.$zoneCode.'" does not exist');
-        }
+        $zone = $this->getZoneByCode($taxZone);
 
         $settings = $this->settingsManager->loadSettings('sylius_taxation');
         $settings->set('default_tax_zone', $zone);

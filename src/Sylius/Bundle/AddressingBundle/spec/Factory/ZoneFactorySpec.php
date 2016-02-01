@@ -66,6 +66,6 @@ class ZoneFactorySpec extends ObjectBehavior
         $zone->addMember($zoneMember1)->shouldBeCalled();
         $zone->addMember($zoneMember2)->shouldBeCalled();
 
-        $this->createWithMembers(array('GB', 'PL'))->shouldReturn($zone);
+        $this->createWithMembers(['GB', 'PL'])->shouldReturn($zone);
     }
 }

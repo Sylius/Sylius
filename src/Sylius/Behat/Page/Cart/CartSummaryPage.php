@@ -25,4 +25,26 @@ class CartSummaryPage extends SymfonyPage
     {
         return 'sylius_cart_summary';
     }
+
+    /**
+     * @param string $productName
+     */
+    public function removeProduct($productName)
+    {
+        $item = $this->find('css', sprintf('#cart-summary tbody tr:contains("%s")', $productName));
+        $item->find('css', 'a.btn-danger')->click();
+    }
+
+    /**
+     * @param string $productName
+     * @param int $quantity
+     */
+    public function changeQuantity($productName, $quantity)
+    {
+        $item = $this->find('css', sprintf('#cart-summary tbody tr:contains("%s")', $productName));
+        $field = $item->find('css', 'input[type=number]');
+        $field->setValue($quantity);
+
+        $this->pressButton('Save');
+    }
 }

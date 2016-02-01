@@ -174,7 +174,7 @@ class UserContext implements Context
 
         if (null === $countryCode) {
             throw new \InvalidArgumentException(sprintf(
-                'Country "%s" not found! Available names: %s.', $name, join(', ', $names)
+                'Country "%s" not found! Available names: %s.', $name, implode(', ', $names)
             ));
         }
 

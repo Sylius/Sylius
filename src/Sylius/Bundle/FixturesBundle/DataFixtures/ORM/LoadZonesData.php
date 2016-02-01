@@ -14,7 +14,6 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Symfony\Component\Intl\Intl;
 
 /**
