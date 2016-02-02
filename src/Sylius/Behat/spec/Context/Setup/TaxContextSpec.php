@@ -55,10 +55,13 @@ class TaxContextSpec extends ObjectBehavior
         $taxCategoryFactory,
         $taxRateRepository,
         $taxCategoryRepository,
+        $zoneRepository,
         TaxCategoryInterface $taxCategory,
         TaxRateInterface $taxRate,
         ZoneInterface $zone
     ) {
+        $zoneRepository->findOneBy(['code' => 'EU'])->willReturn($zone);
+
         $taxCategoryFactory->createNew()->willReturn($taxCategory);
         $taxCategory->setName('Clothes')->shouldBeCalled();
         $taxCategory->setCode('clothes')->shouldBeCalled();

@@ -30,6 +30,7 @@ default:
                     productRepository: "@sylius.repository.product"
                     taxCategoryRepository: "@sylius.repository.tax_category"
                     productFactory: "@sylius.factory.product"
+                    productManager: "@sylius.manager.product"
                 - Sylius\Behat\Context\Ui\CheckoutContext:
                     sharedStorage: "@sylius.behat.shared_storage"
                     productRepository: "@sylius.repository.product"

@@ -62,13 +62,13 @@ class ZoneFactory implements ZoneFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createWithMembers(array $members)
+    public function createWithMembers(array $membersCodes)
     {
         /* @var ZoneInterface $zone */
         $zone = $this->createNew();
-        foreach ($members as $member) {
+        foreach ($membersCodes as $memberCode) {
             $zoneMember = $this->zoneMemberFactory->createNew();
-            $zoneMember->setCode($member);
+            $zoneMember->setCode($memberCode);
 
             $zone->addMember($zoneMember);
         }

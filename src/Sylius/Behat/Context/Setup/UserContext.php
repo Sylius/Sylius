@@ -119,8 +119,11 @@ class UserContext implements Context
      *
      * @return UserInterface
      */
-    private function createUser(CustomerInterface $customer, $email = 'john.doe@example.com', $password = 'testPassword')
-    {
+    private function createUser(
+        CustomerInterface $customer,
+        $email = 'john.doe@example.com',
+        $password = 'testPassword'
+    ) {
         $user = $this->userFactory->createNew();
 
         $user->setCustomer($customer);
