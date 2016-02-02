@@ -51,11 +51,13 @@ class ShippingContextSpec extends ObjectBehavior
         $sharedStorage->getCurrentResource('zone')->willReturn($zone);
         $shippingMethodFactory->createNew()->willReturn($shippingMethod);
 
-        $shippingMethod->setCode('free')->shouldBeCalled();
+        $zone->getCode()->willReturn('UE');
+
+        $shippingMethod->setCode('free_ue')->shouldBeCalled();
         $shippingMethod->setName('Free')->shouldBeCalled();
         $shippingMethod->setCurrentLocale('FR')->shouldBeCalled();
         $shippingMethod->setConfiguration(['amount' => 0])->shouldBeCalled();
-        $shippingMethod->setCalculator(DefaultCalculators::PER_ITEM_RATE)->shouldBeCalled();
+        $shippingMethod->setCalculator(DefaultCalculators::FLAT_RATE)->shouldBeCalled();
         $shippingMethod->setZone($zone)->shouldBeCalled();
 
         $shippingMethodRepository->add($shippingMethod)->shouldBeCalled();
@@ -73,11 +75,13 @@ class ShippingContextSpec extends ObjectBehavior
         $sharedStorage->getCurrentResource('zone')->willReturn($zone);
         $shippingMethodFactory->createNew()->willReturn($shippingMethod);
 
-        $shippingMethod->setCode('test_shipping_method')->shouldBeCalled();
+        $zone->getCode()->willReturn('UE');
+
+        $shippingMethod->setCode('test_shipping_method_ue')->shouldBeCalled();
         $shippingMethod->setName('Test shipping method')->shouldBeCalled();
         $shippingMethod->setCurrentLocale('FR')->shouldBeCalled();
         $shippingMethod->setConfiguration(['amount' => 1000])->shouldBeCalled();
-        $shippingMethod->setCalculator(DefaultCalculators::PER_ITEM_RATE)->shouldBeCalled();
+        $shippingMethod->setCalculator(DefaultCalculators::FLAT_RATE)->shouldBeCalled();
         $shippingMethod->setZone($zone)->shouldBeCalled();
 
         $shippingMethodRepository->add($shippingMethod)->shouldBeCalled();

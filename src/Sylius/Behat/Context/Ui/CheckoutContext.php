@@ -83,14 +83,15 @@ class CheckoutContext extends FeatureContext
 
     /**
      * @When I proceed selecting :paymentMethodName payment method
+     * @When I proceed selecting :paymentMethodName payment method and :shippingCountry as shipping country
      */
-    public function iProceedSelectingOfflinePaymentMethod($paymentMethodName)
+    public function iProceedSelectingPaymentMethod($paymentMethodName, $shippingCountry = null)
     {
         $checkoutAddressingPage = $this->getPage('Checkout\CheckoutAddressingStep')->open();
         $addressingDetails = [
             'firstName' => 'John',
             'lastName' => 'Doe',
-            'country' => 'France',
+            'country' => (null === $shippingCountry) ? 'France' : $shippingCountry,
             'street' => '0635 Myron Hollow Apt. 711',
             'city' => 'North Bridget',
             'postcode' => '93-554',
