@@ -14,6 +14,7 @@ sylius:
       street: Straat
       province: Provincie
     country:
+      add_province: Provincie toevoegen
       name: Naam
       provinces: Provincies
       select: Selecteer
@@ -21,6 +22,7 @@ sylius:
       name: Naam
       select: Selecteer
     zone:
+      add_member: Lid toevoegen
       members: Leden
       name: Naam
       type: Type

@@ -15,3 +15,5 @@ sylius:
       name: Navn
       parent: Overordnede
       options: Indstillinger
+    association_type:
+      name: Navn

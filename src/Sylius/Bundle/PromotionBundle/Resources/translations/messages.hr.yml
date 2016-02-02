@@ -36,6 +36,8 @@ sylius:
       usage_limit: Ograničenje generiranih kodova
     promotion:
       actions: Akcije
+      add_action: Dodajte akciju
+      add_rule: Dodajte pravilo
       coupon_based: Promocija bazirana na kuponima za popust
       description: Opis
       ends_at: Završava

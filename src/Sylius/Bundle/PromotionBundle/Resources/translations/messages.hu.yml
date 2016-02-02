@@ -36,6 +36,8 @@ sylius:
       usage_limit: Felhasználhatóság korlátozása
     promotion:
       actions: Műveletek
+      add_action: Művelet hozzáadása
+      add_rule: Szabály hozzáadása
       coupon_based: Kupon alapján
       description: Leírás
       ends_at: Végződik

@@ -104,3 +104,5 @@ sylius:
         value: Valoare
     guest:
       email: E-mail
+    product_association_type:
+      name: Nume

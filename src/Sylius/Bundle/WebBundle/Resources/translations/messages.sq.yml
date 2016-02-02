@@ -42,6 +42,9 @@ sylius:
       tracking_number: Numri i gjurmimit
     title: Llogaria ime
   add_to_cart: Shto në kartë
+  association_type:
+    name: Emri
+    create: Krijo
   address:
     city: Qyteti
     company: Kompania
@@ -520,6 +523,9 @@ sylius:
   meta:
     backend_title: Paneli i Sylius-it
     frontend_title: Sylius, ecommerce moderne për Symfony2
+  metadata:
+    id: ID
+    content: Përmbajtja
   na: N/A
   newest: Produktet më të reja
   "no": false
@@ -731,6 +737,15 @@ sylius:
     code: Kodi
     create: Krijo atribut produkti
     create_header: Atribut i produktit të ri
+    index_header: Atribute të produktit
+    manage: Kontrollo atributet
+    name: Emri
+    type: Lloji
+    update_header: Duke afishuar atributin
+    updated_at: Ndryshimi i fundit
+  product_association:
+    code: Kodi
+    create_header: Produkt i ri
     index_header: Atribute të produktit
     manage: Kontrollo atributet
     name: Emri
@@ -958,6 +973,8 @@ sylius:
     reset: Rivendos
     reset_password: Rivendos fjalëkalimin
     welcome: Mirësevini
+    name: Emri
+    id: Id
   unknown: E panjohur
   user:
     create_header: Përdorues i ri

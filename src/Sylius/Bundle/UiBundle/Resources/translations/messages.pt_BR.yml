@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    login:
+      username: Login
+      password: Senha
+      remember_me: Lembrar
+  ui:
+    dashboard: Painel

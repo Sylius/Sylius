@@ -15,3 +15,5 @@ sylius:
       name: Navn
       parent: Forelder
       options: Instillinger
+    association_type:
+      name: Navn

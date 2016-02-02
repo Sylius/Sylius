@@ -102,3 +102,5 @@ sylius:
         value: Érték
     guest:
       email: E-mail
+    product_association_type:
+      name: Név

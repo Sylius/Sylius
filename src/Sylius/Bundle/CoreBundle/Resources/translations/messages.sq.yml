@@ -122,3 +122,5 @@ sylius:
         value: Vlera
     guest:
       email: Email
+    product_association_type:
+      name: Emri

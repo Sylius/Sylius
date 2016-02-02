@@ -72,3 +72,5 @@ sylius:
       roles: Roller
     variant:
       sku: SKU
+    product_association_type:
+      name: Namn

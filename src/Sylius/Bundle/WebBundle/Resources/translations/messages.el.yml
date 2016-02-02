@@ -11,6 +11,9 @@ sylius:
         pending: Σε εκκρεμότητα
       state: Νομός
   add_to_cart: Προσθήκη στο καλάθι
+  association_type:
+    name: Ονομασία
+    create: Δημιουργία
   address:
     city: Πόλη
     country: Χώρα
@@ -222,6 +225,9 @@ sylius:
   menu_node:
     id: ID
     title: Τίτλος
+  metadata:
+    id: ID
+    content: Περιεχόμενο
   newest: Νεότερα προϊόντα
   "no": false
   order:
@@ -323,6 +329,11 @@ sylius:
     name: Ονομασία
     type: Τύπος
     updated_at: Τροποποιήθηκε την
+  product_association:
+    code: Κώδικος
+    name: Ονομασία
+    type: Τύπος
+    updated_at: Τροποποιήθηκε την
   product_option:
     manage: Διαχείριση επιλογών
     name: Ονομασία
@@ -416,6 +427,7 @@ sylius:
   ui:
     code: Κώδικος
     email: Ηλεκτρονικό ταχυδρομείο
+    name: Ονομασία
   unknown: Άγνωστο
   user:
     id: ID

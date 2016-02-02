@@ -28,6 +28,8 @@ sylius:
       tracking_number: sylius.account.order.tracking_number
     title: マイアカウント
   add_to_cart: カートに入れる
+  association_type:
+    create: 作成
   address:
     city: 市町村
     company: 会社名
@@ -353,6 +355,9 @@ sylius:
     volume_based:
       price: 価格
   product_attribute:
+    updated_at: 最終更新日
+  product_association:
+    create_header: sylius.backend.quick_links.add_product
     updated_at: 最終更新日
   product_option:
     manage: 商品オプションの管理

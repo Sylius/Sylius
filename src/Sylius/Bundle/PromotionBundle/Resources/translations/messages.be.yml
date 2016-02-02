@@ -36,6 +36,8 @@ sylius:
       usage_limit: Ліміт карыстання
     promotion:
       actions: Дзеянні
+      add_action: Дадаць дзеянне
+      add_rule: Дадаць правіла
       coupon_based: Заснавана на купонах
       description: Апісанне
       ends_at: Канец

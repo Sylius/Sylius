@@ -119,3 +119,5 @@ sylius:
         value: Reikšmė
     guest:
       email: Elektroninis paštas
+    product_association_type:
+      name: Pavadinimas

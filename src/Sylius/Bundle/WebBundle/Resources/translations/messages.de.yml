@@ -41,6 +41,9 @@ sylius:
       tracking_number: Sendungsnummer
     title: Mein Account
   add_to_cart: In den Warenkorb
+  association_type:
+    name: Name
+    create: Erstellen
   address:
     city: Stadt
     company: Firma
@@ -505,6 +508,9 @@ sylius:
   meta:
     backend_title: Sylius Dashboard
     frontend_title: Titel
+  metadata:
+    id: ID
+    content: Inhalt
   na: Nicht verfügbar
   newest: Neueste Produkte
   "no": false
@@ -710,6 +716,15 @@ sylius:
     code: Code
     create: Produkt Attribute hinzufügen
     create_header: Neues Produkt Attribut
+    index_header: Produkt Attribute
+    manage: Attribute verwalten
+    name: Name
+    type: Typ
+    update_header: Attribute editieren
+    updated_at: Geändert
+  product_association:
+    code: Code
+    create_header: Neues Produkt
     index_header: Produkt Attribute
     manage: Attribute verwalten
     name: Name
@@ -923,6 +938,8 @@ sylius:
     login: Anmelden
     logout: Abmelden
     register: Registrieren
+    name: Name
+    id: ID
   unknown: Unbekannt
   user:
     create_header: sylius.user.create_header

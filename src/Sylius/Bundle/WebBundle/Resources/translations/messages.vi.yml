@@ -2,6 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+  association_type:
+    name: Tên
+    create: Tạo
   address:
     city: Thành phố
     company: Công ty
@@ -172,6 +175,8 @@ sylius:
   menu_node:
     id: ID
     title: Tiêu đề
+  metadata:
+    id: ID
   newest: Sản phẩm mới nhất
   "no": false
   order:
@@ -215,6 +220,10 @@ sylius:
     volume_based:
       price: Giá
   product_attribute:
+    code: Mã
+    name: Tên
+    updated_at: Cập nhật lần cuối
+  product_association:
     code: Mã
     name: Tên
     updated_at: Cập nhật lần cuối
@@ -281,6 +290,7 @@ sylius:
     name: Tên
   ui:
     code: Mã
+    name: Tên
   user:
     id: ID
   variant:

@@ -21,6 +21,8 @@ sylius:
     presentation: Презентација
   report:
     id: ID број
+  ui:
+    id: ID број
   "yes": true
   zone:
     scope: Опсег

@@ -92,3 +92,5 @@ sylius:
       width: Πλάτος
     guest:
       email: Ηλεκτρονικό ταχυδρομείο
+    product_association_type:
+      name: Ονομασία

@@ -47,6 +47,8 @@ sylius:
       expires_at: Skadon më
     promotion:
       actions: Veprimet
+      add_action: Shto veprim
+      add_rule: Shto rregull
       coupon_based: Bazuar në kupon
       exclusive: Ekskluziv
       description: Përshkrimi

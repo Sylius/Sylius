@@ -40,6 +40,9 @@ sylius:
       tracking_number: หมายเลขการติดตาม
     title: บัญชีของฉัน
   add_to_cart: หยิบใส่ตระกร้าสินค้า
+  association_type:
+    name: ชื่อ
+    create: สร้าง
   address:
     city: เมือง
     company: บริษัท
@@ -342,6 +345,9 @@ sylius:
     title: หัวข้อ
   meta:
     frontend_title: Sylius อีคอมเมิร์ซที่ทันสมัยสำหรับ Symfony2
+  metadata:
+    id: ID
+    content: เนื้อหา
   na: N/A
   newest: สินค้าใหม่ล่าสุด
   "no": false
@@ -499,6 +505,12 @@ sylius:
       price: ราคา
   product_attribute:
     code: รหัส
+    name: ชื่อ
+    type: ชนิด
+    updated_at: ปรับปรุงล่าสุด
+  product_association:
+    code: รหัส
+    create_header: สินค้าใหม่
     name: ชื่อ
     type: ชนิด
     updated_at: ปรับปรุงล่าสุด
@@ -677,6 +689,7 @@ sylius:
     login: เข้าสู่ระบบ
     logout: ออกจากระบบ
     register: ลงทะเบียน
+    name: ชื่อ
   unknown: ไม่ระบุ
   user:
     create_header: ผู้ใช้ใหม่

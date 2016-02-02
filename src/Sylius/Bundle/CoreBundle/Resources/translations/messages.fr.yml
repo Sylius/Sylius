@@ -29,6 +29,7 @@ sylius:
       roles: Rôles
     channel:
       taxonomies: Taxonomies
+      locale_default: Paramètres régionaux par défaut
       locales: Locales
       currency_default: Devise par défaut
       currencies: Devises
@@ -57,6 +58,7 @@ sylius:
       short_description: Brève description
       tax_category: Catégorie de taxe
       variant_selection_method: Méthode de sélection de variante
+      main_taxon: Taxe
     product_filter:
       name: Nom
       sku: Référence
@@ -110,6 +112,7 @@ sylius:
       images: Images
       on_hand: Stock actuel
       price: Prix
+      original_price: "Prix d'origine"
       sku: Référence
       weight: Poids
       width: Largeur
@@ -119,3 +122,5 @@ sylius:
         value: Valeur
     guest:
       email: E-mail
+    product_association_type:
+      name: Nom

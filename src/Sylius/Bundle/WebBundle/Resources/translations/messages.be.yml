@@ -40,6 +40,9 @@ sylius:
       tracking_number: Нумар адпраўлення
     title: Мой рахунак
   add_to_cart: Дадаць у кошык
+  association_type:
+    name: Імя
+    create: Стварыць
   address:
     city: Горад
     company: Кампанія
@@ -342,6 +345,9 @@ sylius:
     title: Назва
   meta:
     frontend_title: Sylius, сучасны электронны гандль для Symfony2
+  metadata:
+    id: ID
+    content: Змест
   na: Няма адказу
   newest: Навінкі
   "no": false
@@ -499,6 +505,12 @@ sylius:
       price: Кошт
   product_attribute:
     code: Код
+    name: Імя
+    type: Тып
+    updated_at: Апошняе абнаўленне
+  product_association:
+    code: Код
+    create_header: Новы тавар
     name: Імя
     type: Тып
     updated_at: Апошняе абнаўленне
@@ -677,6 +689,7 @@ sylius:
     login: Увайсці
     logout: Выйсці
     register: Зарэгістравацца
+    name: Імя
   unknown: Невядома
   user:
     create_header: Новы карыстальнік

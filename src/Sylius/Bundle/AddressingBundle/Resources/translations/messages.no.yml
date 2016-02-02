@@ -14,6 +14,7 @@ sylius:
       street: Gate
       province: Fylke
     country:
+      add_province: Legg til fylke
       name: Navn
       provinces: Fylker
       select: Velg
@@ -21,6 +22,7 @@ sylius:
       name: Navn
       select: Velg
     zone:
+      add_member: Legg til medlem
       members: Medlemmer
       name: Navn
       type: Type

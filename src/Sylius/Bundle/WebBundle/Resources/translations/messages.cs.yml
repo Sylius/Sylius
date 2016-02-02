@@ -41,6 +41,9 @@ sylius:
       tracking_number: Číslo zásilky
     title: Můj účet
   add_to_cart: Přidat do košíku
+  association_type:
+    name: Jméno
+    create: Vytvořit
   address:
     city: Město
     company: Firma
@@ -502,6 +505,9 @@ sylius:
   meta:
     backend_title: Sylius Dashboard
     frontend_title: Sylius, moderní elektronický obchod pro Symfony2
+  metadata:
+    id: ID
+    content: Obsah
   na: Není k dispozici
   newest: Nejnovější produkty
   "no": false
@@ -713,6 +719,15 @@ sylius:
     type: Typ
     update_header: Úprava atributu
     updated_at: Poslední aktualizace
+  product_association:
+    code: Kód
+    create_header: Nový produkt
+    index_header: Atributy produktu
+    manage: Správa atributů
+    name: Jméno
+    type: Typ
+    update_header: Úprava atributu
+    updated_at: Poslední aktualizace
   product_not_available_in_zone: Není k dispozici ve vaší zemi
   product_option:
     create: Vytvořit volbu
@@ -913,6 +928,8 @@ sylius:
     login: Přihlásit
     logout: Odhlásit
     register: Registrace
+    name: Jméno
+    id: ID
   unknown: Neznámý
   user:
     create_header: Nový uživatel

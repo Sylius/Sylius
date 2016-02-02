@@ -101,3 +101,5 @@ sylius:
       width: Bredde
     guest:
       email: Email
+    product_association_type:
+      name: Navn

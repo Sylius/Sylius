@@ -41,6 +41,9 @@ sylius:
       tracking_number: Número de seguimiento
     title: Mi cuenta
   add_to_cart: Añadir al carrito
+  association_type:
+    name: Nombre
+    create: Crear
   address:
     city: Ciudad
     company: Empresa
@@ -517,6 +520,9 @@ sylius:
   meta:
     backend_title: Panel de administración
     frontend_title: Sylius, e-commerce moderno para Symfony2
+  metadata:
+    id: ID
+    content: Contenido
   na: N/A
   newest: Novedades
   "no": false
@@ -722,6 +728,15 @@ sylius:
     code: Código
     create: Crear atributo de producto
     create_header: Nuevo atributo de producto
+    index_header: Atributos del producto
+    manage: Gestionar atributos
+    name: Nombre
+    type: Tipo
+    update_header: Editando atributo
+    updated_at: Fecha de última modificación
+  product_association:
+    code: Código
+    create_header: Nuevo producto
     index_header: Atributos del producto
     manage: Gestionar atributos
     name: Nombre
@@ -936,6 +951,8 @@ sylius:
     login: Iniciar sesión
     logout: Cerrar sesión
     register: Registrarse
+    name: Nombre
+    id: Id
   unknown: Desconocido
   user:
     create_header: Nuevo usuario

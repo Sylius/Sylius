@@ -104,3 +104,5 @@ sylius:
         value: Valor
     guest:
       email: Email
+    product_association_type:
+      name: Nome

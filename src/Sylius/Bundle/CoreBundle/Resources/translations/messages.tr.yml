@@ -119,3 +119,5 @@ sylius:
         value: Değer
     guest:
       email: E-posta
+    product_association_type:
+      name: Ad

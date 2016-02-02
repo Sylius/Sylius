@@ -13,6 +13,7 @@ sylius:
       street: Đường Phố
       province: Tỉnh
     country:
+      add_province: Thêm tỉnh
       name: Tên
       provinces: Tỉnh
       select: Chọn

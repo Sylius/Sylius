@@ -17,3 +17,5 @@ sylius:
       parent: Übergeordnet
       attributes: Attribute
       options: Optionen
+    association_type:
+      name: Name

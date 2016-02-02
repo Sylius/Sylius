@@ -14,6 +14,7 @@ sylius:
       street: Gade
       province: Provins
     country:
+      add_province: Tilføj provins
       name: Navn
       provinces: Provinser
       select: Vælg
@@ -21,6 +22,7 @@ sylius:
       name: Navn
       select: Vælg
     zone:
+      add_member: Tilføj medlem
       members: Medlemmer
       name: Navn
       type: Type

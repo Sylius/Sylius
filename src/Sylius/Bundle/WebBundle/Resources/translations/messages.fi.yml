@@ -48,6 +48,7 @@ sylius:
     id: Id
   ui:
     email: Sähköpostiosoite
+    id: Id
   user:
     username: Käyttäjänimi
   "yes": true

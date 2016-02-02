@@ -47,6 +47,8 @@ sylius:
       expires_at: Wygasa dnia
     promotion:
       actions: Akcje
+      add_action: Dodaj akcje
+      add_rule: Dodaj regułę
       coupon_based: Z wykorzystaniem kuponów
       exclusive: Ekskluzywny
       description: Opis

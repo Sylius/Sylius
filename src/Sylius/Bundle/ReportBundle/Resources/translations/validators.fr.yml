@@ -10,5 +10,6 @@ sylius:
     description:
       not_blank: La description du rapport ne peut pas être vide
     code:
+      not_blank: Le code du rapport ne peut pas être vide.
       unique: Ce code est déjà utilisé.
       single_word: Le code de rapport doit être un seul mot.

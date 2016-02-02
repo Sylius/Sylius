@@ -104,3 +104,5 @@ sylius:
         value: Vrijednost
     guest:
       email: E-mail
+    product_association_type:
+      name: Naziv grupe

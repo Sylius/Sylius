@@ -14,6 +14,7 @@ sylius:
       street: Ulica
       province: Provincia
     country:
+      add_province: Pridať provinciu
       name: Názov
       provinces: Provincie
       select: Vyberte
@@ -21,6 +22,7 @@ sylius:
       name: Názov
       select: Vyberte
     zone:
+      add_member: Pridať člena
       members: Členovia
       name: Názov
       type: Typ

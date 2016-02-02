@@ -13,3 +13,5 @@ sylius:
       id: ID
     product_filter:
       name: Ime
+    product_association_type:
+      name: Ime

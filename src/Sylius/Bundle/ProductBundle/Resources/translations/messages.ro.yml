@@ -17,3 +17,5 @@ sylius:
       parent: Părinte
       attributes: Atribute
       options: Opţiuni
+    association_type:
+      name: Nume

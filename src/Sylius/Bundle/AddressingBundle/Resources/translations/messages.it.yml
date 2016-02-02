@@ -14,6 +14,7 @@ sylius:
       street: Indirizzo
       province: Provincia
     country:
+      add_province: Aggiungi provincia
       name: Nome
       provinces: Provincia
       select: Scegli
@@ -21,6 +22,7 @@ sylius:
       name: Nome
       select: Seleziona
     zone:
+      add_member: Aggiungi membro
       members: Membri
       name: Nome
       type: Tipo

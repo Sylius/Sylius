@@ -41,6 +41,9 @@ sylius:
       tracking_number: Номер для отслеживания
     title: Моя учетная запись
   add_to_cart: Добавить в корзину
+  association_type:
+    name: Название
+    create: Добавить
   address:
     city: Город
     company: Компания
@@ -454,6 +457,9 @@ sylius:
     title: Название
   meta:
     frontend_title: Sylius, современное решение электронной коммерции для Symfony2
+  metadata:
+    id: ID
+    content: Контент
   na: Н/Д
   newest: Новейшие продукты
   "no": false
@@ -625,6 +631,12 @@ sylius:
       price: Цена
   product_attribute:
     code: Код
+    name: Название
+    type: Тип
+    updated_at: Изменено
+  product_association:
+    code: Код
+    create_header: Добавить товар
     name: Название
     type: Тип
     updated_at: Изменено
@@ -811,6 +823,8 @@ sylius:
     login: Вход
     logout: Выход
     register: Регистрация
+    name: Название
+    id: ID
   unknown: Неизвестен
   user:
     create_header: Новый пользователь

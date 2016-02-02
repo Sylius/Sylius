@@ -15,3 +15,5 @@ sylius:
       name: Імя
       parent: "Бацькоўскі аб'ект"
       options: Опцыі
+    association_type:
+      name: Імя

@@ -14,6 +14,7 @@ sylius:
       street: Улица
       province: Провинција
     country:
+      add_province: Додај провинцију
       name: Име
       provinces: Провинције
       select: Изаберите
@@ -21,6 +22,7 @@ sylius:
       name: Име
       select: Изаберите
     zone:
+      add_member: Додајте члана
       members: Чланови
       name: Име
       type: Тип

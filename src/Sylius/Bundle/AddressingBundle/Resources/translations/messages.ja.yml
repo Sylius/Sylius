@@ -12,8 +12,10 @@ sylius:
       street: それ以降の住所
       province: 都道府県
     country:
+      add_province: 都道府県を設定する
       provinces: 都道府県
     zone:
+      add_member: 追加
       members: 地域
       types:
         province: 都道府県

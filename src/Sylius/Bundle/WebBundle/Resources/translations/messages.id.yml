@@ -5,6 +5,8 @@ sylius:
   account:
     order:
       number: Nomor
+  association_type:
+    name: Nama
   address:
     firstname: Nama Depan
     lastname: Nama belakang
@@ -111,6 +113,8 @@ sylius:
     id: ID
     index_header: Menu node
     title: Judul
+  metadata:
+    id: ID
   "no": false
   order:
     billing_address: Alamat Penagihan
@@ -151,6 +155,9 @@ sylius:
     volume_based:
       price: Harga
   product_attribute:
+    code: Kode
+    name: Nama
+  product_association:
     code: Kode
     name: Nama
   product_option:
@@ -206,6 +213,8 @@ sylius:
     name: Nama
   ui:
     code: Kode
+    name: Nama
+    id: Id
   user:
     id: ID
   variant:

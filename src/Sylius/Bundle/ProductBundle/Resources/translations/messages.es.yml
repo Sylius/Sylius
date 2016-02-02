@@ -17,3 +17,5 @@ sylius:
       parent: Padre
       attributes: Atributos
       options: Opciones de producto
+    association_type:
+      name: Nombre

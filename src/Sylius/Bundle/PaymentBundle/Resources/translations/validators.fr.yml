@@ -34,3 +34,6 @@ sylius:
         max_range: 'Le pourcentage des frais ne peut être supérieur à {{ limit }}.'
         min_range: 'Le pourcentage des frais ne peut être inférieure à {{ limit }}.'
         not_blank: "Merci d'entrer le pourcentage de frais."
+    code:
+      not_blank: Veuillez entrez le code du mode de paiement.
+      unique: Ce code de mode de paiement existe déjà.

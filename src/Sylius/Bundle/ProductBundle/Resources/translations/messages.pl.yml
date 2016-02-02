@@ -17,3 +17,5 @@ sylius:
       parent: Rodzic
       attributes: Cechy
       options: Warianty
+    association_type:
+      name: Nazwa

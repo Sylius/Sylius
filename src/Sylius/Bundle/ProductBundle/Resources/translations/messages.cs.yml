@@ -17,3 +17,5 @@ sylius:
       parent: Rodič
       attributes: Atributy
       options: Možnosti
+    association_type:
+      name: Jméno

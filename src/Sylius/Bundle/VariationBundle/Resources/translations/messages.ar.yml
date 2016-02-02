@@ -8,3 +8,5 @@ sylius:
     option:
       name: اسم داخلي
       presentation: تقديم
+    option_value:
+      value: القيمة

@@ -41,6 +41,9 @@ sylius:
       tracking_number: Sekimo numeris
     title: Mano paskyra
   add_to_cart: Įdėti į krepšelį
+  association_type:
+    name: Pavadinimas
+    create: Sukurti
   address:
     city: Miestas
     company: įmonė
@@ -492,6 +495,9 @@ sylius:
   meta:
     backend_title: Sylius prietaisų skydelis
     frontend_title: Sylius, šiuolaikinės elektroninės komercijos Symfony2
+  metadata:
+    id: ID
+    content: Turinys
   na: Nėra
   newest: Naujausi produktai
   "no": false
@@ -703,6 +709,15 @@ sylius:
     type: Tipas
     update_header: Atributo redagavimas
     updated_at: Paskutinis atnaujinimas
+  product_association:
+    code: Kodas
+    create_header: Naujas produktas
+    index_header: Produkto atributai
+    manage: Valdyti atributus
+    name: Pavadinimas
+    type: Tipas
+    update_header: Atributo redagavimas
+    updated_at: Paskutinis atnaujinimas
   product_not_available_in_zone: Neprieinamas jūsų šalyje
   product_option:
     create: Sukurti parinktį
@@ -906,6 +921,8 @@ sylius:
     login: Prisijungti
     logout: Atsijungti
     register: Užsiregistruoti
+    name: Pavadinimas
+    id: Id
   unknown: Nežinoma
   user:
     create_header: Naujas vartotojas

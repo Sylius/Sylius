@@ -14,6 +14,7 @@ sylius:
       street: Вулиця
       province: Область
     country:
+      add_province: Додати провінцію
       name: Країна
       provinces: Області
       select: Виберіть
@@ -21,6 +22,7 @@ sylius:
       name: Ім’я
       select: Виберіть
     zone:
+      add_member: Додати члена групи
       members: Члени
       name: Назва
       type: Тип

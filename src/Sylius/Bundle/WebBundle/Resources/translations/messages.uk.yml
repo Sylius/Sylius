@@ -41,6 +41,9 @@ sylius:
       tracking_number: Трекінг-номер
     title: Мій обліковий запис
   add_to_cart: У кошик
+  association_type:
+    name: Ім’я
+    create: Створити
   address:
     city: Місто
     company: Компанія
@@ -392,6 +395,9 @@ sylius:
     title: Назва
   meta:
     frontend_title: Sylius, сучасна система електронної комерції для Symfony2
+  metadata:
+    id: ID
+    content: Зміст
   na: N/A
   newest: Найновіші продукти
   "no": false
@@ -554,6 +560,12 @@ sylius:
       price: Ціна
   product_attribute:
     code: Код
+    name: Ім’я
+    type: Тип
+    updated_at: Останнє оновлення
+  product_association:
+    code: Код
+    create_header: Новий товар
     name: Ім’я
     type: Тип
     updated_at: Останнє оновлення
@@ -737,6 +749,8 @@ sylius:
     login: Логін
     logout: Вихід
     register: Зареєструватися
+    name: Ім’я
+    id: ID
   unknown: Не вказаний
   user:
     create_header: Новий користувач

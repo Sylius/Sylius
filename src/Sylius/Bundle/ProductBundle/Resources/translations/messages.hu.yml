@@ -15,3 +15,5 @@ sylius:
       name: Név
       parent: Szülő
       options: Beállítások
+    association_type:
+      name: Név

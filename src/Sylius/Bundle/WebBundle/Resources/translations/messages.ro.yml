@@ -40,6 +40,9 @@ sylius:
       tracking_number: Număr de urmărire
     title: Contul meu
   add_to_cart: Adaugă în coș
+  association_type:
+    name: Nume
+    create: Creează
   address:
     city: Oraș
     company: Firmă
@@ -364,6 +367,9 @@ sylius:
     title: Titlu
   meta:
     frontend_title: Sylius, e-commerce modern pentru Symfony2
+  metadata:
+    id: Id
+    content: Conţinut
   na: N/A
   newest: Produse noi
   "no": false
@@ -527,6 +533,12 @@ sylius:
       price: Preț
   product_attribute:
     code: Cod
+    name: Nume
+    type: Tip
+    updated_at: Data modificării
+  product_association:
+    code: Cod
+    create_header: Produs nou
     name: Nume
     type: Tip
     updated_at: Data modificării
@@ -707,6 +719,8 @@ sylius:
     login: Conectaţi-vă
     logout: Deconectare
     register: Creează cont nou
+    name: Nume
+    id: Id
   unknown: Necunoscut
   user:
     create_header: Utilizator nou

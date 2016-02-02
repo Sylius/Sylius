@@ -122,3 +122,5 @@ sylius:
         value: Wartość
     guest:
       email: Email
+    product_association_type:
+      name: Nazwa

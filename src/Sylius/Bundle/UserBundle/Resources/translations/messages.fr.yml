@@ -19,6 +19,7 @@ sylius:
       groups: Groupes
       last_name: Nom
       email: E-mail
+      gender: Sexe 
       birthday: Date d’anniversaire 
       billing_address: Adresse de facturation
       different_billing_address: Utiliser une adresse différente pour la facturation ?

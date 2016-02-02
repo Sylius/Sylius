@@ -5,6 +5,8 @@ sylius:
   account:
     order:
       number: Nummer
+  association_type:
+    name: Name
   address:
     firstname: Vorname
     street: Strasse / Nr.
@@ -92,6 +94,8 @@ sylius:
   menu_node:
     id: ID
     title: Titel
+  metadata:
+    id: ID
   "no": false
   order:
     billing_address: Rechnungsadresse
@@ -119,6 +123,9 @@ sylius:
     tax_category: Steuerkategorie
     variant_selection_method: Varianten
   product_attribute:
+    code: Code
+    name: Name
+  product_association:
     code: Code
     name: Name
   product_option:
@@ -171,6 +178,8 @@ sylius:
     name: Name
   ui:
     code: Code
+    name: Name
+    id: ID
   user:
     id: ID
   variant:

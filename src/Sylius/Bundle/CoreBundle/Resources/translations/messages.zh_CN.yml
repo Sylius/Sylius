@@ -99,3 +99,5 @@ sylius:
       width: 宽度
     guest:
       email: 电子邮件
+    product_association_type:
+      name: 名称

@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    login:
+      username: ชื่อผู้ใช้
+      password: รหัสผ่าน
+  ui:
+    dashboard: แดชบอร์ด

@@ -41,6 +41,9 @@ sylius:
       tracking_number: Kargo takip numarası
     title: Hesabım
   add_to_cart: Sepete ekle
+  association_type:
+    name: Ad
+    create: Oluştur
   address:
     city: Şehir
     company: Şirket
@@ -517,6 +520,9 @@ sylius:
   meta:
     backend_title: Sylius kontrol paneli
     frontend_title: Sylius, Symfony2 için çağdaş e-ticaret
+  metadata:
+    id: ID
+    content: İçerik
   na: Veri yok
   newest: Yeni Ürünler
   "no": false
@@ -722,6 +728,15 @@ sylius:
     code: Kod
     create: Ürün özniteliğini oluştur
     create_header: Yeni ürün özniteliği
+    index_header: Ürün Öznitelikleri
+    manage: Özellikleri yönet
+    name: Ad
+    type: Türü
+    update_header: Öznitelik düzenleme
+    updated_at: Son gücelleme
+  product_association:
+    code: Kod
+    create_header: Yeni ürün
     index_header: Ürün Öznitelikleri
     manage: Özellikleri yönet
     name: Ad
@@ -936,6 +951,8 @@ sylius:
     login: Giriş
     logout: Çıkış yap
     register: Üye ol
+    name: Ad
+    id: Id
   unknown: Bilinmiyor
   user:
     create_header: Yeni Kullanıcı

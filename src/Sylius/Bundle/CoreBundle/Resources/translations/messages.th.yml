@@ -104,3 +104,5 @@ sylius:
         value: ค่า
     guest:
       email: อีเมล
+    product_association_type:
+      name: ชื่อ

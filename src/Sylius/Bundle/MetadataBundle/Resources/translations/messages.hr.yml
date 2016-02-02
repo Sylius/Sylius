@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  metadata:
+    page:
+      title: Naslov
+      description: Opis
+    twitter:
+      title: Naslov
+      description: Opis
+      image: Fotografija
