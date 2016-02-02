@@ -52,6 +52,8 @@
         <parameter key="sylius.listener.user_reloader.class">Sylius\Bundle\UserBundle\EventListener\UserReloaderListener</parameter>
         <parameter key="sylius.listener.user_mailer_listener.class">Sylius\Bundle\UserBundle\EventListener\MailerListener</parameter>
 
+        <parameter key="sylius.form.event_subscriber.add_user_type.class">Sylius\Bundle\UserBundle\Form\EventSubscriber\AddUserFormSubscriber</parameter>
+
         <parameter key="sylius.controller.user_security.class">Sylius\Bundle\UserBundle\Controller\SecurityController</parameter>
 
         <parameter key="sylius.user.validator.unique_registered_user.class">Sylius\Bundle\UserBundle\Validator\Constraints\RegisteredUserValidator</parameter>
@@ -188,6 +190,9 @@
         <service id="sylius.form.type.gender" class="%sylius.form.type.gender.class%">
             <tag name="form.type" alias="sylius_gender" />
         </service>
+
+        <!-- Form event subscribers-->
+        <service id="sylius.form.event_subscriber.add_user_type" class="%sylius.form.event_subscriber.add_user_type.class%" />
 
         <!-- Validators -->
         <service id="validator.unique.registered_user" class="%sylius.user.validator.unique_registered_user.class%">

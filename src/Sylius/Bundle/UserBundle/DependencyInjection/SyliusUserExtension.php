@@ -58,5 +58,9 @@ class SyliusUserExtension extends AbstractResourceExtension
             ->getDefinition('sylius.form.type.customer_guest')
             ->addArgument(new Reference('sylius.repository.customer'))
         ;
+        $container
+            ->getDefinition('sylius.form.type.customer')
+            ->addArgument(new Reference('sylius.form.event_subscriber.add_user_type'))
+        ;
     }
 }
