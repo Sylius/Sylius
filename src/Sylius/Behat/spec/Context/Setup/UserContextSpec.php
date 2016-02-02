@@ -57,12 +57,9 @@ class UserContextSpec extends ObjectBehavior
         $customer->setFirstName('John')->shouldBeCalled();
         $customer->setLastName('Doe')->shouldBeCalled();
 
-        $customer->getFirstName()->willReturn('John');
-        $customer->getLastName()->willReturn('Doe');
-
         $userFactory->createNew()->willReturn($user);
         $user->setCustomer($customer)->shouldBeCalled();
-        $user->setUsername('John Doe')->shouldBeCalled();
+        $user->setUsername('test@example.com')->shouldBeCalled();
         $user->setEmail('test@example.com')->shouldBeCalled();
         $user->setPlainPassword('pa$$word')->shouldBeCalled();
 
@@ -91,7 +88,7 @@ class UserContextSpec extends ObjectBehavior
 
         $userFactory->createNew()->willReturn($user);
         $user->setCustomer($customer)->shouldBeCalled();
-        $user->setUsername('John Doe')->shouldBeCalled();
+        $user->setUsername('test@example.com')->shouldBeCalled();
         $user->setEmail('test@example.com')->shouldBeCalled();
         $user->setPlainPassword('pa$$word')->shouldBeCalled();
 

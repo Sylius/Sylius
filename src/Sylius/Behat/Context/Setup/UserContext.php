@@ -127,7 +127,7 @@ class UserContext implements Context
         $user = $this->userFactory->createNew();
 
         $user->setCustomer($customer);
-        $user->setUsername($customer->getFirstName().' '.$customer->getLastName());
+        $user->setUsername($email);
         $user->setEmail($email);
         $user->setPlainPassword($password);
 
