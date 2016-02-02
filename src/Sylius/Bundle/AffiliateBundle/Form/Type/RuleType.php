@@ -15,7 +15,7 @@ use Sylius\Bundle\AffiliateBundle\Form\Type\Core\AbstractConfigurationType;
 use Sylius\Bundle\AffiliateBundle\Form\EventListener\BuildRuleFormSubscriber;
 use Sylius\Component\Affiliate\Model\RuleInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RuleType extends AbstractConfigurationType
 {
@@ -40,9 +40,9 @@ class RuleType extends AbstractConfigurationType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
 
         $resolver->setDefaults(array(
             'configuration_type' => RuleInterface::TYPE_NTH_ORDER,
@@ -54,6 +54,6 @@ class RuleType extends AbstractConfigurationType
      */
     public function getName()
     {
-        return 'sylius_affiliate_goal_rule';
+        return 'sylius_affiliate_rule';
     }
 }

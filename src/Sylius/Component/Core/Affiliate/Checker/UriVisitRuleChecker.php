@@ -24,7 +24,7 @@ class UriVisitRuleChecker implements RuleCheckerInterface
         /**
          * @var Request $subject
          */
-        return $configuration['uri'] === $subject->getRequestUri();
+        return $configuration['uri'] === $subject->getPathInfo();
     }
 
     /**

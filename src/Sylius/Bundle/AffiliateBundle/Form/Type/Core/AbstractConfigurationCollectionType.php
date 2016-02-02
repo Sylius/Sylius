@@ -16,7 +16,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class AbstractConfigurationCollectionType extends AbstractType
 {
@@ -37,11 +37,12 @@ abstract class AbstractConfigurationCollectionType extends AbstractType
     {
         $prototypes = array();
 
-        foreach ($this->registry->all() as $type => $value) {
-            $form = $builder->create($options['prototype_name'], $options['type'], array_replace(
+        foreach (array_keys($this->registry->all()) as $type) {
+            $prototypeOptions = array_replace(
                 array('configuration_type' => $type),
                 $options['options']
-            ));
+            );
+            $form = $builder->create($options['prototype_name'], $options['type'], $prototypeOptions);
 
             $prototypes[$type] = $form->getForm();
         }
@@ -65,7 +66,7 @@ abstract class AbstractConfigurationCollectionType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'type' => $this->getFormTypeOption(),

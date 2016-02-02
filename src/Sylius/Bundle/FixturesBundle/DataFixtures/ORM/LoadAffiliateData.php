@@ -34,7 +34,7 @@ class LoadAffiliateData extends DataFixture
         $user = $this->getReference('Sylius.User-Administrator');
 
         /** @var $affiliate AffiliateInterface */
-        $affiliate = $this->getAffiliateRepository()->createNew();
+        $affiliate = $this->get('sylius.factory.affiliate')->createNew();
 
         for ($i = 1; $i <= 50; $i++) {
             $transaction = $this->createTransaction(
@@ -71,13 +71,18 @@ class LoadAffiliateData extends DataFixture
     protected function createTransaction(\DateTime $date, $type, $amount)
     {
         /** @var $transaction TransactionInterface */
-        $transaction = $this->getTransactionRepository()->createNew();
+        $transaction = $this->get('sylius.factory.transaction')->createNew();
         $transaction->setType($type);
         $transaction->setAmount($amount);
         $transaction->setCurrency('EUR');
         $transaction->setCreatedAt($date);
 
         return $transaction;
+    }
+
+    private function getAffiliateRepository()
+    {
+        return $this->get('sylius.repository.affiliate');
     }
 
     /**

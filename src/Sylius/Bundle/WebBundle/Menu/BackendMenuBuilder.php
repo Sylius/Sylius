@@ -238,13 +238,13 @@ class BackendMenuBuilder extends MenuBuilder
                 'labelAttributes' => array('icon' => 'glyphicon glyphicon-envelope'),
             ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.emails', $section)));
         }
-        if ($this->authorizationChecker->isGranted('sylius.affiliate_goal.index')) {
+        if ($this->rbacAuthorizationChecker->isGranted('sylius.affiliate_goal.index')) {
             $child->addChild('affiliate_goals', array(
                 'route' => 'sylius_backend_affiliate_goal_index',
                 'labelAttributes' => array('icon' => 'glyphicon glyphicon-usd'),
             ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.affiliate_goal', $section)));
         }
-        if ($this->authorizationChecker->isGranted('sylius.affiliate_banner.index')) {
+        if ($this->rbacAuthorizationChecker->isGranted('sylius.affiliate_banner.index')) {
             $child->addChild('affiliate_banners', array(
                 'route' => 'sylius_backend_affiliate_banner_index',
                 'labelAttributes' => array('icon' => 'glyphicon glyphicon-picture'),
@@ -403,10 +403,12 @@ class BackendMenuBuilder extends MenuBuilder
             ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.general_settings', $section)));
         }
 
-        $child->addChild('affiliate_settings', array(
-            'route' => 'sylius_backend_affiliate_settings',
-            'labelAttributes' => array('icon' => 'glyphicon glyphicon-euro'),
-        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.affiliate_settings', $section)));
+        if ($this->rbacAuthorizationChecker->isGranted('sylius.settings.sylius_affiliate')) {
+            $child->addChild('affiliate_settings', array(
+                'route' => 'sylius_backend_affiliate_settings',
+                'labelAttributes' => array('icon' => 'glyphicon glyphicon-euro'),
+            ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.affiliate_settings', $section)));
+        }
 
         if ($this->rbacAuthorizationChecker->isGranted('sylius.settings.sylius_security')) {
             $child->addChild('security_settings', array(

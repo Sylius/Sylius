@@ -73,6 +73,8 @@
         <parameter key="sylius.promotion_action.add_product.class">Sylius\Component\Core\Promotion\Action\AddProductAction</parameter>
         <parameter key="sylius.promotion_eligibility_checker.class">Sylius\Component\Core\Promotion\Checker\PromotionEligibilityChecker</parameter>
 
+        <parameter key="sylius.context.affiliate.class">Sylius\Bundle\AffiliateBundle\Context\AffiliateContext</parameter>
+        <parameter key="sylius.referral_processor.class">Sylius\Component\Affiliate\Processor\ReferralProcessor</parameter>
         <parameter key="sylius.affiliate_resolver.class">Sylius\Component\Core\Affiliate\AffiliateResolver</parameter>
         <parameter key="sylius.affiliate_goal_provision.percentage_provision.class">Sylius\Component\Core\Affiliate\Provision\PercentageProvision</parameter>
 
@@ -451,6 +453,15 @@
 
         <service id="sylius.price_calculator.zone_based" class="%sylius.price_calculator.zone_based.class%">
             <tag name="sylius.price_calculator" type="zone_based" label="Customer zone based" />
+        </service>
+
+        <!-- affiliate -->
+        <service id="sylius.referral_processor" class="%sylius.referral_processor.class%">
+            <argument type="service" id="sylius.repository.affiliate_goal" />
+            <argument type="service" id="sylius.referral_eligibility_checker" />
+            <argument type="service" id="sylius.affiliate_provision_applicator" />
+            <argument type="service" id="sylius.context.affiliate" />
+            <argument type="service" id="sylius.context.channel" />
         </service>
 
         <service id="sylius.affiliate_goal_rule_checker.nth_order" class="%sylius.affiliate_goal_rule_checker.nth_order.class%">

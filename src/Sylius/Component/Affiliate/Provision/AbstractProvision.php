@@ -13,16 +13,19 @@ namespace Sylius\Component\Affiliate\Provision;
 
 use Sylius\Component\Affiliate\Model\AffiliateInterface;
 use Sylius\Component\Affiliate\Model\TransactionInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Currency\Context\CurrencyContextInterface;
 
 abstract class AbstractProvision implements AffiliateProvisionInterface
 {
     protected $currency = 'EUR';
-    protected $transactionRepository;
+    protected $transactionFactory;
+    protected $currencyContext;
 
-    public function __construct(RepositoryInterface $transactionRepository)
+    public function __construct(CurrencyContextInterface $currencyContext, FactoryInterface $transactionFactory)
     {
-        $this->transactionRepository = $transactionRepository;
+        $this->currencyContext = $currencyContext;
+        $this->transactionFactory = $transactionFactory;
     }
 
     /**
@@ -33,9 +36,9 @@ abstract class AbstractProvision implements AffiliateProvisionInterface
     protected function createTransaction(AffiliateInterface $affiliate)
     {
         /** @var $transaction TransactionInterface */
-        $transaction = $this->transactionRepository->createNew();
+        $transaction = $this->transactionFactory->createNew();
         $transaction->setAffiliate($affiliate);
-        $transaction->setCurrency($this->currency);
+        $transaction->setCurrency($this->currencyContext->getCurrency());
 
         $affiliate->addTransaction($transaction);
 

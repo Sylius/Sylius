@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\AffiliateBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RuleChoiceType extends AbstractType
 {
@@ -26,7 +26,7 @@ class RuleChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults(array(

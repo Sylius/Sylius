@@ -15,7 +15,7 @@ use Sylius\Bundle\AffiliateBundle\Form\Type\Core\AbstractConfigurationType;
 use Sylius\Bundle\AffiliateBundle\Form\EventListener\BuildProvisionFormSubscriber;
 use Sylius\Component\Affiliate\Model\ProvisionInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProvisionType extends AbstractConfigurationType
 {
@@ -40,9 +40,9 @@ class ProvisionType extends AbstractConfigurationType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
 
         $resolver->setDefaults(array(
             'configuration_type' => ProvisionInterface::TYPE_FIXED_PROVISION,
@@ -54,6 +54,6 @@ class ProvisionType extends AbstractConfigurationType
      */
     public function getName()
     {
-        return 'sylius_affiliate_goal_provision';
+        return 'sylius_affiliate_provision';
     }
 }

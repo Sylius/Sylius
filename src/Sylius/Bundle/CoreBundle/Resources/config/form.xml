@@ -169,33 +169,26 @@
 
         <!-- affiliate -->
         <service id="sylius.form.type.affiliate_rule.nth_order_configuration" class="%sylius.form.type.affiliate_rule.nth_order_configuration.class%">
-            <argument>%sylius.validation_group.affiliate_rule_nth_order_configuration%</argument>
             <tag name="form.type" alias="sylius_affiliate_rule_nth_order_configuration" />
         </service>
         <service id="sylius.form.type.affiliate_rule.taxonomy_configuration" class="%sylius.form.type.affiliate_rule.taxonomy_configuration.class%">
-            <argument>%sylius.validation_group.affiliate_rule_taxonomy_configuration%</argument>
             <tag name="form.type" alias="sylius_affiliate_rule_taxonomy_configuration" />
         </service>
         <service id="sylius.form.type.affiliate_rule.contains_product_configuration" class="%sylius.form.type.affiliate_rule.contains_product_configuration.class%">
-            <argument>%sylius.validation_group.affiliate_rule_contains_product_configuration%</argument>
             <argument type="service" id="sylius.repository.product_variant" />
             <tag name="form.type" alias="sylius_affiliate_rule_contains_product_configuration" />
         </service>
         <service id="sylius.form.type.affiliate_rule.route_visit_configuration" class="%sylius.form.type.affiliate_rule.route_visit_configuration.class%">
-            <argument>%sylius.validation_group.affiliate_rule_route_visit_configuration%</argument>
             <tag name="form.type" alias="sylius_affiliate_rule_route_visit_configuration" />
         </service>
         <service id="sylius.form.type.affiliate_rule.uri_visit_configuration" class="%sylius.form.type.affiliate_rule.uri_visit_configuration.class%">
-            <argument>%sylius.validation_group.affiliate_rule_uri_visit_configuration%</argument>
             <tag name="form.type" alias="sylius_affiliate_rule_uri_visit_configuration" />
         </service>
         <service id="sylius.form.type.affiliate_rule.registration_configuration" class="%sylius.form.type.affiliate_rule.registration_configuration.class%">
-            <argument>%sylius.validation_group.affiliate_rule_registration_configuration%</argument>
             <tag name="form.type" alias="sylius_affiliate_rule_registration_configuration" />
         </service>
         <service id="sylius.form.type.affiliate_rule.referrer_configuration" class="%sylius.form.type.affiliate_rule.referrer_configuration.class%">
             <argument type="service" id="sylius.repository.affiliate" />
-            <argument>%sylius.validation_group.affiliate_rule_referrer_configuration%</argument>
             <tag name="form.type" alias="sylius_affiliate_rule_referrer_configuration" />
         </service>
 

@@ -6,7 +6,6 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Affiliate\Repository\AffiliateRepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
@@ -16,12 +15,10 @@ class ReferrerConfigurationType extends AbstractType
      * @var AffiliateRepositoryInterface
      */
     protected $affiliateRepository;
-    protected $validationGroups;
 
-    public function __construct(EntityRepository $affiliateRepository, array $validationGroups)
+    public function __construct(EntityRepository $affiliateRepository)
     {
         $this->affiliateRepository = $affiliateRepository;
-        $this->validationGroups     = $validationGroups;
     }
 
     /**
@@ -46,18 +43,6 @@ class ReferrerConfigurationType extends AbstractType
             ))
         ;
 
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'validation_groups' => $this->validationGroups,
-            ))
-        ;
     }
 
     /**

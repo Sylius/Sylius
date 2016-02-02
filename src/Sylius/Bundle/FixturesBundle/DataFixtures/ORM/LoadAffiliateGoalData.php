@@ -77,7 +77,7 @@ class LoadAffiliateGoalData extends DataFixture
     protected function createRule($type, array $configuration)
     {
         /** @var $rule RuleInterface */
-        $rule = $this->getAffiliateRuleRepository()->createNew();
+        $rule = $this->get('sylius.factory.affiliate_rule')->createNew();
         $rule->setType($type);
         $rule->setConfiguration($configuration);
 
@@ -95,7 +95,7 @@ class LoadAffiliateGoalData extends DataFixture
     protected function createProvision($type, array $configuration)
     {
         /** @var $provision ProvisionInterface */
-        $provision = $this->getAffiliateProvisionRepository()->createNew();
+        $provision = $this->get('sylius.factory.affiliate_provision')->createNew();
         $provision->setType($type);
         $provision->setConfiguration($configuration);
 
@@ -115,7 +115,7 @@ class LoadAffiliateGoalData extends DataFixture
     protected function createGoal($name, $description, array $rules, array $provisions)
     {
         /** @var $goal GoalInterface */
-        $goal = $this->getAffiliateGoalRepository()->createNew();
+        $goal = $this->get('sylius.factory.affiliate_goal')->createNew();
         $goal->setName($name);
         $goal->setDescription($description);
 

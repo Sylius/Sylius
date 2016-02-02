@@ -13,20 +13,12 @@ namespace Sylius\Bundle\AffiliateBundle\Form\Type\Provision;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Range;
 use Symfony\Component\Validator\Constraints\Type;
 
 class FixedProvisionConfigurationType extends AbstractType
 {
-    protected $validationGroups;
-
-    public function __construct(array $validationGroups)
-    {
-        $this->validationGroups = $validationGroups;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -40,15 +32,6 @@ class FixedProvisionConfigurationType extends AbstractType
                     new Type(array('type' => 'numeric')),
                     new Range(array('min' => 1)),
                 ),
-            ))
-        ;
-    }
-
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'validation_groups' => $this->validationGroups,
             ))
         ;
     }

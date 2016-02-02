@@ -12,13 +12,9 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type\Rule\Affiliate;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * Contains affiliate Uri visit rule configuration form type.
+ * Contains registration rule configuration form type.
  *
  * @author Laszlo Horvath <pentarim@gmail.com>
  */

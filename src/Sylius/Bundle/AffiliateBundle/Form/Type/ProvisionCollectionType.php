@@ -28,6 +28,6 @@ class ProvisionCollectionType extends AbstractConfigurationCollectionType
      */
     public function getFormTypeOption()
     {
-        return 'sylius_affiliate_goal_provision';
+        return 'sylius_affiliate_provision';
     }
 }

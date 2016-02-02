@@ -28,6 +28,6 @@ class RuleCollectionType extends AbstractConfigurationCollectionType
      */
     public function getFormTypeOption()
     {
-        return 'sylius_affiliate_goal_rule';
+        return 'sylius_affiliate_rule';
     }
 }
