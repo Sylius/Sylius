@@ -155,6 +155,28 @@ class CheckoutContext extends FeatureContext
     }
 
     /**
+     * @When /^I proceed logging as "([^"]*)" guest with "([^"]*)" as shipping country$/
+     */
+    public function iProceedLoggingAsGuestWithAsShippingCountry($email, $shippingCountry)
+    {
+        $checkoutSecurityPage = $this->getPage('Checkout\CheckoutSecurityPage')->open();
+        $checkoutSecurityPage->logInAsGuest($email);
+
+        $checkoutAddressingPage = $this->getPage('Checkout\CheckoutAddressingStep');
+        $addressingDetails = [
+            'firstName' => 'John',
+            'lastName' => 'Doe',
+            'country' => (null === $shippingCountry) ? 'France' : $shippingCountry,
+            'street' => '0635 Myron Hollow Apt. 711',
+            'city' => 'North Bridget',
+            'postcode' => '93-554',
+            'phoneNumber' => '321123456'
+        ];
+        $checkoutAddressingPage->fillAddressingDetails($addressingDetails);
+        $checkoutAddressingPage->forward();
+    }
+
+    /**
      * @When I confirm my order
      */
     public function iConfirmMyOrder()

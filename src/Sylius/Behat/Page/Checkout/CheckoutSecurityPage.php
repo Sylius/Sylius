@@ -40,4 +40,14 @@ class CheckoutSecurityPage extends SymfonyPage
 
         $this->pressButton('Login');
     }
+
+    /**
+     * @param string $email
+     */
+    public function logInAsGuest($email)
+    {
+        $this->find('css', '#sylius_customer_guest input#sylius_customer_guest_email')->setValue($email);
+
+        $this->pressButton('Proceed with your order');
+    }
 }
