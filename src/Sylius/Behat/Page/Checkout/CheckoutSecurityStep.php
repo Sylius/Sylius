@@ -42,4 +42,15 @@ class CheckoutSecurityStep extends SymfonyPage
 
         $document->pressButton('Login');
     }
+
+    /**
+     * @param string $email
+     */
+    public function logInAsGuest($email)
+    {
+        $document = $this->getDocument();
+
+        $document->find('css', '#sylius_customer_guest input#sylius_customer_guest_email')->setValue($email);
+        $document->pressButton('Proceed with your order');
+    }
 }

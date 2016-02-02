@@ -184,6 +184,17 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When /^I proceed logging as "([^"]*)" guest with "([^"]*)" as shipping country$/
+     */
+    public function iProceedLoggingAsGuestWithAsShippingCountry($email, $shippingCountry)
+    {
+        $this->checkoutSecurityStep->open();
+        $this->checkoutSecurityStep->logInAsGuest($email);
+
+        $this->proceedOrder($shippingCountry, null, null);
+    }
+
+    /**
      * @When I confirm my order
      */
     public function iConfirmMyOrder()
