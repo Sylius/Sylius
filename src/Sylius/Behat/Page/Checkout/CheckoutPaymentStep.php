@@ -25,4 +25,13 @@ class CheckoutPaymentStep extends SymfonyPage
     {
         return 'sylius_checkout_payment';
     }
+
+    /**
+     * @param string $paymentMethod
+     */
+    public function selectPaymentMethod($paymentMethod)
+    {
+        $this->pressRadio($paymentMethod);
+        $this->pressButton('Continue');
+    }
 }

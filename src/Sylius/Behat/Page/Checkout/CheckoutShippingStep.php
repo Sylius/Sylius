@@ -25,4 +25,13 @@ class CheckoutShippingStep extends SymfonyPage
     {
         return 'sylius_checkout_shipping';
     }
+
+    /**
+     * @param string $shippingMethod
+     */
+    public function selectShippingMethod($shippingMethod)
+    {
+        $this->pressRadio($shippingMethod);
+        $this->pressButton('Continue');
+    }
 }

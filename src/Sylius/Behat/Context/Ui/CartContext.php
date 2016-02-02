@@ -24,11 +24,7 @@ class CartContext extends FeatureContext
      */
     public function myCartTotalShouldBe($total)
     {
-        /** @var CartSummaryPage $cartSummaryPage */
-        $cartSummaryPage = $this->getPage('Cart\CartSummaryPage');
-        $cartSummaryPage->open();
-
-        $this->assertSession()->elementTextContains('css', '#cart-summary', 'Grand total: '.$total);
+        $this->assertCartSummaryPageContents('Grand', $total);
     }
 
     /**
@@ -36,10 +32,27 @@ class CartContext extends FeatureContext
      */
     public function myCartTaxesShouldBe($taxesTotal)
     {
+        $this->assertCartSummaryPageContents('Tax', $taxesTotal);
+    }
+
+    /**
+     * @Given /^my cart shipping fee should be "([^"]+)"$/
+     */
+    public function myCartShippingFeeShouldBe($shippingTotal)
+    {
+        $this->assertCartSummaryPageContents('Shipping', $shippingTotal);
+    }
+
+    /**
+     * @param string $type
+     * @param string $value
+     */
+    public function assertCartSummaryPageContents($type, $value)
+    {
         /** @var CartSummaryPage $cartSummaryPage */
         $cartSummaryPage = $this->getPage('Cart\CartSummaryPage');
         $cartSummaryPage->open();
 
-        $this->assertSession()->elementTextContains('css', '#cart-summary', 'Tax total: '.$taxesTotal);
+        $this->assertSession()->elementTextContains('css', '#cart-summary', $type.' total: '.$value);
     }
 }
