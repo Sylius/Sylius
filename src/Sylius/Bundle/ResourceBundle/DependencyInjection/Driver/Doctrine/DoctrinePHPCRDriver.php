@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Doctrine;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
+use Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Parameter;
@@ -48,6 +49,18 @@ class DoctrinePHPCRDriver extends AbstractDoctrineDriver
             new Reference($metadata->getServiceId('manager')),
             $this->getClassMetadataDefinition($metadata),
         ]);
+
+        if ($metadata->hasParameter('translation')) {
+            $repositoryReflection = new \ReflectionClass($repositoryClass);
+            $translatableRepositoryInterface = TranslatableResourceRepositoryInterface::class;
+            $translationConfig = $metadata->getParameter('translation');
+
+            if (interface_exists($translatableRepositoryInterface) && $repositoryReflection->implementsInterface($translatableRepositoryInterface)) {
+                if (isset($translationConfig['fields'])) {
+                    $definition->addMethodCall('setTranslatableFields', [$translationConfig['fields']]);
+                }
+            }
+        }
 
         $container->setDefinition($metadata->getServiceId('repository'), $definition);
     }
