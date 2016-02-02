@@ -1,6 +1,6 @@
 @ui-cart
-Feature: Cart with single tax rate
-    In order to buy goods with correct taxes applied
+Feature: Apply correct tax for items with the same tax rate
+    In order to pay proper amount when buying goods from the same tax category
     As a Customer
     I want to have correct taxes applied to my order
 

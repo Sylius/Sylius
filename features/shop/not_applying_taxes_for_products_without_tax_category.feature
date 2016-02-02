@@ -1,6 +1,6 @@
 @ui-cart
-Feature: Cart without taxes
-    In order to buy goods without taxes
+Feature: Not applying taxes for products without tax category
+    In order to pay proper amount when buying goods without tax category
     As a Customer
     I want to have correct taxes applied to my order
 
