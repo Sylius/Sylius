@@ -57,9 +57,10 @@ class ShippingContext implements Context
      * @Transform :shippingMethodName shipping method
      * @Transform shipping method :shippingMethodName
      */
-    public function castShippingMethodNameToShippingMethod($shippingMethodName)
+    public function getShippingMethodByName($shippingMethodName)
     {
-        if (null === $shippingMethod = $this->shippingMethodRepository->findOneBy(['name' => $shippingMethodName])) {
+        $shippingMethod = $this->shippingMethodRepository->findOneBy(['name' => $shippingMethodName]);
+        if (null === $shippingMethod) {
             throw new \Exception('Shipping method with name "'.$shippingMethodName.'" does not exist');
         }
 
@@ -93,7 +94,7 @@ class ShippingContext implements Context
         $name,
         $locale = 'en',
         $configuration = ['amount' => 0],
-        $calculator = DefaultCalculators::PER_ITEM_RATE,
+        $calculator = DefaultCalculators::FLAT_RATE,
         $zone = null
     ) {
         if (null === $zone) {

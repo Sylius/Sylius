@@ -108,6 +108,7 @@ class CheckoutContext extends FeatureContext
 
     /**
      * @When /^I proceed selecting "([^"]+)" shipping method$/
+     * @Given /^I chose "([^"]*)" shipping method$/
      */
     public function iProceedSelectingShippingMethod($shippingMethod)
     {
@@ -125,6 +126,15 @@ class CheckoutContext extends FeatureContext
         $checkoutAddressingPage->forward();
 
         $checkoutShippingPage = $this->getPage('Checkout\CheckoutShippingStep');
+        $checkoutShippingPage->selectShippingMethod($shippingMethod);
+    }
+
+    /**
+     * @When /^I change shipping method to "([^"]*)"$/
+     */
+    public function iChangeShippingMethod($shippingMethod)
+    {
+        $checkoutShippingPage = $this->getPage('Checkout\CheckoutShippingStep')->open();
         $checkoutShippingPage->selectShippingMethod($shippingMethod);
     }
 

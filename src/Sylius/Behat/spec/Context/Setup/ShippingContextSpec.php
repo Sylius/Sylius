@@ -55,7 +55,7 @@ class ShippingContextSpec extends ObjectBehavior
         $shippingMethod->setName('Free')->shouldBeCalled();
         $shippingMethod->setCurrentLocale('en')->shouldBeCalled();
         $shippingMethod->setConfiguration(['amount' => 0])->shouldBeCalled();
-        $shippingMethod->setCalculator(DefaultCalculators::PER_ITEM_RATE)->shouldBeCalled();
+        $shippingMethod->setCalculator(DefaultCalculators::FLAT_RATE)->shouldBeCalled();
         $shippingMethod->setZone($zone)->shouldBeCalled();
 
         $shippingMethodRepository->add($shippingMethod)->shouldBeCalled();
@@ -77,7 +77,7 @@ class ShippingContextSpec extends ObjectBehavior
         $shippingMethod->setName('Test shipping method')->shouldBeCalled();
         $shippingMethod->setCurrentLocale('en')->shouldBeCalled();
         $shippingMethod->setConfiguration(['amount' => 1000])->shouldBeCalled();
-        $shippingMethod->setCalculator(DefaultCalculators::PER_ITEM_RATE)->shouldBeCalled();
+        $shippingMethod->setCalculator(DefaultCalculators::FLAT_RATE)->shouldBeCalled();
         $shippingMethod->setZone($zone)->shouldBeCalled();
 
         $shippingMethodRepository->add($shippingMethod)->shouldBeCalled();
@@ -89,13 +89,13 @@ class ShippingContextSpec extends ObjectBehavior
     {
         $shippingMethodRepository->findOneBy(['name' => 'DHL'])->willReturn($shippingMethod);
 
-        $this->castShippingMethodNameToShippingMethod('DHL')->shouldReturn($shippingMethod);
+        $this->getShippingMethodByName('DHL')->shouldReturn($shippingMethod);
     }
 
     function it_throws_exception_if_there_is_no_shipping_method_with_name_passed_to_casting($shippingMethodRepository)
     {
         $shippingMethodRepository->findOneBy(['name' => 'DHL'])->willReturn(null);
 
-        $this->shouldThrow(new \Exception('Shipping method with name "DHL" does not exist'))->during('castShippingMethodNameToShippingMethod', ['DHL']);
+        $this->shouldThrow(new \Exception('Shipping method with name "DHL" does not exist'))->during('getShippingMethodByName', ['DHL']);
     }
 }
