@@ -130,6 +130,7 @@ class UserContext implements Context
         $user->setUsername($customer->getFirstName().' '.$customer->getLastName());
         $user->setEmail($email);
         $user->setPlainPassword($password);
+        $user->enable();
 
         return $user;
     }

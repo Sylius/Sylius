@@ -134,6 +134,27 @@ class CheckoutContext extends FeatureContext
     }
 
     /**
+     * @Given /^I proceed without selecting shipping address$/
+     */
+    public function iProceedWithoutSelectingShippingAddress()
+    {
+        $checkoutAddressingPage = $this->getPage('Checkout\CheckoutAddressingStep')->open();
+        $checkoutAddressingPage->forward();
+    }
+
+    /**
+     * @Given /^I proceed logging as "([^"]*)" with "([^"]*)" password$/
+     */
+    public function iProceedLoggingAs($login, $password)
+    {
+        $checkoutSecurityPage = $this->getPage('Checkout\CheckoutSecurityPage')->open();
+        $checkoutSecurityPage->logInExistingUser($login, $password);
+
+        $checkoutAddressingPage = $this->getPage('Checkout\CheckoutAddressingStep');
+        $checkoutAddressingPage->forward();
+    }
+
+    /**
      * @When I confirm my order
      */
     public function iConfirmMyOrder()
