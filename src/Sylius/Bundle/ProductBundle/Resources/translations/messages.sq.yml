@@ -18,3 +18,5 @@ sylius:
       parent: Prind
       attributes: Atributet
       options: Opsionet
+    association_type:
+      name: Emri

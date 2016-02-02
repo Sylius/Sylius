@@ -14,6 +14,7 @@ sylius:
       street: Adres
       province: Województwo
     country:
+      add_province: Dodaj województwo
       name: Nazwa
       provinces: Województwa
       select: Wybierz
@@ -21,6 +22,7 @@ sylius:
       name: Nazwa
       select: Wybierz
     zone:
+      add_member: Dodaj kraj
       members: Kraje należące do strefy
       name: Nazwa
       type: Typ

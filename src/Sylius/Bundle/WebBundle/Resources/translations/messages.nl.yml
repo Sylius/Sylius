@@ -27,20 +27,26 @@ sylius:
       created_at: Geplaatst op
       details: Details van uw bestelling
       download_invoice: Download de factuur
+      empty: U heeft nog geen bestelling geplaatst
       invoice: Factuur
       list: Uw bestellingen
       number: Nummer
+      payment_mode: Betalingswijze
       placed_at: 'Geplaatst op %at%'
       shipment:
         pending: In behandeling
         ready: 'Gereed sinds %at%'
         returned: 'Geretourneerd op %at%'
         shipped: 'Verzonden op %at%'
+      shipment_mode: Verzendmethode
       state: Status
       total: Totaal
       tracking_number: Tracking code
     title: Mijn account
   add_to_cart: In winkelwagen
+  association_type:
+    name: Naam
+    create: Creëer
   address:
     city: Stad
     company: Bedrijf
@@ -82,6 +88,7 @@ sylius:
       orders_this_month: Aantal bestellingen
       registrations_this_month: Aantal registraties
       sales_this_month: Omzet
+  backend_welcome: 'Hallo <b>%name%</b>'
   billing_address: Factureer naar
   block:
     imagine:
@@ -318,6 +325,7 @@ sylius:
     index_header: Contact verzoeken
     lastName: Achternaam
     message: Bericht
+    no_results: Er zijn geen contact verzoeken om weer te geven
     show_header: Details contact verzoek
     topic: Onderwerp
     update_header: Contact verzoek bewerken
@@ -327,6 +335,7 @@ sylius:
     create_header: Nieuw contact thema
     id: ID
     index_header: Contact onderwerpen
+    no_results: Er zijn geen contact onderwerpen weer te geven
     title: Titel
     update_header: Contact thema bewerken
     updated_at: Laatst bijgewerkt
@@ -339,6 +348,7 @@ sylius:
     index_header: Landen
     manage: Beheer landen
     name: Naam
+    no_results: Er zijn geen landen geconfigureerd
     show_header: Land details
     update_header: Land bewerken
   create: Creëer
@@ -352,6 +362,7 @@ sylius:
     id: ID
     index_header: "Valuta's"
     name: Naam
+    no_results: "Er zijn geen valuta's om weer te geven"
     update_header: Valuta bewerken
     updated_at: Laatst bijgewerkt
   customer:
@@ -385,6 +396,7 @@ sylius:
     enabled: Toegestaan
     index_header: E-mailsjablonen
     manage: E-mails beheren
+    no_results: Er zijn geen e-mails geconfigureerd
     subject: Onderwerp
     update_header: E-mail bewerken
     updated_at: Laatst bijgewerkt
@@ -396,6 +408,7 @@ sylius:
       name: Order bevestiging
     shipment_confirmation:
       name: Bevestiging van de verzending
+      subject: Uw bestelling is verzonden
     user_confirmation:
       name: Bevestiging van de gebruiker
   enable: Inschakelen
@@ -495,6 +508,9 @@ sylius:
   meta:
     backend_title: Sylius Dashboard
     frontend_title: Sylius, een moderne ecommerce oplossing voor Symfony2
+  metadata:
+    id: ID
+    content: Inhoud
   na: N/B
   newest: Nieuwste producten
   "no": false
@@ -647,6 +663,7 @@ sylius:
     attributes: Attributen
     available_on: Beschikbaar op
     available_on_demand: Beschikbaar op aanvraag
+    available_until: Beschikbaar tot
     categorization: Categorisering
     contain_variants: Bevat Varianten
     create: Nieuw product
@@ -696,6 +713,14 @@ sylius:
     code: Code
     create: Productattribuut aanmaken
     create_header: Nieuw productattribuut
+    index_header: Productattributen
+    manage: Beheer attributen
+    name: Naam
+    type: Type
+    updated_at: Laatst bijgewerkt
+  product_association:
+    code: Code
+    create_header: Nieuw product
     index_header: Productattributen
     manage: Beheer attributen
     name: Naam
@@ -903,6 +928,8 @@ sylius:
     login: Inloggen
     logout: Uitloggen
     register: Registreren
+    name: Naam
+    id: Id
   unknown: Onbekend
   user:
     create_header: Nieuwe gebruiker toevoegen

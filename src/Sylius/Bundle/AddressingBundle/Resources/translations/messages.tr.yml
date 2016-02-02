@@ -14,6 +14,7 @@ sylius:
       street: Sokak
       province: Eyalet
     country:
+      add_province: Bölge ekleme
       name: Ülke adı
       provinces: İller
       select: Ülke seçin
@@ -21,6 +22,7 @@ sylius:
       name: Ad
       select: Seçiniz
     zone:
+      add_member: Üye ekle
       members: Üyeler
       name: Bölge adı
       type: Türü

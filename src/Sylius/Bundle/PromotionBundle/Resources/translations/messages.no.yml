@@ -36,6 +36,8 @@ sylius:
       usage_limit: Bruksgrense
     promotion:
       actions: Handlinger
+      add_action: Legg til handling
+      add_rule: Legg til regel
       coupon_based: Kupongbasert
       description: Beskrivelse
       ends_at: Slutter på

@@ -39,6 +39,8 @@ sylius:
       tracking_number: Número de seguiment
     title: El meu compte
   add_to_cart: Afegir a la cistella
+  association_type:
+    name: Nom
   address:
     city: Ciutat
     company: Empresa
@@ -176,6 +178,8 @@ sylius:
   menu_node:
     id: ID
     title: Títol
+  metadata:
+    id: ID
   "no": false
   order:
     adjustments:
@@ -238,6 +242,9 @@ sylius:
   product_attribute:
     code: Codi
     name: Nom
+  product_association:
+    code: Codi
+    name: Nom
   product_option:
     name: Nom
     presentation: Presentació
@@ -295,6 +302,7 @@ sylius:
   ui:
     code: Codi
     email: Correu electrònic
+    name: Nom
   unknown: Desconegut
   user:
     id: ID

@@ -47,6 +47,8 @@ sylius:
       expires_at: Verfällt am
     promotion:
       actions: Aktionen
+      add_action: Aktion hinzufügen
+      add_rule: Regel hinzufügen
       coupon_based: Gutschein basierend
       exclusive: Exklusiv
       description: Beschreibung

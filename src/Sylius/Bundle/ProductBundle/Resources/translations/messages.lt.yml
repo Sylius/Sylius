@@ -17,3 +17,5 @@ sylius:
       parent: Motininis elementas
       attributes: Atributai
       options: Parinktys
+    association_type:
+      name: Pavadinimas

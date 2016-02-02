@@ -17,3 +17,5 @@ sylius:
       parent: Üst
       attributes: Nitelikler
       options: Ayarlar
+    association_type:
+      name: Ad

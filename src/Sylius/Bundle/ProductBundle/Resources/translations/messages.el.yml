@@ -14,3 +14,5 @@ sylius:
     product_archetype:
       name: Ονομασία
       options: Επιλογές
+    association_type:
+      name: Ονομασία

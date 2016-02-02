@@ -34,6 +34,8 @@ sylius:
       usage_limit: Brugsgrænse
     promotion:
       actions: Handlinger
+      add_action: Tilføj handling
+      add_rule: Tilføj regel
       coupon_based: Kupon baseret
       description: Beskrivelse
       ends_at: Slutter den

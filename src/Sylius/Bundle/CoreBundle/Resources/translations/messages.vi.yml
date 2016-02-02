@@ -43,3 +43,5 @@ sylius:
       price: Giá
       sku: MÃ SẢN PHẨM
       width: Chiều rộng
+    product_association_type:
+      name: Tên

@@ -95,3 +95,5 @@ sylius:
       width: Amplada
     guest:
       email: Correu electrònic
+    product_association_type:
+      name: Nom

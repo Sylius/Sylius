@@ -92,3 +92,5 @@ sylius:
       sku: SKU
       weight: Berat
       width: Lebar
+    product_association_type:
+      name: Nama

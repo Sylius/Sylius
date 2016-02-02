@@ -47,6 +47,8 @@ sylius:
       expires_at: Končí v
     promotion:
       actions: Akce
+      add_action: Přidat akci
+      add_rule: Přidat pravidlo
       coupon_based: Kupón na bázi
       exclusive: Exkluzivní
       description: Popis

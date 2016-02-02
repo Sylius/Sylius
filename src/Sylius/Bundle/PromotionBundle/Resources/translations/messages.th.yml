@@ -36,6 +36,8 @@ sylius:
       usage_limit: ขีดจำกัดการใช้งาน
     promotion:
       actions: ดำเนินการ
+      add_action: เพิ่มการดำเนินการ
+      add_rule: เพิ่มกติกา
       coupon_based: ขึ้นกับคูปอง
       description: คำอธิบาย
       ends_at: สิ้นสุด

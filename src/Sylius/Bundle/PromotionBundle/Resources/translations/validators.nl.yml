@@ -3,6 +3,9 @@
 
 sylius:
   promotion:
+    code:
+      unique: De opgegeven promotie code is reeds in gebruik.
+      not_blank: Gelieve een promotie code in te geven.
     description:
       max_length: 'Promotie omschrijving mag niet langer zijn dan 1 teken.|Promotie omschrijving mag niet langer zijn dan {{ limit }} tekens.'
       min_length: 'Promotie omschrijving moet minstens 1 teken lang zijn.|Promotie omschrijving moet minstens {{ limit }} tekens lang zijn.'

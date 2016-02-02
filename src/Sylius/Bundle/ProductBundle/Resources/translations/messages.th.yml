@@ -15,3 +15,5 @@ sylius:
       name: ชื่อ
       parent: หมวดแม่
       options: ตัวเลือก
+    association_type:
+      name: ชื่อ

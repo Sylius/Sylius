@@ -12,6 +12,7 @@ sylius:
         blocks: Blocs
         channels: Canaux
         configuration: Configuration
+        contact_requests: Demandes de contact
         contact_topics: Configurer des sujets
         content: Contenu
         countries: Pays

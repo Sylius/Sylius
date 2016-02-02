@@ -40,6 +40,9 @@ sylius:
       tracking_number: Sporingsnummer
     title: Min konto
   add_to_cart: Legg i handlekurv
+  association_type:
+    name: Navn
+    create: Opprett
   address:
     city: By
     company: Firma
@@ -356,6 +359,9 @@ sylius:
     title: Tittel
   meta:
     frontend_title: Sylius, moderne netthandel for Symfony2
+  metadata:
+    id: ID
+    content: Innhold
   na: Ikke tilgjengelig
   newest: Nyeste produkter
   "no": false
@@ -516,6 +522,12 @@ sylius:
       price: Pris
   product_attribute:
     code: Kode
+    name: Navn
+    type: Type
+    updated_at: Sist oppdatert
+  product_association:
+    code: Kode
+    create_header: Nytt produkt
     name: Navn
     type: Type
     updated_at: Sist oppdatert
@@ -696,6 +708,8 @@ sylius:
     login: Logg inn
     logout: Logg ut
     register: Registrer
+    name: Navn
+    id: Id
   unknown: Ukjent
   user:
     create_header: Ny bruker

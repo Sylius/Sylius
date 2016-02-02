@@ -22,3 +22,6 @@ sylius:
       not_blank: "Merci d'entrer le nom du prototype."
       min_length: 'Le nom du prototype doit avoir au moins un caractère.|Le nom du prototype doit contenir au moins {{ limit }} caractères.'
       max_length: 'Le nom du prototype ne doit pas dépasser un caractère.|Le nom du prototype ne doit pas dépasser les {{ limit }} caractères.'
+    code:
+      unique: Ce code de prototype existe déjà.
+      not_blank: "Merci d'entrer le code du prototype."

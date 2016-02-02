@@ -81,3 +81,5 @@ sylius:
       roles: Rollen
     variant:
       sku: Bestandseinheit
+    product_association_type:
+      name: Name

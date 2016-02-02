@@ -36,6 +36,8 @@ sylius:
       usage_limit: Limite de utilização
     promotion:
       actions: Ações
+      add_action: Adicionar ação
+      add_rule: Adicionar regra
       coupon_based: Cupom com base
       description: Descrição
       ends_at: Termina em

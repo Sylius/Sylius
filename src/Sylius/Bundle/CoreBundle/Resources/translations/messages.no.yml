@@ -104,3 +104,5 @@ sylius:
         value: Verdi
     guest:
       email: E-post
+    product_association_type:
+      name: Navn

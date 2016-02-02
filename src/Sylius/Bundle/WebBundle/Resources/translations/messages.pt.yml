@@ -22,6 +22,8 @@ sylius:
       tracking_number: Número de Tracking
     title: A Minha Conta
   add_to_cart: Adicionar ao carrinho
+  association_type:
+    create: Criar
   address:
     city: Cidade
     company: Empresa
@@ -195,6 +197,8 @@ sylius:
   manage: Gerenciar
   meta:
     frontend_title: Sylius, e-commerce moderno para Symfony2
+  metadata:
+    content: Conteúdo
   newest: Novos produtos
   "no": false
   order:
@@ -310,6 +314,9 @@ sylius:
     updated_at: Data de modificação
     variant_selection_method: Meio de seleção de variação
   product_attribute:
+    updated_at: Data de modificação
+  product_association:
+    create_header: Novo produto
     updated_at: Data de modificação
   product_option:
     manage: Gerir opções

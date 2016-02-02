@@ -47,6 +47,9 @@ sylius:
       tracking_number: Sledovací kód
     title: Môj účet
   add_to_cart: Pridať do košíka
+  association_type:
+    name: Názov
+    create: Vytvoriť
   address:
     city: Mesto
     company: Spoločnosť
@@ -556,6 +559,9 @@ sylius:
     frontend_description: Sylius je moderné riešenie internetového obchodu pre PHP, založené na Symfony2 frameworku
     frontend_keywords: Sylius, e-commerce, symfony2, obchod, nákupný košík, internetový obchod
     frontend_title: Sylius, moderný e-commerce pre Symfony2
+  metadata:
+    id: ID
+    content: Obsah
   move_down: Posunúť dole
   move_up: Posunúť hore
   na: Nie je k dispozícii
@@ -784,6 +790,16 @@ sylius:
     code: Kód
     create: Vytvoriť produktovú vlastnosť
     create_header: Nová produktová vlastnosť
+    index_header: Produktové vlastnosti
+    manage: Správa produktových vlastnosti
+    name: Názov
+    no_results: Nie sú nakonfigurované žiadne produktové vlastnosti
+    type: Typ
+    update_header: Úprava produktovej vlastnosti
+    updated_at: Posledná aktualizácia
+  product_association:
+    code: Kód
+    create_header: Nový produkt
     index_header: Produktové vlastnosti
     manage: Správa produktových vlastnosti
     name: Názov
@@ -1042,6 +1058,8 @@ sylius:
     reset: Obnoviť
     reset_password: Obnoviť heslo
     welcome: Vitajte
+    name: Názov
+    id: Id
   unknown: Neznáme
   user:
     create: Vytvoriť užívateľa

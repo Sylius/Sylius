@@ -119,3 +119,5 @@ sylius:
         value: Wert
     guest:
       email: E-Mail
+    product_association_type:
+      name: Name

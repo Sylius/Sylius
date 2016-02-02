@@ -36,6 +36,8 @@ sylius:
       usage_limit: Limita de utilizare
     promotion:
       actions: Acțiuni
+      add_action: Adaugă acţiune
+      add_rule: Adaugă regulă
       coupon_based: Bazat pe cod promoțional
       description: Descriere
       ends_at: Se termină la

@@ -37,6 +37,8 @@ sylius:
       tracking_number: Број за праћење поруџбине
     title: Мој налог
   add_to_cart: Додај у корпу
+  association_type:
+    create: Креирај
   address:
     city: Град
     company: Предузеће
@@ -229,6 +231,8 @@ sylius:
   manage: Управљајте
   meta:
     frontend_title: Сyлиус, модерни е-комерц за Сyмфонy2
+  metadata:
+    content: Садржај
   newest: Најновији производи
   "no": false
   order:
@@ -330,6 +334,9 @@ sylius:
     updated_at: Ажурирано
     variant_selection_method: Метод избора варијанте производа
   product_attribute:
+    updated_at: Ажурирано
+  product_association:
+    create_header: Нови производ
     updated_at: Ажурирано
   product_option:
     manage: Управљај опцијама

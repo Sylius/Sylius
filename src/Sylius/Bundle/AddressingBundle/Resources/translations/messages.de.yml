@@ -14,6 +14,7 @@ sylius:
       street: Straße
       province: Bundesland
     country:
+      add_province: Bundesland hinzufügen
       name: Name
       provinces: Bundesländer
       select: Bundesland auswählen
@@ -21,6 +22,7 @@ sylius:
       name: Name
       select: Bundesland auswählen
     zone:
+      add_member: Mitglied hinzufügen
       members: Mitglieder
       name: Name
       type: Typ

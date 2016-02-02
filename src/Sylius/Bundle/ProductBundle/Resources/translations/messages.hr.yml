@@ -15,3 +15,5 @@ sylius:
       name: Naziv grupe
       parent: Nadređena kategorija
       options: Opcije
+    association_type:
+      name: Naziv grupe

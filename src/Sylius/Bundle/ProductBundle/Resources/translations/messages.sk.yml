@@ -18,3 +18,5 @@ sylius:
       parent: Nadradená kategória
       attributes: Produktové vlastnosti
       options: Produktové voľby
+    association_type:
+      name: Názov

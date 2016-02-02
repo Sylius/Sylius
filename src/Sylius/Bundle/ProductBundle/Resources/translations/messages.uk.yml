@@ -15,3 +15,5 @@ sylius:
       name: Ім’я
       parent: "Батьківський об'єкт"
       options: Опції
+    association_type:
+      name: Ім’я

@@ -17,3 +17,5 @@ sylius:
       parent: Родитель
       attributes: Атрибуты
       options: Список опций
+    association_type:
+      name: Название

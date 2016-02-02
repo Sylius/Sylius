@@ -40,6 +40,9 @@ sylius:
       tracking_number: Kod za praćenje
     title: Moj profil
   add_to_cart: Dodaj u košaricu
+  association_type:
+    name: Naziv grupe
+    create: Kreiraj
   address:
     city: Grad
     company: Tvrtka
@@ -356,6 +359,9 @@ sylius:
     title: Naslov
   meta:
     frontend_title: Sylius, moderna web trgovina za Symfony2
+  metadata:
+    id: ID
+    content: Sadržaj
   na: N/A
   newest: Najnoviji proizvodi
   "no": false
@@ -516,6 +522,12 @@ sylius:
       price: Cijena
   product_attribute:
     code: ISO kod
+    name: Naziv grupe
+    type: Vrsta
+    updated_at: Posljednji
+  product_association:
+    code: ISO kod
+    create_header: Dodaj novi proizvod
     name: Naziv grupe
     type: Vrsta
     updated_at: Posljednji
@@ -697,6 +709,8 @@ sylius:
     login: Prijavi se
     logout: Odjavi se
     register: Registracija
+    name: Naziv grupe
+    id: Id
   unknown: Nepoznato
   user:
     create_header: Novi korisnik

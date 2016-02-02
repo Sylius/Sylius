@@ -47,6 +47,8 @@ sylius:
       expires_at: Süre sonu: 
     promotion:
       actions: Eylemler
+      add_action: Eylem Ekle
+      add_rule: Kural ekle
       coupon_based: Kupona dayalı
       exclusive: Özel
       description: Açıklama

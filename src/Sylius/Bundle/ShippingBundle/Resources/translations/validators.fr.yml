@@ -7,6 +7,9 @@ sylius:
       max_length: 'Le nom de la catégorie ne peut dépasser les {{ limit }} caractères.'
       min_length: 'Le nom de la catégorie doit contenir au moins {{ limit }} caractères.'
       not_blank: Veuillez entrer le nom de la catégorie de livraison.
+    code:
+      not_blank: Veuillez entrer le code de la catégorie de livraison.
+      unique: Ce code de catégorie de livraison existe déjà.
   shipping_method:
     calculator:
       max_length: Longueur maximale
@@ -16,3 +19,6 @@ sylius:
       max_length: 'Le nom de la méthode de livraison ne peut dépasser les {{ limit }} caractères.'
       min_length: 'Le nom de la méthode de livraison doit contenir au moins {{ limit }} caractères.'
       not_blank: Veuillez entrer le nom de la méthode de livraison.
+    code:
+      not_blank: Veuillez entrer le code du mode de livraison.
+      unique: Ce code de mode de livraison existe déjà.

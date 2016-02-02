@@ -14,6 +14,7 @@ sylius:
       street: Gatvė
       province: Provincija
     country:
+      add_province: Pridėti provinciją
       name: Pavadinimas
       provinces: Provincijos
       select: Pasirinkite
@@ -21,6 +22,7 @@ sylius:
       name: Pavadinimas
       select: Pasirinkite
     zone:
+      add_member: Pridėti narį
       members: Nariai
       name: Pavadinimas
       type: Tipas

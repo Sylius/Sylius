@@ -10,3 +10,5 @@ sylius:
       meta_description: Metadescripció
     product_archetype:
       name: Nom
+    association_type:
+      name: Nom

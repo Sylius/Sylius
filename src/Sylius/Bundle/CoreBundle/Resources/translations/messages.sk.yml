@@ -122,3 +122,5 @@ sylius:
         value: Hodnota
     guest:
       email: Email
+    product_association_type:
+      name: Názov

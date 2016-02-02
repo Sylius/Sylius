@@ -14,6 +14,7 @@ sylius:
       street: Rruga
       province: Rajoni
     country:
+      add_province: Shto rajonin
       name: Emri
       provinces: Rajonet
       select: Zgjidh
@@ -21,6 +22,7 @@ sylius:
       name: Emri
       select: Zgjidh
     zone:
+      add_member: Shto anëtar
       members: Anëtarët
       name: Emri
       type: Lloji

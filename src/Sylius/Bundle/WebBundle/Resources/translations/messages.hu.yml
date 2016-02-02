@@ -40,6 +40,9 @@ sylius:
       tracking_number: Kiszállítási szám
     title: Az Ön fiókja
   add_to_cart: Kosárba
+  association_type:
+    name: Név
+    create: Létrehozás
   address:
     city: Település
     company: Cég
@@ -361,6 +364,9 @@ sylius:
     title: Cím
   meta:
     frontend_title: 'Sylius - modern ecommerce, Symfony2 alapokon'
+  metadata:
+    id: Azonosító
+    content: Tartalom
   na: N/A
   newest: Legújabb termékek
   "no": false
@@ -519,6 +525,12 @@ sylius:
       price: Ár
   product_attribute:
     code: Kód
+    name: Név
+    type: Típus
+    updated_at: Utolsó frissítés
+  product_association:
+    code: Kód
+    create_header: Új termék
     name: Név
     type: Típus
     updated_at: Utolsó frissítés
@@ -699,6 +711,8 @@ sylius:
     login: Belépés
     logout: Kilépés
     register: Regisztráció
+    name: Név
+    id: Azonosító
   unknown: Ismeretlen
   user:
     create_header: Új felhasználó

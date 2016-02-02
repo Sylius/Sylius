@@ -14,6 +14,7 @@ sylius:
       street: Rua
       province: Distrito
     country:
+      add_province: Adicionar estado
       name: Nome
       provinces: Distritos
       select: Seleccionar
@@ -21,6 +22,7 @@ sylius:
       name: Nome
       select: Seleccionar
     zone:
+      add_member: Adicionar membro
       members: Membros
       name: Nome
       type: Tipo

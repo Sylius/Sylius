@@ -40,6 +40,9 @@ sylius:
       tracking_number: Número de rastreamento
     title: Minha conta
   add_to_cart: Adicionar ao carrinho
+  association_type:
+    name: Nome
+    create: Criar
   address:
     city: Cidade
     company: Empresa
@@ -361,6 +364,9 @@ sylius:
     title: Título
   meta:
     frontend_title: Sylius, e-commerce moderno para Symfony2
+  metadata:
+    id: ID
+    content: Conteúdo
   na: N/A
   newest: Novos produtos
   "no": false
@@ -522,6 +528,12 @@ sylius:
       price: Preço
   product_attribute:
     code: Código
+    name: Nome
+    type: Tipo
+    updated_at: Data de modificação
+  product_association:
+    code: Código
+    create_header: Novo produto
     name: Nome
     type: Tipo
     updated_at: Data de modificação
@@ -703,6 +715,8 @@ sylius:
     login: Login
     logout: Sair
     register: Registre-se
+    name: Nome
+    id: Id
   unknown: DESCONHECIDO
   user:
     create_header: Novo usuário

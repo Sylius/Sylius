@@ -14,6 +14,7 @@ sylius:
       street: 街道
       province: 省/直辖市/自治区
     country:
+      add_province: 添加省
       name: 名称
       provinces: 省份
       select: 请选择
@@ -21,6 +22,7 @@ sylius:
       name: 名称
       select: 请选择
     zone:
+      add_member: 添加成员
       members: 会员
       name: 名称
       type: 类型

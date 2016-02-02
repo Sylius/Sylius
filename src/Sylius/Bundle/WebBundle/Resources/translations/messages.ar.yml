@@ -5,6 +5,8 @@ sylius:
   account:
     home:
       email: البريد الإلكتروني
+  association_type:
+    name: الاسم
   address:
     country: البلد
     firstname: الاسم الأول
@@ -95,6 +97,8 @@ sylius:
     name: الاسم
   product_attribute:
     name: الاسم
+  product_association:
+    name: الاسم
   product_option:
     name: الاسم
     presentation: تقديم
@@ -125,6 +129,7 @@ sylius:
     name: الاسم
   ui:
     email: البريد الإلكتروني
+    name: الاسم
   "yes": true
   zone:
     name: الاسم

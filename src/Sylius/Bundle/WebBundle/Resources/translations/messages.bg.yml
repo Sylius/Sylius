@@ -38,6 +38,8 @@ sylius:
       tracking_number: Номер за проследяване
     title: Моят акаунт
   add_to_cart: Добави в количката
+  association_type:
+    create: Създай
   address:
     city: Град
     company: Фирма
@@ -311,6 +313,8 @@ sylius:
     index_header: Меню деца
   meta:
     frontend_title: Sylius, модерна електронна търговия за Symfony2
+  metadata:
+    content: Съдържание
   na: N/A
   newest: Най-новите продукти
   "no": false
@@ -448,6 +452,9 @@ sylius:
     updated_at: Последно обновяване
     variant_selection_method: Метод на избор на вариант
   product_attribute:
+    updated_at: Последно обновяване
+  product_association:
+    create_header: Нов продукт
     updated_at: Последно обновяване
   product_not_available_in_zone: Не са налични във вашата страна
   product_option:
@@ -606,6 +613,7 @@ sylius:
     login: Вход
     logout: Изход
     register: Регистриране
+    id: ID
   unknown: Неизвестен
   user:
     create_header: Нов потребител

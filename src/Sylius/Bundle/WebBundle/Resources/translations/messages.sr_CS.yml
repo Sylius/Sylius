@@ -25,6 +25,9 @@ sylius:
       total: Ukupno
     title: Moj nalog
   add_to_cart: Dodaj u korpu
+  association_type:
+    name: Ime
+    create: Kreiraj
   address:
     city: Grad
     company: Kompanija
@@ -224,6 +227,8 @@ sylius:
     id: ID
   meta:
     frontend_title: Sylius, moderni e-komerc za Symfony2
+  metadata:
+    id: ID
   newest: Najnoviji proizvodi
   "no": false
   order:
@@ -327,6 +332,10 @@ sylius:
     updated_at: Ažurirano
     variant_selection_method: Metod izbora varijante proizvoda
   product_attribute:
+    name: Ime
+    updated_at: Ažurirano
+  product_association:
+    create_header: Novi proizvod
     name: Ime
     updated_at: Ažurirano
   product_option:
@@ -474,6 +483,7 @@ sylius:
     login: Prijavi se
     logout: Odjavi se
     register: Registracija
+    name: Ime
   user:
     general_info: 'Korisnik "%username%"'
     id: ID

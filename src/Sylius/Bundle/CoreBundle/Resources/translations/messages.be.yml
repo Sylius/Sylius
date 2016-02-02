@@ -104,3 +104,5 @@ sylius:
         value: Значэнне
     guest:
       email: Email
+    product_association_type:
+      name: Імя

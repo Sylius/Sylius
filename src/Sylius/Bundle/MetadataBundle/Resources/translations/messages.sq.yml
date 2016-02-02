@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  metadata:
+    page:
+      title: Titulli
+      description: Përshkrimi
+    twitter:
+      title: Titulli
+      description: Përshkrimi
+      image: Imazhi

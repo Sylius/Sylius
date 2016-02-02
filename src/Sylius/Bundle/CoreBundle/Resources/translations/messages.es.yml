@@ -119,3 +119,5 @@ sylius:
         value: Valor
     guest:
       email: Dirección de correo electrónico
+    product_association_type:
+      name: Nombre

@@ -5,6 +5,8 @@ sylius:
   account:
     order:
       number: Nummer
+  association_type:
+    name: Namn
   address:
     firstname: Förnamn
   archetype:
@@ -97,6 +99,9 @@ sylius:
   product_attribute:
     code: Kod
     name: Namn
+  product_association:
+    code: Kod
+    name: Namn
   product_option:
     name: Namn
     presentation: Presentation
@@ -137,6 +142,8 @@ sylius:
     name: Namn
   ui:
     code: Kod
+    name: Namn
+    id: Id
   variant:
     sku: SKU
   "yes": true

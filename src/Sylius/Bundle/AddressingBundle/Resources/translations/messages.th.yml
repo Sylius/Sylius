@@ -13,6 +13,7 @@ sylius:
       street: ถนน
       province: จังหวัด
     country:
+      add_province: เพิ่มจังหวัด
       name: ชื่อ
       provinces: จังหวัด
       select: เลือก
@@ -20,6 +21,7 @@ sylius:
       name: ชื่อ
       select: เลือก
     zone:
+      add_member: เพิ่มสมาชิก
       members: สมาชิก
       name: ชื่อ
       type: ชนิด
