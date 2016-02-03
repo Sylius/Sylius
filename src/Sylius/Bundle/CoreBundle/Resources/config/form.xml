@@ -172,12 +172,6 @@
             <argument type="service" id="sylius.repository.zone" />
             <tag name="form.type" alias="sylius_price_calculator_zone_based" />
         </service>
-
-        <service id="sylius.form.type.product_review_admin" class="%sylius.form.type.product_review_admin.class%">
-            <argument>%sylius.model.product_review.class%</argument>
-            <argument>%sylius.validation_group.product_review_admin%</argument>
-            <tag name="form.type" alias="sylius_product_review_admin" />
-        </service>
     </services>
 
 </container>

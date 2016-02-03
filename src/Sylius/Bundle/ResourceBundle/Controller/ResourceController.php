@@ -103,6 +103,11 @@ class ResourceController extends Controller
     protected $eventDispatcher;
 
     /**
+     * @var string
+     */
+    protected $stateMachineGraph;
+
+    /**
      * @param MetadataInterface $metadata
      * @param RequestConfigurationFactoryInterface $requestConfigurationFactory
      * @param ViewHandlerInterface $viewHandler
@@ -452,6 +457,45 @@ class ResourceController extends Controller
         $this->flashHelper->addSuccessFlash($configuration, 'move', $resource);
 
         return $this->redirectHandler->redirectToIndex($configuration, $resource);
+    }
+
+    /**
+     * @param Request $request
+     * @param string $transition
+     * @param string $graph
+     *
+     * @return RedirectResponse
+     */
+    public function updateStateAction(Request $request, $transition, $graph = null)
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+        $resource = $this->findOr404($configuration);
+
+        if (null === $graph) {
+            $graph = $this->stateMachineGraph;
+        }
+
+        $stateMachine = $this->get('sm.factory')->get($resource, $graph);
+        if (!$stateMachine->can($transition)) {
+            throw new NotFoundHttpException(sprintf(
+                'The requested transition %s cannot be applied on the given %s with graph %s.',
+                $transition,
+                $this->metadata->getName(),
+                $graph
+            ));
+        }
+
+        $stateMachine->apply($transition);
+
+        $this->manager->flush();
+
+        if (!$configuration->isHtmlRequest()) {
+            return $this->viewHandler->handle($configuration, View::create($resource, 204));
+        }
+
+        $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
+
+        return $this->redirectHandler->redirectToReferer($configuration);
     }
 
     /**

@@ -92,11 +92,10 @@ class SyliusReviewExtension extends AbstractResourceExtension
             return;
         }
 
-        $container->getDefinition('sylius.form.type.'.$name.'_review')->addArgument($name);
-
         foreach ($parameters['review']['classes']['form'] as $formName => $form) {
             $formKey = ('default' === $formName) ? $name.'_review' : $name.'_review_'.$formName;
-            $container->getDefinition('sylius.form.type.'.$formKey)->addArgument($name);
+            $formDefinition = $container->getDefinition('sylius.form.type.'.$formKey);
+            $formDefinition->addArgument($name);
         }
     }
 

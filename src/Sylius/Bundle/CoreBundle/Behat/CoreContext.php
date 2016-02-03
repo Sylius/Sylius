@@ -576,7 +576,7 @@ class CoreContext extends DefaultContext
         $this->getSession()->visit($this->generatePageUrl('sylius_backend_customer_index'));
 
         $tr = $this->assertSession()->elementExists('css', sprintf('table tbody tr:contains("%s")', $customerEmail));
-        $locator = sprintf('button:contains("%s")', 'delete');
+        $locator = sprintf('button:contains("%s")', 'Delete');
         $tr->find('css', $locator)->press();
     }
 

@@ -719,7 +719,7 @@ sylius_rbac:
         sylius.manage.product_association_type: [sylius.product_association_type.show, sylius.product_association_type.index, sylius.product_association_type.create, sylius.product_association_type.update, sylius.product_association_type.delete]
         sylius.catalog: [sylius.manage.product, sylius.manage.product_attribute, sylius.manage.product_option, sylius.manage.product_archetype, sylius.manage.product_variant, sylius.manage.taxonomy, sylius.manage.taxon, sylius.manage.metadata_container, sylius.manage.product_association_type]
         sylius.marketing: [sylius.manage.promotion, sylius.manage.promotion_coupon, sylius.manage.email, sylius.manage.metadata_container]
-        sylius.sales: [sylius.manage.order, sylius.manage.order_item, sylius.manage.adjustment, sylius.manage.payment, sylius.manage.report]
+        sylius.sales: [sylius.manage.order, sylius.manage.order_item, sylius.manage.adjustment, sylius.manage.payment, sylius.manage.report, sylius.manage.product_review]
         sylius.shipping: [sylius.manage.shipment, sylius.manage.shipping_method, sylius.manage.shipping_category]
         sylius.content: [sylius.manage.static_content, sylius.manage.route, sylius.manage.simple_block, sylius.manage.menu, sylius.manage.slideshow, sylius.manage.string_block, sylius.manage.slideshow_block, sylius.manage.imagine_block, sylius.manage.metadata_container]
         sylius.security: [sylius.manage.permission, sylius.manage.role, sylius.manage.customer, sylius.manage.group, sylius.accounts]
