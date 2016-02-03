@@ -9,9 +9,9 @@ default:
                     entityManager: "@doctrine.orm.entity_manager"
 
                 - Sylius\Behat\Context\Setup\ChannelContext:
-                    defaultFranceChannelFactory: "@sylius.behat.default_france_channel_factory"
                     sharedStorage: "@sylius.behat.shared_storage"
-
+                    defaultChannelFactory: "@sylius.behat.default_channel_factory"
+                    defaultCountriesFactory: "@sylius.behat.default_countries_factory"
                 - Sylius\Behat\Context\Setup\CurrencyContext:
                     currencyRepository: "@sylius.repository.currency"
                     sharedStorage: "@sylius.behat.shared_storage"

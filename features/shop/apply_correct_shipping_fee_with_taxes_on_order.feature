@@ -5,9 +5,10 @@ Feature: Apply correct shipping fee with taxes on order
     I want to have correct shipping fees and taxes applied to my order
 
     Background:
-        Given the store is operating on a single "France" channel
+        Given the store is operating on a single channel
         And there is "EU" zone containing all members of European Union
         And there is rest of the world zone containing all other countries
+        And store ships to "France" and "Australia"
         And default currency is "EUR"
         And default tax zone is "EU"
         And there is user "john@example.com" identified by "password123"

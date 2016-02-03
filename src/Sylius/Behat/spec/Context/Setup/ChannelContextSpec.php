@@ -14,6 +14,7 @@ namespace spec\Sylius\Behat\Context\Setup;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Test\Services\DefaultCountriesFactoryInterface;
 use Sylius\Component\Core\Test\Services\DefaultStoreDataInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
@@ -23,10 +24,11 @@ use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 class ChannelContextSpec extends ObjectBehavior
 {
     function let(
-        DefaultStoreDataInterface $defaultFranceChannelFactory,
-        SharedStorageInterface $sharedStorage
+        SharedStorageInterface $sharedStorage,
+        DefaultStoreDataInterface $defaultChannelFactory,
+        DefaultCountriesFactoryInterface $defaultCountriesFactory
     ) {
-        $this->beConstructedWith($defaultFranceChannelFactory, $sharedStorage);
+        $this->beConstructedWith($sharedStorage, $defaultChannelFactory, $defaultCountriesFactory);
     }
 
     function it_is_initializable()
@@ -39,16 +41,23 @@ class ChannelContextSpec extends ObjectBehavior
         $this->shouldImplement('Behat\Behat\Context\Context');
     }
 
-    function it_sets_default_france_channel_in_to_shared_storage(
-        $defaultFranceChannelFactory,
+    function it_sets_default_channel_in_to_shared_storage(
+        $defaultChannelFactory,
         $sharedStorage,
         ChannelInterface $channel,
         ZoneInterface $zone
     ) {
         $defaultData = ['channel' => $channel, 'zone' => $zone];
-        $defaultFranceChannelFactory->create()->willReturn($defaultData);
+        $defaultChannelFactory->create()->willReturn($defaultData);
         $sharedStorage->setClipboard($defaultData)->shouldBeCalled();
 
-        $this->thatStoreIsOperatingOnASingleFranceChannel();
+        $this->thatStoreIsOperatingOnASingleChannel();
+    }
+
+    function it_sets_default_countries($defaultCountriesFactory)
+    {
+        $defaultCountriesFactory->create(['AU', 'US', 'GB'])->shouldBeCalled();
+
+        $this->storeShipsTo('Australia', 'United States', 'United Kingdom');
     }
 }

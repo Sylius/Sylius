@@ -12,12 +12,12 @@
 namespace Sylius\Component\Core\Test\Services;
 
 /**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface DefaultStoreDataInterface
+interface DefaultCountriesFactoryInterface
 {
     /**
-     * @return array
+     * @param array $countryCodes
      */
-    public function create();
+    public function create(array $countryCodes);
 }

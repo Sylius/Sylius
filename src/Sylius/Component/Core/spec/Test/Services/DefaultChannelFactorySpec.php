@@ -23,25 +23,21 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class DefaultFranceChannelFactorySpec extends ObjectBehavior
+class DefaultChannelFactorySpec extends ObjectBehavior
 {
     function let(
         RepositoryInterface $channelRepository,
-        RepositoryInterface $countryRepository,
         RepositoryInterface $zoneMemberRepository,
         RepositoryInterface $zoneRepository,
         ChannelFactoryInterface $channelFactory,
-        FactoryInterface $countryFactory,
         FactoryInterface $zoneMemberFactory,
         FactoryInterface $zoneFactory
     ) {
         $this->beConstructedWith(
             $channelRepository,
-            $countryRepository,
             $zoneMemberRepository,
             $zoneRepository,
             $channelFactory,
-            $countryFactory,
             $zoneMemberFactory,
             $zoneFactory
         );
@@ -49,7 +45,7 @@ class DefaultFranceChannelFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Test\Services\DefaultFranceChannelFactory');
+        $this->shouldHaveType('Sylius\Component\Core\Test\Services\DefaultChannelFactory');
     }
 
     function it_is_default_store_data()
@@ -59,18 +55,11 @@ class DefaultFranceChannelFactorySpec extends ObjectBehavior
 
     function it_creates_france_country_and_zone(
         $channelRepository,
-        $countryRepository,
         $zoneMemberRepository,
         $zoneRepository,
         $channelFactory,
-        $countryFactory,
         $zoneMemberFactory,
         $zoneFactory,
-        CountryInterface $france,
-        CountryInterface $unitedKingdom,
-        CountryInterface $unitedStates,
-        CountryInterface $china,
-        CountryInterface $australia,
         ZoneMemberInterface $zoneMember,
         ZoneInterface $zone,
         ChannelInterface $channel
@@ -78,18 +67,10 @@ class DefaultFranceChannelFactorySpec extends ObjectBehavior
         $channel->getName()->willReturn('France');
         $channelFactory->createNamed('France')->willReturn($channel);
 
-        $countryFactory->createNew()->willReturn($france, $unitedKingdom, $unitedStates, $china, $australia);
-
         $zoneMemberFactory->createNew()->willReturn($zoneMember);
         $zoneFactory->createNew()->willReturn($zone);
 
         $channel->setCode('WEB-FR')->shouldBeCalled();
-
-        $france->setCode('FR')->shouldBeCalled();
-        $unitedKingdom->setCode('GB')->shouldBeCalled();
-        $unitedStates->setCode('US')->shouldBeCalled();
-        $china->setCode('CN')->shouldBeCalled();
-        $australia->setCode('AU')->shouldBeCalled();
 
         $zoneMember->setCode('FR')->shouldBeCalled();
         $zone->setCode('FR')->shouldBeCalled();
@@ -98,13 +79,6 @@ class DefaultFranceChannelFactorySpec extends ObjectBehavior
         $zone->addMember($zoneMember)->shouldBeCalled();
 
         $channelRepository->add($channel)->shouldBeCalled();
-
-        $countryRepository->add($france)->shouldBeCalled();
-        $countryRepository->add($unitedKingdom)->shouldBeCalled();
-        $countryRepository->add($unitedStates)->shouldBeCalled();
-        $countryRepository->add($china)->shouldBeCalled();
-        $countryRepository->add($australia)->shouldBeCalled();
-
         $zoneRepository->add($zone)->shouldBeCalled();
         $zoneMemberRepository->add($zoneMember)->shouldBeCalled();
 
