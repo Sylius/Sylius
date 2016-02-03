@@ -20,6 +20,12 @@ use Sylius\Component\Variation\Model\OptionValueInterface;
  */
 class OptionValueSpec extends ObjectBehavior
 {
+    public function let()
+    {
+        $this->setCurrentLocale('en_US');
+        $this->setFallbackLocale('en_US');
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Variation\Model\OptionValue');
@@ -66,15 +72,15 @@ class OptionValueSpec extends ObjectBehavior
         $this->getValue()->shouldReturn(null);
     }
 
-    function its_value_should_be_mutable()
+    function its_presentation_should_be_mutable()
     {
-        $this->setValue('XXL');
-        $this->getValue()->shouldReturn('XXL');
+        $this->setPresentation('XXL');
+        $this->getPresentation()->shouldReturn('XXL');
     }
 
-    function it_returns_its_value_when_converted_to_string()
+    function it_returns_its_presentation_when_converted_to_string()
     {
-        $this->setValue('S');
+        $this->setPresentation('S');
         $this->__toString()->shouldReturn('S');
     }
 
@@ -98,7 +104,7 @@ class OptionValueSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\BadMethodCallException::class)
-            ->duringGetPresentation()
+            ->duringGetPresentationOption()
         ;
     }
 
@@ -107,6 +113,6 @@ class OptionValueSpec extends ObjectBehavior
         $option->getPresentation()->willReturn('Size');
         $this->setOption($option);
 
-        $this->getPresentation()->shouldReturn('Size');
+        $this->getPresentationOption()->shouldReturn('Size');
     }
 }

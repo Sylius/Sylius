@@ -41,7 +41,7 @@ class OptionValueTypeSpec extends ObjectBehavior
     function it_builds_form_with_value_field(FormBuilder $builder)
     {
         $builder
-            ->add('value', 'text', Argument::any())
+            ->add('translations', 'a2lix_translationsForms', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;

@@ -51,4 +51,11 @@ interface OptionValueInterface extends CodeAwareInterface, OptionValueTranslatio
      * @return string The presentation of object
      */
     public function getPresentation();
+
+    /**
+     * Proxy method to access the presentation of real option object.
+     *
+     * @return string The presentation of object
+     */
+    public function getPresentationOption();
 }

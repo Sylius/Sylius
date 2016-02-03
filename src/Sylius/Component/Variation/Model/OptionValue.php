@@ -126,4 +126,15 @@ class OptionValue extends AbstractTranslatable implements OptionValueInterface
         }
         return $this->option->getName();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPresentationOption()
+    {
+        if (null === $this->option) {
+            throw new \BadMethodCallException('The option have not been created yet so you cannot access proxy methods.');
+        }
+        return $this->option->getPresentation();
+    }
 }
