@@ -391,7 +391,7 @@ class ProductContext extends DefaultContext
         $this->getSession()->visit($this->generatePageUrl('sylius_backend_product_index'));
 
         $tr = $this->assertSession()->elementExists('css', sprintf('table tbody tr:contains("%s")', $productName));
-        $locator = sprintf('button:contains("%s")', 'delete');
+        $locator = sprintf('button:contains("%s")', 'Delete');
         $tr->find('css', $locator)->press();
     }
 }

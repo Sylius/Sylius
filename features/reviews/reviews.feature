@@ -58,12 +58,12 @@ Feature: Reviews
 
     Scenario: Accessing review edit page from the list
         Given I am on the product review index page
-         When I press "edit" near "Very good"
+         When I press "Edit" near "Very good"
          Then I should be editing product review with title "Very good"
 
     Scenario: Accessing review edit page from details page
         Given I am on the page of product review with title "Very good"
-         When I follow "edit"
+         When I follow "Edit"
          Then I should be editing product review with title "Very good"
 
     Scenario: Updating review
@@ -75,22 +75,22 @@ Feature: Reviews
     @javascript
     Scenario: Removing review from the list
         Given I am on the product review index page
-         When I press "delete" near "Awesome"
-          And I click "delete" from the confirmation modal
+         When I press "Delete" near "Awesome"
+          And I click "Delete" from the confirmation modal
          Then I should still be on the product review index page
           And I should see "Review has been successfully deleted."
 
     @javascript
     Scenario: Removing review from details page
         Given I am on the page of product review with title "Awesome"
-         When I press "delete"
-          And I click "delete" from the confirmation modal
+         When I press "Delete"
+          And I click "Delete" from the confirmation modal
          Then I should be on the product review index page
           And I should see "Review has been successfully deleted."
 
     Scenario: Showing review details
         Given I am on the product review index page
-         When I click "details" near "Awesome"
+         When I click "Details" near "Awesome"
          Then I should be on the page of product review with title "Awesome"
           And I should see "Awesome"
           And I should see "rick@foo.com"
@@ -100,7 +100,7 @@ Feature: Reviews
         Given I am on the product review index page
          When I press "Accept" near "Awesome"
          Then I should see "Product review has been successfully updated."
-         When I press "details" near "Awesome"
+         When I press "Details" near "Awesome"
          Then I should see "accepted"
 
     Scenario: Accepting review from details page
@@ -115,7 +115,7 @@ Feature: Reviews
         Given I am on the product review index page
          When I press "Reject" near "Awesome"
          Then I should see "Product review has been successfully updated."
-         When I press "details" near "Awesome"
+         When I press "Details" near "Awesome"
          Then I should see "rejected"
 
     Scenario: Rejecting review from details page
