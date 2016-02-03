@@ -11,14 +11,13 @@
 
 namespace Sylius\Bundle\VariationBundle\Form\Type;
 
-use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Vincenzo Provenza <vincenzo.provenza89@gmail.com>
  */
-class OptionValueType extends AbstractResourceType
+class OptionValueTranslationType extends AbstractResourceType
 {
     /**
      * @var string
@@ -28,12 +27,11 @@ class OptionValueType extends AbstractResourceType
     /**
      * @param string $dataClass
      * @param array  $validationGroups
-     * @param string $variableName
+     * @param        $variableName
      */
     public function __construct($dataClass, array $validationGroups, $variableName)
     {
         parent::__construct($dataClass, $validationGroups);
-
         $this->variableName = $variableName;
     }
 
@@ -43,11 +41,9 @@ class OptionValueType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('translations', 'a2lix_translationsForms', [
-                'form_type' => sprintf('sylius_%s_option_value_translation', $this->variableName),
+            ->add('presentation', 'text', [
                 'label' => 'sylius.form.option.presentation',
-            ])
-            ->addEventSubscriber(new AddCodeFormSubscriber());
+            ]);
     }
 
     /**
@@ -55,6 +51,6 @@ class OptionValueType extends AbstractResourceType
      */
     public function getName()
     {
-        return sprintf('sylius_%s_option_value', $this->variableName);
+        return sprintf('sylius_%s_option_value_translation', $this->variableName);
     }
 }

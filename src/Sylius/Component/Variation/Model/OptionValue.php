@@ -10,11 +10,12 @@
  */
 
 namespace Sylius\Component\Variation\Model;
+use Sylius\Component\Translation\Model\AbstractTranslatable;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class OptionValue implements OptionValueInterface
+class OptionValue extends AbstractTranslatable implements OptionValueInterface
 {
     /**
      * @var mixed
@@ -37,11 +38,18 @@ class OptionValue implements OptionValueInterface
     protected $option;
 
     /**
+     * Displayed to user.
+     *
+     * @var string
+     */
+    protected $presentation;
+
+    /**
      * {@inheritdoc}
      */
     public function __toString()
     {
-        return $this->value;
+        return $this->getPresentation();
     }
 
     /**
@@ -71,22 +79,6 @@ class OptionValue implements OptionValueInterface
     /**
      * {@inheritdoc}
      */
-    public function getValue()
-    {
-        return $this->value;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setValue($value)
-    {
-        $this->value = $value;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getOption()
     {
         return $this->option;
@@ -103,24 +95,35 @@ class OptionValue implements OptionValueInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getPresentation()
     {
-        if (null === $this->option) {
-            throw new \BadMethodCallException('The option have not been created yet so you cannot access proxy methods.');
-        }
-
-        return $this->option->getName();
+        return $this->translate()->getPresentation();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getPresentation()
+    public function setPresentation($presentation)
+    {
+        $this->translate()->setPresentation($presentation);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValue()
+    {
+        return $this->getPresentation();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
     {
         if (null === $this->option) {
             throw new \BadMethodCallException('The option have not been created yet so you cannot access proxy methods.');
         }
-
-        return $this->option->getPresentation();
+        return $this->option->getName();
     }
 }

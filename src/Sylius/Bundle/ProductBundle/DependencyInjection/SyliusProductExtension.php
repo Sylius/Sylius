@@ -27,6 +27,8 @@ use Sylius\Component\Product\Model\OptionTranslation;
 use Sylius\Component\Product\Model\OptionTranslationInterface;
 use Sylius\Component\Product\Model\OptionValue;
 use Sylius\Component\Product\Model\OptionValueInterface;
+use Sylius\Component\Product\Model\OptionValueTranslation;
+use Sylius\Component\Product\Model\OptionValueTranslationInterface;
 use Sylius\Component\Product\Model\Variant;
 use Sylius\Component\Product\Model\VariantInterface;
 use Sylius\Component\Resource\Factory;
@@ -151,6 +153,12 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
                             'model' => OptionValue::class,
                             'interface' => OptionValueInterface::class,
                         ],
+                        'translation' => [
+                            'classes' => [
+                                'model' => OptionValueTranslation::class,
+                                'interface' => OptionValueTranslationInterface::class
+                            ]
+                        ]
                     ],
                 ],
             ],

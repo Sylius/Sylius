@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c); Paweł Jędrzejewski
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,23 +11,18 @@
 
 namespace Sylius\Component\Variation\Model;
 
+use Sylius\Component\Product\Model\OptionValueTranslationInterface;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OptionValueInterface extends ResourceInterface, CodeAwareInterface
+interface OptionValueInterface extends CodeAwareInterface, OptionValueTranslationInterface
 {
     /**
      * @return OptionInterface
      */
     public function getOption();
-
-    /**
-     * @param OptionInterface $option
-     */
-    public function setOption(OptionInterface $option = null);
 
     /**
      * Get internal value.
@@ -37,11 +32,9 @@ interface OptionValueInterface extends ResourceInterface, CodeAwareInterface
     public function getValue();
 
     /**
-     * Set internal value.
-     *
-     * @param string $value
+     * @param OptionInterface $option
      */
-    public function setValue($value);
+    public function setOption(OptionInterface $option = null);
 
     /**
      * Proxy method to access the name of real option object.
@@ -53,7 +46,7 @@ interface OptionValueInterface extends ResourceInterface, CodeAwareInterface
     public function getName();
 
     /**
-     * Proxy method to access the presentation of real option object.
+     * Proxy method to access the presentation of real option value object.
      *
      * @return string The presentation of object
      */
