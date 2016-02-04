@@ -60,8 +60,7 @@ final class ZoneContext implements Context
     }
 
     /**
-     * @Transform :zone zone
-     * @Transform zone :zone
+     * @Transform :zone
      */
     public function getZoneByCode($zone)
     {

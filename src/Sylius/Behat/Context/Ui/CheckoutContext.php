@@ -114,7 +114,7 @@ final class CheckoutContext implements Context
         $this->checkoutAddressingStep->fillAddressingDetails([
             'firstName' => 'John',
             'lastName' => 'Doe',
-            'country' => (null === $shippingCountry) ? 'France' : $shippingCountry,
+            'country' => $shippingCountry ?: 'France',
             'street' => '0635 Myron Hollow Apt. 711',
             'city' => 'North Bridget',
             'postcode' => '93-554',
