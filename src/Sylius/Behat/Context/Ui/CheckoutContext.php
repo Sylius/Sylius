@@ -109,8 +109,8 @@ final class CheckoutContext implements Context
      */
     public function iProceedSelectingShippingMethod($shippingMethodName)
     {
-        $checkoutAddressingPage = $this->getPage('Checkout\CheckoutAddressingStep')->open();
-        $addressingDetails = [
+        $this->checkoutAddressingStep->open();
+        $this->checkoutAddressingStep->fillAddressingDetails([
             'firstName' => 'John',
             'lastName' => 'Doe',
             'country' => 'France',
@@ -118,12 +118,11 @@ final class CheckoutContext implements Context
             'city' => 'North Bridget',
             'postcode' => '93-554',
             'phoneNumber' => '321123456',
-        ];
-        $checkoutAddressingPage->fillAddressingDetails($addressingDetails);
-        $checkoutAddressingPage->forward();
+        ]);
+        $this->checkoutAddressingStep->continueCheckout();
 
-        $checkoutShippingPage = $this->getPage('Checkout\CheckoutShippingStep');
-        $checkoutShippingPage->selectShippingMethod($shippingMethodName);
+        $this->checkoutShippingStep->selectShippingMethod($shippingMethodName);
+        $this->checkoutShippingStep->continueCheckout();
     }
 
     /**
@@ -131,8 +130,9 @@ final class CheckoutContext implements Context
      */
     public function iChangeShippingMethod($shippingMethodName)
     {
-        $checkoutShippingPage = $this->getPage('Checkout\CheckoutShippingStep')->open();
-        $checkoutShippingPage->selectShippingMethod($shippingMethodName);
+        $this->checkoutShippingStep->open();
+        $this->checkoutShippingStep->selectShippingMethod($shippingMethodName);
+        $this->checkoutShippingStep->continueCheckout();
     }
 
     /**

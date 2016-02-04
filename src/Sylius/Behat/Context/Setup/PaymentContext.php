@@ -19,7 +19,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class PaymentContext implements Context
+final class PaymentContext implements Context
 {
     /**
      * @var RepositoryInterface

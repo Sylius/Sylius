@@ -24,9 +24,9 @@ use Sylius\Behat\Page\Product\ProductShowPage;
  */
 class CartContextSpec extends ObjectBehavior
 {
-    public function let(ProductShowPage $productShowPage, CartSummaryPage $cartSummaryPage)
+    public function let(CartSummaryPage $cartSummaryPage, ProductShowPage $productShowPage)
     {
-        $this->beConstructedWith($productShowPage, $cartSummaryPage);
+        $this->beConstructedWith($cartSummaryPage, $productShowPage);
     }
 
     function it_is_initializable()

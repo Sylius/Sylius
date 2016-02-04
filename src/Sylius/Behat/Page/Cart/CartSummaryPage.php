@@ -24,6 +24,7 @@ class CartSummaryPage extends SymfonyPage
     protected $elements = [
         'grand total' => '#cart-summary td:contains("Grand total")',
         'tax total' => '#cart-summary td:contains("Tax total")',
+        'shipping total' => '#cart-summary td:contains("Shipping total")',
     ];
 
     /**
@@ -52,6 +53,13 @@ class CartSummaryPage extends SymfonyPage
         $taxTotalElement = $this->getElement('tax total');
 
         return trim(str_replace('Tax total:', '', $taxTotalElement->getText()));
+    }
+
+    public function getShippingTotal()
+    {
+        $shippingTotalElement = $this->getElement('shipping total');
+
+        return trim(str_replace('Shipping total:', '', $shippingTotalElement->getText()));
     }
 
     /**

@@ -23,7 +23,7 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ProductContext implements Context
+final class ProductContext implements Context
 {
     /**
      * @var SharedStorageInterface

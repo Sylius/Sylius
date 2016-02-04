@@ -20,7 +20,7 @@ class CheckoutFinalizeStep extends SymfonyPage
 {
     public function confirmOrder()
     {
-        $this->getDocument()->pressButton('Place order');
+        $this->getDocument()->clickLink('Place order');
     }
 
     /**

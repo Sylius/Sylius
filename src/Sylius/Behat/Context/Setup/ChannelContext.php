@@ -18,7 +18,7 @@ use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class ChannelContext implements Context
+final class ChannelContext implements Context
 {
     /**
      * @var DefaultStoreDataInterface

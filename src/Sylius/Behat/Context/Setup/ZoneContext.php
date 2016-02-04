@@ -20,7 +20,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ZoneContext implements Context
+final class ZoneContext implements Context
 {
     /**
      * @var array

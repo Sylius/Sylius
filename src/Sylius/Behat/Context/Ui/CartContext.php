@@ -22,25 +22,25 @@ use Sylius\Component\Core\Model\ProductInterface;
 final class CartContext implements Context
 {
     /**
-     * @var ProductShowPage
-     */
-    private $productShowPage;
-
-    /**
      * @var CartSummaryPage
      */
     private $cartSummaryPage;
 
     /**
-     * @param ProductShowPage $productShowPage
+     * @var ProductShowPage
+     */
+    private $productShowPage;
+
+    /**
      * @param CartSummaryPage $cartSummaryPage
+     * @param ProductShowPage $productShowPage
      */
     public function __construct(
-        ProductShowPage $productShowPage,
-        CartSummaryPage $cartSummaryPage
+        CartSummaryPage $cartSummaryPage,
+        ProductShowPage $productShowPage
     ) {
-        $this->productShowPage = $productShowPage;
         $this->cartSummaryPage = $cartSummaryPage;
+        $this->productShowPage = $productShowPage;
     }
 
     /**
@@ -102,23 +102,12 @@ final class CartContext implements Context
     }
 
     /**
-     * @Given /^my cart shipping fee should be "([^"]+)"$/
+     * @Then my cart shipping fee should be :shippingTotal
      */
     public function myCartShippingFeeShouldBe($shippingTotal)
     {
-        $this->assertCartSummaryPageContents('Shipping', $shippingTotal);
-    }
+        $this->cartSummaryPage->open();
 
-    /**
-     * @param string $type
-     * @param string $value
-     */
-    public function assertCartSummaryPageContents($type, $value)
-    {
-        /** @var CartSummaryPage $cartSummaryPage */
-        $cartSummaryPage = $this->getPage('Cart\CartSummaryPage');
-        $cartSummaryPage->open();
-
-        $this->assertSession()->elementTextContains('css', '#cart-summary', $type . ' total: ' . $value);
+        expect($this->cartSummaryPage->getShippingTotal())->toBe($shippingTotal);
     }
 }
