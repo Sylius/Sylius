@@ -9,7 +9,7 @@ Feature: Round taxes on order item level
         And there is "EU" zone containing all members of European Union
         And default currency is "EUR"
         And default tax zone is "EU"
-        And there is user "john@example.com" identified by "password123", with "United Kingdom" as shipping country
+        And there is user "john@example.com" identified by "password123"
         And store has "EU VAT" tax rate of 23% for "Clothes" within "EU" zone
         And store has "Low VAT" tax rate of 10% for "Mugs" within "EU" zone
         And store has a product "PHP T-Shirt" priced at "€10.10"
@@ -18,8 +18,6 @@ Feature: Round taxes on order item level
         And product "PHP T-Shirt" belongs to "Clothes" tax category
         And product "Symfony Mug" belongs to "Mugs" tax category
         And product "PHP Mug" belongs to "Mugs" tax category
-        And store ships everything for free
-        And store allows paying offline
         And I am logged in as "john@example.com"
 
     Scenario: Properly rounded up tax for single product
