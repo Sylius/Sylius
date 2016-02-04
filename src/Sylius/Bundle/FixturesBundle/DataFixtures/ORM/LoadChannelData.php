@@ -60,7 +60,7 @@ class LoadChannelData extends DataFixture
     {
         /** @var ChannelInterface $channel */
         $channel = $this->getChannelFactory()->createNew();
-        $channel->setUrl($url);
+        $channel->setHostname($url);
         $channel->setCode($code);
         $channel->setName($name);
         $channel->setColor($this->faker->randomElement(['Red', 'Green', 'Blue', 'Orange', 'Pink']));
