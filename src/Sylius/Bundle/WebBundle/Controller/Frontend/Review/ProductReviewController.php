@@ -11,8 +11,12 @@
 
 namespace Sylius\Bundle\WebBundle\Controller\Frontend\Review;
 
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Doctrine\Common\Persistence\ObjectManager;
+use FOS\RestBundle\Controller\FOSRestController;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Review\Model\ReviewInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,42 +27,49 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  * @author Justin Hilles <justin@1011i.com>
  * @author Daniel Richter <nexyz9@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class ProductReviewController extends ResourceController
+class ProductReviewController extends FOSRestController
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function indexAction(Request $request)
-    {
-        $product = $this->findProductOr404();
-
-        $criteria = $request->query->get('criteria', array());
-        $criteria['reviewSubject'] = $product;
-        $request->query->set('criteria', $criteria);
-
-        return parent::indexAction($request);
-    }
-
     /**
      * @param Request $request
      *
      * @return Response
      */
-    public function createAction(Request $request)
+    public function indexAction(Request $request)
     {
-        $this->isGrantedOr403('create');
-
-        $resource = $this->createNew();
-        $form = $this->getForm($resource);
+        $product = $this->findProductOr404($request->attributes->get('slug'));
+        $reviews = $this->getProductReviewRepository()->findBy([
+            'reviewSubject' => $product,
+            'status' => ReviewInterface::STATUS_ACCEPTED,
+        ]);
 
         $view = $this
             ->view()
-            ->setTemplate($this->config->getTemplate('create.html'))
-            ->setData(array(
-                $this->config->getResourceName() => $resource,
-                'form'                           => $form->createView(),
-            ))
+            ->setTemplate('SyliusWebBundle:Frontend/Review:_list.html.twig')
+            ->setData([
+                'product_reviews' => $reviews,
+            ])
+        ;
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * @return Response
+     */
+    public function createAction()
+    {
+        $review = $this->getProductReviewFactory()->createNew();
+        $form = $this->getReviewForm($review);
+
+        $view = $this
+            ->view()
+            ->setTemplate('SyliusWebBundle:Frontend/Review:_form.html.twig')
+            ->setData([
+                'product_review' => $review,
+                'form' => $form->createView(),
+            ])
         ;
 
         return $this->handleView($view);
@@ -71,11 +82,19 @@ class ProductReviewController extends ResourceController
      */
     public function createWithAjaxAction(Request $request)
     {
-        $resource = $this->createNew();
-        $form = $this->getForm($resource);
+        $review = $this->getProductReviewFactory()->createNew();
+        $form = $this->getReviewForm($review);
 
         if ($form->submit($request)->isValid()) {
-            $this->domainManager->create($form->getData());
+            $manager = $this->getProductReviewManager();
+            $review = $form->getData();
+            $product = $this->findProductOr404($request->attributes->get('slug'));
+            $review->setReviewSubject($product);
+
+            $manager->persist($review);
+            $manager->flush();
+
+            $this->addFlashMessage('success', 'sylius.resource.create', ['%resource%' => 'Product review']);
 
             return new JsonResponse('success');
         }
@@ -84,45 +103,19 @@ class ProductReviewController extends ResourceController
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function createNew()
-    {
-        $review = parent::createNew();
-        $review->setReviewSubject($this->findProductOr404());
-
-        return $review;
-    }
-
-    /**
+     * @param string $slug
+     *
      * @return ProductInterface
+     *
+     * @throws NotFoundHttpException
      */
-    private function findProductOr404()
+    private function findProductOr404($slug)
     {
-        $slug = $this->getRequest()->get('slug');
-
-        if (!$product = $this->get('sylius.repository.product')->findOneBy(array('slug' => $slug))) {
+        if (!$product = $this->getProductRepository()->findOneBy(['slug' => $slug])) {
             throw new NotFoundHttpException(sprintf('Product with slug "%s" not found', $slug));
         }
 
         return $product;
-    }
-
-    /**
-     * @param Request       $request
-     * @param FormInterface $form
-     *
-     * @return bool
-     */
-    private function createResourceIfValid(Request $request, FormInterface $form)
-    {
-        if ($form->submit($request)->isValid()) {
-            $this->domainManager->create($form->getData());
-
-            return true;
-        }
-
-        return false;
     }
 
     /**
@@ -132,11 +125,70 @@ class ProductReviewController extends ResourceController
      */
     private function getFormErrorsAsArray(FormInterface $form)
     {
-        $errors = array();
+        $errors = [];
         foreach ($form->getErrors(true) as $error) {
             $errors[$error->getCause()->getPropertyPath()] = $error->getMessage();
         }
 
         return $errors;
+    }
+
+    /**
+     * @return FactoryInterface
+     */
+    private function getProductReviewFactory()
+    {
+        return $this->get('sylius.factory.product_review');
+    }
+
+    /**
+     * @return EntityRepository
+     */
+    private function getProductReviewRepository()
+    {
+        return $this->get('sylius.repository.product_review');
+    }
+
+    /**
+     * @return EntityRepository
+     */
+    private function getProductRepository()
+    {
+        return $this->get('sylius.repository.product');
+    }
+
+    /**
+     * @param ReviewInterface $review
+     *
+     * @return FormInterface
+     */
+    private function getReviewForm(ReviewInterface $review)
+    {
+        return $this->get('form.factory')->create('sylius_product_review', $review);
+    }
+
+    /**
+     * @return ObjectManager
+     */
+    private function getProductReviewManager()
+    {
+        return $this->get('sylius.manager.product_review');
+    }
+
+    /**
+     * @param string $type
+     * @param string $message
+     * @param array $parameters
+     *
+     * @throws \LogicException
+     */
+    private function addFlashMessage($type, $message, array $parameters)
+    {
+        if (!$this->container->has('session')) {
+            throw new \LogicException('You can not use the addFlash method if sessions are disabled.');
+        }
+
+        $translator = $this->container->get('translator');
+        $this->container->get('session')->getFlashBag()->add($type, $translator->trans($message, $parameters, 'flashes'));
     }
 }
