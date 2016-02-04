@@ -165,7 +165,9 @@ class ProductContext extends DefaultContext
         foreach (explode(',', $values) as $valueData) {
             $valueData = preg_split('[\\[|\\]]', $valueData, -1, PREG_SPLIT_NO_EMPTY);
             $optionValue = $optionValueFactory->createNew();
-            $optionValue->setValue(trim($valueData[0]));
+            $optionValue->setFallbackLocale($this->getContainer()->getParameter('sylius.locale'));
+            $optionValue->setCurrentLocale($this->getContainer()->getParameter('sylius.locale'));
+            $optionValue->setPresentation(trim($valueData[0]));
             $optionValue->setCode(trim($valueData[1]));
 
             $option->addValue($optionValue);
