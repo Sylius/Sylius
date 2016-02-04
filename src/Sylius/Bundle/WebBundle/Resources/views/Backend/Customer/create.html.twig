@@ -2,6 +2,15 @@
 
 {% from 'SyliusResourceBundle:Macros:actions.html.twig' import create %}
 
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts output='assets/compiled/backend_customer.js'
+        'bundles/syliususer/js/sylius-user.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
 {% block topbar %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.section.customer'|trans }}</li>
