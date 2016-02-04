@@ -20,26 +20,27 @@ use Prophecy\Argument;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 class LoadMetadataSubscriberSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(array(
-            'reviewable' => array(
+        $this->beConstructedWith([
+            'reviewable' => [
                 'subject' => 'AcmeBundle\Entity\ReviewableModel',
-                'review' => array(
-                    'classes'  => array(
+                'review' => [
+                    'classes'  => [
                         'model' => 'AcmeBundle\Entity\ReviewModel',
-                    ),
-                ),
-                'reviewer' => array(
-                    'classes'  => array(
+                    ],
+                ],
+                'reviewer' => [
+                    'classes'  => [
                         'model' => 'AcmeBundle\Entity\ReviewerModel',
-                    ),
-                ),
-            ),
-        ));
+                    ],
+                ],
+            ],
+        ]);
     }
 
     function it_is_initializable()
@@ -54,7 +55,7 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
 
     function it_has_subscribed_events()
     {
-        $this->getSubscribedEvents()->shouldReturn(array('loadClassMetadata'));
+        $this->getSubscribedEvents()->shouldReturn(['loadClassMetadata']);
     }
 
     function it_maps_proper_relations_for_review_model(
@@ -68,61 +69,84 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
         $eventArguments->getEntityManager()->willReturn($entityManager)->shouldBeCalled();
         $entityManager->getMetadataFactory()->willReturn($metadataFactory)->shouldBeCalled();
 
-        $classMetadataInfo->fieldMappings = array('id' => array('columnName' => 'id'));
+        $classMetadataInfo->fieldMappings = ['id' => ['columnName' => 'id']];
         $metadataFactory->getMetadataFor('AcmeBundle\Entity\ReviewableModel')->willReturn($classMetadataInfo)->shouldBeCalled();
         $metadataFactory->getMetadataFor('AcmeBundle\Entity\ReviewerModel')->willReturn($classMetadataInfo)->shouldBeCalled();
 
         $metadata->getName()->willReturn('AcmeBundle\Entity\ReviewModel');
 
-        $metadata->mapManyToOne(array(
+        $metadata->mapManyToOne([
             'fieldName'    => 'reviewSubject',
             'targetEntity' => 'AcmeBundle\Entity\ReviewableModel',
             'inversedBy'   => 'reviews',
-            'joinColumns'  => array(
-                array(
-                    'name'                 => 'reviewable_id',
+            'joinColumns'  => [
+                [
+                    'name' => 'reviewable_id',
                     'referencedColumnName' => 'id',
-                    'nullable'             => false,
-                    'onDelete'             => 'CASCADE',
-                ),
-            ),
-        ))->shouldBeCalled();
+                    'nullable' => false,
+                    'onDelete' => 'CASCADE',
+                ],
+            ],
+        ])->shouldBeCalled();
 
-        $metadata->mapManyToOne(array(
-            'fieldName'    => 'author',
+        $metadata->mapManyToOne([
+            'fieldName' => 'author',
             'targetEntity' => 'AcmeBundle\Entity\ReviewerModel',
-            'joinColumn'   => array(
-                'name'                 => 'customer_id',
+            'joinColumn' => [
+                'name' => 'customer_id',
                 'referencedColumnName' => 'id',
-            ),
-            'cascade'      => array('persist'),
-        ))->shouldBeCalled();
+                'nullable' => false,
+                'onDelete' => 'CASCADE',
+            ],
+            'cascade' => ['persist'],
+        ])->shouldBeCalled();
+
+        $this->loadClassMetadata($eventArguments);
+    }
+
+    function it_maps_proper_relations_for_reviewable_model(
+        ClassMetadataFactory $metadataFactory,
+        ClassMetadataInfo $metadata,
+        EntityManager $entityManager,
+        LoadClassMetadataEventArgs $eventArguments
+    ) {
+        $eventArguments->getClassMetadata()->willReturn($metadata)->shouldBeCalled();
+        $eventArguments->getEntityManager()->willReturn($entityManager)->shouldBeCalled();
+        $entityManager->getMetadataFactory()->willReturn($metadataFactory)->shouldBeCalled();
+
+        $metadata->getName()->willReturn('AcmeBundle\Entity\ReviewableModel');
+
+        $metadata->mapOneToMany([
+            'fieldName' => 'reviews',
+            'targetEntity' => 'AcmeBundle\Entity\ReviewModel',
+            'mappedBy' => 'reviewSubject',
+            'cascade' => ['all'],
+        ])->shouldBeCalled();
 
         $this->loadClassMetadata($eventArguments);
     }
 
     function it_skips_mapping_configuration_if_metadata_name_is_not_different(
         ClassMetadataFactory $metadataFactory,
-        ClassMetadataInfo $classMetadataInfo,
         ClassMetadataInfo $metadata,
         EntityManager $entityManager,
         LoadClassMetadataEventArgs $eventArguments
     ) {
-        $this->beConstructedWith(array(
-            'reviewable' => array(
+        $this->beConstructedWith([
+            'reviewable' => [
                 'subject' => 'AcmeBundle\Entity\ReviewableModel',
-                'review' => array(
-                    'classes'  => array(
+                'review' => [
+                    'classes'  => [
                         'model' => 'AcmeBundle\Entity\BadReviewModel',
-                    ),
-                ),
-                'reviewer' => array(
-                    'classes'  => array(
+                    ],
+                ],
+                'reviewer' => [
+                    'classes'  => [
                         'model' => 'AcmeBundle\Entity\ReviewerModel',
-                    ),
-                ),
-            ),
-        ));
+                    ],
+                ],
+            ],
+        ]);
 
         $eventArguments->getClassMetadata()->willReturn($metadata)->shouldBeCalled();
         $eventArguments->getEntityManager()->willReturn($entityManager)->shouldBeCalled();

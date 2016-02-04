@@ -16,6 +16,7 @@ use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 
 /**
  * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 class LoadMetadataSubscriber implements EventSubscriber
 {
@@ -37,7 +38,7 @@ class LoadMetadataSubscriber implements EventSubscriber
      */
     public function getSubscribedEvents()
     {
-        return array('loadClassMetadata');
+        return ['loadClassMetadata'];
     }
 
     /**
@@ -49,40 +50,55 @@ class LoadMetadataSubscriber implements EventSubscriber
         $metadataFactory = $eventArguments->getEntityManager()->getMetadataFactory();
 
         foreach ($this->subjects as $subject => $class) {
-            if ($class['review']['classes']['model'] !== $metadata->getName()) {
-                continue;
+            if ($class['review']['classes']['model'] === $metadata->getName()) {
+                $reviewableEntity = $class['subject'];
+                $reviewerEntity = $class['reviewer']['classes']['model'];
+                $reviewableEntityMetadata = $metadataFactory->getMetadataFor($reviewableEntity);
+                $reviewerEntityMetadata = $metadataFactory->getMetadataFor($reviewerEntity);
+
+                $subjectMapping = [
+                    'fieldName' => 'reviewSubject',
+                    'targetEntity' => $reviewableEntity,
+                    'inversedBy' => 'reviews',
+                    'joinColumns' => [
+                        [
+                            'name' => $subject.'_id',
+                            'referencedColumnName' => $reviewableEntityMetadata->fieldMappings['id']['columnName'],
+                            'nullable' => false,
+                            'onDelete' => 'CASCADE',
+                        ]
+                    ]
+                ];
+
+                $reviewerMapping = [
+                    'fieldName' => 'author',
+                    'targetEntity' => $reviewerEntity,
+                    'joinColumn' => [
+                        'name' => 'customer_id',
+                        'referencedColumnName' => $reviewerEntityMetadata->fieldMappings['id']['columnName'],
+                        'nullable' => false,
+                        'onDelete' => 'CASCADE',
+                    ],
+                    'cascade' => ['persist'],
+                ];
+
+                $metadata->mapManyToOne($subjectMapping);
+                $metadata->mapManyToOne($reviewerMapping);
             }
 
-            $reviewableEntity = $class['subject'];
-            $reviewerEntity = $class['reviewer']['classes']['model'];
-            $reviewableEntityMetadata = $metadataFactory->getMetadataFor($reviewableEntity);
-            $reviewerEntityMetadata = $metadataFactory->getMetadataFor($reviewerEntity);
 
-            $subjectMapping = array(
-                'fieldName'    => 'reviewSubject',
-                'targetEntity' => $reviewableEntity,
-                'inversedBy'   => 'reviews',
-                'joinColumns'  => array(
-                    array(
-                        'name'                 => $subject.'_id',
-                        'referencedColumnName' => $reviewableEntityMetadata->fieldMappings['id']['columnName'],
-                        'nullable'             => false,
-                        'onDelete'             => 'CASCADE',
-                    )
-                )
-            );
-            $reviewerMapping = array(
-                'fieldName'    => 'author',
-                'targetEntity' => $reviewerEntity,
-                'joinColumn'   => array(
-                    'name'                 => 'customer_id',
-                    'referencedColumnName' => $reviewerEntityMetadata->fieldMappings['id']['columnName'],
-                ),
-                'cascade'      => array('persist'),
-            );
+            if ($class['subject'] === $metadata->getName()) {
+                $reviewEntity = $class['review']['classes']['model'];
 
-            $metadata->mapManyToOne($subjectMapping);
-            $metadata->mapManyToOne($reviewerMapping);
+                $reviewsMapping = [
+                    'fieldName' => 'reviews',
+                    'targetEntity' => $reviewEntity,
+                    'mappedBy' => 'reviewSubject',
+                    'cascade' => ['all'],
+                ];
+
+                $metadata->mapOneToMany($reviewsMapping);
+            }
         }
     }
 }
