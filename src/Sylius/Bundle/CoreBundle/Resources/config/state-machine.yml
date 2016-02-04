@@ -6,27 +6,36 @@ winzou_state_machine:
         state_machine_class: %sylius.state_machine.class%
         states:
             cart: ~
-            addressing: ~
-            shipping: ~
-            payment: ~
-            finalize: ~
+            started: ~
+            addressed: ~
+            shipping_selected: ~
+            payment_selected: ~
             completed: ~
         transitions:
-            addressing:
+            start:
                 from: [cart]
-                to:   addressing
-            shipping:
-                from: [addressing]
-                to:   shipping
-            payment:
-                from: [shipping]
-                to:   payment
-            finalize:
-                from: [payment]
-                to:   finalize
+                to: started
+            address:
+                from: [started]
+                to: addressed
+            readdress:
+                from: [payment_selected, shipping_selected, addressed]
+                to: started
+            select_shipping:
+                from: [addressed]
+                to: shipping_selected
+            reselect_shipping:
+                from: [payment_selected, shipping_selected]
+                to: addressed
+            select_payment:
+                from: [shipping_selected]
+                to: payment_selected
+            reselect_payment:
+                from: [payment_selected]
+                to: shipping_selected
             complete:
-                from: [finalize]
-                to:   completed
+                from: [payment_selected]
+                to: completed
 
     sylius_order_shipping:
         class:         %sylius.model.order.class%

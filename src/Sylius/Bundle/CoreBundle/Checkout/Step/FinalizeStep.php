@@ -13,13 +13,13 @@ namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Sylius\Component\Core\SyliusOrderEvents;
 use Sylius\Component\Order\OrderTransitions;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Final checkout step.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Fernando Caraballo Ortiz <caraballo.ortiz@gmail.com>
  */
@@ -49,6 +49,12 @@ class FinalizeStep extends CheckoutStep
         return $this->complete();
     }
 
+    /**
+     * @param ProcessContextInterface $context
+     * @param OrderInterface $order
+     *
+     * @return Response
+     */
     protected function renderStep(ProcessContextInterface $context, OrderInterface $order)
     {
         return $this->render($this->container->getParameter(sprintf('sylius.checkout.step.%s.template', $this->getName())), [
@@ -58,8 +64,6 @@ class FinalizeStep extends CheckoutStep
     }
 
     /**
-     * Mark the order as completed.
-     *
      * @param OrderInterface $order
      */
     protected function completeOrder(OrderInterface $order)
@@ -71,6 +75,7 @@ class FinalizeStep extends CheckoutStep
         $this->dispatchCheckoutEvent(SyliusOrderEvents::PRE_CREATE, $order);
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::FINALIZE_PRE_COMPLETE, $order);
 
+        $this->applyTransition(OrderCheckoutTransitions::TRANSITION_COMPLETE, $order);
         $this->get('sm.factory')->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_CREATE, true);
         if ($order->getCurrency() !== $currencyProvider->getBaseCurrency()) {
             $currencyRepository = $this->get('sylius.repository.currency');

@@ -14,12 +14,12 @@ namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
- * The shipping step of checkout.
- *
  * Based on the user address, we present the available shipping methods,
  * and ask him to select his preferred one.
  *
@@ -39,6 +39,8 @@ class ShippingStep extends CheckoutStep
     {
         $order = $this->getCurrentCart();
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SHIPPING_INITIALIZE, $order);
+
+        $this->applyTransition(OrderCheckoutTransitions::TRANSITION_RESELECT_SHIPPING, $order, true);
 
         $form = $this->createCheckoutShippingForm($order);
 
@@ -64,6 +66,8 @@ class ShippingStep extends CheckoutStep
         if ($form->handleRequest($request)->isValid()) {
             $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SHIPPING_PRE_COMPLETE, $order);
 
+            $this->applyTransition(OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING, $order);
+
             $this->getManager()->persist($order);
             $this->getManager()->flush();
 
@@ -75,6 +79,13 @@ class ShippingStep extends CheckoutStep
         return $this->renderStep($context, $order, $form);
     }
 
+    /**
+     * @param ProcessContextInterface $context
+     * @param OrderInterface $order
+     * @param FormInterface $form
+     *
+     * @return Response
+     */
     protected function renderStep(ProcessContextInterface $context, OrderInterface $order, FormInterface $form)
     {
         return $this->render($this->container->getParameter(sprintf('sylius.checkout.step.%s.template', $this->getName())), [
@@ -84,6 +95,11 @@ class ShippingStep extends CheckoutStep
         ]);
     }
 
+    /**
+     * @param OrderInterface $order
+     *
+     * @return FormInterface
+     */
     protected function createCheckoutShippingForm(OrderInterface $order)
     {
         $this->zones = $this->getZoneMatcher()->matchAll($order->getShippingAddress());

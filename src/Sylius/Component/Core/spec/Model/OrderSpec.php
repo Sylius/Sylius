@@ -21,6 +21,7 @@ use Sylius\Component\Core\Model\OrderShippingStates;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Order\Model\Order;
 use Sylius\Component\Order\Model\OrderInterface;
@@ -88,8 +89,8 @@ class OrderSpec extends ObjectBehavior
 
     function its_checkout_state_is_mutable()
     {
-        $this->setCheckoutState(OrderInterface::STATE_CART);
-        $this->getCheckoutState()->shouldReturn(OrderInterface::STATE_CART);
+        $this->setCheckoutState(OrderCheckoutStates::STATE_CART);
+        $this->getCheckoutState()->shouldReturn(OrderCheckoutStates::STATE_CART);
     }
 
     function its_payment_state_is_mutable()
