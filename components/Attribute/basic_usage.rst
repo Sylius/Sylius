@@ -15,6 +15,7 @@ of the :ref:`component_attribute_model_attribute-subject-interface`.
 
    use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
    use Sylius\Component\Attribute\Model\AttributeValueInterface;
+   use Doctrine\Common\Collections\Collection;
 
    class Shirt implements AttributeSubjectInterface
    {
@@ -34,7 +35,7 @@ of the :ref:`component_attribute_model_attribute-subject-interface`.
        /**
         * {@inheritdoc}
         */
-       public function setAttributes(array $attributes)
+       public function setAttributes(Collection $attributes)
        {
            foreach ($attributes as $attribute) {
                $this->addAttribute($attribute);
@@ -98,6 +99,22 @@ of the :ref:`component_attribute_model_attribute-subject-interface`.
            }
 
            return null;
+       }
+       
+       /**
+        * {@inheritdoc}
+        */
+       public function hasAttributeByCode($attributeCode)
+       {
+   
+       }
+
+       /**
+        * {@inheritdoc}
+        */
+       public function getAttributeByCode($attributeCode)
+       {
+   
        }
    }
 
