@@ -181,4 +181,4 @@ sylius_backend_report:
     
 sylius_backend_metadata_container:
     resource: @SyliusWebBundle/Resources/config/routing/backend/metadata_container.yml
-    prefix: /metadatas
+    prefix: /metadata

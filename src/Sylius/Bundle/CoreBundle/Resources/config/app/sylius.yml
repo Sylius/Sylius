@@ -352,12 +352,12 @@ sylius_rbac:
         sylius.group.update: Edit group
         sylius.group.delete: Delete group
         
-        sylius.manage.metadata: Manage metadatas
-        sylius.metadata.show: Show metadata
-        sylius.metadata.index: List metadatas
-        sylius.metadata.create: Create metadata
-        sylius.metadata.update: Edit metadata
-        sylius.metadata.delete: Delete metadata
+        sylius.manage.metadata_container: Manage metadata
+        sylius.metadata_container.show: Show metadata
+        sylius.metadata_container.index: List metadata
+        sylius.metadata_container.create: Create metadata
+        sylius.metadata_container.update: Edit metadata
+        sylius.metadata_container.delete: Delete metadata
 
         sylius.manage.channel: Manage channels
         sylius.channel.show: Show channel
@@ -668,7 +668,7 @@ sylius_rbac:
         sylius.taxes: Manage taxes
         sylius.support: Manage customer support
     permissions_hierarchy:
-        sylius.manage.metadata: [sylius.metadata.show, sylius.metadata.index, sylius.metadata.create, sylius.metadata.update, sylius.metadata.delete]
+        sylius.manage.metadata_container: [sylius.metadata_container.show, sylius.metadata_container.index, sylius.metadata_container.create, sylius.metadata_container.update, sylius.metadata_container.delete]
         sylius.manage.channel: [sylius.channel.show, sylius.channel.index, sylius.channel.create, sylius.channel.update, sylius.channel.delete]
         sylius.manage.customer: [sylius.customer.show, sylius.customer.index, sylius.customer.create, sylius.customer.update, sylius.customer.delete]
         sylius.manage.group: [sylius.group.show, sylius.group.index, sylius.group.create, sylius.group.update, sylius.group.delete]
@@ -713,11 +713,11 @@ sylius_rbac:
         sylius.manage.contact_topic: [sylius.contact_topic.show, sylius.contact_topic.index, sylius.contact_topic.create, sylius.contact_topic.update, sylius.contact_topic.delete]
         sylius.manage.settings: [sylius.settings.sylius_general, sylius.settings.sylius_security, sylius.settings.sylius_taxation]
         sylius.manage.product_association_type: [sylius.product_association_type.show, sylius.product_association_type.index, sylius.product_association_type.create, sylius.product_association_type.update, sylius.product_association_type.delete]
-        sylius.catalog: [sylius.manage.product, sylius.manage.product_attribute, sylius.manage.product_option, sylius.manage.product_archetype, sylius.manage.product_variant, sylius.manage.taxonomy, sylius.manage.taxon, sylius.manage.metadata, sylius.manage.product_association_type]
-        sylius.marketing: [sylius.manage.promotion, sylius.manage.promotion_coupon, sylius.manage.email, sylius.manage.metadata]
+        sylius.catalog: [sylius.manage.product, sylius.manage.product_attribute, sylius.manage.product_option, sylius.manage.product_archetype, sylius.manage.product_variant, sylius.manage.taxonomy, sylius.manage.taxon, sylius.manage.metadata_container, sylius.manage.product_association_type]
+        sylius.marketing: [sylius.manage.promotion, sylius.manage.promotion_coupon, sylius.manage.email, sylius.manage.metadata_container]
         sylius.sales: [sylius.manage.order, sylius.manage.order_item, sylius.manage.adjustment, sylius.manage.payment, sylius.manage.report]
         sylius.shipping: [sylius.manage.shipment, sylius.manage.shipping_method, sylius.manage.shipping_category]
-        sylius.content: [sylius.manage.static_content, sylius.manage.route, sylius.manage.simple_block, sylius.manage.menu, sylius.manage.slideshow, sylius.manage.string_block, sylius.manage.slideshow_block, sylius.manage.imagine_block, sylius.manage.metadata]
+        sylius.content: [sylius.manage.static_content, sylius.manage.route, sylius.manage.simple_block, sylius.manage.menu, sylius.manage.slideshow, sylius.manage.string_block, sylius.manage.slideshow_block, sylius.manage.imagine_block, sylius.manage.metadata_container]
         sylius.security: [sylius.manage.permission, sylius.manage.role, sylius.manage.customer, sylius.manage.group, sylius.accounts]
         sylius.accounts: [sylius.manage.customer, sylius.manage.group]
         sylius.taxes: [sylius.manage.tax_rate, sylius.manage.tax_category]
