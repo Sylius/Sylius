@@ -77,9 +77,10 @@ final class ZoneContext implements Context
      * @Transform /^rest of the world$/
      * @Transform /^the rest of the world$/
      */
-    public function castRestOfTheWorldToZone()
+    public function getRestOfTheWorldZone()
     {
-        if (null === $zone = $this->zoneRepository->findOneBy(['code' => 'RoW'])) {
+        $zone = $this->zoneRepository->findOneBy(['code' => 'RoW']);
+        if (null === $zone) {
             throw new \Exception('Rest of the world zone does not exist');
         }
 

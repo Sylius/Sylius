@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Core\Test\Services;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;

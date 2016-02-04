@@ -12,6 +12,7 @@
 namespace spec\Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\ShippingMethod;
@@ -20,15 +21,20 @@ use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Calculator\DefaultCalculators;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class ShippingContextSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $shippingMethodRepository, FactoryInterface $shippingMethodFactory, SharedStorageInterface $sharedStorage)
-    {
-        $this->beConstructedWith($shippingMethodRepository, $shippingMethodFactory, $sharedStorage);
+    function let(
+        RepositoryInterface $shippingMethodRepository,
+        FactoryInterface $shippingMethodFactory,
+        ObjectManager $shippingMethodManager,
+        SharedStorageInterface $sharedStorage
+    ) {
+        $this->beConstructedWith($shippingMethodRepository, $shippingMethodFactory, $shippingMethodManager, $sharedStorage);
     }
 
     function it_is_initializable()
@@ -83,6 +89,17 @@ class ShippingContextSpec extends ObjectBehavior
         $shippingMethodRepository->add($shippingMethod)->shouldBeCalled();
 
         $this->storeHasShippingMethodWithFee('Test shipping method', '10.00');
+    }
+
+    function it_assigns_product_for_given_tax_category(
+        $shippingMethodManager,
+        ShippingMethodInterface $shippingMethod,
+        TaxCategoryInterface $taxCategory
+    ) {
+        $shippingMethod->setTaxCategory($taxCategory)->shouldBeCalled();
+        $shippingMethodManager->flush($shippingMethod)->shouldBeCalled();
+
+        $this->shippingMethodBelongsToTaxCategory($shippingMethod, $taxCategory);
     }
 
     function it_casts_shipping_method_name_to_string($shippingMethodRepository, ShippingMethodInterface $shippingMethod)

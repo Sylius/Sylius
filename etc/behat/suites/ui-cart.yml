@@ -45,6 +45,7 @@ default:
                 - Sylius\Behat\Context\Setup\ShippingContext:
                     shippingMethodRepository: "@sylius.repository.shipping_method"
                     shippingMethodFactory: "@sylius.factory.shipping_method"
+                    shippingMethodManager: "@sylius.manager.shipping_method"
                     sharedStorage: "@sylius.behat.shared_storage"
 
                 - Sylius\Behat\Context\Ui\CheckoutContext:

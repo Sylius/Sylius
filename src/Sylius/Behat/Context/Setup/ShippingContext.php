@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
@@ -36,6 +37,11 @@ final class ShippingContext implements Context
     private $shippingMethodFactory;
 
     /**
+     * @var ObjectManager
+     */
+    private $shippingMethodManager;
+
+    /**
      * @var SharedStorageInterface
      */
     private $sharedStorage;
@@ -43,15 +49,18 @@ final class ShippingContext implements Context
     /**
      * @param RepositoryInterface $shippingMethodRepository
      * @param FactoryInterface $shippingMethodFactory
+     * @param ObjectManager $shippingMethodManager
      * @param SharedStorageInterface $sharedStorage
      */
     public function __construct(
         RepositoryInterface $shippingMethodRepository,
         FactoryInterface $shippingMethodFactory,
+        ObjectManager $shippingMethodManager,
         SharedStorageInterface $sharedStorage
     ) {
         $this->shippingMethodRepository = $shippingMethodRepository;
         $this->shippingMethodFactory = $shippingMethodFactory;
+        $this->shippingMethodManager = $shippingMethodManager;
         $this->sharedStorage = $sharedStorage;
     }
 
@@ -91,10 +100,10 @@ final class ShippingContext implements Context
     /**
      * @Given /^(shipping method "[^"]+") belongs to ("[^"]+" tax category)$/
      */
-    public function productBelongsToTaxCategory(ShippingMethodInterface $shippingMethod, TaxCategoryInterface $taxCategory)
+    public function shippingMethodBelongsToTaxCategory(ShippingMethodInterface $shippingMethod, TaxCategoryInterface $taxCategory)
     {
         $shippingMethod->setTaxCategory($taxCategory);
-        $this->shippingMethodRepository->add($shippingMethod);
+        $this->shippingMethodManager->flush($shippingMethod);
     }
 
     /**

@@ -88,7 +88,7 @@ final class TaxContext implements Context
      */
     public function storeHasTaxRateWithinZone($taxRateName, $taxRateAmount, $taxCategoryName, ZoneInterface $taxZone = null)
     {
-        $taxCategory = $this->getTaxCategory($taxCategoryName);
+        $taxCategory = $this->getOrCreateTaxCategory($taxCategoryName);
 
         $taxRate = $this->taxRateFactory->createNew();
         $taxRate->setName($taxRateName);
@@ -106,19 +106,29 @@ final class TaxContext implements Context
      *
      * @return TaxCategoryInterface
      */
-    private function getTaxCategory($taxCategoryName)
+    private function getOrCreateTaxCategory($taxCategoryName)
     {
         try {
             return $this->getTaxCategoryByName($taxCategoryName);
         } catch (\InvalidArgumentException $exception) {
-            $taxCategory = $this->taxCategoryFactory->createNew();
-            $taxCategory->setName($taxCategoryName);
-            $taxCategory->setCode($this->getCodeFromName($taxCategoryName));
-
-            $this->taxCategoryRepository->add($taxCategory);
-
-            return $taxCategory;
+            return $this->createTaxCategory($taxCategoryName);
         }
+    }
+
+    /**
+     * @param string $taxCategoryName
+     *
+     * @return TaxCategoryInterface
+     */
+    private function createTaxCategory($taxCategoryName)
+    {
+        $taxCategory = $this->taxCategoryFactory->createNew();
+        $taxCategory->setName($taxCategoryName);
+        $taxCategory->setCode($this->getCodeFromName($taxCategoryName));
+
+        $this->taxCategoryRepository->add($taxCategory);
+
+        return $taxCategory;
     }
 
     /**

@@ -119,13 +119,13 @@ class ZoneContextSpec extends ObjectBehavior
     {
         $zoneRepository->findOneBy(['code' => 'RoW'])->willReturn($zone);
 
-        $this->castRestOfTheWorldToZone()->shouldReturn($zone);
+        $this->getRestOfTheWorldZone()->shouldReturn($zone);
     }
 
     function it_throws_exception_if_there_is_no_rest_of_the_world_zone($zoneRepository)
     {
         $zoneRepository->findOneBy(['code' => 'RoW'])->willReturn(null);
 
-        $this->shouldThrow(new \Exception('Rest of the world zone does not exist'))->during('castRestOfTheWorldToZone');
+        $this->shouldThrow(new \Exception('Rest of the world zone does not exist'))->during('getRestOfTheWorldZone');
     }
 }
