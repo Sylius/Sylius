@@ -1,18 +1,18 @@
-{% macro list(metadatas) %}
+{% macro list(metadata_containers) %}
 
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
 
-{% if metadatas|length > 0 %}
+{% if metadata_containers|length > 0 %}
 <table class="table table-condensed">
     <thead>
         <tr>
-            <th>{{ sylius_resource_sort('id', 'sylius.metadata.id'|trans) }}</th>
+            <th>{{ sylius_resource_sort('id', 'sylius.metadata_container.id'|trans) }}</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-    {% for metadata in metadatas %}
+    {% for metadata_container in metadata_containers %}
         <tr>
             <td><a href="{{ path('sylius_backend_metadata_container_show', { 'id': metadata_container.id }) }}">{{ metadata_container.id }}</a></td>
             <td>
@@ -26,7 +26,7 @@
     </tbody>
 </table>
 {% else %}
-{{ alerts.info('sylius.metadata.no_results'|trans) }}
+{{ alerts.info('sylius.metadata_container.no_results'|trans) }}
 {% endif %}
 
 {% endmacro %}
