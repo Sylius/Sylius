@@ -40,6 +40,7 @@ imports:
     - suites/ui/user.yml
     - suites/ui/localization.yml
     - suites/ui/product.yml
+    - suites/ui/shipping.yml
 
     - suites/domain/order.yml
     - suites/domain/product.yml

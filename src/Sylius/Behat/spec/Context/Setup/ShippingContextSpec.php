@@ -75,6 +75,7 @@ class ShippingContextSpec extends ObjectBehavior
         $shippingMethod->setZone($zone)->shouldBeCalled();
 
         $shippingMethodRepository->add($shippingMethod)->shouldBeCalled();
+        $sharedStorage->setCurrentResource('shippingMethod', $shippingMethod, true)->shouldBeCalled();
 
         $this->storeShipsEverythingForFree();
     }
@@ -99,6 +100,7 @@ class ShippingContextSpec extends ObjectBehavior
         $shippingMethod->setZone($zone)->shouldBeCalled();
 
         $shippingMethodRepository->add($shippingMethod)->shouldBeCalled();
+        $sharedStorage->setCurrentResource('shippingMethod', $shippingMethod, true)->shouldBeCalled();
 
         $this->storeHasShippingMethodWithFee('Test shipping method', 1000);
     }

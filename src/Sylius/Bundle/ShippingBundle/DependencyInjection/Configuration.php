@@ -15,6 +15,7 @@ use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\ShippingBundle\Controller\ShipmentController;
+use Sylius\Bundle\ShippingBundle\Controller\ShippingMethodController;
 use Sylius\Bundle\ShippingBundle\Form\Type\RuleType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShipmentType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryType;
@@ -129,7 +130,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode('model')->defaultValue(ShippingMethod::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(ShippingMethodInterface::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ShippingMethodController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->end()
                                         ->arrayNode('form')

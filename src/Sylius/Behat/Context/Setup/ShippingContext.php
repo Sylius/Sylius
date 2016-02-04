@@ -22,6 +22,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Calculator\DefaultCalculators;
 use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
+use Sylius\Component\Translation\Model\AbstractTranslatable;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -94,6 +95,14 @@ final class ShippingContext implements Context
     }
 
     /**
+     * @Given /^the store has a shipping method "([^"]*)"$/
+     */
+    public function storeHasShippingMethod($shippingMethodName)
+    {
+        $this->createShippingMethod($shippingMethodName);
+    }
+
+    /**
      * @Given /^the store has "([^"]*)" shipping method with ("[^"]+") fee$/
      * @Given /^the store has "([^"]*)" shipping method with ("[^"]+") fee within ("([^"]*)" zone)$/
      * @Given /^the store has "([^"]*)" shipping method with ("[^"]+") fee for (the rest of the world)$/
@@ -130,6 +139,7 @@ final class ShippingContext implements Context
             $zone = $this->sharedStorage->get('zone');
         }
 
+        /** @var AbstractTranslatable | ShippingMethodInterface $shippingMethod */
         $shippingMethod = $this->shippingMethodFactory->createNew();
         $shippingMethod->setCode($this->generateCodeFromNameAndZone($name, $zone->getCode()));
         $shippingMethod->setName($name);
@@ -139,6 +149,7 @@ final class ShippingContext implements Context
         $shippingMethod->setZone($zone);
 
         $this->shippingMethodRepository->add($shippingMethod);
+        $this->sharedStorage->setCurrentResource('shippingMethod', $shippingMethod);
     }
 
     /**

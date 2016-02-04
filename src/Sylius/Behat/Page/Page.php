@@ -194,6 +194,17 @@ abstract class Page implements PageInterface
     }
 
     /**
+     * @param int $time in seconds
+     * @param NodeElement $modal
+     */
+    public function waitForModalToAppear($time, NodeElement $modal)
+    {
+        $this->getDocument()->waitFor($time, function () use ($modal) {
+            return false !== strpos($modal->getAttribute('class'), 'in');
+        });
+    }
+
+    /**
      * @param string $name
      *
      * @return bool
