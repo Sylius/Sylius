@@ -190,6 +190,23 @@ class OrderItemUnit implements OrderItemUnitInterface
     }
 
     /**
+     * @return Collection|Adjustment[]
+     */
+    public function getRefundAdjustments()
+    {
+        return $this->adjustments->filter(function (Adjustment $adjustment) {
+            return true === $adjustment->isRefund();
+        });
+    }
+
+    public function removeRefundAdjustments()
+    {
+        foreach ($this->getRefundAdjustments() as $adjustment) {
+            $this->removeAdjustment($adjustment);
+        }
+    }
+
+    /**
      * @param AdjustmentInterface $adjustment
      */
     protected function addToAdjustmentsTotal(AdjustmentInterface $adjustment)

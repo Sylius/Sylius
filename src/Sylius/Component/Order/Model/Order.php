@@ -531,6 +531,16 @@ class Order implements OrderInterface
     }
 
     /**
+     * @return Collection|Adjustment[]
+     */
+    public function getRefundAdjustments()
+    {
+        return $this->adjustments->filter(function (Adjustment $adjustment) {
+            return true === $adjustment->isRefund();
+        });
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getAdditionalInformation()
