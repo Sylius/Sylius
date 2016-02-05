@@ -143,12 +143,12 @@ Once we have our class we can characterize it with attributes.
 
    $smallSize = new AttributeValue();
    $mediumSize = new AttributeValue();
+   
+   $smallSize->setAttribute($attribute);
+   $mediumSize->setAttribute($attribute);
 
    $smallSize->setValue('S');
    $mediumSize->setValue('M');
-
-   $smallSize->setAttribute($attribute);
-   $mediumSize->setAttribute($attribute);
 
    $shirt = new Shirt();
 
