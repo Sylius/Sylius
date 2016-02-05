@@ -133,11 +133,13 @@ Once we have our class we can characterize it with attributes.
    use Example\Model\Shirt;
    use Sylius\Component\Attribute\Model\Attribute;
    use Sylius\Component\Attribute\Model\AttributeValue;
+   use Sylius\Component\Attribute\AttributeType\TextAttributeType;
+   use Sylius\Component\Attribute\Model\AttributeValueInterface;
 
    $attribute = new Attribute();
    $attribute->setName('Size');
-   $attribute->setType(DefaultAttributeTypes::TEXT);
-   $attribute->setStorageType(DefaultAttributeTypes::TEXT);
+   $attribute->setType(TextAttributeType::TYPE);
+   $attribute->setStorageType(AttributeValueInterface::STORAGE_TEXT);
 
    $smallSize = new AttributeValue();
    $mediumSize = new AttributeValue();
