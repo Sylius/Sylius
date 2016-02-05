@@ -11,19 +11,20 @@
 
 namespace Sylius\Component\Product\Factory;
 
+use Sylius\Component\Product\Model\VariantInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface VariantFactoryInterface extends FactoryInterface
+interface ProductVariantFactoryInterface extends FactoryInterface
 {
     /**
-     * @param mixed $promotionId
+     * @param mixed $id
      *
      * @return VariantInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function createForProduct($promotionId);
+    public function createBasedOnProductId($id);
 }

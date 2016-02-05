@@ -12,7 +12,7 @@
 namespace spec\Sylius\Component\Product\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Product\Factory\VariantFactoryInterface;
+use Sylius\Component\Product\Factory\ProductVariantFactoryInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\VariantInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -21,7 +21,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class VariantFactorySpec extends ObjectBehavior
+class ProductVariantFactorySpec extends ObjectBehavior
 {
     function let(FactoryInterface $factory, RepositoryInterface $productRepository)
     {
@@ -30,7 +30,7 @@ class VariantFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Product\Factory\VariantFactory');
+        $this->shouldHaveType('Sylius\Component\Product\Factory\ProductVariantFactory');
     }
 
     function it_is_a_resource_factory()
@@ -40,7 +40,7 @@ class VariantFactorySpec extends ObjectBehavior
 
     function it_implements_variant_factory_interface()
     {
-        $this->shouldImplement(VariantFactoryInterface::class);
+        $this->shouldImplement(ProductVariantFactoryInterface::class);
     }
 
     function it_creates_new_variant(FactoryInterface $factory, VariantInterface $variant)
@@ -56,7 +56,7 @@ class VariantFactorySpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('createForProduct', [15])
+            ->during('createBasedOnProductId', [15])
         ;
     }
 
@@ -70,6 +70,6 @@ class VariantFactorySpec extends ObjectBehavior
         $productRepository->find(13)->willReturn($product);
         $variant->setProduct($product)->shouldBeCalled();
 
-        $this->createForProduct(13)->shouldReturn($variant);
+        $this->createBasedOnProductId(13)->shouldReturn($variant);
     }
 }

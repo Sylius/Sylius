@@ -17,7 +17,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class VariantFactory implements VariantFactoryInterface
+class ProductVariantFactory implements ProductVariantFactoryInterface
 {
     /**
      * @var FactoryInterface
@@ -50,15 +50,15 @@ class VariantFactory implements VariantFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createForProduct($productId)
+    public function createBasedOnProductId($id)
     {
-        if (null === $product = $this->productRepository->find($productId)) {
-            throw new \InvalidArgumentException(sprintf('Product with id "%s" does not exist.', $productId));
+        if (null === $product = $this->productRepository->find($id)) {
+            throw new \InvalidArgumentException(sprintf('Product with id "%s" does not exist.', $id));
         }
 
-        $coupon = $this->factory->createNew();
-        $coupon->setProduct($product);
+        $variant = $this->createNew();
+        $variant->setProduct($product);
 
-        return $coupon;
+        return $variant;
     }
 }
