@@ -19,7 +19,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class TaxContext implements Context
+final class TaxContext implements Context
 {
     /**
      * @var FactoryInterface

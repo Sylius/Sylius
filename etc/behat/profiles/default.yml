@@ -13,6 +13,7 @@ default:
             directory: etc/build
             clean_start: false
             screenshot: true
+
         Behat\MinkExtension:
             base_url: http://localhost:8080/
             sessions:
@@ -31,15 +32,21 @@ default:
                             - "no-sandbox"
             browser_name: chrome
             show_auto: false
+
         Behat\Symfony2Extension:
             kernel:
                 class: TestKernel
                 path: app/TestKernel.php
-        Sylius\Behat\Symfony2Extension: ~
+
         SensioLabs\Behat\PageObjectExtension:
             namespaces:
                 page: [Sylius\Behat\Page]
+
+        Sylius\Behat\SymfonyExtension: ~
+
         Sylius\Behat\PageObjectExtension: ~
+
+        Sylius\Behat\SymfonyPageObjectExtension: ~
 
     gherkin:
         filters:

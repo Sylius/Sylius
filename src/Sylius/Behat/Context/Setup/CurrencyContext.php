@@ -19,7 +19,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class CurrencyContext implements Context
+final class CurrencyContext implements Context
 {
     /**
      * @var RepositoryInterface

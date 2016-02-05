@@ -23,7 +23,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class UserContext implements Context
+final class UserContext implements Context
 {
     /**
      * @var RepositoryInterface

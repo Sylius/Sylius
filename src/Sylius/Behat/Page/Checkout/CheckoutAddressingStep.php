@@ -11,8 +11,7 @@
 
 namespace Sylius\Behat\Page\Checkout;
 
-use Behat\Mink\Exception\ElementNotFoundException;
-use Sylius\Behat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\SymfonyPageObjectExtension\PageObject\SymfonyPage;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -20,31 +19,31 @@ use Sylius\Behat\PageObjectExtension\Page\SymfonyPage;
 class CheckoutAddressingStep extends SymfonyPage
 {
     /**
-     * @return string
-     */
-    public function getRouteName()
-    {
-        return 'sylius_checkout_addressing';
-    }
-
-    /**
      * @param array $addressingDetails
-     *
-     * @throws ElementNotFoundException
      */
     public function fillAddressingDetails(array $addressingDetails)
     {
-        $this->fillField('First name', $addressingDetails['firstName']);
-        $this->fillField('Last name', $addressingDetails['lastName']);
-        $this->selectFieldOption('Country', $addressingDetails['country']);
-        $this->fillField('Street', $addressingDetails['street']);
-        $this->fillField('City', $addressingDetails['city']);
-        $this->fillField('Postcode', $addressingDetails['postcode']);
-        $this->fillField('Phone number', $addressingDetails['phoneNumber']);
+        $document = $this->getDocument();
+
+        $document->fillField('First name', $addressingDetails['firstName']);
+        $document->fillField('Last name', $addressingDetails['lastName']);
+        $document->selectFieldOption('Country', $addressingDetails['country']);
+        $document->fillField('Street', $addressingDetails['street']);
+        $document->fillField('City', $addressingDetails['city']);
+        $document->fillField('Postcode', $addressingDetails['postcode']);
+        $document->fillField('Phone number', $addressingDetails['phoneNumber']);
     }
 
-    public function forward()
+    public function continueCheckout()
     {
-        $this->pressButton('Continue');
+        $this->getDocument()->pressButton('Continue');
+    }
+
+    /**
+     * @return string
+     */
+    protected function getRouteName()
+    {
+        return 'sylius_checkout_addressing';
     }
 }

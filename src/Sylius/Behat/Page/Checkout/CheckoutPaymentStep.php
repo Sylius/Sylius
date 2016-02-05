@@ -11,7 +11,7 @@
 
 namespace Sylius\Behat\Page\Checkout;
 
-use Sylius\Behat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\SymfonyPageObjectExtension\PageObject\SymfonyPage;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -19,19 +19,25 @@ use Sylius\Behat\PageObjectExtension\Page\SymfonyPage;
 class CheckoutPaymentStep extends SymfonyPage
 {
     /**
-     * @return string
-     */
-    public function getRouteName()
-    {
-        return 'sylius_checkout_payment';
-    }
-
-    /**
      * @param string $paymentMethod
      */
     public function selectPaymentMethod($paymentMethod)
     {
-        $this->pressRadio($paymentMethod);
-        $this->pressButton('Continue');
+        $radio = $this->getDocument()->findField($paymentMethod);
+
+        $this->getDocument()->fillField($radio->getAttribute('name'), $radio->getAttribute('value'));
+    }
+
+    public function continueCheckout()
+    {
+        $this->getDocument()->pressButton('Continue');
+    }
+
+    /**
+     * @return string
+     */
+    protected function getRouteName()
+    {
+        return 'sylius_checkout_payment';
     }
 }

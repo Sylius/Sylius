@@ -11,17 +11,22 @@
 
 namespace Sylius\Behat\Page\Checkout;
 
-use Sylius\Behat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\SymfonyPageObjectExtension\PageObject\SymfonyPage;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 class CheckoutFinalizeStep extends SymfonyPage
 {
+    public function confirmOrder()
+    {
+        $this->getDocument()->clickLink('Place order');
+    }
+
     /**
      * @return string
      */
-    public function getRouteName()
+    protected function getRouteName()
     {
         return 'sylius_checkout_finalize';
     }

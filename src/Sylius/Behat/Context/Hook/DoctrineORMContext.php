@@ -18,7 +18,7 @@ use Doctrine\ORM\EntityManagerInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class DoctrineORMContext implements Context
+final class DoctrineORMContext implements Context
 {
     /**
      * @var EntityManagerInterface

@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Symfony2Extension\Factory;
+namespace Sylius\Behat\SymfonyExtension\Factory;
 
 use Behat\Mink\Driver\BrowserKitDriver;
 use Behat\MinkExtension\ServiceContainer\Driver\DriverFactory;
 use Behat\Symfony2Extension\Driver\KernelDriver;
-use Sylius\Behat\Symfony2Extension\ServiceContainer\Symfony2Extension;
+use Sylius\Behat\SymfonyExtension\ServiceContainer\SymfonyExtension;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
@@ -55,7 +55,7 @@ final class IsolatedSymfonyFactory implements DriverFactory
         $this->assertMinkBrowserKitDriverIsAvailable();
 
         return new Definition(KernelDriver::class, [
-            new Reference(Symfony2Extension::DRIVER_KERNEL_ID),
+            new Reference(SymfonyExtension::DRIVER_KERNEL_ID),
             '%mink.base_url%',
         ]);
     }

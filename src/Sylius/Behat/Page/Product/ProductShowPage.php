@@ -11,8 +11,7 @@
 
 namespace Sylius\Behat\Page\Product;
 
-use Sylius\Behat\PageObjectExtension\Page\SymfonyPage;
-use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Behat\SymfonyPageObjectExtension\PageObject\SymfonyPage;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -20,13 +19,13 @@ use Sylius\Component\Product\Model\ProductInterface;
 class ProductShowPage extends SymfonyPage
 {
     /**
-     * @param ProductInterface $product
+     * @param array $urlParameters
      *
      * @return ProductShowPage
      */
-    public function openSpecificProductPage(ProductInterface $product)
+    public function open(array $urlParameters = [])
     {
-        $url = $this->router->generate($product);
+        $url = $this->router->generate($urlParameters['product']);
         $this->getSession()->visit($url);
 
         return $this;
@@ -34,7 +33,7 @@ class ProductShowPage extends SymfonyPage
 
     public function addToCart()
     {
-        $this->pressButton('Add to cart');
+        $this->getDocument()->pressButton('Add to cart');
     }
 
     /**
@@ -42,15 +41,14 @@ class ProductShowPage extends SymfonyPage
      */
     public function addToCartWithQuantity($quantity)
     {
-        $this->fillField('Quantity', $quantity);
-        $this->pressButton('Add to cart');
+        $this->getDocument()->fillField('Quantity', $quantity);
+        $this->getDocument()->pressButton('Add to cart');
     }
 
     /**
-     * @return null
+     * {@inheritdoc}
      */
     public function getRouteName()
     {
-        return null;
     }
 }

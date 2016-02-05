@@ -21,7 +21,7 @@ use Sylius\Component\Shipping\Calculator\DefaultCalculators;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class ShippingContext implements Context
+final class ShippingContext implements Context
 {
     /**
      * @var RepositoryInterface
