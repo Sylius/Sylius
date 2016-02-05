@@ -17,6 +17,8 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Test\Services\DefaultCountriesFactoryInterface;
 use Sylius\Component\Core\Test\Services\DefaultStoreDataInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -25,10 +27,9 @@ class ChannelContextSpec extends ObjectBehavior
 {
     function let(
         SharedStorageInterface $sharedStorage,
-        DefaultStoreDataInterface $defaultChannelFactory,
-        DefaultCountriesFactoryInterface $defaultCountriesFactory
+        DefaultStoreDataInterface $defaultChannelFactory
     ) {
-        $this->beConstructedWith($sharedStorage, $defaultChannelFactory, $defaultCountriesFactory);
+        $this->beConstructedWith($sharedStorage, $defaultChannelFactory);
     }
 
     function it_is_initializable()
@@ -52,12 +53,5 @@ class ChannelContextSpec extends ObjectBehavior
         $sharedStorage->setClipboard($defaultData)->shouldBeCalled();
 
         $this->thatStoreIsOperatingOnASingleChannel();
-    }
-
-    function it_sets_default_countries($defaultCountriesFactory)
-    {
-        $defaultCountriesFactory->create(['AU', 'US', 'GB'])->shouldBeCalled();
-
-        $this->storeShipsTo('Australia', 'United States', 'United Kingdom');
     }
 }

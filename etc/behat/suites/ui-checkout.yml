@@ -8,7 +8,6 @@ default:
                 - Sylius\Behat\Context\Setup\ChannelContext:
                     sharedStorage: "@sylius.behat.shared_storage"
                     defaultChannelFactory: "@sylius.behat.default_channel_factory"
-                    defaultCountriesFactory: "@sylius.behat.default_countries_factory"
                 - Sylius\Behat\Context\Setup\CurrencyContext:
                     currencyRepository: "@sylius.repository.currency"
                     sharedStorage: "@sylius.behat.shared_storage"

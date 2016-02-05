@@ -20,7 +20,6 @@
         <parameter key="sylius.behat.security.class">Sylius\Bundle\CoreBundle\Test\Services\SecurityService</parameter>
 
         <parameter key="sylius.behat.default_channel_factory.class">Sylius\Component\Core\Test\Services\DefaultChannelFactory</parameter>
-        <parameter key="sylius.behat.default_countries_factory.class">Sylius\Component\Core\Test\Services\DefaultCountriesFactory</parameter>
     </parameters>
 
     <services>
@@ -38,10 +37,6 @@
             <argument type="service" id="sylius.factory.channel" />
             <argument type="service" id="sylius.factory.zone_member" />
             <argument type="service" id="sylius.factory.zone" />
-        </service>
-        <service id="sylius.behat.default_countries_factory" class="%sylius.behat.default_countries_factory.class%">
-            <argument type="service" id="sylius.factory.country" />
-            <argument type="service" id="sylius.repository.country" />
         </service>
     </services>
 

@@ -19,6 +19,7 @@ use Symfony\Component\Intl\Intl;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class ChannelContext implements Context
 {
@@ -33,23 +34,15 @@ final class ChannelContext implements Context
     private $defaultChannelFactory;
 
     /**
-     * @var DefaultCountriesFactoryInterface
-     */
-    private $defaultCountriesFactory;
-
-    /**
      * @param SharedStorageInterface $sharedStorage
      * @param DefaultStoreDataInterface $defaultChannelFactory
-     * @param DefaultCountriesFactoryInterface $defaultCountriesFactory
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        DefaultStoreDataInterface $defaultChannelFactory,
-        DefaultCountriesFactoryInterface $defaultCountriesFactory
+        DefaultStoreDataInterface $defaultChannelFactory
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->defaultChannelFactory = $defaultChannelFactory;
-        $this->defaultCountriesFactory = $defaultCountriesFactory;
     }
 
     /**
@@ -78,7 +71,6 @@ final class ChannelContext implements Context
             $countries[] = $this->getCountryCodeByEnglishCountryName($country3);
         }
 
-        $this->defaultCountriesFactory->create($countries);
     }
 
     /**

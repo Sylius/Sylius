@@ -20,22 +20,20 @@ Feature: Apply correct shipping fee with taxes on order
         And store has "DHL" shipping method with "€10.00" fee within "EU" zone
         And store has "DHL-World" shipping method with "€20.00" fee for the rest of the world
         And shipping method "DHL" belongs to "Shipping Services" tax category
-        And shipping method "DHL-World" belongs to "Shipping Services World" tax category
+        And shipping method "DHL-World" belongs to "Shipping Services" tax category
         And store allows paying offline
         And I am logged in as "john@example.com"
 
     Scenario: Proper shipping fee and tax
-        Given I am logged in as "john@example.com"
-        And I have product "PHP T-Shirt" in the cart
+        Given I have product "PHP T-Shirt" in the cart
         When I proceed selecting "DHL" shipping method
         Then my cart total should be "€112.30"
         And my cart taxes should be "€2.30"
         And my cart shipping fee should be "€12.30"
 
     Scenario: Proper shipping fee and tax after addressing
-        Given I am logged in as "john@example.com"
-        And I have product "PHP T-Shirt" in the cart
+        Given I have product "PHP T-Shirt" in the cart
         When I proceed selecting "DHL-World" shipping method and "Australia" as shipping country
-        Then my cart total should be "€122.00"
+        Then my cart total should be "€122.00"oo
         And my cart taxes should be "€2.00"
         And my cart shipping fee should be "€22.00"
