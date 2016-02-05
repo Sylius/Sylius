@@ -19,7 +19,7 @@
         <parameter key="sylius.behat.shared_storage.class">Sylius\Component\Core\Test\Services\SharedStorage</parameter>
         <parameter key="sylius.behat.security.class">Sylius\Bundle\CoreBundle\Test\Services\SecurityService</parameter>
 
-        <parameter key="sylius.behat.default_channel_factory.class">Sylius\Component\Core\Test\Services\DefaultChannelFactory</parameter>
+        <parameter key="sylius.behat.default_france_channel_factory.class">Sylius\Component\Core\Test\Services\DefaultFranceChannelFactory</parameter>
     </parameters>
 
     <services>
@@ -30,7 +30,7 @@
         </service>
 
         <!--Default Store Data-->
-        <service id="sylius.behat.default_channel_factory" class="%sylius.behat.default_channel_factory.class%">
+        <service id="sylius.behat.default_france_channel_factory" class="%sylius.behat.default_france_channel_factory.class%">
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.repository.zone_member" />
             <argument type="service" id="sylius.repository.zone" />

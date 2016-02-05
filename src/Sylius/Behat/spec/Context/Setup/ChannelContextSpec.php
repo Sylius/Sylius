@@ -11,7 +11,9 @@
 
 namespace spec\Sylius\Behat\Context\Setup;
 
+use Behat\Behat\Context\Context;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Test\Services\DefaultCountriesFactoryInterface;
@@ -27,9 +29,16 @@ class ChannelContextSpec extends ObjectBehavior
 {
     function let(
         SharedStorageInterface $sharedStorage,
-        DefaultStoreDataInterface $defaultChannelFactory
+        DefaultStoreDataInterface $defaultFranceChannelFactory,
+        FactoryInterface $countryFactory,
+        RepositoryInterface $countryRepository
     ) {
-        $this->beConstructedWith($sharedStorage, $defaultChannelFactory);
+        $this->beConstructedWith(
+            $sharedStorage,
+            $defaultFranceChannelFactory,
+            $countryFactory,
+            $countryRepository
+        );
     }
 
     function it_is_initializable()
@@ -37,21 +46,41 @@ class ChannelContextSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Behat\Context\Setup\ChannelContext');
     }
 
-    function it_is_context()
+    function it_implements_context()
     {
-        $this->shouldImplement('Behat\Behat\Context\Context');
+        $this->shouldImplement(Context::class);
     }
 
     function it_sets_default_channel_in_to_shared_storage(
-        $defaultChannelFactory,
+        $defaultFranceChannelFactory,
         $sharedStorage,
         ChannelInterface $channel,
         ZoneInterface $zone
     ) {
         $defaultData = ['channel' => $channel, 'zone' => $zone];
-        $defaultChannelFactory->create()->willReturn($defaultData);
+        $defaultFranceChannelFactory->create()->willReturn($defaultData);
         $sharedStorage->setClipboard($defaultData)->shouldBeCalled();
 
         $this->thatStoreIsOperatingOnASingleChannel();
+    }
+
+    function it_configures_shipping_available_countries(
+        $countryFactory,
+        $countryRepository,
+        CountryInterface $australia,
+        CountryInterface $china,
+        CountryInterface $france
+    ) {
+        $countryFactory->createNew()->willReturn($australia, $china, $france);
+
+        $australia->setCode('AU')->shouldBeCalled();
+        $china->setCode('CN')->shouldBeCalled();
+        $france->setCode('FR')->shouldBeCalled();
+
+        $countryRepository->add($australia)->shouldBeCalled();
+        $countryRepository->add($china)->shouldBeCalled();
+        $countryRepository->add($france)->shouldBeCalled();
+
+        $this->storeShipsTo('Australia', 'China', 'France');
     }
 }

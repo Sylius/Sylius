@@ -83,17 +83,17 @@ final class TaxContext implements Context
     }
 
     /**
-     * @Given /^store has "([^"]+)" tax rate of ([^"]+)% for "([^"]+)" within ("([^"]+)" zone)$/
+     * @Given store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within :zone zone
      * @Given /^store has "([^"]+)" tax rate of ([^"]+)% for "([^"]+)" for (the rest of the world)$/
      */
-    public function storeHasTaxRateWithinZone($taxRateName, $taxRateAmount, $taxCategoryName, ZoneInterface $taxZone = null)
+    public function storeHasTaxRateWithinZone($taxRateName, $taxRateAmount, $taxCategoryName, ZoneInterface $zone = null)
     {
         $taxCategory = $this->getOrCreateTaxCategory($taxCategoryName);
 
         $taxRate = $this->taxRateFactory->createNew();
         $taxRate->setName($taxRateName);
         $taxRate->setCode($this->getCodeFromName($taxRateName));
-        $taxRate->setZone($taxZone);
+        $taxRate->setZone($zone);
         $taxRate->setAmount($this->getAmountFromString($taxRateAmount));
         $taxRate->setCategory($taxCategory);
         $taxRate->setCalculator('default');

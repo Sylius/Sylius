@@ -15,6 +15,8 @@ use Behat\Behat\Context\Context;
 use Sylius\Component\Core\Test\Services\DefaultCountriesFactoryInterface;
 use Sylius\Component\Core\Test\Services\DefaultStoreDataInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Intl\Intl;
 
 /**
@@ -31,18 +33,34 @@ final class ChannelContext implements Context
     /**
      * @var DefaultStoreDataInterface
      */
-    private $defaultChannelFactory;
+    private $defaultFranceChannelFactory;
+
+    /**
+     * @var FactoryInterface
+     */
+    private $countryFactory;
+
+    /**
+     * @var RepositoryInterface
+     */
+    private $countryRepository;
 
     /**
      * @param SharedStorageInterface $sharedStorage
-     * @param DefaultStoreDataInterface $defaultChannelFactory
+     * @param DefaultStoreDataInterface $defaultFranceChannelFactory
+     * @param FactoryInterface $countryFactory
+     * @param RepositoryInterface $countryRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        DefaultStoreDataInterface $defaultChannelFactory
+        DefaultStoreDataInterface $defaultFranceChannelFactory,
+        FactoryInterface $countryFactory,
+        RepositoryInterface $countryRepository
     ) {
         $this->sharedStorage = $sharedStorage;
-        $this->defaultChannelFactory = $defaultChannelFactory;
+        $this->defaultFranceChannelFactory = $defaultFranceChannelFactory;
+        $this->countryFactory = $countryFactory;
+        $this->countryRepository = $countryRepository;
     }
 
     /**
@@ -50,7 +68,7 @@ final class ChannelContext implements Context
      */
     public function thatStoreIsOperatingOnASingleChannel()
     {
-        $defaultData = $this->defaultChannelFactory->create();
+        $defaultData = $this->defaultFranceChannelFactory->create();
         $this->sharedStorage->setClipboard($defaultData);
     }
 
@@ -71,6 +89,20 @@ final class ChannelContext implements Context
             $countries[] = $this->getCountryCodeByEnglishCountryName($country3);
         }
 
+        foreach ($countries as $country) {
+            $this->createCountry($country);
+        }
+    }
+
+    /**
+     * @param string $code
+     */
+    private function createCountry($code)
+    {
+        $country = $this->countryFactory->createNew();
+        $country->setCode($code);
+
+        $this->countryRepository->add($country);
     }
 
     /**

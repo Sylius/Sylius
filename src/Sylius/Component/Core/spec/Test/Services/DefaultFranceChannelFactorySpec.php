@@ -22,7 +22,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class DefaultChannelFactorySpec extends ObjectBehavior
+class DefaultFranceChannelFactorySpec extends ObjectBehavior
 {
     function let(
         RepositoryInterface $channelRepository,
@@ -44,7 +44,7 @@ class DefaultChannelFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Test\Services\DefaultChannelFactory');
+        $this->shouldHaveType('Sylius\Component\Core\Test\Services\DefaultFranceChannelFactory');
     }
 
     function it_is_default_store_data()

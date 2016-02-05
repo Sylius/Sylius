@@ -21,7 +21,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class DefaultChannelFactory implements DefaultStoreDataInterface
+class DefaultFranceChannelFactory implements DefaultStoreDataInterface
 {
     const DEFAULT_CHANNEL_CODE = 'WEB-FR';
     const DEFAULT_ZONE_CODE = 'FR';

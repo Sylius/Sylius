@@ -15,7 +15,7 @@ Feature: Apply correct shipping fee with taxes on order
         And store has "EU VAT" tax rate of 23% for "Clothes" within "EU" zone
         And store has "Low tax" tax rate of 10% for "Clothes" for the rest of the world
         And store has "Shipping EU VAT" tax rate of 23% for "Shipping Services" within "EU" zone
-        And store has "Shipping Low tax" tax rate of 10% for "Shipping Services World" for the rest of the world
+        And store has "Shipping Low tax" tax rate of 10% for "Shipping Services" for the rest of the world
         And store has a product "PHP T-Shirt" priced at "€100.00"
         And store has "DHL" shipping method with "€10.00" fee within "EU" zone
         And store has "DHL-World" shipping method with "€20.00" fee for the rest of the world
@@ -34,6 +34,6 @@ Feature: Apply correct shipping fee with taxes on order
     Scenario: Proper shipping fee and tax after addressing
         Given I have product "PHP T-Shirt" in the cart
         When I proceed selecting "DHL-World" shipping method and "Australia" as shipping country
-        Then my cart total should be "€122.00"oo
+        Then my cart total should be "€122.00"
         And my cart taxes should be "€2.00"
         And my cart shipping fee should be "€22.00"
