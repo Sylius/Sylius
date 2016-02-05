@@ -46,6 +46,19 @@ class ProductShowPage extends SymfonyPage
     }
 
     /**
+     * @param string $variant
+     */
+    public function addToCartWithVariant($variant)
+    {
+        $item = $this->getDocument()->find('css', sprintf('#product-variants tbody tr:contains("%s")', $variant));
+        $radio = $item->find('css', 'input');
+
+        $this->getDocument()->fillField($radio->getAttribute('name'), $radio->getAttribute('value'));
+
+        $this->getDocument()->pressButton('Add to cart');
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getRouteName()
