@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Channel\Context;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Channel\Context\CompositeChannelContext;

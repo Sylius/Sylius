@@ -12,19 +12,18 @@
 namespace spec\Sylius\Component\Channel\Context\SingleChannel;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
-use Sylius\Component\Channel\Context\SingleChannel\ChannelContext;
+use Sylius\Component\Channel\Context\SingleChannelContext;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 
 /**
- * @mixin ChannelContext
+ * @mixin SingleChannelContext
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ChannelContextSpec extends ObjectBehavior
+class SingleChannelContextSpec extends ObjectBehavior
 {
     function let(ChannelRepositoryInterface $channelRepository)
     {

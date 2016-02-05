@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Channel\Context\RequestBased;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Channel\Context\RequestBased\ChannelContext;
@@ -32,7 +31,7 @@ class ChannelContextSpec extends ObjectBehavior
     {
         $this->beConstructedWith($requestResolver, $requestStack);
     }
-    
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Channel\Context\RequestBased\ChannelContext');
@@ -68,11 +67,11 @@ class ChannelContextSpec extends ObjectBehavior
         $this->shouldThrow(ChannelNotFoundException::class)->during('getChannel');
     }
 
-    function it_throws_an_unexpected_value_exception_if_there_is_no_master_request(
+    function it_throws_an_channel_not_found_exception_if_there_is_no_master_request(
         RequestStack $requestStack
     ) {
         $requestStack->getMasterRequest()->willReturn(null);
 
-        $this->shouldThrow(\UnexpectedValueException::class)->during('getChannel');
+        $this->shouldThrow(ChannelNotFoundException::class)->during('getChannel');
     }
 }

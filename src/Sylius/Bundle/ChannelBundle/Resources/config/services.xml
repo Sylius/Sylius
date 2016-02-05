@@ -16,7 +16,7 @@
         <parameter key="sylius.context.channel.class">Sylius\Component\Channel\Context\CompositeChannelContext</parameter>
 
         <parameter key="sylius.context.channel.request_based.class">Sylius\Component\Channel\Context\RequestBased\ChannelContext</parameter>
-        <parameter key="sylius.context.channel.single_channel.class">Sylius\Component\Channel\Context\SingleChannel\ChannelContext</parameter>
+        <parameter key="sylius.context.channel.single_channel.class">Sylius\Component\Channel\Context\SingleChannelContext</parameter>
 
         <parameter key="sylius.context.channel.request_based.resolver.class">Sylius\Component\Channel\Context\RequestBased\CompositeRequestResolver</parameter>
         <parameter key="sylius.context.channel.request_based.resolver.hostname_based.class">Sylius\Component\Channel\Context\RequestBased\HostnameBasedRequestResolver</parameter>

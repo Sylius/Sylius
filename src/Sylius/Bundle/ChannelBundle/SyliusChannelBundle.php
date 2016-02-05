@@ -47,7 +47,6 @@ class SyliusChannelBundle extends AbstractResourceBundle
 
         $container->addCompilerPass(new CompositeChannelContextPass());
         $container->addCompilerPass(new CompositeRequestResolverPass());
-
     }
 
     /**

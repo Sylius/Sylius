@@ -9,16 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Channel\Context\SingleChannel;
+namespace Sylius\Component\Channel\Context;
 
-use Sylius\Component\Channel\Context\ChannelContextInterface;
-use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ChannelContext implements ChannelContextInterface
+final class SingleChannelContext implements ChannelContextInterface
 {
     /**
      * @var ChannelRepositoryInterface

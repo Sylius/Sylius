@@ -47,7 +47,21 @@ final class ChannelContext implements ChannelContextInterface
      */
     public function getChannel()
     {
-        $channel = $this->requestResolver->findChannel($this->getMasterRequest());
+        try {
+            return $this->getChannelForRequest($this->getMasterRequest());
+        } catch (\UnexpectedValueException $exception) {
+            throw new ChannelNotFoundException($exception);
+        }
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return ChannelInterface
+     */
+    private function getChannelForRequest(Request $request)
+    {
+        $channel = $this->requestResolver->findChannel($request);
 
         $this->assertChannelWasFound($channel);
 
@@ -73,7 +87,7 @@ final class ChannelContext implements ChannelContextInterface
     private function assertChannelWasFound(ChannelInterface $channel = null)
     {
         if (null === $channel) {
-            throw new ChannelNotFoundException();
+            throw new \UnexpectedValueException('Channel was not found for given request');
         }
     }
 }

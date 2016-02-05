@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Channel\Context\RequestBased;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Channel\Context\RequestBased\CompositeRequestResolver;
 use Sylius\Component\Channel\Context\RequestBased\RequestResolverInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -35,9 +34,8 @@ class CompositeRequestResolverSpec extends ObjectBehavior
         $this->shouldImplement(RequestResolverInterface::class);
     }
 
-    function it_returns_null_if_there_are_no_nested_request_resolvers_added(
-        Request $request
-    ) {
+    function it_returns_null_if_there_are_no_nested_request_resolvers_added(Request $request)
+    {
         $this->findChannel($request)->shouldReturn(null);
     }
 

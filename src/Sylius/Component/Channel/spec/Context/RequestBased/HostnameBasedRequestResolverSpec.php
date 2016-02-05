@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Channel\Context\RequestBased;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Channel\Context\RequestBased\HostnameBasedRequestResolver;
 use Sylius\Component\Channel\Context\RequestBased\RequestResolverInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
@@ -30,7 +29,7 @@ class HostnameBasedRequestResolverSpec extends ObjectBehavior
     {
         $this->beConstructedWith($channelRepository);
     }
-    
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Channel\Context\RequestBased\HostnameBasedRequestResolver');
