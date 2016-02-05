@@ -29,16 +29,16 @@ class ProductReviewAdminType extends ProductReviewType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('reviewSubject', 'entity', array(
-                'class'    => 'Sylius\Component\Core\Model\Product',
-                'label'    => 'sylius.form.review.product',
+            ->add('reviewSubject', 'entity', [
+                'class' => 'Sylius\Component\Core\Model\Product',
+                'label' => 'sylius.form.review.product',
                 'property' => 'name',
-            ))
-            ->add('author', 'entity', array(
-                'class'    => 'Sylius\Component\Core\Model\Customer',
-                'label'    => 'sylius.form.review.author',
+            ])
+            ->add('author', 'entity', [
+                'class' => 'Sylius\Component\Core\Model\Customer',
+                'label' => 'sylius.form.review.author',
                 'property' => 'email',
-            ))
+            ])
         ;
     }
 
@@ -47,11 +47,11 @@ class ProductReviewAdminType extends ProductReviewType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'rating_steps'      => 5,
-            'data_class'        => $this->dataClass,
+        $resolver->setDefaults([
+            'rating_steps' => 5,
+            'data_class' => $this->dataClass,
             'validation_groups' => $this->validationGroups,
-        ));
+        ]);
     }
 
     /**

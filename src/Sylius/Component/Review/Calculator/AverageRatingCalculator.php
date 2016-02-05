@@ -33,7 +33,7 @@ class AverageRatingCalculator implements AverageRatingCalculatorInterface
 
         foreach ($reviews as $review) {
             if (ReviewInterface::STATUS_ACCEPTED === $review->getStatus()) {
-                $reviewsNumber++;
+                ++$reviewsNumber;
 
                 $sum = $sum + $review->getRating();
             }

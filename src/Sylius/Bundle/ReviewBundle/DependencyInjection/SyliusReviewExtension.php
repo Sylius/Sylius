@@ -25,7 +25,7 @@ class SyliusReviewExtension extends AbstractResourceExtension
     /**
      * @var array
      */
-    private $reviewSubjects = array();
+    private $reviewSubjects = [];
 
     /**
      * {@inheritdoc}
@@ -45,9 +45,9 @@ class SyliusReviewExtension extends AbstractResourceExtension
             $this->addProperTagToReviewDeleteListener($subject, $container);
         }
 
-        $configFiles = array(
+        $configFiles = [
             'services.xml',
-        );
+        ];
 
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
@@ -59,7 +59,7 @@ class SyliusReviewExtension extends AbstractResourceExtension
      */
     private function resolveResources(array $resources, ContainerBuilder $container)
     {
-        $subjects = array();
+        $subjects = [];
 
         foreach ($resources as $subject => $parameters) {
             $this->reviewSubjects[] = $subject;
@@ -68,7 +68,7 @@ class SyliusReviewExtension extends AbstractResourceExtension
 
         $container->setParameter('sylius.review.subjects', $subjects);
 
-        $resolvedResources = array();
+        $resolvedResources = [];
 
         foreach ($resources as $subjectName => $subjectConfig) {
             foreach ($subjectConfig as $resourceName => $resourceConfig) {
@@ -110,6 +110,6 @@ class SyliusReviewExtension extends AbstractResourceExtension
         }
 
         $listenerDefinition = $container->getDefinition('sylius.listener.review_delete');
-        $listenerDefinition->addTag('kernel.event_listener', array('event' => 'sylius.'.$resourceName.'_review.post_delete', 'method' => 'recalculateSubjectRating'));
+        $listenerDefinition->addTag('kernel.event_listener', ['event' => 'sylius.'.$resourceName.'_review.post_delete', 'method' => 'recalculateSubjectRating']);
     }
 }

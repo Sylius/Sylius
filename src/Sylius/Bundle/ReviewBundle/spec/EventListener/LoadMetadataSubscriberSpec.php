@@ -30,12 +30,12 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
             'reviewable' => [
                 'subject' => 'AcmeBundle\Entity\ReviewableModel',
                 'review' => [
-                    'classes'  => [
+                    'classes' => [
                         'model' => 'AcmeBundle\Entity\ReviewModel',
                     ],
                 ],
                 'reviewer' => [
-                    'classes'  => [
+                    'classes' => [
                         'model' => 'AcmeBundle\Entity\ReviewerModel',
                     ],
                 ],
@@ -47,7 +47,7 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Bundle\ReviewBundle\EventListener\LoadMetadataSubscriber');
     }
-    
+
     function it_implements_event_subscriber()
     {
         $this->shouldImplement('Doctrine\Common\EventSubscriber');
@@ -76,10 +76,10 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
         $metadata->getName()->willReturn('AcmeBundle\Entity\ReviewModel');
 
         $metadata->mapManyToOne([
-            'fieldName'    => 'reviewSubject',
+            'fieldName' => 'reviewSubject',
             'targetEntity' => 'AcmeBundle\Entity\ReviewableModel',
-            'inversedBy'   => 'reviews',
-            'joinColumns'  => [
+            'inversedBy' => 'reviews',
+            'joinColumns' => [
                 [
                     'name' => 'reviewable_id',
                     'referencedColumnName' => 'id',
@@ -136,12 +136,12 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
             'reviewable' => [
                 'subject' => 'AcmeBundle\Entity\ReviewableModel',
                 'review' => [
-                    'classes'  => [
+                    'classes' => [
                         'model' => 'AcmeBundle\Entity\BadReviewModel',
                     ],
                 ],
                 'reviewer' => [
-                    'classes'  => [
+                    'classes' => [
                         'model' => 'AcmeBundle\Entity\ReviewerModel',
                     ],
                 ],

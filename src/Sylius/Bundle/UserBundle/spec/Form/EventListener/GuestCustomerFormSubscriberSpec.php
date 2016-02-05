@@ -46,7 +46,7 @@ class GuestCustomerFormSubscriberSpec extends ObjectBehavior
         FormEvent $event,
         FormInterface $form
     ) {
-        $event->getData()->willReturn(array('email' => null));
+        $event->getData()->willReturn(['email' => null]);
         $event->getForm()->willReturn($form);
 
         $customerContext->getCustomer()->willReturn($customer);
@@ -65,11 +65,11 @@ class GuestCustomerFormSubscriberSpec extends ObjectBehavior
         FormEvent $event,
         FormInterface $form
     ) {
-        $event->getData()->willReturn(array('email' => 'john.doe@example.com'));
+        $event->getData()->willReturn(['email' => 'john.doe@example.com']);
         $event->getForm()->willReturn($form);
 
         $customerContext->getCustomer()->willReturn(null);
-        $customerRepository->findOneBy(array('email' => 'john.doe@example.com'))->willReturn(null);
+        $customerRepository->findOneBy(['email' => 'john.doe@example.com'])->willReturn(null);
 
         $customerFactory->createNew()->willReturn($customer);
         $customer->setEmail('john.doe@example.com')->shouldBeCalled();
@@ -84,7 +84,7 @@ class GuestCustomerFormSubscriberSpec extends ObjectBehavior
         FormEvent $event,
         FormInterface $form
     ) {
-        $event->getData()->willReturn(array());
+        $event->getData()->willReturn([]);
         $event->getForm()->willReturn($form);
 
         $customerContext->getCustomer()->willReturn(null);
@@ -102,11 +102,11 @@ class GuestCustomerFormSubscriberSpec extends ObjectBehavior
         FormInterface $form,
         UserInterface $user
     ) {
-        $event->getData()->willReturn(array('email' => 'john.doe@example.com'));
+        $event->getData()->willReturn(['email' => 'john.doe@example.com']);
         $event->getForm()->willReturn($form);
 
         $customerContext->getCustomer()->willReturn(null);
-        $customerRepository->findOneBy(array('email' => 'john.doe@example.com'))->willReturn($customer);
+        $customerRepository->findOneBy(['email' => 'john.doe@example.com'])->willReturn($customer);
         $customer->getUser()->willReturn($user);
 
         $form->setData(null);

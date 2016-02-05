@@ -62,7 +62,7 @@ class UniqueUserEmailValidatorSpec extends ObjectBehavior
         $userRepository->findOneByEmail('john.doe@example.com')->willReturn($existingUser)->shouldBeCalled();
         $constraint->message = 'This email is already registered. Please log in.';
 
-        $context->addViolationAt('author', 'This email is already registered. Please log in.', array(), null)->shouldBeCalled();
+        $context->addViolationAt('author', 'This email is already registered. Please log in.', [], null)->shouldBeCalled();
 
         $this->validate($review, $constraint);
     }

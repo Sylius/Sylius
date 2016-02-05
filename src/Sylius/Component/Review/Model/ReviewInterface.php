@@ -23,7 +23,7 @@ interface ReviewInterface extends TimestampableInterface, ResourceInterface
 {
     const REVIEW_STATE_MACHINE_GRAPH = 'sylius_review';
 
-    const STATUS_NEW      = 'new';
+    const STATUS_NEW = 'new';
     const STATUS_ACCEPTED = 'accepted';
     const STATUS_REJECTED = 'rejected';
 
@@ -38,12 +38,12 @@ interface ReviewInterface extends TimestampableInterface, ResourceInterface
     public function getTitle();
 
     /**
-     * @param integer $rating
+     * @param int $rating
      */
     public function setRating($rating);
 
     /**
-     * @return integer
+     * @return int
      */
     public function getRating();
 

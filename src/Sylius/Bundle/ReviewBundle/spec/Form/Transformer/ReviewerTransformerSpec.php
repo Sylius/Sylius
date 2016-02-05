@@ -44,7 +44,7 @@ class ReviewerTransformerSpec extends ObjectBehavior
 
     function it_throws_exception_if_given_value_is_not_reviewer_interface_object()
     {
-        $this->shouldThrow(new UnexpectedTypeException('badObject', 'Sylius\Component\Review\Model\ReviewerInterface'))->during('transform', array('badObject'));
+        $this->shouldThrow(new UnexpectedTypeException('badObject', 'Sylius\Component\Review\Model\ReviewerInterface'))->during('transform', ['badObject']);
     }
 
     function it_reverse_transforms_form_data(ReviewerInterface $author)
@@ -62,7 +62,7 @@ class ReviewerTransformerSpec extends ObjectBehavior
 
     public function getMatchers()
     {
-        return array(
+        return [
             'beSameAs' => function ($subject, $key) {
                 if (!$subject instanceof ReviewerInterface || !$key instanceof ReviewerInterface) {
                     return false;
@@ -70,6 +70,6 @@ class ReviewerTransformerSpec extends ObjectBehavior
 
                 return $subject->getEmail() === $key->getEmail();
             },
-        );
+        ];
     }
 }

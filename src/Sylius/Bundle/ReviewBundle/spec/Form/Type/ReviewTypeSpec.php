@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ReviewBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -23,7 +22,7 @@ class ReviewTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('dataClass', array('validation_group'), 'subject');
+        $this->beConstructedWith('dataClass', ['validation_group'], 'subject');
     }
 
     function it_is_initializable()
@@ -39,50 +38,50 @@ class ReviewTypeSpec extends ObjectBehavior
     function it_builds_form(FormBuilderInterface $builder)
     {
         $builder
-            ->add('rating', 'choice', array(
-                'choices'  => array(1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5),
-                'label'    => 'sylius.form.review.rating',
+            ->add('rating', 'choice', [
+                'choices' => [1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5],
+                'label' => 'sylius.form.review.rating',
                 'expanded' => true,
                 'multiple' => false,
-            ))
+            ])
             ->willReturn($builder)
             ->shouldBeCalled()
         ;
 
         $builder
-            ->add('author', 'sylius_customer_guest', array(
-                'label'    => false,
-            ))
+            ->add('author', 'sylius_customer_guest', [
+                'label' => false,
+            ])
             ->willReturn($builder)
             ->shouldBeCalled()
         ;
 
         $builder
-            ->add('title', 'text', array(
-                'label' => 'sylius.form.review.title'
-            ))
+            ->add('title', 'text', [
+                'label' => 'sylius.form.review.title',
+            ])
             ->willReturn($builder)
             ->shouldBeCalled()
         ;
 
         $builder
-            ->add('comment', 'textarea', array(
-                'label' => 'sylius.form.review.comment'
-            ))
+            ->add('comment', 'textarea', [
+                'label' => 'sylius.form.review.comment',
+            ])
             ->willReturn($builder)
             ->shouldBeCalled()
         ;
 
-        $this->buildForm($builder, array('rating_steps' => 5));
+        $this->buildForm($builder, ['rating_steps' => 5]);
     }
 
     function it_sets_default_options(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(
-            array(
-                'rating_steps'      => 5,
-                'validation_groups' => array('validation_group'),
-            )
+            [
+                'rating_steps' => 5,
+                'validation_groups' => ['validation_group'],
+            ]
         )->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);

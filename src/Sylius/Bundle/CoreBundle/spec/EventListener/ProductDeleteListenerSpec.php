@@ -16,7 +16,6 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\Product;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -49,7 +48,7 @@ class ProductDeleteListenerSpec extends ObjectBehavior
         $args->getEntityManager()->willReturn($reviewManager)->shouldBeCalled();
         $container->get('sylius.repository.product_review')->willReturn($reviewRepository)->shouldBeCalled();
 
-        $reviewRepository->findBy(array('reviewSubject' => $product))->willReturn(array($review))->shouldBeCalled();
+        $reviewRepository->findBy(['reviewSubject' => $product])->willReturn([$review])->shouldBeCalled();
 
         $reviewManager->remove($review)->shouldBeCalled();
         $reviewManager->flush()->shouldBeCalled();

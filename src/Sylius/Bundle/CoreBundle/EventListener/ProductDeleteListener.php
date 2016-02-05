@@ -13,7 +13,6 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -46,7 +45,7 @@ class ProductDeleteListener
 
         $reviewManager = $args->getEntityManager();
         $reviewRepository = $this->container->get('sylius.repository.product_review');
-        $reviews = $reviewRepository->findBy(array('reviewSubject' => $product));
+        $reviews = $reviewRepository->findBy(['reviewSubject' => $product]);
 
         foreach ($reviews as $review) {
             $reviewManager->remove($review);

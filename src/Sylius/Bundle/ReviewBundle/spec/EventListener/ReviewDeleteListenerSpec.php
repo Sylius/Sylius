@@ -71,7 +71,7 @@ class ReviewDeleteListenerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(new UnexpectedTypeException('badObject', 'Sylius\Component\Review\Model\ReviewInterface'))
-            ->during('recalculateSubjectRating', array($event))
+            ->during('recalculateSubjectRating', [$event])
         ;
     }
 }

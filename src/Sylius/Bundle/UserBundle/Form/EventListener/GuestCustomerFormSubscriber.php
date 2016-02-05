@@ -57,9 +57,9 @@ class GuestCustomerFormSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             FormEvents::PRE_SUBMIT => 'preSubmit',
-        );
+        ];
     }
 
     /**
@@ -71,7 +71,7 @@ class GuestCustomerFormSubscriber implements EventSubscriberInterface
         $form = $event->getForm();
 
         if (null == $rawData) {
-            $rawData = array();
+            $rawData = [];
         }
 
         $customer = $this->getCustomerFromProperSource($rawData, $form);
@@ -106,7 +106,7 @@ class GuestCustomerFormSubscriber implements EventSubscriberInterface
      */
     protected function createCustomerIfNecessary($email)
     {
-        $customer = $this->customerRepository->findOneBy(array('email' => $email));
+        $customer = $this->customerRepository->findOneBy(['email' => $email]);
 
         // if this email is already a registered user, do not assign this customer (force login)
         if (null !== $customer && null !== $customer->getUser()) {

@@ -28,7 +28,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 class Configuration implements ConfigurationInterface
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getConfigTreeBuilder()
     {
@@ -85,11 +85,11 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius', 'sylius_review'))
+                                            ->defaultValue(['sylius', 'sylius_review'])
                                         ->end()
                                         ->arrayNode('admin')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -110,11 +110,11 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius', 'sylius_review'))
+                                            ->defaultValue(['sylius', 'sylius_review'])
                                         ->end()
                                         ->arrayNode('admin')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()

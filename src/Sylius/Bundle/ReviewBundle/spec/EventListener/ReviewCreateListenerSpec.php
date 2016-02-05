@@ -53,7 +53,7 @@ class ReviewCreateListenerSpec extends ObjectBehavior
     {
         $event->getSubject()->willReturn('badObject')->shouldBeCalled();
 
-        $this->shouldThrow(new UnexpectedTypeException('badObject', 'Sylius\Component\Review\Model\ReviewInterface'))->during('ensureReviewHasAuthor', array($event));
+        $this->shouldThrow(new UnexpectedTypeException('badObject', 'Sylius\Component\Review\Model\ReviewInterface'))->during('ensureReviewHasAuthor', [$event]);
     }
 
     function it_does_nothing_if_review_already_has_author(

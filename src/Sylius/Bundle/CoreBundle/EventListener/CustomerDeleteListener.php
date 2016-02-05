@@ -12,10 +12,8 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\ORM\Event\LifecycleEventArgs;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Review\Calculator\AverageRatingCalculatorInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
@@ -64,9 +62,9 @@ class CustomerDeleteListener
             throw new UnexpectedTypeException($author, 'Sylius\Component\Core\Model\CustomerInterface');
         }
 
-        $reviewSubjectsToRecalculate = array();
+        $reviewSubjectsToRecalculate = [];
 
-        foreach ($this->reviewRepository->findBy(array('author' => $author)) as $review) {
+        foreach ($this->reviewRepository->findBy(['author' => $author]) as $review) {
             $reviewSubjectsToRecalculate = $this->removeReviewsAndExtractSubject($review, $reviewSubjectsToRecalculate);
         }
         $this->reviewManager->flush();

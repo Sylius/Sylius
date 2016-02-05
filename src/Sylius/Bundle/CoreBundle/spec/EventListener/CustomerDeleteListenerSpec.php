@@ -47,7 +47,7 @@ class CustomerDeleteListenerSpec extends ObjectBehavior
     ) {
         $event->getSubject()->willReturn($author)->shouldBeCalled();
 
-        $reviewRepository->findBy(array('author' => $author))->willReturn(array($review))->shouldBeCalled();
+        $reviewRepository->findBy(['author' => $author])->willReturn([$review])->shouldBeCalled();
         $review->getReviewSubject()->willReturn($reviewSubject)->shouldBeCalled();
 
         $reviewManager->remove($review)->shouldBeCalled();
@@ -64,6 +64,6 @@ class CustomerDeleteListenerSpec extends ObjectBehavior
     {
         $event->getSubject()->willReturn('badObject')->shouldBeCalled();
 
-        $this->shouldThrow(new UnexpectedTypeException('badObject', 'Sylius\Component\Core\Model\CustomerInterface'))->during('removeCustomerReviews', array($event));
+        $this->shouldThrow(new UnexpectedTypeException('badObject', 'Sylius\Component\Core\Model\CustomerInterface'))->during('removeCustomerReviews', [$event]);
     }
 }

@@ -18,7 +18,7 @@ namespace Sylius\Component\Review\Model;
 class Review implements ReviewInterface
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $id;
 
@@ -28,7 +28,7 @@ class Review implements ReviewInterface
     protected $title;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $rating;
 

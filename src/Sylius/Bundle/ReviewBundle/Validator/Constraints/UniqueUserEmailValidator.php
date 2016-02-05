@@ -69,7 +69,7 @@ class UniqueUserEmailValidator extends ConstraintValidator
             $this->context->addViolationAt(
                 'author',
                 $constraint->message,
-                array(),
+                [],
                 null
             );
         }

@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\ReviewBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Bundle\ReviewBundle\Form\Transformer\ReviewerTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -32,7 +31,7 @@ class ReviewType extends AbstractResourceType
      * @param array  $validationGroups
      * @param string $subject
      */
-    public function __construct($dataClass, array $validationGroups = array(), $subject)
+    public function __construct($dataClass, array $validationGroups = [], $subject)
     {
         $this->subject = $subject;
 
@@ -45,21 +44,21 @@ class ReviewType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('rating', 'choice', array(
-                'choices'  => $this->createRatingList($options['rating_steps']),
-                'label'    => 'sylius.form.review.rating',
+            ->add('rating', 'choice', [
+                'choices' => $this->createRatingList($options['rating_steps']),
+                'label' => 'sylius.form.review.rating',
                 'expanded' => true,
                 'multiple' => false,
-            ))
-            ->add('author', 'sylius_customer_guest', array(
+            ])
+            ->add('author', 'sylius_customer_guest', [
                 'label' => false,
-            ))
-            ->add('title', 'text', array(
-                'label'    => 'sylius.form.review.title',
-            ))
-            ->add('comment', 'textarea', array(
-                'label'    => 'sylius.form.review.comment',
-            ))
+            ])
+            ->add('title', 'text', [
+                'label' => 'sylius.form.review.title',
+            ])
+            ->add('comment', 'textarea', [
+                'label' => 'sylius.form.review.comment',
+            ])
         ;
     }
 
@@ -68,10 +67,10 @@ class ReviewType extends AbstractResourceType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'rating_steps'      => 5,
+        $resolver->setDefaults([
+            'rating_steps' => 5,
             'validation_groups' => $this->validationGroups,
-        ));
+        ]);
     }
 
     /**
@@ -89,8 +88,8 @@ class ReviewType extends AbstractResourceType
      */
     private function createRatingList($maxRate)
     {
-        $ratings = array();
-        for ($i = 1; $i <= $maxRate; $i++) {
+        $ratings = [];
+        for ($i = 1; $i <= $maxRate; ++$i) {
             $ratings[$i] = $i;
         }
 

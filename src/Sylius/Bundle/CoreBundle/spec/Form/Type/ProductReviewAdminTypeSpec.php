@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\CoreBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -22,7 +21,7 @@ class ProductReviewAdminTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('dataClass', array('validation_group'), 'product');
+        $this->beConstructedWith('dataClass', ['validation_group'], 'product');
     }
 
     function it_is_initializable()
@@ -38,61 +37,61 @@ class ProductReviewAdminTypeSpec extends ObjectBehavior
     function it_builds_form(FormBuilderInterface $builder)
     {
         $builder
-            ->add('rating', 'choice', array(
-                'choices' => array(1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5),
+            ->add('rating', 'choice', [
+                'choices' => [1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5],
                 'label' => 'sylius.form.review.rating',
                 'expanded' => true,
                 'multiple' => false,
-            ))
+            ])
             ->willReturn($builder)
             ->shouldBeCalled()
         ;
 
         $builder
-            ->add('author', 'sylius_customer_guest', array(
-                'label'    => false,
-            ))
+            ->add('author', 'sylius_customer_guest', [
+                'label' => false,
+            ])
             ->willReturn($builder)
             ->shouldBeCalled()
         ;
 
         $builder
-            ->add('title', 'text', array(
-                'label' => 'sylius.form.review.title'
-            ))
+            ->add('title', 'text', [
+                'label' => 'sylius.form.review.title',
+            ])
             ->willReturn($builder)
             ->shouldBeCalled()
         ;
 
         $builder
-            ->add('comment', 'textarea', array(
-                'label' => 'sylius.form.review.comment'
-            ))
+            ->add('comment', 'textarea', [
+                'label' => 'sylius.form.review.comment',
+            ])
             ->willReturn($builder)
             ->shouldBeCalled()
         ;
 
         $builder
-            ->add('author', 'entity', array(
-                'class'    => 'Sylius\Component\Core\Model\Customer',
-                'label'    => 'sylius.form.review.author',
+            ->add('author', 'entity', [
+                'class' => 'Sylius\Component\Core\Model\Customer',
+                'label' => 'sylius.form.review.author',
                 'property' => 'email',
-            ))
+            ])
             ->willReturn($builder)
             ->shouldBeCalled()
         ;
 
         $builder
-            ->add('reviewSubject', 'entity', array(
-                'class'    => 'Sylius\Component\Core\Model\Product',
-                'label'    => 'sylius.form.review.product',
+            ->add('reviewSubject', 'entity', [
+                'class' => 'Sylius\Component\Core\Model\Product',
+                'label' => 'sylius.form.review.product',
                 'property' => 'name',
-            ))
+            ])
             ->willReturn($builder)
             ->shouldBeCalled()
         ;
 
-        $this->buildForm($builder, array('rating_steps' => 5));
+        $this->buildForm($builder, ['rating_steps' => 5]);
     }
 
     function it_has_name()

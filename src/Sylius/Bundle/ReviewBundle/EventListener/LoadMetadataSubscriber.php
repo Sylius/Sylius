@@ -66,8 +66,8 @@ class LoadMetadataSubscriber implements EventSubscriber
                             'referencedColumnName' => $reviewableEntityMetadata->fieldMappings['id']['columnName'],
                             'nullable' => false,
                             'onDelete' => 'CASCADE',
-                        ]
-                    ]
+                        ],
+                    ],
                 ];
 
                 $reviewerMapping = [
@@ -85,7 +85,6 @@ class LoadMetadataSubscriber implements EventSubscriber
                 $metadata->mapManyToOne($subjectMapping);
                 $metadata->mapManyToOne($reviewerMapping);
             }
-
 
             if ($class['subject'] === $metadata->getName()) {
                 $reviewEntity = $class['review']['classes']['model'];

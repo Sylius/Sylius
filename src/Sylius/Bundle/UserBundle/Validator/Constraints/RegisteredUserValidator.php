@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\UserBundle\Validator\Constraints;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\User\Context\CustomerContextInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 

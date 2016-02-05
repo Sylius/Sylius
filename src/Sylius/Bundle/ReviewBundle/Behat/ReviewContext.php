@@ -53,10 +53,10 @@ class ReviewContext extends DefaultContext
         $review->setRating((int) $reviewHash['rating']);
         $review->setComment($reviewHash['comment']);
 
-        $product = $this->getRepository('product')->findOneBy(array('name' => $reviewHash['product']));
+        $product = $this->getRepository('product')->findOneBy(['name' => $reviewHash['product']]);
         $review->setReviewSubject($product);
 
-        $author = $this->getRepository('customer')->findOneBy(array('email' => $reviewHash['author']));
+        $author = $this->getRepository('customer')->findOneBy(['email' => $reviewHash['author']]);
         $review->setAuthor($author);
 
         $review->setStatus((isset($reviewHash['status']) && '' !== $reviewHash['status']) ? $reviewHash['status'] : ReviewInterface::STATUS_ACCEPTED);
