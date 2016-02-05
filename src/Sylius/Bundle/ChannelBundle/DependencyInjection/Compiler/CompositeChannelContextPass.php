@@ -11,37 +11,18 @@
 
 namespace Sylius\Bundle\ChannelBundle\DependencyInjection\Compiler;
 
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
-
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class CompositeChannelContextPass implements CompilerPassInterface
+final class CompositeChannelContextPass extends PrioritizedCompositeServicePass
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function process(ContainerBuilder $container)
+    public function __construct()
     {
-        if (!$container->hasDefinition('sylius.context.channel')) {
-            return;
-        }
-
-        $channelContextDefinition = $container->findDefinition('sylius.context.channel');
-
-        $taggedServices = $container->findTaggedServiceIds('sylius.context.channel');
-        foreach ($taggedServices as $id => $tags) {
-            foreach ($tags as $attributes) {
-                $arguments = [new Reference($id)];
-
-                if (isset($attributes['priority'])) {
-                    $arguments[] = $attributes['priority'];
-                }
-
-                $channelContextDefinition->addMethodCall('addContext', $arguments);
-            }
-        }
+        parent::__construct(
+            'sylius.context.channel',
+            'sylius.context.channel.composite',
+            'sylius.context.channel',
+            'addContext'
+        );
     }
 }

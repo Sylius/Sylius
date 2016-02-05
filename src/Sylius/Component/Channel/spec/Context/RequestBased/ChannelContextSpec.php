@@ -67,7 +67,7 @@ class ChannelContextSpec extends ObjectBehavior
         $this->shouldThrow(ChannelNotFoundException::class)->during('getChannel');
     }
 
-    function it_throws_an_channel_not_found_exception_if_there_is_no_master_request(
+    function it_throws_a_channel_not_found_exception_if_there_is_no_master_request(
         RequestStack $requestStack
     ) {
         $requestStack->getMasterRequest()->willReturn(null);

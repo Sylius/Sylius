@@ -49,7 +49,7 @@ class SingleChannelContextSpec extends ObjectBehavior
         $this->getChannel()->shouldReturn($channel);
     }
 
-    function it_throws_an_channel_not_found_exception_if_there_are_no_channels_defined(
+    function it_throws_a_channel_not_found_exception_if_there_are_no_channels_defined(
         ChannelRepositoryInterface $channelRepository
     ) {
         $channelRepository->findAll()->willReturn([]);
@@ -57,7 +57,7 @@ class SingleChannelContextSpec extends ObjectBehavior
         $this->shouldThrow(ChannelNotFoundException::class)->during('getChannel');
     }
 
-    function it_throws_an_channel_not_found_exception_if_there_are_many_channels_defined(
+    function it_throws_a_channel_not_found_exception_if_there_are_many_channels_defined(
         ChannelRepositoryInterface $channelRepository,
         ChannelInterface $firstChannel,
         ChannelInterface $secondChannel
