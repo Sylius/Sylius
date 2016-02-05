@@ -19,6 +19,11 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 interface ChannelRepositoryInterface
 {
     /**
+     * @return ChannelInterface[]
+     */
+    public function findAll();
+
+    /**
      * @param string $hostname
      *
      * @return ChannelInterface|null
