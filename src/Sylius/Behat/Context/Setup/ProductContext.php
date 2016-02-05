@@ -93,7 +93,7 @@ final class ProductContext implements Context
     {
         $product = $this->productFactory->createNew();
         $product->setName($productName);
-        $product->setPrice((int) $price * 100);
+        $product->setPrice($this->getPriceFromString($price));
         $product->setDescription('Awesome '.$productName);
 
         $channel = $this->sharedStorage->getCurrentResource('channel');
@@ -109,5 +109,15 @@ final class ProductContext implements Context
     {
         $product->setTaxCategory($taxCategory);
         $this->productManager->flush($product);
+    }
+
+    /**
+     * @param string $price
+     *
+     * @return int
+     */
+    private function getPriceFromString($price)
+    {
+        return (int) round(($price * 100), 2);
     }
 }
