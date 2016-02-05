@@ -38,8 +38,8 @@ class ChannelType extends AbstractResourceType
                 'label' => 'sylius.form.channel.enabled',
                 'required' => false,
             ])
-            ->add('url', 'text', [
-                'label' => 'sylius.form.channel.url',
+            ->add('hostname', 'text', [
+                'label' => 'sylius.form.channel.hostname',
                 'required' => false,
             ])
             ->add('color', 'text', [
