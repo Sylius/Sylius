@@ -1,0 +1,8 @@
+imports: ["behat.yml.dist"]
+
+# Uncomment to customize base_url:
+
+#default:
+#    extensions:
+#        Behat\MinkExtension:
+#            base_url: http://localhost:8080/
