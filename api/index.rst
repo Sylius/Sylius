@@ -11,6 +11,7 @@ The API Guide
     checkouts
     products
     users
+    customers
     shipments
     shipping_categories
     payments

@@ -5,7 +5,7 @@
 * :doc:`/api/checkouts`
 * :doc:`/api/products`
 * :doc:`/api/users`
+* :doc:`/api/customers`
 * :doc:`/api/shipments`
 * :doc:`/api/payments`
 * :doc:`/api/promotions`
-* :doc:`/api/stock_locations`
