@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fafff83adfc22bddec15147b3e4a85b2",
-    "content-hash": "62d29091976005ea6cffea4ac68e9eb6",
+    "hash": "f24ecb0cea718b1b05166cfc2382ec05",
+    "content-hash": "cb0b6d7e00c1e962ec57c4c45d6d08d5",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -2692,9 +2692,9 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -5692,9 +5692,9 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -7775,7 +7775,7 @@
             ],
             "authors": [
                 {
-                    "name": "William Durand",
+                    "name": "William DURAND",
                     "email": "william.durand1@gmail.com",
                     "homepage": "http://www.willdurand.fr"
                 }
@@ -8673,7 +8673,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/coduo/php-matcher/zipball/1fd194e40eb282fb18ec1c2beae02f744384f5fa",
+                "url": "https://api.github.com/repos/coduo/php-matcher/zipball/914c18436a4c68006dd8ca7281566f7eb3fc561d",
                 "reference": "c4917b16314900eb186de2422f81191afb7125a3",
                 "shasum": ""
             },
@@ -8944,7 +8944,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Lakion/ApiTestCase/zipball/02a4ce13fa216e215876ee4577dbec094ab663ec",
+                "url": "https://api.github.com/repos/Lakion/ApiTestCase/zipball/6c9f9e1c6a5542da7d4fa6d80b7fae46b2f65498",
                 "reference": "466bd22a228c96a2dba971045ac8c0b0400df6d1",
                 "shasum": ""
             },
@@ -9066,6 +9066,58 @@
                 "logging"
             ],
             "time": "2015-12-03 09:34:37"
+        },
+        {
+            "name": "malukenho/kawaii-gherkin",
+            "version": "0.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/malukenho/kawaii-gherkin.git",
+                "reference": "ab9bafcee0e3054b2cd1aad9ad797eff27dda0fb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/malukenho/kawaii-gherkin/zipball/ab9bafcee0e3054b2cd1aad9ad797eff27dda0fb",
+                "reference": "ab9bafcee0e3054b2cd1aad9ad797eff27dda0fb",
+                "shasum": ""
+            },
+            "require": {
+                "behat/gherkin": "^4.4",
+                "php": "~5.5|^7.0",
+                "sebastian/diff": "~1.2",
+                "symfony/console": "~2.0",
+                "symfony/finder": "~2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.0"
+            },
+            "bin": [
+                "bin/kawaii"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "KawaiiGherkin\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jefersson Nathan",
+                    "email": "malukenho@phpse.net"
+                }
+            ],
+            "description": "A small library to check and fix annoying gherkin code style",
+            "homepage": "https://github.com/malukenho/kawaii-gherkin",
+            "keywords": [
+                "Code style",
+                "code standard",
+                "gherkin"
+            ],
+            "time": "2016-02-08 14:10:57"
         },
         {
             "name": "matthiasnoback/symfony-config-test",
@@ -9412,8 +9464,7 @@
             "authors": [
                 {
                     "name": "Chris Boulton",
-                    "homepage": "http://github.com/chrisboulton",
-                    "role": "Original developer"
+                    "homepage": "http://github.com/chrisboulton"
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
