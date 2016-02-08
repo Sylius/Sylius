@@ -4,7 +4,7 @@
     {% set icon %}
         <a href="#">
             {# fake image span #}<span style="width: 0; height: 28px; vertical-align: middle;"></span>
-            <span class="sf-toolbar-status">{{ collector.channels|length }}</span> channels, 
+            <span class="sf-toolbar-status">{{ collector.channels|length }}</span> channels,
             <b>{{ collector.currentChannel.name }}</b>
         </a>
     {% endset %}
@@ -21,7 +21,7 @@
                     <tr>
                         <td><b>{{ channel.name }}</b></td>
                         <td>{{ channel.hostname }}</td>
-                        <td><a href="?_hostname={{ channel.hostname }}">Change</a></td>
+                        <td><a href="?_channel_code={{ channel.code }}">Change</a></td>
                     </tr>
                 {% endfor %}
             </table>

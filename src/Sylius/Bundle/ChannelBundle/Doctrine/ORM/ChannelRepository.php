@@ -26,4 +26,12 @@ class ChannelRepository extends EntityRepository implements ChannelRepositoryInt
     {
         return $this->findOneBy(['hostname' => $hostname]);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findOneByCode($code)
+    {
+        return $this->findOneBy(['code' => $code]);
+    }
 }

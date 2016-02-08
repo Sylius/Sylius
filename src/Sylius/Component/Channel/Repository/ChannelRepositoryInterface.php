@@ -29,4 +29,11 @@ interface ChannelRepositoryInterface
      * @return ChannelInterface|null
      */
     public function findOneByHostname($hostname);
+
+    /**
+     * @param string $code
+     *
+     * @return ChannelInterface|null
+     */
+    public function findOneByCode($code);
 }

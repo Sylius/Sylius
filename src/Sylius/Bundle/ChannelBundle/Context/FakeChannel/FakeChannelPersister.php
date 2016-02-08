@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ChannelBundle\Development;
+namespace Sylius\Bundle\ChannelBundle\Context\FakeChannel;
 
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
@@ -18,19 +18,19 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class FakeHostnamePersister
+final class FakeChannelPersister
 {
     /**
-     * @var FakeHostnameProviderInterface
+     * @var FakeChannelCodeProviderInterface
      */
-    private $fakeHostnameProvider;
+    private $fakeChannelCodeProvider;
 
     /**
-     * @param FakeHostnameProviderInterface $fakeHostnameProvider
+     * @param FakeChannelCodeProviderInterface $fakeChannelCodeProvider
      */
-    public function __construct(FakeHostnameProviderInterface $fakeHostnameProvider)
+    public function __construct(FakeChannelCodeProviderInterface $fakeChannelCodeProvider)
     {
-        $this->fakeHostnameProvider = $fakeHostnameProvider;
+        $this->fakeChannelCodeProvider = $fakeChannelCodeProvider;
     }
 
     /**
@@ -42,13 +42,13 @@ final class FakeHostnamePersister
             return;
         }
 
-        $fakeHostname = $this->fakeHostnameProvider->getHostname($filterResponseEvent->getRequest());
+        $fakeChannelCode = $this->fakeChannelCodeProvider->getCode($filterResponseEvent->getRequest());
 
-        if (null === $fakeHostname) {
+        if (null === $fakeChannelCode) {
             return;
         }
 
         $response = $filterResponseEvent->getResponse();
-        $response->headers->setCookie(new Cookie('_hostname', $fakeHostname));
+        $response->headers->setCookie(new Cookie('_channel_code', $fakeChannelCode));
     }
 }

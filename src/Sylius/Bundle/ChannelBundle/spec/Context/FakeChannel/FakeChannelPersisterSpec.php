@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ChannelBundle\Development;
+namespace spec\Sylius\Bundle\ChannelBundle\Context\FakeChannel;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ChannelBundle\Development\FakeHostnamePersister;
-use Sylius\Bundle\ChannelBundle\Development\FakeHostnameProviderInterface;
+use Sylius\Bundle\ChannelBundle\Context\FakeChannel\FakeChannelCodeProviderInterface;
+use Sylius\Bundle\ChannelBundle\Context\FakeChannel\FakeChannelPersister;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,20 +23,20 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
- * @mixin FakeHostnamePersister
+ * @mixin FakeChannelPersister
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class FakeHostnamePersisterSpec extends ObjectBehavior
+class FakeChannelPersisterSpec extends ObjectBehavior
 {
-    function let(FakeHostnameProviderInterface $fakeHostnameProvider)
+    function let(FakeChannelCodeProviderInterface $fakeHostnameProvider)
     {
         $this->beConstructedWith($fakeHostnameProvider);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ChannelBundle\Development\FakeHostnamePersister');
+        $this->shouldHaveType('Sylius\Bundle\ChannelBundle\Context\FakeChannel\FakeChannelPersister');
     }
 
     function it_applies_only_to_master_requests(FilterResponseEvent $filterResponseEvent)
@@ -49,23 +49,23 @@ class FakeHostnamePersisterSpec extends ObjectBehavior
         $this->onKernelResponse($filterResponseEvent);
     }
 
-    function it_applies_only_for_request_with_fake_hostname(
-        FakeHostnameProviderInterface $fakeHostnameProvider,
+    function it_applies_only_for_request_with_fake_channel_code(
+        FakeChannelCodeProviderInterface $fakeHostnameProvider,
         FilterResponseEvent $filterResponseEvent,
         Request $request
     ) {
         $filterResponseEvent->getRequestType()->willReturn(HttpKernelInterface::MASTER_REQUEST);
         $filterResponseEvent->getRequest()->willReturn($request);
 
-        $fakeHostnameProvider->getHostname($request)->willReturn(null);
+        $fakeHostnameProvider->getCode($request)->willReturn(null);
 
         $filterResponseEvent->getResponse()->shouldNotBeCalled();
 
         $this->onKernelResponse($filterResponseEvent);
     }
 
-    function it_persists_fake_hostnames_in_a_cookie(
-        FakeHostnameProviderInterface $fakeHostnameProvider,
+    function it_persists_fake_channel_codes_in_a_cookie(
+        FakeChannelCodeProviderInterface $fakeHostnameProvider,
         FilterResponseEvent $filterResponseEvent,
         Request $request,
         Response $response,
@@ -74,17 +74,17 @@ class FakeHostnamePersisterSpec extends ObjectBehavior
         $filterResponseEvent->getRequestType()->willReturn(HttpKernelInterface::MASTER_REQUEST);
         $filterResponseEvent->getRequest()->willReturn($request);
 
-        $fakeHostnameProvider->getHostname($request)->willReturn('fake.hostname');
+        $fakeHostnameProvider->getCode($request)->willReturn('fake_channel_code');
 
         $filterResponseEvent->getResponse()->willReturn($response);
 
         $response->headers = $responseHeaderBag;
         $responseHeaderBag->setCookie(Argument::that(function (Cookie $cookie) {
-            if ($cookie->getName() !== '_hostname') {
+            if ($cookie->getName() !== '_channel_code') {
                 return false;
             }
 
-            if ($cookie->getValue() !== 'fake.hostname') {
+            if ($cookie->getValue() !== 'fake_channel_code') {
                 return false;
             }
 

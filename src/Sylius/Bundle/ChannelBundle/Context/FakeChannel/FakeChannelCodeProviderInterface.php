@@ -9,20 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ChannelBundle\Development;
+namespace Sylius\Bundle\ChannelBundle\Context\FakeChannel;
 
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class FakeHostnameProvider implements FakeHostnameProviderInterface
+interface FakeChannelCodeProviderInterface
 {
     /**
-     * {@inheritdoc}
+     * @param Request $request
+     *
+     * @return string|null
      */
-    public function getHostname(Request $request)
-    {
-        return $request->query->get('_hostname') ?: $request->cookies->get('_hostname');
-    }
+    public function getCode(Request $request);
 }

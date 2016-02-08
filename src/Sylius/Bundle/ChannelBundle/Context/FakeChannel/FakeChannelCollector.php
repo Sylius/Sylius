@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ChannelBundle\Development;
+namespace Sylius\Bundle\ChannelBundle\Context\FakeChannel;
 
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
@@ -21,7 +21,7 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class FakeHostnameCollector extends DataCollector
+final class FakeChannelCollector extends DataCollector
 {
     /**
      * @param ChannelRepositoryInterface $channelRepository
@@ -61,6 +61,6 @@ final class FakeHostnameCollector extends DataCollector
      */
     public function getName()
     {
-        return 'sylius.channel.fake_hostname.collector';
+        return 'sylius.context.channel.fake_channel.collector';
     }
 }
