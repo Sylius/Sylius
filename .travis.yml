@@ -73,7 +73,7 @@ script:
     - bin/phpunit
 
     - etc/travis/prepare-javascript
-    - bin/behat --strict -f progress -p cached || bin/behat --strict -f progress -p cached --rerun
+    - bin/behat --strict -f progress -p cached || if [[ $? -eq 1 ]]; then bin/behat --strict -f progress -p cached --rerun; fi # Do not rerun on fatal error (255) or passed tests (0)
 
 before_cache:
     - yes 'Y' | rm -fr vendor/symfony-cmf/create-bundle/Resources/public/vendor/*
