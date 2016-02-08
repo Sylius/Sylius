@@ -23,8 +23,10 @@ By default, flow bundle will use session for data storage. Here is simple exampl
         {
             $request = $this->getRequest();
             $form = $this->createForm('my_form');
+            
+            $form->handleRequest($request);
 
-            if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
+            if ($request->isMethod('POST') && $form->isValid()) {
                 $context->getStorage()->set('my_data', $form->getData());
 
                 return $this->complete();
