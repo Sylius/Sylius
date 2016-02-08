@@ -103,7 +103,7 @@ final class ShippingContext implements Context
     public function shippingMethodBelongsToTaxCategory(ShippingMethodInterface $shippingMethod, TaxCategoryInterface $taxCategory)
     {
         $shippingMethod->setTaxCategory($taxCategory);
-        $this->shippingMethodManager->flush($shippingMethod);
+        $this->shippingMethodManager->flush();
     }
 
     /**

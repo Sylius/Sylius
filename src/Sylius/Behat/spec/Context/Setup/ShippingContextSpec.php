@@ -97,7 +97,7 @@ class ShippingContextSpec extends ObjectBehavior
         TaxCategoryInterface $taxCategory
     ) {
         $shippingMethod->setTaxCategory($taxCategory)->shouldBeCalled();
-        $shippingMethodManager->flush($shippingMethod)->shouldBeCalled();
+        $shippingMethodManager->flush()->shouldBeCalled();
 
         $this->shippingMethodBelongsToTaxCategory($shippingMethod, $taxCategory);
     }

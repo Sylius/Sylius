@@ -43,11 +43,8 @@ class ZoneContextSpec extends ObjectBehavior
         $this->shouldImplement(Context::class);
     }
 
-    function it_creates_eu_zone_with_european_zone_members(
-        $zoneRepository,
-        $zoneFactory,
-        ZoneInterface $zone
-    ) {
+    function it_creates_eu_zone_with_european_zone_members($zoneRepository, $zoneFactory, ZoneInterface $zone)
+    {
         $zoneFactory->createWithMembers([
             'BE', 'BG', 'CZ', 'DK', 'DE', 'EE', 'IE', 'GR', 'ES',
             'FR', 'IT', 'CY', 'LV', 'LT', 'LU', 'HU', 'MT', 'NL',
@@ -63,11 +60,8 @@ class ZoneContextSpec extends ObjectBehavior
         $this->thereIsEUZoneContainingAllMembersOfEuropeanUnion();
     }
 
-    function it_creates_rest_of_the_world_zone(
-        $zoneRepository,
-        $zoneFactory,
-        ZoneInterface $zone
-    ) {
+    function it_creates_rest_of_the_world_zone($zoneRepository, $zoneFactory, ZoneInterface $zone)
+    {
         $zoneFactory->createWithMembers(Argument::type('array'))->willReturn($zone);
 
         $zone->setType(ZoneInterface::TYPE_COUNTRY)->shouldBeCalled();
@@ -79,12 +73,8 @@ class ZoneContextSpec extends ObjectBehavior
         $this->thereIsRestOfTheWorldZoneContainingAllOtherCountries();
     }
 
-    function it_sets_default_zone(
-        $zoneRepository,
-        $settingsManager,
-        Settings $settings,
-        ZoneInterface $zone
-    ) {
+    function it_sets_default_zone($zoneRepository, $settingsManager, Settings $settings, ZoneInterface $zone)
+    {
         $zoneRepository->findOneBy(['code' => 'EU'])->willReturn($zone);
 
         $settingsManager->loadSettings('sylius_taxation')->willReturn($settings);
@@ -94,28 +84,28 @@ class ZoneContextSpec extends ObjectBehavior
         $this->defaultTaxZoneIs('EU');
     }
 
-    function it_throws_exception_if_zone_with_given_code_does_not_exist($zoneRepository)
+    function it_throws_exception_if_zone_with_given_code_does_not_exist_while_setting_default_zone($zoneRepository)
     {
         $zoneRepository->findOneBy(['code' => 'EU'])->willReturn(null);
 
-        $this->shouldThrow(new \InvalidArgumentException('Zone with code "EU" does not exist'))->during('defaultTaxZoneIs', ['EU']);
+        $this->shouldThrow(new \InvalidArgumentException('Zone with code "EU" does not exist.'))->during('defaultTaxZoneIs', ['EU']);
     }
 
-    function it_casts_zone_code_to_zone($zoneRepository, ZoneInterface $zone)
+    function it_returns_zone_by_its_code($zoneRepository, ZoneInterface $zone)
     {
         $zoneRepository->findOneBy(['code' => 'EU'])->willReturn($zone);
 
         $this->getZoneByCode('EU')->shouldReturn($zone);
     }
 
-    function it_throws_exception_if_there_is_no_zone_with_given_code_to_cast($zoneRepository)
+    function it_throws_exception_if_zone_with_given_code_does_not_exist($zoneRepository)
     {
         $zoneRepository->findOneBy(['code' => 'EU'])->willReturn(null);
 
-        $this->shouldThrow(new \Exception('Zone with code "EU" does not exist'))->during('getZoneByCode', ['EU']);
+        $this->shouldThrow(new \Exception('Zone with code "EU" does not exist.'))->during('getZoneByCode', ['EU']);
     }
 
-    function it_casts_rest_of_the_world($zoneRepository, ZoneInterface $zone)
+    function it_returns_the_rest_of_the_world_zone($zoneRepository, ZoneInterface $zone)
     {
         $zoneRepository->findOneBy(['code' => 'RoW'])->willReturn($zone);
 
@@ -126,6 +116,6 @@ class ZoneContextSpec extends ObjectBehavior
     {
         $zoneRepository->findOneBy(['code' => 'RoW'])->willReturn(null);
 
-        $this->shouldThrow(new \Exception('Rest of the world zone does not exist'))->during('getRestOfTheWorldZone');
+        $this->shouldThrow(new \Exception('Rest of the world zone does not exist.'))->during('getRestOfTheWorldZone');
     }
 }

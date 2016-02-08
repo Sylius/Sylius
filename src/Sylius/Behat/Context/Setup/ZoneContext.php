@@ -52,8 +52,11 @@ final class ZoneContext implements Context
      * @param SettingsManagerInterface $settingsManager
      * @param ZoneFactoryInterface $zoneFactory
      */
-    public function __construct(RepositoryInterface $zoneRepository, SettingsManagerInterface $settingsManager, ZoneFactoryInterface $zoneFactory)
-    {
+    public function __construct(
+        RepositoryInterface $zoneRepository,
+        SettingsManagerInterface $settingsManager,
+        ZoneFactoryInterface $zoneFactory
+    ) {
         $this->zoneRepository = $zoneRepository;
         $this->settingsManager = $settingsManager;
         $this->zoneFactory = $zoneFactory;
@@ -68,7 +71,7 @@ final class ZoneContext implements Context
     {
         $existingZone = $this->zoneRepository->findOneBy(['code' => $zone]);
         if (null === $existingZone) {
-            throw new \InvalidArgumentException(sprintf('Zone with code "%s" does not exist', $zone));
+            throw new \InvalidArgumentException(sprintf('Zone with code "%s" does not exist.', $zone));
         }
 
         return $existingZone;
@@ -82,7 +85,7 @@ final class ZoneContext implements Context
     {
         $zone = $this->zoneRepository->findOneBy(['code' => 'RoW']);
         if (null === $zone) {
-            throw new \Exception('Rest of the world zone does not exist');
+            throw new \Exception('Rest of the world zone does not exist.');
         }
 
         return $zone;

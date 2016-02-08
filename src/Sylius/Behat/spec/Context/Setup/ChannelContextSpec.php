@@ -45,12 +45,12 @@ class ChannelContextSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Behat\Context\Setup\ChannelContext');
     }
 
-    function it_implements_context()
+    function it_implements_context_interface()
     {
         $this->shouldImplement(Context::class);
     }
 
-    function it_sets_default_channel_in_to_shared_storage(
+    function it_sets_default_channel_in_the_shared_storage(
         $defaultFranceChannelFactory,
         $sharedStorage,
         ChannelInterface $channel,
@@ -63,7 +63,7 @@ class ChannelContextSpec extends ObjectBehavior
         $this->thatStoreIsOperatingOnASingleChannel();
     }
 
-    function it_configures_shipping_available_countries(
+    function it_configures_shipping_destination_countries(
         $countryFactory,
         $countryRepository,
         CountryInterface $australia,
