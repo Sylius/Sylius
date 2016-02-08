@@ -43,6 +43,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
+                ->booleanNode('fake_hostname_support')->defaultFalse()->cannotBeEmpty()->end()
             ->end()
         ;
 

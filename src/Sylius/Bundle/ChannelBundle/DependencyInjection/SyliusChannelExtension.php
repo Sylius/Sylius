@@ -39,6 +39,10 @@ class SyliusChannelExtension extends AbstractResourceExtension
             'services.xml',
         ];
 
+        if ($config['fake_hostname_support']) {
+            $configFiles[] = 'fake_hostname.xml';
+        }
+
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
         }
