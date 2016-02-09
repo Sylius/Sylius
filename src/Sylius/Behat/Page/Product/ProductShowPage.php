@@ -12,25 +12,13 @@
 namespace Sylius\Behat\Page\Product;
 
 use Sylius\Behat\SymfonyPageObjectExtension\PageObject\SymfonyPage;
+use Sylius\Component\Core\Model\ProductInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 class ProductShowPage extends SymfonyPage
 {
-    /**
-     * @param array $urlParameters
-     *
-     * @return ProductShowPage
-     */
-    public function open(array $urlParameters = [])
-    {
-        $url = $this->router->generate($urlParameters['product']);
-        $this->getSession()->visit($url);
-
-        return $this;
-    }
-
     public function addToCart()
     {
         $this->getDocument()->pressButton('Add to cart');
@@ -61,7 +49,22 @@ class ProductShowPage extends SymfonyPage
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    protected function getRouteName()
     {
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getUrl(array $urlParameters = [])
+    {
+        if (!isset($urlParameters['product']) || !$urlParameters['product'] instanceof ProductInterface) {
+            throw new \InvalidArgumentException(
+                'There should be only one url parameter passed to ProductShowPage '.
+                'named "product", containing an instance of Core\'s ProductInterface'
+            );
+        }
+
+        return $this->router->generate($urlParameters['product'], [], true);
     }
 }
