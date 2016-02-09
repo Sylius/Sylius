@@ -63,6 +63,10 @@
             </cascade>
         </one-to-many>
 
+        <many-to-one field="taxCategory" target-entity="Sylius\Component\Taxation\Model\TaxCategoryInterface">
+            <join-column name="tax_category_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
+        </many-to-one>
+
         <gedmo:loggable />
     </mapped-superclass>
 

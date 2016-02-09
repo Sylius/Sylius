@@ -20,7 +20,6 @@ use Sylius\Component\Core\Model\ProductVariantInterface as VariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\Product as SyliusProduct;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
-use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 
 /**
@@ -116,31 +115,6 @@ class ProductSpec extends ObjectBehavior
             ->shouldThrow('InvalidArgumentException')
             ->duringSetVariantSelectionMethod('foo')
         ;
-    }
-
-    function it_implements_Sylius_taxable_interface()
-    {
-        $this->shouldImplement('Sylius\Component\Taxation\Model\TaxableInterface');
-    }
-
-    function it_does_not_have_tax_category_by_default()
-    {
-        $this->getTaxCategory()->shouldReturn(null);
-    }
-
-    function it_allows_setting_the_tax_category(TaxCategoryInterface $taxCategory)
-    {
-        $this->setTaxCategory($taxCategory);
-        $this->getTaxCategory()->shouldReturn($taxCategory);
-    }
-
-    function it_allows_resetting_the_tax_category(TaxCategoryInterface $taxCategory)
-    {
-        $this->setTaxCategory($taxCategory);
-        $this->getTaxCategory()->shouldReturn($taxCategory);
-
-        $this->setTaxCategory(null);
-        $this->getTaxCategory()->shouldReturn(null);
     }
 
     function it_has_no_shipping_category_by_default()

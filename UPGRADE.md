@@ -220,6 +220,10 @@ class BookController extends ResourceController
 }
 ```
 
+### Core and CoreBundle
+
+* Moved ``taxCategory`` from ``Product`` to ``ProductVariant``
+
 ### Addressing and SyliusAddressingBundle
 
 * Extracted ``Country`` ISO code to name translation, from model to a twig extension: ``CountryNameExtension``;

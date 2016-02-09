@@ -12,8 +12,10 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Behat\Gherkin\Node\TableNode;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -41,34 +43,50 @@ final class ProductContext implements Context
     private $taxCategoryRepository;
 
     /**
+     * @var RepositoryInterface
+     */
+    private $productVariantRepository;
+
+    /**
      * @var FactoryInterface
      */
     private $productFactory;
 
     /**
+     * @var FactoryInterface
+     */
+    private $productVariantFactory;
+
+    /**
      * @var ObjectManager
      */
-    private $productManager;
+    private $objectManager;
 
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param RepositoryInterface $productRepository
      * @param RepositoryInterface $taxCategoryRepository
+     * @param RepositoryInterface $productVariantRepository
      * @param FactoryInterface $productFactory
-     * @param ObjectManager $productManager
+     * @param FactoryInterface $productVariantFactory
+     * @param ObjectManager $objectManager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         RepositoryInterface $productRepository,
         RepositoryInterface $taxCategoryRepository,
+        RepositoryInterface $productVariantRepository,
         FactoryInterface $productFactory,
-        ObjectManager $productManager
+        FactoryInterface $productVariantFactory,
+        ObjectManager $objectManager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->productRepository = $productRepository;
         $this->taxCategoryRepository = $taxCategoryRepository;
+        $this->productVariantRepository = $productVariantRepository;
         $this->productFactory = $productFactory;
-        $this->productManager = $productManager;
+        $this->productVariantFactory = $productVariantFactory;
+        $this->objectManager = $objectManager;
     }
 
     /**
@@ -76,20 +94,36 @@ final class ProductContext implements Context
      * @Transform /^"([^"]+)" product$/
      * @Transform :product
      */
-    public function castProductNameToProduct($productName)
+    public function getProductByName($productName)
     {
         $product = $this->productRepository->findOneBy(['name' => $productName]);
         if (null === $product) {
-            throw new \InvalidArgumentException('Product with name "'.$productName.'" does not exist');
+            throw new \InvalidArgumentException(sprintf('Product with name "%s" does not exist', $productName));
         }
 
         return $product;
     }
 
     /**
+     * @Transform /^"([^"]+)" variant of product "([^"]+)"$/
+     */
+    public function getProductVariantByNameAndProduct($variantName, $productName)
+    {
+        $product = $this->getProductByName($productName);
+
+        $productVariant = $this->productVariantRepository->findOneBy(['presentation' => $variantName, 'object' => $product]);
+        if (null === $productVariant) {
+            throw new \InvalidArgumentException(sprintf('Product variant with name "%s" of product "%s" does not exist', $variantName, $productName));
+        }
+
+        return $productVariant;
+    }
+
+    /**
+     * @Given /^store has a product "([^"]+)"$/
      * @Given /^store has a product "([^"]+)" priced at "(?:€|£|\$)([^"]+)"$/
      */
-    public function storeHasAProductPricedAt($productName, $price)
+    public function storeHasAProductPricedAt($productName, $price = '0.00')
     {
         $product = $this->productFactory->createNew();
         $product->setName($productName);
@@ -100,6 +134,10 @@ final class ProductContext implements Context
         $product->addChannel($channel);
 
         $this->productRepository->add($product);
+
+        if ('0.00' === $price) {
+            $this->sharedStorage->setCurrentResource('product', $product);
+        }
     }
 
     /**
@@ -107,8 +145,36 @@ final class ProductContext implements Context
      */
     public function productBelongsToTaxCategory(ProductInterface $product, TaxCategoryInterface $taxCategory)
     {
-        $product->setTaxCategory($taxCategory);
-        $this->productManager->flush($product);
+        $product->getMasterVariant()->setTaxCategory($taxCategory);
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^it comes in the following variations:$/
+     */
+    public function itComesInTheFollowingVariations(TableNode $table)
+    {
+        $currentProduct = $this->sharedStorage->getCurrentResource('product');
+
+        foreach ($table->getHash() as $variantHash) {
+            $variant = $this->productVariantFactory->createNew();
+            $variant->setPresentation($variantHash['name']);
+            $variant->setPrice($this->getPriceFromString(str_replace(['$', '€', '£'], '', $variantHash['price'])));
+            $variant->setProduct($currentProduct);
+
+            $this->productRepository->add($variant);
+        }
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^("[^"]+" variant of product "[^"]+") belongs to ("[^"]+" tax category)$/
+     */
+    public function productVariantBelongsToTaxCategory(ProductVariantInterface $productVariant, TaxCategoryInterface $taxCategory)
+    {
+        $productVariant->setTaxCategory($taxCategory);
+        $this->objectManager->flush($productVariant);
     }
 
     /**

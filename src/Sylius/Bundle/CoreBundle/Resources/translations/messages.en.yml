@@ -54,12 +54,13 @@ sylius:
             restricted_zone: Restricted zone
             shipping_category: Shipping category
             short_description: Short description
-            tax_category: Tax category
             variant_selection_method: Variant selection method
             main_taxon: Main taxon
         product_filter:
             name: Name
             sku: SKU
+        product_variant:
+            tax_category: Tax category
         settings:
             general:
                 currency: Default currency

@@ -55,6 +55,17 @@ final class CartContext implements Context
     }
 
     /**
+     * @Given I added :variant variant of product :product to the cart
+     * @When I add :variant variant of product :product to the cart
+     * @When I have :variant variant of product :product in the cart
+     */
+    public function iAddProductToTheCartSelectingVariant($variant, ProductInterface $product)
+    {
+        $this->productShowPage->open(['product' => $product]);
+        $this->productShowPage->addToCartWithVariant($variant);
+    }
+
+    /**
      * @Given I remove product :productName from the cart
      */
     public function iRemoveProductFromTheCart($productName)

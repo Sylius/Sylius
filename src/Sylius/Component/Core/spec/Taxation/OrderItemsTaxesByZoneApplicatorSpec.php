@@ -20,7 +20,7 @@ use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
-use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Taxation\OrderItemsTaxesByZoneApplicatorInterface;
 use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
@@ -65,7 +65,7 @@ class OrderItemsTaxesByZoneApplicatorSpec extends ObjectBehavior
         OrderItemInterface $orderItem,
         OrderItemUnitInterface $unit1,
         OrderItemUnitInterface $unit2,
-        ProductInterface $product,
+        ProductVariantInterface $productVariant,
         TaxRateInterface $taxRate,
         ZoneInterface $zone
     ) {
@@ -80,8 +80,8 @@ class OrderItemsTaxesByZoneApplicatorSpec extends ObjectBehavior
 
         $orderItem->getQuantity()->willReturn(2);
 
-        $orderItem->getProduct()->willReturn($product);
-        $taxRateResolver->resolve($product, ['zone' => $zone])->willReturn($taxRate);
+        $orderItem->getVariant()->willReturn($productVariant);
+        $taxRateResolver->resolve($productVariant, ['zone' => $zone])->willReturn($taxRate);
 
         $orderItem->getTotal()->willReturn(1000);
         $calculator->calculate(1000, $taxRate)->willReturn(100);
@@ -133,7 +133,7 @@ class OrderItemsTaxesByZoneApplicatorSpec extends ObjectBehavior
         \Iterator $iterator,
         OrderInterface $order,
         OrderItemInterface $orderItem,
-        ProductInterface $product,
+        ProductVariantInterface $productVariant,
         ZoneInterface $zone
     ) {
         $order->getItems()->willReturn($items);
@@ -147,8 +147,8 @@ class OrderItemsTaxesByZoneApplicatorSpec extends ObjectBehavior
 
         $orderItem->getQuantity()->willReturn(5);
 
-        $orderItem->getProduct()->willReturn($product);
-        $taxRateResolver->resolve($product, ['zone' => $zone])->willReturn(null);
+        $orderItem->getVariant()->willReturn($productVariant);
+        $taxRateResolver->resolve($productVariant, ['zone' => $zone])->willReturn(null);
 
         $orderItem->getUnits()->shouldNotBeCalled();
 
@@ -167,7 +167,7 @@ class OrderItemsTaxesByZoneApplicatorSpec extends ObjectBehavior
         \Iterator $iterator,
         OrderInterface $order,
         OrderItemInterface $orderItem,
-        ProductInterface $product,
+        ProductVariantInterface $productVariant,
         TaxRateInterface $taxRate,
         ZoneInterface $zone
     ) {
@@ -181,9 +181,9 @@ class OrderItemsTaxesByZoneApplicatorSpec extends ObjectBehavior
         $iterator->next()->shouldBeCalled();
 
         $orderItem->getQuantity()->willReturn(2);
+        $orderItem->getVariant()->willReturn($productVariant);
 
-        $orderItem->getProduct()->willReturn($product);
-        $taxRateResolver->resolve($product, ['zone' => $zone])->willReturn($taxRate);
+        $taxRateResolver->resolve($productVariant, ['zone' => $zone])->willReturn($taxRate);
 
         $orderItem->getTotal()->willReturn(1000);
         $calculator->calculate(1000, $taxRate)->willReturn(0);

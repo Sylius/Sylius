@@ -37,8 +37,10 @@ default:
                     sharedStorage: "@sylius.behat.shared_storage"
                     productRepository: "@sylius.repository.product"
                     taxCategoryRepository: "@sylius.repository.tax_category"
+                    productVariantRepository: "@sylius.repository.product_variant"
                     productFactory: "@sylius.factory.product"
-                    productManager: "@sylius.manager.product"
+                    productVariantFactory: "@sylius.factory.product_variant"
+                    objectManager: "@doctrine.orm.entity_manager"
 
                 - Sylius\Behat\Context\Hook\DoctrineORMContext:
                     entityManager: "@doctrine.orm.entity_manager"

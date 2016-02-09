@@ -15,25 +15,20 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Pricing\Calculators;
 use Sylius\Component\Product\Model\Variant as BaseVariant;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
 
 /**
- * Sylius core product variant entity.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ProductVariant extends BaseVariant implements ProductVariantInterface
 {
     /**
-     * Variant SKU.
-     *
      * @var string
      */
     protected $sku;
 
     /**
-     * The variant price.
-     *
      * @var int
      */
     protected $price;
@@ -44,81 +39,64 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     protected $originalPrice;
 
     /**
-     * The pricing calculator.
-     *
      * @var string
      */
     protected $pricingCalculator = Calculators::STANDARD;
 
     /**
-     * The pricing configuration.
-     *
      * @var array
      */
     protected $pricingConfiguration = [];
 
     /**
-     * On hold.
-     *
      * @var int
      */
     protected $onHold = 0;
 
     /**
-     * On hand stock.
-     *
      * @var int
      */
     protected $onHand = 0;
 
     /**
-     * Sold amount.
-     *
      * @var int
      */
     protected $sold = 0;
 
     /**
-     * Is variant available on demand?
-     *
      * @var bool
      */
     protected $availableOnDemand = true;
 
     /**
-     * Images.
-     *
      * @var Collection|ProductVariantImageInterface[]
      */
     protected $images;
 
     /**
-     * Weight.
-     *
      * @var float
      */
     protected $weight;
 
     /**
-     * Width.
-     *
      * @var float
      */
     protected $width;
 
     /**
-     * Height.
-     *
      * @var float
      */
     protected $height;
 
     /**
-     * Depth.
-     *
      * @var float
      */
     protected $depth;
+
+    /**
+     * @var TaxCategoryInterface
+     */
+    protected $taxCategory;
 
     /**
      * Override constructor to set on hand stock.
@@ -319,8 +297,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function setSold($sold)
     {
         $this->sold = (int) $sold;
-
-        return $this;
     }
 
     /**
@@ -539,5 +515,21 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function isPriceReduced()
     {
         return $this->originalPrice > $this->price;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTaxCategory()
+    {
+        return $this->taxCategory;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTaxCategory(TaxCategoryInterface $category = null)
+    {
+        $this->taxCategory = $category;
     }
 }
