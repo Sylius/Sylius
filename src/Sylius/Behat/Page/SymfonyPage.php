@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page;
 
+use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -63,6 +64,16 @@ abstract class SymfonyPage extends Page
         $baseUrl = rtrim($this->getParameter('base_url'), '/').'/';
 
         return 0 !== strpos($path, 'http') ? $baseUrl.ltrim($path, '/') : $path;
+    }
+
+    /**
+     * @param NodeElement $modalContainer
+     */
+    protected function waitForModalToAppear(NodeElement $modalContainer)
+    {
+        $this->getDocument()->waitFor(1, function () use ($modalContainer) {
+            return false !== strpos($modalContainer->getAttribute('class'), 'in');
+        });
     }
 
     /**

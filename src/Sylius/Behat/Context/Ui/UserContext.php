@@ -12,17 +12,16 @@
 namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\User\LoginPage;
 use Sylius\Behat\Page\Customer\CustomerShowPage;
-use Sylius\Behat\Page\Customer\CustomersIndexPage;
+use Sylius\Behat\Page\User\LoginPage;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class UserContext implements Context
+final class UserContext implements Context
 {
     /**
      * @var SharedStorageInterface
@@ -30,14 +29,9 @@ class UserContext implements Context
     private $sharedStorage;
 
     /**
-     * @var RepositoryInterface
+     * @var UserRepositoryInterface
      */
-    private $customerRepository;
-
-    /**
-     * @var CustomersIndexPage
-     */
-    private $customersIndexPage;
+    private $userRepository;
 
     /**
      * @var CustomerShowPage
@@ -51,21 +45,18 @@ class UserContext implements Context
 
     /**
      * @param SharedStorageInterface $sharedStorage
-     * @param RepositoryInterface $customerRepository
-     * @param CustomersIndexPage $customersIndexPage
+     * @param UserRepositoryInterface $userRepository
      * @param CustomerShowPage $customerShowPage
      * @param LoginPage $loginPage
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        RepositoryInterface $customerRepository,
-        CustomersIndexPage $customersIndexPage,
+        UserRepositoryInterface $userRepository,
         CustomerShowPage $customerShowPage,
         LoginPage $loginPage
     ) {
         $this->sharedStorage = $sharedStorage;
-        $this->customerRepository = $customerRepository;
-        $this->customersIndexPage = $customersIndexPage;
+        $this->userRepository = $userRepository;
         $this->customerShowPage = $customerShowPage;
         $this->loginPage = $loginPage;
     }
@@ -80,24 +71,45 @@ class UserContext implements Context
     }
 
     /**
-     * @When I delete the account of :email
+     * @When I delete the account of :email user
      */
     public function iDeleteAccount($email)
     {
-        $customersIndexPage = $this->customersIndexPage;
-        $customersIndexPage->open();
-        $customersIndexPage->deleteUser($email);
+        $user = $this->userRepository->findOneByEmail($email);
+
+        $this->sharedStorage->set('deleted_user', $user);
+
+        $this->customerShowPage->open(['id' => $user->getCustomer()->getId()]);
+        $this->customerShowPage->deleteAccount();
     }
 
     /**
-     * @Then there should be no account with email :email
+     * @When I try to delete my own account
      */
-    public function thereShouldBeNoAccount($email)
+    public function iTryDeletingMyOwnAccount()
     {
-        $customer = $this->customerRepository->findOneBy(array('email' =>$email));
+        $admin = $this->sharedStorage->get('admin');
 
-        $this->customerShowPage->open(array('id' => $customer->getId()));
+        $this->customerShowPage->open(['id' => $admin->getId()]);
+    }
 
-        $this->customerShowPage->isThereAccountOf($email);
+    /**
+     * @Then I should not be able to do it
+     */
+    public function iShouldNotBeAbleToDeleteMyOwnAccount()
+    {
+        expect($this->customerShowPage)->toThrow(new \Exception('Element not found.'))->during('deleteAccount');
+    }
+
+    /**
+     * @Then the user account should be deleted
+     */
+    public function accountShouldBeDeleted()
+    {
+        $deletedUser = $this->sharedStorage->get('deleted_user');
+
+        $this->customerShowPage->open(['id' => $deletedUser->getCustomer()->getId()]);
+
+        expect($this->customerShowPage->isRegistered())->toBe(false);
     }
 }

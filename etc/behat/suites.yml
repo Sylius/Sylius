@@ -34,5 +34,4 @@ imports:
     - suites/ui_channel.yml
     - suites/ui_checkout.yml
     - suites/ui_promotion.yml
-    - suites/ui-user.yml
-
+    - suites/ui_user.yml

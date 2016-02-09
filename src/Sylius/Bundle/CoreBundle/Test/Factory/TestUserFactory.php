@@ -17,13 +17,17 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
 class TestUserFactory implements TestUserFactoryInterface
 {
     const DEFAULT_USER_EMAIL = 'john.doe@example.com';
+    const DEFAULT_ADMIN_EMAIL = 'admin@example.com';
     const DEFAULT_USER_FIRST_NAME = 'John';
     const DEFAULT_USER_LAST_NAME = 'Doe';
     const DEFAULT_USER_PASSWORD = 'password123';
+    const DEFAULT_USER_ROLE = 'ROLE_USER';
+    const DEFAULT_ADMIN_ROLE = 'ROLE_ADMINISTRATION_ACCESS';
 
     /**
      * @var FactoryInterface
@@ -48,7 +52,7 @@ class TestUserFactory implements TestUserFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function create($email, $password, $firstName = self::DEFAULT_USER_FIRST_NAME, $lastName = self::DEFAULT_USER_LAST_NAME)
+    public function create($email, $password, $firstName = self::DEFAULT_USER_FIRST_NAME, $lastName = self::DEFAULT_USER_LAST_NAME, $role = self::DEFAULT_USER_ROLE)
     {
         $customer = $this->customerFactory->createNew();
 
@@ -62,12 +66,13 @@ class TestUserFactory implements TestUserFactoryInterface
         $user->setEmail($email);
         $user->setPlainPassword($password);
         $user->enable();
+        $user->addRole($role);
 
         return $user;
     }
 
     /**
-     * @return UserInterface
+     * {@inheritdoc}
      */
     public function createDefault()
     {
@@ -75,7 +80,22 @@ class TestUserFactory implements TestUserFactoryInterface
             self::DEFAULT_USER_EMAIL,
             self::DEFAULT_USER_PASSWORD,
             self::DEFAULT_USER_FIRST_NAME,
-            self::DEFAULT_USER_LAST_NAME
+            self::DEFAULT_USER_LAST_NAME,
+            self::DEFAULT_USER_ROLE
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createDefaultAdmin()
+    {
+        return $this->create(
+            self::DEFAULT_ADMIN_EMAIL,
+            self::DEFAULT_USER_PASSWORD,
+            self::DEFAULT_USER_FIRST_NAME,
+            self::DEFAULT_USER_LAST_NAME,
+            self::DEFAULT_ADMIN_ROLE
         );
     }
 }

@@ -80,4 +80,17 @@ final class SecurityContext implements Context
 
         $this->sharedStorage->set('user', $user);
     }
+
+    /**
+     * @Given I am logged in as administrator
+     */
+    public function iAmLoggedInAsAdministrator()
+    {
+        $admin = $this->testUserFactory->createDefaultAdmin();
+        $this->userRepository->add($admin);
+
+        $this->securityService->logIn($admin->getEmail());
+
+        $this->sharedStorage->set('admin', $admin);
+    }
 }

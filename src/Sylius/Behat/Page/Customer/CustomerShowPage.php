@@ -11,7 +11,7 @@
 
 namespace Sylius\Behat\Page\Customer;
 
-use Sylius\Behat\SymfonyPageObjectExtension\PageObject\SymfonyPage;
+use Sylius\Behat\Page\SymfonyPage;
 
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
@@ -26,14 +26,36 @@ class CustomerShowPage extends SymfonyPage
         return 'sylius_backend_customer_show';
     }
 
-    public function isThisCustomerRegistered($email)
+    /**
+     * Checks if the customer on whose page we are currently on is registered,
+     * if not throws an exception.
+     *
+     * @return bool
+     */
+    public function isRegistered()
     {
-        $username = $this->getDocument()->find('css', 'table > tbody > tr > #username')->getText();
+        $username = $this->getDocument()->find('css', '#username')->getText();
 
-        if ($email === $username) {
-            return true;
+        return '' != $username;
+    }
+
+    /**
+     * Deletes the user on whose show page we are currently on.
+     *
+     * @throws \Exception
+     */
+    public function deleteAccount()
+    {
+        $deleteButton = $this->getDocument()->find('css', '.delete-action-form');
+
+        if (null === $deleteButton) {
+            throw new \Exception('Element not found.');
         }
 
-        return false;
+        $deleteButton->press();
+
+        $confirmationModal = $this->getDocument()->find('css', '#confirmation-modal-confirm');
+        $this->waitForModalToAppear($confirmationModal);
+        $confirmationModal->find('css', 'a:contains("Delete")')->press();
     }
 }

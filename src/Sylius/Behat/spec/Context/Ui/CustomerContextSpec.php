@@ -11,23 +11,23 @@
 
 namespace spec\Sylius\Behat\Context\Ui;
 
-use Behat\Mink\Mink;
-use Behat\Mink\WebAssert;
+use Behat\Behat\Context\Context;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use SensioLabs\Behat\PageObjectExtension\PageObject\Factory;
-use Sylius\Behat\Context\FeatureContext;
-use Sylius\Behat\Page\Cart\CartSummaryPage;
+use Sylius\Behat\Page\Customer\CustomerShowPage;
+use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\User\Model\UserInterface;
 
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
 class CustomerContextSpec extends ObjectBehavior
 {
-    function let(Factory $pageObjectFactory, Mink $mink)
-    {
-        $this->setPageObjectFactory($pageObjectFactory);
-        $this->setMink($mink);
+    public function let(
+        SharedStorageInterface $sharedStorage,
+        CustomerShowPage $customerShowPage
+    ) {
+        $this->beConstructedWith($sharedStorage, $customerShowPage);
     }
 
     function it_is_initializable()
@@ -35,17 +35,41 @@ class CustomerContextSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Behat\Context\Ui\CustomerContext');
     }
 
-    function it_is_feature_context()
+    function it_implements_context_interface()
     {
-        $this->shouldHaveType(FeatureContext::class);
+        $this->shouldImplement(Context::class);
     }
 
-    function it_checks_if_cart_has_given_total($pageObjectFactory, $mink, CartSummaryPage $customersIndexPage, WebAssert $assert)
-    {
-        $pageObjectFactory->createPage('Customer\CustomersIndexPage')->willReturn($customersIndexPage);
-        $customersIndexPage->open()->shouldBeCalled();
+    function it_ensures_customer_is_not_deleted_again(
+        CustomerShowPage $customerShowPage,
+        SharedStorageInterface $sharedStorage,
+        CustomerInterface $customer
+    ) {
+        $sharedStorage->get('customer')->willReturn($customer);
 
-        $mink->assertSession(null)->willReturn($assert);
-        $assert->elementTextContains('css', 'data-customer', Argument::type('string'))->shouldBeCalled();
+        $customer->getId()->willReturn(1);
+
+        $customerShowPage->open(['id' => 1])->shouldBeCalled();
+
+        $customerShowPage->deleteAccount()->willThrow(new \Exception('Element not found.'));
+        $this->iShouldNotBeAbleToDeleteCustomerAgain();
+    }
+
+    function it_checks_if_customer_still_exists(
+        CustomerShowPage $customerShowPage,
+        SharedStorageInterface $sharedStorage,
+        CustomerInterface $customer,
+        UserInterface $user
+    ) {
+        $sharedStorage->get('deleted_user')->shouldBeCalled()->willReturn($user);
+        
+        $user->getCustomer()->willReturn($customer);
+        
+        $customer->getId()->willReturn(1);
+        $customerShowPage->open(['id' => 1])->shouldBeCalled();
+
+        $customerShowPage->isRegistered()->willReturn(false);
+
+        $this->customerShouldStillExist();
     }
 }

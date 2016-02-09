@@ -12,7 +12,6 @@
 namespace Sylius\Component\User\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
-use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**

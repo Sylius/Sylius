@@ -14,7 +14,6 @@ namespace Sylius\Behat\Context\Ui;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Customer\CustomerShowPage;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
@@ -27,41 +26,43 @@ class CustomerContext implements Context
     private $sharedStorage;
 
     /**
-     * @var RepositoryInterface
-     */
-    private $customerRepository;
-
-    /**
      * @var CustomerShowPage
      */
     private $customerShowPage;
 
     /**
      * @param SharedStorageInterface $sharedStorage
-     * @param RepositoryInterface $customerRepository
      * @param CustomerShowPage $customerShowPage
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        RepositoryInterface $customerRepository,
         CustomerShowPage $customerShowPage
     ) {
         $this->sharedStorage = $sharedStorage;
-        $this->customerRepository = $customerRepository;
         $this->customerShowPage = $customerShowPage;
     }
 
     /**
-     * @Then there should be customer with email :email
+     * @Then I should not be able to delete it again
      */
-    public function thereShouldBeCustomerIdentifiedBy($email)
+    public function iShouldNotBeAbleToDeleteCustomerAgain()
     {
-        $customer = $this->customerRepository->findOneBy(array('email' =>$email));
+        $customer = $this->sharedStorage->get('customer');
 
-        $this->customerShowPage->open(array('id' => $customer->getId()));
+        $this->customerShowPage->open(['id' => $customer->getId()]);
 
-        if (true === $this->customerShowPage->isThisCustomerRegistered($email)) {
-            throw new \InvalidArgumentException('This customer is a registered user, when it should not.');
-        }
+        expect($this->customerShowPage)->toThrow(new \Exception('Element not found.'))->during('deleteAccount');
+    }
+
+    /**
+     * @Then the customer with this email should still exist
+     */
+    public function customerShouldStillExist()
+    {
+        $deletedUser = $this->sharedStorage->get('deleted_user');
+
+        $this->customerShowPage->open(['id' => $deletedUser->getCustomer()->getId()]);
+
+        expect($this->customerShowPage->isRegistered())->toBe(false);
     }
 }

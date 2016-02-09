@@ -13,7 +13,6 @@ namespace Sylius\Component\User\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
-use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;

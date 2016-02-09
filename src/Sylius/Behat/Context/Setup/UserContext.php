@@ -18,10 +18,12 @@ use Sylius\Component\Core\Test\Factory\TestUserFactoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Intl\Intl;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
+ * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
 final class UserContext implements Context
 {
@@ -51,14 +53,14 @@ final class UserContext implements Context
     private $userManager;
 
     /**
-     * @param RepositoryInterface $userRepository
+     * @param UserRepositoryInterface $userRepository
      * @param SharedStorageInterface $sharedStorage
      * @param TestUserFactoryInterface $userFactory
      * @param FactoryInterface $addressFactory
      * @param ObjectManager $userManager
      */
     public function __construct(
-        RepositoryInterface $userRepository,
+        UserRepositoryInterface $userRepository,
         SharedStorageInterface $sharedStorage,
         TestUserFactoryInterface $userFactory,
         FactoryInterface $addressFactory,
@@ -79,6 +81,7 @@ final class UserContext implements Context
         $user = $this->userFactory->create($email, $password);
 
         $this->sharedStorage->set('user', $user);
+
         $this->userRepository->add($user);
     }
 
@@ -159,32 +162,13 @@ final class UserContext implements Context
     }
 
     /**
-     * @Given there is an administrator account
-     */
-    public function thereIsAdministratorAccount()
-    {
-        /** @var UserInterface $user */
-        $user = $this->userFactory->createNew();
-        $customer = $this->customerFactory->createNew();
-        $customer->setFirstName('Admin');
-        $customer->setLastName('Admin');
-
-        $user->setCustomer($customer);
-        $user->setUsername('Administrator Account');
-        $user->setEmail('admin@test.com');
-        $user->setPlainPassword('pswd1234');
-        $user->addRole('ROLE_ADMINISTRATION_ACCESS');
-
-        $this->sharedStorage->setCurrentResource('administrator', $user);
-        $this->userRepository->add($user);
-    }
-
-    /**
      * @Given the account of :email was deleted
      */
     public function accountWasDeleted($email)
     {
-        $user = $this->userRepository->findOneBy(array('username' => $email));
+        $user = $this->userRepository->findOneByEmail($email);
+
+        $this->sharedStorage->set('customer', $user->getCustomer());
 
         $this->userRepository->remove($user);
     }

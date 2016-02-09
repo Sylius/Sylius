@@ -19,6 +19,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
 class TestUserFactorySpec extends ObjectBehavior
 {
@@ -54,6 +55,7 @@ class TestUserFactorySpec extends ObjectBehavior
         $user->setEmail('oliver.queen@star.com')->shouldBeCalled();
         $user->setPlainPassword('a££ow')->shouldBeCalled();
         $user->enable()->shouldBeCalled();
+        $user->addRole('ROLE_USER')->shouldBeCalled();
 
         $this->create('oliver.queen@star.com', 'a££ow', 'Oliver', 'Queen')->shouldReturn($user);
     }
@@ -75,7 +77,30 @@ class TestUserFactorySpec extends ObjectBehavior
         $user->setEmail('john.doe@example.com')->shouldBeCalled();
         $user->setPlainPassword('password123')->shouldBeCalled();
         $user->enable()->shouldBeCalled();
+        $user->addRole('ROLE_USER')->shouldBeCalled();
 
         $this->createDefault()->shouldReturn($user);
+    }
+
+    function it_creates_default_admin(
+        $customerFactory,
+        $userFactory,
+        CustomerInterface $customer,
+        UserInterface $admin
+    ) {
+        $customerFactory->createNew()->willReturn($customer);
+        $customer->setFirstName('John')->shouldBeCalled();
+        $customer->setLastName('Doe')->shouldBeCalled();
+
+        $userFactory->createNew()->willReturn($admin);
+
+        $admin->setCustomer($customer)->shouldBeCalled();
+        $admin->setUsername('admin@example.com')->shouldBeCalled();
+        $admin->setEmail('admin@example.com')->shouldBeCalled();
+        $admin->setPlainPassword('password123')->shouldBeCalled();
+        $admin->enable()->shouldBeCalled();
+        $admin->addRole('ROLE_ADMINISTRATION_ACCESS')->shouldBeCalled();
+
+        $this->createDefaultAdmin()->shouldReturn($admin);
     }
 }
