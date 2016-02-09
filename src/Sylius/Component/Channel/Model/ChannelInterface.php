@@ -44,12 +44,12 @@ interface ChannelInterface extends CodeAwareInterface, TimestampableInterface, T
     /**
      * @return string
      */
-    public function getUrl();
+    public function getHostname();
 
     /**
      * @param string $url
      */
-    public function setUrl($url);
+    public function setHostname($hostname);
 
     /**
      * @return string

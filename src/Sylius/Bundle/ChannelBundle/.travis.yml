@@ -16,3 +16,4 @@ install:
 
 script:
     - bin/phpspec run -fpretty --verbose
+    - bin/phpunit

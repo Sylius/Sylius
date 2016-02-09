@@ -65,7 +65,7 @@ class ChannelTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('url', 'text', Argument::any())
+            ->add('hostname', 'text', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;

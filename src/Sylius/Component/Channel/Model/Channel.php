@@ -44,7 +44,7 @@ class Channel implements ChannelInterface
     /**
      * @var string
      */
-    protected $url;
+    protected $hostname;
 
     /**
      * @var string
@@ -123,17 +123,17 @@ class Channel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function getUrl()
+    public function getHostname()
     {
-        return $this->url;
+        return $this->hostname;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setUrl($url)
+    public function setHostname($hostname)
     {
-        $this->url = $url;
+        $this->hostname = $hostname;
     }
 
     /**

@@ -152,7 +152,7 @@ class ChannelContext extends DefaultContext
         $channel = $this->getFactory('channel')->createNew();
         $channel->setCode($code);
         $channel->setName($name);
-        $channel->setUrl($url);
+        $channel->setHostname($url);
 
         $this->configureChannel($channel, $locales, $currencies, $shippingMethods, $paymentMethos);
 

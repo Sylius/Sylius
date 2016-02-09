@@ -9,21 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Channel;
+namespace Sylius\Component\Channel\Context\RequestBased;
 
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Hostname based channel resolver.
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ChannelResolver implements ChannelResolverInterface
+final class HostnameBasedRequestResolver implements RequestResolverInterface
 {
     /**
      * @var ChannelRepositoryInterface
      */
-    protected $channelRepository;
+    private $channelRepository;
 
     /**
      * @param ChannelRepositoryInterface $channelRepository
@@ -36,12 +35,8 @@ class ChannelResolver implements ChannelResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function resolve($hostname = null)
+    public function findChannel(Request $request)
     {
-        if (null === $hostname || null === $channel = $this->channelRepository->findMatchingHostname($hostname)) {
-            return $this->channelRepository->findDefault();
-        }
-
-        return $channel;
+        return $this->channelRepository->findOneByHostname($request->getHost());
     }
 }

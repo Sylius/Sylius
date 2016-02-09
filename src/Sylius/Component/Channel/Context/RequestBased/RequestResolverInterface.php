@@ -9,24 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Channel\Repository;
+namespace Sylius\Component\Channel\Context\RequestBased;
 
 use Sylius\Component\Channel\Model\ChannelInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-interface ChannelRepositoryInterface
+interface RequestResolverInterface
 {
     /**
-     * @return ChannelInterface[]
-     */
-    public function findAll();
-
-    /**
-     * @param string $hostname
+     * @param Request $request
      *
      * @return ChannelInterface|null
      */
-    public function findOneByHostname($hostname);
+    public function findChannel(Request $request);
 }

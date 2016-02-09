@@ -71,7 +71,7 @@ class CoreContext extends DefaultContext
         $channel = $this->getFactory('channel')->createNew();
         $channel->setCode('DEFAULT-WEB');
         $channel->setName('Default');
-        $channel->setUrl('http://example.com');
+        $channel->setHostname('http://example.com');
         $channel->addCurrency($currency);
         $channel->setDefaultCurrency($currency);
         $channel->addLocale($locale);

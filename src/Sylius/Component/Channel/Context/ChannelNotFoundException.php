@@ -11,15 +11,16 @@
 
 namespace Sylius\Component\Channel\Context;
 
-use Sylius\Component\Channel\Model\ChannelInterface;
-
 /**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-interface ChannelContextInterface
+class ChannelNotFoundException extends \RuntimeException
 {
     /**
-     * @return ChannelInterface
+     * {@inheritdoc}
      */
-    public function getChannel();
+    public function __construct(\Exception $previousException = null)
+    {
+        parent::__construct('Channel could not be found!', 0, $previousException);
+    }
 }

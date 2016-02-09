@@ -281,7 +281,7 @@ EOT
 
             /** @var ChannelInterface $channel */
             $channel = $channelFactory->createNew();
-            $channel->setUrl(null);
+            $channel->setHostname(null);
             $channel->setCode($code);
             $channel->setName($code);
             $channel->setColor(null);
