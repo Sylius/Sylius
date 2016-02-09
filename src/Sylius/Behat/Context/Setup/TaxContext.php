@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -71,20 +72,55 @@ final class TaxContext implements Context
      * @Transform /^"([^"]+)" tax category$/
      * @Transform /^tax category "([^"]+)"$/
      */
-    public function castTaxCategoryNameToTaxCategory($taxCategoryName)
+    public function getTaxCategoryByName($taxCategoryName)
     {
         $taxCategory = $this->taxCategoryRepository->findOneBy(['name' => $taxCategoryName]);
         if (null === $taxCategory) {
-            throw new \Exception('Tax category with name "'.$taxCategoryName.'" does not exist');
+            throw new \InvalidArgumentException('Tax category with name "'.$taxCategoryName.'" does not exist');
         }
 
         return $taxCategory;
     }
 
     /**
-     * @Given /^store has "([^"]+)" tax rate of ([^"]+)% for "([^"]+)" within ("([^"]+)" zone)$/
+     * @Given store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within :zone zone
+     * @Given /^store has "([^"]+)" tax rate of ([^"]+)% for "([^"]+)" for (the rest of the world)$/
      */
-    public function storeHasTaxRateWithinZone($taxRateName, $taxRateAmount, $taxCategoryName, ZoneInterface $taxZone)
+    public function storeHasTaxRateWithinZone($taxRateName, $taxRateAmount, $taxCategoryName, ZoneInterface $zone = null)
+    {
+        $taxCategory = $this->getOrCreateTaxCategory($taxCategoryName);
+
+        $taxRate = $this->taxRateFactory->createNew();
+        $taxRate->setName($taxRateName);
+        $taxRate->setCode($this->getCodeFromName($taxRateName));
+        $taxRate->setZone($zone);
+        $taxRate->setAmount($this->getAmountFromString($taxRateAmount));
+        $taxRate->setCategory($taxCategory);
+        $taxRate->setCalculator('default');
+
+        $this->taxRateRepository->add($taxRate);
+    }
+
+    /**
+     * @param string $taxCategoryName
+     *
+     * @return TaxCategoryInterface
+     */
+    private function getOrCreateTaxCategory($taxCategoryName)
+    {
+        try {
+            return $this->getTaxCategoryByName($taxCategoryName);
+        } catch (\InvalidArgumentException $exception) {
+            return $this->createTaxCategory($taxCategoryName);
+        }
+    }
+
+    /**
+     * @param string $taxCategoryName
+     *
+     * @return TaxCategoryInterface
+     */
+    private function createTaxCategory($taxCategoryName)
     {
         $taxCategory = $this->taxCategoryFactory->createNew();
         $taxCategory->setName($taxCategoryName);
@@ -92,15 +128,7 @@ final class TaxContext implements Context
 
         $this->taxCategoryRepository->add($taxCategory);
 
-        $taxRate = $this->taxRateFactory->createNew();
-        $taxRate->setName($taxRateName);
-        $taxRate->setCode($this->getCodeFromName($taxRateName));
-        $taxRate->setZone($taxZone);
-        $taxRate->setAmount($this->getAmountFromString($taxRateAmount));
-        $taxRate->setCategory($taxCategory);
-        $taxRate->setCalculator('default');
-
-        $this->taxRateRepository->add($taxRate);
+        return $taxCategory;
     }
 
     /**

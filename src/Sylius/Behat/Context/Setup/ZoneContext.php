@@ -16,6 +16,7 @@ use Sylius\Bundle\AddressingBundle\Factory\ZoneFactoryInterface;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Intl\Intl;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -51,8 +52,11 @@ final class ZoneContext implements Context
      * @param SettingsManagerInterface $settingsManager
      * @param ZoneFactoryInterface $zoneFactory
      */
-    public function __construct(RepositoryInterface $zoneRepository, SettingsManagerInterface $settingsManager, ZoneFactoryInterface $zoneFactory)
-    {
+    public function __construct(
+        RepositoryInterface $zoneRepository,
+        SettingsManagerInterface $settingsManager,
+        ZoneFactoryInterface $zoneFactory
+    ) {
         $this->zoneRepository = $zoneRepository;
         $this->settingsManager = $settingsManager;
         $this->zoneFactory = $zoneFactory;
@@ -61,15 +65,30 @@ final class ZoneContext implements Context
     /**
      * @Transform :zone zone
      * @Transform zone :zone
+     * @Transform :zone
      */
     public function getZoneByCode($zone)
     {
         $existingZone = $this->zoneRepository->findOneBy(['code' => $zone]);
         if (null === $existingZone) {
-            throw new \InvalidArgumentException(sprintf('Zone with code "%s" does not exist', $zone));
+            throw new \InvalidArgumentException(sprintf('Zone with code "%s" does not exist.', $zone));
         }
 
         return $existingZone;
+    }
+
+    /**
+     * @Transform /^rest of the world$/
+     * @Transform /^the rest of the world$/
+     */
+    public function getRestOfTheWorldZone()
+    {
+        $zone = $this->zoneRepository->findOneBy(['code' => 'RoW']);
+        if (null === $zone) {
+            throw new \Exception('Rest of the world zone does not exist.');
+        }
+
+        return $zone;
     }
 
     /**
@@ -81,6 +100,24 @@ final class ZoneContext implements Context
         $zone->setType(ZoneInterface::TYPE_COUNTRY);
         $zone->setCode('EU');
         $zone->setName('European Union');
+
+        $this->zoneRepository->add($zone);
+    }
+
+    /**
+     * @Given /^there is rest of the world zone containing all other countries$/
+     */
+    public function thereIsRestOfTheWorldZoneContainingAllOtherCountries()
+    {
+        $restOfWorldCountries = array_diff(
+            array_keys(Intl::getRegionBundle()->getCountryNames('en')),
+            array_merge($this->euMembers, ['US'])
+        );
+
+        $zone = $this->zoneFactory->createWithMembers($restOfWorldCountries);
+        $zone->setType(ZoneInterface::TYPE_COUNTRY);
+        $zone->setCode('RoW');
+        $zone->setName('Rest of the World');
 
         $this->zoneRepository->add($zone);
     }

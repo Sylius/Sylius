@@ -32,11 +32,9 @@
         <!--Default Store Data-->
         <service id="sylius.behat.default_france_channel_factory" class="%sylius.behat.default_france_channel_factory.class%">
             <argument type="service" id="sylius.repository.channel" />
-            <argument type="service" id="sylius.repository.country" />
             <argument type="service" id="sylius.repository.zone_member" />
             <argument type="service" id="sylius.repository.zone" />
             <argument type="service" id="sylius.factory.channel" />
-            <argument type="service" id="sylius.factory.country" />
             <argument type="service" id="sylius.factory.zone_member" />
             <argument type="service" id="sylius.factory.zone" />
         </service>

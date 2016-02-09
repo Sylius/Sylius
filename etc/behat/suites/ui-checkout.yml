@@ -6,9 +6,10 @@ default:
         ui-checkout:
             contexts:
                 - Sylius\Behat\Context\Setup\ChannelContext:
-                    defaultFranceChannelFactory: "@sylius.behat.default_france_channel_factory"
                     sharedStorage: "@sylius.behat.shared_storage"
-
+                    defaultFranceChannelFactory: "@sylius.behat.default_france_channel_factory"
+                    countryFactory: "@sylius.factory.country"
+                    countryRepository: "@sylius.repository.country"
                 - Sylius\Behat\Context\Setup\CurrencyContext:
                     currencyRepository: "@sylius.repository.currency"
                     sharedStorage: "@sylius.behat.shared_storage"
@@ -45,6 +46,7 @@ default:
                 - Sylius\Behat\Context\Setup\ShippingContext:
                     shippingMethodRepository: "@sylius.repository.shipping_method"
                     shippingMethodFactory: "@sylius.factory.shipping_method"
+                    shippingMethodManager: "@sylius.manager.shipping_method"
                     sharedStorage: "@sylius.behat.shared_storage"
 
                 - Sylius\Behat\Context\Ui\CartContext: ~

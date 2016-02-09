@@ -12,11 +12,14 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Calculator\DefaultCalculators;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -34,6 +37,11 @@ final class ShippingContext implements Context
     private $shippingMethodFactory;
 
     /**
+     * @var ObjectManager
+     */
+    private $shippingMethodManager;
+
+    /**
      * @var SharedStorageInterface
      */
     private $sharedStorage;
@@ -41,15 +49,18 @@ final class ShippingContext implements Context
     /**
      * @param RepositoryInterface $shippingMethodRepository
      * @param FactoryInterface $shippingMethodFactory
+     * @param ObjectManager $shippingMethodManager
      * @param SharedStorageInterface $sharedStorage
      */
     public function __construct(
         RepositoryInterface $shippingMethodRepository,
         FactoryInterface $shippingMethodFactory,
+        ObjectManager $shippingMethodManager,
         SharedStorageInterface $sharedStorage
     ) {
         $this->shippingMethodRepository = $shippingMethodRepository;
         $this->shippingMethodFactory = $shippingMethodFactory;
+        $this->shippingMethodManager = $shippingMethodManager;
         $this->sharedStorage = $sharedStorage;
     }
 
@@ -69,18 +80,30 @@ final class ShippingContext implements Context
 
     /**
      * @Given store ships everything for free
+     * @Given store ships everything for free within :zone zone
      */
-    public function storeShipsEverythingForFree()
+    public function storeShipsEverythingForFree(ZoneInterface $zone = null)
     {
-        $this->createShippingMethod('Free');
+        $this->createShippingMethod('Free', $zone);
     }
 
     /**
      * @Given /^store has "([^"]*)" shipping method with "(?:€|£|\$)([^"]*)" fee$/
+     * @Given /^store has "([^"]*)" shipping method with "(?:€|£|\$)([^"]*)" fee within ("([^"]*)" zone)$/
+     * @Given /^store has "([^"]*)" shipping method with "(?:€|£|\$)([^"]*)" fee for (the rest of the world)$/
      */
-    public function storeHasShippingMethodWithFee($shippingMethodName, $fee)
+    public function storeHasShippingMethodWithFee($shippingMethodName, $fee, ZoneInterface $zone = null)
     {
-        $this->createShippingMethod($shippingMethodName, 'en', ['amount' => $this->getFeeFromString($fee)]);
+        $this->createShippingMethod($shippingMethodName, $zone, 'en', ['amount' => $this->getFeeFromString($fee)]);
+    }
+
+    /**
+     * @Given /^(shipping method "[^"]+") belongs to ("[^"]+" tax category)$/
+     */
+    public function shippingMethodBelongsToTaxCategory(ShippingMethodInterface $shippingMethod, TaxCategoryInterface $taxCategory)
+    {
+        $shippingMethod->setTaxCategory($taxCategory);
+        $this->shippingMethodManager->flush();
     }
 
     /**
@@ -92,10 +115,10 @@ final class ShippingContext implements Context
      */
     private function createShippingMethod(
         $name,
+        $zone = null,
         $locale = 'en',
         $configuration = ['amount' => 0],
-        $calculator = DefaultCalculators::FLAT_RATE,
-        $zone = null
+        $calculator = DefaultCalculators::FLAT_RATE
     ) {
         if (null === $zone) {
             $zone = $this->sharedStorage->getCurrentResource('zone');
@@ -119,7 +142,7 @@ final class ShippingContext implements Context
      */
     private function getCodeFromName($shippingMethodName)
     {
-        return str_replace(' ', '_', strtolower($shippingMethodName));
+        return str_replace([' ', '-'], '_', strtolower($shippingMethodName));
     }
 
     /**

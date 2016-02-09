@@ -11,11 +11,15 @@
 
 namespace spec\Sylius\Behat\Context\Setup;
 
+use Behat\Behat\Context\Context;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Test\Services\DefaultStoreDataInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -23,10 +27,17 @@ use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 class ChannelContextSpec extends ObjectBehavior
 {
     function let(
+        SharedStorageInterface $sharedStorage,
         DefaultStoreDataInterface $defaultFranceChannelFactory,
-        SharedStorageInterface $sharedStorage
+        FactoryInterface $countryFactory,
+        RepositoryInterface $countryRepository
     ) {
-        $this->beConstructedWith($defaultFranceChannelFactory, $sharedStorage);
+        $this->beConstructedWith(
+            $sharedStorage,
+            $defaultFranceChannelFactory,
+            $countryFactory,
+            $countryRepository
+        );
     }
 
     function it_is_initializable()
@@ -34,12 +45,12 @@ class ChannelContextSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Behat\Context\Setup\ChannelContext');
     }
 
-    function it_is_context()
+    function it_implements_context_interface()
     {
-        $this->shouldImplement('Behat\Behat\Context\Context');
+        $this->shouldImplement(Context::class);
     }
 
-    function it_sets_default_france_channel_in_to_shared_storage(
+    function it_sets_default_channel_in_the_shared_storage(
         $defaultFranceChannelFactory,
         $sharedStorage,
         ChannelInterface $channel,
@@ -49,6 +60,26 @@ class ChannelContextSpec extends ObjectBehavior
         $defaultFranceChannelFactory->create()->willReturn($defaultData);
         $sharedStorage->setClipboard($defaultData)->shouldBeCalled();
 
-        $this->thatStoreIsOperatingOnASingleFranceChannel();
+        $this->thatStoreIsOperatingOnASingleChannel();
+    }
+
+    function it_configures_shipping_destination_countries(
+        $countryFactory,
+        $countryRepository,
+        CountryInterface $australia,
+        CountryInterface $china,
+        CountryInterface $france
+    ) {
+        $countryFactory->createNew()->willReturn($australia, $china, $france);
+
+        $australia->setCode('AU')->shouldBeCalled();
+        $china->setCode('CN')->shouldBeCalled();
+        $france->setCode('FR')->shouldBeCalled();
+
+        $countryRepository->add($australia)->shouldBeCalled();
+        $countryRepository->add($china)->shouldBeCalled();
+        $countryRepository->add($france)->shouldBeCalled();
+
+        $this->storeShipsTo('Australia', 'China', 'France');
     }
 }

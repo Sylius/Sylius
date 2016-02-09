@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Core\Test\Services;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
@@ -27,21 +26,17 @@ class DefaultFranceChannelFactorySpec extends ObjectBehavior
 {
     function let(
         RepositoryInterface $channelRepository,
-        RepositoryInterface $countryRepository,
         RepositoryInterface $zoneMemberRepository,
         RepositoryInterface $zoneRepository,
         ChannelFactoryInterface $channelFactory,
-        FactoryInterface $countryFactory,
         FactoryInterface $zoneMemberFactory,
         FactoryInterface $zoneFactory
     ) {
         $this->beConstructedWith(
             $channelRepository,
-            $countryRepository,
             $zoneMemberRepository,
             $zoneRepository,
             $channelFactory,
-            $countryFactory,
             $zoneMemberFactory,
             $zoneFactory
         );
@@ -59,26 +54,23 @@ class DefaultFranceChannelFactorySpec extends ObjectBehavior
 
     function it_creates_france_country_and_zone(
         $channelRepository,
-        $countryRepository,
         $zoneMemberRepository,
         $zoneRepository,
         $channelFactory,
-        $countryFactory,
         $zoneMemberFactory,
         $zoneFactory,
-        CountryInterface $country,
         ZoneMemberInterface $zoneMember,
         ZoneInterface $zone,
         ChannelInterface $channel
     ) {
         $channel->getName()->willReturn('France');
         $channelFactory->createNamed('France')->willReturn($channel);
-        $countryFactory->createNew()->willReturn($country);
+
         $zoneMemberFactory->createNew()->willReturn($zoneMember);
         $zoneFactory->createNew()->willReturn($zone);
 
         $channel->setCode('WEB-FR')->shouldBeCalled();
-        $country->setCode('FR')->shouldBeCalled();
+
         $zoneMember->setCode('FR')->shouldBeCalled();
         $zone->setCode('FR')->shouldBeCalled();
         $zone->setName('France')->shouldBeCalled();
@@ -86,7 +78,6 @@ class DefaultFranceChannelFactorySpec extends ObjectBehavior
         $zone->addMember($zoneMember)->shouldBeCalled();
 
         $channelRepository->add($channel)->shouldBeCalled();
-        $countryRepository->add($country)->shouldBeCalled();
         $zoneRepository->add($zone)->shouldBeCalled();
         $zoneMemberRepository->add($zoneMember)->shouldBeCalled();
 

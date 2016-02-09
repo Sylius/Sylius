@@ -84,23 +84,7 @@ final class CheckoutContext implements Context
      */
     public function iProceedSelectingOfflinePaymentMethod($paymentMethodName)
     {
-        $this->checkoutAddressingStep->open();
-        $this->checkoutAddressingStep->fillAddressingDetails([
-            'firstName' => 'John',
-            'lastName' => 'Doe',
-            'country' => 'France',
-            'street' => '0635 Myron Hollow Apt. 711',
-            'city' => 'North Bridget',
-            'postcode' => '93-554',
-            'phoneNumber' => '321123456',
-        ]);
-        $this->checkoutAddressingStep->continueCheckout();
-
-        $this->checkoutShippingStep->selectShippingMethod('Free');
-        $this->checkoutShippingStep->continueCheckout();
-
-        $this->checkoutPaymentStep->selectPaymentMethod($paymentMethodName);
-        $this->checkoutPaymentStep->continueCheckout();
+        $this->proceedOrder(null, null, $paymentMethodName);
     }
 
     /**
@@ -109,20 +93,15 @@ final class CheckoutContext implements Context
      */
     public function iProceedSelectingShippingMethod($shippingMethodName)
     {
-        $this->checkoutAddressingStep->open();
-        $this->checkoutAddressingStep->fillAddressingDetails([
-            'firstName' => 'John',
-            'lastName' => 'Doe',
-            'country' => 'France',
-            'street' => '0635 Myron Hollow Apt. 711',
-            'city' => 'North Bridget',
-            'postcode' => '93-554',
-            'phoneNumber' => '321123456',
-        ]);
-        $this->checkoutAddressingStep->continueCheckout();
+        $this->proceedOrder(null, $shippingMethodName);
+    }
 
-        $this->checkoutShippingStep->selectShippingMethod($shippingMethodName);
-        $this->checkoutShippingStep->continueCheckout();
+    /**
+     * @When /^I proceed selecting "([^"]*)" as shipping country with "([^"]*)" method$/
+     */
+    public function iProceedSelectingShippingCountryAndShippingMethod($shippingCountry, $shippingMethodName)
+    {
+        $this->proceedOrder($shippingCountry, $shippingMethodName);
     }
 
     /**
@@ -153,5 +132,31 @@ final class CheckoutContext implements Context
         $customer = $user->getCustomer();
 
         expect($this->checkoutThankYouPage->hasThankYouMessageFor($customer->getFullName()))->toBe(true);
+    }
+
+    /**
+     * @param string|null $shippingCountry
+     * @param string|null $shippingMethodName
+     * @param string|null $paymentMethodName
+     */
+    private function proceedOrder($shippingCountry = null, $shippingMethodName = null, $paymentMethodName = null)
+    {
+        $this->checkoutAddressingStep->open();
+        $this->checkoutAddressingStep->fillAddressingDetails([
+            'firstName' => 'John',
+            'lastName' => 'Doe',
+            'country' => $shippingCountry ?: 'France',
+            'street' => '0635 Myron Hollow Apt. 711',
+            'city' => 'North Bridget',
+            'postcode' => '93-554',
+            'phoneNumber' => '321123456',
+        ]);
+        $this->checkoutAddressingStep->continueCheckout();
+
+        $this->checkoutShippingStep->selectShippingMethod($shippingMethodName ?: 'Free');
+        $this->checkoutShippingStep->continueCheckout();
+
+        $this->checkoutPaymentStep->selectPaymentMethod($paymentMethodName ?: 'Offline');
+        $this->checkoutPaymentStep->continueCheckout();
     }
 }

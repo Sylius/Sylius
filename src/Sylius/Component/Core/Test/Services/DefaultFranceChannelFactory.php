@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Core\Test\Services;
 
-use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
@@ -24,15 +23,14 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class DefaultFranceChannelFactory implements DefaultStoreDataInterface
 {
-    /**
-     * @var RepositoryInterface
-     */
-    private $channelRepository;
+    const DEFAULT_CHANNEL_CODE = 'WEB-FR';
+    const DEFAULT_ZONE_CODE = 'FR';
+    const DEFAULT_ZONE_NAME = 'France';
 
     /**
      * @var RepositoryInterface
      */
-    private $countryRepository;
+    private $channelRepository;
 
     /**
      * @var RepositoryInterface
@@ -52,11 +50,6 @@ class DefaultFranceChannelFactory implements DefaultStoreDataInterface
     /**
      * @var FactoryInterface
      */
-    private $countryFactory;
-
-    /**
-     * @var FactoryInterface
-     */
     private $zoneMemberFactory;
 
     /**
@@ -66,43 +59,38 @@ class DefaultFranceChannelFactory implements DefaultStoreDataInterface
 
     /**
      * @param RepositoryInterface $channelRepository
-     * @param RepositoryInterface $countryRepository
      * @param RepositoryInterface $zoneMemberRepository
      * @param RepositoryInterface $zoneRepository
      * @param FactoryInterface $channelFactory
-     * @param FactoryInterface $countryFactory
      * @param FactoryInterface $zoneMemberFactory
      * @param FactoryInterface $zoneFactory
      */
     public function __construct(
         RepositoryInterface $channelRepository,
-        RepositoryInterface $countryRepository,
         RepositoryInterface $zoneMemberRepository,
         RepositoryInterface $zoneRepository,
         FactoryInterface $channelFactory,
-        FactoryInterface $countryFactory,
         FactoryInterface $zoneMemberFactory,
         FactoryInterface $zoneFactory
     ) {
         $this->channelRepository = $channelRepository;
-        $this->countryRepository = $countryRepository;
         $this->zoneMemberRepository = $zoneMemberRepository;
         $this->zoneRepository = $zoneRepository;
         $this->channelFactory = $channelFactory;
-        $this->countryFactory = $countryFactory;
         $this->zoneMemberFactory = $zoneMemberFactory;
         $this->zoneFactory = $zoneFactory;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function create()
     {
         $defaultData['channel'] = $this->createChannel();
-        $defaultData['country'] = $this->createCountry();
         $defaultData['zone_member'] = $this->createZoneMember();
         $defaultData['zone'] = $this->createZone($defaultData['zone_member']);
 
         $this->channelRepository->add($defaultData['channel']);
-        $this->countryRepository->add($defaultData['country']);
         $this->zoneRepository->add($defaultData['zone']);
         $this->zoneMemberRepository->add($defaultData['zone_member']);
 
@@ -115,20 +103,9 @@ class DefaultFranceChannelFactory implements DefaultStoreDataInterface
     private function createChannel()
     {
         $channel = $this->channelFactory->createNamed('France');
-        $channel->setCode('WEB-FR');
+        $channel->setCode(self::DEFAULT_CHANNEL_CODE);
 
         return $channel;
-    }
-
-    /**
-     * @return CountryInterface
-     */
-    private function createCountry()
-    {
-        $country = $this->countryFactory->createNew();
-        $country->setCode('FR');
-
-        return $country;
     }
 
     /**
@@ -137,7 +114,7 @@ class DefaultFranceChannelFactory implements DefaultStoreDataInterface
     private function createZoneMember()
     {
         $zoneMember = $this->zoneMemberFactory->createNew();
-        $zoneMember->setCode('FR');
+        $zoneMember->setCode(self::DEFAULT_ZONE_CODE);
 
         return $zoneMember;
     }
@@ -150,8 +127,8 @@ class DefaultFranceChannelFactory implements DefaultStoreDataInterface
     private function createZone(ZoneMemberInterface $zoneMember)
     {
         $zone = $this->zoneFactory->createNew();
-        $zone->setCode('FR');
-        $zone->setName('France');
+        $zone->setCode(self::DEFAULT_ZONE_CODE);
+        $zone->setName(self::DEFAULT_ZONE_NAME);
         $zone->setType(ZoneInterface::TYPE_COUNTRY);
         $zone->addMember($zoneMember);
 

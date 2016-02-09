@@ -5,7 +5,7 @@ Feature: Apply correct tax for items with the same tax rate
     I want to have correct taxes applied to my order
 
     Background:
-        Given the store is operating on a single "France" channel
+        Given the store is operating on a single channel
         And there is "EU" zone containing all members of European Union
         And default currency is "EUR"
         And default tax zone is "EU"

@@ -16,5 +16,8 @@ namespace Sylius\Component\Core\Test\Services;
  */
 interface DefaultStoreDataInterface
 {
+    /**
+     * @return array
+     */
     public function create();
 }
