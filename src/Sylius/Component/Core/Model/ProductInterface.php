@@ -93,6 +93,22 @@ interface ProductInterface extends
     public function setShippingCategory(ShippingCategoryInterface $category = null);
 
     /**
+     * Get master variant price.
+     *
+     * @return int
+     */
+    public function getPrice();
+
+    /**
+     * Set master variant price.
+     *
+     * @param int $price
+     */
+    public function setPrice($price);
+
+    /**
+     * Get address zone restriction.
+     *
      * @return ZoneInterface
      */
     public function getRestrictedZone();
