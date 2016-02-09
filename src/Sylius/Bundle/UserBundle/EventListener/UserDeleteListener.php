@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\UserBundle\EventListener;
 
-use Sylius\Component\Resource\Event\ResourceEvent;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\User\Model\UserInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -47,9 +47,9 @@ class UserDeleteListener
     }
 
     /**
-     * @param ResourceEvent $event
+     * @param GenericEvent $event
      */
-    public function deleteUser(ResourceEvent $event)
+    public function deleteUser(GenericEvent $event)
     {
         $user = $event->getSubject();
 
