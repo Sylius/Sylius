@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Behat\Gherkin\Node\TableNode;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -97,31 +98,32 @@ final class ProductContext implements Context
     {
         $product = $this->productRepository->findOneBy(['name' => $productName]);
         if (null === $product) {
-            throw new \InvalidArgumentException('Product with name "'.$productName.'" does not exist');
+            throw new \InvalidArgumentException(sprintf('Product with name "%s" does not exist', $productName));
         }
 
         return $product;
     }
 
     /**
-     * @Transform :variantName product variant
-     * @Transform product variant :variantName
-     * @Transform :variantName
+     * @Transform /^"([^"]+)" variant of product "([^"]+)"$/
      */
-    public function getProductVariantByName($variantName)
+    public function getProductVariantByNameAndProduct($variantName, $productName)
     {
-        $productVariant = $this->productVariantRepository->findOneBy(array('presentation' => $variantName));
+        $product = $this->getProductByName($productName);
+
+        $productVariant = $this->productVariantRepository->findOneBy(['presentation' => $variantName, 'object' => $product]);
         if (null === $productVariant) {
-            throw new \InvalidArgumentException('Product variant with name "'.$variantName.'" does not exist');
+            throw new \InvalidArgumentException(sprintf('Product variant with name "%s" of product "%s" does not exist', $variantName, $productName));
         }
 
         return $productVariant;
     }
 
     /**
+     * @Given /^store has a product "([^"]+)"$/
      * @Given /^store has a product "([^"]+)" priced at "(?:€|£|\$)([^"]+)"$/
      */
-    public function storeHasAProductPricedAt($productName, $price)
+    public function storeHasAProductPricedAt($productName, $price = '0.00')
     {
         $product = $this->productFactory->createNew();
         $product->setName($productName);
@@ -132,6 +134,10 @@ final class ProductContext implements Context
         $product->addChannel($channel);
 
         $this->productRepository->add($product);
+
+        if ('0.00' === $price) {
+            $this->sharedStorage->setCurrentResource('product', $product);
+        }
     }
 
     /**
@@ -144,38 +150,26 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^store has a product "([^"]+)" with "([^"]+)" variant priced at "(?:€|£|\$)([^"]+)" and "([^"]+)" variant priced at "(?:€|£|\$)([^"]+)"$/
+     * @Given /^it comes in the following variations:$/
      */
-    public function storeHasAProductWithAndVariants($productName, $firstVariantName, $firstVariantPrice, $secondVariantName, $secondVariantPrice)
+    public function itComesInTheFollowingVariations(TableNode $table)
     {
-        $product = $this->productFactory->createNew();
-        $product->setName($productName);
-        $product->setDescription('Awesome '.$productName);
+        $currentProduct = $this->sharedStorage->getCurrentResource('product');
 
-        $channel = $this->sharedStorage->getCurrentResource('channel');
-        $product->addChannel($channel);
+        foreach ($table->getHash() as $variantHash) {
+            $variant = $this->productVariantFactory->createNew();
+            $variant->setPresentation($variantHash['name']);
+            $variant->setPrice($this->getPriceFromString(str_replace(['$', '€', '£'], '', $variantHash['price'])));
+            $variant->setProduct($currentProduct);
 
-        /** @var ProductVariantInterface $firstVariant */
-        $firstVariant = $this->productVariantFactory->createNew();
-        $firstVariant->setPresentation($firstVariantName);
-        $firstVariant->setPrice((int) $firstVariantPrice * 100);
-        $firstVariant->setProduct($product);
+            $this->productRepository->add($variant);
+        }
 
-        $product->setPrice($firstVariant->getPrice());
-
-        /** @var ProductVariantInterface $firstVariant */
-        $secondVariant = $this->productVariantFactory->createNew();
-        $secondVariant->setPresentation($secondVariantName);
-        $secondVariant->setPrice((int) $secondVariantPrice * 100);
-        $secondVariant->setProduct($product);
-
-        $this->productRepository->add($product);
-        $this->productVariantRepository->add($firstVariant);
-        $this->productVariantRepository->add($secondVariant);
+        $this->objectManager->flush();
     }
 
     /**
-     * @Given /^(product variant "[^"]+") belongs to ("[^"]+" tax category)$/
+     * @Given /^("[^"]+" variant of product "[^"]+") belongs to ("[^"]+" tax category)$/
      */
     public function productVariantBelongsToTaxCategory(ProductVariantInterface $productVariant, TaxCategoryInterface $taxCategory)
     {
