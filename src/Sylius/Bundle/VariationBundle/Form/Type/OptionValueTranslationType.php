@@ -26,8 +26,8 @@ class OptionValueTranslationType extends AbstractResourceType
 
     /**
      * @param string $dataClass
-     * @param array  $validationGroups
-     * @param        $variableName
+     * @param array $validationGroups
+     * @param $variableName
      */
     public function __construct($dataClass, array $validationGroups, $variableName)
     {

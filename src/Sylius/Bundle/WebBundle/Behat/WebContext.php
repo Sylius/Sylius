@@ -516,7 +516,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     {
         foreach ($table->getRows() as $value) {
             $newItem = $this->addNewItemToFormCollection($this->getSession()->getPage(), 'option_values');
-            $newItem->fillField('Value', $value[1]);
+            $newItem->fillField('Presentation', $value[1]);
             $newItem->fillField('Code', $value[0]);
         }
     }
@@ -527,7 +527,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     public function iAddOptionValue($optionValue)
     {
         $newItem = $this->addNewItemToFormCollection($this->getSession()->getPage(), 'option_values');
-        $newItem->fillField('Value', $optionValue);
+        $newItem->fillField('Presentation', $optionValue);
     }
 
     /**

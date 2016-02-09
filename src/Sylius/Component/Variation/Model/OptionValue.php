@@ -10,6 +10,7 @@
  */
 
 namespace Sylius\Component\Variation\Model;
+
 use Sylius\Component\Translation\Model\AbstractTranslatable;
 
 /**
