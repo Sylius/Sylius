@@ -9,11 +9,11 @@ Feature: User account homepage
 
     Scenario: Displaying the my account section only to logged users
         Given I am on the store homepage
-         Then I should not see "My account"
+        Then I should not see "My account"
 
     Scenario: Viewing the homepage of my account
         Given I am logged in user
-          And I am on the store homepage
-         When I follow "My account"
-         Then I should be on my account homepage
-          And I should see "Welcome to your space"
+        And I am on the store homepage
+        When I follow "My account"
+        Then I should be on my account homepage
+        And I should see "Welcome to your space"

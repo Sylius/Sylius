@@ -6,7 +6,7 @@ Feature: Permissions management
 
     Background:
         Given store has default configuration
-          And there is following permission hierarchy:
+        And there is following permission hierarchy:
             | code                     | parent         | description             |
             | sylius.catalog           |                | Manage products catalog |
             | sylius.product.show      | sylius.catalog | View single product     |
@@ -19,16 +19,16 @@ Feature: Permissions management
             | sylius.permission.create |                | Add new permissions     |
             | sylius.permission.update |                | Edit permissions        |
             | sylius.permission.delete |                | Delete permissions      |
-          And there is following role hierarchy:
+        And there is following role hierarchy:
             | code                 | parent | name          | security roles             |
             | sylius.administrator |        | Administrator | ROLE_ADMINISTRATION_ACCESS |
-          And role "Administrator" has the following permissions:
+        And role "Administrator" has the following permissions:
             | sylius.permission.show   |
             | sylius.permission.index  |
             | sylius.permission.create |
             | sylius.permission.update |
             | sylius.permission.delete |
-          And I am logged in as administrator
+        And I am logged in as administrator
 
     Scenario: Seeing index of all permissions
         Given I am on the dashboard page

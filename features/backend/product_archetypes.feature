@@ -6,30 +6,30 @@ Feature: Product archetypes
 
     Background:
         Given store has default configuration
-          And there are following options:
-            | code | name           | presentation  | values                                            |
-            | O1   |T-Shirt color   | Color         | Red[OV1], Blue[OV2], Green[OV3]                   |
-            | O2   |T-Shirt size    | Size          | S[OV4], M[OV5], L[OV6]                            |
-            | O3   | Bag color      | Color         | Black[OV7], Light balsamic[OV8]                   |
-            | O4   |  Beverage size | Size          | Tall[OV9], Grande[OV10], Venti[OV11]              |
-            | O5   | Beverage milk  | Milk          | None[OV12], Whole[OV13], Skinny[OV14], Soya[OV15] |
-            | O6   | Coffee variety | Variety       | Colombian[OV16], Ethiopian[OV17]                  |
-          And there are following attributes:
-            | name                  | presentation   | type     |
-            | T-Shirt collection    | Collection     | text     |
-            | T-Shirt fabric        | T-Shirt fabric | text     |
-            | Bag material          | Material       | text     |
-            | Beverage calories     | Calories       | integer  |
-            | Coffee caffeine       | Caffeine       | checkbox |
-          And there is archetype "T-Shirt" with following configuration:
+        And there are following options:
+            | code | name           | presentation | values                                            |
+            | O1   | T-Shirt color  | Color        | Red[OV1], Blue[OV2], Green[OV3]                   |
+            | O2   | T-Shirt size   | Size         | S[OV4], M[OV5], L[OV6]                            |
+            | O3   | Bag color      | Color        | Black[OV7], Light balsamic[OV8]                   |
+            | O4   | Beverage size  | Size         | Tall[OV9], Grande[OV10], Venti[OV11]              |
+            | O5   | Beverage milk  | Milk         | None[OV12], Whole[OV13], Skinny[OV14], Soya[OV15] |
+            | O6   | Coffee variety | Variety      | Colombian[OV16], Ethiopian[OV17]                  |
+        And there are following attributes:
+            | name               | presentation   | type     |
+            | T-Shirt collection | Collection     | text     |
+            | T-Shirt fabric     | T-Shirt fabric | text     |
+            | Bag material       | Material       | text     |
+            | Beverage calories  | Calories       | integer  |
+            | Coffee caffeine    | Caffeine       | checkbox |
+        And there is archetype "T-Shirt" with following configuration:
             | code       | Arch1                              |
             | options    | T-Shirt color, T-Shirt size        |
             | attributes | T-Shirt collection, T-Shirt fabric |
-          And there is archetype "Beverage" with following configuration:
-            | code       | Arch2                              |
-            | options    | Beverage size, Beverage milk       |
-            | attributes | Beverage calories                  |
-          And I am logged in as administrator
+        And there is archetype "Beverage" with following configuration:
+            | code       | Arch2                        |
+            | options    | Beverage size, Beverage milk |
+            | attributes | Beverage calories            |
+        And I am logged in as administrator
 
     Scenario: Seeing index of all archetypes
         Given I am on the dashboard page
@@ -55,7 +55,7 @@ Feature: Product archetypes
         And I should see "Please enter archetype name"
 
     Scenario: Creating Bag archetype with color as option
-              and material as attribute
+            and material as attribute
         Given I am on the product archetype creation page
         When I fill in "Code" with "bag"
         And I fill in "Name" with "Bag"
@@ -66,7 +66,7 @@ Feature: Product archetypes
         And I should see "Archetype has been successfully created"
 
     Scenario: Creating simple T-Shirt archetype with color and size
-              as options but without attributes
+            as options but without attributes
         Given I am on the product archetype creation page
         When I fill in "Code" with "simple_t_shirt"
         And I fill in "Name" with "Simple T-Shirt"
@@ -81,13 +81,13 @@ Feature: Product archetypes
         Given I am on the product archetype index page
         And I click "Create product" near "T-Shirt"
         When I fill in the following:
-            | Name               | Manchester United tee   |
-            | Description        | Interesting description |
-            | Price              | 59.99                   |
+            | Name        | Manchester United tee   |
+            | Description | Interesting description |
+            | Price       | 59.99                   |
         And I go to "Attributes" tab
         And I fill in the following:
-            | T-Shirt fabric     | Cotton 100%             |
-            | T-Shirt collection | Champions League '11    |
+            | T-Shirt fabric     | Cotton 100%          |
+            | T-Shirt collection | Champions League '11 |
         And I press "Create"
         Then I should be on the page of product "Manchester United tee"
         And I should see "Product has been successfully created"
@@ -126,8 +126,8 @@ Feature: Product archetypes
         And I should not see archetype with name "T-Shirt" in the list
 
     Scenario: Cannot update archetype code
-         When I am editing product archetype "T-Shirt"
-         Then the code field should be disabled
+        When I am editing product archetype "T-Shirt"
+        Then the code field should be disabled
 
     Scenario: Try add archetype with existing code
         Given I am on the product archetype creation page

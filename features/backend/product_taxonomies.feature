@@ -6,23 +6,23 @@ Feature: Browsing products by taxonomies
 
     Background:
         Given store has default configuration
-          And there are following taxonomies defined:
+        And there are following taxonomies defined:
             | code | name     |
             | TRX1 | Category |
             | TRX2 | Special  |
-          And taxonomy "Category" has following taxons:
+        And taxonomy "Category" has following taxons:
             | Clothing[TX1] > T-Shirts[TX2] |
             | Clothing[TX1] > Shorts[TX3]   |
-          And taxonomy "Special" has following taxons:
+        And taxonomy "Special" has following taxons:
             | Featured[TX4] |
             | New[TX5]      |
-          And the following products exist:
+        And the following products exist:
             | name          | price | taxons   |
             | Super T-Shirt | 19.99 | T-Shirts |
             | Black T-Shirt | 19.99 | T-Shirts |
             | Shorts        | 35.99 | Shorts   |
             | Bambi Shorts  | 35.00 | Shorts   |
-          And I am logged in as administrator
+        And I am logged in as administrator
 
     Scenario: Seeing index of all products for given taxonomy
         Given I am on the taxonomy index page

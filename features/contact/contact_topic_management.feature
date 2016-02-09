@@ -6,12 +6,12 @@ Feature: Contact topics management
 
     Background:
         Given store has default configuration
-          And there are following contact topics:
+        And there are following contact topics:
             | title               |
             | Order return        |
             | Delivery            |
             | Product information |
-          And I am logged in as administrator
+        And I am logged in as administrator
 
     Scenario: Browsing all contact topics
         Given I am on the dashboard page

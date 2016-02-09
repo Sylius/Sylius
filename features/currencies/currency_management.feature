@@ -6,13 +6,13 @@ Feature: Currency management
 
     Background:
         Given store has default configuration
-          And there are following currencies configured:
+        And there are following currencies configured:
             | code | exchange rate | enabled |
             | USD  | 0.76496       | yes     |
             | GBP  | 1.16998       | no      |
             | EUR  | 1.00000       | yes     |
             | AUD  | 0.73986       | yes     |
-          And I am logged in as administrator
+        And I am logged in as administrator
 
     Scenario: Browsing all configured currencies
         Given I am on the dashboard page

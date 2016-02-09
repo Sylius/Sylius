@@ -6,7 +6,7 @@ Feature: Roles management
 
     Background:
         Given store has default configuration
-          And there is following permission hierarchy:
+        And there is following permission hierarchy:
             | code                  | parent         | description             |
             | sylius.catalog        |                | Manage products catalog |
             | sylius.product.show   | sylius.catalog | View single product     |
@@ -19,19 +19,19 @@ Feature: Roles management
             | sylius.role.create    |                | Add new roles           |
             | sylius.role.update    |                | Edit roles              |
             | sylius.role.delete    |                | Delete roles            |
-          And there is following role hierarchy:
+        And there is following role hierarchy:
             | code                   | parent               | name            | security roles             |
             | sylius.administrator   |                      | Administrator   | ROLE_ADMINISTRATION_ACCESS |
             | sylius.catalog_manager | sylius.administrator | Catalog Manager | ROLE_ADMINISTRATION_ACCESS |
-          And role "Administrator" has the following permissions:
+        And role "Administrator" has the following permissions:
             | sylius.role.show   |
             | sylius.role.index  |
             | sylius.role.create |
             | sylius.role.update |
             | sylius.role.delete |
-          And role "Catalog Manager" has the following permissions:
+        And role "Catalog Manager" has the following permissions:
             | sylius.catalog |
-          And I am logged in as administrator
+        And I am logged in as administrator
 
     Scenario: Seeing index of all roles
         Given I am on the dashboard page

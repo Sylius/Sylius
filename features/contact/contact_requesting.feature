@@ -6,12 +6,12 @@ Feature: Contact requesting
 
     Background:
         Given store has default configuration
-          And there are following contact topics:
+        And there are following contact topics:
             | title               |
             | Order return        |
             | Delivery            |
             | Product information |
-          And I am logged in as administrator
+        And I am logged in as administrator
 
     Scenario: Submitting the form without the required fields fails
         Given I am on the contact page

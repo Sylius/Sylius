@@ -6,35 +6,35 @@ Feature: Products
 
     Background:
         Given there is default currency configured
-          And there are following taxonomies defined:
+        And there are following taxonomies defined:
             | code | name     |
             | RTX1 | Category |
-          And taxonomy "Category" has following taxons:
+        And taxonomy "Category" has following taxons:
             | Clothing[TX1] > T-Shirts[TX2]     |
             | Clothing[TX1] > PHP T-Shirts[TX3] |
             | Clothing[TX1] > Gloves[TX4]       |
-          And there are following channels configured:
-            | code   | name       | currencies | locales             | url          |
-            | WEB-US | mystore.us | EUR, GBP   | en_US               |              |
-            | WEB-EU | mystore.eu | USD        | en_GB, fr_FR, de_DE | localhost    |
-          And there are following attributes:
-            | name               | type     |
-            | T-Shirt fabric     | text     |
-          And the following products exist:
+        And there are following channels configured:
+            | code   | name       | currencies | locales             | url       |
+            | WEB-US | mystore.us | EUR, GBP   | en_US               |           |
+            | WEB-EU | mystore.eu | USD        | en_GB, fr_FR, de_DE | localhost |
+        And there are following attributes:
+            | name           | type |
+            | T-Shirt fabric | text |
+        And the following products exist:
             | name             | price | taxons       | pricing calculator | calculator configuration | attributes          |
             | Super T-Shirt    | 19.99 | T-Shirts     | channel_based      | WEB-EU:15.99             | T-Shirt fabric:Wool |
             | Black T-Shirt    | 18.99 | T-Shirts     |                    |                          |                     |
             | Sylius Tee       | 12.99 | PHP T-Shirts |                    |                          |                     |
             | Symfony T-Shirt  | 15.00 | PHP T-Shirts |                    |                          |                     |
             | Doctrine T-Shirt | 15.00 | PHP T-Shirts |                    |                          |                     |
-          And channel "WEB-EU" has following configuration:
+        And channel "WEB-EU" has following configuration:
             | taxonomy |
             | Category |
-          And channel "WEB-EU" has following products assigned:
+        And channel "WEB-EU" has following products assigned:
             | product         |
             | Super T-Shirt   |
             | Symfony T-Shirt |
-          And channel "WEB-US" has following products assigned:
+        And channel "WEB-US" has following products assigned:
             | product          |
             | Sylius Tee       |
             | Black T-Shirt    |

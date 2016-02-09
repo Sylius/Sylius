@@ -66,18 +66,18 @@ Feature: Product attributes
         And I should see 3 attributes in the list
         And I should see attribute with name "Released at" in that list
 
-     Scenario: Creating new attribute with validation options
-         Given I am on the product attribute creation page with type "text"
-         When I fill in the following:
+    Scenario: Creating new attribute with validation options
+        Given I am on the product attribute creation page with type "text"
+        When I fill in the following:
             | Name       | Music genre |
             | Code       | music_genre |
             | Min length | 2           |
             | Max length | 255         |
-         And I press "Create"
-         Then I should be on the product attribute index page
-         And I should see "Attribute has been successfully created"
-         And I should see 3 attributes in the list
-         And I should see attribute with name "Music genre" in that list
+        And I press "Create"
+        Then I should be on the product attribute index page
+        And I should see "Attribute has been successfully created"
+        And I should see 3 attributes in the list
+        And I should see attribute with name "Music genre" in that list
 
     Scenario: Accessing the editing form from the list
         Given I am on the product attribute index page

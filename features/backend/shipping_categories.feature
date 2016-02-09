@@ -6,28 +6,28 @@ Feature: Shipping categories
 
     Background:
         Given store has default configuration
-          And there are following shipping categories:
+        And there are following shipping categories:
             | code | name    |
             | SC1  | Regular |
             | SC2  | Heavy   |
-          And I am logged in as administrator
+        And I am logged in as administrator
 
     Scenario: Seeing index of all shipping categories
         Given I am on the dashboard page
-         When I follow "Shipping categories"
-         Then I should be on the shipping category index page
-          And I should see 2 shipping categories in the list
+        When I follow "Shipping categories"
+        Then I should be on the shipping category index page
+        And I should see 2 shipping categories in the list
 
     Scenario: Seeing empty index of shipping categories
         Given there are no shipping categories
-          And I am on the shipping category index page
-         Then I should see "There are no shipping categories configured"
+        And I am on the shipping category index page
+        Then I should see "There are no shipping categories configured"
 
     Scenario: Accessing the shipping category creation form
         Given I am on the dashboard page
-         When I follow "Shipping categories"
-          And I follow "Create shipping category"
-         Then I should be on the shipping category creation page
+        When I follow "Shipping categories"
+        And I follow "Create shipping category"
+        Then I should be on the shipping category creation page
 
     Scenario: Submitting invalid form without name
         Given I am on the shipping category creation page
@@ -46,25 +46,25 @@ Feature: Shipping categories
 
     Scenario: Created shipping categories appear in the list
         Given I created shipping category "Light" with code "SC3"
-          And I go to the shipping category index page
-         Then I should see 3 shipping categories in the list
-          And I should see shipping category with name "Light" in that list
+        And I go to the shipping category index page
+        Then I should see 3 shipping categories in the list
+        And I should see shipping category with name "Light" in that list
 
     Scenario: Accessing the editing form from the list
         Given I am on the shipping category index page
-         When I click "Edit" near "Heavy"
-         Then I should be editing shipping category "Heavy"
+        When I click "Edit" near "Heavy"
+        Then I should be editing shipping category "Heavy"
 
     Scenario: Updating the shipping category
         Given I am editing shipping category "Heavy"
-         When I fill in "Name" with "Light"
-          And I press "Save changes"
-         Then I should be on the shipping category index page
-          And I should see "Shipping category has been successfully updated"
+        When I fill in "Name" with "Light"
+        And I press "Save changes"
+        Then I should be on the shipping category index page
+        And I should see "Shipping category has been successfully updated"
 
     Scenario: Cannot update shipping category code
-         When I am editing shipping category "Heavy"
-         Then the code field should be disabled
+        When I am editing shipping category "Heavy"
+        Then the code field should be disabled
 
     Scenario: Try add shipping category with existing code
         Given I am on the shipping category creation page
@@ -84,8 +84,8 @@ Feature: Shipping categories
     @javascript
     Scenario: Deleting shipping category from list
         Given I am on the shipping category index page
-         When I click "Delete" near "Heavy"
-          And I click "Delete" from the confirmation modal
-         Then I should be on the shipping category index page
-          And I should see "Shipping category has been successfully deleted"
-          And I should not see shipping category with name "Heavy" in that list
+        When I click "Delete" near "Heavy"
+        And I click "Delete" from the confirmation modal
+        Then I should be on the shipping category index page
+        And I should see "Shipping category has been successfully deleted"
+        And I should not see shipping category with name "Heavy" in that list

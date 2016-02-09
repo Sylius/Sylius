@@ -6,11 +6,11 @@ Feature: Product options
 
     Background:
         Given store has default configuration
-          And there are following options:
-            | code | name         | presentation  | values                          |
-            | O1   |T-Shirt color | Color         | Red[OV1], Blue[OV2], Green[OV3] |
-            | O2   |T-Shirt size  | Size          | S[OV4], M[OV5], L[OV6]          |
-          And I am logged in as administrator
+        And there are following options:
+            | code | name          | presentation | values                          |
+            | O1   | T-Shirt color | Color        | Red[OV1], Blue[OV2], Green[OV3] |
+            | O2   | T-Shirt size  | Size         | S[OV4], M[OV5], L[OV6]          |
+        And I am logged in as administrator
 
     Scenario: Seeing index of all options
         Given I am on the dashboard page
@@ -110,8 +110,8 @@ Feature: Product options
         And I should not see option with name "T-Shirt color" in that list
 
     Scenario: Cannot edit product option code
-         When I am editing product option "T-Shirt color"
-         Then the code field should be disabled
+        When I am editing product option "T-Shirt color"
+        Then the code field should be disabled
 
     @javascript
     Scenario: Try add product option without code
@@ -119,8 +119,8 @@ Feature: Product options
         When I fill in "Internal name" with "Bag color"
         And I fill in "Presentation" with "Color"
         And I add following option values:
-            | OV7 | Black  |
-            | OV8 | White  |
+            | OV7 | Black |
+            | OV8 | White |
         And I press "Create"
         Then I should still be on the product option creation page
         And I should see "Please enter option code"
@@ -132,8 +132,8 @@ Feature: Product options
         And I fill in "Internal name" with "Bag color"
         And I fill in "Presentation" with "Color"
         And I add following option values:
-            | OV7 | Black  |
-            | OV8 | White  |
+            | OV7 | Black |
+            | OV8 | White |
         And I press "Create"
         Then I should still be on the product option creation page
         And I should see "The option with given code already exists"
@@ -157,8 +157,8 @@ Feature: Product options
         And I fill in "Internal name" with "Bag color"
         And I fill in "Presentation" with "Color"
         And I add following option values:
-            | OV1 | Black  |
-            | OV8 | White  |
+            | OV1 | Black |
+            | OV8 | White |
         And I press "Create"
         Then I should still be on the product option creation page
         And I should see "The option value with given code already exists"

@@ -6,26 +6,26 @@ Feature: Taxation settings
 
     Background:
         Given store has default configuration
-          And the following zones are defined:
+        And the following zones are defined:
             | name         | type    | members                       |
             | German lands | country | Germany, Austria, Switzerland |
             | USA          | country | United States                 |
-          And I am logged in as administrator
+        And I am logged in as administrator
 
     Scenario: Accessing the settings form
         Given I am on the dashboard page
-         When I follow "Taxation settings"
-         Then I should be on the taxation settings page
+        When I follow "Taxation settings"
+        Then I should be on the taxation settings page
 
     Scenario: Saving the configuration
         Given I am on the taxation settings page
-         When I press "Save changes"
-         Then I should still be on the taxation settings page
-          And I should see "Settings have been successfully updated"
+        When I press "Save changes"
+        Then I should still be on the taxation settings page
+        And I should see "Settings have been successfully updated"
 
     Scenario: Editing the default tax zone
         Given I am on the taxation settings page
-         When I select "USA" from "Default tax zone"
-          And I press "Save changes"
-         Then I should still be on the taxation settings page
-          And I should see "Settings have been successfully updated"
+        When I select "USA" from "Default tax zone"
+        And I press "Save changes"
+        Then I should still be on the taxation settings page
+        And I should see "Settings have been successfully updated"

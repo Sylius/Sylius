@@ -8,21 +8,21 @@ Feature: Currency selection
         Given there are following taxonomies defined:
             | code | name     |
             | RTX1 | Category |
-          And taxonomy "Category" has following taxons:
+        And taxonomy "Category" has following taxons:
             | Clothing[TX1] > PHP T-Shirts[TX2] |
-          And the following products exist:
-            | name          | price | taxons       |
-            | PHP Top       | 5.99  | PHP T-Shirts |
-          And there are following currencies configured:
+        And the following products exist:
+            | name    | price | taxons       |
+            | PHP Top | 5.99  | PHP T-Shirts |
+        And there are following currencies configured:
             | code | exchange rate | enabled |
             | EUR  | 1.00000       | yes     |
             | USD  | 0.76496       | yes     |
             | GBP  | 1.13986       | yes     |
             | PLN  | 1.01447       | no      |
-          And there are following channels configured:
-            | code        | name            | currencies    | locales  | url          |
-            | DEFAULT-WEB | Default Channel | EUR, GBP, USD | en_US    | localhost    |
-          And all products are assigned to the default channel
+        And there are following channels configured:
+            | code        | name            | currencies    | locales | url       |
+            | DEFAULT-WEB | Default Channel | EUR, GBP, USD | en_US   | localhost |
+        And all products are assigned to the default channel
 
     Scenario: Only enabled currencies are visible to the user
         Given I am on the store homepage
@@ -30,7 +30,7 @@ Feature: Currency selection
         And I should see product prices in "EUR"
 
     Scenario: Changing the currency converts the prices
-              on the storefront
+            on the storefront
         Given I am on the store homepage
         When I change the currency to "GBP"
         Then I should see product prices in "GBP"

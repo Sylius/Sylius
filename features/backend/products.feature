@@ -6,43 +6,43 @@ Feature: Products
 
     Background:
         Given store has default configuration
-          And there are following options:
-            | code | name         | presentation  | values                          |
-            | O1   |T-Shirt color | Color         | Red[OV1], Blue[OV2], Green[OV3] |
-            | O2   |T-Shirt size  | Size          | S[OV4], M[OV5], L[OV6]          |
-          And there are following attributes:
+        And there are following options:
+            | code | name          | presentation | values                          |
+            | O1   | T-Shirt color | Color        | Red[OV1], Blue[OV2], Green[OV3] |
+            | O2   | T-Shirt size  | Size         | S[OV4], M[OV5], L[OV6]          |
+        And there are following attributes:
             | name               | type     | configuration |
             | T-Shirt fabric     | text     | min:2,max:255 |
             | T-Shirt fare trade | checkbox |               |
             | Size               | integer  |               |
-          And the following products exist:
+        And the following products exist:
             | name          | price | options                     | attributes            |
             | Super T-Shirt | 19.99 | T-Shirt size, T-Shirt color | T-Shirt fabric:Wool   |
             | Black T-Shirt | 19.99 | T-Shirt size                | T-Shirt fabric:Cotton |
             | Mug           | 5.99  |                             |                       |
             | Sticker       | 10.00 |                             |                       |
-          And there are following association types:
+        And there are following association types:
             | code | name       |
             | PAs1 | Cross sell |
             | PAs2 | Up sell    |
-          And product "Super T-Shirt" is available in all variations
-          And there are following tax categories:
+        And product "Super T-Shirt" is available in all variations
+        And there are following tax categories:
             | code | name        |
             | TC1  | Clothing    |
             | TC2  | Electronics |
             | TC3  | Print       |
-          And there are following taxonomies defined:
+        And there are following taxonomies defined:
             | code | name     |
             | RTX1 | Category |
             | RTX2 | Special  |
-          And taxonomy "Category" has following taxons:
+        And taxonomy "Category" has following taxons:
             | Clothing[TX1] > T-Shirts[TX2]         |
             | Clothing[TX1] > Premium T-Shirts[TX3] |
-          And taxonomy "Special" has following taxons:
+        And taxonomy "Special" has following taxons:
             | Featured[TX4] |
             | New[TX5]      |
-          And product "Sticker" has main taxon "New"
-          And I am logged in as administrator
+        And product "Sticker" has main taxon "New"
+        And I am logged in as administrator
 
     Scenario: Seeing index of all products with simple prices
         Given I am on the dashboard page

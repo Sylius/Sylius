@@ -6,16 +6,16 @@ Feature: Contact requests management
 
     Background:
         Given store has default configuration
-          And there are following contact topics:
+        And there are following contact topics:
             | title               |
             | Order return        |
             | Delivery            |
             | Product information |
-          And there are following contact requests:
-            | topic               | firstName | lastName | email            | message                    |
-            | Order return        | John      | Doe      | john@doe.com     | I want to return order     |
-            | Delivery            | Joe       | Williams | joe@williams.com | What is my delivery status |
-          And I am logged in as administrator
+        And there are following contact requests:
+            | topic        | firstName | lastName | email            | message                    |
+            | Order return | John      | Doe      | john@doe.com     | I want to return order     |
+            | Delivery     | Joe       | Williams | joe@williams.com | What is my delivery status |
+        And I am logged in as administrator
 
     Scenario: Browsing all contact requests
         Given I am on the dashboard page

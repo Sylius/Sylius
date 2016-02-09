@@ -6,13 +6,13 @@ Feature: Products filter
 
     Background:
         Given store has default configuration
-          And the following products exist:
+        And the following products exist:
             | name          | price | sku |
             | Super T-Shirt | 19.99 | 123 |
             | Black T-Shirt | 19.99 | 321 |
             | Sticker       | 10.00 | 555 |
             | Orange        | 10.00 | 124 |
-          And I am logged in as administrator
+        And I am logged in as administrator
 
     Scenario: Filtering products by name
         Given I am on the product index page
