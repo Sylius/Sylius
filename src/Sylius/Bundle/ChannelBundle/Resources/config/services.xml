@@ -20,8 +20,6 @@
 
         <parameter key="sylius.context.channel.request_based.resolver.composite.class">Sylius\Component\Channel\Context\RequestBased\CompositeRequestResolver</parameter>
         <parameter key="sylius.context.channel.request_based.resolver.hostname_based.class">Sylius\Component\Channel\Context\RequestBased\HostnameBasedRequestResolver</parameter>
-
-
     </parameters>
 
     <services>

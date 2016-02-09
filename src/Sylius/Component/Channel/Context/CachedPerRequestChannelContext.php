@@ -35,11 +35,6 @@ final class CachedPerRequestChannelContext implements ChannelContextInterface
     private $requestToChannelMap;
 
     /**
-     * @var \stdClass
-     */
-    private $nullObject;
-
-    /**
      * @param ChannelContextInterface $decoratedChannelContext
      * @param RequestStack $requestStack
      */
@@ -49,7 +44,6 @@ final class CachedPerRequestChannelContext implements ChannelContextInterface
         $this->requestStack = $requestStack;
 
         $this->requestToChannelMap = new \SplObjectStorage();
-        $this->nullObject = new \stdClass();
     }
 
     /**
@@ -57,7 +51,11 @@ final class CachedPerRequestChannelContext implements ChannelContextInterface
      */
     public function getChannel()
     {
-        $objectIdentifier = $this->requestStack->getMasterRequest() ?: $this->nullObject;
+        $objectIdentifier = $this->requestStack->getMasterRequest();
+
+        if (null === $objectIdentifier) {
+            return $this->decoratedChannelContext->getChannel();
+        }
 
         if (!isset($this->requestToChannelMap[$objectIdentifier])) {
             $this->requestToChannelMap[$objectIdentifier] = $this->decoratedChannelContext->getChannel();

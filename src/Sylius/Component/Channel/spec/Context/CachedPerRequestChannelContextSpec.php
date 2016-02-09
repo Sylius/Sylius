@@ -87,16 +87,17 @@ class CachedPerRequestChannelContextSpec extends ObjectBehavior
         $this->getChannel()->shouldReturn($firstChannel);
     }
 
-    function it_caches_results_for_no_master_requests(
+    function it_does_not_cache_results_while_there_are_no_master_requests(
         ChannelContextInterface $decoratedChannelContext,
         RequestStack $requestStack,
-        ChannelInterface $channel
+        ChannelInterface $firstChannel,
+        ChannelInterface $secondChannel
     ) {
         $requestStack->getMasterRequest()->willReturn(null, null);
 
-        $decoratedChannelContext->getChannel()->willReturn($channel)->shouldBeCalledTimes(1);
+        $decoratedChannelContext->getChannel()->willReturn($firstChannel, $secondChannel)->shouldBeCalledTimes(2);
 
-        $this->getChannel()->shouldReturn($channel);
-        $this->getChannel()->shouldReturn($channel);
+        $this->getChannel()->shouldReturn($firstChannel);
+        $this->getChannel()->shouldReturn($secondChannel);
     }
 }
