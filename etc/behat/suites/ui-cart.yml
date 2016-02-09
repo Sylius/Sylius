@@ -68,6 +68,6 @@ default:
                     taxCategoryRepository: "@sylius.repository.tax_category"
                     zoneRepository: "@sylius.repository.zone"
 
-                - Sylius\Behat\Context\Ui\UserContext
+                - Sylius\Behat\Context\Ui\UserContext: ~
             filters:
                 tags: "@ui-cart"

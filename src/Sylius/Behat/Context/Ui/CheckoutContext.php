@@ -145,7 +145,7 @@ final class CheckoutContext implements Context
     public function iProceedLoggingAs($login, $password)
     {
         $this->checkoutSecurityStep->open();
-        $this->checkoutSecurityStep->logInExistingUser($login, $password);
+        $this->checkoutSecurityStep->logInAsExistingUser($login, $password);
 
         $this->checkoutAddressingStep->continueCheckout();
     }

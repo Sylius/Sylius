@@ -26,17 +26,17 @@ class CheckoutSecurityStepSpec extends ObjectBehavior
     {
         $this->beConstructedWith($session, $factory, [], $router);
     }
-    
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Behat\Page\Checkout\CheckoutSecurityStep');
     }
-    
+
     function it_is_symfony_page()
     {
         $this->shouldHaveType(SymfonyPage::class);
     }
-    
+
     function it_has_route_name()
     {
         $this->getRouteName()->shouldReturn('sylius_checkout_security');

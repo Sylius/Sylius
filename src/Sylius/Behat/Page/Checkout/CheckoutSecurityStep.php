@@ -30,7 +30,7 @@ class CheckoutSecurityStep extends SymfonyPage
      * @param string $login
      * @param string $password
      */
-    public function logInExistingUser($login, $password)
+    public function logInAsExistingUser($login, $password)
     {
         $document = $this->getDocument();
 

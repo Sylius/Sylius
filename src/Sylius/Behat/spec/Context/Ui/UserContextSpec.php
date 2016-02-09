@@ -13,7 +13,6 @@ namespace spec\Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
 use PhpSpec\ObjectBehavior;
-use SensioLabs\Behat\PageObjectExtension\PageObject\Factory;
 use Sylius\Behat\Page\User\LoginPage;
 
 /**

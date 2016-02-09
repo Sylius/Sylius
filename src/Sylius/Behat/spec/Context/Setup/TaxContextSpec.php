@@ -67,9 +67,11 @@ class TaxContextSpec extends ObjectBehavior
 
         $taxCategoryRepository->add($taxCategory)->shouldBeCalled();
 
+        $zone->getCode()->willReturn('EU');
+
         $taxRateFactory->createNew()->willReturn($taxRate);
-        $taxRate->setName('EU VAT')->shouldBeCalled();
-        $taxRate->setCode('eu_vat')->shouldBeCalled();
+        $taxRate->setName('Low VAT')->shouldBeCalled();
+        $taxRate->setCode('low_vat_eu')->shouldBeCalled();
         $taxRate->setAmount(0.23)->shouldBeCalled();
         $taxRate->setCategory($taxCategory)->shouldBeCalled();
         $taxRate->setZone($zone)->shouldBeCalled();
@@ -77,7 +79,7 @@ class TaxContextSpec extends ObjectBehavior
 
         $taxRateRepository->add($taxRate)->shouldBeCalled();
 
-        $this->storeHasTaxRateWithinZone('EU VAT', '23%', 'Clothes', $zone);
+        $this->storeHasTaxRateWithinZone('Low VAT', '23%', 'Clothes', $zone);
     }
 
     function it_casts_tax_category_name_to_tax_category($taxCategoryRepository, TaxCategoryInterface $taxCategory)

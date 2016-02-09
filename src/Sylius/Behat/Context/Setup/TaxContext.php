@@ -86,7 +86,7 @@ final class TaxContext implements Context
      * @Given store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within :zone zone
      * @Given /^store has "([^"]+)" tax rate of ([^"]+)% for "([^"]+)" for (the rest of the world)$/
      */
-    public function storeHasTaxRateWithinZone($taxRateName, $taxRateAmount, $taxCategoryName, ZoneInterface $zone = null)
+    public function storeHasTaxRateWithinZone($taxRateName, $taxRateAmount, $taxCategoryName, ZoneInterface $zone)
     {
         $taxCategory = $this->getOrCreateTaxCategory($taxCategoryName);
 
@@ -124,7 +124,7 @@ final class TaxContext implements Context
     {
         $taxCategory = $this->taxCategoryFactory->createNew();
         $taxCategory->setName($taxCategoryName);
-        $taxCategory->setCode($this->getCodeFromNameAndZoneCode($taxCategoryName));
+        $taxCategory->setCode($this->getCodeFromName($taxCategoryName));
 
         $this->taxCategoryRepository->add($taxCategory);
 
@@ -146,12 +146,19 @@ final class TaxContext implements Context
      *
      * @return string
      */
-    private function getCodeFromNameAndZoneCode($taxRateName, $zoneCode = null)
+    private function getCodeFromName($taxRateName)
     {
-        if (null === $zoneCode) {
-            return str_replace(' ', '_', strtolower($taxRateName));
-        }
+        return str_replace(' ', '_', strtolower($taxRateName));
+    }
 
-        return str_replace(' ', '_', strtolower($taxRateName)).'_'.$zoneCode;
+    /**
+     * @param string $taxRateName
+     * @param string $zoneCode
+     *
+     * @return string
+     */
+    private function getCodeFromNameAndZoneCode($taxRateName, $zoneCode)
+    {
+        return $this->getCodeFromName($taxRateName).'_'.strtolower($zoneCode);
     }
 }
