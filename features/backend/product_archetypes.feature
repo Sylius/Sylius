@@ -55,7 +55,7 @@ Feature: Product archetypes
         And I should see "Please enter archetype name"
 
     Scenario: Creating Bag archetype with color as option
-              and material as attribute
+            and material as attribute
         Given I am on the product archetype creation page
         When I fill in "Code" with "bag"
         And I fill in "Name" with "Bag"
@@ -66,7 +66,7 @@ Feature: Product archetypes
         And I should see "Archetype has been successfully created"
 
     Scenario: Creating simple T-Shirt archetype with color and size
-              as options but without attributes
+            as options but without attributes
         Given I am on the product archetype creation page
         When I fill in "Code" with "simple_t_shirt"
         And I fill in "Name" with "Simple T-Shirt"

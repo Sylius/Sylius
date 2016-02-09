@@ -59,7 +59,7 @@ Feature: Product variants
         Then I should see "Original price must not be negative"
 
     Scenario: Displaying the "Generate variants" button
-        only for products with options
+            only for products with options
         Given I am viewing product "Mug"
         Then I should not see "Generate variants"
 

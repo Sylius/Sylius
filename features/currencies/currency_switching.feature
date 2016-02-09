@@ -30,7 +30,7 @@ Feature: Currency selection
         And I should see product prices in "EUR"
 
     Scenario: Changing the currency converts the prices
-        on the storefront
+            on the storefront
         Given I am on the store homepage
         When I change the currency to "GBP"
         Then I should see product prices in "GBP"

@@ -41,7 +41,7 @@ Feature: Checkout shipping
         And I added product "PHP Top" to cart
 
     Scenario: Only enabled and available methods are displayed to user for zone
-        depending on the shipping address zone
+            depending on the shipping address zone
         Given I go to the checkout start page
         And I fill in the shipping address to United Kingdom
         When I press "Continue"

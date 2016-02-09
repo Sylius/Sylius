@@ -37,7 +37,7 @@ Feature: Checkout limited time promotions
         And all promotions are assigned to the default channel
 
     Scenario: Promotion is applied when the order date corresponds
-              with promotion dates
+            with promotion dates
         Given I am on the store homepage
         When I added product "Sarge" to cart, with quantity "8"
         Then I should be on the cart summary page

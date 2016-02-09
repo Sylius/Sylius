@@ -34,7 +34,7 @@ Feature: Checkout promotions with multiple rules and actions
         And all promotions are assigned to the default channel
 
     Scenario: Several discounts are applied when a promotion has several
-        actions and the cart fulfills all the rules
+            actions and the cart fulfills all the rules
         Given I am on the store homepage
         And I added product "Sarge" to cart, with quantity "5"
         When I add product "Lenny" to cart, with quantity "2"
@@ -43,7 +43,7 @@ Feature: Checkout promotions with multiple rules and actions
         And "Grand total: €127.25" should appear on the page
 
     Scenario: Promotion is not applied when one of the cart does not
-        fulfills one of the rule
+            fulfills one of the rule
         Given I am on the store homepage
         When I add product "Sarge" to cart, with quantity "7"
         Then I should be on the cart summary page

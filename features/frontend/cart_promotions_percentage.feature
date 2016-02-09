@@ -39,7 +39,7 @@ Feature: Checkout percentage discount promotions
         And all promotions are assigned to the default channel
 
     Scenario: Percentage discount promotion is applied when the cart
-        has the required amount
+            has the required amount
         Given I am on the store homepage
         When I add product "Etch" to cart, with quantity "4"
         Then I should be on the cart summary page
@@ -48,7 +48,7 @@ Feature: Checkout percentage discount promotions
 #          And "Grand total: €60.00" should appear on the page
 
     Scenario: Percentage discount promotion is not applied when the cart
-              has not the required amount
+            has not the required amount
         Given I am on the store homepage
         When I add product "Sarge" to cart, with quantity "8"
         Then I should be on the cart summary page
@@ -57,7 +57,7 @@ Feature: Checkout percentage discount promotions
         And "Grand total: €200.00" should appear on the page
 
     Scenario: Item count promotion is applied when the cart has the
-              number of items required
+            number of items required
         Given I am on the store homepage
         And I added product "Sarge" to cart, with quantity "3"
         And I added product "Etch" to cart, with quantity "1"
@@ -68,7 +68,7 @@ Feature: Checkout percentage discount promotions
         And "Grand total: €93.75" should appear on the page
 
     Scenario: Item count promotion is not applied when the cart has
-              not the number of items required
+            not the number of items required
         Given I am on the store homepage
         When I add product "Etch" to cart, with quantity "8"
         Then I should be on the cart summary page
@@ -77,7 +77,7 @@ Feature: Checkout percentage discount promotions
         And "Grand total: €160.00" should appear on the page
 
     Scenario: Several promotions are applied when an cart fulfills
-              the rules of several promotions
+            the rules of several promotions
         Given I am on the store homepage
         And I added product "Potato" to cart, with quantity "4"
         And I added product "Buzz" to cart, with quantity "1"

@@ -39,7 +39,7 @@ Feature: Checkout usage limited promotions
         And all promotions are assigned to the default channel
 
     Scenario: Promotion with usage limit is not applied when the
-              number of usage is reached
+            number of usage is reached
         Given I am on the store homepage
         When I add product "Etch" to cart, with quantity "3"
         Then I should be on the cart summary page
@@ -47,7 +47,7 @@ Feature: Checkout usage limited promotions
         And "Grand total: €60.00" should appear on the page
 
     Scenario: Promotion with usage limit is applied when the
-    number of usage is not reached
+            number of usage is not reached
         Given I am on the store homepage
         And I added product "Woody" to cart, with quantity "3"
         Then I should be on the cart summary page

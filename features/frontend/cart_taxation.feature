@@ -31,7 +31,7 @@ Feature: Cart taxation
             | Category |
 
     Scenario: No taxes are applied for unknown billing address
-              when default tax zone is not configured
+            when default tax zone is not configured
         Given I am on the store homepage
         And I follow "PHP T-Shirts"
         And I click "PHP Top"
@@ -42,7 +42,7 @@ Feature: Cart taxation
         But "Grand total: €100.00" should appear on the page
 
     Scenario: Correct taxes are applied for unknown billing address
-              when default tax zone is configured
+            when default tax zone is configured
         Given the default tax zone is "UK"
         And I am on the store homepage
         And I follow "PHP T-Shirts"

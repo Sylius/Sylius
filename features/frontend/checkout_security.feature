@@ -35,7 +35,7 @@ Feature: Checkout security
         And I go to the checkout start page
 
     Scenario: Trying to sign in with bad credentials
-        during the checkout
+            during the checkout
         When I fill in the following:
             | Email    | john@example.com |
             | Password | habababa         |

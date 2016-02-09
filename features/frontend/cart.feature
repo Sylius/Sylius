@@ -123,7 +123,7 @@ Feature: Cart
         And I should see 1 item in the list
 
     Scenario: Correct cart total is displayed after adding the item
-        by selecting options
+            by selecting options
         Given I am on the store homepage
         And I follow "T-Shirts"
         And I click "Super T-Shirt"

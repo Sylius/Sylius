@@ -42,14 +42,14 @@ Feature: Checkout starting
         Then I should be on the checkout security step
 
     Scenario: Logged in users are starting checkout
-        from the addressing step
+            from the addressing step
         Given I am logged in user
         And I added product "PHP Top" to cart
         When I go to the checkout start page
         Then I should be redirected to the checkout addressing step
 
     Scenario: Not logged in users need to authenticate or register
-        new account in the store or be able to checkout as guest
+            new account in the store or be able to checkout as guest
         Given I added product "PHP Top" to cart
         When I go to the checkout start page
         Then I should be redirected to the checkout security step
@@ -58,7 +58,7 @@ Feature: Checkout starting
         And I should see "Guest"
 
     Scenario: Not logged in users are starting checkout
-        can checkout using only email without registration
+            can checkout using only email without registration
         Given I added product "PHP Top" to cart
         When I go to the checkout start page
         And I fill in guest email with "example@example.com"

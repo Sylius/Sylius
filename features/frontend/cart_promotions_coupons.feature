@@ -45,7 +45,7 @@ Feature: Checkout coupon promotions
         And all promotions are assigned to the default channel
 
     Scenario: Promotion with coupons is applied when the customer
-        has added a valid coupon
+            has added a valid coupon
         Given I am on the store homepage
         And I added product "Etch" to cart, with quantity "6"
         When I fill in "Code" with "XD0001"
@@ -66,7 +66,7 @@ Feature: Checkout coupon promotions
         And "Grand total: €100.00" should appear on the page
 
     Scenario: A valid coupon can not be added to the cart if the cart does
-              not fulfill the rules required by the promotion
+            not fulfill the rules required by the promotion
         Given I am on the store homepage
         And I added product "Etch" to cart, with quantity "4"
         When I fill in "Code" with "XD0001"
@@ -77,7 +77,7 @@ Feature: Checkout coupon promotions
         And "Grand total: €80.00" should appear on the page
 
     Scenario: A valid coupon can not be added to the cart if its usage
-              limit has been reached
+            limit has been reached
         Given I am on the store homepage
         And I added product "Lenny" to cart
         And I added product "Etch" to cart
