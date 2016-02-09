@@ -57,7 +57,9 @@ class ShippingContextSpec extends ObjectBehavior
         $sharedStorage->getCurrentResource('zone')->willReturn($zone);
         $shippingMethodFactory->createNew()->willReturn($shippingMethod);
 
-        $shippingMethod->setCode('free')->shouldBeCalled();
+        $zone->getCode()->willReturn('UE');
+
+        $shippingMethod->setCode('free_ue')->shouldBeCalled();
         $shippingMethod->setName('Free')->shouldBeCalled();
         $shippingMethod->setCurrentLocale('en')->shouldBeCalled();
         $shippingMethod->setConfiguration(['amount' => 0])->shouldBeCalled();
@@ -79,7 +81,9 @@ class ShippingContextSpec extends ObjectBehavior
         $sharedStorage->getCurrentResource('zone')->willReturn($zone);
         $shippingMethodFactory->createNew()->willReturn($shippingMethod);
 
-        $shippingMethod->setCode('test_shipping_method')->shouldBeCalled();
+        $zone->getCode()->willReturn('UE');
+
+        $shippingMethod->setCode('test_shipping_method_ue')->shouldBeCalled();
         $shippingMethod->setName('Test shipping method')->shouldBeCalled();
         $shippingMethod->setCurrentLocale('en')->shouldBeCalled();
         $shippingMethod->setConfiguration(['amount' => 1000])->shouldBeCalled();

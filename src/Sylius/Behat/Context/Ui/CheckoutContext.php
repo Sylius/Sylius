@@ -105,6 +105,14 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When /^I proceed selecting "([^"]*)" as shipping country with "([^"]*)" payment method$/
+     */
+    public function iProceedSelectingShippingCountryAndPaymentMethod($shippingCountry, $paymentMethodName)
+    {
+        $this->proceedOrder($shippingCountry, null, $paymentMethodName);
+    }
+
+    /**
      * @When /^I change shipping method to "([^"]*)"$/
      */
     public function iChangeShippingMethod($shippingMethodName)

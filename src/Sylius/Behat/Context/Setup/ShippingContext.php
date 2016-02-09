@@ -81,6 +81,7 @@ final class ShippingContext implements Context
     /**
      * @Given store ships everything for free
      * @Given store ships everything for free within :zone zone
+     * @Given /^store ships everything for free for (the rest of the world)$/
      */
     public function storeShipsEverythingForFree(ZoneInterface $zone = null)
     {
@@ -125,7 +126,7 @@ final class ShippingContext implements Context
         }
 
         $shippingMethod = $this->shippingMethodFactory->createNew();
-        $shippingMethod->setCode($this->getCodeFromName($name));
+        $shippingMethod->setCode($this->generateCodeFromNameAndZone($name, $zone->getCode()));
         $shippingMethod->setName($name);
         $shippingMethod->setCurrentLocale($locale);
         $shippingMethod->setConfiguration($configuration);
@@ -137,12 +138,13 @@ final class ShippingContext implements Context
 
     /**
      * @param string $shippingMethodName
+     * @param string|null $zoneCode
      *
      * @return string
      */
-    private function getCodeFromName($shippingMethodName)
+    private function generateCodeFromNameAndZone($shippingMethodName, $zoneCode = null)
     {
-        return str_replace([' ', '-'], '_', strtolower($shippingMethodName));
+        return str_replace([' ', '-'], '_', strtolower($shippingMethodName)).'_'.strtolower($zoneCode);
     }
 
     /**
