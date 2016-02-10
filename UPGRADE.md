@@ -222,7 +222,8 @@ class BookController extends ResourceController
 
 ### Core and CoreBundle
 
-* Moved ``taxCategory`` from ``Product`` to ``ProductVariant``
+* Moved ``taxCategory`` from ``Product`` to ``ProductVariant``;
+* ``OrderItem`` model from Core component no longer implements ``PromotionSubjectInterface``. Remove all usages of ``addPromotion``, etc. from your custom code. Custom actions targeting items need to be adjusted - see ``ContainsProductRuleChecker`` for reference.
 
 ### Addressing and SyliusAddressingBundle
 
