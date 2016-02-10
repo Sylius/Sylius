@@ -46,7 +46,7 @@ class CheckoutSecurityStep extends SymfonyPage
     /**
      * @param string $email
      */
-    public function logInAsGuest($email)
+    public function proceedAsGuest($email)
     {
         $document = $this->getDocument();
 

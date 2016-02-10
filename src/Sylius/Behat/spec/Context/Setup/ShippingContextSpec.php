@@ -30,11 +30,18 @@ class ShippingContextSpec extends ObjectBehavior
 {
     function let(
         RepositoryInterface $shippingMethodRepository,
+        RepositoryInterface $zoneRepository,
         FactoryInterface $shippingMethodFactory,
         ObjectManager $shippingMethodManager,
         SharedStorageInterface $sharedStorage
     ) {
-        $this->beConstructedWith($shippingMethodRepository, $shippingMethodFactory, $shippingMethodManager, $sharedStorage);
+        $this->beConstructedWith(
+            $shippingMethodRepository,
+            $zoneRepository,
+            $shippingMethodFactory,
+            $shippingMethodManager,
+            $sharedStorage
+        );
     }
 
     function it_is_initializable()
@@ -93,6 +100,43 @@ class ShippingContextSpec extends ObjectBehavior
         $shippingMethodRepository->add($shippingMethod)->shouldBeCalled();
 
         $this->storeHasShippingMethodWithFee('Test shipping method', '10.00');
+    }
+
+    function it_configures_store_to_ship_everything_for_free_in_every_available_zone(
+        $shippingMethodRepository,
+        $zoneRepository,
+        $shippingMethodFactory,
+        ShippingMethod $euShippingMethod,
+        ShippingMethod $usShippingMethod,
+        ZoneInterface $euZone,
+        ZoneInterface $usZone
+    ) {
+        $zoneRepository->findAll()->willReturn([$euZone, $usZone]);
+
+        $shippingMethodFactory->createNew()->willReturn($euShippingMethod, $usShippingMethod);
+
+        $euZone->getCode()->willReturn('UE');
+
+        $euShippingMethod->setCode('free_ue')->shouldBeCalled();
+        $euShippingMethod->setName('Free')->shouldBeCalled();
+        $euShippingMethod->setCurrentLocale('en')->shouldBeCalled();
+        $euShippingMethod->setConfiguration(['amount' => 0])->shouldBeCalled();
+        $euShippingMethod->setCalculator(DefaultCalculators::FLAT_RATE)->shouldBeCalled();
+        $euShippingMethod->setZone($euZone)->shouldBeCalled();
+
+        $usZone->getCode()->willReturn('US');
+
+        $usShippingMethod->setCode('free_us')->shouldBeCalled();
+        $usShippingMethod->setName('Free')->shouldBeCalled();
+        $usShippingMethod->setCurrentLocale('en')->shouldBeCalled();
+        $usShippingMethod->setConfiguration(['amount' => 0])->shouldBeCalled();
+        $usShippingMethod->setCalculator(DefaultCalculators::FLAT_RATE)->shouldBeCalled();
+        $usShippingMethod->setZone($usZone)->shouldBeCalled();
+
+        $shippingMethodRepository->add($euShippingMethod)->shouldBeCalled();
+        $shippingMethodRepository->add($usShippingMethod)->shouldBeCalled();
+
+        $this->theStoreShipsEverythingForFreeToAllAvailableLocations();
     }
 
     function it_assigns_product_for_given_tax_category(
