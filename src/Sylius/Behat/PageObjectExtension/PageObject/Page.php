@@ -68,21 +68,26 @@ abstract class Page implements PageObject
     /**
      * @param array $urlParameters
      *
-     * @return Page
+     * @throws UnexpectedPageException If page is not opened successfully
      */
     public function open(array $urlParameters = [])
     {
-        $url = $this->getUrl($urlParameters);
-
-        $this->getDriver()->visit($url);
-
+        $this->tryToOpen($urlParameters);
         $this->verify($urlParameters);
-
-        return $this;
     }
 
     /**
      * @param array $urlParameters
+     */
+    public function tryToOpen(array $urlParameters = [])
+    {
+        $this->getDriver()->visit($this->getUrl($urlParameters));
+    }
+
+    /**
+     * @param array $urlParameters
+     *
+     * @throws UnexpectedPageException
      */
     public function verify(array $urlParameters)
     {
@@ -163,6 +168,8 @@ abstract class Page implements PageObject
 
     /**
      * Overload to verify if we're on an expected page. Throw an exception otherwise.
+     *
+     * @throws UnexpectedPageException
      */
     protected function verifyPage()
     {
