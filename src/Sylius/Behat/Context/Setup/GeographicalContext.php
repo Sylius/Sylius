@@ -45,9 +45,9 @@ final class GeographicalContext implements Context
     }
 
     /**
-     * @Given /^store ships to "([^"]+)"$/
-     * @Given /^store ships to "([^"]+)" and "([^"]+)"$/
-     * @Given /^store ships to "([^"]+)", "([^"]+)" and "([^"]+)"$/
+     * @Given /^the store ships to "([^"]+)"$/
+     * @Given /^the store ships to "([^"]+)" and "([^"]+)"$/
+     * @Given /^the store ships to "([^"]+)", "([^"]+)" and "([^"]+)"$/
      */
     public function storeShipsTo($country1, $country2 = null, $country3 = null)
     {

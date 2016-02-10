@@ -9,9 +9,9 @@ Feature: Apply different taxes for variants with different tax category
         And there is "EU" zone containing all members of European Union
         And default currency is "EUR"
         And default tax zone is "EU"
-        And store has "EU VAT" tax rate of 23% for "Mugs" within "EU" zone
-        And store has "Low VAT" tax rate of 5% for "Cheap Mugs" within "EU" zone
-        And store has a product "PHP Mug"
+        And the store has "EU VAT" tax rate of 23% for "Mugs" within "EU" zone
+        And the store has "Low VAT" tax rate of 5% for "Cheap Mugs" within "EU" zone
+        And the store has a product "PHP Mug"
         And it comes in the following variations:
             | name       | price   |
             | Medium Mug | €100.00 |

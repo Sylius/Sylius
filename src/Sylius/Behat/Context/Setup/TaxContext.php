@@ -83,8 +83,8 @@ final class TaxContext implements Context
     }
 
     /**
-     * @Given store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within :zone zone
-     * @Given /^store has "([^"]+)" tax rate of ([^"]+)% for "([^"]+)" for (the rest of the world)$/
+     * @Given the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within :zone zone
+     * @Given /^the store has "([^"]+)" tax rate of ([^"]+)% for "([^"]+)" for (the rest of the world)$/
      */
     public function storeHasTaxRateWithinZone($taxRateName, $taxRateAmount, $taxCategoryName, ZoneInterface $zone)
     {

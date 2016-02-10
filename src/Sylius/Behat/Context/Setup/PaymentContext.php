@@ -49,7 +49,7 @@ final class PaymentContext implements Context
     }
 
     /**
-     * @Given store allows paying offline
+     * @Given the store allows paying offline
      */
     public function storeAllowsPayingOffline()
     {
