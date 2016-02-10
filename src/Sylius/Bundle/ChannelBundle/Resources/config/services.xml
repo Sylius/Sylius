@@ -23,22 +23,22 @@
     </parameters>
 
     <services>
-        <service id="sylius.context.channel.composite" class="%sylius.context.channel.composite.class%" />
+        <service id="sylius.context.channel.composite" class="%sylius.context.channel.composite.class%" public="false" />
 
-        <service id="sylius.context.channel.request_based" class="%sylius.context.channel.request_based.class%">
+        <service id="sylius.context.channel.request_based" class="%sylius.context.channel.request_based.class%" public="false">
             <argument type="service" id="sylius.context.channel.request_based.resolver" />
             <argument type="service" id="request_stack" />
             <tag name="sylius.context.channel" />
         </service>
 
-        <service id="sylius.context.channel.single_channel" class="%sylius.context.channel.single_channel.class%">
+        <service id="sylius.context.channel.single_channel" class="%sylius.context.channel.single_channel.class%" public="false">
             <argument type="service" id="sylius.repository.channel" />
             <tag name="sylius.context.channel" priority="-128"/>
         </service>
 
-        <service id="sylius.context.channel.request_based.resolver.composite" class="%sylius.context.channel.request_based.resolver.composite.class%" />
+        <service id="sylius.context.channel.request_based.resolver.composite" class="%sylius.context.channel.request_based.resolver.composite.class%" public="false"/>
 
-        <service id="sylius.context.channel.request_based.resolver.hostname_based" class="%sylius.context.channel.request_based.resolver.hostname_based.class%">
+        <service id="sylius.context.channel.request_based.resolver.hostname_based" class="%sylius.context.channel.request_based.resolver.hostname_based.class%" public="false">
             <argument type="service" id="sylius.repository.channel" />
             <tag name="sylius.context.channel.request_based.resolver" />
         </service>

@@ -22,6 +22,7 @@
         <parameter key="sylius.settings_schema.security.class">Sylius\Bundle\CoreBundle\Settings\SecuritySettingsSchema</parameter>
 
         <parameter key="sylius.context.currency.class">Sylius\Bundle\CoreBundle\Context\CurrencyContext</parameter>
+        <parameter key="sylius.context.channel.cached.class">Sylius\Component\Channel\Context\CachedPerRequestChannelContext</parameter>
 
         <parameter key="sylius.checkout_scenario.class">Sylius\Bundle\CoreBundle\Checkout\CheckoutProcessScenario</parameter>
         <parameter key="sylius.checkout_step.security.class">Sylius\Bundle\CoreBundle\Checkout\Step\SecurityStep</parameter>
@@ -126,6 +127,11 @@
         </service>
         <service id="sylius.settings_schema.security" class="%sylius.settings_schema.security.class%">
             <tag name="sylius.settings_schema" namespace="sylius_security" />
+        </service>
+
+        <service id="sylius.context.channel.cached" class="%sylius.context.channel.cached.class%" decorates="sylius.context.channel" public="false">
+            <argument type="service" id="sylius.context.channel.cached.inner" />
+            <argument type="service" id="request_stack" />
         </service>
 
         <!-- cart -->
