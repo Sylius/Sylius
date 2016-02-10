@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f24ecb0cea718b1b05166cfc2382ec05",
-    "content-hash": "cb0b6d7e00c1e962ec57c4c45d6d08d5",
+    "hash": "5642defa9ad928db0a93c268a41ae707",
+    "content-hash": "178cb9ddfe494055303406f63b9906bb",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -2692,9 +2692,9 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -5692,9 +5692,9 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -7775,7 +7775,7 @@
             ],
             "authors": [
                 {
-                    "name": "William DURAND",
+                    "name": "William Durand",
                     "email": "william.durand1@gmail.com",
                     "homepage": "http://www.willdurand.fr"
                 }
@@ -8944,7 +8944,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Lakion/ApiTestCase/zipball/6c9f9e1c6a5542da7d4fa6d80b7fae46b2f65498",
+                "url": "https://api.github.com/repos/Lakion/ApiTestCase/zipball/6ef4bc5ab7daf8646e7003afdb330b314edbd57d",
                 "reference": "466bd22a228c96a2dba971045ac8c0b0400df6d1",
                 "shasum": ""
             },
@@ -9013,28 +9013,32 @@
         },
         {
             "name": "lakion/mink-debug-extension",
-            "version": "v1.0.2",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Lakion/MinkDebugExtension.git",
-                "reference": "c93dacd50d6fda9334b1f234d98240aea2cfa323"
+                "reference": "ec8fc981b5b7a7ad0d7c44e874d6adaf788a1ca2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Lakion/MinkDebugExtension/zipball/c93dacd50d6fda9334b1f234d98240aea2cfa323",
-                "reference": "c93dacd50d6fda9334b1f234d98240aea2cfa323",
+                "url": "https://api.github.com/repos/Lakion/MinkDebugExtension/zipball/ec8fc981b5b7a7ad0d7c44e874d6adaf788a1ca2",
+                "reference": "ec8fc981b5b7a7ad0d7c44e874d6adaf788a1ca2",
                 "shasum": ""
             },
             "require": {
                 "behat/behat": "^3.0.5",
                 "behat/mink-extension": "^2.0.1",
-                "php": ">=5.5.9",
+                "php": "^5.5.9|^7.0",
                 "symfony/config": "^2.2"
             },
             "require-dev": {
                 "behat/mink-goutte-driver": "^1.1",
                 "behat/mink-selenium2-driver": "^1.2",
                 "phpspec/phpspec": "^2.0"
+            },
+            "suggest": {
+                "behat/mink-browserkit-driver": "To get request debug information included in log file",
+                "behat/mink-selenium2-driver": "To get screenshots"
             },
             "type": "behat-extension",
             "extra": {
@@ -9065,7 +9069,7 @@
                 "debug",
                 "logging"
             ],
-            "time": "2015-12-03 09:34:37"
+            "time": "2016-02-10 09:25:13"
         },
         {
             "name": "malukenho/kawaii-gherkin",
@@ -9464,7 +9468,8 @@
             "authors": [
                 {
                     "name": "Chris Boulton",
-                    "homepage": "http://github.com/chrisboulton"
+                    "homepage": "http://github.com/chrisboulton",
+                    "role": "Original developer"
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
