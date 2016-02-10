@@ -52,11 +52,11 @@ class CurrencyConverterSpec extends ObjectBehavior
         ;
     }
 
-    function it_converts_from_base_currency(CurrencyInterface $currency, $currencyRepository)
+    function it_converts_to_base_currency(CurrencyInterface $currency, $currencyRepository)
     {
         $currencyRepository->findOneBy(['code' => 'PLN'])->shouldBeCalled()->willReturn($currency);
-        $currency->getExchangeRate()->shouldBeCalled()->willReturn(0.24);
+        $currency->getExchangeRate()->shouldBeCalled()->willReturn(0.25);
 
-        $this->convertToBase(6555, 'PLN')->shouldReturn(27313);
+        $this->convertToBase(10000, 'PLN')->shouldReturn(40000);
     }
 }
