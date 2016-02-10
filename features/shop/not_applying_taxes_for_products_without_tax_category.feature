@@ -1,18 +1,16 @@
 @ui-cart
 Feature: Not applying taxes for products without tax category
     In order to pay proper amount when buying goods without tax category
-    As a Customer
+    As a Visitor
     I want to have correct taxes applied to my order
 
     Background:
         Given the store is operating on a single channel
         And default currency is "EUR"
-        And there is user "john@example.com" identified by "password123"
         And the store has a product "PHP T-Shirt" priced at "€100.00"
         And the store has a product "Symfony Mug" priced at "€30.00"
         And the store ships everything for free
         And the store allows paying offline
-        And I am logged in as "john@example.com"
 
     Scenario: Proper taxes for untaxed product
         When I add product "PHP T-Shirt" to the cart

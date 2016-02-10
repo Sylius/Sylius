@@ -1,7 +1,7 @@
 @ui-cart
 Feature: Round taxes on order item level
     In order to avoid taxes amount inaccuracy
-    As a Customer
+    As a Visitor
     I want to have correct taxes applied to my order
 
     Background:
@@ -9,7 +9,6 @@ Feature: Round taxes on order item level
         And there is "EU" zone containing all members of European Union
         And default currency is "EUR"
         And default tax zone is "EU"
-        And there is user "john@example.com" identified by "password123"
         And the store has "EU VAT" tax rate of 23% for "Clothes" within "EU" zone
         And the store has "Low VAT" tax rate of 10% for "Mugs" within "EU" zone
         And the store has a product "PHP T-Shirt" priced at "€10.10"
@@ -18,7 +17,6 @@ Feature: Round taxes on order item level
         And product "PHP T-Shirt" belongs to "Clothes" tax category
         And product "Symfony Mug" belongs to "Mugs" tax category
         And product "PHP Mug" belongs to "Mugs" tax category
-        And I am logged in as "john@example.com"
 
     Scenario: Properly rounded up tax for single product
         When I add product "Symfony Mug" to the cart
