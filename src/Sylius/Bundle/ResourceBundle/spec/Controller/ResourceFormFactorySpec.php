@@ -48,7 +48,8 @@ class ResourceFormFactorySpec extends ObjectBehavior
     ) {
         $requestConfiguration->isHtmlRequest()->willReturn(true);
         $requestConfiguration->getFormType()->willReturn('sylius_product_pricing');
-        $formFactory->create('sylius_product_pricing', $resource)->willReturn($form);
+        $requestConfiguration->getFormOptions()->willReturn([]);
+        $formFactory->create('sylius_product_pricing', $resource, Argument::type('array'))->willReturn($form);
 
         $this->create($requestConfiguration, $resource)->shouldReturn($form);
     }
@@ -61,6 +62,7 @@ class ResourceFormFactorySpec extends ObjectBehavior
     ) {
         $requestConfiguration->isHtmlRequest()->willReturn(false);
         $requestConfiguration->getFormType()->willReturn('sylius_product_api');
+        $requestConfiguration->getFormOptions()->willReturn([]);
         $formFactory->createNamed('', 'sylius_product_api', $resource, ['csrf_protection' => false])->willReturn($form);
 
         $this->create($requestConfiguration, $resource)->shouldReturn($form);
@@ -74,7 +76,8 @@ class ResourceFormFactorySpec extends ObjectBehavior
     ) {
         $requestConfiguration->isHtmlRequest()->willReturn(true);
         $requestConfiguration->getFormType()->willReturn(TextType::class);
-        $formFactory->create(Argument::type(TextType::class), $resource)->willReturn($form);
+        $requestConfiguration->getFormOptions()->willReturn([]);
+        $formFactory->create(Argument::type(TextType::class), $resource, Argument::type('array'))->willReturn($form);
 
         $this->create($requestConfiguration, $resource)->shouldReturn($form);
     }
