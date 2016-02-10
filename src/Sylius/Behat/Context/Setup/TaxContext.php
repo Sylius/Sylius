@@ -86,13 +86,13 @@ final class TaxContext implements Context
      * @Given store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within :zone zone
      * @Given /^store has "([^"]+)" tax rate of ([^"]+)% for "([^"]+)" for (the rest of the world)$/
      */
-    public function storeHasTaxRateWithinZone($taxRateName, $taxRateAmount, $taxCategoryName, ZoneInterface $zone = null)
+    public function storeHasTaxRateWithinZone($taxRateName, $taxRateAmount, $taxCategoryName, ZoneInterface $zone)
     {
         $taxCategory = $this->getOrCreateTaxCategory($taxCategoryName);
 
         $taxRate = $this->taxRateFactory->createNew();
         $taxRate->setName($taxRateName);
-        $taxRate->setCode($this->getCodeFromName($taxRateName));
+        $taxRate->setCode($this->getCodeFromNameAndZoneCode($taxRateName, $zone->getCode()));
         $taxRate->setZone($zone);
         $taxRate->setAmount($this->getAmountFromString($taxRateAmount));
         $taxRate->setCategory($taxCategory);
@@ -149,5 +149,16 @@ final class TaxContext implements Context
     private function getCodeFromName($taxRateName)
     {
         return str_replace(' ', '_', strtolower($taxRateName));
+    }
+
+    /**
+     * @param string $taxRateName
+     * @param string $zoneCode
+     *
+     * @return string
+     */
+    private function getCodeFromNameAndZoneCode($taxRateName, $zoneCode)
+    {
+        return $this->getCodeFromName($taxRateName).'_'.strtolower($zoneCode);
     }
 }

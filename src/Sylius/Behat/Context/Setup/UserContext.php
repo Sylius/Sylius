@@ -116,13 +116,15 @@ final class UserContext implements Context
      * @param CustomerInterface $customer
      * @param string $email
      * @param string $password
+     * @param bool|true $enable
      *
      * @return UserInterface
      */
     private function createUser(
         CustomerInterface $customer,
         $email = 'john.doe@example.com',
-        $password = 'testPassword'
+        $password = 'testPassword',
+        $enable = true
     ) {
         $user = $this->userFactory->createNew();
 
@@ -130,6 +132,10 @@ final class UserContext implements Context
         $user->setUsername($email);
         $user->setEmail($email);
         $user->setPlainPassword($password);
+
+        if ($enable) {
+            $user->enable();
+        }
 
         return $user;
     }
