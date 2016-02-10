@@ -646,35 +646,6 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     }
 
     /**
-     * @Then I should see the orders list sorted by customers' last names
-     */
-    public function iShouldSeeOrdersListSortedByLastName()
-    {
-        /** @var NodeElement[] $nameElements */
-        $nameElements = $this->getSession()->getPage()->findAll('css', '#orders > tbody > tr > td > p');
-
-        $lastNames = [];
-        foreach ($nameElements as $nameElement) {
-            $lastNames[] = substr($nameElement->getText(), strrpos($nameElement->getText(), ' ') + 1);
-        }
-
-        $sortedLastNames = $lastNames;
-        sort($sortedLastNames);
-
-        if (array_values($sortedLastNames) === array_values($lastNames)) {
-            return;
-        }
-
-        throw new \InvalidArgumentException(sprintf(
-            'Orders should be sorted by customers\' last names.'.PHP_EOL.
-            'The customers last names were found in the following order: %s'.PHP_EOL.
-            'Expected: %s',
-            implode(', ', $lastNames),
-            implode(', ', $sortedLastNames)
-        ));
-    }
-
-    /**
      * @Given I registered with email :email and password :password
      */
     public function iRegisteredWithEmailAndPassword($email, $password)
