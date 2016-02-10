@@ -30,5 +30,6 @@ imports:
     - suites/taxation.yml
     - suites/taxonomies.yml
     - suites/ui_cart.yml
+    - suites/ui_channels.yml
     - suites/ui_checkout.yml
     - suites/users.yml

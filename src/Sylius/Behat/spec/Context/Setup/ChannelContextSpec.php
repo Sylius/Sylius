@@ -14,6 +14,8 @@ namespace spec\Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
+use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Test\Services\DefaultStoreDataInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
@@ -23,9 +25,18 @@ use Sylius\Component\Core\Test\Services\SharedStorageInterface;
  */
 class ChannelContextSpec extends ObjectBehavior
 {
-    function let(SharedStorageInterface $sharedStorage, DefaultStoreDataInterface $defaultFranceChannelFactory)
-    {
-        $this->beConstructedWith($sharedStorage, $defaultFranceChannelFactory);
+    function let(
+        SharedStorageInterface $sharedStorage,
+        DefaultStoreDataInterface $defaultFranceChannelFactory,
+        ChannelFactoryInterface $channelFactory,
+        ChannelRepositoryInterface $channelRepository
+    ) {
+        $this->beConstructedWith(
+            $sharedStorage,
+            $defaultFranceChannelFactory,
+            $channelFactory,
+            $channelRepository
+        );
     }
 
     function it_is_initializable()

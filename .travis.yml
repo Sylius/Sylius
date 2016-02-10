@@ -67,7 +67,7 @@ before_script:
 
 script:
     - composer validate
-    
+
     - if [[ $TRAVIS_PHP_VERSION = 7.* ]]; then bin/kawaii gherkin:check --align=left features/; fi;
 
     - bin/phpspec run --no-interaction -f dot

@@ -14,6 +14,7 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
@@ -40,11 +41,6 @@ final class ProductContext implements Context
     /**
      * @var RepositoryInterface
      */
-    private $taxCategoryRepository;
-
-    /**
-     * @var RepositoryInterface
-     */
     private $productVariantRepository;
 
     /**
@@ -65,7 +61,6 @@ final class ProductContext implements Context
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param RepositoryInterface $productRepository
-     * @param RepositoryInterface $taxCategoryRepository
      * @param RepositoryInterface $productVariantRepository
      * @param FactoryInterface $productFactory
      * @param FactoryInterface $productVariantFactory
@@ -74,7 +69,6 @@ final class ProductContext implements Context
     public function __construct(
         SharedStorageInterface $sharedStorage,
         RepositoryInterface $productRepository,
-        RepositoryInterface $taxCategoryRepository,
         RepositoryInterface $productVariantRepository,
         FactoryInterface $productFactory,
         FactoryInterface $productVariantFactory,
@@ -82,7 +76,6 @@ final class ProductContext implements Context
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->productRepository = $productRepository;
-        $this->taxCategoryRepository = $taxCategoryRepository;
         $this->productVariantRepository = $productVariantRepository;
         $this->productFactory = $productFactory;
         $this->productVariantFactory = $productVariantFactory;
@@ -135,9 +128,22 @@ final class ProductContext implements Context
 
         $this->productRepository->add($product);
 
-        if ('0.00' === $price) {
-            $this->sharedStorage->setCurrentResource('product', $product);
-        }
+        $this->sharedStorage->setCurrentResource('product', $product);
+    }
+
+    /**
+     * @Given /^there is product "([^"]+)" available in ((?:this|that|"[^"]+") channel)$/
+     */
+    public function thereIsProductAvailableInGivenChannel($productName, ChannelInterface $channel)
+    {
+        /** @var ProductInterface $product */
+        $product = $this->productFactory->createNew();
+        $product->setName($productName);
+        $product->setPrice(0);
+        $product->setDescription('Awesome ' . $productName);
+        $product->addChannel($channel);
+
+        $this->productRepository->add($product);
     }
 
     /**
