@@ -81,12 +81,25 @@ Feature: Customers management
         Then I should still be on the customer creation page
         And I should see "Please enter your first name"
 
+    @javascript
+    Scenario: Creating customer with user
+        Given I am on the customer creation page
+        When I check "Create account?"
+        And I fill in the following:
+            | First name | Saša               |
+            | Last name  | Stamenković        |
+            | Password   | Password           |
+            | Email      | umpirsky@gmail.com |
+        And I press "Create"
+        Then I should be on the page of customer with email "umpirsky@gmail.com"
+        And I should see "Customer has been successfully created"
+
+    @javascript
     Scenario: Creating customer
         Given I am on the customer creation page
         When I fill in the following:
             | First name | Saša               |
             | Last name  | Stamenković        |
-            | Password   | Password           |
             | Email      | umpirsky@gmail.com |
         And I press "Create"
         Then I should be on the page of customer with email "umpirsky@gmail.com"

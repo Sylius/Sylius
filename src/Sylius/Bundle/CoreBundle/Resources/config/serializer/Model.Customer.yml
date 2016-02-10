@@ -1,0 +1,3 @@
+Sylius\Component\Core\Model\Customer:
+    exclusion_policy: ALL
+    xml_root_name: sylius_customer

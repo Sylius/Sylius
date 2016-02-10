@@ -52,6 +52,12 @@
                 <option name="groups">sylius_customer_profile</option>
             </constraint>
         </property>
+        <property name="gender">
+            <constraint name="NotBlank">
+                <option name="message">sylius.customer.gender.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
         <property name="email">
             <constraint name="NotBlank">
                 <option name="message">sylius.customer.email.not_blank</option>

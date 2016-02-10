@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\UserBundle\Form\Type;
 
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -19,6 +20,22 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class CustomerType extends CustomerProfileType
 {
+    /**
+     * @var EventSubscriberInterface
+     */
+    private $addUserFormSubscriber;
+
+    /**
+     * @param string $dataClass
+     * @param string[] $validationGroups
+     * @param EventSubscriberInterface $addUserFormSubscriber
+     */
+    public function __construct($dataClass, array $validationGroups = [], EventSubscriberInterface $addUserFormSubscriber)
+    {
+        parent::__construct($dataClass, $validationGroups);
+        $this->addUserFormSubscriber = $addUserFormSubscriber;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -31,7 +48,7 @@ class CustomerType extends CustomerProfileType
                 'multiple' => true,
                 'required' => false,
             ])
-            ->add('user', 'sylius_user')
+            ->addEventSubscriber($this->addUserFormSubscriber)
         ;
     }
 

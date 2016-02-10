@@ -1,0 +1,16 @@
+Sylius\Component\Core\Model\User:
+    user_{Oliver, Roy, Thea}:
+        plainPassword: <password()>
+        roles: [ROLE_USER]
+        enabled: true
+        customer: @customer_<current()>
+        username: <current()>@doe.com
+        usernameCanonical: <current()>@doe.com
+
+Sylius\Component\Core\Model\Customer:
+    customer_{Oliver, Roy, Thea, Barry, Joe}:
+        firstName: <current()>
+        lastName: Doe
+        email (unique): <current()>@doe.com
+        emailCanonical: <current()>@doe.com
+        birthday: <date()>

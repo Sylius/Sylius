@@ -5,35 +5,35 @@ Sylius\Component\User\Model\Customer:
         id:
             expose: true
             type: integer
+            groups: [Default, Detailed]
         email:
             expose: true
             type: string
+            groups: [Default, Detailed]
         emailCanonical:
             expose: true
             type: string
+            groups: [Detailed]
         firstName:
             expose: true
             type: string
+            groups: [Default, Detailed]
         lastName:
             expose: true
             type: string
+            groups: [Default, Detailed]
+        user:
+            expose: true
+            groups: [Default, Detailed]
         gender:
             expose: true
             type: string
+            groups: [Detailed]
         birthday:
             expose: true
             type: DateTime
+            groups: [Detailed]
         groups:
             expose: true
             type: array
-    relations:
-        - rel: user
-          href:
-              route: sylius_api_user_show
-              parameters:
-                  id: expr(object.getUser().getId())
-          embedded:
-              content: expr(object.getUser())
-              xmlElementName: sylius_user
-          exclusion:
-              exclude_if: expr(object.getUser() === null)
+            groups: [Detailed]

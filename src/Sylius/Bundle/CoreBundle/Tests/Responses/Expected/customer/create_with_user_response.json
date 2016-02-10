@@ -1,0 +1,17 @@
+{
+    "id": @integer@,
+    "user": {
+        "id": @integer@,
+        "username": "john.diggle@yahoo.com",
+        "roles": [
+            "ROLE_USER"
+        ],
+        "enabled": false
+    },
+    "email": "john.diggle@yahoo.com",
+    "email_canonical": "john.diggle@yahoo.com",
+    "first_name": "John",
+    "last_name": "Diggle",
+    "gender": "m",
+    "groups": []
+}
