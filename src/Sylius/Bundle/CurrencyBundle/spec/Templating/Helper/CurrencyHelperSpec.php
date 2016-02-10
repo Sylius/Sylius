@@ -46,10 +46,10 @@ class CurrencyHelperSpec extends ObjectBehavior
     ) {
         $currencyContext->getCurrency()->willReturn('PLN');
 
-        $converter->convert(15, 'USD')->shouldBeCalled()->willReturn(19);
-        $converter->convert(2500, 'USD')->shouldBeCalled()->willReturn(1913);
-        $converter->convert(312, 'PLN')->shouldBeCalled()->willReturn(407);
-        $converter->convert(500, 'PLN')->shouldBeCalled()->willReturn(653);
+        $converter->convertFromBase(15, 'USD')->shouldBeCalled()->willReturn(19);
+        $converter->convertFromBase(2500, 'USD')->shouldBeCalled()->willReturn(1913);
+        $converter->convertFromBase(312, 'PLN')->shouldBeCalled()->willReturn(407);
+        $converter->convertFromBase(500, 'PLN')->shouldBeCalled()->willReturn(653);
 
         $this->convertAmount(15, 'USD')->shouldReturn(19);
         $this->convertAmount(2500, 'USD')->shouldReturn(1913);

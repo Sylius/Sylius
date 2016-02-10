@@ -19,12 +19,22 @@ namespace Sylius\Component\Currency\Converter;
 interface CurrencyConverterInterface
 {
     /**
-     * Convert the given value to equal amount with different currency.
+     * Convert the given value to equal amount with different target currency.
      *
-     * @param int $value
-     * @param string  $code
+     * @param int    $value
+     * @param string $targetCurrencyCode
      *
      * @return int
      */
-    public function convert($value, $code);
+    public function convertFromBase($value, $targetCurrencyCode);
+
+    /**
+     * Convert the given value to equal amount from different source currency.
+     *
+     * @param int    $value
+     * @param string $sourceCurrencyCode
+     *
+     * @return int
+     */
+    public function convertToBase($value, $sourceCurrencyCode);
 }
