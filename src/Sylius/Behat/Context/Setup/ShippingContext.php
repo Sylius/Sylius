@@ -79,9 +79,9 @@ final class ShippingContext implements Context
     }
 
     /**
-     * @Given store ships everything for free
-     * @Given store ships everything for free within :zone zone
-     * @Given /^store ships everything for free for (the rest of the world)$/
+     * @Given the store ships everything for free
+     * @Given the store ships everything for free within :zone zone
+     * @Given /^the store ships everything for free for (the rest of the world)$/
      */
     public function storeShipsEverythingForFree(ZoneInterface $zone = null)
     {
@@ -89,9 +89,9 @@ final class ShippingContext implements Context
     }
 
     /**
-     * @Given /^store has "([^"]*)" shipping method with "(?:€|£|\$)([^"]*)" fee$/
-     * @Given /^store has "([^"]*)" shipping method with "(?:€|£|\$)([^"]*)" fee within ("([^"]*)" zone)$/
-     * @Given /^store has "([^"]*)" shipping method with "(?:€|£|\$)([^"]*)" fee for (the rest of the world)$/
+     * @Given /^the store has "([^"]*)" shipping method with "(?:€|£|\$)([^"]*)" fee$/
+     * @Given /^the store has "([^"]*)" shipping method with "(?:€|£|\$)([^"]*)" fee within ("([^"]*)" zone)$/
+     * @Given /^the store has "([^"]*)" shipping method with "(?:€|£|\$)([^"]*)" fee for (the rest of the world)$/
      */
     public function storeHasShippingMethodWithFee($shippingMethodName, $fee, ZoneInterface $zone = null)
     {

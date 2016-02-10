@@ -6,12 +6,12 @@ Feature: Apply correct shipping fee on order
 
     Background:
         Given the store is operating on a single channel
-        And store ships to "Australia", "France" and "United States"
+        And the store ships to "Australia", "France" and "United States"
         And default currency is "EUR"
-        And store has a product "PHP T-Shirt" priced at "€100.00"
-        And store has "DHL" shipping method with "€10.00" fee
-        And store has "FedEx" shipping method with "€30.00" fee
-        And store allows paying offline
+        And the store has a product "PHP T-Shirt" priced at "€100.00"
+        And the store has "DHL" shipping method with "€10.00" fee
+        And the store has "FedEx" shipping method with "€30.00" fee
+        And the store allows paying offline
         And there is user "john@example.com" identified by "password123"
         And I am logged in as "john@example.com"
 

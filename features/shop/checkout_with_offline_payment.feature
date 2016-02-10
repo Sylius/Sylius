@@ -8,10 +8,10 @@ Feature: Checkout with offline payment
         Given the store is operating on a single channel
         And default currency is "EUR"
         And there is user "john@example.com" identified by "password123"
-        And store has a product "PHP T-Shirt" priced at "$19.99"
-        And store ships to "France"
-        And store ships everything for free
-        And store allows paying offline
+        And the store has a product "PHP T-Shirt" priced at "$19.99"
+        And the store ships to "France"
+        And the store ships everything for free
+        And the store allows paying offline
 
     Scenario: Successfully placing an order
         Given I am logged in as "john@example.com"

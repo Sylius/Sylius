@@ -10,13 +10,13 @@ Feature: Apply correct tax for items with the same tax rate
         And default currency is "EUR"
         And default tax zone is "EU"
         And there is user "john@example.com" identified by "password123", with "United Kingdom" as shipping country
-        And store has "EU VAT" tax rate of 23% for "Clothes" within "EU" zone
-        And store has a product "PHP T-Shirt" priced at "€100.00"
-        And store has a product "Symfony Hat" priced at "€30.00"
+        And the store has "EU VAT" tax rate of 23% for "Clothes" within "EU" zone
+        And the store has a product "PHP T-Shirt" priced at "€100.00"
+        And the store has a product "Symfony Hat" priced at "€30.00"
         And product "PHP T-Shirt" belongs to "Clothes" tax category
         And product "Symfony Hat" belongs to "Clothes" tax category
-        And store ships everything for free
-        And store allows paying offline
+        And the store ships everything for free
+        And the store allows paying offline
         And I am logged in as "john@example.com"
 
     Scenario: Proper taxes for taxed product

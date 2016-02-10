@@ -6,21 +6,21 @@ Feature: Apply correct taxes for products with different tax rates for different
 
     Background:
         Given the store is operating on a single channel
-        And store ships to "Australia" and "France"
+        And the store ships to "Australia" and "France"
         And there is "EU" zone containing all members of European Union
         And there is rest of the world zone containing all other countries
         And default currency is "EUR"
         And default tax zone is "EU"
-        And store has "EU VAT" tax rate of 23% for "Clothes" within "EU" zone
-        And store has "No tax" tax rate of 0% for "Clothes" for the rest of the world
-        And store has "Low VAT" tax rate of 5% for "Mugs" for the rest of the world
-        And store has a product "PHP T-Shirt" priced at "€100.00"
+        And the store has "EU VAT" tax rate of 23% for "Clothes" within "EU" zone
+        And the store has "No tax" tax rate of 0% for "Clothes" for the rest of the world
+        And the store has "Low VAT" tax rate of 5% for "Mugs" for the rest of the world
+        And the store has a product "PHP T-Shirt" priced at "€100.00"
         And product "PHP T-Shirt" belongs to "Clothes" tax category
-        And store has a product "Symfony Mug" priced at "€50.00"
+        And the store has a product "Symfony Mug" priced at "€50.00"
         And product "Symfony Mug" belongs to "Mugs" tax category
-        And store ships everything for free within "EU" zone
-        And store ships everything for free for the rest of the world
-        And store allows paying offline
+        And the store ships everything for free within "EU" zone
+        And the store ships everything for free for the rest of the world
+        And the store allows paying offline
         And there is user "john@example.com" identified by "password123"
         And I am logged in as "john@example.com"
 

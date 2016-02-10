@@ -120,8 +120,8 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^store has a product "([^"]+)"$/
-     * @Given /^store has a product "([^"]+)" priced at "(?:€|£|\$)([^"]+)"$/
+     * @Given /^the store has a product "([^"]+)"$/
+     * @Given /^the store has a product "([^"]+)" priced at "(?:€|£|\$)([^"]+)"$/
      */
     public function storeHasAProductPricedAt($productName, $price = '0.00')
     {
