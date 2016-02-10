@@ -11,8 +11,11 @@ default:
                 - Sylius\Behat\Context\Setup\ChannelContext:
                     sharedStorage: "@sylius.behat.shared_storage"
                     defaultFranceChannelFactory: "@sylius.behat.default_france_channel_factory"
+
+                - Sylius\Behat\Context\Setup\GeographicalContext:
                     countryFactory: "@sylius.factory.country"
                     countryRepository: "@sylius.repository.country"
+
                 - Sylius\Behat\Context\Setup\CurrencyContext:
                     currencyRepository: "@sylius.repository.currency"
                     sharedStorage: "@sylius.behat.shared_storage"
