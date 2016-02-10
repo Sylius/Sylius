@@ -11,31 +11,29 @@
 
 namespace Sylius\Bundle\CoreBundle\OrderProcessing;
 
-use Sylius\Component\Channel\Context\ChannelContextInterface;
-use Sylius\Component\Promotion\Action\PromotionApplicatorInterface;
-use Sylius\Component\Promotion\Checker\PromotionEligibilityCheckerInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Processor\PromotionProcessor as BasePromotionProcessor;
-use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /**
- * Process all active promotions.
- *
  * @author Kristian Loevstroem <kristian@loevstroem.dk>
  */
 class PromotionProcessor extends BasePromotionProcessor
 {
-    protected $channelContext;
-
-    public function __construct(PromotionRepositoryInterface $repository, PromotionEligibilityCheckerInterface $checker, PromotionApplicatorInterface $applicator, ChannelContextInterface $channelContext)
+    /**
+     * @param PromotionSubjectInterface $subject
+     *
+     * @return array
+     */
+    protected function getActivePromotions(PromotionSubjectInterface $subject)
     {
-        parent::__construct($repository, $checker, $applicator);
-        $this->channelContext = $channelContext;
-    }
+        if (!$subject instanceof OrderInterface) {
+            throw new UnexpectedTypeException($subject, OrderInterface::class);
+        }
 
-    protected function getActivePromotions()
-    {
         if (null === $this->promotions) {
-            $channel = $this->channelContext->getChannel();
+            $channel = $subject->getChannel();
             $this->promotions = $this->repository->findActiveByChannel($channel);
         }
 

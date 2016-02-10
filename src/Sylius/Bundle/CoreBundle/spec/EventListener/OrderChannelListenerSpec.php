@@ -52,11 +52,25 @@ class OrderChannelListenerSpec extends ObjectBehavior
         ChannelContextInterface $channelContext,
         ChannelInterface $channel
     ) {
-        $event->getSubject()->shouldBeCalled()->willReturn($order);
+        $event->getSubject()->willReturn($order);
+        $order->getChannel()->willReturn(null);
 
         $channelContext->getChannel()->shouldBeCalled()->willReturn($channel);
 
         $order->setChannel($channel)->shouldBeCalled();
+
+        $this->processOrderChannel($event);
+    }
+
+    function it_does_not_proceed_order_channel_if_it_is_already_set(
+        GenericEvent $event,
+        OrderInterface $order,
+        ChannelInterface $channel
+    ) {
+        $event->getSubject()->willReturn($order);
+        $order->getChannel()->willReturn($channel);
+
+        $order->setChannel($channel)->shouldNotBeCalled();
 
         $this->processOrderChannel($event);
     }

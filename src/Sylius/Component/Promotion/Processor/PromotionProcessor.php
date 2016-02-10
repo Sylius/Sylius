@@ -45,7 +45,7 @@ class PromotionProcessor implements PromotionProcessorInterface
 
         $eligiblePromotions = [];
 
-        foreach ($this->getActivePromotions() as $promotion) {
+        foreach ($this->getActivePromotions($subject) as $promotion) {
             if (!$this->checker->isEligible($subject, $promotion)) {
                 continue;
             }
@@ -62,7 +62,7 @@ class PromotionProcessor implements PromotionProcessorInterface
         }
     }
 
-    protected function getActivePromotions()
+    protected function getActivePromotions(PromotionSubjectInterface $subject)
     {
         if (null === $this->promotions) {
             $this->promotions = $this->repository->findActive();
