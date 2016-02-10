@@ -50,6 +50,8 @@ class OrderChannelListener
             );
         }
 
-        $order->setChannel($this->channelContext->getChannel());
+        if (null === $order->getChannel()) {
+            $order->setChannel($this->channelContext->getChannel());
+        }
     }
 }
