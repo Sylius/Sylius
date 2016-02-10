@@ -1,7 +1,7 @@
 @ui-cart
 Feature: Apply correct tax for items with different tax rates
     In order to pay proper amount when buying goods from different tax categories
-    As a Customer
+    As a Visitor
     I want to have correct taxes applied to my order
 
     Background:
@@ -15,8 +15,6 @@ Feature: Apply correct tax for items with different tax rates
         And product "PHP T-Shirt" belongs to "Clothes" tax category
         And the store has a product "Symfony Mug" priced at "€50.00"
         And product "Symfony Mug" belongs to "Mugs" tax category
-        And there is user "john@example.com" identified by "password123"
-        And I am logged in as "john@example.com"
 
     Scenario: Proper taxes for different taxed products
         When I add product "PHP T-Shirt" to the cart

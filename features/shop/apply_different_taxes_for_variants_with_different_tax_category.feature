@@ -1,7 +1,7 @@
 @ui-cart
 Feature: Apply different taxes for variants with different tax category
     In order to pay proper amount when buying goods with variants from different tax categories
-    As a Customer
+    As a Visitor
     I want to have correct taxes applied to my order
 
     Background:
@@ -18,8 +18,6 @@ Feature: Apply different taxes for variants with different tax category
             | Large Mug  | €40.00  |
         And "Medium Mug" variant of product "PHP Mug" belongs to "Cheap Mugs" tax category
         And "Large Mug" variant of product "PHP Mug" belongs to "Mugs" tax category
-        And there is user "john@example.com" identified by "password123"
-        And I am logged in as "john@example.com"
 
     Scenario: Proper taxes for different taxed variants
         When I add "Medium Mug" variant of product "PHP Mug" to the cart
