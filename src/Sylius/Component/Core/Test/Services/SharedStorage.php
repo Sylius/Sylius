@@ -11,8 +11,6 @@
 
 namespace Sylius\Component\Core\Test\Services;
 
-use Sylius\Component\Resource\Model\ResourceInterface;
-
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
@@ -31,12 +29,8 @@ class SharedStorage implements SharedStorageInterface
     /**
      * {@inheritdoc}
      */
-    public function setCurrentResource($key, ResourceInterface $resource, $override = false)
+    public function setCurrentResource($key, $resource)
     {
-        if (isset($this->clipboard[$key]) && !$override) {
-            throw new \RuntimeException('This key is already used, if you want override set override flag');
-        }
-
         $this->clipboard[$key] = $resource;
         $this->latestKey = $key;
     }
@@ -58,18 +52,18 @@ class SharedStorage implements SharedStorageInterface
      */
     public function getLatestResource()
     {
+        if (!isset($this->clipboard[$this->latestKey])) {
+            throw new \InvalidArgumentException(sprintf('There is no latest resource!', $this->latestKey));
+        }
+
         return $this->clipboard[$this->latestKey];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setClipboard(array $clipboard, $override = false)
+    public function setClipboard(array $clipboard)
     {
-        if (!empty($this->clipboard) && !$override) {
-            throw new \RuntimeException('Clipboard is not empty, if you want override set override flag');
-        }
-
         $this->clipboard = $clipboard;
     }
 }

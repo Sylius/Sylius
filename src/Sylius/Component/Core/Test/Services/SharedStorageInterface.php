@@ -11,8 +11,6 @@
 
 namespace Sylius\Component\Core\Test\Services;
 
-use Sylius\Component\Resource\Model\ResourceInterface;
-
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
@@ -21,24 +19,25 @@ interface SharedStorageInterface
     /**
      * @param string $key
      *
-     * @return ResourceInterface
+     * @return mixed
      */
     public function getCurrentResource($key);
 
     /**
      * @param string $key
-     * @param ResourceInterface $resource
-     * @param bool $override
-     *
-     * @throws \RuntimeException
+     * @param mixed $resource
      */
-    public function setCurrentResource($key, ResourceInterface $resource, $override = false);
+    public function setCurrentResource($key, $resource);
+
+    /**
+     * @return mixed
+     */
+    public function getLatestResource();
 
     /**
      * @param array $clipboard
-     * @param bool $override
      *
      * @throws \RuntimeException
      */
-    public function setClipboard(array $clipboard, $override = false);
+    public function setClipboard(array $clipboard);
 }

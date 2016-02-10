@@ -14,8 +14,12 @@ namespace spec\Sylius\Component\Core\Test\Services;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Test\Services\SharedStorage;
+use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
 /**
+ * @mixin SharedStorage
+ *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 class SharedStorageSpec extends ObjectBehavior
@@ -27,7 +31,7 @@ class SharedStorageSpec extends ObjectBehavior
 
     function it_implements_shared_storage_interface()
     {
-        $this->shouldImplement('Sylius\Component\Core\Test\Services\SharedStorageInterface');
+        $this->shouldImplement(SharedStorageInterface::class);
     }
 
     function it_has_resources_in_clipboard(ChannelInterface $channel, ProductInterface $product)
@@ -43,35 +47,22 @@ class SharedStorageSpec extends ObjectBehavior
     {
         $this->setCurrentResource('channel1', $channel);
         $this->setCurrentResource('product1', $product);
+
         $this->getLatestResource()->shouldReturn($product);
     }
 
-    function it_prevents_setting_resource_at_used_key(ChannelInterface $channel, ChannelInterface $channel1)
+    function it_overrides_existing_resource_key(ChannelInterface $firstChannel, ChannelInterface $secondChannel)
     {
-        $this->setCurrentResource('channel', $channel);
+        $this->setCurrentResource('channel', $firstChannel);
+        $this->setCurrentResource('channel', $secondChannel);
 
-        $this->shouldThrow(new \RuntimeException('This key is already used, if you want override set override flag'))->during('setCurrentResource', ['channel', $channel1]);
+        $this->getCurrentResource('channel')->shouldReturn($secondChannel);
     }
 
-    function it_overrides_existing_resource_key(ChannelInterface $channel, ChannelInterface $channel1)
+    function its_clipboard_can_be_set(ChannelInterface $channel)
     {
-        $this->setCurrentResource('channel', $channel);
-        $this->setCurrentResource('channel', $channel1, true);
+        $this->setClipboard(['channel' => $channel]);
 
-        $this->getCurrentResource('channel')->shouldReturn($channel1);
-    }
-
-    function it_prevents_setting_clipboard_if_it_is_not_empty(ChannelInterface $channel)
-    {
-        $this->setCurrentResource('channel', $channel);
-
-        $this->shouldThrow(new \RuntimeException('Clipboard is not empty, if you want override set override flag'))->during('setClipboard', [[]]);
-    }
-
-    function it_overrides_clipboard(ChannelInterface $channel)
-    {
-        $this->setCurrentResource('channel', $channel);
-
-        $this->setClipboard([], true);
+        $this->getCurrentResource('channel')->shouldReturn($channel);
     }
 }
