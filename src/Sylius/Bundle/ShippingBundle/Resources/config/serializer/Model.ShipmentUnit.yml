@@ -1,6 +1,6 @@
-Sylius\Component\Shipping\Model\ShipmentItem:
+Sylius\Component\Shipping\Model\ShipmentUnit:
     exclusion_policy: ALL
-    xml_root_name: shipment-item
+    xml_root_name: shipment-unit
     properties:
         id:
             expose: true
@@ -18,7 +18,7 @@ Sylius\Component\Shipping\Model\ShipmentItem:
     relations:
         - rel: self
           href:
-                route: sylius_api_shipment_item_show
+                route: sylius_api_shipment_unit_show
                 parameters:
                     shipmentId: expr(object.getShipment().getId())
                     id: expr(object.getId())

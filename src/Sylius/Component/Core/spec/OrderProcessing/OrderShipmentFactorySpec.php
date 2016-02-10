@@ -41,7 +41,7 @@ class OrderShipmentFactorySpec extends ObjectBehavior
         $this->shouldImplement(OrderShipmentFactoryInterface::class);
     }
 
-    function it_creates_a_single_shipment_and_assigns_all_item_units_to_it(
+    function it_creates_a_single_shipment_and_assigns_all_unit_units_to_it(
         FactoryInterface $shipmentFactory,
         OrderInterface $order,
         ShipmentInterface $shipment,
@@ -64,7 +64,7 @@ class OrderShipmentFactorySpec extends ObjectBehavior
         ;
 
         $shipment
-            ->addItem($itemUnit)
+            ->addUnit($itemUnit)
             ->shouldBeCalled()
         ;
 
@@ -115,12 +115,12 @@ class OrderShipmentFactorySpec extends ObjectBehavior
         ;
 
         $shipment
-            ->addItem($itemUnitWithoutShipment)
+            ->addUnit($itemUnitWithoutShipment)
             ->shouldBeCalled()
         ;
 
         $shipment
-            ->addItem($itemUnit)
+            ->addUnit($itemUnit)
             ->shouldNotBeCalled()
         ;
 

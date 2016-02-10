@@ -19,7 +19,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Order\Model\OrderItemUnit;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
-use Sylius\Component\Shipping\Model\ShipmentItemInterface;
+use Sylius\Component\Shipping\Model\ShipmentUnitInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -48,9 +48,9 @@ class OrderItemUnitSpec extends ObjectBehavior
         $this->shouldImplement(InventoryUnitInterface::class);
     }
 
-    function it_implements_shipment_item_interface()
+    function it_implements_shipment_unit_interface()
     {
-        $this->shouldImplement(ShipmentItemInterface::class);
+        $this->shouldImplement(ShipmentUnitInterface::class);
     }
 
     function it_is_order_item_unit()

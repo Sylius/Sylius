@@ -20,11 +20,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Arnaud Langlade <arn0d.dev@gamil.com>
  */
-class PerItemRateConfigurationTypeSpec extends ObjectBehavior
+class PerUnitRateConfigurationTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Form\Type\Calculator\PerItemRateConfigurationType');
+        $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Form\Type\Calculator\PerUnitRateConfigurationType');
     }
 
     function it_is_a_form()
@@ -50,6 +50,6 @@ class PerItemRateConfigurationTypeSpec extends ObjectBehavior
 
     function it_has_a_name()
     {
-        $this->getName()->shouldReturn('sylius_shipping_calculator_per_item_rate');
+        $this->getName()->shouldReturn('sylius_shipping_calculator_per_unit_rate');
     }
 }

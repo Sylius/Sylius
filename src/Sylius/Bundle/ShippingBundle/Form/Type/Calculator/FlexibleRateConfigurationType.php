@@ -28,23 +28,23 @@ class FlexibleRateConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('first_item_cost', 'sylius_money', [
-                'label' => 'sylius.form.shipping_calculator.flexible_rate_configuration.first_item_cost',
+            ->add('first_unit_cost', 'sylius_money', [
+                'label' => 'sylius.form.shipping_calculator.flexible_rate_configuration.first_unit_cost',
                 'constraints' => [
                     new NotBlank(),
                     new Type(['type' => 'integer']),
                 ],
             ])
-            ->add('additional_item_cost', 'sylius_money', [
-                'label' => 'sylius.form.shipping_calculator.flexible_rate_configuration.additional_item_cost',
+            ->add('additional_unit_cost', 'sylius_money', [
+                'label' => 'sylius.form.shipping_calculator.flexible_rate_configuration.additional_unit_cost',
                 'constraints' => [
                     new NotBlank(),
                     new Type(['type' => 'integer']),
                 ],
             ])
-            ->add('additional_item_limit', 'integer', [
+            ->add('additional_unit_limit', 'integer', [
                 'required' => false,
-                'label' => 'sylius.form.shipping_calculator.flexible_rate_configuration.additional_item_limit',
+                'label' => 'sylius.form.shipping_calculator.flexible_rate_configuration.additional_unit_limit',
                 'constraints' => [
                     new Type(['type' => 'integer']),
                 ],

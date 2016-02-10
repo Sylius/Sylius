@@ -5,7 +5,7 @@ Sylius e-commerce Shipping component is a complete solution to manage
 shipments & shipping methods and shipping cost calculation for modern PHP
 applications.
 
-The component provides models for Shipment, ShipmentItem, ShippingMethod and
+The component provides models for Shipment, ShipmentUnit, ShippingMethod and
 many more. It supports complex ShippingRules system to cover most
 sophisticated logic for selecting available methods for particular shipment.
 

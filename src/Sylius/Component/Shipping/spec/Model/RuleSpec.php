@@ -42,8 +42,8 @@ class RuleSpec extends ObjectBehavior
 
     function its_type_is_mutable()
     {
-        $this->setType(RuleInterface::TYPE_ITEM_COUNT);
-        $this->getType()->shouldReturn(RuleInterface::TYPE_ITEM_COUNT);
+        $this->setType(RuleInterface::TYPE_UNIT_COUNT);
+        $this->getType()->shouldReturn(RuleInterface::TYPE_UNIT_COUNT);
     }
 
     function it_initializes_empty_array_for_configuration_by_default()

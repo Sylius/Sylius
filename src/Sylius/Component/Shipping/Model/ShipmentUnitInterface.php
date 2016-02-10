@@ -17,7 +17,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface ShipmentItemInterface extends TimestampableInterface, ResourceInterface
+interface ShipmentUnitInterface extends TimestampableInterface, ResourceInterface
 {
     /**
      * @return ShipmentInterface

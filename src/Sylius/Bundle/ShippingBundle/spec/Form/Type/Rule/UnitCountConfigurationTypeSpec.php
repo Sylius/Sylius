@@ -19,11 +19,11 @@ use Symfony\Component\Form\Test\FormBuilderInterface;
 /**
  * @author Arnaud Langlade <arn0d.dev@gamil.com>
  */
-class ItemCountConfigurationTypeSpec extends ObjectBehavior
+class UnitCountConfigurationTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Form\Type\Rule\ItemCountConfigurationType');
+        $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Form\Type\Rule\UnitCountConfigurationType');
     }
 
     function it_is_a_form()
@@ -41,6 +41,6 @@ class ItemCountConfigurationTypeSpec extends ObjectBehavior
 
     function it_has_a_name()
     {
-        $this->getName()->shouldReturn('sylius_shipping_rule_item_count_configuration');
+        $this->getName()->shouldReturn('sylius_shipping_rule_unit_count_configuration');
     }
 }

@@ -51,26 +51,26 @@ interface ShipmentInterface extends ResourceInterface, ShippingSubjectInterface,
     public function setMethod(ShippingMethodInterface $method);
 
     /**
-     * @return Collection|ShipmentItemInterface[]
+     * @return Collection|ShipmentUnitInterface[]
      */
-    public function getItems();
+    public function getUnits();
 
     /**
-     * @param ShipmentItemInterface $item
+     * @param ShipmentUnitInterface $unit
      */
-    public function addItem(ShipmentItemInterface $item);
+    public function addUnit(ShipmentUnitInterface $unit);
 
     /**
-     * @param ShipmentItemInterface $item
+     * @param ShipmentUnitInterface $unit
      */
-    public function removeItem(ShipmentItemInterface $item);
+    public function removeUnit(ShipmentUnitInterface $unit);
 
     /**
-     * @param ShipmentItemInterface $item
+     * @param ShipmentUnitInterface $unit
      *
      * @return bool
      */
-    public function hasItem(ShipmentItemInterface $item);
+    public function hasUnit(ShipmentUnitInterface $unit);
 
     /**
      * @return string

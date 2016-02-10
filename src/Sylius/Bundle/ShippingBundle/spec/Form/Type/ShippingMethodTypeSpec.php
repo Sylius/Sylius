@@ -17,7 +17,7 @@ use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ShippingBundle\Form\EventListener\BuildShippingMethodFormSubscriber;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Shipping\Calculator\FlatRateCalculator;
-use Sylius\Component\Shipping\Calculator\PerItemRateCalculator;
+use Sylius\Component\Shipping\Calculator\PerUnitRateCalculator;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -117,9 +117,9 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         FormBuilder $flatRateFormBuilder,
         Form $flatRateForm,
         FlatRateCalculator $flatRateCalculator,
-        FormBuilder $perItemFormBuilder,
-        Form $perItemForm,
-        PerItemRateCalculator $perItemRateCalculator,
+        FormBuilder $perUnitFormBuilder,
+        Form $perUnitForm,
+        PerUnitRateCalculator $perUnitRateCalculator,
         $formRegistry
     ) {
         $builder
@@ -137,9 +137,9 @@ class ShippingMethodTypeSpec extends ObjectBehavior
             ->willReturn('flat_rate')
         ;
 
-        $perItemRateCalculator
+        $perUnitRateCalculator
             ->getType()
-            ->willReturn('per_item_rate')
+            ->willReturn('per_unit_rate')
         ;
 
         $calculatorRegistry
@@ -147,7 +147,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
             ->willReturn(
                 [
                     'flat_rate' => $flatRateCalculator,
-                    'per_item_rate' => $perItemRateCalculator,
+                    'per_unit_rate' => $perUnitRateCalculator,
                 ]
             )
         ;
@@ -162,17 +162,17 @@ class ShippingMethodTypeSpec extends ObjectBehavior
             ->willReturn($flatRateFormBuilder)
         ;
 
-        $perItemFormBuilder
+        $perUnitFormBuilder
             ->getForm()
-            ->willReturn($perItemForm)
+            ->willReturn($perUnitForm)
         ;
 
         $builder
-            ->create('configuration', 'sylius_shipping_calculator_per_item_rate')
-            ->willReturn($perItemFormBuilder)
+            ->create('configuration', 'sylius_shipping_calculator_per_unit_rate')
+            ->willReturn($perUnitFormBuilder)
         ;
 
-        $formRegistry->hasType('sylius_shipping_calculator_per_item_rate')->shouldBeCalled()->willReturn(true);
+        $formRegistry->hasType('sylius_shipping_calculator_per_unit_rate')->shouldBeCalled()->willReturn(true);
         $formRegistry->hasType('sylius_shipping_calculator_flat_rate')->shouldBeCalled()->willReturn(true);
 
         $builder
@@ -181,7 +181,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
                 [
                     'calculators' => [
                         'flat_rate' => $flatRateForm,
-                        'per_item_rate' => $perItemForm,
+                        'per_unit_rate' => $perUnitForm,
                     ],
                     'rules' => [],
                 ]

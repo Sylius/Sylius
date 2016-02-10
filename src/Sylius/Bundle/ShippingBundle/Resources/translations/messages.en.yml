@@ -4,7 +4,7 @@
 sylius:
     form:
         rule:
-            item_count_configuration:
+            unit_count_configuration:
                 count: Count
                 equal: Equal to
 
@@ -28,12 +28,12 @@ sylius:
 
             flexible_rate_configuration:
                 label: Flexible rate
-                additional_item_cost: Additional item cost
-                additional_item_limit: Limit additional items
-                first_item_cost: First item cost
+                additional_unit_cost: Additional unit cost
+                additional_unit_limit: Limit additional units
+                first_unit_cost: First unit cost
 
-            per_item_rate_configuration:
-                label: Flat rate per item
+            per_unit_rate_configuration:
+                label: Flat rate per unit
                 amount: Amount
 
             weight_rate_configuration:

@@ -16,7 +16,7 @@ use Sylius\Component\Resource\Model\TimestampableTrait;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ShipmentItem implements ShipmentItemInterface
+class ShipmentUnit implements ShipmentUnitInterface
 {
     use TimestampableTrait;
 
@@ -50,7 +50,7 @@ class ShipmentItem implements ShipmentItemInterface
      */
     public function __toString()
     {
-        return $this->id;
+        return (string) $this->id;
     }
 
     /**
