@@ -125,7 +125,7 @@ final class SymfonyExtension implements Extension
 
         $container->setDefinition(self::KERNEL_CONTAINER_ID, $containerDefinition);
     }
-    
+
     /**
      * @param ContainerBuilder $container
      */

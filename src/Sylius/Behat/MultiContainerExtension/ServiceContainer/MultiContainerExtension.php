@@ -146,8 +146,12 @@ final class MultiContainerExtension implements Extension
      */
     private function loadEnvironmentHandler(ContainerBuilder $container)
     {
-        $definition = new Definition(ContextServiceEnvironmentHandler::class, [new Reference('sylius_multi_container.context_registry'), new Reference('service_container')]);
-        $definition->addTag(EnvironmentExtension::HANDLER_TAG, array('priority' => 50));
+        $definition = new Definition(ContextServiceEnvironmentHandler::class, [
+            new Reference('sylius_multi_container.context_registry'),
+            new Reference('service_container')
+        ]);
+        $definition->addTag(EnvironmentExtension::HANDLER_TAG, ['priority' => 128]);
+
         $container->setDefinition('sylius_multi_container.environment_handler.context_service', $definition);
     }
 
@@ -173,8 +177,8 @@ final class MultiContainerExtension implements Extension
     private function loadScopeManipulator(ContainerBuilder $container)
     {
         $definition = new Definition(ScopeManipulator::class, [new Reference('service_container')]);
-        $definition->addTag(EventDispatcherExtension::SUBSCRIBER_TAG, ['priority' => 0]);
+        $definition->addTag(EventDispatcherExtension::SUBSCRIBER_TAG);
+
         $container->setDefinition('sylius_multi_container.scope_manipulator', $definition);
     }
-
 }

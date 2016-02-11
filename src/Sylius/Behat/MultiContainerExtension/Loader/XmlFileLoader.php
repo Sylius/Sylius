@@ -1,4 +1,4 @@
-<?php
+<?php // @codingStandardsIgnoreStart
 
 /*
  * This file is part of the Symfony package.

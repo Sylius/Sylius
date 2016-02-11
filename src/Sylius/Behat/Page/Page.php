@@ -278,6 +278,7 @@ abstract class Page
     {
         $selectorType = is_array($selector) ? key($selector) : 'css';
         $locator = is_array($selector) ? $selector[$selectorType] : $selector;
+
         return $selectorsHandler->selectorToXpath($selectorType, $locator);
     }
 }

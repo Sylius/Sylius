@@ -1,24 +1,20 @@
 <?php
 
 /*
- * This file is part of the Behat Symfony2Extension
+ * This file is part of the Sylius package.
  *
- * (c) Konstantin Kudryashov <ever.zet@gmail.com>
+ * (c) Paweł Jędrzejewski
  *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace Sylius\Behat\MultiContainerExtension;
 
-use Behat\Behat\Context\Context;
-use Behat\Behat\Context\Initializer\ContextInitializer;
 use Behat\Behat\EventDispatcher\Event\ExampleTested;
 use Behat\Behat\EventDispatcher\Event\ScenarioTested;
-use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
