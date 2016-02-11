@@ -77,6 +77,7 @@ or use directly a class.
 .. code-block:: yaml
 
     # routing.yml
+
     app_user_create:
         path: /users/new
         methods: [GET, POST]
@@ -85,6 +86,30 @@ or use directly a class.
             _sylius:
                 template: App:Backend/User:create.html.twig
                 form: App\Bundle\Form\UserType
+
+Passing Custom Options to Form
+------------------------------
+
+What happend when you need pass some options to the form?.
+Well, there's a configuration for that!
+
+Below you can see the usage for specifying a custom options, in this case, ``validation_groups``, but you can pass any option accepted by the form.
+
+.. code-block:: yaml
+
+    # routing.yml
+
+    app_user_create:
+        path: /users/new
+        methods: [GET, POST]
+        defaults:
+            _controller: app.controller.user:createAction
+            _sylius:
+                template: App:Backend/User:create.html.twig
+                form:
+                    type: app_user_custom
+                    options:
+                        validation_groups: ['sylius', 'my_custom_group']
 
 Using Custom Factory Method
 ---------------------------
@@ -116,7 +141,7 @@ Additionally, if you want to provide your custom method with arguments from the 
         defaults:
             _controller: app.controller.user:createAction
             _sylius:
-                factory: 
+                factory:
                     method: createNewWithGroups
                     arguments: [$groupId]
 
