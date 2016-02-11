@@ -47,6 +47,11 @@
         <label for="{{ id }}" class="btn-primary btn-lg file-overlay"><i class="glyphicon glyphicon-folder-open"></i>&nbsp; {{ 'sylius.ui.choose_file'|trans }}</label>
         &nbsp;
     {% endif %}
+
+    {% if 'datepicker' in attr.class %}
+        {% set attr = attr|merge({'data-locale': sylius_locale(), 'data-direction': sylius_direction()}) %}
+    {% endif %}
+
     {{ parent() }}
 {% endspaceless %}
 {% endblock form_widget_simple %}
@@ -90,6 +95,7 @@
 {% block date_widget %}
 {% spaceless %}
     {% if widget == 'single_text' %}
+        {% set attr = attr|merge({'data-calendar': sylius_calendar()}) %}
         {{ block('form_widget_simple') }}
     {% else %}
             {{ '{{ year }} / {{ month }} / {{ day }}'|replace({
