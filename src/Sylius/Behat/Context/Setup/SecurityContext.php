@@ -12,8 +12,11 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Mink;
+use Behat\Mink\Session;
 use Behat\MinkExtension\Context\MinkAwareContext;
+use Sylius\Behat\Page\Shop\HomePage;
 use Sylius\Bundle\CoreBundle\Test\Services\SecurityServiceInterface;
 
 /**
@@ -27,16 +30,28 @@ final class SecurityContext implements Context, MinkAwareContext
     private $securityService;
 
     /**
+     * @var HomePage
+     */
+    private $homePage;
+
+    /**
      * @var Mink
      */
     private $mink;
 
     /**
-     * @param SecurityServiceInterface $securityService
+     * @var array
      */
-    public function __construct(SecurityServiceInterface $securityService)
+    private $minkParameters;
+
+    /**
+     * @param SecurityServiceInterface $securityService
+     * @param HomePage $homePage
+     */
+    public function __construct(SecurityServiceInterface $securityService, HomePage $homePage)
     {
         $this->securityService = $securityService;
+        $this->homePage = $homePage;
     }
 
     /**
@@ -44,6 +59,7 @@ final class SecurityContext implements Context, MinkAwareContext
      */
     public function iAmLoggedInAs($email)
     {
+        $this->prepareSessionIfNeeded();
         $this->securityService->logIn($email, 'main', $this->mink->getSession());
     }
 
@@ -60,5 +76,29 @@ final class SecurityContext implements Context, MinkAwareContext
      */
     public function setMinkParameters(array $parameters)
     {
+        $this->minkParameters = $parameters;
+    }
+
+    private function prepareSessionIfNeeded()
+    {
+        if (!$this->getSession()->getDriver() instanceof Selenium2Driver) {
+            return;
+        }
+
+        if (false !== strpos($this->getSession()->getCurrentUrl(), $this->minkParameters['base_url'])) {
+            return;
+        }
+
+        $this->homePage->open();
+    }
+
+    /**
+     * @param null $name
+     *
+     * @return Session
+     */
+    private function getSession($name = null)
+    {
+        return $this->mink->getSession($name);
     }
 }
