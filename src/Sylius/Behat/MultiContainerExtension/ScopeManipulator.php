@@ -60,6 +60,8 @@ final class ScopeManipulator implements EventSubscriberInterface
 
     public function leaveScope()
     {
-        $this->container->leaveScope('scenario');
+        if ($this->container->isScopeActive('scenario')) {
+            $this->container->leaveScope('scenario');
+        }
     }
 }

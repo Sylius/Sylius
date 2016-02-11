@@ -69,16 +69,13 @@ final class MultiContainerExtension implements Extension
      */
     public function load(ContainerBuilder $container, array $config)
     {
-        $container->setProxyInstantiator(new RuntimeInstantiator());
+        $this->enableLazyServicesSupport($container);
 
         $this->registerAutoloader($container);
         $this->loadImportedServicesFiles($container, $config);
 
-        $container->setDefinition('sylius_multi_container.context_registry', new Definition(ContextRegistry::class));
-
-        $definition = new Definition(ScopeManipulator::class, [new Reference('service_container')]);
-        $definition->addTag(EventDispatcherExtension::SUBSCRIBER_TAG, ['priority' => 0]);
-        $container->setDefinition('sylius_multi_container.scope_manipulator', $definition);
+        $this->loadContextRegistry($container);
+        $this->loadScopeManipulator($container);
 
         $this->declareScenarioScope($container);
         $this->loadEnvironmentHandler($container);
@@ -152,6 +149,32 @@ final class MultiContainerExtension implements Extension
         $definition = new Definition(ContextServiceEnvironmentHandler::class, [new Reference('sylius_multi_container.context_registry'), new Reference('service_container')]);
         $definition->addTag(EnvironmentExtension::HANDLER_TAG, array('priority' => 50));
         $container->setDefinition('sylius_multi_container.environment_handler.context_service', $definition);
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     */
+    private function enableLazyServicesSupport(ContainerBuilder $container)
+    {
+        $container->setProxyInstantiator(new RuntimeInstantiator());
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     */
+    private function loadContextRegistry(ContainerBuilder $container)
+    {
+        $container->setDefinition('sylius_multi_container.context_registry', new Definition(ContextRegistry::class));
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     */
+    private function loadScopeManipulator(ContainerBuilder $container)
+    {
+        $definition = new Definition(ScopeManipulator::class, [new Reference('service_container')]);
+        $definition->addTag(EventDispatcherExtension::SUBSCRIBER_TAG, ['priority' => 0]);
+        $container->setDefinition('sylius_multi_container.scope_manipulator', $definition);
     }
 
 }

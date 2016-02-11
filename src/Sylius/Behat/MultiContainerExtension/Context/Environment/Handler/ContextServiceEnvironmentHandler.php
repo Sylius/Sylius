@@ -88,7 +88,9 @@ final class ContextServiceEnvironmentHandler implements EnvironmentHandler
             ), $uninitializedEnvironment);
         }
 
-        $this->container->enterScope('scenario');
+        if (!$this->container->isScopeActive('scenario')) {
+            $this->container->enterScope('scenario');
+        }
 
         $environment = new InitializedContextEnvironment($uninitializedEnvironment->getSuite());
         foreach ($uninitializedEnvironment->getContextsServicesIds() as $serviceId) {
