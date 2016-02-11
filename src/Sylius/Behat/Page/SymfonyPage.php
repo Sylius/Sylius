@@ -9,11 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\SymfonyPageObjectExtension\PageObject;
+namespace Sylius\Behat\Page;
 
 use Behat\Mink\Session;
-use SensioLabs\Behat\PageObjectExtension\PageObject\Factory;
-use Sylius\Behat\PageObjectExtension\PageObject\Page;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -28,13 +26,12 @@ abstract class SymfonyPage extends Page
 
     /**
      * @param Session $session
-     * @param Factory $factory
      * @param array $parameters
      * @param RouterInterface $router
      */
-    public function __construct(Session $session, Factory $factory, array $parameters = [], RouterInterface $router)
+    public function __construct(Session $session, array $parameters, RouterInterface $router)
     {
-        parent::__construct($session, $factory, $parameters);
+        parent::__construct($session, $parameters);
 
         $this->router = $router;
     }
