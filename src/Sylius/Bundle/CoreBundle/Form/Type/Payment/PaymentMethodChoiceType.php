@@ -38,7 +38,7 @@ class PaymentMethodChoiceType extends BasePaymentMethodChoiceType
             ];
 
             return function (PaymentMethodRepositoryInterface $repository) use ($repositoryOptions) {
-                return $repository->getQueryBuidlerForChoiceType($repositoryOptions);
+                return $repository->getQueryBuilderForChoiceType($repositoryOptions);
             };
         };
 
