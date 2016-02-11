@@ -32,13 +32,13 @@ final class SymfonyExtension implements Extension
      * Kernel used inside Behat contexts or to create services injected to them
      * Container is built before every scenario
      */
-    const KERNEL_ID = Symfony2Extension::KERNEL_ID;
+    const KERNEL_ID = 'sylius_symfony_extension.kernel';
 
     /**
      * The current container used in scenario contexts
      * To be used as a factory for current injected application services
      */
-    const KERNEL_CONTAINER_ID = self::KERNEL_ID . '.container';
+    const KERNEL_CONTAINER_ID = 'sylius_symfony_extension.kernel.container';
 
     /**
      * Kernel used by Symfony2 driver to isolate web container from contexts' container
@@ -56,7 +56,7 @@ final class SymfonyExtension implements Extension
      * The only container built by shared kernel
      * To be used as a factory for shared injected application services
      */
-    const SHARED_KERNEL_CONTAINER_ID = self::SHARED_KERNEL_ID . '.container';
+    const SHARED_KERNEL_CONTAINER_ID = 'sylius_symfony_extension.shared_kernel.container';
 
     /**
      * {@inheritdoc}
@@ -87,6 +87,7 @@ final class SymfonyExtension implements Extension
      */
     public function load(ContainerBuilder $container, array $config)
     {
+        $this->aliasSymfony2ExtensionKernel($container);
         $this->declareKernelContainer($container);
 
         $this->declareDriverKernel($container);
@@ -100,6 +101,14 @@ final class SymfonyExtension implements Extension
      */
     public function process(ContainerBuilder $container)
     {
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     */
+    private function aliasSymfony2ExtensionKernel(ContainerBuilder $container)
+    {
+        $container->setAlias(self::KERNEL_ID, Symfony2Extension::KERNEL_ID);
     }
 
     /**
