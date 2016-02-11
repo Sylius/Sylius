@@ -48,7 +48,7 @@ Feature: Checkout coupon promotions
             has added a valid coupon
         Given I am on the store homepage
         And I added product "Etch" to cart, with quantity "6"
-        When I fill in "Code" with "XD0001"
+        When I fill in "Coupon" with "XD0001"
         And I press "Save"
         Then I should be on the cart summary page
         And I should see "Your promotion coupon has been added to the cart"
@@ -58,7 +58,7 @@ Feature: Checkout coupon promotions
     Scenario: An invalid coupon can not be added to the cart
         Given I am on the store homepage
         And I added product "Etch" to cart, with quantity "5"
-        When I fill in "Code" with "an invalid coupon"
+        When I fill in "Coupon" with "an invalid coupon"
         And I press "Save"
         Then I should be on the cart summary page
         And I should see "Your promotion coupon is not valid"
@@ -69,7 +69,7 @@ Feature: Checkout coupon promotions
             not fulfill the rules required by the promotion
         Given I am on the store homepage
         And I added product "Etch" to cart, with quantity "4"
-        When I fill in "Code" with "XD0001"
+        When I fill in "Coupon" with "XD0001"
         And I press "Save"
         Then I should be on the cart summary page
         And I should see "Your cart is not eligible to this promotion coupon"
@@ -82,7 +82,7 @@ Feature: Checkout coupon promotions
         And I added product "Lenny" to cart
         And I added product "Etch" to cart
         And I added product "Sarge" to cart
-        When I fill in "Code" with "XD0002"
+        When I fill in "Coupon" with "XD0002"
         And I press "Save"
         Then I should be on the cart summary page
         And I should see "Your cart is not eligible to this promotion coupon"

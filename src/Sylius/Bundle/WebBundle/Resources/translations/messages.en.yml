@@ -467,7 +467,7 @@ sylius:
     filter: Filter
     form:
         cart:
-            coupon: If you have a promotion coupon, enter it here
+            coupon: Coupon
         choose_file: Choose file
         comment:
             comment: Comment

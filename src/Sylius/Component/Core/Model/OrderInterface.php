@@ -17,7 +17,7 @@ use Sylius\Component\Channel\Model\ChannelAwareInterface;
 use Sylius\Component\Payment\Model\PaymentsSubjectInterface;
 use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionCountableSubjectInterface;
-use Sylius\Component\Promotion\Model\PromotionCouponsAwareSubjectInterface;
+use Sylius\Component\Promotion\Model\PromotionCouponAwareSubjectInterface;
 use Sylius\Component\User\Model\CustomerAwareInterface;
 
 /**
@@ -27,7 +27,7 @@ interface OrderInterface extends
     CartInterface,
     PaymentsSubjectInterface,
     PromotionCountableSubjectInterface,
-    PromotionCouponsAwareSubjectInterface,
+    PromotionCouponAwareSubjectInterface,
     CustomerAwareInterface,
     ChannelAwareInterface
 {
@@ -140,17 +140,7 @@ interface OrderInterface extends
     /**
      * @param BaseCouponInterface $coupon
      */
-    public function addPromotionCoupon(BaseCouponInterface $coupon = null);
-
-    /**
-     * @param BaseCouponInterface $coupon
-     */
-    public function removePromotionCoupon(BaseCouponInterface $coupon = null);
-
-    /**
-     * @param BaseCouponInterface $coupon
-     */
-    public function hasPromotionCoupon(BaseCouponInterface $coupon);
+    public function setPromotionCoupon(BaseCouponInterface $coupon = null);
 
     /**
      * @return string

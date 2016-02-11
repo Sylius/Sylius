@@ -20,7 +20,7 @@ Sylius\Component\Core\Model\Order:
             expose: true
         channel:
             expose: true
-        promotionCoupons:
+        promotionCoupon:
             expose: true
         completedAt:
             expose: true

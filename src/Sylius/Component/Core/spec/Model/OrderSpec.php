@@ -333,13 +333,10 @@ class OrderSpec extends ObjectBehavior
         $this->shouldNotHaveShipment($shipment);
     }
 
-    function it_adds_and_removes_promotion_coupons(CouponInterface $coupon)
+    function it_has_promotion_coupon(CouponInterface $coupon)
     {
-        $this->addPromotionCoupon($coupon);
-        $this->shouldHavePromotionCoupon($coupon);
-
-        $this->removePromotionCoupon($coupon);
-        $this->shouldNotHavePromotionCoupon($coupon);
+        $this->setPromotionCoupon($coupon);
+        $this->getPromotionCoupon()->shouldReturn($coupon);
     }
 
     function it_count_promotions_subjects(OrderItemInterface $item1, OrderItemInterface $item2)

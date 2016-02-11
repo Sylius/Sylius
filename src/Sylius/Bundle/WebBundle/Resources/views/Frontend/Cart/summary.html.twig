@@ -79,16 +79,16 @@
     </tfoot>
 </table>
 
-<div id="sylius-cart-coupons" class="well well-sm" data-prototype="{{ form_row(form.promotionCoupons.vars.prototype)|e }}">
+<div id="sylius-cart-coupons" class="well well-sm">
     <div id="sylius-cart-coupons-collection">
-        {% for couponField in form.promotionCoupons %}
-        {{ form_row(couponField, {'label_attr': {'class': 'col-lg-12'}}) }}
-        {% endfor %}
+        {% if form.promotionCoupon in not null %}
+            {{ form_row(form.promotionCoupon , {'label_attr': {'class': 'col-lg-12'}}) }}
+        {% endif %}
     </div>
 </div>
 
-<div id="sylius-cart-additional-information" class="well well-sm" data-prototype="{{ form_row(form.promotionCoupons.vars.prototype)|e }}">
-        {{ form_row(form.additionalInformation, {'label_attr': {'class': 'col-lg-12'}}) }}
+<div id="sylius-cart-additional-information" class="well well-sm">
+    {{ form_row(form.additionalInformation, {'label_attr': {'class': 'col-lg-12'}}) }}
 </div>
 
 {{ form_rest(form) }}
