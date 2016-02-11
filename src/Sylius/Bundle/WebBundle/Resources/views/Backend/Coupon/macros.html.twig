@@ -8,14 +8,16 @@
     <thead>
         <tr>
             <th>{{ 'sylius.promotion.id' | trans }}</th>
+            <th>{{ 'sylius.promotion_coupon.type'|trans }}</th>
             <th>{{ 'sylius.ui.code' | trans }}</th>
+            <th>{{ 'sylius.promotion_coupon.amount'|trans }}</th>
             <th>{{ 'sylius.promotion.usage_limit' | trans }}</th>
             <th>{{ 'sylius.promotion_coupon.per_customer_usage_limit' | trans }}</th>
             <th>{{ 'sylius.promotion.used' | trans }}</th>
             <th>{{ 'sylius.promotion_coupon.expires_at' | trans }}</th>
             <th>
                 <div class="pull-right">
-                {{ 'sylius.promotion_coupon.total_results'|trans({'%total%': promotion_coupons.nbResults}) }}
+                    {{ 'sylius.promotion_coupon.total_results'|trans({'%total%': promotion_coupons.nbResults}) }}
                 </div>
             </th>
         </tr>
@@ -25,7 +27,13 @@
         {% set promotion = promotion_coupon.promotion %}
         <tr id="{{ promotion_coupon.id }}">
             <td><strong>{{ promotion_coupon.id }}</strong></td>
-            <td>{{ promotion_coupon.code }}</td>
+            <td>
+                <span class="label label-info">
+                    {{ ('sylius.promotion_coupon.types.'~promotion_coupon.type)|trans }}
+                </span>
+            </td>
+            <td><code>{{ promotion_coupon.code }}</code></td>
+            <td>{{ promotion_coupon.amount|sylius_price }}</td>
             <td>
                 <span class="label label-info">
                     {{ promotion_coupon.usageLimit|default('sylius.no'|trans) }}

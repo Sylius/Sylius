@@ -41,7 +41,17 @@ class CouponTypeSpec extends ObjectBehavior
     function it_should_build_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
-            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
+            ->add('type', 'choice', Argument::any())
+            ->willReturn($builder)
+        ;
+
+        $builder
+            ->add('code', 'text', Argument::any())
+            ->willReturn($builder)
+        ;
+
+        $builder
+            ->add('amount', 'sylius_money', Argument::any())
             ->willReturn($builder)
         ;
 
@@ -52,6 +62,11 @@ class CouponTypeSpec extends ObjectBehavior
 
         $builder
             ->add('expiresAt', 'date', Argument::any())
+            ->willReturn($builder)
+        ;
+
+        $builder
+            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
             ->willReturn($builder)
         ;
 

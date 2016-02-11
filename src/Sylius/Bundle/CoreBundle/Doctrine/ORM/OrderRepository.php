@@ -396,6 +396,41 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         return $queryBuilder->getQuery()->getResult();
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function findWithCoupons(array $criteria = [])
+    {
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder
+            ->innerJoin('o.promotionCoupons', 'promotionCoupons')
+            ->addSelect('promotionCoupons')
+        ;
+
+        if (isset($criteria['type'])) {
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->eq('promotionCoupons.type', ':type'))
+                ->setParameter('type', $criteria['type'])
+            ;
+        }
+
+        if (isset($criteria['coupons'])) {
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->in('promotionCoupons', ':coupons'))
+                ->setParameter('coupons', $criteria['coupons'])
+            ;
+        }
+
+        if (isset($criteria['user'])) {
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->eq('o.user', ':user'))
+                ->setParameter('user', $criteria['user'])
+            ;
+        }
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
     protected function getCollectionQueryBuilderBetweenDates(\DateTime $from, \DateTime $to, $state = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilder();

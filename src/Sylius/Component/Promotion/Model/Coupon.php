@@ -29,6 +29,11 @@ class Coupon implements CouponInterface
     /**
      * @var string
      */
+    protected $type = self::TYPE_COUPON;
+
+    /**
+     * @var string
+     */
     protected $code;
 
     /**
@@ -45,6 +50,11 @@ class Coupon implements CouponInterface
      * @var PromotionInterface
      */
     protected $promotion;
+
+    /**
+     * @var int
+     */
+    protected $amount = 0;
 
     /**
      * @var \DateTime
@@ -73,6 +83,22 @@ class Coupon implements CouponInterface
     public function setCode($code)
     {
         $this->code = $code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
     }
 
     /**
@@ -118,6 +144,30 @@ class Coupon implements CouponInterface
     /**
      * {@inheritdoc}
      */
+    public function decrementUsed()
+    {
+        --$this->used;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAmount($amount)
+    {
+        $this->amount = $amount;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getPromotion()
     {
         return $this->promotion;
@@ -152,14 +202,14 @@ class Coupon implements CouponInterface
      */
     public function isValid()
     {
-        if (null !== $this->usageLimit && $this->used >= $this->usageLimit) {
+        if (self::TYPE_COUPON === $this->type && null !== $this->usageLimit && $this->used >= $this->usageLimit) {
             return false;
         }
 
-        if (null !== $this->expiresAt && $this->expiresAt < new \DateTime()) {
+        if (self::TYPE_GIFT_CARD === $this->type && 0 === $this->amount) {
             return false;
         }
 
-        return true;
+        return null !== $this->expiresAt && $this->expiresAt > new \DateTime();
     }
 }

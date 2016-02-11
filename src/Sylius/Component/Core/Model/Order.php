@@ -119,8 +119,6 @@ class Order extends Cart implements OrderInterface
     public function setCustomer(BaseCustomerInterface $customer = null)
     {
         $this->customer = $customer;
-
-        return $this;
     }
 
     /**
@@ -426,8 +424,6 @@ class Order extends Cart implements OrderInterface
     public function setCurrency($currency)
     {
         $this->currency = $currency;
-
-        return $this;
     }
 
     /**
@@ -444,8 +440,6 @@ class Order extends Cart implements OrderInterface
     public function setExchangeRate($exchangeRate)
     {
         $this->exchangeRate = (float) $exchangeRate;
-
-        return $this;
     }
 
     /**
@@ -462,8 +456,6 @@ class Order extends Cart implements OrderInterface
     public function setShippingState($state)
     {
         $this->shippingState = $state;
-
-        return $this;
     }
 
     /**
@@ -529,8 +521,6 @@ class Order extends Cart implements OrderInterface
         if (!$this->hasPromotion($promotion)) {
             $this->promotions->add($promotion);
         }
-
-        return $this;
     }
 
     /**
@@ -541,8 +531,6 @@ class Order extends Cart implements OrderInterface
         if ($this->hasPromotion($promotion)) {
             $this->promotions->removeElement($promotion);
         }
-
-        return $this;
     }
 
     /**

@@ -1,0 +1,41 @@
+{% import 'SyliusWebBundle:Frontend/Macros:buttons.html.twig' as buttons %}
+{% extends 'SyliusWebBundle:Frontend/Account:layout.html.twig' %}
+
+{% block content %}
+<h4>{{ 'sylius.account.giftcards.list'|trans }}</h4>
+
+<div class="row">
+    {% if orders is not empty %}
+        <table id="orders" class="table">
+            <thead>
+            <tr>
+                <td>{{ 'sylius.account.order.created_at'|trans }}</td>
+                <td>{{ 'sylius.order.number'|trans }}</td>
+                <td>{{ 'sylius.order.giftcards'|trans }}</td>
+                <td>{{ 'sylius.order.total'|trans }}</td>
+                <td>&nbsp;</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for order in orders %}
+                <tr class="order" id="order-{{ order.number }}">
+                    <td>{{ order.createdAt|date }}</td>
+                    <td>{{ order.number }}</td>
+                    <td>
+                        {% for coupon in order.promotionCoupons %}
+                            <code>{{ coupon.code }}</code>{% if not loop.last %},{% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>{{ order.total|sylius_money }}</td>
+                    <td>
+                        {{ buttons.show(path('sylius_account_order_show', {'number': order.number}), '', 'order-' ~ order.number ~ '-details') }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>{{ 'sylius.account.giftcards.empty'|trans }}</p>
+    {% endif %}
+</div>
+{% endblock %}

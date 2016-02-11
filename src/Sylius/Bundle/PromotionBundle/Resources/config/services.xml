@@ -36,6 +36,7 @@
         <parameter key="sylius.form.type.promotion_rule.item_count_configuration.class">Sylius\Bundle\PromotionBundle\Form\Type\Rule\ItemCountConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_action_choice.class">Sylius\Bundle\PromotionBundle\Form\Type\ActionChoiceType</parameter>
         <parameter key="sylius.form.type.promotion_action.fixed_discount_configuration.class">Sylius\Bundle\PromotionBundle\Form\Type\Action\FixedDiscountConfigurationType</parameter>
+        <parameter key="sylius.form.type.promotion_action.gift_card_discount_configuration.class">Sylius\Bundle\PromotionBundle\Form\Type\Action\GiftCardDiscountConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_action.percentage_discount_configuration.class">Sylius\Bundle\PromotionBundle\Form\Type\Action\PercentageDiscountConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_coupon_to_code.class">Sylius\Bundle\PromotionBundle\Form\Type\CouponToCodeType</parameter>
         <parameter key="sylius.form.type.promotion_coupon_generate_instruction.class">Sylius\Bundle\PromotionBundle\Form\Type\CouponGenerateInstructionType</parameter>
@@ -97,6 +98,9 @@
         <service id="sylius.form.type.promotion_action.fixed_discount_configuration" class="%sylius.form.type.promotion_action.fixed_discount_configuration.class%">
             <tag name="form.type" alias="sylius_promotion_action_fixed_discount_configuration" />
         </service>
+        <service id="sylius.form.type.promotion_action.gift_card_discount_configuration" class="%sylius.form.type.promotion_action.gift_card_discount_configuration.class%">
+            <tag name="form.type" alias="sylius_promotion_action_gift_card_discount_configuration" />
+        </service>
         <service id="sylius.form.type.promotion_action.percentage_discount_configuration" class="%sylius.form.type.promotion_action.percentage_discount_configuration.class%">
             <tag name="form.type" alias="sylius_promotion_action_percentage_discount_configuration" />
         </service>
@@ -104,15 +108,16 @@
             <argument type="service" id="sylius.form.transformer.promotion_coupon_to_code" />
             <tag name="form.type" alias="sylius_promotion_coupon_to_code" />
         </service>
+        <service id="sylius.form.type.promotion_coupon_generate_instruction" class="%sylius.form.type.promotion_coupon_generate_instruction.class%">
+            <argument>%sylius.generator.instructions.class%</argument>
+            <tag name="form.type" alias="sylius_promotion_coupon_generate_instruction" />
+        </service>
+
         <service id="sylius.form.transformer.promotion_coupon_to_code" class="%sylius.form.transformer.promotion_coupon_to_code.class%">
             <argument type="service" id="sylius.repository.promotion_coupon" />
             <argument type="service" id="event_dispatcher" />
         </service>
 
-        <service id="sylius.form.type.promotion_coupon_generate_instruction" class="%sylius.form.type.promotion_coupon_generate_instruction.class%">
-            <argument>%sylius.generator.instructions.class%</argument>
-            <tag name="form.type" alias="sylius_promotion_coupon_generate_instruction" />
-        </service>
         <service id="sylius.generator.promotion_coupon" class="%sylius.generator.promotion_coupon.class%">
             <argument type="service" id="sylius.factory.promotion_coupon" />
             <argument type="service" id="sylius.repository.promotion_coupon" />

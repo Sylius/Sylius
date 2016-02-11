@@ -11,6 +11,8 @@
 
 namespace Sylius\Component\Promotion\Generator;
 
+use Sylius\Component\Promotion\Model\CouponInterface;
+
 /**
  * Coupon generate instruction.
  *
@@ -18,14 +20,11 @@ namespace Sylius\Component\Promotion\Generator;
  */
 class Instruction
 {
-    protected $amount;
+    protected $amount = 5;
+    protected $value = 0;
+    protected $type = CouponInterface::TYPE_COUPON;
     protected $usageLimit;
     protected $expiresAt;
-
-    public function __construct()
-    {
-        $this->amount = 5;
-    }
 
     public function getAmount()
     {
@@ -39,6 +38,26 @@ class Instruction
         return $this;
     }
 
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    public function setValue($value)
+    {
+        $this->value = $value;
+    }
+
     public function getUsageLimit()
     {
         return $this->usageLimit;
@@ -47,8 +66,6 @@ class Instruction
     public function setUsageLimit($usageLimit)
     {
         $this->usageLimit = $usageLimit;
-
-        return $this;
     }
 
     public function getExpiresAt()

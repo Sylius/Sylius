@@ -1,7 +1,9 @@
 {% form_theme form 'SyliusWebBundle:Backend:forms.html.twig' %}
 
 <fieldset>
+    {{ form_row(form.type) }}
     {{ form_row(form.code) }}
+    {{ form_row(form.amount) }}
     {{ form_row(form.usageLimit) }}
     {{ form_row(form.perCustomerUsageLimit) }}
     {{ form_row(form.expiresAt) }}

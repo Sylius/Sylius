@@ -351,6 +351,12 @@ class FrontendMenuBuilder extends MenuBuilder
             'labelAttributes' => ['icon' => 'icon-briefcase', 'iconOnly' => false],
         ])->setLabel($this->translate('sylius.frontend.menu.account.orders'));
 
+        $child->addChild('giftcards', [
+            'route' => 'sylius_account_giftcard',
+            'linkAttributes' => ['title' => $this->translate('sylius.frontend.menu.account.giftcards')],
+            'labelAttributes' => ['icon' => 'icon-barcode', 'iconOnly' => false],
+        ])->setLabel($this->translate('sylius.frontend.menu.account.giftcards'));
+
         $child->addChild('addresses', [
             'route' => 'sylius_account_address_index',
             'linkAttributes' => ['title' => $this->translate('sylius.frontend.menu.account.addresses')],

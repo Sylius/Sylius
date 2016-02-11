@@ -122,8 +122,6 @@ interface OrderInterface extends
 
     /**
      * @param string
-     *
-     * @return OrderInterface
      */
     public function setCurrency($currency);
 
@@ -175,7 +173,7 @@ interface OrderInterface extends
     /**
      * @param $state
      *
-     * @return PaymentInterface|false
+     * @return PaymentInterface|bool
      */
     public function getLastPayment($state = PaymentInterface::STATE_NEW);
 

@@ -875,6 +875,7 @@ sylius:
         configuration: Configuration
         type: Type
     promotion_coupon:
+        amount: Amount
         code: Code
         create: Add coupon
         create_header: Create new coupon
@@ -884,7 +885,13 @@ sylius:
         index: List coupons
         index_header: Coupons
         no_results: There are no coupon to display
+        per_customer_usage_limit: Per customer usage limit
+        promotion_details: Promotion Details
         total_results: Total: %total%
+        type: Coupon type
+        types:
+            coupon: Coupon
+            gift_card: Gift card
         update_header: Editing coupon
     promotion_rule:
         configuration: Configuration
