@@ -58,7 +58,7 @@ class PaymentMethodRepositorySpec extends ObjectBehavior
         $paymentMethods->toArray()->shouldBeCalled()->willReturn([$paymentMethod]);
         $builder->setParameter('methods', [$paymentMethod])->shouldBeCalled()->willReturn($builder);
 
-        $this->getQueryBuidlerForChoiceType([
+        $this->getQueryBuilderForChoiceType([
             'channel' => $channel,
             'disabled' => true,
         ])->shouldReturn($builder);

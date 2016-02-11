@@ -18,9 +18,9 @@ class PaymentMethodRepository extends BasePaymentMethodRepository
     /**
      * {@inheritdoc}
      */
-    public function getQueryBuidlerForChoiceType(array $options)
+    public function getQueryBuilderForChoiceType(array $options)
     {
-        $queryBuilder = parent::getQueryBuidlerForChoiceType($options);
+        $queryBuilder = parent::getQueryBuilderForChoiceType($options);
 
         if ($options['channel']) {
             $queryBuilder->andWhere('method IN (:methods)')
