@@ -9,8 +9,6 @@ Feature: Not applying taxes for products without tax category
         And default currency is "EUR"
         And the store has a product "PHP T-Shirt" priced at "€100.00"
         And the store has a product "Symfony Mug" priced at "€30.00"
-        And the store ships everything for free
-        And the store allows paying offline
 
     Scenario: Proper taxes for untaxed product
         When I add product "PHP T-Shirt" to the cart

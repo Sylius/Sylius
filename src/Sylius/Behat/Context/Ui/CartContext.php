@@ -84,6 +84,7 @@ final class CartContext implements Context
     }
 
     /**
+     * @Given I have :quantity products :product in the cart
      * @When I add :quantity products :product to the cart
      */
     public function iAddProductsToTheCart(ProductInterface $product, $quantity)

@@ -15,8 +15,6 @@ Feature: Apply correct taxes based on customer data
         And the store has "EU VAT" tax rate of 10% for "Clothes" for the rest of the world
         And the store has a product "PHP T-Shirt" priced at "€100.00"
         And product "PHP T-Shirt" belongs to "Clothes" tax category
-        And the store ships everything for free
-        And the store allows paying offline
         And there is user "john@example.com" identified by "password123", with "Australia" as shipping country
 
     Scenario: Proper taxes for taxed product

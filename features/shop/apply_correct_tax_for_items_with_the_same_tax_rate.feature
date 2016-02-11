@@ -32,15 +32,15 @@ Feature: Apply correct tax for items with the same tax rate
         And my cart taxes should be "€82.80"
 
     Scenario: Proper taxes after removing one of the item
-        When I add 3 products "PHP T-Shirt" to the cart
-        And I add 2 products "Symfony Hat" to the cart
-        And I remove product "PHP T-Shirt" from the cart
+        Given I have 3 products "PHP T-Shirt" in the cart
+        And I have 2 products "Symfony Hat" in the cart
+        When I remove product "PHP T-Shirt" from the cart
         Then my cart total should be "€73.80"
         And my cart taxes should be "€13.80"
 
     Scenario: Proper taxes after changing item quantity
-        When I add 3 products "PHP T-Shirt" to the cart
-        And I add 2 products "Symfony Hat" to the cart
-        And I change "PHP T-Shirt" quantity to 1
+        Given I have 3 products "PHP T-Shirt" in the cart
+        And I have 2 products "Symfony Hat" in the cart
+        When I change "PHP T-Shirt" quantity to 1
         Then my cart total should be "€196.80"
         And my cart taxes should be "€36.80"
