@@ -39,7 +39,7 @@ abstract class Page
     private $parameters;
 
     /**
-     * @var DocumentElement
+     * @var DocumentElement|null
      */
     private $document;
 
@@ -51,8 +51,6 @@ abstract class Page
     {
         $this->session = $session;
         $this->parameters = $parameters;
-
-        $this->document = new DocumentElement($session);
     }
 
     /**
@@ -249,6 +247,10 @@ abstract class Page
      */
     protected function getDocument()
     {
+        if (null === $this->document) {
+            $this->document = new DocumentElement($this->session);
+        }
+
         return $this->document;
     }
 
