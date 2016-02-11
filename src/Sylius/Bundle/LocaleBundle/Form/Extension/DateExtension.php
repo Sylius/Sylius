@@ -109,6 +109,9 @@ class DateExtension extends AbstractTypeExtension
                 $newValues[$newVal] = $newVal;
             }
 
+            $collator = new \Collator($this->localeHelper->getCurrentLocale());
+            $collator->asort($newValues, \Collator::SORT_STRING);
+
             $options['choices'] = $newValues;
         }
 
