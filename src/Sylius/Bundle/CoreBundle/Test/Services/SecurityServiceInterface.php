@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Test\Services;
 
 use Behat\Mink\Session;
+use Sylius\Component\Core\Model\UserInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -26,4 +27,11 @@ interface SecurityServiceInterface
      * @throws \InvalidArgumentException
      */
     public function logIn($email, $providerKey, Session $minkSession);
+
+    /**
+     * @param Session $minkSession
+     *
+     * @return UserInterface
+     */
+    public function logInDefaultUser(Session $minkSession);
 }

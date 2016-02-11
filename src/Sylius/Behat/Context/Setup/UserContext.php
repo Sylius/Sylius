@@ -12,13 +12,13 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\CoreBundle\Test\Factory\UserFactoryInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
-use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Intl\Intl;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -36,14 +36,9 @@ final class UserContext implements Context
     private $sharedStorage;
 
     /**
-     * @var FactoryInterface
+     * @var UserFactoryInterface
      */
     private $userFactory;
-
-    /**
-     * @var FactoryInterface
-     */
-    private $customerFactory;
 
     /**
      * @var FactoryInterface
@@ -51,24 +46,29 @@ final class UserContext implements Context
     private $addressFactory;
 
     /**
+     * @var ObjectManager
+     */
+    private $userManager;
+
+    /**
      * @param RepositoryInterface $userRepository
      * @param SharedStorageInterface $sharedStorage
-     * @param FactoryInterface $userFactory
-     * @param FactoryInterface $customerFactory
+     * @param UserFactoryInterface $userFactory
      * @param FactoryInterface $addressFactory
+     * @param ObjectManager $userManager
      */
     public function __construct(
         RepositoryInterface $userRepository,
         SharedStorageInterface $sharedStorage,
-        FactoryInterface $userFactory,
-        FactoryInterface $customerFactory,
-        FactoryInterface $addressFactory
+        UserFactoryInterface $userFactory,
+        FactoryInterface $addressFactory,
+        ObjectManager $userManager
     ) {
         $this->userRepository = $userRepository;
         $this->sharedStorage = $sharedStorage;
         $this->userFactory = $userFactory;
-        $this->customerFactory = $customerFactory;
         $this->addressFactory = $addressFactory;
+        $this->userManager = $userManager;
     }
 
     /**
@@ -76,8 +76,7 @@ final class UserContext implements Context
      */
     public function thereIsUserIdentifiedBy($email, $password)
     {
-        $customer = $this->createCustomer();
-        $user = $this->createUser($customer, $email, $password);
+        $user = $this->userFactory->create('John', 'Doe', $email, $password);
 
         $this->sharedStorage->setCurrentResource('user', $user);
         $this->userRepository->add($user);
@@ -88,9 +87,9 @@ final class UserContext implements Context
      */
     public function thereIsUserWithShippingCountry($email, $password, $country)
     {
-        $customer = $this->createCustomer();
-        $user = $this->createUser($customer, $email, $password);
+        $user = $this->userFactory->create('John', 'Doe', $email, $password);
 
+        $customer = $user->getCustomer();
         $customer->setShippingAddress($this->createAddress($customer->getFirstName(), $customer->getLastName(), $country));
 
         $this->sharedStorage->setCurrentResource('user', $user);
@@ -98,46 +97,15 @@ final class UserContext implements Context
     }
 
     /**
-     * @param string $firstName
-     * @param string $lastName
-     *
-     * @return CustomerInterface
+     * @Given my default shipping address is :country
      */
-    private function createCustomer($firstName = 'John', $lastName = 'Doe')
+    public function myDefaultShippingAddressIs($country)
     {
-        $customer = $this->customerFactory->createNew();
-        $customer->setFirstName($firstName);
-        $customer->setLastName($lastName);
+        $user = $this->sharedStorage->getCurrentResource('user');
+        $customer = $user->getCustomer();
+        $customer->setShippingAddress($this->createAddress($customer->getFirstName(), $customer->getLastName(), $country));
 
-        return $customer;
-    }
-
-    /**
-     * @param CustomerInterface $customer
-     * @param string $email
-     * @param string $password
-     * @param bool|true $enable
-     *
-     * @return UserInterface
-     */
-    private function createUser(
-        CustomerInterface $customer,
-        $email = 'john.doe@example.com',
-        $password = 'testPassword',
-        $enable = true
-    ) {
-        $user = $this->userFactory->createNew();
-
-        $user->setCustomer($customer);
-        $user->setUsername($email);
-        $user->setEmail($email);
-        $user->setPlainPassword($password);
-
-        if ($enable) {
-            $user->enable();
-        }
-
-        return $user;
+        $this->userManager->flush();
     }
 
     /**

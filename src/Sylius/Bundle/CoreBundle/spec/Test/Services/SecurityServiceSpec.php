@@ -14,7 +14,8 @@ namespace spec\Sylius\Bundle\CoreBundle\Test\Services;
 use Behat\Mink\Session;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\User\Model\UserInterface;
+use Sylius\Bundle\CoreBundle\Test\Factory\UserFactoryInterface;
+use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -25,9 +26,10 @@ class SecurityServiceSpec extends ObjectBehavior
 {
     function let(
         UserRepositoryInterface $userRepository,
+        UserFactoryInterface $userFactory,
         SessionInterface $session
     ) {
-        $this->beConstructedWith($userRepository, $session);
+        $this->beConstructedWith($userRepository, $userFactory, $session);
     }
 
     function it_is_initializable()
@@ -81,5 +83,52 @@ class SecurityServiceSpec extends ObjectBehavior
 
         $minkSession->setCookie('MOCKEDSID', 'xyzc123')->shouldNotBeCalled();
         $this->shouldThrow(new \InvalidArgumentException(sprintf('There is no user with email sylius@example.com')))->during('logIn', ['sylius@example.com', 'default', $minkSession]);
+    }
+
+    function it_logs_in_default_user_if_already_created(
+        $userRepository,
+        $session,
+        UserInterface $user,
+        Session $minkSession
+    ) {
+        $userRepository->findOneBy(['username' => 'john.doe@example.com'])->willReturn($user);
+
+        $user->getRoles()->willReturn(['ROLE_USER']);
+        $user->getPassword()->willReturn('password123');
+        $user->serialize()->willReturn('serialized_user');
+
+        $session->set('_security_user', Argument::any())->shouldBeCalled();
+        $session->save()->shouldBeCalled();
+        $session->getName()->willReturn('MOCKEDSID');
+        $session->getId()->willReturn('xyzc123');
+
+        $minkSession->setCookie('MOCKEDSID', 'xyzc123')->shouldBeCalled();
+
+        $this->logInDefaultUser($minkSession);
+    }
+
+    function it_creates_default_user_if_it_does_not_exist_and_log_it_in(
+        $userRepository,
+        $session,
+        $userFactory,
+        UserInterface $user,
+        Session $minkSession
+    ) {
+        $userRepository->findOneBy(['username' => 'john.doe@example.com'])->willReturn(null);
+        $userFactory->create('John', 'Doe', 'john.doe@example.com', 'password123')->willReturn($user);
+        $userRepository->add($user)->shouldBeCalled();
+
+        $user->getRoles()->willReturn(['ROLE_USER']);
+        $user->getPassword()->willReturn('password123');
+        $user->serialize()->willReturn('serialized_user');
+
+        $session->set('_security_user', Argument::any())->shouldBeCalled();
+        $session->save()->shouldBeCalled();
+        $session->getName()->willReturn('MOCKEDSID');
+        $session->getId()->willReturn('xyzc123');
+
+        $minkSession->setCookie('MOCKEDSID', 'xyzc123')->shouldBeCalled();
+
+        $this->logInDefaultUser($minkSession)->shouldReturn($user);
     }
 }

@@ -29,3 +29,11 @@ Feature: Apply correct taxes based on customer data
         And I proceed without selecting shipping address
         Then my cart total should be "€110.00"
         And my cart taxes should be "€10.00"
+
+    Scenario: Proper taxes for logged in Customer with already specified shipping address
+        Given I am logged in customer
+        And my default shipping address is "Australia"
+        When I add product "PHP T-Shirt" to the cart
+        And I proceed without selecting shipping address
+        Then my cart total should be "€110.00"
+        And my cart taxes should be "€10.00"

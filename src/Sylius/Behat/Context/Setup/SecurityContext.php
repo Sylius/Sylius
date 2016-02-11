@@ -16,6 +16,7 @@ use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Session;
 use Sylius\Behat\Page\Shop\HomePage;
 use Sylius\Bundle\CoreBundle\Test\Services\SecurityServiceInterface;
+use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -28,11 +29,6 @@ final class SecurityContext implements Context
     private $securityService;
 
     /**
-     * @var HomePage
-     */
-    private $homePage;
-
-    /**
      * @var Session
      */
     private $minkSession;
@@ -43,17 +39,34 @@ final class SecurityContext implements Context
     private $minkParameters;
 
     /**
+     * @var HomePage
+     */
+    private $homePage;
+
+    /**
+     * @var SharedStorageInterface
+     */
+    private $sharedStorage;
+
+    /**
      * @param SecurityServiceInterface $securityService
      * @param Session $minkSession
      * @param array $minkParameters
      * @param HomePage $homePage
+     * @param SharedStorageInterface $sharedStorage
      */
-    public function __construct(SecurityServiceInterface $securityService, Session $minkSession, array $minkParameters, HomePage $homePage)
-    {
+    public function __construct(
+        SecurityServiceInterface $securityService,
+        Session $minkSession,
+        array $minkParameters,
+        HomePage $homePage,
+        SharedStorageInterface $sharedStorage
+    ) {
         $this->securityService = $securityService;
         $this->minkSession = $minkSession;
         $this->minkParameters = $minkParameters;
         $this->homePage = $homePage;
+        $this->sharedStorage = $sharedStorage;
     }
 
     /**
@@ -63,6 +76,16 @@ final class SecurityContext implements Context
     {
         $this->prepareSessionIfNeeded();
         $this->securityService->logIn($email, 'main', $this->minkSession);
+    }
+
+    /**
+     * @Given /^I am logged in customer$/
+     */
+    public function iAmLoggedInCustomer()
+    {
+        $user = $this->securityService->logInDefaultUser($this->minkSession);
+
+        $this->sharedStorage->setCurrentResource('user', $user);
     }
 
     private function prepareSessionIfNeeded()
