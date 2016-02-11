@@ -25,7 +25,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  */
 class ContainsProductRuleCheckerSpec extends ObjectBehavior
 {
-    function it_is_initialibable()
+    function it_is_initializable()
     {
         $this->shouldHaveType(ContainsProductRuleChecker::class);
     }
@@ -97,7 +97,7 @@ class ContainsProductRuleCheckerSpec extends ObjectBehavior
         $orderItem->getVariant()->willReturn($variant);
         $variant->getId()->willReturn(1);
 
-        $orderItem->getPromotionSubjectCount()->willReturn(10);
+        $orderItem->getQuantity()->willReturn(10);
 
         $this->isEligible($subject, ['variant' => 1, 'exclude' => false, 'count' => 2])->shouldReturn(true);
     }
@@ -111,7 +111,7 @@ class ContainsProductRuleCheckerSpec extends ObjectBehavior
         $orderItem->getVariant()->willReturn($variant);
         $variant->getId()->willReturn(1);
 
-        $orderItem->getPromotionSubjectCount()->willReturn(1);
+        $orderItem->getQuantity()->willReturn(1);
 
         $this->isEligible($subject, ['variant' => 1, 'exclude' => false, 'count' => 2])->shouldReturn(false);
     }
