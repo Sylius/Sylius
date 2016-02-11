@@ -87,7 +87,7 @@ final class MultiContainerExtension implements Extension
     public function process(ContainerBuilder $container)
     {
         $contextRegistryDefinition = $container->findDefinition('sylius_multi_container.context_registry');
-        $taggedServices = $container->findTaggedServiceIds('sylius.context');
+        $taggedServices = $container->findTaggedServiceIds('sylius.behat.context');
 
         foreach ($taggedServices as $id => $tags) {
             $contextRegistryDefinition->addMethodCall(

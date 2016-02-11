@@ -34,27 +34,27 @@
         <service id="sylius.behat.context.setup.channel" class="%sylius.behat.context.setup.channel.class%" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.behat.default_france_channel_factory" container="symfony" />
-            <tag name="sylius.context" />
+            <tag name="sylius.behat.context" />
         </service>
 
         <service id="sylius.behat.context.setup.geographical" class="%sylius.behat.context.setup.geographical.class%" scope="scenario">
             <argument type="service" id="sylius.factory.country" container="symfony" />
             <argument type="service" id="sylius.repository.country" container="symfony" />
-            <tag name="sylius.context" />
+            <tag name="sylius.behat.context" />
         </service>
 
         <service id="sylius.behat.context.setup.currency" class="%sylius.behat.context.setup.currency.class%" scope="scenario">
             <argument type="service" id="sylius.repository.currency" container="symfony" />
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.factory.currency" container="symfony" />
-            <tag name="sylius.context" />
+            <tag name="sylius.behat.context" />
         </service>
 
         <service id="sylius.behat.context.setup.payment" class="%sylius.behat.context.setup.payment.class%" scope="scenario">
             <argument type="service" id="sylius.repository.payment_method" container="symfony" />
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.factory.payment_method" container="symfony" />
-            <tag name="sylius.context" />
+            <tag name="sylius.behat.context" />
         </service>
 
         <service id="sylius.behat.context.setup.security" class="%sylius.behat.context.setup.security.class%" scope="scenario">
@@ -62,7 +62,7 @@
             <argument type="service" id="mink.default_session" />
             <argument>%mink.parameters%</argument>
             <argument type="service" id="sylius.behat.page.home" />
-            <tag name="sylius.context" />
+            <tag name="sylius.behat.context" />
         </service>
 
         <service id="sylius.behat.context.setup.user" class="%sylius.behat.context.setup.user.class%" scope="scenario">
@@ -71,7 +71,7 @@
             <argument type="service" id="sylius.factory.user" container="symfony" />
             <argument type="service" id="sylius.factory.customer" container="symfony" />
             <argument type="service" id="sylius.factory.address" container="symfony" />
-            <tag name="sylius.context" />
+            <tag name="sylius.behat.context" />
         </service>
 
         <service id="sylius.behat.context.setup.product" class="%sylius.behat.context.setup.product.class%" scope="scenario">
@@ -82,7 +82,7 @@
             <argument type="service" id="sylius.factory.product" container="symfony" />
             <argument type="service" id="sylius.factory.product_variant" container="symfony" />
             <argument type="service" id="doctrine.orm.entity_manager" container="symfony" />
-            <tag name="sylius.context" />
+            <tag name="sylius.behat.context" />
         </service>
 
         <service id="sylius.behat.context.setup.shipping" class="%sylius.behat.context.setup.shipping.class%" scope="scenario">
@@ -90,14 +90,14 @@
             <argument type="service" id="sylius.factory.shipping_method" container="symfony" />
             <argument type="service" id="sylius.manager.shipping_method" container="symfony" />
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
-            <tag name="sylius.context" />
+            <tag name="sylius.behat.context" />
         </service>
 
         <service id="sylius.behat.context.setup.zone" class="%sylius.behat.context.setup.zone.class%" scope="scenario">
             <argument type="service" id="sylius.repository.zone" container="symfony" />
             <argument type="service" id="sylius.settings.manager" container="symfony" />
             <argument type="service" id="sylius.factory.zone" container="symfony" />
-            <tag name="sylius.context" />
+            <tag name="sylius.behat.context" />
         </service>
 
         <service id="sylius.behat.context.setup.tax" class="%sylius.behat.context.setup.tax.class%" scope="scenario">
@@ -106,12 +106,12 @@
             <argument type="service" id="sylius.repository.tax_rate" container="symfony" />
             <argument type="service" id="sylius.repository.tax_category" container="symfony" />
             <argument type="service" id="sylius.repository.zone" container="symfony" />
-            <tag name="sylius.context" />
+            <tag name="sylius.behat.context" />
         </service>
 
         <service id="sylius.behat.context.hook.doctrine_orm" class="%sylius.behat.context.hook.doctrine_orm.class%">
             <argument type="service" id="doctrine.orm.entity_manager" container="symfony_shared" />
-            <tag name="sylius.context" />
+            <tag name="sylius.behat.context" />
         </service>
 
         <service id="sylius.behat.context.ui.checkout" class="%sylius.behat.context.ui.checkout.class%" scope="scenario">
@@ -122,18 +122,18 @@
             <argument type="service" id="sylius.behat.page.checkout_payment" />
             <argument type="service" id="sylius.behat.page.checkout_finalize" />
             <argument type="service" id="sylius.behat.page.checkout_thank_you" />
-            <tag name="sylius.context" />
+            <tag name="sylius.behat.context" />
         </service>
 
         <service id="sylius.behat.context.ui.cart" class="%sylius.behat.context.ui.cart.class%" scope="scenario">
             <argument type="service" id="sylius.behat.page.cart_summary" />
             <argument type="service" id="sylius.behat.page.product_show" />
-            <tag name="sylius.context" />
+            <tag name="sylius.behat.context" />
         </service>
 
         <service id="sylius.behat.context.ui.user" class="%sylius.behat.context.ui.user.class%" scope="scenario">
             <argument type="service" id="sylius.behat.page.login" />
-            <tag name="sylius.context" />
+            <tag name="sylius.behat.context" />
         </service>
     </services>
 </container>
