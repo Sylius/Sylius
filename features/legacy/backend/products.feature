@@ -63,7 +63,6 @@ Feature: Products
         When I press "Create"
         Then I should still be on the product creation page
         And I should see "Please enter product name"
-        And I should see "Please enter product description"
         And I should see "Please enter the price"
 
     Scenario: Trying to create a product with invalid price
