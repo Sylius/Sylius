@@ -22,6 +22,11 @@
             <generator strategy="AUTO" />
         </id>
 
+        <indexes>
+            <index name="state_idx" columns="state"/>
+            <index name="completedAt_idx" columns="completed_at"/>
+        </indexes>
+
         <field name="number" column="number" type="string" unique="true" nullable="true" />
 
         <field name="additionalInformation" column="additional_information" type="string" nullable="true" length="1000" />
@@ -56,8 +61,11 @@
         </one-to-many>
 
         <field name="itemsTotal" column="items_total" type="integer" />
+        <field name="itemsRefundTotal" column="items_refund_total" type="integer" />
         <field name="adjustmentsTotal" column="adjustments_total" type="integer" />
+        <field name="refundAdjustmentsTotal" column="refund_adjustments_total" type="integer" />
         <field name="total" column="total" type="integer" />
+        <field name="refundTotal" column="refund_total" type="integer" />
 
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>

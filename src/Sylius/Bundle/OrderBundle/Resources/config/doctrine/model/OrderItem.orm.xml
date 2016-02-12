@@ -29,8 +29,11 @@
             <gedmo:versioned />
         </field>
         <field name="unitsTotal" column="units_total" type="integer" />
+        <field name="unitsRefundTotal" column="units_refund_total" type="integer" />
         <field name="adjustmentsTotal" column="adjustments_total" type="integer" />
+        <field name="refundAdjustmentsTotal" column="refund_adjustments_total" type="integer" />
         <field name="total" column="total" type="integer" />
+        <field name="refundTotal" column="refund_total" type="integer" />
         <field name="immutable" column="is_immutable" type="boolean" />
 
         <many-to-one field="order" target-entity="Sylius\Component\Order\Model\OrderInterface" inversed-by="items">

@@ -22,6 +22,7 @@
         </id>
 
         <field name="adjustmentsTotal" column="adjustments_total" type="integer" />
+        <field name="refundAdjustmentsTotal" column="refund_adjustments_total" type="integer" />
 
         <many-to-one field="orderItem" target-entity="Sylius\Component\Order\Model\OrderItemInterface" inversed-by="units">
             <join-column name="order_item_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />

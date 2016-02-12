@@ -18,8 +18,6 @@ use Sylius\Component\Resource\Model\TimestampableTrait;
  */
 class Adjustment implements AdjustmentInterface
 {
-    const UNIT_REFUND_ADJUSTMENT = 'unit_refund';
-
     use TimestampableTrait;
 
     /**
@@ -292,7 +290,7 @@ class Adjustment implements AdjustmentInterface
     }
 
     /**
-     * @return boolean
+     * {@inheritdoc}
      */
     public function isRefund()
     {
@@ -300,23 +298,11 @@ class Adjustment implements AdjustmentInterface
     }
 
     /**
-     * @param boolean $refund
+     * {@inheritdoc}
      */
     public function setRefund($refund)
     {
         $this->refund = (bool)$refund;
-    }
-
-    /**
-     * NOTE: This is very important due to the way the subject totals are calculated.
-     * Cloning will also clone these associations and if you try to re-associate the entity it's total
-     * won't be recalculated because it thinks it's already associated
-     */
-    public function __clone()
-    {
-        $this->order = null;
-        $this->orderItem = null;
-        $this->orderItemUnit = null;
     }
 
     private function recalculateAdjustable()

@@ -22,10 +22,16 @@
             <generator strategy="AUTO" />
         </id>
 
+        <indexes>
+            <index name="type_refund_idx" columns="type,is_refund"/>
+            <index name="refund_idx" columns="is_refund"/>
+        </indexes>
+
         <field name="type" column="type" type="string" />
         <field name="label" column="label" type="string" nullable="true" />
         <field name="amount" column="amount" type="integer" />
         <field name="neutral" column="is_neutral" type="boolean" />
+        <field name="refund" column="is_refund" type="boolean" />
         <field name="locked" column="is_locked" type="boolean" />
 
         <field name="originId" column="origin_id" type="integer" nullable="true" />
