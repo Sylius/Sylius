@@ -12,10 +12,12 @@
 namespace spec\Sylius\Component\Core\Test\Services;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -26,19 +28,27 @@ class DefaultFranceChannelFactorySpec extends ObjectBehavior
 {
     function let(
         RepositoryInterface $channelRepository,
+        RepositoryInterface $countryRepository,
+        RepositoryInterface $currencyRepository,
         RepositoryInterface $zoneMemberRepository,
         RepositoryInterface $zoneRepository,
         ChannelFactoryInterface $channelFactory,
-        FactoryInterface $zoneMemberFactory,
-        FactoryInterface $zoneFactory
+        FactoryInterface $countryFactory,
+        FactoryInterface $currencyFactory,
+        FactoryInterface $zoneFactory,
+        FactoryInterface $zoneMemberFactory
     ) {
         $this->beConstructedWith(
             $channelRepository,
+            $countryRepository,
+            $currencyRepository,
             $zoneMemberRepository,
             $zoneRepository,
             $channelFactory,
-            $zoneMemberFactory,
-            $zoneFactory
+            $countryFactory,
+            $currencyFactory,
+            $zoneFactory,
+            $zoneMemberFactory
         );
     }
 
@@ -52,16 +62,22 @@ class DefaultFranceChannelFactorySpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Core\Test\Services\DefaultStoreDataInterface');
     }
 
-    function it_creates_france_country_and_zone(
+    function it_creates_default_france_channel_with_country_zone_and_eur_as_default_currency(
         $channelRepository,
+        $countryRepository,
+        $currencyRepository,
         $zoneMemberRepository,
         $zoneRepository,
         $channelFactory,
+        $countryFactory,
+        $currencyFactory,
         $zoneMemberFactory,
         $zoneFactory,
         ZoneMemberInterface $zoneMember,
         ZoneInterface $zone,
-        ChannelInterface $channel
+        ChannelInterface $channel,
+        CountryInterface $france,
+        CurrencyInterface $euro
     ) {
         $channel->getName()->willReturn('France');
         $channelFactory->createNamed('France')->willReturn($channel);
@@ -76,6 +92,18 @@ class DefaultFranceChannelFactorySpec extends ObjectBehavior
         $zone->setName('France')->shouldBeCalled();
         $zone->setType(ZoneInterface::TYPE_COUNTRY)->shouldBeCalled();
         $zone->addMember($zoneMember)->shouldBeCalled();
+
+        $countryFactory->createNew()->willReturn($france);
+        $france->setCode('FR')->shouldBeCalled();
+
+        $currencyFactory->createNew()->willReturn($euro);
+        $euro->setCode('EUR')->shouldBeCalled();
+        $euro->setExchangeRate(1.00)->shouldBeCalled();
+
+        $channel->setDefaultCurrency($euro)->shouldBeCalled();
+
+        $currencyRepository->add($euro)->shouldBeCalled();
+        $countryRepository->add($france)->shouldBeCalled();
 
         $channelRepository->add($channel)->shouldBeCalled();
         $zoneRepository->add($zone)->shouldBeCalled();

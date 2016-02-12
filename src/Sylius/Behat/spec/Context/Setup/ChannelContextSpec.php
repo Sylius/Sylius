@@ -17,6 +17,7 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Test\Services\DefaultChannelFactoryInterface;
 use Sylius\Component\Core\Test\Services\DefaultStoreDataInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
@@ -28,12 +29,14 @@ class ChannelContextSpec extends ObjectBehavior
     function let(
         SharedStorageInterface $sharedStorage,
         DefaultStoreDataInterface $defaultFranceChannelFactory,
+        DefaultChannelFactoryInterface $defaultChannelFactory,
         ChannelFactoryInterface $channelFactory,
         ChannelRepositoryInterface $channelRepository
     ) {
         $this->beConstructedWith(
             $sharedStorage,
             $defaultFranceChannelFactory,
+            $defaultChannelFactory,
             $channelFactory,
             $channelRepository
         );

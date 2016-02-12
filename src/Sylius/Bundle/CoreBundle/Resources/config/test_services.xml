@@ -19,7 +19,8 @@
         <parameter key="sylius.behat.shared_storage.class">Sylius\Component\Core\Test\Services\SharedStorage</parameter>
         <parameter key="sylius.behat.security.class">Sylius\Bundle\CoreBundle\Test\Services\SecurityService</parameter>
 
-        <parameter key="sylius.behat.default_france_channel_factory.class">Sylius\Component\Core\Test\Services\DefaultFranceChannelFactory</parameter>
+        <parameter key="sylius.behat.factory.default_france_channel.class">Sylius\Component\Core\Test\Services\DefaultFranceChannelFactory</parameter>
+        <parameter key="sylius.behat.factory.default_channel.class">Sylius\Component\Core\Test\Services\DefaultChannelFactory</parameter>
     </parameters>
 
     <services>
@@ -30,13 +31,21 @@
         </service>
 
         <!--Default Store Data-->
-        <service id="sylius.behat.default_france_channel_factory" class="%sylius.behat.default_france_channel_factory.class%">
+        <service id="sylius.behat.factory.default_france_channel" class="%sylius.behat.factory.default_france_channel.class%">
             <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="sylius.repository.country" />
+            <argument type="service" id="sylius.repository.currency" />
             <argument type="service" id="sylius.repository.zone_member" />
             <argument type="service" id="sylius.repository.zone" />
             <argument type="service" id="sylius.factory.channel" />
-            <argument type="service" id="sylius.factory.zone_member" />
+            <argument type="service" id="sylius.factory.country" />
+            <argument type="service" id="sylius.factory.currency" />
             <argument type="service" id="sylius.factory.zone" />
+            <argument type="service" id="sylius.factory.zone_member" />
+        </service>
+        <service id="sylius.behat.factory.default_channel" class="%sylius.behat.factory.default_channel.class%">
+            <argument type="service" id="sylius.factory.channel" />
+            <argument type="service" id="sylius.repository.channel" />
         </service>
     </services>
 
