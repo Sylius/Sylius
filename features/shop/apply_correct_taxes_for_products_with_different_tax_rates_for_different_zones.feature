@@ -18,9 +18,6 @@ Feature: Apply correct taxes for products with different tax rates for different
         And product "PHP T-Shirt" belongs to "Clothes" tax category
         And the store has a product "Symfony Mug" priced at "€50.00"
         And product "Symfony Mug" belongs to "Mugs" tax category
-        And the store ships everything for free within "EU" zone
-        And the store ships everything for free for the rest of the world
-        And the store allows paying offline
         And there is user "john@example.com" identified by "password123"
         And I am logged in as "john@example.com"
 
@@ -30,14 +27,14 @@ Feature: Apply correct taxes for products with different tax rates for different
         And my cart taxes should be "€23.00"
 
     Scenario: Displaying correct tax after specifying shipping address
-        When I add product "PHP T-Shirt" to the cart
-        And I proceed selecting "Australia" as shipping country with "Offline" payment method
+        Given I have product "PHP T-Shirt" in the cart
+        When I proceed selecting "Australia" as shipping country
         Then my cart total should be "€100.00"
         And my cart taxes should be "€0.00"
 
     Scenario: Displaying correct taxes for multiple products after specifying shipping address
-        When I add 3 products "PHP T-Shirt" to the cart
-        And I proceed selecting "Australia" as shipping country with "Offline" payment method
+        Given I have 3 products "PHP T-Shirt" in the cart
+        When I proceed selecting "Australia" as shipping country
         Then my cart total should be "€300.00"
         And my cart taxes should be "€0.00"
 
@@ -48,8 +45,8 @@ Feature: Apply correct taxes for products with different tax rates for different
         And my cart taxes should be "€23.00"
 
     Scenario: Displaying correct taxes for multiple products from different zones after specifying shipping address
-        When I add product "PHP T-Shirt" to the cart
-        And I add 2 products "Symfony Mug" to the cart
-        And I proceed selecting "Australia" as shipping country with "Offline" payment method
+        Given I have product "PHP T-Shirt" in the cart
+        And I have 2 products "Symfony Mug" in the cart
+        When I proceed selecting "Australia" as shipping country
         Then my cart total should be "€205.00"
         And my cart taxes should be "€5.00"
