@@ -17,6 +17,7 @@ use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Cart\Resolver\ItemResolverInterface;
 use Sylius\Component\Cart\Resolver\ItemResolvingException;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -47,9 +48,7 @@ class ItemResolver implements ItemResolverInterface
     protected $priceCalculator;
 
     /**
-     * Product repository.
-     *
-     * @var RepositoryInterface
+     * @var ProductRepositoryInterface
      */
     protected $productRepository;
 
@@ -116,7 +115,7 @@ class ItemResolver implements ItemResolverInterface
         $id = $this->resolveItemIdentifier($data);
 
         $channel = $this->channelContext->getChannel();
-        if (!$product = $this->productRepository->findOneBy(['id' => $id, 'channels' => $channel])) {
+        if (!$product = $this->productRepository->findOneByIdAndChannel($id, $channel)) {
             throw new ItemResolvingException('Requested product was not found.');
         }
 
