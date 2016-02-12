@@ -16,7 +16,6 @@ use Sylius\Bundle\AttributeBundle\Form\Type\AttributeTranslationType;
 use Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
 use Sylius\Bundle\AttributeBundle\Form\Type\AttributeValueType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Attribute\Model\Attribute;
@@ -81,7 +80,7 @@ class Configuration implements ConfigurationInterface
                                             ->scalarNode('model')->defaultValue(Attribute::class)->cannotBeEmpty()->end()
                                             ->scalarNode('interface')->defaultValue(AttributeInterface::class)->cannotBeEmpty()->end()
                                             ->scalarNode('controller')->defaultValue(AttributeController::class)->cannotBeEmpty()->end()
-                                            ->scalarNode('repository')->defaultValue(EntityRepository::class)->cannotBeEmpty()->end()
+                                            ->scalarNode('repository')->cannotBeEmpty()->end()
                                             ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->end()
                                             ->arrayNode('form')
                                                 ->addDefaultsIfNotSet()

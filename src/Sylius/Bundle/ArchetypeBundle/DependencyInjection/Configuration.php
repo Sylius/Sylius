@@ -14,7 +14,6 @@ namespace Sylius\Bundle\ArchetypeBundle\DependencyInjection;
 use Sylius\Bundle\ArchetypeBundle\Form\Type\ArchetypeTranslationType;
 use Sylius\Bundle\ArchetypeBundle\Form\Type\ArchetypeType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Archetype\Model\Archetype;
@@ -82,7 +81,7 @@ class Configuration implements ConfigurationInterface
                                             ->scalarNode('model')->defaultValue(Archetype::class)->cannotBeEmpty()->end()
                                             ->scalarNode('interface')->defaultValue(ArchetypeInterface::class)->cannotBeEmpty()->end()
                                             ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                            ->scalarNode('repository')->defaultValue(EntityRepository::class)->cannotBeEmpty()->end()
+                                            ->scalarNode('repository')->cannotBeEmpty()->end()
                                             ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->end()
                                             ->arrayNode('form')
                                                 ->addDefaultsIfNotSet()
