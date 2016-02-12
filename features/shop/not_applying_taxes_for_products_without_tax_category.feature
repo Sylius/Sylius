@@ -5,8 +5,7 @@ Feature: Not applying taxes for products without tax category
     I want to have correct taxes applied to my order
 
     Background:
-        Given the store is operating on a single channel
-        And default currency is "EUR"
+        Given the store is operating on a single "France" channel
         And the store has a product "PHP T-Shirt" priced at "€100.00"
         And the store has a product "Symfony Mug" priced at "€30.00"
 

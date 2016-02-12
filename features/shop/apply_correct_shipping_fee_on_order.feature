@@ -5,9 +5,7 @@ Feature: Apply correct shipping fee on order
     I want to have shipping fee applied based on chosen shipping method
 
     Background:
-        Given the store is operating on a single channel
-        And default currency is "EUR"
-        And the store ships to "France"
+        Given the store is operating on a single "France" channel
         And the store has a product "PHP T-Shirt" priced at "€100.00"
         And the store has "DHL" shipping method with "€10.00" fee
         And the store has "FedEx" shipping method with "€30.00" fee

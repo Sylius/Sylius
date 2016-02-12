@@ -5,12 +5,10 @@ Feature: Apply different taxes for variants with different tax category
     I want to have correct taxes applied to my order
 
     Background:
-        Given the store is operating on a single channel
-        And there is "EU" zone containing all members of European Union
-        And default currency is "EUR"
-        And default tax zone is "EU"
-        And the store has "EU VAT" tax rate of 23% for "Mugs" within "EU" zone
-        And the store has "Low VAT" tax rate of 5% for "Cheap Mugs" within "EU" zone
+        Given the store is operating on a single "France" channel
+        And default tax zone is "FR"
+        And the store has "EU VAT" tax rate of 23% for "Mugs" within "FR" zone
+        And the store has "Low VAT" tax rate of 5% for "Cheap Mugs" within "FR" zone
         And the store has a product "PHP Mug"
         And it comes in the following variations:
             | name       | price   |
