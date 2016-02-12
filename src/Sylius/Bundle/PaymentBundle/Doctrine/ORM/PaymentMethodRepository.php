@@ -26,7 +26,7 @@ class PaymentMethodRepository extends TranslatableResourceRepository implements 
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
 
-        if (!$options['disabled']) {
+        if (isset($options['disabled']) && !$options['disabled']) {
             $queryBuilder->where('method.enabled = true');
         }
 
