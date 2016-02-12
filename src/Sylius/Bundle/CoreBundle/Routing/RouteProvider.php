@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Routing;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\Common\Util\ClassUtils;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\DoctrineProvider;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -73,9 +74,7 @@ class RouteProvider extends DoctrineProvider implements RouteProviderInterface
         }
 
         foreach ($this->getRepositories() as $className => $repository) {
-            $entity = $repository->findOneBy([
-                $this->routeConfigs[$className]['field'] => urldecode($name)
-            ]);
+            $entity = $this->tryToFindEntity($name, $repository, $className);
             if ($entity) {
                 return $this->createRouteFromEntity($entity);
             }
@@ -141,8 +140,7 @@ class RouteProvider extends DoctrineProvider implements RouteProviderInterface
                     continue;
                 }
 
-                $value = urldecode($value);
-                $entity = $repository->findOneBy([$this->routeConfigs[$className]['field'] => $value]);
+                $entity = $this->tryToFindEntity($value, $repository, $className);
 
                 if (null === $entity) {
                     continue;
@@ -224,5 +222,27 @@ class RouteProvider extends DoctrineProvider implements RouteProviderInterface
         $defaults = ['_sylius_entity' => $entity, $fieldName => $value];
 
         return new Route($this->routeConfigs[$className]['prefix'].'/'.$value, $defaults);
+    }
+
+    /**
+     * @param string $identifier
+     * @param RepositoryInterface $repository
+     * @param string $className
+     *
+     * @return object|null
+     */
+    private function tryToFindEntity($identifier, RepositoryInterface $repository, $className)
+    {
+        if ('slug' === $this->routeConfigs[$className]['field']) {
+            return $repository->findOneBySlug($identifier);
+        }
+        if ('name' === $this->routeConfigs[$className]['field']) {
+            return $repository->findOneByName($identifier);
+        }
+        if ('permalink' === $this->routeConfigs[$className]['field']) {
+            return $repository->findOneByPermalink($identifier);
+        }
+
+        return $repository->findOneBy([$this->routeConfigs[$className]['field'] => $identifier]);
     }
 }
