@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\CoreBundle\Test\Services;
 
 use Behat\Mink\Session;
-use Sylius\Bundle\CoreBundle\Test\Factory\UserFactoryInterface;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -23,11 +22,6 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
  */
 class SecurityService implements SecurityServiceInterface
 {
-    const DEFAULT_USER_FIRST_NAME = 'John';
-    const DEFAULT_USER_LAST_NAME = 'Doe';
-    const DEFAULT_USER_EMAIL = 'john.doe@example.com';
-    const DEFAULT_USER_PASSWORD = 'password123';
-
     const DEFAULT_PROVIDER_KEY = 'main';
 
     /**
@@ -36,34 +30,26 @@ class SecurityService implements SecurityServiceInterface
     private $userRepository;
 
     /**
-     * @var UserFactoryInterface
-     */
-    private $userFactory;
-
-    /**
      * @var SessionInterface
      */
     private $session;
 
     /**
      * @param UserRepositoryInterface $userRepository
-     * @param UserFactoryInterface $userFactory
      * @param SessionInterface $session
      */
     public function __construct(
         UserRepositoryInterface $userRepository,
-        UserFactoryInterface $userFactory,
         SessionInterface $session
     ) {
         $this->userRepository = $userRepository;
-        $this->userFactory = $userFactory;
         $this->session = $session;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function logIn($email, $providerKey, Session $minkSession)
+    public function logIn($email, $providerKey = self::DEFAULT_PROVIDER_KEY, Session $minkSession)
     {
         $user = $this->userRepository->findOneBy(['username' => $email]);
         if (null === $user) {
@@ -71,22 +57,6 @@ class SecurityService implements SecurityServiceInterface
         }
 
         $this->logInUser($minkSession, $user, $providerKey);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function logInDefaultUser(Session $minkSession)
-    {
-        $user = $this->userRepository->findOneBy(['username' => self::DEFAULT_USER_EMAIL]);
-        if (null === $user) {
-            $user = $this->createDefaultUser();
-            $this->userRepository->add($user);
-        }
-
-        $this->logInUser($minkSession, $user);
-
-        return $user;
     }
 
     /**
@@ -102,18 +72,5 @@ class SecurityService implements SecurityServiceInterface
         $this->session->save();
 
         $minkSession->setCookie($this->session->getName(), $this->session->getId());
-    }
-
-    /**
-     * @return UserInterface
-     */
-    private function createDefaultUser()
-    {
-        return $this->userFactory->create(
-            self::DEFAULT_USER_FIRST_NAME,
-            self::DEFAULT_USER_LAST_NAME,
-            self::DEFAULT_USER_EMAIL,
-            self::DEFAULT_USER_PASSWORD
-        );
     }
 }

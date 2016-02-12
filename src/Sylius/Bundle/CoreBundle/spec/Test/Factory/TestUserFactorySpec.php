@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\Test\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Test\Factory\UserFactoryInterface;
+use Sylius\Bundle\CoreBundle\Test\Factory\TestUserFactoryInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -20,7 +20,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class UserFactorySpec extends ObjectBehavior
+class TestUserFactorySpec extends ObjectBehavior
 {
     function let(FactoryInterface $customerFactory, FactoryInterface $userFactory)
     {
@@ -29,15 +29,36 @@ class UserFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Test\Factory\UserFactory');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Test\Factory\TestUserFactory');
     }
 
     function it_implements_user_provider_interface()
     {
-        $this->shouldImplement(UserFactoryInterface::class);
+        $this->shouldImplement(TestUserFactoryInterface::class);
     }
 
     function it_creates_user_with_customer(
+        $customerFactory,
+        $userFactory,
+        CustomerInterface $customer,
+        UserInterface $user
+    ) {
+        $customerFactory->createNew()->willReturn($customer);
+        $customer->setFirstName('Oliver')->shouldBeCalled();
+        $customer->setLastName('Queen')->shouldBeCalled();
+
+        $userFactory->createNew()->willReturn($user);
+
+        $user->setCustomer($customer)->shouldBeCalled();
+        $user->setUsername('oliver.queen@star.com')->shouldBeCalled();
+        $user->setEmail('oliver.queen@star.com')->shouldBeCalled();
+        $user->setPlainPassword('a££ow')->shouldBeCalled();
+        $user->enable()->shouldBeCalled();
+
+        $this->create('Oliver', 'Queen', 'oliver.queen@star.com', 'a££ow')->shouldReturn($user);
+    }
+
+    function it_creates_default_user_with_customer(
         $customerFactory,
         $userFactory,
         CustomerInterface $customer,
@@ -55,6 +76,6 @@ class UserFactorySpec extends ObjectBehavior
         $user->setPlainPassword('password123')->shouldBeCalled();
         $user->enable()->shouldBeCalled();
 
-        $this->create('John', 'Doe', 'john.doe@example.com', 'password123')->shouldReturn($user);
+        $this->createDefault()->shouldReturn($user);
     }
 }

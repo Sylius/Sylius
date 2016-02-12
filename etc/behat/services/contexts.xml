@@ -62,6 +62,8 @@
             <argument type="service" id="mink.default_session" />
             <argument>%mink.parameters%</argument>
             <argument type="service" id="sylius.behat.page.home" />
+            <argument type="service" id="sylius.behat.user_factory" container="symfony" />
+            <argument type="service" id="sylius.repository.user" container="symfony" />
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>

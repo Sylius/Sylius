@@ -12,12 +12,18 @@
 namespace Sylius\Bundle\CoreBundle\Test\Factory;
 
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class UserFactory implements UserFactoryInterface
+class TestUserFactory implements TestUserFactoryInterface
 {
+    const DEFAULT_USER_FIRST_NAME = 'John';
+    const DEFAULT_USER_LAST_NAME = 'Doe';
+    const DEFAULT_USER_EMAIL = 'john.doe@example.com';
+    const DEFAULT_USER_PASSWORD = 'password123';
+
     /**
      * @var FactoryInterface
      */
@@ -57,5 +63,18 @@ class UserFactory implements UserFactoryInterface
         $user->enable();
 
         return $user;
+    }
+
+    /**
+     * @return UserInterface
+     */
+    public function createDefault()
+    {
+        return $this->create(
+            self::DEFAULT_USER_FIRST_NAME,
+            self::DEFAULT_USER_LAST_NAME,
+            self::DEFAULT_USER_EMAIL,
+            self::DEFAULT_USER_PASSWORD
+        );
     }
 }

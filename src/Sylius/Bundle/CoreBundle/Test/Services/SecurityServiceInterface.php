@@ -27,11 +27,4 @@ interface SecurityServiceInterface
      * @throws \InvalidArgumentException
      */
     public function logIn($email, $providerKey, Session $minkSession);
-
-    /**
-     * @param Session $minkSession
-     *
-     * @return UserInterface
-     */
-    public function logInDefaultUser(Session $minkSession);
 }

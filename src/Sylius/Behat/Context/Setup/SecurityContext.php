@@ -15,8 +15,10 @@ use Behat\Behat\Context\Context;
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Session;
 use Sylius\Behat\Page\Shop\HomePage;
+use Sylius\Bundle\CoreBundle\Test\Factory\TestUserFactoryInterface;
 use Sylius\Bundle\CoreBundle\Test\Services\SecurityServiceInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -44,6 +46,16 @@ final class SecurityContext implements Context
     private $homePage;
 
     /**
+     * @var TestUserFactoryInterface
+     */
+    private $testUserFactory;
+
+    /**
+     * @var RepositoryInterface
+     */
+    private $userRepository;
+
+    /**
      * @var SharedStorageInterface
      */
     private $sharedStorage;
@@ -53,6 +65,8 @@ final class SecurityContext implements Context
      * @param Session $minkSession
      * @param array $minkParameters
      * @param HomePage $homePage
+     * @param TestUserFactoryInterface $testUserFactory
+     * @param RepositoryInterface $userRepository
      * @param SharedStorageInterface $sharedStorage
      */
     public function __construct(
@@ -60,12 +74,16 @@ final class SecurityContext implements Context
         Session $minkSession,
         array $minkParameters,
         HomePage $homePage,
+        TestUserFactoryInterface $testUserFactory,
+        RepositoryInterface $userRepository,
         SharedStorageInterface $sharedStorage
     ) {
         $this->securityService = $securityService;
         $this->minkSession = $minkSession;
         $this->minkParameters = $minkParameters;
         $this->homePage = $homePage;
+        $this->testUserFactory = $testUserFactory;
+        $this->userRepository = $userRepository;
         $this->sharedStorage = $sharedStorage;
     }
 
@@ -83,7 +101,10 @@ final class SecurityContext implements Context
      */
     public function iAmLoggedInCustomer()
     {
-        $user = $this->securityService->logInDefaultUser($this->minkSession);
+        $user = $this->testUserFactory->createDefault();
+        $this->userRepository->add($user);
+
+        $this->securityService->logIn($user->getEmail(), 'main', $this->minkSession);
 
         $this->sharedStorage->setCurrentResource('user', $user);
     }

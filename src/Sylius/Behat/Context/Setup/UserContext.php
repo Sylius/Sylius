@@ -13,7 +13,7 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\CoreBundle\Test\Factory\UserFactoryInterface;
+use Sylius\Bundle\CoreBundle\Test\Factory\TestUserFactoryInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -36,7 +36,7 @@ final class UserContext implements Context
     private $sharedStorage;
 
     /**
-     * @var UserFactoryInterface
+     * @var TestUserFactoryInterface
      */
     private $userFactory;
 
@@ -53,14 +53,14 @@ final class UserContext implements Context
     /**
      * @param RepositoryInterface $userRepository
      * @param SharedStorageInterface $sharedStorage
-     * @param UserFactoryInterface $userFactory
+     * @param TestUserFactoryInterface $userFactory
      * @param FactoryInterface $addressFactory
      * @param ObjectManager $userManager
      */
     public function __construct(
         RepositoryInterface $userRepository,
         SharedStorageInterface $sharedStorage,
-        UserFactoryInterface $userFactory,
+        TestUserFactoryInterface $userFactory,
         FactoryInterface $addressFactory,
         ObjectManager $userManager
     ) {

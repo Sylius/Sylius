@@ -11,12 +11,12 @@
 
 namespace Sylius\Bundle\CoreBundle\Test\Factory;
 
-use Symfony\Component\Security\Core\User\UserInterface;
+use Sylius\Component\Core\Model\UserInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface UserFactoryInterface
+interface TestUserFactoryInterface
 {
     /**
      * @param string $firstName
@@ -27,4 +27,9 @@ interface UserFactoryInterface
      * @return UserInterface
      */
     public function create($firstName, $lastName, $email, $password);
+
+    /**
+     * @return UserInterface
+     */
+    public function createDefault();
 }
