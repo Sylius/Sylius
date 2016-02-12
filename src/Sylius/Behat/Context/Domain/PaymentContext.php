@@ -12,8 +12,8 @@
 namespace Sylius\Behat\Context\Domain;
 
 use Behat\Behat\Context\Context;
+use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -21,14 +21,14 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 final class PaymentContext implements Context
 {
     /**
-     * @var RepositoryInterface
+     * @var PaymentRepositoryInterface
      */
     private $paymentRepository;
 
     /**
-     * @param RepositoryInterface $paymentRepository
+     * @param PaymentRepositoryInterface $paymentRepository
      */
-    public function __construct(RepositoryInterface $paymentRepository)
+    public function __construct(PaymentRepositoryInterface $paymentRepository)
     {
         $this->paymentRepository = $paymentRepository;
     }

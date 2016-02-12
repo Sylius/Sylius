@@ -73,7 +73,16 @@ class WebContext extends DefaultContext
             return;
         }
 
-        $this->iAmOnTheResourcePage($type, 'name', $name);
+        $type = str_replace(' ', '_', $type);
+
+        $entityManager = $this->getEntityManager();
+        $entityManager->getFilters()->disable('softdeleteable');
+        $resource = $this->findOneByName($type, $name);
+        $entityManager->getFilters()->enable('softdeleteable');
+
+        $this->getSession()->visit($this->generatePageUrl(
+            sprintf('%s_show', $type), ['id' => $resource->getId()]
+        ));
     }
 
     /**
@@ -112,7 +121,22 @@ class WebContext extends DefaultContext
             return;
         }
 
-        $this->iShouldBeOnTheResourcePage($type, 'name', $name);
+        $type = str_replace(' ', '_', $type);
+
+        $entityManager = $this->getEntityManager();
+        $entityManager->getFilters()->disable('softdeleteable');
+
+        $resource = $this->waitFor(function () use ($type, $name) {
+            return $this->getRepository($type)->findOneByName($name);
+        });
+
+        $entityManager->getFilters()->enable('softdeleteable');
+
+        $this->assertSession()->addressEquals($this->generatePageUrl(
+            sprintf('%s_show', $type), ['id' => $resource->getId()]
+        ));
+
+        $this->assertStatusCodeEquals(200);
     }
 
     /**
@@ -147,7 +171,14 @@ class WebContext extends DefaultContext
             return;
         }
 
-        $this->iAmDoingSomethingWithResource($action, $type, 'name', $name);
+        $type = str_replace(' ', '_', $type);
+
+        $action = str_replace(array_keys($this->actions), array_values($this->actions), $action);
+        $resource = $this->findOneByName($type, $name);
+
+        $this->getSession()->visit($this->generatePageUrl(
+            sprintf('%s_%s', $type, $action), ['id' => $resource->getId()]
+        ));
     }
 
     /**
@@ -177,7 +208,15 @@ class WebContext extends DefaultContext
             return;
         }
 
-        $this->iShouldBeDoingSomethingWithResource($action, $type, 'name', $name);
+        $type = str_replace(' ', '_', $type);
+
+        $action = str_replace(array_keys($this->actions), array_values($this->actions), $action);
+        $resource = $this->findOneByName($type, $name);
+
+        $this->assertSession()->addressEquals($this->generatePageUrl(
+            sprintf('%s_%s', $type, $action), ['id' => $resource->getId()]
+        ));
+        $this->assertStatusCodeEquals(200);
     }
 
     /**

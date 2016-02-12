@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Payment\Model\PaymentMethod;
+use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -23,7 +24,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class PaymentContextSpec extends ObjectBehavior
 {
     function let(
-        RepositoryInterface $paymentMethodRepository
+        PaymentMethodRepositoryInterface $paymentMethodRepository
     ) {
         $this->beConstructedWith($paymentMethodRepository);
     }
@@ -39,18 +40,18 @@ class PaymentContextSpec extends ObjectBehavior
     }
 
     function it_converts_payment_method_name_into_payment_method_object(
-        RepositoryInterface $paymentMethodRepository,
+        PaymentMethodRepositoryInterface $paymentMethodRepository,
         PaymentMethod $paymentMethod
     ) {
-        $paymentMethodRepository->findOneBy(['name' => 'Offline'])->willReturn($paymentMethod);
+        $paymentMethodRepository->findOneByName('Offline')->willReturn($paymentMethod);
 
         $this->getPaymentMethodByName('Offline')->shouldReturn($paymentMethod);
     }
 
     function it_throws_element_not_found_exception_if_payment_method_has_not_been_found (
-        RepositoryInterface $paymentMethodRepository
+        PaymentMethodRepositoryInterface $paymentMethodRepository
     ) {
-        $paymentMethodRepository->findOneBy(['name' => 'Free'])->willReturn(null);
+        $paymentMethodRepository->findOneByName('Free')->willReturn(null);
 
         $this->shouldThrow(\InvalidArgumentException::class)->during('getPaymentMethodByName', ['Free']);
     }

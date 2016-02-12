@@ -14,6 +14,7 @@ namespace spec\Sylius\Behat\Context\Transform;
 use Behat\Behat\Context\Context;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -22,7 +23,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class ZoneContextSpec extends ObjectBehavior
 {
     function let(
-        RepositoryInterface $zoneRepository
+        ZoneRepositoryInterface $zoneRepository
     ) {
         $this->beConstructedWith($zoneRepository);
     }

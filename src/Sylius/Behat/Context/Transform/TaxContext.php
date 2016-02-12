@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Taxation\Repository\TaxCategoryRepositoryInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -20,14 +20,14 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 final class TaxContext implements Context
 {
     /**
-     * @var RepositoryInterface
+     * @var TaxCategoryRepositoryInterface
      */
     private $taxCategoryRepository;
 
     /**
-     * @param RepositoryInterface $taxCategoryRepository
+     * @param TaxCategoryRepositoryInterface $taxCategoryRepository
      */
-    public function __construct(RepositoryInterface $taxCategoryRepository)
+    public function __construct(TaxCategoryRepositoryInterface $taxCategoryRepository)
     {
         $this->taxCategoryRepository = $taxCategoryRepository;
     }
@@ -39,7 +39,7 @@ final class TaxContext implements Context
      */
     public function getTaxCategoryByName($taxCategoryName)
     {
-        $taxCategory = $this->taxCategoryRepository->findOneBy(['name' => $taxCategoryName]);
+        $taxCategory = $this->taxCategoryRepository->findOneByName($taxCategoryName);
         if (null === $taxCategory) {
             throw new \InvalidArgumentException('Tax category with name "'.$taxCategoryName.'" does not exist');
         }

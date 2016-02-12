@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -20,14 +20,14 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 final class PaymentContext implements Context
 {
     /**
-     * @var RepositoryInterface
+     * @var PaymentMethodRepositoryInterface
      */
     private $paymentMethodRepository;
 
     /**
-     * @param RepositoryInterface $paymentMethodRepository
+     * @param PaymentMethodRepositoryInterface $paymentMethodRepository
      */
-    public function __construct(RepositoryInterface $paymentMethodRepository)
+    public function __construct(PaymentMethodRepositoryInterface $paymentMethodRepository)
     {
         $this->paymentMethodRepository = $paymentMethodRepository;
     }
@@ -37,7 +37,7 @@ final class PaymentContext implements Context
      */
     public function getPaymentMethodByName($paymentMethodName)
     {
-        $paymentMethod = $this->paymentMethodRepository->findOneBy(['name' => $paymentMethodName]);
+        $paymentMethod = $this->paymentMethodRepository->findOneByName($paymentMethodName);
         if (null === $paymentMethod) {
             throw new \InvalidArgumentException(sprintf('Payment method with name "%s" does not exist.', $paymentMethodName));
         }

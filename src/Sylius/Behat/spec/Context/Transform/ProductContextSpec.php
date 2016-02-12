@@ -15,14 +15,15 @@ use Behat\Behat\Context\Context;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Core\Repository\ProductRepositoryInterface;
+use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class ProductContextSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $productRepository, RepositoryInterface $productVariantRepository)
+    function let(ProductRepositoryInterface $productRepository, ProductVariantRepositoryInterface $productVariantRepository)
     {
         $this->beConstructedWith($productRepository, $productVariantRepository);
     }
@@ -37,40 +38,40 @@ class ProductContextSpec extends ObjectBehavior
     }
 
     function it_converts_product_name_into_product_object(
-        RepositoryInterface $productRepository,
+        ProductRepositoryInterface $productRepository,
         ProductInterface $product
     ) {
-        $productRepository->findOneBy(['name' => 'Mug'])->willReturn($product);
+        $productRepository->findOneByName('Mug')->willReturn($product);
 
         $this->getProductByName('Mug')->shouldReturn($product);
     }
 
     function it_throws_element_not_found_exception_if_product_has_not_been_found (
-        RepositoryInterface $productRepository
+        ProductRepositoryInterface $productRepository
     ) {
-        $productRepository->findOneBy(['name' => 'T-Shirt'])->willReturn(null);
+        $productRepository->findOneByName('T-Shirt')->willReturn(null);
 
         $this->shouldThrow(\InvalidArgumentException::class)->during('getProductByName', ['T-Shirt']);
     }
 
     function it_converts_product_variant_and_product_names_into_product_object(
-        RepositoryInterface $productRepository,
-        RepositoryInterface $productVariantRepository,
+        ProductRepositoryInterface $productRepository,
+        ProductVariantRepositoryInterface $productVariantRepository,
         ProductInterface $product,
         ProductVariantInterface $productVariant
     ) {
-        $productRepository->findOneBy(['name' => 'Mug'])->willReturn($product);
+        $productRepository->findOneByName('Mug')->willReturn($product);
         $productVariantRepository->findOneBy(['presentation' => 'Eagle Millenium Mug', 'object' => $product])->willReturn($productVariant);
 
         $this->getProductVariantByNameAndProduct('Eagle Millenium Mug', 'Mug')->shouldReturn($productVariant);
     }
 
     function it_throws_element_not_found_exception_if_product_variant_has_not_been_found (
-        RepositoryInterface $productRepository,
-        RepositoryInterface $productVariantRepository,
+        ProductRepositoryInterface $productRepository,
+        ProductVariantRepositoryInterface $productVariantRepository,
         ProductInterface $product
     ) {
-        $productRepository->findOneBy(['name' => 'T-Shirt'])->willReturn($product);
+        $productRepository->findOneByName('T-Shirt')->willReturn($product);
         $productVariantRepository->findOneBy(['presentation' => 'Han Solo T-Shirt', 'object' => $product])->willReturn(null);
 
         $this->shouldThrow(\InvalidArgumentException::class)->during('getProductVariantByNameAndProduct', ['Han Solo T-Shirt', 'T-Shirt']);

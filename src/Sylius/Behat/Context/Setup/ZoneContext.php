@@ -15,7 +15,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Bundle\AddressingBundle\Factory\ZoneFactoryInterface;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
 use Symfony\Component\Intl\Intl;
 
 /**
@@ -33,7 +33,7 @@ final class ZoneContext implements Context
     ];
 
     /**
-     * @var RepositoryInterface
+     * @var ZoneRepositoryInterface
      */
     private $zoneRepository;
 
@@ -48,12 +48,12 @@ final class ZoneContext implements Context
     private $zoneFactory;
 
     /**
-     * @param RepositoryInterface $zoneRepository
+     * @param ZoneRepositoryInterface $zoneRepository
      * @param SettingsManagerInterface $settingsManager
      * @param ZoneFactoryInterface $zoneFactory
      */
     public function __construct(
-        RepositoryInterface $zoneRepository,
+        ZoneRepositoryInterface $zoneRepository,
         SettingsManagerInterface $settingsManager,
         ZoneFactoryInterface $zoneFactory
     ) {

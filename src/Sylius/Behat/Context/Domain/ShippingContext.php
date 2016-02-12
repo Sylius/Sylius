@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Context\Domain;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 
 /**
@@ -21,14 +21,14 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 class ShippingContext implements Context
 {
     /**
-     * @var RepositoryInterface
+     * @var ShipmentRepositoryInterface
      */
     private $shipmentRepository;
 
     /**
-     * @param RepositoryInterface $shipmentRepository
+     * @param ShipmentRepositoryInterface $shipmentRepository
      */
-    public function __construct(RepositoryInterface $shipmentRepository)
+    public function __construct(ShipmentRepositoryInterface $shipmentRepository)
     {
         $this->shipmentRepository = $shipmentRepository;
     }

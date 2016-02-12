@@ -18,7 +18,7 @@ use Sylius\Bundle\AddressingBundle\Factory\ZoneFactoryInterface;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -26,7 +26,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class ZoneContextSpec extends ObjectBehavior
 {
     function let(
-        RepositoryInterface $zoneRepository,
+        ZoneRepositoryInterface $zoneRepository,
         SettingsManagerInterface $settingsManager,
         ZoneFactoryInterface $zoneFactory
     ) {
