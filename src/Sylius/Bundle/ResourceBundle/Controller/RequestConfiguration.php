@@ -122,7 +122,27 @@ class RequestConfiguration
      */
     public function getFormType()
     {
-        return $this->parameters->get('form', sprintf('%s_%s', $this->metadata->getApplicationName(), $this->metadata->getName()));
+        $form = $this->parameters->get('form', sprintf('%s_%s', $this->metadata->getApplicationName(), $this->metadata->getName()));
+
+        if (is_array($form) && array_key_exists('type', $form)) {
+            return $form['type'];
+        }
+
+        return $form;
+    }
+
+    /**
+     * @return mixed|null
+     */
+    public function getFormOptions()
+    {
+        $form = $this->parameters->get('form', sprintf('%s_%s', $this->metadata->getApplicationName(), $this->metadata->getName()));
+
+        if (is_array($form) && array_key_exists('options', $form)) {
+            return $form['options'];
+        }
+
+        return [];
     }
 
     /**
