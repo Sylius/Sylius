@@ -76,7 +76,7 @@ final class UserContext implements Context
      */
     public function thereIsUserIdentifiedBy($email, $password)
     {
-        $user = $this->userFactory->create('John', 'Doe', $email, $password);
+        $user = $this->userFactory->create($email, $password);
 
         $this->sharedStorage->setCurrentResource('user', $user);
         $this->userRepository->add($user);
@@ -87,7 +87,7 @@ final class UserContext implements Context
      */
     public function thereIsUserWithShippingCountry($email, $password, $country)
     {
-        $user = $this->userFactory->create('John', 'Doe', $email, $password);
+        $user = $this->userFactory->create($email, $password);
 
         $customer = $user->getCustomer();
         $customer->setShippingAddress($this->createAddress($customer->getFirstName(), $customer->getLastName(), $country));

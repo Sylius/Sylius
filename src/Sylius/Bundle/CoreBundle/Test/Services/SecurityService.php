@@ -22,8 +22,6 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
  */
 class SecurityService implements SecurityServiceInterface
 {
-    const DEFAULT_PROVIDER_KEY = 'main';
-
     /**
      * @var UserRepositoryInterface
      */
@@ -49,7 +47,7 @@ class SecurityService implements SecurityServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function logIn($email, $providerKey = self::DEFAULT_PROVIDER_KEY, Session $minkSession)
+    public function logIn($email, Session $minkSession, $providerKey = self::DEFAULT_PROVIDER_KEY)
     {
         $user = $this->userRepository->findOneBy(['username' => $email]);
         if (null === $user) {

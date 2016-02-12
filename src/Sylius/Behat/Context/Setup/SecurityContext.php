@@ -93,7 +93,7 @@ final class SecurityContext implements Context
     public function iAmLoggedInAs($email)
     {
         $this->prepareSessionIfNeeded();
-        $this->securityService->logIn($email, 'main', $this->minkSession);
+        $this->securityService->logIn($email, $this->minkSession, 'main');
     }
 
     /**
@@ -104,7 +104,7 @@ final class SecurityContext implements Context
         $user = $this->testUserFactory->createDefault();
         $this->userRepository->add($user);
 
-        $this->securityService->logIn($user->getEmail(), 'main', $this->minkSession);
+        $this->securityService->logIn($user->getEmail(), $this->minkSession, 'main');
 
         $this->sharedStorage->setCurrentResource('user', $user);
     }

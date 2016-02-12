@@ -14,6 +14,7 @@ namespace spec\Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Test\Factory\TestUserFactory;
 use Sylius\Bundle\CoreBundle\Test\Factory\TestUserFactoryInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -30,7 +31,7 @@ class UserContextSpec extends ObjectBehavior
     function let(
         RepositoryInterface $userRepository,
         SharedStorageInterface $sharedStorage,
-        TestUserFactoryInterface $userFactory,
+        TestUserFactory $userFactory,
         FactoryInterface $addressFactory,
         ObjectManager $userManager
     ) {
@@ -59,7 +60,7 @@ class UserContextSpec extends ObjectBehavior
         $userRepository,
         UserInterface $user
     ) {
-        $userFactory->create('John', 'Doe', 'test@example.com', 'pa$$word')->willReturn($user);
+        $userFactory->create('test@example.com', 'pa$$word')->willReturn($user);
 
         $sharedStorage->setCurrentResource('user', $user)->shouldBeCalled();
         $userRepository->add($user)->shouldBeCalled();
@@ -76,7 +77,7 @@ class UserContextSpec extends ObjectBehavior
         CustomerInterface $customer,
         UserInterface $user
     ) {
-        $userFactory->create('John', 'Doe', 'test@example.com', 'pa$$word')->willReturn($user);
+        $userFactory->create('test@example.com', 'pa$$word')->willReturn($user);
         $user->getCustomer()->willReturn($customer);
 
         $customer->getFirstName()->willReturn('John');

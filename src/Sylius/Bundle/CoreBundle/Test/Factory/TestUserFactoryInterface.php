@@ -19,14 +19,14 @@ use Sylius\Component\Core\Model\UserInterface;
 interface TestUserFactoryInterface
 {
     /**
-     * @param string $firstName
-     * @param string $lastName
      * @param string $email
      * @param string $password
+     * @param string $firstName
+     * @param string $lastName
      *
      * @return UserInterface
      */
-    public function create($firstName, $lastName, $email, $password);
+    public function create($email, $password, $firstName, $lastName);
 
     /**
      * @return UserInterface

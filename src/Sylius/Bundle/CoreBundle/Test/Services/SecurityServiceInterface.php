@@ -12,19 +12,20 @@
 namespace Sylius\Bundle\CoreBundle\Test\Services;
 
 use Behat\Mink\Session;
-use Sylius\Component\Core\Model\UserInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 interface SecurityServiceInterface
 {
+    const DEFAULT_PROVIDER_KEY = 'main';
+
     /**
      * @param string $email
-     * @param string $providerKey
      * @param Session $minkSession
+     * @param string $providerKey
      *
      * @throws \InvalidArgumentException
      */
-    public function logIn($email, $providerKey, Session $minkSession);
+    public function logIn($email, Session $minkSession, $providerKey = self::DEFAULT_PROVIDER_KEY);
 }

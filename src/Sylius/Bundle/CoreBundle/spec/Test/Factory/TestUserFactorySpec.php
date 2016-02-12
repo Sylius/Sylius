@@ -55,7 +55,7 @@ class TestUserFactorySpec extends ObjectBehavior
         $user->setPlainPassword('a££ow')->shouldBeCalled();
         $user->enable()->shouldBeCalled();
 
-        $this->create('Oliver', 'Queen', 'oliver.queen@star.com', 'a££ow')->shouldReturn($user);
+        $this->create('oliver.queen@star.com', 'a££ow', 'Oliver', 'Queen')->shouldReturn($user);
     }
 
     function it_creates_default_user_with_customer(

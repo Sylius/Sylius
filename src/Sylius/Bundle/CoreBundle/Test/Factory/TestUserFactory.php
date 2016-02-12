@@ -19,9 +19,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class TestUserFactory implements TestUserFactoryInterface
 {
+    const DEFAULT_USER_EMAIL = 'john.doe@example.com';
     const DEFAULT_USER_FIRST_NAME = 'John';
     const DEFAULT_USER_LAST_NAME = 'Doe';
-    const DEFAULT_USER_EMAIL = 'john.doe@example.com';
     const DEFAULT_USER_PASSWORD = 'password123';
 
     /**
@@ -47,7 +47,7 @@ class TestUserFactory implements TestUserFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function create($firstName, $lastName, $email, $password)
+    public function create($email, $password, $firstName = self::DEFAULT_USER_FIRST_NAME, $lastName = self::DEFAULT_USER_LAST_NAME)
     {
         $customer = $this->customerFactory->createNew();
 
@@ -71,10 +71,10 @@ class TestUserFactory implements TestUserFactoryInterface
     public function createDefault()
     {
         return $this->create(
-            self::DEFAULT_USER_FIRST_NAME,
-            self::DEFAULT_USER_LAST_NAME,
             self::DEFAULT_USER_EMAIL,
-            self::DEFAULT_USER_PASSWORD
+            self::DEFAULT_USER_PASSWORD,
+            self::DEFAULT_USER_FIRST_NAME,
+            self::DEFAULT_USER_LAST_NAME
         );
     }
 }
