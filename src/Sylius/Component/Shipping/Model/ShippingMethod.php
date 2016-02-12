@@ -232,9 +232,9 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
     public static function getCategoryRequirementLabels()
     {
         return [
-            ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE => 'None of items have to match method category',
-            ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY => 'At least 1 item have to match method category',
-            ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ALL => 'All items have to match method category',
+            ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE => 'None of the units have to match the method category',
+            ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY => 'At least 1 unit has to match the method category',
+            ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ALL => 'All units has to match the method category',
         ];
     }
 

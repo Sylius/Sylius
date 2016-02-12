@@ -11,9 +11,9 @@
 
 namespace Sylius\Component\Shipping;
 
-class ShipmentItemTransitions
+class ShipmentUnitTransitions
 {
-    const GRAPH = 'sylius_shipment_item';
+    const GRAPH = 'sylius_shipment_unit';
 
     const SYLIUS_HOLD = 'hold';
     const SYLIUS_RELEASE = 'release';

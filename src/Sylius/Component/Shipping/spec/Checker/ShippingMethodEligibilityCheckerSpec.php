@@ -50,12 +50,12 @@ class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
     ) {
         $configuration = [];
 
-        $rule->getType()->shouldBeCalled()->willReturn(RuleInterface::TYPE_ITEM_TOTAL);
+        $rule->getType()->shouldBeCalled()->willReturn(RuleInterface::TYPE_UNIT_TOTAL);
         $rule->getConfiguration()->shouldBeCalled()->willReturn($configuration);
 
         $shippingMethod->getCategory()->shouldBeCalled();
         $shippingMethod->getRules()->shouldBeCalled()->willReturn([$rule]);
-        $registry->get(RuleInterface::TYPE_ITEM_TOTAL)->shouldBeCalled()->willReturn($checker);
+        $registry->get(RuleInterface::TYPE_UNIT_TOTAL)->shouldBeCalled()->willReturn($checker);
 
         $checker->isEligible($subject, $configuration)->shouldBeCalled()->willReturn(true);
 
@@ -71,12 +71,12 @@ class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
     ) {
         $configuration = [];
 
-        $rule->getType()->shouldBeCalled()->willReturn(RuleInterface::TYPE_ITEM_TOTAL);
+        $rule->getType()->shouldBeCalled()->willReturn(RuleInterface::TYPE_UNIT_TOTAL);
         $rule->getConfiguration()->shouldBeCalled()->willReturn($configuration);
 
         $shippingMethod->getCategory()->shouldBeCalled();
         $shippingMethod->getRules()->shouldBeCalled()->willReturn([$rule]);
-        $registry->get(RuleInterface::TYPE_ITEM_TOTAL)->shouldBeCalled()->willReturn($checker);
+        $registry->get(RuleInterface::TYPE_UNIT_TOTAL)->shouldBeCalled()->willReturn($checker);
 
         $checker->isEligible($subject, $configuration)->shouldBeCalled()->willReturn(false);
 

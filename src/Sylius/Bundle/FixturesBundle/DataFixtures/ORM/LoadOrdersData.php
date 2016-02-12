@@ -130,7 +130,7 @@ class LoadOrdersData extends DataFixture
         $shipment->setState($this->getShipmentState());
 
         foreach ($order->getItemUnits() as $item) {
-            $shipment->addItem($item);
+            $shipment->addUnit($item);
         }
 
         $order->addShipment($shipment);

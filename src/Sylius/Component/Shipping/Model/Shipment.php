@@ -38,9 +38,9 @@ class Shipment implements ShipmentInterface
     protected $method;
 
     /**
-     * @var Collection|ShipmentItemInterface[]
+     * @var Collection|ShipmentUnitInterface[]
      */
-    protected $items;
+    protected $units;
 
     /**
      * @var string
@@ -49,7 +49,7 @@ class Shipment implements ShipmentInterface
 
     public function __construct()
     {
-        $this->items = new ArrayCollection();
+        $this->units = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }
 
@@ -58,7 +58,7 @@ class Shipment implements ShipmentInterface
      */
     public function __toString()
     {
-        return $this->id;
+        return (string) $this->id;
     }
 
     /**
@@ -104,38 +104,38 @@ class Shipment implements ShipmentInterface
     /**
      * {@inheritdoc}
      */
-    public function getItems()
+    public function getUnits()
     {
-        return $this->items;
+        return $this->units;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasItem(ShipmentItemInterface $item)
+    public function hasUnit(ShipmentUnitInterface $unit)
     {
-        return $this->items->contains($item);
+        return $this->units->contains($unit);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addItem(ShipmentItemInterface $item)
+    public function addUnit(ShipmentUnitInterface $unit)
     {
-        if (!$this->hasItem($item)) {
-            $item->setShipment($this);
-            $this->items->add($item);
+        if (!$this->hasUnit($unit)) {
+            $unit->setShipment($this);
+            $this->units->add($unit);
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function removeItem(ShipmentItemInterface $item)
+    public function removeUnit(ShipmentUnitInterface $unit)
     {
-        if ($this->hasItem($item)) {
-            $item->setShipment(null);
-            $this->items->removeElement($item);
+        if ($this->hasUnit($unit)) {
+            $unit->setShipment(null);
+            $this->units->removeElement($unit);
         }
     }
 
@@ -146,8 +146,8 @@ class Shipment implements ShipmentInterface
     {
         $shippables = new ArrayCollection();
 
-        foreach ($this->items as $item) {
-            $shippable = $item->getShippable();
+        foreach ($this->units as $unit) {
+            $shippable = $unit->getShippable();
             if (!$shippables->contains($shippable)) {
                 $shippables->add($shippable);
             }
@@ -187,8 +187,8 @@ class Shipment implements ShipmentInterface
     {
         $weight = 0;
 
-        foreach ($this->items as $item) {
-            $weight += $item->getShippable()->getShippingWeight();
+        foreach ($this->units as $unit) {
+            $weight += $unit->getShippable()->getShippingWeight();
         }
 
         return $weight;
@@ -201,8 +201,8 @@ class Shipment implements ShipmentInterface
     {
         $volume = 0;
 
-        foreach ($this->items as $item) {
-            $volume += $item->getShippable()->getShippingVolume();
+        foreach ($this->units as $unit) {
+            $volume += $unit->getShippable()->getShippingVolume();
         }
 
         return $volume;
@@ -211,15 +211,15 @@ class Shipment implements ShipmentInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingItemCount()
+    public function getShippingUnitCount()
     {
-        return $this->items->count();
+        return $this->units->count();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getShippingItemTotal()
+    public function getShippingUnitTotal()
     {
         return 0;
     }

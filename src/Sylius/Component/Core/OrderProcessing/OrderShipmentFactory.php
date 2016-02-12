@@ -52,7 +52,7 @@ class OrderShipmentFactory implements OrderShipmentFactoryInterface
 
         foreach ($order->getItemUnits() as $itemUnit) {
             if (null === $itemUnit->getShipment()) {
-                $shipment->addItem($itemUnit);
+                $shipment->addUnit($itemUnit);
             }
         }
     }

@@ -25,8 +25,8 @@ use Sylius\Component\Shipping\Model\Rule;
 use Sylius\Component\Shipping\Model\RuleInterface;
 use Sylius\Component\Shipping\Model\Shipment;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
-use Sylius\Component\Shipping\Model\ShipmentItem;
-use Sylius\Component\Shipping\Model\ShipmentItemInterface;
+use Sylius\Component\Shipping\Model\ShipmentUnit;
+use Sylius\Component\Shipping\Model\ShipmentUnitInterface;
 use Sylius\Component\Shipping\Model\ShippingCategory;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethod;
@@ -104,15 +104,15 @@ class Configuration implements ConfigurationInterface
                                 ->end()
                             ->end()
                         ->end()
-                        ->arrayNode('shipment_item')
+                        ->arrayNode('shipment_unit')
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->variableNode('options')->end()
                                 ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('model')->defaultValue(ShipmentItem::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('interface')->defaultValue(ShipmentItemInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('model')->defaultValue(ShipmentUnit::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(ShipmentUnitInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()

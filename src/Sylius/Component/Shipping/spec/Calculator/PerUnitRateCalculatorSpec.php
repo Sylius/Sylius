@@ -18,11 +18,11 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PerItemRateCalculatorSpec extends ObjectBehavior
+class PerUnitRateCalculatorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Shipping\Calculator\PerItemRateCalculator');
+        $this->shouldHaveType('Sylius\Component\Shipping\Calculator\PerUnitRateCalculator');
     }
 
     function it_should_implement_Sylius_shipping_calculator_interface()
@@ -30,22 +30,22 @@ class PerItemRateCalculatorSpec extends ObjectBehavior
         $this->shouldImplement(CalculatorInterface::class);
     }
 
-    function it_returns_per_item_type()
+    function it_returns_per_unit_type()
     {
-        $this->getType()->shouldReturn('per_item_rate');
+        $this->getType()->shouldReturn('per_unit_rate');
     }
 
-    function it_should_calculate_the_total_with_the_per_item_amount_configured_on_the_method(
+    function it_should_calculate_the_total_with_the_per_unit_amount_configured_on_the_method(
         ShippingSubjectInterface $subject
     ) {
-        $subject->getShippingItemCount()->willReturn(11);
+        $subject->getShippingUnitCount()->willReturn(11);
 
         $this->calculate($subject, ['amount' => 200])->shouldReturn(2200);
     }
 
     function its_calculated_value_should_be_an_integer(ShippingSubjectInterface $subject)
     {
-        $subject->getShippingItemCount()->willReturn(6);
+        $subject->getShippingUnitCount()->willReturn(6);
 
         $this->calculate($subject, ['amount' => 200])->shouldBeInteger();
     }

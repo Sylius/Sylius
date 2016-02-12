@@ -37,7 +37,7 @@ class LoadShippingData extends DataFixture
         $manager->persist($regular);
         $manager->persist($heavy);
 
-        $config = ['first_item_cost' => 1000, 'additional_item_cost' => 500, 'additional_item_limit' => 0];
+        $config = ['first_unit_cost' => 1000, 'additional_unit_cost' => 500, 'additional_unit_limit' => 0];
         $manager->persist($this->createShippingMethod([$this->defaultLocale => 'FedEx'], 'SM1', 'USA', DefaultCalculators::FLEXIBLE_RATE, $config));
 
         $config = ['amount' => 2500];
@@ -46,7 +46,7 @@ class LoadShippingData extends DataFixture
         $config = ['amount' => 2350];
         $manager->persist($this->createShippingMethod([$this->defaultLocale => 'DHL'], 'SM3', 'EU', DefaultCalculators::FLAT_RATE, $config));
 
-        $config = ['first_item_cost' => 4000, 'additional_item_cost' => 500, 'additional_item_limit' => 10];
+        $config = ['first_unit_cost' => 4000, 'additional_unit_cost' => 500, 'additional_unit_limit' => 10];
         $manager->persist($this->createShippingMethod([$this->defaultLocale => 'FedEx World Shipping', 'es_ES' => 'FedEx internacional'], 'SM4', 'RoW', DefaultCalculators::FLEXIBLE_RATE, $config));
 
         $manager->flush();
@@ -94,7 +94,7 @@ class LoadShippingData extends DataFixture
      *
      * @return ShippingMethodInterface
      */
-    protected function createShippingMethod(array $translatedNames, $code, $zoneCode, $calculator = DefaultCalculators::PER_ITEM_RATE, array $configuration = [], ShippingCategoryInterface $category = null)
+    protected function createShippingMethod(array $translatedNames, $code, $zoneCode, $calculator = DefaultCalculators::PER_UNIT_RATE, array $configuration = [], ShippingCategoryInterface $category = null)
     {
         /* @var $method ShippingMethodInterface */
         $method = $this->getShippingMethodFactory()->createNew();

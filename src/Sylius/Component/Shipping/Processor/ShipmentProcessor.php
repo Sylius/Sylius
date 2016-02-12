@@ -15,9 +15,9 @@ use Doctrine\Common\Collections\Collection;
 use SM\Factory\FactoryInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
-use Sylius\Component\Shipping\Model\ShipmentItemInterface;
-use Sylius\Component\Shipping\ShipmentItemTransitions;
+use Sylius\Component\Shipping\Model\ShipmentUnitInterface;
 use Sylius\Component\Shipping\ShipmentTransitions;
+use Sylius\Component\Shipping\ShipmentUnitTransitions;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -55,18 +55,18 @@ class ShipmentProcessor implements ShipmentProcessorInterface
     /**
      * {@inheritdoc}
      */
-    public function updateItemStates($items, $transition)
+    public function updateUnitStates($units, $transition)
     {
-        if (!is_array($items) && !$items instanceof Collection) {
-            throw new \InvalidArgumentException('Inventory items value must be array or instance of "Doctrine\Common\Collections\Collection".');
+        if (!is_array($units) && !$units instanceof Collection) {
+            throw new \InvalidArgumentException('Shipping units value must be array or instance of "Doctrine\Common\Collections\Collection".');
         }
 
-        foreach ($items as $item) {
-            if (!$item instanceof ShipmentItemInterface) {
-                throw new UnexpectedTypeException($item, 'Sylius\Component\Shipping\Model\ShipmentItemInterface');
+        foreach ($units as $unit) {
+            if (!$unit instanceof ShipmentUnitInterface) {
+                throw new UnexpectedTypeException($unit, 'Sylius\Component\Shipping\Model\ShipmentUnitInterface');
             }
 
-            $this->factory->get($item, ShipmentItemTransitions::GRAPH)->apply($transition, true);
+            $this->factory->get($unit, ShipmentUnitTransitions::GRAPH)->apply($transition, true);
         }
     }
 }

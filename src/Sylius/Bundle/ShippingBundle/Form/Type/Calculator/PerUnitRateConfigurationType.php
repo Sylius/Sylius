@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Constraints\Type;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PerItemRateConfigurationType extends AbstractType
+class PerUnitRateConfigurationType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -29,7 +29,7 @@ class PerItemRateConfigurationType extends AbstractType
     {
         $builder
             ->add('amount', 'sylius_money', [
-                'label' => 'sylius.form.shipping_calculator.per_item_rate_configuration.amount',
+                'label' => 'sylius.form.shipping_calculator.per_unit_rate_configuration.amount',
                 'constraints' => [
                     new NotBlank(),
                     new Type(['type' => 'integer']),
@@ -55,6 +55,6 @@ class PerItemRateConfigurationType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_shipping_calculator_per_item_rate';
+        return 'sylius_shipping_calculator_per_unit_rate';
     }
 }

@@ -35,55 +35,55 @@ class FlexibleRateCalculatorSpec extends ObjectBehavior
         $this->getType()->shouldReturn('flexible_rate');
     }
 
-    function it_should_calculate_the_first_item_cost_if_shipment_has_only_one_item(ShipmentInterface $shipment)
+    function it_should_calculate_the_first_unit_cost_if_shipment_has_only_one_unit(ShipmentInterface $shipment)
     {
         $configuration = [
-            'first_item_cost' => 1000,
-            'additional_item_cost' => 200,
-            'additional_item_limit' => 0,
+            'first_unit_cost' => 1000,
+            'additional_unit_cost' => 200,
+            'additional_unit_limit' => 0,
         ];
 
-        $shipment->getShippingItemCount()->willReturn(1);
+        $shipment->getShippingUnitCount()->willReturn(1);
 
         $this->calculate($shipment, $configuration)->shouldReturn(1000);
     }
 
-    function it_should_calculate_the_first_and_every_additional_item_cost_when_shipment_has_more_items(
+    function it_should_calculate_the_first_and_every_additional_unit_cost_when_shipment_has_more_units(
         ShipmentInterface $shipment
     ) {
         $configuration = [
-            'first_item_cost' => 1500,
-            'additional_item_cost' => 300,
-            'additional_item_limit' => 0,
+            'first_unit_cost' => 1500,
+            'additional_unit_cost' => 300,
+            'additional_unit_limit' => 0,
         ];
 
-        $shipment->getShippingItemCount()->willReturn(5);
+        $shipment->getShippingUnitCount()->willReturn(5);
 
         $this->calculate($shipment, $configuration)->shouldReturn(2700);
     }
 
-    function it_should_calculate_the_first_and_every_additional_item_cost_taking_limit_into_account(ShipmentInterface $shipment)
+    function it_should_calculate_the_first_and_every_additional_unit_cost_taking_limit_into_account(ShipmentInterface $shipment)
     {
         $configuration = [
-            'first_item_cost' => 1500,
-            'additional_item_cost' => 300,
-            'additional_item_limit' => 3,
+            'first_unit_cost' => 1500,
+            'additional_unit_cost' => 300,
+            'additional_unit_limit' => 3,
         ];
 
-        $shipment->getShippingItemCount()->willReturn(8);
+        $shipment->getShippingUnitCount()->willReturn(8);
 
         $this->calculate($shipment, $configuration)->shouldReturn(2400);
     }
 
-    function it_should_calculate_the_first_and_every_additional_item_cost_when_the_limit_is_equal_to_additional_items_number(ShipmentInterface $shipment)
+    function it_should_calculate_the_first_and_every_additional_unit_cost_when_the_limit_is_equal_to_additional_units_number(ShipmentInterface $shipment)
     {
         $configuration = [
-            'first_item_cost' => 1000,
-            'additional_item_cost' => 200,
-            'additional_item_limit' => 3,
+            'first_unit_cost' => 1000,
+            'additional_unit_cost' => 200,
+            'additional_unit_limit' => 3,
         ];
 
-        $shipment->getShippingItemCount()->willReturn(4);
+        $shipment->getShippingUnitCount()->willReturn(4);
 
         $this->calculate($shipment, $configuration)->shouldReturn(1600);
     }
@@ -91,12 +91,12 @@ class FlexibleRateCalculatorSpec extends ObjectBehavior
     function its_calculated_value_should_be_an_integer(ShipmentInterface $shipment)
     {
         $configuration = [
-            'first_item_cost' => 1090,
-            'additional_item_cost' => 200,
-            'additional_item_limit' => 3,
+            'first_unit_cost' => 1090,
+            'additional_unit_cost' => 200,
+            'additional_unit_limit' => 3,
         ];
 
-        $shipment->getShippingItemCount()->willReturn(6);
+        $shipment->getShippingUnitCount()->willReturn(6);
 
         $this->calculate($shipment, $configuration)->shouldBeInteger();
     }

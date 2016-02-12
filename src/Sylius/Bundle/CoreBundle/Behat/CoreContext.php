@@ -427,7 +427,7 @@ class CoreContext extends DefaultContext
     public function thereAreShippingMethods(TableNode $table)
     {
         foreach ($table->getHash() as $data) {
-            $calculator = array_key_exists('calculator', $data) ? str_replace(' ', '_', strtolower($data['calculator'])) : DefaultCalculators::PER_ITEM_RATE;
+            $calculator = array_key_exists('calculator', $data) ? str_replace(' ', '_', strtolower($data['calculator'])) : DefaultCalculators::PER_UNIT_RATE;
             $configuration = array_key_exists('configuration', $data) ? $this->getConfiguration($data['configuration']) : null;
             $taxCategory = (isset($data['tax category'])) ? $this->findOneByName('tax_category', trim($data['tax category'])) : null;
 
@@ -446,7 +446,7 @@ class CoreContext extends DefaultContext
      * @Given /^There is shipping method "([^""]*)" with code "([^""]*)" and zone "([^""]*)"$/
      * @Given /^there is an enabled shipping method "([^""]*)" with code "([^""]*)" and zone "([^""]*)"$/
      */
-    public function thereIsShippingMethod($name, $code, $zoneName, $calculator = DefaultCalculators::PER_ITEM_RATE, TaxCategoryInterface $taxCategory = null, array $configuration = null, $enabled = true, $flush = true)
+    public function thereIsShippingMethod($name, $code, $zoneName, $calculator = DefaultCalculators::PER_UNIT_RATE, TaxCategoryInterface $taxCategory = null, array $configuration = null, $enabled = true, $flush = true)
     {
         $repository = $this->getRepository('shipping_method');
         $factory = $this->getFactory('shipping_method');
@@ -478,7 +478,7 @@ class CoreContext extends DefaultContext
      */
     public function thereIsDisabledShippingMethod($name, $code, $zoneName)
     {
-        $this->thereIsShippingMethod($name, $code, $zoneName, DefaultCalculators::PER_ITEM_RATE, null, null, false);
+        $this->thereIsShippingMethod($name, $code, $zoneName, DefaultCalculators::PER_UNIT_RATE, null, null, false);
     }
 
     /**

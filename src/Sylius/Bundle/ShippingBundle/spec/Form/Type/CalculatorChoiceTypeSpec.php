@@ -24,7 +24,7 @@ class CalculatorChoiceTypeSpec extends ObjectBehavior
     {
         $choices = [
             'flat_rate' => 'Flat rate per shipment',
-            'per_item_rate' => 'Per item rate',
+            'per_unit_rate' => 'Per unit rate',
         ];
 
         $this->beConstructedWith($choices);
@@ -44,7 +44,7 @@ class CalculatorChoiceTypeSpec extends ObjectBehavior
     {
         $choices = [
             'flat_rate' => 'Flat rate per shipment',
-            'per_item_rate' => 'Per item rate',
+            'per_unit_rate' => 'Per unit rate',
         ];
 
         $resolver->setDefaults(['choices' => $choices])->shouldBeCalled();

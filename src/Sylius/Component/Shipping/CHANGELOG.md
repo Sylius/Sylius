@@ -19,6 +19,10 @@ CHANGELOG
   `ShippingMethodEligibilityCheckerSpec`, `DelegatingCalculatorSpec`
 
 * Rework CalculatorInterface, now it has only two methods : getType and calculate.
-* All calculators have new type, which is accordant with calculator rate type, for example : "per_item_rate".
+* All calculators have new type, which is accordant with calculator rate type, for example : "per_unit_rate".
 * Remove getConfiguration and isConfigurable form all calculators.
 * Rework specs according to above changes.
+
+### v0.17.0
+
+* Rename all shipping references of 'Item' to 'Unit' to align with `OrderItemUnit` which represents a `ShippingUnit` in full-stack Sylius

@@ -23,18 +23,18 @@ class FlexibleRateCalculator implements CalculatorInterface
      */
     public function calculate(ShippingSubjectInterface $subject, array $configuration)
     {
-        $firstItemCost = $configuration['first_item_cost'];
-        $additionalItemCost = $configuration['additional_item_cost'];
-        $additionalItemLimit = $configuration['additional_item_limit'];
+        $firstUnitCost = $configuration['first_unit_cost'];
+        $additionalUnitCost = $configuration['additional_unit_cost'];
+        $additionalUnitLimit = $configuration['additional_unit_limit'];
 
-        $totalItems = $subject->getShippingItemCount();
-        $additionalItems = $totalItems - 1;
+        $totalUnits = $subject->getShippingUnitCount();
+        $additionalUnits = $totalUnits - 1;
 
-        if (0 !== $additionalItemLimit) {
-            $additionalItems = $additionalItemLimit >= $additionalItems ? $additionalItems : $additionalItemLimit;
+        if (0 !== $additionalUnitLimit) {
+            $additionalUnits = $additionalUnitLimit >= $additionalUnits ? $additionalUnits : $additionalUnitLimit;
         }
 
-        return (int) ($firstItemCost + ($additionalItems * $additionalItemCost));
+        return (int) ($firstUnitCost + ($additionalUnits * $additionalUnitCost));
     }
 
     /**

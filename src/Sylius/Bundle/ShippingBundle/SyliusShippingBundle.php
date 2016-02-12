@@ -17,7 +17,7 @@ use Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler\RegisterCalculator
 use Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler\RegisterRuleCheckersPass;
 use Sylius\Component\Shipping\Model\RuleInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
-use Sylius\Component\Shipping\Model\ShipmentItemInterface;
+use Sylius\Component\Shipping\Model\ShipmentUnitInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -61,7 +61,7 @@ class SyliusShippingBundle extends AbstractResourceBundle
     {
         return [
             ShipmentInterface::class => 'sylius.model.shipment.class',
-            ShipmentItemInterface::class => 'sylius.model.shipment_item.class',
+            ShipmentUnitInterface::class => 'sylius.model.shipment_unit.class',
             ShippingCategoryInterface::class => 'sylius.model.shipping_category.class',
             ShippingMethodInterface::class => 'sylius.model.shipping_method.class',
             RuleInterface::class => 'sylius.model.shipping_method_rule.class',

@@ -16,14 +16,14 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PerItemRateCalculator implements CalculatorInterface
+class PerUnitRateCalculator implements CalculatorInterface
 {
     /**
      * {@inheritdoc}
      */
     public function calculate(ShippingSubjectInterface $subject, array $configuration)
     {
-        return (int) ($configuration['amount'] * $subject->getShippingItemCount());
+        return (int) ($configuration['amount'] * $subject->getShippingUnitCount());
     }
 
     /**
@@ -31,6 +31,6 @@ class PerItemRateCalculator implements CalculatorInterface
      */
     public function getType()
     {
-        return 'per_item_rate';
+        return 'per_unit_rate';
     }
 }

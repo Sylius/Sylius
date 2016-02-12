@@ -243,6 +243,34 @@ class BookController extends ResourceController
 * Introduced ``OrderItemQuantityDataMapper``, which attached to ``OrderItemType`` uses proper service to modify ``OrderItem`` quantity;
 * Changed ``Adjustment`` ``description`` field to ``label``;
 
+### Shipping and ShippingBundle
+
+* Renamed ``ShipmentItem`` to ``ShipmentUnit`` to align with full-stack ``OrderItemUnit`` that it represents and avoid confusion
+against the similarly named ``OrderItem``.
+* Also renamed all associated 'item' wording to 'unit' in forms and form configuration (e.g. ``DefaultCalculators::PER_UNIT_RATE`` and ``RuleInterface::TYPE_UNIT_TOTAL``).
+* Shipping resources config must be updated:
+
+Before:
+
+```yml
+ sylius_shipping:
+     resources:
+         shipment_item:
+              classes:
+                  model: %sylius.model.order_item_unit.class%
+```
+
+After:
+
+```yml
+ sylius_shipping:
+     resources:
+         shipment_unit:
+              classes:
+                  model: %sylius.model.order_item_unit.class%
+```
+
+
 ## From 0.15.0 to 0.16.x
 
 ### General

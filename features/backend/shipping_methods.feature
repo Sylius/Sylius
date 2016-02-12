@@ -57,7 +57,7 @@ Feature: Shipping methods
         When I fill in "Name" with "FedEx World Shipping"
         And I fill in "Code" with "SM5"
         And I select "USA" from "Zone"
-        And I select "Flat rate per item" from "Calculator"
+        And I select "Flat rate per unit" from "Calculator"
         And I fill in "Amount" with "10"
         And I press "Create"
         Then I should be on the page of shipping method "FedEx World Shipping"
@@ -65,12 +65,12 @@ Feature: Shipping methods
         And I should see "USA"
 
     @javascript
-    Scenario: Creating new shipping method with flat rate per item
+    Scenario: Creating new shipping method with flat rate per unit
         Given I am on the shipping method creation page
         When I fill in "Name" with "FedEx World Shipping"
         And I fill in "Code" with "SM6"
         And I select "USA" from "Zone"
-        And I select "Flat rate per item" from "Calculator"
+        And I select "Flat rate per unit" from "Calculator"
         And I fill in "Amount" with "10"
         And I press "Create"
         Then I should be on the page of shipping method "FedEx World Shipping"
@@ -93,9 +93,9 @@ Feature: Shipping methods
         When I fill in "Name" with "FedEx World Shipping"
         And I fill in "Code" with "SM7"
         And I select "Flexible rate" from "Calculator"
-        And I fill in "First item cost" with "100"
-        And I fill in "Additional item cost" with "10"
-        And I fill in "Limit additional items" with "5"
+        And I fill in "First unit cost" with "100"
+        And I fill in "Additional unit cost" with "10"
+        And I fill in "Limit additional units" with "5"
         And I press "Create"
         Then I should be on the page of shipping method "FedEx World Shipping"
         And I should see "Shipping method has been successfully created"

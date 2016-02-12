@@ -16,14 +16,14 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ItemCountRuleChecker implements RuleCheckerInterface
+class UnitCountRuleChecker implements RuleCheckerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function isEligible(ShippingSubjectInterface $subject, array $configuration)
     {
-        $count = $subject->getShippingItemCount();
+        $count = $subject->getShippingUnitCount();
 
         if ($configuration['equal']) {
             return $count >= $configuration['count'];
@@ -37,6 +37,6 @@ class ItemCountRuleChecker implements RuleCheckerInterface
      */
     public function getConfigurationFormType()
     {
-        return 'sylius_shipping_rule_item_count_configuration';
+        return 'sylius_shipping_rule_unit_count_configuration';
     }
 }
