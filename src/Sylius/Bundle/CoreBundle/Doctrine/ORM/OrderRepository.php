@@ -191,10 +191,10 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
             ->select('count(o.id)')
-            ->innerJoin('o.promotionCoupons', 'coupons')
+            ->innerJoin('o.promotionCoupon', 'coupon')
             ->andWhere('o.customer = :customer')
             ->andWhere('o.completedAt IS NOT NULL')
-            ->andWhere('coupons = :coupon')
+            ->andWhere('coupon = :coupon')
             ->setParameter('customer', $customer)
             ->setParameter('coupon', $coupon)
         ;

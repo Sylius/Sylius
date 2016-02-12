@@ -16,7 +16,6 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Promotion\Checker\PromotionEligibilityChecker as BasePromotionEligibilityChecker;
 use Sylius\Component\Promotion\Model\PromotionCouponAwareSubjectInterface;
-use Sylius\Component\Promotion\Model\PromotionCouponsAwareSubjectInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\SyliusPromotionEvents;
@@ -60,14 +59,6 @@ class PromotionEligibilityChecker extends BasePromotionEligibilityChecker
             $coupon = $subject->getPromotionCoupon();
             if (null !== $coupon && $promotion === $coupon->getPromotion()) {
                 $eligible = $this->isCouponEligibleToLimit($coupon, $promotion, $subject->getCustomer());
-            }
-        } elseif ($subject instanceof PromotionCouponsAwareSubjectInterface) {
-            foreach ($subject->getPromotionCoupons() as $coupon) {
-                if ($promotion === $coupon->getPromotion()) {
-                    $eligible = $this->isCouponEligibleToLimit($coupon, $promotion, $subject->getCustomer());
-
-                    break;
-                }
             }
         } else {
             return false;

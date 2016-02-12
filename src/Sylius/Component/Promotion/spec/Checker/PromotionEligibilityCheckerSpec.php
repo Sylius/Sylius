@@ -16,7 +16,7 @@ use Prophecy\Argument;
 use Sylius\Component\Promotion\Checker\PromotionEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\CouponInterface;
-use Sylius\Component\Promotion\Model\PromotionCouponsAwareSubjectInterface;
+use Sylius\Component\Promotion\Model\PromotionCouponAwareSubjectInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Model\RuleInterface;
@@ -42,7 +42,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
     function it_recognizes_subject_as_eligible_if_all_checkers_recognize_it_as_eligible(
         $registry,
         RuleCheckerInterface $checker,
-        PromotionCouponsAwareSubjectInterface $subject,
+        PromotionCouponAwareSubjectInterface $subject,
         PromotionInterface $promotion,
         RuleInterface $rule
     ) {
@@ -60,7 +60,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $registry->get(RuleInterface::TYPE_ITEM_TOTAL)->willReturn($checker);
         $checker->isEligible($subject, [])->willReturn(true);
 
-        $subject->getPromotionCoupons()->willReturn([]);
+        $subject->getPromotionCoupon()->willReturn(null);
 
         $this->isEligible($subject, $promotion)->shouldReturn(true);
     }
@@ -92,7 +92,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
     function it_recognizes_subject_as_not_eligible_if_any_checker_recognize_it_as_not_eligible_even_when_coupon_matches(
         $registry,
         RuleCheckerInterface $checker,
-        PromotionCouponsAwareSubjectInterface $subject,
+        PromotionCouponAwareSubjectInterface $subject,
         PromotionInterface $promotion,
         CouponInterface $coupon,
         RuleInterface $rule
@@ -111,7 +111,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $registry->get(RuleInterface::TYPE_ITEM_TOTAL)->willReturn($checker);
         $checker->isEligible($subject, [])->willReturn(false);
 
-        $subject->getPromotionCoupons()->willReturn([$coupon]);
+        $subject->getPromotionCoupon()->willReturn($coupon);
         $coupon->getPromotion()->willReturn($promotion);
 
         $this->isEligible($subject, $promotion)->shouldReturn(false);
@@ -131,11 +131,11 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
     }
 
     function it_recognizes_subject_as_not_eligible_if_coupon_code_does_not_match(
-        PromotionCouponsAwareSubjectInterface $subject,
+        PromotionCouponAwareSubjectInterface $subject,
         PromotionInterface $promotion,
         CouponInterface $coupon
     ) {
-        $subject->getPromotionCoupons()->willReturn([$coupon]);
+        $subject->getPromotionCoupon()->willReturn($coupon);
 
         $promotion->getStartsAt()->willReturn(null);
         $promotion->getEndsAt()->willReturn(null);
@@ -176,11 +176,11 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
 
     function it_recognizes_subject_as_eligible_if_coupon_code_match(
         $dispatcher,
-        PromotionCouponsAwareSubjectInterface $subject,
+        PromotionCouponAwareSubjectInterface $subject,
         PromotionInterface $promotion,
         CouponInterface $coupon
     ) {
-        $subject->getPromotionCoupons()->willReturn([$coupon]);
+        $subject->getPromotionCoupon()->willReturn($coupon);
 
         $promotion->getStartsAt()->willReturn(null);
         $promotion->getEndsAt()->willReturn(null);

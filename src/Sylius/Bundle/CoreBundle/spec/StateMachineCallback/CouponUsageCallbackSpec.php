@@ -26,7 +26,7 @@ class CouponUsageCallbackSpec extends ObjectBehavior
         OrderInterface $order,
         CouponInterface $coupon
     ) {
-        $order->getPromotionCoupons()->willReturn([$coupon]);
+        $order->getPromotionCoupon()->willReturn($coupon);
 
         $coupon->incrementUsed()->shouldBeCalled();
 

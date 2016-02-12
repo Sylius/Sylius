@@ -69,9 +69,9 @@ class Order extends Cart implements OrderInterface
     protected $exchangeRate = 1.0;
 
     /**
-     * @var Collection|BaseCouponInterface[]
+     * @var BaseCouponInterface
      */
-    protected $promotionCoupons;
+    protected $promotionCoupon;
 
     /**
      * @var string
@@ -101,7 +101,6 @@ class Order extends Cart implements OrderInterface
 
         $this->payments = new ArrayCollection();
         $this->shipments = new ArrayCollection();
-        $this->promotionCoupons = new ArrayCollection();
         $this->promotions = new ArrayCollection();
     }
 
@@ -353,47 +352,19 @@ class Order extends Cart implements OrderInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return null|BaseCouponInterface
      */
-    public function getPromotionCoupons()
+    public function getPromotionCoupon()
     {
-        return $this->promotionCoupons;
+        return $this->promotionCoupon;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addPromotionCoupon(BaseCouponInterface $coupon = null)
+    public function setPromotionCoupon(BaseCouponInterface $coupon = null)
     {
-        if (null === $coupon) {
-            return;
-        }
-
-        if (!$this->hasPromotionCoupon($coupon)) {
-            $this->promotionCoupons->add($coupon);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removePromotionCoupon(BaseCouponInterface $coupon = null)
-    {
-        if (null === $coupon) {
-            return;
-        }
-
-        if ($this->hasPromotionCoupon($coupon)) {
-            $this->promotionCoupons->removeElement($coupon);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasPromotionCoupon(BaseCouponInterface $coupon)
-    {
-        return $this->promotionCoupons->contains($coupon);
+        $this->promotionCoupon = $coupon;
     }
 
     /**
