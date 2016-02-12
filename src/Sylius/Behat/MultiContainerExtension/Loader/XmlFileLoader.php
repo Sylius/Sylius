@@ -389,21 +389,6 @@ class XmlFileLoader extends FileLoader
 
             switch ($arg->getAttribute('type')) {
                 case 'service':
-// TODO: To be implemented :)
-//                    $onInvalid = $arg->getAttribute('on-invalid');
-//                    $invalidBehavior = ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE;
-//                    if ('ignore' == $onInvalid) {
-//                        $invalidBehavior = ContainerInterface::IGNORE_ON_INVALID_REFERENCE;
-//                    } elseif ('null' == $onInvalid) {
-//                        $invalidBehavior = ContainerInterface::NULL_ON_INVALID_REFERENCE;
-//                    }
-//
-//                    if ($strict = $arg->getAttribute('strict')) {
-//                        $strict = XmlUtils::phpize($strict);
-//                    } else {
-//                        $strict = true;
-//                    }
-
                     $arguments[$key] = $this->containerConfiguration->createReferenceFor($arg->getAttribute('id'), $arg->getAttribute('container') ?: null);
                     break;
                 case 'expression':

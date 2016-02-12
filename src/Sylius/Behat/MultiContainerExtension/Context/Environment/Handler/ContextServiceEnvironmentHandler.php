@@ -113,7 +113,7 @@ final class ContextServiceEnvironmentHandler implements EnvironmentHandler
     {
         if (!is_array($suite->getSetting('contexts_as_services'))) {
             throw new SuiteConfigurationException(
-                sprintf('`contexts` setting of the "%s" suite is expected to be an array, %s given.',
+                sprintf('`contexts_as_services` setting of the "%s" suite is expected to be an array, %s given.',
                     $suite->getName(),
                     gettype($suite->getSetting('contexts_as_services'))
                 ),

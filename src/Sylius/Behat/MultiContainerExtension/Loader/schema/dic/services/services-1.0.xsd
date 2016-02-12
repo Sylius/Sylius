@@ -147,9 +147,7 @@
     <xsd:attribute name="id" type="xsd:string" />
     <xsd:attribute name="key" type="xsd:string" />
     <xsd:attribute name="index" type="xsd:integer" />
-    <xsd:attribute name="on-invalid" type="xsd:string" />
     <xsd:attribute name="container" type="xsd:string" />
-    <xsd:attribute name="strict" type="boolean" />
   </xsd:complexType>
 
   <xsd:complexType name="call" mixed="true">
