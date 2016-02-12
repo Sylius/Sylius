@@ -191,7 +191,7 @@ final class CheckoutContext implements Context
         $this->checkoutSecurityStep->open();
         $this->checkoutSecurityStep->proceedAsGuest($email);
 
-        $this->proceedOrder($shippingCountry, null, null);
+        $this->iProceedSelectingShippingCountry($shippingCountry);
     }
 
     /**

@@ -15,8 +15,6 @@ Feature: Apply correct taxes on visitor cart
         And the store has "EU VAT" tax rate of 10% for "Clothes" for the rest of the world
         And the store has a product "PHP T-Shirt" priced at "€100.00"
         And product "PHP T-Shirt" belongs to "Clothes" tax category
-        And the store ships everything for free to all available locations
-        And the store allows paying offline
 
     Scenario: Proper taxes for taxed product
         When I add product "PHP T-Shirt" to the cart
