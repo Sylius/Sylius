@@ -3,7 +3,7 @@
 
 default:
     suites:
-        ui-checkout:
+        ui_checkout:
             contexts:
                 - Sylius\Behat\Context\Setup\ChannelContext:
                     sharedStorage: "@sylius.behat.shared_storage"

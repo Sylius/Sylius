@@ -3,7 +3,7 @@
 
 default:
     suites:
-        ui-cart:
+        ui_cart:
             contexts:
                 - Sylius\Behat\Context\Hook\DoctrineORMContext:
                     entityManager: "@doctrine.orm.entity_manager"
@@ -72,5 +72,6 @@ default:
                     zoneRepository: "@sylius.repository.zone"
 
                 - Sylius\Behat\Context\Ui\UserContext: ~
+
             filters:
                 tags: "@ui-cart"

@@ -29,6 +29,6 @@ imports:
     - suites/shipping.yml
     - suites/taxation.yml
     - suites/taxonomies.yml
-    - suites/ui-cart.yml
-    - suites/ui-checkout.yml
+    - suites/ui_cart.yml
+    - suites/ui_checkout.yml
     - suites/users.yml
