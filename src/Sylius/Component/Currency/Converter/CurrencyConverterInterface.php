@@ -19,7 +19,7 @@ namespace Sylius\Component\Currency\Converter;
 interface CurrencyConverterInterface
 {
     /**
-     * Convert the given value to equal amount with different target currency.
+     * Covert given value in base currency to equal amount in target currency.
      *
      * @param int    $value
      * @param string $targetCurrencyCode
@@ -29,7 +29,7 @@ interface CurrencyConverterInterface
     public function convertFromBase($value, $targetCurrencyCode);
 
     /**
-     * Convert the given value to equal amount from different source currency.
+     * Covert given value in actual currency to equal amount in base currency.
      *
      * @param int    $value
      * @param string $sourceCurrencyCode
