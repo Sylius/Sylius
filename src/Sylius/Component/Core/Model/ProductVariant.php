@@ -185,7 +185,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      */
     public function setOriginalPrice($originalPrice)
     {
-        if (!is_int($originalPrice)) {
+        if (null !== $originalPrice && !is_int($originalPrice)) {
             throw new \InvalidArgumentException('Original price must be an integer.');
         }
         $this->originalPrice = $originalPrice;

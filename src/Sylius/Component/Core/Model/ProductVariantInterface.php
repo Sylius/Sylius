@@ -119,7 +119,7 @@ interface ProductVariantInterface extends
     public function getOriginalPrice();
 
     /**
-     * @param int $originalPrice
+     * @param int|null $originalPrice
      */
     public function setOriginalPrice($originalPrice);
 
