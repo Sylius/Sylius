@@ -49,6 +49,10 @@ class ArrayGregorianToCalendarSystemTransformer implements DataTransformerInterf
             return $date;
         }
 
+        if (empty($date['year']) || empty($date['month']) || empty($date['day'])) {
+            return $date;
+        }
+
         $dateTime = \DateTime::createFromFormat('Y-m-d', $date['year'].'-'.$date['month'].'-'.$date['day']);
         $translatedDate = $this->localeHelper->formatDate($dateTime, 'Y-m-d');
 
@@ -75,6 +79,10 @@ class ArrayGregorianToCalendarSystemTransformer implements DataTransformerInterf
         }
 
         if (Calendars::GREGORIAN === $this->localeHelper->getCurrentCalendar()) {
+            return $value;
+        }
+
+        if (empty($value['year']) || empty($value['month']) || empty($value['day'])) {
             return $value;
         }
 
