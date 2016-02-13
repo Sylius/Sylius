@@ -47,7 +47,8 @@ class OptionValueType extends AbstractResourceType
                 'form_type' => sprintf('sylius_%s_option_value_translation', $this->variableName),
                 'label' => 'sylius.form.option.presentation',
             ])
-            ->addEventSubscriber(new AddCodeFormSubscriber());
+            ->addEventSubscriber(new AddCodeFormSubscriber())
+        ;
     }
 
     /**

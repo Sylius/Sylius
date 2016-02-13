@@ -23,12 +23,12 @@ interface OptionValueTranslationInterface extends ResourceInterface
      *
      * @return string
      */
-    public function getPresentation();
+    public function getValue();
 
     /**
-     * Set presentation.
+     * Set value.
      *
-     * @param string $presentation
+     * @param string $value
      */
-    public function setPresentation($presentation);
+    public function setValue($value);
 }

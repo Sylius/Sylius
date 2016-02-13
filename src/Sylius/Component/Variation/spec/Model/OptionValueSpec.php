@@ -72,15 +72,15 @@ class OptionValueSpec extends ObjectBehavior
         $this->getValue()->shouldReturn(null);
     }
 
-    function its_presentation_should_be_mutable()
+    function its_value_should_be_mutable()
     {
-        $this->setPresentation('XXL');
-        $this->getPresentation()->shouldReturn('XXL');
+        $this->setValue('XXL');
+        $this->getValue()->shouldReturn('XXL');
     }
 
     function it_returns_its_presentation_when_converted_to_string()
     {
-        $this->setPresentation('S');
+        $this->setValue('S');
         $this->__toString()->shouldReturn('S');
     }
 
@@ -104,7 +104,7 @@ class OptionValueSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\BadMethodCallException::class)
-            ->duringGetPresentationOption()
+            ->duringGetPresentation()
         ;
     }
 
@@ -113,6 +113,6 @@ class OptionValueSpec extends ObjectBehavior
         $option->getPresentation()->willReturn('Size');
         $this->setOption($option);
 
-        $this->getPresentationOption()->shouldReturn('Size');
+        $this->getPresentation()->shouldReturn('Size');
     }
 }

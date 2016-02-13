@@ -167,7 +167,7 @@ class ProductContext extends DefaultContext
             $optionValue = $optionValueFactory->createNew();
             $optionValue->setFallbackLocale($this->getContainer()->getParameter('sylius.locale'));
             $optionValue->setCurrentLocale($this->getContainer()->getParameter('sylius.locale'));
-            $optionValue->setPresentation(trim($valueData[0]));
+            $optionValue->setValue(trim($valueData[0]));
             $optionValue->setCode(trim($valueData[1]));
 
             $option->addValue($optionValue);

@@ -115,15 +115,15 @@ class LoadProductOptionData extends DataFixture
         }
         $option->setCurrentLocale($this->defaultLocale);
 
-        foreach ($valuesData as $code => $presentationValueTranslation) {
-            /* @var $value OptionValueInterface */
+        foreach ($valuesData as $code => $values) {
+            /* @var $values OptionValueInterface */
             $optionValue = $this->getProductOptionValueFactory()->createNew();
             $optionValue->setCode($code);
 
-            foreach ($presentationValueTranslation as $locale => $presentation) {
+            foreach ($values as $locale => $value) {
                 $optionValue->setFallbackLocale($locale);
                 $optionValue->setCurrentLocale($locale);
-                $optionValue->setPresentation($presentation);
+                $optionValue->setValue($value);
             }
             $option->addValue($optionValue);
         }

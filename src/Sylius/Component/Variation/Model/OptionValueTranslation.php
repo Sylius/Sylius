@@ -27,7 +27,7 @@ class OptionValueTranslation extends AbstractTranslation implements OptionValueT
     /**
      * @var string
      */
-    protected $presentation;
+    protected $value;
 
     /**
      * {@inheritdoc}
@@ -38,18 +38,18 @@ class OptionValueTranslation extends AbstractTranslation implements OptionValueT
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
-    public function getPresentation()
+    public function getValue()
     {
-        return $this->presentation;
+        return $this->value;
     }
 
     /**
-     * {@inheritdoc}
+     * @param $value
      */
-    public function setPresentation($presentation)
+    public function setValue($value)
     {
-        $this->presentation = $presentation;
+        $this->value = $value;
     }
 }

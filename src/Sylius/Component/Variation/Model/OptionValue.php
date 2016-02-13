@@ -39,18 +39,11 @@ class OptionValue extends AbstractTranslatable implements OptionValueInterface
     protected $option;
 
     /**
-     * Displayed to user.
-     *
-     * @var string
-     */
-    protected $presentation;
-
-    /**
      * {@inheritdoc}
      */
     public function __toString()
     {
-        return $this->getPresentation();
+        return $this->getValue();
     }
 
     /**
@@ -96,25 +89,17 @@ class OptionValue extends AbstractTranslatable implements OptionValueInterface
     /**
      * {@inheritdoc}
      */
-    public function getPresentation()
-    {
-        return $this->translate()->getPresentation();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPresentation($presentation)
-    {
-        $this->translate()->setPresentation($presentation);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getValue()
     {
-        return $this->getPresentation();
+        return $this->translate()->getValue();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setValue($value)
+    {
+        $this->translate()->setValue($value);
     }
 
     /**
@@ -131,7 +116,7 @@ class OptionValue extends AbstractTranslatable implements OptionValueInterface
     /**
      * {@inheritdoc}
      */
-    public function getPresentationOption()
+    public function getPresentation()
     {
         if (null === $this->option) {
             throw new \BadMethodCallException('The option have not been created yet so you cannot access proxy methods.');

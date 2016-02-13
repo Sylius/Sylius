@@ -11,11 +11,11 @@
 
 namespace Sylius\Component\Product\Model;
 
-use Sylius\Component\Variation\Model\OptionTranslationInterface as BaseOptionTranslationInterface;
+use Sylius\Component\Variation\Model\OptionValueTranslationInterface as BaseOptionValueTranslationInterface;
 
 /**
  * @author Vincenzo Provenza <vincenzo.provenza89@gmail.com>
  */
-interface OptionValueTranslationInterface extends BaseOptionTranslationInterface
+interface OptionValueTranslationInterface extends BaseOptionValueTranslationInterface
 {
 }
