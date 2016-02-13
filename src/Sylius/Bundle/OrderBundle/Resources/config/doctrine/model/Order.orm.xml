@@ -22,11 +22,6 @@
             <generator strategy="AUTO" />
         </id>
 
-        <indexes>
-            <index name="state_idx" columns="state"/>
-            <index name="completedAt_idx" columns="completed_at"/>
-        </indexes>
-
         <field name="number" column="number" type="string" unique="true" nullable="true" />
 
         <field name="additionalInformation" column="additional_information" type="string" nullable="true" length="1000" />

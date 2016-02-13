@@ -21,9 +21,9 @@ class Version20160212163549 extends AbstractMigration
         $this->addSql('ALTER TABLE sylius_adjustment ADD is_refund TINYINT(1) NOT NULL');
         $this->addSql('CREATE INDEX type_refund_idx ON sylius_adjustment (type, is_refund)');
         $this->addSql('CREATE INDEX refund_idx ON sylius_adjustment (is_refund)');
-        $this->addSql('ALTER TABLE sylius_order ADD items_refund_total INT NOT NULL, ADD refund_adjustments_total INT NOT NULL, ADD refund_total INT NOT NULL');
-        $this->addSql('ALTER TABLE sylius_order_item ADD units_refund_total INT NOT NULL, ADD refund_adjustments_total INT NOT NULL, ADD refund_total INT NOT NULL');
-        $this->addSql('ALTER TABLE sylius_order_item_unit ADD refund_adjustments_total INT NOT NULL');
+        $this->addSql('ALTER TABLE sylius_order ADD items_refund_total INT NOT NULL AFTER items_total, ADD refund_adjustments_total INT NOT NULL AFTER adjustments_total, ADD refund_total INT NOT NULL AFTER total');
+        $this->addSql('ALTER TABLE sylius_order_item ADD units_refund_total INT NOT NULL AFTER units_total, ADD refund_adjustments_total INT NOT NULL AFTER adjustments_total, ADD refund_total INT NOT NULL AFTER total');
+        $this->addSql('ALTER TABLE sylius_order_item_unit ADD refund_adjustments_total INT NOT NULL AFTER adjustments_total');
     }
 
     /**
