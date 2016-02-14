@@ -260,6 +260,11 @@ class BookController extends ResourceController
 * Introduced ``OrderItemQuantityDataMapper``, which attached to ``OrderItemType`` uses proper service to modify ``OrderItem`` quantity;
 * Changed ``Adjustment`` ``description`` field to ``label``;
 
+### Product and SyliusProductBundle
+
+* Moved ``Sylius\Bundle\ProductBundle\EventListener\ArchetypeUpdateListener`` to the ArchetypeBundle as
+``Sylius\Bundle\ArchetypeBundle\EventListener\ArchetypeUpdateListener``.
+
 ### Shipping and ShippingBundle
 
 * Renamed ``ShipmentItem`` to ``ShipmentUnit`` to align with full-stack ``OrderItemUnit`` that it represents and avoid confusion
