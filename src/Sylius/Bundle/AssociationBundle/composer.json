@@ -34,7 +34,7 @@
         "stof/doctrine-extensions-bundle": "~1.1",
         "symfony/form": "^2.7.7",
         "symfony/validator": "^2.7.7",
-        "sylius/resource-bundle": "0.17"
+        "sylius/resource-bundle": "0.17.*@dev"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.4"
@@ -43,10 +43,10 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-4": { "Sylius\\Bundle\\ArchetypeBundle\\": "" }
+        "psr-4": { "Sylius\\Bundle\\AssociationBundle\\": "" }
     },
     "autoload-dev": {
-        "psr-4": { "Sylius\\Bundle\\ArchetypeBundle\\spec\\": "spec/" }
+        "psr-4": { "Sylius\\Bundle\\AssociationBundle\\spec\\": "spec/" }
     },
     "extra": {
         "branch-alias": {
