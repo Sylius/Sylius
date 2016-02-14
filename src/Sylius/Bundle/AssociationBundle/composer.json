@@ -43,10 +43,10 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-4": { "Sylius\\Bundle\\ArchetypeBundle\\": "" }
+        "psr-4": { "Sylius\\Bundle\\AssociationBundle\\": "" }
     },
     "autoload-dev": {
-        "psr-4": { "Sylius\\Bundle\\ArchetypeBundle\\spec\\": "spec/" }
+        "psr-4": { "Sylius\\Bundle\\AssociationBundle\\spec\\": "spec/" }
     },
     "extra": {
         "branch-alias": {
