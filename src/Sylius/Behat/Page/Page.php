@@ -9,22 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\PageObjectExtension\PageObject;
+namespace Sylius\Behat\Page;
 
 use Behat\Mink\Driver\DriverInterface;
 use Behat\Mink\Element\DocumentElement;
+use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\DriverException;
+use Behat\Mink\Selector\SelectorsHandler;
 use Behat\Mink\Session;
-use SensioLabs\Behat\PageObjectExtension\PageObject\Element;
-use SensioLabs\Behat\PageObjectExtension\PageObject\Exception\ElementNotFoundException;
-use SensioLabs\Behat\PageObjectExtension\PageObject\Exception\UnexpectedPageException;
-use SensioLabs\Behat\PageObjectExtension\PageObject\Factory;
-use SensioLabs\Behat\PageObjectExtension\PageObject\PageObject;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-abstract class Page implements PageObject
+abstract class Page
 {
     /**
      * @var array
@@ -37,32 +34,23 @@ abstract class Page implements PageObject
     private $session;
 
     /**
-     * @var Factory
-     */
-    private $factory;
-
-    /**
      * @var array
      */
     private $parameters;
 
     /**
-     * @var DocumentElement
+     * @var DocumentElement|null
      */
     private $document;
 
     /**
      * @param Session $session
-     * @param Factory $factory
      * @param array $parameters
      */
-    public function __construct(Session $session, Factory $factory, array $parameters = [])
+    public function __construct(Session $session, array $parameters = [])
     {
         $this->session = $session;
-        $this->factory = $factory;
         $this->parameters = $parameters;
-
-        $this->document = new DocumentElement($session);
     }
 
     /**
@@ -132,7 +120,7 @@ abstract class Page implements PageObject
      */
     protected function getUrl(array $urlParameters = [])
     {
-        return $this->makeSurePathIsAbsolute($this->unmaskUrl($urlParameters));
+        return $this->unmaskUrl($urlParameters);
     }
 
     /**
@@ -188,7 +176,7 @@ abstract class Page implements PageObject
     /**
      * @param string $name
      *
-     * @return string|null
+     * @return NodeElement
      */
     protected function getParameter($name)
     {
@@ -198,7 +186,7 @@ abstract class Page implements PageObject
     /**
      * @param string $name
      *
-     * @return Element
+     * @return NodeElement
      */
     public function getElement($name)
     {
@@ -224,15 +212,18 @@ abstract class Page implements PageObject
     /**
      * @param string $name
      *
-     * @return Element
+     * @return NodeElement
      */
     protected function createElement($name)
     {
         if (isset($this->elements[$name])) {
-            return $this->factory->createInlineElement($this->elements[$name]);
+            return new NodeElement(
+                $this->getSelectorAsXpath($this->elements[$name], $this->session->getSelectorsHandler()),
+                $this->session
+            );
         }
 
-        return $this->factory->createElement($name);
+        throw new \InvalidArgumentException();
     }
 
     /**
@@ -256,19 +247,11 @@ abstract class Page implements PageObject
      */
     protected function getDocument()
     {
+        if (null === $this->document) {
+            $this->document = new DocumentElement($this->session);
+        }
+
         return $this->document;
-    }
-
-    /**
-     * @param string $path
-     *
-     * @return string
-     */
-    private function makeSurePathIsAbsolute($path)
-    {
-        $baseUrl = rtrim($this->getParameter('base_url'), '/').'/';
-
-        return 0 !== strpos($path, 'http') ? $baseUrl.ltrim($path, '/') : $path;
     }
 
     /**
@@ -285,5 +268,19 @@ abstract class Page implements PageObject
         }
 
         return $url;
+    }
+
+    /**
+     * @param string|array $selector
+     * @param SelectorsHandler $selectorsHandler
+     *
+     * @return string
+     */
+    private function getSelectorAsXpath($selector, SelectorsHandler $selectorsHandler)
+    {
+        $selectorType = is_array($selector) ? key($selector) : 'css';
+        $locator = is_array($selector) ? $selector[$selectorType] : $selector;
+
+        return $selectorsHandler->selectorToXpath($selectorType, $locator);
     }
 }

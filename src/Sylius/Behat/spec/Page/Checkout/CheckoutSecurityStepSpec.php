@@ -13,8 +13,7 @@ namespace spec\Sylius\Behat\Page\Checkout;
 
 use Behat\Mink\Session;
 use PhpSpec\ObjectBehavior;
-use SensioLabs\Behat\PageObjectExtension\PageObject\Factory;
-use Sylius\Behat\SymfonyPageObjectExtension\PageObject\SymfonyPage;
+use Sylius\Behat\Page\SymfonyPage;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -22,9 +21,9 @@ use Symfony\Component\Routing\RouterInterface;
  */
 class CheckoutSecurityStepSpec extends ObjectBehavior
 {
-    function let(Session $session, Factory $factory, RouterInterface $router)
+    function let(Session $session, RouterInterface $router)
     {
-        $this->beConstructedWith($session, $factory, [], $router);
+        $this->beConstructedWith($session, [], $router);
     }
 
     function it_is_initializable()

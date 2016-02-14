@@ -11,7 +11,7 @@
 
 namespace Sylius\Behat\Page\Cart;
 
-use Sylius\Behat\SymfonyPageObjectExtension\PageObject\SymfonyPage;
+use Sylius\Behat\Page\SymfonyPage;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>

@@ -100,8 +100,7 @@
         "matthiasnoback/symfony-config-test": "^1.4",
         "matthiasnoback/symfony-dependency-injection-test": "^0.7.6",
         "phpspec/phpspec": "^2.4",
-        "phpunit/phpunit": "~4.1",
-        "sensiolabs/behat-page-object-extension": "^2.0@dev"
+        "phpunit/phpunit": "~4.1"
     },
     "replace": {
         "sylius/addressing": "self.version",

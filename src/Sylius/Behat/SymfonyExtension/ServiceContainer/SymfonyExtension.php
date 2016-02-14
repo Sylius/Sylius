@@ -15,6 +15,7 @@ use Behat\MinkExtension\ServiceContainer\MinkExtension;
 use Behat\Symfony2Extension\ServiceContainer\Symfony2Extension;
 use Behat\Testwork\ServiceContainer\Extension;
 use Behat\Testwork\ServiceContainer\ExtensionManager;
+use Sylius\Behat\MultiContainerExtension\ServiceContainer\MultiContainerExtension;
 use Sylius\Behat\SymfonyExtension\Factory\IsolatedSymfonyFactory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\DependencyInjection\Container;
@@ -31,7 +32,13 @@ final class SymfonyExtension implements Extension
      * Kernel used inside Behat contexts or to create services injected to them
      * Container is built before every scenario
      */
-    const KERNEL_ID = Symfony2Extension::KERNEL_ID;
+    const KERNEL_ID = 'sylius_symfony_extension.kernel';
+
+    /**
+     * The current container used in scenario contexts
+     * To be used as a factory for current injected application services
+     */
+    const KERNEL_CONTAINER_ID = 'sylius_symfony_extension.kernel.container';
 
     /**
      * Kernel used by Symfony2 driver to isolate web container from contexts' container
@@ -64,15 +71,8 @@ final class SymfonyExtension implements Extension
      */
     public function initialize(ExtensionManager $extensionManager)
     {
-        /** @var MinkExtension $minkExtension */
-        $minkExtension = $extensionManager->getExtension('mink');
-        if (null === $minkExtension) {
-            return;
-        }
-
-        // Overrides default Symfony2Extension driver factory
-        // Have to be registered after that one
-        $minkExtension->registerDriverFactory(new IsolatedSymfonyFactory());
+        $this->registerIsolatedSymfonyDriverFactory($extensionManager);
+        $this->registerContainers($extensionManager);
     }
 
     /**
@@ -87,6 +87,9 @@ final class SymfonyExtension implements Extension
      */
     public function load(ContainerBuilder $container, array $config)
     {
+        $this->aliasSymfony2ExtensionKernel($container);
+        $this->declareKernelContainer($container);
+
         $this->declareDriverKernel($container);
 
         $this->declareSharedKernel($container);
@@ -98,6 +101,29 @@ final class SymfonyExtension implements Extension
      */
     public function process(ContainerBuilder $container)
     {
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     */
+    private function aliasSymfony2ExtensionKernel(ContainerBuilder $container)
+    {
+        $container->setAlias(self::KERNEL_ID, Symfony2Extension::KERNEL_ID);
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     */
+    private function declareKernelContainer(ContainerBuilder $container)
+    {
+        $containerDefinition = new Definition(Container::class);
+        $containerDefinition->setFactory([
+            new Reference(self::KERNEL_ID),
+            'getContainer',
+        ]);
+        $containerDefinition->setScope('scenario');
+
+        $container->setDefinition(self::KERNEL_CONTAINER_ID, $containerDefinition);
     }
 
     /**
@@ -128,5 +154,36 @@ final class SymfonyExtension implements Extension
         ]);
 
         $container->setDefinition(self::SHARED_KERNEL_CONTAINER_ID, $sharedContainerDefinition);
+    }
+
+    /**
+     * @param ExtensionManager $extensionManager
+     */
+    private function registerIsolatedSymfonyDriverFactory(ExtensionManager $extensionManager)
+    {
+        /** @var MinkExtension $minkExtension */
+        $minkExtension = $extensionManager->getExtension('mink');
+        if (null === $minkExtension) {
+            return;
+        }
+
+        // Overrides default Symfony2Extension driver factory
+        // Have to be registered after that one
+        $minkExtension->registerDriverFactory(new IsolatedSymfonyFactory());
+    }
+
+    /**
+     * @param ExtensionManager $extensionManager
+     */
+    private function registerContainers(ExtensionManager $extensionManager)
+    {
+        /** @var MultiContainerExtension $multiContainerExtension */
+        $multiContainerExtension = $extensionManager->getExtension('sylius_multi_container');
+        if (null === $multiContainerExtension) {
+            return;
+        }
+
+        $multiContainerExtension->addContainer('symfony', self::KERNEL_CONTAINER_ID);
+        $multiContainerExtension->addContainer('symfony_shared', self::SHARED_KERNEL_CONTAINER_ID);
     }
 }

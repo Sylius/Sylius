@@ -13,16 +13,14 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Driver\Selenium2Driver;
-use Behat\Mink\Mink;
 use Behat\Mink\Session;
-use Behat\MinkExtension\Context\MinkAwareContext;
 use Sylius\Behat\Page\Shop\HomePage;
 use Sylius\Bundle\CoreBundle\Test\Services\SecurityServiceInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class SecurityContext implements Context, MinkAwareContext
+final class SecurityContext implements Context
 {
     /**
      * @var SecurityServiceInterface
@@ -35,9 +33,9 @@ final class SecurityContext implements Context, MinkAwareContext
     private $homePage;
 
     /**
-     * @var Mink
+     * @var Session
      */
-    private $mink;
+    private $minkSession;
 
     /**
      * @var array
@@ -46,11 +44,15 @@ final class SecurityContext implements Context, MinkAwareContext
 
     /**
      * @param SecurityServiceInterface $securityService
+     * @param Session $minkSession
+     * @param array $minkParameters
      * @param HomePage $homePage
      */
-    public function __construct(SecurityServiceInterface $securityService, HomePage $homePage)
+    public function __construct(SecurityServiceInterface $securityService, Session $minkSession, array $minkParameters, HomePage $homePage)
     {
         $this->securityService = $securityService;
+        $this->minkSession = $minkSession;
+        $this->minkParameters = $minkParameters;
         $this->homePage = $homePage;
     }
 
@@ -60,45 +62,19 @@ final class SecurityContext implements Context, MinkAwareContext
     public function iAmLoggedInAs($email)
     {
         $this->prepareSessionIfNeeded();
-        $this->securityService->logIn($email, 'main', $this->mink->getSession());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setMink(Mink $mink)
-    {
-        $this->mink = $mink;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setMinkParameters(array $parameters)
-    {
-        $this->minkParameters = $parameters;
+        $this->securityService->logIn($email, 'main', $this->minkSession);
     }
 
     private function prepareSessionIfNeeded()
     {
-        if (!$this->getSession()->getDriver() instanceof Selenium2Driver) {
+        if (!$this->minkSession->getDriver() instanceof Selenium2Driver) {
             return;
         }
 
-        if (false !== strpos($this->getSession()->getCurrentUrl(), $this->minkParameters['base_url'])) {
+        if (false !== strpos($this->minkSession->getCurrentUrl(), $this->minkParameters['base_url'])) {
             return;
         }
 
         $this->homePage->open();
-    }
-
-    /**
-     * @param null $name
-     *
-     * @return Session
-     */
-    private function getSession($name = null)
-    {
-        return $this->mink->getSession($name);
     }
 }

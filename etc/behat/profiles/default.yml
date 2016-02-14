@@ -38,15 +38,11 @@ default:
                 class: TestKernel
                 path: app/TestKernel.php
 
-        SensioLabs\Behat\PageObjectExtension:
-            namespaces:
-                page: [Sylius\Behat\Page]
+        Sylius\Behat\MultiContainerExtension:
+            imports:
+                - "etc/behat/services.xml"
 
         Sylius\Behat\SymfonyExtension: ~
-
-        Sylius\Behat\PageObjectExtension: ~
-
-        Sylius\Behat\SymfonyPageObjectExtension: ~
 
     gherkin:
         filters:
