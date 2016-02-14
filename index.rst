@@ -73,6 +73,18 @@ Learn about how Sylius integrates with third-party applications.
 
 .. include:: /integrations/map.rst.inc
 
+The Behat Guide
+---------------
+
+Learn how to write clean and reusable features, contexts and pages.
+
+.. toctree::
+   :hidden:
+
+   behat/index
+
+.. include:: /behat/map.rst.inc
+
 Migration Guide
 ---------------
 

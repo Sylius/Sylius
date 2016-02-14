@@ -10,5 +10,6 @@ Contributing Code
     bdd
     standards
     conventions
+    behat_guide
     git
     license
