@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\AddressingBundle\Form\EventListener;
 
 use Doctrine\Common\Persistence\ObjectRepository;
+use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -66,6 +67,7 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
      */
     public function preSetData(FormEvent $event)
     {
+        /* @var AddressInterface $address */
         $address = $event->getData();
         if (null === $address) {
             return;
@@ -83,7 +85,7 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
         }
 
         if ($country->hasProvinces()) {
-            $event->getForm()->add($this->createProvinceCodeChoiceForm($country, $address->getProvince()));
+            $event->getForm()->add($this->createProvinceCodeChoiceForm($country, $address->getProvinceCode()));
         }
     }
 
@@ -116,16 +118,16 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
 
     /**
      * @param CountryInterface $country
-     * @param ProvinceInterface|null $province
+     * @param string|null $provinceCode
      *
      * @return FormInterface
      */
-    private function createProvinceCodeChoiceForm(CountryInterface $country, ProvinceInterface $province = null)
+    private function createProvinceCodeChoiceForm(CountryInterface $country, $provinceCode = null)
     {
         return
             $this
                 ->formFactory
-                    ->createNamed('provinceCode', 'sylius_province_code_choice', $province, [
+                    ->createNamed('provinceCode', 'sylius_province_code_choice', $provinceCode, [
                     'country' => $country,
                     'auto_initialize' => false,
             ])
