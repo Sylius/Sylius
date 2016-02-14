@@ -34,7 +34,7 @@
         "stof/doctrine-extensions-bundle": "~1.1",
         "symfony/form": "^2.7.7",
         "symfony/validator": "^2.7.7",
-        "sylius/resource-bundle": "0.17"
+        "sylius/resource-bundle": "0.17.*@dev"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.4"
