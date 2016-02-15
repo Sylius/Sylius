@@ -14,7 +14,7 @@ namespace Sylius\Component\Promotion\Processor;
 use Sylius\Component\Promotion\Action\PromotionApplicatorInterface;
 use Sylius\Component\Promotion\Checker\PromotionEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
+use Sylius\Component\Promotion\Provider\PreQualifiedPromotionsProviderInterface;
 
 /**
  * Process all active promotions.
@@ -25,18 +25,41 @@ use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
  */
 class PromotionProcessor implements PromotionProcessorInterface
 {
-    protected $repository;
-    protected $checker;
-    protected $applicator;
-    protected $promotions;
+    /**
+     * @var PreQualifiedPromotionsProviderInterface
+     */
+    protected $activePromotionsProvider;
 
-    public function __construct(PromotionRepositoryInterface $repository, PromotionEligibilityCheckerInterface $checker, PromotionApplicatorInterface $applicator)
-    {
-        $this->repository = $repository;
+    /**
+     * @var PromotionEligibilityCheckerInterface
+     */
+    protected $checker;
+
+    /**
+     * @var PromotionApplicatorInterface
+     */
+    protected $applicator;
+
+    /**
+     * @param PreQualifiedPromotionsProviderInterface $activePromotionsProvider
+     * @param PromotionEligibilityCheckerInterface $checker
+     * @param PromotionApplicatorInterface $applicator
+     */
+    public function __construct(
+        PreQualifiedPromotionsProviderInterface $activePromotionsProvider,
+        PromotionEligibilityCheckerInterface $checker,
+        PromotionApplicatorInterface $applicator
+    ) {
+        $this->activePromotionsProvider = $activePromotionsProvider;
         $this->checker = $checker;
         $this->applicator = $applicator;
     }
 
+    /**
+     * @param PromotionSubjectInterface $subject
+     *
+     * @return mixed
+     */
     public function process(PromotionSubjectInterface $subject)
     {
         foreach ($subject->getPromotions() as $promotion) {
@@ -45,7 +68,7 @@ class PromotionProcessor implements PromotionProcessorInterface
 
         $eligiblePromotions = [];
 
-        foreach ($this->getActivePromotions($subject) as $promotion) {
+        foreach ($this->activePromotionsProvider->provide() as $promotion) {
             if (!$this->checker->isEligible($subject, $promotion)) {
                 continue;
             }
@@ -60,14 +83,5 @@ class PromotionProcessor implements PromotionProcessorInterface
         foreach ($eligiblePromotions as $promotion) {
             $this->applicator->apply($subject, $promotion);
         }
-    }
-
-    protected function getActivePromotions(PromotionSubjectInterface $subject)
-    {
-        if (null === $this->promotions) {
-            $this->promotions = $this->repository->findActive();
-        }
-
-        return $this->promotions;
     }
 }
