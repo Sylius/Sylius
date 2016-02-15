@@ -8,7 +8,6 @@ Feature: Checkout with offline payment
         Given the store is operating on a single "France" channel
         And there is user "john@example.com" identified by "password123"
         And the store has a product "PHP T-Shirt" priced at "$19.99"
-        And the store ships to "France"
         And the store ships everything for free to all available locations
         And the store allows paying offline
 

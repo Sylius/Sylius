@@ -50,20 +50,20 @@ final class ChannelContext implements Context
 
     /**
      * @param SharedStorageInterface $sharedStorage
-     * @param DefaultChannelFactoryInterface $defaultFranceChannelFactory
+     * @param DefaultChannelFactoryInterface $franceChannelFactory
      * @param DefaultChannelFactoryInterface $defaultChannelFactory
      * @param ChannelFactoryInterface $channelFactory
      * @param ChannelRepositoryInterface $channelRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        DefaultChannelFactoryInterface $defaultFranceChannelFactory,
+        DefaultChannelFactoryInterface $franceChannelFactory,
         DefaultChannelFactoryInterface $defaultChannelFactory,
         ChannelFactoryInterface $channelFactory,
         ChannelRepositoryInterface $channelRepository
     ) {
         $this->sharedStorage = $sharedStorage;
-        $this->defaultFranceChannelFactory = $defaultFranceChannelFactory;
+        $this->franceChannelFactory = $franceChannelFactory;
         $this->defaultChannelFactory = $defaultChannelFactory;
         $this->channelFactory = $channelFactory;
         $this->channelRepository = $channelRepository;
