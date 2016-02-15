@@ -21,8 +21,6 @@ use Sylius\Component\Shipping\Model\ShippingMethodsAwareInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomiesAwareInterface;
 
 /**
- * Sylius core channel interface.
- *
  * Model implementing this interface should reference several:
  *   - Currencies;
  *   - Locales;
@@ -40,6 +38,18 @@ interface ChannelInterface extends
     ShippingMethodsAwareInterface,
     TaxonomiesAwareInterface
 {
+    /**
+     * @return string
+     */
+    public function getThemeName();
+
+    /**
+     * @param string $themeName
+     *
+     * @return string
+     */
+    public function setThemeName($themeName);
+
     /**
      * @param LocaleInterface $locale
      */

@@ -21,8 +21,6 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface as BaseShippingMetho
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface as BaseTaxonomyInterface;
 
 /**
- * Core channel model.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Channel extends BaseChannel implements ChannelInterface
@@ -63,8 +61,10 @@ class Channel extends BaseChannel implements ChannelInterface
     protected $taxonomies;
 
     /**
-     * Constructor.
+     * @var string
      */
+    protected $themeName;
+
     public function __construct()
     {
         parent::__construct();
@@ -74,6 +74,22 @@ class Channel extends BaseChannel implements ChannelInterface
         $this->paymentMethods = new ArrayCollection();
         $this->shippingMethods = new ArrayCollection();
         $this->taxonomies = new ArrayCollection();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getThemeName()
+    {
+        return $this->themeName;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setThemeName($themeName)
+    {
+        $this->themeName = $themeName;
     }
 
     /**
