@@ -27,9 +27,4 @@ interface ThemeContextInterface
      * @return ThemeInterface|null
      */
     public function getTheme();
-
-    /**
-     * @return ThemeInterface[]
-     */
-    public function getThemeHierarchy();
 }

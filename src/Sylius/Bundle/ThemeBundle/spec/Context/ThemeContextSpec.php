@@ -47,22 +47,4 @@ class ThemeContextSpec extends ObjectBehavior
         $this->setTheme($theme);
         $this->getTheme()->shouldReturn($theme);
     }
-
-    function it_proxies_getting_theme_hierarchy_if_there_is_current_theme(
-        ThemeHierarchyProviderInterface $themeHierarchyProvider,
-        ThemeInterface $theme
-    ) {
-        $this->setTheme($theme);
-        $themeHierarchyProvider->getThemeHierarchy($theme)->willReturn([$theme]);
-
-        $this->getThemeHierarchy()->shouldReturn([$theme]);
-    }
-
-    function it_returns_an_empty_array_as_theme_hierarchy_if_there_is_no_current_theme(
-        ThemeHierarchyProviderInterface $themeHierarchyProvider
-    ) {
-        $themeHierarchyProvider->getThemeHierarchy(Argument::any())->shouldNotBeCalled();
-
-        $this->getThemeHierarchy()->shouldReturn([]);
-    }
 }

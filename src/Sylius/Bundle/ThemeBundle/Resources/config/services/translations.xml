@@ -21,6 +21,7 @@
         <service id="sylius.theme.translation.translator" class="%sylius.theme.translation.translator.class%" decorates="translator">
             <argument type="service" id="sylius.theme.translation.translator.inner" />
             <argument type="service" id="sylius.theme.context" />
+            <argument type="service" id="sylius.theme.hierarchy_provider" />
         </service>
 
         <service id="sylius.theme.translation.files_finder" class="%sylius.theme.translation.files_finder.class%" public="false">

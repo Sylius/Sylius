@@ -52,12 +52,4 @@ final class ThemeContext implements ThemeContextInterface
     {
         return $this->theme;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getThemeHierarchy()
-    {
-        return null !== $this->theme ? $this->themeHierarchyProvider->getThemeHierarchy($this->theme) : [];
-    }
 }

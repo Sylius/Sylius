@@ -42,6 +42,7 @@
         <service id="sylius.theme.data_collector" class="%sylius.theme.data_collector.class%" public="false">
             <argument type="service" id="sylius.theme.repository" />
             <argument type="service" id="sylius.theme.context" />
+            <argument type="service" id="sylius.theme.hierarchy_provider" />
             <tag name="data_collector" template="SyliusThemeBundle:Profiler:theme" id="sylius_theme" />
         </service>
 

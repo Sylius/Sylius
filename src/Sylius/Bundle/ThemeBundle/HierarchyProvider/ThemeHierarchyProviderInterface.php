@@ -19,11 +19,11 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 interface ThemeHierarchyProviderInterface
 {
     /**
-     * @param ThemeInterface $theme
+     * @param ThemeInterface|null $theme
      *
      * @return ThemeInterface[]
      *
      * @throws \InvalidArgumentException If dependencies could not be resolved.
      */
-    public function getThemeHierarchy(ThemeInterface $theme);
+    public function getThemeHierarchy(ThemeInterface $theme = null);
 }

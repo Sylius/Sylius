@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ThemeBundle\Collector;
 
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
+use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProviderInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,6 +24,21 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface;
  */
 class ThemeDataCollector implements DataCollectorInterface, \Serializable
 {
+    /**
+     * @var ThemeRepositoryInterface
+     */
+    private $themeRepository;
+
+    /**
+     * @var ThemeContextInterface
+     */
+    private $themeContext;
+
+    /**
+     * @var ThemeHierarchyProviderInterface
+     */
+    private $themeHierarchyProvider;
+
     /**
      * @var ThemeInterface
      */
@@ -39,25 +55,18 @@ class ThemeDataCollector implements DataCollectorInterface, \Serializable
     private $allThemes;
 
     /**
-     * @var ThemeRepositoryInterface
-     */
-    private $themeRepository;
-
-    /**
-     * @var ThemeContextInterface
-     */
-    private $themeContext;
-
-    /**
      * @param ThemeRepositoryInterface $themeRepository
      * @param ThemeContextInterface $themeContext
+     * @param ThemeHierarchyProviderInterface $themeHierarchyProvider
      */
     public function __construct(
         ThemeRepositoryInterface $themeRepository,
-        ThemeContextInterface $themeContext
+        ThemeContextInterface $themeContext,
+        ThemeHierarchyProviderInterface $themeHierarchyProvider
     ) {
         $this->themeRepository = $themeRepository;
         $this->themeContext = $themeContext;
+        $this->themeHierarchyProvider = $themeHierarchyProvider;
     }
 
     /**
@@ -90,7 +99,7 @@ class ThemeDataCollector implements DataCollectorInterface, \Serializable
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
         $this->usedTheme = $this->themeContext->getTheme();
-        $this->themeHierarchy = $this->themeContext->getThemeHierarchy();
+        $this->themeHierarchy = $this->themeHierarchyProvider->getThemeHierarchy($this->themeContext->getTheme());
         $this->allThemes = $this->themeRepository->findAll();
     }
 
