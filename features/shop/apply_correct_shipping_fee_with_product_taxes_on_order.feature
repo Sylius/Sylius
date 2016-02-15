@@ -1,4 +1,4 @@
-@ui-cart
+@cart
 Feature: Apply correct shipping fee with product taxes on order
     In order to pay proper amount for shipping and product taxes
     As a Customer
@@ -25,6 +25,7 @@ Feature: Apply correct shipping fee with product taxes on order
         And the store allows paying offline
         And I am logged in as "john@example.com"
 
+    @ui
     Scenario: Proper shipping fee, tax and product tax
         Given I have product "PHP T-Shirt" in the cart
         When I proceed selecting "DHL" shipping method
@@ -33,6 +34,7 @@ Feature: Apply correct shipping fee with product taxes on order
         And my cart taxes should be "€25.30"
         And my cart shipping fee should be "€12.30"
 
+    @ui
     Scenario: Proper shipping fee, tax and products' taxes after addressing
         Given I have 3 products "PHP T-Shirt" in the cart
         When I proceed selecting "Australia" as shipping country with "FedEx" method

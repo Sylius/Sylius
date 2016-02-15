@@ -1,4 +1,4 @@
-@ui-cart
+@cart
 Feature: Apply correct shipping fee with taxes on order
     In order to pay proper amount for shipping
     As a Customer
@@ -24,6 +24,7 @@ Feature: Apply correct shipping fee with taxes on order
         And there is user "john@example.com" identified by "password123"
         And I am logged in as "john@example.com"
 
+    @ui
     Scenario: Proper shipping fee and tax
         Given I have product "PHP T-Shirt" in the cart
         When I proceed selecting "DHL" shipping method
@@ -32,6 +33,7 @@ Feature: Apply correct shipping fee with taxes on order
         And my cart taxes should be "€2.30"
         And my cart shipping fee should be "€12.30"
 
+    @ui
     Scenario: Proper shipping fee and tax after addressing
         Given I have product "PHP T-Shirt" in the cart
         When I proceed selecting "Australia" as shipping country with "DHL-World" method
