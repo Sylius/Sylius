@@ -32,6 +32,11 @@ final class ShippingContext implements Context
     private $shippingMethodRepository;
 
     /**
+     * @var RepositoryInterface
+     */
+    private $zoneRepository;
+
+    /**
      * @var FactoryInterface
      */
     private $shippingMethodFactory;
@@ -48,17 +53,20 @@ final class ShippingContext implements Context
 
     /**
      * @param RepositoryInterface $shippingMethodRepository
+     * @param RepositoryInterface $zoneRepository
      * @param FactoryInterface $shippingMethodFactory
      * @param ObjectManager $shippingMethodManager
      * @param SharedStorageInterface $sharedStorage
      */
     public function __construct(
         RepositoryInterface $shippingMethodRepository,
+        RepositoryInterface $zoneRepository,
         FactoryInterface $shippingMethodFactory,
         ObjectManager $shippingMethodManager,
         SharedStorageInterface $sharedStorage
     ) {
         $this->shippingMethodRepository = $shippingMethodRepository;
+        $this->zoneRepository = $zoneRepository;
         $this->shippingMethodFactory = $shippingMethodFactory;
         $this->shippingMethodManager = $shippingMethodManager;
         $this->sharedStorage = $sharedStorage;
@@ -86,6 +94,16 @@ final class ShippingContext implements Context
     public function storeShipsEverythingForFree(ZoneInterface $zone = null)
     {
         $this->createShippingMethod('Free', $zone);
+    }
+
+    /**
+     * @Given /^the store ships everything for free to all available locations$/
+     */
+    public function theStoreShipsEverythingForFreeToAllAvailableLocations()
+    {
+        foreach ($this->zoneRepository->findAll() as $zone) {
+            $this->createShippingMethod('Free', $zone);
+        }
     }
 
     /**
