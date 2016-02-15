@@ -36,19 +36,6 @@ parameters:
     sylius.currency_importer.open_exchange_rates: EDITME
     sylius.currency_importer.ecb.base_currency: EUR
 
-    paypal.express_checkout.username: EDITME
-    paypal.express_checkout.password: EDITME
-    paypal.express_checkout.signature: EDITME
-    paypal.express_checkout.sandbox: true
-
-    stripe.publishable_key: EDITME
-    stripe.secret_key: EDITME
-    stripe.test_mode: true
-
-    be2bill.identifier: EDITME
-    be2bill.password: EDITME
-    be2bill.sandbox: true
-
     sylius.oauth.amazon.clientid:       EDITME
     sylius.oauth.amazon.clientsecret:   EDITME
     sylius.oauth.facebook.clientid:     EDITME

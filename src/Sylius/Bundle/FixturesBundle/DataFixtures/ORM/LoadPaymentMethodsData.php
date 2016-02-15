@@ -28,10 +28,6 @@ class LoadPaymentMethodsData extends DataFixture
     public function load(ObjectManager $manager)
     {
         $manager->persist($this->createPaymentMethod('PM1', 'Offline', 'offline'));
-        $manager->persist($this->createPaymentMethod('PM2', 'PaypalExpressCheckout', 'paypal_express_checkout'));
-        $manager->persist($this->createPaymentMethod('PM3', 'Be2bill', 'be2bill_direct'));
-        $manager->persist($this->createPaymentMethod('PM4', 'Be2billOffsite', 'be2bill_offsite'));
-        $manager->persist($this->createPaymentMethod('PM5', 'StripeCheckout', 'stripe_checkout'));
 
         $manager->flush();
     }
