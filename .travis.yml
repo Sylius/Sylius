@@ -39,12 +39,11 @@ before_install:
 
     - composer self-update
 
-    # Add Github OAuth token to Composer config if that variable exists
-    - if [[ ! -z "$GITHUB_OAUTH_TOKEN" ]]; then composer config -g github-oauth.github.com "$GITHUB_OAUTH_TOKEN" >/dev/null 2>&1; fi
+    - if [[ -z "$GITHUB_OAUTH_TOKEN" ]]; then export GITHUB_OAUTH_TOKEN="66736022ed66ebbb2be87027ed45a24554cc8344"; fi
+    - composer config -g github-oauth.github.com "$GITHUB_OAUTH_TOKEN" >/dev/null 2>&1
 
 install:
     - composer install --no-interaction --prefer-dist --no-scripts
-
     - composer run-script travis-build --no-interaction
 
 before_script:
