@@ -55,19 +55,4 @@ interface ProductInterface extends
      * @param null|\DateTime $availableUntil
      */
     public function setAvailableUntil(\DateTime $availableUntil = null);
-
-    /**
-     * @param ProductAssociationInterface $association
-     */
-    public function addAssociation(ProductAssociationInterface $association);
-
-    /**
-     * @param ProductAssociationInterface[] $association
-     */
-    public function getAssociations();
-
-    /**
-     * @param ProductAssociationInterface $association
-     */
-    public function removeAssociation(ProductAssociationInterface $association);
 }

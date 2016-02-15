@@ -14,6 +14,7 @@ namespace Sylius\Component\Product\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Archetype\Model\ArchetypeInterface as BaseArchetypeInterface;
+use Sylius\Component\Association\Traits\AssociableTrait;
 use Sylius\Component\Attribute\Model\AttributeValueInterface as BaseAttributeValueInterface;
 use Sylius\Component\Resource\Model\SoftDeletableTrait;
 use Sylius\Component\Resource\Model\TimestampableTrait;
@@ -28,7 +29,7 @@ use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
  */
 class Product extends AbstractTranslatable implements ProductInterface
 {
-    use SoftDeletableTrait, TimestampableTrait, ToggleableTrait;
+    use SoftDeletableTrait, TimestampableTrait, ToggleableTrait, AssociableTrait;
 
     /**
      * @var mixed
@@ -64,11 +65,6 @@ class Product extends AbstractTranslatable implements ProductInterface
      * @var Collection|BaseOptionInterface[]
      */
     protected $options;
-
-    /**
-     * @var Collection|ProductAssociationInterface[]
-     */
-    protected $associations;
 
     public function __construct()
     {
@@ -471,43 +467,5 @@ class Product extends AbstractTranslatable implements ProductInterface
         }
 
         $this->deletedAt = $deletedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAssociations()
-    {
-        return $this->associations;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addAssociation(ProductAssociationInterface $association)
-    {
-        if (!$this->hasAssociation($association)) {
-            $this->associations->add($association);
-            $association->setOwner($this);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeAssociation(ProductAssociationInterface $association)
-    {
-        if ($this->hasAssociation($association)) {
-            $association->setOwner(null);
-            $this->associations->removeElement($association);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasAssociation(ProductAssociationInterface $association)
-    {
-        return $this->associations->contains($association);
     }
 }

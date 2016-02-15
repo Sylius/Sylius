@@ -36,7 +36,7 @@ interface AssociationInterface extends TimestampableInterface, ResourceInterface
     public function getOwner();
 
     /**
-     * @param AssociatableInterface
+     * @param AssociableInterface
      */
     public function setOwner(AssociableInterface $owner = null);
 
@@ -46,17 +46,17 @@ interface AssociationInterface extends TimestampableInterface, ResourceInterface
     public function getAssociatedObjects();
 
     /**
-     * @param AssociatableInterface
+     * @param AssociableInterface
      */
     public function addAssociatedObject(AssociableInterface $associatedObject);
 
     /**
-     * @param AssociatableInterface
+     * @param AssociableInterface
      */
     public function removeAssociatedObject(AssociableInterface $associatedObject);
 
     /**
-     * @param AssociatableInterface
+     * @param AssociableInterface
      *
      * @return bool
      */
