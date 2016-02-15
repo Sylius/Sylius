@@ -9,39 +9,45 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Page\Shipping;
+namespace Sylius\Behat\Page\Admin\ShippingMethod;
 
+use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class ShippingMethodShowPage extends SymfonyPage
+class ShowPage extends SymfonyPage implements ShowPageInterface
 {
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getRouteName()
     {
         return 'sylius_backend_shipping_method_show';
     }
 
-    public function deleteMethod()
+    /**
+     * {@inheritdoc}
+     */
+    public function pressDelete()
     {
         $this->getDocument()->pressButton('Delete');
 
-        $modal = $this->getDocument()->find('css', '#confirmation-modal');
+        $modal = $this->getDocument()->find('css', $modalName = '#confirmation-modal');
+        if (null === $modal) {
+            throw new ElementNotFoundException(sprintf('The element "%s" was not found on page.', $modalName));
+        }
+
         $confirmButton = $modal->find('css', 'a:contains(Delete)');
 
-        $this->waitForModalToAppear(10, $modal);
+        $this->waitForModalToAppear($modal);
 
         $confirmButton->press();
     }
 
     /**
-     * @param string $message
-     *
-     * @return bool
+     * {@inheritdoc}
      */
     public function flashContainsMessage($message)
     {

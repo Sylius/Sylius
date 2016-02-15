@@ -94,27 +94,6 @@ final class UserContext implements Context
     }
 
     /**
-     * @Given there is an administrator account
-     */
-    public function thereIsAdministratorAccount()
-    {
-        /** @var UserInterface $user */
-        $user = $this->userFactory->createNew();
-        $customer = $this->customerFactory->createNew();
-        $customer->setFirstName('Admin');
-        $customer->setLastName('Admin');
-
-        $user->setCustomer($customer);
-        $user->setUsername('Administrator Account');
-        $user->setEmail('admin@test.com');
-        $user->setPlainPassword('pswd1234');
-        $user->addRole('ROLE_ADMINISTRATION_ACCESS');
-
-        $this->sharedStorage->setCurrentResource('administrator', $user);
-        $this->userRepository->add($user);
-    }
-
-    /**
      * @Given there is user :email identified by :password, with :country as shipping country
      */
     public function thereIsUserWithShippingCountry($email, $password, $country)

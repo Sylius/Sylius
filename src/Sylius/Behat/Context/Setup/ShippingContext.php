@@ -22,7 +22,6 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Calculator\DefaultCalculators;
 use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
-use Sylius\Component\Translation\Model\AbstractTranslatable;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -95,9 +94,9 @@ final class ShippingContext implements Context
     }
 
     /**
-     * @Given /^the store has a shipping method "([^"]*)"$/
+     * @Given /^the store allows shipping with "([^"]*)"$/
      */
-    public function storeHasShippingMethod($shippingMethodName)
+    public function theStoreAllowsShippingMethod($shippingMethodName)
     {
         $this->createShippingMethod($shippingMethodName);
     }
@@ -123,14 +122,14 @@ final class ShippingContext implements Context
 
     /**
      * @param string $name
+     * @param ZoneInterface|null $zone
      * @param string $locale
      * @param array $configuration
      * @param string $calculator
-     * @param ZoneInterface|null $zone
      */
     private function createShippingMethod(
         $name,
-        $zone = null,
+        ZoneInterface $zone = null,
         $locale = 'en',
         $configuration = ['amount' => 0],
         $calculator = DefaultCalculators::FLAT_RATE
@@ -139,7 +138,7 @@ final class ShippingContext implements Context
             $zone = $this->sharedStorage->get('zone');
         }
 
-        /** @var AbstractTranslatable | ShippingMethodInterface $shippingMethod */
+        /** @var ShippingMethodInterface $shippingMethod */
         $shippingMethod = $this->shippingMethodFactory->createNew();
         $shippingMethod->setCode($this->generateCodeFromNameAndZone($name, $zone->getCode()));
         $shippingMethod->setName($name);
@@ -149,7 +148,6 @@ final class ShippingContext implements Context
         $shippingMethod->setZone($zone);
 
         $this->shippingMethodRepository->add($shippingMethod);
-        $this->sharedStorage->setCurrentResource('shippingMethod', $shippingMethod);
     }
 
     /**
