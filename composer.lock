@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6f4e61f6e8d69ff394ebbe0124e88b0d",
-    "content-hash": "a2720d142fb2c2a0b2b636ae32381d4b",
+    "hash": "160c647bc2c5678e5013ea727eba1005",
+    "content-hash": "78024c1b1e4d280ebe82da37e10f44f3",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -9013,28 +9013,32 @@
         },
         {
             "name": "lakion/mink-debug-extension",
-            "version": "v1.0.2",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Lakion/MinkDebugExtension.git",
-                "reference": "c93dacd50d6fda9334b1f234d98240aea2cfa323"
+                "reference": "ec8fc981b5b7a7ad0d7c44e874d6adaf788a1ca2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Lakion/MinkDebugExtension/zipball/c93dacd50d6fda9334b1f234d98240aea2cfa323",
-                "reference": "c93dacd50d6fda9334b1f234d98240aea2cfa323",
+                "url": "https://api.github.com/repos/Lakion/MinkDebugExtension/zipball/ec8fc981b5b7a7ad0d7c44e874d6adaf788a1ca2",
+                "reference": "ec8fc981b5b7a7ad0d7c44e874d6adaf788a1ca2",
                 "shasum": ""
             },
             "require": {
                 "behat/behat": "^3.0.5",
                 "behat/mink-extension": "^2.0.1",
-                "php": ">=5.5.9",
+                "php": "^5.5.9|^7.0",
                 "symfony/config": "^2.2"
             },
             "require-dev": {
                 "behat/mink-goutte-driver": "^1.1",
                 "behat/mink-selenium2-driver": "^1.2",
                 "phpspec/phpspec": "^2.0"
+            },
+            "suggest": {
+                "behat/mink-browserkit-driver": "To get request debug information included in log file",
+                "behat/mink-selenium2-driver": "To get screenshots"
             },
             "type": "behat-extension",
             "extra": {
@@ -9065,7 +9069,7 @@
                 "debug",
                 "logging"
             ],
-            "time": "2015-12-03 09:34:37"
+            "time": "2016-02-10 09:25:13"
         },
         {
             "name": "malukenho/kawaii-gherkin",
