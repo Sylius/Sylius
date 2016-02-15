@@ -15,7 +15,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 use Sylius\Component\Core\Model\PromotionRuleInterface;
 use Sylius\Component\Promotion\Model\ActionInterface;
-use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Core\Model\PromotionInterface;
 
 /**
  * Default promotion fixtures.
@@ -29,10 +29,14 @@ class LoadPromotionsData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
+        $channel = 'DEFAULT';
+
         $promotion = $this->createPromotion(
             'PR1',
             'New Year',
             'New Year Sale for 3 and more items.',
+            3,
+            $channel,
             [$this->createRule(PromotionRuleInterface::TYPE_ITEM_COUNT, ['count' => 3, 'equal' => true])],
             [$this->createAction(ActionInterface::TYPE_FIXED_DISCOUNT, ['amount' => 500])]
         );
@@ -43,6 +47,8 @@ class LoadPromotionsData extends DataFixture
             'PR2',
             'Christmas',
             'Christmas Sale for orders over 100 EUR.',
+            2,
+            $channel,
             [$this->createRule(PromotionRuleInterface::TYPE_ITEM_TOTAL, ['amount' => 10000, 'equal' => true])],
             [$this->createAction(ActionInterface::TYPE_FIXED_DISCOUNT, ['amount' => 250])]
         );
@@ -53,6 +59,8 @@ class LoadPromotionsData extends DataFixture
             'PR3',
             '3rd order',
             'Discount for 3rd order',
+            1,
+            $channel,
             [$this->createRule(PromotionRuleInterface::TYPE_NTH_ORDER, ['nth' => 3])],
             [$this->createAction(ActionInterface::TYPE_FIXED_DISCOUNT, ['amount' => 500])]
         );
@@ -63,6 +71,8 @@ class LoadPromotionsData extends DataFixture
             'PR4',
             'Shipping to Germany',
             'Discount for orders with shipping country Germany',
+            0,
+            $channel,
             [$this->createRule(PromotionRuleInterface::TYPE_SHIPPING_COUNTRY, ['country' => $this->getReference('Sylius.Country.DE')->getId()])],
             [$this->createAction(ActionInterface::TYPE_FIXED_DISCOUNT, ['amount' => 500])]
         );
@@ -77,7 +87,7 @@ class LoadPromotionsData extends DataFixture
      */
     public function getOrder()
     {
-        return 20;
+        return 50;
     }
 
     /**
@@ -122,18 +132,23 @@ class LoadPromotionsData extends DataFixture
      * @param string $code
      * @param string $name
      * @param string $description
-     * @param array  $rules
-     * @param array  $actions
+     * @param int $priority
+     * @param string $channel
+     * @param array $rules
+     * @param array $actions
      *
      * @return PromotionInterface
      */
-    protected function createPromotion($code, $name, $description, array $rules, array $actions)
+    protected function createPromotion($code, $name, $description, $priority, $channel, array $rules, array $actions)
     {
         /** @var $promotion PromotionInterface */
         $promotion = $this->getPromotionFactory()->createNew();
         $promotion->setName($name);
         $promotion->setDescription($description);
         $promotion->setCode($code);
+        $promotion->setPriority($priority);
+
+        $promotion->addChannel($this->getReference('Sylius.Channel.'.$channel));
 
         foreach ($rules as $rule) {
             $promotion->addRule($rule);
