@@ -112,6 +112,10 @@ winzou_state_machine:
                     on:   'complete'
                     do:   [@sylius.callback.order_payment, 'updateOrderOnPayment']
                     args: ['object']
+                sylius_fail_payment:
+                    on:   'fail'
+                    do:   [@sylius.callback.fail_payment, 'addFailFlash']
+                    args: ['object']
 
     sylius_order:
         callbacks:
