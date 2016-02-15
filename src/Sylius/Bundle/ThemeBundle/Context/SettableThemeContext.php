@@ -11,31 +11,17 @@
 
 namespace Sylius\Bundle\ThemeBundle\Context;
 
-use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProviderInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ThemeContext implements ThemeContextInterface
+final class SettableThemeContext implements ThemeContextInterface
 {
-    /**
-     * @var ThemeHierarchyProviderInterface
-     */
-    private $themeHierarchyProvider;
-
     /**
      * @var ThemeInterface
      */
     private $theme;
-
-    /**
-     * @param ThemeHierarchyProviderInterface $themeHierarchyProvider
-     */
-    public function __construct(ThemeHierarchyProviderInterface $themeHierarchyProvider)
-    {
-        $this->themeHierarchyProvider = $themeHierarchyProvider;
-    }
 
     /**
      * {@inheritdoc}

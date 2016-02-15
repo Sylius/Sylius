@@ -19,11 +19,6 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 interface ThemeContextInterface
 {
     /**
-     * @param ThemeInterface $theme
-     */
-    public function setTheme(ThemeInterface $theme);
-
-    /**
      * @return ThemeInterface|null
      */
     public function getTheme();
