@@ -134,7 +134,7 @@ class UserContextSpec extends ObjectBehavior
         $this->myDefaultShippingAddressIs('United Kingdom');
     }
 
-    function it_deletes_user_account(
+    function it_deletes_user_account_with_given_email(
         $sharedStorage,
         $userRepository,
         UserInterface $user,
@@ -148,5 +148,13 @@ class UserContextSpec extends ObjectBehavior
         $userRepository->remove($user)->shouldBeCalled();
 
         $this->accountWasDeleted('ted@test.com');
+    }
+
+    function it_deletes_user_account($sharedStorage, $userRepository, UserInterface $user)
+    {
+        $sharedStorage->get('user')->willReturn($user);
+        $userRepository->remove($user)->shouldBeCalled();
+
+        $this->hisAccountWasDeleted();
     }
 }

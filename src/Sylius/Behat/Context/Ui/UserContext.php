@@ -45,21 +45,29 @@ final class UserContext implements Context
     private $loginPage;
 
     /**
+     * @var RegisterPageInterface
+     */
+    private $registerPage;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param UserRepositoryInterface $userRepository
      * @param CustomerShowPageInterface $customerShowPage
      * @param LoginPageInterface $loginPage
+     * @param RegisterPageInterface $registerPage
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         UserRepositoryInterface $userRepository,
         CustomerShowPageInterface $customerShowPage,
-        LoginPageInterface $loginPage
+        LoginPageInterface $loginPage,
+        RegisterPageInterface $registerPage
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->userRepository = $userRepository;
         $this->customerShowPage = $customerShowPage;
         $this->loginPage = $loginPage;
+        $this->registerPage = $registerPage;
     }
 
     /**
@@ -69,6 +77,23 @@ final class UserContext implements Context
     {
         $this->loginPage->open();
         $this->loginPage->logIn($login, $password);
+    }
+
+    /**
+     * @When I try to register again with email :email
+     */
+    public function iTryToRegister($email)
+    {
+        $this->registerPage->open();
+        $this->registerPage->register($email);
+    }
+
+    /**
+     * @Then I should be successfully registered
+     */
+    public function iShouldBeRegistered()
+    {
+        expect($this->registerPage->wasRegistrationSuccessful())->toBe(true);
     }
 
     /**
