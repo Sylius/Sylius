@@ -87,7 +87,6 @@ final class ShippingContext implements Context
     }
 
     /**
-     * @Given the store ships everything for free
      * @Given the store ships everything for free within :zone zone
      * @Given /^the store ships everything for free for (the rest of the world)$/
      */
