@@ -15,8 +15,8 @@ use Behat\Behat\Context\Context;
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Session;
 use Sylius\Behat\Page\Shop\HomePage;
-use Sylius\Bundle\CoreBundle\Test\Factory\TestUserFactoryInterface;
 use Sylius\Bundle\CoreBundle\Test\Services\SecurityServiceInterface;
+use Sylius\Component\Core\Test\Factory\TestUserFactoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -93,7 +93,7 @@ final class SecurityContext implements Context
     public function iAmLoggedInAs($email)
     {
         $this->prepareSessionIfNeeded();
-        $this->securityService->logIn($email, $this->minkSession, 'main');
+        $this->securityService->logIn($email, $this->minkSession);
     }
 
     /**
@@ -104,7 +104,7 @@ final class SecurityContext implements Context
         $user = $this->testUserFactory->createDefault();
         $this->userRepository->add($user);
 
-        $this->securityService->logIn($user->getEmail(), $this->minkSession, 'main');
+        $this->securityService->logIn($user->getEmail(), $this->minkSession);
 
         $this->sharedStorage->setCurrentResource('user', $user);
     }

@@ -18,7 +18,7 @@
     <parameters>
         <parameter key="sylius.behat.shared_storage.class">Sylius\Component\Core\Test\Services\SharedStorage</parameter>
         <parameter key="sylius.behat.security.class">Sylius\Bundle\CoreBundle\Test\Services\SecurityService</parameter>
-        <parameter key="sylius.behat.user_factory.class">Sylius\Bundle\CoreBundle\Test\Factory\TestUserFactory</parameter>
+        <parameter key="sylius.test.factory.user.class">Sylius\Bundle\CoreBundle\Test\Factory\TestUserFactory</parameter>
 
         <parameter key="sylius.behat.default_france_channel_factory.class">Sylius\Component\Core\Test\Services\DefaultFranceChannelFactory</parameter>
     </parameters>
@@ -29,7 +29,7 @@
             <argument type="service" id="sylius.repository.user" />
             <argument type="service" id="session" />
         </service>
-        <service id="sylius.behat.user_factory" class="%sylius.behat.user_factory.class%">
+        <service id="sylius.test.factory.user" class="%sylius.test.factory.user.class%">
             <argument type="service" id="sylius.factory.customer" />
             <argument type="service" id="sylius.factory.user" />
         </service>

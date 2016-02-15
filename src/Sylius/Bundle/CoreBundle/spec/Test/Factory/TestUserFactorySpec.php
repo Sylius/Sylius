@@ -12,9 +12,9 @@
 namespace spec\Sylius\Bundle\CoreBundle\Test\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Test\Factory\TestUserFactoryInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Core\Test\Factory\TestUserFactoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**

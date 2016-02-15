@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Test\Factory;
+namespace Sylius\Component\Core\Test\Factory;
 
 use Sylius\Component\Core\Model\UserInterface;
 

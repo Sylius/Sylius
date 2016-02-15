@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Test\Factory;
 
+use Sylius\Component\Core\Test\Factory\TestUserFactoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
