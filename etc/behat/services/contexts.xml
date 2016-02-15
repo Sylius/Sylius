@@ -29,11 +29,15 @@
         <parameter key="sylius.behat.context.ui.checkout.class">Sylius\Behat\Context\Ui\CheckoutContext</parameter>
         <parameter key="sylius.behat.context.ui.cart.class">Sylius\Behat\Context\Ui\CartContext</parameter>
         <parameter key="sylius.behat.context.ui.user.class">Sylius\Behat\Context\Ui\UserContext</parameter>
+        <parameter key="sylius.behat.context.ui.channel.class">Sylius\Behat\Context\Ui\ChannelContext</parameter>
+        <parameter key="sylius.behat.context.ui.product.class">Sylius\Behat\Context\Ui\ProductContext</parameter>
     </parameters>
     <services>
         <service id="sylius.behat.context.setup.channel" class="%sylius.behat.context.setup.channel.class%" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.behat.default_france_channel_factory" container="symfony" />
+            <argument type="service" id="sylius.factory.channel" container="symfony" />
+            <argument type="service" id="sylius.repository.channel" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 
@@ -77,7 +81,6 @@
         <service id="sylius.behat.context.setup.product" class="%sylius.behat.context.setup.product.class%" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.repository.product" container="symfony" />
-            <argument type="service" id="sylius.repository.tax_category" container="symfony" />
             <argument type="service" id="sylius.repository.product_variant" container="symfony" />
             <argument type="service" id="sylius.factory.product" container="symfony" />
             <argument type="service" id="sylius.factory.product_variant" container="symfony" />
@@ -134,6 +137,17 @@
 
         <service id="sylius.behat.context.ui.user" class="%sylius.behat.context.ui.user.class%" scope="scenario">
             <argument type="service" id="sylius.behat.page.login" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.ui.channel" class="%sylius.behat.context.ui.channel.class%" scope="scenario">
+            <argument type="service" id="mink.default_session" />
+            <argument>%mink.parameters%</argument>
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.ui.product" class="%sylius.behat.context.ui.product.class%" scope="scenario">
+            <argument type="service" id="sylius.behat.page.product_show" />
             <tag name="sylius.behat.context" />
         </service>
     </services>

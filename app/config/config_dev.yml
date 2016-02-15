@@ -31,3 +31,6 @@ doctrine:
 
 swiftmailer:
     disable_delivery: true
+
+sylius_channel:
+    fake_channel_support: true
