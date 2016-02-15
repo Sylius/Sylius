@@ -17,6 +17,7 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Test\Services\DefaultChannelFactoryInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -57,9 +58,9 @@ class DefaultFranceChannelFactorySpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\Core\Test\Services\DefaultFranceChannelFactory');
     }
 
-    function it_is_default_store_data()
+    function it_implements_default_channel_factory_interface()
     {
-        $this->shouldImplement('Sylius\Component\Core\Test\Services\DefaultStoreDataInterface');
+        $this->shouldImplement(DefaultChannelFactoryInterface::class);
     }
 
     function it_creates_default_france_channel_with_country_zone_and_eur_as_default_currency(
@@ -99,6 +100,7 @@ class DefaultFranceChannelFactorySpec extends ObjectBehavior
         $currencyFactory->createNew()->willReturn($euro);
         $euro->setCode('EUR')->shouldBeCalled();
         $euro->setExchangeRate(1.00)->shouldBeCalled();
+        $euro->setBase(true)->shouldBeCalled();
 
         $channel->setDefaultCurrency($euro)->shouldBeCalled();
 

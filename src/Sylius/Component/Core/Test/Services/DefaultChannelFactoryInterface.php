@@ -11,15 +11,13 @@
 
 namespace Sylius\Component\Core\Test\Services;
 
-use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
-
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 interface DefaultChannelFactoryInterface
 {
     /**
-     * @return ChannelRepositoryInterface
+     * @return array
      */
     public function create();
 }

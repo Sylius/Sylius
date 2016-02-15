@@ -23,7 +23,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class DefaultFranceChannelFactory implements DefaultStoreDataInterface
+class DefaultFranceChannelFactory implements DefaultChannelFactoryInterface
 {
     const DEFAULT_CHANNEL_CODE = 'WEB-FR';
     const DEFAULT_COUNTRY_CODE = 'FR';
@@ -172,6 +172,7 @@ class DefaultFranceChannelFactory implements DefaultStoreDataInterface
         $currency = $this->currencyFactory->createNew();
         $currency->setCode(self::DEFAULT_CURRENCY_CODE);
         $currency->setExchangeRate(1.00);
+        $currency->setBase(true);
 
         return $currency;
     }

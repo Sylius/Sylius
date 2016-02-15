@@ -35,9 +35,14 @@
     <services>
         <service id="sylius.behat.context.setup.channel" class="%sylius.behat.context.setup.channel.class%" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
+<<<<<<< HEAD
             <argument type="service" id="sylius.behat.default_france_channel_factory" container="symfony" />
             <argument type="service" id="sylius.factory.channel" container="symfony" />
             <argument type="service" id="sylius.repository.channel" container="symfony" />
+=======
+            <argument type="service" id="sylius.behat.factory.default_france_channel" container="symfony" />
+            <argument type="service" id="sylius.behat.factory.default_channel" container="symfony" />
+>>>>>>> PR review fixes
             <tag name="sylius.behat.context" />
         </service>
 

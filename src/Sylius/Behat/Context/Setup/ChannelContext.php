@@ -15,7 +15,6 @@ use Behat\Behat\Context\Context;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Test\Services\DefaultChannelFactoryInterface;
-use Sylius\Component\Core\Test\Services\DefaultStoreDataInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
 /**
@@ -30,9 +29,9 @@ final class ChannelContext implements Context
     private $sharedStorage;
 
     /**
-     * @var DefaultStoreDataInterface
+     * @var DefaultChannelFactoryInterface
      */
-    private $defaultFranceChannelFactory;
+    private $franceChannelFactory;
 
     /**
      * @var DefaultChannelFactoryInterface
@@ -51,14 +50,14 @@ final class ChannelContext implements Context
 
     /**
      * @param SharedStorageInterface $sharedStorage
-     * @param DefaultStoreDataInterface $defaultFranceChannelFactory
+     * @param DefaultChannelFactoryInterface $defaultFranceChannelFactory
      * @param DefaultChannelFactoryInterface $defaultChannelFactory
      * @param ChannelFactoryInterface $channelFactory
      * @param ChannelRepositoryInterface $channelRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        DefaultStoreDataInterface $defaultFranceChannelFactory,
+        DefaultChannelFactoryInterface $defaultFranceChannelFactory,
         DefaultChannelFactoryInterface $defaultChannelFactory,
         ChannelFactoryInterface $channelFactory,
         ChannelRepositoryInterface $channelRepository
@@ -98,7 +97,7 @@ final class ChannelContext implements Context
      */
     public function thatStoreIsOperatingOnASingleFranceChannel()
     {
-        $defaultData = $this->defaultFranceChannelFactory->create();
+        $defaultData = $this->franceChannelFactory->create();
         $this->sharedStorage->setClipboard($defaultData);
     }
 
