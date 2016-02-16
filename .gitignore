@@ -17,6 +17,8 @@
 /web/assets/img
 /web/assets/compiled
 /web/media
+/web/css
+/web/js
 
 /bin/*
 !/bin/install
