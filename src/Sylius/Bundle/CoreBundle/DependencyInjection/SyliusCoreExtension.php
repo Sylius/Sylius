@@ -126,6 +126,8 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
             $syliusByClasses[$className] = $routeConfig['defaults']['sylius'];
         }
 
+        $container->prependExtensionConfig('sylius_theme', ['context' => 'sylius.theme.context.channel_based']);
+
         $container->setParameter('sylius.route_classes', $routeClasses);
         $container->setParameter('sylius.controller_by_classes', $controllerByClasses);
         $container->setParameter('sylius.repository_by_classes', $repositoryByClasses);
