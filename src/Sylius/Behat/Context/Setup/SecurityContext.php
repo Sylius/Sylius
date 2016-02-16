@@ -18,7 +18,7 @@ use Sylius\Behat\Page\Shop\HomePage;
 use Sylius\Bundle\CoreBundle\Test\Services\SecurityServiceInterface;
 use Sylius\Component\Core\Test\Factory\TestUserFactoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -51,7 +51,7 @@ final class SecurityContext implements Context
     private $testUserFactory;
 
     /**
-     * @var RepositoryInterface
+     * @var UserRepositoryInterface
      */
     private $userRepository;
 
@@ -66,7 +66,7 @@ final class SecurityContext implements Context
      * @param array $minkParameters
      * @param HomePage $homePage
      * @param TestUserFactoryInterface $testUserFactory
-     * @param RepositoryInterface $userRepository
+     * @param UserRepositoryInterface $userRepository
      * @param SharedStorageInterface $sharedStorage
      */
     public function __construct(
@@ -75,7 +75,7 @@ final class SecurityContext implements Context
         array $minkParameters,
         HomePage $homePage,
         TestUserFactoryInterface $testUserFactory,
-        RepositoryInterface $userRepository,
+        UserRepositoryInterface $userRepository,
         SharedStorageInterface $sharedStorage
     ) {
         $this->securityService = $securityService;
