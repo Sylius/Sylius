@@ -19,4 +19,4 @@ default:
                 - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
                 - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
             filters:
-                tags: "@reports"
+                tags: "@legacy_reports"

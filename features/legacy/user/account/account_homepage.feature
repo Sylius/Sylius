@@ -1,4 +1,4 @@
-@account
+@legacy_account
 Feature: User account homepage
     In order to access and manage my personal information
     As a logged user

@@ -1,4 +1,4 @@
-@checkout
+@legacy_checkout
 Feature: Tax included in price
     In order to handle product taxation
     As a store owner

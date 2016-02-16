@@ -14,4 +14,4 @@ default:
                 - Sylius\Bundle\MailerBundle\Behat\MailerContext
                 - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
             filters:
-                tags: "@emails"
+                tags: "@legacy_emails"

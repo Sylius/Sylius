@@ -1,4 +1,4 @@
-@account
+@legacy_account
 Feature: User account addresses page
     In order to manage my addresses
     As a logged user

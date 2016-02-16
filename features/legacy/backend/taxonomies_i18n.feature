@@ -1,4 +1,4 @@
-@i18n
+@legacy_i18n
 Feature: Taxonomies internationalization
     In order to improve the store SEO
     As a store owner

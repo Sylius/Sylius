@@ -1,4 +1,4 @@
-@search
+@legacy_search
 Feature: Orm indexer event listener
     In order to have a consistent indexing when orm is enabled
     As a administrator

@@ -1,4 +1,4 @@
-@users
+@legacy_users
 Feature: User registration
     In order to order products
     As a visitor

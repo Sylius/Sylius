@@ -1,4 +1,4 @@
-@metadata
+@legacy_metadata
 Feature: Metadata rendering
     In order to manage metadata on my store
     As a store owner

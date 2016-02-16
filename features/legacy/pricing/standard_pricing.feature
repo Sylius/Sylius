@@ -1,4 +1,4 @@
-@pricing
+@legacy_pricing
 Feature: Standard pricing
     In order to sell products with simple pricing
     As a store owner

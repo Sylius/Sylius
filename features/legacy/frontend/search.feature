@@ -1,4 +1,4 @@
-@search
+@legacy_search
 Feature: Search products
     In order to be able to find products
     As a visitor

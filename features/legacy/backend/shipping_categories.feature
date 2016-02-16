@@ -1,4 +1,4 @@
-@shipping
+@legacy_shipping
 Feature: Shipping categories
     In order to limit products to certain shipping methods
     As a store owner

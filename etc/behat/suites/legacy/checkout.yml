@@ -17,4 +17,4 @@ default:
                 - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
                 - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
             filters:
-                tags: "@checkout"
+                tags: "@legacy_checkout"

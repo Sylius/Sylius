@@ -1,4 +1,4 @@
-@metadata
+@legacy_metadata
 Feature: Metadata rendering & processing
     In order to render metadata dynamically
     As a store owner

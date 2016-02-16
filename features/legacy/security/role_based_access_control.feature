@@ -1,4 +1,4 @@
-@security
+@legacy_security
 Feature: Hierarchical Role based access control (HRBAC)
     In order to restrict access to certain functionality
     As a Store Owner
