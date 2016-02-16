@@ -1,0 +1,15 @@
+{% macro render(paginator)  %}
+    {% if paginator.haveToPaginate() %}
+    <div class="ui pagination menu">
+        <a class="icon item">
+            <i class="left chevron icon"></i>
+        </a>
+        {% for page_number in 1..paginator.nbPages %}
+        <a class="item">{{ page_number }}</a>
+        {% endfor %}
+        <a class="icon item">
+            <i class="right chevron icon"></i>
+        </a>
+    </div>
+    {% endif %}
+{% endmacro %}

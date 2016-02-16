@@ -504,6 +504,11 @@ class RequestConfiguration
         return (bool) $redirect['header'];
     }
 
+    public function getVars()
+    {
+        return $this->parameters->get('vars', []);
+    }
+
     /**
      * @param array  $parameters
      * @param object $resource

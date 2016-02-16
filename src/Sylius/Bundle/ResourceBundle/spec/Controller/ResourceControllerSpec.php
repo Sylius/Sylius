@@ -171,6 +171,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $expectedView = View::create()
             ->setData([
+                'configuration' => $configuration,
                 'metadata' => $metadata,
                 'resource' => $resource,
                 'product' => $resource,
@@ -266,6 +267,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $expectedView = View::create()
             ->setData([
+                'configuration' => $configuration,
                 'metadata' => $metadata,
                 'resources' => [$resource1, $resource2],
                 'products' => [$resource1, $resource2],
@@ -333,6 +335,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $expectedView = View::create()
             ->setData([
+                'configuration' => $configuration,
                 'metadata' => $metadata,
                 'resource' => $newResource,
                 'product' => $newResource,
@@ -383,6 +386,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $expectedView = View::create()
             ->setData([
+                'configuration' => $configuration,
                 'metadata' => $metadata,
                 'resource' => $newResource,
                 'product' => $newResource,
@@ -723,6 +727,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $expectedView = View::create()
             ->setData([
+                'configuration' => $configuration,
                 'metadata' => $metadata,
                 'resource' => $resource,
                 'product' => $resource,
@@ -776,6 +781,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $expectedView = View::create()
             ->setData([
+                'configuration' => $configuration,
                 'metadata' => $metadata,
                 'resource' => $resource,
                 'product' => $resource,

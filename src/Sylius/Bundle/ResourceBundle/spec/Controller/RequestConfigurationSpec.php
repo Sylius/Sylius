@@ -473,4 +473,10 @@ class RequestConfigurationSpec extends ObjectBehavior
         $parameters->get('section')->willReturn('admin');
         $this->getSection()->shouldReturn('admin');
     }
+    
+    function it_has_vars(Parameters $parameters)
+    {
+        $parameters->get('vars', [])->willReturn(['foo' => 'bar']);
+        $this->getVars()->shouldReturn(['foo' => 'bar']);
+    }
 }
