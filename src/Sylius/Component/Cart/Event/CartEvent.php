@@ -31,6 +31,7 @@ class CartEvent extends ResourceEvent
      */
     public function __construct(CartInterface $cart)
     {
+        $this->subject = $cart;
         $this->cart = $cart;
     }
 
