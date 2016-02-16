@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ThemeBundle\Tests\Functional\app\DefaultTestCase;
 
+use Sylius\Bundle\ThemeBundle\Context\SettableThemeContext;
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
@@ -33,9 +34,9 @@ final class RequestListener
 
     /**
      * @param ThemeRepositoryInterface $themeRepository
-     * @param ThemeContextInterface $themeContext
+     * @param SettableThemeContext $themeContext
      */
-    public function __construct(ThemeRepositoryInterface $themeRepository, ThemeContextInterface $themeContext)
+    public function __construct(ThemeRepositoryInterface $themeRepository, SettableThemeContext $themeContext)
     {
         $this->themeRepository = $themeRepository;
         $this->themeContext = $themeContext;

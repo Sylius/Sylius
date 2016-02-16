@@ -35,8 +35,12 @@ final class ThemeHierarchyProvider implements ThemeHierarchyProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getThemeHierarchy(ThemeInterface $theme)
+    public function getThemeHierarchy(ThemeInterface $theme = null)
     {
+        if (null === $theme) {
+            return [];
+        }
+
         $parents = [];
         $parentsNames = $theme->getParentsNames();
         foreach ($parentsNames as $parentName) {

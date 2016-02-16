@@ -36,6 +36,7 @@
         <service id="sylius.theme.templating.file_locator" class="%sylius.theme.templating.file_locator.class%" decorates="templating.locator" public="false">
             <argument type="service" id="sylius.theme.templating.file_locator.inner" />
             <argument type="service" id="sylius.theme.context" />
+            <argument type="service" id="sylius.theme.hierarchy_provider" />
             <argument type="service" id="sylius.theme.templating.locator" />
             <argument>%kernel.cache_dir%</argument>
         </service>

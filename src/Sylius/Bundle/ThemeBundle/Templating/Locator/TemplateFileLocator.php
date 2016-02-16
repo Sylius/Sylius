@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ThemeBundle\Templating\Locator;
 
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
+use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProviderInterface;
 use Sylius\Bundle\ThemeBundle\Locator\ResourceNotFoundException;
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Templating\TemplateReferenceInterface;
@@ -34,6 +35,11 @@ final class TemplateFileLocator implements FileLocatorInterface
     private $themeContext;
 
     /**
+     * @var ThemeHierarchyProviderInterface
+     */
+    private $themeHierarchyProvider;
+
+    /**
      * @var TemplateLocatorInterface
      */
     private $templateLocator;
@@ -41,15 +47,18 @@ final class TemplateFileLocator implements FileLocatorInterface
     /**
      * @param FileLocatorInterface $decoratedFileLocator
      * @param ThemeContextInterface $themeContext
+     * @param ThemeHierarchyProviderInterface $themeHierarchyProvider
      * @param TemplateLocatorInterface $templateLocator
      */
     public function __construct(
         FileLocatorInterface $decoratedFileLocator,
         ThemeContextInterface $themeContext,
+        ThemeHierarchyProviderInterface $themeHierarchyProvider,
         TemplateLocatorInterface $templateLocator
     ) {
         $this->decoratedFileLocator = $decoratedFileLocator;
         $this->themeContext = $themeContext;
+        $this->themeHierarchyProvider = $themeHierarchyProvider;
         $this->templateLocator = $templateLocator;
     }
 
@@ -62,7 +71,7 @@ final class TemplateFileLocator implements FileLocatorInterface
             throw new \InvalidArgumentException('The template must be an instance of TemplateReferenceInterface.');
         }
 
-        $themes = $this->themeContext->getThemeHierarchy();
+        $themes = $this->themeHierarchyProvider->getThemeHierarchy($this->themeContext->getTheme());
         foreach ($themes as $theme) {
             try {
                 return $this->templateLocator->locateTemplate($template, $theme);

@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ThemeBundle\Translation;
 
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
+use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProviderInterface;
 use Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface;
 use Symfony\Component\Translation\TranslatorBagInterface;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -32,11 +33,17 @@ final class Translator implements TranslatorInterface, TranslatorBagInterface, W
     private $themeContext;
 
     /**
+     * @var ThemeHierarchyProviderInterface
+     */
+    private $themeHierarchyProvider;
+
+    /**
      * {@inheritdoc}
      */
     public function __construct(
         TranslatorInterface $translator,
-        ThemeContextInterface $themeContext
+        ThemeContextInterface $themeContext,
+        ThemeHierarchyProviderInterface $themeHierarchyProvider
     ) {
         if (!$translator instanceof TranslatorBagInterface) {
             throw new \InvalidArgumentException(sprintf(
@@ -47,6 +54,7 @@ final class Translator implements TranslatorInterface, TranslatorBagInterface, W
 
         $this->translator = $translator;
         $this->themeContext = $themeContext;
+        $this->themeHierarchyProvider = $themeHierarchyProvider;
     }
 
     /**
@@ -137,7 +145,7 @@ final class Translator implements TranslatorInterface, TranslatorBagInterface, W
      */
     private function getPossibleIds($id)
     {
-        $themes = $this->themeContext->getThemeHierarchy();
+        $themes = $this->themeHierarchyProvider->getThemeHierarchy($this->themeContext->getTheme());
 
         foreach ($themes as $theme) {
             yield $id.'|'.$theme->getName();

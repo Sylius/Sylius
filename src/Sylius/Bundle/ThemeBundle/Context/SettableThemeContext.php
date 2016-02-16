@@ -16,10 +16,26 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-interface ThemeContextInterface
+final class SettableThemeContext implements ThemeContextInterface
 {
     /**
-     * @return ThemeInterface|null
+     * @var ThemeInterface
      */
-    public function getTheme();
+    private $theme;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTheme(ThemeInterface $theme)
+    {
+        $this->theme = $theme;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTheme()
+    {
+        return $this->theme;
+    }
 }
