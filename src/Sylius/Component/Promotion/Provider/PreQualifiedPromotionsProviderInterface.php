@@ -12,6 +12,7 @@
 namespace Sylius\Component\Promotion\Provider;
 
 use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -19,7 +20,9 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 interface PreQualifiedPromotionsProviderInterface
 {
     /**
+     * @param PromotionSubjectInterface $subject
+     *
      * @return PromotionInterface[]
      */
-    public function provide();
+    public function getPromotions(PromotionSubjectInterface $subject);
 }

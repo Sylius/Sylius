@@ -28,7 +28,7 @@ class PromotionProcessor implements PromotionProcessorInterface
     /**
      * @var PreQualifiedPromotionsProviderInterface
      */
-    protected $activePromotionsProvider;
+    protected $preQualifiedPromotionsProvider;
 
     /**
      * @var PromotionEligibilityCheckerInterface
@@ -41,16 +41,16 @@ class PromotionProcessor implements PromotionProcessorInterface
     protected $applicator;
 
     /**
-     * @param PreQualifiedPromotionsProviderInterface $activePromotionsProvider
+     * @param PreQualifiedPromotionsProviderInterface $preQualifiedPromotionsProvider
      * @param PromotionEligibilityCheckerInterface $checker
      * @param PromotionApplicatorInterface $applicator
      */
     public function __construct(
-        PreQualifiedPromotionsProviderInterface $activePromotionsProvider,
+        PreQualifiedPromotionsProviderInterface $preQualifiedPromotionsProvider,
         PromotionEligibilityCheckerInterface $checker,
         PromotionApplicatorInterface $applicator
     ) {
-        $this->activePromotionsProvider = $activePromotionsProvider;
+        $this->preQualifiedPromotionsProvider = $preQualifiedPromotionsProvider;
         $this->checker = $checker;
         $this->applicator = $applicator;
     }
@@ -68,7 +68,7 @@ class PromotionProcessor implements PromotionProcessorInterface
 
         $eligiblePromotions = [];
 
-        foreach ($this->activePromotionsProvider->provide() as $promotion) {
+        foreach ($this->preQualifiedPromotionsProvider->getPromotions($subject) as $promotion) {
             if (!$this->checker->isEligible($subject, $promotion)) {
                 continue;
             }

@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Promotion\Provider;
 
+use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 
 /**
@@ -34,7 +35,7 @@ class ActivePromotionsProvider implements PreQualifiedPromotionsProviderInterfac
     /**
      * {@inheritdoc}
      */
-    public function provide()
+    public function getPromotions(PromotionSubjectInterface $subject)
     {
         return $this->promotionRepository->findActive();
     }

@@ -9,27 +9,28 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Promotion\Provider;
+namespace spec\Sylius\Bundle\CoreBundle\Provider;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Promotion\Model\PromotionInterface;
-use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\PromotionRepository;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Promotion\Provider\PreQualifiedPromotionsProviderInterface;
-use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ActivePromotionsProviderSpec extends ObjectBehavior
+class ActiveByChannelPromotionsProviderSpec extends ObjectBehavior
 {
-    function let(PromotionRepositoryInterface $promotionRepository)
+    function let(PromotionRepository $promotionRepository)
     {
         $this->beConstructedWith($promotionRepository);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Promotion\Provider\ActivePromotionsProvider');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Provider\ActiveByChannelPromotionsProvider');
     }
 
     function it_implements_active_promotions_provider_interface()
@@ -37,13 +38,15 @@ class ActivePromotionsProviderSpec extends ObjectBehavior
         $this->shouldImplement(PreQualifiedPromotionsProviderInterface::class);
     }
 
-    function it_provides_active_promotions(
-        $promotionRepository,
+    function it_provides_active_promotions_for_given_subject_channel(
+        PromotionRepository $promotionRepository,
+        ChannelInterface $channel,
         PromotionInterface $promotion1,
         PromotionInterface $promotion2,
-        PromotionSubjectInterface $subject
+        OrderInterface $subject
     ) {
-        $promotionRepository->findActive()->willReturn([$promotion1, $promotion2]);
+        $subject->getChannel()->willReturn($channel);
+        $promotionRepository->findActiveByChannel($channel)->willReturn([$promotion1, $promotion2]);
 
         $this->getPromotions($subject)->shouldReturn([$promotion1, $promotion2]);
     }

@@ -50,7 +50,7 @@ class PromotionProcessorSpec extends ObjectBehavior
         PromotionInterface $promotion
     ) {
         $subject->getPromotions()->shouldBeCalled()->willReturn([]);
-        $activePromotionsProvider->provide()->willReturn([$promotion]);
+        $activePromotionsProvider->getPromotions($subject)->willReturn([$promotion]);
 
         $checker->isEligible($subject, $promotion)->shouldBeCalled()->willReturn(false);
         $applicator->apply($subject, $promotion)->shouldNotBeCalled();
@@ -67,7 +67,7 @@ class PromotionProcessorSpec extends ObjectBehavior
         PromotionInterface $promotion
     ) {
         $subject->getPromotions()->shouldBeCalled()->willReturn([]);
-        $activePromotionsProvider->provide()->willReturn([$promotion]);
+        $activePromotionsProvider->getPromotions($subject)->willReturn([$promotion]);
 
         $checker->isEligible($subject, $promotion)->shouldBeCalled()->willReturn(true);
         $applicator->apply($subject, $promotion)->shouldBeCalled();
@@ -85,7 +85,7 @@ class PromotionProcessorSpec extends ObjectBehavior
         PromotionInterface $exlusivePromotion
     ) {
         $subject->getPromotions()->shouldBeCalled()->willReturn([]);
-        $activePromotionsProvider->provide()->willReturn([$promotion, $exlusivePromotion]);
+        $activePromotionsProvider->getPromotions($subject)->willReturn([$promotion, $exlusivePromotion]);
 
         $exlusivePromotion->isExclusive()->shouldBeCalled()->willReturn(true);
         $checker->isEligible($subject, $promotion)->shouldBeCalled()->willReturn(true);
@@ -106,7 +106,7 @@ class PromotionProcessorSpec extends ObjectBehavior
         PromotionInterface $promotion
     ) {
         $subject->getPromotions()->shouldBeCalled()->willReturn([$promotion]);
-        $activePromotionsProvider->provide()->willReturn([$promotion]);
+        $activePromotionsProvider->getPromotions($subject)->willReturn([$promotion]);
 
         $checker->isEligible($subject, $promotion)->shouldBeCalled()->willReturn(false);
 
