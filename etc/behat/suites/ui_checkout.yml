@@ -20,4 +20,4 @@ default:
                 - sylius.behat.context.ui.cart
 
             filters:
-                tags: "@ui-checkout"
+                tags: @checkout && @ui

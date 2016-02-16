@@ -1,4 +1,4 @@
-@ui-checkout
+@checkout
 Feature: Checkout with offline payment
     In order to pay with cash or by external means
     As a Customer
@@ -11,6 +11,7 @@ Feature: Checkout with offline payment
         And the store ships everything for free to all available locations
         And the store allows paying offline
 
+    @ui
     Scenario: Successfully placing an order
         Given I am logged in as "john@example.com"
         And I added product "PHP T-Shirt" to the cart

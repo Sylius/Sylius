@@ -1,4 +1,4 @@
-@cart
+@legacy_cart
 Feature: Cart
     In order to select products for purchase
     As a visitor

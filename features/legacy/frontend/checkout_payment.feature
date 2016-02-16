@@ -1,4 +1,4 @@
-@checkout
+@legacy_checkout
 Feature: Checkout Payment
     In order to submit a payment
     As a logged in user

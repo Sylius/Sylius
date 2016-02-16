@@ -1,4 +1,4 @@
-@products
+@legacy_products
 Feature: Products
     In order to know and pick the products
     As a visitor

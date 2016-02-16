@@ -1,4 +1,4 @@
-@cart
+@legacy_cart
 Feature: Cart
     In order to do shopping comfortably
     As a visitor

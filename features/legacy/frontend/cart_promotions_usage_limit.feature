@@ -1,4 +1,4 @@
-@promotions
+@legacy_promotions
 Feature: Checkout usage limited promotions
     In order to handle product promotions
     As a store owner

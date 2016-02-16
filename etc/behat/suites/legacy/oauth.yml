@@ -13,4 +13,4 @@ default:
                 - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
             filters:
-                tags: "@oauth"
+                tags: "@legacy_oauth"

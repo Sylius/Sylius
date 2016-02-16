@@ -1,4 +1,4 @@
-@checkout
+@legacy_checkout
 Feature: Checkout security
     In order to authenticate
     As a visitor

@@ -1,4 +1,4 @@
-@checkout
+@legacy_checkout
 Feature: Checkout inventory
     In order to manage my inventory
     As a store owner

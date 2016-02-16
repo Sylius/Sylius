@@ -1,4 +1,4 @@
-@pricing
+@legacy_pricing
 Feature: Volume based pricing
     In order to sell higher quantities
     As a store owner

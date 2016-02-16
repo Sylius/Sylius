@@ -15,4 +15,4 @@ default:
                 - sylius.behat.context.ui.product
 
             filters:
-                tags: "@ui-channels"
+                tags: @channels && @ui

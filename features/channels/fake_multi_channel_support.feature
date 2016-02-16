@@ -1,4 +1,4 @@
-@ui-channels
+@channels
 Feature: Fake multi-channel support
     In order to see how my store looks on a different channels
     As a Developer
@@ -11,11 +11,13 @@ Feature: Fake multi-channel support
         And the store operates on another channel named "France"
         And there is product "Banana" available in that channel
 
+    @ui
     Scenario:
         When I change my current channel to "Poland"
         Then I should be able to access product "Onion"
         But I should not be able to access product "Banana"
 
+    @ui
     Scenario:
         When I change my current channel to "France"
         Then I should be able to access product "Banana"

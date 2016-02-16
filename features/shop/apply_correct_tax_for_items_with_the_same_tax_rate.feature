@@ -1,4 +1,4 @@
-@ui-cart
+@cart
 Feature: Apply correct tax for items with the same tax rate
     In order to pay proper amount when buying goods from the same tax category
     As a Visitor
@@ -15,22 +15,26 @@ Feature: Apply correct tax for items with the same tax rate
         And product "PHP T-Shirt" belongs to "Clothes" tax category
         And product "Symfony Hat" belongs to "Clothes" tax category
 
+    @ui
     Scenario: Proper taxes for taxed product
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "€123.00"
         And my cart taxes should be "€23.00"
 
+    @ui
     Scenario: Proper taxes for multiple same products with the same tax rate
         When I add 3 products "PHP T-Shirt" to the cart
         Then my cart total should be "€369.00"
         And my cart taxes should be "€69.00"
 
+    @ui
     Scenario: Proper taxes for multiple different products with the same tax rate
         When I add 3 products "PHP T-Shirt" to the cart
         And I add 2 products "Symfony Hat" to the cart
         Then my cart total should be "€442.80"
         And my cart taxes should be "€82.80"
 
+    @ui
     Scenario: Proper taxes after removing one of the item
         Given I have 3 products "PHP T-Shirt" in the cart
         And I have 2 products "Symfony Hat" in the cart
@@ -38,6 +42,7 @@ Feature: Apply correct tax for items with the same tax rate
         Then my cart total should be "€73.80"
         And my cart taxes should be "€13.80"
 
+    @ui
     Scenario: Proper taxes after changing item quantity
         Given I have 3 products "PHP T-Shirt" in the cart
         And I have 2 products "Symfony Hat" in the cart

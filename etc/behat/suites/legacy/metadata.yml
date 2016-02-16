@@ -14,4 +14,4 @@ default:
                 - Sylius\Bundle\ProductBundle\Behat\ProductContext
                 - Sylius\Bundle\CoreBundle\Behat\MetadataContext
             filters:
-                tags: "@metadata"
+                tags: "@legacy_metadata"

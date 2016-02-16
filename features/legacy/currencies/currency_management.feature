@@ -1,4 +1,4 @@
-@currencies
+@legacy_currencies
 Feature: Currency management
     In order to receive payments in different currencies
     As a store owner

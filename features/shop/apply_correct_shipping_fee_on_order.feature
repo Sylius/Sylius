@@ -1,4 +1,4 @@
-@ui-cart
+@cart
 Feature: Apply correct shipping fee on order
     In order to decide on amount paid for shipment
     As a Customer
@@ -12,12 +12,14 @@ Feature: Apply correct shipping fee on order
         And there is user "john@example.com" identified by "password123"
         And I am logged in as "john@example.com"
 
+    @ui
     Scenario: Adding proper shipping fee
         Given I have product "PHP T-Shirt" in the cart
         When I proceed selecting "DHL" shipping method
         Then my cart total should be "€110.00"
         And my cart shipping fee should be "€10.00"
 
+    @ui
     Scenario: Changing shipping fee after shipping method change
         Given I have product "PHP T-Shirt" in the cart
         And I chose "DHL" shipping method

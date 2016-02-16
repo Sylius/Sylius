@@ -1,4 +1,4 @@
-@ui-cart
+@cart
 Feature: Apply correct tax for items with different tax rates
     In order to pay proper amount when buying goods from different tax categories
     As a Visitor
@@ -16,12 +16,14 @@ Feature: Apply correct tax for items with different tax rates
         And the store has a product "Symfony Mug" priced at "€50.00"
         And product "Symfony Mug" belongs to "Mugs" tax category
 
+    @ui
     Scenario: Proper taxes for different taxed products
         When I add product "PHP T-Shirt" to the cart
         And I add product "Symfony Mug" to the cart
         Then my cart total should be "€175.50"
         And my cart taxes should be "€25.50"
 
+    @ui
     Scenario: Proper taxes for multiple products with different tax rate
         When I add 3 products "PHP T-Shirt" to the cart
         And I add 4 products "Symfony Mug" to the cart

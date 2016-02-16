@@ -1,4 +1,4 @@
-@ui-cart
+@cart
 Feature: Apply correct taxes based on customer data
     In order to pay proper amount when buying goods
     As a Customer
@@ -17,12 +17,14 @@ Feature: Apply correct taxes based on customer data
         And product "PHP T-Shirt" belongs to "Clothes" tax category
         And there is user "john@example.com" identified by "password123", with "Australia" as shipping country
 
+    @ui
     Scenario: Proper taxes for taxed product
         When I add product "PHP T-Shirt" to the cart
         And I proceed logging as "john@example.com" with "password123" password
         Then my cart total should be "€110.00"
         And my cart taxes should be "€10.00"
 
+    @ui
     Scenario: Proper taxes after specifying shipping address
         When I add product "PHP T-Shirt" to the cart
         And I log in as "john@example.com" with "password123" password

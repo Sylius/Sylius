@@ -1,4 +1,4 @@
-@security
+@legacy_security
 Feature: Roles management
     In order to restrict access to certain functionality
     As a Store Owner

@@ -15,4 +15,4 @@ default:
                 - Sylius\Bundle\WebBundle\Behat\WebContext
                 - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
             filters:
-                tags: "@currencies"
+                tags: "@legacy_currencies"

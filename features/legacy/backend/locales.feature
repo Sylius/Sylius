@@ -1,4 +1,4 @@
-@localization
+@legacy_localization
 Feature: Managing locales
     In order to reach customers from different countries
     As a store owner
