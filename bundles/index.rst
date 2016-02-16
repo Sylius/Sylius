@@ -23,6 +23,7 @@ Symfony2 Bundles
     SyliusShippingBundle/index
     SyliusTaxationBundle/index
     SyliusTaxonomyBundle/index
+    SyliusThemeBundle/index
     SyliusVariationBundle/index
 
 .. include:: /bundles/map.rst.inc
