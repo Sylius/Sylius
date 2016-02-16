@@ -14,7 +14,7 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
-use Sylius\Component\Core\Test\Services\DefaultStoreDataInterface;
+use Sylius\Component\Core\Test\Services\DefaultChannelFactoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
 /**
@@ -29,9 +29,14 @@ final class ChannelContext implements Context
     private $sharedStorage;
 
     /**
-     * @var DefaultStoreDataInterface
+     * @var DefaultChannelFactoryInterface
      */
-    private $defaultFranceChannelFactory;
+    private $franceChannelFactory;
+
+    /**
+     * @var DefaultChannelFactoryInterface
+     */
+    private $defaultChannelFactory;
 
     /**
      * @var ChannelFactoryInterface
@@ -45,18 +50,21 @@ final class ChannelContext implements Context
 
     /**
      * @param SharedStorageInterface $sharedStorage
-     * @param DefaultStoreDataInterface $defaultFranceChannelFactory
+     * @param DefaultChannelFactoryInterface $franceChannelFactory
+     * @param DefaultChannelFactoryInterface $defaultChannelFactory
      * @param ChannelFactoryInterface $channelFactory
      * @param ChannelRepositoryInterface $channelRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        DefaultStoreDataInterface $defaultFranceChannelFactory,
+        DefaultChannelFactoryInterface $franceChannelFactory,
+        DefaultChannelFactoryInterface $defaultChannelFactory,
         ChannelFactoryInterface $channelFactory,
         ChannelRepositoryInterface $channelRepository
     ) {
         $this->sharedStorage = $sharedStorage;
-        $this->defaultFranceChannelFactory = $defaultFranceChannelFactory;
+        $this->franceChannelFactory = $franceChannelFactory;
+        $this->defaultChannelFactory = $defaultChannelFactory;
         $this->channelFactory = $channelFactory;
         $this->channelRepository = $channelRepository;
     }
@@ -85,12 +93,21 @@ final class ChannelContext implements Context
     }
 
     /**
+     * @Given the store is operating on a single "France" channel
+     */
+    public function thatStoreIsOperatingOnASingleFranceChannel()
+    {
+        $defaultData = $this->franceChannelFactory->create();
+        $this->sharedStorage->setClipboard($defaultData);
+    }
+
+    /**
      * @Given the store operates on a single channel
      * @Given the store is operating on a single channel
      */
     public function thatStoreIsOperatingOnASingleChannel()
     {
-        $defaultData = $this->defaultFranceChannelFactory->create();
+        $defaultData = $this->defaultChannelFactory->create();
         $this->sharedStorage->setClipboard($defaultData);
     }
 

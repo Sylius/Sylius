@@ -12,9 +12,9 @@
 namespace Sylius\Component\Core\Test\Services;
 
 /**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface DefaultStoreDataInterface
+interface DefaultChannelFactoryInterface
 {
     /**
      * @return array
