@@ -389,9 +389,11 @@ class ResourceController extends Controller
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
-
         $resource = $this->findOr404($configuration);
-        $resource->setEnabled($enabled);
+        $defaultAttribute = 'enabled';
+        $attribute = $this->metadata->hasParameter('attribute') ? $this->metadata->getParameter('attribute') : $defaultAttribute;
+        $accessor = PropertyAccess::createPropertyAccessor();
+        $accessor->setValue($resource, $attribute, $enabled);
 
         $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource);
         $this->manager->flush();
@@ -401,7 +403,13 @@ class ResourceController extends Controller
             return $this->viewHandler->handle($configuration, View::create($resource, 204));
         }
 
-        $this->flashHelper->addSuccessFlash($configuration, $enabled ? 'enable' : 'disable', $resource);
+        $flashKey = $enabled ? 'enable' : 'disable';
+
+        if ($attribute !== $defaultAttribute) {
+            $flashKey .= '_' . $attribute;
+        }
+
+        $this->flashHelper->addSuccessFlash($configuration, $flashKey, $resource);
 
         return $this->redirectHandler->redirectToIndex($configuration, $resource);
     }
