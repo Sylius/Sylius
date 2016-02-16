@@ -22,7 +22,7 @@
         <parameter key="sylius.theme.hierarchy_provider.class">Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProvider</parameter>
         <parameter key="sylius.theme.filesystem.class">Sylius\Bundle\ThemeBundle\Filesystem\Filesystem</parameter>
         <parameter key="sylius.theme.finder_factory.class">Sylius\Bundle\ThemeBundle\Factory\FinderFactory</parameter>
-        <parameter key="sylius.theme.form.type.theme_choice.class">Sylius\Bundle\ThemeBundle\Form\SyliusThemeChoiceType</parameter>
+        <parameter key="sylius.theme.form.type.theme_choice.class">Sylius\Bundle\ThemeBundle\Form\Type\ThemeChoiceType</parameter>
     </parameters>
 
     <services>
