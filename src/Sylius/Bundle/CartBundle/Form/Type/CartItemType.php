@@ -45,6 +45,7 @@ class CartItemType extends AbstractResourceType
         $builder
             ->add('quantity', 'integer', [
                 'attr' => ['min' => 1],
+                'label' => 'sylius.form.cart_item.quantity',
             ])
             ->setDataMapper($this->orderItemQuantityDataMapper);
     }
