@@ -7,7 +7,3 @@ cached:
             kernel:
                 env: test_cached
                 debug: false
-
-    gherkin:
-        filters:
-            tags: "~@ignore"
