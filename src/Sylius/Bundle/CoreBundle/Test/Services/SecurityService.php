@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Test\Services;
 
 use Behat\Mink\Session;
+use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -32,7 +33,8 @@ class SecurityService implements SecurityServiceInterface
     private $session;
 
     /**
-     * {@inheritdoc}
+     * @param UserRepositoryInterface $userRepository
+     * @param SessionInterface $session
      */
     public function __construct(
         UserRepositoryInterface $userRepository,
@@ -45,14 +47,23 @@ class SecurityService implements SecurityServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function logIn($email, $providerKey, Session $minkSession)
+    public function logIn($email, Session $minkSession, $providerKey = self::DEFAULT_PROVIDER_KEY)
     {
         $user = $this->userRepository->findOneBy(['username' => $email]);
-
         if (null === $user) {
             throw new \InvalidArgumentException(sprintf('There is no user with email %s', $email));
         }
 
+        $this->logInUser($minkSession, $user, $providerKey);
+    }
+
+    /**
+     * @param Session $minkSession
+     * @param UserInterface $user
+     * @param string $providerKey
+     */
+    private function logInUser(Session $minkSession, UserInterface $user, $providerKey = self::DEFAULT_PROVIDER_KEY)
+    {
         $token = new UsernamePasswordToken($user, $user->getPassword(), $providerKey, $user->getRoles());
 
         $this->session->set('_security_user', serialize($token));

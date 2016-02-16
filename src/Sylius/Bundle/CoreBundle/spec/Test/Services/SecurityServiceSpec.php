@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Test\Services;
 use Behat\Mink\Session;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\User\Model\UserInterface;
+use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -59,7 +59,7 @@ class SecurityServiceSpec extends ObjectBehavior
 
         $minkSession->setCookie('MOCKEDSID', 'xyzc123')->shouldBeCalled();
 
-        $this->logIn('sylius@example.com', 'default', $minkSession);
+        $this->logIn('sylius@example.com', $minkSession, 'default');
     }
 
     function it_does_not_log_user_in_if_user_was_not_found(
@@ -80,6 +80,6 @@ class SecurityServiceSpec extends ObjectBehavior
         $session->getId()->willReturn('xyzc123');
 
         $minkSession->setCookie('MOCKEDSID', 'xyzc123')->shouldNotBeCalled();
-        $this->shouldThrow(new \InvalidArgumentException(sprintf('There is no user with email sylius@example.com')))->during('logIn', ['sylius@example.com', 'default', $minkSession]);
+        $this->shouldThrow(new \InvalidArgumentException(sprintf('There is no user with email sylius@example.com')))->during('logIn', ['sylius@example.com', $minkSession, 'default']);
     }
 }

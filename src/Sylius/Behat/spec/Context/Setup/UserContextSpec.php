@@ -12,7 +12,9 @@
 namespace spec\Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Test\Factory\TestUserFactory;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\UserInterface;
@@ -28,11 +30,17 @@ class UserContextSpec extends ObjectBehavior
     function let(
         RepositoryInterface $userRepository,
         SharedStorageInterface $sharedStorage,
-        FactoryInterface $userFactory,
-        FactoryInterface $customerFactory,
-        FactoryInterface $addressFactory
+        TestUserFactory $userFactory,
+        FactoryInterface $addressFactory,
+        ObjectManager $userManager
     ) {
-        $this->beConstructedWith($userRepository, $sharedStorage, $userFactory, $customerFactory, $addressFactory);
+        $this->beConstructedWith(
+            $userRepository,
+            $sharedStorage,
+            $userFactory,
+            $addressFactory,
+            $userManager
+        );
     }
 
     function it_is_initializable()
@@ -46,23 +54,12 @@ class UserContextSpec extends ObjectBehavior
     }
 
     function it_creates_user_with_given_credentials_and_default_data(
-        $customerFactory,
         $sharedStorage,
         $userFactory,
         $userRepository,
-        CustomerInterface $customer,
         UserInterface $user
     ) {
-        $customerFactory->createNew()->willReturn($customer);
-        $customer->setFirstName('John')->shouldBeCalled();
-        $customer->setLastName('Doe')->shouldBeCalled();
-
-        $userFactory->createNew()->willReturn($user);
-        $user->setCustomer($customer)->shouldBeCalled();
-        $user->setUsername('test@example.com')->shouldBeCalled();
-        $user->setEmail('test@example.com')->shouldBeCalled();
-        $user->setPlainPassword('pa$$word')->shouldBeCalled();
-        $user->enable()->shouldBeCalled();
+        $userFactory->create('test@example.com', 'pa$$word')->willReturn($user);
 
         $sharedStorage->setCurrentResource('user', $user)->shouldBeCalled();
         $userRepository->add($user)->shouldBeCalled();
@@ -72,7 +69,6 @@ class UserContextSpec extends ObjectBehavior
 
     function it_creates_user_with_given_credentials_default_data_and_shipping_address(
         $addressFactory,
-        $customerFactory,
         $sharedStorage,
         $userFactory,
         $userRepository,
@@ -80,19 +76,11 @@ class UserContextSpec extends ObjectBehavior
         CustomerInterface $customer,
         UserInterface $user
     ) {
-        $customerFactory->createNew()->willReturn($customer);
-        $customer->setFirstName('John')->shouldBeCalled();
-        $customer->setLastName('Doe')->shouldBeCalled();
+        $userFactory->create('test@example.com', 'pa$$word')->willReturn($user);
+        $user->getCustomer()->willReturn($customer);
 
         $customer->getFirstName()->willReturn('John');
         $customer->getLastName()->willReturn('Doe');
-
-        $userFactory->createNew()->willReturn($user);
-        $user->setCustomer($customer)->shouldBeCalled();
-        $user->setUsername('test@example.com')->shouldBeCalled();
-        $user->setEmail('test@example.com')->shouldBeCalled();
-        $user->setPlainPassword('pa$$word')->shouldBeCalled();
-        $user->enable()->shouldBeCalled();
 
         $addressFactory->createNew()->willReturn($address);
         $address->setFirstName('John')->shouldBeCalled();
@@ -108,5 +96,34 @@ class UserContextSpec extends ObjectBehavior
         $userRepository->add($user)->shouldBeCalled();
 
         $this->thereIsUserWithShippingCountry('test@example.com', 'pa$$word', 'United Kingdom');
+    }
+
+    function it_sets_current_user_shipping_address(
+        $addressFactory,
+        $sharedStorage,
+        $userManager,
+        AddressInterface $address,
+        CustomerInterface $customer,
+        UserInterface $user
+    ) {
+        $sharedStorage->getCurrentResource('user')->willReturn($user);
+        $user->getCustomer()->willReturn($customer);
+
+        $customer->getFirstName()->willReturn('John');
+        $customer->getLastName()->willReturn('Doe');
+
+        $addressFactory->createNew()->willReturn($address);
+        $address->setFirstName('John')->shouldBeCalled();
+        $address->setLastName('Doe')->shouldBeCalled();
+        $address->setStreet('Jones St. 114')->shouldBeCalled();
+        $address->setCity('Paradise City')->shouldBeCalled();
+        $address->setPostcode('99999')->shouldBeCalled();
+        $address->setCountryCode('GB')->shouldBeCalled();
+
+        $customer->setShippingAddress($address)->shouldBeCalled();
+
+        $userManager->flush()->shouldBeCalled();
+
+        $this->myDefaultShippingAddressIs('United Kingdom');
     }
 }
