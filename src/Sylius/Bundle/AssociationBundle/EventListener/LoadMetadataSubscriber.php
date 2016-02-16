@@ -102,12 +102,23 @@ class LoadMetadataSubscriber implements EventSubscriber
         return [
             'fieldName' => 'associatedObjects',
             'targetEntity' => $associationEntity,
-            'joinColumns' => [[
-                'name' => $subject.'_id',
-                'referencedColumnName' => $associationEntityMetadata->fieldMappings['id']['columnName'],
-                'nullable' => false,
-                'onDelete' => 'CASCADE',
-            ]],
+            'joinTable' => [
+                'name' => sprintf('sylius_%s_association_%s', $subject, $subject),
+                'joinColumns' => [[
+                    'name' => 'association_id',
+                    'referencedColumnName' => 'id',
+                    'nullable' => false,
+                    'unique' => false,
+                    'onDelete' => 'CASCADE',
+                ]],
+                'inverseJoinColumns' => [[
+                    'name' => $subject.'_id',
+                    'referencedColumnName' => $associationEntityMetadata->fieldMappings['id']['columnName'],
+                    'nullable' => false,
+                    'unique' => false,
+                    'onDelete' => 'CASCADE',
+                ]],
+            ],
         ];
     }
 
