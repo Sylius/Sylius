@@ -1,11 +1,11 @@
 @cart
-Feature: Apply correct tax for items with the same tax rate
+Feature: Apply correct taxes for items with the same tax rate
     In order to pay proper amount when buying goods from the same tax category
     As a Visitor
     I want to have correct taxes applied to my order
 
     Background:
-        Given the store is operating on a single channel
+        Given the store operates on a single channel
         And there is "EU" zone containing all members of European Union
         And default currency is "EUR"
         And default tax zone is "EU"

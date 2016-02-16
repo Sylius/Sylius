@@ -5,7 +5,7 @@ Feature: Round taxes on order item level
     I want to have correct taxes applied to my order
 
     Background:
-        Given the store is operating on a single "France" channel
+        Given the store operates on a single channel in "France"
         And default tax zone is "FR"
         And the store has "EU VAT" tax rate of 23% for "Clothes" within "FR" zone
         And the store has "Low VAT" tax rate of 10% for "Mugs" within "FR" zone

@@ -61,7 +61,7 @@ class ChannelContextSpec extends ObjectBehavior
         $franceChannelFactory->create()->willReturn($defaultData);
         $sharedStorage->setClipboard($defaultData)->shouldBeCalled();
 
-        $this->thatStoreIsOperatingOnASingleFranceChannel();
+        $this->thatStoreOperatesOnASingleChannelInFrance();
     }
 
     function it_sets_default_channel_in_the_shared_storage(
