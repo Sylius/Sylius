@@ -45,7 +45,7 @@ class ProductDeleteListenerSpec extends ObjectBehavior
     ) {
         $args->getEntity()->willReturn($product)->shouldBeCalled();
 
-        $args->getEntityManager()->willReturn($reviewManager)->shouldBeCalled();
+        $container->get('sylius.manager.product_review')->willReturn($reviewManager)->shouldBeCalled();
         $container->get('sylius.repository.product_review')->willReturn($reviewRepository)->shouldBeCalled();
 
         $reviewRepository->findBy(['reviewSubject' => $product])->willReturn([$review])->shouldBeCalled();
@@ -53,7 +53,7 @@ class ProductDeleteListenerSpec extends ObjectBehavior
         $reviewManager->remove($review)->shouldBeCalled();
         $reviewManager->flush()->shouldBeCalled();
 
-        $product->setAverageRating(null)->shouldBeCalled();
+        $product->setAverageRating(0)->shouldBeCalled();
 
         $this->postSoftDelete($args);
     }

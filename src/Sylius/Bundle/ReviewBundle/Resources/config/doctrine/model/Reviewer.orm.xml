@@ -15,11 +15,11 @@
 
     <mapped-superclass name="Sylius\Component\Review\Model\Reviewer" table="sylius_reviewer">
         <id name="id" type="integer" column="id">
-            <generator strategy="AUTO"/>
+            <generator strategy="AUTO" />
         </id>
-        <field name="email" type="string" column="email"/>
-        <field name="firstName" type="string" column="first_name"/>
-        <field name="lastName" type="string" column="last_name"/>
+        <field name="email" type="string" column="email" />
+        <field name="firstName" type="string" column="first_name" />
+        <field name="lastName" type="string" column="last_name" />
     </mapped-superclass>
 
 </doctrine-mapping>

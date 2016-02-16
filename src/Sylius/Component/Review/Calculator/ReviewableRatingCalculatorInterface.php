@@ -15,8 +15,9 @@ use Sylius\Component\Review\Model\ReviewableInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-interface AverageRatingCalculatorInterface
+interface ReviewableRatingCalculatorInterface
 {
     /**
      * @param ReviewableInterface $reviewable

@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ReviewBundle\EventListener;
 
-use Sylius\Bundle\ReviewBundle\Updater\ReviewableAverageRatingUpdaterInterface;
+use Sylius\Bundle\ReviewBundle\Updater\ReviewableRatingUpdaterInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -22,16 +22,16 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 class ReviewDeleteListener
 {
     /**
-     * @var ReviewableAverageRatingUpdaterInterface
+     * @var ReviewableRatingUpdaterInterface
      */
-    private $reviewableAverageRatingUpdater;
+    private $averageRatingUpdater;
 
     /**
-     * @param ReviewableAverageRatingUpdaterInterface $reviewableAverageRatingUpdater
+     * @param ReviewableRatingUpdaterInterface $averageRatingUpdater
      */
-    public function __construct(ReviewableAverageRatingUpdaterInterface $reviewableAverageRatingUpdater)
+    public function __construct(ReviewableRatingUpdaterInterface $averageRatingUpdater)
     {
-        $this->reviewableAverageRatingUpdater = $reviewableAverageRatingUpdater;
+        $this->averageRatingUpdater = $averageRatingUpdater;
     }
 
     /**
@@ -39,12 +39,13 @@ class ReviewDeleteListener
      */
     public function recalculateSubjectRating(GenericEvent $event)
     {
-        if (!(($subject = $event->getSubject()) instanceof ReviewInterface)) {
-            throw new UnexpectedTypeException($subject, 'Sylius\Component\Review\Model\ReviewInterface');
+        $subject = $event->getSubject();
+        if (!$subject instanceof ReviewInterface) {
+            throw new UnexpectedTypeException($subject, ReviewInterface::class);
         }
 
         if (ReviewInterface::STATUS_ACCEPTED === $subject->getStatus()) {
-            $this->reviewableAverageRatingUpdater->update($subject->getReviewSubject());
+            $this->averageRatingUpdater->update($subject->getReviewSubject());
         }
     }
 }

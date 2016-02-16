@@ -48,3 +48,4 @@ sylius_backend_product_review_update_state:
     defaults:
         _controller: sylius.controller.product_review:updateStateAction
         graph: sylius_product_review
+

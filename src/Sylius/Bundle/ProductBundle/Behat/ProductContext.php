@@ -94,10 +94,6 @@ class ProductContext extends DefaultContext
                 $this->configureProductPricingCalculator($product, $data);
             }
 
-            if (isset($data['average rating'])) {
-                $product->setAverageRating($data['average rating']);
-            }
-
             $manager->persist($product);
         }
 
@@ -383,6 +379,7 @@ class ProductContext extends DefaultContext
         $manager->persist($product);
         $manager->flush();
     }
+
     /**
      * @Given /^product "([^"]*)" has been deleted$/
      */
@@ -391,7 +388,7 @@ class ProductContext extends DefaultContext
         $this->getSession()->visit($this->generatePageUrl('sylius_backend_product_index'));
 
         $tr = $this->assertSession()->elementExists('css', sprintf('table tbody tr:contains("%s")', $productName));
-        $locator = sprintf('button:contains("%s")', 'Delete');
+        $locator = 'button:contains("Delete")';
         $tr->find('css', $locator)->press();
     }
 }

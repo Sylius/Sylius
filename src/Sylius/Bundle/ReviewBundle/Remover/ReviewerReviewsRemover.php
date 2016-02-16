@@ -9,21 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\EventListener;
+namespace Sylius\Bundle\ReviewBundle\Remover;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Sylius\Component\Review\Calculator\AverageRatingCalculatorInterface;
+use Sylius\Component\Review\Calculator\ReviewableRatingCalculatorInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
+use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class CustomerDeleteListener
+class ReviewerReviewsRemover implements ReviewerReviewsRemoverInterface
 {
     /**
      * @var EntityRepository
@@ -36,32 +34,30 @@ class CustomerDeleteListener
     private $reviewManager;
 
     /**
-     * @var AverageRatingCalculatorInterface
+     * @var ReviewableRatingCalculatorInterface
      */
     private $averageRatingCalculator;
 
     /**
-     * @param EntityRepository                 $reviewRepository
-     * @param ObjectManager                    $reviewManager
-     * @param AverageRatingCalculatorInterface $averageRatingCalculator
+     * @param EntityRepository $reviewRepository
+     * @param ObjectManager $reviewManager
+     * @param ReviewableRatingCalculatorInterface $averageRatingCalculator
      */
-    public function __construct(EntityRepository $reviewRepository, ObjectManager $reviewManager, AverageRatingCalculatorInterface $averageRatingCalculator)
-    {
+    public function __construct(
+        EntityRepository $reviewRepository,
+        ObjectManager $reviewManager,
+        ReviewableRatingCalculatorInterface $averageRatingCalculator
+    ) {
         $this->reviewRepository = $reviewRepository;
         $this->reviewManager = $reviewManager;
         $this->averageRatingCalculator = $averageRatingCalculator;
     }
 
     /**
-     * @param GenericEvent $event
+     * {@inheritdoc}
      */
-    public function removeCustomerReviews(GenericEvent $event)
+    public function removeReviewerReviews(ReviewerInterface $author)
     {
-        $author = $event->getSubject();
-        if (!$author instanceof CustomerInterface) {
-            throw new UnexpectedTypeException($author, 'Sylius\Component\Core\Model\CustomerInterface');
-        }
-
         $reviewSubjectsToRecalculate = [];
 
         foreach ($this->reviewRepository->findBy(['author' => $author]) as $review) {
@@ -75,7 +71,7 @@ class CustomerDeleteListener
     }
 
     /**
-     * @param ReviewInterface       $review
+     * @param ReviewInterface $review
      * @param ReviewableInterface[] $reviewSubjectsToRecalculate
      *
      * @return array

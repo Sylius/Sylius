@@ -61,6 +61,11 @@ class ReviewContext extends DefaultContext
 
         $review->setStatus((isset($reviewHash['status']) && '' !== $reviewHash['status']) ? $reviewHash['status'] : ReviewInterface::STATUS_ACCEPTED);
 
+        if (ReviewInterface::STATUS_ACCEPTED === $review->getStatus()) {
+            $averageRatingCalculator = $this->getService('sylius.review.calculator.average_rating');
+            $product->setAverageRating($averageRatingCalculator->calculate($product));
+        }
+
         return $review;
     }
 

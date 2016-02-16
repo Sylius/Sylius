@@ -11,9 +11,10 @@
 
 namespace Sylius\Bundle\ReviewBundle\Validator\Constraints;
 
-use Sylius\Bundle\UserBundle\Doctrine\ORM\UserRepository;
 use Sylius\Component\User\Model\UserInterface;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -22,7 +23,7 @@ use Symfony\Component\Validator\ConstraintValidator;
  * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class UniqueUserEmailValidator extends ConstraintValidator
+class UniqueReviewerEmailValidator extends ConstraintValidator
 {
     /**
      * @var UserRepository
@@ -40,12 +41,15 @@ class UniqueUserEmailValidator extends ConstraintValidator
     private $authorizationChecker;
 
     /**
-     * @param UserRepository $userRepository
+     * @param UserRepositoryInterface $userRepository
      * @param TokenStorageInterface $tokenStorage
      * @param AuthorizationCheckerInterface $authorizationChecker
      */
-    public function __construct(UserRepository $userRepository, TokenStorageInterface $tokenStorage, AuthorizationCheckerInterface $authorizationChecker)
-    {
+    public function __construct(
+        UserRepositoryInterface $userRepository,
+        TokenStorageInterface $tokenStorage,
+        AuthorizationCheckerInterface $authorizationChecker
+    ) {
         $this->userRepository = $userRepository;
         $this->tokenStorage = $tokenStorage;
         $this->authorizationChecker = $authorizationChecker;
@@ -59,7 +63,7 @@ class UniqueUserEmailValidator extends ConstraintValidator
         $customer = $review->getAuthor();
 
         $token = $this->tokenStorage->getToken();
-        if (null !== $token && $this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') && $token->getUser() instanceof UserInterface) {
+        if ($this->checkIfUserIsAuthenticated($token)) {
             if (null !== $customer && $token->getUser()->getCustomer()->getEmail() === $customer->getEmail()) {
                 return;
             }
@@ -73,5 +77,19 @@ class UniqueUserEmailValidator extends ConstraintValidator
                 null
             );
         }
+    }
+
+    /**
+     * @param TokenInterface $token
+     *
+     * @return bool
+     */
+    private function checkIfUserIsAuthenticated(TokenInterface $token)
+    {
+        return
+            null !== $token &&
+            $this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') &&
+            $token->getUser() instanceof UserInterface
+        ;
     }
 }

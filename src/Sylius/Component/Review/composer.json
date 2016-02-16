@@ -15,6 +15,10 @@
             "email": "mateusz.zalewski@lakion.com"
         },
         {
+            "name": "Grzegorz Sadowski",
+            "email": "grzegorz.sadowski@lakion.com"
+        },
+        {
             "name": "Daniel Richter",
             "email": "nexyz9@gmail.com"
         },
@@ -28,10 +32,10 @@
         }
     ],
     "require": {
-        "php": ">=5.5.9"
+        "php": "^5.5.9|^7.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2.1"
+        "phpspec/phpspec": "^2.4"
     },
     "autoload": {
         "psr-4": { "Sylius\\Component\\Review\\": "" }
@@ -39,9 +43,10 @@
     "autoload-dev": {
         "psr-4": { "Sylius\\Component\\Review\\spec\\": "spec/" }
     },
+    "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.16-dev"
+            "dev-master": "0.17-dev"
         }
     }
 }

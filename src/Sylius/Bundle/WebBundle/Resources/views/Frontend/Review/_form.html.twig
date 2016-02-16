@@ -1,4 +1,4 @@
-{{ form_start(form, { 'attr': { 'class': 'form-horizontal', 'id': 'reviewForm' }, 'action': path('sylius_review_product', { 'slug': app.request.attributes.get('slug') }) }) }}
+{{ form_start(form, { 'attr': { 'class': 'form-horizontal', 'id': 'reviewForm' }, 'action': path('sylius_product_review', { 'productId': app.request.attributes.get('productId') }) }) }}
 
 <div class="panel panel-default">
     <div class="panel-heading">
@@ -28,4 +28,4 @@
     <div class="panel-footer">
         <button type="submit" class="btn btn-primary">{{ 'sylius.form.review.submit'|trans }}</button>
     </div>
-{{ form_row(form._token) }}
+{{ form_end(form, {'render_rest': false}) }}

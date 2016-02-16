@@ -192,7 +192,7 @@
                     </td>
                 </tr>
                 {% endif %}
-                {% if product.averageRating is not null and product.averageRating != 0 %}
+                {% if 0 != product.averageRating %}
                 <tr>
                     <td>{{ 'sylius.product.rating'|trans }}</td>
                     <td>{{ product.averageRating|round(2, 'floor') }}</td>

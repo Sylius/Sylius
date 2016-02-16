@@ -103,11 +103,6 @@ class ResourceController extends Controller
     protected $eventDispatcher;
 
     /**
-     * @var string
-     */
-    protected $stateMachineGraph;
-
-    /**
      * @param MetadataInterface $metadata
      * @param RequestConfigurationFactoryInterface $requestConfigurationFactory
      * @param ViewHandlerInterface $viewHandler
@@ -466,14 +461,10 @@ class ResourceController extends Controller
      *
      * @return RedirectResponse
      */
-    public function updateStateAction(Request $request, $transition, $graph = null)
+    public function updateStateAction(Request $request, $transition, $graph)
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $resource = $this->findOr404($configuration);
-
-        if (null === $graph) {
-            $graph = $this->stateMachineGraph;
-        }
 
         $stateMachine = $this->get('sm.factory')->get($resource, $graph);
         if (!$stateMachine->can($transition)) {

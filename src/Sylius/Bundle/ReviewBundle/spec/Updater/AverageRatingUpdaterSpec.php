@@ -13,28 +13,29 @@ namespace spec\Sylius\Bundle\ReviewBundle\Updater;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Review\Calculator\AverageRatingCalculatorInterface;
+use Sylius\Bundle\ReviewBundle\Updater\ReviewableRatingUpdaterInterface;
+use Sylius\Component\Review\Calculator\ReviewableRatingCalculatorInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ReviewableAverageRatingUpdaterSpec extends ObjectBehavior
+class AverageRatingUpdaterSpec extends ObjectBehavior
 {
-    function let(AverageRatingCalculatorInterface $averageRatingCalculator, ObjectManager $reviewSubjectManager)
+    function let(ReviewableRatingCalculatorInterface $averageRatingCalculator, ObjectManager $reviewSubjectManager)
     {
         $this->beConstructedWith($averageRatingCalculator, $reviewSubjectManager);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ReviewBundle\Updater\ReviewableAverageRatingUpdater');
+        $this->shouldHaveType('Sylius\Bundle\ReviewBundle\Updater\AverageRatingUpdater');
     }
 
     function it_implements_product_average_rating_updater_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ReviewBundle\Updater\ReviewableAverageRatingUpdaterInterface');
+        $this->shouldImplement(ReviewableRatingUpdaterInterface::class);
     }
 
     function it_updates_review_subject_average_rating(
@@ -42,7 +43,7 @@ class ReviewableAverageRatingUpdaterSpec extends ObjectBehavior
         $reviewSubjectManager,
         ReviewableInterface $reviewSubject
     ) {
-        $averageRatingCalculator->calculate($reviewSubject)->willReturn(4.5)->shouldBeCalled();
+        $averageRatingCalculator->calculate($reviewSubject)->willReturn(4.5);
 
         $reviewSubject->setAverageRating(4.5)->shouldBeCalled();
         $reviewSubjectManager->flush($reviewSubject)->shouldBeCalled();
@@ -56,8 +57,8 @@ class ReviewableAverageRatingUpdaterSpec extends ObjectBehavior
         ReviewableInterface $reviewSubject,
         ReviewInterface $review
     ) {
-        $review->getReviewSubject()->willReturn($reviewSubject)->shouldBeCalled();
-        $averageRatingCalculator->calculate($reviewSubject)->willReturn(4.5)->shouldBeCalled();
+        $review->getReviewSubject()->willReturn($reviewSubject);
+        $averageRatingCalculator->calculate($reviewSubject)->willReturn(4.5);
 
         $reviewSubject->setAverageRating(4.5)->shouldBeCalled();
         $reviewSubjectManager->flush($reviewSubject)->shouldBeCalled();

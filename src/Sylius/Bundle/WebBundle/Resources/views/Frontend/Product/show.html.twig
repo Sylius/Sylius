@@ -141,9 +141,9 @@
 
 <div>
     <h3>{{ 'sylius.review.header'|trans }}</h3>
-    {% render(url("sylius_partial_product_review_list", { 'slug': product.slug, limit: 3 })) %}
+    {% render(url('sylius_product_reviews', { 'productId': product.id, limit: 3 })) %}
     <hr />
-    {% render(url("sylius_partial_product_review_form", { 'slug': product.slug })) %}
+    {% render(url('sylius_product_review_create', { 'productId': product.id })) %}
 </div>
 {% endblock %}
 
@@ -153,5 +153,11 @@
     'bundles/syliusreview/js/sylius-review.js'
     %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
+    <script>
+        var createMessage = "{{ 'sylius.resource.create'|trans({'%resource%': 'sylius.review.product_review'|trans}, 'flashes') }}";
+        $(document).ready(function() {
+            initializeAjaxForm(createMessage);
+        });
+    </script>
     {% endjavascripts %}
 {% endblock %}

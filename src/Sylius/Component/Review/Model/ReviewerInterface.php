@@ -11,10 +11,12 @@
 
 namespace Sylius\Component\Review\Model;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
+
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface ReviewerInterface
+interface ReviewerInterface extends ResourceInterface
 {
     /**
      * @return string

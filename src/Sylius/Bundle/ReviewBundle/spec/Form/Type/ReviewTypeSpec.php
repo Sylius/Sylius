@@ -12,11 +12,14 @@
 namespace spec\Sylius\Bundle\ReviewBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 class ReviewTypeSpec extends ObjectBehavior
 {
@@ -32,42 +35,31 @@ class ReviewTypeSpec extends ObjectBehavior
 
     function it_is_abstract_type_object()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType');
+        $this->shouldHaveType(AbstractResourceType::class);
     }
 
     function it_builds_form(FormBuilderInterface $builder)
     {
         $builder
-            ->add('rating', 'choice', [
-                'choices' => [1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5],
-                'label' => 'sylius.form.review.rating',
-                'expanded' => true,
-                'multiple' => false,
-            ])
+            ->add('rating', 'choice', Argument::cetera())
             ->willReturn($builder)
             ->shouldBeCalled()
         ;
 
         $builder
-            ->add('author', 'sylius_customer_guest', [
-                'label' => false,
-            ])
+            ->add('author', 'sylius_customer_guest', Argument::cetera())
             ->willReturn($builder)
             ->shouldBeCalled()
         ;
 
         $builder
-            ->add('title', 'text', [
-                'label' => 'sylius.form.review.title',
-            ])
+            ->add('title', 'text', Argument::cetera())
             ->willReturn($builder)
             ->shouldBeCalled()
         ;
 
         $builder
-            ->add('comment', 'textarea', [
-                'label' => 'sylius.form.review.comment',
-            ])
+            ->add('comment', 'textarea', Argument::cetera())
             ->willReturn($builder)
             ->shouldBeCalled()
         ;
@@ -75,7 +67,7 @@ class ReviewTypeSpec extends ObjectBehavior
         $this->buildForm($builder, ['rating_steps' => 5]);
     }
 
-    function it_sets_default_options(OptionsResolverInterface $resolver)
+    function it_configures_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             [
@@ -84,7 +76,7 @@ class ReviewTypeSpec extends ObjectBehavior
             ]
         )->shouldBeCalled();
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 
     function it_has_name()

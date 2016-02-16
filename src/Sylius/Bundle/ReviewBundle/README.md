@@ -1,4 +1,4 @@
-SyliusReviewBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusReportBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusReportBundle)
+SyliusReviewBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusReviewBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusReviewBundle)
 ====================
 
 Sylius
@@ -21,18 +21,7 @@ Documentation
 Contributing
 ------------
 
-All informations about contributing to Sylius can be found on [this page](http://docs.sylius.org/en/latest/contributing/index.html).
-
-Mailing lists
--------------
-
-### Users
-
-Questions? Feel free to ask on [users mailing list](http://groups.google.com/group/sylius).
-
-### Developers
-
-To contribute and develop this bundle, use the [developers mailing list](http://groups.google.com/group/sylius-dev).
+All information's about contributing to Sylius can be found on [this page](http://docs.sylius.org/en/latest/contributing/index.html).
 
 Sylius twitter account
 ----------------------
@@ -62,10 +51,10 @@ This versioning method is same for all **Sylius** bundles and applications.
 MIT License
 -----------
 
-License can be found [here](https://github.com/Sylius/SyliusReportBundle/blob/master/Resources/meta/LICENSE).
+License can be found [here](https://github.com/Sylius/SyliusReviewBundle/blob/master/Resources/meta/LICENSE).
 
 Authors
 -------
 
-The bundle was originally created by [Mateusz Zalewski](mateusz.zalewski@lakion.com), based on [Daniel Richter](nexyz9@gmail.com) work.
+The bundle was originally created by [Mateusz Zalewski](mateusz.zalewski@lakion.com) and [Grzegorz Sadowski](grzegorz.sadowski@lakion.com), based on [Daniel Richter](nexyz9@gmail.com) work.
 See the list of [contributors](https://github.com/Sylius/SyliusReviewBundle/contributors).

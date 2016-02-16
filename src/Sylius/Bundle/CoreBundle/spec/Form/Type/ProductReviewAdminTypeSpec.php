@@ -12,10 +12,13 @@
 namespace spec\Sylius\Bundle\CoreBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Sylius\Bundle\CoreBundle\Form\Type\ProductReviewType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 class ProductReviewAdminTypeSpec extends ObjectBehavior
 {
@@ -31,62 +34,43 @@ class ProductReviewAdminTypeSpec extends ObjectBehavior
 
     function it_extends_product_review_admin_type()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\ProductReviewType');
+        $this->shouldHaveType(ProductReviewType::class);
     }
 
     function it_builds_form(FormBuilderInterface $builder)
     {
         $builder
-            ->add('rating', 'choice', [
-                'choices' => [1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5],
-                'label' => 'sylius.form.review.rating',
-                'expanded' => true,
-                'multiple' => false,
-            ])
+            ->add('rating', 'choice', Argument::cetera())
             ->willReturn($builder)
             ->shouldBeCalled()
         ;
 
         $builder
-            ->add('author', 'sylius_customer_guest', [
-                'label' => false,
-            ])
+            ->add('author', 'sylius_customer_guest', Argument::cetera())
             ->willReturn($builder)
             ->shouldBeCalled()
         ;
 
         $builder
-            ->add('title', 'text', [
-                'label' => 'sylius.form.review.title',
-            ])
+            ->add('title', 'text', Argument::cetera())
             ->willReturn($builder)
             ->shouldBeCalled()
         ;
 
         $builder
-            ->add('comment', 'textarea', [
-                'label' => 'sylius.form.review.comment',
-            ])
+            ->add('comment', 'textarea', Argument::cetera())
             ->willReturn($builder)
             ->shouldBeCalled()
         ;
 
         $builder
-            ->add('author', 'entity', [
-                'class' => 'Sylius\Component\Core\Model\Customer',
-                'label' => 'sylius.form.review.author',
-                'property' => 'email',
-            ])
+            ->add('author', 'entity', Argument::cetera())
             ->willReturn($builder)
             ->shouldBeCalled()
         ;
 
         $builder
-            ->add('reviewSubject', 'entity', [
-                'class' => 'Sylius\Component\Core\Model\Product',
-                'label' => 'sylius.form.review.product',
-                'property' => 'name',
-            ])
+            ->add('reviewSubject', 'entity', Argument::cetera())
             ->willReturn($builder)
             ->shouldBeCalled()
         ;

@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Review\Model\Review;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -25,6 +26,6 @@ class ProductReviewSpec extends ObjectBehavior
 
     function it_extends_review()
     {
-        $this->shouldHaveType('Sylius\Component\Review\Model\Review');
+        $this->shouldHaveType(Review::class);
     }
 }

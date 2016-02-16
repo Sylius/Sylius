@@ -13,11 +13,12 @@ namespace Sylius\Bundle\ReviewBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Daniel Richter <nexyz9@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 class ReviewType extends AbstractResourceType
 {
@@ -33,9 +34,9 @@ class ReviewType extends AbstractResourceType
      */
     public function __construct($dataClass, array $validationGroups = [], $subject)
     {
-        $this->subject = $subject;
-
         parent::__construct($dataClass, $validationGroups);
+
+        $this->subject = $subject;
     }
 
     /**
@@ -65,7 +66,7 @@ class ReviewType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'rating_steps' => 5,

@@ -22,6 +22,7 @@ imports:
     - suites/legacy/products.yml
     - suites/legacy/promotions.yml
     - suites/legacy/reports.yml
+    - suites/legacy/reviews.yml
     - suites/legacy/search.yml
     - suites/legacy/security.yml
     - suites/legacy/settings.yml

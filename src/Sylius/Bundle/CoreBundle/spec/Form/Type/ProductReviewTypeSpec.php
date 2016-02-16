@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ReviewBundle\Form\Type\ReviewType;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -30,7 +31,7 @@ class ProductReviewTypeSpec extends ObjectBehavior
 
     function it_extends_review_type()
     {
-        $this->shouldHaveType('Sylius\Bundle\ReviewBundle\Form\Type\ReviewType');
+        $this->shouldHaveType(ReviewType::class);
     }
 
     function it_has_name()

@@ -33,4 +33,4 @@ sylius:
             not_blank: Please enter your email.
             invalid: This email is invalid.
             unique: This email is already used.
-            registered: This email is already registered, please login or reset your password.
+            registered: This email is already registered, please login or use forgotten password.

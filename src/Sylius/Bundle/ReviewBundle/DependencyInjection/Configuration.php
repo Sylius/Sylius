@@ -11,7 +11,13 @@
 
 namespace Sylius\Bundle\ReviewBundle\DependencyInjection;
 
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Bundle\ReviewBundle\Doctrine\ORM\ReviewRepository;
+use Sylius\Bundle\ReviewBundle\Form\Type\ReviewType;
 use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Component\Review\Model\ReviewerInterface;
+use Sylius\Component\Review\Model\ReviewInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -38,7 +44,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
-                ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
             ->end()
         ;
 
@@ -67,14 +73,14 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode('model')->isRequired()->end()
-                                        ->scalarNode('interface')->defaultValue('Sylius\Component\Review\Model\ReviewInterface')->end()
-                                        ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
-                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->scalarNode('interface')->defaultValue(ReviewInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(ReviewRepository::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->cannotBeEmpty()->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()
                                             ->children()
-                                                ->scalarNode('default')->defaultValue('Sylius\Bundle\ReviewBundle\Form\Type\ReviewType')->cannotBeEmpty()->end()
+                                                ->scalarNode('default')->defaultValue(ReviewType::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('admin')->isRequired()->end()
                                             ->end()
                                         ->end()
@@ -102,7 +108,9 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode('model')->isRequired()->end()
-                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->scalarNode('interface')->defaultValue(ReviewerInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                                 ->arrayNode('validation_groups')

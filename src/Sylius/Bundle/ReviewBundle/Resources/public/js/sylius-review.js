@@ -7,40 +7,57 @@
  * file that was distributed with this source code.
  */
 
-$(document).ready(function(){
-    $("#reviewForm").submit(function(e){
+function initializeAjaxForm(successMessage) {
+    $("#reviewForm").submit(function(e) {
         e.preventDefault();
         var form = $(this);
 
         $.ajax({
             type: "POST",
-            url: location.href+"/product_review",
-            data: $(this).serialize(),
+            url: form.attr('action'),
+            data: parseFormToJson(form),
             dataType: "json",
-            success: function(data) {
-                if (data == 'success') {
-                    location.reload();
-                } else {
-                    renderErrorsOnProperFields(data, form);
-                }
+            accept: "application/json",
+            success: function(data, textStatus, xhr) {
+                completeRequest(form);
+                appendFlash(successMessage);
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                renderErrors(xhr, form);
             }
         });
     });
-});
+}
 
-function renderErrorsOnProperFields(data, form) {
+function renderErrors(xhr, form) {
     clearErrors(form);
 
-    $.each(data, function(key, value){
-        var element = form.find('#sylius_product_review_'+key.replace('data.', ''));
-
-        element.siblings('.form-error').remove();
-        element.parent().append('<span class="help-block form-error">'+value+'</span>');
-        element.parents('.form-group').addClass('has-error');
+    $.each(xhr.responseJSON.errors.errors, function(key, value) {
+        $('div.panel-body').addClass('has-error').prepend('<span class="help-block form-error">' + value + '</span>');
     });
 }
 
 function clearErrors(form) {
     form.find('.form-error').remove();
     form.find('.has-error').removeClass('has-error');
+}
+
+function parseFormToJson(form) {
+    var formJson = {};
+    $.each(form.serializeArray(), function(index, field) {
+        var name = field.name.replace('sylius_product_review[', '').replace(']', '');
+        formJson[name] = field.value || '';
+    });
+
+    return formJson;
+}
+
+function appendFlash(successMessage) {
+    $('<div class="alert alert-success"><a class="close" data-dismiss="alert" href="#">×</a>' + successMessage + '</div>').insertAfter('h1.logo');
+}
+
+function completeRequest(form) {
+    form[0].reset();
+    clearErrors(form);
+    $("html, body").animate({ scrollTop: 0 }, "slow");
 }

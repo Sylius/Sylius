@@ -17,28 +17,25 @@ use Sylius\Component\Review\Model\ReviewInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class AverageRatingCalculator implements AverageRatingCalculatorInterface
+class AverageRatingCalculator implements ReviewableRatingCalculatorInterface
 {
     /**
      * {@inheritdoc}
      */
     public function calculate(ReviewableInterface $reviewable)
     {
-        if (0 === count($reviews = $reviewable->getReviews())) {
-            return 0;
-        }
-
-        $sum = 0.0;
+        $sum = 0;
         $reviewsNumber = 0;
+        $reviews = $reviewable->getReviews();
 
         foreach ($reviews as $review) {
             if (ReviewInterface::STATUS_ACCEPTED === $review->getStatus()) {
                 ++$reviewsNumber;
 
-                $sum = $sum + $review->getRating();
+                $sum += $review->getRating();
             }
         }
 
-        return $sum / $reviewsNumber;
+        return 0 !== $reviewsNumber ? $sum / $reviewsNumber : 0;
     }
 }

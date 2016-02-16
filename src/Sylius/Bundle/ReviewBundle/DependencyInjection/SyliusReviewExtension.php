@@ -82,8 +82,8 @@ class SyliusReviewExtension extends AbstractResourceExtension
     }
 
     /**
-     * @param string           $name
-     * @param array            $parameters
+     * @param string $name
+     * @param array $parameters
      * @param ContainerBuilder $container
      */
     private function addRequiredArgumentsToForms($name, array $parameters, ContainerBuilder $container)
@@ -100,7 +100,7 @@ class SyliusReviewExtension extends AbstractResourceExtension
     }
 
     /**
-     * @param string           $resourceName
+     * @param string $resourceName
      * @param ContainerBuilder $container
      */
     private function addProperTagToReviewDeleteListener($resourceName, ContainerBuilder $container)
@@ -110,6 +110,6 @@ class SyliusReviewExtension extends AbstractResourceExtension
         }
 
         $listenerDefinition = $container->getDefinition('sylius.listener.review_delete');
-        $listenerDefinition->addTag('kernel.event_listener', ['event' => 'sylius.'.$resourceName.'_review.post_delete', 'method' => 'recalculateSubjectRating']);
+        $listenerDefinition->addTag('doctrine.event_listener', ['event' => 'postRemove', 'method' => 'recalculateSubjectRating']);
     }
 }

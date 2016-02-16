@@ -28,7 +28,7 @@ class ReviewSpec extends ObjectBehavior
 
     function it_implements_review_interace()
     {
-        $this->shouldImplement('Sylius\Component\Review\Model\ReviewInterface');
+        $this->shouldImplement(ReviewInterface::class);
     }
 
     function it_has_title()
@@ -57,7 +57,6 @@ class ReviewSpec extends ObjectBehavior
 
     function it_has_status()
     {
-        $this->setStatus(ReviewInterface::STATUS_NEW);
         $this->getStatus()->shouldReturn(ReviewInterface::STATUS_NEW);
     }
 

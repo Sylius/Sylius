@@ -16,17 +16,17 @@
 
     <mapped-superclass name="Sylius\Component\Review\Model\Review" table="sylius_review">
         <id name="id" type="integer" column="id">
-            <generator strategy="AUTO"/>
+            <generator strategy="AUTO" />
         </id>
-        <field name="title" type="string" column="title"/>
-        <field name="rating" type="integer" column="rating"/>
+        <field name="title" type="string" column="title" />
+        <field name="rating" type="integer" column="rating" />
         <field name="comment" type="text" column="comment" nullable="true" />
-        <field name="status" type="string" column="status" length="255"/>
+        <field name="status" type="string" column="status" length="255" />
         <field name="createdAt" column="created_at" type="datetime">
-            <gedmo:timestampable on="create"/>
+            <gedmo:timestampable on="create" />
         </field>
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
-            <gedmo:timestampable on="update"/>
+            <gedmo:timestampable on="update" />
         </field>
     </mapped-superclass>
 

@@ -28,8 +28,8 @@ class CustomerGuestType extends AbstractResourceType
     private $guestCustomerSubscriber;
 
     /**
-     * @param string                   $dataClass
-     * @param array                    $validationGroups
+     * @param string $dataClass
+     * @param array $validationGroups
      * @param EventSubscriberInterface $guestCustomerSubscriber
      */
     public function __construct($dataClass, array $validationGroups, EventSubscriberInterface $guestCustomerSubscriber)

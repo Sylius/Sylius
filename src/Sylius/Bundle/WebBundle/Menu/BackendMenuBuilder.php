@@ -374,8 +374,8 @@ class BackendMenuBuilder extends MenuBuilder
 
     /**
      * @param ItemInterface $menu
-     * @param array         $childOptions
-     * @param string        $section
+     * @param array $childOptions
+     * @param string $section
      */
     public function addReviewsMenu(ItemInterface $menu, array $childOptions, $section)
     {

@@ -65,7 +65,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * @var float
      */
-    protected $averageRating;
+    protected $averageRating = 0;
 
     public function __construct()
     {
@@ -368,7 +368,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     }
 
     /**
-     * @return Collection|ReviewInterface[]
+     * {@inheritdoc}
      */
     public function getReviews()
     {
@@ -376,15 +376,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     }
 
     /**
-     * @param Collection $reviews
-     */
-    public function setReviews(Collection $reviews)
-    {
-        $this->reviews = $reviews;
-    }
-
-    /**
-     * @param ReviewInterface $review
+     * {@inheritdoc}
      */
     public function addReview(ReviewInterface $review)
     {
@@ -392,7 +384,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     }
 
     /**
-     * @param ReviewInterface $review
+     * {@inheritdoc}
      */
     public function removeReview(ReviewInterface $review)
     {
@@ -400,7 +392,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     }
 
     /**
-     * @param float $averageRating
+     * {@inheritdoc}
      */
     public function setAverageRating($averageRating)
     {
@@ -408,7 +400,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     }
 
     /**
-     * @return float
+     * {@inheritdoc}
      */
     public function getAverageRating()
     {

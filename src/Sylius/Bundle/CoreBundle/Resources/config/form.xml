@@ -48,8 +48,6 @@
         <parameter key="sylius.form.type.promotion_rule.customer_group_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\CustomerGroupType</parameter>
         <parameter key="sylius.form.type.promotion_action.shipping_discount_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Action\ShippingDiscountConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_action.add_product_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Action\AddProductConfigurationType</parameter>
-
-        <parameter key="sylius.form.type.product_review_admin.class">Sylius\Bundle\CoreBundle\Form\Type\ProductReviewAdminType</parameter>
     </parameters>
 
     <services>

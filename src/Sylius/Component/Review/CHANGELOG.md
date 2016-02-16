@@ -1,6 +1,6 @@
 CHANGELOG
 =========
 
-### v0.16.0
+### v0.17.0
 
 * Initial dev release.

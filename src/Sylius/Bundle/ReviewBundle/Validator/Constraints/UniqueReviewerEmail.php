@@ -15,8 +15,9 @@ use Symfony\Component\Validator\Constraint;
 
 /**
  * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class UniqueUserEmail extends Constraint
+class UniqueReviewerEmail extends Constraint
 {
     /**
      * @var string
@@ -28,7 +29,7 @@ class UniqueUserEmail extends Constraint
      */
     public function validatedBy()
     {
-        return 'unique_user_email_validator';
+        return 'sylius_unique_reviewer_email_validator';
     }
 
     /**

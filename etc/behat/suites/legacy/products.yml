@@ -16,5 +16,6 @@ default:
                 - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
                 - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
+                - Sylius\Bundle\ReviewBundle\Behat\ReviewContext
             filters:
                 tags: "@legacy_products"

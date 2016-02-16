@@ -40,8 +40,8 @@ class ReviewCreateListenerSpec extends ObjectBehavior
         GenericEvent $event,
         ReviewInterface $review
     ) {
-        $event->getSubject()->willReturn($review)->shouldBeCalled();
-        $customerContext->getCustomer()->willReturn($customer)->shouldBeCalled();
+        $event->getSubject()->willReturn($review);
+        $customerContext->getCustomer()->willReturn($customer);
         $review->getAuthor()->willReturn(null);
 
         $review->setAuthor($customer)->shouldBeCalled();
@@ -53,7 +53,7 @@ class ReviewCreateListenerSpec extends ObjectBehavior
     {
         $event->getSubject()->willReturn('badObject')->shouldBeCalled();
 
-        $this->shouldThrow(new UnexpectedTypeException('badObject', 'Sylius\Component\Review\Model\ReviewInterface'))->during('ensureReviewHasAuthor', [$event]);
+        $this->shouldThrow(new UnexpectedTypeException('badObject', ReviewInterface::class))->during('ensureReviewHasAuthor', [$event]);
     }
 
     function it_does_nothing_if_review_already_has_author(
@@ -62,8 +62,8 @@ class ReviewCreateListenerSpec extends ObjectBehavior
         GenericEvent $event,
         ReviewInterface $review
     ) {
-        $event->getSubject()->willReturn($review)->shouldBeCalled();
-        $review->getAuthor()->willReturn($existingAuthor)->shouldBeCalled();
+        $event->getSubject()->willReturn($review);
+        $review->getAuthor()->willReturn($existingAuthor);
 
         $customerContext->getCustomer()->shouldNotBeCalled();
 

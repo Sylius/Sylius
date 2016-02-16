@@ -43,7 +43,7 @@ class ProductDeleteListener
             return;
         }
 
-        $reviewManager = $args->getEntityManager();
+        $reviewManager = $this->container->get('sylius.manager.product_review');
         $reviewRepository = $this->container->get('sylius.repository.product_review');
         $reviews = $reviewRepository->findBy(['reviewSubject' => $product]);
 
@@ -51,7 +51,7 @@ class ProductDeleteListener
             $reviewManager->remove($review);
         }
 
-        $product->setAverageRating(null);
+        $product->setAverageRating(0);
 
         $reviewManager->flush();
     }

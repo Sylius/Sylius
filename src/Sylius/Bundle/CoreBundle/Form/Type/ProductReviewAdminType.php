@@ -11,8 +11,10 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
+use Sylius\Component\Core\Model\Customer;
+use Sylius\Component\Core\Model\Product;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Daniel Richter <nexyz9@gmail.com>
@@ -30,12 +32,12 @@ class ProductReviewAdminType extends ProductReviewType
 
         $builder
             ->add('reviewSubject', 'entity', [
-                'class' => 'Sylius\Component\Core\Model\Product',
+                'class' => Product::class,
                 'label' => 'sylius.form.review.product',
                 'property' => 'name',
             ])
             ->add('author', 'entity', [
-                'class' => 'Sylius\Component\Core\Model\Customer',
+                'class' => Customer::class,
                 'label' => 'sylius.form.review.author',
                 'property' => 'email',
             ])
@@ -45,7 +47,7 @@ class ProductReviewAdminType extends ProductReviewType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'rating_steps' => 5,
@@ -59,6 +61,6 @@ class ProductReviewAdminType extends ProductReviewType
      */
     public function getName()
     {
-        return sprintf('sylius_%s_review_admin', $this->subject);
+        return 'sylius_product_review_admin';
     }
 }

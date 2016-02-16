@@ -675,52 +675,6 @@ sylius:
         taxes: Taxes
         total: Total
         update_header: Editing order
-        customer: customer
-        currency: Currency
-        state: State
-        immutable_warning: Already shipped orders are immutable.
-        promotion_coupons: Coupons
-        no_promotion: No coupons were used.order:
-        adjustments:
-            manage: Manage adjustments
-            type: Type
-            description: Description
-            amount: Amount
-            locked: Locked?
-            lock: Lock
-            unlock: Unlock
-            lock_all: Lock all adjustments
-            unlock_all: Unlock all adjustments
-        comment:
-            header: Order comments
-            comment: Comment
-            author: Author
-            created_at: Created at
-            notify: Notification
-            state: State
-            customer:
-                notified: Customer notified
-                not_notified: Customer not notified
-            no_comment: No comment
-    route:
-        create: Create route
-        create_header: Creating route
-        id: ID
-        index_header: Routes
-        name: Name
-        no_results: There are no routes to display.
-        page: Page
-        title: Title
-        update_header: Editing route
-        view: View
-    redirect_route:
-        create: Create redirect route
-        create_header: Creating redirect route
-        id: ID
-        index_header: Redirect route
-        no_results: There are no redirect routes to display.
-        title: Title
-        update_header: Editing redirect route
     review:
         create: New review
         index: Product reviews
@@ -736,43 +690,9 @@ sylius:
         created_at: Created at
         details: Review details
         editing: Editing review
-    shipment:
-        ship: Ship
-        created_at: Created at
-        id: ID
-        index_header: Shipments
-        inventory_state: Inventory state
-        manage: Manage shipments
-        method: Method
-        modified: Modified
-        name: Name
-        no_items: There are no items to display.
-        no_results: There are no shipments to display.
-        order: Order
-        show_header: Shipment details
-        sku: SKU
-        state: State
-        tracking_code: Tracking Code
-        update: Edit
-        update_header: Editing shipment
-        updated_at: Last update
-    channel:
-        create: Add channel
-        created_at: Created at
-        code: Code
-        currency_default: Default currency
-        enabled: Enabled
-        id: ID
-        index_header: Channels
-        locale_default: Default locale
-        manage: Manage channels
-        create_header: Add channel
-        name: Name
-        url: Url
-        no_results: There are no channels configured.
-        update: Edit
-        update_header: Editing channel
-        updated_at: Last update
+        header: Product reviews
+        product_review: Product review
+        no_results: There are no reviews for this product.
     order_item:
         product: Item
         quantity: Qty

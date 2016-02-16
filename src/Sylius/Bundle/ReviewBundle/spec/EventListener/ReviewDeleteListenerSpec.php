@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\ReviewBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ReviewBundle\Updater\ReviewableAverageRatingUpdaterInterface;
+use Sylius\Bundle\ReviewBundle\Updater\ReviewableRatingUpdaterInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
@@ -24,9 +24,9 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class ReviewDeleteListenerSpec extends ObjectBehavior
 {
-    function let(ReviewableAverageRatingUpdaterInterface $reviewableAverageRatingUpdater)
+    function let(ReviewableRatingUpdaterInterface $averageRatingUpdater)
     {
-        $this->beConstructedWith($reviewableAverageRatingUpdater);
+        $this->beConstructedWith($averageRatingUpdater);
     }
 
     function it_is_initializable()
@@ -34,33 +34,37 @@ class ReviewDeleteListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ReviewBundle\EventListener\ReviewDeleteListener');
     }
 
-    function it_recalculates_subject_rating_on_accepted_review_deletion($reviewableAverageRatingUpdater, GenericEvent $event, ReviewInterface $review, ReviewableInterface $reviewSubject)
-    {
-        $event->getSubject()->willReturn($review)->shouldBeCalled();
-        $review->getStatus()->willReturn(ReviewInterface::STATUS_ACCEPTED)->shouldBeCalled();
-        $review->getReviewSubject()->willReturn($reviewSubject)->shouldBeCalled();
+    function it_recalculates_subject_rating_on_accepted_review_deletion(
+        $averageRatingUpdater,
+        GenericEvent $event,
+        ReviewInterface $review,
+        ReviewableInterface $reviewSubject
+    ) {
+        $event->getSubject()->willReturn($review);
+        $review->getStatus()->willReturn(ReviewInterface::STATUS_ACCEPTED);
+        $review->getReviewSubject()->willReturn($reviewSubject);
 
-        $reviewableAverageRatingUpdater->update($reviewSubject)->shouldBeCalled();
-
-        $this->recalculateSubjectRating($event);
-    }
-
-    function it_does_nothing_if_review_was_new($reviewableAverageRatingUpdater, GenericEvent $event, ReviewInterface $review)
-    {
-        $event->getSubject()->willReturn($review)->shouldBeCalled();
-        $review->getStatus()->willReturn(ReviewInterface::STATUS_NEW)->shouldBeCalled();
-
-        $reviewableAverageRatingUpdater->update(Argument::type('Sylius\Component\Review\Model\ReviewableInterface'))->shouldNotBeCalled();
+        $averageRatingUpdater->update($reviewSubject)->shouldBeCalled();
 
         $this->recalculateSubjectRating($event);
     }
 
-    function it_does_nothing_if_review_was_rejected($reviewableAverageRatingUpdater, GenericEvent $event, ReviewInterface $review)
+    function it_does_nothing_if_review_was_new($averageRatingUpdater, GenericEvent $event, ReviewInterface $review)
     {
-        $event->getSubject()->willReturn($review)->shouldBeCalled();
-        $review->getStatus()->willReturn(ReviewInterface::STATUS_REJECTED)->shouldBeCalled();
+        $event->getSubject()->willReturn($review);
+        $review->getStatus()->willReturn(ReviewInterface::STATUS_NEW);
 
-        $reviewableAverageRatingUpdater->update(Argument::type('Sylius\Component\Review\Model\ReviewableInterface'))->shouldNotBeCalled();
+        $averageRatingUpdater->update(Argument::type(ReviewableInterface::class))->shouldNotBeCalled();
+
+        $this->recalculateSubjectRating($event);
+    }
+
+    function it_does_nothing_if_review_was_rejected($averageRatingUpdater, GenericEvent $event, ReviewInterface $review)
+    {
+        $event->getSubject()->willReturn($review);
+        $review->getStatus()->willReturn(ReviewInterface::STATUS_REJECTED);
+
+        $averageRatingUpdater->update(Argument::type(ReviewableInterface::class))->shouldNotBeCalled();
 
         $this->recalculateSubjectRating($event);
     }
@@ -70,7 +74,7 @@ class ReviewDeleteListenerSpec extends ObjectBehavior
         $event->getSubject()->willReturn('badObject');
 
         $this
-            ->shouldThrow(new UnexpectedTypeException('badObject', 'Sylius\Component\Review\Model\ReviewInterface'))
+            ->shouldThrow(new UnexpectedTypeException('badObject', ReviewInterface::class))
             ->during('recalculateSubjectRating', [$event])
         ;
     }

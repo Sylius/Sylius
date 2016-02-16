@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Bundle\ReviewBundle\EventListener;
 
+use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadataFactory;
@@ -50,7 +51,7 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
 
     function it_implements_event_subscriber()
     {
-        $this->shouldImplement('Doctrine\Common\EventSubscriber');
+        $this->shouldImplement(EventSubscriber::class);
     }
 
     function it_has_subscribed_events()
@@ -93,7 +94,7 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
             'fieldName' => 'author',
             'targetEntity' => 'AcmeBundle\Entity\ReviewerModel',
             'joinColumn' => [
-                'name' => 'customer_id',
+                'name' => 'author_id',
                 'referencedColumnName' => 'id',
                 'nullable' => false,
                 'onDelete' => 'CASCADE',

@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    review:
-        header: Product reviews
-        no_results: There are no reviews for this product.
     form:
         review:
             header: Add a review
@@ -18,4 +15,3 @@ sylius:
                 approved: Approved
                 rejected: Rejected
             submit: Submit
-            product: Product

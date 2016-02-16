@@ -16,8 +16,9 @@ use Sylius\Component\Review\Model\ReviewInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-interface ReviewableAverageRatingUpdaterInterface
+interface ReviewableRatingUpdaterInterface
 {
     /**
      * @param ReviewableInterface $reviewSubject

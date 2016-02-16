@@ -11,12 +11,17 @@
 
 namespace Sylius\Component\Review\Model;
 
+use Sylius\Component\Resource\Model\TimestampableTrait;
+
 /**
  * @author Daniel Richter <nexyz9@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 class Review implements ReviewInterface
 {
+    use TimestampableTrait;
+
     /**
      * @var int
      */
@@ -52,19 +57,6 @@ class Review implements ReviewInterface
      */
     protected $reviewSubject;
 
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
-
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -172,37 +164,5 @@ class Review implements ReviewInterface
     public function setReviewSubject(ReviewableInterface $reviewSubject)
     {
         $this->reviewSubject = $reviewSubject;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
     }
 }

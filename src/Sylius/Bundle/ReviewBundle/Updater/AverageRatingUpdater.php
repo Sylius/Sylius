@@ -12,17 +12,18 @@
 namespace Sylius\Bundle\ReviewBundle\Updater;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Component\Review\Calculator\AverageRatingCalculatorInterface;
+use Sylius\Component\Review\Calculator\ReviewableRatingCalculatorInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class ReviewableAverageRatingUpdater implements ReviewableAverageRatingUpdaterInterface
+class AverageRatingUpdater implements ReviewableRatingUpdaterInterface
 {
     /**
-     * @var AverageRatingCalculatorInterface
+     * @var ReviewableRatingCalculatorInterface
      */
     private $averageRatingCalculator;
 
@@ -32,10 +33,10 @@ class ReviewableAverageRatingUpdater implements ReviewableAverageRatingUpdaterIn
     private $reviewSubjectManager;
 
     /**
-     * @param AverageRatingCalculatorInterface $averageRatingCalculator
-     * @param ObjectManager                    $reviewSubjectManager
+     * @param ReviewableRatingCalculatorInterface $averageRatingCalculator
+     * @param ObjectManager $reviewSubjectManager
      */
-    public function __construct(AverageRatingCalculatorInterface $averageRatingCalculator, ObjectManager $reviewSubjectManager)
+    public function __construct(ReviewableRatingCalculatorInterface $averageRatingCalculator, ObjectManager $reviewSubjectManager)
     {
         $this->averageRatingCalculator = $averageRatingCalculator;
         $this->reviewSubjectManager = $reviewSubjectManager;
