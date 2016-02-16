@@ -46,4 +46,4 @@ default:
 
     gherkin:
         filters:
-            tags: "~@todo && ~@ignore"
+            tags: "~@todo"

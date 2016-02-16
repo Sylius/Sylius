@@ -7,7 +7,6 @@ imports:
     - suites/legacy/cart.yml
     - suites/legacy/channels.yml
     - suites/legacy/checkout.yml
-    - suites/legacy/contact.yml
     - suites/legacy/currencies.yml
     - suites/legacy/dashboard.yml
     - suites/legacy/emails.yml
