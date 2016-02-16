@@ -9,8 +9,7 @@ Feature: Apply correct shipping fee on order
         And the store has a product "PHP T-Shirt" priced at "€100.00"
         And the store has "DHL" shipping method with "€10.00" fee
         And the store has "FedEx" shipping method with "€30.00" fee
-        And there is user "john@example.com" identified by "password123"
-        And I am logged in as "john@example.com"
+        And I am logged in customer
 
     @ui
     Scenario: Adding proper shipping fee
