@@ -40,7 +40,10 @@ final class ContextRegistry
     public function getClass($serviceId)
     {
         if (!isset($this->registry[$serviceId])) {
-            throw new \InvalidArgumentException();
+            throw new \InvalidArgumentException(sprintf(
+                'Could not find class for service with id "%s". Make sure you tagged the context with "sylius.behat.context".',
+                $serviceId
+            ));
         }
 
         return $this->registry[$serviceId];
