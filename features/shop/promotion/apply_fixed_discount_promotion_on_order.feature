@@ -9,7 +9,7 @@ Feature: Apply fixed discount promotion on order
         And the store has a product "PHP T-Shirt" priced at "€100.00"
         And the store has a product "PHP Mug" priced at "€6.00"
 
-    @todo
+    @ui
     Scenario: Receiving fixed discount for my cart
         Given there is a promotion "Holiday promotion"
         And it gives "€10.00" fixed discount to every order

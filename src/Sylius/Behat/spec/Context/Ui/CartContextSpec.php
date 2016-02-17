@@ -54,4 +54,12 @@ class CartContextSpec extends ObjectBehavior
 
         $this->myCartTaxesShouldBe('$50.00');
     }
+
+    function it_checks_if_cart_has_given_promotion_total(CartSummaryPage $cartSummaryPage)
+    {
+        $cartSummaryPage->open()->shouldBeCalled();
+        $cartSummaryPage->getPromotionTotal()->willReturn('$50.00');
+
+        $this->myCartPromotionsShouldBe('$50.00');
+    }
 }
