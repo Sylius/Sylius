@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Locale;
 
-use Sylius\Component\Core\Channel\ChannelContextInterface;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 
@@ -66,7 +66,7 @@ class ChannelAwareLocaleProvider implements LocaleProviderInterface
      */
     protected function getEnabledLocalesCodes()
     {
-        $localesCodes = array();
+        $localesCodes = [];
 
         /** @var LocaleInterface[] $locales */
         $locales = $this->channelContext->getChannel()->getLocales();

@@ -55,7 +55,7 @@
             {% endif %}
             <tr>
                 <td><strong>{{ 'sylius.user.username'|trans }}</strong></td>
-                <td>
+                <td id="username">
                 {% if customer.user is not null %}
                     {{ customer.user.username }}
                 {% endif %}
@@ -67,7 +67,7 @@
             </tr>
             <tr>
                 <td><strong>{{ 'sylius.user.enabled'|trans }}</strong></td>
-                <td>
+                <td id="enabled">
                     {% if customer.user is not null %}
                         {{ state_label(customer.user.enabled) }}
                     {% endif %}

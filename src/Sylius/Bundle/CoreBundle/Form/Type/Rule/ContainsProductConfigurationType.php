@@ -14,27 +14,24 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Rule;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * Contains product rule configuration form type.
- *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
 class ContainsProductConfigurationType extends AbstractType
 {
-    protected $validationGroups;
-
     /**
      * @var ProductVariantRepositoryInterface
      */
     protected $variantRepository;
 
-    public function __construct(array $validationGroups, ProductVariantRepositoryInterface $variantRepository)
+    /**
+     * @param ProductVariantRepositoryInterface $variantRepository
+     */
+    public function __construct(ProductVariantRepositoryInterface $variantRepository)
     {
-        $this->validationGroups  = $validationGroups;
         $this->variantRepository = $variantRepository;
     }
 
@@ -43,35 +40,34 @@ class ContainsProductConfigurationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $variantRepository = $this->variantRepository;
-
         $builder
-            ->add('variant', 'sylius_entity_to_identifier', array(
-                'label'         => 'sylius.form.action.add_product_configuration.variant',
-                'class'         => $variantRepository->getClassName(),
-                'query_builder' => function () use ($variantRepository) {
-                    return $variantRepository->getFormQueryBuilder();
+            ->add('variant', 'sylius_entity_to_identifier', [
+                'label' => 'sylius.form.action.add_product_configuration.variant',
+                'class' => $this->variantRepository->getClassName(),
+                'query_builder' => function () {
+                    return $this->variantRepository->getFormQueryBuilder();
                 },
-                'constraints'   => array(
+                'constraints' => [
                     new NotBlank(),
-                    new Type(array('type' => 'numeric')),
-                )
-            ))
-            ->add('exclude', 'checkbox', array(
+                    new Type(['type' => 'numeric']),
+                ],
+            ])
+            ->add('count', 'integer', [
+                'label' => 'sylius.form.rule.item_count_configuration.count',
+                'constraints' => [
+                    new NotBlank(),
+                    new Type(['type' => 'numeric']),
+                ],
+            ])
+            ->add('equal', 'checkbox', [
+                'label' => 'sylius.form.rule.item_count_configuration.equal',
+                'constraints' => [
+                    new Type(['type' => 'bool']),
+                ],
+            ])
+            ->add('exclude', 'checkbox', [
                 'label' => 'sylius.form.rule.contains_product_configuration.exclude',
-            ))
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'validation_groups' => $this->validationGroups,
-            ))
+            ])
         ;
     }
 

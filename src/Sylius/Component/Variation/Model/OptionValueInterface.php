@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c); Paweł Jędrzejewski
+ * (c) Paweł Jędrzejewski
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,21 +11,20 @@
 
 namespace Sylius\Component\Variation\Model;
 
+use Sylius\Component\Resource\Model\CodeAwareInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
+
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OptionValueInterface
+interface OptionValueInterface extends ResourceInterface, CodeAwareInterface
 {
     /**
-     * Get option.
-     *
      * @return OptionInterface
      */
     public function getOption();
 
     /**
-     * Set option.
-     *
      * @param OptionInterface $option
      */
     public function setOption(OptionInterface $option = null);

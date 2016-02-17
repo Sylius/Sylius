@@ -40,12 +40,12 @@ EOT
         $output->writeln(sprintf('Creating Sylius database for environment <info>%s</info>.', $this->getEnvironment()));
 
         if (!$this->isDatabasePresent()) {
-            $commands = array(
+            $commands = [
                 'doctrine:database:create',
                 'doctrine:schema:create',
                 'cache:clear',
-                'doctrine:phpcr:repository:init'
-            );
+                'doctrine:phpcr:repository:init',
+            ];
 
             $this->runCommands($commands, $input, $output);
 
@@ -53,10 +53,10 @@ EOT
         }
 
         $dialog = $this->getHelper('dialog');
-        $commands = array();
+        $commands = [];
 
         if ($input->getOption('no-interaction')) {
-            $commands['doctrine:schema:update'] = array('--force' => true);
+            $commands['doctrine:schema:update'] = ['--force' => true];
         } else {
             if ($dialog->askConfirmation(
                 $output,
@@ -64,7 +64,7 @@ EOT
                 false
             )
             ) {
-                $commands['doctrine:database:drop'] = array('--force' => true);
+                $commands['doctrine:database:drop'] = ['--force' => true];
                 $commands[] = 'doctrine:database:create';
                 $commands[] = 'doctrine:schema:create';
             } elseif ($this->isSchemaPresent()) {
@@ -74,7 +74,7 @@ EOT
                     false
                 )
                 ) {
-                    $commands['doctrine:schema:drop'] = array('--force' => true);
+                    $commands['doctrine:schema:drop'] = ['--force' => true];
                     $commands[] = 'doctrine:schema:create';
                 }
             }
@@ -84,15 +84,15 @@ EOT
         $commands[] = 'doctrine:phpcr:repository:init';
         $commands[] = 'sylius:search:index';
         $commands[] = 'sylius:rbac:initialize';
-        $commands['doctrine:migrations:version'] = array(
+        $commands['doctrine:migrations:version'] = [
             '--add' => true,
             '--all' => true,
             '--no-interaction' => true,
-        );
+        ];
 
         $this->runCommands($commands, $input, $output);
 
-        $this->commandExecutor->runCommand('sylius:install:sample-data', array(), $output);
+        $this->commandExecutor->runCommand('sylius:install:sample-data', [], $output);
     }
 
     /**
@@ -129,7 +129,7 @@ EOT
     {
         $schemaManager = $this->getSchemaManager();
 
-        return $schemaManager->tablesExist(array('sylius_user'));
+        return $schemaManager->tablesExist(['sylius_user']);
     }
 
     /**

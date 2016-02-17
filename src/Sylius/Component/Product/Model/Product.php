@@ -15,6 +15,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Archetype\Model\ArchetypeInterface as BaseArchetypeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface as BaseAttributeValueInterface;
+use Sylius\Component\Resource\Model\SoftDeletableTrait;
+use Sylius\Component\Resource\Model\TimestampableTrait;
+use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Translation\Model\AbstractTranslatable;
 use Sylius\Component\Variation\Model\OptionInterface as BaseOptionInterface;
 use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
@@ -25,13 +28,15 @@ use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
  */
 class Product extends AbstractTranslatable implements ProductInterface
 {
+    use SoftDeletableTrait, TimestampableTrait, ToggleableTrait;
+
     /**
      * @var mixed
      */
     protected $id;
 
     /**
-     * @var null|ArchetypeInterface
+     * @var null|BaseArchetypeInterface
      */
     protected $archetype;
 
@@ -39,6 +44,11 @@ class Product extends AbstractTranslatable implements ProductInterface
      * @var \DateTime
      */
     protected $availableOn;
+
+    /**
+     * @var \DateTime
+     */
+    protected $availableUntil;
 
     /**
      * @var Collection|BaseAttributeValueInterface[]
@@ -56,28 +66,28 @@ class Product extends AbstractTranslatable implements ProductInterface
     protected $options;
 
     /**
-     * @var \DateTime
+     * @var Collection|ProductAssociationInterface[]
      */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $deletedAt;
+    protected $associations;
 
     public function __construct()
     {
         parent::__construct();
+
         $this->availableOn = new \DateTime();
         $this->attributes = new ArrayCollection();
+        $this->associations = new ArrayCollection();
         $this->variants = new ArrayCollection();
         $this->options = new ArrayCollection();
         $this->createdAt = new \DateTime();
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getName();
     }
 
     /**
@@ -89,7 +99,7 @@ class Product extends AbstractTranslatable implements ProductInterface
     }
 
     /**
-     * @return null|ArchetypeInterface
+     * {@inheritdoc}
      */
     public function getArchetype()
     {
@@ -97,7 +107,7 @@ class Product extends AbstractTranslatable implements ProductInterface
     }
 
     /**
-     * @param null|ArchetypeInterface $archetype
+     * {@inheritdoc}
      */
     public function setArchetype(BaseArchetypeInterface $archetype = null)
     {
@@ -189,7 +199,7 @@ class Product extends AbstractTranslatable implements ProductInterface
      */
     public function isAvailable()
     {
-        return new \DateTime() >= $this->availableOn;
+        return (new DateRange($this->availableOn, $this->availableUntil))->isInRange();
     }
 
     /**
@@ -206,6 +216,22 @@ class Product extends AbstractTranslatable implements ProductInterface
     public function setAvailableOn(\DateTime $availableOn = null)
     {
         $this->availableOn = $availableOn;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAvailableUntil()
+    {
+        return $this->availableUntil;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAvailableUntil(\DateTime $availableUntil = null)
+    {
+        $this->availableUntil = $availableUntil;
     }
 
     /**
@@ -259,10 +285,10 @@ class Product extends AbstractTranslatable implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function hasAttributeByName($attributeName)
+    public function hasAttributeByCode($attributeCode)
     {
         foreach ($this->attributes as $attribute) {
-            if ($attribute->getName() === $attributeName) {
+            if ($attribute->getAttribute()->getCode() === $attributeCode) {
                 return true;
             }
         }
@@ -273,10 +299,10 @@ class Product extends AbstractTranslatable implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function getAttributeByName($attributeName)
+    public function getAttributeByCode($attributeCode)
     {
         foreach ($this->attributes as $attribute) {
-            if ($attribute->getName() === $attributeName) {
+            if ($attributeCode === $attribute->getAttribute()->getCode()) {
                 return $attribute;
             }
         }
@@ -436,62 +462,52 @@ class Product extends AbstractTranslatable implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isDeleted()
-    {
-        return null !== $this->deletedAt && new \DateTime() >= $this->deletedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDeletedAt()
-    {
-        return $this->deletedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function setDeletedAt(\DateTime $deletedAt = null)
     {
-        $this->deletedAt = $deletedAt;
-
-        if(null === $deletedAt) {
-            foreach($this->variants as $variant) {
+        if (null === $deletedAt) {
+            foreach ($this->variants as $variant) {
                 $variant->setDeletedAt(null);
             }
         }
+
+        $this->deletedAt = $deletedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAssociations()
+    {
+        return $this->associations;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addAssociation(ProductAssociationInterface $association)
+    {
+        if (!$this->hasAssociation($association)) {
+            $this->associations->add($association);
+            $association->setOwner($this);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeAssociation(ProductAssociationInterface $association)
+    {
+        if ($this->hasAssociation($association)) {
+            $association->setOwner(null);
+            $this->associations->removeElement($association);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasAssociation(ProductAssociationInterface $association)
+    {
+        return $this->associations->contains($association);
     }
 }

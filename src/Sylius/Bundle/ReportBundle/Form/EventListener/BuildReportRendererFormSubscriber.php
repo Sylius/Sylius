@@ -46,10 +46,10 @@ class BuildReportRendererFormSubscriber implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT   => 'preBind',
-        );
+            FormEvents::PRE_SUBMIT => 'preBind',
+        ];
     }
 
     public function preSetData(FormEvent $event)
@@ -61,7 +61,7 @@ class BuildReportRendererFormSubscriber implements EventSubscriberInterface
         }
 
         if (!$report instanceof ReportInterface) {
-            throw new UnexpectedTypeException($report, 'Sylius\Component\Report\Model\ReportInterface');
+            throw new UnexpectedTypeException($report, ReportInterface::class);
         }
 
         $this->addConfigurationFields($event->getForm(), $report->getRenderer(), $report->getRendererConfiguration());
@@ -85,7 +85,7 @@ class BuildReportRendererFormSubscriber implements EventSubscriberInterface
      * @param string        $rendererType
      * @param array         $data
      */
-    public function addConfigurationFields(FormInterface $form, $rendererType, array $data = array())
+    public function addConfigurationFields(FormInterface $form, $rendererType, array $data = [])
     {
         $renderer = $this->rendererRegistry->get($rendererType);
         $formType = sprintf('sylius_renderer_%s', $renderer->getType());
@@ -95,7 +95,7 @@ class BuildReportRendererFormSubscriber implements EventSubscriberInterface
                 'rendererConfiguration',
                 $formType,
                 $data,
-                array('auto_initialize' => false)
+                ['auto_initialize' => false]
             );
         } catch (\InvalidArgumentException $e) {
             return;

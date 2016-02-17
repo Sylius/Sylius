@@ -13,6 +13,10 @@ namespace Sylius\Bundle\UserBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\User\Model\GroupInterface;
+use Sylius\Component\User\Model\UserInterface;
+use Sylius\Component\User\Model\UserOAuthInterface;
 
 /**
  * User bundle.
@@ -26,9 +30,9 @@ class SyliusUserBundle extends AbstractResourceBundle
      */
     public static function getSupportedDrivers()
     {
-        return array(
+        return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        );
+        ];
     }
 
     /**
@@ -36,12 +40,12 @@ class SyliusUserBundle extends AbstractResourceBundle
      */
     protected function getModelInterfaces()
     {
-        return array(
-            'Sylius\Component\User\Model\CustomerInterface'  => 'sylius.model.customer.class',
-            'Sylius\Component\User\Model\UserInterface'      => 'sylius.model.user.class',
-            'Sylius\Component\User\Model\UserOAuthInterface' => 'sylius.model.user_oauth.class',
-            'Sylius\Component\User\Model\GroupInterface'     => 'sylius.model.group.class',
-        );
+        return [
+            CustomerInterface::class => 'sylius.model.customer.class',
+            UserInterface::class => 'sylius.model.user.class',
+            UserOAuthInterface::class => 'sylius.model.user_oauth.class',
+            GroupInterface::class => 'sylius.model.group.class',
+        ];
     }
 
     /**

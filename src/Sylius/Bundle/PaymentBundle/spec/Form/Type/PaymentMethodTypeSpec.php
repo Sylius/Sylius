@@ -13,11 +13,9 @@ namespace spec\Sylius\Bundle\PaymentBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Payment\Calculator\FeeCalculatorInterface;
-use Sylius\Component\Registry\ServiceRegistryInterface;
-use Symfony\Component\Form\Form;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Symfony\Component\Form\FormBuilder;
-use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -26,78 +24,49 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class PaymentMethodTypeSpec extends ObjectBehavior
 {
-    function let(ServiceRegistryInterface $feeCalculatorRegistry)
+    function let()
     {
-        $this->beConstructedWith('PaymentMethod', array('sylius'), $feeCalculatorRegistry);
+        $this->beConstructedWith('PaymentMethod', ['sylius']);
     }
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_builds_form_with_proper_fields(
-        $feeCalculatorRegistry,
-        FeeCalculatorInterface $feeCalculatorTest,
-        Form $form,
-        FormBuilder $builder,
-        FormFactoryInterface $formFactory
+        FormBuilder $builder
     ) {
-        $builder->getFormFactory()->willReturn($formFactory)->shouldBeCalled();
+        $builder
+            ->add('translations', 'a2lix_translationsForms', Argument::any())
+            ->shouldBeCalled()
+            ->willReturn($builder);
 
         $builder
-            ->add('name', 'text', Argument::type('array'))
+            ->add('enabled', 'checkbox', Argument::any())
             ->willReturn($builder)
-            ->shouldBeCalled()
         ;
 
         $builder
-            ->add('description', 'textarea', Argument::type('array'))
+            ->add('gateway', 'sylius_payment_gateway_choice', Argument::any())
             ->willReturn($builder)
-            ->shouldBeCalled()
         ;
 
         $builder
-            ->add('enabled', 'checkbox', Argument::type('array'))
+            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
             ->willReturn($builder)
-            ->shouldBeCalled()
         ;
 
-        $builder
-            ->add('gateway', 'sylius_payment_gateway_choice', Argument::type('array'))
-            ->willReturn($builder)
-            ->shouldBeCalled()
-        ;
-
-        $builder
-            ->add('feeCalculator', 'sylius_fee_calculator_choice', Argument::type('array'))
-            ->willReturn($builder)
-            ->shouldBeCalled()
-        ;
-
-        $builder
-            ->addEventSubscriber(Argument::type('Sylius\Bundle\PaymentBundle\Form\Type\EventListener\BuildPaymentMethodFeeCalculatorFormSubscriber'))
-            ->shouldBeCalled()
-        ;
-
-        $feeCalculatorRegistry->all()->willReturn(array('test' => $feeCalculatorTest))->shouldBeCalled();
-
-        $feeCalculatorTest->getType()->willReturn('test')->shouldBeCalled();
-        $builder->create('feeCalculatorConfiguration', 'sylius_fee_calculator_test')->willReturn($builder)->shouldBeCalled();
-        $builder->getForm()->willReturn($form)->shouldBeCalled();
-
-        $builder->setAttribute('feeCalculatorsConfigurations', array('test' => $form))->willReturn($builder)->shouldBeCalled();
-
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
-                'data_class'        => 'PaymentMethod',
-                'validation_groups' => array('sylius'),
-            ))
+            ->setDefaults([
+                'data_class' => 'PaymentMethod',
+                'validation_groups' => ['sylius'],
+            ])
             ->shouldBeCalled()
         ;
 

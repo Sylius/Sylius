@@ -13,8 +13,10 @@ namespace spec\Sylius\Bundle\RbacBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\RbacBundle\Form\EventSubscriber\AddParentFormSubscriber;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Symfony\Component\Form\FormBuilder;
-use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -24,7 +26,7 @@ class PermissionTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Permission', array('sylius'));
+        $this->beConstructedWith('Permission', ['sylius']);
     }
 
     function it_is_initializable()
@@ -34,7 +36,7 @@ class PermissionTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_should_build_form_with_proper_fields(FormBuilder $builder)
@@ -46,27 +48,27 @@ class PermissionTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('parent', 'sylius_permission_choice', Argument::any())
+            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->addEventListener(FormEvents::PRE_SET_DATA, Argument::type('closure'))
+            ->addEventSubscriber(Argument::type(AddParentFormSubscriber::class))
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_should_define_assigned_data_class_and_validation_groups(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
-                'data_class'        => 'Permission',
-                'validation_groups' => array('sylius')
-            ))
+            ->setDefaults([
+                'data_class' => 'Permission',
+                'validation_groups' => ['sylius'],
+            ])
             ->shouldBeCalled()
         ;
 

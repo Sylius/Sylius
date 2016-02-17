@@ -62,15 +62,15 @@ class MailerListener
         if (!$user instanceof UserInterface) {
             throw new UnexpectedTypeException(
                 $user,
-                'Sylius\Component\User\Model\UserInterface'
+                UserInterface::class
             );
         }
 
         $this->emailSender->send($emailCode,
-            array($user->getEmail()),
-            array(
+            [$user->getEmail()],
+            [
                 'user' => $user,
-            )
+            ]
         );
     }
 }

@@ -11,13 +11,11 @@
 
 namespace Sylius\Component\Report\Model;
 
-interface ReportInterface
-{
-    /**
-     * @return mixed
-     */
-    public function getId();
+use Sylius\Component\Resource\Model\CodeAwareInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
+interface ReportInterface extends CodeAwareInterface, ResourceInterface
+{
     /**
      * @return string
      */

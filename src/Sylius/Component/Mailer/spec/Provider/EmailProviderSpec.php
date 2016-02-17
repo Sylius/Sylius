@@ -12,38 +12,42 @@
 namespace spec\Sylius\Component\Mailer\Provider;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Mailer\Model\EmailInterface;
+use Sylius\Component\Mailer\Provider\EmailProviderInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
+ * @mixin \Sylius\Component\Mailer\Provider\EmailProvider
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class EmailProviderSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $repository)
+    function let(FactoryInterface $factory, RepositoryInterface $repository)
     {
-        $emails = array(
-            'user_confirmation' => array(
-                'enabled'  => false,
-                'subject'  => 'Hello test!',
+        $emails = [
+            'user_confirmation' => [
+                'enabled' => false,
+                'subject' => 'Hello test!',
                 'template' => 'SyliusMailerBundle::default.html.twig',
-                'sender'   => array(
-                    'name'    => 'John Doe',
-                    'address' => 'john@doe.com'
-                )
-            ),
-            'order_cancelled' => array(
-                'enabled'  => false,
-                'subject'  => 'Hi test!',
+                'sender' => [
+                    'name' => 'John Doe',
+                    'address' => 'john@doe.com',
+                ],
+            ],
+            'order_cancelled' => [
+                'enabled' => false,
+                'subject' => 'Hi test!',
                 'template' => 'SyliusMailerBundle::default.html.twig',
-                'sender'   => array(
-                    'name'    => 'Rick Doe',
-                    'address' => 'john@doe.com'
-                )
-            )
-        );
-        $this->beConstructedWith($repository, $emails);
+                'sender' => [
+                    'name' => 'Rick Doe',
+                    'address' => 'john@doe.com',
+                ],
+            ],
+        ];
+
+        $this->beConstructedWith($factory, $repository, $emails);
     }
 
     function it_is_initializable()
@@ -53,20 +57,23 @@ class EmailProviderSpec extends ObjectBehavior
 
     function it_implements_Sylius_email_provider_interface()
     {
-        $this->shouldImplement('Sylius\Component\Mailer\Provider\EmailProviderInterface');
+        $this->shouldImplement(EmailProviderInterface::class);
     }
 
-    function it_looks_for_an_email_via_repository($repository, EmailInterface $email)
+    function it_looks_for_an_email_via_repository(RepositoryInterface $repository, EmailInterface $email)
     {
-        $repository->findOneBy(array('code' => 'user_confirmation'))->shouldBeCalled()->willReturn($email);
+        $repository->findOneBy(['code' => 'user_confirmation'])->willReturn($email);
 
         $this->getEmail('user_confirmation')->shouldReturn($email);
     }
 
-    function it_looks_for_email_in_configuration($repository, EmailInterface $email)
-    {
-        $repository->findOneBy(array('code' => 'user_confirmation'))->shouldBeCalled()->willReturn(null);
-        $repository->createNew()->shouldBeCalled()->willReturn($email);
+    function it_looks_for_an_email_in_configuration_when_not_found_via_repository(
+        FactoryInterface $factory,
+        RepositoryInterface $repository,
+        EmailInterface $email
+    ) {
+        $repository->findOneBy(['code' => 'user_confirmation'])->shouldBeCalled()->willReturn(null);
+        $factory->createNew()->shouldBeCalled()->willReturn($email);
 
         $email->setCode('user_confirmation')->shouldBeCalled();
         $email->setSubject('Hello test!')->shouldBeCalled();
@@ -80,7 +87,7 @@ class EmailProviderSpec extends ObjectBehavior
 
     function it_complains_if_email_does_not_exist($repository)
     {
-        $repository->findOneBy(array('code' => 'foo'))->shouldBeCalled()->willReturn(null);
+        $repository->findOneBy(['code' => 'foo'])->willReturn(null);
 
         $this
             ->shouldThrow(new \InvalidArgumentException('Email with code "foo" does not exist!'))

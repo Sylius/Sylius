@@ -21,7 +21,7 @@
     </parameters>
 
     <services>
-        <service id="sylius.templating.helper.rbac" class="%sylius.templating.helper.rbac.class%">
+        <service id="sylius.templating.helper.rbac" class="%sylius.templating.helper.rbac.class%" lazy="true">
             <argument type="service" id="sylius.authorization_checker" />
             <tag name="templating.helper" alias="sylius_rbac" />
         </service>

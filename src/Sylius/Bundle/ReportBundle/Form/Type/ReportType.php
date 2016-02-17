@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ReportBundle\Form\Type;
 
 use Sylius\Bundle\ReportBundle\Form\EventListener\BuildReportDataFetcherFormSubscriber;
 use Sylius\Bundle\ReportBundle\Form\EventListener\BuildReportRendererFormSubscriber;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,30 +21,22 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 
 /**
- * Report form type.
- *
  * @author Łukasz Chruściel <lchrusciel@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class ReportType extends AbstractResourceType
 {
     /**
-     * Renderer registry.
-     *
      * @var ServiceRegistryInterface
      */
     protected $rendererRegistry;
 
     /**
-     * DataFetcher registry.
-     *
      * @var ServiceRegistryInterface
      */
     protected $dataFetcherRegistry;
 
     /**
-     * Constructor.
-     *
      * @param ServiceRegistryInterface $rendererRegistry
      * @param ServiceRegistryInterface $dataFetcherRegistry
      */
@@ -65,32 +58,29 @@ class ReportType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->addEventSubscriber(new AddCodeFormSubscriber())
             ->addEventSubscriber(new BuildReportDataFetcherFormSubscriber($this->dataFetcherRegistry, $builder->getFormFactory()))
             ->addEventSubscriber(new BuildReportRendererFormSubscriber($this->rendererRegistry, $builder->getFormFactory()))
-            ->add('name', 'text', array(
+            ->add('name', 'text', [
                 'label' => 'sylius.form.report.name',
                 'required' => true,
-            ))
-            ->add('code', 'text', array(
-                'label'    => 'sylius.form.report.code',
-                'required' => true,
-            ))
-            ->add('description', 'textarea', array(
-                'label'    => 'sylius.form.report.description',
+            ])
+            ->add('description', 'textarea', [
+                'label' => 'sylius.form.report.description',
                 'required' => false,
-            ))
-            ->add('dataFetcher', 'sylius_data_fetcher_choice', array(
-                'label'    => 'sylius.form.report.data_fetcher',
-            ))
-            ->add('renderer', 'sylius_renderer_choice', array(
+            ])
+            ->add('dataFetcher', 'sylius_data_fetcher_choice', [
+                'label' => 'sylius.form.report.data_fetcher',
+            ])
+            ->add('renderer', 'sylius_renderer_choice', [
                 'label' => 'sylius.form.report.renderer.label',
-            ))
+            ])
         ;
 
-        $prototypes = array(
-            'renderers' => array(),
-            'dataFetchers' => array(),
-        );
+        $prototypes = [
+            'renderers' => [],
+            'dataFetchers' => [],
+        ];
 
         foreach ($this->rendererRegistry->all() as $type => $renderer) {
             $formType = sprintf('sylius_renderer_%s', $renderer->getType());
@@ -128,7 +118,7 @@ class ReportType extends AbstractResourceType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $view->vars['prototypes'] = array();
+        $view->vars['prototypes'] = [];
 
         foreach ($form->getConfig()->getAttribute('prototypes') as $group => $prototypes) {
             foreach ($prototypes as $type => $prototype) {

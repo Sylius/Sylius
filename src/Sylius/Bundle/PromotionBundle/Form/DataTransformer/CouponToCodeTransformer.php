@@ -60,7 +60,7 @@ class CouponToCodeTransformer implements DataTransformerInterface
         }
 
         if (!$coupon instanceof CouponInterface) {
-            throw new UnexpectedTypeException($coupon, 'Sylius\Component\Promotion\Model\CouponInterface');
+            throw new UnexpectedTypeException($coupon, CouponInterface::class);
         }
 
         return $coupon->getCode();
@@ -75,7 +75,7 @@ class CouponToCodeTransformer implements DataTransformerInterface
             return null;
         }
 
-        if (!$coupon = $this->couponRepository->findOneBy(array('code' => $code))) {
+        if (!$coupon = $this->couponRepository->findOneBy(['code' => $code])) {
             $this->dispatcher->dispatch(SyliusPromotionEvents::COUPON_INVALID, new GenericEvent());
 
             return null;

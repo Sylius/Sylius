@@ -24,28 +24,28 @@ class ActionBlockType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options = array())
+    public function buildForm(FormBuilderInterface $builder, array $options = [])
     {
         $builder
-            ->add('id', 'text', array(
-                'label' => 'sylius.form.action_block.id'
-            ))
-            ->add('actionName', 'text', array(
+            ->add('id', 'text', [
+                'label' => 'sylius.form.action_block.id',
+            ])
+            ->add('actionName', 'text', [
                 'label' => 'sylius.form.action_block.action_name',
-            ))
-            ->add('publishable', null, array(
-                'label' => 'sylius.form.action_block.publishable'
-                ))
-            ->add('publishStartDate', 'datetime', array(
+            ])
+            ->add('publishable', null, [
+                'label' => 'sylius.form.action_block.publishable',
+                ])
+            ->add('publishStartDate', 'datetime', [
                 'label' => 'sylius.form.action_block.publish_start_date',
-                'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'empty_value' => /* @Ignore */ ['year' => '-', 'month' => '-', 'day' => '-'],
                 'time_widget' => 'text',
-            ))
-            ->add('publishEndDate', 'datetime', array(
+            ])
+            ->add('publishEndDate', 'datetime', [
                 'label' => 'sylius.form.action_block.publish_end_date',
-                'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'empty_value' => /* @Ignore */ ['year' => '-', 'month' => '-', 'day' => '-'],
                 'time_widget' => 'text',
-            ))
+            ])
         ;
     }
 

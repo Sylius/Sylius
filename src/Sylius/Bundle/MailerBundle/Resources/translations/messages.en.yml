@@ -1,7 +1,6 @@
 sylius:
     form:
         email:
-            code: Code
             enabled: Enabled
             subject: Subject
             sender_name: Sender Name

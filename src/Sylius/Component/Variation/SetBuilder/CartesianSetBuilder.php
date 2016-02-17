@@ -49,15 +49,15 @@ class CartesianSetBuilder implements SetBuilderInterface
 
         $b = $this->build($setTuples, true);
 
-        $result = array();
+        $result = [];
 
         foreach ($a as $valueA) {
             if ($valueA) {
                 foreach ($b as $valueB) {
                     if ($isRecursiveStep) {
-                        $result[] = array_merge(array($valueA), (array) $valueB);
+                        $result[] = array_merge([$valueA], (array) $valueB);
                     } else {
-                        $result[] = array($k => $valueA) + array_combine($keys, (array) $valueB);
+                        $result[] = [$k => $valueA] + array_combine($keys, (array) $valueB);
                     }
                 }
             }

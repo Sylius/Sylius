@@ -3,9 +3,6 @@
 
 sylius:
   account:
-    address:
-      flash:
-        billing:
-          success: La dirección se ha establecido con éxito como dirección de facturación predeterminada.
-        shipping:
-          success: La dirección ha sido establecida con éxito como su dirección de envío por defecto.
+    password:
+      change_success: La contraseña ha sido cambiada
+      invalid: La contraseña actual es incorrecta

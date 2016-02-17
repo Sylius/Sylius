@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Taxonomy\Model\Taxonomy as BaseTaxonomy;
+use Sylius\Component\Taxonomy\Model\TaxonomyTranslation;
 
 class Taxonomy extends BaseTaxonomy
 {
@@ -21,8 +22,6 @@ class Taxonomy extends BaseTaxonomy
     public function __construct()
     {
         parent::__construct();
-
-        $this->setRoot(new Taxon());
     }
 
     /**
@@ -30,6 +29,6 @@ class Taxonomy extends BaseTaxonomy
      */
     public static function getTranslationClass()
     {
-        return 'Sylius\Component\Taxonomy\Model\TaxonomyTranslation';
+        return TaxonomyTranslation::class;
     }
 }

@@ -13,7 +13,7 @@ namespace Sylius\Bundle\UserBundle\Doctrine\ORM;
 
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\QueryBuilder;
-use Pagerfanta\PagerfantaInterface;
+use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
@@ -29,9 +29,9 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
      * @param array $sorting
      * @param bool  $deleted
      *
-     * @return PagerfantaInterface
+     * @return Pagerfanta
      */
-    public function createFilterPaginator($criteria = array(), $sorting = array(), $deleted = false)
+    public function createFilterPaginator($criteria = [], $sorting = [], $deleted = false)
     {
         $queryBuilder = parent::getCollectionQueryBuilder();
 
@@ -58,7 +58,7 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
 
         if (empty($sorting)) {
             if (!is_array($sorting)) {
-                $sorting = array();
+                $sorting = [];
             }
             $sorting['updatedAt'] = 'desc';
         }
@@ -71,7 +71,7 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
     /**
      * Get the user data for the details page.
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return null|UserInterface
      */
@@ -126,7 +126,7 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
      *
      * @return array
      */
-    public function getRegistrationStatistic(array $configuration = array())
+    public function getRegistrationStatistic(array $configuration = [])
     {
         $groupBy = '';
         foreach ($configuration['groupBy'] as $groupByArray) {

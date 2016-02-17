@@ -3,11 +3,13 @@
 
 sylius:
   form:
+    rule:
+      item_count_configuration:
+        count: Πλήθος
     shipment:
       state: Νομός
       states:
         checkout: Ολοκλήρωση αγορών
-        dispatched: Αποστέλλονται
         pending: Σε εκκρεμότητα
         ready: Έτοιμα
         shipped: Αποστάλθηκαν
@@ -18,7 +20,7 @@ sylius:
         amount: Ποσό
       per_item_rate_configuration:
         amount: Ποσό
-      weight_rate_configuration:
+      volume_rate_configuration:
         amount: Ποσό
     shipping_category:
       description: Περιγραφή
@@ -26,4 +28,5 @@ sylius:
     shipping_method:
       category: Κατηγορία
       configuration: Παραμετροποίηση
+      enabled: Ενεργοποιημένο
       name: Ονομασία

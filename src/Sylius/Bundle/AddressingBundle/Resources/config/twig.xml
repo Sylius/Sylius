@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.twig.extension.country_name.class">Sylius\Bundle\AddressingBundle\Twig\CountryNameExtension</parameter>
+        <parameter key="sylius.twig.extension.province_naming.class">Sylius\Bundle\AddressingBundle\Twig\ProvinceNamingExtension</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.twig.extension.country_name" class="%sylius.twig.extension.country_name.class%">
+            <argument type="string" id="isoCode" />
+            <tag name="twig.extension"/>
+        </service>
+        <service id="sylius.twig.extension.province_naming" class="%sylius.twig.extension.province_naming.class%">
+            <argument type="service" id="sylius.province_naming_provider" />
+            <argument type="string" id="provinceCode" />
+            <tag name="twig.extension" />
+        </service>
+    </services>
+
+</container>

@@ -14,7 +14,9 @@ namespace spec\Sylius\Bundle\SettingsBundle\Manager;
 use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Validator\ValidatorInterface;
@@ -29,20 +31,20 @@ class SettingsManagerSpec extends ObjectBehavior
         Cache $cache,
         ObjectManager $manager,
         RepositoryInterface $repository,
+        FactoryInterface $factory,
         ValidatorInterface $validator,
         EventDispatcherInterface $eventDispatcher
-    )
-    {
-        $this->beConstructedWith($registry, $manager, $repository, $cache, $validator, $eventDispatcher);
+    ) {
+        $this->beConstructedWith($registry, $manager, $repository, $factory, $cache, $validator, $eventDispatcher);
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SettingsBundle\Manager\SettingsManager');
     }
 
     function it_should_be_a_Sylius_settings_manager()
     {
-        $this->shouldImplement('Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface');
+        $this->shouldImplement(SettingsManagerInterface::class);
     }
 }

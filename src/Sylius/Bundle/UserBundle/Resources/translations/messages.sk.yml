@@ -1,0 +1,34 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    group:
+      name: Názov
+      roles: Role
+    user:
+      email: Email
+      enabled: Zapnuté
+      password:
+        label: Heslo
+        confirmation: Overenie
+      remember_me: Zapamätať si ma
+      shipping_address: Adresa doručenia
+    customer:
+      first_name: Meno
+      groups: Zákaznícke skupiny
+      last_name: Priezvisko
+      email: Email
+      gender: Pohlavie
+      birthday: Dátum narodenia
+      billing_address: Fakturačná adresa
+      different_billing_address: Použiť inú fakturačnú adresu?
+    user_filter:
+      query: Vyhľadať
+    user_change_password:
+      confirmation: Potvrdenie
+      current: Aktuálne heslo
+      new: Nové heslo
+    user_reset_password:
+      confirmation: Potvrdenie
+      new: Nové heslo

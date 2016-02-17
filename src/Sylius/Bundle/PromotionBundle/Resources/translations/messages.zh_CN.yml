@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    rule:
+      contains_product_configuration:
+        variants: 产品
+    promotion:
+      description: 描述
+      name: 名称

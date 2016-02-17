@@ -13,8 +13,10 @@ namespace spec\Sylius\Bundle\VariationBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Product\Model\OptionInterface;
+use Sylius\Bundle\VariationBundle\Form\DataTransformer\VariantToCombinationTransformer;
+use Sylius\Component\Variation\Model\OptionInterface;
 use Sylius\Component\Variation\Model\VariableInterface;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Form\Test\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -32,33 +34,33 @@ class VariantMatchTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_builds_a_form(FormBuilderInterface $builder, VariableInterface $variable, OptionInterface $option)
     {
-        $variable->getOptions()->shouldBeCalled()->willReturn(array($option));
+        $variable->getOptions()->shouldBeCalled()->willReturn([$option]);
         $option->getName()->shouldBeCalled()->willReturn('option_name');
         $option->getPresentation()->shouldBeCalled()->willReturn('option_presentation');
 
-        $builder->add('option-name', 'sylius_varibale_name_option_value_choice', array(
-            'label'         => 'option_presentation',
-            'option'        => $option,
-            'property_path' => '[0]'
-        ))->shouldBeCalled();
+        $builder->add('option-name', 'sylius_varibale_name_option_value_choice', [
+            'label' => 'option_presentation',
+            'option' => $option,
+            'property_path' => '[0]',
+        ])->shouldBeCalled();
 
         $builder->addModelTransformer(
-            Argument::type('Sylius\Bundle\VariationBundle\Form\DataTransformer\VariantToCombinationTransformer')
+            Argument::type(VariantToCombinationTransformer::class)
         )->shouldBeCalled();
 
-        $this->buildForm($builder, array('variable' => $variable));
+        $this->buildForm($builder, ['variable' => $variable]);
     }
 
     function it_has_options(OptionsResolver $resolver)
     {
-        $resolver->setRequired(array(
-            'variable'
-        ))->shouldBeCalled()->willReturn($resolver);
+        $resolver->setRequired([
+            'variable',
+        ])->shouldBeCalled()->willReturn($resolver);
 
         $resolver->setAllowedTypes('variable', VariableInterface::class)->shouldBeCalled()->willReturn($resolver);
 

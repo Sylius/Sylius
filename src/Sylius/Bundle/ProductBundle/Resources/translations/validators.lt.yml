@@ -17,37 +17,8 @@ sylius:
     sku:
       not_blank: Įveskite varianto kodą.
       unique: Varianto kodas turi būti unikalus.
-    combination: Variantas su šia parinktimi jau egzistuoja.
-  option:
+  archetype:
     name:
-      not_blank: Įveskite parinkties pavadinimą.
-      min_length: 'Parinkties pavadinimas turi būti ne mažiau kaip 1 simbolis.|Parinkties pavadinimas turi būti ne mažiau kaip {{ limit }} simbolių.'
-      max_length: 'Parinkties pavadinimas neturi būti ilgesnis kaip 1 simbolis.|Parinkties pavadinimas turi būti ilgesnis nei {{ limit }} simbolių.'
-    presentation:
-      not_blank: Įveskite pasirinkties prezentaciją.
-      min_length: 'Parinkties prezentacija turi būti ne mažiau kaip 1 simbolis.|Parinkties prezentacija turi būti ne mažiau kaip {{ limit }} simbolių.'
-      max_length: 'Parinkties prezentacija turi būti ne ilgesnė kaip 1 simbolis.|Parinkties prezentacija turi būti ne ilgesnis nei {{ limit }} simbolių.'
-    values:
-      min_count: 'Prašome įtraukti bent {{ limit }} parinkties reikšmę.|Prašome įtraukti bent {{ limit }} parinkties reikšmes.'
-  option_value:
-    value:
-      not_blank: Įveskite parinkties reikšmę.
-  property:
-    name:
-      not_blank: Įveskite ypatybės pavadinimą.
-      min_length: 'Ypatybės pavadinimas turi būti ne mažiau kaip 1 simbolis.|Ypatybės pavadinimas turi būti ne mažiau kaip {{ limit }} simbolių.'
-      max_length: 'Ypatybės pavadinimas negali būti ilgesnis negu 1 simbolis.|Ypatybės pavadinimas negali būti ilgesnis nei {{ limit }} simbolių.'
-    presentation:
-      not_blank: Įveskite ypatybės prezentaciją.
-      min_length: 'Ypatybės prezentacija turi būti ne mažiau kaip 1 simbolis.|Ypatybės prezentacija turi būti ne mažiau kaip {{ limit }} simbolių.'
-      max_length: 'Ypatybės prezentacija turi būti ne ilgesnis kaip 1 simbolis.|Ypatybės prezentacija turi būti ne ilgesnis nei {{ limit }} simbolių.'
-  product_property:
-    property:
-      not_blank: Pasirinkite ypatybę.
-    value:
-      not_blank: Įveskite produkto ypatybės reikšmę.
-  prototype:
-    name:
-      not_blank: Įveskite prototipo pavadinimą.
-      min_length: 'Prototipo pavadinimas turi būti ne mažiau kaip 1 simbolis.|Prototipo pavadinimas turi būti ne mažiau kaip {{ limit }} simbolių.'
-      max_length: 'Prototipo pavadinimas neturi būti ilgesnis kaip 1 simbolis.|Prototipo pavadinimas neturi būti ilgesnis nei {{ limit }} simbolių.'
+      not_blank: Įveskite archetipo pavadinimą.
+      min_length: 'Archetipo pavadinimas turi būti ne mažiau kaip 1 simbolis. | Archetipo pavadinimas turi būti ne mažiau kaip {{ limit }} simbolių.'
+      max_length: 'Archetipo pavadinimas neturi būti ilgesnis kaip 1 simbolis. | Archetipo pavadinimas neturi būti ilgesnis nei {{ limit }} simbolių.'

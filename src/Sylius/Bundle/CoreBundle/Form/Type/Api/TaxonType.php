@@ -25,27 +25,27 @@ class TaxonType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', array(
-                'label' => 'sylius.form.taxon.name'
-            ))
-            ->add('permalink', 'text', array(
+            ->add('name', 'text', [
+                'label' => 'sylius.form.taxon.name',
+            ])
+            ->add('permalink', 'text', [
                 'required' => false,
-                'label' => 'sylius.form.taxon.permalink'
-            ))
-            ->add('description', 'text', array(
+                'label' => 'sylius.form.taxon.permalink',
+            ])
+            ->add('description', 'text', [
                 'required' => false,
-                'label' => 'sylius.form.taxon.description'
-            ))
-            ->add('parent', 'sylius_taxon_choice', array(
+                'label' => 'sylius.form.taxon.description',
+            ])
+            ->add('parent', 'sylius_taxon_choice', [
                 'required' => false,
-                'label' => 'sylius.form.taxon.parent'
-            ))
+                'label' => 'sylius.form.taxon.parent',
+            ])
             ->add(
                 'file',
                 'file',
-                array(
-                    'label' => 'sylius.form.taxon.file'
-                )
+                [
+                    'label' => 'sylius.form.taxon.file',
+                ]
             )
         ;
     }

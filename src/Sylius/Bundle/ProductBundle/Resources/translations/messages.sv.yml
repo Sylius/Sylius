@@ -2,10 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  label:
+  form:
     product:
       name: Namn
       meta_keywords: Metasökord
       meta_description: Metabeskrivning
-    prototype:
+    product_archetype:
+      name: Namn
+    association_type:
       name: Namn

@@ -12,18 +12,20 @@
 namespace Sylius\Component\Shipping\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\ToggleableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface ShippingMethodInterface extends TimestampableInterface, ShippingMethodTranslationInterface
+interface ShippingMethodInterface extends CodeAwareInterface, ShippingMethodTranslationInterface, TimestampableInterface, ToggleableInterface
 {
     // Shippables requirement to match given method.
     const CATEGORY_REQUIREMENT_MATCH_NONE = 0;
-    const CATEGORY_REQUIREMENT_MATCH_ANY  = 1;
-    const CATEGORY_REQUIREMENT_MATCH_ALL  = 2;
+    const CATEGORY_REQUIREMENT_MATCH_ANY = 1;
+    const CATEGORY_REQUIREMENT_MATCH_ALL = 2;
 
     /**
      * @return null|ShippingCategoryInterface
@@ -56,16 +58,6 @@ interface ShippingMethodInterface extends TimestampableInterface, ShippingMethod
      * @return string
      */
     public function getCategoryRequirementLabel();
-
-    /**
-     * @return bool
-     */
-    public function isEnabled();
-
-    /**
-     * @param bool $enabled
-     */
-    public function setEnabled($enabled);
 
     /**
      * Get calculator name assigned for this shipping method.

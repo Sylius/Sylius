@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  checkout:
-    shipping_method:
-      not_blank: Silahkan Pilih metode pengiriman.
   form:
     action:
       add_product_configuration:
@@ -25,6 +22,8 @@ sylius:
     group:
       name: Nama
       roles: Peran
+    channel:
+      currency_default: Mata uang default
     image:
       file: Gambar
     locale:
@@ -61,6 +60,10 @@ sylius:
       created_at_to: Untuk
       number: Nomor Order
       shipping_address: Kirim ke Nama
+    payment_filter:
+      created_at_from: Dari
+      created_at_to: Untuk
+      number: Nomor Order
     shipping_method:
       zone: Zona
     taxon:
@@ -73,6 +76,7 @@ sylius:
       enabled: Diaktifkan
       first_name: Nama Depan
       groups: Kelompok
+      roles: Peran
       last_name: Nama belakang
       password: Kata sandi
       shipping_address: Alamat pengiriman
@@ -88,3 +92,5 @@ sylius:
       sku: SKU
       weight: Berat
       width: Lebar
+    product_association_type:
+      name: Nama

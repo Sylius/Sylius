@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
+use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;

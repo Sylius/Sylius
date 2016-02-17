@@ -18,56 +18,37 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * Weight rate calculator configuration form.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class WeightRateConfigurationType extends AbstractType
 {
-    /**
-     * Validation groups.
-     *
-     * @var array
-     */
-    protected $validationGroups;
-
-    /**
-     * Constructor.
-     *
-     * @param array $validationGroups
-     */
-    public function __construct(array $validationGroups)
-    {
-        $this->validationGroups = $validationGroups;
-    }
-
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('fixed', 'sylius_money', array(
+            ->add('fixed', 'sylius_money', [
                 'label' => 'sylius.form.shipping_calculator.weight_rate_configuration.fixed',
-                'constraints' => array(
+                'constraints' => [
                     new NotBlank(),
-                    new Type(array('type' => 'integer')),
-                ),
-            ))
-            ->add('variable', 'sylius_money', array(
+                    new Type(['type' => 'integer']),
+                ],
+            ])
+            ->add('variable', 'sylius_money', [
                 'label' => 'sylius.form.shipping_calculator.weight_rate_configuration.variable',
-                'constraints' => array(
+                'constraints' => [
                     new NotBlank(),
-                    new Type(array('type' => 'integer')),
-                ),
-            ))
-            ->add('division', 'number', array(
+                    new Type(['type' => 'integer']),
+                ],
+            ])
+            ->add('division', 'number', [
                 'label' => 'sylius.form.shipping_calculator.weight_rate_configuration.division',
-                'constraints' => array(
+                'constraints' => [
                     new NotBlank(),
-                    new Type(array('type' => 'numeric')),
-                ),
-            ))
+                    new Type(['type' => 'numeric']),
+                ],
+            ])
         ;
     }
 
@@ -77,10 +58,9 @@ class WeightRateConfigurationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'data_class' => null,
-                'validation_groups' => $this->validationGroups,
-            ))
+            ])
         ;
     }
 
@@ -89,6 +69,6 @@ class WeightRateConfigurationType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_shipping_calculator_weight_rate_configuration';
+        return 'sylius_shipping_calculator_weight_rate';
     }
 }

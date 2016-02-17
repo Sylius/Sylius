@@ -1,0 +1,21 @@
+<div class="modal fade" id="attribute-types-modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">{{ 'sylius.form.attribute_type.title'|trans }}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="list-group">
+                    {% for name, attributeType in attributeTypes %}
+                        {% set route = metadata.applicationName~'_backend_'~metadata.name~'_create' %}
+                        <a href="{{ path(route, { 'type': name }) }}" id="{{ name }}" class="list-group-item">
+                            {% set label = 'sylius.form.attribute_type.' ~ attributeType.type %}
+                            {{ label|trans }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

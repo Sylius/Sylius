@@ -13,6 +13,9 @@ namespace spec\Sylius\Bundle\UserBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Component\User\Model\Customer;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -20,9 +23,9 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class CustomerTypeSpec extends ObjectBehavior
 {
-    function let()
+    function let(EventSubscriberInterface $addUserTypeSubscriber)
     {
-        $this->beConstructedWith('Sylius\Component\User\Model\Customer', array('sylius'));
+        $this->beConstructedWith(Customer::class, ['sylius'], $addUserTypeSubscriber);
     }
 
     function it_is_initializable()
@@ -32,7 +35,7 @@ class CustomerTypeSpec extends ObjectBehavior
 
     function it_extends_abstract_resource_type()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType');
+        $this->shouldHaveType(AbstractResourceType::class);
     }
 
     function it_has_name()
@@ -40,7 +43,7 @@ class CustomerTypeSpec extends ObjectBehavior
         $this->getName()->shouldReturn('sylius_customer');
     }
 
-    function it_builds_form(FormBuilderInterface $builder)
+    function it_builds_form(FormBuilderInterface $builder, EventSubscriberInterface $addUserTypeSubscriber)
     {
         $builder->add('firstName', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('lastName', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
@@ -48,8 +51,8 @@ class CustomerTypeSpec extends ObjectBehavior
         $builder->add('birthday', 'birthday', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('gender', 'sylius_gender', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('groups', 'sylius_group_choice', Argument::any())->shouldBeCalled()->willReturn($builder);
-        $builder->add('user', 'sylius_user', Argument::any())->shouldBeCalled()->willReturn($builder);
+        $builder->addEventSubscriber($addUserTypeSubscriber)->shouldBeCalled()->willReturn($builder);
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 }

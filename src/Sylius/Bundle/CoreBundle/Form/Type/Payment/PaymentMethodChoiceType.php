@@ -32,21 +32,21 @@ class PaymentMethodChoiceType extends BasePaymentMethodChoiceType
         parent::configureOptions($resolver);
 
         $queryBuilder = function (Options $options) {
-            $repositoryOptions = array(
+            $repositoryOptions = [
                 'disabled' => $options['disabled'],
                 'channel' => $options['channel'],
-            );
+            ];
 
             return function (PaymentMethodRepositoryInterface $repository) use ($repositoryOptions) {
-                return $repository->getQueryBuidlerForChoiceType($repositoryOptions);
+                return $repository->getQueryBuilderForChoiceType($repositoryOptions);
             };
         };
 
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'query_builder' => $queryBuilder,
-                'channel' => null
-            ))
+                'channel' => null,
+            ])
             ->setAllowedTypes('channel', [ChannelInterface::class, 'null'])
         ;
     }

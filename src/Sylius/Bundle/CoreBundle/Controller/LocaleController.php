@@ -26,6 +26,6 @@ class LocaleController extends BaseLocaleController
      */
     protected function getLocaleProvider()
     {
-        return $this->get('sylius.channel_aware_locale_provider');
+        return $this->container->get('sylius.channel_aware_locale_provider');
     }
 }

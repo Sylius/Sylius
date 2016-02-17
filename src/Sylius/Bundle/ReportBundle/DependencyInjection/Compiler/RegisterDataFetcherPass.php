@@ -33,7 +33,7 @@ class RegisterDataFetcherPass implements CompilerPassInterface
         }
 
         $registry = $container->getDefinition('sylius.registry.report.data_fetcher');
-        $dataFetchers = array();
+        $dataFetchers = [];
 
         foreach ($container->findTaggedServiceIds('sylius.report.data_fetcher') as $id => $attributes) {
             if (!isset($attributes[0]['fetcher']) || !isset($attributes[0]['label'])) {
@@ -45,7 +45,7 @@ class RegisterDataFetcherPass implements CompilerPassInterface
             $name = $attributes[0]['fetcher'];
             $dataFetchers[$name] = $attributes[0]['label'];
 
-            $registry->addMethodCall('register', array($name, new Reference($id)));
+            $registry->addMethodCall('register', [$name, new Reference($id)]);
         }
 
         $container->setParameter('sylius.report.data_fetchers', $dataFetchers);

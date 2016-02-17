@@ -2,10 +2,20 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  label:
+  form:
     product:
       name: Name
-      meta_keywords: Meta-Stichwörter
-      meta_description: Meta-Beschreibung
-    prototype:
+      description: Beschreibung
+      attributes: Attribute
+      options: Optionen
+      meta_keywords: Metastichwörter
+      meta_description: Metabeschreibung
+    product_variant:
+      available_on: Verfügbar ab
+    product_archetype:
+      name: Name
+      parent: Übergeordnet
+      attributes: Attribute
+      options: Optionen
+    association_type:
       name: Name

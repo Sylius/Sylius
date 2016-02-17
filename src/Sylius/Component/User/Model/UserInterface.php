@@ -7,15 +7,15 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * This model was inspired by FOS User-Bundle
  */
 
 namespace Sylius\Component\User\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\ToggleableInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
@@ -23,13 +23,16 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-interface UserInterface extends AdvancedUserInterface, \Serializable, TimestampableInterface, SoftDeletableInterface
+interface UserInterface extends
+    AdvancedUserInterface,
+    CredentialsHolderInterface,
+    ResourceInterface,
+    \Serializable,
+    SoftDeletableInterface,
+    TimestampableInterface,
+    ToggleableInterface
 {
     const DEFAULT_ROLE = 'ROLE_USER';
-    /**
-     * @return int
-     */
-    public function getId();
 
     /**
      * @return string
@@ -37,7 +40,7 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
     public function getEmail();
 
     /**
-     * @param  string $email
+     * @param string $email
      */
     public function setEmail($email);
 
@@ -49,7 +52,7 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
     public function getEmailCanonical();
 
     /**
-     * @param  string $emailCanonical
+     * @param string $emailCanonical
      */
     public function setEmailCanonical($emailCanonical);
 
@@ -81,29 +84,7 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
     public function setUsernameCanonical($usernameCanonical);
 
     /**
-     * @return string
-     */
-    public function getPlainPassword();
-
-    /**
-     * @param string $password
-     */
-    public function setPlainPassword($password);
-
-    /**
-     * Sets the hashed password.
-     *
-     * @param string $password
-     */
-    public function setPassword($password);
-
-    /**
-     * @param boolean $enabled
-     */
-    public function setEnabled($enabled);
-
-    /**
-     * @param boolean $locked
+     * @param bool $locked
      */
     public function setLocked($locked);
 
@@ -129,7 +110,7 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
      *
      * @param \DateInterval $ttl Requests older than this time interval will be considered expired
      *
-     * @return boolean true if the user's password request is non expired, false otherwise
+     * @return bool true if the user's password request is non expired, false otherwise
      */
     public function isPasswordRequestNonExpired(\DateInterval $ttl);
 
@@ -158,7 +139,7 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
      *
      * @param string $role
      *
-     * @return boolean
+     * @return bool
      */
     public function hasRole($role);
 

@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    product:
+      name: Ime
+    product_variant:
+      available_on: Dostupno
+    product_archetype:
+      name: Ime
+    association_type:
+      name: Ime

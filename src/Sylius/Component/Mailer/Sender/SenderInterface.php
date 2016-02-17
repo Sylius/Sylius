@@ -21,5 +21,5 @@ interface SenderInterface
      * @param array  $recipients
      * @param array  $data
      */
-    public function send($code, array $recipients, array $data = array());
+    public function send($code, array $recipients, array $data = []);
 }

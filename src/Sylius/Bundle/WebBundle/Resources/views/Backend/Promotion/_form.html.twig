@@ -1,5 +1,6 @@
 <div class="row">
     <div class="col-md-12">
+        {{ form_row(form.code, {'attr': {'class': 'input-lg'}}) }}
         {{ form_row(form.name, {'attr': {'class': 'input-lg'}}) }}
         {{ form_row(form.description) }}
         {{ form_row(form.usageLimit) }}
@@ -7,14 +8,7 @@
         {{ form_row(form.endsAt) }}
         {{ form_row(form.couponBased) }}
         {{ form_row(form.exclusive) }}
-        <div class="form-group">
-        {{ form_errors(form.channels) }}
-        {{ form_label(form.channels) }}
-        {% for channelForm in form.channels %}
-            {{ form_row(channelForm) }}
-        {% endfor %}
-        </div>
-
+        {{ form_row(form.channels) }}
         {{ form_widget(form._token) }}
     </div>
     <div class="row">

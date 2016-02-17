@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services
+    http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.requirements.class">Sylius\Bundle\InstallerBundle\Requirement\SyliusRequirements</parameter>
+        <parameter key="sylius.requirements.settings.class">Sylius\Bundle\InstallerBundle\Requirement\SettingsRequirements</parameter>
+        <parameter key="sylius.requirements.extensions.class">Sylius\Bundle\InstallerBundle\Requirement\ExtensionsRequirements</parameter>
+        <parameter key="sylius.requirements.filesystem.class">Sylius\Bundle\InstallerBundle\Requirement\FilesystemRequirements</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.requirements" class="%sylius.requirements.class%">
+            <argument type="collection">
+                <argument type="service">
+                    <service class="%sylius.requirements.settings.class%">
+                        <argument type="service" id="translator" />
+                    </service>
+                </argument>
+                <argument type="service">
+                    <service class="%sylius.requirements.extensions.class%">
+                        <argument type="service" id="translator" />
+                    </service>
+                </argument>
+                <argument type="service">
+                    <service class="%sylius.requirements.filesystem.class%">
+                        <argument type="service" id="translator" />
+                        <argument>%kernel.root_dir%</argument>
+                        <argument>%kernel.cache_dir%</argument>
+                        <argument>%kernel.logs_dir%</argument>
+                    </service>
+                </argument>
+            </argument>
+        </service>
+    </services>
+
+</container>

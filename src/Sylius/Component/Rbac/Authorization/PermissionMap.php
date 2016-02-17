@@ -12,6 +12,7 @@
 namespace Sylius\Component\Rbac\Authorization;
 
 use Sylius\Component\Rbac\Exception\PermissionNotFoundException;
+use Sylius\Component\Rbac\Model\PermissionInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
 use Sylius\Component\Rbac\Provider\PermissionProviderInterface;
 use Sylius\Component\Rbac\Resolver\PermissionsResolverInterface;
@@ -38,7 +39,7 @@ class PermissionMap implements PermissionMapInterface
      *
      * @var array
      */
-    private $permissions = array();
+    private $permissions = [];
 
     /**
      * @param PermissionProviderInterface $permissionProvider
@@ -47,8 +48,7 @@ class PermissionMap implements PermissionMapInterface
     public function __construct(
         PermissionProviderInterface $permissionProvider,
         PermissionsResolverInterface $permissionsResolver
-    )
-    {
+    ) {
         $this->permissionProvider = $permissionProvider;
         $this->permissionsResolver = $permissionsResolver;
     }

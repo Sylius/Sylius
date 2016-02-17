@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\RbacBundle\Form\Type;
 
+use Sylius\Bundle\RbacBundle\Form\EventSubscriber\AddParentFormSubscriber;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 
 /**
  * RBAC Role form type.
@@ -29,48 +29,26 @@ class RoleType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', array(
+            ->add('name', 'text', [
                 'label' => 'sylius.form.role.name',
-            ))
-            ->add('description', 'textarea', array(
+            ])
+            ->add('description', 'textarea', [
                 'required' => false,
-                'label'    => 'sylius.form.role.description',
-            ))
-            ->add('securityRoles', 'sylius_security_role_choice', array(
+                'label' => 'sylius.form.role.description',
+            ])
+            ->add('securityRoles', 'sylius_security_role_choice', [
                 'required' => false,
-                'label'    => 'sylius.form.role.security_roles',
-            ))
-            ->add('parent', 'sylius_role_choice', array(
-                'label'    => 'sylius.form.role.parent',
-            ))
-            ->add('permissions', 'sylius_permission_choice', array(
+                'label' => 'sylius.form.role.security_roles',
+            ])
+            ->add('permissions', 'sylius_permission_choice', [
                 'required' => false,
                 'multiple' => true,
                 'expanded' => true,
-                'label'    => 'sylius.form.role.permissions',
-            ))
+                'label' => 'sylius.form.role.permissions',
+            ])
+            ->addEventSubscriber(new AddCodeFormSubscriber())
+            ->addEventSubscriber(new AddParentFormSubscriber('role'))
         ;
-
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-            $role = $event->getData();
-            $form = $event->getForm();
-
-            if (null === $role || null === $role->getId()) {
-                $form->add('code', 'text', array(
-                    'label' => 'sylius.form.role.code',
-                ));
-            } else {
-                $form->add('code', 'text', array(
-                    'label'    => 'sylius.form.role.code',
-                    'disabled' => true,
-
-                ));
-            }
-
-            if (null !== $role && null !== $role->getId() && null === $role->getParent()) {
-                $form->remove('parent');
-            }
-        });
     }
 
     /**

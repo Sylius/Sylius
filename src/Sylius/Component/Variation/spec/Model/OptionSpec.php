@@ -11,7 +11,9 @@
 
 namespace spec\Sylius\Component\Variation\Model;
 
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Variation\Model\OptionInterface;
 use Sylius\Component\Variation\Model\OptionValueInterface;
 
 /**
@@ -32,12 +34,18 @@ class OptionSpec extends ObjectBehavior
 
     function it_implement_Sylius_option_interface()
     {
-        $this->shouldImplement('Sylius\Component\Variation\Model\OptionInterface');
+        $this->shouldImplement(OptionInterface::class);
     }
 
     function it_should_not_have_id_by_default()
     {
         $this->getId()->shouldReturn(null);
+    }
+
+    function it_has_mutable_code()
+    {
+        $this->setCode('O1');
+        $this->getCode()->shouldReturn('O1');
     }
 
     function it_should_not_have_name_by_default()
@@ -70,7 +78,7 @@ class OptionSpec extends ObjectBehavior
 
     function it_should_initialize_values_collection_by_default()
     {
-        $this->getValues()->shouldHaveType('Doctrine\Common\Collections\Collection');
+        $this->getValues()->shouldHaveType(Collection::class);
     }
 
     function it_should_add_value(OptionValueInterface $value)
@@ -96,7 +104,7 @@ class OptionSpec extends ObjectBehavior
 
     function it_should_initialize_creation_date_by_default()
     {
-        $this->getCreatedAt()->shouldHaveType('DateTime');
+        $this->getCreatedAt()->shouldHaveType(\DateTime::class);
     }
 
     function it_should_not_have_last_update_date_by_default()

@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\RbacBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -22,9 +22,9 @@ class SecurityRoleChoiceTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(array(
-            'key' => 'role'
-        ));
+        $this->beConstructedWith([
+            'key' => 'role',
+        ]);
     }
 
     function it_is_initializable()
@@ -34,18 +34,18 @@ class SecurityRoleChoiceTypeSpec extends ObjectBehavior
 
     function it_is_a_form()
     {
-        $this->shouldHaveType('Symfony\Component\Form\AbstractType');
+        $this->shouldHaveType(AbstractType::class);
     }
 
     function it_has_options(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'choices' => array(
-                'key' => 'role'
-            ),
+        $resolver->setDefaults([
+            'choices' => [
+                'key' => 'role',
+            ],
             'multiple' => true,
-            'expanded' => true
-        ))->shouldBeCalled();
+            'expanded' => true,
+        ])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

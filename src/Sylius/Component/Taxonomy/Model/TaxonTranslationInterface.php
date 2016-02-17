@@ -11,18 +11,14 @@
 
 namespace Sylius\Component\Taxonomy\Model;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\SlugAwareInterface;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface TaxonTranslationInterface extends SlugAwareInterface
+interface TaxonTranslationInterface extends SlugAwareInterface, ResourceInterface
 {
-    /**
-     * @return mixed
-     */
-    public function getId();
-
     /**
      * @return string
      */
@@ -42,7 +38,7 @@ interface TaxonTranslationInterface extends SlugAwareInterface
      * @param string $permalink
      */
     public function setPermalink($permalink);
-    
+
     /**
      * @return string
      */

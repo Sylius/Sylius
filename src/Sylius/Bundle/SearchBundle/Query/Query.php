@@ -19,7 +19,7 @@ class Query
     /**
      * @var array
      */
-    protected $appliedFilters = array();
+    protected $appliedFilters = [];
 
     /**
      * @param array $appliedFilters

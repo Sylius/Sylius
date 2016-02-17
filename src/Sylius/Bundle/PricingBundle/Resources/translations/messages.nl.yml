@@ -7,3 +7,9 @@ sylius:
       price: Prijs
       calculator: Prijsstelling
       configuration: Configuratie
+    pricing:
+      volume_based:
+        label: Prijzen configuratie
+        min: Minimum Volume
+        max: Maximum Volume
+        price: Prijs

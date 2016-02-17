@@ -1,6 +1,5 @@
 <?php
 
-
 /*
  * This file is part of the Sylius package.
  *
@@ -12,22 +11,22 @@
 
 namespace Sylius\Bundle\PaymentBundle\Doctrine\ORM;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository;
 use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class PaymentMethodRepository extends EntityRepository implements PaymentMethodRepositoryInterface
+class PaymentMethodRepository extends TranslatableResourceRepository implements PaymentMethodRepositoryInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function getQueryBuidlerForChoiceType(array $options)
+    public function getQueryBuilderForChoiceType(array $options)
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
 
-        if (!$options['disabled']) {
+        if (isset($options['disabled']) && !$options['disabled']) {
             $queryBuilder->where('method.enabled = true');
         }
 

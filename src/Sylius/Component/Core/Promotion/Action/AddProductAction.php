@@ -11,12 +11,14 @@
 
 namespace Sylius\Component\Core\Promotion\Action;
 
+use Sylius\Bundle\OrderBundle\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Promotion\Action\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -27,29 +29,30 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class AddProductAction implements PromotionActionInterface
 {
     /**
-     * OrderItem repository.
-     *
-     * @var RepositoryInterface
+     * @var FactoryInterface
      */
-    protected $itemRepository;
+    protected $itemFactory;
 
     /**
-     * Variant repository.
-     *
      * @var RepositoryInterface
      */
     protected $variantRepository;
 
     /**
-     * Constructor.
-     *
-     * @param RepositoryInterface $itemRepository
-     * @param RepositoryInterface $variantRepository
+     * @var OrderItemQuantityModifierInterface
      */
-    public function __construct(RepositoryInterface $itemRepository, RepositoryInterface $variantRepository)
+    protected $orderItemQuantityModifier;
+
+    /**
+     * @param FactoryInterface $itemFactory
+     * @param RepositoryInterface $variantRepository
+     * @param OrderItemQuantityModifierInterface $orderItemQuantityModifier
+     */
+    public function __construct(FactoryInterface $itemFactory, RepositoryInterface $variantRepository, OrderItemQuantityModifierInterface $orderItemQuantityModifier)
     {
-        $this->itemRepository    = $itemRepository;
+        $this->itemFactory = $itemFactory;
         $this->variantRepository = $variantRepository;
+        $this->orderItemQuantityModifier = $orderItemQuantityModifier;
     }
 
     /**
@@ -62,7 +65,7 @@ class AddProductAction implements PromotionActionInterface
         }
 
         if (!$subject instanceof OrderInterface) {
-            throw new UnexpectedTypeException($subject, 'Sylius\Component\Order\Model\OrderInterface');
+            throw new UnexpectedTypeException($subject, OrderInterface::class);
         }
 
         $promotionItem = $this->createItem($configuration);
@@ -88,7 +91,7 @@ class AddProductAction implements PromotionActionInterface
         }
 
         if (!$subject instanceof OrderInterface) {
-            throw new UnexpectedTypeException($subject, 'Sylius\Component\Order\Model\OrderInterface');
+            throw new UnexpectedTypeException($subject, OrderInterface::class);
         }
 
         $promotionItem = $this->createItem($configuration);
@@ -110,8 +113,6 @@ class AddProductAction implements PromotionActionInterface
     }
 
     /**
-     * Create promotion item
-     *
      * @param array $configuration
      *
      * @return OrderItemInterface
@@ -120,10 +121,11 @@ class AddProductAction implements PromotionActionInterface
     {
         $variant = $this->variantRepository->find($configuration['variant']);
 
-        $promotionItem = $this->itemRepository->createNew();
+        $promotionItem = $this->itemFactory->createNew();
         $promotionItem->setVariant($variant);
-        $promotionItem->setQuantity((int) $configuration['quantity']);
         $promotionItem->setUnitPrice((int) $configuration['price']);
+
+        $this->orderItemQuantityModifier->modify($promotionItem, (int) $configuration['quantity']);
 
         return $promotionItem;
     }

@@ -18,6 +18,7 @@ use Prophecy\Argument;
 use Sylius\Component\Archetype\Builder\ArchetypeBuilderInterface;
 use Sylius\Component\Archetype\Model\ArchetypeInterface;
 use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -43,14 +44,14 @@ class ArchetypeUpdateListenerSpec extends ObjectBehavior
         $builder->build(Argument::any())->shouldNotBeCalled();
         $productManager->persist(Argument::any())->shouldNotBeCalled();
 
-        $this->shouldThrow('Sylius\Component\Resource\Exception\UnexpectedTypeException')->duringOnArchetypeUpdate($event);
+        $this->shouldThrow(UnexpectedTypeException::class)->duringOnArchetypeUpdate($event);
     }
 
     function it_updates_products_with_newer_attributes_added_to_their_archetypes(
         GenericEvent $event, ArchetypeInterface $archetype, ArchetypeBuilderInterface $builder, ObjectRepository $productRepository, ObjectManager $productManager, ProductInterface $productA, ProductInterface $productB
     ) {
         $event->getSubject()->willReturn($archetype);
-        $productRepository->findBy(array('archetype' => $archetype))->willReturn(array($productA, $productB));
+        $productRepository->findBy(['archetype' => $archetype])->willReturn([$productA, $productB]);
 
         $builder->build($productA)->shouldBeCalled();
         $builder->build($productB)->shouldBeCalled();

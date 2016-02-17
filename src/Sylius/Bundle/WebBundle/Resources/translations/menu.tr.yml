@@ -5,49 +5,76 @@ sylius:
   backend:
     menu:
       main:
+        api_clients: API İstemcileri
+        archetypes: Ürün arketipler
         assortment: Çeşitlilik
+        attributes: özellikleri yapılandırma
+        blocks: Bloklar
+        channels: Kanallar
         configuration: Ayarlar
+        contact_topics: Konuları yapılandırma
+        content: İçerik
         countries: Ülkeler
-        customer: Müşteriler
+        currencies: Para birimi
+        customer: Müşteri
+        customers: müşteriler
         dashboard: Kontrol Paneli
-        exchange_rates: Döviz kurları
+        emails: E-posta
         general_settings: Genel ayarlar
+        groups: Gruplar
         homepage: Mağazanız
         locales: Diller
+        marketing: Pazarlama
+        menus: Menü
         new_order: Sipariş ekle
         new_promotion: Yeni promosyon ekle
         options: Ürün seçeneklerini yönet
         orders: Şuanki siparişler
+        pages: Sayfalar
         payment_methods: Ödeme tipleri
         payments: Ödemeler
+        permissions: İzinler
         products: Ürünler
         promotions: Promosyonlar
-        properties: Ayarları yapılandırma
-        prototypes: Ürün prototipleri
+        report: Raporlar
+        roles: Roller
+        routes: Rotalar
         sales: Siparişler
+        security_settings: Güvenlik ayarları
         shipments: Kargo İşlemleri
         shipping_categories: Kargo kategorileri
         shipping_methods: Gönderim metodları
+        slideshow: Slayt gösterisi
         stockables: Stok düzeyleri
-        tax_categories: Vergi kategorileri
-        tax_rates: Vergi oranları
-        taxation_settings: Vergilendirme ayarları
+        support: DESTEK
+        tax_categories: Kdv kategorileri
+        tax_rates: Kdv oranları
+        taxation_settings: 'Kdv  ayarları'
         taxonomies: Sınıflandırma
-        users: Kullanıcılar
         zones: Bölgeler
       sidebar:
+        api_clients: API İstemcileri
+        archetypes: Ürün arketipler
         assortment: Çeşitlilik
+        attributes: özellikleri yapılandırma
         blocks: Bloklar
+        channels: Kanallar
         configuration: Ayarlar
+        contact_requests: İstekler
+        contact_topics: Konuları yapılandırma
         content: İçerik
         countries: Ülkeler
-        customer: Müşteriler
+        currencies: Para birimi
+        customer: Müşteri
+        customers: müşteriler
         dashboard: Kontrol Paneli
-        exchange_rates: Döviz kurları
+        emails: E-posta
         general_settings: Genel ayarlar
         groups: Gruplar
         homepage: Siteye dön
         locales: Diller
+        marketing: Pazarlama
+        menus: Menü
         new_order: Sipariş ekle
         new_promotion: Yeni promosyon ekle
         options: Seçeneklerini yönet
@@ -55,20 +82,25 @@ sylius:
         pages: Sayfalar
         payment_methods: Ödeme tipleri
         payments: Ödemeler
+        permissions: İzinler
         products: Ürünler
         promotions: Promosyonlar
-        properties: Ayarları yapılandırma
-        prototypes: Ürün prototipleri
+        redirects: ' yönlendirmeler'
+        report: Raporlar
+        roles: Roller
+        routes: Rotalar
         sales: Siparişler
+        security_settings: Güvenlik ayarları
         shipments: Kargo İşlemleri
         shipping_categories: Kargo kategorileri
         shipping_methods: Gönderim metodları
+        slideshow: Slayt gösterisi
         stockables: Stok düzeyleri
+        support: DESTEK
         tax_categories: Vergi kategorileri
         tax_rates: Vergi oranları
         taxation_settings: Vergilendirme ayarları
         taxonomies: Sınıflandırma
-        users: Kullanıcılar
         zones: Bölgeler
   frontend:
     menu:
@@ -87,6 +119,8 @@ sylius:
         login: Giriş
         logout: Çıkış yap
         register: Üye ol
+      sidebar:
+        links: Linkler
       social:
         facebook: Facebook
         github: GitHub

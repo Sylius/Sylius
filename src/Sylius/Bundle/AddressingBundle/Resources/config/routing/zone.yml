@@ -7,9 +7,10 @@ sylius_zone_list:
         _controller: sylius.controller.zone:indexAction
 
 sylius_zone_create:
-    path: /create
+    path: /{type}/create
     defaults:
         _controller: sylius.controller.zone:createAction
+        _factory: sylius.factory.zone
 
 sylius_zone_update:
     path: /{id}/update

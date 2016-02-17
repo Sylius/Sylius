@@ -12,32 +12,28 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
 use Sylius\Bundle\CartBundle\Form\Type\CartType as BaseCartType;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
 /**
- * Cart form.
- *
  * @author Julien Janvier <j.janvier@gmail.com>
  */
 class CartType extends BaseCartType
 {
-    protected $couponRepository;
+    protected $couponFactory;
 
     /**
-     * Constructor.
-     *
      * @param string              $dataClass        FQCN of cart model
-     * @param array               $validationGroups
-     * @param RepositoryInterface $couponRepository
+     * @param string[]            $validationGroups
+     * @param FactoryInterface $couponFactory
      */
-    public function __construct($dataClass, array $validationGroups, RepositoryInterface $couponRepository)
+    public function __construct($dataClass, array $validationGroups, FactoryInterface $couponFactory)
     {
         parent::__construct($dataClass, $validationGroups);
 
-        $this->couponRepository = $couponRepository;
+        $this->couponFactory = $couponFactory;
     }
 
     /**
@@ -47,26 +43,23 @@ class CartType extends BaseCartType
     {
         parent::buildForm($builder, $options);
 
-        $couponRepository = $this->couponRepository;
-
         $builder
-            ->add('promotionCoupons', 'collection', array(
-                'type'         => 'sylius_promotion_coupon_to_code',
-                'allow_add'    => true,
-                'allow_delete' => true,
+            ->add('promotionCoupon', 'sylius_promotion_coupon_to_code', [
                 'by_reference' => false,
-                'label'        => 'sylius.form.cart.coupon',
-            ))
-            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($couponRepository) {
+                'label' => 'sylius.form.cart.coupon',
+            ])
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
                 $data = $event->getData();
 
-                if (!$data->getPromotionCoupons()->isEmpty()) {
+                if (null !== $data->getPromotionCoupon()) {
                     return;
                 }
 
-                $data->addPromotionCoupon(
-                    $couponRepository->createNew()
-                );
+                if ($event->getForm()->has('promotionCoupon')) {
+                    $data->setPromotionCoupon(
+                        $this->couponFactory->createNew()
+                    );
+                }
             })
         ;
     }

@@ -11,27 +11,26 @@
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
+use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 class ShipmentRepository extends EntityRepository
 {
     /**
-     * Create filter paginator.
-     *
      * @param array $criteria
      * @param array $sorting
      *
-     * @return PagerfantaInterface
+     * @return Pagerfanta
      */
-    public function createFilterPaginator($criteria = array(), $sorting = array())
+    public function createFilterPaginator($criteria = [], $sorting = [])
     {
         $this->_em->getFilters()->disable('softdeleteable');
 
         $queryBuilder = $this->getCollectionQueryBuilder();
 
         $queryBuilder
-            ->leftJoin($this->getAlias().'.order', 'shipmentOrder')
-            ->leftJoin('shipmentOrder.shippingAddress', 'address')
+            ->innerJoin($this->getAlias().'.order', 'shipmentOrder')
+            ->innerJoin('shipmentOrder.shippingAddress', 'address')
             ->addSelect('shipmentOrder')
             ->addSelect('address')
         ;
@@ -69,7 +68,7 @@ class ShipmentRepository extends EntityRepository
 
         if (empty($sorting)) {
             if (!is_array($sorting)) {
-                $sorting = array();
+                $sorting = [];
             }
             $sorting['updatedAt'] = 'desc';
         }
@@ -79,6 +78,9 @@ class ShipmentRepository extends EntityRepository
         return $this->getPaginator($queryBuilder);
     }
 
+    /**
+     * @return string
+     */
     protected function getAlias()
     {
         return 's';

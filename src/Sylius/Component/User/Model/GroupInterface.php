@@ -7,23 +7,18 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * This model was inspired by FOS User-Bundle
  */
 
 namespace Sylius\Component\User\Model;
+
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-interface GroupInterface
+interface GroupInterface extends ResourceInterface
 {
-    /**
-     * @return int
-     */
-    public function getId();
-
     /**
      * @return string
      */

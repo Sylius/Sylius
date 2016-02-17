@@ -34,12 +34,12 @@ interface ShippingSubjectInterface
     /**
      * @return int
      */
-    public function getShippingItemCount();
+    public function getShippingUnitCount();
 
     /**
      * @return int
      */
-    public function getShippingItemTotal();
+    public function getShippingUnitTotal();
 
     /**
      * Get collection of unique shippables.

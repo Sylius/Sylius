@@ -1,0 +1,33 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    group:
+      name: Pavadinimas
+      roles: Rolės
+    user:
+      email: Elektroninis paštas
+      enabled: Įjungta
+      password:
+        label: Slaptažodis
+        confirmation: Patikrinimas
+      remember_me: Prisiminti mane
+      shipping_address: Pristatymo adresas
+    customer:
+      first_name: Vardas
+      groups: Grupės
+      last_name: Pavardė
+      email: Elektroninis paštas
+      birthday: Gimimo diena
+      billing_address: Mokėtojo adresas
+      different_billing_address: Naudoti kitą adresą apmokėjimui?
+    user_filter:
+      query: Ieškoti
+    user_change_password:
+      confirmation: Patvirtinimas
+      current: Dabartinis slaptažodis
+      new: Naujas slaptažodis
+    user_reset_password:
+      confirmation: Patvirtinimas
+      new: Naujas slaptažodis

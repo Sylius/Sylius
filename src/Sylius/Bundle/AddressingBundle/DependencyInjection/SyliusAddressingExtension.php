@@ -12,13 +12,13 @@
 namespace Sylius\Bundle\AddressingBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Addressing extension.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
@@ -29,27 +29,55 @@ class SyliusAddressingExtension extends AbstractResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $config = $this->configure(
-            $config,
-            new Configuration(),
-            $container,
-            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_FORMS | self::CONFIGURE_TRANSLATIONS
-        );
+        $config = $this->processConfiguration(new Configuration(), $config);
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+
+        $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
+
+        $configFiles = [
+            'services.xml',
+            'twig.xml',
+        ];
+
+        foreach ($configFiles as $configFile) {
+            $loader->load($configFile);
+        }
 
         $container->setParameter('sylius.scope.zone', $config['scopes']);
 
         $container
             ->getDefinition('sylius.form.type.province_choice')
-            ->setArguments(array(
+            ->setArguments([
                 new Reference('sylius.repository.province'),
-            ))
+            ])
+        ;
+
+        $container
+            ->getDefinition('sylius.form.type.province_code_choice')
+            ->setArguments([
+                new Reference('sylius.repository.province'),
+            ])
         ;
 
         $container
             ->getDefinition('sylius.form.type.country_choice')
-            ->setArguments(array(
+            ->setArguments([
                 new Reference('sylius.repository.country'),
-            ))
+            ])
+        ;
+
+        $container
+            ->getDefinition('sylius.form.type.country_code_choice')
+            ->setArguments([
+                new Reference('sylius.repository.country'),
+            ])
+        ;
+
+        $container
+            ->getDefinition('sylius.form.type.zone_code_choice')
+            ->setArguments([
+                new Reference('sylius.repository.zone'),
+            ])
         ;
 
         $container

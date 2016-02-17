@@ -23,6 +23,10 @@
             <gedmo:versioned />
         </field>
 
+        <field name="availableUntil" column="available_until" type="datetime" nullable="true">
+            <gedmo:versioned />
+        </field>
+
         <many-to-one field="archetype" target-entity="Sylius\Component\Product\Model\ArchetypeInterface">
             <join-column name="archetype_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
@@ -35,6 +39,13 @@
         </one-to-many>
 
         <one-to-many field="variants" target-entity="Sylius\Component\Product\Model\VariantInterface" mapped-by="object" orphan-removal="true">
+            <cascade>
+                <cascade-all />
+            </cascade>
+            <gedmo:versioned />
+        </one-to-many>
+
+        <one-to-many field="associations" target-entity="Sylius\Component\Product\Model\ProductAssociationInterface" mapped-by="owner" orphan-removal="true">
             <cascade>
                 <cascade-all />
             </cascade>
@@ -63,6 +74,7 @@
             <gedmo:timestampable on="update"/>
         </field>
         <field name="deletedAt" column="deleted_at" type="datetime" nullable="true" />
+        <field name="enabled" column="enabled" type="boolean" />
 
         <gedmo:soft-deleteable field-name="deletedAt" />
         <gedmo:loggable />

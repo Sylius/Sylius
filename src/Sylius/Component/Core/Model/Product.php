@@ -17,71 +17,69 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Product\Model\Product as BaseProduct;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
-use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
 
 /**
- * Sylius core product entity.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
+ * @author Anna Walasek <anna.walasek@lakion.com>
  */
 class Product extends BaseProduct implements ProductInterface
 {
     /**
-     * Variant selection method.
-     *
      * @var string
      */
     protected $variantSelectionMethod;
 
     /**
-     * Taxons.
-     *
      * @var Collection|BaseTaxonInterface[]
      */
     protected $taxons;
 
     /**
-     * Tax category.
-     *
-     * @var TaxCategoryInterface
-     */
-    protected $taxCategory;
-
-    /**
-     * Shipping category.
-     *
      * @var ShippingCategoryInterface
      */
     protected $shippingCategory;
 
     /**
-     * Not allowed to ship in this zone.
-     *
      * @var ZoneInterface
      */
     protected $restrictedZone;
 
     /**
-     * Channels in which this product is available.
-     *
      * @var ChannelInterface[]|Collection
      */
     protected $channels;
 
     /**
-     * Constructor.
+     * @var BaseTaxonInterface
      */
+    protected $mainTaxon;
+
     public function __construct()
     {
         parent::__construct();
 
-        $this->setMasterVariant(new ProductVariant());
         $this->taxons = new ArrayCollection();
         $this->channels = new ArrayCollection();
 
         $this->variantSelectionMethod = self::VARIANT_SELECTION_CHOICE;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMetadataClassIdentifier()
+    {
+        return self::METADATA_CLASS_IDENTIFIER;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMetadataIdentifier()
+    {
+        return $this->getMetadataClassIdentifier().'-'.$this->getId();
     }
 
     /**
@@ -115,7 +113,7 @@ class Product extends BaseProduct implements ProductInterface
      */
     public function setVariantSelectionMethod($variantSelectionMethod)
     {
-        if (!in_array($variantSelectionMethod, array(self::VARIANT_SELECTION_CHOICE, self::VARIANT_SELECTION_MATCH))) {
+        if (!in_array($variantSelectionMethod, [self::VARIANT_SELECTION_CHOICE, self::VARIANT_SELECTION_MATCH])) {
             throw new \InvalidArgumentException(sprintf('Wrong variant selection method "%s" given.', $variantSelectionMethod));
         }
 
@@ -212,24 +210,6 @@ class Product extends BaseProduct implements ProductInterface
     public function setPrice($price)
     {
         $this->getMasterVariant()->setPrice($price);
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTaxCategory()
-    {
-        return $this->taxCategory;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setTaxCategory(TaxCategoryInterface $category = null)
-    {
-        $this->taxCategory = $category;
 
         return $this;
     }
@@ -337,10 +317,10 @@ class Product extends BaseProduct implements ProductInterface
      */
     public static function getVariantSelectionMethodLabels()
     {
-        return array(
+        return [
             self::VARIANT_SELECTION_CHOICE => 'Variant choice',
-            self::VARIANT_SELECTION_MATCH  => 'Options matching',
-        );
+            self::VARIANT_SELECTION_MATCH => 'Options matching',
+        ];
     }
 
     /**
@@ -357,6 +337,21 @@ class Product extends BaseProduct implements ProductInterface
     public function setShortDescription($shortDescription)
     {
         $this->translate()->setShortDescription($shortDescription);
-        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMainTaxon()
+    {
+        return $this->mainTaxon;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setMainTaxon(TaxonInterface $mainTaxon = null)
+    {
+        $this->mainTaxon = $mainTaxon;
     }
 }

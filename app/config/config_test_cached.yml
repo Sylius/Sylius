@@ -1,0 +1,21 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+imports:
+    - { resource: config_test.yml }
+
+doctrine:
+    orm:
+        entity_managers:
+            default:
+                metadata_cache_driver:
+                    type: memcached
+                    host: localhost
+                    port: 11211
+
+doctrine_phpcr:
+    odm:
+        metadata_cache_driver:
+            type: memcached
+            host: localhost
+            port: 11211

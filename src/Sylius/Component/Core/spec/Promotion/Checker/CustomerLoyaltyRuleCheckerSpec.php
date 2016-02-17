@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Core\Promotion\Checker;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
@@ -20,21 +21,21 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  */
 class CustomerLoyaltyRuleCheckerSpec extends ObjectBehavior
 {
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Core\Promotion\Checker\CustomerLoyaltyRuleChecker');
     }
 
     function it_should_be_Sylius_rule_checker()
     {
-        $this->shouldImplement('Sylius\Component\Promotion\Checker\RuleCheckerInterface');
+        $this->shouldImplement(RuleCheckerInterface::class);
     }
 
     function it_should_recognize_no_customer_as_not_eligible(OrderInterface $subject)
     {
         $subject->getCustomer()->willReturn(null);
 
-        $this->isEligible($subject, array('time' => 30, 'unit' => 'days'))->shouldReturn(false);
+        $this->isEligible($subject, ['time' => 30, 'unit' => 'days'])->shouldReturn(false);
     }
 
     function it_should_recognize_subject_as_not_eligible_if_customer_is_created_after_configured(
@@ -44,7 +45,7 @@ class CustomerLoyaltyRuleCheckerSpec extends ObjectBehavior
         $subject->getCustomer()->willReturn($customer);
         $customer->getCreatedAt()->willReturn(new \DateTime());
 
-        $this->isEligible($subject, array('time' => 30, 'unit' => 'days'))->shouldReturn(false);
+        $this->isEligible($subject, ['time' => 30, 'unit' => 'days'])->shouldReturn(false);
     }
 
     function it_should_recognize_subject_as_eligible_if_customer_is_created_before_configured(
@@ -54,7 +55,7 @@ class CustomerLoyaltyRuleCheckerSpec extends ObjectBehavior
         $subject->getCustomer()->willReturn($customer);
         $customer->getCreatedAt()->willReturn(new \DateTime('40 days ago'));
 
-        $this->isEligible($subject, array('time' => 30, 'unit' => 'days'))->shouldReturn(true);
+        $this->isEligible($subject, ['time' => 30, 'unit' => 'days'])->shouldReturn(true);
     }
 
     function it_should_recognize_subject_as_eligible_if_customer_is_created_after_configured(
@@ -64,7 +65,7 @@ class CustomerLoyaltyRuleCheckerSpec extends ObjectBehavior
         $subject->getCustomer()->shouldBeCalled()->willReturn($customer);
         $customer->getCreatedAt()->shouldBeCalled()->willReturn(new \DateTime('40 days ago'));
 
-        $this->isEligible($subject, array('time' => 30, 'unit' => 'days', 'after' => true))->shouldReturn(false);
+        $this->isEligible($subject, ['time' => 30, 'unit' => 'days', 'after' => true])->shouldReturn(false);
     }
 
     function it_should_recognize_subject_as_not_eligible_if_customer_is_created_before_configured(
@@ -74,6 +75,6 @@ class CustomerLoyaltyRuleCheckerSpec extends ObjectBehavior
         $subject->getCustomer()->willReturn($customer);
         $customer->getCreatedAt()->willReturn(new \DateTime());
 
-        $this->isEligible($subject, array('time' => 30, 'unit' => 'days', 'after' => true))->shouldReturn(true);
+        $this->isEligible($subject, ['time' => 30, 'unit' => 'days', 'after' => true])->shouldReturn(true);
     }
 }

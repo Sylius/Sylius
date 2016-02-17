@@ -13,7 +13,6 @@ namespace spec\Sylius\Bundle\ResourceBundle\Twig;
 
 use Pagerfanta\Pagerfanta;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\Parameters;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
@@ -67,23 +66,23 @@ class ResourceExtensionSpec extends ObjectBehavior
         \Twig_Environment $twig,
         $parameters
     ) {
-        $parameters->get('parameter_name')->willReturn(array());
+        $parameters->get('parameter_name')->willReturn([]);
         $parameters->get('sortable')->willReturn(true);
-        $parameters->get('sorting', array('id' => 'asc'))->willReturn(array());
+        $parameters->get('sorting', ['id' => 'asc'])->willReturn([]);
 
         $event = $this->getGetResponseEvent($request, $event);
 
         $router->generate(
             'route_name',
-            array('sorting' => array('propertyName' => 'asc'))
+            ['sorting' => ['propertyName' => 'asc']]
         )->willReturn('?sorting[propertyName]=asc');
 
-        $twig->render('SyliusResourceBundle:Twig:sorting.html.twig', array(
+        $twig->render('SyliusResourceBundle:Twig:sorting.html.twig', [
             'url' => '?sorting[propertyName]=asc',
             'label' => 'fieldName',
             'icon' => false,
             'currentOrder' => null,
-        ))->shouldBeCalled();
+        ])->shouldBeCalled();
 
         $this->fetchRequest($event);
         $this->renderSortingLink($twig, 'propertyName', 'fieldName');
@@ -96,23 +95,23 @@ class ResourceExtensionSpec extends ObjectBehavior
         \Twig_Environment $twig,
         $parameters
     ) {
-        $parameters->get('parameter_name')->willReturn(array());
+        $parameters->get('parameter_name')->willReturn([]);
         $parameters->get('sortable')->willReturn(true);
-        $parameters->get('sorting', array('id' => 'asc'))->willReturn(array());
+        $parameters->get('sorting', ['id' => 'asc'])->willReturn([]);
 
         $event = $this->getGetResponseEvent($request, $event);
 
         $router->generate(
             'route_name',
-            array('sorting' => array('propertyName' => 'asc'))
+            ['sorting' => ['propertyName' => 'asc']]
         )->willReturn('?sorting[propertyName]=asc');
 
-        $twig->render('SyliusResourceBundle:Twig:sorting.html.twig', array(
+        $twig->render('SyliusResourceBundle:Twig:sorting.html.twig', [
             'url' => '?sorting[propertyName]=asc',
             'label' => 'propertyName',
             'icon' => false,
             'currentOrder' => null,
-        ))->shouldBeCalled();
+        ])->shouldBeCalled();
 
         $this->fetchRequest($event);
         $this->renderSortingLink($twig, 'propertyName');
@@ -125,23 +124,23 @@ class ResourceExtensionSpec extends ObjectBehavior
         \Twig_Environment $twig,
         $parameters
     ) {
-        $parameters->get('parameter_name')->willReturn(array());
+        $parameters->get('parameter_name')->willReturn([]);
         $parameters->get('sortable')->willReturn(true);
-        $parameters->get('sorting', array('id' => 'asc'))->willReturn(array('propertyName' => 'asc'));
+        $parameters->get('sorting', ['id' => 'asc'])->willReturn(['propertyName' => 'asc']);
 
         $event = $this->getGetResponseEvent($request, $event);
 
         $router->generate(
             'route_name',
-            array('sorting' => array('propertyName' => 'desc'))
+            ['sorting' => ['propertyName' => 'desc']]
         )->willReturn('?sorting[propertyName]=desc');
 
-        $twig->render('SyliusResourceBundle:Twig:sorting.html.twig', array(
+        $twig->render('SyliusResourceBundle:Twig:sorting.html.twig', [
             'url' => '?sorting[propertyName]=desc',
             'label' => 'fieldName',
             'icon' => true,
             'currentOrder' => 'asc',
-        ))->shouldBeCalled();
+        ])->shouldBeCalled();
 
         $this->fetchRequest($event);
         $this->renderSortingLink($twig, 'propertyName', 'fieldName');
@@ -155,22 +154,22 @@ class ResourceExtensionSpec extends ObjectBehavior
         $parameters
     ) {
         $parameters->get('sortable')->willReturn(true);
-        $parameters->get('parameter_name')->willReturn(array());
-        $parameters->get('sorting', array('id' => 'asc'))->willReturn(array());
+        $parameters->get('parameter_name')->willReturn([]);
+        $parameters->get('sorting', ['id' => 'asc'])->willReturn([]);
 
         $event = $this->getGetResponseEvent($request, $event);
 
         $router->generate(
             'route_name',
-            array('sorting' => array('otherName' => 'asc'))
+            ['sorting' => ['otherName' => 'asc']]
         )->willReturn('?sorting[otherName]=asc');
 
-        $twig->render('SyliusResourceBundle:Twig:sorting.html.twig', array(
+        $twig->render('SyliusResourceBundle:Twig:sorting.html.twig', [
             'url' => '?sorting[otherName]=asc',
             'label' => 'fieldName',
             'icon' => false,
             'currentOrder' => null,
-        ))->shouldBeCalled();
+        ])->shouldBeCalled();
 
         $this->fetchRequest($event);
         $this->renderSortingLink($twig, 'otherName', 'fieldName');
@@ -184,36 +183,36 @@ class ResourceExtensionSpec extends ObjectBehavior
         $parameters
     ) {
         $parameters->get('sortable')->willReturn(true);
-        $parameters->get('parameter_name')->willReturn(array());
-        $parameters->get('sorting', array('id' => 'asc'))->willReturn(array('propertyName' => 'asc'));
+        $parameters->get('parameter_name')->willReturn([]);
+        $parameters->get('sorting', ['id' => 'asc'])->willReturn(['propertyName' => 'asc']);
         $event = $this->getGetResponseEvent($request, $event);
 
         $router->generate(
             'new_route',
-            array(
-                'sorting' => array('propertyName' => 'desc'),
+            [
+                'sorting' => ['propertyName' => 'desc'],
                 'params' => 'value',
-            )
+            ]
         )->willReturn('?sorting[propertyName]=asc&params=value');
 
-        $twig->render('SyliusResourceBundle:Twig:newsorting.html.twig', array(
+        $twig->render('SyliusResourceBundle:Twig:newsorting.html.twig', [
             'url' => '?sorting[propertyName]=asc&params=value',
             'label' => 'fieldName',
             'icon' => true,
             'currentOrder' => 'asc',
-        ))->shouldBeCalled();
+        ])->shouldBeCalled();
 
         $this->fetchRequest($event);
-        $this->renderSortingLink($twig, 'propertyName', 'fieldName', null, array(
+        $this->renderSortingLink($twig, 'propertyName', 'fieldName', null, [
             'route' => 'new_route',
             'template' => 'SyliusResourceBundle:Twig:newsorting.html.twig',
-            'route_params' => array('params' => 'value'),
-        ));
+            'route_params' => ['params' => 'value'],
+        ]);
     }
 
     function it_should_not_render_sorting_link_when_not_sortable(
-        Request $request, 
-        GetResponseEvent $event, 
+        Request $request,
+        GetResponseEvent $event,
         \Twig_Environment $twig,
         $parameters
     ) {
@@ -223,7 +222,7 @@ class ResourceExtensionSpec extends ObjectBehavior
             $request,
             $event,
             'route_name',
-            array('_sylius' => array('sortable' => false))
+            ['_sylius' => ['sortable' => false]]
         );
 
         $this->fetchRequest($event);
@@ -242,7 +241,7 @@ class ResourceExtensionSpec extends ObjectBehavior
             $request,
             $event,
             'route_name',
-            array('_sylius' => array('sortable' => false))
+            ['_sylius' => ['sortable' => false]]
         );
 
         $this->fetchRequest($event);
@@ -257,41 +256,41 @@ class ResourceExtensionSpec extends ObjectBehavior
         \Twig_Environment $twig,
         $parameters
     ) {
-        $limits = array(10, 20);
+        $limits = [10, 20];
 
         $parameters->get('paginate')->willReturn(10);
-        $parameters->get('parameter_name')->willReturn(array('paginate' => 'paginate'));
+        $parameters->get('parameter_name')->willReturn(['paginate' => 'paginate']);
         $event = $this->getGetResponseEvent(
             $request,
             $event,
             'route_name',
-            array(
+            [
                 'page' => 3,
-                '_sylius' => array('paginate' => '$paginate'),
-            )
+                '_sylius' => ['paginate' => '$paginate'],
+            ]
         );
 
         foreach ($limits as $limit) {
             $router->generate(
                 'route_name',
-                array(
+                [
                     'page' => 1,
                     'paginate' => $limit,
-                    '_sylius' => array('paginate' => '$paginate'),
-                )
-            )->willReturn('?paginate=' . $limit);
+                    '_sylius' => ['paginate' => '$paginate'],
+                ]
+            )->willReturn('?paginate='.$limit);
         }
 
-        $twig->render('SyliusResourceBundle:Twig:paginate.html.twig', array(
+        $twig->render('SyliusResourceBundle:Twig:paginate.html.twig', [
             'paginator' => $paginator,
-            'limits' => array(
+            'limits' => [
                 10 => '?paginate=10',
                 20 => '?paginate=20',
-            ),
-        ))->shouldBeCalled();
+            ],
+        ])->shouldBeCalled();
 
         $this->fetchRequest($event);
-        $this->renderPaginateSelect($twig, $paginator, array(10, 20));
+        $this->renderPaginateSelect($twig, $paginator, [10, 20]);
     }
 
     function it_should_render_a_paginate_select_with_custom_options(
@@ -302,46 +301,46 @@ class ResourceExtensionSpec extends ObjectBehavior
         \Twig_Environment $twig,
         $parameters
     ) {
-        $limits = array(10, 20);
+        $limits = [10, 20];
         $parameters->get('paginate')->willReturn(10);
-        $parameters->get('parameter_name')->willReturn(array('paginate' => 'paginate'));
+        $parameters->get('parameter_name')->willReturn(['paginate' => 'paginate']);
 
         $event = $this->getGetResponseEvent(
             $request,
             $event,
             'route_name',
-            array(
+            [
                 'page' => 3,
-                '_sylius' => array('paginate' => '$paginate'),
-            )
+                '_sylius' => ['paginate' => '$paginate'],
+            ]
         );
 
         foreach ($limits as $limit) {
             $router->generate(
                 'new_route',
-                array(
+                [
                     'page' => 1,
                     'params' => 'value',
                     'paginate' => $limit,
-                    '_sylius' => array('paginate' => '$paginate'),
-                )
-            )->willReturn('?paginate=' . $limit . '&params=value');
+                    '_sylius' => ['paginate' => '$paginate'],
+                ]
+            )->willReturn('?paginate='.$limit.'&params=value');
         }
 
-        $twig->render('SyliusResourceBundle:Twig:newpaginate.html.twig', array(
+        $twig->render('SyliusResourceBundle:Twig:newpaginate.html.twig', [
             'paginator' => $paginator,
-            'limits' => array(
+            'limits' => [
                 10 => '?paginate=10&params=value',
                 20 => '?paginate=20&params=value',
-            ),
-        ))->shouldBeCalled();
+            ],
+        ])->shouldBeCalled();
 
         $this->fetchRequest($event);
-        $this->renderPaginateSelect($twig, $paginator, array(10, 20), array(
+        $this->renderPaginateSelect($twig, $paginator, [10, 20], [
             'route' => 'new_route',
             'template' => 'SyliusResourceBundle:Twig:newpaginate.html.twig',
-            'route_params' => array('params' => 'value'),
-        ));
+            'route_params' => ['params' => 'value'],
+        ]);
     }
 
     function it_should_have_a_name()
@@ -353,7 +352,7 @@ class ResourceExtensionSpec extends ObjectBehavior
         Request $request,
         GetResponseEvent $event,
         $routeName = 'route_name',
-        $routerParams = array()
+        $routerParams = []
     ) {
         $request->attributes = new ParameterBag();
         $request->query = new ParameterBag();

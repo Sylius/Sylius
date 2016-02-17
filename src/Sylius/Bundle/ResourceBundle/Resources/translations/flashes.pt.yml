@@ -5,4 +5,4 @@ sylius:
   resource:
     create: '%resource% foi criado com sucesso.'
     update: '%resource% foi atualizado com sucesso.'
-    delete: '%resource% foi excluído com sucesso.'
+    delete: '%resource% foi apagado com sucesso.'

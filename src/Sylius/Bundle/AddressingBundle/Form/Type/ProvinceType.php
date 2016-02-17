@@ -11,12 +11,11 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Province form type.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
 class ProvinceType extends AbstractResourceType
@@ -27,9 +26,13 @@ class ProvinceType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', array(
+            ->addEventSubscriber(new AddCodeFormSubscriber())
+            ->add('name', 'text', [
                 'label' => 'sylius.form.province.name',
-            ))
+            ])
+            ->add('abbreviation', 'text', [
+                'label' => false,
+            ])
         ;
     }
 

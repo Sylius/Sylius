@@ -27,18 +27,17 @@ class BlockType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('id', 'text', array(
-                'label' => 'sylius.form.block.id'
-            ))
-            ->add('title', 'text', array(
-                'label' => 'sylius.form.block.title'
-            ))
-            ->add('body', 'textarea', array(
+            ->add('id', 'text', [
+                'label' => 'sylius.form.block.id',
+            ])
+            ->add('title', 'text', [
+                'label' => 'sylius.form.block.title',
+            ])
+            ->add('body', 'textarea', [
                 'required' => false,
-                'label'    => 'sylius.form.block.body',
-            ))
+                'label' => 'sylius.form.block.body',
+            ])
         ;
-
     }
 
     /**

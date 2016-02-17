@@ -11,14 +11,16 @@ sylius:
             street: Street
             province: Province
         country:
-            iso_name: ISO name
+            add_province: Add province
             name: Name
             provinces: Provinces
             select: Select
         province:
             name: Name
+            abbreviation: Abbreviation
             select: Select
         zone:
+            add_member: Add member
             members: Members
             name: Name
             type: Type
@@ -27,10 +29,7 @@ sylius:
                 province: Province
                 zone: Zone
             scope: Scope
+            select: Select
             select_scope: Select scope
-        zone_member_country:
-            country: Country
-        zone_member_province:
-            province: Province
-        zone_member_zone:
-            zone: Zone
+        zone_member:
+            select: Select

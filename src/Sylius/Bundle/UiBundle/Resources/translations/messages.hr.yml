@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    login:
+      username: Korisničko ime
+      password: Lozinka
+      remember_me: Zapamti me
+  ui:
+    dashboard: Kontrolna ploča

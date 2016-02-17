@@ -39,7 +39,7 @@ class PermissionProvider implements PermissionProviderInterface
      */
     public function getPermission($code)
     {
-        if (null === $permission = $this->repository->findOneBy(array('code' => $code))) {
+        if (null === $permission = $this->repository->findOneBy(['code' => $code])) {
             throw new PermissionNotFoundException($code);
         }
 

@@ -14,9 +14,10 @@ sylius:
       amount: Betaal hoeveelheid
       method: Betaalmethode
       state:
-        0: Betaal status
+        header: Betaalstatus
         checkout: Afrekenen
         completed: Voltooid
+        authorized: Gemachtigd
         failed: Mislukt
         new: Nieuw
         pending: In behandeling

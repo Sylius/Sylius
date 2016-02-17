@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\CurrencyBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Currency\Model\Currency;
 use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -33,7 +34,7 @@ class CurrencyCodeChoiceTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_should_define_assigned_data_class_and_validation_groups(
@@ -41,14 +42,14 @@ class CurrencyCodeChoiceTypeSpec extends ObjectBehavior
         OptionsResolver $resolver,
         Currency $currency
     ) {
-        $currencyProvider->getAvailableCurrencies()->shouldBeCalled()->willReturn(array($currency));
+        $currencyProvider->getAvailableCurrencies()->shouldBeCalled()->willReturn([$currency]);
         $currency->getCode()->shouldBeCalled()->willReturn('EUR');
         $currency->getName()->shouldBeCalled()->willReturn('Euro');
 
         $resolver
-            ->setDefaults(array(
-                'choices' => array('EUR' => 'EUR - Euro'),
-            ))
+            ->setDefaults([
+                'choices' => ['EUR' => 'EUR - Euro'],
+            ])
             ->shouldBeCalled();
 
         $this->configureOptions($resolver);

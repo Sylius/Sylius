@@ -11,13 +11,18 @@ sylius_backend_zone_index:
             sortable: true
 
 sylius_backend_zone_create:
-    path: /new
+    path: /{type}/new
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.zone:createAction
         _sylius:
             template: SyliusWebBundle:Backend/Zone:create.html.twig
             redirect: sylius_backend_zone_show
+            factory:
+                method: createTyped
+                arguments: [$type]
+    requirements:
+        type: country|province|zone
 
 sylius_backend_zone_update:
     path: /{id}/edit

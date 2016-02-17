@@ -16,6 +16,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Inventory\Operator\BackordersHandlerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -31,11 +32,11 @@ class BackordersHandlerSpec extends ObjectBehavior
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Inventory\Operator\BackordersHandler');
-   }
+    }
 
     function it_implements_Sylius_inventory_backorders_handler_interface()
     {
-        $this->shouldImplement('Sylius\Component\Inventory\Operator\BackordersHandlerInterface');
+        $this->shouldImplement(BackordersHandlerInterface::class);
     }
 
     function it_backorders_units_if_quantity_is_greater_than_on_hand(
@@ -54,7 +55,7 @@ class BackordersHandlerSpec extends ObjectBehavior
         $inventoryUnit2->setInventoryState(Argument::any())->shouldNotBeCalled();
         $inventoryUnit3->setInventoryState(InventoryUnitInterface::STATE_BACKORDERED)->shouldBeCalled();
 
-        $this->processBackorders(array($inventoryUnit1, $inventoryUnit2, $inventoryUnit3));
+        $this->processBackorders([$inventoryUnit1, $inventoryUnit2, $inventoryUnit3]);
     }
 
     function it_complains_if_inventory_units_contain_different_stockables(
@@ -69,8 +70,8 @@ class BackordersHandlerSpec extends ObjectBehavior
         $stockable1->getOnHand()->shouldBeCalled()->willReturn(50);
 
         $this
-            ->shouldThrow('InvalidArgumentException')
-            ->duringProcessBackorders(array($inventoryUnit1, $inventoryUnit2))
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->duringProcessBackorders([$inventoryUnit1, $inventoryUnit2])
         ;
     }
 
@@ -88,15 +89,15 @@ class BackordersHandlerSpec extends ObjectBehavior
 
         $repository
             ->findBy(
-                array(
-                    'stockable'      => $stockable,
-                    'inventoryState' => InventoryUnitInterface::STATE_BACKORDERED
-                ),
-                array(
-                    'createdAt' => 'ASC'
-                )
+                [
+                    'stockable' => $stockable,
+                    'inventoryState' => InventoryUnitInterface::STATE_BACKORDERED,
+                ],
+                [
+                    'createdAt' => 'ASC',
+                ]
             )
-            ->willReturn(array($inventoryUnit1, $inventoryUnit2))
+            ->willReturn([$inventoryUnit1, $inventoryUnit2])
         ;
 
         $this->fillBackorders($stockable);
@@ -118,15 +119,15 @@ class BackordersHandlerSpec extends ObjectBehavior
 
         $repository
             ->findBy(
-                array(
-                    'stockable'      => $stockable,
-                    'inventoryState' => InventoryUnitInterface::STATE_BACKORDERED
-                ),
-                array(
-                    'createdAt' => 'ASC'
-                )
+                [
+                    'stockable' => $stockable,
+                    'inventoryState' => InventoryUnitInterface::STATE_BACKORDERED,
+                ],
+                [
+                    'createdAt' => 'ASC',
+                ]
             )
-            ->willReturn(array($inventoryUnit1, $inventoryUnit2, $inventoryUnit3))
+            ->willReturn([$inventoryUnit1, $inventoryUnit2, $inventoryUnit3])
         ;
 
         $this->fillBackorders($stockable);
@@ -146,15 +147,15 @@ class BackordersHandlerSpec extends ObjectBehavior
 
         $repository
             ->findBy(
-                array(
-                    'stockable'      => $stockable,
-                    'inventoryState' => InventoryUnitInterface::STATE_BACKORDERED
-                ),
-                array(
-                    'createdAt' => 'ASC'
-                )
+                [
+                    'stockable' => $stockable,
+                    'inventoryState' => InventoryUnitInterface::STATE_BACKORDERED,
+                ],
+                [
+                    'createdAt' => 'ASC',
+                ]
             )
-            ->willReturn(array($inventoryUnit1, $inventoryUnit2))
+            ->willReturn([$inventoryUnit1, $inventoryUnit2])
         ;
 
         $this->fillBackorders($stockable);

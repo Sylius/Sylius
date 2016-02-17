@@ -7,14 +7,15 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * This component was inspired by FOS User-Bundle
  */
 
 namespace Sylius\Component\User\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\SoftDeletableTrait;
+use Sylius\Component\Resource\Model\TimestampableTrait;
+use Sylius\Component\Resource\Model\ToggleableTrait;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -23,8 +24,10 @@ use Doctrine\Common\Collections\Collection;
  */
 class User implements UserInterface
 {
+    use SoftDeletableTrait, TimestampableTrait, ToggleableTrait;
+
     /**
-     * @var int
+     * @var mixed
      */
     protected $id;
 
@@ -44,11 +47,6 @@ class User implements UserInterface
      * @var string
      */
     protected $usernameCanonical;
-
-    /**
-     * @var boolean
-     */
-    protected $enabled = false;
 
     /**
      * Random data that is used as an additional input to a function that hashes a password.
@@ -89,7 +87,7 @@ class User implements UserInterface
     protected $passwordRequestedAt;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $locked = false;
 
@@ -108,33 +106,21 @@ class User implements UserInterface
      *
      * @var array
      */
-    protected $roles = array(UserInterface::DEFAULT_ROLE);
+    protected $roles = [UserInterface::DEFAULT_ROLE];
 
     /**
-     * @var Collection
+     * @var Collection|UserOAuth[]
      */
     protected $oauthAccounts;
-
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $deletedAt;
 
     public function __construct()
     {
         $this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
         $this->oauthAccounts = new ArrayCollection();
         $this->createdAt = new \DateTime();
+
+        // Set here to overwrite default value from trait
+        $this->enabled = false;
     }
 
     /**
@@ -311,22 +297,6 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function isEnabled()
-    {
-        return $this->enabled;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setEnabled($enabled)
-    {
-        $this->enabled = (bool) $enabled;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function isAccountNonExpired()
     {
         return !$this->hasExpired($this->expiresAt);
@@ -391,7 +361,7 @@ class User implements UserInterface
      */
     public function setRoles(array $roles)
     {
-        $this->roles = array();
+        $this->roles = [];
 
         foreach ($roles as $role) {
             $this->addRole($role);
@@ -435,7 +405,7 @@ class User implements UserInterface
      */
     public function isPasswordRequestNonExpired(\DateInterval $ttl)
     {
-        return (null !== $this->passwordRequestedAt && new \DateTime() <= $this->passwordRequestedAt->add($ttl));
+        return null !== $this->passwordRequestedAt && new \DateTime() <= $this->passwordRequestedAt->add($ttl);
     }
 
     /**
@@ -504,62 +474,6 @@ class User implements UserInterface
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDeletedAt()
-    {
-        return $this->deletedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDeletedAt(\DateTime $deletedAt = null)
-    {
-        $this->deletedAt = $deletedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isDeleted()
-    {
-        return $this->hasExpired($this->deletedAt);
-    }
-
-    /**
      * Returns username.
      *
      * @return string
@@ -576,7 +490,7 @@ class User implements UserInterface
      */
     public function serialize()
     {
-        return serialize(array(
+        return serialize([
             $this->password,
             $this->salt,
             $this->usernameCanonical,
@@ -584,7 +498,7 @@ class User implements UserInterface
             $this->locked,
             $this->enabled,
             $this->id,
-        ));
+        ]);
     }
 
     /**
@@ -605,7 +519,7 @@ class User implements UserInterface
             $this->locked,
             $this->enabled,
             $this->id
-            ) = $data;
+        ) = $data;
     }
 
     /**
@@ -619,10 +533,12 @@ class User implements UserInterface
     }
 
     /**
+     * @param \DateTime $date
+     *
      * @return bool
      */
-    protected function hasExpired($date)
+    protected function hasExpired(\DateTime $date = null)
     {
-        return (null !== $date) && ((new \DateTime()) >= $date);
+        return null !== $date && new \DateTime() >= $date;
     }
 }

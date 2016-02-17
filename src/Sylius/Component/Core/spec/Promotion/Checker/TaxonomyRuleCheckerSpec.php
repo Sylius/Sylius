@@ -17,20 +17,21 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Core\Model\Taxon;
+use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
 
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class TaxonomyRuleCheckerSpec extends ObjectBehavior
 {
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Core\Promotion\Checker\TaxonomyRuleChecker');
     }
 
     function it_should_be_sylius_rule_checker()
     {
-        $this->shouldImplement('Sylius\Component\Promotion\Checker\RuleCheckerInterface');
+        $this->shouldImplement(RuleCheckerInterface::class);
     }
 
     function it_should_recognize_subject_as_eligible_if_product_taxonomy_is_matched(
@@ -40,14 +41,14 @@ class TaxonomyRuleCheckerSpec extends ObjectBehavior
         Product $product,
         ArrayCollection $collection
     ) {
-        $configuration = array('taxons' => $collection, 'exclude' => false);
+        $configuration = ['taxons' => $collection, 'exclude' => false];
 
         $collection->contains(1)->willReturn(true);
 
         $taxon->getId()->willReturn(1);
-        $product->getTaxons()->willReturn(array($taxon));
+        $product->getTaxons()->willReturn([$taxon]);
         $item->getProduct()->willReturn($product);
-        $subject->getItems()->willReturn(array($item));
+        $subject->getItems()->willReturn([$item]);
 
         $this->isEligible($subject, $configuration)->shouldReturn(true);
     }
@@ -59,14 +60,14 @@ class TaxonomyRuleCheckerSpec extends ObjectBehavior
         Product $product,
         ArrayCollection $collection
     ) {
-        $configuration = array('taxons' => $collection, 'exclude' => false);
+        $configuration = ['taxons' => $collection, 'exclude' => false];
 
         $collection->contains(1)->willReturn(false);
 
         $taxon->getId()->willReturn(1);
-        $product->getTaxons()->willReturn(array($taxon));
+        $product->getTaxons()->willReturn([$taxon]);
         $item->getProduct()->willReturn($product);
-        $subject->getItems()->willReturn(array($item));
+        $subject->getItems()->willReturn([$item]);
 
         $this->isEligible($subject, $configuration)->shouldReturn(false);
     }
@@ -78,14 +79,14 @@ class TaxonomyRuleCheckerSpec extends ObjectBehavior
         Product $product,
         ArrayCollection $collection
     ) {
-        $configuration = array('taxons' => $collection, 'exclude' => true);
+        $configuration = ['taxons' => $collection, 'exclude' => true];
 
         $collection->contains(1)->willReturn(false);
 
         $taxon->getId()->willReturn(1);
-        $product->getTaxons()->willReturn(array($taxon));
+        $product->getTaxons()->willReturn([$taxon]);
         $item->getProduct()->willReturn($product);
-        $subject->getItems()->willReturn(array($item));
+        $subject->getItems()->willReturn([$item]);
 
         $this->isEligible($subject, $configuration)->shouldReturn(true);
     }
@@ -97,14 +98,14 @@ class TaxonomyRuleCheckerSpec extends ObjectBehavior
         Product $product,
         ArrayCollection $collection
     ) {
-        $configuration = array('taxons' => $collection, 'exclude' => true);
+        $configuration = ['taxons' => $collection, 'exclude' => true];
 
         $collection->contains(2)->willReturn(true);
 
         $taxon->getId()->willReturn(2);
-        $product->getTaxons()->willReturn(array($taxon));
+        $product->getTaxons()->willReturn([$taxon]);
         $item->getProduct()->willReturn($product);
-        $subject->getItems()->willReturn(array($item));
+        $subject->getItems()->willReturn([$item]);
 
         $this->isEligible($subject, $configuration)->shouldReturn(false);
     }

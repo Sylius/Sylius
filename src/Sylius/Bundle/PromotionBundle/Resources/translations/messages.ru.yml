@@ -15,6 +15,9 @@ sylius:
       taxonomy_configuration:
         taxons: Налоги
         exclude: Исключить
+      contains_product_configuration:
+        variants: Товары
+        exclude: Исключить
       item_count_configuration:
         count: Кол-во
         equal: Равно
@@ -23,27 +26,31 @@ sylius:
         equal: Равно
       nth_order_configuration:
         nth: Количество
-      user_loyality_configuration:
+      customer_loyalty_configuration:
         time: Время
         unit:
           days: Дней
           weeks: Недель
           months: Месяцев
           years: Лет
-          0: Единица
-        after: Пользователь был создан после этого периода
+          header: Единиц
+        after: Пользователь создан после этого периода
       shipping_country_configuration:
         country: Страна
       type: Тип
     coupon:
-      code: Код
       usage_limit: Предел использования
+      expires_at: Истекает
     coupon_generate_instruction:
       amount: Количество
       usage_limit: Предел использования
+      expires_at: Истекает
     promotion:
       actions: Действия
+      add_action: Добавить действие
+      add_rule: Добавить правило
       coupon_based: Основана на купонах
+      exclusive: Эксклюзив
       description: Описание
       ends_at: Конец
       name: Название

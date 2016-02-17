@@ -1,9 +1,0 @@
-{% import 'SyliusResourceBundle:Macros:actions.html.twig' as actions %}
-
-<h1>Zone updating <small>Use this form to edit existing zone</small></h1>
-<hr />
-
-<form action="{{ path('sylius_zone_update', {'id': zone.id}) }}" method="post" class="form-horizontal">
-    {% include 'SyliusAddressingBundle:Zone:_form.html.twig' %}
-    {{ actions.update(path('sylius_zone_list')) }}
-</form>

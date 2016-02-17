@@ -19,13 +19,12 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class SearchStringQuerySpec extends ObjectBehavior
 {
-
     function let()
     {
         $request = new Request();
         $request->query->set('q', 'search term');
         $request->query->set('search_param', 'all');
-        $request->query->set('filters', array('test'));
+        $request->query->set('filters', ['test']);
 
         $this->beConstructedWith($request, true);
     }
@@ -47,12 +46,11 @@ class SearchStringQuerySpec extends ObjectBehavior
 
     public function it_has_some_applied_filters()
     {
-        $this->getAppliedFilters()->shouldReturn(array('test'));
+        $this->getAppliedFilters()->shouldReturn(['test']);
     }
 
     public function it_should_take_in_mind_the_dropdown_filter()
     {
         $this->isDropdownFilterEnabled()->shouldReturn(true);
     }
-
-} 
+}

@@ -15,6 +15,9 @@ sylius:
       taxonomy_configuration:
         taxons: Taksonomier
         exclude: Eksluder
+      contains_product_configuration:
+        variants: Produkter
+        exclude: Eksluder
       item_count_configuration:
         count: Antall
         equal: Lik
@@ -23,26 +26,18 @@ sylius:
         equal: Lik
       nth_order_configuration:
         nth: Nth
-      user_loyality_configuration:
-        time: Tid
-        unit:
-          days: Dager
-          weeks: Uker
-          months: Måneder
-          years: År
-          0: Enhet
-        after: Brukere opprettet etter denne perioden
       shipping_country_configuration:
         country: Land
       type: Type
     coupon:
-      code: Kode
       usage_limit: Bruksgrense
     coupon_generate_instruction:
       amount: Beløp
       usage_limit: Bruksgrense
     promotion:
       actions: Handlinger
+      add_action: Legg til handling
+      add_rule: Legg til regel
       coupon_based: Kupongbasert
       description: Beskrivelse
       ends_at: Slutter på

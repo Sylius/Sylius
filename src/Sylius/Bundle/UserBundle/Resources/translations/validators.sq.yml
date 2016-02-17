@@ -1,0 +1,35 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  group:
+    name:
+      max: 'Emri i grupit nuk duhet të përmbajë më shumë se {{ limit }} karaktere.'
+      min: 'Emri i grupit duhet të përmbajë të paktën {{ limit }} karaktere.'
+      not_blank: Fut emrin e grupit.
+  user:
+    email:
+      not_blank: Shkruaj adresën e email-it.
+      invalid: Ky email nuk është i vlefshëm.
+      not_registered: Përdoruesi me këtë email nuk egziston. Ju lutem me parë rregjistrohuni.
+    plainPassword:
+      not_blank: Fut fjalëkalimin tënd.
+      mismatch: Fjalëkalimi i futur nuk përputhet
+      wrong_current: Fjalëkalimi i shtuar është ndryshe nga ai egzistues.
+  customer:
+    first_name:
+      max: 'Emri nuk duhet të përmbajë më shumë se {{ limit }} karaktere.'
+      min: 'Emri duhet të përmbajë të paktën {{ limit }} karaktere.'
+      not_blank: Shkruaj emrin.
+    last_name:
+      max: 'Mbiemri nuk duhet të përmbajë më shumë se {{ limit }} karaktere.'
+      min: 'Mbiemri duhet të përmbajë të paktën {{ limit }} karaktere.'
+      not_blank: Shkruaj mbiemrin.
+    email:
+      already_used: Ky email është përdorur tashmë, login ose përdor rikujtimin e fjalëkalimit.
+      max: 'Email nuk duhet të përmbajë më shumë se {{ limit }} karaktere.'
+      min: 'Email duhet të përmbajë të paktën {{ limit }} karaktere.'
+      not_blank: Shkruaj adresën e email-it.
+      invalid: Ky email nuk është i vlefshëm.
+      unique: Ky email është përdorur tashmë.
+      registered: Ky email është i regjistruar, login ose përdor rikujtimin e fjalëkalimit.

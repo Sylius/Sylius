@@ -1,14 +1,3 @@
 Sylius\Component\Product\Model\Variant:
     exclusion_policy: ALL
     xml_root_name: variant
-    properties:
-        id:
-            expose: true
-            type: integer
-            xml_attribute: true
-        availableOn:
-            expose: true
-            type: DateTime
-        object:
-            expose: true
-            serialized_name: product

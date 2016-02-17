@@ -5,7 +5,6 @@ imports:
     - { resource: config.yml }
 
 parameters:
-    sylius.promotion.item_based: true
     sylius.order.allow_guest_order: true
 
 framework:
@@ -36,6 +35,9 @@ sylius_payment:
 sylius_rbac:
     authorization_checker: sylius.authorization_checker.toggleable
 
+sylius_channel:
+    fake_channel_support: true
+
 doctrine_cache:
     providers:
         sylius_settings:
@@ -47,3 +49,6 @@ monolog:
             type:  stream
             path:  %kernel.logs_dir%/%kernel.environment%.log
             level: error
+
+twig:
+    exception_controller: 'Sylius\Bundle\CoreBundle\Controller\VerboseExceptionController::showAction'

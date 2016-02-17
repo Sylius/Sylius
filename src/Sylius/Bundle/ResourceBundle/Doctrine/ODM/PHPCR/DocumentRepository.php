@@ -15,6 +15,7 @@ use Doctrine\ODM\PHPCR\DocumentRepository as BaseDocumentRepository;
 use Doctrine\ODM\PHPCR\Query\Builder\QueryBuilder;
 use Pagerfanta\Adapter\DoctrineODMPhpcrAdapter;
 use Pagerfanta\Pagerfanta;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -28,17 +29,7 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
     /**
      * {@inheritdoc}
      */
-    public function createNew()
-    {
-        $className = $this->getClassName();
-
-        return new $className();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createPaginator(array $criteria = array(), array $sorting = array())
+    public function createPaginator(array $criteria = [], array $sorting = [])
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
 
@@ -46,6 +37,26 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         $this->applySorting($queryBuilder, $sorting);
 
         return $this->getPaginator($queryBuilder);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function add(ResourceInterface $resource)
+    {
+        $this->dm->persist($resource);
+        $this->dm->flush();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function remove(ResourceInterface $resource)
+    {
+        if (null !== $this->find($resource->getId())) {
+            $this->dm->remove($resource);
+            $this->dm->flush();
+        }
     }
 
     /**
@@ -70,15 +81,24 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
      * @param QueryBuilder $queryBuilder
      * @param array        $criteria
      */
-    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = array())
+    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = [])
     {
+        $metadata = $this->getClassMetadata();
         foreach ($criteria as $property => $value) {
             if (!empty($value)) {
-                $queryBuilder
-                    ->andWhere()
-                        ->eq()
-                            ->field($this->getPropertyName($property))
-                            ->literal($value);
+                if ($property === $metadata->nodename) {
+                    $queryBuilder
+                        ->andWhere()
+                            ->eq()
+                                ->localName($this->getAlias())
+                                ->literal($value);
+                } else {
+                    $queryBuilder
+                        ->andWhere()
+                            ->eq()
+                                ->field($this->getPropertyName($property))
+                                ->literal($value);
+                }
             }
         }
     }
@@ -87,7 +107,7 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
      * @param QueryBuilder $queryBuilder
      * @param array        $sorting
      */
-    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = array())
+    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = [])
     {
         foreach ($sorting as $property => $order) {
             if (!empty($order)) {

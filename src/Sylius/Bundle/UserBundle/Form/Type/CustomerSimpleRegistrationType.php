@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\UserBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Bundle\UserBundle\Form\EventListener\CustomerRegistrationFormListener;
-use Sylius\Bundle\UserBundle\Form\EventListener\UserRegistrationFormListener;
+use Sylius\Bundle\UserBundle\Form\EventSubscriber\CustomerRegistrationFormSubscriber;
+use Sylius\Bundle\UserBundle\Form\EventSubscriber\UserRegistrationFormSubscriber;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -43,17 +43,17 @@ class CustomerSimpleRegistrationType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options = array())
+    public function buildForm(FormBuilderInterface $builder, array $options = [])
     {
         $builder
-            ->add('email', 'email', array(
+            ->add('email', 'email', [
                 'label' => 'sylius.form.customer.email',
-            ))
-            ->add('user', 'sylius_user_registration', array(
+            ])
+            ->add('user', 'sylius_user_registration', [
                 'label' => false,
-            ))
-            ->addEventSubscriber(new CustomerRegistrationFormListener($this->customerRepository))
-            ->addEventSubscriber(new UserRegistrationFormListener())
+            ])
+            ->addEventSubscriber(new CustomerRegistrationFormSubscriber($this->customerRepository))
+            ->addEventSubscriber(new UserRegistrationFormSubscriber())
             ->setDataLocked(false)
         ;
     }
@@ -63,11 +63,11 @@ class CustomerSimpleRegistrationType extends AbstractResourceType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => $this->dataClass,
             'validation_groups' => $this->validationGroups,
             'cascade_validation' => true,
-        ));
+        ]);
     }
 
     /**

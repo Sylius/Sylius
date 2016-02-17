@@ -11,7 +11,7 @@ sylius_backend_country_index:
             sortable: true
             paginate: 50
             sorting:
-                isoName: asc
+                code: asc
 
 sylius_backend_country_create:
     path: /new

@@ -46,10 +46,10 @@ class StateResolver implements StateResolverInterface
             } else {
                 // Payment is processing if one of the payment is.
                 if ($payments->exists(function ($key, $payment) {
-                    return in_array($payment->getState(), array(
+                    return in_array($payment->getState(), [
                         PaymentInterface::STATE_PROCESSING,
                         PaymentInterface::STATE_PENDING,
-                    ));
+                    ]);
                 })) {
                     $paymentState = PaymentInterface::STATE_PROCESSING;
                 }
@@ -75,7 +75,7 @@ class StateResolver implements StateResolverInterface
 
     protected function getShippingState(OrderInterface $order)
     {
-        $states = array();
+        $states = [];
 
         foreach ($order->getShipments() as $shipment) {
             $states[] = $shipment->getState();
@@ -83,17 +83,17 @@ class StateResolver implements StateResolverInterface
 
         $states = array_unique($states);
 
-        $acceptableStates = array(
-            ShipmentInterface::STATE_CHECKOUT   => OrderShippingStates::CHECKOUT,
-            ShipmentInterface::STATE_ONHOLD     => OrderShippingStates::ONHOLD,
-            ShipmentInterface::STATE_READY      => OrderShippingStates::READY,
-            ShipmentInterface::STATE_SHIPPED    => OrderShippingStates::SHIPPED,
-            ShipmentInterface::STATE_RETURNED   => OrderShippingStates::RETURNED,
-            ShipmentInterface::STATE_CANCELLED  => OrderShippingStates::CANCELLED,
-        );
+        $acceptableStates = [
+            ShipmentInterface::STATE_CHECKOUT => OrderShippingStates::CHECKOUT,
+            ShipmentInterface::STATE_ONHOLD => OrderShippingStates::ONHOLD,
+            ShipmentInterface::STATE_READY => OrderShippingStates::READY,
+            ShipmentInterface::STATE_SHIPPED => OrderShippingStates::SHIPPED,
+            ShipmentInterface::STATE_RETURNED => OrderShippingStates::RETURNED,
+            ShipmentInterface::STATE_CANCELLED => OrderShippingStates::CANCELLED,
+        ];
 
         foreach ($acceptableStates as $shipmentState => $orderState) {
-            if (array($shipmentState) == $states) {
+            if ([$shipmentState] == $states) {
                 return $orderState;
             }
         }

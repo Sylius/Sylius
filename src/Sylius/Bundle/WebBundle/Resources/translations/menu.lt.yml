@@ -5,49 +5,70 @@ sylius:
   backend:
     menu:
       main:
+        api_clients: API klientai
+        archetypes: Produkto archetipai
         assortment: Asortimentas
+        attributes: Konfigūruoti atributus
+        blocks: Blokai
+        channels: Kanalai
         configuration: Konfigūracija
+        content: Turinys
         countries: Šalys
-        customer: Klientai
+        currencies: Valiutos
+        customer: Klienta
+        customers: Klientai
         dashboard: Skydelis
-        exchange_rates: Valiutų kursai
+        emails: El. laiškai
         general_settings: Bendrieji nustatymai
+        groups: Grupės
         homepage: Jūsų parduotuvė
         locales: Lokalės
+        menus: Meniu
         new_order: Pridėti naują užsakymą
         new_promotion: Pridėti naują akciją
         options: Valdyti produkto parinktis
         orders: Esami užsakymai
+        pages: Puslapiai
         payment_methods: Apmokėjimo būdai
         payments: Mokėjimai
+        permissions: Prieigos teisės
         products: Produktai
         promotions: Akcijos
-        properties: Konfigūruoti ypatybės
-        prototypes: Produkto prototipai
+        report: Ataskaitos
+        roles: Rolės
+        routes: Maršrutai
         sales: Užsakymai
+        security_settings: Saugos parametrai
         shipments: Pristatymai
         shipping_categories: Pristatymo kategorijos
         shipping_methods: Pristatymo būdai
+        slideshow: Skaidrių demonstracija
         stockables: Atsargų lygiai
         tax_categories: Apmokestinimo kategorijos
         tax_rates: Mokesčių tarifai
         taxation_settings: Apmokestinimo nustatymai
         taxonomies: Skirstymas į kategorijas
-        users: Vartotojai
         zones: Zonos
       sidebar:
+        api_clients: API klientai
+        archetypes: Produkto archetipai
         assortment: Asortimentas
+        attributes: Konfigūruoti atributus
         blocks: Blokai
+        channels: Kanalai
         configuration: Konfigūracija
         content: Turinys
         countries: Šalys
-        customer: Klientai
+        currencies: Valiutos
+        customer: Klienta
+        customers: Klientai
         dashboard: Skydelis
-        exchange_rates: Valiutų kursai
+        emails: El. laiškai
         general_settings: Bendrieji nustatymai
         groups: Grupės
         homepage: Grįžti į svetainę
         locales: Lokalės
+        menus: Meniu
         new_order: Pridėti naują užsakymą
         new_promotion: Pridėti naują akciją
         options: Valdyti parinktis
@@ -55,20 +76,24 @@ sylius:
         pages: Puslapiai
         payment_methods: Apmokėjimo būdai
         payments: Mokėjimai
+        permissions: Prieigos teisės
         products: Produktai
         promotions: Akcijos
-        properties: Konfigūruoti ypatybės
-        prototypes: Produkto prototipai
+        redirects: Nukreipimai
+        report: Ataskaitos
+        roles: Rolės
+        routes: Maršrutai
         sales: Užsakymai
+        security_settings: Saugos parametrai
         shipments: Pristatymai
         shipping_categories: Pristatymo kategorijos
         shipping_methods: Pristatymo būdai
+        slideshow: Skaidrių demonstracija
         stockables: Atsargų lygiai
         tax_categories: Apmokestinimo kategorijos
         tax_rates: Mokesčių tarifai
         taxation_settings: Apmokestinimo nustatymai
         taxonomies: Skirstymas į kategorijas
-        users: Vartotojai
         zones: Zonos
   frontend:
     menu:

@@ -45,9 +45,9 @@ class MoneyTypeExtension extends AbstractTypeExtension
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'currency' => $this->currencyContext->getCurrency(),
-            ))
+            ])
         ;
     }
 

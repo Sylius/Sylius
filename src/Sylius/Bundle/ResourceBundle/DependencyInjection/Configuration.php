@@ -11,7 +11,9 @@
 
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection;
 
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -41,8 +43,6 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds `resources` section.
-     *
      * @param ArrayNodeDefinition $node
      */
     private function addResourcesSection(ArrayNodeDefinition $node)
@@ -54,29 +54,60 @@ class Configuration implements ConfigurationInterface
                     ->prototype('array')
                         ->children()
                             ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
-                            ->scalarNode('object_manager')->defaultValue('default')->end()
+                            ->variableNode('options')->end()
                             ->scalarNode('templates')->cannotBeEmpty()->end()
                             ->arrayNode('classes')
+                                ->isRequired()
+                                ->addDefaultsIfNotSet()
                                 ->children()
                                     ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
-                                    ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                    ->scalarNode('repository')->end()
-                                    ->scalarNode('interface')->end()
-                                    ->arrayNode('translation')
+                                    ->scalarNode('interface')->cannotBeEmpty()->end()
+                                    ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                    ->scalarNode('repository')->cannotBeEmpty()->end()
+                                    ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                    ->arrayNode('form')
+                                        ->prototype('scalar')->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                            ->arrayNode('validation_groups')
+                                ->addDefaultsIfNotSet()
+                                ->children()
+                                    ->arrayNode('default')
+                                        ->prototype('scalar')->end()
+                                        ->defaultValue([])
+                                    ->end()
+                                ->end()
+                            ->end()
+                            ->arrayNode('translation')
+                                ->children()
+                                    ->variableNode('options')->end()
+                                    ->arrayNode('classes')
+                                        ->isRequired()
+                                        ->addDefaultsIfNotSet()
                                         ->children()
-                                            ->scalarNode('model')->isRequired()->end()
-                                            ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                            ->scalarNode('repository')->end()
-                                            ->scalarNode('interface')->end()
-                                            ->arrayNode('mapping')
-                                                ->isRequired()
-                                                ->children()
-                                                    ->arrayNode('fields')
-                                                        ->prototype('scalar')
-                                                    ->end()
-                                                ->end()
+                                            ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
+                                            ->scalarNode('interface')->cannotBeEmpty()->end()
+                                            ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                            ->scalarNode('repository')->cannotBeEmpty()->end()
+                                            ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                            ->arrayNode('form')
+                                                ->prototype('scalar')->end()
                                             ->end()
                                         ->end()
+                                    ->end()
+                                    ->arrayNode('validation_groups')
+                                        ->addDefaultsIfNotSet()
+                                        ->children()
+                                            ->arrayNode('default')
+                                                ->prototype('scalar')->end()
+                                                ->defaultValue([])
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                    ->arrayNode('fields')
+                                        ->prototype('scalar')->end()
+                                        ->defaultValue([])
                                     ->end()
                                 ->end()
                             ->end()
@@ -88,8 +119,6 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds `settings` section.
-     *
      * @param $node
      */
     private function addSettingsSection(ArrayNodeDefinition $node)
@@ -103,7 +132,7 @@ class Configuration implements ConfigurationInterface
                         ->variableNode('limit')->defaultNull()->end()
                         ->arrayNode('allowed_paginate')
                             ->prototype('integer')->end()
-                            ->defaultValue(array(10, 20, 30))
+                            ->defaultValue([10, 20, 30])
                         ->end()
                         ->integerNode('default_page_size')->defaultValue(10)->end()
                         ->booleanNode('sortable')->defaultFalse()->end()

@@ -2,17 +2,15 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  checkout:
-    shipping_method:
-      not_blank: Bitte wählen Sie die Versandart.
   form:
     action:
       add_product_configuration:
         price: Stückpreis
         quantity: Stückzahl
         variant: Variante
+      customer_group: Kundengruppe
     block:
-      body: Body
+      body: Inhalt
       id: ID
       title: Titel
     cart:
@@ -20,27 +18,37 @@ sylius:
     checkout:
       addressing:
         different_billing_address: Eine andere Rechnungsadresse benutzen?
-      payment_method: Zahlungsart
+      payment_method: Zahlungsmethode
       shipping_method: Versandarten
+    promotion:
+      channels: Promotionskanäle
     coupon:
-      per_user_usage_limit: Benutzungslimite pro Benutzer
+      per_customer_usage_limit: Nutzungsbeschränkung pro Kunde
     group:
       name: Name
       roles: Rollen
+    channel:
+      taxonomies: Klassifizierungen
+      locales: Gebietsschemata
+      currency_default: Standardwährung
+      currencies: Währungen
+      shipping_methods: Versandmethoden
+      payment_methods: Zahlungsmethoden
     image:
-      file: Bild
+      file: Foto
     locale:
       code: Code
       enabled: Aktiviert
     order_filter:
-      created_at_from: Erstellt nach
-      created_at_to: Erstellt vor
+      created_at_from: Danach erstellt
+      created_at_to: Vorher erstellt
       number: Nummer
       total_from: Von
-      total_to: zu
+      total_to: Bis
       payment_state: Zahlungsstatus
+      channel: Alle Kanäle
     page:
-      body: Body
+      body: Inhalt
       id: ID
       title: Titel
     product:
@@ -48,7 +56,7 @@ sylius:
       shipping_category: Versandkategorie
       short_description: Kurzbeschreibung
       tax_category: Steuerkategorie
-      variant_selection_method: Varianten
+      variant_selection_method: Variantenauswahlmethode
     product_filter:
       name: Name
       sku: Bestandseinheit
@@ -56,18 +64,29 @@ sylius:
       general:
         currency: Standardwährung
         locale: Sprache
-        meta_description: Meta-Beschreibung
-        meta_keywords: Meta-Stichwörter
-        title: Titel der Seite
+        meta_description: Metabeschreibung
+        meta_keywords: Metastichwörter
+        title: Seitentitel
+        tracking_code:
+          Tracking code (for example: Google Analytics Tracking Code)
       taxation:
         default_tax_zone: Standard Steuerzone
+      security:
+        enabled: Aktiv?
     shipment_filter:
       created_at_from: Von
-      created_at_to: zu
-      number: Auftragsnummer
+      created_at_to: Bis
+      number: Bestellnummer
       shipping_address: Liefern an
+      channel: Alle Kanäle
+    payment_filter:
+      created_at_from: Von
+      created_at_to: Bis
+      number: Bestellnummer
+      billing_address: Rechnungsadresse
+      channel: Alle Kanäle
     shipping_method:
-      zone: Zone
+      zone: Versandgebiet
     taxon:
       file: Foto auswählen
     taxonomy:
@@ -77,5 +96,28 @@ sylius:
       different_billing_address: Eine andere Rechnungsadresse benutzen?
       enabled: Aktiviert
       first_name: Vorname
+      groups: Gruppen
+      roles: Rollen
+      last_name: Nachname
+      password: Passwort
+      shipping_address: Lieferadresse
+    user_filter:
+      query: Suche
     variant:
+      available_on_demand: Auf Nachfrage
+      depth: Tiefe
+      height: Höhe
+      images: Fotos
+      on_hand: Auf Lager
+      price: Preis
       sku: Bestandseinheit
+      weight: Gewicht
+      width: Breite
+    attribute:
+      product_attribute_value:
+        attribute: Attribut
+        value: Wert
+    guest:
+      email: E-Mail
+    product_association_type:
+      name: Name

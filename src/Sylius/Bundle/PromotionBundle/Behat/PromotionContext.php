@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\PromotionBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
+use Behat\Mink\Element\NodeElement;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 
 class PromotionContext extends DefaultContext
@@ -25,10 +26,10 @@ class PromotionContext extends DefaultContext
         $promotion = $this->findOneByName('promotion', $name);
 
         $manager = $this->getEntityManager();
-        $repository = $this->getRepository('promotion_coupon');
+        $factory = $this->getFactory('promotion_coupon');
 
         foreach ($table->getHash() as $data) {
-            $coupon = $repository->createNew();
+            $coupon = $factory->createNew();
             $coupon->setCode($data['code']);
             $coupon->setUsageLimit(isset($data['usage limit']) ? $data['usage limit'] : 0);
             $coupon->setUsed(isset($data['used']) ? $data['used'] : 0);
@@ -51,12 +52,12 @@ class PromotionContext extends DefaultContext
         $promotion = $this->findOneByName('promotion', $name);
 
         $manager = $this->getEntityManager();
-        $repository = $this->getRepository('promotion_rule');
+        $factory = $this->getFactory('promotion_rule');
 
         foreach ($table->getHash() as $data) {
             $configuration = $this->cleanPromotionConfiguration($this->getConfiguration($data['configuration']));
 
-            $rule = $repository->createNew();
+            $rule = $factory->createNew();
             $rule->setType(strtolower(str_replace(' ', '_', $data['type'])));
             $rule->setConfiguration($configuration);
 
@@ -76,12 +77,12 @@ class PromotionContext extends DefaultContext
         $promotion = $this->findOneByName('promotion', $name);
 
         $manager = $this->getEntityManager();
-        $repository = $this->getRepository('promotion_action');
+        $factory = $this->getFactory('promotion_action');
 
         foreach ($table->getHash() as $data) {
             $configuration = $this->cleanPromotionConfiguration($this->getConfiguration($data['configuration']));
 
-            $action = $repository->createNew();
+            $action = $factory->createNew();
             $action->setType(strtolower(str_replace(' ', '_', $data['type'])));
             $action->setConfiguration($configuration);
 
@@ -100,13 +101,14 @@ class PromotionContext extends DefaultContext
     public function theFollowingPromotionsExist(TableNode $table)
     {
         $manager = $this->getEntityManager();
-        $repository = $this->getRepository('promotion');
+        $factory = $this->getFactory('promotion');
 
         foreach ($table->getHash() as $data) {
-            $promotion = $repository->createNew();
+            $promotion = $factory->createNew();
 
             $promotion->setName($data['name']);
             $promotion->setDescription($data['description']);
+            $promotion->setCode($data['code']);
 
             if (array_key_exists('usage limit', $data) && '' !== $data['usage limit']) {
                 $promotion->setUsageLimit((int) $data['usage limit']);
@@ -125,6 +127,43 @@ class PromotionContext extends DefaultContext
         }
 
         $manager->flush();
+    }
+
+    /**
+     * @Then I should see product :productName in the cart summary
+     */
+    public function iShouldSeeProductInCartSummary($productName)
+    {
+        $cartSummary = $this->getCartSummaryPageElement();
+        if (false === strpos($cartSummary->getText(), $productName)) {
+            throw new \InvalidArgumentException(sprintf('Product "%s" was not found in cart summary', $productName));
+        }
+    }
+
+    /**
+     * @Then I should not see product :productName in the cart summary
+     */
+    public function iShouldNotSeeProductInCartSummary($productName)
+    {
+        $cartSummary = $this->getCartSummaryPageElement();
+        if (false !== strpos($cartSummary->getText(), $productName)) {
+            throw new \InvalidArgumentException(sprintf('Product "%s" was found in cart summary', $productName));
+        }
+    }
+
+    /**
+     * @return NodeElement
+     *
+     * @throws \Exception
+     */
+    private function getCartSummaryPageElement()
+    {
+        $element = $this->getSession()->getPage()->find('css', 'div:contains("Cart summary") > form > table');
+        if (null === $element) {
+            throw new \Exception('Cart summary element cannot be found!');
+        }
+
+        return $element;
     }
 
     /**

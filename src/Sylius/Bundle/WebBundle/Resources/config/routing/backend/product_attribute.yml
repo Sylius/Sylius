@@ -9,17 +9,19 @@ sylius_backend_product_attribute_index:
         _sylius:
             template: SyliusWebBundle:Backend/ProductAttribute:index.html.twig
             sortable: true
-            sorting:
-                name: desc
 
 sylius_backend_product_attribute_create:
-    path: /new
+    path: /new/{type}
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.product_attribute:createAction
+        type: text
         _sylius:
             template: SyliusWebBundle:Backend/ProductAttribute:create.html.twig
             redirect: sylius_backend_product_attribute_index
+            factory:
+                method: createTyped
+                arguments: [$type]
 
 sylius_backend_product_attribute_update:
     path: /{id}/edit
@@ -38,3 +40,22 @@ sylius_backend_product_attribute_delete:
         _sylius:
             template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_product_attribute_index
+
+sylius_backend_get_attribute_types:
+    path: /attribute-types
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_attribute:getAttributeTypesAction
+        template: SyliusAttributeBundle::attributeTypes.html.twig
+
+sylius_backend_product_attributes:
+    path: /attributes
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_attribute:renderAttributesAction
+
+sylius_backend_render_attribute_forms:
+    path: /attribute-forms
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_attribute:renderAttributeValueFormsAction

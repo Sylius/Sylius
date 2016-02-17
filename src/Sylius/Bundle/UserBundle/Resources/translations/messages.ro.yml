@@ -1,0 +1,30 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    group:
+      name: Nume
+      roles: Roluri
+    user:
+      email: E-mail
+      enabled: Activat
+      password:
+        label: Parolă
+      shipping_address: Adresa de livrare
+    customer:
+      first_name: Prenume
+      groups: Grupuri
+      last_name: Nume
+      email: E-mail
+      billing_address: Adresa de facturare
+      different_billing_address: Folosiți o adresă de facturare diferită?
+    user_filter:
+      query: Căutare
+    user_change_password:
+      confirmation: Confirmare
+      current: Parola actuală
+      new: Parolă nouă
+    user_reset_password:
+      confirmation: Confirmare
+      new: Parolă nouă

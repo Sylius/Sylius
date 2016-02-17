@@ -30,9 +30,9 @@ class FormController extends Controller
      */
     public function showAction($type, $template)
     {
-        return $this->render($template, array(
-            'form' => $this->createForm($type)->createView()
-        ));
+        return $this->render($template, [
+            'form' => $this->createForm($type)->createView(),
+        ]);
     }
 
     /**
@@ -45,8 +45,14 @@ class FormController extends Controller
      */
     public function filterAction($type, $template)
     {
-        return $this->render($template, array(
-            'form' => $this->get('form.factory')->createNamed('criteria', $type)->createView()
-        ));
+        $request = $this->get('request_stack')->getMasterRequest();
+
+        $form = $this->get('form.factory')->createNamed('criteria', $type, null, ['method' => 'GET']);
+
+        $form->handleRequest($request);
+
+        return $this->render($template, [
+            'form' => $form->createView(),
+        ]);
     }
 }

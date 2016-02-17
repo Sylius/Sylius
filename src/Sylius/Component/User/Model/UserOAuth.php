@@ -1,13 +1,13 @@
 <?php
 
 /*
-* This file is part of the Sylius package.
-*
-* (c) Paweł Jędrzejewski
-*
-* For the full copyright and license information, please view the LICENSE
-* file that was distributed with this source code.
-*/
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Sylius\Component\User\Model;
 
@@ -18,7 +18,7 @@ namespace Sylius\Component\User\Model;
 class UserOAuth implements UserOAuthInterface
 {
     /**
-     * @var int
+     * @var mixed
      */
     protected $id;
 
@@ -43,7 +43,7 @@ class UserOAuth implements UserOAuthInterface
     protected $user;
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getId()
     {

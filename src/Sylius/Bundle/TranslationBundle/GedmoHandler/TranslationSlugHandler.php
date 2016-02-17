@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sylius package.
  *
@@ -12,6 +13,7 @@ namespace Sylius\Bundle\TranslationBundle\GedmoHandler;
 
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Gedmo\Exception\InvalidMappingException;
 use Gedmo\Sluggable\Handler\SlugHandlerInterface;
 use Gedmo\Sluggable\Mapping\Event\SluggableAdapter;
@@ -71,7 +73,7 @@ class TranslationSlugHandler implements SlugHandlerInterface
     private $usedPathSeparator;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function __construct(SluggableListener $sluggable)
     {
@@ -79,7 +81,7 @@ class TranslationSlugHandler implements SlugHandlerInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function onChangeDecision(SluggableAdapter $ea, array &$config, $object, &$slug, &$needToChangeSlug)
     {
@@ -100,7 +102,7 @@ class TranslationSlugHandler implements SlugHandlerInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function postSlugBuild(SluggableAdapter $ea, array &$config, $object, &$slug)
     {
@@ -114,40 +116,47 @@ class TranslationSlugHandler implements SlugHandlerInterface
 
         $wrapped = AbstractWrapper::wrap($relation, $this->om);
         if ($parent = $wrapped->getPropertyValue($options['relationParentRelationField'])) {
-
-            $translation = call_user_func_array(array($parent,$options['translate']), array($locale));
+            $translation = call_user_func_array([$parent, $options['translate']], [$locale]);
 
             $this->parentSlug = $translation->{$options['parentFieldMethod']}();
 
             // if needed, remove suffix from parentSlug, so we can use it to prepend it to our slug
-            if(isset($options['suffix'])) {
+            if (isset($options['suffix'])) {
                 $suffix = $options['suffix'];
 
-                if(substr($this->parentSlug, -strlen($suffix)) === $suffix) { //endsWith
+                if (substr($this->parentSlug, -strlen($suffix)) === $suffix) { //endsWith
                     $this->parentSlug = substr_replace($this->parentSlug, '', -1 * strlen($suffix));
                 }
             }
         }
+
+        $slug = $this->deleteUnnecessaryParentSlug($slug);
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public static function validate(array $options, ClassMetadata $meta)
     {
+        // Since we cannot know, whether children of this mapped superclass
+        // have or have not given association.
+        if ($meta instanceof ClassMetadataInfo && $meta->isMappedSuperclass) {
+            return;
+        }
+
         if (!$meta->isSingleValuedAssociation($options['relationField'])) {
-            throw new InvalidMappingException("Unable to find tree parent slug relation through field - [{$options['relationParentRelationField']}] in class - {$meta->name}");
+            throw new InvalidMappingException("Unable to find tree parent slug relation through field - [{$options['relationField']}] in class - {$meta->name}");
         }
 //      TODO Check parent relation in translatable entity is single valued
 //      (Note: don't know if that's possible here as we need the relationField class metadada)
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function onSlugCompletion(SluggableAdapter $ea, array &$config, $object, &$slug)
     {
-        $slug = $this->transliterate($slug, $config['separator'], $object);
+        $slug = $this->transliterate($slug);
 
         if (!$this->isInsert) {
             $wrapped = AbstractWrapper::wrap($object, $this->om);
@@ -183,28 +192,33 @@ class TranslationSlugHandler implements SlugHandlerInterface
      * by collection of parent slugs.
      *
      * @param string $text
-     * @param string $separator
-     * @param object $object
      *
      * @return string
      */
-    public function transliterate($text, $separator, $object)
+    public function transliterate($text)
     {
         if (!empty($this->parentSlug)) {
-            $text = $this->parentSlug.$this->usedPathSeparator.$text.$this->suffix;
-        } else {
-            // if no parentSlug, apply our prefix
-            $text = $this->prefix.$text;
+            return $this->parentSlug.$this->usedPathSeparator.$text.$this->suffix;
         }
 
-        return $text;
+        return $this->prefix.$text;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function handlesUrlization()
     {
         return false;
+    }
+
+    /**
+     * @param string $slug
+     *
+     * @return string
+     */
+    private function deleteUnnecessaryParentSlug($slug)
+    {
+        return preg_replace('/^'.preg_quote($this->parentSlug.$this->usedPathSeparator, '/').'/', '', $slug);
     }
 }

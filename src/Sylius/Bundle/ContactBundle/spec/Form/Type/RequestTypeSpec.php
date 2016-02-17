@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\ContactBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -23,7 +24,7 @@ class RequestTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Contact', array('sylius'));
+        $this->beConstructedWith('Contact', ['sylius']);
     }
 
     function it_is_initializable()
@@ -33,7 +34,7 @@ class RequestTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_should_build_form_with_proper_fields(FormBuilder $builder)
@@ -63,16 +64,16 @@ class RequestTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_should_define_assigned_data_class_and_validation_groups(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'data_class' => 'Contact',
-                'validation_groups' => array('sylius')
-            ))
+                'validation_groups' => ['sylius'],
+            ])
             ->shouldBeCalled();
 
         $this->configureOptions($resolver);

@@ -1,5 +1,9 @@
 {% extends 'SyliusWebBundle:Frontend:layout.html.twig' %}
 
+{% if cmfMainContent is not defined %}
+    {% set cmfMainContent = static_content %}
+{% endif %}
+
 {% block content %}
 {% createphp cmfMainContent as='rdf' noautotag %}
 <div {{ createphp_attributes(rdf) }}>

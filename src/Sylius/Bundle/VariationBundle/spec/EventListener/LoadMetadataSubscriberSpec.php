@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Bundle\VariationBundle\EventListener;
 
+use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use PhpSpec\ObjectBehavior;
@@ -23,20 +24,26 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(array(
-            'product' => array(
+        $this->beConstructedWith([
+            'product' => [
                 'variable' => 'Some\App\Product\Entity\Product',
-                'option' => array(
-                    'model' => 'Some\App\Product\Entity\Option',
-                ),
-                'option_value' => array(
-                    'model' => 'Some\App\Product\Entity\OptionValue',
-                ),
-                'variant' => array(
-                    'model' => 'Some\App\Product\Entity\Variant',
-                ),
-            ),
-        ));
+                'option' => [
+                    'classes' => [
+                        'model' => 'Some\App\Product\Entity\Option',
+                    ],
+                ],
+                'option_value' => [
+                    'classes' => [
+                        'model' => 'Some\App\Product\Entity\OptionValue',
+                    ],
+                ],
+                'variant' => [
+                    'classes' => [
+                        'model' => 'Some\App\Product\Entity\Variant',
+                    ],
+                ],
+            ],
+        ]);
     }
 
     function it_is_initializable()
@@ -46,12 +53,12 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
 
     function it_is_a_Doctrine_event_subscriber()
     {
-        $this->shouldImplement('Doctrine\Common\EventSubscriber');
+        $this->shouldImplement(EventSubscriber::class);
     }
 
     function it_subscribes_to_loadClassMetadata_events_dispatched_by_Doctrine()
     {
-        $this->getSubscribedEvents()->shouldReturn(array('loadClassMetadata'));
+        $this->getSubscribedEvents()->shouldReturn(['loadClassMetadata']);
     }
 
     function it_does_not_add_mapping_if_the_class_is_not_a_configured_for_a_variation_set(LoadClassMetadataEventArgs $eventArgs, ClassMetadataInfo $metadata)
@@ -71,55 +78,55 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
         $eventArgs->getClassMetadata()->willReturn($metadata);
         $metadata->getName()->willReturn('Some\App\Product\Entity\Variant');
 
-        $objectMapping = array(
+        $objectMapping = [
             'fieldName' => 'object',
             'targetEntity' => 'Some\App\Product\Entity\Product',
             'inversedBy' => 'variants',
-            'joinColumns' => array(array(
+            'joinColumns' => [[
                 'name' => 'product_id',
                 'referencedColumnName' => 'id',
                 'nullable' => false,
-                'onDelete' => 'CASCADE'
-            ))
-        );
+                'onDelete' => 'CASCADE',
+            ]],
+        ];
 
-        $optionsMapping = array(
+        $optionsMapping = [
             'fieldName' => 'options',
             'type' => ClassMetadataInfo::MANY_TO_MANY,
             'targetEntity' => 'Some\App\Product\Entity\OptionValue',
-            'joinTable' => array(
+            'joinTable' => [
                 'name' => 'sylius_product_variant_option_value',
-                'joinColumns' => array(array(
+                'joinColumns' => [[
                     'name' => 'variant_id',
                     'referencedColumnName' => 'id',
                     'unique' => false,
                     'nullable' => false,
-                    'onDelete' => 'CASCADE'
-                )),
-                'inverseJoinColumns' => array(array(
+                    'onDelete' => 'CASCADE',
+                ]],
+                'inverseJoinColumns' => [[
                     'name' => 'option_value_id',
                     'referencedColumnName' => 'id',
                     'unique' => false,
                     'nullable' => false,
-                    'onDelete' => 'CASCADE'
-                ))
-            )
-        );
+                    'onDelete' => 'CASCADE',
+                ]],
+            ],
+        ];
 
         $metadata->mapManyToOne($objectMapping)->shouldBeCalled();
         $metadata->mapManyToMany($optionsMapping)->shouldBeCalled();
 
-        $nonApplicableOptionMapping = array(
+        $nonApplicableOptionMapping = [
             'fieldName' => 'option',
             'targetEntity' => 'Some\App\Product\Entity\Option',
             'inversedBy' => 'values',
-            'joinColumns' => array(array(
+            'joinColumns' => [[
                 'name' => 'option_id',
                 'referencedColumnName' => 'id',
                 'nullable' => false,
-                'onDelete' => 'CASCADE'
-            ))
-        );
+                'onDelete' => 'CASCADE',
+            ]],
+        ];
 
         $metadata->mapOneToMany(Argument::any())->shouldNotBeCalled();
         $metadata->mapManyToOne($nonApplicableOptionMapping)->shouldNotBeCalled();
@@ -132,12 +139,12 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
         $eventArgs->getClassMetadata()->willReturn($metadata);
         $metadata->getName()->willReturn('Some\App\Product\Entity\Option');
 
-        $valuesMapping = array(
+        $valuesMapping = [
             'fieldName' => 'values',
             'targetEntity' => 'Some\App\Product\Entity\OptionValue',
             'mappedBy' => 'option',
-            'cascade' => array('all')
-        );
+            'cascade' => ['all'],
+        ];
 
         $metadata->mapOneToMany($valuesMapping)->shouldBeCalled();
 
@@ -152,40 +159,40 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
         $eventArgs->getClassMetadata()->willReturn($metadata);
         $metadata->getName()->willReturn('Some\App\Product\Entity\OptionValue');
 
-        $optionMapping = array(
+        $optionMapping = [
             'fieldName' => 'option',
             'targetEntity' => 'Some\App\Product\Entity\Option',
             'inversedBy' => 'values',
-            'joinColumns' => array(array(
+            'joinColumns' => [[
                 'name' => 'option_id',
                 'referencedColumnName' => 'id',
                 'nullable' => false,
-                'onDelete' => 'CASCADE'
-            ))
-        );
+                'onDelete' => 'CASCADE',
+            ]],
+        ];
 
-        $nonApplicableOptionsMapping = array(
+        $nonApplicableOptionsMapping = [
             'fieldName' => 'options',
             'type' => ClassMetadataInfo::MANY_TO_MANY,
             'targetEntity' => 'Some\App\Product\Entity\OptionValue',
-            'joinTable' => array(
+            'joinTable' => [
                 'name' => 'sylius_product_variant_option_value',
-                'joinColumns' => array(array(
+                'joinColumns' => [[
                     'name' => 'variant_id',
                     'referencedColumnName' => 'id',
                     'unique' => false,
                     'nullable' => false,
-                    'onDelete' => 'CASCADE'
-                )),
-                'inverseJoinColumns' => array(array(
+                    'onDelete' => 'CASCADE',
+                ]],
+                'inverseJoinColumns' => [[
                     'name' => 'option_value_id',
                     'referencedColumnName' => 'id',
                     'unique' => false,
                     'nullable' => false,
-                    'onDelete' => 'CASCADE'
-                ))
-            )
-        );
+                    'onDelete' => 'CASCADE',
+                ]],
+            ],
+        ];
 
         $metadata->mapManyToOne($optionMapping)->shouldBeCalled();
         $metadata->mapManyToOne($nonApplicableOptionsMapping)->shouldNotBeCalled();

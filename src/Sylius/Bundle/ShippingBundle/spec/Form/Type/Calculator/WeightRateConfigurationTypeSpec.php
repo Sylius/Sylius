@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\ShippingBundle\Form\Type\Calculator;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Test\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -21,11 +22,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class WeightRateConfigurationTypeSpec extends ObjectBehavior
 {
-    function let()
-    {
-        $this->beConstructedWith(array('sylius'));
-    }
-
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Form\Type\Calculator\WeightRateConfigurationType');
@@ -33,7 +29,7 @@ class WeightRateConfigurationTypeSpec extends ObjectBehavior
 
     function it_is_a_form()
     {
-        $this->shouldHaveType('Symfony\Component\Form\AbstractType');
+        $this->shouldHaveType(AbstractType::class);
     }
 
     function it_builds_a_form(FormBuilderInterface $builder)
@@ -42,21 +38,20 @@ class WeightRateConfigurationTypeSpec extends ObjectBehavior
         $builder->add('variable', 'sylius_money', Argument::withKey('constraints'))->shouldBeCalled()->willReturn($builder);
         $builder->add('division', 'number', Argument::withKey('constraints'))->shouldBeCalled()->willReturn($builder);
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_has_options(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'validation_groups' => array('sylius'),
+        $resolver->setDefaults([
             'data_class' => null,
-        ))->shouldBeCalled();
+        ])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }
 
     function it_has_a_name()
     {
-        $this->getName()->shouldReturn('sylius_shipping_calculator_weight_rate_configuration');
+        $this->getName()->shouldReturn('sylius_shipping_calculator_weight_rate');
     }
 }

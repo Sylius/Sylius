@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\CurrencyBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 
 /**

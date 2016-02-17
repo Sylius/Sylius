@@ -13,55 +13,33 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type\Rule;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * Item total rule configuration form type.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ItemTotalConfigurationType extends AbstractType
 {
-    protected $validationGroups;
-
-    public function __construct(array $validationGroups)
-    {
-        $this->validationGroups = $validationGroups;
-    }
-
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('amount', 'sylius_money', array(
+            ->add('amount', 'sylius_money', [
                 'label' => 'sylius.form.rule.item_total_configuration.amount',
-                'constraints' => array(
+                'constraints' => [
                     new NotBlank(),
-                    new Type(array('type' => 'numeric')),
-                ),
-            ))
-            ->add('equal', 'checkbox', array(
+                    new Type(['type' => 'numeric']),
+                ],
+            ])
+            ->add('equal', 'checkbox', [
                 'label' => 'sylius.form.rule.item_total_configuration.equal',
-                'constraints' => array(
-                    new Type(array('type' => 'bool')),
-                ),
-            ))
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'validation_groups' => $this->validationGroups,
-            ))
+                'constraints' => [
+                    new Type(['type' => 'bool']),
+                ],
+            ])
         ;
     }
 

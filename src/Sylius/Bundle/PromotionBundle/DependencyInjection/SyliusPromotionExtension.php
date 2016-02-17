@@ -12,7 +12,12 @@
 namespace Sylius\Bundle\PromotionBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Sylius\Component\Resource\Factory\Factory;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Promotions extension.
@@ -26,11 +31,38 @@ class SyliusPromotionExtension extends AbstractResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $this->configure(
-            $config,
-            new Configuration(),
-            $container,
-            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS
-        );
+        $config = $this->processConfiguration(new Configuration(), $config);
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+
+        $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
+        $this->mapFormValidationGroupsParameters($config, $container);
+
+        $configFiles = [
+            'services.xml',
+        ];
+
+        foreach ($configFiles as $configFile) {
+            $loader->load($configFile);
+        }
+
+        $couponFactoryDefinition = $container->getDefinition('sylius.factory.promotion_coupon');
+        $couponFactoryClass = $couponFactoryDefinition->getClass();
+        $couponFactoryDefinition->setClass(Factory::class);
+
+        $decoratedCouponFactoryDefinition = new Definition($couponFactoryClass);
+        $decoratedCouponFactoryDefinition
+            ->addArgument($couponFactoryDefinition)
+            ->addArgument(new Reference('sylius.repository.promotion'))
+        ;
+        $container->setDefinition('sylius.factory.promotion_coupon', $decoratedCouponFactoryDefinition);
+
+        $container
+            ->getDefinition('sylius.form.type.promotion_action')
+            ->replaceArgument(1, new Reference('sylius.registry.promotion_action'))
+        ;
+        $container
+            ->getDefinition('sylius.form.type.promotion_rule')
+            ->replaceArgument(1, new Reference('sylius.registry.promotion_rule_checker'))
+        ;
     }
 }

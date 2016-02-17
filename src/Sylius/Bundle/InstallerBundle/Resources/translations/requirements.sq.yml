@@ -3,8 +3,63 @@
 
 sylius:
   extensions:
+    header: Shtesa
+    accelerator:
+      header: Përshpejtues
+      help: Instalo dhe aktivizo një përshpejtues PHP si APC (i rekomanduar fort).
+    apc: APC
+    ctype: Ctype
+    gd: GD
+    help: 'Instalo dhe aktivizo shtesën %extension%.'
+    iconv: Iconv
+    exif: Exif
+    fileinfo: Fileinfo
+    icu: ICU
+    intl: Intl
+    json_encode: JSON
+    mbstring: String multibyte
     "off": false
     "on": true
+    pcre: PCRE
+    pdo: PDO
+    php_xml: PHP-XML
+    session_start: Sesion
+    simplexml_import_dom: SimpleXML
+    token_get_all: Tokenizer
+  filesystem:
+    header: file system
+    cache:
+      header: cache
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+    exists: Ekziston
+    logs:
+      header: logs
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+    not_exists: Nuk ekziston
+    not_writable: I pashkrueshëm
+    parameters:
+      header: parameters.yml
+      help:
+        To set permissions run: 'sudo chmod a+w %path%'
+    vendors: Shitësit
+    writable: I shkrueshëm
   settings:
+    header: Parametra dhe version PHP
+    any: Çfarëdo
+    detect_unicode: detect_unicode
+    magic_quotes_gpc: magic_quotes_gpc
+    non_deprecated: Nuk kundërshtohet
     "off": false
     "on": true
+    register_globals: register_globals
+    session:
+      auto_start: session.auto_start
+    short_open_tag: short_open_tag
+    timezone: Zona orare
+    timezone_deprecated:
+      header: Zonë orare e papranueshme
+      help: 'Zona orare %timezone% nuk pranohet. is deprecated. Korrigjo php.ini file (lista e zonave orare të kundërshtuara http://php.net/manual/en/timezones.others.php).'
+    version: Versioni PHP
+    version_recommanded: Versioni PHP i rekomanduar

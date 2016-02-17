@@ -17,6 +17,7 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Report\Model\ReportInterface;
 use Sylius\Component\Report\Renderer\RendererInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -33,7 +34,7 @@ class BuildReportRendererFormSubscriberSpec extends ObjectBehavior
 
     function it_implements_data_fetcher_interface()
     {
-        $this->shouldImplement('Symfony\Component\EventDispatcher\EventSubscriberInterface');
+        $this->shouldImplement(EventSubscriberInterface::class);
     }
 
     function let(ServiceRegistryInterface $rendererRegistry, FormFactoryInterface $factory, RendererInterface $renderer)
@@ -52,7 +53,7 @@ class BuildReportRendererFormSubscriberSpec extends ObjectBehavior
         Form $field)
     {
         $report->getRenderer()->willReturn('test_renderer');
-        $report->getRendererConfiguration()->willReturn(array());
+        $report->getRendererConfiguration()->willReturn([]);
 
         $event->getData()->willReturn($report);
         $event->getForm()->willReturn($form);
@@ -74,7 +75,7 @@ class BuildReportRendererFormSubscriberSpec extends ObjectBehavior
         Form $form,
         Form $field)
     {
-        $data = array('renderer' => 'test_renderer');
+        $data = ['renderer' => 'test_renderer'];
 
         $event->getData()->willReturn($data);
         $event->getForm()->willReturn($form);
@@ -94,7 +95,7 @@ class BuildReportRendererFormSubscriberSpec extends ObjectBehavior
     {
         $report = '';
         $event->getData()->willReturn($report);
-        $this->shouldThrow(new UnexpectedTypeException($report, 'Sylius\Component\Report\Model\ReportInterface'))
+        $this->shouldThrow(new UnexpectedTypeException($report, ReportInterface::class))
             ->duringPreSetData($event);
     }
 }

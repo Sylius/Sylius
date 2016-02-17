@@ -15,7 +15,9 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
+use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TaxonChoiceTypeSpec extends ObjectBehavior
@@ -32,32 +34,30 @@ class TaxonChoiceTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_builds_a_form(FormBuilderInterface $builder)
     {
         $builder->addModelTransformer(
-            Argument::type('Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer')
+            Argument::type(CollectionToArrayTransformer::class)
         )->shouldBeCalled();
 
-        $this->buildForm($builder, array(
-            'multiple' => true
-        ));
+        $this->buildForm($builder, [
+            'multiple' => true,
+        ]);
     }
 
     function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(Argument::withKey('choice_list'))->shouldBeCalled()->willReturn($resolver);
-        $resolver->setRequired(array(
-            'taxonomy',
-            'filter',
-        ))->shouldBeCalled()->willReturn($resolver);
+        $resolver->setDefaults(Argument::withKey('taxonomy'))->shouldBeCalled()->willReturn($resolver);
+        $resolver->setDefaults(Argument::withKey('filter'))->shouldBeCalled()->willReturn($resolver);
 
-        $resolver->setAllowedTypes('taxonomy', TaxonomyInterface::class)->shouldBeCalled()->willReturn($resolver);
+        $resolver->setAllowedTypes('taxonomy', [TaxonomyInterface::class, 'null'])->shouldBeCalled()->willReturn($resolver);
         $resolver->setAllowedTypes('filter', ['callable', 'null'])->shouldBeCalled()->willReturn($resolver);
 
-        $this->configureOptions($resolver, array());
+        $this->configureOptions($resolver, []);
     }
 
     function it_has_a_name()

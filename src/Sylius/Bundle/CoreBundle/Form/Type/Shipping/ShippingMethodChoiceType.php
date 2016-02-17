@@ -32,19 +32,16 @@ class ShippingMethodChoiceType extends BaseShippingMethodType
     {
         parent::configureOptions($resolver);
 
-        $methodsResolver = $this->resolver;
-        $repository = $this->repository;
-
-        $choiceList = function (Options $options) use ($methodsResolver, $repository) {
+        $choiceList = function (Options $options) {
             if (isset($options['subject'])) {
-                $methods = $methodsResolver->getSupportedMethods($options['subject'], $options['criteria']);
+                $methods = $this->resolver->getSupportedMethods($options['subject'], $options['criteria']);
             } else {
-                $methods = $repository->findBy($options['criteria']);
+                $methods = $this->repository->findBy($options['criteria']);
             }
 
             if ($options['channel']) {
-                $filteredMethods = array();
-                foreach($methods as $method) {
+                $filteredMethods = [];
+                foreach ($methods as $method) {
                     if ($options['channel']->hasShippingMethod($method)) {
                         $filteredMethods[] = $method;
                     }
@@ -53,15 +50,15 @@ class ShippingMethodChoiceType extends BaseShippingMethodType
                 $methods = $filteredMethods;
             }
 
-            return new ObjectChoiceList($methods, null, array(), null, 'id');
+            return new ObjectChoiceList($methods, null, [], null, 'id');
         };
 
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'choice_list' => $choiceList,
-                'criteria'    => array(),
-                'channel'     => null
-            ))
+                'criteria' => [],
+                'channel' => null,
+            ])
             ->setAllowedTypes('channel', [ChannelInterface::class, 'null'])
         ;
     }

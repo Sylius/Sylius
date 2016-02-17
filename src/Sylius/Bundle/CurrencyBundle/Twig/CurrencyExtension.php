@@ -38,16 +38,16 @@ class CurrencyExtension extends \Twig_Extension
      */
     public function getFilters()
     {
-        return array(
-            new \Twig_SimpleFilter('sylius_currency', array($this, 'convertAmount')),
-            new \Twig_SimpleFilter('sylius_price', array($this, 'convertAndFormatAmount')),
-        );
+        return [
+            new \Twig_SimpleFilter('sylius_currency', [$this, 'convertAmount']),
+            new \Twig_SimpleFilter('sylius_price', [$this, 'convertAndFormatAmount']),
+        ];
     }
 
     /**
      * Convert amount to target currency.
      *
-     * @param integer     $amount
+     * @param int     $amount
      * @param string|null $currency
      *
      * @return string
@@ -60,7 +60,7 @@ class CurrencyExtension extends \Twig_Extension
     /**
      * Convert and format amount.
      *
-     * @param integer     $amount
+     * @param int     $amount
      * @param string|null $currency
      *
      * @return string

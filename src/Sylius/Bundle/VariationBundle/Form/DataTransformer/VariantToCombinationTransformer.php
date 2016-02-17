@@ -45,11 +45,11 @@ class VariantToCombinationTransformer implements DataTransformerInterface
     public function transform($value)
     {
         if (null === $value) {
-            return array();
+            return [];
         }
 
         if (!$value instanceof VariantInterface) {
-            throw new UnexpectedTypeException($value, 'Sylius\Component\Variation\Model\VariantInterface');
+            throw new UnexpectedTypeException($value, VariantInterface::class);
         }
 
         return $value->getOptions();

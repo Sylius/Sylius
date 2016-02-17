@@ -7,3 +7,9 @@ sylius:
       price: Prix
       calculator: Tarification
       configuration: Configuration
+    pricing:
+      volume_based:
+        label: Configuration des prix
+        min: Volume minimum
+        max: Volume maximum
+        price: Prix

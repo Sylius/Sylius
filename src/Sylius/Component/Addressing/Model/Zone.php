@@ -28,6 +28,11 @@ class Zone implements ZoneInterface
     /**
      * @var string
      */
+    protected $code;
+
+    /**
+     * @var string
+     */
     protected $name;
 
     /**
@@ -64,6 +69,22 @@ class Zone implements ZoneInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
     }
 
     /**
@@ -109,7 +130,7 @@ class Zone implements ZoneInterface
      */
     public static function getTypes()
     {
-        return array(self::TYPE_COUNTRY, self::TYPE_PROVINCE, self::TYPE_ZONE);
+        return [self::TYPE_COUNTRY, self::TYPE_PROVINCE, self::TYPE_ZONE];
     }
 
     /**

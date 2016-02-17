@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>{% block title %}Sylius{% endblock %}</title>
+
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    {% block metatags %}
+    {% endblock %}
+
+    {% block stylesheets %}
+        {% include 'SyliusUiBundle::_stylesheets.html.twig' %}
+    {% endblock %}
+</head>
+
+<body class="hold-transition skin-sylius sidebar-mini">
+<div class="wrapper">
+    <header class="main-header">
+        {% block logo %}
+            <a href="#" class="logo">
+                <span class="logo-mini"><b>S</b></span>
+                <span class="logo-lg"><b>Sylius UI</b></span>
+            </a>
+        {% endblock %}
+
+        <nav class="navbar navbar-static-top" role="navigation">
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+            <div class="navbar-custom-menu">
+                {% block toolbar %}
+                    {% include 'SyliusUiBundle::_profile.html.twig' %}
+                {% endblock %}
+            </div>
+        </nav>
+    </header>
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            {% block sidebar %}
+            {% endblock %}
+        </section>
+    </aside>
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                {% block header %}{% endblock %}
+            </h1>
+        </section>
+
+        <section class="content">
+            {% block content %}
+            {% endblock %}
+        </section>
+    </div>
+
+    <footer class="main-footer">
+        {% block footer %}
+        {% endblock %}
+    </footer>
+</div>
+
+{% block javascripts %}
+    {% include 'SyliusUiBundle::_javascripts.html.twig' %}
+{% endblock %}
+</body>
+</html>

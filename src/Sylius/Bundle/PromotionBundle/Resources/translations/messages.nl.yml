@@ -15,6 +15,9 @@ sylius:
       taxonomy_configuration:
         taxons: Taxons
         exclude: Uitsluiten
+      contains_product_configuration:
+        variants: Producten
+        exclude: Uitsluiten
       item_count_configuration:
         count: Aantal
         equal: Gelijk
@@ -23,27 +26,31 @@ sylius:
         equal: Gelijk
       nth_order_configuration:
         nth: Nde
-      user_loyality_configuration:
+      customer_loyalty_configuration:
         time: Tijd
         unit:
           days: Dagen
           weeks: Weken
           months: Maanden
           years: Jaren
-          0: Eenheid
+          header: Eenheid
         after: Gebruiker aangemaakt na deze periode
       shipping_country_configuration:
         country: Land
       type: Type
     coupon:
-      code: Code
       usage_limit: Gebruikslimiet
+      expires_at: Verloopt op
     coupon_generate_instruction:
       amount: Hoeveelheid
       usage_limit: Gebruikslimiet
+      expires_at: Verloopt op
     promotion:
       actions: Acties
+      add_action: Actie toevoegen
+      add_rule: Regel toevoegen
       coupon_based: Coupon gebaseerd
+      exclusive: Exclusief
       description: Omschrijving
       ends_at: Eindigt op
       name: Naam

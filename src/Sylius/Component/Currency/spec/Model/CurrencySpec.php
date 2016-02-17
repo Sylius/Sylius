@@ -12,6 +12,8 @@
 namespace spec\Sylius\Component\Currency\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Currency\Model\CurrencyInterface;
+use Sylius\Component\Resource\Model\ToggleableInterface;
 
 class CurrencySpec extends ObjectBehavior
 {
@@ -22,7 +24,12 @@ class CurrencySpec extends ObjectBehavior
 
     function it_implements_Sylius_currency_interface()
     {
-        $this->shouldImplement('Sylius\Component\Currency\Model\CurrencyInterface');
+        $this->shouldImplement(CurrencyInterface::class);
+    }
+
+    function it_implements_Sylius_toggleable_interface()
+    {
+        $this->shouldImplement(ToggleableInterface::class);
     }
 
     function it_has_no_id_by_default()
@@ -59,13 +66,45 @@ class CurrencySpec extends ObjectBehavior
 
     function it_can_be_disabled()
     {
+        $this->disable();
+        $this->shouldNotBeEnabled();
+    }
+
+    function it_can_be_enabled()
+    {
+        $this->disable();
+        $this->shouldNotBeEnabled();
+
+        $this->enable();
+        $this->shouldBeEnabled();
+    }
+
+    function it_can_set_enabled_value()
+    {
+        $this->setEnabled(false);
+        $this->shouldNotBeEnabled();
+
+        $this->setEnabled(true);
+        $this->shouldBeEnabled();
+
         $this->setEnabled(false);
         $this->shouldNotBeEnabled();
     }
 
+    function it_is_not_base_currency_by_default()
+    {
+        $this->shouldNotBeBase();
+    }
+
+    function it_can_can_be_base_currency()
+    {
+        $this->setBase(true);
+        $this->shouldBeBase();
+    }
+
     function it_initializes_creation_date_by_default()
     {
-        $this->getCreatedAt()->shouldHaveType('DateTime');
+        $this->getCreatedAt()->shouldHaveType(\DateTime::class);
     }
 
     function its_creation_date_is_mutable()
@@ -87,5 +126,21 @@ class CurrencySpec extends ObjectBehavior
 
         $this->setUpdatedAt($date);
         $this->getUpdatedAt()->shouldReturn($date);
+    }
+
+    function its_exchange_rate_cannot_be_changed_if_it_is_base()
+    {
+        $this->setExchangeRate(1);
+        $this->setBase(true);
+
+        $this->shouldThrow(\LogicException::class)->duringSetExchangeRate(2.61);
+    }
+
+    function its_enabled_state_cannot_be_changed_if_it_is_base()
+    {
+        $this->setBase(true);
+
+        $this->shouldThrow(\LogicException::class)->duringDisable();
+        $this->shouldThrow(\LogicException::class)->duringSetEnabled(false);
     }
 }

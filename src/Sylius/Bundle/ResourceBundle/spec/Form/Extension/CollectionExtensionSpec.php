@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the NIM package.
+ * This file is part of the Sylius package.
  *
- * (c) Langlade Arnaud
+ * (c) Paweł Jędrzejewski
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Form\Extension;
 
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -26,7 +27,7 @@ class CollectionExtensionSpec extends ObjectBehavior
 
     function it_should_extends_abstract_type_extension()
     {
-        $this->shouldHaveType('Symfony\Component\Form\AbstractTypeExtension');
+        $this->shouldHaveType(AbstractTypeExtension::class);
     }
 
     function it_should_have_collection_as_extended_type()
@@ -36,15 +37,15 @@ class CollectionExtensionSpec extends ObjectBehavior
 
     function it_should_have_default_option(OptionsResolver $resolver)
     {
-        $resolver->setDefined(array(
+        $resolver->setDefined([
             'button_add_label',
             'button_delete_label',
-        ))->shouldBeCalled();
+        ])->shouldBeCalled();
 
-        $resolver->setDefaults(array(
-            'button_add_label' => 'form.collection.add',
-            'button_delete_label' => 'form.collection.delete',
-        ))->shouldBeCalled();
+        $resolver->setDefaults([
+            'button_add_label' => 'sylius.form.collection.add',
+            'button_delete_label' => 'sylius.form.collection.delete',
+        ])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

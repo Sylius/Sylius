@@ -1,0 +1,35 @@
+sylius:
+    metadata:
+        type:
+            none: " - NONE - "
+            twitter_summary_card: Summary
+            twitter_summary_large_image_card: Summary with large image
+            twitter_player_card: Player
+            twitter_app_card: Application
+        page:
+            title: Title
+            description: Description
+            keywords: Keywords
+            twitter: Twitter Card
+        twitter:
+            title: Title
+            description: Description
+            site: Site
+            site_id: Site ID
+            creator: Creator
+            creator_id: Creator ID
+            image: Image
+            player: Player
+            player_width: Player width
+            player_height: Player height
+            player_stream: Player stream
+            player_stream_content_type: Player stream content type
+            app_name_iphone: Iphone application name
+            app_id_iphone: Iphone application ID
+            app_url_iphone: Iphone application url
+            app_name_ipad: Ipad application name
+            app_id_ipad: Ipad application ID
+            app_url_ipad: Ipad application url
+            app_name_googleplay: Google Play application name
+            app_id_googleplay: Google Play application ID
+            app_url_googleplay: Google Play application url

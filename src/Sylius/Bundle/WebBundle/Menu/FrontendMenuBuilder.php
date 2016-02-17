@@ -18,12 +18,13 @@ use Sylius\Bundle\WebBundle\Event\MenuBuilderEvent;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
-use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface;
+use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface as RbacAuthorizationCheckerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Intl\Intl;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
@@ -67,37 +68,46 @@ class FrontendMenuBuilder extends MenuBuilder
     protected $channelContext;
 
     /**
+     * @var TokenStorageInterface
+     */
+    protected $tokenStorage;
+
+    /**
      * Constructor.
      *
-     * @param FactoryInterface          $factory
-     * @param SecurityContextInterface  $securityContext
-     * @param TranslatorInterface       $translator
-     * @param EventDispatcherInterface  $eventDispatcher
+     * @param FactoryInterface $factory
      * @param AuthorizationCheckerInterface $authorizationChecker
+     * @param TranslatorInterface $translator
+     * @param EventDispatcherInterface $eventDispatcher
+     * @param RbacAuthorizationCheckerInterface $rbacAuthorizationChecker
      * @param CurrencyProviderInterface $currencyProvider
-     * @param RepositoryInterface       $taxonomyRepository
-     * @param CartProviderInterface     $cartProvider
-     * @param CurrencyHelper            $currencyHelper
+     * @param RepositoryInterface $taxonomyRepository
+     * @param CartProviderInterface $cartProvider
+     * @param CurrencyHelper $currencyHelper
+     * @param ChannelContextInterface $channelContext
+     * @param TokenStorageInterface $tokenStorage
      */
     public function __construct(
-        FactoryInterface          $factory,
-        SecurityContextInterface  $securityContext,
-        TranslatorInterface       $translator,
-        EventDispatcherInterface  $eventDispatcher,
+        FactoryInterface $factory,
         AuthorizationCheckerInterface $authorizationChecker,
+        TranslatorInterface $translator,
+        EventDispatcherInterface $eventDispatcher,
+        RbacAuthorizationCheckerInterface $rbacAuthorizationChecker,
         CurrencyProviderInterface $currencyProvider,
-        RepositoryInterface       $taxonomyRepository,
-        CartProviderInterface     $cartProvider,
-        CurrencyHelper            $currencyHelper,
-        ChannelContextInterface   $channelContext
+        RepositoryInterface $taxonomyRepository,
+        CartProviderInterface $cartProvider,
+        CurrencyHelper $currencyHelper,
+        ChannelContextInterface $channelContext,
+        TokenStorageInterface $tokenStorage
     ) {
-        parent::__construct($factory, $securityContext, $translator, $eventDispatcher, $authorizationChecker);
+        parent::__construct($factory, $authorizationChecker, $translator, $eventDispatcher, $rbacAuthorizationChecker);
 
         $this->currencyProvider = $currencyProvider;
         $this->taxonomyRepository = $taxonomyRepository;
         $this->cartProvider = $cartProvider;
         $this->currencyHelper = $currencyHelper;
         $this->channelContext = $channelContext;
+        $this->tokenStorage = $tokenStorage;
     }
 
     /**
@@ -107,82 +117,82 @@ class FrontendMenuBuilder extends MenuBuilder
      */
     public function createMainMenu()
     {
-        $menu = $this->factory->createItem('root', array(
-            'childrenAttributes' => array(
-                'class' => 'nav nav-pills'
-            )
-        ));
+        $menu = $this->factory->createItem('root', [
+            'childrenAttributes' => [
+                'class' => 'nav nav-pills',
+            ],
+        ]);
         $menu->setCurrentUri($this->request->getRequestUri());
 
         if ($this->cartProvider->hasCart()) {
             $cart = $this->cartProvider->getCart();
-            $cartTotals = array('items' => $cart->getTotalQuantity(), 'total' => $cart->getTotal());
+            $cartTotals = ['items' => $cart->getTotalQuantity(), 'total' => $cart->getTotal()];
         } else {
-            $cartTotals = array('items' => 0, 'total' => 0);
+            $cartTotals = ['items' => 0, 'total' => 0];
         }
 
-        $menu->addChild('cart', array(
+        $menu->addChild('cart', [
             'route' => 'sylius_cart_summary',
-            'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.cart', array(
+            'linkAttributes' => ['title' => $this->translate('sylius.frontend.menu.main.cart', [
                 '%items%' => $cartTotals['items'],
-                '%total%' => $this->currencyHelper->convertAndFormatAmount($cartTotals['total'])
-            ))),
-            'labelAttributes' => array('icon' => 'icon-shopping-cart icon-large')
-        ))->setLabel($this->translate('sylius.frontend.menu.main.cart', array(
+                '%total%' => $this->currencyHelper->convertAndFormatAmount($cartTotals['total']),
+            ])],
+            'labelAttributes' => ['icon' => 'icon-shopping-cart icon-large'],
+        ])->setLabel($this->translate('sylius.frontend.menu.main.cart', [
             '%items%' => $cartTotals['items'],
-            '%total%' => $this->currencyHelper->convertAndFormatAmount($cartTotals['total'])
-        )));
+            '%total%' => $this->currencyHelper->convertAndFormatAmount($cartTotals['total']),
+        ]));
 
-        if ($this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if ($this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $route = $this->request === null ? '' : $this->request->get('_route');
 
             if (1 === preg_match('/^(sylius_account)/', $route)) {
-                $menu->addChild('shop', array(
+                $menu->addChild('shop', [
                     'route' => 'sylius_homepage',
-                    'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.account.shop')),
-                    'labelAttributes' => array('icon' => 'icon-th icon-large', 'iconOnly' => false)
-                ))->setLabel($this->translate('sylius.frontend.menu.account.shop'));
+                    'linkAttributes' => ['title' => $this->translate('sylius.frontend.menu.account.shop')],
+                    'labelAttributes' => ['icon' => 'icon-th icon-large', 'iconOnly' => false],
+                ])->setLabel($this->translate('sylius.frontend.menu.account.shop'));
             } else {
-                $menu->addChild('account', array(
+                $menu->addChild('account', [
                     'route' => 'sylius_account_profile_show',
-                    'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.account')),
-                    'labelAttributes' => array('icon' => 'icon-user icon-large', 'iconOnly' => false)
-                ))->setLabel($this->translate('sylius.frontend.menu.main.account'));
+                    'linkAttributes' => ['title' => $this->translate('sylius.frontend.menu.main.account')],
+                    'labelAttributes' => ['icon' => 'icon-user icon-large', 'iconOnly' => false],
+                ])->setLabel($this->translate('sylius.frontend.menu.main.account'));
             }
 
-            $menu->addChild('logout', array(
+            $menu->addChild('logout', [
                 'route' => 'sylius_user_security_logout',
-                'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.logout')),
-                'labelAttributes' => array('icon' => 'icon-off icon-large', 'iconOnly' => false)
-            ))->setLabel($this->translate('sylius.frontend.menu.main.logout'));
+                'linkAttributes' => ['title' => $this->translate('sylius.frontend.menu.main.logout')],
+                'labelAttributes' => ['icon' => 'icon-off icon-large', 'iconOnly' => false],
+            ])->setLabel($this->translate('sylius.frontend.menu.main.logout'));
         } else {
-            $menu->addChild('login', array(
+            $menu->addChild('login', [
                 'route' => 'sylius_user_security_login',
-                'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.login')),
-                'labelAttributes' => array('icon' => 'icon-lock icon-large', 'iconOnly' => false)
-            ))->setLabel($this->translate('sylius.frontend.menu.main.login'));
-            $menu->addChild('register', array(
+                'linkAttributes' => ['title' => $this->translate('sylius.frontend.menu.main.login')],
+                'labelAttributes' => ['icon' => 'icon-lock icon-large', 'iconOnly' => false],
+            ])->setLabel($this->translate('sylius.frontend.menu.main.login'));
+            $menu->addChild('register', [
                 'route' => 'sylius_user_registration',
-                'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.register')),
-                'labelAttributes' => array('icon' => 'icon-user icon-large', 'iconOnly' => false)
-            ))->setLabel($this->translate('sylius.frontend.menu.main.register'));
+                'linkAttributes' => ['title' => $this->translate('sylius.frontend.menu.main.register')],
+                'labelAttributes' => ['icon' => 'icon-user icon-large', 'iconOnly' => false],
+            ])->setLabel($this->translate('sylius.frontend.menu.main.register'));
         }
 
-        if ($this->securityContext->isGranted('ROLE_ADMINISTRATION_ACCESS') || $this->securityContext->isGranted('ROLE_PREVIOUS_ADMIN')) {
-            $routeParams = array(
+        if ($this->authorizationChecker->isGranted('ROLE_ADMINISTRATION_ACCESS') || $this->authorizationChecker->isGranted('ROLE_PREVIOUS_ADMIN')) {
+            $routeParams = [
                 'route' => 'sylius_backend_dashboard',
-                'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.administration')),
-                'labelAttributes' => array('icon' => 'icon-briefcase icon-large', 'iconOnly' => false)
-            );
+                'linkAttributes' => ['title' => $this->translate('sylius.frontend.menu.main.administration')],
+                'labelAttributes' => ['icon' => 'icon-briefcase icon-large', 'iconOnly' => false],
+            ];
 
-            if ($this->securityContext->isGranted('ROLE_PREVIOUS_ADMIN')) {
-                $routeParams = array_merge($routeParams, array(
+            if ($this->authorizationChecker->isGranted('ROLE_PREVIOUS_ADMIN')) {
+                $routeParams = array_merge($routeParams, [
                     'route' => 'sylius_switch_user_return',
-                    'routeParameters' => array(
-                        'username' => $this->securityContext->getToken()->getUsername(),
-                        '_switch_user' => '_exit'
-                    )
-                ));
+                    'routeParameters' => [
+                        'username' => $this->tokenStorage->getToken()->getUsername(),
+                        '_switch_user' => '_exit',
+                    ],
+                ]);
             }
 
             $menu->addChild('administration', $routeParams)->setLabel($this->translate('sylius.frontend.menu.main.administration'));
@@ -200,11 +210,11 @@ class FrontendMenuBuilder extends MenuBuilder
      */
     public function createCurrencyMenu()
     {
-        $menu = $this->factory->createItem('root', array(
-            'childrenAttributes' => array(
-                'class' => 'nav nav-pills'
-            )
-        ));
+        $menu = $this->factory->createItem('root', [
+            'childrenAttributes' => [
+                'class' => 'nav nav-pills',
+            ],
+        ]);
 
         $currencies = $this->currencyProvider->getAvailableCurrencies();
         if (1 === count($currencies)) {
@@ -216,11 +226,11 @@ class FrontendMenuBuilder extends MenuBuilder
         foreach ($currencies as $currency) {
             $code = $currency->getCode();
 
-            $menu->addChild($code, array(
+            $menu->addChild($code, [
                 'route' => 'sylius_currency_change',
-                'routeParameters' => array('currency' => $code),
-                'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.currency', array('%currency%' => $code))),
-            ))->setLabel(Intl::getCurrencyBundle()->getCurrencySymbol($code));
+                'routeParameters' => ['currency' => $code],
+                'linkAttributes' => ['title' => $this->translate('sylius.frontend.menu.currency', ['%currency%' => $code])],
+            ])->setLabel(Intl::getCurrencyBundle()->getCurrencySymbol($code));
         }
 
         $this->eventDispatcher->dispatch(MenuBuilderEvent::FRONTEND_CURRENCY, new MenuBuilderEvent($this->factory, $menu));
@@ -235,17 +245,17 @@ class FrontendMenuBuilder extends MenuBuilder
      */
     public function createTaxonomiesMenu()
     {
-        $menu = $this->factory->createItem('root', array(
-            'childrenAttributes' => array(
-                'class' => 'nav'
-            )
-        ));
+        $menu = $this->factory->createItem('root', [
+            'childrenAttributes' => [
+                'class' => 'nav',
+            ],
+        ]);
         $menu->setCurrentUri($this->request->getRequestUri());
 
-        $childOptions = array(
-            'childrenAttributes' => array('class' => 'nav nav-list'),
-            'labelAttributes'    => array('class' => 'nav-header'),
-        );
+        $childOptions = [
+            'childrenAttributes' => ['class' => 'nav nav-list'],
+            'labelAttributes' => ['class' => 'nav-header'],
+        ];
 
         $taxonomies = $this->channelContext->getChannel()->getTaxonomies();
 
@@ -271,27 +281,27 @@ class FrontendMenuBuilder extends MenuBuilder
      */
     public function createSocialMenu()
     {
-        $menu = $this->factory->createItem('root', array(
-            'childrenAttributes' => array(
-                'class' => 'nav nav-pills pull-right'
-            )
-        ));
+        $menu = $this->factory->createItem('root', [
+            'childrenAttributes' => [
+                'class' => 'nav nav-pills pull-right',
+            ],
+        ]);
 
-        $menu->addChild('github', array(
+        $menu->addChild('github', [
             'uri' => 'https://github.com/Sylius',
-            'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.social.github')),
-            'labelAttributes' => array('icon' => 'icon-github-sign icon-large', 'iconOnly' => true)
-        ));
-        $menu->addChild('twitter', array(
+            'linkAttributes' => ['title' => $this->translate('sylius.frontend.menu.social.github')],
+            'labelAttributes' => ['icon' => 'icon-github-sign icon-large', 'iconOnly' => true],
+        ]);
+        $menu->addChild('twitter', [
             'uri' => 'https://twitter.com/Sylius',
-            'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.social.twitter')),
-            'labelAttributes' => array('icon' => 'icon-twitter-sign icon-large', 'iconOnly' => true)
-        ));
-        $menu->addChild('facebook', array(
+            'linkAttributes' => ['title' => $this->translate('sylius.frontend.menu.social.twitter')],
+            'labelAttributes' => ['icon' => 'icon-twitter-sign icon-large', 'iconOnly' => true],
+        ]);
+        $menu->addChild('facebook', [
             'uri' => 'http://facebook.com/SyliusEcommerce',
-            'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.social.facebook')),
-            'labelAttributes' => array('icon' => 'icon-facebook-sign icon-large', 'iconOnly' => true)
-        ));
+            'linkAttributes' => ['title' => $this->translate('sylius.frontend.menu.social.facebook')],
+            'labelAttributes' => ['icon' => 'icon-facebook-sign icon-large', 'iconOnly' => true],
+        ]);
 
         $this->eventDispatcher->dispatch(MenuBuilderEvent::FRONTEND_SOCIAL, new MenuBuilderEvent($this->factory, $menu));
 
@@ -305,47 +315,47 @@ class FrontendMenuBuilder extends MenuBuilder
      */
     public function createAccountMenu()
     {
-        $menu = $this->factory->createItem('root', array(
-            'childrenAttributes' => array(
-                'class' => 'nav'
-            )
-        ));
+        $menu = $this->factory->createItem('root', [
+            'childrenAttributes' => [
+                'class' => 'nav',
+            ],
+        ]);
         $menu->setCurrentUri($this->request->getRequestUri());
 
-        $child = $menu->addChild($this->translate('sylius.account.title'), array(
-            'childrenAttributes' => array('class' => 'nav nav-list'),
-            'labelAttributes'    => array('class' => 'nav-header')
-        ));
+        $child = $menu->addChild($this->translate('sylius.account.title'), [
+            'childrenAttributes' => ['class' => 'nav nav-list'],
+            'labelAttributes' => ['class' => 'nav-header'],
+        ]);
 
-        $child->addChild('account', array(
+        $child->addChild('account', [
             'route' => 'sylius_account_profile_show',
-            'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.account.homepage')),
-            'labelAttributes' => array('icon' => 'icon-home', 'iconOnly' => false)
-        ))->setLabel($this->translate('sylius.frontend.menu.account.homepage'));
+            'linkAttributes' => ['title' => $this->translate('sylius.frontend.menu.account.homepage')],
+            'labelAttributes' => ['icon' => 'icon-home', 'iconOnly' => false],
+        ])->setLabel($this->translate('sylius.frontend.menu.account.homepage'));
 
-        $child->addChild('profile', array(
+        $child->addChild('profile', [
             'route' => 'sylius_account_profile_update',
-            'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.account.profile')),
-            'labelAttributes' => array('icon' => 'icon-info-sign', 'iconOnly' => false)
-        ))->setLabel($this->translate('sylius.frontend.menu.account.profile'));
+            'linkAttributes' => ['title' => $this->translate('sylius.frontend.menu.account.profile')],
+            'labelAttributes' => ['icon' => 'icon-info-sign', 'iconOnly' => false],
+        ])->setLabel($this->translate('sylius.frontend.menu.account.profile'));
 
-        $child->addChild('password', array(
+        $child->addChild('password', [
             'route' => 'sylius_account_change_password',
-            'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.account.password')),
-            'labelAttributes' => array('icon' => 'icon-lock', 'iconOnly' => false)
-        ))->setLabel($this->translate('sylius.frontend.menu.account.password'));
+            'linkAttributes' => ['title' => $this->translate('sylius.frontend.menu.account.password')],
+            'labelAttributes' => ['icon' => 'icon-lock', 'iconOnly' => false],
+        ])->setLabel($this->translate('sylius.frontend.menu.account.password'));
 
-        $child->addChild('orders', array(
+        $child->addChild('orders', [
             'route' => 'sylius_account_order_index',
-            'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.account.orders')),
-            'labelAttributes' => array('icon' => 'icon-briefcase', 'iconOnly' => false)
-        ))->setLabel($this->translate('sylius.frontend.menu.account.orders'));
+            'linkAttributes' => ['title' => $this->translate('sylius.frontend.menu.account.orders')],
+            'labelAttributes' => ['icon' => 'icon-briefcase', 'iconOnly' => false],
+        ])->setLabel($this->translate('sylius.frontend.menu.account.orders'));
 
-        $child->addChild('addresses', array(
+        $child->addChild('addresses', [
             'route' => 'sylius_account_address_index',
-            'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.account.addresses')),
-            'labelAttributes' => array('icon' => 'icon-envelope', 'iconOnly' => false)
-        ))->setLabel($this->translate('sylius.frontend.menu.account.addresses'));
+            'linkAttributes' => ['title' => $this->translate('sylius.frontend.menu.account.addresses')],
+            'labelAttributes' => ['icon' => 'icon-envelope', 'iconOnly' => false],
+        ])->setLabel($this->translate('sylius.frontend.menu.account.addresses'));
 
         $this->eventDispatcher->dispatch(MenuBuilderEvent::FRONTEND_ACCOUNT, new MenuBuilderEvent($this->factory, $menu));
 
@@ -355,10 +365,10 @@ class FrontendMenuBuilder extends MenuBuilder
     protected function createTaxonomiesMenuNode(ItemInterface $menu, TaxonInterface $taxon)
     {
         foreach ($taxon->getChildren() as $child) {
-            $childMenu = $menu->addChild($child->getName(), array(
-                'route'           => $child,
-                'labelAttributes' => array('icon' => 'icon-angle-right')
-            ));
+            $childMenu = $menu->addChild($child->getName(), [
+                'route' => $child,
+                'labelAttributes' => ['icon' => 'icon-angle-right'],
+            ]);
             if ($child->getPath()) {
                 $childMenu->setLabelAttribute('data-image', $child->getPath());
             }

@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\ReportBundle\DependencyInjection\Compiler;
 
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
@@ -23,7 +24,7 @@ class RegisterRenderersPassSpec extends ObjectBehavior
 {
     function it_should_implement_compiler_pass_interface()
     {
-        $this->shouldImplement('Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface');
+        $this->shouldImplement(CompilerPassInterface::class);
     }
 
     function it_processes_with_given_container(ContainerBuilder $container, Definition $rendererDefinition)
@@ -31,15 +32,15 @@ class RegisterRenderersPassSpec extends ObjectBehavior
         $container->hasDefinition('sylius.registry.report.renderer')->willReturn(true);
         $container->getDefinition('sylius.registry.report.renderer')->willReturn($rendererDefinition);
 
-        $rendererServices = array(
-            'sylius.form.type.renderer.test' => array(
-                array('renderer' => 'test', 'label' => 'Test renderer'),
-            ),
-        );
+        $rendererServices = [
+            'sylius.form.type.renderer.test' => [
+                ['renderer' => 'test', 'label' => 'Test renderer'],
+            ],
+        ];
         $container->findTaggedServiceIds('sylius.report.renderer')->willReturn($rendererServices);
 
-        $rendererDefinition->addMethodCall('register', array('test', new Reference('sylius.form.type.renderer.test')))->shouldBeCalled();
-        $container->setParameter('sylius.report.renderers', array('test' => 'Test renderer'))->shouldBeCalled();
+        $rendererDefinition->addMethodCall('register', ['test', new Reference('sylius.form.type.renderer.test')])->shouldBeCalled();
+        $container->setParameter('sylius.report.renderers', ['test' => 'Test renderer'])->shouldBeCalled();
 
         $this->process($container);
     }
@@ -55,13 +56,13 @@ class RegisterRenderersPassSpec extends ObjectBehavior
         $container->hasDefinition('sylius.registry.report.renderer')->willReturn(true);
         $container->getDefinition('sylius.registry.report.renderer')->willReturn($rendererDefinition);
 
-        $rendererServices = array(
-            'sylius.form.type.renderer.test' => array(
-                array('renderer' => 'test'),
-            ),
-        );
+        $rendererServices = [
+            'sylius.form.type.renderer.test' => [
+                ['renderer' => 'test'],
+            ],
+        ];
         $container->findTaggedServiceIds('sylius.report.renderer')->willReturn($rendererServices);
         $this->shouldThrow(new \InvalidArgumentException('Tagged renderers needs to have `renderer` and `label` attributes.'));
-        $rendererDefinition->addMethodCall('register', array('test', new Reference('sylius.form.type.renderer.test')))->shouldNotBeCalled();
+        $rendererDefinition->addMethodCall('register', ['test', new Reference('sylius.form.type.renderer.test')])->shouldNotBeCalled();
     }
 }

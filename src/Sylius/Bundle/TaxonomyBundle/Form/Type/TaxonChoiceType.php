@@ -21,16 +21,13 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Taxon choice form form.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Anna Walasek <anna.walasek@lakion.com>
  */
 class TaxonChoiceType extends AbstractType
 {
     /**
-     * Taxonon repository.
-     *
      * @var TaxonRepositoryInterface
      */
     protected $taxonRepository;
@@ -68,24 +65,26 @@ class TaxonChoiceType extends AbstractType
     {
         $repository = $this->taxonRepository;
         $choiceList = function (Options $options) use ($repository) {
-            $taxons = $repository->getTaxonsAsList($options['taxonomy']);
+            $taxons = $repository->getNonRootTaxons();
+
+            if (null !== $options['taxonomy']) {
+                $taxons = $repository->getTaxonsAsList($options['taxonomy']);
+            }
 
             if (null !== $options['filter']) {
                 $taxons = array_filter($taxons, $options['filter']);
             }
 
-            return new ObjectChoiceList($taxons, null, array(), null, 'id');
+            return new ObjectChoiceList($taxons, null, [], 'taxonomy', 'id');
         };
 
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'choice_list' => $choiceList,
-            ))
-            ->setRequired(array(
-                'taxonomy',
-                'filter',
-            ))
-            ->setAllowedTypes('taxonomy', TaxonomyInterface::class)
+                'taxonomy' => null,
+                'filter' => null,
+            ])
+            ->setAllowedTypes('taxonomy', [TaxonomyInterface::class, 'null'])
             ->setAllowedTypes('filter', ['callable', 'null'])
         ;
     }

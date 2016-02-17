@@ -7,6 +7,9 @@ sylius:
       main:
         countries: البلدان
         homepage: متجرك
+        pages: الصفحات
+        routes: طرق
       sidebar:
         countries: البلدان
         pages: الصفحات
+        routes: طرق

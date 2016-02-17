@@ -4,6 +4,10 @@ body {
     font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 
+body.toolbar-padding {
+    padding-top: 81px;
+}
+
 a.create-ui-toggle {
     background-image: url("/bundles/syliusweb/img/logo.png");
 }
@@ -158,7 +162,7 @@ a.oauth-login:hover {
     background-color: #333 !important;
 }
 .create-ui-toolbar-wrapper.editing {
-	background: rgba(0, 0, 0, 0.7) !important;
+    background: rgba(0, 0, 0, 0.7) !important;
 }
 
 a.create-ui-toggle {
@@ -167,6 +171,15 @@ a.create-ui-toggle {
     background-repeat: no-repeat !important;
     cursor: pointer;
 }
+
+/* Specific rules */
+.crossed {
+     text-decoration: line-through;
+ }
+.label-originalprice {
+     margin-right: 0.3em;
+ }
+
 .create-ui-toolbar-wrapper a {
     font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif !important;
 }

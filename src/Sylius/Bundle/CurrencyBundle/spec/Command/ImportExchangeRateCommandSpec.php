@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Currency\Importer\ImporterInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -28,7 +29,7 @@ class ImportExchangeRateCommandSpec extends ObjectBehavior
 
     function it_is_a_command()
     {
-        $this->shouldHaveType('Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand');
+        $this->shouldHaveType(ContainerAwareCommand::class);
     }
 
     function it_has_a_name()
@@ -36,7 +37,7 @@ class ImportExchangeRateCommandSpec extends ObjectBehavior
         $this->getName()->shouldReturn('sylius:currency:import');
     }
 
-    function it_updates_a_avaivalble_exchange_rate(
+    function it_updates_a_available_exchange_rate(
         ContainerInterface $container,
         InputInterface $input,
         OutputInterface $output,
@@ -46,6 +47,7 @@ class ImportExchangeRateCommandSpec extends ObjectBehavior
         $input->bind(Argument::any())->shouldBeCalled();
         $input->isInteractive()->shouldBeCalled();
         $input->validate()->shouldBeCalled();
+        $input->hasArgument('command')->willReturn(false);
 
         $output->writeln('Fetching data from external database.')->shouldBeCalled();
 

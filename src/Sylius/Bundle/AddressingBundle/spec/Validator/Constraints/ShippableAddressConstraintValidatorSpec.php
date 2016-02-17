@@ -17,7 +17,7 @@ use Sylius\Bundle\AddressingBundle\Validator\Constraints\ProvinceAddressConstrai
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintViolation;
-use Symfony\Component\Validator\ExecutionContextInterface;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
@@ -31,10 +31,10 @@ class ShippableAddressConstraintValidatorSpec extends ObjectBehavior
 
     function it_throws_exception_if_the_value_is_not_an_address(Constraint $constraint)
     {
-        $this->shouldThrow('\InvalidArgumentException')->during('validate', array(
+        $this->shouldThrow(\InvalidArgumentException::class)->during('validate', [
             '',
-            $constraint
-        ));
+            $constraint,
+        ]);
     }
 
     function it_does_not_add_violation(
@@ -62,9 +62,9 @@ class ShippableAddressConstraintValidatorSpec extends ObjectBehavior
         $this->initialize($context);
 
         $context->getPropertyPath()->shouldBeCalled()->willReturn('property_path');
-        $context->getViolations()->shouldBeCalled()->willReturn(new \ArrayIterator(array(
-            $this->createViolation('other_property_path')
-        )));
+        $context->getViolations()->shouldBeCalled()->willReturn(new \ArrayIterator([
+            $this->createViolation('other_property_path'),
+        ]));
 
         $context->addViolation(Argument::any())->shouldNotBeCalled();
 
@@ -73,6 +73,6 @@ class ShippableAddressConstraintValidatorSpec extends ObjectBehavior
 
     private function createViolation($propertyPath)
     {
-        return new ConstraintViolation('message', 'template', array(), 'root', $propertyPath, 'invalidValue');
+        return new ConstraintViolation('message', 'template', [], 'root', $propertyPath, 'invalidValue');
     }
 }

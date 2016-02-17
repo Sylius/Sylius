@@ -72,10 +72,10 @@ class MoneyType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'currency' => $this->currency,
-                'divisor'  => 100
-            ))
+                'divisor' => 100,
+            ])
         ;
     }
 

@@ -15,7 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\User\Model\CustomerInterface;
 
 /**
- *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class CustomerSpec extends ObjectBehavior
@@ -27,7 +26,7 @@ class CustomerSpec extends ObjectBehavior
 
     function it_implements_customer_interface()
     {
-        $this->shouldImplement('Sylius\Component\User\Model\CustomerInterface');
+        $this->shouldImplement(CustomerInterface::class);
     }
 
     function it_implements_user_aware_interface()

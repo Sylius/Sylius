@@ -13,7 +13,6 @@ namespace spec\Sylius\Component\Archetype\Model;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Archetype\Model\ArchetypeInterface;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Variation\Model\OptionInterface;
@@ -37,7 +36,7 @@ class ArchetypeSpec extends ObjectBehavior
 
     function it_is_an_Archetype()
     {
-        $this->shouldImplement('Sylius\Component\Archetype\Model\ArchetypeInterface');
+        $this->shouldImplement(ArchetypeInterface::class);
     }
 
     function it_has_no_id_by_default()

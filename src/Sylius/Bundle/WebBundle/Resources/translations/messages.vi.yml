@@ -2,15 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  account:
-    home:
-      email: ""
-      id: ""
-    order:
-      number: ""
-      payment_mode: ""
-      shipment_mode: ""
-      state: ""
+  association_type:
+    name: Tên
+    create: Tạo
   address:
     city: Thành phố
     company: Công ty
@@ -25,6 +19,10 @@ sylius:
     info: Thông tin
     success: Thành công
     warning: Cảnh báo
+  archetype:
+    name: Tên
+    options: Tùy chọn
+    updated_at: Cập nhật lần cuối
   backend:
     alert:
       info: Thông tin
@@ -33,20 +31,24 @@ sylius:
       chart_order_total: Giá trị đơn đặt hàng
       orders: Đơn đặt hàng tuần trước
       revenue: Doanh thu tuần trước
-    quick_links:
-      users: Người dùng
   block:
-    id: ID
-    title: Tiêu đề
-    update_header: Chỉnh sửa khối nội dung
-    updated_at: Cập nhật lần cuối
+    imagine:
+      title: Tiêu đề
+      updated_at: Cập nhật lần cuối
+    simple:
+      title: Tiêu đề
+      updated_at: Cập nhật lần cuối
+    slideshow:
+      title: Tiêu đề
+      updated_at: Cập nhật lần cuối
+    string:
+      title: Tiêu đề
+      updated_at: Cập nhật lần cuối
   breadcrumb:
     country:
       index: Quốc gia
-    customers: Khách hàng
+    dashboard: Bảng điều khiển
     edit: Chỉnh sửa
-    exchange_rate:
-      index: Tỷ giá ngoại tệ
     general_settings: Cài đặt chung
     generate: Tạo
     group:
@@ -60,8 +62,6 @@ sylius:
       index: Tùy chọn
     order:
       index: Đơn đặt hàng
-    page:
-      index: Các trang tĩnh
     payment:
       index: Thanh toán
     payment_method:
@@ -70,16 +70,22 @@ sylius:
       index: Sản phẩm
     promotion:
       index: Chương trình khuyến mãi
+    role:
+      index: Vai trò
     shipment:
       index: Vận chuyển
-    user:
-      index: Người dùng
   cart:
     summary:
       quantity: Số lượng
       save: Lưu lại
       total: Tổng cộng
       unit_price: Giá
+  channel:
+    code: Mã
+    created_at: Được tạo vào lúc
+    id: ID
+    name: Tên
+    updated_at: Cập nhật lần cuối
   checkout:
     finalize:
       address:
@@ -107,35 +113,38 @@ sylius:
       new_customer: Khách hàng mới
       register: Đăng kí
     shipping:
-      error: Chúng tôi rất tiếc, nhưng cửa hàng của chúng tôi không thể vận chuyển sản phẩm này đến nước mà bạn đã chọn.
       header: Phương pháp vận chuyển
   confirmation:
-    message: Bạn có muốn xóa khoản mục này không?
     title: Xác nhận
+  contact_request:
+    id: ID
+    updated_at: Cập nhật lần cuối
+  contact_topic:
+    id: ID
+    title: Tiêu đề
+    updated_at: Cập nhật lần cuối
   country:
     add_province: Thêm tỉnh
     create: Tạo quốc gia
     create_header: Tạo quốc gia mới
     id: ID
     index_header: Quốc gia
-    iso_name: Mã ISO
     manage: Quản lý quốc gia
     name: Tên
   create: Tạo
   created_at: Được tạo vào lúc
-  delete: xóa
-  deleted: Đã bị xoá
-  edit: chỉnh sửa
-  email: Email
-  exchange_rate:
-    create: Tự tạo tỷ giá ngoại tệ
-    create_header: Tỷ giá ngoại tệ mới
-    currency: Tiền tệ
+  currency:
+    code: Mã
     id: ID
-    index_header: Tỷ giá ngoại tệ
-    no_results: Chưa có tỷ giá ngoại tệ nào để hiển thị.
-    rate: tỷ giá
-    update_header: Chỉnh sửa tỷ giá hối đoái
+    name: Tên
+    updated_at: Cập nhật lần cuối
+  customer:
+    groups: Nhóm
+    id: ID
+  deleted: Đã bị xoá
+  email:
+    code: Mã
+    updated_at: Cập nhật lần cuối
   form:
     frontend:
       password:
@@ -155,38 +164,33 @@ sylius:
   locale:
     code: Mã
     enabled: Đã được kích hoạt
+    id: ID
+    name: Tên
     updated_at: Cập nhật lần cuối
   logo: Sylius
   manage: Quản lý
+  menu:
+    id: ID
+    title: Tiêu đề
+  menu_node:
+    id: ID
+    title: Tiêu đề
+  metadata:
+    id: ID
   newest: Sản phẩm mới nhất
   "no": false
-  option:
-    create: Tạo tùy chọn
-    create_header: Tạo tuỳ chọn sản phẩm mới
-    index_header: Tuỳ chọn cho sản phẩm
-    manage: Quản lý tuỳ chọn
-    name: Tên
-    presentation: trình bày
-    update_header: Chỉnh sửa tùy chọn
-    updated_at: Cập nhật lần cuối
   order:
+    comment:
+      created_at: Được tạo vào lúc
     id: ID
     index_header: Đơn đặt hàng hiện tại
     shipments: Vận chuyển
     taxes: Thuế
-  shipment:
-    created_at: Được tạo vào lúc
-    id: ID
-    index_header: Vận chuyển
-    name: Tên
-    sku: MÃ SẢN PHẨM
-    updated_at: Cập nhật lần cuối
   order_item:
     quantity: Số lượng
   page:
     id: ID
     title: Tiêu đề
-    update_header: Cập nhật lần cuối
   password: Mật khẩu
   payment:
     created_at: Được tạo vào lúc
@@ -198,6 +202,13 @@ sylius:
     index_header: Phương thức thanh toán
     name: Tên
     updated_at: Cập nhật lần cuối
+  permission:
+    code: Mã
+    id: ID
+    updated_at: Cập nhật lần cuối
+  pricing:
+    volume_based:
+      price: Giá
   product:
     name: Tên
     options: Tùy chọn
@@ -206,20 +217,53 @@ sylius:
       images: Hình ảnh
       options: Tùy chọn
     updated_at: Cập nhật lần cuối
+    volume_based:
+      price: Giá
+  product_attribute:
+    code: Mã
+    name: Tên
+    updated_at: Cập nhật lần cuối
+  product_association:
+    code: Mã
+    name: Tên
+    updated_at: Cập nhật lần cuối
+  product_option:
+    name: Tên
+    updated_at: Cập nhật lần cuối
   promotion:
     created_at: Được tạo vào lúc
     id: ID
     name: Tên
     updated_at: Cập nhật lần cuối
-  property:
+  promotion_coupon:
+    code: Mã
+  redirect_route:
+    id: ID
+    title: Tiêu đề
+  report:
+    code: Mã
+    manage: Quản lý
     name: Tên
-    presentation: trình bày
-  prototype:
-    index_header: Sản phẩm mẫu
+  role:
+    code: Mã
+    id: ID
+    index_header: Vai trò
     name: Tên
+    updated_at: Cập nhật lần cuối
+  route:
+    id: ID
+    name: Tên
+    title: Tiêu đề
   search: Tìm kiếm
   settings:
     general_header: Cài đặt chung
+  shipment:
+    created_at: Được tạo vào lúc
+    id: ID
+    index_header: Vận chuyển
+    name: Tên
+    sku: MÃ SẢN PHẨM
+    updated_at: Cập nhật lần cuối
   shipping_category:
     id: ID
     index_header: Thể loại
@@ -232,20 +276,22 @@ sylius:
     updated_at: Cập nhật lần cuối
   stockable:
     name: Tên
+    updated_at: Cập nhật lần cuối
   tax_category:
     id: ID
     name: Tên
     updated_at: Cập nhật lần cuối
   tax_rate:
-    included_in_price: Bao gồm trong giá?
     name: Tên
     updated_at: Cập nhật lần cuối
   taxon:
     name: Tên
   taxonomy:
     name: Tên
+  ui:
+    code: Mã
+    name: Tên
   user:
-    email: Email
     id: ID
   variant:
     last_update: Cập nhật lần cuối
@@ -255,3 +301,4 @@ sylius:
   "yes": true
   zone:
     name: Tên
+    scope: Phạm vi

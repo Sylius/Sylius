@@ -13,16 +13,25 @@ namespace Sylius\Component\Promotion\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\SoftDeletableTrait;
+use Sylius\Component\Resource\Model\TimestampableTrait;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class Promotion implements PromotionInterface
 {
+    use SoftDeletableTrait, TimestampableTrait;
+
     /**
      * @var mixed
      */
     protected $id;
+
+    /**
+     * @var string
+     */
+    protected $code;
 
     /**
      * @var string
@@ -88,21 +97,6 @@ class Promotion implements PromotionInterface
      */
     protected $actions;
 
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $deletedAt;
-
     public function __construct()
     {
         $this->coupons = new ArrayCollection();
@@ -117,6 +111,22 @@ class Promotion implements PromotionInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
     }
 
     /**
@@ -401,61 +411,5 @@ class Promotion implements PromotionInterface
     {
         $action->setPromotion(null);
         $this->actions->removeElement($action);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isDeleted()
-    {
-        return null !== $this->deletedAt && new \DateTime() >= $this->deletedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDeletedAt()
-    {
-        return $this->deletedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDeletedAt(\DateTime $deletedAt)
-    {
-        $this->deletedAt = $deletedAt;
     }
 }

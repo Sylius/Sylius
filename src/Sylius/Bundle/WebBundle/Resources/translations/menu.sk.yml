@@ -5,80 +5,113 @@ sylius:
   backend:
     menu:
       main:
+        api_clients: API klienti
+        archetypes: Produktové prototypy
         assortment: Sortiment
-        configuration: Konfigurácia
-        countries: Krajiny
-        customer: Zákazníci
-        dashboard: Nástenka
-        exchange_rates: Výmenné kurzy
-        general_settings: Základné nastavenia
-        homepage: Zobraziť obchod
-        locales: Jazyky
-        new_order: Pridať novú objednávku
-        new_promotion: Pridať novú akciu
-        options: Spravovať možnosti produktov
-        orders: Aktuálne objednávky
-        payment_methods: Spôsoby platby
-        payments: Platby
-        products: Produkty
-        promotions: Akcie
-        properties: Konfigurácia vlastností
-        prototypes: Prototypy produktov
-        sales: Objednávky
-        shipments: Zásielky
-        shipping_categories: Kategórie doručenia
-        shipping_methods: Spôsoby doručenia
-        stockables: Úrovne zásob
-        tax_categories: Kategórie zdaňovania
-        tax_rates: Daňové sadzby
-        taxation_settings: Nastavenie zdaňovania
-        taxonomies: Kategorizácia
-        users: Používatelia
-        zones: Zóny
-      sidebar:
-        assortment: Sortiment
+        attributes: Produktové vlastnosti
         blocks: Bloky
+        channels: Kanály
         configuration: Konfigurácia
+        contact_requests: Žiadosti
+        contact_topics: Témy
         content: Obsah
         countries: Krajiny
-        customer: Zákazníci
-        dashboard: Nástenka
-        exchange_rates: Výmenné kurzy
+        currencies: Meny
+        customer: Zákazník
+        customers: Zákazníci
+        dashboard: Administračný panel
+        emails: E-maily
         general_settings: Základné nastavenia
-        groups: Skupiny
-        homepage: Naspäť na stránku
+        groups: Zákaznícke skupiny
+        homepage: Zobraziť obchod
         locales: Jazyky
+        marketing: Marketing
+        menus: Menu
         new_order: Pridať novú objednávku
         new_promotion: Pridať novú akciu
-        options: Spravovať možnosti
+        options: Produktové voľby
         orders: Aktuálne objednávky
         pages: Stránky
         payment_methods: Spôsoby platby
         payments: Platby
+        permissions: Oprávnenia
         products: Produkty
         promotions: Akcie
-        properties: Konfigurácia vlastností
-        prototypes: Prototypy produktov
+        report: Reporty
+        roles: Role
+        routes: URL cesty
         sales: Objednávky
+        security_settings: Nastavenia bezpečnosti
         shipments: Zásielky
         shipping_categories: Kategórie doručenia
         shipping_methods: Spôsoby doručenia
-        stockables: Úrovne zásob
-        tax_categories: Kategórie zdaňovania
+        slideshow: Prezentácia
+        stockables: Skladové zásoby
+        support: Podpora
+        tax_categories: Daňové kategórie
         tax_rates: Daňové sadzby
         taxation_settings: Nastavenie zdaňovania
         taxonomies: Kategorizácia
-        users: Používatelia
+        zones: Zóny
+      sidebar:
+        api_clients: API klienti
+        archetypes: Produktové prototypy
+        assortment: Sortiment
+        attributes: Produktové vlastnosti
+        blocks: Bloky
+        channels: Kanály
+        configuration: Konfigurácia
+        contact_requests: Žiadosti
+        contact_topics: Témy
+        content: Obsah
+        countries: Krajiny
+        currencies: Meny
+        customer: Zákazník
+        customers: Zákazníci
+        dashboard: Nástenka
+        emails: E-maily
+        general_settings: Základné nastavenia
+        groups: Zákaznícke skupiny
+        homepage: Naspäť na stránku
+        locales: Jazyky
+        marketing: Marketing
+        menus: Menu
+        new_order: Pridať novú objednávku
+        new_promotion: Pridať novú akciu
+        options: Produktové voľby
+        orders: Aktuálne objednávky
+        pages: Stránky
+        payment_methods: Spôsoby platby
+        payments: Platby
+        permissions: Oprávnenia
+        products: Produkty
+        promotions: Akcie
+        redirects: Presmerovania
+        report: Reporty
+        roles: Role
+        routes: URL cesty
+        sales: Objednávky
+        security_settings: Nastavenia bezpečnosti
+        shipments: Zásielky
+        shipping_categories: Kategórie doručenia
+        shipping_methods: Spôsoby doručenia
+        slideshow: Prezentácia
+        stockables: Skladové zásoby
+        support: Podpora
+        tax_categories: Daňové kategórie
+        tax_rates: Daňové sadzby
+        taxation_settings: Nastavenie zdaňovania
+        taxonomies: Kategorizácia
         zones: Zóny
   frontend:
     menu:
       account:
         addresses: Môj adresár
-        homepage: Domov
+        homepage: Úvod
         orders: Moje objednávky / moje faktúry
         password: Moje heslo
         profile: Moje osobné údaje
-        shop: Späť na obchod
+        shop: Späť do obchodu
       currency: 'Zobraziť ceny v %currency%'
       main:
         account: Môj účet
@@ -87,6 +120,8 @@ sylius:
         login: Prihlásenie
         logout: Odhlásiť
         register: Registrovať
+      sidebar:
+        links: Odkazy
       social:
         facebook: Facebook
         github: GitHub

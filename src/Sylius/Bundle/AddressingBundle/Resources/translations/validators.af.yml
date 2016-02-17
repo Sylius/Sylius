@@ -28,12 +28,6 @@ sylius:
       min_length: Straat moet minstens 2 karakters lank wees|Straat moet minstens 2 karakters lank wees.
       not_blank: Voer asb. straat in.
     not_shippable: "Hierdie adres is nie 'n geldige bestemming nie."
-  country:
-    iso_name:
-      not_blank: Voer asb. ISO land kode in.
-    name:
-      max_length: Land mag nie langer wees as 255 karakters nie|Land mag nie langer wees as 255 karakters nie.
-      not_blank: Voer asb. land naam in.
   province:
     name:
       max_length: Provinsie naam mag nie langer wees as 255 karakters nie|Provinsie naam mag nie langer wees as 255 karakters nie.

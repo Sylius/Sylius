@@ -11,11 +11,16 @@
 
 namespace Sylius\Component\Mailer\Model;
 
+use Sylius\Component\Resource\Model\TimestampableTrait;
+use Sylius\Component\Resource\Model\ToggleableTrait;
+
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Email implements EmailInterface
 {
+    use TimestampableTrait, ToggleableTrait;
+
     /**
      * @var mixed
      */
@@ -25,11 +30,6 @@ class Email implements EmailInterface
      * @var string
      */
     protected $code;
-
-    /**
-     * @var bool
-     */
-    protected $enabled = true;
 
     /**
      * @var string
@@ -55,16 +55,6 @@ class Email implements EmailInterface
      * @var string
      */
     protected $senderAddress;
-
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
 
     public function __construct()
     {
@@ -93,22 +83,6 @@ class Email implements EmailInterface
     public function setCode($code)
     {
         $this->code = $code;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isEnabled()
-    {
-        return $this->enabled;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setEnabled($enabled)
-    {
-        $this->enabled = (bool) $enabled;
     }
 
     /**
@@ -189,37 +163,5 @@ class Email implements EmailInterface
     public function setSenderAddress($senderAddress)
     {
         $this->senderAddress = $senderAddress;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
     }
 }

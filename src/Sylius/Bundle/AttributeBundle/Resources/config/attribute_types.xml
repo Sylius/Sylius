@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.attribute_type.text.class">Sylius\Component\Attribute\AttributeType\TextAttributeType</parameter>
+        <parameter key="sylius.form.type.attribute_type.text.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\TextAttributeType</parameter>
+        <parameter key="sylius.form.type.attribute_type.configuration.text.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\TextAttributeConfigurationType</parameter>
+
+        <parameter key="sylius.attribute_type.textarea.class">Sylius\Component\Attribute\AttributeType\TextareaAttributeType</parameter>
+        <parameter key="sylius.form.type.attribute_type.textarea.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\TextareaAttributeType</parameter>
+
+        <parameter key="sylius.attribute_type.checkbox.class">Sylius\Component\Attribute\AttributeType\CheckboxAttributeType</parameter>
+        <parameter key="sylius.form.type.attribute_type.checkbox.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\CheckboxAttributeType</parameter>
+
+        <parameter key="sylius.attribute_type.integer.class">Sylius\Component\Attribute\AttributeType\IntegerAttributeType</parameter>
+        <parameter key="sylius.form.type.attribute_type.integer.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\IntegerAttributeType</parameter>
+
+        <parameter key="sylius.attribute_type.percent.class">Sylius\Component\Attribute\AttributeType\PercentAttributeType</parameter>
+        <parameter key="sylius.form.type.attribute_type.percent.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\PercentAttributeType</parameter>
+
+        <parameter key="sylius.attribute_type.datetime.class">Sylius\Component\Attribute\AttributeType\DatetimeAttributeType</parameter>
+        <parameter key="sylius.form.type.attribute_type.datetime.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DatetimeAttributeType</parameter>
+        <parameter key="sylius.form.type.attribute_type.configuration.datetime.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\DatetimeAttributeConfigurationType</parameter>
+
+        <parameter key="sylius.attribute_type.date.class">Sylius\Component\Attribute\AttributeType\DateAttributeType</parameter>
+        <parameter key="sylius.form.type.attribute_type.date.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DateAttributeType</parameter>
+        <parameter key="sylius.form.type.attribute_type.configuration.date.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\DateAttributeConfigurationType</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.attribute_type.text" class="%sylius.attribute_type.text.class%">
+            <tag name="sylius.attribute.type" attribute-type="text" label="Text" />
+        </service>
+        <service id="sylius.form.type.attribute_type.text" class="%sylius.form.type.attribute_type.text.class%">
+            <tag name="form.type" alias="sylius_attribute_type_text" />
+        </service>
+        <service id="sylius.form.type.attribute_type.configuration.text" class="%sylius.form.type.attribute_type.configuration.text.class%">
+            <tag name="form.type" alias="sylius_attribute_type_configuration_text" />
+        </service>
+
+        <service id="sylius.attribute_type.textarea" class="%sylius.attribute_type.textarea.class%">
+            <tag name="sylius.attribute.type" attribute-type="textarea" label="Textarea" />
+        </service>
+        <service id="sylius.form.type.attribute_type.textarea" class="%sylius.form.type.attribute_type.textarea.class%">
+            <tag name="form.type" alias="sylius_attribute_type_textarea" />
+        </service>
+
+        <service id="sylius.attribute_type.checkbox" class="%sylius.attribute_type.checkbox.class%">
+            <tag name="sylius.attribute.type" attribute-type="checkbox" label="Checkbox" />
+        </service>
+        <service id="sylius.form.type.attribute_type.checkbox" class="%sylius.form.type.attribute_type.checkbox.class%">
+            <tag name="form.type" alias="sylius_attribute_type_checkbox" />
+        </service>
+
+        <service id="sylius.attribute_type.integer" class="%sylius.attribute_type.integer.class%">
+            <tag name="sylius.attribute.type" attribute-type="integer" label="Integer" />
+        </service>
+        <service id="sylius.form.type.attribute_type.integer" class="%sylius.form.type.attribute_type.integer.class%">
+            <tag name="form.type" alias="sylius_attribute_type_integer" />
+        </service>
+
+        <service id="sylius.attribute_type.percent" class="%sylius.attribute_type.percent.class%">
+            <tag name="sylius.attribute.type" attribute-type="percent" label="Percent" />
+        </service>
+        <service id="sylius.form.type.attribute_type.percent" class="%sylius.form.type.attribute_type.percent.class%">
+            <tag name="form.type" alias="sylius_attribute_type_percent" />
+        </service>
+
+        <service id="sylius.attribute_type.datetime" class="%sylius.attribute_type.datetime.class%">
+            <tag name="sylius.attribute.type" attribute-type="datetime" label="Datetime" />
+        </service>
+        <service id="sylius.form.type.attribute_type.datetime" class="%sylius.form.type.attribute_type.datetime.class%">
+            <tag name="form.type" alias="sylius_attribute_type_datetime" />
+        </service>
+        <service id="sylius.form.type.attribute_type.configuration.datetime" class="%sylius.form.type.attribute_type.configuration.datetime.class%">
+            <tag name="form.type" alias="sylius_attribute_type_configuration_datetime" />
+        </service>
+
+        <service id="sylius.attribute_type.date" class="%sylius.attribute_type.date.class%">
+            <tag name="sylius.attribute.type" attribute-type="date" label="Date" />
+        </service>
+        <service id="sylius.form.type.attribute_type.date" class="%sylius.form.type.attribute_type.date.class%">
+            <tag name="form.type" alias="sylius_attribute_type_date" />
+        </service>
+        <service id="sylius.form.type.attribute_type.configuration.date" class="%sylius.form.type.attribute_type.configuration.date.class%">
+            <tag name="form.type" alias="sylius_attribute_type_configuration_date" />
+        </service>
+    </services>
+
+</container>

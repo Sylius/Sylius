@@ -14,7 +14,7 @@ sylius:
       street: Gade
       province: Provins
     country:
-      iso_name: ISO navn
+      add_province: Tilføj provins
       name: Navn
       provinces: Provinser
       select: Vælg
@@ -22,6 +22,7 @@ sylius:
       name: Navn
       select: Vælg
     zone:
+      add_member: Tilføj medlem
       members: Medlemmer
       name: Navn
       type: Type
@@ -30,10 +31,7 @@ sylius:
         province: Provins
         zone: Zone
       scope: Omfang
+      select: Vælg
       select_scope: Vælg omfang
-    zone_member_country:
-      country: Land
-    zone_member_province:
-      province: Provins
-    zone_member_zone:
-      zone: Zone
+    zone_member:
+      select: Vælg

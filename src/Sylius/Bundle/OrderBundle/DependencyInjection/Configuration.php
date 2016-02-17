@@ -11,7 +11,29 @@
 
 namespace Sylius\Bundle\OrderBundle\DependencyInjection;
 
+use Sylius\Bundle\OrderBundle\Controller\AdjustmentController;
+use Sylius\Bundle\OrderBundle\Controller\CommentController;
+use Sylius\Bundle\OrderBundle\Controller\OrderItemController;
+use Sylius\Bundle\OrderBundle\Factory\OrderItemUnitFactory;
+use Sylius\Bundle\OrderBundle\Form\Type\AdjustmentType;
+use Sylius\Bundle\OrderBundle\Form\Type\CommentType;
+use Sylius\Bundle\OrderBundle\Form\Type\OrderItemType;
+use Sylius\Bundle\OrderBundle\Form\Type\OrderType;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Order\Model\Adjustment;
+use Sylius\Component\Order\Model\AdjustmentInterface;
+use Sylius\Component\Order\Model\Comment;
+use Sylius\Component\Order\Model\CommentInterface;
+use Sylius\Component\Order\Model\Identity;
+use Sylius\Component\Order\Model\IdentityInterface;
+use Sylius\Component\Order\Model\Order;
+use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderItem;
+use Sylius\Component\Order\Model\OrderItemInterface;
+use Sylius\Component\Order\Model\OrderItemUnit;
+use Sylius\Component\Order\Model\OrderItemUnitInterface;
+use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -48,68 +70,48 @@ class Configuration implements ConfigurationInterface
             ->end()
         ;
 
-        $this->addClassesSection($rootNode);
-        $this->addValidationGroupsSection($rootNode);
+        $this->addResourcesSection($rootNode);
 
         return $treeBuilder;
     }
 
     /**
-     * Adds `validation_groups` section.
-     *
      * @param ArrayNodeDefinition $node
      */
-    private function addValidationGroupsSection(ArrayNodeDefinition $node)
+    private function addResourcesSection(ArrayNodeDefinition $node)
     {
         $node
             ->children()
-                ->arrayNode('validation_groups')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->arrayNode('order')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('order_item')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('adjustment')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('comment')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                    ->end()
-                ->end()
-            ->end()
-        ;
-    }
-
-    /**
-     * Adds `classes` section.
-     *
-     * @param ArrayNodeDefinition $node
-     */
-    private function addClassesSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('classes')
+                ->arrayNode('resources')
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('order')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Order\Model\Order')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('repository')->cannotBeEmpty()->end()
-                                ->arrayNode('form')
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('default')->defaultValue('Sylius\Bundle\OrderBundle\Form\Type\OrderType')->end()
+                                        ->scalarNode('model')->defaultValue(Order::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(OrderInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->arrayNode('form')
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                                ->scalarNode('default')->defaultValue(OrderType::class)->cannotBeEmpty()->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('validation_groups')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->arrayNode('default')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(['sylius'])
+                                        ->end()
                                     ->end()
                                 ->end()
                             ->end()
@@ -117,13 +119,45 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('order_item')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Order\Model\OrderItem')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\OrderBundle\Controller\OrderItemController')->end()
-                                ->scalarNode('repository')->cannotBeEmpty()->end()
-                                ->arrayNode('form')
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('default')->defaultValue('Sylius\Bundle\OrderBundle\Form\Type\OrderItemType')->end()
+                                        ->scalarNode('model')->defaultValue(OrderItem::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(OrderItemInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(OrderItemController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->arrayNode('form')
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                                ->scalarNode('default')->defaultValue(OrderItemType::class)->cannotBeEmpty()->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('validation_groups')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->arrayNode('default')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(['sylius'])
+                                        ->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('order_item_unit')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(OrderItemUnit::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(OrderItemUnitInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(OrderItemUnitFactory::class)->end()
                                     ->end()
                                 ->end()
                             ->end()
@@ -131,20 +165,45 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('order_identity')
                             ->addDefaultsIfNotSet()
                             ->children()
-                            ->scalarNode('model')->defaultValue('Sylius\Component\Order\Model\Identity')->end()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(Identity::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(IdentityInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                    ->end()
+                                ->end()
                             ->end()
                         ->end()
-
                         ->arrayNode('adjustment')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Order\Model\Adjustment')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\OrderBundle\Controller\AdjustmentController')->end()
-                                ->scalarNode('repository')->cannotBeEmpty()->end()
-                                ->arrayNode('form')
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('default')->defaultValue('Sylius\Bundle\OrderBundle\Form\Type\AdjustmentType')->end()
+                                        ->scalarNode('model')->defaultValue(Adjustment::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(AdjustmentInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(AdjustmentController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->arrayNode('form')
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                                ->scalarNode('default')->defaultValue(AdjustmentType::class)->cannotBeEmpty()->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('validation_groups')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->arrayNode('default')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(['sylius'])
+                                        ->end()
                                     ->end()
                                 ->end()
                             ->end()
@@ -152,13 +211,30 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('comment')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Order\Model\Comment')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\OrderBundle\Controller\CommentController')->end()
-                                ->scalarNode('repository')->cannotBeEmpty()->end()
-                                ->arrayNode('form')
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('default')->defaultValue('Sylius\Bundle\OrderBundle\Form\Type\CommentType')->end()
+                                        ->scalarNode('model')->defaultValue(Comment::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(CommentInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(CommentController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->arrayNode('form')
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                                ->scalarNode('default')->defaultValue(CommentType::class)->cannotBeEmpty()->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('validation_groups')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->arrayNode('default')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(['sylius'])
+                                        ->end()
                                     ->end()
                                 ->end()
                             ->end()

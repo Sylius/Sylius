@@ -29,10 +29,9 @@ class StaticContentChoiceType extends ResourceChoiceType
         parent::configureOptions($resolver);
 
         $resolver->setDefaults(
-            array(
+            [
                 'property' => 'id',
-            )
+            ]
         );
     }
-
 }

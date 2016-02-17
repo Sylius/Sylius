@@ -1,19 +1,27 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-auto: Автоматически
-route: маршрут
 sylius:
   form:
     action_block:
       action_name: Действие
       id: ID
+      publish_end_date: Публиковать до
+      publish_start_date: Публиковать от
+      publishable: Опубликовано
     imagine_block:
-      parent: Родитель
+      filter: Фильтр
+      image: Изображение
       internal_name: Внутреннее название
-      slideshow_small: Большое слайдшоу (полноразмерное)
+      label: Заголовок
+      link_url: URL ссылки
+      parent: Родитель
+      publish_end_date: Публиковать до
+      publish_start_date: Публиковать от
+      publishable: Опубликовано
+      slideshow_small: Слайд-шоу маленькое (сбоку)
       slideshow_medium: Среднее слайдшоу (контент)
-      slideshow_large: Малое слайдшоу (сайдбар)
+      slideshow_large: Слайд-шоу большое (полной ширины)
     menu:
       childrens: Потомки
       display: Отображать
@@ -21,12 +29,18 @@ sylius:
       label: Заголовок
       name: Название
       parent: Родитель
+      publish_end_date: Публиковать до
+      publish_start_date: Публиковать от
+      publishable: Опубликовано
       route: Маршрут
       uri: URI
     menu_block:
       body: Содержание
       id: ID
       name: Название
+      publish_end_date: Публиковать до
+      publish_start_date: Публиковать от
+      publishable: Опубликовано
     menu_node_block:
       content: Контент
       display: Отображать
@@ -36,7 +50,7 @@ sylius:
       link_type: Тип ссылки
       publish_end_date: Публиковать до
       publish_start_date: Публиковать от
-      publishable: Опубликованый
+      publishable: Опубликовано
       route: Маршрут
       uri: URI
     redirect_route:
@@ -47,6 +61,9 @@ sylius:
     reference_block:
       body: Содержание
       id: ID
+      publish_end_date: Публиковать до
+      publish_start_date: Публиковать от
+      publishable: Опубликовано
       title: Название
     route:
       content: Контент
@@ -56,11 +73,18 @@ sylius:
       body: Содержание
       internal_name: Внутреннее название
       parent: Родитель
+      publish_end_date: Публиковать до
+      publish_start_date: Публиковать от
+      publishable: Опубликовано
       title: Название
     slideshow_block:
+      add_slide: Добавить слайд
       childrens: Потомки
       internal_name: Внутреннее название
       parent: Родитель
+      publish_end_date: Публиковать до
+      publish_start_date: Публиковать от
+      publishable: Опубликовано
       title: Название
     static_content:
       body: Содержание
@@ -70,10 +94,13 @@ sylius:
       parent: Родитель
       publish_end_date: Публиковать до
       publish_start_date: Публиковать от
-      publishable: Опубликованый
+      publishable: Опубликовано
       routes: Маршруты
       title: Название
     string_block:
       body: Содержание
       id: ID
       name: Название
+      publish_end_date: Публиковать до
+      publish_start_date: Публиковать от
+      publishable: Опубликовано

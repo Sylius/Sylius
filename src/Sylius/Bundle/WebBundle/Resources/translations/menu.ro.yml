@@ -6,34 +6,36 @@ sylius:
     menu:
       main:
         assortment: Sortiment
+        blocks: Block-uri
         configuration: Configurare
+        content: Conţinut
         countries: Țări
-        customer: Clienți
         dashboard: Panou de administrare
-        exchange_rates: Cursuri de schimb
         general_settings: Setări generale
+        groups: Grupuri
         homepage: Magazinul dumneavoastră
         locales: Setări regionale
         new_order: Adăugaţi comandă nouă
         new_promotion: Adăugaţi promoție nouă
         options: Gestionare opţiuni produs
         orders: Comenzi curente
+        pages: Pagini
         payment_methods: Metode de plată
         payments: Plăți
         products: Produse
         promotions: Promoţii
-        properties: Configurare atribute produs
-        prototypes: Șabloane produs
+        roles: Roluri
+        routes: Rute
         sales: Comenzi
         shipments: Livrări
         shipping_categories: Categorii de livrare
         shipping_methods: Metode de livrare
+        slideshow: Slideshow
         stockables: Stocuri
         tax_categories: Categorii de taxe
         tax_rates: Taxe
         taxation_settings: Setări taxe
         taxonomies: Categorizare
-        users: Utilizatori
         zones: Zone
       sidebar:
         assortment: Sortiment
@@ -41,9 +43,7 @@ sylius:
         configuration: Configurare
         content: Conţinut
         countries: Țări
-        customer: Clienți
         dashboard: Panou de administrare
-        exchange_rates: Cursuri de schimb
         general_settings: Setări generale
         groups: Grupuri
         homepage: Înapoi la site
@@ -57,18 +57,18 @@ sylius:
         payments: Plăți
         products: Produse
         promotions: Promoţii
-        properties: Configurare atribute produs
-        prototypes: Șabloane produs
+        roles: Roluri
+        routes: Rute
         sales: Comenzi
         shipments: Livrări
         shipping_categories: Categorii de livrare
         shipping_methods: Metode de livrare
+        slideshow: Slideshow
         stockables: Stocuri
         tax_categories: Categorii de taxe
         tax_rates: Taxe
         taxation_settings: Setări taxe
         taxonomies: Categorizare
-        users: Utilizatori
         zones: Zone
   frontend:
     menu:

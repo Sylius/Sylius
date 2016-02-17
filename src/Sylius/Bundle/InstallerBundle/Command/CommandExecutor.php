@@ -63,10 +63,10 @@ class CommandExecutor
      *
      * @throws \Exception
      */
-    public function runCommand($command, $parameters = array(), OutputInterface $output = null)
+    public function runCommand($command, $parameters = [], OutputInterface $output = null)
     {
         $parameters = array_merge(
-            array('command' => $command),
+            ['command' => $command],
             $this->getDefaultParameters(),
             $parameters
         );
@@ -98,12 +98,12 @@ class CommandExecutor
      */
     protected function getDefaultParameters()
     {
-        $defaultParameters = array('--no-debug' => true);
+        $defaultParameters = ['--no-debug' => true];
 
         if ($this->input->hasOption('env')) {
             $defaultParameters['--env'] = $this->input->hasOption('env') ? $this->input->getOption('env') : Kernel::ENV_DEV;
         }
-        
+
         if ($this->input->hasOption('no-interaction') && true === $this->input->getOption('no-interaction')) {
             $defaultParameters['--no-interaction'] = true;
         }

@@ -13,8 +13,11 @@ namespace spec\Sylius\Bundle\TaxonomyBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
+use Sylius\Bundle\TaxonomyBundle\Form\EventListener\BuildTaxonFormSubscriber;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -25,7 +28,7 @@ class TaxonTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Taxon', array('sylius'));
+        $this->beConstructedWith('Taxon', ['sylius']);
     }
 
     function it_is_initializable()
@@ -35,37 +38,41 @@ class TaxonTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
-    function it_builds_form_with_proper_fields(
-        FormBuilder $builder,
-        FormFactoryInterface $factory
-    ) {
+    function it_builds_form_with_proper_fields(FormBuilder $builder, FormFactoryInterface $factory)
+    {
         $builder->getFormFactory()->willReturn($factory);
 
         $builder
-            ->addEventSubscriber(
-                Argument::type('Sylius\Bundle\TaxonomyBundle\Form\EventListener\BuildTaxonFormSubscriber')
-            )
+            ->addEventSubscriber(Argument::type(BuildTaxonFormSubscriber::class))
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+
+        $builder
+            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('translations', 'a2lix_translationsForms', Argument::any())
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
-                'data_class'        => 'Taxon',
-                'validation_groups' => array('sylius'),
-            ))
+            ->setDefaults([
+                'data_class' => 'Taxon',
+                'validation_groups' => ['sylius'],
+            ])
             ->shouldBeCalled()
         ;
 

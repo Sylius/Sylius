@@ -30,9 +30,9 @@ class TaxonSelectionToCollectionTransformer extends ObjectSelectionToIdentifierC
      */
     public function transform($value)
     {
-        $taxons = array();
+        $taxons = [];
         foreach ($this->objects as $taxonomy) {
-            $taxons[$taxonomy->getId()] = array();
+            $taxons[$taxonomy->getId()] = [];
         }
 
         if (null === $value) {
@@ -40,7 +40,7 @@ class TaxonSelectionToCollectionTransformer extends ObjectSelectionToIdentifierC
         }
 
         if (!$value instanceof Collection) {
-            throw new UnexpectedTypeException($value, 'Doctrine\Common\Collections\Collection');
+            throw new UnexpectedTypeException($value, Collection::class);
         }
 
         return $this->processObjects($value, $taxons);

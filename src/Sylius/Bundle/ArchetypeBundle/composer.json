@@ -20,19 +20,19 @@
         }
     ],
     "require": {
-        "php": ">=5.5.9",
+        "php": "^5.5.9|^7.0",
 
-        "symfony/framework-bundle":        "~2.3",
-        "stof/doctrine-extensions-bundle": "~1.1",
-        "sylius/resource-bundle":          "0.16.*",
-        "sylius/archetype":                "0.16.*",
-        "sylius/attribute-bundle":         "0.16.*",
-        "sylius/variation-bundle":         "0.16.*"
+        "sylius/archetype": "0.17.*",
+        "sylius/attribute-bundle": "0.17.*",
+        "sylius/resource-bundle": "0.17.*",
+        "sylius/variation-bundle": "0.17.*",
+        "symfony/framework-bundle": "^2.7.7"
     },
     "require-dev": {
-        "phpspec/phpspec":   "~2.0",
-        "symfony/form":      "~2.3",
-        "symfony/validator": "~2.3"
+        "phpspec/phpspec": "^2.4",
+        "symfony/form": "^2.7",
+        "symfony/validator": "^2.7",
+        "doctrine/orm": "^2.4.8,<2.5"
     },
     "config": {
         "bin-dir": "bin"
@@ -46,8 +46,7 @@
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.16-dev"
+            "dev-master": "0.17-dev"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }

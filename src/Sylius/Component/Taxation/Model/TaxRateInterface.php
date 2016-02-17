@@ -11,12 +11,14 @@
 
 namespace Sylius\Component\Taxation\Model;
 
+use Sylius\Component\Resource\Model\CodeAwareInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface TaxRateInterface extends TimestampableInterface
+interface TaxRateInterface extends CodeAwareInterface, TimestampableInterface, ResourceInterface
 {
     /**
      * @return TaxCategoryInterface
@@ -54,12 +56,12 @@ interface TaxRateInterface extends TimestampableInterface
     public function setAmount($amount);
 
     /**
-     * @return Boolean
+     * @return bool
      */
     public function isIncludedInPrice();
 
     /**
-     * @param Boolean $includedInPrice
+     * @param bool $includedInPrice
      */
     public function setIncludedInPrice($includedInPrice);
 
@@ -72,4 +74,9 @@ interface TaxRateInterface extends TimestampableInterface
      * @param string $calculator
      */
     public function setCalculator($calculator);
+
+    /**
+     * @return string
+     */
+    public function getLabel();
 }

@@ -21,5 +21,5 @@ interface PaymentMethodRepositoryInterface
      *
      * @return mixed
      */
-    public function getQueryBuidlerForChoiceType(array $options);
+    public function getQueryBuilderForChoiceType(array $options);
 }

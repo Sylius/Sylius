@@ -1,0 +1,41 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  address:
+    city:
+      max_length: 城市不能超过 255 个字符。
+      min_length: 城市必须至少 2 个字符长。
+      not_blank: 请输入城市。
+    country:
+      not_blank: 请选择国家。
+    first_name:
+      max_length: 名字不能超过 255 个字符。
+      min_length: 名字必须是至少 2 个字符长。
+      not_blank: 请输入名字。
+    last_name:
+      max_length: 姓氏不能超过 255 个字符。
+      min_length: 姓氏必须是至少 2 个字符长。
+      not_blank: 请输入姓氏。
+    postcode:
+      max_length: 邮政编码不能超过 255 个字符。
+      min_length: 邮政编码必须是至少 2 个字符长。
+      not_blank: 请输入邮政编码。
+    province:
+      valid: 请选择正确的省。
+    street:
+      max_length: 街道名不能超过 255 个字符。
+      min_length: 街道名必须至少 2 个字符长。
+      not_blank: 请输入街道。
+    not_shippable: 此地址不是一个有效的送货目的地。
+  province:
+    name:
+      max_length: 省名不能超过 255 个字符。
+      min_length: 省名必须是至少 2 个字符长。
+      not_blank: 请输入省名。
+  zone:
+    members:
+      min_count: '请至少添加{{ limit }} 地区会员。'
+    name:
+      max_length: 区域名称不能超过 255 个字符。
+      not_blank: 请输入区域名称。

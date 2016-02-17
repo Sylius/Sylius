@@ -12,6 +12,7 @@
 namespace Sylius\Component\Order\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
@@ -19,19 +20,25 @@ use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OrderInterface extends AdjustableInterface, CommentAwareInterface, TimestampableInterface, SoftDeletableInterface, SequenceSubjectInterface
+interface OrderInterface extends
+    AdjustableInterface,
+    CommentAwareInterface,
+    ResourceInterface,
+    SoftDeletableInterface,
+    SequenceSubjectInterface,
+    TimestampableInterface
 {
-    const STATE_CART        = 'cart';
+    const STATE_CART = 'cart';
     const STATE_CART_LOCKED = 'cart_locked';
-    const STATE_PENDING     = 'pending';
-    const STATE_CONFIRMED   = 'confirmed';
-    const STATE_SHIPPED     = 'shipped';
-    const STATE_ABANDONED   = 'abandoned';
-    const STATE_CANCELLED   = 'cancelled';
-    const STATE_RETURNED    = 'returned';
+    const STATE_PENDING = 'pending';
+    const STATE_CONFIRMED = 'confirmed';
+    const STATE_SHIPPED = 'shipped';
+    const STATE_ABANDONED = 'abandoned';
+    const STATE_CANCELLED = 'cancelled';
+    const STATE_RETURNED = 'returned';
 
     /**
-     * @return Boolean
+     * @return bool
      */
     public function isCompleted();
 
@@ -53,12 +60,7 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Tim
     public function getItems();
 
     /**
-     * @param Collection|OrderItemInterface[] $items
-     */
-    public function setItems(Collection $items);
-
-    /**
-     * @return integer
+     * @return int
      */
     public function countItems();
 
@@ -68,8 +70,6 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Tim
     public function addItem(OrderItemInterface $item);
 
     /**
-     * Remove item from order.
-     *
      * @param OrderItemInterface $item
      */
     public function removeItem(OrderItemInterface $item);
@@ -77,36 +77,21 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Tim
     /**
      * @param OrderItemInterface $item
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasItem(OrderItemInterface $item);
 
     /**
-     * @return integer
+     * @return int
      */
     public function getItemsTotal();
 
-    /**
-     * Calculate items total based on the items
-     * unit prices and quantities.
-     */
-    public function calculateItemsTotal();
+    public function recalculateItemsTotal();
 
     /**
-     * @return integer
+     * @return int
      */
     public function getTotal();
-
-    /**
-     * @param integer $total
-     */
-    public function setTotal($total);
-
-    /**
-     * Calculate total.
-     * Items total + Adjustments total.
-     */
-    public function calculateTotal();
 
     /**
      * Alias of {@link countItems()}.
@@ -116,18 +101,15 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Tim
     public function getTotalItems();
 
     /**
-     * @return integer
+     * @return int
      */
     public function getTotalQuantity();
 
     /**
-     * @return Boolean
+     * @return bool
      */
     public function isEmpty();
 
-    /**
-     * Clears all items in cart.
-     */
     public function clearItems();
 
     /**
@@ -161,4 +143,28 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Tim
      * @return Collection|IdentityInterface[]
      */
     public function getIdentities();
+
+    /**
+     * @return string
+     */
+    public function getAdditionalInformation();
+
+    /**
+     * @param string $information
+     */
+    public function setAdditionalInformation($information);
+
+    /**
+     * @param string|null $type
+     *
+     * @return array
+     */
+    public function getAdjustmentsRecursively($type = null);
+
+    /**
+     * @param string|null $type
+     *
+     * @return int
+     */
+    public function getAdjustmentsTotalRecursively($type = null);
 }

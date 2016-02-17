@@ -1,11 +1,21 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\ApiBundle\Command;
 
 use FOS\OAuthServerBundle\Model\ClientManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Model\Client;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -19,7 +29,7 @@ class CreateClientCommandSpec extends ObjectBehavior
 
     public function it_is_a_container_aware_command()
     {
-        $this->shouldHaveType('Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand');
+        $this->shouldHaveType(ContainerAwareCommand::class);
     }
 
     public function it_has_a_name()
@@ -34,14 +44,19 @@ class CreateClientCommandSpec extends ObjectBehavior
         ClientManager $clientManager,
         Client $client
     ) {
+        $input->bind(Argument::any())->shouldBeCalled();
+        $input->isInteractive()->shouldBeCalled();
+        $input->validate()->shouldBeCalled();
+        $input->hasArgument('command')->willReturn(false);
+
         $container->get('fos_oauth_server.client_manager.default')->willReturn($clientManager);
         $clientManager->createClient()->willReturn($client);
 
-        $input->getOption('redirect-uri')->willReturn(array('redirect-uri'));
-        $input->getOption('grant-type')->willReturn(array('grant-type'));
+        $input->getOption('redirect-uri')->willReturn(['redirect-uri']);
+        $input->getOption('grant-type')->willReturn(['grant-type']);
 
-        $client->setRedirectUris(array('redirect-uri'))->shouldBeCalled();
-        $client->setAllowedGrantTypes(array('grant-type'))->shouldBeCalled();
+        $client->setRedirectUris(['redirect-uri'])->shouldBeCalled();
+        $client->setAllowedGrantTypes(['grant-type'])->shouldBeCalled();
 
         $clientManager->updateClient($client)->shouldBeCalled();
 
@@ -51,9 +66,6 @@ class CreateClientCommandSpec extends ObjectBehavior
         $output->writeln(Argument::type('string'))->shouldBeCalled();
 
         $this->setContainer($container);
-        $input->bind(Argument::any())->shouldBeCalled();
-        $input->isInteractive()->shouldBeCalled();
-        $input->validate()->shouldBeCalled();
         $this->run($input, $output);
     }
 }

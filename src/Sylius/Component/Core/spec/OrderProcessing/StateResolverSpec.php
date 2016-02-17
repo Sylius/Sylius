@@ -18,6 +18,7 @@ use Sylius\Component\Core\Model\OrderShippingStates;
 use Sylius\Component\Core\Model\Payment;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Core\OrderProcessing\StateResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -31,7 +32,7 @@ class StateResolverSpec extends ObjectBehavior
 
     function it_implements_Sylius_order_state_resolver_interface()
     {
-        $this->shouldImplement('Sylius\Component\Core\OrderProcessing\StateResolverInterface');
+        $this->shouldImplement(StateResolverInterface::class);
     }
 
     function it_marks_order_as_a_backorders_if_it_contains_backordered_units(OrderInterface $order)
@@ -48,7 +49,7 @@ class StateResolverSpec extends ObjectBehavior
         ShipmentInterface $shipment2
     ) {
         $order->isBackorder()->shouldBeCalled()->willReturn(false);
-        $order->getShipments()->willReturn(array($shipment1, $shipment2));
+        $order->getShipments()->willReturn([$shipment1, $shipment2]);
 
         $shipment1->getState()->willReturn(ShipmentInterface::STATE_SHIPPED);
         $shipment2->getState()->willReturn(ShipmentInterface::STATE_SHIPPED);
@@ -63,7 +64,7 @@ class StateResolverSpec extends ObjectBehavior
         ShipmentInterface $shipment2
     ) {
         $order->isBackorder()->shouldBeCalled()->willReturn(false);
-        $order->getShipments()->willReturn(array($shipment1, $shipment2));
+        $order->getShipments()->willReturn([$shipment1, $shipment2]);
 
         $shipment1->getState()->willReturn(ShipmentInterface::STATE_SHIPPED);
         $shipment2->getState()->willReturn(ShipmentInterface::STATE_READY);
@@ -78,7 +79,7 @@ class StateResolverSpec extends ObjectBehavior
         ShipmentInterface $shipment2
     ) {
         $order->isBackorder()->shouldBeCalled()->willReturn(false);
-        $order->getShipments()->willReturn(array($shipment1, $shipment2));
+        $order->getShipments()->willReturn([$shipment1, $shipment2]);
 
         $shipment1->getState()->willReturn(ShipmentInterface::STATE_RETURNED);
         $shipment2->getState()->willReturn(ShipmentInterface::STATE_RETURNED);
@@ -93,7 +94,7 @@ class StateResolverSpec extends ObjectBehavior
         $payment1 = new Payment();
         $payment1->setAmount(10000);
         $payment1->setState(PaymentInterface::STATE_COMPLETED);
-        $payments = new ArrayCollection(array($payment1));
+        $payments = new ArrayCollection([$payment1]);
 
         $order->hasPayments()->willReturn(true);
         $order->getPayments()->willReturn($payments);
@@ -112,7 +113,7 @@ class StateResolverSpec extends ObjectBehavior
         $payment2 = new Payment();
         $payment2->setAmount(4000);
         $payment2->setState(PaymentInterface::STATE_COMPLETED);
-        $payments = new ArrayCollection(array($payment1, $payment2));
+        $payments = new ArrayCollection([$payment1, $payment2]);
 
         $order->hasPayments()->willReturn(true);
         $order->getPayments()->willReturn($payments);
@@ -130,7 +131,7 @@ class StateResolverSpec extends ObjectBehavior
         $payment2 = new Payment();
         $payment2->setAmount(4000);
         $payment2->setState(PaymentInterface::STATE_NEW);
-        $payments = new ArrayCollection(array($payment1, $payment2));
+        $payments = new ArrayCollection([$payment1, $payment2]);
 
         $order->hasPayments()->willReturn(true);
         $order->getPayments()->willReturn($payments);
@@ -148,7 +149,7 @@ class StateResolverSpec extends ObjectBehavior
         $payment2 = new Payment();
         $payment2->setAmount(4000);
         $payment2->setState(PaymentInterface::STATE_NEW);
-        $payments = new ArrayCollection(array($payment1, $payment2));
+        $payments = new ArrayCollection([$payment1, $payment2]);
 
         $order->hasPayments()->willReturn(true);
         $order->getPayments()->willReturn($payments);

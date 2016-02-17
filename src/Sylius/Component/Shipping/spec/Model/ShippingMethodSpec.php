@@ -34,12 +34,23 @@ class ShippingMethodSpec extends ObjectBehavior
 
     function it_implements_Sylius_shipping_method_interface()
     {
-        $this->shouldImplement('Sylius\Component\Shipping\Model\ShippingMethodInterface');
+        $this->shouldImplement(ShippingMethodInterface::class);
+    }
+
+    function it_implements_Sylius_toogleable_interface()
+    {
+        $this->shouldImplement('Sylius\Component\Resource\Model\ToggleableInterface');
     }
 
     function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
+    }
+
+    function its_code_is_mutable()
+    {
+        $this->setCode('SC2');
+        $this->getCode()->shouldReturn('SC2');
     }
 
     function it_is_enabled_by_default()
@@ -114,13 +125,13 @@ class ShippingMethodSpec extends ObjectBehavior
 
     function it_initializes_array_for_configuration_by_default()
     {
-        $this->getConfiguration()->shouldReturn(array());
+        $this->getConfiguration()->shouldReturn([]);
     }
 
     function its_configuration_is_mutable()
     {
-        $this->setConfiguration(array('charge' => 5));
-        $this->getConfiguration()->shouldReturn(array('charge' => 5));
+        $this->setConfiguration(['charge' => 5]);
+        $this->getConfiguration()->shouldReturn(['charge' => 5]);
     }
 
     function it_initializes_creation_date_by_default()

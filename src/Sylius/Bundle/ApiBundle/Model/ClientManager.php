@@ -23,6 +23,6 @@ class ClientManager extends BaseClientManager
      */
     public function findClientByPublicId($publicId)
     {
-        return $this->findClientBy(array('randomId'  => $publicId));
+        return $this->findClientBy(['randomId' => $publicId]);
     }
 }

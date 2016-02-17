@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  user:
+    email:
+      not_exist: Użytkownik z tym adresem email nie istnieje.
+    password:
+      invalid: Błędne hasło.
+      reset:
+        success: Hasło zostało pomyślnie zresetowane!
+      change:
+        success: Pomyślnie zmieniono hasło!

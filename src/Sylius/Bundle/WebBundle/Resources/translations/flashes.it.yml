@@ -3,9 +3,6 @@
 
 sylius:
   account:
-    address:
-      flash:
-        billing:
-          success: "L'indirizzo è stato correttamente impostato come predefinito indirizzo di fatturazione."
-        shipping:
-          success: "L'indirizzo è stato correttamente impostato come predefinito indirizzo di fatturazione."
+    password:
+      change_success: La password è stata cambiata
+      invalid: Password attuale errata

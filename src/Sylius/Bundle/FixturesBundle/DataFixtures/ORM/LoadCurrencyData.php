@@ -21,21 +21,21 @@ use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
  */
 class LoadCurrencyData extends DataFixture
 {
-    protected $currencies = array(
+    protected $currencies = [
         'EUR' => 1.00,
         'USD' => 1.30,
         'GBP' => 0.85,
-    );
+    ];
 
     /**
      * {@inheritdoc}
      */
     public function load(ObjectManager $manager)
     {
-        $currencyRepository = $this->getCurrencyRepository();
+        $currencyFactory = $this->getCurrencyFactory();
 
         foreach ($this->currencies as $code => $rate) {
-            $currency = $currencyRepository->createNew();
+            $currency = $currencyFactory->createNew();
 
             $currency->setCode($code);
             $currency->setExchangeRate($rate);

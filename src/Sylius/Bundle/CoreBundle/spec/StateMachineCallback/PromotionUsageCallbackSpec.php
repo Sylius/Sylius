@@ -26,7 +26,7 @@ class PromotionUsageCallbackSpec extends ObjectBehavior
         OrderInterface $order,
         PromotionInterface $promotion
     ) {
-        $order->getPromotions()->willReturn(array($promotion));
+        $order->getPromotions()->willReturn([$promotion]);
 
         $promotion->incrementUsed()->shouldBeCalled();
 
@@ -37,7 +37,7 @@ class PromotionUsageCallbackSpec extends ObjectBehavior
         OrderInterface $order,
         PromotionInterface $promotion
     ) {
-        $order->getPromotions()->willReturn(array($promotion));
+        $order->getPromotions()->willReturn([$promotion]);
 
         $promotion->getUsed()->willReturn(5);
         $promotion->setUsed(4)->shouldBeCalled();

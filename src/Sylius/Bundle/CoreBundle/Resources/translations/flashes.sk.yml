@@ -11,5 +11,5 @@ sylius:
     processing: Vaša platba sa spracováva.
     new: Vaša platba je nová.
     failed: Vaša platba bola odmietnutá.
-    unknown: Neznáma chyba platby.
+    unknown: Neznáma platobná chyba.
     out_of_stock: 'K dispozícii je iba %quantity% %name% na sklade.'

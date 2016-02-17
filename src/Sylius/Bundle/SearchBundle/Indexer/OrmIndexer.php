@@ -52,7 +52,7 @@ class OrmIndexer implements IndexerInterface
      */
     public function __construct(array $config, ModelToElasticaAutoTransformer $transformer)
     {
-        $this->config      = $config;
+        $this->config = $config;
         $this->transformer = $transformer;
     }
 
@@ -106,7 +106,7 @@ class OrmIndexer implements IndexerInterface
             $this->createIndex($index['class'], $index['mappings']);
         }
 
-        $index = new Index('fulltext_search_idx', array('value'), false, false, array('fulltext'));
+        $index = new Index('fulltext_search_idx', ['value'], false, false, ['fulltext']);
         $sm->createIndex($index, 'sylius_search_index');
 
         return $this;
@@ -176,7 +176,7 @@ class OrmIndexer implements IndexerInterface
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
             ->select('u')
-            ->from('Sylius\Bundle\SearchBundle\Model\SearchIndex', 'u')
+            ->from(SearchIndex::class, 'u')
             ->where('u.itemId = :item_id')
             ->andWhere('u.entity = :entity_namespace')
             ->setParameter(':item_id', $entity->getId())
@@ -203,7 +203,7 @@ class OrmIndexer implements IndexerInterface
     {
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
-            ->delete('Sylius\Bundle\SearchBundle\Model\SearchIndex', 'u')
+            ->delete(SearchIndex::class, 'u')
             ->where('u.itemId = :item_id')
             ->andWhere('u.entity = :entity_namespace')
             ->setParameter(':item_id', $entity->getId())
@@ -241,8 +241,11 @@ class OrmIndexer implements IndexerInterface
         // TODO maybe I can use the property accessor here
         $content = '';
         foreach (array_keys(array_slice($fields, 1)) as $field) {
-            $func = 'get' . ucfirst($field);
-            $content .= $element->$func() . self::SPACER;
+            $func = 'get'.ucfirst($field);
+
+            if (method_exists($element, $func)) {
+                $content .= $element->$func().self::SPACER;
+            }
         }
 
         return $content;

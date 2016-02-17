@@ -65,4 +65,47 @@ class TaxonRepositorySpec extends ObjectBehavior
 
         $this->findOneByPermalink('link');
     }
+
+    function it_finds_non_root_taxons($em, QueryBuilder $builder, AbstractQuery $query)
+    {
+        $em->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
+
+        $builder
+            ->select('o')
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+        $builder
+            ->from(Argument::any(), 'o', Argument::cetera())
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+        $builder
+            ->addSelect('translation')
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+        $builder
+            ->leftJoin('o.translations', 'translation')
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+        $builder
+            ->where('o.parent IS NOT NULL')
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+        $builder
+            ->orderBy('o.left')
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+        $builder
+            ->getQuery()
+            ->shouldBeCalled()
+            ->willReturn($query)
+        ;
+        $query->getResult()->shouldBeCalled();
+        $this->getNonRootTaxons();
+    }
 }

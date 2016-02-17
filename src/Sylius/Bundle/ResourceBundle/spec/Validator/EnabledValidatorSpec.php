@@ -1,12 +1,22 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\ResourceBundle\Validator;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Validator\Constraints;
 use Sylius\Component\Resource\Model\ToggleableInterface;
-use Symfony\Component\Validator\ExecutionContextInterface;
+use Symfony\Component\Validator\ConstraintValidatorInterface;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @mixin \Sylius\Bundle\ResourceBundle\Validator\EnabledValidator
@@ -27,7 +37,7 @@ class EnabledValidatorSpec extends ObjectBehavior
 
     function it_is_constraint_validator()
     {
-        $this->shouldHaveType('Symfony\Component\Validator\ConstraintValidatorInterface');
+        $this->shouldHaveType(ConstraintValidatorInterface::class);
     }
 
     function it_does_not_apply_to_null_values(ExecutionContextInterface $context, Constraints\Enabled $constraint)
@@ -44,7 +54,7 @@ class EnabledValidatorSpec extends ObjectBehavior
     ) {
         $context->addViolation(Argument::cetera())->shouldNotBeCalled();
 
-        $this->shouldThrow('\InvalidArgumentException')->duringValidate($subject, $constraint);
+        $this->shouldThrow(\InvalidArgumentException::class)->duringValidate($subject, $constraint);
     }
 
     function it_adds_violation_if_subject_is_disabled(
@@ -52,7 +62,7 @@ class EnabledValidatorSpec extends ObjectBehavior
         Constraints\Enabled $constraint,
         ToggleableInterface $subject
     ) {
-        $constraint->message = "Violation message";
+        $constraint->message = 'Violation message';
 
         $subject->isEnabled()->shouldBeCalled()->willReturn(false);
 

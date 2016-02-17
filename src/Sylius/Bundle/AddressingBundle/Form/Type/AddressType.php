@@ -18,8 +18,6 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Address form type.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
 class AddressType extends AbstractResourceType
@@ -30,8 +28,6 @@ class AddressType extends AbstractResourceType
     protected $eventListener;
 
     /**
-     * Constructor.
-     *
      * @param string                   $dataClass
      * @param string[]                 $validationGroups
      * @param EventSubscriberInterface $eventListener
@@ -49,35 +45,34 @@ class AddressType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->addEventSubscriber($this->eventListener)
-            ->add('firstName', 'text', array(
+            ->add('firstName', 'text', [
                 'label' => 'sylius.form.address.first_name',
-            ))
-            ->add('lastName', 'text', array(
+            ])
+            ->add('lastName', 'text', [
                 'label' => 'sylius.form.address.last_name',
-            ))
-            ->add('phoneNumber', 'text', array(
+            ])
+            ->add('phoneNumber', 'text', [
                 'required' => false,
-                'label'    => 'sylius.form.address.phone_number',
-            ))
-            ->add('company', 'text', array(
+                'label' => 'sylius.form.address.phone_number',
+            ])
+            ->add('company', 'text', [
                 'required' => false,
-                'label'    => 'sylius.form.address.company',
-            ))
-            ->add('country', 'sylius_country_choice', array(
+                'label' => 'sylius.form.address.company',
+            ])
+            ->add('countryCode', 'sylius_country_code_choice', [
                 'label' => 'sylius.form.address.country',
-                'empty_value' => 'sylius.form.country.select',
                 'enabled' => true,
-            ))
-            ->add('street', 'text', array(
+            ])
+            ->add('street', 'text', [
                 'label' => 'sylius.form.address.street',
-            ))
-            ->add('city', 'text', array(
+            ])
+            ->add('city', 'text', [
                 'label' => 'sylius.form.address.city',
-            ))
-            ->add('postcode', 'text', array(
+            ])
+            ->add('postcode', 'text', [
                 'label' => 'sylius.form.address.postcode',
-            ))
+            ])
+            ->addEventSubscriber($this->eventListener)
         ;
     }
 
@@ -88,19 +83,17 @@ class AddressType extends AbstractResourceType
     {
         parent::configureOptions($resolver);
 
-        $validationGroups = $this->validationGroups;
-
         $resolver
-            ->setDefaults(array(
-                'validation_groups' => function (Options $options) use ($validationGroups) {
+            ->setDefaults([
+                'validation_groups' => function (Options $options) {
                     if ($options['shippable']) {
-                        $validationGroups[] = 'shippable';
+                        $this->validationGroups[] = 'shippable';
                     }
 
-                    return $validationGroups;
+                    return $this->validationGroups;
                 },
-                'shippable'         => false,
-            ))
+                'shippable' => false,
+            ])
             ->setAllowedTypes('shippable', 'bool')
         ;
     }

@@ -11,10 +11,9 @@
 
 namespace Sylius\Component\Core\OrderProcessing;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * Payment processor.
@@ -27,26 +26,18 @@ class PaymentProcessor implements PaymentProcessorInterface
     /**
      * Payment repository.
      *
-     * @var RepositoryInterface
+     * @var FactoryInterface
      */
-    protected $paymentRepository;
-
-    /**
-     * Payment Manager
-     *
-     * @var ObjectManager
-     */
-    protected $paymentManager;
+    protected $paymentFactory;
 
     /**
      * Constructor.
      *
-     * @param RepositoryInterface $paymentRepository
+     * @param FactoryInterface $paymentFactory
      */
-    public function __construct(RepositoryInterface $paymentRepository, ObjectManager $paymentManager)
+    public function __construct(FactoryInterface $paymentFactory)
     {
-        $this->paymentRepository = $paymentRepository;
-        $this->paymentManager = $paymentManager;
+        $this->paymentFactory = $paymentFactory;
     }
 
     /**
@@ -54,37 +45,13 @@ class PaymentProcessor implements PaymentProcessorInterface
      */
     public function createPayment(OrderInterface $order)
     {
-        $this->updateExistingPaymentsStates($order);
-
         /** @var $payment PaymentInterface */
-        $payment = $this->paymentRepository->createNew();
+        $payment = $this->paymentFactory->createNew();
         $payment->setCurrency($order->getCurrency());
         $payment->setAmount($order->getTotal());
 
         $order->addPayment($payment);
 
         return $payment;
-    }
-
-    /**
-     * @param OrderInterface $order
-     */
-    private function updateExistingPaymentsStates(OrderInterface $order)
-    {
-        foreach ($order->getPayments() as $payment) {
-            $this->cancelPaymentStateIfNotStarted($payment);
-        }
-
-        $this->paymentManager->flush();
-    }
-
-    /**
-     * @param PaymentInterface $payment
-     */
-    private function cancelPaymentStateIfNotStarted(PaymentInterface $payment)
-    {
-        if (PaymentInterface::STATE_NEW === $payment->getState()) {
-            $payment->setState(PaymentInterface::STATE_CANCELLED);
-        }
     }
 }

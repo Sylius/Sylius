@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the Symfony package.
+ * This file is part of the Sylius package.
  *
- * (c) Fabien Potencier <fabien@symfony.com>
+ * (c) Paweł Jędrzejewski
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\User\Security;
 
-use Sylius\Component\User\Model\UserInterface;
+use Sylius\Component\User\Model\CredentialsHolderInterface;
 
 /**
  * Pbkdf2PasswordEncoder uses the PBKDF2 (Password-Based Key Derivation Function 2).
@@ -70,7 +70,7 @@ class UserPbkdf2PasswordEncoder implements UserPasswordEncoderInterface
      *
      * @throws \LogicException when the algorithm is not supported
      */
-    public function encode(UserInterface $user)
+    public function encode(CredentialsHolderInterface $user)
     {
         return $this->encodePassword($user->getPlainPassword(), $user->getSalt());
     }

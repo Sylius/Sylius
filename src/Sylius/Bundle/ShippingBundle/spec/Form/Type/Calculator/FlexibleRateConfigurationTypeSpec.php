@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\ShippingBundle\Form\Type\Calculator;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Test\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -21,11 +22,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class FlexibleRateConfigurationTypeSpec extends ObjectBehavior
 {
-    function let()
-    {
-        $this->beConstructedWith(array('sylius'));
-    }
-
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Form\Type\Calculator\FlexibleRateConfigurationType');
@@ -33,30 +29,29 @@ class FlexibleRateConfigurationTypeSpec extends ObjectBehavior
 
     function it_is_a_form()
     {
-        $this->shouldHaveType('Symfony\Component\Form\AbstractType');
+        $this->shouldHaveType(AbstractType::class);
     }
 
     function it_builds_a_form(FormBuilderInterface $builder)
     {
-        $builder->add('first_item_cost', 'sylius_money', Argument::withKey('constraints'))->shouldBeCalled()->willReturn($builder);
-        $builder->add('additional_item_cost', 'sylius_money', Argument::withKey('constraints'))->shouldBeCalled()->willReturn($builder);
-        $builder->add('additional_item_limit', 'integer', Argument::withKey('constraints'))->shouldBeCalled()->willReturn($builder);
+        $builder->add('first_unit_cost', 'sylius_money', Argument::withKey('constraints'))->shouldBeCalled()->willReturn($builder);
+        $builder->add('additional_unit_cost', 'sylius_money', Argument::withKey('constraints'))->shouldBeCalled()->willReturn($builder);
+        $builder->add('additional_unit_limit', 'integer', Argument::withKey('constraints'))->shouldBeCalled()->willReturn($builder);
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_has_options(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => null,
-            'validation_groups' => array('sylius')
-        ))->shouldBeCalled();
+        ])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }
 
     function it_has_a_name()
     {
-        $this->getName()->shouldReturn('sylius_shipping_calculator_flexible_rate_configuration');
+        $this->getName()->shouldReturn('sylius_shipping_calculator_flexible_rate');
     }
 }

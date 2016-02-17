@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormTypeInterface;
 
 /**
  * @author Julien Janvier <j.janvier@gmail.com>
@@ -23,7 +24,7 @@ class AddressTypeSpec extends ObjectBehavior
 {
     function let(EventSubscriberInterface $eventListener)
     {
-        $this->beConstructedWith('Address', array('sylius'), $eventListener);
+        $this->beConstructedWith('Address', ['sylius'], $eventListener);
     }
 
     function it_is_initializable()
@@ -33,7 +34,7 @@ class AddressTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_has_a_valid_name()
@@ -43,50 +44,59 @@ class AddressTypeSpec extends ObjectBehavior
 
     function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
-        $builder->addEventSubscriber(Argument::type('Symfony\Component\EventDispatcher\EventSubscriberInterface'))
+        $builder->addEventSubscriber(Argument::type(EventSubscriberInterface::class))
             ->shouldBeCalled()
-            ->willReturn($builder);
+            ->willReturn($builder)
+        ;
 
         $builder
             ->add('firstName', 'text', Argument::any())
             ->shouldBeCalled()
-            ->willReturn($builder);
+            ->willReturn($builder)
+        ;
 
         $builder
             ->add('lastName', 'text', Argument::any())
             ->shouldBeCalled()
-            ->willReturn($builder);
+            ->willReturn($builder)
+        ;
 
         $builder
             ->add('phoneNumber', 'text', Argument::any())
             ->shouldBeCalled()
-            ->willReturn($builder);
+            ->willReturn($builder)
+        ;
 
         $builder
             ->add('company', 'text', Argument::any())
             ->shouldBeCalled()
-            ->willReturn($builder);
+            ->willReturn($builder)
+        ;
 
         $builder
-            ->add('country', 'sylius_country_choice', Argument::any())
+            ->add('countryCode', 'sylius_country_code_choice', Argument::any())
             ->shouldBeCalled()
-            ->willReturn($builder);
+            ->willReturn($builder)
+        ;
 
         $builder
             ->add('street', 'text', Argument::any())
             ->shouldBeCalled()
-            ->willReturn($builder);
+            ->willReturn($builder)
+        ;
 
         $builder
             ->add('city', 'text', Argument::any())
             ->shouldBeCalled()
-            ->willReturn($builder);
+            ->willReturn($builder)
+        ;
 
         $builder
             ->add('postcode', 'text', Argument::any())
             ->shouldBeCalled()
-            ->willReturn($builder);
+            ->willReturn($builder)
+        ;
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 }

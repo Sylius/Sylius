@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\TaxonomyBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -28,10 +29,11 @@ class TaxonomyType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('translations', 'a2lix_translationsForms', array(
+            ->add('translations', 'a2lix_translationsForms', [
                 'form_type' => 'sylius_taxonomy_translation',
-                'label'    => 'sylius.form.taxonomy.name',
-            ))
+                'label' => 'sylius.form.taxonomy.name',
+            ])
+            ->addEventSubscriber(new AddCodeFormSubscriber())
         ;
     }
 

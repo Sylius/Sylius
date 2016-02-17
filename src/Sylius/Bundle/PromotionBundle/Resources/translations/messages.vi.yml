@@ -3,7 +3,8 @@
 
 sylius:
   form:
-    coupon:
-      code: Mã
+    rule:
+      contains_product_configuration:
+        variants: Sản phẩm
     promotion:
       name: Tên

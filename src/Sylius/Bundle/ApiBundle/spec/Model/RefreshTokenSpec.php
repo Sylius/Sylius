@@ -1,9 +1,18 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\ApiBundle\Model;
 
+use FOS\OAuthServerBundle\Entity\RefreshToken;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class RefreshTokenSpec extends ObjectBehavior
 {
@@ -14,6 +23,6 @@ class RefreshTokenSpec extends ObjectBehavior
 
     function it_is_a_refresh_token()
     {
-        $this->shouldHaveType('FOS\OAuthServerBundle\Entity\RefreshToken');
+        $this->shouldHaveType(RefreshToken::class);
     }
 }

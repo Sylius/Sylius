@@ -31,7 +31,7 @@ class CustomerGroupRuleChecker implements RuleCheckerInterface
     public function isEligible(PromotionSubjectInterface $subject, array $configuration)
     {
         if (!$subject instanceof OrderInterface) {
-            throw new UnsupportedTypeException($subject, 'Sylius\Component\Core\Model\OrderInterface');
+            throw new UnsupportedTypeException($subject, OrderInterface::class);
         }
 
         if (null === $customer = $subject->getCustomer()) {
@@ -44,7 +44,6 @@ class CustomerGroupRuleChecker implements RuleCheckerInterface
         /* @var GroupInterface $group */
         foreach ($customer->getGroups() as $group) {
             if ($configuration['groups'] == $group->getId()) {
-
                 return true;
             }
         }

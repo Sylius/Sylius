@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Component\Cart\Event\CartEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * Sets currently selected currency on order object.
@@ -23,21 +23,34 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
  */
 class OrderCurrencyListener
 {
+    /**
+     * @var CurrencyContextInterface
+     */
     protected $currencyContext;
 
+    /**
+     * @param CurrencyContextInterface $currencyContext
+     */
     public function __construct(CurrencyContextInterface $currencyContext)
     {
         $this->currencyContext = $currencyContext;
     }
 
-    public function processOrderCurrency(CartEvent $event)
+    /**
+     * Sets currency on the order
+     *
+     * @throws UnexpectedTypeException when event's subject is not an order
+     *
+     * @param GenericEvent $event
+     */
+    public function processOrderCurrency(GenericEvent $event)
     {
-        $order = $event->getCart();
+        $order = $event->getSubject();
 
         if (!$order instanceof OrderInterface) {
             throw new UnexpectedTypeException(
                 $order,
-                'Sylius\Component\Core\Model\OrderInterface'
+                OrderInterface::class
             );
         }
 

@@ -13,49 +13,27 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Rule;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Taxonomy rule configuration form type.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class TaxonomyConfigurationType extends AbstractType
 {
-    protected $validationGroups;
-
-    public function __construct(array $validationGroups)
-    {
-        $this->validationGroups = $validationGroups;
-    }
-
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('taxons', 'sylius_taxon_selection', array(
-                'label'             => 'sylius.form.rule.taxonomy_configuration.taxons',
-                'model_transformer' => array(
+            ->add('taxons', 'sylius_taxon_selection', [
+                'label' => 'sylius.form.rule.taxonomy_configuration.taxons',
+                'model_transformer' => [
                     'save_objects' => false,
-                ),
-            ))
-            ->add('exclude', 'checkbox', array(
+                ],
+            ])
+            ->add('exclude', 'checkbox', [
                 'label' => 'sylius.form.rule.taxonomy_configuration.exclude',
-            ))
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'validation_groups' => $this->validationGroups,
-            ))
+            ])
         ;
     }
 

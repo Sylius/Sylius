@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\RbacBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -33,13 +34,13 @@ class PermissionEntityTypeSpec extends ObjectBehavior
 
     function it_is_a_form()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType');
+        $this->shouldHaveType(ResourceChoiceType::class);
     }
 
     function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(Argument::withKey('class'))->shouldBeCalled()->willReturn($resolver);
-        $resolver->setNormalizers(Argument::withKey('class'))->shouldBeCalled()->willReturn($resolver);
+        $resolver->setNormalizer('class', Argument::type('callable'))->shouldBeCalled()->willReturn($resolver);
         $resolver->setDefaults(Argument::withKey('query_builder'))->shouldBeCalled()->willReturn($resolver);
 
         $this->configureOptions($resolver);

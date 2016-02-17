@@ -15,6 +15,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ObjectToIdentifierTransformer;
 use Symfony\Component\Form\Test\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -35,20 +36,20 @@ class ObjectToIdentifierTypeSpec extends ObjectBehavior
         $manager->getRepository('class')->willReturn($repository);
 
         $builder->addModelTransformer(
-            Argument::type('Sylius\Bundle\ResourceBundle\Form\DataTransformer\ObjectToIdentifierTransformer')
+            Argument::type(ObjectToIdentifierTransformer::class)
         )->shouldBeCalled();
 
-        $this->buildForm($builder, array(
+        $this->buildForm($builder, [
             'class' => 'class',
             'identifier' => 'identifier',
-        ));
+        ]);
     }
 
     function it_has_options(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'identifier' => 'id'
-        ))->willReturn($resolver);
+        $resolver->setDefaults([
+            'identifier' => 'id',
+        ])->willReturn($resolver);
 
         $resolver->setAllowedTypes('identifier', 'string')->willReturn($resolver);
 

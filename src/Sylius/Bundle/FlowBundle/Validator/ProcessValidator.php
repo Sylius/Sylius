@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\FlowBundle\Validator;
 
+use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 
 /**
@@ -25,10 +26,12 @@ class ProcessValidator implements ProcessValidatorInterface
      * @var string|null
      */
     protected $message;
+
     /**
      * @var string|null
      */
     protected $stepName;
+
     /**
      * @var callable
      */
@@ -104,7 +107,7 @@ class ProcessValidator implements ProcessValidatorInterface
     /**
      * {@inheritdoc}
      */
-    public function isValid()
+    public function isValid(ProcessContextInterface $processContext)
     {
         return call_user_func($this->validation) ? true : false;
     }

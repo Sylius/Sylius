@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    product:
+      name: Name
+      meta_keywords: Meta-Stichwörter
+      meta_description: Meta-Beschreibung
+    product_archetype:
+      name: Name
+    association_type:
+      name: Name

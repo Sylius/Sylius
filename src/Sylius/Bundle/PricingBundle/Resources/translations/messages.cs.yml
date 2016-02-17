@@ -7,3 +7,9 @@ sylius:
       price: Cena
       calculator: Ceník
       configuration: Nastavení
+    pricing:
+      volume_based:
+        label: Cenová konfigurace
+        min: Minimální objem
+        max: Maximální objem
+        price: Cena

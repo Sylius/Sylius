@@ -12,9 +12,10 @@
 namespace Sylius\Component\Archetype\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Attribute\Model\AttributeInterface as BaseAttributeInterface;
+use Sylius\Component\Attribute\Model\AttributeInterface;
+use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
-use Sylius\Component\Variation\Model\OptionInterface as BaseOptionInterface;
+use Sylius\Component\Variation\Model\OptionInterface;
 
 /**
  * The archetype defines the template for new objects to be created from
@@ -24,85 +25,80 @@ use Sylius\Component\Variation\Model\OptionInterface as BaseOptionInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Adam Elsodaney <adam.elso@gmail.com>
  */
-interface ArchetypeInterface extends TimestampableInterface, ArchetypeTranslationInterface
+interface ArchetypeInterface extends CodeAwareInterface, TimestampableInterface, ArchetypeTranslationInterface
 {
-     /**
-     * @return mixed
-     */
-    public function getId();
-    
     /**
      * Returns all prototype attributes.
      *
-     * @return Collection|BaseAttributeInterface[]
+     * @return Collection|AttributeInterface[]
      */
     public function getAttributes();
 
     /**
      * Sets all prototype attributes.
      *
-     * @param Collection|BaseAttributeInterface[] $attributes
+     * @param Collection|AttributeInterface[] $attributes
      */
     public function setAttributes(Collection $attributes);
 
     /**
-     * @param BaseAttributeInterface $attribute
+     * @param AttributeInterface $attribute
      */
-    public function addAttribute(BaseAttributeInterface $attribute);
+    public function addAttribute(AttributeInterface $attribute);
 
     /**
      * Removes attribute from prototype.
      *
-     * @param BaseAttributeInterface $attribute
+     * @param AttributeInterface $attribute
      */
-    public function removeAttribute(BaseAttributeInterface $attribute);
+    public function removeAttribute(AttributeInterface $attribute);
 
     /**
      * Checks whether prototype has given attribute.
      *
-     * @param BaseAttributeInterface $attribute
+     * @param AttributeInterface $attribute
      *
-     * @return Boolean
+     * @return bool
      */
-    public function hasAttribute(BaseAttributeInterface $attribute);
+    public function hasAttribute(AttributeInterface $attribute);
 
     /**
      * Returns all prototype options.
      *
-     * @return Collection|BaseOptionInterface[]
+     * @return Collection|OptionInterface[]
      */
     public function getOptions();
 
     /**
      * Sets all prototype options.
      *
-     * @param Collection|BaseOptionInterface[] $options
+     * @param Collection|OptionInterface[] $options
      */
     public function setOptions(Collection $options);
 
     /**
-     * @param BaseOptionInterface $option
+     * @param OptionInterface $option
      */
-    public function addOption(BaseOptionInterface $option);
+    public function addOption(OptionInterface $option);
 
     /**
      * Removes option from prototype.
      *
-     * @param BaseOptionInterface $option
+     * @param OptionInterface $option
      */
-    public function removeOption(BaseOptionInterface $option);
+    public function removeOption(OptionInterface $option);
 
     /**
      * Checks whether prototype has given option.
      *
-     * @param BaseOptionInterface $option
+     * @param OptionInterface $option
      *
-     * @return boolean
+     * @return bool
      */
-    public function hasOption(BaseOptionInterface $option);
+    public function hasOption(OptionInterface $option);
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function hasParent();
 
@@ -115,14 +111,4 @@ interface ArchetypeInterface extends TimestampableInterface, ArchetypeTranslatio
      * @return null|ArchetypeInterface
      */
     public function getParent();
-    
-    /**
-     * @return string
-     */
-    public function getCode();
-
-    /**
-     * @param string $code
-     */
-    public function setCode($code);
 }

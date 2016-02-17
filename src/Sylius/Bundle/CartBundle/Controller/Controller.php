@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CartBundle\Controller;
 
+use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
@@ -26,13 +27,13 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 abstract class Controller extends ResourceController
 {
     /**
-     * Redirect to cart summary page.
+     * @param RequestConfiguration $configuration
      *
      * @return RedirectResponse
      */
-    protected function redirectToCartSummary()
+    protected function redirectToCartSummary(RequestConfiguration $configuration)
     {
-        return $this->redirect($this->generateUrl($this->getCartSummaryRoute()));
+        return $this->redirectHandler->redirectToRoute($configuration, $this->getCartSummaryRoute());
     }
 
     /**

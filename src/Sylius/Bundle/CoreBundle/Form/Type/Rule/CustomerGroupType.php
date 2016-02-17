@@ -14,31 +14,24 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Rule;
 use Sylius\Bundle\UserBundle\Doctrine\ORM\GroupRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * CustomerGroup rule configuration form type.
- *
  * @author Antonio Perić <antonio@locastic.com>
  */
 class CustomerGroupType extends AbstractType
 {
-    protected $validationGroups;
-
     /**
      * @var GroupRepository
      */
     protected $groupRepository;
 
     /**
-     * @param array           $validationGroups
      * @param GroupRepository $groupRepository
      */
-    public function __construct(array $validationGroups, GroupRepository $groupRepository)
+    public function __construct(GroupRepository $groupRepository)
     {
-        $this->validationGroups = $validationGroups;
         $this->groupRepository = $groupRepository;
     }
 
@@ -47,38 +40,20 @@ class CustomerGroupType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $groupRepository = $this->groupRepository;
-
         $builder
-            ->add(
-                'groups',
-                'sylius_entity_to_identifier',
-                array(
-                    'label' => 'sylius.form.action.customer_group',
-                    'property' => 'name',
-                    'class' => $groupRepository->getClassName(),
-                    'query_builder' => function () use ($groupRepository) {
-                        return $groupRepository->getFormQueryBuilder();
-                    },
-                    'constraints' => array(
-                        new NotBlank(),
-                        new Type(array('type' => 'numeric')),
-                    ),
-                )
-            );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver
-            ->setDefaults(
-                array(
-                    'validation_groups' => $this->validationGroups,
-                )
-            );
+            ->add('groups', 'sylius_entity_to_identifier', [
+                'label' => 'sylius.form.action.customer_group',
+                'property' => 'name',
+                'class' => $this->groupRepository->getClassName(),
+                'query_builder' => function () {
+                    return $this->groupRepository->getFormQueryBuilder();
+                },
+                'constraints' => [
+                    new NotBlank(),
+                    new Type(['type' => 'numeric']),
+                ],
+            ])
+        ;
     }
 
     /**

@@ -4,15 +4,31 @@
 sylius:
   account:
     home:
-      email: ""
-      id: ""
-    order:
-      number: ""
-      payment_mode: ""
-      shipment_mode: ""
-      state: ""
+      email: Sähköpostiosoite
+  archetype:
+    parent: Vanhempi
+  block:
+    imagine:
+      id: Id
+      label: Otsikko
+    simple:
+      id: Id
+      label: Otsikko
+    slideshow:
+      id: Id
+    string:
+      id: Id
+      label: Otsikko
   checkout:
     back: Edellinen
+  contact_request:
+    email: Sähköpostiosoite
+    message: Viesti
+    topic: Aihe
+  currency:
+    exchange_rate: Vaihtokurssi
+  customer:
+    email: Sähköpostiosoite
   form:
     login:
       email: Sähköpostiosoite
@@ -20,9 +36,19 @@ sylius:
       email: Sähköpostiosoite
   gallery:
     next: Seuraava
+  menu_node:
+    parent: Vanhempi
   "no": false
   order:
-    user: Käyttäjä
+    currency: Valuutta
+  product:
+    tabs:
+      pricing: Hinnoittelu
+  report:
+    id: Id
+  ui:
+    email: Sähköpostiosoite
+    id: Id
   user:
     username: Käyttäjänimi
   "yes": true

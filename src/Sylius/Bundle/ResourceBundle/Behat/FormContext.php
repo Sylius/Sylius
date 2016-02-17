@@ -14,6 +14,7 @@ namespace Sylius\Bundle\ResourceBundle\Behat;
 use Behat\Mink\Element\Element;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Mink\Selector\Xpath\Escaper;
 use Behat\MinkExtension\Context\RawMinkContext;
 
 /**
@@ -69,7 +70,7 @@ abstract class FormContext extends RawMinkContext
      * Delete an item of the collection type
      *
      * @param string  $collectionSelector
-     * @param integer $position
+     * @param int $position
      * @param null    $buttonName
      * @param string  $buttonType
      */
@@ -100,6 +101,7 @@ abstract class FormContext extends RawMinkContext
      * @param  string           $position
      * @param  string           $label
      * @param  string           $collectionSelector
+     *
      * @return NodeElement|null
      */
     protected function isInvalidCollectionField($position, $label, $collectionSelector = null)
@@ -130,7 +132,7 @@ abstract class FormContext extends RawMinkContext
     /**
      * Fill a collection form field
      *
-     * @param integer $position
+     * @param int $position
      * @param string  $field
      * @param mixed   $value
      * @param string  $collectionSelector
@@ -184,10 +186,12 @@ abstract class FormContext extends RawMinkContext
      */
     protected function findField($locator, Element $container = null)
     {
+        $escaper = new Escaper();
+
         if (null !== $container) {
-            $field = $container->find('named', array(
-                'field', $this->getSession()->getSelectorsHandler()->xpathLiteral($locator),
-            ));
+            $field = $container->find('named', [
+                'field', $escaper->escapeLiteral($locator),
+            ]);
         } else {
             $field = $this->getSession()->getPage()->findField($locator);
         }
@@ -197,7 +201,7 @@ abstract class FormContext extends RawMinkContext
                 $this->getSession(),
                 'element',
                 'xpath',
-                $this->getSession()->getSelectorsHandler()->xpathLiteral($locator)
+                $escaper->escapeLiteral($locator)
             );
         }
 
@@ -215,6 +219,7 @@ abstract class FormContext extends RawMinkContext
      */
     protected function findElement($locator, $selector = 'xpath', Element $container = null)
     {
+        $escaper = new Escaper();
         if (null !== $container) {
             $field = $container->find($selector, $locator);
         } else {
@@ -226,7 +231,7 @@ abstract class FormContext extends RawMinkContext
                 $this->getSession(),
                 'element',
                 'xpath',
-                $this->getSession()->getSelectorsHandler()->xpathLiteral($locator)
+                $escaper->escapeLiteral($locator)
             );
         }
 

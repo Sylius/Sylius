@@ -36,7 +36,7 @@ class FlashSubscriberSpec extends ObjectBehavior
 
     function it_should_add_a_custom_error_flash_message_from_event($session, FlashEvent $event, FlashBag $flashBag)
     {
-        $message = "This is an error message";
+        $message = 'This is an error message';
 
         $event
             ->getMessage()
@@ -63,7 +63,7 @@ class FlashSubscriberSpec extends ObjectBehavior
 
     function it_should_add_a_custom_success_flash_message_from_event($session, FlashEvent $event, FlashBag $flashBag)
     {
-        $message = "This is an success message";
+        $message = 'This is an success message';
 
         $event
             ->getMessage()
@@ -94,7 +94,7 @@ class FlashSubscriberSpec extends ObjectBehavior
         FlashEvent $event,
         FlashBag $flashBag
     ) {
-        $messages = array(SyliusCartEvents::ITEM_ADD_ERROR => 'Error occurred while adding item to cart.');
+        $messages = [SyliusCartEvents::ITEM_ADD_ERROR => 'Error occurred while adding item to cart.'];
 
         $event
             ->getMessage()
@@ -130,7 +130,7 @@ class FlashSubscriberSpec extends ObjectBehavior
         FlashEvent $event,
         FlashBag $flashBag
     ) {
-        $messages = array(SyliusCartEvents::ITEM_ADD_COMPLETED => 'The cart has been successfully updated.');
+        $messages = [SyliusCartEvents::ITEM_ADD_COMPLETED => 'The cart has been successfully updated.'];
 
         $event
             ->getMessage()

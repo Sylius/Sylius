@@ -4,5 +4,5 @@
 sylius:
   locale:
     code:
-      not_blank: Należy wprowadzić kod lokalizacji.
+      not_blank: Wybierz kod lokalizacji.
       unique: Kod lokalizacji musi być unikalny.

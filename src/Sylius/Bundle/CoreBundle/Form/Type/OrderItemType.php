@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
 use Sylius\Bundle\OrderBundle\Form\Type\OrderItemType as BaseOrderItemType;
+use Sylius\Component\Core\Model\ProductVariant;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -35,9 +36,9 @@ class OrderItemType extends BaseOrderItemType
             ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($options) {
                 $data = $event->getData();
                 if (isset($data['variant'])) {
-                    $event->getForm()->add('variant', 'entity_hidden', array(
+                    $event->getForm()->add('variant', 'entity_hidden', [
                         'data_class' => $options['variant_data_class'],
-                    ));
+                    ]);
                 }
             })
         ;
@@ -50,8 +51,8 @@ class OrderItemType extends BaseOrderItemType
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefaults(array(
-            'variant_data_class' => 'Sylius\Component\Core\Model\ProductVariant',
-        ));
+        $resolver->setDefaults([
+            'variant_data_class' => ProductVariant::class,
+        ]);
     }
 }

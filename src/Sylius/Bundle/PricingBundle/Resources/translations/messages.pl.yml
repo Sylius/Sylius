@@ -5,5 +5,11 @@ sylius:
   form:
     priceable:
       price: Cena
-      calculator: Ceny
+      calculator: Cennik
       configuration: Konfiguracja
+    pricing:
+      volume_based:
+        label: Ustawienie cennika
+        min: Ilość min.
+        max: Ilość maks.
+        price: Cena

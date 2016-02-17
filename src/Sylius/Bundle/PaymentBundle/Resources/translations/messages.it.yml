@@ -14,9 +14,10 @@ sylius:
       amount: Ammontare del pagamento
       method: Metodo di pagamento
       state:
-        0: Stato del pagamento
+        header: Stato pagamento
         checkout: Checkout
         completed: Completato
+        authorized: Autorizzato
         failed: Fallimento
         new: Nuovo
         pending: In attesa

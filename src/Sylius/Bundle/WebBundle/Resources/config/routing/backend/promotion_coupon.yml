@@ -17,13 +17,16 @@ sylius_backend_promotion_coupon_create:
     defaults:
         _controller: sylius.controller.promotion_coupon:createAction
         _sylius:
+            factory:
+                method: createForPromotion
+                arguments: [$promotionId]
             template: SyliusWebBundle:Backend/Coupon:create.html.twig
             redirect:
                 route: sylius_backend_promotion_show
                 parameters: {'id': $promotionId}
 
 sylius_backend_promotion_coupon_update:
-    path: /edit
+    path: /{id}/edit
     methods: [GET, PUT]
     defaults:
         _controller: sylius.controller.promotion_coupon:updateAction

@@ -35,6 +35,9 @@
         <field name="price" column="price" type="integer">
             <gedmo:versioned />
         </field>
+        <field name="originalPrice" column="original_price" type="integer" nullable="true">
+            <gedmo:versioned />
+        </field>
         <field name="pricingCalculator" column="pricing_calculator" type="string">
             <gedmo:versioned/>
         </field>
@@ -59,6 +62,10 @@
                 <cascade-all />
             </cascade>
         </one-to-many>
+
+        <many-to-one field="taxCategory" target-entity="Sylius\Component\Taxation\Model\TaxCategoryInterface">
+            <join-column name="tax_category_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
+        </many-to-one>
 
         <gedmo:loggable />
     </mapped-superclass>

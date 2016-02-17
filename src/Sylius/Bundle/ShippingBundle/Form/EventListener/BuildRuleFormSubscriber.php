@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ShippingBundle\Form\EventListener;
 
-use Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistryInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -27,7 +27,7 @@ use Symfony\Component\Form\FormInterface;
 class BuildRuleFormSubscriber implements EventSubscriberInterface
 {
     /**
-     * @var RuleCheckerRegistryInterface
+     * @var ServiceRegistryInterface
      */
     private $checkerRegistry;
 
@@ -36,7 +36,11 @@ class BuildRuleFormSubscriber implements EventSubscriberInterface
      */
     private $factory;
 
-    public function __construct(RuleCheckerRegistryInterface $checkerRegistry, FormFactoryInterface $factory)
+    /**
+     * @param ServiceRegistryInterface $checkerRegistry
+     * @param FormFactoryInterface     $factory
+     */
+    public function __construct(ServiceRegistryInterface $checkerRegistry, FormFactoryInterface $factory)
     {
         $this->checkerRegistry = $checkerRegistry;
         $this->factory = $factory;
@@ -47,10 +51,10 @@ class BuildRuleFormSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT   => 'preSubmit',
-        );
+            FormEvents::PRE_SUBMIT => 'preSubmit',
+        ];
     }
 
     /**
@@ -85,13 +89,13 @@ class BuildRuleFormSubscriber implements EventSubscriberInterface
 
     /**
      * @param FormInterface $form
-     * @param $ruleType
+     * @param string        $ruleType
      * @param array         $data
      */
-    protected function addConfigurationFields(FormInterface $form, $ruleType, array $data = array())
+    protected function addConfigurationFields(FormInterface $form, $ruleType, array $data = [])
     {
-        $checker = $this->checkerRegistry->getChecker($ruleType);
-        $configurationField = $this->factory->createNamed('configuration', $checker->getConfigurationFormType(), $data, array('auto_initialize' => false));
+        $checker = $this->checkerRegistry->get($ruleType);
+        $configurationField = $this->factory->createNamed('configuration', $checker->getConfigurationFormType(), $data, ['auto_initialize' => false]);
 
         $form->add($configurationField);
     }

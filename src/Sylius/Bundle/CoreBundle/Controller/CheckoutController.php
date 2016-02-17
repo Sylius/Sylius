@@ -11,8 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle\Controller;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\Controller\FOSRestController;
+use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Sylius\Component\Core\SyliusOrderEvents;
@@ -31,7 +34,7 @@ class CheckoutController extends FOSRestController
         $order = $this->findOrderOr404($orderId);
         $state = $order->getCheckoutState();
 
-        if (OrderInterface::CHECKOUT_STATE_COMPLETED === $state) {
+        if (OrderCheckoutStates::STATE_COMPLETED === $state) {
             throw new \Exception('Order is already completed.');
         }
 
@@ -46,16 +49,16 @@ class CheckoutController extends FOSRestController
         }
 
         switch ($transition) {
-            case OrderCheckoutTransitions::SYLIUS_ADDRESSING:
+            case OrderCheckoutTransitions::TRANSITION_ADDRESS:
                 return $this->addressingAction($request, $order);
 
-            case OrderCheckoutTransitions::SYLIUS_SHIPPING:
+            case OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING:
                 return $this->shippingAction($request, $order);
 
-            case OrderCheckoutTransitions::SYLIUS_PAYMENT:
+            case OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT:
                 return $this->paymentAction($request, $order);
 
-            case OrderCheckoutTransitions::SYLIUS_FINALIZE:
+            case OrderCheckoutTransitions::TRANSITION_COMPLETE:
                 return $this->finalizeAction($request, $order);
         }
 
@@ -65,7 +68,7 @@ class CheckoutController extends FOSRestController
     public function addressingAction(Request $request, OrderInterface $order)
     {
         if ($order->isEmpty()) {
-            //return new Response('Order cannot be empty!', 400);
+            return new Response('Order cannot be empty!', 400);
         }
 
         if ($request->isMethod('GET')) {
@@ -80,7 +83,7 @@ class CheckoutController extends FOSRestController
             $this->dispatchCheckoutEvent(SyliusCheckoutEvents::ADDRESSING_PRE_COMPLETE, $order);
 
             $stateMachine = $this->get('sm.factory')->get($order, OrderCheckoutTransitions::GRAPH);
-            $stateMachine->apply(OrderCheckoutTransitions::SYLIUS_ADDRESSING);
+            $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_ADDRESS);
 
             $this->getManager()->persist($order);
             $this->getManager()->flush();
@@ -100,14 +103,14 @@ class CheckoutController extends FOSRestController
         $form = $this->createCheckoutShippingForm($order);
 
         if ($request->isMethod('GET')) {
-            $shipments = array();
+            $shipments = [];
             $form->submit($request);
 
             foreach ($order->getShipments() as $key => $shipment) {
-                $shipments[] = array(
+                $shipments[] = [
                     'shipment' => $shipment,
-                    'methods'  => $form['shipments'][$key]['method']->getConfig()->getOption('choice_list')->getChoices(),
-                );
+                    'methods' => $form['shipments'][$key]['method']->getConfig()->getOption('choice_list')->getChoices(),
+                ];
             }
 
             return $this->handleView($this->view($shipments));
@@ -117,7 +120,7 @@ class CheckoutController extends FOSRestController
             $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SHIPPING_PRE_COMPLETE, $order);
 
             $stateMachine = $this->get('sm.factory')->get($order, OrderCheckoutTransitions::GRAPH);
-            $stateMachine->apply(OrderCheckoutTransitions::SYLIUS_SHIPPING);
+            $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
 
             $this->getManager()->persist($order);
             $this->getManager()->flush();
@@ -139,10 +142,10 @@ class CheckoutController extends FOSRestController
         if ($request->isMethod('GET')) {
             $form->submit($request);
 
-            $paymentInfo = array(
+            $paymentInfo = [
                 'payment' => $order->getLastPayment(),
                 'methods' => $form['paymentMethod']->getConfig()->getOption('choice_list')->getChoices(),
-            );
+            ];
 
             return $this->handleView($this->view($paymentInfo));
         }
@@ -151,7 +154,7 @@ class CheckoutController extends FOSRestController
             $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PAYMENT_PRE_COMPLETE, $order);
 
             $stateMachine = $this->get('sm.factory')->get($order, OrderCheckoutTransitions::GRAPH);
-            $stateMachine->apply(OrderCheckoutTransitions::SYLIUS_PAYMENT);
+            $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
 
             $this->getManager()->persist($order);
             $this->getManager()->flush();
@@ -178,7 +181,7 @@ class CheckoutController extends FOSRestController
         $this->get('sm.factory')->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_CREATE, true);
 
         $stateMachine = $this->get('sm.factory')->get($order, OrderCheckoutTransitions::GRAPH);
-        $stateMachine->apply(OrderCheckoutTransitions::SYLIUS_FINALIZE);
+        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_COMPLETE);
 
         $manager = $this->get('sylius.manager.order');
         $manager->persist($order);
@@ -188,6 +191,17 @@ class CheckoutController extends FOSRestController
         $this->dispatchCheckoutEvent(SyliusOrderEvents::POST_CREATE, $order);
 
         return $this->handleView($this->view($order));
+    }
+
+    /**
+     * @return Response
+     */
+    public function thankYouAction()
+    {
+        $id = $this->get('session')->get('sylius_order_id');
+        $order = $this->findOrderOr404($id);
+
+        return $this->render('SyliusWebBundle:Frontend/Checkout/Step:thankYou.html.twig', ['order' => $order]);
     }
 
     /**
@@ -201,8 +215,6 @@ class CheckoutController extends FOSRestController
     }
 
     /**
-     * Get zone matcher.
-     *
      * @return ZoneMatcherInterface
      */
     protected function getZoneMatcher()
@@ -211,22 +223,18 @@ class CheckoutController extends FOSRestController
     }
 
     /**
-     * Is user logged in?
-     *
-     * @return Boolean
+     * @return bool
      */
     protected function isUserLoggedIn()
     {
         try {
-            return $this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED');
+            return $this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED');
         } catch (AuthenticationCredentialsNotFoundException $e) {
             return false;
         }
     }
 
     /**
-     * Dispatch event.
-     *
      * @param string $name
      * @param Event  $event
      */
@@ -236,8 +244,6 @@ class CheckoutController extends FOSRestController
     }
 
     /**
-     * Dispatch checkout event.
-     *
      * @param string         $name
      * @param OrderInterface $order
      */
@@ -269,14 +275,14 @@ class CheckoutController extends FOSRestController
     {
         $zones = $this->getZoneMatcher()->matchAll($order->getShippingAddress());
 
-        return $this->createApiForm('sylius_checkout_shipping', $order, array(
-            'criteria' => array(
+        return $this->createApiForm('sylius_checkout_shipping', $order, [
+            'criteria' => [
                 'zone' => !empty($zones) ? array_map(function ($zone) {
                     return $zone->getId();
                 }, $zones) : null,
                 'enabled' => true,
-            )
-        ));
+            ],
+        ]);
     }
 
     private function createCheckoutPaymentForm(OrderInterface $order)
@@ -284,8 +290,8 @@ class CheckoutController extends FOSRestController
         return $this->createApiForm('sylius_checkout_payment', $order);
     }
 
-    private function createApiForm($type, $value = null, array $options = array())
+    private function createApiForm($type, $value = null, array $options = [])
     {
-        return $this->get('form.factory')->createNamed('', $type, $value, array_merge($options, array('csrf_protection' => false)));
+        return $this->get('form.factory')->createNamed('', $type, $value, array_merge($options, ['csrf_protection' => false]));
     }
 }

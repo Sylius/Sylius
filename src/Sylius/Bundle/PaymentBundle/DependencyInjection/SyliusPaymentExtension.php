@@ -12,8 +12,9 @@
 namespace Sylius\Bundle\PaymentBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 /**
  * Payments extension.
@@ -27,24 +28,19 @@ class SyliusPaymentExtension extends AbstractResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $config = $this->configure(
-            $config,
-            new Configuration(),
-            $container,
-            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_FORMS
-        );
+        $config = $this->processConfiguration(new Configuration(), $config);
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+
+        $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
+
+        $configFiles = [
+            'services.xml',
+        ];
+
+        foreach ($configFiles as $configFile) {
+            $loader->load($configFile);
+        }
 
         $container->setParameter('sylius.payment_gateways', $config['gateways']);
-
-        $container
-            ->getDefinition('sylius.form.type.payment_method')
-            ->addArgument(new Reference('sylius.registry.payment.fee_calculator'))
-        ;
-
-        $container
-            ->getDefinition('sylius.form.type.payment_method_choice')
-            ->addArgument(new Reference('sylius.registry.payment.fee_calculator'))
-            ->addArgument(new Reference('sylius.repository.payment'))
-        ;
     }
 }

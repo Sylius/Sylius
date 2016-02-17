@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Addressing\Model;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 
 /**
@@ -28,7 +29,7 @@ class ZoneSpec extends ObjectBehavior
 
     function it_implements_Sylius_zone_interface()
     {
-        $this->shouldImplement('Sylius\Component\Addressing\Model\ZoneInterface');
+        $this->shouldImplement(ZoneInterface::class);
     }
 
     function it_has_no_id_by_default()
@@ -60,7 +61,7 @@ class ZoneSpec extends ObjectBehavior
 
     function it_initializes_members_collection_by_default()
     {
-        $this->getMembers()->shouldHaveType('Doctrine\Common\Collections\Collection');
+        $this->getMembers()->shouldHaveType(Collection::class);
     }
 
     function it_has_no_members_by_default()

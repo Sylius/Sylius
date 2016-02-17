@@ -6,7 +6,7 @@
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
     <li><a href="{{ path('sylius_backend_country_index') }}">{{ 'sylius.breadcrumb.country.index'|trans }}</a></li>
-    <li><a href="{{ path('sylius_backend_country_show', {'id': country.id}) }}">{{ country.name }}</a></li>
+    <li><a href="{{ path('sylius_backend_country_show', {'id': country.id}) }}">{{ country.code|sylius_country_name }}</a></li>
     <li>{{ 'sylius.breadcrumb.edit'|trans }}</li>
 </ol>
 {% endblock %}

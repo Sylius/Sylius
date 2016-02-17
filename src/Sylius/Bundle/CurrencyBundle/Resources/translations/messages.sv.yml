@@ -4,5 +4,4 @@
 sylius:
   form:
     currency:
-      code: Kod
       enabled: Aktiverad

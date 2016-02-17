@@ -27,10 +27,10 @@ class LoadContactTopicData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $contactTopicRepository = $this->getContactTopicRepository();
+        $contactTopicFactory = $this->getContactTopicFactory();
 
-        for ($i = 0; $i < 5; $i++) {
-            $contactTopic = $contactTopicRepository->createNew();
+        for ($i = 0; $i < 5; ++$i) {
+            $contactTopic = $contactTopicFactory->createNew();
             $contactTopic->setCurrentLocale($this->defaultLocale);
             $contactTopic->setFallbackLocale($this->defaultLocale);
 

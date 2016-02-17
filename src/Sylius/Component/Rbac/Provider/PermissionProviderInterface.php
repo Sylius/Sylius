@@ -11,6 +11,9 @@
 
 namespace Sylius\Component\Rbac\Provider;
 
+use Sylius\Component\Rbac\Exception\PermissionNotFoundException;
+use Sylius\Component\Rbac\Model\PermissionInterface;
+
 /**
  * Service implementing this interface should return an instance of currently used identity.
  *

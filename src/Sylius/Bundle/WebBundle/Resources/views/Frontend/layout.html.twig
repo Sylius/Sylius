@@ -2,14 +2,16 @@
 {% set settings = sylius_settings_all('sylius_general') %}
 <html>
     <head>
-        <title>
-            {% block title %}
-                {{ settings.title|default('sylius.meta.frontend_title'|trans) }}
-            {% endblock %}
-        </title>
-        <meta charset="UTF-8">
-        <meta name="description" content="{{ settings.meta_description|default('sylius.meta.frontend_description'|trans) }}">
-        <meta name="keywords" content="{{ settings.meta_keywords|default('sylius.meta.frontend_keywords'|trans) }}">
+        {% block head %}
+            <title>
+                {% block title %}
+                    {{ settings.title|default('sylius.meta.frontend_title'|trans) }}
+                {% endblock %}
+            </title>
+            <meta charset="UTF-8">
+            <meta name="description" content="{{ settings.meta_description|default('sylius.meta.frontend_description'|trans) }}">
+            <meta name="keywords" content="{{ settings.meta_keywords|default('sylius.meta.frontend_keywords'|trans) }}">
+        {% endblock %}
 
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 
@@ -23,7 +25,7 @@
             %}
                 <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
             {% endstylesheets %}
-            {% if is_granted('ROLE_SYLIUS_ADMIN') %}
+            {% if is_granted('ROLE_ADMINISTRATION_ACCESS') %}
                 {% include "CmfCreateBundle::includecssfiles.html.twig" %}
             {% endif %}
         {% endblock %}
@@ -33,7 +35,7 @@
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
     </head>
-    <body>
+    <body {% if is_granted('ROLE_ADMINISTRATION_ACCESS') %}class="toolbar-padding"{% endif %}>
     {% if settings.tracking_code %}
         {{ settings.tracking_code|raw }}
     {% endif %}
@@ -141,7 +143,7 @@
         {% endblock %}
         </div>
 
-        {% if is_granted('ROLE_SYLIUS_ADMIN') %}
+        {% if is_granted('ROLE_ADMINISTRATION_ACCESS') %}
             {% render(controller(
                 "cmf_create.jsloader.controller:includeJSFilesAction",
                 {'_locale': app.request.locale, 'editor': 'hallo'}

@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\LocaleBundle\Controller;
 
+use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
@@ -30,6 +31,7 @@ class LocaleController extends ResourceController
      */
     public function changeAction(Request $request)
     {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $locale = $request->get('locale');
 
         if (!$this->getLocaleProvider()->isLocaleAvailable($locale)) {
@@ -38,16 +40,13 @@ class LocaleController extends ResourceController
 
         $this->getLocaleContext()->setCurrentLocale($locale);
 
-        if ($this->config->isApiRequest()) {
-            $view = $this
-                ->view()
-                ->setData(array('locale' => $locale))
-            ;
+        if (!$configuration->isHtmlRequest()) {
+            $view = View::create(['locale' => $locale]);
 
-            return $this->handleView($view);
+            return $this->viewHandler->handle($configuration, $view);
         }
 
-        return $this->redirect($request->headers->get('referer') ?: '/');
+        return $this->redirectHandler->redirect($configuration, $request->headers->get('referer') ?: '/');
     }
 
     /**
@@ -55,7 +54,7 @@ class LocaleController extends ResourceController
      */
     protected function getLocaleContext()
     {
-        return $this->get('sylius.context.locale');
+        return $this->container->get('sylius.context.locale');
     }
 
     /**
@@ -63,6 +62,6 @@ class LocaleController extends ResourceController
      */
     protected function getLocaleProvider()
     {
-        return $this->get('sylius.locale_provider');
+        return $this->container->get('sylius.locale_provider');
     }
 }

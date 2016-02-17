@@ -2,14 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  account:
-    home:
-      email: ""
-      id: ""
-    order:
-      number: ""
-      payment_mode: ""
-      shipment_mode: ""
-      state: ""
   "no": false
+  product_option:
+    presentation: Weergawe
   "yes": true
+  zone:
+    scope: Gebied

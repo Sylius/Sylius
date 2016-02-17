@@ -1,0 +1,26 @@
+<div class="modal fade" id="attributes-modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">{{ 'sylius.form.attribute_type.title'|trans }}</h4>
+            </div>
+            <div class="modal-body">
+                <form action="{{ path('sylius_backend_render_attribute_forms') }}" method="GET" id="attributeChoice">
+                    <div class="list-group row">
+                        {% for attributeField in form %}
+                            {% if attributeField.vars.name != '_token' %}
+                            <div class="list-group-item col-xs-12 col-md-6" style="cursor: default;">
+                                {{ attributeField.vars.label }} {{ form_widget(attributeField, { 'id': attributeField.vars.label~' attribute' }) }}
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <button type="submit" class="btn btn-success">
+                        <i class="icon-plus"></i><span>{{ 'sylius.form.attribute.add_attributes'|trans }}</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

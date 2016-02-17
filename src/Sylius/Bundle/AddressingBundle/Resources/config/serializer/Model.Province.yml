@@ -6,7 +6,13 @@ Sylius\Component\Addressing\Model\Province:
             expose: true
             type: integer
             xml_attribute: true
+        code:
+            expose: true
+            type: string
         name:
+            expose: true
+            type: string
+        abbreviation:
             expose: true
             type: string
         createdAt:

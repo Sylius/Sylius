@@ -7,6 +7,9 @@ sylius:
       not_blank: "Veuillez entrer un nom d'attribut."
       min_length: "Le nom d'attribut doit contenir au moins 1 caractère.|Le nom d'attribut doit contenir au moins {{ limit }} caractères."
       max_length: "Le nom d'attribut ne peut pas contenir plus de 1 caractère.|Le nom d'attribut ne peut pas contenir plus de {{ limit }} caractères."
+    code:
+      not_blank: "Entrez le code de l'attribut."
+      unique: Ce code est déjà utilisé.
     presentation:
       not_blank: "Veuillez entrer une description de l'attribut."
       min_length: "La description de l'attribut doit contenir au moins 1 caractère.|La description de l'attribut doit contenir au moins {{ limit }} caractères."

@@ -12,26 +12,28 @@
 namespace spec\Sylius\Bundle\CoreBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\TaxationBundle\Form\Type\TaxRateType;
+use Symfony\Component\Form\FormTypeInterface;
 
 class TaxRateTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('TaxRate', array());
+        $this->beConstructedWith('TaxRate', []);
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\TaxRateType');
     }
 
     function it_should_be_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_should_extend_Sylius_tax_rate_form_type()
     {
-        $this->shouldHaveType('Sylius\Bundle\TaxationBundle\Form\Type\TaxRateType');
+        $this->shouldHaveType(TaxRateType::class);
     }
 }

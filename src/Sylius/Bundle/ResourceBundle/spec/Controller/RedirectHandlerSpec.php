@@ -1,19 +1,41 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Bundle\ResourceBundle\Controller\Configuration;
+use Sylius\Bundle\ResourceBundle\Controller\RedirectHandler;
+use Sylius\Bundle\ResourceBundle\Controller\RedirectHandlerInterface;
+use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Route;
+use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Routing\RouterInterface;
 
+/**
+ * @mixin RedirectHandler
+ *
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
+ */
 class RedirectHandlerSpec extends ObjectBehavior
 {
-    function let(Configuration $config, RouterInterface $router)
+    function let(RouterInterface $router, RouteCollection $routes)
     {
-        $this->beConstructedWith($config, $router);
+        $router->getRouteCollection()->willReturn($routes);
+
+        $this->beConstructedWith($router);
     }
 
     function it_is_initializable()
@@ -21,61 +43,101 @@ class RedirectHandlerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\RedirectHandler');
     }
 
-    function it_redirects_to_resource($config, $router)
+    function it_implements_redirect_handler_interface()
     {
-        $config->getRedirectParameters('resource')->willReturn(array());
-        $config->getRedirectRoute('show')->willReturn('my_route');
-        $router->generate('my_route', array())->willReturn('http://myurl.com');
-        $config->getRedirectHash()->willReturn(null);
-        $config->isHeaderRedirection()->willReturn(false);
-
-        $this->redirectTo('resource')->shouldHaveType('Symfony\Component\HttpFoundation\RedirectResponse');
+        $this->shouldImplement(RedirectHandlerInterface::class);
     }
 
-    function it_redirecst_to_index($config, $router)
-    {
-        $config->getRedirectRoute('index')->willReturn('my_route');
-        $config->getRedirectParameters()->willReturn(array());
-        $router->generate('my_route', array())->willReturn('http://myurl.com');
-        $config->getRedirectHash()->willReturn(null);
-        $config->isHeaderRedirection()->willReturn(false);
+    function it_redirects_to_resource(
+        RequestConfiguration $configuration,
+        ResourceInterface $resource,
+        RouterInterface $router,
+        RouteCollection $routes,
+        Route $route
+    ) {
+        $configuration->getRedirectParameters($resource)->willReturn([]);
+        $configuration->getRedirectRoute('show')->willReturn('my_route');
 
-        $this->redirectToIndex()->shouldHaveType('Symfony\Component\HttpFoundation\RedirectResponse');
+        $routes->get('my_route')->willReturn($route);
+
+        $router->generate('my_route', [])->shouldBeCalled()->willReturn('http://test.com');
+
+        $configuration->getRedirectHash()->willReturn(null);
+        $configuration->isHeaderRedirection()->willReturn(false);
+
+        $this->redirectToResource($configuration, $resource)->shouldHaveType(RedirectResponse::class);
     }
 
-    function it_redirects_to_route($router)
-    {
-        $router->generate('my_route', array('my_parameter' => 'value'))->willReturn('http://myurl.com');
+    function it_fallbacks_to_index_route_if_show_does_not_exist(
+        RequestConfiguration $configuration,
+        ResourceInterface $resource,
+        RouterInterface $router,
+        RouteCollection $routes
+    ) {
+        $configuration->getRedirectParameters($resource)->willReturn([]);
+        $configuration->getRedirectRoute('show')->willReturn('app_product_show');
+        $configuration->getRedirectRoute('index')->willReturn('app_product_index');
 
-        $this->redirectToRoute('my_route', array('my_parameter' => 'value'))
-            ->shouldHaveType('Symfony\Component\HttpFoundation\RedirectResponse');
+        $routes->get('app_product_show')->willReturn(null);
+
+        $router->generate('app_product_index', [])->shouldBeCalled()->willReturn('http://test.com');
+
+        $configuration->getRedirectHash()->willReturn(null);
+        $configuration->isHeaderRedirection()->willReturn(false);
+
+        $this->redirectToResource($configuration, $resource)->shouldHaveType(RedirectResponse::class);
     }
 
-    function it_redirects($config)
+    function it_redirects_to_index(RequestConfiguration $configuration, $router)
     {
-        $config->getRedirectHash()->willReturn(null);
-        $config->isHeaderRedirection()->willReturn(false);
-        $this->redirect('http://myurl.com')->shouldHaveType('Symfony\Component\HttpFoundation\RedirectResponse');
+        $configuration->getRedirectRoute('index')->willReturn('my_route');
+        $configuration->getRedirectParameters()->willReturn([]);
+
+        $router->generate('my_route', [])->willReturn('http://myurl.com');
+
+        $configuration->getRedirectHash()->willReturn(null);
+        $configuration->isHeaderRedirection()->willReturn(false);
+
+        $this->redirectToIndex($configuration)->shouldHaveType(RedirectResponse::class);
     }
 
-    function it_redirect_to_referer($config, Request $request, ParameterBag $bag)
+    function it_redirects_to_route(RequestConfiguration $configuration, $router)
+    {
+        $router->generate('route', ['parameter' => 'value'])->willReturn('http://myurl.com');
+
+        $this
+            ->redirectToRoute($configuration, 'route', ['parameter' => 'value'])
+            ->shouldHaveType(RedirectResponse::class)
+        ;
+    }
+
+    function it_redirects(RequestConfiguration $configuration)
+    {
+        $configuration->getRedirectHash()->willReturn(null);
+        $configuration->isHeaderRedirection()->willReturn(false);
+
+        $this->redirect($configuration, 'http://myurl.com')->shouldHaveType(RedirectResponse::class);
+    }
+
+    function it_redirect_to_referer(RequestConfiguration $configuration, Request $request, ParameterBag $bag)
     {
         $request->headers = $bag;
 
         $bag->get('referer')->willReturn('http://myurl.com');
-        $config->getRequest()->willreturn($request);
-        $config->getRedirectHash()->willReturn(null);
-        $config->getRedirectReferer()->willreturn('http://myurl.com');
-        $config->isHeaderRedirection()->willReturn(false);
 
-        $this->redirectToReferer()->shouldHaveType('Symfony\Component\HttpFoundation\RedirectResponse');
+        $configuration->getRequest()->willreturn($request);
+        $configuration->getRedirectHash()->willReturn(null);
+        $configuration->getRedirectReferer()->willreturn('http://myurl.com');
+        $configuration->isHeaderRedirection()->willReturn(false);
+
+        $this->redirectToReferer($configuration)->shouldHaveType(RedirectResponse::class);
     }
 
-    function it_redirects_with_header($config)
+    function it_redirects_with_header(RequestConfiguration $configuration)
     {
-        $config->getRedirectHash()->willReturn(null);
-        $config->isHeaderRedirection()->willReturn(true);
+        $configuration->getRedirectHash()->willReturn(null);
+        $configuration->isHeaderRedirection()->willReturn(true);
 
-        $this->redirect('http://myurl.com')->shouldHaveType('Symfony\Component\HttpFoundation\Response');
+        $this->redirect($configuration, 'http://myurl.com')->shouldHaveType(Response::class);
     }
 }

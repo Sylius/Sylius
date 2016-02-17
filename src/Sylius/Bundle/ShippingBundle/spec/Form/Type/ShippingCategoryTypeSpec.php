@@ -13,7 +13,9 @@ namespace spec\Sylius\Bundle\ShippingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -23,7 +25,7 @@ class ShippingCategoryTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('ShippingCategory', array('sylius'));
+        $this->beConstructedWith('ShippingCategory', ['sylius']);
     }
 
     function it_is_initializable()
@@ -33,11 +35,15 @@ class ShippingCategoryTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_builds_form_with_name_and_description_fields(FormBuilder $builder)
     {
+        $builder
+            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
+            ->willReturn($builder);
+
         $builder
             ->add('name', 'text', Argument::any())
             ->willReturn($builder)
@@ -48,16 +54,21 @@ class ShippingCategoryTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $builder
+            ->add('code', 'text', Argument::any())
+            ->willReturn($builder)
+        ;
+
+        $this->buildForm($builder, []);
     }
 
     function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
-                'data_class'        => 'ShippingCategory',
-                'validation_groups' => array('sylius'),
-            ))
+            ->setDefaults([
+                'data_class' => 'ShippingCategory',
+                'validation_groups' => ['sylius'],
+            ])
             ->shouldBeCalled()
         ;
 

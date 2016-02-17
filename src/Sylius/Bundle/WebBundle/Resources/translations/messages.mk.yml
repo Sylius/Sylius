@@ -2,16 +2,27 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  account:
-    home:
-      email: ""
-      id: ""
-    order:
-      number: ""
-      payment_mode: ""
-      shipment_mode: ""
-      state: ""
+  block:
+    imagine:
+      id: ID број
+    simple:
+      id: ID број
+    slideshow:
+      id: ID број
+    string:
+      id: ID број
+  contact_request:
+    message: Порака
+    topic: Тема
+  currency:
+    exchange_rate: Курс на конверзија
   "no": false
-  tax_rate:
-    included_in_price: Вклучено во цената?
+  product_option:
+    presentation: Презентација
+  report:
+    id: ID број
+  ui:
+    id: ID број
   "yes": true
+  zone:
+    scope: Опсег

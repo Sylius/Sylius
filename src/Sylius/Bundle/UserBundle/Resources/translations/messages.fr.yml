@@ -1,0 +1,34 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    group:
+      name: Nom
+      roles: Rôles
+    user:
+      email: E-mail
+      enabled: Activé
+      password:
+        label: Mot de passe
+        confirmation: Vérification
+      remember_me: Rester connecté
+      shipping_address: Adresse de livraison
+    customer:
+      first_name: Prénom
+      groups: Groupes
+      last_name: Nom
+      email: E-mail
+      gender: Sexe 
+      birthday: Date d’anniversaire 
+      billing_address: Adresse de facturation
+      different_billing_address: Utiliser une adresse différente pour la facturation ?
+    user_filter:
+      query: Rechercher
+    user_change_password:
+      confirmation: Confirmation
+      current: Mot de passe actuel
+      new: Nouveau mot de passe
+    user_reset_password:
+      confirmation: Confirmation
+      new: Nouveau mot de passe

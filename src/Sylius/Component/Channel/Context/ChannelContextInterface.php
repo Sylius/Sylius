@@ -14,8 +14,6 @@ namespace Sylius\Component\Channel\Context;
 use Sylius\Component\Channel\Model\ChannelInterface;
 
 /**
- * Provides the context of currently used channel.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface ChannelContextInterface
@@ -24,9 +22,4 @@ interface ChannelContextInterface
      * @return ChannelInterface
      */
     public function getChannel();
-
-    /**
-     * @param ChannelInterface $channel
-     */
-    public function setChannel(ChannelInterface $channel);
 }

@@ -14,7 +14,7 @@ sylius:
       amount: Suma de plată
       method: Modul de plată
       state:
-        0: Statusul plății
+        header: Status plată
         checkout: Trimite comanda
         completed: Finalizată
         failed: Eșuată

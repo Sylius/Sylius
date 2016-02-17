@@ -11,7 +11,13 @@
 
 namespace Sylius\Bundle\ChannelBundle\DependencyInjection;
 
+use Sylius\Bundle\ChannelBundle\Form\Type\ChannelType;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Channel\Factory\ChannelFactory;
+use Sylius\Component\Channel\Model\Channel;
+use Sylius\Component\Channel\Model\ChannelInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -37,60 +43,53 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
+                ->booleanNode('fake_channel_support')->defaultFalse()->cannotBeEmpty()->end()
             ->end()
         ;
 
-        $this->addValidationGroupsSection($rootNode);
-        $this->addClassesSection($rootNode);
+        $this->addResourcesSection($rootNode);
 
         return $treeBuilder;
     }
 
     /**
-     * Adds `validation_groups` section.
-     *
      * @param ArrayNodeDefinition $node
      */
-    private function addValidationGroupsSection(ArrayNodeDefinition $node)
+    private function addResourcesSection(ArrayNodeDefinition $node)
     {
         $node
             ->children()
-                ->arrayNode('validation_groups')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->arrayNode('channel')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                    ->end()
-                ->end()
-            ->end()
-        ;
-    }
-
-    /**
-     * Adds `classes` section.
-     *
-     * @param ArrayNodeDefinition $node
-     */
-    private function addClassesSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('classes')
+                ->arrayNode('resources')
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('channel')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Channel\Model\Channel')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('repository')->end()
-                                ->arrayNode('form')
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('default')->defaultValue('Sylius\Bundle\ChannelBundle\Form\Type\ChannelType')->end()
-                                        ->scalarNode('choice')->defaultValue('%sylius.form.type.resource_choice.class%')->end()
+                                        ->scalarNode('model')->defaultValue(Channel::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(ChannelInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(ChannelFactory::class)->end()
+                                        ->arrayNode('form')
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                                ->scalarNode('default')->defaultValue(ChannelType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('validation_groups')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->arrayNode('default')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(['sylius'])
+                                        ->end()
                                     ->end()
                                 ->end()
                             ->end()

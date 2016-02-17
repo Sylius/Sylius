@@ -39,17 +39,17 @@ class ZoneBasedConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if (null !== $options['scope']) {
-            $zones = $this->zoneRepository->findBy(array('scope' => $options['scope']));
+            $zones = $this->zoneRepository->findBy(['scope' => $options['scope']]);
         } else {
             $zones = $this->zoneRepository->findAll();
         }
 
         foreach ($zones as $zone) {
             $builder
-                ->add($zone->getId(), 'sylius_money', array(
-                    'label'    => $zone->getName(),
+                ->add($zone->getId(), 'sylius_money', [
+                    'label' => $zone->getName(),
                     'required' => false,
-                ))
+                ])
             ;
         }
     }
@@ -60,10 +60,10 @@ class ZoneBasedConfigurationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'data_class' => null,
-                'scope'      => null
-            ))
+                'scope' => null,
+            ])
         ;
     }
 

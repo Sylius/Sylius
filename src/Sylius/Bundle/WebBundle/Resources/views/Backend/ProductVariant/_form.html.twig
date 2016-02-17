@@ -18,6 +18,7 @@
             </div>
         </div>
         {{ form_row(form.price) }}
+        {{ form_row(form.originalPrice) }}
         {{ form_row(form.pricingCalculator) }}
         {% if form.pricingConfiguration is defined %}
             {% if form.pricingCalculator.vars.value == 'volume_based' %}
@@ -32,6 +33,7 @@
         <hr />
         {{ form_row(form.availableOnDemand) }}
         {{ form_row(form.onHand) }}
+        {{ form_row(form.taxCategory) }}
     </div>
 
     <div class="col-md-4">

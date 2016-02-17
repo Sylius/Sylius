@@ -25,13 +25,13 @@ class GenderType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'choices' => array(
-                CustomerInterface::UNKNOWN_GENDER  => ' ',
+        $resolver->setDefaults([
+            'choices' => [
+                CustomerInterface::UNKNOWN_GENDER => ' ',
                 CustomerInterface::MALE_GENDER => 'sylius.gender.male',
                 CustomerInterface::FEMALE_GENDER => 'sylius.gender.female',
-            ),
-        ));
+            ],
+        ]);
     }
 
     /**

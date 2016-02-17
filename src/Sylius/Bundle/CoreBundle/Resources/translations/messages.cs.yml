@@ -2,15 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  checkout:
-    shipping_method:
-      not_blank: Vyberte prosím způsob dopravy.
   form:
     action:
       add_product_configuration:
         price: Jednotná cena
         quantity: Počet
         variant: Varianta
+      customer_group: Skupina zákazníků
     block:
       body: Tělo
       id: ID
@@ -22,11 +20,20 @@ sylius:
         different_billing_address: Použít jinou adresu pro fakturaci?
       payment_method: Způsob Platby
       shipping_method: Způsob Dopravy
+    promotion:
+      channels: Kanál
     coupon:
-      per_user_usage_limit: Využití uživatelských limitů
+      per_customer_usage_limit: Omezení použití na zákazníka
     group:
       name: Jméno
       roles: Role
+    channel:
+      taxonomies: Taxonomie
+      locales: Lokalizace
+      currency_default: Výchozí měna
+      currencies: Měny
+      shipping_methods: Způsoby dopravy
+      payment_methods: Způsoby platby
     image:
       file: Obrázek
     locale:
@@ -39,6 +46,7 @@ sylius:
       total_from: Od
       total_to: Do
       payment_state: Stav platby
+      channel: Všechny kanály
     page:
       body: Tělo
       id: ID
@@ -59,13 +67,24 @@ sylius:
         meta_description: Meta popis
         meta_keywords: Meta klíčová slova
         title: Název stránky
+        tracking_code:
+          Tracking code (for example: Kód Google Analytics)
       taxation:
         default_tax_zone: Výchozí sazba DPH
+      security:
+        enabled: Povolit?
     shipment_filter:
       created_at_from: Od
       created_at_to: Do
       number: Číslo objednávky
       shipping_address: Jméno příjemce
+      channel: Všechny kanály
+    payment_filter:
+      created_at_from: Od
+      created_at_to: Do
+      number: Číslo objednávky
+      billing_address: Fakturační adresa – jméno
+      channel: Všechny kanály
     shipping_method:
       zone: Oblast
     taxon:
@@ -78,6 +97,7 @@ sylius:
       enabled: Povoleno
       first_name: Křestní Jméno
       groups: Skupiny
+      roles: Role
       last_name: Příjmení
       password: Heslo
       shipping_address: Doručovací adresa
@@ -93,3 +113,11 @@ sylius:
       sku: SKU
       weight: Hmotnost
       width: Šířka
+    attribute:
+      product_attribute_value:
+        attribute: Atribut
+        value: Hodnota
+    guest:
+      email: Email
+    product_association_type:
+      name: Jméno

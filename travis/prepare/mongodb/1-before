@@ -1,3 +1,0 @@
-#!/bin/bash
-
-echo "extension = mongo.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini

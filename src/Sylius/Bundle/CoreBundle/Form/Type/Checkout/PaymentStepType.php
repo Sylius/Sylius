@@ -33,7 +33,7 @@ class PaymentStepType extends AbstractResourceType
      * @param array                   $validationGroups
      * @param ChannelContextInterface $channelContext
      */
-    public function __construct($dataClass, array $validationGroups = array(), ChannelContextInterface $channelContext)
+    public function __construct($dataClass, array $validationGroups = [], ChannelContextInterface $channelContext)
     {
         parent::__construct($dataClass, $validationGroups);
         $this->channelContext = $channelContext;
@@ -48,15 +48,15 @@ class PaymentStepType extends AbstractResourceType
         $notBlank->message = 'sylius.checkout.payment_method.not_blank';
 
         $builder
-            ->add('paymentMethod', 'sylius_payment_method_choice', array(
-                'label'         => 'sylius.form.checkout.payment_method',
-                'expanded'      => true,
+            ->add('paymentMethod', 'sylius_payment_method_choice', [
+                'label' => 'sylius.form.checkout.payment_method',
+                'expanded' => true,
                 'property_path' => 'lastPayment.method',
-                'channel'       => $this->channelContext->getChannel(),
-                'constraints'   => array(
-                    $notBlank
-                )
-            ))
+                'channel' => $this->channelContext->getChannel(),
+                'constraints' => [
+                    $notBlank,
+                ],
+            ])
         ;
     }
 

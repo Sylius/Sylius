@@ -28,8 +28,6 @@ use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundE
 abstract class CheckoutStep extends AbstractControllerStep
 {
     /**
-     * Get cart provider.
-     *
      * @return CartProviderInterface
      */
     protected function getCartProvider()
@@ -38,8 +36,6 @@ abstract class CheckoutStep extends AbstractControllerStep
     }
 
     /**
-     * Get current cart instance.
-     *
      * @return OrderInterface
      */
     protected function getCurrentCart()
@@ -48,8 +44,6 @@ abstract class CheckoutStep extends AbstractControllerStep
     }
 
     /**
-     * Get object manager.
-     *
      * @return ObjectManager
      */
     protected function getManager()
@@ -58,8 +52,6 @@ abstract class CheckoutStep extends AbstractControllerStep
     }
 
     /**
-     * Get zone matcher.
-     *
      * @return ZoneMatcherInterface
      */
     protected function getZoneMatcher()
@@ -68,22 +60,18 @@ abstract class CheckoutStep extends AbstractControllerStep
     }
 
     /**
-     * Is user logged in?
-     *
-     * @return Boolean
+     * @return bool
      */
     protected function isUserLoggedIn()
     {
         try {
-            return $this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED');
+            return $this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED');
         } catch (AuthenticationCredentialsNotFoundException $e) {
             return false;
         }
     }
 
     /**
-     * Dispatch event.
-     *
      * @param string $name
      * @param Event  $event
      */
@@ -93,13 +81,32 @@ abstract class CheckoutStep extends AbstractControllerStep
     }
 
     /**
-     * Dispatch checkout event.
-     *
      * @param string         $name
      * @param OrderInterface $order
      */
     protected function dispatchCheckoutEvent($name, OrderInterface $order)
     {
         $this->dispatchEvent($name, new GenericEvent($order));
+    }
+
+    /**
+     * @param string $transition
+     * @param OrderInterface $order
+     * @param bool $flush
+     */
+    protected function applyTransition($transition, OrderInterface $order, $flush = false)
+    {
+        $stateMachineFactory = $this->get('sm.factory');
+        $cartStateMachine = $stateMachineFactory->get($order, 'sylius_order_checkout');
+
+        if (!$cartStateMachine->can($transition)) {
+            return;
+        }
+
+        $cartStateMachine->apply($transition);
+
+        if ($flush) {
+            $this->getManager()->flush($order);
+        }
     }
 }

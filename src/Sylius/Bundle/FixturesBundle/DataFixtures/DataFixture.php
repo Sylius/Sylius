@@ -78,17 +78,15 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
 
     public function __call($method, $arguments)
     {
-        $matches = array();
+        $matches = [];
         if (preg_match('/^get(.*)Repository$/', $method, $matches)) {
             return $this->get('sylius.repository.'.$matches[1]);
         }
+        if (preg_match('/^get(.*)Factory$/', $method, $matches)) {
+            return $this->get('sylius.factory.'.$matches[1]);
+        }
 
-        return call_user_func_array(array($this, $method), $arguments);
-    }
-
-    protected function getZoneMemberRepository($zoneType)
-    {
-        return $this->get('sylius.repository.zone_member_'.$zoneType);
+        return call_user_func_array([$this, $method], $arguments);
     }
 
     /**
@@ -100,15 +98,15 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
     }
 
     /**
-     * Get zone reference by its name.
+     * Get zone reference by its code.
      *
-     * @param string $name
+     * @param string $code
      *
      * @return ZoneInterface
      */
-    protected function getZoneByName($name)
+    protected function getZoneByCode($code)
     {
-        return $this->getReference('Sylius.Zone.'.$name);
+        return $this->getReference('Sylius.Zone.'.$code);
     }
 
     /**
@@ -140,22 +138,25 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
     protected function createAddress()
     {
         /* @var $address AddressInterface */
-        $address = $this->getAddressRepository()->createNew();
+        $address = $this->getAddressFactory()->createNew();
         $address->setFirstname($this->faker->firstName);
         $address->setLastname($this->faker->lastName);
         $address->setCity($this->faker->city);
         $address->setStreet($this->faker->streetAddress);
         $address->setPostcode($this->faker->postcode);
 
-        /** @var CountryInterface $country */
-        $countries = Intl::getRegionBundle()->getCountryNames($this->defaultLocale);
-        $isoName = array_rand($countries);
-        $country = $this->getReference("Sylius.Country." . $isoName);
+        /* @var CountryInterface $country */
+        $allCountries = Intl::getRegionBundle()->getCountryNames($this->defaultLocale);
+        $countries = array_slice($allCountries, 0, count($allCountries) - 5, true);
 
-        $province = $country->hasProvinces() ? $this->faker->randomElement($country->getProvinces()->toArray()) : null;
+        $countryCode = array_rand($countries);
+        $country = $this->getReference('Sylius.Country.'.$countryCode);
 
-        $address->setCountry($country);
-        $address->setProvince($province);
+        if ($province = $country->hasProvinces() ? $this->faker->randomElement($country->getProvinces()->toArray()) : null) {
+            $address->setProvinceCode($province->getCode());
+        }
+
+        $address->setCountryCode($countryCode);
 
         return $address;
     }

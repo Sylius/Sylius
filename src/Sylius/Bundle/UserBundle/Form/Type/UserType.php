@@ -27,12 +27,12 @@ class UserType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('plainPassword', 'password', array(
+            ->add('plainPassword', 'password', [
                 'label' => 'sylius.form.user.password.label',
-            ))
-            ->add('enabled', 'checkbox', array(
+            ])
+            ->add('enabled', 'checkbox', [
                 'label' => 'sylius.form.user.enabled',
-            ))
+            ])
         ;
     }
 
@@ -41,18 +41,19 @@ class UserType extends AbstractResourceType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $groups = $this->validationGroups;
-        $resolver->setDefaults(array(
-            'data_class' => $this->dataClass,
-            'validation_groups' => function (FormInterface $form) use ($groups) {
-                $data = $form->getData();
-                if ($data && !$data->getId()) {
-                    $groups[] = 'user_create';
-                }
+        $resolver
+            ->setDefaults([
+                'data_class' => $this->dataClass,
+                'validation_groups' => function (FormInterface $form) {
+                    $data = $form->getData();
+                    if ($data && !$data->getId()) {
+                        $this->validationGroups[] = 'sylius_user_create';
+                    }
 
-                return $groups;
-            },
-        ));
+                    return $this->validationGroups;
+                },
+            ])
+        ;
     }
 
     /**

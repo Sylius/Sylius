@@ -1,0 +1,11 @@
+sylius:
+  form:
+    login:
+      username: Username
+      password: Password
+      remember_me: Remember me
+  ui:
+    sign_in: Sign in
+    sign_out: Sign out
+    dashboard: Dashboard
+    powered_by: Powered by

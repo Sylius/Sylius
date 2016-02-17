@@ -12,9 +12,9 @@
 namespace spec\Sylius\Bundle\TaxonomyBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -34,15 +34,15 @@ class BuildTaxonFormSubscriberSpec extends ObjectBehavior
 
     function it_is_a_subscriber()
     {
-        $this->shouldImplement('Symfony\Component\EventDispatcher\EventSubscriberInterface');
+        $this->shouldImplement(EventSubscriberInterface::class);
     }
 
     function it_subscribes_to_event()
     {
-        $this::getSubscribedEvents()->shouldReturn(array(
+        $this::getSubscribedEvents()->shouldReturn([
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::POST_SUBMIT  => 'postSubmit'
-        ));
+            FormEvents::POST_SUBMIT => 'postSubmit',
+        ]);
     }
 
     function it_adds_a_parent_form(
@@ -61,14 +61,14 @@ class BuildTaxonFormSubscriberSpec extends ObjectBehavior
         $taxon->getTaxonomy()->shouldBeCalled()->willReturn($taxonomy);
         $taxon->getParent()->shouldBeCalled()->willReturn($parent);
 
-        $factory->createNamed('parent', 'sylius_taxon_choice', $parent, array(
-            'taxonomy'        => $taxonomy,
-            'filter'          => null,
-            'required'        => false,
-            'label'           => 'sylius.form.taxon.parent',
-            'empty_value'     => '---',
+        $factory->createNamed('parent', 'sylius_taxon_choice', $parent, [
+            'taxonomy' => $taxonomy,
+            'filter' => null,
+            'required' => false,
+            'label' => 'sylius.form.taxon.parent',
+            'empty_value' => '---',
             'auto_initialize' => false,
-        ))->shouldBeCalled()->willReturn($parentForm);
+        ])->shouldBeCalled()->willReturn($parentForm);
 
         $form->add($parentForm)->shouldBeCalled();
 

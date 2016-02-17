@@ -18,29 +18,22 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
- * Object to id transformer.
- *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class ObjectToIdentifierTransformer implements DataTransformerInterface
 {
     /**
-     * Repository.
-     *
      * @var ObjectRepository
      */
     protected $repository;
 
     /**
-     * Identifier.
-     *
      * @var string
      */
     protected $identifier;
 
     /**
-     * Constructor.
-     *
      * @param ObjectRepository $repository
      * @param string           $identifier
      */
@@ -55,27 +48,6 @@ class ObjectToIdentifierTransformer implements DataTransformerInterface
      */
     public function transform($value)
     {
-        if (!$value) {
-            return null;
-        }
-
-        if (null === $entity = $this->repository->findOneBy(array($this->identifier => $value))) {
-            throw new TransformationFailedException(sprintf(
-                'Object "%s" with identifier "%s"="%s" does not exist.',
-                $this->repository->getClassName(),
-                $this->identifier,
-                $value
-            ));
-        }
-
-        return $entity;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function reverseTransform($value)
-    {
         if (null === $value) {
             return '';
         }
@@ -89,5 +61,26 @@ class ObjectToIdentifierTransformer implements DataTransformerInterface
         $accessor = PropertyAccess::createPropertyAccessor();
 
         return $accessor->getValue($value, $this->identifier);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function reverseTransform($value)
+    {
+        if (!$value) {
+            return null;
+        }
+
+        if (null === $entity = $this->repository->findOneBy([$this->identifier => $value])) {
+            throw new TransformationFailedException(sprintf(
+                'Object "%s" with identifier "%s"="%s" does not exist.',
+                $this->repository->getClassName(),
+                $this->identifier,
+                $value
+            ));
+        }
+
+        return $entity;
     }
 }

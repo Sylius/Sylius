@@ -14,9 +14,10 @@ sylius:
       amount: Mokėjimo suma
       method: Apmokėjimo būdas
       state:
-        0: Apmokėjimo būsena
+        header: Apmokėjimo būsena
         checkout: Apmokėjimas
         completed: Baigtas
+        authorized: Patvirtintas
         failed: Nepavyko
         new: Naujas
         pending: Laukiama

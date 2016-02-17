@@ -9,12 +9,12 @@ sylius:
       country: Ülke
       first_name: Ad
       last_name: Soyad
-      phone_number: Telefon
+      phone_number: Telefon numarası
       postcode: Posta kodu
       street: Sokak
       province: Eyalet
     country:
-      iso_name: Ülke kodu
+      add_province: Bölge ekleme
       name: Ülke adı
       provinces: İller
       select: Ülke seçin
@@ -22,6 +22,7 @@ sylius:
       name: Ad
       select: Seçiniz
     zone:
+      add_member: Üye ekle
       members: Üyeler
       name: Bölge adı
       type: Türü
@@ -30,10 +31,7 @@ sylius:
         province: Eyalet
         zone: Bölge
       scope: Kapsam
+      select: Ülke seçin
       select_scope: Ölçek seçiniz
-    zone_member_country:
-      country: Ülke
-    zone_member_province:
-      province: Eyalet
-    zone_member_zone:
-      zone: Bölge
+    zone_member:
+      select: Ülke seçin

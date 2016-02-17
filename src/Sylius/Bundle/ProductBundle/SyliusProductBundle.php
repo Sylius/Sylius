@@ -11,18 +11,23 @@
 
 namespace Sylius\Bundle\ProductBundle;
 
+use Sylius\Bundle\ProductBundle\DependencyInjection\Compiler\ServicesPass;
 use Sylius\Bundle\ProductBundle\DependencyInjection\Compiler\ValidatorPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Product\Model\ArchetypeInterface;
+use Sylius\Component\Product\Model\AttributeInterface;
+use Sylius\Component\Product\Model\AttributeTranslationInterface;
+use Sylius\Component\Product\Model\AttributeValueInterface;
+use Sylius\Component\Product\Model\OptionInterface;
+use Sylius\Component\Product\Model\OptionValueInterface;
+use Sylius\Component\Product\Model\ProductAssociationInterface;
+use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Product\Model\ProductTranslationInterface;
+use Sylius\Component\Product\Model\VariantInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * Product management bundle with highly flexible architecture.
- * Implements basic product model with properties support.
- *
- * Use *SyliusVariationBundle* to get variants, options and
- * customizations support.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
@@ -33,9 +38,9 @@ class SyliusProductBundle extends AbstractResourceBundle
      */
     public static function getSupportedDrivers()
     {
-        return array(
+        return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        );
+        ];
     }
 
     /**
@@ -45,6 +50,7 @@ class SyliusProductBundle extends AbstractResourceBundle
     {
         parent::build($container);
 
+        $container->addCompilerPass(new ServicesPass());
         $container->addCompilerPass(new ValidatorPass());
     }
 
@@ -53,17 +59,18 @@ class SyliusProductBundle extends AbstractResourceBundle
      */
     protected function getModelInterfaces()
     {
-        return array(
-            'Sylius\Component\Product\Model\ProductInterface'              => 'sylius.model.product.class',
-            'Sylius\Component\Product\Model\ProductTranslationInterface'   => 'sylius.model.product_translation.class',
-            'Sylius\Component\Product\Model\AttributeInterface'            => 'sylius.model.product_attribute.class',
-            'Sylius\Component\Product\Model\AttributeTranslationInterface' => 'sylius.model.product_attribute_translation.class',
-            'Sylius\Component\Product\Model\AttributeValueInterface'       => 'sylius.model.product_attribute_value.class',
-            'Sylius\Component\Product\Model\VariantInterface'              => 'sylius.model.product_variant.class',
-            'Sylius\Component\Product\Model\OptionInterface'               => 'sylius.model.product_option.class',
-            'Sylius\Component\Product\Model\OptionValueInterface'          => 'sylius.model.product_option_value.class',
-            'Sylius\Component\Product\Model\ArchetypeInterface'            => 'sylius.model.product_archetype.class',
-        );
+        return [
+            ProductInterface::class => 'sylius.model.product.class',
+            ProductTranslationInterface::class => 'sylius.model.product_translation.class',
+            AttributeInterface::class => 'sylius.model.product_attribute.class',
+            AttributeTranslationInterface::class => 'sylius.model.product_attribute_translation.class',
+            AttributeValueInterface::class => 'sylius.model.product_attribute_value.class',
+            VariantInterface::class => 'sylius.model.product_variant.class',
+            OptionInterface::class => 'sylius.model.product_option.class',
+            OptionValueInterface::class => 'sylius.model.product_option_value.class',
+            ArchetypeInterface::class => 'sylius.model.product_archetype.class',
+            ProductAssociationInterface::class => 'sylius.model.product_association.class',
+        ];
     }
 
     /**

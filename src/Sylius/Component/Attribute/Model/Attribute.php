@@ -13,14 +13,19 @@ namespace Sylius\Component\Attribute\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Attribute\AttributeType\TextAttributeType;
+use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Translation\Model\AbstractTranslatable;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class Attribute extends AbstractTranslatable implements AttributeInterface
 {
+    use TimestampableTrait;
+
     /**
      * @var mixed
      */
@@ -29,17 +34,17 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     /**
      * @var string
      */
-    protected $type = AttributeTypes::TEXT;
+    protected $code;
 
     /**
      * @var string
      */
-    protected $name;
+    protected $type = TextAttributeType::TYPE;
 
     /**
      * @var array
      */
-    protected $configuration = array();
+    protected $configuration = [];
 
     /**
      * @var AttributeValueInterface[]|Collection
@@ -47,18 +52,14 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     protected $values;
 
     /**
-     * @var \DateTime
+     * @var string
      */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
+    protected $storageType;
 
     public function __construct()
     {
         parent::__construct();
+
         $this->values = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }
@@ -68,7 +69,7 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
      */
     public function __toString()
     {
-        return $this->name;
+        return $this->getName();
     }
 
     /**
@@ -82,9 +83,25 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     /**
      * {@inheritdoc}
      */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
-        return $this->name;
+        return $this->translate()->getName();
     }
 
     /**
@@ -92,23 +109,7 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
      */
     public function setName($name)
     {
-        $this->name = $name;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPresentation()
-    {
-        return $this->translate()->getPresentation();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPresentation($presentation)
-    {
-        $this->translate()->setPresentation($presentation);
+        $this->translate()->setName($name);
     }
 
     /**
@@ -152,34 +153,18 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $storageType
      */
-    public function getCreatedAt()
+    public function setStorageType($storageType)
     {
-        return $this->createdAt;
+        $this->storageType = $storageType;
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
-    public function setCreatedAt(\DateTime $createdAt)
+    public function getStorageType()
     {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
+        return $this->storageType;
     }
 }

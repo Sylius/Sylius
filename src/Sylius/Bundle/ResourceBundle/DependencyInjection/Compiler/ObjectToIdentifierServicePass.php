@@ -30,7 +30,7 @@ class ObjectToIdentifierServicePass implements CompilerPassInterface
             $definition = new DefinitionDecorator('sylius.form.type.object_to_identifier');
             $definition->addArgument(new Reference('doctrine'));
             $definition->addArgument('sylius_entity_to_identifier');
-            $definition->addTag('form.type', array('alias' => 'sylius_entity_to_identifier'));
+            $definition->addTag('form.type', ['alias' => 'sylius_entity_to_identifier']);
 
             $container->setDefinition('sylius_entity_to_identifier', $definition);
 
@@ -42,7 +42,7 @@ class ObjectToIdentifierServicePass implements CompilerPassInterface
             $definition = new DefinitionDecorator('sylius.form.type.object_to_identifier');
             $definition->addArgument(new Reference('doctrine_mongodb'));
             $definition->addArgument('sylius_document_to_identifier');
-            $definition->addTag('form.type', array('alias' => 'sylius_document_to_identifier'));
+            $definition->addTag('form.type', ['alias' => 'sylius_document_to_identifier']);
 
             $container->setDefinition('sylius_document_to_identifier', $definition);
 
@@ -60,7 +60,7 @@ class ObjectToIdentifierServicePass implements CompilerPassInterface
             $definition = new DefinitionDecorator('sylius.form.type.object_to_identifier');
             $definition->addArgument(new Reference('doctrine_phpcr'));
             $definition->addArgument('sylius_phpcr_document_to_identifier');
-            $definition->addTag('form.type', array('alias' => 'sylius_phpcr_document_to_identifier'));
+            $definition->addTag('form.type', ['alias' => 'sylius_phpcr_document_to_identifier']);
 
             $container->setDefinition('sylius_phpcr_document_to_identifier', $definition);
 

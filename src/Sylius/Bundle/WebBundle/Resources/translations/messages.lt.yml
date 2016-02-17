@@ -1,9 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-email:
-  order_confirmation:
-    subject: Tema
 sylius:
   account:
     address:
@@ -19,36 +16,34 @@ sylius:
         no_billing: Nėra numatytojo atsiskaitymo adreso
         no_shipping: Nėra numatytojo pristatymo adreso
         shipping: Numatytasis pristatymo adresas
-      empty: Jūs dar nepridėjote nei vieno adreso.
       list: Visi jūsų adresai
       update: Redaguoti adresą
     home:
-      email: ""
-      id: ""
-      outline: Mėgaukitės visomis funkcijomis, kurias galima pasiekti per savo asmeninę erdvę tam, kad peržiūrėti, stebėti ir valdyti visus savo duomenis.
+      email: Elektroninis paštas
+      last5orders: Jūsų paskutiniai 5 užsakymai
       since: Jūs esate klientas nuo
       welcome: Sveiki atvykę į savo erdvę
     order:
       created_at: Užsakytas
       details: Jūsų užsakymo detalės
       download_invoice: Parsisiųsti sąskaitą
-      empty: Jūs dar nepateikėte nei vieno užsakymo.
       invoice: Sąskaita
       list: Visų jūsų užsakymai
-      number: ""
-      payment_mode: ""
+      number: Numeris
       placed_at: 'Užsakytas %at%'
       shipment:
         pending: Laukiama
         ready: 'Paruošta nuo %at%'
         returned: 'Grąžintas %at%'
         shipped: 'Pristatytas %at%'
-      shipment_mode: ""
-      state: ""
+      state: Būsena
       total: Iš viso
       tracking_number: Sekimo numeris
     title: Mano paskyra
   add_to_cart: Įdėti į krepšelį
+  association_type:
+    name: Pavadinimas
+    create: Sukurti
   address:
     city: Miestas
     company: įmonė
@@ -63,6 +58,18 @@ sylius:
     info: Informacija
     success: Pavyko
     warning: Dėmesio
+  archetype:
+    attributes: Atributai
+    build: Sukurti archetipą
+    build_header: Produkto kūrimas iš archetipo
+    create: Sukurti archetipą
+    create_header: Naujas archetipas
+    index_header: Produkto archetipai
+    name: Pavadinimas
+    options: Parinktys
+    parent: Motininis elementas
+    update_header: Archetipo redagavimas
+    updated_at: Paskutinis atnaujinimas
   backend:
     alert:
       info: Informacija
@@ -76,37 +83,108 @@ sylius:
     logout: Atsijungti
     quick_links:
       add_product: Naujas produktas
+      customers: Klientai
       orders: Naujausi užsakymai
       products: Jūsų produktai
-      users: Vartotojai
     statistics:
-      0: Šio mėnesio statistika
+      header: Šio mėnesio statistika
       orders_this_month: Viso užsakymų
       registrations_this_month: Viso registracijų
       sales_this_month: Pardavimai
-  backend_welcome: 'Sveiki, <b>%name%</b>!'
   block:
-    body: Bloko turinys
-    create: Sukurti bloką
-    create_header: Kurti naują turinio bloką
-    id: ID
-    index_header: Turinio blokai
-    no_results: Nėra blokų.
-    title: Pavadinimas
-    update_header: Turinio bloko redagavimas
-    updated_at: Paskutinis atnaujinimas
+    imagine:
+      create: Sukurti paveikslėlių bloką
+      create_header: Kuriamas naujas paveikslėlių blokas
+      end_date: Pabaigos data
+      id: Id
+      index: Paveikslėlių blokai
+      index_header: Paveikslėlių blokai
+      label: Etiketė
+      publishable: Paskelbta
+      start_date: Pradžios data
+      title: Pavadinimas
+      update_header: Redaguojamas paveikslėlių blokas
+      updated_at: Paskutinis atnaujinimas
+    imagine_blocks: Paveikslėlių blokai
+    index_header: Blokai
+    simple:
+      body: Bloko turinys
+      create: Sukurti paprastą bloką
+      create_header: Kuriamas paprastas blokas
+      end_date: Pabaigos data
+      id: Id
+      index: Paprasti blokai
+      index_header: Paprasti blokai
+      label: Etiketė
+      publishable: Paskelbta
+      start_date: Pradžios data
+      title: Pavadinimas
+      update_header: Paprasto bloko redagavimas
+      updated_at: Paskutinis atnaujinimas
+    simple_blocks: Paprasti blokai
+    slideshow:
+      body: Bloko turinys
+      create: Sukurti skaidrių bloką
+      create_header: Skaidžių bloko kūrimas
+      end_date: Pabaigos data
+      id: Id
+      index: Skaidrių blokai
+      index_header: Skaidrių blokai
+      publishable: Paskelbta
+      start_date: Pradžios data
+      title: Pavadinimas
+      update_header: Skaidžių bloko redagavimas
+      updated_at: Paskutinis atnaujinimas
+    slideshow_blocks: Skaidrių blokai
+    string:
+      body: Bloko turinys
+      create: Sukurti simbolių bloką
+      create_header: Simbolių bloko kūrimas
+      end_date: Pabaigos data
+      id: Id
+      index: Simbolių blokai
+      index_header: Simbolių blokai
+      label: Etiketė
+      publishable: Paskelbta
+      start_date: Pradžios data
+      title: Pavadinimas
+      update_header: Simbolių bloko redagavimas
+      updated_at: Paskutinis atnaujinimas
+    string_blocks: Simbolių blokai
   breadcrumb:
     assortment: Asortimentas
+    attribute:
+      index: Atributai
     block:
-      index: Turinio blokai
+      imagine:
+        index: Paveikslėlių blokai
+      index: Blokai
+      simple:
+        index: Paprasti blokai
+      slideshow:
+        index: Skaidrių blokai
+      string:
+        index: Simbolių blokai
     build: Sukurti
+    channel:
+      index: Kanalai
     configuration: Konfigūracija
+    contact_request:
+      index: Kontaktų užklausos
+      show: Kontaktų užklausa
+    contact_topic:
+      index: Užklausų tipai
+    content: Turinys
     country:
       index: Šalys
-    customers: Klientai
+    currency:
+      index: Valiutos
+    customer:
+      index: Klientai
+    dashboard: Skydelis
     edit: Redaguoti
-    exchange_rate:
-      index: Valiutų kursai
+    email:
+      index: El. laiškai
     general_settings: Bendrieji nustatymai
     generate: Generuoti
     group:
@@ -115,34 +193,50 @@ sylius:
       index: Atsargos
     locale:
       index: Lokalės
+    marketing: Marketingas
+    menu:
+      index: Meniu
+    menu_node:
+      index: Meniu elementai
     new: Naujas
     option:
       index: Parinktys
     order:
+      adjustments: Koregavimai
       index: Užsakymai
     page:
-      index: Statiniai puslapius
+      index: Puslapiai
     payment:
       index: Mokėjimai
     payment_method:
       index: Mokėjimo būdai
+    permission:
+      index: Prieigos teisės
     product:
       index: Produktai
     promotion:
       index: Akcijos
     promotion_coupon:
       index: Kuponai
-    property:
-      index: Ypatybės
-    prototype:
-      index: Prototipai
+    redirect_route:
+      index: Nukreipimo maršrutai
+    report:
+      index: Ataskaitos
+    role:
+      index: Rolės
+    route:
+      index: Maršrutai
     sales: Pardavimai
+    section:
+      customer: Klienta
+    security_settings: Saugos parametrai
     shipment:
       index: Pristatymai
     shipping_category:
       index: Pristatymo kategorijos
     shipping_method:
       index: Pristatymo būdai
+    support: Pagalba
     tax_category:
       index: Mokesčių kategorijos
     tax_rate:
@@ -151,8 +245,6 @@ sylius:
     taxonomy:
       index: Taksonomijos
     update: Redaguoti
-    user:
-      index: Vartotojai
     zone:
       index: Zonos
   browse_products: Peržiūrėti produktus
@@ -160,7 +252,7 @@ sylius:
   cart:
     empty: Jūsų krepšelis yra tuščias
     summary:
-      add_coupon: OK
+      add_coupon: Pridėti kuponą
       checkout: Apmokėjimas
       clear: Ištuštinti krepšelį
       grand_total: Viso
@@ -171,10 +263,27 @@ sylius:
       unit_price: Kaina
     summary_header: Krepšelio santrauka
     total_items: '1 prekė|%count% prek.'
+  channel:
+    code: Kodas
+    create: Pridėti kanalą
+    create_header: Pridėti kanalą
+    created_at: Sukurta
+    currency_default: Numatytoji valiuta
+    enabled: Įjungta
+    id: ID
+    index_header: Kanalai
+    manage: Valdyti kanalus
+    name: Pavadinimas
+    update: Redaguoti
+    update_header: Kanalo redagavimas
+    updated_at: Paskutinis atnaujinimas
+    url: Url
   checkout:
     addressing:
       header: Adresas
     back: Atgal
+    credit_card:
+      header: Apmokėjimo duomenys
     finalize:
       address:
         city: Miestas
@@ -212,49 +321,92 @@ sylius:
       header: Apmokėjimo būdas
     security:
       existing_customer: Esamas klientas
+      guest: Svečias
       header: 'Prisijunkite prie parduotuvės <small>arba užsiregistruokite</small>'
       login: Prisijungti
       new_customer: Naujas klientas
+      proceed_order: Tęsti užsakymą
       register: Užsiregistruoti
     shipping:
-      error: Mes labai atsiprašome, tačiau neturime galimybės pristatyti prekių į jūsų pasirinktą šalį.
       header: Pristatymo būdas
   confirmation:
-    message: Ar norite pašalinti šį elementą?
     title: Patvirtinimas
+  contact_request:
+    email: Elektroninis paštas
+    firstName: Vardas
+    id: ID
+    index_header: Kontaktų užklausos
+    lastName: Pavardė
+    message: Žinutė
+    topic: Tema
+    updated_at: Paskutinis atnaujinimas
+  contact_topic:
+    id: ID
+    index_header: Užklausų tipai
+    title: Pavadinimas
+    updated_at: Paskutinis atnaujinimas
   country:
     add_province: Pridėti provinciją
     create: Sukurti šalį
     create_header: Naujas šalis
+    enabled: Įjungta
     id: ID
     index_header: Šalys
-    iso_name: ISO pavadinimas
     manage: Valdyti šalis
     name: Pavadinimas
-    no_results: Nėra šalių.
     show_header: Šalies detalės
     update_header: Šalies redagavimas
   create: Sukurti
   created_at: Sukurta
-  delete: šalinti
-  deleted: Pašalintas
-  edit: redaguoti
-  email: El. paštas
-  exchange_rate:
-    create: Sukurti kursą
-    create_header: Naujas kursas
-    currency: valiuta
+  currency:
+    code: Kodas
+    create: Sukurti valiutą
+    create_header: Nauja valiuta
+    enabled: Įjungta
+    exchange_rate: Valiutų kursas
     id: ID
-    index_header: Valiutų kursai
-    no_results: Nėra jokių valiutų kursų.
-    rate: kursas
-    update_header: Kurso redagavimas
-    updated_at: paskutins atnaujinimas
+    index_header: Valiutos
+    name: Pavadinimas
+    update_header: Valiutos redagavimas
+    updated_at: Paskutinis atnaujinimas
+  customer:
+    billing_address: Mokėtojo adresas
+    email: Elektroninis paštas
+    first_name: Vardas
+    groups: Grupės
+    id: ID
+    last_name: Pavardė
+    shipping_address: Pristatymo adresas
+  delete: Šalinti
+  deleted: Pašalintas
+  edit: Redaguoti
+  email:
+    code: Kodas
+    create: Pridėti naują adresą
+    create_header: Naujo adreso pridėjimas
+    enabled: Įjungta
+    index_header: El. laiškų šablonai
+    manage: Tvarkyti laiškus
+    subject: Tema
+    update_header: El. pašto redagavimas
+    updated_at: Paskutinis atnaujinimas
+  emails:
+    order_comment:
+      name: Užsakymo komentaras
+      subject: Užsakymas pakomentuotas
+    order_confirmation:
+      name: Užsakymo patvirtinimas
+    shipment_confirmation:
+      name: Pristatymo patvirtinimas
+    user_confirmation:
+      name: Vartotojo patvirtinimas
   filter: Filtruoti
   form:
     cart:
       coupon: Jei turite nuolaidos kuponą, įveskite jį čia
     choose_file: Pasirinkite failą
+    comment:
+      comment: Komentaras
     frontend:
       password:
         confirmation: Pakartokite slaptažodį
@@ -266,6 +418,8 @@ sylius:
     login:
       email: Elektroninis paštas
       password: Slaptažodis
+    menu:
+      add_menu_node: Pridėti meniu elementą
     option_value:
       add_value: Pridėti reikšmę
     profile:
@@ -277,23 +431,24 @@ sylius:
     previous: Ankstesnis
     slideshow: Skaidrių demonstracija
   generate: Generuoti
+  go_to_dashboard: Eiti į prietaisų skydelį
   group:
     create: Grupės kūrimas
-    create_header: Vartotojų grupių pridėjimas
+    create_header: Pridedamos naujos klientų grupės
     id: ID
     index_header: Grupės
     name: Pavadinimas
-    no_results: Nėra grupių.
     roles: Rolės
     update_header: Redaguoti grupę
   hide_deleted: Slėpti pašalintus
   history:
-    0: Istorija
     action: Veiksmas
     author: Autorius
     data: Data
-    logged_at: Įrašyta
-    version: Versija
+    empty: Išvalyti
+    header: Istorija
+    logged_at: Prisijungęs prie (versija)
+    revert: Atstatyti
   homepage:
     splash:
       headline: Sveiki atvykę į Sylius
@@ -302,7 +457,6 @@ sylius:
     created_at: Sukurtas
     inventory_state: Atsargų būklė
     name: Pavadinimas
-    no_results: Nėra jokių atsargų vienetų.
     shipping_state: Pristatymo būsena
     sku: Kodas
     updated_at: Paskutinis atnaujinimas
@@ -311,43 +465,82 @@ sylius:
     create: Sukurti lokalę
     create_header: Naujos lokalės pridėjimas
     enabled: Įjungta
+    id: ID
     index_header: Visų sukonfigūruotų lokalių indeksas
-    no_results: Nėra lokalių.
+    name: Pavadinimas
     update_header: Lokalės redagavimas
     updated_at: Paskutinis atnaujinimas
   login: Prisijungti
   login_header: Administravimas
   logo: Sylius
   manage: Valdyti
+  menu:
+    create: Sukurti meniu
+    create_header: Meniu kūrimas
+    end_date: Pabaigos data
+    id: ID
+    index_header: Meniu
+    publishable: Paskelbta
+    start_date: Pradžios data
+    title: Pavadinimas
+    update_header: Meniu redagavimas
+  menu_node:
+    create: Sukurti meniu punktą
+    create_header: Meniu punkto kūrimas
+    id: ID
+    index_header: Meniu elementai
+    parent: Motininis elementas
+    title: Pavadinimas
+    update_header: Meniu punkto redagavimas
   meta:
-    backend_title: Sylius prietaisų skydelis.
-    frontend_description: Sylius yra šiuolaikinės elektroninės komercijos sprendimas su PHP, remiantis Symfony2 sistema.
-    frontend_keywords: sylius, e-commerce, symfony2, parduotuvė, vežimėlis, parduotuvė
+    backend_title: Sylius prietaisų skydelis
     frontend_title: Sylius, šiuolaikinės elektroninės komercijos Symfony2
+  metadata:
+    id: ID
+    content: Turinys
   na: Nėra
   newest: Naujausi produktai
   "no": false
-  no_results: Nėra rezultatų.
-  option:
-    create: Sukurti parinktį
-    create_header: Nauja produkto parinktis
-    index_header: Produkto parinktys
-    manage: Valdyti parinktis
-    name: pavadinimas
-    no_results: Nėra parinkčių.
-    presentation: prezentacija
-    update_header: Parinkties redagavimas
-    updated_at: paskutins atnaujinimas
-    values: reikšmės
+  no_results: Nėra rezultatų
   order:
+    adjustments:
+      amount: Suma
+      description: Aprašymas
+      lock: Užrakinti
+      lock_all: Užrakinti visus pakeitimus
+      manage: Valdyti patikslinimus
+      type: Tipas
+      unlock: Atrakinti
+      unlock_all: Atrakinti visus pakeitimus
     billing_address: Mokėtojo adresas
+    channel: Kanalas
+    comment:
+      author: Autorius
+      comment: Komentaras
+      created_at: Sukurta
+      customer:
+        not_notified: Pirkėjas neinformuotas
+        notified: Pirkėjas informuotas
+      header: Užsakymo komentarai
+      no_comment: Nėra komentaro
+      notify: Pranešimas
+      state: Būsena
     create: Sukurti užsakymą
     create_header: Naujas užsakymas
     created_at: Sukūrimo laikas
+    currency: Valiuta
+    customer: Klienta
+    details: Užsakymo informacija
     general_info: Bendra informacija
+    guest: Svečias klientas
     id: ID
     index_header: Esami užsakymai
     inventory_tracking: Atsargų stebėjimas
+    inventory_unit:
+      backorder: Užsakyti į ateitį
+      fulfill: Išpildyti
+      return: Grįžti
+    items: Elementai
     items_total: Iš viso prekių
     manage: Valdyti užsakymus
     no_items: Šiame užsakyme nėra prekių
@@ -356,55 +549,32 @@ sylius:
     no_shipping_charges: Nepritaikyta jokių pristatymo mokesčių
     no_taxes: Nepritaikyta jokių mokesčių
     number: Numeris
+    order_state: Užsakymo būsena
     payment: Apmokėjimas
     payment_state: Apmokėjimo būsena
     payment_states:
       balance_due: Likutis
+    promotion_coupons: Kuponai
     promotion_total: Iš viso nuolaidų
     recent_header: Naujausi užsakymai
+    release_inventory: Atlaisvinti atsargas
     shipment_state: Pristatymo būsena
     shipment_states:
       pending: Laukiama
     shipments: Pristatymai
-    release_inventory: Atlaisvinti atsargas
-    inventory_unit:
-      backorder: Užsakyti į ateitį
-      fulfill: Išpildyti
-      return: Grįžti
     shipping_address: Pristatymo adresas
     shipping_charges: Pristatymo mokesčiai
     shipping_total: Pristatymas viso
     show_header: Užsakymas
     state:
-      cart_locked: Krepšelis užrakintas
+      cancelled: Atšaukta
       checkout: Apmokėjimas
-      order_confimed: Užsakymas patvirtintas
-      ordered: Užsakyta
+      returned: Grąžintas
+      shipped: Pristatytas
     tax_total: Mokesčių suma
     taxes: Mokesčiai
     total: Iš viso
     update_header: Užsakymo redagavimas
-    user: Vartotojas
-  shipment:
-    ship: Išsiųsti
-    created_at: Sukurta
-    id: ID
-    index_header: Pristatymai
-    inventory_state: Atsargų būklė
-    manage: Valdyti siuntas
-    method: Būdas
-    modified: Modifikuotas
-    name: Pavadinimas
-    no_items: Nėra rodytinų elementų.
-    no_results: Nėra rodytinų siuntų.
-    order: Užsakymas
-    show_header: Pristatymo detalės
-    sku: Kodas
-    state: Būsena
-    tracking_code: Sekimo kodas
-    update: Redaguoti
-    update_header: Pristatymo redagavimas
-    updated_at: Paskutinis atnaujinimas
   order_item:
     product: Produktas
     quantity: Kiekis
@@ -415,12 +585,16 @@ sylius:
   page:
     body: Bloko turinys
     create: Kurti naują puslapį
-    create_header: Sukurti naują statinį turinį
+    create_header: Puslaio kūrimas
+    end_date: Pabaigos data
     id: ID
     index_header: Puslapiai
-    no_results: Nėra statinių puslapių.
+    no_route: Jūsų turinys nebus rodomas, jei nukreipimas nėra nurodytas
+    publishable: Paskelbta
+    routes: Maršrutai
+    start_date: Pradžios data
     title: Pavadinimas
-    update_header: Paskutinis atnaujinimas
+    update_header: Puslapio redagavimas
   password: Slaptažodis
   payment:
     amount: Suma
@@ -431,15 +605,17 @@ sylius:
     index_header: Mokėjimai
     manage: Valdyti mokėjimus
     method: Būdas
-    no_results: Nėra sukonfigūruotas mokėjimų.
+    order: Užsakymas
     state:
-      0: Būsena
+      cancelled: Atšaukta
       checkout: Apmokėjimas
       completed: Baigtas
       failed: Nepavyko
+      header: Būsena
       new: Naujas
       pending: Laukiama
       processing: Apdorojamas
+      refunded: Grąžinta
       unknown: Nežinoma
       void: Nenurodyta
     update_header: Mokėjimo redagavimas
@@ -447,16 +623,32 @@ sylius:
   payment_method:
     create: Sukurti mokėjimo būdą
     create_header: Naujas mokėjimo būdas
-    enabled: Įgalintas?
-    gateway: kanalas
+    gateway: Apmokėjimo kanalas
     id: ID
     index_header: Apmokėjimo būdai
     name: Pavadinimas
-    no_results: Nėra sukonfigūruotų mokėjimo būdų.
     update_header: Mokėjimo būdo redagavimas
     updated_at: Paskutins atnaujinimas
+  permission:
+    code: Kodas
+    create: Pridėti naują leidimą
+    create_header: Naujas leidimas
+    description: Aprašymas
+    id: ID
+    index_header: Prieigos teisės
+    update_header: Teisių redagavimas
+    updated_at: Paskutinis atnaujinimas
+  pricing:
+    volume_based:
+      button:
+        add: Pridėti
+      max: Maks. kiekis
+      min: Min kiekis
+      price: Kaina
   product:
-    add_property: Pridėti ypatybę
+    add_attribute: Pridėti atributą
+    archetype: Archetipas
+    attributes: Atributai
     available_on: Prieinamas nuo
     available_on_demand: Prieinamas pagal poreikį
     categorization: Skirstymas į kategorijas
@@ -469,11 +661,10 @@ sylius:
     index_header: 'Produktai <small>visų produktų jūsų parduotuvėje rodyklė</small>'
     manage: Valdyti produktus
     name: Pavadinimas
+    no_attributes: Šis produktas neturi atributų
     no_description: '<i>Nėra aprašymo...</i>'
     no_images: Šis produktas neturi paveikslėlių
     no_options: Šis produktas neturi parinkčių
-    no_properties: Šis produktas neturi ypatybių
-    no_results: Nėra rodytinų produktų.
     no_shipping_category: Nėra pristatymo kategorijos
     no_short_description: '<i>Nėra trumpo aprašymo</i>'
     no_sku: Nėra kodo
@@ -481,43 +672,79 @@ sylius:
     no_taxons: Nėra jokių taksonų šiam produktui
     options: Parinktys
     price: Mažmeninė kaina
-    properties: Ypatybės
+    remove_attribute: Pašalinkite atributą
     restricted_zone: Apribota zona
     shipping_category: Pristatymo kategorija
     show: Rodyti daugiau
     show_header: 'Produkto detalės <small>peržiūrimas produktas "<strong>%product%</strong>"</small>'
-    show_in_store: rodyti parduotuvėje
     sku: Kodas
     stock: Dabartinės atsargos
     tabs:
+      attributes: Atributai
       categorization: Skirstymas į kategorijas
+      channels: Kanalai
       images: Paveikslėliai
       options: Parinktys
+      pricing: Kainodara
       product: Produktas
-      properties: Ypatybės
     tax_category: Mokesčių kategorija
     unavailable: Nepasiekiamas
     update_header: Produkto redagavimas
     updated_at: Paskutinis atnaujinimas
     variant_selection_method: Varianto pasirinkimo būdas
-    view_details: 'Rodyti %product% detales.'
+    variants: Variantai
+    volume_based:
+      price: Kaina
+      qty_max: Kiekis max
+      qty_min: Kiekis min
+    volume_price: Apimtimi pagrįsta kainodara
+  product_attribute:
+    add_choice: Pridėti pasirinkimą
+    code: Kodas
+    create: Sukurti produkto atributą
+    create_header: Naujas produktas atributas
+    index_header: Produkto atributai
+    manage: Valdyti atributus
+    name: Pavadinimas
+    type: Tipas
+    update_header: Atributo redagavimas
+    updated_at: Paskutinis atnaujinimas
+  product_association:
+    code: Kodas
+    create_header: Naujas produktas
+    index_header: Produkto atributai
+    manage: Valdyti atributus
+    name: Pavadinimas
+    type: Tipas
+    update_header: Atributo redagavimas
+    updated_at: Paskutinis atnaujinimas
   product_not_available_in_zone: Neprieinamas jūsų šalyje
+  product_option:
+    create: Sukurti parinktį
+    create_header: Nauja produkto parinktis
+    index_header: Produkto parinktys
+    manage: Valdyti parinktis
+    name: Pavadinimas
+    presentation: Prezentacija
+    update_header: Parinkties redagavimas
+    updated_at: Paskutinis atnaujinimas
   promotion:
     actions: Veiksmai
     add_action: Pridėti veiksmą
     add_rule: Pridėti taisyklę
-    coupon_based: Pagal kuponą?
+    coupon_based: Pagal kuponą
     create: Sukurti akciją
     create_header: Nauja akcija
     created_at: Sukurta
     description: Aprašymas
     ends_at: Baigiasi
+    exclusive: Išskirtinis
     general_info: Bendroji informacija
     id: ID
     index_header: Esamos akcijos
     manage: Valdyti akcijas
     name: Pavadinimas
-    no_results: Nėra jokių akcijų.
+    priority: Prioritetas
     rules: Taisyklės
     show_header: Akcijos detalės
     starts_at: Prasideda
@@ -529,51 +756,88 @@ sylius:
     configuration: Konfigūracija
     type: Tipas
   promotion_coupon:
+    code: Kodas
     create: Pridėti kuponą
     create_header: Sukurti naują kuponą
+    expires_at: Nustoja galioti
     generate: Generuoti kuponus
     generate_header: Kuponų generavimas
     index: Kuponų sąrašas
     index_header: Kuponai
-    no_results: Nėra kuponų.
     total_results:
       Total: '%total%'
     update_header: Kupono redagavimas
   promotion_rule:
     configuration: Konfigūracija
     type: Tipas
-  property:
-    add_choice: Pridėti pasirinkimą
-    create: Sukurti ypatybę
-    create_header: Nauja ypatybė
-    index_header: Produkto ypatybės
-    manage: Valdyti ypatybės
-    name: pavadinimas
-    no_results: Nėra ypatybių.
-    presentation: prezentacija
-    type: tipas
-    update_header: Ypatybės redagavimas
-    updated_at: paskutins atnaujinimas
-  prototype:
-    build: Sukurti prototipą
-    build_header: Produkto kūrimas iš prototipo
-    create: Sukurti prototipą
-    create_header: Naujas prototipas
-    index_header: Produkto prototipai
-    name: pavadinimas
-    no_results: Nėra prototipų.
-    options: parinktys
-    properties: ypatybės
-    update_header: Prototipo redagavimas
-    updated_at: paskutins atnaujinimas
   province:
     provinces: Provincijos
-  remember_me: Prisiminti mane?
+  redirect_route:
+    create: Sukurti nukreipimą
+    create_header: Nukreipimo kūrimas
+    id: ID
+    index_header: Nukreipimas
+    title: Pavadinimas
+    update_header: Nukreipimo redagavimas
+  remember_me: Prisiminti mane
+  report:
+    code: Kodas
+    create: Sukurti ataskaitą
+    create_header: Sukurti naują ataskaitą
+    description: Aprašymas
+    id: Id
+    index_header: Ataskaitos
+    manage: Valdyti
+    name: Pavadinimas
+    show_header: Ataskaitos duomenys
+    update_header: Redaguoti ataskaitą
+  role:
+    code: Kodas
+    create: Pridėti naują rolę
+    create_header: Nauja rolė
+    description: Aprašymas
+    id: ID
+    index_header: Rolės
+    name: Pavadinimas
+    update_header: Rolės redagavimas
+    updated_at: Paskutinis atnaujinimas
+  route:
+    create: Sukurti maršrutą
+    create_header: Maršruto kūrimas
+    id: ID
+    index_header: Maršrutai
+    name: Pavadinimas
+    page: Puslapis
+    title: Pavadinimas
+    update_header: Maršruto redagavimas
+    view: Peržiūrėti
   save_changes: Išsaugoti pakeitimus
   search: Ieškoti
+  security:
+    login:
+      button: Prisijungti
   settings:
     general_header: Bendrieji nustatymai
+    security_header: Saugos parametrai
     taxation_header: Apmokestinimo nustatymai
+  shipment:
+    created_at: Sukurta
+    id: ID
+    index_header: Pristatymai
+    inventory_state: Atsargų būklė
+    manage: Valdyti siuntas
+    method: Būdas
+    modified: Modifikuotas
+    name: Pavadinimas
+    order: Užsakymas
+    ship: Išsiųsti
+    show_header: Pristatymo detalės
+    sku: Kodas
+    state: Būsena
+    tracking_code: Sekimo kodas
+    update: Redaguoti
+    update_header: Pristatymo redagavimas
+    updated_at: Paskutinis atnaujinimas
   shipment_category:
     manage: Valdyti pristatymo kategorijas
   shipping_address: Pristatymo adresas
@@ -584,7 +848,6 @@ sylius:
     index_header: Pristatymo kategorijos
     manage: Valdyti pristatymo kategorijas
     name: Pavadinimas
-    no_results: Nėra pristatymo kategorijų.
     update_header: Pristatymo kategorijos redagavimas
     updated_at: Paskutinis atnaujinimas
   shipping_method:
@@ -592,28 +855,22 @@ sylius:
     category: Kategorija
     create: Sukurti pristatymo būdą
     create_header: Naujas pristatymo būdas
-    enabled: Įgalintas?
+    enabled: Įjungta
     id: ID
     index_header: Pristatymo būdai
     manage: Valdyti pristatymo būdus
     name: Pavadinimas
-    no_results: Nėra pristatymo būdų.
     show_header: Pristatymo būdo detalės
     update_header: Pristatymo būdo redagavimas
     updated_at: Paskutinis atnaujinimas
     zone: Zona
   shop_by: Parduotuvėje
-  show: detalės
   show_all: Rodyti viską
   show_deleted: Rodyti pašalintus
   stockable:
     index_header: 'Atsargos <small>čia galite peržiūrėti dabartinius atsargų lygius</small>'
-    name: pavadinimas
-    no_results: Nėra atsargų elementų.
-    on_hand: atsargų lygis
-    on_hold: sulaikytas
-    sku: kodas
-    updated_at: paskutins atnaujinimas
+    name: Pavadinimas
+    updated_at: Paskutinis atnaujinimas
   tax_category:
     create: Sukurti mokesčių kategoriją
     create_header: Nauja mokesčių kategorija
@@ -623,7 +880,6 @@ sylius:
     manage: Tvarkyti mokesčių kategorijas
     name: Pavadinimas
     no_description: Nėra aprašymo
-    no_results: Nėra mokesčių kategorijų.
     update_header: Mokesčių kategorijos redagavimas
     updated_at: Paskutinis atnaujinimas
   tax_rate:
@@ -632,11 +888,9 @@ sylius:
     category: Kategorija
     create: Sukurti mokesčio tarifą
     create_header: Naujas mokesčio tarifas
-    included_in_price: Įeina į kainą?
     index_header: Mokesčių tarifai
     manage: Tvarkyti mokesčių tarifus
     name: Pavadinimas
-    no_results: Nėra mokesčių tarifų.
     show_header: Mokesčių tarifo detalės
     update_header: Mokesčio tarifo atnaujinimas
     updated_at: Paskutinis atnaujinimas
@@ -647,7 +901,6 @@ sylius:
     image: Pasirinkite paveikslėlį
     name: Pavadinimas
     no_image: Šis taksonas neturi paveikslėlio
-    no_results: Nėra taksonų.
     product_index_header: 'Produktai klasifikuojami kaip "%name%"'
     update_header: Taksono redagavimas
   taxonomy:
@@ -658,35 +911,30 @@ sylius:
     manage: Valdyti taksonomijas
     name: Pavadinimas
     no_image: Ši taksonomija neturi paveikslėlio
-    no_results: Nėra taksonomijų.
     show_header: 'Taksonomija <small><strong>%name%</strong></small>'
     update_header: Taksonomijos redagavimas
   total_quantity: Bendras kiekis
+  ui:
+    change_password: Pakeisti savo slaptažodį
+    code: Kodas
+    email: Elektroninis paštas
+    login: Prisijungti
+    logout: Atsijungti
+    register: Užsiregistruoti
+    name: Pavadinimas
+    id: Id
   unknown: Nežinoma
   user:
-    billing_address: Mokėtojo adresas
-    create: sukurti vartotoją
     create_header: Naujas vartotojas
-    email: El. paštas
-    enabled: Patvirtintas?
-    filter:
-      all: Rodyti visus vartotojus
-      unconfirmed: Nepatvirtinti vartotojai
-    first_name: Vardas
     general_info: 'Vartotojo "%username%" bendra informacija'
     id: ID
+    impersonate: Prisijungti kaip šis vartotojas
     index_header: 'Vartotojai <small>visų registruotų vartotojų sąrašas</small>'
     last_login: Paskutinis prisijungimas
-    last_name: Pavardė
-    impersonate: Prisijungti kaip šis vartotojas
-    manage: valdyti vartotojus
-    no_results: Nėra rodytinų vartotojų.
-    order:
-      no_results: Šis vartotojas neturi užsakymų.
-    orders: Vartotojo užsakymai
     recent_header: Naujausi vartotojai
+    register:
+      button: Užsiregistruoti
     registration_date: Registracijos data
-    shipping_address: Pristatymo adresas
     show_header: Vartotojo duomenys
     update_header: Vartotojo redagavimas
     username: Vartotojo vardas
@@ -698,7 +946,6 @@ sylius:
     create_header: Naujas produkto variantas
     delete_image: Pašalinti paveikslėlį
     last_update: Paskutinis atnaujinimas
-    no_results: Nėra jokių variantų.
     options: Parinktys
     price: Kaina
     sku: Kodas
@@ -712,7 +959,7 @@ sylius:
     index_header: Zonos
     manage: Valdyti zonas
     name: Pavadinimas
-    no_results: Nėra zonų.
+    scope: Apimtis
     show_header: Zonos duomenys
     type: Tipas
     update_header: Zonos redagavimas

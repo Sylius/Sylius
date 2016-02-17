@@ -15,105 +15,88 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Pricing\Calculators;
 use Sylius\Component\Product\Model\Variant as BaseVariant;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
 
 /**
- * Sylius core product variant entity.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ProductVariant extends BaseVariant implements ProductVariantInterface
 {
     /**
-     * Variant SKU.
-     *
      * @var string
      */
     protected $sku;
 
     /**
-     * The variant price.
-     *
      * @var int
      */
     protected $price;
 
     /**
-     * The pricing calculator.
-     *
+     * @var int
+     */
+    protected $originalPrice;
+
+    /**
      * @var string
      */
     protected $pricingCalculator = Calculators::STANDARD;
 
     /**
-     * The pricing configuration.
-     *
      * @var array
      */
-    protected $pricingConfiguration = array();
+    protected $pricingConfiguration = [];
 
     /**
-     * On hold.
-     *
      * @var int
      */
     protected $onHold = 0;
 
     /**
-     * On hand stock.
-     *
      * @var int
      */
     protected $onHand = 0;
 
     /**
-     * Sold amount.
-     *
      * @var int
      */
     protected $sold = 0;
 
     /**
-     * Is variant available on demand?
-     *
      * @var bool
      */
     protected $availableOnDemand = true;
 
     /**
-     * Images.
-     *
      * @var Collection|ProductVariantImageInterface[]
      */
     protected $images;
 
     /**
-     * Weight.
-     *
      * @var float
      */
     protected $weight;
 
     /**
-     * Width.
-     *
      * @var float
      */
     protected $width;
 
     /**
-     * Height.
-     *
      * @var float
      */
     protected $height;
 
     /**
-     * Depth.
-     *
      * @var float
      */
     protected $depth;
+
+    /**
+     * @var TaxCategoryInterface
+     */
+    protected $taxCategory;
 
     /**
      * Override constructor to set on hand stock.
@@ -133,13 +116,29 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
             $string .= '(';
 
             foreach ($this->getOptions() as $option) {
-                $string .= $option->getOption()->getName() . ': ' . $option->getValue() . ', ';
+                $string .= $option->getOption()->getName().': '.$option->getValue().', ';
             }
 
-            $string = substr($string, 0, -2) . ')';
+            $string = substr($string, 0, -2).')';
         }
 
         return $string;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMetadataClassIdentifier()
+    {
+        return self::METADATA_CLASS_IDENTIFIER;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMetadataIdentifier()
+    {
+        return $this->getMetadataClassIdentifier().'-'.$this->getId();
     }
 
     /**
@@ -179,6 +178,25 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
         $this->price = $price;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOriginalPrice($originalPrice)
+    {
+        if (null !== $originalPrice && !is_int($originalPrice)) {
+            throw new \InvalidArgumentException('Original price must be an integer.');
+        }
+        $this->originalPrice = $originalPrice;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOriginalPrice()
+    {
+        return $this->originalPrice;
     }
 
     /**
@@ -278,9 +296,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      */
     public function setSold($sold)
     {
-        $this->sold = (int)$sold;
-
-        return $this;
+        $this->sold = (int) $sold;
     }
 
     /**
@@ -304,7 +320,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      */
     public function setAvailableOnDemand($availableOnDemand)
     {
-        $this->availableOnDemand = (bool)$availableOnDemand;
+        $this->availableOnDemand = (bool) $availableOnDemand;
 
         return $this;
     }
@@ -491,5 +507,29 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function getShippingVolume()
     {
         return $this->depth * $this->height * $this->width;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isPriceReduced()
+    {
+        return $this->originalPrice > $this->price;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTaxCategory()
+    {
+        return $this->taxCategory;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTaxCategory(TaxCategoryInterface $category = null)
+    {
+        $this->taxCategory = $category;
     }
 }

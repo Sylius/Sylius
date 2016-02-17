@@ -46,9 +46,9 @@ class CurrencyCodeChoiceType extends AbstractType
             $choices[$currency->getCode()] = sprintf('%s - %s', $currency->getCode(), $currency->getName());
         }
 
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'choices' => $choices,
-        ));
+        ]);
     }
 
     /**

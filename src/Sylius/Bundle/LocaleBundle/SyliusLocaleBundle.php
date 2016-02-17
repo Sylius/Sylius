@@ -13,6 +13,7 @@ namespace Sylius\Bundle\LocaleBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Locale\Model\LocaleInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
@@ -24,10 +25,10 @@ class SyliusLocaleBundle extends AbstractResourceBundle
      */
     public static function getSupportedDrivers()
     {
-        return array(
+        return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
             SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM,
-        );
+        ];
     }
 
     /**
@@ -35,9 +36,9 @@ class SyliusLocaleBundle extends AbstractResourceBundle
      */
     protected function getModelInterfaces()
     {
-        return array(
-            'Sylius\Component\Locale\Model\LocaleInterface' => 'sylius.model.locale.class',
-        );
+        return [
+            LocaleInterface::class => 'sylius.model.locale.class',
+        ];
     }
 
     /**

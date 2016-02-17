@@ -12,8 +12,9 @@
 namespace Sylius\Bundle\ContentBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Parameter;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -23,24 +24,25 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class SyliusContentExtension extends AbstractResourceExtension
 {
-    protected $configFiles = array();
-
     /**
      * {@inheritdoc}
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $this->configure(
-            $config,
-            new Configuration(),
-            $container,
-            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_FORMS
-        );
+        $config = $this->processConfiguration(new Configuration(), $config);
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+
+        $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
+
+        $configFiles = [
+            // ...
+        ];
+
+        foreach ($configFiles as $configFile) {
+            $loader->load($configFile);
+        }
 
         $imagineBlock = $container->getDefinition('sylius.form.type.imagine_block');
         $imagineBlock->addArgument(new Reference('liip_imagine.filter.configuration'));
-
-        $imagineBlock = $container->getDefinition('sylius.form.type.menu');
-        $imagineBlock->addArgument(new Parameter('cmf_menu.persistence.phpcr.menu_basepath'));
     }
 }

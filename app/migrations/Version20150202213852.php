@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sylius\Migrations;
 
 use Doctrine\DBAL\Migrations\AbstractMigration;
@@ -16,31 +25,27 @@ class Version20150202213852 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->connection->executeQuery('CREATE TABLE sylius_channel (id INT AUTO_INCREMENT NOT NULL, code VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, color VARCHAR(255) DEFAULT NULL, description LONGTEXT DEFAULT NULL, enabled TINYINT(1) NOT NULL, url VARCHAR(255) DEFAULT NULL, created_at DATETIME NOT NULL, updated_at DATETIME DEFAULT NULL, UNIQUE INDEX UNIQ_16C8119E77153098 (code), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
-        $this->connection->insert('sylius_channel', array(
-            'code'      => 'WEB',
-            'name'      => 'Default Web',
-            'color'     => 'green',
-            'enabled'   => true,
-            'created_at'    => 'NOW()',
-            'updated_at'    => 'NOW()'
-        ));
+        $this->connection->insert('sylius_channel', [
+            'code' => 'WEB',
+            'name' => 'Default Web',
+            'color' => 'green',
+            'enabled' => true,
+            'created_at' => 'NOW()',
+            'updated_at' => 'NOW()',
+        ]);
         $channelId = $this->connection->lastInsertId();
 
         $this->connection->executeQuery('CREATE TABLE sylius_product_channels (product_id INT NOT NULL, channel_id INT NOT NULL, INDEX IDX_F9EF269B4584665A (product_id), INDEX IDX_F9EF269B72F5A1AA (channel_id), PRIMARY KEY(product_id, channel_id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
         $this->connection->executeQuery("INSERT INTO sylius_product_channels (product_id, channel_id) SELECT id as product_id, {$channelId} as channel_id FROM sylius_product");
 
-
         $this->connection->executeQuery('CREATE TABLE sylius_promotion_channels (promotion_id INT NOT NULL, channel_id INT NOT NULL, INDEX IDX_1A044F64139DF194 (promotion_id), INDEX IDX_1A044F6472F5A1AA (channel_id), PRIMARY KEY(promotion_id, channel_id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
         $this->connection->executeQuery("INSERT INTO sylius_promotion_channels (promotion_id, channel_id) SELECT id as promotion_id, {$channelId} as channel_id FROM sylius_promotion");
-
 
         $this->connection->executeQuery('CREATE TABLE sylius_channel_currencies (channel_id INT NOT NULL, currency_id INT NOT NULL, INDEX IDX_AE491F9372F5A1AA (channel_id), INDEX IDX_AE491F9338248176 (currency_id), PRIMARY KEY(channel_id, currency_id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
         $this->connection->executeQuery("INSERT INTO sylius_channel_currencies (currency_id, channel_id) SELECT id as currency_id, {$channelId} as channel_id FROM sylius_currency");
 
-
         $this->connection->executeQuery('CREATE TABLE sylius_channel_locales (channel_id INT NOT NULL, locale_id INT NOT NULL, INDEX IDX_786B7A8472F5A1AA (channel_id), INDEX IDX_786B7A84E559DFD1 (locale_id), PRIMARY KEY(channel_id, locale_id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
         $this->connection->executeQuery("INSERT INTO sylius_channel_locales (locale_id, channel_id) SELECT id as locale_id, {$channelId} as channel_id FROM sylius_locale");
-
 
         $this->connection->executeQuery('CREATE TABLE sylius_channel_shipping_methods (channel_id INT NOT NULL, shipping_method_id INT NOT NULL, INDEX IDX_6858B18E72F5A1AA (channel_id), INDEX IDX_6858B18E5F7D6850 (shipping_method_id), PRIMARY KEY(channel_id, shipping_method_id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
         $this->connection->executeQuery("INSERT INTO sylius_channel_shipping_methods (shipping_method_id, channel_id) SELECT id as shipping_method_id, {$channelId} as channel_id FROM sylius_shipping_method");
@@ -77,7 +82,7 @@ class Version20150202213852 extends AbstractMigration
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
-        
+
         $this->addSql('ALTER TABLE sylius_product_channels DROP FOREIGN KEY FK_F9EF269B72F5A1AA');
         $this->addSql('ALTER TABLE sylius_promotion_channels DROP FOREIGN KEY FK_1A044F6472F5A1AA');
         $this->addSql('ALTER TABLE sylius_order DROP FOREIGN KEY FK_6196A1F972F5A1AA');

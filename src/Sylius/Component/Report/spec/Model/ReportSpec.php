@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Report\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Report\Model\ReportInterface;
 
 /**
  * @author Łukasz Chruściel <lchrusciel@gmail.com>
@@ -26,7 +27,13 @@ class ReportSpec extends ObjectBehavior
 
     public function it_implements_report_interface()
     {
-        $this->shouldImplement('Sylius\Component\Report\Model\ReportInterface');
+        $this->shouldImplement(ReportInterface::class);
+    }
+
+    public function it_has_mutable_code()
+    {
+        $this->setCode('R1');
+        $this->getCode()->shouldReturn('R1');
     }
 
     public function it_has_name()
@@ -49,8 +56,8 @@ class ReportSpec extends ObjectBehavior
 
     public function it_has_data_fetcher_configuration()
     {
-        $this->setDataFetcherConfiguration(array());
-        $this->getDataFetcherConfiguration()->shouldReturn(array());
+        $this->setDataFetcherConfiguration([]);
+        $this->getDataFetcherConfiguration()->shouldReturn([]);
     }
 
     public function it_has_renderer()
@@ -61,7 +68,7 @@ class ReportSpec extends ObjectBehavior
 
     public function it_has_renderer_configuration()
     {
-        $this->setRendererConfiguration(array());
-        $this->getRendererConfiguration()->shouldReturn(array());
+        $this->setRendererConfiguration([]);
+        $this->getRendererConfiguration()->shouldReturn([]);
     }
 }

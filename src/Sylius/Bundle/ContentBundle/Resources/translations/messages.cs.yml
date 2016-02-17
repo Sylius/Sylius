@@ -1,19 +1,27 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-auto: auto
-route: cesta
 sylius:
   form:
     action_block:
       action_name: Název akce
       id: ID
+      publish_end_date: Publikovat k datu ukončení
+      publish_start_date: Publikovat datum zahájení
+      publishable: Publikováno
     imagine_block:
-      parent: Rodič
+      filter: Filtr
+      image: Obrázek
       internal_name: Interní název
-      slideshow_small: Prezentace Velká (plná šíře)
+      label: Popisek
+      link_url: URL odkazu
+      parent: Rodič
+      publish_end_date: Publikovat k datu ukončení
+      publish_start_date: Publikovat datum zahájení
+      publishable: Publikováno
+      slideshow_small: Malá prezentace (postranní)
       slideshow_medium: Prezentace střední (obsah)
-      slideshow_large: Prezentace malá (postranní)
+      slideshow_large: Velká prezentace (plná šíře)
     menu:
       childrens: Potomci
       display: Zobrazit
@@ -21,12 +29,18 @@ sylius:
       label: Popisek
       name: Jméno
       parent: Rodič
+      publish_end_date: Publikovat k datu ukončení
+      publish_start_date: Publikovat datum zahájení
+      publishable: Publikováno
       route: Cesta
       uri: URI
     menu_block:
       body: Tělo
       id: ID
       name: Jméno
+      publish_end_date: Publikovat k datu ukončení
+      publish_start_date: Publikovat datum zahájení
+      publishable: Publikováno
     menu_node_block:
       content: Obsah
       display: Zobrazit
@@ -36,7 +50,7 @@ sylius:
       link_type: Typ vazby
       publish_end_date: Publikovat k datu ukončení
       publish_start_date: Publikovat datum zahájení
-      publishable: Publikovatelný
+      publishable: Publikováno
       route: Cesta
       uri: URI
     redirect_route:
@@ -47,6 +61,9 @@ sylius:
     reference_block:
       body: Tělo
       id: ID
+      publish_end_date: Publikovat k datu ukončení
+      publish_start_date: Publikovat datum zahájení
+      publishable: Publikováno
       title: Název
     route:
       content: Obsah
@@ -56,11 +73,18 @@ sylius:
       body: Tělo
       internal_name: Interní název
       parent: Rodič
+      publish_end_date: Publikovat k datu ukončení
+      publish_start_date: Publikovat datum zahájení
+      publishable: Publikováno
       title: Název
     slideshow_block:
+      add_slide: Přidat snímek
       childrens: Potomci
       internal_name: Interní název
       parent: Rodič
+      publish_end_date: Publikovat k datu ukončení
+      publish_start_date: Publikovat datum zahájení
+      publishable: Publikováno
       title: Název
     static_content:
       body: Tělo
@@ -70,10 +94,13 @@ sylius:
       parent: Rodič
       publish_end_date: Publikovat k datu ukončení
       publish_start_date: Publikovat datum zahájení
-      publishable: Publikovatelný
+      publishable: Publikováno
       routes: Cesty
       title: Název
     string_block:
       body: Tělo
       id: ID
       name: Jméno
+      publish_end_date: Publikovat k datu ukončení
+      publish_start_date: Publikovat datum zahájení
+      publishable: Publikováno

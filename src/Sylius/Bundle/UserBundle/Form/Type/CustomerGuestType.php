@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\UserBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Bundle\UserBundle\Form\EventListener\CustomerRegistrationFormListener;
+use Sylius\Bundle\UserBundle\Form\EventSubscriber\CustomerRegistrationFormSubscriber;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -42,13 +42,13 @@ class CustomerGuestType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options = array())
+    public function buildForm(FormBuilderInterface $builder, array $options = [])
     {
         $builder
-            ->add('email', 'email', array(
+            ->add('email', 'email', [
                 'label' => 'sylius.form.customer.email',
-            ))
-            ->addEventSubscriber(new CustomerRegistrationFormListener($this->customerRepository))
+            ])
+            ->addEventSubscriber(new CustomerRegistrationFormSubscriber($this->customerRepository))
             ->setDataLocked(false)
         ;
     }

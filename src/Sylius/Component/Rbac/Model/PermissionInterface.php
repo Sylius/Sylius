@@ -11,6 +11,9 @@
 
 namespace Sylius\Component\Rbac\Model;
 
+use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\CodeAwareInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
@@ -18,18 +21,8 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface PermissionInterface extends TimestampableInterface
+interface PermissionInterface extends CodeAwareInterface, TimestampableInterface, ResourceInterface
 {
-    /**
-     * @return string
-     */
-    public function getCode();
-
-    /**
-     * @param string $code
-     */
-    public function setCode($code);
-
     /**
      * @return string
      */
@@ -51,12 +44,12 @@ interface PermissionInterface extends TimestampableInterface
     public function setParent(PermissionInterface $permission);
 
     /**
-     * @return Collection
+     * @return Collection|PermissionInterface[]
      */
     public function getChildren();
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function hasChildren();
 
@@ -73,7 +66,7 @@ interface PermissionInterface extends TimestampableInterface
     /**
      * @param PermissionInterface $permission
      *
-     * @return boolean
+     * @return bool
      */
     public function hasChild(PermissionInterface $permission);
 

@@ -7,3 +7,9 @@ sylius:
       price: Prezzo
       calculator: Stabilire prezzi di vendita
       configuration: Configurazione
+    pricing:
+      volume_based:
+        label: Configurazione dei prezzi
+        min: Volume min
+        max: Volume max
+        price: Prezzo

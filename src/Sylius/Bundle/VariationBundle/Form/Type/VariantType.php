@@ -44,10 +44,10 @@ class VariantType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('presentation', 'text', array(
+            ->add('presentation', 'text', [
                 'required' => false,
-                'label'    => 'sylius.form.variant.presentation',
-            ))
+                'label' => 'sylius.form.variant.presentation',
+            ])
         ;
 
         if (!$options['master']) {
@@ -63,9 +63,9 @@ class VariantType extends AbstractResourceType
         parent::configureOptions($resolver);
 
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'master' => false,
-            ))
+            ])
         ;
     }
 

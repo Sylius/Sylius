@@ -14,9 +14,10 @@ sylius:
       amount: Platební částka
       method: Způsob platby
       state:
-        0: Stav platby
+        header: Stav platby
         checkout: Objednat
         completed: Dokončeno
+        authorized: Autorizováno
         failed: Neúspěšné
         new: Nový
         pending: Čekající

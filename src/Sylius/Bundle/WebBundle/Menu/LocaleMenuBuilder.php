@@ -14,10 +14,10 @@ namespace Sylius\Bundle\WebBundle\Menu;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
-use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface;
+use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface as RbacAuthorizationCheckerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Intl\Intl;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
@@ -33,21 +33,22 @@ class LocaleMenuBuilder extends MenuBuilder
     protected $localeProvider;
 
     /**
-     * @param FactoryInterface         $factory
-     * @param SecurityContextInterface $securityContext
-     * @param TranslatorInterface      $translator
+     * @param FactoryInterface $factory
+     * @param AuthorizationCheckerInterface $authorizationChecker
+     * @param TranslatorInterface $translator
      * @param EventDispatcherInterface $eventDispatcher
-     * @param LocaleProviderInterface  $localeProvider
+     * @param LocaleProviderInterface $localeProvider
+     * @param RbacAuthorizationCheckerInterface $rbacAuthorizationChecker
      */
     public function __construct(
-        FactoryInterface          $factory,
-        SecurityContextInterface  $securityContext,
-        TranslatorInterface       $translator,
-        EventDispatcherInterface  $eventDispatcher,
-        LocaleProviderInterface   $localeProvider,
-        AuthorizationCheckerInterface $authorizationChecker
+        FactoryInterface $factory,
+        AuthorizationCheckerInterface $authorizationChecker,
+        TranslatorInterface $translator,
+        EventDispatcherInterface $eventDispatcher,
+        LocaleProviderInterface $localeProvider,
+        RbacAuthorizationCheckerInterface $rbacAuthorizationChecker
     ) {
-        parent::__construct($factory, $securityContext, $translator, $eventDispatcher, $authorizationChecker);
+        parent::__construct($factory, $authorizationChecker, $translator, $eventDispatcher, $rbacAuthorizationChecker);
 
         $this->localeProvider = $localeProvider;
     }
@@ -60,11 +61,11 @@ class LocaleMenuBuilder extends MenuBuilder
     public function createMenu()
     {
         $locales = $this->localeProvider->getAvailableLocales();
-        $menu = $this->factory->createItem('root', array(
-            'childrenAttributes' => array(
-                'class' => 'nav nav-pills'
-            )
-        ));
+        $menu = $this->factory->createItem('root', [
+            'childrenAttributes' => [
+                'class' => 'nav nav-pills',
+            ],
+        ]);
 
         if (1 === count($locales)) {
             $menu->setDisplay(false);
@@ -73,10 +74,10 @@ class LocaleMenuBuilder extends MenuBuilder
         }
 
         foreach ($locales as $locale) {
-            $menu->addChild($locale, array(
+            $menu->addChild($locale, [
                 'route' => 'sylius_locale_change',
-                'routeParameters' => array('locale' => $locale),
-            ))->setLabel(Intl::getLocaleBundle()->getLocaleName($locale));
+                'routeParameters' => ['locale' => $locale],
+            ])->setLabel(Intl::getLocaleBundle()->getLocaleName($locale));
         }
 
         return $menu;

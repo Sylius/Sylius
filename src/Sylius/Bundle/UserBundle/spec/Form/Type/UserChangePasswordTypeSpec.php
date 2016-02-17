@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\UserBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -22,7 +23,7 @@ class UserChangePasswordTypeSpec extends ObjectBehavior
 {
     function it_extends_abstract_type()
     {
-        $this->shouldHaveType('Symfony\Component\Form\AbstractType');
+        $this->shouldHaveType(AbstractType::class);
     }
 
     function it_is_initializable()
@@ -40,6 +41,6 @@ class UserChangePasswordTypeSpec extends ObjectBehavior
         $builder->add('currentPassword', 'password', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('newPassword', 'repeated', Argument::any())->shouldBeCalled()->willReturn($builder);
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 }

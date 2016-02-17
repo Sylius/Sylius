@@ -12,26 +12,17 @@
 namespace Sylius\Bundle\TranslationBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Translation\Model\TranslatableInterface;
-use Sylius\Component\Translation\Provider\LocaleProviderInterface;
 use Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface;
 
 /**
- * Doctrine ORM driver translatable entity repository.
- *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class TranslatableResourceRepository extends EntityRepository implements TranslatableResourceRepositoryInterface
 {
     /**
-     * @var LocaleProviderInterface
-     */
-    protected $localeProvider;
-
-    /**
      * @var array
      */
-    protected $translatableFields = array();
+    protected $translatableFields = [];
 
     /**
      * {@inheritdoc}
@@ -61,33 +52,6 @@ class TranslatableResourceRepository extends EntityRepository implements Transla
         ;
 
         return $queryBuilder;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createNew()
-    {
-        $resource = parent::createNew();
-
-        if (!$resource instanceof TranslatableInterface) {
-            throw new \InvalidArgumentException('Resource must implement TranslatableInterface.');
-        }
-
-        $resource->setCurrentLocale($this->localeProvider->getCurrentLocale());
-        $resource->setFallbackLocale($this->localeProvider->getFallbackLocale());
-
-        return $resource;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setLocaleProvider(LocaleProviderInterface $provider)
-    {
-        $this->localeProvider = $provider;
-
-        return $this;
     }
 
     /**

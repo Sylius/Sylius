@@ -6,6 +6,7 @@ sylius:
             not_blank: Please enter city.
         country:
             not_blank: Please select country.
+            disabled: Chosen country is disabled. Please choose a different one.
         first_name:
             max_length: First name must not be longer than 255 characters|First name must not be longer than 255 characters.
             min_length: First name must be at least 2 characters long|First name must be at least 2 characters long.
@@ -26,19 +27,30 @@ sylius:
             not_blank: Please enter street.
         not_shippable: This address is not a valid shipping destination.
     country:
-        iso_name:
+        code:
             not_blank: Please enter country ISO code.
-        name:
-            max_length: Country Name must not be longer than 255 characters|Country Name must not be longer than 255 characters.
-            not_blank: Please enter country name.
+            unique: Country ISO code must be unique.
     province:
+        code:
+            min_length: Province code must be at least 5 characters long|Province code must be at least 5 characters long.
+            not_blank: Please enter province code.
+            regex: Province code should have the following format XX-XX (e.g. US-FL).
+            unique: Province code must be unique.
         name:
             max_length: Province name must not be longer than 255 characters|Province name must not be longer than 255 characters.
             min_length: Province name must be at least 2 characters long|Province name must be at least 2 characters long.
             not_blank: Please enter province name.
+            unique: Province name must be unique.
     zone:
+        code:
+            not_blank: Please enter zone code.
+            unique: Zone code must be unique.
         members:
             min_count: Please add at least {{ limit }} zone member.
         name:
             max_length: Zone name must not be longer than 255 characters|Zone name must not be longer than 255 characters.
             not_blank: Please enter zone name.
+    zone_member:
+        code:
+            not_blank: Please choose a zone member.
+        unique: Chosen zone member is already in this zone.

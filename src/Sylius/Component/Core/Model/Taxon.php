@@ -12,10 +12,14 @@
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Taxonomy\Model\Taxon as BaseTaxon;
+use Sylius\Component\Taxonomy\Model\TaxonTranslation;
 
 class Taxon extends BaseTaxon implements ImageInterface, TaxonInterface
 {
+    use TimestampableTrait;
+
     /**
      * @var \SplFileInfo
      */
@@ -25,16 +29,6 @@ class Taxon extends BaseTaxon implements ImageInterface, TaxonInterface
      * @var string
      */
     protected $path;
-
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
 
     /**
      * @var ArrayCollection
@@ -100,38 +94,6 @@ class Taxon extends BaseTaxon implements ImageInterface, TaxonInterface
     /**
      * {@inheritdoc}
      */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getProducts()
     {
         return $this->products;
@@ -150,6 +112,6 @@ class Taxon extends BaseTaxon implements ImageInterface, TaxonInterface
      */
     public static function getTranslationClass()
     {
-        return 'Sylius\Component\Taxonomy\Model\TaxonTranslation';
+        return TaxonTranslation::class;
     }
 }

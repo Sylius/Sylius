@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\TaxonomyBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -23,7 +24,7 @@ class TaxonomyTranslationTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('TaxonomyTranslation', array('sylius'));
+        $this->beConstructedWith('TaxonomyTranslation', ['sylius']);
     }
 
     function it_is_initializable()
@@ -33,7 +34,7 @@ class TaxonomyTranslationTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_builds_form_with_proper_fields(FormBuilder $builder)
@@ -43,16 +44,16 @@ class TaxonomyTranslationTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_defines_data_class(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
-                'data_class'        => 'TaxonomyTranslation',
-                'validation_groups' => array('sylius'),
-            ))
+            ->setDefaults([
+                'data_class' => 'TaxonomyTranslation',
+                'validation_groups' => ['sylius'],
+            ])
             ->shouldBeCalled()
         ;
 

@@ -25,7 +25,7 @@ class PaymentContext extends DefaultContext
     public function thereArePaymentMethods(TableNode $table)
     {
         $manager = $this->getEntityManager();
-        $repository = $this->getRepository('payment_method');
+        $factory = $this->getFactory('payment_method');
 
         foreach ($table->getHash() as $data) {
             if (!isset($data['calculator'], $data['calculator_configuration'])) {
@@ -34,15 +34,34 @@ class PaymentContext extends DefaultContext
             }
 
             /* @var $method PaymentMethodInterface */
-            $method = $repository->createNew();
+            $method = $factory->createNew();
+            $method->setCode(trim($data['code']));
             $method->setName(trim($data['name']));
             $method->setGateway(trim($data['gateway']));
-            $method->setFeeCalculator($data['calculator']);
-            $method->setFeeCalculatorConfiguration($this->getConfiguration($data['calculator_configuration']));
 
             $method->setEnabled(isset($data['enabled']) ? 'yes' === trim($data['enabled']) : true);
 
             $manager->persist($method);
+        }
+
+        $manager->flush();
+    }
+
+    /**
+     * @Given the payment method translations exist:
+     */
+    public function thePaymentMethodTranslationsExist(TableNode $table)
+    {
+        $manager = $this->getEntityManager();
+
+        foreach ($table->getHash() as $data) {
+            $paymentMethodTranslation = $this->findOneByName('payment_method_translation', $data['payment method']);
+
+            $paymentMethod = $paymentMethodTranslation->getTranslatable();
+            $paymentMethod->setCurrentLocale($data['locale']);
+            $paymentMethod->setFallbackLocale($data['locale']);
+
+            $paymentMethod->setName($data['name']);
         }
 
         $manager->flush();

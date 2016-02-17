@@ -27,7 +27,7 @@ class CurrencyContext extends BaseCurrencyContext
 {
     const STORAGE_KEY = '_sylius_currency_%s';
 
-    protected $securityContext;
+    protected $customerContext;
     protected $settingsManager;
     protected $customerManager;
     protected $channelContext;
@@ -96,6 +96,7 @@ class CurrencyContext extends BaseCurrencyContext
      * Get storage key for channel with given code.
      *
      * @param string $channelCode
+     *
      * @return string
      */
     private function getStorageKey($channelCode)

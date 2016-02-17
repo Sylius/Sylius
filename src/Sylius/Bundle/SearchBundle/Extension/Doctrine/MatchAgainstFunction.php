@@ -26,7 +26,7 @@ class MatchAgainstFunction extends FunctionNode
     /**
      * @var array
      */
-    protected $pathExp = array();
+    protected $pathExp = [];
 
     /**
      * @var null
@@ -53,7 +53,7 @@ class MatchAgainstFunction extends FunctionNode
         $parser->match(Lexer::T_OPEN_PARENTHESIS);
 
         // first Path Expression is mandatory
-        $this->pathExp = array();
+        $this->pathExp = [];
         $this->pathExp[] = $parser->StateFieldPathExpression();
 
         // Subsequent Path Expressions are optional
@@ -94,14 +94,14 @@ class MatchAgainstFunction extends FunctionNode
      */
     public function getSql(SqlWalker $walker)
     {
-        $fields = array();
+        $fields = [];
         foreach ($this->pathExp as $pathExp) {
             $fields[] = $pathExp->dispatch($walker);
         }
 
         $against = $walker->walkStringPrimary($this->against)
-            . ($this->booleanMode ? ' IN BOOLEAN MODE' : '')
-            . ($this->queryExpansion ? ' WITH QUERY EXPANSION' : '');
+            .($this->booleanMode ? ' IN BOOLEAN MODE' : '')
+            .($this->queryExpansion ? ' WITH QUERY EXPANSION' : '');
 
         return sprintf('MATCH (%s) AGAINST (%s)', implode(', ', $fields), $against);
     }

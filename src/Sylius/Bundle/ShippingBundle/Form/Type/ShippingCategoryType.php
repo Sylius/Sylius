@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -27,13 +28,14 @@ class ShippingCategoryType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', array(
+            ->addEventSubscriber(new AddCodeFormSubscriber())
+            ->add('name', 'text', [
                 'label' => 'sylius.form.shipping_category.name',
-            ))
-            ->add('description', 'textarea', array(
+            ])
+            ->add('description', 'textarea', [
                 'required' => false,
                 'label' => 'sylius.form.shipping_category.description',
-            ))
+            ])
         ;
     }
 

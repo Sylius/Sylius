@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\ShippingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Test\FormBuilderInterface;
 
 /**
@@ -22,7 +23,7 @@ class ShipmentTrackingTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('ShipmentTracking', array('sylius'));
+        $this->beConstructedWith('ShipmentTracking', ['sylius']);
     }
 
     function it_is_initializable()
@@ -32,16 +33,16 @@ class ShipmentTrackingTypeSpec extends ObjectBehavior
 
     function it_is_a_form()
     {
-        $this->shouldHaveType('Symfony\Component\Form\AbstractType');
+        $this->shouldHaveType(AbstractType::class);
     }
 
     function it_builds_a_form(FormBuilderInterface $builder)
     {
         $builder->add('tracking', 'text', Argument::type('array'))->shouldBeCalled()->willreturn($builder);
 
-        $this->buildForm($builder, array(
-            'multiple' => true
-        ));
+        $this->buildForm($builder, [
+            'multiple' => true,
+        ]);
     }
 
     function it_has_a_name()

@@ -2,24 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  group:
-    name:
-      max: 'Groep naam mag niet langer zijn dan {{ limit }} tekens.'
-      min: 'Groep naam moet minstens {{ limit }} tekens lang zijn.'
-      not_blank: Vul een groep naam in.
+  checkout:
+    shipping_method:
+      not_blank: Gelieve een verzendmethode te kiezen.
   locale:
     code:
       not_blank: Voer een locatie code in.
       unique: Deze locatie bestaat al.
-  user:
-    first_name:
-      max: 'Voornaam mag niet langer zijn dan {{ limit }} tekens.'
-      min: 'Voornaam moet minstens {{ limit }} tekens lang zijn.'
-      not_blank: Vul uw voornaam in.
-    last_name:
-      max: 'Achternaam mag niet langer zijn dan {{ limit }} tekens.'
-      min: 'Achternaam moet minstens {{ limit }} tekens lang zijn.'
-      not_blank: Vul uw voornaam in.
   product_variant:
     onHand:
       min: 'Verkoopbare voorraad moet groter zijn dan {{ limit }}.'
@@ -27,11 +16,8 @@ sylius:
     price:
       min: Prijs mag niet negatief zijn.
       not_blank: Voer de prijs in.
-sylius_shipping:
-  method:
-    zone:
-      not_blank: Voer een verzendmethode zone in.
-sylius_taxation:
-  rate:
-    zone:
-      not_blank: Voer een zone voor het belastingtarief in.
+    original_price:
+      min: De originele prijs mag niet negatief zijn.
+  product_translation:
+    short_description:
+      max: 'Korte omschrijving mag niet langer zijn dan {{ limit }} tekens bevatten.'

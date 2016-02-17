@@ -15,6 +15,9 @@ sylius:
       taxonomy_configuration:
         taxons: Taxonok
         exclude: Kivétel
+      contains_product_configuration:
+        variants: Termékek
+        exclude: Kivétel
       item_count_configuration:
         count: Mennyiség
         equal: Egyenlő
@@ -23,26 +26,18 @@ sylius:
         equal: Egyenlő
       nth_order_configuration:
         nth: N-edik
-      user_loyality_configuration:
-        time: Idő
-        unit:
-          days: Nap
-          weeks: Hét
-          months: Hónap
-          years: Év
-          0: Egység
-        after: A felhasználó ezután lett létrehozva
       shipping_country_configuration:
         country: Ország
       type: Típus
     coupon:
-      code: Kód
       usage_limit: Felhasználhatóság korlátozása
     coupon_generate_instruction:
       amount: Összeg
       usage_limit: Felhasználhatóság korlátozása
     promotion:
       actions: Műveletek
+      add_action: Művelet hozzáadása
+      add_rule: Szabály hozzáadása
       coupon_based: Kupon alapján
       description: Leírás
       ends_at: Végződik

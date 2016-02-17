@@ -40,7 +40,7 @@ class ImageUploadListenerSpec extends ObjectBehavior
     ) {
         $event->getSubject()->willReturn($product);
         $product->getMasterVariant()->willReturn($variant);
-        $variant->getImages()->willReturn(array($image));
+        $variant->getImages()->willReturn([$image]);
         $uploader->upload($image)->shouldBeCalled();
         $image->getPath()->willReturn('some_path');
 
@@ -66,7 +66,7 @@ class ImageUploadListenerSpec extends ObjectBehavior
         $event->getSubject()->willReturn($uploader);
 
         $this
-            ->shouldThrow('InvalidArgumentException')
+            ->shouldThrow(\InvalidArgumentException::class)
             ->duringUploadProductImage($event)
         ;
     }

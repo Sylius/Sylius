@@ -13,7 +13,9 @@ namespace spec\Sylius\Bundle\VariationBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -24,7 +26,7 @@ class OptionTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Option', array(), 'server');
+        $this->beConstructedWith('Option', [], 'server');
     }
 
     function it_is_initializable()
@@ -34,36 +36,45 @@ class OptionTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
             ->add('name', 'text', Argument::any())
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('translations', 'a2lix_translationsForms', Argument::any())
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('values', 'collection', Argument::any())
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $builder
+            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+
+        $this->buildForm($builder, []);
     }
 
     function it_defines_assigned_data_class_and_validation_groups(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'data_class' => 'Option',
-                'validation_groups' => array()
-            ))
+                'validation_groups' => [],
+            ])
             ->shouldBeCalled();
 
         $this->configureOptions($resolver);

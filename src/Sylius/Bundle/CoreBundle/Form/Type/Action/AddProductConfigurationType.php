@@ -14,27 +14,24 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Action;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * Free product configuration form.
- *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
 class AddProductConfigurationType extends AbstractType
 {
-    protected $validationGroups;
-
     /**
      * @var ProductVariantRepositoryInterface
      */
     protected $variantRepository;
 
-    public function __construct(array $validationGroups, ProductVariantRepositoryInterface $variantRepository)
+    /**
+     * @param ProductVariantRepositoryInterface $variantRepository
+     */
+    public function __construct(ProductVariantRepositoryInterface $variantRepository)
     {
-        $this->validationGroups  = $validationGroups;
         $this->variantRepository = $variantRepository;
     }
 
@@ -43,48 +40,40 @@ class AddProductConfigurationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $variantRepository = $this->variantRepository;
-
         $builder
-            ->add('variant', 'sylius_entity_to_identifier', array(
-                'label'         => 'sylius.form.action.add_product_configuration.variant',
-                'class'         => $this->variantRepository->getClassName(),
-                'query_builder' => function () use ($variantRepository) {
-                    return $variantRepository->getFormQueryBuilder();
+            ->add('variant', 'sylius_entity_to_identifier', [
+                'label' => 'sylius.form.action.add_product_configuration.variant',
+                'class' => $this->variantRepository->getClassName(),
+                'query_builder' => function () {
+                    return $this->variantRepository->getFormQueryBuilder();
                 },
-                'constraints'   => array(
+                'constraints' => [
                     new NotBlank(),
-                    new Type(array('type' => 'numeric')),
-                )
-            ))
-            ->add('quantity', 'integer', array(
+                    new Type(['type' => 'numeric']),
+                ],
+            ])
+            ->add('quantity', 'integer', [
                 'label' => 'sylius.form.action.add_product_configuration.quantity',
-                'empty_data'  => 1,
-                'constraints' => array(
+                'empty_data' => 1,
+                'constraints' => [
                     new NotBlank(),
-                    new Type(array('type' => 'numeric')),
-                )
-            ))
-            ->add('price', 'sylius_money', array(
+                    new Type(['type' => 'numeric']),
+                ],
+            ])
+            ->add('price', 'sylius_money', [
                 'label' => 'sylius.form.action.add_product_configuration.price',
-                'empty_data'  => 0,
-                'constraints' => array(
+                'empty_data' => 0,
+                'constraints' => [
                     new NotBlank(),
-                    new Type(array('type' => 'numeric')),
-                )
-            ))
+                    new Type(['type' => 'numeric']),
+                ],
+            ])
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'validation_groups' => $this->validationGroups,
-            ))
-        ;
-    }
-
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sylius_promotion_action_add_product_configuration';

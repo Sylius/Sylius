@@ -4,16 +4,16 @@
 sylius:
   account:
     home:
-      email: ""
-      id: ""
+      email: Ηλεκτρονικό ταχυδρομείο
     order:
-      number: ""
-      payment_mode: ""
+      number: Αριθμός
       shipment:
         pending: Σε εκκρεμότητα
-      shipment_mode: ""
-      state: ""
+      state: Νομός
   add_to_cart: Προσθήκη στο καλάθι
+  association_type:
+    name: Ονομασία
+    create: Δημιουργία
   address:
     city: Πόλη
     country: Χώρα
@@ -27,37 +27,52 @@ sylius:
     info: Πληροφορίες
     success: Επιτυχία
     warning: Προειδοποίηση
+  archetype:
+    name: Ονομασία
+    options: Επιλογές
+    updated_at: Τροποποιήθηκε την
   backend:
     alert:
       info: Πληροφορίες
-    quick_links:
-      users: Χρήστες
   block:
-    id: ID
-    title: Τίτλος
+    imagine:
+      title: Τίτλος
+      updated_at: Τροποποιήθηκε την
+    index_header: Μπλοκ
+    simple:
+      title: Τίτλος
+      updated_at: Τροποποιήθηκε την
+    slideshow:
+      title: Τίτλος
+      updated_at: Τροποποιήθηκε την
+    string:
+      title: Τίτλος
+      updated_at: Τροποποιήθηκε την
   breadcrumb:
+    block:
+      index: Μπλοκ
     configuration: Παραμετροποίηση
+    content: Περιεχόμενο
     country:
       index: Χώρες
-    customers: Πελάτες
     group:
       index: Ομάδες
     option:
       index: Επιλογές
     order:
       index: Παραγγελίες
+    page:
+      index: Σελίδες
     payment:
       index: Πληρωμές
     product:
       index: Προϊόντα
     promotion:
       index: Προσφορές
-    property:
-      index: Ιδιότητες
+    role:
+      index: Ρόλοι
     shipment:
       index: Αποστολές
-    user:
-      index: Χρήστες
     zone:
       index: Ζώνες
   cancel: Άκυρο
@@ -74,6 +89,13 @@ sylius:
       unit_price: Τιμή
     summary_header: Σύνοψη καλαθιού
     total_items: '1 στοιχείο|%count% στοιχεία'
+  channel:
+    code: Κώδικος
+    currency_default: Προεπιλεγμένο νόμισμα
+    enabled: Ενεργοποιημένο
+    id: ID
+    name: Ονομασία
+    updated_at: Τροποποιήθηκε την
   checkout:
     back: Επιστροφή
     finalize:
@@ -119,24 +141,46 @@ sylius:
       register: Καταχώρηση
     shipping:
       header: Τρόπος αποστολής
+  contact_request:
+    email: Ηλεκτρονικό ταχυδρομείο
+    firstName: Όνομα
+    id: ID
+    lastName: Επώνυμο
+    updated_at: Τροποποιήθηκε την
+  contact_topic:
+    id: ID
+    title: Τίτλος
+    updated_at: Τροποποιήθηκε την
   country:
     add_province: Προσθήκη επαρχίας
     create: Δημιουργία χώρας
     create_header: Νέα χώρα
+    enabled: Ενεργοποιημένο
     id: ID
     index_header: Χώρες
-    iso_name: Όνομα ISO
     manage: Διαχείριση χωρών
     name: Ονομασία
-    no_results: Δεν έχει ρυθμιστεί κάποια χώρα
     show_header: Λεπτομέρειες χώρας
     update_header: Επεξεργασία χώρας
   create: Δημιουργία
-  delete: διαγραφή
-  edit: επεξεργασία
-  email: E-mail
-  exchange_rate:
+  currency:
+    code: Κώδικος
+    enabled: Ενεργοποιημένο
     id: ID
+    name: Ονομασία
+    updated_at: Τροποποιήθηκε την
+  customer:
+    billing_address: Διεύθυνση τιμολόγησης
+    email: Ηλεκτρονικό ταχυδρομείο
+    first_name: Όνομα
+    groups: Ομάδες
+    id: ID
+    last_name: Επώνυμο
+    shipping_address: Διεύθυνση αποστολής
+  email:
+    code: Κώδικος
+    enabled: Ενεργοποιημένο
+    updated_at: Τροποποιήθηκε την
   filter: Φίλτρο
   form:
     choose_file: Επιλογή αρχείου
@@ -163,28 +207,41 @@ sylius:
     created_at: Δημιουργήθηκε
     inventory_state: Κατάσταση απογραφής
     name: Ονομασία
-    no_results: Δεν υπάρχουν μονάδες στην απογραφή για να εμφανιστούν.
     shipping_state: Κατάσταση μεταφορικών
     sku: ΚΩΔΙΚΟΣ ΠΡΟΪΟΝΤΟΣ
     updated_at: Τροποποιήθηκε την
   locale:
     code: Κώδικος
     enabled: Ενεργοποιημένο
+    id: ID
+    name: Ονομασία
+    updated_at: Τροποποιήθηκε την
   login: Είσοδος
   login_header: Διαχείριση
   manage: Διαχείριση
-  meta:
-    backend_title: Πίνακας ελέγχου του Sylius.
+  menu:
+    id: ID
+    title: Τίτλος
+  menu_node:
+    id: ID
+    title: Τίτλος
+  metadata:
+    id: ID
+    content: Περιεχόμενο
   newest: Νεότερα προϊόντα
   "no": false
-  option:
-    create: Δημιουργία επιλογής
-    manage: Διαχείριση επιλογών
   order:
+    adjustments:
+      amount: Ποσό
+      description: Περιγραφή
+      type: Τύπος
     billing_address: Διεύθυνση χρέωσης
+    comment:
+      state: Νομός
     create: Δημιουργία παραγγελίας
     create_header: Νεα παραγγελία
     created_at: Δημιουργήθηκε την
+    currency: Νόμισμα
     id: ID
     index_header: Τρέχουσες παραγγελίες
     items_total: Σύνολο στοιχείων
@@ -200,23 +257,14 @@ sylius:
     shipping_address: Διεύθυνση αποστολής
     shipping_charges: Έξοδα αποστολής
     shipping_total: Σύνολο εξόδων αποστολής
+    show_header: παραγγελία
     state:
       checkout: Ολοκλήρωση αγορών
+      returned: Επεστράφησαν
+      shipped: Αποστάλθηκαν
     tax_total: Σύνολο φόρων
     taxes: Φόροι
     total: Σύνολο
-    user: Χρήστης
-  shipment:
-    id: ID
-    index_header: Αποστολές
-    inventory_state: Κατάσταση απογραφής
-    manage: Διαχείριση αποστολών
-    method: τρόπος
-    name: ονομασία
-    order: παραγγελία
-    sku: ΚΩΔΙΚΟΣ ΠΡΟΪΟΝΤΟΣ
-    state: κατάσταση
-    tracking_code: Κωδικός παρακολούθησης
   order_item:
     quantity: Ποσότητα
     sellable: Προϊόν
@@ -231,16 +279,28 @@ sylius:
     id: ID
     index_header: Πληρωμές
     method: τρόπος
+    order: παραγγελία
     state:
-      0: Νομός
       checkout: Ολοκλήρωση αγορών
+      header: Νομός
       pending: Σε εκκρεμότητα
       processing: Σε εξέλιξη
       unknown: Άγνωστο
+    updated_at: Τροποποιήθηκε την
   payment_method:
+    gateway: Πύλη
     id: ID
     index_header: Τρόποι πληρωμής
     name: Ονομασία
+    updated_at: Τροποποιήθηκε την
+  permission:
+    code: Κώδικος
+    description: Περιγραφή
+    id: ID
+    updated_at: Τροποποιήθηκε την
+  pricing:
+    volume_based:
+      price: Τιμή
   product:
     available_on: Διαθέσιμο την
     categorization: Κατηγοριοποίηση
@@ -250,7 +310,6 @@ sylius:
     name: Ονομασία
     options: Επιλογές
     price: Τιμή
-    properties: Ιδιότητες
     restricted_zone: Απαγορευμένη ζώνη
     shipping_category: Κατηγορία αποστολής
     sku: ΚΩΔΙΚΟΣ ΠΡΟΪΟΝΤΟΣ
@@ -260,9 +319,26 @@ sylius:
       images: Εικόνες
       options: Επιλογές
       product: Προϊόν
-      properties: Ιδιότητες
     tax_category: Φορολογική κατηγορία
+    updated_at: Τροποποιήθηκε την
     variant_selection_method: Μέθοδος επιλογής παραλλαγής
+    volume_based:
+      price: Τιμή
+  product_attribute:
+    code: Κώδικος
+    name: Ονομασία
+    type: Τύπος
+    updated_at: Τροποποιήθηκε την
+  product_association:
+    code: Κώδικος
+    name: Ονομασία
+    type: Τύπος
+    updated_at: Τροποποιήθηκε την
+  product_option:
+    manage: Διαχείριση επιλογών
+    name: Ονομασία
+    presentation: Παρουσίαση
+    updated_at: Τροποποιήθηκε την
   promotion:
     actions: Ενέργειες
     description: Περιγραφή
@@ -271,51 +347,93 @@ sylius:
     name: Ονομασία
     rules: Κανόνες
     starts_at: Αρχίζει με
+    updated_at: Τροποποιήθηκε την
     usage_limit: Όριο χρήσης
   promotion_action:
     configuration: Παραμετροποίηση
     type: Τύπος
+  promotion_coupon:
+    code: Κώδικος
   promotion_rule:
     configuration: Παραμετροποίηση
     type: Τύπος
+  redirect_route:
+    id: ID
+    title: Τίτλος
+  report:
+    code: Κώδικος
+    description: Περιγραφή
+    manage: Διαχείριση
+    name: Ονομασία
+  role:
+    code: Κώδικος
+    description: Περιγραφή
+    id: ID
+    index_header: Ρόλοι
+    name: Ονομασία
+    updated_at: Τροποποιήθηκε την
+  route:
+    id: ID
+    name: Ονομασία
+    title: Τίτλος
   save_changes: Αποθήκευση αλλαγών
   search: Αναζήτηση
   settings:
     general_header: Γενικές ρυθμίσεις
+  shipment:
+    id: ID
+    index_header: Αποστολές
+    inventory_state: Κατάσταση απογραφής
+    manage: Διαχείριση αποστολών
+    method: τρόπος
+    name: ονομασία
+    order: παραγγελία
+    sku: ΚΩΔΙΚΟΣ ΠΡΟΪΟΝΤΟΣ
+    state: κατάσταση
+    tracking_code: Κωδικός παρακολούθησης
+    updated_at: Τροποποιήθηκε την
   shipping_address: Διεύθυνση αποστολής
   shipping_category:
     id: ID
     name: Ονομασία
+    updated_at: Τροποποιήθηκε την
   shipping_method:
     category: Κατηγορία
+    enabled: Ενεργοποιημένο
     id: ID
     name: Ονομασία
+    updated_at: Τροποποιήθηκε την
     zone: Ζώνη
+  stockable:
+    name: Ονομασία
+    updated_at: Τροποποιήθηκε την
   tax_category:
     description: Περιγραφή
     id: ID
     name: Ονομασία
+    updated_at: Τροποποιήθηκε την
   tax_rate:
     amount: Ποσό
     category: Κατηγορία
     index_header: Φορολογικοί συντελεστές
     manage: Διαχείριση φορολόγισης
     name: Ονομασία
+    updated_at: Τροποποιήθηκε την
     zone: Ζώνη
   taxon:
     name: Ονομασία
   taxonomy:
     name: Ονομασία
+  ui:
+    code: Κώδικος
+    email: Ηλεκτρονικό ταχυδρομείο
+    name: Ονομασία
   unknown: Άγνωστο
   user:
-    billing_address: Διεύθυνση τιμολόγησης
-    email: E-mail
-    first_name: Όνομα
     id: ID
-    last_name: Επώνυμο
-    shipping_address: Διεύθυνση αποστολής
     username: Όνομα χρήστη
   variant:
+    last_update: Τροποποιήθηκε την
     options: Επιλογές
     price: Τιμή
     sku: ΚΩΔΙΚΟΣ ΠΡΟΪΟΝΤΟΣ
@@ -328,7 +446,6 @@ sylius:
     index_header: Ζώνες
     manage: Διαχείριση ζωνών
     name: Ονομασία
-    no_results: Δεν έχουν οριστεί ζώνες.
     show_header: Λεπτομέρειες ζώνης
     type: Τύπος
     update_header: Επεξεργασία ζώνης

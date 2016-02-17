@@ -14,9 +14,10 @@ sylius:
       amount: Сумма платежа
       method: Метод платежа
       state:
-        0: Статус платежа
+        header: Статус платежа
         checkout: Сверка
         completed: Завершен
+        authorized: Авторизовано
         failed: Провален
         new: Новый
         pending: Ожидает

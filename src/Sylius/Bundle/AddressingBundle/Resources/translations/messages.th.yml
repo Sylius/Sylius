@@ -13,7 +13,7 @@ sylius:
       street: ถนน
       province: จังหวัด
     country:
-      iso_name: ชื่อ ISO
+      add_province: เพิ่มจังหวัด
       name: ชื่อ
       provinces: จังหวัด
       select: เลือก
@@ -21,6 +21,7 @@ sylius:
       name: ชื่อ
       select: เลือก
     zone:
+      add_member: เพิ่มสมาชิก
       members: สมาชิก
       name: ชื่อ
       type: ชนิด
@@ -29,9 +30,6 @@ sylius:
         province: จังหวัด
         zone: โซน
       scope: Scope
-    zone_member_country:
-      country: ประเทศ
-    zone_member_province:
-      province: จังหวัด
-    zone_member_zone:
-      zone: โซน
+      select: เลือก
+    zone_member:
+      select: เลือก

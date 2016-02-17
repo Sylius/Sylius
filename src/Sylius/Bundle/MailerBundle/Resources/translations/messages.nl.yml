@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    email:
+      enabled: Toegestaan
+      subject: Onderwerp
+      sender_name: Afzendernaam
+      sender_address: Afzenderadres
+      content: Inhoud
+      template: Sjabloon
+      no_template: Gebruik aangepaste sjabloon

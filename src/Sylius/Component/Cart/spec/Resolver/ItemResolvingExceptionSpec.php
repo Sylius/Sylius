@@ -25,6 +25,6 @@ class ItemResolvingExceptionSpec  extends ObjectBehavior
 
     function it_is_an_invalid_argument_exception()
     {
-        $this->shouldHaveType('\InvalidArgumentException');
+        $this->shouldHaveType(\InvalidArgumentException::class);
     }
 }

@@ -21,48 +21,48 @@ use Sylius\Component\Report\Renderer\DefaultRenderers;
 class Report implements ReportInterface
 {
     /**
-     *@var integer
+     * @var mixed
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      */
-    private $name;
+    protected $code;
 
     /**
      * @var string
      */
-    private $description;
+    protected $name;
 
     /**
      * @var string
      */
-    private $code;
+    protected $description;
 
     /**
      * Renderer name.
      *
      * @var string
      */
-    private $renderer = DefaultRenderers::TABLE;
+    protected $renderer = DefaultRenderers::TABLE;
 
     /**
      * @var array
      */
-    private $rendererConfiguration = array();
+    protected $rendererConfiguration = [];
 
     /**
      * Data fetcher name.
      *
      * @var string
      */
-    private $dataFetcher = DefaultDataFetchers::USER_REGISTRATION;
+    protected $dataFetcher = DefaultDataFetchers::USER_REGISTRATION;
 
     /**
      * @var array
      */
-    private $dataFetcherConfiguration = array();
+    protected $dataFetcherConfiguration = [];
 
     /**
      * {@inheritdoc}
@@ -70,6 +70,22 @@ class Report implements ReportInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
     }
 
     /**
@@ -102,22 +118,6 @@ class Report implements ReportInterface
     public function setDescription($description)
     {
         $this->description = $description;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCode()
-    {
-        return $this->code;
-    }
-
-    /**
-     * @param string $code
-     */
-    public function setCode($code)
-    {
-        $this->code = $code;
     }
 
     /**

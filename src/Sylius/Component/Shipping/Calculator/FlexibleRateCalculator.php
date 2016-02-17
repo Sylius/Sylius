@@ -12,64 +12,36 @@
 namespace Sylius\Component\Shipping\Calculator;
 
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class FlexibleRateCalculator extends Calculator
+class FlexibleRateCalculator implements CalculatorInterface
 {
     /**
      * {@inheritdoc}
      */
     public function calculate(ShippingSubjectInterface $subject, array $configuration)
     {
-        $firstItemCost = $configuration['first_item_cost'];
-        $additionalItemCost = $configuration['additional_item_cost'];
-        $additionalItemLimit = $configuration['additional_item_limit'];
+        $firstUnitCost = $configuration['first_unit_cost'];
+        $additionalUnitCost = $configuration['additional_unit_cost'];
+        $additionalUnitLimit = $configuration['additional_unit_limit'];
 
-        $totalItems = $subject->getShippingItemCount();
-        $additionalItems = $totalItems - 1;
+        $totalUnits = $subject->getShippingUnitCount();
+        $additionalUnits = $totalUnits - 1;
 
-        if (0 !== $additionalItemLimit) {
-            $additionalItems = $additionalItemLimit >= $additionalItems ? $additionalItems : $additionalItemLimit;
+        if (0 !== $additionalUnitLimit) {
+            $additionalUnits = $additionalUnitLimit >= $additionalUnits ? $additionalUnits : $additionalUnitLimit;
         }
 
-        return (int)($firstItemCost + ($additionalItems * $additionalItemCost));
+        return (int) ($firstUnitCost + ($additionalUnits * $additionalUnitCost));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function isConfigurable()
+    public function getType()
     {
-        return true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getConfigurationFormType()
-    {
-        return 'sylius_shipping_calculator_flexible_rate_configuration';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setConfiguration(OptionsResolverInterface $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'additional_item_limit' => 0,
-            ))
-            ->setRequired(array(
-                'first_item_cost',
-                'additional_item_cost'
-            ))
-            ->setAllowedTypes('first_item_cost', 'numeric')
-            ->setAllowedTypes('additional_item_cost', 'numeric')
-            ->setAllowedTypes('additional_item_limit', 'integer')
-        ;
+        return 'flexible_rate';
     }
 }

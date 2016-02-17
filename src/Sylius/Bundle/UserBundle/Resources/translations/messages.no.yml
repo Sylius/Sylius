@@ -1,0 +1,30 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    group:
+      name: Navn
+      roles: Roller
+    user:
+      email: E-post
+      enabled: Aktivert
+      password:
+        label: Passord
+      shipping_address: Leveringsadresse
+    customer:
+      first_name: Fornavn
+      groups: Grupper
+      last_name: Etternavn
+      email: E-post
+      billing_address: Fakturaadresse
+      different_billing_address: Bruk annen adresse for fakturering?
+    user_filter:
+      query: Søk
+    user_change_password:
+      confirmation: Bekreft
+      current: Gjeldende passord
+      new: Nytt Passord
+    user_reset_password:
+      confirmation: Bekreft
+      new: Nytt Passord

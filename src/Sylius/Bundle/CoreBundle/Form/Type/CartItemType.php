@@ -37,9 +37,9 @@ class CartItemType extends BaseCartItemType
         if (isset($options['product']) && $options['product']->hasVariants()) {
             $type = Product::VARIANT_SELECTION_CHOICE === $options['product']->getVariantSelectionMethod() ? 'sylius_product_variant_choice' : 'sylius_product_variant_match';
 
-            $builder->add('variant', $type, array(
-                'variable'  => $options['product']
-            ));
+            $builder->add('variant', $type, [
+                'variable' => $options['product'],
+            ]);
         }
     }
 
@@ -55,9 +55,9 @@ class CartItemType extends BaseCartItemType
         parent::configureOptions($resolver);
 
         $resolver
-            ->setDefined(array(
-                'product'
-            ))
+            ->setDefined([
+                'product',
+            ])
             ->setAllowedTypes('product', ProductInterface::class)
         ;
     }

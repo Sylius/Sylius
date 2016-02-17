@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    variant:
+      presentation: 演示
+    option:
+      name: 内部名称
+      presentation: 演示
+    option_value:
+      add_value: 添加值

@@ -4,14 +4,14 @@
 sylius:
     account:
         address:
-            create: Your address has been successfully added.
-            update: Your address has been successfully updated.
-            delete: Your address has been successfully deleted.
-            set_as_billing: Your billing address has been changed.
-            set_as_shipping: Your shipping address has been changed.
+            create: Your address has been successfully added
+            delete: Your address has been successfully deleted
+            set_as_billing: Your billing address has been changed
+            set_as_shipping: Your shipping address has been changed
+            update: Your address has been successfully updated
         password:
             change_success: The password has been changed
             invalid: Wrong current password
     channel:
         error:
-            at_least_one: The channel cannot be deleted, at least one enabled channel is required.
+            at_least_one: The channel cannot be deleted, at least one enabled channel is required

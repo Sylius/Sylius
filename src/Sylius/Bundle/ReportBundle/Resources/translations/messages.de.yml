@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    report:
+      name: Name
+      description: Beschreibung
+      renderer:
+        template: Vorlage
+      chart:
+        type: Typ
+      user_registration:
+        start: Startdatum
+        end: End–Datum
+        period: Zeitraum
+        empty_records: Leere Datensätze drucken?

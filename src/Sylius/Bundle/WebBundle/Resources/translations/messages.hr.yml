@@ -1,9 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-email:
-  order_confirmation:
-    subject: Naslov
 sylius:
   account:
     address:
@@ -19,36 +16,33 @@ sylius:
         no_billing: sylius.account.address.default.no_billing
         no_shipping: sylius.account.address.default.no_shipping
         shipping: sylius.account.address.default.shipping
-      empty: sylius.account.address.empty
       list: sylius.account.address.list
       update: sylius.account.address.update
     home:
-      email: ""
-      id: ""
-      outline: Uživajte u svim opcijama koje su vam dostupne.
+      email: E-mail
       since: Vi ste kupac od
       welcome: Dobrodošli u vaš kutak
     order:
       created_at: Narudžba kreirana
       details: Detalji vaše narudžbe
       download_invoice: Preuzmite račun
-      empty: Nemate narudžbi.
       invoice: Račun
       list: Sve vaše narudžbe
-      number: ""
-      payment_mode: ""
+      number: Broj
       placed_at: 'Datum %at%'
       shipment:
         pending: Na čekanju
         ready: 'Narudžba spremna za dostavu %at%'
         returned: 'Vraćena narudžba %at%'
         shipped: 'Dostavljeno %at%'
-      shipment_mode: ""
-      state: ""
+      state: Stanje
       total: Ukupno
       tracking_number: Kod za praćenje
     title: Moj profil
   add_to_cart: Dodaj u košaricu
+  association_type:
+    name: Naziv grupe
+    create: Kreiraj
   address:
     city: Grad
     company: Tvrtka
@@ -63,6 +57,11 @@ sylius:
     info: Obavijest
     success: Uspješno
     warning: Upozorenje
+  archetype:
+    name: Naziv grupe
+    options: Opcije
+    parent: Nadređena kategorija
+    updated_at: Posljednji
   backend:
     alert:
       info: Obavijest
@@ -78,35 +77,45 @@ sylius:
       add_product: Dodaj novi proizvod
       orders: Pregledaj narudžbe
       products: Pregledaj proizvode
-      users: Pregledaj korisnika
     statistics:
-      0: Statistika
       orders_this_month: Narudžbe u trenutnom mjesecu
       registrations_this_month: Registracije u trenutnom mjesecu
       sales_this_month: Prodaja u trenutnom mjesecu
-  backend_welcome: Dobrodošli
   block:
-    body: Poruka
-    create: Napravi blok
-    create_header: Napravi novi blok sadržaja
-    id: ID
-    index_header: Blokovi sadržaja
-    no_results: Trenutno nemate nijedan spremljeni blok.
-    title: Naslov
-    update_header: Uredi blok sadržaja
-    updated_at: Zadnja izmjena
+    imagine:
+      id: Id
+      label: Oznaka
+      title: Naslov
+      updated_at: Posljednji
+    index_header: Blokovi
+    simple:
+      body: Poruka
+      id: Id
+      label: Oznaka
+      title: Naslov
+      updated_at: Posljednji
+    slideshow:
+      body: Poruka
+      id: Id
+      title: Naslov
+      updated_at: Posljednji
+    string:
+      body: Poruka
+      id: Id
+      label: Oznaka
+      title: Naslov
+      updated_at: Posljednji
   breadcrumb:
     assortment: Ponuda
     block:
-      index: Blokavi sadržaja
+      index: Blokovi
     build: sylius.breadcrumb.build
     configuration: Postavke
+    content: Sadržaj
     country:
       index: Države
-    customers: Korisnici
+    dashboard: Kontrolna ploča
     edit: Uredi
-    exchange_rate:
-      index: Tečajna lista
     general_settings: Osnovne postavke
     generate: Generiraj
     group:
@@ -115,13 +124,15 @@ sylius:
       index: Skladište
     locale:
       index: Lokaliteti
+    menu_node:
+      index: Čvor izbornika
     new: Dodaj novo
     option:
       index: Opcije
     order:
       index: Narudžbe
     page:
-      index: Statičke stranice
+      index: Stranice
     payment:
       index: Plaćanja
     payment_method:
@@ -132,10 +143,10 @@ sylius:
       index: Promocije
     promotion_coupon:
       index: Kuponi
-    property:
-      index: Svojstva
-    prototype:
-      index: Prototipovi proizvoda
+    role:
+      index: Role (korisnička prava)
+    route:
+      index: Rute
     sales: Prodaja
     shipment:
       index: Pošiljke
@@ -151,8 +162,6 @@ sylius:
     taxonomy:
       index: Glavne kategorije
     update: Uredi
-    user:
-      index: Korisnici
     zone:
       index: Područja (Zone)
   browse_products: Pretraži proizvode
@@ -160,7 +169,7 @@ sylius:
   cart:
     empty: Košarica je prazna
     summary:
-      add_coupon: OK
+      add_coupon: Dodaj kod za popust
       checkout: Blagajna
       clear: Izpraznite košaricu
       grand_total: Sveukupno
@@ -171,6 +180,15 @@ sylius:
       unit_price: Cijena
     summary_header: Pregled narudžbe
     total_items: '1 artikal|%count% artikal(a)'
+  channel:
+    code: ISO kod
+    created_at: Dodano
+    currency_default: Zadana valuta
+    enabled: Omogući
+    id: ID
+    name: Naziv grupe
+    update: Uredi
+    updated_at: Posljednji
   checkout:
     addressing:
       header: Adresa
@@ -217,39 +235,56 @@ sylius:
       new_customer: Novi kupac
       register: Registrirajte se
     shipping:
-      error: Žao nam je, ali naša trgovina nije u mogućnosti dostaviti proizovde u državu koju ste izabrali.
       header: Način dostave
   confirmation:
-    message: Želiš li izvršiti brisanje?
     title: Potvrda
+  contact_request:
+    email: E-mail
+    firstName: Ime
+    id: ID
+    lastName: Prezime
+    message: Poruka
+    topic: Tema
+    updated_at: Posljednji
+  contact_topic:
+    id: ID
+    title: Naslov
+    updated_at: Posljednji
   country:
     add_province: Dodaj regiju
     create: Dodaj državu
     create_header: Nova država
+    enabled: Omogući
     id: ID
     index_header: Države
-    iso_name: ISO naziv
     manage: Upravljaj državama
     name: Naziv
-    no_results: Nema postavljenih država.
     show_header: Detalji države
     update_header: Uređivanje države
   create: Kreiraj
   created_at: Dodano
-  delete: Briši
+  currency:
+    code: ISO kod
+    enabled: Omogući
+    exchange_rate: Tečaj
+    id: ID
+    name: Naziv grupe
+    updated_at: Posljednji
+  customer:
+    billing_address: Adresa za dostavu
+    email: E-mail
+    first_name: Ime
+    groups: Grupe
+    id: ID
+    last_name: Prezime
+    shipping_address: Adresa za dostavu
+  delete: sylius.account.address.action.delete
   deleted: Izbrisano
   edit: Uredi
-  email: E-Mail
-  exchange_rate:
-    create: Kreiraj tečaj
-    create_header: Novi tečaj
-    currency: Valuta
-    id: ID
-    index_header: Tečajna lista
-    no_results: Nema tečajnih lista za prikaz.
-    rate: Tečaj
-    update_header: Uredi tečajnu vrijednost
-    updated_at: Zadnje osvježavanje
+  email:
+    code: ISO kod
+    enabled: Omogući
+    updated_at: Posljednji
   filter: Filter
   form:
     cart:
@@ -279,21 +314,16 @@ sylius:
   generate: Generiraj
   group:
     create: Napravi grupu
-    create_header: Dodaj novu grupu korisnika
     id: ID
     index_header: Grupe
     name: Naziv grupe
-    no_results: Trenutno nemate ni jednu grupu korisnika.
     roles: Role (korisnička prava)
     update_header: Uredi grupu
   hide_deleted: Sakrij izbrisano
   history:
-    0: Povijest
     action: Akcija
     author: Autor
     data: Podaci
-    logged_at: Zabilježeno na
-    version: Verzija
   homepage:
     splash:
       headline: Dobrodošli u Sylius
@@ -302,7 +332,6 @@ sylius:
     created_at: Kreirano
     inventory_state: Stanje zaliha
     name: Naziv
-    no_results: Nema artikala za prikaz.
     shipping_state: Stanje pošiljke
     sku: Kod
     updated_at: Posljednji
@@ -311,43 +340,53 @@ sylius:
     create: Dodaj lokale
     create_header: Dodaj novi lokale
     enabled: Omogući
+    id: ID
     index_header: Popis svih postavljeni lokaliteta
-    no_results: Trenutno nemate postavljene lokalitete.
+    name: Naziv grupe
     update_header: Uredi lokalitet
     updated_at: Zadnja izmjena
   login: Prijava
   login_header: Administracija
   logo: Syius
   manage: Upravljanje
+  menu:
+    id: ID
+    title: Naslov
+  menu_node:
+    id: ID
+    index_header: Čvor izbornika
+    parent: Nadređena kategorija
+    title: Naslov
   meta:
-    backend_title: Sylius kontrolna ploča.
-    frontend_description: Sylius je moderno rješenje za PHP, bazirano na Symfony2 frameworku.
-    frontend_keywords: sylius, web trgovina, symfony2, trgovina, košarica, webshop
     frontend_title: Sylius, moderna web trgovina za Symfony2
+  metadata:
+    id: ID
+    content: Sadržaj
   na: N/A
   newest: Najnoviji proizvodi
   "no": false
-  no_results: Nema rezultata
-  option:
-    create: Kreirajte opciju
-    create_header: Nova opcija artikla
-    index_header: Opcije artikla
-    manage: Upravljanje opcijama
-    name: Naziv
-    no_results: Artikal nema dodatnih opcija.
-    presentation: Prezentacija
-    update_header: Ažuriranje opcija
-    updated_at: Ažurirano
-    values: Vrijednosti
   order:
+    adjustments:
+      amount: Iznos
+      description: Opis
+      type: Vrsta
     billing_address: Adresa
+    comment:
+      author: Autor
+      created_at: Dodano
+      state: Stanje
     create: Kreirajte narudžbu
     create_header: Nova narudžba
     created_at: Kreirano
+    currency: Valuta
     general_info: Opće informacije
     id: ID
     index_header: Trenutne narudžbe
     inventory_tracking: Stanje zaliha
+    inventory_unit:
+      backorder: na čekanju
+      fulfill: Ispunjeno
+      return: Vraćeno
     items_total: Ukupno artikala
     manage: Upravljanje narudžbama
     no_items: Ova narudžba ne sadrži niti jedan artikal.
@@ -360,51 +399,27 @@ sylius:
     payment_state: Stanje plaćanja
     payment_states:
       balance_due: Dugovni saldo
+    promotion_coupons: Kuponi
     promotion_total: Ukupno akcije
     recent_header: Posljednje narudžbe
+    release_inventory: Oslobodi skladište
     shipment_state: Stanje pošiljke
     shipment_states:
       pending: Na čekanju
     shipments: Pošiljke
-    release_inventory: Oslobodi skladište
-    inventory_unit:
-      backorder: na čekanju
-      fulfill: Ispunjeno
-      return: Vraćeno
     shipping_address: Adresa za slanje
     shipping_charges: Cijena dostave
     shipping_total: Ukupan iznos dostave
-    show_header: Detalji narudžbe
+    show_header: Narudžba
     state:
-      cart_locked: Košarica zaključana
+      cancelled: Otkazano
       checkout: Blagajna
-      order_confimed: Narudžba potvrđena
-      ordered: Naručeno
+      returned: Vraćeno
+      shipped: Poslano
     tax_total: PDV ukupno
     taxes: Porezi
     total: Ukupno
     update_header: Ažuriranje narudžbe
-    user: Korisnik
-  shipment:
-    ship: Pošalji
-    created_at: Kreirano
-    id: ID
-    index_header: Dostavljanje
-    inventory_state: Stanje zaliha
-    manage: Upravljanje pošiljkama
-    method: Vrsta
-    modified: Izmijenjeno
-    name: Naziv
-    no_items: Nema artikala za prikaz.
-    no_results: Nema pošiljaka za prikaz.
-    order: Narudžba
-    show_header: Detalji pošiljke
-    sku: Kod
-    state: Stanje
-    tracking_code: Kod za praćenje
-    update: Uredi
-    update_header: Uredi pošiljku
-    updated_at: Ažurirano
   order_item:
     product: sylius.order_item.product
     quantity: Količina
@@ -415,12 +430,10 @@ sylius:
   page:
     body: Poruka
     create: Dodaj novu stranicu
-    create_header: Dodaj novi statički sadržaj
     id: ID
     index_header: Stranice
-    no_results: Trenutno nema statičkog sadržaja za prikazati.
+    routes: Rute
     title: Naslov
-    update_header: Zadnja izmjena
   password: Lozinka
   payment:
     amount: Iznos
@@ -431,15 +444,17 @@ sylius:
     index_header: Plaćanje
     manage: sylius.payment.manage
     method: Tip
-    no_results: Nema postavljenih tipova plaćanja.
+    order: Narudžba
     state:
-      0: Stanje
+      cancelled: Otkazano
       checkout: Blagajna
       completed: Završeno
       failed: Neuspješno
+      header: Stanje
       new: Novo
       pending: Na čekanju
       processing: U obradi
+      refunded: Refundirano
       unknown: Nepoznato
       void: Nevažeće
     update_header: Ažuriranje tipa plaćanja
@@ -447,16 +462,23 @@ sylius:
   payment_method:
     create: Kreirajte tip plaćanja
     create_header: Novi tip plaćanja
-    enabled: Aktivno?
     gateway: Gateway
     id: ID
     index_header: Tip plaćanja
     name: Naziv
-    no_results: Nema postavljenih tipova plaćanja.
     update_header: Ažuriranje tipa plaćanja
     updated_at: Ažurirano
+  permission:
+    code: ISO kod
+    description: Opis
+    id: ID
+    updated_at: Posljednji
+  pricing:
+    volume_based:
+      button:
+        add: Dodaj
+      price: Cijena
   product:
-    add_property: Dodajte svojstvo
     available_on: Dostupno
     available_on_demand: Dostupno na zahtijev
     categorization: Kategorizacija
@@ -472,8 +494,6 @@ sylius:
     no_description: 'lt;i>Nema opisa...</i>'
     no_images: Nema slika za ovaj artikal
     no_options: Nema opcija za ovaj artikal
-    no_properties: Artikal nema atributa
-    no_results: Nema artikala za prikaz.
     no_shipping_category: Nema kategoriju pošiljke
     no_short_description: '<i>Nema kratkog opisa</i>'
     no_sku: '<i>Nema koda</i>'
@@ -481,32 +501,47 @@ sylius:
     no_taxons: Nema podkategorija za ovaj proizvod
     options: Opcije
     price: Prodajna cijena
-    properties: Atributi
     restricted_zone: Ograničena zona pristupa
     shipping_category: Kategorija pošiljke
     show: Više
     show_header: Detalji artikla
-    show_in_store: Prikaži u trgovini
     sku: Kod
     stock: Skladište
     tabs:
       categorization: Kategorizacija
       images: Slike
       options: Opcije
+      pricing: Određivanje cijene
       product: Artikal
-      properties: Atributi
     tax_category: Kategorija artikla
     unavailable: Nedostupno
     update_header: Ažuriranje artikla
     updated_at: Ažurirano
     variant_selection_method: Odabir varijante artikla
-    view_details: 'Pogledaj detalje za proizvod %product%.'
+    volume_based:
+      price: Cijena
+  product_attribute:
+    code: ISO kod
+    name: Naziv grupe
+    type: Vrsta
+    updated_at: Posljednji
+  product_association:
+    code: ISO kod
+    create_header: Dodaj novi proizvod
+    name: Naziv grupe
+    type: Vrsta
+    updated_at: Posljednji
   product_not_available_in_zone: Nije dostupno u vašoj državi.
+  product_option:
+    manage: Uredi opcije
+    name: Naziv grupe
+    presentation: Prezentacija
+    updated_at: Posljednji
   promotion:
     actions: Akcije
     add_action: Dodajte akciju
     add_rule: Dodajte pravilo
-    coupon_based: Kod za popust?
+    coupon_based: Promocija bazirana na kuponima za popust
     create: Kreirajte akciju
     create_header: Nova akcija
     created_at: Kreirano
@@ -517,7 +552,6 @@ sylius:
     index_header: Trenutne akcije
     manage: Upravljajte akcijama
     name: Naziv
-    no_results: Nema trenutno aktivnih akcija.
     rules: Pravila
     show_header: Detalji akcije
     starts_at: Početak
@@ -529,51 +563,69 @@ sylius:
     configuration: Podešavanje
     type: Tip
   promotion_coupon:
+    code: ISO kod
     create: Dodaj kod za popust
     create_header: Novi kod za popust
     generate: Generirajte kod za popust
     generate_header: Generiranje kodova za popust
     index: Izlist kodova za popust
     index_header: sylius.promotion_coupon.index_header
-    no_results: Nema kodova za prikaz.
     total_results:
       Total: '%total%'
     update_header: Ažuriranje kupona
   promotion_rule:
     configuration: Podeševanje
     type: Tip
-  property:
-    add_choice: Dodajte izbor
-    create: Novi atribut
-    create_header: Novi atribut artikla
-    index_header: Atributi artikla
-    manage: Upravljanje atributima
-    name: Naziv
-    no_results: Nema dodijeljenih atributa
-    presentation: Prezentacija
-    type: Tip
-    update_header: Ažuriranje atributa
-    updated_at: Ažurirano
-  prototype:
-    build: Kreiraj prototip
-    build_header: Kreirajte artikal na bazi prototipa
-    create: Kreiraj prototip
-    create_header: Novi prototip
-    index_header: Prototipovi artikla
-    name: Naziv
-    no_results: Nema definiranih prototipova.
-    options: Opcije
-    properties: Atributi
-    update_header: Ažuriranje prototipa
-    updated_at: Ažurirano
   province:
     provinces: Županije
-  remember_me: Zapamti me?
+  redirect_route:
+    id: ID
+    title: Naslov
+  remember_me: Zapamti me
+  report:
+    code: ISO kod
+    description: Opis
+    id: Id
+    manage: Upravljanje
+    name: Naziv grupe
+  role:
+    code: ISO kod
+    description: Opis
+    id: ID
+    index_header: Role (korisnička prava)
+    name: Naziv grupe
+    updated_at: Posljednji
+  route:
+    id: ID
+    index_header: Rute
+    name: Naziv grupe
+    title: Naslov
   save_changes: Sačuvaj izmjene
   search: Pretraga
+  security:
+    login:
+      button: Prijavi se
   settings:
     general_header: Opće postavke
     taxation_header: Podešavanja poreza
+  shipment:
+    created_at: Kreirano
+    id: ID
+    index_header: Dostavljanje
+    inventory_state: Stanje zaliha
+    manage: Upravljanje pošiljkama
+    method: Vrsta
+    modified: Izmijenjeno
+    name: Naziv
+    order: Narudžba
+    ship: Pošalji
+    show_header: Detalji pošiljke
+    sku: Kod
+    state: Stanje
+    tracking_code: Kod za praćenje
+    update: Uredi
+    update_header: Uredi pošiljku
+    updated_at: Ažurirano
   shipment_category:
     manage: Upravljajte tipovima dostave
   shipping_address: Adresa za dostavu
@@ -584,7 +636,6 @@ sylius:
     index_header: Kategorije dostave
     manage: Upravljanje kategorija dostave
     name: Naziv
-    no_results: Nema definiranih kategorija dostave.
     update_header: Uređivanje kategorije dostave
     updated_at: Ažurirano
   shipping_method:
@@ -592,28 +643,22 @@ sylius:
     category: Kategorija
     create: Novi način dostave
     create_header: Novi način dostave
-    enabled: Aktivno?
+    enabled: Omogući
     id: ID
     index_header: Načini dostave
     manage: Upravljajte načinima dostave
     name: Naziv
-    no_results: Nema postavljenih načina dostava.
     show_header: Detalji načina dostave
     update_header: Ažuriranje načina dostave
     updated_at: Ažurirano
     zone: Regija
   shop_by: Kupujte po
-  show: Detalji
   show_all: sylius.show_all
   show_deleted: Prikaži izbrisano
   stockable:
     index_header: 'Skladište <small>Pregled stanja zaliha</small>'
-    name: Naziv
-    no_results: Nema niti jednoga artikla na skladištu.
-    on_hand: Nivo zaliha
-    on_hold: Na stanju
-    sku: Kod
-    updated_at: Ažurirano
+    name: Naziv grupe
+    updated_at: Posljednji
   tax_category:
     create: Kreirajte kategoriju poreza
     create_header: Nova kategorija poreza
@@ -623,7 +668,6 @@ sylius:
     manage: Upravljajte kategorijama poreza
     name: Naziv
     no_description: Nema opisa
-    no_results: Nema definiranih kategorija poreza.
     update_header: Ažuriranje kategorije poreza
     updated_at: Ažurirano
   tax_rate:
@@ -632,11 +676,9 @@ sylius:
     category: Kategorija porezne stope
     create: Kreirajte poreznu stopu
     create_header: Nova porezna stopa
-    included_in_price: Uključena u cijenu?
     index_header: Porezne stope
     manage: Upravljajte poreznim stopama
     name: Naziv
-    no_results: Nema definiranih poreznih stopa.
     show_header: Detalji porezne stope
     update_header: Ažuriranje porezne stope
     updated_at: Ažurirano
@@ -647,7 +689,6 @@ sylius:
     image: Izaberite sliku
     name: Naziv
     no_image: Nema slika za ovu kategoriju.
-    no_results: Nema kategorija za prikaz.
     product_index_header: 'Proizvodi kategorizirani kao %name%'
     update_header: Ažuriranje kategorije
   taxonomy:
@@ -658,35 +699,30 @@ sylius:
     manage: sylius.taxonomy.manage
     name: Naziv
     no_image: Nema slike za ovu kategoriju
-    no_results: Nema definiranih kategorija.
     show_header: 'Kategorija <small><strong>%name%</strong></small>'
     update_header: Ažuriranje kategorije
   total_quantity: Ukupna kol
+  ui:
+    change_password: Promijenite lozinku
+    code: ISO kod
+    email: E-mail
+    login: Prijavi se
+    logout: Odjavi se
+    register: Registracija
+    name: Naziv grupe
+    id: Id
   unknown: Nepoznato
   user:
-    billing_address: Adresa
-    create: Kreiranje korisnika
     create_header: Novi korisnik
-    email: E-Mail
-    enabled: Potvrđeno?
-    filter:
-      all: Prikaz svih korisnika
-      unconfirmed: Nepotvrđeni računi
-    first_name: Ime
     general_info: 'Korisnik "%username%"'
     id: ID
+    impersonate: Prijavi se kao korisnik
     index_header: 'Korisnici <small>Lista svih registriranih korisnika</small>'
     last_login: Posljednja prijava
-    last_name: Prezime
-    impersonate: Prijavi se kao korisnik
-    manage: Upravljanje korisnicima
-    no_results: Nema korisnika za prikaz.
-    order:
-      no_results: Ovaj korisnik nije naručio putem web trgovine.
-    orders: Narudžbe korisnika
     recent_header: Posljednji korisnici
+    register:
+      button: Registracija
     registration_date: Datum registracije
-    shipping_address: Adresa za dostavu
     show_header: Korisnički detalji
     update_header: Uređivanje korisnika
     username: Korisničko ime
@@ -698,7 +734,6 @@ sylius:
     create_header: Novi model
     delete_image: Obriši sliku
     last_update: Ažurirano
-    no_results: Nema modela za prikaz.
     options: Opcije
     price: Cijena
     sku: KOD (SKU)
@@ -712,7 +747,7 @@ sylius:
     index_header: Regije
     manage: Upravljanje regijama
     name: Naziv
-    no_results: Ne postoje definirane regije.
+    scope: Djelokrug
     show_header: Detalji regije
     type: Tip
     update_header: Uređivanje regije

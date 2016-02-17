@@ -7,8 +7,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * This model was inspired by FOS User-Bundle
  */
 
 namespace Sylius\Component\User\Model;
@@ -20,7 +18,7 @@ namespace Sylius\Component\User\Model;
 class Group implements GroupInterface
 {
     /**
-     * @var int
+     * @var mixed
      */
     protected $id;
 

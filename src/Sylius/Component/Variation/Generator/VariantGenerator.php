@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Variation\Generator;
 
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Variation\Model\VariableInterface;
 use Sylius\Component\Variation\Model\VariantInterface;
 use Sylius\Component\Variation\SetBuilder\SetBuilderInterface;
@@ -35,9 +35,9 @@ class VariantGenerator implements VariantGeneratorInterface
     /**
      * Variant manager.
      *
-     * @var RepositoryInterface
+     * @var FactoryInterface
      */
-    protected $variantRepository;
+    protected $variantFactory;
 
     /**
      * @var SetBuilderInterface
@@ -47,12 +47,12 @@ class VariantGenerator implements VariantGeneratorInterface
     /**
      * Constructor.
      *
-     * @param RepositoryInterface $variantRepository
+     * @param FactoryInterface $variantFactory
      * @param SetBuilderInterface $setBuilder
      */
-    public function __construct(RepositoryInterface $variantRepository, SetBuilderInterface $setBuilder)
+    public function __construct(FactoryInterface $variantFactory, SetBuilderInterface $setBuilder)
     {
-        $this->variantRepository = $variantRepository;
+        $this->variantFactory = $variantFactory;
         $this->setBuilder = $setBuilder;
     }
 
@@ -65,8 +65,8 @@ class VariantGenerator implements VariantGeneratorInterface
             throw new \InvalidArgumentException('Cannot generate variants for an object without options.');
         }
 
-        $optionSet = array();
-        $optionMap = array();
+        $optionSet = [];
+        $optionMap = [];
 
         foreach ($variable->getOptions() as $k => $option) {
             foreach ($option->getValues() as $value) {
@@ -78,7 +78,7 @@ class VariantGenerator implements VariantGeneratorInterface
         $permutations = $this->setBuilder->build($optionSet);
 
         foreach ($permutations as $permutation) {
-            $variant = $this->variantRepository->createNew();
+            $variant = $this->variantFactory->createNew();
             $variant->setObject($variable);
             $variant->setDefaults($variable->getMasterVariant());
 

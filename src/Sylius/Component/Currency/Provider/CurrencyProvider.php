@@ -15,6 +15,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Fernando Caraballo Ortiz <caraballo.ortiz@gmail.com>
  */
 class CurrencyProvider implements CurrencyProviderInterface
 {
@@ -36,6 +37,14 @@ class CurrencyProvider implements CurrencyProviderInterface
      */
     public function getAvailableCurrencies()
     {
-        return $this->currencyRepository->findBy(array('enabled' => true));
+        return $this->currencyRepository->findBy(['enabled' => true]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBaseCurrency()
+    {
+        return $this->currencyRepository->findOneBy(['base' => true]);
     }
 }

@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Promotion\Action;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Action\PromotionActionInterface;
+use Sylius\Component\Promotion\Action\PromotionApplicatorInterface;
 use Sylius\Component\Promotion\Model\ActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -28,14 +29,14 @@ class PromotionApplicatorSpec extends ObjectBehavior
         $this->beConstructedWith($registry);
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Promotion\Action\PromotionApplicator');
     }
 
     function it_should_be_Sylius_promotion_applicator()
     {
-        $this->shouldImplement('Sylius\Component\Promotion\Action\PromotionApplicatorInterface');
+        $this->shouldImplement(PromotionApplicatorInterface::class);
     }
 
     function it_should_execute_all_actions_registered(
@@ -45,10 +46,10 @@ class PromotionApplicatorSpec extends ObjectBehavior
         PromotionInterface $promotion,
         ActionInterface $actionModel
     ) {
-        $configuration = array();
+        $configuration = [];
 
         $registry->get(ActionInterface::TYPE_FIXED_DISCOUNT)->shouldBeCalled()->willReturn($action);
-        $promotion->getActions()->shouldBeCalled()->willReturn(array($actionModel));
+        $promotion->getActions()->shouldBeCalled()->willReturn([$actionModel]);
         $actionModel->getType()->shouldBeCalled()->willReturn(ActionInterface::TYPE_FIXED_DISCOUNT);
         $actionModel->getConfiguration()->shouldBeCalled()->willReturn($configuration);
 
@@ -66,10 +67,10 @@ class PromotionApplicatorSpec extends ObjectBehavior
         PromotionInterface $promotion,
         ActionInterface $actionModel
     ) {
-        $configuration = array();
+        $configuration = [];
 
         $registry->get(ActionInterface::TYPE_FIXED_DISCOUNT)->shouldBeCalled()->willReturn($action);
-        $promotion->getActions()->shouldBeCalled()->willReturn(array($actionModel));
+        $promotion->getActions()->shouldBeCalled()->willReturn([$actionModel]);
         $actionModel->getType()->shouldBeCalled()->willReturn(ActionInterface::TYPE_FIXED_DISCOUNT);
         $actionModel->getConfiguration()->shouldBeCalled()->willReturn($configuration);
 

@@ -20,14 +20,14 @@ use Sylius\Component\Promotion\Model\RuleInterface;
  */
 class RuleSpec extends ObjectBehavior
 {
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Promotion\Model\Rule');
     }
 
     function it_should_be_Sylius_promotion_rule()
     {
-        $this->shouldImplement('Sylius\Component\Promotion\Model\RuleInterface');
+        $this->shouldImplement(RuleInterface::class);
     }
 
     function it_should_not_have_id_by_default()
@@ -48,13 +48,13 @@ class RuleSpec extends ObjectBehavior
 
     function it_should_initialize_array_for_configuration_by_default()
     {
-        $this->getConfiguration()->shouldReturn(array());
+        $this->getConfiguration()->shouldReturn([]);
     }
 
     function its_configuration_should_be_mutable()
     {
-        $this->setConfiguration(array('value' => 500));
-        $this->getConfiguration()->shouldReturn(array('value' => 500));
+        $this->setConfiguration(['value' => 500]);
+        $this->getConfiguration()->shouldReturn(['value' => 500]);
     }
 
     function it_should_not_have_promotion_by_default()

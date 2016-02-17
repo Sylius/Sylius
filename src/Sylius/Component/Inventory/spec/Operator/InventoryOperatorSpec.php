@@ -16,6 +16,7 @@ use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Inventory\Operator\BackordersHandlerInterface;
+use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
@@ -39,7 +40,7 @@ class InventoryOperatorSpec extends ObjectBehavior
 
     function it_implements_Sylius_inventory_operator_interface()
     {
-        $this->shouldImplement('Sylius\Component\Inventory\Operator\InventoryOperatorInterface');
+        $this->shouldImplement(InventoryOperatorInterface::class);
     }
 
     function it_increases_stockable_on_hand(StockableInterface $stockable)
@@ -61,7 +62,7 @@ class InventoryOperatorSpec extends ObjectBehavior
         $inventoryUnit2->getStockable()->willReturn($stockable);
 
         $availabilityChecker->isStockSufficient($stockable, 2)->shouldBeCalled()->willReturn(true);
-        $backordersHandler->processBackorders(array($inventoryUnit1, $inventoryUnit2))->shouldBeCalled();
+        $backordersHandler->processBackorders([$inventoryUnit1, $inventoryUnit2])->shouldBeCalled();
 
         $inventoryUnit1->getInventoryState()->shouldBeCalled()->willReturn(InventoryUnitInterface::STATE_SOLD);
         $inventoryUnit2->getInventoryState()->shouldBeCalled()->willReturn(InventoryUnitInterface::STATE_SOLD);
@@ -69,7 +70,7 @@ class InventoryOperatorSpec extends ObjectBehavior
         $stockable->getOnHand()->shouldBeCalled()->willReturn(7);
         $stockable->setOnHand(5)->shouldBeCalled();
 
-        $this->decrease(array($inventoryUnit1, $inventoryUnit2));
+        $this->decrease([$inventoryUnit1, $inventoryUnit2]);
     }
 
     function it_decreases_stockable_on_hand_and_ignores_backordered_units(
@@ -85,7 +86,7 @@ class InventoryOperatorSpec extends ObjectBehavior
         $inventoryUnit3->getStockable()->willReturn($stockable);
 
         $availabilityChecker->isStockSufficient($stockable, 3)->shouldBeCalled()->willReturn(true);
-        $backordersHandler->processBackorders(array($inventoryUnit1, $inventoryUnit2, $inventoryUnit3))->shouldBeCalled();
+        $backordersHandler->processBackorders([$inventoryUnit1, $inventoryUnit2, $inventoryUnit3])->shouldBeCalled();
 
         $inventoryUnit1->getInventoryState()->shouldBeCalled()->willReturn(InventoryUnitInterface::STATE_SOLD);
         $inventoryUnit2->getInventoryState()->shouldBeCalled()->willReturn(InventoryUnitInterface::STATE_BACKORDERED);
@@ -94,6 +95,6 @@ class InventoryOperatorSpec extends ObjectBehavior
         $stockable->getOnHand()->shouldBeCalled()->willReturn(1);
         $stockable->setOnHand(0)->shouldBeCalled();
 
-        $this->decrease(array($inventoryUnit1, $inventoryUnit2, $inventoryUnit3));
+        $this->decrease([$inventoryUnit1, $inventoryUnit2, $inventoryUnit3]);
     }
 }

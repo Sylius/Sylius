@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c); Paweł Jędrzejewski
+ * (c) Paweł Jędrzejewski
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -12,6 +12,7 @@
 namespace Sylius\Component\Variation\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
@@ -20,15 +21,8 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OptionInterface extends TimestampableInterface, OptionTranslationInterface
+interface OptionInterface extends CodeAwareInterface, TimestampableInterface, OptionTranslationInterface
 {
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId();
-    
     /**
      * Get internal name.
      *

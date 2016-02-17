@@ -2,10 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  label:
+  form:
     product:
       name: Nama
       meta_keywords: Meta Kata Kunci
       meta_description: Meta Deskripsi
-    prototype:
+    product_archetype:
+      name: Nama
+    association_type:
       name: Nama

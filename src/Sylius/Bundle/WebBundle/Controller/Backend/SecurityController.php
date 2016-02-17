@@ -35,16 +35,16 @@ class SecurityController extends BaseSecurityController
      */
     public function exitUserSwitchAction($username)
     {
-        if (!$this->get('security.context')->isGranted('ROLE_SYLIUS_ADMIN')) {
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ALLOWED_TO_SWITCH')) {
             throw new AccessDeniedException();
         }
 
-        $user = $this->get('sylius.repository.user')->findOneBy(array('usernameCanonical' => $username));
+        $user = $this->get('sylius.repository.user')->findOneBy(['usernameCanonical' => $username]);
 
         if (!$user) {
             throw new NotFoundHttpException(sprintf('User with username %s does not exist.', $username));
         }
 
-        return $this->redirect($this->generateUrl('sylius_backend_customer_show', array('id' => $user->getCustomer()->getId())));
+        return $this->redirect($this->generateUrl('sylius_backend_customer_show', ['id' => $user->getCustomer()->getId()]));
     }
 }

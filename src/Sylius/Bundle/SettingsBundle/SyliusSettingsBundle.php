@@ -14,6 +14,7 @@ namespace Sylius\Bundle\SettingsBundle;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\SettingsBundle\DependencyInjection\Compiler\RegisterSchemasPass;
+use Sylius\Bundle\SettingsBundle\Model\ParameterInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -28,9 +29,9 @@ class SyliusSettingsBundle extends AbstractResourceBundle
      */
     public static function getSupportedDrivers()
     {
-        return array(
+        return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        );
+        ];
     }
 
     /**
@@ -48,9 +49,9 @@ class SyliusSettingsBundle extends AbstractResourceBundle
      */
     protected function getModelInterfaces()
     {
-        return array(
-            'Sylius\Bundle\SettingsBundle\Model\ParameterInterface' => 'sylius.model.parameter.class',
-        );
+        return [
+            ParameterInterface::class => 'sylius.model.parameter.class',
+        ];
     }
 
     /**

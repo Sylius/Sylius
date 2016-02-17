@@ -18,9 +18,8 @@ use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
- * Checks if order contains the given variant.
- *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class ContainsProductRuleChecker implements RuleCheckerInterface
 {
@@ -30,14 +29,16 @@ class ContainsProductRuleChecker implements RuleCheckerInterface
     public function isEligible(PromotionSubjectInterface $subject, array $configuration)
     {
         if (!$subject instanceof OrderInterface) {
-            throw new UnsupportedTypeException($subject, 'Sylius\Component\Core\Model\OrderInterface');
+            throw new UnsupportedTypeException($subject, OrderInterface::class);
         }
 
         /* @var $item OrderItemInterface */
         foreach ($subject->getItems() as $item) {
-            if ($configuration['variant'] == $item->getVariant()->getId()) {
-                return !$configuration['exclude'];
+            if ($configuration['variant'] != $item->getVariant()->getId()) {
+                continue;
             }
+
+            return $this->isItemEligible($item, $configuration);
         }
 
         return (bool) $configuration['exclude'];
@@ -49,5 +50,39 @@ class ContainsProductRuleChecker implements RuleCheckerInterface
     public function getConfigurationFormType()
     {
         return 'sylius_promotion_rule_contains_product_configuration';
+    }
+
+    /**
+     * @param OrderItemInterface $item
+     * @param array $configuration
+     *
+     * @return bool
+     */
+    private function isItemEligible(OrderItemInterface $item, array $configuration)
+    {
+        if (!$configuration['exclude']) {
+            if (isset($configuration['count'])) {
+                return $this->isItemQuantityEligible($item->getQuantity(), $configuration);
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param int $quantity
+     * @param array $configuration
+     *
+     * @return bool
+     */
+    private function isItemQuantityEligible($quantity, array $configuration)
+    {
+        if (isset($configuration['equal']) && $configuration['equal']) {
+            return $quantity >= $configuration['count'];
+        }
+
+        return $quantity > $configuration['count'];
     }
 }

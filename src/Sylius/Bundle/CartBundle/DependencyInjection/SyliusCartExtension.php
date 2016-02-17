@@ -12,48 +12,49 @@
 namespace Sylius\Bundle\CartBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Sylius\Component\Cart\Model\Cart;
+use Sylius\Component\Cart\Model\CartItem;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Carts extension.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Jérémy Leherpeur <jeremy@leherpeur.net>
  */
 class SyliusCartExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
-    protected $configFiles = array(
-        'services.xml',
-        'templating.xml',
-        'twig.xml',
-    );
-
     /**
      * {@inheritdoc}
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $config = $this->configure($config, new Configuration(), $container);
+        $config = $this->processConfiguration(new Configuration(), $config);
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+
+        $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
+
+        $configFiles = [
+            'services.xml',
+            'templating.xml',
+            'twig.xml',
+        ];
+
+        foreach ($configFiles as $configFile) {
+            $loader->load($configFile);
+        }
 
         $container->setAlias('sylius.cart_provider', $config['provider']);
         $container->setAlias('sylius.cart_resolver', $config['resolver']);
 
-        $definition = $container->findDefinition('sylius.context.cart');
+        $definition = $container->getDefinition('sylius.context.cart');
         $definition->replaceArgument(0, new Reference($config['storage']));
 
-        $classes = $config['classes'];
-
-        $container->setParameter('sylius.controller.cart.class', $classes['cart']['controller']);
-        $container->setParameter('sylius.form.type.cart.class', $classes['cart']['form']);
-
-        $container->setParameter('sylius.controller.cart_item.class', $classes['item']['controller']);
-        $container->setParameter('sylius.form.type.cart_item.class', $classes['item']['form']);
-
-        $container->setParameter('sylius.validation_group.cart', $config['validation_groups']['cart']);
-        $container->setParameter('sylius.validation_group.cart_item', $config['validation_groups']['item']);
+        $definition = $container->getDefinition('sylius.form.type.cart_item');
+        $definition->addArgument(new Reference('sylius.form.data_mapper.order_item_quantity'));
     }
 
     /**
@@ -62,18 +63,22 @@ class SyliusCartExtension extends AbstractResourceExtension implements PrependEx
     public function prepend(ContainerBuilder $container)
     {
         if (!$container->hasExtension('sylius_order')) {
-            return;
+            throw new \RuntimeException('Please install and configure SyliusOrderBundle in order to use SyliusCartBundle.');
         }
 
-        $container->prependExtensionConfig('sylius_order', array(
-            'classes' => array(
-                'order_item' => array(
-                    'model' => 'Sylius\Component\Cart\Model\CartItem'
-                ),
-                'order' => array(
-                    'model' => 'Sylius\Component\Cart\Model\Cart'
-                )
-            ))
+        $container->prependExtensionConfig('sylius_order', [
+            'resources' => [
+                'order' => [
+                    'classes' => [
+                        'model' => Cart::class,
+                    ],
+                ],
+                'order_item' => [
+                    'classes' => [
+                        'model' => CartItem::class,
+                    ],
+                ],
+            ], ]
         );
     }
 }

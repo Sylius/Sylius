@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\TaxationBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -21,7 +22,7 @@ class CalculatorChoiceTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(array('calc1', 'calc2'));
+        $this->beConstructedWith(['calc1', 'calc2']);
     }
 
     function it_is_initializable()
@@ -31,7 +32,7 @@ class CalculatorChoiceTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_has_a_valid_name()
@@ -48,9 +49,9 @@ class CalculatorChoiceTypeSpec extends ObjectBehavior
     {
         $resolver
             ->setDefaults(
-                array(
-                    'choices' => array('calc1', 'calc2'),
-                )
+                [
+                    'choices' => ['calc1', 'calc2'],
+                ]
             )
             ->shouldBeCalled();
 

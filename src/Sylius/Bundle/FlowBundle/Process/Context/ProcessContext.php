@@ -104,8 +104,8 @@ class ProcessContext implements ProcessContextInterface
 
         foreach ($steps as $index => $step) {
             if ($step === $currentStep) {
-                $this->previousStep = isset($steps[$index-1]) ? $steps[$index-1] : null;
-                $this->nextStep = isset($steps[$index+1]) ? $steps[$index+1] : null;
+                $this->previousStep = isset($steps[$index - 1]) ? $steps[$index - 1] : null;
+                $this->nextStep = isset($steps[$index + 1]) ? $steps[$index + 1] : null;
 
                 $this->calculateProgress($index);
             }
@@ -126,7 +126,7 @@ class ProcessContext implements ProcessContextInterface
         $validator = $this->process->getValidator();
 
         if (null !== $validator) {
-            return $validator->isValid();
+            return $validator->isValid($this);
         }
 
         $history = $this->getStepHistory();
@@ -251,7 +251,7 @@ class ProcessContext implements ProcessContextInterface
      */
     public function getStepHistory()
     {
-        return $this->storage->get('history', array());
+        return $this->storage->get('history', []);
     }
 
     /**

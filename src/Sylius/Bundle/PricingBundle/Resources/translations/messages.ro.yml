@@ -7,3 +7,6 @@ sylius:
       price: Preț
       calculator: Calculator
       configuration: Configurare
+    pricing:
+      volume_based:
+        price: Preț

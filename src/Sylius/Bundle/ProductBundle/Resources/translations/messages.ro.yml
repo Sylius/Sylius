@@ -2,17 +2,20 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  label:
+  form:
     product:
       name: Nume
       description: Descriere
-      properties: Proprietăți
-      available_on: Disponibil din
+      attributes: Atribute
+      options: Opţiuni
       meta_keywords: Meta cuvinte cheie
       meta_description: Meta descriere
-    property:
-      name: Denumire internă
-      presentation: Prezentare
-    prototype:
+    product_variant:
+      available_on: Disponibil din
+    product_archetype:
       name: Nume
-      properties: Proprietăți
+      parent: Părinte
+      attributes: Atribute
+      options: Opţiuni
+    association_type:
+      name: Nume

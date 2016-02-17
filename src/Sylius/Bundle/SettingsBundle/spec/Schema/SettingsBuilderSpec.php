@@ -12,37 +12,39 @@
 namespace spec\Sylius\Bundle\SettingsBundle\Schema;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
 use Sylius\Bundle\SettingsBundle\Transformer\ParameterTransformerInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SettingsBuilderSpec extends ObjectBehavior
 {
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SettingsBundle\Schema\SettingsBuilder');
     }
 
     function it_should_implement_settings_builder_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\SettingsBundle\Schema\SettingsBuilderInterface');
+        $this->shouldImplement(SettingsBuilderInterface::class);
     }
 
     function it_should_extend_options_resolver()
     {
-        $this->shouldHaveType('Symfony\Component\OptionsResolver\OptionsResolver');
+        $this->shouldHaveType(OptionsResolver::class);
     }
 
     function it_should_initialize_transformers_array_by_default()
     {
-        $this->getTransformers()->shouldReturn(array());
+        $this->getTransformers()->shouldReturn([]);
     }
 
     function it_should_set_transformer_for_parameter_by_name(ParameterTransformerInterface $transformer)
     {
         $this->setTransformer('test', $transformer);
 
-        $this->getTransformers()->shouldReturn(array('test' => $transformer));
+        $this->getTransformers()->shouldReturn(['test' => $transformer]);
     }
 }

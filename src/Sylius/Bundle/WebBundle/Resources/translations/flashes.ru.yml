@@ -3,9 +3,6 @@
 
 sylius:
   account:
-    address:
-      flash:
-        billing:
-          success: Адрес успешно установлен как адрес для выставления счёта по умолчанию.
-        shipping:
-          success: Адрес успешно установлен как адрес доставки по умолчанию.
+    password:
+      change_success: Пароль успешно изменен
+      invalid: Неправильный текущий пароль

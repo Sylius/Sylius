@@ -14,7 +14,7 @@ sylius:
       amount: Beløp
       method: Betalingsmetode
       state:
-        0: Betalingsstatus
+        header: Betalingsstatus
         checkout: Gå til kassen
         completed: Fullført
         failed: Mislyktes

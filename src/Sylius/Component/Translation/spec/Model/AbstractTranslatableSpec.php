@@ -1,10 +1,21 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Component\Translation\Model;
 
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Translation\Model\AbstractTranslatable;
 use Sylius\Component\Translation\Model\AbstractTranslation;
+use Sylius\Component\Translation\Model\TranslatableInterface;
 use Sylius\Component\Translation\Model\TranslationInterface;
 
 class AbstractTranslatableSpec extends ObjectBehavior
@@ -16,12 +27,12 @@ class AbstractTranslatableSpec extends ObjectBehavior
 
     function it_is_translatable()
     {
-        $this->shouldImplement('Sylius\Component\Translation\Model\TranslatableInterface');
+        $this->shouldImplement(TranslatableInterface::class);
     }
 
     function it_initializes_translattion_collection_by_default()
     {
-        $this->getTranslations()->shouldHaveType('Doctrine\Common\Collections\Collection');
+        $this->getTranslations()->shouldHaveType(Collection::class);
     }
 
     function it_adds_translation(TranslationInterface $translation)
@@ -55,7 +66,7 @@ class AbstractTranslatableSpec extends ObjectBehavior
 
     function it_throws_exception_if_no_locale_has_been_set()
     {
-        $this->shouldThrow('\RuntimeException')->duringTranslate();
+        $this->shouldThrow(\RuntimeException::class)->duringTranslate();
     }
 
     function it_translates_properly(TranslationInterface $translation)

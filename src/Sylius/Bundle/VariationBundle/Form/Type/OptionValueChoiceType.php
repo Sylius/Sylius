@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\VariationBundle\Form\Type;
 
+use Sylius\Component\Variation\Model\OptionInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\OptionsResolver\Options;
@@ -44,7 +45,7 @@ class OptionValueChoiceType extends AbstractType
             return new ObjectChoiceList(
                 $options['option']->getValues(),
                 'value',
-                array(),
+                [],
                 null,
                 'id',
                 PropertyAccess::createPropertyAccessor()
@@ -52,15 +53,15 @@ class OptionValueChoiceType extends AbstractType
         };
 
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'choice_list' => $choiceList,
-            ))
-            ->setRequired(array(
+            ])
+            ->setRequired([
                 'option',
-            ))
-            ->addAllowedTypes(array(
-                'option' => 'Sylius\Component\Variation\Model\OptionInterface',
-            ))
+            ])
+            ->addAllowedTypes([
+                'option' => OptionInterface::class,
+            ])
         ;
     }
 

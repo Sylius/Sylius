@@ -11,11 +11,15 @@
 
 namespace Sylius\Component\Payment\Model;
 
+use Sylius\Component\Resource\Model\TimestampableTrait;
+
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class CreditCard implements CreditCardInterface
 {
+    use TimestampableTrait;
+
     /**
      * @var mixed
      */
@@ -47,24 +51,14 @@ class CreditCard implements CreditCardInterface
     protected $securityCode;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $expiryMonth;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $expiryYear;
-
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
 
     public function __construct()
     {
@@ -151,6 +145,9 @@ class CreditCard implements CreditCardInterface
         $this->number = $number;
     }
 
+    /**
+     * @return string
+     */
     public function getMaskedNumber()
     {
         return sprintf('XXXX XXXX XXXX %s', substr($this->number, -4));
@@ -202,37 +199,5 @@ class CreditCard implements CreditCardInterface
     public function setExpiryYear($expiryYear)
     {
         $this->expiryYear = $expiryYear;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
     }
 }

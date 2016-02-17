@@ -26,3 +26,14 @@ sylius:
       max_length: 'Il metodo di pagamento deve essere lungo {{ limit }} caratteri o meno.'
       min_length: 'Il metodo di pagamento deve essere lungo almeno {{ limit }} caratteri.'
       not_blank: Inserisci il nome del metodo di pagamento.
+    fee_calculator_configuration:
+      amount:
+        greater_than_or_equal: 'La tassa non può essere inferiore a {{ compared_value }}.'
+        not_blank: "Inserisci l'importo della tassa."
+      percent:
+        max_range: 'La percentuale della tassa non può essere maggiore di {{ limit }}.'
+        min_range: 'La percentuale della tassa non può essere minore di {{ limit }}.'
+        not_blank: Inserisci la percentuale della tassa.
+    code:
+      not_blank: Inserisci il codice del metodo di pagamento.
+      unique: Il metodo di pagamento con dato codice esiste già.

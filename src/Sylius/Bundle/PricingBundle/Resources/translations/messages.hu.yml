@@ -7,3 +7,6 @@ sylius:
       price: Ár
       calculator: Árazás
       configuration: Konfiguráció
+    pricing:
+      volume_based:
+        price: Ár

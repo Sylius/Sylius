@@ -14,9 +14,10 @@ sylius:
       amount: Montant du paiement
       method: Moyen de paiement
       state:
-        0: Etat du paiement
+        header: Etat du paiement
         checkout: Paiement
         completed: Complété
+        authorized: Autorisé
         failed: Échoué
         new: Nouveau
         pending: En attente

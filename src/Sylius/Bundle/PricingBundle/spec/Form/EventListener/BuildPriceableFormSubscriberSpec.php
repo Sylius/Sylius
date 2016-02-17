@@ -17,11 +17,10 @@ use Sylius\Component\Pricing\Calculator\CalculatorInterface;
 use Sylius\Component\Pricing\Calculator\Calculators;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormFactoryInterface;
-
-;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -35,14 +34,14 @@ class BuildPriceableFormSubscriberSpec extends ObjectBehavior
         $this->beConstructedWith($calculatorRegistry, $factory);
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PricingBundle\Form\EventListener\BuildPriceableFormSubscriber');
     }
 
     function it_should_be_event_subscriber()
     {
-        $this->shouldImplement('Symfony\Component\EventDispatcher\EventSubscriberInterface');
+        $this->shouldImplement(EventSubscriberInterface::class);
     }
 
     function it_should_add_configuration_fields_in_pre_set_data(
@@ -61,9 +60,9 @@ class BuildPriceableFormSubscriberSpec extends ObjectBehavior
         $calculatorRegistry->get('bar')->willReturn($calculator);
 
         $priceable->getPricingCalculator()->willReturn('bar');
-        $priceable->getPricingConfiguration()->willReturn(array());
+        $priceable->getPricingConfiguration()->willReturn([]);
 
-        $factory->createNamed('pricingConfiguration', 'sylius_price_calculator_foo', array(), Argument::any())->willReturn($field);
+        $factory->createNamed('pricingConfiguration', 'sylius_price_calculator_foo', [], Argument::any())->willReturn($field);
         $form->add($field)->shouldBeCalled();
 
         $this->preSetData($event);

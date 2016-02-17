@@ -17,7 +17,8 @@ use Sylius\Bundle\VariationBundle\Validator\Constraint\VariantCombination;
 use Sylius\Component\Variation\Model\OptionValueInterface;
 use Sylius\Component\Variation\Model\VariableInterface;
 use Sylius\Component\Variation\Model\VariantInterface;
-use Symfony\Component\Validator\ExecutionContextInterface;
+use Symfony\Component\Validator\ConstraintValidator;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class VariantCombinationValidatorSpec extends ObjectBehavior
 {
@@ -33,14 +34,14 @@ class VariantCombinationValidatorSpec extends ObjectBehavior
 
     function it_is_a_constraint_validator()
     {
-        $this->shouldImplement('Symfony\Component\Validator\ConstraintValidator');
+        $this->shouldImplement(ConstraintValidator::class);
     }
 
     function it_should_not_add_violation_if_variant_is_master(VariantInterface $variant)
     {
-        $constraint = new VariantCombination(array(
-            'message' => 'Variant with given presentation already exists'
-        ));
+        $constraint = new VariantCombination([
+            'message' => 'Variant with given presentation already exists',
+        ]);
 
         $variant->isMaster()->willReturn(true);
 
@@ -51,9 +52,9 @@ class VariantCombinationValidatorSpec extends ObjectBehavior
         VariantInterface $variant,
         VariableInterface $variable
     ) {
-        $constraint = new VariantCombination(array(
-            'message' => 'Variant with given options already exists'
-        ));
+        $constraint = new VariantCombination([
+            'message' => 'Variant with given options already exists',
+        ]);
 
         $variant->isMaster()->willReturn(false);
         $variant->getObject()->willReturn($variable);
@@ -68,9 +69,9 @@ class VariantCombinationValidatorSpec extends ObjectBehavior
         VariantInterface $variant,
         VariableInterface $variable
     ) {
-        $constraint = new VariantCombination(array(
-            'message' => 'Variant with given options already exists'
-        ));
+        $constraint = new VariantCombination([
+            'message' => 'Variant with given options already exists',
+        ]);
 
         $variant->isMaster()->willReturn(false);
         $variant->getObject()->willReturn($variable);
@@ -88,19 +89,19 @@ class VariantCombinationValidatorSpec extends ObjectBehavior
         OptionValueInterface $option,
         $context
     ) {
-        $constraint = new VariantCombination(array(
-            'message' => 'Variant with given options already exists'
-        ));
+        $constraint = new VariantCombination([
+            'message' => 'Variant with given options already exists',
+        ]);
 
         $variant->isMaster()->willReturn(false);
         $variant->getObject()->willReturn($variable);
-        $variant->getOptions()->willReturn(array($option));
+        $variant->getOptions()->willReturn([$option]);
 
         $existingVariant->hasOption($option)->willReturn(true);
 
         $variable->hasVariants()->willReturn(true);
         $variable->hasOptions()->willReturn(true);
-        $variable->getVariants()->willReturn(array($existingVariant));
+        $variable->getVariants()->willReturn([$existingVariant]);
 
         $context->addViolation('Variant with given options already exists', Argument::any())->shouldBeCalled();
 

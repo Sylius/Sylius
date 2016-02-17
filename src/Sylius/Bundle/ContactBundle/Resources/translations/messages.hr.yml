@@ -6,7 +6,7 @@ sylius:
     contact_request:
       first_name: Ime
       last_name: Prezime
-      email: Email
+      email: E-mail
       message: Poruka
       topic: Tema
     contact_topic:

@@ -18,42 +18,23 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * Flat rate calculator configuration form.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class FlatRateConfigurationType extends AbstractType
 {
-    /**
-     * Validation groups.
-     *
-     * @var array
-     */
-    protected $validationGroups;
-
-    /**
-     * Constructor.
-     *
-     * @param array $validationGroups
-     */
-    public function __construct(array $validationGroups)
-    {
-        $this->validationGroups = $validationGroups;
-    }
-
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('amount', 'sylius_money', array(
+            ->add('amount', 'sylius_money', [
                 'label' => 'sylius.form.shipping_calculator.flat_rate_configuration.amount',
-                'constraints' => array(
+                'constraints' => [
                     new NotBlank(),
-                    new Type(array('type' => 'integer')),
-                ),
-            ))
+                    new Type(['type' => 'integer']),
+                ],
+            ])
         ;
     }
 
@@ -63,10 +44,9 @@ class FlatRateConfigurationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'data_class' => null,
-                'validation_groups' => $this->validationGroups,
-            ))
+            ])
         ;
     }
 
@@ -75,6 +55,6 @@ class FlatRateConfigurationType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_shipping_calculator_flat_rate_configuration';
+        return 'sylius_shipping_calculator_flat_rate';
     }
 }

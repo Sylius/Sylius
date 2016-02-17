@@ -1,0 +1,26 @@
+sylius_admin_root:
+    path: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: sylius_admin_dashboard
+        permanent: true
+
+sylius_admin_dashboard:
+    path: /dashboard
+    defaults:
+        _controller: sylius.controller.admin.dashboard:indexAction
+
+sylius_admin_login:
+    path: /login
+    defaults:
+        _controller: sylius.controller.security:loginAction
+        _sylius:
+            template: SyliusAdminBundle:Security:login.html.twig
+
+sylius_admin_login_check:
+    path: /login-check
+    defaults:
+        _controller: sylius.controller.security:checkAction
+
+sylius_admin_logout:
+    path: /logout

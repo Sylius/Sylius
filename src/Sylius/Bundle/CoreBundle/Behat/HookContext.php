@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sylius package.
  *
@@ -10,32 +11,15 @@
 
 namespace Sylius\Bundle\CoreBundle\Behat;
 
-use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
-use Behat\Symfony2Extension\Context\KernelAwareContext;
-use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\DBAL\Driver\PDOMySql\Driver as PDOMySqlDriver;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpKernel\KernelInterface;
+use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class HookContext implements Context, KernelAwareContext
+class HookContext extends DefaultContext
 {
-    /**
-     * @var KernelInterface
-     */
-    protected $kernel;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setKernel(KernelInterface $kernel)
-    {
-        $this->kernel = $kernel;
-    }
-
     /**
      * @BeforeScenario
      */
@@ -46,38 +30,15 @@ class HookContext implements Context, KernelAwareContext
 
         $isMySqlDriver = $entityManager->getConnection()->getDriver() instanceof PDOMySqlDriver;
         if ($isMySqlDriver) {
-            $entityManager->getConnection()->executeUpdate("SET foreign_key_checks = 0;");
+            $entityManager->getConnection()->executeUpdate('SET foreign_key_checks = 0;');
         }
 
-        $purger = new ORMPurger($entityManager);
-        $purger->purge();
+        $this->getSharedService('sylius.purger.orm_purger')->purge();
 
         if ($isMySqlDriver) {
-            $entityManager->getConnection()->executeUpdate("SET foreign_key_checks = 1;");
+            $entityManager->getConnection()->executeUpdate('SET foreign_key_checks = 1;');
         }
 
         $entityManager->clear();
     }
-
-    /**
-     * Get service by id.
-     *
-     * @param string $id
-     *
-     * @return object
-     */
-    protected function getService($id)
-    {
-        return $this->getContainer()->get($id);
-    }
-
-    /**
-     * Returns Container instance.
-     *
-     * @return ContainerInterface
-     */
-    protected function getContainer()
-    {
-        return $this->kernel->getContainer();
-    }
-} 
+}

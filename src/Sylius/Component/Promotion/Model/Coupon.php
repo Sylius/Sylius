@@ -11,11 +11,16 @@
 
 namespace Sylius\Component\Promotion\Model;
 
+use Sylius\Component\Resource\Model\SoftDeletableTrait;
+use Sylius\Component\Resource\Model\TimestampableTrait;
+
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class Coupon implements CouponInterface
 {
+    use SoftDeletableTrait, TimestampableTrait;
+
     /**
      * @var mixed
      */
@@ -45,21 +50,6 @@ class Coupon implements CouponInterface
      * @var \DateTime
      */
     protected $expiresAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $deletedAt;
 
     /**
      * {@inheritdoc}
@@ -122,7 +112,7 @@ class Coupon implements CouponInterface
      */
     public function incrementUsed()
     {
-        $this->used++;
+        ++$this->used;
     }
 
     /**
@@ -155,62 +145,6 @@ class Coupon implements CouponInterface
     public function setExpiresAt(\DateTime $expiresAt = null)
     {
         $this->expiresAt = $expiresAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isDeleted()
-    {
-        return null !== $this->deletedAt && new \DateTime() >= $this->deletedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDeletedAt()
-    {
-        return $this->deletedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDeletedAt(\DateTime $deletedAt = null)
-    {
-        $this->deletedAt = $deletedAt;
     }
 
     /**

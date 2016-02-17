@@ -12,15 +12,14 @@
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Doctrine\ORM\QueryBuilder;
-use Pagerfanta\PagerfantaInterface;
+use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Product\Model\ArchetypeInterface;
 
 /**
- * Product repository.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
@@ -32,9 +31,9 @@ class ProductRepository extends BaseProductRepository
      * @param TaxonInterface $taxon
      * @param array          $criteria
      *
-     * @return \Pagerfanta\Pagerfanta
+     * @return Pagerfanta
      */
-    public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = array())
+    public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = [])
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
         $queryBuilder
@@ -54,11 +53,32 @@ class ProductRepository extends BaseProductRepository
     }
 
     /**
+     * @param ArchetypeInterface $archetype
+     * @param array $criteria
+     *
+     * @return Pagerfanta
+     */
+    public function createByProductArchetypePaginator(ArchetypeInterface $archetype, array $criteria = [])
+    {
+        $queryBuilder = $this->getCollectionQueryBuilder();
+        $queryBuilder
+            ->innerJoin('product.archetype', 'archetype')
+            ->addSelect('archetype')
+            ->andWhere('archetype = :archetype')
+            ->setParameter('archetype', $archetype)
+        ;
+
+        $this->applyCriteria($queryBuilder, $criteria);
+
+        return $this->getPaginator($queryBuilder);
+    }
+
+    /**
      * Create paginator for products categorized under given taxon.
      *
      * @param TaxonInterface $taxon
      *
-     * @return PagerfantaInterface
+     * @return Pagerfanta
      */
     public function createByTaxonAndChannelPaginator(TaxonInterface $taxon, ChannelInterface $channel)
     {
@@ -83,9 +103,9 @@ class ProductRepository extends BaseProductRepository
      * @param array $sorting
      * @param bool  $deleted
      *
-     * @return PagerfantaInterface
+     * @return Pagerfanta
      */
-    public function createFilterPaginator($criteria = array(), $sorting = array(), $deleted = false)
+    public function createFilterPaginator($criteria = [], $sorting = [], $deleted = false)
     {
         $queryBuilder = parent::getCollectionQueryBuilder()
             ->addSelect('variant')
@@ -107,7 +127,7 @@ class ProductRepository extends BaseProductRepository
 
         if (empty($sorting)) {
             if (!is_array($sorting)) {
-                $sorting = array();
+                $sorting = [];
             }
             $sorting['updatedAt'] = 'desc';
         }
@@ -161,7 +181,7 @@ class ProductRepository extends BaseProductRepository
      */
     public function findLatest($limit = 10, ChannelInterface $channel)
     {
-        return $this->findBy(array('channels' => array($channel)), array('createdAt' => 'desc'), $limit);
+        return $this->findBy(['channels' => [$channel]], ['createdAt' => 'desc'], $limit);
     }
 
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null)

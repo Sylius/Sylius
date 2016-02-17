@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  user:
+    email:
+      not_exist: Nėra vartotojo su tokiu el. pašto adresu.
+    password:
+      invalid: Klaidingas dabartinis slaptažodis.
+      reset:
+        success: Jūsų slaptažodis atstatytas sėkmingai!
+      change:
+        success: Jūsų slaptažodis buvo pakeistas sėkmingai!

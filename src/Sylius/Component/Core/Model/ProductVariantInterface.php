@@ -13,24 +13,27 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Metadata\Model\MetadataSubjectInterface;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 use Sylius\Component\Product\Model\VariantInterface as BaseVariantInterface;
 use Sylius\Component\Shipping\Model\ShippableInterface;
+use Sylius\Component\Taxation\Model\TaxableInterface;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 /**
- * Sylius core product Variant interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface ProductVariantInterface extends
     BaseVariantInterface,
     ShippableInterface,
     StockableInterface,
-    PriceableInterface
+    PriceableInterface,
+    MetadataSubjectInterface,
+    TaxableInterface
 {
+    const METADATA_CLASS_IDENTIFIER = 'ProductVariant';
+
     /**
-     * Get images.
-     *
      * @return Collection|ProductVariantImageInterface[]
      */
     public function getImages();
@@ -44,8 +47,6 @@ interface ProductVariantInterface extends
     public function getImage();
 
     /**
-     * Checks if product has image.
-     *
      * @param ProductVariantImageInterface $image
      *
      * @return bool
@@ -53,15 +54,11 @@ interface ProductVariantInterface extends
     public function hasImage(ProductVariantImageInterface $image);
 
     /**
-     * Add image.
-     *
      * @param ProductVariantImageInterface $image
      */
     public function addImage(ProductVariantImageInterface $image);
 
     /**
-     * Remove image.
-     *
      * @param ProductVariantImageInterface $image
      */
     public function removeImage(ProductVariantImageInterface $image);
@@ -73,8 +70,6 @@ interface ProductVariantInterface extends
 
     /**
      * @param int $sold
-     *
-     * @return $this
      */
     public function setSold($sold);
 
@@ -117,4 +112,24 @@ interface ProductVariantInterface extends
      * @param float $depth
      */
     public function setDepth($depth);
+
+    /**
+     * @return int
+     */
+    public function getOriginalPrice();
+
+    /**
+     * @param int|null $originalPrice
+     */
+    public function setOriginalPrice($originalPrice);
+
+    /**
+     * @return bool
+     */
+    public function isPriceReduced();
+
+    /**
+     * @param TaxCategoryInterface $category
+     */
+    public function setTaxCategory(TaxCategoryInterface $category = null);
 }

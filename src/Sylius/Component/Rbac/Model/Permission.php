@@ -12,6 +12,8 @@
 namespace Sylius\Component\Rbac\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\TimestampableTrait;
 
 /**
  * Default permission implementation.
@@ -20,8 +22,10 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Permission implements PermissionInterface
 {
+    use TimestampableTrait;
+
     /**
-     * @var integer
+     * @var mixed
      */
     protected $id;
 
@@ -41,7 +45,7 @@ class Permission implements PermissionInterface
     protected $parent;
 
     /**
-     * @var Collection
+     * @var Collection|PermissionInterface[]
      */
     protected $children;
 
@@ -66,19 +70,6 @@ class Permission implements PermissionInterface
      */
     protected $level;
 
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
-
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         $this->children = new ArrayCollection();
@@ -90,6 +81,9 @@ class Permission implements PermissionInterface
         return $this->description;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getId()
     {
         return $this->id;
@@ -109,8 +103,6 @@ class Permission implements PermissionInterface
     public function setCode($code)
     {
         $this->code = $code;
-
-        return $this;
     }
 
     /**
@@ -127,8 +119,6 @@ class Permission implements PermissionInterface
     public function setDescription($description)
     {
         $this->description = $description;
-
-        return $this;
     }
 
     /**
@@ -145,8 +135,6 @@ class Permission implements PermissionInterface
     public function setParent(PermissionInterface $permission = null)
     {
         $this->parent = $permission;
-
-        return $this;
     }
 
     /**
@@ -174,8 +162,6 @@ class Permission implements PermissionInterface
             $permission->setParent($this);
             $this->children->add($permission);
         }
-
-        return $this;
     }
 
     /**
@@ -187,8 +173,6 @@ class Permission implements PermissionInterface
             $permission->setParent(null);
             $this->children->removeElement($permission);
         }
-
-        return $this;
     }
 
     /**
@@ -213,8 +197,6 @@ class Permission implements PermissionInterface
     public function setLeft($left)
     {
         $this->left = $left;
-
-        return $this;
     }
 
     /**
@@ -231,8 +213,6 @@ class Permission implements PermissionInterface
     public function setRight($right)
     {
         $this->right = $right;
-
-        return $this;
     }
 
     /**
@@ -249,43 +229,5 @@ class Permission implements PermissionInterface
     public function setLevel($level)
     {
         $this->level = $level;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 }

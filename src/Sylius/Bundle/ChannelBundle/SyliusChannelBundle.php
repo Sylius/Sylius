@@ -11,8 +11,13 @@
 
 namespace Sylius\Bundle\ChannelBundle;
 
+use Sylius\Bundle\ChannelBundle\DependencyInjection\Compiler\CompositeChannelContextPass;
+use Sylius\Bundle\ChannelBundle\DependencyInjection\Compiler\CompositeRequestResolverPass;
+use Sylius\Bundle\ChannelBundle\DependencyInjection\Compiler\RegisterChannelFactoryPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Channel\Model\ChannelInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Channels bundle.
@@ -26,9 +31,22 @@ class SyliusChannelBundle extends AbstractResourceBundle
      */
     public static function getSupportedDrivers()
     {
-        return array(
+        return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        );
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+
+        $container->addCompilerPass(new RegisterChannelFactoryPass());
+
+        $container->addCompilerPass(new CompositeChannelContextPass());
+        $container->addCompilerPass(new CompositeRequestResolverPass());
     }
 
     /**
@@ -36,9 +54,9 @@ class SyliusChannelBundle extends AbstractResourceBundle
      */
     protected function getModelInterfaces()
     {
-        return array(
-            'Sylius\Component\Channel\Model\ChannelInterface' => 'sylius.model.channel.class',
-        );
+        return [
+            ChannelInterface::class => 'sylius.model.channel.class',
+        ];
     }
 
     /**

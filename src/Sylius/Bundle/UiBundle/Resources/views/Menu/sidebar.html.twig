@@ -1,0 +1,101 @@
+{% macro attributes(attributes) %}
+{% for name, value in attributes %}
+    {%- if value is not none and value is not sameas(false) -%}
+        {{- ' %s="%s"'|format(name, value is sameas(true) ? name|e : value|e)|raw -}}
+    {%- endif -%}
+{%- endfor -%}
+{% endmacro %}
+
+{% block compressed_root %}
+{% spaceless %}
+{{ block('root') }}
+{% endspaceless %}
+{% endblock %}
+
+{% block root %}
+{%- set listClasses = item.childrenAttribute('class') is not empty ? [item.childrenAttribute('class'), 'sidebar-menu'] : ['sidebar-menu'] %}
+{%- set listAttributes = item.childrenAttributes|merge({'class': listClasses|join(' ') }) %}
+{{ block('list') -}}
+{% endblock %}
+
+{% block list %}
+{% if item.hasChildren and 0 == item.level and item.displayChildren %}
+    <ul{{ _self.attributes(listAttributes) }}>
+        {{ block('children') }}
+    </ul>
+{% else %}
+    {{ block('children') }}
+{% endif %}
+{% endblock %}
+
+{% block children %}
+{% set currentOptions = options %}
+{% set currentItem = item %}
+
+{% if options.depth is not none %}
+{% set options = currentOptions|merge({'depth': currentOptions.depth - 1}) %}
+{% endif %}
+{% for item in currentItem.children %}
+    {{ block('item') }}
+{% endfor %}
+
+{% set item = currentItem %}
+{% set options = currentOptions %}
+{% endblock %}
+
+{% block item %}
+{% if item.displayed %}
+    {%- set classes = item.attribute('class') is not empty ? [item.attribute('class')] : [] %}
+
+    {%- if item.current %}
+        {%- set classes = classes|merge([options.currentClass]) %}
+    {%- elseif item.currentAncestor %}
+        {%- set classes = classes|merge([options.ancestorClass]) %}
+    {%- endif %}
+    {%- if item.actsLikeFirst %}
+        {%- set classes = classes|merge([options.firstClass]) %}
+    {%- endif %}
+    {%- if item.actsLikeLast %}
+        {%- set classes = classes|merge([options.lastClass]) %}
+    {%- endif %}
+    {% if 1 == item.level %}
+        {%- set classes = classes|merge(['header']) %}
+    {% endif %}
+
+    {%- set attributes = item.attributes %}
+
+    {%- if classes is not empty %}
+        {%- set attributes = attributes|merge({'class': classes|join(' ')}) %}
+    {%- endif %}
+
+    <li{{ _self.attributes(attributes) }}>
+        {%- if item.uri is not empty and (not item.current or options.currentAsLink) %}
+        {{ block('linkElement') }}
+        {%- elseif 1 == item.level %}
+        {{ block('headerElement') }}
+        {%- else %}
+        {{ block('spanElement') }}
+        {%- endif %}
+
+        {%- set childrenClasses = item.childrenAttribute('class') is not empty ? [item.childrenAttribute('class')] : [] %}
+        {%- set childrenClasses = childrenClasses|merge(['menu_level_' ~ item.level]) %}
+        {%- set listAttributes = item.childrenAttributes|merge({'class': childrenClasses|join(' ') }) %}
+
+        {{ block('list') }}
+    </li>
+{% endif %}
+{% endblock %}
+
+{% block icon %}
+{% set icon = item.labelAttribute('icon') %}
+
+{% if icon %}<i class="fa fa-{{ icon }}"></i> {% endif %}
+{% endblock %}
+
+{% block linkElement %}
+<a href="{{ item.uri }}"{{ _self.attributes(item.linkAttributes) }}>{{ block('icon') }}<span>{{ block('label') }}</span></a>
+{% endblock %}
+{% block headerElement %}{{ block('label') }}{% endblock %}
+{% block spanElement %}<span{{ _self.attributes(item.labelAttributes) }}>{{ block('label') }}</span>{% endblock %}
+
+{% block label %}{% if options.allow_safe_labels and item.getExtra('safe_label', false) %}{{ item.label|trans|raw }}{% else %}{{ item.label|trans }}{% endif %}{% endblock %}

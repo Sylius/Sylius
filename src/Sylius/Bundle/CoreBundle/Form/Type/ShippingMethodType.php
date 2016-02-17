@@ -15,8 +15,6 @@ use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType as BaseShippingMet
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Shipping method form type, extended with zone selection field.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ShippingMethodType extends BaseShippingMethodType
@@ -28,8 +26,15 @@ class ShippingMethodType extends BaseShippingMethodType
     {
         parent::buildForm($builder, $options);
 
-        $builder->add('zone', 'sylius_zone_choice', array(
-                'label' => 'sylius.form.shipping_method.zone'
-            ));
+        $builder
+            ->add('zone', 'sylius_zone_choice', [
+                'label' => 'sylius.form.shipping_method.zone',
+            ])
+            ->add('taxCategory', 'sylius_tax_category_choice', [
+                'required' => false,
+                'empty_value' => '---',
+                'label' => 'sylius.form.shipping_method.tax_category',
+            ])
+        ;
     }
 }

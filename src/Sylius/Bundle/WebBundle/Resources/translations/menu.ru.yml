@@ -5,49 +5,27 @@ sylius:
   backend:
     menu:
       main:
+        api_clients: API клиенты
+        archetypes: Прототипы продукта
         assortment: Ассортимент
-        configuration: Настройки
-        countries: Страны
-        customer: Клиенты
-        dashboard: Приборная панель
-        exchange_rates: Курс валют
-        general_settings: Общие настройки
-        homepage: Ваш магазин
-        locales: Языки
-        new_order: Создать заказ
-        new_promotion: Создать рекламную акцию
-        options: Настройка опций
-        orders: Текущие заказы
-        payment_methods: Методы оплаты
-        payments: Платежи
-        products: Товары
-        promotions: Рекламные акции
-        properties: Настройка свойств
-        prototypes: Прототипы товаров
-        sales: Заказы
-        shipments: Посылки
-        shipping_categories: Категории доставки
-        shipping_methods: Методы доставки
-        stockables: Уровень запасов
-        tax_categories: Налоговые категории
-        tax_rates: Налоговые ставки
-        taxation_settings: Настройки налогообложения
-        taxonomies: Каталоги
-        users: Пользователи
-        zones: Зоны
-      sidebar:
-        assortment: Ассортимент
+        attributes: Настройка атрибутов
         blocks: Блоки
+        channels: Каналы
         configuration: Настройки
+        contact_topics: Темы обращений
         content: Контент
         countries: Страны
-        customer: Клиенты
+        currencies: Валюты
+        customer: Клиент
+        customers: Клиенты
         dashboard: Приборная панель
-        exchange_rates: Курсы валют
+        emails: Emails
         general_settings: Общие настройки
         groups: Группы
-        homepage: Вернуться к магазину
+        homepage: Ваш магазин
         locales: Языки
+        marketing: Маркетинг
+        menus: Элементы меню
         new_order: Создать заказ
         new_promotion: Создать рекламную акцию
         options: Настройка опций
@@ -55,20 +33,74 @@ sylius:
         pages: Страницы
         payment_methods: Методы оплаты
         payments: Платежи
+        permissions: Права доступа
         products: Товары
         promotions: Рекламные акции
-        properties: Настройка свойств
-        prototypes: Прототипы товаров
+        report: Отчеты
+        roles: Роли
+        routes: Маршруты
         sales: Заказы
+        security_settings: Настройки безопасности
         shipments: Посылки
         shipping_categories: Категории доставки
-        shipping_methods: Способы доставки
+        shipping_methods: Методы доставки
+        slideshow: Слайд-шоу
         stockables: Уровень запасов
+        support: Поддержка
         tax_categories: Налоговые категории
         tax_rates: Налоговые ставки
         taxation_settings: Настройки налогообложения
         taxonomies: Каталоги
-        users: Пользователи
+        zones: Зоны
+      sidebar:
+        api_clients: API клиенты
+        archetypes: Прототипы продукта
+        assortment: Ассортимент
+        attributes: Настройка атрибутов
+        blocks: Блоки
+        channels: Каналы
+        configuration: Настройки
+        contact_requests: Запросы
+        contact_topics: Темы обращений
+        content: Контент
+        countries: Страны
+        currencies: Валюты
+        customer: Клиент
+        customers: Клиенты
+        dashboard: Приборная панель
+        emails: Emails
+        general_settings: Общие настройки
+        groups: Группы
+        homepage: Вернуться к магазину
+        locales: Языки
+        marketing: Маркетинг
+        menus: Элементы меню
+        new_order: Создать заказ
+        new_promotion: Создать рекламную акцию
+        options: Настройка опций
+        orders: Текущие заказы
+        pages: Страницы
+        payment_methods: Методы оплаты
+        payments: Платежи
+        permissions: Права доступа
+        products: Товары
+        promotions: Рекламные акции
+        redirects: Перенаправления
+        report: Отчеты
+        roles: Роли
+        routes: Маршруты
+        sales: Заказы
+        security_settings: Настройки безопасности
+        shipments: Посылки
+        shipping_categories: Категории доставки
+        shipping_methods: Способы доставки
+        slideshow: Слайд-шоу
+        stockables: Уровень запасов
+        support: Поддержка
+        tax_categories: Налоговые категории
+        tax_rates: Налоговые ставки
+        taxation_settings: Настройки налогообложения
+        taxonomies: Каталоги
         zones: Зоны
   frontend:
     menu:
@@ -87,6 +119,8 @@ sylius:
         login: Вход
         logout: Выход
         register: Регистрация
+      sidebar:
+        links: Ссылки
       social:
         facebook: Facebook
         github: GitHub

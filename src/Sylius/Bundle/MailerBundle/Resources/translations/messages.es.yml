@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    email:
+      enabled: Activado
+      subject: Asunto
+      sender_name: Nombre del remitente
+      sender_address: Correo electónico del remitente
+      content: Contenido
+      template: Plantilla
+      no_template: Usar plantilla personalizada

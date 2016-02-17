@@ -11,23 +11,20 @@
 
 namespace Sylius\Component\Currency\Model;
 
+use Sylius\Component\Resource\Model\CodeAwareInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\ToggleableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface CurrencyInterface extends TimestampableInterface
+interface CurrencyInterface extends
+    CodeAwareInterface,
+    TimestampableInterface,
+    ToggleableInterface,
+    ResourceInterface
 {
-    /**
-     * @return string
-     */
-    public function getCode();
-
-    /**
-     * @param string $code
-     */
-    public function setCode($code);
-
     /**
      * Get the human-friendly name.
      *
@@ -48,10 +45,10 @@ interface CurrencyInterface extends TimestampableInterface
     /**
      * @return bool
      */
-    public function isEnabled();
+    public function isBase();
 
     /**
-     * @param bool $enabled
+     * @param bool $base
      */
-    public function setEnabled($enabled);
+    public function setBase($base);
 }

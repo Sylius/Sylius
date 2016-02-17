@@ -12,9 +12,11 @@
 namespace Sylius\Bundle\CoreBundle;
 
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\DoctrineSluggablePass;
+use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\LazyCacheWarmupPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RoutingRepositoryPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Core\Model\ProductVariantImageInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -30,9 +32,9 @@ class SyliusCoreBundle extends AbstractResourceBundle
      */
     public static function getSupportedDrivers()
     {
-        return array(
+        return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        );
+        ];
     }
 
     /**
@@ -44,6 +46,7 @@ class SyliusCoreBundle extends AbstractResourceBundle
 
         $container->addCompilerPass(new DoctrineSluggablePass());
         $container->addCompilerPass(new RoutingRepositoryPass());
+        $container->addCompilerPass(new LazyCacheWarmupPass());
     }
 
     /**
@@ -51,9 +54,9 @@ class SyliusCoreBundle extends AbstractResourceBundle
      */
     protected function getModelInterfaces()
     {
-        return array(
-            'Sylius\Component\Core\Model\ProductVariantImageInterface' => 'sylius.model.product_variant_image.class',
-        );
+        return [
+            ProductVariantImageInterface::class => 'sylius.model.product_variant_image.class',
+        ];
     }
 
     /**

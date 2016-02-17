@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Report\DataFetcher;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Report\DataFetcher\DataFetcherInterface;
+use Sylius\Component\Report\DataFetcher\DelegatingDataFetcherInterface;
 use Sylius\Component\Report\Model\ReportInterface;
 
 /**
@@ -33,7 +34,7 @@ class DelegatingDataFetcherSpec extends ObjectBehavior
 
     public function it_implements_delegating_data_fetcher_interface()
     {
-        $this->shouldImplement('Sylius\Component\Report\DataFetcher\DelegatingDataFetcherInterface');
+        $this->shouldImplement(DelegatingDataFetcherInterface::class);
     }
 
     public function it_delegates_data_fetcher_to_report(
@@ -42,12 +43,12 @@ class DelegatingDataFetcherSpec extends ObjectBehavior
         DataFetcherInterface $dataFetcher)
     {
         $subject->getDataFetcher()->willReturn('default_data_fetcher');
-        $subject->getDataFetcherConfiguration()->willReturn(array());
+        $subject->getDataFetcherConfiguration()->willReturn([]);
 
         $serviceRegistryInterface->get('default_data_fetcher')->willReturn($dataFetcher);
-        $dataFetcher->fetch(array())->shouldBeCalled()->willReturn(array(array('date' => '2014-12-31', 'user_total' => '20')));
+        $dataFetcher->fetch([])->shouldBeCalled()->willReturn([['date' => '2014-12-31', 'user_total' => '20']]);
 
-        $this->fetch($subject)->shouldReturn(array(array('date' => '2014-12-31', 'user_total' => '20')));
+        $this->fetch($subject)->shouldReturn([['date' => '2014-12-31', 'user_total' => '20']]);
     }
 
     public function it_should_complain_if_report_has_no_data_fetcher_defined(ReportInterface $subject)

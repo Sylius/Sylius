@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  checkout:
-    shipping_method:
-      not_blank: เลือกวิธีการจัดส่ง
   form:
     action:
       add_product_configuration:
@@ -25,6 +22,12 @@ sylius:
     group:
       name: ชื่อ
       roles: Roles
+    channel:
+      taxonomies: การจัดประเภท
+      locales: ภาษาที่ใช้
+      currency_default: สกุลเงินหลัก
+      shipping_methods: วิธีการจัดส่ง
+      payment_methods: วิธีการชำระเงิน
     image:
       file: รูปภาพ
     locale:
@@ -64,6 +67,10 @@ sylius:
       created_at_to: ถึง
       number: หมายเลขคำสั่งซื้อ
       shipping_address: ส่งให้กับ
+    payment_filter:
+      created_at_from: จาก
+      created_at_to: ถึง
+      number: หมายเลขคำสั่งซื้อ
     shipping_method:
       zone: โซน
     taxon:
@@ -76,6 +83,7 @@ sylius:
       enabled: เปิดใช้งานแล้ว
       first_name: ชื่อ
       groups: กลุ่ม
+      roles: Roles
       last_name: นามสกุล
       password: รหัสผ่าน
       shipping_address: ที่อยู่สำหรับจัดส่งสินค้า
@@ -91,3 +99,10 @@ sylius:
       sku: SKU
       weight: น้ำหนัก
       width: ความกว้าง
+    attribute:
+      product_attribute_value:
+        value: ค่า
+    guest:
+      email: อีเมล
+    product_association_type:
+      name: ชื่อ

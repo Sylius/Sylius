@@ -34,7 +34,7 @@ class CachedPermissionMapSpec extends ObjectBehavior
 
     function it_is_a_permission_map()
     {
-        $this->shouldHaveType('Sylius\Component\Rbac\Authorization\PermissionMapInterface');
+        $this->shouldHaveType(PermissionMapInterface::class);
     }
 
     function it_uses_another_map_to_get_all_permissions($map, Collection $permissions, RoleInterface $role)
@@ -49,7 +49,7 @@ class CachedPermissionMapSpec extends ObjectBehavior
         $role->getCode()->shouldBeCalled()->willReturn('catalog_manager');
 
         $cache->contains('catalog_manager')->shouldBeCalled()->willReturn(true);
-        $cache->fetch('catalog_manager')->shouldBeCalled()->willReturn(array('can_eat_bananas', 'can_smash_bananas'));
+        $cache->fetch('catalog_manager')->shouldBeCalled()->willReturn(['can_eat_bananas', 'can_smash_bananas']);
 
         $this->hasPermission($role, 'can_eat_bananas')->shouldReturn(true);
         $this->hasPermission($role, 'can_eat_oranges')->shouldReturn(false);

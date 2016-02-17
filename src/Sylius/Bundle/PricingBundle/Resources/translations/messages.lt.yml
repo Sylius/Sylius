@@ -7,3 +7,9 @@ sylius:
       price: Kaina
       calculator: Kainodara
       configuration: Konfigūracija
+    pricing:
+      volume_based:
+        label: Kainų nustatymo konfigūracijos
+        min: Min kiekis
+        max: Maks. kiekis
+        price: Kaina

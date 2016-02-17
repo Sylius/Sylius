@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Rbac\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Rbac\Model\PermissionInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -25,7 +26,7 @@ class PermissionSpec extends ObjectBehavior
 
     function it_implements_Sylius_Rbac_permission_interface()
     {
-        $this->shouldImplement('Sylius\Component\Rbac\Model\PermissionInterface');
+        $this->shouldImplement(PermissionInterface::class);
     }
 
     function it_has_no_id_by_default()

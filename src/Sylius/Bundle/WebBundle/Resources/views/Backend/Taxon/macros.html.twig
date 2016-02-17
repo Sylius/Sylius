@@ -6,6 +6,7 @@
 <table class="table">
     <thead>
         <tr>
+            <th>{{ 'sylius.ui.code'|trans  }}</th>
             <th>{{ 'sylius.taxon.name'|trans }}</th>
             <th></th>
         </tr>
@@ -26,6 +27,9 @@
 
 {% for taxon in taxons %}
 <tr id="{{ taxon.id }}">
+    <td>
+        {{ taxon.code }}
+    </td>
     <td>
         <span style="border-left: {{ (taxon.level - 1) * 20}}px solid #f1f1f1; padding-left: 10px;">
             {% if taxon.path|length > 0 %}

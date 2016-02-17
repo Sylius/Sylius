@@ -12,8 +12,8 @@
 namespace spec\Sylius\Bundle\CoreBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormTypeInterface;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
@@ -22,7 +22,7 @@ class ProductTranslationTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('ProductTranslation', array(), 'sylius');
+        $this->beConstructedWith('ProductTranslation', [], 'sylius');
     }
 
     function it_is_initializable()
@@ -32,55 +32,55 @@ class ProductTranslationTypeSpec extends ObjectBehavior
 
     function it_should_be_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
-            ->add('name', 'text', array(
-                'label' => 'sylius.form.product.name'
-            ))
+            ->add('name', 'text', [
+                'label' => 'sylius.form.product.name',
+            ])
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('description', 'textarea', array(
-                'label' => 'sylius.form.product.description'
-            ))
+            ->add('description', 'textarea', [
+                'label' => 'sylius.form.product.description',
+            ])
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('metaKeywords', 'text', array(
+            ->add('metaKeywords', 'text', [
                 'required' => false,
-                'label'    => 'sylius.form.product.meta_keywords'
-            ))
+                'label' => 'sylius.form.product.meta_keywords',
+            ])
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('metaDescription', 'text', array(
+            ->add('metaDescription', 'text', [
                 'required' => false,
-                'label'    => 'sylius.form.product.meta_description'
-            ))
+                'label' => 'sylius.form.product.meta_description',
+            ])
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('shortDescription', 'textarea', array(
+            ->add('shortDescription', 'textarea', [
                 'required' => false,
-                'label'    => 'sylius.form.product.short_description'
-            ))
+                'label' => 'sylius.form.product.short_description',
+            ])
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_has_valid_name()

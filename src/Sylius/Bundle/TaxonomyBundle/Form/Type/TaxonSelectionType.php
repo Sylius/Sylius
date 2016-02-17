@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\TaxonomyBundle\Form\Type;
 
+use Sylius\Bundle\TaxonomyBundle\Form\DataTransformer\TaxonSelectionToCollectionTransformer;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
@@ -67,11 +68,11 @@ class TaxonSelectionType extends AbstractType
 
         foreach ($taxonomies as $taxonomy) {
             /* @var $taxonomy TaxonomyInterface */
-            $builder->add($taxonomy->getId(), 'choice', array(
-                'choice_list' => new ObjectChoiceList($this->taxonRepository->getTaxonsAsList($taxonomy), null, array(), null, 'id'),
-                'multiple'    => $options['multiple'],
-                'label'       => /* @Ignore */ $taxonomy->getName(),
-            ));
+            $builder->add($taxonomy->getId(), 'choice', [
+                'choice_list' => new ObjectChoiceList($this->taxonRepository->getTaxonsAsList($taxonomy), null, [], null, 'id'),
+                'multiple' => $options['multiple'],
+                'label' => /* @Ignore */ $taxonomy->getName(),
+            ]);
         }
     }
 
@@ -81,33 +82,31 @@ class TaxonSelectionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
-                'data_class'         => null,
-                'multiple'           => true,
-                'render_label'       => false,
-                'model_transformer'  => 'Sylius\Bundle\TaxonomyBundle\Form\DataTransformer\TaxonSelectionToCollectionTransformer',
-            ))
+            ->setDefaults([
+                'data_class' => null,
+                'multiple' => true,
+                'render_label' => false,
+                'model_transformer' => TaxonSelectionToCollectionTransformer::class,
+            ])
         ;
 
-        $resolver->setNormalizers(array(
-            'model_transformer' => function (Options $options, $value) {
-                if (!is_array($value)) {
-                    $value = array(
-                        'class'        => $value,
-                        'save_objects' => true,
-                    );
-                } else {
-                    if (!isset($value['class'])) {
-                        $value['class'] = 'Sylius\Bundle\TaxonomyBundle\Form\DataTransformer\TaxonSelectionToCollectionTransformer';
-                    }
-                    if (!isset($value['save_objects'])) {
-                        $value['save_objects'] = true;
-                    }
+        $resolver->setNormalizer('model_transformer', function (Options $options, $value) {
+            if (!is_array($value)) {
+                $value = [
+                    'class' => $value,
+                    'save_objects' => true,
+                ];
+            } else {
+                if (!isset($value['class'])) {
+                    $value['class'] = TaxonSelectionToCollectionTransformer::class;
                 }
+                if (!isset($value['save_objects'])) {
+                    $value['save_objects'] = true;
+                }
+            }
 
-                return $value;
-            },
-        ));
+            return $value;
+        });
     }
 
     /**

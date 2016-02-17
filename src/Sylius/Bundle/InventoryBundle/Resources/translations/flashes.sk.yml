@@ -3,7 +3,7 @@
 
 sylius:
   inventory_unit:
-    backorder: Skladová položka je predobjednaná.
-    sell: Skladová položka je doplnená.
+    backorder: Skladová položka predobjednaná.
+    sell: Skladová položka predaná.
     return: Skladová položka navrátená.
     transition_fail: Akcia sa nemohla vykonať vzhľadom na aktuálny stav jednotky

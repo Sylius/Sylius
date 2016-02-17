@@ -101,7 +101,7 @@
     {% endif %}
 </div>
 
-{% if shipment.items|length > 0 %}
+{% if shipment.units|length > 0 %}
     <table class="table table-bordered table-condensed">
         <thead>
             <tr>
@@ -115,7 +115,7 @@
             </tr>
         </thead>
         <tbody>
-        {% for item in shipment.items %}
+        {% for item in shipment.units %}
             <tr>
                 <td>{{ loop.index }}</td>
                 <td>{{ item.stockable.sku }}</td>

@@ -20,14 +20,14 @@
         }
     ],
     "require": {
-        "php":                       ">=5.5.9",
+        "php": "^5.5.9|^7.0",
 
-        "symfony/framework-bundle":  "~2.3",
-        "jms/translation-bundle":    "1.1.*",
-        "knplabs/knp-menu-bundle":   "1.1.*",
-        "liip/imagine-bundle":       "~1.0",
+        "jms/translation-bundle": "1.1.*",
+        "knplabs/knp-menu-bundle": "1.1.*",
         "knplabs/knp-snappy-bundle": "*@dev",
-        "sylius/core-bundle":        "0.16.*"
+        "liip/imagine-bundle": "~1.0",
+        "sylius/core-bundle": "0.17.*",
+        "symfony/framework-bundle": "^2.7.7"
     },
     "config": {
         "bin-dir": "bin"
@@ -38,7 +38,7 @@
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.16-dev"
+            "dev-master": "0.17-dev"
         }
     }
 }

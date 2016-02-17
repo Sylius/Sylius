@@ -3,5 +3,9 @@
 
 sylius:
   form:
+    rule:
+      contains_product_configuration:
+        variants: Пороизводи
     promotion:
-      name: Ime
+      add_action: Додајте акцију
+      add_rule: Додајте правило

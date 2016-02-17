@@ -39,3 +39,21 @@ CHANGELOG
 * Remove the ``sylius_shipping`` prefix from services and models.
   Use simple ``sylius`` instead.
 * Tag ``sylius_shipping.calculator`` was renamed to ``sylius.shipping_calculator``.
+
+### v0.16.0
+
+* Change service sylius.shipping_calculator_registry to sylius.registry.shipping_calculator
+  and sylius.shipping_rule_checker_registry to sylius.registry.shipping_rule_checker
+* Change service id for shipping rule checker registry to sylius.registry.shipping_rule_checker in RegisterRuleCheckersPass,
+  RegisterRuleCheckersPassSpec
+* Change id of service to sylius.registry.shipping_calculator in RegisterCalculatorsPassSpec, RegisterCalculatorsPass
+* Replace custom RuleCheckerRegistry with ServiceRegistry in BuildRuleFormSubscriber, RuleType, ShippingMethodType,
+  BuildRuleFormSubscriberSpec, RuleTypeSpec, ShippingMethodTypeSpec
+* Replace custom CalculatorRegistry with ServiceRegistry in BuildShippingMethodFormSubscriber, ShippingMethodChoiceType, ShippingMethodType,
+  BuildShippingMethodFormSubscriberSpec, ShippingMethodChoiceTypeSpec
+
+* Add new field FormRegistryInterface to ShippingMethod in SyliusShippingExtension
+* Change name of calculators forms according to this schema: sylius.form.type_shipping_calculator_<typeOfCalculator> in service.xml
+* Change name of calculator types according to this schema : sylius_shipping_calculator_<typeOfCalculator> in class from Type/Calculator
+* BuildMethodFromSubscriber - add new filed FormRegistryInterface, rework addConfigurationFields method
+* ShippingMethodType - is constructed with new parameter FormRegistryInterface, rework buildForm

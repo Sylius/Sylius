@@ -11,11 +11,15 @@
 
 namespace Sylius\Component\Addressing\Model;
 
+use Sylius\Component\Resource\Model\TimestampableTrait;
+
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
 class Address implements AddressInterface
 {
+    use TimestampableTrait;
+
     /**
      * @var mixed
      */
@@ -42,14 +46,14 @@ class Address implements AddressInterface
     protected $company;
 
     /**
-     * @var CountryInterface
+     * @var string
      */
-    protected $country;
+    protected $countryCode;
 
     /**
-     * @var ProvinceInterface
+     * @var string
      */
-    protected $province;
+    protected $provinceCode;
 
     /**
      * @var string
@@ -65,16 +69,6 @@ class Address implements AddressInterface
      * @var string
      */
     protected $postcode;
-
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
 
     public function __construct()
     {
@@ -164,49 +158,41 @@ class Address implements AddressInterface
     /**
      * {@inheritdoc}
      */
-    public function getCountry()
+    public function getCountryCode()
     {
-        return $this->country;
+        return $this->countryCode;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setCountry(CountryInterface $country = null)
+    public function setCountryCode($countryCode = null)
     {
-        if (null === $country) {
-            $this->province = null;
+        if (null === $countryCode) {
+            $this->provinceCode = null;
         }
 
-        $this->country = $country;
+        $this->countryCode = $countryCode;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getProvince()
+    public function getProvinceCode()
     {
-        return $this->province;
+        return $this->provinceCode;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setProvince(ProvinceInterface $province = null)
+    public function setProvinceCode($provinceCode = null)
     {
-        if (null === $this->country) {
-            throw new \BadMethodCallException('Cannot define province on address without assigned country');
+        if (null === $this->countryCode) {
+            return;
         }
 
-        if (null !== $province && !$this->country->hasProvince($province)) {
-            throw new \InvalidArgumentException(sprintf(
-                'Cannot set province "%s", because it does not belong to country "%s"',
-                $province->getName(),
-                $this->country->getName()
-            ));
-        }
-
-        $this->province = $province;
+        $this->provinceCode = $provinceCode;
     }
 
     /**
@@ -255,37 +241,5 @@ class Address implements AddressInterface
     public function setPostcode($postcode)
     {
         $this->postcode = $postcode;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
     }
 }

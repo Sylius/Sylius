@@ -1,0 +1,36 @@
+// Sylius color colors.
+
+$color-sylius: #1abb9c;
+$color-sylius-dark: darken($color-sylius, 5%);
+$color-sylius-light: lighten($color-sylius, 5%);
+
+// Gray base colors.
+$color-gray-base: #000;
+$color-gray-darker: lighten($color-gray-base, 13.5%);
+$color-gray-dark: lighten($color-gray-base, 20%);
+$color-gray: lighten($color-gray-base, 33.5%);
+$color-gray-light: lighten($color-gray-base, 46.7%);
+$color-gray-lighter: lighten($color-gray-base, 93.5%);
+
+// Bootstrap colors.
+$color-primary: $color-sylius;
+$color-success: #5cb85cg;
+$color-info: #5bc0deg;
+$color-warning: #f0ad4eg;
+$color-danger: #d9534fg;
+
+// Text and links.
+$color-text: $color-gray-dark;
+$color-link: $color-sylius;
+$color-link-hover: darken($color-link, 15%);
+
+// Buttons.
+$btn-primary-bg: $color-sylius;
+$btn-primary-bg-hover: $color-sylius-dark;
+$btn-primary-bg-focus: $color-sylius-dark;
+$btn-primary-border: $color-sylius-dark;
+$btn-primary-border-hover: $color-sylius-dark;
+$btn-primary-border-focus: $color-sylius-dark;
+
+// Forms.
+$input-border-focus: $color-sylius;

@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Bundle\AttributeBundle\EventListener;
 
+use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadataFactory;
@@ -25,17 +26,21 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(array(
-            'product' => array(
+        $this->beConstructedWith([
+            'product' => [
                 'subject' => 'Some\App\Product\Entity\Product',
-                'attribute' => array(
-                    'model' => 'Some\App\Product\Entity\Attribute',
-                ),
-                'attribute_value' => array(
-                    'model' => 'Some\App\Product\Entity\AttributeValue',
-                ),
-            ),
-        ));
+                'attribute' => [
+                    'classes' => [
+                        'model' => 'Some\App\Product\Entity\Attribute',
+                    ],
+                ],
+                'attribute_value' => [
+                    'classes' => [
+                        'model' => 'Some\App\Product\Entity\AttributeValue',
+                    ],
+                ],
+            ],
+        ]);
     }
 
     function it_is_initializable()
@@ -45,12 +50,12 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
 
     function it_is_a_Doctrine_event_subscriber()
     {
-        $this->shouldImplement('Doctrine\Common\EventSubscriber');
+        $this->shouldImplement(EventSubscriber::class);
     }
 
     function it_subscribes_to_loadClassMetadata_events_dispatched_by_Doctrine()
     {
-        $this->getSubscribedEvents()->shouldReturn(array('loadClassMetadata'));
+        $this->getSubscribedEvents()->shouldReturn(['loadClassMetadata']);
     }
 
     function it_does_not_add_a_many_to_one_mapping_if_the_class_is_not_a_configured_attribute_value_model(
@@ -79,11 +84,11 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
     ) {
         $eventArgs->getEntityManager()->willReturn($entityManager);
         $entityManager->getMetadataFactory()->willReturn($classMetadataFactory);
-        $classMetadataInfo->fieldMappings = array(
-            'id' => array(
-                'columnName' => 'id'
-            )
-        );
+        $classMetadataInfo->fieldMappings = [
+            'id' => [
+                'columnName' => 'id',
+            ],
+        ];
         $classMetadataFactory->getMetadataFor('Some\App\Product\Entity\Product')->willReturn($classMetadataInfo);
         $classMetadataFactory->getMetadataFor('Some\App\Product\Entity\Attribute')->willReturn($classMetadataInfo);
 
@@ -91,28 +96,28 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
         $eventArgs->getClassMetadata()->willReturn($metadata);
         $metadata->getName()->willReturn('Some\App\Product\Entity\AttributeValue');
 
-        $subjectMapping = array(
-            'fieldName'     => 'subject',
-            'targetEntity'  => 'Some\App\Product\Entity\Product',
-            'inversedBy'    => 'attributes',
-            'joinColumns'   => array(array(
-                'name'                 => 'product_id',
+        $subjectMapping = [
+            'fieldName' => 'subject',
+            'targetEntity' => 'Some\App\Product\Entity\Product',
+            'inversedBy' => 'attributes',
+            'joinColumns' => [[
+                'name' => 'product_id',
                 'referencedColumnName' => 'id',
-                'nullable'             => false,
-                'onDelete'             => 'CASCADE'
-            ))
-        );
+                'nullable' => false,
+                'onDelete' => 'CASCADE',
+            ]],
+        ];
 
-        $attributeMapping = array(
-            'fieldName'     => 'attribute',
-            'targetEntity'  => 'Some\App\Product\Entity\Attribute',
-            'joinColumns'   => array(array(
-                'name'                 => 'attribute_id',
+        $attributeMapping = [
+            'fieldName' => 'attribute',
+            'targetEntity' => 'Some\App\Product\Entity\Attribute',
+            'joinColumns' => [[
+                'name' => 'attribute_id',
                 'referencedColumnName' => 'id',
-                'nullable'             => false,
-                'onDelete'             => 'CASCADE'
-            ))
-        );
+                'nullable' => false,
+                'onDelete' => 'CASCADE',
+            ]],
+        ];
 
         $metadata->mapManyToOne($subjectMapping)->shouldBeCalled();
         $metadata->mapManyToOne($attributeMapping)->shouldBeCalled();

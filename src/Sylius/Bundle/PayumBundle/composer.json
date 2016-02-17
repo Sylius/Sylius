@@ -24,19 +24,18 @@
         }
     ],
     "require": {
-        "php":                    ">=5.5.9",
+        "php": "^5.5.9|^7.0",
 
-        "sylius/core":                          "0.16.*",
-        "sylius/currency":                      "0.16.*",
-        "sylius/order-bundle":                  "0.16.*",
-        "sylius/payment-bundle":                "0.16.*",
-        "sylius/resource-bundle":               "0.16.*",
-        "payum/payum":                          "~0.14.0",
-        "payum/payum-bundle":                   "~0.14.2",
-        "winzou/state-machine":                 "~0.1"
+        "payum/payum": "~1.0",
+        "payum/payum-bundle": "~1.0",
+        "sylius/core": "0.17.*",
+        "sylius/currency": "0.17.*",
+        "sylius/order-bundle": "0.17.*",
+        "sylius/payment-bundle": "0.17.*",
+        "sylius/resource-bundle": "0.17.*"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2.1"
+        "phpspec/phpspec": "^2.4"
     },
     "config": {
         "bin-dir": "bin"
@@ -50,7 +49,7 @@
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.16-dev"
+            "dev-master": "0.17-dev"
         }
     }
 }

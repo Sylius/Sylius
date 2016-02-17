@@ -13,8 +13,10 @@ namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * The payment step of checkout.
@@ -31,6 +33,8 @@ class PaymentStep extends CheckoutStep
     {
         $order = $this->getCurrentCart();
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PAYMENT_INITIALIZE, $order);
+
+        $this->applyTransition(OrderCheckoutTransitions::TRANSITION_RESELECT_PAYMENT, $order, true);
 
         $form = $this->createCheckoutPaymentForm($order);
 
@@ -52,6 +56,8 @@ class PaymentStep extends CheckoutStep
         if ($form->handleRequest($request)->isValid()) {
             $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PAYMENT_PRE_COMPLETE, $order);
 
+            $this->applyTransition(OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT, $order);
+
             $this->getManager()->persist($order);
             $this->getManager()->flush();
 
@@ -63,15 +69,27 @@ class PaymentStep extends CheckoutStep
         return $this->renderStep($context, $order, $form);
     }
 
+    /**
+     * @param ProcessContextInterface $context
+     * @param OrderInterface $order
+     * @param FormInterface $form
+     *
+     * @return Response
+     */
     protected function renderStep(ProcessContextInterface $context, OrderInterface $order, FormInterface $form)
     {
-        return $this->render($this->container->getParameter(sprintf('sylius.checkout.step.%s.template', $this->getName())), array(
-            'order'   => $order,
-            'form'    => $form->createView(),
-            'context' => $context
-        ));
+        return $this->render($this->container->getParameter(sprintf('sylius.checkout.step.%s.template', $this->getName())), [
+            'order' => $order,
+            'form' => $form->createView(),
+            'context' => $context,
+        ]);
     }
 
+    /**
+     * @param OrderInterface $order
+     *
+     * @return FormInterface
+     */
     protected function createCheckoutPaymentForm(OrderInterface $order)
     {
         return $this->createForm('sylius_checkout_payment', $order);

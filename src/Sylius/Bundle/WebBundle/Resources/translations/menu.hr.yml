@@ -6,34 +6,36 @@ sylius:
     menu:
       main:
         assortment: Ponuda
+        blocks: Blokovi
         configuration: Postavke
+        content: Sadržaj
         countries: Države
-        customer: Klijenti (Kupci)
         dashboard: Kontrolna ploča
-        exchange_rates: Tečajna lista
         general_settings: Osnovne postavke
+        groups: Grupe
         homepage: Vaša trgovina
         locales: Lokaliteti
         new_order: Dodaj novu narudžbu
         new_promotion: Dodaj novu promociju
         options: Uredi opcije proizvoda
         orders: Trenutne narudžbe
+        pages: Stranice
         payment_methods: Načini plaćanja
         payments: Plaćanja
         products: Proizvodi
         promotions: Promocije
-        properties: Uredi svojstva
-        prototypes: Prototipovi proizvoda
+        roles: Role (korisnička prava)
+        routes: Rute
         sales: Narudžbe
         shipments: Pošiljke
         shipping_categories: Kategorije pošiljki
         shipping_methods: Načini slanja
+        slideshow: Automatski prikaz
         stockables: Stanje zaliha
         tax_categories: Kategorije poreza
         tax_rates: Stope poreza
         taxation_settings: Postavke poreza
         taxonomies: Kategorizacija
-        users: Korisnici
         zones: Regije
       sidebar:
         assortment: Ponuda
@@ -41,9 +43,7 @@ sylius:
         configuration: Postavke
         content: Sadržaj
         countries: Države
-        customer: Kupci
         dashboard: Kontrolna ploča
-        exchange_rates: Tečajna lista
         general_settings: Osnovne postavke
         groups: Grupe
         homepage: Povratak na web trgovinu
@@ -57,18 +57,18 @@ sylius:
         payments: Plaćanja
         products: Proizvodi
         promotions: Akcije
-        properties: Uredi svojstva
-        prototypes: Prototipovi proizvoda
+        roles: Role (korisnička prava)
+        routes: Rute
         sales: Narudžbe
         shipments: Pošiljke
         shipping_categories: Kategorije pošiljki
         shipping_methods: Načini slanja
+        slideshow: Automatski prikaz
         stockables: Stanje skladišta
         tax_categories: Postavke poreza
         tax_rates: Stope poreza
         taxation_settings: Postavke poreza
         taxonomies: Kategorizacija
-        users: Korisnici
         zones: Regije
   frontend:
     menu:

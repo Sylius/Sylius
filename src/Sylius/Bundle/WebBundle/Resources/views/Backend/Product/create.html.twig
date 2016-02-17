@@ -5,6 +5,7 @@
 {% block javascripts %}
 {{ parent() }}
 {% javascripts output='assets/compiled/backend_product.js'
+    'bundles/syliusattribute/js/sylius-attribute.js'
     'bundles/syliusshipping/js/prototype-handler.js'
     'bundles/syliusweb/js/dynamic-property-types.js'
     '@A2lixTranslationFormBundle/Resources/public/js/a2lix_translation_bootstrap.js'
@@ -33,3 +34,4 @@
     {{ create() }}
 </form>
 {% endblock %}
+{% render(url('sylius_backend_product_attributes')) %}

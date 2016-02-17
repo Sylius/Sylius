@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\UserBundle\Form\Type;
 
+use Sylius\Bundle\UserBundle\Form\Model\PasswordResetRequest;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -26,9 +27,9 @@ class UserRequestPasswordResetType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', 'email', array(
+            ->add('email', 'email', [
                 'label' => 'sylius.form.user.email',
-            ))
+            ])
         ;
     }
 
@@ -37,10 +38,10 @@ class UserRequestPasswordResetType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Sylius\Bundle\UserBundle\Form\Model\PasswordReset',
-            'validation_groups' => array('sylius'),
-        ));
+        $resolver->setDefaults([
+            'data_class' => PasswordResetRequest::class,
+            'validation_groups' => ['sylius'],
+        ]);
     }
 
     /**

@@ -22,7 +22,7 @@ use Sylius\Component\Core\Model\UserInterface;
  */
 class LoadUsersData extends DataFixture
 {
-    private $usernames = array();
+    private $usernames = [];
 
     /**
      * {@inheritdoc}
@@ -33,16 +33,16 @@ class LoadUsersData extends DataFixture
             'sylius@example.com',
             'sylius',
             true,
-            array('ROLE_USER', 'ROLE_SYLIUS_ADMIN', 'ROLE_ADMINISTRATION_ACCESS')
+            ['ROLE_USER', 'ROLE_ADMINISTRATION_ACCESS']
         );
-        $user->addAuthorizationRole($this->get('sylius.repository.role')->findOneBy(array('code' => 'administrator')));
+        $user->addAuthorizationRole($this->get('sylius.repository.role')->findOneBy(['code' => 'administrator']));
 
         $manager->persist($user);
         $manager->flush();
 
         $this->setReference('Sylius.User-Administrator', $user);
 
-        for ($i = 1; $i <= 200; $i++) {
+        for ($i = 1; $i <= 200; ++$i) {
             $username = $this->faker->username;
 
             while (isset($this->usernames[$username])) {
@@ -64,7 +64,7 @@ class LoadUsersData extends DataFixture
             $this->setReference('Sylius.Customer-'.$i, $user->getCustomer());
         }
 
-        $customer = $this->getCustomerRepository()->createNew();
+        $customer = $this->getCustomerFactory()->createNew();
         $customer->setFirstname($this->faker->firstName);
         $customer->setLastname($this->faker->lastName);
         $customer->setEmail('customer@email.com');
@@ -90,13 +90,13 @@ class LoadUsersData extends DataFixture
      *
      * @return UserInterface
      */
-    protected function createUser($email, $password, $enabled = true, array $roles = array('ROLE_USER'), $currency = 'EUR')
+    protected function createUser($email, $password, $enabled = true, array $roles = ['ROLE_USER'], $currency = 'EUR')
     {
         $canonicalizer = $this->get('sylius.user.canonicalizer');
 
         /* @var $user UserInterface */
-        $user = $this->getUserRepository()->createNew();
-        $customer = $this->getCustomerRepository()->createNew();
+        $user = $this->getUserFactory()->createNew();
+        $customer = $this->getCustomerFactory()->createNew();
         $customer->setFirstname($this->faker->firstName);
         $customer->setLastname($this->faker->lastName);
         $customer->setCurrency($currency);

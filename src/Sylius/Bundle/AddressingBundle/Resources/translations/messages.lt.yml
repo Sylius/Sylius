@@ -14,7 +14,7 @@ sylius:
       street: Gatvė
       province: Provincija
     country:
-      iso_name: ISO pavadinimas
+      add_province: Pridėti provinciją
       name: Pavadinimas
       provinces: Provincijos
       select: Pasirinkite
@@ -22,6 +22,7 @@ sylius:
       name: Pavadinimas
       select: Pasirinkite
     zone:
+      add_member: Pridėti narį
       members: Nariai
       name: Pavadinimas
       type: Tipas
@@ -30,10 +31,7 @@ sylius:
         province: Provincija
         zone: Zona
       scope: Apimtis
+      select: Pasirinkite
       select_scope: Pasirinkite sritį
-    zone_member_country:
-      country: Šalis
-    zone_member_province:
-      province: Provincija
-    zone_member_zone:
-      zone: Zona
+    zone_member:
+      select: Pasirinkite

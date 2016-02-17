@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\OrderBundle\Doctrine\ORM;
 
 use Doctrine\ORM\AbstractQuery;
@@ -10,6 +19,8 @@ use Doctrine\ORM\Query\FilterCollection;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 
 class OrderRepositorySpec extends ObjectBehavior
 {
@@ -25,8 +36,8 @@ class OrderRepositorySpec extends ObjectBehavior
 
     function it_is_repository()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository');
-        $this->shouldImplement('Sylius\Component\Order\Repository\OrderRepositoryInterface');
+        $this->shouldHaveType(EntityRepository::class);
+        $this->shouldImplement(OrderRepositoryInterface::class);
     }
 
     function it_finds_recent_orders(

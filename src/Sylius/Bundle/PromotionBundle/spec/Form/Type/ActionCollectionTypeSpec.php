@@ -12,7 +12,8 @@
 namespace spec\Sylius\Bundle\PromotionBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
+use Sylius\Bundle\PromotionBundle\Form\Type\ActionCollectionType;
+use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationCollectionType;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormConfigInterface;
@@ -32,12 +33,12 @@ class ActionCollectionTypeSpec extends ObjectBehavior
 
     function it_is_initializabled()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\ActionCollectionType');
+        $this->shouldHaveType(ActionCollectionType::class);
     }
 
     function it_is_configuration_collection_type()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationCollectionType');
+        $this->shouldHaveType(AbstractConfigurationCollectionType::class);
     }
 
     function it_builds_prototypes(
@@ -46,21 +47,21 @@ class ActionCollectionTypeSpec extends ObjectBehavior
         FormInterface $form,
         $registry
     ) {
-        $registry->all()->willReturn(array('configuration_kind' => ''));
+        $registry->all()->willReturn(['configuration_kind' => '']);
 
-        $builder->create('name', 'sylius_promotion_action', array('configuration_type' => 'configuration_kind'))
+        $builder->create('name', 'sylius_promotion_action', ['configuration_type' => 'configuration_kind'])
             ->willReturn($prototype);
 
         $prototype->getForm()->willReturn($form);
 
-        $builder->setAttribute('prototypes', array('configuration_kind' => $form))->shouldBeCalled();
+        $builder->setAttribute('prototypes', ['configuration_kind' => $form])->shouldBeCalled();
 
-        $this->buildForm($builder, array(
+        $this->buildForm($builder, [
             'registry' => $registry,
             'prototype_name' => 'name',
             'type' => 'sylius_promotion_action',
-            'options' => array(),
-        ));
+            'options' => [],
+        ]);
     }
 
     function it_builds_view(
@@ -70,22 +71,22 @@ class ActionCollectionTypeSpec extends ObjectBehavior
         FormInterface $prototype
     ) {
         $form->getConfig()->willReturn($config);
-        $config->getAttribute('prototypes')->willReturn(array('configuration_kind' => $prototype));
+        $config->getAttribute('prototypes')->willReturn(['configuration_kind' => $prototype]);
 
         $prototype->createView($view)->shouldBeCalled();
 
-        $this->buildView($view, $form, array());
+        $this->buildView($view, $form, []);
     }
 
     function it_should_have_default_option(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'type' => 'sylius_promotion_action',
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-            ))->shouldBeCalled()
+            ])->shouldBeCalled()
         ;
         $this->configureOptions($resolver);
     }

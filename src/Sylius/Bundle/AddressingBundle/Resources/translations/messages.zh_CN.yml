@@ -1,0 +1,37 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    address:
+      city: 城市
+      company: 公司
+      country: 国家
+      first_name: 名
+      last_name: 姓
+      phone_number: 电话
+      postcode: 邮编
+      street: 街道
+      province: 省/直辖市/自治区
+    country:
+      add_province: 添加省
+      name: 名称
+      provinces: 省份
+      select: 请选择
+    province:
+      name: 名称
+      select: 请选择
+    zone:
+      add_member: 添加成员
+      members: 会员
+      name: 名称
+      type: 类型
+      types:
+        country: test
+        province: 省/直辖市/自治区
+        zone: 区域
+      scope: 范围
+      select: 请选择
+      select_scope: 选择范围
+    zone_member:
+      select: 请选择

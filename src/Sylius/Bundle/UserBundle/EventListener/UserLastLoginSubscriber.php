@@ -35,14 +35,14 @@ class UserLastLoginSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             SecurityEvents::INTERACTIVE_LOGIN => 'onSecurityInteractiveLogin',
             UserEvents::SECURITY_IMPLICIT_LOGIN => 'onImplicitLogin',
-        );
+        ];
     }
 
     /**
@@ -72,6 +72,6 @@ class UserLastLoginSubscriber implements EventSubscriberInterface
     {
         $user->setLastLogin(new \DateTime());
         $this->userManager->persist($user);
-        $this->userManager->flush($user);
+        $this->userManager->flush();
     }
 }

@@ -32,11 +32,11 @@ class SecurityController extends Controller
         $formType = $request->attributes->get('_sylius[form]', 'sylius_user_security_login', true);
         $form = $this->get('form.factory')->createNamed('', $formType);
 
-        return $this->renderLogin($template, array(
-            'form'          => $form->createView(),
+        return $this->renderLogin($template, [
+            'form' => $form->createView(),
             'last_username' => $lastUsername,
-            'error'         => $error,
-        ));
+            'error' => $error,
+        ]);
     }
 
     /**
@@ -52,7 +52,7 @@ class SecurityController extends Controller
      */
     public function logoutAction(Request $request)
     {
-        throw new \RuntimeException('You must configure the check path to be handled by the firewall.');
+        throw new \RuntimeException('You must configure the logout path to be handled by the firewall.');
     }
 
     /**

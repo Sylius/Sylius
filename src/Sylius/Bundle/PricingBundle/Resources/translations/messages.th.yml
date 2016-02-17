@@ -7,3 +7,6 @@ sylius:
       price: ราคา
       calculator: การกำหนดราคา
       configuration: ตั้งค่า
+    pricing:
+      volume_based:
+        price: ราคา

@@ -9,11 +9,11 @@ sylius:
       country: Land
       first_name: Förnamn
       last_name: Efternamn
+      phone_number: Telefonnummer
       postcode: Postnummer
       street: Gatuadress
       province: Län
     country:
-      iso_name: ISOnamn
       name: Namn
       provinces: Län
       select: Välj
@@ -29,9 +29,6 @@ sylius:
         province: Län
         zone: Zon
       scope: Omfattning
-    zone_member_country:
-      country: Land
-    zone_member_province:
-      province: Län
-    zone_member_zone:
-      zone: Zon
+      select: Välj
+    zone_member:
+      select: Välj

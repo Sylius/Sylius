@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  checkout:
-    shipping_method:
-      not_blank: Välj ett leveranssätt.
   form:
     action:
       add_product_configuration:
@@ -21,6 +18,8 @@ sylius:
     group:
       name: Namn
       roles: Roller
+    channel:
+      currency_default: Standardvaluta
     image:
       file: Bild
     locale:
@@ -54,6 +53,10 @@ sylius:
       created_at_to: Till
       number: Beställningsnummer
       shipping_address: Skickas till
+    payment_filter:
+      created_at_from: Från
+      created_at_to: Till
+      number: Beställningsnummer
     shipping_method:
       zone: Zon
     taxon:
@@ -66,5 +69,8 @@ sylius:
       enabled: Aktiverad
       first_name: Förnamn
       groups: Grupper
+      roles: Roller
     variant:
       sku: SKU
+    product_association_type:
+      name: Namn

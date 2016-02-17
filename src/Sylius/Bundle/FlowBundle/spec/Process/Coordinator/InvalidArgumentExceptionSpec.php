@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\FlowBundle\Process\Coordinator;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class InvalidArgumentExceptionSpec extends ObjectBehavior
 {
@@ -23,6 +22,6 @@ class InvalidArgumentExceptionSpec extends ObjectBehavior
 
     function it_is_a_exception()
     {
-        $this->shouldHaveType('\Exception');
+        $this->shouldHaveType(\Exception::class);
     }
 }

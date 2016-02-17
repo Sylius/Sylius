@@ -21,8 +21,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * Province controller.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
 class ProvinceController extends ResourceController
@@ -43,23 +41,24 @@ class ProvinceController extends ResourceController
             throw new AccessDeniedException();
         }
 
+        /* @var CountryInterface $country */
         if (!$country = $this->getCountryRepository()->find($countryId)) {
             throw new NotFoundHttpException('Requested country does not exist.');
         }
 
         if (!$country->hasProvinces()) {
-            return new JsonResponse(array('content' => false));
+            return new JsonResponse(['content' => false]);
         }
 
         $form = $this->createProvinceChoiceForm($country);
 
-        $content = $this->renderView($this->getConfiguration()->getTemplate('_provinceChoiceForm.html'), array(
+        $content = $this->renderView($this->getConfiguration()->getTemplate('_provinceChoiceForm.html'), [
             'form' => $form->createView(),
-        ));
+        ]);
 
-        return new JsonResponse(array(
+        return new JsonResponse([
             'content' => $content,
-        ));
+        ]);
     }
 
     /**
@@ -67,14 +66,14 @@ class ProvinceController extends ResourceController
      */
     public function createNew()
     {
-        $request = $this->getRequest();
+        $request = $this->config->getRequest();
         if (null === $countryId = $request->get('countryId')) {
             throw new NotFoundHttpException('No country given');
         }
 
         $country = $this
             ->getCountryController()
-            ->findOr404($request, array('id' => $countryId))
+            ->findOr404($request, ['id' => $countryId])
         ;
 
         $province = parent::createNew();
@@ -84,8 +83,6 @@ class ProvinceController extends ResourceController
     }
 
     /**
-     * Get country controller.
-     *
      * @return ResourceController
      */
     protected function getCountryController()
@@ -94,8 +91,6 @@ class ProvinceController extends ResourceController
     }
 
     /**
-     * Get country repository.
-     *
      * @return ObjectRepository
      */
     protected function getCountryRepository()
@@ -104,18 +99,16 @@ class ProvinceController extends ResourceController
     }
 
     /**
-     * Create province choice form for given country.
-     *
      * @param CountryInterface $country
      *
      * @return FormInterface
      */
     protected function createProvinceChoiceForm(CountryInterface $country)
     {
-        return $this->get('form.factory')->createNamed('sylius_address_province', 'sylius_province_choice', null, array(
-            'country'     => $country,
-            'label'       => 'sylius.form.address.province',
+        return $this->get('form.factory')->createNamed('sylius_address_province', 'sylius_province_choice', null, [
+            'country' => $country,
+            'label' => 'sylius.form.address.province',
             'empty_value' => 'sylius.form.province.select',
-        ));
+        ]);
     }
 }

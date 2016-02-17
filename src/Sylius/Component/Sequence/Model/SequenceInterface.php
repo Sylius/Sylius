@@ -11,7 +11,9 @@
 
 namespace Sylius\Component\Sequence\Model;
 
-interface SequenceInterface
+use Sylius\Component\Resource\Model\ResourceInterface;
+
+interface SequenceInterface extends ResourceInterface
 {
     /**
      * @return string
@@ -19,7 +21,7 @@ interface SequenceInterface
     public function getType();
 
     /**
-     * @return integer
+     * @return int
      */
     public function getIndex();
 

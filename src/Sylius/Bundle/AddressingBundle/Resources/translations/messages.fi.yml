@@ -14,7 +14,6 @@ sylius:
       street: Katuosoite
       province: Lääni
     country:
-      iso_name: ISO nimi
       name: Nimi
       select: Valitse
     province:
@@ -24,5 +23,6 @@ sylius:
       members: Jäsenet
       name: Nimi
       type: Tyyppi
-    zone_member_country:
-      country: Maa
+      select: Valitse
+    zone_member:
+      select: Valitse

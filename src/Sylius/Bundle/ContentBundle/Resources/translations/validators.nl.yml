@@ -1,0 +1,76 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  imagine_block:
+    start_date:
+      invalid_date: Start datum publiceren ongeldig.
+    end_date:
+      invalid_date: Eind datum publiceren ongeldig.
+  menu:
+    name:
+      not_blank: Voer menu naam in.
+    label:
+      not_blank: Voer menu label in.
+    start_date:
+      invalid_date: Start datum publiceren ongeldig.
+    end_date:
+      invalid_date: Eind datum publiceren ongeldig.
+  menu_node:
+    name:
+      not_blank: 'Voer menu "node" naam in.'
+    label:
+      not_blank: 'Voer menu "node" label in.'
+    start_date:
+      invalid_date: Start datum publiceren ongeldig.
+    end_date:
+      invalid_date: Eind datum publiceren ongeldig.
+  route:
+    name:
+      not_blank: Voer menu route naam in.
+    content:
+      not_blank: Voer menu route inhoud in.
+    start_date:
+      invalid_date: Start datum publiceren ongeldig.
+    end_date:
+      invalid_date: Eind datum publiceren ongeldig.
+  slideshow_block:
+    name:
+      not_blank: Voer slideshow naam in.
+    title:
+      not_blank: Voer slideshow titel in.
+    start_date:
+      invalid_date: Start datum publiceren ongeldig.
+    end_date:
+      invalid_date: Eind datum publiceren ongeldig.
+  simple_block:
+    name:
+      not_blank: Voer eenvoudige blok naam in.
+    title:
+      not_blank: Voer eenvoudige blok titel in.
+    body:
+      not_blank: Voer eenvoudige blok raamwerk in.
+    start_date:
+      invalid_date: Start datum publiceren ongeldig.
+    end_date:
+      invalid_date: Eind datum publiceren ongeldig.
+  string_block:
+    name:
+      not_blank: Voer eenvoudige blok naam in.
+    body:
+      not_blank: Voer eenvoudige blok raamwerk in.
+    start_date:
+      invalid_date: Start datum publiceren ongeldig.
+    end_date:
+      invalid_date: Eind datum publiceren ongeldig.
+  static_content:
+    name:
+      not_blank: Voer statische inhoud naam in.
+    title:
+      not_blank: Voer eenvoudige statische inhoud titel in.
+    body:
+      not_blank: Voer eenvoudige statische inhoud raamwerk in.
+    start_date:
+      invalid_date: Start datum publiceren ongeldig.
+    end_date:
+      invalid_date: Eind datum publiceren ongeldig.

@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\SettingsBundle\Transformer;
 use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\SettingsBundle\Model\ParameterInterface;
+use Sylius\Bundle\SettingsBundle\Transformer\ParameterTransformerInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -25,14 +26,14 @@ class ObjectToIdentifierTransformerSpec extends ObjectBehavior
         $this->beConstructedWith($repository, 'name');
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SettingsBundle\Transformer\ObjectToIdentifierTransformer');
     }
 
     function it_should_implement_parameter_transformer_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\SettingsBundle\Transformer\ParameterTransformerInterface');
+        $this->shouldImplement(ParameterTransformerInterface::class);
     }
 
     function it_should_return_null_when_null_transformed()
@@ -56,14 +57,14 @@ class ObjectToIdentifierTransformerSpec extends ObjectBehavior
         $repository,
         ParameterInterface $object
     ) {
-        $repository->findOneBy(array('name' => 'foo'))->shouldBeCalled()->willReturn($object);
+        $repository->findOneBy(['name' => 'foo'])->shouldBeCalled()->willReturn($object);
 
         $this->reverseTransform('foo')->shouldReturn($object);
     }
 
     function it_should_null_when_object_not_found_on_reverse_transform($repository)
     {
-        $repository->findOneBy(array('name' => 'baz'))->shouldBeCalled()->willReturn(null);
+        $repository->findOneBy(['name' => 'baz'])->shouldBeCalled()->willReturn(null);
 
         $this->reverseTransform('baz')->shouldReturn(null);
     }

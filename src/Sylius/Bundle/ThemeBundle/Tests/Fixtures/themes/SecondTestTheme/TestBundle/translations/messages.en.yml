@@ -1,0 +1,5 @@
+test:
+  theme_bundle: 'That should be overrided by first test theme.'
+  theme: 'That should be overrided by first test theme.'
+  parent_theme_bundle: 'PARENT_THEME/BUNDLE_NAME/translations'
+  parent_theme: 'PARENT_THEME/BUNDLE_NAME/translations'

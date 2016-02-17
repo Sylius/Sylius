@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Report\DataFetcher\Data;
 use Sylius\Component\Report\Model\ReportInterface;
 use Sylius\Component\Report\Renderer\DefaultRenderers;
+use Sylius\Component\Report\Renderer\RendererInterface;
 use Symfony\Component\Templating\EngineInterface;
 
 /**
@@ -35,25 +36,25 @@ class ChartRendererSpec extends ObjectBehavior
 
     function it_should_implement_renderer_interface()
     {
-        $this->shouldImplement('Sylius\Component\Report\Renderer\RendererInterface');
+        $this->shouldImplement(RendererInterface::class);
     }
 
     function it_renders_data_with_given_configuration(ReportInterface $report, Data $reportData, $templating)
     {
-        $reportData->getData()->willReturn(array('month1' => '50', 'month2' => '40'));
+        $reportData->getData()->willReturn(['month1' => '50', 'month2' => '40']);
 
-        $renderData = array(
+        $renderData = [
             'report' => $report,
-            'values' => array('month1' => '50', 'month2' => '40'),
-            'labels' => array('month1', 'month2'),
-        );
+            'values' => ['month1' => '50', 'month2' => '40'],
+            'labels' => ['month1', 'month2'],
+        ];
 
-        $report->getRendererConfiguration()->willReturn(array('template' => 'SyliusReportBundle:Chart:default.html.twig'));
+        $report->getRendererConfiguration()->willReturn(['template' => 'SyliusReportBundle:Chart:default.html.twig']);
 
-        $templating->render('SyliusReportBundle:Chart:default.html.twig', array(
+        $templating->render('SyliusReportBundle:Chart:default.html.twig', [
             'data' => $renderData,
-            'configuration' => array('template' => 'SyliusReportBundle:Chart:default.html.twig'),
-        ))->willReturn('<div>Chart Report</div>');
+            'configuration' => ['template' => 'SyliusReportBundle:Chart:default.html.twig'],
+        ])->willReturn('<div>Chart Report</div>');
 
         $this->render($report, $reportData)->shouldReturn('<div>Chart Report</div>');
     }

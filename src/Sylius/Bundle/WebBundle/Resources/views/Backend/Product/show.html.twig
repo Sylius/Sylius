@@ -17,15 +17,23 @@
 <div class="page-header">
     <div class="actions-menu">
     {{ buttons.manage(path('sylius_backend_product_index'), 'sylius.product.manage'|trans) }}
-    {% if not product.deleted %}
-    {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}
-    {{ buttons.delete(path('sylius_backend_product_delete', {'id': product.id}), null, false, true) }}
-    <a href="{{ path(product) }}" class="btn btn-info">
-       <i class="glyphicon glyphicon-shopping-cart"></i>
-        {{ 'sylius.product.show_in_store'|trans }}
-    </a>
+    {% if product.enabled %}
+        {{ buttons.disable(path('sylius_backend_product_disable', {'id': product.id})) }}
     {% else %}
-        {{ buttons.patch(path('sylius_backend_product_delete_restore', {'id': product.id}), 'sylius.product.delete_restore', null, 'btn btn-primary') }}
+        {{ buttons.enable(path('sylius_backend_product_enable', {'id': product.id})) }}
+    {% endif %}
+    {% if not product.deleted %}
+        <a href="{{ path('sylius_backend_metadata_container_customize', { 'id': product.metadataIdentifier }) }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-file"></i><span>{{ 'sylius.metadata.product.single_customize'|trans }}</span>
+        </a>
+        {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}
+        {{ buttons.delete(path('sylius_backend_product_delete', {'id': product.id}), null, false, true) }}
+        <a href="{{ path(product) }}" class="btn btn-info">
+           <i class="glyphicon glyphicon-shopping-cart"></i>
+            {{ 'sylius.product.show_in_store'|trans }}
+        </a>
+    {% else %}
+        {{ buttons.patch(path('sylius_backend_product_delete_restore', {'id': product.id}), 'sylius.restore'|trans, null, 'btn btn-primary') }}
     {% endif %}
     <a href="{{ path('sylius_backend_product_history', {'id': product.id}) }}" class="btn btn-info">
        <i class="glyphicon glyphicon-calendar"></i>
@@ -77,6 +85,12 @@
                     <td>{{ 'sylius.product.available_on'|trans }}</td>
                     <td><span class="label label-{{ product.available ? 'success' : 'danger' }}">{{ product.availableOn|date }}</span></td>
                 </tr>
+                {% if product.availableUntil %}
+                <tr>
+                    <td>{{ 'sylius.product.available_until'|trans }}</td>
+                    <td><span class="label label-{{ product.available ? 'success' : 'danger' }}">{{ product.availableUntil|date }}</span></td>
+                </tr>
+                {% endif %}
                 <tr>
                     <td>{{ 'sylius.product.options'|trans }}</td>
                     <td>
@@ -110,12 +124,22 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>{{ 'sylius.product.tax_category'|trans }}</td>
-                    <td>{{ product.taxCategory|default('sylius.product.no_tax_category'|trans) }}</td>
+                    <td>{{ 'sylius.product.main_taxon'|trans }}</td>
+                    <td>
+                        {%  if product.mainTaxon is not null %}
+                            {{ product.mainTaxon }}
+                        {%  else %}
+                            {{ 'sylius.product.no_taxon'|trans }}
+                        {%  endif %}
+                    </td>
                 </tr>
                 <tr>
                     <td>{{ 'sylius.product.shipping_category'|trans }}</td>
                     <td>{{ product.shippingCategory|default('sylius.product.no_shipping_category'|trans) }}</td>
+                </tr>
+                <tr>
+                    <td>{{ 'sylius.product.tax_category'|trans }}</td>
+                    <td>{{ product.masterVariant.taxCategory|default('sylius.product.no_tax_category'|trans) }}</td>
                 </tr>
                 <tr>
                     <td>{{ 'sylius.product.available_on_demand'|trans }}</td>
@@ -136,8 +160,16 @@
                     <td><span class="label label-{{ product.masterVariant.inStock ? 'success' : 'important' }}">{{ product.masterVariant.onHand }}</span></td>
                 </tr>
                 <tr>
+                    <td></td>
+                    <td><span class="label label-{{ product.enabled ? 'success' : 'important'}}">{{ product.enabled ? 'Enabled' : 'Disabled' }}</span></td>
+                </tr>
+                <tr>
                     <td>{{ 'sylius.product.price'|trans }}</td>
                     <td>{{ product.masterVariant.price|sylius_price }}</td>
+                </tr>
+                <tr>
+                    <td>{{ 'sylius.product.original_price'|trans }}</td>
+                    <td>{{ product.masterVariant.originalPrice|sylius_price }}</td>
                 </tr>
                 {% if product.masterVariant.pricingCalculator == 'volume_based' %}
                 <tr>
@@ -188,7 +220,11 @@
                 {% for attribute in product.attributes %}
                 <tr>
                     <td><strong>{{ attribute.name }}</strong></td>
-                    <td>{{ attribute.value }}</td>
+                    {% if attribute.value.timestamp is defined %}
+                        <td>{{ attribute.value|date('Y/m/d H:i:s') }}</td>
+                    {% else %}
+                        <td>{{ attribute.value }}</td>
+                    {% endif %}
                 </tr>
                 {% else %}
                 <tr>
@@ -199,6 +235,35 @@
                     </td>
                 </tr>
                 {% endfor %}
+            </tbody>
+        </table>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th colspan="2">{{ 'sylius.product.associations'|trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for association in product.associations %}
+                <tr>
+                    <td class="sylius-association-type"><strong>{{ association.type.name }}</strong></td>
+                    <td>
+                        <ul>
+                        {% for associatedProduct in association.associatedObjects %}
+                            <li>{{ associatedProduct.name }}</li>
+                        {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="2">
+                        <span class="label label-info">
+                            <i class="glyphicon glyphicon-list-alt icon-white"></i> {{ 'sylius.product.no_associations'|trans }}
+                        </span>
+                    </td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>

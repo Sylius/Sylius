@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\FlowBundle\Process\Context;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\FlowBundle\Process\ProcessInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 use Sylius\Bundle\FlowBundle\Storage\StorageInterface;
@@ -33,7 +34,7 @@ class ProcessContextSpec extends ObjectBehavior
 
     function it_is_a_process_context()
     {
-        $this->shouldImplement('Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface');
+        $this->shouldImplement(ProcessContextInterface::class);
     }
 
     function it_initializes(
@@ -45,7 +46,7 @@ class ProcessContextSpec extends ObjectBehavior
     ) {
         $process->getScenarioAlias()->shouldBeCalled();
         $storage->initialize(Argument::type('string'))->shouldBeCalled();
-        $process->getOrderedSteps()->shouldBeCalled()->willReturn(array($previousStep, $currentStep, $nextStep));
+        $process->getOrderedSteps()->shouldBeCalled()->willReturn([$previousStep, $currentStep, $nextStep]);
         $process->countSteps()->shouldBeCalled()->willReturn(3);
 
         $this->initialize($process, $currentStep);
@@ -54,7 +55,6 @@ class ProcessContextSpec extends ObjectBehavior
         $this->getCurrentStep()->shouldReturn($currentStep);
         $this->getPreviousStep()->shouldReturn($previousStep);
     }
-
 
     function it_is_valid(
         $storage,
@@ -66,34 +66,33 @@ class ProcessContextSpec extends ObjectBehavior
     ) {
         $process->getScenarioAlias()->shouldBeCalled();
         $storage->initialize(Argument::type('string'))->shouldBeCalled();
-        $process->getOrderedSteps()->shouldBeCalled()->willReturn(array($previousStep, $currentStep, $nextStep));
+        $process->getOrderedSteps()->shouldBeCalled()->willReturn([$previousStep, $currentStep, $nextStep]);
         $process->countSteps()->shouldBeCalled()->willReturn(3);
 
         $this->initialize($process, $currentStep);
 
         $process->getValidator()->willReturn($processValidator);
-        $processValidator->isValid()->willReturn(false);
+        $processValidator->isValid($this)->willReturn(false);
         $this->isValid()->shouldReturn(false);
 
         $process->getValidator()->willReturn($processValidator);
-        $processValidator->isValid()->willReturn(true);
+        $processValidator->isValid($this)->willReturn(true);
 
         $process->getValidator()->willReturn(null);
         $currentStep->getName()->willReturn('current_step');
-        $storage->get('history', array())->shouldBeCalled()->willReturn(array());
+        $storage->get('history', [])->shouldBeCalled()->willReturn([]);
         $this->isValid()->shouldReturn(true);
 
         $process->getValidator()->willReturn(null);
         $currentStep->getName()->shouldBeCalled()->willReturn('current_step');
-        $storage->get('history', array())->shouldBeCalled()->willReturn(array('current_step'));
+        $storage->get('history', [])->shouldBeCalled()->willReturn(['current_step']);
         $this->isValid()->shouldReturn(true);
 
         $process->getValidator()->willReturn(null);
         $currentStep->getName()->shouldBeCalled()->willReturn('other_step');
-        $storage->get('history', array())->shouldBeCalled()->willReturn(array('current_step'));
+        $storage->get('history', [])->shouldBeCalled()->willReturn(['current_step']);
         $this->isValid()->shouldReturn(false);
     }
-
 
     function it_checks_if_it_is_the_first_step(
         $storage,
@@ -103,7 +102,7 @@ class ProcessContextSpec extends ObjectBehavior
     ) {
         $process->getScenarioAlias()->shouldBeCalled();
         $storage->initialize(Argument::type('string'))->shouldBeCalled();
-        $process->getOrderedSteps()->shouldBeCalled()->willReturn(array($firstStep, $lastStep));
+        $process->getOrderedSteps()->shouldBeCalled()->willReturn([$firstStep, $lastStep]);
         $process->countSteps()->shouldBeCalled()->willReturn(2);
 
         $this->initialize($process, $firstStep);
@@ -119,7 +118,7 @@ class ProcessContextSpec extends ObjectBehavior
     ) {
         $process->getScenarioAlias()->shouldBeCalled();
         $storage->initialize(Argument::type('string'))->shouldBeCalled();
-        $process->getOrderedSteps()->shouldBeCalled()->willReturn(array($firstStep, $lastStep));
+        $process->getOrderedSteps()->shouldBeCalled()->willReturn([$firstStep, $lastStep]);
         $process->countSteps()->shouldBeCalled()->willReturn(2);
 
         $this->initialize($process, $lastStep);
@@ -135,7 +134,7 @@ class ProcessContextSpec extends ObjectBehavior
     ) {
         $process->getScenarioAlias()->shouldBeCalled();
         $storage->initialize(Argument::type('string'))->shouldBeCalled();
-        $process->getOrderedSteps()->shouldBeCalled()->willReturn(array($firstStep, $lastStep));
+        $process->getOrderedSteps()->shouldBeCalled()->willReturn([$firstStep, $lastStep]);
         $process->countSteps()->shouldBeCalled()->willReturn(2);
 
         $this->initialize($process, $lastStep);
@@ -159,12 +158,12 @@ class ProcessContextSpec extends ObjectBehavior
 
     function its_step_history_is_mutable($storage)
     {
-        $storage->set('history', array('step_one'))->shouldBeCalled();
-        $storage->get('history', array())->willReturn(array('step_one'));
-        $storage->set('history', array('step_one', 'step_two'))->shouldBeCalled();
-        $storage->get('history', array('step_one'))->willReturn(array('step_one', 'step_two'));
+        $storage->set('history', ['step_one'])->shouldBeCalled();
+        $storage->get('history', [])->willReturn(['step_one']);
+        $storage->set('history', ['step_one', 'step_two'])->shouldBeCalled();
+        $storage->get('history', ['step_one'])->willReturn(['step_one', 'step_two']);
 
-        $this->setStepHistory(array('step_one'));
+        $this->setStepHistory(['step_one']);
         $this->addStepToHistory('step_two');
     }
 
@@ -178,12 +177,12 @@ class ProcessContextSpec extends ObjectBehavior
         $currentStep->getName()->willReturn('step_two');
         $process->getScenarioAlias()->shouldBeCalled();
         $storage->initialize(Argument::type('string'))->shouldBeCalled();
-        $process->getOrderedSteps()->shouldBeCalled()->willReturn(array($previousStep, $currentStep, $nextStep));
+        $process->getOrderedSteps()->shouldBeCalled()->willReturn([$previousStep, $currentStep, $nextStep]);
         $process->countSteps()->shouldBeCalled()->willReturn(2);
         $this->initialize($process, $currentStep);
 
-        $storage->get("history", array())->shouldBeCalled()->willreturn(array("step_one", "step_two", "step_three"));
-        $storage->set('history', array('step_one', 'step_two'))->shouldBeCalled();
+        $storage->get('history', [])->shouldBeCalled()->willreturn(['step_one', 'step_two', 'step_three']);
+        $storage->set('history', ['step_one', 'step_two'])->shouldBeCalled();
 
         $this->rewindHistory();
     }

@@ -12,8 +12,6 @@
 namespace Sylius\Bundle\UserBundle\Form\Model;
 
 /**
- * Model class for email validation.
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class PasswordReset
@@ -21,29 +19,21 @@ class PasswordReset
     /**
      * @var string
      */
-    private $email;
+    private $password;
 
     /**
-     * Gets the value of email.
-     *
      * @return string
      */
-    public function getEmail()
+    public function getPassword()
     {
-        return $this->email;
+        return $this->password;
     }
 
     /**
-     * Sets the value of email.
-     *
-     * @param string $email the email
-     *
-     * @return self
+     * @param string $password
      */
-    public function setEmail($email)
+    public function setPassword($password)
     {
-        $this->email = $email;
-
-        return $this;
+        $this->password = $password;
     }
 }

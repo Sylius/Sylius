@@ -15,6 +15,7 @@ use Doctrine\MongoDB\Query\Builder as QueryBuilder;
 use Doctrine\ODM\MongoDB\DocumentRepository as BaseDocumentRepository;
 use Pagerfanta\Adapter\DoctrineODMMongoDBAdapter;
 use Pagerfanta\Pagerfanta;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -24,16 +25,6 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class DocumentRepository extends BaseDocumentRepository implements RepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function createNew()
-    {
-        $className = $this->getClassName();
-
-        return new $className();
-    }
-
     /**
      * @param int $id
      *
@@ -86,7 +77,7 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
      *
      * @return array
      */
-    public function findBy(array $criteria, array $sorting = array(), $limit = null, $offset = null)
+    public function findBy(array $criteria, array $sorting = [], $limit = null, $offset = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
 
@@ -110,7 +101,7 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
     /**
      * {@inheritdoc}
      */
-    public function createPaginator(array $criteria = array(), array $sorting = array())
+    public function createPaginator(array $criteria = [], array $sorting = [])
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
 
@@ -118,6 +109,26 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         $this->applySorting($queryBuilder, $sorting);
 
         return $this->getPaginator($queryBuilder);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function add(ResourceInterface $resource)
+    {
+        $this->dm->persist($resource);
+        $this->dm->flush();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function remove(ResourceInterface $resource)
+    {
+        if (null !== $this->find($resource->getId())) {
+            $this->dm->remove($resource);
+            $this->dm->flush();
+        }
     }
 
     /**
@@ -150,7 +161,7 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
      * @param QueryBuilder $queryBuilder
      * @param array        $criteria
      */
-    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = array())
+    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = [])
     {
         foreach ($criteria as $property => $value) {
             $queryBuilder->field($property)->equals($value);
@@ -161,7 +172,7 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
      * @param QueryBuilder $queryBuilder
      * @param array        $sorting
      */
-    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = array())
+    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = [])
     {
         foreach ($sorting as $property => $order) {
             $queryBuilder->sort($property, $order);

@@ -14,7 +14,7 @@ sylius:
       street: Улица
       province: Област
     country:
-      iso_name: Име ISO
+      add_province: Добавяне на провинция
       name: Име
       provinces: Области
       select: Изберете
@@ -22,6 +22,7 @@ sylius:
       name: Име
       select: Изберете
     zone:
+      add_member: Добавяне на член
       members: Членове
       name: Име
       type: Тип
@@ -30,10 +31,7 @@ sylius:
         province: Област
         zone: Зона
       scope: Oбсег
+      select: Изберете
       select_scope: Изберете обхват
-    zone_member_country:
-      country: Държава
-    zone_member_province:
-      province: Област
-    zone_member_zone:
-      zone: Зона
+    zone_member:
+      select: Изберете

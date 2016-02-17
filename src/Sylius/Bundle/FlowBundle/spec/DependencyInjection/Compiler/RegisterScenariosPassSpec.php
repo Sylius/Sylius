@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\FlowBundle\DependencyInjection\Compiler;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
@@ -25,19 +26,19 @@ class RegisterScenariosPassSpec extends ObjectBehavior
 
     function it_is_compiler_pass()
     {
-        $this->shouldImplement('Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface');
+        $this->shouldImplement(CompilerPassInterface::class);
     }
 
     function it_processes(ContainerBuilder $container, Definition $coordinator)
     {
         $container->getDefinition('sylius.process.coordinator')->shouldBeCalled()->willreturn($coordinator);
-        $container->findTaggedServiceIds('sylius.process.scenario')->shouldBeCalled()->willreturn(array(
-            'id' => array(
-                array(
-                    'alias' => 'alias'
-                )
-            )
-        ));
+        $container->findTaggedServiceIds('sylius.process.scenario')->shouldBeCalled()->willreturn([
+            'id' => [
+                [
+                    'alias' => 'alias',
+                ],
+            ],
+        ]);
 
         $coordinator->addMethodCall('registerScenario', Argument::type('array'))->shouldBeCalled();
 

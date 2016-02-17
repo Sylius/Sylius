@@ -11,12 +11,11 @@
 
 namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Promotion coupon form type.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class CouponType extends AbstractResourceType
@@ -27,16 +26,14 @@ class CouponType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('code', 'text', array(
-                'label' => 'sylius.form.coupon.code'
-            ))
-            ->add('usageLimit', 'integer', array(
-                'label' => 'sylius.form.coupon.usage_limit'
-            ))
-            ->add('expiresAt', 'date', array(
+            ->add('usageLimit', 'integer', [
+                'label' => 'sylius.form.coupon.usage_limit',
+            ])
+            ->add('expiresAt', 'date', [
                 'label' => 'sylius.form.coupon.expires_at',
-                'empty_value' => /** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
-            ))
+                'empty_value' => /* @Ignore */ ['year' => '-', 'month' => '-', 'day' => '-'],
+            ])
+            ->addEventSubscriber(new AddCodeFormSubscriber())
         ;
     }
 

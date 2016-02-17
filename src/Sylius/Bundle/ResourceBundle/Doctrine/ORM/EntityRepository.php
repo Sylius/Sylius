@@ -16,6 +16,7 @@ use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -25,16 +26,6 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class EntityRepository extends BaseEntityRepository implements RepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function createNew()
-    {
-        $className = $this->getClassName();
-
-        return new $className();
-    }
-
     /**
      * @param mixed $id
      *
@@ -87,7 +78,7 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
      *
      * @return array
      */
-    public function findBy(array $criteria, array $sorting = array(), $limit = null, $offset = null)
+    public function findBy(array $criteria, array $sorting = [], $limit = null, $offset = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
 
@@ -111,7 +102,27 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
     /**
      * {@inheritdoc}
      */
-    public function createPaginator(array $criteria = array(), array $sorting = array())
+    public function add(ResourceInterface $resource)
+    {
+        $this->_em->persist($resource);
+        $this->_em->flush();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function remove(ResourceInterface $resource)
+    {
+        if (null !== $this->find($resource->getId())) {
+            $this->_em->remove($resource);
+            $this->_em->flush();
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createPaginator(array $criteria = [], array $sorting = [])
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
 
@@ -128,7 +139,8 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
      */
     public function getPaginator(QueryBuilder $queryBuilder)
     {
-        return new Pagerfanta(new DoctrineORMAdapter($queryBuilder, true, null));
+        // Use output walkers option in DoctrineORMAdapter should be false as it affects performance greatly (see #3775)
+        return new Pagerfanta(new DoctrineORMAdapter($queryBuilder, true, false));
     }
 
     /**
@@ -161,7 +173,7 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
      * @param QueryBuilder $queryBuilder
      * @param array        $criteria
      */
-    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = array())
+    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = [])
     {
         foreach ($criteria as $property => $value) {
             $name = $this->getPropertyName($property);
@@ -183,7 +195,7 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
      * @param QueryBuilder $queryBuilder
      * @param array        $sorting
      */
-    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = array())
+    protected function applySorting(QueryBuilder $queryBuilder, array $sorting = [])
     {
         foreach ($sorting as $property => $order) {
             if (!empty($order)) {

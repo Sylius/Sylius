@@ -6,6 +6,9 @@ Sylius\Component\Addressing\Model\Zone:
             expose: true
             type: integer
             xml_attribute: true
+        code:
+            expose: true
+            type: string
         name:
             expose: true
             type: string

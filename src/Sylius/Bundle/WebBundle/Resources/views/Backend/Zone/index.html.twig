@@ -1,8 +1,9 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
 {% from 'SyliusWebBundle:Backend/Zone:macros.html.twig' import list %}
+{% from 'SyliusResourceBundle:Macros:buttons.html.twig' import manage %}
+{% from 'SyliusAddressingBundle:Zone:buttons.html.twig' import updateRoute %}
 
 {% block topbar %}
 <ol class="breadcrumb">
@@ -14,8 +15,9 @@
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_zone_create'), 'sylius.zone.create'|trans) }}
-        {{ buttons.manage(path('sylius_backend_country_index'), 'sylius.country.manage'|trans) }}
+        {% include 'SyliusWebBundle:Backend/Zone:_zone_type_form.html.twig' %}
+        {{ updateRoute("this.href=document.getElementById('zone_type').value+'/new'", 'sylius.zone.create') }}
+        {{ manage(path('sylius_backend_country_index'), 'sylius.country.manage'|trans) }}
     </div>
     <h1><i class="glyphicon glyphicon-globe"></i> {{ 'sylius.zone.index_header'|trans|raw }}</h1>
 </div>

@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\CartBundle\Doctrine\ORM;
 
 use Doctrine\ORM\AbstractQuery;
@@ -10,7 +19,7 @@ use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Cart\Model\CartInterface;
-use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderInterface;
 
 class CartRepositorySpec extends ObjectBehavior
 {
@@ -43,12 +52,12 @@ class CartRepositorySpec extends ObjectBehavior
         $builder->addSelect('item')->shouldBeCalled()->willReturn($builder);
         $builder->andWhere(Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->andWhere(Argument::any())->shouldBeCalled()->willReturn($builder);
-        $builder->setParameter('now', Argument::type('\DateTime'))->shouldBeCalled()->willReturn($builder);
+        $builder->setParameter('now', Argument::type(\DateTime::class))->shouldBeCalled()->willReturn($builder);
         $builder->setParameter('state', OrderInterface::STATE_CART)->shouldBeCalled()->willReturn($builder);
 
         $builder->getQuery()->shouldBeCalled()->willReturn($query);
-        $query->getResult()->shouldBeCalled()->willReturn(array($cart));
+        $query->getResult()->shouldBeCalled()->willReturn([$cart]);
 
-        $this->findExpiredCarts()->shouldReturn(array($cart));
+        $this->findExpiredCarts()->shouldReturn([$cart]);
     }
 }

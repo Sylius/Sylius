@@ -45,8 +45,6 @@ class Topic extends AbstractTranslatable implements TopicInterface
     public function setTitle($name)
     {
         $this->translate()->setTitle($name);
-
-        return $this;
     }
 
     /**

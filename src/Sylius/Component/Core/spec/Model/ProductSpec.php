@@ -15,9 +15,11 @@ use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\Product;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface as VariantInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Product\Model\Product as SyliusProduct;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
-use Sylius\Component\Taxation\Model\TaxCategoryInterface;
-use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 
 /**
@@ -26,6 +28,15 @@ use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
  */
 class ProductSpec extends ObjectBehavior
 {
+    function let(VariantInterface $masterVariant)
+    {
+        $masterVariant->setMaster(true)->shouldBeCalled();
+        $masterVariant->setProduct($this)->shouldBeCalled();
+        $masterVariant->isMaster()->willReturn(true);
+
+        $this->setMasterVariant($masterVariant);
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Core\Model\Product');
@@ -33,17 +44,22 @@ class ProductSpec extends ObjectBehavior
 
     function it_implements_Sylius_core_product_interface()
     {
-        $this->shouldImplement('Sylius\Component\Core\Model\ProductInterface');
+        $this->shouldImplement(ProductInterface::class);
     }
 
     function it_extends_Sylius_product_model()
     {
-        $this->shouldHaveType('Sylius\Component\Product\Model\Product');
+        $this->shouldHaveType(SyliusProduct::class);
+    }
+
+    function it_has_metadata_class_identifier()
+    {
+        $this->getMetadataClassIdentifier()->shouldReturn('Product');
     }
 
     function it_initializes_taxon_collection_by_default()
     {
-        $this->getTaxons()->shouldHaveType('Doctrine\Common\Collections\Collection');
+        $this->getTaxons()->shouldHaveType(Collection::class);
     }
 
     function its_taxons_are_mutable(Collection $taxons)
@@ -58,8 +74,7 @@ class ProductSpec extends ObjectBehavior
         TaxonInterface $taxon3,
         TaxonomyInterface $taxonomy1,
         TaxonomyInterface $taxonomy2
-    )
-    {
+    ) {
         $taxon1->getTaxonomy()->willReturn($taxonomy1);
         $taxon2->getTaxonomy()->willReturn($taxonomy1);
         $taxon3->getTaxonomy()->willReturn($taxonomy2);
@@ -75,8 +90,11 @@ class ProductSpec extends ObjectBehavior
         $this->getTaxons('brand')->shouldHaveCount(1);
     }
 
-    function its_price_is_mutable()
+    function its_price_is_mutable(VariantInterface $masterVariant)
     {
+        $masterVariant->setPrice(499)->shouldBeCalled();
+        $masterVariant->getPrice()->willReturn(499);
+
         $this->setPrice(499);
         $this->getPrice()->shouldReturn(499);
     }
@@ -99,31 +117,6 @@ class ProductSpec extends ObjectBehavior
         ;
     }
 
-    function it_implements_Sylius_taxable_interface()
-    {
-        $this->shouldImplement('Sylius\Component\Taxation\Model\TaxableInterface');
-    }
-
-    function it_does_not_have_tax_category_by_default()
-    {
-        $this->getTaxCategory()->shouldReturn(null);
-    }
-
-    function it_allows_setting_the_tax_category(TaxCategoryInterface $taxCategory)
-    {
-        $this->setTaxCategory($taxCategory);
-        $this->getTaxCategory()->shouldReturn($taxCategory);
-    }
-
-    function it_allows_resetting_the_tax_category(TaxCategoryInterface $taxCategory)
-    {
-        $this->setTaxCategory($taxCategory);
-        $this->getTaxCategory()->shouldReturn($taxCategory);
-
-        $this->setTaxCategory(null);
-        $this->getTaxCategory()->shouldReturn(null);
-    }
-
     function it_has_no_shipping_category_by_default()
     {
         $this->getShippingCategory()->shouldReturn(null);
@@ -144,5 +137,16 @@ class ProductSpec extends ObjectBehavior
     {
         $this->setRestrictedZone($zone);
         $this->getRestrictedZone()->shouldReturn($zone);
+    }
+
+    function it_has_no_main_taxon_by_default()
+    {
+        $this->getMainTaxon()->shouldReturn(null);
+    }
+
+    function it_sets_main_taxon(TaxonInterface $taxon)
+    {
+        $this->setMainTaxon($taxon);
+        $this->getMainTaxon()->shouldReturn($taxon);
     }
 }

@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityManager;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\SearchBundle\Doctrine\ORM\SearchIndexRepository;
+use Sylius\Bundle\SearchBundle\Model\SearchIndex;
 use Sylius\Bundle\SearchBundle\Query\Query;
 use Sylius\Bundle\SearchBundle\Query\SearchStringQuery;
 use Sylius\Bundle\SearchBundle\Query\TaxonQuery;
@@ -28,14 +29,19 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
  */
 class OrmFinder extends AbstractFinder
 {
+    /**
+     * @var EntityManager
+     */
+    protected $em;
+
     public function __construct(SearchIndexRepository $searchRepository, $config, $productRepository, EntityManager $em, QueryLoggerInterface $queryLogger, ChannelContextInterface $channelContext)
     {
-        $this->searchRepository  = $searchRepository;
-        $this->config            = $config;
+        $this->searchRepository = $searchRepository;
+        $this->config = $config;
         $this->productRepository = $productRepository;
-        $this->em                = $em;
-        $this->queryLogger       = $queryLogger;
-        $this->channelContext    = $channelContext;
+        $this->em = $em;
+        $this->queryLogger = $queryLogger;
+        $this->channelContext = $channelContext;
     }
 
     /**
@@ -76,11 +82,11 @@ class OrmFinder extends AbstractFinder
         $channel = $this->channelContext->getChannel();
 
         // First get ALL products from the taxon to get their ids
-        $paginator = $this->productRepository->createByTaxonPaginator($query->getTaxon(), array('channels' => $channel));
+        $paginator = $this->productRepository->createByTaxonPaginator($query->getTaxon(), ['channels' => $channel]);
 
-        $ids = array();
+        $ids = [];
         $pages = $paginator->getNbPages();
-        for ($i = 1; $i <= $pages; $i++) {
+        for ($i = 1; $i <= $pages; ++$i) {
             $paginator->setCurrentPage($i);
             foreach ($paginator->getIterator() as $product) {
                 $ids[] = $product->getId();
@@ -91,15 +97,15 @@ class OrmFinder extends AbstractFinder
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
             ->select('u.itemId, u.tags, u.entity')
-            ->from('Sylius\Bundle\SearchBundle\Model\SearchIndex', 'u')
+            ->from(SearchIndex::class, 'u')
             ->where('u.itemId IN (:ids)')
             ->setParameter('ids', $ids);
         $indexedItems = $queryBuilder->getQuery()->getResult();
 
         // TODO: Need to configure / refactor this default!
-        $entityName = "Product";
+        $entityName = 'Product';
 
-        $facetsArray = array();
+        $facetsArray = [];
 
         if ($indexedItems) {
             $entityName = $indexedItems[0]['entity'];
@@ -115,9 +121,9 @@ class OrmFinder extends AbstractFinder
         }
 
         if (count($idsFromAllFacets)) {
-            $this->paginator = $this->productRepository->createByTaxonPaginator($query->getTaxon(), array('id' => $idsFromAllFacets, 'channels' => $channel));
+            $this->paginator = $this->productRepository->createByTaxonPaginator($query->getTaxon(), ['id' => $idsFromAllFacets, 'channels' => $channel]);
         } else {
-            $this->paginator = new Pagerfanta(new ArrayAdapter(array()));
+            $this->paginator = new Pagerfanta(new ArrayAdapter([]));
         }
         $this->filters = $query->getAppliedFilters();
 
@@ -133,13 +139,13 @@ class OrmFinder extends AbstractFinder
             $this->initializeFacetGroup($this->facetGroup);
         }
 
-        $finalResults = $facets = array();
+        $finalResults = $facets = [];
         $modelIdsForChannel = $this->searchRepository->getProductIdsFromChannel($this->channelContext->getChannel());
         // get ids and tags from full text search
         foreach ($this->query($query->getSearchTerm(), $this->em) as $modelClass => $modelIdsToTags) {
             $modelIds = array_keys($modelIdsToTags);
 
-            if(isset($modelIdsForChannel[$modelClass])) {
+            if (isset($modelIdsForChannel[$modelClass])) {
                 $modelIds = array_intersect($modelIds, $modelIdsForChannel[$modelClass]);
             }
 
@@ -150,13 +156,13 @@ class OrmFinder extends AbstractFinder
                 if (isset($preFilteredModelIds[$modelClass])) {
                     $modelIds = array_intersect($modelIds, $preFilteredModelIds[$modelClass]);
                 } else {
-                    $modelIds = array();
+                    $modelIds = [];
                 }
             }
 
-            $appliedFilters = $query->getAppliedFilters() ?: array();
+            $appliedFilters = $query->getAppliedFilters() ?: [];
 
-            $finalResults[$modelClass] = array();
+            $finalResults[$modelClass] = [];
 
             if (!empty($modelIds)) {
                 list($modelIdsForFacets, $finalResults[$modelClass]) = $this->getFilteredIds($appliedFilters, $modelIds, $modelClass);
@@ -188,7 +194,7 @@ class OrmFinder extends AbstractFinder
     public function getFilteredIds($filters, $ids, $model)
     {
         // Build up lists of model ids for each facet and the total intersect of all for full filtered set
-        $facetFilteredIds = array();
+        $facetFilteredIds = [];
         $idsFromAllFacets = $ids;
 
         foreach ($this->config['filters']['facets'] as $facetName => $facetConfig) {
@@ -202,8 +208,7 @@ class OrmFinder extends AbstractFinder
             $idsFromAllFacets = array_intersect($idsFromAllFacets, $facetFilteredIds[$facetName]);
         }
 
-        return array($facetFilteredIds, $idsFromAllFacets);
-
+        return [$facetFilteredIds, $idsFromAllFacets];
     }
 
     /**
@@ -218,7 +223,7 @@ class OrmFinder extends AbstractFinder
     {
         $ids = array_keys($result);
         // Fetch the 'options' for each facet based on the limited set of products from the other facets
-        $facets = array();
+        $facets = [];
 
         foreach ($this->config['filters']['facets'] as $facetName => $ormFacet) {
             $idsFromOtherFacets = $ids;
@@ -251,7 +256,7 @@ class OrmFinder extends AbstractFinder
          * it is mandatory to build all the facets from scratch since they are always based
          * on the $idsFromOtherFacets
          */
-        $calculatedFacets = array();
+        $calculatedFacets = [];
 
         foreach ($result as $id => $serializedTags) {
             if (!in_array($id, $idsFromOtherFacets)) {
@@ -267,7 +272,7 @@ class OrmFinder extends AbstractFinder
                 if (is_array($value)) {
                     foreach ($value as $v) {
                         if (!isset($calculatedFacets[$name][$v])) {
-                            $calculatedFacets[$name][$v] = array('key' => $v, 'doc_count' => 1);
+                            $calculatedFacets[$name][$v] = ['key' => $v, 'doc_count' => 1];
                         } else {
                             $calculatedFacets[$name][$v]['doc_count'] += 1;
                         }
@@ -276,7 +281,7 @@ class OrmFinder extends AbstractFinder
                     foreach ($facets[$name]['values'] as $key => $range) {
                         if ($value >= $range['from'] && $value <= $range['to']) {
                             if (empty($calculatedFacets[$name][$key])) {
-                                $calculatedFacets[$name][$key] = array('from' => $range['from'], 'to' => $range['to'], 'doc_count' => 1);
+                                $calculatedFacets[$name][$key] = ['from' => $range['from'], 'to' => $range['to'], 'doc_count' => 1];
                             } else {
                                 $calculatedFacets[$name][$key]['doc_count'] += 1;
                             }
@@ -288,7 +293,7 @@ class OrmFinder extends AbstractFinder
                     }
                 } elseif (is_string($value)) {
                     if (!isset($calculatedFacets[$name][$value])) {
-                        $calculatedFacets[$name][$value] = array('key' => $value, 'doc_count' => 1);
+                        $calculatedFacets[$name][$value] = ['key' => $value, 'doc_count' => 1];
                     } else {
                         $calculatedFacets[$name][$value]['doc_count'] += 1;
                     }
@@ -298,7 +303,7 @@ class OrmFinder extends AbstractFinder
 
         // I want to return an empty array in case this facet has no tags
         if (!isset($calculatedFacets[$givenFacetName])) {
-            return array();
+            return [];
         }
 
         return $calculatedFacets[$givenFacetName];
@@ -312,13 +317,13 @@ class OrmFinder extends AbstractFinder
      */
     public function getFiltersAppliedForFacet($facetName, $filters)
     {
-        $filtersForFacet = array();
+        $filtersForFacet = [];
 
         foreach ($filters as $filter) {
             $filterName = key($filter);
 
             if ($facetName == preg_replace('/\d/', '', $filterName)) {
-                $filtersForFacet[] = array($filterName => $filter[$filterName]);
+                $filtersForFacet[] = [$filterName => $filter[$filterName]];
             }
         }
 
@@ -343,14 +348,14 @@ class OrmFinder extends AbstractFinder
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
             ->select('u.itemId, u.tags')
-            ->from('Sylius\Bundle\SearchBundle\Model\SearchIndex', 'u')
+            ->from(SearchIndex::class, 'u')
             ->where('u.itemId IN (:ids)')
             ->andWhere('u.entity = :model')
             ->setParameter('ids', $ids)
             ->setParameter('model', $model)
         ;
 
-        $result = array();
+        $result = [];
         foreach ($queryBuilder->getQuery()->getResult() as $facet) {
             foreach ($filters as $separateFilter) {
                 $tags = unserialize($facet['tags']);
@@ -359,7 +364,7 @@ class OrmFinder extends AbstractFinder
                 if ($separateFilter[$key] && $tags[strtolower($key)]) {
                     // range filtering
                     if (is_numeric($tags[strtolower($key)])) {
-                        $range = explode("|", $separateFilter[$key]);
+                        $range = explode('|', $separateFilter[$key]);
                         if ($tags[strtolower($key)] >= $range[0] && $tags[strtolower($key)] <= $range[1]) {
                             $result[] = $facet['itemId'];
                         }
@@ -399,7 +404,7 @@ class OrmFinder extends AbstractFinder
         $query = $em->createQuery('SELECT u.itemId, u.tags, u.entity FROM Sylius\Bundle\SearchBundle\Model\SearchIndex u WHERE MATCH(u.value) AGAINST (:searchTerm BOOLEAN) > 0');
         $query->setParameter('searchTerm', $searchTerm);
 
-        $elements = array();
+        $elements = [];
         foreach ($query->getResult() as $result) {
             foreach ($this->targetTypes as $type) {
                 if ($result['entity'] != $this->config['orm_indexes'][$type]['class']) {

@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Checkout;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilderInterface;
+use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 
@@ -36,22 +37,24 @@ class CheckoutProcessScenarioSpec extends ObjectBehavior
 
     function it_implements_Sylius_process_scenario_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface');
+        $this->shouldImplement(ProcessScenarioInterface::class);
     }
 
-    function it_builds_checkout_process_with_proper_steps(ProcessBuilderInterface $builder)
+    function it_builds_checkout_process_with_proper_steps(ProcessBuilderInterface $builder, $cart)
     {
         $builder->add('security', 'sylius_checkout_security')->willReturn($builder)->shouldBeCalled();
         $builder->add('addressing', 'sylius_checkout_addressing')->willReturn($builder)->shouldBeCalled();
         $builder->add('shipping', 'sylius_checkout_shipping')->willReturn($builder)->shouldBeCalled();
         $builder->add('payment', 'sylius_checkout_payment')->willReturn($builder)->shouldBeCalled();
         $builder->add('finalize', 'sylius_checkout_finalize')->willReturn($builder)->shouldBeCalled();
-        $builder->add("purchase", "sylius_checkout_purchase")->willReturn($builder)->shouldBeCalled();
+        $builder->add('purchase', 'sylius_checkout_purchase')->willReturn($builder)->shouldBeCalled();
+        $builder->setRedirect('sylius_checkout_thank_you')->willReturn($builder)->shouldBeCalled();
+
+        $cart->getId()->willReturn(1);
 
         $builder->setDisplayRoute('sylius_checkout_display')->willReturn($builder)->shouldBeCalled();
         $builder->setForwardRoute('sylius_checkout_forward')->willReturn($builder)->shouldBeCalled();
 
-        $builder->setRedirect('sylius_homepage')->willReturn($builder)->shouldBeCalled();
         $builder->validate(Argument::any())->willReturn($builder)->shouldBeCalled();
 
         $this->build($builder);

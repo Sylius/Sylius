@@ -1,6 +1,15 @@
 {% extends 'SyliusWebBundle:Frontend:layout.html.twig' %}
 
 {% set form = sylius_cart_form({'product': product}) %}
+{% from 'SyliusWebBundle:Frontend/Product:macros.html.twig' import sylius_display_price %}
+
+{% block head %}
+    {{ sylius_metadata_render(product, null, { 'defaults': {
+        'title': settings.title|default('sylius.meta.frontend_title'|trans),
+        'description': settings.meta_description|default('sylius.meta.frontend_description'|trans),
+        'keywords': settings.meta_description|default('sylius.meta.frontend_keywords'|trans)
+    } })|raw }}
+{% endblock %}
 
 {% block content %}
 <div class="row">
@@ -37,8 +46,9 @@
             <tbody>
                 {% for attribute in product.attributes %}
                 <tr>
-                    <td>{{ attribute.presentation }}</td>
-                    <td>{{ attribute.value }}</td>
+                    <td>{{ attribute.name }}</td>
+                    {% set attributeTemplate = 'SyliusAttributeBundle:Types:' ~ attribute.attribute.type ~ '.html.twig' %}
+                    {% include [attributeTemplate, 'SyliusWebBundle:Frontend/Product:_attribute.html.twig'] with {'attribute': attribute} %}
                 </tr>
                 {% endfor %}
             </tbody>
@@ -56,7 +66,7 @@
     <div class="col-md-6">
         {% if product.hasVariants %}
             {% if product.isVariantSelectionMethodChoice %}
-            <table class="table table-condensed">
+            <table class="table table-condensed" id="product-variants">
                 <thead>
                     <tr>
                         <th></th>
@@ -79,7 +89,7 @@
                             {% endif %}
                         </td>
                         <td>
-                            <span class="label label-success">{{ sylius_calculate_price(variant)|sylius_price }}</span>
+                            {{ sylius_display_price(variant) }}
                         </td>
                         <td>
                         {% if sylius_inventory_is_available(variant) %}
@@ -99,7 +109,9 @@
             {% endif %}
         {% else %}
             <h4>
-                <span class="label label-success pull-right">{{ sylius_calculate_price(product.masterVariant)|sylius_price }}</span>
+                <span class="pull-right">
+                   {{ sylius_display_price(product.masterVariant) }}
+                </span>
                 {{ 'sylius.variant.price'|trans }}
             </h4>
         {% endif %}

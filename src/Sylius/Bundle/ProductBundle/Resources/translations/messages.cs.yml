@@ -2,17 +2,20 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  label:
+  form:
     product:
-      name: Název
+      name: Jméno
       description: Popis
-      properties: Vlastnosti
-      available_on: Dostupný od
+      attributes: Atributy
+      options: Možnosti
       meta_keywords: Meta klíčová slova
       meta_description: Meta popis
-    property:
-      name: Interní název
-      presentation: Prezentace
-    prototype:
+    product_variant:
+      available_on: Dostupný od
+    product_archetype:
       name: Jméno
-      properties: Vlastnosti
+      parent: Rodič
+      attributes: Atributy
+      options: Možnosti
+    association_type:
+      name: Jméno

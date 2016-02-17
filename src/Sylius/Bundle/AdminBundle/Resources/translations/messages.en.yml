@@ -1,0 +1,6 @@
+sylius:
+  menu:
+    admin:
+      main:
+        configuration:
+          header: Configuration

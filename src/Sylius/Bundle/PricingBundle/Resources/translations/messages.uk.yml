@@ -7,3 +7,6 @@ sylius:
       price: Ціна
       calculator: Ціноутворення
       configuration: Конфігурація
+    pricing:
+      volume_based:
+        price: Ціна

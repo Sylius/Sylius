@@ -15,6 +15,8 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
+use Sylius\Component\Taxation\Model\TaxableInterface;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -28,7 +30,12 @@ class ProductVariantSpec extends ObjectBehavior
 
     function it_implements_Sylius_product_variant_interface()
     {
-        $this->shouldImplement('Sylius\Component\Core\Model\ProductVariantInterface');
+        $this->shouldImplement(ProductVariantInterface::class);
+    }
+
+    function it_implements_Sylius_taxable_interface()
+    {
+        $this->shouldImplement(TaxableInterface::class);
     }
 
     function it_extends_Sylius_product_variant_model()
@@ -36,9 +43,19 @@ class ProductVariantSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\Product\Model\Variant');
     }
 
+    function it_has_metadata_class_identifier()
+    {
+        $this->getMetadataClassIdentifier()->shouldReturn('ProductVariant');
+    }
+
     function it_should_not_have_price_by_default()
     {
         $this->getPrice()->shouldReturn(null);
+    }
+
+    function it_should_not_have_original_price_by_default()
+    {
+        $this->getOriginalPrice()->shouldReturn(null);
     }
 
     function it_initializes_image_collection_by_default()
@@ -51,14 +68,29 @@ class ProductVariantSpec extends ObjectBehavior
         $this->setPrice(499)->getPrice()->shouldReturn(499);
     }
 
+    function its_original_price_should_be_mutable()
+    {
+        $this->setOriginalPrice(399);
+        $this->getOriginalPrice()->shouldReturn(399);
+    }
+
     function its_price_should_accept_only_integer()
     {
         $this->setPrice(410)->getPrice()->shouldBeInteger();
         $this->shouldThrow('\InvalidArgumentException')->duringSetPrice(4.1 * 100);
         $this->shouldThrow('\InvalidArgumentException')->duringSetPrice('410');
         $this->shouldThrow('\InvalidArgumentException')->duringSetPrice(round(4.1 * 100));
-        $this->shouldThrow('\InvalidArgumentException')->duringSetPrice(array(410));
+        $this->shouldThrow('\InvalidArgumentException')->duringSetPrice([410]);
         $this->shouldThrow('\InvalidArgumentException')->duringSetPrice(new \stdClass());
+    }
+
+    function its_original_price_should_accept_only_integer()
+    {
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice(3.1 * 100);
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice('310');
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice(round(3.1 * 100));
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice([310]);
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice(new \stdClass());
     }
 
     function it_should_inherit_price_from_master_variant(ProductVariantInterface $masterVariant)
@@ -165,5 +197,25 @@ class ProductVariantSpec extends ObjectBehavior
 
         $this->setSku($sku);
         $this->getSku()->shouldReturn($sku);
+    }
+
+    function it_does_not_have_tax_category_by_default()
+    {
+        $this->getTaxCategory()->shouldReturn(null);
+    }
+
+    function it_allows_setting_the_tax_category(TaxCategoryInterface $taxCategory)
+    {
+        $this->setTaxCategory($taxCategory);
+        $this->getTaxCategory()->shouldReturn($taxCategory);
+    }
+
+    function it_allows_resetting_the_tax_category(TaxCategoryInterface $taxCategory)
+    {
+        $this->setTaxCategory($taxCategory);
+        $this->getTaxCategory()->shouldReturn($taxCategory);
+
+        $this->setTaxCategory(null);
+        $this->getTaxCategory()->shouldReturn(null);
     }
 }

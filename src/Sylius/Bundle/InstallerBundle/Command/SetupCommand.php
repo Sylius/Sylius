@@ -28,12 +28,12 @@ class SetupCommand extends AbstractInstallCommand
     /**
      * @var array
      */
-    private $currencies = array();
+    private $currencies = [];
 
     /**
      * @var array
      */
-    private $locales = array();
+    private $locales = [];
 
     /**
      * {@inheritdoc}
@@ -74,13 +74,14 @@ EOT
 
         $userManager = $this->get('sylius.manager.user');
         $userRepository = $this->get('sylius.repository.user');
-        $customerRepository = $this->get('sylius.repository.customer');
+        $userFactory = $this->get('sylius.factory.user');
+        $customerFactory = $this->get('sylius.factory.customer');
 
         $rbacInitializer = $this->get('sylius.rbac.initializer');
         $rbacInitializer->initialize();
 
-        $user = $userRepository->createNew();
-        $customer = $customerRepository->createNew();
+        $user = $userFactory->createNew();
+        $customer = $customerFactory->createNew();
         $user->setCustomer($customer);
 
         if ($input->getOption('no-interaction')) {
@@ -95,11 +96,11 @@ EOT
             $user->setEmail('sylius@example.com');
             $user->setPlainPassword('sylius');
         } else {
-            $customer->setFirstname($this->ask($output, 'Your firstname:', array(new NotBlank())));
-            $customer->setLastname($this->ask($output, 'Lastname:', array(new NotBlank())));
+            $customer->setFirstname($this->ask($output, 'Your firstname:', [new NotBlank()]));
+            $customer->setLastname($this->ask($output, 'Lastname:', [new NotBlank()]));
 
             do {
-                $email = $this->ask($output, 'E-Mail:', array(new NotBlank(), new Email()));
+                $email = $this->ask($output, 'E-Mail:', [new NotBlank(), new Email()]);
                 $exists = null !== $userRepository->findOneByEmail($email);
 
                 if ($exists) {
@@ -112,7 +113,7 @@ EOT
         }
 
         $user->setEnabled(true);
-        $user->addAuthorizationRole($this->get('sylius.repository.role')->findOneBy(array('code' => 'administrator')));
+        $user->addAuthorizationRole($this->get('sylius.repository.role')->findOneBy(['code' => 'administrator']));
 
         $userManager->persist($user);
         $userManager->flush();
@@ -126,6 +127,7 @@ EOT
     {
         $localeRepository = $this->get('sylius.repository.locale');
         $localeManager = $this->get('sylius.manager.locale');
+        $localeFactory = $this->get('sylius.factory.locale');
 
         do {
             $locales = $this->getLocalesCodes($input, $output);
@@ -133,7 +135,7 @@ EOT
             $valid = true;
 
             foreach ($locales as $code) {
-                if (0 !== count($errors = $this->validate(trim($code), array(new Locale())))) {
+                if (0 !== count($errors = $this->validate(trim($code), [new Locale()]))) {
                     $valid = false;
                 }
 
@@ -158,7 +160,7 @@ EOT
                 continue;
             }
 
-            $locale = $localeRepository->createNew();
+            $locale = $localeFactory->createNew();
             $locale->setCode($code);
             $this->locales[] = $locale;
 
@@ -176,6 +178,7 @@ EOT
     {
         $currencyRepository = $this->get('sylius.repository.currency');
         $currencyManager = $this->get('sylius.manager.currency');
+        $currencyFactory = $this->get('sylius.factory.currency');
 
         do {
             $currencies = $this->getCurrenciesCodes($input, $output);
@@ -183,7 +186,7 @@ EOT
             $valid = true;
 
             foreach ($currencies as $code) {
-                if (0 !== count($errors = $this->validate(trim($code), array(new Currency())))) {
+                if (0 !== count($errors = $this->validate(trim($code), [new Currency()]))) {
                     $valid = false;
                 }
 
@@ -203,7 +206,7 @@ EOT
                 continue;
             }
 
-            $currency = $currencyRepository->createNew();
+            $currency = $currencyFactory->createNew();
             $currency->setCode($code);
             $currency->setExchangeRate(1);
             $this->currencies[] = $currency;
@@ -222,14 +225,15 @@ EOT
     {
         $countryRepository = $this->get('sylius.repository.country');
         $countryManager = $this->get('sylius.manager.country');
+        $countryFactory = $this->get('sylius.factory.country');
 
         do {
             $countries = $this->getCountriesCodes($input, $output);
-            
+
             $valid = true;
 
             foreach ($countries as $code) {
-                if (0 !== count($errors = $this->validate(trim($code), array(new Country())))) {
+                if (0 !== count($errors = $this->validate(trim($code), [new Country()]))) {
                     $valid = false;
                 }
 
@@ -243,12 +247,12 @@ EOT
 
             $output->writeln(sprintf('Adding <info>%s</info>.', $name));
 
-            if (null !== $countryRepository->findOneByIsoName($code)) {
+            if (null !== $countryRepository->findOneByCode($code)) {
                 continue;
             }
 
-            $country = $countryRepository->createNew();
-            $country->setIsoName($code);
+            $country = $countryFactory->createNew();
+            $country->setCode($code);
 
             $countryManager->persist($country);
         }
@@ -264,6 +268,7 @@ EOT
     {
         $channelRepository = $this->get('sylius.repository.channel');
         $channelManager = $this->get('sylius.manager.channel');
+        $channelFactory = $this->get('sylius.factory.channel');
 
         $channels = $this->getChannelsCodes($input, $output);
 
@@ -275,8 +280,8 @@ EOT
             }
 
             /** @var ChannelInterface $channel */
-            $channel = $channelRepository->createNew();
-            $channel->setUrl(null);
+            $channel = $channelFactory->createNew();
+            $channel->setHostname(null);
             $channel->setCode($code);
             $channel->setName($code);
             $channel->setColor(null);
@@ -369,11 +374,11 @@ EOT
     private function getCodes(InputInterface $input, OutputInterface $output, $question, $description, $defaultAnswer)
     {
         if ($input->getOption('no-interaction')) {
-            return array($defaultAnswer);
+            return [$defaultAnswer];
         }
 
         $output->writeln($description);
-        $codes = $this->ask($output, '<question>'.$question.'</question> ', array(), $defaultAnswer);
+        $codes = $this->ask($output, '<question>'.$question.'</question> ', [], $defaultAnswer);
 
         return explode(',', $codes);
     }
@@ -386,8 +391,8 @@ EOT
     private function getAdministratorPassword(OutputInterface $output)
     {
         do {
-            $password = $this->askHidden($output, 'Choose password:', array(new NotBlank()));
-            $repeatedPassword = $this->askHidden($output, 'Repeat password:', array(new NotBlank()));
+            $password = $this->askHidden($output, 'Choose password:', [new NotBlank()]);
+            $repeatedPassword = $this->askHidden($output, 'Repeat password:', [new NotBlank()]);
 
             if ($repeatedPassword !== $password) {
                 $output->writeln('<error>Passwords does not match confirmation!</error>');

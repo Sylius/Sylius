@@ -3,9 +3,6 @@
 
 sylius:
   account:
-    address:
-      flash:
-        billing:
-          success: Adresa byla úspěšně nastavena jako výchozí fakturační adresu.
-        shipping:
-          success: Adresa byla úspěšně nastavena jako výchozí dodací adresa.
+    password:
+      change_success: Heslo bylo změněno
+      invalid: Chybné současné heslo

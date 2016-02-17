@@ -11,16 +11,14 @@
 
 namespace Sylius\Component\Addressing\Model;
 
+use Sylius\Component\Resource\Model\CodeAwareInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
+
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-interface ProvinceInterface
+interface ProvinceInterface extends ResourceInterface, CodeAwareInterface
 {
-    /**
-     * @return mixed
-     */
-    public function getId();
-
     /**
      * @return string
      */
@@ -34,12 +32,12 @@ interface ProvinceInterface
     /**
      * @return string
      */
-    public function getIsoName();
+    public function getAbbreviation();
 
     /**
-     * @param string $isoName
+     * @param string $abbreviation
      */
-    public function setIsoName($isoName);
+    public function setAbbreviation($abbreviation);
 
     /**
      * @return CountryInterface

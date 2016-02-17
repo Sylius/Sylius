@@ -14,7 +14,7 @@ sylius:
       amount: ยอดการชำระเงิน
       method: วิธีการชำระเงิน
       state:
-        0: สถานะการชำระเงิน
+        header: สถานะการชำระเงิน
         checkout: ชำระเงิน
         completed: เสร็จสมบูรณ์
         failed: ล้มเหลว

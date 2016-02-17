@@ -21,8 +21,8 @@ class CustomerController extends BaseCustomerController
      */
     public function filterFormAction(Request $request)
     {
-        return $this->render('SyliusWebBundle:Backend/Customer:filterForm.html.twig', array(
-            'form' => $this->get('form.factory')->createNamed('criteria', 'sylius_customer_filter', $request->query->get('criteria'))->createView()
-        ));
+        return $this->container->get('templating')->renderResponse('SyliusWebBundle:Backend/Customer:filterForm.html.twig', [
+            'form' => $this->container->get('form.factory')->createNamed('criteria', 'sylius_customer_filter', $request->query->get('criteria'))->createView(),
+        ]);
     }
 }

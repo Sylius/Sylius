@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\ShippingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Test\FormBuilderInterface;
 
 /**
@@ -22,12 +23,12 @@ class ShipmentTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Shipment', array('sylius'));
+        $this->beConstructedWith('Shipment', ['sylius']);
     }
 
     function it_is_a_form()
     {
-        $this->shouldHaveType('Symfony\Component\Form\AbstractType');
+        $this->shouldHaveType(AbstractType::class);
     }
 
     function it_is_initializable()
@@ -40,9 +41,9 @@ class ShipmentTypeSpec extends ObjectBehavior
         $builder->add('state', 'choice', Argument::withKey('choices'))->shouldBeCalled()->willreturn($builder);
         $builder->add('tracking', 'text', Argument::type('array'))->shouldBeCalled()->willreturn($builder);
 
-        $this->buildForm($builder, array(
-            'multiple' => true
-        ));
+        $this->buildForm($builder, [
+            'multiple' => true,
+        ]);
     }
 
     function it_has_a_name()

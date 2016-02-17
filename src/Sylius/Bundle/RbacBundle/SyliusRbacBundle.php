@@ -13,6 +13,8 @@ namespace Sylius\Bundle\RbacBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Rbac\Model\PermissionInterface;
+use Sylius\Component\Rbac\Model\RoleInterface;
 
 /**
  * Rbac bundle.
@@ -26,9 +28,9 @@ class SyliusRbacBundle extends AbstractResourceBundle
      */
     public static function getSupportedDrivers()
     {
-        return array(
+        return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        );
+        ];
     }
 
     /**
@@ -36,10 +38,10 @@ class SyliusRbacBundle extends AbstractResourceBundle
      */
     protected function getModelInterfaces()
     {
-        return array(
-            'Sylius\Component\Rbac\Model\RoleInterface'       => 'sylius.model.role.class',
-            'Sylius\Component\Rbac\Model\PermissionInterface' => 'sylius.model.permission.class',
-        );
+        return [
+            RoleInterface::class => 'sylius.model.role.class',
+            PermissionInterface::class => 'sylius.model.permission.class',
+        ];
     }
 
     /**

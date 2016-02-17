@@ -15,6 +15,7 @@ use Sylius\Bundle\ReportBundle\DependencyInjection\Compiler\RegisterDataFetcherP
 use Sylius\Bundle\ReportBundle\DependencyInjection\Compiler\RegisterRenderersPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Report\Model\ReportInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -32,9 +33,9 @@ class SyliusReportBundle extends AbstractResourceBundle
      */
     public static function getSupportedDrivers()
     {
-        return array(
+        return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        );
+        ];
     }
 
     /**
@@ -53,9 +54,9 @@ class SyliusReportBundle extends AbstractResourceBundle
      */
     protected function getModelInterfaces()
     {
-        return array(
-            'Sylius\Component\Report\Model\ReportInterface' => 'sylius.model.report.class',
-        );
+        return [
+            ReportInterface::class => 'sylius.model.report.class',
+        ];
     }
 
     /**

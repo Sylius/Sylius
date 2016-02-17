@@ -1,0 +1,44 @@
+{
+    "name": "sylius/admin-bundle",
+    "type": "symfony-bundle",
+    "description": "Sylius eCommerce administration panel component.",
+    "keywords": ["shop", "ecommerce", "store", "webshop", "sylius", "ui", "admin interface", "admin", "backend"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name":     "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": "^5.5.9|^7.0",
+
+        "sylius/ui-bundle": "^0.17.0",
+        "sylius/core-bundle": "^0.17.0",
+        "symfony/framework-bundle": "^2.7.7"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^2.4"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Bundle\\AdminBundle\\": "" }
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.17-dev"
+        }
+    }
+}

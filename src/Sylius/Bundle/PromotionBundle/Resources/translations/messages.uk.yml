@@ -15,6 +15,9 @@ sylius:
       taxonomy_configuration:
         taxons: Таксони
         exclude: Виключити
+      contains_product_configuration:
+        variants: Продукти
+        exclude: Виключити
       item_count_configuration:
         count: Кількість
         equal: Дорівнює
@@ -23,26 +26,18 @@ sylius:
         equal: Дорівнює
       nth_order_configuration:
         nth: N-ний
-      user_loyality_configuration:
-        time: Час
-        unit:
-          days: Дні
-          weeks: Тижнів
-          months: Місяці
-          years: Роки
-          0: Елемент
-        after: Користувач створений після цього періоду
       shipping_country_configuration:
         country: Країна
       type: Тип
     coupon:
-      code: Код
       usage_limit: Обмеження використання
     coupon_generate_instruction:
       amount: Кількість
       usage_limit: Обмеження використання
     promotion:
       actions: Дії
+      add_action: Додати дію
+      add_rule: Додати правило
       coupon_based: На основі купону
       description: Опис
       ends_at: Закінчується

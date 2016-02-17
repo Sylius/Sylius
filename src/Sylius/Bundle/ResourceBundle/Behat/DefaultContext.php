@@ -20,11 +20,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory as FakerFactory;
 use Faker\Generator;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Intl\Intl;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 abstract class DefaultContext extends RawMinkContext implements Context, KernelAwareContext
@@ -42,17 +45,23 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     /**
      * @var array
      */
-    protected $actions = array(
-        'viewing'  => 'show',
+    protected $actions = [
+        'viewing' => 'show',
         'creation' => 'create',
-        'editing'  => 'update',
+        'editing' => 'update',
         'building' => 'build',
-    );
+        'customization' => 'customize',
+    ];
 
     /**
      * @var KernelInterface
      */
-    protected $kernel;
+    private $kernel;
+
+    /**
+     * @var KernelInterface
+     */
+    private static $sharedKernel;
 
     public function __construct($applicationName = null)
     {
@@ -71,6 +80,11 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     public function setKernel(KernelInterface $kernel)
     {
         $this->kernel = $kernel;
+
+        if (null === self::$sharedKernel) {
+            self::$sharedKernel = clone $kernel;
+            self::$sharedKernel->boot();
+        }
     }
 
     /**
@@ -81,7 +95,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      */
     protected function findOneByName($type, $name)
     {
-        return $this->findOneBy($type, array('name' => trim($name)));
+        return $this->findOneBy($type, ['name' => trim($name)]);
     }
 
     /**
@@ -119,6 +133,16 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     }
 
     /**
+     * @param string $resourceName
+     *
+     * @return FactoryInterface
+     */
+    protected function getFactory($resourceName)
+    {
+        return $this->getService($this->applicationName.'.factory.'.$resourceName);
+    }
+
+    /**
      * @return ObjectManager
      */
     protected function getEntityManager()
@@ -153,7 +177,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      */
     protected function getConfiguration($configurationString)
     {
-        $configuration = array();
+        $configuration = [];
         $list = explode(',', $configurationString);
 
         foreach ($list as $parameter) {
@@ -162,17 +186,17 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
 
             switch ($key) {
                 case 'country':
-                    $isoName = $this->getCountryCodeByEnglishCountryName(trim($value));
+                    $countryCode = $this->getCountryCodeByEnglishCountryName(trim($value));
 
-                    $configuration[$key] = $this->getRepository('country')->findOneBy(array('isoName' => $isoName))->getId();
+                    $configuration[$key] = $this->getRepository('country')->findOneBy(['code' => $countryCode])->getId();
                     break;
 
                 case 'taxons':
-                    $configuration[$key] = new ArrayCollection(array($this->getRepository('taxon')->findOneBy(array('name' => trim($value)))->getId()));
+                    $configuration[$key] = new ArrayCollection([$this->getRepository('taxon')->findOneBy(['name' => trim($value)])->getId()]);
                     break;
 
                 case 'variant':
-                    $configuration[$key] = $this->getRepository('product')->findOneBy(array('name' => trim($value)))->getMasterVariant()->getId();
+                    $configuration[$key] = $this->getRepository('product')->findOneBy(['name' => trim($value)])->getMasterVariant()->getId();
                     break;
 
                 case 'amount':
@@ -198,14 +222,14 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      *
      * @return string
      */
-    protected function generatePageUrl($page, array $parameters = array())
+    protected function generatePageUrl($page, array $parameters = [])
     {
         if (is_object($page)) {
             return $this->generateUrl($page, $parameters);
         }
 
-        $route  = str_replace(' ', '_', trim($page));
-        $routes = $this->getContainer()->get('router')->getRouteCollection();
+        $route = str_replace(' ', '_', trim($page));
+        $routes = $this->getRouter()->getRouteCollection();
 
         if (null === $routes->get($route)) {
             $route = $this->applicationName.'_'.$route;
@@ -230,7 +254,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      */
     protected function getUser()
     {
-        $token = $this->getSecurityContext()->getToken();
+        $token = $this->getTokenStorage()->getToken();
 
         if (null === $token) {
             throw new \Exception('No token found in security context.');
@@ -240,23 +264,31 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     }
 
     /**
-     * @return SecurityContextInterface
+     * @return TokenStorageInterface
      */
-    protected function getSecurityContext()
+    protected function getTokenStorage()
     {
-        return $this->getContainer()->get('security.context');
+        return $this->getContainer()->get('security.token_storage');
+    }
+
+    /**
+     * @return AuthorizationCheckerInterface
+     */
+    protected function getAuthorizationChecker()
+    {
+        return $this->getContainer()->get('security.authorization_checker');
     }
 
     /**
      * @param string  $route
      * @param array   $parameters
-     * @param Boolean $absolute
+     * @param bool $absolute
      *
      * @return string
      */
-    protected function generateUrl($route, array $parameters = array(), $absolute = false)
+    protected function generateUrl($route, array $parameters = [], $absolute = false)
     {
-        return $this->locatePath($this->getService('router')->generate($route, $parameters, $absolute));
+        return $this->locatePath($this->getRouter()->generate($route, $parameters, $absolute));
     }
 
     /**
@@ -331,7 +363,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      * @param NodeElement $table
      * @param string $columnName
      *
-     * @return integer
+     * @return int
      *
      * @throws \Exception If column was not found
      */
@@ -340,7 +372,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
         $rows = $table->findAll('css', 'tr');
 
         if (!isset($rows[0])) {
-            throw new \Exception("There are no rows!");
+            throw new \Exception('There are no rows!');
         }
 
         /** @var NodeElement $firstRow */
@@ -378,7 +410,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     /**
      * @param NodeElement $table
      * @param array $fields
-     * @param boolean $onlyFirstOccurence
+     * @param bool $onlyFirstOccurence
      *
      * @return NodeElement[]
      *
@@ -389,12 +421,12 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
         $rows = $table->findAll('css', 'tr');
 
         if (!isset($rows[0])) {
-            throw new \Exception("There are no rows!");
+            throw new \Exception('There are no rows!');
         }
 
         $fields = $this->replaceColumnNamesWithColumnIds($table, $fields);
 
-        $foundRows = array();
+        $foundRows = [];
 
         /** @var NodeElement[] $rows */
         $rows = $table->findAll('css', 'tr');
@@ -445,7 +477,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      */
     protected function replaceColumnNamesWithColumnIds(NodeElement $table, array $fields)
     {
-        $replacedFields = array();
+        $replacedFields = [];
         foreach ($fields as $columnName => $expectedValue) {
             $columnIndex = $this->getColumnIndex($table, $columnName);
 
@@ -456,8 +488,6 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     }
 
     /**
-     * Callback can return any value, to stop waiting use anonymous function provided as first argument.
-     *
      * @param callable $callback
      * @param int $limit
      * @param int $delay In miliseconds
@@ -466,12 +496,12 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      *
      * @throws \RuntimeException If timeout was reached
      */
-    protected function waitFor(callable $callback, $limit = 10, $delay = 100)
+    protected function waitFor(callable $callback, $limit = 30, $delay = 100)
     {
         for ($i = 0; $i < $limit; ++$i) {
             $payload = $callback();
 
-            if (null !== $payload) {
+            if (!empty($payload)) {
                 return $payload;
             }
 
@@ -491,15 +521,15 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     protected function getCountryCodeByEnglishCountryName($name)
     {
         $names = Intl::getRegionBundle()->getCountryNames('en');
-        $isoName = array_search(trim($name), $names);
+        $countryCode = array_search(trim($name), $names);
 
-        if (null === $isoName) {
+        if (null === $countryCode) {
             throw new \InvalidArgumentException(sprintf(
-                'Country "%s" not found! Available names: %s.', $name, join(', ', $names)
+                'Country "%s" not found! Available names: %s.', $name, implode(', ', $names)
             ));
         }
 
-        return $isoName;
+        return $countryCode;
     }
 
     /**
@@ -516,10 +546,44 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
 
         if (null === $code) {
             throw new \InvalidArgumentException(sprintf(
-                'Locale "%s" not found! Available names: %s.', $name, join(', ', $names)
+                'Locale "%s" not found! Available names: %s.', $name, implode(', ', $names)
             ));
         }
 
         return $code;
+    }
+
+    /**
+     * @return RouterInterface
+     */
+    protected function getRouter()
+    {
+        return $this->getSharedService('router');
+    }
+
+    /**
+     * @return KernelInterface
+     */
+    protected function getKernel()
+    {
+        return $this->kernel;
+    }
+
+    /**
+     * @return KernelInterface
+     */
+    protected function getSharedKernel()
+    {
+        return self::$sharedKernel;
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return object
+     */
+    protected function getSharedService($id)
+    {
+        return self::$sharedKernel->getContainer()->get($id);
     }
 }

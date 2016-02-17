@@ -17,6 +17,17 @@
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
     <class name="Sylius\Component\Promotion\Model\Promotion">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">code</option>
+            <option name="message">sylius.promotion.code.unique</option>
+            <option name="groups">sylius</option>
+        </constraint>
+        <property name="code">
+        <constraint name="NotBlank">
+            <option name="message">sylius.promotion.code.not_blank</option>
+            <option name="groups">sylius</option>
+        </constraint>
+        </property>
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.promotion.name.not_blank</option>
@@ -42,6 +53,15 @@
                 <option name="maxMessage">sylius.promotion.description.max_length</option>
                 <option name="groups">sylius</option>
             </constraint>
+        </property>
+        <property name="actions">
+            <constraint name="Valid" />
+        </property>
+    </class>
+
+    <class name="Sylius\Component\Promotion\Model\Action">
+        <property name="configuration">
+            <constraint name="Valid" />
         </property>
     </class>
 
@@ -77,19 +97,16 @@
         <property name="amount">
             <constraint name="NotBlank">
                 <option name="message">sylius.promotion_coupon_generate_instruction.amount.not_blank</option>
-                <option name="groups">sylius</option>
             </constraint>
             <constraint name="Range">
                 <option name="min">1</option>
                 <option name="minMessage">sylius.promotion_coupon_generate_instruction.amount.min</option>
-                <option name="groups">sylius</option>
             </constraint>
         </property>
         <property name="usageLimit">
             <constraint name="Range">
                 <option name="min">1</option>
                 <option name="minMessage">sylius.promotion_coupon_generate_instruction.usage_limit.min</option>
-                <option name="groups">sylius</option>
             </constraint>
         </property>
     </class>

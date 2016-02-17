@@ -1,0 +1,63 @@
+build: off
+cache:
+    - c:\php -> appveyor.yml
+    - '%LOCALAPPDATA%\Composer\files -> appveyor.yml'
+clone_folder: c:\projects\sylius
+
+environment:
+  fast_finish: true
+  matrix:
+    - TEST_SUITE: phpspec
+    - TEST_SUITE: 1a
+    - TEST_SUITE: 1b
+    - TEST_SUITE: 2a
+    - TEST_SUITE: 2b
+
+services:
+  - mysql
+
+init:
+    - SET PATH=c:\php;%PATH%
+    - SET COMPOSER_NO_INTERACTION=1
+    - SET PHP=1
+    - SET ANSICON=121x90 (121x90)
+
+install:
+    - IF EXIST c:\php (SET PHP=0) ELSE (mkdir c:\php)
+    - IF %PHP%==1 cd c:\php
+    - IF %PHP%==1 appveyor DownloadFile http://windows.php.net/downloads/releases/php-5.6.15-Win32-VC11-x86.zip
+    - IF %PHP%==1 7z x php-5.6.15-Win32-VC11-x86.zip -y >nul
+    - IF %PHP%==1 echo [PHP] >> php.ini
+    - IF %PHP%==1 echo max_execution_time=3600 >> php.ini
+    - IF %PHP%==1 echo memory_limit=-1 >> php.ini
+    - IF %PHP%==1 echo date.timezone="UTC" >> php.ini
+    - IF %PHP%==1 echo extension_dir=ext >> php.ini
+    - IF %PHP%==1 echo extension=php_curl.dll >> php.ini
+    - IF %PHP%==1 echo extension=php_exif.dll >> php.ini
+    - IF %PHP%==1 echo extension=php_fileinfo.dll >> php.ini
+    - IF %PHP%==1 echo extension=php_gd2.dll >> php.ini
+    - IF %PHP%==1 echo extension=php_intl.dll >> php.ini
+    - IF %PHP%==1 echo extension=php_mbstring.dll >> php.ini
+    - IF %PHP%==1 echo extension=php_openssl.dll >> php.ini
+    - IF %PHP%==1 echo extension=php_soap.dll >> php.ini
+    - IF %PHP%==1 echo extension=php_pdo_mysql.dll >> php.ini
+    - IF %PHP%==1 echo zend_extension=C:\php\ext\php_opcache.dll >> php.ini
+    - php -v
+    - IF %PHP%==1 del /Q *.zip
+    - IF %PHP%==1 cd ..
+    - cd c:\projects\sylius
+    - appveyor DownloadFile https://getcomposer.org/composer.phar
+    - copy /Y etc\appveyor\parameters.test.yml app\config\parameters.yml
+    - php composer.phar install --prefer-dist --no-interaction --no-progress --ansi
+
+test_script:
+    - php app\console doctrine:database:create --env=test
+    - php app\console doctrine:schema:create --env=test
+    - php app\console doctrine:phpcr:repository:init --env=test
+    - php app\console cache:warmup --env=test
+
+    - IF %TEST_SUITE%==phpspec etc\appveyor\suite-phpspec.cmd
+    - IF %TEST_SUITE%==1a etc\appveyor\suite-1a.cmd
+    - IF %TEST_SUITE%==1b etc\appveyor\suite-1b.cmd
+    - IF %TEST_SUITE%==2a etc\appveyor\suite-2a.cmd
+    - IF %TEST_SUITE%==2b etc\appveyor\suite-2b.cmd

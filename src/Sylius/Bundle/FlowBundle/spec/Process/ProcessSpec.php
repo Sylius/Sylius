@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\FlowBundle\Process;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
+use Sylius\Bundle\FlowBundle\Process\ProcessInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 use Sylius\Bundle\FlowBundle\Validator\ProcessValidatorInterface;
 
@@ -25,7 +25,7 @@ class ProcessSpec extends ObjectBehavior
 
     function it_is_a_process()
     {
-        $this->shouldImplement('Sylius\Bundle\FlowBundle\Process\ProcessInterface');
+        $this->shouldImplement(ProcessInterface::class);
     }
 
     function its_forward_route_is_mutable()
@@ -36,8 +36,8 @@ class ProcessSpec extends ObjectBehavior
 
     function its_forward_route_params_is_mutable()
     {
-        $this->setForwardRouteParams(array('name' => 'value'));
-        $this->getForwardRouteParams()->shouldReturn(array('name' => 'value'));
+        $this->setForwardRouteParams(['name' => 'value']);
+        $this->getForwardRouteParams()->shouldReturn(['name' => 'value']);
     }
 
     function its_display_route_is_mutable()
@@ -48,14 +48,14 @@ class ProcessSpec extends ObjectBehavior
 
     function its_display_params_is_mutable()
     {
-        $this->setDisplayRouteParams(array('name' => 'value'));
-        $this->getDisplayRouteParams()->shouldReturn(array('name' => 'value'));
+        $this->setDisplayRouteParams(['name' => 'value']);
+        $this->getDisplayRouteParams()->shouldReturn(['name' => 'value']);
     }
 
     function its_redirect_params_is_mutable()
     {
-        $this->setRedirectParams(array('name' => 'value'));
-        $this->getRedirectParams()->shouldReturn(array('name' => 'value'));
+        $this->setRedirectParams(['name' => 'value']);
+        $this->getRedirectParams()->shouldReturn(['name' => 'value']);
     }
 
     function its_redirect_is_mutable()
@@ -80,13 +80,12 @@ class ProcessSpec extends ObjectBehavior
     {
         $step->getName()->shouldBeCalled()->willReturn('name');
         $secondStep->getName()->shouldBeCalled()->willReturn('other_name');
-        $this->setSteps(array('name' => $step));
+        $this->setSteps(['name' => $step]);
 
         $this->addStep('other_name', $secondStep);
         $this->removeStep('name');
 
-        $this->getSteps()->shouldReturn(array('other_name' => $secondStep));
-        $this->getOrderedSteps()->shouldReturn(array($secondStep));
+        $this->getSteps()->shouldReturn(['other_name' => $secondStep]);
+        $this->getOrderedSteps()->shouldReturn([$secondStep]);
     }
-
 }

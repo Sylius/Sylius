@@ -7,6 +7,8 @@ sylius:
       not_blank: Vul naam van het attribuut in.
       min_length: 'Attribuutnaam moet minimaal 1 teken lang zijn. |Attribuutnaam moet minstens {{ limit }} karakters lang zijn.'
       max_length: 'Attribuutnaam mag niet langer zijn dan 1 teken. | Attribuutnaam mag niet langer zijn dan {{ limit }} karakters.'
+    code:
+      unique: Deze code is al in gebruik.
     presentation:
       not_blank: Vul de attribuutweergave in.
       min_length: 'Attribuutweergave moet minimaal 1 teken lang zijn. |Attribuutweergave moet minstens {{ limit }} karakters lang zijn.'

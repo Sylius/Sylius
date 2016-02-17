@@ -44,9 +44,9 @@ class MethodsResolver implements MethodsResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function getSupportedMethods(ShippingSubjectInterface $subject, array $criteria = array())
+    public function getSupportedMethods(ShippingSubjectInterface $subject, array $criteria = [])
     {
-        $methods = array();
+        $methods = [];
 
         foreach ($this->getMethods($criteria) as $method) {
             if ($this->eligibilityChecker->isEligible($subject, $method)) {
@@ -62,7 +62,7 @@ class MethodsResolver implements MethodsResolverInterface
      *
      * @return ShippingMethodInterface[]
      */
-    protected function getMethods(array $criteria = array())
+    protected function getMethods(array $criteria = [])
     {
         return $this->repository->findBy($criteria);
     }

@@ -24,11 +24,11 @@ class TaxonSelectionToIdentifierCollectionTransformer implements DataTransformer
     public function transform($value)
     {
         if (null === $value) {
-            return array();
+            return [];
         }
 
         if (!$value instanceof Collection) {
-            throw new UnexpectedTypeException($value, 'Doctrine\Common\Collections\Collection');
+            throw new UnexpectedTypeException($value, Collection::class);
         }
 
         return $value->toArray();

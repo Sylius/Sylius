@@ -48,19 +48,19 @@ class ProductUniqueValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         if (!$value instanceof ProductInterface) {
-            throw new UnexpectedTypeException($value, 'Sylius\Component\Product\Model\ProductInterface');
+            throw new UnexpectedTypeException($value, ProductInterface::class);
         }
 
         $product = $value;
         $accessor = PropertyAccess::createPropertyAccessor();
 
-        $criteria = array($constraint->property => $accessor->getValue($product, $constraint->property));
+        $criteria = [$constraint->property => $accessor->getValue($product, $constraint->property)];
         $conflictualProduct = $this->repository->findOneBy($criteria);
 
         if (null !== $conflictualProduct && $conflictualProduct != $product) {
-            $this->context->addViolationAt($constraint->property, $constraint->message, array(
-                '%property%' => $constraint->property
-            ));
+            $this->context->addViolationAt($constraint->property, $constraint->message, [
+                '%property%' => $constraint->property,
+            ]);
         }
     }
 }

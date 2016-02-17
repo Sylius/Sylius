@@ -21,7 +21,7 @@ class VariantUniqueSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(array('property' => 'sku'));
+        $this->beConstructedWith(['property' => 'sku']);
     }
 
     function it_is_initializable()
@@ -31,7 +31,7 @@ class VariantUniqueSpec extends ObjectBehavior
 
     function it_is_a_validation_constraint()
     {
-        $this->shouldHaveType('Symfony\Component\Validator\Constraint');
+        $this->shouldHaveType(Constraint::class);
     }
 
     function it_is_class_constraint()

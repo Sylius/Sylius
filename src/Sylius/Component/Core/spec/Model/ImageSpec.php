@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\ImageInterface;
 
 class ImageSpec extends ObjectBehavior
 {
@@ -22,7 +23,7 @@ class ImageSpec extends ObjectBehavior
 
     function it_implements_Sylius_image_interface()
     {
-        $this->shouldImplement('Sylius\Component\Core\Model\ImageInterface');
+        $this->shouldImplement(ImageInterface::class);
     }
 
     function it_does_not_have_id_by_default()
@@ -52,7 +53,7 @@ class ImageSpec extends ObjectBehavior
 
     function it_initializes_creation_date_by_default()
     {
-        $this->getCreatedAt()->shouldHaveType('DateTime');
+        $this->getCreatedAt()->shouldHaveType(\DateTime::class);
     }
 
     function it_does_not_have_last_update_date_by_default()

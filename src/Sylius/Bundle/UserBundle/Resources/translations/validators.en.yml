@@ -9,9 +9,11 @@ sylius:
         email:
             not_blank: Please enter your email.
             invalid: This email is invalid.
+            not_registered: User with this email does not exist. Please register first.
         plainPassword:
             not_blank: Please enter your password.
             mismatch: The entered passwords don't match
+            wrong_current: Provided password is different than the current one.
 
     customer:
         first_name:
@@ -22,6 +24,8 @@ sylius:
             max: Last name must not be longer than {{ limit }} characters.
             min: Last name must be at least {{ limit }} characters long.
             not_blank: Please enter your last name.
+        gender:
+            not_blank: Please choose your gender.
         email:
             already_used: This email is already used, please login or use forgotten password.
             max: Email must not be longer than {{ limit }} characters.

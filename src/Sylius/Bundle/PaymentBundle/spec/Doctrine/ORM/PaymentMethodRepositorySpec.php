@@ -26,12 +26,12 @@ class PaymentMethodRepositorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\PaymentBundle\Doctrine\ORM\PaymentMethodRepository');
+        $this->shouldHaveType('Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository');
     }
 
     function it_is_a_repository()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository');
+        $this->shouldHaveType('Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository');
         $this->shouldImplement('Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface');
     }
 
@@ -39,22 +39,26 @@ class PaymentMethodRepositorySpec extends ObjectBehavior
     {
         $em->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
         $builder->select('method')->shouldBeCalled()->willReturn($builder);
+        $builder->addSelect('translation')->shouldBeCalled()->willReturn($builder);
+        $builder->leftJoin('method.translations', 'translation')->shouldBeCalled()->willReturn($builder);
         $builder->from(Argument::any(), 'method', Argument::cetera())->shouldBeCalled()->willReturn($builder);
         $builder->where('method.enabled = true')->shouldBeCalled()->willReturn($builder);
 
-        $this->getQueryBuidlerForChoiceType(array(
-            'disabled' => false
-        ))->shouldReturn($builder);
+        $this->getQueryBuilderForChoiceType([
+            'disabled' => false,
+        ])->shouldReturn($builder);
     }
 
     function it_creates_query_builder_for_all_status($em, QueryBuilder $builder)
     {
         $em->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
         $builder->select('method')->shouldBeCalled()->willReturn($builder);
+        $builder->addSelect('translation')->shouldBeCalled()->willReturn($builder);
+        $builder->leftJoin('method.translations', 'translation')->shouldBeCalled()->willReturn($builder);
         $builder->from(Argument::any(), 'method', Argument::cetera())->shouldBeCalled()->willReturn($builder);
 
-        $this->getQueryBuidlerForChoiceType(array(
-            'disabled' => true
-        ))->shouldReturn($builder);
+        $this->getQueryBuilderForChoiceType([
+            'disabled' => true,
+        ])->shouldReturn($builder);
     }
 }

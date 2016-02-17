@@ -14,9 +14,10 @@ sylius:
       amount: Importe del pago
       method: Modo de pago
       state:
-        0: Estado del pago
+        header: Estado del pago
         checkout: Completar pedido
         completed: Completado
+        authorized: Autorizado
         failed: Fallido
         new: Nuevo
         pending: Pendiente

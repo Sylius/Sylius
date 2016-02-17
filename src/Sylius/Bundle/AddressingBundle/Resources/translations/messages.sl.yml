@@ -12,9 +12,8 @@ sylius:
       phone_number: Telefon
       postcode: Poštna številka
       street: Ulica
-      province: Provinca
+      province: Regija
     country:
-      iso_name: ISO ime
       name: Ime
       provinces: Province
       select: Izberite
@@ -30,9 +29,6 @@ sylius:
         province: Provinca
         zone: Območje
       scope: Področje
-    zone_member_country:
-      country: Država
-    zone_member_province:
-      province: Provinca
-    zone_member_zone:
-      zone: Območje
+      select: Izberite
+    zone_member:
+      select: Izberite

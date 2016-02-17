@@ -23,7 +23,7 @@ class Version20150102133831 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
-        
+
         $this->addSql('ALTER TABLE sylius_product_archetype ADD code VARCHAR(255) NOT NULL');
     }
 
@@ -31,7 +31,7 @@ class Version20150102133831 extends AbstractMigration
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
-        
+
         $this->addSql('ALTER TABLE sylius_product_archetype DROP code');
     }
 }

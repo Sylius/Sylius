@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    priceable:
+      price: 价格
+    pricing:
+      volume_based:
+        price: 价格

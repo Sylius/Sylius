@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\OrderBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,7 +24,7 @@ class AdjustmentTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Adjustment', array('sylius'));
+        $this->beConstructedWith('Adjustment', ['sylius']);
     }
 
     function it_is_initializable()
@@ -33,18 +34,18 @@ class AdjustmentTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldHaveType('Symfony\Component\Form\AbstractType');
+        $this->shouldHaveType(AbstractType::class);
     }
 
     function it_builds_form_with_proper_fields(FormBuilderInterface $builder)
     {
         $builder
-            ->add('label', 'text', Argument::any())
+            ->add('type', 'text', Argument::any())
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('description', 'text', Argument::any())
+            ->add('label', 'text', Argument::any())
             ->willReturn($builder)
         ;
 
@@ -53,16 +54,16 @@ class AdjustmentTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
-                'data_class'        => 'Adjustment',
-                'validation_groups' => array('sylius'),
-            ))
+            ->setDefaults([
+                'data_class' => 'Adjustment',
+                'validation_groups' => ['sylius'],
+            ])
             ->shouldBeCalled()
         ;
 

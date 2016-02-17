@@ -1,13 +1,13 @@
 <?php
 
 /*
-* This file is part of the Sylius package.
-*
-* (c) Paweł Jędrzejewski
-*
-* For the full copyright and license information, please view the LICENSE
-* file that was distributed with this source code.
-*/
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace spec\Sylius\Bundle\InventoryBundle\Validator\Constraints;
 
@@ -17,6 +17,7 @@ use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
+use Symfony\Component\Validator\ConstraintValidator;
 
 class InStockValidatorSpec extends ObjectBehavior
 {
@@ -32,7 +33,7 @@ class InStockValidatorSpec extends ObjectBehavior
 
     function it_is_a_constraint_validator()
     {
-        $this->shouldHaveType('Symfony\Component\Validator\ConstraintValidator');
+        $this->shouldHaveType(ConstraintValidator::class);
     }
 
     function it_should_not_add_violation_if_there_is_no_stockable(

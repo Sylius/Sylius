@@ -21,7 +21,7 @@
     </parameters>
 
     <services>
-        <service id="sylius.templating.helper.money" class="%sylius.templating.helper.money.class%">
+        <service id="sylius.templating.helper.money" class="%sylius.templating.helper.money.class%" lazy="true">
             <argument>%sylius.money.locale%</argument>
             <argument>%sylius.money.currency%</argument>
             <tag name="templating.helper" alias="sylius_money" />

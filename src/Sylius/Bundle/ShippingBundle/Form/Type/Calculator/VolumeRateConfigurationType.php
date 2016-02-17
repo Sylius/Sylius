@@ -18,49 +18,30 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * Volume rate calculator configuration form.
- *
  * @author Antonio Peric <antonio@locastic.com>
  */
 class VolumeRateConfigurationType extends AbstractType
 {
-    /**
-     * Validation groups.
-     *
-     * @var array
-     */
-    protected $validationGroups;
-
-    /**
-     * Constructor.
-     *
-     * @param array $validationGroups
-     */
-    public function __construct(array $validationGroups)
-    {
-        $this->validationGroups = $validationGroups;
-    }
-
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('amount', 'sylius_money', array(
+            ->add('amount', 'sylius_money', [
                 'label' => 'sylius.form.shipping_calculator.volume_rate_configuration.amount',
-                'constraints' => array(
+                'constraints' => [
                     new NotBlank(),
-                    new Type(array('type' => 'integer')),
-                ),
-            ))
-            ->add('division', 'number', array(
+                    new Type(['type' => 'integer']),
+                ],
+            ])
+            ->add('division', 'number', [
                 'label' => 'sylius.form.shipping_calculator.volume_rate_configuration.division',
-                'constraints' => array(
+                'constraints' => [
                     new NotBlank(),
-                    new Type(array('type' => 'numeric')),
-                ),
-            ))
+                    new Type(['type' => 'numeric']),
+                ],
+            ])
         ;
     }
 
@@ -70,10 +51,9 @@ class VolumeRateConfigurationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'data_class' => null,
-                'validation_groups' => $this->validationGroups,
-            ))
+            ])
         ;
     }
 
@@ -82,6 +62,6 @@ class VolumeRateConfigurationType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_shipping_calculator_volume_rate_configuration';
+        return 'sylius_shipping_calculator_volume_rate';
     }
 }

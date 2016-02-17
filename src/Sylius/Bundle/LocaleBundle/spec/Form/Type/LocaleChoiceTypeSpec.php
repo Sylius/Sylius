@@ -11,17 +11,16 @@
 
 namespace spec\Sylius\Bundle\LocaleBundle\Form\Type;
 
-use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Form\FormTypeInterface;
 
 /**
- * @mixin \Sylius\Bundle\LocaleBundle\Form\Type\LocaleChoiceType
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 class LocaleChoiceTypeSpec extends ObjectBehavior
 {
-    function let(ObjectRepository $localeRepository)
+    function let(RepositoryInterface $localeRepository)
     {
         $this->beConstructedWith($localeRepository);
     }
@@ -33,7 +32,7 @@ class LocaleChoiceTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_has_a_valid_name()

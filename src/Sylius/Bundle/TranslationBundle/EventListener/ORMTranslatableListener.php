@@ -31,10 +31,10 @@ class ORMTranslatableListener extends AbstractTranslatableListener implements Ev
      */
     public function getSubscribedEvents()
     {
-        return array(
+        return [
             Events::loadClassMetadata,
             Events::postLoad,
-        );
+        ];
     }
 
     /**
@@ -45,13 +45,13 @@ class ORMTranslatableListener extends AbstractTranslatableListener implements Ev
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
         $classMetadata = $eventArgs->getClassMetadata();
-        $reflection    = $classMetadata->reflClass;
+        $reflection = $classMetadata->reflClass;
 
         if (!$reflection || $reflection->isAbstract()) {
             return;
         }
 
-        if ($reflection->implementsInterface('Sylius\Component\Translation\Model\TranslatableInterface')) {
+        if ($reflection->implementsInterface(TranslatableInterface::class)) {
             $this->mapTranslatable($classMetadata);
         }
 
@@ -67,21 +67,29 @@ class ORMTranslatableListener extends AbstractTranslatableListener implements Ev
      */
     private function mapTranslatable(ClassMetadata $metadata)
     {
-        // In the case A -> B -> TranslatableInterface, B might not have mapping defined as it
-        // is probably defined in A, so in that case, we just return.
-        if (!isset($this->configs[$metadata->name])) {
+        $className = $metadata->name;
+
+        try {
+            $resourceMetadata = $this->registry->getByClass($className);
+        } catch (\InvalidArgumentException $exception) {
             return;
         }
 
-        $metadata->mapOneToMany(array(
-            'fieldName'     => 'translations',
-            'targetEntity'  => $this->configs[$metadata->name]['translation']['model'],
-            'mappedBy'      => 'translatable',
-            'fetch'         => ClassMetadataInfo::FETCH_EXTRA_LAZY,
-            'indexBy'       => 'locale',
-            'cascade'       => array('persist', 'merge', 'remove'),
+        if (!$resourceMetadata->hasParameter('translation')) {
+            return;
+        }
+
+        $translationResourceMetadata = $this->registry->get($resourceMetadata->getAlias().'_translation');
+
+        $metadata->mapOneToMany([
+            'fieldName' => 'translations',
+            'targetEntity' => $translationResourceMetadata->getClass('model'),
+            'mappedBy' => 'translatable',
+            'fetch' => ClassMetadataInfo::FETCH_EXTRA_LAZY,
+            'indexBy' => 'locale',
+            'cascade' => ['persist', 'merge', 'remove'],
             'orphanRemoval' => true,
-        ));
+        ]);
     }
 
     /**
@@ -91,48 +99,52 @@ class ORMTranslatableListener extends AbstractTranslatableListener implements Ev
      */
     private function mapTranslation(ClassMetadata $metadata)
     {
-        // In the case A -> B -> TranslationInterface, B might not have mapping defined as it
-        // is probably defined in A, so in that case, we just return.
-        if (!isset($this->configs[$metadata->name])) {
+        $className = $metadata->name;
+
+        try {
+            $resourceMetadata = $this->registry->getByClass($className);
+        } catch (\InvalidArgumentException $exception) {
             return;
         }
 
-        $metadata->mapManyToOne(array(
-            'fieldName'    => 'translatable' ,
-            'targetEntity' => $this->configs[$metadata->name]['model'],
-            'inversedBy'   => 'translations' ,
-            'joinColumns'  => array(array(
-                'name'                 => 'translatable_id',
+        $translatableResourceMetadata = $this->registry->get(str_replace('_translation', '', $resourceMetadata->getAlias()));
+
+        $metadata->mapManyToOne([
+            'fieldName' => 'translatable',
+            'targetEntity' => $translatableResourceMetadata->getClass('model'),
+            'inversedBy' => 'translations',
+            'joinColumns' => [[
+                'name' => 'translatable_id',
                 'referencedColumnName' => 'id',
-                'onDelete'             => 'CASCADE',
-                'nullable'             => false,
-            )),
-        ));
+                'onDelete' => 'CASCADE',
+                'nullable' => false,
+            ]],
+        ]);
 
         if (!$metadata->hasField('locale')) {
-            $metadata->mapField(array(
+            $metadata->mapField([
                 'fieldName' => 'locale',
-                'type'      => 'string',
-                'nullable'  => false,
-            ));
+                'type' => 'string',
+                'nullable' => false,
+            ]);
         }
 
         // Map unique index.
-        $columns = array(
+        $columns = [
             $metadata->getSingleAssociationJoinColumnName('translatable'),
-            'locale'
-        );
+            'locale',
+        ];
 
         if (!$this->hasUniqueConstraint($metadata, $columns)) {
-            $constraints = isset($metadata->table['uniqueConstraints']) ? $metadata->table['uniqueConstraints'] : array();
+            $constraints = isset($metadata->table['uniqueConstraints']) ? $metadata->table['uniqueConstraints'] : [];
 
-            $constraints[$metadata->getTableName().'_uniq_trans'] = array(
+            $constraints[$metadata->getTableName().'_uniq_trans'] = [
                 'columns' => $columns,
-            );
+            ];
 
-            $metadata->setPrimaryTable(array(
+            $metadata->setPrimaryTable([
                 'uniqueConstraints' => $constraints,
-            ));
+            ]);
         }
     }
 

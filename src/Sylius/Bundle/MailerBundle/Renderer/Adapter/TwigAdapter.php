@@ -42,7 +42,7 @@ class TwigAdapter extends AbstractAdapter
     /**
      * {@inheritdoc}
      */
-    public function render(EmailInterface $email, array $data = array())
+    public function render(EmailInterface $email, array $data = [])
     {
         if (null !== $email->getTemplate()) {
             $data = $this->twig->mergeGlobals($data);
@@ -53,7 +53,7 @@ class TwigAdapter extends AbstractAdapter
             $subject = $template->renderBlock('subject', $data);
             $body = $template->renderBlock('body', $data);
         } else {
-            $twig = new \Twig_Environment(new \Twig_Loader_Array(array()));
+            $twig = new \Twig_Environment(new \Twig_Loader_Array([]));
 
             $subjectTemplate = $twig->createTemplate($email->getSubject());
             $bodyTemplate = $twig->createTemplate($email->getContent());

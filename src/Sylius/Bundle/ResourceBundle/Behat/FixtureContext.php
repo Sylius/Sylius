@@ -38,7 +38,7 @@ class FixtureContext extends DefaultContext
             $additionalData = $additionalData->getHash();
         }
 
-        $entity = $this->getRepository($resource)->createNew();
+        $entity = $this->getFactory($resource)->createNew();
 
         if (count($additionalData) > 0) {
             $this->setDataToObject($entity, $additionalData);
@@ -78,7 +78,11 @@ class FixtureContext extends DefaultContext
         $type = str_replace(' ', '_', trim($type));
 
         $object = $this->waitFor(function () use ($type, $data) {
-            return $this->findOneByName($type, $data['name']);
+            try {
+                return $this->findOneByName($type, $data['name']);
+            } catch (\InvalidArgumentException $exception) {
+                return null;
+            }
         });
 
         foreach ($data as $property => $value) {
@@ -114,7 +118,7 @@ class FixtureContext extends DefaultContext
      */
     public function iDeletedResource($type, $property, $value)
     {
-        $user = $this->findOneBy($type, array($property => $value));
+        $user = $this->findOneBy($type, [$property => $value]);
         $entityManager = $this->getEntityManager();
         $entityManager->remove($user);
         $entityManager->flush();

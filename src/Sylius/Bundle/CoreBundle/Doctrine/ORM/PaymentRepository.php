@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
-use Pagerfanta\PagerfantaInterface;
+use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 class PaymentRepository extends EntityRepository
@@ -22,9 +22,9 @@ class PaymentRepository extends EntityRepository
      * @param array $criteria
      * @param array $sorting
      *
-     * @return PagerfantaInterface
+     * @return Pagerfanta
      */
-    public function createFilterPaginator($criteria = array(), $sorting = array())
+    public function createFilterPaginator($criteria = [], $sorting = [])
     {
         $this->_em->getFilters()->disable('softdeleteable');
 
@@ -57,7 +57,7 @@ class PaymentRepository extends EntityRepository
         if (!empty($criteria['createdAtFrom'])) {
             $queryBuilder
                 ->andWhere($queryBuilder->expr()->gte($this->getPropertyName('createdAt'), ':createdAtFrom'))
-                ->setParameter('createdAtFrom', date('Y-m-d 00:00:00',strtotime($criteria['createdAtFrom'])))
+                ->setParameter('createdAtFrom', date('Y-m-d 00:00:00', strtotime($criteria['createdAtFrom'])))
             ;
         }
         if (!empty($criteria['createdAtTo'])) {
@@ -69,7 +69,7 @@ class PaymentRepository extends EntityRepository
 
         if (empty($sorting)) {
             if (!is_array($sorting)) {
-                $sorting = array();
+                $sorting = [];
             }
             $sorting['updatedAt'] = 'desc';
         }

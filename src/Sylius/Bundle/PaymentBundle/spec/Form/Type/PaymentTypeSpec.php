@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\PaymentBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormTypeInterface;
 
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
@@ -22,7 +23,7 @@ class PaymentTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Payment', array('sylius'));
+        $this->beConstructedWith('Payment', ['sylius']);
     }
 
     function it_is_initializable()
@@ -32,7 +33,7 @@ class PaymentTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_builds_form(FormBuilderInterface $builder)
@@ -41,7 +42,7 @@ class PaymentTypeSpec extends ObjectBehavior
         $builder->add('amount', 'sylius_money', Argument::type('array'))->willReturn($builder);
         $builder->add('state', 'choice', Argument::withKey('choices'))->willReturn($builder);
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_has_a_name()

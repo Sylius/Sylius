@@ -13,20 +13,21 @@ namespace spec\Sylius\Bundle\AttributeBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Attribute\Model\AttributeInterface;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class AttributeValueTypeSpec extends ObjectBehavior
 {
-    function let()
+    function let(EntityRepository $attributeRepository)
     {
-        $this->beConstructedWith('AttributeValue', array('sylius'), 'server');
+        $this->beConstructedWith('AttributeValue', ['sylius'], 'server', $attributeRepository);
     }
 
     function it_is_initializable()
@@ -36,18 +37,13 @@ class AttributeValueTypeSpec extends ObjectBehavior
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
     function it_builds_attribute_types_prototype_and_passes_it_as_argument(
         FormBuilder $builder,
-        FormBuilder $fieldBuilder,
-        FormFactoryInterface $formFactory,
-        ChoiceListInterface $choiceList,
-        AttributeInterface $attribute
-    )
-    {
-        $builder->getFormFactory()->willReturn($formFactory);
+        FormFactoryInterface $formFactory
+    ) {
         $builder->add('attribute', 'sylius_server_attribute_choice', Argument::any())->willReturn($builder);
 
         $builder
@@ -55,36 +51,12 @@ class AttributeValueTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $attribute->getType()->willReturn('checkbox')->shouldBeCalled();
-        $attribute->getConfiguration()->willReturn(array('label' => 'sylius.form.attribute.server_attribute_value.value'))->shouldBeCalled();
-
-        $choiceList
-            ->getChoices()
-            ->willReturn(array($attribute))
-        ;
-        $fieldBuilder
-            ->getOption('choice_list')
-            ->willReturn($choiceList)
-        ;
-        $builder
-            ->get('attribute')
-            ->willReturn($fieldBuilder)
-        ;
-        $builder
-            ->create('value', 'checkbox', array('label' => 'sylius.form.attribute.server_attribute_value.value'))
-            ->shouldBeCalled()
-            ->willReturn($fieldBuilder)
-        ;
-        $fieldBuilder->getForm()->willReturn('Form for attribute');
-
-        $builder->setAttribute('prototypes', array(0 => 'Form for attribute'))->shouldBeCalled();
-
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array('data_class' => 'AttributeValue', 'validation_groups' => array('sylius')))->shouldBeCalled();
+        $resolver->setDefaults(['data_class' => 'AttributeValue', 'validation_groups' => ['sylius']])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

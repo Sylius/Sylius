@@ -27,7 +27,7 @@ class RuleSpec extends ObjectBehavior
 
     function it_implements_Sylius_shipping_method_rule_interface()
     {
-        $this->shouldImplement('Sylius\Component\Shipping\Model\RuleInterface');
+        $this->shouldImplement(RuleInterface::class);
     }
 
     function it_has_no_id_by_default()
@@ -42,19 +42,19 @@ class RuleSpec extends ObjectBehavior
 
     function its_type_is_mutable()
     {
-        $this->setType(RuleInterface::TYPE_ITEM_COUNT);
-        $this->getType()->shouldReturn(RuleInterface::TYPE_ITEM_COUNT);
+        $this->setType(RuleInterface::TYPE_UNIT_COUNT);
+        $this->getType()->shouldReturn(RuleInterface::TYPE_UNIT_COUNT);
     }
 
     function it_initializes_empty_array_for_configuration_by_default()
     {
-        $this->getConfiguration()->shouldReturn(array());
+        $this->getConfiguration()->shouldReturn([]);
     }
 
     function its_configuration_is_mutable()
     {
-        $this->setConfiguration(array('value' => 500));
-        $this->getConfiguration()->shouldReturn(array('value' => 500));
+        $this->setConfiguration(['value' => 500]);
+        $this->getConfiguration()->shouldReturn(['value' => 500]);
     }
 
     function it_does_not_belong_to_a_shipping_method_by_default()

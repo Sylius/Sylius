@@ -12,10 +12,10 @@
 namespace spec\Sylius\Bundle\ShippingBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistryInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Shipping\Checker\RuleCheckerInterface;
 use Sylius\Component\Shipping\Model\Rule;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -23,7 +23,7 @@ use Symfony\Component\Form\FormInterface;
 
 class BuildRuleFormSubscriberSpec extends ObjectBehavior
 {
-    function let(RuleCheckerRegistryInterface $checkerRegistry, FormFactoryInterface $factory)
+    function let(ServiceRegistryInterface $checkerRegistry, FormFactoryInterface $factory)
     {
         $this->beConstructedWith($checkerRegistry, $factory);
     }
@@ -35,15 +35,15 @@ class BuildRuleFormSubscriberSpec extends ObjectBehavior
 
     function it_is_a_subscriber()
     {
-        $this->shouldImplement('Symfony\Component\EventDispatcher\EventSubscriberInterface');
+        $this->shouldImplement(EventSubscriberInterface::class);
     }
 
     function it_subscribes_to_event()
     {
-        $this::getSubscribedEvents()->shouldReturn(array(
+        $this::getSubscribedEvents()->shouldReturn([
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT => 'preSubmit'
-        ));
+            FormEvents::PRE_SUBMIT => 'preSubmit',
+        ]);
     }
 
     function it_adds_configuration_field_on_pre_set_data(
@@ -60,16 +60,16 @@ class BuildRuleFormSubscriberSpec extends ObjectBehavior
 
         $rule->getId()->shouldBeCalled()->willreturn(12);
         $rule->getType()->shouldBeCalled()->willreturn('rule_type');
-        $rule->getConfiguration()->shouldBeCalled()->willreturn(array());
+        $rule->getConfiguration()->shouldBeCalled()->willreturn([]);
 
-        $checkerRegistry->getChecker('rule_type')->shouldBeCalled()->willreturn($checker);
+        $checkerRegistry->get('rule_type')->shouldBeCalled()->willreturn($checker);
         $checker->getConfigurationFormType()->shouldBeCalled()->willreturn('configuration_form_type');
 
         $factory->createNamed(
             'configuration',
             'configuration_form_type',
-            array(),
-            array('auto_initialize' => false)
+            [],
+            ['auto_initialize' => false]
         )->shouldBeCalled()->willreturn($formConfiguration);
 
         $form->add($formConfiguration)->shouldBeCalled();
@@ -85,17 +85,17 @@ class BuildRuleFormSubscriberSpec extends ObjectBehavior
         FormInterface $formConfiguration,
         RuleCheckerInterface $checker
     ) {
-        $event->getData()->shouldBeCalled()->willReturn(array('type' => 'rule_type'));
+        $event->getData()->shouldBeCalled()->willReturn(['type' => 'rule_type']);
         $event->getForm()->shouldBeCalled()->willReturn($form);
 
-        $checkerRegistry->getChecker('rule_type')->shouldBeCalled()->willreturn($checker);
+        $checkerRegistry->get('rule_type')->shouldBeCalled()->willreturn($checker);
         $checker->getConfigurationFormType()->shouldBeCalled()->willreturn('configuration_form_type');
 
         $factory->createNamed(
             'configuration',
             'configuration_form_type',
-            array(),
-            array('auto_initialize' => false)
+            [],
+            ['auto_initialize' => false]
         )->shouldBeCalled()->willreturn($formConfiguration);
 
         $form->add($formConfiguration)->shouldBeCalled();

@@ -1,0 +1,23 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    user:
+      email: メールアドレス
+      password:
+        label: パスワード
+      shipping_address: 配送先住所
+    customer:
+      first_name: 名
+      last_name: 姓
+      email: メールアドレス
+      billing_address: ご請求先住所
+      different_billing_address: 請求先として別の住所を指定する
+    user_filter:
+      query: 検索
+    user_change_password:
+      current: 現在のパスワード
+      new: 新しいパスワード
+    user_reset_password:
+      new: 新しいパスワード

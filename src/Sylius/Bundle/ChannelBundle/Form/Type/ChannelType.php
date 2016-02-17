@@ -11,12 +11,11 @@
 
 namespace Sylius\Bundle\ChannelBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Sylius channel form type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ChannelType extends AbstractResourceType
@@ -27,28 +26,26 @@ class ChannelType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('code', 'text', array(
-                'label'    => 'sylius.form.channel.code',
-            ))
-            ->add('name', 'text', array(
+            ->addEventSubscriber(new AddCodeFormSubscriber())
+            ->add('name', 'text', [
                 'label' => 'sylius.form.channel.name',
-            ))
-            ->add('description', 'text', array(
-                'label'    => 'sylius.form.channel.description',
+            ])
+            ->add('description', 'text', [
+                'label' => 'sylius.form.channel.description',
                 'required' => false,
-            ))
-            ->add('enabled', 'checkbox', array(
-                'label'    => 'sylius.form.channel.enabled',
+            ])
+            ->add('enabled', 'checkbox', [
+                'label' => 'sylius.form.channel.enabled',
                 'required' => false,
-            ))
-            ->add('url', 'text', array(
-                'label'    => 'sylius.form.channel.url',
+            ])
+            ->add('hostname', 'text', [
+                'label' => 'sylius.form.channel.hostname',
                 'required' => false,
-            ))
-            ->add('color', 'text', array(
-                'label'    => 'sylius.form.channel.color',
+            ])
+            ->add('color', 'text', [
+                'label' => 'sylius.form.channel.color',
                 'required' => false,
-            ))
+            ])
         ;
     }
 

@@ -34,7 +34,7 @@ class LocaleType extends AbstractResourceType
      *
      * @param RepositoryInterface $localeRepository
      */
-    public function __construct($dataClass, array $validationGroups = array(), RepositoryInterface $localeRepository)
+    public function __construct($dataClass, array $validationGroups = [], RepositoryInterface $localeRepository)
     {
         parent::__construct($dataClass, $validationGroups);
 
@@ -46,21 +46,22 @@ class LocaleType extends AbstractResourceType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $self = $this;
         $builder->addEventListener(
             FormEvents::PRE_SET_DATA,
-            function (FormEvent $event) use ($self) {
+            function (FormEvent $event) {
                 // Adding dynamically created code field
-                $nameOptions = array(
+                $nameOptions = [
                     'label' => 'sylius.form.locale.name',
-                );
+                ];
 
                 $locale = $event->getData();
                 if ($locale instanceof LocaleInterface && null !== $locale->getCode()) {
                     $nameOptions['disabled'] = true;
                 } else {
-                    $nameOptions['choices'] = $self->getAvailableLocales();
+                    $nameOptions['choices'] = $this->getAvailableLocales();
                 }
+
+                $nameOptions['choices_as_values'] = false;
 
                 $form = $event->getForm();
                 $form->add('code', 'locale', $nameOptions);

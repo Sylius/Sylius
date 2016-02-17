@@ -12,11 +12,12 @@
 namespace Sylius\Bundle\OrderBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Order extension.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SyliusOrderExtension extends AbstractResourceExtension
@@ -26,13 +27,23 @@ class SyliusOrderExtension extends AbstractResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $config = $this->configure(
-            $config,
-            new Configuration(),
-            $container,
-            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_FORMS
-        );
+        $config = $this->processConfiguration(new Configuration(), $config);
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $container->setParameter('sylius.order.allow_guest_order', $config['guest_order']);
+        $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
+
+        $configFiles = [
+            'services.xml',
+            'templating.xml',
+            'twig.xml',
+            sprintf('driver/%s.xml', $config['driver']),
+        ];
+
+        foreach ($configFiles as $configFile) {
+            $loader->load($configFile);
+        }
+
+        $orderItemType = $container->getDefinition('sylius.form.type.order_item');
+        $orderItemType->addArgument(new Reference('sylius.form.data_mapper.order_item_quantity'));
     }
 }

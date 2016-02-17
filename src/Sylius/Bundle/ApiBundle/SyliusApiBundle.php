@@ -11,6 +11,11 @@
 
 namespace Sylius\Bundle\ApiBundle;
 
+use Sylius\Bundle\ApiBundle\Model\AccessTokenInterface;
+use Sylius\Bundle\ApiBundle\Model\AuthCodeInterface;
+use Sylius\Bundle\ApiBundle\Model\ClientInterface;
+use Sylius\Bundle\ApiBundle\Model\RefreshTokenInterface;
+use Sylius\Bundle\ApiBundle\Model\UserInterface;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 
@@ -26,9 +31,9 @@ class SyliusApiBundle extends AbstractResourceBundle
      */
     public static function getSupportedDrivers()
     {
-        return array(
+        return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        );
+        ];
     }
 
     /**
@@ -36,13 +41,13 @@ class SyliusApiBundle extends AbstractResourceBundle
      */
     protected function getModelInterfaces()
     {
-        return array(
-            'Sylius\Bundle\ApiBundle\Model\UserInterface'         => 'sylius.model.api_user.class',
-            'Sylius\Bundle\ApiBundle\Model\ClientInterface'       => 'sylius.model.api_client.class',
-            'Sylius\Bundle\ApiBundle\Model\AccessTokenInterface'  => 'sylius.model.api_access_token.class',
-            'Sylius\Bundle\ApiBundle\Model\RefreshTokenInterface' => 'sylius.model.api_refresh_token.class',
-            'Sylius\Bundle\ApiBundle\Model\AuthCodeInterface'     => 'sylius.model.api_auth_code.class',
-        );
+        return [
+            UserInterface::class => 'sylius.model.api_user.class',
+            ClientInterface::class => 'sylius.model.api_client.class',
+            AccessTokenInterface::class => 'sylius.model.api_access_token.class',
+            RefreshTokenInterface::class => 'sylius.model.api_refresh_token.class',
+            AuthCodeInterface::class => 'sylius.model.api_auth_code.class',
+        ];
     }
 
     /**

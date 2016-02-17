@@ -11,22 +11,26 @@
 
 namespace Sylius\Component\Payment\Model;
 
-use Sylius\Component\Payment\Calculator\DefaultFeeCalculators;
+use Sylius\Component\Resource\Model\TimestampableTrait;
+use Sylius\Component\Resource\Model\ToggleableTrait;
+use Sylius\Component\Translation\Model\AbstractTranslatable;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PaymentMethod implements PaymentMethodInterface
+class PaymentMethod extends AbstractTranslatable implements PaymentMethodInterface
 {
+    use TimestampableTrait, ToggleableTrait;
+
     /**
      * @var mixed
      */
     protected $id;
 
     /**
-     * @var Boolean
+     * @var string
      */
-    protected $enabled = true;
+    protected $code;
 
     /**
      * @var string
@@ -48,28 +52,10 @@ class PaymentMethod implements PaymentMethodInterface
      */
     protected $environment;
 
-    /**
-     * @var string
-     */
-    protected $feeCalculator = DefaultFeeCalculators::FIXED;
-
-    /**
-     * @var array
-     */
-    protected $feeCalculatorConfiguration = array();
-
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
-
     public function __construct()
     {
+        parent::__construct();
+
         $this->createdAt = new \DateTime();
     }
 
@@ -78,7 +64,7 @@ class PaymentMethod implements PaymentMethodInterface
      */
     public function __toString()
     {
-        return $this->name;
+        return $this->translate()->__toString();
     }
 
     /**
@@ -92,17 +78,17 @@ class PaymentMethod implements PaymentMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function isEnabled()
+    public function getCode()
     {
-        return $this->enabled;
+        return $this->code;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setEnabled($enabled)
+    public function setCode($code)
     {
-        $this->enabled = (Boolean) $enabled;
+        $this->code = $code;
     }
 
     /**
@@ -110,7 +96,7 @@ class PaymentMethod implements PaymentMethodInterface
      */
     public function getName()
     {
-        return $this->name;
+        return $this->translate()->getName();
     }
 
     /**
@@ -118,7 +104,7 @@ class PaymentMethod implements PaymentMethodInterface
      */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->translate()->setName($name);
     }
 
     /**
@@ -126,7 +112,7 @@ class PaymentMethod implements PaymentMethodInterface
      */
     public function getDescription()
     {
-        return $this->description;
+        return $this->translate()->getDescription();
     }
 
     /**
@@ -134,7 +120,7 @@ class PaymentMethod implements PaymentMethodInterface
      */
     public function setDescription($description)
     {
-        $this->description = $description;
+        $this->translate()->setDescription($description);
     }
 
     /**
@@ -167,69 +153,5 @@ class PaymentMethod implements PaymentMethodInterface
     public function setEnvironment($environment)
     {
         $this->environment = $environment;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFeeCalculator()
-    {
-        return $this->feeCalculator;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setFeeCalculator($feeCalculator)
-    {
-        $this->feeCalculator = $feeCalculator;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFeeCalculatorConfiguration()
-    {
-        return $this->feeCalculatorConfiguration;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setFeeCalculatorConfiguration(array $feeCalculatorConfiguration)
-    {
-        $this->feeCalculatorConfiguration = $feeCalculatorConfiguration;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
     }
 }

@@ -2,21 +2,21 @@
 
 /*
  * This file is part of the Sylius package.
-*
-* (c) Paweł Jędrzejewski
-*
-* For the full copyright and license information, please view the LICENSE
-* file that was distributed with this source code.
-*/
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Sylius\Bundle\CoreBundle\Purger;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use SM\Factory\FactoryInterface;
 use Sylius\Component\Cart\Purger\PurgerInterface;
-use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Order\OrderTransitions;
 
 /**
@@ -54,9 +54,9 @@ class ExpiredOrdersPurger implements PurgerInterface
 
     public function __construct(ObjectManager $manager, OrderRepositoryInterface $repository, FactoryInterface $factory)
     {
-        $this->manager    = $manager;
+        $this->manager = $manager;
         $this->repository = $repository;
-        $this->factory    = $factory;
+        $this->factory = $factory;
     }
 
     /**
@@ -77,7 +77,7 @@ class ExpiredOrdersPurger implements PurgerInterface
         $orders = $this->repository->findExpired($this->expiresAt);
         foreach ($orders as $order) {
             // Check if order has any on-hold inventory units.
-            $hasOnHoldInventoryUnits = $order->getInventoryUnits()->exists(function ($key, InventoryUnitInterface $inventoryUnit) {
+            $hasOnHoldInventoryUnits = $order->getItemUnits()->exists(function ($key, InventoryUnitInterface $inventoryUnit) {
                 return InventoryUnitInterface::STATE_ONHOLD === $inventoryUnit->getInventoryState();
             });
 

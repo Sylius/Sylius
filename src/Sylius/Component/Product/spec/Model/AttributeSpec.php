@@ -12,6 +12,8 @@
 namespace spec\Sylius\Component\Product\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Attribute\Model\Attribute;
+use Sylius\Component\Product\Model\AttributeInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -25,11 +27,11 @@ class AttributeSpec extends ObjectBehavior
 
     function it_extends_Sylius_attribute_model()
     {
-        $this->shouldImplement('Sylius\Component\Attribute\Model\Attribute');
+        $this->shouldImplement(Attribute::class);
     }
 
     function it_implements_Sylius_product_attribute_interface()
     {
-        $this->shouldImplement('Sylius\Component\Product\Model\AttributeInterface');
+        $this->shouldImplement(AttributeInterface::class);
     }
 }

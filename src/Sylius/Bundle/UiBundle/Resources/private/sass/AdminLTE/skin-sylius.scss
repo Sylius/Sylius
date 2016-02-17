@@ -1,0 +1,129 @@
+@import "../variables";
+
+// AdminLTE dark sidebar skin port.
+$sidebar-dark-bg: #222d32;
+$sidebar-dark-hover-bg: darken($sidebar-dark-bg, 2%);
+$sidebar-dark-color: lighten($sidebar-dark-bg, 60%);
+$sidebar-dark-hover-color: #fff;
+$sidebar-dark-submenu-bg: lighten($sidebar-dark-bg, 5%);
+$sidebar-dark-submenu-color: lighten($sidebar-dark-submenu-bg, 40%);
+$sidebar-dark-submenu-hover-color: #fff;
+
+.skin-sylius.login-page {
+    background-color: $color-gray-lighter;
+}
+
+.skin-sylius {
+    a:link {
+        color: $color-link;
+    }
+    a:visited {
+        color: $color-link;
+    }
+    a:hover {
+        color: $color-link-hover;
+    }
+
+    input:focus {
+        border-color: $input-border-focus;
+    }
+
+    .btn-primary {
+        background-color: $btn-primary-bg;
+        border-color: $btn-primary-border;
+    }
+    .btn-primary:hover {
+        background-color: $btn-primary-bg-hover;
+        border-color: $btn-primary-border-hover;
+    }
+    .btn-primary:focus {
+        background-color: $btn-primary-bg-focus;
+        border-color: $btn-primary-border-focus;
+    }
+
+    .main-header {
+        background-color: $color-sylius;
+
+        .nav > li > a {
+            color: #fff;
+        }
+
+        .nav > li > a:hover,
+        .nav > li > a:active,
+        .nav > li > a:focus,
+        .nav .open > a,
+        .nav .open > a:hover,
+        .nav .open > a:focus,
+        .nav > .active > a {
+            background: $color-sylius-dark;
+            color: #fff;
+        }
+
+        .navbar {
+            .sidebar-toggle {
+                color: #fff;
+                &:hover {
+                    background-color: $color-sylius-dark;
+                }
+            }
+        }
+
+        .logo {
+            background-color: $color-sylius-dark;
+            color: #fff;
+
+            &:hover {
+                background-color: $color-sylius-dark;
+            }
+        }
+
+        li.user-header {
+            background-color: $color-sylius-dark;
+        }
+    }
+
+    .content-header {
+        background: transparent;
+    }
+
+    // AdminLTE dark sidebar skin port.
+    .wrapper,
+    .main-sidebar,
+    .left-side {
+        background-color: $sidebar-dark-bg;
+    }
+    .sidebar-menu > li {
+        &.header {
+            color: lighten($sidebar-dark-bg, 20%);
+            background: darken($sidebar-dark-bg, 5%);
+        }
+        > a {
+            border-left: 3px solid transparent;
+        }
+        &:hover > a, &.active > a {
+            color: $sidebar-dark-hover-color;
+            background: $sidebar-dark-hover-bg;
+            border-left-color: $color-sylius;
+        }
+        > .treeview-menu {
+            margin: 0 1px;
+            background: $sidebar-dark-submenu-bg;
+        }
+    }
+    .sidebar a {
+        color: $sidebar-dark-color;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+    .treeview-menu {
+        > li {
+            > a {
+                color: $sidebar-dark-submenu-color;
+            }
+            &.active > a, > a:hover {
+                color: $sidebar-dark-submenu-hover-color;
+            }
+        }
+    }
+}

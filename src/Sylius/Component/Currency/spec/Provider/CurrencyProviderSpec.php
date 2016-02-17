@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Currency\Provider;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Currency\Model\CurrencyInterface;
+use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -32,13 +33,13 @@ class CurrencyProviderSpec extends ObjectBehavior
 
     function it_implements_Sylius_currency_provider_interface()
     {
-        $this->shouldImplement('Sylius\Component\Currency\Provider\CurrencyProviderInterface');
+        $this->shouldImplement(CurrencyProviderInterface::class);
     }
 
     function it_returns_all_enabled_currencies(CurrencyInterface $currency, $currencyRepository)
     {
-        $currencyRepository->findBy(array('enabled' => true))->shouldBeCalled()->willReturn(array($currency));
+        $currencyRepository->findBy(['enabled' => true])->shouldBeCalled()->willReturn([$currency]);
 
-        $this->getAvailableCurrencies()->shouldReturn(array($currency));
+        $this->getAvailableCurrencies()->shouldReturn([$currency]);
     }
 }

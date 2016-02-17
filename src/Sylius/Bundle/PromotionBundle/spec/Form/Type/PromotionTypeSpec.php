@@ -13,7 +13,9 @@ namespace spec\Sylius\Bundle\PromotionBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -27,17 +29,17 @@ class PromotionTypeSpec extends ObjectBehavior
         ServiceRegistryInterface $checkerRegistry,
         ServiceRegistryInterface $actionRegistry
     ) {
-        $this->beConstructedWith('Promotion', array('sylius'), $checkerRegistry, $actionRegistry);
+        $this->beConstructedWith('Promotion', ['sylius'], $checkerRegistry, $actionRegistry);
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\PromotionType');
     }
 
     function it_should_be_a_form_type()
     {
-        $this->shouldHaveType('Symfony\Component\Form\AbstractType');
+        $this->shouldHaveType(AbstractType::class);
     }
 
     function it_should_build_form_with_proper_fields(FormBuilder $builder)
@@ -87,16 +89,21 @@ class PromotionTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $builder
+            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
+            ->willReturn($builder)
+        ;
+
+        $this->buildForm($builder, []);
     }
 
     function it_should_define_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
-                'data_class'        => 'Promotion',
-                'validation_groups' => array('sylius'),
-            ))
+            ->setDefaults([
+                'data_class' => 'Promotion',
+                'validation_groups' => ['sylius'],
+            ])
             ->shouldBeCalled()
         ;
 

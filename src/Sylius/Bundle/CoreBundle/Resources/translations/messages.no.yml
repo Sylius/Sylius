@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  checkout:
-    shipping_method:
-      not_blank: Vennligst velg sendingsmetode.
   form:
     action:
       add_product_configuration:
@@ -22,11 +19,15 @@ sylius:
         different_billing_address: Bruk annen adresse for fakturering?
       payment_method: Betalingsmetode
       shipping_method: Fraktalternativ
-    coupon:
-      per_user_usage_limit: Bruksgrense for hver bruker
     group:
       name: Navn
       roles: Roller
+    channel:
+      taxonomies: Kategorisering
+      locales: Nasjonale innstillinger
+      currency_default: Standard valuta
+      shipping_methods: Fraktalternativ
+      payment_methods: Betalingsmetoder
     image:
       file: Bilde
     locale:
@@ -66,6 +67,10 @@ sylius:
       created_at_to: Til
       number: Ordrenummer
       shipping_address: Leveringsadresse
+    payment_filter:
+      created_at_from: Fra
+      created_at_to: Til
+      number: Ordrenummer
     shipping_method:
       zone: Sone
     taxon:
@@ -78,6 +83,7 @@ sylius:
       enabled: Aktivert
       first_name: Fornavn
       groups: Grupper
+      roles: Roller
       last_name: Etternavn
       password: Passord
       shipping_address: Leveringsadresse
@@ -93,3 +99,10 @@ sylius:
       sku: Strekkode
       weight: Vekt
       width: Bredde
+    attribute:
+      product_attribute_value:
+        value: Verdi
+    guest:
+      email: E-post
+    product_association_type:
+      name: Navn

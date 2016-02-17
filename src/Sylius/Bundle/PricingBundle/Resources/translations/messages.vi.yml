@@ -5,3 +5,6 @@ sylius:
   form:
     priceable:
       price: Giá
+    pricing:
+      volume_based:
+        price: Giá

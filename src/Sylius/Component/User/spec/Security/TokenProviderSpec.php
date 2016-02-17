@@ -18,6 +18,7 @@ use Prophecy\Argument;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
+use Sylius\Component\User\Security\TokenProviderInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -36,7 +37,7 @@ class TokenProviderSpec extends ObjectBehavior
 
     public function it_implements_token_provider_interface()
     {
-        $this->shouldImplement('Sylius\Component\User\Security\TokenProviderInterface');
+        $this->shouldImplement(TokenProviderInterface::class);
     }
 
     public function it_generates_random_token($repository, $manager, FilterCollection $filter, $generator)
@@ -60,8 +61,8 @@ class TokenProviderSpec extends ObjectBehavior
         $filter->disable('softdeleteable')->shouldBeCalled();
         $filter->enable('softdeleteable')->shouldBeCalled();
 
-        $repository->findOneBy(array('confirmationToken' => 'tesToken1234'))->willReturn($user);
-        $repository->findOneBy(array('confirmationToken' => 'tesToken1235'))->willReturn(null);
+        $repository->findOneBy(['confirmationToken' => 'tesToken1234'])->willReturn($user);
+        $repository->findOneBy(['confirmationToken' => 'tesToken1235'])->willReturn(null);
 
         $generator->generate(12)->shouldBeCalled()->willReturn('tesToken1234', 'tesToken1235');
 

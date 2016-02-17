@@ -17,7 +17,7 @@ class MySqlDriver extends Driver
 {
     private static $connection;
 
-    public function connect(array $params, $username = null, $password = null, array $driverOptions = array())
+    public function connect(array $params, $username = null, $password = null, array $driverOptions = [])
     {
         if (null === self::$connection) {
             self::$connection = parent::connect($params, $username, $password, $driverOptions);

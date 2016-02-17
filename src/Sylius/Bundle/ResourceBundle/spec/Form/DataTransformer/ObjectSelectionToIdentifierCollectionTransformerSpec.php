@@ -13,15 +13,16 @@ namespace spec\Sylius\Bundle\ResourceBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 // Since the root namespace "spec" is not in our autoload
-require_once __DIR__ . DIRECTORY_SEPARATOR . 'FakeEntity.php';
+require_once __DIR__.DIRECTORY_SEPARATOR.'FakeEntity.php';
 
 class ObjectSelectionToIdentifierCollectionTransformerSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(array(), false);
+        $this->beConstructedWith([], false);
     }
 
     function it_is_initializable()
@@ -31,36 +32,36 @@ class ObjectSelectionToIdentifierCollectionTransformerSpec extends ObjectBehavio
 
     function it_does_transform_null_value()
     {
-        $this->transform(null)->shouldReturn(array());
+        $this->transform(null)->shouldReturn([]);
     }
 
     function it_does_not_transform_string_value()
     {
-        $this->shouldThrow('Symfony\Component\Form\Exception\UnexpectedTypeException')->duringTransform('');
+        $this->shouldThrow(UnexpectedTypeException::class)->duringTransform('');
     }
 
     function it_does_transform_collection_object_value(Collection $collection)
     {
-        $collection->toArray()->willReturn(array());
+        $collection->toArray()->willReturn([]);
 
-        $this->transform($collection)->shouldReturn(array());
+        $this->transform($collection)->shouldReturn([]);
     }
 
     function it_does_reverse_transform_empty_value()
     {
-        $this->reverseTransform('')->shouldImplement('Doctrine\Common\Collections\Collection');
+        $this->reverseTransform('')->shouldImplement(Collection::class);
     }
 
     function it_does_not_reverse_transform_string_value()
     {
-        $this->shouldThrow('Symfony\Component\Form\Exception\UnexpectedTypeException')->duringReverseTransform('string');
+        $this->shouldThrow(UnexpectedTypeException::class)->duringReverseTransform('string');
     }
 
     function it_does_reverse_transform_array_value(FakeEntity $entity)
     {
         $entity->getId()->willReturn(1);
 
-        $this->reverseTransform(array($entity))->shouldHaveCount(1);
+        $this->reverseTransform([$entity])->shouldHaveCount(1);
     }
 
     function it_does_reverse_transform_array_of_arrays_value(FakeEntity $entityOne, FakeEntity $entityTwo)
@@ -68,6 +69,6 @@ class ObjectSelectionToIdentifierCollectionTransformerSpec extends ObjectBehavio
         $entityOne->getId()->willReturn(1);
         $entityTwo->getId()->willReturn(1);
 
-        $this->reverseTransform(array(array($entityOne, $entityTwo)))->shouldHaveCount(2);
+        $this->reverseTransform([[$entityOne, $entityTwo]])->shouldHaveCount(2);
     }
 }

@@ -15,9 +15,11 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\FilterCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Promotion\Generator\CouponGeneratorInterface;
 use Sylius\Component\Promotion\Generator\Instruction;
 use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -25,22 +27,23 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class CouponGeneratorSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $repository, EntityManagerInterface $manager)
+    function let(FactoryInterface $couponFactory, RepositoryInterface $repository, EntityManagerInterface $manager)
     {
-        $this->beConstructedWith($repository, $manager);
+        $this->beConstructedWith($couponFactory, $repository, $manager);
     }
 
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Promotion\Generator\CouponGenerator');
     }
 
     function it_should_implement_Sylius_promotion_coupon_generator_interface()
     {
-        $this->shouldImplement('Sylius\Component\Promotion\Generator\CouponGeneratorInterface');
+        $this->shouldImplement(CouponGeneratorInterface::class);
     }
 
     function it_should_generate_coupons_according_to_instruction(
+        FactoryInterface $couponFactory,
         $repository,
         $manager,
         FilterCollection $filters,
@@ -52,7 +55,7 @@ class CouponGeneratorSpec extends ObjectBehavior
         $instruction->getUsageLimit()->willReturn(null);
         $instruction->getExpiresAt()->willReturn(null);
 
-        $repository->createNew()->willReturn($coupon);
+        $couponFactory->createNew()->willReturn($coupon);
         $repository->findOneBy(Argument::any())->willReturn(null);
 
         $coupon->setPromotion($promotion)->shouldBeCalled();

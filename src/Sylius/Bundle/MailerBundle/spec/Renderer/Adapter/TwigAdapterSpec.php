@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Mailer\Event\EmailRenderEvent;
 use Sylius\Component\Mailer\Model\EmailInterface;
+use Sylius\Component\Mailer\Renderer\Adapter\AbstractAdapter;
 use Sylius\Component\Mailer\Renderer\RenderedEmail;
 use Sylius\Component\Mailer\SyliusMailerEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -33,7 +34,7 @@ class TwigAdapterSpec extends ObjectBehavior
 
     function it_is_an_adapter()
     {
-        $this->shouldHaveType('Sylius\Component\Mailer\Renderer\Adapter\AbstractAdapter');
+        $this->shouldHaveType(AbstractAdapter::class);
     }
 
     function it_renders_an_email(
@@ -46,22 +47,22 @@ class TwigAdapterSpec extends ObjectBehavior
     ) {
         $this->setEventDispatcher($dispatcher);
 
-        $twig->mergeGlobals(array())->shouldBeCalled()->willReturn(array());
+        $twig->mergeGlobals([])->shouldBeCalled()->willReturn([]);
 
         $email->getTemplate()->shouldBeCalled()->willReturn('MyTemplate');
         $twig->loadTemplate('MyTemplate')->shouldBeCalled()->willReturn($template);
 
-        $template->renderBlock('subject', array())->shouldBeCalled();
-        $template->renderBlock('body', array())->shouldBeCalled();
+        $template->renderBlock('subject', [])->shouldBeCalled();
+        $template->renderBlock('body', [])->shouldBeCalled();
 
         $dispatcher->dispatch(
             SyliusMailerEvents::EMAIL_PRE_RENDER,
-            Argument::type('Sylius\Component\Mailer\Event\EmailRenderEvent')
+            Argument::type(EmailRenderEvent::class)
         )->shouldBeCalled()->willReturn($event);
 
         $event->getRenderedEmail()->shouldBeCalled()->willReturn($renderedEmail);
 
-        $this->render($email, array())->shouldReturn($renderedEmail);
+        $this->render($email, [])->shouldReturn($renderedEmail);
     }
 
     function it_creates_and_renders_an_email(
@@ -78,11 +79,11 @@ class TwigAdapterSpec extends ObjectBehavior
 
         $dispatcher->dispatch(
             SyliusMailerEvents::EMAIL_PRE_RENDER,
-            Argument::type('Sylius\Component\Mailer\Event\EmailRenderEvent')
+            Argument::type(EmailRenderEvent::class)
         )->shouldBeCalled()->willReturn($event);
 
         $event->getRenderedEmail()->shouldBeCalled()->willReturn($renderedEmail);
 
-        $this->render($email, array())->shouldReturn($renderedEmail);
+        $this->render($email, [])->shouldReturn($renderedEmail);
     }
 }

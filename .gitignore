@@ -1,27 +1,35 @@
-app/*.cache
-app/cache
-app/logs
+/.php_cs.cache
 
-app/check.php
-app/SymfonyRequirements.php
+/app/*.cache
+/app/cache
+/app/logs
 
-app/config/parameters.yml
-app/config/*.local.yml
-behat.yml
+/app/check.php
+/app/SymfonyRequirements.php
 
-web/bundles
-web/css
-web/js
-web/assets/compiled
-web/media
+/app/config/parameters.yml
+/app/config/*.local.yml
 
-bin/*
-!bin/install
-!bin/sylius-cs-fixer
-vendor
+/web/bundles
+/web/assets/css
+/web/assets/js
+/web/assets/fonts
+/web/assets/img
+/web/assets/compiled
+/web/media
+/web/css
+/web/js
 
-deploy/deploy.rb
-deploy/stages/*.rb
+/bin/*
+!/bin/install
+!/bin/sylius-cs-fixer
 
-travis/build-output/*
-!travis/build-output/.gitkeep
+/vendor
+/node_modules
+
+/etc/build/*
+!/etc/build/.gitkeep
+
+/behat.yml
+/phpunit.xml
+/phpspec.yml

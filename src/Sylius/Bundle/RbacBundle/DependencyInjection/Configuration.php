@@ -11,7 +11,16 @@
 
 namespace Sylius\Bundle\RbacBundle\DependencyInjection;
 
+use Sylius\Bundle\RbacBundle\Form\Type\PermissionType;
+use Sylius\Bundle\RbacBundle\Form\Type\RoleType;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Rbac\Model\Permission;
+use Sylius\Component\Rbac\Model\PermissionInterface;
+use Sylius\Component\Rbac\Model\Role;
+use Sylius\Component\Rbac\Model\RoleInterface;
+use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -43,13 +52,12 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('security_roles')
                     ->useAttributeAsKey('id')
                     ->prototype('scalar')
-                    ->defaultValue(array())
+                    ->defaultValue([])
                 ->end()
             ->end()
         ;
 
-        $this->addValidationGroupsSection($rootNode);
-        $this->addClassesSection($rootNode);
+        $this->addResourcesSection($rootNode);
         $this->addRolesSection($rootNode);
         $this->addPermissionsSection($rootNode);
 
@@ -57,24 +65,78 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds `validation_groups` section.
-     *
      * @param ArrayNodeDefinition $node
      */
-    private function addValidationGroupsSection(ArrayNodeDefinition $node)
+    private function addResourcesSection(ArrayNodeDefinition $node)
     {
         $node
             ->children()
-                ->arrayNode('validation_groups')
+                ->arrayNode('resources')
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('role')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(Role::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(RoleInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->arrayNode('form')
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                                ->scalarNode('default')->defaultValue(RoleType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('validation_groups')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->arrayNode('default')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(['sylius'])
+                                        ->end()
+                                    ->end()
+                                ->end()
+                            ->end()
                         ->end()
                         ->arrayNode('permission')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(Permission::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(PermissionInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->arrayNode('form')
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                                ->scalarNode('default')->defaultValue(PermissionType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('validation_groups')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->arrayNode('default')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(['sylius'])
+                                        ->end()
+                                    ->end()
+                                ->end()
+                            ->end()
                         ->end()
                     ->end()
                 ->end()
@@ -83,56 +145,6 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds `classes` section.
-     *
-     * @param ArrayNodeDefinition $node
-     */
-    private function addClassesSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('classes')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->arrayNode('role')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Rbac\Model\Role')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('repository')->end()
-                                ->arrayNode('form')
-                                    ->addDefaultsIfNotSet()
-                                    ->children()
-                                        ->scalarNode('default')->defaultValue('Sylius\Bundle\RbacBundle\Form\Type\RoleType')->end()
-                                        ->scalarNode('choice')->defaultValue('%sylius.form.type.resource_choice.class%')->end()
-                                    ->end()
-                                ->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('permission')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Rbac\Model\Permission')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('repository')->end()
-                                ->arrayNode('form')
-                                    ->addDefaultsIfNotSet()
-                                    ->children()
-                                        ->scalarNode('default')->defaultValue('Sylius\Bundle\RbacBundle\Form\Type\PermissionType')->end()
-                                        ->scalarNode('choice')->defaultValue('%sylius.form.type.resource_choice.class%')->end()
-                                    ->end()
-                                ->end()
-                            ->end()
-                        ->end()
-                    ->end()
-                ->end()
-            ->end()
-        ;
-    }
-
-    /**
-     * Adds `roles` section.
-     *
      * @param ArrayNodeDefinition $node
      */
     private function addRolesSection(ArrayNodeDefinition $node)
@@ -150,7 +162,7 @@ class Configuration implements ConfigurationInterface
                             ->end()
                             ->arrayNode('security_roles')
                                 ->prototype('scalar')->end()
-                                ->defaultValue(array())
+                                ->defaultValue([])
                             ->end()
                         ->end()
                     ->end()
@@ -158,7 +170,7 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('roles_hierarchy')
                     ->useAttributeAsKey('id')
                     ->prototype('array')
-                        ->beforeNormalization()->ifString()->then(function ($v) { return array('value' => $v); })->end()
+                        ->beforeNormalization()->ifString()->then(function ($v) { return ['value' => $v]; })->end()
                         ->beforeNormalization()
                             ->ifTrue(function ($v) { return is_array($v) && isset($v['value']); })
                             ->then(function ($v) { return preg_split('/\s*,\s*/', $v['value']); })
@@ -171,8 +183,6 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds `permissions` section.
-     *
      * @param ArrayNodeDefinition $node
      */
     private function addPermissionsSection(ArrayNodeDefinition $node)
@@ -182,13 +192,13 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('permissions')
                     ->useAttributeAsKey('id')
                     ->prototype('scalar')->end()
-                    ->defaultValue(array())
+                    ->defaultValue([])
                 ->end()
                 ->arrayNode('permissions_hierarchy')
                     ->useAttributeAsKey('id')
                     ->prototype('array')
                         ->performNoDeepMerging()
-                        ->beforeNormalization()->ifString()->then(function ($v) { return array('value' => $v); })->end()
+                        ->beforeNormalization()->ifString()->then(function ($v) { return ['value' => $v]; })->end()
                         ->beforeNormalization()
                             ->ifTrue(function ($v) { return is_array($v) && isset($v['value']); })
                             ->then(function ($v) { return preg_split('/\s*,\s*/', $v['value']); })

@@ -17,10 +17,10 @@ namespace Sylius\Bundle\UserBundle\Provider;
 class UsernameProvider extends AbstractUserProvider
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function findUser($username)
     {
-        return $this->userRepository->findOneBy(array('usernameCanonical' => $username));
+        return $this->userRepository->findOneBy(['usernameCanonical' => $username]);
     }
 }

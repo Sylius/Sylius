@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  locale:
+    code:
+      not_blank: 请输入区域设置代码。
+      unique: 此区域设置已存在。
+  product_variant:
+    price:
+      min: 价格不能为负。
+      not_blank: 请输入价格。

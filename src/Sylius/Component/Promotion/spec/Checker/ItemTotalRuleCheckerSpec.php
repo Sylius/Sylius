@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Promotion\Checker;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
@@ -19,21 +20,21 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  */
 class ItemTotalRuleCheckerSpec extends ObjectBehavior
 {
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Promotion\Checker\ItemTotalRuleChecker');
     }
 
     function it_should_be_Sylius_rule_checker()
     {
-        $this->shouldImplement('Sylius\Component\Promotion\Checker\RuleCheckerInterface');
+        $this->shouldImplement(RuleCheckerInterface::class);
     }
 
     function it_should_recognize_empty_subject_as_not_eligible(PromotionSubjectInterface $subject)
     {
         $subject->getPromotionSubjectTotal()->shouldBeCalled()->willReturn(0);
 
-        $this->isEligible($subject, array('amount' => 500, 'equal' => false))->shouldReturn(false);
+        $this->isEligible($subject, ['amount' => 500, 'equal' => false])->shouldReturn(false);
     }
 
     function it_should_recognize_subject_as_not_eligible_if_subject_total_is_less_then_configured(
@@ -41,7 +42,7 @@ class ItemTotalRuleCheckerSpec extends ObjectBehavior
     ) {
         $subject->getPromotionSubjectTotal()->shouldBeCalled()->willReturn(400);
 
-        $this->isEligible($subject, array('amount' => 500, 'equal' => false))->shouldReturn(false);
+        $this->isEligible($subject, ['amount' => 500, 'equal' => false])->shouldReturn(false);
     }
 
     function it_should_recognize_subject_as_eligible_if_subject_total_is_greater_then_configured(
@@ -49,7 +50,7 @@ class ItemTotalRuleCheckerSpec extends ObjectBehavior
     ) {
         $subject->getPromotionSubjectTotal()->shouldBeCalled()->willReturn(600);
 
-        $this->isEligible($subject, array('amount' => 500, 'equal' => false))->shouldReturn(true);
+        $this->isEligible($subject, ['amount' => 500, 'equal' => false])->shouldReturn(true);
     }
 
     function it_should_recognize_subject_as_eligible_if_subject_total_is_equal_with_configured_depending_on_equal_setting(
@@ -57,8 +58,8 @@ class ItemTotalRuleCheckerSpec extends ObjectBehavior
     ) {
         $subject->getPromotionSubjectTotal()->shouldBeCalled()->willReturn(500);
 
-        $this->isEligible($subject, array('amount' => 500, 'equal' => false))->shouldReturn(false);
-        $this->isEligible($subject, array('amount' => 500, 'equal' => true))->shouldReturn(true);
+        $this->isEligible($subject, ['amount' => 500, 'equal' => false])->shouldReturn(false);
+        $this->isEligible($subject, ['amount' => 500, 'equal' => true])->shouldReturn(true);
     }
 
     function it_should_return_subject_total_configuration_form_type()

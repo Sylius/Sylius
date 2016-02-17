@@ -13,25 +13,26 @@ namespace spec\Sylius\Bundle\SettingsBundle\Schema;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaInterface;
+use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SchemaRegistrySpec extends ObjectBehavior
 {
-    function it_should_be_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SettingsBundle\Schema\SchemaRegistry');
     }
 
     function it_should_be_a_Sylius_settings_schema_registry()
     {
-        $this->shouldImplement('Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface');
+        $this->shouldImplement(SchemaRegistryInterface::class);
     }
 
     function it_should_initialize_schemas_array_by_default()
     {
-        $this->getSchemas()->shouldReturn(array());
+        $this->getSchemas()->shouldReturn([]);
     }
 
     function it_should_register_schema_properly(SchemaInterface $schema)
@@ -59,7 +60,7 @@ class SchemaRegistrySpec extends ObjectBehavior
     function it_should_complain_if_trying_to_retrieve_non_existing_schema()
     {
         $this
-            ->shouldThrow('InvalidArgumentException')
+            ->shouldThrow(\InvalidArgumentException::class)
             ->duringGetSchema('security-settings')
         ;
     }
