@@ -78,7 +78,7 @@ final class UserContext implements Context
     {
         $user = $this->userFactory->create($email, $password);
 
-        $this->sharedStorage->setCurrentResource('user', $user);
+        $this->sharedStorage->set('user', $user);
         $this->userRepository->add($user);
     }
 
@@ -92,7 +92,7 @@ final class UserContext implements Context
         $customer = $user->getCustomer();
         $customer->setShippingAddress($this->createAddress($customer->getFirstName(), $customer->getLastName(), $country));
 
-        $this->sharedStorage->setCurrentResource('user', $user);
+        $this->sharedStorage->set('user', $user);
         $this->userRepository->add($user);
     }
 
@@ -101,7 +101,7 @@ final class UserContext implements Context
      */
     public function myDefaultShippingAddressIs($country)
     {
-        $user = $this->sharedStorage->getCurrentResource('user');
+        $user = $this->sharedStorage->get('user');
         $customer = $user->getCustomer();
         $customer->setShippingAddress($this->createAddress($customer->getFirstName(), $customer->getLastName(), $country));
 

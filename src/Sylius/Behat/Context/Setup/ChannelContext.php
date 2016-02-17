@@ -89,7 +89,7 @@ final class ChannelContext implements Context
      */
     public function getLatestChannel()
     {
-        return $this->sharedStorage->getCurrentResource('channel');
+        return $this->sharedStorage->get('channel');
     }
 
     /**
@@ -119,6 +119,6 @@ final class ChannelContext implements Context
         $channel->setCode($channelName);
 
         $this->channelRepository->add($channel);
-        $this->sharedStorage->setCurrentResource('channel', $channel);
+        $this->sharedStorage->set('channel', $channel);
     }
 }

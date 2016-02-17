@@ -59,7 +59,7 @@ final class CurrencyContext implements Context
         $currency = $this->currencyFactory->createNew();
         $currency->setCode($currencyCode);
         $currency->setExchangeRate(1.0);
-        $channel = $this->sharedStorage->getCurrentResource('channel');
+        $channel = $this->sharedStorage->get('channel');
         $channel->setDefaultCurrency($currency);
 
         $this->currencyRepository->add($currency);

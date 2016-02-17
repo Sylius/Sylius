@@ -139,7 +139,7 @@ final class ShippingContext implements Context
         $calculator = DefaultCalculators::FLAT_RATE
     ) {
         if (null === $zone) {
-            $zone = $this->sharedStorage->getCurrentResource('zone');
+            $zone = $this->sharedStorage->get('zone');
         }
 
         $shippingMethod = $this->shippingMethodFactory->createNew();

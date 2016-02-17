@@ -61,7 +61,7 @@ class ShippingContextSpec extends ObjectBehavior
         ShippingMethod $shippingMethod,
         ZoneInterface $zone
     ) {
-        $sharedStorage->getCurrentResource('zone')->willReturn($zone);
+        $sharedStorage->get('zone')->willReturn($zone);
         $shippingMethodFactory->createNew()->willReturn($shippingMethod);
 
         $zone->getCode()->willReturn('UE');
@@ -85,7 +85,7 @@ class ShippingContextSpec extends ObjectBehavior
         ShippingMethod $shippingMethod,
         ZoneInterface $zone
     ) {
-        $sharedStorage->getCurrentResource('zone')->willReturn($zone);
+        $sharedStorage->get('zone')->willReturn($zone);
         $shippingMethodFactory->createNew()->willReturn($shippingMethod);
 
         $zone->getCode()->willReturn('UE');

@@ -106,7 +106,7 @@ final class SecurityContext implements Context
 
         $this->securityService->logIn($user->getEmail(), $this->minkSession);
 
-        $this->sharedStorage->setCurrentResource('user', $user);
+        $this->sharedStorage->set('user', $user);
     }
 
     private function prepareSessionIfNeeded()

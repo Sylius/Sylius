@@ -208,7 +208,7 @@ final class CheckoutContext implements Context
     public function iShouldSeeTheThankYouPage()
     {
         /** @var UserInterface $user */
-        $user = $this->sharedStorage->getCurrentResource('user');
+        $user = $this->sharedStorage->get('user');
         $customer = $user->getCustomer();
 
         expect($this->checkoutThankYouPage->hasThankYouMessageFor($customer->getFullName()))->toBe(true);
