@@ -136,7 +136,7 @@ class ShippingContextSpec extends ObjectBehavior
         $shippingMethodRepository->add($euShippingMethod)->shouldBeCalled();
         $shippingMethodRepository->add($usShippingMethod)->shouldBeCalled();
 
-        $this->theStoreShipsEverythingForFreeToAllAvailableLocations();
+        $this->theStoreShipsEverywhereForFree();
     }
 
     function it_assigns_product_for_given_tax_category(

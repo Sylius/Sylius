@@ -96,9 +96,9 @@ final class ShippingContext implements Context
     }
 
     /**
-     * @Given /^the store ships everything for free to all available locations$/
+     * @Given /^the store ships everywhere for free$/
      */
-    public function theStoreShipsEverythingForFreeToAllAvailableLocations()
+    public function theStoreShipsEverywhereForFree()
     {
         foreach ($this->zoneRepository->findAll() as $zone) {
             $this->createShippingMethod('Free', $zone);
