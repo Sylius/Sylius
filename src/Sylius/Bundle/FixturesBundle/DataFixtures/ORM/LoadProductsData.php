@@ -33,13 +33,6 @@ class LoadProductsData extends DataFixture
      */
     protected $totalVariants = 0;
 
-    protected $channels = [
-        'WEB-UK',
-        'WEB-DE',
-        'WEB-US',
-        'MOBILE',
-    ];
-
     /**
      * {@inheritdoc}
      */
@@ -101,7 +94,7 @@ class LoadProductsData extends DataFixture
         $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
 
         $this->addMasterVariant($product);
-        $this->setChannels($product, $this->faker->randomElements($this->channels, rand(1, 4)));
+        $this->setChannels($product, ['DEFAULT']);
 
         $this->setTaxons($product, ['T-Shirts', 'SuperTees']);
         $product->setArchetype($this->getReference('Sylius.Archetype.t_shirt'));
@@ -148,7 +141,7 @@ class LoadProductsData extends DataFixture
         $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
 
         $this->addMasterVariant($product);
-        $this->setChannels($product, $this->faker->randomElements($this->channels, rand(1, 4)));
+        $this->setChannels($product, ['DEFAULT']);
 
         $this->setTaxons($product, ['Stickers', 'Stickypicky']);
         $product->setArchetype($this->getReference('Sylius.Archetype.sticker'));
@@ -188,7 +181,7 @@ class LoadProductsData extends DataFixture
         $this->addTranslatedFields($product, $translatedNames);
 
         $this->addMasterVariant($product);
-        $this->setChannels($product, $this->faker->randomElements($this->channels, rand(1, 4)));
+        $this->setChannels($product, ['DEFAULT']);
 
         $this->setTaxons($product, ['Mugs', 'Mugland']);
         $product->setArchetype($this->getReference('Sylius.Archetype.mug'));
@@ -226,7 +219,7 @@ class LoadProductsData extends DataFixture
         $this->addTranslatedFields($product, $translatedNames);
 
         $this->addMasterVariant($product, $isbn);
-        $this->setChannels($product, $this->faker->randomElements($this->channels, rand(1, 4)));
+        $this->setChannels($product, ['DEFAULT']);
 
         $this->setTaxons($product, ['Books', 'Bookmania']);
         $product->setArchetype($this->getReference('Sylius.Archetype.book'));
