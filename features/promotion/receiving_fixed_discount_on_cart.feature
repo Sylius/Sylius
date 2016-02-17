@@ -26,11 +26,11 @@ Feature: Receiving fixed discount on cart
         Then my cart total should be "€0.00"
         And my cart promotions should be "-€106.00"
 
-    @todo
+    @ui
     Scenario: Receiving fixed discount equal to the items total of my cart even if the discount is bigger than the items total
         Given there is a promotion "Thanksgiving sale"
         And it gives "€200.00" fixed discount to every order
-        When I add product "PHP Mug" to the cart
+        When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "€0.00"
         And my cart promotions should be "-€100.00"
 

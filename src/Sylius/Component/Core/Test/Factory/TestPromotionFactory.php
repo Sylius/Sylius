@@ -58,14 +58,4 @@ class TestPromotionFactory implements TestPromotionFactoryInterface
 
         return $promotion;
     }
-
-    /**
-     * @param string $promotionName
-     *
-     * @return string
-     */
-    private function getCodeFromName($promotionName)
-    {
-        return str_replace(' ', '_', strtolower($promotionName));
-    }
 }

@@ -18,8 +18,6 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /**
- * Fixed discount action.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
@@ -38,7 +36,9 @@ class FixedDiscountAction extends DiscountAction
         }
 
         $adjustment = $this->createAdjustment($promotion);
-        $adjustment->setAmount(-$configuration['amount']);
+        $adjustment->setAmount(
+            $this->calculateAdjustmentAmount($subject->getPromotionSubjectTotal(), $configuration['amount'])
+        );
 
         $subject->addAdjustment($adjustment);
     }
@@ -49,5 +49,16 @@ class FixedDiscountAction extends DiscountAction
     public function getConfigurationFormType()
     {
         return 'sylius_promotion_action_fixed_discount_configuration';
+    }
+
+    /**
+     * @param int $promotionSubjectTotal
+     * @param int $targetPromotionAmount
+     *
+     * @return int
+     */
+    private function calculateAdjustmentAmount($promotionSubjectTotal, $targetPromotionAmount)
+    {
+        return ($promotionSubjectTotal < $targetPromotionAmount) ? -$promotionSubjectTotal : -$targetPromotionAmount;
     }
 }

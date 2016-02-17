@@ -52,6 +52,8 @@ class FixedDiscountActionSpec extends ObjectBehavior
         $adjustmentFactory->createNew()->willReturn($adjustment);
         $promotion->getDescription()->willReturn('promotion description');
 
+        $order->getPromotionSubjectTotal()->willReturn(1000);
+
         $adjustment->setAmount(-500)->shouldBeCalled();
         $adjustment->setType(AdjustmentInterface::PROMOTION_ADJUSTMENT)->shouldBeCalled();
         $adjustment->setLabel('promotion description')->shouldBeCalled();
@@ -60,6 +62,30 @@ class FixedDiscountActionSpec extends ObjectBehavior
 
         $order->addAdjustment($adjustment)->shouldBeCalled();
         $configuration = ['amount' => 500];
+
+        $this->execute($order, $configuration, $promotion);
+    }
+
+    function it_does_not_applies_bigger_discount_than_promotion_subject_total(
+        $adjustmentFactory,
+        $originator,
+        OrderInterface $order,
+        AdjustmentInterface $adjustment,
+        PromotionInterface $promotion
+    ) {
+        $adjustmentFactory->createNew()->willReturn($adjustment);
+        $promotion->getDescription()->willReturn('promotion description');
+
+        $order->getPromotionSubjectTotal()->willReturn(1000);
+
+        $adjustment->setAmount(-1000)->shouldBeCalled();
+        $adjustment->setType(AdjustmentInterface::PROMOTION_ADJUSTMENT)->shouldBeCalled();
+        $adjustment->setLabel('promotion description')->shouldBeCalled();
+
+        $originator->setOrigin($adjustment, $promotion)->shouldBeCalled();
+
+        $order->addAdjustment($adjustment)->shouldBeCalled();
+        $configuration = ['amount' => 1500];
 
         $this->execute($order, $configuration, $promotion);
     }
