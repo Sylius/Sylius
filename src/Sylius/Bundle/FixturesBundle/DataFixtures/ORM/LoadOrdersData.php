@@ -33,13 +33,6 @@ class LoadOrdersData extends DataFixture
         $orderItemFactory = $this->getOrderItemFactory();
         $orderItemQuantityModifier = $this->get('sylius.order_item_quantity_modifier');
 
-        $channels = [
-            'WEB-UK',
-            'WEB-DE',
-            'WEB-US',
-            'MOBILE',
-        ];
-
         $currencyExchangeRates = [
             'GBP' => 0.8,
             'USD' => 1.2,
@@ -49,7 +42,7 @@ class LoadOrdersData extends DataFixture
         for ($i = 1; $i <= 50; ++$i) {
             /* @var $order OrderInterface */
             $order = $orderFactory->createNew();
-            $channel = $this->getReference('Sylius.Channel.'.$this->faker->randomElement($channels));
+            $channel = $this->getReference('Sylius.Channel.DEFAULT');
 
             $order->setChannel($channel);
 
@@ -111,7 +104,7 @@ class LoadOrdersData extends DataFixture
         /* @var $payment PaymentInterface */
         $payment = $this->getPaymentFactory()->createNew();
         $payment->setOrder($order);
-        $payment->setMethod($this->getReference('Sylius.PaymentMethod.StripeCheckout'));
+        $payment->setMethod($this->getReference('Sylius.PaymentMethod.Offline'));
         $payment->setAmount($order->getTotal());
         $payment->setCurrency($order->getCurrency());
         $payment->setState(null === $state ? $this->getPaymentState() : $state);
