@@ -23,8 +23,6 @@ interface ProductVariantFactoryInterface extends FactoryInterface
      * @param mixed $id
      *
      * @return VariantInterface
-     *
-     * @throws \InvalidArgumentException
      */
-    public function createBasedOnProductId($id);
+    public function createForProductWithId($id);
 }

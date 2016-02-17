@@ -56,7 +56,7 @@ class ProductVariantFactorySpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('createBasedOnProductId', [15])
+            ->during('createForProductWithId', [15])
         ;
     }
 
@@ -70,6 +70,6 @@ class ProductVariantFactorySpec extends ObjectBehavior
         $productRepository->find(13)->willReturn($product);
         $variant->setProduct($product)->shouldBeCalled();
 
-        $this->createBasedOnProductId(13)->shouldReturn($variant);
+        $this->createForProductWithId(13)->shouldReturn($variant);
     }
 }

@@ -50,9 +50,10 @@ class ProductVariantFactory implements ProductVariantFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createBasedOnProductId($id)
+    public function createForProductWithId($id)
     {
-        if (null === $product = $this->productRepository->find($id)) {
+        $product = $this->productRepository->find($id);
+        if (null === $product) {
             throw new \InvalidArgumentException(sprintf('Product with id "%s" does not exist.', $id));
         }
 
