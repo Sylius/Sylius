@@ -9,28 +9,29 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Provider;
+namespace spec\Sylius\Component\Core\Provider;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\PromotionRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
+use Sylius\Component\Core\Repository\PromotionRepositoryInterface;
 use Sylius\Component\Promotion\Provider\PreQualifiedPromotionsProviderInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ActiveByChannelPromotionsProviderSpec extends ObjectBehavior
+class ActivePromotionsByChannelProviderSpec extends ObjectBehavior
 {
-    function let(PromotionRepository $promotionRepository)
+    function let(PromotionRepositoryInterface $promotionRepository)
     {
         $this->beConstructedWith($promotionRepository);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Provider\ActiveByChannelPromotionsProvider');
+        $this->shouldHaveType('Sylius\Component\Core\Provider\ActivePromotionsByChannelProvider');
     }
 
     function it_implements_active_promotions_provider_interface()

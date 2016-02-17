@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Provider;
+namespace Sylius\Component\Core\Provider;
 
-use Sylius\Bundle\CoreBundle\Doctrine\ORM\PromotionRepository;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Repository\PromotionRepositoryInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Provider\PreQualifiedPromotionsProviderInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -20,17 +20,17 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ActiveByChannelPromotionsProvider implements PreQualifiedPromotionsProviderInterface
+class ActivePromotionsByChannelProvider implements PreQualifiedPromotionsProviderInterface
 {
     /**
-     * @var PromotionRepository
+     * @var PromotionRepositoryInterface
      */
     private $promotionRepository;
 
     /**
-     * @param PromotionRepository $promotionRepository
+     * @param PromotionRepositoryInterface $promotionRepository
      */
-    public function __construct(PromotionRepository $promotionRepository)
+    public function __construct(PromotionRepositoryInterface $promotionRepository)
     {
         $this->promotionRepository = $promotionRepository;
     }
