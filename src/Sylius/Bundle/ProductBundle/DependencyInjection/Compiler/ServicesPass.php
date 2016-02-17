@@ -56,12 +56,12 @@ class ServicesPass implements CompilerPassInterface
         $variantFactoryClass = $variantFactoryDefinition->getClass();
         $variantFactoryDefinition->setClass(Factory::class);
 
-        $decoratedVariantFactoryDefinition = new Definition($variantFactoryClass);
-        $decoratedVariantFactoryDefinition
+        $decoratedProductVariantFactoryDefinition = new Definition($variantFactoryClass);
+        $decoratedProductVariantFactoryDefinition
             ->addArgument($variantFactoryDefinition)
             ->addArgument(new Reference('sylius.repository.product'))
         ;
 
-        $container->setDefinition('sylius.factory.product_variant', $decoratedVariantFactoryDefinition);
+        $container->setDefinition('sylius.factory.product_variant', $decoratedProductVariantFactoryDefinition);
     }
 }
