@@ -11,13 +11,13 @@
 
 namespace Sylius\Bundle\SettingsBundle\Transformer;
 
-use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ObjectToIdentifierTransformer as BaseTransformer;
+use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer as BaseTransformer;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ObjectToIdentifierTransformer extends BaseTransformer implements ParameterTransformerInterface
+class ResourceToIdentifierTransformer extends BaseTransformer implements ParameterTransformerInterface
 {
     /**
      * {@inheritdoc}

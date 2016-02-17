@@ -41,12 +41,9 @@ class AddProductConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('variant', 'sylius_entity_to_identifier', [
+            ->add('variant', 'sylius_product_variant_from_identifier', [
                 'label' => 'sylius.form.action.add_product_configuration.variant',
                 'class' => $this->variantRepository->getClassName(),
-                'query_builder' => function () {
-                    return $this->variantRepository->getFormQueryBuilder();
-                },
                 'constraints' => [
                     new NotBlank(),
                     new Type(['type' => 'numeric']),

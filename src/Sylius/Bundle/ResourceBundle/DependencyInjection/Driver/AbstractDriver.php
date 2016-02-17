@@ -89,7 +89,7 @@ abstract class AbstractDriver implements DriverInterface
         $definition = new Definition($metadata->getClass('controller'));
         $definition
             ->setArguments([
-                $this->getMetdataDefinition($metadata),
+                $this->getMetadataDefinition($metadata),
                 new Reference('sylius.resource_controller.request_configuration_factory'),
                 new Reference('sylius.resource_controller.view_handler'),
                 new Reference($metadata->getServiceId('repository')),
@@ -154,10 +154,13 @@ abstract class AbstractDriver implements DriverInterface
 
             switch ($formName) {
                 case 'choice':
+                    $definition->addArgument($this->getMetadataDefinition($metadata));
+                break;
+
+                case ('to_identifier' === $formName || 'from_identifier' === $formName || 'to_hidden_identifier' === $formName):
                     $definition->setArguments([
-                        $metadata->getClass('model'),
-                        $metadata->getDriver(),
-                        $alias,
+                        new Reference($metadata->getServiceId('repository')),
+                        $this->getMetadataDefinition($metadata),
                     ]);
                 break;
 
@@ -195,7 +198,7 @@ abstract class AbstractDriver implements DriverInterface
      *
      * @return Definition
      */
-    protected function getMetdataDefinition(MetadataInterface $metadata)
+    protected function getMetadataDefinition(MetadataInterface $metadata)
     {
         $definition = new Definition(Metadata::class);
         $definition

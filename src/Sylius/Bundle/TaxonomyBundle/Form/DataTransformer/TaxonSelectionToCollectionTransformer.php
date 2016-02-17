@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\TaxonomyBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ObjectSelectionToIdentifierCollectionTransformer;
+use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceSelectionToIdentifierCollectionTransformer;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
@@ -23,7 +23,7 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Patrick Berenschot <p.berenschot@taka-a-byte.eu>
  */
-class TaxonSelectionToCollectionTransformer extends ObjectSelectionToIdentifierCollectionTransformer
+class TaxonSelectionToCollectionTransformer extends ResourceSelectionToIdentifierCollectionTransformer
 {
     /**
      * {@inheritdoc}
