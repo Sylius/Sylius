@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Theme;
 
+use Doctrine\DBAL\DBALException;
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
@@ -66,6 +67,8 @@ final class ChannelBasedThemeContext implements ThemeContextInterface
 
             $themeName = $channel->getThemeName();
         } catch (ChannelNotFoundException $exception) {
+            $themeName = null;
+        } catch (\Exception $exception) {
             $themeName = null;
         }
 

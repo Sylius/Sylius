@@ -87,4 +87,12 @@ class ChannelBasedThemeContextSpec extends ObjectBehavior
 
         $this->getTheme()->shouldReturn(null);
     }
+
+    function it_returns_null_if_any_exception_is_thrown_during_getting_the_channel(
+        ChannelContextInterface $channelContext
+    ) {
+        $channelContext->getChannel()->willThrow(\Exception::class);
+
+        $this->getTheme()->shouldReturn(null);
+    }
 }
