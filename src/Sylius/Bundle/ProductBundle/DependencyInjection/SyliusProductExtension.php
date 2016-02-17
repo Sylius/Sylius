@@ -156,9 +156,9 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
                         'translation' => [
                             'classes' => [
                                 'model' => OptionValueTranslation::class,
-                                'interface' => OptionValueTranslationInterface::class
-                            ]
-                        ]
+                                'interface' => OptionValueTranslationInterface::class,
+                            ],
+                        ],
                     ],
                 ],
             ],

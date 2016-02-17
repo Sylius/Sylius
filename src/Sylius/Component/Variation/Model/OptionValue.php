@@ -110,6 +110,7 @@ class OptionValue extends AbstractTranslatable implements OptionValueInterface
         if (null === $this->option) {
             throw new \BadMethodCallException('The option have not been created yet so you cannot access proxy methods.');
         }
+
         return $this->option->getName();
     }
 
@@ -121,6 +122,7 @@ class OptionValue extends AbstractTranslatable implements OptionValueInterface
         if (null === $this->option) {
             throw new \BadMethodCallException('The option have not been created yet so you cannot access proxy methods.');
         }
+
         return $this->option->getPresentation();
     }
 }

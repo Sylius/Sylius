@@ -27,7 +27,7 @@ class OptionValueTranslationType extends AbstractResourceType
     /**
      * @param string $dataClass
      * @param array $validationGroups
-     * @param $variableName
+     * @param string $variableName
      */
     public function __construct($dataClass, array $validationGroups, $variableName)
     {
@@ -43,7 +43,8 @@ class OptionValueTranslationType extends AbstractResourceType
         $builder
             ->add('value', 'text', [
                 'label' => 'sylius.form.option_value.value',
-            ]);
+            ])
+        ;
     }
 
     /**

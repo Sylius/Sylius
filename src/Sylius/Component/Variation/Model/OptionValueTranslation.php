@@ -38,7 +38,7 @@ class OptionValueTranslation extends AbstractTranslation implements OptionValueT
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getValue()
     {
@@ -46,7 +46,7 @@ class OptionValueTranslation extends AbstractTranslation implements OptionValueT
     }
 
     /**
-     * @param $value
+     * {@inheritdoc}
      */
     public function setValue($value)
     {

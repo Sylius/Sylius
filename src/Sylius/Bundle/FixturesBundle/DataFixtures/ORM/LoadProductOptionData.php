@@ -78,7 +78,7 @@ class LoadProductOptionData extends DataFixture
             [
                 'OV12' => [$this->defaultLocale => 'Medium mug', 'es_ES' => 'Taza mediana'],
                 'OV13' => [$this->defaultLocale => 'Double mug', 'es_ES' => 'Taza doble'],
-                'OV14' => [$this->defaultLocale => 'MONSTER mug', 'es_ES' => 'Taza del monstruo']
+                'OV14' => [$this->defaultLocale => 'MONSTER mug', 'es_ES' => 'Taza del monstruo'],
             ]
         );
         $manager->persist($option);

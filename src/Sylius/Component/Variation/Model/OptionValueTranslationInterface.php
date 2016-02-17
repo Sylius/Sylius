@@ -26,8 +26,6 @@ interface OptionValueTranslationInterface extends ResourceInterface
     public function getValue();
 
     /**
-     * Set value.
-     *
      * @param string $value
      */
     public function setValue($value);
