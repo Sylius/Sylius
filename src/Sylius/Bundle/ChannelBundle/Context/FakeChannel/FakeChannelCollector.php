@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ChannelBundle\Context\FakeChannel;
 
 use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,7 +31,12 @@ final class FakeChannelCollector extends DataCollector
     public function __construct(ChannelRepositoryInterface $channelRepository, ChannelContextInterface $channelContext)
     {
         $this->data['channels'] = $channelRepository->findAll();
-        $this->data['current_channel'] = $channelContext->getChannel();
+
+        try {
+            $this->data['current_channel'] = $channelContext->getChannel();
+        } catch (ChannelNotFoundException $exception) {
+            $this->data['current_channel'] = null;
+        }
     }
 
     /**
