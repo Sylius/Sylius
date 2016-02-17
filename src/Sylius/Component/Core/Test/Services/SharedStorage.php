@@ -29,22 +29,22 @@ class SharedStorage implements SharedStorageInterface
     /**
      * {@inheritdoc}
      */
-    public function setCurrentResource($key, $resource)
-    {
-        $this->clipboard[$key] = $resource;
-        $this->latestKey = $key;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCurrentResource($key)
+    public function get($key)
     {
         if (!isset($this->clipboard[$key])) {
             throw new \InvalidArgumentException(sprintf('There is no current resource for "%s"!', $key));
         }
 
         return $this->clipboard[$key];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function set($key, $resource)
+    {
+        $this->clipboard[$key] = $resource;
+        $this->latestKey = $key;
     }
 
     /**

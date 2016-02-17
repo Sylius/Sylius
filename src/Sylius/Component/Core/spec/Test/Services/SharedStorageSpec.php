@@ -36,33 +36,33 @@ class SharedStorageSpec extends ObjectBehavior
 
     function it_has_resources_in_clipboard(ChannelInterface $channel, ProductInterface $product)
     {
-        $this->setCurrentResource('channel1', $channel);
-        $this->getCurrentResource('channel1')->shouldReturn($channel);
+        $this->set('channel1', $channel);
+        $this->get('channel1')->shouldReturn($channel);
 
-        $this->setCurrentResource('product1', $product);
-        $this->getCurrentResource('product1')->shouldReturn($product);
+        $this->set('product1', $product);
+        $this->get('product1')->shouldReturn($product);
     }
 
     function it_returns_latest_added_resource(ChannelInterface $channel, ProductInterface $product)
     {
-        $this->setCurrentResource('channel1', $channel);
-        $this->setCurrentResource('product1', $product);
+        $this->set('channel1', $channel);
+        $this->set('product1', $product);
 
         $this->getLatestResource()->shouldReturn($product);
     }
 
     function it_overrides_existing_resource_key(ChannelInterface $firstChannel, ChannelInterface $secondChannel)
     {
-        $this->setCurrentResource('channel', $firstChannel);
-        $this->setCurrentResource('channel', $secondChannel);
+        $this->set('channel', $firstChannel);
+        $this->set('channel', $secondChannel);
 
-        $this->getCurrentResource('channel')->shouldReturn($secondChannel);
+        $this->get('channel')->shouldReturn($secondChannel);
     }
 
     function its_clipboard_can_be_set(ChannelInterface $channel)
     {
         $this->setClipboard(['channel' => $channel]);
 
-        $this->getCurrentResource('channel')->shouldReturn($channel);
+        $this->get('channel')->shouldReturn($channel);
     }
 }

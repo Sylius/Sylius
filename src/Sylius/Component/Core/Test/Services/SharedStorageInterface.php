@@ -21,13 +21,13 @@ interface SharedStorageInterface
      *
      * @return mixed
      */
-    public function getCurrentResource($key);
+    public function get($key);
 
     /**
      * @param string $key
      * @param mixed $resource
      */
-    public function setCurrentResource($key, $resource);
+    public function set($key, $resource);
 
     /**
      * @return mixed

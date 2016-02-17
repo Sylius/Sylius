@@ -59,7 +59,7 @@ final class PaymentContext implements Context
         $paymentMethod->setName('Offline');
         $paymentMethod->setDescription('Offline payment method');
 
-        $channel = $this->sharedStorage->getCurrentResource('channel');
+        $channel = $this->sharedStorage->get('channel');
         $channel->addPaymentMethod($paymentMethod);
 
         $this->paymentMethodRepository->add($paymentMethod);

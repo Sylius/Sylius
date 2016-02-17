@@ -61,7 +61,7 @@ class UserContextSpec extends ObjectBehavior
     ) {
         $userFactory->create('test@example.com', 'pa$$word')->willReturn($user);
 
-        $sharedStorage->setCurrentResource('user', $user)->shouldBeCalled();
+        $sharedStorage->set('user', $user)->shouldBeCalled();
         $userRepository->add($user)->shouldBeCalled();
 
         $this->thereIsUserIdentifiedBy('test@example.com', 'pa$$word');
@@ -92,7 +92,7 @@ class UserContextSpec extends ObjectBehavior
 
         $customer->setShippingAddress($address)->shouldBeCalled();
 
-        $sharedStorage->setCurrentResource('user', $user)->shouldBeCalled();
+        $sharedStorage->set('user', $user)->shouldBeCalled();
         $userRepository->add($user)->shouldBeCalled();
 
         $this->thereIsUserWithShippingCountry('test@example.com', 'pa$$word', 'United Kingdom');
@@ -106,7 +106,7 @@ class UserContextSpec extends ObjectBehavior
         CustomerInterface $customer,
         UserInterface $user
     ) {
-        $sharedStorage->getCurrentResource('user')->willReturn($user);
+        $sharedStorage->get('user')->willReturn($user);
         $user->getCustomer()->willReturn($customer);
 
         $customer->getFirstName()->willReturn('John');

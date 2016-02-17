@@ -123,12 +123,12 @@ final class ProductContext implements Context
         $product->setPrice($this->getPriceFromString($price));
         $product->setDescription('Awesome '.$productName);
 
-        $channel = $this->sharedStorage->getCurrentResource('channel');
+        $channel = $this->sharedStorage->get('channel');
         $product->addChannel($channel);
 
         $this->productRepository->add($product);
 
-        $this->sharedStorage->setCurrentResource('product', $product);
+        $this->sharedStorage->set('product', $product);
     }
 
     /**
@@ -160,7 +160,7 @@ final class ProductContext implements Context
      */
     public function itComesInTheFollowingVariations(TableNode $table)
     {
-        $currentProduct = $this->sharedStorage->getCurrentResource('product');
+        $currentProduct = $this->sharedStorage->get('product');
 
         foreach ($table->getHash() as $variantHash) {
             $variant = $this->productVariantFactory->createNew();
