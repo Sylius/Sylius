@@ -5,7 +5,7 @@ Feature: Checkout with offline payment
     I want to be able to complete checkout process without paying
 
     Background:
-        Given the store is operating on a single "France" channel
+        Given the store operates on a single channel in "France"
         And there is user "john@example.com" identified by "password123"
         And the store has a product "PHP T-Shirt" priced at "$19.99"
         And the store ships everything for free to all available locations

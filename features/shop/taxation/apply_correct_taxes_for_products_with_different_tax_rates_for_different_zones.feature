@@ -5,7 +5,7 @@ Feature: Apply correct taxes for products with different tax rates for different
     I want to have correct taxes applied to my order
 
     Background:
-        Given the store is operating on a single channel
+        Given the store operates on a single channel
         And the store ships to "Australia" and "France"
         And there is "EU" zone containing all members of European Union
         And there is rest of the world zone containing all other countries
