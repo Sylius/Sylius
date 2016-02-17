@@ -14,8 +14,6 @@ namespace Sylius\Bundle\ApiBundle\Model;
 use FOS\OAuthServerBundle\Entity\Client as BaseClient;
 
 /**
- * API client model.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Client extends BaseClient implements ClientInterface

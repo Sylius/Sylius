@@ -14,8 +14,6 @@ namespace Sylius\Bundle\ApiBundle\Model;
 use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
 
 /**
- * API user interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface UserInterface extends BaseUserInterface

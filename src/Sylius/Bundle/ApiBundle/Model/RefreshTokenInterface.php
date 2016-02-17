@@ -15,8 +15,6 @@ use FOS\OAuthServerBundle\Model\RefreshTokenInterface as BaseRefreshTokenInterfa
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
- * API refresh token interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface RefreshTokenInterface extends BaseRefreshTokenInterface, ResourceInterface

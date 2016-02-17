@@ -15,8 +15,6 @@ use FOS\OAuthServerBundle\Model\AccessTokenInterface as BaseAccessTokenInterface
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
- * API access token interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface AccessTokenInterface extends BaseAccessTokenInterface, ResourceInterface

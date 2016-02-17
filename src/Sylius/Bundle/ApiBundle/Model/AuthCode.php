@@ -14,8 +14,6 @@ namespace Sylius\Bundle\ApiBundle\Model;
 use FOS\OAuthServerBundle\Entity\AuthCode as BaseAuthCode;
 
 /**
- * API auth code model.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class AuthCode extends BaseAuthCode implements AuthCodeInterface
