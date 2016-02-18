@@ -13,7 +13,6 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use SM\Factory\FactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\PaymentProcessorInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
@@ -25,9 +24,9 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class OrderPaymentListenerSpec extends ObjectBehavior
 {
-    function let(PaymentProcessorInterface $processor, EventDispatcherInterface $dispatcher, FactoryInterface $factory)
+    function let(PaymentProcessorInterface $processor, EventDispatcherInterface $dispatcher)
     {
-        $this->beConstructedWith($processor, $dispatcher, $factory);
+        $this->beConstructedWith($processor, $dispatcher);
     }
 
     function it_is_initializable()
@@ -56,7 +55,7 @@ class OrderPaymentListenerSpec extends ObjectBehavior
 
         $order->getLastPayment()->willReturn(false);
 
-        $processor->createPayment($order)->shouldBeCalled();
+        $processor->processOrderPayments($order)->shouldBeCalled();
 
         $this->createOrderPayment($event);
     }
