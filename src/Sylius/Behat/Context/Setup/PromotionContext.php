@@ -79,18 +79,18 @@ final class PromotionContext implements Context
     public function thereIsPromotion($promotionName)
     {
         $promotion = $this->testPromotionFactory->createPromotion($promotionName);
-        $promotion->addChannel($this->sharedStorage->getCurrentResource('channel'));
+        $promotion->addChannel($this->sharedStorage->get('channel'));
 
         $this->promotionRepository->add($promotion);
-        $this->sharedStorage->setCurrentResource('promotion', $promotion);
+        $this->sharedStorage->set('promotion', $promotion);
     }
 
     /**
      * @Given /^it gives "(?:€|£|\$)([^"]+)" fixed discount to every order$/
      */
-    public function itGivesFixedDiscountForCustomersWithCartsAbove($amount)
+    public function itGivesFixedDiscountToEveryOrder($amount)
     {
-        $currentPromotion = $this->sharedStorage->getCurrentResource('promotion');
+        $currentPromotion = $this->sharedStorage->get('promotion');
 
         $action = $this->testPromotionFactory->createFixedDiscountAction($amount, $currentPromotion);
         $this->actionRepository->add($action);

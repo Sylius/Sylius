@@ -63,30 +63,30 @@ class PromotionContextSpec extends ObjectBehavior
     ) {
         $testPromotionFactory->createPromotion('Super promotion')->willReturn($promotion);
 
-        $sharedStorage->getCurrentResource('channel')->willReturn($channel);
+        $sharedStorage->get('channel')->willReturn($channel);
         $promotion->addChannel($channel)->shouldBeCalled();
 
         $promotionRepository->add($promotion)->shouldBeCalled();
-        $sharedStorage->setCurrentResource('promotion', $promotion)->shouldBeCalled();
+        $sharedStorage->set('promotion', $promotion)->shouldBeCalled();
 
         $this->thereIsPromotion('Super promotion');
     }
 
     function it_creates_fixed_discount_action_for_promotion(
-        $actionRepository,
-        $objectManager,
         $sharedStorage,
+        $actionRepository,
         $testPromotionFactory,
+        $objectManager,
         ActionInterface $action,
         PromotionInterface $promotion
     ) {
-        $sharedStorage->getCurrentResource('promotion')->willReturn($promotion);
+        $sharedStorage->get('promotion')->willReturn($promotion);
 
         $testPromotionFactory->createFixedDiscountAction('10.00', $promotion)->willReturn($action);
         $actionRepository->add($action)->shouldBeCalled();
 
         $objectManager->flush()->shouldBeCalled();
 
-        $this->itGivesFixedDiscountForCustomersWithCartsAbove('10.00');
+        $this->itGivesFixedDiscountToEveryOrder('10.00');
     }
 }
