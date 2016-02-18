@@ -164,4 +164,30 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
 
         $this->get($requestConfiguration, $repository)->shouldReturn($paginatedRepresentation);
     }
+
+    function it_sets_current_page_on_paginator_from_custom_method(
+        RequestConfiguration $requestConfiguration,
+        RepositoryInterface $repository,
+        Pagerfanta $paginator,
+        Request $request,
+        ParameterBag $queryParameters
+    ) {
+        $requestConfiguration->isHtmlRequest()->willReturn(true);
+        $requestConfiguration->getRepositoryMethod()->willReturn('findAll');
+        $requestConfiguration->getRepositoryArguments()->willReturn(['foo']);
+
+        $requestConfiguration->isPaginated()->willReturn(false);
+        $requestConfiguration->isLimited()->willReturn(true);
+        $requestConfiguration->getLimit()->willReturn(15);
+
+        $repository->findAll('foo')->willReturn($paginator);
+
+        $requestConfiguration->getRequest()->willReturn($request);
+        $request->query = $queryParameters;
+        $queryParameters->get('page', 1)->willReturn(8);
+
+        $paginator->setCurrentPage(8)->shouldBeCalled();
+
+        $this->get($requestConfiguration, $repository)->shouldReturn($paginator);
+    }
 }
