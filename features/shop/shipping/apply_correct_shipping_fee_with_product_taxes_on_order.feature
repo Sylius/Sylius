@@ -11,7 +11,6 @@ Feature: Apply correct shipping fee with product taxes on order
         And there is rest of the world zone containing all other countries
         And default currency is "EUR"
         And default tax zone is "EU"
-        And there is user "john@example.com" identified by "password123"
         And the store has "EU VAT" tax rate of 23% for "Clothes" within "EU" zone
         And the store has "Low tax" tax rate of 10% for "Clothes" for the rest of the world
         And the store has "EU Shipping VAT" tax rate of 23% for "Shipping Services" within "EU" zone
@@ -23,7 +22,7 @@ Feature: Apply correct shipping fee with product taxes on order
         And shipping method "DHL" belongs to "Shipping Services" tax category
         And shipping method "FedEx" belongs to "Shipping Services" tax category
         And the store allows paying offline
-        And I am logged in as "john@example.com"
+        And I am logged in customer
 
     @ui
     Scenario: Proper shipping fee, tax and product tax

@@ -18,8 +18,7 @@ Feature: Apply correct taxes for products with different tax rates for different
         And product "PHP T-Shirt" belongs to "Clothes" tax category
         And the store has a product "Symfony Mug" priced at "€50.00"
         And product "Symfony Mug" belongs to "Mugs" tax category
-        And there is user "john@example.com" identified by "password123"
-        And I am logged in as "john@example.com"
+        And I am logged in customer
 
     @ui
     Scenario: Displaying correct tax before specifying shipping address

@@ -5,11 +5,9 @@ Feature: Apply correct taxes for items with the same tax rate
     I want to have correct taxes applied to my order
 
     Background:
-        Given the store operates on a single channel
-        And there is "EU" zone containing all members of European Union
-        And default currency is "EUR"
-        And default tax zone is "EU"
-        And the store has "EU VAT" tax rate of 23% for "Clothes" within "EU" zone
+        Given the store operates on a single channel in "France"
+        And default tax zone is "FR"
+        And the store has "VAT" tax rate of 23% for "Clothes" within "FR" zone
         And the store has a product "PHP T-Shirt" priced at "€100.00"
         And the store has a product "Symfony Hat" priced at "€30.00"
         And product "PHP T-Shirt" belongs to "Clothes" tax category

@@ -21,8 +21,7 @@ Feature: Apply correct shipping fee with taxes on order
         And shipping method "DHL" belongs to "Shipping Services" tax category
         And shipping method "DHL-World" belongs to "Shipping Services" tax category
         And the store allows paying offline
-        And there is user "john@example.com" identified by "password123"
-        And I am logged in as "john@example.com"
+        And I am logged in customer
 
     @ui
     Scenario: Proper shipping fee and tax
