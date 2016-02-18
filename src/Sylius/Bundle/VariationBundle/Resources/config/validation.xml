@@ -88,9 +88,15 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <property name="translations">
+            <constraint name="Valid" />
+        </property>
+    </class>
+
+    <class name="Sylius\Component\Variation\Model\OptionValueTranslation">
         <property name="value">
             <constraint name="NotBlank">
-                <option name="message">sylius.option_value.value.not_blank</option>
+                <option name="message">sylius.option.presentation.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>

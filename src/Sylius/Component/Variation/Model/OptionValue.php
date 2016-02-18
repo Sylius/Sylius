@@ -11,10 +11,12 @@
 
 namespace Sylius\Component\Variation\Model;
 
+use Sylius\Component\Translation\Model\AbstractTranslatable;
+
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class OptionValue implements OptionValueInterface
+class OptionValue extends AbstractTranslatable implements OptionValueInterface
 {
     /**
      * @var mixed
@@ -41,7 +43,7 @@ class OptionValue implements OptionValueInterface
      */
     public function __toString()
     {
-        return $this->value;
+        return $this->getValue();
     }
 
     /**
@@ -71,22 +73,6 @@ class OptionValue implements OptionValueInterface
     /**
      * {@inheritdoc}
      */
-    public function getValue()
-    {
-        return $this->value;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setValue($value)
-    {
-        $this->value = $value;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getOption()
     {
         return $this->option;
@@ -98,6 +84,22 @@ class OptionValue implements OptionValueInterface
     public function setOption(OptionInterface $option = null)
     {
         $this->option = $option;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValue()
+    {
+        return $this->translate()->getValue();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setValue($value)
+    {
+        $this->translate()->setValue($value);
     }
 
     /**

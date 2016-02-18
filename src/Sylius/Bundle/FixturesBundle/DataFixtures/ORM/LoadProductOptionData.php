@@ -35,11 +35,11 @@ class LoadProductOptionData extends DataFixture
             'T-Shirt size',
             [$this->defaultLocale => 'Size', 'es_ES' => 'Talla'],
             [
-                'OV1' => 'S',
-                'OV2' => 'M',
-                'OV3' => 'L',
-                'OV4' => 'XL',
-                'OV5' => 'XXL',
+                'OV1' => [$this->defaultLocale => 'S', 'es_ES' => 'S'],
+                'OV2' => [$this->defaultLocale => 'M', 'es_ES' => 'M'],
+                'OV3' => [$this->defaultLocale => 'L', 'es_ES' => 'L'],
+                'OV4' => [$this->defaultLocale => 'XL', 'es_ES' => 'XL'],
+                'OV5' => [$this->defaultLocale => 'XXL', 'es_ES' => 'XLL'],
             ]
         );
         $manager->persist($option);
@@ -50,9 +50,9 @@ class LoadProductOptionData extends DataFixture
             'T-Shirt color',
             [$this->defaultLocale => 'Color'],
             [
-                'OV6' => 'Red',
-                'OV7' => 'Blue',
-                'OV8' => 'Green',
+                'OV6' => [$this->defaultLocale => 'Red', 'es_ES' => 'Rojo'],
+                'OV7' => [$this->defaultLocale => 'Blue', 'es_ES' => 'Azul'],
+                'OV8' => [$this->defaultLocale => 'Green', 'es_ES' => 'Verde'],
             ]
         );
         $manager->persist($option);
@@ -63,9 +63,9 @@ class LoadProductOptionData extends DataFixture
             'Sticker size',
             [$this->defaultLocale => 'Size', 'es_ES' => 'Talla'],
             [
-                'OV9' => '3"',
-                'OV10' => '5"',
-                'OV11' => '7"',
+                'OV9' => [$this->defaultLocale => '3"', 'es_ES' => '3"'],
+                'OV10' => [$this->defaultLocale => '5"', 'es_ES' => '5"'],
+                'OV11' => [$this->defaultLocale => '7"', 'es_ES' => '7"'],
             ]
         );
         $manager->persist($option);
@@ -76,9 +76,9 @@ class LoadProductOptionData extends DataFixture
             'Mug type',
             [$this->defaultLocale => 'Type', 'es_ES' => 'Tipo'],
             [
-                'OV12' => 'Medium mug',
-                'OV13' => 'Double mug',
-                'OV14' => 'MONSTER mug',
+                'OV12' => [$this->defaultLocale => 'Medium mug', 'es_ES' => 'Taza mediana'],
+                'OV13' => [$this->defaultLocale => 'Double mug', 'es_ES' => 'Taza doble'],
+                'OV14' => [$this->defaultLocale => 'MONSTER mug', 'es_ES' => 'Taza del monstruo'],
             ]
         );
         $manager->persist($option);
@@ -115,12 +115,16 @@ class LoadProductOptionData extends DataFixture
         }
         $option->setCurrentLocale($this->defaultLocale);
 
-        foreach ($valuesData as $code => $value) {
-            /* @var $value OptionValueInterface */
+        foreach ($valuesData as $code => $values) {
+            /* @var $values OptionValueInterface */
             $optionValue = $this->getProductOptionValueFactory()->createNew();
-            $optionValue->setValue($value);
             $optionValue->setCode($code);
 
+            foreach ($values as $locale => $value) {
+                $optionValue->setFallbackLocale($locale);
+                $optionValue->setCurrentLocale($locale);
+                $optionValue->setValue($value);
+            }
             $option->addValue($optionValue);
         }
 
