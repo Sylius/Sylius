@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Product;
 
+use SensioLabs\Behat\PageObjectExtension\PageObject\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Component\Core\Model\ProductInterface;
 
@@ -19,6 +20,9 @@ use Sylius\Component\Core\Model\ProductInterface;
  */
 class ProductShowPage extends SymfonyPage
 {
+    /**
+     * @throws ElementNotFoundException
+     */
     public function addToCart()
     {
         $this->getDocument()->pressButton('Add to cart');
@@ -65,6 +69,8 @@ class ProductShowPage extends SymfonyPage
             );
         }
 
-        return $this->router->generate($urlParameters['product'], [], true);
+        $url = $this->router->generate($urlParameters['product'], []);
+
+        return $this->makePathAbsoluteWithBehatParameter($url);
     }
 }

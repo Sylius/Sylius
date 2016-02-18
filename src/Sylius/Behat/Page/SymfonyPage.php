@@ -72,5 +72,8 @@ abstract class SymfonyPage extends Page
     {
     }
 
+    /**
+     * @return string
+     */
     abstract protected function getRouteName();
 }

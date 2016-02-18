@@ -5,7 +5,15 @@ EXIT_CODE=0
 bin/behat --strict -f progress -p cached ; EXIT_CODE=$?
 
 if [[ $EXIT_CODE -eq 1 ]]; then
-    bin/behat --strict -f progress -p cached --rerun ; EXIT_CODE=$?
-fi
+    bin/behat --strict -f progress -p cached --rerun; EXIT_CODE=$?
+fi;
+
+if [[ $TRAVIS_PULL_REQUEST = false && ! -z "$SYMFONY__PAYPAL__EXPRESS_CHECKOUT__USERNAME" ]]; then
+    bin/behat --strict -p cached --tags=paypal; EXIT_CODE=$?
+fi;
+
+if [[ $EXIT_CODE -eq 1 && $TRAVIS_PULL_REQUEST = false && ! -z "$SYMFONY__PAYPAL__EXPRESS_CHECKOUT__USERNAME" ]]; then
+    bin/behat --strict -p cached --rerun --tags=paypal; EXIT_CODE=$?
+fi;
 
 exit $EXIT_CODE

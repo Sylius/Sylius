@@ -17,9 +17,23 @@ use Payum\Core\Request\Convert;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\Payment\InvoiceNumberGeneratorInterface;
 
 class ConvertPaymentToPaypalExpressAction implements ActionInterface
 {
+    /**
+     * @var InvoiceNumberGeneratorInterface
+     */
+    private $invoiceNumberGenerator;
+
+    /**
+     * @param InvoiceNumberGeneratorInterface $invoiceNumberGenerator
+     */
+    public function __construct(InvoiceNumberGeneratorInterface $invoiceNumberGenerator)
+    {
+        $this->invoiceNumberGenerator = $invoiceNumberGenerator;
+    }
+
     /**
      * {@inheritdoc}
      *
@@ -34,7 +48,7 @@ class ConvertPaymentToPaypalExpressAction implements ActionInterface
         $order = $payment->getOrder();
 
         $details = [];
-        $details['PAYMENTREQUEST_0_INVNUM'] = $order->getNumber().'-'.$payment->getId();
+        $details['PAYMENTREQUEST_0_INVNUM'] = $this->invoiceNumberGenerator->generate($order, $payment);
         $details['PAYMENTREQUEST_0_CURRENCYCODE'] = $order->getCurrency();
         $details['PAYMENTREQUEST_0_AMT'] = round($order->getTotal() / 100, 2);
         $details['PAYMENTREQUEST_0_ITEMAMT'] = round($order->getTotal() / 100, 2);
@@ -66,14 +80,6 @@ class ConvertPaymentToPaypalExpressAction implements ActionInterface
         if (0 !== $shippingTotal = $order->getAdjustmentsTotal(AdjustmentInterface::SHIPPING_ADJUSTMENT)) {
             $details['L_PAYMENTREQUEST_0_NAME'.$m] = 'Shipping Total';
             $details['L_PAYMENTREQUEST_0_AMT'.$m] = round($shippingTotal / 100, 2);
-            $details['L_PAYMENTREQUEST_0_QTY'.$m] = 1;
-
-            ++$m;
-        }
-
-        if (0 !== $paymentTotal = $order->getAdjustmentsTotal(AdjustmentInterface::PAYMENT_ADJUSTMENT)) {
-            $details['L_PAYMENTREQUEST_0_NAME'.$m] = 'Payment Fee Total';
-            $details['L_PAYMENTREQUEST_0_AMT'.$m] = round($paymentTotal / 100, 2);
             $details['L_PAYMENTREQUEST_0_QTY'.$m] = 1;
         }
 

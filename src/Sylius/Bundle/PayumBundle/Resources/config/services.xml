@@ -33,6 +33,7 @@
 
         <!-- PayPal -->
         <service id="sylius.payum.action.convert_payment_to_paypal_express" class="Sylius\Bundle\PayumBundle\Action\ConvertPaymentToPaypalExpressAction">
+            <argument type="service" id="sylius.invoice_number_generator" />
             <tag name="payum.action" factory="paypal_express_checkout_nvp" alias="sylius.convert_payment" />
         </service>
 

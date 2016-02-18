@@ -62,7 +62,7 @@ before_script:
     # Debug informations, PHP version & PHP configuration
     # Its needed to remove the line with secret ariable, as it is listed in _SERVER variables
     - php -v
-    - php -i | grep -v GITHUB_OAUTH_TOKEN
+    - php -i | grep -v 'GITHUB_OAUTH_TOKEN\|SYMFONY__'
 
 script:
     - composer validate
