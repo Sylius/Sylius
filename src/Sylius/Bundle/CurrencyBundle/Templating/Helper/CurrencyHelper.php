@@ -54,7 +54,7 @@ class CurrencyHelper extends Helper
     {
         $currency = $currency ?: $this->currencyContext->getCurrency();
 
-        return $this->converter->convert($amount, $currency);
+        return $this->converter->convertFromBase($amount, $currency);
     }
 
     /**
@@ -69,7 +69,7 @@ class CurrencyHelper extends Helper
     public function convertAndFormatAmount($amount, $currency = null, $decimal = false)
     {
         $currency = $currency ?: $this->currencyContext->getCurrency();
-        $amount = $this->converter->convert($amount, $currency);
+        $amount = $this->converter->convertFromBase($amount, $currency);
 
         return $this->moneyHelper->formatAmount($amount, $currency, $decimal);
     }

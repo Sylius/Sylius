@@ -39,7 +39,7 @@ class CurrencyConverterSpec extends ObjectBehavior
         $currencyRepository->findOneBy(['code' => 'USD'])->shouldBeCalled()->willReturn($currency);
         $currency->getExchangeRate()->shouldBeCalled()->willReturn(1.30);
 
-        $this->convert(6555, 'USD')->shouldReturn(8522);
+        $this->convertFromBase(6555, 'USD')->shouldReturn(8522);
     }
 
     function it_throws_exception_if_currency_is_not_found($currencyRepository)
@@ -48,7 +48,15 @@ class CurrencyConverterSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(new UnavailableCurrencyException('EUR'))
-            ->duringConvert(6555, 'EUR')
+            ->duringConvertFromBase(6555, 'EUR')
         ;
+    }
+
+    function it_converts_to_base_currency(CurrencyInterface $currency, $currencyRepository)
+    {
+        $currencyRepository->findOneBy(['code' => 'PLN'])->shouldBeCalled()->willReturn($currency);
+        $currency->getExchangeRate()->shouldBeCalled()->willReturn(0.25);
+
+        $this->convertToBase(10000, 'PLN')->shouldReturn(40000);
     }
 }
