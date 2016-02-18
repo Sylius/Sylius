@@ -34,7 +34,7 @@ Feature: Receiving fixed discount on cart
         Then my cart total should be "€0.00"
         And my cart promotions should be "-€100.00"
 
-    @todo
+    @ui
     Scenario: Receiving fixed discount does not affect the shipping fee
         Given the store has "DHL" shipping method with "€10.00" fee
         And there is a promotion "Holiday promotion"
