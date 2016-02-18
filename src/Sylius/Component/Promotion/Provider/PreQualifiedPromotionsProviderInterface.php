@@ -9,19 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Promotion\Processor;
+namespace Sylius\Component\Promotion\Provider;
 
+use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
- * Promotion processor interface.
- *
- * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface PromotionProcessorInterface
+interface PreQualifiedPromotionsProviderInterface
 {
     /**
      * @param PromotionSubjectInterface $subject
+     *
+     * @return PromotionInterface[]
      */
-    public function process(PromotionSubjectInterface $subject);
+    public function getPromotions(PromotionSubjectInterface $subject);
 }

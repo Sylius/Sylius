@@ -61,7 +61,8 @@
         <parameter key="sylius.listener.channel.class">Sylius\Bundle\CoreBundle\EventListener\ChannelDeletionListener</parameter>
         <parameter key="sylius.listener.customer_aware.class">Sylius\Bundle\CoreBundle\EventListener\CustomerAwareListener</parameter>
 
-        <parameter key="sylius.promotion_processor.class">Sylius\Bundle\CoreBundle\OrderProcessing\PromotionProcessor</parameter>
+        <parameter key="sylius.active_promotions_by_channel_provider.class">Sylius\Component\Core\Provider\ActivePromotionsByChannelProvider</parameter>
+
         <parameter key="sylius.promotion_rule_checker.nth_order.class">Sylius\Component\Core\Promotion\Checker\NthOrderRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.customer_loyalty.class">Sylius\Component\Core\Promotion\Checker\CustomerLoyaltyRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.shipping_country.class">Sylius\Component\Core\Promotion\Checker\ShippingCountryRuleChecker</parameter>
@@ -312,6 +313,16 @@
             <argument type="service" id="sylius.context.channel" />
             <tag name="kernel.event_listener" event="sylius.cart_change" method="processOrderChannel" />
         </service>
+
+        <service id="sylius.active_promotions_by_channel_provider" class="%sylius.active_promotions_by_channel_provider.class%">
+            <argument type="service" id="sylius.repository.promotion" />
+        </service>
+        <service id="sylius.promotion_processor" class="%sylius.promotion_processor.class%">
+            <argument type="service" id="sylius.active_promotions_by_channel_provider" />
+            <argument type="service" id="sylius.promotion_eligibility_checker" />
+            <argument type="service" id="sylius.promotion_applicator" />
+        </service>
+
         <service id="sylius.listener.order_promotion" class="%sylius.listener.order_promotion.class%">
             <argument type="service" id="sylius.promotion_processor" />
             <argument type="service" id="session" />
