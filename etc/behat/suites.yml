@@ -32,3 +32,4 @@ imports:
     - suites/ui_cart.yml
     - suites/ui_channels.yml
     - suites/ui_checkout.yml
+    - suites/ui_promotion.yml
