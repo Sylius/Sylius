@@ -12,13 +12,14 @@
 namespace Sylius\Bundle\PaymentBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Parameter;
 
 /**
- * Payments extension.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SyliusPaymentExtension extends AbstractResourceExtension
@@ -42,5 +43,11 @@ class SyliusPaymentExtension extends AbstractResourceExtension
         }
 
         $container->setParameter('sylius.payment_gateways', $config['gateways']);
+
+        $factoryDefinition = new Definition(Factory::class, [new Parameter('sylius.model.payment.class')]);
+        $paymentFactoryClass = $container->getParameter('sylius.factory.payment.class');
+        $decoratedPaymentFactoryDefinition = new Definition($paymentFactoryClass, [$factoryDefinition]);
+
+        $container->setDefinition('sylius.factory.payment', $decoratedPaymentFactoryDefinition);
     }
 }

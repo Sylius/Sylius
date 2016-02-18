@@ -18,6 +18,7 @@ use Sylius\Bundle\PaymentBundle\Form\Type\PaymentType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Payment\Factory\PaymentFactory;
 use Sylius\Component\Payment\Model\CreditCard;
 use Sylius\Component\Payment\Model\CreditCardInterface;
 use Sylius\Component\Payment\Model\Payment;
@@ -155,7 +156,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('interface')->defaultValue(PaymentInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
-                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->scalarNode('factory')->defaultValue(PaymentFactory::class)->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()
                                             ->children()
