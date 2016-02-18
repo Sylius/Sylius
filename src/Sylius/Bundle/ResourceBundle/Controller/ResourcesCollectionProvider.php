@@ -39,15 +39,34 @@ class ResourcesCollectionProvider implements ResourcesCollectionProviderInterfac
      */
     public function get(RequestConfiguration $requestConfiguration, RepositoryInterface $repository)
     {
+        $resources = $this->getResources($requestConfiguration, $repository);
+
+        if ($resources instanceof Pagerfanta) {
+            $request = $requestConfiguration->getRequest();
+            $resources->setCurrentPage($request->query->get('page', 1));
+
+            if (!$requestConfiguration->isHtmlRequest()) {
+                $route = new Route($request->attributes->get('_route'), array_merge($request->attributes->get('_route_params'), $request->query->all()));
+
+                return $this->pagerfantaRepresentationFactory->createRepresentation($resources, $route);
+            }
+        }
+
+        return $resources;
+    }
+
+    /**
+     * @param RequestConfiguration $requestConfiguration
+     * @param RepositoryInterface $repository
+     *
+     * @return mixed
+     */
+    private function getResources(RequestConfiguration $requestConfiguration, RepositoryInterface $repository)
+    {
         if (null !== $repositoryMethod = $requestConfiguration->getRepositoryMethod()) {
             $callable = [$repository, $repositoryMethod];
 
             $resources = call_user_func_array($callable, $requestConfiguration->getRepositoryArguments());
-
-            if ($resources instanceof Pagerfanta) {
-                $request = $requestConfiguration->getRequest();
-                $resources->setCurrentPage($request->query->get('page', 1));
-            }
 
             return $resources;
         }
@@ -60,18 +79,6 @@ class ResourcesCollectionProvider implements ResourcesCollectionProviderInterfac
             return $repository->findBy($requestConfiguration->getCriteria(), $requestConfiguration->getSorting(), $requestConfiguration->getLimit());
         }
 
-        $request = $requestConfiguration->getRequest();
-
-        /** @var Pagerfanta $paginator */
-        $paginator = $repository->createPaginator($requestConfiguration->getCriteria(), $requestConfiguration->getSorting());
-        $paginator->setCurrentPage($request->query->get('page', 1));
-
-        if (!$requestConfiguration->isHtmlRequest()) {
-            $route = new Route($request->attributes->get('_route'), array_merge($request->attributes->get('_route_params'), $request->query->all()));
-
-            return $this->pagerfantaRepresentationFactory->createRepresentation($paginator, $route);
-        }
-
-        return $paginator;
+        return $repository->createPaginator($requestConfiguration->getCriteria(), $requestConfiguration->getSorting());
     }
 }
