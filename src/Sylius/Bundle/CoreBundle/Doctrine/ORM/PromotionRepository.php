@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Sylius\Bundle\PromotionBundle\Doctrine\ORM\PromotionRepository as BasePromotionRepository;
-use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Repository\PromotionRepositoryInterface;
 
 /**

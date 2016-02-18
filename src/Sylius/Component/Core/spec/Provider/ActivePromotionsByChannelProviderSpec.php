@@ -12,12 +12,13 @@
 namespace spec\Sylius\Component\Core\Provider;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Doctrine\ORM\PromotionRepository;
-use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Repository\PromotionRepositoryInterface;
+use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Provider\PreQualifiedPromotionsProviderInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -40,7 +41,7 @@ class ActivePromotionsByChannelProviderSpec extends ObjectBehavior
     }
 
     function it_provides_active_promotions_for_given_subject_channel(
-        PromotionRepository $promotionRepository,
+        $promotionRepository,
         ChannelInterface $channel,
         PromotionInterface $promotion1,
         PromotionInterface $promotion2,
@@ -50,5 +51,10 @@ class ActivePromotionsByChannelProviderSpec extends ObjectBehavior
         $promotionRepository->findActiveByChannel($channel)->willReturn([$promotion1, $promotion2]);
 
         $this->getPromotions($subject)->shouldReturn([$promotion1, $promotion2]);
+    }
+
+    function it_throws_exception_if_passed_subject_is_not_order(PromotionSubjectInterface $subject)
+    {
+        $this->shouldThrow(UnexpectedTypeException::class)->during('getPromotions', [$subject]);
     }
 }
