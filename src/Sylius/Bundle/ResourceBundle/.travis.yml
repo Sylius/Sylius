@@ -18,5 +18,5 @@ before_script:
     - test/app/console doctrine:schema:create
 
 script:
-    - bin/phpunit
     - bin/phpspec run -fpretty --verbose
+    - bin/phpunit
