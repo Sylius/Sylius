@@ -115,6 +115,18 @@ EOT;
     /**
      * @test
      */
+    public function it_allows_paginating_the_index_of_books()
+    {
+        $this->loadFixturesFromFile('more_books.yml');
+
+        $this->client->request('GET', '/books/', ['page' => 2]);
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'books/paginated_index_response');
+    }
+
+    /**
+     * @test
+     */
     public function it_does_not_allow_showing_resource_if_it_not_exists()
     {
         $this->loadFixturesFromFile('books.yml');
