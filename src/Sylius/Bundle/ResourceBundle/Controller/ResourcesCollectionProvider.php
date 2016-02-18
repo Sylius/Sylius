@@ -42,7 +42,14 @@ class ResourcesCollectionProvider implements ResourcesCollectionProviderInterfac
         if (null !== $repositoryMethod = $requestConfiguration->getRepositoryMethod()) {
             $callable = [$repository, $repositoryMethod];
 
-            return call_user_func_array($callable, $requestConfiguration->getRepositoryArguments());
+            $resources = call_user_func_array($callable, $requestConfiguration->getRepositoryArguments());
+
+            if ($resources instanceof Pagerfanta) {
+                $request = $requestConfiguration->getRequest();
+                $resources->setCurrentPage($request->query->get('page', 1));
+            }
+
+            return $resources;
         }
 
         if (!$requestConfiguration->isPaginated() && !$requestConfiguration->isLimited()) {

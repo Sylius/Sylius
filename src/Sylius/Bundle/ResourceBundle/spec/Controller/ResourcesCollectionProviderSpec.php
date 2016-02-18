@@ -190,4 +190,40 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
 
         $this->get($requestConfiguration, $repository)->shouldReturn($paginator);
     }
+
+    function it_creates_a_pagniated_respresentation_for_pagerfanta_for_non_html_requests_with_a_custom_repository_method(
+        RequestConfiguration $requestConfiguration,
+        RepositoryInterface $repository,
+        Pagerfanta $paginator,
+        Request $request,
+        ParameterBag $queryParameters,
+        ParameterBag $requestAttributes,
+        PagerfantaFactory $pagerfantaRepresentationFactory,
+        PaginatedRepresentation $paginatedRepresentation
+    ) {
+        $requestConfiguration->isHtmlRequest()->willReturn(false);
+        $requestConfiguration->getRepositoryMethod()->willReturn('findAll');
+        $requestConfiguration->getRepositoryArguments()->willReturn(['foo']);
+
+        $requestConfiguration->isPaginated()->willReturn(true);
+        $requestConfiguration->isLimited()->willReturn(false);
+        $requestConfiguration->getCriteria()->willReturn([]);
+        $requestConfiguration->getSorting()->willReturn([]);
+
+        $repository->findAll('foo')->willReturn($paginator);
+
+        $requestConfiguration->getRequest()->willReturn($request);
+        $request->query = $queryParameters;
+        $queryParameters->get('page', 1)->willReturn(6);
+        $queryParameters->all()->willReturn(['foo' => 2, 'bar' => 15]);
+        $request->attributes = $requestAttributes;
+        $requestAttributes->get('_route')->willReturn('sylius_product_index');
+        $requestAttributes->get('_route_params')->willReturn(['slug' => 'foo-bar']);
+
+        $paginator->setCurrentPage(6)->shouldBeCalled();
+
+        $pagerfantaRepresentationFactory->createRepresentation($paginator, Argument::type(Route::class))->willReturn($paginatedRepresentation);
+
+        $this->get($requestConfiguration, $repository)->shouldReturn($paginatedRepresentation);
+    }
 }
