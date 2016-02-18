@@ -1,0 +1,7 @@
+AppBundle\Entity\Book:
+    book1:
+        title: "Lord of The Rings"
+        author: "J.R.R. Tolkien"
+    book2:
+        title: "Game of Thrones"
+        author: "George R. R. Martin"
