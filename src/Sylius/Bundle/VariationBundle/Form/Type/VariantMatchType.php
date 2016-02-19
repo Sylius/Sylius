@@ -43,7 +43,7 @@ class VariantMatchType extends AbstractType
     {
         foreach ($options['variable']->getOptions() as $i => $option) {
             $builder->add(Urlizer::urlize($option->getName()), sprintf('sylius_%s_option_value_choice', $this->variableName), [
-                'label' => $option->getPresentation(),
+                'label' => $option->getName(),
                 'option' => $option,
                 'property_path' => '['.$i.']',
             ]);

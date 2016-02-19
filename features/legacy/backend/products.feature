@@ -7,20 +7,20 @@ Feature: Products
     Background:
         Given store has default configuration
         And there are following options:
-            | code | name          | presentation | values                          |
-            | O1   | T-Shirt color | Color        | Red[OV1], Blue[OV2], Green[OV3] |
-            | O2   | T-Shirt size  | Size         | S[OV4], M[OV5], L[OV6]          |
+            | code | name          | values                          |
+            | O1   | T-Shirt color | Red[OV1], Blue[OV2], Green[OV3] |
+            | O2   | T-Shirt size  | S[OV4], M[OV5], L[OV6]          |
         And there are following attributes:
             | name               | type     | configuration |
             | T-Shirt fabric     | text     | min:2,max:255 |
             | T-Shirt fare trade | checkbox |               |
             | Size               | integer  |               |
         And the following products exist:
-            | name          | price | options                     | attributes            |
-            | Super T-Shirt | 19.99 | T-Shirt size, T-Shirt color | T-Shirt fabric:Wool   |
-            | Black T-Shirt | 19.99 | T-Shirt size                | T-Shirt fabric:Cotton |
-            | Mug           | 5.99  |                             |                       |
-            | Sticker       | 10.00 |                             |                       |
+            | name          | price | options | attributes            |
+            | Super T-Shirt | 19.99 | O2, O1  | T-Shirt fabric:Wool   |
+            | Black T-Shirt | 19.99 | O1      | T-Shirt fabric:Cotton |
+            | Mug           | 5.99  |         |                       |
+            | Sticker       | 10.00 |         |                       |
         And there are following association types:
             | code | name       |
             | PAs1 | Cross sell |

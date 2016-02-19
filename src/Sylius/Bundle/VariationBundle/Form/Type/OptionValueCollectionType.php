@@ -60,7 +60,7 @@ class OptionValueCollectionType extends AbstractType
             }
 
             $builder->add((string) $option->getId(), sprintf('sylius_%s_option_value_choice', $this->variableName), [
-                'label' => $option->getPresentation() ?: $option->getName(),
+                'label' => $option->getName() ?: $option->getCode(),
                 'option' => $option,
                 'property_path' => '['.$i.']',
             ]);

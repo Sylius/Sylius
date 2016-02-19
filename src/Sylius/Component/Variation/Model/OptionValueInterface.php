@@ -44,13 +44,11 @@ interface OptionValueInterface extends ResourceInterface, CodeAwareInterface
     public function setValue($value);
 
     /**
-     * Proxy method to access the name of real option object.
-     * Those methods are mostly useful in templates so you can easily
-     * display option name with their values.
+     * Proxy method to access the presentation of real option object.
      *
-     * @return string The name of option
+     * @return string The code of object
      */
-    public function getName();
+    public function getOptionCode();
 
     /**
      * Proxy method to access the presentation of real option object.

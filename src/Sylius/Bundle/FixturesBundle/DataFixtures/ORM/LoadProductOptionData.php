@@ -33,7 +33,7 @@ class LoadProductOptionData extends DataFixture
         $option = $this->createOption(
             'O1',
             'T-Shirt size',
-            [$this->defaultLocale => 'Size', 'es_ES' => 'Talla'],
+            [$this->defaultLocale => 'T-Shirt Size', 'es_ES' => 'Talla'],
             [
                 'OV1' => [$this->defaultLocale => 'S', 'es_ES' => 'S'],
                 'OV2' => [$this->defaultLocale => 'M', 'es_ES' => 'M'],
@@ -48,7 +48,7 @@ class LoadProductOptionData extends DataFixture
         $option = $this->createOption(
             'O2',
             'T-Shirt color',
-            [$this->defaultLocale => 'Color'],
+            [$this->defaultLocale => 'T-Shirt Color'],
             [
                 'OV6' => [$this->defaultLocale => 'Red', 'es_ES' => 'Rojo'],
                 'OV7' => [$this->defaultLocale => 'Blue', 'es_ES' => 'Azul'],
@@ -61,7 +61,7 @@ class LoadProductOptionData extends DataFixture
         $option = $this->createOption(
             'O3',
             'Sticker size',
-            [$this->defaultLocale => 'Size', 'es_ES' => 'Talla'],
+            [$this->defaultLocale => 'Sticker Size', 'es_ES' => 'Talla'],
             [
                 'OV9' => [$this->defaultLocale => '3"', 'es_ES' => '3"'],
                 'OV10' => [$this->defaultLocale => '5"', 'es_ES' => '5"'],
@@ -74,7 +74,7 @@ class LoadProductOptionData extends DataFixture
         $option = $this->createOption(
             'O4',
             'Mug type',
-            [$this->defaultLocale => 'Type', 'es_ES' => 'Tipo'],
+            [$this->defaultLocale => 'Mug Type', 'es_ES' => 'Tipo'],
             [
                 'OV12' => [$this->defaultLocale => 'Medium mug', 'es_ES' => 'Taza mediana'],
                 'OV13' => [$this->defaultLocale => 'Double mug', 'es_ES' => 'Taza doble'],
@@ -106,12 +106,11 @@ class LoadProductOptionData extends DataFixture
     {
         /* @var $option OptionInterface */
         $option = $this->getProductOptionFactory()->createNew();
-        $option->setName($name);
         $option->setCode($optionCode);
 
         foreach ($presentationTranslation as $locale => $presentation) {
             $option->setCurrentLocale($locale);
-            $option->setPresentation($presentation);
+            $option->setName($presentation);
         }
         $option->setCurrentLocale($this->defaultLocale);
 

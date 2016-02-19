@@ -34,14 +34,14 @@ class OptionTranslationSpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
-    function it_should_not_have_presentation_by_default()
+    function it_should_not_have_name_by_default()
     {
-        $this->getPresentation()->shouldReturn(null);
+        $this->getName()->shouldReturn(null);
     }
 
-    function its_presentation_should_be_mutable()
+    function its_name_should_be_mutable()
     {
-        $this->setPresentation('Size');
-        $this->getPresentation()->shouldReturn('Size');
+        $this->setName('Size');
+        $this->getName()->shouldReturn('Size');
     }
 }

@@ -7,16 +7,16 @@ Feature: Product variants
     Background:
         Given store has default configuration
         And there are following options:
-            | code | name          | presentation | values                          |
-            | O1   | T-Shirt color | Color        | Red[OV1], Blue[OV2], Green[OV3] |
-            | O2   | T-Shirt size  | Size         | S[OV4], M[OV5], L[OV6]          |
+            | code | name          | values                          |
+            | O1   | T-Shirt color | Red[OV1], Blue[OV2], Green[OV3] |
+            | O2   | T-Shirt size  | S[OV4], M[OV5], L[OV6]          |
         And the following products exist:
-            | name           | price | options                     |
-            | Super T-Shirt  | 19.99 | T-Shirt size, T-Shirt color |
-            | Black T-Shirt  | 19.99 | T-Shirt size                |
-            | Sylius T-Shirt | 12.99 | T-Shirt size, T-Shirt color |
-            | Mug            | 5.99  |                             |
-            | Sticker        | 10.00 |                             |
+            | name           | price | options |
+            | Super T-Shirt  | 19.99 | O2, O1  |
+            | Black T-Shirt  | 19.99 | O2      |
+            | Sylius T-Shirt | 12.99 | O2, O1  |
+            | Mug            | 5.99  |         |
+            | Sticker        | 10.00 |         |
         And product "Super T-Shirt" is available in all variations
         And I am logged in as administrator
 
@@ -73,7 +73,7 @@ Feature: Product variants
     Scenario: Generating only missing variants of product
         Given I am creating variant of "Black T-Shirt"
         When I fill in "Price" with "19.99"
-        And I select "L" from "Size"
+        And I select "L" from "T-Shirt size"
         And I press "Create"
         And I press "Generate variants"
         Then I should still be on the page of product with name "Black T-Shirt"
@@ -90,8 +90,8 @@ Feature: Product variants
     Scenario: Generating only missing variants of product with multiple options
         Given I am creating variant of "Sylius T-Shirt"
         When I fill in "Price" with "19.99"
-        And I select "L" from "Size"
-        And I select "Red" from "Color"
+        And I select "L" from "T-Shirt size"
+        And I select "Red" from "T-Shirt color"
         And I press "Create"
         And I press "Generate variants"
         Then I should still be on the page of product with name "Sylius T-Shirt"
@@ -101,7 +101,7 @@ Feature: Product variants
     Scenario: Creating a product variant by selecting option
         Given I am creating variant of "Black T-Shirt"
         When I fill in "Price" with "19.99"
-        And I select "L" from "Size"
+        And I select "L" from "T-Shirt size"
         And I press "Create"
         Then I should be on the page of product "Black T-Shirt"
         And I should see "Variant has been successfully created"
@@ -109,8 +109,8 @@ Feature: Product variants
     Scenario: Creating a product variant by selecting multiple options
         Given I am creating variant of "Sylius T-Shirt"
         When I fill in "Price" with "19.99"
-        And I select "L" from "Size"
-        And I select "Red" from "Color"
+        And I select "L" from "T-Shirt size"
+        And I select "Red" from "T-Shirt color"
         And I press "Create"
         Then I should be on the page of product "Sylius T-Shirt"
         And I should see "Variant has been successfully created"
@@ -118,7 +118,7 @@ Feature: Product variants
     Scenario: Updating the variant price
         Given product "Black T-Shirt" is available in all variations
         And I am on the page of product "Black T-Shirt"
-        When I click "Edit" near "Size: L"
+        When I click "Edit" near "T-Shirt size: L"
         And I fill in "Price" with "33.99"
         And I press "Save changes"
         Then I should be on the page of product "Black T-Shirt"
@@ -128,7 +128,7 @@ Feature: Product variants
     Scenario: Deleting product variant
         Given product "Black T-Shirt" is available in all variations
         And I am on the page of product "Black T-Shirt"
-        When I click "Delete" near "Size: L"
+        When I click "Delete" near "T-Shirt size: L"
         And I click "Delete" from the confirmation modal
         Then I should be on the page of product "Black T-Shirt"
         And I should see "Variant has been successfully deleted"

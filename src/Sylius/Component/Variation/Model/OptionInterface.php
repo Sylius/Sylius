@@ -24,26 +24,6 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 interface OptionInterface extends CodeAwareInterface, TimestampableInterface, OptionTranslationInterface
 {
     /**
-     * Get internal name.
-     *
-     * It is used only in backend so you can easily
-     * separate similar options for different kind of objects.
-     *
-     * For example "T-Shirt size" and "Box size", both may have
-     * presentation "Size", but their internal name should be different.
-     *
-     * @return string
-     */
-    public function getName();
-
-    /**
-     * Set internal name.
-     *
-     * @param string $name
-     */
-    public function setName($name);
-
-    /**
      * Returns all option values.
      *
      * @return Collection|OptionValueInterface[]

@@ -13,12 +13,12 @@ Feature: Checkout starting
             | Clothing[TX1] > T-Shirts[TX2]     |
             | Clothing[TX1] > PHP T-Shirts[TX3] |
         And there are following options:
-            | code | name          | presentation | values                          |
-            | O1   | T-Shirt color | Color        | Red[OV1], Blue[OV2], Green[OV3] |
+            | code | name          | values                          |
+            | O1   | T-Shirt color | Red[OV1], Blue[OV2], Green[OV3] |
         And the following products exist:
-            | name          | price | options       | taxons       | variants selection |
-            | Super T-Shirt | 20.00 | T-Shirt color | T-Shirts     | match              |
-            | PHP Top       | 5.99  |               | PHP T-Shirts |                    |
+            | name          | price | options | taxons       | variants selection |
+            | Super T-Shirt | 20.00 | O1      | T-Shirts     | match              |
+            | PHP Top       | 5.99  |         | PHP T-Shirts |                    |
         And product "Super T-Shirt" is available in all variations
         And all products are assigned to the default channel
 
