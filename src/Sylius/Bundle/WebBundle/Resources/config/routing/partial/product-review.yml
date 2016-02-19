@@ -1,0 +1,25 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_product_reviews:
+    path: /products/{productId}/reviews/
+    defaults:
+        _controller: sylius.controller.product_review:indexAction
+        _sylius:
+            template: 'SyliusWebBundle:Frontend/Review:_list.html.twig'
+            repository:
+                method: findAcceptedBySubjectId
+                arguments: [$productId]
+            permission: false
+
+sylius_product_review_create:
+    path: /products/{productId}/reviews/new
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_review:createAction
+        _sylius:
+            template: 'SyliusWebBundle:Frontend/Review:_form.html.twig'
+            factory:
+                method: createForSubject
+                arguments: [$productId]
+            permission: false

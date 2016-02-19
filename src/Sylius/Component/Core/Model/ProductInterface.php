@@ -16,6 +16,7 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\ChannelsAwareInterface;
 use Sylius\Component\Metadata\Model\MetadataSubjectInterface;
 use Sylius\Component\Product\Model\ProductInterface as BaseProductInterface;
+use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonsAwareInterface;
 
@@ -27,7 +28,8 @@ interface ProductInterface extends
     BaseProductInterface,
     TaxonsAwareInterface,
     ChannelsAwareInterface,
-    MetadataSubjectInterface
+    MetadataSubjectInterface,
+    ReviewableInterface
 {
     /*
      * Variant selection methods.
@@ -107,8 +109,6 @@ interface ProductInterface extends
     public function setPrice($price);
 
     /**
-     * Get address zone restriction.
-     *
      * @return ZoneInterface
      */
     public function getRestrictedZone();

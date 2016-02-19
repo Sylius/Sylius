@@ -569,6 +569,18 @@ class CoreContext extends DefaultContext
     }
 
     /**
+     * @Given /^customer "([^"]*)" has been deleted$/
+     */
+    public function customerHasBeenDeleted($customerEmail)
+    {
+        $this->getSession()->visit($this->generatePageUrl('sylius_backend_customer_index'));
+
+        $tr = $this->assertSession()->elementExists('css', sprintf('table tbody tr:contains("%s")', $customerEmail));
+        $locator = sprintf('button:contains("%s")', 'Delete');
+        $tr->find('css', $locator)->press();
+    }
+
+    /**
      * Create an address instance from string.
      *
      * @param string $string

@@ -248,6 +248,8 @@ sylius:
             index: Reports
         role:
             index: Roles
+        review:
+            index: Reviews
         route:
             index: Routes
         sales: Sales
@@ -673,6 +675,24 @@ sylius:
         taxes: Taxes
         total: Total
         update_header: Editing order
+    review:
+        create: New review
+        index: Product reviews
+        manage: Manage reviews
+        no_reviews: There are no reviews.
+        id: ID
+        subject: Subject
+        title: Title
+        status: Status
+        rating: Rating
+        author: Author
+        guest: Guest
+        created_at: Created at
+        details: Review details
+        editing: Editing review
+        header: Product reviews
+        product_review: Product review
+        no_results: There are no reviews for this product.
     order_item:
         product: Item
         quantity: Qty
@@ -782,6 +802,9 @@ sylius:
         options: Options
         original_price: Original price
         price: Retail price
+        attributes: Attributes
+        rating: Rating
+        restricted_zone: Restricted zone
         remove_attribute: Remove attribute
         restricted_zone: Restricted zone
         shipping_category: Shipping category

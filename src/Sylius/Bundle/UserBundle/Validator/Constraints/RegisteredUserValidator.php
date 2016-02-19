@@ -17,6 +17,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class RegisteredUserValidator extends ConstraintValidator
 {

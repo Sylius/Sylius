@@ -12,31 +12,31 @@
 namespace Sylius\Bundle\UserBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Bundle\UserBundle\Form\EventSubscriber\CustomerRegistrationFormSubscriber;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  * @author Dmitrijs Balabka <dmitry.balabka@gmail.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class CustomerGuestType extends AbstractResourceType
 {
     /**
-     * @var RepositoryInterface
+     * @var EventSubscriberInterface
      */
-    private $customerRepository;
+    private $guestCustomerSubscriber;
 
     /**
-     * @param string              $dataClass
-     * @param array               $validationGroups
-     * @param RepositoryInterface $customerRepository
+     * @param string $dataClass
+     * @param array $validationGroups
+     * @param EventSubscriberInterface $guestCustomerSubscriber
      */
-    public function __construct($dataClass, array $validationGroups, RepositoryInterface $customerRepository)
+    public function __construct($dataClass, array $validationGroups, EventSubscriberInterface $guestCustomerSubscriber)
     {
         parent::__construct($dataClass, $validationGroups);
 
-        $this->customerRepository = $customerRepository;
+        $this->guestCustomerSubscriber = $guestCustomerSubscriber;
     }
 
     /**
@@ -48,7 +48,7 @@ class CustomerGuestType extends AbstractResourceType
             ->add('email', 'email', [
                 'label' => 'sylius.form.customer.email',
             ])
-            ->addEventSubscriber(new CustomerRegistrationFormSubscriber($this->customerRepository))
+            ->addEventSubscriber($this->guestCustomerSubscriber)
             ->setDataLocked(false)
         ;
     }

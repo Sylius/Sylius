@@ -178,7 +178,11 @@ sylius_backend_content:
 sylius_backend_report:
     resource: @SyliusWebBundle/Resources/config/routing/backend/report.yml
     prefix: /reports
-    
+
 sylius_backend_metadata_container:
     resource: @SyliusWebBundle/Resources/config/routing/backend/metadata_container.yml
     prefix: /metadata
+
+sylius_backend_product_review:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/product_review.yml
+    prefix: /product-reviews

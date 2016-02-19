@@ -192,6 +192,12 @@
                     </td>
                 </tr>
                 {% endif %}
+                {% if 0 != product.averageRating %}
+                <tr>
+                    <td>{{ 'sylius.product.rating'|trans }}</td>
+                    <td>{{ product.averageRating|round(2, 'floor') }}</td>
+                </tr>
+                {% endif %}
             </tbody>
         </table>
     </div>

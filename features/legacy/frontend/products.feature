@@ -39,6 +39,9 @@ Feature: Products
             | Sylius Tee       |
             | Black T-Shirt    |
             | Doctrine T-Shirt |
+        And there are following reviews:
+            | title       | rating | comment               | author      | product         | subject type |
+            | Lorem ipsum | 5      | Lorem ipsum dolor sit | bar@foo.com | Symfony T-Shirt | product      |
 
     Scenario: Browsing products by taxon
         Given I am on the store homepage
@@ -71,3 +74,7 @@ Feature: Products
     Scenario: Display product attributes
         Given I am on the product page for "Super T-shirt"
         Then I should see "Wool"
+
+    Scenario: Receiving exception while entering page for product with empty slug
+        Given I go to page for product with empty slug
+        Then the response status code should be 404

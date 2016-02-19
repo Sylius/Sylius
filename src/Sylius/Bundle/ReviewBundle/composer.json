@@ -1,0 +1,63 @@
+{
+    "name": "sylius/review-bundle",
+    "type": "symfony-bundle",
+    "description": "Review system for Symfony2 ecommerce applications.",
+    "keywords": ["review", "shop", "webshop", "ecommerce", "sylius"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Mateusz Zalewski",
+            "email": "mateusz.zalewski@lakion.com"
+        },
+        {
+            "name": "Grzegorz Sadowski",
+            "email": "grzegorz.sadowski@lakion.com"
+        },
+        {
+            "name": "Daniel Richter",
+            "email": "nexyz9@gmail.com"
+        },
+        {
+            "name": "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": "^5.5.9|^7.0",
+
+        "symfony/framework-bundle": "^2.7.7",
+        "stof/doctrine-extensions-bundle": "~1.1",
+        "sylius/review": "0.17.*",
+        "sylius/user-bundle": "0.17.*",
+        "sylius/resource-bundle": "0.17.*"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^2.4",
+        "symfony/form": "^2.7",
+        "symfony/validator": "^2.7"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Bundle\\ReviewBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Bundle\\ReviewBundle\\spec\\": "spec/" }
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.17-dev"
+        }
+    }
+}
