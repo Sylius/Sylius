@@ -354,4 +354,22 @@ class Product extends BaseProduct implements ProductInterface
     {
         $this->mainTaxon = $mainTaxon;
     }
+
+    public function getAvailableOptions()
+    {
+        $options = clone $this->getOptions();
+
+        foreach ($options as $option) {
+            $option->getValues()->clear();
+            foreach ($this->getVariants() as $variant) {
+                foreach ($variant->getOptions() as $optionValue) {
+                    if($option->getName() == $optionValue->getOption()->getName()){
+                        $option->addValue($optionValue);
+                    }
+                }
+            }
+        }
+
+        return $options;
+    }
 }
