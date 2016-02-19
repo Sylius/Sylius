@@ -1,8 +1,8 @@
 @promotion
-Feature: Apply percentage discount promotion on order
+Feature: Receiving percentage discount promotion on order
     In order to pay proper amount while buying promoted goods
     As a Customer
-    I want to have promotions applied to my cart
+    I want to receive discount for my purchase
 
     Background:
         Given the store is operating on a single channel in "France"
