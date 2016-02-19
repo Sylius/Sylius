@@ -60,10 +60,9 @@ class PromotionContextSpec extends ObjectBehavior
         ChannelInterface $channel,
         PromotionInterface $promotion
     ) {
-        $testPromotionFactory->create('Super promotion')->willReturn($promotion);
-
         $sharedStorage->get('channel')->willReturn($channel);
-        $promotion->addChannel($channel)->shouldBeCalled();
+
+        $testPromotionFactory->createForChannel('Super promotion', $channel)->willReturn($promotion);
 
         $promotionRepository->add($promotion)->shouldBeCalled();
         $sharedStorage->set('promotion', $promotion)->shouldBeCalled();

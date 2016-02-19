@@ -11,9 +11,8 @@
 
 namespace Sylius\Component\Core\Test\Factory;
 
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
-use Sylius\Component\Promotion\Model\ActionInterface;
-use Sylius\Component\Promotion\Model\RuleInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -26,4 +25,12 @@ interface TestPromotionFactoryInterface
      * @return PromotionInterface
      */
     public function create($name);
+
+    /**
+     * @param string $name
+     * @param ChannelInterface $channel
+     *
+     * @return PromotionInterface
+     */
+    public function createForChannel($name, ChannelInterface $channel);
 }

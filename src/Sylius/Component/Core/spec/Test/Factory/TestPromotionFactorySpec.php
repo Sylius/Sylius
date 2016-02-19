@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Core\Test\Factory;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Test\Factory\TestPromotionFactoryInterface;
 use Sylius\Component\Promotion\Model\ActionInterface;
@@ -39,7 +40,7 @@ class TestPromotionFactorySpec extends ObjectBehavior
         $this->shouldImplement(TestPromotionFactoryInterface::class);
     }
 
-    function it_creates_promotion_based_on_provided_data($promotionFactory, PromotionInterface $promotion)
+    function it_creates_promotion_with_given_name($promotionFactory, PromotionInterface $promotion)
     {
         $promotionFactory->createNew()->willReturn($promotion);
         $promotion->setName('Super promotion')->shouldBeCalled();
@@ -49,5 +50,21 @@ class TestPromotionFactorySpec extends ObjectBehavior
         $promotion->setEndsAt(Argument::type('\DateTime'))->shouldBeCalled();
 
         $this->create('Super promotion')->shouldReturn($promotion);
+    }
+
+    function it_creates_promotion_with_given_name_and_channel(
+        $promotionFactory,
+        ChannelInterface $channel,
+        PromotionInterface $promotion
+    ) {
+        $promotionFactory->createNew()->willReturn($promotion);
+        $promotion->setName('Super promotion')->shouldBeCalled();
+        $promotion->setCode('super_promotion')->shouldBeCalled();
+        $promotion->setDescription('Promotion Super promotion')->shouldBeCalled();
+        $promotion->setStartsAt(Argument::type('\DateTime'))->shouldBeCalled();
+        $promotion->setEndsAt(Argument::type('\DateTime'))->shouldBeCalled();
+        $promotion->addChannel($channel)->shouldBeCalled();
+
+        $this->createForChannel('Super promotion', $channel)->shouldReturn($promotion);
     }
 }

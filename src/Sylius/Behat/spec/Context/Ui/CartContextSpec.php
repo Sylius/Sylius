@@ -12,6 +12,7 @@
 namespace spec\Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
+use PhpSpec\Exception\Example\NotEqualException;
 use PhpSpec\ObjectBehavior;
 use Sylius\Behat\Context\Ui\CartContext;
 use Sylius\Behat\Page\Cart\CartSummaryPage;
@@ -47,6 +48,14 @@ class CartContextSpec extends ObjectBehavior
         $this->myCartTotalShouldBe('$100.00');
     }
 
+    function it_throws_not_equal_exception_if_grand_total_is_incorrect(CartSummaryPage $cartSummaryPage)
+    {
+        $cartSummaryPage->open()->shouldBeCalled();
+        $cartSummaryPage->getGrandTotal()->willReturn('$90.00');
+
+        $this->shouldThrow(NotEqualException::class)->during('myCartTotalShouldBe', ['$100.00']);
+    }
+
     function it_checks_if_cart_has_given_tax_total(CartSummaryPage $cartSummaryPage)
     {
         $cartSummaryPage->open()->shouldBeCalled();
@@ -55,11 +64,27 @@ class CartContextSpec extends ObjectBehavior
         $this->myCartTaxesShouldBe('$50.00');
     }
 
+    function it_throws_not_equal_exception_if_tax_total_is_incorrect(CartSummaryPage $cartSummaryPage)
+    {
+        $cartSummaryPage->open()->shouldBeCalled();
+        $cartSummaryPage->getTaxTotal()->willReturn('$40.00');
+
+        $this->shouldThrow(NotEqualException::class)->during('myCartTaxesShouldBe', ['$50.00']);
+    }
+
     function it_checks_if_cart_has_given_promotion_total(CartSummaryPage $cartSummaryPage)
     {
         $cartSummaryPage->open()->shouldBeCalled();
         $cartSummaryPage->getPromotionTotal()->willReturn('$50.00');
 
         $this->myCartPromotionsShouldBe('$50.00');
+    }
+
+    function it_throws_not_equal_exception_if_promotion_total_is_incorrect(CartSummaryPage $cartSummaryPage)
+    {
+        $cartSummaryPage->open()->shouldBeCalled();
+        $cartSummaryPage->getPromotionTotal()->willReturn('$40.00');
+
+        $this->shouldThrow(NotEqualException::class)->during('myCartPromotionsShouldBe', ['$50.00']);
     }
 }

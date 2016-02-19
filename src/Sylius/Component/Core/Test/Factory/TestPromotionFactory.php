@@ -11,9 +11,7 @@
 
 namespace Sylius\Component\Core\Test\Factory;
 
-use Sylius\Component\Core\Model\PromotionInterface;
-use Sylius\Component\Promotion\Model\ActionInterface;
-use Sylius\Component\Promotion\Model\RuleInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
@@ -46,6 +44,17 @@ class TestPromotionFactory implements TestPromotionFactoryInterface
         $promotion->setDescription('Promotion '.$name);
         $promotion->setStartsAt(new \DateTime('-3 days'));
         $promotion->setEndsAt(new \DateTime('+3 days'));
+
+        return $promotion;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createForChannel($name, ChannelInterface $channel)
+    {
+        $promotion = $this->create($name);
+        $promotion->addChannel($channel);
 
         return $promotion;
     }
