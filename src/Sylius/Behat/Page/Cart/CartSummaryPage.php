@@ -23,8 +23,9 @@ class CartSummaryPage extends SymfonyPage
      */
     protected $elements = [
         'grand total' => '#cart-summary td:contains("Grand total")',
-        'tax total' => '#cart-summary td:contains("Tax total")',
+        'promotion total' => '#cart-summary td:contains("Promotion total")',
         'shipping total' => '#cart-summary td:contains("Shipping total")',
+        'tax total' => '#cart-summary td:contains("Tax total")',
     ];
 
     /**
@@ -55,11 +56,24 @@ class CartSummaryPage extends SymfonyPage
         return trim(str_replace('Tax total:', '', $taxTotalElement->getText()));
     }
 
+    /**
+     * @return string
+     */
     public function getShippingTotal()
     {
         $shippingTotalElement = $this->getElement('shipping total');
 
         return trim(str_replace('Shipping total:', '', $shippingTotalElement->getText()));
+    }
+
+    /**
+     * @return string
+     */
+    public function getPromotionTotal()
+    {
+        $shippingTotalElement = $this->getElement('promotion total');
+
+        return trim(str_replace('Promotion total:', '', $shippingTotalElement->getText()));
     }
 
     /**

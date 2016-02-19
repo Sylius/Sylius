@@ -23,6 +23,8 @@
         <parameter key="sylius.random_invoice_number_generator.class">Sylius\Component\Core\Test\Services\RandomInvoiceNumberGenerator</parameter>
         <parameter key="sylius.behat.factory.default_france_channel.class">Sylius\Component\Core\Test\Services\DefaultFranceChannelFactory</parameter>
         <parameter key="sylius.behat.factory.default_channel.class">Sylius\Component\Core\Test\Services\DefaultChannelFactory</parameter>
+
+        <parameter key="sylius.test.factory.promotion.class">Sylius\Component\Core\Test\Factory\TestPromotionFactory</parameter>
     </parameters>
 
     <services>
@@ -55,6 +57,10 @@
         <service id="sylius.behat.factory.default_channel" class="%sylius.behat.factory.default_channel.class%">
             <argument type="service" id="sylius.factory.channel" />
             <argument type="service" id="sylius.repository.channel" />
+        </service>
+
+        <service id="sylius.test.factory.promotion" class="%sylius.test.factory.promotion.class%">
+            <argument type="service" id="sylius.factory.promotion" />
         </service>
     </services>
 

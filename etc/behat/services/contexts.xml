@@ -20,6 +20,7 @@
         <parameter key="sylius.behat.context.setup.security.class">Sylius\Behat\Context\Setup\SecurityContext</parameter>
         <parameter key="sylius.behat.context.setup.user.class">Sylius\Behat\Context\Setup\UserContext</parameter>
         <parameter key="sylius.behat.context.setup.product.class">Sylius\Behat\Context\Setup\ProductContext</parameter>
+        <parameter key="sylius.behat.context.setup.promotion.class">Sylius\Behat\Context\Setup\PromotionContext</parameter>
         <parameter key="sylius.behat.context.setup.shipping.class">Sylius\Behat\Context\Setup\ShippingContext</parameter>
         <parameter key="sylius.behat.context.setup.zone.class">Sylius\Behat\Context\Setup\ZoneContext</parameter>
         <parameter key="sylius.behat.context.setup.tax.class">Sylius\Behat\Context\Setup\TaxContext</parameter>
@@ -87,6 +88,15 @@
             <argument type="service" id="sylius.repository.product_variant" container="symfony" />
             <argument type="service" id="sylius.factory.product" container="symfony" />
             <argument type="service" id="sylius.factory.product_variant" container="symfony" />
+            <argument type="service" id="doctrine.orm.entity_manager" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.setup.promotion" class="%sylius.behat.context.setup.promotion.class%" scope="scenario">
+            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
+            <argument type="service" id="sylius.factory.promotion_action" container="symfony" />
+            <argument type="service" id="sylius.test.factory.promotion" container="symfony" />
+            <argument type="service" id="sylius.repository.promotion" container="symfony" />
             <argument type="service" id="doctrine.orm.entity_manager" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>

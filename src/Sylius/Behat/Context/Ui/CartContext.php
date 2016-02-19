@@ -122,4 +122,14 @@ final class CartContext implements Context
 
         expect($this->cartSummaryPage->getShippingTotal())->toBe($shippingTotal);
     }
+
+    /**
+     * @Then my cart promotions should be :promotionsTotal
+     */
+    public function myCartPromotionsShouldBe($promotionsTotal)
+    {
+        $this->cartSummaryPage->open();
+
+        expect($this->cartSummaryPage->getPromotionTotal())->toBe($promotionsTotal);
+    }
 }
