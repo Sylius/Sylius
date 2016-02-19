@@ -21,9 +21,9 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 class ActionFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $actionFactory)
+    function let(FactoryInterface $decoratedFactory)
     {
-        $this->beConstructedWith($actionFactory);
+        $this->beConstructedWith($decoratedFactory);
     }
 
     function it_is_initializable()
@@ -36,16 +36,16 @@ class ActionFactorySpec extends ObjectBehavior
         $this->shouldImplement(ActionFactoryInterface::class);
     }
 
-    function it_creates_new_action_with_default_action_factory($actionFactory, ActionInterface $action)
+    function it_creates_new_action_with_default_action_factory($decoratedFactory, ActionInterface $action)
     {
-        $actionFactory->createNew()->willReturn($action);
+        $decoratedFactory->createNew()->willReturn($action);
 
         $this->createNew()->shouldReturn($action);
     }
 
-    function it_creates_new_fixed_discount_action_with_given_amount($actionFactory, ActionInterface $action)
+    function it_creates_new_fixed_discount_action_with_given_amount($decoratedFactory, ActionInterface $action)
     {
-        $actionFactory->createNew()->willReturn($action);
+        $decoratedFactory->createNew()->willReturn($action);
 
         $action->setType(ActionInterface::TYPE_FIXED_DISCOUNT)->shouldBeCalled();
         $action->setConfiguration(['amount' => 1000])->shouldBeCalled();

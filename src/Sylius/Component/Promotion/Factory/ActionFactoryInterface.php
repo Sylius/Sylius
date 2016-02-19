@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Promotion\Factory;
 
-use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Promotion\Model\ActionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
@@ -22,7 +22,7 @@ interface ActionFactoryInterface extends FactoryInterface
     /**
      * @param int $amount
      *
-     * @return PromotionInterface
+     * @return ActionInterface
      */
     public function createFixedDiscount($amount);
 }

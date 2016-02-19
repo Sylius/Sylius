@@ -22,14 +22,14 @@ class ActionFactory implements ActionFactoryInterface
     /**
      * @var FactoryInterface
      */
-    private $actionFactory;
+    private $decoratedFactory;
 
     /**
-     * @param FactoryInterface $actionFactory
+     * @param FactoryInterface $decoratedFactory
      */
-    public function __construct($actionFactory)
+    public function __construct(FactoryInterface $decoratedFactory)
     {
-        $this->actionFactory = $actionFactory;
+        $this->decoratedFactory = $decoratedFactory;
     }
 
     /**
@@ -37,7 +37,7 @@ class ActionFactory implements ActionFactoryInterface
      */
     public function createNew()
     {
-        return $this->actionFactory->createNew();
+        return $this->decoratedFactory->createNew();
     }
 
     /**

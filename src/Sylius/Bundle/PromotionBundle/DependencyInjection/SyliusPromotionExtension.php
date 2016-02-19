@@ -18,6 +18,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -80,10 +81,10 @@ class SyliusPromotionExtension extends AbstractResourceExtension
      */
     private function overwriteActionFactory(ContainerBuilder $container)
     {
-        $oldActionFactory = $container->getDefinition('sylius.factory.promotion_action');
-        $newActionFactoryDefinition = new Definition(ActionFactory::class);
+        $baseFactoryDefinition = new Definition(Factory::class, [new Parameter('sylius.model.promotion_action.class')]);
+        $promotionActionFactoryClass = $container->getParameter('sylius.factory.promotion_action.class');
+        $decoratedPromotionActionFactoryDefinition = new Definition($promotionActionFactoryClass, [$baseFactoryDefinition]);
 
-        $actionFactory = $container->setDefinition('sylius.factory.promotion_action', $newActionFactoryDefinition);
-        $actionFactory->addArgument($oldActionFactory);
+        $container->setDefinition('sylius.factory.promotion_action', $decoratedPromotionActionFactoryDefinition);
     }
 }
