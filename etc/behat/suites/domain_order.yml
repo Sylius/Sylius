@@ -1,0 +1,19 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        domain_order:
+            contexts_as_services:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.payment
+                - sylius.behat.context.setup.shipping
+                - sylius.behat.context.setup.customer
+                - sylius.behat.context.setup.order
+                - sylius.behat.context.setup.addressing
+
+            filters:
+                tags: @order && @domain
