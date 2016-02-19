@@ -13,29 +13,24 @@ namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
- * Payment processor.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class PaymentProcessor implements PaymentProcessorInterface
 {
     /**
-     * Payment repository.
-     *
-     * @var FactoryInterface
+     * @var PaymentFactoryInterface
      */
     protected $paymentFactory;
 
     /**
-     * Constructor.
-     *
-     * @param FactoryInterface $paymentFactory
+     * @param PaymentFactoryInterface $paymentFactory
      */
-    public function __construct(FactoryInterface $paymentFactory)
+    public function __construct(PaymentFactoryInterface $paymentFactory)
     {
         $this->paymentFactory = $paymentFactory;
     }
@@ -43,15 +38,11 @@ class PaymentProcessor implements PaymentProcessorInterface
     /**
      * {@inheritdoc}
      */
-    public function createPayment(OrderInterface $order)
+    public function processOrderPayments(OrderInterface $order)
     {
         /** @var $payment PaymentInterface */
-        $payment = $this->paymentFactory->createNew();
-        $payment->setCurrency($order->getCurrency());
-        $payment->setAmount($order->getTotal());
+        $payment = $this->paymentFactory->createWithAmountAndCurrency($order->getTotal(), $order->getCurrency());
 
         $order->addPayment($payment);
-
-        return $payment;
     }
 }

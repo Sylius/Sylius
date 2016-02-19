@@ -21,9 +21,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 interface PaymentProcessorInterface
 {
     /**
-     * Create payment.
-     *
      * @param OrderInterface $order
      */
-    public function createPayment(OrderInterface $order);
+    public function processOrderPayments(OrderInterface $order);
 }
