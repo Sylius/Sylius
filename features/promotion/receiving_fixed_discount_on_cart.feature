@@ -1,5 +1,5 @@
 @promotion
-Feature: Apply fixed discount promotion on order
+Feature: Receiving fixed discount on cart
     In order to pay proper amount while buying promoted goods
     As a Visitor
     I want to have promotions applied to my cart

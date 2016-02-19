@@ -1,4 +1,4 @@
-@channels
+@channel
 Feature: Fake multi-channel support
     In order to see how my store looks on a different channels
     As a Developer

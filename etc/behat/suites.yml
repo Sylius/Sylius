@@ -31,6 +31,6 @@ imports:
     - suites/legacy/taxonomies.yml
     - suites/legacy/users.yml
     - suites/ui_cart.yml
-    - suites/ui_channels.yml
+    - suites/ui_channel.yml
     - suites/ui_checkout.yml
     - suites/ui_promotion.yml
