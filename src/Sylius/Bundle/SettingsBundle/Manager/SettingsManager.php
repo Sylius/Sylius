@@ -15,8 +15,8 @@ use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\SettingsBundle\Event\SettingsEvent;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
-use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilder;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -30,7 +30,7 @@ use Symfony\Component\Validator\ValidatorInterface;
 class SettingsManager implements SettingsManagerInterface
 {
     /**
-     * @var SchemaRegistryInterface
+     * @var ServiceRegistryInterface
      */
     protected $schemaRegistry;
 
@@ -72,7 +72,7 @@ class SettingsManager implements SettingsManagerInterface
     protected $eventDispatcher;
 
     /**
-     * @param SchemaRegistryInterface  $schemaRegistry
+     * @param ServiceRegistryInterface  $schemaRegistry
      * @param ObjectManager            $parameterManager
      * @param RepositoryInterface      $parameterRepository
      * @param FactoryInterface         $parameterFactory
@@ -81,7 +81,7 @@ class SettingsManager implements SettingsManagerInterface
      * @param EventDispatcherInterface $eventDispatcher
      */
     public function __construct(
-        SchemaRegistryInterface $schemaRegistry,
+        ServiceRegistryInterface $schemaRegistry,
         ObjectManager $parameterManager,
         RepositoryInterface $parameterRepository,
         FactoryInterface $parameterFactory,
@@ -114,7 +114,7 @@ class SettingsManager implements SettingsManagerInterface
             $this->cache->save($namespace, $parameters);
         }
 
-        $schema = $this->schemaRegistry->getSchema($namespace);
+        $schema = $this->schemaRegistry->get($namespace);
 
         $settingsBuilder = new SettingsBuilder();
         $schema->buildSettings($settingsBuilder);
@@ -141,7 +141,7 @@ class SettingsManager implements SettingsManagerInterface
      */
     public function saveSettings($namespace, Settings $settings)
     {
-        $schema = $this->schemaRegistry->getSchema($namespace);
+        $schema = $this->schemaRegistry->get($namespace);
 
         $settingsBuilder = new SettingsBuilder();
         $schema->buildSettings($settingsBuilder);
