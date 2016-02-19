@@ -114,13 +114,13 @@ final class ProductContext implements Context
 
     /**
      * @Given /^the store has a product "([^"]+)"$/
-     * @Given /^the store has a product "([^"]+)" priced at "(?:€|£|\$)([^"]+)"$/
+     * @Given /^the store has a product "([^"]+)" priced at ("[^"]+")$/
      */
-    public function storeHasAProductPricedAt($productName, $price = '0.00')
+    public function storeHasAProductPricedAt($productName, $price = 0)
     {
         $product = $this->productFactory->createNew();
         $product->setName($productName);
-        $product->setPrice($this->getPriceFromString($price));
+        $product->setPrice($price);
         $product->setDescription('Awesome '.$productName);
 
         $channel = $this->sharedStorage->get('channel');
