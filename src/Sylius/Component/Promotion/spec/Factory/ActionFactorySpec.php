@@ -52,4 +52,14 @@ class ActionFactorySpec extends ObjectBehavior
 
         $this->createFixedDiscount(1000)->shouldReturn($action);
     }
+
+    function it_creates_percentage_discount_action_with_given_discount_rate($decoratedFactory, ActionInterface $action)
+    {
+        $decoratedFactory->createNew()->willReturn($action);
+
+        $action->setType(ActionInterface::TYPE_PERCENTAGE_DISCOUNT)->shouldBeCalled();
+        $action->setConfiguration(['percentage' => 0.1])->shouldBeCalled();
+
+        $this->createPercentageDiscount(0.1)->shouldReturn($action);
+    }
 }
