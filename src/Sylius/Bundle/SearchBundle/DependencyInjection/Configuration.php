@@ -68,6 +68,7 @@ class Configuration implements ConfigurationInterface
         $node
             ->children()
                 ->arrayNode('filters')
+                    ->performNoDeepMerging()
                     ->isRequired()
                     ->children()
                         ->arrayNode('pre_search_filter')
