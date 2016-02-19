@@ -65,10 +65,7 @@
         </service>
 
         <service id="sylius.behat.context.setup.security" class="%sylius.behat.context.setup.security.class%" scope="scenario">
-            <argument type="service" id="sylius.behat.security" container="symfony" />
-            <argument type="service" id="mink.default_session" />
-            <argument>%mink.parameters%</argument>
-            <argument type="service" id="sylius.behat.page.home" />
+            <argument type="service" id="sylius.behat.security" />
             <argument type="service" id="sylius.test.factory.user" container="symfony" />
             <argument type="service" id="sylius.repository.user" container="symfony" />
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />

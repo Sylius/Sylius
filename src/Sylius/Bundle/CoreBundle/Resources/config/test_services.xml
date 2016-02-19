@@ -17,7 +17,6 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
         <parameter key="sylius.behat.shared_storage.class">Sylius\Component\Core\Test\Services\SharedStorage</parameter>
-        <parameter key="sylius.behat.security.class">Sylius\Bundle\CoreBundle\Test\Services\SecurityService</parameter>
         <parameter key="sylius.test.factory.user.class">Sylius\Bundle\CoreBundle\Test\Factory\TestUserFactory</parameter>
         <parameter key="sylius.payment_method_name_to_gateway_converter.class">Sylius\Bundle\CoreBundle\Test\Services\PaymentMethodNameToGatewayConverter</parameter>
 
@@ -28,10 +27,6 @@
 
     <services>
         <service id="sylius.behat.shared_storage" class="%sylius.behat.shared_storage.class%" />
-        <service id="sylius.behat.security" class="%sylius.behat.security.class%">
-            <argument type="service" id="sylius.repository.user" />
-            <argument type="service" id="session" />
-        </service>
 
         <service id="sylius.test.factory.user" class="%sylius.test.factory.user.class%">
             <argument type="service" id="sylius.factory.customer" />

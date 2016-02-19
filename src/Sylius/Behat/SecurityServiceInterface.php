@@ -9,23 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Test\Services;
-
-use Behat\Mink\Session;
+namespace Sylius\Behat;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 interface SecurityServiceInterface
 {
-    const DEFAULT_PROVIDER_KEY = 'main';
-
     /**
      * @param string $email
-     * @param Session $minkSession
-     * @param string $providerKey
      *
      * @throws \InvalidArgumentException
      */
-    public function logIn($email, Session $minkSession, $providerKey = self::DEFAULT_PROVIDER_KEY);
+    public function logIn($email);
 }
