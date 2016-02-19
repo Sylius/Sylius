@@ -154,8 +154,7 @@
         </service>
 
         <service id="sylius.behat.context.ui.channel" class="%sylius.behat.context.ui.channel.class%" scope="scenario">
-            <argument type="service" id="mink.default_session" />
-            <argument>%mink.parameters%</argument>
+            <argument type="service" id="sylius.behat.channel_context_setter" />
             <tag name="sylius.behat.context" />
         </service>
 

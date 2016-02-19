@@ -18,6 +18,7 @@
     </imports>
     <parameters>
         <parameter key="sylius.behat.cookie_setter.class">Sylius\Behat\CookieSetter</parameter>
+        <parameter key="sylius.behat.channel_context_setter.class">Sylius\Behat\ChannelContextSetter</parameter>
         <parameter key="sylius.behat.page.class">Sylius\Behat\Page\Page</parameter>
         <parameter key="sylius.behat.symfony_page.class">Sylius\Behat\Page\SymfonyPage</parameter>
     </parameters>
@@ -27,6 +28,10 @@
         <service id="sylius.behat.cookie_setter" class="%sylius.behat.cookie_setter.class%" scope="scenario" public="false">
             <argument type="service" id="mink.default_session" />
             <argument>%mink.parameters%</argument>
+        </service>
+
+        <service id="sylius.behat.channel_context_setter" class="%sylius.behat.channel_context_setter.class%" scope="scenario" public="false">
+            <argument type="service" id="sylius.behat.cookie_setter" />
         </service>
 
         <service id="sylius.behat.page" class="%sylius.behat.page.class%" abstract="true" scope="scenario" public="false">

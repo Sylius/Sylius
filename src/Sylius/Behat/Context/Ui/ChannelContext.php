@@ -12,10 +12,7 @@
 namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
-use Behat\Mink\Mink;
-use Behat\Mink\Session;
-use Behat\MinkExtension\Context\MinkAwareContext;
-use Behat\Symfony2Extension\Driver\KernelDriver;
+use Sylius\Behat\ChannelContextSetterInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 
 /**
@@ -24,27 +21,16 @@ use Sylius\Component\Core\Model\ChannelInterface;
 final class ChannelContext implements Context
 {
     /**
-     * @var Session
+     * @var ChannelContextSetterInterface
      */
-    private $minkSession;
+    private $channelContextSetter;
 
     /**
-     * @var array
+     * @param ChannelContextSetterInterface $channelContextSetter
      */
-    private $minkParameters;
-
-    /**
-     * @param Session $minkSession
-     * @param array $minkParameters
-     */
-    public function __construct(Session $minkSession, array $minkParameters)
+    public function __construct(ChannelContextSetterInterface $channelContextSetter)
     {
-        if (!isset($minkParameters['base_url'])) {
-            $minkParameters['base_url'] = null;
-        }
-
-        $this->minkSession = $minkSession;
-        $this->minkParameters = $minkParameters;
+        $this->channelContextSetter = $channelContextSetter;
     }
 
     /**
@@ -52,21 +38,6 @@ final class ChannelContext implements Context
      */
     public function iChangeMyCurrentChannelTo(ChannelInterface $channel)
     {
-        $this->prepareSessionIfNeeded();
-
-        $this->minkSession->setCookie('_channel_code', $channel->getCode());
-    }
-
-    private function prepareSessionIfNeeded()
-    {
-        if ($this->minkSession->getDriver() instanceof KernelDriver) {
-            return;
-        }
-
-        if (false !== strpos($this->minkSession->getCurrentUrl(), $this->minkParameters['base_url'])) {
-            return;
-        }
-
-        $this->minkSession->visit(rtrim($this->minkParameters['base_url'], '/') . '/');
+        $this->channelContextSetter->setChannel($channel);
     }
 }
