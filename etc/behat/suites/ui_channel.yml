@@ -3,7 +3,7 @@
 
 default:
     suites:
-        ui_channels:
+        ui_channel:
             contexts_as_services:
                 - sylius.behat.context.hook.doctrine_orm
 
@@ -15,4 +15,4 @@ default:
                 - sylius.behat.context.ui.product
 
             filters:
-                tags: @channels && @ui
+                tags: @channel && @ui
