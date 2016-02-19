@@ -1,0 +1,54 @@
+<?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Sylius\Component\Promotion\Factory;
+
+use Sylius\Component\Promotion\Model\ActionInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
+
+/**
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ */
+class ActionFactory implements ActionFactoryInterface
+{
+    /**
+     * @var FactoryInterface
+     */
+    private $actionFactory;
+
+    /**
+     * @param FactoryInterface $actionFactory
+     */
+    public function __construct($actionFactory)
+    {
+        $this->actionFactory = $actionFactory;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createNew()
+    {
+        return $this->actionFactory->createNew();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createFixedDiscount($amount)
+    {
+        $action = $this->createNew();
+        $action->setType(ActionInterface::TYPE_FIXED_DISCOUNT);
+        $action->setConfiguration(['amount' => $amount]);
+
+        return $action;
+    }
+}
