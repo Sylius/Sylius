@@ -14,3 +14,5 @@ payum:
     gateways:
         offline:
             offline: ~
+        cash_on_delivery:
+            offline: ~
