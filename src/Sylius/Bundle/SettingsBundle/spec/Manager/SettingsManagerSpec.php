@@ -15,7 +15,7 @@ use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
-use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -27,7 +27,7 @@ use Symfony\Component\Validator\ValidatorInterface;
 class SettingsManagerSpec extends ObjectBehavior
 {
     function let(
-        SchemaRegistryInterface $registry,
+        ServiceRegistryInterface $registry,
         Cache $cache,
         ObjectManager $manager,
         RepositoryInterface $repository,
