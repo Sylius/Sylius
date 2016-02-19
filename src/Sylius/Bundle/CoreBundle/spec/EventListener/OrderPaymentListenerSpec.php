@@ -16,7 +16,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\PaymentProcessorInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -24,9 +23,9 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class OrderPaymentListenerSpec extends ObjectBehavior
 {
-    function let(PaymentProcessorInterface $processor, EventDispatcherInterface $dispatcher)
+    function let(PaymentProcessorInterface $processor)
     {
-        $this->beConstructedWith($processor, $dispatcher);
+        $this->beConstructedWith($processor);
     }
 
     function it_is_initializable()
