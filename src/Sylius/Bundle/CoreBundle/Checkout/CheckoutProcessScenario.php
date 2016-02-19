@@ -47,10 +47,12 @@ class CheckoutProcessScenario implements ProcessScenarioInterface
             ->add('shipping', 'sylius_checkout_shipping')
             ->add('payment', 'sylius_checkout_payment')
             ->add('finalize', 'sylius_checkout_finalize')
-            ->add('purchase', 'sylius_checkout_purchase')
             ->setDisplayRoute('sylius_checkout_display')
             ->setForwardRoute('sylius_checkout_forward')
-            ->setRedirect('sylius_checkout_thank_you')
+            ->setRedirect('sylius_account_order_purchase')
+            ->setRedirectParams([
+                'paymentId' => $this->getLastNewPaymentId(),
+            ])
             ->validate(function () {
                 return !$this->getCurrentCart()->isEmpty();
             })
@@ -63,5 +65,19 @@ class CheckoutProcessScenario implements ProcessScenarioInterface
     protected function getCurrentCart()
     {
         return $this->cartProvider->getCart();
+    }
+
+    /**
+     * @return mixed
+     */
+    private function getLastNewPaymentId()
+    {
+        $lastNewPayment = $this->getCurrentCart()->getLastPayment();
+
+        if ($lastNewPayment) {
+            return $lastNewPayment->getId();
+        }
+
+        return null;
     }
 }

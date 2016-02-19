@@ -38,12 +38,25 @@ class CheckoutThankYouPage extends SymfonyPage implements CheckoutThankYouPageIn
     /**
      * {@inheritdoc}
      */
-    public function waitForResponse($timeout)
+    public function waitForResponse($timeout, array $parameters)
     {
-        $this->getDocument()->waitFor($timeout, function () {
-            return $this->isOpen();
+        $this->getDocument()->waitFor($timeout, function () use ($parameters) {
+            return $this->isOpen($parameters);
         });
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getUrl(array $urlParameters = [])
+    {
+        if (!isset($urlParameters['id'])) {
+            throw new \RuntimeException(sprintf('%s getUrl method require order id', self::class));
+        }
+
+        return parent::getUrl($urlParameters);
+    }
+
 
     /**
      * @return string

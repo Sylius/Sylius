@@ -23,6 +23,7 @@
         <parameter key="sylius.behat.table_manipulator.class">Sylius\Behat\TableManipulator</parameter>
         <parameter key="sylius.behat.page.class">Sylius\Behat\Page\Page</parameter>
         <parameter key="sylius.behat.symfony_page.class">Sylius\Behat\Page\SymfonyPage</parameter>
+        <parameter key="sylius.behat.paypal_mocked_api_responses.class">Sylius\Behat\PaypalMockedApiResponses</parameter>
         <parameter key="sylius.behat.page.admin.crud.index.class">Sylius\Behat\Page\Admin\Crud\IndexPage</parameter>
         <parameter key="sylius.behat.page.admin.crud.create.class">Sylius\Behat\Page\Admin\Crud\CreatePage</parameter>
         <parameter key="sylius.behat.page.admin.crud.update.class">Sylius\Behat\Page\Admin\Crud\UpdatePage</parameter>
@@ -55,6 +56,10 @@
 
         <service id="sylius.behat.symfony_page" class="%sylius.behat.symfony_page.class%" parent="sylius.behat.page" abstract="true" scope="scenario" public="false">
             <argument type="service" id="router" container="symfony_shared" />
+        </service>
+
+        <service id="sylius.behat.paypal_mocked_api_responses" class="%sylius.behat.paypal_mocked_api_responses.class%" scope="scenario" public="false">
+            <argument type="service" id="kernel" container="symfony" />
         </service>
 
         <service id="sylius.behat.page.admin.crud.index" class="%sylius.behat.page.admin.crud.index.class%" parent="sylius.behat.symfony_page" abstract="true" scope="scenario" public="false">

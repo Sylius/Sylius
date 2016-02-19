@@ -11,29 +11,24 @@
 
 namespace Sylius\Behat\Page\External;
 
-use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Mink\Exception\DriverException;
+use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Sylius\Behat\Page\PageInterface;
 
 /**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 interface PaypalExpressCheckoutPageInterface extends PageInterface
 {
     /**
-     * @param string $email
-     * @param string $password
-     *
-     * @throws ElementNotFoundException
-     */
-    public function logIn($email, $password);
-
-    /**
-     * @throws ElementNotFoundException
+     * @throws UnsupportedDriverActionException
+     * @throws DriverException
      */
     public function pay();
 
     /**
-     * @throws ElementNotFoundException
+     * @throws UnsupportedDriverActionException
+     * @throws DriverException
      */
     public function cancel();
 }

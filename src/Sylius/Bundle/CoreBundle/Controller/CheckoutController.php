@@ -194,12 +194,17 @@ class CheckoutController extends FOSRestController
     }
 
     /**
+     * @param int $id
+     *
      * @return Response
      */
-    public function thankYouAction()
+    public function thankYouAction($id)
     {
-        $id = $this->get('session')->get('sylius_order_id');
         $order = $this->findOrderOr404($id);
+
+        if ($this->getCustomer() !== $order->getCustomer()) {
+            return $this->createAccessDeniedException();
+        }
 
         return $this->render('SyliusWebBundle:Frontend/Checkout/Step:thankYou.html.twig', ['order' => $order]);
     }
@@ -293,5 +298,13 @@ class CheckoutController extends FOSRestController
     private function createApiForm($type, $value = null, array $options = [])
     {
         return $this->get('form.factory')->createNamed('', $type, $value, array_merge($options, ['csrf_protection' => false]));
+    }
+
+    /**
+     * @return null|\Sylius\Component\User\Model\CustomerInterface
+     */
+    protected function getCustomer()
+    {
+        return $this->get('sylius.context.customer')->getCustomer();
     }
 }

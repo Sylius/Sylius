@@ -13,6 +13,7 @@ namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\External\PaypalExpressCheckoutPageInterface;
+use Sylius\Behat\PaypalMockedApiResponsesInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -25,28 +26,20 @@ final class PaypalContext implements Context
     private $paypalExpressCheckoutPage;
 
     /**
-     * @var string
+     * @var PaypalMockedApiResponsesInterface
      */
-    private $paypalAccountName;
-
-    /**
-     * @var string
-     */
-    private $paypalAccountPassword;
+    private $paypalMockedApiResponses;
 
     /**
      * @param PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage
-     * @param string $paypalAccountName
-     * @param string $paypalAccountPassword
+     * @param PaypalMockedApiResponsesInterface $paypalMockedApiResponses
      */
     public function __construct(
         PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage,
-        $paypalAccountName,
-        $paypalAccountPassword
+        PaypalMockedApiResponsesInterface $paypalMockedApiResponses
     ) {
         $this->paypalExpressCheckoutPage = $paypalExpressCheckoutPage;
-        $this->paypalAccountName = $paypalAccountName;
-        $this->paypalAccountPassword = $paypalAccountPassword;
+        $this->paypalMockedApiResponses = $paypalMockedApiResponses;
     }
 
     /**
@@ -62,7 +55,7 @@ final class PaypalContext implements Context
      */
     public function iSignInToPaypalAndPaySuccessfully()
     {
-        $this->paypalExpressCheckoutPage->logIn($this->paypalAccountName, $this->paypalAccountPassword);
+        $this->paypalMockedApiResponses->mockApiSuccessfulPaymentResponse();
         $this->paypalExpressCheckoutPage->pay();
     }
 

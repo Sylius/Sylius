@@ -18,8 +18,11 @@ use Sylius\Behat\Page\Checkout\CheckoutPaymentStepInterface;
 use Sylius\Behat\Page\Checkout\CheckoutSecurityStepInterface;
 use Sylius\Behat\Page\Checkout\CheckoutShippingStepInterface;
 use Sylius\Behat\Page\Checkout\CheckoutThankYouPageInterface;
+use Sylius\Behat\Page\Order\PayOrderPageInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -62,6 +65,16 @@ final class CheckoutContext implements Context
     private $checkoutThankYouPage;
 
     /**
+     * @var PayOrderPageInterface
+     */
+    private $payOrderPage;
+
+    /**
+     * @var RepositoryInterface
+     */
+    private $orderRepository;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param CheckoutSecurityStepInterface $checkoutSecurityStep
      * @param CheckoutAddressingStepInterface $checkoutAddressingStep
@@ -69,6 +82,8 @@ final class CheckoutContext implements Context
      * @param CheckoutPaymentStepInterface $checkoutPaymentStep
      * @param CheckoutFinalizeStepInterface $checkoutFinalizeStep
      * @param CheckoutThankYouPageInterface $checkoutThankYouPage
+     * @param PayOrderPageInterface $payOrderPage
+     * @param RepositoryInterface $orderRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -77,7 +92,9 @@ final class CheckoutContext implements Context
         CheckoutShippingStepInterface $checkoutShippingStep,
         CheckoutPaymentStepInterface $checkoutPaymentStep,
         CheckoutFinalizeStepInterface $checkoutFinalizeStep,
-        CheckoutThankYouPageInterface $checkoutThankYouPage
+        CheckoutThankYouPageInterface $checkoutThankYouPage,
+        PayOrderPageInterface $payOrderPage,
+        RepositoryInterface $orderRepository
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->checkoutSecurityStep = $checkoutSecurityStep;
@@ -86,6 +103,8 @@ final class CheckoutContext implements Context
         $this->checkoutPaymentStep = $checkoutPaymentStep;
         $this->checkoutFinalizeStep = $checkoutFinalizeStep;
         $this->checkoutThankYouPage = $checkoutThankYouPage;
+        $this->payOrderPage = $payOrderPage;
+        $this->orderRepository = $orderRepository;
     }
 
     /**
@@ -220,8 +239,55 @@ final class CheckoutContext implements Context
      */
     public function iShouldBeRedirectedBackToTheThankYouPage()
     {
-        $this->checkoutThankYouPage->waitForResponse(10);
+        $this->checkoutThankYouPage->waitForResponse(10, ['id' => $this->getLastOrder()->getId()]);
 
-        expect($this->checkoutThankYouPage->isOpen())->toBe(true);
+        expect($this->checkoutThankYouPage->isOpen(['id' => $this->getLastOrder()->getId()]))->toBe(true);
+    }
+
+    /**
+     * @Then I should be redirected back to the order payment page
+     */
+    public function iShouldBeRedirectedBackToTheOrderPaymentPage()
+    {
+        $this->payOrderPage->waitForResponse(10, ['number' => $this->getLastOrder()->getNumber()]);
+
+        expect($this->payOrderPage->isOpen(['number' => $this->getLastOrder()->getNumber()]))->toBe(true);
+    }
+
+    /**
+     * @When I try to pay again
+     */
+    public function iTryToPayAgain()
+    {
+        $order = $this->getLastOrder();
+        $payment = $order->getLastPayment();
+        $this->payOrderPage->clickPayButtonForGivenPayment($payment);
+    }
+
+    /**
+     * @Then I should see two failed payments and new one ready to be paid
+     */
+    public function iShouldSeeTwoFailedPaymentsAndNewOneReadyToBePaid()
+    {
+        expect($this->payOrderPage->countCancelledPayments())->toBe(2);
+        expect($this->payOrderPage->countNewPayments())->toBe(1);
+    }
+
+    /**
+     * @return OrderInterface
+     *
+     * @throws \RuntimeException
+     */
+    private function getLastOrder()
+    {
+        $customer = $this->sharedStorage->get('user')->getCustomer();
+        $orders = $this->orderRepository->findByCustomer($customer);
+        $lastOrder = end($orders);
+
+        if (false === $lastOrder) {
+            throw new \RuntimeException(sprintf('There is no last order for %s', $customer->getFullName()));
+        }
+
+        return $lastOrder;
     }
 }
