@@ -15,7 +15,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\PaymentProcessorInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -29,20 +28,12 @@ class OrderPaymentListener
     protected $paymentProcessor;
 
     /**
-     * @var EventDispatcherInterface
-     */
-    protected $dispatcher;
-
-    /**
      * @param PaymentProcessorInterface $paymentProcessor
-     * @param EventDispatcherInterface $dispatcher
      */
     public function __construct(
-        PaymentProcessorInterface $paymentProcessor,
-        EventDispatcherInterface $dispatcher
+        PaymentProcessorInterface $paymentProcessor
     ) {
         $this->paymentProcessor = $paymentProcessor;
-        $this->dispatcher = $dispatcher;
     }
 
     /**
