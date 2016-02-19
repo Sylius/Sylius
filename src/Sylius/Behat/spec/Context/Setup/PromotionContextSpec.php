@@ -18,10 +18,9 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Test\Factory\TestPromotionFactoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Component\Promotion\Factory\ActionFactoryInterface;
 use Sylius\Component\Promotion\Model\ActionInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -30,16 +29,16 @@ class PromotionContextSpec extends ObjectBehavior
 {
     function let(
         SharedStorageInterface $sharedStorage,
-        PromotionRepositoryInterface $promotionRepository,
-        RepositoryInterface $actionRepository,
+        ActionFactoryInterface $actionFactory,
         TestPromotionFactoryInterface $testPromotionFactory,
+        PromotionRepositoryInterface $promotionRepository,
         ObjectManager $objectManager
     ) {
         $this->beConstructedWith(
             $sharedStorage,
-            $promotionRepository,
-            $actionRepository,
+            $actionFactory,
             $testPromotionFactory,
+            $promotionRepository,
             $objectManager
         );
     }
@@ -56,12 +55,12 @@ class PromotionContextSpec extends ObjectBehavior
 
     function it_creates_promotion(
         $sharedStorage,
-        $promotionRepository,
         $testPromotionFactory,
+        $promotionRepository,
         ChannelInterface $channel,
         PromotionInterface $promotion
     ) {
-        $testPromotionFactory->createPromotion('Super promotion')->willReturn($promotion);
+        $testPromotionFactory->create('Super promotion')->willReturn($promotion);
 
         $sharedStorage->get('channel')->willReturn($channel);
         $promotion->addChannel($channel)->shouldBeCalled();
@@ -74,16 +73,15 @@ class PromotionContextSpec extends ObjectBehavior
 
     function it_creates_fixed_discount_action_for_promotion(
         $sharedStorage,
-        $actionRepository,
-        $testPromotionFactory,
+        $actionFactory,
         $objectManager,
         ActionInterface $action,
         PromotionInterface $promotion
     ) {
         $sharedStorage->get('promotion')->willReturn($promotion);
 
-        $testPromotionFactory->createFixedDiscountAction('10.00', $promotion)->willReturn($action);
-        $actionRepository->add($action)->shouldBeCalled();
+        $actionFactory->createFixedDiscount(1000)->willReturn($action);
+        $promotion->addAction($action)->shouldBeCalled();
 
         $objectManager->flush()->shouldBeCalled();
 

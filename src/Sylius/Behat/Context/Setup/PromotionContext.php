@@ -16,6 +16,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Test\Factory\TestPromotionFactoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Component\Promotion\Factory\ActionFactoryInterface;
 use Sylius\Component\Promotion\Model\ActionInterface;
 use Sylius\Component\Promotion\Model\RuleInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
@@ -33,19 +34,19 @@ final class PromotionContext implements Context
     private $sharedStorage;
 
     /**
-     * @var PromotionRepositoryInterface
+     * @var ActionFactoryInterface
      */
-    private $promotionRepository;
-
-    /**
-     * @var RepositoryInterface
-     */
-    private $actionRepository;
+    private $actionFactory;
 
     /**
      * @var TestPromotionFactoryInterface
      */
     private $testPromotionFactory;
+
+    /**
+     * @var PromotionRepositoryInterface
+     */
+    private $promotionRepository;
 
     /**
      * @var ObjectManager
@@ -54,22 +55,22 @@ final class PromotionContext implements Context
 
     /**
      * @param SharedStorageInterface $sharedStorage
-     * @param PromotionRepositoryInterface $promotionRepository
-     * @param RepositoryInterface $actionRepository
+     * @param ActionFactoryInterface $actionFactory
      * @param TestPromotionFactoryInterface $testPromotionFactory
+     * @param PromotionRepositoryInterface $promotionRepository
      * @param ObjectManager $objectManager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        PromotionRepositoryInterface $promotionRepository,
-        RepositoryInterface $actionRepository,
+        ActionFactoryInterface $actionFactory,
         TestPromotionFactoryInterface $testPromotionFactory,
+        PromotionRepositoryInterface $promotionRepository,
         ObjectManager $objectManager
     ) {
         $this->sharedStorage = $sharedStorage;
-        $this->promotionRepository = $promotionRepository;
-        $this->actionRepository = $actionRepository;
+        $this->actionFactory = $actionFactory;
         $this->testPromotionFactory = $testPromotionFactory;
+        $this->promotionRepository = $promotionRepository;
         $this->objectManager = $objectManager;
     }
 
@@ -78,7 +79,7 @@ final class PromotionContext implements Context
      */
     public function thereIsPromotion($promotionName)
     {
-        $promotion = $this->testPromotionFactory->createPromotion($promotionName);
+        $promotion = $this->testPromotionFactory->create($promotionName);
         $promotion->addChannel($this->sharedStorage->get('channel'));
 
         $this->promotionRepository->add($promotion);
@@ -92,9 +93,19 @@ final class PromotionContext implements Context
     {
         $currentPromotion = $this->sharedStorage->get('promotion');
 
-        $action = $this->testPromotionFactory->createFixedDiscountAction($amount, $currentPromotion);
-        $this->actionRepository->add($action);
+        $action = $this->actionFactory->createFixedDiscount($this->getPriceFromString($amount));
+        $currentPromotion->addAction($action);
 
         $this->objectManager->flush();
+    }
+
+    /**
+     * @param string $price
+     *
+     * @return int
+     */
+    private function getPriceFromString($price)
+    {
+        return (int) round(($price * 100), 2);
     }
 }

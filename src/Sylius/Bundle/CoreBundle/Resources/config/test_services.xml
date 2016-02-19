@@ -60,9 +60,7 @@
         </service>
 
         <service id="sylius.test.factory.promotion" class="%sylius.test.factory.promotion.class%">
-            <argument type="service" id="sylius.factory.promotion_action" />
             <argument type="service" id="sylius.factory.promotion" />
-            <argument type="service" id="sylius.factory.promotion_rule" />
         </service>
     </services>
 

@@ -24,9 +24,9 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 class TestPromotionFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $actionFactory, FactoryInterface $promotionFactory)
+    function let(FactoryInterface $promotionFactory)
     {
-        $this->beConstructedWith($actionFactory, $promotionFactory);
+        $this->beConstructedWith($promotionFactory);
     }
 
     function it_is_initializable()
@@ -48,19 +48,6 @@ class TestPromotionFactorySpec extends ObjectBehavior
         $promotion->setStartsAt(Argument::type('\DateTime'))->shouldBeCalled();
         $promotion->setEndsAt(Argument::type('\DateTime'))->shouldBeCalled();
 
-        $this->createPromotion('Super promotion')->shouldReturn($promotion);
-    }
-
-    function it_creates_fixed_discount_action_for_given_promotion(
-        $actionFactory,
-        ActionInterface $action,
-        PromotionInterface $promotion
-    ) {
-        $actionFactory->createNew()->willReturn($action);
-        $action->setType(ActionInterface::TYPE_FIXED_DISCOUNT)->shouldBeCalled();
-        $action->setConfiguration(['amount' => 1000])->shouldBeCalled();
-        $action->setPromotion($promotion)->shouldBeCalled();
-
-        $this->createFixedDiscountAction('10.00', $promotion)->shouldReturn($action);
+        $this->create('Super promotion')->shouldReturn($promotion);
     }
 }

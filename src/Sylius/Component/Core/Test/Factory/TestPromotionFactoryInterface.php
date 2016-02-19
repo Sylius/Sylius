@@ -25,13 +25,5 @@ interface TestPromotionFactoryInterface
      *
      * @return PromotionInterface
      */
-    public function createPromotion($name);
-
-    /**
-     * @param string $discount
-     * @param PromotionInterface $promotion
-     *
-     * @return ActionInterface
-     */
-    public function createFixedDiscountAction($discount, PromotionInterface $promotion);
+    public function create($name);
 }

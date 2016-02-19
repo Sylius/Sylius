@@ -24,29 +24,20 @@ class TestPromotionFactory implements TestPromotionFactoryInterface
     /**
      * @var FactoryInterface
      */
-    private $actionFactory;
-
-    /**
-     * @var FactoryInterface
-     */
     private $promotionFactory;
 
     /**
-     * @param FactoryInterface $actionFactory
      * @param FactoryInterface $promotionFactory
      */
-    public function __construct(
-        FactoryInterface $actionFactory,
-        FactoryInterface $promotionFactory
-    ) {
-        $this->actionFactory = $actionFactory;
+    public function __construct(FactoryInterface $promotionFactory)
+    {
         $this->promotionFactory = $promotionFactory;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function createPromotion($name)
+    public function create($name)
     {
         $promotion = $this->promotionFactory->createNew();
 
@@ -60,20 +51,6 @@ class TestPromotionFactory implements TestPromotionFactoryInterface
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function createFixedDiscountAction($discount, PromotionInterface $promotion)
-    {
-        $action = $this->actionFactory->createNew();
-
-        $action->setType(ActionInterface::TYPE_FIXED_DISCOUNT);
-        $action->setConfiguration(['amount' => $this->getPriceFromString($discount)]);
-        $action->setPromotion($promotion);
-
-        return $action;
-    }
-
-    /**
      * @param string $promotionName
      *
      * @return string
@@ -81,15 +58,5 @@ class TestPromotionFactory implements TestPromotionFactoryInterface
     private function getCodeFromName($promotionName)
     {
         return str_replace(' ', '_', strtolower($promotionName));
-    }
-
-    /**
-     * @param string $price
-     *
-     * @return int
-     */
-    private function getPriceFromString($price)
-    {
-        return (int) round(($price * 100), 2);
     }
 }
