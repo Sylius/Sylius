@@ -91,6 +91,8 @@ class NumberListener
 
         if (!$this->listenerEnabled) {
             $this->eventManager->addEventListener(Events::preFlush, $this);
+            $this->eventManager->addEventListener(Events::postFlush, $this);
+
             $this->listenerEnabled = true;
         }
     }
@@ -129,6 +131,18 @@ class NumberListener
                 $event
             );
         }
+    }
+
+    /**
+     * Remove cached entities and sequences.
+     */
+    public function postFlush()
+    {
+        // Free memory to avoid memory leak.
+        $this->entitiesEnabled = array();
+
+        // Remove all cached sequences in order to get updated sequences on next use.
+        $this->sequences = array();
     }
 
     /**

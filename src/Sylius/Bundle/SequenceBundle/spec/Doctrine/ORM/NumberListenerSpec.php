@@ -50,6 +50,11 @@ class NumberListenerSpec extends ObjectBehavior
             Argument::type('Sylius\Bundle\SequenceBundle\Doctrine\ORM\NumberListener')
         )->shouldBeCalled();
 
+        $eventManager->addEventListener(
+            Events::postFlush,
+            Argument::type('Sylius\Bundle\SequenceBundle\Doctrine\ORM\NumberListener')
+        )->shouldBeCalled();
+
         $this->enableEntity($subject);
     }
 
