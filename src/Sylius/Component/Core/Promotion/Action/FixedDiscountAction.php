@@ -59,6 +59,6 @@ class FixedDiscountAction extends DiscountAction
      */
     private function calculateAdjustmentAmount($promotionSubjectTotal, $targetPromotionAmount)
     {
-        return ($promotionSubjectTotal < $targetPromotionAmount) ? -$promotionSubjectTotal : -$targetPromotionAmount;
+        return -1 * min($promotionSubjectTotal, $targetPromotionAmount);
     }
 }
