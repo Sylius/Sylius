@@ -12,10 +12,7 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
-use Behat\Mink\Driver\Selenium2Driver;
-use Behat\Mink\Session;
-use Sylius\Behat\Page\Shop\HomePage;
-use Sylius\Bundle\CoreBundle\Test\Services\SecurityServiceInterface;
+use Sylius\Behat\SecurityServiceInterface;
 use Sylius\Component\Core\Test\Factory\TestUserFactoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
@@ -29,21 +26,6 @@ final class SecurityContext implements Context
      * @var SecurityServiceInterface
      */
     private $securityService;
-
-    /**
-     * @var Session
-     */
-    private $minkSession;
-
-    /**
-     * @var array
-     */
-    private $minkParameters;
-
-    /**
-     * @var HomePage
-     */
-    private $homePage;
 
     /**
      * @var TestUserFactoryInterface
@@ -62,26 +44,17 @@ final class SecurityContext implements Context
 
     /**
      * @param SecurityServiceInterface $securityService
-     * @param Session $minkSession
-     * @param array $minkParameters
-     * @param HomePage $homePage
      * @param TestUserFactoryInterface $testUserFactory
      * @param UserRepositoryInterface $userRepository
      * @param SharedStorageInterface $sharedStorage
      */
     public function __construct(
         SecurityServiceInterface $securityService,
-        Session $minkSession,
-        array $minkParameters,
-        HomePage $homePage,
         TestUserFactoryInterface $testUserFactory,
         UserRepositoryInterface $userRepository,
         SharedStorageInterface $sharedStorage
     ) {
         $this->securityService = $securityService;
-        $this->minkSession = $minkSession;
-        $this->minkParameters = $minkParameters;
-        $this->homePage = $homePage;
         $this->testUserFactory = $testUserFactory;
         $this->userRepository = $userRepository;
         $this->sharedStorage = $sharedStorage;
@@ -92,8 +65,7 @@ final class SecurityContext implements Context
      */
     public function iAmLoggedInAs($email)
     {
-        $this->prepareSessionIfNeeded();
-        $this->securityService->logIn($email, $this->minkSession);
+        $this->securityService->logIn($email);
     }
 
     /**
@@ -104,21 +76,8 @@ final class SecurityContext implements Context
         $user = $this->testUserFactory->createDefault();
         $this->userRepository->add($user);
 
-        $this->securityService->logIn($user->getEmail(), $this->minkSession);
+        $this->securityService->logIn($user->getEmail());
 
         $this->sharedStorage->set('user', $user);
-    }
-
-    private function prepareSessionIfNeeded()
-    {
-        if (!$this->minkSession->getDriver() instanceof Selenium2Driver) {
-            return;
-        }
-
-        if (false !== strpos($this->minkSession->getCurrentUrl(), $this->minkParameters['base_url'])) {
-            return;
-        }
-
-        $this->homePage->open();
     }
 }

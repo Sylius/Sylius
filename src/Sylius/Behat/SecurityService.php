@@ -9,9 +9,8 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Test\Services;
+namespace Sylius\Behat;
 
-use Behat\Mink\Session;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -19,8 +18,9 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
+ * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class SecurityService implements SecurityServiceInterface
+final class SecurityService implements SecurityServiceInterface
 {
     /**
      * @var UserRepositoryInterface
@@ -33,42 +33,57 @@ class SecurityService implements SecurityServiceInterface
     private $session;
 
     /**
+     * @var CookieSetterInterface
+     */
+    private $cookieSetter;
+
+    /**
+     * @var string
+     */
+    private $sessionTokenVariable;
+
+    /**
      * @param UserRepositoryInterface $userRepository
      * @param SessionInterface $session
+     * @param CookieSetterInterface $cookieSetter
+     * @param string $contextKey
      */
     public function __construct(
         UserRepositoryInterface $userRepository,
-        SessionInterface $session
+        SessionInterface $session,
+        CookieSetterInterface $cookieSetter,
+        $contextKey
     ) {
         $this->userRepository = $userRepository;
         $this->session = $session;
+        $this->cookieSetter = $cookieSetter;
+        $this->sessionTokenVariable = sprintf('_security_%s', $contextKey);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function logIn($email, Session $minkSession, $providerKey = self::DEFAULT_PROVIDER_KEY)
+    public function logIn($email)
     {
+        /** @var UserInterface $user */
         $user = $this->userRepository->findOneBy(['username' => $email]);
         if (null === $user) {
             throw new \InvalidArgumentException(sprintf('There is no user with email %s', $email));
         }
 
-        $this->logInUser($minkSession, $user, $providerKey);
+        $this->logInUser($user);
     }
 
     /**
-     * @param Session $minkSession
      * @param UserInterface $user
-     * @param string $providerKey
      */
-    private function logInUser(Session $minkSession, UserInterface $user, $providerKey = self::DEFAULT_PROVIDER_KEY)
+    private function logInUser(UserInterface $user)
     {
-        $token = new UsernamePasswordToken($user, $user->getPassword(), $providerKey, $user->getRoles());
+        $token = new UsernamePasswordToken($user, $user->getPassword(), 'randomstringbutnotnull', $user->getRoles());
 
-        $this->session->set('_security_user', serialize($token));
+        $this->session->set($this->sessionTokenVariable, serialize($token));
         $this->session->save();
 
-        $minkSession->setCookie($this->session->getName(), $this->session->getId());
+        $this->cookieSetter->setCookie($this->session->getName(), $this->session->getId());
     }
 }
