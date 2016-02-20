@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ReviewBundle\Remover;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ReviewBundle\Updater\ReviewableRatingUpdaterInterface;
 use Sylius\Component\Review\Calculator\ReviewableRatingCalculatorInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewerInterface;
@@ -34,23 +35,23 @@ class ReviewerReviewsRemover implements ReviewerReviewsRemoverInterface
     private $reviewManager;
 
     /**
-     * @var ReviewableRatingCalculatorInterface
+     * @var ReviewableRatingUpdaterInterface
      */
-    private $averageRatingCalculator;
+    private $averageRatingUpdater;
 
     /**
      * @param EntityRepository $reviewRepository
      * @param ObjectManager $reviewManager
-     * @param ReviewableRatingCalculatorInterface $averageRatingCalculator
+     * @param ReviewableRatingUpdaterInterface $averageRatingUpdater
      */
     public function __construct(
         EntityRepository $reviewRepository,
         ObjectManager $reviewManager,
-        ReviewableRatingCalculatorInterface $averageRatingCalculator
+        ReviewableRatingUpdaterInterface $averageRatingUpdater
     ) {
         $this->reviewRepository = $reviewRepository;
         $this->reviewManager = $reviewManager;
-        $this->averageRatingCalculator = $averageRatingCalculator;
+        $this->averageRatingUpdater = $averageRatingUpdater;
     }
 
     /**
@@ -66,7 +67,7 @@ class ReviewerReviewsRemover implements ReviewerReviewsRemoverInterface
         $this->reviewManager->flush();
 
         foreach ($reviewSubjectsToRecalculate as $reviewSubject) {
-            $reviewSubject->setAverageRating($this->averageRatingCalculator->calculate($reviewSubject));
+            $this->averageRatingUpdater->update($reviewSubject);
         }
     }
 

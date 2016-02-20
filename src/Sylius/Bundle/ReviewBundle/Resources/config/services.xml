@@ -19,7 +19,7 @@
         <parameter key="sylius.event_subscriber.review.load_metadata.class">Sylius\Bundle\ReviewBundle\EventListener\LoadMetadataSubscriber</parameter>
         <parameter key="sylius.review.validator.unique_reviewer_email.class">Sylius\Bundle\ReviewBundle\Validator\Constraints\UniqueReviewerEmailValidator</parameter>
         <parameter key="sylius.listener.review_create.class">Sylius\Bundle\ReviewBundle\EventListener\ReviewCreateListener</parameter>
-        <parameter key="sylius.listener.review_delete.class">Sylius\Bundle\ReviewBundle\EventListener\ReviewDeleteListener</parameter>
+        <parameter key="sylius.listener.review_change.class">Sylius\Bundle\ReviewBundle\EventListener\ReviewChangeListener</parameter>
         <parameter key="sylius.review.calculator.average_rating.class">Sylius\Component\Review\Calculator\AverageRatingCalculator</parameter>
         <parameter key="sylius.review.updater.average_rating.class">Sylius\Bundle\ReviewBundle\Updater\AverageRatingUpdater</parameter>
         <parameter key="sylius.review.remover.reviewer_reviews.class">Sylius\Bundle\ReviewBundle\Remover\ReviewerReviewsRemover</parameter>
@@ -45,8 +45,10 @@
             <argument type="service" id="sylius.context.customer" />
             <tag name="kernel.event_listener" event="sylius.product_review.pre_create" method="ensureReviewHasAuthor" />
         </service>
-        <service id="sylius.listener.review_delete" class="%sylius.listener.review_delete.class%">
+        <service id="sylius.listener.review_change" class="%sylius.listener.review_change.class%">
             <argument type="service" id="sylius.review.updater.average_rating" />
+            <tag name="kernel.event_listener" event="sylius.product_review.post_update" method="recalculateSubjectRating" />
+            <tag name="kernel.event_listener" event="sylius.product_review.post_delete" method="recalculateSubjectRating" />
         </service>
 
         <service id="sylius.review.calculator.average_rating" class="%sylius.review.calculator.average_rating.class%" />
@@ -57,7 +59,7 @@
         <service id="sylius.review.remover.reviewer_reviews" class="%sylius.review.remover.reviewer_reviews.class%">
             <argument type="service" id="sylius.repository.product_review" />
             <argument type="service" id="sylius.manager.product_review" />
-            <argument type="service" id="sylius.review.calculator.average_rating" />
+            <argument type="service" id="sylius.review.updater.average_rating" />
         </service>
     </services>
 </container>

@@ -22,7 +22,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ReviewDeleteListenerSpec extends ObjectBehavior
+class ReviewChangeListenerSpec extends ObjectBehavior
 {
     function let(ReviewableRatingUpdaterInterface $averageRatingUpdater)
     {
@@ -31,7 +31,7 @@ class ReviewDeleteListenerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ReviewBundle\EventListener\ReviewDeleteListener');
+        $this->shouldHaveType('Sylius\Bundle\ReviewBundle\EventListener\ReviewChangeListener');
     }
 
     function it_recalculates_subject_rating_on_accepted_review_deletion(
