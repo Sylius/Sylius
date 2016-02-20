@@ -2,7 +2,6 @@
 
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
-{% from 'SyliusWebBundle:Backend/ShippingCategory:macros.html.twig' import list %}
 
 {% block topbar %}
 <ol class="breadcrumb">
@@ -20,8 +19,5 @@
     <h1><i class="glyphicon glyphicon-cog"></i> {{ 'sylius.shipping_category.index_header'|trans|raw }}</h1>
 </div>
 
-{{ pagination(shipping_categories.data) }}
-{{ list(shipping_categories.data) }}
-{{ pagination(shipping_categories.data) }}
-
+{{ sylius_grid_render(shipping_categories) }}
 {% endblock %}

@@ -14,10 +14,9 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 use Pagerfanta\Pagerfanta;
+use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridViewFactoryInterface;
 use Sylius\Component\Grid\Parameters as GridParameters;
 use Sylius\Component\Grid\Provider\GridProviderInterface;
-use Sylius\Component\Grid\View\GridView;
-use Sylius\Component\Grid\View\GridViewFactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -36,16 +35,16 @@ class ResourcesCollectionProvider implements ResourcesCollectionProviderInterfac
     private $gridProvider;
 
     /**
-     * @var GridViewFactoryInterface
+     * @var ResourceGridViewFactoryInterface
      */
     private $gridViewFactory;
 
     /**
      * @param PagerfantaFactory $pagerfantaRepresentationFactory
      * @param GridProviderInterface $gridProvider
-     * @param GridViewFactoryInterface $gridViewFactory
+     * @param ResourceGridViewFactoryInterface $gridViewFactory
      */
-    public function __construct(PagerfantaFactory $pagerfantaRepresentationFactory, GridProviderInterface $gridProvider, GridViewFactoryInterface $gridViewFactory)
+    public function __construct(PagerfantaFactory $pagerfantaRepresentationFactory, GridProviderInterface $gridProvider, ResourceGridViewFactoryInterface $gridViewFactory)
     {
         $this->pagerfantaRepresentationFactory = $pagerfantaRepresentationFactory;
         $this->gridProvider = $gridProvider;
@@ -115,7 +114,7 @@ class ResourcesCollectionProvider implements ResourcesCollectionProviderInterfac
         $request = $requestConfiguration->getRequest();
         $parameters = new GridParameters($request->query->all());
 
-        $gridView = $this->gridViewFactory->create($gridDefinition, $parameters);
+        $gridView = $this->gridViewFactory->create($gridDefinition, $parameters, $requestConfiguration->getMetadata(), $requestConfiguration);
 
         if ($requestConfiguration->isHtmlRequest()) {
             return $gridView;

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.grid.renderer.twig.class">Sylius\Bundle\GridBundle\Renderer\TwigGridRenderer</parameter>
+        <parameter key="sylius.twig.extension.grid.class">Sylius\Bundle\GridBundle\Twig\GridExtension</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.grid.renderer.twig" class="%sylius.grid.renderer.twig.class%">
+            <argument type="service" id="twig" />
+            <argument>SyliusGridBundle::_grid.html.twig</argument>
+            <argument type="service" id="sylius.registry.grid_field" />
+            <argument type="collection">
+                <argument key="create">SyliusAdminBundle:Grid/Action:_create.html.twig</argument>
+                <argument key="update">SyliusAdminBundle:Grid/Action:_update.html.twig</argument>
+                <argument key="delete">SyliusAdminBundle:Grid/Action:_delete.html.twig</argument>
+                <argument key="link">SyliusGridBundle:Action:_link.html.twig</argument>
+                <argument key="form">SyliusGridBundle:Action:_form.html.twig</argument>
+            </argument>
+            <argument type="service" id="form.factory" />
+            <argument type="collection">
+                <argument key="string">SyliusAdminBundle:Grid/Filter:_string.html.twig</argument>
+            </argument>
+        </service>
+        <service id="sylius.twig.extension.grid" class="%sylius.twig.extension.grid.class%" public="false">
+            <argument type="service" id="sylius.templating.helper.grid" />
+            <tag name="twig.extension" />
+        </service>
+    </services>
+
+</container>

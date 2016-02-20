@@ -1,10 +1,9 @@
 {% extends 'SyliusAdminBundle::layout.html.twig' %}
 
-{% import configuration.vars.templates.list as list %}
-{% import 'SyliusUiBundle:Macro:buttons.html.twig' as buttons %}
 {% import 'SyliusUiBundle:Macro:headers.html.twig' as headers %}
-{% import 'SyliusUiBundle:Macro:labels.html.twig' as labels %}
-{% import 'SyliusUiBundle:Macro:pagination.html.twig' as pagination %}
+
+{% set definition = resources.definition %}
+{% set data = resources.data %}
 
 {% set header = configuration.vars.header|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
 
@@ -17,14 +16,14 @@
     </div>
     <div class="middle aligned column">
         <div class="ui right floated buttons">
-            {{ buttons.create(path(configuration.getRouteName('create'))) }}
+            {% if definition.actionGroups.main is defined and definition.getActions('main')|length > 0 %}
+                {% for action in definition.getActions('main') %}
+                    {{ sylius_grid_render_action(resources, action, null) }}
+                {% endfor %}
+            {% endif %}
         </div>
     </div>
 </div>
 
-<div class="ui segment">
-{{ pagination.render(resources) }}
-{{ list.full(resources, configuration) }}
-{{ pagination.render(resources) }}
-</div>
+{{ sylius_grid_render(resources, 'SyliusAdminBundle:Crud:_grid.html.twig', {'configuration': configuration, 'metadata': metadata, 'header': header}) }}
 {% endblock %}

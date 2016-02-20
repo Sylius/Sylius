@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\GridBundle;
 
 use Sylius\Bundle\GridBundle\DependencyInjection\Compiler\RegisterDriversPass;
+use Sylius\Bundle\GridBundle\DependencyInjection\Compiler\RegisterFieldTypesPass;
 use Sylius\Bundle\GridBundle\DependencyInjection\Compiler\RegisterFiltersPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -30,5 +31,6 @@ class SyliusGridBundle extends Bundle
 
         $container->addCompilerPass(new RegisterDriversPass());
         $container->addCompilerPass(new RegisterFiltersPass());
+        $container->addCompilerPass(new RegisterFieldTypesPass());
     }
 }

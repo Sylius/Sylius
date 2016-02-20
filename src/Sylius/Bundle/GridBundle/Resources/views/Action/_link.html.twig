@@ -1,0 +1,11 @@
+{% macro attributes(attributes) %}
+    {% for name, value in attributes %}
+        {%- if value is not none and value is not sameas(false) -%}
+            {{- ' %s="%s"'|format(name, value is sameas(true) ? name|e : value|e)|raw -}}
+        {%- endif -%}
+    {%- endfor -%}
+{% endmacro %}
+
+{% import _self as macros %}
+
+<a href="{{ action.url|default('#') }}" {% if action.options.attr is defined %}{{ macros.attributes(action.options.attr) }}{% endif %}>{{ action.label|trans }}</a>

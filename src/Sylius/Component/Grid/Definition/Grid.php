@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of the Sylius package.
  *
@@ -34,7 +33,7 @@ class Grid
     /**
      * @var array
      */
-    private $sorting = array();
+    private $sorting = [];
 
     /**
      * @var array
@@ -112,7 +111,7 @@ class Grid
     /**
      * @param array $sorting
      */
-    public function setSorting($sorting)
+    public function setSorting(array $sorting)
     {
         $this->sorting = $sorting;
     }
@@ -187,6 +186,16 @@ class Grid
         }
 
         return $this->actionGroups[$name];
+    }
+
+    /**
+     * @param string $groupName
+     *
+     * @return Action[]
+     */
+    public function getActions($groupName)
+    {
+        return $this->getActionGroup($groupName)->getActions();
     }
 
     /**

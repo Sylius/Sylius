@@ -35,7 +35,13 @@ class SyliusGridExtension extends Extension
         $loader->load('services.xml');
         $loader->load('drivers.xml');
         $loader->load('filters.xml');
+        $loader->load('field_types.xml');
+        $loader->load('templating.xml');
+        $loader->load('twig.xml');
 
         $container->setParameter('sylius.grids_definitions', $config['grids']);
+
+        $container->setAlias('sylius.grid.renderer', 'sylius.grid.renderer.twig');
+        $container->setAlias('sylius.grid.data_extractor', 'sylius.grid.data_extractor.property_access');
     }
 }

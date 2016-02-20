@@ -32,6 +32,11 @@ class Action
     private $label;
 
     /**
+     * @var array
+     */
+    private $options = [];
+
+    /**
      * @param string $name
      * @param string $type
      */
@@ -85,5 +90,21 @@ class Action
     public function setLabel($label)
     {
         $this->label = $label;
+    }
+
+    /**
+     * @return array
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * @param array $options
+     */
+    public function setOptions(array $options)
+    {
+        $this->options = $options;
     }
 }

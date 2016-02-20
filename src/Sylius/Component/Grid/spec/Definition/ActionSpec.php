@@ -49,4 +49,15 @@ class ActionSpec extends ObjectBehavior
         $this->setLabel('Read book');
         $this->getLabel()->shouldReturn('Read book');
     }
+
+    function it_has_no_options_by_default()
+    {
+        $this->getOptions()->shouldReturn(array());
+    }
+
+    function it_can_have_options()
+    {
+        $this->setOptions(array('route' => 'sylius_admin_product_update'));
+        $this->getOptions()->shouldReturn(array('route' => 'sylius_admin_product_update'));
+    }
 }

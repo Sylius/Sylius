@@ -48,4 +48,17 @@ class GridViewSpec extends ObjectBehavior
     {
         $this->getParameters()->shouldReturn($parameters);
     }
+
+    function it_knows_by_which_fields_it_has_been_sorted(Grid $gridDefinition, Parameters $parameters)
+    {
+        $gridDefinition->getSorting()->willReturn(['name' => 'desc']);
+        $parameters->get('sorting', [])->willReturn(['code' => 'asc']);
+
+        $this->isSortedBy('foo')->shouldReturn(false);
+        $this->isSortedBy('name')->shouldReturn(true);
+        $this->isSortedBy('code')->shouldReturn(true);
+
+        $this->getSortingOrder('name')->shouldReturn('desc');
+        $this->getSortingOrder('code')->shouldReturn('asc');
+    }
 }

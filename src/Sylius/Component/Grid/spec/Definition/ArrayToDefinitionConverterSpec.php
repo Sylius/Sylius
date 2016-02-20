@@ -47,11 +47,13 @@ class ArrayToDefinitionConverterSpec extends ObjectBehavior
         $codeField = Field::fromNameAndType('code', 'string');
         $codeField->setLabel('System Code');
         $codeField->setPath('method.code');
+        $codeField->setOptions(['template' => 'bar.html.twig']);
 
         $grid->addField($codeField);
 
         $viewAction = Action::fromNameAndType('view', 'link');
         $viewAction->setLabel('Display Tax Category');
+        $viewAction->setOptions(['foo' => 'bar']);
         $defaultActionGroup = ActionGroup::named('default');
         $defaultActionGroup->addAction($viewAction);
 
@@ -73,7 +75,10 @@ class ArrayToDefinitionConverterSpec extends ObjectBehavior
                     'type' => 'string',
                     'label' => 'System Code',
                     'path' => 'method.code',
-                )
+                    'options' => [
+                        'template' => 'bar.html.twig'
+                    ],
+                ),
             ),
             'filters' => array(
                 'enabled' => array(
@@ -85,6 +90,9 @@ class ArrayToDefinitionConverterSpec extends ObjectBehavior
                     'view' => array(
                         'type' => 'link',
                         'label' => 'Display Tax Category',
+                        'options' => [
+                            'foo' => 'bar',
+                        ],
                     )
                 )
             )

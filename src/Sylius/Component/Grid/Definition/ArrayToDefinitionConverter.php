@@ -36,6 +36,9 @@ class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInterface
             if (array_key_exists('label', $fieldConfiguration)) {
                 $field->setLabel($fieldConfiguration['label']);
             }
+            if (array_key_exists('options', $fieldConfiguration)) {
+                $field->setOptions($fieldConfiguration['options']);
+            }
 
             $grid->addField($field);
         }
@@ -58,6 +61,9 @@ class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInterface
 
                 if (array_key_exists('label', $actionConfiguration)) {
                     $action->setLabel($actionConfiguration['label']);
+                }
+                if (array_key_exists('options', $actionConfiguration)) {
+                    $action->setOptions($actionConfiguration['options']);
                 }
 
                 $actionGroup->addAction($action);

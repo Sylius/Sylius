@@ -69,4 +69,32 @@ class GridView
     {
         return $this->parameters;
     }
+
+    /**
+     * @param string $fieldName
+     *
+     * @return bool
+     */
+    public function isSortedBy($fieldName)
+    {
+        return array_key_exists($fieldName, $this->getCurrentSorting());
+    }
+
+    /**
+     * @param string $fieldName
+     *
+     * @return string
+     */
+    public function getSortingOrder($fieldName)
+    {
+        return $this->getCurrentSorting()[$fieldName];
+    }
+
+    /**
+     * @return array|mixed
+     */
+    private function getCurrentSorting()
+    {
+        return $this->parameters->has('sorting') ? $this->parameters->get('sorting') : $this->definition->getSorting();
+    }
 }

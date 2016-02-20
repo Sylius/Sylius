@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Grid\Definition;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Grid\Definition\Action;
 use Sylius\Component\Grid\Definition\ActionGroup;
 use Sylius\Component\Grid\Definition\Field;
 use Sylius\Component\Grid\Definition\Filter;
@@ -137,6 +138,15 @@ class GridSpec extends ObjectBehavior
 
         $this->hasActionGroup('row')->shouldReturn(true);
         $this->hasActionGroup('default')->shouldReturn(false);
+    }
+
+    function it_returns_actions_for_given_group(ActionGroup $actionGroup, Action $action)
+    {
+        $actionGroup->getName()->willReturn('row');
+        $actionGroup->getActions()->willReturn([$action]);
+        $this->addActionGroup($actionGroup);
+
+        $this->getActions('row')->shouldReturn([$action]);
     }
 
     function it_does_not_have_any_filters_by_default()

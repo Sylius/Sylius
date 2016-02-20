@@ -19,11 +19,15 @@
 
     <parameters>
         <parameter key="sylius.grid_filter.string.class">Sylius\Component\Grid\Filter\StringFilter</parameter>
+        <parameter key="sylius.form.type.grid_filter.string.class">Sylius\Bundle\GridBundle\Form\Type\Filter\StringFilterType</parameter>
     </parameters>
 
     <services>
         <service id="sylius.grid_filter.string" class="%sylius.grid_filter.string.class%">
             <tag name="sylius.grid_filter" type="string" />
+        </service>
+        <service id="sylius.form.type.grid_filter.string" class="%sylius.form.type.grid_filter.string.class%">
+            <tag name="form.type" alias="sylius_grid_filter_string" />
         </service>
     </services>
 

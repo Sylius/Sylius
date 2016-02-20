@@ -18,20 +18,26 @@
 >
 
     <parameters>
+        <parameter key="sylius.grid.field_renderer.class">Sylius\Component\Grid\Renderer\FieldRenderer</parameter>
         <parameter key="sylius.grid.data_provider.class">Sylius\Component\Grid\Data\DataProvider</parameter>
         <parameter key="sylius.grid.data_source_provider.class">Sylius\Component\Grid\Data\DataSourceProvider</parameter>
         <parameter key="sylius.grid.filters_applicator.class">Sylius\Component\Grid\Filtering\FiltersApplicator</parameter>
         <parameter key="sylius.grid.sorter.class">Sylius\Component\Grid\Sorting\Sorter</parameter>
         <parameter key="sylius.grid.view_factory.class">Sylius\Component\Grid\View\GridViewFactory</parameter>
 
+        <parameter key="sylius.grid.data_extractor.property_access.class">Sylius\Component\Grid\DataExtractor\PropertyAccessDataExtractor</parameter>
         <parameter key="sylius.grid.array_to_definition_converter.class">Sylius\Component\Grid\Definition\ArrayToDefinitionConverter</parameter>
         <parameter key="sylius.grid.provider.class">Sylius\Component\Grid\Provider\ArrayGridProvider</parameter>
 
         <parameter key="sylius.registry.grid_driver.class">Sylius\Component\Registry\ServiceRegistry</parameter>
         <parameter key="sylius.registry.grid_filter.class">Sylius\Component\Registry\ServiceRegistry</parameter>
+        <parameter key="sylius.registry.grid_field.class">Sylius\Component\Registry\ServiceRegistry</parameter>
     </parameters>
 
     <services>
+        <service id="sylius.grid.data_extractor.property_access" class="%sylius.grid.data_extractor.property_access.class%">
+            <argument type="service" id="property_accessor" />
+        </service>
         <service id="sylius.grid.array_to_definition_converter" class="%sylius.grid.array_to_definition_converter.class%" />
         <service id="sylius.grid.provider" class="%sylius.grid.provider.class%">
             <argument type="service" id="sylius.grid.array_to_definition_converter" />
@@ -59,6 +65,9 @@
         </service>
         <service id="sylius.registry.grid_filter" class="%sylius.registry.grid_filter.class%">
             <argument>Sylius\Component\Grid\Filtering\FilterInterface</argument>
+        </service>
+        <service id="sylius.registry.grid_field" class="%sylius.registry.grid_field.class%">
+            <argument>Sylius\Component\Grid\FieldTypes\FieldTypeInterface</argument>
         </service>
     </services>
 

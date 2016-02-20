@@ -41,6 +41,7 @@ class SyliusResourceExtension extends Extension implements PrependExtensionInter
             'storage.xml',
             'routing.xml',
             'twig.xml',
+            'grid.xml',
         ];
 
         foreach ($configFiles as $configFile) {
