@@ -6,7 +6,8 @@ sylius:
     user:
       email: Имейл
     customer:
-      email: Имейл
+      email:
+        label: Имейл
     user_change_password:
       confirmation: Потвърждение
       current: Текуща парола

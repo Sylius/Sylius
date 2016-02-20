@@ -18,7 +18,8 @@ sylius:
       first_name: Имя
       groups: Группы
       last_name: Фамилия
-      email: Email
+      email:
+        label: Email
       birthday: День рождения
       billing_address: Адрес для выставления счета
       different_billing_address: Использовать другой адрес для составления счета?

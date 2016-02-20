@@ -16,7 +16,8 @@ sylius:
       first_name: Iм’я
       groups: Групи
       last_name: Прізвище
-      email: Email
+      email:
+        label: Email
       billing_address: Платіжна адреса
       different_billing_address: Використовувати іншу платіжну адресу?
     user_filter:

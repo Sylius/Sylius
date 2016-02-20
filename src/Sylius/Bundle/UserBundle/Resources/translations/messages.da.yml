@@ -16,7 +16,8 @@ sylius:
       first_name: Fornavn
       groups: Grupper
       last_name: Efternavn
-      email: Email
+      email:
+        label: Email
       billing_address: Faktureringsadresse
       different_billing_address: Brug anden faktureringsadresse?
     user_filter:

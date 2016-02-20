@@ -18,7 +18,8 @@ sylius:
       first_name: Ad
       groups: Gruplar
       last_name: Soyad
-      email: E-posta
+      email:
+        label: E-posta
       birthday: Doğum Günü
       billing_address: Fatura adresi
       different_billing_address: Fatura için farklı bir adres kullanmak ister misiniz?
