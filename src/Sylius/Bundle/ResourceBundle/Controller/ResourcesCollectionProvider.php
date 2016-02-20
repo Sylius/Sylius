@@ -44,6 +44,7 @@ class ResourcesCollectionProvider implements ResourcesCollectionProviderInterfac
         if ($resources instanceof Pagerfanta) {
             $request = $requestConfiguration->getRequest();
             $resources->setCurrentPage($request->query->get('page', 1));
+            $resources->setMaxPerPage($requestConfiguration->getPaginationMaxPerPage());
 
             if (!$requestConfiguration->isHtmlRequest()) {
                 $route = new Route($request->attributes->get('_route'), array_merge($request->attributes->get('_route_params'), $request->query->all()));

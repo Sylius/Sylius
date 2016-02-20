@@ -115,6 +115,7 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
         $requestConfiguration->getRepositoryMethod()->willReturn(null);
 
         $requestConfiguration->isPaginated()->willReturn(true);
+        $requestConfiguration->getPaginationMaxPerPage()->willReturn(5);
         $requestConfiguration->isLimited()->willReturn(false);
         $requestConfiguration->getCriteria()->willReturn([]);
         $requestConfiguration->getSorting()->willReturn([]);
@@ -126,11 +127,12 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
         $queryParameters->get('page', 1)->willReturn(6);
 
         $paginator->setCurrentPage(6)->shouldBeCalled();
+        $paginator->setMaxPerPage(5)->shouldBeCalled();
 
         $this->get($requestConfiguration, $repository)->shouldReturn($paginator);
     }
 
-    function it_creates_a_pagniated_respresentation_for_pagerfanta_for_non_html_requests(
+    function it_creates_a_paginated_representation_for_pagerfanta_for_non_html_requests(
         RequestConfiguration $requestConfiguration,
         RepositoryInterface $repository,
         Pagerfanta $paginator,
@@ -144,6 +146,7 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
         $requestConfiguration->getRepositoryMethod()->willReturn(null);
 
         $requestConfiguration->isPaginated()->willReturn(true);
+        $requestConfiguration->getPaginationMaxPerPage()->willReturn(5);
         $requestConfiguration->isLimited()->willReturn(false);
         $requestConfiguration->getCriteria()->willReturn([]);
         $requestConfiguration->getSorting()->willReturn([]);
@@ -159,6 +162,7 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
         $requestAttributes->get('_route_params')->willReturn(['slug' => 'foo-bar']);
 
         $paginator->setCurrentPage(6)->shouldBeCalled();
+        $paginator->setMaxPerPage(5)->shouldBeCalled();
 
         $pagerfantaRepresentationFactory->createRepresentation($paginator, Argument::type(Route::class))->willReturn($paginatedRepresentation);
 
@@ -176,7 +180,8 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
         $requestConfiguration->getRepositoryMethod()->willReturn('findAll');
         $requestConfiguration->getRepositoryArguments()->willReturn(['foo']);
 
-        $requestConfiguration->isPaginated()->willReturn(false);
+        $requestConfiguration->isPaginated()->willReturn(true);
+        $requestConfiguration->getPaginationMaxPerPage()->willReturn(5);
         $requestConfiguration->isLimited()->willReturn(true);
         $requestConfiguration->getLimit()->willReturn(15);
 
@@ -187,11 +192,12 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
         $queryParameters->get('page', 1)->willReturn(8);
 
         $paginator->setCurrentPage(8)->shouldBeCalled();
+        $paginator->setMaxPerPage(5)->shouldBeCalled();
 
         $this->get($requestConfiguration, $repository)->shouldReturn($paginator);
     }
 
-    function it_creates_a_pagniated_respresentation_for_pagerfanta_for_non_html_requests_with_a_custom_repository_method(
+    function it_creates_a_ppaginated_representation_for_pagerfanta_for_non_html_requests_with_a_custom_repository_method(
         RequestConfiguration $requestConfiguration,
         RepositoryInterface $repository,
         Pagerfanta $paginator,
@@ -206,6 +212,7 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
         $requestConfiguration->getRepositoryArguments()->willReturn(['foo']);
 
         $requestConfiguration->isPaginated()->willReturn(true);
+        $requestConfiguration->getPaginationMaxPerPage()->willReturn(5);
         $requestConfiguration->isLimited()->willReturn(false);
         $requestConfiguration->getCriteria()->willReturn([]);
         $requestConfiguration->getSorting()->willReturn([]);
@@ -221,6 +228,7 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
         $requestAttributes->get('_route_params')->willReturn(['slug' => 'foo-bar']);
 
         $paginator->setCurrentPage(6)->shouldBeCalled();
+        $paginator->setMaxPerPage(5)->shouldBeCalled();
 
         $pagerfantaRepresentationFactory->createRepresentation($paginator, Argument::type(Route::class))->willReturn($paginatedRepresentation);
 
