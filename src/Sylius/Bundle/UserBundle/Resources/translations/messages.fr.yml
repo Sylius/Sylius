@@ -18,7 +18,8 @@ sylius:
       first_name: Prénom
       groups: Groupes
       last_name: Nom
-      email: E-mail
+      email:
+        label: E-mail
       gender: Sexe 
       birthday: Date d’anniversaire 
       billing_address: Adresse de facturation

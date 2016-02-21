@@ -18,7 +18,8 @@ sylius:
       first_name: Křestní Jméno
       groups: Skupiny
       last_name: Příjmení
-      email: Email
+      email:
+        label: Email
       birthday: Narozeniny
       billing_address: Fakturační adresa
       different_billing_address: Použít jinou adresu pro fakturaci?

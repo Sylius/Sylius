@@ -18,7 +18,8 @@ sylius:
       first_name: Imię
       groups: Grupy
       last_name: Nazwisko
-      email: Email
+      email:
+        label: Email
       birthday: Data urodzenia
       billing_address: Adres do rachunku
       different_billing_address: Użyć innego adresu do rozliczeń?

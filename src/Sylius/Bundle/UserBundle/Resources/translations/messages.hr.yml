@@ -18,7 +18,8 @@ sylius:
       first_name: Ime
       groups: Grupe
       last_name: Prezime
-      email: E-mail
+      email:
+        label: E-mail
       birthday: Datum rođenja
       billing_address: Adresa za dostavu
       different_billing_address: Želim koristiti drugu adresu za račun.

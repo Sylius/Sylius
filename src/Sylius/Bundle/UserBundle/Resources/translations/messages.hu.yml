@@ -16,7 +16,8 @@ sylius:
       first_name: Keresztnév
       groups: Csoportok
       last_name: Vezetéknév
-      email: E-mail
+      email:
+        label: E-mail
       billing_address: Számlázási cím
       different_billing_address: A számlázási címe különbözik a megadott címtől?
     user_filter:

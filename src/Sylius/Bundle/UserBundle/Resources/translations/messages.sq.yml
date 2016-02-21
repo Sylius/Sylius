@@ -18,7 +18,8 @@ sylius:
       first_name: Emri
       groups: Grupet
       last_name: Mbiemri
-      email: Email
+      email:
+        label: Email
       gender: Gjinia
       birthday: Ditëlindja
       billing_address: Adresa e faturimit

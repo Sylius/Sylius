@@ -16,7 +16,8 @@ sylius:
       first_name: ชื่อ
       groups: กลุ่ม
       last_name: นามสกุล
-      email: อีเมล
+      email:
+        label: อีเมล
       billing_address: ที่อยู่สำหรับออกใบเสร็จ
       different_billing_address: ใช้ที่อยู่อื่นสำหรับเรียกเก็บเงินหรือไม่
     user_filter:

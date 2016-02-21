@@ -12,4 +12,5 @@ sylius:
     customer:
       first_name: الاسم الأول
       last_name: اسم العائلة
-      email: البريد الإلكتروني
+      email:
+        label: البريد الإلكتروني

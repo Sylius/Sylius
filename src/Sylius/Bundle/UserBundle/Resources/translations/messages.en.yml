@@ -15,7 +15,9 @@ sylius:
             first_name: First name
             groups: Groups
             last_name: Last name
-            email: Email
+            email:
+              label: Email
+              placeholder: Please enter your email address
             gender: Gender
             birthday: Birthday
             billing_address: Billing address

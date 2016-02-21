@@ -18,7 +18,8 @@ sylius:
       first_name: Meno
       groups: Zákaznícke skupiny
       last_name: Priezvisko
-      email: Email
+      email:
+        label: Email
       gender: Pohlavie
       birthday: Dátum narodenia
       billing_address: Fakturačná adresa

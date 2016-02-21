@@ -6,4 +6,5 @@ sylius:
     user:
       email: Sähköpostiosoite
     customer:
-      email: Sähköpostiosoite
+      email:
+        label: Sähköpostiosoite

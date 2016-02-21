@@ -16,7 +16,8 @@ sylius:
       first_name: Prenume
       groups: Grupuri
       last_name: Nume
-      email: E-mail
+      email:
+        label: E-mail
       billing_address: Adresa de facturare
       different_billing_address: Folosiți o adresă de facturare diferită?
     user_filter:
