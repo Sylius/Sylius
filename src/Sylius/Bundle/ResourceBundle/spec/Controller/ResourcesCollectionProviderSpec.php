@@ -126,8 +126,8 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
         $request->query = $queryParameters;
         $queryParameters->get('page', 1)->willReturn(6);
 
-        $paginator->setCurrentPage(6)->shouldBeCalled();
         $paginator->setMaxPerPage(5)->shouldBeCalled();
+        $paginator->setCurrentPage(6)->shouldBeCalled();
 
         $this->get($requestConfiguration, $repository)->shouldReturn($paginator);
     }
@@ -161,8 +161,8 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
         $requestAttributes->get('_route')->willReturn('sylius_product_index');
         $requestAttributes->get('_route_params')->willReturn(['slug' => 'foo-bar']);
 
-        $paginator->setCurrentPage(6)->shouldBeCalled();
         $paginator->setMaxPerPage(5)->shouldBeCalled();
+        $paginator->setCurrentPage(6)->shouldBeCalled();
 
         $pagerfantaRepresentationFactory->createRepresentation($paginator, Argument::type(Route::class))->willReturn($paginatedRepresentation);
 
@@ -191,13 +191,13 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
         $request->query = $queryParameters;
         $queryParameters->get('page', 1)->willReturn(8);
 
-        $paginator->setCurrentPage(8)->shouldBeCalled();
         $paginator->setMaxPerPage(5)->shouldBeCalled();
+        $paginator->setCurrentPage(8)->shouldBeCalled();
 
         $this->get($requestConfiguration, $repository)->shouldReturn($paginator);
     }
 
-    function it_creates_a_ppaginated_representation_for_pagerfanta_for_non_html_requests_with_a_custom_repository_method(
+    function it_creates_a_paginated_representation_for_pagerfanta_for_non_html_requests_with_a_custom_repository_method(
         RequestConfiguration $requestConfiguration,
         RepositoryInterface $repository,
         Pagerfanta $paginator,
@@ -227,8 +227,8 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
         $requestAttributes->get('_route')->willReturn('sylius_product_index');
         $requestAttributes->get('_route_params')->willReturn(['slug' => 'foo-bar']);
 
-        $paginator->setCurrentPage(6)->shouldBeCalled();
         $paginator->setMaxPerPage(5)->shouldBeCalled();
+        $paginator->setCurrentPage(6)->shouldBeCalled();
 
         $pagerfantaRepresentationFactory->createRepresentation($paginator, Argument::type(Route::class))->willReturn($paginatedRepresentation);
 
