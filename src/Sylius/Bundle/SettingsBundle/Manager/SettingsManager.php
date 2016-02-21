@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\SettingsBundle\Manager;
 
-use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\SettingsBundle\Event\SettingsEvent;
 use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Bundle\SettingsBundle\Resolver\SettingsResolverInterface;
@@ -53,11 +53,6 @@ class SettingsManager implements SettingsManagerInterface
     protected $defaultResolver;
 
     /**
-     * @var Cache
-     */
-    protected $cache;
-
-    /**
      * Runtime cache for resolved parameters.
      *
      * @var Settings[]
@@ -75,7 +70,6 @@ class SettingsManager implements SettingsManagerInterface
         ObjectManager $settingsManager,
         FactoryInterface $settingsFactory,
         SettingsResolverInterface $defaultResolver,
-        Cache $cache,
         EventDispatcherInterface $eventDispatcher
     ) {
         $this->schemaRegistry = $schemaRegistry;
@@ -83,21 +77,20 @@ class SettingsManager implements SettingsManagerInterface
         $this->settingsManager = $settingsManager;
         $this->settingsFactory = $settingsFactory;
         $this->defaultResolver = $defaultResolver;
-        $this->cache = $cache;
         $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function load($schemaAlias, array $context = [], $ignoreUnknown = true)
+    public function load($schemaAlias, $ignoreUnknown = true)
     {
         $schema = $this->schemaRegistry->getSchema($schemaAlias);
 
+        $resolver = $this->defaultResolver;
+
         if ($this->resolverRegistry->has($schemaAlias)) {
             $resolver = $this->resolverRegistry->get($schemaAlias);
-        } else {
-            $resolver = $this->defaultResolver;
         }
 
         $settings = $resolver->resolve($schemaAlias);
@@ -133,6 +126,9 @@ class SettingsManager implements SettingsManagerInterface
     public function save(SettingsInterface $settings)
     {
         $this->settingsManager->persist($settings);
+
+        $this->eventDispatcher->dispatch(SettingsEvent::PRE_SAVE, new SettingsEvent($settings));
         $this->settingsManager->flush();
+        $this->eventDispatcher->dispatch(SettingsEvent::POST_SAVE, new SettingsEvent($settings));
     }
 }

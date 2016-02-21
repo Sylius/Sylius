@@ -45,7 +45,6 @@
             <argument type="service" id="sylius.manager.settings"/>
             <argument type="service" id="sylius.factory.settings"/>
             <argument type="service" id="sylius.settings.resolver.default"/>
-            <argument type="service" id="sylius.settings.cache"/>
             <argument type="service" id="event_dispatcher"/>
         </service>
 

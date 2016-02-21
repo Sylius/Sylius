@@ -11,7 +11,6 @@
 
 namespace spec\Sylius\Bundle\SettingsBundle\Manager;
 
-use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -32,13 +31,12 @@ class SettingsManagerSpec extends ObjectBehavior
     function let(
         SchemaRegistryInterface $registry,
         ServiceRegistryInterface $resolverRegistry,
-        Cache $cache,
         ObjectManager $manager,
         FactoryInterface $factory,
         SettingsResolverInterface $defaultResolver,
         EventDispatcherInterface $eventDispatcher
     ) {
-        $this->beConstructedWith($registry, $resolverRegistry, $manager, $factory, $defaultResolver, $cache, $eventDispatcher);
+        $this->beConstructedWith($registry, $resolverRegistry, $manager, $factory, $defaultResolver, $eventDispatcher);
     }
 
     function it_is_initializable()
