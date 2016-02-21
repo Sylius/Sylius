@@ -19,7 +19,7 @@ use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 interface SettingsResolverInterface
 {
     /**
-     * Resolves settings based on schema and an optional context array.
+     * Resolves settings based on schema.
      *
      * @param string $schema
      *

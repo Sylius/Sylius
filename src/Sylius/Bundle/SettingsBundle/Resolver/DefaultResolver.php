@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\SettingsBundle\Resolver;
 
+use Doctrine\ORM\NonUniqueResultException;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -33,8 +34,12 @@ class DefaultResolver implements SettingsResolverInterface
      */
     public function resolve($schema)
     {
-        return $this->settingRepository->findOneBy([
-            'schema' => $schema
-        ]);
+        try {
+            return $this->settingRepository->findOneBy([
+                'schema' => $schema
+            ]);
+        } catch (NonUniqueResultException $e) {
+            throw new \LogicException(sprintf('Multiple schemas found for "%s". You should probably define a custom settings resolver for this schema.', $schema));
+        }
     }
 }

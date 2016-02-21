@@ -125,6 +125,13 @@ class SettingsManager implements SettingsManagerInterface
      */
     public function save(SettingsInterface $settings)
     {
+        $schema = $this->schemaRegistry->getSchema($settings->getSchema());
+
+        $settingsBuilder = new SettingsBuilder();
+        $schema->buildSettings($settingsBuilder);
+
+        $settingsBuilder->resolve($settings->getParameters());
+
         $this->settingsManager->persist($settings);
 
         $this->eventDispatcher->dispatch(SettingsEvent::PRE_SAVE, new SettingsEvent($settings));
