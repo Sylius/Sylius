@@ -68,6 +68,6 @@ class SettingsManagerSpec extends ObjectBehavior
             ->willReturn([$parameter1, $parameter2])
         ;
 
-        $this->loadSettings('theme')->shouldHaveType(Settings::class);
+        $this->load('theme')->shouldHaveType(Settings::class);
     }
 }

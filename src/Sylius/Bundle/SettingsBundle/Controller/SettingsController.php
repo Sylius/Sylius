@@ -42,7 +42,7 @@ class SettingsController extends FOSRestController
         $this->isGrantedOr403($namespace);
 
         try {
-            $settings = $this->getSettingsManager()->loadSettings($namespace);
+            $settings = $this->getSettingsManager()->load($namespace);
         } catch (MissingOptionsException $e) {
             // When a Settings is not persisted yet, it won't have any initial value in database,
             // so we create a new empty instance.
@@ -70,7 +70,7 @@ class SettingsController extends FOSRestController
         $manager = $this->getSettingsManager();
 
         try {
-            $settings = $manager->loadSettings($namespace);
+            $settings = $manager->load($namespace);
         } catch (MissingOptionsException $e) {
             // When it is the first time that a Settings is being persisted,
             // it won't have any initial value in database, so we should create a new instance.
@@ -87,7 +87,7 @@ class SettingsController extends FOSRestController
         if ($form->handleRequest($request)->isValid()) {
             $messageType = 'success';
             try {
-                $manager->saveSettings($namespace, $form->getData());
+                $manager->save($form->getData());
                 $message = $this->getTranslator()->trans('sylius.settings.update', [], 'flashes');
             } catch (ValidatorException $exception) {
                 $message = $this->getTranslator()->trans($exception->getMessage(), [], 'validators');

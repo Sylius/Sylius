@@ -21,7 +21,7 @@
         <parameter key="sylius.settings.form_factory.class">Sylius\Bundle\SettingsBundle\Form\Factory\SettingsFormFactory</parameter>
         <parameter key="sylius.settings.manager.class">Sylius\Bundle\SettingsBundle\Manager\SettingsManager</parameter>
         <parameter key="sylius.settings.schema_registry.class">Sylius\Bundle\SettingsBundle\Schema\SchemaRegistry</parameter>
-        <parameter key="sylius.settings.resolver.default_resolver.class">Sylius\Bundle\SettingsBundle\Resolver\DefaultResolver</parameter>
+        <parameter key="sylius.settings.resolver.default.class">Sylius\Bundle\SettingsBundle\Resolver\DefaultResolver</parameter>
         <parameter key="sylius.settings.resolver_registry.class">Sylius\Component\Registry\ServiceRegistry</parameter>
     </parameters>
 
@@ -42,17 +42,26 @@
         <service id="sylius.settings.manager" class="%sylius.settings.manager.class%" lazy="true">
             <argument type="service" id="sylius.settings.schema_registry" />
             <argument type="service" id="sylius.manager.settings" />
-            <argument type="service" id="sylius.repository.settings" />
             <argument type="service" id="sylius.factory.settings" />
+            <argument type="service" id="sylius.settings.resolver.default"/>
             <argument type="service" id="sylius.settings.cache" />
-            <argument type="service" id="validator" />
             <argument type="service" id="event_dispatcher" />
         </service>
 
         <service id="sylius.settings.schema_registry" class="%sylius.settings.schema_registry.class%" />
 
+        <service id="sylius.settings.resolver.default" class="%sylius.settings.resolver.default.class%">
+            <argument type="service" id="sylius.repository.settings"/>
+        </service>
+
         <service id="sylius.settings.resolver_registry" class="%sylius.settings.resolver_registry.class%">
             <argument>Sylius\Bundle\SettingsBundle\Resolver\SettingsResolverInterface</argument>
+        </service>
+
+        <service id="sylius.settings.doctrine.transform_settings_listener" class="Sylius\Bundle\SettingsBundle\Doctrine\EventListener\TransformParameterListener">
+            <argument type="service" id="service_container"/>
+            <tag name="doctrine.event_listener" event="onFlush"/>
+            <tag name="doctrine.event_listener" event="postFlush"/>
         </service>
     </services>
 

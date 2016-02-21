@@ -18,9 +18,9 @@
             <generator strategy="AUTO"/>
         </id>
 
-        <field name="schema" type="string" nullable="false"/>
+        <field name="schema" column="schema_name" type="string" nullable="false"/>
 
-        <one-to-many target-entity="Sylius\Bundle\SettingsBundle\Model\ParameterInterface" mapped-by="setting" field="parameters" index-by="name">
+        <one-to-many target-entity="Sylius\Bundle\SettingsBundle\Model\ParameterInterface" mapped-by="settings" field="parameters" index-by="name">
             <cascade>
                 <cascade-persist/>
             </cascade>

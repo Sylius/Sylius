@@ -31,7 +31,7 @@ class DefaultResolver implements SettingsResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function resolve($schema, array $context = [])
+    public function resolve($schema)
     {
         return $this->settingRepository->findOneBy([
             'schema' => $schema

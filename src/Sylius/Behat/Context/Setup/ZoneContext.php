@@ -98,8 +98,8 @@ final class ZoneContext implements Context
      */
     public function defaultTaxZoneIs(ZoneInterface $zone)
     {
-        $settings = $this->settingsManager->loadSettings('sylius_taxation');
+        $settings = $this->settingsManager->load('sylius_taxation');
         $settings->set('default_tax_zone', $zone);
-        $this->settingsManager->saveSettings('sylius_taxation', $settings);
+        $this->settingsManager->save($settings);
     }
 }

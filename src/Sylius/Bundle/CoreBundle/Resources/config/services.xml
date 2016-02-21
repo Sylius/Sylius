@@ -211,7 +211,7 @@
             <argument type="service">
                 <service
                         factory-service="sylius.settings.manager"
-                        factory-method="loadSettings"
+                        factory-method="load"
                         class="Sylius\Bundle\SettingsBundle\Model\Settings"
                         >
                     <argument>sylius_taxation</argument>

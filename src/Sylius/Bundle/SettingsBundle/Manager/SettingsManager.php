@@ -15,14 +15,11 @@ use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
-use Sylius\Bundle\SettingsBundle\Resolver\DefaultResolver;
+use Sylius\Bundle\SettingsBundle\Resolver\SettingsResolverInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilder;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\ValidatorInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -40,14 +37,14 @@ class SettingsManager implements SettingsManagerInterface
     protected $settingsManager;
 
     /**
-     * @var RepositoryInterface
-     */
-    protected $settingsRepository;
-
-    /**
      * @var FactoryInterface
      */
     protected $settingsFactory;
+
+    /**
+     * @var SettingsResolverInterface
+     */
+    protected $defaultResolver;
 
     /**
      * @var Cache
@@ -62,66 +59,38 @@ class SettingsManager implements SettingsManagerInterface
     protected $resolvedSettings = [];
 
     /**
-     * @var ValidatorInterface
-     */
-    protected $validator;
-
-    /**
      * @var EventDispatcherInterface
      */
     protected $eventDispatcher;
 
-    /**
-     * @param SchemaRegistryInterface  $schemaRegistry
-     * @param ObjectManager            $settingsManager
-     * @param RepositoryInterface      $settingsRepository
-     * @param FactoryInterface         $settingsFactory
-     * @param Cache                    $cache
-     * @param ValidatorInterface       $validator
-     * @param EventDispatcherInterface $eventDispatcher
-     */
     public function __construct(
         SchemaRegistryInterface $schemaRegistry,
         ObjectManager $settingsManager,
-        RepositoryInterface $settingsRepository,
         FactoryInterface $settingsFactory,
+        SettingsResolverInterface $defaultResolver,
         Cache $cache,
-        ValidatorInterface $validator,
         EventDispatcherInterface $eventDispatcher
     ) {
         $this->schemaRegistry = $schemaRegistry;
         $this->settingsManager = $settingsManager;
-        $this->settingsRepository = $settingsRepository;
         $this->settingsFactory = $settingsFactory;
+        $this->defaultResolver = $defaultResolver;
         $this->cache = $cache;
-        $this->validator = $validator;
         $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
-     * @param       $schemaAlias
-     * @param array $context
-     * @param bool  $ignoreUnknown
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function load($schemaAlias, array $context = [], $ignoreUnknown = true)
     {
         $schema = $this->schemaRegistry->getSchema($schemaAlias);
 
-        $contextResolver = new OptionsResolver();
-        $schema->configureContext($contextResolver);
+        // try to resolve schema settings
+        $settings = $this->defaultResolver->resolve($schemaAlias);
 
-        // resolve optional schema context
-        $context = $contextResolver->resolve($context);
-
-        // we have a schema (theme) and some context ([]), get the correct resolver now
-        $resolver = new DefaultResolver($this->settingsRepository);
-        $settings = $resolver->resolve($schemaAlias, $context);
-
-        // create a new one
+        // if we could not resolve any existing settings, create a new one
         if (!$settings) {
-            /** @var SettingsInterface $settings */
             $settings = $this->settingsFactory->createNew();
             $settings->setSchema($schemaAlias);
         }
@@ -148,27 +117,21 @@ class SettingsManager implements SettingsManagerInterface
         return $settings;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function save(SettingsInterface $settings)
     {
-        $schema = $this->schemaRegistry->getSchema($settings->getSchema());
-
-        $settingsBuilder = new SettingsBuilder();
-        $schema->buildSettings($settingsBuilder);
-
-        $parameters = $settingsBuilder->resolve($settings->getParameters());
-
-        foreach ($settingsBuilder->getTransformers() as $parameter => $transformer) {
-            if (array_key_exists($parameter, $parameters)) {
-                $parameters[$parameter] = $transformer->transform($parameters[$parameter]);
-            }
-        }
-
-        $settings->setParameters($parameters);
-
         $this->settingsManager->persist($settings);
         $this->settingsManager->flush();
     }
 
+    /**
+     * @param SettingsBuilder $settingsBuilder
+     * @param array           $parameters
+     *
+     * @return array
+     */
     private function transformParameters(SettingsBuilder $settingsBuilder, array $parameters)
     {
         $transformedParameters = $parameters;

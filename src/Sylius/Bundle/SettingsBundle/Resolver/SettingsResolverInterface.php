@@ -22,9 +22,8 @@ interface SettingsResolverInterface
      * Resolves settings based on schema and an optional context array.
      *
      * @param string $schema
-     * @param array  $context
      *
      * @return SettingsInterface
      */
-    public function resolve($schema, array $context = []);
+    public function resolve($schema);
 }

@@ -75,9 +75,9 @@ class ZoneContextSpec extends ObjectBehavior
 
     function it_sets_default_zone($settingsManager, Settings $settings, ZoneInterface $zone)
     {
-        $settingsManager->loadSettings('sylius_taxation')->willReturn($settings);
+        $settingsManager->load('sylius_taxation')->willReturn($settings);
         $settings->set('default_tax_zone', $zone)->shouldBeCalled();
-        $settingsManager->saveSettings('sylius_taxation', $settings)->shouldBeCalled();
+        $settingsManager->save($settings)->shouldBeCalled();
 
         $this->defaultTaxZoneIs($zone);
     }

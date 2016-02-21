@@ -35,7 +35,7 @@ class SettingsHelperSpec extends ObjectBehavior
 
     function it_should_return_settings_by_namespace($settingsManager, Settings $settings)
     {
-        $settingsManager->loadSettings('sylius_taxation')->shouldBeCalled()->willReturn($settings);
+        $settingsManager->load('sylius_taxation')->shouldBeCalled()->willReturn($settings);
 
         $this->getSettings('sylius_taxation')->shouldReturn($settings);
     }
@@ -44,7 +44,7 @@ class SettingsHelperSpec extends ObjectBehavior
         SettingsManagerInterface $settingsManager,
         Settings $settings
     ) {
-        $settingsManager->loadSettings('sylius_shipping')->shouldBeCalled()->willReturn($settings);
+        $settingsManager->load('sylius_shipping')->shouldBeCalled()->willReturn($settings);
         $settings->get('price')->shouldBeCalled()->willReturn(19.99);
 
         $this->getSettingsParameter('sylius_shipping.price')->shouldReturn(19.99);

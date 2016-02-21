@@ -36,7 +36,7 @@ class SettingsHelper extends Helper
      */
     public function getSettings($namespace)
     {
-        return $this->settingsManager->loadSettings($namespace);
+        return $this->settingsManager->load($namespace);
     }
 
     /**
@@ -54,7 +54,7 @@ class SettingsHelper extends Helper
 
         list($namespace, $name) = explode('.', $name);
 
-        $settings = $this->settingsManager->loadSettings($namespace);
+        $settings = $this->settingsManager->load($namespace);
 
         return $settings->get($name);
     }
@@ -74,7 +74,7 @@ class SettingsHelper extends Helper
 
         list($namespace, $name) = explode('.', $name);
 
-        $settings = $this->settingsManager->loadSettings($namespace);
+        $settings = $this->settingsManager->load($namespace);
 
         return $settings->has($name);
     }
