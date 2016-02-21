@@ -11,7 +11,7 @@
     'use strict';
 
     $(document).ready(function() {
-        $('select[name$="[country]"]').on('change', function(event) {
+        $('select[name$="[countryCode]"]').on('change', function(event) {
             var $select = $(event.currentTarget);
             var $provinceContainer = $select.closest('div.form-group').next('div.province-container');
             var provinceName = $select.attr('name').replace('country', 'province');
@@ -23,7 +23,7 @@
                 return;
             }
 
-            $.get($provinceContainer.attr('data-url'), {countryId: $(this).val()}, function (response) {
+            $.get($provinceContainer.attr('data-url'), {countryCode: $(this).val()}, function (response) {
                 if (!response.content) {
                     $provinceContainer.fadeOut('slow', function () {
                         $provinceContainer.html('');

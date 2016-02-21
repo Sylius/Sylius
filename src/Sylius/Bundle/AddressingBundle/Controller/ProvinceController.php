@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\AddressingBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectRepository;
+use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -37,12 +38,13 @@ class ProvinceController extends ResourceController
      */
     public function choiceFormAction(Request $request)
     {
-        if (!$request->isXmlHttpRequest() || null === $countryId = $request->query->get('countryId')) {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+        if (!$configuration->isHtmlRequest() || null === $countryCode = $request->query->get('countryCode')) {
             throw new AccessDeniedException();
         }
 
         /* @var CountryInterface $country */
-        if (!$country = $this->getCountryRepository()->find($countryId)) {
+        if (!$country = $this->getCountryRepository()->findOneBy(['code' => $countryCode])) {
             throw new NotFoundHttpException('Requested country does not exist.');
         }
 
@@ -52,12 +54,16 @@ class ProvinceController extends ResourceController
 
         $form = $this->createProvinceChoiceForm($country);
 
-        $content = $this->renderView($this->getConfiguration()->getTemplate('_provinceChoiceForm.html'), [
-            'form' => $form->createView(),
-        ]);
+        $view = View::create()
+            ->setData([
+                'metadata' => $this->metadata,
+                'form' => $form->createView(),
+            ])
+            ->setTemplate($configuration->getTemplate('_provinceChoiceForm.html'))
+        ;
 
         return new JsonResponse([
-            'content' => $content,
+            'content' => $this->viewHandler->handle($configuration, $view)->getContent(),
         ]);
     }
 
@@ -105,7 +111,7 @@ class ProvinceController extends ResourceController
      */
     protected function createProvinceChoiceForm(CountryInterface $country)
     {
-        return $this->get('form.factory')->createNamed('sylius_address_province', 'sylius_province_choice', null, [
+        return $this->get('form.factory')->createNamed('sylius_address_province', 'sylius_province_code_choice', null, [
             'country' => $country,
             'label' => 'sylius.form.address.province',
             'empty_value' => 'sylius.form.province.select',
