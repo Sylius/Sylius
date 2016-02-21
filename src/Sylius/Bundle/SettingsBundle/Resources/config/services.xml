@@ -62,6 +62,7 @@
             <argument type="service" id="service_container"/>
             <tag name="doctrine.event_listener" event="onFlush"/>
             <tag name="doctrine.event_listener" event="postFlush"/>
+            <tag name="doctrine.event_listener" event="postLoad"/>
         </service>
     </services>
 

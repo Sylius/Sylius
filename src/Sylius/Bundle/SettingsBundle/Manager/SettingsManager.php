@@ -109,9 +109,7 @@ class SettingsManager implements SettingsManagerInterface
             }
         }
 
-        $parameters = $this->transformParameters($settingsBuilder, $parameters);
         $parameters = $settingsBuilder->resolve($parameters);
-
         $settings->setParameters($parameters);
 
         return $settings;
@@ -124,24 +122,5 @@ class SettingsManager implements SettingsManagerInterface
     {
         $this->settingsManager->persist($settings);
         $this->settingsManager->flush();
-    }
-
-    /**
-     * @param SettingsBuilder $settingsBuilder
-     * @param array           $parameters
-     *
-     * @return array
-     */
-    private function transformParameters(SettingsBuilder $settingsBuilder, array $parameters)
-    {
-        $transformedParameters = $parameters;
-
-        foreach ($settingsBuilder->getTransformers() as $parameter => $transformer) {
-            if (array_key_exists($parameter, $parameters)) {
-                $transformedParameters[$parameter] = $transformer->reverseTransform($parameters[$parameter]);
-            }
-        }
-
-        return $transformedParameters;
     }
 }

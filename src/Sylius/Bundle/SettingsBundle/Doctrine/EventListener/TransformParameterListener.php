@@ -11,9 +11,11 @@
 
 namespace Sylius\Bundle\SettingsBundle\Doctrine\EventListener;
 
+use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use Sylius\Bundle\SettingsBundle\Model\ParameterInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilder;
+use Sylius\Bundle\SettingsBundle\Transformer\ParameterTransformerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -34,6 +36,18 @@ class TransformParameterListener
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
+    }
+
+    /**
+     * @param LifecycleEventArgs $event
+     */
+    public function postLoad(LifecycleEventArgs $event)
+    {
+        $parameter = $event->getObject();
+
+        if ($parameter instanceof ParameterInterface) {
+            $this->reverseTransform($parameter);
+        }
     }
 
     /**
@@ -78,6 +92,28 @@ class TransformParameterListener
             'value' => $parameter->getValue(),
         ];
 
+        if ($transformer = $this->getTransformer($parameter)) {
+            $parameter->setValue($transformer->transform($parameter->getValue()));
+        }
+    }
+
+    /**
+     * @param ParameterInterface $parameter
+     */
+    protected function reverseTransform(ParameterInterface $parameter)
+    {
+        if ($transformer = $this->getTransformer($parameter)) {
+            $parameter->setValue($transformer->reverseTransform($parameter->getValue()));
+        }
+    }
+
+    /**
+     * @param ParameterInterface $parameter
+     *
+     * @return ParameterTransformerInterface
+     */
+    protected function getTransformer(ParameterInterface $parameter)
+    {
         $registry = $this->container->get('sylius.settings.schema_registry');
         $schema = $registry->getSchema($parameter->getSettings()->getSchema());
 
@@ -86,8 +122,7 @@ class TransformParameterListener
 
         $transformers = $settingsBuilder->getTransformers();
         if (isset($transformers[$parameter->getName()])) {
-            $transformer = $transformers[$parameter->getName()];
-            $parameter->setValue($transformer->transform($parameter->getValue()));
+            return $transformers[$parameter->getName()];
         }
     }
 }
