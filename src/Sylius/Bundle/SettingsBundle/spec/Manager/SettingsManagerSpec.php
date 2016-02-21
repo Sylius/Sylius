@@ -16,14 +16,13 @@ use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
-use Sylius\Bundle\SettingsBundle\Model\ParameterInterface;
-use Sylius\Bundle\SettingsBundle\Model\Settings;
+use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
+use Sylius\Bundle\SettingsBundle\Resolver\SettingsResolverInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\Validator\ValidatorInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -32,14 +31,14 @@ class SettingsManagerSpec extends ObjectBehavior
 {
     function let(
         SchemaRegistryInterface $registry,
+        ServiceRegistryInterface $resolverRegistry,
         Cache $cache,
         ObjectManager $manager,
-        RepositoryInterface $repository,
         FactoryInterface $factory,
-        ValidatorInterface $validator,
+        SettingsResolverInterface $defaultResolver,
         EventDispatcherInterface $eventDispatcher
     ) {
-        $this->beConstructedWith($registry, $manager, $repository, $factory, $cache, $validator, $eventDispatcher);
+        $this->beConstructedWith($registry, $resolverRegistry, $manager, $factory, $defaultResolver, $cache, $eventDispatcher);
     }
 
     function it_is_initializable()
@@ -53,21 +52,38 @@ class SettingsManagerSpec extends ObjectBehavior
     }
 
     function it_can_load_settings_by_schema_alias(
-        $repository,
         $registry,
+        $resolverRegistry,
+        $defaultResolver,
         SchemaInterface $schema,
-        ParameterInterface $parameter1,
-        ParameterInterface $parameter2
+        SettingsInterface $settings
     ) {
         $registry->getSchema('theme')
             ->willReturn($schema)
         ;
 
-        $repository->findBy(Argument::any())
+        $resolverRegistry->has('theme')
             ->shouldBeCalled()
-            ->willReturn([$parameter1, $parameter2])
+            ->willReturn(false)
         ;
 
-        $this->load('theme')->shouldHaveType(Settings::class);
+        $defaultResolver->resolve('theme')
+            ->shouldBeCalled()
+            ->willReturn($settings)
+        ;
+
+        $settings->getParameters()
+            ->shouldBeCalled()
+            ->willReturn([
+                'title' => 'Sylius',
+                'description' => 'Sylius is awesome',
+            ])
+        ;
+
+        $settings->setParameters(Argument::any())
+            ->shouldBeCalled()
+        ;
+
+        $this->load('theme')->shouldHaveType(SettingsInterface::class);
     }
 }
