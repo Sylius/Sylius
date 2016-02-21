@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\WebBundle\Controller\Frontend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Frontend homepage controller.
@@ -20,6 +21,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  */
 class HomepageController extends Controller
 {
+    /**
+     * Store front page.
+     *
+     * @return Response
+     */
     public function mainAction()
     {
         return $this->render('SyliusWebBundle:Frontend/Homepage:main.html.twig');
