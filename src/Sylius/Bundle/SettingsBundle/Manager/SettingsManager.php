@@ -18,6 +18,7 @@ use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Bundle\SettingsBundle\Resolver\SettingsResolverInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilder;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -30,6 +31,11 @@ class SettingsManager implements SettingsManagerInterface
      * @var SchemaRegistryInterface
      */
     protected $schemaRegistry;
+
+    /**
+     * @var ServiceRegistryInterface
+     */
+    protected $resolverRegistry;
 
     /**
      * @var ObjectManager
@@ -65,6 +71,7 @@ class SettingsManager implements SettingsManagerInterface
 
     public function __construct(
         SchemaRegistryInterface $schemaRegistry,
+        ServiceRegistryInterface $resolverRegistry,
         ObjectManager $settingsManager,
         FactoryInterface $settingsFactory,
         SettingsResolverInterface $defaultResolver,
@@ -72,6 +79,7 @@ class SettingsManager implements SettingsManagerInterface
         EventDispatcherInterface $eventDispatcher
     ) {
         $this->schemaRegistry = $schemaRegistry;
+        $this->resolverRegistry = $resolverRegistry;
         $this->settingsManager = $settingsManager;
         $this->settingsFactory = $settingsFactory;
         $this->defaultResolver = $defaultResolver;
@@ -86,10 +94,14 @@ class SettingsManager implements SettingsManagerInterface
     {
         $schema = $this->schemaRegistry->getSchema($schemaAlias);
 
-        // try to resolve schema settings
-        $settings = $this->defaultResolver->resolve($schemaAlias);
+        if ($this->resolverRegistry->has($schemaAlias)) {
+            $resolver = $this->resolverRegistry->get($schemaAlias);
+        } else {
+            $resolver = $this->defaultResolver;
+        }
 
-        // if we could not resolve any existing settings, create a new one
+        $settings = $resolver->resolve($schemaAlias);
+
         if (!$settings) {
             $settings = $this->settingsFactory->createNew();
             $settings->setSchema($schemaAlias);

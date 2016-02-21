@@ -20,13 +20,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 interface SchemaInterface
 {
     /**
-     * Configure the required or optional context that this schema needs to resolve properly.
-     *
-     * @param OptionsResolver $resolver
-     */
-    public function configureContext(OptionsResolver $resolver);
-
-    /**
      * @param SettingsBuilderInterface $builder
      */
     public function buildSettings(SettingsBuilderInterface $builder);

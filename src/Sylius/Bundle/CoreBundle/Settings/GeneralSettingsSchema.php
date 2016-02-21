@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Settings;
 
-use Sylius\Bundle\SettingsBundle\Schema\AbstractSchema;
+use Sylius\Bundle\SettingsBundle\Schema\SchemaInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Currency;
@@ -23,7 +23,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class GeneralSettingsSchema extends AbstractSchema
+class GeneralSettingsSchema implements SchemaInterface
 {
     /**
      * @var array
