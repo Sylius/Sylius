@@ -12,8 +12,6 @@
 namespace Sylius\Bundle\WebBundle\Controller\Frontend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Frontend homepage controller.
@@ -22,25 +20,8 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class HomepageController extends Controller
 {
-    public function mainAction(Request $request)
+    public function mainAction()
     {
-        $manager = $this->get('sylius.settings.manager');
-
-        $zone = $this->get('sylius.repository.zone')->findAll()[0];
-
-        $settings = $manager->load('sylius_taxation');
-//        $settings['default_tax_zone'] = $zone;
-
-//        echo '<pre>';
-        var_dump($settings->getParameters()['default_tax_zone']->getId());
-//
-        $manager->save($settings);
-
-        var_dump($settings->getParameters()['default_tax_zone']->getId());
-
-
-        die;
-
         return $this->render('SyliusWebBundle:Frontend/Homepage:main.html.twig');
     }
 }
