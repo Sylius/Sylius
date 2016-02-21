@@ -14,7 +14,11 @@ namespace spec\Sylius\Bundle\SettingsBundle\Manager;
 use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
+use Sylius\Bundle\SettingsBundle\Model\ParameterInterface;
+use Sylius\Bundle\SettingsBundle\Model\Settings;
+use Sylius\Bundle\SettingsBundle\Schema\SchemaInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -46,5 +50,24 @@ class SettingsManagerSpec extends ObjectBehavior
     function it_should_be_a_Sylius_settings_manager()
     {
         $this->shouldImplement(SettingsManagerInterface::class);
+    }
+
+    function it_can_load_settings_by_schema_alias(
+        $repository,
+        $registry,
+        SchemaInterface $schema,
+        ParameterInterface $parameter1,
+        ParameterInterface $parameter2
+    ) {
+        $registry->getSchema('theme')
+            ->willReturn($schema)
+        ;
+
+        $repository->findBy(Argument::any())
+            ->shouldBeCalled()
+            ->willReturn([$parameter1, $parameter2])
+        ;
+
+        $this->loadSettings('theme')->shouldHaveType(Settings::class);
     }
 }

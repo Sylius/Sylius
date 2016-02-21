@@ -15,7 +15,7 @@
 
     <mapped-superclass name="Sylius\Bundle\SettingsBundle\Model\Parameter" table="sylius_settings_parameter">
         <unique-constraints>
-            <unique-constraint columns="setting_id,name" name="name_idx"/>
+            <unique-constraint columns="settings_id,name" name="name_idx"/>
         </unique-constraints>
 
         <id name="id" column="id" type="integer">
@@ -25,8 +25,8 @@
         <field name="name" column="name" type="string"/>
         <field name="value" column="value" type="object" nullable="true"/>
 
-        <many-to-one target-entity="Sylius\Bundle\SettingsBundle\Model\SettingInterface" field="setting">
-            <join-column name="setting_id" referenced-column-name="id" on-delete="CASCADE"/>
+        <many-to-one target-entity="Sylius\Bundle\SettingsBundle\Model\SettingsInterface" field="settings">
+            <join-column name="settings_id" referenced-column-name="id" on-delete="CASCADE"/>
         </many-to-one>
     </mapped-superclass>
 

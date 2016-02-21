@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Settings;
 
 use Doctrine\Common\Persistence\ObjectRepository;
-use Sylius\Bundle\SettingsBundle\Schema\SchemaInterface;
+use Sylius\Bundle\SettingsBundle\Schema\AbstractSchema;
 use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
 use Sylius\Bundle\SettingsBundle\Transformer\ObjectToIdentifierTransformer;
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -23,7 +23,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class TaxationSettingsSchema implements SchemaInterface
+class TaxationSettingsSchema extends AbstractSchema
 {
     /**
      * Zone repository.

@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\WebBundle\Controller\Frontend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -21,13 +22,22 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class HomepageController extends Controller
 {
-    /**
-     * Store front page.
-     *
-     * @return Response
-     */
-    public function mainAction()
+    public function mainAction(Request $request)
     {
+        $manager = $this->get('sylius.settings.manager');
+
+        $settings = $manager->load('sylius_general');
+        $settings['title'] = 'Heeey!!!';
+
+        echo '<pre>';
+        print_r($settings->getParameters());
+
+        $manager->save($settings);
+        die;
+
+        echo 123;
+        die;
+
         return $this->render('SyliusWebBundle:Frontend/Homepage:main.html.twig');
     }
 }

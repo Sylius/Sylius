@@ -42,9 +42,9 @@ class SettingsFormFactory implements SettingsFormFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function create($namespace, $data = null, array $options = [])
+    public function create($schemaAlias, $data = null, array $options = [])
     {
-        $schema = $this->schemaRegistry->getSchema($namespace);
+        $schema = $this->schemaRegistry->getSchema($schemaAlias);
         $builder = $this->formFactory->createBuilder('form', $data, array_merge_recursive(
             ['data_class' => null], $options
         ));

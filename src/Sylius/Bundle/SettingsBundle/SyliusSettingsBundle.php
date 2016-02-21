@@ -16,6 +16,7 @@ use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\SettingsBundle\DependencyInjection\Compiler\RegisterSchemasPass;
 use Sylius\Bundle\SettingsBundle\Model\ParameterInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 
 /**
  * Settings system for ecommerce Symfony2 applications.
@@ -51,6 +52,7 @@ class SyliusSettingsBundle extends AbstractResourceBundle
     {
         return [
             ParameterInterface::class => 'sylius.model.parameter.class',
+            SettingsInterface::class => 'sylius.model.settings.class'
         ];
     }
 

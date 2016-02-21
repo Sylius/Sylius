@@ -12,11 +12,12 @@
 namespace Sylius\Bundle\SettingsBundle\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Steffen Brem <steffenbrem@gmail.com>
  */
-interface SettingInterface
+interface SettingsInterface extends ResourceInterface, \IteratorAggregate, \ArrayAccess, \Countable
 {
     /**
      * @return string
@@ -29,29 +30,35 @@ interface SettingInterface
     public function setSchema($schema);
 
     /**
-     * @return Collection|ParameterInterface[]
+     * @return array
      */
     public function getParameters();
+
+    /**
+     * @param array $parameters
+     */
+    public function setParameters(array $parameters);
 
     /**
      * @param string $name
      *
      * @return ParameterInterface
      */
-    public function getParameter($name);
+    public function get($name);
 
     /**
-     * @param ParameterInterface $parameter
+     * @param string $name
      */
-    public function hasParameter(ParameterInterface $parameter);
+    public function has($name);
 
     /**
-     * @param ParameterInterface $parameter
+     * @param string $name
+     * @param mixed $value
      */
-    public function addParameter(ParameterInterface $parameter);
+    public function set($name, $value);
 
     /**
-     * @param ParameterInterface $parameter
+     * @param $name
      */
-    public function removeParameter(ParameterInterface $parameter);
+    public function remove($name);
 }

@@ -13,15 +13,15 @@ namespace Sylius\Bundle\SettingsBundle\Manager;
 
 use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\SettingsBundle\Event\SettingsEvent;
+use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
+use Sylius\Bundle\SettingsBundle\Resolver\DefaultResolver;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilder;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
-use Symfony\Component\Validator\Exception\ValidatorException;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\ValidatorInterface;
 
 /**
@@ -37,17 +37,17 @@ class SettingsManager implements SettingsManagerInterface
     /**
      * @var ObjectManager
      */
-    protected $parameterManager;
+    protected $settingsManager;
 
     /**
      * @var RepositoryInterface
      */
-    protected $parameterRepository;
+    protected $settingsRepository;
 
     /**
      * @var FactoryInterface
      */
-    protected $parameterFactory;
+    protected $settingsFactory;
 
     /**
      * @var Cache
@@ -73,48 +73,60 @@ class SettingsManager implements SettingsManagerInterface
 
     /**
      * @param SchemaRegistryInterface  $schemaRegistry
-     * @param ObjectManager            $parameterManager
-     * @param RepositoryInterface      $parameterRepository
-     * @param FactoryInterface         $parameterFactory
+     * @param ObjectManager            $settingsManager
+     * @param RepositoryInterface      $settingsRepository
+     * @param FactoryInterface         $settingsFactory
      * @param Cache                    $cache
      * @param ValidatorInterface       $validator
      * @param EventDispatcherInterface $eventDispatcher
      */
     public function __construct(
         SchemaRegistryInterface $schemaRegistry,
-        ObjectManager $parameterManager,
-        RepositoryInterface $parameterRepository,
-        FactoryInterface $parameterFactory,
+        ObjectManager $settingsManager,
+        RepositoryInterface $settingsRepository,
+        FactoryInterface $settingsFactory,
         Cache $cache,
         ValidatorInterface $validator,
         EventDispatcherInterface $eventDispatcher
     ) {
         $this->schemaRegistry = $schemaRegistry;
-        $this->parameterManager = $parameterManager;
-        $this->parameterRepository = $parameterRepository;
-        $this->parameterFactory = $parameterFactory;
+        $this->settingsManager = $settingsManager;
+        $this->settingsRepository = $settingsRepository;
+        $this->settingsFactory = $settingsFactory;
         $this->cache = $cache;
         $this->validator = $validator;
         $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
-     * {@inheritdoc}
+     * @param       $schemaAlias
+     * @param array $context
+     * @param bool  $ignoreUnknown
+     *
+     * @return array
      */
-    public function loadSettings($namespace, $ignoreUnknown = true)
+    public function load($schemaAlias, array $context = [], $ignoreUnknown = true)
     {
-        if (isset($this->resolvedSettings[$namespace])) {
-            return $this->resolvedSettings[$namespace];
+        $schema = $this->schemaRegistry->getSchema($schemaAlias);
+
+        $contextResolver = new OptionsResolver();
+        $schema->configureContext($contextResolver);
+
+        // resolve optional schema context
+        $context = $contextResolver->resolve($context);
+
+        // we have a schema (theme) and some context ([]), get the correct resolver now
+        $resolver = new DefaultResolver($this->settingsRepository);
+        $settings = $resolver->resolve($schemaAlias, $context);
+
+        // create a new one
+        if (!$settings) {
+            /** @var SettingsInterface $settings */
+            $settings = $this->settingsFactory->createNew();
+            $settings->setSchema($schemaAlias);
         }
 
-        if ($this->cache->contains($namespace)) {
-            $parameters = $this->cache->fetch($namespace);
-        } else {
-            $parameters = $this->getParameters($namespace);
-            $this->cache->save($namespace, $parameters);
-        }
-
-        $schema = $this->schemaRegistry->getSchema($namespace);
+        $parameters = $settings->getParameters();
 
         $settingsBuilder = new SettingsBuilder();
         $schema->buildSettings($settingsBuilder);
@@ -131,17 +143,14 @@ class SettingsManager implements SettingsManagerInterface
         $parameters = $this->transformParameters($settingsBuilder, $parameters);
         $parameters = $settingsBuilder->resolve($parameters);
 
-        return $this->resolvedSettings[$namespace] = new Settings($parameters);
+        $settings->setParameters($parameters);
+
+        return $settings;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws ValidatorException
-     */
-    public function saveSettings($namespace, Settings $settings)
+    public function save(SettingsInterface $settings)
     {
-        $schema = $this->schemaRegistry->getSchema($namespace);
+        $schema = $this->schemaRegistry->getSchema($settings->getSchema());
 
         $settingsBuilder = new SettingsBuilder();
         $schema->buildSettings($settingsBuilder);
@@ -154,61 +163,10 @@ class SettingsManager implements SettingsManagerInterface
             }
         }
 
-        if (isset($this->resolvedSettings[$namespace])) {
-            $transformedParameters = $this->transformParameters($settingsBuilder, $parameters);
-            $this->resolvedSettings[$namespace]->setParameters($transformedParameters);
-        }
+        $settings->setParameters($parameters);
 
-        $persistedParameters = $this->parameterRepository->findBy(['namespace' => $namespace]);
-        $persistedParametersMap = [];
-
-        foreach ($persistedParameters as $parameter) {
-            $persistedParametersMap[$parameter->getName()] = $parameter;
-        }
-
-        $this->eventDispatcher->dispatch(SettingsEvent::PRE_SAVE, new SettingsEvent($namespace, $settings, $parameters));
-
-        foreach ($parameters as $name => $value) {
-            if (isset($persistedParametersMap[$name])) {
-                $persistedParametersMap[$name]->setValue($value);
-            } else {
-                $parameter = $this->parameterFactory->createNew();
-
-                $parameter->setNamespace($namespace);
-                $parameter->setName($name);
-                $parameter->setValue($value);
-
-                /* @var $errors ConstraintViolationListInterface */
-                $errors = $this->validator->validate($parameter);
-                if (0 < $errors->count()) {
-                    throw new ValidatorException($errors->get(0)->getMessage());
-                }
-
-                $this->parameterManager->persist($parameter);
-            }
-        }
-
-        $this->parameterManager->flush();
-
-        $this->eventDispatcher->dispatch(SettingsEvent::POST_SAVE, new SettingsEvent($namespace, $settings, $parameters));
-
-        $this->cache->save($namespace, $parameters);
-    }
-
-    /**
-     * @param string $namespace
-     *
-     * @return array
-     */
-    private function getParameters($namespace)
-    {
-        $parameters = [];
-
-        foreach ($this->parameterRepository->findBy(['namespace' => $namespace]) as $parameter) {
-            $parameters[$parameter->getName()] = $parameter->getValue();
-        }
-
-        return $parameters;
+        $this->settingsManager->persist($settings);
+        $this->settingsManager->flush();
     }
 
     private function transformParameters(SettingsBuilder $settingsBuilder, array $parameters)

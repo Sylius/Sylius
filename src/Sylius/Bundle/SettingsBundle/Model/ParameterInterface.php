@@ -22,14 +22,14 @@ interface ParameterInterface
     public function getId();
 
     /**
-     * @return SettingInterface
+     * @return SettingsInterface
      */
-    public function getSetting();
+    public function getSettings();
 
     /**
-     * @param SettingInterface $setting
+     * @param SettingsInterface $settings
      */
-    public function setSetting(SettingInterface $setting);
+    public function setSettings(SettingsInterface $settings);
 
     /**
      * @return string

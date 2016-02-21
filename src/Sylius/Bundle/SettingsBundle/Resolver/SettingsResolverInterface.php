@@ -9,24 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\SettingsBundle\Manager;
+namespace Sylius\Bundle\SettingsBundle\Resolver;
 
 use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 
 /**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Steffen Brem <steffenbrem@gmail.com>
  */
-interface SettingsManagerInterface
+interface SettingsResolverInterface
 {
     /**
+     * Resolves settings based on schema and an optional context array.
+     *
      * @param string $schema
+     * @param array  $context
      *
      * @return SettingsInterface
      */
-    public function load($schema);
-
-    /**
-     * @param SettingsInterface $setting
-     */
-    public function save(SettingsInterface $setting);
+    public function resolve($schema, array $context = []);
 }

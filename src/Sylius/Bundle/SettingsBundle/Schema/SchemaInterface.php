@@ -12,12 +12,20 @@
 namespace Sylius\Bundle\SettingsBundle\Schema;
 
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface SchemaInterface
 {
+    /**
+     * Configure the required or optional context that this schema needs to resolve properly.
+     *
+     * @param OptionsResolver $resolver
+     */
+    public function configureContext(OptionsResolver $resolver);
+
     /**
      * @param SettingsBuilderInterface $builder
      */

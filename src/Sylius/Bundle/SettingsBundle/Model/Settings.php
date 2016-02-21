@@ -1,32 +1,60 @@
 <?php
 
-/*
- * This file is part of the Sylius package.
- *
- * (c) Paweł Jędrzejewski
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Sylius\Bundle\SettingsBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Steffen Brem <steffenbrem@gmail.com>
  */
-class Settings implements \ArrayAccess
+class Settings implements SettingsInterface
 {
     /**
-     * @var array
+     * @var mixed
+     */
+    protected $id;
+
+    /**
+     * @var string
+     */
+    protected $schema;
+
+    /**
+     * @var ArrayCollection|ParameterInterface[]
      */
     protected $parameters;
 
-    /**
-     * @param array $parameters
-     */
-    public function __construct(array $parameters)
+    public function __construct()
     {
-        $this->parameters = $parameters;
+        $this->parameters = new ArrayCollection();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSchema()
+    {
+        return $this->schema;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setSchema($schema)
+    {
+        if (null !== $this->schema) {
+            throw new \LogicException('A settings schema is immutable, you have to define a new "Setting" object to use another schema.');
+        }
+
+        $this->schema = $schema;
     }
 
     /**
@@ -34,7 +62,12 @@ class Settings implements \ArrayAccess
      */
     public function getParameters()
     {
-        return $this->parameters;
+        $parameters = [];
+        foreach ($this->parameters as $parameter) {
+            $parameters[$parameter->getName()] = $parameter->getValue();
+        }
+
+        return $parameters;
     }
 
     /**
@@ -42,15 +75,9 @@ class Settings implements \ArrayAccess
      */
     public function setParameters(array $parameters)
     {
-        $this->parameters = $parameters;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function has($name)
-    {
-        return array_key_exists($name, $this->parameters);
+        foreach ($parameters as $name => $value) {
+            $this->set($name, $value);
+        }
     }
 
     /**
@@ -62,7 +89,15 @@ class Settings implements \ArrayAccess
             throw new \InvalidArgumentException(sprintf('Parameter with name "%s" does not exist.', $name));
         }
 
-        return $this->parameters[$name];
+        return $this->parameters->get($name)->getValue();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function has($name)
+    {
+        return $this->parameters->containsKey($name);
     }
 
     /**
@@ -70,7 +105,18 @@ class Settings implements \ArrayAccess
      */
     public function set($name, $value)
     {
-        $this->parameters[$name] = $value;
+        if (!$this->has($name)) {
+            $parameter = new Parameter();
+
+            $parameter->setSettings($this);
+            $parameter->setName($name);
+            $parameter->setValue($value);
+
+            $this->parameters->set($name, $parameter);
+        } else {
+            $parameter = $this->parameters->get($name);
+            $parameter->setValue($value);
+        }
     }
 
     /**
@@ -78,11 +124,17 @@ class Settings implements \ArrayAccess
      */
     public function remove($name)
     {
-        if (!$this->has($name)) {
-            throw new \InvalidArgumentException(sprintf('Parameter with name "%s" does not exist.', $name));
+        if ($this->has($name)) {
+            $this->parameters->remove($name);
         }
+    }
 
-        unset($this->parameters[$name]);
+    /**
+     * {@inheritdoc}
+     */
+    public function getIterator()
+    {
+        return new \ArrayIterator($this->getParameters());
     }
 
     /**
@@ -115,5 +167,13 @@ class Settings implements \ArrayAccess
     public function offsetUnset($offset)
     {
         $this->remove($offset);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function count()
+    {
+        return $this->parameters->count();
     }
 }

@@ -22,9 +22,9 @@ class Parameter implements ParameterInterface
     protected $id;
 
     /**
-     * @var SettingInterface
+     * @var SettingsInterface
      */
-    protected $setting;
+    protected $settings;
 
     /**
      * @var string
@@ -47,17 +47,17 @@ class Parameter implements ParameterInterface
     /**
      * {@inheritdoc}
      */
-    public function getSetting()
+    public function getSettings()
     {
-        return $this->setting;
+        return $this->settings;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setSetting(SettingInterface $setting)
+    public function setSettings(SettingsInterface $settings)
     {
-        $this->setting = $setting;
+        $this->settings = $settings;
     }
 
     /**

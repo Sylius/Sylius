@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Settings;
 
-use Sylius\Bundle\SettingsBundle\Schema\SchemaInterface;
+use Sylius\Bundle\SettingsBundle\Schema\AbstractSchema;
 use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SecuritySettingsSchema implements SchemaInterface
+class SecuritySettingsSchema extends AbstractSchema
 {
     /**
      * {@inheritdoc}
