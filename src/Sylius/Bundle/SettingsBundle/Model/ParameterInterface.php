@@ -22,14 +22,14 @@ interface ParameterInterface
     public function getId();
 
     /**
-     * @return string
+     * @return SettingInterface
      */
-    public function getNamespace();
+    public function getSetting();
 
     /**
-     * @param string $namespace
+     * @param SettingInterface $setting
      */
-    public function setNamespace($namespace);
+    public function setSetting(SettingInterface $setting);
 
     /**
      * @return string

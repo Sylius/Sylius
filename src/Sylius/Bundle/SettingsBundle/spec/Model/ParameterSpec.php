@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\SettingsBundle\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\SettingsBundle\Model\ParameterInterface;
+use Sylius\Bundle\SettingsBundle\Model\SettingInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -34,20 +35,15 @@ class ParameterSpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
-    function it_should_not_have_namespace_by_default()
-    {
-        $this->getNamespace()->shouldReturn(null);
-    }
-
-    function its_namespace_should_be_mutable()
-    {
-        $this->setNamespace('general-settings');
-        $this->getNamespace()->shouldReturn('general-settings');
-    }
-
     function it_should_be_unnamed_by_default()
     {
         $this->getName()->shouldReturn(null);
+    }
+
+    function its_setting_is_mutable(SettingInterface $setting)
+    {
+        $this->setSetting($setting);
+        $this->getSetting()->shouldReturn($setting);
     }
 
     function its_name_should_be_mutable()

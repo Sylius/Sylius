@@ -22,11 +22,9 @@ class Parameter implements ParameterInterface
     protected $id;
 
     /**
-     * Parameter settings namespace.
-     *
-     * @var string
+     * @var SettingInterface
      */
-    protected $namespace;
+    protected $setting;
 
     /**
      * @var string
@@ -49,17 +47,17 @@ class Parameter implements ParameterInterface
     /**
      * {@inheritdoc}
      */
-    public function getNamespace()
+    public function getSetting()
     {
-        return $this->namespace;
+        return $this->setting;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setNamespace($namespace)
+    public function setSetting(SettingInterface $setting)
     {
-        $this->namespace = $namespace;
+        $this->setting = $setting;
     }
 
     /**
