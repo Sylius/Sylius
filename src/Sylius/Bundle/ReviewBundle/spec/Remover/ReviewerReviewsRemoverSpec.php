@@ -15,7 +15,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\ReviewBundle\Remover\ReviewerReviewsRemoverInterface;
-use Sylius\Component\Review\Calculator\ReviewableRatingCalculatorInterface;
+use Sylius\Bundle\ReviewBundle\Updater\ReviewableRatingUpdaterInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
@@ -28,9 +28,9 @@ class ReviewerReviewsRemoverSpec extends ObjectBehavior
     function let(
         EntityRepository $reviewRepository,
         ObjectManager $reviewManager,
-        ReviewableRatingCalculatorInterface $averageRatingCalculator
+        ReviewableRatingUpdaterInterface $averageRatingUpdater
     ) {
-        $this->beConstructedWith($reviewRepository, $reviewManager, $averageRatingCalculator);
+        $this->beConstructedWith($reviewRepository, $reviewManager, $averageRatingUpdater);
     }
 
     function it_is_initializable()
@@ -44,7 +44,7 @@ class ReviewerReviewsRemoverSpec extends ObjectBehavior
     }
 
     function it_removes_soft_deleted_customer_reviews_and_recalculates_their_product_ratings(
-        $averageRatingCalculator,
+        $averageRatingUpdater,
         $reviewRepository,
         $reviewManager,
         ReviewerInterface $author,
@@ -57,9 +57,7 @@ class ReviewerReviewsRemoverSpec extends ObjectBehavior
         $reviewManager->remove($review)->shouldBeCalled();
         $reviewManager->flush()->shouldBeCalled();
 
-        $averageRatingCalculator->calculate($reviewSubject)->willReturn(0);
-
-        $reviewSubject->setAverageRating(0)->shouldBeCalled();
+        $averageRatingUpdater->update($reviewSubject)->shouldBeCalled();
 
         $this->removeReviewerReviews($author);
     }

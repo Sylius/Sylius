@@ -19,7 +19,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 /**
  * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
  */
-class ReviewDeleteListener
+class ReviewChangeListener
 {
     /**
      * @var ReviewableRatingUpdaterInterface

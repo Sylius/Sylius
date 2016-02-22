@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Review\Model;
 
-use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
@@ -76,7 +75,7 @@ interface ReviewInterface extends TimestampableInterface, ResourceInterface
     public function getStatus();
 
     /**
-     * @return ProductInterface
+     * @return ReviewableInterface
      */
     public function getReviewSubject();
 
