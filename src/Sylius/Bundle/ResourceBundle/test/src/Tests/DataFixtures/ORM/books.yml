@@ -1,7 +1,11 @@
 AppBundle\Entity\Book:
     book1:
-        title: "Lord of The Rings"
+        fallbackLocale: en_US
+        currentLocale: en_US
+        title:  "Lord of The Rings"
         author: "J.R.R. Tolkien"
     book2:
+        fallbackLocale: en_US
+        currentLocale: en_US
         title: "Game of Thrones"
         author: "George R. R. Martin"

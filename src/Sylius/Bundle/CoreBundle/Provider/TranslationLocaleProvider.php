@@ -9,10 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Locale;
+namespace Sylius\Bundle\CoreBundle\Provider;
 
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Resource\Provider\LocaleProviderInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -44,6 +46,14 @@ class TranslationLocaleProvider implements LocaleProviderInterface
      * {@inheritdoc}
      */
     public function getFallbackLocale()
+    {
+        return $this->localeContext->getDefaultLocale();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDefaultLocale()
     {
         return $this->localeContext->getDefaultLocale();
     }

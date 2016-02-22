@@ -12,21 +12,22 @@
 namespace AppBundle\Entity;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\Resource\Model\TranslatableInterface;
+use Sylius\Component\Resource\Model\TranslatableTrait;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class Book implements ResourceInterface
+class Book implements ResourceInterface, TranslatableInterface
 {
+    use TranslatableTrait {
+        __construct as private initializeTranslationsCollection;
+    }
+
     /**
      * @var int
      */
     private $id;
-
-    /**
-     * @var string
-     */
-    private $title;
 
     /**
      * @var string
@@ -46,7 +47,7 @@ class Book implements ResourceInterface
      */
     public function getTitle()
     {
-        return $this->title;
+        return $this->translate()->getTitle();
     }
 
     /**
@@ -54,7 +55,7 @@ class Book implements ResourceInterface
      */
     public function setTitle($title)
     {
-        $this->title = $title;
+        $this->translate()->setTitle($title);
     }
 
     /**

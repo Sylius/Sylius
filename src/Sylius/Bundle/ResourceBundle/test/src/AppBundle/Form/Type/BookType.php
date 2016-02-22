@@ -25,7 +25,10 @@ class BookType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', 'text')
+            ->add('translations', 'sylius_translations', [
+                'label' => 'title',
+                'type' => 'app_book_translation',
+            ])
             ->add('author', 'text')
         ;
     }

@@ -30,8 +30,8 @@ class ProductType extends BaseProductType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('translations', 'a2lix_translationsForms', [
-                'form_type' => 'sylius_product_translation',
+            ->add('translations', 'sylius_translations', [
+                'type' => 'sylius_product_translation',
                 'label' => 'sylius.form.product.translations',
             ])
             ->add('shippingCategory', 'sylius_shipping_category_choice', [

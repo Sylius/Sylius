@@ -1,0 +1,13 @@
+AppBundle\Entity\Book:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            type: integer
+            xml_attribute: true
+        author:
+            expose: true
+            type: string
+    virtual_properties:
+        getTitle:
+            serialized_name: title

@@ -28,8 +28,8 @@ class PaymentMethodType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('translations', 'a2lix_translationsForms', [
-                'form_type' => 'sylius_payment_method_translation',
+            ->add('translations', 'sylius_translations', [
+                'type' => 'sylius_payment_method_translation',
                 'label' => 'sylius.form.payment_method.name',
             ])
             ->add('gateway', 'sylius_payment_gateway_choice', [

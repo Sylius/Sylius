@@ -97,7 +97,6 @@
         <parameter key="sylius.dynamic_router.class">Symfony\Cmf\Component\Routing\DynamicRouter</parameter>
         <parameter key="sylius.generator.class">Sylius\Bundle\CoreBundle\Routing\SyliusAwareGenerator</parameter>
         <parameter key="sylius.route_provider.class">Sylius\Bundle\CoreBundle\Routing\RouteProvider</parameter>
-        <parameter key="sylius.a2lix_locale_provider.class">Sylius\Bundle\CoreBundle\Locale\A2lixTranslationLocaleProvider</parameter>
 
         <parameter key="sylius.validator.has_enabled_entity.class">Sylius\Bundle\CoreBundle\Validator\Constraints\HasEnabledEntityValidator</parameter>
 
@@ -118,8 +117,8 @@
         <parameter key="sylius.form.type.data_fetcher.user_registration.class">Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\UserRegistrationType</parameter>
 
         <parameter key="sylius.authorization_checker.toggleable.class">Sylius\Bundle\CoreBundle\Authorization\ToggleableAuthorizationChecker</parameter>
-        <parameter key="sylius.translation.locale_provider.contextual.class">Sylius\Bundle\CoreBundle\Locale\TranslationLocaleProvider</parameter>
-
+        <parameter key="sylius.translation.locale_provider.contextual.class">Sylius\Bundle\CoreBundle\Provider\TranslationLocaleProvider</parameter>
+        <parameter key="sylius.translation.locales_provider.class">Sylius\Bundle\CoreBundle\Provider\AvailableLocalesProvider</parameter>
         <parameter key="sylius.based_on_id_invoice_number_generator.class" >Sylius\Component\Core\Payment\IdBasedInvoiceNumberGenerator</parameter>
 
         <parameter key="sylius.form.type.product_review.class">Sylius\Bundle\CoreBundle\Form\Type\ProductReviewType</parameter>
@@ -545,11 +544,6 @@
             <argument>%sylius.route_classes%</argument>
             <call method="setRouteCollectionLimit"><argument>%sylius.route_collection_limit%</argument></call>
         </service>
-        <service id="sylius.a2lix_locale_provider" class="%sylius.a2lix_locale_provider.class%">
-            <argument type="service" id="sylius.locale_provider" />
-            <argument type="service" id="sylius.context.locale" />
-        </service>
-
 
         <service id="sylius.enhancer.controllers_by_class" class="%cmf_routing.enhancer.field_by_class.class%">
             <argument>_sylius_entity</argument>
@@ -593,6 +587,10 @@
         <service id="sylius.authorization_checker.toggleable" class="%sylius.authorization_checker.toggleable.class%">
             <argument type="service" id="sylius.authorization_checker.default" />
             <argument type="service" id="sylius.settings.manager" />
+        </service>
+
+        <service id="sylius.translation.locales_provider" class="%sylius.translation.locales_provider.class%">
+            <argument type="service" id="sylius.repository.locale" />
         </service>
 
         <service id="sylius.translation.locale_provider.contextual" class="%sylius.translation.locale_provider.contextual.class%">

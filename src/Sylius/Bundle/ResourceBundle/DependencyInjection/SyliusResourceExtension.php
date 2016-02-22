@@ -57,6 +57,8 @@ class SyliusResourceExtension extends Extension
 
             $container->setParameter('sylius.translation.default_locale', $config['translation']['default_locale']);
             $container->setAlias('sylius.translation.locale_provider', $config['translation']['locale_provider']);
+            $container->setAlias('sylius.translation.available_locales_provider', $config['translation']['available_locales_provider']);
+            $container->setParameter('sylius.translation.available_locales', $config['translation']['available_locales']);
         }
 
         foreach ($config['resources'] as $alias => $resourceConfig) {
