@@ -13,6 +13,7 @@ namespace spec\Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -22,9 +23,12 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class GeographicalContextSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $countryFactory, RepositoryInterface $countryRepository)
-    {
-        $this->beConstructedWith($countryFactory, $countryRepository);
+    function let(
+        FactoryInterface $countryFactory,
+        RepositoryInterface $countryRepository,
+        CountryNameConverterInterface $nameToCodeConverter
+    ) {
+        $this->beConstructedWith($countryFactory, $countryRepository, $nameToCodeConverter);
     }
 
     function it_is_initializable()
@@ -42,7 +46,8 @@ class GeographicalContextSpec extends ObjectBehavior
         RepositoryInterface $countryRepository,
         CountryInterface $australia,
         CountryInterface $china,
-        CountryInterface $france
+        CountryInterface $france,
+        CountryNameConverterInterface $nameToCodeConverter
     ) {
         $countryFactory->createNew()->willReturn($australia, $china, $france);
 
@@ -53,6 +58,10 @@ class GeographicalContextSpec extends ObjectBehavior
         $countryRepository->add($australia)->shouldBeCalled();
         $countryRepository->add($china)->shouldBeCalled();
         $countryRepository->add($france)->shouldBeCalled();
+
+        $nameToCodeConverter->convertToCode('Australia')->willReturn('AU');
+        $nameToCodeConverter->convertToCode('China')->willReturn('CN');
+        $nameToCodeConverter->convertToCode('France')->willReturn('FR');
 
         $this->storeShipsTo('Australia', 'China', 'France');
     }

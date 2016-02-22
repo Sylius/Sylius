@@ -12,10 +12,10 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Symfony\Component\Intl\Intl;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -33,15 +33,23 @@ final class GeographicalContext implements Context
     private $countryRepository;
 
     /**
+     * @var CountryNameConverterInterface
+     */
+    private $countryNameConverter;
+
+    /**
      * @param FactoryInterface $countryFactory
      * @param RepositoryInterface $countryRepository
+     * @param CountryNameConverterInterface $countryNameConverter
      */
     public function __construct(
         FactoryInterface $countryFactory,
-        RepositoryInterface $countryRepository
+        RepositoryInterface $countryRepository,
+        CountryNameConverterInterface $countryNameConverter
     ) {
         $this->countryFactory = $countryFactory;
         $this->countryRepository = $countryRepository;
+        $this->countryNameConverter = $countryNameConverter;
     }
 
     /**
@@ -67,29 +75,8 @@ final class GeographicalContext implements Context
     {
         /** @var CountryInterface $country */
         $country = $this->countryFactory->createNew();
-        $country->setCode($this->getCountryCodeByEnglishCountryName($name));
+        $country->setCode($this->countryNameConverter->convertToCode($name));
 
         $this->countryRepository->add($country);
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return string
-     *
-     * @throws \InvalidArgumentException If name is not found in country code registry.
-     */
-    private function getCountryCodeByEnglishCountryName($name)
-    {
-        $names = Intl::getRegionBundle()->getCountryNames('en');
-        $countryCode = array_search($name, $names, true);
-
-        if (null === $countryCode) {
-            throw new \InvalidArgumentException(sprintf(
-                'Country "%s" not found! Available names: %s.', $name, implode(', ', $names)
-            ));
-        }
-
-        return $countryCode;
     }
 }
