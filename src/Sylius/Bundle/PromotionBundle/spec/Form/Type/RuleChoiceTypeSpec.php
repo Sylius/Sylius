@@ -23,7 +23,7 @@ class RuleChoiceTypeSpec extends ObjectBehavior
 {
     private $choices = [
         RuleInterface::TYPE_ITEM_TOTAL => 'Order total',
-        RuleInterface::TYPE_CART_QUANTITY => 'Order items count',
+        RuleInterface::TYPE_CART_QUANTITY => 'Order quantity',
     ];
 
     function let()

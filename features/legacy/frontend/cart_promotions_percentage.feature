@@ -38,21 +38,11 @@ Feature: Checkout percentage discount promotions
         And all products are assigned to the default channel
         And all promotions are assigned to the default channel
 
-    Scenario: Percentage discount promotion is applied when the cart
-            has the required amount
-        Given I am on the store homepage
-        When I add product "Etch" to cart, with quantity "4"
-        Then I should be on the cart summary page
-#        Valid scenario that is not passing, should follow '5 items' promotion
-#          And "Promotion total: -€20.00" should appear on the page
-#          And "Grand total: €60.00" should appear on the page
-
     Scenario: Percentage discount promotion is not applied when the cart
             has not the required amount
         Given I am on the store homepage
         When I add product "Sarge" to cart, with quantity "3"
         Then I should be on the cart summary page
-#        8 items should follow '5 items' promotion
         And "Promotion total" should not appear on the page
         And "Grand total: €75.00" should appear on the page
 
@@ -71,7 +61,6 @@ Feature: Checkout percentage discount promotions
         Given I am on the store homepage
         When I add product "Etch" to cart, with quantity "4"
         Then I should be on the cart summary page
-#        8 items should follow '5 items' promotion
         And "Promotion total" should not appear on the page
         And "Grand total: €80.00" should appear on the page
 
@@ -82,6 +71,5 @@ Feature: Checkout percentage discount promotions
         And I added product "Buzz" to cart, with quantity "1"
         When I add product "Woody" to cart, with quantity "3"
         Then I should still be on the cart summary page
-#        1675 - (10 + 25)% * 1675 = 586.25
         And "Promotion total: -€586.25" should appear on the page
         And "Grand total: €1,088.75" should appear on the page
