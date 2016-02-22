@@ -86,4 +86,21 @@ class PromotionContextSpec extends ObjectBehavior
 
         $this->itGivesFixedDiscountToEveryOrder('10.00');
     }
+
+    function it_creates_percentage_discount_action_for_promotion(
+        $sharedStorage,
+        $actionFactory,
+        $objectManager,
+        ActionInterface $action,
+        PromotionInterface $promotion
+    ) {
+        $sharedStorage->get('promotion')->willReturn($promotion);
+
+        $actionFactory->createPercentageDiscount(0.1)->willReturn($action);
+        $promotion->addAction($action)->shouldBeCalled();
+
+        $objectManager->flush()->shouldBeCalled();
+
+        $this->itGivesPercentageDiscountToEveryOrder('10');
+    }
 }

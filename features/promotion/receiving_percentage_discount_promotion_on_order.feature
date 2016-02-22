@@ -5,18 +5,18 @@ Feature: Receiving percentage discount promotion on order
     I want to receive discount for my purchase
 
     Background:
-        Given the store is operating on a single channel in "France"
+        Given the store operates on a single channel in "France"
         And the store has a product "PHP T-Shirt" priced at "€100.00"
         And there is a promotion "Holiday promotion"
         And it gives "20%" percentage discount to every order
 
-    @todo
+    @ui
     Scenario: Receiving percentage discount for my cart
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "€80.00"
         And my cart promotions should be "-€20.00"
 
-    @todo
+    @ui
     Scenario: Receiving percentage discount does not affect the shipping fee
         Given the store has "DHL" shipping method with "€10.00" fee
         And I am logged in customer
