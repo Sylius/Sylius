@@ -13,6 +13,7 @@ namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Cart\CartSummaryPage;
+use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Page\Product\ProductShowPage;
 use Sylius\Component\Core\Model\ProductInterface;
 
@@ -124,6 +125,7 @@ final class CartContext implements Context
     }
 
     /**
+     * @Then my cart promotions should be :promotionsTotal
      * @Then my discount should be :promotionsTotal
      */
     public function myDiscountShouldBe($promotionsTotal)
@@ -131,5 +133,15 @@ final class CartContext implements Context
         $this->cartSummaryPage->open();
 
         expect($this->cartSummaryPage->getPromotionTotal())->toBe($promotionsTotal);
+    }
+
+    /**
+     * @Given /^there should be no discount$/
+     */
+    public function thereShouldBeNoDiscount()
+    {
+        $this->cartSummaryPage->open();
+
+        expect($this->cartSummaryPage)->toThrow(ElementNotFoundException::class)->during('getPromotionTotal', []);
     }
 }

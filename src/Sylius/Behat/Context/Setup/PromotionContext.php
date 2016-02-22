@@ -13,6 +13,7 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Component\Core\Factory\RuleFactoryInterface;
 use Sylius\Component\Core\Test\Factory\TestPromotionFactoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Promotion\Factory\ActionFactoryInterface;
@@ -34,6 +35,11 @@ final class PromotionContext implements Context
     private $actionFactory;
 
     /**
+     * @var RuleFactoryInterface
+     */
+    private $ruleFactory;
+
+    /**
      * @var TestPromotionFactoryInterface
      */
     private $testPromotionFactory;
@@ -51,6 +57,7 @@ final class PromotionContext implements Context
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param ActionFactoryInterface $actionFactory
+     * @param RuleFactoryInterface $ruleFactory
      * @param TestPromotionFactoryInterface $testPromotionFactory
      * @param PromotionRepositoryInterface $promotionRepository
      * @param ObjectManager $objectManager
@@ -58,12 +65,14 @@ final class PromotionContext implements Context
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ActionFactoryInterface $actionFactory,
+        RuleFactoryInterface $ruleFactory,
         TestPromotionFactoryInterface $testPromotionFactory,
         PromotionRepositoryInterface $promotionRepository,
         ObjectManager $objectManager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->actionFactory = $actionFactory;
+        $this->ruleFactory = $ruleFactory;
         $this->testPromotionFactory = $testPromotionFactory;
         $this->promotionRepository = $promotionRepository;
         $this->objectManager = $objectManager;
@@ -96,7 +105,7 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @Given /^it gives "([^"]+)%" percentage discount to every order$/
+     * @Given /^(?:it|the promotion) gives "([^"]+)%" percentage discount to every order$/
      */
     public function itGivesPercentageDiscountToEveryOrder($discount)
     {
@@ -104,6 +113,22 @@ final class PromotionContext implements Context
 
         $action = $this->actionFactory->createPercentageDiscount($this->getPercentageFromString($discount));
         $currentPromotion->addAction($action);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(?:it|the promotion) gives "(?:€|£|\$)([^"]+)" fixed discount to every order with quantity at least ([^"]+)$/
+     */
+    public function itGivesFixedDiscountToEveryOrderWithQuantityAtLeast($amount, $quantity)
+    {
+        $currentPromotion = $this->sharedStorage->get('promotion');
+
+        $action = $this->actionFactory->createFixedDiscount($this->getPriceFromString($amount));
+        $currentPromotion->addAction($action);
+
+        $rule = $this->ruleFactory->createCartQuantity((int) $quantity);
+        $currentPromotion->addRule($rule);
 
         $this->objectManager->flush();
     }
