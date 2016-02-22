@@ -53,14 +53,14 @@ class ContainsProductConfigurationType extends AbstractType
                 ],
             ])
             ->add('count', 'integer', [
-                'label' => 'sylius.form.rule.item_count_configuration.count',
+                'label' => 'sylius.form.rule.cart_quantity_configuration.count',
                 'constraints' => [
                     new NotBlank(),
                     new Type(['type' => 'numeric']),
                 ],
             ])
             ->add('equal', 'checkbox', [
-                'label' => 'sylius.form.rule.item_count_configuration.equal',
+                'label' => 'sylius.form.rule.cart_quantity_configuration.equal',
                 'constraints' => [
                     new Type(['type' => 'bool']),
                 ],

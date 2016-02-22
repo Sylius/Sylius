@@ -15,11 +15,9 @@ use Sylius\Component\Promotion\Model\PromotionCountableSubjectInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
- * Checks if subject item count exceeds (or at least equal) to the configured count.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ItemCountRuleChecker implements RuleCheckerInterface
+class CartQuantityRuleChecker implements RuleCheckerInterface
 {
     /**
      * {@inheritdoc}
@@ -42,6 +40,6 @@ class ItemCountRuleChecker implements RuleCheckerInterface
      */
     public function getConfigurationFormType()
     {
-        return 'sylius_promotion_rule_item_count_configuration';
+        return 'sylius_promotion_rule_cart_quantity_configuration';
     }
 }

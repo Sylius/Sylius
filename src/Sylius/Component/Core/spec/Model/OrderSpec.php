@@ -342,9 +342,11 @@ class OrderSpec extends ObjectBehavior
     function it_count_promotions_subjects(OrderItemInterface $item1, OrderItemInterface $item2)
     {
         $this->addItem($item1);
+        $item1->getQuantity()->willReturn(4);
         $this->addItem($item2);
+        $item2->getQuantity()->willReturn(3);
 
-        $this->getPromotionSubjectCount()->shouldReturn(2);
+        $this->getPromotionSubjectCount()->shouldReturn(7);
     }
 
     function it_adds_and_removes_promotions(PromotionInterface $promotion)

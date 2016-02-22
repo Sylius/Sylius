@@ -19,11 +19,11 @@ use Symfony\Component\Form\FormBuilder;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ItemCountConfigurationTypeSpec extends ObjectBehavior
+class CartQuantityConfigurationTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\Rule\ItemCountConfigurationType');
+        $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\Rule\CartQuantityConfigurationType');
     }
 
     function it_should_be_a_form_type()

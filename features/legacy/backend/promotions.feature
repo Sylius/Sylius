@@ -13,8 +13,8 @@ Feature: Promotions
             | P3   | Press Campaign | Coupon based promotion                 | 0           | 0    |            |            |
             | P4   | Free orders    | First 3 orders have 100% discount!     | 3           | 0    |            |            |
         And promotion "New Year" has following rules defined:
-            | type       | configuration |
-            | Item count | Count: 3      |
+            | type          | configuration |
+            | Cart quantity | Count: 3      |
         And promotion "New year" has following actions defined:
             | type           | configuration |
             | Fixed discount | Amount: 10    |
@@ -76,13 +76,13 @@ Feature: Promotions
         And I should see "Promotion has been successfully created"
 
     @javascript
-    Scenario: Creating new promotion with item count rule
+    Scenario: Creating new promotion with cart quantity rule
         Given I am on the promotion creation page
         When I fill in "Code" with "P5"
         And I fill in "Name" with "Behat Training"
         And I fill in "Description" with "Behat Training Sale for 10 and more people"
         And I click "Add rule"
-        And I select "Item count" from "Type"
+        And I select "Cart quantity" from "Type"
         And I fill in "Count" with "10"
         And I press "Create"
         Then I should see "Behat Training"

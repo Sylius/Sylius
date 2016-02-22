@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraints\Type;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ItemCountConfigurationType extends AbstractType
+class CartQuantityConfigurationType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -28,14 +28,14 @@ class ItemCountConfigurationType extends AbstractType
     {
         $builder
             ->add('count', 'integer', [
-                'label' => 'sylius.form.rule.item_count_configuration.count',
+                'label' => 'sylius.form.rule.cart_quantity_configuration.count',
                 'constraints' => [
                     new NotBlank(),
                     new Type(['type' => 'numeric']),
                 ],
             ])
             ->add('equal', 'checkbox', [
-                'label' => 'sylius.form.rule.item_count_configuration.equal',
+                'label' => 'sylius.form.rule.cart_quantity_configuration.equal',
                 'constraints' => [
                     new Type(['type' => 'bool']),
                 ],
@@ -48,6 +48,6 @@ class ItemCountConfigurationType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_promotion_rule_item_count_configuration';
+        return 'sylius_promotion_rule_cart_quantity_configuration';
     }
 }
