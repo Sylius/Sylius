@@ -125,6 +125,6 @@ final class PromotionContext implements Context
      */
     private function getPercentageFromString($discount)
     {
-        return ((int) $discount)/100;
+        return ((int) $discount) / 100;
     }
 }
