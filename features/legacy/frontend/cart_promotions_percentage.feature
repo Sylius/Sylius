@@ -11,8 +11,8 @@ Feature: Checkout percentage discount promotions
             | PR1  | 3 items | 25% Discount for orders with at least 3 items |
             | PR2  | 300 EUR | 10% Discount for orders over 300 EUR          |
         And promotion "3 items" has following rules defined:
-            | type       | configuration        |
-            | item_count | Count: 3,Equal: true |
+            | type          | configuration        |
+            | cart quantity | Count: 3,Equal: true |
         And promotion "3 items" has following actions defined:
             | type                | configuration  |
             | percentage discount | percentage: 25 |
@@ -56,7 +56,7 @@ Feature: Checkout percentage discount promotions
         And "Promotion total" should not appear on the page
         And "Grand total: €200.00" should appear on the page
 
-    Scenario: Item count promotion is applied when the cart has the
+    Scenario: Cart quantity promotion is applied when the cart has the
             number of items required
         Given I am on the store homepage
         And I added product "Sarge" to cart, with quantity "3"
@@ -67,7 +67,7 @@ Feature: Checkout percentage discount promotions
         And "Promotion total: -€31.25" should appear on the page
         And "Grand total: €93.75" should appear on the page
 
-    Scenario: Item count promotion is not applied when the cart has
+    Scenario: Cart quantity promotion is not applied when the cart has
             not the number of items required
         Given I am on the store homepage
         When I add product "Etch" to cart, with quantity "8"

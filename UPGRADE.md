@@ -3,6 +3,10 @@ UPGRADE
 
 ## From 0.16 to 0.17.x
 
+### Promotion and PromotionBundle
+
+* Changed "item_count" promotion type into "cart_quantity". It now checks cart quantity rather than different items number.
+
 ### Resource and SyliusResourceBundle
 
  * All resources must implement ``Sylius\Component\Resource\Model\ResourceInterface``;

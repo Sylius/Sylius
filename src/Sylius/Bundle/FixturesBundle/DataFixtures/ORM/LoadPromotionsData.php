@@ -37,7 +37,7 @@ class LoadPromotionsData extends DataFixture
             'New Year Sale for 3 and more items.',
             3,
             $channel,
-            [$this->createRule(PromotionRuleInterface::TYPE_ITEM_COUNT, ['count' => 3, 'equal' => true])],
+            [$this->createRule(PromotionRuleInterface::TYPE_CART_QUANTITY, ['count' => 3, 'equal' => true])],
             [$this->createAction(ActionInterface::TYPE_FIXED_DISCOUNT, ['amount' => 500])]
         );
 

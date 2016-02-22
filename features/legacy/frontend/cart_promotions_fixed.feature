@@ -35,8 +35,8 @@ Feature: Checkout fixed discount promotions
         And all products are assigned to the default channel
         And all promotions are assigned to the default channel
         And promotion "3 items" has following rules defined:
-            | type       | configuration        |
-            | Item count | Count: 3,Equal: true |
+            | type          | configuration        |
+            | Cart quantity | Count: 3,Equal: true |
         And promotion "3 items" has following actions defined:
             | type           | configuration |
             | Fixed discount | Amount: 15    |
@@ -82,7 +82,7 @@ Feature: Checkout fixed discount promotions
         And "Promotion total" should not appear on the page
         And "Grand total: €200.00" should appear on the page
 
-    Scenario: Item count promotion is applied when the cart has the
+    Scenario: Cart quantity promotion is applied when the cart has the
             number of items required
         Given I am on the store homepage
         And I added product "Sarge" to cart, with quantity "3"
@@ -92,7 +92,7 @@ Feature: Checkout fixed discount promotions
         And "Promotion total: -€15.00" should appear on the page
         And "Grand total: €110.00" should appear on the page
 
-    Scenario: Item count promotion is not applied when the cart has
+    Scenario: Cart quantity promotion is not applied when the cart has
             not the number of items required
         Given I am on the store homepage
         When I add product "Etch" to cart, with quantity "8"

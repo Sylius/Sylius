@@ -18,11 +18,11 @@ use Sylius\Component\Promotion\Model\PromotionCountableSubjectInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ItemCountRuleCheckerSpec extends ObjectBehavior
+class CartQuantityRuleCheckerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Promotion\Checker\ItemCountRuleChecker');
+        $this->shouldHaveType('Sylius\Component\Promotion\Checker\CartQuantityRuleChecker');
     }
 
     function it_should_be_Sylius_rule_checker()
@@ -37,7 +37,7 @@ class ItemCountRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, ['count' => 10, 'equal' => false])->shouldReturn(false);
     }
 
-    function it_should_recognize_subject_as_not_eligible_if_item_count_is_less_then_configured(
+    function it_should_recognize_subject_as_not_eligible_if_cart_quantity_is_less_then_configured(
         PromotionCountableSubjectInterface $subject
     ) {
         $subject->getPromotionSubjectCount()->shouldBeCalled()->willReturn(7);
@@ -45,7 +45,7 @@ class ItemCountRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, ['count' => 10, 'equal' => false])->shouldReturn(false);
     }
 
-    function it_should_recognize_subject_as_eligible_if_item_count_is_greater_then_configured(
+    function it_should_recognize_subject_as_eligible_if_cart_quantity_is_greater_then_configured(
         PromotionCountableSubjectInterface $subject
     ) {
         $subject->getPromotionSubjectCount()->shouldBeCalled()->willReturn(12);
@@ -53,7 +53,7 @@ class ItemCountRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, ['count' => 10, 'equal' => false])->shouldReturn(true);
     }
 
-    function it_should_recognize_subject_as_eligible_if_item_count_is_equal_with_configured_depending_on_equal_setting(
+    function it_should_recognize_subject_as_eligible_if_cart_quantity_is_equal_with_configured_depending_on_equal_setting(
         PromotionCountableSubjectInterface $subject
     ) {
         $subject->getPromotionSubjectCount()->shouldBeCalled()->willReturn(10);
@@ -62,8 +62,8 @@ class ItemCountRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, ['count' => 10, 'equal' => true])->shouldReturn(true);
     }
 
-    function it_should_return_item_count_configuration_form_type()
+    function it_should_return_cart_quantity_configuration_form_type()
     {
-        $this->getConfigurationFormType()->shouldReturn('sylius_promotion_rule_item_count_configuration');
+        $this->getConfigurationFormType()->shouldReturn('sylius_promotion_rule_cart_quantity_configuration');
     }
 }
