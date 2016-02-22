@@ -36,17 +36,11 @@ class SettingsController extends FOSRestController
      */
     public function showAction(Request $request)
     {
-        $namespace = $request->get('namespace');
+        $schema = $request->get('namespace');
 
-        $this->isGrantedOr403($namespace);
+        $this->isGrantedOr403($schema);
 
-        try {
-            $settings = $this->getSettingsManager()->load($namespace);
-        } catch (MissingOptionsException $e) {
-            // When a Settings is not persisted yet, it won't have any initial value in database,
-            // so we create a new empty instance.
-            $settings = new Settings([]);
-        }
+        $settings = $this->getSettingsManager()->load($schema);
 
         $view = $this
             ->view()
@@ -58,29 +52,29 @@ class SettingsController extends FOSRestController
 
     /**
      * @param Request $request
-     * @param string  $namespace
+     * @param string  $schema
      *
      * @return Response
      */
-    public function updateAction(Request $request, $namespace)
+    public function updateAction(Request $request, $schema)
     {
-        $this->isGrantedOr403($namespace);
+        $this->isGrantedOr403($schema);
 
         $manager = $this->getSettingsManager();
 
-        $settings = $manager->load($namespace);
+        $settings = $manager->load($schema);
 
         $isApiRequest = $this->isApiRequest($request);
 
         $form = $this
             ->getSettingsFormFactory()
-            ->create($namespace, $settings, $isApiRequest ? ['csrf_protection' => false] : [])
+            ->create($schema, $settings, $isApiRequest ? ['csrf_protection' => false] : [])
         ;
 
         if ($form->handleRequest($request)->isValid()) {
             $messageType = 'success';
             try {
-                $manager->save($form->getData());
+                $manager->save($settings);
                 $message = $this->getTranslator()->trans('sylius.settings.update', [], 'flashes');
             } catch (ValidatorException $exception) {
                 $message = $this->getTranslator()->trans($exception->getMessage(), [], 'validators');
@@ -129,19 +123,19 @@ class SettingsController extends FOSRestController
     }
 
     /**
-     * Check that user can change given namespace.
+     * Check that user can change given schema.
      *
-     * @param string $namespace
+     * @param string $schema
      *
      * @return bool
      */
-    protected function isGrantedOr403($namespace)
+    protected function isGrantedOr403($schema)
     {
         if (!$this->container->has('sylius.authorization_checker')) {
             return true;
         }
 
-        if (!$this->get('sylius.authorization_checker')->isGranted(sprintf('sylius.settings.%s', $namespace))) {
+        if (!$this->get('sylius.authorization_checker')->isGranted(sprintf('sylius.settings.%s', $schema))) {
             throw new AccessDeniedException();
         }
     }

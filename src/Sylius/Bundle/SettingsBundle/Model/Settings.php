@@ -81,14 +81,6 @@ class Settings implements SettingsInterface
     /**
      * {@inheritdoc}
      */
-    public function setParameters(Collection $parameters)
-    {
-        $this->parameters = $parameters;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function hasParameter($name)
     {
         return $this->parameters->containsKey($name);
@@ -99,6 +91,7 @@ class Settings implements SettingsInterface
      */
     public function addParameter(ParameterInterface $parameter)
     {
+        $parameter->setSettings($this);
         $this->parameters->set($parameter->getName(), $parameter);
     }
 

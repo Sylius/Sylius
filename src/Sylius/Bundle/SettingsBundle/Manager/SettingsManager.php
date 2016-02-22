@@ -187,6 +187,8 @@ class SettingsManager implements SettingsManagerInterface
             }
         }
 
+        $this->settingsManager->persist($settings);
+
         $this->settingsManager->flush();
         $this->eventDispatcher->dispatch(SettingsEvent::POST_SAVE, new SettingsEvent($settings));
     }

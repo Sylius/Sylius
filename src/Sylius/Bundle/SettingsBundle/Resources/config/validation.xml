@@ -17,17 +17,6 @@
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
     <class name="Sylius\Bundle\SettingsBundle\Model\Parameter">
-        <property name="namespace">
-            <constraint name="NotBlank">
-                <option name="message">sylius.parameter.namespace.not_blank</option>
-            </constraint>
-            <constraint name="Length">
-                <option name="min">1</option>
-                <option name="minMessage">sylius.parameter.namespace.min_length</option>
-                <option name="max">255</option>
-                <option name="maxMessage">sylius.parameter.namespace.max_length</option>
-            </constraint>
-        </property>
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.parameter.name.not_blank</option>

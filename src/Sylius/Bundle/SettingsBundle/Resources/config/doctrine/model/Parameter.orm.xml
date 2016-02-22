@@ -26,7 +26,7 @@
         <field name="value" column="value" type="object" nullable="true"/>
 
         <many-to-one target-entity="Sylius\Bundle\SettingsBundle\Model\SettingsInterface" field="settings">
-            <join-column name="settings_id" referenced-column-name="id" on-delete="CASCADE"/>
+            <join-column name="settings_id" referenced-column-name="id" nullable="false" on-delete="CASCADE"/>
         </many-to-one>
     </mapped-superclass>
 

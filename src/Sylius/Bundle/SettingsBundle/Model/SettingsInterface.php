@@ -44,11 +44,6 @@ interface SettingsInterface extends ResourceInterface
     public function getParameter($name);
 
     /**
-     * @param Collection $parameters
-     */
-    public function setParameters(Collection $parameters);
-
-    /**
      * @param string $name
      */
     public function hasParameter($name);
