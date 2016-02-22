@@ -22,8 +22,8 @@ sylius_core:
     sitemap: ~
 
 sylius_money:
-    currency: %sylius.currency%
-    locale: %sylius.locale%
+    currency: %currency%
+    locale: %locale%
 
 sylius_locale:
     resources:
@@ -292,7 +292,7 @@ sylius_search:
 
 sylius_resource:
     translation:
-        default_locale: %sylius.locale%
+        default_locale: %locale%
         locale_provider: sylius.translation.locale_provider.contextual
         available_locales_provider: sylius.translation.locales_provider
 

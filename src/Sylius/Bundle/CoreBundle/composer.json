@@ -22,7 +22,6 @@
     "require": {
         "php": "^5.5.9|^7.0",
 
-        "hwi/oauth-bundle": "~0.3",
         "jms/serializer-bundle": "^0.13|^1.0",
         "jms/translation-bundle": "^1.1",
         "knplabs/knp-gaufrette-bundle": "~0.1",
@@ -64,6 +63,7 @@
         "winzou/state-machine-bundle": "~0.2"
     },
     "require-dev": {
+        "hwi/oauth-bundle": "~0.3",
         "matthiasnoback/symfony-dependency-injection-test": "^0.7",
         "phpspec/phpspec": "^2.4",
         "phpunit/phpunit": "^4.8"

@@ -57,7 +57,7 @@ sonata_block:
         sonata.block.service.text: ~
 
 stof_doctrine_extensions:
-    default_locale: %sylius.locale%
+    default_locale: %locale%
     orm:
         default:
             tree: true
@@ -72,32 +72,6 @@ fos_rest:
             json: true
             xml:  true
         empty_content: 204
-
-hwi_oauth:
-    firewall_name: main
-    resource_owners:
-        amazon:
-            type:          amazon
-            client_id:     %sylius.oauth.amazon.clientid%
-            client_secret: %sylius.oauth.amazon.clientsecret%
-        facebook:
-            type:          facebook
-            client_id:     %sylius.oauth.facebook.clientid%
-            client_secret: %sylius.oauth.facebook.clientsecret%
-            scope:         "email"
-            infos_url:     "https://graph.facebook.com/me?fields=id,name,email"
-            options:
-                display: popup
-        google:
-            type:          google
-            client_id:     %sylius.oauth.google.clientid%
-            client_secret: %sylius.oauth.google.clientsecret%
-            scope:         "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
-            options:
-                access_type:     online
-                approval_prompt: force
-                display:         popup
-                login_hint:      email address
 
 jms_serializer:
     metadata:

@@ -4,6 +4,15 @@
 sylius_frontend:
     resource: @SyliusWebBundle/Resources/config/routing/frontend/main.yml
 
+sylius_sitemap:
+    path: /sitemap.{_format}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.sitemap:showAction
+        _format: xml
+    requirements:
+        _format: xml
+
 sylius_backend:
     resource: @SyliusWebBundle/Resources/config/routing/backend/main.yml
     prefix: /administration

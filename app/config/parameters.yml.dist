@@ -1,54 +1,24 @@
 parameters:
-    sylius.database.driver:           pdo_mysql
-    sylius.database.host:             127.0.0.1
-    sylius.database.port:             ~
-    sylius.database.name:             sylius
-    sylius.database.path:             ~
-    sylius.database.user:             root
-    sylius.database.password:         ~
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: ~
+    database_name: sylius
+    database_user: root
+    database_password: ~
+    # You should uncomment this if you want use pdo_sqlite.
+    # database_path: "%kernel.root_dir%/data.db3"
 
-    sylius.mailer.transport:          smtp
-    sylius.mailer.host:               127.0.0.1
-    sylius.mailer.port:               ~
-    sylius.mailer.user:               ~
-    sylius.mailer.password:           ~
+    phpcr_user: root
+    phpcr_password: ~
 
-    sylius.secret:                    EDITME
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: ~
+    mailer_password: ~
 
-    sylius.locale:                    en_US
-    sylius.currency:                  USD
-
-    sylius.cache:
-        type: file_system
-
-    sylius.phpcr.backend:
-        type: doctrinedbal
-        connection: default
-        caches:
-            meta: doctrine_cache.providers.phpcr_meta
-            nodes: doctrine_cache.providers.phpcr_nodes
-    sylius.phpcr.workspace: default
-    sylius.phpcr.user: EDITME
-    sylius.phpcr.pass: EDITME
-
-    sylius.uploader.filesystem: sylius_image
-
-    sylius.currency_importer.open_exchange_rates: EDITME
-    sylius.currency_importer.ecb.base_currency: EUR
-
-    sylius.oauth.amazon.clientid:       EDITME
-    sylius.oauth.amazon.clientsecret:   EDITME
-    sylius.oauth.facebook.clientid:     EDITME
-    sylius.oauth.facebook.clientsecret: EDITME
-    sylius.oauth.google.clientid:       EDITME
-    sylius.oauth.google.clientsecret:   EDITME
-
-    sylius.inventory.backorders_enabled: true
-    sylius.inventory.tracking_enabled: true
-    sylius.inventory.holding.duration: 15 minutes
-
-    sylius.order.allow_guest_order: false
-    sylius.order.pending.duration: 3 hours
+    secret: EDITME
+    locale: en_US
+    currency: USD
 
     wkhtmltopdf.bin_path: /usr/bin/wkhtmltopdf
     wkhtmltoimage.bin_path: /usr/bin/wkhtmltoimage

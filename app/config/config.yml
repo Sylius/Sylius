@@ -1,6 +1,23 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+parameters:
+    sylius.inventory.backorders_enabled: true
+    sylius.inventory.tracking_enabled: true
+    sylius.inventory.holding.duration: 15 minutes
+    sylius.order.allow_guest_order: false
+    sylius.order.pending.duration: 3 hours
+    sylius.cache:
+        type: file_system
+    sylius.uploader.filesystem: sylius_image
+    phpcr_backend:
+        type: doctrinedbal
+        connection: default
+        caches:
+            meta: doctrine_cache.providers.phpcr_meta
+            nodes: doctrine_cache.providers.phpcr_nodes
+    phpcr_workspace: default
+
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
@@ -9,8 +26,8 @@ imports:
     - { resource: @SyliusAdminBundle/Resources/config/grids.yml }
 
 framework:
-    translator:      { fallback: %sylius.locale% }
-    secret:          %sylius.secret%
+    translator:      { fallback: %locale% }
+    secret:          %secret%
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
         strict_requirements: %kernel.debug%
@@ -18,7 +35,7 @@ framework:
     csrf_protection: true
     validation:      { enable_annotations: true }
     templating:      { engines: ['twig'] }
-    default_locale:  "%sylius.locale%"
+    default_locale:  "%locale%"
     trusted_proxies: ~
     session:
         # handler_id set to null will use default session handler from php.ini
@@ -45,12 +62,12 @@ assetic:
 
 doctrine:
     dbal:
-        driver:   %sylius.database.driver%
-        host:     %sylius.database.host%
-        port:     %sylius.database.port%
-        dbname:   %sylius.database.name%
-        user:     %sylius.database.user%
-        password: %sylius.database.password%
+        driver:   %database_driver%
+        host:     %database_host%
+        port:     %database_port%
+        dbname:   %database_name%
+        user:     %database_user%
+        password: %database_password%
         charset:  UTF8
     orm:
         auto_generate_proxy_classes: %kernel.debug%
@@ -69,20 +86,19 @@ doctrine:
 
 doctrine_phpcr:
     session:
-        backend: %sylius.phpcr.backend%
-        workspace: %sylius.phpcr.workspace%
-        username: %sylius.phpcr.user%
-        password: %sylius.phpcr.pass%
+        backend: %phpcr_backend%
+        workspace: %phpcr_workspace%
+        username: %phpcr_user%
+        password: %phpcr_password%
     odm:
         auto_mapping: true
         auto_generate_proxy_classes: %kernel.debug%
 
 swiftmailer:
-    transport: %sylius.mailer.transport%
-    host:      %sylius.mailer.host%
-    port:      %sylius.mailer.port%
-    username:  %sylius.mailer.user%
-    password:  %sylius.mailer.password%
+    transport: %mailer_transport%
+    host:      %mailer_host%
+    username:  %mailer_user%
+    password:  %mailer_password%
 
 fos_rest:
     format_listener:

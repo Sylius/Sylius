@@ -26,7 +26,7 @@
     <services>
         <service id="sylius.context.locale" class="%sylius.context.locale.class%">
             <argument /> <!-- Storage service name comes from config -->
-            <argument>%sylius.locale%</argument>
+            <argument>%locale%</argument>
         </service>
 
         <service id="sylius.locale_provider" class="%sylius.locale_provider.class%">

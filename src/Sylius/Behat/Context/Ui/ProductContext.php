@@ -69,7 +69,7 @@ final class ProductContext implements Context
     {
         $this->productShowPage->tryToOpen(['product' => $product]);
 
-        expect($this->productShowPage->isOpen(['product' => $product]))->toBe(true);
+        $this->productShowPage->isOpen(['product' => $product]);
     }
 
     /**

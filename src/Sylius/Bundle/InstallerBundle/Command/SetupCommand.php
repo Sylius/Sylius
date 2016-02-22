@@ -130,7 +130,7 @@ EOT
         $localeManager = $this->get('sylius.manager.locale');
         $localeFactory = $this->get('sylius.factory.locale');
 
-        $code = trim($this->getContainer()->getParameter('sylius.locale'));
+        $code = trim($this->getContainer()->getParameter('locale'));
         $name = Intl::getLanguageBundle()->getLanguageName($code);
         $output->writeln(sprintf('Adding <info>%s</info> locale.', $name));
 
@@ -161,7 +161,7 @@ EOT
         $currencyManager = $this->get('sylius.manager.currency');
         $currencyFactory = $this->get('sylius.factory.currency');
 
-        $code = trim($this->getContainer()->getParameter('sylius.currency'));
+        $code = trim($this->getContainer()->getParameter('currency'));
         $name = Intl::getCurrencyBundle()->getCurrencyName($code);
         $output->writeln(sprintf('Adding <info>%s</info> currency.', $name));
 

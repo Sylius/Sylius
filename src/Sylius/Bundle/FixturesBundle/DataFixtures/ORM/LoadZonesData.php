@@ -35,7 +35,7 @@ class LoadZonesData extends DataFixture
     public function load(ObjectManager $manager)
     {
         $restOfWorldCountries = array_diff(
-            array_keys(Intl::getRegionBundle()->getCountryNames($this->container->getParameter('sylius.locale'))),
+            array_keys(Intl::getRegionBundle()->getCountryNames($this->container->getParameter('locale'))),
             array_merge($this->euCountries, ['US'])
         );
 
