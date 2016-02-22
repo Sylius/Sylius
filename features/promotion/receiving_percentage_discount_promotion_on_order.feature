@@ -14,7 +14,7 @@ Feature: Receiving percentage discount promotion on order
     Scenario: Receiving percentage discount for my cart
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "€80.00"
-        And my cart promotions should be "-€20.00"
+        And my discount should be "-€20.00"
 
     @ui
     Scenario: Receiving percentage discount does not affect the shipping fee
@@ -24,4 +24,4 @@ Feature: Receiving percentage discount promotion on order
         And I proceed selecting "DHL" shipping method
         Then my cart total should be "€90.00"
         And my cart shipping fee should be "€10.00"
-        And my cart promotions should be "-€20.00"
+        And my discount should be "-€20.00"

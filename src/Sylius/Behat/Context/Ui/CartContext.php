@@ -124,9 +124,9 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then my cart promotions should be :promotionsTotal
+     * @Then my discount should be :promotionsTotal
      */
-    public function myCartPromotionsShouldBe($promotionsTotal)
+    public function myDiscountShouldBe($promotionsTotal)
     {
         $this->cartSummaryPage->open();
 
