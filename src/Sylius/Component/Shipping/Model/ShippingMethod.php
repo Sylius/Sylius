@@ -15,15 +15,19 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
-use Sylius\Component\Translation\Model\AbstractTranslatable;
+use Sylius\Component\Translation\Model\TranslatableTrait;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class ShippingMethod extends AbstractTranslatable implements ShippingMethodInterface
+class ShippingMethod implements ShippingMethodInterface
 {
-    use TimestampableTrait, ToggleableTrait;
+    use TimestampableTrait;
+    use ToggleableTrait;
+    use TranslatableTrait {
+        __construct as translatableConstruct;
+    }
 
     /**
      * @var mixed
@@ -64,7 +68,7 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
 
     public function __construct()
     {
-        parent::__construct();
+        $this->translatableConstruct();
 
         $this->rules = new ArrayCollection();
         $this->createdAt = new \DateTime();

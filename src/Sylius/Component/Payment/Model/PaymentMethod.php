@@ -13,14 +13,18 @@ namespace Sylius\Component\Payment\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
-use Sylius\Component\Translation\Model\AbstractTranslatable;
+use Sylius\Component\Translation\Model\TranslatableTrait;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PaymentMethod extends AbstractTranslatable implements PaymentMethodInterface
+class PaymentMethod implements PaymentMethodInterface
 {
-    use TimestampableTrait, ToggleableTrait;
+    use TimestampableTrait;
+    use ToggleableTrait;
+    use TranslatableTrait {
+        __construct as translatableConstruct;
+    }
 
     /**
      * @var mixed
@@ -54,7 +58,7 @@ class PaymentMethod extends AbstractTranslatable implements PaymentMethodInterfa
 
     public function __construct()
     {
-        parent::__construct();
+        $this->translatableConstruct();
 
         $this->createdAt = new \DateTime();
     }

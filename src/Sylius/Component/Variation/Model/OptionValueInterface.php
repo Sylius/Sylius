@@ -13,11 +13,12 @@ namespace Sylius\Component\Variation\Model;
 
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\Translation\Model\TranslatableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OptionValueInterface extends ResourceInterface, CodeAwareInterface
+interface OptionValueInterface extends ResourceInterface, CodeAwareInterface, TranslatableInterface
 {
     /**
      * @return OptionInterface

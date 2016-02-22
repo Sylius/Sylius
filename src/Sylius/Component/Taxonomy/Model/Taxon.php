@@ -14,15 +14,18 @@ namespace Sylius\Component\Taxonomy\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\SoftDeletableTrait;
-use Sylius\Component\Translation\Model\AbstractTranslatable;
+use Sylius\Component\Translation\Model\TranslatableTrait;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class Taxon extends AbstractTranslatable implements TaxonInterface
+class Taxon implements TaxonInterface
 {
     use SoftDeletableTrait;
+    use TranslatableTrait {
+        __construct as translatableConstruct;
+    }
 
     /**
      * @var mixed
@@ -66,7 +69,7 @@ class Taxon extends AbstractTranslatable implements TaxonInterface
 
     public function __construct()
     {
-        parent::__construct();
+        $this->translatableConstruct();
 
         $this->children = new ArrayCollection();
     }

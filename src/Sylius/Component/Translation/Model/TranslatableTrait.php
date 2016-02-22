@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-abstract class AbstractTranslatable implements TranslatableInterface
+trait TranslatableTrait
 {
     /**
      * @var TranslationInterface[]
@@ -138,6 +138,7 @@ abstract class AbstractTranslatable implements TranslatableInterface
             if (!$fallbackTranslation = $this->translations->get($this->getFallbackLocale())) {
                 $className = $this->getTranslationClass();
 
+                /** @var TranslationInterface $translation */
                 $translation = new $className();
                 $translation->setLocale($locale);
 

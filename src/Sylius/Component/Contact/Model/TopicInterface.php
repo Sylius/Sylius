@@ -11,12 +11,14 @@
 
 namespace Sylius\Component\Contact\Model;
 
+use Sylius\Component\Translation\Model\TranslatableInterface;
+
 /**
  * Interface for the model representing a contact topic.
  *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-interface TopicInterface extends TopicTranslationInterface
+interface TopicInterface extends TopicTranslationInterface, TranslatableInterface
 {
 }
