@@ -3,6 +3,7 @@
 namespace Sylius\Bundle\SettingsBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @author Steffen Brem <steffenbrem@gmail.com>
@@ -62,40 +63,33 @@ class Settings implements SettingsInterface
      */
     public function getParameters()
     {
-        $parameters = [];
-        foreach ($this->parameters as $parameter) {
-            $parameters[$parameter->getName()] = $parameter->getValue();
-        }
-
-        return $parameters;
+        return $this->parameters;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setParameters(array $parameters)
+    public function getParameter($name)
     {
-        foreach ($parameters as $name => $value) {
-            $this->set($name, $value);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function get($name)
-    {
-        if (!$this->has($name)) {
+        if (!$this->hasParameter($name)) {
             throw new \InvalidArgumentException(sprintf('Parameter with name "%s" does not exist.', $name));
         }
 
-        return $this->parameters->get($name)->getValue();
+        return $this->parameters->get($name);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function has($name)
+    public function setParameters(Collection $parameters)
+    {
+        $this->parameters = $parameters;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasParameter($name)
     {
         return $this->parameters->containsKey($name);
     }
@@ -103,77 +97,16 @@ class Settings implements SettingsInterface
     /**
      * {@inheritdoc}
      */
-    public function set($name, $value)
+    public function addParameter(ParameterInterface $parameter)
     {
-        if (!$this->has($name)) {
-            $parameter = new Parameter();
-
-            $parameter->setSettings($this);
-            $parameter->setName($name);
-            $parameter->setValue($value);
-
-            $this->parameters->set($name, $parameter);
-        } else {
-            $parameter = $this->parameters->get($name);
-            $parameter->setValue($value);
-        }
+        $this->parameters->set($parameter->getName(), $parameter);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function remove($name)
+    public function removeParameter(ParameterInterface $parameter)
     {
-        if ($this->has($name)) {
-            $this->parameters->remove($name);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getIterator()
-    {
-        return new \ArrayIterator($this->getParameters());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function offsetExists($offset)
-    {
-        return $this->has($offset);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function offsetGet($offset)
-    {
-        return $this->get($offset);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function offsetSet($offset, $value)
-    {
-        $this->set($offset, $value);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function offsetUnset($offset)
-    {
-        $this->remove($offset);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function count()
-    {
-        return $this->parameters->count();
+        $this->parameters->removeElement($parameter);
     }
 }

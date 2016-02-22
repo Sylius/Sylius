@@ -44,7 +44,9 @@
             <argument type="service" id="sylius.settings.resolver_registry"/>
             <argument type="service" id="sylius.manager.settings"/>
             <argument type="service" id="sylius.factory.settings"/>
+            <argument type="service" id="sylius.factory.parameter"/>
             <argument type="service" id="sylius.settings.resolver.default"/>
+            <argument type="service" id="validator"/>
             <argument type="service" id="event_dispatcher"/>
         </service>
 
@@ -56,13 +58,6 @@
 
         <service id="sylius.settings.resolver.default" class="%sylius.settings.resolver.default.class%">
             <argument type="service" id="sylius.repository.settings"/>
-        </service>
-
-        <service id="sylius.settings.doctrine.transform_settings_listener" class="Sylius\Bundle\SettingsBundle\Doctrine\EventListener\TransformParameterListener">
-            <argument type="service" id="service_container"/>
-            <tag name="doctrine.event_listener" event="onFlush"/>
-            <tag name="doctrine.event_listener" event="postFlush"/>
-            <tag name="doctrine.event_listener" event="postLoad"/>
         </service>
     </services>
 

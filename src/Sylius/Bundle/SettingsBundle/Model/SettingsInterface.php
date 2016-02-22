@@ -17,7 +17,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 /**
  * @author Steffen Brem <steffenbrem@gmail.com>
  */
-interface SettingsInterface extends ResourceInterface, \IteratorAggregate, \ArrayAccess, \Countable
+interface SettingsInterface extends ResourceInterface
 {
     /**
      * @return string
@@ -30,35 +30,36 @@ interface SettingsInterface extends ResourceInterface, \IteratorAggregate, \Arra
     public function setSchema($schema);
 
     /**
-     * @return array
+     * @return Collection|ParameterInterface[]
      */
     public function getParameters();
 
     /**
-     * @param array $parameters
-     */
-    public function setParameters(array $parameters);
-
-    /**
      * @param string $name
+     *
+     * @throws \InvalidArgumentException
      *
      * @return ParameterInterface
      */
-    public function get($name);
+    public function getParameter($name);
+
+    /**
+     * @param Collection $parameters
+     */
+    public function setParameters(Collection $parameters);
 
     /**
      * @param string $name
      */
-    public function has($name);
+    public function hasParameter($name);
 
     /**
-     * @param string $name
-     * @param mixed $value
+     * @param ParameterInterface $parameter
      */
-    public function set($name, $value);
+    public function addParameter(ParameterInterface $parameter);
 
     /**
-     * @param $name
+     * @param ParameterInterface $parameter
      */
-    public function remove($name);
+    public function removeParameter(ParameterInterface $parameter);
 }

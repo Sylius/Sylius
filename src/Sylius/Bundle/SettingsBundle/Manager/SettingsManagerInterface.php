@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\SettingsBundle\Manager;
 
+use Sylius\Bundle\SettingsBundle\Model\ParameterCollection;
 use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 
 /**
@@ -21,12 +22,12 @@ interface SettingsManagerInterface
     /**
      * @param string $schema
      *
-     * @return SettingsInterface
+     * @return ParameterCollection
      */
     public function load($schema);
 
     /**
-     * @param SettingsInterface $setting
+     * @param ParameterCollection $parameters
      */
-    public function save(SettingsInterface $setting);
+    public function save(ParameterCollection $parameters);
 }
