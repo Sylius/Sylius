@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\Provider;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\SettingsBundle\Model\Settings;
+use Sylius\Bundle\SettingsBundle\Model\ParameterCollection;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Provider\ZoneProviderInterface;
 
@@ -21,7 +21,7 @@ use Sylius\Component\Core\Provider\ZoneProviderInterface;
  */
 class DefaultTaxZoneProviderSpec extends ObjectBehavior
 {
-    function let(Settings $settings)
+    function let(ParameterCollection $settings)
     {
         $this->beConstructedWith($settings);
     }
@@ -38,7 +38,6 @@ class DefaultTaxZoneProviderSpec extends ObjectBehavior
 
     function it_provides_default_tax_zone_from_settings($settings, ZoneInterface $defaultTaxZone)
     {
-        $settings->has('default_tax_zone')->willReturn(true);
         $settings->get('default_tax_zone')->willReturn($defaultTaxZone);
 
         $this->getZone()->shouldReturn($defaultTaxZone);
@@ -46,7 +45,7 @@ class DefaultTaxZoneProviderSpec extends ObjectBehavior
 
     function it_returns_null_if_there_is_no_default_tax_zone_configured($settings)
     {
-        $settings->has('default_tax_zone')->willReturn(false);
+        $settings->get('default_tax_zone')->willReturn(null);
 
         $this->getZone()->shouldReturn(null);
     }

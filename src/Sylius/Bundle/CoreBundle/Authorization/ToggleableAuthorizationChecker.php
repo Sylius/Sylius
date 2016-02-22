@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Authorization;
 
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
-use Sylius\Bundle\SettingsBundle\Model\Settings;
+use Sylius\Bundle\SettingsBundle\Model\ParameterCollection;
 use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface;
 
 /**
@@ -33,7 +33,7 @@ class ToggleableAuthorizationChecker implements AuthorizationCheckerInterface
     private $settingsManager;
 
     /**
-     * @var Settings
+     * @var ParameterCollection
      */
     private $settings;
 

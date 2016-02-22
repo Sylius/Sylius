@@ -14,7 +14,6 @@ namespace Sylius\Bundle\SettingsBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use Sylius\Bundle\SettingsBundle\Form\Factory\SettingsFormFactoryInterface;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
-use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
@@ -69,13 +68,7 @@ class SettingsController extends FOSRestController
 
         $manager = $this->getSettingsManager();
 
-        try {
-            $settings = $manager->load($namespace);
-        } catch (MissingOptionsException $e) {
-            // When it is the first time that a Settings is being persisted,
-            // it won't have any initial value in database, so we should create a new instance.
-            $settings = new Settings([]);
-        }
+        $settings = $manager->load($namespace);
 
         $isApiRequest = $this->isApiRequest($request);
 
