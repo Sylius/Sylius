@@ -9,15 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Translation\Factory;
-
-use Sylius\Component\Resource\Factory\FactoryInterface;
+namespace Sylius\Component\Resource\Provider;
 
 /**
- * Interface for factories creating translatable resources.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface TranslatableFactoryInterface extends FactoryInterface
+interface LocaleProviderInterface
 {
+    /**
+     * @return string
+     */
+    public function getCurrentLocale();
+
+    /**
+     * @return string
+     */
+    public function getFallbackLocale();
 }

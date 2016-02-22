@@ -9,21 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Translation\Factory;
+namespace spec\Sylius\Component\Resource\Factory;
 
 use PhpSpec\ObjectBehavior;
-use spec\Sylius\Component\Translation\Fixtures\SampleNonTranslatableResource;
-use spec\Sylius\Component\Translation\Fixtures\SampleTranslatableResource;
+use spec\Sylius\Component\Resource\Fixtures\SampleNonTranslatableResource;
+use spec\Sylius\Component\Resource\Fixtures\SampleTranslatableResource;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Translation\Factory\TranslatableFactoryInterface;
-use Sylius\Component\Translation\Provider\LocaleProviderInterface;
+use Sylius\Component\Resource\Factory\TranslatableFactoryInterface;
+use Sylius\Component\Resource\Provider\LocaleProviderInterface;
 
 require_once __DIR__.'/../Fixtures/SampleTranslatableResource.php';
 require_once __DIR__.'/../Fixtures/SampleNonTranslatableResource.php';
 
 /**
- * @mixin \Sylius\Component\Translation\Factory\TranslatableFactory
+ * @mixin \Sylius\Component\Resource\Factory\TranslatableFactory
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
@@ -36,7 +36,7 @@ class TranslatableFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Translation\Factory\TranslatableFactory');
+        $this->shouldHaveType('Sylius\Component\Resource\Factory\TranslatableFactory');
     }
 
     function it_implements_translatable_factory_interface()

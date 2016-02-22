@@ -14,7 +14,7 @@ namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver;
 use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\Resource\Metadata\Metadata;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
-use Sylius\Component\Translation\Factory\TranslatableFactoryInterface;
+use Sylius\Component\Resource\Factory\TranslatableFactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Parameter;

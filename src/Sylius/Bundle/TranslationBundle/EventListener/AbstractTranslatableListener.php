@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\TranslationBundle\EventListener;
 
 use Sylius\Component\Resource\Metadata\RegistryInterface;
-use Sylius\Component\Translation\Provider\LocaleProviderInterface;
+use Sylius\Component\Resource\Provider\LocaleProviderInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

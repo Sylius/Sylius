@@ -13,8 +13,8 @@ namespace Sylius\Bundle\TranslationBundle\Doctrine\ODM\MongoDB;
 
 use Doctrine\MongoDB\Query\Builder as QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository;
-use Sylius\Component\Translation\Provider\LocaleProviderInterface;
-use Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface;
+use Sylius\Component\Resource\Provider\LocaleProviderInterface;
+use Sylius\Component\Resource\Repository\TranslatableResourceRepositoryInterface;
 
 /**
  * Doctrine ORM driver translatable entity repository.

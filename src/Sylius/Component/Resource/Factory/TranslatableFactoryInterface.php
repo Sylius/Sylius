@@ -9,11 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Translation\Fixtures;
+namespace Sylius\Component\Resource\Factory;
+
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
+ * Interface for factories creating translatable resources.
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SampleNonTranslatableResource
+interface TranslatableFactoryInterface extends FactoryInterface
 {
 }

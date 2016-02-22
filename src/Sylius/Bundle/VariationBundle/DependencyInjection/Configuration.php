@@ -22,7 +22,7 @@ use Sylius\Bundle\VariationBundle\Form\Type\VariantType;
 use Sylius\Component\Product\Model\OptionValueTranslation;
 use Sylius\Component\Product\Model\OptionValueTranslationInterface;
 use Sylius\Component\Resource\Factory\Factory;
-use Sylius\Component\Translation\Factory\TranslatableFactory;
+use Sylius\Component\Resource\Factory\TranslatableFactory;
 use Sylius\Component\Variation\Model\OptionTranslation;
 use Sylius\Component\Variation\Model\OptionTranslationInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;

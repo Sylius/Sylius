@@ -28,7 +28,6 @@ suites:
     Storage: { namespace: Sylius\Component\Storage, psr4_prefix: Sylius\Component\Storage, spec_path: src/Sylius/Component/Storage, src_path: src/Sylius/Component/Storage }
     Taxation: { namespace: Sylius\Component\Taxation, psr4_prefix: Sylius\Component\Taxation, spec_path: src/Sylius/Component/Taxation, src_path: src/Sylius/Component/Taxation }
     Taxonomy: { namespace: Sylius\Component\Taxonomy, psr4_prefix: Sylius\Component\Taxonomy, spec_path: src/Sylius/Component/Taxonomy, src_path: src/Sylius/Component/Taxonomy }
-    Translation: { namespace: Sylius\Component\Translation, psr4_prefix: Sylius\Component\Translation, spec_path: src/Sylius/Component/Translation, src_path: src/Sylius/Component/Translation }
     User: { namespace: Sylius\Component\User, psr4_prefix: Sylius\Component\User, spec_path: src/Sylius/Component/User, src_path: src/Sylius/Component/User }
     Variation: { namespace: Sylius\Component\Variation, psr4_prefix: Sylius\Component\Variation, spec_path: src/Sylius/Component/Variation, src_path: src/Sylius/Component/Variation }
 

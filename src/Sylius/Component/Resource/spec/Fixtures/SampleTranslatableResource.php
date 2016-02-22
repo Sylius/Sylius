@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Translation\Fixtures;
+namespace spec\Sylius\Component\Resource\Fixtures;
 
 use Sylius\Component\Translation\Model\TranslatableInterface;
 use Sylius\Component\Translation\Model\TranslatableTrait;

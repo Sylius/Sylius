@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Translation\Repository;
+namespace Sylius\Component\Resource\Repository;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 

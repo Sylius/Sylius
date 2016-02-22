@@ -32,6 +32,6 @@ class SyliusTranslationBundle extends AbstractResourceBundle
      */
     protected function getModelNamespace()
     {
-        return 'Sylius\Component\Translation\Model';
+        return 'Sylius\Component\Resource\Model';
     }
 }

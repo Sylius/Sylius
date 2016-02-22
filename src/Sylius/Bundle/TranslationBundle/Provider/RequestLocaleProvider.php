@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\TranslationBundle\Provider;
 
-use Sylius\Component\Translation\Provider\LocaleProviderInterface;
+use Sylius\Component\Resource\Provider\LocaleProviderInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;

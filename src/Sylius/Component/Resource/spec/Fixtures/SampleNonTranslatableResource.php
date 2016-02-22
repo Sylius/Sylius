@@ -9,20 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Translation\Provider;
+namespace spec\Sylius\Component\Resource\Fixtures;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface LocaleProviderInterface
+class SampleNonTranslatableResource
 {
-    /**
-     * @return string
-     */
-    public function getCurrentLocale();
-
-    /**
-     * @return string
-     */
-    public function getFallbackLocale();
 }

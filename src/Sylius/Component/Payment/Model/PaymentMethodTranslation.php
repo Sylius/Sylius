@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Payment\Model;
 
-use Sylius\Component\Translation\Model\AbstractTranslation;
+use Sylius\Component\Resource\Model\AbstractTranslation;
 
 class PaymentMethodTranslation extends AbstractTranslation implements PaymentMethodTranslationInterface
 {

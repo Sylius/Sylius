@@ -9,19 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Translation\Model;
+namespace spec\Sylius\Component\Resource\Model;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Translation\Model\AbstractTranslation;
-use Sylius\Component\Translation\Model\TranslatableInterface;
-use Sylius\Component\Translation\Model\TranslationInterface;
+use Sylius\Component\Resource\Model\AbstractTranslation;
+use Sylius\Component\Resource\Model\TranslatableInterface;
+use Sylius\Component\Resource\Model\TranslationInterface;
 
 class AbstractTranslationSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beAnInstanceOf('spec\Sylius\Component\Translation\Model\ConcreteTranslation');
+        $this->beAnInstanceOf('spec\Sylius\Component\Resource\Model\ConcreteTranslation');
     }
 
     function it_is_a_translation()
