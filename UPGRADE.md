@@ -5,7 +5,7 @@ UPGRADE
 
 ### Promotion and PromotionBundle
 
-* Changed "item_count" promotion type into "cart_quantity". It now checks cart quantity rather than different items number.
+* Changed "item_count" promotion type into "cart_quantity". It now checks cart quantity instead different items number.
 
 ### Resource and SyliusResourceBundle
 

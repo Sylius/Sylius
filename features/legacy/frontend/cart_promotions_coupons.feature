@@ -20,8 +20,8 @@ Feature: Checkout coupon promotions
             | type           | configuration |
             | Fixed discount | Amount: 5     |
         And promotion "New Year campaign" has following rules defined:
-            | type         | configuration |
-            | Cart quantity| Count: 2      |
+            | type          | configuration |
+            | Cart quantity | Count: 2      |
         And promotion "New Year campaign" has following actions defined:
             | type           | configuration |
             | Fixed discount | Amount: 10    |

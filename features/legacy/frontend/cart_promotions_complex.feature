@@ -45,7 +45,7 @@ Feature: Checkout promotions with multiple rules and actions
     Scenario: Promotion is not applied when one of the cart does not
             fulfills one of the rule
         Given I am on the store homepage
-        When I add product "Sarge" to cart, with quantity "7"
+        When I add product "Sarge" to cart, with quantity "2"
         Then I should be on the cart summary page
         And "Promotion total" should not appear on the page
-        And "Grand total: €175.00" should appear on the page
+        And "Grand total: €50.00" should appear on the page
