@@ -392,10 +392,7 @@
             <tag name="kernel.event_listener" event="sylius.taxonomy.pre_create" method="uploadTaxonomyImage" />
             <tag name="kernel.event_listener" event="sylius.taxonomy.pre_update" method="uploadTaxonomyImage" />
         </service>
-        <service id="sylius.listener.customer_reviews_delete" class="%sylius.listener.customer_reviews_delete.class%">
-            <argument type="service" id="sylius.review.remover.reviewer_reviews" />
-            <tag name="kernel.event_listener" event="sylius.customer.pre_delete" method="removeCustomerReviews" />
-        </service>
+
         <service id="sylius.listener.product_delete" class="%sylius.listener.product_delete.class%">
             <argument type="service" id="service_container"/>
             <tag name="doctrine.event_listener" event="postSoftDelete" method="postSoftDelete" />

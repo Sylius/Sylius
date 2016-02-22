@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Customer;
 
+use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 
 /**
@@ -49,7 +50,7 @@ class CustomerShowPage extends SymfonyPage
         $deleteButton = $this->getDocument()->find('css', '.delete-action-form');
 
         if (null === $deleteButton) {
-            throw new \Exception('Element not found.');
+            throw new ElementNotFoundException('Element not found.');
         }
 
         $deleteButton->press();

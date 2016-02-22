@@ -14,6 +14,7 @@ namespace spec\Sylius\Behat\Context\Ui;
 use Behat\Behat\Context\Context;
 use PhpSpec\ObjectBehavior;
 use Sylius\Behat\Page\Customer\CustomerShowPage;
+use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Page\User\LoginPage;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\User\Model\CustomerInterface;
@@ -82,7 +83,7 @@ class UserContextSpec extends ObjectBehavior
         $customerShowPage->open(['id' => 1])->shouldBeCalled();
         $this->iTryDeletingMyOwnAccount();
 
-        $customerShowPage->deleteAccount()->willThrow(new \Exception('Element not found.'));
+        $customerShowPage->deleteAccount()->willThrow(new ElementNotFoundException('Element not found.'));
         $this->iShouldNotBeAbleToDeleteMyOwnAccount();
     }
 

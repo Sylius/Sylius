@@ -13,6 +13,7 @@ namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Customer\CustomerShowPage;
+use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Page\User\LoginPage;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
@@ -98,7 +99,7 @@ final class UserContext implements Context
      */
     public function iShouldNotBeAbleToDeleteMyOwnAccount()
     {
-        expect($this->customerShowPage)->toThrow(new \Exception('Element not found.'))->during('deleteAccount');
+        expect($this->customerShowPage)->toThrow(new ElementNotFoundException('Element not found.'))->during('deleteAccount');
     }
 
     /**

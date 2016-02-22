@@ -13,6 +13,7 @@ namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Customer\CustomerShowPage;
+use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
 /**
@@ -51,7 +52,7 @@ class CustomerContext implements Context
 
         $this->customerShowPage->open(['id' => $customer->getId()]);
 
-        expect($this->customerShowPage)->toThrow(new \Exception('Element not found.'))->during('deleteAccount');
+        expect($this->customerShowPage)->toThrow(new ElementNotFoundException('Element not found.'))->during('deleteAccount');
     }
 
     /**
