@@ -5,7 +5,7 @@ Feature: Receiving discount based on cart quantity
     I want to have promotion applied to my cart when my cart quantity qualifies
 
     Background:
-        Given the store is operating on a single "France" channel
+        Given the store operates on a single channel in "France"
         And the store has a product "PHP T-Shirt" priced at "€100.00"
         And there is a promotion "Holiday promotion"
 

@@ -168,6 +168,9 @@ sylius_promotion:
                 repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\PromotionRepository
                 form:
                     default: Sylius\Bundle\CoreBundle\Form\Type\PromotionType
+        promotion_rule:
+            classes:
+                factory: Sylius\Component\Core\Factory\RuleFactory
         promotion_coupon:
             classes:
                 model: Sylius\Component\Core\Model\Coupon

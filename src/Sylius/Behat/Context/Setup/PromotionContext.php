@@ -83,7 +83,7 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @Given /^it gives "(?:€|£|\$)([^"]+)" fixed discount to every order$/
+     * @Given /^(?:it|the promotion) gives "(?:€|£|\$)([^"]+)" fixed discount to every order$/
      */
     public function itGivesFixedDiscountToEveryOrder($amount)
     {
