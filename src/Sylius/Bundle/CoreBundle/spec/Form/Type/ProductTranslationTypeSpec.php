@@ -47,6 +47,7 @@ class ProductTranslationTypeSpec extends ObjectBehavior
 
         $builder
             ->add('description', 'textarea', [
+                'required' => false,
                 'label' => 'sylius.form.product.description',
             ])
             ->shouldBeCalled()
