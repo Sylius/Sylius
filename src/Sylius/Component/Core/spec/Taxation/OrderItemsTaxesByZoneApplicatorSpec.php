@@ -91,6 +91,7 @@ class OrderItemsTaxesByZoneApplicatorSpec extends ObjectBehavior
 
         $orderItem->getUnits()->willReturn($units);
 
+        $units->first()->shouldBeCalled();
         $units->current()->willReturn($unit1, $unit2);
         $units->next()->shouldBeCalledTimes(2);
 
@@ -192,6 +193,7 @@ class OrderItemsTaxesByZoneApplicatorSpec extends ObjectBehavior
         $taxRate->isIncludedInPrice()->willReturn(false);
 
         $orderItem->getUnits()->willReturn($units);
+        $units->first()->shouldBeCalled();
         $units->current()->shouldNotBeCalled();
         $units->next()->shouldNotBeCalled();
 

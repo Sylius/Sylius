@@ -81,6 +81,7 @@ class OrderItemsTaxesByZoneApplicator implements OrderItemsTaxesByZoneApplicator
             $splitTaxes = $this->distributor->distribute($totalTaxAmount, $quantity);
 
             $units = $item->getUnits();
+            $units->first();
             foreach ($splitTaxes as $key => $tax) {
                 if (0 === $tax) {
                     continue;
@@ -112,7 +113,7 @@ class OrderItemsTaxesByZoneApplicator implements OrderItemsTaxesByZoneApplicator
     private function getNextUnit(Collection $units)
     {
         $unit = $units->current();
-        if (null === $unit) {
+        if (false === $unit) {
             throw new \InvalidArgumentException('The number of tax items is greater than number of units.');
         }
         $units->next();
