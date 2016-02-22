@@ -1,4 +1,4 @@
-@cli
+@installer @cli
 Feature: Sylius Install Feature
     In order to install Sylius via CLI
     As a Developer
@@ -6,7 +6,7 @@ Feature: Sylius Install Feature
 
     Scenario: Running install setup command
         When I run Sylius CLI installer
-        Then I should see output "Please enter a currency code (For example "GBP") or press ENTER to use "USD"."
+        Then I should see output "Please enter a currency code"
         And I should see output "In which currency can your customers buy goods?"
 
     Scenario: Choosing default currency

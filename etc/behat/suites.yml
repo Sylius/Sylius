@@ -39,3 +39,5 @@ imports:
     - suites/ui_user.yml
 
     - suites/domain_order.yml
+
+    - suites/cli_installer.yml

@@ -9,20 +9,26 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\InstallerBundle\Behat;
+namespace Sylius\Behat\Context\Cli;
 
+use Behat\Behat\Context\Context;
 use Sylius\Bundle\InstallerBundle\Command\SetupCommand;
-use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Helper\DialogHelper;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
-class CliContext extends DefaultContext
+final class InstallerContext implements Context
 {
+    /**
+     * @var KernelInterface
+     */
+    private $kernel;
+
     /**
      * @var Application
      */
@@ -56,11 +62,19 @@ class CliContext extends DefaultContext
     );
 
     /**
+     * @param KernelInterface $kernel
+     */
+    public function __construct(KernelInterface $kernel)
+    {
+        $this->kernel = $kernel;
+    }
+
+    /**
      * @When I run Sylius CLI installer
      */
     public function iRunSyliusCommandLineInstaller()
     {
-        $this->application = new Application($this->getKernel());
+        $this->application = new Application($this->kernel);
         $this->application->add(new SetupCommand());
 
         $this->command = $this->application->find('sylius:install:setup');
@@ -70,7 +84,7 @@ class CliContext extends DefaultContext
     }
 
     /**
-     * @Then /^I should see output "(.+)"$/
+     * @Then I should see output :text
      */
     public function iShouldSeeOutput($text)
     {

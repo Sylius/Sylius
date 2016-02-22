@@ -49,6 +49,7 @@ EOT
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->setupCurrency($input, $output);
+        $this->setupChannel();
         $this->setupAdministratorUser($input, $output);
     }
 
@@ -134,26 +135,46 @@ EOT
         } while (!$valid);
 
         $code = trim($code);
-        $name  = Intl::getCurrencyBundle()->getCurrencyName($code);
+        $name = Intl::getCurrencyBundle()->getCurrencyName($code);
         $output->writeln(sprintf('Adding <info>%s</info>', $name));
 
-        if (null !== $existingCurrency = $currencyRepository->findOneByCode($code)) {
+        if (null !== $existingCurrency = $currencyRepository->findOneBy(['code' => $code])) {
             $this->currency = $existingCurrency;
 
             return;
         }
 
-
         $currency = $currencyFactory->createNew();
 
+        $currency->setExchangeRate(1);
         $currency->setBase(true);
         $currency->setCode($code);
-        $currency->setExchangeRate(1);
 
         $this->currency = $currency;
 
         $currencyManager->persist($currency);
         $currencyManager->flush();
+    }
+
+    protected function setupChannel()
+    {
+        $channelRepository = $this->get('sylius.repository.channel');
+        $channelManager = $this->get('sylius.manager.channel');
+        $channelFactory = $this->get('sylius.factory.channel');
+
+        $channel = $channelRepository->findOneByCode('DEFAULT');
+
+        if (null !== $channel) {
+            return;
+        }
+
+        $channel = $channelFactory->createNew();
+        $channel->setCode('DEFAULT');
+        $channel->setName('DEFAULT');
+        $channel->setDefaultCurrency($this->currency);
+
+        $channelManager->persist($channel);
+        $channelManager->flush();
     }
 
     /**
