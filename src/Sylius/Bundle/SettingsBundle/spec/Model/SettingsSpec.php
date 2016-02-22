@@ -27,12 +27,17 @@ class SettingsSpec extends ObjectBehavior
             'zone' => new \stdClass(),
         ];
 
-        $this->beConstructedWith($parameters);
+        $this->beConstructedWith($parameters, 'settings_namespace', 'schema_alias');
     }
 
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SettingsBundle\Model\Settings');
+    }
+
+    function it_has_no_id_by_default()
+    {
+        $this->getId()->shouldReturn(null);
     }
 
     function it_should_check_for_parameter_existence_by_name()
@@ -57,7 +62,7 @@ class SettingsSpec extends ObjectBehavior
     function it_should_set_parameter_by_name()
     {
         $this->set('limit', 50);
-        $this->geT('limit')->shouldReturn(50);
+        $this->get('limit')->shouldReturn(50);
     }
 
     function it_should_overwrite_parameter()
@@ -80,27 +85,13 @@ class SettingsSpec extends ObjectBehavior
         $this->has('page')->shouldReturn(false);
     }
 
-    function it_should_implement_array_access_interface()
+    function it_has_schema_alias()
     {
-        $this->shouldImplement('ArrayAccess');
+        $this->getSchemaAlias()->shouldReturn('schema_alias');
     }
 
-    function it_should_allow_to_get_parameters_via_array_access()
+    function it_has_namespace()
     {
-        $this['page']->shouldReturn(1);
-    }
-
-    function it_should_allow_to_set_parameters_via_array_access()
-    {
-        $this['page'] = 10;
-
-        $this['page']->shouldReturn(10);
-        $this->get('page')->shouldReturn(10);
-    }
-
-    function it_should_allow_to_unset_parameters_via_array_access()
-    {
-        unset($this['title']);
-        $this->has('title')->shouldReturn(false);
+        $this->getNamespace()->shouldReturn('settings_namespace');
     }
 }

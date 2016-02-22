@@ -40,5 +40,14 @@
             </constraint>
         </property>
     </class>
+    
+    <class name="Sylius\Bundle\SettingsBundle\Model\Settings">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">namespace</option>
+        </constraint>
+        <property name="namespace">
+            <constraint name="Namespace" />
+        </property>
+    </class>
 
 </constraint-mapping>

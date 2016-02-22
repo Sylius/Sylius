@@ -14,19 +14,62 @@ namespace Sylius\Bundle\SettingsBundle\Model;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class Settings implements \ArrayAccess
+class Settings
 {
     /**
-     * @var array
+     * @var string
+     */
+    protected $id;
+
+    /**
+     * @var ParameterInterface[]
      */
     protected $parameters;
 
     /**
-     * @param array $parameters
+     * @var string
      */
-    public function __construct(array $parameters)
+    protected $namespace;
+
+    /**
+     * @var string
+     */
+    protected $schemaAlias;
+
+    /**
+     * @param array $parameters
+     * @param string $namespace
+     * @param string $schemaAlias
+     */
+    public function __construct(array $parameters, $namespace, $schemaAlias)
     {
         $this->parameters = $parameters;
+        $this->namespace = $namespace;
+        $this->schemaAlias = $schemaAlias;
+    }
+
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSchemaAlias()
+    {
+        return $this->schemaAlias;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNamespace()
+    {
+        return $this->namespace;
     }
 
     /**
@@ -83,37 +126,5 @@ class Settings implements \ArrayAccess
         }
 
         unset($this->parameters[$name]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function offsetExists($offset)
-    {
-        return $this->has($offset);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function offsetGet($offset)
-    {
-        return $this->get($offset);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function offsetSet($offset, $value)
-    {
-        $this->set($offset, $value);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function offsetUnset($offset)
-    {
-        $this->remove($offset);
     }
 }
