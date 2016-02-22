@@ -28,23 +28,6 @@ class HomepageController extends Controller
      */
     public function mainAction()
     {
-        $zone = $this->get('sylius.repository.zone')->findAll()[0];
-
-        $manager = $this->get('sylius.settings.manager');
-        $settings = $manager->load('sylius_taxation');
-
-        echo '<pre>';
-        echo $settings['default_tax_zone']->getId();
-
-
-        $settings['default_tax_zone'] = null;
-
-
-        $manager->save($settings);
-
-        die;
-
-
         return $this->render('SyliusWebBundle:Frontend/Homepage:main.html.twig');
     }
 }
