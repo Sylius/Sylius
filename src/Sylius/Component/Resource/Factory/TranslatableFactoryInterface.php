@@ -11,8 +11,6 @@
 
 namespace Sylius\Component\Resource\Factory;
 
-use Sylius\Component\Resource\Factory\FactoryInterface;
-
 /**
  * Interface for factories creating translatable resources.
  *

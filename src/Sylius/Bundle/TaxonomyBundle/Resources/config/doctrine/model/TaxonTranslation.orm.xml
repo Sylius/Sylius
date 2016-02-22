@@ -27,7 +27,7 @@
         </field>
         <field name="permalink" column="permalink" type="string" unique="false">
             <gedmo:slug fields="name" unique="false" >
-                <gedmo:handler class="Sylius\Bundle\TranslationBundle\GedmoHandler\TranslationSlugHandler">
+                <gedmo:handler class="Sylius\Bundle\ResourceBundle\GedmoHandler\TranslationSlugHandler">
                     <gedmo:handler-option name="relationField" value="translatable"/>
                     <gedmo:handler-option name="relationParentRelationField" value="parent"/>
                     <gedmo:handler-option name="parentFieldMethod" value="getPermalink"/>

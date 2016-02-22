@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+### v0.17.0
+
+* Integrated TranslationBundle.
+
 ### v0.16.0
 
 * Introduce Factory for all resources.

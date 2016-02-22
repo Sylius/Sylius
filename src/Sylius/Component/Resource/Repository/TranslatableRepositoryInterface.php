@@ -11,12 +11,10 @@
 
 namespace Sylius\Component\Resource\Repository;
 
-use Sylius\Component\Resource\Repository\RepositoryInterface;
-
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface TranslatableResourceRepositoryInterface extends RepositoryInterface
+interface TranslatableRepositoryInterface extends RepositoryInterface
 {
     /**
      * @param array $translatableFields

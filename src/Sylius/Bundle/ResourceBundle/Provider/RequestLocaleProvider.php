@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\TranslationBundle\Provider;
+namespace Sylius\Bundle\ResourceBundle\Provider;
 
 use Sylius\Component\Resource\Provider\LocaleProviderInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

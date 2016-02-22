@@ -38,6 +38,7 @@ class Configuration implements ConfigurationInterface
 
         $this->addResourcesSection($rootNode);
         $this->addSettingsSection($rootNode);
+        $this->addTranslationsSection($rootNode);
 
         return $treeBuilder;
     }
@@ -141,6 +142,20 @@ class Configuration implements ConfigurationInterface
                         ->variableNode('criteria')->defaultNull()->end()
                     ->end()
                 ->end()
+            ->end()
+        ;
+    }
+
+    /**
+     * @param ArrayNodeDefinition $node
+     */
+    private function addTranslationsSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+            ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
+            ->scalarNode('default_locale')->isRequired()->cannotBeEmpty()->end()
+            ->scalarNode('locale_provider')->defaultValue('sylius.translation.locale_provider.request')->end()
             ->end()
         ;
     }

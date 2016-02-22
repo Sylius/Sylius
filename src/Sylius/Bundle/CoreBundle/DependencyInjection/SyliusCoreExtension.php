@@ -57,7 +57,6 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         'sylius_taxonomy',
         'sylius_user',
         'sylius_variation',
-        'sylius_translation',
         'sylius_rbac',
     ];
 

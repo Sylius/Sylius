@@ -284,7 +284,7 @@ sylius_search:
                 type: terms
                 value: ~
 
-sylius_translation:
+sylius_resource:
     default_locale: %sylius.locale%
     locale_provider: sylius.translation.locale_provider.contextual
 

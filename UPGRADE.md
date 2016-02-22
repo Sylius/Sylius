@@ -298,9 +298,11 @@ app/console doctrine:phpcr:document:migrate-class "Symfony\Cmf\Bundle\BlockBundl
 app/console doctrine:phpcr:document:migrate-class "Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\StringBlock" "Sylius\Bundle\ContentBundle\Document\StringBlock"
 ```
 
-### Translation 
+### Translation and TranslationBundle
 
-* Moved whole component to ``Resource``
+* Integrated ``Translation`` component with ``Resource`` component
+* Integrated ``TranslationBundle`` with ``ResourceBundle``
+* Renamed ``TranslatableResourceRepository`` to ``TranslatableRepository``
 
 ## From 0.15.0 to 0.16.x
 

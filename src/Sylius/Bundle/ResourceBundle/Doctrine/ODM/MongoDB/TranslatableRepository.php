@@ -9,19 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\TranslationBundle\Doctrine\ODM\MongoDB;
+namespace Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB;
 
 use Doctrine\MongoDB\Query\Builder as QueryBuilder;
-use Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository;
 use Sylius\Component\Resource\Provider\LocaleProviderInterface;
-use Sylius\Component\Resource\Repository\TranslatableResourceRepositoryInterface;
+use Sylius\Component\Resource\Repository\TranslatableRepositoryInterface;
 
 /**
  * Doctrine ORM driver translatable entity repository.
  *
  * @author Ivannis Suárez Jérez <ivannis.suarez@gmail.com>
  */
-class TranslatableResourceRepository extends DocumentRepository implements TranslatableResourceRepositoryInterface
+class TranslatableRepository extends DocumentRepository implements TranslatableRepositoryInterface
 {
     /**
      * @var LocaleProviderInterface

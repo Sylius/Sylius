@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\TranslationBundle\EventListener;
+namespace Sylius\Bundle\ResourceBundle\EventListener;
 
 use Sylius\Component\Resource\Metadata\RegistryInterface;
 use Sylius\Component\Resource\Provider\LocaleProviderInterface;

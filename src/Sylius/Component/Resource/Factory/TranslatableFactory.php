@@ -12,7 +12,6 @@
 namespace Sylius\Component\Resource\Factory;
 
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 use Sylius\Component\Resource\Provider\LocaleProviderInterface;
 
