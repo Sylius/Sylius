@@ -26,6 +26,7 @@
 
         <parameter key="sylius.province_naming_provider.class">Sylius\Component\Addressing\Provider\ProvinceNamingProvider</parameter>
         <parameter key="sylius.zone_matcher.class">Sylius\Component\Addressing\Matcher\ZoneMatcher</parameter>
+        <parameter key="sylius.converter.country_name.class">Sylius\Component\Addressing\Converter\CountryNameConverter</parameter>
 
         <parameter key="sylius.validator.shippable_address.class">Sylius\Bundle\AddressingBundle\Validator\Constraints\ShippableAddressConstraintValidator</parameter>
         <parameter key="sylius.validator.valid_province_address.class">Sylius\Bundle\AddressingBundle\Validator\Constraints\ProvinceAddressConstraintValidator</parameter>
@@ -59,6 +60,7 @@
         <service id="sylius.zone_matcher" class="%sylius.zone_matcher.class%">
             <argument type="service" id="sylius.repository.zone" />
         </service>
+        <service id="sylius.converter.country_name" class="%sylius.converter.country_name.class%" />
 
         <service id="sylius.validator.shippable_address" class="%sylius.validator.shippable_address.class%">
             <tag name="validator.constraint_validator" alias="sylius_shippable_address_validator" />
