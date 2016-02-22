@@ -77,7 +77,7 @@ class CartContextSpec extends ObjectBehavior
         $cartSummaryPage->open()->shouldBeCalled();
         $cartSummaryPage->getPromotionTotal()->willReturn('$50.00');
 
-        $this->myCartPromotionsShouldBe('$50.00');
+        $this->myDiscountShouldBe('$50.00');
     }
 
     function it_throws_not_equal_exception_if_promotion_total_is_incorrect(CartSummaryPage $cartSummaryPage)
@@ -85,6 +85,6 @@ class CartContextSpec extends ObjectBehavior
         $cartSummaryPage->open()->shouldBeCalled();
         $cartSummaryPage->getPromotionTotal()->willReturn('$40.00');
 
-        $this->shouldThrow(NotEqualException::class)->during('myCartPromotionsShouldBe', ['$50.00']);
+        $this->shouldThrow(NotEqualException::class)->during('myDiscountShouldBe', ['$50.00']);
     }
 }

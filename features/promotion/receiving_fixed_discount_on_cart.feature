@@ -15,7 +15,7 @@ Feature: Receiving fixed discount on cart
         And it gives "€10.00" fixed discount to every order
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "€90.00"
-        And my cart promotions should be "-€10.00"
+        And my discount should be "-€10.00"
 
     @ui
     Scenario: Receiving fixed discount equal to the items total of my cart
@@ -24,7 +24,7 @@ Feature: Receiving fixed discount on cart
         When I add product "PHP T-Shirt" to the cart
         And I add product "PHP Mug" to the cart
         Then my cart total should be "€0.00"
-        And my cart promotions should be "-€106.00"
+        And my discount should be "-€106.00"
 
     @ui
     Scenario: Receiving fixed discount equal to the items total of my cart even if the discount is bigger than the items total
@@ -32,7 +32,7 @@ Feature: Receiving fixed discount on cart
         And it gives "€200.00" fixed discount to every order
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "€0.00"
-        And my cart promotions should be "-€100.00"
+        And my discount should be "-€100.00"
 
     @ui
     Scenario: Receiving fixed discount does not affect the shipping fee
@@ -44,4 +44,4 @@ Feature: Receiving fixed discount on cart
         And I proceed selecting "DHL" shipping method
         Then my cart total should be "€100.00"
         And my cart shipping fee should be "€10.00"
-        And my cart promotions should be "-€10.00"
+        And my discount should be "-€10.00"
