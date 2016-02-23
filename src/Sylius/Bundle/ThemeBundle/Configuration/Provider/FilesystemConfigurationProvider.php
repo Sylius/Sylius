@@ -9,10 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ThemeBundle\Loader\Filesystem;
+namespace Sylius\Bundle\ThemeBundle\Configuration\Provider;
 
-use Sylius\Bundle\ThemeBundle\Loader\ConfigurationProviderInterface;
-use Sylius\Bundle\ThemeBundle\Loader\LoaderInterface;
+use Sylius\Bundle\ThemeBundle\Configuration\Loader\ConfigurationLoaderInterface;
 use Sylius\Bundle\ThemeBundle\Locator\FileLocatorInterface;
 use Symfony\Component\Config\Resource\FileResource;
 
@@ -27,7 +26,7 @@ final class FilesystemConfigurationProvider implements ConfigurationProviderInte
     private $fileLocator;
 
     /**
-     * @var LoaderInterface
+     * @var ConfigurationLoaderInterface
      */
     private $loader;
 
@@ -38,10 +37,10 @@ final class FilesystemConfigurationProvider implements ConfigurationProviderInte
 
     /**
      * @param FileLocatorInterface $fileLocator
-     * @param LoaderInterface $loader
+     * @param ConfigurationLoaderInterface $loader
      * @param string $configurationFilename
      */
-    public function __construct(FileLocatorInterface $fileLocator, LoaderInterface $loader, $configurationFilename)
+    public function __construct(FileLocatorInterface $fileLocator, ConfigurationLoaderInterface $loader, $configurationFilename)
     {
         $this->fileLocator = $fileLocator;
         $this->loader = $loader;

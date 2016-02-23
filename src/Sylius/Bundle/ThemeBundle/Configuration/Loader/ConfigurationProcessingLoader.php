@@ -9,15 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ThemeBundle\Loader;
+namespace Sylius\Bundle\ThemeBundle\Configuration\Loader;
+
+use Sylius\Bundle\ThemeBundle\Configuration\Processor\ConfigurationProcessorInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ConfigurationProcessingLoader implements LoaderInterface
+final class ConfigurationProcessingLoader implements ConfigurationLoaderInterface
 {
     /**
-     * @var LoaderInterface
+     * @var ConfigurationLoaderInterface
      */
     private $decoratedLoader;
 
@@ -27,10 +29,10 @@ final class ConfigurationProcessingLoader implements LoaderInterface
     private $configurationProcessor;
 
     /**
-     * @param LoaderInterface $decoratedLoader
+     * @param ConfigurationLoaderInterface $decoratedLoader
      * @param ConfigurationProcessorInterface $configurationProcessor
      */
-    public function __construct(LoaderInterface $decoratedLoader, ConfigurationProcessorInterface $configurationProcessor)
+    public function __construct(ConfigurationLoaderInterface $decoratedLoader, ConfigurationProcessorInterface $configurationProcessor)
     {
         $this->decoratedLoader = $decoratedLoader;
         $this->configurationProcessor = $configurationProcessor;

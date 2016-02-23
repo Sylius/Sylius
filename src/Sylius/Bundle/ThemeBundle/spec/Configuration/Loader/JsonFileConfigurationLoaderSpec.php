@@ -9,19 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ThemeBundle\Loader\Filesystem;
+namespace spec\Sylius\Bundle\ThemeBundle\Configuration\Loader;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ThemeBundle\Configuration\Loader\ConfigurationLoaderInterface;
+use Sylius\Bundle\ThemeBundle\Configuration\Loader\JsonFileConfigurationLoader;
 use Sylius\Bundle\ThemeBundle\Filesystem\FilesystemInterface;
-use Sylius\Bundle\ThemeBundle\Loader\Filesystem\JsonFileLoader;
-use Sylius\Bundle\ThemeBundle\Loader\LoaderInterface;
 
 /**
- * @mixin JsonFileLoader
+ * @mixin JsonFileConfigurationLoader
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class JsonFileLoaderSpec extends ObjectBehavior
+class JsonFileConfigurationLoaderSpec extends ObjectBehavior
 {
     function let(FilesystemInterface $filesystem)
     {
@@ -30,12 +30,12 @@ class JsonFileLoaderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Loader\Filesystem\JsonFileLoader');
+        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Configuration\Loader\JsonFileConfigurationLoader');
     }
 
     function it_implements_configuration_loader_interface()
     {
-        $this->shouldImplement(LoaderInterface::class);
+        $this->shouldImplement(ConfigurationLoaderInterface::class);
     }
 
     function it_loads_json_file(FilesystemInterface $filesystem)

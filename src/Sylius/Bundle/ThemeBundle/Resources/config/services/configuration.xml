@@ -13,19 +13,19 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
-        <parameter key="sylius.theme.configuration.class">Sylius\Bundle\ThemeBundle\Loader\ThemeConfiguration</parameter>
+        <parameter key="sylius.theme.configuration.class">Sylius\Bundle\ThemeBundle\Configuration\ThemeConfiguration</parameter>
 
-        <parameter key="sylius.theme.configuration.processor.symfony.class">Symfony\Component\Config\Definition\Processor</parameter>
-        <parameter key="sylius.theme.configuration.processor.class">Sylius\Bundle\ThemeBundle\Loader\SymfonyConfigurationProcessor</parameter>
+        <parameter key="sylius.theme.configuration.processor.class">Sylius\Bundle\ThemeBundle\Configuration\Processor\SymfonyConfigurationProcessor</parameter>
     </parameters>
 
     <services>
         <service id="sylius.theme.configuration" class="%sylius.theme.configuration.class%" public="false" />
 
-        <service id="sylius.theme.configuration.processor.symfony" class="%sylius.theme.configuration.processor.symfony.class%" public="false" />
         <service id="sylius.theme.configuration.processor" class="%sylius.theme.configuration.processor.class%" public="false">
             <argument type="service" id="sylius.theme.configuration" />
-            <argument type="service" id="sylius.theme.configuration.processor.symfony" />
+            <argument type="service">
+                <service class="Symfony\Component\Config\Definition\Processor" />
+            </argument>
         </service>
     </services>
 </container>

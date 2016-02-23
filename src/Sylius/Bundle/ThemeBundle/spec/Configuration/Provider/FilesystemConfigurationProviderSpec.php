@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ThemeBundle\Loader\Filesystem;
+namespace spec\Sylius\Bundle\ThemeBundle\Configuration\Provider;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ThemeBundle\Loader\ConfigurationProviderInterface;
-use Sylius\Bundle\ThemeBundle\Loader\Filesystem\FilesystemConfigurationProvider;
-use Sylius\Bundle\ThemeBundle\Loader\LoaderInterface;
+use Sylius\Bundle\ThemeBundle\Configuration\Loader\ConfigurationLoaderInterface;
+use Sylius\Bundle\ThemeBundle\Configuration\Provider\ConfigurationProviderInterface;
+use Sylius\Bundle\ThemeBundle\Configuration\Provider\FilesystemConfigurationProvider;
 use Sylius\Bundle\ThemeBundle\Locator\FileLocatorInterface;
 use Symfony\Component\Config\Resource\ResourceInterface;
 
@@ -25,14 +25,14 @@ use Symfony\Component\Config\Resource\ResourceInterface;
  */
 class FilesystemConfigurationProviderSpec extends ObjectBehavior
 {
-    function let(FileLocatorInterface $fileLocator, LoaderInterface $loader)
+    function let(FileLocatorInterface $fileLocator, ConfigurationLoaderInterface $loader)
     {
         $this->beConstructedWith($fileLocator, $loader, 'configurationfile.json');
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Loader\Filesystem\FilesystemConfigurationProvider');
+        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Configuration\Provider\FilesystemConfigurationProvider');
     }
 
     function it_implements_configuration_provider_interface()
@@ -40,7 +40,7 @@ class FilesystemConfigurationProviderSpec extends ObjectBehavior
         $this->shouldImplement(ConfigurationProviderInterface::class);
     }
 
-    function it_provides_loaded_configuration_files(FileLocatorInterface $fileLocator, LoaderInterface $loader)
+    function it_provides_loaded_configuration_files(FileLocatorInterface $fileLocator, ConfigurationLoaderInterface $loader)
     {
         $fileLocator->locateFilesNamed('configurationfile.json')->willReturn([
             '/cristopher/configurationfile.json',

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ThemeBundle\Loader;
+namespace Sylius\Bundle\ThemeBundle\Configuration;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -77,8 +77,6 @@ final class ThemeConfiguration implements ConfigurationInterface
      */
     private function addOptionalParentsList(ArrayNodeDefinition $rootNodeDefinition)
     {
-        $this->deleteChildIfEmpty($rootNodeDefinition, 'parents');
-
         $parentsNodeDefinition = $rootNodeDefinition->children()->arrayNode('parents');
         $parentsNodeDefinition
             ->requiresAtLeastOneElement()
@@ -93,8 +91,6 @@ final class ThemeConfiguration implements ConfigurationInterface
      */
     private function addOptionalAuthorsList(ArrayNodeDefinition $rootNodeDefinition)
     {
-        $this->deleteChildIfEmpty($rootNodeDefinition, 'authors');
-
         $authorsNodeDefinition = $rootNodeDefinition->children()->arrayNode('authors');
         $authorsNodeDefinition
             ->requiresAtLeastOneElement()
@@ -116,24 +112,5 @@ final class ThemeConfiguration implements ConfigurationInterface
         $authorNodeBuilder->scalarNode('email')->cannotBeEmpty();
         $authorNodeBuilder->scalarNode('homepage')->cannotBeEmpty();
         $authorNodeBuilder->scalarNode('role')->cannotBeEmpty();
-    }
-
-    /**
-     * @param ArrayNodeDefinition $arrayNodeDefinition
-     * @param $field
-     */
-    private function deleteChildIfEmpty(ArrayNodeDefinition $arrayNodeDefinition, $field)
-    {
-        $arrayNodeDefinition
-            ->validate()
-                ->ifTrue(function ($data) use ($field) {
-                    return isset($data[$field]) && ([] === $data[$field] || '' === $data[$field]);
-                })
-                ->then(function ($data) use ($field) {
-                    unset($data[$field]);
-
-                    return $data;
-                })
-        ;
     }
 }

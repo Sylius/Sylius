@@ -9,14 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ThemeBundle\Loader;
+namespace Sylius\Bundle\ThemeBundle\Configuration\Provider;
 
 use Symfony\Component\Config\Resource\ResourceInterface;
 
 /**
  * Provides configuration of all known themes, runs while building the container.
- *
- * @see \Sylius\Bundle\ThemeBundle\DependencyInjection\Compiler\ThemeRepositoryPass
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */

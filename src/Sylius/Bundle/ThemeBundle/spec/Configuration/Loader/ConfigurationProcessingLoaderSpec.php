@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ThemeBundle\Loader;
+namespace spec\Sylius\Bundle\ThemeBundle\Configuration\Loader;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ThemeBundle\Loader\ConfigurationProcessingLoader;
-use Sylius\Bundle\ThemeBundle\Loader\ConfigurationProcessorInterface;
-use Sylius\Bundle\ThemeBundle\Loader\LoaderInterface;
+use Sylius\Bundle\ThemeBundle\Configuration\Loader\ConfigurationLoaderInterface;
+use Sylius\Bundle\ThemeBundle\Configuration\Loader\ConfigurationProcessingLoader;
+use Sylius\Bundle\ThemeBundle\Configuration\Processor\ConfigurationProcessorInterface;
 
 /**
  * @mixin ConfigurationProcessingLoader
@@ -23,23 +23,23 @@ use Sylius\Bundle\ThemeBundle\Loader\LoaderInterface;
  */
 class ConfigurationProcessingLoaderSpec extends ObjectBehavior
 {
-    function let(LoaderInterface $decoratedLoader, ConfigurationProcessorInterface $configurationProcessor)
+    function let(ConfigurationLoaderInterface $decoratedLoader, ConfigurationProcessorInterface $configurationProcessor)
     {
         $this->beConstructedWith($decoratedLoader, $configurationProcessor);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Loader\ConfigurationProcessingLoader');
+        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Configuration\Loader\ConfigurationProcessingLoader');
     }
 
     function it_implements_loader_interface()
     {
-        $this->shouldImplement(LoaderInterface::class);
+        $this->shouldImplement(ConfigurationLoaderInterface::class);
     }
 
     function it_processes_the_configuration(
-        LoaderInterface $decoratedLoader,
+        ConfigurationLoaderInterface $decoratedLoader,
         ConfigurationProcessorInterface $configurationProcessor
     ) {
         $basicConfiguration = ['name' => 'example/sylius-theme'];
@@ -56,7 +56,7 @@ class ConfigurationProcessingLoaderSpec extends ObjectBehavior
     }
 
     function it_processes_the_configuration_and_extracts_extra_sylius_theme_key_as_another_configuration(
-        LoaderInterface $decoratedLoader,
+        ConfigurationLoaderInterface $decoratedLoader,
         ConfigurationProcessorInterface $configurationProcessor
     ) {
         $basicConfiguration = [

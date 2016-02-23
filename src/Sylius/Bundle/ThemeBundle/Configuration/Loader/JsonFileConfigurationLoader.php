@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ThemeBundle\Loader\Filesystem;
+namespace Sylius\Bundle\ThemeBundle\Configuration\Loader;
 
 use Sylius\Bundle\ThemeBundle\Filesystem\FilesystemInterface;
-use Sylius\Bundle\ThemeBundle\Loader\LoaderInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class JsonFileLoader implements LoaderInterface
+final class JsonFileConfigurationLoader implements ConfigurationLoaderInterface
 {
     /**
      * @var FilesystemInterface
