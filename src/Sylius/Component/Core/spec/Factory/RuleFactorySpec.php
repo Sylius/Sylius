@@ -51,4 +51,13 @@ class RuleFactorySpec extends ObjectBehavior
 
         $this->createCartQuantity(5)->shouldReturn($rule);
     }
+
+    function it_creates_item_total_rule($decoratedFactory, RuleInterface $rule)
+    {
+        $decoratedFactory->createNew()->willReturn($rule);
+        $rule->setType(RuleInterface::TYPE_ITEM_TOTAL)->shouldBeCalled();
+        $rule->setConfiguration(['amount' => 1000])->shouldBeCalled();
+
+        $this->createItemTotal(1000)->shouldReturn($rule);
+    }
 }
