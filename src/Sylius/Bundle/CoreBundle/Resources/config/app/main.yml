@@ -13,7 +13,6 @@ twig:
 
 doctrine_cache:
     providers:
-        sylius_settings: %sylius.cache%
         sylius_rbac: %sylius.cache%
 
 knp_gaufrette:
