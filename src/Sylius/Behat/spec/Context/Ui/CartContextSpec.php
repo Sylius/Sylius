@@ -89,6 +89,22 @@ class CartContextSpec extends ObjectBehavior
         $this->shouldThrow(NotEqualException::class)->during('myDiscountShouldBe', ['$50.00']);
     }
 
+    function it_ensures_there_is_no_grand_total_info_on_the_page(CartSummaryPage $cartSummaryPage)
+    {
+        $cartSummaryPage->open()->shouldBeCalled();
+        $cartSummaryPage->getGrandTotal()->willThrow(new ElementNotFoundException('"grand total" element is not present on the page'));
+
+        $this->cartShouldBeEmptyWithNoValue();
+    }
+
+    function it_ensures_there_is_no_shipping_fee_info_on_the_page(CartSummaryPage $cartSummaryPage)
+    {
+        $cartSummaryPage->open()->shouldBeCalled();
+        $cartSummaryPage->getShippingTotal()->willThrow(new ElementNotFoundException('"shipping total" element is not present on the page'));
+
+        $this->thereShouldBeNoShippingFee();
+    }
+
     function it_ensures_there_is_no_discount_info_on_the_page(CartSummaryPage $cartSummaryPage)
     {
         $cartSummaryPage->open()->shouldBeCalled();
