@@ -83,6 +83,20 @@ EOT;
         $this->assertResponse($response, 'shipping_category/index_response', Response::HTTP_OK);
     }
 
+    public function testGetShippingCategoriesListResponseWithSparseFieldsets()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/shipping_categories.yml');
+
+
+        $this->client->request('GET', '/api/shipping-categories/?include[shipping-category][]=code', [], [], [
+            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+        ]);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'shipping_category/index_response_sparse_fieldsets', Response::HTTP_OK);
+    }
+
     public function testGetShippingCategoryAccessDeniedResponse()
     {
         $this->client->request('GET', '/api/shipping-categories/1');

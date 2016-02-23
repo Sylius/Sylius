@@ -1,0 +1,45 @@
+{
+    "page": 1,
+    "limit": 10,
+    "pages": 1,
+    "total": 3,
+    "_links": {
+        "self": {
+            "href": "\/api\/shipping-categories\/?include%5Bshipping-category%5D%5B0%5D=code&page=1&limit=10"
+        },
+        "first": {
+            "href": "\/api\/shipping-categories\/?include%5Bshipping-category%5D%5B0%5D=code&page=1&limit=10"
+        },
+        "last": {
+            "href": "\/api\/shipping-categories\/?include%5Bshipping-category%5D%5B0%5D=code&page=1&limit=10"
+        }
+    },
+    "_embedded": {
+        "items": [
+            {
+                "code": "SC3",
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "code": "SC2",
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "code": "SC1",
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            }
+        ]
+    }
+}
