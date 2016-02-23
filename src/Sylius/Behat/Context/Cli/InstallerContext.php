@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Context\Cli;
 
 use Behat\Behat\Context\Context;
+use Sylius\Bundle\InstallerBundle\Command\InstallSampleDataCommand;
 use Sylius\Bundle\InstallerBundle\Command\SetupCommand;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Helper\DialogHelper;
@@ -81,6 +82,33 @@ final class InstallerContext implements Context
         $this->tester = new CommandTester($this->command);
 
         $this->iExecuteCommandWithInputChoices('sylius:install:setup');
+    }
+
+    /**
+     * @Given I run Sylius Install Load Sample Data command
+     */
+    public function iRunSyliusInstallSampleDataCommand()
+    {
+        $this->application = new Application($this->kernel);
+        $this->application->add(new InstallSampleDataCommand());
+        $this->command = $this->application->find('sylius:install:sample-data');
+        $this->tester = new CommandTester($this->command);
+    }
+
+    /**
+     * @Given I confirm loading sample data
+     */
+    public function iConfirmLoadingData()
+    {
+        $this->iExecuteCommandAndConfirm('sylius:install:sample-data');
+    }
+
+    /**
+     * @Then the command should finish successfully
+     */
+    public function commandSuccess()
+    {
+        expect($this->tester->getStatusCode())->toBe(0);
     }
 
     /**
@@ -174,6 +202,19 @@ final class InstallerContext implements Context
         $this->dialog = $this->command->getHelper('dialog');
         $inputString = join(PHP_EOL, $this->inputChoices);
         $this->dialog->setInputStream($this->getInputStream($inputString.PHP_EOL));
+
+        $this->tester->execute($fullParameters);
+    }
+
+    /**
+     * @param string $name
+     */
+    private function iExecuteCommandAndConfirm($name)
+    {
+        $fullParameters = array_merge(array('command' => $name));
+        $this->dialog = $this->command->getHelper('dialog');
+        $inputString = 'y'.PHP_EOL;
+        $this->dialog->setInputStream($this->getInputStream($inputString));
 
         $this->tester->execute($fullParameters);
     }
