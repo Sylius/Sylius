@@ -9,19 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ThemeBundle\Provider;
+namespace Sylius\Bundle\ThemeBundle\Loader;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-interface ThemeProviderInterface
+interface ThemeLoaderInterface
 {
     /**
-     * @param string $name
+     * @return ThemeInterface[]
      *
-     * @return ThemeInterface
+     * @throws ThemeLoadingFailedException
      */
-    public function getNamed($name);
+    public function load();
 }
