@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ThemeBundle\Templating\Cache\Warmer;
 
 use Doctrine\Common\Cache\Cache;
+use Sylius\Bundle\ThemeBundle\Loader\ThemeLoaderInterface;
 use Sylius\Bundle\ThemeBundle\Locator\ResourceNotFoundException;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
@@ -36,9 +37,9 @@ final class TemplatePathsCacheWarmer implements CacheWarmerInterface
     private $templateLocator;
 
     /**
-     * @var ThemeRepositoryInterface
+     * @var ThemeLoaderInterface
      */
-    private $themeRepository;
+    private $themeLoader;
 
     /**
      * @var Cache
@@ -48,18 +49,18 @@ final class TemplatePathsCacheWarmer implements CacheWarmerInterface
     /**
      * @param TemplateFinderInterface $templateFinder
      * @param TemplateLocatorInterface $templateLocator
-     * @param ThemeRepositoryInterface $themeRepository
+     * @param ThemeLoaderInterface $themeLoader
      * @param Cache $cache
      */
     public function __construct(
         TemplateFinderInterface $templateFinder,
         TemplateLocatorInterface $templateLocator,
-        ThemeRepositoryInterface $themeRepository,
+        ThemeLoaderInterface $themeLoader,
         Cache $cache
     ) {
         $this->templateFinder = $templateFinder;
         $this->templateLocator = $templateLocator;
-        $this->themeRepository = $themeRepository;
+        $this->themeLoader = $themeLoader;
         $this->cache = $cache;
     }
 
@@ -90,7 +91,7 @@ final class TemplatePathsCacheWarmer implements CacheWarmerInterface
     private function warmUpTemplate(TemplateReferenceInterface $template)
     {
         /** @var ThemeInterface $theme */
-        foreach ($this->themeRepository->findAll() as $theme) {
+        foreach ($this->themeLoader->load() as $theme) {
             $this->warmUpThemeTemplate($template, $theme);
         }
     }

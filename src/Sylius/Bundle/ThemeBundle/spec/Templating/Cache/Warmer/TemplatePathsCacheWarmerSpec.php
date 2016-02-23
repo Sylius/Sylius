@@ -15,7 +15,7 @@ use Doctrine\Common\Cache\Cache;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Locator\ResourceNotFoundException;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
+use Sylius\Bundle\ThemeBundle\Loader\ThemeLoaderInterface;
 use Sylius\Bundle\ThemeBundle\Templating\Cache\Warmer\TemplatePathsCacheWarmer;
 use Sylius\Bundle\ThemeBundle\Templating\Locator\TemplateLocatorInterface;
 use Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinderInterface;
@@ -32,10 +32,10 @@ class TemplatePathsCacheWarmerSpec extends ObjectBehavior
     function let(
         TemplateFinderInterface $templateFinder,
         TemplateLocatorInterface $templateLocator,
-        ThemeRepositoryInterface $themeRepository,
+        ThemeLoaderInterface $themeLoader,
         Cache $cache
     ) {
-        $this->beConstructedWith($templateFinder, $templateLocator, $themeRepository, $cache);
+        $this->beConstructedWith($templateFinder, $templateLocator, $themeLoader, $cache);
     }
 
     function it_is_initializable()
@@ -51,7 +51,7 @@ class TemplatePathsCacheWarmerSpec extends ObjectBehavior
     function it_builds_cache_by_warming_up_every_template_and_every_theme_together(
         TemplateFinderInterface $templateFinder,
         TemplateLocatorInterface $templateLocator,
-        ThemeRepositoryInterface $themeRepository,
+        ThemeLoaderInterface $themeLoader,
         Cache $cache,
         ThemeInterface $theme,
         TemplateReferenceInterface $firstTemplate,
@@ -59,7 +59,7 @@ class TemplatePathsCacheWarmerSpec extends ObjectBehavior
     ) {
         $templateFinder->findAllTemplates()->willReturn([$firstTemplate, $secondTemplate]);
 
-        $themeRepository->findAll()->willReturn([$theme]);
+        $themeLoader->load()->willReturn([$theme]);
 
         $theme->getName()->willReturn('theme/name');
         $firstTemplate->getLogicalName()->willReturn('Logical:Name:First');

@@ -49,7 +49,7 @@
             <argument type="service" id="sylius.theme.circular_dependency_checker" />
         </service>
 
-        <service id="sylius.theme.synchronizer" class="%sylius.theme.synchronizer.class%" public="false">
+        <service id="sylius.theme.synchronizer" class="%sylius.theme.synchronizer.class%">
             <argument type="service" id="sylius.theme.loader" />
             <argument type="service" id="sylius.repository.theme" />
             <argument type="service" id="sylius.theme.merger" />

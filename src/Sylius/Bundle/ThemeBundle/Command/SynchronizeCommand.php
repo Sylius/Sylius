@@ -11,31 +11,15 @@
 
 namespace Sylius\Bundle\ThemeBundle\Command;
 
-use Sylius\Bundle\ThemeBundle\Synchronizer\ThemeSynchronizerInterface;
-use Symfony\Component\Console\Command\Command;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class SynchronizeCommand extends Command
+final class SynchronizeCommand extends ContainerAwareCommand
 {
-    /**
-     * @var ThemeSynchronizerInterface
-     */
-    private $themeSynchronizer;
-
-    /**
-     * @param ThemeSynchronizerInterface $themeSynchronizer
-     */
-    public function __construct(ThemeSynchronizerInterface $themeSynchronizer)
-    {
-        parent::__construct();
-
-        $this->themeSynchronizer = $themeSynchronizer;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -54,7 +38,7 @@ final class SynchronizeCommand extends Command
     {
         $output->write('Synchronizing themes... ');
 
-        $this->themeSynchronizer->synchronize();
+        $this->getContainer()->get('sylius.theme.synchronizer')->synchronize();
 
         $output->writeln('Success!');
     }
