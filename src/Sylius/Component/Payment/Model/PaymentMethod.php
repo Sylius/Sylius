@@ -20,10 +20,9 @@ use Sylius\Component\Translation\Model\TranslatableTrait;
  */
 class PaymentMethod implements PaymentMethodInterface
 {
-    use TimestampableTrait;
-    use ToggleableTrait;
+    use TimestampableTrait, ToggleableTrait;
     use TranslatableTrait {
-        __construct as translatableConstruct;
+        __construct as initializeTranslationsCollection;
     }
 
     /**
@@ -58,7 +57,7 @@ class PaymentMethod implements PaymentMethodInterface
 
     public function __construct()
     {
-        $this->translatableConstruct();
+        $this->initializeTranslationsCollection();
 
         $this->createdAt = new \DateTime();
     }

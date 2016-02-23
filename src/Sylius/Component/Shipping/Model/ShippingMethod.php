@@ -23,10 +23,9 @@ use Sylius\Component\Translation\Model\TranslatableTrait;
  */
 class ShippingMethod implements ShippingMethodInterface
 {
-    use TimestampableTrait;
-    use ToggleableTrait;
+    use TimestampableTrait, ToggleableTrait;
     use TranslatableTrait {
-        __construct as translatableConstruct;
+        __construct as private initializeTranslationsCollection;
     }
 
     /**
@@ -68,7 +67,7 @@ class ShippingMethod implements ShippingMethodInterface
 
     public function __construct()
     {
-        $this->translatableConstruct();
+        $this->initializeTranslationsCollection();
 
         $this->rules = new ArrayCollection();
         $this->createdAt = new \DateTime();

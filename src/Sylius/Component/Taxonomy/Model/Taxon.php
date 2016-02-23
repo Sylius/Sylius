@@ -24,7 +24,7 @@ class Taxon implements TaxonInterface
 {
     use SoftDeletableTrait;
     use TranslatableTrait {
-        __construct as translatableConstruct;
+        __construct as private initializeTranslationsCollection;
     }
 
     /**
@@ -69,7 +69,7 @@ class Taxon implements TaxonInterface
 
     public function __construct()
     {
-        $this->translatableConstruct();
+        $this->initializeTranslationsCollection();
 
         $this->children = new ArrayCollection();
     }

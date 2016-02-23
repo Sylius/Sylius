@@ -29,7 +29,7 @@ class Archetype implements ArchetypeInterface
 {
     use TimestampableTrait;
     use TranslatableTrait {
-        __construct as translatableConstruct;
+        __construct as private initializeTranslationsCollection;
     }
 
     /**
@@ -61,13 +61,16 @@ class Archetype implements ArchetypeInterface
 
     public function __construct()
     {
+        $this->initializeTranslationsCollection();
+
         $this->attributes = new ArrayCollection();
         $this->options = new ArrayCollection();
         $this->createdAt = new \DateTime();
-
-        $this->translatableConstruct();
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->getName();

@@ -24,7 +24,7 @@ class Option implements OptionInterface
 {
     use TimestampableTrait;
     use TranslatableTrait {
-        __construct as translatableConstruct;
+        __construct as private initializeTranslationsCollection;
     }
 
     /**
@@ -58,7 +58,7 @@ class Option implements OptionInterface
 
     public function __construct()
     {
-        $this->translatableConstruct();
+        $this->initializeTranslationsCollection();
 
         $this->values = new ArrayCollection();
         $this->createdAt = new \DateTime();

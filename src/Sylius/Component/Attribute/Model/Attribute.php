@@ -26,7 +26,7 @@ class Attribute implements AttributeInterface
 {
     use TimestampableTrait;
     use TranslatableTrait {
-        __construct as translatableConstruct;
+        __construct as private initializeTranslationsCollection;
     }
 
     /**
@@ -61,7 +61,7 @@ class Attribute implements AttributeInterface
 
     public function __construct()
     {
-        $this->translatableConstruct();
+        $this->initializeTranslationsCollection();
 
         $this->values = new ArrayCollection();
         $this->createdAt = new \DateTime();

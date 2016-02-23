@@ -21,7 +21,9 @@ use Sylius\Component\Translation\Model\TranslatableTrait;
  */
 class Topic implements TopicInterface
 {
-    use TranslatableTrait;
+    use TranslatableTrait {
+        __construct as private initializeTranslationsCollection;
+    }
 
     /**
      * @var int
@@ -32,6 +34,11 @@ class Topic implements TopicInterface
      * @var string
      */
     protected $title;
+
+    public function __construct()
+    {
+        $this->initializeTranslationsCollection();
+    }
 
     /**
      * {@inheritdoc}

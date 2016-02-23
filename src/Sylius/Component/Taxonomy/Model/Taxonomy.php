@@ -22,9 +22,10 @@ use Sylius\Component\Translation\Model\TranslationInterface;
 class Taxonomy implements TaxonomyInterface
 {
     use TranslatableTrait {
-        setCurrentLocale as baseSetCurrentLocale;
-        setFallbackLocale as baseSetFallbackLocale;
-        addTranslation as baseAddTranslation;
+        setCurrentLocale as private baseSetCurrentLocale;
+        setFallbackLocale as private baseSetFallbackLocale;
+        addTranslation as private baseAddTranslation;
+        __construct as private initializeTranslationsCollection;
     }
 
     /**
@@ -36,6 +37,11 @@ class Taxonomy implements TaxonomyInterface
      * @var TaxonInterface
      */
     protected $root;
+
+    public function __construct()
+    {
+        $this->initializeTranslationsCollection();
+    }
 
     /**
      * {@inheritdoc}

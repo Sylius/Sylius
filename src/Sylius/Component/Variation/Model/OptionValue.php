@@ -18,7 +18,9 @@ use Sylius\Component\Translation\Model\TranslatableTrait;
  */
 class OptionValue implements OptionValueInterface
 {
-    use TranslatableTrait;
+    use TranslatableTrait {
+        __construct as private initializeTranslationCollection;
+    }
 
     /**
      * @var mixed
@@ -39,6 +41,11 @@ class OptionValue implements OptionValueInterface
      * @var OptionInterface
      */
     protected $option;
+
+    public function __construct()
+    {
+        $this->initializeTranslationCollection();
+    }
 
     /**
      * {@inheritdoc}

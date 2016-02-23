@@ -28,11 +28,9 @@ use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
  */
 class Product implements ProductInterface
 {
-    use SoftDeletableTrait;
-    use TimestampableTrait;
-    use ToggleableTrait;
+    use SoftDeletableTrait, TimestampableTrait, ToggleableTrait;
     use TranslatableTrait {
-        __construct as translatableConstruct;
+        __construct as private initializeTranslationsCollection;
     }
 
     /**
@@ -77,7 +75,7 @@ class Product implements ProductInterface
 
     public function __construct()
     {
-        $this->translatableConstruct();
+        $this->initializeTranslationsCollection();
 
         $this->availableOn = new \DateTime();
         $this->attributes = new ArrayCollection();
