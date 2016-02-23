@@ -52,4 +52,17 @@ class RuleFactory implements RuleFactoryInterface
 
         return $rule;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createItemTotal($amount)
+    {
+        /** @var RuleInterface $rule */
+        $rule = $this->createNew();
+        $rule->setType(RuleInterface::TYPE_ITEM_TOTAL);
+        $rule->setConfiguration(['amount' => $amount]);
+
+        return $rule;
+    }
 }

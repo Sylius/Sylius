@@ -134,6 +134,22 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given /^(?:it|the promotion) gives "(?:€|£|\$)([^"]+)" fixed discount to every order with items total at least "(?:€|£|\$)([^"]+)"$/
+     */
+    public function itGivesFixedDiscountToEveryOrderWithItemsTotalAtLeast($amount, $targetAmount)
+    {
+        $currentPromotion = $this->sharedStorage->get('promotion');
+
+        $action = $this->actionFactory->createFixedDiscount($this->getPriceFromString($amount));
+        $currentPromotion->addAction($action);
+
+        $rule = $this->ruleFactory->createItemTotal($this->getPriceFromString($targetAmount));
+        $currentPromotion->addRule($rule);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @param string $price
      *
      * @return int

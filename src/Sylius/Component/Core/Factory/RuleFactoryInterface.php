@@ -25,4 +25,11 @@ interface RuleFactoryInterface extends FactoryInterface
      * @return RuleInterface
      */
     public function createCartQuantity($count);
+
+    /**
+     * @param int $amount
+     *
+     * @return RuleInterface
+     */
+    public function createItemTotal($amount);
 }
