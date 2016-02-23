@@ -30,7 +30,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
            [
                [],
            ],
-           ['sources' => ['filesystem' => ['locations' => ['%kernel.root_dir%/themes', '%kernel.root_dir%/../vendor/sylius/themes']]]]
+           ['sources' => ['filesystem' => ['locations' => ['%kernel.root_dir%/themes', '%kernel.root_dir%/../vendor/sylius/themes']]]],
+            'sources'
        );
     }
 

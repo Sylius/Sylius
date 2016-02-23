@@ -53,7 +53,7 @@ class SyliusThemeBundle extends AbstractResourceBundle
     {
         return [
             ThemeInterface::class => 'sylius.model.theme.class',
-            ThemeAuthorInterface::class => ThemeAuthor::class,
+            ThemeAuthorInterface::class => 'sylius.model.theme_author.class',
         ];
     }
 

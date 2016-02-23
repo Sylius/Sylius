@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ThemeBundle\Synchronizer;
+namespace spec\Sylius\Bundle\ThemeBundle\Loader;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-use Sylius\Bundle\ThemeBundle\Synchronizer\CircularDependencyFoundException;
+use Sylius\Bundle\ThemeBundle\Loader\CircularDependencyFoundException;
 
 /**
  * @mixin CircularDependencyFoundException
@@ -30,7 +30,7 @@ class CircularDependencyFoundExceptionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Synchronizer\CircularDependencyFoundException');
+        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Loader\CircularDependencyFoundException');
     }
 
     function it_is_a_domain_exception()

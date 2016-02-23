@@ -11,11 +11,9 @@
 
 namespace Sylius\Bundle\ThemeBundle\Synchronizer;
 
-use Sylius\Bundle\ThemeBundle\Loader\ConfigurationProviderInterface;
+use Sylius\Bundle\ThemeBundle\Loader\ThemeLoaderInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-use Sylius\Bundle\ThemeBundle\Provider\ThemeProviderInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
-use Zend\Hydrator\HydrationInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -23,19 +21,9 @@ use Zend\Hydrator\HydrationInterface;
 final class ThemeSynchronizer implements ThemeSynchronizerInterface
 {
     /**
-     * @var ConfigurationProviderInterface
+     * @var ThemeLoaderInterface
      */
-    private $configurationProvider;
-
-    /**
-     * @var ThemeProviderInterface
-     */
-    private $themeProvider;
-
-    /**
-     * @var HydrationInterface
-     */
-    private $themeHydrator;
+    private $themeLoader;
 
     /**
      * @var ThemeRepositoryInterface
@@ -43,29 +31,23 @@ final class ThemeSynchronizer implements ThemeSynchronizerInterface
     private $themeRepository;
 
     /**
-     * @var CircularDependencyCheckerInterface
+     * @var ThemeMergerInterface
      */
-    private $circularDependencyChecker;
+    private $themeMerger;
 
     /**
-     * @param ConfigurationProviderInterface $configurationProvider
-     * @param ThemeProviderInterface $themeProvider
-     * @param HydrationInterface $themeHydrator
+     * @param ThemeLoaderInterface $themeLoader
      * @param ThemeRepositoryInterface $themeRepository
-     * @param CircularDependencyCheckerInterface $circularDependencyChecker
+     * @param ThemeMergerInterface $themeMerger
      */
     public function __construct(
-        ConfigurationProviderInterface $configurationProvider,
-        ThemeProviderInterface $themeProvider,
-        HydrationInterface $themeHydrator,
+        ThemeLoaderInterface $themeLoader,
         ThemeRepositoryInterface $themeRepository,
-        CircularDependencyCheckerInterface $circularDependencyChecker
+        ThemeMergerInterface $themeMerger
     ) {
-        $this->configurationProvider = $configurationProvider;
-        $this->themeProvider = $themeProvider;
-        $this->themeHydrator = $themeHydrator;
+        $this->themeLoader = $themeLoader;
         $this->themeRepository = $themeRepository;
-        $this->circularDependencyChecker = $circularDependencyChecker;
+        $this->themeMerger = $themeMerger;
     }
 
     /**
@@ -73,76 +55,104 @@ final class ThemeSynchronizer implements ThemeSynchronizerInterface
      */
     public function synchronize()
     {
-        $configurations = $this->configurationProvider->getConfigurations();
+        $persistedThemes = $this->themeRepository->findAll();
+        $loadedThemes = $this->themeLoader->load();
 
-        $themes = $this->initializeThemes($configurations);
-        $themes = $this->hydrateThemes($configurations, $themes);
-
-        $this->checkForCircularDependencies($themes);
-
-        foreach ($themes as $theme) {
-            $this->themeRepository->add($theme);
-        }
-    }
-
-    /**
-     * @param array $configurations
-     *
-     * @return ThemeInterface[]
-     */
-    private function initializeThemes(array $configurations)
-    {
-        $themes = [];
-        foreach ($configurations as $configuration) {
-            /** @var ThemeInterface $theme */
-            $themes[$configuration['name']] = $this->themeProvider->getNamed($configuration['name']);
-        }
-
-        return $themes;
-    }
-
-    /**
-     * @param array $configurations
-     * @param ThemeInterface[] $themes
-     *
-     * @return ThemeInterface[]
-     */
-    private function hydrateThemes(array $configurations, array $themes)
-    {
-        foreach ($configurations as $configuration) {
-            if (!isset($configuration['parents'])) {
-                $configuration['parents'] = [];
+        $removedThemes = $this->removeAbandonedThemes($persistedThemes, $loadedThemes);
+        $existingThemes = array_udiff(
+            $persistedThemes,
+            $removedThemes,
+            function (ThemeInterface $firstTheme, ThemeInterface $secondTheme) {
+                return (int) ($firstTheme->getName() === $secondTheme->getName());
             }
+        );
 
-            $configuration['parents'] = array_map(function ($parentName) use ($themes, $configuration) {
-                if (!isset($themes[$parentName])) {
-                    throw new SynchronizationFailedException(sprintf(
-                        'Unexisting theme "%s" is required by "%s".',
-                        $parentName,
-                        $configuration['name']
-                    ));
+        $this->updateThemes($existingThemes, $loadedThemes);
+    }
+
+    /**
+     * @param ThemeInterface[] $existingThemes
+     * @param ThemeInterface[] $loadedThemes
+     */
+    private function updateThemes(array $existingThemes, array $loadedThemes)
+    {
+        $loadedThemes = $this->ensureCohesionOfReferencedThemes($existingThemes, $loadedThemes);
+
+        foreach ($loadedThemes as $loadedTheme) {
+            $this->updateTheme($loadedTheme);
+        }
+    }
+
+    /**
+     * @param ThemeInterface $theme
+     */
+    private function updateTheme(ThemeInterface $theme)
+    {
+        $existingTheme = $this->themeRepository->findOneByName($theme->getName());
+
+        if (null !== $existingTheme) {
+            $theme = $this->themeMerger->merge($existingTheme, $theme);
+        }
+
+        $this->themeRepository->add($theme);
+    }
+
+    /**
+     * @param ThemeInterface[] $persistedThemes
+     * @param ThemeInterface[] $loadedThemes
+     *
+     * @return ThemeInterface[] Removed themes
+     */
+    private function removeAbandonedThemes(array $persistedThemes, array $loadedThemes)
+    {
+        if (0 === count($persistedThemes)) {
+            return [];
+        }
+
+        $loadedThemesNames = array_map(function (ThemeInterface $theme) {
+            return $theme->getName();
+        }, $loadedThemes);
+
+        $removedThemes = [];
+        foreach ($persistedThemes as $persistedTheme) {
+            if (!in_array($persistedTheme->getName(), $loadedThemesNames, true)) {
+                $removedThemes[] = $persistedTheme;
+                $this->themeRepository->remove($persistedTheme);
+            }
+        }
+
+        return $removedThemes;
+    }
+
+    /**
+     * Removes references to loaded themes, that exists.
+     * Adds references to existing themes instead (the loaded ones will be merged into them).
+     *
+     * @param ThemeInterface[] $existingThemes
+     * @param ThemeInterface[] $loadedThemes
+     *
+     * @return ThemeInterface[]
+     */
+    private function ensureCohesionOfReferencedThemes(array $existingThemes, array $loadedThemes)
+    {
+        foreach ($loadedThemes as $loadedTheme) {
+            foreach ($loadedTheme->getParents() as $parentTheme) {
+                $correspondingTheme = current(array_filter(
+                    array_merge($existingThemes, $loadedThemes),
+                    function (ThemeInterface $theme) use ($parentTheme) {
+                        return $theme->getName() === $parentTheme->getName();
+                    }
+                ));
+
+                if (null === $correspondingTheme) {
+                    throw new SynchronizationFailedException('Cannot find a corresponding theme!');
                 }
 
-                return $themes[$parentName];
-            }, $configuration['parents']);
-
-            $themes[$configuration['name']] = $this->themeHydrator->hydrate($configuration, $themes[$configuration['name']]);
-        }
-
-        return $themes;
-    }
-
-    /**
-     * @param ThemeInterface[] $themes
-     */
-    private function checkForCircularDependencies(array $themes)
-    {
-        try {
-            foreach ($themes as $theme) {
-                $this->circularDependencyChecker->check($theme);
+                $loadedTheme->removeParent($parentTheme);
+                $loadedTheme->addParent($correspondingTheme);
             }
-        } catch (CircularDependencyFoundException $exception) {
-            throw new SynchronizationFailedException('Circular dependency found.', 0, $exception);
         }
+
+        return $loadedThemes;
     }
 }

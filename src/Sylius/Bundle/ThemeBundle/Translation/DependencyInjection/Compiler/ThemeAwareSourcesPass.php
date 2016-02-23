@@ -67,7 +67,10 @@ final class ThemeAwareSourcesPass implements CompilerPassInterface
 
         $themes = [];
         foreach ($configurationProvider->getConfigurations() as $themeConfiguration) {
-            $themes[] = $themeFactory->createFromArray($themeConfiguration);
+            $theme = $themeFactory->createNamed($themeConfiguration['name']);
+            $theme->setPath($themeConfiguration['path']);
+
+            $themes[] = $theme;
         }
 
         /** @var TranslationFilesFinderInterface $translationFilesFinder */

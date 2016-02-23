@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ThemeBundle\Synchronizer;
+namespace Sylius\Bundle\ThemeBundle\Loader;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 

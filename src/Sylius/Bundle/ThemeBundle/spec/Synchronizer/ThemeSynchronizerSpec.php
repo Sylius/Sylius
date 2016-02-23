@@ -13,17 +13,12 @@ namespace spec\Sylius\Bundle\ThemeBundle\Synchronizer;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ThemeBundle\Factory\ThemeFactoryInterface;
-use Sylius\Bundle\ThemeBundle\Loader\ConfigurationProviderInterface;
+use Sylius\Bundle\ThemeBundle\Loader\ThemeLoaderInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-use Sylius\Bundle\ThemeBundle\Provider\ThemeProviderInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
-use Sylius\Bundle\ThemeBundle\Synchronizer\CircularDependencyCheckerInterface;
-use Sylius\Bundle\ThemeBundle\Synchronizer\CircularDependencyFoundException;
-use Sylius\Bundle\ThemeBundle\Synchronizer\SynchronizationFailedException;
 use Sylius\Bundle\ThemeBundle\Synchronizer\ThemeSynchronizer;
 use Sylius\Bundle\ThemeBundle\Synchronizer\ThemeSynchronizerInterface;
-use Zend\Hydrator\HydrationInterface;
+use Sylius\Bundle\ThemeBundle\Synchronizer\ThemeMergerInterface;
 
 /**
  * @mixin ThemeSynchronizer
@@ -33,18 +28,14 @@ use Zend\Hydrator\HydrationInterface;
 class ThemeSynchronizerSpec extends ObjectBehavior
 {
     function let(
-        ConfigurationProviderInterface $configurationProvider,
-        ThemeProviderInterface $themeProvider,
-        HydrationInterface $themeHydrator,
+        ThemeLoaderInterface $themeLoader,
         ThemeRepositoryInterface $themeRepository,
-        CircularDependencyCheckerInterface $circularDependencyChecker
+        ThemeMergerInterface $themeMerger
     ) {
         $this->beConstructedWith(
-            $configurationProvider,
-            $themeProvider,
-            $themeHydrator,
+            $themeLoader,
             $themeRepository,
-            $circularDependencyChecker
+            $themeMerger
         );
     }
 
@@ -58,102 +49,96 @@ class ThemeSynchronizerSpec extends ObjectBehavior
         $this->shouldImplement(ThemeSynchronizerInterface::class);
     }
 
-    function it_synchronizes_a_single_theme(
-        ConfigurationProviderInterface $configurationProvider,
-        ThemeProviderInterface $themeProvider,
-        HydrationInterface $themeHydrator,
+    function it_just_adds_themes_if_they_do_not_exist(
+        ThemeLoaderInterface $themeLoader,
         ThemeRepositoryInterface $themeRepository,
-        CircularDependencyCheckerInterface $circularDependencyChecker,
-        ThemeInterface $firstTheme
+        ThemeInterface $theme
     ) {
-        $configurationProvider->getConfigurations()->willReturn([
-            ['name' => 'first/theme', 'parents' => []],
-        ]);
+        $themeRepository->findAll()->willReturn([]);
+        $themeLoader->load()->willReturn([$theme]);
 
-        $themeProvider->getNamed('first/theme')->willReturn($firstTheme);
+        $theme->getName()->willReturn('theme/name');
+        $theme->getParents()->willReturn([]);
+        $themeRepository->findOneByName('theme/name')->willReturn(null);
 
-        $themeHydrator->hydrate(['name' => 'first/theme', 'parents' => []], $firstTheme)->willReturn($firstTheme);
-
-        $circularDependencyChecker->check($firstTheme)->shouldBeCalled();
-
-        $themeRepository->add($firstTheme);
+        $themeRepository->add($theme)->shouldBeCalled();
 
         $this->synchronize();
     }
 
-    function it_synchronizes_a_theme_with_its_dependency(
-        ConfigurationProviderInterface $configurationProvider,
-        ThemeProviderInterface $themeProvider,
-        HydrationInterface $themeHydrator,
+    function it_overrides_existing_theme_by_freshly_loaded_theme(
+        ThemeLoaderInterface $themeLoader,
         ThemeRepositoryInterface $themeRepository,
-        CircularDependencyCheckerInterface $circularDependencyChecker,
-        ThemeInterface $firstTheme,
-        ThemeInterface $secondTheme
+        ThemeMergerInterface $themeMerger,
+        ThemeInterface $loadedTheme,
+        ThemeInterface $existingTheme
     ) {
-        $configurationProvider->getConfigurations()->willReturn([
-            ['name' => 'first/theme', 'parents' => ['second/theme']],
-            ['name' => 'second/theme', 'parents' => []],
-        ]);
+        $themeRepository->findAll()->willReturn([]);
+        $themeLoader->load()->willReturn([$loadedTheme]);
 
-        $themeProvider->getNamed('first/theme')->willReturn($firstTheme);
-        $themeProvider->getNamed('second/theme')->willReturn($secondTheme);
+        $loadedTheme->getName()->willReturn('theme/name');
+        $loadedTheme->getParents()->willReturn([]);
+        $themeRepository->findOneByName('theme/name')->willReturn($existingTheme);
+        $themeMerger->merge($existingTheme, $loadedTheme)->willReturn($existingTheme);
 
-        $themeHydrator->hydrate(['name' => 'first/theme', 'parents' => [$secondTheme]], $firstTheme)->willReturn($firstTheme);
-        $themeHydrator->hydrate(['name' => 'second/theme', 'parents' => []], $secondTheme)->willReturn($secondTheme);
-
-        $circularDependencyChecker->check($firstTheme)->shouldBeCalled();
-        $circularDependencyChecker->check($secondTheme)->shouldBeCalled();
-
-        $themeRepository->add($firstTheme);
-        $themeRepository->add($secondTheme);
+        $themeRepository->add($existingTheme)->shouldBeCalled();
+        $themeRepository->add($loadedTheme)->shouldNotBeCalled();
 
         $this->synchronize();
     }
 
-    function it_throws_an_exception_if_requires_not_existing_dependency(
-        ConfigurationProviderInterface $configurationProvider,
-        ThemeProviderInterface $themeProvider,
-        ThemeInterface $firstTheme
+    function it_removes_not_used_themes(
+        ThemeLoaderInterface $themeLoader,
+        ThemeRepositoryInterface $themeRepository,
+        ThemeInterface $loadedTheme,
+        ThemeInterface $existingAbandonedTheme
     ) {
-        $configurationProvider->getConfigurations()->willReturn([
-            ['name' => 'first/theme', 'parents' => ['second/theme']],
-        ]);
+        $themeRepository->findAll()->willReturn([$existingAbandonedTheme]);
+        $themeLoader->load()->willReturn([$loadedTheme]);
 
-        $themeProvider->getNamed('first/theme')->willReturn($firstTheme);
+        $loadedTheme->getName()->willReturn('theme/name');
+        $loadedTheme->getParents()->willReturn([]);
+        $themeRepository->findOneByName('theme/name')->willReturn(null);
 
-        $this
-            ->shouldThrow(new SynchronizationFailedException('Unexisting theme "second/theme" is required by "first/theme".'))
-            ->during('synchronize')
-        ;
+        $themeRepository->add($loadedTheme)->shouldBeCalled();
+
+        $existingAbandonedTheme->getName()->willReturn('abandoned/theme');
+
+        $themeRepository->remove($existingAbandonedTheme)->shouldBeCalled();
+
+        $this->synchronize();
     }
 
-    function it_throws_an_exception_if_there_is_a_circular_dependency_found(
-        ConfigurationProviderInterface $configurationProvider,
-        ThemeProviderInterface $themeProvider,
-        HydrationInterface $themeHydrator,
+    function it_ensures_cohesion_between_parent_themes(
+        ThemeLoaderInterface $themeLoader,
         ThemeRepositoryInterface $themeRepository,
-        CircularDependencyCheckerInterface $circularDependencyChecker,
-        ThemeInterface $firstTheme,
-        ThemeInterface $secondTheme
+        ThemeMergerInterface $themeMerger,
+        ThemeInterface $loadedTheme,
+        ThemeInterface $loadedParentTheme,
+        ThemeInterface $existingParentTheme
     ) {
-        $configurationProvider->getConfigurations()->willReturn([
-            ['name' => 'first/theme', 'parents' => ['second/theme']],
-            ['name' => 'second/theme', 'parents' => ['first/theme']],
-        ]);
+        $themeRepository->findAll()->willReturn([$existingParentTheme]);
+        $existingParentTheme->getName()->willReturn('parent-theme/name');
 
-        $themeProvider->getNamed('first/theme')->willReturn($firstTheme);
-        $themeProvider->getNamed('second/theme')->willReturn($secondTheme);
+        $themeLoader->load()->willReturn([$loadedTheme, $loadedParentTheme]);
 
-        $themeHydrator->hydrate(['name' => 'first/theme', 'parents' => [$secondTheme]], $firstTheme)->willReturn($firstTheme);
-        $themeHydrator->hydrate(['name' => 'second/theme', 'parents' => [$firstTheme]], $secondTheme)->willReturn($secondTheme);
+        $loadedTheme->getName()->willReturn('theme/name');
+        $loadedTheme->getParents()->willReturn([$loadedParentTheme]);
+        $themeRepository->findOneByName('theme/name')->willReturn(null);
 
-        $circularDependencyChecker->check(Argument::cetera())->willThrow(CircularDependencyFoundException::class);
+        $loadedParentTheme->getName()->willReturn('parent-theme/name');
+        $loadedParentTheme->getParents()->willReturn([]);
+        $themeRepository->findOneByName('parent-theme/name')->willReturn($existingParentTheme);
 
-        $themeRepository->add(Argument::cetera())->shouldNotBeCalled();
+        $loadedTheme->removeParent($loadedParentTheme)->shouldBeCalled();
+        $loadedTheme->addParent($existingParentTheme)->shouldBeCalled();
 
-        $this
-            ->shouldThrow(new SynchronizationFailedException('Circular dependency found.'))
-            ->during('synchronize')
-        ;
+        $themeMerger->merge($existingParentTheme, $loadedParentTheme)->willReturn($existingParentTheme);
+
+        $themeRepository->add($loadedTheme)->shouldBeCalled();
+        $themeRepository->add($existingParentTheme)->shouldBeCalled();
+        $themeRepository->add($loadedParentTheme)->shouldNotBeCalled();
+
+        $this->synchronize();
     }
 }

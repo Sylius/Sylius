@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ThemeBundle\Tests\Loader;
+namespace Sylius\Bundle\ThemeBundle\Tests\Configuration;
 
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
-use Sylius\Bundle\ThemeBundle\Loader\ThemeConfiguration;
+use Sylius\Bundle\ThemeBundle\Configuration\ThemeConfiguration;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -30,7 +30,8 @@ class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
             [
                 ['name' => 'example/sylius-theme'],
             ],
-            ['name' => 'example/sylius-theme']
+            ['name' => 'example/sylius-theme'],
+            'name'
         );
     }
 
@@ -202,11 +203,10 @@ class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function it_ignores_undefined_root_level_fields()
     {
-        $this->assertProcessedConfigurationEquals(
+        $this->assertConfigurationIsValid(
             [
                 ['name' => 'example/sylius-theme', 'undefined_variable' => '42'],
-            ],
-            ['name' => 'example/sylius-theme']
+            ]
         );
     }
 

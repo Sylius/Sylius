@@ -11,28 +11,31 @@
 
 -->
 
-<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <mapped-superclass name="Sylius\Bundle\ThemeBundle\Model\Theme" table="sylius_theme">
         <indexes>
-            <index columns="name"/>
+            <index columns="name" />
         </indexes>
 
         <id name="id" type="integer">
             <generator strategy="AUTO" />
         </id>
 
-        <field name="name" type="string" nullable="false" />
+        <field name="name" type="string" unique="true" nullable="false" />
         <field name="title" type="string" nullable="false" />
         <field name="path" type="string" nullable="false" />
         <field name="code" type="string" nullable="false" />
 
-        <field name="description" column="description" type="string" nullable="true" />
+        <field name="description" type="string" nullable="true" />
 
         <!-- One-To-Many, Unidirectional with Join Table -->
-        <many-to-many field="authors" target-entity="Sylius\Bundle\ThemeBundle\Model\ThemeAuthorInterface">
+        <many-to-many field="authors" target-entity="Sylius\Bundle\ThemeBundle\Model\ThemeAuthorInterface" orphan-removal="true">
+            <cascade>
+                <cascade-all/>
+            </cascade>
             <join-table name="sylius_theme_authors">
                 <join-columns>
-                    <join-column name="theme_id" referenced-column-name="id" />
+                    <join-column name="theme_id" referenced-column-name="id" on-delete="CASCADE" />
                 </join-columns>
                 <inverse-join-columns>
                     <join-column name="theme_author_id" referenced-column-name="id" unique="true" />
@@ -41,12 +44,15 @@
         </many-to-many>
 
         <many-to-many field="parents" target-entity="Sylius\Bundle\ThemeBundle\Model\ThemeInterface">
+            <cascade>
+                <cascade-all/>
+            </cascade>
             <join-table name="sylius_theme_parents">
                 <join-columns>
                     <join-column name="child_id" referenced-column-name="id" />
                 </join-columns>
                 <inverse-join-columns>
-                    <join-column name="parent_id" referenced-column-name="id" />
+                    <join-column name="parent_id" referenced-column-name="id" on-delete="CASCADE" />
                 </inverse-join-columns>
             </join-table>
         </many-to-many>

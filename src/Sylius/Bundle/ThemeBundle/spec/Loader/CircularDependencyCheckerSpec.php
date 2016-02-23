@@ -1,13 +1,13 @@
 <?php
 
-namespace spec\Sylius\Bundle\ThemeBundle\Synchronizer;
+namespace spec\Sylius\Bundle\ThemeBundle\Loader;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-use Sylius\Bundle\ThemeBundle\Synchronizer\CircularDependencyChecker;
-use Sylius\Bundle\ThemeBundle\Synchronizer\CircularDependencyCheckerInterface;
-use Sylius\Bundle\ThemeBundle\Synchronizer\CircularDependencyFoundException;
+use Sylius\Bundle\ThemeBundle\Loader\CircularDependencyChecker;
+use Sylius\Bundle\ThemeBundle\Loader\CircularDependencyCheckerInterface;
+use Sylius\Bundle\ThemeBundle\Loader\CircularDependencyFoundException;
 
 /**
  * @mixin CircularDependencyChecker
@@ -18,7 +18,7 @@ class CircularDependencyCheckerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Synchronizer\CircularDependencyChecker');
+        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Loader\CircularDependencyChecker');
     }
 
     function it_implements_circular_dependency_checker_interface()
