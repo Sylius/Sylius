@@ -51,6 +51,21 @@ class SettingsSpec extends ObjectBehavior
         ;
     }
 
+    function its_namespace_is_null_by_default()
+    {
+        $this->getNamespace()->shouldReturn(null);
+    }
+
+    public function its_namespace_should_be_immutable_after_it_is_set()
+    {
+        $this->setNamespace('banana');
+        $this->getNamespace()->shouldReturn('banana');
+        $this
+            ->shouldThrow(new \LogicException('The namespace of the settings model is immutable, instantiate a new object in order to use another namespace.'))
+            ->during('setNamespace', ['i_dont_like_to_be_changed'])
+        ;
+    }
+
     function it_can_get_parameters(ParameterInterface $parameter)
     {
         $this->addParameter($parameter);

@@ -102,7 +102,7 @@ class SettingsManager implements SettingsManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function load($schemaAlias, $ignoreUnknown = true)
+    public function load($schemaAlias, $namespace = null, $ignoreUnknown = true)
     {
         $schema = $this->schemaRegistry->get($schemaAlias);
 
@@ -112,7 +112,8 @@ class SettingsManager implements SettingsManagerInterface
             $resolver = $this->resolverRegistry->get($schemaAlias);
         }
 
-        $settings = $resolver->resolve($schemaAlias);
+        // try to resolve settings for schema alias and namespace
+        $settings = $resolver->resolve($schemaAlias, $namespace);
 
         if (!$settings) {
             $settings = $this->settingsFactory->createNew();

@@ -22,8 +22,9 @@ interface SettingsResolverInterface
      * Resolves settings based on schema alias.
      *
      * @param string $schemaAlias
+     * @param string $namespace
      *
      * @return SettingsInterface
      */
-    public function resolve($schemaAlias);
+    public function resolve($schemaAlias, $namespace = null);
 }

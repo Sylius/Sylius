@@ -29,6 +29,11 @@ class Settings implements SettingsInterface
     protected $schemaAlias;
 
     /**
+     * @var string
+     */
+    protected $namespace;
+
+    /**
      * @var ArrayCollection|ParameterInterface[]
      */
     protected $parameters;
@@ -64,6 +69,26 @@ class Settings implements SettingsInterface
         }
 
         $this->schemaAlias = $schemaAlias;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getNamespace()
+    {
+        return $this->namespace;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setNamespace($namespace)
+    {
+        if (null !== $this->namespace) {
+            throw new \LogicException('The namespace of the settings model is immutable, instantiate a new object in order to use another namespace.');
+        }
+
+        $this->namespace = $namespace;
     }
 
     /**

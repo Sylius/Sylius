@@ -34,12 +34,18 @@ class DefaultSettingsResolver implements SettingsResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function resolve($schemaAlias)
+    public function resolve($schemaAlias, $namespace = null)
     {
         try {
-            return $this->settingRepository->findOneBy([
-                'schemaAlias' => $schemaAlias
-            ]);
+            $criteria = [
+                'schemaAlias' => $schemaAlias,
+            ];
+
+            if (null !== $namespace) {
+                $criteria['namespace'] = $namespace;
+            }
+
+            return $this->settingRepository->findOneBy($criteria);
         } catch (NonUniqueResultException $e) {
             throw new \LogicException(sprintf('Multiple schemas found for "%s". You should probably define a custom settings resolver for this schema.', $schemaAlias));
         }

@@ -30,6 +30,16 @@ interface SettingsInterface extends ResourceInterface
     public function setSchemaAlias($schemaAlias);
 
     /**
+     * @return string
+     */
+    public function getNamespace();
+
+    /**
+     * @param string $namespace
+     */
+    public function setNamespace($namespace);
+
+    /**
      * @return Collection|ParameterInterface[]
      */
     public function getParameters();
