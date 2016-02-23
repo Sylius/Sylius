@@ -116,11 +116,11 @@ Feature: Reviews
         And I should not see "Reject" button
         And I should not see "Accept" button
 
-    Scenario: Seeing reviews list after customer deletion
-        Given customer "beth@foo.com" has been deleted
+    Scenario: Seeing reviews list unchanged after user deletion
+        Given user "beth@foo.com" has been deleted
         And I am on the product review index page
-        Then I should see 2 reviews in the list
-        And I should not see "Really bad"
+        Then I should see 3 reviews in the list
+        And I should see "Really bad"
 
     Scenario: Seeing review list after product deletion
         Given product "Symfony T-Shirt" has been deleted

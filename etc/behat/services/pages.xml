@@ -15,6 +15,7 @@
     <parameters>
         <parameter key="sylius.behat.page.cart_summary.class">Sylius\Behat\Page\Cart\CartSummaryPage</parameter>
         <parameter key="sylius.behat.page.product_show.class">Sylius\Behat\Page\Product\ProductShowPage</parameter>
+        <parameter key="sylius.behat.page.customer_show.class">Sylius\Behat\Page\Customer\CustomerShowPage</parameter>
         <parameter key="sylius.behat.page.login.class">Sylius\Behat\Page\User\LoginPage</parameter>
         <parameter key="sylius.behat.page.home.class">Sylius\Behat\Page\Shop\HomePage</parameter>
 
@@ -30,6 +31,7 @@
     <services>
         <service id="sylius.behat.page.cart_summary" class="%sylius.behat.page.cart_summary.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.product_show" class="%sylius.behat.page.product_show.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+        <service id="sylius.behat.page.customer_show" class="%sylius.behat.page.customer_show.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.login" class="%sylius.behat.page.login.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.home" class="%sylius.behat.page.home.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
 

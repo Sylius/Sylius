@@ -61,7 +61,7 @@ final class SecurityContext implements Context
     }
 
     /**
-     * @Given I am logged in as :email
+     * @Given /^I am logged in as "([^""]*)"$/
      */
     public function iAmLoggedInAs($email)
     {
@@ -79,5 +79,18 @@ final class SecurityContext implements Context
         $this->securityService->logIn($user->getEmail());
 
         $this->sharedStorage->set('user', $user);
+    }
+
+    /**
+     * @Given I am logged in as administrator
+     */
+    public function iAmLoggedInAsAdministrator()
+    {
+        $admin = $this->testUserFactory->createDefaultAdmin();
+        $this->userRepository->add($admin);
+
+        $this->securityService->logIn($admin->getEmail());
+
+        $this->sharedStorage->set('admin', $admin);
     }
 }

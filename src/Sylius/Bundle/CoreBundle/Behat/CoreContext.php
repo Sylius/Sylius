@@ -569,15 +569,15 @@ class CoreContext extends DefaultContext
     }
 
     /**
-     * @Given /^customer "([^"]*)" has been deleted$/
+     * @Given /^user "([^"]*)" has been deleted$/
      */
-    public function customerHasBeenDeleted($customerEmail)
+    public function userHasBeenDeleted($customerEmail)
     {
-        $this->getSession()->visit($this->generatePageUrl('sylius_backend_customer_index'));
+        $userRepository = $this->getRepository('user');
 
-        $tr = $this->assertSession()->elementExists('css', sprintf('table tbody tr:contains("%s")', $customerEmail));
-        $locator = sprintf('button:contains("%s")', 'Delete');
-        $tr->find('css', $locator)->press();
+        $user = $userRepository->findOneByEmail($customerEmail);
+
+        $userRepository->remove($user);
     }
 
     /**

@@ -12,7 +12,6 @@
 namespace Sylius\Component\User\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
-use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
@@ -21,7 +20,6 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 interface CustomerInterface extends
     UserAwareInterface,
     TimestampableInterface,
-    SoftDeletableInterface,
     ResourceInterface
 {
     const UNKNOWN_GENDER = 'u';

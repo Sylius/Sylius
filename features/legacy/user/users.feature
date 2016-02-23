@@ -148,36 +148,10 @@ Feature: Customers management
         Then I should be on the sylius homepage page
         And I should see "Logout"
 
-    Scenario: Accessing the customer details page from customers list for deleted customer
-        Given I deleted customer with email "rick@foo.com"
-        And I am on the customer index page
-        And I view deleted elements
-        When I click "Details" near "rick@foo.com"
-        Then I should be on the page of customer with email "rick@foo.com"
-        And I should see 1 orders in the list
-
-    Scenario: Deleting customer
-        Given I am on the page of customer with email "rick@foo.com"
-        When I press "Delete"
-        Then I should see "Do you want to delete this item"
-        When I press "Delete"
-        Then I should be on the customer index page
-        And I should see "Customer has been successfully deleted"
-
     @javascript
-    Scenario: Deleting customer
-        Given I am on the page of customer with email "rick@foo.com"
-        When I press "Delete"
-        And I click "Delete" from the confirmation modal
-        Then I should be on the customer index page
-        And I should see "Customer has been successfully deleted"
-        And I should not see customer with email "rick@foo.com" in that list
-
-    @javascript
-    Scenario: Deleting customer from the list
+    Scenario: Deleting user from the list
         Given I am on the customer index page
         When I click "Delete" near "rick@foo.com"
         And I click "Delete" from the confirmation modal
         Then I should still be on the customer index page
-        And "Customer has been successfully deleted" should appear on the page
-        But I should not see customer with email "rick@foo.com" in that list
+        And "User has been successfully deleted" should appear on the page

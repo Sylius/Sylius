@@ -20,7 +20,7 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -28,7 +28,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class UserContextSpec extends ObjectBehavior
 {
     function let(
-        RepositoryInterface $userRepository,
+        UserRepositoryInterface $userRepository,
         SharedStorageInterface $sharedStorage,
         TestUserFactory $userFactory,
         FactoryInterface $addressFactory,
@@ -53,18 +53,18 @@ class UserContextSpec extends ObjectBehavior
         $this->shouldImplement(Context::class);
     }
 
-    function it_creates_user_with_given_credentials_and_default_data(
+    function it_creates_user_with_given_email_and_default_data(
         $sharedStorage,
         $userFactory,
         $userRepository,
         UserInterface $user
     ) {
-        $userFactory->create('test@example.com', 'pa$$word')->willReturn($user);
+        $userFactory->create('test@example.com', 'pswd')->willReturn($user);
 
         $sharedStorage->set('user', $user)->shouldBeCalled();
         $userRepository->add($user)->shouldBeCalled();
 
-        $this->thereIsUserIdentifiedBy('test@example.com', 'pa$$word');
+        $this->thereIsUserIdentifiedBy('test@example.com', 'pswd');
     }
 
     function it_creates_user_with_given_credentials_default_data_and_shipping_address(
@@ -125,5 +125,21 @@ class UserContextSpec extends ObjectBehavior
         $userManager->flush()->shouldBeCalled();
 
         $this->myDefaultShippingAddressIs('United Kingdom');
+    }
+
+    function it_deletes_user_account(
+        $sharedStorage,
+        $userRepository,
+        UserInterface $user,
+        CustomerInterface $customer
+    ) {
+        $userRepository->findOneByEmail('ted@test.com')->willReturn($user);
+        $user->getCustomer()->willReturn($customer);
+
+        $sharedStorage->set('customer', $customer)->shouldBeCalled();
+
+        $userRepository->remove($user)->shouldBeCalled();
+
+        $this->accountWasDeleted('ted@test.com');
     }
 }

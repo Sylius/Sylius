@@ -15,6 +15,7 @@ use Sylius\Component\Core\Model\UserInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
 interface TestUserFactoryInterface
 {
@@ -23,13 +24,19 @@ interface TestUserFactoryInterface
      * @param string $password
      * @param string $firstName
      * @param string $lastName
+     * @param string $role
      *
      * @return UserInterface
      */
-    public function create($email, $password, $firstName, $lastName);
+    public function create($email, $password, $firstName, $lastName, $role);
 
     /**
      * @return UserInterface
      */
     public function createDefault();
+
+    /**
+     * @return UserInterface
+     */
+    public function createDefaultAdmin();
 }

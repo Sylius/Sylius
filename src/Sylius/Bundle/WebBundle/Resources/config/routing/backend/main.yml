@@ -56,6 +56,10 @@ sylius_backend_taxon:
     resource: @SyliusWebBundle/Resources/config/routing/backend/taxon.yml
     prefix: /taxonomies/{taxonomyId}/taxons
 
+sylius_backend_user:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/user.yml
+    prefix: /users
+
 sylius_backend_order:
     resource: @SyliusWebBundle/Resources/config/routing/backend/order.yml
     prefix: /orders
