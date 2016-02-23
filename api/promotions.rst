@@ -77,8 +77,7 @@ Response
                     "rules": [
                         {
                             "configuration": {
-                                "count": 3,
-                                "equal": true
+                                "count": 3
                             },
                             "id": 1,
                             "type": "item_count"
@@ -136,8 +135,7 @@ Response
         "rules": [
             {
                 "configuration": {
-                    "count": 3,
-                    "equal": true
+                    "count": 3
                 },
                 "id": 1,
                 "type": "item_count"

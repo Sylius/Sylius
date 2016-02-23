@@ -8,9 +8,9 @@ Rule checkers
 
 New rules can be created by implementing ``RuleCheckerInterface``. This interface provides the method ``isEligible`` which aims to determine if the promotion subject respects the current rule or not.
 
-I told you before that ``SyliusPromotionBundle`` ships with 2 types of rules : item count rule and item total rule.
+I told you before that ``SyliusPromotionBundle`` ships with 2 types of rules : cart quantity rule and item total rule.
 
-Item count rule is defined via the service ``sylius.promotion_rule_checker.item_count`` which uses the class ``ItemCountRuleChecker``. The method ``isEligible`` checks here if the promotion subject has the minimum number of items (method ``getPromotionSubjectItemCount()`` of ``PromotionSubjectInterface``) required by the rule.
+Cart quantity rule is defined via the service ``sylius.promotion_rule_checker.cart_quantity`` which uses the class ``CartQuantityRuleChecker``. The method ``isEligible`` checks here if the promotion subject has the minimum quantity (method ``getPromotionSubjectItemCount()`` of ``PromotionSubjectInterface``) required by the rule.
 
 Item total rule is defined via the service ``sylius.promotion_rule_checker.item_total`` which uses the class ``ItemTotalRuleChecker``. The method ``isEligible`` checks here if the promotion subject has the minimum amount (method ``getPromotionSubjectItemTotal()`` of ``PromotionSubjectInterface``) required by the rule.
 

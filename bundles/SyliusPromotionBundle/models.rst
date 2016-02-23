@@ -7,11 +7,11 @@ Rule
 ----
 A ``Rule`` is used to check if your order is eligible to the promotion. A promotion can have none, one or several rules. ``SyliusPromotionBundle`` comes with 2 types of rules :
 
- - item count rule : the number of items of the order is checked
+ - cart quantity rule : quantity of the order is checked
  - item total rule : the amount of the order is checked
 
-A rule is configured via the ``configuration`` attribute which is an array serialized into database. For item count rules, you have to configure the ``count`` key, whereas the ``amount`` key is used for item total rules. For both types of rules, you can configure the ``equal`` key to ``false`` or ``true`` depending is you want the rule to be strict or not.
-For instance, for an item count rule configured with ``equal`` to ``false`` and ``count`` to 4, orders with only **more** than 4 items will be eligible.
+A rule is configured via the ``configuration`` attribute which is an array serialized into database. For cart quantity rules, you have to configure the ``count`` key, whereas the ``amount`` key is used for item total rules.
+Configuration is always strict, which means, that if you set ``count`` to **4** for cart quantity rule, orders with equal or more than **4** quantity will be eligible.
 
 Action
 ------
