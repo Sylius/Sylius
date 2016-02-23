@@ -35,6 +35,7 @@ class CartItemEvent extends CartEvent
         parent::__construct($cart);
 
         $this->item = $item;
+        $this->subject = $item;
     }
 
     /**
