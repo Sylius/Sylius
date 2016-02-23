@@ -98,7 +98,6 @@ class SettingsSpec extends ObjectBehavior
         ;
 
         $parameter->getName()
-            ->shouldBeCalled()
             ->willReturn('title')
         ;
 
@@ -113,7 +112,6 @@ class SettingsSpec extends ObjectBehavior
         ;
 
         $parameter->getName()
-            ->shouldBeCalled()
             ->willReturn('title')
         ;
 
