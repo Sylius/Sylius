@@ -14,8 +14,6 @@ namespace Sylius\Component\Promotion\Checker;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
- * Checks if subject’s total exceeds (or at least equal) to the configured amount.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ItemTotalRuleChecker implements RuleCheckerInterface
@@ -25,11 +23,7 @@ class ItemTotalRuleChecker implements RuleCheckerInterface
      */
     public function isEligible(PromotionSubjectInterface $subject, array $configuration)
     {
-        if (isset($configuration['equal']) && $configuration['equal']) {
-            return $subject->getPromotionSubjectTotal() >= $configuration['amount'];
-        }
-
-        return $subject->getPromotionSubjectTotal() > $configuration['amount'];
+        return $subject->getPromotionSubjectTotal() >= $configuration['amount'];
     }
 
     /**

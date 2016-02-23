@@ -17,8 +17,8 @@ Feature: Checkout usage limited promotions
             | type                | configuration  |
             | Percentage discount | Percentage: 25 |
         And promotion "Free order with at least 3 items" has following rules defined:
-            | type          | configuration        |
-            | Cart quantity | Count: 3,Equal: true |
+            | type          | configuration |
+            | Cart quantity | Count: 3      |
         And promotion "Free order with at least 3 items" has following actions defined:
             | type                | configuration   |
             | Percentage discount | Percentage: 100 |

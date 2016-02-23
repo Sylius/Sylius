@@ -10,9 +10,9 @@ Feature: Checkout promotions with multiple rules and actions
             | code | name              | description                                            |
             | P1   | 150 EUR / 2 items | Discount for orders over 150 EUR with at least 2 items |
         And promotion "150 EUR / 2 items" has following rules defined:
-            | type          | configuration        |
-            | Item total    | Amount: 150          |
-            | Cart quantity | Count: 2,Equal: true |
+            | type          | configuration |
+            | Item total    | Amount: 150   |
+            | Cart quantity | Count: 2      |
         And promotion "150 EUR / 2 items" has following actions defined:
             | type                | configuration |
             | Fixed discount      | Amount: 20    |

@@ -79,10 +79,6 @@ class ContainsProductRuleChecker implements RuleCheckerInterface
      */
     private function isItemQuantityEligible($quantity, array $configuration)
     {
-        if (isset($configuration['equal']) && $configuration['equal']) {
-            return $quantity >= $configuration['count'];
-        }
-
-        return $quantity > $configuration['count'];
+        return $quantity >= $configuration['count'];
     }
 }
