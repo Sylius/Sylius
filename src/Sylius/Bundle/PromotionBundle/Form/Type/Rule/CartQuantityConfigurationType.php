@@ -34,12 +34,6 @@ class CartQuantityConfigurationType extends AbstractType
                     new Type(['type' => 'numeric']),
                 ],
             ])
-            ->add('equal', 'checkbox', [
-                'label' => 'sylius.form.rule.cart_quantity_configuration.equal',
-                'constraints' => [
-                    new Type(['type' => 'bool']),
-                ],
-            ])
         ;
     }
 

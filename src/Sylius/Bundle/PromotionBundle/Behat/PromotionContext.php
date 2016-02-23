@@ -187,9 +187,6 @@ class PromotionContext extends DefaultContext
                 case 'percentage':
                     $configuration[$key] = (int) $value / 100;
                     break;
-                case 'equal':
-                    $configuration[$key] = (Boolean) $value;
-                    break;
                 default:
                     break;
             }

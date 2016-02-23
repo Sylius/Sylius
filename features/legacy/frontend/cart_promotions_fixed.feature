@@ -35,8 +35,8 @@ Feature: Checkout fixed discount promotions
         And all products are assigned to the default channel
         And all promotions are assigned to the default channel
         And promotion "3 items" has following rules defined:
-            | type          | configuration        |
-            | Cart quantity | Count: 4,Equal: true |
+            | type          | configuration |
+            | Cart quantity | Count: 4      |
         And promotion "3 items" has following actions defined:
             | type           | configuration |
             | Fixed discount | Amount: 15    |

@@ -11,8 +11,8 @@ Feature: Checkout percentage discount promotions
             | PR1  | 5 items | 25% Discount for orders with at least 5 items |
             | PR2  | 300 EUR | 10% Discount for orders over 300 EUR          |
         And promotion "5 items" has following rules defined:
-            | type          | configuration        |
-            | cart quantity | Count: 5,Equal: true |
+            | type          | configuration |
+            | cart quantity | Count: 5      |
         And promotion "5 items" has following actions defined:
             | type                | configuration  |
             | percentage discount | percentage: 25 |
