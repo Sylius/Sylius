@@ -147,7 +147,7 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^(product "[^"]+") belongs to ("[^"]+" tax category)$/
+     * @Given /^([^"]+) belongs to ("[^"]+" tax category)$/
      */
     public function productBelongsToTaxCategory(ProductInterface $product, TaxCategoryInterface $taxCategory)
     {
@@ -156,17 +156,15 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^it comes in the following variations:$/
+     * @Given /^(it) comes in the following variations:$/
      */
-    public function itComesInTheFollowingVariations(TableNode $table)
+    public function itComesInTheFollowingVariations(ProductInterface $product, TableNode $table)
     {
-        $currentProduct = $this->sharedStorage->get('product');
-
         foreach ($table->getHash() as $variantHash) {
             $variant = $this->productVariantFactory->createNew();
             $variant->setPresentation($variantHash['name']);
             $variant->setPrice($this->getPriceFromString(str_replace(['$', '€', '£'], '', $variantHash['price'])));
-            $variant->setProduct($currentProduct);
+            $variant->setProduct($product);
 
             $this->productRepository->add($variant);
         }

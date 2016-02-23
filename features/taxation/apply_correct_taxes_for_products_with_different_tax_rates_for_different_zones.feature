@@ -15,9 +15,9 @@ Feature: Apply correct taxes for products with different tax rates for different
         And the store has "No tax" tax rate of 0% for "Clothes" for the rest of the world
         And the store has "Low VAT" tax rate of 5% for "Mugs" for the rest of the world
         And the store has a product "PHP T-Shirt" priced at "€100.00"
-        And product "PHP T-Shirt" belongs to "Clothes" tax category
+        And it belongs to "Clothes" tax category
         And the store has a product "Symfony Mug" priced at "€50.00"
-        And product "Symfony Mug" belongs to "Mugs" tax category
+        And it belongs to "Mugs" tax category
         And I am logged in customer
 
     @ui
