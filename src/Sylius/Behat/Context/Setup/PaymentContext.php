@@ -86,7 +86,7 @@ final class PaymentContext implements Context
     {
         $paymentMethod = $this->paymentMethodRepository->findOneBy(['name' => $paymentMethodName]);
         if (null === $paymentMethod) {
-            throw new \InvalidArgumentException(sprintf('Payment method with name "%s" does not exist', $paymentMethodName));
+            throw new \InvalidArgumentException(sprintf('Payment method with name "%s" does not exist.', $paymentMethodName));
         }
 
         return $paymentMethod;

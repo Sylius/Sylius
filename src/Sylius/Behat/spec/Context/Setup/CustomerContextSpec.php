@@ -48,7 +48,7 @@ class CustomerContextSpec extends ObjectBehavior
         $customerRepository->findOneBy(['email' => 'oliver.queen@star.com'])->willReturn(null);
 
         $customerFactory->createNew()->willReturn($customer);
-        $customer->setEmail('oliver.queen@star.com');
+        $customer->setEmail('oliver.queen@star.com')->shouldBeCalled();
 
         $customerRepository->add($customer)->shouldBeCalled();
 

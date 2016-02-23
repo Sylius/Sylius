@@ -96,7 +96,7 @@ class OrderContextSpec extends ObjectBehavior
         $this->theCustomerPlacedAnOrder($customer, '#00000022');
     }
 
-    function it_sets_options_chosen_by_customer(
+    function it_adds_shipping_payment_and_addressing_info_to_an_order(
         AddressInterface $address,
         Collection $shipmentCollection,
         OrderInterface $order,
@@ -131,7 +131,7 @@ class OrderContextSpec extends ObjectBehavior
         $this->theCustomerChoseShippingToWithPayment($shippingMethod, $address, $paymentMethod);
     }
 
-    function it_sets_items_bought_by_customer(
+    function it_adds_single_item_by_customer(
         FactoryInterface $orderItemFactory,
         OrderInterface $order,
         OrderItemInterface $item,

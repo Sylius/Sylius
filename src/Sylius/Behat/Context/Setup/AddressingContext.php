@@ -26,7 +26,7 @@ class AddressingContext implements Context
     /**
      * @var FactoryInterface
      */
-     private $addressFactory;
+    private $addressFactory;
 
     /**
      * @var CountryNameConverterInterface

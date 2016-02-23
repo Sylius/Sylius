@@ -33,6 +33,7 @@ class PaymentContextSpec extends ObjectBehavior
     ) {
         $this->beConstructedWith($paymentMethodRepository, $sharedStorage, $paymentMethodFactory, $paymentMethodNameToGatewayConverter);
     }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Behat\Context\Setup\PaymentContext');
@@ -52,7 +53,7 @@ class PaymentContextSpec extends ObjectBehavior
         $this->getPaymentMethodByName('Offline')->shouldReturn($paymentMethod);
     }
 
-    function it_throws_element_not_found_exception_if_payment_method_has_been_not_found (
+    function it_throws_element_not_found_exception_if_payment_method_has_not_been_found (
         RepositoryInterface $paymentMethodRepository
     ) {
         $paymentMethodRepository->findOneBy(['name' => 'Free'])->willReturn(null);
