@@ -13,11 +13,8 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
-        <parameter key="sylius.theme.model.class">Sylius\Bundle\ThemeBundle\Model\Theme</parameter>
-        <parameter key="sylius.theme.context.class">Sylius\Bundle\ThemeBundle\Context\SettableThemeContext</parameter>
-        <parameter key="sylius.theme.factory.basic.class">Sylius\Component\Resource\Factory\Factory</parameter>
-        <parameter key="sylius.theme.factory.class">Sylius\Bundle\ThemeBundle\Factory\ThemeFactory</parameter>
-        <parameter key="sylius.theme.repository.class">Sylius\Bundle\ThemeBundle\Repository\ThemeRepository</parameter>
+        <parameter key="sylius.context.theme.class">Sylius\Bundle\ThemeBundle\Context\SettableThemeContext</parameter>
+        <parameter key="sylius.hydrator.theme.class">DoctrineModule\Stdlib\Hydrator\DoctrineObject</parameter>
         <parameter key="sylius.theme.data_collector.class">Sylius\Bundle\ThemeBundle\Collector\ThemeDataCollector</parameter>
         <parameter key="sylius.theme.hierarchy_provider.class">Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProvider</parameter>
         <parameter key="sylius.theme.filesystem.class">Sylius\Bundle\ThemeBundle\Filesystem\Filesystem</parameter>
@@ -26,38 +23,27 @@
     </parameters>
 
     <services>
-        <service id="sylius.theme.context" class="%sylius.theme.context.class%">
+        <service id="sylius.context.theme" class="%sylius.context.theme.class%">
             <argument type="service" id="sylius.theme.hierarchy_provider" />
         </service>
 
-        <service id="sylius.theme.factory.basic" class="%sylius.theme.factory.basic.class%" public="false">
-            <argument>%sylius.theme.model.class%</argument>
+        <service id="sylius.hydrator.theme" class="%sylius.hydrator.theme.class%" public="false">
+            <argument type="service" id="sylius.manager.theme" />
         </service>
-
-        <service id="sylius.theme.factory" class="%sylius.theme.factory.class%">
-            <argument type="service" id="sylius.theme.factory.basic" />
-        </service>
-
-        <service id="sylius.theme.repository" class="%sylius.theme.repository.class%" />
 
         <service id="sylius.theme.data_collector" class="%sylius.theme.data_collector.class%" public="false">
-            <argument type="service" id="sylius.theme.repository" />
-            <argument type="service" id="sylius.theme.context" />
+            <argument type="service" id="sylius.repository.theme" />
+            <argument type="service" id="sylius.context.theme" />
             <argument type="service" id="sylius.theme.hierarchy_provider" />
             <tag name="data_collector" template="SyliusThemeBundle:Profiler:theme" id="sylius_theme" />
         </service>
 
         <service id="sylius.theme.hierarchy_provider" class="%sylius.theme.hierarchy_provider.class%" public="false">
-            <argument type="service" id="sylius.theme.repository" />
+            <argument type="service" id="sylius.repository.theme" />
         </service>
 
         <service id="sylius.theme.filesystem" class="%sylius.theme.filesystem.class%" public="false" />
 
         <service id="sylius.theme.finder_factory" class="%sylius.theme.finder_factory.class%" public="false" />
-
-        <service id="sylius.theme.form.type.theme_choice" class="%sylius.theme.form.type.theme_choice.class%">
-            <argument type="service" id="sylius.theme.repository" />
-            <tag name="form.type" alias="sylius_theme_choice" />
-        </service>
     </services>
 </container>

@@ -45,7 +45,7 @@ class ThemeRepositoryPassSpec extends ObjectBehavior
     ) {
         $container->get('sylius.theme.configuration.provider')->willReturn($configurationProvider);
 
-        $container->findDefinition('sylius.theme.repository')->willReturn($themeRepositoryDefinition);
+        $container->findDefinition('sylius.repository.theme')->willReturn($themeRepositoryDefinition);
 
         $configurationProvider->getConfigurations()->willReturn([
             ['name' => 'example/sylius-theme'],

@@ -11,15 +11,15 @@
 
 namespace Sylius\Bundle\ThemeBundle\DependencyInjection;
 
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class SyliusThemeExtension extends Extension
+class SyliusThemeExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritdoc}
@@ -29,6 +29,7 @@ class SyliusThemeExtension extends Extension
         $config = $this->processConfiguration(new Configuration(), $configs);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/services'));
+        $loader->load(sprintf('driver/%s.xml', $config['driver']));
         $loader->load('assets.xml');
         $loader->load('configuration.xml');
         $loader->load('resource_locators.xml');
@@ -42,5 +43,7 @@ class SyliusThemeExtension extends Extension
         $container->setAlias('sylius.theme.configuration.provider', 'sylius.theme.configuration.provider.filesystem');
 
         $container->setParameter('sylius.theme.configuration.filesystem.locations', $config['sources']['filesystem']['locations']);
+
+        $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
     }
 }

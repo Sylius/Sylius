@@ -11,6 +11,14 @@
 
 namespace Sylius\Bundle\ThemeBundle\DependencyInjection;
 
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Bundle\ThemeBundle\Doctrine\ORM\ThemeRepository;
+use Sylius\Bundle\ThemeBundle\Model\Theme;
+use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
+use Sylius\Component\Resource\Factory\Factory;
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -27,7 +35,71 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('sylius_theme');
 
-        $sourcesNodeBuilder = $rootNode->addDefaultsIfNotSet()->fixXmlConfig('source')->children()->arrayNode('sources')->addDefaultsIfNotSet()->children();
+        $this->addResourcesConfiguration($rootNode);
+        $this->addSourcesConfiguration($rootNode);
+
+        return $treeBuilder;
+    }
+
+    /**
+     * @param ArrayNodeDefinition $rootNode
+     */
+    private function addResourcesConfiguration(ArrayNodeDefinition $rootNode)
+    {
+        $rootNode
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
+                ->arrayNode('resources')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('theme')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(Theme::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(ThemeInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(ThemeRepository::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->arrayNode('form')
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                                ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('validation_groups')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->arrayNode('choice')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(['sylius'])
+                                        ->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+        ;
+    }
+
+    /**
+     * @param ArrayNodeDefinition $rootNode
+     */
+    private function addSourcesConfiguration(ArrayNodeDefinition $rootNode)
+    {
+        $sourcesNodeBuilder = $rootNode
+            ->addDefaultsIfNotSet()
+            ->fixXmlConfig('source')
+                ->children()
+                    ->arrayNode('sources')
+                        ->addDefaultsIfNotSet()
+                            ->children()
+        ;
 
         $sourcesNodeBuilder
             ->arrayNode('filesystem')
@@ -40,7 +112,5 @@ class Configuration implements ConfigurationInterface
                             ->defaultValue(['%kernel.root_dir%/themes', '%kernel.root_dir%/../vendor/sylius/themes'])
                             ->prototype('scalar')
         ;
-
-        return $treeBuilder;
     }
 }

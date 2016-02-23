@@ -30,12 +30,12 @@ class ThemeRepositoryPass implements CompilerPassInterface
         /** @var ConfigurationProviderInterface $configurationProvider */
         $configurationProvider = $container->get('sylius.theme.configuration.provider');
 
-        $themeRepositoryDefinition = $container->findDefinition('sylius.theme.repository');
+        $themeRepositoryDefinition = $container->findDefinition('sylius.repository.theme');
         foreach ($configurationProvider->getConfigurations() as $themeConfiguration) {
             $themeDefinition = new Definition(null, [$themeConfiguration]);
 
             $themeDefinition->setFactory([
-                new Reference('sylius.theme.factory'),
+                new Reference('sylius.factory.theme'),
                 'createFromArray',
             ]);
 

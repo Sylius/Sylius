@@ -11,17 +11,28 @@
 
 namespace Sylius\Bundle\ThemeBundle;
 
-use Sylius\Bundle\ThemeBundle\DependencyInjection\Compiler\ThemeRepositoryPass;
+use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\ThemeAwareLoaderDecoratorPass;
 use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\ThemeAwareSourcesPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class SyliusThemeBundle extends Bundle
+class SyliusThemeBundle extends AbstractResourceBundle
 {
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSupportedDrivers()
+    {
+        return [
+            SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
+        ];
+    }
+
     /**
      * @param ContainerBuilder $container
      */
@@ -29,8 +40,25 @@ class SyliusThemeBundle extends Bundle
     {
         parent::build($container);
 
-        $container->addCompilerPass(new ThemeRepositoryPass());
         $container->addCompilerPass(new ThemeAwareSourcesPass());
         $container->addCompilerPass(new ThemeAwareLoaderDecoratorPass());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getModelInterfaces()
+    {
+        return [
+            ThemeInterface::class => 'sylius.model.theme.class',
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getModelNamespace()
+    {
+        return 'Sylius\Bundle\ThemeBundle\Model';
     }
 }

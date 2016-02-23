@@ -39,7 +39,7 @@ class ThemeDebugCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         /** @var ThemeInterface[] $themes */
-        $themes = $this->getContainer()->get('sylius.theme.repository')->findAll();
+        $themes = $this->getContainer()->get('sylius.repository.theme')->findAll();
 
         if (0 === count($themes)) {
             $output->writeln('<error>There are no themes.</error>');

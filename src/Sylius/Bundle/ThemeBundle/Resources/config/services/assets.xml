@@ -24,7 +24,7 @@
         <service id="sylius.theme.asset.assets_installer" class="%sylius.theme.asset.assets_installer.class%">
             <argument type="service" id="filesystem" />
             <argument type="service" id="kernel" />
-            <argument type="service" id="sylius.theme.repository" />
+            <argument type="service" id="sylius.repository.theme" />
             <argument type="service" id="sylius.theme.hierarchy_provider" />
             <argument type="service" id="sylius.theme.asset.path_resolver" />
         </service>
@@ -35,7 +35,7 @@
         <service id="assets.path_package" class="%sylius.assets.path_package.class%" abstract="true">
             <argument /> <!-- base path -->
             <argument type="service" /> <!-- version strategy -->
-            <argument type="service" id="sylius.theme.context" />
+            <argument type="service" id="sylius.context.theme" />
             <argument type="service" id="sylius.theme.asset.path_resolver" />
             <argument type="service" id="assets.context" />
         </service>

@@ -11,6 +11,9 @@
 
 namespace Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler;
 
+use Sylius\Bundle\ThemeBundle\Factory\ThemeFactoryInterface;
+use Sylius\Bundle\ThemeBundle\Loader\ConfigurationProviderInterface;
+use Sylius\Bundle\ThemeBundle\Model\Theme;
 use Sylius\Bundle\ThemeBundle\Translation\Finder\TranslationFilesFinderInterface;
 use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -56,10 +59,19 @@ final class ThemeAwareSourcesPass implements CompilerPassInterface
 
     private function getTranslationFiles(ContainerBuilder $container)
     {
+        /** @var ConfigurationProviderInterface $configurationProvider */
+        $configurationProvider = $container->get('sylius.theme.configuration.provider');
+
+        /** @var ThemeFactoryInterface $themeFactory */
+        $themeFactory = $container->get('sylius.factory.theme');
+
+        $themes = [];
+        foreach ($configurationProvider->getConfigurations() as $themeConfiguration) {
+            $themes[] = $themeFactory->createFromArray($themeConfiguration);
+        }
+
         /** @var TranslationFilesFinderInterface $translationFilesFinder */
         $translationFilesFinder = $container->get('sylius.theme.translation.files_finder');
-        $themes = $container->get('sylius.theme.repository')->findAll();
-
         $files = [];
         foreach ($themes as $theme) {
             $files = array_merge(

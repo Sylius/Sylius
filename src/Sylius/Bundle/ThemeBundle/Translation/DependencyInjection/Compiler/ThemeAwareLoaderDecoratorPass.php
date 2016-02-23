@@ -41,7 +41,7 @@ final class ThemeAwareLoaderDecoratorPass implements CompilerPassInterface
                 ->setDecoratedService($id)
                 ->setArguments([
                     new Reference('sylius.theme.translation.loader.'.$id.'.inner'),
-                    new Reference('sylius.theme.repository'),
+                    new Reference('sylius.repository.theme'),
                 ])
             ;
         }
