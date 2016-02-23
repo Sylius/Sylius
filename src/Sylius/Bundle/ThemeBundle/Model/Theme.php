@@ -11,25 +11,23 @@
 
 namespace Sylius\Bundle\ThemeBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 class Theme implements ThemeInterface
 {
     /**
+     * @var int
+     */
+    protected $id;
+
+    /**
      * @var string
      */
     protected $name;
-
-    /**
-     * @var string
-     */
-    protected $path;
-
-    /**
-     * @var array
-     */
-    protected $authors = [];
 
     /**
      * @var string
@@ -39,12 +37,7 @@ class Theme implements ThemeInterface
     /**
      * @var string
      */
-    protected $description;
-
-    /**
-     * @var array
-     */
-    protected $parentsNames = [];
+    protected $path;
 
     /**
      * @var string
@@ -52,11 +45,32 @@ class Theme implements ThemeInterface
     protected $code;
 
     /**
+     * @var string
+     */
+    protected $description;
+
+    /**
+     * @var Collection
+     */
+    protected $authors;
+
+    /**
+     * @var Collection
+     */
+    protected $parents;
+
+    public function __construct()
+    {
+        $this->authors = new ArrayCollection();
+        $this->parents = new ArrayCollection();
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getId()
     {
-        return $this->getName();
+        return $this->id;
     }
 
     /**
@@ -79,6 +93,22 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getPath()
     {
         return $this->path;
@@ -95,33 +125,9 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function getAuthors()
+    public function getCode()
     {
-        return $this->authors;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setAuthors(array $authors)
-    {
-        $this->authors = $authors;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
+        return $this->code;
     }
 
     /**
@@ -143,24 +149,48 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function getParentsNames()
+    public function getAuthors()
     {
-        return $this->parentsNames;
+        return $this->authors;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setParentsNames(array $parentsNames)
+    public function addAuthor(ThemeAuthorInterface $author)
     {
-        $this->parentsNames = $parentsNames;
+        $this->authors[] = $author;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getCode()
+    public function removeAuthor(ThemeAuthorInterface $author)
     {
-        return $this->code;
+        $this->authors->removeElement($author);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getParents()
+    {
+        return $this->parents;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addParent(ThemeInterface $theme)
+    {
+        $this->parents[] = $theme;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeParent(ThemeInterface $theme)
+    {
+        $this->parents->removeElement($theme);
     }
 }

@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\ThemeBundle\Factory;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeFactory;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeFactoryInterface;
+use Sylius\Bundle\ThemeBundle\Model\Theme;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
@@ -24,9 +25,9 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 class ThemeFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $basicThemeFactory)
+    function let()
     {
-        $this->beConstructedWith($basicThemeFactory);
+        $this->beConstructedWith(Theme::class);
     }
 
     function it_is_initializable()
@@ -39,37 +40,17 @@ class ThemeFactorySpec extends ObjectBehavior
         $this->shouldImplement(ThemeFactoryInterface::class);
     }
 
-    function it_creates_theme_based_on_array_data(FactoryInterface $basicThemeFactory, ThemeInterface $theme)
+    function it_creates_named_theme()
     {
-        $basicThemeFactory->createNew()->willReturn($theme);
-
-        $theme->setName('example/theme')->shouldBeCalled();
-        $theme->setPath('/theme/path')->shouldBeCalled();
-
-        $this->createFromArray(['name' => 'example/theme', 'path' => '/theme/path'])->shouldReturn($theme);
+        $this->createNamed('example/theme')->shouldBeThemeWithName('example/theme');
     }
 
-    function it_creates_theme_with_optional_properties_based_on_array_data(
-        FactoryInterface $basicThemeFactory,
-        ThemeInterface $theme
-    ) {
-        $basicThemeFactory->createNew()->willReturn($theme);
-
-        $theme->setName('example/theme')->shouldBeCalled();
-        $theme->setPath('/theme/path')->shouldBeCalled();
-
-        $theme->setAuthors([['name' => 'Ryszard Rynkowski']])->shouldBeCalled();
-        $theme->setTitle('Example theme')->shouldBeCalled();
-        $theme->setDescription('The best theme all around the world')->shouldBeCalled();
-        $theme->setParentsNames(['example/parent-theme'])->shouldBeCalled();
-
-        $this->createFromArray([
-            'name' => 'example/theme',
-            'path' => '/theme/path',
-            'authors' => [['name' => 'Ryszard Rynkowski']],
-            'title' => 'Example theme',
-            'description' => 'The best theme all around the world',
-            'parents' => ['example/parent-theme'],
-        ])->shouldReturn($theme);
+    public function getMatchers()
+    {
+        return [
+            'beThemeWithName' => function (ThemeInterface $theme, $expectedName) {
+                return $expectedName === $theme->getName();
+            },
+        ];
     }
 }

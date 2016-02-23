@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\ThemeBundle\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Model\Theme;
+use Sylius\Bundle\ThemeBundle\Model\ThemeAuthorInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
@@ -38,12 +39,9 @@ class ThemeSpec extends ObjectBehavior
         $this->shouldImplement(ResourceInterface::class);
     }
 
-    function its_id_is_name()
+    function it_has_id()
     {
         $this->getId()->shouldReturn(null);
-
-        $this->setName('name');
-        $this->getId()->shouldReturn('name');
     }
 
     function it_has_name()
@@ -54,6 +52,14 @@ class ThemeSpec extends ObjectBehavior
         $this->getName()->shouldReturn('foo/bar');
     }
 
+    function it_has_title()
+    {
+        $this->getTitle()->shouldReturn(null);
+
+        $this->setTitle('Foo Bar');
+        $this->getTitle()->shouldReturn('Foo Bar');
+    }
+
     function it_has_path()
     {
         $this->getPath()->shouldReturn(null);
@@ -62,20 +68,11 @@ class ThemeSpec extends ObjectBehavior
         $this->getPath()->shouldReturn('/foo/bar');
     }
 
-    function it_has_authors()
+    function it_has_code_based_on_md5ed_name()
     {
-        $this->getAuthors()->shouldReturn([]);
+        $this->setName('name');
 
-        $this->setAuthors([['name' => 'Richard Rinkowsky']]);
-        $this->getAuthors()->shouldReturn([['name' => 'Richard Rinkowsky']]);
-    }
-
-    function it_has_title()
-    {
-        $this->getTitle()->shouldReturn(null);
-
-        $this->setTitle('Foo Bar');
-        $this->getTitle()->shouldReturn('Foo Bar');
+        $this->getCode()->shouldReturn(substr(md5('name'), 0, 8));
     }
 
     function it_has_description()
@@ -86,18 +83,25 @@ class ThemeSpec extends ObjectBehavior
         $this->getDescription()->shouldReturn('Lorem ipsum.');
     }
 
-    function it_has_parents_names()
+    function it_has_authors(ThemeAuthorInterface $themeAuthor)
     {
-        $this->getParentsNames()->shouldReturn([]);
+        $this->getAuthors()->shouldHaveCount(0);
 
-        $this->setParentsNames(['example/sylius-theme']);
-        $this->getParentsNames()->shouldReturn(['example/sylius-theme']);
+        $this->addAuthor($themeAuthor);
+        $this->getAuthors()->shouldHaveCount(1);
+
+        $this->removeAuthor($themeAuthor);
+        $this->getAuthors()->shouldHaveCount(0);
     }
 
-    function it_has_code_based_on_md5ed_name()
+    function it_has_parents(ThemeInterface $theme)
     {
-        $this->setName('name');
+        $this->getParents()->shouldHaveCount(0);
 
-        $this->getCode()->shouldReturn(substr(md5('name'), 0, 8));
+        $this->addParent($theme);
+        $this->getParents()->shouldHaveCount(1);
+
+        $this->removeParent($theme);
+        $this->getParents()->shouldHaveCount(0);
     }
 }

@@ -39,14 +39,19 @@ interface ThemeInterface extends ResourceInterface
     public function setPath($path);
 
     /**
-     * @return array
+     * @return ThemeAuthorInterface[]
      */
     public function getAuthors();
 
     /**
-     * @param array $authors
+     * @param ThemeAuthorInterface $author
      */
-    public function setAuthors(array $authors);
+    public function addAuthor(ThemeAuthorInterface $author);
+
+    /**
+     * @param ThemeAuthorInterface $author
+     */
+    public function removeAuthor(ThemeAuthorInterface $author);
 
     /**
      * @return string
@@ -69,14 +74,19 @@ interface ThemeInterface extends ResourceInterface
     public function setDescription($description);
 
     /**
-     * @return array
+     * @return ThemeInterface[]
      */
-    public function getParentsNames();
+    public function getParents();
 
     /**
-     * @param array $parentsNames
+     * @param ThemeInterface $theme
      */
-    public function setParentsNames(array $parentsNames);
+    public function addParent(ThemeInterface $theme);
+
+    /**
+     * @param ThemeInterface $theme
+     */
+    public function removeParent(ThemeInterface $theme);
 
     /**
      * Should match /^[a-zA-Z0-9-_]{6,32}$/
