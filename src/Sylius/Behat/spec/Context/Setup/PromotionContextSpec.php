@@ -149,6 +149,6 @@ class PromotionContextSpec extends ObjectBehavior
 
         $objectManager->flush()->shouldBeCalled();
 
-        $this->itGivesFixedDiscountToEveryOrderWithItemTotalAtLeast('10.00', '50.00');
+        $this->itGivesFixedDiscountToEveryOrderWithItemsTotalAtLeast('10.00', '50.00');
     }
 }

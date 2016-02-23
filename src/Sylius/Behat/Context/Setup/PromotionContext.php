@@ -134,9 +134,9 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @Given /^(?:it|the promotion) gives "(?:€|£|\$)([^"]+)" fixed discount to every order with item total at least "(?:€|£|\$)([^"]+)"$/
+     * @Given /^(?:it|the promotion) gives "(?:€|£|\$)([^"]+)" fixed discount to every order with items total at least "(?:€|£|\$)([^"]+)"$/
      */
-    public function itGivesFixedDiscountToEveryOrderWithItemTotalAtLeast($amount, $targetAmount)
+    public function itGivesFixedDiscountToEveryOrderWithItemsTotalAtLeast($amount, $targetAmount)
     {
         $currentPromotion = $this->sharedStorage->get('promotion');
 
