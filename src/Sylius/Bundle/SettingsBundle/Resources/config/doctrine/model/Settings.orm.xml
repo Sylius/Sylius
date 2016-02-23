@@ -23,7 +23,7 @@
         </id>
 
         <field name="schemaAlias" column="schema_alias" type="string" nullable="false"/>
-        <field name="namespace" column="namespace" type="string" nullable="true"/>
+        <field name="namespace" type="string" nullable="true"/>
 
         <one-to-many target-entity="Sylius\Bundle\SettingsBundle\Model\ParameterInterface" mapped-by="settings"
                      field="parameters" index-by="name" fetch="EAGER">
