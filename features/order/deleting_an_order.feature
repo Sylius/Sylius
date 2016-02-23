@@ -18,7 +18,7 @@ Feature: Deleting an order
         When I delete the order "#00000022"
         Then this order should not exist in the registry
 
-    @todo
+    @domain
     Scenario: Payments of a deleted order should disappear from the registry
         When I delete the order "#00000022"
         Then there should be no "Cash on Delivery" payments in the registry

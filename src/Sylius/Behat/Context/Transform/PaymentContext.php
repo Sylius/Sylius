@@ -33,7 +33,7 @@ final class PaymentContext implements Context
     }
 
     /**
-     * @Transform /^"([^"]+)" payment$/
+     * @Transform /^"([^"]+)" payment(s)?$/
      */
     public function getPaymentMethodByName($paymentMethodName)
     {
