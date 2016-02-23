@@ -62,4 +62,14 @@ class ActionFactorySpec extends ObjectBehavior
 
         $this->createPercentageDiscount(0.1)->shouldReturn($action);
     }
+
+    function it_creates_shipping_discount_action_with_given_discount_rate($decoratedFactory, ActionInterface $action)
+    {
+        $decoratedFactory->createNew()->willReturn($action);
+
+        $action->setType('shipping_discount')->shouldBeCalled();
+        $action->setConfiguration(['percentage' => 0.1])->shouldBeCalled();
+
+        $this->createShippingDiscount(0.1)->shouldReturn($action);
+    }
 }
