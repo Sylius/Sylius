@@ -129,4 +129,26 @@ class PromotionContextSpec extends ObjectBehavior
 
         $this->itGivesFixedDiscountToEveryOrderWithQuantityAtLeast('10.00', '5');
     }
+
+    function it_creates_fixed_discount_promotion_for_cart_with_specified_item_total(
+        $sharedStorage,
+        $actionFactory,
+        $ruleFactory,
+        $objectManager,
+        ActionInterface $action,
+        RuleInterface $rule,
+        PromotionInterface $promotion
+    ) {
+        $sharedStorage->get('promotion')->willReturn($promotion);
+
+        $actionFactory->createFixedDiscount(1000)->willReturn($action);
+        $promotion->addAction($action)->shouldBeCalled();
+
+        $ruleFactory->createItemTotal(5000)->willReturn($rule);
+        $promotion->addRule($rule)->shouldBeCalled();
+
+        $objectManager->flush()->shouldBeCalled();
+
+        $this->itGivesFixedDiscountToEveryOrderWithItemTotalAtLeast('10.00', '50.00');
+    }
 }
