@@ -5,36 +5,36 @@ Feature: Receiving discount based on cart quantity
     I want to have promotion applied to my cart when my cart quantity qualifies
 
     Background:
-        Given the store is operating on a single "France" channel
+        Given the store operates on a single channel in "France"
         And the store has a product "PHP T-Shirt" priced at "€100.00"
         And there is a promotion "Holiday promotion"
 
-    @todo
+    @ui
     Scenario: Receiving discount when buying more than required quantity
-        Given the promotion gives "€10.00" fixed discount to every cart with quantity at least 3
+        Given the promotion gives "€10.00" fixed discount to every order with quantity at least 3
         When I add 4 products "PHP T-Shirt" to the cart
         Then my cart total should be "€390.00"
         And my discount should be "-€10.00"
 
-    @todo
+    @ui
     Scenario: Receiving discount when buying the required quantity
-        Given the promotion gives "€10.00" fixed discount to every cart with quantity at least 3
-        When I add 3 products "PHP T-Shirt" to the cart
-        Then my cart total should be "€290.00"
+        Given the promotion gives "€10.00" fixed discount to every order with quantity at least 4
+        When I add 4 products "PHP T-Shirt" to the cart
+        Then my cart total should be "€390.00"
         And my discount should be "-€10.00"
 
-    @todo
+    @ui
     Scenario: Not receiving discount when buying less than required quantity
-        Given the promotion gives "€10.00" fixed discount to every cart with quantity at least 3
+        Given the promotion gives "€10.00" fixed discount to every order with quantity at least 5
         When I add 2 products "PHP T-Shirt" to the cart
         Then my cart total should be "€200.00"
-        And my discount should be "€0.00"
+        And there should be no discount
 
-    @todo
+    @ui
     Scenario: Receiving discount when buying different products with the required quantity
         Given the store has a product "Symfony T-Shirt" priced at "€50.00"
-        And the promotion gives "€10.00" fixed discount to every cart with quantity at least 3
+        And the promotion gives "€10.00" fixed discount to every order with quantity at least 3
         When I add 2 products "PHP T-Shirt" to the cart
-        And I add product "Symfony T-Shirt" to the cart
-        Then my cart total should be "€240.00"
+        And I add 2 products "Symfony T-Shirt" to the cart
+        Then my cart total should be "€290.00"
         And my discount should be "-€10.00"

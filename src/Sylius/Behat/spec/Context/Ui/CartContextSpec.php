@@ -16,6 +16,7 @@ use PhpSpec\Exception\Example\NotEqualException;
 use PhpSpec\ObjectBehavior;
 use Sylius\Behat\Context\Ui\CartContext;
 use Sylius\Behat\Page\Cart\CartSummaryPage;
+use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Page\Product\ProductShowPage;
 
 /**
@@ -86,5 +87,13 @@ class CartContextSpec extends ObjectBehavior
         $cartSummaryPage->getPromotionTotal()->willReturn('$40.00');
 
         $this->shouldThrow(NotEqualException::class)->during('myDiscountShouldBe', ['$50.00']);
+    }
+
+    function it_ensures_there_is_no_discount_info_on_the_page(CartSummaryPage $cartSummaryPage)
+    {
+        $cartSummaryPage->open()->shouldBeCalled();
+        $cartSummaryPage->getPromotionTotal()->willThrow(new ElementNotFoundException('"promotion total" element is not present on the page'));
+
+        $this->thereShouldBeNoDiscount();
     }
 }

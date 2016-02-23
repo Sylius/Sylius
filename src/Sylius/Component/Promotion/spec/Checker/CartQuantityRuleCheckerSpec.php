@@ -34,7 +34,7 @@ class CartQuantityRuleCheckerSpec extends ObjectBehavior
     {
         $subject->getPromotionSubjectCount()->shouldBeCalled()->willReturn(0);
 
-        $this->isEligible($subject, ['count' => 10, 'equal' => false])->shouldReturn(false);
+        $this->isEligible($subject, ['count' => 10])->shouldReturn(false);
     }
 
     function it_should_recognize_subject_as_not_eligible_if_cart_quantity_is_less_then_configured(
@@ -42,7 +42,7 @@ class CartQuantityRuleCheckerSpec extends ObjectBehavior
     ) {
         $subject->getPromotionSubjectCount()->shouldBeCalled()->willReturn(7);
 
-        $this->isEligible($subject, ['count' => 10, 'equal' => false])->shouldReturn(false);
+        $this->isEligible($subject, ['count' => 10])->shouldReturn(false);
     }
 
     function it_should_recognize_subject_as_eligible_if_cart_quantity_is_greater_then_configured(
@@ -50,16 +50,15 @@ class CartQuantityRuleCheckerSpec extends ObjectBehavior
     ) {
         $subject->getPromotionSubjectCount()->shouldBeCalled()->willReturn(12);
 
-        $this->isEligible($subject, ['count' => 10, 'equal' => false])->shouldReturn(true);
+        $this->isEligible($subject, ['count' => 10])->shouldReturn(true);
     }
 
-    function it_should_recognize_subject_as_eligible_if_cart_quantity_is_equal_with_configured_depending_on_equal_setting(
+    function it_should_recognize_subject_as_eligible_if_cart_quantity_is_equal_with_configured(
         PromotionCountableSubjectInterface $subject
     ) {
         $subject->getPromotionSubjectCount()->shouldBeCalled()->willReturn(10);
 
-        $this->isEligible($subject, ['count' => 10, 'equal' => false])->shouldReturn(false);
-        $this->isEligible($subject, ['count' => 10, 'equal' => true])->shouldReturn(true);
+        $this->isEligible($subject, ['count' => 10])->shouldReturn(true);
     }
 
     function it_should_return_cart_quantity_configuration_form_type()

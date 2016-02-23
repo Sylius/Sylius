@@ -12,10 +12,13 @@
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -94,6 +97,8 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
 
         $definition = $container->findDefinition('sylius.context.currency');
         $definition->replaceArgument(0, new Reference($config['currency_storage']));
+
+        $this->overwriteRuleFactory($container);
     }
 
     /**
@@ -138,5 +143,18 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         foreach ($config['steps'] as $name => $step) {
             $container->setParameter(sprintf('sylius.checkout.step.%s.template', $name), $step['template']);
         }
+    }
+
+
+    /**
+     * @param ContainerBuilder $container
+     */
+    private function overwriteRuleFactory(ContainerBuilder $container)
+    {
+        $baseFactoryDefinition = new Definition(Factory::class, [new Parameter('sylius.model.promotion_rule.class')]);
+        $promotionRuleFactoryClass = $container->getParameter('sylius.factory.promotion_rule.class');
+        $decoratedPromotionRuleFactoryDefinition = new Definition($promotionRuleFactoryClass, [$baseFactoryDefinition]);
+
+        $container->setDefinition('sylius.factory.promotion_rule', $decoratedPromotionRuleFactoryDefinition);
     }
 }
