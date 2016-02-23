@@ -22,6 +22,7 @@ default:
 
                 - sylius.behat.context.domain.order
                 - sylius.behat.context.domain.payment
+                - sylius.behat.context.domain.shipment
 
             filters:
                 tags: @order && @domain

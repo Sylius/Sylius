@@ -52,6 +52,7 @@
 
         <parameter key="sylius.behat.context.domain.order.class">Sylius\Behat\Context\Domain\OrderContext</parameter>
         <parameter key="sylius.behat.context.domain.payment.class">Sylius\Behat\Context\Domain\PaymentContext</parameter>
+        <parameter key="sylius.behat.context.domain.shipment.class">Sylius\Behat\Context\Domain\ShippingContext</parameter>
     </parameters>
     <services>
         <service id="sylius.behat.context.setup.channel" class="%sylius.behat.context.setup.channel.class%" scope="scenario">
@@ -297,6 +298,11 @@
 
         <service id="sylius.behat.context.domain.payment" class="%sylius.behat.context.domain.payment.class%" scope="scenario">
             <argument type="service" id="sylius.repository.payment" container="symfony"/>
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.domain.shipment" class="%sylius.behat.context.domain.shipment.class%" scope="scenario">
+            <argument type="service" id="sylius.repository.shipment" container="symfony"/>
             <tag name="sylius.behat.context" />
         </service>
     </services>
