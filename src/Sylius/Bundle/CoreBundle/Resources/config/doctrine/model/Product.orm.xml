@@ -20,7 +20,11 @@
     <mapped-superclass name="Sylius\Component\Core\Model\Product" table="sylius_product">
 
         <field name="variantSelectionMethod" column="variant_selection_method" type="string" nullable="false" />
-        <field name="averageRating" column="average_rating" type="float" />
+        <field name="averageRating" column="average_rating" type="float">
+            <options>
+                <option name="default">0</option>
+            </options>
+        </field>
 
         <many-to-one field="shippingCategory" target-entity="Sylius\Component\Shipping\Model\ShippingCategoryInterface">
             <join-column name="shipping_category_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
