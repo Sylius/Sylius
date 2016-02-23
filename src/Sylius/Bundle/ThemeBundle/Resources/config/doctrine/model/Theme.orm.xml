@@ -29,7 +29,7 @@
         <field name="description" column="description" type="string" nullable="true" />
 
         <!-- One-To-Many, Unidirectional with Join Table -->
-        <many-to-many field="authors" target-entity="Sylius\Bundle\ThemeBundle\Model\ThemeAuthor">
+        <many-to-many field="authors" target-entity="Sylius\Bundle\ThemeBundle\Model\ThemeAuthorInterface">
             <join-table name="sylius_theme_authors">
                 <join-columns>
                     <join-column name="theme_id" referenced-column-name="id" />

@@ -13,6 +13,8 @@ namespace Sylius\Bundle\ThemeBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Bundle\ThemeBundle\Model\ThemeAuthor;
+use Sylius\Bundle\ThemeBundle\Model\ThemeAuthorInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\ThemeAwareLoaderDecoratorPass;
 use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\ThemeAwareSourcesPass;
@@ -51,6 +53,7 @@ class SyliusThemeBundle extends AbstractResourceBundle
     {
         return [
             ThemeInterface::class => 'sylius.model.theme.class',
+            ThemeAuthorInterface::class => ThemeAuthor::class,
         ];
     }
 
