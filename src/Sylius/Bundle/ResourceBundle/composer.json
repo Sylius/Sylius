@@ -51,8 +51,6 @@
         "phpspec/phpspec": "^2.4",
         "phpunit/phpunit": "^4.8",
         "sensio/generator-bundle": "^3.0",
-        "symfony/form": "^2.7",
-        "symfony/validator": "^2.7",
         "sylius/rbac-bundle": "0.18.*",
         "twig/twig": "~1.11"
     },

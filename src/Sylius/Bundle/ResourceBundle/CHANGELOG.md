@@ -3,7 +3,7 @@ CHANGELOG
 
 ### v0.17.0
 
-* Integrated TranslationBundle.
+* Merged TranslationBundle.
 
 ### v0.16.0
 

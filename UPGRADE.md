@@ -300,8 +300,8 @@ app/console doctrine:phpcr:document:migrate-class "Symfony\Cmf\Bundle\BlockBundl
 
 ### Translation and TranslationBundle
 
-* Integrated ``Translation`` component with ``Resource`` component
-* Integrated ``TranslationBundle`` with ``ResourceBundle``
+* Merged ``Translation`` component with ``Resource`` component
+* Merged ``TranslationBundle`` with ``ResourceBundle``
 * Renamed ``TranslatableResourceRepository`` to ``TranslatableRepository``
 
 ## From 0.15.0 to 0.16.x

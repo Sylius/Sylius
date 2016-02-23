@@ -3,7 +3,7 @@ CHANGELOG
 
 ### v0.17.0
 
-* Integrated Translation component
+* Merged Translation component.
 
 ### v0.16.0
 
