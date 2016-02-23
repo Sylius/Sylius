@@ -425,6 +425,13 @@ sylius_rbac:
         sylius.taxon.update: Edit taxon
         sylius.taxon.delete: Delete taxon
 
+        sylius.manage.adjustment: Manage adjustments
+        sylius.adjustment.show: Show adjustment
+        sylius.adjustment.index: List adjustments
+        sylius.adjustment.create: Create adjustment
+        sylius.adjustment.update: Edit adjustment
+        sylius.adjustment.delete: Delete adjustment
+
         sylius.manage.order: Manage orders
         sylius.order.show: Show order
         sylius.order.index: List orders
@@ -684,6 +691,7 @@ sylius_rbac:
         sylius.manage.product_variant: [sylius.product_variant.show, sylius.product_variant.index, sylius.product_variant.create, sylius.product_variant.update, sylius.product_variant.delete]
         sylius.manage.taxonomy: [sylius.taxonomy.show, sylius.taxonomy.index, sylius.taxonomy.create, sylius.taxonomy.update, sylius.taxonomy.delete]
         sylius.manage.taxon: [sylius.taxon.show, sylius.taxon.index, sylius.taxon.create, sylius.taxon.update, sylius.taxon.delete]
+        sylius.manage.adjustment: [sylius.adjustment.show, sylius.adjustment.index, sylius.adjustment.create, sylius.adjustment.update, sylius.adjustment.delete]
         sylius.manage.order: [sylius.order.show, sylius.order.index, sylius.order.create, sylius.order.update, sylius.order.delete]
         sylius.manage.order_item: [sylius.order_item.show, sylius.order_item.index, sylius.order_item.create, sylius.order_item.update, sylius.order_item.delete]
         sylius.manage.adjustment: [sylius.adjustment.show, sylius.adjustment.index, sylius.adjustment.create, sylius.adjustment.update, sylius.adjustment.delete]
@@ -719,7 +727,7 @@ sylius_rbac:
         sylius.manage.product_association_type: [sylius.product_association_type.show, sylius.product_association_type.index, sylius.product_association_type.create, sylius.product_association_type.update, sylius.product_association_type.delete]
         sylius.catalog: [sylius.manage.product, sylius.manage.product_attribute, sylius.manage.product_option, sylius.manage.product_archetype, sylius.manage.product_variant, sylius.manage.taxonomy, sylius.manage.taxon, sylius.manage.metadata_container, sylius.manage.product_association_type]
         sylius.marketing: [sylius.manage.promotion, sylius.manage.promotion_coupon, sylius.manage.email, sylius.manage.metadata_container]
-        sylius.sales: [sylius.manage.order, sylius.manage.order_item, sylius.manage.adjustment, sylius.manage.payment, sylius.manage.report, sylius.manage.product_review]
+        sylius.sales: [sylius.manage.adjustment, sylius.manage.order, sylius.manage.order_item, sylius.manage.adjustment, sylius.manage.payment, sylius.manage.report, sylius.manage.product_review]
         sylius.shipping: [sylius.manage.shipment, sylius.manage.shipping_method, sylius.manage.shipping_category]
         sylius.content: [sylius.manage.static_content, sylius.manage.route, sylius.manage.simple_block, sylius.manage.menu, sylius.manage.slideshow, sylius.manage.string_block, sylius.manage.slideshow_block, sylius.manage.imagine_block, sylius.manage.metadata_container]
         sylius.security: [sylius.manage.permission, sylius.manage.role, sylius.manage.customer, sylius.manage.group, sylius.accounts]

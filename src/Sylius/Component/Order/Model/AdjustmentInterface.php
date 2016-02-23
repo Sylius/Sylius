@@ -12,12 +12,13 @@
 namespace Sylius\Component\Order\Model;
 
 use Sylius\Component\Originator\Model\OriginAwareInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface AdjustmentInterface extends TimestampableInterface, OriginAwareInterface
+interface AdjustmentInterface extends ResourceInterface, TimestampableInterface, OriginAwareInterface
 {
     /**
      * @return AdjustableInterface
