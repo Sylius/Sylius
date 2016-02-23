@@ -33,7 +33,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class SettingsManager implements SettingsManagerInterface
 {
     /**
-     * @var SchemaRegistryInterface
+     * @var ServiceRegistryInterface
      */
     protected $schemaRegistry;
 
@@ -80,7 +80,7 @@ class SettingsManager implements SettingsManagerInterface
     protected $eventDispatcher;
 
     public function __construct(
-        SchemaRegistryInterface $schemaRegistry,
+        ServiceRegistryInterface $schemaRegistry,
         ServiceRegistryInterface $resolverRegistry,
         ObjectManager $settingsManager,
         FactoryInterface $settingsFactory,
@@ -104,7 +104,7 @@ class SettingsManager implements SettingsManagerInterface
      */
     public function load($schemaAlias, $ignoreUnknown = true)
     {
-        $schema = $this->schemaRegistry->getSchema($schemaAlias);
+        $schema = $this->schemaRegistry->get($schemaAlias);
 
         $resolver = $this->defaultResolver;
 
@@ -116,7 +116,7 @@ class SettingsManager implements SettingsManagerInterface
 
         if (!$settings) {
             $settings = $this->settingsFactory->createNew();
-            $settings->setSchema($schemaAlias);
+            $settings->setSchemaAlias($schemaAlias);
         }
 
         // map parameters to a plain php array
@@ -152,7 +152,7 @@ class SettingsManager implements SettingsManagerInterface
         $settings = $parameters->getSettings();
         $parameters = $parameters->toArray();
 
-        $schema = $this->schemaRegistry->getSchema($settings->getSchema());
+        $schema = $this->schemaRegistry->get($settings->getSchemaAlias());
 
         $settingsBuilder = new SettingsBuilder();
         $schema->buildSettings($settingsBuilder);

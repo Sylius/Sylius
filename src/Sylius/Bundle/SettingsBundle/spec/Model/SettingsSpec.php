@@ -36,18 +36,18 @@ class SettingsSpec extends ObjectBehavior
         $this->getParameters()->shouldHaveType(Collection::class);
     }
 
-    function its_schema_is_null_by_default()
+    function its_schema_alias_is_null_by_default()
     {
-        $this->getSchema()->shouldReturn(null);
+        $this->getSchemaAlias()->shouldReturn(null);
     }
 
     function its_schema_should_be_immutable_after_it_is_set()
     {
-        $this->setSchema('theme');
-        $this->getSchema()->shouldReturn('theme');
+        $this->setSchemaAlias('theme');
+        $this->getSchemaAlias()->shouldReturn('theme');
         $this
-            ->shouldThrow(new \LogicException('A settings schema is immutable, you have to define a new "Setting" object to use another schema.'))
-            ->during('setSchema', ['i_dont_like_to_be_changed'])
+            ->shouldThrow(new \LogicException('The schema alias of the settings model is immutable, instantiate a new object in order to use another schema.'))
+            ->during('setSchemaAlias', ['i_dont_like_to_be_changed'])
         ;
     }
 
@@ -82,7 +82,6 @@ class SettingsSpec extends ObjectBehavior
         ;
 
         $parameter->getName()
-            ->shouldBeCalled()
             ->willReturn('title')
         ;
 

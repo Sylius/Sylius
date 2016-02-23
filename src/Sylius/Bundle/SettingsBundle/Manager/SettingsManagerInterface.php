@@ -20,11 +20,11 @@ use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 interface SettingsManagerInterface
 {
     /**
-     * @param string $schema
+     * @param string $schemaAlias
      *
      * @return ParameterCollection
      */
-    public function load($schema);
+    public function load($schemaAlias);
 
     /**
      * @param ParameterCollection $parameters

@@ -22,12 +22,12 @@ interface SettingsInterface extends ResourceInterface
     /**
      * @return string
      */
-    public function getSchema();
+    public function getSchemaAlias();
 
     /**
-     * @param string $schema
+     * @param string $schemaAlias
      */
-    public function setSchema($schema);
+    public function setSchemaAlias($schemaAlias);
 
     /**
      * @return Collection|ParameterInterface[]

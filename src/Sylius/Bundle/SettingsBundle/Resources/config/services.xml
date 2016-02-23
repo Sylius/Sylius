@@ -20,44 +20,48 @@
         <parameter key="sylius.controller.settings.class">Sylius\Bundle\SettingsBundle\Controller\SettingsController</parameter>
         <parameter key="sylius.settings.form_factory.class">Sylius\Bundle\SettingsBundle\Form\Factory\SettingsFormFactory</parameter>
         <parameter key="sylius.settings.manager.class">Sylius\Bundle\SettingsBundle\Manager\SettingsManager</parameter>
-        <parameter key="sylius.settings.schema_registry.class">Sylius\Bundle\SettingsBundle\Schema\SchemaRegistry</parameter>
-        <parameter key="sylius.settings.resolver.default.class">Sylius\Bundle\SettingsBundle\Resolver\DefaultResolver</parameter>
+        <parameter key="sylius.settings.schema_registry.class">Sylius\Component\Registry\ServiceRegistry</parameter>
+        <parameter key="sylius.settings.schema_interface">Sylius\Bundle\SettingsBundle\Schema\SchemaInterface</parameter>
         <parameter key="sylius.settings.resolver_registry.class">Sylius\Component\Registry\ServiceRegistry</parameter>
+        <parameter key="sylius.settings.resolver_interface">Sylius\Bundle\SettingsBundle\Resolver\SettingsResolverInterface</parameter>
+        <parameter key="sylius.settings.resolver.default.class">Sylius\Bundle\SettingsBundle\Resolver\DefaultSettingsResolver</parameter>
     </parameters>
 
     <services>
         <service id="sylius.controller.settings" class="%sylius.controller.settings.class%">
             <call method="setContainer">
-                <argument type="service" id="service_container"/>
+                <argument type="service" id="service_container" />
             </call>
         </service>
 
         <service id="sylius.settings.form_factory" class="%sylius.settings.form_factory.class%">
-            <argument type="service" id="sylius.settings.schema_registry"/>
-            <argument type="service" id="form.factory"/>
+            <argument type="service" id="sylius.settings.schema_registry" />
+            <argument type="service" id="form.factory" />
         </service>
 
-        <service id="sylius.settings.cache" alias="doctrine_cache.providers.sylius_settings"/>
+        <service id="sylius.settings.cache" alias="doctrine_cache.providers.sylius_settings" />
 
         <service id="sylius.settings.manager" class="%sylius.settings.manager.class%" lazy="true">
-            <argument type="service" id="sylius.settings.schema_registry"/>
-            <argument type="service" id="sylius.settings.resolver_registry"/>
-            <argument type="service" id="sylius.manager.settings"/>
-            <argument type="service" id="sylius.factory.settings"/>
-            <argument type="service" id="sylius.factory.parameter"/>
-            <argument type="service" id="sylius.settings.resolver.default"/>
-            <argument type="service" id="validator"/>
-            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="sylius.settings.schema_registry" />
+            <argument type="service" id="sylius.settings.resolver_registry" />
+            <argument type="service" id="sylius.manager.settings" />
+            <argument type="service" id="sylius.factory.settings" />
+            <argument type="service" id="sylius.factory.parameter" />
+            <argument type="service" id="sylius.settings.resolver.default" />
+            <argument type="service" id="validator" />
+            <argument type="service" id="event_dispatcher" />
         </service>
 
-        <service id="sylius.settings.schema_registry" class="%sylius.settings.schema_registry.class%"/>
+        <service id="sylius.settings.schema_registry" class="%sylius.settings.schema_registry.class%">
+            <argument>%sylius.settings.schema_interface%</argument>
+        </service>
 
         <service id="sylius.settings.resolver_registry" class="%sylius.settings.resolver_registry.class%">
-            <argument>Sylius\Bundle\SettingsBundle\Resolver\SettingsResolverInterface</argument>
+            <argument>%sylius.settings.resolver_interface%</argument>
         </service>
 
         <service id="sylius.settings.resolver.default" class="%sylius.settings.resolver.default.class%">
-            <argument type="service" id="sylius.repository.settings"/>
+            <argument type="service" id="sylius.repository.settings" />
         </service>
     </services>
 

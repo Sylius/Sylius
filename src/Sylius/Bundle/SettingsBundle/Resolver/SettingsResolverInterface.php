@@ -19,11 +19,11 @@ use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 interface SettingsResolverInterface
 {
     /**
-     * Resolves settings based on schema.
+     * Resolves settings based on schema alias.
      *
-     * @param string $schema
+     * @param string $schemaAlias
      *
      * @return SettingsInterface
      */
-    public function resolve($schema);
+    public function resolve($schemaAlias);
 }

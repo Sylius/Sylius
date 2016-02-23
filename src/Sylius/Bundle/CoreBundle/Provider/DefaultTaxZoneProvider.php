@@ -37,10 +37,6 @@ class DefaultTaxZoneProvider implements ZoneProviderInterface
      */
     public function getZone()
     {
-        if ($zone = $this->settings->get('default_tax_zone')) {
-            return $zone;
-        }
-
-        return null;
+        return $this->settings->get('default_tax_zone');
     }
 }

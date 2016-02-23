@@ -15,9 +15,11 @@ use Doctrine\ORM\NonUniqueResultException;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
+ * Default implementation that resolves settings in the simplest way possible. It tries to find a schema by it's name.
+ *
  * @author Steffen Brem <steffenbrem@gmail.com>
  */
-class DefaultResolver implements SettingsResolverInterface
+class DefaultSettingsResolver implements SettingsResolverInterface
 {
     /**
      * @var RepositoryInterface
@@ -32,14 +34,14 @@ class DefaultResolver implements SettingsResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function resolve($schema)
+    public function resolve($schemaAlias)
     {
         try {
             return $this->settingRepository->findOneBy([
-                'schema' => $schema
+                'schemaAlias' => $schemaAlias
             ]);
         } catch (NonUniqueResultException $e) {
-            throw new \LogicException(sprintf('Multiple schemas found for "%s". You should probably define a custom settings resolver for this schema.', $schema));
+            throw new \LogicException(sprintf('Multiple schemas found for "%s". You should probably define a custom settings resolver for this schema.', $schemaAlias));
         }
     }
 }

@@ -36,11 +36,11 @@ class SettingsController extends FOSRestController
      */
     public function showAction(Request $request)
     {
-        $schema = $request->get('namespace');
+        $schemaAlias = $request->get('schema');
 
-        $this->isGrantedOr403($schema);
+        $this->isGrantedOr403($schemaAlias);
 
-        $settings = $this->getSettingsManager()->load($schema);
+        $settings = $this->getSettingsManager()->load($schemaAlias);
 
         $view = $this
             ->view()
@@ -52,29 +52,29 @@ class SettingsController extends FOSRestController
 
     /**
      * @param Request $request
-     * @param string  $schema
      *
      * @return Response
      */
-    public function updateAction(Request $request, $schema)
+    public function updateAction(Request $request)
     {
-        $this->isGrantedOr403($schema);
+        $schemaAlias = $request->get('schema');
 
-        $manager = $this->getSettingsManager();
+        $this->isGrantedOr403($schemaAlias);
 
-        $settings = $manager->load($schema);
+        $settingsManager = $this->getSettingsManager();
+        $settings = $settingsManager->load($schemaAlias);
 
         $isApiRequest = $this->isApiRequest($request);
 
         $form = $this
             ->getSettingsFormFactory()
-            ->create($schema, $settings, $isApiRequest ? ['csrf_protection' => false] : [])
+            ->create($schemaAlias, $settings, $isApiRequest ? ['csrf_protection' => false] : [])
         ;
 
         if ($form->handleRequest($request)->isValid()) {
             $messageType = 'success';
             try {
-                $manager->save($settings);
+                $settingsManager->save($settings);
                 $message = $this->getTranslator()->trans('sylius.settings.update', [], 'flashes');
             } catch (ValidatorException $exception) {
                 $message = $this->getTranslator()->trans($exception->getMessage(), [], 'validators');
@@ -125,17 +125,17 @@ class SettingsController extends FOSRestController
     /**
      * Check that user can change given schema.
      *
-     * @param string $schema
+     * @param string $schemaAlias
      *
      * @return bool
      */
-    protected function isGrantedOr403($schema)
+    protected function isGrantedOr403($schemaAlias)
     {
         if (!$this->container->has('sylius.authorization_checker')) {
             return true;
         }
 
-        if (!$this->get('sylius.authorization_checker')->isGranted(sprintf('sylius.settings.%s', $schema))) {
+        if (!$this->get('sylius.authorization_checker')->isGranted(sprintf('sylius.settings.%s', $schemaAlias))) {
             throw new AccessDeniedException();
         }
     }

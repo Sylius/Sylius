@@ -33,7 +33,7 @@ class RegisterResolversPass implements CompilerPassInterface
 
         foreach ($container->findTaggedServiceIds('sylius.settings_resolver') as $id => $tags) {
             foreach ($tags as $attributes) {
-                if (!array_key_exists('schema', $attributes)) {
+                if (!isset($attributes['schema'])) {
                     throw new \InvalidArgumentException(sprintf('Service "%s" must define the "schema" attribute on "sylius.settings_resolver" tags.', $id));
                 }
 

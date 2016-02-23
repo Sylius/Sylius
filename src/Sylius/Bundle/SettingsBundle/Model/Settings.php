@@ -1,9 +1,17 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sylius\Bundle\SettingsBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 
 /**
  * @author Steffen Brem <steffenbrem@gmail.com>
@@ -18,7 +26,7 @@ class Settings implements SettingsInterface
     /**
      * @var string
      */
-    protected $schema;
+    protected $schemaAlias;
 
     /**
      * @var ArrayCollection|ParameterInterface[]
@@ -41,21 +49,21 @@ class Settings implements SettingsInterface
     /**
      * {@inheritdoc}
      */
-    public function getSchema()
+    public function getSchemaAlias()
     {
-        return $this->schema;
+        return $this->schemaAlias;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setSchema($schema)
+    public function setSchemaAlias($schemaAlias)
     {
-        if (null !== $this->schema) {
-            throw new \LogicException('A settings schema is immutable, you have to define a new "Setting" object to use another schema.');
+        if (null !== $this->schemaAlias) {
+            throw new \LogicException('The schema alias of the settings model is immutable, instantiate a new object in order to use another schema.');
         }
 
-        $this->schema = $schema;
+        $this->schemaAlias = $schemaAlias;
     }
 
     /**

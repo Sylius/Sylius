@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\SettingsBundle\Form\Factory;
 
-use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 
 /**
@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 class SettingsFormFactory implements SettingsFormFactoryInterface
 {
     /**
-     * @var SchemaRegistryInterface
+     * @var ServiceRegistryInterface
      */
     protected $schemaRegistry;
 
@@ -30,10 +30,10 @@ class SettingsFormFactory implements SettingsFormFactoryInterface
     protected $formFactory;
 
     /**
-     * @param SchemaRegistryInterface $schemaRegistry
+     * @param ServiceRegistryInterface $schemaRegistry
      * @param FormFactoryInterface    $formFactory
      */
-    public function __construct(SchemaRegistryInterface $schemaRegistry, FormFactoryInterface $formFactory)
+    public function __construct(ServiceRegistryInterface $schemaRegistry, FormFactoryInterface $formFactory)
     {
         $this->schemaRegistry = $schemaRegistry;
         $this->formFactory = $formFactory;
@@ -44,7 +44,7 @@ class SettingsFormFactory implements SettingsFormFactoryInterface
      */
     public function create($schemaAlias, $data = null, array $options = [])
     {
-        $schema = $this->schemaRegistry->getSchema($schemaAlias);
+        $schema = $this->schemaRegistry->get($schemaAlias);
         $builder = $this->formFactory->createBuilder('form', $data, array_merge_recursive(
             ['data_class' => null], $options
         ));

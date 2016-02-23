@@ -16,7 +16,6 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Sylius\Bundle\SettingsBundle\Resolver\SettingsResolverInterface;
-use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -28,7 +27,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class SettingsManagerSpec extends ObjectBehavior
 {
     function let(
-        SchemaRegistryInterface $registry,
+        ServiceRegistryInterface $registry,
         ServiceRegistryInterface $resolverRegistry,
         ObjectManager $settingsManager,
         FactoryInterface $settingsfactory,
