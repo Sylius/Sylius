@@ -18,7 +18,7 @@
             <generator strategy="AUTO"/>
         </id>
 
-        <field name="schema" column="schema_name" type="string" nullable="false"/>
+        <field name="schemaAlias" column="schema_alias" type="string" nullable="false"/>
 
         <one-to-many target-entity="Sylius\Bundle\SettingsBundle\Model\ParameterInterface" mapped-by="settings"
                      field="parameters" index-by="name" fetch="EAGER">
