@@ -16,6 +16,7 @@ default:
                 - sylius.behat.context.setup.shipping
                 - sylius.behat.context.setup.zone
                 - sylius.behat.context.setup.lexical
+                - sylius.behat.context.setup.shared_storage
 
                 - sylius.behat.context.ui.checkout
                 - sylius.behat.context.ui.cart

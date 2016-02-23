@@ -88,7 +88,7 @@ class PromotionContextSpec extends ObjectBehavior
 
         $objectManager->flush()->shouldBeCalled();
 
-        $this->itGivesFixedDiscountToEveryOrder('10.00');
+        $this->itGivesFixedDiscountToEveryOrder(1000);
     }
 
     function it_creates_percentage_discount_action_for_promotion(
@@ -105,7 +105,7 @@ class PromotionContextSpec extends ObjectBehavior
 
         $objectManager->flush()->shouldBeCalled();
 
-        $this->itGivesPercentageDiscountToEveryOrder('10');
+        $this->itGivesPercentageDiscountToEveryOrder(0.1);
     }
 
     function it_creates_fixed_discount_promotion_for_cart_with_specified_quantity(
@@ -127,7 +127,7 @@ class PromotionContextSpec extends ObjectBehavior
 
         $objectManager->flush()->shouldBeCalled();
 
-        $this->itGivesFixedDiscountToEveryOrderWithQuantityAtLeast('10.00', '5');
+        $this->itGivesFixedDiscountToEveryOrderWithQuantityAtLeast(1000, '5');
     }
 
     function it_creates_fixed_discount_promotion_for_cart_with_specified_item_total(

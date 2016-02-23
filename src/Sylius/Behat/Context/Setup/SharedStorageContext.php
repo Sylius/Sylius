@@ -39,4 +39,12 @@ class SharedStorageContext implements Context
     {
         return $this->sharedStorage->getLatestResource();
     }
+
+    /**
+     * @Transform /^(this|that|the) ([^"]+)$/
+     */
+    public function getResource($resource)
+    {
+        return $this->sharedStorage->get($resource);
+    }
 }

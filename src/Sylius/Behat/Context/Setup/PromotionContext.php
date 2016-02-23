@@ -105,26 +105,26 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @Given /^(?:it|the promotion) gives "([^"]+)%" percentage discount to every order$/
+     * @Given /^(?:it|the promotion) gives ("[^"]+") percentage discount to every order$/
      */
     public function itGivesPercentageDiscountToEveryOrder($discount)
     {
         $currentPromotion = $this->sharedStorage->get('promotion');
 
-        $action = $this->actionFactory->createPercentageDiscount($this->getPercentageFromString($discount));
+        $action = $this->actionFactory->createPercentageDiscount($discount);
         $currentPromotion->addAction($action);
 
         $this->objectManager->flush();
     }
 
     /**
-     * @Given /^(?:it|the promotion) gives "(?:€|£|\$)([^"]+)" fixed discount to every order with quantity at least ([^"]+)$/
+     * @Given /^(?:it|the promotion) gives ("[^"]+") fixed discount to every order with quantity at least ([^"]+)$/
      */
     public function itGivesFixedDiscountToEveryOrderWithQuantityAtLeast($amount, $quantity)
     {
         $currentPromotion = $this->sharedStorage->get('promotion');
 
-        $action = $this->actionFactory->createFixedDiscount($this->getPriceFromString($amount));
+        $action = $this->actionFactory->createFixedDiscount($amount);
         $currentPromotion->addAction($action);
 
         $rule = $this->ruleFactory->createCartQuantity((int) $quantity);
@@ -170,15 +170,5 @@ final class PromotionContext implements Context
     private function getPriceFromString($price)
     {
         return (int) round(($price * 100), 2);
-    }
-
-    /**
-     * @param string $discount
-     *
-     * @return float
-     */
-    private function getPercentageFromString($discount)
-    {
-        return ((int) $discount) / 100;
     }
 }
