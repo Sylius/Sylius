@@ -40,6 +40,8 @@
         <parameter key="sylius.behat.context.ui.product.class">Sylius\Behat\Context\Ui\ProductContext</parameter>
         <parameter key="sylius.behat.context.ui.paypal.class">Sylius\Behat\Context\Ui\PaypalContext</parameter>
         <parameter key="sylius.behat.context.ui.customer.class">Sylius\Behat\Context\Ui\CustomerContext</parameter>
+
+        <parameter key="sylius.behat.context.domain.order.class">Sylius\Behat\Context\Domain\OrderContext</parameter>
     </parameters>
     <services>
         <service id="sylius.behat.context.setup.channel" class="%sylius.behat.context.setup.channel.class%" scope="scenario">
@@ -218,6 +220,11 @@
         <service id="sylius.behat.context.ui.customer" class="%sylius.behat.context.ui.customer.class%" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.behat.page.customer_show" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.domain.order" class="%sylius.behat.context.domain.order.class%" scope="scenario">
+            <argument type="service" id="sylius.repository.order" container="symfony"/>
             <tag name="sylius.behat.context" />
         </service>
     </services>
