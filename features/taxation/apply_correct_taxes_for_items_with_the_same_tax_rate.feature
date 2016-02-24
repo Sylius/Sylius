@@ -9,9 +9,9 @@ Feature: Apply correct taxes for items with the same tax rate
         And default tax zone is "FR"
         And the store has "VAT" tax rate of 23% for "Clothes" within "FR" zone
         And the store has a product "PHP T-Shirt" priced at "€100.00"
+        And it belongs to "Clothes" tax category
         And the store has a product "Symfony Hat" priced at "€30.00"
-        And product "PHP T-Shirt" belongs to "Clothes" tax category
-        And product "Symfony Hat" belongs to "Clothes" tax category
+        And it belongs to "Clothes" tax category
 
     @ui
     Scenario: Proper taxes for taxed product

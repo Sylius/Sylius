@@ -75,20 +75,17 @@ class PromotionContextSpec extends ObjectBehavior
     }
 
     function it_creates_fixed_discount_action_for_promotion(
-        $sharedStorage,
         $actionFactory,
         $objectManager,
         ActionInterface $action,
         PromotionInterface $promotion
     ) {
-        $sharedStorage->get('promotion')->willReturn($promotion);
-
         $actionFactory->createFixedDiscount(1000)->willReturn($action);
         $promotion->addAction($action)->shouldBeCalled();
 
         $objectManager->flush()->shouldBeCalled();
 
-        $this->itGivesFixedDiscountToEveryOrder('10.00');
+        $this->itGivesFixedDiscountToEveryOrder($promotion, 1000);
     }
 
     function it_creates_percentage_discount_action_for_promotion(
@@ -105,7 +102,7 @@ class PromotionContextSpec extends ObjectBehavior
 
         $objectManager->flush()->shouldBeCalled();
 
-        $this->itGivesPercentageDiscountToEveryOrder('10');
+        $this->itGivesPercentageDiscountToEveryOrder($promotion, 0.1);
     }
 
     function it_creates_fixed_discount_promotion_for_cart_with_specified_quantity(
@@ -127,11 +124,10 @@ class PromotionContextSpec extends ObjectBehavior
 
         $objectManager->flush()->shouldBeCalled();
 
-        $this->itGivesFixedDiscountToEveryOrderWithQuantityAtLeast('10.00', '5');
+        $this->itGivesFixedDiscountToEveryOrderWithQuantityAtLeast($promotion, 1000, '5');
     }
 
     function it_creates_fixed_discount_promotion_for_cart_with_specified_item_total(
-        $sharedStorage,
         $actionFactory,
         $ruleFactory,
         $objectManager,
@@ -139,8 +135,6 @@ class PromotionContextSpec extends ObjectBehavior
         RuleInterface $rule,
         PromotionInterface $promotion
     ) {
-        $sharedStorage->get('promotion')->willReturn($promotion);
-
         $actionFactory->createFixedDiscount(1000)->willReturn($action);
         $promotion->addAction($action)->shouldBeCalled();
 
@@ -149,23 +143,20 @@ class PromotionContextSpec extends ObjectBehavior
 
         $objectManager->flush()->shouldBeCalled();
 
-        $this->itGivesFixedDiscountToEveryOrderWithItemsTotalAtLeast('10.00', '50.00');
+        $this->itGivesFixedDiscountToEveryOrderWithItemsTotalAtLeast($promotion, 1000, 5000);
     }
 
     function it_creates_percentage_shipping_discount_action_for_promotion(
-        $sharedStorage,
         $actionFactory,
         $objectManager,
         ActionInterface $action,
         PromotionInterface $promotion
     ) {
-        $sharedStorage->get('promotion')->willReturn($promotion);
-
         $actionFactory->createPercentageShippingDiscount(0.1)->willReturn($action);
         $promotion->addAction($action)->shouldBeCalled();
 
         $objectManager->flush()->shouldBeCalled();
 
-        $this->itGivesPercentageDiscountOnShippingToEveryOrder('10');
+        $this->itGivesPercentageDiscountOnShippingToEveryOrder($promotion, 0.1);
     }
 }

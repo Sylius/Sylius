@@ -10,11 +10,11 @@ Feature: Round taxes on order item level
         And the store has "EU VAT" tax rate of 23% for "Clothes" within "FR" zone
         And the store has "Low VAT" tax rate of 10% for "Mugs" within "FR" zone
         And the store has a product "PHP T-Shirt" priced at "€10.10"
+        And it belongs to "Clothes" tax category
         And the store has a product "Symfony Mug" priced at "€45.95"
+        And it belongs to "Mugs" tax category
         And the store has a product "PHP Mug" priced at "€45.94"
-        And product "PHP T-Shirt" belongs to "Clothes" tax category
-        And product "Symfony Mug" belongs to "Mugs" tax category
-        And product "PHP Mug" belongs to "Mugs" tax category
+        And it belongs to "Mugs" tax category
 
     @ui
     Scenario: Properly rounded up tax for single product

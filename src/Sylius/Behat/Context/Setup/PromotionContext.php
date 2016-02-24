@@ -14,6 +14,7 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Core\Factory\RuleFactoryInterface;
+use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Test\Factory\TestPromotionFactoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Promotion\Factory\ActionFactoryInterface;
@@ -92,93 +93,66 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @Given /^(?:it|the promotion) gives "(?:€|£|\$)([^"]+)" fixed discount to every order$/
+     * @Given /^([^"]+) gives ("[^"]+") fixed discount to every order$/
      */
-    public function itGivesFixedDiscountToEveryOrder($amount)
+    public function itGivesFixedDiscountToEveryOrder(PromotionInterface $promotion, $amount)
     {
-        $currentPromotion = $this->sharedStorage->get('promotion');
-
-        $action = $this->actionFactory->createFixedDiscount($this->getPriceFromString($amount));
-        $currentPromotion->addAction($action);
+        $action = $this->actionFactory->createFixedDiscount($amount);
+        $promotion->addAction($action);
 
         $this->objectManager->flush();
     }
 
     /**
-     * @Given /^(?:it|the promotion) gives "([^"]+)%" percentage discount to every order$/
+     * @Given /^([^"]+) gives ("[^"]+") percentage discount to every order$/
      */
-    public function itGivesPercentageDiscountToEveryOrder($discount)
+    public function itGivesPercentageDiscountToEveryOrder(PromotionInterface $promotion, $discount)
     {
-        $currentPromotion = $this->sharedStorage->get('promotion');
-
-        $action = $this->actionFactory->createPercentageDiscount($this->getPercentageFromString($discount));
-        $currentPromotion->addAction($action);
+        $action = $this->actionFactory->createPercentageDiscount($discount);
+        $promotion->addAction($action);
 
         $this->objectManager->flush();
     }
 
     /**
-     * @Given /^(?:it|the promotion) gives "(?:€|£|\$)([^"]+)" fixed discount to every order with quantity at least ([^"]+)$/
+     * @Given /^([^"]+) gives ("[^"]+") fixed discount to every order with quantity at least ([^"]+)$/
      */
-    public function itGivesFixedDiscountToEveryOrderWithQuantityAtLeast($amount, $quantity)
+    public function itGivesFixedDiscountToEveryOrderWithQuantityAtLeast(PromotionInterface $promotion, $amount, $quantity)
     {
-        $currentPromotion = $this->sharedStorage->get('promotion');
-
-        $action = $this->actionFactory->createFixedDiscount($this->getPriceFromString($amount));
-        $currentPromotion->addAction($action);
+        $action = $this->actionFactory->createFixedDiscount($amount);
+        $promotion->addAction($action);
 
         $rule = $this->ruleFactory->createCartQuantity((int) $quantity);
-        $currentPromotion->addRule($rule);
+        $promotion->addRule($rule);
 
         $this->objectManager->flush();
     }
 
     /**
-     * @Given /^(?:it|the promotion) gives "(?:€|£|\$)([^"]+)" fixed discount to every order with items total at least "(?:€|£|\$)([^"]+)"$/
+     * @Given /^([^"]+) gives ("[^"]+") fixed discount to every order with items total at least ("[^"]+")$/
      */
-    public function itGivesFixedDiscountToEveryOrderWithItemsTotalAtLeast($amount, $targetAmount)
-    {
-        $currentPromotion = $this->sharedStorage->get('promotion');
+    public function itGivesFixedDiscountToEveryOrderWithItemsTotalAtLeast(
+        PromotionInterface $promotion,
+        $amount,
+        $targetAmount
+    ) {
+        $action = $this->actionFactory->createFixedDiscount($amount);
+        $promotion->addAction($action);
 
-        $action = $this->actionFactory->createFixedDiscount($this->getPriceFromString($amount));
-        $currentPromotion->addAction($action);
-
-        $rule = $this->ruleFactory->createItemTotal($this->getPriceFromString($targetAmount));
-        $currentPromotion->addRule($rule);
+        $rule = $this->ruleFactory->createItemTotal($targetAmount);
+        $promotion->addRule($rule);
 
         $this->objectManager->flush();
     }
 
     /**
-     * @Given /^(?:it|the promotion) gives "([^"]+)%" percentage discount on shipping to every order$/
+     * @Given /^([^"]+) gives ("[^"]+") percentage discount on shipping to every order$/
      */
-    public function itGivesPercentageDiscountOnShippingToEveryOrder($discount)
+    public function itGivesPercentageDiscountOnShippingToEveryOrder(PromotionInterface $promotion, $discount)
     {
-        $currentPromotion = $this->sharedStorage->get('promotion');
-
-        $action = $this->actionFactory->createPercentageShippingDiscount($this->getPercentageFromString($discount));
-        $currentPromotion->addAction($action);
+        $action = $this->actionFactory->createPercentageShippingDiscount($discount);
+        $promotion->addAction($action);
 
         $this->objectManager->flush();
-    }
-
-    /**
-     * @param string $price
-     *
-     * @return int
-     */
-    private function getPriceFromString($price)
-    {
-        return (int) round(($price * 100), 2);
-    }
-
-    /**
-     * @param string $discount
-     *
-     * @return float
-     */
-    private function getPercentageFromString($discount)
-    {
-        return ((int) $discount) / 100;
     }
 }

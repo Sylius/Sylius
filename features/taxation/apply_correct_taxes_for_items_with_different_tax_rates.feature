@@ -10,9 +10,9 @@ Feature: Apply correct taxes for items with different tax rates
         And the store has "VAT" tax rate of 23% for "Clothes" within "FR" zone
         And the store has "Low VAT" tax rate of 5% for "Mugs" within "FR" zone
         And the store has a product "PHP T-Shirt" priced at "€100.00"
-        And product "PHP T-Shirt" belongs to "Clothes" tax category
+        And it belongs to "Clothes" tax category
         And the store has a product "Symfony Mug" priced at "€50.00"
-        And product "Symfony Mug" belongs to "Mugs" tax category
+        And it belongs to "Mugs" tax category
 
     @ui
     Scenario: Proper taxes for different taxed products

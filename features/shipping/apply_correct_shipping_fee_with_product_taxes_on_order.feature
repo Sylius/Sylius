@@ -16,7 +16,7 @@ Feature: Apply correct shipping fee with product taxes on order
         And the store has "EU Shipping VAT" tax rate of 23% for "Shipping Services" within "EU" zone
         And the store has "Low Shipping VAT" tax rate of 10% for "Shipping Services" for the rest of the world
         And the store has a product "PHP T-Shirt" priced at "€100.00"
-        And product "PHP T-Shirt" belongs to "Clothes" tax category
+        And it belongs to "Clothes" tax category
         And the store has "DHL" shipping method with "€10.00" fee within "EU" zone
         And the store has "FedEx" shipping method with "€20.00" fee for the rest of the world
         And shipping method "DHL" belongs to "Shipping Services" tax category

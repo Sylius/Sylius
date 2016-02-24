@@ -99,7 +99,7 @@ class ShippingContextSpec extends ObjectBehavior
 
         $shippingMethodRepository->add($shippingMethod)->shouldBeCalled();
 
-        $this->storeHasShippingMethodWithFee('Test shipping method', '10.00');
+        $this->storeHasShippingMethodWithFee('Test shipping method', 1000);
     }
 
     function it_configures_store_to_ship_everything_for_free_in_every_available_zone(

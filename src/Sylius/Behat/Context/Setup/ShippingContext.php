@@ -106,13 +106,13 @@ final class ShippingContext implements Context
     }
 
     /**
-     * @Given /^the store has "([^"]*)" shipping method with "(?:€|£|\$)([^"]*)" fee$/
-     * @Given /^the store has "([^"]*)" shipping method with "(?:€|£|\$)([^"]*)" fee within ("([^"]*)" zone)$/
-     * @Given /^the store has "([^"]*)" shipping method with "(?:€|£|\$)([^"]*)" fee for (the rest of the world)$/
+     * @Given /^the store has "([^"]*)" shipping method with ("[^"]+") fee$/
+     * @Given /^the store has "([^"]*)" shipping method with ("[^"]+") fee within ("([^"]*)" zone)$/
+     * @Given /^the store has "([^"]*)" shipping method with ("[^"]+") fee for (the rest of the world)$/
      */
     public function storeHasShippingMethodWithFee($shippingMethodName, $fee, ZoneInterface $zone = null)
     {
-        $this->createShippingMethod($shippingMethodName, $zone, 'en', ['amount' => $this->getFeeFromString($fee)]);
+        $this->createShippingMethod($shippingMethodName, $zone, 'en', ['amount' => $fee]);
     }
 
     /**
@@ -162,15 +162,5 @@ final class ShippingContext implements Context
     private function generateCodeFromNameAndZone($shippingMethodName, $zoneCode = null)
     {
         return str_replace([' ', '-'], '_', strtolower($shippingMethodName)).'_'.strtolower($zoneCode);
-    }
-
-    /**
-     * @param string $shippingMethodFee
-     *
-     * @return string
-     */
-    private function getFeeFromString($shippingMethodFee)
-    {
-        return ((int) $shippingMethodFee) * 100;
     }
 }
