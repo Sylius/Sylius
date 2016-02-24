@@ -38,5 +38,5 @@ interface ActionFactoryInterface extends FactoryInterface
      *
      * @return ActionInterface
      */
-    public function createShippingDiscount($percentage);
+    public function createPercentageShippingDiscount($percentage);
 }

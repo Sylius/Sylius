@@ -152,7 +152,7 @@ class PromotionContextSpec extends ObjectBehavior
         $this->itGivesFixedDiscountToEveryOrderWithItemsTotalAtLeast('10.00', '50.00');
     }
 
-    function it_creates_shipping_discount_action_for_promotion(
+    function it_creates_percentage_shipping_discount_action_for_promotion(
         $sharedStorage,
         $actionFactory,
         $objectManager,
@@ -161,7 +161,7 @@ class PromotionContextSpec extends ObjectBehavior
     ) {
         $sharedStorage->get('promotion')->willReturn($promotion);
 
-        $actionFactory->createShippingDiscount(0.1)->willReturn($action);
+        $actionFactory->createPercentageShippingDiscount(0.1)->willReturn($action);
         $promotion->addAction($action)->shouldBeCalled();
 
         $objectManager->flush()->shouldBeCalled();

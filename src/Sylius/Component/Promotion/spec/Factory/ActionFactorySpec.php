@@ -70,6 +70,6 @@ class ActionFactorySpec extends ObjectBehavior
         $action->setType('shipping_discount')->shouldBeCalled();
         $action->setConfiguration(['percentage' => 0.1])->shouldBeCalled();
 
-        $this->createShippingDiscount(0.1)->shouldReturn($action);
+        $this->createPercentageShippingDiscount(0.1)->shouldReturn($action);
     }
 }

@@ -67,7 +67,7 @@ class ActionFactory implements ActionFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createShippingDiscount($percentage)
+    public function createPercentageShippingDiscount($percentage)
     {
         $action = $this->createNew();
         $action->setType('shipping_discount');

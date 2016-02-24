@@ -156,7 +156,7 @@ final class PromotionContext implements Context
     {
         $currentPromotion = $this->sharedStorage->get('promotion');
 
-        $action = $this->actionFactory->createShippingDiscount($this->getPercentageFromString($discount));
+        $action = $this->actionFactory->createPercentageShippingDiscount($this->getPercentageFromString($discount));
         $currentPromotion->addAction($action);
 
         $this->objectManager->flush();
