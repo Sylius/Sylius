@@ -27,7 +27,7 @@ final class TranslatorResourceProviderPass implements CompilerPassInterface
     {
         try {
             $symfonyTranslator = $container->findDefinition('translator.default');
-            $syliusResourceProvider = $container->findDefinition('sylius.theme.translation.resource_provider');
+            $syliusResourceProvider = $container->findDefinition('sylius.theme.translation.resource_provider.default');
         } catch (\InvalidArgumentException $exception) {
             return;
         }

@@ -16,7 +16,9 @@
         <parameter key="sylius.theme.translation.translator.class">Sylius\Bundle\ThemeBundle\Translation\Translator</parameter>
         <parameter key="sylius.theme.translation.theme_aware_translator.class">Sylius\Bundle\ThemeBundle\Translation\ThemeAwareTranslator</parameter>
         <parameter key="sylius.theme.translation.loader_provider.class">Sylius\Bundle\ThemeBundle\Translation\Provider\TranslatorLoaderProvider</parameter>
-        <parameter key="sylius.theme.translation.resource_provider.class">Sylius\Bundle\ThemeBundle\Translation\Provider\TranslatorResourceProvider</parameter>
+        <parameter key="sylius.theme.translation.resource_provider.class">Sylius\Bundle\ThemeBundle\Translation\Provider\CompositeTranslatorResourceProvider</parameter>
+        <parameter key="sylius.theme.translation.resource_provider.default.class">Sylius\Bundle\ThemeBundle\Translation\Provider\TranslatorResourceProvider</parameter>
+        <parameter key="sylius.theme.translation.resource_provider.theme_aware.class">Sylius\Bundle\ThemeBundle\Translation\Provider\ThemeTranslatorResourceProvider</parameter>
         <parameter key="sylius.theme.translation.files_finder.class">Sylius\Bundle\ThemeBundle\Translation\Finder\TranslationFilesFinder</parameter>
     </parameters>
 
@@ -42,7 +44,20 @@
         </service>
 
         <service id="sylius.theme.translation.resource_provider" class="%sylius.theme.translation.resource_provider.class%" public="false">
+            <argument type="collection">
+                <argument type="service" id="sylius.theme.translation.resource_provider.default" />
+                <argument type="service" id="sylius.theme.translation.resource_provider.theme_aware" />
+            </argument>
+        </service>
+
+        <service id="sylius.theme.translation.resource_provider.default" class="%sylius.theme.translation.resource_provider.default.class%" public="false">
             <argument type="collection" /> <!-- resources filepaths -->
+        </service>
+
+        <service id="sylius.theme.translation.resource_provider.theme_aware" class="%sylius.theme.translation.resource_provider.theme_aware.class%" public="false">
+            <argument type="service" id="sylius.theme.translation.files_finder" />
+            <argument type="service" id="sylius.repository.theme" />
+            <argument type="service" id="sylius.theme.hierarchy_provider" />
         </service>
 
         <service id="sylius.theme.translation.files_finder" class="%sylius.theme.translation.files_finder.class%" public="false">
