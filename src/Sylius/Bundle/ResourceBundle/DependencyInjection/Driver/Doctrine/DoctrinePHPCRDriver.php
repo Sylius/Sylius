@@ -44,15 +44,16 @@ class DoctrinePHPCRDriver extends AbstractDoctrineDriver
             $repositoryClass = $metadata->getClass('repository');
         }
 
+        $repositoryReflection = new \ReflectionClass($repositoryClass);
+
         $definition = new Definition($repositoryClass);
         $definition->setArguments([
             new Reference($metadata->getServiceId('manager')),
             $this->getClassMetadataDefinition($metadata),
         ]);
-        $definition->setLazy(true);
+        $definition->setLazy(!$repositoryReflection->isFinal());
 
         if ($metadata->hasParameter('translation')) {
-            $repositoryReflection = new \ReflectionClass($repositoryClass);
             $translatableRepositoryInterface = TranslatableResourceRepositoryInterface::class;
             $translationConfig = $metadata->getParameter('translation');
 

@@ -53,6 +53,8 @@ class DoctrineODMDriver extends AbstractDoctrineDriver
             $repositoryClass = $metadata->getClass('repository');
         }
 
+        $repositoryReflection = new \ReflectionClass($repositoryClass);
+
         $unitOfWorkDefinition = new Definition('Doctrine\\ODM\\MongoDB\\UnitOfWork');
         $unitOfWorkDefinition
             ->setFactory([new Reference($this->getManagerServiceId($metadata)), 'getUnitOfWork'])
@@ -65,7 +67,7 @@ class DoctrineODMDriver extends AbstractDoctrineDriver
             $unitOfWorkDefinition,
             $this->getClassMetadataDefinition($metadata),
         ]);
-        $definition->setLazy(true);
+        $definition->setLazy(!$repositoryReflection->isFinal());
 
         $container->setDefinition($metadata->getServiceId('repository'), $definition);
     }
