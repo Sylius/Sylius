@@ -13,7 +13,6 @@ namespace spec\Sylius\Bundle\ThemeBundle\Translation\Finder;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Factory\FinderFactoryInterface;
-use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Translation\Finder\TranslationFilesFinder;
 use Sylius\Bundle\ThemeBundle\Translation\Finder\TranslationFilesFinderInterface;
 use Symfony\Component\Finder\Finder;
@@ -42,11 +41,9 @@ class TranslationFilesFinderSpec extends ObjectBehavior
 
     function it_returns_an_array_of_translation_resources_paths(
         FinderFactoryInterface $finderFactory,
-        Finder $finder,
-        ThemeInterface $theme
+        Finder $finder
     ) {
         $finderFactory->create()->willReturn($finder);
-        $theme->getPath()->willReturn('/theme');
 
         $finder->in('/theme')->shouldBeCalled()->willReturn($finder);
         $finder->ignoreUnreadableDirs()->shouldBeCalled()->willReturn($finder);
@@ -59,7 +56,7 @@ class TranslationFilesFinderSpec extends ObjectBehavior
             '/theme/AcmeBundle/translations/messages.pl_PL.yml',
         ]));
 
-        $this->findTranslationFiles($theme)->shouldReturn([
+        $this->findTranslationFiles('/theme')->shouldReturn([
             '/theme/translations/messages.en.yml',
             '/theme/AcmeBundle/translations/messages.pl_PL.yml',
         ]);
