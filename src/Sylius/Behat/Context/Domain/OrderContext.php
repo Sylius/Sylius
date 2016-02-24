@@ -33,13 +33,20 @@ final class OrderContext implements Context
     private $orderItemRepository;
 
     /**
+     * @var RepositoryInterface
+     */
+    private $addressRepository;
+
+    /**
      * @param OrderRepositoryInterface $orderRepository
      * @param RepositoryInterface $orderItemRepository
+     * @param RepositoryInterface $addressRepository
      */
-    public function __construct(OrderRepositoryInterface $orderRepository, RepositoryInterface $orderItemRepository)
+    public function __construct(OrderRepositoryInterface $orderRepository, RepositoryInterface $orderItemRepository, RepositoryInterface $addressRepository)
     {
         $this->orderRepository = $orderRepository;
         $this->orderItemRepository = $orderItemRepository;
+        $this->addressRepository = $addressRepository;
     }
 
     /**
@@ -75,5 +82,20 @@ final class OrderContext implements Context
         $orderItems = $this->orderItemRepository->findBy(['variant' => $product->getMasterVariant()]);
 
         expect($orderItems)->toBe([]);
+    }
+
+    /**
+     * @Then /^billing and shipping addresses of ([^"]+) should not exist$/
+     */
+    public function addressesShouldNotExistInTheRegistry(OrderInterface $order)
+    {
+        $billingAddress = $order->getBillingAddress();
+        $shippingAddress = $order->getShippingAddress();
+
+        $billingAddress = $this->addressRepository->find($billingAddress->getId());
+        $shippingAddress = $this->addressRepository->find($shippingAddress->getId());
+
+        expect($billingAddress)->toBe(null);
+        expect($shippingAddress)->toBe(null);
     }
 }

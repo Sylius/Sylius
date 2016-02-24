@@ -294,6 +294,7 @@
         <service id="sylius.behat.context.domain.order" class="%sylius.behat.context.domain.order.class%" scope="scenario">
             <argument type="service" id="sylius.repository.order" container="symfony"/>
             <argument type="service" id="sylius.repository.order_item" container="symfony"/>
+            <argument type="service" id="sylius.repository.address" container="symfony"/>
             <tag name="sylius.behat.context" />
         </service>
 

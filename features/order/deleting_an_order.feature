@@ -38,7 +38,7 @@ Feature: Deleting an order
         When I delete the order "#00000022"
         Then adjustments of this order should not exist
 
-    @todo
+    @domain
     Scenario: Billing and shipping addresses are deleted with an order
         When I delete the order "#00000022"
         Then billing and shipping addresses of this order should not exist

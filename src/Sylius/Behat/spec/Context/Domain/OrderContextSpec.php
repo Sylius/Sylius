@@ -17,6 +17,7 @@ use Behat\Mink\Tests\Exception\ExpectationExceptionTest;
 use PhpSpec\Exception\Example\NotEqualException;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -29,9 +30,12 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class OrderContextSpec extends ObjectBehavior
 {
-    function let(OrderRepositoryInterface $orderRepository, RepositoryInterface $orderItemRepository)
-    {
-        $this->beConstructedWith($orderRepository, $orderItemRepository);
+    function let(
+        OrderRepositoryInterface $orderRepository,
+        RepositoryInterface $orderItemRepository,
+        RepositoryInterface $addressRepository
+    ) {
+        $this->beConstructedWith($orderRepository, $orderItemRepository, $addressRepository);
     }
 
     function it_is_initializable()
@@ -99,5 +103,59 @@ class OrderContextSpec extends ObjectBehavior
         $orderItemRepository->findBy(['variant' => $productVariant])->willReturn([$orderItem]);
 
         $this->shouldThrow(NotEqualException::class)->during('orderItemShouldNotExistInTheRegistry', [$product]);
+    }
+
+    function it_checks_if_an_order_addresses_exists_in_repository(
+        RepositoryInterface $addressRepository,
+        OrderInterface $order,
+        AddressInterface $shippingAddress,
+        AddressInterface $billingAddress
+    ) {
+        $order->getBillingAddress()->willReturn($billingAddress);
+        $order->getShippingAddress()->willReturn($shippingAddress);
+
+        $billingAddress->getId()->willReturn(1);
+        $shippingAddress->getId()->willReturn(2);
+
+        $addressRepository->find(1)->willReturn(null);
+        $addressRepository->find(2)->willReturn(null);
+
+        $this->addressesShouldNotExistInTheRegistry($order);
+    }
+
+    function it_throws_an_exception_if_shipping_addresses_still_exist(
+        RepositoryInterface $addressRepository,
+        OrderInterface $order,
+        AddressInterface $shippingAddress,
+        AddressInterface $billingAddress
+    ) {
+        $order->getBillingAddress()->willReturn($billingAddress);
+        $order->getShippingAddress()->willReturn($shippingAddress);
+
+        $billingAddress->getId()->willReturn(1);
+        $shippingAddress->getId()->willReturn(2);
+
+        $addressRepository->find(1)->willReturn(null);
+        $addressRepository->find(2)->willReturn($shippingAddress);
+
+        $this->shouldThrow(NotEqualException::class)->during('addressesShouldNotExistInTheRegistry', [$order]);
+    }
+
+    function it_throws_an_exception_if_billing_addresses_still_exist(
+        RepositoryInterface $addressRepository,
+        OrderInterface $order,
+        AddressInterface $shippingAddress,
+        AddressInterface $billingAddress
+    ) {
+        $order->getBillingAddress()->willReturn($billingAddress);
+        $order->getShippingAddress()->willReturn($shippingAddress);
+
+        $billingAddress->getId()->willReturn(1);
+        $shippingAddress->getId()->willReturn(2);
+
+        $addressRepository->find(1)->willReturn($billingAddress);
+        $addressRepository->find(2)->willReturn(null);
+
+        $this->shouldThrow(NotEqualException::class)->during('addressesShouldNotExistInTheRegistry', [$order]);
     }
 }
