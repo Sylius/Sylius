@@ -26,12 +26,4 @@ class ThemeRepository extends EntityRepository implements ThemeRepositoryInterfa
     {
         return $this->findOneBy(['name' => $name]);
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function findOneByPath($path)
-    {
-        return $this->findOneBy(['path' => $path]);
-    }
 }

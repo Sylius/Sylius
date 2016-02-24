@@ -25,11 +25,4 @@ interface ThemeRepositoryInterface extends RepositoryInterface
      * @return ThemeInterface|null
      */
     public function findOneByName($name);
-
-    /**
-     * @param string $path
-     *
-     * @return ThemeInterface|null
-     */
-    public function findOneByPath($path);
 }

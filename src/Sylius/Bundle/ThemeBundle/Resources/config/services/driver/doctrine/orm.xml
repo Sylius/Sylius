@@ -14,5 +14,12 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
         <parameter key="sylius.repository.theme.class">Sylius\Bundle\ThemeBundle\Doctrine\ORM\ThemeRepository</parameter>
+        <parameter key="sylius.theme.repository.failsafe.class">Sylius\Bundle\ThemeBundle\Repository\FailsafeThemeRepository</parameter>
     </parameters>
+    <services>
+        <service id="sylius.theme.repository.failsafe" class="%sylius.theme.repository.failsafe.class%" decorates="sylius.repository.theme" public="false">
+            <argument type="service" id="sylius.theme.repository.failsafe.inner" />
+            <argument type="service" id="sylius.theme.repository.in_memory" />
+        </service>
+    </services>
 </container>

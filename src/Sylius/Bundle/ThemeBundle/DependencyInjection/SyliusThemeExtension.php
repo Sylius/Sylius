@@ -29,7 +29,6 @@ class SyliusThemeExtension extends AbstractResourceExtension
         $config = $this->processConfiguration(new Configuration(), $configs);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/services'));
-        $loader->load(sprintf('driver/%s.xml', $config['driver']));
         $loader->load('assets.xml');
         $loader->load('configuration.xml');
         $loader->load('resource_locators.xml');
@@ -44,6 +43,7 @@ class SyliusThemeExtension extends AbstractResourceExtension
 
         $container->setParameter('sylius.theme.configuration.filesystem.locations', $config['sources']['filesystem']['locations']);
 
+        $loader->load(sprintf('driver/%s.xml', $config['driver']));
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
     }
 }

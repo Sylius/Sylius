@@ -18,6 +18,7 @@
         <parameter key="sylius.theme.merger.class">Sylius\Bundle\ThemeBundle\Synchronizer\ThemeMerger</parameter>
         <parameter key="sylius.theme.loader.class">Sylius\Bundle\ThemeBundle\Loader\ThemeLoader</parameter>
         <parameter key="sylius.theme.synchronizer.class">Sylius\Bundle\ThemeBundle\Synchronizer\ThemeSynchronizer</parameter>
+        <parameter key="sylius.theme.repository.in_memory.class">Sylius\Bundle\ThemeBundle\Repository\InMemoryThemeRepository</parameter>
         <parameter key="sylius.theme.circular_dependency_checker.class">Sylius\Bundle\ThemeBundle\Loader\CircularDependencyChecker</parameter>
         <parameter key="sylius.theme.data_collector.class">Sylius\Bundle\ThemeBundle\Collector\ThemeDataCollector</parameter>
         <parameter key="sylius.theme.hierarchy_provider.class">Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProvider</parameter>
@@ -55,6 +56,11 @@
             <argument type="service" id="sylius.theme.merger" />
         </service>
 
+        <service id="sylius.theme.repository.in_memory" class="%sylius.theme.repository.in_memory.class%" lazy="true">
+            <argument type="service" id="sylius.theme.loader" />
+            <argument>Sylius\Bundle\ThemeBundle\Model\ThemeInterface</argument>
+        </service>
+
         <service id="sylius.theme.data_collector" class="%sylius.theme.data_collector.class%" public="false">
             <argument type="service" id="sylius.repository.theme" />
             <argument type="service" id="sylius.context.theme" />
@@ -62,9 +68,7 @@
             <tag name="data_collector" template="SyliusThemeBundle:Profiler:theme" id="sylius_theme" />
         </service>
 
-        <service id="sylius.theme.hierarchy_provider" class="%sylius.theme.hierarchy_provider.class%" public="false">
-            <argument type="service" id="sylius.repository.theme" />
-        </service>
+        <service id="sylius.theme.hierarchy_provider" class="%sylius.theme.hierarchy_provider.class%" public="false" />
 
         <service id="sylius.theme.filesystem" class="%sylius.theme.filesystem.class%" public="false" />
 
