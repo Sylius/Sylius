@@ -129,7 +129,7 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @Given /^([^"]+) gives ("[^"]+") fixed discount to every order with items total at least ([^"]+)$/
+     * @Given /^([^"]+) gives ("[^"]+") fixed discount to every order with items total at least ("[^"]+")$/
      */
     public function itGivesFixedDiscountToEveryOrderWithItemsTotalAtLeast(
         PromotionInterface $promotion,
@@ -146,25 +146,13 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @Given /^(?:it|the promotion) gives "([^"]+)%" percentage discount on shipping to every order$/
+     * @Given /^([^"]+) gives ("[^"]+") percentage discount on shipping to every order$/
      */
-    public function itGivesPercentageDiscountOnShippingToEveryOrder($discount)
+    public function itGivesPercentageDiscountOnShippingToEveryOrder(PromotionInterface $promotion, $discount)
     {
-        $currentPromotion = $this->sharedStorage->get('promotion');
-
-        $action = $this->actionFactory->createPercentageShippingDiscount($this->getPercentageFromString($discount));
-        $currentPromotion->addAction($action);
+        $action = $this->actionFactory->createPercentageShippingDiscount($discount);
+        $promotion->addAction($action);
 
         $this->objectManager->flush();
-    }
-
-    /**
-     * @param string $price
-     *
-     * @return int
-     */
-    private function getPriceFromString($price)
-    {
-        return (int) round(($price * 100), 2);
     }
 }

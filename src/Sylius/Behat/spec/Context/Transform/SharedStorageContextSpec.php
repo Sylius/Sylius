@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Behat\Context\Setup;
+namespace spec\Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 use PhpSpec\ObjectBehavior;
@@ -28,7 +28,7 @@ class SharedStorageContextSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Behat\Context\Setup\SharedStorageContext');
+        $this->shouldHaveType('Sylius\Behat\Context\Transform\SharedStorageContext');
     }
 
     function it_implements_context_interface()

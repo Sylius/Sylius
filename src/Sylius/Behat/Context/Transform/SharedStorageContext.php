@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Context\Setup;
+namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
