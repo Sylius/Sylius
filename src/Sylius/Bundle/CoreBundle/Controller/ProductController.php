@@ -139,7 +139,9 @@ class ProductController extends ResourceController
             ->createByProductArchetypePaginator($archetype)
         ;
 
-        return $this->renderArchetypeResults($archetype, $paginator, 'productIndex.html', $request->query->get('page', 1));
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        return $this->renderArchetypeResults($configuration, $archetype, $paginator, 'productIndex.html', $request->query->get('page', 1));
     }
 
     /**
@@ -163,7 +165,9 @@ class ProductController extends ResourceController
             ->createByProductArchetypePaginator($archetype)
         ;
 
-        return $this->renderArchetypeResults($archetype, $paginator, 'productIndex.html', $request->query->get('page', 1));
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        return $this->renderArchetypeResults($configuration, $archetype, $paginator, 'productIndex.html', $request->query->get('page', 1));
     }
 
     /**
@@ -348,23 +352,23 @@ class ProductController extends ResourceController
      * @return Response
      */
     private function renderArchetypeResults(
+        RequestConfiguration $configuration,
         ArchetypeInterface $archetype,
         Pagerfanta $results,
         $template,
         $page
     ) {
         $results->setCurrentPage($page, true, true);
-        $results->setMaxPerPage($this->config->getPaginationMaxPerPage());
+        $results->setMaxPerPage($configuration->getPaginationMaxPerPage());
 
-        $view = $this
-            ->view()
-            ->setTemplate($this->config->getTemplate($template))
+        $view = View::create()
+            ->setTemplate($configuration->getTemplate($template))
             ->setData([
                 'archetype' => $archetype,
                 'products' => $results,
             ])
         ;
 
-        return $this->handleView($view);
+        return $this->viewHandler->handle($configuration, $view);
     }
 }
