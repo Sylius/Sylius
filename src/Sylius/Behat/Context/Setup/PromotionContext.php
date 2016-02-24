@@ -150,6 +150,19 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given /^(?:it|the promotion) gives "([^"]+)%" percentage discount on shipping to every order$/
+     */
+    public function itGivesPercentageDiscountOnShippingToEveryOrder($discount)
+    {
+        $currentPromotion = $this->sharedStorage->get('promotion');
+
+        $action = $this->actionFactory->createPercentageShippingDiscount($this->getPercentageFromString($discount));
+        $currentPromotion->addAction($action);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @param string $price
      *
      * @return int
