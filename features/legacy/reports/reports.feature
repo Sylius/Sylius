@@ -7,10 +7,10 @@ Feature: Reports
     Background:
         Given store has default configuration
         And there are following reports configured:
-            | code             | name           | description | renderer | renderer_configuration                                       | data_fetcher      | data_fetcher_configuration                   |
-            | table_report     | TableReport    | Lorem ipsum | table    | Template:SyliusReportBundle:Table:default.html.twig          | user_registration | Period:day,Start:2010-01-01,End:2010-04-01   |
-            | sales_report     | SalesReport    | Lorem ipsum | table    | Template:SyliusReportBundle:Table:default.html.twig          | sales_total       | Period:day,Start:2010-01-01,End:2010-01-05   |
-            | bar_chart_report | BarChartReport | Lorem ipsum | chart    | Type:bar,Template:SyliusReportBundle:Chart:default.html.twig | user_registration | Period:month,Start:2010-01-01,End:2010-04-01 |
+            | code             | name           | description | renderer              | renderer_configuration                                       | data_fetcher      | data_fetcher_configuration                   |
+            | table_report     | TableReport    | Lorem ipsum | sylius_renderer_table | Template:SyliusReportBundle:Table:default.html.twig          | user_registration | Period:day,Start:2010-01-01,End:2010-04-01   |
+            | sales_report     | SalesReport    | Lorem ipsum | sylius_renderer_table | Template:SyliusReportBundle:Table:default.html.twig          | sales_total       | Period:day,Start:2010-01-01,End:2010-01-05   |
+            | bar_chart_report | BarChartReport | Lorem ipsum | sylius_renderer_chart | Type:bar,Template:SyliusReportBundle:Chart:default.html.twig | user_registration | Period:month,Start:2010-01-01,End:2010-04-01 |
         And there are following users:
             | email          | enabled | created at          |
             | beth@foo.com   | yes     | 2010-01-02 12:00:00 |
