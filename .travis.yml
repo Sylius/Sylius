@@ -49,12 +49,12 @@ install:
 before_script:
     - phpenv config-add etc/travis/before-script-php.ini
 
-    - app/console doctrine:database:create --env=test_cached
+    - app/console doctrine:database:create --env=test_cached # have to be run with debug = true, to omit generating proxies before setting up the database
 
     - app/console cache:warmup --env=test_cached --no-debug
 
-    - app/console doctrine:schema:create --env=test_cached
-    - app/console doctrine:phpcr:repository:init --env=test_cached
+    - app/console doctrine:schema:create --env=test_cached --no-debug
+    - app/console doctrine:phpcr:repository:init --env=test_cached --no-debug
 
     - app/console assets:install --env=test_cached --no-debug
     - app/console assetic:dump --env=test_cached --no-debug
