@@ -34,6 +34,8 @@ class TranslatableResourceRepository extends EntityRepository implements Transla
         $queryBuilder
             ->addSelect('translation')
             ->leftJoin($this->getAlias().'.translations', 'translation')
+            ->andWhere('translation.locale = :locale')
+            ->setParameter('locale', $this->localeProvider->getCurrentLocale())
         ;
 
         return $queryBuilder;
@@ -49,6 +51,8 @@ class TranslatableResourceRepository extends EntityRepository implements Transla
         $queryBuilder
             ->addSelect('translation')
             ->leftJoin($this->getAlias().'.translations', 'translation')
+            ->andWhere('translation.locale = :locale')
+            ->setParameter('locale', $this->localeProvider->getCurrentLocale())
         ;
 
         return $queryBuilder;
