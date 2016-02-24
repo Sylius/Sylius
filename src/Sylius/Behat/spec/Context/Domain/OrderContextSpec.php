@@ -18,6 +18,7 @@ use PhpSpec\Exception\Example\NotEqualException;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -33,9 +34,10 @@ class OrderContextSpec extends ObjectBehavior
     function let(
         OrderRepositoryInterface $orderRepository,
         RepositoryInterface $orderItemRepository,
-        RepositoryInterface $addressRepository
+        RepositoryInterface $addressRepository,
+        RepositoryInterface $adjustmentRepository
     ) {
-        $this->beConstructedWith($orderRepository, $orderItemRepository, $addressRepository);
+        $this->beConstructedWith($orderRepository, $orderItemRepository, $addressRepository, $adjustmentRepository);
     }
 
     function it_is_initializable()
@@ -157,5 +159,33 @@ class OrderContextSpec extends ObjectBehavior
         $addressRepository->find(2)->willReturn(null);
 
         $this->shouldThrow(NotEqualException::class)->during('addressesShouldNotExistInTheRegistry', [$order]);
+    }
+
+    function it_checks_if_an_order_adjustments_exists_in_repository(
+        RepositoryInterface $adjustmentRepository,
+        OrderInterface $order,
+        AdjustmentInterface $adjustment
+    ) {
+        $order->getAdjustments()->willReturn([$adjustment]);
+
+        $adjustment->getId()->willReturn(1);
+
+        $adjustmentRepository->find(1)->willReturn(null);
+
+        $this->adjustmentShouldNotExistInTheRegistry($order);
+    }
+
+    function it_throws_an_exception_if_adjustments_still_exist(
+        RepositoryInterface $adjustmentRepository,
+        OrderInterface $order,
+        AdjustmentInterface $adjustment
+    ) {
+        $order->getAdjustments()->willReturn([$adjustment]);
+
+        $adjustment->getId()->willReturn(1);
+
+        $adjustmentRepository->find(1)->willReturn($adjustment);
+
+        $this->shouldThrow(NotEqualException::class)->during('adjustmentShouldNotExistInTheRegistry', [$order]);
     }
 }

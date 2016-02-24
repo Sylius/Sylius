@@ -38,15 +38,26 @@ final class OrderContext implements Context
     private $addressRepository;
 
     /**
+     * @var RepositoryInterface
+     */
+    private $adjustmentRepository;
+
+    /**
      * @param OrderRepositoryInterface $orderRepository
      * @param RepositoryInterface $orderItemRepository
      * @param RepositoryInterface $addressRepository
+     * @param RepositoryInterface $adjustmentRepository
      */
-    public function __construct(OrderRepositoryInterface $orderRepository, RepositoryInterface $orderItemRepository, RepositoryInterface $addressRepository)
-    {
+    public function __construct(
+        OrderRepositoryInterface $orderRepository,
+        RepositoryInterface $orderItemRepository,
+        RepositoryInterface $addressRepository,
+        RepositoryInterface $adjustmentRepository
+    ) {
         $this->orderRepository = $orderRepository;
         $this->orderItemRepository = $orderItemRepository;
         $this->addressRepository = $addressRepository;
+        $this->adjustmentRepository = $adjustmentRepository;
     }
 
     /**
@@ -97,5 +108,18 @@ final class OrderContext implements Context
 
         expect($billingAddress)->toBe(null);
         expect($shippingAddress)->toBe(null);
+    }
+
+    /**
+     * @Then /^adjustments of ([^"]+) should not exist$/
+     */
+    public function adjustmentShouldNotExistInTheRegistry(OrderInterface $order)
+    {
+        $adjustments = $order->getAdjustments();
+
+        foreach ($adjustments as $adjustment) {
+            $adjustment = $this->adjustmentRepository->find($adjustment->getId());
+            expect($adjustment)->toBe(null);
+        }
     }
 }

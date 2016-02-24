@@ -33,7 +33,7 @@ Feature: Deleting an order
         When I delete the order "#00000022"
         Then the order item with product "PHP T-Shirt" should not exist
 
-    @todo
+    @domain
     Scenario: Order adjustments are deleted together with an order
         When I delete the order "#00000022"
         Then adjustments of this order should not exist
