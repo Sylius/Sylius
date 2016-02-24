@@ -20,23 +20,23 @@
             <join-column name="channel_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
 
-        <many-to-one field="shippingAddress" target-entity="Sylius\Component\Addressing\Model\AddressInterface" orphan-removal="true">
+        <one-to-one field="shippingAddress" target-entity="Sylius\Component\Addressing\Model\AddressInterface">
             <cascade>
                 <cascade-persist/>
                 <cascade-remove/>
             </cascade>
             <join-column name="shipping_address_id" referenced-column-name="id" nullable="true" />
             <gedmo:versioned />
-        </many-to-one>
+        </one-to-one>
 
-        <many-to-one field="billingAddress" target-entity="Sylius\Component\Addressing\Model\AddressInterface" orphan-removal="true">
+        <one-to-one field="billingAddress" target-entity="Sylius\Component\Addressing\Model\AddressInterface">
             <cascade>
                 <cascade-persist/>
                 <cascade-remove/>
             </cascade>
             <join-column name="billing_address_id" referenced-column-name="id" nullable="true" />
             <gedmo:versioned />
-        </many-to-one>
+        </one-to-one>
 
         <one-to-one field="promotionCoupon" target-entity="Sylius\Component\Promotion\Model\CouponInterface">
             <join-column name="promotion_coupon_id" on-delete="SET NULL" />
