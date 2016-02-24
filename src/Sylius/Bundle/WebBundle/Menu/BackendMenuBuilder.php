@@ -386,10 +386,16 @@ class BackendMenuBuilder extends MenuBuilder
             ->setLabel($this->translate(sprintf('sylius.backend.menu.%s.review', $section)))
         ;
 
-        $child->addChild('reviews', [
-            'route' => 'sylius_backend_product_review_index',
-            'labelAttributes' => ['icon' => 'glyphicon glyphicon-pencil'],
-        ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.product_review', $section)));
+        if ($this->rbacAuthorizationChecker->isGranted('sylius.product_review.index')) {
+            $child->addChild('reviews', [
+                'route' => 'sylius_backend_product_review_index',
+                'labelAttributes' => ['icon' => 'glyphicon glyphicon-pencil'],
+            ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.product_review', $section)));
+        }
+
+        if (!$child->hasChildren()) {
+            $menu->removeChild('review');
+        }
     }
 
     /**
