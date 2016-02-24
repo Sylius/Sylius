@@ -20,7 +20,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ThemeDebugCommand extends ContainerAwareCommand
+class ListCommand extends ContainerAwareCommand
 {
     /**
      * {@inheritdoc}
@@ -28,7 +28,7 @@ class ThemeDebugCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('sylius:theme:debug')
+            ->setName('sylius:theme:list')
             ->setDescription('Shows list of detected themes.')
         ;
     }

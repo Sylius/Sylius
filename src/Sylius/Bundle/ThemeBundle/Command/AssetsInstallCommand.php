@@ -33,7 +33,7 @@ class AssetsInstallCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('sylius:assets:install')
+            ->setName('sylius:theme:assets:install')
             ->setDefinition([
                 new InputArgument('target', InputArgument::OPTIONAL, 'The target directory', 'web'),
             ])
