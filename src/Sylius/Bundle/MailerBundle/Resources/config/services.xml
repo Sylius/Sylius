@@ -26,6 +26,7 @@
 
         <parameter key="sylius.email_sender.adapter.abstract.class">Sylius\Component\Mailer\Sender\Adapter\AbstractAdapter</parameter>
         <parameter key="sylius.email_sender.adapter.swiftmailer.class">Sylius\Bundle\MailerBundle\Sender\Adapter\SwiftMailerAdapter</parameter>
+        <parameter key="sylius.email_sender.adapter.sendgrid.class">Sylius\Bundle\MailerBundle\Sender\Adapter\SendGridAdapter</parameter>
     </parameters>
 
     <services>
@@ -67,5 +68,6 @@
         <service id="sylius.email_sender.adapter.swiftmailer" class="%sylius.email_sender.adapter.swiftmailer.class%" parent="sylius.email_sender.adapter.abstract">
             <argument type="service" id="mailer" />
         </service>
+        <service id="sylius.email_sender.adapter.sendgrid" class="%sylius.email_sender.adapter.sendgrid.class%" parent="sylius.email_sender.adapter.abstract"/>
     </services>
 </container>

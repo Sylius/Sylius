@@ -46,6 +46,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
                 ->scalarNode('sender_adapter')->defaultValue('sylius.email_sender.adapter.swiftmailer')->end()
                 ->scalarNode('renderer_adapter')->defaultValue('sylius.email_renderer.adapter.twig')->end()
+                ->scalarNode('sendgrid_api')->defaultValue(null)->end()
             ->end()
         ;
 

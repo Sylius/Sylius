@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "160c647bc2c5678e5013ea727eba1005",
-    "content-hash": "78024c1b1e4d280ebe82da37e10f44f3",
+    "hash": "d77eea85d49a7ba83b122faa8f8ed5e3",
+    "content-hash": "741513a1d2ca3d768163179edbd900c0",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -6029,6 +6029,101 @@
             "time": "2015-08-10 19:35:16"
         },
         {
+            "name": "sendgrid/sendgrid",
+            "version": "4.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sendgrid/sendgrid-php.git",
+                "reference": "b7d88a78b5ef7c029237e449e0adcaa1b7b70092"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sendgrid/sendgrid-php/zipball/b7d88a78b5ef7c029237e449e0adcaa1b7b70092",
+                "reference": "b7d88a78b5ef7c029237e449e0adcaa1b7b70092",
+                "shasum": ""
+            },
+            "require": {
+                "guzzle/guzzle": "~3.9",
+                "php": ">=5.3",
+                "sendgrid/smtpapi": "~0.5"
+            },
+            "replace": {
+                "sendgrid/sendgrid-php": "*"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.4",
+                "vlucas/phpdotenv": "~1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "SendGrid": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "This library allows you to quickly and easily send emails through SendGrid using PHP.",
+            "homepage": "http://github.com/sendgrid/sendgrid-php",
+            "keywords": [
+                "email",
+                "grid",
+                "send",
+                "sendgrid"
+            ],
+            "time": "2016-02-18 21:40:14"
+        },
+        {
+            "name": "sendgrid/smtpapi",
+            "version": "0.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sendgrid/smtpapi-php.git",
+                "reference": "05ccf57bad5d1524e479b6dc0a2dfade88b3fbe5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sendgrid/smtpapi-php/zipball/05ccf57bad5d1524e479b6dc0a2dfade88b3fbe5",
+                "reference": "05ccf57bad5d1524e479b6dc0a2dfade88b3fbe5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "replace": {
+                "sendgrid/smtpapi-php": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Smtpapi": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Build SendGrid X-SMTPAPI headers in PHP.",
+            "homepage": "http://github.com/sendgrid/smtpapi-php",
+            "keywords": [
+                "X-SMTP",
+                "api",
+                "email",
+                "grid",
+                "send",
+                "sendgrid",
+                "smtp",
+                "smtpapi",
+                "xsmtp"
+            ],
+            "time": "2015-04-14 02:37:45"
+        },
+        {
             "name": "sensio/distribution-bundle",
             "version": "v3.0.34",
             "target-dir": "Sensio/Bundle/DistributionBundle",
@@ -8944,7 +9039,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Lakion/ApiTestCase/zipball/6ef4bc5ab7daf8646e7003afdb330b314edbd57d",
+                "url": "https://api.github.com/repos/Lakion/ApiTestCase/zipball/ae9e1b635f26780df66fb034c8c3566d52eca928",
                 "reference": "466bd22a228c96a2dba971045ac8c0b0400df6d1",
                 "shasum": ""
             },
