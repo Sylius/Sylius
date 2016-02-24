@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "160c647bc2c5678e5013ea727eba1005",
-    "content-hash": "78024c1b1e4d280ebe82da37e10f44f3",
+    "hash": "0c22f212a3df99f6049ced0ce7465df8",
+    "content-hash": "8fb7fd8f7d205b00ea43d0ba6b958fb4",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -8944,7 +8944,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Lakion/ApiTestCase/zipball/6ef4bc5ab7daf8646e7003afdb330b314edbd57d",
+                "url": "https://api.github.com/repos/Lakion/ApiTestCase/zipball/ae9e1b635f26780df66fb034c8c3566d52eca928",
                 "reference": "466bd22a228c96a2dba971045ac8c0b0400df6d1",
                 "shasum": ""
             },
@@ -10032,6 +10032,45 @@
                 "test"
             ],
             "time": "2013-01-19 23:12:22"
+        },
+        {
+            "name": "se/selenium-server-standalone",
+            "version": "v2.52.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sveneisenschmidt/selenium-server-standalone.git",
+                "reference": "b1dae29a7f24d43ef7ccd5e73f545e297ba6f14d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sveneisenschmidt/selenium-server-standalone/zipball/b1dae29a7f24d43ef7ccd5e73f545e297ba6f14d",
+                "reference": "b1dae29a7f24d43ef7ccd5e73f545e297ba6f14d",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "bin": [
+                "bin/selenium-server-standalone"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache 2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Sven Eisenschmidt",
+                    "email": "sven.eisenschmidt@gmail.com"
+                }
+            ],
+            "description": "Composer distribution of Selenium Server Standalone, the browser automation framework. Adds a executable to your composer bin directory.",
+            "homepage": "https://github.com/sveneisenschmidt/selenium-server-standalone",
+            "keywords": [
+                "selenium",
+                "testing"
+            ],
+            "time": "2016-02-17 10:14:55"
         },
         {
             "name": "sebastian/comparator",
