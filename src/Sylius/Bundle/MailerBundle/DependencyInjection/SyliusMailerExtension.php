@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\MailerBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
@@ -40,6 +41,17 @@ class SyliusMailerExtension extends AbstractResourceExtension
 
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
+        }
+
+        if ($config['sender_adapter'] == 'sylius.email_sender.adapter.sendgrid') {
+            if (!isset($config['sendgrid_api'])) {
+                throw new InvalidConfigurationException('You must configure a sendgrid_api for mailer adapter');
+            }
+
+            $container
+                ->getDefinition('sylius.email_sender.adapter.sendgrid')
+                ->addArgument($config['sendgrid_api'])
+            ;
         }
 
         $container->setAlias('sylius.email_sender.adapter', $config['sender_adapter']);
