@@ -97,7 +97,7 @@
                         {% if product.options|length > 0 %}
                         <ul>
                         {% for option in product.options %}
-                            <li><strong>{{ option.name }}</strong>: {{ option.values|join(', ') }}.</li>
+                            <li><strong>{{ option.name }}</strong>.</li>
                         {% endfor %}
                         </ul>
                         {% else %}
