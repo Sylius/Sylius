@@ -66,7 +66,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(Theme::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(ThemeInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->defaultValue(ThemeRepository::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(ThemeFactory::class)->cannotBeEmpty()->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()

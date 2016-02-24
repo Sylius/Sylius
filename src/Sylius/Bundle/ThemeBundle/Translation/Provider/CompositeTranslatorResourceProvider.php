@@ -40,7 +40,7 @@ final class CompositeTranslatorResourceProvider implements TranslatorResourcePro
             $resources = array_merge($resources, $resourceProvider->getResources());
         }
 
-        return array_values(array_unique($resources, \SORT_REGULAR));
+        return $resources;
     }
 
     /**

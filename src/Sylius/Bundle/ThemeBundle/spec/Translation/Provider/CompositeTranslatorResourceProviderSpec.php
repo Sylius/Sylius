@@ -43,23 +43,9 @@ class CompositeTranslatorResourceProviderSpec extends ObjectBehavior
         $this->beConstructedWith([$firstResourceProvider, $secondResourceProvider]);
 
         $firstResourceProvider->getResources()->willReturn([$firstResource]);
-        $secondResourceProvider->getResources()->willReturn([$secondResource]);
-
-        $this->getResources()->shouldReturn([$firstResource, $secondResource]);
-    }
-
-    function it_aggregates_the_unique_resources(
-        TranslatorResourceProviderInterface $firstResourceProvider,
-        TranslatorResourceProviderInterface $secondResourceProvider,
-        TranslationResourceInterface $firstResource,
-        TranslationResourceInterface $secondResource
-    ) {
-        $this->beConstructedWith([$firstResourceProvider, $secondResourceProvider]);
-
-        $firstResourceProvider->getResources()->willReturn([$firstResource]);
         $secondResourceProvider->getResources()->willReturn([$secondResource, $firstResource]);
 
-        $this->getResources()->shouldReturn([$firstResource, $secondResource]);
+        $this->getResources()->shouldReturn([$firstResource, $secondResource, $firstResource]);
     }
 
     function it_aggregates_the_resources_locales(

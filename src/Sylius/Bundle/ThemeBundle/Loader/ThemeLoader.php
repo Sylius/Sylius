@@ -99,19 +99,11 @@ final class ThemeLoader implements ThemeLoaderInterface
     private function hydrateThemes(array $configurations, array $themes)
     {
         foreach ($configurations as $configuration) {
-            $configuration['parents'] = array_map(function ($parentName) use ($themes, $configuration) {
-                if (!isset($themes[$parentName])) {
-                    throw new ThemeLoadingFailedException(sprintf(
-                        'Unexisting theme "%s" is required by "%s".',
-                        $parentName,
-                        $configuration['name']
-                    ));
-                }
+            $themeName = $configuration['name'];
 
-                return $themes[$parentName];
-            }, $configuration['parents']);
+            $configuration['parents'] = $this->convertParentsNamesToParentsObjects($themeName, $configuration['parents'], $themes);
 
-            $themes[$configuration['name']] = $this->themeHydrator->hydrate($configuration, $themes[$configuration['name']]);
+            $themes[$themeName] = $this->themeHydrator->hydrate($configuration, $themes[$themeName]);
         }
 
         return $themes;
@@ -129,5 +121,27 @@ final class ThemeLoader implements ThemeLoaderInterface
         } catch (CircularDependencyFoundException $exception) {
             throw new ThemeLoadingFailedException('Circular dependency found.', 0, $exception);
         }
+    }
+
+    /**
+     * @param string $themeName
+     * @param array $parentsNames
+     * @param array $existingThemes
+     *
+     * @return ThemeInterface[]
+     */
+    private function convertParentsNamesToParentsObjects($themeName, array $parentsNames, array $existingThemes)
+    {
+        return array_map(function ($parentName) use ($themeName, $existingThemes) {
+            if (!isset($existingThemes[$parentName])) {
+                throw new ThemeLoadingFailedException(sprintf(
+                    'Unexisting theme "%s" is required by "%s".',
+                    $parentName,
+                    $themeName
+                ));
+            }
+
+            return $existingThemes[$parentName];
+        }, $parentsNames);
     }
 }

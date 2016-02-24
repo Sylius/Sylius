@@ -58,7 +58,7 @@
 
         <service id="sylius.theme.repository.in_memory" class="%sylius.theme.repository.in_memory.class%" lazy="true">
             <argument type="service" id="sylius.theme.loader" />
-            <argument>Sylius\Bundle\ThemeBundle\Model\ThemeInterface</argument>
+            <argument>%sylius.interface.theme.class%</argument>
         </service>
 
         <service id="sylius.theme.data_collector" class="%sylius.theme.data_collector.class%" public="false">

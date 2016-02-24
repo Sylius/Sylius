@@ -16,5 +16,4 @@ namespace Sylius\Bundle\ThemeBundle\Loader;
  */
 class ThemeLoadingFailedException extends \DomainException
 {
-
 }

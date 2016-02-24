@@ -98,5 +98,4 @@ final class ThemeTranslatorResourceProvider implements TranslatorResourceProvide
 
         return $resources;
     }
-
 }

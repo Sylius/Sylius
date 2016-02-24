@@ -49,7 +49,7 @@
         <service id="sylius.theme.templating.cache.warmer" class="%sylius.theme.templating.cache.warmer.class%" public="false">
             <argument type="service" id="templating.finder" />
             <argument type="service" id="sylius.theme.templating.locator" />
-            <argument type="service" id="sylius.theme.loader" />
+            <argument type="service" id="sylius.repository.theme" />
             <argument type="service" id="sylius.theme.templating.cache" />
             <tag name="kernel.cache_warmer" priority="20" />
         </service>

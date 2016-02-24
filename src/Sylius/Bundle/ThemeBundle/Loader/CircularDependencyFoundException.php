@@ -25,12 +25,12 @@ class CircularDependencyFoundException extends \DomainException
      */
     public function __construct(array $themes, $code = 0, \Exception $previous = null)
     {
-        $cycle = $this->getCycleAsString($themes);
+        $cycle = $this->getCycleFromArray($themes);
 
         $message = sprintf(
             'Circular dependency was found while resolving theme "%s", caused by cycle "%s".',
             reset($themes)->getName(),
-            $cycle
+            $this->formatCycleToString($cycle)
         );
 
         parent::__construct($message, $code, $previous);
@@ -39,9 +39,9 @@ class CircularDependencyFoundException extends \DomainException
     /**
      * @param array $themes
      *
-     * @return string
+     * @return array
      */
-    private function getCycleAsString(array $themes)
+    private function getCycleFromArray(array $themes)
     {
         while (reset($themes) !== end($themes) || 1 === count($themes)) {
             array_shift($themes);
@@ -51,6 +51,20 @@ class CircularDependencyFoundException extends \DomainException
             throw new \InvalidArgumentException('There is no cycle within given themes.');
         }
 
-        return implode(' -> ', array_map(function (ThemeInterface $theme) { return $theme->getName(); }, $themes));
+        return $themes;
+    }
+
+    /**
+     * @param array $themes
+     *
+     * @return string
+     */
+    private function formatCycleToString(array $themes)
+    {
+        $themesNames = array_map(function (ThemeInterface $theme) {
+            return $theme->getName();
+        }, $themes);
+
+        return implode(' -> ', $themesNames);
     }
 }
