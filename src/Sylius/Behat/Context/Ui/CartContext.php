@@ -46,9 +46,8 @@ final class CartContext implements Context
 
     /**
      * @Given I added product :product to the cart
-     * @Given I had product :product in the cart
+     * @Given /^I (?:have|had) (product "([^"]+)") in the cart$/
      * @When I add product :product to the cart
-     * @When I have product :product in the cart
      */
     public function iAddProductToTheCart(ProductInterface $product)
     {
