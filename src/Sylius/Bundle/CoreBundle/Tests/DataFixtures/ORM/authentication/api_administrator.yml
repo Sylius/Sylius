@@ -13,7 +13,7 @@ Sylius\Bundle\ApiBundle\Model\AccessToken:
 Sylius\Component\Core\Model\User:
     admin:
         plainPassword: sylius
-        roles: [ROLE_API]
+        roles: [ROLE_API_ACCESS]
         enabled: true
         customer: @customerAdmin
 
