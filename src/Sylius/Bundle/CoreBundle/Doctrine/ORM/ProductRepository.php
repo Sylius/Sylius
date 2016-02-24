@@ -181,7 +181,7 @@ class ProductRepository extends BaseProductRepository
      */
     public function findLatest($limit = 10, ChannelInterface $channel)
     {
-        return $this->findBy(['channels' => [$channel]], ['createdAt' => 'desc'], $limit);
+        return $this->findBy(['channels' => [$channel], 'enabled' => true], ['createdAt' => 'desc'], $limit);
     }
 
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null)
