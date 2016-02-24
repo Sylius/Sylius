@@ -40,7 +40,7 @@ class BuildReportRendererFormSubscriberSpec extends ObjectBehavior
     function let(ServiceRegistryInterface $rendererRegistry, FormFactoryInterface $factory, RendererInterface $renderer)
     {
         $rendererRegistry->get('test_renderer')->willReturn($renderer);
-        $renderer->getType()->willReturn('test_type');
+        $renderer->getType()->willReturn('sylius_renderer_test_type');
 
         $this->beConstructedWith($rendererRegistry, $factory);
     }

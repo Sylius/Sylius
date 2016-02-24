@@ -72,7 +72,7 @@ class ReportTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $renderer->getType()->willReturn('test_renderer');
+        $renderer->getType()->willReturn('sylius_renderer_test_renderer');
         $rendererRegistry->all()->willReturn(['test_renderer' => $renderer]);
         $builder->create('rendererConfiguration', 'sylius_renderer_test_renderer')->willReturn($builder);
         $builder->getForm()->shouldBeCalled()->willReturn(Argument::type(Form::class));

@@ -21,10 +21,10 @@ final class DefaultRenderers
     /**
      * Table renderer
      */
-    const TABLE = 'table';
+    const TABLE = 'sylius_renderer_table';
 
     /**
      * Chart renderer
      */
-    const CHART = 'chart';
+    const CHART = 'sylius_renderer_chart';
 }
