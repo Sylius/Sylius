@@ -28,7 +28,7 @@ Feature: Deleting an order
         When I delete the order "#00000022"
         Then there should be no shipments with "Free" shipping method in the registry
 
-    @todo
+    @domain
     Scenario: Order items are deleted together with an order
         When I delete the order "#00000022"
         Then the order item with product "PHP T-Shirt" should not exist

@@ -18,16 +18,20 @@ use PhpSpec\Exception\Example\NotEqualException;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class OrderContextSpec extends ObjectBehavior
 {
-    function let(OrderRepositoryInterface $orderRepository)
+    function let(OrderRepositoryInterface $orderRepository, RepositoryInterface $orderItemRepository)
     {
-        $this->beConstructedWith($orderRepository);
+        $this->beConstructedWith($orderRepository, $orderItemRepository);
     }
 
     function it_is_initializable()
@@ -70,5 +74,30 @@ class OrderContextSpec extends ObjectBehavior
         $orderRepository->find(1)->willReturn($order);
 
         $this->shouldThrow(NotEqualException::class)->during('orderShouldNotExistInTheRegistry', [$order]);
+    }
+
+    function it_checks_if_an_order_item_exists_in_repository(
+        RepositoryInterface $orderItemRepository,
+        ProductInterface $product,
+        ProductVariantInterface $productVariant
+    ) {
+        $product->getMasterVariant()->willReturn($productVariant);
+
+        $orderItemRepository->findBy(['variant' => $productVariant])->willReturn([]);
+
+        $this->orderItemShouldNotExistInTheRegistry($product);
+    }
+
+    function it_throws_an_exception_if_order_item_still_exist(
+        RepositoryInterface $orderItemRepository,
+        ProductInterface $product,
+        ProductVariantInterface $productVariant,
+        OrderItemInterface $orderItem
+    ) {
+        $product->getMasterVariant()->willReturn($productVariant);
+
+        $orderItemRepository->findBy(['variant' => $productVariant])->willReturn([$orderItem]);
+
+        $this->shouldThrow(NotEqualException::class)->during('orderItemShouldNotExistInTheRegistry', [$product]);
     }
 }
