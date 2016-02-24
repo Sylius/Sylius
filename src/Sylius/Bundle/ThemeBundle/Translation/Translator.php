@@ -11,121 +11,60 @@
 
 namespace Sylius\Bundle\ThemeBundle\Translation;
 
-use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
-use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProviderInterface;
+use Sylius\Bundle\ThemeBundle\Translation\Provider\TranslatorLoaderProviderInterface;
+use Sylius\Bundle\ThemeBundle\Translation\Provider\TranslatorResourceProviderInterface;
 use Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface;
-use Symfony\Component\Translation\TranslatorBagInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Component\Translation\MessageSelector;
+use Symfony\Component\Translation\Translator as BaseTranslator;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class Translator implements TranslatorInterface, TranslatorBagInterface, WarmableInterface
+final class Translator extends BaseTranslator implements WarmableInterface
 {
     /**
-     * @var TranslatorInterface|TranslatorBagInterface
+     * @var array
      */
-    private $translator;
+    protected $options = [
+        'cache_dir' => null,
+        'debug' => false,
+    ];
 
     /**
-     * @var ThemeContextInterface
+     * @var TranslatorLoaderProviderInterface
      */
-    private $themeContext;
+    private $loaderProvider;
 
     /**
-     * @var ThemeHierarchyProviderInterface
+     * @var TranslatorResourceProviderInterface
      */
-    private $themeHierarchyProvider;
+    private $resourceProvider;
 
     /**
-     * {@inheritdoc}
+     * @param TranslatorLoaderProviderInterface $loaderProvider
+     * @param TranslatorResourceProviderInterface $resourceProvider
+     * @param MessageSelector $messageSelector
+     * @param string $locale
+     * @param array $options
      */
     public function __construct(
-        TranslatorInterface $translator,
-        ThemeContextInterface $themeContext,
-        ThemeHierarchyProviderInterface $themeHierarchyProvider
+        TranslatorLoaderProviderInterface $loaderProvider,
+        TranslatorResourceProviderInterface $resourceProvider,
+        MessageSelector $messageSelector,
+        $locale,
+        array $options = []
     ) {
-        if (!$translator instanceof TranslatorBagInterface) {
-            throw new \InvalidArgumentException(sprintf(
-                'The Translator "%s" must implement TranslatorInterface and TranslatorBagInterface.',
-                get_class($translator)
-            ));
+        $this->assertOptionsAreKnown($options);
+
+        $this->loaderProvider = $loaderProvider;
+        $this->resourceProvider = $resourceProvider;
+
+        $this->options = array_merge($this->options, $options);
+        if (null !== $this->options['cache_dir'] && $this->options['debug']) {
+            $this->addResources();
         }
 
-        $this->translator = $translator;
-        $this->themeContext = $themeContext;
-        $this->themeHierarchyProvider = $themeHierarchyProvider;
-    }
-
-    /**
-     * Passes through all unknown calls onto the translator object.
-     *
-     * @param string $method
-     * @param array $arguments
-     *
-     * @return mixed
-     */
-    public function __call($method, array $arguments)
-    {
-        return call_user_func_array([$this->translator, $method], $arguments);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function trans($id, array $parameters = [], $domain = null, $locale = null)
-    {
-        $possibleIds = $this->getPossibleIds($id);
-        foreach ($possibleIds as $possibleId) {
-            $translation = $this->translator->trans($possibleId, $parameters, $domain, $locale);
-
-            if ($translation !== $possibleId) {
-                return $translation;
-            }
-        }
-
-        return $id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function transChoice($id, $number, array $parameters = [], $domain = null, $locale = null)
-    {
-        $possibleIds = $this->getPossibleIds($id);
-        foreach ($possibleIds as $possibleId) {
-            $translation = $this->translator->transChoice($possibleId, $number, $parameters, $domain, $locale);
-
-            if ($translation !== $possibleId) {
-                return $translation;
-            }
-        }
-
-        return $id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getLocale()
-    {
-        return $this->translator->getLocale();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setLocale($locale)
-    {
-        $this->translator->setLocale($locale);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCatalogue($locale = null)
-    {
-        return $this->translator->getCatalogue($locale);
+        parent::__construct($locale, $messageSelector, $this->options['cache_dir'], $this->options['debug']);
     }
 
     /**
@@ -133,24 +72,86 @@ final class Translator implements TranslatorInterface, TranslatorBagInterface, W
      */
     public function warmUp($cacheDir)
     {
-        if ($this->translator instanceof WarmableInterface) {
-            $this->translator->warmUp($cacheDir);
+        // skip warmUp when translator doesn't use cache
+        if (null === $this->options['cache_dir']) {
+            return;
+        }
+
+        $locales = array_merge(
+            $this->getFallbackLocales(),
+            [$this->getLocale()],
+            $this->resourceProvider->getResourcesLocales()
+        );
+        foreach (array_unique($locales) as $locale) {
+            // reset catalogue in case it's already loaded during the dump of the other locales.
+            if (isset($this->catalogues[$locale])) {
+                unset($this->catalogues[$locale]);
+            }
+
+            $this->loadCatalogue($locale);
         }
     }
 
     /**
-     * @param string $id
-     *
-     * @return \Generator
+     * {@inheritdoc}
      */
-    private function getPossibleIds($id)
+    protected function initializeCatalogue($locale)
     {
-        $themes = $this->themeHierarchyProvider->getThemeHierarchy($this->themeContext->getTheme());
+        $this->initialize();
 
-        foreach ($themes as $theme) {
-            yield $id.'|'.$theme->getName();
+        parent::initializeCatalogue($locale);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function computeFallbackLocales($locale)
+    {
+        $locales = parent::computeFallbackLocales($locale);
+
+        while (strrchr($locale, '_') !== false) {
+            $locale = substr($locale, 0, -strlen(strrchr($locale, '_')));
+
+            array_unshift($locales, $locale);
         }
 
-        yield $id;
+        return array_unique($locales);
+    }
+
+    private function initialize()
+    {
+        $this->addResources();
+        $this->addLoaders();
+    }
+
+    private function addResources()
+    {
+        $resources = $this->resourceProvider->getResources();
+        foreach ($resources as $resource) {
+            $this->addResource(
+                $resource->getFormat(),
+                $resource->getName(),
+                $resource->getLocale(),
+                $resource->getDomain()
+            );
+        }
+    }
+
+    private function addLoaders()
+    {
+        $loaders = $this->loaderProvider->getLoaders();
+        foreach ($loaders as $alias => $loader) {
+            $this->addLoader($alias, $loader);
+        }
+    }
+
+    /**
+     * @param array $options
+     */
+    private function assertOptionsAreKnown(array $options)
+    {
+        if ($diff = array_diff(array_keys($options), array_keys($this->options))) {
+            throw new \InvalidArgumentException(sprintf('The Translator does not support the following options: \'%s\'.', implode('\', \'', $diff)));
+        }
     }
 }
