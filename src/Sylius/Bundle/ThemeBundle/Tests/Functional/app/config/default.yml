@@ -14,6 +14,7 @@ framework:
     http_method_override: true
     test: ~
     translator: { fallback: [en] }
+    form: ~
 
 twig:
     debug:            false
@@ -24,3 +25,13 @@ sylius_theme:
         filesystem:
             locations:
                 - "%kernel.root_dir%/../../Fixtures/themes"
+
+doctrine:
+    dbal:
+        driver: pdo_sqlite
+        path: "%kernel.root_dir%/cache/db.sql"
+        charset: UTF8
+    orm:
+        entity_managers:
+            default:
+                auto_mapping: true

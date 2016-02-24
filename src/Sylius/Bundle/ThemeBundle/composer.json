@@ -32,7 +32,9 @@
         "phpunit/phpunit": "^4.1",
         "matthiasnoback/symfony-config-test": "^1.4.0",
         "matthiasnoback/symfony-dependency-injection-test": "^0.7.6",
-        "symfony/twig-bundle": "^2.7.7, <2.8"
+        "symfony/twig-bundle": "^2.7.7, <2.8",
+        "doctrine/doctrine-bundle": "^1.6",
+        "doctrine/orm": "^2.5"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
