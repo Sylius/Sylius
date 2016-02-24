@@ -35,7 +35,7 @@ class LoadApiData extends DataFixture
             'api@example.com',
             'api',
             true,
-            ['ROLE_API']
+            ['ROLE_API_ACCESS']
         );
         $user->addAuthorizationRole($this->get('sylius.repository.role')->findOneBy(['code' => 'administrator']));
 
