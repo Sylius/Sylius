@@ -67,6 +67,7 @@ class DoctrineORMDriver extends AbstractDoctrineDriver
             new Reference($metadata->getServiceId('manager')),
             $this->getClassMetadataDefinition($metadata),
         ]);
+        $definition->setLazy(true);
 
         if ($metadata->hasParameter('translation')) {
             $repositoryReflection = new \ReflectionClass($repositoryClass);

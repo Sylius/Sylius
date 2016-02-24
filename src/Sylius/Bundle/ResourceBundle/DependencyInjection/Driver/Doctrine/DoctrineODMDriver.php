@@ -65,6 +65,7 @@ class DoctrineODMDriver extends AbstractDoctrineDriver
             $unitOfWorkDefinition,
             $this->getClassMetadataDefinition($metadata),
         ]);
+        $definition->setLazy(true);
 
         $container->setDefinition($metadata->getServiceId('repository'), $definition);
     }
