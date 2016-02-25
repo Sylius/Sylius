@@ -46,8 +46,8 @@ final class CartContext implements Context
 
     /**
      * @Given I added product :product to the cart
+     * @Given /^I (?:have|had) (product "([^"]+)") in the cart$/
      * @When I add product :product to the cart
-     * @When I have product :product in the cart
      */
     public function iAddProductToTheCart(ProductInterface $product)
     {
@@ -67,7 +67,7 @@ final class CartContext implements Context
     }
 
     /**
-     * @Given I remove product :productName from the cart
+     * @Given /^I (?:remove|removed) product "([^"]+)" from the cart$/
      */
     public function iRemoveProductFromTheCart($productName)
     {
@@ -133,6 +133,26 @@ final class CartContext implements Context
         $this->cartSummaryPage->open();
 
         expect($this->cartSummaryPage->getPromotionTotal())->toBe($promotionsTotal);
+    }
+
+    /**
+     * @Given /^cart should be empty with no value$/
+     */
+    public function cartShouldBeEmptyWithNoValue()
+    {
+        $this->cartSummaryPage->open();
+
+        expect($this->cartSummaryPage)->toThrow(ElementNotFoundException::class)->during('getGrandTotal', []);
+    }
+
+    /**
+     * @Given /^there should be no shipping fee$/
+     */
+    public function thereShouldBeNoShippingFee()
+    {
+        $this->cartSummaryPage->open();
+
+        expect($this->cartSummaryPage)->toThrow(ElementNotFoundException::class)->during('getShippingTotal', []);
     }
 
     /**

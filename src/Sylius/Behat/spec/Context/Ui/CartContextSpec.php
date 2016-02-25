@@ -12,6 +12,7 @@
 namespace spec\Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
+use PhpSpec\Exception\Example\FailureException;
 use PhpSpec\Exception\Example\NotEqualException;
 use PhpSpec\ObjectBehavior;
 use Sylius\Behat\Context\Ui\CartContext;
@@ -87,6 +88,38 @@ class CartContextSpec extends ObjectBehavior
         $cartSummaryPage->getPromotionTotal()->willReturn('$40.00');
 
         $this->shouldThrow(NotEqualException::class)->during('myDiscountShouldBe', ['$50.00']);
+    }
+
+    function it_ensures_there_is_no_grand_total_info_on_the_page(CartSummaryPage $cartSummaryPage)
+    {
+        $cartSummaryPage->open()->shouldBeCalled();
+        $cartSummaryPage->getGrandTotal()->willThrow(new ElementNotFoundException('"grand total" element is not present on the page'));
+
+        $this->cartShouldBeEmptyWithNoValue();
+    }
+
+    function it_throws_exception_if_grand_total_is_present_on_the_page_but_should_not(CartSummaryPage $cartSummaryPage)
+    {
+        $cartSummaryPage->open()->shouldBeCalled();
+        $cartSummaryPage->getGrandTotal()->willReturn('$10.00');
+
+        $this->shouldThrow(new FailureException('Expected to get exception, none got.'))->during('cartShouldBeEmptyWithNoValue', []);
+    }
+
+    function it_ensures_there_is_no_shipping_fee_info_on_the_page(CartSummaryPage $cartSummaryPage)
+    {
+        $cartSummaryPage->open()->shouldBeCalled();
+        $cartSummaryPage->getShippingTotal()->willThrow(new ElementNotFoundException('"shipping total" element is not present on the page'));
+
+        $this->thereShouldBeNoShippingFee();
+    }
+    
+    function it_throws_exception_if_shipping_total_is_present_on_the_page_but_should_not(CartSummaryPage $cartSummaryPage)
+    {
+        $cartSummaryPage->open()->shouldBeCalled();
+        $cartSummaryPage->getShippingTotal()->willReturn('$10.00');
+        
+        $this->shouldThrow(new FailureException('Expected to get exception, none got.'))->during('thereShouldBeNoShippingFee', []);
     }
 
     function it_ensures_there_is_no_discount_info_on_the_page(CartSummaryPage $cartSummaryPage)

@@ -127,7 +127,7 @@ class PromotionContextSpec extends ObjectBehavior
         $this->itGivesFixedDiscountToEveryOrderWithQuantityAtLeast($promotion, 1000, '5');
     }
 
-    function it_creates_fixed_discount_promotion_for_cart_with_specified_item_total(
+    function it_creates_fixed_discount_promotion_for_cart_with_specified_items_total(
         $actionFactory,
         $ruleFactory,
         $objectManager,
