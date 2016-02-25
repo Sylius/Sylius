@@ -72,6 +72,19 @@ class TaxonomyContext implements Context
     }
 
     /**
+     * @Transform classified as :taxonName
+     */
+    public function getTaxonByName($taxonName)
+    {
+        $taxon = $this->taxonRepository->findOneBy(['name' => $taxonName]);
+        if (null === $taxon) {
+            throw new \InvalidArgumentException(sprintf('Taxon with name "%s" does not exist.', $taxonName));
+        }
+
+        return $taxon;
+    }
+
+    /**
      * @Given store classifies its products as :firstTaxonName
      * @Given store classifies its products as :firstTaxonName and :secondTaxonName
      * @Given store classifies its products as :firstTaxonName, :secondTaxonName and :thirdTaxonName
@@ -80,6 +93,7 @@ class TaxonomyContext implements Context
     {
         /** @var TaxonomyInterface $taxonomy */
         $taxonomy = $this->taxonomyFactory->createNew();
+        $taxonomy->setName('Category');
         $taxonomy->setCode('category');
 
         $taxonomy->addTaxon($this->createTaxon($firstTaxonName));
@@ -89,7 +103,7 @@ class TaxonomyContext implements Context
         }
 
         if (null !== $thirdTaxonName) {
-            $taxonomy->addTaxon($this->ccontexts.xmlreateTaxon($thirdTaxonName));
+            $taxonomy->addTaxon($this->createTaxon($thirdTaxonName));
         }
 
         $this->taxonomyRepository->add($taxonomy);
@@ -100,12 +114,7 @@ class TaxonomyContext implements Context
      */
     public function itBelongsTo(ProductInterface $product, $taxonName)
     {
-        $taxon = $this->taxonRepository->findOneBy(['name' => $taxonName]);
-        if (null === $taxon) {
-            throw new \InvalidArgumentException(sprintf('Taxon with name "%s" does not exist.', $taxonName));
-        }
-
-        $product->addTaxon($taxon);
+        $product->addTaxon($this->getTaxonByName($taxonName));
 
         $this->objectManager->flush($product);
     }

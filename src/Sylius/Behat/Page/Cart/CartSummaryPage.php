@@ -71,6 +71,28 @@ class CartSummaryPage extends SymfonyPage implements CartSummaryPageInterface
     /**
      * {@inheritdoc}
      */
+    public function getItemRegularPrice($productName)
+    {
+        $this->elements['regular price'] = '#cart-summary tr:contains("'.$productName.'") .regular-price';
+        $regularPriceElement = $this->getElement('regular price');
+
+        return trim($regularPriceElement->getText());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getItemDiscountPrice($productName)
+    {
+        $this->elements['discount price'] = '#cart-summary tr:contains("'.$productName.'") .discount-price';
+        $discountPriceElement = $this->getElement('discount price');
+
+        return trim($discountPriceElement->getText());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function removeProduct($productName)
     {
         $item = $this->getDocument()->find('css', sprintf('#cart-summary tbody tr:contains("%s")', $productName));

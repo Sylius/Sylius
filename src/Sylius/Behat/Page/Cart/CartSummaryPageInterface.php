@@ -50,6 +50,20 @@ interface CartSummaryPageInterface extends PageInterface
 
     /**
      * @param string $productName
+     *
+     * @throws ElementNotFoundException
+     */
+    public function getItemRegularPrice($productName);
+
+    /**
+     * @param string $productName
+     *
+     * @throws ElementNotFoundException
+     */
+    public function getItemDiscountPrice($productName);
+
+    /**
+     * @param string $productName
      */
     public function removeProduct($productName);
 

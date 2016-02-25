@@ -52,6 +52,23 @@ class TaxonomyContextSpec extends ObjectBehavior
         $this->shouldImplement(Context::class);
     }
 
+    function it_returns_taxon_by_name($taxonRepository, TaxonInterface $taxon)
+    {
+        $taxonRepository->findOneBy(['name' => 'Books'])->willReturn($taxon);
+
+        $this->getTaxonByName('Books')->shouldReturn($taxon);
+    }
+
+    function it_throws_exception_if_taxon_with_given_name_does_not_exist($taxonRepository)
+    {
+        $taxonRepository->findOneBy(['name' => 'Books'])->willReturn(null);
+
+        $this
+            ->shouldThrow(new \InvalidArgumentException('Taxon with name "Books" does not exist.'))
+            ->during('getTaxonByName', ['Books'])
+        ;
+    }
+
     function it_creates_taxons_with_given_name(
         $taxonomyRepository,
         $taxonomyFactory,
@@ -63,6 +80,7 @@ class TaxonomyContextSpec extends ObjectBehavior
     ) {
         $taxonomyFactory->createNew()->willReturn($taxonomy);
         $taxonomy->setCode('category')->shouldBeCalled();
+        $taxonomy->setName('Category')->shouldBeCalled();
 
         $taxonFactory->createNew()->willReturn($firstTaxon, $secondTaxon, $thirdTaxon);
 
@@ -91,15 +109,5 @@ class TaxonomyContextSpec extends ObjectBehavior
         $product->addTaxon($taxon)->shouldBeCalled();
 
         $this->itBelongsTo($product, 'Books');
-    }
-
-    function it_throws_exception_if_taxon_with_given_name_does_not_exist($taxonRepository, ProductInterface $product)
-    {
-        $taxonRepository->findOneBy(['name' => 'Books'])->willReturn(null);
-
-        $this
-            ->shouldThrow(new \InvalidArgumentException('Taxon with name "Books" does not exist.'))
-            ->during('itBelongsTo', [$product, 'Books'])
-        ;
     }
 }

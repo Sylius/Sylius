@@ -16,12 +16,18 @@ use Sylius\Behat\Page\Cart\CartSummaryPageInterface;
 use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Page\Product\ProductShowPageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class CartContext implements Context
 {
+    /**
+     * @var SharedStorageInterface
+     */
+    private $sharedStorage;
+
     /**
      * @var CartSummaryPageInterface
      */
@@ -33,13 +39,16 @@ final class CartContext implements Context
     private $productShowPage;
 
     /**
+     * @param SharedStorageInterface $sharedStorage
      * @param CartSummaryPageInterface $cartSummaryPage
      * @param ProductShowPageInterface $productShowPage
      */
     public function __construct(
+        SharedStorageInterface $sharedStorage,
         CartSummaryPageInterface $cartSummaryPage,
         ProductShowPageInterface $productShowPage
     ) {
+        $this->sharedStorage = $sharedStorage;
         $this->cartSummaryPage = $cartSummaryPage;
         $this->productShowPage = $productShowPage;
     }
@@ -53,6 +62,8 @@ final class CartContext implements Context
     {
         $this->productShowPage->open(['product' => $product]);
         $this->productShowPage->addToCart();
+
+        $this->sharedStorage->set('product', $product);
     }
 
     /**
@@ -64,6 +75,8 @@ final class CartContext implements Context
     {
         $this->productShowPage->open(['product' => $product]);
         $this->productShowPage->addToCartWithVariant($variant);
+
+        $this->sharedStorage->set('product', $product);
     }
 
     /**
@@ -163,5 +176,28 @@ final class CartContext implements Context
         $this->cartSummaryPage->open();
 
         expect($this->cartSummaryPage)->toThrow(ElementNotFoundException::class)->during('getPromotionTotal', []);
+    }
+
+    /**
+     * @Then /^(its|theirs) price should be decreased by ("[^"]+")$/
+     */
+    public function itsPriceShouldBeDecreasedBy(ProductInterface $product, $amount)
+    {
+        $this->cartSummaryPage->open();
+
+        $discountPrice = $this->getPriceFromString($this->cartSummaryPage->getItemDiscountPrice($product->getName()));
+        $regularPrice = $this->getPriceFromString($this->cartSummaryPage->getItemRegularPrice($product->getName()));
+
+        expect($discountPrice)->toBe($regularPrice - $amount);
+    }
+
+    /**
+     * @param string $price
+     *
+     * @return int
+     */
+    private function getPriceFromString($price)
+    {
+        return (int) round(($price * 100), 2);
     }
 }

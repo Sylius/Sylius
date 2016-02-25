@@ -267,6 +267,7 @@
         </service>
 
         <service id="sylius.behat.context.ui.cart" class="%sylius.behat.context.ui.cart.class%" scope="scenario">
+            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.behat.page.cart_summary" />
             <argument type="service" id="sylius.behat.page.product_show" />
             <tag name="sylius.behat.context" />

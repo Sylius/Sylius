@@ -19,6 +19,8 @@ use Sylius\Behat\Context\Ui\CartContext;
 use Sylius\Behat\Page\Cart\CartSummaryPageInterface;
 use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Page\Product\ProductShowPageInterface;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
 /**
  * @mixin CartContext
@@ -27,9 +29,12 @@ use Sylius\Behat\Page\Product\ProductShowPageInterface;
  */
 class CartContextSpec extends ObjectBehavior
 {
-    public function let(CartSummaryPageInterface $cartSummaryPage, ProductShowPageInterface $productShowPage)
-    {
-        $this->beConstructedWith($cartSummaryPage, $productShowPage);
+    public function let(
+        SharedStorageInterface $sharedStorage,
+        CartSummaryPageInterface $cartSummaryPage,
+        ProductShowPageInterface $productShowPage
+    ) {
+        $this->beConstructedWith($sharedStorage, $cartSummaryPage, $productShowPage);
     }
 
     function it_is_initializable()
@@ -128,5 +133,16 @@ class CartContextSpec extends ObjectBehavior
         $cartSummaryPage->getPromotionTotal()->willThrow(new ElementNotFoundException('"promotion total" element is not present on the page'));
 
         $this->thereShouldBeNoDiscount();
+    }
+
+    function it_checks_if_cart_item_has_correct_discount_price(CartSummaryPage $cartSummaryPage, ProductInterface $product)
+    {
+        $cartSummaryPage->open()->shouldBeCalled();
+        $product->getName()->willReturn('Test product');
+
+        $cartSummaryPage->getItemDiscountPrice('Test product')->willReturn('€30.00');
+        $cartSummaryPage->getItemRegularPrice('Test product')->willReturn('€50.00');
+
+        $this->itsPriceShouldBeDecreasedBy($product, '€20.00');
     }
 }

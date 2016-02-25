@@ -18,6 +18,7 @@ use Sylius\Component\Core\Factory\ActionFactoryInterface;
 use Sylius\Component\Core\Factory\RuleFactoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Test\Factory\TestPromotionFactoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Promotion\Model\ActionInterface;
@@ -158,5 +159,20 @@ class PromotionContextSpec extends ObjectBehavior
         $objectManager->flush()->shouldBeCalled();
 
         $this->itGivesPercentageDiscountOnShippingToEveryOrder($promotion, 0.1);
+    }
+
+    function it_creates_item_percentage_discount_action_for_promotion_products_with_specific_taxon(
+        $actionFactory,
+        $objectManager,
+        ActionInterface $action,
+        PromotionInterface $promotion,
+        TaxonInterface $taxon
+    ) {
+        $actionFactory->createItemPercentageDiscount(0.1)->willReturn($action);
+        $promotion->addAction($action)->shouldBeCalled();
+
+        $objectManager->flush()->shouldBeCalled();
+
+        $this->itGivesOffEveryProductClassifiedAs($promotion, 0.1, $taxon);
     }
 }

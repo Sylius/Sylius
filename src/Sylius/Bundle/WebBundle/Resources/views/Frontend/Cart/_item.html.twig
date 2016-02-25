@@ -17,6 +17,7 @@
         {{ item.vars.value.unitPrice|sylius_price }}
     </td>
     <td class="col-md-1" style="text-align: right">
-        {{ item.vars.value.total|sylius_price }}
+        <span class="regular-price">{{ item.vars.value.total|sylius_price }}</span>
+        <span class="discount-price"></span>
     </td>
 </tr>

@@ -12,9 +12,9 @@ Feature: Receiving percentage discount on products from specific taxon
         And the store has a product "PHP Mug" priced at "€20.00"
         And it belongs to "Mugs"
         And there is a promotion "T-Shirts promotion"
-        And it gives 20% off every product classified as "T-Shirts"
+        And it gives "20%" off every product classified as "T-Shirts"
 
-    @todo
+    @ui
     Scenario: Receiving percentage discount on a single item from specific taxon
         When I add product "PHP T-Shirt" to the cart
         Then its price should be decreased by "€20.00"
@@ -24,7 +24,7 @@ Feature: Receiving percentage discount on products from specific taxon
     @todo
     Scenario: Receiving percentage discount on a multiple items from specific taxon
         When I add 3 products "PHP T-Shirt" to the cart
-        Then their price should be decreased by "€60.00"
+        Then theirs price should be decreased by "€60.00"
         And my cart total should be "€240.00"
         And my discount should be "-€60.00"
 
