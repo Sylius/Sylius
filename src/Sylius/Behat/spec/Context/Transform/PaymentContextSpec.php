@@ -9,15 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Behat\Context\Setup;
+namespace spec\Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\Test\Services\PaymentMethodNameToGatewayConverterInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Payment\Model\PaymentMethod;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -26,17 +23,14 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class PaymentContextSpec extends ObjectBehavior
 {
     function let(
-        RepositoryInterface $paymentMethodRepository,
-        SharedStorageInterface $sharedStorage,
-        FactoryInterface $paymentMethodFactory,
-        PaymentMethodNameToGatewayConverterInterface $paymentMethodNameToGatewayConverter
+        RepositoryInterface $paymentMethodRepository
     ) {
-        $this->beConstructedWith($paymentMethodRepository, $sharedStorage, $paymentMethodFactory, $paymentMethodNameToGatewayConverter);
+        $this->beConstructedWith($paymentMethodRepository);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Behat\Context\Setup\PaymentContext');
+        $this->shouldHaveType('Sylius\Behat\Context\Transform\PaymentContext');
     }
 
     function it_implements_context_interface()
