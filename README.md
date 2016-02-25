@@ -12,11 +12,11 @@ Sylius is an open source e-commerce solution for **PHP**, based on the [**Symfon
 
 Ultimate goal of the project is to create a webshop engine, which is user-friendly, *loved* by developers and has a helpful community.
 
-Sylius is constructed from fully decoupled components (bundles in Symfony2 glossary), which means that every feature (products catalog, shipping engine, promotions system...) can be used in any other application. 
+Sylius is constructed from fully decoupled components (bundles in Symfony2 glossary), which means that every feature (products catalog, shipping engine, promotions system...) can be used in any other application.
 
 We're using full-stack BDD methodology, with [phpspec](http://phpspec.net) and [Behat](http://behat.org).
 
-Windows support is a WIP! 
+Windows support is a WIP!
 
 [![Build status on Windows](https://img.shields.io/appveyor/ci/pjedrzejewski/sylius.svg)](https://ci.appveyor.com/project/pjedrzejewski/sylius/branch/master)
 
@@ -41,14 +41,14 @@ The install script will give you the option to run fixtures that make testing an
 If you want to try out new Sylius UI, please run the following commands:
 
 ```bash
-$ npm install 
+$ npm install
 $ gulp
 ```
 
 [Behat](http://behat.org) scenarios
 -----------------------------------
 
-By default Behat uses `http://localhost:8080/` as your application base url. If your one is different, 
+By default Behat uses `http://localhost:8080/` as your application base url. If your one is different,
 you need to create `behat.yml` files that will overwrite it with your custom url:
 
 ```yaml
@@ -60,10 +60,10 @@ default:
             base_url: http://my.custom.url
 ```
 
-Then download [Selenium Server](http://seleniumhq.org/download/), and run it:
+Then run selenium-server-standalone:
 
 ```bash
-$ java -jar selenium-server-standalone.jar
+$ bin/selenium-server-standalone
 ```
 
 Then setup your test database:
