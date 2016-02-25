@@ -12,7 +12,9 @@
 namespace Sylius\Bundle\ThemeBundle\Loader;
 
 use Sylius\Bundle\ThemeBundle\Configuration\Provider\ConfigurationProviderInterface;
+use Sylius\Bundle\ThemeBundle\Factory\ThemeAuthorFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeFactoryInterface;
+use Sylius\Bundle\ThemeBundle\Model\ThemeAuthor;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Zend\Hydrator\HydrationInterface;
 
@@ -32,6 +34,11 @@ final class ThemeLoader implements ThemeLoaderInterface
     private $themeFactory;
 
     /**
+     * @var ThemeAuthorFactoryInterface
+     */
+    private $themeAuthorFactory;
+
+    /**
      * @var HydrationInterface
      */
     private $themeHydrator;
@@ -44,17 +51,20 @@ final class ThemeLoader implements ThemeLoaderInterface
     /**
      * @param ConfigurationProviderInterface $configurationProvider
      * @param ThemeFactoryInterface $themeFactory
+     * @param ThemeAuthorFactoryInterface $themeAuthorFactory
      * @param HydrationInterface $themeHydrator
      * @param CircularDependencyCheckerInterface $circularDependencyChecker
      */
     public function __construct(
         ConfigurationProviderInterface $configurationProvider,
         ThemeFactoryInterface $themeFactory,
+        ThemeAuthorFactoryInterface $themeAuthorFactory,
         HydrationInterface $themeHydrator,
         CircularDependencyCheckerInterface $circularDependencyChecker
     ) {
         $this->configurationProvider = $configurationProvider;
         $this->themeFactory = $themeFactory;
+        $this->themeAuthorFactory = $themeAuthorFactory;
         $this->themeHydrator = $themeHydrator;
         $this->circularDependencyChecker = $circularDependencyChecker;
     }
@@ -102,6 +112,7 @@ final class ThemeLoader implements ThemeLoaderInterface
             $themeName = $configuration['name'];
 
             $configuration['parents'] = $this->convertParentsNamesToParentsObjects($themeName, $configuration['parents'], $themes);
+            $configuration['authors'] = $this->convertAuthorsArraysToAuthorsObjects($configuration['authors']);
 
             $themes[$themeName] = $this->themeHydrator->hydrate($configuration, $themes[$themeName]);
         }
@@ -143,5 +154,17 @@ final class ThemeLoader implements ThemeLoaderInterface
 
             return $existingThemes[$parentName];
         }, $parentsNames);
+    }
+
+    /**
+     * @param array $authorsArrays
+     *
+     * @return ThemeAuthor[]
+     */
+    private function convertAuthorsArraysToAuthorsObjects(array $authorsArrays)
+    {
+        return array_map(function (array $authorArray) {
+            return $this->themeAuthorFactory->createFromArray($authorArray);
+        }, $authorsArrays);
     }
 }

@@ -14,7 +14,8 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
         <parameter key="sylius.context.theme.class">Sylius\Bundle\ThemeBundle\Context\SettableThemeContext</parameter>
-        <parameter key="sylius.theme.hydrator.class">DoctrineModule\Stdlib\Hydrator\DoctrineObject</parameter>
+        <parameter key="sylius.factory.theme_author.class">Sylius\Bundle\ThemeBundle\Factory\ThemeAuthorFactory</parameter>
+        <parameter key="sylius.theme.hydrator.class">Sylius\Bundle\ThemeBundle\Hydrator\ThemeHydrator</parameter>
         <parameter key="sylius.theme.merger.class">Sylius\Bundle\ThemeBundle\Synchronizer\ThemeMerger</parameter>
         <parameter key="sylius.theme.loader.class">Sylius\Bundle\ThemeBundle\Loader\ThemeLoader</parameter>
         <parameter key="sylius.theme.synchronizer.class">Sylius\Bundle\ThemeBundle\Synchronizer\ThemeSynchronizer</parameter>
@@ -32,9 +33,12 @@
             <argument type="service" id="sylius.theme.hierarchy_provider" />
         </service>
 
+        <service id="sylius.factory.theme_author" class="%sylius.factory.theme_author.class%" public="false" />
+
         <service id="sylius.theme.hydrator" class="%sylius.theme.hydrator.class%" public="false">
-            <argument type="service" id="sylius.manager.theme" />
-            <argument type="constant">false</argument>
+            <argument type="service">
+                <service class="Zend\Hydrator\Reflection" />
+            </argument>
         </service>
 
         <service id="sylius.theme.merger" class="%sylius.theme.merger.class%" public="false">
@@ -46,6 +50,7 @@
         <service id="sylius.theme.loader" class="%sylius.theme.loader.class%" public="false">
             <argument type="service" id="sylius.theme.configuration.provider" />
             <argument type="service" id="sylius.factory.theme" />
+            <argument type="service" id="sylius.factory.theme_author" />
             <argument type="service" id="sylius.theme.hydrator" />
             <argument type="service" id="sylius.theme.circular_dependency_checker" />
         </service>

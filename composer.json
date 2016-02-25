@@ -31,7 +31,6 @@
         "doctrine/doctrine-cache-bundle": "~1.0",
         "doctrine/doctrine-fixtures-bundle": "~2.2",
         "doctrine/doctrine-migrations-bundle": "~1.0",
-        "doctrine/doctrine-module": "^1.0",
         "doctrine/orm": "^2.4.8,<2.5",
         "doctrine/phpcr-odm": "^1.3",
         "friendsofsymfony/elastica-bundle": "^3.0.2",
@@ -83,6 +82,7 @@
         "white-october/pagerfanta-bundle": "~1.0",
         "willdurand/hateoas-bundle": "^0.4|^1.0",
         "winzou/state-machine-bundle": "~0.2",
+        "zendframework/zend-hydrator": "^1.0|^2.0",
         "zendframework/zend-stdlib": "^2.0|^3.0"
     },
     "require-dev": {
