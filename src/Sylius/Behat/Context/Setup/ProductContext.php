@@ -165,8 +165,7 @@ final class ProductContext implements Context
             $variant->setPresentation($variantHash['name']);
             $variant->setPrice($this->getPriceFromString(str_replace(['$', '€', '£'], '', $variantHash['price'])));
             $variant->setProduct($product);
-
-            $this->productRepository->add($variant);
+            $product->addVariant($variant);
         }
 
         $this->objectManager->flush();
