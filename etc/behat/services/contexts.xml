@@ -32,6 +32,7 @@
         <parameter key="sylius.behat.context.transform.shared_storage.class">Sylius\Behat\Context\Transform\SharedStorageContext</parameter>
         <parameter key="sylius.behat.context.transform.channel.class">Sylius\Behat\Context\Transform\ChannelContext</parameter>
         <parameter key="sylius.behat.context.transform.payment.class">Sylius\Behat\Context\Transform\PaymentContext</parameter>
+        <parameter key="sylius.behat.context.transform.product.class">Sylius\Behat\Context\Transform\ProductContext</parameter>
 
         <parameter key="sylius.behat.context.hook.doctrine_orm.class">Sylius\Behat\Context\Hook\DoctrineORMContext</parameter>
 
@@ -97,7 +98,6 @@
         <service id="sylius.behat.context.setup.product" class="%sylius.behat.context.setup.product.class%" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.repository.product" container="symfony" />
-            <argument type="service" id="sylius.repository.product_variant" container="symfony" />
             <argument type="service" id="sylius.factory.product" container="symfony" />
             <argument type="service" id="sylius.factory.product_variant" container="symfony" />
             <argument type="service" id="doctrine.orm.entity_manager" container="symfony" />
@@ -179,6 +179,12 @@
 
         <service id="sylius.behat.context.transform.payment" class="%sylius.behat.context.transform.payment.class%" scope="scenario">
             <argument type="service" id="sylius.repository.payment_method" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.transform.product" class="%sylius.behat.context.transform.product.class%" scope="scenario">
+            <argument type="service" id="sylius.repository.product" container="symfony" />
+            <argument type="service" id="sylius.repository.product_variant" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 
