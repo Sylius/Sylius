@@ -10,13 +10,13 @@ Feature: Deleting an order
         And the store ships everywhere for free
         And the store allows paying with "Cash on Delivery"
         And the customer "john.doe@gmail.com" placed an order "#00000022"
-        And the customer chose "Free" shipping to "France" with "Cash on Delivery" payment
+        And the customer chose "Free" shipping method to "France" with "Cash on Delivery" payment
         And the customer bought single "PHP T-Shirt"
 
     @domain
     Scenario: Deleted order should disappear from the registry
         When I delete the order "#00000022"
-        Then order "#00000022" should not exist in the registry
+        Then this order should not exist in the registry
 
     @todo
     Scenario: Payments of a deleted order should disappear from the registry
