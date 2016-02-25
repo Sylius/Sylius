@@ -27,18 +27,16 @@ final class TranslatorResourceProvider implements TranslatorResourceProviderInte
     private $resourcesLocales = [];
 
     /**
+     * @var array
+     */
+    private $filepaths;
+
+    /**
      * @param array $filepaths
      */
     public function __construct(array $filepaths = [])
     {
-        foreach ($filepaths as $filepath) {
-            $resource = new TranslationResource($filepath);
-
-            $this->resources[] = $resource;
-            $this->resourcesLocales[] = $resource->getLocale();
-        }
-
-        $this->resourcesLocales = array_unique($this->resourcesLocales);
+        $this->filepaths = $filepaths;
     }
 
     /**
@@ -46,6 +44,8 @@ final class TranslatorResourceProvider implements TranslatorResourceProviderInte
      */
     public function getResources()
     {
+        $this->initializeIfNeeded();
+
         return $this->resources;
     }
 
@@ -54,6 +54,21 @@ final class TranslatorResourceProvider implements TranslatorResourceProviderInte
      */
     public function getResourcesLocales()
     {
+        $this->initializeIfNeeded();
+
         return $this->resourcesLocales;
+    }
+
+    private function initializeIfNeeded()
+    {
+        foreach ($this->filepaths as $key => $filepath) {
+            $resource = new TranslationResource($filepath);
+
+            $this->resources[] = $resource;
+            $this->resourcesLocales[] = $resource->getLocale();
+        }
+
+        $this->resourcesLocales = array_unique($this->resourcesLocales);
+        $this->filepaths = [];
     }
 }
