@@ -48,12 +48,12 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Then order :orderNumber should not exist in the registry
+     * @Then /^([^"]+) should not exist in the registry$/
      */
-    public function orderShouldNotExistInTheRegistry($orderNumber)
+    public function orderShouldNotExistInTheRegistry(OrderInterface $order)
     {
         /** @var OrderInterface $order */
-        $order = $this->orderRepository->findOneBy(['number' => $orderNumber]);
+        $order = $this->orderRepository->find($order->getId());
 
         expect($order)->toBe(null);
     }

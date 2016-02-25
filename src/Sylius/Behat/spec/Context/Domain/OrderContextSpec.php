@@ -56,17 +56,19 @@ class OrderContextSpec extends ObjectBehavior
         $this->shouldThrow(new \InvalidArgumentException('Order with #00000000 number was not found in an order repository'))->during('iDeleteTheOrder', ['#00000000']);
     }
 
-    function it_checks_if_an_order_exists_in_repository(OrderRepositoryInterface $orderRepository)
+    function it_checks_if_an_order_exists_in_repository(OrderRepositoryInterface $orderRepository, OrderInterface $order)
     {
-        $orderRepository->findOneBy(['number' => '#00000000'])->willReturn(null);
+        $order->getId()->willReturn(1);
+        $orderRepository->find(1)->willReturn(null);
 
-        $this->orderShouldNotExistInTheRegistry('#00000000');
+        $this->orderShouldNotExistInTheRegistry($order);
     }
 
     function it_throws_an_exception_if_order_still_exists(OrderRepositoryInterface $orderRepository, OrderInterface $order)
     {
-        $orderRepository->findOneBy(['number' => '#00000001'])->willReturn($order);
+        $order->getId()->willReturn(1);
+        $orderRepository->find(1)->willReturn($order);
 
-        $this->shouldThrow(NotEqualException::class)->during('orderShouldNotExistInTheRegistry', ['#00000001']);
+        $this->shouldThrow(NotEqualException::class)->during('orderShouldNotExistInTheRegistry', [$order]);
     }
 }

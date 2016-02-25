@@ -32,6 +32,12 @@ use Sylius\Component\User\Model\CustomerInterface;
  */
 final class OrderContext implements Context
 {
+
+    /**
+     * @var SharedStorageInterface
+     */
+    private $sharedStorage;
+
     /**
      * @var OrderRepositoryInterface
      */
@@ -63,11 +69,6 @@ final class OrderContext implements Context
     private $itemQuantityModifier;
 
     /**
-     * @var SharedStorageInterface
-     */
-    private $sharedStorage;
-
-    /**
      * @var ObjectManager
      */
     private $objectManager;
@@ -83,22 +84,22 @@ final class OrderContext implements Context
      * @param ObjectManager $objectManager
      */
     public function __construct(
+        SharedStorageInterface $sharedStorage,
         OrderRepositoryInterface $orderRepository,
         FactoryInterface $orderFactory,
         OrderShipmentFactoryInterface $orderShipmentFactory,
         PaymentFactoryInterface $paymentFactory,
         FactoryInterface $orderItemFactory,
         OrderItemQuantityModifierInterface $itemQuantityModifier,
-        SharedStorageInterface $sharedStorage,
         ObjectManager $objectManager
     ) {
+        $this->sharedStorage = $sharedStorage;
         $this->orderRepository = $orderRepository;
         $this->orderFactory = $orderFactory;
         $this->orderShipmentFactory = $orderShipmentFactory;
         $this->paymentFactory = $paymentFactory;
         $this->orderItemFactory = $orderItemFactory;
         $this->itemQuantityModifier = $itemQuantityModifier;
-        $this->sharedStorage = $sharedStorage;
         $this->objectManager = $objectManager;
     }
 
@@ -121,7 +122,7 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given /^the customer chose ("[^"]+" shipping) (to "[^"]+") with ("[^"]+" payment)$/
+     * @Given /^the customer chose ("[^"]+" shipping method) (to "[^"]+") with ("[^"]+" payment)$/
      */
     public function theCustomerChoseShippingToWithPayment(
         ShippingMethodInterface $shippingMethod,

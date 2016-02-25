@@ -52,7 +52,7 @@ class CustomerContextSpec extends ObjectBehavior
 
         $customerRepository->add($customer)->shouldBeCalled();
 
-        $this->getCustomerByEmail('oliver.queen@star.com')->shouldReturn($customer);
+        $this->getOrCreateCustomerByEmail('oliver.queen@star.com')->shouldReturn($customer);
     }
 
     function it_provides_new_customer_from_repository_if_it_exists(
@@ -61,6 +61,6 @@ class CustomerContextSpec extends ObjectBehavior
     ) {
         $customerRepository->findOneBy(['email' => 'oliver.queen@star.com'])->willReturn($customer);
 
-        $this->getCustomerByEmail('oliver.queen@star.com')->shouldReturn($customer);
+        $this->getOrCreateCustomerByEmail('oliver.queen@star.com')->shouldReturn($customer);
     }
 }

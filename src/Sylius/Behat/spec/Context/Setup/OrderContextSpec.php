@@ -40,23 +40,23 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 class OrderContextSpec extends ObjectBehavior
 {
     function let(
+        SharedStorageInterface $sharedStorage,
         FactoryInterface $orderFactory,
         OrderRepositoryInterface $orderRepository,
         OrderShipmentFactoryInterface $orderShipmentFactory,
         PaymentFactoryInterface $paymentFactory,
         FactoryInterface $orderItemFactory,
         OrderItemQuantityModifierInterface $itemQuantityModifier,
-        SharedStorageInterface $sharedStorage,
         ObjectManager $objectManager
     ) {
         $this->beConstructedWith(
+            $sharedStorage,
             $orderRepository,
             $orderFactory,
             $orderShipmentFactory,
             $paymentFactory,
             $orderItemFactory,
             $itemQuantityModifier,
-            $sharedStorage,
             $objectManager
         );
     }

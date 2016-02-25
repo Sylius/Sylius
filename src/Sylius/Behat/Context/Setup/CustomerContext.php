@@ -45,7 +45,7 @@ final class CustomerContext implements Context
     /**
      * @Transform :customer
      */
-    public function getCustomerByEmail($email)
+    public function getOrCreateCustomerByEmail($email)
     {
         /** @var CustomerInterface $customer */
         $customer = $this->customerRepository->findOneBy(['email' => $email]);

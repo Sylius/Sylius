@@ -21,7 +21,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class AddressingContext implements Context
+final class AddressingContext implements Context
 {
     /**
      * @var FactoryInterface

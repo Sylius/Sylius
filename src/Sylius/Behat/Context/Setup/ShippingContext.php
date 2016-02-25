@@ -75,7 +75,7 @@ final class ShippingContext implements Context
     /**
      * @Transform :shippingMethodName shipping method
      * @Transform shipping method :shippingMethodName
-     * @Transform /^"([^"]*)" shipping$/
+     * @Transform /^"([^"]*)" shipping method$/
      */
     public function getShippingMethodByName($shippingMethodName)
     {
