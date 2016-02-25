@@ -4,7 +4,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: migrations.yml }    
+    - { resource: migrations.yml }
     - { resource: @SyliusCoreBundle/Resources/config/app/main.yml }
 
 framework:
@@ -86,3 +86,9 @@ swiftmailer:
     port:      %sylius.mailer.port%
     username:  %sylius.mailer.user%
     password:  %sylius.mailer.password%
+
+fos_rest:
+    format_listener:
+        rules:
+            - { path: '^/api', priorities: ['json', 'xml'], fallback_format: json, prefer_extension: true }
+            - { path: '^/', stop: true }
