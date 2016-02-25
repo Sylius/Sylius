@@ -39,19 +39,19 @@ interface ThemeInterface extends ResourceInterface
     public function setPath($path);
 
     /**
-     * @return ThemeAuthorInterface[]
+     * @return ThemeAuthor[]
      */
     public function getAuthors();
 
     /**
-     * @param ThemeAuthorInterface $author
+     * @param ThemeAuthor $author
      */
-    public function addAuthor(ThemeAuthorInterface $author);
+    public function addAuthor(ThemeAuthor $author);
 
     /**
-     * @param ThemeAuthorInterface $author
+     * @param ThemeAuthor $author
      */
-    public function removeAuthor(ThemeAuthorInterface $author);
+    public function removeAuthor(ThemeAuthor $author);
 
     /**
      * @return string
@@ -89,7 +89,7 @@ interface ThemeInterface extends ResourceInterface
     public function removeParent(ThemeInterface $theme);
 
     /**
-     * Should match /^[a-zA-Z0-9-_]{6,32}$/
+     * Should match /^[a-zA-Z0-9]{6,32}$/
      *
      * @return string
      */

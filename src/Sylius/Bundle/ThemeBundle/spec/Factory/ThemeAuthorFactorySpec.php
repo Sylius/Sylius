@@ -16,7 +16,6 @@ use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeAuthorFactory;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeAuthorFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeAuthor;
-use Sylius\Bundle\ThemeBundle\Model\ThemeAuthorInterface;
 
 /**
  * @mixin ThemeAuthorFactory
@@ -25,11 +24,6 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeAuthorInterface;
  */
 class ThemeAuthorFactorySpec extends ObjectBehavior
 {
-    function let()
-    {
-        $this->beConstructedWith(ThemeAuthor::class);
-    }
-
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Factory\ThemeAuthorFactory');
@@ -51,7 +45,7 @@ class ThemeAuthorFactorySpec extends ObjectBehavior
     public function getMatchers()
     {
         return [
-            'beAnAuthorWithNameAndEmail' => function (ThemeAuthorInterface $themeAuthor, $name, $email) {
+            'beAnAuthorWithNameAndEmail' => function (ThemeAuthor $themeAuthor, $name, $email) {
                 return $name === $themeAuthor->getName() && $email === $themeAuthor->getEmail();
             },
         ];

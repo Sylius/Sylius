@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ThemeBundle\Factory;
 
-use Sylius\Bundle\ThemeBundle\Model\ThemeAuthorInterface;
+use Sylius\Bundle\ThemeBundle\Model\ThemeAuthor;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -21,7 +21,7 @@ interface ThemeAuthorFactoryInterface
     /**
      * @param array $data
      *
-     * @return ThemeAuthorInterface
+     * @return ThemeAuthor
      */
     public function createFromArray(array $data);
 }

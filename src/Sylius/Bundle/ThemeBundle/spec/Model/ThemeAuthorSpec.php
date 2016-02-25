@@ -14,7 +14,6 @@ namespace spec\Sylius\Bundle\ThemeBundle\Model;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Model\ThemeAuthor;
-use Sylius\Bundle\ThemeBundle\Model\ThemeAuthorInterface;
 
 /**
  * @mixin ThemeAuthor
@@ -30,7 +29,7 @@ class ThemeAuthorSpec extends ObjectBehavior
 
     function it_implements_theme_author_interface()
     {
-        $this->shouldImplement(ThemeAuthorInterface::class);
+        $this->shouldImplement(ThemeAuthor::class);
     }
 
     function it_has_name()

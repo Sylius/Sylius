@@ -14,32 +14,27 @@ namespace Sylius\Bundle\ThemeBundle\Model;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ThemeAuthor implements ThemeAuthorInterface
+final class ThemeAuthor
 {
     /**
-     * @var int
+     * @var string
      */
-    protected $id;
+    private $name;
 
     /**
      * @var string
      */
-    protected $name;
+    private $email;
 
     /**
      * @var string
      */
-    protected $email;
+    private $homepage;
 
     /**
      * @var string
      */
-    protected $homepage;
-
-    /**
-     * @var string
-     */
-    protected $role;
+    private $role;
 
     /**
      * {@inheritdoc}

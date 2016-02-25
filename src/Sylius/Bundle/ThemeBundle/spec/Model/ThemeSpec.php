@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\ThemeBundle\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Model\Theme;
-use Sylius\Bundle\ThemeBundle\Model\ThemeAuthorInterface;
+use Sylius\Bundle\ThemeBundle\Model\ThemeAuthor;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
@@ -83,8 +83,10 @@ class ThemeSpec extends ObjectBehavior
         $this->getDescription()->shouldReturn('Lorem ipsum.');
     }
 
-    function it_has_authors(ThemeAuthorInterface $themeAuthor)
+    function it_has_authors()
     {
+        $themeAuthor = new ThemeAuthor();
+
         $this->getAuthors()->shouldHaveCount(0);
 
         $this->addAuthor($themeAuthor);

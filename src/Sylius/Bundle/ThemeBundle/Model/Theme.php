@@ -50,9 +50,9 @@ class Theme implements ThemeInterface
     protected $description;
 
     /**
-     * @var Collection
+     * @var ThemeAuthor[]
      */
-    protected $authors;
+    protected $authors = [];
 
     /**
      * @var Collection
@@ -61,7 +61,6 @@ class Theme implements ThemeInterface
 
     public function __construct()
     {
-        $this->authors = new ArrayCollection();
         $this->parents = new ArrayCollection();
     }
 
@@ -157,7 +156,7 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function addAuthor(ThemeAuthorInterface $author)
+    public function addAuthor(ThemeAuthor $author)
     {
         $this->authors[] = $author;
     }
@@ -165,9 +164,11 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function removeAuthor(ThemeAuthorInterface $author)
+    public function removeAuthor(ThemeAuthor $author)
     {
-        $this->authors->removeElement($author);
+        $this->authors = array_values(array_filter($this->authors, function (ThemeAuthor $existingAuthor) use ($author) {
+            return $existingAuthor !== $author;
+        }));
     }
 
     /**

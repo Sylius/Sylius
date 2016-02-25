@@ -11,21 +11,20 @@
 
 namespace Sylius\Bundle\ThemeBundle\Factory;
 
-use Sylius\Bundle\ThemeBundle\Model\ThemeAuthorInterface;
-use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Bundle\ThemeBundle\Model\ThemeAuthor;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ThemeAuthorFactory extends Factory implements ThemeAuthorFactoryInterface
+final class ThemeAuthorFactory implements ThemeAuthorFactoryInterface
 {
     /**
      * {@inheritdoc}
      */
     public function createFromArray(array $data)
     {
-        /** @var ThemeAuthorInterface $author */
-        $author = $this->createNew();
+        /** @var ThemeAuthor $author */
+        $author = new ThemeAuthor();
 
         $author->setName(isset($data['name']) ? $data['name'] : null);
         $author->setEmail(isset($data['email']) ? $data['email'] : null);

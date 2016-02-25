@@ -13,12 +13,9 @@ namespace Sylius\Bundle\ThemeBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Bundle\ThemeBundle\Model\ThemeAuthor;
-use Sylius\Bundle\ThemeBundle\Model\ThemeAuthorInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\TranslatorAliasingPass;
 use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\TranslatorLoaderProviderPass;
-use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\ThemeAwareSourcesPass;
 use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\TranslatorResourceProviderPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -56,7 +53,6 @@ class SyliusThemeBundle extends AbstractResourceBundle
     {
         return [
             ThemeInterface::class => 'sylius.model.theme.class',
-            ThemeAuthorInterface::class => 'sylius.model.theme_author.class',
         ];
     }
 
