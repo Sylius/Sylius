@@ -9,15 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Behat\Context\Setup;
+namespace spec\Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
-use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -33,7 +31,7 @@ class AddressingContextSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Behat\Context\Setup\AddressingContext');
+        $this->shouldHaveType('Sylius\Behat\Context\Transform\AddressingContext');
     }
 
     function it_implements_context_interface()
