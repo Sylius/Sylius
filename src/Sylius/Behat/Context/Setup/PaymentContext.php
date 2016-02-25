@@ -19,6 +19,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class PaymentContext implements Context
 {
@@ -62,6 +63,7 @@ final class PaymentContext implements Context
 
     /**
      * @Given the store allows paying :paymentMethodName
+     * @Given the store allows paying with :paymentMethodName
      */
     public function storeAllowsPaying($paymentMethodName)
     {
@@ -75,5 +77,18 @@ final class PaymentContext implements Context
         $channel->addPaymentMethod($paymentMethod);
 
         $this->paymentMethodRepository->add($paymentMethod);
+    }
+
+    /**
+     * @Transform /^"([^"]+)" payment$/
+     */
+    public function getPaymentMethodByName($paymentMethodName)
+    {
+        $paymentMethod = $this->paymentMethodRepository->findOneBy(['name' => $paymentMethodName]);
+        if (null === $paymentMethod) {
+            throw new \InvalidArgumentException(sprintf('Payment method with name "%s" does not exist.', $paymentMethodName));
+        }
+
+        return $paymentMethod;
     }
 }
