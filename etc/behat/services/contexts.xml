@@ -35,6 +35,7 @@
         <parameter key="sylius.behat.context.transform.product.class">Sylius\Behat\Context\Transform\ProductContext</parameter>
         <parameter key="sylius.behat.context.transform.shipping.class">Sylius\Behat\Context\Transform\ShippingContext</parameter>
         <parameter key="sylius.behat.context.transform.tax.class">Sylius\Behat\Context\Transform\TaxContext</parameter>
+        <parameter key="sylius.behat.context.transform.zone.class">Sylius\Behat\Context\Transform\ZoneContext</parameter>
 
         <parameter key="sylius.behat.context.hook.doctrine_orm.class">Sylius\Behat\Context\Hook\DoctrineORMContext</parameter>
 
@@ -197,6 +198,11 @@
 
         <service id="sylius.behat.context.transform.tax" class="%sylius.behat.context.transform.tax.class%" scope="scenario">
             <argument type="service" id="sylius.repository.tax_category" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.transform.zone" class="%sylius.behat.context.transform.zone.class%" scope="scenario">
+            <argument type="service" id="sylius.repository.zone" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 

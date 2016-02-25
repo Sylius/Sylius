@@ -63,35 +63,6 @@ final class ZoneContext implements Context
     }
 
     /**
-     * @Transform :zone zone
-     * @Transform zone :zone
-     * @Transform :zone
-     */
-    public function getZoneByCode($zone)
-    {
-        $existingZone = $this->zoneRepository->findOneBy(['code' => $zone]);
-        if (null === $existingZone) {
-            throw new \InvalidArgumentException(sprintf('Zone with code "%s" does not exist.', $zone));
-        }
-
-        return $existingZone;
-    }
-
-    /**
-     * @Transform /^rest of the world$/
-     * @Transform /^the rest of the world$/
-     */
-    public function getRestOfTheWorldZone()
-    {
-        $zone = $this->zoneRepository->findOneBy(['code' => 'RoW']);
-        if (null === $zone) {
-            throw new \Exception('Rest of the world zone does not exist.');
-        }
-
-        return $zone;
-    }
-
-    /**
      * @Given /^there is "EU" zone containing all members of European Union$/
      */
     public function thereIsEUZoneContainingAllMembersOfEuropeanUnion()
@@ -123,12 +94,10 @@ final class ZoneContext implements Context
     }
 
     /**
-     * @Given default tax zone is :taxZone
+     * @Given default tax zone is :zone
      */
-    public function defaultTaxZoneIs($taxZone)
+    public function defaultTaxZoneIs(ZoneInterface $zone)
     {
-        $zone = $this->getZoneByCode($taxZone);
-
         $settings = $this->settingsManager->loadSettings('sylius_taxation');
         $settings->set('default_tax_zone', $zone);
         $this->settingsManager->saveSettings('sylius_taxation', $settings);

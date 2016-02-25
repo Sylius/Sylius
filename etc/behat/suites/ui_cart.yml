@@ -23,6 +23,7 @@ default:
                 - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.shipping
                 - sylius.behat.context.transform.tax
+                - sylius.behat.context.transform.zone
 
                 - sylius.behat.context.ui.checkout
                 - sylius.behat.context.ui.cart
