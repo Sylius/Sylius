@@ -11,11 +11,11 @@ default:
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.payment
                 - sylius.behat.context.setup.shipping
-                - sylius.behat.context.setup.customer
                 - sylius.behat.context.setup.order
 
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.addressing
+                - sylius.behat.context.transform.customer
 
                 - sylius.behat.context.domain.order
 
