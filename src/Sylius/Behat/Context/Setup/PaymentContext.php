@@ -24,14 +24,14 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 final class PaymentContext implements Context
 {
     /**
-     * @var RepositoryInterface
-     */
-    private $paymentMethodRepository;
-
-    /**
      * @var SharedStorageInterface
      */
     private $sharedStorage;
+
+    /**
+     * @var RepositoryInterface
+     */
+    private $paymentMethodRepository;
 
     /**
      * @var FactoryInterface
@@ -44,19 +44,19 @@ final class PaymentContext implements Context
     private $paymentMethodNameToGatewayConverter;
 
     /**
-     * @param RepositoryInterface $paymentMethodRepository
      * @param SharedStorageInterface $sharedStorage
+     * @param RepositoryInterface $paymentMethodRepository
      * @param FactoryInterface $paymentMethodFactory
      * @param PaymentMethodNameToGatewayConverterInterface $paymentMethodNameToGatewayConverter
      */
     public function __construct(
-        RepositoryInterface $paymentMethodRepository,
         SharedStorageInterface $sharedStorage,
+        RepositoryInterface $paymentMethodRepository,
         FactoryInterface $paymentMethodFactory,
         PaymentMethodNameToGatewayConverterInterface $paymentMethodNameToGatewayConverter
     ) {
-        $this->paymentMethodRepository = $paymentMethodRepository;
         $this->sharedStorage = $sharedStorage;
+        $this->paymentMethodRepository = $paymentMethodRepository;
         $this->paymentMethodFactory = $paymentMethodFactory;
         $this->paymentMethodNameToGatewayConverter = $paymentMethodNameToGatewayConverter;
     }

@@ -67,31 +67,31 @@
         </service>
 
         <service id="sylius.behat.context.setup.currency" class="%sylius.behat.context.setup.currency.class%" scope="scenario">
-            <argument type="service" id="sylius.repository.currency" container="symfony" />
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
+            <argument type="service" id="sylius.repository.currency" container="symfony" />
             <argument type="service" id="sylius.factory.currency" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 
         <service id="sylius.behat.context.setup.payment" class="%sylius.behat.context.setup.payment.class%" scope="scenario">
-            <argument type="service" id="sylius.repository.payment_method" container="symfony" />
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
+            <argument type="service" id="sylius.repository.payment_method" container="symfony" />
             <argument type="service" id="sylius.factory.payment_method" container="symfony" />
             <argument type="service" id="sylius.payment_method_name_to_gateway_converter" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 
         <service id="sylius.behat.context.setup.security" class="%sylius.behat.context.setup.security.class%" scope="scenario">
+            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.behat.security" />
             <argument type="service" id="sylius.test.factory.user" container="symfony" />
             <argument type="service" id="sylius.repository.user" container="symfony" />
-            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 
         <service id="sylius.behat.context.setup.user" class="%sylius.behat.context.setup.user.class%" scope="scenario">
-            <argument type="service" id="sylius.repository.user" container="symfony" />
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
+            <argument type="service" id="sylius.repository.user" container="symfony" />
             <argument type="service" id="sylius.test.factory.user" container="symfony" />
             <argument type="service" id="sylius.factory.address" container="symfony" />
             <argument type="service" id="sylius.manager.user" container="symfony" />
@@ -119,11 +119,11 @@
         </service>
 
         <service id="sylius.behat.context.setup.shipping" class="%sylius.behat.context.setup.shipping.class%" scope="scenario">
+            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.repository.shipping_method" container="symfony" />
             <argument type="service" id="sylius.repository.zone" container="symfony" />
             <argument type="service" id="sylius.factory.shipping_method" container="symfony" />
             <argument type="service" id="sylius.manager.shipping_method" container="symfony" />
-            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 

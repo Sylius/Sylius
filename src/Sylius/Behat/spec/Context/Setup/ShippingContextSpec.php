@@ -29,18 +29,18 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 class ShippingContextSpec extends ObjectBehavior
 {
     function let(
+        SharedStorageInterface $sharedStorage,
         RepositoryInterface $shippingMethodRepository,
         RepositoryInterface $zoneRepository,
         FactoryInterface $shippingMethodFactory,
-        ObjectManager $shippingMethodManager,
-        SharedStorageInterface $sharedStorage
+        ObjectManager $shippingMethodManager
     ) {
         $this->beConstructedWith(
+            $sharedStorage,
             $shippingMethodRepository,
             $zoneRepository,
             $shippingMethodFactory,
-            $shippingMethodManager,
-            $sharedStorage
+            $shippingMethodManager
         );
     }
 
