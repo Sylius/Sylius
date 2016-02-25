@@ -21,6 +21,7 @@ default:
                 - sylius.behat.context.transform.lexical
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.product
+                - sylius.behat.context.transform.shipping
 
                 - sylius.behat.context.ui.checkout
                 - sylius.behat.context.ui.cart

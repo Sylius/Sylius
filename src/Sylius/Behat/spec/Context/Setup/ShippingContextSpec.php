@@ -149,18 +149,4 @@ class ShippingContextSpec extends ObjectBehavior
 
         $this->shippingMethodBelongsToTaxCategory($shippingMethod, $taxCategory);
     }
-
-    function it_casts_shipping_method_name_to_string($shippingMethodRepository, ShippingMethodInterface $shippingMethod)
-    {
-        $shippingMethodRepository->findOneBy(['name' => 'DHL'])->willReturn($shippingMethod);
-
-        $this->getShippingMethodByName('DHL')->shouldReturn($shippingMethod);
-    }
-
-    function it_throws_exception_if_there_is_no_shipping_method_with_name_passed_to_casting($shippingMethodRepository)
-    {
-        $shippingMethodRepository->findOneBy(['name' => 'DHL'])->willReturn(null);
-
-        $this->shouldThrow(new \Exception('Shipping method with name "DHL" does not exist'))->during('getShippingMethodByName', ['DHL']);
-    }
 }

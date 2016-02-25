@@ -73,21 +73,6 @@ final class ShippingContext implements Context
     }
 
     /**
-     * @Transform :shippingMethodName shipping method
-     * @Transform shipping method :shippingMethodName
-     * @Transform /^"([^"]*)" shipping method$/
-     */
-    public function getShippingMethodByName($shippingMethodName)
-    {
-        $shippingMethod = $this->shippingMethodRepository->findOneBy(['name' => $shippingMethodName]);
-        if (null === $shippingMethod) {
-            throw new \Exception('Shipping method with name "'.$shippingMethodName.'" does not exist');
-        }
-
-        return $shippingMethod;
-    }
-
-    /**
      * @Given the store ships everything for free within :zone zone
      * @Given /^the store ships everything for free for (the rest of the world)$/
      */

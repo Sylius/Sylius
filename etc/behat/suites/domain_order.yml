@@ -18,6 +18,7 @@ default:
                 - sylius.behat.context.transform.addressing
                 - sylius.behat.context.transform.customer
                 - sylius.behat.context.transform.payment
+                - sylius.behat.context.transform.shipping
 
                 - sylius.behat.context.domain.order
 
