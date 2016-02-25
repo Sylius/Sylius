@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Test\Factory\TestUserFactory;
+use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\UserInterface;
@@ -32,14 +33,16 @@ class UserContextSpec extends ObjectBehavior
         SharedStorageInterface $sharedStorage,
         TestUserFactory $userFactory,
         FactoryInterface $addressFactory,
-        ObjectManager $userManager
+        ObjectManager $userManager,
+        CountryNameConverterInterface $countryNameConverter
     ) {
         $this->beConstructedWith(
             $userRepository,
             $sharedStorage,
             $userFactory,
             $addressFactory,
-            $userManager
+            $userManager,
+            $countryNameConverter
         );
     }
 
@@ -72,10 +75,12 @@ class UserContextSpec extends ObjectBehavior
         $sharedStorage,
         $userFactory,
         $userRepository,
+        $countryNameConverter,
         AddressInterface $address,
         CustomerInterface $customer,
         UserInterface $user
     ) {
+        $countryNameConverter->convertToCode('United Kingdom')->willReturn('GB');
         $userFactory->create('test@example.com', 'pa$$word')->willReturn($user);
         $user->getCustomer()->willReturn($customer);
 
@@ -102,10 +107,12 @@ class UserContextSpec extends ObjectBehavior
         $addressFactory,
         $sharedStorage,
         $userManager,
+        $countryNameConverter,
         AddressInterface $address,
         CustomerInterface $customer,
         UserInterface $user
     ) {
+        $countryNameConverter->convertToCode('United Kingdom')->willReturn('GB');
         $sharedStorage->get('user')->willReturn($user);
         $user->getCustomer()->willReturn($customer);
 

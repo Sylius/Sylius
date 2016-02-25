@@ -13,13 +13,12 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Core\Test\Factory\TestUserFactoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
-use Symfony\Component\Intl\Intl;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -28,7 +27,7 @@ use Symfony\Component\Intl\Intl;
 final class UserContext implements Context
 {
     /**
-     * @var RepositoryInterface
+     * @var UserRepositoryInterface
      */
     private $userRepository;
 
@@ -53,24 +52,32 @@ final class UserContext implements Context
     private $userManager;
 
     /**
+     * @var CountryNameConverterInterface
+     */
+    private $countryCodeConverter;
+
+    /**
      * @param UserRepositoryInterface $userRepository
      * @param SharedStorageInterface $sharedStorage
      * @param TestUserFactoryInterface $userFactory
      * @param FactoryInterface $addressFactory
      * @param ObjectManager $userManager
+     * @param CountryNameConverterInterface $countryCodeConverter
      */
     public function __construct(
         UserRepositoryInterface $userRepository,
         SharedStorageInterface $sharedStorage,
         TestUserFactoryInterface $userFactory,
         FactoryInterface $addressFactory,
-        ObjectManager $userManager
+        ObjectManager $userManager,
+        CountryNameConverterInterface $countryCodeConverter
     ) {
         $this->userRepository = $userRepository;
         $this->sharedStorage = $sharedStorage;
         $this->userFactory = $userFactory;
         $this->addressFactory = $addressFactory;
         $this->userManager = $userManager;
+        $this->countryCodeConverter = $countryCodeConverter;
     }
 
     /**
@@ -112,6 +119,18 @@ final class UserContext implements Context
     }
 
     /**
+     * @Given the account of :email was deleted
+     */
+    public function accountWasDeleted($email)
+    {
+        $user = $this->userRepository->findOneByEmail($email);
+
+        $this->sharedStorage->set('customer', $user->getCustomer());
+
+        $this->userRepository->remove($user);
+    }
+
+    /**
      * @param string $firstName
      * @param string $lastName
      * @param string $country
@@ -135,41 +154,8 @@ final class UserContext implements Context
         $address->setStreet($street);
         $address->setCity($city);
         $address->setPostcode($postcode);
-        $address->setCountryCode($this->getCountryCodeByEnglishCountryName($country));
+        $address->setCountryCode($this->countryCodeConverter->convertToCode($country));
 
         return $address;
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return string
-     *
-     * @throws \InvalidArgumentException If name is not found in country code registry.
-     */
-    private function getCountryCodeByEnglishCountryName($name)
-    {
-        $names = Intl::getRegionBundle()->getCountryNames('en');
-        $countryCode = array_search(trim($name), $names);
-
-        if (null === $countryCode) {
-            throw new \InvalidArgumentException(sprintf(
-                'Country "%s" not found! Available names: %s.', $name, implode(', ', $names)
-            ));
-        }
-
-        return $countryCode;
-    }
-
-    /**
-     * @Given the account of :email was deleted
-     */
-    public function accountWasDeleted($email)
-    {
-        $user = $this->userRepository->findOneByEmail($email);
-
-        $this->sharedStorage->set('customer', $user->getCustomer());
-
-        $this->userRepository->remove($user);
     }
 }
