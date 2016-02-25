@@ -88,7 +88,7 @@ class BuildReportRendererFormSubscriber implements EventSubscriberInterface
     public function addConfigurationFields(FormInterface $form, $rendererType, array $data = [])
     {
         $renderer = $this->rendererRegistry->get($rendererType);
-        $formType = sprintf('sylius_renderer_%s', $renderer->getType());
+        $formType = $renderer->getType();
 
         try {
             $configurationField = $this->factory->createNamed(

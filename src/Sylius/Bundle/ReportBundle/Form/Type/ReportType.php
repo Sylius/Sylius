@@ -83,7 +83,7 @@ class ReportType extends AbstractResourceType
         ];
 
         foreach ($this->rendererRegistry->all() as $type => $renderer) {
-            $formType = sprintf('sylius_renderer_%s', $renderer->getType());
+            $formType = $renderer->getType();
 
             if (!$formType) {
                 continue;
