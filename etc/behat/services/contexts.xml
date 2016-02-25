@@ -30,6 +30,7 @@
 
         <parameter key="sylius.behat.context.transform.lexical.class">Sylius\Behat\Context\Transform\LexicalContext</parameter>
         <parameter key="sylius.behat.context.transform.shared_storage.class">Sylius\Behat\Context\Transform\SharedStorageContext</parameter>
+        <parameter key="sylius.behat.context.transform.channel.class">Sylius\Behat\Context\Transform\ChannelContext</parameter>
 
         <parameter key="sylius.behat.context.hook.doctrine_orm.class">Sylius\Behat\Context\Hook\DoctrineORMContext</parameter>
 
@@ -137,15 +138,6 @@
             <tag name="sylius.behat.context" />
         </service>
 
-        <service id="sylius.behat.context.transform.lexical" class="%sylius.behat.context.transform.lexical.class%" scope="scenario">
-            <tag name="sylius.behat.context" />
-        </service>
-
-        <service id="sylius.behat.context.transform.shared_storage" class="%sylius.behat.context.transform.shared_storage.class%" scope="scenario">
-            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
-            <tag name="sylius.behat.context" />
-        </service>
-
         <service id="sylius.behat.context.setup.order" class="%sylius.behat.context.setup.order.class%" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.repository.order" container="symfony" />
@@ -167,6 +159,20 @@
         <service id="sylius.behat.context.setup.addressing" class="%sylius.behat.context.setup.addressing.class%" scope="scenario">
             <argument type="service" id="sylius.factory.address" container="symfony" />
             <argument type="service" id="sylius.converter.country_name" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.transform.lexical" class="%sylius.behat.context.transform.lexical.class%" scope="scenario">
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.transform.shared_storage" class="%sylius.behat.context.transform.shared_storage.class%" scope="scenario">
+            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.transform.channel" class="%sylius.behat.context.transform.channel.class%" scope="scenario">
+            <argument type="service" id="sylius.repository.channel" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 
