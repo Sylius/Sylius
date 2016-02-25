@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CurrencyBundle\Templating\Helper;
 
+use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelperInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 use Symfony\Component\Templating\Helper\Helper;
@@ -18,37 +19,40 @@ use Symfony\Component\Templating\Helper\Helper;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CurrencyHelper extends Helper
+class CurrencyHelper extends Helper implements CurrencyHelperInterface
 {
-    /**
-     * @var CurrencyConverterInterface
-     */
-    private $converter;
-
     /**
      * @var CurrencyContextInterface
      */
     private $currencyContext;
 
     /**
-     * @var MoneyHelper
+     * @var CurrencyConverterInterface
+     */
+    private $converter;
+
+    /**
+     * @var MoneyHelperInterface
      */
     private $moneyHelper;
 
-    public function __construct(CurrencyContextInterface $currencyContext, CurrencyConverterInterface $converter, MoneyHelper $moneyHelper)
-    {
+    /**
+     * @param CurrencyContextInterface $currencyContext
+     * @param CurrencyConverterInterface $converter
+     * @param MoneyHelperInterface $moneyHelper
+     */
+    public function __construct(
+        CurrencyContextInterface $currencyContext,
+        CurrencyConverterInterface $converter,
+        MoneyHelperInterface $moneyHelper
+    ) {
         $this->currencyContext = $currencyContext;
         $this->converter = $converter;
         $this->moneyHelper = $moneyHelper;
     }
 
     /**
-     * Convert amount to target or currently used currency.
-     *
-     * @param int         $amount
-     * @param string|null $currency
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function convertAmount($amount, $currency = null)
     {
@@ -58,13 +62,7 @@ class CurrencyHelper extends Helper
     }
 
     /**
-     * Convert amount and format it!
-     *
-     * @param int         $amount
-     * @param string|null $currency
-     * @param bool        $decimal
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function convertAndFormatAmount($amount, $currency = null, $decimal = false)
     {

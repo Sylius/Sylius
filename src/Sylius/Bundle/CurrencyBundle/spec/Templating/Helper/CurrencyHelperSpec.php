@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\CurrencyBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CurrencyBundle\Templating\Helper\MoneyHelper;
+use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelperInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 use Symfony\Component\Templating\Helper\Helper;
@@ -25,7 +25,7 @@ class CurrencyHelperSpec extends ObjectBehavior
     function let(
         CurrencyContextInterface $currencyContext,
         CurrencyConverterInterface $converter,
-        MoneyHelper $moneyHelper
+        MoneyHelperInterface $moneyHelper
     ) {
         $this->beConstructedWith($currencyContext, $converter, $moneyHelper);
     }

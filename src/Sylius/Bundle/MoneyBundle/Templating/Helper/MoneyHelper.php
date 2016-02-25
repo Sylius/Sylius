@@ -13,7 +13,7 @@ namespace Sylius\Bundle\MoneyBundle\Templating\Helper;
 
 use Symfony\Component\Templating\Helper\Helper;
 
-class MoneyHelper extends Helper
+class MoneyHelper extends Helper implements MoneyHelperInterface
 {
     /**
      * The default currency.
@@ -38,16 +38,7 @@ class MoneyHelper extends Helper
     }
 
     /**
-     * Format the money amount to nice display form.
-     *
-     * @param int         $amount
-     * @param string|null $currency
-     * @param bool        $decimal
-     * @param string|null $locale
-     *
-     * @return string
-     *
-     * @throws \InvalidArgumentException
+     * {@inheritdoc}
      */
     public function formatAmount($amount, $currency = null, $decimal = false, $locale = null)
     {
