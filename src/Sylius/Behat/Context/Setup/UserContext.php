@@ -27,14 +27,14 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 final class UserContext implements Context
 {
     /**
-     * @var UserRepositoryInterface
-     */
-    private $userRepository;
-
-    /**
      * @var SharedStorageInterface
      */
     private $sharedStorage;
+
+    /**
+     * @var UserRepositoryInterface
+     */
+    private $userRepository;
 
     /**
      * @var TestUserFactoryInterface
@@ -59,21 +59,22 @@ final class UserContext implements Context
     /**
      * @param UserRepositoryInterface $userRepository
      * @param SharedStorageInterface $sharedStorage
+     * @param UserRepositoryInterface $userRepository
      * @param TestUserFactoryInterface $userFactory
      * @param FactoryInterface $addressFactory
      * @param ObjectManager $userManager
      * @param CountryNameConverterInterface $countryCodeConverter
      */
     public function __construct(
-        UserRepositoryInterface $userRepository,
         SharedStorageInterface $sharedStorage,
+        UserRepositoryInterface $userRepository,
         TestUserFactoryInterface $userFactory,
         FactoryInterface $addressFactory,
         ObjectManager $userManager,
         CountryNameConverterInterface $countryCodeConverter
     ) {
-        $this->userRepository = $userRepository;
         $this->sharedStorage = $sharedStorage;
+        $this->userRepository = $userRepository;
         $this->userFactory = $userFactory;
         $this->addressFactory = $addressFactory;
         $this->userManager = $userManager;

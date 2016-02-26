@@ -29,16 +29,16 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 class UserContextSpec extends ObjectBehavior
 {
     function let(
-        UserRepositoryInterface $userRepository,
         SharedStorageInterface $sharedStorage,
+        UserRepositoryInterface $userRepository,
         TestUserFactory $userFactory,
         FactoryInterface $addressFactory,
         ObjectManager $userManager,
         CountryNameConverterInterface $countryNameConverter
     ) {
         $this->beConstructedWith(
-            $userRepository,
             $sharedStorage,
+            $userRepository,
             $userFactory,
             $addressFactory,
             $userManager,

@@ -23,6 +23,11 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 final class SecurityContext implements Context
 {
     /**
+     * @var SharedStorageInterface
+     */
+    private $sharedStorage;
+
+    /**
      * @var SecurityServiceInterface
      */
     private $securityService;
@@ -38,26 +43,21 @@ final class SecurityContext implements Context
     private $userRepository;
 
     /**
-     * @var SharedStorageInterface
-     */
-    private $sharedStorage;
-
-    /**
+     * @param SharedStorageInterface $sharedStorage
      * @param SecurityServiceInterface $securityService
      * @param TestUserFactoryInterface $testUserFactory
      * @param UserRepositoryInterface $userRepository
-     * @param SharedStorageInterface $sharedStorage
      */
     public function __construct(
+        SharedStorageInterface $sharedStorage,
         SecurityServiceInterface $securityService,
         TestUserFactoryInterface $testUserFactory,
-        UserRepositoryInterface $userRepository,
-        SharedStorageInterface $sharedStorage
+        UserRepositoryInterface $userRepository
     ) {
+        $this->sharedStorage = $sharedStorage;
         $this->securityService = $securityService;
         $this->testUserFactory = $testUserFactory;
         $this->userRepository = $userRepository;
-        $this->sharedStorage = $sharedStorage;
     }
 
     /**
