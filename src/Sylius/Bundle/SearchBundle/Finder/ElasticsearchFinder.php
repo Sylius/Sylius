@@ -444,10 +444,11 @@ class ElasticsearchFinder extends AbstractFinder
      */
     public function applyFilterToElasticaQuery($appliedFilters, $elasticaQuery)
     {
-        $rangeFilters = new \Elastica\Filter\Range();
+        $rangeFilters = new \Elastica\Filter\BoolOr();
         $boolFilter = new \Elastica\Filter\BoolFilter();
 
         $filters = [];
+        $termFilters = [];
         foreach ($appliedFilters as $facet) {
             if (strpos($facet[key($facet)], '|') !== false) {
                 $filters[key($facet)][] = ['range' => explode('|', $facet[key($facet)])];
@@ -459,9 +460,11 @@ class ElasticsearchFinder extends AbstractFinder
         foreach ($filters as $name => $value) {
             if (is_array($value[0])) {
                 foreach ($value as $range) {
-                    $rangeFilters->addField($name, ['gte' => $range['range'][0], 'lte' => $range['range'][1]]);
-                    $boolFilter->addShould($rangeFilters);
+                    $rangeFilter = new \Elastica\Filter\Range();
+                    $rangeFilter->addField($name, ['gte' => $range['range'][0], 'lte' => $range['range'][1]]);
+                    $rangeFilters->addFilter($rangeFilter);
                 }
+                $boolFilter->addShould($rangeFilters);
             } else {
                 $termFilters = new \Elastica\Filter\Terms();
                 $termFilters->setTerms($name, $value);
