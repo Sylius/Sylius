@@ -68,8 +68,8 @@ class BuildAttributeValueFormSubscriber implements EventSubscriberInterface
     {
         $attributeValue = $event->getData();
 
-        if (!isset($attributeValue['value']) || !isset($attributeValue['attribute'])) {
-            throw new \InvalidArgumentException('Cannot create an attribute value form on pre submit event without "attribute" and "value" keys in data.');
+        if (!isset($attributeValue['attribute'])) {
+            throw new \InvalidArgumentException('Cannot create an attribute value form on pre submit event without an "attribute" key in data.');
         }
 
         $form = $event->getForm();
