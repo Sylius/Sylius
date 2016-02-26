@@ -67,6 +67,11 @@ class Customer implements CustomerInterface, GroupableInterface
      */
     protected $groups;
 
+    /**
+     * @var string
+     */
+    protected $phoneNumber;
+
     public function __construct()
     {
         $this->groups = new ArrayCollection();
@@ -275,6 +280,22 @@ class Customer implements CustomerInterface, GroupableInterface
         if ($this->groups->contains($group)) {
             $this->groups->removeElement($group);
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPhoneNumber()
+    {
+        return $this->phoneNumber;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPhoneNumber($phoneNumber)
+    {
+        $this->phoneNumber = $phoneNumber;
     }
 
     public function __toString()

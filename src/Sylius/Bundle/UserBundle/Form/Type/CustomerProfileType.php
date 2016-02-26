@@ -42,6 +42,10 @@ class CustomerProfileType extends AbstractResourceType
             ->add('gender', 'sylius_gender', [
                 'label' => 'sylius.form.customer.gender',
             ])
+            ->add('phoneNumber', 'text', [
+                'required' => false,
+                'label' => 'sylius.form.customer.phone_number',
+            ])
         ;
     }
 
