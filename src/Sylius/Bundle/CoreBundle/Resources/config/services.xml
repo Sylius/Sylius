@@ -104,7 +104,7 @@
         <parameter key="sylius.purger.orm_purger.class">Sylius\Bundle\CoreBundle\Purger\ORMPurger</parameter>
 
         <parameter key="sylius.provider.default_zone_provider.class">Sylius\Bundle\CoreBundle\Provider\DefaultTaxZoneProvider</parameter>
-        <parameter key="sylius.distributor.order_unit_taxes.class">Sylius\Bundle\CoreBundle\Distributor\IntegerDistributor</parameter>
+        <parameter key="sylius.integer_distributor.class">Sylius\Bundle\CoreBundle\Distributor\IntegerDistributor</parameter>
 
         <!-- Data fetchers -->
         <parameter key="sylius.form.type.data_fetcher.number_of_orders.class">Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\NumberOfOrdersType</parameter>
@@ -212,7 +212,7 @@
                 </service>
             </argument>
         </service>
-        <service id="sylius.distributor.order_unit_taxes" class="%sylius.distributor.order_unit_taxes.class%" />
+        <service id="sylius.integer_distributor" class="%sylius.integer_distributor.class%" />
 
         <service id="sylius.invoice_number_generator" class="%sylius.based_on_id_invoice_number_generator.class%" />
 
@@ -238,7 +238,7 @@
         <service id="sylius.taxation.order_items_taxes_by_zone_applicator" class="%sylius.taxation.order_items_taxes_by_zone_applicator.class%">
             <argument type="service" id="sylius.tax_calculator" />
             <argument type="service" id="sylius.factory.adjustment" />
-            <argument type="service" id="sylius.distributor.order_unit_taxes" />
+            <argument type="service" id="sylius.integer_distributor" />
             <argument type="service" id="sylius.tax_rate_resolver" />
         </service>
         <service id="sylius.taxation.order_taxes_applicator" class="%sylius.taxation.order_taxes_applicator.class%">
