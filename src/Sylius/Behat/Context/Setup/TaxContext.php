@@ -69,20 +69,6 @@ final class TaxContext implements Context
     }
 
     /**
-     * @Transform /^"([^"]+)" tax category$/
-     * @Transform /^tax category "([^"]+)"$/
-     */
-    public function getTaxCategoryByName($taxCategoryName)
-    {
-        $taxCategory = $this->taxCategoryRepository->findOneBy(['name' => $taxCategoryName]);
-        if (null === $taxCategory) {
-            throw new \InvalidArgumentException('Tax category with name "'.$taxCategoryName.'" does not exist');
-        }
-
-        return $taxCategory;
-    }
-
-    /**
      * @Given the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within :zone zone
      * @Given /^the store has "([^"]+)" tax rate of ([^"]+)% for "([^"]+)" for (the rest of the world)$/
      */
@@ -108,11 +94,12 @@ final class TaxContext implements Context
      */
     private function getOrCreateTaxCategory($taxCategoryName)
     {
-        try {
-            return $this->getTaxCategoryByName($taxCategoryName);
-        } catch (\InvalidArgumentException $exception) {
-            return $this->createTaxCategory($taxCategoryName);
+        $taxCategory = $this->taxCategoryRepository->findOneBy(['name' => $taxCategoryName]);
+        if (null === $taxCategory) {
+            $taxCategory = $this->createTaxCategory($taxCategoryName);
         }
+
+        return $taxCategory;
     }
 
     /**

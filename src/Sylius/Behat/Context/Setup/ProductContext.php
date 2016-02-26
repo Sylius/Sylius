@@ -39,11 +39,6 @@ final class ProductContext implements Context
     private $productRepository;
 
     /**
-     * @var RepositoryInterface
-     */
-    private $productVariantRepository;
-
-    /**
      * @var FactoryInterface
      */
     private $productFactory;
@@ -61,7 +56,6 @@ final class ProductContext implements Context
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param RepositoryInterface $productRepository
-     * @param RepositoryInterface $productVariantRepository
      * @param FactoryInterface $productFactory
      * @param FactoryInterface $productVariantFactory
      * @param ObjectManager $objectManager
@@ -69,47 +63,15 @@ final class ProductContext implements Context
     public function __construct(
         SharedStorageInterface $sharedStorage,
         RepositoryInterface $productRepository,
-        RepositoryInterface $productVariantRepository,
         FactoryInterface $productFactory,
         FactoryInterface $productVariantFactory,
         ObjectManager $objectManager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->productRepository = $productRepository;
-        $this->productVariantRepository = $productVariantRepository;
         $this->productFactory = $productFactory;
         $this->productVariantFactory = $productVariantFactory;
         $this->objectManager = $objectManager;
-    }
-
-    /**
-     * @Transform /^product "([^"]+)"$/
-     * @Transform /^"([^"]+)" product$/
-     * @Transform :product
-     */
-    public function getProductByName($productName)
-    {
-        $product = $this->productRepository->findOneBy(['name' => $productName]);
-        if (null === $product) {
-            throw new \InvalidArgumentException(sprintf('Product with name "%s" does not exist', $productName));
-        }
-
-        return $product;
-    }
-
-    /**
-     * @Transform /^"([^"]+)" variant of product "([^"]+)"$/
-     */
-    public function getProductVariantByNameAndProduct($variantName, $productName)
-    {
-        $product = $this->getProductByName($productName);
-
-        $productVariant = $this->productVariantRepository->findOneBy(['presentation' => $variantName, 'object' => $product]);
-        if (null === $productVariant) {
-            throw new \InvalidArgumentException(sprintf('Product variant with name "%s" of product "%s" does not exist', $variantName, $productName));
-        }
-
-        return $productVariant;
     }
 
     /**

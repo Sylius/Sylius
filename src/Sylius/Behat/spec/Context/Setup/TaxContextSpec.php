@@ -81,21 +81,4 @@ class TaxContextSpec extends ObjectBehavior
 
         $this->storeHasTaxRateWithinZone('Low VAT', '23%', 'Clothes', $zone);
     }
-
-    function it_casts_tax_category_name_to_tax_category($taxCategoryRepository, TaxCategoryInterface $taxCategory)
-    {
-        $taxCategoryRepository->findOneBy(['name' => 'TaxCategory'])->willReturn($taxCategory);
-
-        $this->getTaxCategoryByName('TaxCategory')->shouldReturn($taxCategory);
-    }
-
-    function it_throws_exception_if_there_is_no_tax_category_with_name_given_to_casting($taxCategoryRepository)
-    {
-        $taxCategoryRepository->findOneBy(['name' => 'TaxCategory'])->willReturn(null);
-
-        $this
-            ->shouldThrow(new \InvalidArgumentException('Tax category with name "TaxCategory" does not exist'))
-            ->during('getTaxCategoryByName', ['TaxCategory'])
-        ;
-    }
 }

@@ -70,29 +70,6 @@ final class ChannelContext implements Context
     }
 
     /**
-     * @Transform /^channel "([^"]+)"$/
-     * @Transform /^"([^"]+)" channel/
-     * @Transform :channel
-     */
-    public function getChannelByName($channelName)
-    {
-        $channel = $this->channelRepository->findOneBy(['name' => $channelName]);
-        if (null === $channel) {
-            throw new \InvalidArgumentException('Channel with name "'.$channelName.'" does not exist');
-        }
-
-        return $channel;
-    }
-
-    /**
-     * @Transform /(?:this|that|the) channel/
-     */
-    public function getLatestChannel()
-    {
-        return $this->sharedStorage->get('channel');
-    }
-
-    /**
      * @Given the store operates on a single channel in "France"
      */
     public function storeOperatesOnASingleChannelInFrance()

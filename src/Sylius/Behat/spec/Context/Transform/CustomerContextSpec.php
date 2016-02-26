@@ -9,12 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Behat\Context\Setup;
+namespace spec\Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -32,7 +31,7 @@ class CustomerContextSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Behat\Context\Setup\CustomerContext');
+        $this->shouldHaveType('Sylius\Behat\Context\Transform\CustomerContext');
     }
 
     function it_implements_context_interface()
