@@ -41,6 +41,11 @@ final class Translator extends BaseTranslator implements WarmableInterface
     private $resourceProvider;
 
     /**
+     * @var bool
+     */
+    private $resourcesLoaded = false;
+
+    /**
      * @param TranslatorLoaderProviderInterface $loaderProvider
      * @param TranslatorResourceProviderInterface $resourceProvider
      * @param MessageSelector $messageSelector
@@ -126,6 +131,10 @@ final class Translator extends BaseTranslator implements WarmableInterface
 
     private function addResources()
     {
+        if ($this->resourcesLoaded) {
+            return;
+        }
+
         $resources = $this->resourceProvider->getResources();
         foreach ($resources as $resource) {
             $this->addResource(
@@ -135,6 +144,8 @@ final class Translator extends BaseTranslator implements WarmableInterface
                 $resource->getDomain()
             );
         }
+
+        $this->resourcesLoaded = true;
     }
 
     private function addLoaders()
