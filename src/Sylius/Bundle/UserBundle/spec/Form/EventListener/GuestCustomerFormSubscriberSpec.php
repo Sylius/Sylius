@@ -12,11 +12,11 @@
 namespace spec\Sylius\Bundle\UserBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Context\CustomerContextInterface;
 use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormInterface;
 

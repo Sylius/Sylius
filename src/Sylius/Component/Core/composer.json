@@ -48,7 +48,10 @@
         "sylius/taxonomy": "0.17.*",
         "sylius/translation": "0.17.*",
         "sylius/user": "0.17.*",
-        "sylius/variation": "0.17.*"
+        "sylius/variation": "0.17.*",
+        "sylius/association": "0.17.*",
+        "sylius/review": "0.17.*",
+        "sylius/metadata": "0.17.*"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.4",
