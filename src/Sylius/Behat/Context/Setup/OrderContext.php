@@ -19,7 +19,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Core\OrderProcessing\OrderShipmentFactoryInterface;
+use Sylius\Component\Core\OrderProcessing\OrderShipmentProcessorInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
@@ -49,7 +49,7 @@ final class OrderContext implements Context
     private $orderFactory;
 
     /**
-     * @var OrderShipmentFactoryInterface
+     * @var OrderShipmentProcessorInterface
      */
     private $orderShipmentFactory;
 
@@ -76,7 +76,7 @@ final class OrderContext implements Context
     /**
      * @param OrderRepositoryInterface $orderRepository
      * @param FactoryInterface $orderFactory
-     * @param OrderShipmentFactoryInterface $orderShipmentFactory
+     * @param OrderShipmentProcessorInterface $orderShipmentFactory
      * @param PaymentFactoryInterface $paymentFactory
      * @param FactoryInterface $orderItemFactory
      * @param OrderItemQuantityModifierInterface $itemQuantityModifier
@@ -87,7 +87,7 @@ final class OrderContext implements Context
         SharedStorageInterface $sharedStorage,
         OrderRepositoryInterface $orderRepository,
         FactoryInterface $orderFactory,
-        OrderShipmentFactoryInterface $orderShipmentFactory,
+        OrderShipmentProcessorInterface $orderShipmentFactory,
         PaymentFactoryInterface $paymentFactory,
         FactoryInterface $orderItemFactory,
         OrderItemQuantityModifierInterface $itemQuantityModifier,
@@ -132,7 +132,7 @@ final class OrderContext implements Context
         /** @var OrderInterface $order */
         $order = $this->sharedStorage->get('order');
 
-        $this->orderShipmentFactory->createForOrder($order);
+        $this->orderShipmentFactory->processOrderShipment($order);
         $order->getShipments()->first()->setMethod($shippingMethod);
 
         $payment = $this->paymentFactory->createWithAmountAndCurrency($order->getTotal(), $order->getCurrency());
