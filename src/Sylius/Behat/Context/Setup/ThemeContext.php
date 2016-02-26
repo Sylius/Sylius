@@ -63,16 +63,6 @@ final class ThemeContext implements Context
     }
 
     /**
-     * @Transform :theme
-     * @Transform /^"([^"]+)" theme$/
-     * @Transform /^theme "([^"]+)"$/
-     */
-    public function getThemeByThemeName($themeTitle)
-    {
-        return $this->themeRepository->findOneBy(['title' => $themeTitle]);
-    }
-
-    /**
      * @Given there is :themeName theme defined
      */
     public function thereIsThemeDefined($themeName)
