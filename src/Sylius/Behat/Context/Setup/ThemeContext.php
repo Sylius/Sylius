@@ -76,15 +76,6 @@ final class ThemeContext implements Context
     }
 
     /**
-     * @Given there are :firstThemeName and :secondThemeName themes defined
-     */
-    public function thereAreThemesDefined($firstThemeName, $secondThemeName)
-    {
-        $this->thereIsThemeDefined($firstThemeName);
-        $this->thereIsThemeDefined($secondThemeName);
-    }
-
-    /**
      * @Given /^("[^"]+" channel) is using ("[^"]+" theme)$/
      */
     public function channelIsUsingTheme(ChannelInterface $channel, ThemeInterface $theme)

@@ -3,7 +3,7 @@
 
 default:
     suites:
-        ui_themes:
+        ui_theme:
             contexts_as_services:
                 - sylius.behat.context.hook.doctrine_orm
 
