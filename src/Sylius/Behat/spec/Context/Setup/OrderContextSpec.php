@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
+use Sylius\Behat\Context\Setup\OrderContext;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -36,6 +37,8 @@ use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
+ * @mixin OrderContext
+ *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class OrderContextSpec extends ObjectBehavior
@@ -137,7 +140,7 @@ class OrderContextSpec extends ObjectBehavior
         $this->theCustomerChoseShippingToWithPayment($shippingMethod, $address, $paymentMethod);
     }
 
-    function it_adds_single_item_by_customer(
+    function it_adds_single_product_item_by_customer(
         FactoryInterface $orderItemFactory,
         OrderInterface $order,
         OrderItemInterface $item,
@@ -148,21 +151,38 @@ class OrderContextSpec extends ObjectBehavior
         ObjectManager $objectManager
     ) {
         $sharedStorage->get('order')->willReturn($order);
-
         $orderItemFactory->createNew()->willReturn($item);
-
         $product->getMasterVariant()->willReturn($variant);
         $product->getPrice()->willReturn(1234);
 
         $itemQuantityModifier->modify($item, 1)->shouldBeCalled();
-
         $item->setVariant($variant)->shouldBeCalled();
         $item->setUnitPrice(1234)->shouldBeCalled();
-
         $order->addItem($item)->shouldBeCalled();
-
         $objectManager->flush()->shouldBeCalled();
 
-        $this->theCustomerBoughtSingle($product);
+        $this->theCustomerBoughtSingleProduct($product);
+    }
+
+    function it_adds_single_product_variant_as_item_by_customer(
+        FactoryInterface $orderItemFactory,
+        OrderInterface $order,
+        OrderItemInterface $item,
+        OrderItemQuantityModifierInterface $itemQuantityModifier,
+        SharedStorageInterface $sharedStorage,
+        ProductVariantInterface $variant,
+        ObjectManager $objectManager
+    ) {
+        $sharedStorage->get('order')->willReturn($order);
+        $orderItemFactory->createNew()->willReturn($item);
+        $variant->getPrice()->willReturn(1234);
+
+        $itemQuantityModifier->modify($item, 1)->shouldBeCalled();
+        $item->setVariant($variant)->shouldBeCalled();
+        $item->setUnitPrice(1234)->shouldBeCalled();
+        $order->addItem($item)->shouldBeCalled();
+        $objectManager->flush()->shouldBeCalled();
+
+        $this->theCustomerBoughtSingleProductVariant($variant);
     }
 }

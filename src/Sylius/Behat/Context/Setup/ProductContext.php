@@ -143,6 +143,23 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^the (product "[^"]+") has "([^"]+)" variant priced at ("[^"]+")$/
+     */
+    public function theProductHasVariantPricedAt(ProductInterface $product, $productVariantName, $price = 0)
+    {
+        $variant = $this->productVariantFactory->createNew();
+
+        $variant->setPresentation($productVariantName);
+        $variant->setPrice($price);
+        $variant->setProduct($product);
+        $product->addVariant($variant);
+
+        $this->objectManager->flush();
+
+        $this->sharedStorage->set('variant', $variant);
+    }
+
+    /**
      * @param string $price
      *
      * @return int
