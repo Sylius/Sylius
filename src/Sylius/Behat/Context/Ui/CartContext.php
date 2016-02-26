@@ -198,6 +198,6 @@ final class CartContext implements Context
      */
     private function getPriceFromString($price)
     {
-        return (int) round(($price * 100), 2);
+        return (int) round((str_replace(['€', '£', '$'], '', $price) * 100), 2);
     }
 }

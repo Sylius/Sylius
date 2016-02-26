@@ -74,6 +74,7 @@
         <parameter key="sylius.promotion_rule_checker.customer_group.class">Sylius\Component\Core\Promotion\Checker\CustomerGroupRuleChecker</parameter>
         <parameter key="sylius.promotion_action.fixed_discount.class">Sylius\Component\Core\Promotion\Action\FixedDiscountAction</parameter>
         <parameter key="sylius.promotion_action.percentage_discount.class">Sylius\Component\Core\Promotion\Action\PercentageDiscountAction</parameter>
+        <parameter key="sylius.promotion_action.item_percentage_discount.class">Sylius\Component\Core\Promotion\Action\ItemPercentageDiscountAction</parameter>
         <parameter key="sylius.promotion_action.shipping_discount.class">Sylius\Component\Core\Promotion\Action\ShippingDiscountAction</parameter>
         <parameter key="sylius.promotion_action.add_product.class">Sylius\Component\Core\Promotion\Action\AddProductAction</parameter>
         <parameter key="sylius.promotion_eligibility_checker.class">Sylius\Component\Core\Promotion\Checker\PromotionEligibilityChecker</parameter>
@@ -438,6 +439,12 @@
             <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.originator" />
             <tag name="sylius.promotion_action" type="percentage_discount" label="Percentage discount" />
+        </service>
+        <service id="sylius.promotion_action.item_percentage_discount" class="%sylius.promotion_action.item_percentage_discount.class%">
+            <argument type="service" id="sylius.factory.adjustment" />
+            <argument type="service" id="sylius.originator" />
+            <argument type="service" id="sylius.distributor.order_unit_taxes" />
+            <tag name="sylius.promotion_action" type="item_percentage_discount" label="Item percentage discount" />
         </service>
         <service id="sylius.promotion_action.shipping_discount" class="%sylius.promotion_action.shipping_discount.class%">
             <argument type="service" id="sylius.factory.adjustment" />

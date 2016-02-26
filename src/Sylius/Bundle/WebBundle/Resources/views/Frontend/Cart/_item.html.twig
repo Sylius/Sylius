@@ -17,7 +17,8 @@
         {{ item.vars.value.unitPrice|sylius_price }}
     </td>
     <td class="col-md-1" style="text-align: right">
-        <span class="regular-price">{{ item.vars.value.total|sylius_price }}</span>
-        <span class="discount-price"></span>
+        {% set regularPrice = item.vars.value.unitPrice * item.vars.value.quantity %}
+        <span class="regular-price" style="text-decoration: line-through">{{ regularPrice|sylius_price }}</span>
+        <span class="discount-price">{{ item.vars.value.total|sylius_price }}</span>
     </td>
 </tr>
