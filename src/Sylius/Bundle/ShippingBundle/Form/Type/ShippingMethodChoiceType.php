@@ -53,6 +53,15 @@ class ShippingMethodChoiceType extends AbstractType
     protected $repository;
 
     /**
+     * {@inheritdoc}
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        if ($options['multiple']) {
+            $builder->addModelTransformer( new CollectionToArrayTransformer());
+        }
+    }
+    /**
      * @param MethodsResolverInterface    $resolver
      * @param ServiceRegistryInterface    $calculators
      * @param RepositoryInterface         $repository
@@ -70,14 +79,6 @@ class ShippingMethodChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $builder->addModelTransformer($this->getProperTransformer($options));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $choiceList = function (Options $options) {
@@ -87,13 +88,14 @@ class ShippingMethodChoiceType extends AbstractType
                 $methods = $this->repository->findBy($options['criteria']);
             }
 
-            return new ObjectChoiceList($methods, null, [], null, 'id');
+            return new ObjectChoiceList($methods, null, [], null, $options['identifier']);
         };
 
         $resolver
             ->setDefaults([
                 'choice_list' => $choiceList,
                 'criteria' => [],
+                'identifier'=>'id'
             ])
             ->setDefined([
                 'subject',
@@ -145,17 +147,5 @@ class ShippingMethodChoiceType extends AbstractType
         return 'sylius_shipping_method_choice';
     }
 
-    /**
-     * @param array $options
-     *
-     * @return ObjectToIdentifierTransformer|CollectionToArrayTransformer
-     */
-    private function getProperTransformer(array $options)
-    {
-        if ($options['multiple']) {
-            return new CollectionToArrayTransformer();
-        }
 
-        return new ObjectToIdentifierTransformer($this->repository);
-    }
 }
