@@ -12,52 +12,21 @@
 namespace Sylius\Bundle\ThemeBundle\Factory;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Factory\Factory;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ThemeFactory implements ThemeFactoryInterface
+final class ThemeFactory extends Factory implements ThemeFactoryInterface
 {
-    /**
-     * @var FactoryInterface
-     */
-    private $basicThemeFactory;
-
-    /**
-     * @param FactoryInterface $basicThemeFactory
-     */
-    public function __construct(FactoryInterface $basicThemeFactory)
-    {
-        $this->basicThemeFactory = $basicThemeFactory;
-    }
-
     /**
      * {@inheritdoc}
      */
-    public function createFromArray(array $themeData)
+    public function createNamed($name)
     {
         /** @var ThemeInterface $theme */
-        $theme = $this->basicThemeFactory->createNew();
-
-        $theme->setName($themeData['name']);
-        $theme->setPath($themeData['path']);
-
-        if (isset($themeData['authors'])) {
-            $theme->setAuthors($themeData['authors']);
-        }
-
-        if (isset($themeData['title'])) {
-            $theme->setTitle($themeData['title']);
-        }
-
-        if (isset($themeData['description'])) {
-            $theme->setDescription($themeData['description']);
-        }
-
-        if (isset($themeData['parents'])) {
-            $theme->setParentsNames($themeData['parents']);
-        }
+        $theme = $this->createNew();
+        $theme->setName($name);
 
         return $theme;
     }

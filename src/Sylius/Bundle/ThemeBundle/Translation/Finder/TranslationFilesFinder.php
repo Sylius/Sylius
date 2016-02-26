@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\ThemeBundle\Translation\Finder;
 
 use Sylius\Bundle\ThemeBundle\Factory\FinderFactoryInterface;
-use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -35,9 +34,9 @@ final class TranslationFilesFinder implements TranslationFilesFinderInterface
     /**
      * {@inheritdoc}
      */
-    public function findTranslationFiles(ThemeInterface $theme)
+    public function findTranslationFiles($path)
     {
-        $themeFiles = $this->getThemeFiles($theme);
+        $themeFiles = $this->getFiles($path);
 
         $translationsFiles = [];
         foreach ($themeFiles as $themeFile) {
@@ -52,17 +51,18 @@ final class TranslationFilesFinder implements TranslationFilesFinderInterface
     }
 
     /**
-     * @param ThemeInterface $theme
+     * @param string $path
      *
      * @return array
      */
-    private function getThemeFiles(ThemeInterface $theme)
+    private function getFiles($path)
     {
         $finder = $this->finderFactory->create();
 
         $finder
             ->ignoreUnreadableDirs()
-            ->in($theme->getPath());
+            ->in($path)
+        ;
 
         return $finder;
     }

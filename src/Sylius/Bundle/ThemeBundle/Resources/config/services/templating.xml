@@ -35,7 +35,7 @@
 
         <service id="sylius.theme.templating.file_locator" class="%sylius.theme.templating.file_locator.class%" decorates="templating.locator" public="false">
             <argument type="service" id="sylius.theme.templating.file_locator.inner" />
-            <argument type="service" id="sylius.theme.context" />
+            <argument type="service" id="sylius.context.theme" />
             <argument type="service" id="sylius.theme.hierarchy_provider" />
             <argument type="service" id="sylius.theme.templating.locator" />
             <argument>%kernel.cache_dir%</argument>
@@ -49,7 +49,7 @@
         <service id="sylius.theme.templating.cache.warmer" class="%sylius.theme.templating.cache.warmer.class%" public="false">
             <argument type="service" id="templating.finder" />
             <argument type="service" id="sylius.theme.templating.locator" />
-            <argument type="service" id="sylius.theme.repository" />
+            <argument type="service" id="sylius.repository.theme" />
             <argument type="service" id="sylius.theme.templating.cache" />
             <tag name="kernel.cache_warmer" priority="20" />
         </service>

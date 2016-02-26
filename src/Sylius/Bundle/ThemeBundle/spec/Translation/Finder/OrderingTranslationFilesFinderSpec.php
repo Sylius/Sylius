@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ThemeBundle\Translation\Finder;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Translation\Finder\OrderingTranslationFilesFinder;
 use Sylius\Bundle\ThemeBundle\Translation\Finder\TranslationFilesFinderInterface;
 
@@ -39,16 +38,15 @@ class OrderingTranslationFilesFinderSpec extends ObjectBehavior
     }
 
     function it_puts_application_translations_files_before_bundle_translations_files(
-        TranslationFilesFinderInterface $translationFilesFinder,
-        ThemeInterface $theme
+        TranslationFilesFinderInterface $translationFilesFinder
     ) {
-        $translationFilesFinder->findTranslationFiles($theme)->willReturn([
+        $translationFilesFinder->findTranslationFiles('/some/path/to/theme')->willReturn([
             '/some/path/to/theme/AcmeBundle/messages.en.yml',
             '/some/path/to/theme/translations/messages.en.yml',
             '/some/path/to/theme/YcmeBundle/messages.en.yml',
         ]);
 
-        $this->findTranslationFiles($theme)->shouldHaveFirstElement('/some/path/to/theme/translations/messages.en.yml');
+        $this->findTranslationFiles('/some/path/to/theme')->shouldHaveFirstElement('/some/path/to/theme/translations/messages.en.yml');
     }
 
     public function getMatchers()

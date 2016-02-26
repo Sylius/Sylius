@@ -11,17 +11,15 @@
 
 namespace Sylius\Bundle\ThemeBundle\Translation\Finder;
 
-use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 interface TranslationFilesFinderInterface
 {
     /**
-     * @param ThemeInterface $theme
+     * @param string $path
      *
      * @return array Paths to translation files
      */
-    public function findTranslationFiles(ThemeInterface $theme);
+    public function findTranslationFiles($path);
 }

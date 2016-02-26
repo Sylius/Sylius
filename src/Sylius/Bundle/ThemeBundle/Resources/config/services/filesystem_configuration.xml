@@ -15,10 +15,10 @@
     <parameters>
         <parameter key="sylius.theme.recursive_file_locator.class">Sylius\Bundle\ThemeBundle\Locator\RecursiveFileLocator</parameter>
 
-        <parameter key="sylius.theme.configuration.loader.json_file.class">Sylius\Bundle\ThemeBundle\Loader\Filesystem\JsonFileLoader</parameter>
-        <parameter key="sylius.theme.configuration.loader.processing.class">Sylius\Bundle\ThemeBundle\Loader\ConfigurationProcessingLoader</parameter>
+        <parameter key="sylius.theme.configuration.loader.json_file.class">Sylius\Bundle\ThemeBundle\Configuration\Loader\JsonFileConfigurationLoader</parameter>
+        <parameter key="sylius.theme.configuration.loader.processing.class">Sylius\Bundle\ThemeBundle\Configuration\Loader\ConfigurationProcessingLoader</parameter>
 
-        <parameter key="sylius.theme.configuration.provider.filesystem.class">Sylius\Bundle\ThemeBundle\Loader\Filesystem\FilesystemConfigurationProvider</parameter>
+        <parameter key="sylius.theme.configuration.provider.filesystem.class">Sylius\Bundle\ThemeBundle\Configuration\Provider\FilesystemConfigurationProvider</parameter>
     </parameters>
 
     <services>

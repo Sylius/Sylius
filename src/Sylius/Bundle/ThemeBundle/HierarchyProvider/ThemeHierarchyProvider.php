@@ -20,19 +20,6 @@ use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 final class ThemeHierarchyProvider implements ThemeHierarchyProviderInterface
 {
     /**
-     * @var ThemeRepositoryInterface
-     */
-    private $themeRepository;
-
-    /**
-     * @param ThemeRepositoryInterface $themeRepository
-     */
-    public function __construct(ThemeRepositoryInterface $themeRepository)
-    {
-        $this->themeRepository = $themeRepository;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getThemeHierarchy(ThemeInterface $theme = null)
@@ -42,32 +29,13 @@ final class ThemeHierarchyProvider implements ThemeHierarchyProviderInterface
         }
 
         $parents = [];
-        $parentsNames = $theme->getParentsNames();
-        foreach ($parentsNames as $parentName) {
+        foreach ($theme->getParents() as $parent) {
             $parents = array_merge(
                 $parents,
-                $this->getThemeHierarchy($this->getTheme($parentName))
+                $this->getThemeHierarchy($parent)
             );
         }
 
         return array_merge([$theme], $parents);
-    }
-
-    /**
-     * @param string $themeName
-     *
-     * @return ThemeInterface
-     *
-     * @throws \InvalidArgumentException If theme is not found
-     */
-    private function getTheme($themeName)
-    {
-        $theme = $this->themeRepository->findOneByName($themeName);
-
-        if (null === $theme) {
-            throw new \InvalidArgumentException(sprintf('Theme "%s" not found!', $themeName));
-        }
-
-        return $theme;
     }
 }
