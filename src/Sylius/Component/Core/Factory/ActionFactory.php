@@ -55,6 +55,14 @@ class ActionFactory implements ActionFactoryInterface
     /**
      * {@inheritdoc}
      */
+    public function createItemFixedDiscount($amount)
+    {
+        return $this->createAction(ActionInterface::TYPE_ITEM_FIXED_DISCOUNT, ['amount' => $amount]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function createPercentageDiscount($percentage)
     {
         return $this->createAction(PercentageDiscountAction::TYPE, ['percentage' => $percentage]);

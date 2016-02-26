@@ -26,10 +26,8 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ItemPercentageDiscountAction extends DiscountAction
+class ItemFixedDiscountAction extends DiscountAction
 {
-    const TYPE = 'item_percentage_discount';
-
     /**
      * @var IntegerDistributorInterface
      */
@@ -55,6 +53,7 @@ class ItemPercentageDiscountAction extends DiscountAction
         parent::__construct($adjustmentFactory, $originator);
 
         $this->distributor = $distributor;
+        $this->taxonFilter = $taxonFilter;
     }
 
     /**
@@ -69,8 +68,7 @@ class ItemPercentageDiscountAction extends DiscountAction
         $filteredItems = $this->taxonFilter->filter($subject->getItems()->toArray(), $configuration);
 
         foreach ($filteredItems as $item) {
-            $promotionAmount = (int) round($item->getTotal() * $configuration['percentage']);
-            $distributedAmounts = $this->distributor->distribute($promotionAmount, $item->getQuantity());
+            $distributedAmounts = $this->distributor->distribute($configuration['amount'], $item->getQuantity());
 
             $this->setUnitsAdjustments($item, $distributedAmounts, $promotion);
         }
@@ -95,7 +93,7 @@ class ItemPercentageDiscountAction extends DiscountAction
      */
     public function getConfigurationFormType()
     {
-        return 'sylius_promotion_action_percentage_discount_configuration';
+        return 'sylius_promotion_action_fixed_discount_configuration';
     }
 
     /**
@@ -124,7 +122,7 @@ class ItemPercentageDiscountAction extends DiscountAction
     private function addAdjustmentToUnit(OrderItemUnitInterface $unit, $amount, PromotionInterface $promotion)
     {
         $adjustment = $this->createAdjustment($promotion, AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT);
-        $adjustment->setAmount(-$amount);
+        $adjustment->setAmount($this->calculateAdjustmentAmount($unit->getTotal(), $amount));
 
         $unit->addAdjustment($adjustment);
     }
@@ -151,5 +149,16 @@ class ItemPercentageDiscountAction extends DiscountAction
                 $unit->removeAdjustment($adjustment);
             }
         }
+    }
+
+    /**
+     * @param int $promotionSubjectTotal
+     * @param int $targetPromotionAmount
+     *
+     * @return int
+     */
+    private function calculateAdjustmentAmount($promotionSubjectTotal, $targetPromotionAmount)
+    {
+        return -1 * min($promotionSubjectTotal, $targetPromotionAmount);
     }
 }

@@ -14,7 +14,7 @@ Feature: Receiving fixed discount on products from specific taxon
         And there is a promotion "T-Shirts promotion"
         And it gives "€10.00" off on every product classified as "T-Shirts"
 
-    @todo
+    @ui
     Scenario: Receiving fixed discount on a single item from specific taxon
         When I add product "PHP T-Shirt" to the cart
         Then its price should be decreased by "€10.00"

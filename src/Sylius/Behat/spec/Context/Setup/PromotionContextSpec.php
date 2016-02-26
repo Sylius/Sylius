@@ -183,6 +183,6 @@ class PromotionContextSpec extends ObjectBehavior
 
         $objectManager->flush()->shouldBeCalled();
 
-        $this->itGivesOffEveryProductClassifiedAs($promotion, 0.1, $taxon);
+        $this->itGivesPercentageOffEveryProductClassifiedAs($promotion, 0.1, $taxon);
     }
 }
