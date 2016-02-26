@@ -12,10 +12,9 @@
 namespace spec\Sylius\Bundle\ReviewBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\Customer;
-use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Review\Model\ReviewInterface;
+use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\User\Context\CustomerContextInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -36,7 +35,7 @@ class ReviewCreateListenerSpec extends ObjectBehavior
 
     function it_adds_currently_logged_customer_as_author_to_newly_created_review_if_it_has_no_author_yet(
         $customerContext,
-        Customer $customer,
+        ReviewerInterface $customer,
         GenericEvent $event,
         ReviewInterface $review
     ) {
@@ -58,7 +57,7 @@ class ReviewCreateListenerSpec extends ObjectBehavior
 
     function it_does_nothing_if_review_already_has_author(
         $customerContext,
-        CustomerInterface $existingAuthor,
+        ReviewerInterface $existingAuthor,
         GenericEvent $event,
         ReviewInterface $review
     ) {

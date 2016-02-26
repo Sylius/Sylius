@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Variation\Model;
 
-use Sylius\Component\Product\Model\OptionValueTranslationInterface;
 use Sylius\Component\Translation\Model\AbstractTranslation;
 
 /**
