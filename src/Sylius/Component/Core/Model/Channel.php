@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Component\Channel\Model\Channel as BaseChannel;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
@@ -61,9 +62,9 @@ class Channel extends BaseChannel implements ChannelInterface
     protected $taxonomies;
 
     /**
-     * @var string
+     * @var ThemeInterface
      */
-    protected $themeName;
+    protected $theme;
 
     public function __construct()
     {
@@ -79,17 +80,17 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function getThemeName()
+    public function getTheme()
     {
-        return $this->themeName;
+        return $this->theme;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setThemeName($themeName)
+    public function setTheme(ThemeInterface $theme = null)
     {
-        $this->themeName = $themeName;
+        $this->theme = $theme;
     }
 
     /**

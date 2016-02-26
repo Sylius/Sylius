@@ -29,18 +29,11 @@ final class ChannelBasedThemeContext implements ThemeContextInterface
     private $channelContext;
 
     /**
-     * @var ThemeRepositoryInterface
-     */
-    private $themeRepository;
-
-    /**
      * @param ChannelContextInterface $channelContext
-     * @param ThemeRepositoryInterface $themeRepository
      */
-    public function __construct(ChannelContextInterface $channelContext, ThemeRepositoryInterface $themeRepository)
+    public function __construct(ChannelContextInterface $channelContext)
     {
         $this->channelContext = $channelContext;
-        $this->themeRepository = $themeRepository;
     }
 
     /**
@@ -48,30 +41,15 @@ final class ChannelBasedThemeContext implements ThemeContextInterface
      */
     public function getTheme()
     {
-        $themeName = $this->getChannelThemeName();
-        if (null === $themeName) {
-            return null;
-        }
-
-        return $this->themeRepository->findOneByName($themeName);
-    }
-
-    /**
-     * @return string|null
-     */
-    private function getChannelThemeName()
-    {
         try {
             /** @var ChannelInterface $channel */
             $channel = $this->channelContext->getChannel();
 
-            $themeName = $channel->getThemeName();
+            return $channel->getTheme();
         } catch (ChannelNotFoundException $exception) {
-            $themeName = null;
+            return null;
         } catch (\Exception $exception) {
-            $themeName = null;
+            return null;
         }
-
-        return $themeName;
     }
 }

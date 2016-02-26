@@ -65,6 +65,14 @@ class Theme implements ThemeInterface
     }
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->title;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getId()

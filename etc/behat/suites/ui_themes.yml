@@ -7,10 +7,15 @@ default:
             contexts_as_services:
                 - sylius.behat.context.hook.doctrine_orm
 
-                - sylius.behat.context.setup.channel
-#                - sylius.behat.context.setup.theme
+                - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.channel
 
-#                - sylius.behat.context.ui.theme
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.security
+                - sylius.behat.context.setup.theme
+
+                - sylius.behat.context.ui.channel
+                - sylius.behat.context.ui.theme
 
             filters:
-                tags: "@ui-themes"
+                tags: @theme && @ui

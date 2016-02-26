@@ -15,9 +15,7 @@ final class TableManipulator implements TableManipulatorInterface
     public function getRowWithFields(NodeElement $table, array $fields)
     {
         try {
-            $foundRows = $this->findRowsWithFields($table, $fields);
-
-            return current($foundRows);
+            return $this->getRowsWithFields($table, $fields)[0];
         } catch (\InvalidArgumentException $exception) {
             throw new \InvalidArgumentException('Could not find row with given fields', 0, $exception);
         }
@@ -35,6 +33,21 @@ final class TableManipulator implements TableManipulatorInterface
         } catch (\InvalidArgumentException $exception) {
             throw new \InvalidArgumentException('Could not find any row with given fields', 0, $exception);
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFieldFromRow(NodeElement $table, NodeElement $row, $field)
+    {
+        $columnIndex = $this->getColumnIndex($table, $field);
+
+        $columns = $row->findAll('css', 'td,th');
+        if (!isset($columns[$columnIndex])) {
+            throw new \InvalidArgumentException(sprintf('Could not find column with index %d', $columnIndex));
+        }
+
+        return $columns[$columnIndex];
     }
 
     /**

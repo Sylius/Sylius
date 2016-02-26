@@ -14,7 +14,6 @@ namespace Sylius\Bundle\ThemeBundle\DependencyInjection;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Bundle\ThemeBundle\Doctrine\ORM\ThemeRepository;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeFactory;
 use Sylius\Bundle\ThemeBundle\Model\Theme;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;

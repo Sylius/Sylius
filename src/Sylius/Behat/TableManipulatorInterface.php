@@ -13,7 +13,7 @@ interface TableManipulatorInterface
      * @param NodeElement $table
      * @param array $fields
      *
-     * @return array
+     * @return NodeElement
      *
      * @throws \InvalidArgumentException If row cannot be found
      */
@@ -23,9 +23,18 @@ interface TableManipulatorInterface
      * @param NodeElement $table
      * @param array $fields
      *
-     * @return array
+     * @return NodeElement[]
      *
      * @throws \InvalidArgumentException If there is no rows fulfilling given conditions
      */
     public function getRowsWithFields(NodeElement $table, array $fields);
+
+    /**
+     * @param NodeElement $table
+     * @param NodeElement $row
+     * @param string $field
+     *
+     * @return NodeElement
+     */
+    public function getFieldFromRow(NodeElement $table, NodeElement $row, $field);
 }
