@@ -4,7 +4,7 @@
 
 {% set taxAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::TAX_ADJUSTMENT') %}
 {% set shippingAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::SHIPPING_ADJUSTMENT') %}
-{% set promotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::PROMOTION_ADJUSTMENT') %}
+{% set orderPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT') %}
 
 {% form_theme form _self %}
 
@@ -43,10 +43,10 @@
         {% endfor %}
     </tbody>
     <tfoot>
-        {% if cart.adjustmentsTotal(promotionAdjustment) %}
+        {% if cart.adjustmentsTotal(orderPromotionAdjustment) %}
         <tr>
             <td colspan="6" style="text-align: right;">
-                <strong>{{ 'sylius.order.promotion_total'|trans }}</strong>: -{{ (-1 * cart.adjustmentsTotal(promotionAdjustment))|sylius_price }}
+                <strong>{{ 'sylius.order.promotion_total'|trans }}</strong>: -{{ (-1 * cart.adjustmentsTotal(orderPromotionAdjustment))|sylius_price }}
             </td>
         </tr>
         {% endif %}
