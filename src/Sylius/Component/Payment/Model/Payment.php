@@ -20,7 +20,7 @@ use Sylius\Component\Resource\Model\TimestampableTrait;
  */
 class Payment implements PaymentInterface
 {
-    use SoftDeletableTrait, TimestampableTrait;
+    use TimestampableTrait;
 
     /**
      * @var mixed
