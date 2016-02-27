@@ -29,7 +29,7 @@
         <field name="description" type="string" nullable="true" />
         <field name="authors" type="object" nullable="true" />
 
-        <many-to-many field="parents" target-entity="Sylius\Bundle\ThemeBundle\Model\ThemeInterface">
+        <many-to-many field="parents" target-entity="Sylius\Bundle\ThemeBundle\Model\Theme">
             <cascade>
                 <cascade-all/>
             </cascade>
