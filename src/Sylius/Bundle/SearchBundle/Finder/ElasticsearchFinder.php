@@ -297,6 +297,12 @@ class ElasticsearchFinder extends AbstractFinder
                 $facets[$name] = $facetData['buckets'];
             }
         }
+        
+        foreach ($facets as &$facet) {
+            $facet = array_filter($facet, function($v){
+                return $v["doc_count"] != 0;
+            });
+        }
 
         return array_reverse($facets);
     }
