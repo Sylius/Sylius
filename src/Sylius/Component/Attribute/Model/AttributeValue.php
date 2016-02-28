@@ -11,11 +11,13 @@
 
 namespace Sylius\Component\Attribute\Model;
 
+use Sylius\Component\Translation\Model\AbstractTranslatable;
+
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class AttributeValue implements AttributeValueInterface
+class AttributeValue extends AbstractTranslatable implements AttributeValueInterface
 {
     /**
      * @var mixed

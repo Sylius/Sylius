@@ -19,6 +19,7 @@ use Sylius\Component\Product\Model\ArchetypeInterface;
 use Sylius\Component\Product\Model\AttributeInterface;
 use Sylius\Component\Product\Model\AttributeTranslationInterface;
 use Sylius\Component\Product\Model\AttributeValueInterface;
+use Sylius\Component\Product\Model\AttributeValueTranslationInterface;
 use Sylius\Component\Product\Model\OptionInterface;
 use Sylius\Component\Product\Model\OptionValueInterface;
 use Sylius\Component\Product\Model\OptionValueTranslationInterface;
@@ -66,6 +67,7 @@ class SyliusProductBundle extends AbstractResourceBundle
             AttributeInterface::class => 'sylius.model.product_attribute.class',
             AttributeTranslationInterface::class => 'sylius.model.product_attribute_translation.class',
             AttributeValueInterface::class => 'sylius.model.product_attribute_value.class',
+            AttributeValueTranslationInterface::class => 'sylius.model.product_attribute_value_translation.class',
             VariantInterface::class => 'sylius.model.product_variant.class',
             OptionInterface::class => 'sylius.model.product_option.class',
             OptionValueInterface::class => 'sylius.model.product_option_value.class',
