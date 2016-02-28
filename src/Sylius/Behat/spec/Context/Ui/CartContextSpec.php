@@ -143,6 +143,16 @@ class CartContextSpec extends ObjectBehavior
         $cartSummaryPage->getItemDiscountPrice('Test product')->willReturn('€30.00');
         $cartSummaryPage->getItemRegularPrice('Test product')->willReturn('€50.00');
 
-        $this->itsPriceShouldBeDecreasedBy($product, '€20.00');
+        $this->itsPriceShouldBeDecreasedBy($product, 2000);
+    }
+
+    function it_ensures_product_has_no_discount_price(CartSummaryPage $cartSummaryPage, ProductInterface $product)
+    {
+        $cartSummaryPage->open()->shouldBeCalled();
+        $product->getName()->willReturn('Test product');
+
+        $cartSummaryPage->getItemDiscountPrice('Test product')->willThrow(new ElementNotFoundException('"discount price" element is not present on the page'));
+
+        $this->productPriceShouldNotBeDecreased($product);
     }
 }

@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Promotion\Action;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\CoreBundle\Distributor\IntegerDistributorInterface;
+use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Order\Model\OrderItemUnitInterface;
@@ -86,7 +87,7 @@ class ItemPercentageDiscountAction extends DiscountAction
                 continue;
             }
 
-            $unit = $units->get($key);
+            $unit = $this->getNextUnit($units);
             $this->addAdjustmentToUnit($unit, $amount, $promotion);
         }
     }
@@ -98,7 +99,7 @@ class ItemPercentageDiscountAction extends DiscountAction
      */
     private function addAdjustmentToUnit(OrderItemUnitInterface $unit, $amount, PromotionInterface $promotion)
     {
-        $adjustment = $this->createAdjustment($promotion);
+        $adjustment = $this->createAdjustment($promotion, AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT);
         $adjustment->setAmount(-$amount);
 
         $unit->addAdjustment($adjustment);

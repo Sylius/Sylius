@@ -84,13 +84,13 @@ class ItemPercentageDiscountActionSpec extends ObjectBehavior
 
         $adjustmentFactory->createNew()->willReturn($promotionAdjustment1, $promotionAdjustment2);
 
-        $promotionAdjustment1->setType(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)->shouldBeCalled();
+        $promotionAdjustment1->setType(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->shouldBeCalled();
         $promotionAdjustment1->setLabel('Test description')->shouldBeCalled();
         $promotionAdjustment1->setAmount(-100)->shouldBeCalled();
 
         $originator->setOrigin($promotionAdjustment1, $promotion)->shouldBeCalled();
 
-        $promotionAdjustment2->setType(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)->shouldBeCalled();
+        $promotionAdjustment2->setType(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->shouldBeCalled();
         $promotionAdjustment2->setLabel('Test description')->shouldBeCalled();
         $promotionAdjustment2->setAmount(-100)->shouldBeCalled();
 

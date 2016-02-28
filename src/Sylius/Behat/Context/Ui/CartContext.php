@@ -105,6 +105,8 @@ final class CartContext implements Context
     {
         $this->productShowPage->open(['product' => $product]);
         $this->productShowPage->addToCartWithQuantity($quantity);
+
+        $this->sharedStorage->set('product', $product);
     }
 
     /**
@@ -189,6 +191,27 @@ final class CartContext implements Context
         $regularPrice = $this->getPriceFromString($this->cartSummaryPage->getItemRegularPrice($product->getName()));
 
         expect($discountPrice)->toBe($regularPrice - $amount);
+    }
+
+    /**
+     * @Then /^(product "[^"]+") price should be decreased by ("[^"]+")$/
+     */
+    public function productPriceShouldBeDecreasedBy(ProductInterface $product, $amount)
+    {
+        $this->itsPriceShouldBeDecreasedBy($product, $amount);
+    }
+
+    /**
+     * @Given /^(product "[^"]+") price should not be decreased$/
+     */
+    public function productPriceShouldNotBeDecreased(ProductInterface $product)
+    {
+        $this->cartSummaryPage->open();
+
+        expect($this->cartSummaryPage)
+            ->toThrow(ElementNotFoundException::class)
+            ->during('getItemDiscountPrice', [$product->getName()])
+        ;
     }
 
     /**

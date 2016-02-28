@@ -69,13 +69,14 @@ abstract class DiscountAction implements PromotionActionInterface
 
     /**
      * @param PromotionInterface $promotion
+     * @param string $type
      *
      * @return AdjustmentInterface
      */
-    protected function createAdjustment(PromotionInterface $promotion)
+    protected function createAdjustment(PromotionInterface $promotion, $type = AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)
     {
         $adjustment = $this->adjustmentFactory->createNew();
-        $adjustment->setType(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
+        $adjustment->setType($type);
         $adjustment->setLabel($promotion->getDescription());
 
         $this->originator->setOrigin($adjustment, $promotion);
