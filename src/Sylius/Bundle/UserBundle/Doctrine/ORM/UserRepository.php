@@ -27,17 +27,12 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
     /**
      * @param array $criteria
      * @param array $sorting
-     * @param bool  $deleted
      *
      * @return Pagerfanta
      */
-    public function createFilterPaginator($criteria = [], $sorting = [], $deleted = false)
+    public function createFilterPaginator($criteria = [], $sorting = [])
     {
         $queryBuilder = parent::getCollectionQueryBuilder();
-
-        if ($deleted) {
-            $this->_em->getFilters()->disable('softdeleteable');
-        }
 
         if (isset($criteria['query'])) {
             $queryBuilder
@@ -77,8 +72,6 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
      */
     public function findForDetailsPage($id)
     {
-        $this->_em->getFilters()->disable('softdeleteable');
-
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
             ->leftJoin($this->getAlias().'.customer', 'customer')
@@ -91,8 +84,6 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
             ->getQuery()
             ->getOneOrNullResult()
         ;
-
-        $this->_em->getFilters()->enable('softdeleteable');
 
         return $result;
     }

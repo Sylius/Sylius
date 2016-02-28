@@ -29,8 +29,6 @@ class CustomerRepository extends EntityRepository
      */
     public function findForDetailsPage($id)
     {
-        $this->_em->getFilters()->disable('softdeleteable');
-
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
             ->andWhere($queryBuilder->expr()->eq('o.id', ':id'))
@@ -41,7 +39,6 @@ class CustomerRepository extends EntityRepository
             ->getQuery()
             ->getOneOrNullResult()
         ;
-        $this->_em->getFilters()->enable('softdeleteable');
 
         return $result;
     }
@@ -49,18 +46,13 @@ class CustomerRepository extends EntityRepository
     /**
      * @param array $criteria
      * @param array $sorting
-     * @param bool  $deleted
      *
      * @return Pagerfanta
      */
-    public function createFilterPaginator($criteria = [], $sorting = [], $deleted = false)
+    public function createFilterPaginator($criteria = [], $sorting = [])
     {
         $queryBuilder = parent::getCollectionQueryBuilder()
             ->leftJoin($this->getPropertyName('user'), 'user');
-
-        if ($deleted) {
-            $this->_em->getFilters()->disable('softdeleteable');
-        }
 
         if (isset($criteria['query'])) {
             $queryBuilder
