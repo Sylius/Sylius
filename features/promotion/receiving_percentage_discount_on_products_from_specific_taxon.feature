@@ -37,7 +37,7 @@ Feature: Receiving percentage discount on products from specific taxon
         And my cart total should be "€100.00"
         And my discount should be "-€20.00"
 
-    @todo
+    @ui
     Scenario: Receiving different discounts on items from different taxons
         Given there is a promotion "Mugs promotion"
         And it gives "50%" off every product classified as "Mugs"
