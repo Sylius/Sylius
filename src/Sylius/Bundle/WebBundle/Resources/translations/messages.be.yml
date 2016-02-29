@@ -265,6 +265,7 @@ sylius:
     id: ID
     last_name: Прозвішча
     shipping_address: Адрас дастаўкі
+    phone_number: Нумар тэлефону
   delete: Выдаліць
   deleted: Выдалена
   edit: Рэдагаваць
@@ -275,7 +276,7 @@ sylius:
   filter: Фільтр
   form:
     cart:
-      coupon: Калі маеце прамацыйны купон, увядзіце яго нумар тут
+      coupon: Купон
     choose_file: Абярыце файл
     frontend:
       password:
@@ -406,6 +407,11 @@ sylius:
     taxes: Падаткі
     total: Агулам
     update_header: Рэдагаванне замовы
+  review:
+    id: ID
+    title: Назва
+    author: Аўтар
+    created_at: Створана на
   order_item:
     product: Тавар
     quantity: Колькасць

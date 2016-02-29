@@ -7,6 +7,7 @@ sylius:
       main:
         api_clients: API klienti
         archetypes: Produktové prototypy
+        association_types: Priradenie produktov
         assortment: Sortiment
         attributes: Produktové vlastnosti
         blocks: Bloky

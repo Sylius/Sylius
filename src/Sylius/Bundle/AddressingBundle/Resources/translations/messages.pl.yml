@@ -20,6 +20,7 @@ sylius:
       select: Wybierz
     province:
       name: Nazwa
+      abbreviation: Skrót
       select: Wybierz
     zone:
       add_member: Dodaj kraj

@@ -19,6 +19,7 @@ sylius:
       groups: Zákaznícke skupiny
       last_name: Priezvisko
       email: Email
+      phone_number: Telefónne číslo
       gender: Pohlavie
       birthday: Dátum narodenia
       billing_address: Fakturačná adresa

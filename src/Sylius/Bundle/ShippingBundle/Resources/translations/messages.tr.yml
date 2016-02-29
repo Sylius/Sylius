@@ -4,9 +4,8 @@
 sylius:
   form:
     rule:
-      item_count_configuration:
+      unit_count_configuration:
         count: Sayısı
-        equal: Eşittir
       type: Kural türü
     shipment:
       state: Durum
@@ -24,11 +23,7 @@ sylius:
         amount: Miktar
       flexible_rate_configuration:
         label: Esnek oranı
-        additional_item_cost: Ek içerik maliyeti
-        additional_item_limit: Ek içerik limiti
-        first_item_cost: İlk içerik maliyeti
-      per_item_rate_configuration:
-        label: Her öğe için sabit oran
+      per_unit_rate_configuration:
         amount: Miktar
       weight_rate_configuration:
         label: Temel ağırlık oranı

@@ -17,7 +17,7 @@ sylius:
       min: Le tarif ne peut pas être négatif.
       not_blank: Veuillez entrer un prix.
     original_price:
-      min: "Le Prix d'origine ne peux pas être négatif."
+      min: Le prix initial ne peux pas être négatif.
   product_translation:
     short_description:
-      max: 'La description brève ne doit pas dépasser {{ limit }} caractères.'
+      max: 'La description courte ne doit pas dépasser {{ limit }} caractères.'

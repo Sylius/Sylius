@@ -29,6 +29,7 @@ sylius:
     exchange_rate: Vaihtokurssi
   customer:
     email: Sähköpostiosoite
+    phone_number: Puhelinnumero
   form:
     login:
       email: Sähköpostiosoite

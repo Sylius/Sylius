@@ -1,0 +1,38 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  metadata:
+    type:
+      none: ' - BREZ - '
+      twitter_summary_card: Povzetek
+      twitter_summary_large_image_card: Povzetek z veliko sliko
+      twitter_player_card: Predvajalnik
+      twitter_app_card: Aplikacija
+    page:
+      title: Naslov
+      description: Opis
+      keywords: Ključne besede
+      twitter: Twitter Card
+    twitter:
+      title: Naslov
+      description: Opis
+      site: Stran
+      site_id: ID strani
+      creator: Ustvaril(a)
+      creator_id: ID ustvarjalca
+      image: Slika
+      player: Predvajalnik
+      player_width: Širina predvajalnika
+      player_height: Višina predvajalnika
+      player_stream: Pretakanje predvajalnika
+      player_stream_content_type: Vrsta pretočne vsebine predvajalnika
+      app_name_iphone: Ime aplikacije za iPhone
+      app_id_iphone: ID aplikacije za iPhone
+      app_url_iphone: URL Iphone aplikacije
+      app_name_ipad: Ime Ipad aplikacije
+      app_id_ipad: ID Ipad aplikacije
+      app_url_ipad: URL Ipad aplikacije
+      app_name_googleplay: Ime aplikacije Google Play
+      app_id_googleplay: ID aplikacije Google Play
+      app_url_googleplay: URL aplikacije Google Play

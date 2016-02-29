@@ -377,6 +377,7 @@ sylius:
     id: ID
     last_name: Pavardė
     shipping_address: Pristatymo adresas
+    phone_number: Telefono numeris
   delete: Šalinti
   deleted: Pašalintas
   edit: Redaguoti
@@ -403,7 +404,7 @@ sylius:
   filter: Filtruoti
   form:
     cart:
-      coupon: Jei turite nuolaidos kuponą, įveskite jį čia
+      coupon: Kuponas
     choose_file: Pasirinkite failą
     comment:
       comment: Komentaras
@@ -575,6 +576,13 @@ sylius:
     taxes: Mokesčiai
     total: Iš viso
     update_header: Užsakymo redagavimas
+  review:
+    id: ID
+    subject: Tema
+    title: Pavadinimas
+    author: Autorius
+    guest: Svečias
+    created_at: Sukurta
   order_item:
     product: Produktas
     quantity: Kiekis
@@ -672,8 +680,8 @@ sylius:
     no_taxons: Nėra jokių taksonų šiam produktui
     options: Parinktys
     price: Mažmeninė kaina
-    remove_attribute: Pašalinkite atributą
     restricted_zone: Apribota zona
+    remove_attribute: Pašalinkite atributą
     shipping_category: Pristatymo kategorija
     show: Rodyti daugiau
     show_header: 'Produkto detalės <small>peržiūrimas produktas "<strong>%product%</strong>"</small>'

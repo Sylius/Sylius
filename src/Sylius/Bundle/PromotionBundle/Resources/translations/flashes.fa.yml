@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  promotion_coupon:
+    generate: کدهای تخفیف با موفقیت ساخته شدند.
+    eligible: کد تخفیف شما با موفقیت به سبد خرید افزوده شد.
+    invalid: کد تخفیف شما نامعتبر است.
+    not_eligible: سبد خرید شما شرایط لازم برای پذیرش این کد تخفیف را ندارد.

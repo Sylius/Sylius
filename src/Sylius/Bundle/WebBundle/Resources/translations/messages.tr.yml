@@ -397,6 +397,7 @@ sylius:
     shipping_address: Teslimat adresi
     show_header: Müşteri detayları
     update_header: Müşteri düzenleme
+    phone_number: Telefon numarası
   delete: Sil
   deleted: Silindi
   disable: Devre dışı
@@ -425,7 +426,7 @@ sylius:
   filter: Filtrele
   form:
     cart:
-      coupon: Eğer bir promosyon kuponu varsa buraya girin
+      coupon: Kupon
     choose_file: Dosya seç
     comment:
       comment: Yorum
@@ -600,6 +601,13 @@ sylius:
     taxes: Vergiler
     total: Toplam
     update_header: Sipariş düzenleme
+  review:
+    id: ID
+    subject: Konu
+    title: Başlık
+    author: Hazırlayan
+    guest: Konuk
+    created_at: Oluşturulma tarihi
   order_item:
     product: Öğe
     quantity: Adet
@@ -697,8 +705,8 @@ sylius:
     no_taxons: Bu ürün için bir sınıf yok
     options: Ayarlar
     price: Perakende fiyatı
-    remove_attribute: Özniteliğini kaldır
     restricted_zone: Kısıtlı bölge
+    remove_attribute: Özniteliğini kaldır
     shipping_category: Teslimat kategorisi
     show: Detayları göster
     show_header: 'Ürün ayrıntıları <small>Gösterilen ürün "<strong>%product%</strong>"</small>'

@@ -55,11 +55,12 @@ sylius:
       restricted_zone: Beperkte zone
       shipping_category: Verzend categorie
       short_description: Korte omschrijving
-      tax_category: Belastingcategorie
       variant_selection_method: Variant selectie methode
     product_filter:
       name: Naam
       sku: SKU
+    product_variant:
+      tax_category: Belasting categorie
     settings:
       general:
         currency: Standaard valuta

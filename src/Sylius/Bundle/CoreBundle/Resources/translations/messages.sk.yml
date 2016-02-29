@@ -56,12 +56,13 @@ sylius:
       restricted_zone: Zóna s obmedzeným prístupom
       shipping_category: Kategória doručenia
       short_description: Krátky popis
-      tax_category: Daňová kategória
       variant_selection_method: Spôsob výberu produktového variantu
       main_taxon: Hlavná kategória
     product_filter:
       name: Názov
       sku: Skladový kód (SKU)
+    product_variant:
+      tax_category: Daňová kategória
     settings:
       general:
         currency: Predvolená mena
@@ -122,5 +123,8 @@ sylius:
         value: Hodnota
     guest:
       email: Email
+    product_association:
+      product: Priradený produkt
+      type: Typ priradenia
     product_association_type:
       name: Názov

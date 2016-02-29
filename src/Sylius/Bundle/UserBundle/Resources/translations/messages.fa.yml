@@ -1,0 +1,35 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    group:
+      name: نام
+      roles: نقش ها
+    user:
+      email: ایمیل
+      enabled: فعال
+      password:
+        label: کلمه عبور
+        confirmation: تکرار کلمه عبور
+      remember_me: مرا به خاطر بسپار
+      shipping_address: آدرس تحویل سفارش
+    customer:
+      first_name: نام
+      groups: گروه ها
+      last_name: نام خانوادگی
+      email: ایمیل
+      phone_number: شماره تلفن
+      gender: جنسیت
+      birthday: تاریخ تولد
+      billing_address: مشخصات پرداخت کننده
+      different_billing_address: آدرس گیرنده با خریدار متفاوت است؟
+    user_filter:
+      query: جستجو
+    user_change_password:
+      confirmation: تایید
+      current: کلمه عبور فعلی
+      new: کلمه عبور جدید
+    user_reset_password:
+      confirmation: تایید
+      new: کلمه عبور جدید

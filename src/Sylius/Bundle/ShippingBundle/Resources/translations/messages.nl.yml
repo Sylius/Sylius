@@ -4,9 +4,8 @@
 sylius:
   form:
     rule:
-      item_count_configuration:
+      unit_count_configuration:
         count: Aantal
-        equal: Gelijk aan
       type: Regeltype
     shipment:
       state: Status
@@ -24,11 +23,7 @@ sylius:
         amount: Hoeveelheid
       flexible_rate_configuration:
         label: Flexibele tarief
-        additional_item_cost: Extra item kosten
-        additional_item_limit: Limiet extra items
-        first_item_cost: Eerste item kosten
-      per_item_rate_configuration:
-        label: Flexibele tarief per item
+      per_unit_rate_configuration:
         amount: Hoeveelheid
       weight_rate_configuration:
         label: Gewicht gebasseerd tarief

@@ -12,6 +12,7 @@ sylius:
       meta_description: Описание метаданных
     product_variant:
       available_on: Доступен с
+      available_until: Доступно до
     product_archetype:
       name: Название
       parent: Родитель
@@ -19,3 +20,6 @@ sylius:
       options: Список опций
     association_type:
       name: Название
+    association:
+      type: Тип взаимосвязи
+      product: Связанные продукты

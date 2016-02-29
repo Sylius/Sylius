@@ -18,12 +18,10 @@ sylius:
       contains_product_configuration:
         variants: Termékek
         exclude: Kivétel
-      item_count_configuration:
+      cart_quantity_configuration:
         count: Mennyiség
-        equal: Egyenlő
       item_total_configuration:
         amount: Összeg
-        equal: Egyenlő
       nth_order_configuration:
         nth: N-edik
       shipping_country_configuration:

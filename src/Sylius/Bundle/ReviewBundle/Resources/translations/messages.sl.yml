@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    review:
+      title: Naslov
+      comment: Komentar
+      author: Avtor
+      status:
+        new: Novo

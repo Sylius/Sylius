@@ -55,11 +55,12 @@ sylius:
       restricted_zone: Zóna s omezeným přístupem
       shipping_category: Typ dopravy
       short_description: Stručný popis
-      tax_category: Typ daně
       variant_selection_method: Metoda výběru varianty
     product_filter:
       name: Název
       sku: SKU
+    product_variant:
+      tax_category: Typ daně
     settings:
       general:
         currency: Výchozí měna

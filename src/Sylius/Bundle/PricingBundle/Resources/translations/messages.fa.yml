@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    priceable:
+      price: قیمت
+      calculator: قیمت گذاری
+      configuration: تنظیمات
+    pricing:
+      volume_based:
+        label: تنظیمات قیمت گذاری
+        min: حداقل سفارش
+        max: حداکثر سفارش
+        price: قیمت

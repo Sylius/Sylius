@@ -48,8 +48,12 @@ sylius:
     title: Môj účet
   add_to_cart: Pridať do košíka
   association_type:
+    index_header: Typy priradenia
+    update_header: Upraviť typ priradenia
+    create_header: Vytvoriť typ priradenia
     name: Názov
     create: Vytvoriť
+    update: Upraviť
   address:
     city: Mesto
     company: Spoločnosť
@@ -210,6 +214,8 @@ sylius:
       index: Menu
     menu_node:
       index: Menu elementy
+    metadata:
+      index: Metadáta
     new: Nový
     option:
       index: Produktové voľby
@@ -226,10 +232,16 @@ sylius:
       index: Oprávnenia
     product:
       index: Produkty
+    association_type:
+      index: Typy priradenia
     promotion:
       index: Akcie
     promotion_coupon:
       index: Kupóny
+    product_association:
+      index: Priradenia
+    product_association_type:
+      index: Typ priradenia
     redirect_route:
       index: Presmerovania
     report:
@@ -423,6 +435,7 @@ sylius:
     shipping_address: Adresa doručenia
     show_header: Detail zákazníka
     update_header: Úprava zákazníka
+    phone_number: Telefónne číslo
   delete: Odstrániť
   deleted: Zmazané
   disable: Vypnúť
@@ -455,7 +468,7 @@ sylius:
   filter: Filter
   form:
     cart:
-      coupon: Ak máte akciový kupón, zadajte ho tu
+      coupon: Kupón
     choose_file: Vybrať súbor
     comment:
       comment: Komentár
@@ -560,8 +573,20 @@ sylius:
     frontend_keywords: Sylius, e-commerce, symfony2, obchod, nákupný košík, internetový obchod
     frontend_title: Sylius, moderný e-commerce pre Symfony2
   metadata:
+    customize_header: Úprava metadáta
+    show_header: Zobraziť metadáta
     id: ID
+    customize: Upraviť metadáta
+    manage: Spravovať metadáta
     content: Obsah
+    index_metadata: Metadáta
+    default_page:
+      group_customize: Úprava predvolených metadáta
+    product:
+      single_customize: Upraviť metadáta
+      group_customize: Upraviť produktové metadáta
+    product_variant:
+      single_customize: Upraviť metadáta
   move_down: Posunúť dole
   move_up: Posunúť hore
   na: Nie je k dispozícii
@@ -649,6 +674,13 @@ sylius:
     taxes: Dane
     total: Spolu
     update_header: Úprava objednávky
+  review:
+    id: ID
+    subject: Predmet
+    title: Názov
+    author: Autor
+    guest: Návštevník
+    created_at: Vytvorené
   order_item:
     product: Položka
     quantity: Množstvo
@@ -729,6 +761,7 @@ sylius:
     add_attribute: Pridať produktovú vlastnosť
     archetype: Produktový prototyp
     attributes: Produktové vlastnosti
+    association: Priradenia
     available_on: Dostupný od
     available_on_demand: Na objednávku
     available_until: Dostupný do
@@ -757,8 +790,8 @@ sylius:
     options: Produktové voľby
     original_price: Pôvodná cena
     price: Predajná cena
-    remove_attribute: Odstrániť produktovú vlastnosť
     restricted_zone: Zóna s obmedzeným prístupom
+    remove_attribute: Odstrániť produktovú vlastnosť
     shipping_category: Kategória doručenia
     show: Zobraziť viac
     show_header: 'Detail produktu <small>pre "<strong>%product%</strong>"</small>'
@@ -767,6 +800,7 @@ sylius:
     stock: Položiek na sklade
     tabs:
       attributes: Produktové vlastnosti
+      associations: Priradenia
       categorization: Kategorizácia
       channels: Kanály
       images: Obrázky
@@ -799,6 +833,7 @@ sylius:
     updated_at: Posledná aktualizácia
   product_association:
     code: Kód
+    create: Vytvoriť priradenie produktu
     create_header: Nový produkt
     index_header: Produktové vlastnosti
     manage: Správa produktových vlastnosti
@@ -1058,6 +1093,13 @@ sylius:
     reset: Obnoviť
     reset_password: Obnoviť heslo
     welcome: Vitajte
+    add_association: Pridať priradenie
+    product_associations: Produktové priradenia
+    create_product_association: Vytvoriť priradenie produktu
+    product_association_types: Priradenie produktov
+    create_product_association_type: Vytvoriť typ produktového priradenia
+    update_product_association_type: Upraviť typ produktového priradenia
+    no_association_types_to_display: Neexistujú žiadne typy priradení
     name: Názov
     id: Id
   unknown: Neznáme

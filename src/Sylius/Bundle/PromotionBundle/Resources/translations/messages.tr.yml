@@ -18,12 +18,10 @@ sylius:
       contains_product_configuration:
         variants: Ürünler
         exclude: Hariç
-      item_count_configuration:
+      cart_quantity_configuration:
         count: Sayısı
-        equal: Eşit
       item_total_configuration:
         amount: Miktar
-        equal: Eşit
       nth_order_configuration:
         nth: "n'inci"
       customer_loyalty_configuration:

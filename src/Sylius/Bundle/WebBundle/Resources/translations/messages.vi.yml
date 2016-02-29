@@ -31,6 +31,9 @@ sylius:
       chart_order_total: Giá trị đơn đặt hàng
       orders: Đơn đặt hàng tuần trước
       revenue: Doanh thu tuần trước
+    logout: Đăng xuất
+    quick_links:
+      customers: Khách hàng
   block:
     imagine:
       title: Tiêu đề
@@ -45,9 +48,13 @@ sylius:
       title: Tiêu đề
       updated_at: Cập nhật lần cuối
   breadcrumb:
+    channel:
+      index: Kênh
     country:
       index: Quốc gia
-    dashboard: Bảng điều khiển
+    customer:
+      index: Khách hàng
+    dashboard: Bảng tin
     edit: Chỉnh sửa
     general_settings: Cài đặt chung
     generate: Tạo
@@ -57,11 +64,16 @@ sylius:
       index: Hàng tồn kho
     locale:
       index: Miền địa phương
+    marketing: Tiếp thị
+    menu:
+      index: Menu
     new: Mới
     option:
       index: Tùy chọn
     order:
       index: Đơn đặt hàng
+    page:
+      index: Trang
     payment:
       index: Thanh toán
     payment_method:
@@ -70,8 +82,12 @@ sylius:
       index: Sản phẩm
     promotion:
       index: Chương trình khuyến mãi
+    report:
+      index: Báo cáo
     role:
       index: Vai trò
+    section:
+      customer: Khách hàng
     shipment:
       index: Vận chuyển
   cart:
@@ -84,6 +100,7 @@ sylius:
     code: Mã
     created_at: Được tạo vào lúc
     id: ID
+    index_header: Kênh
     name: Tên
     updated_at: Cập nhật lần cuối
   checkout:
@@ -146,6 +163,8 @@ sylius:
     code: Mã
     updated_at: Cập nhật lần cuối
   form:
+    cart:
+      coupon: Phiếu giảm giá
     frontend:
       password:
         confirmation: Xác nhận
@@ -167,10 +186,12 @@ sylius:
     id: ID
     name: Tên
     updated_at: Cập nhật lần cuối
+  login: Đăng nhập
   logo: Sylius
   manage: Quản lý
   menu:
     id: ID
+    index_header: Menu
     title: Tiêu đề
   menu_node:
     id: ID
@@ -182,14 +203,20 @@ sylius:
   order:
     comment:
       created_at: Được tạo vào lúc
+    customer: Khách hàng
     id: ID
     index_header: Đơn đặt hàng hiện tại
     shipments: Vận chuyển
     taxes: Thuế
+  review:
+    id: ID
+    title: Tiêu đề
+    created_at: Được tạo vào lúc
   order_item:
     quantity: Số lượng
   page:
     id: ID
+    index_header: Trang
     title: Tiêu đề
   password: Mật khẩu
   payment:
@@ -214,6 +241,7 @@ sylius:
     options: Tùy chọn
     sku: MÃ SẢN PHẨM
     tabs:
+      channels: Kênh
       images: Hình ảnh
       options: Tùy chọn
     updated_at: Cập nhật lần cuối
@@ -242,6 +270,7 @@ sylius:
     title: Tiêu đề
   report:
     code: Mã
+    index_header: Báo cáo
     manage: Quản lý
     name: Tên
   role:
@@ -255,6 +284,9 @@ sylius:
     name: Tên
     title: Tiêu đề
   search: Tìm kiếm
+  security:
+    login:
+      button: Đăng nhập
   settings:
     general_header: Cài đặt chung
   shipment:
@@ -290,9 +322,15 @@ sylius:
     name: Tên
   ui:
     code: Mã
+    links: Liên kết
+    login: Đăng nhập
+    logout: Đăng xuất
+    register: Đăng ký
     name: Tên
   user:
     id: ID
+    register:
+      button: Đăng ký
   variant:
     last_update: Cập nhật lần cuối
     options: Tùy chọn

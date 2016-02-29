@@ -8,4 +8,6 @@ sylius:
       password: Пароль
       remember_me: Запомнить меня
   ui:
+    sign_in: Войти
+    sign_out: Выйти
     dashboard: Приборная панель

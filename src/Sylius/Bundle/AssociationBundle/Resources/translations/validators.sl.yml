@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  association_type:
+    name:
+      not_blank: Prosimo, vnesite ime združenja.
+      min_length: 'Ime združenja mora biti dolgo vsaj 1 znak.|Ime združenja mora biti dolgo vsaj {{ limit }} znakov.'
+      max_length: 'Ime povezave ne sme biti daljše od 1 znaka.|Ime povezave ne sme biti daljši od {{ limit }} znakov.'
+    code:
+      unique: Združenje z dano kodo že obstaja.
+      not_blank: Prosimo, vnesite kodo združenja.

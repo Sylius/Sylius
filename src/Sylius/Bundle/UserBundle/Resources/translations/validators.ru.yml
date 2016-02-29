@@ -11,9 +11,11 @@ sylius:
     email:
       not_blank: Пожалуйста, введите ваш email.
       invalid: Не правильный e-mail адрес.
+      not_registered: Пользователь с таким e-mail не существует. Пожалуйста, сначала зарегистрируйтесь.
     plainPassword:
       not_blank: Пожалуйста, введите ваш пароль.
       mismatch: Введенные пароли не совпадают
+      wrong_current: Введенный пароль отличается от текущего.
   customer:
     first_name:
       max: 'Имя не должно быть длиннее {{ limit }} символов.'

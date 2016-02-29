@@ -48,8 +48,12 @@ sylius:
     title: Mon compte
   add_to_cart: Ajouter au panier
   association_type:
+    index_header: "Types d'associations"
+    update_header: "Modifier le type d'association"
+    create_header: "Créer un type d'association"
     name: Nom
     create: Créer
+    update: Mise à jour
   address:
     city: Ville
     company: Société
@@ -210,6 +214,8 @@ sylius:
       index: Menus
     menu_node:
       index: Nœuds de menu
+    metadata:
+      index: Méta-données
     new: Nouveau
     option:
       index: Options
@@ -226,10 +232,16 @@ sylius:
       index: "Droits d'accès"
     product:
       index: Produits
+    association_type:
+      index: "Types d'associations"
     promotion:
       index: Promotions
     promotion_coupon:
       index: Coupons de réduction
+    product_association:
+      index: Association
+    product_association_type:
+      index: "Type d'association"
     redirect_route:
       index: Redirections
     report:
@@ -423,6 +435,7 @@ sylius:
     shipping_address: Adresse de livraison
     show_header: Informations sur le client
     update_header: Modifier client
+    phone_number: Téléphone
   delete: Supprimer
   deleted: Supprimé
   disable: Desactiver
@@ -455,7 +468,7 @@ sylius:
   filter: Filtrer
   form:
     cart:
-      coupon: Si vous avez un coupon de promotion, saisissez-le ici
+      coupon: Code promo
     choose_file: Choisir un fichier
     comment:
       comment: Commentaire
@@ -560,8 +573,20 @@ sylius:
     frontend_keywords: Sylius, e-commerce, symfony2, boutique, panier, commande
     frontend_title: Sylius, boutique e-commerce pour Symfony2
   metadata:
+    customize_header: Personnalisation des méta-données
+    show_header: Afficher les méta-données
     id: ID
+    customize: Personnaliser les méta-données
+    manage: Gérer les méta-données
     content: Contenu
+    index_metadata: Méta-données
+    default_page:
+      group_customize: Personnaliser les méta-données par défaut
+    product:
+      single_customize: Personnaliser les méta-données
+      group_customize: Personnaliser les méta-données du produit
+    product_variant:
+      single_customize: Personnaliser les méta-données
   move_down: Déplacement vers le bas
   move_up: Déplacement vers le haut
   na: N/A
@@ -649,6 +674,13 @@ sylius:
     taxes: Taxes
     total: Total
     update_header: Modification de la commande
+  review:
+    id: ID
+    subject: Sujet
+    title: Titre
+    author: Auteur
+    guest: Invité
+    created_at: Date de création
   order_item:
     product: Élément
     quantity: Quantité
@@ -729,6 +761,7 @@ sylius:
     add_attribute: Ajouter un attribut
     archetype: Prototype
     attributes: Attributs
+    association: Association
     available_on: Disponible le
     available_on_demand: Disponible à la demande
     available_until: "Disponible jusqu'au"
@@ -740,7 +773,7 @@ sylius:
     generate_variants: Générer des variantes
     index_by_taxon_header: 'Produits <small>catégorisés sous le taxon "%taxon%"</small>'
     index_header: 'Produits <small>Liste de tous les produits de votre boutique</small>'
-    main_taxon: Taxe
+    main_taxon: Taxinomie principale
     manage: Gérer les produits
     name: Désignation
     no_attributes: "Ce produit ne comporte pas d'attributs"
@@ -757,8 +790,8 @@ sylius:
     options: Options
     original_price: "Prix d'origine"
     price: Prix
-    remove_attribute: "Supprimer l'attribut"
     restricted_zone: Restriction de zone
+    remove_attribute: "Supprimer l'attribut"
     shipping_category: Catégorie de livraison
     show: En savoir plus
     show_header: Détails du produit
@@ -767,6 +800,7 @@ sylius:
     stock: Stock courant
     tabs:
       attributes: Attributs
+      associations: Associations
       categorization: Catégorisation
       channels: Canaux
       images: Images
@@ -799,6 +833,7 @@ sylius:
     updated_at: Date de modification
   product_association:
     code: Code
+    create: Créer une association de produit
     create_header: Nouveau produit
     index_header: Propriété de produit
     manage: Gérer les propriétés
@@ -1059,6 +1094,13 @@ sylius:
     reset: Réinitialiser
     reset_password: Réinitialisation du mot de passe
     welcome: Bienvenue
+    add_association: Ajouter une association
+    product_associations: Associations de produit
+    create_product_association: Créer une association de produit
+    product_association_types: "Types d'association de produits"
+    create_product_association_type: "Créer un type d'association de produit"
+    update_product_association_type: "Mise à jour d'un type d'association de produit"
+    no_association_types_to_display: "Il n'y a aucun association de défini"
     name: Nom
     id: Id
   unknown: Inconnu

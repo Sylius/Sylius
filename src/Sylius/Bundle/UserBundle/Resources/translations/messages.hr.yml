@@ -19,6 +19,7 @@ sylius:
       groups: Grupe
       last_name: Prezime
       email: E-mail
+      phone_number: Kontakt telefon
       birthday: Datum rođenja
       billing_address: Adresa za dostavu
       different_billing_address: Želim koristiti drugu adresu za račun.

@@ -273,6 +273,7 @@ sylius:
     id: ID
     last_name: 姓氏
     shipping_address: 送货地址
+    phone_number: 电话
   delete: 删除
   deleted: 已删除
   edit: 编辑
@@ -283,7 +284,7 @@ sylius:
   filter: 筛选器
   form:
     cart:
-      coupon: 如果您有促进的优惠券，请在这里输入
+      coupon: 优惠券
     choose_file: 选择文件
     frontend:
       password:
@@ -388,6 +389,11 @@ sylius:
     tax_total: 税费总计
     taxes: 税
     total: 共计
+  review:
+    id: ID
+    title: 标题
+    author: 作者
+    created_at: 创建于
   order_item:
     quantity: 数量
     sellable: 产品

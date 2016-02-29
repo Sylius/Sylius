@@ -170,6 +170,8 @@ sylius:
   create: Criar
   currency:
     updated_at: Data de modificação
+  customer:
+    phone_number: Número de Telefone
   delete: Apagar
   edit: Editar
   email:

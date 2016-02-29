@@ -19,6 +19,7 @@ sylius:
       groups: Grupės
       last_name: Pavardė
       email: Elektroninis paštas
+      phone_number: Telefono numeris
       birthday: Gimimo diena
       billing_address: Mokėtojo adresas
       different_billing_address: Naudoti kitą adresą apmokėjimui?

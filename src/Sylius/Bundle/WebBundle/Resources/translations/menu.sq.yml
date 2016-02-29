@@ -7,6 +7,7 @@ sylius:
       main:
         api_clients: Klientët API
         archetypes: Prototipet e produktit
+        association_types: Tipet e lidhjes se produktit
         assortment: Asortimenti
         attributes: Konfiguro atributet
         blocks: Blloqet

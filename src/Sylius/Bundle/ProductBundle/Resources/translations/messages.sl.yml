@@ -1,0 +1,23 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    product:
+      name: Ime
+      description: Opis
+      attributes: Atributi
+      options: Možnosti
+    product_variant:
+      available_on: Na voljo na
+      available_until: Na voljo do
+    product_archetype:
+      name: Ime
+      parent: Nadrejeni
+      attributes: Atributi
+      options: Možnosti
+    association_type:
+      name: Ime
+    association:
+      type: Vrsta združenja
+      product: Povezani izdelek

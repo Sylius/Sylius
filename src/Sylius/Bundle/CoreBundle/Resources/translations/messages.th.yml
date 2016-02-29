@@ -48,11 +48,12 @@ sylius:
       restricted_zone: จำกัดโซน
       shipping_category: ประเภทการจัดส่ง
       short_description: คำอธิบายโดยย่อ
-      tax_category: ประเภทภาษี
       variant_selection_method: วิธีการเลือกตัวแปร
     product_filter:
       name: ชื่อ
       sku: SKU
+    product_variant:
+      tax_category: ประเภทภาษี
     settings:
       general:
         currency: สกุลเงินหลัก

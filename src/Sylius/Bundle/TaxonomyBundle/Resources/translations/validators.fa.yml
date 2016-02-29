@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  taxon:
+    name:
+      max_length: نام زیر رده نباید بیش از 255 حرف باشد.
+      not_blank: لطفا نام رده را وارد کنید.
+    code:
+      unique: زیر رده ای با این کد قبلا در سیستم ثبت شده است.
+      not_blank: لطفا کد زیر رده را وارد کنید.
+  taxonomy:
+    name:
+      max_length: رده نباید بیش از 255 حرف باشد.
+      not_blank: لطفا نام رده را وارد کنید.

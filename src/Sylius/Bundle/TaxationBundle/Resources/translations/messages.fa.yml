@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    tax_category:
+      name: نام
+      description: شرح
+    tax_rate:
+      category: دسته
+      name: نام
+      amount: مبلغ
+      included_in_price: مالیات در قیمت نهایی لحاظ شود؟
+      calculator: نوع محاسبه

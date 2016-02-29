@@ -6,4 +6,4 @@ sylius:
     login:
       password: Mật khẩu
   ui:
-    dashboard: Bảng điều khiển
+    dashboard: Bảng tin

@@ -4,7 +4,7 @@
 sylius:
   form:
     rule:
-      item_count_configuration:
+      unit_count_configuration:
         count: Πλήθος
     shipment:
       state: Νομός
@@ -18,7 +18,7 @@ sylius:
     shipping_calculator:
       flat_rate_configuration:
         amount: Ποσό
-      per_item_rate_configuration:
+      per_unit_rate_configuration:
         amount: Ποσό
       volume_rate_configuration:
         amount: Ποσό

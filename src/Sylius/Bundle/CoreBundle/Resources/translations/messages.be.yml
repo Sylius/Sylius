@@ -48,11 +48,12 @@ sylius:
       restricted_zone: Забароненая зона
       shipping_category: Катэгорыя дастаўкі
       short_description: Кароткае апісанне
-      tax_category: Катэгорыя падатку
       variant_selection_method: Метад выбару варыянта
     product_filter:
       name: Імя
       sku: SKU
+    product_variant:
+      tax_category: Катэгорыя падатку
     settings:
       general:
         currency: Галоўная валюта

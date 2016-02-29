@@ -14,7 +14,7 @@ sylius:
     rule:
       contains_product_configuration:
         variants: Προϊόντα
-      item_count_configuration:
+      cart_quantity_configuration:
         count: Πλήθος
       item_total_configuration:
         amount: Ποσό

@@ -180,6 +180,7 @@ sylius:
     updated_at: Ažurirano
   customer:
     id: ID
+    phone_number: Broj telefona
   delete: Obrisati
   deleted: Obrisano
   edit: Izmeniti
@@ -267,6 +268,9 @@ sylius:
     taxes: Porezi
     total: Ukupno
     update_header: Ažuriranje narudžbine
+  review:
+    id: ID
+    created_at: Kreirano
   order_item:
     quantity: Količina
     sellable: Proizvod

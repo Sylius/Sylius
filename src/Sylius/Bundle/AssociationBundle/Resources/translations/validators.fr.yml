@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  association_type:
+    name:
+      not_blank: "Le nom de l'association ne doit pas être vide."
+      min_length: "Le nom de l'association doit posséder au moins 1 caractère. | Le nom de l'association doit posséder au moins {{ limit }} caractères."
+      max_length: "Le nom de l'association doit posséder au plus 1 caractère. | Le nom de l'association doit posséder au plus {{ limit }} caractères."
+    code:
+      unique: "Ce code d'association existe déjà."
+      not_blank: "Veuillez entrer un code d'association."

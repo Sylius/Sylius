@@ -4,9 +4,8 @@
 sylius:
   form:
     rule:
-      item_count_configuration:
+      unit_count_configuration:
         count: Nombre
-        equal: Égal à
       type: Type de règle
     shipment:
       state: État
@@ -24,11 +23,7 @@ sylius:
         amount: Montant
       flexible_rate_configuration:
         label: Taux variable
-        additional_item_cost: "Coût d'un article supplémentaire"
-        additional_item_limit: Limite des articles supplémentaires
-        first_item_cost: Coût du premier article
-      per_item_rate_configuration:
-        label: Taux fixe par produit
+      per_unit_rate_configuration:
         amount: Montant
       weight_rate_configuration:
         label: Taux basé sur le poids

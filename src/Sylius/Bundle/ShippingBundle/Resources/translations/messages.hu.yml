@@ -4,7 +4,7 @@
 sylius:
   form:
     rule:
-      item_count_configuration:
+      unit_count_configuration:
         count: Mennyiség
     shipment:
       state: Állapot
@@ -18,11 +18,7 @@ sylius:
     shipping_calculator:
       flat_rate_configuration:
         amount: Összeg
-      flexible_rate_configuration:
-        additional_item_cost: További tétel költség
-        additional_item_limit: További tételek korlátozása
-        first_item_cost: Első tétel költsége
-      per_item_rate_configuration:
+      per_unit_rate_configuration:
         amount: Összeg
       weight_rate_configuration:
         division: Részleg

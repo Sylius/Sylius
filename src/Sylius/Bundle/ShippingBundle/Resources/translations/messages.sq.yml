@@ -4,9 +4,8 @@
 sylius:
   form:
     rule:
-      item_count_configuration:
+      unit_count_configuration:
         count: Numëro
-        equal: I barabartë me
       type: Lloji i rregullit
     shipment:
       state: Shteti
@@ -24,11 +23,7 @@ sylius:
         amount: Shuma
       flexible_rate_configuration:
         label: Taksa e ndryshueshme
-        additional_item_cost: Kostoja shtesë e artikullit
-        additional_item_limit: Kufiri i artikujve shtesë
-        first_item_cost: Kostoja e artikullit të parë
-      per_item_rate_configuration:
-        label: Taksa fikse për artikull
+      per_unit_rate_configuration:
         amount: Shuma
       weight_rate_configuration:
         label: Taksa e bazuar te pesha

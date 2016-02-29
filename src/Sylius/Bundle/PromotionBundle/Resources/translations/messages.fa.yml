@@ -1,0 +1,57 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    action:
+      fixed_discount_configuration:
+        amount: مبلغ
+      percentage_discount_configuration:
+        percentage: درصد
+      shipping_discount_configuration:
+        percentage: درصد
+      type: نوع
+    rule:
+      taxonomy_configuration:
+        taxons: رده ها
+        exclude: به جز اینها
+      contains_product_configuration:
+        variants: محصولات
+        exclude: به جز اینها
+      cart_quantity_configuration:
+        count: تعداد
+      item_total_configuration:
+        amount: مبلغ
+      nth_order_configuration:
+        nth: در مرحله چند
+      customer_loyalty_configuration:
+        time: زمان
+        unit:
+          days: روز
+          weeks: هفته
+          months: ماه
+          years: سال
+          header: واحد
+        after: کاربران ساخته شده بعد از این بازه ی زمانی
+      shipping_country_configuration:
+        country: كشور
+      type: نوع
+    coupon:
+      usage_limit: محدودیت استفاده
+      expires_at: انقضا در تاریخ
+    coupon_generate_instruction:
+      amount: مبلغ
+      usage_limit: محدودیت استفاده
+      expires_at: انقضا در تاریخ
+    promotion:
+      actions: طریقه اعمال
+      add_action: افزودن عملیات
+      add_rule: افزودن قانون
+      coupon_based: مبتنی بر کوپن
+      exclusive: یکبار مصرف
+      description: شرح
+      ends_at: پایان در
+      name: نام
+      rules: قوانین
+      starts_at: شروع از
+      usage_limit: محدودیت استفاده

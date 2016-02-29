@@ -4,9 +4,8 @@
 sylius:
   form:
     rule:
-      item_count_configuration:
+      unit_count_configuration:
         count: Počet
-        equal: Rovná sa
       type: Typ pravidla
     shipment:
       state: Stav
@@ -24,11 +23,7 @@ sylius:
         amount: Suma
       flexible_rate_configuration:
         label: Flexibilná sadzba
-        additional_item_cost: Cena za každý ďalší predmet
-        additional_item_limit: Obmedenie na ďalšie predmety
-        first_item_cost: Cena prvej položky
-      per_item_rate_configuration:
-        label: Paušálna sadzba za kus
+      per_unit_rate_configuration:
         amount: Suma
       weight_rate_configuration:
         label: Sadzba podľa hmotnosti

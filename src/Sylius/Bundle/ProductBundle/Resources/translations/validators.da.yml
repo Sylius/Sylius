@@ -10,9 +10,6 @@ sylius:
       not_blank: Indtast produktnavn.
       min_length: 'Produktnavnet skal være mindst ét tegn langt. |Produktnavnet skal være mindst {{ limit }} tegn langt.'
       max_length: 'Produktnavnet må ikke være længere end 1 tegn. |Produktnavn må ikke være længere end {{ limit }} tegn.'
-    description:
-      not_blank: Angiv produktbeskrivelse.
-      min_length: 'Produktbeskrivelsen skal være mindst ét tegn langt. |Produktbeskrivelse skal være mindst {{ limit }} tegn langt.'
   variant:
     sku:
       not_blank: Angiv variant SKU.

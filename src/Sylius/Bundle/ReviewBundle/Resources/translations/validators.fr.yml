@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  review:
+    author:
+      already_exists: Cet e-mail est déjà utilisé, veuillez vous connecter ou lancer une procédure de réinitialisation de mot de passe.

@@ -9,7 +9,7 @@ sylius:
       not_blank: Veuillez entrer une ville
     country:
       not_blank: Veuillez choisir un pays.
-      disabled: Le pays choisi est désactivé. Veuillez choisir un autre.
+      disabled: Le pays choisi est désactivé. Veuillez en choisir un autre.
     first_name:
       max_length: Le prénom ne doit pas comporter plus de 255 caractères.
       min_length: Le prénom doit comporter au moins 2 caractères.
@@ -35,13 +35,15 @@ sylius:
       unique: Le code ISO du pays doit être unique.
   province:
     code:
-      not_blank: Veuillez entrer le code de la province.
-      unique: Le code de la province doit être unique.
+      min_length: Le code de la région doit comporter au moins 5 caractères.
+      not_blank: Veuillez entrer le code de la région.
+      regex: Le code de la région doit avoir le format suivant XX-XX (ex. FR-IF).
+      unique: Le code de la région doit être unique.
     name:
       max_length: Le nom de la région ne doit pas dépasser les 255 caractères.
       min_length: Le nom de la région doit comporter au moins 2 caractères.
       not_blank: Veuillez fournir le nom de la région.
-      unique: Le nom de la province doit être unique.
+      unique: Le nom de la région doit être unique.
   zone:
     code:
       not_blank: Merci de saisir le code de la zone.

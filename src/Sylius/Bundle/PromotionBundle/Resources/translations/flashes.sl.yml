@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  promotion_coupon:
+    generate: Promocijski kuponi so bili uspešno ustvarjeni.
+    eligible: Vaš promocijski kupon je bil dodan v košarico.
+    invalid: Vaš promocijski kupon ni veljaven.
+    not_eligible: Vaša košarica ni upravičena do tega promocijskega kupona.
