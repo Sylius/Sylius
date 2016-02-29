@@ -20,6 +20,7 @@ sylius:
       select: Bundesland auswählen
     province:
       name: Name
+      abbreviation: Abkürzung
       select: Bundesland auswählen
     zone:
       add_member: Mitglied hinzufügen

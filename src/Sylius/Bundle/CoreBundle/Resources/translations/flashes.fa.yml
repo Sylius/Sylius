@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  cart:
+    restricted_zone_removal: 'محصول %product% از سبد خرید شما حذف شد زیرا در کشور/شهر شما قابل ارائه نیست.'
+  checkout:
+    restricted_zone: این کالا در کشور شما عرضه نمی شود.
+    success: از سفارش شما سپاسگزاریم!
+    canceled: پرداخت شما لغو شد.
+    processing: پرداخت شما در حال بررسی است.
+    new: پرداخت شما به تازگی ثبت شد.
+    failed: پرداخت شما نامعتبر است.
+    unknown: خطای غیرقابل تشخصی در روند پرداخت
+    out_of_stock: 'تنها %quantity% %name% در انبار وجود دارد.'

@@ -20,3 +20,6 @@ sylius:
       options: Produktové voľby
     association_type:
       name: Názov
+    association:
+      type: Typ priradenia
+      product: Priradený produkt

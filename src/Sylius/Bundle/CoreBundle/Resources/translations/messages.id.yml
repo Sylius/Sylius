@@ -41,11 +41,12 @@ sylius:
       restricted_zone: Zona Terbatas
       shipping_category: Kategori Pengiriman
       short_description: Deskripsi singkat
-      tax_category: Kategori Pajak
       variant_selection_method: Metode Pilih Varian
     product_filter:
       name: Nama
       sku: SKU
+    product_variant:
+      tax_category: Kategori Pajak
     settings:
       general:
         currency: Mata uang default

@@ -6,3 +6,15 @@ sylius:
     address:
       city: 도시
       company: 회사명
+      phone_number: 전화번호
+    country:
+      select: 선택하기
+    province:
+      abbreviation: 약어
+      select: 선택하기
+    zone:
+      scope: 범위
+      select: 선택하기
+      select_scope: 범위를 선택하세요
+    zone_member:
+      select: 선택하기

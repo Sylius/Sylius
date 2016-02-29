@@ -40,11 +40,12 @@ sylius:
       restricted_zone: Απαγορευμένη ζώνη
       shipping_category: Κατηγορία αποστολής
       short_description: Σύντομη περιγραφή
-      tax_category: Φορολογική κατηγορία
       variant_selection_method: Μέθοδος επιλογής παραλλαγής
     product_filter:
       name: Ονομασία
       sku: ΚΩΔΙΚΟΣ ΠΡΟΪΟΝΤΟΣ
+    product_variant:
+      tax_category: Φορολογική κατηγορία
     settings:
       general:
         currency: Προεπιλεγμένο νόμισμα

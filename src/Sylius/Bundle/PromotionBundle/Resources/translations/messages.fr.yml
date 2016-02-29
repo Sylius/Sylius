@@ -18,16 +18,14 @@ sylius:
       contains_product_configuration:
         variants: Produits
         exclude: Exclure
-      item_count_configuration:
+      cart_quantity_configuration:
         count: Nombre
-        equal: Supérieur ou égal
       item_total_configuration:
         amount: Montant
-        equal: Supérieur ou égal
       nth_order_configuration:
         nth: Nième
       customer_loyalty_configuration:
-        time: Temps
+        time: Heure
         unit:
           days: Jours
           weeks: Semaines

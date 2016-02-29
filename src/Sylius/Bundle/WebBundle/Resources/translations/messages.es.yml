@@ -397,6 +397,7 @@ sylius:
     shipping_address: Dirección de envío
     show_header: Detalles del cliente
     update_header: Editando cliente
+    phone_number: Teléfono
   delete: sylius.account.address.action.delete
   deleted: Eliminado
   disable: Desactivar
@@ -425,7 +426,7 @@ sylius:
   filter: Filtrar
   form:
     cart:
-      coupon: Si dispone de un cupón de oferta, introdúzcalo aquí
+      coupon: Cupón
     choose_file: Seleccionar fichero
     comment:
       comment: Comentario
@@ -600,6 +601,13 @@ sylius:
     taxes: Impuestos
     total: Total
     update_header: Editar orden
+  review:
+    id: ID
+    subject: Asunto
+    title: Título
+    author: Autor
+    guest: Invitado
+    created_at: Creando el
   order_item:
     product: sylius.order_item.product
     quantity: Cantidad
@@ -697,8 +705,8 @@ sylius:
     no_taxons: No taxons
     options: Opciones
     price: Precio
-    remove_attribute: Remover atributo
     restricted_zone: Zona restringida
+    remove_attribute: Remover atributo
     shipping_category: Categoría de envío
     show: Ver más
     show_header: 'Detalles del producto <small>"<strong>%product%</strong>"</small>'

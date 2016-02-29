@@ -278,6 +278,7 @@ sylius:
     id: ID
     last_name: Prezime
     shipping_address: Adresa za dostavu
+    phone_number: Kontakt telefon
   delete: sylius.account.address.action.delete
   deleted: Izbrisano
   edit: Uredi
@@ -288,7 +289,7 @@ sylius:
   filter: Filter
   form:
     cart:
-      coupon: Ukoliko imate kupon za dodatni popust, unesite ga ovdje
+      coupon: Kupon
     choose_file: Odaberite dokument
     frontend:
       password:
@@ -420,6 +421,11 @@ sylius:
     taxes: Porezi
     total: Ukupno
     update_header: Ažuriranje narudžbe
+  review:
+    id: ID
+    title: Naslov
+    author: Autor
+    created_at: Dodano
   order_item:
     product: sylius.order_item.product
     quantity: Količina

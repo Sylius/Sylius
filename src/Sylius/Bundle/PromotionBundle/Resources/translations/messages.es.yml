@@ -18,12 +18,10 @@ sylius:
       contains_product_configuration:
         variants: Productos
         exclude: Excluir
-      item_count_configuration:
+      cart_quantity_configuration:
         count: Contador
-        equal: Igual
       item_total_configuration:
         amount: Cantidad
-        equal: Igual
       nth_order_configuration:
         nth: Enésimo
       customer_loyalty_configuration:

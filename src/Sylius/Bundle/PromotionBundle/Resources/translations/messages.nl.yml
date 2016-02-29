@@ -18,12 +18,10 @@ sylius:
       contains_product_configuration:
         variants: Producten
         exclude: Uitsluiten
-      item_count_configuration:
+      cart_quantity_configuration:
         count: Aantal
-        equal: Gelijk
       item_total_configuration:
         amount: Hoeveelheid
-        equal: Gelijk
       nth_order_configuration:
         nth: Nde
       customer_loyalty_configuration:

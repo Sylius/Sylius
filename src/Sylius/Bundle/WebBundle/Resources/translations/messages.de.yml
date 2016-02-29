@@ -219,6 +219,8 @@ sylius:
       index: Aktionen
     promotion_coupon:
       index: Gutscheine
+    product_association_type:
+      index: Assoziationstyp
     redirect_route:
       index: Umleitungen (Redirects)
     report:
@@ -273,6 +275,7 @@ sylius:
     enabled: Aktiviert
     id: ID
     index_header: Ausgabekanäle
+    locale_default: Standard Lokalisierung
     manage: Kanäle verwalten
     name: Name
     update: Bearbeiten
@@ -390,6 +393,7 @@ sylius:
     shipping_address: Lieferadresse
     show_header: Kundendetails
     update_header: Kunde bearbeiten
+    phone_number: Telefonnummer
   delete: Löschen
   deleted: Gelöscht
   edit: Bearbeiten
@@ -416,7 +420,7 @@ sylius:
   filter: Filtern
   form:
     cart:
-      coupon: Falls vorhanden, geben Sie Ihren Gutscheincode hier ein
+      coupon: Gutschein
     choose_file: Datei wählen
     comment:
       comment: Anmerkung
@@ -588,6 +592,13 @@ sylius:
     taxes: Steuern
     total: Total
     update_header: Bestellung editieren
+  review:
+    id: ID
+    subject: Betreff
+    title: Titel
+    author: Autor
+    guest: Gastbestellung
+    created_at: Erstellt am
   order_item:
     product: Produkt
     quantity: Artikelmenge
@@ -672,6 +683,7 @@ sylius:
     generate_variants: Generiere Varianten
     index_by_taxon_header: 'Produkte <small>kategorisiert als "%taxon%</small>"'
     index_header: 'Produkte <small> Alle Produkte in Ihrem Shop</small>'
+    main_taxon: Haupt-Taxonomie
     manage: Produkte verwalten
     name: Name
     no_attributes: Für dieses Produkt wurden keine Attribute definiert
@@ -684,9 +696,10 @@ sylius:
     no_tax_category: Keine Steuerkategorie
     no_taxons: Keine Klassifizierungen
     options: Optionen
+    original_price: Ursprünglicher Preis
     price: Listenpreis
-    remove_attribute: Attribute entfernen
     restricted_zone: Eingeschränktes Versandgebiet
+    remove_attribute: Attribute entfernen
     shipping_category: Versandkategorie
     show: Mehr anzeigen
     show_header: 'Produktdetails <small> Anzeige von Produkt "<strong>%product%</strong>"</small>'
@@ -964,6 +977,7 @@ sylius:
     delete_image: Bild löschen
     last_update: Letztes Update
     options: Optionen
+    original_price: Ursprünglicher Preis
     price: Preis
     sku: Bestandseinheit
     stock: Aktueller Lagerbestand

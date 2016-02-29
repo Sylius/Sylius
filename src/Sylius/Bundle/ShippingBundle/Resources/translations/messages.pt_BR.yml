@@ -4,7 +4,7 @@
 sylius:
   form:
     rule:
-      item_count_configuration:
+      unit_count_configuration:
         count: Contagem
     shipment:
       state: Estado
@@ -19,11 +19,7 @@ sylius:
     shipping_calculator:
       flat_rate_configuration:
         amount: Quantidade
-      flexible_rate_configuration:
-        additional_item_cost: Custo de item adicional
-        additional_item_limit: Limite de itens adicionais
-        first_item_cost: Custo do primeiro item
-      per_item_rate_configuration:
+      per_unit_rate_configuration:
         amount: Quantidade
       weight_rate_configuration:
         division: Divisão

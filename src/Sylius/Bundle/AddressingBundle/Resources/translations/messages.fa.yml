@@ -1,0 +1,38 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    address:
+      city: شهر
+      company: شرکت
+      country: كشور
+      first_name: نام
+      last_name: نام خانوادگی
+      phone_number: شماره تلفن
+      postcode: کد پستی
+      street: آدرس پستی
+      province: استان
+    country:
+      add_province: افزودن استان
+      name: نام
+      provinces: استان ها
+      select: انتخاب
+    province:
+      name: نام
+      abbreviation: مخفف
+      select: انتخاب
+    zone:
+      add_member: افزودن بخش
+      members: بخش ها
+      name: نام
+      type: نوع
+      types:
+        country: كشور
+        province: استان
+        zone: منطقه
+      scope: محدوده
+      select: انتخاب
+      select_scope: انتخاب محدوده
+    zone_member:
+      select: انتخاب

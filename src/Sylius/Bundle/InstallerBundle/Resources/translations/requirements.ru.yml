@@ -13,6 +13,7 @@ sylius:
     help: 'Установите и включите %extension%.'
     iconv: Iconv
     exif: Exif
+    fileinfo: Информация о файле
     icu: ICU
     intl: Intl
     json_encode: JSON

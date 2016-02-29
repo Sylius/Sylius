@@ -1,0 +1,65 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  extensions:
+    header: افزونه ها
+    accelerator:
+      header: شتاب دهنده
+      help: به شدت نسبت به نصب و فعال سازی یک شتابدهنده پی اچ پی مانند APC توصیه می کنیم.
+    apc: APC
+    ctype: Ctype
+    gd: GD
+    help: 'افزونه %extension% را نصب و فعال کنید.'
+    iconv: Iconv
+    exif: Exif
+    fileinfo: Fileinfo
+    icu: ICU
+    intl: Intl
+    json_encode: JSON
+    mbstring: Multibyte String
+    "off": false
+    "on": true
+    pcre: PCRE
+    pdo: PDO
+    php_xml: PHP-XML
+    session_start: Session
+    simplexml_import_dom: SimpleXML
+    token_get_all: Tokenizer
+  filesystem:
+    header: file system
+    cache:
+      header: cache
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+    exists: وجود دارد
+    logs:
+      header: پیام های سیستم
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+    not_exists: وجود ندارد
+    not_writable: غیرقابل رایت
+    parameters:
+      header: parameters.yml
+      help:
+        To set permissions run: 'sudo chmod a+w %path%'
+    vendors: vendors
+    writable: قابل رایت
+  settings:
+    header: ورژن PHP و تنظیمات
+    any: هر
+    detect_unicode: detect_unicode
+    magic_quotes_gpc: magic_quotes_gpc
+    non_deprecated: معتبر
+    "off": false
+    "on": true
+    register_globals: register_globals
+    session:
+      auto_start: session.auto_start
+    short_open_tag: short_open_tag
+    timezone: منطقه زمانی
+    timezone_deprecated:
+      header: منطقه زمانی نامعتبر
+      help: 'منطقه زمانی %timezone% نامعتبر است. لطفا تنظیمات مربوطه را در فایل php.ini اصلاح کنید (برای دیدن لیست منطقه های زمانی نامعتبر به آدرس http://php.net/manual/en/timezones.others.php مراجعه کنید).'
+    version: ورژن PHP
+    version_recommanded: ورژن PHP توصیه شده

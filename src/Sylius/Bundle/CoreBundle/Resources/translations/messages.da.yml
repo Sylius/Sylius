@@ -48,11 +48,12 @@ sylius:
       restricted_zone: Begrænset zone
       shipping_category: Fragt kategori
       short_description: Kort beskrivelse
-      tax_category: Momskategori
       variant_selection_method: Variant udvælgelsesmetode
     product_filter:
       name: Navn
       sku: SKU
+    product_variant:
+      tax_category: Momskategori
     settings:
       general:
         currency: Standard valuta

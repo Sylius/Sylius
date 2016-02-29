@@ -9,18 +9,21 @@ sylius:
       country: Država
       first_name: Ime
       last_name: Priimek
-      phone_number: Telefon
+      phone_number: Telefonska številka
       postcode: Poštna številka
       street: Ulica
       province: Regija
     country:
+      add_province: Dodaj provinco
       name: Ime
       provinces: Province
       select: Izberite
     province:
       name: Ime
+      abbreviation: Kratica
       select: Izberite
     zone:
+      add_member: Dodaj člana
       members: Člani
       name: Ime
       type: Vrsta
@@ -30,5 +33,6 @@ sylius:
         zone: Območje
       scope: Področje
       select: Izberite
+      select_scope: Izberite področje
     zone_member:
       select: Izberite

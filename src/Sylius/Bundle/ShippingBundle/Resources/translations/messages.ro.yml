@@ -4,7 +4,7 @@
 sylius:
   form:
     rule:
-      item_count_configuration:
+      unit_count_configuration:
         count: Număr
     shipment:
       state: Status
@@ -19,12 +19,8 @@ sylius:
     shipping_calculator:
       flat_rate_configuration:
         amount: Sumă
-      flexible_rate_configuration:
-        additional_item_cost: Cost produs adițional
-        additional_item_limit: Limita produse adiționale
-        first_item_cost: Costul primului produs
-      per_item_rate_configuration:
-        amount: Sumă
+      per_unit_rate_configuration:
+        amount: Valoare
       weight_rate_configuration:
         division: Divizie
       volume_rate_configuration:

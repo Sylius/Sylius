@@ -7,6 +7,7 @@ sylius:
       main:
         api_clients: Clients API
         archetypes: Archétypes de produit
+        association_types: "Types d'association de produits"
         assortment: Assortiment
         attributes: Configurer les attributs
         blocks: Blocs

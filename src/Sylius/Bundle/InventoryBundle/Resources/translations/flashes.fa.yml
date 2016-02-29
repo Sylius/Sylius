@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  inventory_unit:
+    backorder: واحد انبار بدون موجودی سفارش داده شد.
+    sell: واحد انبار با موفقیت ارسال شد.
+    return: واحد انبار بازگشت داده شد.
+    transition_fail: با توجه به وضعیت فعلی واحد انبار, عملیات نمی تواند انجام شود

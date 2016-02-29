@@ -55,11 +55,12 @@ sylius:
       restricted_zone: Apribota zona
       shipping_category: Pristatymo kategorija
       short_description: Trumpas aprašymas
-      tax_category: Mokesčių kategorija
       variant_selection_method: Varianto pasirinkimo būdas
     product_filter:
       name: Pavadinimas
       sku: Kodas
+    product_variant:
+      tax_category: Mokesčių kategorija
     settings:
       general:
         currency: Numatytoji valiuta

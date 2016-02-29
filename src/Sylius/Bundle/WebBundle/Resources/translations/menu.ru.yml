@@ -7,11 +7,13 @@ sylius:
       main:
         api_clients: API клиенты
         archetypes: Прототипы продукта
+        association_types: Типы взаимосвязей продуктов
         assortment: Ассортимент
         attributes: Настройка атрибутов
         blocks: Блоки
         channels: Каналы
         configuration: Настройки
+        contact_requests: Контактные запросы
         contact_topics: Темы обращений
         content: Контент
         countries: Страны

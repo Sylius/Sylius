@@ -3,6 +3,9 @@
 
 sylius:
   promotion:
+    code:
+      unique: La promoción con este código ya existe.
+      not_blank: Por favor, ingresa el codigo promocional.
     description:
       max_length: 'La descripción de la promoción no debe tener más de 1 carácter.|La descripción de la promoción no debe tener más de {{ limit }} caracteres.'
       min_length: 'La descripción de la promoción debe tener al menos 1 carácter.|La descripción de la promoción debe tener al menos {{ limit }} caracteres.'

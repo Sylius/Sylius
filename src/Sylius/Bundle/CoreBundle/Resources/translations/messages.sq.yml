@@ -56,12 +56,13 @@ sylius:
       restricted_zone: Zonë e kufizuar
       shipping_category: Kategoria e dërgesës
       short_description: Përshkrim i shkurtër
-      tax_category: Kategoria e taksimit
       variant_selection_method: Metoda rezervë e përzgjedhjes
       main_taxon: Grupi kryesor
     product_filter:
       name: Emri
       sku: SKU
+    product_variant:
+      tax_category: Kategoria e taksimit
     settings:
       general:
         currency: Monedha e paracaktuar
@@ -122,5 +123,8 @@ sylius:
         value: Vlera
     guest:
       email: Email
+    product_association:
+      product: Produkt i lidhur
+      type: Tipi i lidhjes
     product_association_type:
       name: Emri

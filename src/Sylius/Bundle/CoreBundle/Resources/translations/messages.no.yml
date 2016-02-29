@@ -48,11 +48,12 @@ sylius:
       restricted_zone: Begrenset sone
       shipping_category: Fraktkategori
       short_description: Kort beskrivelse
-      tax_category: Skattekategori
       variant_selection_method: Metode for valg av variant
     product_filter:
       name: Navn
       sku: Strekkode
+    product_variant:
+      tax_category: Skattekategori
     settings:
       general:
         currency: Standard valuta

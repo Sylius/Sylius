@@ -302,6 +302,7 @@ sylius:
     id: ID
     last_name: Прізвище
     shipping_address: Адреса доставки
+    phone_number: Номер Телефону
   delete: Видалити
   deleted: Видалено
   edit: Редагувати
@@ -322,7 +323,7 @@ sylius:
   filter: Фільтр
   form:
     cart:
-      coupon: Якщо у вас є купон акції, введіть його тут
+      coupon: Купон
     choose_file: Обрати файл
     frontend:
       password:
@@ -457,6 +458,11 @@ sylius:
     taxes: Податки
     total: Усього
     update_header: Редагування замовлення
+  review:
+    id: ID
+    title: Назва
+    author: Автор
+    created_at: Створено
   order_item:
     product: Елемент
     quantity: К-сть

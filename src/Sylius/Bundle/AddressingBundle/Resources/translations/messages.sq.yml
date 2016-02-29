@@ -20,6 +20,7 @@ sylius:
       select: Zgjidh
     province:
       name: Emri
+      abbreviation: Shkurtim
       select: Zgjidh
     zone:
       add_member: Shto anëtar

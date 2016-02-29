@@ -8,4 +8,7 @@ sylius:
       password: Mot de passe
       remember_me: Rester connecté
   ui:
+    sign_in: Connection
+    sign_out: Déconnection
     dashboard: Tableau de bord
+    powered_by: Propulsé par

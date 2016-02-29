@@ -48,11 +48,12 @@ sylius:
       restricted_zone: Zonă cu restricție
       shipping_category: Categoria de livrare
       short_description: Descriere scurtă
-      tax_category: Categoria de taxă
       variant_selection_method: Metoda de selectare a variantei
     product_filter:
       name: Nume
       sku: SKU
+    product_variant:
+      tax_category: Categoria de taxă
     settings:
       general:
         currency: Moneda implicită

@@ -10,9 +10,6 @@ sylius:
       not_blank: Kérjük, írja be a termék nevét.
       min_length: 'Termék neve legalább 1 karakter hosszúnak kell lennie. |Termék neve legalább {{ limit }} karakter hosszú.'
       max_length: 'Termék neve nem lehet hosszabb, mint 1 karakter. |Termék neve nem lehet hosszabb, mint {{ limit }} karakter.'
-    description:
-      not_blank: Kérjük, adjon meg termék leírást.
-      min_length: 'A termék leírás legalább 1 karakter hosszúnak kell lennie. |A termék leírás legalább {{ limit }} karakter hosszúnak kell lennie.'
   variant:
     sku:
       not_blank: Kérjük, írjon be SKU változatot.

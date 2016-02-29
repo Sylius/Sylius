@@ -278,6 +278,7 @@ sylius:
     id: ID
     last_name: Etternavn
     shipping_address: Leveringsadresse
+    phone_number: Telefonnummer
   delete: Slett
   deleted: Slettet
   edit: Rediger
@@ -288,7 +289,7 @@ sylius:
   filter: Filtrer
   form:
     cart:
-      coupon: Hvis du har en rabattkupong, skriver du det inn her
+      coupon: Kupong
     choose_file: Velg fil
     frontend:
       password:
@@ -420,6 +421,11 @@ sylius:
     taxes: Avgifter
     total: Totalt
     update_header: Redigere rekkefølge
+  review:
+    id: ID
+    title: Tittel
+    author: Forfatter
+    created_at: Opprettet på
   order_item:
     product: Produkt
     quantity: Antall

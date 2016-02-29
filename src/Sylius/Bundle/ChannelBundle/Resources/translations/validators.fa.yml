@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  channel:
+    code:
+      not_blank: لطفا کد کانال فروش را وارد کنید.
+      unique: کد کانال فروش باید منحصر به فرد باشد.
+    name:
+      not_blank: لطفا نام کانال فروش را وارد کنید.

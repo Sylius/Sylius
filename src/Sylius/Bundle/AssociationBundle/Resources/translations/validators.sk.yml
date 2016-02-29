@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  association_type:
+    name:
+      not_blank: Zadajte názov priradenia.
+      min_length: 'Názov priradenia musí mať aspoň 1 znak. | Názov priradenia musí mať {{ limit }} znakov.'
+      max_length: 'Názov priradenia nesmie byť dlhší ako 1 znak. | Názov priradenia nesmie byť dlhší ako {{ limit }} znakov.'
+    code:
+      unique: Priradenie s daným kódom už existuje.
+      not_blank: Prosím, zadajte kód priradenia.

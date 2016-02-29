@@ -4,7 +4,7 @@
 sylius:
   form:
     rule:
-      item_count_configuration:
+      unit_count_configuration:
         count: จำนวน
     shipment:
       state: สถานะ
@@ -19,12 +19,8 @@ sylius:
     shipping_calculator:
       flat_rate_configuration:
         amount: ยอดเงิน
-      flexible_rate_configuration:
-        additional_item_cost: ต้นทุนอื่นๆ
-        additional_item_limit: จำกัดรายการเพิ่มเติม
-        first_item_cost: ต้นทุนสำหรับสินค้าชิ้นแรก
-      per_item_rate_configuration:
-        amount: ยอดเงิน
+      per_unit_rate_configuration:
+        amount: ยอดรวม
       weight_rate_configuration:
         division: สัดส่วน
       volume_rate_configuration:

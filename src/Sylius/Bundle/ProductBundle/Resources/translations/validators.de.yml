@@ -10,9 +10,6 @@ sylius:
       not_blank: Bitte gib Sie einen Produktnamen an.
       min_length: 'Der Produktname muss mindestens 1 Zeichen lang sein.|Der Produktname muss mindestens {{ limit }} Zeichen lang sein.'
       max_length: 'Der Produktname darf nicht länger als 1 Zeichen sein.|Der Produktname darf nicht länger als {{ limit }} Zeichen sein.'
-    description:
-      not_blank: Bitte geben Sie eine Produktbeschreibung an.
-      min_length: 'Die Produktbeschreibung muss mindestens 1 Zeichen lang sein.|Die Produktbeschreibung muss mindestens {{ limit }} Zeichen lang sein.'
   variant:
     sku:
       not_blank: Bitte geben Sie die Bestandseinheit der Variante an.

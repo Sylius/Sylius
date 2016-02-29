@@ -35,7 +35,9 @@ sylius:
       unique: Codice ISO del paese deve essere unico.
   province:
     code:
+      min_length: Il nome della provincia deve essere almeno di due caratteri|Il nome della provincia deve essere almeno di due caratteri.
       not_blank: Inserisci il codice di provincia.
+      regex: Il codice provincia dovrebbe avere il seguente formato XX-XX (ad es. U.S.-FL).
       unique: Il codice di provincia deve essere unico.
     name:
       max_length: Il nome della provincia non deve essere più lungo di 255 caratteri|Il nome della provincia non deve essere più lungo di 255 caratteri.

@@ -214,6 +214,8 @@ sylius:
       index: Promocje
     promotion_coupon:
       index: Kupony
+    product_association_type:
+      index: Rodzaj powiązania
     report:
       index: Raporty
     role:
@@ -384,6 +386,7 @@ sylius:
     shipping_address: Adres dostawy
     show_header: Dane Klienta
     update_header: Edycja klienta
+    phone_number: Numer telefonu
   delete: Usuń
   deleted: Usunięto
   disable: Wyłącz
@@ -409,7 +412,7 @@ sylius:
   filter: Filtruj
   form:
     cart:
-      coupon: Jeśli posiadasz kupon promocyjny, wpisz go tutaj
+      coupon: Kupon
     choose_file: Wybierz plik
     comment:
       comment: Komentarz
@@ -574,6 +577,13 @@ sylius:
     taxes: Podatki
     total: Łącznie
     update_header: Edycja zamówienia
+  review:
+    id: ID
+    subject: Temat
+    title: Tytuł
+    author: Autor
+    guest: Gość
+    created_at: Utworzono
   order_item:
     product: Element
     quantity: Ilość
@@ -650,6 +660,7 @@ sylius:
     attributes: Cechy
     available_on: Dostępny od
     available_on_demand: Dostępny na zamówienie
+    available_until: Dostępne do
     categorization: Kategoria
     contain_variants: Zawiera Warianty
     create: Dodaj produkt
@@ -673,8 +684,8 @@ sylius:
     options: Warianty
     original_price: Oryginalna cena
     price: Cena detaliczna
-    remove_attribute: Usuń cechę
     restricted_zone: Strefa zamknięta
+    remove_attribute: Usuń cechę
     shipping_category: Kategoria wysyłki
     show: Zobacz więcej
     show_header: 'Szczegóły produktu <small>Oglądasz produkt "<strong>%product%</strong>"</small>'
@@ -912,6 +923,7 @@ sylius:
     login: Zaloguj
     logout: Wyloguj
     register: Zarejestruj
+    product_association_types: Rodzaje produktów towarzyszących
     name: Nazwa
     id: Id
   unknown: Nieznany

@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  user:
+    email:
+      not_exist: کاربری با این آدرس ایمیل وجود ندارد.
+    password:
+      invalid: کلمه عبور فعلی اشتباه است.
+      request:
+        success: ایمیلی حاوی دستورالعمل تنظیم مجدد کلمه عبور برای شما ارسال شد!
+      reset:
+        success: کلمه عبور با موفقیت تغییر کرد!
+      change:
+        success: کلمه عبور با موفقیت تغییر کرد!
+    reset_password:
+      requested: اگر ایمیلی که تعیین نمودید، در سیستم ما موجود باشد، آموزش نحوه تنظیم مجدد کلمه عبور را برای آن ارسال کردیم.

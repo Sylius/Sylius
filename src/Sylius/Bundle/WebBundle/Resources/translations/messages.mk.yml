@@ -16,6 +16,8 @@ sylius:
     topic: Тема
   currency:
     exchange_rate: Курс на конверзија
+  customer:
+    phone_number: Телефонски Број
   "no": false
   product_option:
     presentation: Презентација

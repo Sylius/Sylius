@@ -7,7 +7,7 @@ sylius:
       max_length: La taxon ne peux dépasser les 255 caractères.
       not_blank: Veuillez saisir un nom pour la taxon.
     code:
-      unique: Ce code de taxon existe déjà.
+      unique: Cette taxonomie avec le même code existe déjà.
       not_blank: Veuillez entrer le code de taxon.
   taxonomy:
     name:

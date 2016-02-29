@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    login:
+      username: Uporabniško ime
+      password: Geslo
+      remember_me: Zapomni si me
+  ui:
+    sign_in: Prijava
+    sign_out: Odjava
+    dashboard: Nadzorna plošča
+    powered_by: Poganja

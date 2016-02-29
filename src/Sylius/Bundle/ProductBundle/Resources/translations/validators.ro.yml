@@ -10,9 +10,6 @@ sylius:
       not_blank: Vă rugăm să completați numele produsului.
       min_length: 'Numele produsului trebuie să conţină cel puţin 1 caracter.|Numele produsului trebuie să conţină cel puţin {{ limit }} caractere.'
       max_length: 'Numele produsului nu poate depăși un caracter.|Numele produsului nu poate depăși {{ limit }} de caractere.'
-    description:
-      not_blank: Vă rugăm să completați descrierea produsului.
-      min_length: 'Descrierea produsului trebuie să conţină cel puţin 1 caracter.|Descrierea produsului trebuie să conţină cel puţin {{ limit }} caractere.'
   variant:
     sku:
       not_blank: Vă rugăm să completați codul SKU a variantei.

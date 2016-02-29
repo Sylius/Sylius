@@ -48,11 +48,12 @@ sylius:
       restricted_zone: Ograničena zona pristupa
       shipping_category: Kategorija pošiljke
       short_description: Kratak opis
-      tax_category: Porezna kategorija
       variant_selection_method: Način odabira varijante
     product_filter:
       name: Naziv
       sku: KOD (SKU)
+    product_variant:
+      tax_category: Kategorija artikla
     settings:
       general:
         currency: Zadana valuta

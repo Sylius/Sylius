@@ -35,10 +35,11 @@ sylius:
     product:
       shipping_category: Kategori
       short_description: Kort beskrivning
-      tax_category: Momskategori
     product_filter:
       name: Namn
       sku: SKU
+    product_variant:
+      tax_category: Momskategori
     settings:
       general:
         currency: Standardvaluta

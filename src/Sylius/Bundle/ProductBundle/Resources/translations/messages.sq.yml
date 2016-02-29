@@ -20,3 +20,6 @@ sylius:
       options: Opsionet
     association_type:
       name: Emri
+    association:
+      type: Tipi i lidhjes
+      product: Produkti i lidhur

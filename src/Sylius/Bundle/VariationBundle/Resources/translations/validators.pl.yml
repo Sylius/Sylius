@@ -3,6 +3,9 @@
 
 sylius:
   option:
+    code:
+      not_blank: Proszę wprowadzić kod opcji.
+      unique: Opcja z podanym kodem już istnieje.
     name:
       not_blank: Proszę wprowadzić nazwę opcji.
       min_length: 'Nazwa opcji powinna być dłuższa niż jeden znak.|Nazwa opcji musi zawierać co najmniej {{ limit }} znaków.'
@@ -14,6 +17,9 @@ sylius:
     values:
       min_count: '{1} Dodaj co najmniej 1 opcję.|{2,3,4} Dodaj co najmniej {{ limit }} opcje.|[5,Inf[ Dodaj co najmniej {{ limit }} opcji.'
   option_value:
+    code:
+      not_blank: Proszę wprowadzić kod wartości opcji.
+      unique: Wartość opcji z podanym kodem już istnieje.
     value:
       not_blank: Podaj wartość opcji.
   variant:

@@ -4,7 +4,7 @@
 sylius:
   form:
     rule:
-      item_count_configuration:
+      unit_count_configuration:
         count: Колькасць
     shipment:
       state: Статус
@@ -19,11 +19,7 @@ sylius:
     shipping_calculator:
       flat_rate_configuration:
         amount: Сума
-      flexible_rate_configuration:
-        additional_item_cost: Дадаковы кошт адзінкаі
-        additional_item_limit: Ліміт дадаковых адзінак
-        first_item_cost: Кошт першай адзінкі
-      per_item_rate_configuration:
+      per_unit_rate_configuration:
         amount: Сума
       weight_rate_configuration:
         division: Падзел

@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    variant:
+      presentation: عنوان برای مشتری
+    option:
+      name: عنوان برای مدیر
+      presentation: عنوان برای مشتری
+      values: مقادیر قابل قبول
+    option_value:
+      add_value: افزودن مقدار
+      value: مقدار

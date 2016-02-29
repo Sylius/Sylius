@@ -8,4 +8,7 @@ sylius:
       password: Heslo
       remember_me: Zapamätať si ma
   ui:
+    sign_in: Prihlásiť
+    sign_out: Odhlásiť
     dashboard: Administračný panel
+    powered_by: Vytvorené v systéme

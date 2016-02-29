@@ -8,4 +8,7 @@ sylius:
       password: Fjalëkalimi
       remember_me: Më mbaj mend
   ui:
+    sign_in: Hyr
+    sign_out: Dil
     dashboard: Paneli
+    powered_by: Mundësuar nga

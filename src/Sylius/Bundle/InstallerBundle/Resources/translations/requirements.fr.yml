@@ -13,7 +13,7 @@ sylius:
     help: "Installer et activer l'extension %extension%."
     iconv: Iconv
     exif: EXIF
-    fileinfo: Information sur le fichier
+    fileinfo: FileInfo
     icu: ICU
     intl: Intl
     json_encode: JSON

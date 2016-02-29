@@ -60,6 +60,7 @@ sylius:
     email: البريد الإلكتروني
     first_name: الاسم الأول
     last_name: اسم العائلة
+    phone_number: رقم الهاتف
   form:
     login:
       email: البريد الإلكتروني

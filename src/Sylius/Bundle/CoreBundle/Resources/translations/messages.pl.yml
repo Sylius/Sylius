@@ -56,12 +56,13 @@ sylius:
       restricted_zone: Strefa
       shipping_category: Kategoria wysyłki
       short_description: Krótki opis
-      tax_category: Kategoria podatkowa
       variant_selection_method: Metody wyboru wariantu
       main_taxon: Główne grupy
     product_filter:
       name: Nazwa
       sku: SKU
+    product_variant:
+      tax_category: Kategoria podatkowa
     settings:
       general:
         currency: Domyślna waluta
@@ -122,5 +123,8 @@ sylius:
         value: Wartość
     guest:
       email: Email
+    product_association:
+      product: Powiązany produkt
+      type: Rodzaj powiązania
     product_association_type:
       name: Nazwa

@@ -17,6 +17,7 @@ sylius:
       groups: 团体
       last_name: 姓氏
       email: 电子邮件
+      phone_number: 电话
       billing_address: 账单地址
       different_billing_address: 使用不同地址的帐单吗？
     user_filter:

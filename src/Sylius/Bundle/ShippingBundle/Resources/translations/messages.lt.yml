@@ -4,9 +4,8 @@
 sylius:
   form:
     rule:
-      item_count_configuration:
+      unit_count_configuration:
         count: Kiekis
-        equal: Lygi
       type: Taisyklės tipas
     shipment:
       state: Būsena
@@ -21,11 +20,7 @@ sylius:
     shipping_calculator:
       flat_rate_configuration:
         amount: Suma
-      flexible_rate_configuration:
-        additional_item_cost: Papildomos prekės kaina
-        additional_item_limit: Papildomų prekių limitas
-        first_item_cost: Pirmos prekės kaina
-      per_item_rate_configuration:
+      per_unit_rate_configuration:
         amount: Suma
       weight_rate_configuration:
         division: Dalyba

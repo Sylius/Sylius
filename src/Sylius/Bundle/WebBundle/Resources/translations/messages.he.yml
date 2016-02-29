@@ -2,5 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+  customer:
+    phone_number: מספר טלפון
   "no": false
   "yes": true

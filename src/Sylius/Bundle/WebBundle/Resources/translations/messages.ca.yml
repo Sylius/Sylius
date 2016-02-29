@@ -144,12 +144,15 @@ sylius:
     id: ID
     last_name: Cognoms
     shipping_address: "Adreça d'enviament"
+    phone_number: Telèfon
   delete: Suprimir
   edit: Editar
   email:
     code: Codi
     enabled: Activat
   form:
+    cart:
+      coupon: Cupó
     login:
       email: Correu electrònic
       password: Contrasenya
@@ -195,6 +198,9 @@ sylius:
     state:
       checkout: Realitza la compra
     total: Total
+  review:
+    id: ID
+    title: Títol
   order_item:
     total: Total
     unit_price: Preu per unitat
