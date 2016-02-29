@@ -145,7 +145,7 @@ final class ProductContext implements Context
     /**
      * @Given /^the (product "[^"]+") has "([^"]+)" variant priced at ("[^"]+")$/
      */
-    public function theProductHasVariantPricedAt(ProductInterface $product, $productVariantName, $price = 0)
+    public function theProductHasVariantPricedAt(ProductInterface $product, $productVariantName, $price)
     {
         $variant = $this->productVariantFactory->createNew();
 
