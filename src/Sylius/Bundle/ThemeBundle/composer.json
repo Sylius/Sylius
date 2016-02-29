@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^5.5.9|^7.0",
+        "php": "^5.5.11|^7.0",
 
         "sylius/resource-bundle": "^0.17",
 
