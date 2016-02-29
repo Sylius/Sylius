@@ -78,6 +78,8 @@
         <parameter key="sylius.promotion_action.shipping_discount.class">Sylius\Component\Core\Promotion\Action\ShippingDiscountAction</parameter>
         <parameter key="sylius.promotion_action.add_product.class">Sylius\Component\Core\Promotion\Action\AddProductAction</parameter>
         <parameter key="sylius.promotion_eligibility_checker.class">Sylius\Component\Core\Promotion\Checker\PromotionEligibilityChecker</parameter>
+        <parameter key="sylius.promotion_filter.taxon.class">Sylius\Component\Core\Promotion\Filter\TaxonFilter</parameter>
+
         <parameter key="sylius.order.purger.class">Sylius\Bundle\CoreBundle\Purger\ExpiredOrdersPurger</parameter>
         <parameter key="sylius.order.releaser.class">Sylius\Bundle\CoreBundle\Releaser\ExpiredOrdersReleaser</parameter>
         <parameter key="sylius.image_uploader.class">Sylius\Component\Core\Uploader\ImageUploader</parameter>
@@ -444,6 +446,7 @@
             <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.originator" />
             <argument type="service" id="sylius.distributor.order_unit_taxes" />
+            <argument type="service" id="sylius.promotion_filter.taxon" />
             <tag name="sylius.promotion_action" type="item_percentage_discount" label="Item percentage discount" />
         </service>
         <service id="sylius.promotion_action.shipping_discount" class="%sylius.promotion_action.shipping_discount.class%">
@@ -463,6 +466,8 @@
             <argument type="service" id="sylius.registry.promotion_rule_checker" />
             <argument type="service" id="event_dispatcher" />
         </service>
+
+        <service id="sylius.promotion_filter.taxon" class="%sylius.promotion_filter.taxon.class%" />
 
         <service id="sylius.price_calculator.channel_based" class="%sylius.price_calculator.channel_based.class%" lazy="true">
             <argument type="service" id="sylius.context.channel" />

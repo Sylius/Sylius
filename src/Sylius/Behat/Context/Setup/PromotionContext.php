@@ -163,6 +163,9 @@ final class PromotionContext implements Context
     public function itGivesOffEveryProductClassifiedAs(PromotionInterface $promotion, $discount, TaxonInterface $taxon)
     {
         $action = $this->actionFactory->createItemPercentageDiscount($discount);
+        $configuration = array_merge(['filters' => ['taxons' => [$taxon->getCode()]]], $action->getConfiguration());
+        $action->setConfiguration($configuration);
+
         $promotion->addAction($action);
 
         $this->objectManager->flush();

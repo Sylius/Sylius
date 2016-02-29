@@ -16,6 +16,7 @@ use Sylius\Bundle\CoreBundle\Distributor\IntegerDistributorInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Promotion\Filter\TaxonFilterInterface;
 use Sylius\Component\Order\Model\OrderItemUnitInterface;
 use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
@@ -34,18 +35,26 @@ class ItemPercentageDiscountAction extends DiscountAction
     private $distributor;
 
     /**
+     * @var TaxonFilterInterface
+     */
+    private $taxonFilter;
+
+    /**
      * @param FactoryInterface $adjustmentFactory
      * @param OriginatorInterface $originator
      * @param IntegerDistributorInterface $distributor
+     * @param TaxonFilterInterface $taxonFilter
      */
     public function __construct(
         FactoryInterface $adjustmentFactory,
         OriginatorInterface $originator,
-        IntegerDistributorInterface $distributor
+        IntegerDistributorInterface $distributor,
+        TaxonFilterInterface $taxonFilter
     ) {
         parent::__construct($adjustmentFactory, $originator);
 
         $this->distributor = $distributor;
+        $this->taxonFilter = $taxonFilter;
     }
 
     /**
@@ -57,11 +66,27 @@ class ItemPercentageDiscountAction extends DiscountAction
             throw new UnexpectedTypeException($subject, OrderInterface::class);
         }
 
-        foreach ($subject->getItems() as $item) {
+        $filteredItems = $this->taxonFilter->filter($subject->getItems(), $configuration);
+
+        foreach ($filteredItems as $item) {
             $promotionAmount = (int) round($item->getTotal() * $configuration['percentage']);
             $distributedAmounts = $this->distributor->distribute($promotionAmount, $item->getUnits()->count());
 
             $this->setUnitsAdjustments($item, $distributedAmounts, $promotion);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
+    {
+        if (!$subject instanceof OrderInterface) {
+            throw new UnexpectedTypeException($subject, OrderInterface::class);
+        }
+
+        foreach ($subject->getItems() as $item) {
+            $this->removeUnitsAdjustment($item, $promotion);
         }
     }
 
@@ -120,5 +145,20 @@ class ItemPercentageDiscountAction extends DiscountAction
         $units->next();
 
         return $unit;
+    }
+
+    /**
+     * @param OrderItemInterface $item
+     * @param PromotionInterface $promotion
+     */
+    private function removeUnitsAdjustment(OrderItemInterface $item, PromotionInterface $promotion)
+    {
+        foreach ($item->getUnits() as $unit) {
+            foreach ($unit->getAdjustments(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT) as $adjustment) {
+                if ($promotion === $this->originator->getOrigin($adjustment)) {
+                    $unit->removeAdjustment($adjustment);
+                }
+            }
+        }
     }
 }

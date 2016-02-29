@@ -168,7 +168,17 @@ class PromotionContextSpec extends ObjectBehavior
         PromotionInterface $promotion,
         TaxonInterface $taxon
     ) {
+        $taxon->getCode()->willReturn('taxonCode');
+
         $actionFactory->createItemPercentageDiscount(0.1)->willReturn($action);
+        $action->getConfiguration()->willReturn(['percentage' => 0.1]);
+        $action->setConfiguration([
+            'percentage' => 0.1,
+            'filters' => [
+                'taxons' => ['taxonCode'],
+            ],
+        ])->shouldBeCalled();
+        
         $promotion->addAction($action)->shouldBeCalled();
 
         $objectManager->flush()->shouldBeCalled();

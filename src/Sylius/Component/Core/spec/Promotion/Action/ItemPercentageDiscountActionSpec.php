@@ -20,6 +20,7 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Promotion\Action\DiscountAction;
+use Sylius\Component\Core\Promotion\Filter\TaxonFilterInterface;
 use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -33,9 +34,10 @@ class ItemPercentageDiscountActionSpec extends ObjectBehavior
     function let(
         FactoryInterface $adjustmentFactory,
         OriginatorInterface $originator,
-        IntegerDistributorInterface $distributor
+        IntegerDistributorInterface $distributor,
+        TaxonFilterInterface $taxonFilter
     ) {
-        $this->beConstructedWith($adjustmentFactory, $originator, $distributor);
+        $this->beConstructedWith($adjustmentFactory, $originator, $distributor, $taxonFilter);
     }
 
     function it_is_initializable()
@@ -52,9 +54,11 @@ class ItemPercentageDiscountActionSpec extends ObjectBehavior
         $adjustmentFactory,
         $distributor,
         $originator,
+        $taxonFilter,
         AdjustmentInterface $promotionAdjustment1,
         AdjustmentInterface $promotionAdjustment2,
-        Collection $items,
+        Collection $originalItems,
+        Collection $filteredItems,
         Collection $units,
         \Iterator $itemsIterator,
         OrderInterface $order,
@@ -63,8 +67,13 @@ class ItemPercentageDiscountActionSpec extends ObjectBehavior
         OrderItemUnitInterface $unit2,
         PromotionInterface $promotion
     ) {
-        $order->getItems()->willReturn($items);
-        $items->getIterator()->willReturn($itemsIterator);
+        $order->getItems()->willReturn($originalItems);
+        $taxonFilter
+            ->filter($originalItems, ['percentage' => 0.2, 'filters' => ['taxons' => ['testTaxon']]])
+            ->willReturn($filteredItems)
+        ;
+
+        $filteredItems->getIterator()->willReturn($itemsIterator);
         $itemsIterator->rewind()->shouldBeCalled();
         $itemsIterator->valid()->willReturn(true, false);
         $itemsIterator->current()->willReturn($orderItem);
@@ -96,16 +105,72 @@ class ItemPercentageDiscountActionSpec extends ObjectBehavior
 
         $originator->setOrigin($promotionAdjustment2, $promotion)->shouldBeCalled();
 
-        $this->execute($order, ['percentage' => 0.2], $promotion);
+        $this->execute($order, ['percentage' => 0.2, 'filters' => ['taxons' => ['testTaxon']]], $promotion);
     }
 
-    function it_throws_exception_if_passed_subject_is_not_order(
+    function it_throws_exception_if_passed_subject_to_execute_is_not_order(
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion
     ) {
         $this
             ->shouldThrow(UnexpectedTypeException::class)
             ->during('execute', [$subject, ['percentage' => 0.2], $promotion])
+        ;
+    }
+
+    function it_revert_proper_promotion_adjustment_from_all_units(
+        $originator,
+        AdjustmentInterface $promotionAdjustment1,
+        AdjustmentInterface $promotionAdjustment2,
+        Collection $items,
+        Collection $units,
+        Collection $adjustments,
+        \Iterator $itemsIterator,
+        \Iterator $unitsIterator,
+        \Iterator $adjustmentsIterator,
+        OrderInterface $order,
+        OrderItemInterface $orderItem,
+        OrderItemUnitInterface $unit,
+        PromotionInterface $promotion,
+        PromotionInterface $someOtherPromotion
+    ) {
+        $order->getItems()->willReturn($items);
+        $items->getIterator()->willReturn($itemsIterator);
+        $itemsIterator->rewind()->shouldBeCalled();
+        $itemsIterator->valid()->willReturn(true, false);
+        $itemsIterator->current()->willReturn($orderItem);
+        $itemsIterator->next()->shouldBeCalled();
+
+        $orderItem->getUnits()->willReturn($units);
+        $units->getIterator()->willReturn($unitsIterator);
+        $unitsIterator->rewind()->shouldBeCalled();
+        $unitsIterator->valid()->willReturn(true, false);
+        $unitsIterator->current()->willReturn($unit);
+        $unitsIterator->next()->shouldBeCalled();
+
+        $unit->getAdjustments(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->willReturn($adjustments);
+        $adjustments->getIterator()->willReturn($adjustmentsIterator);
+        $adjustmentsIterator->rewind()->shouldBeCalled();
+        $adjustmentsIterator->valid()->willReturn(true, true, false);
+        $adjustmentsIterator->current()->willReturn($promotionAdjustment1, $promotionAdjustment2);
+        $adjustmentsIterator->next()->shouldBeCalled();
+
+        $originator->getOrigin($promotionAdjustment1)->willReturn($promotion);
+        $unit->removeAdjustment($promotionAdjustment1)->shouldBeCalled();
+
+        $originator->getOrigin($promotionAdjustment2)->willReturn($someOtherPromotion);
+        $unit->removeAdjustment($promotionAdjustment2)->shouldNotBeCalled();
+
+        $this->revert($order, ['percentage' => 0.2], $promotion);
+    }
+
+    function it_throws_exception_if_passed_subject_to_revert_is_not_order(
+        PromotionSubjectInterface $subject,
+        PromotionInterface $promotion
+    ) {
+        $this
+            ->shouldThrow(UnexpectedTypeException::class)
+            ->during('revert', [$subject, ['percentage' => 0.2], $promotion])
         ;
     }
 
