@@ -354,7 +354,7 @@ class Product implements ProductInterface
     public function getVariants()
     {
         return $this->variants->filter(function (BaseVariantInterface $variant) {
-            return !$variant->isDeleted() && !$variant->isMaster();
+            return !$variant->isMaster();
         });
     }
 
@@ -364,7 +364,7 @@ class Product implements ProductInterface
     public function getAvailableVariants()
     {
         return $this->variants->filter(function (BaseVariantInterface $variant) {
-            return !$variant->isDeleted() && !$variant->isMaster() && $variant->isAvailable();
+            return $variant->isMaster() && $variant->isAvailable();
         });
     }
 
