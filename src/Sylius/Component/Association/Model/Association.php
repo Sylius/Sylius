@@ -121,7 +121,7 @@ class Association implements AssociationInterface
      */
     public function removeAssociatedObject(AssociableInterface $associatedObject)
     {
-        if (!$this->hasAssociatedObject($associatedObject)) {
+        if ($this->hasAssociatedObject($associatedObject)) {
             $this->associatedObjects->removeElement($associatedObject);
         }
     }

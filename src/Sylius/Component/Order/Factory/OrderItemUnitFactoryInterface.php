@@ -9,18 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\OrderBundle\Modifier;
+namespace Sylius\Component\Order\Factory;
 
 use Sylius\Component\Order\Model\OrderItemInterface;
+use Sylius\Component\Order\Model\OrderItemUnit;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface OrderItemQuantityModifierInterface
+interface OrderItemUnitFactoryInterface extends FactoryInterface
 {
     /**
      * @param OrderItemInterface $orderItem
-     * @param int $targetQuantity
+     *
+     * @return OrderItemUnit
      */
-    public function modify(OrderItemInterface $orderItem, $targetQuantity);
+    public function createForItem(OrderItemInterface $orderItem);
 }

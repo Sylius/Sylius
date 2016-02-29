@@ -14,7 +14,7 @@ namespace Sylius\Bundle\OrderBundle\DependencyInjection;
 use Sylius\Bundle\OrderBundle\Controller\AdjustmentController;
 use Sylius\Bundle\OrderBundle\Controller\CommentController;
 use Sylius\Bundle\OrderBundle\Controller\OrderItemController;
-use Sylius\Bundle\OrderBundle\Factory\OrderItemUnitFactory;
+use Sylius\Component\Order\Factory\OrderItemUnitFactory;
 use Sylius\Bundle\OrderBundle\Form\Type\AdjustmentType;
 use Sylius\Bundle\OrderBundle\Form\Type\CommentType;
 use Sylius\Bundle\OrderBundle\Form\Type\OrderItemType;

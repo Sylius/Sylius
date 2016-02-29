@@ -8,17 +8,13 @@
 >
     <testsuites>
         <testsuite name="Sylius Test Suite">
-            <directory>Tests</directory>
+            <directory>./Tests</directory>
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist>
-            <directory>src</directory>
-            <exclude>
-                <directory>Resources</directory>
-                <directory>Tests</directory>
-            </exclude>
+            <directory>./Tests</directory>
         </whitelist>
     </filter>
 </phpunit>

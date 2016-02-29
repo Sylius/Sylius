@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Distributor;
+namespace spec\Sylius\Component\Core\Distributor;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Distributor\IntegerDistributorInterface;
+use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -21,7 +21,7 @@ class IntegerDistributorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Distributor\IntegerDistributor');
+        $this->shouldHaveType('Sylius\Component\Core\Distributor\IntegerDistributor');
     }
 
     function it_implements_integer_distributor_interface()

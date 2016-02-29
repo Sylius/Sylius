@@ -14,7 +14,7 @@ namespace spec\Sylius\Component\Core\Taxation;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\Distributor\IntegerDistributorInterface;
+use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
