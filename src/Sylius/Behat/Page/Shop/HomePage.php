@@ -19,6 +19,14 @@ use Sylius\Behat\Page\SymfonyPage;
 class HomePage extends SymfonyPage
 {
     /**
+     * @return string
+     */
+    public function getContents()
+    {
+        return $this->getDocument()->getContent();
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getRouteName()

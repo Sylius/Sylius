@@ -14,6 +14,7 @@ namespace Sylius\Behat\Context\Ui;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Channel\ChannelIndexPage;
 use Sylius\Behat\Page\Channel\ChannelUpdatePage;
+use Sylius\Behat\Page\Shop\HomePage;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
@@ -39,18 +40,26 @@ final class ThemeContext implements Context
     private $channelUpdatePage;
 
     /**
+     * @var HomePage
+     */
+    private $homePage;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param ChannelIndexPage $channelIndexPage
      * @param ChannelUpdatePage $channelUpdatePage
+     * @param HomePage $homePage
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ChannelIndexPage $channelIndexPage,
-        ChannelUpdatePage $channelUpdatePage
+        ChannelUpdatePage $channelUpdatePage,
+        HomePage $homePage
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->channelIndexPage = $channelIndexPage;
         $this->channelUpdatePage = $channelUpdatePage;
+        $this->homePage = $homePage;
     }
 
     /**
@@ -94,5 +103,25 @@ final class ThemeContext implements Context
         $this->channelIndexPage->open();
 
         expect($this->channelIndexPage->getUsedThemeName($channel->getCode()))->toBe($theme->getName());
+    }
+
+    /**
+     * @Then /^I should see a homepage from ((?:this|that) theme)$/
+     */
+    public function iShouldSeeThemedHomepage(ThemeInterface $theme)
+    {
+        $content = file_get_contents(rtrim($theme->getPath(), '/') . '/SyliusWebBundle/views/Frontend/Homepage/main.html.twig');
+
+        expect($this->homePage->getContents())->toBe($content);
+    }
+
+    /**
+     * @Then I should not see a homepage from :theme theme
+     */
+    public function iShouldNotSeeThemedHomepage(ThemeInterface $theme)
+    {
+        $content = file_get_contents(rtrim($theme->getPath(), '/') . '/SyliusWebBundle/views/Frontend/Homepage/main.html.twig');
+
+        expect($this->homePage->getContents())->notToBe($content);
     }
 }

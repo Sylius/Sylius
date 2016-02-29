@@ -63,20 +63,24 @@ final class ThemeContext implements Context
     }
 
     /**
-     * @Given there is :themeName theme defined
+     * @Given the store has :themeName theme
      */
     public function thereIsThemeDefined($themeName)
     {
         $theme = $this->themeFactory->createNamed($themeName);
         $theme->setTitle($themeName);
-        $theme->setPath(__DIR__);
+        $theme->setPath(sys_get_temp_dir() . '/theme-' . $theme->getCode() . time() . '/');
+
+        if (!file_exists($theme->getPath())) {
+            mkdir($theme->getPath(), 0777, true);
+        }
 
         $this->themeRepository->add($theme);
         $this->sharedStorage->set('theme', $theme);
     }
 
     /**
-     * @Given /^("[^"]+" channel) is using ("[^"]+" theme)$/
+     * @Given channel :channel uses :theme theme
      */
     public function channelIsUsingTheme(ChannelInterface $channel, ThemeInterface $theme)
     {
@@ -86,5 +90,32 @@ final class ThemeContext implements Context
 
         $this->sharedStorage->set('channel', $channel);
         $this->sharedStorage->set('theme', $theme);
+    }
+
+    /**
+     * @Given channel :channel does not use any theme
+     */
+    public function channelDoesNotUseAnyTheme(ChannelInterface $channel)
+    {
+        $channel->setTheme(null);
+
+        $this->channelRepository->add($channel);
+
+        $this->sharedStorage->set('channel', $channel);
+    }
+
+    /**
+     * @Given /^(this theme) changes homepage template contents to "([^"]+)"$/
+     */
+    public function themeChangesHomepageTemplateContents(ThemeInterface $theme, $contents)
+    {
+        $file = rtrim($theme->getPath(), '/') . '/SyliusWebBundle/views/Frontend/Homepage/main.html.twig';
+        $dir = dirname($file);
+
+        if (!file_exists($dir)) {
+            mkdir($dir, 0777, true);
+        }
+
+        file_put_contents($file, $contents);
     }
 }

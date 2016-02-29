@@ -6,7 +6,7 @@ Feature: Managing themes per channel
 
     Background:
         Given the store operates on a channel named "France"
-        And there is "Maverick Meerkat" theme defined
+        And the store has "Maverick Meerkat" theme
         And I am logged in as administrator
 
     @ui
@@ -21,6 +21,6 @@ Feature: Managing themes per channel
 
     @ui
     Scenario: Unsetting a channel theme
-        Given "France" channel is using "Maverick Meerkat" theme
+        Given channel "France" uses "Maverick Meerkat" theme
         When I unset theme on that channel
         Then that channel should not use any theme

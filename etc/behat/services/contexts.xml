@@ -267,6 +267,7 @@
             <argument type="service" id="sylius.behat.channel_context_setter" />
             <argument type="service" id="sylius.repository.channel" container="symfony"/>
             <argument type="service" id="sylius.behat.page.channel_create" />
+            <argument type="service" id="sylius.behat.page.home" />
             <tag name="sylius.behat.context" />
         </service>
 
@@ -285,6 +286,7 @@
             <argument type="service" id="sylius.behat.shared_storage" container="symfony"/>
             <argument type="service" id="sylius.behat.page.channel_index" />
             <argument type="service" id="sylius.behat.page.channel_update" />
+            <argument type="service" id="sylius.behat.page.home" />
             <tag name="sylius.behat.context" />
         </service>
 
