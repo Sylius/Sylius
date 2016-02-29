@@ -15,6 +15,7 @@ use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\TranslatorAliasingPass;
+use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\TranslatorFallbackLocalesPass;
 use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\TranslatorLoaderProviderPass;
 use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\TranslatorResourceProviderPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -42,6 +43,7 @@ class SyliusThemeBundle extends AbstractResourceBundle
         parent::build($container);
 
         $container->addCompilerPass(new TranslatorAliasingPass());
+        $container->addCompilerPass(new TranslatorFallbackLocalesPass());
         $container->addCompilerPass(new TranslatorLoaderProviderPass());
         $container->addCompilerPass(new TranslatorResourceProviderPass());
     }
