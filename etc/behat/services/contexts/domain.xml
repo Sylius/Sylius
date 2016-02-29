@@ -41,7 +41,9 @@
 
         <service id="sylius.behat.context.domain.product" class="%sylius.behat.context.domain.product.class%" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
-            <argument type="service" id="sylius.repository.product_variant" container="symfony"/>
+            <argument type="service" id="sylius.repository.product" container="symfony" />
+            <argument type="service" id="sylius.repository.product_variant" container="symfony" />
+            <argument type="service" id="sylius.repository.product_review" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
     </services>

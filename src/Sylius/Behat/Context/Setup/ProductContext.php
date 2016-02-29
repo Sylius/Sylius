@@ -94,6 +94,25 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given this product has :variantName variant priced at :price
+     */
+    public function productHasAVariantPricedAt($variantName, $price)
+    {
+        $product = $this->sharedStorage->get('product');
+
+        $variant = $this->productVariantFactory->createNew();
+        $variant->setPresentation($variantName);
+        $variant->setPrice($this->getPriceFromString(str_replace(['$', '€', '£'], '', $price)));
+        $variant->setProduct($product);
+
+        $product->addVariant($variant);
+
+        $this->sharedStorage->set('product_variant', $variant);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given /^there is product "([^"]+)" available in ((?:this|that|"[^"]+") channel)$/
      */
     public function thereIsProductAvailableInGivenChannel($productName, ChannelInterface $channel)

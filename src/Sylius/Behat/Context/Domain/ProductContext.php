@@ -16,32 +16,51 @@ use Doctrine\DBAL\DBALException;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
 final class ProductContext implements Context
 {
+    /**
+     * @var RepositoryInterface
+     */
+    private $productRepository;
+
+    /**
+     * @var ProductVariantRepositoryInterface
+     */
+    private $variantRepository;
+
+    /**
+     * @var RepositoryInterface
+     */
+    private $reviewRepository;
+
     /**
      * @var SharedStorageInterface
      */
     private $sharedStorage;
 
     /**
-     * @var ProductVariantRepositoryInterface
-     */
-    private $productVariantRepository;
-
-    /**
      * @param SharedStorageInterface $sharedStorage
-     * @param ProductVariantRepositoryInterface $productVariantRepository
+     * @param RepositoryInterface $productRepository
+     * @param ProductVariantRepositoryInterface $variantRepository
+     * @param RepositoryInterface $reviewRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        ProductVariantRepositoryInterface $productVariantRepository
-    ) {
+        RepositoryInterface $productRepository,
+        ProductVariantRepositoryInterface $variantRepository,
+        RepositoryInterface $reviewRepository
+    )
+    {
         $this->sharedStorage = $sharedStorage;
-        $this->productVariantRepository = $productVariantRepository;
+        $this->productRepository = $productRepository;
+        $this->variantRepository = $variantRepository;
+        $this->reviewRepository = $reviewRepository;
     }
 
     /**
@@ -50,7 +69,7 @@ final class ProductContext implements Context
     public function iDeleteTheVariantOfProduct(ProductVariantInterface $productVariant)
     {
         $this->sharedStorage->set('product_variant_id', $productVariant->getId());
-        $this->productVariantRepository->remove($productVariant);
+        $this->variantRepository->remove($productVariant);
     }
 
     /**
@@ -59,7 +78,7 @@ final class ProductContext implements Context
     public function iTryToDeleteTheVariantOfProduct(ProductVariantInterface $productVariant)
     {
         try {
-            $this->productVariantRepository->remove($productVariant);
+            $this->variantRepository->remove($productVariant);
         } catch (DBALException $exception) {
             $this->sharedStorage->set('last_exception', $exception);
         }
@@ -79,7 +98,7 @@ final class ProductContext implements Context
     public function productVariantShouldNotExistInTheProductCatalog()
     {
         $productVariantId = $this->sharedStorage->get('product_variant_id');
-        $productVariant = $this->productVariantRepository->find($productVariantId);
+        $productVariant = $this->variantRepository->find($productVariantId);
 
         expect($productVariant)->toBe(null);
     }
@@ -89,8 +108,34 @@ final class ProductContext implements Context
      */
     public function productVariantShouldExistInTheProductCatalog(ProductVariantInterface $productVariant)
     {
-        $productVariant = $this->productVariantRepository->find($productVariant->getId());
+        $productVariant = $this->variantRepository->find($productVariant->getId());
 
         expect($productVariant)->toNotBe(null);
+    }
+
+    /**
+     * @When I delete the :productName product
+     */
+    public function iDeleteTheProduct($productName)
+    {
+        $product = $this->productRepository->findOneBy(['name' => $productName]);
+
+        if (null === $product) {
+            throw new \InvalidArgumentException(sprintf('Product with %s name was not found in the product repository', $productName));
+        }
+
+        $this->sharedStorage->set('deleted_product', $product);
+
+        $this->productRepository->remove($product);
+    }
+
+    /**
+     * @Then there should be no reviews of this product
+     */
+    public function thereAreNoProductReviews()
+    {
+        $product = $this->sharedStorage->get('deleted_product');
+
+        expect($this->reviewRepository->findBy(['reviewSubject' => $product]))->toBe([]);
     }
 }
