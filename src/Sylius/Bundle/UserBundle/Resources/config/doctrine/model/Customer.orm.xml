@@ -61,6 +61,8 @@
             </join-table>
         </many-to-many>
 
+        <field name="phoneNumber" column="phone_number" type="string" nullable="true" />
+
     </mapped-superclass>
 
 </doctrine-mapping>

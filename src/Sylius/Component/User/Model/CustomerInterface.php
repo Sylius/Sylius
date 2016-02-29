@@ -111,4 +111,14 @@ interface CustomerInterface extends
      * @return bool
      */
     public function isFemale();
+
+    /**
+     * @return string
+     */
+    public function getPhoneNumber();
+
+    /**
+     * @param string $phoneNumber
+     */
+    public function setPhoneNumber($phoneNumber);
 }

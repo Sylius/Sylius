@@ -63,6 +63,12 @@
                 <td><strong>{{ 'sylius.customer.email'|trans }}</strong></td>
                 <td>{{ customer.email }}</td>
             </tr>
+            {% if customer.phoneNumber is not null %}
+                <tr>
+                    <td><strong>{{ 'sylius.customer.phone_number'|trans }}</strong></td>
+                    <td>{{ customer.phoneNumber }}</td>
+                </tr>
+            {% endif %}
             <tr>
                 <td><strong>{{ 'sylius.user.enabled'|trans }}</strong></td>
                 <td id="enabled">
