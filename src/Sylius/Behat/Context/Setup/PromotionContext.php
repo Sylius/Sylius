@@ -20,6 +20,8 @@ use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Test\Factory\TestPromotionFactoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Promotion\Model\ActionInterface;
+use Sylius\Component\Promotion\Factory\CouponFactoryInterface;
+use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 
 /**
@@ -36,6 +38,11 @@ final class PromotionContext implements Context
      * @var ActionFactoryInterface
      */
     private $actionFactory;
+
+    /**
+     * @var CouponFactoryInterface
+     */
+    private $couponFactory;
 
     /**
      * @var RuleFactoryInterface
@@ -60,6 +67,7 @@ final class PromotionContext implements Context
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param ActionFactoryInterface $actionFactory
+     * @param CouponFactoryInterface $couponFactory
      * @param RuleFactoryInterface $ruleFactory
      * @param TestPromotionFactoryInterface $testPromotionFactory
      * @param PromotionRepositoryInterface $promotionRepository
@@ -68,6 +76,7 @@ final class PromotionContext implements Context
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ActionFactoryInterface $actionFactory,
+        CouponFactoryInterface $couponFactory,
         RuleFactoryInterface $ruleFactory,
         TestPromotionFactoryInterface $testPromotionFactory,
         PromotionRepositoryInterface $promotionRepository,
@@ -75,6 +84,7 @@ final class PromotionContext implements Context
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->actionFactory = $actionFactory;
+        $this->couponFactory = $couponFactory;
         $this->ruleFactory = $ruleFactory;
         $this->testPromotionFactory = $testPromotionFactory;
         $this->promotionRepository = $promotionRepository;
@@ -92,6 +102,26 @@ final class PromotionContext implements Context
 
         $this->promotionRepository->add($promotion);
         $this->sharedStorage->set('promotion', $promotion);
+    }
+
+    /**
+     * @Given the store has promotion :promotionName with coupon :couponCode
+     */
+    public function thereIsPromotionWithCoupon($promotionName, $couponCode)
+    {
+        /** @var CouponInterface $coupon */
+        $coupon = $this->couponFactory->createNew();
+        $coupon->setCode($couponCode);
+
+        $promotion = $this->testPromotionFactory
+            ->createForChannel($promotionName, $this->sharedStorage->get('channel'))
+        ;
+        $promotion->addCoupon($coupon);
+        $promotion->setCouponBased(true);
+
+        $this->promotionRepository->add($promotion);
+        $this->sharedStorage->set('promotion', $promotion);
+        $this->sharedStorage->set('coupon', $coupon);
     }
 
     /**

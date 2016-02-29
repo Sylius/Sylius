@@ -13,6 +13,8 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Component\Core\Model\CouponInterface;
+use Sylius\Component\Core\OrderProcessing\OrderRecalculatorInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -75,6 +77,11 @@ final class OrderContext implements Context
     private $shippingChargesProcessor;
 
     /**
+     * @var OrderRecalculatorInterface
+     */
+    private $orderRecalculator;
+
+    /**
      * @var ObjectManager
      */
     private $objectManager;
@@ -88,6 +95,8 @@ final class OrderContext implements Context
      * @param FactoryInterface $orderItemFactory
      * @param OrderItemQuantityModifierInterface $itemQuantityModifier
      * @param ShippingChargesProcessorInterface $shippingChargesProcessor
+     * @param SharedStorageInterface $sharedStorage
+     * @param OrderRecalculatorInterface $orderRecalculator
      * @param ObjectManager $objectManager
      */
     public function __construct(
@@ -99,6 +108,7 @@ final class OrderContext implements Context
         FactoryInterface $orderItemFactory,
         OrderItemQuantityModifierInterface $itemQuantityModifier,
         ShippingChargesProcessorInterface $shippingChargesProcessor,
+        OrderRecalculatorInterface $orderRecalculator,
         ObjectManager $objectManager
     ) {
         $this->sharedStorage = $sharedStorage;
@@ -109,6 +119,7 @@ final class OrderContext implements Context
         $this->orderItemFactory = $orderItemFactory;
         $this->itemQuantityModifier = $itemQuantityModifier;
         $this->shippingChargesProcessor = $shippingChargesProcessor;
+        $this->orderRecalculator = $orderRecalculator;
         $this->objectManager = $objectManager;
     }
 
@@ -191,6 +202,28 @@ final class OrderContext implements Context
 
         $order->addItem($item);
 
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given the customer bought single :product using :coupon coupon
+     */
+    public function theCustomerBoughtSingleUsing(ProductInterface $product, CouponInterface $coupon)
+    {
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+
+        /** @var OrderItemInterface $item */
+        $item = $this->orderItemFactory->createNew();
+        $item->setVariant($product->getMasterVariant());
+        $item->setUnitPrice($product->getPrice());
+
+        $this->itemQuantityModifier->modify($item, 1);
+
+        $order->setPromotionCoupon($coupon);
+        $order->addItem($item);
+
+        $this->orderRecalculator->recalculate($order);
         $this->objectManager->flush();
     }
 }

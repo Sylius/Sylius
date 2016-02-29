@@ -6,10 +6,9 @@ Feature: Deleting a coupon
 
     Background:
         Given the store operates on a single channel in "France"
-        And there is a promotion "Holiday promotion" with coupon "Santa's gift"
-        And I am logged in as administrator
+        And the store has promotion "Christmas sale" with coupon "Santa's gift"
 
-    @todo
+    @domain
     Scenario: Deleted coupon should disappear from the registry
         When I delete "Santa's Gift" coupon
         Then this coupon should no longer exist in the registry

@@ -42,5 +42,6 @@ imports:
 
     - suites/domain/order.yml
     - suites/domain/product.yml
+    - suites/domain/promotion.yml
 
     - suites/cli/installer.yml

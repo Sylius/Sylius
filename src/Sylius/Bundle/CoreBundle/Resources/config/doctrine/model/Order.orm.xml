@@ -37,7 +37,7 @@
         </one-to-one>
 
         <many-to-one field="promotionCoupon" target-entity="Sylius\Component\Promotion\Model\CouponInterface">
-            <join-column name="promotion_coupon_id" on-delete="SET NULL" />
+            <join-column name="promotion_coupon_id" />
             <cascade>
                 <cascade-persist />
             </cascade>
