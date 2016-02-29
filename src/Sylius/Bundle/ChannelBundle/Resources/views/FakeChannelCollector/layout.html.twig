@@ -4,8 +4,11 @@
     {% set icon %}
         <a href="#">
             {# fake image span #}<span style="width: 0; height: 28px; vertical-align: middle;"></span>
-            <span class="sf-toolbar-status">{{ collector.channels|length }}</span> channel(s),
-            <b>{{ collector.currentChannel.name|default('Undefined') }}</b>
+            <span class="sf-toolbar-status">{{ collector.channels|length }}</span>
+            <span class="sf-toolbar-value">
+                channel(s),
+                <b>{{ collector.currentChannel.name|default('Undefined') }}</b>
+            </span>
         </a>
     {% endset %}
 
