@@ -440,7 +440,7 @@
         <service id="sylius.promotion_action.percentage_discount" class="%sylius.promotion_action.percentage_discount.class%">
             <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.originator" />
-            <tag name="sylius.promotion_action" type="percentage_discount" label="Percentage discount" />
+            <tag name="sylius.promotion_action" type="order_percentage_discount" label="Percentage discount" />
         </service>
         <service id="sylius.promotion_action.item_percentage_discount" class="%sylius.promotion_action.item_percentage_discount.class%">
             <argument type="service" id="sylius.factory.adjustment" />

@@ -27,14 +27,12 @@ use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 class TaxonomyContextSpec extends ObjectBehavior
 {
     function let(
-        RepositoryInterface $taxonRepository,
         RepositoryInterface $taxonomyRepository,
         FactoryInterface $taxonomyFactory,
         TaxonFactoryInterface $taxonFactory,
         ObjectManager $objectManager
     ) {
         $this->beConstructedWith(
-            $taxonRepository,
             $taxonomyRepository,
             $taxonomyFactory,
             $taxonFactory,
@@ -52,24 +50,57 @@ class TaxonomyContextSpec extends ObjectBehavior
         $this->shouldImplement(Context::class);
     }
 
-    function it_returns_taxon_by_name($taxonRepository, TaxonInterface $taxon)
-    {
-        $taxonRepository->findOneBy(['name' => 'Books'])->willReturn($taxon);
+    function it_creates_one_taxons_with_given_name(
+        $taxonomyRepository,
+        $taxonomyFactory,
+        $taxonFactory,
+        TaxonInterface $firstTaxon,
+        TaxonomyInterface $taxonomy
+    ) {
+        $taxonomyFactory->createNew()->willReturn($taxonomy);
+        $taxonomy->setCode('category')->shouldBeCalled();
+        $taxonomy->setName('Category')->shouldBeCalled();
 
-        $this->getTaxonByName('Books')->shouldReturn($taxon);
+        $taxonFactory->createNew()->willReturn($firstTaxon);
+
+        $firstTaxon->setName('Swords')->shouldBeCalled();
+        $firstTaxon->setCode('swords')->shouldBeCalled();
+
+        $taxonomy->addTaxon($firstTaxon)->shouldBeCalled();
+        $taxonomyRepository->add($taxonomy)->shouldBeCalled();
+
+        $this->storeClassifiesItsProductsAs('Swords');
     }
 
-    function it_throws_exception_if_taxon_with_given_name_does_not_exist($taxonRepository)
-    {
-        $taxonRepository->findOneBy(['name' => 'Books'])->willReturn(null);
+    function it_creates_two_taxons_with_given_name(
+        $taxonomyRepository,
+        $taxonomyFactory,
+        $taxonFactory,
+        TaxonInterface $firstTaxon,
+        TaxonInterface $secondTaxon,
+        TaxonomyInterface $taxonomy
+    ) {
+        $taxonomyFactory->createNew()->willReturn($taxonomy);
+        $taxonomy->setCode('category')->shouldBeCalled();
+        $taxonomy->setName('Category')->shouldBeCalled();
 
-        $this
-            ->shouldThrow(new \InvalidArgumentException('Taxon with name "Books" does not exist.'))
-            ->during('getTaxonByName', ['Books'])
-        ;
+        $taxonFactory->createNew()->willReturn($firstTaxon, $secondTaxon);
+
+        $firstTaxon->setName('Swords')->shouldBeCalled();
+        $firstTaxon->setCode('swords')->shouldBeCalled();
+
+        $secondTaxon->setName('Composite bows')->shouldBeCalled();
+        $secondTaxon->setCode('composite_bows')->shouldBeCalled();
+
+        $taxonomy->addTaxon($firstTaxon)->shouldBeCalled();
+        $taxonomy->addTaxon($secondTaxon)->shouldBeCalled();
+
+        $taxonomyRepository->add($taxonomy)->shouldBeCalled();
+
+        $this->storeClassifiesItsProductsAs('Swords', 'Composite bows');
     }
 
-    function it_creates_taxons_with_given_name(
+    function it_creates_three_taxons_with_given_name(
         $taxonomyRepository,
         $taxonomyFactory,
         $taxonFactory,
@@ -102,12 +133,10 @@ class TaxonomyContextSpec extends ObjectBehavior
         $this->storeClassifiesItsProductsAs('Swords', 'Composite bows', 'Axes');
     }
 
-    function it_adds_taxon_to_product($taxonRepository, ProductInterface $product, TaxonInterface $taxon)
+    function it_adds_taxon_to_product(ProductInterface $product, TaxonInterface $taxon)
     {
-        $taxonRepository->findOneBy(['name' => 'Books'])->willReturn($taxon);
-
         $product->addTaxon($taxon)->shouldBeCalled();
 
-        $this->itBelongsTo($product, 'Books');
+        $this->itBelongsTo($product, $taxon);
     }
 }

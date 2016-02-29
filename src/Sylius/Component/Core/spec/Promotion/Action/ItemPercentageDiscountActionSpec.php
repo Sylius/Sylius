@@ -80,7 +80,7 @@ class ItemPercentageDiscountActionSpec extends ObjectBehavior
         $itemsIterator->next()->shouldBeCalled();
 
         $orderItem->getUnits()->willReturn($units);
-        $units->count()->willReturn(2);
+        $orderItem->getQuantity()->willReturn(2);
 
         $units->first()->willReturn($unit1);
         $units->current()->willReturn($unit1, $unit2);

@@ -39,6 +39,7 @@
         <parameter key="sylius.behat.context.transform.product.class">Sylius\Behat\Context\Transform\ProductContext</parameter>
         <parameter key="sylius.behat.context.transform.shipping.class">Sylius\Behat\Context\Transform\ShippingContext</parameter>
         <parameter key="sylius.behat.context.transform.tax.class">Sylius\Behat\Context\Transform\TaxContext</parameter>
+        <parameter key="sylius.behat.context.transform.taxon.class">Sylius\Behat\Context\Transform\TaxonContext</parameter>
         <parameter key="sylius.behat.context.transform.zone.class">Sylius\Behat\Context\Transform\ZoneContext</parameter>
         <parameter key="sylius.behat.context.transform.theme.class">Sylius\Behat\Context\Transform\ThemeContext</parameter>
 
@@ -154,20 +155,10 @@
         </service>
 
         <service id="sylius.behat.context.setup.taxonomy" class="%sylius.behat.context.setup.taxonomy.class%" scope="scenario">
-            <argument type="service" id="sylius.repository.taxon" container="symfony" />
             <argument type="service" id="sylius.repository.taxonomy" container="symfony" />
             <argument type="service" id="sylius.factory.taxonomy" container="symfony" />
             <argument type="service" id="sylius.factory.taxon" container="symfony" />
             <argument type="service" id="doctrine.orm.entity_manager" container="symfony" />
-            <tag name="sylius.behat.context" />
-        </service>
-
-        <service id="sylius.behat.context.transform.lexical" class="%sylius.behat.context.transform.lexical.class%" scope="scenario">
-            <tag name="sylius.behat.context" />
-        </service>
-
-        <service id="sylius.behat.context.transform.shared_storage" class="%sylius.behat.context.transform.shared_storage.class%" scope="scenario">
-            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 
@@ -237,6 +228,11 @@
 
         <service id="sylius.behat.context.transform.tax" class="%sylius.behat.context.transform.tax.class%" scope="scenario">
             <argument type="service" id="sylius.repository.tax_category" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.transform.taxon" class="%sylius.behat.context.transform.taxon.class%" scope="scenario">
+            <argument type="service" id="sylius.repository.taxon" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 

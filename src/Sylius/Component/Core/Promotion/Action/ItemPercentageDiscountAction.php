@@ -70,7 +70,7 @@ class ItemPercentageDiscountAction extends DiscountAction
 
         foreach ($filteredItems as $item) {
             $promotionAmount = (int) round($item->getTotal() * $configuration['percentage']);
-            $distributedAmounts = $this->distributor->distribute($promotionAmount, $item->getUnits()->count());
+            $distributedAmounts = $this->distributor->distribute($promotionAmount, $item->getQuantity());
 
             $this->setUnitsAdjustments($item, $distributedAmounts, $promotion);
         }

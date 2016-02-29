@@ -71,7 +71,7 @@ class ActionFactory implements ActionFactoryInterface
      */
     public function createPercentageShippingDiscount($percentage)
     {
-        return $this->createAction('shipping_discount', ['percentage' => $percentage]);
+        return $this->createAction(ActionInterface::TYPE_SHIPPING_DISCOUNT, ['percentage' => $percentage]);
     }
 
     /**

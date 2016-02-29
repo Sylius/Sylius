@@ -28,11 +28,6 @@ class TaxonomyContext implements Context
     /**
      * @var RepositoryInterface
      */
-    private $taxonRepository;
-
-    /**
-     * @var RepositoryInterface
-     */
     private $taxonomyRepository;
 
     /**
@@ -51,37 +46,21 @@ class TaxonomyContext implements Context
     private $objectManager;
 
     /**
-     * @param RepositoryInterface $taxonRepository
      * @param RepositoryInterface $taxonomyRepository
      * @param FactoryInterface $taxonomyFactory
      * @param TaxonFactoryInterface $taxonFactory
      * @param ObjectManager $objectManager
      */
     public function __construct(
-        RepositoryInterface $taxonRepository,
         RepositoryInterface $taxonomyRepository,
         FactoryInterface $taxonomyFactory,
         TaxonFactoryInterface $taxonFactory,
         ObjectManager $objectManager
     ) {
-        $this->taxonRepository = $taxonRepository;
         $this->taxonomyRepository = $taxonomyRepository;
         $this->taxonomyFactory = $taxonomyFactory;
         $this->taxonFactory = $taxonFactory;
         $this->objectManager = $objectManager;
-    }
-
-    /**
-     * @Transform classified as :taxonName
-     */
-    public function getTaxonByName($taxonName)
-    {
-        $taxon = $this->taxonRepository->findOneBy(['name' => $taxonName]);
-        if (null === $taxon) {
-            throw new \InvalidArgumentException(sprintf('Taxon with name "%s" does not exist.', $taxonName));
-        }
-
-        return $taxon;
     }
 
     /**
@@ -110,11 +89,11 @@ class TaxonomyContext implements Context
     }
 
     /**
-     * @Given /^([^"]+) belongs to "([^"]+)"$/
+     * @Given /^(it) (belongs to "[^"]+")$/
      */
-    public function itBelongsTo(ProductInterface $product, $taxonName)
+    public function itBelongsTo(ProductInterface $product, TaxonInterface $taxon)
     {
-        $product->addTaxon($this->getTaxonByName($taxonName));
+        $product->addTaxon($taxon);
 
         $this->objectManager->flush($product);
     }
