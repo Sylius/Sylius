@@ -170,20 +170,6 @@ interface FilesystemInterface
     /**
      * @param string $file
      *
-     * @return \SplFileInfo
-     */
-    public function getFileInfo($file);
-
-    /**
-     * @param string $file
-     *
-     * @return \SplFileObject
-     */
-    public function getFileObject($file);
-
-    /**
-     * @param string $file
-     *
      * @return string
      */
     public function getFileContents($file);
