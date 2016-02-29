@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Promotion\Model\CouponInterface;
+use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -100,6 +101,34 @@ final class PromotionContext implements Context
     public function couponShouldStillExistInTheRegistry(CouponInterface $coupon)
     {
         expect($this->couponRepository->find($coupon->getId()))->toNotBe(null);
+    }
+
+    /**
+     * @When /^I delete (promotion "([^"]+)")$/
+     */
+    public function iDeletePromotion(PromotionInterface $promotion)
+    {
+        try {
+            $this->promotionRepository->remove($promotion);
+        } catch (ForeignKeyConstraintViolationException $exception) {
+            $this->sharedStorage->set('exception', $exception);
+        }
+    }
+
+    /**
+     * @Then :it should not exist in the registry
+     */
+    public function promotionShouldNotExistInTheRegistry(PromotionInterface $promotion)
+    {
+        expect($this->promotionRepository->find($promotion->getId()))->toBe(null);
+    }
+
+    /**
+     * @Then promotion :promotion should still exist in the registry
+     */
+    public function promotionShouldStillExistInTheRegistry(PromotionInterface $promotion)
+    {
+        expect($this->promotionRepository->find($promotion->getId()))->toNotBe(null);
     }
 
     /**

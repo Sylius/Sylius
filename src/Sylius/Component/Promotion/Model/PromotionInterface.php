@@ -20,7 +20,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-interface PromotionInterface extends CodeAwareInterface, SoftDeletableInterface, TimestampableInterface, ResourceInterface
+interface PromotionInterface extends CodeAwareInterface, TimestampableInterface, ResourceInterface
 {
     /**
      * @return string

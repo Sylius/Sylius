@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\OrderProcessing\OrderRecalculatorInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Behat\Context\Setup\OrderContext;
@@ -218,5 +219,39 @@ class OrderContextSpec extends ObjectBehavior
         $objectManager->flush()->shouldBeCalled();
 
         $this->theCustomerBoughtSingleUsing($product, $coupon);
+    }
+
+    function it_adds_single_item_by_customer_and_applies_a_promotion(
+        FactoryInterface $orderItemFactory,
+        OrderInterface $order,
+        OrderItemInterface $item,
+        OrderItemQuantityModifierInterface $itemQuantityModifier,
+        ProductInterface $product,
+        PromotionInterface $promotion,
+        SharedStorageInterface $sharedStorage,
+        ProductVariantInterface $variant,
+        OrderRecalculatorInterface $orderRecalculator,
+        ObjectManager $objectManager
+    ) {
+        $sharedStorage->get('order')->willReturn($order);
+
+        $orderItemFactory->createNew()->willReturn($item);
+
+        $product->getMasterVariant()->willReturn($variant);
+        $product->getPrice()->willReturn(1234);
+
+        $itemQuantityModifier->modify($item, 1)->shouldBeCalled();
+
+        $item->setVariant($variant)->shouldBeCalled();
+        $item->setUnitPrice(1234)->shouldBeCalled();
+
+        $promotion->setUsed(1)->shouldBeCalled();
+        $order->addPromotion($promotion)->shouldBeCalled();
+        $order->addItem($item)->shouldBeCalled();
+
+        $orderRecalculator->recalculate($order)->shouldBeCalled();
+        $objectManager->flush()->shouldBeCalled();
+
+        $this->theCustomerBoughtSingleWhile($product, $promotion);
     }
 }
