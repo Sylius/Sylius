@@ -30,6 +30,16 @@ class SyliusThemeExtensionTest extends AbstractExtensionTestCase
     }
 
     /**
+     * @test
+     */
+    public function it_aliases_configured_theme_context_service()
+    {
+        $this->load(['context' => 'sylius.theme.context.custom']);
+
+        $this->assertContainerBuilderHasAlias('sylius.context.theme', 'sylius.theme.context.custom');
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getContainerExtensions()

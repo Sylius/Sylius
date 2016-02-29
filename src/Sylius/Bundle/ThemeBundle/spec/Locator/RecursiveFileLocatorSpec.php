@@ -45,14 +45,13 @@ class RecursiveFileLocatorSpec extends ObjectBehavior
         $finderFactory->create()->willReturn($finder);
 
         $finder->name('readme.md')->shouldBeCalled()->willReturn($finder);
-        $finder->in(['/search/path/'])->shouldBeCalled()->willReturn($finder);
+        $finder->in('/search/path/')->shouldBeCalled()->willReturn($finder);
         $finder->ignoreUnreadableDirs()->shouldBeCalled()->willReturn($finder);
         $finder->files()->shouldBeCalled()->willReturn($finder);
 
         $finder->getIterator()->willReturn(new \ArrayIterator([
             $splFileInfo->getWrappedObject(),
         ]));
-        $finder->count()->willReturn(1);
 
         $splFileInfo->getPathname()->willReturn('/search/path/nested/readme.md');
 
@@ -68,7 +67,7 @@ class RecursiveFileLocatorSpec extends ObjectBehavior
         $finderFactory->create()->willReturn($finder);
 
         $finder->name('readme.md')->shouldBeCalled()->willReturn($finder);
-        $finder->in(['/search/path/'])->shouldBeCalled()->willReturn($finder);
+        $finder->in('/search/path/')->shouldBeCalled()->willReturn($finder);
         $finder->ignoreUnreadableDirs()->shouldBeCalled()->willReturn($finder);
         $finder->files()->shouldBeCalled()->willReturn($finder);
 
@@ -76,7 +75,6 @@ class RecursiveFileLocatorSpec extends ObjectBehavior
             $firstSplFileInfo->getWrappedObject(),
             $secondSplFileInfo->getWrappedObject(),
         ]));
-        $finder->count()->willReturn(2);
 
         $firstSplFileInfo->getPathname()->willReturn('/search/path/nested1/readme.md');
         $secondSplFileInfo->getPathname()->willReturn('/search/path/nested2/readme.md');
@@ -106,12 +104,11 @@ class RecursiveFileLocatorSpec extends ObjectBehavior
         $finderFactory->create()->willReturn($finder);
 
         $finder->name('readme.md')->shouldBeCalled()->willReturn($finder);
-        $finder->in(['/search/path/'])->shouldBeCalled()->willReturn($finder);
+        $finder->in('/search/path/')->shouldBeCalled()->willReturn($finder);
         $finder->ignoreUnreadableDirs()->shouldBeCalled()->willReturn($finder);
         $finder->files()->shouldBeCalled()->willReturn($finder);
 
         $finder->getIterator()->willReturn(new \ArrayIterator());
-        $finder->count()->willReturn(0);
 
         $this->shouldThrow(\InvalidArgumentException::class)->during('locateFileNamed', ['readme.md']);
     }
@@ -123,13 +120,72 @@ class RecursiveFileLocatorSpec extends ObjectBehavior
         $finderFactory->create()->willReturn($finder);
 
         $finder->name('readme.md')->shouldBeCalled()->willReturn($finder);
-        $finder->in(['/search/path/'])->shouldBeCalled()->willReturn($finder);
+        $finder->in('/search/path/')->shouldBeCalled()->willReturn($finder);
         $finder->ignoreUnreadableDirs()->shouldBeCalled()->willReturn($finder);
         $finder->files()->shouldBeCalled()->willReturn($finder);
 
         $finder->getIterator()->willReturn(new \ArrayIterator());
-        $finder->count()->willReturn(0);
 
         $this->shouldThrow(\InvalidArgumentException::class)->during('locateFilesNamed', ['readme.md']);
+    }
+
+    function it_isolates_finding_paths_from_multiple_sources(
+        FinderFactoryInterface $finderFactory,
+        Finder $firstFinder,
+        Finder $secondFinder,
+        SplFileInfo $splFileInfo
+    ) {
+        $this->beConstructedWith($finderFactory, ['/search/path/first/', '/search/path/second/']);
+
+        $finderFactory->create()->willReturn($firstFinder, $secondFinder);
+
+        $firstFinder->name('readme.md')->shouldBeCalled()->willReturn($firstFinder);
+        $firstFinder->in('/search/path/first/')->shouldBeCalled()->willReturn($firstFinder);
+        $firstFinder->ignoreUnreadableDirs()->shouldBeCalled()->willReturn($firstFinder);
+        $firstFinder->files()->shouldBeCalled()->willReturn($firstFinder);
+
+        $secondFinder->name('readme.md')->shouldBeCalled()->willReturn($secondFinder);
+        $secondFinder->in('/search/path/second/')->shouldBeCalled()->willReturn($secondFinder);
+        $secondFinder->ignoreUnreadableDirs()->shouldBeCalled()->willReturn($secondFinder);
+        $secondFinder->files()->shouldBeCalled()->willReturn($secondFinder);
+
+        $firstFinder->getIterator()->willReturn(new \ArrayIterator([$splFileInfo->getWrappedObject()]));
+        $secondFinder->getIterator()->willReturn(new \ArrayIterator());
+
+        $splFileInfo->getPathname()->willReturn('/search/path/first/nested/readme.md');
+
+        $this->locateFilesNamed('readme.md')->shouldReturn([
+            '/search/path/first/nested/readme.md',
+        ]);
+    }
+
+    function it_silences_finder_exceptions_even_if_searching_in_multiple_sources(
+        FinderFactoryInterface $finderFactory,
+        Finder $firstFinder,
+        Finder $secondFinder,
+        SplFileInfo $splFileInfo
+    ) {
+        $this->beConstructedWith($finderFactory, ['/search/path/first/', '/search/path/second/']);
+
+        $finderFactory->create()->willReturn($firstFinder, $secondFinder);
+
+        $firstFinder->name('readme.md')->shouldBeCalled()->willReturn($firstFinder);
+        $firstFinder->in('/search/path/first/')->shouldBeCalled()->willReturn($firstFinder);
+        $firstFinder->ignoreUnreadableDirs()->shouldBeCalled()->willReturn($firstFinder);
+        $firstFinder->files()->shouldBeCalled()->willReturn($firstFinder);
+
+        $secondFinder->name('readme.md')->shouldBeCalled()->willReturn($secondFinder);
+        $secondFinder->in('/search/path/second/')->shouldBeCalled()->willReturn($secondFinder);
+        $secondFinder->ignoreUnreadableDirs()->shouldBeCalled()->willReturn($secondFinder);
+        $secondFinder->files()->shouldBeCalled()->willReturn($secondFinder);
+
+        $firstFinder->getIterator()->willReturn(new \ArrayIterator([$splFileInfo->getWrappedObject()]));
+        $secondFinder->getIterator()->willThrow(\InvalidArgumentException::class);
+
+        $splFileInfo->getPathname()->willReturn('/search/path/first/nested/readme.md');
+
+        $this->locateFilesNamed('readme.md')->shouldReturn([
+            '/search/path/first/nested/readme.md',
+        ]);
     }
 }

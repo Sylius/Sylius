@@ -11,17 +11,18 @@
 
 namespace Sylius\Bundle\ThemeBundle\Context;
 
-use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-interface ThemeContextInterface
+final class EmptyThemeContext implements ThemeContextInterface
 {
     /**
-     * Should not throw any exception if failed to get theme.
+     * {@inheritdoc}
      *
-     * @return ThemeInterface|null
+     * @return null
      */
-    public function getTheme();
+    public function getTheme()
+    {
+        return null;
+    }
 }

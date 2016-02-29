@@ -9,19 +9,24 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ThemeBundle\Context;
+namespace Sylius\Bundle\ThemeBundle\HierarchyProvider;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-interface ThemeContextInterface
+final class NoopThemeHierarchyProvider implements ThemeHierarchyProviderInterface
 {
     /**
-     * Should not throw any exception if failed to get theme.
-     *
-     * @return ThemeInterface|null
+     * {@inheritdoc}
      */
-    public function getTheme();
+    public function getThemeHierarchy(ThemeInterface $theme = null)
+    {
+        if (null === $theme) {
+            return [];
+        }
+
+        return [$theme];
+    }
 }

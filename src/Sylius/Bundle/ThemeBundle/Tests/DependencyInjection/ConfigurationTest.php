@@ -91,6 +91,47 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @test
+     */
+    public function it_has_default_context_service_set()
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                [],
+            ],
+            ['context' => 'sylius.theme.context.settable'],
+            'context'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function its_context_cannot_be_empty()
+    {
+        $this->assertPartialConfigurationIsInvalid(
+            [
+                ['']
+            ],
+            'context'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function its_context_can_be_overrided()
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                ['context' => 'sylius.theme.context.custom'],
+            ],
+            ['context' => 'sylius.theme.context.custom'],
+            'context'
+        );
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getConfiguration()

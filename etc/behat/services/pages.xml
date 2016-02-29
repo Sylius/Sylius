@@ -18,6 +18,9 @@
         <parameter key="sylius.behat.page.customer_show.class">Sylius\Behat\Page\Customer\CustomerShowPage</parameter>
         <parameter key="sylius.behat.page.login.class">Sylius\Behat\Page\User\LoginPage</parameter>
         <parameter key="sylius.behat.page.home.class">Sylius\Behat\Page\Shop\HomePage</parameter>
+        <parameter key="sylius.behat.page.channel_create.class">Sylius\Behat\Page\Channel\ChannelCreatePage</parameter>
+        <parameter key="sylius.behat.page.channel_update.class">Sylius\Behat\Page\Channel\ChannelUpdatePage</parameter>
+        <parameter key="sylius.behat.page.channel_index.class">Sylius\Behat\Page\Channel\ChannelIndexPage</parameter>
 
         <parameter key="sylius.behat.page.checkout_addressing.class">Sylius\Behat\Page\Checkout\CheckoutAddressingStep</parameter>
         <parameter key="sylius.behat.page.checkout_finalize.class">Sylius\Behat\Page\Checkout\CheckoutFinalizeStep</parameter>
@@ -34,6 +37,11 @@
         <service id="sylius.behat.page.customer_show" class="%sylius.behat.page.customer_show.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.login" class="%sylius.behat.page.login.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.home" class="%sylius.behat.page.home.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+        <service id="sylius.behat.page.channel_create" class="%sylius.behat.page.channel_create.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+        <service id="sylius.behat.page.channel_update" class="%sylius.behat.page.channel_update.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+        <service id="sylius.behat.page.channel_index" class="%sylius.behat.page.channel_index.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false">
+            <argument type="service" id="sylius.behat.table_manipulator" />
+        </service>
 
         <service id="sylius.behat.page.checkout_addressing" class="%sylius.behat.page.checkout_addressing.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.checkout_finalize" class="%sylius.behat.page.checkout_finalize.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />

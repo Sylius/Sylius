@@ -305,7 +305,8 @@ sylius:
         update: Edit
         update_header: Editing channel
         updated_at: Last update
-        url: Url
+        hostname: Hostname
+        theme: Theme
     checkout:
         addressing:
             header: Addressing step

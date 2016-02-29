@@ -14,7 +14,6 @@ namespace Sylius\Bundle\ThemeBundle\DependencyInjection;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Bundle\ThemeBundle\Doctrine\ORM\ThemeRepository;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeFactory;
 use Sylius\Bundle\ThemeBundle\Model\Theme;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
@@ -35,6 +34,7 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('sylius_theme');
 
+        $this->addContextConfiguration($rootNode);
         $this->addResourcesConfiguration($rootNode);
         $this->addSourcesConfiguration($rootNode);
 
@@ -112,5 +112,13 @@ class Configuration implements ConfigurationInterface
                             ->defaultValue(['%kernel.root_dir%/themes', '%kernel.root_dir%/../vendor/sylius/themes'])
                             ->prototype('scalar')
         ;
+    }
+
+    /**
+     * @param ArrayNodeDefinition $rootNode
+     */
+    private function addContextConfiguration(ArrayNodeDefinition $rootNode)
+    {
+        $rootNode->children()->scalarNode('context')->defaultValue('sylius.theme.context.settable')->cannotBeEmpty();
     }
 }

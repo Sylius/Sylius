@@ -21,6 +21,7 @@
         <parameter key="sylius.theme.synchronizer.class">Sylius\Bundle\ThemeBundle\Synchronizer\ThemeSynchronizer</parameter>
         <parameter key="sylius.theme.repository.in_memory.class">Sylius\Bundle\ThemeBundle\Repository\InMemoryThemeRepository</parameter>
         <parameter key="sylius.theme.circular_dependency_checker.class">Sylius\Bundle\ThemeBundle\Loader\CircularDependencyChecker</parameter>
+        <parameter key="sylius.theme.context.settable.class">Sylius\Bundle\ThemeBundle\Context\SettableThemeContext</parameter>
         <parameter key="sylius.theme.data_collector.class">Sylius\Bundle\ThemeBundle\Collector\ThemeDataCollector</parameter>
         <parameter key="sylius.theme.hierarchy_provider.class">Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProvider</parameter>
         <parameter key="sylius.theme.filesystem.class">Sylius\Bundle\ThemeBundle\Filesystem\Filesystem</parameter>
@@ -29,7 +30,7 @@
     </parameters>
 
     <services>
-        <service id="sylius.context.theme" class="%sylius.context.theme.class%">
+        <service id="sylius.theme.context.settable" class="%sylius.theme.context.settable.class%" public="false">
             <argument type="service" id="sylius.theme.hierarchy_provider" />
         </service>
 
