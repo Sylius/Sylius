@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20160215140108 extends AbstractMigration
+class Version20160229125721 extends AbstractMigration
 {
     /**
      * @param Schema $schema
@@ -18,7 +18,9 @@ class Version20160215140108 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE sylius_channel ADD theme_name VARCHAR(255) DEFAULT NULL');
+        $this->addSql('ALTER TABLE sylius_channel ADD theme_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE sylius_channel ADD CONSTRAINT FK_16C8119E59027487 FOREIGN KEY (theme_id) REFERENCES sylius_theme (id) ON DELETE SET NULL');
+        $this->addSql('CREATE INDEX IDX_16C8119E59027487 ON sylius_channel (theme_id)');
     }
 
     /**
@@ -29,6 +31,8 @@ class Version20160215140108 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE sylius_channel DROP theme_name');
+        $this->addSql('ALTER TABLE sylius_channel DROP FOREIGN KEY FK_16C8119E59027487');
+        $this->addSql('DROP INDEX IDX_16C8119E59027487 ON sylius_channel');
+        $this->addSql('ALTER TABLE sylius_channel DROP theme_id');
     }
 }

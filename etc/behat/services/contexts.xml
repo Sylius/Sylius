@@ -25,8 +25,6 @@
         <parameter key="sylius.behat.context.setup.zone.class">Sylius\Behat\Context\Setup\ZoneContext</parameter>
         <parameter key="sylius.behat.context.setup.tax.class">Sylius\Behat\Context\Setup\TaxContext</parameter>
         <parameter key="sylius.behat.context.setup.order.class">Sylius\Behat\Context\Setup\OrderContext</parameter>
-        <parameter key="sylius.behat.context.setup.customer.class">Sylius\Behat\Context\Setup\CustomerContext</parameter>
-        <parameter key="sylius.behat.context.setup.addressing.class">Sylius\Behat\Context\Setup\AddressingContext</parameter>
         <parameter key="sylius.behat.context.setup.theme.class">Sylius\Behat\Context\Setup\ThemeContext</parameter>
 
         <parameter key="sylius.behat.context.transform.customer.class">Sylius\Behat\Context\Transform\CustomerContext</parameter>
@@ -165,6 +163,7 @@
             <argument type="service" id="sylius.repository.theme" container="symfony" />
             <argument type="service" id="sylius.factory.theme" container="symfony" />
             <argument type="service" id="sylius.repository.channel" container="symfony" />
+            <argument type="service" id="sylius.manager.channel" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 

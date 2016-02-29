@@ -28,9 +28,9 @@ use Sylius\Component\Core\Theme\ChannelBasedThemeContext;
  */
 class ChannelBasedThemeContextSpec extends ObjectBehavior
 {
-    function let(ChannelContextInterface $channelContext, ThemeRepositoryInterface $themeRepository)
+    function let(ChannelContextInterface $channelContext)
     {
-        $this->beConstructedWith($channelContext, $themeRepository);
+        $this->beConstructedWith($channelContext);
     }
 
     function it_is_initializable()
@@ -45,42 +45,26 @@ class ChannelBasedThemeContextSpec extends ObjectBehavior
 
     function it_returns_a_theme(
         ChannelContextInterface $channelContext,
-        ThemeRepositoryInterface $themeRepository,
         ChannelInterface $channel,
         ThemeInterface $theme
     ) {
         $channelContext->getChannel()->willReturn($channel);
-        $channel->getThemeName()->willReturn('example/theme');
-
-        $themeRepository->findOneByName('example/theme')->willReturn($theme);
+        $channel->getTheme()->willReturn($theme);
 
         $this->getTheme()->shouldReturn($theme);
     }
 
-    function it_returns_null_if_theme_cannot_be_found(
-        ChannelContextInterface $channelContext,
-        ThemeRepositoryInterface $themeRepository,
-        ChannelInterface $channel
-    ) {
-        $channelContext->getChannel()->willReturn($channel);
-        $channel->getThemeName()->willReturn('example/theme');
-
-        $themeRepository->findOneByName('example/theme')->willReturn(null);
-
-        $this->getTheme()->shouldReturn(null);
-    }
-
-    function it_returns_null_if_there_is_no_theme_set_on_the_channel(
+    function it_returns_null_if_channel_has_no_theme(
         ChannelContextInterface $channelContext,
         ChannelInterface $channel
     ) {
         $channelContext->getChannel()->willReturn($channel);
-        $channel->getThemeName()->willReturn(null);
+        $channel->getTheme()->willReturn(null);
 
         $this->getTheme()->shouldReturn(null);
     }
 
-    function it_returns_null_if_there_is_no_context(
+    function it_returns_null_if_there_is_no_channel(
         ChannelContextInterface $channelContext
     ) {
         $channelContext->getChannel()->willThrow(ChannelNotFoundException::class);

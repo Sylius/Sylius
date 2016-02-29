@@ -14,7 +14,7 @@ namespace Sylius\Bundle\ThemeBundle\Context;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class EmptyThemeContext implements  ThemeContextInterface
+final class EmptyThemeContext implements ThemeContextInterface
 {
     /**
      * {@inheritdoc}

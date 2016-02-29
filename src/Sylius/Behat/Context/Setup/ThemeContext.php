@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
@@ -45,27 +46,35 @@ final class ThemeContext implements Context
     private $channelRepository;
 
     /**
+     * @var ObjectManager
+     */
+    private $channelManager;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param ThemeRepositoryInterface $themeRepository
      * @param ThemeFactoryInterface $themeFactory
      * @param ChannelRepositoryInterface $channelRepository
+     * @param ObjectManager $channelManager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ThemeRepositoryInterface $themeRepository,
         ThemeFactoryInterface $themeFactory,
-        ChannelRepositoryInterface $channelRepository
+        ChannelRepositoryInterface $channelRepository,
+        ObjectManager $channelManager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->themeRepository = $themeRepository;
         $this->themeFactory = $themeFactory;
         $this->channelRepository = $channelRepository;
+        $this->channelManager = $channelManager;
     }
 
     /**
      * @Given the store has :themeName theme
      */
-    public function thereIsThemeDefined($themeName)
+    public function storeHasTheme($themeName)
     {
         $theme = $this->themeFactory->createNamed($themeName);
         $theme->setTitle($themeName);
@@ -82,11 +91,11 @@ final class ThemeContext implements Context
     /**
      * @Given channel :channel uses :theme theme
      */
-    public function channelIsUsingTheme(ChannelInterface $channel, ThemeInterface $theme)
+    public function channelUsesTheme(ChannelInterface $channel, ThemeInterface $theme)
     {
         $channel->setTheme($theme);
 
-        $this->channelRepository->add($channel);
+        $this->channelManager->flush();
 
         $this->sharedStorage->set('channel', $channel);
         $this->sharedStorage->set('theme', $theme);
@@ -99,7 +108,7 @@ final class ThemeContext implements Context
     {
         $channel->setTheme(null);
 
-        $this->channelRepository->add($channel);
+        $this->channelManager->flush();
 
         $this->sharedStorage->set('channel', $channel);
     }
