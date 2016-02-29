@@ -12,6 +12,7 @@
 namespace Sylius\Component\Addressing\Checker;
 
 use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Core\Model\RestrictedZoneInterface;
 
 interface RestrictedZoneCheckerInterface
 {
@@ -21,5 +22,5 @@ interface RestrictedZoneCheckerInterface
      *
      * @return bool
      */
-    public function isRestricted($subject, AddressInterface $address = null);
+    public function isRestricted(RestrictedZoneInterface $subject, AddressInterface $address = null);
 }

@@ -14,9 +14,8 @@ namespace Sylius\Bundle\CoreBundle\Checker;
 use Sylius\Component\Addressing\Checker\RestrictedZoneCheckerInterface;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
-use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\User\Context\CustomerContextInterface;
+use Sylius\Component\Core\Model\RestrictedZoneInterface;
 
 class RestrictedZoneChecker implements RestrictedZoneCheckerInterface
 {
@@ -32,11 +31,8 @@ class RestrictedZoneChecker implements RestrictedZoneCheckerInterface
     /**
      * {@inheritdoc}
      */
-    public function isRestricted($subject, AddressInterface $address = null)
+    public function isRestricted(RestrictedZoneInterface $subject, AddressInterface $address = null)
     {
-        if (!$subject instanceof ProductInterface) {
-            throw new UnexpectedTypeException($subject, ProductInterface::class);
-        }
 
         if (null === $customer = $this->customerContext->getCustomer()) {
             return false;
