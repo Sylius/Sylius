@@ -180,6 +180,7 @@ class Configuration implements ConfigurationInterface
                             ->scalarNode('class')
                             ->end()
                             ->arrayNode('mappings')
+                            ->performNoDeepMerging()
                                 ->prototype('array')
                                 ->end()
                             ->end()
