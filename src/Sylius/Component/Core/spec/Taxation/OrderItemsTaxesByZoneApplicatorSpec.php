@@ -60,7 +60,6 @@ class OrderItemsTaxesByZoneApplicatorSpec extends ObjectBehavior
         AdjustmentInterface $taxAdjustment2,
         Collection $items,
         Collection $units,
-        \Iterator $iterator,
         OrderInterface $order,
         OrderItemInterface $orderItem,
         OrderItemUnitInterface $unit1,
@@ -72,11 +71,7 @@ class OrderItemsTaxesByZoneApplicatorSpec extends ObjectBehavior
         $order->getItems()->willReturn($items);
 
         $items->count()->willReturn(1);
-        $items->getIterator()->willReturn($iterator);
-        $iterator->rewind()->shouldBeCalled();
-        $iterator->valid()->willReturn(true, false)->shouldBeCalled();
-        $iterator->current()->willReturn($orderItem);
-        $iterator->next()->shouldBeCalled();
+        $items->getIterator()->willReturn(new \ArrayIterator([$orderItem->getWrappedObject()]));
 
         $orderItem->getQuantity()->willReturn(2);
 
@@ -90,14 +85,14 @@ class OrderItemsTaxesByZoneApplicatorSpec extends ObjectBehavior
         $taxRate->isIncludedInPrice()->willReturn(false);
 
         $orderItem->getUnits()->willReturn($units);
-
-        $units->first()->shouldBeCalled();
-        $units->current()->willReturn($unit1, $unit2);
-        $units->next()->shouldBeCalledTimes(2);
+        $units->getIterator()->willReturn(new \ArrayIterator([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
 
         $distributor->distribute(100, 2)->willReturn([50, 50]);
 
-        $adjustmentsFactory->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, 'Simple tax (10%)', 50, false)->willReturn($taxAdjustment1, $taxAdjustment2);
+        $adjustmentsFactory
+            ->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, 'Simple tax (10%)', 50, false)
+            ->willReturn($taxAdjustment1, $taxAdjustment2)
+        ;
 
         $unit1->addAdjustment($taxAdjustment1)->shouldBeCalled();
         $unit2->addAdjustment($taxAdjustment2)->shouldBeCalled();
@@ -161,13 +156,12 @@ class OrderItemsTaxesByZoneApplicatorSpec extends ObjectBehavior
         $calculator,
         $distributor,
         $taxRateResolver,
-        AdjustmentInterface $taxAdjustment1,
-        AdjustmentInterface $taxAdjustment2,
         Collection $items,
         Collection $units,
-        \Iterator $iterator,
         OrderInterface $order,
         OrderItemInterface $orderItem,
+        OrderItemUnitInterface $unit1,
+        OrderItemUnitInterface $unit2,
         ProductVariantInterface $productVariant,
         TaxRateInterface $taxRate,
         ZoneInterface $zone
@@ -175,11 +169,7 @@ class OrderItemsTaxesByZoneApplicatorSpec extends ObjectBehavior
         $order->getItems()->willReturn($items);
 
         $items->count()->willReturn(1);
-        $items->getIterator()->willReturn($iterator);
-        $iterator->rewind()->shouldBeCalled();
-        $iterator->valid()->willReturn(true, false)->shouldBeCalled();
-        $iterator->current()->willReturn($orderItem);
-        $iterator->next()->shouldBeCalled();
+        $items->getIterator()->willReturn(new \ArrayIterator([$orderItem->getWrappedObject()]));
 
         $orderItem->getQuantity()->willReturn(2);
         $orderItem->getVariant()->willReturn($productVariant);
@@ -193,13 +183,11 @@ class OrderItemsTaxesByZoneApplicatorSpec extends ObjectBehavior
         $taxRate->isIncludedInPrice()->willReturn(false);
 
         $orderItem->getUnits()->willReturn($units);
-        $units->first()->shouldBeCalled();
-        $units->current()->shouldNotBeCalled();
-        $units->next()->shouldNotBeCalled();
+        $units->getIterator()->willReturn(new \ArrayIterator([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
 
         $distributor->distribute(0, 2)->willReturn([0, 0]);
 
-        $adjustmentsFactory->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, 'Simple tax (0%)', 0, false)->willReturn($taxAdjustment1, $taxAdjustment2);
+        $adjustmentsFactory->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, 'Simple tax (0%)', 0, false)->shouldNotBeCalled();
 
         $this->apply($order, $zone);
     }
