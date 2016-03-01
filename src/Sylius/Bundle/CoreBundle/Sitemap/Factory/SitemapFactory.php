@@ -21,7 +21,7 @@ class SitemapFactory implements SitemapFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createEmpty()
+    public function createNew()
     {
         return new Sitemap();
     }

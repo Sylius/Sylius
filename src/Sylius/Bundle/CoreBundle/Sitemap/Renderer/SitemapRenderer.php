@@ -27,7 +27,7 @@ class SitemapRenderer implements SitemapRendererInterface
      * @param RendererAdapterInterface $adapter
      * @param array $configuration
      */
-    public function __construct(RendererAdapterInterface $adapter, array $configuration = array())
+    public function __construct(RendererAdapterInterface $adapter, array $configuration = [])
     {
         $this->adapter = $adapter;
     }

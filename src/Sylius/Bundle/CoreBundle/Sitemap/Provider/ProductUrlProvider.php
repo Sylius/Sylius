@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Sitemap\Provider;
 
 use Sylius\Bundle\CoreBundle\Sitemap\Factory\SitemapUrlFactoryInterface;
+use Sylius\Bundle\CoreBundle\Sitemap\Model\ChangeFrequency;
 use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapUrlInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -39,7 +40,7 @@ class ProductUrlProvider implements UrlProviderInterface
     /**
      * @var array
      */
-    private $urls;
+    private $urls = [];
 
     /**
      * @param RepositoryInterface $productRepository
@@ -54,23 +55,22 @@ class ProductUrlProvider implements UrlProviderInterface
         $this->productRepository = $productRepository;
         $this->router = $router;
         $this->sitemapUrlFactory = $sitemapUrlFactory;
-        $this->urls = array();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function generate(array $criteria = array())
+    public function generate()
     {
-        $products = $this->productRepository->findBy($criteria);
+        $products = $this->productRepository->findAll();
 
         foreach ($products as $product) {
-            $productUrl = $this->sitemapUrlFactory->createEmpty();
-            $localization = $this->router->generate($product, array(), true);
+            $productUrl = $this->sitemapUrlFactory->createNew();
+            $localization = $this->router->generate($product, [], true);
 
             $productUrl->setLastModification($product->getUpdatedAt());
             $productUrl->setLocalization($localization);
-            $productUrl->setChangeFrequency(SitemapUrlInterface::CHANGEFREQ_ALWAYS);
+            $productUrl->setChangeFrequency(ChangeFrequency::always());
             $productUrl->setPriority(0.5);
 
             $this->urls[] = $productUrl;

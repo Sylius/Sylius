@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\Sitemap\Factory;
  
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Sitemap\Factory\SitemapUrlFactoryInterface;
 use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapUrlInterface;
 
 /**
@@ -26,7 +27,7 @@ class SitemapUrlFactorySpec extends ObjectBehavior
 
     function it_implements_sitemap_url_factory_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\CoreBundle\Sitemap\Factory\SitemapUrlFactoryInterface');
+        $this->shouldImplement(SitemapUrlFactoryInterface::class);
     }
 
     function it_creates_empty_sitemap_url(SitemapUrlInterface $sitemapUrl)
@@ -34,9 +35,9 @@ class SitemapUrlFactorySpec extends ObjectBehavior
         $sitemapUrl->getLastModification()->willReturn(null);
         $sitemapUrl->getLocalization()->willReturn(null);
         $sitemapUrl->getPriority()->willReturn(null);
-        $sitemapUrl->getChangeFrequency()->willReturn(null);
+        $sitemapUrl->getChangeFrequency()->willReturn('');
 
-        $this->createEmpty()->shouldBeSameAs($sitemapUrl);
+        $this->createNew()->shouldBeSameAs($sitemapUrl);
     }
 
     /**
@@ -50,10 +51,10 @@ class SitemapUrlFactorySpec extends ObjectBehavior
                     return false;
                 }
 
-                return ($subject->getChangeFrequency() === $key->getChangeFrequency()
+                return $subject->getChangeFrequency() === $key->getChangeFrequency()
                     && $subject->getLocalization() === $key->getLocalization()
                     && $subject->getLastModification() === $key->getLastModification()
-                    && $subject->getPriority() === $key->getPriority());
+                    && $subject->getPriority() === $key->getPriority();
             },
         ];
     }

@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Sitemap\Builder;
  
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\CoreBundle\Sitemap\Builder\SitemapBuilderInterface;
 use Sylius\Bundle\CoreBundle\Sitemap\Factory\SitemapFactoryInterface;
 use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapInterface;
 use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapUrlInterface;
@@ -23,12 +24,9 @@ use Sylius\Bundle\CoreBundle\Sitemap\Provider\UrlProviderInterface;
  */
 class SitemapBuilderSpec extends ObjectBehavior
 {
-    function let(
-        SitemapFactoryInterface $sitemapFactory
-    ) {
-        $this->beConstructedWith(
-            $sitemapFactory
-        );
+    function let(SitemapFactoryInterface $sitemapFactory)
+    {
+        $this->beConstructedWith($sitemapFactory);
     }
 
     function it_is_initializable()
@@ -38,7 +36,7 @@ class SitemapBuilderSpec extends ObjectBehavior
 
     function it_implements_sitemap_builder_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\CoreBundle\Sitemap\Builder\SitemapBuilderInterface');
+        $this->shouldImplement(SitemapBuilderInterface::class);
     }
 
     function it_builds_sitemap(
@@ -49,15 +47,14 @@ class SitemapBuilderSpec extends ObjectBehavior
         SitemapUrlInterface $bookUrl,
         SitemapUrlInterface $homePage
     ) {
-        $sitemapFactory->createEmpty()->willReturn($sitemap);
+        $sitemapFactory->createNew()->willReturn($sitemap);
         $this->addProvider($productUrlProvider);
         $this->addProvider($staticUrlProvider);
-        $productUrlProvider->generate(array())->willReturn(array($bookUrl));
-        $staticUrlProvider->generate(array())->willReturn(array($homePage));
+        $productUrlProvider->generate()->willReturn([$bookUrl]);
+        $staticUrlProvider->generate()->willReturn([$homePage]);
 
-        $array = array_merge(array($bookUrl), array($homePage));
-        $sitemap->setUrls($array)->shouldBeCalled();
+        $sitemap->setUrls([$bookUrl, $homePage])->shouldBeCalled();
 
-        $this->build();
+        $this->build()->shouldReturn($sitemap);
     }
 }

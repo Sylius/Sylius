@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.controller.sitemap.class">Sylius\Bundle\CoreBundle\Controller\SitemapController</parameter>
+        <parameter key="sylius.sitemap_renderer.class">Sylius\Bundle\CoreBundle\Sitemap\Renderer\SitemapRenderer</parameter>
+        <parameter key="sylius.sitemap_renderer.twig_adapter.class">Sylius\Bundle\CoreBundle\Sitemap\Renderer\TwigAdapter</parameter>
+        <parameter key="sylius.sitemap_provider.product_url.class">Sylius\Bundle\CoreBundle\Sitemap\Provider\ProductUrlProvider</parameter>
+        <parameter key="sylius.sitemap_service.sitemap_builder.class">Sylius\Bundle\CoreBundle\Sitemap\Builder\SitemapBuilder</parameter>
+        <parameter key="sylius.sitemap_factory.sitemap.class">Sylius\Bundle\CoreBundle\Sitemap\Factory\SitemapFactory</parameter>
+        <parameter key="sylius.sitemap_factory.sitemap_url.class">Sylius\Bundle\CoreBundle\Sitemap\Factory\SitemapUrlFactory</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.controller.sitemap" class="%sylius.controller.sitemap.class%">
+            <argument type="service" id="sylius.sitemap_renderer"/>
+            <argument type="service" id="sylius.sitemap_builder" />
+        </service>
+        <service id="sylius.sitemap_renderer.twig_adapter" class="%sylius.sitemap_renderer.twig_adapter.class%">
+            <argument type="service" id="templating" />
+            <argument>%sylius.sitemap_template%</argument>
+        </service>
+        <service id="sylius.sitemap_renderer" class="%sylius.sitemap_renderer.class%">
+            <argument type="service" id="sylius.sitemap_renderer.twig_adapter" />
+        </service>
+        <service id="sylius.sitemap_factory" class="%sylius.sitemap_factory.sitemap.class%" />
+        <service id="sylius.sitemap_url_factory" class="%sylius.sitemap_factory.sitemap_url.class%" />
+        <service id="sylius.sitemap_builder" class="%sylius.sitemap_service.sitemap_builder.class%">
+            <argument type="service" id="sylius.sitemap_factory" />
+        </service>
+        <service id="sylius.sitemap_provider.product" class="%sylius.sitemap_provider.product_url.class%" >
+            <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="router" />
+            <argument type="service" id="sylius.sitemap_url_factory" />
+            <tag name="sylius.sitemap_provider" />
+        </service>
+    </services>
+
+</container>

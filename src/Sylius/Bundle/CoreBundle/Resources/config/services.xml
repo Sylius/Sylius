@@ -118,14 +118,6 @@
         <parameter key="sylius.based_on_id_invoice_number_generator.class" >Sylius\Component\Core\Payment\IdBasedInvoiceNumberGenerator</parameter>
 
         <parameter key="sylius.form.type.product_review.class">Sylius\Bundle\CoreBundle\Form\Type\ProductReviewType</parameter>
-
-        <parameter key="sylius.controller.sitemap.class">Sylius\Bundle\CoreBundle\Controller\SitemapController</parameter>
-        <parameter key="sylius.sitemap.renderer.sitemap_renderer.class">Sylius\Bundle\CoreBundle\Sitemap\Renderer\SitemapRenderer</parameter>
-        <parameter key="sylius.sitemap.renderer.twig_adapter.class">Sylius\Bundle\CoreBundle\Sitemap\Renderer\TwigAdapter</parameter>
-        <parameter key="sylius.sitemap.provider.product_url.class">Sylius\Bundle\CoreBundle\Sitemap\Provider\ProductUrlProvider</parameter>
-        <parameter key="sylius.sitemap.service.sitemap_builder.class">Sylius\Bundle\CoreBundle\Sitemap\Builder\SitemapBuilder</parameter>
-        <parameter key="sylius.sitemap.factory.sitemap.class">Sylius\Bundle\CoreBundle\Sitemap\Factory\SitemapFactory</parameter>
-        <parameter key="sylius.sitemap.factory.sitemap_url.class">Sylius\Bundle\CoreBundle\Sitemap\Factory\SitemapUrlFactory</parameter>
     </parameters>
 
     <services>
@@ -593,28 +585,6 @@
         <service id="sylius.validator.has_enabled_entity" class="%sylius.validator.has_enabled_entity.class%">
             <argument type="service" id="doctrine" />
             <tag name="validator.constraint_validator" alias="sylius_has_enabled_entity" />
-        </service>
-        <service id="sylius.controller.sitemap" class="%sylius.controller.sitemap.class%">
-            <argument type="service" id="sylius.sitemap.renderer.sitemap_renderer"/>
-            <argument type="service" id="sylius.sitemap.service.builder" />
-        </service>
-        <service id="sylius.sitemap.renderer.twig_adapter" class="%sylius.sitemap.renderer.twig_adapter.class%">
-            <argument type="service" id="templating" />
-            <argument>%sylius.sitemap%</argument>
-        </service>
-        <service id="sylius.sitemap.renderer.sitemap_renderer" class="%sylius.sitemap.renderer.sitemap_renderer.class%">
-            <argument type="service" id="sylius.sitemap.renderer.twig_adapter" />
-        </service>
-        <service id="sylius.sitemap.factory.sitemap" class="%sylius.sitemap.factory.sitemap.class%" />
-        <service id="sylius.sitemap.factory.sitemap_url" class="%sylius.sitemap.factory.sitemap_url.class%" />
-        <service id="sylius.sitemap.service.builder" class="%sylius.sitemap.service.sitemap_builder.class%">
-            <argument type="service" id="sylius.sitemap.factory.sitemap" />
-        </service>
-        <service id="sylius.sitemap.provider.product" class="%sylius.sitemap.provider.product_url.class%" >
-            <argument type="service" id="sylius.repository.product" />
-            <argument type="service" id="router" />
-            <argument type="service" id="sylius.sitemap.factory.sitemap_url" />
-            <tag name="sylius.sitemap.provider" />
         </service>
     </services>
 

@@ -17,9 +17,7 @@ namespace Sylius\Bundle\CoreBundle\Sitemap\Provider;
 interface UrlProviderInterface
 {
     /**
-     * @param array $criteria
-     *
      * @return array
      */
-    public function generate(array $criteria);
+    public function generate();
 }

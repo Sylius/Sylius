@@ -16,14 +16,6 @@ namespace Sylius\Bundle\CoreBundle\Sitemap\Model;
  */
 interface SitemapUrlInterface
 {
-    const CHANGEFREQ_ALWAYS = 'always';
-    const CHANGEFREQ_HOURLY = 'hourly';
-    const CHANGEFREQ_DAILY = 'daily';
-    const CHANGEFREQ_WEEKLY = 'weekly';
-    const CHANGEFREQ_MONTHLY = 'monthly';
-    const CHANGEFREQ_YEARLY = 'yearly';
-    const CHANGEFREQ_NEVER = 'never';
-
     /**
      * @return string
      */
@@ -50,9 +42,9 @@ interface SitemapUrlInterface
     public function getChangeFrequency();
 
     /**
-     * @param string $changeFrequency
+     * @param ChangeFrequency $changeFrequency
      */
-    public function setChangeFrequency($changeFrequency);
+    public function setChangeFrequency(ChangeFrequency $changeFrequency);
 
     /**
      * @return float

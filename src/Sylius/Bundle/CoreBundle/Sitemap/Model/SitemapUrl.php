@@ -27,7 +27,7 @@ class SitemapUrl implements SitemapUrlInterface
     private $lastModification;
 
     /**
-     * @var string
+     * @var ChangeFrequency
      */
     private $changeFrequency;
 
@@ -73,21 +73,14 @@ class SitemapUrl implements SitemapUrlInterface
      */
     public function getChangeFrequency()
     {
-        return $this->changeFrequency;
+        return (string) $this->changeFrequency;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setChangeFrequency($changeFrequency)
+    public function setChangeFrequency(ChangeFrequency $changeFrequency)
     {
-        if (!in_array($changeFrequency, self::getSupportedChangeFrequencies(), true)) {
-            throw new \InvalidArgumentException(sprintf(
-                'The value %s is not supported by the option changefreq.',
-                $changeFrequency
-            ));
-        }
-
         $this->changeFrequency = $changeFrequency;
     }
 
@@ -111,12 +104,5 @@ class SitemapUrl implements SitemapUrlInterface
         }
 
         $this->priority = $priority;
-    }
-
-    static function getSupportedChangeFrequencies()
-    {
-        $class = new \ReflectionClass(__CLASS__);
-
-        return $class->getConstants();
     }
 }

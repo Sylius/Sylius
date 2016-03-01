@@ -57,4 +57,4 @@ sylius_sitemap:
         _controller: sylius.controller.sitemap:showAction
         _format: xml
     requirements:
-        _format: xml|html
+        _format: xml

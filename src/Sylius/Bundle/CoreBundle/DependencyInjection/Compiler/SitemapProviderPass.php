@@ -18,25 +18,22 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class SitemapProviderCompilerPass implements CompilerPassInterface
+class SitemapProviderPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->has('sylius.sitemap.service.builder')) {
+        if (!$container->has('sylius.sitemap_builder')) {
             return;
         }
 
-        $builderDefinition = $container->findDefinition('sylius.sitemap.service.builder');
-        $taggedProviders = $container->findTaggedServiceIds('sylius.sitemap.provider');
+        $builderDefinition = $container->findDefinition('sylius.sitemap_builder');
+        $taggedProviders = $container->findTaggedServiceIds('sylius.sitemap_provider');
 
-        foreach ($taggedProviders as $id => $provider) {
-            $builderDefinition->addMethodCall(
-                'addProvider',
-                array(new Reference($id))
-            );
+        foreach ($taggedProviders as $id => $tags) {
+            $builderDefinition->addMethodCall('addProvider', [(new Reference($id))]);
         }
     }
 }

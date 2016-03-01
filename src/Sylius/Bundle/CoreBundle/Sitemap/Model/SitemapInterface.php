@@ -11,22 +11,20 @@
 
 namespace Sylius\Bundle\CoreBundle\Sitemap\Model;
 
-use Doctrine\Common\Collections\Collection;
-
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 interface SitemapInterface
 {
     /**
-     * @return array
+     * @return SitemapUrlInterface[]
      */
     public function getUrls();
 
     /**
-     * @param array $urlSet
+     * @param SitemapUrlInterface[] $urlSet
      */
-    public function setUrls($urlSet);
+    public function setUrls(array $urlSet);
 
     /**
      * @param SitemapUrlInterface $url

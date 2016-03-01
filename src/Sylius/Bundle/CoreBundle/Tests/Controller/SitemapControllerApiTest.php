@@ -16,16 +16,15 @@ use Lakion\ApiTestCase\XmlApiTestCase;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class SitemapControllerTest extends XmlApiTestCase
+class SitemapControllerApiTest extends XmlApiTestCase
 {
     public function testShowActionResponse()
     {
-        $this->purgeDataBase();
-        $this->loadFixturesFromFile('Product.yml');
+        $this->loadFixturesFromFile('resources/product.yml');
         $this->client->request('GET', '/sitemap.xml');
 
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'show_sitemap');
+        $this->assertResponse($response, 'sitemap/show_sitemap');
     }
 }

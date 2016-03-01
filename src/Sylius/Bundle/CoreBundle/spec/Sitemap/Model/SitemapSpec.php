@@ -12,6 +12,8 @@
 namespace spec\Sylius\Bundle\CoreBundle\Sitemap\Model;
  
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Sitemap\Exception\SitemapUrlNotFoundException;
+use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapInterface;
 use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapUrlInterface;
 
 /**
@@ -26,29 +28,32 @@ class SitemapSpec extends ObjectBehavior
 
     function it_implements_sitemap_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapInterface');
+        $this->shouldImplement(SitemapInterface::class);
     }
 
     function it_has_sitemap_urls()
     {
-        $this->setUrls(array());
-        $this->getUrls()->shouldReturn(array());
+        $this->setUrls([]);
+        $this->getUrls()->shouldReturn([]);
     }
 
     function it_adds_url(SitemapUrlInterface $sitemapUrl)
     {
         $this->addUrl($sitemapUrl);
-        $this->getUrls()->shouldReturn(array($sitemapUrl));
+        $this->getUrls()->shouldReturn([$sitemapUrl]);
     }
 
-    function it_removes_url(SitemapUrlInterface $sitemapUrl, SitemapUrlInterface $productUrl, SitemapUrlInterface $staticUrl)
-    {
+    function it_removes_url(
+        SitemapUrlInterface $sitemapUrl,
+        SitemapUrlInterface $productUrl,
+        SitemapUrlInterface $staticUrl
+    ) {
         $this->addUrl($sitemapUrl);
         $this->addUrl($staticUrl);
         $this->addUrl($productUrl);
         $this->removeUrl($sitemapUrl);
 
-        $this->getUrls()->shouldReturn(array($staticUrl, $productUrl));
+        $this->getUrls()->shouldReturn([1 => $staticUrl, 2 => $productUrl]);
     }
 
     function it_has_localization()
@@ -63,12 +68,14 @@ class SitemapSpec extends ObjectBehavior
         $this->getLastModification()->shouldReturn($now);
     }
 
-    function it_throws_sitemap_url_not_found_exception_if_cannot_find_url_to_remove(SitemapUrlInterface $productUrl, SitemapUrlInterface $staticUrl)
-    {
+    function it_throws_sitemap_url_not_found_exception_if_cannot_find_url_to_remove(
+        SitemapUrlInterface $productUrl,
+        SitemapUrlInterface $staticUrl
+    ) {
         $this->addUrl($productUrl);
 
         $staticUrl->getLocalization()->willReturn('http://sylius.org');
 
-        $this->shouldThrow('Sylius\Bundle\CoreBundle\Sitemap\Exception\SitemapUrlNotFoundException')->during('removeUrl', array($staticUrl));
+        $this->shouldThrow(SitemapUrlNotFoundException::class)->during('removeUrl', [$staticUrl]);
     }
 }

@@ -15,7 +15,9 @@ use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository;
 use Sylius\Bundle\CoreBundle\Sitemap\Factory\SitemapUrlFactoryInterface;
+use Sylius\Bundle\CoreBundle\Sitemap\Model\ChangeFrequency;
 use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapUrlInterface;
+use Sylius\Bundle\CoreBundle\Sitemap\Provider\UrlProviderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -36,7 +38,7 @@ class ProductUrlProviderSpec extends ObjectBehavior
 
     function it_implements_provider_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\CoreBundle\Sitemap\Provider\UrlProviderInterface');
+        $this->shouldImplement(UrlProviderInterface::class);
     }
 
     function it_generates_urls(
@@ -49,9 +51,7 @@ class ProductUrlProviderSpec extends ObjectBehavior
         SitemapUrlInterface $sitemapUrl,
         \DateTime $now
     ) {
-        $criteria = array('channels' => 'WEB-UK');
-
-        $repository->findBy($criteria)->willReturn($products);
+        $repository->findAll()->willReturn($products);
         $products->getIterator()->willReturn($iterator);
         $iterator->valid()->willReturn(true, false);
         $iterator->next()->shouldBeCalled();
@@ -60,14 +60,14 @@ class ProductUrlProviderSpec extends ObjectBehavior
         $iterator->current()->willReturn($product);
         $product->getUpdatedAt()->willReturn($now);
 
-        $router->generate($product, array(), true)->willReturn('http://sylius.org/t-shirt');
-        $sitemapUrlFactory->createEmpty()->willReturn($sitemapUrl);
+        $router->generate($product, [], true)->willReturn('http://sylius.org/t-shirt');
+        $sitemapUrlFactory->createNew()->willReturn($sitemapUrl);
 
         $sitemapUrl->setLocalization('http://sylius.org/t-shirt')->shouldBeCalled();
         $sitemapUrl->setLastModification($now)->shouldBeCalled();
-        $sitemapUrl->setChangeFrequency(SitemapUrlInterface::CHANGEFREQ_ALWAYS)->shouldBeCalled();
+        $sitemapUrl->setChangeFrequency(ChangeFrequency::always())->shouldBeCalled();
         $sitemapUrl->setPriority(0.5)->shouldBeCalled();
 
-        $this->generate($criteria);
+        $this->generate();
     }
 }

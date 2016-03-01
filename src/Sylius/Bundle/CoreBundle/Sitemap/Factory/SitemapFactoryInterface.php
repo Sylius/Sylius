@@ -21,5 +21,5 @@ interface SitemapFactoryInterface
     /**
      * @return SitemapInterface
      */
-    public function createEmpty();
+    public function createNew();
 }

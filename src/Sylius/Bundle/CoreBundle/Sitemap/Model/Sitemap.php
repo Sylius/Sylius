@@ -21,7 +21,7 @@ class Sitemap implements SitemapInterface
     /**
      * @var array
      */
-    private $urls;
+    private $urls = [];
 
     /**
      * @var string
@@ -33,15 +33,10 @@ class Sitemap implements SitemapInterface
      */
     private $lastModification;
 
-    public function __construct()
-    {
-        $this->urls = array();
-    }
-
     /**
      * {@inheritdoc}
      */
-    public function setUrls($urls)
+    public function setUrls(array $urls)
     {
         $this->urls = $urls;
     }
@@ -59,7 +54,7 @@ class Sitemap implements SitemapInterface
      */
     public function addUrl(SitemapUrlInterface $url)
     {
-        array_push($this->urls, $url);
+        $this->urls[] = $url;
     }
 
     /**
@@ -67,13 +62,12 @@ class Sitemap implements SitemapInterface
      */
     public function removeUrl(SitemapUrlInterface $url)
     {
-        $key = array_search($url, $this->urls);
+        $key = array_search($url, $this->urls, true);
         if (false === $key) {
             throw new SitemapUrlNotFoundException($url);
         }
 
         unset($this->urls[$key]);
-        $this->urls = array_values($this->urls);
     }
 
     /**

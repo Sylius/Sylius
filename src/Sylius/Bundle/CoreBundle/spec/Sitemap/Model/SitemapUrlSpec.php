@@ -12,7 +12,9 @@
 namespace spec\Sylius\Bundle\CoreBundle\Sitemap\Model;
  
 use PhpSpec\ObjectBehavior;
- 
+use Sylius\Bundle\CoreBundle\Sitemap\Model\ChangeFrequency;
+use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapUrlInterface;
+
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
@@ -25,7 +27,7 @@ class SitemapUrlSpec extends ObjectBehavior
 
     function it_implements_sitemap_url_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapUrlInterface');
+        $this->shouldImplement(SitemapUrlInterface::class);
     }
 
     function it_has_localization()
@@ -42,7 +44,7 @@ class SitemapUrlSpec extends ObjectBehavior
 
     function it_has_change_frequency()
     {
-        $this->setChangeFrequency('always');
+        $this->setChangeFrequency(ChangeFrequency::always());
         $this->getChangeFrequency()->shouldReturn('always');
     }
 
@@ -54,22 +56,15 @@ class SitemapUrlSpec extends ObjectBehavior
 
     function it_throws_invalid_argument_exception_if_priority_wont_be_between_zero_and_one()
     {
-        $this->shouldThrow('\InvalidArgumentException')->during('setPriority', array(-1));
-        $this->shouldThrow('\InvalidArgumentException')->during('setPriority', array(-0.5));
-        $this->shouldThrow('\InvalidArgumentException')->during('setPriority', array(2));
-        $this->shouldThrow('\InvalidArgumentException')->during('setPriority', array(1.1));
+        $this->shouldThrow(\InvalidArgumentException::class)->during('setPriority', array(-1));
+        $this->shouldThrow(\InvalidArgumentException::class)->during('setPriority', array(-0.5));
+        $this->shouldThrow(\InvalidArgumentException::class)->during('setPriority', array(2));
+        $this->shouldThrow(\InvalidArgumentException::class)->during('setPriority', array(1.1));
     }
 
     function it_throws_invalid_argument_exception_if_priority_will_be_not_a_number()
     {
-        $this->shouldThrow('\InvalidArgumentException')->during('setPriority', array('Mike'));
-        $this->shouldThrow('\InvalidArgumentException')->during('setPriority', array(true));
-    }
-
-    function it_throws_invalid_argument_exception_if_changefreq_will_be_not_supported()
-    {
-        $this->shouldThrow('\InvalidArgumentException')->during('setChangeFrequency', array('John'));
-        $this->shouldThrow('\InvalidArgumentException')->during('setChangeFrequency', array(1));
-        $this->shouldThrow('\InvalidArgumentException')->during('setChangeFrequency', array(true));
+        $this->shouldThrow(\InvalidArgumentException::class)->during('setPriority', array('Mike'));
+        $this->shouldThrow(\InvalidArgumentException::class)->during('setPriority', array(true));
     }
 }

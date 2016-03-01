@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Sitemap\Renderer;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapInterface;
 use Sylius\Bundle\CoreBundle\Sitemap\Renderer\RendererAdapterInterface;
+use Sylius\Bundle\CoreBundle\Sitemap\Renderer\SitemapRendererInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -22,9 +23,7 @@ class SitemapRendererSpec extends ObjectBehavior
 {
     function let(RendererAdapterInterface $adapter)
     {
-        $this->beConstructedWith(
-            $adapter
-        );
+        $this->beConstructedWith($adapter);
     }
 
     function it_is_initializable()
@@ -34,13 +33,11 @@ class SitemapRendererSpec extends ObjectBehavior
 
     function it_implements_sitemap_renderer_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\CoreBundle\Sitemap\Renderer\SitemapRendererInterface');
+        $this->shouldImplement(SitemapRendererInterface::class);
     }
 
-    function it_renders_sitemap(
-        $adapter,
-        SitemapInterface $sitemap
-    ) {
+    function it_renders_sitemap($adapter, SitemapInterface $sitemap)
+    {
         $adapter->render($sitemap)->shouldBeCalled();
 
         $this->render($sitemap);

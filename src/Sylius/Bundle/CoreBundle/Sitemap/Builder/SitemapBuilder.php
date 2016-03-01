@@ -28,16 +28,14 @@ class SitemapBuilder implements SitemapBuilderInterface
     /**
      * @var array
      */
-    private $providers;
+    private $providers = [];
 
     /**
      * @param SitemapFactoryInterface $sitemapFactory
      */
-    public function __construct(
-        SitemapFactoryInterface $sitemapFactory
-    ) {
+    public function __construct(SitemapFactoryInterface $sitemapFactory)
+    {
         $this->sitemapFactory = $sitemapFactory;
-        $this->providers = array();
     }
 
     /**
@@ -53,12 +51,11 @@ class SitemapBuilder implements SitemapBuilderInterface
      */
     public function build()
     {
-        $sitemap = $this->sitemapFactory->createEmpty();
-        $urls = array();
+        $sitemap = $this->sitemapFactory->createNew();
+        $urls = [];
 
         foreach ($this->providers as $provider) {
-            $resourceUrls = $provider->generate(array());
-            $urls = array_merge($urls, $resourceUrls);
+            $urls = array_merge($urls, $provider->generate());
         }
         $sitemap->setUrls($urls);
 

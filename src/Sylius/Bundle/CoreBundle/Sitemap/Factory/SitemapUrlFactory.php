@@ -21,7 +21,7 @@ class SitemapUrlFactory implements SitemapUrlFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createEmpty()
+    public function createNew()
     {
         return new SitemapUrl();
     }

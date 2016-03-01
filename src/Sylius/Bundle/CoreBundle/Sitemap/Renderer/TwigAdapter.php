@@ -26,18 +26,18 @@ class TwigAdapter implements RendererAdapterInterface
     private $twig;
 
     /**
-     * @var array
+     * @var string
      */
-    private $configuration;
+    private $template;
 
     /**
      * @param EngineInterface $twig
-     * @param array           $configuration
+     * @param string $template
      */
-    public function __construct(EngineInterface $twig, array $configuration)
+    public function __construct(EngineInterface $twig, $template)
     {
         $this->twig = $twig;
-        $this->configuration = $configuration;
+        $this->template = $template;
     }
 
     /**
@@ -45,6 +45,6 @@ class TwigAdapter implements RendererAdapterInterface
      */
     public function render(SitemapInterface $sitemap)
     {
-        return $this->twig->render($this->configuration['template'], array('url_set' => $sitemap->getUrls()));
+        return $this->twig->render($this->template, ['url_set' => $sitemap->getUrls()]);
     }
 }

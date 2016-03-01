@@ -13,7 +13,6 @@ namespace Sylius\Bundle\CoreBundle\Sitemap\Factory;
 
 use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapUrlInterface;
 
-
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
@@ -22,5 +21,5 @@ interface SitemapUrlFactoryInterface
     /**
      * @return SitemapUrlInterface
      */
-    public function createEmpty();
+    public function createNew();
 }

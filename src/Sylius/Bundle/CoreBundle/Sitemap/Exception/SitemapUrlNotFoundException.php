@@ -21,8 +21,8 @@ class SitemapUrlNotFoundException extends \Exception
     /**
      * {@inheritdoc}
      */
-    public function __construct(SitemapUrlInterface $sitemapUrl)
+    public function __construct(SitemapUrlInterface $sitemapUrl, \Exception $previousException = null)
     {
-        parent::__construct(sprintf('Sitemap url %s not found', $sitemapUrl->getLocalization()));
+        parent::__construct(sprintf('Sitemap url %s not found', $sitemapUrl->getLocalization()), 0, $previousException);
     }
 }

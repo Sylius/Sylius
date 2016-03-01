@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\Sitemap\Factory;
  
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Sitemap\Factory\SitemapFactoryInterface;
 use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapInterface;
 
 /**
@@ -26,16 +27,16 @@ class SitemapFactorySpec extends ObjectBehavior
 
     function it_implements_sitemap_factory_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\CoreBundle\Sitemap\Factory\SitemapFactoryInterface');
+        $this->shouldImplement(SitemapFactoryInterface::class);
     }
 
     function it_creates_empty_sitemap(SitemapInterface $sitemap)
     {
-        $sitemap->getUrls()->willReturn(array());
+        $sitemap->getUrls()->willReturn([]);
         $sitemap->getLastModification()->willReturn(null);
         $sitemap->getLocalization()->willReturn(null);
 
-        $this->createEmpty()->shouldBeSameAs($sitemap);
+        $this->createNew()->shouldBeSameAs($sitemap);
     }
 
     /**
@@ -49,10 +50,10 @@ class SitemapFactorySpec extends ObjectBehavior
                     return false;
                 }
 
-                return ($subject->getLastModification() === $key->getLastModification()
+                return $subject->getLastModification() === $key->getLastModification()
                     && $subject->getLocalization() === $key->getLocalization()
                     && $subject->getUrls() === $key->getUrls()
-                );
+                ;
             },
         ];
     }
