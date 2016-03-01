@@ -26,8 +26,8 @@
         "stof/doctrine-extensions-bundle": "~1.1",
         "friendsofsymfony/rest-bundle": "~1.5",
         "jms/serializer-bundle": "^0.13|^1.0",
-        "sylius/resource": "0.17.*",
-        "sylius/storage": "0.17.*",
+        "sylius/resource": "0.18.*",
+        "sylius/storage": "0.18.*",
         "symfony/expression-language": "^2.7",
         "symfony/form": "^2.7",
         "symfony/validator": "^2.7",
@@ -51,16 +51,16 @@
         "phpspec/phpspec": "^2.4",
         "phpunit/phpunit": "^4.8",
         "sensio/generator-bundle": "^3.0",
-        "sylius/rbac-bundle": "0.17.*",
-        "sylius/translation-bundle": "0.17.*",
+        "sylius/rbac-bundle": "0.18.*",
+        "sylius/translation-bundle": "0.18.*",
         "twig/twig": "~1.11"
     },
     "suggest": {
         "doctrine/mongodb-odm": "1.0.*@dev",
         "doctrine/orm": "^2.4.8,<2.5",
         "doctrine/phpcr-bundle": "~1.1",
-        "sylius/rbac-bundle": "0.17.*",
-        "sylius/translation-bundle": "0.17.*"
+        "sylius/rbac-bundle": "0.18.*",
+        "sylius/translation-bundle": "0.18.*"
     },
     "scripts": {
         "post-install-cmd": [
@@ -85,7 +85,7 @@
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.17-dev"
+            "dev-master": "0.18-dev"
         },
         "incenteev-parameters": {
             "file": "test/app/config/parameters.yml",

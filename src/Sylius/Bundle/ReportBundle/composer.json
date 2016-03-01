@@ -31,10 +31,10 @@
         "php": "^5.5.9|^7.0",
 
         "stof/doctrine-extensions-bundle": "~1.1",
-        "sylius/registry": "0.17.*",
-        "sylius/report": "0.17.*",
-        "sylius/money-bundle": "0.17.*",
-        "sylius/resource-bundle": "0.17.*",
+        "sylius/registry": "0.18.*",
+        "sylius/report": "0.18.*",
+        "sylius/money-bundle": "0.18.*",
+        "sylius/resource-bundle": "0.18.*",
         "symfony/framework-bundle": "^2.7.7"
     },
     "require-dev": {
@@ -54,7 +54,7 @@
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.17-dev"
+            "dev-master": "0.18-dev"
         }
     }
 }
