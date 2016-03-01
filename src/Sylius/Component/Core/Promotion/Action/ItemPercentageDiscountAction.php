@@ -11,13 +11,12 @@
 
 namespace Sylius\Component\Core\Promotion\Action;
 
-use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\CoreBundle\Distributor\IntegerDistributorInterface;
+use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Promotion\Filter\TaxonFilterInterface;
-use Sylius\Component\Order\Model\OrderItemUnitInterface;
 use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -105,21 +104,20 @@ class ItemPercentageDiscountAction extends DiscountAction
      */
     private function setUnitsAdjustments(OrderItemInterface $item, array $distributedAmounts, PromotionInterface $promotion)
     {
-        $units = $item->getUnits();
-        $units->first();
-        foreach ($distributedAmounts as $key => $amount) {
-            if (0 === $amount) {
-                continue;
+        $i = 0;
+        foreach ($item->getUnits() as $unit) {
+            if (0 === $distributedAmounts[$i]) {
+                break;
             }
 
-            $unit = $this->getNextUnit($units);
-            $this->addAdjustmentToUnit($unit, $amount, $promotion);
+            $this->addAdjustmentToUnit($unit, $distributedAmounts[$i], $promotion);
+            $i++;
         }
     }
 
-    /**
+    /**X
      * @param OrderItemUnitInterface $unit
-     * @param $amount
+     * @param int $amount
      * @param PromotionInterface $promotion
      */
     private function addAdjustmentToUnit(OrderItemUnitInterface $unit, $amount, PromotionInterface $promotion)
@@ -131,33 +129,25 @@ class ItemPercentageDiscountAction extends DiscountAction
     }
 
     /**
-     * @param Collection $units
-     *
-     * @return OrderItemUnitInterface
-     */
-    private function getNextUnit(Collection $units)
-    {
-        $unit = $units->current();
-        if (false === $unit) {
-            throw new \InvalidArgumentException('The number of promotion items is greater than number of units.');
-        }
-
-        $units->next();
-
-        return $unit;
-    }
-
-    /**
      * @param OrderItemInterface $item
      * @param PromotionInterface $promotion
      */
     private function removeUnitsAdjustment(OrderItemInterface $item, PromotionInterface $promotion)
     {
         foreach ($item->getUnits() as $unit) {
-            foreach ($unit->getAdjustments(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT) as $adjustment) {
-                if ($promotion === $this->originator->getOrigin($adjustment)) {
-                    $unit->removeAdjustment($adjustment);
-                }
+            $this->removeUnitOrderItemAdjustments($unit, $promotion);
+        }
+    }
+
+    /**
+     * @param OrderItemUnitInterface $unit
+     * @param PromotionInterface $promotion
+     */
+    private function removeUnitOrderItemAdjustments(OrderItemUnitInterface $unit, PromotionInterface $promotion)
+    {
+        foreach ($unit->getAdjustments(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT) as $adjustment) {
+            if ($promotion === $this->originator->getOrigin($adjustment)) {
+                $unit->removeAdjustment($adjustment);
             }
         }
     }

@@ -155,4 +155,16 @@ class CartContextSpec extends ObjectBehavior
 
         $this->productPriceShouldNotBeDecreased($product);
     }
+
+    function it_throws_exception_if_discount_price_is_present_on_the_page_but_should_not(
+        CartSummaryPage $cartSummaryPage,
+        ProductInterface $product
+    ) {
+        $cartSummaryPage->open()->shouldBeCalled();
+        $product->getName()->willReturn('Test product');
+
+        $cartSummaryPage->getItemDiscountPrice('Test product')->willReturn('$10.00');
+
+        $this->shouldThrow(new FailureException('Expected to get exception, none got.'))->during('productPriceShouldNotBeDecreased', [$product]);
+    }
 }

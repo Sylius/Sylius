@@ -13,7 +13,8 @@ namespace spec\Sylius\Component\Core\Promotion\Action;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Distributor\IntegerDistributorInterface;
+use Prophecy\Argument;
+use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -60,7 +61,6 @@ class ItemPercentageDiscountActionSpec extends ObjectBehavior
         Collection $originalItems,
         Collection $filteredItems,
         Collection $units,
-        \Iterator $itemsIterator,
         OrderInterface $order,
         OrderItemInterface $orderItem,
         OrderItemUnitInterface $unit1,
@@ -73,18 +73,11 @@ class ItemPercentageDiscountActionSpec extends ObjectBehavior
             ->willReturn($filteredItems)
         ;
 
-        $filteredItems->getIterator()->willReturn($itemsIterator);
-        $itemsIterator->rewind()->shouldBeCalled();
-        $itemsIterator->valid()->willReturn(true, false);
-        $itemsIterator->current()->willReturn($orderItem);
-        $itemsIterator->next()->shouldBeCalled();
+        $filteredItems->getIterator()->willReturn(new \ArrayIterator([$orderItem->getWrappedObject()]));
 
-        $orderItem->getUnits()->willReturn($units);
         $orderItem->getQuantity()->willReturn(2);
-
-        $units->first()->willReturn($unit1);
-        $units->current()->willReturn($unit1, $unit2);
-        $units->next()->shouldBeCalled();
+        $orderItem->getUnits()->willReturn($units);
+        $units->getIterator()->willReturn(new \ArrayIterator([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
 
         $orderItem->getTotal()->willReturn(1000);
         $distributor->distribute(200, 2)->willReturn([100, 100]);
@@ -104,6 +97,55 @@ class ItemPercentageDiscountActionSpec extends ObjectBehavior
         $promotionAdjustment2->setAmount(-100)->shouldBeCalled();
 
         $originator->setOrigin($promotionAdjustment2, $promotion)->shouldBeCalled();
+
+        $unit1->addAdjustment($promotionAdjustment1)->shouldBeCalled();
+        $unit2->addAdjustment($promotionAdjustment2)->shouldBeCalled();
+
+        $this->execute($order, ['percentage' => 0.2, 'filters' => ['taxons' => ['testTaxon']]], $promotion);
+    }
+
+    function it_does_not_apply_promotions_with_amount_0(
+        $adjustmentFactory,
+        $distributor,
+        $originator,
+        $taxonFilter,
+        AdjustmentInterface $promotionAdjustment1,
+        Collection $originalItems,
+        Collection $filteredItems,
+        Collection $units,
+        OrderInterface $order,
+        OrderItemInterface $orderItem,
+        OrderItemUnitInterface $unit1,
+        OrderItemUnitInterface $unit2,
+        PromotionInterface $promotion
+    ) {
+        $order->getItems()->willReturn($originalItems);
+        $taxonFilter
+            ->filter($originalItems, ['percentage' => 0.2, 'filters' => ['taxons' => ['testTaxon']]])
+            ->willReturn($filteredItems)
+        ;
+
+        $filteredItems->getIterator()->willReturn(new \ArrayIterator([$orderItem->getWrappedObject()]));
+
+        $orderItem->getQuantity()->willReturn(2);
+        $orderItem->getUnits()->willReturn($units);
+        $units->getIterator()->willReturn(new \ArrayIterator([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
+
+        $orderItem->getTotal()->willReturn(5);
+        $distributor->distribute(1, 2)->willReturn([1, 0]);
+
+        $promotion->getDescription()->willReturn('Test description');
+
+        $adjustmentFactory->createNew()->willReturn($promotionAdjustment1);
+
+        $promotionAdjustment1->setType(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->shouldBeCalled();
+        $promotionAdjustment1->setLabel('Test description')->shouldBeCalled();
+        $promotionAdjustment1->setAmount(-1)->shouldBeCalled();
+
+        $originator->setOrigin($promotionAdjustment1, $promotion)->shouldBeCalled();
+
+        $unit1->addAdjustment($promotionAdjustment1)->shouldBeCalled();
+        $unit2->addAdjustment(Argument::any())->shouldNotBeCalled();
 
         $this->execute($order, ['percentage' => 0.2, 'filters' => ['taxons' => ['testTaxon']]], $promotion);
     }
@@ -125,9 +167,6 @@ class ItemPercentageDiscountActionSpec extends ObjectBehavior
         Collection $items,
         Collection $units,
         Collection $adjustments,
-        \Iterator $itemsIterator,
-        \Iterator $unitsIterator,
-        \Iterator $adjustmentsIterator,
         OrderInterface $order,
         OrderItemInterface $orderItem,
         OrderItemUnitInterface $unit,
@@ -135,25 +174,16 @@ class ItemPercentageDiscountActionSpec extends ObjectBehavior
         PromotionInterface $someOtherPromotion
     ) {
         $order->getItems()->willReturn($items);
-        $items->getIterator()->willReturn($itemsIterator);
-        $itemsIterator->rewind()->shouldBeCalled();
-        $itemsIterator->valid()->willReturn(true, false);
-        $itemsIterator->current()->willReturn($orderItem);
-        $itemsIterator->next()->shouldBeCalled();
+        $items->getIterator()->willReturn(new \ArrayIterator([$orderItem->getWrappedObject()]));
 
         $orderItem->getUnits()->willReturn($units);
-        $units->getIterator()->willReturn($unitsIterator);
-        $unitsIterator->rewind()->shouldBeCalled();
-        $unitsIterator->valid()->willReturn(true, false);
-        $unitsIterator->current()->willReturn($unit);
-        $unitsIterator->next()->shouldBeCalled();
+        $units->getIterator()->willReturn(new \ArrayIterator([$unit->getWrappedObject()]));
 
         $unit->getAdjustments(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->willReturn($adjustments);
-        $adjustments->getIterator()->willReturn($adjustmentsIterator);
-        $adjustmentsIterator->rewind()->shouldBeCalled();
-        $adjustmentsIterator->valid()->willReturn(true, true, false);
-        $adjustmentsIterator->current()->willReturn($promotionAdjustment1, $promotionAdjustment2);
-        $adjustmentsIterator->next()->shouldBeCalled();
+        $adjustments
+            ->getIterator()
+            ->willReturn(new \ArrayIterator([$promotionAdjustment1->getWrappedObject(), $promotionAdjustment2->getWrappedObject()]))
+        ;
 
         $originator->getOrigin($promotionAdjustment1)->willReturn($promotion);
         $unit->removeAdjustment($promotionAdjustment1)->shouldBeCalled();

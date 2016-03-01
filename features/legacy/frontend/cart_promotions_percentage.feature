@@ -12,16 +12,16 @@ Feature: Checkout percentage discount promotions
             | PR2  | 300 EUR | 10% Discount for orders over 300 EUR          |
         And promotion "5 items" has following rules defined:
             | type          | configuration |
-            | cart quantity | Count: 5      |
+            | Cart quantity | Count: 5      |
         And promotion "5 items" has following actions defined:
             | type                      | configuration  |
-            | order percentage discount | percentage: 25 |
+            | Order percentage discount | percentage: 25 |
         And promotion "300 EUR" has following rules defined:
             | type       | configuration |
             | Item total | Amount: 300   |
         And promotion "300 EUR" has following actions defined:
             | type                      | configuration  |
-            | order percentage discount | percentage: 10 |
+            | Order percentage discount | percentage: 10 |
         And there are following taxonomies defined:
             | code | name     |
             | RTX1 | Category |

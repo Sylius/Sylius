@@ -182,6 +182,7 @@ final class CartContext implements Context
 
     /**
      * @Then /^(its|theirs) price should be decreased by ("[^"]+")$/
+     * @Then /^(product "[^"]+") price should be decreased by ("[^"]+")$/
      */
     public function itsPriceShouldBeDecreasedBy(ProductInterface $product, $amount)
     {
@@ -191,14 +192,6 @@ final class CartContext implements Context
         $regularPrice = $this->getPriceFromString($this->cartSummaryPage->getItemRegularPrice($product->getName()));
 
         expect($discountPrice)->toBe($regularPrice - $amount);
-    }
-
-    /**
-     * @Then /^(product "[^"]+") price should be decreased by ("[^"]+")$/
-     */
-    public function productPriceShouldBeDecreasedBy(ProductInterface $product, $amount)
-    {
-        $this->itsPriceShouldBeDecreasedBy($product, $amount);
     }
 
     /**

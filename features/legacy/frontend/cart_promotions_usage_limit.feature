@@ -15,13 +15,13 @@ Feature: Checkout usage limited promotions
             | Item total | Amount: 200   |
         And promotion "25% off over 200 EUR" has following actions defined:
             | type                      | configuration  |
-            | order percentage discount | Percentage: 25 |
+            | Order percentage discount | Percentage: 25 |
         And promotion "Free order with at least 3 items" has following rules defined:
             | type          | configuration |
             | Cart quantity | Count: 3      |
         And promotion "Free order with at least 3 items" has following actions defined:
-            | type                     | configuration   |
-            | orde percentage discount | Percentage: 100 |
+            | type                      | configuration   |
+            | Order percentage discount | Percentage: 100 |
         And there are following taxonomies defined:
             | code | name     |
             | RTX1 | Category |

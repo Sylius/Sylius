@@ -64,9 +64,9 @@ class TaxonomyContext implements Context
     }
 
     /**
-     * @Given store classifies its products as :firstTaxonName
-     * @Given store classifies its products as :firstTaxonName and :secondTaxonName
-     * @Given store classifies its products as :firstTaxonName, :secondTaxonName and :thirdTaxonName
+     * @Given the store classifies its products as :firstTaxonName
+     * @Given the store classifies its products as :firstTaxonName and :secondTaxonName
+     * @Given the store classifies its products as :firstTaxonName, :secondTaxonName and :thirdTaxonName
      */
     public function storeClassifiesItsProductsAs($firstTaxonName, $secondTaxonName = null, $thirdTaxonName = null)
     {
