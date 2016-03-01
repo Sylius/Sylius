@@ -154,15 +154,15 @@ class BackendMenuBuilder extends MenuBuilder
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.archetypes', $section)));
         }
 
-        if (!$child->hasChildren()) {
-            $menu->removeChild('assortment');
-        }
-
         if ($this->rbacAuthorizationChecker->isGranted('sylius.product_association_type.index')) {
-            $child->addChild('product_association types', [
+            $child->addChild('product_association_types', [
                 'route' => 'sylius_backend_product_association_type_index',
                 'labelAttributes' => ['icon' => 'glyphicon glyphicon-th-list'],
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.association_types', $section)));
+        }
+
+        if (!$child->hasChildren()) {
+            $menu->removeChild('assortment');
         }
     }
 
