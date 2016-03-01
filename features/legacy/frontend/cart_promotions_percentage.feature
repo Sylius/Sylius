@@ -14,15 +14,15 @@ Feature: Checkout percentage discount promotions
             | type          | configuration |
             | cart quantity | Count: 5      |
         And promotion "5 items" has following actions defined:
-            | type                | configuration  |
-            | percentage discount | percentage: 25 |
+            | type                      | configuration  |
+            | order percentage discount | percentage: 25 |
         And promotion "300 EUR" has following rules defined:
             | type       | configuration |
             | Item total | Amount: 300   |
         And promotion "300 EUR" has following actions defined:
-            | type                | configuration  |
-            | Percentage discount | percentage: 10 |
-        And there are following taxons defined:
+            | type                      | configuration  |
+            | order percentage discount | percentage: 10 |
+        And there are following taxonomies defined:
             | code | name     |
             | RTX1 | Category |
         And taxon "Category" has following children:
