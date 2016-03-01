@@ -75,14 +75,12 @@ class TaxonomyContext implements Context
         $taxonomy->setName('Category');
         $taxonomy->setCode('category');
 
-        $taxonomy->addTaxon($this->createTaxon($firstTaxonName));
+        foreach ([$firstTaxonName, $secondTaxonName, $thirdTaxonName] as $taxonName) {
+            if (null === $taxonName) {
+                break;
+            }
 
-        if (null !== $secondTaxonName) {
-            $taxonomy->addTaxon($this->createTaxon($secondTaxonName));
-        }
-
-        if (null !== $thirdTaxonName) {
-            $taxonomy->addTaxon($this->createTaxon($thirdTaxonName));
+            $taxonomy->addTaxon($this->createTaxon($taxonName));
         }
 
         $this->taxonomyRepository->add($taxonomy);
