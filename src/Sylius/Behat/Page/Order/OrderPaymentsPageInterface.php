@@ -17,7 +17,7 @@ use Sylius\Component\Core\Model\PaymentInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-interface PayOrderPageInterface
+interface OrderPaymentsPageInterface
 {
     /**
      * @param PaymentInterface $payment
@@ -37,16 +37,11 @@ interface PayOrderPageInterface
     public function waitForResponse($timeout, array $parameters);
 
     /**
+     * @param string $state
+     *
      * @throws ElementNotFoundException
      *
      * @return int
      */
-    public function countCancelledPayments();
-
-    /**
-     * @throws ElementNotFoundException
-     *
-     * @return int
-     */
-    public function countNewPayments();
+    public function countPaymentWithSpecificState($state);
 }

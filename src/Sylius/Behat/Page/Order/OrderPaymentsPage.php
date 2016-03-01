@@ -17,14 +17,14 @@ use Sylius\Component\Core\Model\PaymentInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class PayOrderPage extends SymfonyPage implements PayOrderPageInterface
+class OrderPaymentsPage extends SymfonyPage implements OrderPaymentsPageInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getRouteName()
     {
-        return 'sylius_account_order_payment_index';
+        return 'sylius_order_payment_index';
     }
 
     /**
@@ -32,23 +32,26 @@ class PayOrderPage extends SymfonyPage implements PayOrderPageInterface
      */
     public function clickPayButtonForGivenPayment(PaymentInterface $payment)
     {
-        $this->getDocument()->clickLink(sprintf('delete_%s', $payment->getId()));
+        $this->getDocument()->clickLink(sprintf('pay_%s', $payment->getId()));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function countCancelledPayments()
+    public function countPaymentWithSpecificState($state)
     {
-        return $this->countPaymentsWithSpecificState(PaymentInterface::STATE_CANCELLED);
-    }
+        $elements = $this->getDocument()->findAll('css', '#payments > tr');
 
-    /**
-     * {@inheritdoc}
-     */
-    public function countNewPayments()
-    {
-        return $this->countPaymentsWithSpecificState(PaymentInterface::STATE_NEW);
+        $counter = 0;
+        foreach ($elements as $element) {
+            $text = $element->getText();
+
+            if (false !== strpos($text, $state)) {
+                $counter++;
+            }
+        }
+
+        return $counter;
     }
 
     /**
@@ -67,30 +70,9 @@ class PayOrderPage extends SymfonyPage implements PayOrderPageInterface
     protected function getUrl(array $urlParameters = [])
     {
         if (!isset($urlParameters['number'])) {
-            throw new \RuntimeException(sprintf('%s getUrl method require order number', self::class));
+            throw new \InvalidArgumentException(sprintf('This page %s requires order number to be passed as parameter', self::class));
         }
 
         return parent::getUrl($urlParameters);
-    }
-
-    /**
-     * @param string $state
-     *
-     * @return int
-     */
-    private function countPaymentsWithSpecificState($state)
-    {
-        $elements = $this->getDocument()->findAll('css', '#payments > tr');
-
-        $counter = 0;
-        foreach ($elements as $element) {
-            $text = $element->getText();
-
-            if (false !== strpos($text, $state)) {
-                $counter++;
-            }
-        }
-
-        return $counter;
     }
 }

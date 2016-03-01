@@ -11,14 +11,6 @@ Feature: Checkout with PayPal Express Checkout
         And the store ships everywhere for free
         And the store allows paying "PayPal Express Checkout"
 
-    @ui @mink:firefox
-    Scenario: Being redirected to the PayPal Express Checkout page
-        Given I am logged in as "john@example.com"
-        And I added product "PHP T-Shirt" to the cart
-        When I proceed selecting "PayPal Express Checkout" payment method
-        And I confirm my order
-        Then I should be redirected to PayPal Express Checkout page
-
     @ui
     Scenario: Successful payment
         Given I am logged in as "john@example.com"
@@ -60,4 +52,12 @@ Feature: Checkout with PayPal Express Checkout
         When I try to pay again
         And I cancel my PayPal payment
         Then I should be redirected back to the order payment page
-        And I should see two failed payments and new one ready to be paid
+        And I should see two cancelled payments and new one ready to be paid
+
+    @ui @mink:firefox
+    Scenario: Being redirected to the PayPal Express Checkout page
+        Given I am logged in as "john@example.com"
+        And I added product "PHP T-Shirt" to the cart
+        When I proceed selecting "PayPal Express Checkout" payment method
+        And I confirm my order
+        Then I should be redirected to PayPal Express Checkout page

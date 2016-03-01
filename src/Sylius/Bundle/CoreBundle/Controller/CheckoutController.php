@@ -202,10 +202,6 @@ class CheckoutController extends FOSRestController
     {
         $order = $this->findOrderOr404($id);
 
-        if ($this->getCustomer() !== $order->getCustomer()) {
-            return $this->createAccessDeniedException();
-        }
-
         return $this->render('SyliusWebBundle:Frontend/Checkout/Step:thankYou.html.twig', ['order' => $order]);
     }
 

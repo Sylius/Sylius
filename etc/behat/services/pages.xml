@@ -30,8 +30,8 @@
         <parameter key="sylius.behat.page.checkout_shipping.class">Sylius\Behat\Page\Checkout\CheckoutShippingStep</parameter>
         <parameter key="sylius.behat.page.checkout_thank_you.class">Sylius\Behat\Page\Checkout\CheckoutThankYouPage</parameter>
         <parameter key="sylius.behat.page.external.paypal_checkout_express.class">Sylius\Behat\Page\External\PaypalExpressCheckoutPage</parameter>
-        <parameter key="sylius.behat.page.order_pay.class">Sylius\Behat\Page\Order\PayOrderPage</parameter>
-
+        <parameter key="sylius.behat.page.order_payments.class">Sylius\Behat\Page\Order\OrderPaymentsPage</parameter>
+        
         <parameter key="sylius.behat.page.admin.country.create.class">Sylius\Behat\Page\Admin\Country\CreatePage</parameter>
         <parameter key="sylius.behat.page.admin.country.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
         <parameter key="sylius.behat.page.admin.locale.create.class">Sylius\Behat\Page\Admin\Locale\CreatePage</parameter>
@@ -60,8 +60,8 @@
         <service id="sylius.behat.page.external.paypal_checkout_express" class="%sylius.behat.page.external.paypal_checkout_express.class%" parent="sylius.behat.page" scope="scenario" public="false" >
             <argument type="service" id="sylius.repository.payment_security_token" container="symfony" />
         </service>
-        <service id="sylius.behat.page.order_pay" class="%sylius.behat.page.order_pay.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
-
+        <service id="sylius.behat.page.order_payments" class="%sylius.behat.page.order_payments.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+        
         <service id="sylius.behat.page.admin.country.index" class="%sylius.behat.page.admin.country.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
             <argument type="string">country</argument>
         </service>

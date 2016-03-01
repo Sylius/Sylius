@@ -14,16 +14,16 @@ namespace spec\Sylius\Behat\Context\Ui;
 use Behat\Behat\Context\Context;
 use PhpSpec\ObjectBehavior;
 use Sylius\Behat\Page\External\PaypalExpressCheckoutPageInterface;
-use Sylius\Behat\PaypalMockedApiResponsesInterface;
+use Sylius\Behat\PaypalApiMockerInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 class PaypalContextSpec extends ObjectBehavior
 {
-    function let(PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage, PaypalMockedApiResponsesInterface $paypalMockedApiResponses)
+    function let(PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage, PaypalApiMockerInterface $paypalApiMocker)
     {
-        $this->beConstructedWith($paypalExpressCheckoutPage, $paypalMockedApiResponses);
+        $this->beConstructedWith($paypalExpressCheckoutPage, $paypalApiMocker);
     }
 
     function it_is_initializable()
@@ -43,10 +43,10 @@ class PaypalContextSpec extends ObjectBehavior
         $this->iShouldBeRedirectedToPaypalExpressCheckoutPage();
     }
 
-    function it_logs_in_and_pay_on_paypal_page($paypalExpressCheckoutPage, $paypalMockedApiResponses)
+    function it_logs_in_and_pay_on_paypal_page($paypalExpressCheckoutPage, $paypalApiMocker)
     {
         $paypalExpressCheckoutPage->pay()->shouldBeCalled();
-        $paypalMockedApiResponses->mockApiSuccessfulPaymentResponse()->shouldBeCalled();
+        $paypalApiMocker->mockApiSuccessfulPaymentResponse()->shouldBeCalled();
 
         $this->iSignInToPaypalAndPaySuccessfully();
     }

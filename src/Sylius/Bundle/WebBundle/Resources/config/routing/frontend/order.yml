@@ -1,0 +1,20 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_order_after_purchase:
+    path: /after-purchase
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.frontend.account.order:afterPurchaseAction
+
+sylius_order_purchase:
+    path: /{paymentId}/purchase
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.frontend.account.order:purchaseAction
+
+sylius_order_payment_index:
+    path: /{number}/payments
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.frontend.account.order:showPaymentsAction

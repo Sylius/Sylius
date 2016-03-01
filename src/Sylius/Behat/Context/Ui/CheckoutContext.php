@@ -18,10 +18,12 @@ use Sylius\Behat\Page\Checkout\CheckoutPaymentStepInterface;
 use Sylius\Behat\Page\Checkout\CheckoutSecurityStepInterface;
 use Sylius\Behat\Page\Checkout\CheckoutShippingStepInterface;
 use Sylius\Behat\Page\Checkout\CheckoutThankYouPageInterface;
-use Sylius\Behat\Page\Order\PayOrderPageInterface;
+use Sylius\Behat\Page\Order\OrderPaymentsPageInterface;
+use Sylius\Behat\PaypalApiMockerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -65,14 +67,19 @@ final class CheckoutContext implements Context
     private $checkoutThankYouPage;
 
     /**
-     * @var PayOrderPageInterface
+     * @var OrderPaymentsPageInterface
      */
-    private $payOrderPage;
+    private $orderPaymentsPage;
 
     /**
      * @var RepositoryInterface
      */
     private $orderRepository;
+
+    /**
+     * @var PaypalApiMockerInterface
+     */
+    private $paypalApiMocker;
 
     /**
      * @param SharedStorageInterface $sharedStorage
@@ -82,8 +89,9 @@ final class CheckoutContext implements Context
      * @param CheckoutPaymentStepInterface $checkoutPaymentStep
      * @param CheckoutFinalizeStepInterface $checkoutFinalizeStep
      * @param CheckoutThankYouPageInterface $checkoutThankYouPage
-     * @param PayOrderPageInterface $payOrderPage
+     * @param OrderPaymentsPageInterface $orderPaymentsPage
      * @param RepositoryInterface $orderRepository
+     * @param PaypalApiMockerInterface $paypalApiMocker
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -93,8 +101,9 @@ final class CheckoutContext implements Context
         CheckoutPaymentStepInterface $checkoutPaymentStep,
         CheckoutFinalizeStepInterface $checkoutFinalizeStep,
         CheckoutThankYouPageInterface $checkoutThankYouPage,
-        PayOrderPageInterface $payOrderPage,
-        RepositoryInterface $orderRepository
+        OrderPaymentsPageInterface $orderPaymentsPage,
+        RepositoryInterface $orderRepository,
+        PaypalApiMockerInterface $paypalApiMocker
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->checkoutSecurityStep = $checkoutSecurityStep;
@@ -103,8 +112,9 @@ final class CheckoutContext implements Context
         $this->checkoutPaymentStep = $checkoutPaymentStep;
         $this->checkoutFinalizeStep = $checkoutFinalizeStep;
         $this->checkoutThankYouPage = $checkoutThankYouPage;
-        $this->payOrderPage = $payOrderPage;
+        $this->orderPaymentsPage = $orderPaymentsPage;
         $this->orderRepository = $orderRepository;
+        $this->paypalApiMocker = $paypalApiMocker;
     }
 
     /**
@@ -219,6 +229,7 @@ final class CheckoutContext implements Context
      */
     public function iConfirmMyOrder()
     {
+        $this->paypalApiMocker->mockApiPaymentInitializeResponse();
         $this->checkoutFinalizeStep->confirmOrder();
     }
 
@@ -239,7 +250,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldBeRedirectedBackToTheThankYouPage()
     {
-        $this->checkoutThankYouPage->waitForResponse(10, ['id' => $this->getLastOrder()->getId()]);
+        $this->checkoutThankYouPage->waitForResponse(5, ['id' => $this->getLastOrder()->getId()]);
 
         expect($this->checkoutThankYouPage->isOpen(['id' => $this->getLastOrder()->getId()]))->toBe(true);
     }
@@ -249,9 +260,9 @@ final class CheckoutContext implements Context
      */
     public function iShouldBeRedirectedBackToTheOrderPaymentPage()
     {
-        $this->payOrderPage->waitForResponse(10, ['number' => $this->getLastOrder()->getNumber()]);
+        $this->orderPaymentsPage->waitForResponse(5, ['number' => $this->getLastOrder()->getNumber()]);
 
-        expect($this->payOrderPage->isOpen(['number' => $this->getLastOrder()->getNumber()]))->toBe(true);
+        expect($this->orderPaymentsPage->isOpen(['number' => $this->getLastOrder()->getNumber()]))->toBe(true);
     }
 
     /**
@@ -261,16 +272,17 @@ final class CheckoutContext implements Context
     {
         $order = $this->getLastOrder();
         $payment = $order->getLastPayment();
-        $this->payOrderPage->clickPayButtonForGivenPayment($payment);
+        $this->paypalApiMocker->mockApiPaymentInitializeResponse();
+        $this->orderPaymentsPage->clickPayButtonForGivenPayment($payment);
     }
 
     /**
-     * @Then I should see two failed payments and new one ready to be paid
+     * @Then I should see two cancelled payments and new one ready to be paid
      */
-    public function iShouldSeeTwoFailedPaymentsAndNewOneReadyToBePaid()
+    public function iShouldSeeTwoCancelledPaymentsAndNewOneReadyToBePaid()
     {
-        expect($this->payOrderPage->countCancelledPayments())->toBe(2);
-        expect($this->payOrderPage->countNewPayments())->toBe(1);
+        expect($this->orderPaymentsPage->countPaymentWithSpecificState(PaymentInterface::STATE_CANCELLED))->toBe(2);
+        expect($this->orderPaymentsPage->countPaymentWithSpecificState(PaymentInterface::STATE_NEW))->toBe(1);
     }
 
     /**

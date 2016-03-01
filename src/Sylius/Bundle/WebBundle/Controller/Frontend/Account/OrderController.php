@@ -17,6 +17,7 @@ use Payum\Core\Registry\RegistryInterface;
 use Payum\Core\Security\GenericTokenFactoryInterface;
 use Payum\Core\Security\HttpRequestVerifierInterface;
 use Sylius\Bundle\PayumBundle\Request\GetStatus;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -66,6 +67,7 @@ class OrderController extends FOSRestController
     public function showAction($number)
     {
         $order = $this->findOrderOr404($number);
+        $this->checkAccessToOrder($order);
 
         $view = $this
             ->view()
@@ -92,6 +94,7 @@ class OrderController extends FOSRestController
     public function renderInvoiceAction(Request $request, $number)
     {
         $order = $this->findOrderOr404($number);
+        $this->checkAccessToOrder($order);
 
         if (!$order->isInvoiceAvailable()) {
             throw $this->createNotFoundException('The invoice can not yet be generated.');
@@ -131,16 +134,13 @@ class OrderController extends FOSRestController
     public function showPaymentsAction($number)
     {
         $order = $this->findOrderOr404($number);
-
-        if ($order->getCustomer() !== $this->getCustomer()) {
-            return $this->createAccessDeniedException();
-        }
+        $this->checkAccessToOrder($order);
 
         if ($order->getLastPayment(PaymentInterface::STATE_COMPLETED)) {
             return $this->redirectToRoute('sylius_checkout_thank_you', ['id' => $order->getId()]);
         }
 
-        $this->get('sylius.order_processing.payment_processor')->createNewPaymentForOrder($order);
+        $this->get('sylius.order_processing.payment_processor')->processOrderPayments($order);
         $this->getOrderManager()->flush();
 
         return $this->render('SyliusWebBundle:Frontend/Account/Order:showPayments.html.twig', ['order' => $order]);
@@ -160,6 +160,7 @@ class OrderController extends FOSRestController
         $this->getPayum()->getGateway($token->getGatewayName())->execute($status);
         $payment = $status->getFirstModel();
         $order = $payment->getOrder();
+        $this->checkAccessToOrder($order);
 
         $orderStateResolver = $this->get('sylius.order_processing.state_resolver');
         $orderStateResolver->resolvePaymentState($order);
@@ -167,7 +168,7 @@ class OrderController extends FOSRestController
 
         $this->getOrderManager()->flush();
         if ($status->isCanceled() || $status->isFailed()) {
-            return $this->redirectToRoute('sylius_account_order_payment_index', ['number' => $order->getNumber()]);
+            return $this->redirectToRoute('sylius_order_payment_index', ['number' => $order->getNumber()]);
         }
 
         return $this->redirectToRoute('sylius_checkout_thank_you', ['id' => $order->getId()]);
@@ -186,7 +187,7 @@ class OrderController extends FOSRestController
         $captureToken = $this->getTokenFactory()->createCaptureToken(
             $payment->getMethod()->getGateway(),
             $payment,
-            'sylius_account_order_after_purchase'
+            'sylius_order_after_purchase'
         );
 
         return $this->redirect($captureToken->getTargetUrl());
@@ -201,14 +202,11 @@ class OrderController extends FOSRestController
     }
 
     /**
-     * Finds order or throws 404
-     *
      * @param string $number
      *
      * @return OrderInterface
      *
      * @throws NotFoundHttpException
-     * @throws AccessDeniedException
      */
     protected function findOrderOr404($number)
     {
@@ -217,17 +215,28 @@ class OrderController extends FOSRestController
             throw $this->createNotFoundException('The order does not exist.');
         }
 
-        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMINISTRATION_ACCESS')
-            && (!$this->getCustomer() || $this->getCustomer()->getId() !== $order->getCustomer()->getId())
-        ) {
-            throw new AccessDeniedException();
-        }
-
         return $order;
     }
 
     /**
-     * @return null|\Sylius\Component\User\Model\CustomerInterface
+     * @param OrderInterface $order
+     *
+     * @throws AccessDeniedException
+     */
+    protected function checkAccessToOrder(OrderInterface $order)
+    {
+        $customerGuestId = $this->get('session')->get('sylius_customer_guest_id');
+        $customerGuest = $this->get('sylius.repository.customer')->find($customerGuestId);
+        $loggedInCustomer = $this->getCustomer();
+        $expectedCustomer = $order->getCustomer();
+
+        if ($expectedCustomer !== $customerGuest && $expectedCustomer !== $loggedInCustomer) {
+            throw $this->createAccessDeniedException();
+        }
+    }
+
+    /**
+     * @return null|CustomerInterface
      */
     protected function getCustomer()
     {

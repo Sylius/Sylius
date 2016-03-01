@@ -41,6 +41,7 @@ class PaymentProcessor implements PaymentProcessorInterface
     {
         /** @var $payment PaymentInterface */
         $payment = $this->paymentFactory->createWithAmountAndCurrency($order->getTotal(), $order->getCurrency());
+        $this->setPaymentMethodIfNeeded($order, $payment);
 
         $order->addPayment($payment);
     }
@@ -48,16 +49,13 @@ class PaymentProcessor implements PaymentProcessorInterface
     /**
      * {@inheritdoc}
      */
-    public function createNewPaymentForOrder(OrderInterface $order)
+    private function setPaymentMethodIfNeeded(OrderInterface $order, PaymentInterface $payment)
     {
         $lastCancelledPayment = $order->getLastPayment(PaymentInterface::STATE_CANCELLED);
         $lastNewPayment = $order->getLastPayment(PaymentInterface::STATE_NEW);
 
         if (!$lastNewPayment && $lastCancelledPayment) {
-            $payment = $this->paymentFactory->createWithAmountAndCurrency($order->getTotal(), $order->getCurrency());
             $payment->setMethod($lastCancelledPayment->getMethod());
-
-            $order->addPayment($payment);
         }
     }
 }

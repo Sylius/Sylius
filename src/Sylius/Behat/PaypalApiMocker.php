@@ -11,13 +11,16 @@
 
 namespace Sylius\Behat;
 
+use Guzzle\Http\Message\Response;
+use Guzzle\Stream\Stream;
 use Mockery\Mock;
+use Payum\Core\Bridge\Guzzle\HttpClient;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class PaypalMockedApiResponses implements PaypalMockedApiResponsesInterface
+class PaypalApiMocker implements PaypalApiMockerInterface
 {
     /**
      * @var KernelInterface
@@ -67,9 +70,9 @@ class PaypalMockedApiResponses implements PaypalMockedApiResponsesInterface
         $getExpressCheckoutDetailsStream = $this->mockStream('TOKEN=EC%2d9EV13959UR209410U&BILLINGAGREEMENTACCEPTEDSTATUS=0&CHECKOUTSTATUS=PaymentActionNotInitiated&TIMESTAMP=2016%2d02%2d29T11%3a19%3a22Z&CORRELATIONID=90278b4d5eaf9&ACK=Success&VERSION=65%2e1&BUILD=18316154&CURRENCYCODE=EUR&AMT=19%2e99&ITEMAMT=19%2e99&SHIPPINGAMT=0%2e00&HANDLINGAMT=0%2e00&TAXAMT=0%2e00&INVNUM=92757%2d10268&NOTIFYURL=http%3a%2f%2f127%2e0%2e0%2e1%3a8080%2fpayment%2fnotify%2f%2dTMb4VEfLDAtynAUVdt_aaWAskDTgdZVzoeu3SlQtDw&INSURANCEAMT=0%2e00&SHIPDISCAMT=0%2e00&L_QTY0=1&L_TAXAMT0=0%2e00&L_AMT0=19%2e99&L_ITEMWEIGHTVALUE0=%20%20%200%2e00000&L_ITEMLENGTHVALUE0=%20%20%200%2e00000&L_ITEMWIDTHVALUE0=%20%20%200%2e00000&L_ITEMHEIGHTVALUE0=%20%20%200%2e00000&PAYMENTREQUEST_0_CURRENCYCODE=EUR&PAYMENTREQUEST_0_AMT=19%2e99&PAYMENTREQUEST_0_ITEMAMT=19%2e99&PAYMENTREQUEST_0_SHIPPINGAMT=0%2e00&PAYMENTREQUEST_0_HANDLINGAMT=0%2e00&PAYMENTREQUEST_0_TAXAMT=0%2e00&PAYMENTREQUEST_0_INVNUM=92757%2d10268&PAYMENTREQUEST_0_NOTIFYURL=http%3a%2f%2f127%2e0%2e0%2e1%3a8080%2fpayment%2fnotify%2f%2dTMb4VEfLDAtynAUVdt_aaWAskDTgdZVzoeu3SlQtDw&PAYMENTREQUEST_0_INSURANCEAMT=0%2e00&PAYMENTREQUEST_0_SHIPDISCAMT=0%2e00&PAYMENTREQUEST_0_INSURANCEOPTIONOFFERED=false&L_PAYMENTREQUEST_0_QTY0=1&L_PAYMENTREQUEST_0_TAXAMT0=0%2e00&L_PAYMENTREQUEST_0_AMT0=19%2e99&L_PAYMENTREQUEST_0_ITEMWEIGHTVALUE0=%20%20%200%2e00000&L_PAYMENTREQUEST_0_ITEMLENGTHVALUE0=%20%20%200%2e00000&L_PAYMENTREQUEST_0_ITEMWIDTHVALUE0=%20%20%200%2e00000&L_PAYMENTREQUEST_0_ITEMHEIGHTVALUE0=%20%20%200%2e00000&PAYMENTREQUESTINFO_0_ERRORCODE=0');
         $getExpressCheckoutDetailsResponse = $this->mockHttpResponse(200, $getExpressCheckoutDetailsStream);
 
-        $this->kernel->getContainer()->mock('payum.http_client', 'Payum\Core\Bridge\Guzzle\HttpClient')
+        $this->kernel->getContainer()->mock('payum.http_client', HttpClient::class)
             ->shouldReceive('send')
-            ->times(2)
+            ->twice()
             ->andReturn($setExpressCheckoutResponse, $getExpressCheckoutDetailsResponse)
         ;
     }
@@ -81,7 +84,7 @@ class PaypalMockedApiResponses implements PaypalMockedApiResponsesInterface
      */
     private function mockStream($content)
     {
-        $mockedStream = $this->mockObject('GuzzleHttp\Psr7\Stream');
+        $mockedStream = $this->mockObject(Stream::class);
         $mockedStream->shouldReceive('getContents')->once()->andReturn($content);
         $mockedStream->shouldReceive('close')->once()->andReturn();
 
@@ -96,7 +99,7 @@ class PaypalMockedApiResponses implements PaypalMockedApiResponsesInterface
      */
     private function mockHttpResponse($statusCode, $streamMock)
     {
-        $mockedHttpResponse = $this->mockObject('GuzzleHttp\Psr7\Response');
+        $mockedHttpResponse = $this->mockObject(Response::class);
         $mockedHttpResponse->shouldReceive('getStatusCode')->once()->andReturn($statusCode);
         $mockedHttpResponse->shouldReceive('getBody')->once()->andReturn($streamMock);
 

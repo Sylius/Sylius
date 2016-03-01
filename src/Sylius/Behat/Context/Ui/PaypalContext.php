@@ -13,7 +13,7 @@ namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\External\PaypalExpressCheckoutPageInterface;
-use Sylius\Behat\PaypalMockedApiResponsesInterface;
+use Sylius\Behat\PaypalApiMockerInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -26,17 +26,17 @@ final class PaypalContext implements Context
     private $paypalExpressCheckoutPage;
 
     /**
-     * @var PaypalMockedApiResponsesInterface
+     * @var PaypalApiMockerInterface
      */
     private $paypalMockedApiResponses;
 
     /**
      * @param PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage
-     * @param PaypalMockedApiResponsesInterface $paypalMockedApiResponses
+     * @param PaypalApiMockerInterface $paypalMockedApiResponses
      */
     public function __construct(
         PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage,
-        PaypalMockedApiResponsesInterface $paypalMockedApiResponses
+        PaypalApiMockerInterface $paypalMockedApiResponses
     ) {
         $this->paypalExpressCheckoutPage = $paypalExpressCheckoutPage;
         $this->paypalMockedApiResponses = $paypalMockedApiResponses;

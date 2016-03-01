@@ -14,7 +14,7 @@ namespace Sylius\Behat;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-interface PaypalMockedApiResponsesInterface
+interface PaypalApiMockerInterface
 {
     public function mockApiSuccessfulPaymentResponse();
     public function mockApiPaymentInitializeResponse();

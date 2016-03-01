@@ -24,9 +24,4 @@ interface PaymentProcessorInterface
      * @param OrderInterface $order
      */
     public function processOrderPayments(OrderInterface $order);
-
-    /**
-     * @param OrderInterface $order
-     */
-    public function createNewPaymentForOrder(OrderInterface $order);
 }

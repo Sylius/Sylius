@@ -74,8 +74,7 @@ Feature: Checkout security
         And I select the "Offline" radio button
         And I press "Continue"
         And I click "Place order"
-        Then I should be on the checkout thank you page
-        And I should see "Thank you for your order!"
+        Then I should see "Thank you"
 
     Scenario: Creating account without first and last name
         When I fill in the following:

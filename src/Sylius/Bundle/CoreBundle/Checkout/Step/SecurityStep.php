@@ -143,6 +143,7 @@ class SecurityStep extends CheckoutStep
         $order->setCustomer($customer);
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SECURITY_PRE_COMPLETE, $order);
         $this->saveResource($order);
+        $this->get('session')->set('sylius_customer_guest_id', $customer->getId());
 
         return $this->complete();
     }

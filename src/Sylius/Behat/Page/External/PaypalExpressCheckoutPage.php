@@ -83,19 +83,12 @@ class PaypalExpressCheckoutPage extends Page implements PaypalExpressCheckoutPag
     {
         $tokens = $this->securityTokenRepository->findAll();
 
-        $captureToken = null;
         foreach ($tokens as $token) {
             if (strpos($token->getTargetUrl(), 'capture')) {
-                $captureToken = $token;
-
-                break;
+                return $token;
             }
         }
 
-        if (null === $captureToken) {
-            throw new \RuntimeException('Cannot find capture token, check if you are after proper checkout steps');
-        }
-
-        return $captureToken;
+        throw new \RuntimeException('Cannot find capture token, check if you are after proper checkout steps');
     }
 }

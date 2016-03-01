@@ -51,12 +51,11 @@ class CheckoutThankYouPage extends SymfonyPage implements CheckoutThankYouPageIn
     protected function getUrl(array $urlParameters = [])
     {
         if (!isset($urlParameters['id'])) {
-            throw new \RuntimeException(sprintf('%s getUrl method require order id', self::class));
+            throw new \InvalidArgumentException(sprintf('This page %s requires order id to be passed as parameter', self::class));
         }
 
         return parent::getUrl($urlParameters);
     }
-
 
     /**
      * @return string
