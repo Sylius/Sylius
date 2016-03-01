@@ -23,8 +23,6 @@
         {%- endif %}
 
         {{ misc.payment_form(payment) }}
-
-        {{ buttons.delete(path('sylius_backend_payment_delete', {'id': payment.id}), null, false, false) }}
     </div>
     <h1><span class="glyphicon glyphicon-calendar"></span> {{ payment.method.name }} - {{ payment.amount|sylius_money }}</h1>
 </div>
