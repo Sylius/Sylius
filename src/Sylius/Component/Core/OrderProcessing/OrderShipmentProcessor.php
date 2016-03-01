@@ -15,22 +15,16 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
- * Shipment factory.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class OrderShipmentFactory implements OrderShipmentFactoryInterface
+class OrderShipmentProcessor implements OrderShipmentProcessorInterface
 {
     /**
-     * Shipment repository.
-     *
      * @var FactoryInterface
      */
     protected $shipmentFactory;
 
     /**
-     * Constructor.
-     *
      * @param FactoryInterface $shipmentFactory
      */
     public function __construct(FactoryInterface $shipmentFactory)
@@ -41,7 +35,7 @@ class OrderShipmentFactory implements OrderShipmentFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createForOrder(OrderInterface $order)
+    public function processOrderShipment(OrderInterface $order)
     {
         if ($order->hasShipments()) {
             $shipment = $order->getShipments()->first();

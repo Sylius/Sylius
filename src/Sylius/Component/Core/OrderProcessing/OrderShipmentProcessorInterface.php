@@ -14,16 +14,12 @@ namespace Sylius\Component\Core\OrderProcessing;
 use Sylius\Component\Core\Model\OrderInterface;
 
 /**
- * Order shipment factory.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OrderShipmentFactoryInterface
+interface OrderShipmentProcessorInterface
 {
     /**
-     * Create shipment for order.
-     *
      * @param OrderInterface $order
      */
-    public function createForOrder(OrderInterface $order);
+    public function processOrderShipment(OrderInterface $order);
 }
