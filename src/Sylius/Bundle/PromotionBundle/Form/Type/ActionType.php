@@ -46,18 +46,6 @@ class ActionType extends AbstractConfigurationType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        parent::configureOptions($resolver);
-
-        $resolver->setDefaults([
-            'configuration_type' => ActionInterface::TYPE_FIXED_DISCOUNT,
-        ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'sylius_promotion_action';

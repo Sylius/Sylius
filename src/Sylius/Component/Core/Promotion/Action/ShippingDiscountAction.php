@@ -24,6 +24,8 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
  */
 class ShippingDiscountAction extends DiscountAction
 {
+    const TYPE = 'shipping_discount';
+
     /**
      * {@inheritdoc}
      */

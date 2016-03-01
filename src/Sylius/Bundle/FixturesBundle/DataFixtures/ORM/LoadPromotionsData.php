@@ -13,9 +13,10 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
-use Sylius\Component\Core\Model\PromotionRuleInterface;
-use Sylius\Component\Promotion\Model\ActionInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
+use Sylius\Component\Core\Model\PromotionRuleInterface;
+use Sylius\Component\Core\Promotion\Action\FixedDiscountAction;
+use Sylius\Component\Promotion\Model\ActionInterface;
 
 /**
  * Default promotion fixtures.
@@ -38,7 +39,7 @@ class LoadPromotionsData extends DataFixture
             3,
             $channel,
             [$this->createRule(PromotionRuleInterface::TYPE_CART_QUANTITY, ['count' => 3, 'equal' => true])],
-            [$this->createAction(ActionInterface::TYPE_FIXED_DISCOUNT, ['amount' => 500])]
+            [$this->createAction(FixedDiscountAction::TYPE, ['amount' => 500])]
         );
 
         $manager->persist($promotion);
@@ -50,7 +51,7 @@ class LoadPromotionsData extends DataFixture
             2,
             $channel,
             [$this->createRule(PromotionRuleInterface::TYPE_ITEM_TOTAL, ['amount' => 10000, 'equal' => true])],
-            [$this->createAction(ActionInterface::TYPE_FIXED_DISCOUNT, ['amount' => 250])]
+            [$this->createAction(FixedDiscountAction::TYPE, ['amount' => 250])]
         );
 
         $manager->persist($promotion);
@@ -62,7 +63,7 @@ class LoadPromotionsData extends DataFixture
             1,
             $channel,
             [$this->createRule(PromotionRuleInterface::TYPE_NTH_ORDER, ['nth' => 3])],
-            [$this->createAction(ActionInterface::TYPE_FIXED_DISCOUNT, ['amount' => 500])]
+            [$this->createAction(FixedDiscountAction::TYPE, ['amount' => 500])]
         );
 
         $manager->persist($promotion);
@@ -74,7 +75,7 @@ class LoadPromotionsData extends DataFixture
             0,
             $channel,
             [$this->createRule(PromotionRuleInterface::TYPE_SHIPPING_COUNTRY, ['country' => $this->getReference('Sylius.Country.DE')->getId()])],
-            [$this->createAction(ActionInterface::TYPE_FIXED_DISCOUNT, ['amount' => 500])]
+            [$this->createAction(FixedDiscountAction::TYPE, ['amount' => 500])]
         );
 
         $manager->persist($promotion);

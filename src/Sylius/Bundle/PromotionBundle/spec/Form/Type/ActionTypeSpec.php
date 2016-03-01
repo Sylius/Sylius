@@ -62,22 +62,6 @@ class ActionTypeSpec extends ObjectBehavior
         ]);
     }
 
-    function it_should_define_assigned_data_class(OptionsResolver $resolver)
-    {
-        $resolver
-            ->setDefaults([
-                'data_class' => 'Action',
-                'validation_groups' => ['Default'],
-            ])
-            ->shouldBeCalled()
-        ;
-
-        $resolver->setDefined(['configuration_type'])->shouldBeCalled();
-        $resolver->setDefaults(['configuration_type' => ActionInterface::TYPE_FIXED_DISCOUNT])->shouldBeCalled();
-
-        $this->configureOptions($resolver);
-    }
-
     function it_has_a_name()
     {
         $this->getName()->shouldReturn('sylius_promotion_action');
