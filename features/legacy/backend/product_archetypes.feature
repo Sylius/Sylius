@@ -7,13 +7,13 @@ Feature: Product archetypes
     Background:
         Given store has default configuration
         And there are following options:
-            | code | name           | presentation | values                                            |
-            | O1   | T-Shirt color  | Color        | Red[OV1], Blue[OV2], Green[OV3]                   |
-            | O2   | T-Shirt size   | Size         | S[OV4], M[OV5], L[OV6]                            |
-            | O3   | Bag color      | Color        | Black[OV7], Light balsamic[OV8]                   |
-            | O4   | Beverage size  | Size         | Tall[OV9], Grande[OV10], Venti[OV11]              |
-            | O5   | Beverage milk  | Milk         | None[OV12], Whole[OV13], Skinny[OV14], Soya[OV15] |
-            | O6   | Coffee variety | Variety      | Colombian[OV16], Ethiopian[OV17]                  |
+            | code | name           | values                                            |
+            | O1   | T-Shirt color  | Red[OV1], Blue[OV2], Green[OV3]                   |
+            | O2   | T-Shirt size   | S[OV4], M[OV5], L[OV6]                            |
+            | O3   | Bag color      | Black[OV7], Light balsamic[OV8]                   |
+            | O4   | Beverage size  | Tall[OV9], Grande[OV10], Venti[OV11]              |
+            | O5   | Beverage milk  | None[OV12], Whole[OV13], Skinny[OV14], Soya[OV15] |
+            | O6   | Coffee variety | Colombian[OV16], Ethiopian[OV17]                  |
         And there are following attributes:
             | name               | presentation   | type     |
             | T-Shirt collection | Collection     | text     |
@@ -23,12 +23,12 @@ Feature: Product archetypes
             | Coffee caffeine    | Caffeine       | checkbox |
         And there is archetype "T-Shirt" with following configuration:
             | code       | Arch1                              |
-            | options    | T-Shirt color, T-Shirt size        |
+            | options    | O1, O2                             |
             | attributes | T-Shirt collection, T-Shirt fabric |
         And there is archetype "Beverage" with following configuration:
-            | code       | Arch2                        |
-            | options    | Beverage size, Beverage milk |
-            | attributes | Beverage calories            |
+            | code       | Arch2             |
+            | options    | O4, O5            |
+            | attributes | Beverage calories |
         And I am logged in as administrator
 
     Scenario: Seeing index of all archetypes

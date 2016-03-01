@@ -10,7 +10,7 @@ sylius_backend_product_option_index:
             template: SyliusWebBundle:Backend/ProductOption:index.html.twig
             sortable: true
             sorting:
-                name: desc
+                code: desc
 
 sylius_backend_product_option_create:
     path: /new

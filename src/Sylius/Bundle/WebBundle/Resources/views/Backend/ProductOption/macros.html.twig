@@ -9,10 +9,9 @@
             <tr>
                 <th>{{ sylius_resource_sort('id', '#id') }}</th>
                 <th>{{ sylius_resource_sort('code', 'sylius.ui.code'|trans) }}</th>
-                <th>{{ sylius_resource_sort('name', 'sylius.product_option.name'|trans) }}</th>
                 {#TODO allow sort by translation field#}
                 {#<th>{{ sylius_resource_sort('presentation', 'sylius.product_option.presentation'|trans) }}</th>#}
-                <th>{{ 'sylius.product_option.presentation'|trans }}</th>
+                <th>{{ 'sylius.product_option.name'|trans }}</th>
                 <th>{{ 'sylius.product_option.values'|trans }}</th>
                 <th>{{ sylius_resource_sort('updatedAt', 'sylius.product_option.updated_at'|trans) }}</th>
                 <th></th>
@@ -24,7 +23,6 @@
                 <td>{{ option.id }}</td>
                 <td>{{ option.code }}</td>
                 <td>{{ option.name }}</td>
-                <td>{{ option.presentation }}</td>
                 <td>
                     <ul class="list-unstyled">
                         {% for value in option.values %}

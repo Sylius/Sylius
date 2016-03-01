@@ -35,18 +35,11 @@ class Option extends AbstractTranslatable implements OptionInterface
     protected $code;
 
     /**
-     * Internal name.
-     *
-     * @var string
-     */
-    protected $name;
-
-    /**
      * Displayed to user.
      *
      * @var string
      */
-    protected $presentation;
+    protected $name;
 
     /**
      * @var Collection|OptionValueInterface[]
@@ -66,7 +59,7 @@ class Option extends AbstractTranslatable implements OptionInterface
      */
     public function __toString()
     {
-        return $this->name;
+        return $this->getName();
     }
 
     /**
@@ -98,7 +91,7 @@ class Option extends AbstractTranslatable implements OptionInterface
      */
     public function getName()
     {
-        return $this->name;
+        return $this->translate()->getName();
     }
 
     /**
@@ -106,23 +99,7 @@ class Option extends AbstractTranslatable implements OptionInterface
      */
     public function setName($name)
     {
-        $this->name = $name;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPresentation()
-    {
-        return $this->translate()->getPresentation();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPresentation($presentation)
-    {
-        $this->translate()->setPresentation($presentation);
+        $this->translate()->setName($name);
     }
 
     /**

@@ -26,7 +26,7 @@ class OptionTranslation extends AbstractTranslation implements OptionTranslation
     /**
      * @var string
      */
-    protected $presentation;
+    protected $name;
 
     /**
      * {@inheritdoc}
@@ -39,16 +39,16 @@ class OptionTranslation extends AbstractTranslation implements OptionTranslation
     /**
      * {@inheritdoc}
      */
-    public function getPresentation()
+    public function getName()
     {
-        return $this->presentation;
+        return $this->name;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setPresentation($presentation)
+    public function setName($name)
     {
-        $this->presentation = $presentation;
+        $this->name = $name;
     }
 }

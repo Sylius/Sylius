@@ -41,10 +41,9 @@ class VariantMatchTypeSpec extends ObjectBehavior
     {
         $variable->getOptions()->shouldBeCalled()->willReturn([$option]);
         $option->getName()->shouldBeCalled()->willReturn('option_name');
-        $option->getPresentation()->shouldBeCalled()->willReturn('option_presentation');
 
         $builder->add('option-name', 'sylius_varibale_name_option_value_choice', [
-            'label' => 'option_presentation',
+            'label' => 'option_name',
             'option' => $option,
             'property_path' => '[0]',
         ])->shouldBeCalled();

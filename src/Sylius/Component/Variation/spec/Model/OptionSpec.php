@@ -55,25 +55,14 @@ class OptionSpec extends ObjectBehavior
 
     function its_name_should_be_mutable()
     {
-        $this->setName('T-Shirt size');
-        $this->getName()->shouldReturn('T-Shirt size');
+        $this->setName('Size');
+        $this->getName()->shouldReturn('Size');
     }
 
     function it_returns_name_when_converted_to_string()
     {
         $this->setName('T-Shirt color');
         $this->__toString()->shouldReturn('T-Shirt color');
-    }
-
-    function it_should_not_have_presentation_by_default()
-    {
-        $this->getPresentation()->shouldReturn(null);
-    }
-
-    function its_presentation_should_be_mutable()
-    {
-        $this->setPresentation('Size');
-        $this->getPresentation()->shouldReturn('Size');
     }
 
     function it_should_initialize_values_collection_by_default()
