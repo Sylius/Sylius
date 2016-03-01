@@ -55,4 +55,9 @@ interface AttributeInterface extends CodeAwareInterface, TimestampableInterface,
      * @param string $storageType
      */
     public function setStorageType($storageType);
+
+    /**
+     * @return bool
+     */
+    public function isTextType();
 }

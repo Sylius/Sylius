@@ -167,4 +167,12 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     {
         return $this->storageType;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isTextType()
+    {
+        return AttributeValueInterface::STORAGE_TEXT == $this->getType() ? true : false;
+    }
 }

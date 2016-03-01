@@ -30,7 +30,9 @@
 {% endfor %}
 
 {% macro formField(item, count, id, prefix, subject, applicationName) %}
-    {% if item.children|length > 0 %}
+    {{ dump(item.children|length > 0 and item.vars.name != "translations") }}
+
+    {% if (item.children|length > 0 and item.vars.name != "translations") %}
         {% set prefix = prefix~'_'~item.vars.name %}
         {% for child in item.children %}
             {{ _self.formField(child, count, id, prefix) }}
