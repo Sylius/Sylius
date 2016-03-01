@@ -15,7 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Association\Model\AssociableInterface;
 use Sylius\Component\Association\Model\AssociationInterface;
 use Sylius\Component\Association\Model\AssociationType;
-use Sylius\Component\Product\Model\ProductInterface;
 
 /**
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
@@ -33,7 +32,7 @@ class AssociationSpec extends ObjectBehavior
         $this->shouldHaveType(AssociationInterface::class);
     }
 
-    function it_has_owner_object(ProductInterface $product)
+    function it_has_owner_object(AssociableInterface $product)
     {
         $this->setOwner($product);
         $this->getOwner()->shouldReturn($product);

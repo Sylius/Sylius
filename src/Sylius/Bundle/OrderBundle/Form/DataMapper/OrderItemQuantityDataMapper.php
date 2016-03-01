@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\OrderBundle\Form\DataMapper;
 
-use Sylius\Bundle\OrderBundle\Modifier\OrderItemQuantityModifierInterface;
+use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Symfony\Component\Form\DataMapperInterface;
 
 /**

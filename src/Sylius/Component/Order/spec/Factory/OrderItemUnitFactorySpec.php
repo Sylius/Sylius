@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\OrderBundle\Factory;
+namespace spec\Sylius\Component\Order\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\OrderBundle\Factory\OrderItemUnitFactoryInterface;
+use Sylius\Component\Order\Factory\OrderItemUnitFactoryInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Model\OrderItemUnit;
 use Sylius\Component\Order\Model\OrderItemUnitInterface;
@@ -30,7 +30,7 @@ class OrderItemUnitFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\OrderBundle\Factory\OrderItemUnitFactory');
+        $this->shouldHaveType('Sylius\Component\Order\Factory\OrderItemUnitFactory');
     }
 
     function it_implements_factory_interface()

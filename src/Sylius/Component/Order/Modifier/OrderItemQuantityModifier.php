@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\OrderBundle\Modifier;
+namespace Sylius\Component\Order\Modifier;
 
-use Sylius\Bundle\OrderBundle\Factory\OrderItemUnitFactoryInterface;
+use Sylius\Component\Order\Factory\OrderItemUnitFactoryInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 
 /**

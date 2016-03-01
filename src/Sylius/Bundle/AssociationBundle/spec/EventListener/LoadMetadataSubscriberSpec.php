@@ -29,10 +29,14 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
             'product' => [
                 'subject' => 'Some\App\Product\Entity\Product',
                 'association' => [
-                    'model' => 'Some\App\Product\Entity\EntityAssociation',
+                    'classes' => [
+                        'model' => 'Some\App\Product\Entity\EntityAssociation',
+                    ],
                 ],
                 'association_type' => [
-                    'model' => 'Some\App\Product\Entity\AssociationType',
+                    'classes' => [
+                        'model' => 'Some\App\Product\Entity\AssociationType',
+                    ]
                 ],
             ],
         ]);
@@ -86,12 +90,23 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
         $associationMapping = [
             'fieldName' => 'associatedObjects',
             'targetEntity' => 'Some\App\Product\Entity\Product',
-            'joinColumns' => [[
-                'name' => 'product_id',
-                'referencedColumnName' => 'id',
-                'nullable' => false,
-                'onDelete' => 'CASCADE',
-            ]],
+            'joinTable' => [
+                'name' => 'sylius_product_association_product',
+                'joinColumns' => [[
+                    'name' => 'association_id',
+                    'referencedColumnName' => 'id',
+                    'nullable' => false,
+                    'unique' => false,
+                    'onDelete' => 'CASCADE',
+                ]],
+                'inverseJoinColumns' => [[
+                    'name' => 'product_id',
+                    'referencedColumnName' => 'id',
+                    'nullable' => false,
+                    'unique' => false,
+                    'onDelete' => 'CASCADE',
+                ]],
+            ],
         ];
         $associationTypeMapping = [
             'fieldName' => 'type',

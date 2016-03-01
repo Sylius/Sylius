@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\OrderBundle\Modifier;
+namespace spec\Sylius\Component\Order\Modifier;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\OrderBundle\Factory\OrderItemUnitFactoryInterface;
-use Sylius\Bundle\OrderBundle\Modifier\OrderItemQuantityModifierInterface;
+use Sylius\Component\Order\Factory\OrderItemUnitFactoryInterface;
+use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 
@@ -31,7 +31,7 @@ class OrderItemQuantityModifierSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\OrderBundle\Modifier\OrderItemQuantityModifier');
+        $this->shouldHaveType('Sylius\Component\Order\Modifier\OrderItemQuantityModifier');
     }
 
     function it_implements_order_item_quantity_modifier_interface()
