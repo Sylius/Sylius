@@ -185,7 +185,7 @@ class AttributeValue extends AbstractTranslatable implements AttributeValueInter
      */
     public function getText()
     {
-        return $this->text;
+        return $this->translate()->getValue();
     }
 
     /**
@@ -193,7 +193,7 @@ class AttributeValue extends AbstractTranslatable implements AttributeValueInter
      */
     public function setText($text)
     {
-        $this->text = $text;
+        $this->translate()->setValue($text);
     }
 
     /**
