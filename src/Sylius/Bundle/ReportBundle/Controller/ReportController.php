@@ -37,7 +37,7 @@ class ReportController extends ResourceController
 
         $report = $this->findOr404($configuration);
 
-        $formType = sprintf('sylius_data_fetcher_%s', $report->getDataFetcher());
+        $formType = $report->getDataFetcher();
         $configurationForm = $this->container->get('form.factory')->createNamed(
             'configuration',
             $formType,
