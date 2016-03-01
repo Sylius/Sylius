@@ -15,16 +15,19 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Attribute\AttributeType\TextAttributeType;
 use Sylius\Component\Resource\Model\TimestampableTrait;
-use Sylius\Component\Translation\Model\AbstractTranslatable;
+use Sylius\Component\Translation\Model\TranslatableTrait;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class Attribute extends AbstractTranslatable implements AttributeInterface
+class Attribute implements AttributeInterface
 {
     use TimestampableTrait;
+    use TranslatableTrait {
+        __construct as private initializeTranslationsCollection;
+    }
 
     /**
      * @var mixed
@@ -58,7 +61,7 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
 
     public function __construct()
     {
-        parent::__construct();
+        $this->initializeTranslationsCollection();
 
         $this->values = new ArrayCollection();
         $this->createdAt = new \DateTime();

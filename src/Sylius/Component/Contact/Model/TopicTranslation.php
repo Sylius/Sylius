@@ -39,7 +39,7 @@ class TopicTranslation extends AbstractTranslation implements TopicTranslationIn
      */
     public function __toString()
     {
-        return $this->title;
+        return (string) $this->title;
     }
 
     public function getId()

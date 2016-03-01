@@ -15,7 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Resource\Model\TimestampableTrait;
-use Sylius\Component\Translation\Model\AbstractTranslatable;
+use Sylius\Component\Translation\Model\TranslatableTrait;
 use Sylius\Component\Variation\Model\OptionInterface;
 
 /**
@@ -25,9 +25,12 @@ use Sylius\Component\Variation\Model\OptionInterface;
  * @author Adam Elsodaney <adam.elso@gmail.com>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class Archetype extends AbstractTranslatable implements ArchetypeInterface
+class Archetype implements ArchetypeInterface
 {
     use TimestampableTrait;
+    use TranslatableTrait {
+        __construct as private initializeTranslationsCollection;
+    }
 
     /**
      * @var mixed
@@ -58,13 +61,16 @@ class Archetype extends AbstractTranslatable implements ArchetypeInterface
 
     public function __construct()
     {
+        $this->initializeTranslationsCollection();
+
         $this->attributes = new ArrayCollection();
         $this->options = new ArrayCollection();
         $this->createdAt = new \DateTime();
-
-        parent::__construct();
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->getName();

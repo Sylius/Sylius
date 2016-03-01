@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Component\Translation\Model\TranslatableInterface;
 use Sylius\Component\Variation\Model\OptionInterface;
 
 /**
@@ -25,7 +26,11 @@ use Sylius\Component\Variation\Model\OptionInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Adam Elsodaney <adam.elso@gmail.com>
  */
-interface ArchetypeInterface extends CodeAwareInterface, TimestampableInterface, ArchetypeTranslationInterface
+interface ArchetypeInterface extends
+    CodeAwareInterface,
+    TimestampableInterface,
+    ArchetypeTranslationInterface,
+    TranslatableInterface
 {
     /**
      * Returns all prototype attributes.

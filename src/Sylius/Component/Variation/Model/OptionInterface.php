@@ -14,6 +14,7 @@ namespace Sylius\Component\Variation\Model;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Component\Translation\Model\TranslatableInterface;
 
 /**
  * Model implementing this interface represents the option type, which can be
@@ -21,7 +22,11 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OptionInterface extends CodeAwareInterface, TimestampableInterface, OptionTranslationInterface
+interface OptionInterface extends
+    CodeAwareInterface,
+    TimestampableInterface,
+    OptionTranslationInterface,
+    TranslatableInterface
 {
     /**
      * Returns all option values.

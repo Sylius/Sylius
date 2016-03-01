@@ -11,13 +11,17 @@
 
 namespace Sylius\Component\Variation\Model;
 
-use Sylius\Component\Translation\Model\AbstractTranslatable;
+use Sylius\Component\Translation\Model\TranslatableTrait;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class OptionValue extends AbstractTranslatable implements OptionValueInterface
+class OptionValue implements OptionValueInterface
 {
+    use TranslatableTrait {
+        __construct as private initializeTranslationCollection;
+    }
+
     /**
      * @var mixed
      */
@@ -37,6 +41,11 @@ class OptionValue extends AbstractTranslatable implements OptionValueInterface
      * @var OptionInterface
      */
     protected $option;
+
+    public function __construct()
+    {
+        $this->initializeTranslationCollection();
+    }
 
     /**
      * {@inheritdoc}

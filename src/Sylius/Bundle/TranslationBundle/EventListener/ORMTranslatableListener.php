@@ -18,6 +18,7 @@ use Doctrine\ORM\Events;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Sylius\Component\Translation\Model\TranslatableInterface;
+use Sylius\Component\Translation\Model\TranslationInterface;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
@@ -55,7 +56,7 @@ class ORMTranslatableListener extends AbstractTranslatableListener implements Ev
             $this->mapTranslatable($classMetadata);
         }
 
-        if ($reflection->implementsInterface('Sylius\Component\Translation\Model\TranslationInterface')) {
+        if ($reflection->implementsInterface(TranslationInterface::class)) {
             $this->mapTranslation($classMetadata);
         }
     }
@@ -149,7 +150,7 @@ class ORMTranslatableListener extends AbstractTranslatableListener implements Ev
     }
 
     /**
-     * Check if an unique constraint has been defined.
+     * Check if a unique constraint has been defined.
      *
      * @param ClassMetadata $metadata
      * @param array         $columns
