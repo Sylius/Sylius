@@ -42,7 +42,7 @@ class ProductAccessor extends PropertyAccessor
             $propertyPath = strtolower((string) $propertyPath);
             foreach ($product->getAvailableVariants() as $variant) {
                 foreach ($variant->getOptions() as $option) {
-                    if ($propertyPath === strtolower($option->getPresentation())) {
+                    if ($propertyPath === strtolower($option->getOptionCode())) {
                         $tags[] = $option->getValue();
                     }
                 }
