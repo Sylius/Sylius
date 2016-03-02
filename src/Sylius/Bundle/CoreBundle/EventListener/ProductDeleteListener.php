@@ -37,7 +37,7 @@ class ProductDeleteListener
     /**
      * @param LifecycleEventArgs $args
      */
-    public function postSoftDelete(LifecycleEventArgs $args)
+    public function postRemove(LifecycleEventArgs $args)
     {
         if (!($product = $args->getEntity()) instanceof ProductInterface) {
             return;

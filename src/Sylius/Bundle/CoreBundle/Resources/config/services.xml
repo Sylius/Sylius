@@ -401,7 +401,7 @@
 
         <service id="sylius.listener.product_delete" class="%sylius.listener.product_delete.class%">
             <argument type="service" id="service_container"/>
-            <tag name="doctrine.event_listener" event="postSoftDelete" method="postSoftDelete" />
+            <tag name="doctrine.event_listener" event="postRemove" method="postRemove" />
         </service>
 
         <service id="sylius.image_uploader" class="%sylius.image_uploader.class%">

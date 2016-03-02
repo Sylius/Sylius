@@ -15,7 +15,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Archetype\Model\ArchetypeInterface as BaseArchetypeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface as BaseAttributeValueInterface;
-use Sylius\Component\Resource\Model\SoftDeletableTrait;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
@@ -28,7 +27,7 @@ use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
  */
 class Product implements ProductInterface
 {
-    use SoftDeletableTrait, TimestampableTrait, ToggleableTrait;
+    use TimestampableTrait, ToggleableTrait;
     use TranslatableTrait {
         __construct as private initializeTranslationsCollection;
     }

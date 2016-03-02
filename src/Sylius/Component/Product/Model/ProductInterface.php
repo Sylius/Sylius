@@ -26,7 +26,6 @@ use Sylius\Component\Resource\Model\TranslatableInterface;
 interface ProductInterface extends
     ArchetypeSubjectInterface,
     SlugAwareInterface,
-    SoftDeletableInterface,
     TimestampableInterface,
     ToggleableInterface,
     ProductTranslationInterface,
