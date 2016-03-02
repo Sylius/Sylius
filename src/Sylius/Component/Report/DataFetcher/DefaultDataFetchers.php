@@ -21,15 +21,15 @@ final class DefaultDataFetchers
     /**
      * User registrations data fetcher
      */
-    const USER_REGISTRATION = 'user_registration';
+    const USER_REGISTRATION = 'sylius_data_fetcher_user_registration';
 
     /**
      * Sales total data fetcher
      */
-    const SALES_TOTAL = 'sales_total';
+    const SALES_TOTAL = 'sylius_data_fetcher_sales_total';
 
     /**
      * Number of orders data fetcher
      */
-    const NUMBER_OF_ORDERS = 'number_of_orders';
+    const NUMBER_OF_ORDERS = 'sylius_data_fetcher_number_of_orders';
 }

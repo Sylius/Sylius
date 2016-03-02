@@ -91,7 +91,7 @@ class BuildReportDataFetcherFormSubscriber implements EventSubscriberInterface
     protected function addConfigurationFields(FormInterface $form, $dataFetcherType, array $config = [])
     {
         $dataFetcher = $this->dataFecherRegistry->get($dataFetcherType);
-        $formType = sprintf('sylius_data_fetcher_%s', $dataFetcher->getType());
+        $formType = $dataFetcher->getType();
 
         try {
             $configurationField = $this->factory->createNamed(

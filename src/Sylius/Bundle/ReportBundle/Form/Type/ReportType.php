@@ -97,7 +97,7 @@ class ReportType extends AbstractResourceType
         }
 
         foreach ($this->dataFetcherRegistry->all() as $type => $dataFetcher) {
-            $formType = sprintf('sylius_data_fetcher_%s', $dataFetcher->getType());
+            $formType = $dataFetcher->getType();
 
             if (!$formType) {
                 continue;
