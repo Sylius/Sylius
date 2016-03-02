@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Promotion\Factory;
+namespace spec\Sylius\Component\Core\Factory;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Factory\ActionFactoryInterface;
 use Sylius\Component\Core\Promotion\Action\FixedDiscountAction;
 use Sylius\Component\Core\Promotion\Action\PercentageDiscountAction;
 use Sylius\Component\Core\Promotion\Action\ShippingDiscountAction;
-use Sylius\Component\Promotion\Factory\ActionFactoryInterface;
 use Sylius\Component\Promotion\Model\ActionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
@@ -31,7 +31,7 @@ class ActionFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Promotion\Factory\ActionFactory');
+        $this->shouldHaveType('Sylius\Component\Core\Factory\ActionFactory');
     }
 
     function it_implements_action_factory_interface()
