@@ -94,8 +94,7 @@ Feature: Promotions
         When I fill in "Code" with "P5"
         And I fill in "Name" with "Behat Training"
         And I fill in "Description" with "Behat Training 100 EUR discount on all orders"
-        And I click "Add action"
-        And I select "Fixed discount" from "Type"
+        And I add "Fixed discount" action
         And I fill in "Amount" with "100"
         And I press "Create"
         Then I should see "Behat Training"
@@ -107,8 +106,7 @@ Feature: Promotions
         When I fill in "Code" with "P5"
         And I fill in "Name" with "Sylius Training"
         And I fill in "Description" with "Sylius Training 10% discount on all orders"
-        And I click "Add action"
-        And I select "Percentage discount" from "Type"
+        And I add "Percentage discount" action
         And I fill in "Percentage" with "10"
         And I press "Create"
         Then I should see "Sylius Training"
@@ -202,8 +200,7 @@ Feature: Promotions
         When I fill in "Code" with "P5"
         And I fill in "Name" with "First 5 pay half!"
         And I fill in "Description" with "First 5 orders get 50% discount!"
-        And I click "Add action"
-        And I select "Percentage discount" from "Type"
+        And I add "Percentage discount" action
         And I fill in "Percentage" with "50"
         And I fill in "Usage limit" with "5"
         And I press "Create"
