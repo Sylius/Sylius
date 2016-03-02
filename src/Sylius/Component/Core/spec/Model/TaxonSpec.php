@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 class TaxonSpec extends ObjectBehavior
@@ -25,11 +24,5 @@ class TaxonSpec extends ObjectBehavior
     function it_is_Sylius_Taxon()
     {
         $this->shouldImplement(TaxonInterface::class);
-        $this->shouldImplement(ImageInterface::class);
-    }
-
-    function it_should_not_path_defined_by_default()
-    {
-        $this->getPath()->shouldReturn(null);
     }
 }

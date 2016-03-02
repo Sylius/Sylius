@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Media\Model\ImageInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface as VariableTaxonInterface;
 
 /**
@@ -19,6 +20,21 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface as VariableTaxonInterface;
  */
 interface TaxonInterface extends VariableTaxonInterface
 {
+    /**
+     * @return ImageInterface
+     */
+    public function getImage();
+
+    /**
+     * @param ImageInterface $image
+     */
+    public function setImage(ImageInterface $image);
+
+    /**
+     * @return bool
+     */
+    public function hasImage();
+
     /**
      * @return Collection|ProductInterface[]
      */

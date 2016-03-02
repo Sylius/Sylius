@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Media\Model\ImageInterface;
 use Sylius\Component\Metadata\Model\MetadataSubjectInterface;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 use Sylius\Component\Product\Model\VariantInterface as BaseVariantInterface;
@@ -34,7 +35,7 @@ interface ProductVariantInterface extends
     const METADATA_CLASS_IDENTIFIER = 'ProductVariant';
 
     /**
-     * @return Collection|ProductVariantImageInterface[]
+     * @return Collection|ImageInterface[]
      */
     public function getImages();
 
@@ -47,21 +48,21 @@ interface ProductVariantInterface extends
     public function getImage();
 
     /**
-     * @param ProductVariantImageInterface $image
+     * @param ImageInterface $image
      *
      * @return bool
      */
-    public function hasImage(ProductVariantImageInterface $image);
+    public function hasImage(ImageInterface $image);
 
     /**
-     * @param ProductVariantImageInterface $image
+     * @param ImageInterface $image
      */
-    public function addImage(ProductVariantImageInterface $image);
+    public function addImage(ImageInterface $image);
 
     /**
-     * @param ProductVariantImageInterface $image
+     * @param ImageInterface $image
      */
-    public function removeImage(ProductVariantImageInterface $image);
+    public function removeImage(ImageInterface $image);
 
     /**
      * @return int

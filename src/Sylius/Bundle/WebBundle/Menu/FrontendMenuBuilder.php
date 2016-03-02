@@ -19,7 +19,7 @@ use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
 use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface as RbacAuthorizationCheckerInterface;
-use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Intl\Intl;
@@ -257,11 +257,12 @@ class FrontendMenuBuilder extends MenuBuilder
 
         $taxons = $this->channelContext->getChannel()->getTaxons();
 
+        /** @var TaxonInterface $taxon */
         foreach ($taxons as $taxon) {
             $child = $menu->addChild($taxon->getName(), $childOptions);
 
-            if ($taxon->hasPath()) {
-                $child->setLabelAttribute('data-image', $taxon->getPath());
+            if ($image = $taxon->getImage()) {
+                $child->setLabelAttribute('data-image', $image);
             }
 
             $this->createTaxonsMenuNode($child, $taxon);
@@ -371,8 +372,8 @@ class FrontendMenuBuilder extends MenuBuilder
                 'route' => $child,
                 'labelAttributes' => ['icon' => 'icon-angle-right'],
             ]);
-            if ($child->getPath()) {
-                $childMenu->setLabelAttribute('data-image', $child->getPath());
+            if ($image = $child->getImage()) {
+                $childMenu->setLabelAttribute('data-image', $image);
             }
 
             $this->createTaxonsMenuNode($childMenu, $child);

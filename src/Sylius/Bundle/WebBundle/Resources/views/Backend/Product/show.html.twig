@@ -201,8 +201,8 @@
         {% if product.images|length > 0 %}
             <div id="gallery">
                 {% for image in product.images %}
-                <a href="{{ image.path|imagine_filter('sylius_large') }}" title="{{ product.name }}" class="thumbnail">
-                    <img src="{{ image.path|imagine_filter('sylius_small') }}" alt="{{ product.name }}" />
+                <a href="{{ sylius_image_url(image, 'sylius_large') }}" title="{{ product.name }}" class="thumbnail">
+                    <img src="{{ sylius_image_url(image, 'sylius_small') }}" alt="{{ product.name }}" />
                 </a>
                 {% endfor %}
             </div>

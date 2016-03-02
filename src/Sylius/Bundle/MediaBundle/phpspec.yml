@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Sylius\Bundle\MediaBundle
+        psr4_prefix: Sylius\Bundle\MediaBundle
+        src_path: .

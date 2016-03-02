@@ -80,6 +80,7 @@ abstract class Kernel extends BaseKernel
             new \Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new \Sylius\Bundle\GridBundle\SyliusGridBundle(),
             new \winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
+            new \Sylius\Bundle\MediaBundle\SyliusMediaBundle(), // It should come after ResourceBundle
             new \Sylius\Bundle\ApiBundle\SyliusApiBundle(),
 
             new \Sonata\BlockBundle\SonataBlockBundle(),
@@ -106,7 +107,6 @@ abstract class Kernel extends BaseKernel
             new \FOS\RestBundle\FOSRestBundle(),
 
             new \FOS\ElasticaBundle\FOSElasticaBundle(),
-            new \Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
             new \Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new \Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
             new \Liip\ImagineBundle\LiipImagineBundle(),
