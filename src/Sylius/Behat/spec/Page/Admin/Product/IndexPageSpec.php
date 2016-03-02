@@ -13,22 +13,25 @@ namespace spec\Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Session;
 use PhpSpec\ObjectBehavior;
+use Sylius\Behat\Page\Admin\Product\IndexPageInterface;
+use Sylius\Behat\Page\Admin\Product\ProductShowPageInterface;
 use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\TableManipulatorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
-class ProductShowPageSpec extends ObjectBehavior
+class IndexPageSpec extends ObjectBehavior
 {
-    function let(Session $session, RouterInterface $router)
+    function let(Session $session, RouterInterface $router, TableManipulatorInterface $tableManipulator)
     {
-        $this->beConstructedWith($session, [], $router);
+        $this->beConstructedWith($session, [], $router, $tableManipulator);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Behat\Page\Admin\Product\ProductShowPage');
+        $this->shouldHaveType('Sylius\Behat\Page\Admin\Product\IndexPage');
     }
 
     function it_is_symfony_page()
@@ -36,8 +39,8 @@ class ProductShowPageSpec extends ObjectBehavior
         $this->shouldHaveType(SymfonyPage::class);
     }
 
-    function it_has_route_name()
+    function it_implements_product_index_page_interface()
     {
-        $this->getRouteName()->shouldReturn('sylius_backend_product_show');
+        $this->shouldImplement(IndexPageInterface::class);
     }
 }

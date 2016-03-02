@@ -20,7 +20,7 @@
         <parameter key="sylius.behat.context.setup.security.class">Sylius\Behat\Context\Setup\SecurityContext</parameter>
         <parameter key="sylius.behat.context.setup.user.class">Sylius\Behat\Context\Setup\UserContext</parameter>
         <parameter key="sylius.behat.context.setup.product.class">Sylius\Behat\Context\Setup\ProductContext</parameter>
-        <parameter key="sylius.behat.context.setup.product_review.class">Sylius\Behat\Context\Setup\ReviewContext</parameter>
+        <parameter key="sylius.behat.context.setup.product_review.class">Sylius\Behat\Context\Setup\ProductReviewContext</parameter>
         <parameter key="sylius.behat.context.setup.promotion.class">Sylius\Behat\Context\Setup\PromotionContext</parameter>
         <parameter key="sylius.behat.context.setup.shipping.class">Sylius\Behat\Context\Setup\ShippingContext</parameter>
         <parameter key="sylius.behat.context.setup.zone.class">Sylius\Behat\Context\Setup\ZoneContext</parameter>

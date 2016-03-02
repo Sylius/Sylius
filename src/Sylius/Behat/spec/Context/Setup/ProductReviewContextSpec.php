@@ -24,25 +24,19 @@ use Sylius\Component\Review\Model\ReviewInterface;
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
-class ReviewContextSpec extends ObjectBehavior
+class ProductReviewContextSpec extends ObjectBehavior
 {
     function let(
         SharedStorageInterface $sharedStorage,
-        RepositoryInterface $reviewRepository,
         FactoryInterface $reviewFactory,
         ObjectManager $reviewManager
     ) {
-        $this->beConstructedWith(
-            $sharedStorage,
-            $reviewRepository,
-            $reviewFactory,
-            $reviewManager
-        );
+        $this->beConstructedWith($sharedStorage, $reviewFactory, $reviewManager);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Behat\Context\Setup\ReviewContext');
+        $this->shouldHaveType('Sylius\Behat\Context\Setup\ProductReviewContext');
     }
 
     function it_implements_context_interface()
@@ -52,12 +46,10 @@ class ReviewContextSpec extends ObjectBehavior
 
     function it_creates_a_review_for_a_given_product(
         $reviewFactory,
-        $reviewRepository,
         $sharedStorage,
         $reviewManager,
         ProductInterface $product,
-        ReviewInterface $review,
-        ReviewerInterface $reviewer
+        ReviewInterface $review
     ) {
         $sharedStorage->get('product')->willReturn($product);
 
@@ -70,6 +62,6 @@ class ReviewContextSpec extends ObjectBehavior
 
         $reviewManager->flush()->shouldBeCalled();
 
-        $this->productHasAReview();
+        $this->productHasAReview($product);
     }
 }

@@ -11,17 +11,15 @@
 
 namespace Sylius\Behat\Page\Admin\Product;
 
-use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
-use Sylius\Component\Core\Model\ProductInterface;
 
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
-class ProductShowPage extends SymfonyPage
+class ShowPage extends SymfonyPage implements ShowPageInterface
 {
     /**
-     * @throws ElementNotFoundException
+     * {@inheritdoc}
      */
     public function deleteProduct()
     {
@@ -35,7 +33,7 @@ class ProductShowPage extends SymfonyPage
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    protected function getRouteName()
     {
         return 'sylius_backend_product_show';
     }

@@ -61,7 +61,6 @@
         <parameter key="sylius.listener.image_upload.class">Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener</parameter>
         <parameter key="sylius.listener.channel.class">Sylius\Bundle\CoreBundle\EventListener\ChannelDeletionListener</parameter>
         <parameter key="sylius.listener.customer_aware.class">Sylius\Bundle\CoreBundle\EventListener\CustomerAwareListener</parameter>
-        <parameter key="sylius.listener.product_delete.class">Sylius\Bundle\CoreBundle\EventListener\ProductDeleteListener</parameter>
         <parameter key="sylius.listener.customer_reviews_delete.class">Sylius\Bundle\CoreBundle\EventListener\CustomerReviewsDeleteListener</parameter>
 
         <parameter key="sylius.active_promotions_by_channel_provider.class">Sylius\Component\Core\Provider\ActivePromotionsByChannelProvider</parameter>
@@ -397,11 +396,6 @@
             <tag name="kernel.event_listener" event="sylius.product_variant.pre_update" method="uploadProductImage" />
             <tag name="kernel.event_listener" event="sylius.taxon.pre_create" method="uploadTaxonImage" />
             <tag name="kernel.event_listener" event="sylius.taxon.pre_update" method="uploadTaxonImage" />
-        </service>
-
-        <service id="sylius.listener.product_delete" class="%sylius.listener.product_delete.class%">
-            <argument type="service" id="service_container"/>
-            <tag name="doctrine.event_listener" event="postRemove" method="postRemove" />
         </service>
 
         <service id="sylius.image_uploader" class="%sylius.image_uploader.class%">

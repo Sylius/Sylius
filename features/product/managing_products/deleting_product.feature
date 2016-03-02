@@ -19,7 +19,7 @@ Feature: Deleting a product
     @domain
     Scenario: Deleted product variants disappear from the product catalog
         When I delete the "Toyota GT86 model" product
-        Then there should be no "1:43" variant of this product in the product catalog
+        Then there should be no variants of this product in the product catalog
 
     @domain
     Scenario: Deleted product reviews disappear from the product catalog

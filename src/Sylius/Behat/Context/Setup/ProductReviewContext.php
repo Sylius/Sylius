@@ -1,8 +1,19 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sylius\Behat\Context\Setup;
+
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -10,17 +21,12 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
-class ReviewContext implements Context
+class ProductReviewContext implements Context
 {
     /**
      * @var SharedStorageInterface
      */
     private $sharedStorage;
-
-    /**
-     * @var RepositoryInterface
-     */
-    private $reviewRepository;
 
     /**
      * @var FactoryInterface
@@ -34,29 +40,24 @@ class ReviewContext implements Context
 
     /**
      * @param SharedStorageInterface $sharedStorage
-     * @param RepositoryInterface $reviewRepository
      * @param FactoryInterface $reviewFactory
      * @param ObjectManager $reviewManager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        RepositoryInterface $reviewRepository,
         FactoryInterface $reviewFactory,
         ObjectManager $reviewManager
     ) {
         $this->sharedStorage = $sharedStorage;
-        $this->reviewRepository = $reviewRepository;
         $this->reviewFactory = $reviewFactory;
         $this->reviewManager = $reviewManager;
     }
 
     /**
-     * @Given this product has one review
+     * @Given /^(this product) has one review$/
      */
-    public function productHasAReview()
+    public function productHasAReview(ProductInterface $product)
     {
-        $product = $this->sharedStorage->get('product');
-
         $review = $this->reviewFactory->createNew();
         $review->setTitle('title');
         $review->setRating(5);

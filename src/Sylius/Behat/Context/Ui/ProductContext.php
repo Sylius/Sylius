@@ -12,8 +12,10 @@
 namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Page\Admin\Product\IndexPageInterface;
+use Sylius\Behat\Page\Admin\Product\ShowPageInterface;
 use Sylius\Behat\Page\Product\ProductShowPage;
-use Sylius\Behat\Page\Admin\Product\ProductShowPage as AdminProductShowPage;
+use Sylius\Behat\Page\Admin\Product\ShowPage as AdminProductShowPage;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
@@ -23,7 +25,12 @@ use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 final class ProductContext implements Context
 {
     /**
-     * @var ProductShowPageInterface
+     * @var SharedStorageInterface
+     */
+    private $sharedStorage;
+
+    /**
+     * @var ProductShowPage
      */
     private $productShowPage;
 
@@ -33,23 +40,26 @@ final class ProductContext implements Context
     private $adminProductShowPage;
 
     /**
-     * @var SharedStorageInterface
+     * @var IndexPageInterface
      */
-    private $sharedStorage;
+    private $productIndexPage;
 
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param ProductShowPage $productShowPage
-     * @param AdminProductShowPage $adminProductShowPage
+     * @param ShowPageInterface $adminProductShowPage
+     * @param IndexPageInterface $productIndexPage
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ProductShowPage $productShowPage,
-        AdminProductShowPage $adminProductShowPage
+        ShowPageInterface $adminProductShowPage,
+        IndexPageInterface $productIndexPage
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->productShowPage = $productShowPage;
         $this->adminProductShowPage = $adminProductShowPage;
+        $this->productIndexPage = $productIndexPage;
     }
 
     /**
@@ -75,13 +85,9 @@ final class ProductContext implements Context
     /**
      * @When I delete the :product product
      */
-    public function iDeleteProduct($productName)
+    public function iDeleteProduct(ProductInterface $product)
     {
-        $product = $this->sharedStorage->get('product');
-
-        if ($product->getName() !== $productName) {
-            throw new \InvalidArgumentException('There is no such product in the store right now!');
-        }
+        $this->sharedStorage->set('product', $product);
 
         $this->adminProductShowPage->open(['id' => $product->getId()]);
 
@@ -89,14 +95,12 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then this product should not exist in the product catalog
+     * @Then /^(this product) should not exist in the product catalog$/
      */
-    public function productShouldNotExist()
+    public function productShouldNotExist(ProductInterface $product)
     {
-        $product = $this->sharedStorage->get('product');
+        $this->productIndexPage->open();
 
-        $this->adminProductShowPage->tryToOpen(['id' => $product->getId()]);
-
-        expect($this->adminProductShowPage->isOpen(['id' => $product->getId()]))->toBe(false);
+        expect($this->productIndexPage->isThereProduct($product))->toBe(false);
     }
 }

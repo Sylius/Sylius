@@ -13,10 +13,13 @@ namespace spec\Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
 use PhpSpec\ObjectBehavior;
+use Sylius\Behat\Page\Admin\Product\IndexPageInterface;
+use Sylius\Behat\Page\Admin\Product\ShowPageInterface;
 use Sylius\Behat\Page\Product\ProductShowPage;
-use Sylius\Behat\Page\Admin\Product\ProductShowPage as AdminProductShowPage;
+use Sylius\Behat\Page\Admin\Product\ShowPage as AdminProductShowPage;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Test\Services\SharedStorage;
+use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
@@ -24,11 +27,12 @@ use Sylius\Component\Core\Test\Services\SharedStorage;
 class ProductContextSpec extends ObjectBehavior
 {
     public function let(
-        SharedStorage $sharedStorage,
+        SharedStorageInterface $sharedStorage,
         ProductShowPage $productShowPage,
-        AdminProductShowPage $adminProductShowPage
+        ShowPageInterface $adminProductShowPage,
+        IndexPageInterface $productIndexPage
     ) {
-        $this->beConstructedWith($sharedStorage, $productShowPage, $adminProductShowPage);
+        $this->beConstructedWith($sharedStorage, $productShowPage, $adminProductShowPage, $productIndexPage);
     }
 
     function it_is_initializable()
@@ -41,32 +45,25 @@ class ProductContextSpec extends ObjectBehavior
         $this->shouldImplement(Context::class);
     }
 
-    function it_checks_if_i_am_be_able_to_access_product_page(
-        $productShowPage,
-        ProductInterface $product
-    ) {
+    function it_checks_if_i_am_be_able_to_access_product_page($productShowPage, ProductInterface $product)
+    {
         $productShowPage->tryToOpen(['product' => $product])->shouldBeCalled();
         $productShowPage->isOpen(['product' => $product])->willReturn(true);
         
         $this->iShouldBeAbleToAccessProduct($product);
     }
 
-    function it_checks_if_i_am_not_able_to_access_product_page(
-        $productShowPage,
-        ProductInterface $product
-    ) {
+    function it_checks_if_i_am_not_able_to_access_product_page($productShowPage, ProductInterface $product)
+    {
         $productShowPage->tryToOpen(['product' => $product])->shouldBeCalled();
         $productShowPage->isOpen(['product' => $product])->willReturn(false);
 
         $this->iShouldNotBeAbleToAccessProduct($product);
     }
 
-    function it_deletes_product(
-        $adminProductShowPage,
-        $sharedStorage,
-        ProductInterface $product
-    ) {
-        $sharedStorage->get('product')->willReturn($product);
+    function it_deletes_product($adminProductShowPage, $sharedStorage, ProductInterface $product)
+    {
+        $sharedStorage->set('product', $product)->shouldBeCalled();
         
         $product->getName()->willReturn('Model');
         $product->getId()->willReturn(1);
@@ -74,6 +71,16 @@ class ProductContextSpec extends ObjectBehavior
         $adminProductShowPage->open(['id' => 1])->shouldBeCalled();
         $adminProductShowPage->deleteProduct()->shouldBeCalled();
 
-        $this->iDeleteProduct('Model');
+        $this->iDeleteProduct($product);
+    }
+
+    function it_checks_if_product_does_not_exist($sharedStorage, $productIndexPage, ProductInterface $product)
+    {
+        $sharedStorage->get('product')->willReturn($product);
+
+        $productIndexPage->open()->shouldBeCalled();
+        $productIndexPage->isThereProduct($product)->willReturn(false);
+
+        $this->productShouldNotExist($product);
     }
 }

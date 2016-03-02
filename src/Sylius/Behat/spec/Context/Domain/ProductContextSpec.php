@@ -22,7 +22,9 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Component\Product\Model\VariantInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Review\Model\ReviewInterface;
 
 /**
  * @mixin ProductContext
@@ -51,16 +53,14 @@ class ProductContextSpec extends ObjectBehavior
         $this->shouldImplement(Context::class);
     }
 
-    function it_deletes_a_product_variant_from_the_repository(
-        $variantRepository,
-        ProductVariantInterface $productVariant
-    ) {
+    function it_deletes_a_product_variant_from_the_repository($variantRepository, ProductVariantInterface $productVariant)
+    {
         $variantRepository->remove($productVariant)->shouldBeCalled();
 
         $this->iDeleteTheVariantOfProduct($productVariant);
     }
 
-    function it_tries_to_delete_a_product_variant_that_should_not_be_delted_from_the_repository(
+    function it_tries_to_delete_a_product_variant_that_should_not_be_deleted_from_the_repository(
         $sharedStorage,
         $variantRepository,
         ProductVariantInterface $productVariant
@@ -71,8 +71,12 @@ class ProductContextSpec extends ObjectBehavior
         $this->iTryToDeleteTheVariantOfProduct($productVariant);
     }
 
-    function it_checks_if_a_product_variant_exists_in_the_repository($sharedStorage, $variantRepository)
-    {
+    function it_checks_if_a_product_variant_exists_in_the_repository(
+        $sharedStorage,
+        $variantRepository,
+        ProductVariantInterface $productVariant
+    ) {
+        $productVariant->getId()->willReturn(1);
         $sharedStorage->get('product_variant_id')->willReturn(1);
         $variantRepository->find(1)->willReturn(null);
 
@@ -84,13 +88,14 @@ class ProductContextSpec extends ObjectBehavior
         $variantRepository,
         ProductVariantInterface $productVariant
     ) {
+        $productVariant->getId()->willReturn(1);
         $sharedStorage->get('product_variant_id')->willReturn(1);
         $variantRepository->find(1)->willReturn($productVariant);
 
         $this->shouldThrow(NotEqualException::class)->during('productVariantShouldNotExistInTheProductCatalog');
     }
 
-    function it_checks_if_a_proper_exception_has_been_thrown_in_the_previous_step($sharedStorage, DBALException $exception)
+    function it_checks_if_a_proper_exception_was_thrown_in_the_previous_step_of_variant_deletion($sharedStorage, DBALException $exception)
     {
         $sharedStorage->get('last_exception')->willReturn($exception);
 
@@ -131,25 +136,67 @@ class ProductContextSpec extends ObjectBehavior
         $this->shouldThrow(FailureException::class)->during('productVariantShouldExistInTheProductCatalog', [$productVariant]);
     }
 
-    function it_deletes_a_product(
-        $sharedStorage,
-        $productRepository,
-        ProductInterface $product
-    ) {
-        $productRepository->findOneBy(['name' => 'Model'])->willReturn($product);
+    function it_deletes_a_product($sharedStorage, $productRepository, ProductInterface $product)
+    {
+        $product->getId()->willReturn(1);
+        $productRepository->find(1)->willReturn($product);
 
         $sharedStorage->set('deleted_product', $product)->shouldBeCalled();
         $productRepository->remove($product)->shouldBeCalled();
 
-        $this->iDeleteTheProduct('Model');
+        $this->iDeleteTheProduct($product);
+    }
+
+    function it_tries_to_delete_a_product_that_does_not_exist($sharedStorage, $productRepository, ProductInterface $product)
+    {
+        $product->getId()->willReturn(1);
+        $productRepository->find(1)->willReturn(null);
+
+        $sharedStorage->set('deleted_product', $product)->shouldBeCalled();
+        $productRepository->remove($product)->willThrow(DBALException::class);
+
+        $sharedStorage->set('last_exception', Argument::type(DBALException::class))->shouldBeCalled();
+
+        $this->iDeleteTheProduct($product);
     }
 
     function it_checks_if_there_are_no_reviews($sharedStorage, $reviewRepository, ProductInterface $product)
     {
         $sharedStorage->get('deleted_product')->willReturn($product);
-
         $reviewRepository->findBy(['reviewSubject' => $product])->willReturn([]);
 
-        $this->thereAreNoProductReviews();
+        $this->thereAreNoProductReviews($product);
+    }
+
+    function it_throws_an_exception_if_reviews_of_the_product_still_exist(
+        $sharedStorage,
+        $reviewRepository,
+        ProductInterface $product,
+        ReviewInterface $review
+    ) {
+        $sharedStorage->get('deleted_product')->willReturn($product);
+        $reviewRepository->findBy(['reviewSubject' => $product])->willReturn([$review]);
+
+        $this->shouldThrow(FailureException::class)->during('thereAreNoProductReviews', [$product]);
+    }
+
+    function it_checks_if_there_are_no_variants($sharedStorage, $variantRepository, ProductInterface $product)
+    {
+        $sharedStorage->get('deleted_product')->willReturn($product);
+        $variantRepository->findBy(['object' => $product])->willReturn([]);
+
+        $this->thereAreNoVariants($product);
+    }
+
+    function it_throws_an_exception_if_variants_of_the_product_still_exist(
+        $sharedStorage,
+        $variantRepository,
+        ProductInterface $product,
+        VariantInterface $variant
+    ) {
+        $sharedStorage->get('deleted_product')->willReturn($product);
+        $variantRepository->findBy(['object' => $product])->willReturn([$variant]);
+
+        $this->shouldThrow(FailureException::class)->during('thereAreNoVariants', [$product]);
     }
 }

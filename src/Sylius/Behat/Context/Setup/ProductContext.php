@@ -94,15 +94,13 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given this product has :variantName variant priced at :price
+     * @Given /^(this product) has "([^"]+)" variant priced at ("[^"]+")$/
      */
-    public function productHasAVariantPricedAt($variantName, $price)
+    public function productHasAVariantPricedAt(ProductInterface $product, $variantName, $price)
     {
-        $product = $this->sharedStorage->get('product');
-
         $variant = $this->productVariantFactory->createNew();
         $variant->setPresentation($variantName);
-        $variant->setPrice($this->getPriceFromString(str_replace(['$', '€', '£'], '', $price)));
+        $variant->setPrice($price);
         $variant->setProduct($product);
 
         $product->addVariant($variant);
