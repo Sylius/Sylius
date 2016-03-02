@@ -24,6 +24,7 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -32,12 +33,13 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class OrderContextSpec extends ObjectBehavior
 {
     function let(
+        SharedStorageInterface $sharedStorage,
         OrderRepositoryInterface $orderRepository,
         RepositoryInterface $orderItemRepository,
         RepositoryInterface $addressRepository,
         RepositoryInterface $adjustmentRepository
     ) {
-        $this->beConstructedWith($orderRepository, $orderItemRepository, $addressRepository, $adjustmentRepository);
+        $this->beConstructedWith($sharedStorage, $orderRepository, $orderItemRepository, $addressRepository, $adjustmentRepository);
     }
 
     function it_is_initializable()
@@ -50,11 +52,25 @@ class OrderContextSpec extends ObjectBehavior
         $this->shouldImplement(Context::class);
     }
 
-    function it_deletes_an_order(OrderRepositoryInterface $orderRepository, OrderInterface $order)
-    {
+    function it_deletes_an_order(
+        SharedStorageInterface $sharedStorage,
+        AddressInterface $shippingAddress,
+        AddressInterface $billingAddress,
+        AdjustmentInterface $adjustment,
+        OrderRepositoryInterface $orderRepository,
+        OrderInterface $order
+    ) {
         $orderRepository->findOneBy(['number' => '#00000000'])->willReturn($order);
+        $order->getBillingAddress()->willReturn($billingAddress);
+        $order->getShippingAddress()->willReturn($shippingAddress);
+        $order->getAdjustments()->willReturn([$adjustment]);
+        $billingAddress->getId()->willReturn(3);
+        $shippingAddress->getId()->willReturn(2);
+        $adjustment->getId()->willReturn(1);
 
         $orderRepository->remove($order)->shouldBeCalled();
+        $sharedStorage->set('deleted_adjustments', [1])->shouldBeCalled();
+        $sharedStorage->set('deleted_addresses', [2, 3])->shouldBeCalled();
 
         $this->iDeleteTheOrder('#00000000');
     }
@@ -68,16 +84,16 @@ class OrderContextSpec extends ObjectBehavior
 
     function it_checks_if_an_order_exists_in_repository(OrderRepositoryInterface $orderRepository, OrderInterface $order)
     {
-        $order->getId()->willReturn(1);
-        $orderRepository->find(1)->willReturn(null);
+        $order->getNumber()->willReturn('#00000000');
+        $orderRepository->findOneBy(['number' => '#00000000'])->willReturn(null);
 
         $this->orderShouldNotExistInTheRegistry($order);
     }
 
     function it_throws_an_exception_if_order_still_exists(OrderRepositoryInterface $orderRepository, OrderInterface $order)
     {
-        $order->getId()->willReturn(1);
-        $orderRepository->find(1)->willReturn($order);
+        $order->getNumber()->willReturn('#00000000');
+        $orderRepository->findOneBy(['number' => '#00000000'])->willReturn($order);
 
         $this->shouldThrow(NotEqualException::class)->during('orderShouldNotExistInTheRegistry', [$order]);
     }
@@ -108,84 +124,63 @@ class OrderContextSpec extends ObjectBehavior
     }
 
     function it_checks_if_an_order_addresses_exists_in_repository(
+        SharedStorageInterface $sharedStorage,
         RepositoryInterface $addressRepository,
-        OrderInterface $order,
-        AddressInterface $shippingAddress,
-        AddressInterface $billingAddress
+        OrderInterface $order
     ) {
-        $order->getBillingAddress()->willReturn($billingAddress);
-        $order->getShippingAddress()->willReturn($shippingAddress);
+        $sharedStorage->get('deleted_adjustments')->willReturn([1, 2]);
 
-        $billingAddress->getId()->willReturn(1);
-        $shippingAddress->getId()->willReturn(2);
-
-        $addressRepository->find(1)->willReturn(null);
-        $addressRepository->find(2)->willReturn(null);
+        $addressRepository->findBy(['id' => [1, 2]])->willReturn([]);
 
         $this->addressesShouldNotExistInTheRegistry($order);
     }
 
     function it_throws_an_exception_if_shipping_addresses_still_exist(
+        SharedStorageInterface $sharedStorage,
         RepositoryInterface $addressRepository,
         OrderInterface $order,
-        AddressInterface $shippingAddress,
-        AddressInterface $billingAddress
+        AddressInterface $address
     ) {
-        $order->getBillingAddress()->willReturn($billingAddress);
-        $order->getShippingAddress()->willReturn($shippingAddress);
+        $sharedStorage->get('deleted_adjustments')->willReturn([1, 2]);
 
-        $billingAddress->getId()->willReturn(1);
-        $shippingAddress->getId()->willReturn(2);
-
-        $addressRepository->find(1)->willReturn(null);
-        $addressRepository->find(2)->willReturn($shippingAddress);
+        $addressRepository->findBy(['id' => [1, 2]])->willReturn([$address]);
 
         $this->shouldThrow(NotEqualException::class)->during('addressesShouldNotExistInTheRegistry', [$order]);
     }
 
     function it_throws_an_exception_if_billing_addresses_still_exist(
+        SharedStorageInterface $sharedStorage,
         RepositoryInterface $addressRepository,
         OrderInterface $order,
-        AddressInterface $shippingAddress,
-        AddressInterface $billingAddress
+        AddressInterface $address
     ) {
-        $order->getBillingAddress()->willReturn($billingAddress);
-        $order->getShippingAddress()->willReturn($shippingAddress);
+        $sharedStorage->get('deleted_adjustments')->willReturn([1, 2]);
 
-        $billingAddress->getId()->willReturn(1);
-        $shippingAddress->getId()->willReturn(2);
-
-        $addressRepository->find(1)->willReturn($billingAddress);
-        $addressRepository->find(2)->willReturn(null);
+        $addressRepository->findBy(['id' => [1, 2]])->willReturn([$address]);
 
         $this->shouldThrow(NotEqualException::class)->during('addressesShouldNotExistInTheRegistry', [$order]);
     }
 
     function it_checks_if_an_order_adjustments_exists_in_repository(
-        RepositoryInterface $adjustmentRepository,
-        OrderInterface $order,
-        AdjustmentInterface $adjustment
+        SharedStorageInterface $sharedStorage,
+        RepositoryInterface $adjustmentRepository
     ) {
-        $order->getAdjustments()->willReturn([$adjustment]);
+        $sharedStorage->get('deleted_adjustments')->willReturn([1]);
 
-        $adjustment->getId()->willReturn(1);
+        $adjustmentRepository->findBy(['id' => [1]])->willReturn([]);
 
-        $adjustmentRepository->find(1)->willReturn(null);
-
-        $this->adjustmentShouldNotExistInTheRegistry($order);
+        $this->adjustmentShouldNotExistInTheRegistry();
     }
 
     function it_throws_an_exception_if_adjustments_still_exist(
+        SharedStorageInterface $sharedStorage,
         RepositoryInterface $adjustmentRepository,
-        OrderInterface $order,
         AdjustmentInterface $adjustment
     ) {
-        $order->getAdjustments()->willReturn([$adjustment]);
+        $sharedStorage->get('deleted_adjustments')->willReturn([1]);
 
-        $adjustment->getId()->willReturn(1);
+        $adjustmentRepository->findBy(['id' => [1]])->willReturn([$adjustment]);
 
-        $adjustmentRepository->find(1)->willReturn($adjustment);
-
-        $this->shouldThrow(NotEqualException::class)->during('adjustmentShouldNotExistInTheRegistry', [$order]);
+        $this->shouldThrow(NotEqualException::class)->during('adjustmentShouldNotExistInTheRegistry', []);
     }
 }

@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -22,6 +23,11 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 final class OrderContext implements Context
 {
+    /**
+     * @var SharedStorageInterface
+     */
+    private $sharedStorage;
+
     /**
      * @var OrderRepositoryInterface
      */
@@ -43,17 +49,20 @@ final class OrderContext implements Context
     private $adjustmentRepository;
 
     /**
+     * @param SharedStorageInterface $sharedStorage
      * @param OrderRepositoryInterface $orderRepository
      * @param RepositoryInterface $orderItemRepository
      * @param RepositoryInterface $addressRepository
      * @param RepositoryInterface $adjustmentRepository
      */
     public function __construct(
+        SharedStorageInterface $sharedStorage,
         OrderRepositoryInterface $orderRepository,
         RepositoryInterface $orderItemRepository,
         RepositoryInterface $addressRepository,
         RepositoryInterface $adjustmentRepository
     ) {
+        $this->sharedStorage = $sharedStorage;
         $this->orderRepository = $orderRepository;
         $this->orderItemRepository = $orderItemRepository;
         $this->addressRepository = $addressRepository;
@@ -71,6 +80,17 @@ final class OrderContext implements Context
             throw new \InvalidArgumentException(sprintf('Order with %s number was not found in an order repository', $orderNumber));
         }
 
+        $adjustmentsId = [];
+        foreach ($order->getAdjustments() as $adjustment) {
+            $adjustmentsId[] = $adjustment->getId();
+        }
+
+        $this->sharedStorage->set('deleted_adjustments', $adjustmentsId);
+        $this->sharedStorage->set('deleted_addresses', [
+            $order->getShippingAddress()->getId(),
+            $order->getBillingAddress()->getId(),
+        ]);
+
         $this->orderRepository->remove($order);
     }
 
@@ -80,7 +100,7 @@ final class OrderContext implements Context
     public function orderShouldNotExistInTheRegistry(OrderInterface $order)
     {
         /** @var OrderInterface $order */
-        $order = $this->orderRepository->find($order->getId());
+        $order = $this->orderRepository->findOneBy(['number' => $order->getNumber()]);
 
         expect($order)->toBe(null);
     }
@@ -96,30 +116,25 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Then /^billing and shipping addresses of ([^"]+) should not exist$/
+     * @Then /^billing and shipping addresses of this order should not exist$/
      */
-    public function addressesShouldNotExistInTheRegistry(OrderInterface $order)
+    public function addressesShouldNotExistInTheRegistry()
     {
-        $billingAddress = $order->getBillingAddress();
-        $shippingAddress = $order->getShippingAddress();
+        $addresses = $this->sharedStorage->get('deleted_adjustments');
 
-        $billingAddress = $this->addressRepository->find($billingAddress->getId());
-        $shippingAddress = $this->addressRepository->find($shippingAddress->getId());
+        $addresses = $this->addressRepository->findBy(['id' => $addresses]);
 
-        expect($billingAddress)->toBe(null);
-        expect($shippingAddress)->toBe(null);
+        expect($addresses)->toBe([]);
     }
 
     /**
-     * @Then /^adjustments of ([^"]+) should not exist$/
+     * @Then /^adjustments of this order should not exist$/
      */
-    public function adjustmentShouldNotExistInTheRegistry(OrderInterface $order)
+    public function adjustmentShouldNotExistInTheRegistry()
     {
-        $adjustments = $order->getAdjustments();
+        $adjustments = $this->sharedStorage->get('deleted_adjustments');
 
-        foreach ($adjustments as $adjustment) {
-            $adjustment = $this->adjustmentRepository->find($adjustment->getId());
-            expect($adjustment)->toBe(null);
-        }
+        $adjustments = $this->adjustmentRepository->findBy(['id' => $adjustments]);
+        expect($adjustments)->toBe([]);
     }
 }
