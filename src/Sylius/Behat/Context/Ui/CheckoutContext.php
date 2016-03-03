@@ -19,7 +19,7 @@ use Sylius\Behat\Page\Checkout\CheckoutSecurityStepInterface;
 use Sylius\Behat\Page\Checkout\CheckoutShippingStepInterface;
 use Sylius\Behat\Page\Checkout\CheckoutThankYouPageInterface;
 use Sylius\Behat\Page\Order\OrderPaymentsPageInterface;
-use Sylius\Behat\PaypalApiMockerInterface;
+use Sylius\Behat\PaypalApiMocker;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
@@ -91,7 +91,7 @@ final class CheckoutContext implements Context
      * @param CheckoutThankYouPageInterface $checkoutThankYouPage
      * @param OrderPaymentsPageInterface $orderPaymentsPage
      * @param RepositoryInterface $orderRepository
-     * @param PaypalApiMockerInterface $paypalApiMocker
+     * @param PaypalApiMocker $paypalApiMocker
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -103,7 +103,7 @@ final class CheckoutContext implements Context
         CheckoutThankYouPageInterface $checkoutThankYouPage,
         OrderPaymentsPageInterface $orderPaymentsPage,
         RepositoryInterface $orderRepository,
-        PaypalApiMockerInterface $paypalApiMocker
+        PaypalApiMocker $paypalApiMocker
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->checkoutSecurityStep = $checkoutSecurityStep;

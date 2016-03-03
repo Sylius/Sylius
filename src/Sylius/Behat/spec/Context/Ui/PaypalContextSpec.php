@@ -14,14 +14,14 @@ namespace spec\Sylius\Behat\Context\Ui;
 use Behat\Behat\Context\Context;
 use PhpSpec\ObjectBehavior;
 use Sylius\Behat\Page\External\PaypalExpressCheckoutPageInterface;
-use Sylius\Behat\PaypalApiMockerInterface;
+use Sylius\Behat\PaypalApiMocker;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 class PaypalContextSpec extends ObjectBehavior
 {
-    function let(PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage, PaypalApiMockerInterface $paypalApiMocker)
+    function let(PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage, PaypalApiMocker $paypalApiMocker)
     {
         $this->beConstructedWith($paypalExpressCheckoutPage, $paypalApiMocker);
     }

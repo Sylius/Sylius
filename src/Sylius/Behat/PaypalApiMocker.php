@@ -20,19 +20,19 @@ use Symfony\Component\HttpKernel\KernelInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class PaypalApiMocker implements PaypalApiMockerInterface
+class PaypalApiMocker
 {
     /**
-     * @var KernelInterface
+     * @var BehatMockerInterface
      */
-    private $kernel;
+    private $behatMocker;
 
     /**
-     * @param KernelInterface $kernel
+     * @param BehatMockerInterface $behatMocker
      */
-    public function __construct(KernelInterface $kernel)
+    public function __construct(BehatMockerInterface $behatMocker)
     {
-        $this->kernel = $kernel;
+        $this->behatMocker = $behatMocker;
     }
 
     /**
@@ -52,7 +52,7 @@ class PaypalApiMocker implements PaypalApiMockerInterface
         $getTransactionDetailsStream = $this->mockStream('RECEIVERBUSINESS=alanmerchant%40gmail%2ecom&RECEIVEREMAIL=alanmerchant%40gmail%2ecom&RECEIVERID=K2XEH9B3Z2CWW&EMAIL=mike%2eehrmantraut%40gmail%2ecom&PAYERID=UX8WBNYWGBVMG&PAYERSTATUS=verified&COUNTRYCODE=PL&SHIPTONAME=Mike%20Ehrmantraut&SHIPTOSTREET=Bajkowa%202%20%2f%205%2c&SHIPTOSTREET2=Case%20postale%2012&SHIPTOCITY=Warszawa&SHIPTOCOUNTRYCODE=PL&SHIPTOCOUNTRYNAME=Poland&SHIPTOZIP=00800&ADDRESSOWNER=PayPal&ADDRESSSTATUS=Confirmed&INVNUM=92757%2d10268&SALESTAX=0%2e00&SHIPDISCOUNT=0%2e00&INSURANCEAMOUNT=0%2e00&TIMESTAMP=2016%2d02%2d29T11%3a25%3a53Z&CORRELATIONID=208eab6692fb&ACK=Success&VERSION=65%2e1&BUILD=18316154&FIRSTNAME=Mike&LASTNAME=Ehrmantraut&TRANSACTIONID=60R39504PU561661X&TRANSACTIONTYPE=cart&PAYMENTTYPE=instant&ORDERTIME=2016%2d02%2d29T11%3a21%3a53Z&AMT=19%2e99&FEEAMT=0%2e93&TAXAMT=0%2e00&SHIPPINGAMT=0%2e00&HANDLINGAMT=0%2e00&CURRENCYCODE=EUR&PAYMENTSTATUS=Completed&PENDINGREASON=None&REASONCODE=None&SHIPPINGMETHOD=Default&PROTECTIONELIGIBILITY=Eligible&PROTECTIONELIGIBILITYTYPE=ItemNotReceivedEligible%2cUnauthorizedPaymentEligible&L_NAME0=1&L_QTY0=1&L_TAXAMT0=0%2e00&L_SHIPPINGAMT0=0%2e00&L_HANDLINGAMT0=0%2e00&L_CURRENCYCODE0=EUR&L_AMT0=19%2e99');
         $getTransactionDetailsResponse = $this->mockHttpResponse(200, $getTransactionDetailsStream);
 
-        $this->kernel->getContainer()->mock('payum.http_client', 'Payum\Core\Bridge\Guzzle\HttpClient')
+        $this->behatMocker->mockService('payum.http_client', HttpClient::class)
             ->shouldReceive('send')
             ->times(4)
             ->andReturn($firstGetExpressCheckoutDetailsResponse, $doExpressCheckoutPaymentResponse, $secondGetExpressCheckoutDetailsResponse, $getTransactionDetailsResponse)
@@ -70,7 +70,7 @@ class PaypalApiMocker implements PaypalApiMockerInterface
         $getExpressCheckoutDetailsStream = $this->mockStream('TOKEN=EC%2d9EV13959UR209410U&BILLINGAGREEMENTACCEPTEDSTATUS=0&CHECKOUTSTATUS=PaymentActionNotInitiated&TIMESTAMP=2016%2d02%2d29T11%3a19%3a22Z&CORRELATIONID=90278b4d5eaf9&ACK=Success&VERSION=65%2e1&BUILD=18316154&CURRENCYCODE=EUR&AMT=19%2e99&ITEMAMT=19%2e99&SHIPPINGAMT=0%2e00&HANDLINGAMT=0%2e00&TAXAMT=0%2e00&INVNUM=92757%2d10268&NOTIFYURL=http%3a%2f%2f127%2e0%2e0%2e1%3a8080%2fpayment%2fnotify%2f%2dTMb4VEfLDAtynAUVdt_aaWAskDTgdZVzoeu3SlQtDw&INSURANCEAMT=0%2e00&SHIPDISCAMT=0%2e00&L_QTY0=1&L_TAXAMT0=0%2e00&L_AMT0=19%2e99&L_ITEMWEIGHTVALUE0=%20%20%200%2e00000&L_ITEMLENGTHVALUE0=%20%20%200%2e00000&L_ITEMWIDTHVALUE0=%20%20%200%2e00000&L_ITEMHEIGHTVALUE0=%20%20%200%2e00000&PAYMENTREQUEST_0_CURRENCYCODE=EUR&PAYMENTREQUEST_0_AMT=19%2e99&PAYMENTREQUEST_0_ITEMAMT=19%2e99&PAYMENTREQUEST_0_SHIPPINGAMT=0%2e00&PAYMENTREQUEST_0_HANDLINGAMT=0%2e00&PAYMENTREQUEST_0_TAXAMT=0%2e00&PAYMENTREQUEST_0_INVNUM=92757%2d10268&PAYMENTREQUEST_0_NOTIFYURL=http%3a%2f%2f127%2e0%2e0%2e1%3a8080%2fpayment%2fnotify%2f%2dTMb4VEfLDAtynAUVdt_aaWAskDTgdZVzoeu3SlQtDw&PAYMENTREQUEST_0_INSURANCEAMT=0%2e00&PAYMENTREQUEST_0_SHIPDISCAMT=0%2e00&PAYMENTREQUEST_0_INSURANCEOPTIONOFFERED=false&L_PAYMENTREQUEST_0_QTY0=1&L_PAYMENTREQUEST_0_TAXAMT0=0%2e00&L_PAYMENTREQUEST_0_AMT0=19%2e99&L_PAYMENTREQUEST_0_ITEMWEIGHTVALUE0=%20%20%200%2e00000&L_PAYMENTREQUEST_0_ITEMLENGTHVALUE0=%20%20%200%2e00000&L_PAYMENTREQUEST_0_ITEMWIDTHVALUE0=%20%20%200%2e00000&L_PAYMENTREQUEST_0_ITEMHEIGHTVALUE0=%20%20%200%2e00000&PAYMENTREQUESTINFO_0_ERRORCODE=0');
         $getExpressCheckoutDetailsResponse = $this->mockHttpResponse(200, $getExpressCheckoutDetailsStream);
 
-        $this->kernel->getContainer()->mock('payum.http_client', HttpClient::class)
+        $this->behatMocker->mockService('payum.http_client', HttpClient::class)
             ->shouldReceive('send')
             ->twice()
             ->andReturn($setExpressCheckoutResponse, $getExpressCheckoutDetailsResponse)
@@ -84,7 +84,7 @@ class PaypalApiMocker implements PaypalApiMockerInterface
      */
     private function mockStream($content)
     {
-        $mockedStream = $this->mockObject(Stream::class);
+        $mockedStream = $this->behatMocker->mockCollaborator(Stream::class);
         $mockedStream->shouldReceive('getContents')->once()->andReturn($content);
         $mockedStream->shouldReceive('close')->once()->andReturn();
 
@@ -99,20 +99,10 @@ class PaypalApiMocker implements PaypalApiMockerInterface
      */
     private function mockHttpResponse($statusCode, $streamMock)
     {
-        $mockedHttpResponse = $this->mockObject(Response::class);
+        $mockedHttpResponse = $this->behatMocker->mockCollaborator(Response::class);
         $mockedHttpResponse->shouldReceive('getStatusCode')->once()->andReturn($statusCode);
         $mockedHttpResponse->shouldReceive('getBody')->once()->andReturn($streamMock);
 
         return $mockedHttpResponse;
-    }
-
-    /**
-     * @param $class
-     *
-     * @return Mock
-     */
-    private function mockObject($class)
-    {
-        return \Mockery::mock($class);
     }
 }

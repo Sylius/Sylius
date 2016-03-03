@@ -22,14 +22,6 @@ class OrderPaymentsPage extends SymfonyPage implements OrderPaymentsPageInterfac
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
-    {
-        return 'sylius_order_payment_index';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function clickPayButtonForGivenPayment(PaymentInterface $payment)
     {
         $this->getDocument()->clickLink(sprintf('pay_%s', $payment->getId()));
@@ -74,5 +66,13 @@ class OrderPaymentsPage extends SymfonyPage implements OrderPaymentsPageInterfac
         }
 
         return parent::getUrl($urlParameters);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getRouteName()
+    {
+        return 'sylius_order_payment_index';
     }
 }
