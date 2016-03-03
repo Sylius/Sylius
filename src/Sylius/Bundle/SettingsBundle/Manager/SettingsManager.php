@@ -17,7 +17,6 @@ use Sylius\Bundle\SettingsBundle\Model\ParameterCollection;
 use Sylius\Bundle\SettingsBundle\Model\ParameterInterface;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Bundle\SettingsBundle\Resolver\SettingsResolverInterface;
-use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilder;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;

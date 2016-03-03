@@ -19,9 +19,9 @@ use Symfony\Component\Form\FormInterface;
 interface SettingsFormFactoryInterface
 {
     /**
-     * @param string     $schemaAlias
+     * @param string $schemaAlias
      * @param null|mixed $data
-     * @param array      $options
+     * @param array $options
      *
      * @return FormInterface
      */
