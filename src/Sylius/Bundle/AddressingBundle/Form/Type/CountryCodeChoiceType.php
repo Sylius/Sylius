@@ -64,6 +64,8 @@ class CountryCodeChoiceType extends CountryChoiceType
             $countryCodes[$country->getCode()] = Intl::getRegionBundle()->getCountryName($country->getCode());
         }
 
+        asort($countryCodes);
+
         return $countryCodes;
     }
 }
