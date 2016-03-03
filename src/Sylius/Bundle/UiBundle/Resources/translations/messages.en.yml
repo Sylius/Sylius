@@ -5,7 +5,30 @@ sylius:
       password: Password
       remember_me: Remember me
   ui:
+    are_your_sure_you_want_to_perform_this_action: Are you sure you want to perform this action?
+    confirm_your_action: Confirm your action
+    create: Create
+    dashboard: Dashboard
+    delete: Delete
+    disabled: Disabled
+    edit: Edit
+    enabled: Enabled
+    an_error_occurred: An error occurred
+    last_updated: Last updated
+    manage_taxation_of_your_products: Manage taxation of your products
+    no: No
+    no_results_to_display: There are no results to display
+    powered_by: Powered by
+    tax_categories: Tax categories
+    show: Show
+    info: Info
     sign_in: Sign in
     sign_out: Sign out
-    dashboard: Dashboard
-    powered_by: Powered by
+    status: Status
+    success: Success
+    yes: Yes
+    new: New
+    save_changes: Save changes
+    administration_panel_login: Administration panel login
+    new_tax_category: New tax category
+    edit_tax_category: Edit tax category

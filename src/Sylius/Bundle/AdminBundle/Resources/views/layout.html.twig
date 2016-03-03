@@ -1,18 +1,37 @@
-{% extends 'SyliusUiBundle::base.html.twig' %}
+{% extends 'SyliusUiBundle:Layout:sidebar.html.twig' %}
 
 {% block title %}Sylius | {% endblock %}
 
-{% block logo %}
-<a href="{{ path('sylius_admin_dashboard') }}" class="logo">
-    <span class="logo-mini"><b>S</b></span>
-    <span class="logo-lg"><b>Sylius</b></span>
-</a>
+{% block stylesheets %}
+    {% include 'SyliusUiBundle::_stylesheets.html.twig' with {'path': 'assets/admin/css/style.css'} %}
+{% endblock %}
+
+{% block topbar %}
+    <a class="icon item" id="sidebar-toggle">
+        <i class="sidebar icon"></i>
+    </a>
+    <div class="ui right floated simple dropdown item">
+        <img class="ui avatar image" src="{{ asset('assets/admin/img/avatar.png') }}">
+        <span>{{ app.user.customer.fullName }}</span>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+            <a href="{{ path('sylius_admin_logout') }}" class="item">
+                <i class="sign out icon"></i>
+                {{ 'sylius.ui.logout'|trans }}
+            </a>
+        </div>
+    </div>
 {% endblock %}
 
 {% block sidebar %}
-{{ knp_menu_render('sylius.admin.main', {'template': 'SyliusUiBundle:Menu:sidebar.html.twig'}) }}
+    <a class="item" href="{{ path('sylius_admin_dashboard') }}"><b>Sylius</b></a>
+    {{ knp_menu_render('sylius.admin.main', {'template': 'SyliusUiBundle:Menu:sidebar.html.twig'}) }}
 {% endblock %}
 
 {% block footer %}
-{{ 'sylius.ui.powered_by'|trans }} <a href="http://sylius.org" target="_blank">Sylius</a>.
+    {{ 'sylius.ui.powered_by'|trans }} <a href="http://sylius.org" target="_blank">Sylius</a>.
+{% endblock %}
+
+{% block javascripts %}
+    {% include 'SyliusUiBundle::_javascripts.html.twig' with {'path': 'assets/admin/js/app.js'} %}
 {% endblock %}

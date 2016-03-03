@@ -1,0 +1,29 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{% block form_row -%}
+    <div class="{% if required %}required {% endif %}field{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
+        {{- form_label(form) -}}
+        {{- form_widget(form) -}}
+        {{- form_errors(form) -}}
+    </div>
+{%- endblock form_row %}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+        {%- for error in errors -%}
+            <div class="ui pointing red label">
+            {{ error.message }}
+            </div>
+        {%- endfor -%}
+    {%- endif -%}
+{%- endblock form_errors -%}
+
+{% block checkbox_row -%}
+    <div class="field{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
+        <div class="ui toggle checkbox">
+            {{- form_label(form) -}}
+            {{- form_widget(form) -}}
+            {{- form_errors(form) -}}
+        </div>
+    </div>
+{%- endblock checkbox_row %}

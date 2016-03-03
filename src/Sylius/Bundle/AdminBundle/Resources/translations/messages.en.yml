@@ -4,3 +4,4 @@ sylius:
       main:
         configuration:
           header: Configuration
+          tax_categories: Tax categories

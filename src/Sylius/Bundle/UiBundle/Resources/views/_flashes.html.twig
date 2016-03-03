@@ -1,0 +1,19 @@
+{% for type in ['success', 'error', 'info', 'warning'] %}
+    {% for message in app.session.flashbag.get(type) %}
+        {% if 'error' == type %}
+            {% set result = 'negative' %}
+            {% set icon = 'remove' %}
+        {% endif %}
+        <div class="ui icon {{ result|default('positive') }} message">
+            <i class="close icon"></i>
+            <i class="{{ icon|default('checkmark') }} icon"></i>
+            <div class="content">
+                <div class="header">
+                    {% set header = 'sylius.ui.'~type %}
+                    {{ header|trans }}
+                </div>
+                <p>{{ message }}</p>
+            </div>
+        </div>
+    {% endfor %}
+{% endfor %}

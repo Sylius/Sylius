@@ -11,6 +11,7 @@
 /app/config/*.local.yml
 
 /web/bundles
+/web/assets/admin
 /web/assets/css
 /web/assets/js
 /web/assets/fonts

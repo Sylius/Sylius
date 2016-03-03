@@ -10,17 +10,8 @@ sylius_admin_dashboard:
     defaults:
         _controller: sylius.controller.admin.dashboard:indexAction
 
-sylius_admin_login:
-    path: /login
-    defaults:
-        _controller: sylius.controller.security:loginAction
-        _sylius:
-            template: SyliusAdminBundle:Security:login.html.twig
+sylius_admin_security:
+    resource: @SyliusAdminBundle/Resources/config/routing/security.yml
 
-sylius_admin_login_check:
-    path: /login-check
-    defaults:
-        _controller: sylius.controller.security:checkAction
-
-sylius_admin_logout:
-    path: /logout
+sylius_admin_tax_category:
+    resource: @SyliusAdminBundle/Resources/config/routing/tax_category.yml
