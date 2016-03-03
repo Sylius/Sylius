@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\SettingsBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Sylius\Bundle\SettingsBundle\Exception\ParameterNotFoundException;
 
 /**
  * @author Steffen Brem <steffenbrem@gmail.com>
@@ -105,7 +106,7 @@ class Settings implements SettingsInterface
     public function getParameter($name)
     {
         if (!$this->hasParameter($name)) {
-            throw new \InvalidArgumentException(sprintf('Parameter with name "%s" does not exist.', $name));
+            throw new ParameterNotFoundException($name);
         }
 
         return $this->parameters->get($name);

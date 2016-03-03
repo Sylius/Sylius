@@ -13,7 +13,6 @@ namespace spec\Sylius\Bundle\SettingsBundle\Manager;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Sylius\Bundle\SettingsBundle\Resolver\SettingsResolverInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
@@ -27,20 +26,20 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class SettingsManagerSpec extends ObjectBehavior
 {
     function let(
-        ServiceRegistryInterface $registry,
+        ServiceRegistryInterface $schemaRegistry,
         ServiceRegistryInterface $resolverRegistry,
         ObjectManager $settingsManager,
-        FactoryInterface $settingsfactory,
+        FactoryInterface $settingsFactory,
         FactoryInterface $parameterFactory,
         SettingsResolverInterface $defaultResolver,
         ValidatorInterface $validator,
         EventDispatcherInterface $eventDispatcher
     ) {
         $this->beConstructedWith(
-            $registry,
+            $schemaRegistry,
             $resolverRegistry,
             $settingsManager,
-            $settingsfactory,
+            $settingsFactory,
             $parameterFactory,
             $defaultResolver,
             $validator,

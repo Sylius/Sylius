@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\SettingsBundle\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Bundle\SettingsBundle\Exception\ParameterNotFoundException;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
@@ -47,7 +48,7 @@ interface SettingsInterface extends ResourceInterface
     /**
      * @param string $name
      *
-     * @throws \InvalidArgumentException
+     * @throws ParameterNotFoundException
      *
      * @return ParameterInterface
      */

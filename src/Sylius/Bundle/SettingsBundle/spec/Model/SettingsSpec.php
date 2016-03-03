@@ -56,7 +56,7 @@ class SettingsSpec extends ObjectBehavior
         $this->getNamespace()->shouldReturn(null);
     }
 
-    public function its_namespace_should_be_immutable_after_it_is_set()
+    function its_namespace_should_be_immutable_after_it_is_set()
     {
         $this->setNamespace('banana');
         $this->getNamespace()->shouldReturn('banana');
@@ -74,31 +74,18 @@ class SettingsSpec extends ObjectBehavior
 
     function it_can_get_parameter_by_name(ParameterInterface $parameter)
     {
-        $parameter->getName()
-            ->shouldBeCalled()
-            ->willReturn('left_side_products')
-        ;
-
-        $parameter->setSettings($this)
-            ->shouldBeCalled()
-        ;
+        $parameter->getName()->willReturn('left_side_products');
+        $parameter->setSettings($this)->shouldBeCalled();
 
         $this->addParameter($parameter);
 
-        $this->getParameter('left_side_products')
-            ->shouldReturn($parameter)
-        ;
+        $this->getParameter('left_side_products')->shouldReturn($parameter);
     }
 
     function it_can_check_if_it_has_a_parameter(ParameterInterface $parameter)
     {
-        $parameter->setSettings($this)
-            ->shouldBeCalled()
-        ;
-
-        $parameter->getName()
-            ->willReturn('title')
-        ;
+        $parameter->setSettings($this)->shouldBeCalled();
+        $parameter->getName()->willReturn('title');
 
         $this->addParameter($parameter);
 
@@ -108,13 +95,8 @@ class SettingsSpec extends ObjectBehavior
 
     function it_allows_to_add_parameters(ParameterInterface $parameter)
     {
-        $parameter->setSettings($this)
-            ->shouldBeCalled()
-        ;
-
-        $parameter->getName()
-            ->willReturn('title')
-        ;
+        $parameter->setSettings($this)->shouldBeCalled();
+        $parameter->getName()->willReturn('title');
 
         $this->addParameter($parameter);
         $this->getParameters()->shouldHaveCount(1);
@@ -122,13 +104,8 @@ class SettingsSpec extends ObjectBehavior
 
     function it_allows_to_remove_parameters(ParameterInterface $parameter)
     {
-        $parameter->setSettings($this)
-            ->shouldBeCalled()
-        ;
-
-        $parameter->getName()
-            ->willReturn('title')
-        ;
+        $parameter->setSettings($this)->shouldBeCalled();
+        $parameter->getName()->willReturn('title');
 
         $this->addParameter($parameter);
 

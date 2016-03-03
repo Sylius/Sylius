@@ -14,13 +14,15 @@ namespace Sylius\Bundle\SettingsBundle\Resolver;
 use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 
 /**
+ * A settings resolver is always bound to only one schema alias. You can change the way how that schema will resolve by
+ * implementing this interface. You could for example implement a resolver that uses a query parameter on the
+ * current request.
+ *
  * @author Steffen Brem <steffenbrem@gmail.com>
  */
 interface SettingsResolverInterface
 {
     /**
-     * Resolves settings based on schema alias.
-     *
      * @param string $schemaAlias
      * @param string $namespace
      *

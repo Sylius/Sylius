@@ -196,7 +196,7 @@ class SettingsManager implements SettingsManagerInterface
 
     /**
      * @param SettingsBuilder $settingsBuilder
-     * @param array           $parameters
+     * @param array $parameters
      *
      * @return array
      */

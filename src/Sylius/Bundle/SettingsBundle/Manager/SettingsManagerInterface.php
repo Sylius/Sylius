@@ -20,7 +20,7 @@ use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 interface SettingsManagerInterface
 {
     /**
-     * @param string      $schemaAlias
+     * @param string $schemaAlias
      * @param string|null $namespace
      *
      * @return ParameterCollection
