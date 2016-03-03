@@ -21,14 +21,14 @@ Feature: Receiving fixed discount on products from specific taxon
         And my cart total should be "€90.00"
         And my discount should be "-€10.00"
 
-    @todo
+    @ui
     Scenario: Receiving percentage discount on a multiple items from specific taxon
         When I add 3 products "PHP T-Shirt" to the cart
         Then theirs price should be decreased by "€30.00"
         And my cart total should be "€270.00"
         And my discount should be "-€30.00"
 
-    @todo
+    @ui
     Scenario: Receiving fixed discount equal to the items total of my cart
         Given there is a promotion "Christmas Sale"
         And it gives "€20.00" off on every product classified as "Mugs"
@@ -37,7 +37,7 @@ Feature: Receiving fixed discount on products from specific taxon
         And my cart total should be "€0.00"
         And my discount should be "-€60.00"
 
-    @todo
+    @ui
     Scenario: Receiving fixed discount equal to the items total of my cart even if the discount is bigger than the items total
         Given there is a promotion "Christmas Sale"
         And it gives "€30.00" off on every product classified as "Mugs"
@@ -46,7 +46,7 @@ Feature: Receiving fixed discount on products from specific taxon
         And my cart total should be "€0.00"
         And my discount should be "-€40.00"
 
-    @todo
+    @ui
     Scenario: Receiving fixed discount only on items from specific taxon
         When I add product "PHP T-Shirt" to the cart
         And I add product "PHP Mug" to the cart
@@ -55,7 +55,7 @@ Feature: Receiving fixed discount on products from specific taxon
         And my cart total should be "€110.00"
         And my discount should be "-€10.00"
 
-    @todo
+    @ui
     Scenario: Receiving different discounts on items from different taxons
         Given there is a promotion "Mugs promotion"
         And it gives "€2.00" off on every product classified as "Mugs"

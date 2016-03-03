@@ -172,7 +172,7 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") off every product (classified as "[^"]+")$/
+     * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") off on every product (classified as "[^"]+")$/
      */
     public function itGivesFixedOffEveryProductClassifiedAs(PromotionInterface $promotion, $discount, TaxonInterface $taxon)
     {

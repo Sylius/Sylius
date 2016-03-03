@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Core\Promotion\Action;
 
-use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -29,11 +28,6 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 class ItemFixedDiscountAction extends DiscountAction
 {
     /**
-     * @var IntegerDistributorInterface
-     */
-    private $distributor;
-
-    /**
      * @var TaxonFilterInterface
      */
     private $taxonFilter;
@@ -41,18 +35,15 @@ class ItemFixedDiscountAction extends DiscountAction
     /**
      * @param FactoryInterface $adjustmentFactory
      * @param OriginatorInterface $originator
-     * @param IntegerDistributorInterface $distributor
      * @param TaxonFilterInterface $taxonFilter
      */
     public function __construct(
         FactoryInterface $adjustmentFactory,
         OriginatorInterface $originator,
-        IntegerDistributorInterface $distributor,
         TaxonFilterInterface $taxonFilter
     ) {
         parent::__construct($adjustmentFactory, $originator);
 
-        $this->distributor = $distributor;
         $this->taxonFilter = $taxonFilter;
     }
 
@@ -65,12 +56,14 @@ class ItemFixedDiscountAction extends DiscountAction
             throw new UnexpectedTypeException($subject, OrderInterface::class);
         }
 
+        if (0 === $configuration['amount']) {
+            return;
+        }
+
         $filteredItems = $this->taxonFilter->filter($subject->getItems()->toArray(), $configuration);
 
         foreach ($filteredItems as $item) {
-            $distributedAmounts = $this->distributor->distribute($configuration['amount'], $item->getQuantity());
-
-            $this->setUnitsAdjustments($item, $distributedAmounts, $promotion);
+            $this->setUnitsAdjustments($item, $configuration['amount'], $promotion);
         }
     }
 
@@ -98,19 +91,13 @@ class ItemFixedDiscountAction extends DiscountAction
 
     /**
      * @param OrderItemInterface $item
-     * @param array $distributedAmounts
+     * @param int $amount
      * @param PromotionInterface $promotion
      */
-    private function setUnitsAdjustments(OrderItemInterface $item, array $distributedAmounts, PromotionInterface $promotion)
+    private function setUnitsAdjustments(OrderItemInterface $item, $amount, PromotionInterface $promotion)
     {
-        $i = 0;
         foreach ($item->getUnits() as $unit) {
-            if (0 === $distributedAmounts[$i]) {
-                break;
-            }
-
-            $this->addAdjustmentToUnit($unit, $distributedAmounts[$i], $promotion);
-            $i++;
+            $this->addAdjustmentToUnit($unit, $amount, $promotion);
         }
     }
 
