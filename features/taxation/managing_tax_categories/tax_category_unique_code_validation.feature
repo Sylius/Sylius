@@ -5,8 +5,8 @@ Feature: Tax category unique code validation
     I want to be prevented from adding two tax categories with same code
 
     Background:
-        Given I am logged in as an administrator
-        And the store has "Alcoholic Drinks" tax category with code "alcohol"
+        Given the store has "Alcoholic Drinks" tax category with code "alcohol"
+        And I am logged in as an administrator
 
     @todo
     Scenario: Trying to add tax category with taken code

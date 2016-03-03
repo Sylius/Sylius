@@ -1,6 +1,6 @@
 @order
 Feature: Deleting an order
-    In order to get rid of test and bad orders
+    In order to to remove test, obsolete or incorrect orders
     As an Administrator
     I want to be able to delete an order with all it's details from the registry
 
