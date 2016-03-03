@@ -12,14 +12,14 @@ Feature: Checkout limited time promotions
             | P2   | Too late | too late to get this discount |            | 2013-01-01 |
             | P3   | Too soon | too soon to get this discount | 2023-01-01 |            |
         And promotion "Decade" has following actions defined:
-            | type           | configuration |
-            | Fixed discount | Amount: 20    |
+            | type                 | configuration |
+            | Order fixed discount | Amount: 20    |
         And promotion "Too late" has following actions defined:
-            | type           | configuration |
-            | Fixed discount | Amount: 30    |
+            | type                 | configuration |
+            | Order fixed discount | Amount: 30    |
         And promotion "Too soon" has following actions defined:
-            | type           | configuration |
-            | Fixed discount | Amount: 40    |
+            | type                 | configuration |
+            | Order fixed discount | Amount: 40    |
         And there are following taxons defined:
             | code | name     |
             | RTX1 | Category |

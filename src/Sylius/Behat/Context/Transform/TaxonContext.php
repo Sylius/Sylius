@@ -12,22 +12,22 @@
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class TaxonContext implements Context
+final class TaxonContext implements Context
 {
     /**
-     * @var RepositoryInterface
+     * @var TaxonRepositoryInterface
      */
     private $taxonRepository;
 
     /**
-     * @param RepositoryInterface $taxonRepository
+     * @param TaxonRepositoryInterface $taxonRepository
      */
-    public function __construct(RepositoryInterface $taxonRepository)
+    public function __construct(TaxonRepositoryInterface $taxonRepository)
     {
         $this->taxonRepository = $taxonRepository;
     }
@@ -38,7 +38,7 @@ class TaxonContext implements Context
      */
     public function getTaxonByName($taxonName)
     {
-        $taxon = $this->taxonRepository->findOneBy(['name' => $taxonName]);
+        $taxon = $this->taxonRepository->findOneByName($taxonName);
         if (null === $taxon) {
             throw new \InvalidArgumentException(sprintf('Taxon with name "%s" does not exist.', $taxonName));
         }

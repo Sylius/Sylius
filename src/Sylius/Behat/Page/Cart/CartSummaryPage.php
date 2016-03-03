@@ -93,6 +93,16 @@ class CartSummaryPage extends SymfonyPage implements CartSummaryPageInterface
     /**
      * {@inheritdoc}
      */
+    public function isItemDiscounted($productName)
+    {
+        $this->elements['discount price'] = '#cart-summary tr:contains("'.$productName.'") .discount-price';
+
+        return $this->hasElement('discount price');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function removeProduct($productName)
     {
         $item = $this->getDocument()->find('css', sprintf('#cart-summary tbody tr:contains("%s")', $productName));

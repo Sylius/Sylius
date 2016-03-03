@@ -17,26 +17,19 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\Taxonomy\Factory\TaxonFactoryInterface;
-use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class TaxonomyContext implements Context
+final class TaxonomyContext implements Context
 {
     /**
      * @var RepositoryInterface
      */
-    private $taxonomyRepository;
+    private $taxonRepository;
 
     /**
      * @var FactoryInterface
-     */
-    private $taxonomyFactory;
-
-    /**
-     * @var TaxonFactoryInterface
      */
     private $taxonFactory;
 
@@ -46,19 +39,16 @@ class TaxonomyContext implements Context
     private $objectManager;
 
     /**
-     * @param RepositoryInterface $taxonomyRepository
-     * @param FactoryInterface $taxonomyFactory
-     * @param TaxonFactoryInterface $taxonFactory
+     * @param RepositoryInterface $taxonRepository
+     * @param FactoryInterface $taxonFactory
      * @param ObjectManager $objectManager
      */
     public function __construct(
-        RepositoryInterface $taxonomyRepository,
-        FactoryInterface $taxonomyFactory,
-        TaxonFactoryInterface $taxonFactory,
+        RepositoryInterface $taxonRepository,
+        FactoryInterface $taxonFactory,
         ObjectManager $objectManager
     ) {
-        $this->taxonomyRepository = $taxonomyRepository;
-        $this->taxonomyFactory = $taxonomyFactory;
+        $this->taxonRepository = $taxonRepository;
         $this->taxonFactory = $taxonFactory;
         $this->objectManager = $objectManager;
     }
@@ -70,20 +60,13 @@ class TaxonomyContext implements Context
      */
     public function storeClassifiesItsProductsAs($firstTaxonName, $secondTaxonName = null, $thirdTaxonName = null)
     {
-        /** @var TaxonomyInterface $taxonomy */
-        $taxonomy = $this->taxonomyFactory->createNew();
-        $taxonomy->setName('Category');
-        $taxonomy->setCode('category');
-
         foreach ([$firstTaxonName, $secondTaxonName, $thirdTaxonName] as $taxonName) {
             if (null === $taxonName) {
                 break;
             }
 
-            $taxonomy->addTaxon($this->createTaxon($taxonName));
+            $this->taxonRepository->add($this->createTaxon($taxonName));
         }
-
-        $this->taxonomyRepository->add($taxonomy);
     }
 
     /**

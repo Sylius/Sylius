@@ -59,11 +59,11 @@ class PromotionContextSpec extends ObjectBehavior
     }
 
     function it_creates_promotion(
-        $sharedStorage,
-        $testPromotionFactory,
-        $promotionRepository,
         ChannelInterface $channel,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
+        PromotionRepositoryInterface $promotionRepository,
+        SharedStorageInterface $sharedStorage,
+        TestPromotionFactoryInterface $testPromotionFactory
     ) {
         $sharedStorage->get('channel')->willReturn($channel);
 
@@ -76,9 +76,9 @@ class PromotionContextSpec extends ObjectBehavior
     }
 
     function it_creates_fixed_discount_action_for_promotion(
-        $actionFactory,
-        $objectManager,
+        ActionFactoryInterface $actionFactory,
         ActionInterface $action,
+        ObjectManager $objectManager,
         PromotionInterface $promotion
     ) {
         $actionFactory->createFixedDiscount(1000)->willReturn($action);
@@ -90,11 +90,11 @@ class PromotionContextSpec extends ObjectBehavior
     }
 
     function it_creates_percentage_discount_action_for_promotion(
-        $sharedStorage,
-        $actionFactory,
-        $objectManager,
+        ActionFactoryInterface $actionFactory,
         ActionInterface $action,
-        PromotionInterface $promotion
+        ObjectManager $objectManager,
+        PromotionInterface $promotion,
+        SharedStorageInterface $sharedStorage
     ) {
         $sharedStorage->get('promotion')->willReturn($promotion);
 
@@ -107,13 +107,13 @@ class PromotionContextSpec extends ObjectBehavior
     }
 
     function it_creates_fixed_discount_promotion_for_cart_with_specified_quantity(
-        $sharedStorage,
-        $actionFactory,
-        $ruleFactory,
-        $objectManager,
+        ActionFactoryInterface $actionFactory,
         ActionInterface $action,
+        ObjectManager $objectManager,
+        PromotionInterface $promotion,
+        RuleFactoryInterface $ruleFactory,
         RuleInterface $rule,
-        PromotionInterface $promotion
+        SharedStorageInterface $sharedStorage
     ) {
         $sharedStorage->get('promotion')->willReturn($promotion);
 
@@ -129,12 +129,12 @@ class PromotionContextSpec extends ObjectBehavior
     }
 
     function it_creates_fixed_discount_promotion_for_cart_with_specified_items_total(
-        $actionFactory,
-        $ruleFactory,
-        $objectManager,
+        ActionFactoryInterface $actionFactory,
         ActionInterface $action,
-        RuleInterface $rule,
-        PromotionInterface $promotion
+        ObjectManager $objectManager,
+        PromotionInterface $promotion,
+        RuleFactoryInterface $ruleFactory,
+        RuleInterface $rule
     ) {
         $actionFactory->createFixedDiscount(1000)->willReturn($action);
         $promotion->addAction($action)->shouldBeCalled();
@@ -148,9 +148,9 @@ class PromotionContextSpec extends ObjectBehavior
     }
 
     function it_creates_percentage_shipping_discount_action_for_promotion(
-        $actionFactory,
-        $objectManager,
+        ActionFactoryInterface $actionFactory,
         ActionInterface $action,
+        ObjectManager $objectManager,
         PromotionInterface $promotion
     ) {
         $actionFactory->createPercentageShippingDiscount(0.1)->willReturn($action);
@@ -162,20 +162,20 @@ class PromotionContextSpec extends ObjectBehavior
     }
 
     function it_creates_item_percentage_discount_action_for_promotion_products_with_specific_taxon(
-        $actionFactory,
-        $objectManager,
+        ActionFactoryInterface $actionFactory,
         ActionInterface $action,
+        ObjectManager $objectManager,
         PromotionInterface $promotion,
         TaxonInterface $taxon
     ) {
-        $taxon->getCode()->willReturn('taxonCode');
+        $taxon->getCode()->willReturn('scottish_kilts');
 
         $actionFactory->createItemPercentageDiscount(0.1)->willReturn($action);
         $action->getConfiguration()->willReturn(['percentage' => 0.1]);
         $action->setConfiguration([
             'percentage' => 0.1,
             'filters' => [
-                'taxons' => ['taxonCode'],
+                'taxons' => ['scottish_kilts'],
             ],
         ])->shouldBeCalled();
         

@@ -24,7 +24,7 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
  */
 class PercentageDiscountAction extends DiscountAction
 {
-    const TYPE = 'percentage_discount';
+    const TYPE = 'order_percentage_discount';
 
     /**
      * {@inheritdoc}

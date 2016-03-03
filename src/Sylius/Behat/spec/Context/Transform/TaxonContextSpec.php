@@ -14,14 +14,14 @@ namespace spec\Sylius\Behat\Context\Transform;
 use Behat\Behat\Context\Context;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class TaxonContextSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $taxonRepository)
+    function let(TaxonRepositoryInterface $taxonRepository)
     {
         $this->beConstructedWith($taxonRepository);
     }
@@ -38,14 +38,14 @@ class TaxonContextSpec extends ObjectBehavior
 
     function it_returns_taxon_by_name($taxonRepository, TaxonInterface $taxon)
     {
-        $taxonRepository->findOneBy(['name' => 'Books'])->willReturn($taxon);
+        $taxonRepository->findOneByName('Books')->willReturn($taxon);
 
         $this->getTaxonByName('Books')->shouldReturn($taxon);
     }
 
     function it_throws_exception_if_taxon_with_given_name_does_not_exist($taxonRepository)
     {
-        $taxonRepository->findOneBy(['name' => 'Books'])->willReturn(null);
+        $taxonRepository->findOneByName('Books')->willReturn(null);
 
         $this
             ->shouldThrow(new \InvalidArgumentException('Taxon with name "Books" does not exist.'))

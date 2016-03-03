@@ -22,11 +22,9 @@ Feature: Checkout percentage discount promotions
         And promotion "300 EUR" has following actions defined:
             | type                      | configuration  |
             | Order percentage discount | percentage: 10 |
-        And there are following taxonomies defined:
-            | code | name     |
-            | RTX1 | Category |
-        And taxon "Category" has following children:
-            | Clothing[TX1] > Debian T-Shirts[TX2] |
+        And there are following taxons defined:
+            | code | name            |
+            | TX1  | Debian T-Shirts |
         And the following products exist:
             | name   | price | taxons          |
             | Buzz   | 500   | Debian T-Shirts |

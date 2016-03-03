@@ -38,7 +38,7 @@ class RegularPriceExtension extends \Twig_Extension
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('sylius_regular_price', [$this, 'provideItemRegularPrice']),
+            new \Twig_SimpleFilter('sylius_regular_price', [$this, 'getItemRegularPrice']),
         ];
     }
 
@@ -47,7 +47,7 @@ class RegularPriceExtension extends \Twig_Extension
      *
      * @return int
      */
-    public function provideItemRegularPrice(OrderItemInterface $orderItem)
+    public function getItemRegularPrice(OrderItemInterface $orderItem)
     {
         return $this->regularPriceHelper->getRegularPrice($orderItem);
     }

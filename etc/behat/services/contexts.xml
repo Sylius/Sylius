@@ -155,8 +155,7 @@
         </service>
 
         <service id="sylius.behat.context.setup.taxonomy" class="%sylius.behat.context.setup.taxonomy.class%" scope="scenario">
-            <argument type="service" id="sylius.repository.taxonomy" container="symfony" />
-            <argument type="service" id="sylius.factory.taxonomy" container="symfony" />
+            <argument type="service" id="sylius.repository.taxon" container="symfony" />
             <argument type="service" id="sylius.factory.taxon" container="symfony" />
             <argument type="service" id="doctrine.orm.entity_manager" container="symfony" />
             <tag name="sylius.behat.context" />

@@ -16,17 +16,17 @@ Feature: Promotions
             | type          | configuration |
             | Cart quantity | Count: 3      |
         And promotion "New year" has following actions defined:
-            | type           | configuration |
-            | Fixed discount | Amount: 10    |
+            | type                 | configuration |
+            | Order fixed discount | Amount: 10    |
         And promotion "Christmas" has following rules defined:
             | type       | configuration |
             | Item total | Amount: 100   |
         And promotion "Christmas" has following actions defined:
-            | type           | configuration |
-            | Fixed discount | Amount: 15    |
+            | type                 | configuration |
+            | Order fixed discount | Amount: 15    |
         And promotion "Press Campaign" has following actions defined:
-            | type           | configuration |
-            | Fixed discount | Amount: 5     |
+            | type                | configuration |
+            | Orde fixed discount | Amount: 5     |
         And promotion "Press Campaign" has following coupons:
             | code   | usage limit | used |
             | XD0001 | 1           | 0    |
@@ -35,8 +35,8 @@ Feature: Promotions
             | AD0001 | 3           | 2    |
             | AD0002 | 3           | 0    |
         And promotion "Free orders" has following actions defined:
-            | type                | configuration   |
-            | Percentage discount | Percentage: 100 |
+            | type                      | configuration   |
+            | Order percentage discount | Percentage: 100 |
         And I am logged in as administrator
 
     Scenario: Seeing index of all promotions
@@ -94,7 +94,7 @@ Feature: Promotions
         When I fill in "Code" with "P5"
         And I fill in "Name" with "Behat Training"
         And I fill in "Description" with "Behat Training 100 EUR discount on all orders"
-        And I add "Fixed discount" action
+        And I add "Order fixed discount" action
         And I fill in "Amount" with "100"
         And I press "Create"
         Then I should see "Behat Training"
@@ -106,7 +106,7 @@ Feature: Promotions
         When I fill in "Code" with "P5"
         And I fill in "Name" with "Sylius Training"
         And I fill in "Description" with "Sylius Training 10% discount on all orders"
-        And I add "Percentage discount" action
+        And I add "Order percentage discount" action
         And I fill in "Percentage" with "10"
         And I press "Create"
         Then I should see "Sylius Training"
@@ -200,7 +200,7 @@ Feature: Promotions
         When I fill in "Code" with "P5"
         And I fill in "Name" with "First 5 pay half!"
         And I fill in "Description" with "First 5 orders get 50% discount!"
-        And I add "Percentage discount" action
+        And I add "Order percentage discount" action
         And I fill in "Percentage" with "50"
         And I fill in "Usage limit" with "5"
         And I press "Create"
@@ -274,10 +274,10 @@ Feature: Promotions
     @javascript
     Scenario: Deleting promotion action
         Given I am on the page of promotion "Christmas"
-        When I press "Delete" near "Fixed discount"
+        When I press "Delete" near "Order fixed discount"
         And I click "Delete" from the confirmation modal
         Then I should see "Promotion action has been successfully deleted"
-        And I should not see "Fixed discount"
+        And I should not see "Order fixed discount"
 
     Scenario: Cannot update promotion code
         When I am editing promotion "New Year"

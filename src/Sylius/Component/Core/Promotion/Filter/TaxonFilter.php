@@ -22,7 +22,7 @@ class TaxonFilter implements TaxonFilterInterface
     /**
      * {@inheritdoc}
      */
-    public function filter(Collection $items, array $configuration)
+    public function filter(array $items, array $configuration)
     {
         if (!isset($configuration['filters']['taxons'])) {
             return $items;

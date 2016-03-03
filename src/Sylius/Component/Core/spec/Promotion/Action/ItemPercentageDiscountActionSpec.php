@@ -68,8 +68,9 @@ class ItemPercentageDiscountActionSpec extends ObjectBehavior
         PromotionInterface $promotion
     ) {
         $order->getItems()->willReturn($originalItems);
+        $originalItems->toArray()->willReturn([$orderItem]);
         $taxonFilter
-            ->filter($originalItems, ['percentage' => 0.2, 'filters' => ['taxons' => ['testTaxon']]])
+            ->filter([$orderItem], ['percentage' => 0.2, 'filters' => ['taxons' => ['testTaxon']]])
             ->willReturn($filteredItems)
         ;
 
@@ -120,8 +121,9 @@ class ItemPercentageDiscountActionSpec extends ObjectBehavior
         PromotionInterface $promotion
     ) {
         $order->getItems()->willReturn($originalItems);
+        $originalItems->toArray()->willReturn([$orderItem]);
         $taxonFilter
-            ->filter($originalItems, ['percentage' => 0.2, 'filters' => ['taxons' => ['testTaxon']]])
+            ->filter([$orderItem], ['percentage' => 0.2, 'filters' => ['taxons' => ['testTaxon']]])
             ->willReturn($filteredItems)
         ;
 
@@ -160,7 +162,7 @@ class ItemPercentageDiscountActionSpec extends ObjectBehavior
         ;
     }
 
-    function it_revert_proper_promotion_adjustment_from_all_units(
+    function it_reverts_proper_promotion_adjustment_from_all_units(
         $originator,
         AdjustmentInterface $promotionAdjustment1,
         AdjustmentInterface $promotionAdjustment2,

@@ -26,18 +26,9 @@ use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
  */
 class TaxonomyContextSpec extends ObjectBehavior
 {
-    function let(
-        RepositoryInterface $taxonomyRepository,
-        FactoryInterface $taxonomyFactory,
-        TaxonFactoryInterface $taxonFactory,
-        ObjectManager $objectManager
-    ) {
-        $this->beConstructedWith(
-            $taxonomyRepository,
-            $taxonomyFactory,
-            $taxonFactory,
-            $objectManager
-        );
+    function let(RepositoryInterface $taxonRepository, FactoryInterface $taxonFactory, ObjectManager $objectManager)
+    {
+        $this->beConstructedWith($taxonRepository, $taxonFactory, $objectManager);
     }
 
     function it_is_initializable()
@@ -51,39 +42,26 @@ class TaxonomyContextSpec extends ObjectBehavior
     }
 
     function it_creates_one_taxons_with_given_name(
-        $taxonomyRepository,
-        $taxonomyFactory,
-        $taxonFactory,
-        TaxonInterface $firstTaxon,
-        TaxonomyInterface $taxonomy
+        FactoryInterface $taxonFactory,
+        RepositoryInterface $taxonRepository,
+        TaxonInterface $firstTaxon
     ) {
-        $taxonomyFactory->createNew()->willReturn($taxonomy);
-        $taxonomy->setCode('category')->shouldBeCalled();
-        $taxonomy->setName('Category')->shouldBeCalled();
-
         $taxonFactory->createNew()->willReturn($firstTaxon);
 
         $firstTaxon->setName('Swords')->shouldBeCalled();
         $firstTaxon->setCode('swords')->shouldBeCalled();
 
-        $taxonomy->addTaxon($firstTaxon)->shouldBeCalled();
-        $taxonomyRepository->add($taxonomy)->shouldBeCalled();
+        $taxonRepository->add($firstTaxon)->shouldBeCalled();
 
         $this->storeClassifiesItsProductsAs('Swords');
     }
 
     function it_creates_two_taxons_with_given_name(
-        $taxonomyRepository,
-        $taxonomyFactory,
-        $taxonFactory,
+        FactoryInterface $taxonFactory,
+        RepositoryInterface $taxonRepository,
         TaxonInterface $firstTaxon,
-        TaxonInterface $secondTaxon,
-        TaxonomyInterface $taxonomy
+        TaxonInterface $secondTaxon
     ) {
-        $taxonomyFactory->createNew()->willReturn($taxonomy);
-        $taxonomy->setCode('category')->shouldBeCalled();
-        $taxonomy->setName('Category')->shouldBeCalled();
-
         $taxonFactory->createNew()->willReturn($firstTaxon, $secondTaxon);
 
         $firstTaxon->setName('Swords')->shouldBeCalled();
@@ -92,27 +70,19 @@ class TaxonomyContextSpec extends ObjectBehavior
         $secondTaxon->setName('Composite bows')->shouldBeCalled();
         $secondTaxon->setCode('composite_bows')->shouldBeCalled();
 
-        $taxonomy->addTaxon($firstTaxon)->shouldBeCalled();
-        $taxonomy->addTaxon($secondTaxon)->shouldBeCalled();
-
-        $taxonomyRepository->add($taxonomy)->shouldBeCalled();
+        $taxonRepository->add($firstTaxon)->shouldBeCalled();
+        $taxonRepository->add($secondTaxon)->shouldBeCalled();
 
         $this->storeClassifiesItsProductsAs('Swords', 'Composite bows');
     }
 
     function it_creates_three_taxons_with_given_name(
-        $taxonomyRepository,
-        $taxonomyFactory,
-        $taxonFactory,
+        FactoryInterface $taxonFactory,
+        RepositoryInterface $taxonRepository,
         TaxonInterface $firstTaxon,
         TaxonInterface $secondTaxon,
-        TaxonInterface $thirdTaxon,
-        TaxonomyInterface $taxonomy
+        TaxonInterface $thirdTaxon
     ) {
-        $taxonomyFactory->createNew()->willReturn($taxonomy);
-        $taxonomy->setCode('category')->shouldBeCalled();
-        $taxonomy->setName('Category')->shouldBeCalled();
-
         $taxonFactory->createNew()->willReturn($firstTaxon, $secondTaxon, $thirdTaxon);
 
         $firstTaxon->setName('Swords')->shouldBeCalled();
@@ -124,11 +94,9 @@ class TaxonomyContextSpec extends ObjectBehavior
         $thirdTaxon->setName('Axes')->shouldBeCalled();
         $thirdTaxon->setCode('axes')->shouldBeCalled();
 
-        $taxonomy->addTaxon($firstTaxon)->shouldBeCalled();
-        $taxonomy->addTaxon($secondTaxon)->shouldBeCalled();
-        $taxonomy->addTaxon($thirdTaxon)->shouldBeCalled();
-
-        $taxonomyRepository->add($taxonomy)->shouldBeCalled();
+        $taxonRepository->add($firstTaxon)->shouldBeCalled();
+        $taxonRepository->add($secondTaxon)->shouldBeCalled();
+        $taxonRepository->add($thirdTaxon)->shouldBeCalled();
 
         $this->storeClassifiesItsProductsAs('Swords', 'Composite bows', 'Axes');
     }

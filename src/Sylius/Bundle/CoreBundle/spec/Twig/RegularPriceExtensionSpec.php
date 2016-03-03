@@ -39,7 +39,7 @@ class RegularPriceExtensionSpec extends ObjectBehavior
     {
         $regularPriceHelper->getRegularPrice($orderItem)->willReturn(1500);
 
-        $this->provideItemRegularPrice($orderItem)->shouldReturn(1500);
+        $this->getItemRegularPrice($orderItem)->shouldReturn(1500);
     }
 
     function it_has_name()

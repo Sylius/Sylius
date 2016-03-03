@@ -64,6 +64,13 @@ interface CartSummaryPageInterface extends PageInterface
 
     /**
      * @param string $productName
+     *
+     * @return bool
+     */
+    public function isItemDiscounted($productName);
+
+    /**
+     * @param string $productName
      */
     public function removeProduct($productName);
 

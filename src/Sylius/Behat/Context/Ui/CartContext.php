@@ -201,10 +201,7 @@ final class CartContext implements Context
     {
         $this->cartSummaryPage->open();
 
-        expect($this->cartSummaryPage)
-            ->toThrow(ElementNotFoundException::class)
-            ->during('getItemDiscountPrice', [$product->getName()])
-        ;
+        expect($this->cartSummaryPage->isItemDiscounted($product->getName()))->toBe(false);
     }
 
     /**

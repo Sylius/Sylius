@@ -20,10 +20,10 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 interface TaxonFilterInterface
 {
     /**
-     * @param Collection $items
+     * @param array $items
      * @param array $configuration
      *
      * @return OrderItemInterface[]
      */
-    public function filter(Collection $items, array $configuration);
+    public function filter(array $items, array $configuration);
 }

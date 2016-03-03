@@ -28,8 +28,7 @@ class RegularPriceHelper extends Helper
     public function getRegularPrice(OrderItemInterface $orderItem)
     {
         return
-            $orderItem->getUnitPrice() *
-            $orderItem->getQuantity() +
+            $orderItem->getUnitPrice() * $orderItem->getQuantity() +
             $orderItem->getAdjustmentsTotalRecursively(AdjustmentInterface::TAX_ADJUSTMENT)
         ;
     }

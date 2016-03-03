@@ -435,12 +435,12 @@
         <service id="sylius.promotion_action.fixed_discount" class="%sylius.promotion_action.fixed_discount.class%">
             <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.originator" />
-            <tag name="sylius.promotion_action" type="fixed_discount" label="Fixed discount" />
+            <tag name="sylius.promotion_action" type="order_fixed_discount" label="Order fixed discount" />
         </service>
         <service id="sylius.promotion_action.percentage_discount" class="%sylius.promotion_action.percentage_discount.class%">
             <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.originator" />
-            <tag name="sylius.promotion_action" type="order_percentage_discount" label="Percentage discount" />
+            <tag name="sylius.promotion_action" type="order_percentage_discount" label="Order percentage discount" />
         </service>
         <service id="sylius.promotion_action.item_percentage_discount" class="%sylius.promotion_action.item_percentage_discount.class%">
             <argument type="service" id="sylius.factory.adjustment" />

@@ -12,8 +12,10 @@
 namespace Sylius\Component\Core\Factory;
 
 use Sylius\Component\Core\Promotion\Action\FixedDiscountAction;
+use Sylius\Component\Core\Promotion\Action\ItemPercentageDiscountAction;
 use Sylius\Component\Core\Promotion\Action\PercentageDiscountAction;
 use Sylius\Component\Core\Promotion\Action\ShippingDiscountAction;
+use Sylius\Component\Promotion\Model\ActionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
@@ -63,7 +65,7 @@ class ActionFactory implements ActionFactoryInterface
      */
     public function createItemPercentageDiscount($percentage)
     {
-        return $this->createAction(ActionInterface::TYPE_ITEM_PERCENTAGE_DISCOUNT, ['percentage' => $percentage]);
+        return $this->createAction(ItemPercentageDiscountAction::TYPE, ['percentage' => $percentage]);
     }
 
     /**
@@ -71,7 +73,7 @@ class ActionFactory implements ActionFactoryInterface
      */
     public function createPercentageShippingDiscount($percentage)
     {
-        return $this->createAction(ActionInterface::TYPE_SHIPPING_DISCOUNT, ['percentage' => $percentage]);
+        return $this->createAction(ShippingDiscountAction::TYPE, ['percentage' => $percentage]);
     }
 
     /**

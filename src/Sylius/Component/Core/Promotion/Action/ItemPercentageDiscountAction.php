@@ -28,6 +28,8 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 class ItemPercentageDiscountAction extends DiscountAction
 {
+    const TYPE = 'item_percentage_discount';
+
     /**
      * @var IntegerDistributorInterface
      */
@@ -65,7 +67,7 @@ class ItemPercentageDiscountAction extends DiscountAction
             throw new UnexpectedTypeException($subject, OrderInterface::class);
         }
 
-        $filteredItems = $this->taxonFilter->filter($subject->getItems(), $configuration);
+        $filteredItems = $this->taxonFilter->filter($subject->getItems()->toArray(), $configuration);
 
         foreach ($filteredItems as $item) {
             $promotionAmount = (int) round($item->getTotal() * $configuration['percentage']);
@@ -115,7 +117,7 @@ class ItemPercentageDiscountAction extends DiscountAction
         }
     }
 
-    /**X
+    /**
      * @param OrderItemUnitInterface $unit
      * @param int $amount
      * @param PromotionInterface $promotion
