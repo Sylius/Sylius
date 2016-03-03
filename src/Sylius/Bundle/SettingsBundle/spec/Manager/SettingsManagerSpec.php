@@ -15,7 +15,8 @@ use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
-use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
+use Sylius\Bundle\SettingsBundle\Schema\SchemaInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -27,7 +28,7 @@ use Symfony\Component\Validator\ValidatorInterface;
 class SettingsManagerSpec extends ObjectBehavior
 {
     function let(
-        SchemaRegistryInterface $registry,
+        ServiceRegistryInterface $registry,
         Cache $cache,
         ObjectManager $manager,
         RepositoryInterface $repository,
@@ -47,4 +48,25 @@ class SettingsManagerSpec extends ObjectBehavior
     {
         $this->shouldImplement(SettingsManagerInterface::class);
     }
+
+    function it_throws_exception_if_settings_do_not_exists_in_database_and_schama_is_not_pass($schemaAlias, $namespace)
+    {
+
+    }
+
+    function it_creates_new_schema_if_it_is_not_in_database($schemaAlias, $namespace)
+    {
+
+    }
+
+    function it_loads_settings_for_given_schema_and_namespace($schemaAlias, $namespace)
+    {
+
+    }
+
+    function it_loads_settings_for_given_namespace($namespace)
+    {
+
+    }
+
 }

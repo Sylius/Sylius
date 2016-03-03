@@ -46,7 +46,7 @@ class SettingsController extends FOSRestController
         } catch (MissingOptionsException $e) {
             // When a Settings is not persisted yet, it won't have any initial value in database,
             // so we create a new empty instance.
-            $settings = new Settings([]);
+            $settings = new Settings([], '', null);
         }
 
         $view = $this
@@ -74,7 +74,7 @@ class SettingsController extends FOSRestController
         } catch (MissingOptionsException $e) {
             // When it is the first time that a Settings is being persisted,
             // it won't have any initial value in database, so we should create a new instance.
-            $settings = new Settings([]);
+            $settings = new Settings([], '', null);
         }
 
         $isApiRequest = $this->isApiRequest($request);
