@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
-use Sylius\Component\Core\Model\Customer;
-use Sylius\Component\Core\Model\Product;
+use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -32,12 +32,12 @@ class ProductReviewAdminType extends ProductReviewType
 
         $builder
             ->add('reviewSubject', 'entity', [
-                'class' => Product::class,
+                'class' => ProductInterface::class,
                 'label' => 'sylius.form.review.product',
                 'property' => 'name',
             ])
             ->add('author', 'entity', [
-                'class' => Customer::class,
+                'class' => CustomerInterface::class,
                 'label' => 'sylius.form.review.author',
                 'property' => 'email',
             ])
