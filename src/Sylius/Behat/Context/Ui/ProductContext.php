@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Product\ProductShowPage;
+use Sylius\Behat\Page\Product\ProductShowPageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
 /**
@@ -21,14 +21,14 @@ use Sylius\Component\Core\Model\ProductInterface;
 final class ProductContext implements Context
 {
     /**
-     * @var ProductShowPage
+     * @var ProductShowPageInterface
      */
     private $productShowPage;
 
     /**
-     * @param ProductShowPage $productShowPage
+     * @param ProductShowPageInterface $productShowPage
      */
-    public function __construct(ProductShowPage $productShowPage)
+    public function __construct(ProductShowPageInterface $productShowPage)
     {
         $this->productShowPage = $productShowPage;
     }

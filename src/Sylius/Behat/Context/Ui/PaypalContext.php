@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\External\PaypalExpressCheckoutPage;
+use Sylius\Behat\Page\External\PaypalExpressCheckoutPageInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -20,7 +20,7 @@ use Sylius\Behat\Page\External\PaypalExpressCheckoutPage;
 class PaypalContext implements Context
 {
     /**
-     * @var PaypalExpressCheckoutPage
+     * @var PaypalExpressCheckoutPageInterface
      */
     private $paypalExpressCheckoutPage;
 
@@ -35,12 +35,15 @@ class PaypalContext implements Context
     private $paypalAccountPassword;
 
     /**
-     * @param PaypalExpressCheckoutPage $paypalExpressCheckoutPage
+     * @param PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage
      * @param string $paypalAccountName
      * @param string $paypalAccountPassword
      */
-    public function __construct(PaypalExpressCheckoutPage $paypalExpressCheckoutPage, $paypalAccountName, $paypalAccountPassword)
-    {
+    public function __construct(
+        PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage,
+        $paypalAccountName,
+        $paypalAccountPassword
+    ) {
         $this->paypalExpressCheckoutPage = $paypalExpressCheckoutPage;
         $this->paypalAccountName = $paypalAccountName;
         $this->paypalAccountPassword = $paypalAccountPassword;

@@ -16,10 +16,10 @@ use Sylius\Behat\Page\SymfonyPage;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class CheckoutAddressingStep extends SymfonyPage
+class CheckoutAddressingStep extends SymfonyPage implements CheckoutAddressingStepInterface
 {
     /**
-     * @param array $addressingDetails
+     * {@inheritdoc}
      */
     public function fillAddressingDetails(array $addressingDetails)
     {

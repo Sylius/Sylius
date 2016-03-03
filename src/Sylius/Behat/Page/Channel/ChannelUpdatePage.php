@@ -16,10 +16,10 @@ use Sylius\Behat\Page\SymfonyPage;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ChannelUpdatePage extends SymfonyPage
+class ChannelUpdatePage extends SymfonyPage implements ChannelUpdatePageInterface
 {
     /**
-     * @param string $themeName
+     * {@inheritdoc}
      */
     public function setTheme($themeName)
     {

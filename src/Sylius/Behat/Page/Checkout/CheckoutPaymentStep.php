@@ -11,18 +11,16 @@
 
 namespace Sylius\Behat\Page\Checkout;
 
-use SensioLabs\Behat\PageObjectExtension\PageObject\Exception\ElementNotFoundException;
+use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class CheckoutPaymentStep extends SymfonyPage
+class CheckoutPaymentStep extends SymfonyPage implements CheckoutPaymentStepInterface
 {
     /**
-     * @param string $paymentMethod
-     *
-     * @throws ElementNotFoundException
+     * {@inheritdoc}
      */
     public function selectPaymentMethod($paymentMethod)
     {

@@ -13,9 +13,9 @@ namespace spec\Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
 use PhpSpec\ObjectBehavior;
-use Sylius\Behat\Page\Customer\CustomerShowPage;
+use Sylius\Behat\Page\Customer\CustomerShowPageInterface;
 use Sylius\Behat\Page\ElementNotFoundException;
-use Sylius\Behat\Page\User\LoginPage;
+use Sylius\Behat\Page\User\LoginPageInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
@@ -30,8 +30,8 @@ class UserContextSpec extends ObjectBehavior
     public function let(
         SharedStorageInterface $sharedStorage,
         UserRepositoryInterface $userRepository,
-        CustomerShowPage $customerShowPage,
-        LoginPage $loginPage
+        CustomerShowPageInterface $customerShowPage,
+        LoginPageInterface $loginPage
     ) {
         $this->beConstructedWith($sharedStorage, $userRepository, $customerShowPage, $loginPage);
     }
@@ -75,7 +75,7 @@ class UserContextSpec extends ObjectBehavior
     }
 
     function it_does_not_allow_deleting_my_own_account(
-        SharedStorageInterface $sharedStorage, UserInterface $admin, CustomerShowPage $customerShowPage
+        SharedStorageInterface $sharedStorage, UserInterface $admin, CustomerShowPageInterface $customerShowPage
     ) {
         $sharedStorage->get('admin')->willReturn($admin);
 
@@ -91,7 +91,7 @@ class UserContextSpec extends ObjectBehavior
         SharedStorageInterface $sharedStorage,
         UserInterface $user,
         CustomerInterface $customer,
-        CustomerShowPage $customerShowPage
+        CustomerShowPageInterface $customerShowPage
     ) {
         $sharedStorage->get('deleted_user')->willReturn($user);
 

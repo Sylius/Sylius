@@ -16,7 +16,7 @@ use Sylius\Behat\Page\SymfonyPage;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class CartSummaryPage extends SymfonyPage
+class CartSummaryPage extends SymfonyPage implements CartSummaryPageInterface
 {
     /**
      * @var array
@@ -29,15 +29,7 @@ class CartSummaryPage extends SymfonyPage
     ];
 
     /**
-     * @return string
-     */
-    public function getRouteName()
-    {
-        return 'sylius_cart_summary';
-    }
-
-    /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getGrandTotal()
     {
@@ -47,7 +39,7 @@ class CartSummaryPage extends SymfonyPage
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getTaxTotal()
     {
@@ -57,7 +49,7 @@ class CartSummaryPage extends SymfonyPage
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getShippingTotal()
     {
@@ -67,7 +59,7 @@ class CartSummaryPage extends SymfonyPage
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getPromotionTotal()
     {
@@ -77,7 +69,7 @@ class CartSummaryPage extends SymfonyPage
     }
 
     /**
-     * @param string $productName
+     * {@inheritdoc}
      */
     public function removeProduct($productName)
     {
@@ -86,8 +78,7 @@ class CartSummaryPage extends SymfonyPage
     }
 
     /**
-     * @param string $productName
-     * @param int $quantity
+     * {@inheritdoc}
      */
     public function changeQuantity($productName, $quantity)
     {
@@ -96,5 +87,13 @@ class CartSummaryPage extends SymfonyPage
         $field->setValue($quantity);
 
         $this->getDocument()->pressButton('Save');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getRouteName()
+    {
+        return 'sylius_cart_summary';
     }
 }

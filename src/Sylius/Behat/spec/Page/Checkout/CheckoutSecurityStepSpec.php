@@ -13,6 +13,7 @@ namespace spec\Sylius\Behat\Page\Checkout;
 
 use Behat\Mink\Session;
 use PhpSpec\ObjectBehavior;
+use Sylius\Behat\Page\Checkout\CheckoutSecurityStepInterface;
 use Sylius\Behat\Page\SymfonyPage;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -31,13 +32,13 @@ class CheckoutSecurityStepSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Behat\Page\Checkout\CheckoutSecurityStep');
     }
 
+    function it_implements_checkout_security_step_interface()
+    {
+        $this->shouldImplement(CheckoutSecurityStepInterface::class);
+    }
+
     function it_is_symfony_page()
     {
         $this->shouldHaveType(SymfonyPage::class);
-    }
-
-    function it_has_route_name()
-    {
-        $this->getRouteName()->shouldReturn('sylius_checkout_security');
     }
 }

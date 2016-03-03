@@ -17,10 +17,10 @@ use Sylius\Behat\Page\SymfonyPage;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class CheckoutShippingStep extends SymfonyPage
+class CheckoutShippingStep extends SymfonyPage implements CheckoutShippingStepInterface
 {
     /**
-     * @param string $shippingMethod
+     * {@inheritdoc}
      */
     public function selectShippingMethod($shippingMethod)
     {
