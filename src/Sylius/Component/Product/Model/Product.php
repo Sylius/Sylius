@@ -18,7 +18,7 @@ use Sylius\Component\Attribute\Model\AttributeValueInterface as BaseAttributeVal
 use Sylius\Component\Resource\Model\SoftDeletableTrait;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
-use Sylius\Component\Translation\Model\TranslatableTrait;
+use Sylius\Component\Resource\Model\TranslatableTrait;
 use Sylius\Component\Variation\Model\OptionInterface as BaseOptionInterface;
 use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
 

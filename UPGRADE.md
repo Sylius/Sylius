@@ -1,6 +1,15 @@
 UPGRADE
 =======
 
+## From 0.17 to 0.18.x
+
+### Translation and TranslationBundle
+
+* Merged ``Translation`` component with ``Resource`` component
+* Merged ``TranslationBundle`` with ``ResourceBundle``
+* Renamed ``TranslatableResourceRepository`` to ``TranslatableRepository``
+
+
 ## From 0.16 to 0.17.x
 
 ### Promotion and PromotionBundle
@@ -297,12 +306,6 @@ app/console doctrine:phpcr:document:migrate-class "Symfony\Cmf\Bundle\BlockBundl
 app/console doctrine:phpcr:document:migrate-class "Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SimpleBlock" "Sylius\Bundle\ContentBundle\Document\SimpleBlock"
 app/console doctrine:phpcr:document:migrate-class "Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\StringBlock" "Sylius\Bundle\ContentBundle\Document\StringBlock"
 ```
-
-### Translation and TranslationBundle
-
-* Merged ``Translation`` component with ``Resource`` component
-* Merged ``TranslationBundle`` with ``ResourceBundle``
-* Renamed ``TranslatableResourceRepository`` to ``TranslatableRepository``
 
 ## From 0.15.0 to 0.16.x
 

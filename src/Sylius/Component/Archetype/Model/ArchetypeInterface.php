@@ -15,7 +15,7 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
-use Sylius\Component\Translation\Model\TranslatableInterface;
+use Sylius\Component\Resource\Model\TranslatableInterface;
 use Sylius\Component\Variation\Model\OptionInterface;
 
 /**

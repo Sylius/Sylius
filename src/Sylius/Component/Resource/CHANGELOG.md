@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-### v0.17.0
+### v0.18.0
 
 * Merged Translation component.
 

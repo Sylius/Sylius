@@ -24,7 +24,6 @@
 
         "sylius/attribute": "0.18.*",
         "sylius/resource": "0.18.*",
-        "sylius/translation": "0.18.*",
         "sylius/variation": "0.18.*"
     },
     "require-dev": {

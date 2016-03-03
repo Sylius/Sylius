@@ -11,8 +11,8 @@
 
 namespace spec\Sylius\Component\Resource\Fixtures;
 
-use Sylius\Component\Translation\Model\TranslatableInterface;
-use Sylius\Component\Translation\Model\TranslatableTrait;
+use Sylius\Component\Resource\Model\TranslatableInterface;
+use Sylius\Component\Resource\Model\TranslatableTrait;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

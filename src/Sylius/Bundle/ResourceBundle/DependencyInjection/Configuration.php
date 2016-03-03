@@ -153,9 +153,9 @@ class Configuration implements ConfigurationInterface
     {
         $node
             ->children()
-            ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
-            ->scalarNode('default_locale')->isRequired()->cannotBeEmpty()->end()
-            ->scalarNode('locale_provider')->defaultValue('sylius.translation.locale_provider.request')->end()
+                ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
+                ->scalarNode('default_locale')->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('locale_provider')->defaultValue('sylius.translation.locale_provider.request')->end()
             ->end()
         ;
     }
