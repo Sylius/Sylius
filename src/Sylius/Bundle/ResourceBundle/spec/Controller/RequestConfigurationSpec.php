@@ -191,33 +191,59 @@ class RequestConfigurationSpec extends ObjectBehavior
         $this->isLimited()->shouldReturn(false);
     }
 
-    function it_gets_limit(Parameters $parameters)
+    function it_gets_limit(Parameters $parameters, Request $request)
     {
         $parameters->get('limit', false)->willReturn(true);
         $parameters->get('limit', 10)->willReturn(10);
+        $request->get('limit', 10)->willReturn(10);
         $this->getLimit()->shouldReturn(10);
 
         $parameters->get('limit', false)->willReturn(false);
         $parameters->get('limit', 10)->willReturn(null);
+        $request->get('limit', null)->willReturn(null);
         $this->getLimit()->shouldReturn(null);
+
+        $parameters->get('limit', false)->willReturn(10);
+        $parameters->get('limit', 10)->willReturn(10);
+        $request->get('limit', 10)->willReturn(20);
+        $this->getLimit()->shouldReturn(20);
     }
 
-    function it_checks_if_pagination_is_enabled(Parameters $parameters)
+    function it_checks_if_pagination_is_enabled(Parameters $parameters, Request $request)
     {
         $parameters->get('paginate', Argument::any())->willReturn(10);
+        $request->get('paginate', true)->willReturn(10);
         $this->isPaginated()->shouldReturn(true);
 
         $parameters->get('paginate', Argument::any())->willReturn(null);
+        $request->get('paginate', Argument::any())->willReturn('false');
+        $this->isPaginated()->shouldReturn(false);
+
+        $parameters->get('paginate', Argument::any())->willReturn(null);
+        $request->get('paginate', Argument::any())->willReturn(0);
+        $this->isPaginated()->shouldReturn(false);
+
+        $parameters->get('paginate', Argument::any())->willReturn(null);
+        $request->get('paginate', Argument::any())->willReturn('0');
         $this->isPaginated()->shouldReturn(false);
     }
 
-    function it_gets_pagination_max_per_page(Parameters $parameters)
+    function it_gets_pagination_max_per_page(Parameters $parameters, Request $request)
     {
         $parameters->get('paginate', 10)->willReturn(20);
+        $request->get('limit', 20)->willReturn(20);
+        $request->get('paginate', 20)->willReturn(20);
         $this->getPaginationMaxPerPage()->shouldReturn(20);
 
         $parameters->get('paginate', 10)->willReturn(10);
+        $request->get('limit', 10)->willReturn(10);
+        $request->get('paginate', 10)->willReturn(10);
         $this->getPaginationMaxPerPage()->shouldReturn(10);
+
+        $parameters->get('paginate', 10)->willReturn(null);
+        $request->get('limit', null)->willReturn(20);
+        $request->get('paginate', 20)->willReturn(20);
+        $this->getPaginationMaxPerPage()->shouldReturn(20);
     }
 
     function it_checks_if_the_resource_is_filterable(Parameters $parameters)

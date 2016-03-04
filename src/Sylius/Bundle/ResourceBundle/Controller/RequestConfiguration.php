@@ -257,7 +257,8 @@ class RequestConfiguration
         $limit = null;
 
         if ($this->isLimited()) {
-            $limit = (int) $this->parameters->get('limit', 10);
+            $limit= $this->parameters->get('limit', 10);
+            $limit = (int) $this->request->get('limit', $limit);
         }
 
         return $limit;
@@ -268,7 +269,12 @@ class RequestConfiguration
      */
     public function isPaginated()
     {
-        return (bool) $this->parameters->get('paginate', true);
+        $paginate = (bool) $this->parameters->get('paginate', true);
+        $requestPaginate = $this->request->get('paginate', $paginate);
+        if(is_string($requestPaginate)){
+            $requestPaginate = filter_var($requestPaginate, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+        }
+        return (bool) $requestPaginate;
     }
 
     /**
@@ -276,7 +282,10 @@ class RequestConfiguration
      */
     public function getPaginationMaxPerPage()
     {
-        return (int) $this->parameters->get('paginate', 10);
+        $maxPerPage = $this->parameters->get('paginate', 10);
+        $maxPerPage = $this->request->get('limit', $maxPerPage);
+        $maxPerPage = $this->request->get('paginate', $maxPerPage);
+        return $maxPerPage;
     }
 
     /**
