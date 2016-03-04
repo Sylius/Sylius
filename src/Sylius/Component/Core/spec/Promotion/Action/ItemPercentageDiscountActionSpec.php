@@ -20,7 +20,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
-use Sylius\Component\Core\Promotion\Action\DiscountAction;
+use Sylius\Component\Core\Promotion\Action\ItemDiscountAction;
 use Sylius\Component\Core\Promotion\Filter\TaxonFilterInterface;
 use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -46,9 +46,9 @@ class ItemPercentageDiscountActionSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\Core\Promotion\Action\ItemPercentageDiscountAction');
     }
 
-    function it_is_discount_action()
+    function it_is_item_discount_action()
     {
-        $this->shouldHaveType(DiscountAction::class);
+        $this->shouldHaveType(ItemDiscountAction::class);
     }
 
     function it_applies_percentage_discount_on_every_unit_in_order(

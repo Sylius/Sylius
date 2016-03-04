@@ -26,7 +26,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ItemPercentageDiscountAction extends DiscountAction
+class ItemPercentageDiscountAction extends ItemDiscountAction
 {
     const TYPE = 'item_percentage_discount';
 
@@ -79,20 +79,6 @@ class ItemPercentageDiscountAction extends DiscountAction
     /**
      * {@inheritdoc}
      */
-    public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
-    {
-        if (!$subject instanceof OrderInterface) {
-            throw new UnexpectedTypeException($subject, OrderInterface::class);
-        }
-
-        foreach ($subject->getItems() as $item) {
-            $this->removeUnitsAdjustment($item, $promotion);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getConfigurationFormType()
     {
         return 'sylius_promotion_action_percentage_discount_configuration';
@@ -113,43 +99,6 @@ class ItemPercentageDiscountAction extends DiscountAction
 
             $this->addAdjustmentToUnit($unit, $distributedAmounts[$i], $promotion);
             $i++;
-        }
-    }
-
-    /**
-     * @param OrderItemUnitInterface $unit
-     * @param int $amount
-     * @param PromotionInterface $promotion
-     */
-    private function addAdjustmentToUnit(OrderItemUnitInterface $unit, $amount, PromotionInterface $promotion)
-    {
-        $adjustment = $this->createAdjustment($promotion, AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT);
-        $adjustment->setAmount(-$amount);
-
-        $unit->addAdjustment($adjustment);
-    }
-
-    /**
-     * @param OrderItemInterface $item
-     * @param PromotionInterface $promotion
-     */
-    private function removeUnitsAdjustment(OrderItemInterface $item, PromotionInterface $promotion)
-    {
-        foreach ($item->getUnits() as $unit) {
-            $this->removeUnitOrderItemAdjustments($unit, $promotion);
-        }
-    }
-
-    /**
-     * @param OrderItemUnitInterface $unit
-     * @param PromotionInterface $promotion
-     */
-    private function removeUnitOrderItemAdjustments(OrderItemUnitInterface $unit, PromotionInterface $promotion)
-    {
-        foreach ($unit->getAdjustments(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT) as $adjustment) {
-            if ($promotion === $this->originator->getOrigin($adjustment)) {
-                $unit->removeAdjustment($adjustment);
-            }
         }
     }
 }

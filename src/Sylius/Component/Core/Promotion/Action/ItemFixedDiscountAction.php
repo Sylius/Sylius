@@ -25,7 +25,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ItemFixedDiscountAction extends DiscountAction
+class ItemFixedDiscountAction extends ItemDiscountAction
 {
     /**
      * @var TaxonFilterInterface
@@ -70,20 +70,6 @@ class ItemFixedDiscountAction extends DiscountAction
     /**
      * {@inheritdoc}
      */
-    public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
-    {
-        if (!$subject instanceof OrderInterface) {
-            throw new UnexpectedTypeException($subject, OrderInterface::class);
-        }
-
-        foreach ($subject->getItems() as $item) {
-            $this->removeUnitsAdjustment($item, $promotion);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getConfigurationFormType()
     {
         return 'sylius_promotion_action_fixed_discount_configuration';
@@ -97,44 +83,11 @@ class ItemFixedDiscountAction extends DiscountAction
     private function setUnitsAdjustments(OrderItemInterface $item, $amount, PromotionInterface $promotion)
     {
         foreach ($item->getUnits() as $unit) {
-            $this->addAdjustmentToUnit($unit, $amount, $promotion);
-        }
-    }
-
-    /**
-     * @param OrderItemUnitInterface $unit
-     * @param int $amount
-     * @param PromotionInterface $promotion
-     */
-    private function addAdjustmentToUnit(OrderItemUnitInterface $unit, $amount, PromotionInterface $promotion)
-    {
-        $adjustment = $this->createAdjustment($promotion, AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT);
-        $adjustment->setAmount($this->calculateAdjustmentAmount($unit->getTotal(), $amount));
-
-        $unit->addAdjustment($adjustment);
-    }
-
-    /**
-     * @param OrderItemInterface $item
-     * @param PromotionInterface $promotion
-     */
-    private function removeUnitsAdjustment(OrderItemInterface $item, PromotionInterface $promotion)
-    {
-        foreach ($item->getUnits() as $unit) {
-            $this->removeUnitOrderItemAdjustments($unit, $promotion);
-        }
-    }
-
-    /**
-     * @param OrderItemUnitInterface $unit
-     * @param PromotionInterface $promotion
-     */
-    private function removeUnitOrderItemAdjustments(OrderItemUnitInterface $unit, PromotionInterface $promotion)
-    {
-        foreach ($unit->getAdjustments(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT) as $adjustment) {
-            if ($promotion === $this->originator->getOrigin($adjustment)) {
-                $unit->removeAdjustment($adjustment);
-            }
+            $this->addAdjustmentToUnit(
+                $unit,
+                $this->calculateAdjustmentAmount($unit->getTotal(), $amount),
+                $promotion
+            );
         }
     }
 
@@ -146,6 +99,6 @@ class ItemFixedDiscountAction extends DiscountAction
      */
     private function calculateAdjustmentAmount($promotionSubjectTotal, $targetPromotionAmount)
     {
-        return -1 * min($promotionSubjectTotal, $targetPromotionAmount);
+        return min($promotionSubjectTotal, $targetPromotionAmount);
     }
 }
