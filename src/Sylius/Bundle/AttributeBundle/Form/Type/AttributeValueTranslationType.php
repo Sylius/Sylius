@@ -33,7 +33,7 @@ class AttributeValueTranslationType extends AbstractResourceType
     {
         $builder
             ->add('value', 'text', [
-                'label' => sprintf('sylius.form.attribute.%s_attribute_value_translation.value', $this->subjectName)
+                'label' => 'sylius.form.attribute.name'
             ])
         ;
     }

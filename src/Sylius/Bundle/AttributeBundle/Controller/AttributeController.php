@@ -13,6 +13,7 @@ namespace Sylius\Bundle\AttributeBundle\Controller;
 
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -78,10 +79,17 @@ class AttributeController extends ResourceController
         foreach ($attributes as $attribute) {
             $options = ['label' => $attribute->getName()];
 
-            if($attribute->isTextType()) {
-                $form = $this->get('form.factory')->createNamed('translations', 'a2lix_translationsForms', [
+            if($attribute->isTextType() || $attribute->getType() == 'textarea') {
+                $count = $request->query->get('count');
+                $subject = str_replace('_attribute','',$this->metadata->getName());
+                $form = $this->get('form.factory')->createNamed('translations', 'a2lix_translationsForms', null, [
                     'form_type' => sprintf('sylius_%s_attribute_value_translation', 'product'),
-                    'label' => 'sylius.form.value_translation.presentation',
+                    'label' => $attribute->getName(),
+                    'form_options' => [
+                        'attr' => [
+                            'data-name' => 'sylius_'.$subject.'[attributes]['.$count.'][translations]'
+                        ],
+                    ],
                 ]);
             } else {
                 $attributeForm = 'sylius_attribute_type_'.$attribute->getType();
