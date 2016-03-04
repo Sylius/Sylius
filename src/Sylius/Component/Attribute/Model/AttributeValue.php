@@ -11,14 +11,18 @@
 
 namespace Sylius\Component\Attribute\Model;
 
-use Sylius\Component\Translation\Model\AbstractTranslatable;
+use Sylius\Component\Translation\Model\TranslatableTrait;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class AttributeValue extends AbstractTranslatable implements AttributeValueInterface
+class AttributeValue implements AttributeValueInterface
 {
+    use TranslatableTrait {
+        __construct as private initializeTranslationsCollection;
+    }
+
     /**
      * @var mixed
      */
@@ -68,6 +72,14 @@ class AttributeValue extends AbstractTranslatable implements AttributeValueInter
      * @var \DateTime
      */
     protected $date;
+
+    /**
+     * AttributeValue constructor.
+     */
+    public function __construct()
+    {
+        $this->initializeTranslationsCollection();
+    }
 
     /**
      * {@inheritdoc}

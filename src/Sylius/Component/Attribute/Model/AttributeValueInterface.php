@@ -12,11 +12,14 @@
 namespace Sylius\Component\Attribute\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\Translation\Model\TranslatableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface AttributeValueInterface extends ResourceInterface
+interface AttributeValueInterface extends
+    ResourceInterface,
+    TranslatableInterface
 {
     const STORAGE_TEXT = 'text';
     const STORAGE_BOOLEAN = 'boolean';
