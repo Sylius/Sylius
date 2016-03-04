@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        ui_addressing:
+            contexts_as_services:
+                - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.transform.lexical
+
+            filters:
+                tags: @localization && @ui
