@@ -19,6 +19,7 @@ sylius:
       groups: Gruppen
       last_name: Nachname
       email: E-Mail
+      phone_number: Telefonnummer
       birthday: Geburtstag
       billing_address: Rechnungsadresse
       different_billing_address: Eine andere Rechnungsadresse benutzen?

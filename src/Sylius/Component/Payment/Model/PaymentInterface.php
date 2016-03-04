@@ -18,7 +18,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface PaymentInterface extends TimestampableInterface, SoftDeletableInterface, ResourceInterface
+interface PaymentInterface extends TimestampableInterface, ResourceInterface
 {
     // Payment states.
     const STATE_NEW = 'new';

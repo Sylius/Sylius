@@ -385,6 +385,7 @@ sylius:
     shipping_address: Bezorgadres
     show_header: Klantgegevens
     update_header: Klant bewerken
+    phone_number: Telefoonnummer
   delete: Verwijderen
   deleted: Verwijderd
   disable: Uitschakelen
@@ -415,7 +416,7 @@ sylius:
   filter: Filter
   form:
     cart:
-      coupon: Vul hier een promotie coupon in, als u deze heeft
+      coupon: Coupon
     choose_file: Kies bestand
     comment:
       comment: Commentaar
@@ -588,6 +589,13 @@ sylius:
     taxes: Belastingen
     total: Totaal
     update_header: Bestelling bewerken
+  review:
+    id: ID
+    subject: Onderwerp
+    title: Titel
+    author: Auteur
+    guest: Gast
+    created_at: verwijder
   order_item:
     product: Artikel
     quantity: Hoeveelheid

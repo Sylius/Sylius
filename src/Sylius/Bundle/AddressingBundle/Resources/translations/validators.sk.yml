@@ -35,7 +35,9 @@ sylius:
       unique: ISO kód krajiny musí byť jedinečný.
   province:
     code:
+      min_length: Kód provincie musí obsahovať aspoň 5 znakov|Kód provincie musí obsahovať aspoň 5 znakov.
       not_blank: Prosím zadajte kód provincie.
+      regex: Kód provincie musí mať nasledujúci formát XX-XX (napr USA-FL).
       unique: Kód provincie musí byť jedinečný.
     name:
       max_length: Názov provincie nesmie byť dlhší ako 255 znakov|Názov provincie nesmie byť dlhší ako 255 znakov.

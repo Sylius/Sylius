@@ -183,6 +183,8 @@ sylius:
     updated_at: Τροποποιήθηκε την
   filter: Φίλτρο
   form:
+    cart:
+      coupon: Κουπόνι
     choose_file: Επιλογή αρχείου
     login:
       email: Ηλεκτρονικό ταχυδρομείο
@@ -265,6 +267,9 @@ sylius:
     tax_total: Σύνολο φόρων
     taxes: Φόροι
     total: Σύνολο
+  review:
+    id: ID
+    title: Τίτλος
   order_item:
     quantity: Ποσότητα
     sellable: Προϊόν

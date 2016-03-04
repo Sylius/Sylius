@@ -4,7 +4,7 @@
 sylius:
   form:
     rule:
-      item_count_configuration:
+      unit_count_configuration:
         count: Brojač
     shipment:
       state: Stanje
@@ -19,11 +19,7 @@ sylius:
     shipping_calculator:
       flat_rate_configuration:
         amount: Iznos
-      flexible_rate_configuration:
-        additional_item_cost: Trošak za dodani artikal
-        additional_item_limit: Ograničenje dodatnih artikala
-        first_item_cost: Trošak za prvi artikal
-      per_item_rate_configuration:
+      per_unit_rate_configuration:
         amount: Iznos
       weight_rate_configuration:
         division: Odjel

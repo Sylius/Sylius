@@ -40,7 +40,7 @@ class OptionTranslationTypeSpec extends ObjectBehavior
     function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
-            ->add('presentation', 'text', Argument::any())
+            ->add('name', 'text', Argument::any())
             ->willReturn($builder)
         ;
 

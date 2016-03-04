@@ -22,10 +22,11 @@ sylius:
       payment_state: 入金状況
     product:
       short_description: 商品概要
-      tax_category: 課税方法
       variant_selection_method: バリエーション指定方法
     product_filter:
       name: 商品名
+    product_variant:
+      tax_category: 税区分
     settings:
       general:
         currency: デフォルトの通貨

@@ -56,12 +56,13 @@ sylius:
       restricted_zone: Restriction de zone
       shipping_category: Catégorie de livraison
       short_description: Brève description
-      tax_category: Catégorie de taxe
       variant_selection_method: Méthode de sélection de variante
-      main_taxon: Taxe
+      main_taxon: Taxinomie principale
     product_filter:
       name: Nom
       sku: Référence
+    product_variant:
+      tax_category: Catégorie de taxe
     settings:
       general:
         currency: Devise par défaut
@@ -70,7 +71,7 @@ sylius:
         meta_keywords: Meta mots-clés
         title: Titre de la page
         tracking_code:
-          Tracking code (for example: Clé Google Analytics)
+          Tracking code (for example: Clé Google Analytics
       taxation:
         default_tax_zone: Zone de taxe par défaut
       security:
@@ -118,9 +119,12 @@ sylius:
       width: Largeur
     attribute:
       product_attribute_value:
-        attribute: Propriété
+        attribute: Attribut 
         value: Valeur
     guest:
       email: E-mail
+    product_association:
+      product: Produits associés
+      type: "Type d'association"
     product_association_type:
       name: Nom

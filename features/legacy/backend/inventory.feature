@@ -7,15 +7,15 @@ Feature: Inventory tracking
     Background:
         Given store has default configuration
         And there are following options:
-            | code | name          | presentation | values                          |
-            | O1   | T-Shirt color | Color        | Red[OV1], Blue[OV2], Green[OV3] |
-            | O2   | T-Shirt size  | Size         | S[OV4], M[OV5], L[OV6]          |
+            | code | name          | values                          |
+            | O1   | T-Shirt color | Red[OV1], Blue[OV2], Green[OV3] |
+            | O2   | T-Shirt size  | S[OV4], M[OV5], L[OV6]          |
         And the following products exist:
-            | name          | price | options                     |
-            | Super T-Shirt | 19.99 | T-Shirt size, T-Shirt color |
-            | Black T-Shirt | 19.99 | T-Shirt size                |
-            | Mug           | 5.99  |                             |
-            | Sticker       | 10.00 |                             |
+            | name          | price | options |
+            | Super T-Shirt | 19.99 | O2, O1  |
+            | Black T-Shirt | 19.99 | O2      |
+            | Mug           | 5.99  |         |
+            | Sticker       | 10.00 |         |
         And I am logged in as administrator
 
     Scenario: Seeing index of inventory
@@ -46,7 +46,7 @@ Feature: Inventory tracking
     Scenario: Updating variant stock level
         Given product "Black T-Shirt" is available in all variations
         And I am on the page of product "Black T-Shirt"
-        When I click "Edit" near "Size: L"
+        When I click "Edit" near "T-Shirt size: L"
         And I fill in "Current stock" with "10"
         And I press "Save changes"
         Then I should be on the page of product "Black T-Shirt"
@@ -55,7 +55,7 @@ Feature: Inventory tracking
     Scenario: Making variant not available on demand
         Given product "Black T-Shirt" is available in all variations
         And I am on the page of product "Black T-Shirt"
-        When I click "Edit" near "Size: L"
+        When I click "Edit" near "T-Shirt size: L"
         And I uncheck "Available on demand"
         And I press "Save changes"
         Then I should be on the page of product "Black T-Shirt"

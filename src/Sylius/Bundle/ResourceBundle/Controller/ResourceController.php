@@ -171,6 +171,7 @@ class ResourceController extends Controller
                 ->setTemplate($configuration->getTemplate(ResourceActions::SHOW))
                 ->setTemplateVar($this->metadata->getName())
                 ->setData([
+                    'configuration' => $configuration,
                     'metadata' => $this->metadata,
                     'resource' => $resource,
                     $this->metadata->getName() => $resource,
@@ -200,6 +201,7 @@ class ResourceController extends Controller
                 ->setTemplate($configuration->getTemplate(ResourceActions::INDEX))
                 ->setTemplateVar($this->metadata->getPluralName())
                 ->setData([
+                    'configuration' => $configuration,
                     'metadata' => $this->metadata,
                     'resources' => $resources,
                     $this->metadata->getPluralName() => $resources,
@@ -256,6 +258,7 @@ class ResourceController extends Controller
 
         $view = View::create()
             ->setData([
+                'configuration' => $configuration,
                 'metadata' => $this->metadata,
                 'resource' => $newResource,
                 $this->metadata->getName() => $newResource,
@@ -313,6 +316,7 @@ class ResourceController extends Controller
 
         $view = View::create()
             ->setData([
+                'configuration' => $configuration,
                 'metadata' => $this->metadata,
                 'resource' => $resource,
                 $this->metadata->getName() => $resource,

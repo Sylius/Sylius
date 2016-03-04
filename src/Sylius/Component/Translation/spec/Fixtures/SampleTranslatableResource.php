@@ -11,11 +11,13 @@
 
 namespace spec\Sylius\Component\Translation\Fixtures;
 
-use Sylius\Component\Translation\Model\AbstractTranslatable;
+use Sylius\Component\Translation\Model\TranslatableInterface;
+use Sylius\Component\Translation\Model\TranslatableTrait;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SampleTranslatableResource extends AbstractTranslatable
+class SampleTranslatableResource implements TranslatableInterface
 {
+    use TranslatableTrait;
 }

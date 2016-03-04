@@ -34,3 +34,6 @@ sylius:
         max_range: 'Opłata w procentach nie może być większa niż {{ limit }}.'
         min_range: 'Opłata w procentach nie może być niższa niż {{ limit }}.'
         not_blank: Wprowadź wartość opłaty w procentach.
+    code:
+      not_blank: Proszę podać kod metody płatności.
+      unique: Metoda płatności z danym kodem już istnieje.

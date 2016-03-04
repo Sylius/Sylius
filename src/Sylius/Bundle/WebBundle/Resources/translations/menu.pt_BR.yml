@@ -22,8 +22,10 @@ sylius:
         pages: Páginas
         payment_methods: Meios de pagamentos
         payments: Pagamentos
+        permissions: Permissões
         products: Produtos
         promotions: Promoções
+        report: Relatórios
         roles: Papéis
         routes: Rotas
         sales: Pedidos
@@ -55,8 +57,10 @@ sylius:
         pages: Páginas
         payment_methods: Meios de pagamentos
         payments: Pagamentos
+        permissions: Permissões
         products: Produtos
         promotions: Promoções
+        report: Relatórios
         roles: Papéis
         routes: Rotas
         sales: Pedidos

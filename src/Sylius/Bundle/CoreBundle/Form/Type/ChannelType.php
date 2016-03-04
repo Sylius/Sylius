@@ -47,6 +47,11 @@ class ChannelType extends BaseChannelType
             ->add('defaultCurrency', 'sylius_currency_choice', [
                 'label' => 'sylius.form.channel.currency_default',
             ])
+            ->add('theme', 'sylius_theme_choice', [
+                'label' => 'sylius.form.channel.theme',
+                'required' => false,
+                'empty_data' => null,
+            ])
             ->add('shippingMethods', 'sylius_shipping_method_choice', [
                 'label' => 'sylius.form.channel.shipping_methods',
                 'multiple' => true,

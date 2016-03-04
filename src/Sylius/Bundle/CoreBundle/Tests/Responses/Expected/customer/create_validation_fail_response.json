@@ -19,11 +19,12 @@
                 ]
             },
             "birthday": {},
-            "gender":{
+            "gender": {
                 "errors": [
                     "Please choose your gender."
                 ]
             },
+            "phoneNumber": {},
             "groups": {}
         }
     }

@@ -141,12 +141,16 @@ sylius:
       index: Pagamentos
     payment_method:
       index: Meios de pagamentos
+    permission:
+      index: Permissões
     product:
       index: Produtos
     promotion:
       index: Promoções
     promotion_coupon:
       index: Cupons
+    report:
+      index: Relatórios
     role:
       index: Papéis
     route:
@@ -282,6 +286,7 @@ sylius:
     id: ID
     last_name: Sobrenome
     shipping_address: Endereço de entrega
+    phone_number: Número de Telefone
   delete: Excluir
   deleted: Apagado
   edit: Editar
@@ -292,7 +297,7 @@ sylius:
   filter: Filtrar
   form:
     cart:
-      coupon: Se você tem um cupom de promoção, digite-o aqui
+      coupon: Cupom
     choose_file: Escolha um arquivo
     frontend:
       password:
@@ -425,6 +430,11 @@ sylius:
     taxes: Taxas
     total: Total
     update_header: Editar pedido
+  review:
+    id: ID
+    title: Título
+    author: Autor
+    created_at: Criado em
   order_item:
     product: Item
     quantity: Quantidade
@@ -478,6 +488,7 @@ sylius:
     code: Código
     description: Descrição
     id: ID
+    index_header: Permissões
     updated_at: Data de modificação
   pricing:
     volume_based:
@@ -592,6 +603,7 @@ sylius:
     code: Código
     description: Descrição
     id: Id
+    index_header: Relatórios
     manage: Gerenciar
     name: Nome
   role:

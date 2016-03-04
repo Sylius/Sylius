@@ -4,7 +4,7 @@
 sylius:
   form:
     rule:
-      item_count_configuration:
+      unit_count_configuration:
         count: Antal
     shipment:
       state: Status
@@ -18,10 +18,7 @@ sylius:
     shipping_calculator:
       flat_rate_configuration:
         amount: Beløb
-      flexible_rate_configuration:
-        additional_item_cost: Ekstra vareomkostning
-        additional_item_limit: Begræns yderligere varer
-      per_item_rate_configuration:
+      per_unit_rate_configuration:
         amount: Beløb
       volume_rate_configuration:
         amount: Beløb

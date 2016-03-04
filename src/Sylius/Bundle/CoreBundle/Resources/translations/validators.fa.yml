@@ -1,0 +1,23 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  checkout:
+    shipping_method:
+      not_blank: لطفا شیوه ارسال را انتخاب کنید.
+  locale:
+    code:
+      not_blank: لطفاً کد زبان را وارد کنید.
+      unique: این زبان قبلا در سیستم ثبت شده است.
+  product_variant:
+    onHand:
+      min: 'میزان موجودی باید بیشتر از {{ limit }} باشد.'
+      not_blank: لطفا میزان موجودی را وارد کنید.
+    price:
+      min: قیمت نمی تواند منفی باشد.
+      not_blank: لطفا قیمت را وارد کنید.
+    original_price:
+      min: قیمت ابتدایی نمی تواند منفی باشد.
+  product_translation:
+    short_description:
+      max: 'معرفی کوتاه نباید بیش از {{ limit }} حرف باشد.'

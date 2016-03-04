@@ -46,11 +46,12 @@ sylius:
       restricted_zone: 限制的区
       shipping_category: 送货类别
       short_description: 简短说明：
-      tax_category: 税类别
       variant_selection_method: 变量选择方法
     product_filter:
       name: 名称
       sku: SKU
+    product_variant:
+      tax_category: 税类别
     settings:
       general:
         currency: 默认货币：

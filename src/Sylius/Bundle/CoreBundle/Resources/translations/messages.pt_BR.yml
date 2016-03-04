@@ -48,11 +48,12 @@ sylius:
       restricted_zone: Zona restrita
       shipping_category: Categoria de expedição
       short_description: Breve descrição
-      tax_category: Categoria de imposto
       variant_selection_method: Método de seleção da variação
     product_filter:
       name: Nome
       sku: SKU
+    product_variant:
+      tax_category: Categoria de imposto
     settings:
       general:
         currency: Moeda padrão

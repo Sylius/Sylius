@@ -18,12 +18,10 @@ sylius:
       contains_product_configuration:
         variants: Товары
         exclude: Исключить
-      item_count_configuration:
+      cart_quantity_configuration:
         count: Кол-во
-        equal: Равно
       item_total_configuration:
         amount: Сумма
-        equal: Равно
       nth_order_configuration:
         nth: Количество
       customer_loyalty_configuration:

@@ -7,9 +7,9 @@ Feature: Product options
     Background:
         Given store has default configuration
         And there are following options:
-            | code | name          | presentation | values                          |
-            | O1   | T-Shirt color | Color        | Red[OV1], Blue[OV2], Green[OV3] |
-            | O2   | T-Shirt size  | Size         | S[OV4], M[OV5], L[OV6]          |
+            | code | name          | values                          |
+            | O1   | T-Shirt color | Red[OV1], Blue[OV2], Green[OV3] |
+            | O2   | T-Shirt size  | S[OV4], M[OV5], L[OV6]          |
         And I am logged in as administrator
 
     Scenario: Seeing index of all options
@@ -18,7 +18,6 @@ Feature: Product options
         Then I should be on the product option index page
         And I should see 2 options in the list
         And I should see option with name "T-Shirt color" in the list
-        And I should see option with presentation "Color" in the list
 
     Scenario: Seeing empty index of options
         Given there are no product options
@@ -36,13 +35,11 @@ Feature: Product options
         When I press "Create"
         Then I should still be on the product option creation page
         And I should see "Please enter option name"
-        And I should see "Please enter option presentation"
 
     Scenario: Trying to create option without at least 2 values
         Given I am on the product option creation page
         When I fill in "Code" with "PO3"
-        And I fill in "Internal name" with "Bag color"
-        And I fill in "Presentation" with "Color"
+        And I fill in "Name" with "T-Shirt color"
         And I press "Create"
         Then I should still be on the product option creation page
         And I should see "Please add at least 2 option values"
@@ -51,8 +48,7 @@ Feature: Product options
     Scenario: Creating option with 4 possible values
         Given I am on the product option creation page
         When I fill in "Code" with "PO3"
-        And I fill in "Internal name" with "Bag color"
-        And I fill in "Presentation" with "Color"
+        And I fill in "Name" with "T-Shirt color"
         And I add following option values:
             | OV7  | Black  |
             | OV8  | White  |
@@ -66,8 +62,7 @@ Feature: Product options
     Scenario: Values are listed after creating the option
         Given I am on the product option creation page
         When I fill in "Code" with "PO3"
-        And I fill in "Internal name" with "Mug type"
-        And I fill in "Presentation" with "Type"
+        And I fill in "Name" with "Type"
         And I add following option values:
             | OV7 | Normal mug  |
             | OV8 | Large mug   |
@@ -78,7 +73,7 @@ Feature: Product options
 
     @javascript
     Scenario: Adding values to existing option
-        Given I am editing product option "T-Shirt size"
+        Given I am editing product option "O2"
         And I add following option values:
             | OV7 | XL  |
             | OV8 | XXL |
@@ -96,7 +91,7 @@ Feature: Product options
     Scenario: Updating the option
         Given I am on the product option index page
         And I click "Edit" near "T-Shirt color"
-        When I fill in "Internal name" with "T-Shirt sex"
+        When I fill in "Name" with "T-Shirt sex"
         And I press "Save changes"
         Then I should be on the product option index page
         And I should see "Option has been successfully updated"
@@ -110,14 +105,13 @@ Feature: Product options
         And I should not see option with name "T-Shirt color" in that list
 
     Scenario: Cannot edit product option code
-        When I am editing product option "T-Shirt color"
+        When I am editing product option "O2"
         Then the code field should be disabled
 
     @javascript
     Scenario: Try add product option without code
         Given I am on the product option creation page
-        When I fill in "Internal name" with "Bag color"
-        And I fill in "Presentation" with "Color"
+        And I fill in "Name" with "Bag color"
         And I add following option values:
             | OV7 | Black |
             | OV8 | White |
@@ -129,8 +123,7 @@ Feature: Product options
     Scenario: Try add product option with existing code
         Given I am on the product option creation page
         When I fill in "Code" with "O1"
-        And I fill in "Internal name" with "Bag color"
-        And I fill in "Presentation" with "Color"
+        And I fill in "Name" with "Bag color"
         And I add following option values:
             | OV7 | Black |
             | OV8 | White |
@@ -142,8 +135,7 @@ Feature: Product options
     Scenario: Try add product option values without code
         Given I am on the product option creation page
         When I fill in "Code" with "O3"
-        And I fill in "Internal name" with "Bag color"
-        And I fill in "Presentation" with "Color"
+        And I fill in "Name" with "Bag Color"
         And I add option value "Black"
         And I add option value "White"
         And I press "Create"
@@ -154,8 +146,7 @@ Feature: Product options
     Scenario: Try add product option value with existing code
         Given I am on the product option creation page
         When I fill in "Code" with "O3"
-        And I fill in "Internal name" with "Bag color"
-        And I fill in "Presentation" with "Color"
+        And I fill in "Name" with "Bag color"
         And I add following option values:
             | OV1 | Black |
             | OV8 | White |

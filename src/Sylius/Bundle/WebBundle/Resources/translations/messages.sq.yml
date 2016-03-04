@@ -16,35 +16,44 @@ sylius:
         no_billing: Nuk ka adresë kryesore faturimi
         no_shipping: Nuk ka adresë kryesore dërgimi
         shipping: Adresa kryesore e dërgimit
+      empty: Nuk ke adresë të përcaktuar
       list: Të gjitha adresat e tua
       update: Afisho adresën time
     home:
       email: Email
       id: ID e blerësit
       last5orders: 5 porositë e tua të fundit
+      outline: Shijo të gjitha vetitë që shfaqen në hapësirën tënde personale, gjurmo dhe kontrollo të gjitha të dhënat
       since: Ti je blerës qysh prej
       welcome: Mirë se erdhët në hapësirën tuaj
     order:
       created_at: Porositur te
       details: Hollësi të porosisë tënde
       download_invoice: Shkarko faturën
+      empty: Nuk ke vendosur ende asnjë porosi
       invoice: Fatura
       list: Të gjitha porositë e tua
       number: Numri
+      payment_mode: Mënyra e pagesës
       placed_at: 'Porositur te %at%'
       shipment:
         pending: Në pritje
         ready: 'Gati qysh nga %at%'
         returned: 'Rikthyer më %at%'
         shipped: 'Dërguar më %at%'
+      shipment_mode: Mënyra e dërgesës
       state: Shteti
       total: Totali
       tracking_number: Numri i gjurmimit
     title: Llogaria ime
   add_to_cart: Shto në kartë
   association_type:
+    index_header: Tipi i lidhjes
+    update_header: Ndrysho tipin e lidhjes
+    create_header: Krijo tipin e lidhjes
     name: Emri
     create: Krijo
+    update: Përditëso
   address:
     city: Qyteti
     company: Kompania
@@ -67,6 +76,7 @@ sylius:
     create_header: Prototip i ri
     index_header: Prototipet e produktit
     name: Emri
+    no_results: Nuk ka asnjë prototip të përcaktuar
     options: Opsionet
     parent: Prind
     update_header: Duke afishuar prototipin
@@ -92,6 +102,7 @@ sylius:
       orders_this_month: Porositë totale
       registrations_this_month: Regjistrimet totale
       sales_this_month: Shitjet
+  backend_welcome: 'Përshëndetje <b>%name%</b>'
   billing_address: Faturoje për
   block:
     imagine:
@@ -109,6 +120,7 @@ sylius:
       updated_at: Ndryshimi i fundit
     imagine_blocks: Blloqe figurash
     index_header: Blloqet
+    no_results: "Nuk ka asnjë bllok për t'u shfaqur"
     simple:
       body: Përmbajtja e porosisë
       create: Krijo bllok të thjeshtë
@@ -154,6 +166,8 @@ sylius:
       updated_at: Ndryshimi i fundit
     string_blocks: Blloqe zinxhir
   breadcrumb:
+    archetype:
+      index: Prototipet
     assortment: Asortimenti
     attribute:
       index: Atributet
@@ -200,6 +214,8 @@ sylius:
       index: Menutë
     menu_node:
       index: Nyjet e menusë
+    metadata:
+      index: Metadata
     new: E re
     option:
       index: Opsionet
@@ -216,10 +232,16 @@ sylius:
       index: Lejet
     product:
       index: Produktet
+    association_type:
+      index: Tipi i lidhjes
     promotion:
       index: Reklamat
     promotion_coupon:
       index: Kuponat
+    product_association:
+      index: Lidhje
+    product_association_type:
+      index: Tipi i lidhjes
     redirect_route:
       index: Rishkruaj drejtimet
     report:
@@ -277,6 +299,7 @@ sylius:
     locale_default: Lokalizimi i parazgjedhur
     manage: Kontrollo kanalet
     name: Emri
+    no_results: Nuk ka asnjë kanal të konfiguruar
     update: Afisho
     update_header: Afishimi i kanalit
     updated_at: Ndryshimi i fundit
@@ -332,8 +355,10 @@ sylius:
       proceed_order: Vazhdo me porosinë tënde
       register: Regjistrohu
     shipping:
+      error: Na vjen keq, por dyqani ynë nuk mund ta dërgojë produktin në vendin që ke zgjedhur
       header: Mënyra e dërgimit
   confirmation:
+    message: Dëshiron ta fshish këtë artikull
     title: Konfirmo
   contact_request:
     create: Krijo kërkesë kontakti
@@ -344,6 +369,7 @@ sylius:
     index_header: Kërkesa kontakti
     lastName: Mbiemri
     message: Mesazhi
+    no_results: "Nuk ka asnjë kërkesë kontakti për t'u shfaqur"
     show_header: Hollësi të kërkesës së kontaktit
     topic: Tema
     update_header: Duke afishuar kërkesën e kontaktit
@@ -353,6 +379,7 @@ sylius:
     create_header: Rubrikë e re kontakti
     id: ID
     index_header: Kategoria e kontaktit
+    no_results: "Nuk ka asnjë rubrikë kontakti për t'u shfaqur"
     title: Titulli
     update_header: Duke afishuar rubrikën e kontaktit
     updated_at: Ndryshimi i fundit
@@ -365,6 +392,7 @@ sylius:
     index_header: Vendet
     manage: Kontrollo vendet
     name: Emri
+    no_results: Nuk ka asnjë vend të konfiguruar
     show_header: Hollësi për vendin
     update_header: Duke afishuar vendin
   create: Krijo
@@ -378,10 +406,12 @@ sylius:
     id: ID
     index_header: Monedhat
     name: Emri
+    no_results: "Nuk ka asnjë lloj monedhe për t'u shfaqur"
     update_header: Duke afishuar llojin e monedhës
     updated_at: Ndryshimi i fundit
   customer:
     billing_address: Adresa e faturimit
+    create: Krijo blerësin
     create_header: Blerës i ri
     creation_date: Data e krijimit
     email: Email
@@ -395,11 +425,17 @@ sylius:
     id: ID
     index_header: 'Blerësi <small>Lista e të gjithë blerësve në dyqan</small>'
     last_name: Mbiemri
+    manage: Kontrollo blerësit
+    no_groups: Nuk ka asnjë grup për tu shfaqur për këtë blerës
+    no_results: "Nuk ka asnjë blerës për t'u shfaqur"
+    order:
+      no_results: "Nuk ka asnjë porosi të këtij blerësi për t'u shfaqur"
     orders: Porositë e blerësit
     recent_header: Blerësit e fundit
     shipping_address: Adresa e dërgimit
     show_header: Hollësi të blerësit
     update_header: Duke afishuar blerësin
+    phone_number: Numri i telefonit
   delete: Fshi
   deleted: U fshi
   disable: Çaktivizo
@@ -411,6 +447,7 @@ sylius:
     enabled: E aktivizuar
     index_header: Modele Email
     manage: Kontrollo Email-et
+    no_results: Nuk ka asnjë Email të konfiguruar
     subject: Subjekti
     update_header: Duke afishuar Email
     updated_at: Ndryshimi i fundit
@@ -420,18 +457,22 @@ sylius:
       subject: Koment i ri i postuar për porosinë
     order_confirmation:
       name: Konfirmimi i porosisë
+      subject: Falmnderit për porosinë
     shipment_confirmation:
       name: Konfirmimi i dërgesës
+      subject: Porosia juaj u nis
     user_confirmation:
       name: Konfirmimi i përdoruesit
+      subject: Mirë se erdhët në dyqanin tonë
   enable: Aktivizo
   filter: Filtri
   form:
     cart:
-      coupon: Nëse ke kupon promocioni, fute atë këtu
+      coupon: Kuponi
     choose_file: Përzgjidh fajlin
     comment:
       comment: Koment
+      notify_customer: Të njoftohet blerësi
     frontend:
       password:
         confirmation: Konfirmo
@@ -466,6 +507,7 @@ sylius:
     id: ID
     index_header: Grupet
     name: Emri
+    no_results: "Nuk ka asnjë grup për t'u shfaqur"
     roles: Funksionet
     update_header: Afisho grupin
   hide_deleted: Fshihi elementet e fshira
@@ -476,6 +518,7 @@ sylius:
     empty: Bosh
     header: Historia
     logged_at: Lidhur me (versioni)
+    no_results: "Nuk ka ngjarje të lidhura për t'u shfaqur"
     revert: Rikthe
   homepage:
     splash:
@@ -485,6 +528,7 @@ sylius:
     created_at: Krijuar
     inventory_state: Gjendja e listës
     name: Emri
+    no_results: "Nuk ka njësi të listës për t'u shfaqur"
     shipping_state: Gjendja e dërgimit
     sku: SKU
     updated_at: Ndryshimi i fundit
@@ -496,6 +540,7 @@ sylius:
     id: ID
     index_header: Treguesi i të gjitha vendeve të konfiguruara
     name: Emri
+    no_results: Nuk ka vende të konfiguruara
     update_header: Afisho vendin
     updated_at: Ndryshimi i fundit
   login: Futu
@@ -508,6 +553,7 @@ sylius:
     end_date: Data e mbarimit
     id: ID
     index_header: Menutë
+    no_results: "Nuk ka asnjë menu për t'u shfaqur"
     publishable: Publikuar
     start_date: Data e fillimit
     title: Titulli
@@ -517,15 +563,32 @@ sylius:
     create_header: Duke krijuar një element të menusë
     id: ID
     index_header: Nyjet e menusë
+    no_results: "Nuk ka asnjë element menuje për t'u shfaqur"
     parent: Prind
     title: Titulli
     update_header: Afishimi i elementeve të menusë
   meta:
     backend_title: Paneli i Sylius-it
+    frontend_description: Sylius është zgjidhja moderne e ecommerce për PHP, bazuar në framework Symfony2
+    frontend_keywords: Sylius, ecommerce, symfony2, dyqan, karrocë, webshop
     frontend_title: Sylius, ecommerce moderne për Symfony2
   metadata:
+    customize_header: Personalizim i metadata
+    show_header: Shfaq metadata
     id: ID
+    customize: Personalizo metadata
+    manage: Menaxho metadata
     content: Përmbajtja
+    index_metadata: Metadata
+    default_page:
+      group_customize: Personalizo metadata baze
+    product:
+      single_customize: Personalizo metadata
+      group_customize: Personalizo metadata te produktit
+    product_variant:
+      single_customize: Personalizo metadata
+  move_down: Leviz poshte
+  move_up: Leviz lart
   na: N/A
   newest: Produktet më të reja
   "no": false
@@ -537,6 +600,7 @@ sylius:
       description: Përshkrimi
       lock: Kyç
       lock_all: Kyçi të gjithë parametrat e vendosur
+      locked: Kyçur
       manage: Kontrollo parametrat
       type: Lloji
       unlock: Shkyç
@@ -563,6 +627,7 @@ sylius:
     general_info: Info e përgjithshme
     guest: Blerës i ftuar
     id: ID
+    immutable_warning: Porositë tashme te nisura nuk ndryshohen dot më
     index_header: Porositë korrente
     inventory_tracking: Gjurmimi i gjendjes së magazinës
     inventory_unit:
@@ -573,6 +638,7 @@ sylius:
     items_total: Totali i artikujve
     manage: Kontrollo porositë
     no_items: Kjo porosi nuk përmban asnjë artikull
+    no_promotion: Asnjë kupon i përdorur
     no_results: Nuk ke porosi të reja
     no_shipments: Nuk ka asnjë dërgesë për këtë porosi
     no_shipping_charges: Nuk ka asnjë pagesë dërgimi
@@ -596,14 +662,25 @@ sylius:
     shipping_total: Pagesa totale e dërgimit
     show_header: Porosia
     state:
+      abandoned: I braktisur
       cancelled: E fshirë
+      cart_locked: Karroca e kycur
       checkout: Kontrolli
+      order_confimed: Porosia e konfirmuar
+      ordered: Porositur
       returned: I kthyer
       shipped: Dërguar
     tax_total: Totali i taksave
     taxes: Taksat
     total: Totali
     update_header: Duke afishuar porosinë
+  review:
+    id: ID
+    subject: Subjekti
+    title: Titulli
+    author: Autori
+    guest: I ftuar
+    created_at: Krijuar më
   order_item:
     product: Po ashtu
     quantity: Sasitë
@@ -618,6 +695,7 @@ sylius:
     end_date: Data e mbarimit
     id: ID
     index_header: Faqet
+    no_results: "Nuk ka asnjë faqe për t'u shfaqur"
     no_route: Përmbajtja jote nuk do të shfaqet në faqen e parë nëse nuk ke përcaktuar rrugën
     publishable: Publikuar
     routes: Rrugët
@@ -634,6 +712,7 @@ sylius:
     index_header: Pagesat
     manage: Kontrollo pagesat
     method: Mënyra
+    no_results: Nuk ka asnjë pagesë të konfiguruar
     order: Porosia
     state:
       cancelled: E fshirë
@@ -652,10 +731,12 @@ sylius:
   payment_method:
     create: Krijo mënyrën e pagesës
     create_header: Mënyrë e re pagese
+    enabled: U aktivizua
     gateway: Gateway
     id: ID
     index_header: Mënyrat e pagesës
     name: Emri
+    no_results: Nuk ka asnjë mënyrë pagese të konfiguruar
     update_header: Duke afishuar mënyrën e pagesës
     updated_at: Ndryshimi i fundit
   permission:
@@ -665,6 +746,7 @@ sylius:
     description: Përshkrimi
     id: ID
     index_header: Lejet
+    no_results: Nuk ka asnjë leje të përcaktuar
     update_header: Duke afishuar lejen
     updated_at: Ndryshimi i fundit
   pricing:
@@ -679,6 +761,7 @@ sylius:
     add_attribute: Shto atribut
     archetype: Prototipi
     attributes: Atributet
+    association: Lidhje
     available_on: Gati më
     available_on_demand: E mundshme me porosi
     available_until: Në dispozicion deri në
@@ -697,6 +780,7 @@ sylius:
     no_description: '<i>Asnjë përshkrim...</i>'
     no_images: Nuk ka pamje për këtë produkt
     no_options: Nuk ka opsione për këtë produkt
+    no_results: "Nuk ka asnjë produkt për t'u shfaqur"
     no_shipping_category: Nuk ka kategori dërgimi
     no_short_description: '<i>Asnjë përshkrimi i shkurtër</i>'
     no_sku: Asnjë SKU
@@ -706,15 +790,17 @@ sylius:
     options: Opsionet
     original_price: Çmimi fillestar
     price: Çmimi me pakicë
-    remove_attribute: Fshi atributin
     restricted_zone: Zonë e kufizuar
+    remove_attribute: Fshi atributin
     shipping_category: Kategoria e dërgesës
     show: Shiko më shumë
     show_header: 'Hollësi të produktit <small>Shikim i produktit "<strong>%product%</strong>"</small>'
+    show_in_store: Trego në magazinë
     sku: SKU
     stock: Fondi aktual
     tabs:
       attributes: Atributet
+      associations: Lidhje
       categorization: Kategorizimi
       channels: Kanalet
       images: Imazhet
@@ -727,6 +813,7 @@ sylius:
     updated_at: Ndryshimi i fundit
     variant_selection_method: Metoda rezervë e përzgjedhjes
     variants: Variante
+    view_details: 'Shiko %product% hollësitë'
     volume_based:
       price: Çmimi
       qty_max: Qty max
@@ -740,15 +827,18 @@ sylius:
     index_header: Atribute të produktit
     manage: Kontrollo atributet
     name: Emri
+    no_results: Nuk ka asnjë atribut të konfiguruar
     type: Lloji
     update_header: Duke afishuar atributin
     updated_at: Ndryshimi i fundit
   product_association:
     code: Kodi
+    create: Krijo lidhje te produktit
     create_header: Produkt i ri
     index_header: Atribute të produktit
     manage: Kontrollo atributet
     name: Emri
+    no_results: Nuk ka asnjë atribut të konfiguruar
     type: Lloji
     update_header: Duke afishuar atributin
     updated_at: Ndryshimi i fundit
@@ -759,9 +849,11 @@ sylius:
     index_header: Opsionet e produktit
     manage: Përdor opsionet
     name: Emri
+    no_results: Nuk ka asnjë opsion të konfiguruar
     presentation: Prezantimi
     update_header: Afishimi i opsionit
     updated_at: Ndryshimi i fundit
+    values: Vlerat
   promotion:
     actions: Veprimet
     add_action: Shto veprim
@@ -778,6 +870,7 @@ sylius:
     index_header: Promocionet aktuale
     manage: Kontrollo promocionet
     name: Emri
+    no_results: Nuk ka asnjë promocion të konfiguruar
     priority: Përparësia
     rules: Rregullat
     show_header: Hollësi të promocionit
@@ -798,6 +891,7 @@ sylius:
     generate_header: Duke gjeneruar kupona
     index: Listo kuponat
     index_header: Kuponat
+    no_results: "Nuk ka asnjë kupon për t'u shfaqur"
     total_results:
       Total: '%total%'
     update_header: Duke afishuar kuponin
@@ -811,6 +905,7 @@ sylius:
     create_header: Duke krijuar rrugë tjetër
     id: ID
     index_header: Rrugë tjetër
+    no_results: "Nuk ka asnjë rrugë tjetër për t'u shfaqur"
     title: Titulli
     update_header: Duke afishuar rrugën tjetër
   remember_me: Më mbaj mend
@@ -820,10 +915,14 @@ sylius:
     create_header: Krijo raport të ri
     data_fetcher: Të dhëna mbi llojin e sjellësit
     description: Përshkrimi
+    details: Detajet
     id: Id
     index_header: Njoftimet
     manage: Kontrollo
     name: Emri
+    no_data: "Nuk ka asnjë të dhënë për t'u shfaqur"
+    no_report: "Nuk ka asnjë njoftim për t'u shfaqur"
+    no_results: Nuk është krijuar asnjë njoftim
     renderer: Lloji i interpretimit
     show_header: Hollësi të njoftimit
     update_header: Afisho njoftimin
@@ -836,6 +935,7 @@ sylius:
     id: ID
     index_header: Funksionet
     name: Emri
+    no_results: Nuk ka asnjë rol të përcaktuar
     update_header: Duke afishuar rolin
     updated_at: Ndryshimi i fundit
   route:
@@ -844,6 +944,7 @@ sylius:
     id: ID
     index_header: Rrugët
     name: Emri
+    no_results: "Nuk ka asnjë rrugë për t'u shfaqur"
     page: Faqja
     title: Titulli
     update_header: Duke afishuar rrugën
@@ -853,8 +954,10 @@ sylius:
   security:
     login:
       button: Futu
+      forgot_password: Harruat fjalëkalimin
       header: 'Login <small>Sylius store</small>'
       info: 'Futu duke përdorur <b>"sylius@example.com"</b> email and <b>"sylius"</b> si fjalëkalim. <small>Mr. Sylius Demo Guide</small>'
+      no_account: Ende nuk keni krijuar account
   settings:
     general_header: Rregullimet kryesore
     security_header: Parametrat e sigurisë
@@ -868,6 +971,8 @@ sylius:
     method: Mënyra
     modified: Ndryshuar
     name: Emri
+    no_items: "Nuk ka asnjë artikull për t'u shfaqur"
+    no_results: "Nuk ka asnjë dërgesë për t'u shfaqur"
     order: Porosia
     ship: Dërgimi
     show_header: Hollësi të dërgimit
@@ -887,6 +992,7 @@ sylius:
     index_header: Kategoritë e dërgesave
     manage: Kontrollo kategoritë e dërgimit
     name: Emri
+    no_results: Nuk ka asnjë kategori dërgimi të konfiguruar
     update_header: Duke afishuar kategorinë e dërgimit
     updated_at: Ndryshimi i fundit
   shipping_method:
@@ -899,16 +1005,22 @@ sylius:
     index_header: Mënyrat e dërgesave
     manage: Kontrollo mënyrat e dërgimit
     name: Emri
+    no_results: Nuk ka asnjë mënyrë dërgimi të konfiguruar
     show_header: Hollësi të mënyrës së dërgimit
     update_header: Duke afishuar mënyrën e dërgimit
     updated_at: Ndryshimi i fundit
     zone: Zona
   shop_by: Bli me
+  show: Detajet
   show_all: Shfaqi të gjitha
   show_deleted: Shfaq të fshirat
   stockable:
     index_header: 'Inventari <small>Këtu mund të shikosh gjendjet aktuale të magazinës</small>'
     name: Emri
+    no_results: "Nuk ka asnjë artikull inventari për t'u shfaqur"
+    on_hand: Gjendja e magazinës
+    on_hold: Ne pritje
+    sku: Sku
     updated_at: Ndryshimi i fundit
   tax_category:
     create: Krijo një kategori taksimi
@@ -919,6 +1031,7 @@ sylius:
     manage: Kontrollo kategoritë e taksimit
     name: Emri
     no_description: Asnjë përshkrim
+    no_results: Nuk ka asnjë kategori taksimi të konfiguruar
     update_header: Duke afishuar kategorinë e taksimit
     updated_at: Ndryshimi i fundit
   tax_rate:
@@ -927,9 +1040,11 @@ sylius:
     category: Kategorija
     create: Krijo normën e taksimit
     create_header: Normë e re taksimi
+    included_in_price: Përfshirë në çmim
     index_header: Normat e taksimit
     manage: Kontrollo normat e taksimit
     name: Emri
+    no_results: Nuk ka asnjë normë taksimi të konfiguruar
     show_header: Hollësi të normës së taksimit
     update_header: Duke përditësuar normën e taksimit
     updated_at: Ndryshimi i fundit
@@ -940,6 +1055,7 @@ sylius:
     image: Zgjidh figurën
     name: Emri
     no_image: Nuk ka asnjë figurë për këtë kategori
+    no_results: "Nuk ka asnjë kategori për t'u shfaqur"
     product_index_header: 'Produkte të klasifikuar si "%name%"'
     update_header: Duke afishuar kategorinë
   taxonomy:
@@ -950,20 +1066,24 @@ sylius:
     manage: Kontrollo kategorizimet
     name: Emri
     no_image: Nuk ka asnjë figurë për këtë kategorizim
+    no_results: Nuk ka asnjë kategorizim të përcaktuar
     show_header: 'Kategorizim <small><strong>%name%</strong></small>'
     update_header: Duke afishuar kategorizimin
   total_quantity: Sasia totale
   ui:
+    account_panel_outline: Shijo të gjitha vetitë që shfaqen në hapësirën tënde personale, gjurmo dhe kontrollo të gjitha të dhënat
     change_password: Ndrysho fjalëkalimin
     code: Kodi
     customer:
       id: ID e blerësit
     customer_since: Ti je blerës që prej
     email: Email
+    forgot_password: Harruat fjalëkalimin
     links: Linket
     logged_in_as: 'Loguar si %username%'
     login: Futu
     logout: Dil
+    no_account: Ende nuk keni krijuar account
     password:
       reset:
         button: Rivendos
@@ -973,19 +1093,31 @@ sylius:
     reset: Rivendos
     reset_password: Rivendos fjalëkalimin
     welcome: Mirësevini
+    add_association: Shto lidhje
+    product_associations: Lidhje produkti
+    create_product_association: Krijo lidhje te produktit
+    product_association_types: Tipet e lidhjes se produktit
+    create_product_association_type: Krijo tipologji te lidhjes se produktit
+    update_product_association_type: Perditeso tipologji te lidhjes se produktit
+    no_association_types_to_display: Nuk ka tipologji lidhjesh te percaktuar
     name: Emri
     id: Id
   unknown: E panjohur
   user:
+    create: Krijo përdorues
     create_header: Përdorues i ri
+    enabled: Konfirmuar
     general_info: 'Informacion i përgjithshëm për "%username%"'
     id: ID
     impersonate: Logo si ky përdorues
     index_header: 'Përdorues <small>Lista e të gjithë përdoruesve të regjistruar në dyqan</small>'
     last_login: Login i fundit
+    manage: Menaxho përdoruesit
+    no_results: "Nuk ka asnjë përdorues për t'u shfaqur"
     oauth:
       access_token: Xhitoni i hyrjes
       identifier: Identifikuesi
+      none: Nuk ka asnjë llogari OAuth të lidhur
       provider: Furnizues OAuth
     recent_header: Përdoruesit e fundit
     register:
@@ -1003,6 +1135,7 @@ sylius:
     create_header: Variant i produktit të ri
     delete_image: Fshi figurën
     last_update: Ndryshimi i fundit
+    no_results: "Nuk ka asnjë variant për t'u shfaqur"
     options: Opsionet
     original_price: Çmimi fillestar
     price: Çmimi
@@ -1017,6 +1150,7 @@ sylius:
     index_header: Zonat
     manage: Kontrollo zonat
     name: Emri
+    no_results: Nuk ka asnjë zonë të konfiguruar
     scope: Zona
     show_header: Hollësi të zonës
     type: Lloji

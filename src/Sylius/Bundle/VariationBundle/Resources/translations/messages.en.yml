@@ -3,8 +3,7 @@ sylius:
         variant:
             presentation: Presentation
         option:
-            name: Internal name
-            presentation: Presentation
+            name: Name
             values: Possible values
         option_value:
             add_value: Add value

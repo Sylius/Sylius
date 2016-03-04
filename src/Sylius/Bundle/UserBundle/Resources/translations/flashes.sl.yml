@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  user:
+    email:
+      not_exist: Uporabnik s to e-pošto ne obstaja.
+    password:
+      invalid: Napačno trenutno geslo.
+      request:
+        success: Poslali smo vam e-pošto z navodili za ponastavitev gesla!
+      reset:
+        success: Vaše geslo je bilo uspešno ponastavljeno!
+      change:
+        success: Vaše geslo je bilo uspešno spremenjeno!
+    reset_password:
+      requested: Če e-pošta, ki ste jo določili v našem sistemu, obstaja, smo nanjo poslali navodila, kako ponastaviti vaše geslo.

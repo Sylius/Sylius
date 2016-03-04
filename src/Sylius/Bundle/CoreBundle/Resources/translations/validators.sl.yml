@@ -1,0 +1,23 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  checkout:
+    shipping_method:
+      not_blank: Prosimo, izberite način dostave.
+  locale:
+    code:
+      not_blank: Prosimo, vnesite kodo območnih nastavitev.
+      unique: Ta nastavitev območja že obstaja.
+  product_variant:
+    onHand:
+      min: 'Na voljo mora biti večje od {{ limit }}.'
+      not_blank: Prosimo, vnesite na voljo.
+    price:
+      min: Cena ne sme biti negativna.
+      not_blank: Prosimo, vnesite ceno.
+    original_price:
+      min: Prvotna cena ne sme biti negativna.
+  product_translation:
+    short_description:
+      max: 'Kratek opis ne sme biti daljši kot {{ limit }} znakov.'

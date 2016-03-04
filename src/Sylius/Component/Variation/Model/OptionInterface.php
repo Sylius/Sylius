@@ -14,6 +14,7 @@ namespace Sylius\Component\Variation\Model;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Component\Translation\Model\TranslatableInterface;
 
 /**
  * Model implementing this interface represents the option type, which can be
@@ -21,28 +22,12 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OptionInterface extends CodeAwareInterface, TimestampableInterface, OptionTranslationInterface
+interface OptionInterface extends
+    CodeAwareInterface,
+    TimestampableInterface,
+    OptionTranslationInterface,
+    TranslatableInterface
 {
-    /**
-     * Get internal name.
-     *
-     * It is used only in backend so you can easily
-     * separate similar options for different kind of objects.
-     *
-     * For example "T-Shirt size" and "Box size", both may have
-     * presentation "Size", but their internal name should be different.
-     *
-     * @return string
-     */
-    public function getName();
-
-    /**
-     * Set internal name.
-     *
-     * @param string $name
-     */
-    public function setName($name);
-
     /**
      * Returns all option values.
      *

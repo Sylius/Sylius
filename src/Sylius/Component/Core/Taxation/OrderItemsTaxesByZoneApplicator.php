@@ -12,7 +12,7 @@
 namespace Sylius\Component\Core\Taxation;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\CoreBundle\Distributor\IntegerDistributorInterface;
+use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -80,15 +80,14 @@ class OrderItemsTaxesByZoneApplicator implements OrderItemsTaxesByZoneApplicator
             $totalTaxAmount = $this->calculator->calculate($item->getTotal(), $taxRate);
             $splitTaxes = $this->distributor->distribute($totalTaxAmount, $quantity);
 
-            $units = $item->getUnits();
-            $units->first();
-            foreach ($splitTaxes as $key => $tax) {
-                if (0 === $tax) {
+            $i = 0;
+            foreach ($item->getUnits() as $unit) {
+                if (0 === $splitTaxes[$i]) {
                     continue;
                 }
 
-                $unit = $this->getNextUnit($units);
-                $this->addAdjustment($unit, $tax, $taxRate->getLabel(), $taxRate->isIncludedInPrice());
+                $this->addAdjustment($unit, $splitTaxes[$i], $taxRate->getLabel(), $taxRate->isIncludedInPrice());
+                $i++;
             }
         }
     }
@@ -103,21 +102,5 @@ class OrderItemsTaxesByZoneApplicator implements OrderItemsTaxesByZoneApplicator
     {
         $unitTaxAdjustment = $this->adjustmentFactory->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, $label, $taxAmount, $included);
         $unit->addAdjustment($unitTaxAdjustment);
-    }
-
-    /**
-     * @param Collection $units
-     *
-     * @return OrderItemUnitInterface
-     */
-    private function getNextUnit(Collection $units)
-    {
-        $unit = $units->current();
-        if (false === $unit) {
-            throw new \InvalidArgumentException('The number of tax items is greater than number of units.');
-        }
-        $units->next();
-
-        return $unit;
     }
 }

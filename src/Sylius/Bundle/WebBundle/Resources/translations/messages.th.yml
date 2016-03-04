@@ -265,6 +265,7 @@ sylius:
     id: ID
     last_name: นามสกุล
     shipping_address: ที่อยู่สำหรับจัดส่งสินค้า
+    phone_number: หมายเลขโทรศัพท์
   delete: ลบ
   deleted: ลบทิ้งแล้ว
   edit: แก้ไข
@@ -275,7 +276,7 @@ sylius:
   filter: ตัวกรอง
   form:
     cart:
-      coupon: ถ้าคุณมีคูปองโปรโมชั่น ป้อนไว้ที่นี่
+      coupon: คูปอง
     choose_file: เลือกไฟล์
     frontend:
       password:
@@ -406,6 +407,11 @@ sylius:
     taxes: ภาษี
     total: ผลรวม
     update_header: แก้ไขใบสั่งซื้อ
+  review:
+    id: ID
+    title: หัวข้อ
+    author: ผู้เขียน
+    created_at: สร้างเมื่อ
   order_item:
     product: รายการ
     quantity: ปริมาณ

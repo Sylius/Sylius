@@ -13,7 +13,11 @@ namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\ChannelContextSetterInterface;
+use Sylius\Behat\Page\Channel\ChannelCreatePage;
+use Sylius\Behat\Page\Shop\HomePage;
+use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -21,16 +25,49 @@ use Sylius\Component\Core\Model\ChannelInterface;
 final class ChannelContext implements Context
 {
     /**
+     * @var SharedStorageInterface
+     */
+    private $sharedStorage;
+
+    /**
      * @var ChannelContextSetterInterface
      */
     private $channelContextSetter;
 
     /**
-     * @param ChannelContextSetterInterface $channelContextSetter
+     * @var ChannelRepositoryInterface
      */
-    public function __construct(ChannelContextSetterInterface $channelContextSetter)
-    {
+    private $channelRepository;
+
+    /**
+     * @var ChannelCreatePage
+     */
+    private $channelCreatePage;
+
+    /**
+     * @var HomePage
+     */
+    private $homePage;
+
+    /**
+     * @param SharedStorageInterface $sharedStorage
+     * @param ChannelContextSetterInterface $channelContextSetter
+     * @param ChannelRepositoryInterface $channelRepository
+     * @param ChannelCreatePage $channelCreatePage
+     * @param HomePage $homePage
+     */
+    public function __construct(
+        SharedStorageInterface $sharedStorage,
+        ChannelContextSetterInterface $channelContextSetter,
+        ChannelRepositoryInterface $channelRepository,
+        ChannelCreatePage $channelCreatePage,
+        HomePage $homePage
+    ) {
+        $this->sharedStorage = $sharedStorage;
         $this->channelContextSetter = $channelContextSetter;
+        $this->channelRepository = $channelRepository;
+        $this->channelCreatePage = $channelCreatePage;
+        $this->homePage = $homePage;
     }
 
     /**
@@ -39,5 +76,29 @@ final class ChannelContext implements Context
     public function iChangeMyCurrentChannelTo(ChannelInterface $channel)
     {
         $this->channelContextSetter->setChannel($channel);
+    }
+
+    /**
+     * @When I create a new channel :channelName
+     */
+    public function iCreateNewChannel($channelName)
+    {
+        $this->channelCreatePage->open();
+        $this->channelCreatePage->fillName($channelName);
+        $this->channelCreatePage->fillCode($channelName);
+        $this->channelCreatePage->create();
+
+        $channel = $this->channelRepository->findOneBy(['name' => $channelName]);
+        $this->sharedStorage->set('channel', $channel);
+    }
+
+    /**
+     * @When /^I visit (this channel)'s homepage$/
+     */
+    public function iVisitChannelHomepage(ChannelInterface $channel)
+    {
+        $this->channelContextSetter->setChannel($channel);
+
+        $this->homePage->open();
     }
 }

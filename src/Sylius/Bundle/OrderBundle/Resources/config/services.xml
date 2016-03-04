@@ -23,7 +23,7 @@
 
         <parameter key="sylius.originator.class">Sylius\Component\Originator\Originator\Originator</parameter>
 
-        <parameter key="sylius.order_item_quantity_modifier.class">Sylius\Bundle\OrderBundle\Modifier\OrderItemQuantityModifier</parameter>
+        <parameter key="sylius.order_item_quantity_modifier.class">Sylius\Component\Order\Modifier\OrderItemQuantityModifier</parameter>
         <parameter key="sylius.form.data_mapper.property_path.class">Symfony\Component\Form\Extension\Core\DataMapper\PropertyPathMapper</parameter>
         <parameter key="sylius.form.data_mapper.order_item_quantity.class">Sylius\Bundle\OrderBundle\Form\DataMapper\OrderItemQuantityDataMapper</parameter>
 

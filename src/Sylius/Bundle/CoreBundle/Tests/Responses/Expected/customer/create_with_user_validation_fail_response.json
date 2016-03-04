@@ -19,12 +19,13 @@
                 ]
             },
             "birthday": {},
-            "gender":{
+            "gender": {
                 "errors": [
                     "Please choose your gender."
                 ]
             },
             "groups": {},
+            "phoneNumber": {},
             "user": {
                 "children": {
                     "plainPassword": {

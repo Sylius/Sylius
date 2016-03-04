@@ -1,0 +1,16 @@
+sylius_admin_tax_category:
+    resource: |
+        alias: sylius.tax_category
+        section: admin
+        templates: SyliusAdminBundle:Crud
+        except: ['show']
+        redirect: update
+        vars:
+          all:
+              subheader: sylius.ui.manage_taxation_of_your_products
+              templates:
+                  list: SyliusAdminBundle:TaxCategory/Macro:list.html.twig
+                  form: SyliusAdminBundle:TaxCategory:_form.html.twig
+          index:
+              icon: tags
+    type: sylius.resource

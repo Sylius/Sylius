@@ -1,0 +1,24 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  product:
+    sku:
+      not_blank: Prosimo, vnesite SKU izdelka.
+      unique: SKU izdelka mora biti edinstven.
+    name:
+      not_blank: Prosimo, vnesite ime izdelka.
+      min_length: 'Ime izdelka mora biti dolgo vsaj 1 znak.|Ime izdelka mora biti dolgo vsaj {{ limit }} znakov.'
+      max_length: 'Ime izdelka ne sme biti daljše od 1 znaka.|Ime izdelka ne sme biti daljše od {{ limit }} znakov.'
+  variant:
+    sku:
+      not_blank: Prosimo, vnesite SKU varianto.
+      unique: SKU variante mora biti edinstven.
+  archetype:
+    name:
+      not_blank: Prosimo, vnesite ime prototipa.
+      min_length: 'Ime prototipa mora biti dolgo vsaj 1 znak.|Ime prototipa mora biti dolgo vsaj {{ limit }} znakov.'
+      max_length: 'Ime prototipa ne sme biti daljše od 1 znaka.|Ime prototipa ne sme biti daljše od {{ limit }} znakov.'
+    code:
+      unique: Prototip z dano kodo že obstaja.
+      not_blank: Prosimo, vnesite kodo prototipa.

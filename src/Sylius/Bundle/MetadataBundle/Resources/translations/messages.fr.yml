@@ -3,10 +3,36 @@
 
 sylius:
   metadata:
+    type:
+      none: ' - AUCUN - '
+      twitter_summary_card: Résumé
+      twitter_summary_large_image_card: Résumé avec grande image
+      twitter_player_card: Lecteur
+      twitter_app_card: Application 
     page:
       title: Titre
       description: Description
+      keywords: Mots clés
+      twitter: Twitter Card
     twitter:
       title: Titre
       description: Description
+      site: Site
+      site_id: Identifiant du site
+      creator: Auteur
+      creator_id: "ID de l'auteur"
       image: Image
+      player: Lecteur
+      player_width: Largeur du lecteur
+      player_height: Hauteur du lecteur
+      player_stream: Flux du lecteur
+      player_stream_content_type: Type de contenu pour le flux du lecteur
+      app_name_iphone: "Le nom de l'application iPhone"
+      app_id_iphone: "L'ID de l'application iPhone"
+      app_url_iphone: "L'url de l'application iPhone"
+      app_name_ipad: "Le nom de l'application iPad"
+      app_id_ipad: "L'ID de l'application iPad"
+      app_url_ipad: "L'url de l'application iPad"
+      app_name_googleplay: "Le nom de l'application Google Play"
+      app_id_googleplay: "L'ID de l'application Google Play"
+      app_url_googleplay: "L'url de l'application Google Play"

@@ -84,20 +84,20 @@ class OptionValueSpec extends ObjectBehavior
         $this->__toString()->shouldReturn('S');
     }
 
-    function it_throws_exception_when_trying_to_get_name_without_option_being_assigned()
+    function it_throws_exception_when_trying_to_get_option_code_without_option_being_assigned()
     {
         $this
             ->shouldThrow(\BadMethodCallException::class)
-            ->duringGetName()
+            ->duringGetOptionCode()
         ;
     }
 
-    function it_returns_its_option_name(OptionInterface $option)
+    function it_returns_its_option_code(OptionInterface $option)
     {
-        $option->getName()->willReturn('T-Shirt size');
+        $option->getCode()->willReturn('01');
         $this->setOption($option);
 
-        $this->getName()->shouldReturn('T-Shirt size');
+        $this->getOptionCode()->shouldReturn('01');
     }
 
     function it_throws_exception_when_trying_to_get_presentation_without_option_being_assigned()
@@ -110,7 +110,7 @@ class OptionValueSpec extends ObjectBehavior
 
     function it_returns_its_option_presentation(OptionInterface $option)
     {
-        $option->getPresentation()->willReturn('Size');
+        $option->getName()->willReturn('Size');
         $this->setOption($option);
 
         $this->getPresentation()->shouldReturn('Size');

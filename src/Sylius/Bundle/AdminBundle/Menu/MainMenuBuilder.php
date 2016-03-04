@@ -45,6 +45,12 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
             ->setLabel('sylius.menu.admin.main.configuration.header')
         ;
 
+        $child
+            ->addChild('tax_categories', ['route' => 'sylius_admin_tax_category_index'])
+            ->setLabel('sylius.menu.admin.main.configuration.tax_categories')
+            ->setLabelAttribute('icon', 'tags')
+        ;
+
         if (!$child->hasChildren()) {
             $menu->removeChild('configuration');
         }

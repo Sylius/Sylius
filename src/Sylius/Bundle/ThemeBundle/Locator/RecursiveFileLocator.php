@@ -65,18 +65,32 @@ final class RecursiveFileLocator implements FileLocatorInterface
     {
         $this->assertNameIsNotEmpty($name);
 
-        $finder = $this->finderFactory->create();
-        $finder
-            ->files()
-            ->name($name)
-            ->ignoreUnreadableDirs()
-            ->in($this->paths);
+        $found = false;
+        foreach ($this->paths as $path) {
+            try {
+                $finder = $this->finderFactory->create();
+                $finder
+                    ->files()
+                    ->name($name)
+                    ->ignoreUnreadableDirs()
+                    ->in($path);
 
-        $this->assertThatAtLeastOneFileWasFound($finder, $name);
+                /** @var SplFileInfo $file */
+                foreach ($finder as $file) {
+                    $found = true;
 
-        /** @var SplFileInfo $file */
-        foreach ($finder as $file) {
-            yield $file->getPathname();
+                    yield $file->getPathname();
+                }
+            } catch (\InvalidArgumentException $exception) {
+            }
+        }
+
+        if (false === $found) {
+            throw new \InvalidArgumentException(sprintf(
+                'The file "%s" does not exist (searched in the following directories: %s).',
+                $name,
+                implode(', ', $this->paths)
+            ));
         }
     }
 
@@ -89,21 +103,6 @@ final class RecursiveFileLocator implements FileLocatorInterface
             throw new \InvalidArgumentException(
                 'An empty file name is not valid to be located.'
             );
-        }
-    }
-
-    /**
-     * @param Finder $finder
-     * @param string $name
-     */
-    private function assertThatAtLeastOneFileWasFound(Finder $finder, $name)
-    {
-        if (0 === $finder->count()) {
-            throw new \InvalidArgumentException(sprintf(
-                'The file "%s" does not exist (searched in the following directories: %s).',
-                $name,
-                implode(', ', $this->paths)
-            ));
         }
     }
 }

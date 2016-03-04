@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    email:
+      enabled: فعال
+      subject: عنوان
+      sender_name: نام ارسال کننده
+      sender_address: آدرس ارسال کننده
+      content: آیتم های محتوایی
+      template: تمپلت ایمیل
+      no_template: استفاده از تمپلت اختصاصی

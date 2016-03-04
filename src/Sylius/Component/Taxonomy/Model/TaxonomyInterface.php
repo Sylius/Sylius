@@ -18,7 +18,11 @@ use Sylius\Component\Translation\Model\TranslatableInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface TaxonomyInterface extends CodeAwareInterface, TranslatableInterface, TaxonomyTranslationInterface, TaxonsAwareInterface
+interface TaxonomyInterface extends
+    CodeAwareInterface,
+    TranslatableInterface,
+    TaxonomyTranslationInterface,
+    TaxonsAwareInterface
 {
     /**
      * @return TaxonInterface

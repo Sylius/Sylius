@@ -70,10 +70,13 @@ sylius:
     billing_address: Rechnungsadresse
     first_name: Vorname
     id: ID
+    phone_number: Telefonnummber
   email:
     code: Code
     enabled: Aktiviert
   form:
+    cart:
+      coupon: Gutschein
     profile:
       firstName: Vorname
   group:
@@ -101,6 +104,9 @@ sylius:
     billing_address: Rechnungsadresse
     id: ID
     number: Nummer
+  review:
+    id: ID
+    title: Titel
   order_item:
     unit_price: Stückpreis
   page:

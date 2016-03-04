@@ -20,6 +20,7 @@ sylius:
       select: Vyberte
     province:
       name: Názov
+      abbreviation: Skratka
       select: Vyberte
     zone:
       add_member: Pridať člena

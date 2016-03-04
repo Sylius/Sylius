@@ -1,0 +1,106 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    action_block:
+      action_name: نام بلاک
+      id: شناسه
+      publish_end_date: پایان تاریخ انتشار
+      publish_start_date: تاریخ انتشار
+      publishable: انتشار در سایت؟
+    imagine_block:
+      filter: فیلتر
+      image: عکس
+      internal_name: عنوان برای مدیر
+      label: عنوان منو
+      link_url: آدرس عکس
+      parent: رده پدر
+      publish_end_date: پایان تاریخ انتشار
+      publish_start_date: تاریخ انتشار
+      publishable: انتشار در سایت؟
+      slideshow_small: اسلایدشو کوچک (کناری)
+      slideshow_medium: اسلایدشو متوسط (محتوایی)
+      slideshow_large: اسلایدشو بزرگ (عریض تمام صفحه)
+    menu:
+      childrens: زیرمنوها
+      display: نمایش در سایت؟
+      display_children: نمایش زیرمنوها؟
+      label: عنوان منو
+      name: نام
+      parent: رده پدر
+      publish_end_date: پایان تاریخ انتشار
+      publish_start_date: تاریخ انتشار
+      publishable: انتشار در سایت؟
+      route: آدرس داخلی منو (به عنوان مثال taxon/mobile/iPhone/)
+      uri: آدرس اینترنتی منو (به عنوان مثال http://yoursite.com)
+    menu_block:
+      body: متن
+      id: شناسه
+      name: نام
+      publish_end_date: پایان تاریخ انتشار
+      publish_start_date: تاریخ انتشار
+      publishable: انتشار در سایت؟
+    menu_node_block:
+      content: آیتم های محتوایی
+      display: نمایش در سایت؟
+      display_children: نمایش زیرمنوها؟
+      internal_name: عنوان برای مدیر
+      label: عنوان منو
+      link_type: نوع لینک
+      publish_end_date: پایان تاریخ انتشار
+      publish_start_date: تاریخ انتشار
+      publishable: انتشار در سایت؟
+      route: آدرس داخلی منو (به عنوان مثال taxon/mobile/iPhone/)
+      uri: آدرس اینترنتی منو (به عنوان مثال http://yoursite.com)
+    redirect_route:
+      id: شناسه
+      name: نام
+      route_name: نام آدرس داخلی
+      uri: آدرس اینترنتی منو (به عنوان مثال http://yoursite.com)
+    reference_block:
+      body: متن
+      id: شناسه
+      publish_end_date: پایان تاریخ انتشار
+      publish_start_date: تاریخ انتشار
+      publishable: انتشار در سایت؟
+      title: عنوان
+    route:
+      content: آیتم های محتوایی
+      name: نام
+      parent: رده پدر
+    simple_block:
+      body: متن
+      internal_name: عنوان برای مدیر
+      parent: رده پدر
+      publish_end_date: پایان تاریخ انتشار
+      publish_start_date: تاریخ انتشار
+      publishable: انتشار در سایت؟
+      title: عنوان
+    slideshow_block:
+      add_slide: اضافه کردن اسلاید
+      childrens: زیرمنوها
+      internal_name: عنوان برای مدیر
+      parent: رده پدر
+      publish_end_date: پایان تاریخ انتشار
+      publish_start_date: تاریخ انتشار
+      publishable: انتشار در سایت؟
+      title: عنوان
+    static_content:
+      body: متن
+      id: شناسه
+      internal_name: عنوان برای مدیر
+      menu_nodes: زیرمجموعه های منو
+      parent: رده پدر
+      publish_end_date: پایان تاریخ انتشار
+      publish_start_date: تاریخ انتشار
+      publishable: انتشار در سایت؟
+      routes: آدرس های داخلی
+      title: عنوان
+    string_block:
+      body: متن
+      id: شناسه
+      name: نام
+      publish_end_date: پایان تاریخ انتشار
+      publish_start_date: تاریخ انتشار
+      publishable: انتشار در سایت؟

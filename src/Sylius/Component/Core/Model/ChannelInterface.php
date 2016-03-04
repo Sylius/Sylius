@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Model;
 
+use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Currency\Model\CurrenciesAwareInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
@@ -21,8 +22,6 @@ use Sylius\Component\Shipping\Model\ShippingMethodsAwareInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomiesAwareInterface;
 
 /**
- * Sylius core channel interface.
- *
  * Model implementing this interface should reference several:
  *   - Currencies;
  *   - Locales;
@@ -40,6 +39,16 @@ interface ChannelInterface extends
     ShippingMethodsAwareInterface,
     TaxonomiesAwareInterface
 {
+    /**
+     * @return ThemeInterface
+     */
+    public function getTheme();
+
+    /**
+     * @param ThemeInterface|null $theme
+     */
+    public function setTheme(ThemeInterface $theme = null);
+
     /**
      * @param LocaleInterface $locale
      */

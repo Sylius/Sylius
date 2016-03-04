@@ -19,6 +19,7 @@ sylius:
       groups: Grupet
       last_name: Mbiemri
       email: Email
+      phone_number: Numri i telefonit
       gender: Gjinia
       birthday: Ditëlindja
       billing_address: Adresa e faturimit

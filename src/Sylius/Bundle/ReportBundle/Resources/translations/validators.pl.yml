@@ -10,5 +10,6 @@ sylius:
     description:
       not_blank: Opis raportu nie może być pusty
     code:
+      not_blank: Kod raportu nie może być pusty.
       unique: Ten kod jest już w użyciu.
       single_word: Kod raportu powinien być jednym słowem.

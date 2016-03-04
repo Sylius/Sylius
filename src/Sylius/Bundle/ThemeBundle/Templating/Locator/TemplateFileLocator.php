@@ -11,7 +11,9 @@
 
 namespace Sylius\Bundle\ThemeBundle\Templating\Locator;
 
+use Sylius\Bundle\ThemeBundle\Context\EmptyThemeContext;
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
+use Sylius\Bundle\ThemeBundle\HierarchyProvider\NoopThemeHierarchyProvider;
 use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProviderInterface;
 use Sylius\Bundle\ThemeBundle\Locator\ResourceNotFoundException;
 use Symfony\Component\Config\FileLocatorInterface;
@@ -22,7 +24,7 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class TemplateFileLocator implements FileLocatorInterface
+final class TemplateFileLocator implements FileLocatorInterface, \Serializable
 {
     /**
      * @var FileLocatorInterface
@@ -81,5 +83,24 @@ final class TemplateFileLocator implements FileLocatorInterface
         }
 
         return $this->decoratedFileLocator->locate($template, $currentPath, $first);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function serialize()
+    {
+        return serialize($this->decoratedFileLocator);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function unserialize($serialized)
+    {
+        $this->decoratedFileLocator = unserialize($serialized);
+
+        $this->themeContext = new EmptyThemeContext();
+        $this->themeHierarchyProvider = new NoopThemeHierarchyProvider();
     }
 }

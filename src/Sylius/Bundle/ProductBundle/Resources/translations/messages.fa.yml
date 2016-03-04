@@ -1,0 +1,25 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    product:
+      name: نام
+      description: شرح
+      attributes: قابلیت ها
+      options: آپشن ها
+      meta_keywords: کلمات کلیدی
+      meta_description: توضیحات سئو
+    product_variant:
+      available_on: تاریخ فعال شدن
+      available_until: در دسترس تا
+    product_archetype:
+      name: نام
+      parent: رده پدر
+      attributes: قابلیت ها
+      options: آپشن ها
+    association_type:
+      name: نام
+    association:
+      type: نوع ارتباط
+      product: محصولات مرتبط

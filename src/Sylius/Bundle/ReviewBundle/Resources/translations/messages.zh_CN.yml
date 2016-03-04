@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    review:
+      title: 标题
+      author: 作者
+      status:
+        new: 新增

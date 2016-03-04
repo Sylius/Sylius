@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Component\Channel\Model\Channel as BaseChannel;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
@@ -21,8 +22,6 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface as BaseShippingMetho
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface as BaseTaxonomyInterface;
 
 /**
- * Core channel model.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Channel extends BaseChannel implements ChannelInterface
@@ -63,8 +62,10 @@ class Channel extends BaseChannel implements ChannelInterface
     protected $taxonomies;
 
     /**
-     * Constructor.
+     * @var ThemeInterface
      */
+    protected $theme;
+
     public function __construct()
     {
         parent::__construct();
@@ -74,6 +75,22 @@ class Channel extends BaseChannel implements ChannelInterface
         $this->paymentMethods = new ArrayCollection();
         $this->shippingMethods = new ArrayCollection();
         $this->taxonomies = new ArrayCollection();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTheme()
+    {
+        return $this->theme;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTheme(ThemeInterface $theme = null)
+    {
+        $this->theme = $theme;
     }
 
     /**

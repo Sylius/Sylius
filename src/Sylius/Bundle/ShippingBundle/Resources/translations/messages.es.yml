@@ -4,9 +4,8 @@
 sylius:
   form:
     rule:
-      item_count_configuration:
+      unit_count_configuration:
         count: Contador
-        equal: Igual a
       type: Tipo de regla
     shipment:
       state: Estado
@@ -24,11 +23,7 @@ sylius:
         amount: Cantidad
       flexible_rate_configuration:
         label: Tarifa plana
-        additional_item_cost: Costo adicional de artículo
-        additional_item_limit: Límite de artículos adicionales
-        first_item_cost: Costo del primer artículo
-      per_item_rate_configuration:
-        label: Tarifa plana por artículo
+      per_unit_rate_configuration:
         amount: Cantidad
       weight_rate_configuration:
         label: Tarifa basada en peso

@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CartBundle\Templating\Helper;
 
-use Sylius\Bundle\OrderBundle\Modifier\OrderItemQuantityModifierInterface;
+use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;

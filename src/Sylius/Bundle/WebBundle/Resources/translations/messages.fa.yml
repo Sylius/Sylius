@@ -1,0 +1,1152 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  account:
+    address:
+      action:
+        billing: تنظیم به عنوان آدرس پیش‌فرض صورت‌حساب
+        create: افزودن آدرس جدید
+        delete: حذف
+        edit: ويرايش
+        shipping: تنظیم به عنوان آدرس تحویل پیش‌فرض
+      create: افزودن آدرس جدید
+      default:
+        billing: آدرس پیش فرض
+        no_billing: آدرس پیش فرض تعریف نشده
+        no_shipping: آدرس پیش فرضی برای تحویل تعریف نشده
+        shipping: آدرس پیش فرض تحویل کالا
+      empty: هیچ آدرسی در حساب شما ثبت نشده است
+      list: تمامی آدرس های شما
+      update: ویرایش آدرس من
+    home:
+      email: ایمیل
+      id: شناسه مشتری
+      last5orders: 5 سفارش آخر شما
+      outline: از این صفحه می توانید برای مشاهده, دنبال کردن و مدیریت اطلاعاتتان استفاده کنید.
+      since: تاریخ ثبت نام در فروشگاه
+      welcome: به صفحه ی شخصیتان خوش آمدید
+    order:
+      created_at: تاریخ ثبت سفارش
+      details: جزئیات سفارش شما
+      download_invoice: دانلود فاکتور خرید
+      empty: شما تاکنون هیچ سفارشی را ثبت نکرده اید
+      invoice: فاکتور خرید
+      list: تمام سفارشهای شما
+      number: شناسه سفارش
+      payment_mode: نحوه ی پرداخت
+      placed_at: 'ثبت شده در تاریخ %at%'
+      shipment:
+        pending: پرداخت منتظر تایید
+        ready: 'تا %at% آماده میگردد'
+        returned: 'بازگشت داده شده در تاریخ %at%'
+        shipped: 'تا %at% ارسال می شود'
+      shipment_mode: نحوه ی ارسال
+      state: وضعیت
+      total: قیمت کل
+      tracking_number: کد پیگیری
+    title: حساب کاربری من
+  add_to_cart: افزودن به سبد خرید
+  association_type:
+    index_header: انواع ارتباط ها
+    update_header: ویرایش نوع ارتباط
+    create_header: ایجاد نوع ارتباط
+    name: نام
+    create: ایجاد
+    update: به روز رسانی
+  address:
+    city: شهر
+    company: شرکت
+    country: كشور
+    firstname: نام
+    lastname: نام خانوادگی
+    postcode: کد پستی
+    province: استان
+    street: آدرس پستی
+  alert:
+    error: خطا
+    info: اطلاع رسانی
+    success: موفق
+    warning: هشدار
+  archetype:
+    attributes: قابلیت ها
+    build: ساخت قلم کالا
+    build_header: تعریف کالا از روی قلم کالا
+    create: ایجاد قلم کالا
+    create_header: قلم کالای جدید
+    index_header: اقلام محصول
+    name: نام
+    no_results: قلم کالایی تعریف نشده
+    options: آپشن ها
+    parent: رده پدر
+    update_header: ویرایش قلم کالا
+    updated_at: آخرین به روز رسانی
+  backend:
+    alert:
+      info: اطلاع رسانی
+    dashboard:
+      chart_order_count: تعداد سفارش ها
+      chart_order_total: رقم کلیه ی سفارش ها
+      header: داشبورد مدیریتی
+      orders: سفارش های هفته گذشته
+      revenue: درآمد حاصل از فروش هفته ی گذشته
+      subheader: نگاهی اجمالی به فروشگاه
+    logout: خروج
+    quick_links:
+      add_product: کالای جدید
+      customers: مشتریان
+      orders: آخرین سفارش‌ها
+      products: کالاهای شما
+    statistics:
+      header: آمار ماه جاری
+      orders_this_month: کل سفارش ها
+      registrations_this_month: تعداد مشتری های ثبت شده
+      sales_this_month: میزان فروش ماه جاری
+  backend_welcome: 'سلام <b>%name%</b>'
+  billing_address: پرداخت کننده
+  block:
+    imagine:
+      create: ایجاد بلاک عکس
+      create_header: ایجاد بلاک عکس
+      end_date: تاریخ انقضاء
+      id: شناسه
+      index: بلاک های عکس
+      index_header: بلاک های عکس
+      label: عنوان منو
+      publishable: انتشار در سایت؟
+      start_date: تاریخ شروع
+      title: عنوان
+      update_header: ویرایش بلاک عکس
+      updated_at: آخرین به روز رسانی
+    imagine_blocks: بلاک های عکس
+    index_header: بلاک ها
+    no_results: هیچ بلاکی برای نمایش وجود ندارد
+    simple:
+      body: متن
+      create: ایجاد بلاک ساده
+      create_header: ایجاد بلاک ساده
+      end_date: تاریخ انقضاء
+      id: شناسه
+      index: بلاک های ساده
+      index_header: بلاک های ساده
+      label: عنوان منو
+      publishable: انتشار در سایت؟
+      start_date: تاریخ شروع
+      title: عنوان
+      update_header: ویرایش بلاک ساده
+      updated_at: آخرین به روز رسانی
+    simple_blocks: بلاک های ساده
+    slideshow:
+      body: متن
+      create: ایجاد بلاک اسلایدشو
+      create_header: ایجاد بلاک اسلاید شو
+      end_date: تاریخ انقضاء
+      id: شناسه
+      index: بلاک های اسلایدشو
+      index_header: بلاک های اسلایدشو
+      publishable: انتشار در سایت؟
+      start_date: تاریخ شروع
+      title: عنوان
+      update_header: ویرایش بلاک اسلایدشو
+      updated_at: آخرین به روز رسانی
+    slideshow_blocks: بلاک های اسلایدشو
+    string:
+      body: متن
+      create: ایجاد بلاک متنی
+      create_header: ایجاد بلاک متنی
+      end_date: تاریخ انقضاء
+      id: شناسه
+      index: بلاک های متنی
+      index_header: بلاک های متنی
+      label: عنوان منو
+      publishable: انتشار در سایت؟
+      start_date: تاریخ شروع
+      title: عنوان
+      update_header: ویرایش بلاک متنی
+      updated_at: آخرین به روز رسانی
+    string_blocks: بلاک های متنی
+  breadcrumb:
+    archetype:
+      index: اقلام کالا
+    assortment: طبقه بندی
+    attribute:
+      index: قابلیت ها
+    block:
+      imagine:
+        index: بلاک های عکس
+      index: بلاک ها
+      simple:
+        index: بلاک های ساده
+      slideshow:
+        index: بلاک های اسلایدشو
+      string:
+        index: بلاک های متنی
+    build: ایجاد
+    channel:
+      index: کانال های فروش
+    configuration: تنظیمات
+    contact_request:
+      index: درخواست های پشتیبانی
+      show: درخواست پشتیبانی
+    contact_topic:
+      index: موضوعات پشتیبانی
+    content: آیتم های محتوایی
+    country:
+      index: كشور‌ها
+    currency:
+      index: واحدهای پول
+    customer:
+      index: مشتریان
+    dashboard: داشبورد
+    edit: ويرايش
+    email:
+      index: ایمیل ها
+    general_settings: تنظیمات کلی
+    generate: ایجاد
+    group:
+      index: گروه ها
+    inventory:
+      index: موجودی کالا
+    locale:
+      index: زبان ها
+    marketing: بازاریابی
+    menu:
+      index: منوها
+    menu_node:
+      index: زیرمجموعه های منو
+    metadata:
+      index: فراداده
+    new: پرداخت ثبت شده
+    option:
+      index: آپشن ها
+    order:
+      adjustments: هزینه های جانبی
+      index: سفارش‌ها
+    page:
+      index: صفحات
+    payment:
+      index: پرداخت‌ها
+    payment_method:
+      index: روش‌های پرداخت
+    permission:
+      index: دسترسی ها
+    product:
+      index: محصولات
+    association_type:
+      index: انواع ارتباط ها
+    promotion:
+      index: فروش ویژه
+    promotion_coupon:
+      index: کدهای تخفیف
+    product_association:
+      index: ارتباط ها
+    product_association_type:
+      index: نوع ارتباط
+    report:
+      index: گزارش ها
+    role:
+      index: نقش ها
+    route:
+      index: آدرس های داخلی
+    sales: میزان فروش ماه جاری
+    section:
+      customer: مشتری
+    security_settings: تنظیمات امنیتی
+    shipment:
+      index: ارسال محصول
+    shipping_category:
+      index: انواع ارسال
+    shipping_method:
+      index: شیوه های ارسال
+    support: پشتیبانی
+    tax_category:
+      index: انواع مالیات
+    tax_rate:
+      index: نرخ های مالیات
+    taxation_settings: تنظیمات مالیات
+    taxonomy:
+      index: رده بندی
+    update: ويرايش
+    zone:
+      index: مناطق
+  browse_products: نمایش کالاها
+  cancel: لغو
+  cart:
+    empty: سبد خرید شما خالی است
+    summary:
+      add_coupon: ایجاد کد تخفیف
+      checkout: پرداخت نشده
+      clear: خالی کردن سبد خرید
+      grand_total: هزینه نهایی
+      product: محصول
+      quantity: تعداد
+      save: ذخیره
+      total: قیمت کل
+      unit_price: قیمت
+    summary_header: سبد خرید
+    total_items: '‍۱ آیتم | %count% آیتم'
+  channel:
+    code: نام انگلیسی
+    create: افزودن کانال
+    create_header: افزودن کانال
+    created_at: ایجاد شده در
+    currency_default: واحد پولی پیش‌فرض
+    enabled: فعال
+    id: شناسه
+    index_header: کانال های فروش
+    locale_default: زبان پیش فرض
+    manage: مدیریت کانال ها
+    name: نام
+    no_results: هیچ کانالی پیکربندی نشده
+    update: ويرايش
+    update_header: ویرایش کانال
+    updated_at: آخرین به روز رسانی
+    url: آدرس اینترنتی
+  checkout:
+    addressing:
+      header: اطلاعات کاربر
+    back: بازگشت
+    credit_card:
+      header: جزئیات پرداخت
+    finalize:
+      address:
+        city: شهر
+        country: كشور
+        firstname: نام
+        lastname: نام خانوادگی
+        postcode: کد پستی
+        province: استان
+        street: آدرس پستی
+      header: فاکتور نهایی خرید
+      order:
+        additional_information: اطلاعات بیشتر
+        billing_address: مشخصات پرداخت کننده
+        items_total: جمع قیمت کالا
+        no_items: هیچ آیتمی در این سفارش وجود ندارد
+        no_promotion: هیچ نوع تخفیفی روی این سفارش اعمال نشده است
+        no_shipping_charges: هیچ هزینه ی ارسالی روی این سفارش اعمال نشده است
+        no_taxes: هیچ مالیاتی روی این سفارش اعمال نشده است
+        promotion_discount: تخفیف فروش ویژه
+        promotion_total: جمع تخفیفات
+        shipping_address: آدرس تحویل سفارش
+        shipping_charges: هزینه ارسال
+        shipping_total: هزینه ارسال
+        tax_total: مجموع مالیات
+        taxes: مالیات
+        total: قیمت کل
+      order_item:
+        quantity: تعداد
+        total: قیمت کل
+        unit_price: قیمت واحد
+      place_order: نهایی کردن خرید
+      product:
+        name: نام
+    forward: ادامه
+    payment:
+      header: روش پرداخت
+    security:
+      existing_customer: از قبل عضو هستم
+      guest: می خواهم بدون ثبت نام ادامه دهم
+      header: 'وارد حسابتان شده <small> و یا اینکه عضو شوید <small>'
+      login: ورود
+      new_customer: مشتری جدید
+      proceed_order: تکمیل مراحل سفارش را ادامه دهید
+      register: ثبت نام
+    shipping:
+      error: متاسفانه قادر نیستیم سفارش شما را به کشور انتخابی ارسال کنیم
+      header: شیوه ارسال
+  confirmation:
+    message: آیا از حذف این آیتم اطمینان دارید؟
+    title: تایید
+  contact_request:
+    create: درخواست پشتیبانی
+    create_header: درخواست پشتیبانی جدید
+    email: ایمیل
+    firstName: نام
+    id: شناسه
+    index_header: درخواست های پشتیبانی
+    lastName: نام خانوادگی
+    message: متن پیام
+    no_results: هیچ درخواست پشتیبانی برای نمایش وجود ندارد
+    show_header: جزئیات درخواست پشتیبانی
+    topic: عنوان
+    update_header: ویرایش درخواست پشتیبانی
+    updated_at: آخرین به روز رسانی
+  contact_topic:
+    create: ایجاد موضوع پشتیبانی
+    create_header: موضوع پشتیبانی جدید
+    id: شناسه
+    index_header: موضوعات پشتیبانی
+    no_results: هیچ موضوع پشتیبانی برای نمایش وجود ندارد
+    title: عنوان
+    update_header: ویرایش موضوع پشتیبانی
+    updated_at: آخرین به روز رسانی
+  country:
+    add_province: افزودن استان
+    create: ایجاد کشور
+    create_header: کشور جدید
+    enabled: فعال
+    id: شناسه
+    index_header: كشور‌ها
+    manage: مدیریت کشورها
+    name: نام
+    no_results: هیچ کشوری پیکربندی نشده
+    show_header: جزئیات کشور
+    update_header: ویرایش کشور
+  create: ایجاد
+  created_at: ایجاد شده در
+  currency:
+    code: نام انگلیسی
+    create: ایجاد ارز
+    create_header: ارز جدید
+    enabled: فعال
+    exchange_rate: نرخ تبدیل ارز
+    id: شناسه
+    index_header: واحدهای پول
+    name: نام
+    no_results: ارزی برای نمایش وجود ندارد
+    update_header: ویرایش ارز
+    updated_at: آخرین به روز رسانی
+  customer:
+    billing_address: مشخصات پرداخت کننده
+    create: ایجاد کاربر
+    create_header: مشتری جدید
+    creation_date: تاریخ ایجاد
+    email: ایمیل
+    filter:
+      all: نمایش همه مشتریان
+      registered: نمایش مشتری های ثبت نامی
+      unconfirmed: نمایش حساب های فعال نشده
+    first_name: نام
+    general_info: 'اطلاعات کلی %fullName%'
+    groups: گروه ها
+    id: شناسه
+    index_header: 'مشتریان <small> لیست کل مشتری های فروشگاه <small>'
+    last_name: نام خانوادگی
+    manage: مدیریت مشتریان
+    no_groups: هیچ گروه فابل نمایشی برای این مشتری وجود ندارد
+    no_results: هیچ مشتری برای نمایش وجود ندارد
+    order:
+      no_results: سفارشی برای این مشتری وجود ندارد
+    orders: سفارش مشتریان
+    recent_header: مشتریان اخیر
+    shipping_address: آدرس تحویل سفارش
+    show_header: اظلاعات مشتری
+    update_header: ویرایش مشتری
+    phone_number: شماره تلفن
+  delete: حذف
+  deleted: حذف شده
+  disable: غیرفعال کردن
+  edit: ويرايش
+  email:
+    code: نام انگلیسی
+    create: ایجاد ایمیل جدید
+    create_header: ایجاد ایمیل جدید
+    enabled: فعال
+    index_header: قالب‌های ایمیل
+    manage: مدیریت ایمیل ها
+    no_results: هیچ ایمیلی پیکربندی نشده
+    subject: عنوان
+    update_header: ویرایش ایمیل
+    updated_at: آخرین به روز رسانی
+  emails:
+    order_comment:
+      name: یادداشت سفارش
+      subject: یادداشت جدیدی روی سفارش ارسال شد
+    order_confirmation:
+      name: تایید سفارش
+      subject: از سفارش شما سپاسگزاریم
+    shipment_confirmation:
+      name: تایید ارسال
+      subject: سفارش شما ارسال شده
+    user_confirmation:
+      name: تایید کاربر
+      subject: به فروشگاه ما خوش آمدید
+  enable: فعال
+  filter: فیلتر
+  form:
+    cart:
+      coupon: کد تخفیف
+    choose_file: انتخاب فایل
+    comment:
+      comment: نظر
+      notify_customer: اطلاع رسانی به مشتری
+    frontend:
+      password:
+        confirmation: تایید
+        current: کلمه عبور فعلی
+        new: کلمه عبور جدید
+        title: تغییر کلمه عبور
+      profile:
+        title: ویرایش اطلاعات شخصی
+    login:
+      email: ایمیل
+      password: کلمه عبور
+    menu:
+      add_menu_node: افزودن زیرمنو
+    option_value:
+      add_value: افزودن مقدار
+    profile:
+      email: ایمیل
+      firstName: نام
+      lastName: نام خانوادگی
+  gallery:
+    next: بعدی
+    previous: قبلی
+    slideshow: اسلایدشو
+  gender:
+    female: خانم
+    male: آقا
+  generate: ایجاد
+  go_to_dashboard: رفتن به داشبورد
+  group:
+    create: ایجاد گروه
+    create_header: ایجاد گروه های جدید مشتریان
+    id: شناسه
+    index_header: گروه ها
+    name: نام
+    no_results: هیچ گروهی برای نمایش وجود ندارد
+    roles: نقش ها
+    update_header: ویرایش گروه
+  hide_deleted: مخفی کردن آیتم های حذف شده
+  history:
+    action: عمل
+    author: نويسنده
+    data: اطلاعات
+    empty: خالی
+    header: پيشينه
+    logged_at: آخرین ورود
+    no_results: هیچ تاریخ ثبت شده ای از ورود کاربر به سیستم برای نمایش وجود ندارد
+    revert: بازگشت به تنظیمات اولیه
+  homepage:
+    splash:
+      headline: به Sylius خوش آمدید
+      subheadline: فروشگاه مدرن برای Symfony 2
+  inventory_unit:
+    created_at: ساخته شده در تاریخ
+    inventory_state: وضعیت انبار
+    name: نام
+    no_results: هیچ واحد انباری برای نمایش وجود ندارد
+    shipping_state: وضعیت ارسال
+    sku: کد محصول
+    updated_at: آخرین به روز رسانی
+  locale:
+    code: نام انگلیسی
+    create: ایجاد زبان
+    create_header: ایجاد زبان جدید
+    enabled: فعال
+    id: شناسه
+    index_header: فهرست تمام مناطق پیکربندی شده
+    name: نام
+    no_results: هیچ منطقه ای پیکربندی نشده
+    update_header: ویرایش زبان
+    updated_at: آخرین به روز رسانی
+  login: ورود
+  login_header: مدیریت
+  logo: Sylius
+  manage: مدیریت
+  menu:
+    create: ایجاد منو
+    create_header: ایجاد منو
+    end_date: تاریخ انقضاء
+    id: شناسه
+    index_header: منوها
+    no_results: هیچ منویی برای نمایش وجود ندارد
+    publishable: انتشار در سایت؟
+    start_date: تاریخ شروع
+    title: عنوان
+    update_header: ویرایش منو
+  menu_node:
+    create: ایجاد زیرمنو
+    create_header: ایجاد منو
+    id: شناسه
+    index_header: زیرمجموعه های منو
+    no_results: هیچ زیرمنویی برای نمیاش وجود ندارد
+    parent: رده پدر
+    title: عنوان
+    update_header: ویرایش زیرمنو
+  meta:
+    backend_title: داشبورد
+    frontend_description: سایلیوس یک راهکار مدرن تجارت الکترونیک، با زبان پی اچ پی و مبتنی بر فریم ورک Symfony2 است
+    frontend_keywords: سایلیوس, تجارت الکترونیک, symfony2, فروشگاه, سبد خرید, فروشگاه آنلاین
+    frontend_title: Sylius, فروشگاه مدرن برای Symfony 2
+  metadata:
+    customize_header: سفارشی سازی فراداده
+    show_header: نمایش فراداده
+    id: شناسه
+    customize: تغییر فراداده
+    manage: مدیریت فراداده
+    content: آیتم های محتوایی
+    index_metadata: فراداده
+    default_page:
+      group_customize: تغییر فراداده پیش فرض
+    product:
+      single_customize: تغییر فراداده
+      group_customize: تعریف فراداده ی کالاها
+    product_variant:
+      single_customize: تغییر فراداده
+  move_down: پائین
+  move_up: بالا
+  na: نامشخص
+  newest: جدیدترین کالاها
+  "no": false
+  no_results: بدون نتیجه
+  order:
+    additional_information: اطلاعات بیشتر
+    adjustments:
+      amount: مبلغ
+      description: شرح
+      lock: قفل
+      lock_all: قفل همه ی هزینه های جانبی
+      locked: قفل شده
+      manage: مدیریت سایر هزینه ها
+      type: نوع
+      unlock: باز کن
+      unlock_all: باز کردن همه ی هزینه های جانبی
+    billing_address: مشخصات پرداخت کننده
+    channel: کانال فروش
+    comment:
+      author: نويسنده
+      comment: نظر
+      created_at: ایجاد شده در
+      customer:
+        not_notified: به مشتری اطلاع رسانی نشده
+        notified: به مشتری اطلاع رسانی شده
+      header: نظرات سفارش
+      no_comment: بدون نظر
+      notify: اطلاع رسانی
+      state: وضعیت
+    create: ایجاد سفارش
+    create_header: سفارش جدید
+    created_at: زمان ایجاد
+    currency: ارز
+    customer: مشتری
+    details: جزییات سفارش
+    general_info: اطلاعات کلی
+    guest: مشتری مهمان
+    id: شناسه
+    immutable_warning: در حال حاضر سفارش های ارسال شده قابل تغییر نیستند
+    index_header: مشاهده سفارشها
+    inventory_tracking: پیگیری انبار
+    inventory_unit:
+      backorder: پیش خرید
+      fulfill: ارسال
+      return: بازگشت
+    items: آیتم ها
+    items_total: جمع قیمت کالا
+    manage: مدیریت سفارش ها
+    no_items: هیچ آیتمی در این سفارش وجود ندارد
+    no_promotion: هیچ کد تخفیفی استفاده نشده است
+    no_results: سفارش جدیدی ندارید
+    no_shipments: هیچ ارسالی برای این سفارش وجود ندارد
+    no_shipping_charges: هیچ هزینه ی ارسالی روی این سفارش اعمال نشده است
+    no_taxes: هیچ مالیاتی روی این سفارش اعمال نشده است
+    number: شناسه سفارش
+    order_state: وضعیت سفارش
+    payment: پرداخت
+    payment_state: وضعیت پرداخت
+    payment_states:
+      balance_due: دلیل موازنه
+    promotion_coupons: کدهای تخفیف
+    promotion_total: جمع تخفیفات
+    recent_header: سفارش های اخیر
+    release_inventory: بازانتشار موجودی
+    shipment_state: وضعیت ارسال
+    shipment_states:
+      pending: پرداخت منتظر تایید
+    shipments: ارسال محصول
+    shipping_address: آدرس تحویل سفارش
+    shipping_charges: هزینه ارسال
+    shipping_total: هزینه ارسال
+    show_header: سفارش
+    state:
+      abandoned: سفارش ناتمام
+      cancelled: پرداخت لغو شده
+      cart_locked: سبد خرید قفل شده
+      checkout: پرداخت نشده
+      order_confimed: سفارس تایید شده
+      ordered: سفارش ثبت شده
+      returned: برگشت داده شده
+      shipped: ارسال شده
+    tax_total: مجموع مالیات
+    taxes: مالیات
+    total: قیمت کل
+    update_header: ویرایش سفارش
+  review:
+    id: شناسه
+    subject: عنوان
+    title: عنوان
+    author: نويسنده
+    guest: می خواهم بدون ثبت نام ادامه دهم
+    created_at: ایجاد شده در
+  order_item:
+    product: کالا
+    quantity: تعداد
+    sellable: محصول
+    total: قیمت کل
+    unit_price: قیمت واحد
+  out_of_stock: ناموجود
+  page:
+    body: متن
+    create: ایجاد صفحه جدید
+    create_header: ایجاد صفحه جدید
+    end_date: تاریخ انقضاء
+    id: شناسه
+    index_header: صفحات
+    no_results: هیچ صفحه ای برای نمایش وجود ندارد
+    no_route: محتوای وارد شده بدون تعیین آدرس داخلی در صفحه ی اصلی نمایش داده نخواهد شد
+    publishable: انتشار در سایت؟
+    routes: آدرس های داخلی
+    start_date: تاریخ شروع
+    title: عنوان
+    update_header: ویرایش صفحه
+  password: کلمه عبور
+  payment:
+    amount: مبلغ
+    create: ایجاد پرداخت
+    create_header: پرداخت جدید
+    created_at: ایجاد شده در
+    id: شناسه
+    index_header: پرداخت‌ها
+    manage: مدیریت پرداخت‌ها
+    method: روش
+    no_results: هیچ پرداختی پیکربندی نشده
+    order: سفارش
+    state:
+      cancelled: پرداخت لغو شده
+      checkout: پرداخت نشده
+      completed: پرداخت کامل شده
+      failed: پرداخت ناموفق
+      header: وضعیت
+      new: پرداخت ثبت شده
+      pending: پرداخت منتظر تایید
+      processing: پرداخت در حال پردازش
+      refunded: پرداخت برگشت داده شده
+      unknown: پرداخت نامعلوم
+      void: پرداخت نامعتبر
+    update_header: ویرایش پرداخت
+    updated_at: آخرین به روز رسانی
+  payment_method:
+    create: ایجاد روش پرداخت
+    create_header: روش پرداخت جدید
+    enabled: آیا فعال است
+    gateway: درگاه پرداخت
+    id: شناسه
+    index_header: شیوه های پرداخت
+    name: نام
+    no_results: هیچ روش پرداختی پیکربندی نشده
+    update_header: ویرایش روش پرداخت
+    updated_at: آخرین به روز رسانی
+  permission:
+    code: نام انگلیسی
+    create: ایجاد سطح دسترسی جدید
+    create_header: سطح دسترسی جدید
+    description: شرح
+    id: شناسه
+    index_header: دسترسی ها
+    no_results: هیچ سطح دسترسی تعیین نشده است
+    update_header: ویرایش سطح دسترسی
+    updated_at: آخرین به روز رسانی
+  pricing:
+    volume_based:
+      button:
+        add: ﺍﻓﺰﻭﺩﻥ
+      max: حداکثر سفارش
+      min: حداقل سفارش
+      no_results: بدون تنظیمات قیمت گذاری
+      price: قیمت
+  product:
+    add_attribute: ایجاد قابلیت
+    archetype: قلم کالا
+    attributes: قابلیت ها
+    association: ارتباط ها
+    available_on: تاریخ فعال شدن
+    available_on_demand: قابل سفارش
+    available_until: در دسترس تا
+    categorization: دسته بندی
+    contain_variants: شامل ترکیبات
+    create: افزودن کالا
+    create_header: کالای جدید
+    description: شرح
+    generate_variants: ایجاد ترکیبات
+    index_by_taxon_header: 'محصول <small> زیر رده ی %taxon% قرار دارد <small>'
+    index_header: 'کالاها <small>فهرست تمام کالاهای فروشگاه شما</small>'
+    main_taxon: رده اصلی
+    manage: مدیریت کالاها
+    name: نام
+    no_attributes: برای این کالا قابلیتی تعریف نشده
+    no_description: '<i> بدون توضیحات... <i>'
+    no_images: هیچ عکسی برای این محصول تعریف نشده است
+    no_options: آپشنی برای این کالا تعریف نشده
+    no_results: کالایی برای نمایش وجود ندارد
+    no_shipping_category: نوع ارسالی مشخص نشده
+    no_short_description: '<i>بدون معرفی کوتاه</i>'
+    no_sku: بدون کد کالا
+    no_tax_category: نوع مالیات تعریف نشده
+    no_taxon: برای این کالا رده اصلی تعریف نشده.
+    no_taxons: هیچ رده بندی برای این محصول تعریف نشده است
+    options: آپشن ها
+    original_price: قيمت ابتدایی
+    price: قیمت خرده فروشی
+    restricted_zone: مناطق ممنوع
+    remove_attribute: حذف قابلیت
+    shipping_category: نوع ارسال
+    show: مشاهده بیشتر
+    show_header: 'توضیحات محصول: مشاهده محصول %product%'
+    show_in_store: نمایش در فروشگاه
+    sku: کد محصول
+    stock: موجودی
+    tabs:
+      attributes: قابلیت ها
+      associations: ارتباطات
+      categorization: دسته بندی
+      channels: کانال های فروش
+      images: عکس ها
+      options: آپشن ها
+      pricing: قیمت گذاری
+      product: محصول
+    tax_category: نوع مالیات
+    unavailable: ناموجود
+    update_header: ویرایش محصول
+    updated_at: آخرین به روز رسانی
+    variant_selection_method: انتخاب نوع ترکیب بندی
+    variants: تنوع کالا
+    view_details: 'مشاهده جزئيات %product%'
+    volume_based:
+      price: قیمت
+      qty_max: حداکثر حجم
+      qty_min: حداقل حجم
+    volume_price: قیمت گذاری بر اساس حجم سفارش
+  product_attribute:
+    add_choice: افزودن گزینه
+    code: نام انگلیسی
+    create: ایجاد قابلیت محصول
+    create_header: تعریف قابلیت جدید
+    index_header: قابلیت های کالا
+    manage: مدیریت قابلیت ها
+    name: نام
+    no_results: قابلیتی پیکربندی نشده
+    type: نوع
+    update_header: ویرایش قابلیت
+    updated_at: آخرین به روز رسانی
+  product_association:
+    code: نام انگلیسی
+    create: ایجاد ارتباط محصول
+    create_header: کالای جدید
+    index_header: قابلیت های کالا
+    manage: مدیریت قابلیت ها
+    name: نام
+    no_results: قابلیتی پیکربندی نشده
+    type: نوع
+    update_header: ویرایش قابلیت
+    updated_at: آخرین به روز رسانی
+  product_not_available_in_zone: غیر قابل عرضه در کشور شما
+  product_option:
+    create: ایجاد آپشن
+    create_header: آپشن محصول جدید
+    index_header: آپشن های کالا
+    manage: مدیریت آپشن ها
+    name: نام
+    no_results: هیچ آپشنی پیکربندی نشده
+    presentation: عنوان برای مشتری
+    update_header: ویرایش آپشن
+    updated_at: آخرین به روز رسانی
+    values: مقادیر
+  promotion:
+    actions: طریقه اعمال
+    add_action: افزودن عملیات
+    add_rule: افزودن قانون
+    coupon_based: مبتنی بر کوپن
+    create: ایجاد فروش ویژه
+    create_header: فروش ویژه جدید
+    created_at: ایجاد شده در
+    description: شرح
+    ends_at: پایان در
+    exclusive: یکبار مصرف
+    general_info: اطلاعات کلی
+    id: شناسه
+    index_header: فروش های ویژه فعلی
+    manage: مدیریت فروش های ویژه
+    name: نام
+    no_results: هیچ فروش ویژه ای پیکربندی نشده
+    priority: درجه ی اهمیت
+    rules: قوانین
+    show_header: جزئیات فروش ویژه
+    starts_at: شروع از
+    update_header: ویرایش فروش ویژه
+    updated_at: آخرین به روز رسانی
+    usage_limit: محدودیت استفاده
+    used: استفاده شده
+  promotion_action:
+    configuration: تنظیمات
+    type: نوع
+  promotion_coupon:
+    code: نام انگلیسی
+    create: ایجاد کد تخفیف
+    create_header: ایجاد کد تخفیف جدید
+    expires_at: انقضا در تاریخ
+    generate: ایجاد کد تخفیف
+    generate_header: ایجاد کد تخفیف
+    index: لیست کدهای تخفیف
+    index_header: کدهای تخفیف
+    no_results: هیچ کد تخفیفی برای نمایش وجود ندارد
+    total_results:
+      Total: '%total%'
+    update_header: ویرایش کد تخفیف
+  promotion_rule:
+    configuration: تنظیمات
+    type: نوع
+  province:
+    provinces: استان ها
+  redirect_route:
+    id: شناسه
+    title: عنوان
+  remember_me: مرا به خاطر بسپار
+  report:
+    code: نام انگلیسی
+    create: ایجاد گزارش
+    create_header: ایجاد گزارش جدید
+    data_fetcher: نوع منبع اطلاعات
+    description: شرح
+    details: جزئیات
+    id: شناسه
+    index_header: گزارش ها
+    manage: مدیریت
+    name: نام
+    no_data: اطلاعاتی برای نمایش وجود ندارد
+    no_report: هیچ گزارشی برای نمایش وجود ندارد
+    no_results: هنوز هیچ گزارشی ایجاد نشده
+    renderer: نوع خروجی
+    show_header: جزئیات گزارش
+    update_header: ویرایش گزارش
+  restore: بازگشت به تنظیمات اولیه
+  role:
+    code: نام انگلیسی
+    create: افزودن نقش جدید
+    create_header: نقش جدید
+    description: شرح
+    id: شناسه
+    index_header: نقش ها
+    name: نام
+    no_results: هیچ نقشی تعریف نشده است
+    update_header: ویرایش نقش
+    updated_at: آخرین به روز رسانی
+  route:
+    create: ایجاد آدرس داخلی
+    create_header: ایجاد آدرس داخلی
+    id: شناسه
+    index_header: آدرس های داخلی
+    name: نام
+    no_results: هیچ آدرس داخلی برای نمایش وجود ندارد
+    page: صفحه
+    title: عنوان
+    update_header: ویرایش آدرس داخلی
+    view: مشاهده
+  save_changes: ذخیره تغییرات
+  search: جستجو
+  security:
+    login:
+      button: ورود
+      forgot_password: فراموشی کلمه عبور
+      header: 'ورود <small> فروشگاه سایلیوس </small>'
+      info: 'لطفا با استفاده از <b>"sylius@example.com"</b> به عنوان کاربر و <b>"sylius"</b> به عنوان پسورد به حسابتان وارد شوید. <small> راهنمای ورود به سایت <small>'
+      no_account: ثبت نام کنید
+  settings:
+    general_header: تنظیمات کلی
+    security_header: تنظیمات امنیتی
+    taxation_header: تنظیمات مالیات
+  shipment:
+    created_at: ایجاد شده در
+    id: شناسه
+    index_header: ارسال محصول
+    inventory_state: وضعیت انبار
+    manage: مدیریت ارسال کالا
+    method: روش
+    modified: ویرایش شده
+    name: نام
+    no_items: هیچ آیتمی برای نمایش وجود ندارد
+    no_results: هیچ ارسالی برای نمایش وجود ندارد
+    order: سفارش
+    ship: ارسال
+    show_header: جزئیات ارسال کالا
+    sku: کد محصول
+    state: وضعیت
+    tracking_code: کد پیگیری
+    update: ويرايش
+    update_header: ویرایش ارسال محصول
+    updated_at: آخرین به روز رسانی
+  shipment_category:
+    manage: مدیریت انواع ارسال
+  shipping_address: آدرس تحویل سفارش
+  shipping_category:
+    create: تعریف نوع ارسال
+    create_header: نوع ارسال جدید
+    id: شناسه
+    index_header: انواع ارسال
+    manage: مدیریت انواع ارسال
+    name: نام
+    no_results: هیچ نوع ارسالی پیکربندی نشده
+    update_header: ویرایش نوع ارسال
+    updated_at: آخرین به روز رسانی
+  shipping_method:
+    calculator: نوع محاسبه
+    category: دسته
+    create: ایجاد شیوه ارسال
+    create_header: شیوه ارسال جدید
+    enabled: فعال
+    id: شناسه
+    index_header: شیوه های ارسال
+    manage: مدیریت روش های ارسال
+    name: نام
+    no_results: هیچ روش ارسالی پیکربندی نشده
+    show_header: جزئیات شیوه ارسال
+    update_header: ویرایش شیوه ارسال
+    updated_at: آخرین به روز رسانی
+    zone: منطقه
+  shop_by: خرید با
+  show: جزئیات
+  show_all: نمایش همه
+  show_deleted: نمایش حذف شده ها
+  stockable:
+    index_header: 'موجودی کالا <small>در اینجا شما می توانید میزان موجودی کالا را ببینید</small>'
+    name: نام
+    no_results: هیچ آیتم انباری برای مشاهده وجود ندارد
+    on_hand: تعداد موجودی
+    on_hold: در حالت انتظار
+    sku: کد کالا
+    updated_at: آخرین به روز رسانی
+  tax_category:
+    create: تعریف نوع مالیات
+    create_header: نوع مالیاتی جدید
+    description: شرح
+    id: شناسه
+    index_header: انواع مالیات
+    manage: مدیریت انواع مالیات
+    name: نام
+    no_description: بدون شرح
+    no_results: هیچ نوع مالیاتی پیکربندی نشده
+    update_header: ویرایش نوع مالیات
+    updated_at: آخرین به روز رسانی
+  tax_rate:
+    amount: مبلغ
+    calculator: نوع محاسبه
+    category: دسته
+    create: ایجاد نرخ مالیات
+    create_header: نرخ مالیات جدید
+    included_in_price: اعمال شده در قیمت نهایی
+    index_header: نرخ های مالیات
+    manage: مدیریت نرخ های مالیات
+    name: نام
+    no_results: هیچ نرخ مالیاتی پیکربندی نشده
+    show_header: جزئیات نرخ مالیات
+    update_header: ویرایش نرخ مالیات
+    updated_at: آخرین به روز رسانی
+    zone: منطقه
+  taxon:
+    create: ایجاد زیر رده
+    create_header: رده جدید
+    image: انتخاب عکس
+    name: نام
+    no_image: هیچ عکسی برای این زیررده ثبت نشده است
+    no_results: هیچ زیررده ای برای نمایش وجود ندارد
+    product_index_header: 'محصولات زیر دسته ی %name%'
+    update_header: ویرایش رده
+  taxonomy:
+    create: ایجاد رده اصلی
+    create_header: رده ی جدید
+    image: انتخاب عکس
+    index_header: 'دسته بندی <small>در اینجا رده های تعریف شده را می بینید</small>'
+    manage: مدیریت رده ها
+    name: نام
+    no_image: هیچ عکسی برای این رده وجود ندارد
+    no_results: هیچ رده ای تعریف نشده است
+    show_header: 'رده ی <small><strong>%name%</strong></small>'
+    update_header: ویرایش رده اصلی
+  total_quantity: تعداد کل
+  ui:
+    account_panel_outline: از این صفحه می توانید برای مشاهده, دنبال کردن و مدیریت اطلاعاتتان استفاده کنید.
+    change_password: تغییر کلمه عبور
+    code: نام انگلیسی
+    customer:
+      id: شناسه مشتری
+    customer_since: تاریخ عضویت در
+    email: ایمیل
+    forgot_password: فراموشی کلمه عبور
+    links: لینک ها
+    logged_in_as: 'وارد شده به عنوان %username%'
+    login: ورود
+    logout: خروج
+    no_account: ثبت نام کنید
+    password:
+      reset:
+        button: تغییر
+        header: تنظیم مجدد کلمه عبور
+    profile: پروفایل
+    register: ثبت نام
+    reset: تغییر
+    reset_password: تنظیم مجدد کلمه عبور
+    welcome: خوش آمدید
+    add_association: ایجاد ارتباط
+    product_associations: کالاهای مرتبط
+    create_product_association: ایجاد ارتباط محصول
+    product_association_types: انواع روابط محصول
+    create_product_association_type: ایجاد نوع ارتباط کالا
+    update_product_association_type: به روز رسانی نوع ارتباط کالا
+    no_association_types_to_display: هیچ نوع ارتباط تعریف شده ای وجود ندارد
+    name: نام
+    id: شناسه
+  unknown: پرداخت نامعلوم
+  user:
+    create: ایجاد کاربر
+    create_header: کاربر جدید
+    enabled: تایید شده
+    general_info: 'توضیحات کلی کاربر %username%'
+    id: شناسه
+    impersonate: ورود به عنوان این کاربر
+    index_header: 'کاربران <small> لیست همه کاربران ثبت شده در این فروشگاه </small>'
+    last_login: آخرین ورود
+    manage: مدیریت کاربران
+    no_results: هیچ کاربری برای نمایش وجود ندارد
+    oauth:
+      access_token: Access Token
+      identifier: شناسه
+      none: هیچ حساب OAuth ای وصل نشده است
+      provider: منبع oAuth
+    recent_header: کاربران اخیر
+    register:
+      button: ثبت نام
+      header: 'ثبت نام <small> یک حساب کاربری بسازید </small>'
+    registration_date: تاریخ ثبت نام
+    show_header: اطلاعات کاربر
+    update_header: ویرایش کاربر
+    username: نام کاربری
+  variant:
+    add_image: افزودن عکس
+    availability: موارد موجود
+    available_on_demand: قابل سفارش
+    create: ایجاد تنوع کالا
+    create_header: تنوع جدیدی از کالا
+    delete_image: حذف عکس
+    last_update: آخرین به روز رسانی
+    no_results: نوع کالایی برای نمایش وجود ندارد
+    options: آپشن ها
+    original_price: قيمت ابتدایی
+    price: قیمت
+    sku: کد محصول
+    stock: موجودی
+    update_header: ویرایش ترکیب
+  "yes": true
+  zone:
+    add_member: افزودن بخش
+    create: ایجاد منطقه
+    create_header: منطقه جدید
+    index_header: مناطق
+    manage: مدیریت مناطق
+    name: نام
+    no_results: هیچ محلی پیکربندی نشده
+    scope: محدوده
+    show_header: جزئیات منطقه
+    type: نوع
+    update_header: ویرایش منطقه
+  zone_member:
+    members: بخش ها

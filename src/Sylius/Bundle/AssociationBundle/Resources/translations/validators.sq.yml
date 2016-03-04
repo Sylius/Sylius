@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  association_type:
+    name:
+      not_blank: Shkruani emrin e lidhjes.
+      min_length: 'Emri i lidhjes duhet te permbaje te pakten 1 karakter. | Emri i lidhjes duhet te permbaje te pakten {{ limit }} karaktere.'
+      max_length: 'Emri i lidhjes nuk duhet te permbaje me shume se 1 karakter. |Emri i lidhjes nuk duhet te permbaje me shume se {{ limit }} karaktere.'
+    code:
+      unique: Lidhja me kodin e dhene tashme egziston.
+      not_blank: Shkruaj kodin e lidhjes.

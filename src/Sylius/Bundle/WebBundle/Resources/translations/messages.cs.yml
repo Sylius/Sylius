@@ -382,6 +382,7 @@ sylius:
     id: ID
     last_name: Příjmení
     shipping_address: Doručovací adresa
+    phone_number: Telefonní číslo
   delete: Odstranit
   deleted: Odstraněno
   disable: Zakázat
@@ -410,7 +411,7 @@ sylius:
   filter: Filtr
   form:
     cart:
-      coupon: Pokud máte propagační kupón, zadejte jej zde
+      coupon: Kupón
     choose_file: Vyberte soubor
     comment:
       comment: Komentář
@@ -585,6 +586,13 @@ sylius:
     taxes: DPH
     total: Celkem
     update_header: Editace objednávky
+  review:
+    id: ID
+    subject: Předmět
+    title: Název
+    author: Autor
+    guest: Neregistrovaný náštěvník
+    created_at: Vytvořeno
   order_item:
     product: Položka
     quantity: Množství
@@ -682,8 +690,8 @@ sylius:
     no_taxons: Tento produkt nemá žádné taxony
     options: Možnosti
     price: Maloobchodní cena
-    remove_attribute: Odstranit atribut
     restricted_zone: Zóna s omezeným přístupem
+    remove_attribute: Odstranit atribut
     shipping_category: Typ dopravy
     show: Zobrazit více
     show_header: 'Podrobnosti produktu <small>zobrazení produktu "<strong>%product%</strong>"</small>'

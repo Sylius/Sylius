@@ -18,7 +18,7 @@ use Sylius\Component\Attribute\Model\AttributeValueInterface as BaseAttributeVal
 use Sylius\Component\Resource\Model\SoftDeletableTrait;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
-use Sylius\Component\Translation\Model\AbstractTranslatable;
+use Sylius\Component\Translation\Model\TranslatableTrait;
 use Sylius\Component\Variation\Model\OptionInterface as BaseOptionInterface;
 use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
 
@@ -26,9 +26,12 @@ use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class Product extends AbstractTranslatable implements ProductInterface
+class Product implements ProductInterface
 {
     use SoftDeletableTrait, TimestampableTrait, ToggleableTrait;
+    use TranslatableTrait {
+        __construct as private initializeTranslationsCollection;
+    }
 
     /**
      * @var mixed
@@ -72,7 +75,7 @@ class Product extends AbstractTranslatable implements ProductInterface
 
     public function __construct()
     {
-        parent::__construct();
+        $this->initializeTranslationsCollection();
 
         $this->availableOn = new \DateTime();
         $this->attributes = new ArrayCollection();

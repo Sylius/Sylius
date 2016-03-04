@@ -1,29 +1,25 @@
-{% form_theme form 'bootstrap_3_layout.html.twig' %}
+{% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
 
-<div class="login-box">
-    <div class="login-logo">
-        <a href="http://sylius.org" target="_blank">
-            <img src="{{ asset('assets/img/logo.png') }}" alt="Sylius" class="login-logo-sylius" />
-        </a>
-    </div>
-    <div class="login-box-body">
+{% import 'SyliusUiBundle:Macro:messages.html.twig' as messages %}
+
+<div class="ui middle aligned center aligned grid">
+    <div class="column">
+        {% if logo_path is defined %}
+        <img src="{{ asset(logo_path) }}" class="ui fluid image" id="logo">
+        {% endif %}
+
         {% if last_error %}
-            <div class="alert alert-danger alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                {{ last_error.message }}
+            <div class="ui left aligned basic segment">
+                {{ messages.error(last_error.message) }}
             </div>
         {% endif %}
 
-        <form action="{{ action|default('/') }}" method="post">
-            {{ form_row(form._username, {'value': last_username|default('')}) }}
-            {{ form_row(form._password) }}
-            {{ form_row(form._remember_me) }}
-            <div class="row">
-                <div class="col-xs-8">
-                </div>
-                <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">{{ 'sylius.ui.sign_in'|trans }}</button>
-                </div>
+        <form class="ui large form" action="{{ action|default('/') }}" method="post" novalidate>
+            <div class="ui left aligned segment">
+                {{ form_row(form._username, {'value': last_username|default('')}) }}
+                {{ form_row(form._password) }}
+                {{ form_row(form._remember_me) }}
+                <button type="submit" class="ui fluid large primary submit button">Login</button>
             </div>
         </form>
     </div>

@@ -29,6 +29,7 @@ sylius:
       roles: Роли
     channel:
       taxonomies: Список каталогов
+      locale_default: Локаль по умолчанию
       locales: Языки
       currency_default: Валюта по умолчанию
       currencies: Валюты
@@ -55,11 +56,13 @@ sylius:
       restricted_zone: Зона ограничений
       shipping_category: Категория доставки
       short_description: Короткое описание
-      tax_category: Налоговая категория
       variant_selection_method: Метод выбора вариантов
+      main_taxon: Основной таксон
     product_filter:
       name: Название
       sku: Идентификатор товарной позиции
+    product_variant:
+      tax_category: Категория налогов
     settings:
       general:
         currency: Валюта по умолчанию
@@ -110,6 +113,7 @@ sylius:
       images: Изображения
       on_hand: Количество на складе
       price: Цена
+      original_price: Исходная цена
       sku: Идентификатор товарной позиции
       weight: Вес
       width: Ширина
@@ -119,5 +123,8 @@ sylius:
         value: Значение
     guest:
       email: Email
+    product_association:
+      product: Связанные продукты
+      type: Типы взаимосвязи
     product_association_type:
       name: Название

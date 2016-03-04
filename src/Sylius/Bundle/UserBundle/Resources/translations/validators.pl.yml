@@ -11,9 +11,11 @@ sylius:
     email:
       not_blank: Proszę podać swój e-mail.
       invalid: Ten e-mail jest nieprawidłowy.
+      not_registered: Użytkownik z tym adresem email nie istnieje. Proszę najpierw się zarejestrować.
     plainPassword:
       not_blank: Proszę wprowadzić swoje hasło.
       mismatch: Wpisane hasła nie pasują
+      wrong_current: Podane hasło jest inne od istniejącego.
   customer:
     first_name:
       max: 'Imię nie może być dłuższe niż {{ limit }} znaków.'

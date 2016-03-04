@@ -37,7 +37,7 @@ sylius:
     name:
       not_blank: "Merci d'entrer le nom de la route."
     content:
-      not_blank: Merci de choisir le contenu vers lequel pointe la route.
+      not_blank: Veuillez noter le chemin du fichier.
     start_date:
       invalid_date: La date de début de publication est invalide.
     end_date:

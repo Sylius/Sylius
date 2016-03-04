@@ -77,7 +77,7 @@ class ReportTypeSpec extends ObjectBehavior
         $builder->create('rendererConfiguration', 'sylius_renderer_test_renderer')->willReturn($builder);
         $builder->getForm()->shouldBeCalled()->willReturn(Argument::type(Form::class));
 
-        $dataFetcher->getType()->willReturn('test_data_fetcher');
+        $dataFetcher->getType()->willReturn('sylius_data_fetcher_test_data_fetcher');
         $dataFetcherRegistry->all()->willReturn(['test_data_fetcher' => $dataFetcher]);
         $builder->create('dataFetcherConfiguration', 'sylius_data_fetcher_test_data_fetcher')->willReturn($builder);
         $builder->getForm()->shouldBeCalled()->willReturn(Argument::type(Form::class));

@@ -10,5 +10,6 @@ sylius:
       enabled: Aktiviert
     customer:
       first_name: Vorname
+      phone_number: Telefonnummber
       billing_address: Rechnungsadresse
       different_billing_address: Eine andere Rechnungsadresse benutzen?

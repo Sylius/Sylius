@@ -11,5 +11,6 @@ sylius:
     customer:
       first_name: Förnamn
       groups: Grupper
+      phone_number: Telefonnummer
       billing_address: Faktureringsadress
       different_billing_address: Använda annan adress för fakturering?

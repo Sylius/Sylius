@@ -5,3 +5,5 @@ sylius:
   form:
     order_filter:
       payment_state: Situação do pagamento
+    product_variant:
+      tax_category: Categoria de imposto

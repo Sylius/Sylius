@@ -12,6 +12,7 @@
                 <th>{{ sylius_resource_sort('url', 'sylius.channel.hostname'|trans) }}</th>
                 <th>{{ sylius_resource_sort('defaultLocale', 'sylius.channel.locale_default'|trans) }}</th>
                 <th>{{ sylius_resource_sort('defaultCurrency', 'sylius.channel.currency_default'|trans) }}</th>
+                <th>{{ sylius_resource_sort('theme', 'sylius.channel.theme'|trans) }}</th>
                 <th>{{ sylius_resource_sort('enabled', 'sylius.channel.enabled'|trans) }}</th>
                 <th>{{ sylius_resource_sort('updatedAt', 'sylius.channel.updated_at'|trans) }}</th>
                 <th></th>
@@ -25,6 +26,7 @@
                     <td>{{ channel.hostname }}</td>
                     <td>{% if channel.defaultLocale is not null %}{{ channel.defaultLocale.code }}{% endif %}</td>
                     <td>{% if channel.defaultCurrency is not null %}{{ channel.defaultCurrency.code }}{% endif %}</td>
+                    <td>{{ channel.theme.title|default('') }}</td>
                     <td>{{ misc.state_label(channel.enabled) }}</td>
                     <td>{{ channel.updatedAt|date }}</td>
                     <td>

@@ -1,5 +1,33 @@
 @import "variables";
 
-.login-logo-sylius {
-    width: 340px;
+#wrapper {
+  padding: 54px 0 0 0;
 }
+
+#content {
+  padding: 1em;
+}
+
+#logo {
+  margin-bottom: 1em;
+}
+
+body.pushable {
+  .pusher {
+    background-color: $color-background;
+  }
+}
+
+body.centered {
+  background-color: $color-background;
+
+  .grid {
+    height: 100%;
+  }
+
+  .column {
+    padding: 1em;
+    max-width: 450px;
+  }
+}
+

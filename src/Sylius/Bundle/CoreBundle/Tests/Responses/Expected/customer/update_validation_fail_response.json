@@ -24,6 +24,7 @@
                     "Please choose your gender."
                 ]
             },
+            "phoneNumber": {},
             "groups": {}
         }
     }

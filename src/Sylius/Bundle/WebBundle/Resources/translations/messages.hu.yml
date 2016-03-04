@@ -282,6 +282,7 @@ sylius:
     id: Azonosító
     last_name: Vezetéknév
     shipping_address: Szállítási cím
+    phone_number: Telefonszám
   delete: Törlés
   deleted: Törölve
   edit: Szerkesztés
@@ -292,7 +293,7 @@ sylius:
   filter: Szűrő
   form:
     cart:
-      coupon: Ha van egy promóciós kuponja, adja meg itt
+      coupon: Kupon
     choose_file: Válassza ki a fájlt
     frontend:
       password:
@@ -424,6 +425,11 @@ sylius:
     taxes: Adók
     total: Összesen
     update_header: Rendelés szerkesztés
+  review:
+    id: Azonosító
+    title: Cím
+    author: Szerző
+    created_at: Készítetve
   order_item:
     product: Cikk
     quantity: Mennyiség

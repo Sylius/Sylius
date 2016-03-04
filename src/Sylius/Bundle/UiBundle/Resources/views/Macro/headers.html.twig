@@ -1,0 +1,13 @@
+{% macro default(header, icon, subheader) %}
+<h1 class="ui header">
+    {% if icon is not empty %}
+    <i class="circular {{ icon }} icon"></i>
+    {% endif %}
+    <div class="content">
+        {{ header }}
+        {% if subheader is not empty %}
+        <div class="sub header">{{ subheader }}</div>
+        {% endif %}
+    </div>
+</h1>
+{% endmacro %}

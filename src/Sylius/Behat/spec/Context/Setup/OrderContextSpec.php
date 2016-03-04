@@ -15,7 +15,7 @@ use Behat\Behat\Context\Context;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\OrderBundle\Modifier\OrderItemQuantityModifierInterface;
+use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -26,7 +26,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Core\OrderProcessing\OrderShipmentFactoryInterface;
+use Sylius\Component\Core\OrderProcessing\OrderShipmentProcessorInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
@@ -43,7 +43,7 @@ class OrderContextSpec extends ObjectBehavior
         SharedStorageInterface $sharedStorage,
         FactoryInterface $orderFactory,
         OrderRepositoryInterface $orderRepository,
-        OrderShipmentFactoryInterface $orderShipmentFactory,
+        OrderShipmentProcessorInterface $orderShipmentFactory,
         PaymentFactoryInterface $paymentFactory,
         FactoryInterface $orderItemFactory,
         OrderItemQuantityModifierInterface $itemQuantityModifier,
@@ -100,7 +100,7 @@ class OrderContextSpec extends ObjectBehavior
         AddressInterface $address,
         Collection $shipmentCollection,
         OrderInterface $order,
-        OrderShipmentFactoryInterface $orderShipmentFactory,
+        OrderShipmentProcessorInterface $orderShipmentFactory,
         PaymentFactoryInterface $paymentFactory,
         PaymentInterface $payment,
         PaymentMethodInterface $paymentMethod,
@@ -124,7 +124,7 @@ class OrderContextSpec extends ObjectBehavior
         $order->addPayment($payment)->shouldBeCalled();
         $payment->setMethod($paymentMethod)->shouldBeCalled();
         $shipment->setMethod($shippingMethod)->shouldBeCalled();
-        $orderShipmentFactory->createForOrder($order)->shouldBeCalled();
+        $orderShipmentFactory->processOrderShipment($order)->shouldBeCalled();
 
         $objectManager->flush()->shouldBeCalled();
 

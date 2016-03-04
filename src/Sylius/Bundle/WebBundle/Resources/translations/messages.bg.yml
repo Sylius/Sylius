@@ -242,6 +242,7 @@ sylius:
     updated_at: Последно обновяване
   customer:
     email: Имейл
+    phone_number: Телефонен номер
   delete: Изтрий
   deleted: Изтрито
   edit: Редактирай
@@ -249,8 +250,6 @@ sylius:
     updated_at: Последно обновяване
   filter: Филтър
   form:
-    cart:
-      coupon: Ако имате купон с промоция, въведете го тук
     choose_file: Избор на файл
     frontend:
       password:
@@ -362,6 +361,9 @@ sylius:
     taxes: Такси
     total: Общо
     update_header: Редактиране на поръчка
+  review:
+    author: Автор
+    created_at: Създаден на
   order_item:
     product: артикул
     quantity: Количество

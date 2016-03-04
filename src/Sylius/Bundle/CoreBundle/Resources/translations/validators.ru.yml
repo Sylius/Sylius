@@ -2,6 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+  checkout:
+    shipping_method:
+      not_blank: Пожалуйста, выберите метод доставки.
   locale:
     code:
       not_blank: Пожалуйста, введите код языка.
@@ -13,6 +16,8 @@ sylius:
     price:
       min: Стоимость не может быть отрицательной.
       not_blank: Пожалуйста введите стоимость.
+    original_price:
+      min: Первоначальная стоимость не может быть отрицательной.
   product_translation:
     short_description:
       max: 'Краткое описание не должно быть длинее {{ limit }} символов.'

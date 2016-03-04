@@ -5,83 +5,82 @@ var uglifycss = require('gulp-uglifycss');
 var concat = require('gulp-concat');
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
-var merge = require('merge-stream');
 var debug = require('gulp-debug');
 var livereload = require('gulp-livereload');
-
+var order = require('gulp-order');
+var merge = require('merge-stream');
 var env = process.env.GULP_ENV;
+
 var rootPath = 'web/assets/';
 
+var adminRootPath = rootPath + 'admin/';
+
 var paths = {
-    js: [
-        'node_modules/jquery/dist/jquery.min.js',
-        'node_modules/bootstrap/dist/js/bootstrap.min.js',
-        'node_modules/admin-lte/dist/js/app.min.js',
-    ],
-    sass: [
-        'src/Sylius/Bundle/UiBundle/Resources/private/sass/**',
-    ],
-    css: [
-        'node_modules/bootstrap/dist/css/bootstrap.min.css',
-        'node_modules/admin-lte/dist/css/AdminLTE.min.css',
-        'node_modules/font-awesome/css/font-awesome.min.css',
-    ],
-    fonts: [
-        'node_modules/font-awesome/fonts/**',
-    ],
-    img: [
-        'src/Sylius/Bundle/UiBundle/Resources/private/img/**',
-    ]
+    admin: {
+        js: [
+            'node_modules/jquery/dist/jquery.min.js',
+            'node_modules/semantic-ui-css/semantic.min.js',
+            'src/Sylius/Bundle/UiBundle/Resources/private/js/**',
+        ],
+        sass: [
+            'src/Sylius/Bundle/UiBundle/Resources/private/sass/**',
+        ],
+        css: [
+            'node_modules/semantic-ui-css/semantic.min.css',
+        ],
+        img: [
+            'src/Sylius/Bundle/UiBundle/Resources/private/img/**',
+        ]
+    }
 };
 
-gulp.task('js', function () {
-    return gulp.src(paths.js)
-        .pipe(concat('javascript.js'))
-        .pipe(gulpif('prod' === env, uglify()))
+gulp.task('admin-js', function () {
+    return gulp.src(paths.admin.js)
+        .pipe(concat('app.js'))
+        .pipe(gulpif(env === 'prod', uglify))
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest(rootPath + 'js'))
+        .pipe(gulp.dest(adminRootPath + 'js/'))
     ;
 });
 
-gulp.task('css', function() {
-    var sassStream = gulp.src(paths.sass)
+gulp.task('admin-css', function() {
+    gulp.src(['node_modules/semantic-ui-css/themes/**/*']).pipe(gulp.dest(adminRootPath + 'css/themes/'));
+
+    var cssStream = gulp.src(paths.admin.css)
+        .pipe(concat('css-files.css'))
+    ;
+
+    var sassStream = gulp.src(paths.admin.sass)
         .pipe(sass())
         .pipe(concat('sass-files.scss'))
     ;
 
-    var cssStream = gulp.src(paths.css)
-        .pipe(concat('css-files.css'))
-    ;
-
-    return merge(sassStream, cssStream)
+    return merge(cssStream, sassStream)
+        .pipe(order(['css-files.css', 'sass-files.scss']))
         .pipe(concat('style.css'))
-        .pipe(gulpif('prod' === env, uglifycss()))
+        .pipe(gulpif(env === 'prod', uglifycss))
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest(rootPath + 'css'))
+        .pipe(gulp.dest(adminRootPath + 'css/'))
         .pipe(livereload())
     ;
 });
 
-gulp.task('fonts', function () {
-    return gulp.src(paths.fonts)
+gulp.task('admin-img', function() {
+    return gulp.src(paths.admin.img)
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest(rootPath + 'fonts'))
+        .pipe(gulp.dest(adminRootPath + 'img/'))
     ;
 });
 
-gulp.task('img', function () {
-    return gulp.src(paths.img)
-        .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest(rootPath + 'img'))
-    ;
-});
-
-gulp.task('watch', function() {
+gulp.task('admin-watch', function() {
     livereload.listen();
-    gulp.watch(paths.js, ['js']);
-    gulp.watch(paths.sass, ['css']);
-    gulp.watch(paths.css, ['css']);
-    gulp.watch(paths.img, ['img']);
+
+    gulp.watch(paths.admin.js, ['admin-js']);
+    gulp.watch(paths.admin.coffee, ['admin-js']);
+    gulp.watch(paths.admin.sass, ['admin-css']);
+    gulp.watch(paths.admin.css, ['admin-css']);
+    gulp.watch(paths.admin.img, ['admin-img']);
 });
 
-gulp.task('default', ['watch', 'js', 'css', 'fonts', 'img']);
+gulp.task('default', ['admin-watch', 'admin-js', 'admin-css', 'admin-img']);
+

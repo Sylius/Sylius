@@ -34,19 +34,6 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
-        <property name="name">
-            <constraint name="NotBlank">
-                <option name="message">sylius.option.name.not_blank</option>
-                <option name="groups">sylius</option>
-            </constraint>
-            <constraint name="Length">
-                <option name="min">2</option>
-                <option name="minMessage">sylius.option.name.min_length</option>
-                <option name="max">255</option>
-                <option name="maxMessage">sylius.option.name.max_length</option>
-                <option name="groups">sylius</option>
-            </constraint>
-        </property>
         <property name="values">
             <constraint name="Valid" />
             <constraint name="Count">
@@ -61,9 +48,9 @@
     </class>
 
     <class name="Sylius\Component\Variation\Model\OptionTranslation">
-        <property name="presentation">
+        <property name="name">
             <constraint name="NotBlank">
-                <option name="message">sylius.option.presentation.not_blank</option>
+                <option name="message">sylius.option.name.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
             <constraint name="Length">

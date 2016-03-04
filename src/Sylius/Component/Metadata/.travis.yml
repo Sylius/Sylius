@@ -12,4 +12,4 @@ before_script:
     - composer install --no-interaction --prefer-source
 
 script:
-    - vendor/bin/phpspec run -f pretty --verbose
+    - bin/phpspec run -f pretty --verbose

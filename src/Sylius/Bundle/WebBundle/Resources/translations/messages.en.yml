@@ -305,7 +305,8 @@ sylius:
         update: Edit
         update_header: Editing channel
         updated_at: Last update
-        url: Url
+        hostname: Hostname
+        theme: Theme
     checkout:
         addressing:
             header: Addressing step
@@ -437,6 +438,7 @@ sylius:
         shipping_address: Shipping address
         show_header: Customer details
         update_header: Editing customer
+        phone_number: Phone number
     delete: Delete
     deleted: Deleted
     disable: Disable

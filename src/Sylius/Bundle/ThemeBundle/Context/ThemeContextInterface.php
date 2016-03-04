@@ -19,6 +19,8 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 interface ThemeContextInterface
 {
     /**
+     * Should not throw any exception if failed to get theme.
+     *
      * @return ThemeInterface|null
      */
     public function getTheme();

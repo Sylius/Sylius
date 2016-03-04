@@ -191,14 +191,14 @@ sylius:
   create: Креирај
   currency:
     updated_at: Ажурирано
+  customer:
+    phone_number: Број телефона
   delete: Обриши
   edit: Измени
   email:
     updated_at: Ажурирано
   filter: Филтер
   form:
-    cart:
-      coupon: Ако имате промотивни купон, унесите га овде
     choose_file: Фајл
     frontend:
       password:

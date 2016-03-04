@@ -1,0 +1,130 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    action:
+      add_product_configuration:
+        price: قیمت واحد
+        quantity: تعداد
+        variant: ترکیب محصول
+      customer_group: گروه مشتری
+    block:
+      body: متن
+      id: شناسه
+      title: عنوان
+    cart:
+      coupon: کد تخفیف
+    checkout:
+      addressing:
+        different_billing_address: آدرس گیرنده با خریدار متفاوت است؟
+      payment_method: روش پرداخت
+      shipping_method: روش ارسال
+    promotion:
+      channels: کانال فروش
+    coupon:
+      per_customer_usage_limit: محدودیت استفاده (به عنوان مثال به ازای ... تعداد مشتری)
+    group:
+      name: نام
+      roles: نقش ها
+    channel:
+      taxonomies: رده بندی
+      locale_default: زبان پیش فرض
+      locales: زبان ها
+      currency_default: واحد پولی پیش‌فرض
+      currencies: واحدهای پول
+      shipping_methods: شیوه های ارسال
+      payment_methods: روش‌های پرداخت
+    image:
+      file: عکس
+    locale:
+      code: نام انگلیسی
+      enabled: فعال
+    order_filter:
+      created_at_from: ثبت شده بعد از
+      created_at_to: ثبت شده قبل از
+      number: شناسه سفارش
+      total_from: از تاریخ
+      total_to: تا تاریخ
+      payment_state: وضعیت پرداخت
+      channel: تمام کانال های فروش
+    page:
+      body: متن
+      id: شناسه
+      title: عنوان
+    product:
+      restricted_zone: مناطق ممنوع
+      shipping_category: نوع ارسال
+      short_description: شرح کوتاه
+      variant_selection_method: انتخاب نوع ترکیب بندی
+      main_taxon: رده اصلی
+    product_filter:
+      name: نام
+      sku: کد محصول
+    product_variant:
+      tax_category: نوع مالیات
+    settings:
+      general:
+        currency: واحد پولی پیش‌فرض
+        locale: زبان
+        meta_description: توضیحات سئو
+        meta_keywords: کلمات کلیدی
+        title: عنوان صفحه
+        tracking_code:
+          Tracking code (for example: کد گوگل آنالیتیک)
+      taxation:
+        default_tax_zone: منطقه مالیاتی پیش فرض
+      security:
+        enabled: فعال؟
+    shipment_filter:
+      created_at_from: از تاریخ
+      created_at_to: تا تاریخ
+      number: شناسه سفارش
+      shipping_address: نام دریافت کننده سفارش
+      channel: تمام کانال های فروش
+    payment_filter:
+      created_at_from: از تاریخ
+      created_at_to: تا تاریخ
+      number: شناسه سفارش
+      billing_address: نام پرداخت کننده
+      channel: تمام کانال های فروش
+    shipping_method:
+      zone: منطقه
+    taxon:
+      file: انتخاب تصویر
+    taxonomy:
+      file: انتخاب تصویر
+    user:
+      billing_address: مشخصات پرداخت کننده
+      different_billing_address: آدرس گیرنده با خریدار متفاوت است؟
+      enabled: فعال
+      first_name: نام
+      groups: گروه ها
+      roles: نقش ها
+      last_name: نام خانوادگی
+      password: کلمه عبور
+      shipping_address: آدرس تحویل سفارش
+    user_filter:
+      query: جستجو
+    variant:
+      available_on_demand: قابل سفارش
+      depth: عمق
+      height: طول
+      images: عکس ها
+      on_hand: موجودی
+      price: قیمت
+      original_price: قيمت ابتدایی
+      sku: کد محصول
+      weight: وزن
+      width: عرض
+    attribute:
+      product_attribute_value:
+        attribute: قابلیت
+        value: مقدار
+    guest:
+      email: ایمیل
+    product_association:
+      product: محصول مرتبط
+      type: نوع ارتباط
+    product_association_type:
+      name: نام

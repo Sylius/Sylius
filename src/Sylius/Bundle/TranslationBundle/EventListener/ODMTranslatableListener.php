@@ -109,8 +109,6 @@ class ODMTranslatableListener implements EventSubscriber
     {
         // In the case A -> B -> TranslatableInterface, B might not have mapping defined as it
         // is probably defined in A, so in that case, we just return.
-        // In the case A -> B -> TranslatableInterface, B might not have mapping defined as it
-        // is probably defined in A, so in that case, we just return.
         if (!isset($this->mappings[$metadata->name])) {
             return;
         }

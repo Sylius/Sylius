@@ -41,6 +41,7 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('only')
                     ->prototype('scalar')->end()
                 ->end()
+                ->variableNode('vars')->cannotBeEmpty()->end()
             ->end()
         ;
 

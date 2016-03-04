@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  review:
+    author:
+      already_exists: Ten e-mail jest już zrejestrowany, proszę się zalogować lub użyć opcji przypominania hasła.

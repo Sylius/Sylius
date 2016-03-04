@@ -285,6 +285,7 @@ sylius:
     id: Id
     last_name: Nume
     shipping_address: Adresa de livrare
+    phone_number: Număr de telefon
   delete: Șterge
   deleted: Șters
   edit: Editare
@@ -295,7 +296,7 @@ sylius:
   filter: Filtrează
   form:
     cart:
-      coupon: Dacă aveţi un cod promoțional, introduceţi-l aici
+      coupon: Cod promoțional
     choose_file: Alege fișier
     frontend:
       password:
@@ -428,6 +429,11 @@ sylius:
     taxes: Taxe
     total: Total
     update_header: Modificare comandă
+  review:
+    id: Id
+    title: Titlu
+    author: Autor
+    created_at: Creat la
   order_item:
     product: Produs
     quantity: Cantitate

@@ -84,10 +84,13 @@ sylius:
     id: ID
     last_name: Nama belakang
     shipping_address: Alamat pengiriman
+    phone_number: Nomor telepon
   email:
     code: Kode
     enabled: Diaktifkan
   form:
+    cart:
+      coupon: Kupon
     login:
       password: Kata sandi
     profile:
@@ -122,6 +125,9 @@ sylius:
     id: ID
     number: Nomor
     shipping_address: Alamat pengiriman
+  review:
+    id: ID
+    title: Judul
   order_item:
     unit_price: Harga Satuan
   page:

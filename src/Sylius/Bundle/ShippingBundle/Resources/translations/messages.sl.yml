@@ -1,0 +1,46 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    rule:
+      unit_count_configuration:
+        count: Število
+      type: Vrsta pravila
+    shipment:
+      state: Stanje
+      states:
+        checkout: Plačilo
+        pending: Na čakanju
+        ready: Pripravljen
+        shipped: Poslano
+        returned: Vrnjeno
+        cancelled: Preklicano
+      tracking_code: Koda za sledenje
+    shipping_calculator:
+      flat_rate_configuration:
+        label: Pavšalno na pošiljko
+        amount: Znesek
+      flexible_rate_configuration:
+        label: Prilagodljiva stopnja
+      per_unit_rate_configuration:
+        amount: Znesek
+      weight_rate_configuration:
+        label: Teža na podlagi stopnje
+        fixed: Fiksni znesek
+        variable: Spremenljiva količina
+        division: Delitev
+      volume_rate_configuration:
+        label: Stopnja na osnovi prostornine
+        amount: Znesek
+        division: Delitev
+    shipping_category:
+      description: Opis
+      name: Ime
+    shipping_method:
+      calculator: Kalkulator
+      category: Kategorija
+      category_requirement: Zahteva kategorije
+      configuration: Konfiguracija
+      enabled: Omogočeno
+      name: Ime

@@ -16,6 +16,7 @@ sylius:
             groups: Groups
             last_name: Last name
             email: Email
+            phone_number: Phone number
             gender: Gender
             birthday: Birthday
             billing_address: Billing address

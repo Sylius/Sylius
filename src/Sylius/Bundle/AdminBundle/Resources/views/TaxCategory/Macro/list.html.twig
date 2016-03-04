@@ -1,0 +1,24 @@
+{% macro full(tax_categories, configuration) %}
+
+{% import 'SyliusUiBundle:Macro:messages.html.twig' as messages %}
+
+{% if tax_categories|length > 0 %}
+    <table class="ui stackable celled table">
+        <thead>
+        <tr>
+            <th>{{ 'sylius.ui.code'|trans }}</th>
+            <th>{{ 'sylius.ui.name'|trans }}</th>
+            <th>{{ 'sylius.ui.last_updated'|trans }}</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for tax_category in tax_categories %}
+                {% include 'SyliusAdminBundle:TaxCategory:_row.html.twig' %}
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    {{ messages.info('sylius.ui.no_results_to_display'|trans) }}
+{% endif %}
+{% endmacro %}

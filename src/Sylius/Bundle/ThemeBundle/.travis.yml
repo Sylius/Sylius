@@ -9,8 +9,8 @@ before_install:
     - phpenv config-rm xdebug.ini || true
 
 before_script:
-    - composer install --prefer-source --no-interaction
+    - composer install --no-interaction --prefer-source
 
 script:
-    - vendor/bin/phpspec run -f dot
-    - vendor/bin/phpunit ./
+    - bin/phpspec run -fpretty --verbose
+    - bin/phpunit

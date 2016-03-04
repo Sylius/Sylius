@@ -14,15 +14,18 @@ namespace Sylius\Component\Variation\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\TimestampableTrait;
-use Sylius\Component\Translation\Model\AbstractTranslatable;
+use Sylius\Component\Translation\Model\TranslatableTrait;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class Option extends AbstractTranslatable implements OptionInterface
+class Option implements OptionInterface
 {
     use TimestampableTrait;
+    use TranslatableTrait {
+        __construct as private initializeTranslationsCollection;
+    }
 
     /**
      * @var mixed
@@ -35,18 +38,11 @@ class Option extends AbstractTranslatable implements OptionInterface
     protected $code;
 
     /**
-     * Internal name.
-     *
-     * @var string
-     */
-    protected $name;
-
-    /**
      * Displayed to user.
      *
      * @var string
      */
-    protected $presentation;
+    protected $name;
 
     /**
      * @var Collection|OptionValueInterface[]
@@ -55,7 +51,7 @@ class Option extends AbstractTranslatable implements OptionInterface
 
     public function __construct()
     {
-        parent::__construct();
+        $this->initializeTranslationsCollection();
 
         $this->values = new ArrayCollection();
         $this->createdAt = new \DateTime();
@@ -66,7 +62,7 @@ class Option extends AbstractTranslatable implements OptionInterface
      */
     public function __toString()
     {
-        return $this->name;
+        return $this->getName();
     }
 
     /**
@@ -98,7 +94,7 @@ class Option extends AbstractTranslatable implements OptionInterface
      */
     public function getName()
     {
-        return $this->name;
+        return $this->translate()->getName();
     }
 
     /**
@@ -106,23 +102,7 @@ class Option extends AbstractTranslatable implements OptionInterface
      */
     public function setName($name)
     {
-        $this->name = $name;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPresentation()
-    {
-        return $this->translate()->getPresentation();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPresentation($presentation)
-    {
-        $this->translate()->setPresentation($presentation);
+        $this->translate()->setName($name);
     }
 
     /**

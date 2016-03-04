@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    priceable:
+      price: Cena
+      calculator: Cenik
+      configuration: Konfiguracija
+    pricing:
+      volume_based:
+        label: Konfiguracija cenika
+        min: Najmanjša prostornina
+        max: Največja prostornina
+        price: Cena

@@ -18,12 +18,10 @@ sylius:
       contains_product_configuration:
         variants: Produkty
         exclude: Vylúčiť
-      item_count_configuration:
+      cart_quantity_configuration:
         count: Počet
-        equal: Rovné
       item_total_configuration:
         amount: Suma
-        equal: Rovné
       nth_order_configuration:
         nth: N-ty
       customer_loyalty_configuration:

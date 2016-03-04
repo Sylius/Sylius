@@ -18,12 +18,10 @@ sylius:
       contains_product_configuration:
         variants: Produktai
         exclude: Neįtraukti
-      item_count_configuration:
+      cart_quantity_configuration:
         count: Kiekis
-        equal: Lygus
       item_total_configuration:
         amount: Suma
-        equal: Lygus
       nth_order_configuration:
         nth: N-tasis
       customer_loyalty_configuration:

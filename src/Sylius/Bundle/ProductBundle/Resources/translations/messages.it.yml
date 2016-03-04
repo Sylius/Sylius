@@ -20,3 +20,6 @@ sylius:
       options: Opzioni
     association_type:
       name: Nome
+    association:
+      type: Tipo di associazione
+      product: Prodotto associato

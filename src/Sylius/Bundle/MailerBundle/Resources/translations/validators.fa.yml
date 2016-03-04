@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  email:
+    code:
+      not_blank: لطفا کد ایمیل را وارد کنید.
+      unique: کد ایمیل باید منحصر به فرد باشد.
+    subject:
+      not_blank: لطفا عنوان ایمیل را وارد کنید.

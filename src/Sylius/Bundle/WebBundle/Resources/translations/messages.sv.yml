@@ -59,10 +59,13 @@ sylius:
     billing_address: Faktureringsadress
     first_name: Förnamn
     groups: Grupper
+    phone_number: Telefonnummer
   email:
     code: Kod
     enabled: Aktiverad
   form:
+    cart:
+      coupon: Rabattkupong
     profile:
       firstName: Förnamn
   group:

@@ -48,7 +48,7 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         return $this
             ->getCollectionQueryBuilder()
             ->getQuery()
-            ->execute()
+            ->getIterator()
         ;
     }
 
@@ -94,7 +94,7 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
 
         return $queryBuilder
             ->getQuery()
-            ->execute()
+            ->getIterator()
         ;
     }
 

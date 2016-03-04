@@ -55,11 +55,12 @@ sylius:
       restricted_zone: Kısıtlı bölge
       shipping_category: Teslimat kategorisi
       short_description: Kısa açıklama
-      tax_category: Vergi kategorisi
       variant_selection_method: Varyant seçme yöntemi
     product_filter:
       name: Ad
       sku: Stok Kodu
+    product_variant:
+      tax_category: Vergi kategorisi
     settings:
       general:
         currency: Varsayılan para birimi

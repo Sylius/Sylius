@@ -21,26 +21,8 @@ class Filesystem extends BaseFilesystem implements FilesystemInterface
     /**
      * {@inheritdoc}
      */
-    public function getFileInfo($file)
-    {
-        return new \SplFileInfo($file);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFileObject($file)
-    {
-        return new \SplFileObject($file);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getFileContents($file)
     {
-        $openedFile = $this->getFileObject($file);
-
-        return $openedFile->fread($openedFile->getSize());
+        return file_get_contents($file);
     }
 }
