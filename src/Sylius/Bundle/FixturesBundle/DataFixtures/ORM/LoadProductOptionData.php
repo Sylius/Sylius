@@ -97,20 +97,20 @@ class LoadProductOptionData extends DataFixture
     /**
      * @param string $optionCode
      * @param string $name
-     * @param array $presentationTranslation
+     * @param array $nameTranslation
      * @param array $valuesData
      *
      * @return OptionInterface
      */
-    protected function createOption($optionCode, $name, array $presentationTranslation, array $valuesData)
+    protected function createOption($optionCode, $name, array $nameTranslation, array $valuesData)
     {
         /* @var $option OptionInterface */
         $option = $this->getProductOptionFactory()->createNew();
         $option->setCode($optionCode);
 
-        foreach ($presentationTranslation as $locale => $presentation) {
+        foreach ($nameTranslation as $locale => $name) {
             $option->setCurrentLocale($locale);
-            $option->setName($presentation);
+            $option->setName($name);
         }
         $option->setCurrentLocale($this->defaultLocale);
 
