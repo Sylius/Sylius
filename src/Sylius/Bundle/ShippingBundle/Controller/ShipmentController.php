@@ -17,6 +17,15 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ShipmentController extends ResourceController
 {
+    /**
+     * @var string
+     */
+    protected $stateMachineGraph = ShipmentTransitions::GRAPH;
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
     public function shipAction(Request $request)
     {
         $shipment = $this->findOr404($request);
