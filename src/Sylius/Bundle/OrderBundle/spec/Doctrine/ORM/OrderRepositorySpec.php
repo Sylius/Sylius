@@ -66,6 +66,8 @@ class OrderRepositorySpec extends ObjectBehavior
         $builder->getQuery()->shouldBeCalled()->willReturn($query);
         $query->getResult()->shouldBeCalled();
 
+        $filterCollection->enable('softdeleteable')->shouldBeCalled();
+
         $this->findRecentOrders(10);
     }
 

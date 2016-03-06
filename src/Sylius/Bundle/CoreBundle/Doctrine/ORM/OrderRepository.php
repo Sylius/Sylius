@@ -98,10 +98,11 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
             ->setParameter('id', $id)
         ;
 
-        return $queryBuilder
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $result = $queryBuilder->getQuery()->getOneOrNullResult();
+
+        $this->_em->getFilters()->enable('softdeleteable');
+
+        return $result;
     }
 
     /**
