@@ -79,7 +79,7 @@ class AttributeController extends ResourceController
         foreach ($attributes as $attribute) {
             $options = ['label' => $attribute->getName()];
 
-            if($attribute->isTextType() || $attribute->getType() == 'textarea') {
+            if($attribute->isValueTranslatable()) {
                 $count = $request->query->get('count');
                 $subject = str_replace('_attribute','',$this->metadata->getName());
                 $form = $this->get('form.factory')->createNamed('translations', 'a2lix_translationsForms', null, [
@@ -89,6 +89,7 @@ class AttributeController extends ResourceController
                         'attr' => [
                             'data-name' => 'sylius_'.$subject.'[attributes]['.$count.'][translations]'
                         ],
+                        'valueTranslationType' => $attribute->getType()
                     ],
                 ]);
             } else {

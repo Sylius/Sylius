@@ -174,8 +174,8 @@ class Attribute implements AttributeInterface
     /**
      * {@inheritdoc}
      */
-    public function isTextType()
+    public function isValueTranslatable()
     {
-        return AttributeValueInterface::STORAGE_TEXT == $this->getType() ? true : false;
+        return AttributeValueInterface::STORAGE_TEXT == $this->getStorageType() ? true : false;
     }
 }

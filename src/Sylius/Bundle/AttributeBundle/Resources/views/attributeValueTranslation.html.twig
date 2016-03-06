@@ -14,6 +14,20 @@
     {{ parent() }}
 {% endblock form_widget_simple %}
 
+{% block textarea_widget %}
+    {% set customData = "" %}
+    {% for key,value in form.parent.vars.attr %}
+        {% if key == 'data-name' %}
+            {% set customData = value %}
+        {% endif %}
+    {% endfor %}
+    {% set fullName = form.vars.full_name|replace({'translations': ''}) %}
+
+    {% set attr = attr|merge({'data-name': customData~fullName }) %}
+
+    {{ parent() }}
+{% endblock textarea_widget %}
+
 {% block a2lix_translations_widget %}
     {{ form_errors(form) }}
     <div class="a2lix_translations tabbable">

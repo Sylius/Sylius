@@ -4,6 +4,7 @@ namespace Sylius\Bundle\AttributeBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Salvatore Pappalardo <salvatore.pappalardo82@gmail.com>
@@ -31,11 +32,24 @@ class AttributeValueTranslationType extends AbstractResourceType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $valueTranslationType = $options['valueTranslationType'];
         $builder
-            ->add('value', 'text', [
+            ->add('value', $valueTranslationType, [
                 'label' => 'sylius.form.attribute.name'
             ])
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        parent::configureOptions($resolver);
+        $resolver->setDefined('valueType');
+        $resolver->setDefaults([
+            'valueTranslationType' => 'text',
+        ]);
     }
 
     /**
