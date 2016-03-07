@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+for file in `find src -name composer.json | grep -v Fixtures | grep -v vendor`; do
+    echo "$PWD/$(dirname $file)"
+done

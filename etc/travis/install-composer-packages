@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+INITIAL_PWD=`pwd`
+EXIT_CODE=0
+
+for dir in `etc/travis/find-packages`; do
+    echo "Installing dependencies by Composer at $dir..."
+
+    etc/travis/install-composer-package "$dir" >> "$SYLIUS_BUILD_DIR/composer-packages.log" || EXIT_CODE=$?
+done
+
+cd $INITIAL_PWD
+exit $EXIT_CODE

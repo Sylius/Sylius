@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+
+# Argument 1: Dir with scripts
+function main
+{
+    UNIQUE_KEY=$( text_md5sum $1 )
+    INITIAL_PWD=`pwd`
+    EXIT_CODE=0
+
+    cd "$1"
+
+    if is_cache_fresh $UNIQUE_KEY; then
+        restore_composer_lock_from_cache $UNIQUE_KEY
+    else
+        rebuild_cache $1 || EXIT_CODE=$?
+        store_composer_lock_in_cache $UNIQUE_KEY
+    fi
+
+    cd "$INITIAL_PWD"
+
+    return $EXIT_CODE
+}
+
+# Argument 1: Cache unique key
+function store_composer_lock_in_cache
+{
+    cp composer.lock $SYLIUS_CACHE_DIR/composer-$1.lock
+    file_md5sum composer.json > $SYLIUS_CACHE_DIR/composer-$1.json.md5sum
+}
+
+# Argument 1: Cache unique key
+function restore_composer_lock_from_cache
+{
+    cp $SYLIUS_CACHE_DIR/composer-$1.lock composer.lock
+}
+
+# Argument 1: Cache unique key
+function is_cache_fresh
+{
+    if [ -f $SYLIUS_CACHE_DIR/composer-$1.lock ] && [ -f $SYLIUS_CACHE_DIR/composer-$1.json.md5sum ] && [ file_md5sum 'composer.lock' -eq `cat $SYLIUS_CACHE_DIR/composer-$1.json.md5sum` ];
+    then
+        return 0
+    else
+        return 1
+    fi
+}
+
+function rebuild_cache
+{
+    composer install --no-interaction --prefer-dist --no-scripts
+}
+
+# Argument 1: String to hash
+function text_md5sum
+{
+    echo $1 | md5sum | awk '{ print $1 }'
+}
+
+# Argument 1: File to hash
+function file_md5sum
+{
+    md5sum $1 | awk '{ print $1 }'
+}
+
+if [ -z "$1" ]; then
+    echo "Usage: $0 <package directory>"
+    exit 1
+fi
+
+main $1

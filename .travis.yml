@@ -7,8 +7,7 @@ env:
 
 cache:
     directories:
-        - bin
-        - vendor
+        - ~/.composer/cache/files
         - $SYLIUS_CACHE_DIR
 
 sudo: false
@@ -30,6 +29,7 @@ php:
 
 before_install:
     - phpenv config-rm xdebug.ini || true
+    - echo "memory_limit=4096M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
     - mkdir -p $SYLIUS_CACHE_DIR
 
@@ -44,6 +44,9 @@ before_install:
 
 install:
     - composer install --no-interaction --prefer-dist --no-scripts
+    - php -i
+    - etc/travis/install-composer-packages
+
     - composer run-script travis-build --no-interaction
 
 before_script:
@@ -66,6 +69,7 @@ before_script:
 
 script:
     - composer validate
+    - etc/travis/validate-composer-packages
 
     - if [[ $TRAVIS_PHP_VERSION = 7.* ]]; then bin/kawaii gherkin:check --align=left features/; fi;
 
