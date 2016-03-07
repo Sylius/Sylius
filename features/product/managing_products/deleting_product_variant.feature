@@ -1,8 +1,8 @@
 @product
 Feature: Deleting a product variant
-    In order to remove test or incorrect product variants
+    In order to remove test, obsolete or incorrect product variants
     As an Administrator
-    I want to be able to delete product variant from the registry
+    I want to be able to delete product variant from the product catalog
 
     Background:
         Given the store operates on a single channel in "France"
