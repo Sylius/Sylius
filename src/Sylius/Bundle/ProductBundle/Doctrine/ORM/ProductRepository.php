@@ -11,33 +11,42 @@
 
 namespace Sylius\Bundle\ProductBundle\Doctrine\ORM;
 
-use Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Product\Repository\ProductRepositoryInterface;
 
 /**
- * Default product repository.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class ProductRepository extends TranslatableResourceRepository
+class ProductRepository extends EntityRepository implements ProductRepositoryInterface
 {
     /**
      * {@inheritdoc}
      */
-    protected function getQueryBuilder()
+    public function findOneByName($name)
     {
-        return parent::getQueryBuilder()
-            ->select($this->getAlias().', option, variant')
-            ->leftJoin($this->getAlias().'.options', 'option')
-            ->leftJoin($this->getAlias().'.variants', 'variant')
+        return $this->createQueryBuilder('o')
+            ->addSelect('translation')
+            ->leftJoin('o.translations', 'translation')
+            ->where('translation.name = :name')
+            ->setParameter('name', $name)
+            ->getQuery()
+            ->getOneOrNullResult()
         ;
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getAlias()
+    public function findOneBySlug($slug)
     {
-        return 'product';
+        return $this->createQueryBuilder('o')
+            ->addSelect('translation')
+            ->leftJoin('o.translations', 'translation')
+            ->where('translation.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
     }
 }

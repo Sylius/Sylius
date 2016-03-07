@@ -12,10 +12,9 @@
 namespace Sylius\Bundle\SearchBundle\Doctrine\ORM;
 
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\QueryBuilder;
-use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Channel\Model\ChannelInterface;
+use Sylius\Component\Product\Repository\ProductRepositoryInterface;
 
 /**
  * @author Argyrios Gounaris <agounaris@gmail.com>
@@ -25,27 +24,25 @@ class SearchIndexRepository extends EntityRepository
     /**
      * @var EntityManager
      */
-    private $em;
+    private $entityManager;
 
     /**
-     * @var ProductRepository
+     * @var ProductRepositoryInterface
      */
     private $productRepository;
 
     /**
-     * @param EntityManager     $em
-     * @param ProductRepository $productRepository
+     * @param EntityManager $entityManager
+     * @param ProductRepositoryInterface $productRepository
      */
-    public function __construct(EntityManager $em, ProductRepository $productRepository)
+    public function __construct(EntityManager $entityManager, ProductRepositoryInterface $productRepository)
     {
-        $this->em = $em;
+        $this->entityManager = $entityManager;
         $this->productRepository = $productRepository;
     }
 
     /**
-     * Returns the product ids for a given taxon.
-     *
-     * @param $taxonName
+     * @param string $taxonName
      *
      * @return array
      */
@@ -54,7 +51,7 @@ class SearchIndexRepository extends EntityRepository
         $productClassName = $this->productRepository->getClassName();
 
         // Gets the taxon ids
-        $queryBuilder = $this->em->createQueryBuilder();
+        $queryBuilder = $this->entityManager->createQueryBuilder();
         $queryBuilder
             ->select('product')
             ->from($productClassName, 'product')
@@ -76,7 +73,7 @@ class SearchIndexRepository extends EntityRepository
         $productClassName = $this->productRepository->getClassName();
 
         // Gets the taxon ids
-        $queryBuilder = $this->em->createQueryBuilder();
+        $queryBuilder = $this->entityManager->createQueryBuilder();
         $queryBuilder
             ->select('product.id')
             ->from($productClassName, 'product')
@@ -102,7 +99,7 @@ class SearchIndexRepository extends EntityRepository
     {
         $results = [];
         foreach ($resultSetFromFulltextSearch as $model => $ids) {
-            $queryBuilder = $this->em->createQueryBuilder();
+            $queryBuilder = $this->entityManager->createQueryBuilder();
             $queryBuilder
                 ->select('u')
                 ->from($model, 'u')
@@ -128,11 +125,8 @@ class SearchIndexRepository extends EntityRepository
         return $this->productRepository->findBy(['id' => $ids]);
     }
 
-    /**
-     * @return QueryBuilder
-     */
-    public function getProductsQueryBuilder()
+    public function getArrayPaginator($objects)
     {
-        return $this->productRepository->getCollectionQueryBuilder();
+        return parent::getArrayPaginator($objects);
     }
 }

@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use PhpSpec\Exception\Example\NotEqualException;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -23,7 +24,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class PaymentContextSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $paymentRepository)
+    function let(PaymentRepositoryInterface $paymentRepository)
     {
         $this->beConstructedWith($paymentRepository);
     }
@@ -39,7 +40,7 @@ class PaymentContextSpec extends ObjectBehavior
     }
 
     function it_checks_if_a_payment_exists_in_repository(
-        RepositoryInterface $paymentRepository,
+        PaymentRepositoryInterface $paymentRepository,
         PaymentMethodInterface $cashOnDeliveryPaymentMethod
     ) {
         $paymentRepository->findBy(['method' => $cashOnDeliveryPaymentMethod])->willReturn([]);
@@ -48,7 +49,7 @@ class PaymentContextSpec extends ObjectBehavior
     }
 
     function it_throws_an_exception_if_payment_still_exist(
-        RepositoryInterface $paymentRepository,
+        PaymentRepositoryInterface $paymentRepository,
         PaymentMethodInterface $paypalPaymentMethod,
         PaymentInterface $payment
     ) {

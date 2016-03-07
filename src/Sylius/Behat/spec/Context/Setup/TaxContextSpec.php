@@ -14,10 +14,12 @@ namespace spec\Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
 use Sylius\Component\Core\Model\TaxRateInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
+use Sylius\Component\Taxation\Repository\TaxCategoryRepositoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -28,8 +30,8 @@ class TaxContextSpec extends ObjectBehavior
         FactoryInterface $taxRateFactory,
         FactoryInterface $taxCategoryFactory,
         RepositoryInterface $taxRateRepository,
-        RepositoryInterface $taxCategoryRepository,
-        RepositoryInterface $zoneRepository
+        TaxCategoryRepositoryInterface $taxCategoryRepository,
+        ZoneRepositoryInterface $zoneRepository
     ) {
         $this->beConstructedWith(
             $taxRateFactory,
@@ -59,7 +61,7 @@ class TaxContextSpec extends ObjectBehavior
         TaxRateInterface $taxRate,
         ZoneInterface $zone
     ) {
-        $taxCategoryRepository->findOneBy(['name' => 'Clothes'])->willReturn(null);
+        $taxCategoryRepository->findOneByName('Clothes')->willReturn(null);
 
         $taxCategoryFactory->createNew()->willReturn($taxCategory);
         $taxCategory->setName('Clothes')->shouldBeCalled();

@@ -39,7 +39,7 @@ final class ChannelContext implements Context
      */
     public function getChannelByName($channelName)
     {
-        $channel = $this->channelRepository->findOneBy(['name' => $channelName]);
+        $channel = $this->channelRepository->findOneByName($channelName);
         if (null === $channel) {
             throw new \InvalidArgumentException('Channel with name "'.$channelName.'" does not exist');
         }

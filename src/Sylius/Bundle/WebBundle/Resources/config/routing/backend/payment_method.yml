@@ -10,7 +10,7 @@ sylius_backend_payment_method_index:
             template: SyliusWebBundle:Backend/PaymentMethod:index.html.twig
             sortable: true
             sorting:
-                name: desc
+                translation.name: desc
 
 sylius_backend_payment_method_create:
     path: /new

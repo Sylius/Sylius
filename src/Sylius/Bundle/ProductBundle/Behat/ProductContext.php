@@ -363,7 +363,7 @@ class ProductContext extends DefaultContext
      */
     public function thereIsProduct($enabled, $name)
     {
-        $product = $this->getRepository('product')->findOneBy(['name' => $name]);
+        $product = $this->getRepository('product')->findOneByName($name);
 
         if (null === $product) {
             $product = $this->getRepository('product')->createNew();

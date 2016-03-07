@@ -57,7 +57,6 @@ final class UserContext implements Context
     private $countryCodeConverter;
 
     /**
-     * @param UserRepositoryInterface $userRepository
      * @param SharedStorageInterface $sharedStorage
      * @param UserRepositoryInterface $userRepository
      * @param TestUserFactoryInterface $userFactory

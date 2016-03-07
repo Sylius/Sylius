@@ -16,14 +16,14 @@ use PhpSpec\Exception\Example\NotEqualException;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class ShippingContextSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $shippingRepository)
+    function let(ShipmentRepositoryInterface $shippingRepository)
     {
         $this->beConstructedWith($shippingRepository);
     }
@@ -39,7 +39,7 @@ class ShippingContextSpec extends ObjectBehavior
     }
 
     function it_checks_if_an_shipment_exists_in_repository(
-        RepositoryInterface $shippingRepository,
+        ShipmentRepositoryInterface $shippingRepository,
         ShippingMethodInterface $freeDeliveryShipmentMethod
     ) {
         $shippingRepository->findBy(['method' => $freeDeliveryShipmentMethod])->willReturn([]);
@@ -48,7 +48,7 @@ class ShippingContextSpec extends ObjectBehavior
     }
 
     function it_throws_an_exception_if_shipment_still_exist(
-        RepositoryInterface $shippingRepository,
+        ShipmentRepositoryInterface $shippingRepository,
         ShippingMethodInterface $dhlShipmentMethod,
         ShipmentInterface $shipment
     ) {

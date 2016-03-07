@@ -12,16 +12,18 @@
 namespace Sylius\Bundle\UserBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\User\Repository\GroupRepositoryInterface;
 
 /**
- * UserGroup rule configuration form type.
- *
  * @author Antonio Perić <antonio@locastic.com>
  */
-class GroupRepository extends EntityRepository
+class GroupRepository extends EntityRepository implements GroupRepositoryInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function getFormQueryBuilder()
     {
-        return $this->getCollectionQueryBuilder();
+        return $this->createQueryBuilder('o');
     }
 }

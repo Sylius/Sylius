@@ -53,7 +53,7 @@ class ChannelContext extends DefaultContext
 
         foreach ($table->getHash() as $product) {
             /** @var ProductInterface $product */
-            $product = $this->getRepository('product')->findOneBy(['name' => $product]);
+            $product = $this->getRepository('product')->findOneByName($product['product']);
 
             $product->addChannel($channel);
         }
@@ -170,15 +170,15 @@ class ChannelContext extends DefaultContext
         if ($shippingMethodNames) {
             $shippingMethodNames = array_map('trim', explode(',', $shippingMethodNames));
             foreach ($shippingMethodNames as $shippingMethodName) {
-                $shippingMethod = $shippingMethods = $this->getRepository('shipping_method')->findOneBy(['name' => $shippingMethodName]);
+                $shippingMethod = $shippingMethods = $this->getRepository('shipping_method')->findOneByName($shippingMethodName);
                 $channel->addShippingMethod($shippingMethod);
             }
         }
 
         if ($paymentMethodNames) {
             $paymentMethodNames = array_map('trim', explode(',', $paymentMethodNames));
-            $paymentMethods = $this->getRepository('payment_method')->findBy(['name' => $paymentMethodNames]);
-            foreach ($paymentMethods as $paymentMethod) {
+            foreach ($paymentMethodNames as $paymentMethodName) {
+                $paymentMethod = $this->getRepository('payment_method')->findOneByName($paymentMethodName);
                 $channel->addPaymentMethod($paymentMethod);
             }
         }
@@ -202,7 +202,7 @@ class ChannelContext extends DefaultContext
         if ($taxonNames) {
             $taxonNames = array_map('trim', explode(',', $taxonNames));
             foreach ($taxonNames as $taxonName) {
-                $taxon = $this->getRepository('taxon')->findOneBy(['name' => $taxonName]);
+                $taxon = $this->getRepository('taxon')->findOneByName($taxonName);
                 $channel->addTaxon($taxon);
             }
         }

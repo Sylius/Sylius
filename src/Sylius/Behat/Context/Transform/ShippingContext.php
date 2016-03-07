@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -20,14 +20,14 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 final class ShippingContext implements Context
 {
     /**
-     * @var RepositoryInterface
+     * @var ShippingMethodRepositoryInterface
      */
     private $shippingMethodRepository;
 
     /**
-     * @param RepositoryInterface $shippingMethodRepository
+     * @param ShippingMethodRepositoryInterface $shippingMethodRepository
      */
-    public function __construct(RepositoryInterface $shippingMethodRepository)
+    public function __construct(ShippingMethodRepositoryInterface $shippingMethodRepository)
     {
         $this->shippingMethodRepository = $shippingMethodRepository;
     }
@@ -39,7 +39,7 @@ final class ShippingContext implements Context
      */
     public function getShippingMethodByName($shippingMethodName)
     {
-        $shippingMethod = $this->shippingMethodRepository->findOneBy(['name' => $shippingMethodName]);
+        $shippingMethod = $this->shippingMethodRepository->findOneByName($shippingMethodName);
         if (null === $shippingMethod) {
             throw new \Exception('Shipping method with name "'.$shippingMethodName.'" does not exist');
         }

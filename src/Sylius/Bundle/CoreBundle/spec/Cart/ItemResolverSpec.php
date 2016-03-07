@@ -18,9 +18,9 @@ use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Cart\Resolver\ItemResolverInterface;
 use Sylius\Component\Cart\Resolver\ItemResolvingException;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -31,7 +31,7 @@ class ItemResolverSpec extends ObjectBehavior
 {
     function let(
         CartProviderInterface $cartProvider,
-        RepositoryInterface $productRepository,
+        ProductRepositoryInterface $productRepository,
         FormFactoryInterface $formFactory,
         AvailabilityCheckerInterface $availabilityChecker,
         RestrictedZoneCheckerInterface $restrictedZoneChecker,
@@ -89,7 +89,7 @@ class ItemResolverSpec extends ObjectBehavior
         $request->isMethod('POST')->willReturn(true);
         $request->get('id')->willReturn(5);
 
-        $productRepository->findOneBy(['id' => 5, 'channels' => null])->willReturn(null);
+        $productRepository->findOneByIdAndChannel(5, null)->willReturn(null);
 
         $this
             ->shouldThrow(ItemResolvingException::class)
