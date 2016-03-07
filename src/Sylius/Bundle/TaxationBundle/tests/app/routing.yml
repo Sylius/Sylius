@@ -1,0 +1,4 @@
+sylius_tax_category:
+    resource: |
+        alias: sylius.tax_category
+    type: sylius.resource
