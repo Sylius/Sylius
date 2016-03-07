@@ -24,7 +24,6 @@ interface OrderInterface extends
     AdjustableInterface,
     CommentAwareInterface,
     ResourceInterface,
-    SoftDeletableInterface,
     SequenceSubjectInterface,
     TimestampableInterface
 {

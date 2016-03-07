@@ -18,27 +18,27 @@ Feature: Deleting an order
         When I delete the order "#00000022"
         Then this order should not exist in the registry
 
-    @todo
+    @domain
     Scenario: Payments of a deleted order should disappear from the registry
         When I delete the order "#00000022"
         Then there should be no "Cash on Delivery" payments in the registry
 
-    @todo
+    @domain
     Scenario: Shipments of a deleted order should disappear from the registry
         When I delete the order "#00000022"
         Then there should be no shipments with "Free" shipping method in the registry
 
-    @todo
+    @domain
     Scenario: Order items are deleted together with an order
         When I delete the order "#00000022"
         Then the order item with product "PHP T-Shirt" should not exist
 
-    @todo
+    @domain
     Scenario: Order adjustments are deleted together with an order
         When I delete the order "#00000022"
         Then adjustments of this order should not exist
 
-    @todo
+    @domain
     Scenario: Billing and shipping addresses are deleted with an order
         When I delete the order "#00000022"
         Then billing and shipping addresses of this order should not exist
