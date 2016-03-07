@@ -1,7 +1,7 @@
 {% extends 'SyliusWebBundle:Frontend:layout.html.twig' %}
 
 {% set form = sylius_cart_form({'product': product}) %}
-{% from 'SyliusWebBundle:Frontend/Product:macros.html.twig' import sylius_display_price %}
+{% from 'SyliusWebBundle:Frontend/Product:macros.html.twig' import sylius_display_price, list %}
 
 {% block head %}
     {{ sylius_metadata_render(product, null, { 'defaults': {
@@ -135,6 +135,18 @@
         {% endif %}
     </div>
 </form>
+</div>
+
+<hr />
+
+<div>
+    {% for association in product.associations %}
+        {% if association.associatedObjects|length > 0 %}
+            <h3>{{ association.type.name }}</h3>
+            <hr />
+            {{ list(association.associatedObjects) }}
+        {% endif %}
+    {% endfor %}
 </div>
 
 <hr />
