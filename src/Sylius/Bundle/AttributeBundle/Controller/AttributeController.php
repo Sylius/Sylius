@@ -77,7 +77,6 @@ class AttributeController extends ResourceController
 
         $attributes = $attributeRepository->findBy(['id' => $choices]);
         foreach ($attributes as $attribute) {
-            $options = ['label' => $attribute->getName()];
 
             if($attribute->isValueTranslatable()) {
                 $count = $request->query->get('count');
@@ -93,6 +92,7 @@ class AttributeController extends ResourceController
                     ],
                 ]);
             } else {
+                $options = ['label' => $attribute->getName()];
                 $attributeForm = 'sylius_attribute_type_'.$attribute->getType();
                 $form = $this->get('form.factory')->createNamed('value', $attributeForm, null, $options);
             }
