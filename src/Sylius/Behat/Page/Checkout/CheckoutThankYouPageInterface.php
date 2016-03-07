@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Checkout;
 
+use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Page\PageInterface;
 
 /**
@@ -22,6 +23,8 @@ interface CheckoutThankYouPageInterface extends PageInterface
      * @param string $name
      *
      * @return bool
+     *
+     * @throws ElementNotFoundException
      */
     public function hasThankYouMessageFor($name);
 

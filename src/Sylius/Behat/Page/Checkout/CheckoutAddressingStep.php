@@ -34,6 +34,9 @@ class CheckoutAddressingStep extends SymfonyPage implements CheckoutAddressingSt
         $document->fillField('Phone number', $addressingDetails['phoneNumber']);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function continueCheckout()
     {
         $this->getDocument()->pressButton('Continue');

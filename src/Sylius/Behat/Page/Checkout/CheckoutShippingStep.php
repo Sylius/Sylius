@@ -11,7 +11,7 @@
 
 namespace Sylius\Behat\Page\Checkout;
 
-use SensioLabs\Behat\PageObjectExtension\PageObject\Exception\ElementNotFoundException;
+use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 
 /**
@@ -33,6 +33,9 @@ class CheckoutShippingStep extends SymfonyPage implements CheckoutShippingStepIn
         $this->getDocument()->fillField($radio->getAttribute('name'), $radio->getAttribute('value'));
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function continueCheckout()
     {
         $this->getDocument()->pressButton('Continue');

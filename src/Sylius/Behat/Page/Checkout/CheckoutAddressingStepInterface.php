@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Checkout;
 
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\PageInterface;
 
 /**
@@ -20,8 +21,13 @@ interface CheckoutAddressingStepInterface extends PageInterface
 {
     /**
      * @param array $addressingDetails
+     *
+     * @throws ElementNotFoundException
      */
     public function fillAddressingDetails(array $addressingDetails);
 
+    /**
+     * @throws ElementNotFoundException
+     */
     public function continueCheckout();
 }

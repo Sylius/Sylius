@@ -11,7 +11,6 @@
 
 namespace Sylius\Behat\Page\External;
 
-use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Page;
 use Sylius\Behat\Page\UnexpectedPageException;
 
@@ -73,7 +72,7 @@ class PaypalExpressCheckoutPage extends Page implements PaypalExpressCheckoutPag
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     protected function getPath()
     {
@@ -81,7 +80,7 @@ class PaypalExpressCheckoutPage extends Page implements PaypalExpressCheckoutPag
     }
 
     /**
-     * @param array $urlParameters
+     * {@inheritdoc}
      *
      * @throws UnexpectedPageException
      */

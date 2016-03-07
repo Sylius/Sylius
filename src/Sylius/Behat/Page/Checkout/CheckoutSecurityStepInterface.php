@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Checkout;
 
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\PageInterface;
 
 /**
@@ -21,11 +22,15 @@ interface CheckoutSecurityStepInterface extends PageInterface
     /**
      * @param string $login
      * @param string $password
+     *
+     * @throws ElementNotFoundException
      */
     public function logInAsExistingUser($login, $password);
 
     /**
      * @param string $email
+     *
+     * @throws ElementNotFoundException
      */
     public function proceedAsGuest($email);
 }

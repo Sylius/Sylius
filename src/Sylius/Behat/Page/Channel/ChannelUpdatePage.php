@@ -26,11 +26,17 @@ class ChannelUpdatePage extends SymfonyPage implements ChannelUpdatePageInterfac
         $this->getDocument()->selectFieldOption('Theme', $themeName);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function unsetTheme()
     {
         $this->getDocument()->selectFieldOption('Theme', '');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function update()
     {
         $this->getDocument()->pressButton('Save changes');

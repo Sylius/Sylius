@@ -18,6 +18,9 @@ use Sylius\Behat\Page\SymfonyPage;
  */
 class CheckoutFinalizeStep extends SymfonyPage implements CheckoutFinalizeStepInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function confirmOrder()
     {
         $this->getDocument()->clickLink('Place order');

@@ -11,12 +11,13 @@
 
 namespace Sylius\Behat\Page\Product;
 
-use Sylius\Behat\Page\ElementNotFoundException;
+use Behat\Mink\Exception\ElementNotFoundException;
+use Sylius\Behat\Page\PageInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-interface ProductShowPageInterface
+interface ProductShowPageInterface extends PageInterface
 {
     /**
      * @throws ElementNotFoundException
@@ -25,11 +26,15 @@ interface ProductShowPageInterface
 
     /**
      * @param string $quantity
+     *
+     * @throws ElementNotFoundException
      */
     public function addToCartWithQuantity($quantity);
 
     /**
      * @param string $variant
+     *
+     * @throws ElementNotFoundException
      */
     public function addToCartWithVariant($variant);
 }

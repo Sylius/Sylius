@@ -34,6 +34,9 @@ class ChannelCreatePage extends SymfonyPage implements ChannelCreatePageInterfac
         $this->getDocument()->fillField('Code', $code);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function create()
     {
         $this->getDocument()->pressButton('Create');

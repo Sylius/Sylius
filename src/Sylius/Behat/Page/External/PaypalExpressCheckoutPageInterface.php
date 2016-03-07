@@ -11,7 +11,7 @@
 
 namespace Sylius\Behat\Page\External;
 
-use Sylius\Behat\Page\ElementNotFoundException;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\PageInterface;
 
 /**

@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\User;
 
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\PageInterface;
 
 /**
@@ -21,6 +22,8 @@ interface LoginPageInterface extends PageInterface
     /**
      * @param string $email
      * @param string $password
+     *
+     * @throws ElementNotFoundException
      */
     public function logIn($email, $password);
 }

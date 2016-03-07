@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Checkout;
 
+use Behat\Mink\Exception\ElementNotFoundException as BehatElementNotFoundException;
 use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Page\PageInterface;
 
@@ -23,8 +24,12 @@ interface CheckoutPaymentStepInterface extends PageInterface
      * @param string $paymentMethod
      *
      * @throws ElementNotFoundException
+     * @throws BehatElementNotFoundException
      */
     public function selectPaymentMethod($paymentMethod);
 
+    /**
+     * @throws BehatElementNotFoundException
+     */
     public function continueCheckout();
 }

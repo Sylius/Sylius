@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Channel;
 
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\PageInterface;
 
 /**
@@ -20,13 +21,20 @@ interface ChannelCreatePageInterface extends PageInterface
 {
     /**
      * @param string $name
+     *
+     * @throws ElementNotFoundException
      */
     public function fillName($name);
 
     /**
      * @param string $code
+     *
+     * @throws ElementNotFoundException
      */
     public function fillCode($code);
 
+    /**
+     * @throws ElementNotFoundException
+     */
     public function create();
 }

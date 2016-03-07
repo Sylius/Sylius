@@ -33,6 +33,9 @@ class CheckoutPaymentStep extends SymfonyPage implements CheckoutPaymentStepInte
         $this->getDocument()->fillField($radio->getAttribute('name'), $radio->getAttribute('value'));
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function continueCheckout()
     {
         $this->getDocument()->pressButton('Continue');
