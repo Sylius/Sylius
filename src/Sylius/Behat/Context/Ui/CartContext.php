@@ -12,9 +12,9 @@
 namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Cart\CartSummaryPage;
+use Sylius\Behat\Page\Cart\CartSummaryPageInterface;
 use Sylius\Behat\Page\ElementNotFoundException;
-use Sylius\Behat\Page\Product\ProductShowPage;
+use Sylius\Behat\Page\Product\ProductShowPageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
 /**
@@ -23,22 +23,22 @@ use Sylius\Component\Core\Model\ProductInterface;
 final class CartContext implements Context
 {
     /**
-     * @var CartSummaryPage
+     * @var CartSummaryPageInterface
      */
     private $cartSummaryPage;
 
     /**
-     * @var ProductShowPage
+     * @var ProductShowPageInterface
      */
     private $productShowPage;
 
     /**
-     * @param CartSummaryPage $cartSummaryPage
-     * @param ProductShowPage $productShowPage
+     * @param CartSummaryPageInterface $cartSummaryPage
+     * @param ProductShowPageInterface $productShowPage
      */
     public function __construct(
-        CartSummaryPage $cartSummaryPage,
-        ProductShowPage $productShowPage
+        CartSummaryPageInterface $cartSummaryPage,
+        ProductShowPageInterface $productShowPage
     ) {
         $this->cartSummaryPage = $cartSummaryPage;
         $this->productShowPage = $productShowPage;

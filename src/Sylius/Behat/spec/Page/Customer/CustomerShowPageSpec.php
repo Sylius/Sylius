@@ -14,6 +14,7 @@ namespace spec\Sylius\Behat\Page\Customer;
 use Behat\Mink\Session;
 use PhpSpec\ObjectBehavior;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Factory;
+use Sylius\Behat\Page\Customer\CustomerShowPageInterface;
 use Sylius\Behat\Page\SymfonyPage;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -32,13 +33,13 @@ class CustomerShowPageSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Behat\Page\Customer\CustomerShowPage');
     }
 
+    function it_implements_customer_show_page_interface()
+    {
+        $this->shouldImplement(CustomerShowPageInterface::class);
+    }
+
     function it_is_symfony_page()
     {
         $this->shouldHaveType(SymfonyPage::class);
-    }
-
-    function it_has_route_name()
-    {
-        $this->getRouteName()->shouldReturn('sylius_backend_customer_show');
     }
 }

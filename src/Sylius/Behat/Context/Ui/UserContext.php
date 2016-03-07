@@ -12,9 +12,9 @@
 namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Customer\CustomerShowPage;
+use Sylius\Behat\Page\Customer\CustomerShowPageInterface;
 use Sylius\Behat\Page\ElementNotFoundException;
-use Sylius\Behat\Page\User\LoginPage;
+use Sylius\Behat\Page\User\LoginPageInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 
@@ -35,26 +35,26 @@ final class UserContext implements Context
     private $userRepository;
 
     /**
-     * @var CustomerShowPage
+     * @var CustomerShowPageInterface
      */
     private $customerShowPage;
 
     /**
-     * @var LoginPage
+     * @var LoginPageInterface
      */
     private $loginPage;
 
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param UserRepositoryInterface $userRepository
-     * @param CustomerShowPage $customerShowPage
-     * @param LoginPage $loginPage
+     * @param CustomerShowPageInterface $customerShowPage
+     * @param LoginPageInterface $loginPage
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         UserRepositoryInterface $userRepository,
-        CustomerShowPage $customerShowPage,
-        LoginPage $loginPage
+        CustomerShowPageInterface $customerShowPage,
+        LoginPageInterface $loginPage
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->userRepository = $userRepository;

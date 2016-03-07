@@ -16,19 +16,10 @@ use Sylius\Behat\Page\SymfonyPage;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class CheckoutSecurityStep extends SymfonyPage
+class CheckoutSecurityStep extends SymfonyPage implements CheckoutSecurityStepInterface
 {
     /**
      * {@inheritdoc}
-     */
-    public function getRouteName()
-    {
-        return 'sylius_checkout_security';
-    }
-
-    /**
-     * @param string $login
-     * @param string $password
      */
     public function logInAsExistingUser($login, $password)
     {
@@ -44,7 +35,7 @@ class CheckoutSecurityStep extends SymfonyPage
     }
 
     /**
-     * @param string $email
+     * {@inheritdoc}
      */
     public function proceedAsGuest($email)
     {
@@ -52,5 +43,13 @@ class CheckoutSecurityStep extends SymfonyPage
 
         $document->find('css', '#sylius_customer_guest input#sylius_customer_guest_email')->setValue($email);
         $document->pressButton('Proceed with your order');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getRouteName()
+    {
+        return 'sylius_checkout_security';
     }
 }

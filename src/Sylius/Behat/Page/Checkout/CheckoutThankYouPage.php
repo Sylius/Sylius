@@ -16,7 +16,7 @@ use Sylius\Behat\Page\SymfonyPage;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class CheckoutThankYouPage extends SymfonyPage
+class CheckoutThankYouPage extends SymfonyPage implements CheckoutThankYouPageInterface
 {
     /**
      * @var array
@@ -26,9 +26,7 @@ class CheckoutThankYouPage extends SymfonyPage
     ];
 
     /**
-     * @param string $name
-     *
-     * @return bool
+     * {@inheritdoc}
      */
     public function hasThankYouMessageFor($name)
     {
@@ -38,9 +36,7 @@ class CheckoutThankYouPage extends SymfonyPage
     }
 
     /**
-     * @param int $timeout
-     *
-     * @throws \InvalidArgumentException
+     * {@inheritdoc}
      */
     public function waitForResponse($timeout)
     {
