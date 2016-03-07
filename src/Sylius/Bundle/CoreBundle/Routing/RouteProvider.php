@@ -73,7 +73,9 @@ class RouteProvider extends DoctrineProvider implements RouteProviderInterface
         }
 
         foreach ($this->getRepositories() as $className => $repository) {
-            $entity = $repository->findOneBy([$this->routeConfigs[$className]['field'] => $name]);
+            $entity = $repository->findOneBy([
+                $this->routeConfigs[$className]['field'] => urldecode($name)
+            ]);
             if ($entity) {
                 return $this->createRouteFromEntity($entity);
             }
@@ -139,6 +141,7 @@ class RouteProvider extends DoctrineProvider implements RouteProviderInterface
                     continue;
                 }
 
+                $value = urldecode($value);
                 $entity = $repository->findOneBy([$this->routeConfigs[$className]['field'] => $value]);
 
                 if (null === $entity) {
