@@ -38,6 +38,7 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand implements Role
                     if (empty($email)) {
                         throw new \Exception('Email can not be empty');
                     }
+
                     return $email;
                 }
             );
@@ -97,9 +98,10 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand implements Role
 
     /**
      * @param string $role
+     *
      * @return RoleInterface
      */
-    public function findAuthorizationRole($role)
+    protected function findAuthorizationRole($role)
     {
         $roleRepository = $this->getContainer()->get('sylius.repository.role');
         /** @var RoleInterface $role */

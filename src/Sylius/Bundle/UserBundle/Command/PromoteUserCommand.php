@@ -44,7 +44,7 @@ EOT
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function executeRoleCommand(OutputInterface $output, UserInterface $user, array $roles, array $securityRoles)
     {
@@ -56,22 +56,22 @@ EOT
             if ($user->hasAuthorizationRole($role)) {
                 $output->writeln(sprintf('<error>User "%s" did already have "%s" RBAC role.</error>', (string)$user, $role));
                 $error = true;
-            } else {
-                $user->addAuthorizationRole($role);
-
-                $output->writeln(sprintf('RBAC role <comment>%s</comment> has been added to user <comment>%s</comment>', $role, (string)$user));
+                continue;
             }
+
+            $user->addAuthorizationRole($role);
+            $output->writeln(sprintf('RBAC role <comment>%s</comment> has been added to user <comment>%s</comment>', $role, (string)$user));
         }
 
         foreach ($securityRoles as $securityRole) {
             if ($user->hasRole($securityRole)) {
                 $output->writeln(sprintf('<error>User "%s" did already have "%s" security role.</error>', (string)$user, $securityRole));
                 $error = true;
-            } else {
-                $user->addRole($securityRole);
-
-                $output->writeln(sprintf('Scurity role <comment>%s</comment> has been added to user <comment>%s</comment>', $securityRole, (string)$user));
+                continue;
             }
+
+            $user->addRole($securityRole);
+            $output->writeln(sprintf('Scurity role <comment>%s</comment> has been added to user <comment>%s</comment>', $securityRole, (string)$user));
         }
 
         if (!$error) {

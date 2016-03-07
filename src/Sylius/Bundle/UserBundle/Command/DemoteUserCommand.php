@@ -37,13 +37,13 @@ class DemoteUserCommand extends AbstractRoleCommand
             ->setHelp(<<<EOT
 The <info>sylius:user:demote</info> command demotes a user by removing roles
 
-  <info>php app/console fos:user:demote matthieu@email.com ROLE_CUSTOM</info>
+  <info>php app/console fos:user:demote matthieu@email.com</info>
 EOT
             );
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function executeRoleCommand(OutputInterface $output, UserInterface $user, array $roles, array $securityRoles)
     {
@@ -55,20 +55,22 @@ EOT
             if (!$user->hasAuthorizationRole($role)) {
                 $output->writeln(sprintf('<error>User "%s" didn\'t have "%s" RBAC role.</error>', (string)$user, $role));
                 $error = true;
-            } else {
-                $user->removeAuthorizationRole($role);
-                $output->writeln(sprintf('RBAC role <comment>%s</comment> has been removed from user <comment>%s</comment>', $role, (string)$user));
+                continue;
             }
+
+            $user->removeAuthorizationRole($role);
+            $output->writeln(sprintf('RBAC role <comment>%s</comment> has been removed from user <comment>%s</comment>', $role, (string)$user));
         }
 
         foreach ($securityRoles as $securityRole) {
             if (!$user->hasRole($securityRole)) {
                 $output->writeln(sprintf('<error>User "%s" didn\'t have "%s" Security role.</error>', (string)$user, $securityRole));
                 $error = true;
-            } else {
-                $user->removeRole($securityRole);
-                $output->writeln(sprintf('Security role <comment>%s</comment> has been removed from user <comment>%s</comment>', $securityRole, (string)$user));
+                continue;
             }
+
+            $user->removeRole($securityRole);
+            $output->writeln(sprintf('Security role <comment>%s</comment> has been removed from user <comment>%s</comment>', $securityRole, (string)$user));
         }
 
         if (!$error) {
