@@ -1,5 +1,5 @@
 @legacy_i18n
-Feature: Taxonomies internationalization
+Feature: Taxons internationalization
     In order to improve the store SEO
     As a store owner
     I want to be able to have localised permalinks
@@ -10,10 +10,10 @@ Feature: Taxonomies internationalization
             | code  |
             | en_US |
             | es_ES |
-        And there are following taxonomies defined:
+        And there are following taxons defined:
             | code | name     |
             | RTX1 | Category |
-        And taxonomy "Category" has following taxons:
+        And taxon "Category" has following children:
             | Clothing[TX1] > Shirts[TX2] > Long Sleeve[TX3] |
         And the following taxon translations exist:
             | taxon       | name        | locale |

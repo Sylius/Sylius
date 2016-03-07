@@ -17,6 +17,6 @@ interface PromotionRuleInterface extends RuleInterface
 {
     const TYPE_NTH_ORDER = 'nth_order';
     const TYPE_SHIPPING_COUNTRY = 'shipping_country';
-    const TYPE_TAXONOMY = 'taxonomy';
+    const TYPE_TAXON = 'taxon';
     const TYPE_CUSTOMER_GROUP = 'customer_group';
 }

@@ -1,55 +1,53 @@
-{% macro list(taxonomy, taxons) %}
+{% macro list(taxons) %}
+    {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
 
-{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
-
-{% if taxons|length > 0 %}
-<table class="table">
-    <thead>
-        <tr>
-            <th>{{ 'sylius.ui.code'|trans  }}</th>
-            <th>{{ 'sylius.taxon.name'|trans }}</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        {{ _self.tree(taxonomy, taxons) }}
-    </tbody>
-</table>
-{% else %}
-{{ alerts.info('sylius.taxon.no_results'|trans) }}
-{% endif %}
+    {% if taxons|length > 0 %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>{{ 'sylius.ui.code'|trans  }}</th>
+                    <th>{{ 'sylius.taxon.name'|trans }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{ _self.tree(taxons) }}
+            </tbody>
+        </table>
+    {% else %}
+        {{ alerts.info('sylius.taxon.no_results'|trans) }}
+    {% endif %}
 
 {% endmacro %}
 
-{% macro tree(taxonomy, taxons) %}
+{% macro tree(taxons) %}
+    {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 
-{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
-
-{% for taxon in taxons %}
-<tr id="{{ taxon.id }}">
-    <td>
-        {{ taxon.code }}
-    </td>
-    <td>
-        <span style="border-left: {{ (taxon.level - 1) * 20}}px solid #f1f1f1; padding-left: 10px;">
-            {% if taxon.path|length > 0 %}
-                <a href="{{ taxon.path|imagine_filter('sylius_large') }}" title="{{ taxon.name }}">
-                    <img src="{{ taxon.path|imagine_filter('sylius_small') }}" alt="" class="img-rounded" />
-                </a>
-            {% endif %}
-            {{ taxon.name }}
-        </span>
-    </td>
-    <td>
-        <div class="pull-right">
-        {{ buttons.generic(path('sylius_backend_taxon_product_index', {'taxonomyId': taxonomy.id, 'id': taxon.id}), 'sylius.browse_products'|trans) }}
-        {{ buttons.edit(path('sylius_backend_taxon_update', {'taxonomyId': taxonomy.id, 'id': taxon.id})) }}
-        {{ buttons.delete(path('sylius_backend_taxon_delete', {'taxonomyId': taxonomy.id, 'id': taxon.id})) }}
-        </div>
-    </td>
-</tr>
-{% if taxon.children|length > 0 %}
-    {{ _self.tree(taxonomy, taxon.children) }}
-{% endif %}
-{% endfor %}
+    {% for taxon in taxons %}
+        <tr id="{{ taxon.id }}">
+            <td>
+                {{ taxon.code }}
+            </td>
+            <td>
+                <span style="border-left: {{ taxon.level * 20}}px solid #f1f1f1; padding-left: 10px;">
+                    {% if taxon.path|length > 0 %}
+                        <a href="{{ taxon.path|imagine_filter('sylius_large') }}" title="{{ taxon.name }}">
+                            <img src="{{ taxon.path|imagine_filter('sylius_small') }}" alt="" class="img-rounded" />
+                        </a>
+                    {% endif %}
+                    <a href="{{ path('sylius_backend_taxon_show', {'id': taxon.id}) }}">{{ taxon.name }}</a>
+                </span>
+            </td>
+            <td>
+                <div class="pull-right">
+                {{ buttons.generic(path('sylius_backend_taxon_product_index', {'id': taxon.id}), 'sylius.browse_products'|trans) }}
+                {{ buttons.edit(path('sylius_backend_taxon_update', {'id': taxon.id})) }}
+                {{ buttons.delete(path('sylius_backend_taxon_delete', {'id': taxon.id})) }}
+                </div>
+            </td>
+        </tr>
+        {% if taxon.children|length > 0 %}
+            {{ _self.tree(taxon.children) }}
+        {% endif %}
+    {% endfor %}
 {% endmacro %}

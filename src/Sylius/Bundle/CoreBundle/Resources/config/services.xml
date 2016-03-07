@@ -69,7 +69,7 @@
         <parameter key="sylius.promotion_rule_checker.nth_order.class">Sylius\Component\Core\Promotion\Checker\NthOrderRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.customer_loyalty.class">Sylius\Component\Core\Promotion\Checker\CustomerLoyaltyRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.shipping_country.class">Sylius\Component\Core\Promotion\Checker\ShippingCountryRuleChecker</parameter>
-        <parameter key="sylius.promotion_rule_checker.taxonomy.class">Sylius\Component\Core\Promotion\Checker\TaxonomyRuleChecker</parameter>
+        <parameter key="sylius.promotion_rule_checker.taxon.class">Sylius\Component\Core\Promotion\Checker\TaxonRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.contains_product.class">Sylius\Component\Core\Promotion\Checker\ContainsProductRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.customer_group.class">Sylius\Component\Core\Promotion\Checker\CustomerGroupRuleChecker</parameter>
         <parameter key="sylius.promotion_action.fixed_discount.class">Sylius\Component\Core\Promotion\Action\FixedDiscountAction</parameter>
@@ -394,8 +394,6 @@
             <tag name="kernel.event_listener" event="sylius.product_variant.pre_update" method="uploadProductImage" />
             <tag name="kernel.event_listener" event="sylius.taxon.pre_create" method="uploadTaxonImage" />
             <tag name="kernel.event_listener" event="sylius.taxon.pre_update" method="uploadTaxonImage" />
-            <tag name="kernel.event_listener" event="sylius.taxonomy.pre_create" method="uploadTaxonomyImage" />
-            <tag name="kernel.event_listener" event="sylius.taxonomy.pre_update" method="uploadTaxonomyImage" />
         </service>
 
         <service id="sylius.listener.product_delete" class="%sylius.listener.product_delete.class%">
@@ -422,8 +420,8 @@
             <argument type="service" id="sylius.repository.country" />
             <tag name="sylius.promotion_rule_checker" type="shipping_country" label="Shipping country" />
         </service>
-        <service id="sylius.promotion_rule_checker.taxonomy" class="%sylius.promotion_rule_checker.taxonomy.class%">
-            <tag name="sylius.promotion_rule_checker" type="taxonomy" label="Taxonomy" />
+        <service id="sylius.promotion_rule_checker.taxon" class="%sylius.promotion_rule_checker.taxon.class%">
+            <tag name="sylius.promotion_rule_checker" type="taxon" label="Taxon" />
         </service>
         <service id="sylius.promotion_rule_checker.contains_product" class="%sylius.promotion_rule_checker.contains_product.class%">
             <tag name="sylius.promotion_rule_checker" type="contains_product" label="Contains Product" />

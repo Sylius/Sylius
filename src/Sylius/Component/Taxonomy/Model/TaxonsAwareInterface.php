@@ -19,11 +19,9 @@ use Doctrine\Common\Collections\Collection;
 interface TaxonsAwareInterface
 {
     /**
-     * @param string $taxonomy
-     *
      * @return Collection|TaxonInterface[]
      */
-    public function getTaxons($taxonomy = null);
+    public function getTaxons();
 
     /**
      * @param Collection $collection

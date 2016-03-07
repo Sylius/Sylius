@@ -702,15 +702,4 @@ class WebContext extends DefaultContext
             throw new \Exception(sprintf('"%s" %s should be disabled', $name, $fieldType));
         }
     }
-
-    /**
-     * @Given /^permalink of taxon "([^"]*)" in "([^"]*)" taxonomy has been changed to "([^"]*)"$/
-     */
-    public function permalinkOfTaxonInTaxonomyHasBeenChangedTo($taxon, $taxonomy, $newPermalink)
-    {
-        $this->iAmOnTheResourcePage('taxonomy', 'name', $taxonomy);
-        $this->iClickNear('Edit', $taxon);
-        $this->fillField('Permalink', $newPermalink);
-        $this->pressButton('Save changes');
-    }
 }

@@ -29,8 +29,8 @@ class ChannelType extends BaseChannelType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('taxonomies', 'sylius_taxonomy_choice', [
-                'label' => 'sylius.form.channel.taxonomies',
+            ->add('taxons', 'sylius_taxon_choice', [
+                'label' => 'sylius.form.channel.taxons',
                 'multiple' => true,
             ])
             ->add('locales', 'sylius_locale_choice', [

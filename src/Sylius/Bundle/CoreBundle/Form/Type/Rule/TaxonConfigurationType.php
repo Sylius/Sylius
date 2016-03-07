@@ -9,17 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\TaxonomyBundle\Form\Type;
+namespace Sylius\Bundle\CoreBundle\Form\Type\Rule;
 
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Taxonomy translation form type.
- *
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class TaxonomyTranslationType extends AbstractResourceType
+class TaxonConfigurationType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -27,8 +25,11 @@ class TaxonomyTranslationType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', [
-                'label' => 'sylius.form.taxonomy.name',
+            ->add('taxons', 'sylius_taxon_choice', [
+                'label' => 'sylius.form.rule.taxon_configuration.taxons',
+            ])
+            ->add('exclude', 'checkbox', [
+                'label' => 'sylius.form.rule.taxonomy_configuration.exclude',
             ])
         ;
     }
@@ -38,6 +39,6 @@ class TaxonomyTranslationType extends AbstractResourceType
      */
     public function getName()
     {
-        return 'sylius_taxonomy_translation';
+        return 'sylius_promotion_rule_taxon_configuration';
     }
 }

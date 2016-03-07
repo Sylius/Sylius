@@ -19,7 +19,7 @@ use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Locale\Model\LocalesAwareInterface;
 use Sylius\Component\Payment\Model\PaymentMethodsAwareInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodsAwareInterface;
-use Sylius\Component\Taxonomy\Model\TaxonomiesAwareInterface;
+use Sylius\Component\Taxonomy\Model\TaxonsAwareInterface;
 
 /**
  * Model implementing this interface should reference several:
@@ -27,7 +27,7 @@ use Sylius\Component\Taxonomy\Model\TaxonomiesAwareInterface;
  *   - Locales;
  *   - Payment methods;
  *   - Shipping methods;
- *   - Taxonomies.
+ *   - Taxons.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
@@ -37,7 +37,7 @@ interface ChannelInterface extends
     LocalesAwareInterface,
     PaymentMethodsAwareInterface,
     ShippingMethodsAwareInterface,
-    TaxonomiesAwareInterface
+    TaxonsAwareInterface
 {
     /**
      * @return ThemeInterface

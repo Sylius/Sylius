@@ -13,7 +13,6 @@ namespace Sylius\Component\Taxonomy\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Resource\Model\SoftDeletableTrait;
 use Sylius\Component\Translation\Model\TranslatableTrait;
 
 /**
@@ -22,7 +21,6 @@ use Sylius\Component\Translation\Model\TranslatableTrait;
  */
 class Taxon implements TaxonInterface
 {
-    use SoftDeletableTrait;
     use TranslatableTrait {
         __construct as private initializeTranslationsCollection;
     }
@@ -38,9 +36,9 @@ class Taxon implements TaxonInterface
     protected $code;
 
     /**
-     * @var TaxonomyInterface
+     * @var TaxonInterface
      */
-    protected $taxonomy;
+    protected $root;
 
     /**
      * @var TaxonInterface
@@ -109,25 +107,17 @@ class Taxon implements TaxonInterface
     /**
      * {@inheritdoc}
      */
-    public function getTaxonomy()
-    {
-        return $this->taxonomy;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setTaxonomy(TaxonomyInterface $taxonomy = null)
-    {
-        $this->taxonomy = $taxonomy;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function isRoot()
     {
         return null === $this->parent;
+    }
+
+    /**
+     * @return TaxonInterface
+     */
+    public function getRoot()
+    {
+        return $this->root;
     }
 
     /**
@@ -168,7 +158,6 @@ class Taxon implements TaxonInterface
     public function addChild(TaxonInterface $taxon)
     {
         if (!$this->hasChild($taxon)) {
-            $taxon->setTaxonomy($this->taxonomy);
             $taxon->setParent($this);
 
             $this->children->add($taxon);
@@ -181,7 +170,6 @@ class Taxon implements TaxonInterface
     public function removeChild(TaxonInterface $taxon)
     {
         if ($this->hasChild($taxon)) {
-            $taxon->setTaxonomy(null);
             $taxon->setParent(null);
 
             $this->children->removeElement($taxon);

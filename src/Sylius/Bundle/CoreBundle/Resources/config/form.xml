@@ -43,7 +43,7 @@
         <parameter key="sylius.form.type.promotion_rule.nth_order_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\NthOrderConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_rule.customer_loyalty_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\CustomerLoyaltyConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_rule.shipping_country_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\ShippingCountryConfigurationType</parameter>
-        <parameter key="sylius.form.type.promotion_rule.taxonomy_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\TaxonomyConfigurationType</parameter>
+        <parameter key="sylius.form.type.promotion_rule.taxon_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\TaxonConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_rule.contains_product_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\ContainsProductConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_rule.customer_group_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\CustomerGroupType</parameter>
         <parameter key="sylius.form.type.promotion_action.shipping_discount_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Action\ShippingDiscountConfigurationType</parameter>
@@ -139,8 +139,8 @@
             <argument>%sylius.model.country.class%</argument>
             <tag name="form.type" alias="sylius_promotion_rule_shipping_country_configuration" />
         </service>
-        <service id="sylius.form.type.promotion_rule.taxonomy_configuration" class="%sylius.form.type.promotion_rule.taxonomy_configuration.class%">
-            <tag name="form.type" alias="sylius_promotion_rule_taxonomy_configuration" />
+        <service id="sylius.form.type.promotion_rule.taxon_configuration" class="%sylius.form.type.promotion_rule.taxon_configuration.class%">
+            <tag name="form.type" alias="sylius_promotion_rule_taxon_configuration" />
         </service>
         <service id="sylius.form.type.promotion_rule.contains_product_configuration" class="%sylius.form.type.promotion_rule.contains_product_configuration.class%">
             <argument type="service" id="sylius.repository.product_variant" />

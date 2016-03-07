@@ -6,10 +6,10 @@ Feature: Checkout shipping in preferred language
 
     Background:
         Given store has default configuration
-        And there are following taxonomies defined:
+        And there are following taxons defined:
             | code | name     |
             | RTX1 | Category |
-        And taxonomy "Category" has following taxons:
+        And taxon "Category" has following children:
             | Clothing[TX1] > PHP T-Shirts[TX2] |
         And the following products exist:
             | name    | price | taxons       |
@@ -35,7 +35,7 @@ Feature: Checkout shipping in preferred language
             | shipping method | name     | locale |
             | UPS Ground      | UPS Land | de_DE  |
         And the default channel has following configuration:
-            | taxonomy | shipping          |
+            | taxon    | shipping          |
             | Category | FedEx, UPS Ground |
         And I am logged in user
         And I added product "PHP Top" to cart

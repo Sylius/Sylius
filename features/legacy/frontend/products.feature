@@ -6,10 +6,10 @@ Feature: Products
 
     Background:
         Given there is default currency configured
-        And there are following taxonomies defined:
+        And there are following taxons defined:
             | code | name     |
             | RTX1 | Category |
-        And taxonomy "Category" has following taxons:
+        And taxon "Category" has following children:
             | Clothing[TX1] > T-Shirts[TX2]     |
             | Clothing[TX1] > PHP T-Shirts[TX3] |
             | Clothing[TX1] > Gloves[TX4]       |
@@ -28,7 +28,7 @@ Feature: Products
             | Symfony T-Shirt  | 15.00 | PHP T-Shirts |                    |                          |                     |
             | Doctrine T-Shirt | 15.00 | PHP T-Shirts |                    |                          |                     |
         And channel "WEB-EU" has following configuration:
-            | taxonomy |
+            | taxon    |
             | Category |
         And channel "WEB-EU" has following products assigned:
             | product         |

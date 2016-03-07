@@ -268,8 +268,8 @@ sylius:
         tax_rate:
             index: Tax Rates
         taxation_settings: Taxation Settings
-        taxonomy:
-            index: Taxonomies
+        taxon:
+            index: Taxons
         update: Edit
         zone:
             index: Zones
@@ -1066,6 +1066,7 @@ sylius:
         updated_at: Last update
         zone: Zone
     taxon:
+        index_header: Taxons
         create: Create taxon
         create_header: New taxon
         image: Choose image
@@ -1074,17 +1075,6 @@ sylius:
         no_results: There are no taxons to display
         product_index_header: Products categorized as "%name%"
         update_header: Editing taxon
-    taxonomy:
-        create: Create taxonomy
-        create_header: New taxonomy
-        image: Choose image
-        index_header: Categorization <small>Here you see the defined taxonomies</small>
-        manage: Manage taxonomies
-        name: Name
-        no_image: There is no image for this taxonomy
-        no_results: There are no taxonomies defined
-        show_header: Taxonomy <small><strong>%name%</strong></small>
-        update_header: Editing taxonomy
     total_quantity: Total Qty
     ui:
         account_panel_outline: Enjoy all the features that are available on your personal space to view, track and manage all your data

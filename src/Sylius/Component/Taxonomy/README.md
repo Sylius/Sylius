@@ -3,8 +3,7 @@ Taxonomy Component [![Build status...](https://secure.travis-ci.org/Sylius/Taxon
 
 Categorization is one of the most basic functionality for modern web
 applications. Sylius Taxonomy component is an implementation of classification
-system, which can handle different taxonomy and unlimited terms (taxons) per
-taxonomy.
+system, which can handle different and unlimited hierarchical terms (taxons).
 
 Most basic examples of taxonomy configuration for an application are
 categorization of products or customers.

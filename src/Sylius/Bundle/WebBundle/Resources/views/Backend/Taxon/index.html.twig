@@ -2,26 +2,26 @@
 
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
-{% from 'SyliusWebBundle:Backend/Taxonomy:macros.html.twig' import list %}
+{% from 'SyliusWebBundle:Backend/Taxon:macros.html.twig' import list %}
 
 {% block topbar %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
-    <li>{{ 'sylius.breadcrumb.taxonomy.index'|trans }}</li>
+    <li>{{ 'sylius.breadcrumb.taxon.index'|trans }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_taxonomy_create'), 'sylius.taxonomy.create'|trans) }}
+        {{ buttons.create(path('sylius_backend_taxon_create'), 'sylius.taxon.create'|trans) }}
         {{ buttons.manage(path('sylius_backend_product_index'), 'sylius.product.manage'|trans) }}
     </div>
-    <h1><i class="glyphicon glyphicon-folder-close"></i> {{ 'sylius.taxonomy.index_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-folder-close"></i> {{ 'sylius.taxon.index_header'|trans|raw }}</h1>
 </div>
 
-{{ pagination(taxonomies) }}
-{{ list(taxonomies) }}
-{{ pagination(taxonomies) }}
+{{ pagination(taxons) }}
+{{ list(taxons) }}
+{{ pagination(taxons) }}
 
 {% endblock %}

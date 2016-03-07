@@ -5,10 +5,10 @@ Feature: Currency selection
     I want to to select my currency in storefront
 
     Background:
-        Given there are following taxonomies defined:
+        Given there are following taxons defined:
             | code | name     |
             | RTX1 | Category |
-        And taxonomy "Category" has following taxons:
+        And taxon "Category" has following children:
             | Clothing[TX1] > PHP T-Shirts[TX2] |
         And the following products exist:
             | name    | price | taxons       |
