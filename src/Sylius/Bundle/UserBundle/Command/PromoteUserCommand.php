@@ -14,6 +14,7 @@ namespace Sylius\Bundle\UserBundle\Command;
 use Sylius\Component\Core\Model\UserInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -28,15 +29,16 @@ class PromoteUserCommand extends AbstractRoleCommand
     {
         $this
             ->setName('sylius:user:promote')
-            ->setDescription('Promotes a user by adding a role.')
+            ->setDescription('Promotes a user by adding roles.')
             ->setDefinition(array(
-                new InputArgument('email', InputArgument::REQUIRED, 'The email'),
-                new InputArgument('role', InputArgument::REQUIRED, 'The role'),
+                new InputArgument('email', InputArgument::REQUIRED, 'Email'),
+                new InputArgument('roles', InputArgument::IS_ARRAY, 'RBAC roles'),
+                new InputOption('super-admin', null, InputOption::VALUE_NONE, 'Set the user as a super admin'),
             ))
             ->setHelp(<<<EOT
-The <info>sylius:user:promote</info> command promotes a user by adding a role
+The <info>sylius:user:promote</info> command promotes a user by adding RBAC roles
 
-  <info>php app/console fos:user:promote matthieu@email.com ROLE_CUSTOM</info>
+  <info>php app/console fos:user:promote matthieu@email.com</info>
 EOT
             );
     }
@@ -44,24 +46,36 @@ EOT
     /**
      * @inheritdoc
      */
-    public function executeRoleCommand(OutputInterface $output, UserInterface $user, $role)
+    public function executeRoleCommand(OutputInterface $output, UserInterface $user, array $roles, array $securityRoles)
     {
-        if ($user->hasRole($role)) {
-            $output->writeln(sprintf('<error>User "%s" did already have "%s" role.</error>', (string)$user, $role));
-        } else {
-            $this->promoteUser($user, $role);
-            $this->getEntityManager()->flush();
+        $error = false;
 
-            $output->writeln(sprintf('Role <comment>%s</comment> has been added to user <comment>%s</comment>', $role, (string)$user));
+        foreach ($roles as $code) {
+            $role = $this->findAuthorizationRole($code);
+
+            if ($user->hasAuthorizationRole($role)) {
+                $output->writeln(sprintf('<error>User "%s" did already have "%s" RBAC role.</error>', (string)$user, $role));
+                $error = true;
+            } else {
+                $user->addAuthorizationRole($role);
+
+                $output->writeln(sprintf('RBAC role <comment>%s</comment> has been added to user <comment>%s</comment>', $role, (string)$user));
+            }
         }
-    }
 
-    /**
-     * @param UserInterface $user
-     * @param string $role
-     */
-    protected function promoteUser(UserInterface $user, $role)
-    {
-        $user->addRole($role);
+        foreach ($securityRoles as $securityRole) {
+            if ($user->hasRole($securityRole)) {
+                $output->writeln(sprintf('<error>User "%s" did already have "%s" security role.</error>', (string)$user, $securityRole));
+                $error = true;
+            } else {
+                $user->addRole($securityRole);
+
+                $output->writeln(sprintf('Scurity role <comment>%s</comment> has been added to user <comment>%s</comment>', $securityRole, (string)$user));
+            }
+        }
+
+        if (!$error) {
+            $this->getEntityManager()->flush();
+        }
     }
 }

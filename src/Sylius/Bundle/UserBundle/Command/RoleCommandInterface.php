@@ -22,7 +22,8 @@ interface RoleCommandInterface
     /**
      * @param OutputInterface $output
      * @param UserInterface $user
-     * @param string $role
+     * @param array $roles
+     * @param array $securityRoles
      */
-    public function executeRoleCommand(OutputInterface $output, UserInterface $user, $role);
+    public function executeRoleCommand(OutputInterface $output, UserInterface $user, array $roles, array $securityRoles);
 }

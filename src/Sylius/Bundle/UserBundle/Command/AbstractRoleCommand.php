@@ -13,6 +13,7 @@ namespace Sylius\Bundle\UserBundle\Command;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Rbac\Model\RoleInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -44,19 +45,15 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand implements Role
             $input->setArgument('email', $email);
         }
 
-        if (!$input->getArgument('role')) {
-            $role = $this->getHelper('dialog')->askAndValidate(
+        if (!$input->getArgument('roles')) {
+            $roles = $this->getHelper('dialog')->ask(
                 $output,
-                'Please choose a role:',
-                function($role) {
-                    if (empty($role)) {
-                        throw new \Exception('Role can not be empty');
-                    }
-                    return $role;
-                }
+                'Please enter user\'s roles (separated by space):'
             );
 
-            $input->setArgument('role', $role);
+            if (!empty($roles)) {
+                $input->setArgument('roles', explode(' ', $roles));
+            }
         }
     }
 
@@ -66,12 +63,19 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand implements Role
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $email = $input->getArgument('email');
-        $role = $input->getArgument('role');
+        $roles = $input->getArgument('roles');
+        $superAdmin = $input->getOption('super-admin');
+
+        $securityRoles = array();
+
+        if ($superAdmin) {
+            $securityRoles[] = 'ROLE_ADMINISTRATION_ACCESS';
+        }
 
         /** @var UserInterface $user */
         $user = $this->findUserByEmail($email);
 
-        $this->executeRoleCommand($output, $user, $role);
+        $this->executeRoleCommand($output, $user, $roles, $securityRoles);
     }
 
     /**
@@ -91,6 +95,24 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand implements Role
         return $user;
     }
 
+    /**
+     * @param string $role
+     * @return RoleInterface
+     */
+    public function findAuthorizationRole($role)
+    {
+        $roleRepository = $this->getContainer()->get('sylius.repository.role');
+        /** @var RoleInterface $role */
+        $authorizationRole = $roleRepository->findOneBy(array('code' => $role));
+
+        if (null === $authorizationRole) {
+            throw new \InvalidArgumentException(
+                sprintf('No role with code `%s` does not exist.', $role)
+            );
+        }
+
+        return $authorizationRole;
+    }
 
     /**
      * @return ObjectManager
