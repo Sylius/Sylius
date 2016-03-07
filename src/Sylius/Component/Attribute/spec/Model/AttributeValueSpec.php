@@ -22,6 +22,12 @@ use Sylius\Component\Attribute\Model\AttributeValueInterface;
  */
 class AttributeValueSpec extends ObjectBehavior
 {
+    public function let()
+    {
+        $this->setCurrentLocale('en_US');
+        $this->setFallbackLocale('en_US');
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Attribute\Model\AttributeValue');
@@ -78,8 +84,8 @@ class AttributeValueSpec extends ObjectBehavior
         $attribute->getStorageType()->willReturn('text');
         $this->setAttribute($attribute);
 
-        $this->setValue('XXL');
-        $this->getValue()->shouldReturn('XXL');
+        $this->translate()->setValue('XXL');
+        $this->translate()->getValue()->shouldReturn('XXL');
     }
 
     function it_throws_exception_when_trying_to_get_code_without_attribute_defined()

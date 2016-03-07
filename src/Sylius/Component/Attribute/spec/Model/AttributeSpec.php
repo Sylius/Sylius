@@ -115,4 +115,17 @@ class AttributeSpec extends ObjectBehavior
         $this->setUpdatedAt($date);
         $this->getUpdatedAt()->shouldReturn($date);
     }
+
+    function its_value_is_translatable()
+    {
+        $this->setStorageType('text');
+        $this->isValueTranslatable()->shouldReturn(true);
+    }
+
+    function its_value_is_not_translatable()
+    {
+        $this->setStorageType('date');
+        $this->isValueTranslatable()->shouldReturn(false);
+    }
+
 }

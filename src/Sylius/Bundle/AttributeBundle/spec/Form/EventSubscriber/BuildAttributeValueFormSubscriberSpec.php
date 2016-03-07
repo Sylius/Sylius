@@ -68,6 +68,7 @@ class BuildAttributeValueFormSubscriberSpec extends ObjectBehavior
         $attributeValue->getValue()->willReturn(true);
         $attribute->getType()->willReturn(CheckboxAttributeType::TYPE);
         $attribute->getName()->willReturn('Is promoted?');
+        $attribute->isValueTranslatable()->willReturn(false);
 
         $form->add('value', 'sylius_attribute_type_checkbox', Argument::type('array'))->shouldBeCalled();
 
@@ -104,6 +105,7 @@ class BuildAttributeValueFormSubscriberSpec extends ObjectBehavior
         $attribute->getName()->willReturn('Release Date');
         $attribute->getType()->willReturn(DateAttributeType::TYPE);
         $attribute->getStorageType()->willReturn(AttributeValueInterface::STORAGE_DATE);
+        $attribute->isValueTranslatable()->willReturn(false);
 
         $form->add('value', 'sylius_attribute_type_date', Argument::type('array'))->shouldBeCalled();
 
