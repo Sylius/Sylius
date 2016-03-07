@@ -39,7 +39,7 @@ class OrderController extends ResourceController
             throw new NotFoundHttpException('Requested customer does not exist.');
         }
 
-        $paginator = $this->repository->createByCustomerPaginator($customer, $configuration->getSorting());
+        $paginator = $this->repository->createPaginatorByCustomer($customer, $configuration->getSorting());
 
         $paginator->setCurrentPage($request->get('page', 1), true, true);
         $paginator->setMaxPerPage($configuration->getPaginationMaxPerPage());
