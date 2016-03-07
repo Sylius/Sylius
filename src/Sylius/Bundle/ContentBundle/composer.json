@@ -43,6 +43,7 @@
         "psr-4": { "Sylius\\Bundle\\ContentBundle\\": "" }
     },
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "extra": {
         "branch-alias": {
             "dev-master": "0.18-dev"

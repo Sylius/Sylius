@@ -66,6 +66,7 @@
         "psr-4": { "Sylius\\Component\\Core\\spec\\": "spec/" }
     },
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "extra": {
         "branch-alias": {
             "dev-master": "0.18-dev"

@@ -49,6 +49,7 @@
         "psr-4": { "Sylius\\Component\\Report\\spec\\": "spec/" }
     },
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "extra": {
         "branch-alias": {
             "dev-master": "0.18-dev"

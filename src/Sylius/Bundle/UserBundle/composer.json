@@ -54,6 +54,7 @@
         "psr-4": { "Sylius\\Bundle\\UserBundle\\spec\\": "spec/" }
     },
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "extra": {
         "branch-alias": {
             "dev-master": "0.18-dev"

@@ -21,7 +21,7 @@
     ],
     "require": {
         "php": "^5.5.9|^7.0",
- 
+
         "sylius/archetype": "0.18.*",
         "sylius/attribute": "0.18.*",
         "sylius/association": "0.18.*",
@@ -45,6 +45,7 @@
         "psr-4": { "Sylius\\Component\\Product\\spec\\": "spec/" }
     },
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "extra": {
         "branch-alias": {
             "dev-master": "0.18-dev"
