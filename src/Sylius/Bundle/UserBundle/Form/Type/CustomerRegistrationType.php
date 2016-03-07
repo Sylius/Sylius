@@ -32,6 +32,9 @@ class CustomerRegistrationType extends CustomerSimpleRegistrationType
             ->add('lastName', 'text', [
                 'label' => 'sylius.form.customer.last_name',
             ])
+            ->add('phoneNumber', 'text', [
+                'label' => 'sylius.form.customer.phone_number',
+            ])
         ;
     }
 
