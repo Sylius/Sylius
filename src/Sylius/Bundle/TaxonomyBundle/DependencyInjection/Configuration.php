@@ -13,8 +13,8 @@ namespace Sylius\Bundle\TaxonomyBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonTranslationType;
+use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType;
 use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\Taxonomy\Model\Taxon;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;

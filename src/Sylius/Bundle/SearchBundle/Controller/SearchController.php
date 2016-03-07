@@ -96,7 +96,7 @@ class SearchController extends ResourceController
                 'code' => $this->container->getParameter('sylius_search.pre_search_filter.taxon'),
             ]);
 
-            $filters = array();
+            $filters = [];
             if ($rootTaxon) {
                 /** @var TaxonInterface $rootTaxon */
                 foreach ($rootTaxon->getChildren() as $taxon) {

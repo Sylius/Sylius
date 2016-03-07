@@ -24,9 +24,9 @@ Feature: Tax included in price
         And the following products exist:
             | name    | price | taxons       | tax category  |
             | PHP Top | 85    | PHP T-Shirts | Taxable Goods |
-          And all products are assigned to the default channel
-          And the default channel has following configuration:
-            | taxon |
+        And all products are assigned to the default channel
+        And the default channel has following configuration:
+            | taxon    |
             | Category |
         And the default tax zone is "Germany"
 

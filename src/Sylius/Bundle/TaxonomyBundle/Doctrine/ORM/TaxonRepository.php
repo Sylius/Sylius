@@ -21,9 +21,7 @@ use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 class TaxonRepository extends TranslatableResourceRepository implements TaxonRepositoryInterface
 {
     /**
-     * @param TaxonInterface $taxon
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function findChildren(TaxonInterface $taxon)
     {
@@ -39,10 +37,7 @@ class TaxonRepository extends TranslatableResourceRepository implements TaxonRep
     }
 
     /**
-     * @param string $permalink
-     * @return TaxonInterface
-     *
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * {@inheritdoc}
      */
     public function findOneByPermalink($permalink)
     {
@@ -55,7 +50,7 @@ class TaxonRepository extends TranslatableResourceRepository implements TaxonRep
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     public function findRootNodes()
     {

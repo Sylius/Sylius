@@ -6,11 +6,10 @@ Feature: Search products
 
     Background:
         Given store has default configuration
-          And there are following taxons defined:
+        And there are following taxons defined:
             | code | name     |
             | RTX1 | Category |
-
-          And taxon "Category" has following children:
+        And taxon "Category" has following children:
             | Clothing[TX1] > T-Shirts[TX2]     |
             | Clothing[TX1] > PHP T-Shirts[TX3] |
             | Clothing[TX1] > Gloves[TX4]       |
@@ -21,9 +20,9 @@ Feature: Search products
             | Sylius Tee       | 12.99 | PHP T-Shirts | a very nice php t-shirt |
             | Symfony T-Shirt  | 15.00 | PHP T-Shirts | symfony t-shirt         |
             | Doctrine T-Shirt | 15.00 | PHP T-Shirts | doctrine t-shirt        |
-          And all products are assigned to the default channel
-          And the default channel has following configuration:
-            | taxon |
+        And all products are assigned to the default channel
+        And the default channel has following configuration:
+            | taxon    |
             | Category |
         And I populate the index
 

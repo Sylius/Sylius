@@ -26,7 +26,7 @@ Feature: Cart
         And all products are available in all variations
         And all products are assigned to the default channel
         And the default channel has following configuration:
-            | taxon |
+            | taxon    |
             | Category |
 
     Scenario: Seeing empty cart

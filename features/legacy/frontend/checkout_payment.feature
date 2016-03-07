@@ -6,10 +6,10 @@ Feature: Checkout Payment
 
     Background:
         Given store has default configuration
-          And there are following taxons defined:
+        And there are following taxons defined:
             | code | name     |
             | RTX1 | Category |
-          And taxon "Category" has following children:
+        And taxon "Category" has following children:
             | Clothing[TX1] > PHP T-Shirts[TX2] |
         And the following products exist:
             | name    | price | taxons       |
@@ -21,14 +21,14 @@ Feature: Checkout Payment
             | code | zone | name        |
             | SM1  | UK   | DHL Express |
         And the following payment methods exist:
-          | code | name            | gateway    | enabled |
-          | PM1  | Credit Card     | stripe     | yes     |
-          | PM2  | PayPal          | paypal     | yes     |
-          | PM3  | PayPal PRO      | paypal_pro | no      |
+            | code | name        | gateway    | enabled |
+            | PM1  | Credit Card | stripe     | yes     |
+            | PM2  | PayPal      | paypal     | yes     |
+            | PM3  | PayPal PRO  | paypal_pro | no      |
         And all products are assigned to the default channel
         And the default channel has following configuration:
-          | taxon    | payment                           | shipping    |
-          | Category | PayPal, PayPal PRO, Credit Card   | DHL Express |
+            | taxon    | payment                         | shipping    |
+            | Category | PayPal, PayPal PRO, Credit Card | DHL Express |
         And I am logged in user
         And I added product "PHP Top" to cart
         And I go to the checkout start page

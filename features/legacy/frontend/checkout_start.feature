@@ -6,10 +6,10 @@ Feature: Checkout starting
 
     Background:
         Given store has default configuration
-          And there are following taxons defined:
+        And there are following taxons defined:
             | code | name     |
             | RTX1 | Category |
-          And taxon "Category" has following children:
+        And taxon "Category" has following children:
             | Clothing[TX1] > T-Shirts[TX2]     |
             | Clothing[TX1] > PHP T-Shirts[TX3] |
         And there are following options:

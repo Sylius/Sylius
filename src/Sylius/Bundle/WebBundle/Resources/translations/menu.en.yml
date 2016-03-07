@@ -52,7 +52,7 @@ sylius:
                 tax_categories: Taxation categories
                 tax_rates: Tax rates
                 taxation_settings: Taxation settings
-                taxons: Taxons
+                taxons: Categorization
                 zones: Zones
             sidebar:
                 api_clients: API clients
@@ -106,7 +106,7 @@ sylius:
                 tax_categories: Taxation categories
                 tax_rates: Tax rates
                 taxation_settings: Taxation settings
-                taxons: Taxons
+                taxons: Categorization
                 zones: Zones
     frontend:
         menu:

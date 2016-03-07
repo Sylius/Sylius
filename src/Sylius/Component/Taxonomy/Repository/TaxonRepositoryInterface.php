@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Sylius\Component\Taxonomy\Repository;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -26,4 +27,13 @@ interface TaxonRepositoryInterface extends RepositoryInterface
      * @return array
      */
     public function findRootNodes();
+
+    /**
+     * @param string $permalink
+     *
+     * @return TaxonInterface
+     *
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function findOneByPermalink($permalink);
 }

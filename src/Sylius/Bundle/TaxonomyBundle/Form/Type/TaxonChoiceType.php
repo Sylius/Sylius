@@ -60,22 +60,21 @@ class TaxonChoiceType extends AbstractType
     {
         /** @var ChoiceView $choice */
         foreach ($view->vars['choices'] as $choice) {
-            $choice->label = str_repeat('— ' , $choice->data->getLevel()).$choice->label;
+            $choice->label = str_repeat('— ', $choice->data->getLevel()).$choice->label;
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function buildTreeChoices($choices , $level = 0)
+    protected function buildTreeChoices($choices, $level = 0)
     {
-        $result = array();
+        $result = [];
 
         /** @var TaxonInterface $choice */
         foreach ($choices as $choice) {
-
             $result[] = new ChoiceView(
-                str_repeat('-' , $level).' '.$choice->getName(),
+                str_repeat('-', $level).' '.$choice->getName(),
                 $choice->getId(),
                 $choice,
                 []
@@ -87,7 +86,6 @@ class TaxonChoiceType extends AbstractType
                     $this->buildTreeChoices($choice->getChildren(), $level + 1)
                 );
             }
-
         }
 
         return $result;
@@ -108,7 +106,7 @@ class TaxonChoiceType extends AbstractType
     {
         $repository = $this->taxonRepository;
         $choiceList = function (Options $options) use ($repository) {
-            /** @var TaxonRepositoryInterface $repository */
+            /* @var TaxonRepositoryInterface $repository */
             if (null !== $options['root']) {
                 $taxons = $repository->findChildren($options['root']);
             } else {

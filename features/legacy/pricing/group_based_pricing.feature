@@ -6,10 +6,10 @@ Feature: Group based pricing
 
     Background:
         Given store has default configuration
-          And there are following taxons defined:
+        And there are following taxons defined:
             | code | name     |
             | RTX1 | Category |
-          And taxon "Category" has following children:
+        And taxon "Category" has following children:
             | Clothing[TX1] > PHP T-Shirts[TX2] |
         And the following zones are defined:
             | name | type    | members        |
@@ -37,9 +37,9 @@ Feature: Group based pricing
             | group               | price |
             | Wholesale Customers | 39.49 |
             | Retail Customers    | 45.99 |
-          And all products are assigned to the default channel
-          And the default channel has following configuration:
-            | taxon |
+        And all products are assigned to the default channel
+        And the default channel has following configuration:
+            | taxon    |
             | Category |
 
     Scenario: Default price is used when user is not logged in

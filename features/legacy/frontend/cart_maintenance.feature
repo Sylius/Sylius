@@ -19,7 +19,7 @@ Feature: Cart
             | PHP Top | 85    | PHP T-Shirts |
         And all products are assigned to the default channel
         And the default channel has following configuration:
-            | taxon |
+            | taxon    |
             | Category |
 
     Scenario: The cart is maintained after user log in

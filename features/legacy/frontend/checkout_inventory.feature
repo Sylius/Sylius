@@ -6,10 +6,10 @@ Feature: Checkout inventory
 
     Background:
         Given store has default configuration
-          And there are following taxons defined:
+        And there are following taxons defined:
             | code | name     |
             | RTX1 | Category |
-          And taxon "Category" has following children:
+        And taxon "Category" has following children:
             | Clothing[TX1] > PHP T-Shirts[TX2] |
         And the following products exist:
             | name          | price | taxons       | quantity |
@@ -23,12 +23,12 @@ Feature: Checkout inventory
             | SM1  | UK   | DHL Express |
         And the following payment methods exist:
             | code | name        | gateway | enabled |
-            | PM1  | Credit Card | offline   | yes     |
-          And all products are assigned to the default channel
-          And the default channel has following configuration:
-            | taxon | payment       | shipping    |
-            | Category | Credit Card   | DHL Express |
-          And I am logged in as administrator
+            | PM1  | Credit Card | offline | yes     |
+        And all products are assigned to the default channel
+        And the default channel has following configuration:
+            | taxon    | payment     | shipping    |
+            | Category | Credit Card | DHL Express |
+        And I am logged in as administrator
 
     Scenario: Inventory is updated after buying products
         Given I added product "PHP Top" to cart, with quantity "4"

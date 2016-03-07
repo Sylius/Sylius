@@ -38,6 +38,11 @@ class Taxon implements TaxonInterface
     /**
      * @var TaxonInterface
      */
+    protected $root;
+
+    /**
+     * @var TaxonInterface
+     */
     protected $parent;
 
     /**
@@ -105,6 +110,14 @@ class Taxon implements TaxonInterface
     public function isRoot()
     {
         return null === $this->parent;
+    }
+
+    /**
+     * @return TaxonInterface
+     */
+    public function getRoot()
+    {
+        return $this->root;
     }
 
     /**

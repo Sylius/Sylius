@@ -22,6 +22,10 @@
             <generator strategy="AUTO" />
         </id>
 
+        <many-to-one field="root" target-entity="Sylius\Component\Taxonomy\Model\TaxonInterface">
+            <join-column name="tree_root" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
+            <gedmo:tree-root />
+        </many-to-one>
         <many-to-one field="parent" target-entity="Sylius\Component\Taxonomy\Model\TaxonInterface" inversed-by="children">
             <join-column name="parent_id" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
             <gedmo:tree-parent />

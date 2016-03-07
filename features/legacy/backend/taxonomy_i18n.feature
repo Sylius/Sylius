@@ -10,10 +10,10 @@ Feature: Taxons internationalization
             | code  |
             | en_US |
             | es_ES |
-          And there are following taxons defined:
+        And there are following taxons defined:
             | code | name     |
             | RTX1 | Category |
-          And taxon "Category" has following children:
+        And taxon "Category" has following children:
             | Clothing[TX1] > Shirts[TX2] > Long Sleeve[TX3] |
         And the following taxon translations exist:
             | taxon       | name        | locale |
