@@ -29,7 +29,6 @@
     "require-dev": {
         "phpspec/phpspec": "^2.4",
         "phpunit/phpunit": "~3.7",
-        "sylius/fixtures-bundle": "0.18.*",
         "symfony/form": "^2.7",
         "twig/twig": "^1.0"
     },

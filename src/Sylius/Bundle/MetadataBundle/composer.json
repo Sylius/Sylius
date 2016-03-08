@@ -22,7 +22,7 @@
     "require": {
         "php": "^5.5.9|^7.0",
 
-        "sylius/metadata": "0.18.*@dev"
+        "sylius/metadata": "0.18.*"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.4"
@@ -33,6 +33,8 @@
     "autoload-dev": {
         "psr-4": { "Sylius\\Bundle\\MetadataBundle\\spec\\": "spec/" }
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "extra": {
         "branch-alias": {
             "dev-master": "0.18-dev"
