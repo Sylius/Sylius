@@ -31,7 +31,7 @@ class LoadProductOptionData extends DataFixture
     {
         // T-Shirt size option.
         $option = $this->createOption(
-            'O1',
+            't_shirt_size',
             'T-Shirt size',
             [$this->defaultLocale => 'T-Shirt Size', 'es_ES' => 'Talla'],
             [
@@ -46,7 +46,7 @@ class LoadProductOptionData extends DataFixture
 
         // T-Shirt color option.
         $option = $this->createOption(
-            'O2',
+            't_shirt_color',
             'T-Shirt color',
             [$this->defaultLocale => 'T-Shirt Color'],
             [
@@ -59,7 +59,7 @@ class LoadProductOptionData extends DataFixture
 
         // Sticker size option.
         $option = $this->createOption(
-            'O3',
+            'sticker_size',
             'Sticker size',
             [$this->defaultLocale => 'Sticker Size', 'es_ES' => 'Talla'],
             [
@@ -72,7 +72,7 @@ class LoadProductOptionData extends DataFixture
 
         // Mug type option.
         $option = $this->createOption(
-            'O4',
+            'mug_type',
             'Mug type',
             [$this->defaultLocale => 'Mug Type', 'es_ES' => 'Tipo'],
             [
@@ -127,7 +127,7 @@ class LoadProductOptionData extends DataFixture
             $option->addValue($optionValue);
         }
 
-        $this->setReference('Sylius.Option.'.$name, $option);
+        $this->setReference('Sylius.Option.'.$optionCode, $option);
 
         return $option;
     }

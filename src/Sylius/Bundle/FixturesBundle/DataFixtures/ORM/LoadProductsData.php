@@ -111,8 +111,8 @@ class LoadProductsData extends DataFixture
         $randomMaterial = $this->faker->randomElement(['Polyester', 'Wool', 'Polyester 10% / Wool 90%', 'Potato 100%']);
         $this->addAttribute($product, 'T-Shirt material', $randomMaterial);
 
-        $product->addOption($this->getReference('Sylius.Option.T-Shirt size'));
-        $product->addOption($this->getReference('Sylius.Option.T-Shirt color'));
+        $product->addOption($this->getReference('Sylius.Option.t_shirt_size'));
+        $product->addOption($this->getReference('Sylius.Option.t_shirt_color'));
 
         $this->generateVariants($product);
 
@@ -154,7 +154,7 @@ class LoadProductsData extends DataFixture
         $randomPaper = sprintf('Paper from tree %s', $this->faker->randomElement(['Wung', 'Yang', 'Lemon-San', 'Me-Gusta']));
         $this->addAttribute($product, 'Sticker paper', $randomPaper);
 
-        $product->addOption($this->getReference('Sylius.Option.Sticker size'));
+        $product->addOption($this->getReference('Sylius.Option.sticker_size'));
 
         $this->generateVariants($product);
 
@@ -189,7 +189,7 @@ class LoadProductsData extends DataFixture
         $randomMugMaterial = $this->faker->randomElement(['Invisible porcelain', 'Banana skin', 'Porcelain', 'Sand']);
         $this->addAttribute($product, 'Mug material', $randomMugMaterial);
 
-        $product->addOption($this->getReference('Sylius.Option.Mug type'));
+        $product->addOption($this->getReference('Sylius.Option.mug_type'));
 
         $this->generateVariants($product);
 
