@@ -7,15 +7,17 @@ install_package() {
     EXIT_CODE=0
 
     COMPOSER_ADDITIONAL=""
-    if [ "$(echo "$1" | grep ResourceBundle | wc -l)" -eq "1" ]; then
+    if [ "$(echo "$1" | grep -c ResourceBundle)" -eq "1" ]; then
         COMPOSER_ADDITIONAL="--ignore-platform-reqs"
     fi
 
     cd "$1"
 
     if is_cache_fresh "${UNIQUE_KEY}"; then
+        echo "Restoring lock from cache"
         restore_composer_lock_from_cache "${UNIQUE_KEY}"
     else
+        echo "Rebuilding cache"
         rebuild_cache ${COMPOSER_ADDITIONAL} || EXIT_CODE=$?
         store_composer_lock_in_cache "${UNIQUE_KEY}"
     fi
@@ -38,7 +40,7 @@ restore_composer_lock_from_cache() {
 
 # Argument 1: Cache unique key
 is_cache_fresh() {
-    if [ -f "${SYLIUS_CACHE_DIR}/composer-$1.lock" ] && [ -f "${SYLIUS_CACHE_DIR}/composer-$1.json.md5sum" ] && [ file_md5sum "composer.lock" -eq $(cat "${SYLIUS_CACHE_DIR}/composer-$1.json.md5sum") ]; then
+    if [[ -f "${SYLIUS_CACHE_DIR}/composer-$1.lock" && -f "${SYLIUS_CACHE_DIR}/composer-$1.json.md5sum" && $(file_md5sum "composer.lock") -eq $(cat "${SYLIUS_CACHE_DIR}/composer-$1.json.md5sum") ]]; then
         return 0
     else
         return 1
