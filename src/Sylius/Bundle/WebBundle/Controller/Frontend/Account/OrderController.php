@@ -226,7 +226,12 @@ class OrderController extends FOSRestController
     protected function checkAccessToOrder(OrderInterface $order)
     {
         $customerGuestId = $this->get('session')->get('sylius_customer_guest_id');
-        $customerGuest = $this->get('sylius.repository.customer')->find($customerGuestId);
+        $customerGuest = null;
+
+        if (null !== $customerGuestId) {
+            $customerGuest = $this->get('sylius.repository.customer')->find($customerGuestId);
+        }
+
         $loggedInCustomer = $this->getCustomer();
         $expectedCustomer = $order->getCustomer();
 

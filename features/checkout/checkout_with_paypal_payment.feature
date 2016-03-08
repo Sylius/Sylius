@@ -54,7 +54,7 @@ Feature: Checkout with PayPal Express Checkout
         Then I should be redirected back to the order payment page
         And I should see two cancelled payments and new one ready to be paid
 
-    @ui @mink:firefox
+    @ui @mink:chrome
     Scenario: Being redirected to the PayPal Express Checkout page
         Given I am logged in as "john@example.com"
         And I added product "PHP T-Shirt" to the cart

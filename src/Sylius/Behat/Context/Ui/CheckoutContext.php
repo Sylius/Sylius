@@ -77,7 +77,7 @@ final class CheckoutContext implements Context
     private $orderRepository;
 
     /**
-     * @var PaypalApiMockerInterface
+     * @var PaypalApiMocker
      */
     private $paypalApiMocker;
 
