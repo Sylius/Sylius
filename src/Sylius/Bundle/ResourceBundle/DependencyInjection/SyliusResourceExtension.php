@@ -24,7 +24,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class SyliusResourceExtension extends Extension implements PrependExtensionInterface
+class SyliusResourceExtension extends Extension
 {
     /**
      * {@inheritdoc}
@@ -80,20 +80,9 @@ class SyliusResourceExtension extends Extension implements PrependExtensionInter
         }
 
         $container->setParameter('sylius.resource.settings', $config['settings']);
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function prepend(ContainerBuilder $container)
-    {
-        $container->setAlias('sylius.resource_controller.authorization_checker', 'sylius.resource_controller.authorization_checker.disabled');
-
-        if ($container->hasExtension('sylius_rbac')) {
-            $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-            $loader->load('rbac.xml');
-
-            $container->setAlias('sylius.resource_controller.authorization_checker', 'sylius.resource_controller.authorization_checker.rbac');
+        if (!$container->has('sylius.resource_controller.authorization_checker')) {
+            $container->setAlias('sylius.resource_controller.authorization_checker', 'sylius.resource_controller.authorization_checker.disabled');
         }
     }
 }

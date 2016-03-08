@@ -17,11 +17,11 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.resource_controller.authorization_checker.rbac.class">Sylius\Bundle\ResourceBundle\Controller\RbacAuthorizationChecker</parameter>
+        <parameter key="sylius.resource_controller.authorization_checker.rbac.class">Sylius\Bundle\RbacBundle\Authorization\RbacAuthorizationChecker</parameter>
     </parameters>
 
     <services>
-        <service id="sylius.resource_controller.authorization_checker.rbac" class="%sylius.resource_controller.authorization_checker.rbac.class%">
+        <service id="sylius.resource_controller.authorization_checker.rbac" class="%sylius.resource_controller.authorization_checker.rbac.class%" public="false">
             <argument type="service" id="sylius.authorization_checker" />
         </service>
     </services>

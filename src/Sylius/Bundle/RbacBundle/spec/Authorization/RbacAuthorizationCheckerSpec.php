@@ -9,31 +9,31 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ResourceBundle\Controller;
+namespace spec\Sylius\Bundle\RbacBundle\Authorization;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
+use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface as ResourceBundleAuthorizationCheckerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
-use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface as RbacAuthorizationCheckerInterface;
+use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class RbacAuthorizationCheckerSpec extends ObjectBehavior
 {
-    function let(RbacAuthorizationCheckerInterface $rbacAuthorizationChecker)
+    function let(AuthorizationCheckerInterface $rbacAuthorizationChecker)
     {
         $this->beConstructedWith($rbacAuthorizationChecker);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\RbacAuthorizationChecker');
+        $this->shouldHaveType('Sylius\Bundle\RbacBundle\Authorization\RbacAuthorizationChecker');
     }
 
     function it_implements_resource_controller_authorization_checker_interface()
     {
-        $this->shouldImplement(AuthorizationCheckerInterface::class);
+        $this->shouldImplement(ResourceBundleAuthorizationCheckerInterface::class);
     }
 
     function it_grants_access_if_permission_is_not_required(RequestConfiguration $requestConfiguration)
@@ -44,7 +44,7 @@ class RbacAuthorizationCheckerSpec extends ObjectBehavior
 
     function it_uses_rbac_authorization_checker(
         RequestConfiguration $requestConfiguration,
-        RbacAuthorizationCheckerInterface $rbacAuthorizationChecker
+        AuthorizationCheckerInterface $rbacAuthorizationChecker
     ) {
         $requestConfiguration->hasPermission()->willReturn(true);
         $requestConfiguration->getPermission('sylius.product.foo')->willReturn('sylius.product.foo');
