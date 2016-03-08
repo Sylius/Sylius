@@ -214,9 +214,9 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     /**
      * @Given /^I am on the shipment page with method "([^""]*)"$/
      */
-    public function iAmOnTheShipmentPage($value)
+    public function iAmOnTheShipmentPage($name)
     {
-        $shippingMethod = $this->findOneBy('shipping_method', ['name' => $value]);
+        $shippingMethod = $this->findOneByName('shipping_method', $name);
         $shipment = $this->findOneBy('shipment', ['method' => $shippingMethod]);
 
         $this->getSession()->visit($this->generatePageUrl('backend_shipment_show', ['id' => $shipment->getId()]));
@@ -225,9 +225,9 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     /**
      * @Then /^I should be on the shipment page with method "([^"]*)"$/
      */
-    public function iShouldBeOnTheShipmentPageWithMethod($value)
+    public function iShouldBeOnTheShipmentPageWithMethod($name)
     {
-        $shippingMethod = $this->findOneBy('shipping_method', ['name' => $value]);
+        $shippingMethod = $this->findOneByName('shipping_method', $name);
         $shipment = $this->findOneBy('shipment', ['method' => $shippingMethod]);
 
         $this->assertSession()->addressEquals($this->generatePageUrl('backend_shipment_show', ['id' => $shipment->getId()]));
@@ -451,7 +451,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iAmOnTheProductPage($name)
     {
-        $product = $this->findOneBy('product', ['name' => $name]);
+        $product = $this->findOneByName('product', $name);
 
         $this->getSession()->visit($this->generatePageUrl($product));
     }
@@ -462,7 +462,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iShouldBeOnTheProductPage($name)
     {
-        $product = $this->findOneBy('product', ['name' => $name]);
+        $product = $this->findOneByName('product', $name);
 
         $this->assertSession()->addressEquals($this->generateUrl($product));
     }

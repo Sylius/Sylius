@@ -50,7 +50,7 @@ class SyliusSearchExtension extends AbstractResourceExtension
         $container->setParameter('sylius_search.request.method', $config['request_method']);
         $container->setParameter('sylius_search.search.template', $config['search_form_template']);
         $container->setParameter('sylius_search.pre_search_filter.enabled', $config['filters']['pre_search_filter']['enabled']);
-        $container->setParameter('sylius_search.pre_search_filter.taxon', $config['filters']['pre_search_filter']['taxonomy']);
+        $container->setParameter('sylius_search.pre_search_filter.taxon', $config['filters']['pre_search_filter']['taxon']);
 
         $container->setParameter('sylius_search.custom.accessor.class', $config['custom_accessor']);
     }

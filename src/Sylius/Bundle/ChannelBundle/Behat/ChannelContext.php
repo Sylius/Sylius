@@ -53,7 +53,7 @@ class ChannelContext extends DefaultContext
 
         foreach ($table->getHash() as $product) {
             /** @var ProductInterface $product */
-            $product = $this->getRepository('product')->findOneBy(['name' => $product]);
+            $product = $this->getRepository('product')->findOneByName($product['product']);
 
             $product->addChannel($channel);
         }
@@ -128,7 +128,7 @@ class ChannelContext extends DefaultContext
                 isset($data['currencies']) ? $data['currencies'] : null,
                 isset($data['shipping']) ? $data['shipping'] : null,
                 isset($data['payment']) ? $data['payment'] : null,
-                isset($data['taxonomy']) ? $data['taxonomy'] : null
+                isset($data['taxon']) ? $data['taxon'] : null
             );
         }
 
@@ -165,20 +165,20 @@ class ChannelContext extends DefaultContext
         return $channel;
     }
 
-    private function configureChannel(ChannelInterface $channel, $localeCodes = null, $currencyCodes = null, $shippingMethodNames = null, $paymentMethodNames = null, $taxonomyNames = null)
+    private function configureChannel(ChannelInterface $channel, $localeCodes = null, $currencyCodes = null, $shippingMethodNames = null, $paymentMethodNames = null, $taxonNames = null)
     {
         if ($shippingMethodNames) {
             $shippingMethodNames = array_map('trim', explode(',', $shippingMethodNames));
             foreach ($shippingMethodNames as $shippingMethodName) {
-                $shippingMethod = $shippingMethods = $this->getRepository('shipping_method')->findOneBy(['name' => $shippingMethodName]);
+                $shippingMethod = $shippingMethods = $this->getRepository('shipping_method')->findOneByName($shippingMethodName);
                 $channel->addShippingMethod($shippingMethod);
             }
         }
 
         if ($paymentMethodNames) {
             $paymentMethodNames = array_map('trim', explode(',', $paymentMethodNames));
-            $paymentMethods = $this->getRepository('payment_method')->findBy(['name' => $paymentMethodNames]);
-            foreach ($paymentMethods as $paymentMethod) {
+            foreach ($paymentMethodNames as $paymentMethodName) {
+                $paymentMethod = $this->getRepository('payment_method')->findOneByName($paymentMethodName);
                 $channel->addPaymentMethod($paymentMethod);
             }
         }
@@ -199,12 +199,11 @@ class ChannelContext extends DefaultContext
             }
         }
 
-        if ($taxonomyNames) {
-            $taxonomyNames = array_map('trim', explode(',', $taxonomyNames));
-
-            foreach ($taxonomyNames as $taxonomyName) {
-                $taxonomy = $this->getRepository('taxonomy')->findOneBy(['name' => $taxonomyName]);
-                $channel->addTaxonomy($taxonomy);
+        if ($taxonNames) {
+            $taxonNames = array_map('trim', explode(',', $taxonNames));
+            foreach ($taxonNames as $taxonName) {
+                $taxon = $this->getRepository('taxon')->findOneByName($taxonName);
+                $channel->addTaxon($taxon);
             }
         }
     }

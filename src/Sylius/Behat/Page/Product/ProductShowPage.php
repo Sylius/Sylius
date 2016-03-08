@@ -11,17 +11,16 @@
 
 namespace Sylius\Behat\Page\Product;
 
-use SensioLabs\Behat\PageObjectExtension\PageObject\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Component\Core\Model\ProductInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class ProductShowPage extends SymfonyPage
+class ProductShowPage extends SymfonyPage implements ProductShowPageInterface
 {
     /**
-     * @throws ElementNotFoundException
+     * {@inheritdoc}
      */
     public function addToCart()
     {
@@ -29,7 +28,7 @@ class ProductShowPage extends SymfonyPage
     }
 
     /**
-     * @param string $quantity
+     * {@inheritdoc}
      */
     public function addToCartWithQuantity($quantity)
     {
@@ -38,7 +37,7 @@ class ProductShowPage extends SymfonyPage
     }
 
     /**
-     * @param string $variant
+     * {@inheritdoc}
      */
     public function addToCartWithVariant($variant)
     {

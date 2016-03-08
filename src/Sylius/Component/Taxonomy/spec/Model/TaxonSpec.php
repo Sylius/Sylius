@@ -13,7 +13,6 @@ namespace spec\Sylius\Component\Taxonomy\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
-use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -46,30 +45,6 @@ class TaxonSpec extends ObjectBehavior
     {
         $this->setCode('TX2');
         $this->getCode()->shouldReturn('TX2');
-    }
-
-    function it_does_not_belong_to_taxonomy_by_default()
-    {
-        $this->getTaxonomy()->shouldReturn(null);
-    }
-
-    function it_allows_assigning_itself_to_taxonomy(TaxonomyInterface $taxonomy, TaxonInterface $root)
-    {
-        $taxonomy->getRoot()->willReturn($root);
-
-        $this->setTaxonomy($taxonomy);
-        $this->getTaxonomy()->shouldReturn($taxonomy);
-    }
-
-    function it_allows_detaching_itself_from_taxonomy(TaxonomyInterface $taxonomy, TaxonInterface $root)
-    {
-        $taxonomy->getRoot()->willReturn($root);
-
-        $this->setTaxonomy($taxonomy);
-        $this->getTaxonomy()->shouldReturn($taxonomy);
-
-        $this->setTaxonomy(null);
-        $this->getTaxonomy()->shouldReturn(null);
     }
 
     function it_has_no_parent_by_default()
@@ -165,26 +140,19 @@ class TaxonSpec extends ObjectBehavior
         $this->hasChild($taxon)->shouldReturn(false);
     }
 
-    function it_allows_to_add_child_taxons(TaxonomyInterface $taxonomy, TaxonInterface $taxon)
+    function it_allows_to_add_child_taxons(TaxonInterface $taxon)
     {
-        $this->setTaxonomy($taxonomy);
-
-        $taxon->setTaxonomy($taxonomy)->shouldBeCalled();
         $taxon->setParent($this)->shouldBeCalled();
 
         $this->addChild($taxon);
     }
 
-    function it_allows_to_remove_child_taxons(TaxonomyInterface $taxonomy, TaxonInterface $taxon)
+    function it_allows_to_remove_child_taxons(TaxonInterface $taxon)
     {
-        $this->setTaxonomy($taxonomy);
-
-        $taxon->setTaxonomy($taxonomy)->shouldBeCalled();
         $taxon->setParent($this)->shouldBeCalled();
 
         $this->addChild($taxon);
 
-        $taxon->setTaxonomy(null)->shouldBeCalled();
         $taxon->setParent(null)->shouldBeCalled();
 
         $this->removeChild($taxon);

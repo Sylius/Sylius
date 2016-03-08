@@ -12,12 +12,12 @@
 namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Checkout\CheckoutAddressingStep;
-use Sylius\Behat\Page\Checkout\CheckoutFinalizeStep;
-use Sylius\Behat\Page\Checkout\CheckoutPaymentStep;
-use Sylius\Behat\Page\Checkout\CheckoutSecurityStep;
-use Sylius\Behat\Page\Checkout\CheckoutShippingStep;
-use Sylius\Behat\Page\Checkout\CheckoutThankYouPage;
+use Sylius\Behat\Page\Checkout\CheckoutAddressingStepInterface;
+use Sylius\Behat\Page\Checkout\CheckoutFinalizeStepInterface;
+use Sylius\Behat\Page\Checkout\CheckoutPaymentStepInterface;
+use Sylius\Behat\Page\Checkout\CheckoutSecurityStepInterface;
+use Sylius\Behat\Page\Checkout\CheckoutShippingStepInterface;
+use Sylius\Behat\Page\Checkout\CheckoutThankYouPageInterface;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
@@ -32,52 +32,52 @@ final class CheckoutContext implements Context
     private $sharedStorage;
 
     /**
-     * @var CheckoutSecurityStep
+     * @var CheckoutSecurityStepInterface
      */
     private $checkoutSecurityStep;
 
     /**
-     * @var CheckoutAddressingStep
+     * @var CheckoutAddressingStepInterface
      */
     private $checkoutAddressingStep;
 
     /**
-     * @var CheckoutShippingStep
+     * @var CheckoutShippingStepInterface
      */
     private $checkoutShippingStep;
 
     /**
-     * @var CheckoutPaymentStep
+     * @var CheckoutPaymentStepInterface
      */
     private $checkoutPaymentStep;
 
     /**
-     * @var CheckoutFinalizeStep
+     * @var CheckoutFinalizeStepInterface
      */
     private $checkoutFinalizeStep;
 
     /**
-     * @var CheckoutThankYouPage
+     * @var CheckoutThankYouPageInterface
      */
     private $checkoutThankYouPage;
 
     /**
      * @param SharedStorageInterface $sharedStorage
-     * @param CheckoutSecurityStep $checkoutSecurityStep
-     * @param CheckoutAddressingStep $checkoutAddressingStep
-     * @param CheckoutShippingStep $checkoutShippingStep
-     * @param CheckoutPaymentStep $checkoutPaymentStep
-     * @param CheckoutFinalizeStep $checkoutFinalizeStep
-     * @param CheckoutThankYouPage $checkoutThankYouPage
+     * @param CheckoutSecurityStepInterface $checkoutSecurityStep
+     * @param CheckoutAddressingStepInterface $checkoutAddressingStep
+     * @param CheckoutShippingStepInterface $checkoutShippingStep
+     * @param CheckoutPaymentStepInterface $checkoutPaymentStep
+     * @param CheckoutFinalizeStepInterface $checkoutFinalizeStep
+     * @param CheckoutThankYouPageInterface $checkoutThankYouPage
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        CheckoutSecurityStep $checkoutSecurityStep,
-        CheckoutAddressingStep $checkoutAddressingStep,
-        CheckoutShippingStep $checkoutShippingStep,
-        CheckoutPaymentStep $checkoutPaymentStep,
-        CheckoutFinalizeStep $checkoutFinalizeStep,
-        CheckoutThankYouPage $checkoutThankYouPage
+        CheckoutSecurityStepInterface $checkoutSecurityStep,
+        CheckoutAddressingStepInterface $checkoutAddressingStep,
+        CheckoutShippingStepInterface $checkoutShippingStep,
+        CheckoutPaymentStepInterface $checkoutPaymentStep,
+        CheckoutFinalizeStepInterface $checkoutFinalizeStep,
+        CheckoutThankYouPageInterface $checkoutThankYouPage
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->checkoutSecurityStep = $checkoutSecurityStep;

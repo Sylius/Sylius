@@ -154,7 +154,7 @@ fos_elastica:
 filters:
         search_filter: # the small drop down menu on the side of the search field
             enabled: true
-            taxonomy: category # possible values are the high level taxons (category, brand for sylius)
+            taxon: CATEGORY # possible values are taxons codes (CATEGORY, BRAND for sylius)
         facet_groups: # possible facet groups, you assign them in a finder object
             search_set:
                 values: [taxons, price, made_of, color]

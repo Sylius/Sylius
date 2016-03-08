@@ -54,6 +54,8 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
         $config = $this->processConfiguration(new Configuration(), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
+        $loader->load(sprintf('driver/%s.xml', $config['driver']));
+
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
         $configFiles = [

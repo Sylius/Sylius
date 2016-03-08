@@ -43,7 +43,7 @@ class ChannelContextSpec extends ObjectBehavior
         ChannelRepositoryInterface $channelRepository,
         ChannelInterface $channel
     ) {
-        $channelRepository->findOneBy(['name' => 'Store'])->willReturn($channel);
+        $channelRepository->findOneByName('Store')->willReturn($channel);
 
         $this->getChannelByName('Store')->shouldReturn($channel);
     }
@@ -51,7 +51,7 @@ class ChannelContextSpec extends ObjectBehavior
     function it_throws_an_exception_if_channel_is_not_found(
         ChannelRepositoryInterface $channelRepository
     ) {
-        $channelRepository->findOneBy(['name' => 'Store'])->willReturn(null);
+        $channelRepository->findOneByName('Store')->willReturn(null);
 
         $this->shouldThrow(new \InvalidArgumentException('Channel with name "Store" does not exist'))->during('getChannelByName', ['Store']);
     }

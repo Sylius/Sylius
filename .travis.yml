@@ -60,7 +60,7 @@ before_script:
     - app/console assetic:dump --env=test_cached --no-debug
 
     # Debug informations, PHP version & PHP configuration
-    # Its needed to remove the line with secret ariable, as it is listed in _SERVER variables
+    # Its needed to remove the line with secret variable, as it is listed in _SERVER variables
     - php -v
     - php -i | grep -v 'GITHUB_OAUTH_TOKEN\|SYMFONY__'
 

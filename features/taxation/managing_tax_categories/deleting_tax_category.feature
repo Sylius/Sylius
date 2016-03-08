@@ -6,6 +6,7 @@ Feature: Deleting a tax category
 
     Background:
         Given the store has "Alcohol" tax category with code "alcohol"
+        And I am logged in as administrator
 
     @todo
     Scenario: Deleted tax category should disappear from the registry

@@ -11,47 +11,72 @@
 
 namespace Sylius\Bundle\TaxonomyBundle\Doctrine\ORM;
 
-use Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository;
-use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 /**
- * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- * @author Anna Walasek <anna.walasek@lakion.com>
+ * @author Aram Alipoor <aram.alipoor@gmail.com>
  */
-class TaxonRepository extends TranslatableResourceRepository implements TaxonRepositoryInterface
+class TaxonRepository extends EntityRepository implements TaxonRepositoryInterface
 {
-    public function getTaxonsAsList(TaxonomyInterface $taxonomy)
+    /**
+     * {@inheritdoc}
+     */
+    public function findChildren(TaxonInterface $taxon)
     {
-        return $this->getQueryBuilder()
-            ->where('o.taxonomy = :taxonomy')
-            ->andWhere('o.parent IS NOT NULL')
-            ->setParameter('taxonomy', $taxonomy)
-            ->orderBy('o.left')
-            ->getQuery()
-            ->getResult();
-    }
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder
+            ->andWhere($queryBuilder->expr()->gt('o.left', ':left'))
+            ->andWhere($queryBuilder->expr()->lt('o.right', ':right'))
+            ->setParameter('left', $taxon->getLeft())
+            ->setParameter('right', $taxon->getRight())
+        ;
 
-    public function findOneByPermalink($permalink)
-    {
-        return $this->getQueryBuilder()
-            ->where('translation.permalink = :permalink')
-            ->setParameter('permalink', $permalink)
-            ->orderBy($this->getAlias().'.left')
-            ->getQuery()
-            ->getOneOrNullResult();
+        return $queryBuilder->getQuery()->getResult();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getNonRootTaxons()
+    public function findOneByPermalink($permalink)
     {
-        return $this->getQueryBuilder()
-            ->where($this->getAlias().'.parent IS NOT NULL')
-            ->orderBy($this->getAlias().'.left')
+        return $this->createQueryBuilder('o')
+            ->addSelect('translation')
+            ->leftJoin('o.translations', 'translation')
+            ->where('translation.permalink = :permalink')
+            ->setParameter('permalink', $permalink)
+            ->orderBy('o.left')
             ->getQuery()
-            ->getResult();
+            ->getOneOrNullResult()
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findOneByName($name)
+    {
+        return $this->createQueryBuilder('o')
+            ->addSelect('translation')
+            ->leftJoin('o.translations', 'translation')
+            ->where('translation.name = :name')
+            ->setParameter('name', $name)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findRootNodes()
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder
+            ->andWhere($queryBuilder->expr()->isNull($this->getPropertyName('parent')))
+        ;
+
+        return $queryBuilder->getQuery()->getResult();
     }
 }

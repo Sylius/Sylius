@@ -20,11 +20,6 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 interface ChannelRepositoryInterface extends RepositoryInterface
 {
     /**
-     * @return ChannelInterface[]
-     */
-    public function findAll();
-
-    /**
      * @param string $hostname
      *
      * @return ChannelInterface|null
@@ -37,4 +32,11 @@ interface ChannelRepositoryInterface extends RepositoryInterface
      * @return ChannelInterface|null
      */
     public function findOneByCode($code);
+
+    /**
+     * @param string $name
+     *
+     * @return ChannelInterface|null
+     */
+    public function findOneByName($name);
 }

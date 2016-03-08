@@ -17,21 +17,10 @@ use Sylius\Behat\Page\SymfonyPage;
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
-class CustomerShowPage extends SymfonyPage
+class CustomerShowPage extends SymfonyPage implements CustomerShowPageInterface
 {
     /**
-     * @return string
-     */
-    public function getRouteName()
-    {
-        return 'sylius_backend_customer_show';
-    }
-
-    /**
-     * Checks if the customer on whose page we are currently on is registered,
-     * if not throws an exception.
-     *
-     * @return bool
+     * {@inheritdoc}
      */
     public function isRegistered()
     {
@@ -41,9 +30,7 @@ class CustomerShowPage extends SymfonyPage
     }
 
     /**
-     * Deletes the user on whose show page we are currently on.
-     *
-     * @throws \Exception
+     * {@inheritdoc}
      */
     public function deleteAccount()
     {
@@ -58,5 +45,13 @@ class CustomerShowPage extends SymfonyPage
         $confirmationModal = $this->getDocument()->find('css', '#confirmation-modal-confirm');
         $this->waitForModalToAppear($confirmationModal);
         $confirmationModal->find('css', 'a:contains("Delete")')->press();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getRouteName()
+    {
+        return 'sylius_backend_customer_show';
     }
 }

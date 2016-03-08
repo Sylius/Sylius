@@ -11,25 +11,20 @@
 
 namespace Sylius\Bundle\UserBundle\Doctrine\ORM;
 
-use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\User\Repository\CustomerRepositoryInterface;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class CustomerRepository extends EntityRepository
+class CustomerRepository extends EntityRepository implements CustomerRepositoryInterface
 {
     /**
-     * Get the customer's data for the details page.
-     *
-     * @param int $id
-     *
-     * @return null|UserInterface
+     * {@inheritdoc}
      */
     public function findForDetailsPage($id)
     {
-        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder
             ->andWhere($queryBuilder->expr()->eq('o.id', ':id'))
             ->setParameter('id', $id)
@@ -44,14 +39,11 @@ class CustomerRepository extends EntityRepository
     }
 
     /**
-     * @param array $criteria
-     * @param array $sorting
-     *
-     * @return Pagerfanta
+     * {@inheritdoc}
      */
-    public function createFilterPaginator($criteria = [], $sorting = [])
+    public function createFilterPaginator(array $criteria = null, array $sorting = null)
     {
-        $queryBuilder = parent::getCollectionQueryBuilder()
+        $queryBuilder = $this->createQueryBuilder('o')
             ->leftJoin($this->getPropertyName('user'), 'user');
 
         if (isset($criteria['query'])) {

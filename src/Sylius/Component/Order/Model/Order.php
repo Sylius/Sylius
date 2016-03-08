@@ -13,7 +13,6 @@ namespace Sylius\Component\Order\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Resource\Model\SoftDeletableTrait;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
 /**
@@ -21,7 +20,7 @@ use Sylius\Component\Resource\Model\TimestampableTrait;
  */
 class Order implements OrderInterface
 {
-    use SoftDeletableTrait, TimestampableTrait;
+    use TimestampableTrait;
 
     /**
      * @var mixed

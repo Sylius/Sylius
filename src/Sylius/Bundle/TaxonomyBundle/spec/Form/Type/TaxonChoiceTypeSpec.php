@@ -13,10 +13,8 @@ namespace spec\Sylius\Bundle\TaxonomyBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
-use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -37,24 +35,13 @@ class TaxonChoiceTypeSpec extends ObjectBehavior
         $this->shouldImplement(FormTypeInterface::class);
     }
 
-    function it_builds_a_form(FormBuilderInterface $builder)
-    {
-        $builder->addModelTransformer(
-            Argument::type(CollectionToArrayTransformer::class)
-        )->shouldBeCalled();
-
-        $this->buildForm($builder, [
-            'multiple' => true,
-        ]);
-    }
-
     function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(Argument::withKey('choice_list'))->shouldBeCalled()->willReturn($resolver);
-        $resolver->setDefaults(Argument::withKey('taxonomy'))->shouldBeCalled()->willReturn($resolver);
+        $resolver->setDefaults(Argument::withKey('root'))->shouldBeCalled()->willReturn($resolver);
         $resolver->setDefaults(Argument::withKey('filter'))->shouldBeCalled()->willReturn($resolver);
 
-        $resolver->setAllowedTypes('taxonomy', [TaxonomyInterface::class, 'null'])->shouldBeCalled()->willReturn($resolver);
+        $resolver->setAllowedTypes('root', [TaxonInterface::class, 'null'])->shouldBeCalled()->willReturn($resolver);
         $resolver->setAllowedTypes('filter', ['callable', 'null'])->shouldBeCalled()->willReturn($resolver);
 
         $this->configureOptions($resolver, []);

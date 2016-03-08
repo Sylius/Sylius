@@ -16,8 +16,6 @@ use Sylius\Component\Rbac\Model\RoleInterface;
 use Sylius\Component\Rbac\Repository\RoleRepositoryInterface;
 
 /**
- * Role repository.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class RoleRepository extends EntityRepository implements RoleRepositoryInterface

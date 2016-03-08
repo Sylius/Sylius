@@ -14,8 +14,8 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Sylius\Bundle\CoreBundle\Test\Services\PaymentMethodNameToGatewayConverterInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -29,7 +29,7 @@ final class PaymentContext implements Context
     private $sharedStorage;
 
     /**
-     * @var RepositoryInterface
+     * @var PaymentMethodRepositoryInterface
      */
     private $paymentMethodRepository;
 
@@ -45,13 +45,13 @@ final class PaymentContext implements Context
 
     /**
      * @param SharedStorageInterface $sharedStorage
-     * @param RepositoryInterface $paymentMethodRepository
+     * @param PaymentMethodRepositoryInterface $paymentMethodRepository
      * @param FactoryInterface $paymentMethodFactory
      * @param PaymentMethodNameToGatewayConverterInterface $paymentMethodNameToGatewayConverter
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        RepositoryInterface $paymentMethodRepository,
+        PaymentMethodRepositoryInterface $paymentMethodRepository,
         FactoryInterface $paymentMethodFactory,
         PaymentMethodNameToGatewayConverterInterface $paymentMethodNameToGatewayConverter
     ) {

@@ -19,8 +19,8 @@ use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
 use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface as RbacAuthorizationCheckerInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -42,11 +42,11 @@ class FrontendMenuBuilder extends MenuBuilder
     protected $currencyProvider;
 
     /**
-     * Taxonomy repository.
+     * Taxon repository.
      *
-     * @var RepositoryInterface
+     * @var TaxonRepositoryInterface
      */
-    protected $taxonomyRepository;
+    protected $taxonRepository;
 
     /**
      * Cart provider.
@@ -73,15 +73,13 @@ class FrontendMenuBuilder extends MenuBuilder
     protected $tokenStorage;
 
     /**
-     * Constructor.
-     *
      * @param FactoryInterface $factory
      * @param AuthorizationCheckerInterface $authorizationChecker
      * @param TranslatorInterface $translator
      * @param EventDispatcherInterface $eventDispatcher
      * @param RbacAuthorizationCheckerInterface $rbacAuthorizationChecker
      * @param CurrencyProviderInterface $currencyProvider
-     * @param RepositoryInterface $taxonomyRepository
+     * @param TaxonRepositoryInterface $taxonRepository
      * @param CartProviderInterface $cartProvider
      * @param CurrencyHelper $currencyHelper
      * @param ChannelContextInterface $channelContext
@@ -94,7 +92,7 @@ class FrontendMenuBuilder extends MenuBuilder
         EventDispatcherInterface $eventDispatcher,
         RbacAuthorizationCheckerInterface $rbacAuthorizationChecker,
         CurrencyProviderInterface $currencyProvider,
-        RepositoryInterface $taxonomyRepository,
+        TaxonRepositoryInterface $taxonRepository,
         CartProviderInterface $cartProvider,
         CurrencyHelper $currencyHelper,
         ChannelContextInterface $channelContext,
@@ -103,7 +101,7 @@ class FrontendMenuBuilder extends MenuBuilder
         parent::__construct($factory, $authorizationChecker, $translator, $eventDispatcher, $rbacAuthorizationChecker);
 
         $this->currencyProvider = $currencyProvider;
-        $this->taxonomyRepository = $taxonomyRepository;
+        $this->taxonRepository = $taxonRepository;
         $this->cartProvider = $cartProvider;
         $this->currencyHelper = $currencyHelper;
         $this->channelContext = $channelContext;
@@ -239,11 +237,11 @@ class FrontendMenuBuilder extends MenuBuilder
     }
 
     /**
-     * Builds frontend taxonomies menu.
+     * Builds frontend taxons menu.
      *
      * @return ItemInterface
      */
-    public function createTaxonomiesMenu()
+    public function createTaxonsMenu()
     {
         $menu = $this->factory->createItem('root', [
             'childrenAttributes' => [
@@ -257,19 +255,19 @@ class FrontendMenuBuilder extends MenuBuilder
             'labelAttributes' => ['class' => 'nav-header'],
         ];
 
-        $taxonomies = $this->channelContext->getChannel()->getTaxonomies();
+        $taxons = $this->channelContext->getChannel()->getTaxons();
 
-        foreach ($taxonomies as $taxonomy) {
-            $child = $menu->addChild($taxonomy->getName(), $childOptions);
+        foreach ($taxons as $taxon) {
+            $child = $menu->addChild($taxon->getName(), $childOptions);
 
-            if ($taxonomy->getRoot()->hasPath()) {
-                $child->setLabelAttribute('data-image', $taxonomy->getRoot()->getPath());
+            if ($taxon->hasPath()) {
+                $child->setLabelAttribute('data-image', $taxon->getPath());
             }
 
-            $this->createTaxonomiesMenuNode($child, $taxonomy->getRoot());
+            $this->createTaxonsMenuNode($child, $taxon);
         }
 
-        $this->eventDispatcher->dispatch(MenuBuilderEvent::FRONTEND_TAXONOMIES, new MenuBuilderEvent($this->factory, $menu));
+        $this->eventDispatcher->dispatch(MenuBuilderEvent::FRONTEND_TAXONS, new MenuBuilderEvent($this->factory, $menu));
 
         return $menu;
     }
@@ -362,7 +360,11 @@ class FrontendMenuBuilder extends MenuBuilder
         return $menu;
     }
 
-    protected function createTaxonomiesMenuNode(ItemInterface $menu, TaxonInterface $taxon)
+    /**
+     * @param ItemInterface $menu
+     * @param TaxonInterface $taxon
+     */
+    protected function createTaxonsMenuNode(ItemInterface $menu, TaxonInterface $taxon)
     {
         foreach ($taxon->getChildren() as $child) {
             $childMenu = $menu->addChild($child->getName(), [
@@ -373,7 +375,7 @@ class FrontendMenuBuilder extends MenuBuilder
                 $childMenu->setLabelAttribute('data-image', $child->getPath());
             }
 
-            $this->createTaxonomiesMenuNode($childMenu, $child);
+            $this->createTaxonsMenuNode($childMenu, $child);
         }
     }
 }

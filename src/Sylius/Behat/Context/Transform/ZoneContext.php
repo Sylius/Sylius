@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -20,14 +20,14 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 final class ZoneContext implements Context
 {
     /**
-     * @var RepositoryInterface
+     * @var ZoneRepositoryInterface
      */
     private $zoneRepository;
 
     /**
-     * @param RepositoryInterface $zoneRepository
+     * @param ZoneRepositoryInterface $zoneRepository
      */
-    public function __construct(RepositoryInterface $zoneRepository)
+    public function __construct(ZoneRepositoryInterface $zoneRepository)
     {
         $this->zoneRepository = $zoneRepository;
     }

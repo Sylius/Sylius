@@ -212,7 +212,7 @@ class MetadataContext extends DefaultContext
     public function productHasTheFollowingPageMetadata($productName, TableNode $table)
     {
         /** @var ProductInterface $product */
-        $product = $this->getRepository('product')->findOneBy(['name' => $productName]);
+        $product = $this->getRepository('product')->findOneByName($productName);
 
         $this->thereIsTheFollowingMetadata($product->getMetadataIdentifier(), $table);
     }

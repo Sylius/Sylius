@@ -15,15 +15,11 @@ use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 
 /**
- * Order repository interface.
- *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
 interface CartRepositoryInterface extends OrderRepositoryInterface
 {
     /**
-     * Get expired carts
-     *
      * @return CartInterface[]
      */
     public function findExpiredCarts();

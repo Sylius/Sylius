@@ -13,9 +13,11 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
+use Sylius\Component\Taxation\Repository\TaxCategoryRepositoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -38,12 +40,12 @@ final class TaxContext implements Context
     private $taxRateRepository;
 
     /**
-     * @var RepositoryInterface
+     * @var TaxCategoryRepositoryInterface
      */
     private $taxCategoryRepository;
 
     /**
-     * @var RepositoryInterface
+     * @var ZoneRepositoryInterface
      */
     private $zoneRepository;
 
@@ -51,15 +53,15 @@ final class TaxContext implements Context
      * @param FactoryInterface $taxRateFactory
      * @param FactoryInterface $taxCategoryFactory
      * @param RepositoryInterface $taxRateRepository
-     * @param RepositoryInterface $taxCategoryRepository
-     * @param RepositoryInterface $zoneRepository
+     * @param TaxCategoryRepositoryInterface $taxCategoryRepository
+     * @param ZoneRepositoryInterface $zoneRepository
      */
     public function __construct(
         FactoryInterface $taxRateFactory,
         FactoryInterface $taxCategoryFactory,
         RepositoryInterface $taxRateRepository,
-        RepositoryInterface $taxCategoryRepository,
-        RepositoryInterface $zoneRepository
+        TaxCategoryRepositoryInterface $taxCategoryRepository,
+        ZoneRepositoryInterface $zoneRepository
     ) {
         $this->taxRateFactory = $taxRateFactory;
         $this->taxCategoryFactory = $taxCategoryFactory;
@@ -94,7 +96,7 @@ final class TaxContext implements Context
      */
     private function getOrCreateTaxCategory($taxCategoryName)
     {
-        $taxCategory = $this->taxCategoryRepository->findOneBy(['name' => $taxCategoryName]);
+        $taxCategory = $this->taxCategoryRepository->findOneByName($taxCategoryName);
         if (null === $taxCategory) {
             $taxCategory = $this->createTaxCategory($taxCategoryName);
         }

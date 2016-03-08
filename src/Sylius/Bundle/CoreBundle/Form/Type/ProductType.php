@@ -39,7 +39,10 @@ class ProductType extends BaseProductType
                 'empty_value' => '---',
                 'label' => 'sylius.form.product.shipping_category',
             ])
-            ->add('taxons', 'sylius_taxon_selection')
+            ->add('taxons', 'sylius_taxon_choice', [
+                'label' => 'sylius.form.product.taxons',
+                'multiple' => true,
+            ])
             ->add('variantSelectionMethod', 'choice', [
                 'label' => 'sylius.form.product.variant_selection_method',
                 'choices' => Product::getVariantSelectionMethodLabels(),

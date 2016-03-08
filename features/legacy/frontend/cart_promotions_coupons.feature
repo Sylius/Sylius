@@ -28,10 +28,10 @@ Feature: Checkout coupon promotions
         And promotion "New Year campaign" has following coupons:
             | code   | usage limit | used |
             | XD0002 | 1           | 1    |
-        And there are following taxonomies defined:
+        And there are following taxons defined:
             | code | name     |
             | RTX2 | Category |
-        And taxonomy "Category" has following taxons:
+        And taxon "Category" has following children:
             | Clothing[TX1] > Debian T-Shirts[TX2] |
         And the following products exist:
             | name   | price | taxons          |

@@ -11,23 +11,40 @@
 
 namespace Sylius\Component\Taxonomy\Repository;
 
-use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
-use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 
-interface TaxonRepositoryInterface
+/**
+ * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
+ * @author Anna Walasek <anna.walasek@lakion.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ */
+interface TaxonRepositoryInterface extends RepositoryInterface
 {
     /**
-     * Get all taxons that belong to given taxonomy.
+     * @param TaxonInterface $taxon
      *
-     * @param $taxonomy TaxonomyInterface
-     *
-     * @return Collection|TaxonInterface[]
+     * @return TaxonInterface[]
      */
-    public function getTaxonsAsList(TaxonomyInterface $taxonomy);
+    public function findChildren(TaxonInterface $taxon);
 
     /**
-     * @return Collection|TaxonInterface[]
+     * @return TaxonInterface[]
      */
-    public function getNonRootTaxons();
+    public function findRootNodes();
+
+    /**
+     * @param string $permalink
+     *
+     * @return TaxonInterface|null
+     */
+    public function findOneByPermalink($permalink);
+
+    /**
+     * @param string $name
+     *
+     * @return TaxonInterface|null
+     */
+    public function findOneByName($name);
 }

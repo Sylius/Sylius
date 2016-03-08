@@ -16,10 +16,10 @@ use Sylius\Behat\Page\SymfonyPage;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ChannelCreatePage extends SymfonyPage
+class ChannelCreatePage extends SymfonyPage implements ChannelCreatePageInterface
 {
     /**
-     * @param string $name
+     * {@inheritdoc}
      */
     public function fillName($name)
     {
@@ -27,13 +27,16 @@ class ChannelCreatePage extends SymfonyPage
     }
 
     /**
-     * @param string $code
+     * {@inheritdoc}
      */
     public function fillCode($code)
     {
         $this->getDocument()->fillField('Code', $code);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function create()
     {
         $this->getDocument()->pressButton('Create');

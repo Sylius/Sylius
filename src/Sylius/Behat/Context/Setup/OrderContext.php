@@ -20,6 +20,7 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\OrderProcessing\OrderShipmentProcessorInterface;
+use Sylius\Component\Core\OrderProcessing\ShippingChargesProcessorInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
@@ -32,7 +33,6 @@ use Sylius\Component\User\Model\CustomerInterface;
  */
 final class OrderContext implements Context
 {
-
     /**
      * @var SharedStorageInterface
      */
@@ -69,18 +69,24 @@ final class OrderContext implements Context
     private $itemQuantityModifier;
 
     /**
+     * @var ShippingChargesProcessorInterface
+     */
+    private $shippingChargesProcessor;
+
+    /**
      * @var ObjectManager
      */
     private $objectManager;
 
     /**
+     * @param SharedStorageInterface $sharedStorage
      * @param OrderRepositoryInterface $orderRepository
      * @param FactoryInterface $orderFactory
      * @param OrderShipmentProcessorInterface $orderShipmentFactory
      * @param PaymentFactoryInterface $paymentFactory
      * @param FactoryInterface $orderItemFactory
      * @param OrderItemQuantityModifierInterface $itemQuantityModifier
-     * @param SharedStorageInterface $sharedStorage
+     * @param ShippingChargesProcessorInterface $shippingChargesProcessor
      * @param ObjectManager $objectManager
      */
     public function __construct(
@@ -91,6 +97,7 @@ final class OrderContext implements Context
         PaymentFactoryInterface $paymentFactory,
         FactoryInterface $orderItemFactory,
         OrderItemQuantityModifierInterface $itemQuantityModifier,
+        ShippingChargesProcessorInterface $shippingChargesProcessor,
         ObjectManager $objectManager
     ) {
         $this->sharedStorage = $sharedStorage;
@@ -100,6 +107,7 @@ final class OrderContext implements Context
         $this->paymentFactory = $paymentFactory;
         $this->orderItemFactory = $orderItemFactory;
         $this->itemQuantityModifier = $itemQuantityModifier;
+        $this->shippingChargesProcessor = $shippingChargesProcessor;
         $this->objectManager = $objectManager;
     }
 
@@ -134,6 +142,8 @@ final class OrderContext implements Context
 
         $this->orderShipmentFactory->processOrderShipment($order);
         $order->getShipments()->first()->setMethod($shippingMethod);
+
+        $this->shippingChargesProcessor->applyShippingCharges($order);
 
         $payment = $this->paymentFactory->createWithAmountAndCurrency($order->getTotal(), $order->getCurrency());
         $payment->setMethod($paymentMethod);

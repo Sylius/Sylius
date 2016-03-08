@@ -16,21 +16,27 @@ use Sylius\Behat\Page\SymfonyPage;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ChannelUpdatePage extends SymfonyPage
+class ChannelUpdatePage extends SymfonyPage implements ChannelUpdatePageInterface
 {
     /**
-     * @param string $themeName
+     * {@inheritdoc}
      */
     public function setTheme($themeName)
     {
         $this->getDocument()->selectFieldOption('Theme', $themeName);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function unsetTheme()
     {
         $this->getDocument()->selectFieldOption('Theme', '');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function update()
     {
         $this->getDocument()->pressButton('Save changes');

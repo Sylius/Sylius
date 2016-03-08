@@ -12,26 +12,25 @@
 namespace Sylius\Bundle\ProductBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Product\Repository\VariantRepositoryInterface;
 
 /**
- * Variant repository.
- *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-class VariantRepository extends EntityRepository
+class VariantRepository extends EntityRepository implements VariantRepositoryInterface
 {
-    protected function getCollectionQueryBuilder()
+    /**
+     * {@inheritdoc}
+     */
+    public function findOneByName($name)
     {
-        return parent::getCollectionQueryBuilder()
-            ->join($this->getAlias().'.object', 'product')
-            ->addSelect('product')
-            ->leftJoin($this->getAlias().'.options', 'option')
-            ->addSelect('option')
+        return $this->createQueryBuilder('o')
+            ->addSelect('translation')
+            ->leftJoin('o.translations', 'translation')
+            ->where('translation.name = :name')
+            ->setParameter('name', $name)
+            ->getQuery()
+            ->getOneOrNullResult()
         ;
-    }
-
-    protected function getAlias()
-    {
-        return 'variant';
     }
 }

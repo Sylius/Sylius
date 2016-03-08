@@ -13,15 +13,15 @@ namespace spec\Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
+use Sylius\Component\Taxation\Repository\TaxCategoryRepositoryInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class TaxContextSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $taxCategoryRepository) {
+    function let(TaxCategoryRepositoryInterface $taxCategoryRepository) {
         $this->beConstructedWith($taxCategoryRepository);
     }
 
@@ -37,14 +37,14 @@ class TaxContextSpec extends ObjectBehavior
 
     function it_casts_tax_category_name_to_tax_category($taxCategoryRepository, TaxCategoryInterface $taxCategory)
     {
-        $taxCategoryRepository->findOneBy(['name' => 'TaxCategory'])->willReturn($taxCategory);
+        $taxCategoryRepository->findOneByName('TaxCategory')->willReturn($taxCategory);
 
         $this->getTaxCategoryByName('TaxCategory')->shouldReturn($taxCategory);
     }
 
     function it_throws_exception_if_there_is_no_tax_category_with_name_given_to_casting($taxCategoryRepository)
     {
-        $taxCategoryRepository->findOneBy(['name' => 'TaxCategory'])->willReturn(null);
+        $taxCategoryRepository->findOneByName('TaxCategory')->willReturn(null);
 
         $this
             ->shouldThrow(new \InvalidArgumentException('Tax category with name "TaxCategory" does not exist'))

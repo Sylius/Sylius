@@ -48,13 +48,9 @@ sylius_backend_product_archetype:
     resource: @SyliusWebBundle/Resources/config/routing/backend/product_archetype.yml
     prefix: /product-archetypes
 
-sylius_backend_taxonomy:
-    resource: @SyliusWebBundle/Resources/config/routing/backend/taxonomy.yml
-    prefix: /taxonomies
-
 sylius_backend_taxon:
     resource: @SyliusWebBundle/Resources/config/routing/backend/taxon.yml
-    prefix: /taxonomies/{taxonomyId}/taxons
+    prefix: /taxons
 
 sylius_backend_user:
     resource: @SyliusWebBundle/Resources/config/routing/backend/user.yml

@@ -20,85 +20,10 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * Doctrine ORM driver entity repository.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class EntityRepository extends BaseEntityRepository implements RepositoryInterface
 {
-    /**
-     * @param mixed $id
-     *
-     * @return null|object
-     */
-    public function find($id)
-    {
-        return $this
-            ->getQueryBuilder()
-            ->andWhere($this->getAlias().'.id = '.intval($id))
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-
-    /**
-     * @return array
-     */
-    public function findAll()
-    {
-        return $this
-            ->getCollectionQueryBuilder()
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-
-    /**
-     * @param array $criteria
-     *
-     * @return null|object
-     */
-    public function findOneBy(array $criteria)
-    {
-        $queryBuilder = $this->getQueryBuilder();
-
-        $this->applyCriteria($queryBuilder, $criteria);
-
-        return $queryBuilder
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-
-    /**
-     * @param array $criteria
-     * @param array $sorting
-     * @param int   $limit
-     * @param int   $offset
-     *
-     * @return array
-     */
-    public function findBy(array $criteria, array $sorting = [], $limit = null, $offset = null)
-    {
-        $queryBuilder = $this->getCollectionQueryBuilder();
-
-        $this->applyCriteria($queryBuilder, $criteria);
-        $this->applySorting($queryBuilder, $sorting);
-
-        if (null !== $limit) {
-            $queryBuilder->setMaxResults($limit);
-        }
-
-        if (null !== $offset) {
-            $queryBuilder->setFirstResult($offset);
-        }
-
-        return $queryBuilder
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -124,7 +49,7 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
      */
     public function createPaginator(array $criteria = [], array $sorting = [])
     {
-        $queryBuilder = $this->getCollectionQueryBuilder();
+        $queryBuilder = $this->createQueryBuilder('o');
 
         $this->applyCriteria($queryBuilder, $criteria);
         $this->applySorting($queryBuilder, $sorting);
@@ -137,7 +62,7 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
      *
      * @return Pagerfanta
      */
-    public function getPaginator(QueryBuilder $queryBuilder)
+    protected function getPaginator(QueryBuilder $queryBuilder)
     {
         // Use output walkers option in DoctrineORMAdapter should be false as it affects performance greatly (see #3775)
         return new Pagerfanta(new DoctrineORMAdapter($queryBuilder, true, false));
@@ -148,30 +73,14 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
      *
      * @return Pagerfanta
      */
-    public function getArrayPaginator($objects)
+    protected function getArrayPaginator($objects)
     {
         return new Pagerfanta(new ArrayAdapter($objects));
     }
 
     /**
-     * @return QueryBuilder
-     */
-    protected function getQueryBuilder()
-    {
-        return $this->createQueryBuilder($this->getAlias());
-    }
-
-    /**
-     * @return QueryBuilder
-     */
-    protected function getCollectionQueryBuilder()
-    {
-        return $this->createQueryBuilder($this->getAlias());
-    }
-
-    /**
      * @param QueryBuilder $queryBuilder
-     * @param array        $criteria
+     * @param array $criteria
      */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = [])
     {
@@ -193,7 +102,7 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
 
     /**
      * @param QueryBuilder $queryBuilder
-     * @param array        $sorting
+     * @param array $sorting
      */
     protected function applySorting(QueryBuilder $queryBuilder, array $sorting = [])
     {
@@ -212,17 +121,9 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
     protected function getPropertyName($name)
     {
         if (false === strpos($name, '.')) {
-            return $this->getAlias().'.'.$name;
+            return 'o'.'.'.$name;
         }
 
         return $name;
-    }
-
-    /**
-     * @return string
-     */
-    protected function getAlias()
-    {
-        return 'o';
     }
 }

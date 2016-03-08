@@ -13,7 +13,6 @@ namespace Sylius\Component\Taxonomy\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
-use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Translation\Model\TranslatableInterface;
 
 /**
@@ -22,24 +21,18 @@ use Sylius\Component\Translation\Model\TranslatableInterface;
  */
 interface TaxonInterface extends
     CodeAwareInterface,
-    SoftDeletableInterface,
     TaxonTranslationInterface,
     TranslatableInterface
 {
     /**
-     * @return TaxonomyInterface
-     */
-    public function getTaxonomy();
-
-    /**
-     * @param null|TaxonomyInterface $taxonomy
-     */
-    public function setTaxonomy(TaxonomyInterface $taxonomy = null);
-
-    /**
      * @return bool
      */
     public function isRoot();
+
+    /**
+     * @return TaxonInterface
+     */
+    public function getRoot();
 
     /**
      * @return TaxonInterface

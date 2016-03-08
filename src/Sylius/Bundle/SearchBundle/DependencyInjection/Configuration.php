@@ -74,7 +74,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('pre_search_filter')
                             ->isRequired()
                             ->children()
-                                ->scalarNode('taxonomy')
+                                ->scalarNode('taxon')
                                     ->isRequired()
                                     ->cannotBeEmpty()
                                 ->end()

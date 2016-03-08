@@ -3,27 +3,15 @@ sylius_taxon_create:
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.taxon:createAction
-        _sylius:
-            redirect:
-                route: sylius_taxonomy_show
-                parameters: {'id': $taxonomyId}
 
 sylius_taxon_update:
     path: /{id}/edit
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.taxon:updateAction
-        _sylius:
-            redirect:
-                route: sylius_taxonomy_show
-                parameters: {'id': $taxonomyId}
 
 sylius_taxon_delete:
     path: /{id}
     methods: [POST]
     defaults:
         _controller: sylius.controller.taxon:deleteAction
-        _sylius:
-            redirect:
-                route: sylius_taxonomy_show
-                parameters: {'id': $taxonomyId}

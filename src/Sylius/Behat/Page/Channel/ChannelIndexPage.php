@@ -19,7 +19,7 @@ use Symfony\Component\Routing\RouterInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ChannelIndexPage extends SymfonyPage
+class ChannelIndexPage extends SymfonyPage implements ChannelIndexPageInterface
 {
     /**
      * @var TableManipulatorInterface
@@ -43,9 +43,7 @@ class ChannelIndexPage extends SymfonyPage
     }
 
     /**
-     * @param string $channelCode
-     *
-     * @return string|null
+     * {@inheritdoc}
      */
     public function getUsedThemeName($channelCode)
     {

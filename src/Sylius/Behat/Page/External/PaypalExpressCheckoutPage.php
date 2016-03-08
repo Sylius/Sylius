@@ -11,20 +11,16 @@
 
 namespace Sylius\Behat\Page\External;
 
-use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Page;
 use Sylius\Behat\Page\UnexpectedPageException;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class PaypalExpressCheckoutPage extends Page
+class PaypalExpressCheckoutPage extends Page implements PaypalExpressCheckoutPageInterface
 {
     /**
-     * @param string $email
-     * @param string $password
-     *
-     * @throws ElementNotFoundException
+     * {@inheritdoc}
      */
     public function logIn($email, $password)
     {
@@ -46,7 +42,7 @@ class PaypalExpressCheckoutPage extends Page
     }
 
     /**
-     * @throws ElementNotFoundException
+     * {@inheritdoc}
      */
     public function pay()
     {
@@ -57,7 +53,7 @@ class PaypalExpressCheckoutPage extends Page
     }
 
     /**
-     * @throws ElementNotFoundException
+     * {@inheritdoc}
      */
     public function cancel()
     {
@@ -68,9 +64,7 @@ class PaypalExpressCheckoutPage extends Page
     }
 
     /**
-     * @param array $urlParameters
-     *
-     * @throws UnexpectedPageException
+     * {@inheritdoc}
      */
     public function verify(array $urlParameters = [])
     {
@@ -78,7 +72,7 @@ class PaypalExpressCheckoutPage extends Page
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     protected function getPath()
     {
@@ -86,7 +80,7 @@ class PaypalExpressCheckoutPage extends Page
     }
 
     /**
-     * @param array $urlParameters
+     * {@inheritdoc}
      *
      * @throws UnexpectedPageException
      */

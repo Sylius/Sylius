@@ -16,8 +16,6 @@ use Sylius\Component\Rbac\Model\PermissionInterface;
 use Sylius\Component\Rbac\Repository\PermissionRepositoryInterface;
 
 /**
- * Permission repository.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class PermissionRepository extends EntityRepository implements PermissionRepositoryInterface

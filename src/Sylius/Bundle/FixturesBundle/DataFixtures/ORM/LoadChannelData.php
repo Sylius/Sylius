@@ -47,13 +47,13 @@ class LoadChannelData extends DataFixture
      * @param string $url
      * @param array  $locales
      * @param array  $currencies
-     * @param array  $taxonomies
+     * @param array  $taxons
      * @param array  $shippingMethods
      * @param array  $paymentMethods
      *
      * @return ChannelInterface
      */
-    protected function createChannel($code, $name, $url, array $locales = [], array $currencies = [], array $taxonomies = [], array $shippingMethods = [], array $paymentMethods = [])
+    protected function createChannel($code, $name, $url, array $locales = [], array $currencies = [], array $taxons = [], array $shippingMethods = [], array $paymentMethods = [])
     {
         /** @var ChannelInterface $channel */
         $channel = $this->getChannelFactory()->createNew();
@@ -70,8 +70,8 @@ class LoadChannelData extends DataFixture
         foreach ($currencies as $currency) {
             $channel->addCurrency($this->getReference('Sylius.Currency.'.$currency));
         }
-        foreach ($taxonomies as $taxonomy) {
-            $channel->addTaxonomy($this->getReference('Sylius.Taxonomy.'.$taxonomy));
+        foreach ($taxons as $taxon) {
+            $channel->addTaxon($this->getReference('Sylius.Taxon.'.$taxon));
         }
         foreach ($shippingMethods as $shippingMethod) {
             $channel->addShippingMethod($this->getReference('Sylius.ShippingMethod.'.$shippingMethod));

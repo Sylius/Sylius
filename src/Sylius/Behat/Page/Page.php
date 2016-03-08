@@ -21,7 +21,7 @@ use Behat\Mink\Session;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-abstract class Page
+abstract class Page implements PageInterface
 {
     /**
      * @var array
@@ -54,9 +54,7 @@ abstract class Page
     }
 
     /**
-     * @param array $urlParameters
-     *
-     * @throws UnexpectedPageException If page is not opened successfully
+     * {@inheritdoc}
      */
     public function open(array $urlParameters = [])
     {
@@ -65,7 +63,7 @@ abstract class Page
     }
 
     /**
-     * @param array $urlParameters
+     * {@inheritdoc}
      */
     public function tryToOpen(array $urlParameters = [])
     {
@@ -73,9 +71,7 @@ abstract class Page
     }
 
     /**
-     * @param array $urlParameters
-     *
-     * @throws UnexpectedPageException
+     * {@inheritdoc}
      */
     public function verify(array $urlParameters)
     {
@@ -85,9 +81,7 @@ abstract class Page
     }
 
     /**
-     * @param array $urlParameters
-     *
-     * @return bool
+     * {@inheritdoc}
      */
     public function isOpen(array $urlParameters = [])
     {

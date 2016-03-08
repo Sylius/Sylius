@@ -27,7 +27,7 @@ class ReviewRepository extends EntityRepository
     public function findAcceptedBySubjectId($reviewSubjectId)
     {
         return $this
-            ->getCollectionQueryBuilder()
+            ->createQueryBuilder('o')
             ->andWhere('o.reviewSubject = :reviewSubject')
             ->andWhere('o.status = :status')
             ->setParameter('reviewSubject', $reviewSubjectId)

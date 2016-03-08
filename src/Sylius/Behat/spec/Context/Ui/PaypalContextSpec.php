@@ -13,14 +13,14 @@ namespace spec\Sylius\Behat\Context\Ui;
  
 use Behat\Behat\Context\Context;
 use PhpSpec\ObjectBehavior;
-use Sylius\Behat\Page\External\PaypalExpressCheckoutPage;
+use Sylius\Behat\Page\External\PaypalExpressCheckoutPageInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 class PaypalContextSpec extends ObjectBehavior
 {
-    function let(PaypalExpressCheckoutPage $paypalExpressCheckoutPage)
+    function let(PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage)
     {
         $this->beConstructedWith($paypalExpressCheckoutPage, 'john@doe.com', 'pass123');
     }

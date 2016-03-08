@@ -25,8 +25,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * Doctrine event listener.
- *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
@@ -67,6 +65,12 @@ class NumberListener
      */
     protected $listenerEnabled = false;
 
+    /**
+     * @param ServiceRegistryInterface $registry
+     * @param EventManager $eventManager
+     * @param EventDispatcherInterface $eventDispatcher
+     * @param string $sequenceClass
+     */
     public function __construct(
         ServiceRegistryInterface $registry,
         EventManager $eventManager,
@@ -80,10 +84,7 @@ class NumberListener
     }
 
     /**
-     * Enable this listener for the given entity
-     * This will apply the number generator when this entity will be flushed.
-     *
-     * @param SequenceSubjectInterface $subject
+     * {@inheritdoc}
      */
     public function enableEntity(SequenceSubjectInterface $subject)
     {
@@ -96,11 +97,7 @@ class NumberListener
     }
 
     /**
-     * Apply generator to all enabled entities.
-     *
-     * @param PreFlushEventArgs $args
-     *
-     * @throws NonExistingGeneratorException if no generator is found for an enabled entity
+     * {@inheritdoc}
      */
     public function preFlush(PreFlushEventArgs $args)
     {
@@ -132,25 +129,25 @@ class NumberListener
     }
 
     /**
-     * @param string                 $type
-     * @param EntityManagerInterface $em
+     * @param string $type
+     * @param EntityManagerInterface $entityManager
      *
      * @return SequenceInterface
      */
-    protected function getSequence($type, EntityManagerInterface $em)
+    protected function getSequence($type, EntityManagerInterface $entityManager)
     {
         if (isset($this->sequences[$type])) {
             return $this->sequences[$type];
         }
 
-        $sequence = $em
+        $sequence = $entityManager
             ->getRepository($this->sequenceClass)
             ->findOneBy(['type' => $type])
         ;
 
         if (null === $sequence) {
             $sequence = new $this->sequenceClass($type);
-            $em->persist($sequence);
+            $entityManager->persist($sequence);
         }
 
         return $this->sequences[$type] = $sequence;

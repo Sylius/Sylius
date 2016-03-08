@@ -14,7 +14,7 @@ namespace Sylius\Behat\Context\Transform;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\User\Repository\CustomerRepositoryInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -22,7 +22,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 final class CustomerContext implements Context
 {
     /**
-     * @var RepositoryInterface
+     * @var CustomerRepositoryInterface
      */
     private $customerRepository;
 
@@ -32,10 +32,10 @@ final class CustomerContext implements Context
     private $customerFactory;
 
     /**
-     * @param RepositoryInterface $customerRepository
+     * @param CustomerRepositoryInterface $customerRepository
      * @param FactoryInterface $customerFactory
      */
-    public function __construct(RepositoryInterface $customerRepository, FactoryInterface $customerFactory)
+    public function __construct(CustomerRepositoryInterface $customerRepository, FactoryInterface $customerFactory)
     {
         $this->customerRepository = $customerRepository;
         $this->customerFactory = $customerFactory;

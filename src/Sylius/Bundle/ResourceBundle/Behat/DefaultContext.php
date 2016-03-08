@@ -95,7 +95,15 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      */
     protected function findOneByName($type, $name)
     {
-        return $this->findOneBy($type, ['name' => trim($name)]);
+        $resource = $this->getRepository($type)->findOneByName(trim($name));
+
+        if (null === $resource) {
+            throw new \InvalidArgumentException(
+                sprintf('%s with name "%s" was not found.', str_replace('_', ' ', ucfirst($type)), $name)
+            );
+        }
+
+        return $resource;
     }
 
     /**
@@ -192,11 +200,11 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
                     break;
 
                 case 'taxons':
-                    $configuration[$key] = new ArrayCollection([$this->getRepository('taxon')->findOneBy(['name' => trim($value)])->getId()]);
+                    $configuration[$key] = new ArrayCollection([$this->getRepository('taxon')->findOneByName(trim($value))->getId()]);
                     break;
 
                 case 'variant':
-                    $configuration[$key] = $this->getRepository('product')->findOneBy(['name' => trim($value)])->getMasterVariant()->getId();
+                    $configuration[$key] = $this->getRepository('product')->findOneByName($value)->getMasterVariant()->getId();
                     break;
 
                 case 'amount':

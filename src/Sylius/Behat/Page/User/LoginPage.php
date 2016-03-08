@@ -16,19 +16,10 @@ use Sylius\Behat\Page\SymfonyPage;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class LoginPage extends SymfonyPage
+class LoginPage extends SymfonyPage implements LoginPageInterface
 {
     /**
      * {@inheritdoc}
-     */
-    public function getRouteName()
-    {
-        return 'sylius_user_security_login';
-    }
-
-    /**
-     * @param string $email
-     * @param string $password
      */
     public function logIn($email, $password)
     {
@@ -38,5 +29,13 @@ class LoginPage extends SymfonyPage
         $document->fillField('Password', $password);
 
         $document->pressButton('Login');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getRouteName()
+    {
+        return 'sylius_user_security_login';
     }
 }
