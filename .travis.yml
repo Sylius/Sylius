@@ -76,6 +76,8 @@ script:
     - bin/phpspec run --no-interaction -f dot
     - bin/phpunit
 
+    - etc/travis/test-packages
+
     - etc/travis/prepare-javascript
     - etc/travis/run-behat
 

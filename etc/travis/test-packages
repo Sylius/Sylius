@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+INITIAL_PWD=`pwd`
+EXIT_CODE=0
+
+for dir in `etc/travis/find-packages`; do
+    echo "Testing package at $dir..."
+
+    cd "$dir"
+
+    if [ -e "phpspec.yml.dist" ] || [ -e "phpspec.yml" ]; then
+        PHPSPEC=""
+        if [ -x "bin/phpspec" ]; then
+            PHPSPEC="bin/phpspec"
+        elif [ -x "vendor/bin/phpspec" ]; then
+            PHPSPEC="vendor/bin/phpspec"
+        fi
+
+        if [ -z "$PHPSPEC" ]; then
+            echo "Phpspec binary not found, make sure you included it in require-dev"
+            EXIT_CODE=1
+        else
+            echo "Specs found, running..."
+            "$PHPSPEC" run --no-interaction -f dot || EXIT_CODE=$?
+        fi
+    else
+        echo "Specs not found, skipping..."
+    fi
+
+    if [ -e "phpunit.xml.dist" ] || [ -e "phpunit.xml" ]; then
+        PHPUNIT=""
+        if [ -x "bin/phpunit" ]; then
+            PHPUNIT="bin/phpunit"
+        elif [ -x "vendor/bin/phpunit" ]; then
+            PHPUNIT="vendor/bin/phpunit"
+        fi
+
+        if [ -z "$PHPUNIT" ]; then
+            echo "Phpunit binary not found, make sure you included it in require-dev"
+            EXIT_CODE=1
+        else
+            echo "Phpunit tests found, running..."
+            "$PHPUNIT" || EXIT_CODE=$?
+        fi
+    else
+        echo "Phpunit tests not found, skipping..."
+    fi
+done
+
+cd $INITIAL_PWD
+exit $EXIT_CODE
