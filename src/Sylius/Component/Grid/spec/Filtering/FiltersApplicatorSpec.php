@@ -53,18 +53,18 @@ class FiltersApplicatorSpec extends ObjectBehavior
         DataSourceInterface $dataSource
     ) {
         $parameters->has('criteria')->willReturn(true);
-        $parameters->get('criteria')->willReturn(array('keywords' => 'Banana', 'enabled' => true));
+        $parameters->get('criteria')->willReturn(['keywords' => 'Banana', 'enabled' => true]);
 
         $grid->hasFilter('keywords')->willReturn(true);
         $grid->hasFilter('enabled')->willReturn(false);
         
         $grid->getFilter('keywords')->willReturn($filter);
         $filter->getType()->willReturn('string');
-        $filter->getOptions()->willReturn(array('fields' => ['firstName', 'lastName']));
+        $filter->getOptions()->willReturn(['fields' => ['firstName', 'lastName']]);
         
         $filtersRegistry->get('string')->willReturn($stringFilter);
 
-        $stringFilter->apply($dataSource, 'keywords', 'Banana', array('fields' => ['firstName', 'lastName']))->shouldBeCalled();
+        $stringFilter->apply($dataSource, 'keywords', 'Banana', ['fields' => ['firstName', 'lastName']])->shouldBeCalled();
 
         $this->apply($dataSource, $grid, $parameters);
     }

@@ -28,15 +28,15 @@ class ArrayGridProviderSpec extends ObjectBehavior
 {
     function let(ArrayToDefinitionConverterInterface $converter, Grid $firstGrid, Grid $secondGrid, Grid $thirdGrid)
     {
-        $converter->convert('sylius_admin_tax_category', array('configuration1'))->willReturn($firstGrid);
-        $converter->convert('sylius_admin_product', array('configuration2'))->willReturn($secondGrid);
-        $converter->convert('sylius_admin_order', array('configuration3'))->willReturn($thirdGrid);
+        $converter->convert('sylius_admin_tax_category', ['configuration1'])->willReturn($firstGrid);
+        $converter->convert('sylius_admin_product', ['configuration2'])->willReturn($secondGrid);
+        $converter->convert('sylius_admin_order', ['configuration3'])->willReturn($thirdGrid);
 
-        $this->beConstructedWith($converter, array(
-            'sylius_admin_tax_category' => array('configuration1'),
-            'sylius_admin_product' => array('configuration2'),
-            'sylius_admin_order' => array('configuration3'),
-        ));
+        $this->beConstructedWith($converter, [
+            'sylius_admin_tax_category' => ['configuration1'],
+            'sylius_admin_product' => ['configuration2'],
+            'sylius_admin_order' => ['configuration3'],
+        ]);
     }
 
     function it_is_initializable()
@@ -60,7 +60,7 @@ class ArrayGridProviderSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(new UndefinedGridException('sylius_admin_order_item'))
-            ->during('get', array('sylius_admin_order_item'))
+            ->during('get', ['sylius_admin_order_item'])
         ;
     }
 }

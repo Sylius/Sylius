@@ -20,9 +20,7 @@
         }
     ],
     "require": {
-        "php": "^5.5.9|^7.0",
-
-        "sylius/resource": "0.17.*"
+        "php": "^5.5.9|^7.0"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.4"

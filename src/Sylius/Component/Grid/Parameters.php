@@ -24,7 +24,7 @@ class Parameters
     /**
      * @param array $parameters
      */
-    public function __construct(array $parameters = array())
+    public function __construct(array $parameters = [])
     {
         $this->parameters = $parameters;
     }
@@ -59,7 +59,7 @@ class Parameters
     /**
      * @param string $key
      *
-     * @return Boolean
+     * @return bool
      */
     public function has($key)
     {

@@ -14,6 +14,9 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 use Pagerfanta\Pagerfanta;
+use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridViewFactoryInterface;
+use Sylius\Component\Grid\Parameters as GridParameters;
+use Sylius\Component\Grid\Provider\GridProviderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -27,11 +30,25 @@ class ResourcesCollectionProvider implements ResourcesCollectionProviderInterfac
     private $pagerfantaRepresentationFactory;
 
     /**
-     * @param PagerfantaFactory $pagerfantaRepresentationFactory
+     * @var GridProviderInterface
      */
-    public function __construct(PagerfantaFactory $pagerfantaRepresentationFactory)
+    private $gridProvider;
+
+    /**
+     * @var ResourceGridViewFactoryInterface
+     */
+    private $gridViewFactory;
+
+    /**
+     * @param PagerfantaFactory $pagerfantaRepresentationFactory
+     * @param GridProviderInterface $gridProvider
+     * @param ResourceGridViewFactoryInterface $gridViewFactory
+     */
+    public function __construct(PagerfantaFactory $pagerfantaRepresentationFactory, GridProviderInterface $gridProvider, ResourceGridViewFactoryInterface $gridViewFactory)
     {
         $this->pagerfantaRepresentationFactory = $pagerfantaRepresentationFactory;
+        $this->gridProvider = $gridProvider;
+        $this->gridViewFactory = $gridViewFactory;
     }
 
     /**
@@ -45,12 +62,10 @@ class ResourcesCollectionProvider implements ResourcesCollectionProviderInterfac
             $request = $requestConfiguration->getRequest();
             $resources->setMaxPerPage($requestConfiguration->getPaginationMaxPerPage());
             $resources->setCurrentPage($request->query->get('page', 1));
+        }
 
-            if (!$requestConfiguration->isHtmlRequest()) {
-                $route = new Route($request->attributes->get('_route'), array_merge($request->attributes->get('_route_params'), $request->query->all()));
-
-                return $this->pagerfantaRepresentationFactory->createRepresentation($resources, $route);
-            }
+        if (!$requestConfiguration->isHtmlRequest() && $resources instanceof Pagerfanta) {
+            return $this->createPaginatedRepresentation($requestConfiguration, $resources);
         }
 
         return $resources;
@@ -64,6 +79,10 @@ class ResourcesCollectionProvider implements ResourcesCollectionProviderInterfac
      */
     private function getResources(RequestConfiguration $requestConfiguration, RepositoryInterface $repository)
     {
+        if ($requestConfiguration->hasGrid()) {
+            return $this->getGrid($requestConfiguration);
+        }
+
         if (null !== $repositoryMethod = $requestConfiguration->getRepositoryMethod()) {
             $callable = [$repository, $repositoryMethod];
 
@@ -81,5 +100,40 @@ class ResourcesCollectionProvider implements ResourcesCollectionProviderInterfac
         }
 
         return $repository->createPaginator($requestConfiguration->getCriteria(), $requestConfiguration->getSorting());
+    }
+
+    /**
+     * @param RequestConfiguration $requestConfiguration
+     *
+     * @return mixed
+     */
+    private function getGrid(RequestConfiguration $requestConfiguration)
+    {
+        $gridDefinition = $this->gridProvider->get($requestConfiguration->getGrid());
+
+        $request = $requestConfiguration->getRequest();
+        $parameters = new GridParameters($request->query->all());
+
+        $gridView = $this->gridViewFactory->create($gridDefinition, $parameters, $requestConfiguration->getMetadata(), $requestConfiguration);
+
+        if ($requestConfiguration->isHtmlRequest()) {
+            return $gridView;
+        }
+
+        return $gridView->getData();
+    }
+
+    /**
+     * @param RequestConfiguration $requestConfiguration
+     * @param Pagerfanta $paginator
+     *
+     * @return PaginatedRepresentation
+     */
+    private function createPaginatedRepresentation(RequestConfiguration $requestConfiguration, Pagerfanta $paginator)
+    {
+        $request = $requestConfiguration->getRequest();
+        $route = new Route($request->attributes->get('_route'), array_merge($request->attributes->get('_route_params'), $request->query->all()));
+
+        return $this->pagerfantaRepresentationFactory->createRepresentation($paginator, $route);
     }
 }

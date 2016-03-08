@@ -47,9 +47,9 @@ class GridViewFactorySpec extends ObjectBehavior
         Grid $grid,
         Parameters $parameters
     ) {
-        $expectedGridView = new GridView(array('foo', 'bar'), $grid->getWrappedObject(), $parameters->getWrappedObject());
+        $expectedGridView = new GridView(['foo', 'bar'], $grid->getWrappedObject(), $parameters->getWrappedObject());
         
-        $dataProvider->getData($grid, $parameters)->willReturn(array('foo', 'bar'));
+        $dataProvider->getData($grid, $parameters)->willReturn(['foo', 'bar']);
         
         $this->create($grid, $parameters)->shouldBeSameGridViewAs($expectedGridView);
     }

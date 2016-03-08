@@ -23,7 +23,7 @@ interface GridRendererInterface
 {
     /**
      * @param GridView $gridView
-     * @param string $template
+     * @param string|null $template
      *
      * @return mixed
      */
@@ -41,7 +41,7 @@ interface GridRendererInterface
     /**
      * @param GridView $gridView
      * @param Action $action
-     * @param mixed $data
+     * @param mixed|null $data
      *
      * @return mixed
      */

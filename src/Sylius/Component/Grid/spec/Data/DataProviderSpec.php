@@ -58,8 +58,8 @@ class DataProviderSpec extends ObjectBehavior
         $filtersApplicator->apply($dataSource, $grid, $parameters)->shouldBeCalled();
         $sorter->sort($dataSource, $grid, $parameters)->shouldBeCalled();
 
-        $dataSource->getData($parameters)->willReturn(array('foo', 'bar'));
+        $dataSource->getData($parameters)->willReturn(['foo', 'bar']);
 
-        $this->getData($grid, $parameters)->shouldReturn(array('foo', 'bar'));
+        $this->getData($grid, $parameters)->shouldReturn(['foo', 'bar']);
     }
 }

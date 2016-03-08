@@ -24,7 +24,7 @@ class ActionGroup
     /**
      * @var array
      */
-    private $actions = array();
+    private $actions = [];
 
     /**
      * @param string $name
@@ -39,9 +39,7 @@ class ActionGroup
      */
     public static function named($name)
     {
-        $actionGroup = new ActionGroup($name);
-
-        return $actionGroup;
+        return new ActionGroup($name);
     }
 
     /**
@@ -89,6 +87,6 @@ class ActionGroup
      */
     public function hasAction($name)
     {
-        return array_key_exists($name, $this->actions);
+        return isset($this->actions[$name]);
     }
 }

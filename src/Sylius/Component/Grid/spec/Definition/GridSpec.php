@@ -28,11 +28,11 @@ class GridSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedThrough('fromCodeAndDriverConfiguration', array('sylius_admin_tax_category', 'doctrine/orm', array(
+        $this->beConstructedThrough('fromCodeAndDriverConfiguration', ['sylius_admin_tax_category', 'doctrine/orm', [
             'resource' => 'sylius.tax_category',
             'method' => 'createByCodeQueryBuilder',
             'arguments' => ['$code']
-        )));
+        ]]);
     }
 
     function it_is_initializable()
@@ -52,27 +52,27 @@ class GridSpec extends ObjectBehavior
 
     function it_has_driver_configuration()
     {
-        $this->getDriverConfiguration()->shouldReturn(array(
+        $this->getDriverConfiguration()->shouldReturn([
             'resource' => 'sylius.tax_category',
             'method' => 'createByCodeQueryBuilder',
             'arguments' => ['$code']
-        ));
+        ]);
     }
     
     function it_has_empty_sorting_configuration_by_default()
     {
-        $this->getSorting()->shouldReturn(array());
+        $this->getSorting()->shouldReturn([]);
     }
     
     function it_can_have_sorting_configuration()
     {
-        $this->setSorting(array('name' => 'desc'));
-        $this->getSorting()->shouldReturn(array('name' => 'desc'));
+        $this->setSorting(['name' => 'desc']);
+        $this->getSorting()->shouldReturn(['name' => 'desc']);
     }
     
     function it_does_not_have_any_fields_by_default()
     {
-        $this->getFields()->shouldReturn(array());
+        $this->getFields()->shouldReturn([]);
     }
 
     function it_can_have_field_definitions(Field $field)
@@ -92,7 +92,7 @@ class GridSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('addField', array($secondField))
+            ->during('addField', [$secondField])
         ;
     }
     
@@ -107,7 +107,7 @@ class GridSpec extends ObjectBehavior
 
     function it_does_not_have_any_action_groups_by_default()
     {
-        $this->getActionGroups()->shouldReturn(array());
+        $this->getActionGroups()->shouldReturn([]);
     }
 
     function it_can_have_action_group_definitions(ActionGroup $actionGroup)
@@ -127,7 +127,7 @@ class GridSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('addActionGroup', array($secondActionGroup))
+            ->during('addActionGroup', [$secondActionGroup])
         ;
     }
 
@@ -151,7 +151,7 @@ class GridSpec extends ObjectBehavior
 
     function it_does_not_have_any_filters_by_default()
     {
-        $this->getFilters()->shouldReturn(array());
+        $this->getFilters()->shouldReturn([]);
     }
 
     function it_can_have_filter_definitions(Filter $filter)
@@ -171,7 +171,7 @@ class GridSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('addFilter', array($secondFilter))
+            ->during('addFilter', [$secondFilter])
         ;
     }
 

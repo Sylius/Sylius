@@ -47,7 +47,7 @@ class DriverSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('getDataSource', array(array(), $parameters));
+            ->during('getDataSource', [[], $parameters]);
         ;
     }
 
@@ -60,6 +60,6 @@ class DriverSpec extends ObjectBehavior
         $entityManager->getRepository('App:Book')->willReturn($entityRepository);
         $entityRepository->createQueryBuilder('o')->willReturn($queryBuilder);
         
-        $this->getDataSource(array('class' => 'App:Book'), $parameters)->shouldHaveType(DataSource::class);
+        $this->getDataSource(['class' => 'App:Book'], $parameters)->shouldHaveType(DataSource::class);
     }
 }

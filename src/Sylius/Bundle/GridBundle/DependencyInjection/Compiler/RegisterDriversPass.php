@@ -32,7 +32,7 @@ class RegisterDriversPass implements CompilerPassInterface
                 throw new \InvalidArgumentException('Tagged grid drivers needs to have `alias` attribute.');
             }
 
-            $registry->addMethodCall('register', array($attributes[0]['alias'], new Reference($id)));
+            $registry->addMethodCall('register', [$attributes[0]['alias'], new Reference($id)]);
         }
     }
 }

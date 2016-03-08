@@ -41,8 +41,7 @@ class TwigFieldType implements FieldTypeInterface
     }
 
     /**
-     * @param Field $field
-     * @param $data
+     * {@inheritdoc}
      */
     public function render(Field $field, $data)
     {

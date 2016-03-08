@@ -21,10 +21,9 @@ class ArrayGridProvider implements GridProviderInterface
     /**
      * @var Grid[]
      */
-    private $grids = array();
+    private $grids = [];
 
     /**
-     * ArrayGridProvider constructor.
      * @param ArrayToDefinitionConverterInterface $converter
      * @param array $gridConfigurations
      */

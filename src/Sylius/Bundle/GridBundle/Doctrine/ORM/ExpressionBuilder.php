@@ -40,7 +40,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
         $expr = $this->queryBuilder->expr();
 
         if (is_array($expressions)) {
-            return call_user_func_array(array($expr, 'andX'), $expressions);
+            return call_user_func_array([$expr, 'andX'], $expressions);
         }
 
         return $this->queryBuilder->expr()->andX(func_get_args());
@@ -54,7 +54,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
         $expr = $this->queryBuilder->expr();
 
         if (is_array($expressions)) {
-            return call_user_func_array(array($expr, 'orX'), $expressions);
+            return call_user_func_array([$expr, 'orX'], $expressions);
         }
 
         return $this->queryBuilder->expr()->orX(func_get_args());
@@ -65,6 +65,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
      */
     public function comparison($field, $operator, $value)
     {
+        throw new \BadMethodCallException('Not supported yet.');
         // TODO: Implement comparison() method.
     }
 

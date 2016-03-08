@@ -24,7 +24,7 @@ class FilterSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedThrough('fromNameAndType', array('keywords', 'string'));
+        $this->beConstructedThrough('fromNameAndType', ['keywords', 'string']);
     }
 
     function it_is_initializable()
@@ -52,12 +52,12 @@ class FilterSpec extends ObjectBehavior
     
     function it_has_no_options_by_default()
     {
-        $this->getOptions()->shouldReturn(array());
+        $this->getOptions()->shouldReturn([]);
     }
 
     function it_can_have_options()
     {
-        $this->setOptions(array('fields' => ['firstName', 'lastName', 'email']));
-        $this->getOptions()->shouldReturn(array('fields' => ['firstName', 'lastName', 'email']));
+        $this->setOptions(['fields' => ['firstName', 'lastName', 'email']]);
+        $this->getOptions()->shouldReturn(['fields' => ['firstName', 'lastName', 'email']]);
     }
 }

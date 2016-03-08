@@ -27,20 +27,20 @@ class StringFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('type', 'choice', array(
-                'choices' => array(
-                    StringFilter::TYPE_CONTAINS     => 'sylius.ui.contains',
+            ->add('type', 'choice', [
+                'choices' => [
+                    StringFilter::TYPE_CONTAINS => 'sylius.ui.contains',
                     StringFilter::TYPE_NOT_CONTAINS => 'sylius.ui.not_contains',
-                    StringFilter::TYPE_EQUAL        => 'sylius.ui.equal',
-                    StringFilter::TYPE_EMPTY        => 'sylius.ui.empty',
-                    StringFilter::TYPE_NOT_EMPTY    => 'sylius.ui.not_empty',
-                    StringFilter::TYPE_STARTS_WITH  => 'sylius.ui.starts_with',
-                    StringFilter::TYPE_ENDS_WITH    => 'sylius.ui.ends_with',
-                    StringFilter::TYPE_IN           => 'sylius.ui.in',
-                    StringFilter::TYPE_NOT_IN       => 'sylius.ui.not_in'
-                )
-            ))
-            ->add('value', 'text', array('required' => false))
+                    StringFilter::TYPE_EQUAL => 'sylius.ui.equal',
+                    StringFilter::TYPE_EMPTY => 'sylius.ui.empty',
+                    StringFilter::TYPE_NOT_EMPTY => 'sylius.ui.not_empty',
+                    StringFilter::TYPE_STARTS_WITH => 'sylius.ui.starts_with',
+                    StringFilter::TYPE_ENDS_WITH => 'sylius.ui.ends_with',
+                    StringFilter::TYPE_IN => 'sylius.ui.in',
+                    StringFilter::TYPE_NOT_IN => 'sylius.ui.not_in'
+                ]
+            ])
+            ->add('value', 'text', ['required' => false])
         ;
     }
 
@@ -50,15 +50,15 @@ class StringFilterType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'data_class' => null
-            ))
-            ->setOptional(array(
+            ])
+            ->setOptional([
                 'fields'
-            ))
-            ->setAllowedTypes(array(
-                'fields' => array('array')
-            ))
+            ])
+            ->setAllowedTypes([
+                'fields' => ['array']
+            ])
         ;
     }
 

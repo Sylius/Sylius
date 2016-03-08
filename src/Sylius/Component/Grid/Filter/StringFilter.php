@@ -38,10 +38,10 @@ class StringFilter implements FilterInterface
         $expressionBuilder = $dataSource->getExpressionBuilder();
 
         if (!is_array($data)) {
-            $data = array('type' => self::TYPE_CONTAINS, 'value' => $data);
+            $data = ['type' => self::TYPE_CONTAINS, 'value' => $data];
         }
 
-        $fields = array_key_exists('fields', $options) ? $options['fields'] : array($name);
+        $fields = array_key_exists('fields', $options) ? $options['fields'] : [$name];
 
         $type = $data['type'];
         $value = array_key_exists('value', $data) ? $data['value'] : null;
@@ -49,7 +49,7 @@ class StringFilter implements FilterInterface
         if (1 === count($fields)) {
             $expression = $this->getExpression($expressionBuilder, $type, $name, $value);
         } else {
-            $expressions = array();
+            $expressions = [];
 
             foreach ($fields as $field) {
                 $expressions[] = $this->getExpression($expressionBuilder, $type, $field, $value);
@@ -62,8 +62,6 @@ class StringFilter implements FilterInterface
     }
 
     /**
-     * Get expression.
-     *
      * @param string $type
      * @param string $field
      * @param mixed  $value

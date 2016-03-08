@@ -10,6 +10,7 @@
  */
 
 namespace Sylius\Component\Grid\Data;
+
 use Sylius\Component\Grid\Parameters;
 
 /**

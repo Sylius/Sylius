@@ -34,7 +34,7 @@ class Filter
     /**
      * @var array
      */
-    private $options = array();
+    private $options = [];
 
     /**
      * @param string $name
@@ -56,9 +56,7 @@ class Filter
      */
     public static function fromNameAndType($name, $type)
     {
-        $field = new Filter($name, $type);
-
-        return $field;
+        return new Filter($name, $type);
     }
 
     /**

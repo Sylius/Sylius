@@ -33,7 +33,7 @@ class ResourceGridViewSpec extends ObjectBehavior
         MetadataInterface $resourceMetadata,
         RequestConfiguration $requestConfiguration
     ) {
-        $this->beConstructedWith(array('foo', 'bar'), $gridDefinition, $parameters, $resourceMetadata, $requestConfiguration);
+        $this->beConstructedWith(['foo', 'bar'], $gridDefinition, $parameters, $resourceMetadata, $requestConfiguration);
     }
 
     function it_is_initializable()

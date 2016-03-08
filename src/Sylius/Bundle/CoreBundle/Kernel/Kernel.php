@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Kernel;
 
+use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 
@@ -134,7 +135,7 @@ abstract class Kernel extends BaseKernel
     protected function getContainerBaseClass()
     {
         if ('test' === $this->environment) {
-            return '\PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer';
+            return MockerContainer::class;
         }
 
         return parent::getContainerBaseClass();

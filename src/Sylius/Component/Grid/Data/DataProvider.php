@@ -41,8 +41,11 @@ class DataProvider implements DataProviderInterface
      * @param FiltersApplicatorInterface $filtersApplicator
      * @param SorterInterface $sorter
      */
-    public function __construct(DataSourceProviderInterface $dataSourceProvider, FiltersApplicatorInterface $filtersApplicator, SorterInterface $sorter)
-    {
+    public function __construct(
+        DataSourceProviderInterface $dataSourceProvider,
+        FiltersApplicatorInterface $filtersApplicator,
+        SorterInterface $sorter
+    ) {
         $this->dataSourceProvider = $dataSourceProvider;
         $this->filtersApplicator = $filtersApplicator;
         $this->sorter = $sorter;

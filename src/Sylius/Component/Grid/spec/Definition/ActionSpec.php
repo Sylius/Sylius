@@ -24,7 +24,7 @@ class ActionSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedThrough('fromNameAndType', array('view', 'link'));
+        $this->beConstructedThrough('fromNameAndType', ['view', 'link']);
     }
 
     function it_is_initializable()
@@ -52,12 +52,12 @@ class ActionSpec extends ObjectBehavior
 
     function it_has_no_options_by_default()
     {
-        $this->getOptions()->shouldReturn(array());
+        $this->getOptions()->shouldReturn([]);
     }
 
     function it_can_have_options()
     {
-        $this->setOptions(array('route' => 'sylius_admin_product_update'));
-        $this->getOptions()->shouldReturn(array('route' => 'sylius_admin_product_update'));
+        $this->setOptions(['route' => 'sylius_admin_product_update']);
+        $this->getOptions()->shouldReturn(['route' => 'sylius_admin_product_update']);
     }
 }

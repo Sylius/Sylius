@@ -38,17 +38,17 @@ class Grid
     /**
      * @var array
      */
-    private $fields = array();
+    private $fields = [];
 
     /**
      * @var array
      */
-    private $filters = array();
+    private $filters = [];
 
     /**
      * @var array
      */
-    private $actionGroups = array();
+    private $actionGroups = [];
 
     /**
      * @param string $code
@@ -71,9 +71,7 @@ class Grid
      */
     public static function fromCodeAndDriverConfiguration($code, $driver, array $driverConfiguration)
     {
-        $grid = new Grid($code, $driver, $driverConfiguration);
-
-        return $grid;
+        return new Grid($code, $driver, $driverConfiguration);
     }
 
     /**
@@ -129,7 +127,9 @@ class Grid
      */
     public function addField(Field $field)
     {
-        if ($this->hasField($name = $field->getName())) {
+        $name = $field->getName();
+
+        if ($this->hasField($name)) {
             throw new \InvalidArgumentException(sprintf('Field "%s" already exists.', $name));
         }
 
@@ -169,7 +169,9 @@ class Grid
      */
     public function addActionGroup(ActionGroup $actionGroup)
     {
-        if ($this->hasActionGroup($name = $actionGroup->getName())) {
+        $name = $actionGroup->getName();
+
+        if ($this->hasActionGroup($name)) {
             throw new \InvalidArgumentException(sprintf('ActionGroup "%s" already exists.', $name));
         }
 

@@ -24,7 +24,7 @@ class FieldSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedThrough('fromNameAndType', array('enabled', 'boolean'));
+        $this->beConstructedThrough('fromNameAndType', ['enabled', 'boolean']);
     }
 
     function it_is_initializable()
@@ -60,12 +60,12 @@ class FieldSpec extends ObjectBehavior
     
     function it_has_no_options_by_default()
     {
-        $this->getOptions()->shouldReturn(array());
+        $this->getOptions()->shouldReturn([]);
     }
 
     function it_can_have_options()
     {
-        $this->setOptions(array('template' => 'SyliusUiBundle:Grid/Field:_status.html.twig'));
-        $this->getOptions()->shouldReturn(array('template' => 'SyliusUiBundle:Grid/Field:_status.html.twig'));
+        $this->setOptions(['template' => 'SyliusUiBundle:Grid/Field:_status.html.twig']);
+        $this->getOptions()->shouldReturn(['template' => 'SyliusUiBundle:Grid/Field:_status.html.twig']);
     }
 }

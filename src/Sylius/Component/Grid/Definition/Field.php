@@ -39,7 +39,7 @@ class Field
     /**
      * @var array
      */
-    private $options = array();
+    private $options = [];
 
     /**
      * @param string $name
@@ -62,9 +62,7 @@ class Field
      */
     public static function fromNameAndType($name, $type)
     {
-        $field = new Field($name, $type);
-
-        return $field;
+        return new Field($name, $type);
     }
 
     /**

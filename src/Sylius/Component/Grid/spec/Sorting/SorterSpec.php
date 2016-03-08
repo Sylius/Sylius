@@ -45,7 +45,7 @@ class SorterSpec extends ObjectBehavior
     ) {
         $parameters->has('sorting')->willReturn(false);
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
-        $grid->getSorting()->willReturn(array('name' => 'desc'));
+        $grid->getSorting()->willReturn(['name' => 'desc']);
 
         $expressionBuilder->addOrderBy('name', 'desc')->shouldBeCalled();
 
@@ -59,10 +59,10 @@ class SorterSpec extends ObjectBehavior
         ExpressionBuilderInterface $expressionBuilder
     ) {
         $parameters->has('sorting')->willReturn(true);
-        $parameters->get('sorting')->willReturn(array('name' => 'asc'));
+        $parameters->get('sorting')->willReturn(['name' => 'asc']);
 
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
-        $grid->getSorting()->willReturn(array('name' => 'desc'));
+        $grid->getSorting()->willReturn(['name' => 'desc']);
 
         $expressionBuilder->addOrderBy('name', 'asc')->shouldBeCalled();
 

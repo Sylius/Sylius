@@ -20,6 +20,8 @@ use Sylius\Component\Grid\Parameters;
  */
 class Driver implements DriverInterface
 {
+    const NAME = 'doctrine/orm';
+
     /**
      * @var EntityManagerInterface
      */

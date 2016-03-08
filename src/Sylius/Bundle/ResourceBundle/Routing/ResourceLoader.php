@@ -97,7 +97,7 @@ class ResourceLoader implements LoaderInterface
         }
 
         if (in_array('delete', $routesToGenerate)) {
-            $deleteRoute = $this->createRoute($metadata, $configuration, $rootPath . '{id}', 'delete', array('DELETE'), $isApi);
+            $deleteRoute = $this->createRoute($metadata, $configuration, $rootPath . '{id}', 'delete', ['DELETE'], $isApi);
             $routes->add($this->getRouteName($metadata, $configuration, 'delete'), $deleteRoute);
         }
 

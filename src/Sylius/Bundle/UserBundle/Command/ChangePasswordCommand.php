@@ -32,10 +32,10 @@ class ChangePasswordCommand extends ContainerAwareCommand
         $this
             ->setName('sylius:user:change-password')
             ->setDescription('Change the password of a user.')
-            ->setDefinition(array(
+            ->setDefinition([
                 new InputArgument('email', InputArgument::REQUIRED, 'The email'),
                 new InputArgument('password', InputArgument::REQUIRED, 'The password'),
-            ))
+            ])
             ->setHelp(<<<EOT
 The <info>sylius:user:change-password</info> command changes the password of a user:
   <info>php app/console sylius:user:change-password matthieu@email.com</info>

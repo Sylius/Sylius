@@ -57,17 +57,17 @@ class TwigGridRenderer implements GridRendererInterface
     /**
      * @param \Twig_Environment $twig
      * @param ServiceRegistryInterface $fieldsRegistry
+     * @param FormFactoryInterface $formFactory
      * @param string $defaultTemplate
      * @param array $actionTemplates
-     * @param FormFactoryInterface $formFactory
      * @param array $filterTemplates
      */
     public function __construct(
         \Twig_Environment $twig,
-        $defaultTemplate,
         ServiceRegistryInterface $fieldsRegistry,
-        array $actionTemplates = [],
         FormFactoryInterface $formFactory,
+        $defaultTemplate,
+        array $actionTemplates = [],
         array $filterTemplates = []
     ) {
         $this->twig = $twig;

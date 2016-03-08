@@ -44,7 +44,7 @@ class StringFilterSpec extends ObjectBehavior
         $expressionBuilder->like('firstName', '%John%')->willReturn('EXPR');
         $dataSource->restrict('EXPR')->shouldBeCalled();
         
-        $this->apply($dataSource, 'firstName', 'John', array());
+        $this->apply($dataSource, 'firstName', 'John', []);
     }
 
     function it_filters_equal_strings(
@@ -56,7 +56,7 @@ class StringFilterSpec extends ObjectBehavior
         $expressionBuilder->equals('firstName', 'John')->willReturn('EXPR');
         $dataSource->restrict('EXPR')->shouldBeCalled();
 
-        $this->apply($dataSource, 'firstName', array('type' => StringFilter::TYPE_EQUAL, 'value' => 'John'), array());
+        $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_EQUAL, 'value' => 'John'], []);
     }
 
     function it_filters_data_containing_empty_strings(
@@ -69,7 +69,7 @@ class StringFilterSpec extends ObjectBehavior
         $expressionBuilder->isNull('firstName')->willReturn('EXPR');
         $dataSource->restrict('EXPR')->shouldBeCalled();
 
-        $this->apply($dataSource, 'firstName', array('type' => StringFilter::TYPE_EMPTY), array());
+        $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_EMPTY], []);
     }
 
     function it_filters_data_containing_not_empty_strings(
@@ -81,7 +81,7 @@ class StringFilterSpec extends ObjectBehavior
         $expressionBuilder->isNotNull('firstName')->willReturn('EXPR');
         $dataSource->restrict('EXPR')->shouldBeCalled();
 
-        $this->apply($dataSource, 'firstName', array('type' => StringFilter::TYPE_NOT_EMPTY), array());
+        $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_NOT_EMPTY], []);
     }
 
     function it_filters_data_containing_a_string(
@@ -94,7 +94,7 @@ class StringFilterSpec extends ObjectBehavior
         $expressionBuilder->like('firstName', '%John%')->willReturn('EXPR');
         $dataSource->restrict('EXPR')->shouldBeCalled();
 
-        $this->apply($dataSource, 'firstName', array('type' => StringFilter::TYPE_CONTAINS, 'value' => 'John'), array());
+        $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_CONTAINS, 'value' => 'John'], []);
     }
 
     function it_filters_data_not_containing_a_string(
@@ -106,7 +106,7 @@ class StringFilterSpec extends ObjectBehavior
         $expressionBuilder->notLike('firstName', '%John%')->willReturn('EXPR');
         $dataSource->restrict('EXPR')->shouldBeCalled();
 
-        $this->apply($dataSource, 'firstName', array('type' => StringFilter::TYPE_NOT_CONTAINS, 'value' => 'John'), array());
+        $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_NOT_CONTAINS, 'value' => 'John'], []);
     }
 
     function it_filters_data_starting_with_a_string(
@@ -118,7 +118,7 @@ class StringFilterSpec extends ObjectBehavior
         $expressionBuilder->like('firstName', 'John%')->willReturn('EXPR');
         $dataSource->restrict('EXPR')->shouldBeCalled();
 
-        $this->apply($dataSource, 'firstName', array('type' => StringFilter::TYPE_STARTS_WITH, 'value' => 'John'), array());
+        $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_STARTS_WITH, 'value' => 'John'], []);
     }
 
     function it_filters_data_ending_with_a_string(
@@ -130,7 +130,7 @@ class StringFilterSpec extends ObjectBehavior
         $expressionBuilder->like('firstName', '%John')->willReturn('EXPR');
         $dataSource->restrict('EXPR')->shouldBeCalled();
 
-        $this->apply($dataSource, 'firstName', array('type' => StringFilter::TYPE_ENDS_WITH, 'value' => 'John'), array());
+        $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_ENDS_WITH, 'value' => 'John'], []);
     }
 
     function it_filters_data_containing_one_of_strings(
@@ -139,10 +139,10 @@ class StringFilterSpec extends ObjectBehavior
     ) {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
-        $expressionBuilder->in('firstName', array('John', 'Paul', 'Rick'))->willReturn('EXPR');
+        $expressionBuilder->in('firstName', ['John', 'Paul', 'Rick'])->willReturn('EXPR');
         $dataSource->restrict('EXPR')->shouldBeCalled();
 
-        $this->apply($dataSource, 'firstName', array('type' => StringFilter::TYPE_IN, 'value' => 'John, Paul,Rick'), array());
+        $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_IN, 'value' => 'John, Paul,Rick'], []);
     }
 
     function it_filters_data_containing_none_of_strings(
@@ -151,10 +151,10 @@ class StringFilterSpec extends ObjectBehavior
     ) {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
-        $expressionBuilder->notIn('firstName', array('John', 'Paul', 'Rick'))->willReturn('EXPR');
+        $expressionBuilder->notIn('firstName', ['John', 'Paul', 'Rick'])->willReturn('EXPR');
         $dataSource->restrict('EXPR')->shouldBeCalled();
 
-        $this->apply($dataSource, 'firstName', array('type' => StringFilter::TYPE_NOT_IN, 'value' => 'John, Paul,Rick'), array());
+        $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_NOT_IN, 'value' => 'John, Paul,Rick'], []);
     }
 
     function it_filters_in_multiple_fields(
@@ -165,10 +165,10 @@ class StringFilterSpec extends ObjectBehavior
 
         $expressionBuilder->like('firstName', '%John%')->willReturn('EXPR1');
         $expressionBuilder->like('lastName', '%John%')->willReturn('EXPR2');
-        $expressionBuilder->orX(array('EXPR1', 'EXPR2'))->willReturn('EXPR');
+        $expressionBuilder->orX(['EXPR1', 'EXPR2'])->willReturn('EXPR');
 
         $dataSource->restrict('EXPR')->shouldBeCalled();
 
-        $this->apply($dataSource, 'name', 'John', array('fields' => ['firstName', 'lastName']));
+        $this->apply($dataSource, 'name', 'John', ['fields' => ['firstName', 'lastName']]);
     }
 }

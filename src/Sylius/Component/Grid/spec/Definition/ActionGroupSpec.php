@@ -25,7 +25,7 @@ class ActionGroupSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedThrough('named', array('row'));
+        $this->beConstructedThrough('named', ['row']);
     }
 
     function it_is_initializable()
@@ -40,7 +40,7 @@ class ActionGroupSpec extends ObjectBehavior
 
     function it_does_not_have_any_actions_by_default()
     {
-        $this->getActions()->shouldReturn(array());
+        $this->getActions()->shouldReturn([]);
     }
 
     function it_can_have_action_definitions(Action $action)
@@ -49,7 +49,7 @@ class ActionGroupSpec extends ObjectBehavior
         
         $this->addAction($action);
         $this->getAction('display_summary')->shouldReturn($action);
-        $this->getActions()->shouldReturn(array('display_summary' => $action));
+        $this->getActions()->shouldReturn(['display_summary' => $action]);
     }
 
     function it_cannot_have_two_actions_with_the_same_name(Action $firstAction, Action $secondAction)
@@ -61,7 +61,7 @@ class ActionGroupSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('addAction', array($secondAction))
+            ->during('addAction', [$secondAction])
         ;
     }
     

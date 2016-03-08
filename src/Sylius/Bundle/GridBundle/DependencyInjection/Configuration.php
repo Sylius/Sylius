@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\GridBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Bundle\GridBundle\Doctrine\ORM\Driver as DoctrineORMDriver;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -35,8 +35,6 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Adds `grids` section.
-     *
      * @param ArrayNodeDefinition $node
      */
     private function addGridsSection(ArrayNodeDefinition $node)
@@ -49,10 +47,10 @@ class Configuration implements ConfigurationInterface
                         ->children()
                             ->arrayNode('driver')
                                 ->children()
-                                    ->scalarNode('name')->defaultValue('doctrine/orm')->end()
+                                    ->scalarNode('name')->defaultValue(DoctrineORMDriver::NAME)->end()
                                     ->arrayNode('options')
                                         ->prototype('variable')->end()
-                                        ->defaultValue(array())
+                                        ->defaultValue([])
                                     ->end()
                                 ->end()
                             ->end()

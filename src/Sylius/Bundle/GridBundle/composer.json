@@ -20,9 +20,17 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3",
+        "php": "^5.5.9|^7.0",
 
-        "sylius/resource-bundle": "0.14.*@dev"
+        "symfony/form": "^2.7",
+        "symfony/framework-bundle": "^2.7.7"
+    },
+    "require-dev": {
+        "doctrine/orm": "^2.4.8,<2.5",
+        "matthiasnoback/symfony-dependency-injection-test": "0.*",
+        "phpspec/phpspec": "^2.4",
+        "phpunit/phpunit": "^4.8",
+        "twig/twig": "~1.11"
     },
     "config": {
         "bin-dir": "bin"
@@ -30,6 +38,7 @@
     "autoload": {
         "psr-4": { "Sylius\\Bundle\\GridBundle\\": "" }
     },
+    "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
             "dev-master": "0.14-dev"

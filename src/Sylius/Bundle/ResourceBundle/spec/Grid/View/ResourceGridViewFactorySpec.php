@@ -59,7 +59,7 @@ class ResourceGridViewFactorySpec extends ObjectBehavior
             $requestConfiguration->getWrappedObject()
         );
 
-        $dataProvider->getData($grid, $parameters)->willReturn(array('foo', 'bar'));
+        $dataProvider->getData($grid, $parameters)->willReturn(['foo', 'bar']);
 
         $this->create($grid, $parameters, $resourceMetadata, $requestConfiguration)->shouldBeSameResourceGridViewAs($expectedResourceGridView);
     }

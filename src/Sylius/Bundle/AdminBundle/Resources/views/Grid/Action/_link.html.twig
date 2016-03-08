@@ -1,7 +1,3 @@
 {% from 'SyliusUiBundle:Macro:common.html.twig' import attributes %}
 
-{% if url is not defined %}
-    {% set url = action.options.url %}
-{% endif %}
-
-<a href="{{ url }}" {% if action.options.attr is defined %}{{ macros.attributes(action.options.attr) }}{% endif %}>{{ action.label|trans }}</a>
+<a href="{{ url|default(action.options.url) }}" {% if action.options.attr is defined %}{{ attributes(action.options.attr) }}{% endif %}>{{ action.label|trans }}</a>

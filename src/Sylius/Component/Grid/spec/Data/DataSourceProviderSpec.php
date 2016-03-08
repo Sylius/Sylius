@@ -50,13 +50,13 @@ class DataSourceProviderSpec extends ObjectBehavior
         Parameters $parameters
     ) {
         $grid->getDriver()->willReturn('doctrine/orm');
-        $grid->getDriverConfiguration()->willReturn(array('resource' => 'sylius.tax_category'));
+        $grid->getDriverConfiguration()->willReturn(['resource' => 'sylius.tax_category']);
 
         $driversRegistry->has('doctrine/orm')->willReturn(true);
         $driversRegistry->get('doctrine/orm')->willReturn($driver);
-        $driver->getDataSource(array('resource' => 'sylius.tax_category'), $parameters)->willReturn(array('foo', 'bar'));
+        $driver->getDataSource(['resource' => 'sylius.tax_category'], $parameters)->willReturn(['foo', 'bar']);
 
-        $this->getDataSource($grid, $parameters)->shouldReturn(array('foo', 'bar'));
+        $this->getDataSource($grid, $parameters)->shouldReturn(['foo', 'bar']);
     }
 
     function it_throws_an_exception_if_driver_is_not_supported(Grid $grid, Parameters $parameters, ServiceRegistryInterface $driversRegistry)
@@ -66,7 +66,7 @@ class DataSourceProviderSpec extends ObjectBehavior
         
         $this
             ->shouldThrow(new UnsupportedDriverException('doctrine/banana'))
-            ->during('getDataSource', array($grid, $parameters))
+            ->during('getDataSource', [$grid, $parameters])
         ;
     }
 }

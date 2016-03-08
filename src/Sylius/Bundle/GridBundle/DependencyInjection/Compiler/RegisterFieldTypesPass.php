@@ -32,7 +32,7 @@ class RegisterFieldTypesPass implements CompilerPassInterface
                 throw new \InvalidArgumentException('Tagged grid fields needs to have `type` attribute.');
             }
 
-            $registry->addMethodCall('register', array($attributes[0]['type'], new Reference($id)));
+            $registry->addMethodCall('register', [$attributes[0]['type'], new Reference($id)]);
         }
     }
 }

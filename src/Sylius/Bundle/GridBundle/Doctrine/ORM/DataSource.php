@@ -50,10 +50,10 @@ class DataSource implements DataSourceInterface
         switch ($condition) {
             case DataSourceInterface::CONDITION_AND:
                 $this->queryBuilder->andWhere($expression);
-            break;
+                break;
             case DataSourceInterface::CONDITION_OR:
                 $this->queryBuilder->orWhere($expression);
-            break;
+                break;
         }
     }
 

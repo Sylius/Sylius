@@ -40,9 +40,9 @@ class ArrayToDefinitionConverterSpec extends ObjectBehavior
 
     function it_converts_an_array_to_grid_definition()
     {
-        $grid = Grid::fromCodeAndDriverConfiguration('sylius_admin_tax_category', 'doctrine/orm', array('resource' => 'sylius.tax_category'));
+        $grid = Grid::fromCodeAndDriverConfiguration('sylius_admin_tax_category', 'doctrine/orm', ['resource' => 'sylius.tax_category']);
 
-        $grid->setSorting(array('name' => 'desc'));
+        $grid->setSorting(['name' => 'desc']);
 
         $codeField = Field::fromNameAndType('code', 'string');
         $codeField->setLabel('System Code');
@@ -62,41 +62,41 @@ class ArrayToDefinitionConverterSpec extends ObjectBehavior
         $filter = Filter::fromNameAndType('enabled', 'boolean');
         $grid->addFilter($filter);
 
-        $definitionArray = array(
-            'driver' => array(
+        $definitionArray = [
+            'driver' => [
                 'name' => 'doctrine/orm',
-                'options' => array('resource' => 'sylius.tax_category'),
-            ),
-            'sorting' => array(
+                'options' => ['resource' => 'sylius.tax_category'],
+            ],
+            'sorting' => [
                 'name' => 'desc',
-            ),
-            'fields' => array(
-                'code' => array(
+            ],
+            'fields' => [
+                'code' => [
                     'type' => 'string',
                     'label' => 'System Code',
                     'path' => 'method.code',
                     'options' => [
                         'template' => 'bar.html.twig'
                     ],
-                ),
-            ),
-            'filters' => array(
-                'enabled' => array(
+                ],
+            ],
+            'filters' => [
+                'enabled' => [
                     'type' => 'boolean',
-                )
-            ),
-            'actions' => array(
-                'default' => array(
-                    'view' => array(
+                ]
+            ],
+            'actions' => [
+                'default' => [
+                    'view' => [
                         'type' => 'link',
                         'label' => 'Display Tax Category',
                         'options' => [
                             'foo' => 'bar',
                         ],
-                    )
-                )
-            )
-        );
+                    ]
+                ]
+            ]
+        ];
         
         $this->convert('sylius_admin_tax_category', $definitionArray)->shouldBeSameGridAs($grid);
     }
@@ -105,10 +105,6 @@ class ArrayToDefinitionConverterSpec extends ObjectBehavior
     {
         return [
             'beSameGridAs' => function ($subject, $key) {
-                if (!$subject instanceof Grid || !$key instanceof Grid) {
-                    return false;
-                }
-
                 return serialize($subject) === serialize($key);
             },
         ];
