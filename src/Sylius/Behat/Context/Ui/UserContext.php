@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Customer\CustomerShowPageInterface;
 use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Page\User\LoginPageInterface;
+use Sylius\Behat\Page\User\RegisterPageInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 

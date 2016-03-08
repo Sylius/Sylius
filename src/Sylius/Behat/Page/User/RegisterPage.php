@@ -16,18 +16,10 @@ use Sylius\Behat\Page\SymfonyPage;
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
-class RegisterPage extends SymfonyPage
+class RegisterPage extends SymfonyPage implements RegisterPageInterface
 {
     /**
      * {@inheritdoc}
-     */
-    public function getRouteName()
-    {
-        return 'sylius_user_registration';
-    }
-
-    /**
-     * @param string $email
      */
     public function register($email)
     {
@@ -43,12 +35,20 @@ class RegisterPage extends SymfonyPage
     }
 
     /**
-     * @return bool
+     * {@inheritdoc}
      */
     public function wasRegistrationSuccessful()
     {
         $flashMessage = $this->getDocument()->find('css', '.alert-success');
 
         return null !== $flashMessage;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getRouteName()
+    {
+        return 'sylius_user_registration';
     }
 }

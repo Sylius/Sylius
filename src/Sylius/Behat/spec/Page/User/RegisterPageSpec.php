@@ -16,6 +16,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Factory;
 use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\User\RegisterPageInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -33,13 +34,13 @@ class RegisterPageSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Behat\Page\User\RegisterPage');
     }
 
+    function it_implements_register_page_interface()
+    {
+        $this->shouldImplement(RegisterPageInterface::class);
+    }
+
     function it_is_symfony_page()
     {
         $this->shouldHaveType(SymfonyPage::class);
-    }
-
-    function it_has_route_name()
-    {
-        $this->getRouteName()->shouldReturn('sylius_user_registration');
     }
 }
