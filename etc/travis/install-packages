@@ -6,12 +6,17 @@ install_package() {
     INITIAL_PWD=$(pwd)
     EXIT_CODE=0
 
+    COMPOSER_ADDITIONAL=""
+    if [ "$(echo "$1" | grep ResourceBundle | wc -l)" -eq "1" ]; then
+        COMPOSER_ADDITIONAL="--ignore-platform-reqs"
+    fi
+
     cd "$1"
 
     if is_cache_fresh "${UNIQUE_KEY}"; then
         restore_composer_lock_from_cache "${UNIQUE_KEY}"
     else
-        rebuild_cache || EXIT_CODE=$?
+        rebuild_cache ${COMPOSER_ADDITIONAL} || EXIT_CODE=$?
         store_composer_lock_in_cache "${UNIQUE_KEY}"
     fi
 
@@ -41,7 +46,7 @@ is_cache_fresh() {
 }
 
 rebuild_cache() {
-    composer install --no-interaction --prefer-dist --no-scripts
+    composer install --no-interaction --prefer-dist --no-scripts "$@"
 }
 
 # Argument 1: String to hash
