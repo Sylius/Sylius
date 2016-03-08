@@ -15,3 +15,6 @@ sylius_admin_security:
 
 sylius_admin_tax_category:
     resource: @SyliusAdminBundle/Resources/config/routing/tax_category.yml
+
+sylius_admin_country:
+    resource: @SyliusAdminBundle/Resources/config/routing/country.yml

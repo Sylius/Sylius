@@ -31,6 +31,11 @@
         <parameter key="sylius.behat.page.checkout_thank_you.class">Sylius\Behat\Page\Checkout\CheckoutThankYouPage</parameter>
 
         <parameter key="sylius.behat.page.external.paypal_checkout_express.class">Sylius\Behat\Page\External\PaypalExpressCheckoutPage</parameter>
+
+        <parameter key="sylius.behat.page.admin.crud.index.class">Sylius\Behat\Page\Admin\Crud\IndexPage</parameter>
+        <parameter key="sylius.behat.page.admin.crud.create.class">Sylius\Behat\Page\Admin\Crud\CreatePage</parameter>
+
+        <parameter key="sylius.behat.page.admin.country.create.class">Sylius\Behat\Page\Admin\Country\CreatePage</parameter>
     </parameters>
     <services>
         <service id="sylius.behat.page.cart_summary" class="%sylius.behat.page.cart_summary.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
@@ -53,5 +58,12 @@
         <service id="sylius.behat.page.checkout_thank_you" class="%sylius.behat.page.checkout_thank_you.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
 
         <service id="sylius.behat.page.external.paypal_checkout_express" class="%sylius.behat.page.external.paypal_checkout_express.class%" parent="sylius.behat.page" scope="scenario" public="false" />
+
+        <service id="sylius.behat.page.admin.country.index" class="%sylius.behat.page.admin.crud.index.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false">
+            <argument type="string">country</argument>
+        </service>
+        <service id="sylius.behat.page.admin.country.create" class="%sylius.behat.page.admin.country.create.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false">
+            <argument type="string">country</argument>
+        </service>
     </services>
 </container>

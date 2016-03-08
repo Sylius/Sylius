@@ -7,7 +7,7 @@ Feature: Adding country
     Background:
         Given I am logged in as administrator
 
-    @todo
+    @ui
     Scenario: Adding new country
         Given I want to create new country
         When I name it "France"

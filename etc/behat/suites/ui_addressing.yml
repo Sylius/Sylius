@@ -7,6 +7,8 @@ default:
             contexts_as_services:
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.transform.lexical
+                - sylius.behat.context.setup.security
 
+                - sylius.behat.context.ui.admin.country
             filters:
-                tags: @localization && @ui
+                tags: @addressing && @ui

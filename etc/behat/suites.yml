@@ -35,6 +35,7 @@ imports:
     - suites/ui/channel.yml
     - suites/ui/checkout.yml
     - suites/ui/localization.yml
+    - suites/ui/addressing.yml
     - suites/ui/promotion.yml
     - suites/ui/theme.yml
     - suites/ui/user.yml
