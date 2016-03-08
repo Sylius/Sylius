@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+validate_package() {
+    composer validate --strict "$1/composer.json"
+}
+
+main() {
+    set -e -o pipefail
+
+    # shellcheck source=../concurrent.lib.sh
+    source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../concurrent.lib.sh"
+
+    local args=()
+    for dir in $(etc/travis/find-packages); do
+        args+=(- "Validating dependencies at ${dir}..." validate_package "${dir}")
+    done
+
+    CONCURRENT_LIMIT=10 CONCURRENT_COMPACT=0 CONCURRENT_LOG_DIR="${SYLIUS_BUILD_DIR}" concurrent "${args[@]}"
+}
+
+main

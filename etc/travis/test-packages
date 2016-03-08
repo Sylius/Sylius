@@ -1,12 +1,17 @@
 #!/usr/bin/env bash
 
-INITIAL_PWD=`pwd`
-EXIT_CODE=0
+join_string() {
+    local IFS="$1"; shift; echo "$*";
+}
 
-for dir in `etc/travis/find-packages`; do
-    echo "Testing package at $dir..."
+test_package() {
+    local code=0
 
-    cd "$dir"
+    echo "Testing package at $1..."
+
+    cd "$1"
+
+    local messages=()
 
     if [ -e "phpspec.yml.dist" ] || [ -e "phpspec.yml" ]; then
         PHPSPEC=""
@@ -16,15 +21,18 @@ for dir in `etc/travis/find-packages`; do
             PHPSPEC="vendor/bin/phpspec"
         fi
 
-        if [ -z "$PHPSPEC" ]; then
-            echo "Phpspec binary not found, make sure you included it in require-dev"
-            EXIT_CODE=1
+        if [ -z "${PHPSPEC}" ]; then
+            echo "Phpspec binary not found, make sure you included it in require-dev" 1>&2
+            messages+=("(no phpspec binary)")
+            code=1
         else
             echo "Specs found, running..."
-            "$PHPSPEC" run --no-interaction -f dot || EXIT_CODE=$?
+            messages+=("(specs found)")
+            "${PHPSPEC}" run --no-interaction -f dot || code=$?
         fi
     else
         echo "Specs not found, skipping..."
+        messages+=("(specs not found)")
     fi
 
     if [ -e "phpunit.xml.dist" ] || [ -e "phpunit.xml" ]; then
@@ -35,17 +43,37 @@ for dir in `etc/travis/find-packages`; do
             PHPUNIT="vendor/bin/phpunit"
         fi
 
-        if [ -z "$PHPUNIT" ]; then
-            echo "Phpunit binary not found, make sure you included it in require-dev"
-            EXIT_CODE=1
+        if [ -z "${PHPUNIT}" ]; then
+            echo "Phpunit binary not found, make sure you included it in require-dev" 1>&2
+            messages+=("(no phpunit binary)")
+            code=1
         else
             echo "Phpunit tests found, running..."
-            "$PHPUNIT" || EXIT_CODE=$?
+            messages+=("(phpunit tests found)")
+            "${PHPUNIT}" || code=$?
         fi
     else
         echo "Phpunit tests not found, skipping..."
+        messages+=("(phpunit tests not found)")
     fi
-done
 
-cd $INITIAL_PWD
-exit $EXIT_CODE
+    echo $(join_string " " "${messages[@]}") >&3
+
+    return "${code}"
+}
+
+main() {
+    set -e -o pipefail
+
+    # shellcheck source=../concurrent.lib.sh
+    source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../concurrent.lib.sh"
+
+    local args=()
+    for dir in $(etc/travis/find-packages); do
+        args+=(- "Testing package at ${dir}..." test_package "${dir}")
+    done
+
+    CONCURRENT_LIMIT=5 CONCURRENT_COMPACT=0 CONCURRENT_LOG_DIR="${SYLIUS_BUILD_DIR}" concurrent "${args[@]}"
+}
+
+main

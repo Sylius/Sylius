@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+
+# Argument 1: Package directory
+install_package() {
+    UNIQUE_KEY=$(text_md5sum "$1")
+    INITIAL_PWD=$(pwd)
+    EXIT_CODE=0
+
+    cd "$1"
+
+    if is_cache_fresh "${UNIQUE_KEY}"; then
+        restore_composer_lock_from_cache "${UNIQUE_KEY}"
+    else
+        rebuild_cache || EXIT_CODE=$?
+        store_composer_lock_in_cache "${UNIQUE_KEY}"
+    fi
+
+    cd "${INITIAL_PWD}"
+
+    return "${EXIT_CODE}"
+}
+
+# Argument 1: Cache unique key
+store_composer_lock_in_cache() {
+    cp "composer.lock" "${SYLIUS_CACHE_DIR}/composer-$1.lock"
+    file_md5sum "composer.json" > "${SYLIUS_CACHE_DIR}/composer-$1.json.md5sum"
+}
+
+# Argument 1: Cache unique key
+restore_composer_lock_from_cache() {
+    cp "${SYLIUS_CACHE_DIR}/composer-$1.lock" "composer.lock"
+}
+
+# Argument 1: Cache unique key
+is_cache_fresh() {
+    if [ -f "${SYLIUS_CACHE_DIR}/composer-$1.lock" ] && [ -f "${SYLIUS_CACHE_DIR}/composer-$1.json.md5sum" ] && [ file_md5sum "composer.lock" -eq $(cat "${SYLIUS_CACHE_DIR}/composer-$1.json.md5sum") ]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+rebuild_cache() {
+    composer install --no-interaction --prefer-dist --no-scripts
+}
+
+# Argument 1: String to hash
+text_md5sum() {
+    echo "$1" | md5sum | awk '{ print $1 }'
+}
+
+# Argument 1: File to hash
+file_md5sum() {
+    md5sum "$1" | awk '{ print $1 }'
+}
+
+main() {
+    set -e -o pipefail
+
+    # shellcheck source=../concurrent.lib.sh
+    source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../concurrent.lib.sh"
+
+    args=()
+    for dir in $(etc/travis/find-packages); do
+        args+=(- "Installing dependencies at ${dir}..." install_package "${dir}")
+    done
+
+    CONCURRENT_LIMIT=3 CONCURRENT_COMPACT=0 CONCURRENT_LOG_DIR="${SYLIUS_BUILD_DIR}" concurrent "${args[@]}"
+}
+
+main

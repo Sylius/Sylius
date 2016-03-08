@@ -44,8 +44,7 @@ before_install:
 
 install:
     - composer install --no-interaction --prefer-dist --no-scripts
-    - php -i
-    - etc/travis/install-composer-packages
+    - etc/travis/install-packages
 
     - composer run-script travis-build --no-interaction
 
@@ -69,7 +68,7 @@ before_script:
 
 script:
     - composer validate
-    - etc/travis/validate-composer-packages
+    - etc/travis/validate-packages
 
     - if [[ $TRAVIS_PHP_VERSION = 7.* ]]; then bin/kawaii gherkin:check --align=left features/; fi;
 
@@ -87,6 +86,7 @@ before_cache:
 after_failure:
     - export IMGUR_API_KEY=4907fcd89e761c6b07eeb8292d5a9b2a
 
+    - rm -fr "$SYLIUS_BUILD_DIR/*(0).log"
     - cp app/logs/test_cached.log "$SYLIUS_BUILD_DIR/symfony_app.log"
 
     - vendor/lakion/mink-debug-extension/travis/tools/upload-textfiles "$SYLIUS_BUILD_DIR/*.log"
