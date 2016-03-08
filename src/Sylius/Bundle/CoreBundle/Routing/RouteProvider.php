@@ -135,6 +135,7 @@ class RouteProvider extends DoctrineProvider implements RouteProviderInterface
             ) {
                 $value = substr($path, strlen($this->routeConfigs[$className]['prefix']));
                 $value = trim($value, '/');
+                $value = urldecode($value);
 
                 if (empty($value)) {
                     continue;
