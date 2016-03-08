@@ -168,5 +168,7 @@
         $(document).trigger('dom-node-inserted', [$(addedElement)]);
     });
 
-    $('[data-form-type="collection"]').CollectionForm();
+    $(document).ready(function () {
+        $('[data-form-type="collection"]').CollectionForm();
+    });
 }(jQuery);
