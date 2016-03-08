@@ -22,7 +22,7 @@
     "require": {
         "php": "^5.5.9|^7.0",
 
-        "sylius/core-bundle": "0.18.*"
+        "sylius/core-bundle": "^0.18"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "2.2.*",

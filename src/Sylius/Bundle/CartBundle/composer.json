@@ -22,8 +22,8 @@
     "require": {
         "php": "^5.5.9|^7.0",
 
-        "sylius/cart": "0.18.*",
-        "sylius/order-bundle": "0.18.*",
+        "sylius/cart": "^0.18",
+        "sylius/order-bundle": "^0.18",
         "symfony/framework-bundle": "^2.7.7"
     },
     "require-dev": {

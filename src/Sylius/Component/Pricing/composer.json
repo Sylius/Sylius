@@ -22,7 +22,7 @@
     "require": {
         "php": "^5.5.9|^7.0",
 
-        "sylius/registry": "0.18.*"
+        "sylius/registry": "^0.18"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.4"
