@@ -30,7 +30,7 @@
     "require": {
         "php": "^5.5.9|^7.0",
 
-        "sylius/resource":  "0.18.*",
+        "sylius/resource": "0.18.*",
         "sylius/attribute": "0.18.*",
         "sylius/variation": "0.18.*",
         "doctrine/collections": "^1.0.0"

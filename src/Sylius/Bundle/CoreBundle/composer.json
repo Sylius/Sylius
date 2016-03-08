@@ -7,15 +7,15 @@
     "license": "MIT",
     "authors": [
         {
-            "name":     "Paweł Jędrzejewski",
+            "name": "Paweł Jędrzejewski",
             "homepage": "http://pjedrzejewski.com"
         },
         {
-            "name":     "Sylius project",
+            "name": "Sylius project",
             "homepage": "http://sylius.org"
         },
         {
-            "name":     "Community contributions",
+            "name": "Community contributions",
             "homepage": "http://github.com/Sylius/Sylius/contributors"
         }
     ],
@@ -71,7 +71,7 @@
         "coduo/php-matcher": "^2.1@dev"
     },
     "suggest": {
-        "sylius/web-bundle":      "Provides default web interface",
+        "sylius/web-bundle": "Provides default web interface",
         "sylius/fixtures-bundle": "Provides default Sylius fixtures"
     },
     "config": {
