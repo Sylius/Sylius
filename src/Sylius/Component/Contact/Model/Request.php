@@ -12,13 +12,14 @@
 namespace Sylius\Component\Contact\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * Default contact request representation.
  *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class Request implements RequestInterface
+class Request implements RequestInterface, ResourceInterface
 {
     use TimestampableTrait;
 
