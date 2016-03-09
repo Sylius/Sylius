@@ -12,4 +12,4 @@ Feature: Deleting a coupon
     Scenario: Deleted coupon should disappear from the registry
         When I delete "Santa's Gift" coupon
         Then I should be notified that it has been successfully deleted
-        And this coupon should no longer exist in the registry
+        And this coupon should no longer exist in the coupon registry

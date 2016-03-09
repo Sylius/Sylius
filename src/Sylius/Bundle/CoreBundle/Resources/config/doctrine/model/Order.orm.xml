@@ -65,7 +65,7 @@
         <many-to-many field="promotions" target-entity="Sylius\Component\Promotion\Model\PromotionInterface">
             <join-table name="sylius_promotion_order">
                 <join-columns>
-                    <join-column name="order_id" referenced-column-name="id" on-delete="CASCADE"/>
+                    <join-column name="order_id" referenced-column-name="id" on-delete="CASCADE" />
                 </join-columns>
                 <inverse-join-columns>
                     <join-column name="promotion_id" referenced-column-name="id" />

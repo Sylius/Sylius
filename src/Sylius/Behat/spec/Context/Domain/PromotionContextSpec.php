@@ -143,26 +143,27 @@ class PromotionContextSpec extends ObjectBehavior
         ;
     }
 
-    function it_removes_a_promotion(PromotionRepositoryInterface $promotionRepository, PromotionInterface $promotion)
-    {
+    function it_removes_a_promotion(
+        PromotionRepositoryInterface $promotionRepository,
+        SharedStorageInterface $sharedStorage,
+        PromotionInterface $promotion
+    ) {
         $promotion->getId()->willReturn(5);
-        $promotionRepository->find(5)->willReturn($promotion);
+        $sharedStorage->set('promotion_id', 5)->shouldBeCalled();
         $promotionRepository->remove($promotion)->shouldBeCalled();
 
         $this->iDeletePromotion($promotion);
     }
 
     function it_checks_whether_a_promotion_does_not_exist_in_the_registry(
-        PromotionRepositoryInterface $promotionRepository,
-        PromotionInterface $promotion
+        PromotionRepositoryInterface $promotionRepository
     ) {
-        $promotion->getId()->willReturn(5);
         $promotionRepository->find(5)->willReturn(null);
 
-        $this->promotionShouldNotExistInTheRegistry($promotion);
+        $this->promotionShouldNotExistInTheRegistry(5);
     }
 
-    function it_throws_exception_when_a_promotion_is_found_when_it_should_not(
+    function it_throws_exception_when_a_promotion_is_found_but_it_should_not_exist(
         PromotionRepositoryInterface $promotionRepository,
         PromotionInterface $promotion
     ) {
@@ -171,7 +172,7 @@ class PromotionContextSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(NotEqualException::class)
-            ->during('promotionShouldNotExistInTheRegistry', [$promotion])
+            ->during('promotionShouldNotExistInTheRegistry', [5])
         ;
     }
 
@@ -185,7 +186,7 @@ class PromotionContextSpec extends ObjectBehavior
         $this->promotionShouldStillExistInTheRegistry($promotion);
     }
 
-    function it_throws_exception_when_a_promotion_is_not_found_when_it_should(
+    function it_throws_exception_when_a_promotion_is_not_found_but_it_should_exist(
         PromotionRepositoryInterface $promotionRepository,
         PromotionInterface $promotion
     ) {

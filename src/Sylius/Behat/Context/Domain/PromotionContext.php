@@ -78,7 +78,7 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @Then /^([^"]+ should no longer) exist in the registry$/
+     * @Then /^([^"]+ should no longer) exist in the coupon registry$/
      */
     public function couponShouldNotExistInTheRegistry($couponId)
     {
@@ -104,23 +104,34 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @When /^I delete (promotion "([^"]+)")$/
+     * @When /^I try to delete (promotion "([^"]+)")$/
      */
-    public function iDeletePromotion(PromotionInterface $promotion)
+    public function iTryToDeletePromotion(PromotionInterface $promotion)
     {
         try {
             $this->promotionRepository->remove($promotion);
+
+            throw new \Exception(sprintf('Promotion "%s" has been removed, but it should not.', $promotion->getName()));
         } catch (ForeignKeyConstraintViolationException $exception) {
-            $this->sharedStorage->set('exception', $exception);
+            $this->sharedStorage->set('last_exception', $exception);
         }
     }
 
     /**
-     * @Then :it should not exist in the registry
+     * @When /^I delete (promotion "([^"]+)")$/
      */
-    public function promotionShouldNotExistInTheRegistry(PromotionInterface $promotion)
+    public function iDeletePromotion(PromotionInterface $promotion)
     {
-        expect($this->promotionRepository->find($promotion->getId()))->toBe(null);
+        $this->sharedStorage->set('promotion_id', $promotion->getId());
+        $this->promotionRepository->remove($promotion);
+    }
+
+    /**
+     * @Then /^([^"]+ should no longer) exist in the promotion registry$/
+     */
+    public function promotionShouldNotExistInTheRegistry($promotionId)
+    {
+        expect($this->promotionRepository->find($promotionId))->toBe(null);
     }
 
     /**
