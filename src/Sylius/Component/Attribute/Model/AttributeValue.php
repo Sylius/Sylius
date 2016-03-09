@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Attribute\Model;
 
-use Sylius\Component\Translation\Model\TranslatableTrait;
+use Sylius\Component\Resource\Model\TranslatableTrait;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
