@@ -1,4 +1,4 @@
-@legacy_promotions
+@legacy @promotion
 Feature: Checkout limited time promotions
     In order to handle product promotions
     As a store owner

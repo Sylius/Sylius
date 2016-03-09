@@ -1,4 +1,4 @@
-@legacy_promotions
+@legacy @promotion
 Feature: Promotions
     In order to apply discounts to my products
     As a store owner

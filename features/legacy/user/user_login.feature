@@ -1,4 +1,4 @@
-@legacy_users
+@legacy @user
 Feature: Sign in to the store
     In order to view my orders list
     As a visitor

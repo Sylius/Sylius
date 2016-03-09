@@ -1,4 +1,4 @@
-@legacy_users
+@legacy @user
 Feature: Forgot password
     In order to login to my account after a long time
     As a visitor

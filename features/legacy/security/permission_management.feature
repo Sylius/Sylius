@@ -1,4 +1,4 @@
-@legacy_security
+@legacy @security
 Feature: Permissions management
     In order to restrict access to certain functionality
     As a Store Owner

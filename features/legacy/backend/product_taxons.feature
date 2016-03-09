@@ -1,4 +1,4 @@
-@legacy_products
+@legacy @product
 Feature: Browsing products by taxons
     In order to manage my products efficiently
     As a store owner

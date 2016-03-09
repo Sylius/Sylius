@@ -1,4 +1,4 @@
-@legacy_dashboard
+@legacy @dashboard
 Feature: Store dashboard
     In order to have an overview of my business
     As a store owner

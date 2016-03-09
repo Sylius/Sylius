@@ -3,7 +3,7 @@
 
 default:
     suites:
-        i18n:
+        legacy_i18n:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\CoreBundle\Behat\HookContext
@@ -17,4 +17,4 @@ default:
                 - Sylius\Bundle\ShippingBundle\Behat\ShippingContext
                 - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
             filters:
-                tags: "@legacy_i18n"
+                tags: "@legacy && @i18n"

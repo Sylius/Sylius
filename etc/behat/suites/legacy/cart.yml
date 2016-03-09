@@ -3,7 +3,7 @@
 
 default:
     suites:
-        cart:
+        legacy_cart:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\CoreBundle\Behat\HookContext
@@ -14,4 +14,4 @@ default:
                 - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
                 - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
             filters:
-                tags: "@legacy_cart"
+                tags: "@legacy && @cart"

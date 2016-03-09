@@ -1,4 +1,4 @@
-@legacy_metadata
+@legacy @metadata
 Feature: Metadata management
     In order to manage metadata on my store
     As a store owner
