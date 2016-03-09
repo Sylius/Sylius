@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\AddressingBundle\Factory\ZoneFactoryInterface;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
-use Sylius\Bundle\SettingsBundle\Model\ParameterCollection;
+use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
 
@@ -73,7 +73,7 @@ class ZoneContextSpec extends ObjectBehavior
         $this->thereIsAZoneTheRestOfTheWorldContainingAllOtherCountries();
     }
 
-    function it_sets_default_zone($settingsManager, ParameterCollection $settings, ZoneInterface $zone)
+    function it_sets_default_zone($settingsManager, SettingsInterface $settings, ZoneInterface $zone)
     {
         $settingsManager->load('sylius_taxation')->willReturn($settings);
         $settings->set('default_tax_zone', $zone)->shouldBeCalled();

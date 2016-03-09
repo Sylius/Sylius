@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Provider;
 
-use Sylius\Bundle\SettingsBundle\Model\ParameterCollection;
+use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 use Sylius\Component\Core\Provider\ZoneProviderInterface;
 
 /**
@@ -20,14 +20,14 @@ use Sylius\Component\Core\Provider\ZoneProviderInterface;
 class DefaultTaxZoneProvider implements ZoneProviderInterface
 {
     /**
-     * @var ParameterCollection
+     * @var SettingsInterface
      */
     private $settings;
 
     /**
-     * @param ParameterCollection $settings
+     * @param SettingsInterface $settings
      */
-    public function __construct(ParameterCollection $settings)
+    public function __construct(SettingsInterface $settings)
     {
         $this->settings = $settings;
     }

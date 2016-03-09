@@ -15,7 +15,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Context\CurrencyContext;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
-use Sylius\Bundle\SettingsBundle\Model\ParameterCollection;
+use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -30,7 +30,7 @@ class CurrencyContextSpec extends ObjectBehavior
         CustomerContextInterface $customerContext,
         SettingsManagerInterface $settingsManager,
         ObjectManager $customerManager,
-        ParameterCollection $settings,
+        SettingsInterface $settings,
         ChannelContextInterface $channelContext
     ) {
         $settingsManager->load('sylius_general')->willReturn($settings);

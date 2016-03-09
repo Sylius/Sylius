@@ -24,13 +24,7 @@
 
         <field name="schemaAlias" column="schema_alias" type="string" nullable="false"/>
         <field name="namespace" type="string" nullable="true"/>
-
-        <one-to-many target-entity="Sylius\Bundle\SettingsBundle\Model\ParameterInterface" mapped-by="settings"
-                     field="parameters" index-by="name" fetch="EAGER">
-            <cascade>
-                <cascade-persist/>
-            </cascade>
-        </one-to-many>
+        <field name="parameters" type="array"/>
     </mapped-superclass>
 
 </doctrine-mapping>

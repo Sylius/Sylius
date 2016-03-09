@@ -11,9 +11,8 @@
 
 namespace spec\Sylius\Bundle\SettingsBundle\Model;
 
-use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\SettingsBundle\Model\ParameterInterface;
+use Sylius\Bundle\SettingsBundle\Exception\ParameterNotFoundException;
 use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 
 /**
@@ -31,9 +30,14 @@ class SettingsSpec extends ObjectBehavior
         $this->shouldImplement(SettingsInterface::class);
     }
 
-    function it_initializes_parameter_collection_by_default()
+    function it_implements_array_access_interface()
     {
-        $this->getParameters()->shouldHaveType(Collection::class);
+        $this->shouldImplement(\ArrayAccess::class);
+    }
+
+    function it_implements_countable_interface()
+    {
+        $this->shouldImplement(\Countable::class);
     }
 
     function its_schema_alias_is_null_by_default()
@@ -66,50 +70,54 @@ class SettingsSpec extends ObjectBehavior
         ;
     }
 
-    function it_can_get_parameters(ParameterInterface $parameter)
+    function its_parameters_has_empty_array_by_default()
     {
-        $this->addParameter($parameter);
-        $this->getParameters()->shouldHaveCount(1);
+        $this->getParameters()->shouldReturn([]);
     }
 
-    function it_can_get_parameter_by_name(ParameterInterface $parameter)
+    function it_can_set_a_parameter()
     {
-        $parameter->getName()->willReturn('left_side_products');
-        $parameter->setSettings($this)->shouldBeCalled();
-
-        $this->addParameter($parameter);
-
-        $this->getParameter('left_side_products')->shouldReturn($parameter);
+        $this->set('key', 'value');
+        $this->getParameters()->shouldReturn([
+            'key' => 'value',
+        ])
+        ;
     }
 
-    function it_can_check_if_it_has_a_parameter(ParameterInterface $parameter)
+    function it_throws_parameter_not_found_exception_when_getting_non_existing_parameter()
     {
-        $parameter->setSettings($this)->shouldBeCalled();
-        $parameter->getName()->willReturn('title');
-
-        $this->addParameter($parameter);
-
-        $this->hasParameter('title')->shouldReturn(true);
-        $this->hasParameter('non_existing')->shouldReturn(false);
+        $this->shouldThrow(ParameterNotFoundException::class)->during('get', ['non_existing']);
     }
 
-    function it_allows_to_add_parameters(ParameterInterface $parameter)
+    function it_can_get_a_parameter()
     {
-        $parameter->setSettings($this)->shouldBeCalled();
-        $parameter->getName()->willReturn('title');
-
-        $this->addParameter($parameter);
-        $this->getParameters()->shouldHaveCount(1);
+        $this->set('key', 'value');
+        $this->get('key')->shouldReturn('value');
     }
 
-    function it_allows_to_remove_parameters(ParameterInterface $parameter)
+    function it_can_check_if_it_has_parameter()
     {
-        $parameter->setSettings($this)->shouldBeCalled();
-        $parameter->getName()->willReturn('title');
+        $this->has('key')->shouldReturn(false);
+        $this->set('key', 'value');
+        $this->has('key')->shouldReturn(true);
+    }
 
-        $this->addParameter($parameter);
+    function it_throws_parameter_not_found_exception_when_removing_non_existing_parameter()
+    {
+        $this->shouldThrow(ParameterNotFoundException::class)->during('remove', ['non_existing']);
+    }
 
-        $this->removeParameter($parameter);
-        $this->getParameters()->shouldHaveCount(0);
+    function it_can_remove_a_parameter()
+    {
+        $this->set('key', 'value');
+        $this->remove('key');
+        $this->has('key')->shouldReturn(false);
+    }
+
+    function it_can_count_its_parameters()
+    {
+        $this->count()->shouldReturn(0);
+        $this->set('key', 'value');
+        $this->count()->shouldReturn(1);
     }
 }

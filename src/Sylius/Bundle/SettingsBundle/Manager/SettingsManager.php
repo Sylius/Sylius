@@ -13,17 +13,11 @@ namespace Sylius\Bundle\SettingsBundle\Manager;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\SettingsBundle\Event\SettingsEvent;
-use Sylius\Bundle\SettingsBundle\Model\ParameterCollection;
-use Sylius\Bundle\SettingsBundle\Model\ParameterInterface;
-use Sylius\Bundle\SettingsBundle\Model\Settings;
-use Sylius\Bundle\SettingsBundle\Resolver\SettingsResolverInterface;
+use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilder;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
-use Symfony\Component\Validator\Exception\ValidatorException;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -44,29 +38,12 @@ class SettingsManager implements SettingsManagerInterface
     /**
      * @var ObjectManager
      */
-    protected $settingsManager;
+    protected $manager;
 
     /**
      * @var FactoryInterface
      */
     protected $settingsFactory;
-
-    /**
-     * @var FactoryInterface
-     */
-    protected $parameterFactory;
-
-    /**
-     * @var SettingsResolverInterface
-     */
-    protected $defaultResolver;
-
-    /**
-     * Runtime cache for resolved parameters.
-     *
-     * @var Settings[]
-     */
-    protected $resolvedSettings = [];
 
     /**
      * @var ValidatorInterface
@@ -81,20 +58,14 @@ class SettingsManager implements SettingsManagerInterface
     public function __construct(
         ServiceRegistryInterface $schemaRegistry,
         ServiceRegistryInterface $resolverRegistry,
-        ObjectManager $settingsManager,
+        ObjectManager $manager,
         FactoryInterface $settingsFactory,
-        FactoryInterface $parameterFactory,
-        SettingsResolverInterface $defaultResolver,
-        ValidatorInterface $validator,
         EventDispatcherInterface $eventDispatcher
     ) {
         $this->schemaRegistry = $schemaRegistry;
         $this->resolverRegistry = $resolverRegistry;
-        $this->settingsManager = $settingsManager;
+        $this->manager = $manager;
         $this->settingsFactory = $settingsFactory;
-        $this->parameterFactory = $parameterFactory;
-        $this->defaultResolver = $defaultResolver;
-        $this->validator = $validator;
         $this->eventDispatcher = $eventDispatcher;
     }
 
@@ -104,12 +75,7 @@ class SettingsManager implements SettingsManagerInterface
     public function load($schemaAlias, $namespace = null, $ignoreUnknown = true)
     {
         $schema = $this->schemaRegistry->get($schemaAlias);
-
-        $resolver = $this->defaultResolver;
-
-        if ($this->resolverRegistry->has($schemaAlias)) {
-            $resolver = $this->resolverRegistry->get($schemaAlias);
-        }
+        $resolver = $this->resolverRegistry->get($schemaAlias);
 
         // try to resolve settings for schema alias and namespace
         $settings = $resolver->resolve($schemaAlias, $namespace);
@@ -119,12 +85,8 @@ class SettingsManager implements SettingsManagerInterface
             $settings->setSchemaAlias($schemaAlias);
         }
 
-        // map parameters to a plain php array
-        $parameters = $settings->getParameters()
-            ->map(function(ParameterInterface $parameter) {
-                return $parameter->getValue();
-            })->toArray()
-        ;
+        // We need to get a plain parameters array since we use the options resolver on it
+        $parameters = $settings->getParameters();
 
         $settingsBuilder = new SettingsBuilder();
         $schema->buildSettings($settingsBuilder);
@@ -138,76 +100,30 @@ class SettingsManager implements SettingsManagerInterface
             }
         }
 
-        $parameters = $this->transformParameters($settingsBuilder, $parameters);
         $parameters = $settingsBuilder->resolve($parameters);
+        $settings->setParameters($parameters);
 
-        return new ParameterCollection($settings, $parameters);
+        return $settings;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function save(ParameterCollection $parameters)
+    public function save(SettingsInterface $settings)
     {
-        $settings = $parameters->getSettings();
-        $parameters = $parameters->toArray();
-
         $schema = $this->schemaRegistry->get($settings->getSchemaAlias());
 
         $settingsBuilder = new SettingsBuilder();
         $schema->buildSettings($settingsBuilder);
 
-        $parameters = $settingsBuilder->resolve($parameters);
-
-        foreach ($settingsBuilder->getTransformers() as $parameter => $transformer) {
-            if (array_key_exists($parameter, $parameters)) {
-                $parameters[$parameter] = $transformer->transform($parameters[$parameter]);
-            }
-        }
+        $parameters = $settingsBuilder->resolve($settings->getParameters());
+        $settings->setParameters($parameters);
 
         $this->eventDispatcher->dispatch(SettingsEvent::PRE_SAVE, new SettingsEvent($settings));
 
-        foreach ($parameters as $name => $value) {
-            if ($settings->hasParameter($name)) {
-                $parameter = $settings->getParameter($name);
-                $parameter->setValue($value);
-            } else {
-                /** @var ParameterInterface $parameter */
-                $parameter = $this->parameterFactory->createNew();
-                $parameter->setName($name);
-                $parameter->setValue($value);
+        $this->manager->persist($settings);
+        $this->manager->flush();
 
-                /* @var $errors ConstraintViolationListInterface */
-                $errors = $this->validator->validate($parameter);
-                if (0 < $errors->count()) {
-                    throw new ValidatorException($errors->get(0)->getMessage());
-                }
-
-                $settings->addParameter($parameter);
-            }
-        }
-
-        $this->settingsManager->persist($settings);
-
-        $this->settingsManager->flush();
         $this->eventDispatcher->dispatch(SettingsEvent::POST_SAVE, new SettingsEvent($settings));
-    }
-
-    /**
-     * @param SettingsBuilder $settingsBuilder
-     * @param array $parameters
-     *
-     * @return array
-     */
-    private function transformParameters(SettingsBuilder $settingsBuilder, array $parameters)
-    {
-        $transformedParameters = $parameters;
-        foreach ($settingsBuilder->getTransformers() as $parameter => $transformer) {
-            if (array_key_exists($parameter, $parameters)) {
-                $transformedParameters[$parameter] = $transformer->reverseTransform($parameters[$parameter]);
-            }
-        }
-
-        return $transformedParameters;
     }
 }

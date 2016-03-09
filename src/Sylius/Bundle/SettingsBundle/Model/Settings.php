@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\SettingsBundle\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Bundle\SettingsBundle\Exception\ParameterNotFoundException;
 
 /**
@@ -35,14 +34,9 @@ class Settings implements SettingsInterface
     protected $namespace;
 
     /**
-     * @var ArrayCollection|ParameterInterface[]
+     * @var array
      */
-    protected $parameters;
-
-    public function __construct()
-    {
-        $this->parameters = new ArrayCollection();
-    }
+    protected $parameters = [];
 
     /**
      * {@inheritdoc}
@@ -103,37 +97,88 @@ class Settings implements SettingsInterface
     /**
      * {@inheritdoc}
      */
-    public function getParameter($name)
+    public function setParameters(array $parameters)
     {
-        if (!$this->hasParameter($name)) {
+        $this->parameters = $parameters;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetExists($offset)
+    {
+        return $this->has($offset);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetGet($offset)
+    {
+        return $this->get($offset);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetSet($offset, $value)
+    {
+        $this->set($offset, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetUnset($offset)
+    {
+        $this->remove($offset);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function count()
+    {
+        return count($this->parameters);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function get($name)
+    {
+        if (!$this->has($name)) {
             throw new ParameterNotFoundException($name);
         }
 
-        return $this->parameters->get($name);
+        return $this->parameters[$name];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasParameter($name)
+    public function has($name)
     {
-        return $this->parameters->containsKey($name);
+        return array_key_exists($name, $this->parameters);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addParameter(ParameterInterface $parameter)
+    public function set($name, $value)
     {
-        $parameter->setSettings($this);
-        $this->parameters->set($parameter->getName(), $parameter);
+        $this->parameters[$name] = $value;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function removeParameter(ParameterInterface $parameter)
+    public function remove($name)
     {
-        $this->parameters->removeElement($parameter);
+        if (!$this->has($name)) {
+            throw new ParameterNotFoundException($name);
+        }
+
+        unset($this->parameters[$name]);
     }
 }

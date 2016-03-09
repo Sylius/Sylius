@@ -13,8 +13,6 @@ namespace Sylius\Bundle\SettingsBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Bundle\SettingsBundle\Model\Parameter;
-use Sylius\Bundle\SettingsBundle\Model\ParameterInterface;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 use Sylius\Component\Resource\Factory\Factory;
@@ -62,22 +60,6 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('resources')
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->arrayNode('parameter')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->variableNode('options')->end()
-                                ->arrayNode('classes')
-                                    ->addDefaultsIfNotSet()
-                                    ->children()
-                                        ->scalarNode('model')->defaultValue(Parameter::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('interface')->defaultValue(ParameterInterface::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
-                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
-                                    ->end()
-                                ->end()
-                            ->end()
-                        ->end()
                         ->arrayNode('settings')
                             ->addDefaultsIfNotSet()
                             ->children()

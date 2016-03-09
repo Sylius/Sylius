@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\Provider;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\SettingsBundle\Model\ParameterCollection;
+use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Provider\ZoneProviderInterface;
 
@@ -21,7 +21,7 @@ use Sylius\Component\Core\Provider\ZoneProviderInterface;
  */
 class DefaultTaxZoneProviderSpec extends ObjectBehavior
 {
-    function let(ParameterCollection $settings)
+    function let(SettingsInterface $settings)
     {
         $this->beConstructedWith($settings);
     }

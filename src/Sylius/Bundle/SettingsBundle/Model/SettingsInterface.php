@@ -11,14 +11,13 @@
 
 namespace Sylius\Bundle\SettingsBundle\Model;
 
-use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\SettingsBundle\Exception\ParameterNotFoundException;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Steffen Brem <steffenbrem@gmail.com>
  */
-interface SettingsInterface extends ResourceInterface
+interface SettingsInterface extends ResourceInterface, \ArrayAccess, \Countable
 {
     /**
      * @return string
@@ -41,31 +40,49 @@ interface SettingsInterface extends ResourceInterface
     public function setNamespace($namespace);
 
     /**
-     * @return Collection|ParameterInterface[]
+     * @return array
      */
     public function getParameters();
 
     /**
+     * @param array $parameters
+     */
+    public function setParameters(array $parameters);
+
+    /**
+     * Get parameter by it's name.
+     *
      * @param string $name
      *
      * @throws ParameterNotFoundException
      *
-     * @return ParameterInterface
+     * @return string
      */
-    public function getParameter($name);
+    public function get($name);
 
     /**
+     * Checks if it contains the given parameter.
+     *
      * @param string $name
+     *
+     * @return bool
      */
-    public function hasParameter($name);
+    public function has($name);
 
     /**
-     * @param ParameterInterface $parameter
+     * Set a parameter.
+     *
+     * @param string $name
+     * @param mixed $value
      */
-    public function addParameter(ParameterInterface $parameter);
+    public function set($name, $value);
 
     /**
-     * @param ParameterInterface $parameter
+     * Removes a parameter.
+     *
+     * @param string $name
+     *
+     * @throws ParameterNotFoundException
      */
-    public function removeParameter(ParameterInterface $parameter);
+    public function remove($name);
 }

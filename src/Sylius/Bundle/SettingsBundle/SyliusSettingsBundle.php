@@ -15,7 +15,6 @@ use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\SettingsBundle\DependencyInjection\Compiler\RegisterResolversPass;
 use Sylius\Bundle\SettingsBundle\DependencyInjection\Compiler\RegisterSchemasPass;
-use Sylius\Bundle\SettingsBundle\Model\ParameterInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 
@@ -53,8 +52,7 @@ class SyliusSettingsBundle extends AbstractResourceBundle
     protected function getModelInterfaces()
     {
         return [
-            ParameterInterface::class => 'sylius.model.parameter.class',
-            SettingsInterface::class => 'sylius.model.settings.class'
+            SettingsInterface::class => 'sylius.model.settings.class',
         ];
     }
 
