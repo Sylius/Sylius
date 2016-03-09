@@ -50,7 +50,12 @@ abstract class ItemDiscountAction implements PromotionActionInterface
     /**
      * {@inheritdoc}
      */
-    public abstract function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion);
+    abstract public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion);
+
+    /**
+     * {@inheritdoc}
+     */
+    abstract public function getConfigurationFormType();
 
     /**
      * {@inheritdoc}
@@ -65,8 +70,6 @@ abstract class ItemDiscountAction implements PromotionActionInterface
             $this->removeUnitsAdjustment($item, $promotion);
         }
     }
-
-    public abstract function getConfigurationFormType();
 
     /**
      * @param OrderItemInterface $item

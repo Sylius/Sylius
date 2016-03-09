@@ -108,7 +108,7 @@ class ItemFixedDiscountActionSpec extends ObjectBehavior
         OrderItemUnitInterface $unit2,
         PromotionInterface $promotion
     ) {
-        $adjustmentFactory->createNew()->shouldNotBeCalled();;
+        $adjustmentFactory->createNew()->shouldNotBeCalled();
 
         $unit1->addAdjustment(Argument::any())->shouldNotBeCalled();
         $unit2->addAdjustment(Argument::any())->shouldNotBeCalled();

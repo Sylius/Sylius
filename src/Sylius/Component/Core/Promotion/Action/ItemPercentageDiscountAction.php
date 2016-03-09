@@ -12,10 +12,8 @@
 namespace Sylius\Component\Core\Promotion\Action;
 
 use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
-use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Promotion\Filter\TaxonFilterInterface;
 use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
@@ -55,6 +53,7 @@ class ItemPercentageDiscountAction extends ItemDiscountAction
         parent::__construct($adjustmentFactory, $originator);
 
         $this->distributor = $distributor;
+        $this->taxonFilter = $taxonFilter;
     }
 
     /**

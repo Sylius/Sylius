@@ -27,6 +27,8 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 class ItemFixedDiscountAction extends ItemDiscountAction
 {
+    const TYPE = 'item_fixed_discount';
+
     /**
      * @var TaxonFilterInterface
      */
@@ -85,20 +87,9 @@ class ItemFixedDiscountAction extends ItemDiscountAction
         foreach ($item->getUnits() as $unit) {
             $this->addAdjustmentToUnit(
                 $unit,
-                $this->calculateAdjustmentAmount($unit->getTotal(), $amount),
+                min($unit->getTotal(), $amount),
                 $promotion
             );
         }
-    }
-
-    /**
-     * @param int $promotionSubjectTotal
-     * @param int $targetPromotionAmount
-     *
-     * @return int
-     */
-    private function calculateAdjustmentAmount($promotionSubjectTotal, $targetPromotionAmount)
-    {
-        return min($promotionSubjectTotal, $targetPromotionAmount);
     }
 }
