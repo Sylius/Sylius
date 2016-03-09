@@ -18,7 +18,7 @@ use Sylius\Component\Attribute\Model\AttributeValueInterface as BaseAttributeVal
 use Sylius\Component\Resource\Model\SoftDeletableTrait;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
-use Sylius\Component\Translation\Model\TranslatableTrait;
+use Sylius\Component\Resource\Model\TranslatableTrait;
 use Sylius\Component\Variation\Model\OptionInterface as BaseOptionInterface;
 use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
 
@@ -354,7 +354,7 @@ class Product implements ProductInterface
     public function getVariants()
     {
         return $this->variants->filter(function (BaseVariantInterface $variant) {
-            return !$variant->isDeleted() && !$variant->isMaster();
+            return !$variant->isMaster();
         });
     }
 
@@ -364,7 +364,7 @@ class Product implements ProductInterface
     public function getAvailableVariants()
     {
         return $this->variants->filter(function (BaseVariantInterface $variant) {
-            return !$variant->isDeleted() && !$variant->isMaster() && $variant->isAvailable();
+            return $variant->isMaster() && $variant->isAvailable();
         });
     }
 

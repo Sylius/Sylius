@@ -17,10 +17,3 @@ Sylius\Component\Taxonomy\Model\Taxon:
             type: string
         children:
             expose: true
-    relations:
-        - rel: self
-          href:
-                route: sylius_api_taxon_show
-                parameters:
-                    taxonomyId: expr(object.getTaxonomy().getId())
-                    id: expr(object.getId())

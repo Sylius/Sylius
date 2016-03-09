@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DriverProvider;
-use Sylius\Bundle\TranslationBundle\SyliusTranslationBundle;
 use Sylius\Component\Resource\Metadata\Metadata;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
@@ -48,6 +47,9 @@ class SyliusResourceExtension extends Extension implements PrependExtensionInter
             $loader->load($configFile);
         }
 
+        $container->setParameter('sylius.translation.default_locale', $config['default_locale']);
+        $container->setAlias('sylius.translation.locale_provider', $config['locale_provider']);
+
         foreach ($config['resources'] as $alias => $resourceConfig) {
             $metadata = Metadata::fromAliasAndConfiguration($alias, $resourceConfig);
 
@@ -57,7 +59,7 @@ class SyliusResourceExtension extends Extension implements PrependExtensionInter
 
             DriverProvider::get($metadata)->load($container, $metadata);
 
-            if ($metadata->hasParameter('translation') && class_exists(SyliusTranslationBundle::class)) {
+            if ($metadata->hasParameter('translation')) {
                 $alias = $alias.'_translation';
                 $resourceConfig = array_merge(['driver' => $resourceConfig['driver']], $resourceConfig['translation']);
 

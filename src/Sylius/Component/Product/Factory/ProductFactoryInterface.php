@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Product\Factory;
 
-use Sylius\Component\Translation\Factory\TranslatableFactoryInterface;
+use Sylius\Component\Resource\Factory\TranslatableFactoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

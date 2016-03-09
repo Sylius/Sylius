@@ -26,7 +26,6 @@
         "sylius/attribute": "0.18.*",
         "sylius/association": "0.18.*",
         "sylius/resource": "0.18.*",
-        "sylius/translation": "0.18.*",
         "sylius/variation": "0.18.*",
         "symfony/polyfill-iconv": "~1.0"
     },

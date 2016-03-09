@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Contact\Model;
 
-use Sylius\Component\Translation\Model\TranslatableInterface;
+use Sylius\Component\Resource\Model\TranslatableInterface;
 
 /**
  * Interface for the model representing a contact topic.

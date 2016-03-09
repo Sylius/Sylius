@@ -18,7 +18,7 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class ShippingContext implements Context
+final class ShippingContext implements Context
 {
     /**
      * @var ShipmentRepositoryInterface

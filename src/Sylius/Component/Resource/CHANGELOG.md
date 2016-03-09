@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+### v0.18.0
+
+* Merged Translation component.
+
 ### v0.16.0
 
 * Introduce Factory and FactoryInterface for creating new resources.

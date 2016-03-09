@@ -82,6 +82,7 @@ final class UserContext implements Context
 
     /**
      * @Given there is user :email identified by :password
+     * @Given there was account of :email with password :password
      */
     public function thereIsUserIdentifiedBy($email, $password)
     {
@@ -157,5 +158,15 @@ final class UserContext implements Context
         $address->setCountryCode($this->countryCodeConverter->convertToCode($country));
 
         return $address;
+    }
+
+    /**
+     * @Given his account was deleted
+     */
+    public function hisAccountWasDeleted()
+    {
+        $user = $this->sharedStorage->get('user');
+
+        $this->userRepository->remove($user);
     }
 }

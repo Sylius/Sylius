@@ -46,7 +46,6 @@
         "sylius/storage": "0.18.*",
         "sylius/taxation": "0.18.*",
         "sylius/taxonomy": "0.18.*",
-        "sylius/translation": "0.18.*",
         "sylius/user": "0.18.*",
         "sylius/variation": "0.18.*",
         "sylius/association": "0.18.*",

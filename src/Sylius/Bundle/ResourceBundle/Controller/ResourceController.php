@@ -449,6 +449,10 @@ class ResourceController extends Controller
             $accessor->getValue($resource, $position) + $movement
         );
 
+        $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource);
+        $this->manager->flush();
+        $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
+
         if (!$configuration->isHtmlRequest()) {
             return $this->viewHandler->handle($configuration, View::create($resource, 204));
         }

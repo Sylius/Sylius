@@ -17,7 +17,7 @@ use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class SharedStorageContext implements Context
+final class SharedStorageContext implements Context
 {
     /**
      * @var SharedStorageInterface

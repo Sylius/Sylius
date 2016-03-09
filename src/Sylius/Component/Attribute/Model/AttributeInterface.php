@@ -13,7 +13,7 @@ namespace Sylius\Component\Attribute\Model;
 
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
-use Sylius\Component\Translation\Model\TranslatableInterface;
+use Sylius\Component\Resource\Model\TranslatableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

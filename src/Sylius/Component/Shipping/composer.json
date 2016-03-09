@@ -23,7 +23,6 @@
         "php": "^5.5.9|^7.0",
 
         "sylius/resource": "0.18.*",
-        "sylius/translation": "0.18.*",
         "sylius/registry": "0.18.*",
         "symfony/options-resolver": "^2.7"
     },

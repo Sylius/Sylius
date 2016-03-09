@@ -137,35 +137,4 @@ class VariantSpec extends ObjectBehavior
     {
         $this->getUpdatedAt()->shouldReturn(null);
     }
-
-    function it_should_not_have_deletion_date_by_default()
-    {
-        $this->getDeletedAt()->shouldReturn(null);
-    }
-
-    function its_deletion_date_should_be_mutable()
-    {
-        $deletedAt = new \DateTime('now');
-
-        $this->setDeletedAt($deletedAt);
-        $this->getDeletedAt()->shouldReturn($deletedAt);
-    }
-
-    function it_is_deleted_only_if_deletion_date_is_in_past()
-    {
-        $deletedAt = new \DateTime('yesterday');
-
-        $this->setDeletedAt($deletedAt);
-        $this->shouldBeDeleted();
-
-        $deletedAt = new \DateTime('tomorrow');
-
-        $this->setDeletedAt($deletedAt);
-        $this->shouldNotBeDeleted();
-    }
-
-    function it_should_not_be_deleted_by_default()
-    {
-        $this->shouldNotBeDeleted();
-    }
 }

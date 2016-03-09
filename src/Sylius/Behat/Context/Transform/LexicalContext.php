@@ -16,7 +16,7 @@ use Behat\Behat\Context\Context;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class LexicalContext implements Context
+final class LexicalContext implements Context
 {
     /**
      * @Transform /^"(?:€|£|\$)((?:\d+\.)?\d+)"$/

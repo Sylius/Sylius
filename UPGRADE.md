@@ -1,6 +1,15 @@
 UPGRADE
 =======
 
+## From 0.17 to 0.18.x
+
+### Translation and TranslationBundle
+
+* Merged ``Translation`` component with ``Resource`` component
+* Merged ``TranslationBundle`` with ``ResourceBundle``
+* Renamed ``TranslatableResourceRepository`` to ``TranslatableRepository``
+
+
 ## From 0.16 to 0.17.x
 
 ### Promotion and PromotionBundle

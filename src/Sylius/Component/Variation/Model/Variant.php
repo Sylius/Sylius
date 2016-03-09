@@ -21,7 +21,7 @@ use Sylius\Component\Resource\Model\TimestampableTrait;
  */
 class Variant implements VariantInterface
 {
-    use SoftDeletableTrait, TimestampableTrait;
+    use TimestampableTrait;
 
     /**
      * @var mixed

@@ -19,7 +19,7 @@ use Sylius\Bundle\PromotionBundle\Form\Type\RuleType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Promotion\Factory\ActionFactory;
+use Sylius\Component\Core\Factory\ActionFactory;
 use Sylius\Component\Promotion\Factory\CouponFactory;
 use Sylius\Component\Promotion\Model\Action;
 use Sylius\Component\Promotion\Model\ActionInterface;
