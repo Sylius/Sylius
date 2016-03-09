@@ -261,7 +261,7 @@ class RequestConfiguration
         $limit = $this->parameters->get('limit', 10);
         $limit = $this->request->get('limit', $limit);
 
-        return (int) $limit;
+        return $this->getMaxLimit($limit);
     }
 
     /**
@@ -280,15 +280,20 @@ class RequestConfiguration
     }
 
     /**
+     * Gets the number of resources per page.
+     * The limit parameter from query string has priority from paginate.
+     *
      * @return int
      */
     public function getPaginationMaxPerPage()
     {
         $maxPerPage = $this->parameters->get('paginate', 10);
-        $maxPerPage = $this->request->get('limit', $maxPerPage);
-        $maxPerPage = $this->request->get('paginate', $maxPerPage);
+        $maxPerPage = $this->parameters->get('limit', $maxPerPage);
 
-        return $maxPerPage;
+        $maxPerPage = $this->request->get('paginate', $maxPerPage);
+        $maxPerPage = $this->request->get('limit', $maxPerPage);
+
+        return $this->getMaxLimit($maxPerPage);
     }
 
     /**
@@ -568,5 +573,16 @@ class RequestConfiguration
         }
 
         return $this->parameters->get('grid');
+    }
+
+    /**
+     * @param int $limit
+     * @return int
+     */
+    public function getMaxLimit($limit)
+    {
+        $maxLimit = (int) $this->parameters->get('max_limit', 100);
+
+        return (int) min($limit, $maxLimit);
     }
 }

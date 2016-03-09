@@ -131,6 +131,7 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->variableNode('paginate')->defaultNull()->end()
                         ->variableNode('limit')->defaultNull()->end()
+                        ->variableNode('max_limit')->defaultValue(100)->end()
                         ->arrayNode('allowed_paginate')
                             ->prototype('integer')->end()
                             ->defaultValue([10, 20, 30])
