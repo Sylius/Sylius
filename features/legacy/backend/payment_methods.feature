@@ -1,4 +1,4 @@
-@legacy_payments
+@legacy @payments
 Feature: Payment methods
     In order to allow customers to select a payment method
     As a store owner

@@ -1,4 +1,4 @@
-@legacy_products
+@legacy @products
 Feature: Product association
     In order connect products together in many contexts
     As a store owner

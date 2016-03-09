@@ -1,4 +1,4 @@
-@legacy_channels
+@legacy @channels
 Feature: Channel management
     In order to sell through different entry points
     As a store owner

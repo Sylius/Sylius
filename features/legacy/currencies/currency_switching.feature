@@ -1,4 +1,4 @@
-@legacy_currencies
+@legacy @currencies
 Feature: Currency selection
     In order to pay using my preferred currency
     As a customer

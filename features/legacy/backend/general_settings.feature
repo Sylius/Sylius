@@ -1,4 +1,4 @@
-@legacy_settings
+@legacy @settings
 Feature: General settings
     In order configure my store SEO fields
     As a store owner

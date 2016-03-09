@@ -1,4 +1,4 @@
-@legacy_pricing
+@legacy @pricing
 Feature: Group based pricing
     In order to have different contracts
     As a store owner

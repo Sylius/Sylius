@@ -1,4 +1,4 @@
-@legacy_account
+@legacy @account
 Feature: User account orders page
     In order to follow my orders
     As a logged user

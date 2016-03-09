@@ -1,4 +1,4 @@
-@legacy_addressing
+@legacy @addressing
 Feature: Zones
     As a store owner
     I want to be able to manage zones

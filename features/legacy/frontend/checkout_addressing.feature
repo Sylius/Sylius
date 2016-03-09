@@ -1,4 +1,4 @@
-@legacy_checkout
+@legacy @checkout
 Feature: Checkout addressing
     In order to select billing and shipping addresses
     As a visitor

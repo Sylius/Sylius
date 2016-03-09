@@ -1,4 +1,4 @@
-@legacy_emails
+@legacy @emails
 Feature: Managing emails
     In order to easily customize my marketing emails
     As a store owner

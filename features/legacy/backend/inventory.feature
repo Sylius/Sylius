@@ -1,4 +1,4 @@
-@legacy_inventory
+@legacy @inventory
 Feature: Inventory tracking
     In order track and control my inventory
     As a store owner

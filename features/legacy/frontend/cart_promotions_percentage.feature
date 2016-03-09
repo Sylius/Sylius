@@ -1,4 +1,4 @@
-@legacy_promotions
+@legacy @promotions
 Feature: Checkout percentage discount promotions
     In order to handle product promotions
     As a store owner

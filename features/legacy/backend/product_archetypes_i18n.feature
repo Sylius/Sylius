@@ -1,4 +1,4 @@
-@legacy_i18n
+@legacy @i18n
 Feature: Product archetype translations
     In order to create similar products faster
     As a store owner

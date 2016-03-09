@@ -1,4 +1,4 @@
-@legacy_metadata
+@legacy @metadata
 Feature: Metadata customization
     In order to customize metadata
     As a store owner

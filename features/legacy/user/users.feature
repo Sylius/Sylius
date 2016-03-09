@@ -1,4 +1,4 @@
-@legacy_users
+@legacy @users
 Feature: Customers management
     In order to manager customers
     As a store owner
