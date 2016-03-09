@@ -28,6 +28,9 @@ php:
     - 5.5
 
 before_install:
+    # For packages testing
+    - git branch master 2>/dev/null || true
+
     - phpenv config-rm xdebug.ini || true
     - echo "memory_limit=4096M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
