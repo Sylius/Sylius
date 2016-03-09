@@ -51,7 +51,7 @@ is_cache_fresh() {
 }
 
 rebuild_cache() {
-    composer install --no-interaction --prefer-dist --no-scripts "$@"
+    composer install --no-interaction --prefer-dist --no-scripts --quiet "$@"
 }
 
 # Argument 1: String to hash
