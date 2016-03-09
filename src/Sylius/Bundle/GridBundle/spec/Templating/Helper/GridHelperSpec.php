@@ -50,8 +50,8 @@ class GridHelperSpec extends ObjectBehavior
 
     function it_uses_grid_renderer_to_render_grid(GridRendererInterface $gridRenderer, GridView $gridView)
     {
-        $gridRenderer->render($gridView)->willReturn('<html>Grid!</html>');
-        $this->renderGrid($gridView)->shouldReturn('<html>Grid!</html>');
+        $gridRenderer->render($gridView, null)->willReturn('<html>Grid!</html>');
+        $this->renderGrid($gridView, null)->shouldReturn('<html>Grid!</html>');
     }
     
     function it_uses_grid_renderer_to_render_field(GridRendererInterface $gridRenderer, GridView $gridView, Field $field)
@@ -62,7 +62,7 @@ class GridHelperSpec extends ObjectBehavior
     
     function it_uses_grid_renderer_to_render_action(GridRendererInterface $gridRenderer, GridView $gridView, Action $action)
     {
-        $gridRenderer->renderAction($gridView, $action)->willReturn('<a href="#">Go go Gadget arms!</a>');
+        $gridRenderer->renderAction($gridView, $action, null)->willReturn('<a href="#">Go go Gadget arms!</a>');
         $this->renderAction($gridView, $action)->shouldReturn('<a href="#">Go go Gadget arms!</a>');
     }
 

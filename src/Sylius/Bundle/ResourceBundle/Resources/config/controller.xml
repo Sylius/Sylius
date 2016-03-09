@@ -22,6 +22,7 @@
         <parameter key="sylius.resource_controller.request_configuration_factory.class">Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactory</parameter>
         <parameter key="sylius.resource_controller.new_resource_factory.class">Sylius\Bundle\ResourceBundle\Controller\NewResourceFactory</parameter>
         <parameter key="sylius.resource_controller.single_resource_provider.class">Sylius\Bundle\ResourceBundle\Controller\SingleResourceProvider</parameter>
+        <parameter key="sylius.resource_controller.resources_resolver.class">Sylius\Bundle\ResourceBundle\Controller\ResourcesResolver</parameter>
         <parameter key="sylius.resource_controller.resources_collection_provider.class">Sylius\Bundle\ResourceBundle\Controller\ResourcesCollectionProvider</parameter>
         <parameter key="sylius.resource_controller.form_factory.class">Sylius\Bundle\ResourceBundle\Controller\ResourceFormFactory</parameter>
         <parameter key="sylius.resource_controller.redirect_handler.class">Sylius\Bundle\ResourceBundle\Controller\RedirectHandler</parameter>
@@ -33,8 +34,6 @@
     </parameters>
 
     <services>
-        <!-- tmp -->
-        <service id="sylius.controller.parameters" class="Sylius\Bundle\ResourceBundle\Controller\Parameters" />
         <service id="sylius.resource_controller.parameters_parser" class="%sylius.resource_controller.parameters_parser.class%">
             <argument type="service" id="sylius.expression_language" />
         </service>
@@ -45,7 +44,9 @@
         <service id="sylius.resource_controller.new_resource_factory" class="%sylius.resource_controller.new_resource_factory.class%" />
         <service id="sylius.resource_controller.single_resource_provider" class="%sylius.resource_controller.single_resource_provider.class%" />
         <service id="sylius.resource_controller.pagerfanta_representation_factory" class="%sylius.resource_controller.pagerfanta_representation_factory.class%" />
+        <service id="sylius.resource_controller.resources_resolver" class="%sylius.resource_controller.resources_resolver.class%" />
         <service id="sylius.resource_controller.resources_collection_provider" class="%sylius.resource_controller.resources_collection_provider.class%">
+            <argument type="service" id="sylius.resource_controller.resources_resolver" />
             <argument type="service" id="sylius.resource_controller.pagerfanta_representation_factory" />
         </service>
         <service id="sylius.resource_controller.form_factory" class="%sylius.resource_controller.form_factory.class%">

@@ -18,9 +18,11 @@ use Sylius\Component\Grid\ActionTypes;
 use Sylius\Component\Grid\Definition\Action;
 use Sylius\Component\Grid\Definition\Field;
 use Sylius\Component\Grid\FieldTypes\FieldTypeInterface;
+use Sylius\Component\Grid\Filter\StringFilter;
 use Sylius\Component\Grid\Renderer\GridRendererInterface;
 use Sylius\Component\Grid\View\GridView;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 
 /**
  * @mixin TwigGridRenderer
@@ -29,14 +31,17 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
  */
 class TwigGridRendererSpec extends ObjectBehavior
 {
-    function let(\Twig_Environment $twig, ServiceRegistryInterface $fieldsRegistry)
+    function let(\Twig_Environment $twig, ServiceRegistryInterface $fieldsRegistry, FormFactoryInterface $formFactory)
     {
         $actionTemplates = [
             ActionTypes::LINK => 'SyliusGridBundle:Action:_link.html.twig',
             ActionTypes::FORM => 'SyliusGridBundle:Action:_form.html.twig',
         ];
+        $filterTemplates = [
+            StringFilter::NAME => 'SyliusGridBundle:Filter:_string.html.twig',
+        ];
 
-        $this->beConstructedWith($twig, 'SyliusGridBundle:default.html.twig', $fieldsRegistry, $actionTemplates);
+        $this->beConstructedWith($twig, $fieldsRegistry, $formFactory, 'SyliusGridBundle:default.html.twig', $actionTemplates, $filterTemplates);
     }
 
     function it_is_initializable()

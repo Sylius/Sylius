@@ -22,15 +22,22 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class ResourcesCollectionProvider implements ResourcesCollectionProviderInterface
 {
     /**
+     * @var ResourcesResolverInterface
+     */
+    private $resourcesResolver;
+
+    /**
      * @var PagerfantaFactory
      */
     private $pagerfantaRepresentationFactory;
 
     /**
+     * @param ResourcesResolverInterface $resourcesResolver
      * @param PagerfantaFactory $pagerfantaRepresentationFactory
      */
-    public function __construct(PagerfantaFactory $pagerfantaRepresentationFactory)
+    public function __construct(ResourcesResolverInterface $resourcesResolver, PagerfantaFactory $pagerfantaRepresentationFactory)
     {
+        $this->resourcesResolver = $resourcesResolver;
         $this->pagerfantaRepresentationFactory = $pagerfantaRepresentationFactory;
     }
 
@@ -39,7 +46,7 @@ class ResourcesCollectionProvider implements ResourcesCollectionProviderInterfac
      */
     public function get(RequestConfiguration $requestConfiguration, RepositoryInterface $repository)
     {
-        $resources = $this->getResources($requestConfiguration, $repository);
+        $resources = $this->resourcesResolver->getResources($requestConfiguration, $repository);
 
         if ($resources instanceof Pagerfanta) {
             $request = $requestConfiguration->getRequest();
@@ -54,32 +61,5 @@ class ResourcesCollectionProvider implements ResourcesCollectionProviderInterfac
         }
 
         return $resources;
-    }
-
-    /**
-     * @param RequestConfiguration $requestConfiguration
-     * @param RepositoryInterface $repository
-     *
-     * @return mixed
-     */
-    private function getResources(RequestConfiguration $requestConfiguration, RepositoryInterface $repository)
-    {
-        if (null !== $repositoryMethod = $requestConfiguration->getRepositoryMethod()) {
-            $callable = [$repository, $repositoryMethod];
-
-            $resources = call_user_func_array($callable, $requestConfiguration->getRepositoryArguments());
-
-            return $resources;
-        }
-
-        if (!$requestConfiguration->isPaginated() && !$requestConfiguration->isLimited()) {
-            return $repository->findAll();
-        }
-
-        if (!$requestConfiguration->isPaginated()) {
-            return $repository->findBy($requestConfiguration->getCriteria(), $requestConfiguration->getSorting(), $requestConfiguration->getLimit());
-        }
-
-        return $repository->createPaginator($requestConfiguration->getCriteria(), $requestConfiguration->getSorting());
     }
 }

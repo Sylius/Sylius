@@ -20,6 +20,8 @@ use Sylius\Component\Grid\Filtering\FilterInterface;
  */
 class StringFilter implements FilterInterface
 {
+    const NAME = 'string';
+
     const TYPE_EQUAL = 'equal';
     const TYPE_EMPTY = 'empty';
     const TYPE_NOT_EMPTY = 'not_empty';

@@ -43,12 +43,12 @@ class GridExtensionSpec extends ObjectBehavior
 
     function it_defines_functions()
     {
-        $this->getFunctions()->shouldHaveCount(3);
+        $this->getFunctions()->shouldHaveCount(4);
     }
 
     function it_delegates_grid_rendering_to_the_helper(GridHelper $gridHelper, GridView $gridView)
     {
-        $gridHelper->renderGrid($gridView)->willReturn('<html>Grid!</html>');
+        $gridHelper->renderGrid($gridView, null)->willReturn('<html>Grid!</html>');
         
         $this->renderGrid($gridView)->shouldReturn('<html>Grid!</html>');
     }
@@ -62,7 +62,7 @@ class GridExtensionSpec extends ObjectBehavior
 
     function it_delegates_action_rendering_to_the_helper(GridHelper $gridHelper, GridView $gridView, Action $action)
     {
-        $gridHelper->renderAction($gridView, $action)->willReturn('<a href="#">Greet!</a>');
+        $gridHelper->renderAction($gridView, $action, null)->willReturn('<a href="#">Greet!</a>');
 
         $this->renderAction($gridView, $action)->shouldReturn('<a href="#">Greet!</a>');
     }
