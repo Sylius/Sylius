@@ -18,12 +18,12 @@ use Symfony\Component\Routing\RouterInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class CreatePage extends SymfonyPage implements CreatePageInterface
+class EditPage extends SymfonyPage implements EditPageInterface
 {
     /**
      * @var string
      */
-    protected $resourceName;
+    private $resourceName;
 
     /**
      * @param Session $session
@@ -33,8 +33,6 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
      */
     public function __construct(Session $session, array $parameters, RouterInterface $router, $resourceName)
     {
-        parent::__construct($session, $parameters, $router);
-
         $this->resourceName = $resourceName;
     }
 
@@ -49,9 +47,9 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function create()
+    public function saveChanges()
     {
-        $this->getDocument()->pressButton('Create');
+        $this->getDocument()->pressButton('Save changes');
     }
 
     /**
@@ -59,6 +57,6 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
      */
     protected function getRouteName()
     {
-        return 'sylius_admin_' . strtolower($this->resourceName) . '_create';
+        return 'sylius_admin_' . strtolower($this->resourceName) . '_update';
     }
 }

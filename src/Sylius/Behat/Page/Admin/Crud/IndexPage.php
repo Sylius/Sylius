@@ -11,9 +11,9 @@
 
 namespace Sylius\Behat\Page\Admin\Crud;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\TableManipulatorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -27,23 +27,31 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     protected $resourceName;
 
     /**
+     * @var TableManipulatorInterface
+     */
+    protected $tableManipulator;
+
+    /**
      * @var array
      */
     protected  $elements = [
         'message' => '.message',
         'messageContent' => '.message > .content',
+        'table' => '.table',
     ];
 
     /**
      * @param Session $session
      * @param array $parameters
      * @param RouterInterface $router
+     * @param TableManipulatorInterface $tableManipulator
      * @param string $resourceName
      */
-    public function __construct(Session $session, array $parameters, RouterInterface $router, $resourceName)
+    public function __construct(Session $session, array $parameters, RouterInterface $router, TableManipulatorInterface $tableManipulator, $resourceName)
     {
         parent::__construct($session, $parameters, $router);
 
+        $this->tableManipulator = $tableManipulator;
         $this->resourceName = $resourceName;
     }
 
@@ -84,15 +92,13 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
      */
     public function isResourceAppearInTheStoreBy(array $parameters)
     {
-        foreach ($parameters as $key => $value)
-        {
-            if ($this->isTableContainHeader($key) && $this->isTableContainText($value))
-            {
-                return true;
-            }
+        $rows = $this->tableManipulator->getRowsWithFields($this->getElement('table'), $parameters);
 
-            return false;
+        if (!empty($rows)) {
+            return true;
         }
+
+        return false;
     }
 
     /**
@@ -113,56 +119,5 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     protected function getRouteName()
     {
         return 'sylius_admin_' . strtolower($this->resourceName) . '_index';
-    }
-
-    /**
-     * @return NodeElement[]
-     */
-    private function getAllTableRecords()
-    {
-        return $this->getDocument()->findAll('css', 'tbody > tr');
-    }
-
-    /**
-     * @return NodeElement
-     */
-    private function getAllTableHeaders()
-    {
-        return $this->getDocument()->find('css', 'thead > tr');
-    }
-
-    /**
-     * @param string $header
-     *
-     * @return bool
-     */
-    private function isTableContainHeader($header)
-    {
-        $tableHeaders = $this->getAllTableHeaders()->getText();
-
-        if (false !== strpos($tableHeaders, ucfirst($header))) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * @param string $text
-     *
-     * @return bool
-     */
-    private function isTableContainText($text)
-    {
-        foreach ($this->getAllTableRecords() as $row)
-        {
-            $rowText = $row->getText();
-
-            if (false !== strpos($rowText, $text)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }

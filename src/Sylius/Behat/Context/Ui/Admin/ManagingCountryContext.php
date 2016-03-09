@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Context\Ui;
+namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
@@ -19,7 +19,7 @@ use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class CountryContext implements Context
+class ManagingCountryContext implements Context
 {
     /**
      * @var SharedStorageInterface

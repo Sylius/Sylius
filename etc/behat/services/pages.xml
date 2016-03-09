@@ -60,6 +60,7 @@
         <service id="sylius.behat.page.external.paypal_checkout_express" class="%sylius.behat.page.external.paypal_checkout_express.class%" parent="sylius.behat.page" scope="scenario" public="false" />
 
         <service id="sylius.behat.page.admin.country.index" class="%sylius.behat.page.admin.crud.index.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false">
+            <argument type="service" id="sylius.behat.table_manipulator" />
             <argument type="string">country</argument>
         </service>
         <service id="sylius.behat.page.admin.country.create" class="%sylius.behat.page.admin.country.create.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false">
