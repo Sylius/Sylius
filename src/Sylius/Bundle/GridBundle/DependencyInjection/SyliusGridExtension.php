@@ -39,6 +39,11 @@ class SyliusGridExtension extends Extension
         $loader->load('templating.xml');
         $loader->load('twig.xml');
 
+        foreach (['filter', 'action'] as $templatesCollectionName) {
+            $templates = isset($config['templates'][$templatesCollectionName]) ? $config['templates'][$templatesCollectionName] : [];
+            $container->setParameter('sylius.grid.templates.'.$templatesCollectionName, $templates);
+        }
+
         $container->setParameter('sylius.grids_definitions', $config['grids']);
 
         $container->setAlias('sylius.grid.renderer', 'sylius.grid.renderer.twig');

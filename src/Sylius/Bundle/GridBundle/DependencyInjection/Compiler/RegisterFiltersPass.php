@@ -25,6 +25,10 @@ class RegisterFiltersPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
+        if (!$container->hasDefinition('sylius.registry.grid_filter')) {
+            return;
+        }
+
         $registry = $container->getDefinition('sylius.registry.grid_filter');
 
         foreach ($container->findTaggedServiceIds('sylius.grid_filter') as $id => $attributes) {

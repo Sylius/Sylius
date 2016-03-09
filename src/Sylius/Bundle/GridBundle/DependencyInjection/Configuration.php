@@ -29,9 +29,31 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('sylius_grid');
 
+        $this->addTemplatesSection($rootNode);
         $this->addGridsSection($rootNode);
 
         return $treeBuilder;
+    }
+
+    /**
+     * @param ArrayNodeDefinition $node
+     */
+    private function addTemplatesSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('templates')
+                    ->children()
+                        ->arrayNode('filter')
+                            ->prototype('scalar')->end()
+                        ->end()
+                        ->arrayNode('action')
+                            ->prototype('scalar')->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
     }
 
     /**
@@ -46,6 +68,7 @@ class Configuration implements ConfigurationInterface
                     ->prototype('array')
                         ->children()
                             ->arrayNode('driver')
+                                ->addDefaultsIfNotSet()
                                 ->children()
                                     ->scalarNode('name')->defaultValue(DoctrineORMDriver::NAME)->end()
                                     ->arrayNode('options')

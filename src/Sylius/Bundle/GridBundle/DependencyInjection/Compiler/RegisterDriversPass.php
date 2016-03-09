@@ -25,7 +25,11 @@ class RegisterDriversPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $registry = $container->getDefinition('sylius.registry.grid_driver');
+        if (!$container->hasDefinition('sylius.registry.grid_driver')) {
+            return;
+        }
+
+        $registry = $container->findDefinition('sylius.registry.grid_driver');
 
         foreach ($container->findTaggedServiceIds('sylius.grid_driver') as $id => $attributes) {
             if (!isset($attributes[0]['alias']))  {
