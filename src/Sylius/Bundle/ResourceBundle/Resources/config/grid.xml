@@ -18,11 +18,17 @@
 
     <parameters>
         <parameter key="sylius.grid.resource_view_factory.class">Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridViewFactory</parameter>
+        <parameter key="sylius.resource_controller.resources_resolver.grid_aware.class">Sylius\Bundle\ResourceBundle\Grid\Controller\ResourcesResolver</parameter>
     </parameters>
 
     <services>
         <service id="sylius.grid.resource_view_factory" class="%sylius.grid.resource_view_factory.class%">
             <argument type="service" id="sylius.grid.data_provider" />
+        </service>
+        <service id="sylius.resource_controller.resources_resolver.grid_aware" class="%sylius.resource_controller.resources_resolver.grid_aware.class%" decorates="sylius.resource_controller.resources_resolver">
+            <argument type="service" id="sylius.resource_controller.resources_resolver.grid_aware.inner" />
+            <argument type="service" id="sylius.grid.provider" />
+            <argument type="service" id="sylius.grid.resource_view_factory" />
         </service>
     </services>
 </container>

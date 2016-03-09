@@ -24,8 +24,9 @@
     <services>
         <service id="sylius.grid.renderer.twig" class="%sylius.grid.renderer.twig.class%">
             <argument type="service" id="twig" />
-            <argument>SyliusGridBundle::_grid.html.twig</argument>
             <argument type="service" id="sylius.registry.grid_field" />
+            <argument type="service" id="form.factory" />
+            <argument>SyliusGridBundle::_grid.html.twig</argument>
             <argument type="collection">
                 <argument key="create">SyliusAdminBundle:Grid/Action:_create.html.twig</argument>
                 <argument key="update">SyliusAdminBundle:Grid/Action:_update.html.twig</argument>
@@ -33,7 +34,6 @@
                 <argument key="link">SyliusGridBundle:Action:_link.html.twig</argument>
                 <argument key="form">SyliusGridBundle:Action:_form.html.twig</argument>
             </argument>
-            <argument type="service" id="form.factory" />
             <argument type="collection">
                 <argument key="string">SyliusAdminBundle:Grid/Filter:_string.html.twig</argument>
             </argument>

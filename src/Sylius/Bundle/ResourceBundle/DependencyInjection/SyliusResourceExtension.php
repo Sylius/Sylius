@@ -41,11 +41,16 @@ class SyliusResourceExtension extends Extension implements PrependExtensionInter
             'storage.xml',
             'routing.xml',
             'twig.xml',
-            'grid.xml',
         ];
 
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
+        }
+
+        $bundles = $container->getParameter('kernel.bundles');
+
+        if (array_key_exists('SyliusGridBundle', $bundles)) {
+            $loader->load('grid.xml');
         }
 
         $container->setParameter('sylius.translation.default_locale', $config['default_locale']);
