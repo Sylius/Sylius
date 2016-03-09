@@ -9,17 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Core\Theme;
+namespace spec\Sylius\Bundle\CoreBundle\Theme;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\CoreBundle\Theme\ChannelBasedThemeContext;
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Theme\ChannelBasedThemeContext;
 
 /**
  * @mixin ChannelBasedThemeContext
@@ -35,7 +34,7 @@ class ChannelBasedThemeContextSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Theme\ChannelBasedThemeContext');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Theme\ChannelBasedThemeContext');
     }
 
     function it_implements_theme_context_interface()

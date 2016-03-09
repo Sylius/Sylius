@@ -9,11 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Theme;
+namespace Sylius\Bundle\CoreBundle\Theme;
 
-use Doctrine\DBAL\DBALException;
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
-use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Model\ChannelInterface;

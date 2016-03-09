@@ -57,7 +57,7 @@
         "doctrine/mongodb-odm": "1.0.*@dev",
         "doctrine/orm": "^2.4.8,<2.5",
         "doctrine/phpcr-bundle": "~1.1",
-        "sylius/rbac-bundle": "^0.18",
+        "sylius/rbac-bundle": "^0.18"
     },
     "scripts": {
         "post-install-cmd": [
