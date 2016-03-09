@@ -16,4 +16,4 @@ default:
                 - Sylius\Bundle\WebBundle\Behat\WebContext
                 - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
             filters:
-                tags: "@legacy_pricing"
+                tags: "@legacy && @pricing"

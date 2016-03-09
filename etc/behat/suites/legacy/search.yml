@@ -18,4 +18,4 @@ default:
                 - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
                 - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
             filters:
-                tags: "@legacy_search"
+                tags: "@legacy && @search"

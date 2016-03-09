@@ -17,4 +17,4 @@ default:
                 - Sylius\Bundle\ShippingBundle\Behat\ShippingContext
                 - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
             filters:
-                tags: "@legacy_i18n"
+                tags: "@legacy && @i18n"

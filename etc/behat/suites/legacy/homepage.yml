@@ -12,4 +12,4 @@ default:
                 - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
                 - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
             filters:
-                tags: "@legacy_homepage"
+                tags: "@legacy && @homepage"

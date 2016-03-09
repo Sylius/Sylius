@@ -18,4 +18,4 @@ default:
                 - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
                 - Sylius\Bundle\ReviewBundle\Behat\ReviewContext
             filters:
-                tags: "@legacy_products"
+                tags: "@legacy && @products"

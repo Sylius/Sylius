@@ -14,4 +14,4 @@ default:
                 - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
                 - Sylius\Bundle\LocaleBundle\Behat\LocaleContext
             filters:
-                tags: "@legacy_localization"
+                tags: "@legacy && @localization"

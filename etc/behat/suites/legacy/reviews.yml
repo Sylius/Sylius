@@ -17,4 +17,4 @@ default:
                 - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
             filters:
-                tags: "@legacy_reviews"
+                tags: "@legacy && @reviews"

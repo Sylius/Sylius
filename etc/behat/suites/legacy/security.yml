@@ -18,4 +18,4 @@ default:
                 - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
                 - Sylius\Bundle\RbacBundle\Behat\RbacContext
             filters:
-                tags: "@legacy_security"
+                tags: "@legacy && @security"
