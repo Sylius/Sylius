@@ -51,7 +51,7 @@ class UserController extends ResourceController
         }
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle(View::create($form, 400));
+            return $this->viewHandler->handle($configuration, View::create($form, 400));
         }
 
         return $this->container->get('templating')->renderResponse(
@@ -89,11 +89,11 @@ class UserController extends ResourceController
         $form = $this->createResourceForm($configuration, $formType, $changePassword);
 
         if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
-            return $this->handleResetPassword($user, $changePassword->getPassword());
+            return $this->handleResetPassword($configuration, $user, $changePassword->getPassword());
         }
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle(View::create($form, 400));
+            return $this->viewHandler->handle($configuration, View::create($form, 400));
         }
 
         return $this->container->get('templating')->renderResponse(
@@ -120,7 +120,7 @@ class UserController extends ResourceController
             }
 
             if (!$configuration->isHtmlRequest()) {
-                return $this->viewHandler->handle(View::create($user, 204));
+                return $this->viewHandler->handle($configuration, View::create($user, 204));
             }
 
             $this->addFlash('success', 'sylius.user.reset_password.requested');
@@ -129,7 +129,7 @@ class UserController extends ResourceController
         }
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle(View::create($form, 400));
+            return $this->viewHandler->handle($configuration, View::create($form, 400));
         }
 
         return $this->container->get('templating')->renderResponse(
@@ -156,7 +156,8 @@ class UserController extends ResourceController
     }
 
     /**
-     * @param string        $token
+     * @param RequestConfiguration $configuration
+     * @param string $token
      * @param UserInterface $user
      *
      * @return RedirectResponse
@@ -169,7 +170,7 @@ class UserController extends ResourceController
         $this->manager->flush();
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle(View::create($user, 400));
+            return $this->viewHandler->handle($configuration, View::create($user, 400));
         }
 
         $this->addFlash('error', 'sylius.user.password.token_expired');
@@ -181,8 +182,8 @@ class UserController extends ResourceController
 
     /**
      * @param TokenProviderInterface $generator
-     * @param UserInterface          $user
-     * @param string                 $senderEvent
+     * @param UserInterface $user
+     * @param string $senderEvent
      *
      * @return Response
      */
@@ -201,8 +202,9 @@ class UserController extends ResourceController
     }
 
     /**
+     * @param RequestConfiguration $configuration
      * @param UserInterface $user
-     * @param string        $newPassword
+     * @param string $newPassword
      *
      * @return RedirectResponse
      */
@@ -221,15 +223,16 @@ class UserController extends ResourceController
         $dispatcher->dispatch(UserEvents::POST_PASSWORD_RESET, new GenericEvent($user));
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle(View::create($user, 204));
+            return $this->viewHandler->handle($configuration, View::create($user, 204));
         }
 
         return new RedirectResponse($this->container->get('router')->generate('sylius_user_security_login'));
     }
 
     /**
+     * @param RequestConfiguration $configuration
      * @param UserInterface $user
-     * @param string        $newPassword
+     * @param string $newPassword
      *
      * @return RedirectResponse
      */
@@ -246,7 +249,7 @@ class UserController extends ResourceController
         $dispatcher->dispatch(UserEvents::POST_PASSWORD_CHANGE, new GenericEvent($user));
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle(View::create($user, 204));
+            return $this->viewHandler->handle($configuration, View::create($user, 204));
         }
 
         return new RedirectResponse($this->container->get('router')->generate('sylius_account_profile_show'));
