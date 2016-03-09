@@ -54,32 +54,43 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @When /^I delete ("([^"]+)" coupon)$/
+     * @When /^I try to delete ("([^"]+)" coupon)$/
      */
-    public function iDeleteCoupon(CouponInterface $coupon)
+    public function iTryToDeleteCoupon(CouponInterface $coupon)
     {
         try {
             $this->couponRepository->remove($coupon);
+
+            throw new \Exception(sprintf('Coupon "%s" has been removed, but it should not.', $coupon->getCode()));
         } catch(ForeignKeyConstraintViolationException $exception) {
-            $this->sharedStorage->set('exception', $exception);
+            $this->sharedStorage->set('last_exception', $exception);
         }
     }
 
     /**
-     * @Then /^([^"]+) should no longer exist in the registry$/
+     * @When /^I delete ("([^"]+)" coupon)$/
      */
-    public function couponShouldNotExistInTheRegistry(CouponInterface $coupon)
+    public function iDeleteCoupon(CouponInterface $coupon)
     {
-        expect($this->couponRepository->find($coupon->getId()))->toBe(null);
+        $this->sharedStorage->set('coupon_id', $coupon->getId());
+        $this->couponRepository->remove($coupon);
+    }
+
+    /**
+     * @Then /^([^"]+ should no longer) exist in the registry$/
+     */
+    public function couponShouldNotExistInTheRegistry($couponId)
+    {
+        expect($this->couponRepository->find($couponId))->toBe(null);
     }
 
     /**
      * @Then I should be notified that it is in use and cannot be deleted
      */
-    public function iShouldBeNotified()
+    public function iShouldBeNotifiedOfFailure()
     {
-        expect($this->sharedStorage->get('exception'))
-            ->toReturnAnInstanceOf(ForeignKeyConstraintViolationException::class)
+        expect($this->sharedStorage->get('last_exception'))
+            ->toBeAnInstanceOf(ForeignKeyConstraintViolationException::class)
         ;
     }
 
@@ -89,5 +100,13 @@ final class PromotionContext implements Context
     public function couponShouldStillExistInTheRegistry(CouponInterface $coupon)
     {
         expect($this->couponRepository->find($coupon->getId()))->toNotBe(null);
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully deleted
+     */
+    public function iShouldBeNotifiedOfSuccess()
+    {
+        // Not applicable in the domain scope
     }
 }

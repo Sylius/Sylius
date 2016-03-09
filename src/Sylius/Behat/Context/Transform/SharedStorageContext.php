@@ -41,6 +41,14 @@ final class SharedStorageContext implements Context
     }
 
     /**
+     * @Transform /^(?:this|that|the) ([^"]+) should no longer$/
+     */
+    public function getResourceId($resource)
+    {
+        return $this->sharedStorage->get(sprintf('%s_id', $resource));
+    }
+
+    /**
      * @Transform /^(?:this|that|the) ([^"]+)$/
      */
     public function getResource($resource)

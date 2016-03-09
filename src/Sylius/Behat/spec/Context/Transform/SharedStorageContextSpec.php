@@ -13,10 +13,13 @@ namespace spec\Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 use PhpSpec\ObjectBehavior;
+use Sylius\Behat\Context\Transform\SharedStorageContext;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
 /**
+ * @mixin SharedStorageContext
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class SharedStorageContextSpec extends ObjectBehavior
@@ -43,12 +46,20 @@ class SharedStorageContextSpec extends ObjectBehavior
         $this->getLatestResource()->shouldReturn('string');
     }
 
-    function it_transform_this_that_and_the_with_resource_name_to_current_resource_of_this_type(
+    function it_transforms_this_that_and_the_with_resource_name_to_current_resource_of_this_type(
         $sharedStorage,
         CustomerInterface $customer
     ) {
         $sharedStorage->get('customer')->willReturn($customer);
 
         $this->getResource('customer')->shouldReturn($customer);
+    }
+
+    function it_transforms_this_that_and_the_should_no_longer_with_resource_name_to_current_id_set_for_that_resource(
+        SharedStorageInterface $sharedStorage
+    ) {
+        $sharedStorage->get('customer_id')->willReturn(5);
+
+        $this->getResourceId('customer')->shouldReturn(5);
     }
 }

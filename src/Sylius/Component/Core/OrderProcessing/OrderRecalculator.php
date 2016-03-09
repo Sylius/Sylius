@@ -57,10 +57,7 @@ class OrderRecalculator implements OrderRecalculatorInterface
      */
     public function recalculate(OrderInterface $order)
     {
-        if (!empty($order->getPromotions())) {
-            $this->promotionProcessor->process($order);
-        }
-
+        $this->promotionProcessor->process($order);
         $this->taxesApplicator->apply($order);
         $this->shippingChargesProcessor->applyShippingCharges($order);
     }

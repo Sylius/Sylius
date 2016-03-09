@@ -14,6 +14,7 @@ namespace spec\Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
+use Sylius\Behat\Context\Setup\PromotionContext;
 use Sylius\Component\Core\Factory\ActionFactoryInterface;
 use Sylius\Component\Core\Factory\RuleFactoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -28,6 +29,8 @@ use Sylius\Component\Promotion\Model\RuleInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 
 /**
+ * @mixin PromotionContext
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class PromotionContextSpec extends ObjectBehavior
@@ -81,10 +84,9 @@ class PromotionContextSpec extends ObjectBehavior
 
     function it_creates_promotion_with_coupon(
         SharedStorageInterface $sharedStorage,
+        CouponFactoryInterface $couponFactory,
         TestPromotionFactoryInterface $testPromotionFactory,
         PromotionRepositoryInterface $promotionRepository,
-        CouponFactoryInterface $couponFactory,
-        RepositoryInterface $couponRepository,
         ChannelInterface $channel,
         CouponInterface $coupon,
         PromotionInterface $promotion
@@ -99,8 +101,6 @@ class PromotionContextSpec extends ObjectBehavior
 
         $promotionRepository->add($promotion)->shouldBeCalled();
         $sharedStorage->set('promotion', $promotion)->shouldBeCalled();
-
-        $couponRepository->add($coupon)->shouldBeCalled();
         $sharedStorage->set('coupon', $coupon)->shouldBeCalled();
 
         $this->thereIsPromotionWithCoupon('Promotion galore', 'Coupon galore');

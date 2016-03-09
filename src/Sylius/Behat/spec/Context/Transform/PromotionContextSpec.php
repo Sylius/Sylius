@@ -14,12 +14,15 @@ namespace spec\Sylius\Behat\Context\Transform;
 use Behat\Behat\Context\Context;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Behat\Context\Transform\PromotionContext;
 use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
+ * @mixin PromotionContext
+ *
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
 class PromotionContextSpec extends ObjectBehavior

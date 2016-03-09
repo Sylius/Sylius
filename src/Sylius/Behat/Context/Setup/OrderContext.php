@@ -72,11 +72,6 @@ final class OrderContext implements Context
     private $itemQuantityModifier;
 
     /**
-     * @var ShippingChargesProcessorInterface
-     */
-    private $shippingChargesProcessor;
-
-    /**
      * @var OrderRecalculatorInterface
      */
     private $orderRecalculator;
@@ -94,7 +89,6 @@ final class OrderContext implements Context
      * @param PaymentFactoryInterface $paymentFactory
      * @param FactoryInterface $orderItemFactory
      * @param OrderItemQuantityModifierInterface $itemQuantityModifier
-     * @param ShippingChargesProcessorInterface $shippingChargesProcessor
      * @param SharedStorageInterface $sharedStorage
      * @param OrderRecalculatorInterface $orderRecalculator
      * @param ObjectManager $objectManager
@@ -107,7 +101,6 @@ final class OrderContext implements Context
         PaymentFactoryInterface $paymentFactory,
         FactoryInterface $orderItemFactory,
         OrderItemQuantityModifierInterface $itemQuantityModifier,
-        ShippingChargesProcessorInterface $shippingChargesProcessor,
         OrderRecalculatorInterface $orderRecalculator,
         ObjectManager $objectManager
     ) {
@@ -118,7 +111,6 @@ final class OrderContext implements Context
         $this->paymentFactory = $paymentFactory;
         $this->orderItemFactory = $orderItemFactory;
         $this->itemQuantityModifier = $itemQuantityModifier;
-        $this->shippingChargesProcessor = $shippingChargesProcessor;
         $this->orderRecalculator = $orderRecalculator;
         $this->objectManager = $objectManager;
     }
@@ -155,7 +147,7 @@ final class OrderContext implements Context
         $this->orderShipmentFactory->processOrderShipment($order);
         $order->getShipments()->first()->setMethod($shippingMethod);
 
-        $this->shippingChargesProcessor->applyShippingCharges($order);
+        $this->orderRecalculator->recalculate($order);
 
         $payment = $this->paymentFactory->createWithAmountAndCurrency($order->getTotal(), $order->getCurrency());
         $payment->setMethod($paymentMethod);
@@ -174,6 +166,8 @@ final class OrderContext implements Context
     public function theCustomerBoughtSingleProduct(ProductInterface $product)
     {
         $this->addSingleProductVariantToOrder($product->getMasterVariant(), $product->getPrice());
+
+        $this->objectManager->flush();
     }
 
     /**
@@ -182,15 +176,31 @@ final class OrderContext implements Context
     public function theCustomerBoughtSingleProductVariant(ProductVariantInterface $productVariant)
     {
         $this->addSingleProductVariantToOrder($productVariant, $productVariant->getPrice());
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given the customer bought single :product using :coupon coupon
+     */
+    public function theCustomerBoughtSingleUsing(ProductInterface $product, CouponInterface $coupon)
+    {
+        $order = $this->addSingleProductVariantToOrder($product->getMasterVariant(), $product->getPrice());
+        $order->setPromotionCoupon($coupon);
+
+        $this->orderRecalculator->recalculate($order);
+
+        $this->objectManager->flush();
     }
 
     /**
      * @param ProductVariantInterface $productVariant
      * @param int $price
+     *
+     * @return OrderInterface
      */
     private function addSingleProductVariantToOrder(ProductVariantInterface $productVariant, $price)
     {
-        /** @var OrderInterface $order */
         $order = $this->sharedStorage->get('order');
 
         /** @var OrderItemInterface $item */
@@ -202,28 +212,8 @@ final class OrderContext implements Context
 
         $order->addItem($item);
 
-        $this->objectManager->flush();
-    }
-
-    /**
-     * @Given the customer bought single :product using :coupon coupon
-     */
-    public function theCustomerBoughtSingleUsing(ProductInterface $product, CouponInterface $coupon)
-    {
-        /** @var OrderInterface $order */
-        $order = $this->sharedStorage->get('order');
-
-        /** @var OrderItemInterface $item */
-        $item = $this->orderItemFactory->createNew();
-        $item->setVariant($product->getMasterVariant());
-        $item->setUnitPrice($product->getPrice());
-
-        $this->itemQuantityModifier->modify($item, 1);
-
-        $order->setPromotionCoupon($coupon);
-        $order->addItem($item);
-
         $this->orderRecalculator->recalculate($order);
-        $this->objectManager->flush();
+
+        return $order;
     }
 }

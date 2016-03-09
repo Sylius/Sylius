@@ -30,7 +30,6 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\OrderProcessing\OrderShipmentProcessorInterface;
-use Sylius\Component\Core\OrderProcessing\ShippingChargesProcessorInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
@@ -53,7 +52,6 @@ class OrderContextSpec extends ObjectBehavior
         PaymentFactoryInterface $paymentFactory,
         FactoryInterface $orderItemFactory,
         OrderItemQuantityModifierInterface $itemQuantityModifier,
-        ShippingChargesProcessorInterface $chargesProcessor,
         OrderRecalculatorInterface $orderRecalculator,
         ObjectManager $objectManager
     ) {
@@ -65,7 +63,6 @@ class OrderContextSpec extends ObjectBehavior
             $paymentFactory,
             $orderItemFactory,
             $itemQuantityModifier,
-            $chargesProcessor,
             $orderRecalculator,
             $objectManager
         );
@@ -116,7 +113,7 @@ class OrderContextSpec extends ObjectBehavior
         PaymentMethodInterface $paymentMethod,
         SharedStorageInterface $sharedStorage,
         ShipmentInterface $shipment,
-        ShippingChargesProcessorInterface $chargesProcessor,
+        OrderRecalculatorInterface $orderRecalculator,
         ShippingMethodInterface $shippingMethod,
         ObjectManager $objectManager
     ) {
@@ -139,7 +136,7 @@ class OrderContextSpec extends ObjectBehavior
 
         $objectManager->flush()->shouldBeCalled();
 
-        $chargesProcessor->applyShippingCharges($order)->shouldBeCalled();
+        $orderRecalculator->recalculate($order)->shouldBeCalled();
 
         $this->theCustomerChoseShippingToWithPayment($shippingMethod, $address, $paymentMethod);
     }

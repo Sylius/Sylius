@@ -13,13 +13,15 @@ namespace spec\Sylius\Component\Core\OrderProcessing;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderProcessing\OrderRecalculator;
 use Sylius\Component\Core\OrderProcessing\OrderRecalculatorInterface;
 use Sylius\Component\Core\OrderProcessing\ShippingChargesProcessorInterface;
 use Sylius\Component\Core\Taxation\OrderTaxesApplicatorInterface;
-use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
 
 /**
+ * @mixin OrderRecalculator
+ *
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
 class OrderRecalculatorSpec extends ObjectBehavior
@@ -46,26 +48,9 @@ class OrderRecalculatorSpec extends ObjectBehavior
         PromotionProcessorInterface $promotionProcessor,
         OrderTaxesApplicatorInterface $taxesApplicator,
         ShippingChargesProcessorInterface $shippingChargesProcessor,
-        OrderInterface $order,
-        PromotionInterface $firstPromotion,
-        PromotionInterface $secondPromotion
-    ) {
-        $order->getPromotions()->willReturn([$firstPromotion, $secondPromotion]);
-
-        $promotionProcessor->process($order)->shouldBeCalled();
-        $taxesApplicator->apply($order)->shouldBeCalled();
-        $shippingChargesProcessor->applyShippingCharges($order)->shouldBeCalled();
-
-        $this->recalculate($order);
-    }
-
-    function it_recalculates_order_taxes_and_shipping_charges(
-        OrderTaxesApplicatorInterface $taxesApplicator,
-        ShippingChargesProcessorInterface $shippingChargesProcessor,
         OrderInterface $order
     ) {
-        $order->getPromotions()->willReturn([]);
-
+        $promotionProcessor->process($order)->shouldBeCalled();
         $taxesApplicator->apply($order)->shouldBeCalled();
         $shippingChargesProcessor->applyShippingCharges($order)->shouldBeCalled();
 
