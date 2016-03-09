@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+test_package() {
+    local code=0
+
+    echo "Testing package located at $1..."
+
+    cd "$1"
+
+    local messages=()
+
+    if [ -e "phpspec.yml.dist" ] || [ -e "phpspec.yml" ]; then
+        PHPSPEC=""
+        if [ -x "bin/phpspec" ]; then
+            PHPSPEC="bin/phpspec"
+        elif [ -x "vendor/bin/phpspec" ]; then
+            PHPSPEC="vendor/bin/phpspec"
+        fi
+
+        if [ -z "${PHPSPEC}" ]; then
+            echo "Phpspec binary not found, make sure you included it in require-dev" 1>&2
+            code=1
+        else
+            echo "Specs found, running..."
+            "${PHPSPEC}" run --no-interaction -f dot || code=$?
+        fi
+    else
+        echo "Specs not found, skipping..."
+    fi
+
+    if [ -e "phpunit.xml.dist" ] || [ -e "phpunit.xml" ]; then
+        PHPUNIT=""
+        if [ -x "bin/phpunit" ]; then
+            PHPUNIT="bin/phpunit"
+        elif [ -x "vendor/bin/phpunit" ]; then
+            PHPUNIT="vendor/bin/phpunit"
+        fi
+
+        if [ -z "${PHPUNIT}" ]; then
+            echo "Phpunit binary not found, make sure you included it in require-dev" 1>&2
+            code=1
+        else
+            echo "Phpunit tests found, running..."
+            "${PHPUNIT}" || code=$?
+        fi
+    else
+        echo "Phpunit tests not found, skipping..."
+    fi
+
+    return "${code}"
+}
+
+if [ -z "$1" ]; then
+    echo "Usage: $0 <absolute package path>"
+    exit 1
+fi
+
+test_package "$1"

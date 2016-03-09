@@ -18,6 +18,7 @@ addons:
             - google-chrome
         packages:
             - google-chrome-stable
+            - parallel
 
 services:
     - memcached

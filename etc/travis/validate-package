@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+validate_package() {
+    echo "Validating package located at $1..."
+    composer validate --strict "$1/composer.json"
+}
+
+if [ -z "$1" ]; then
+    echo "Usage: $0 <absolute package path>"
+    exit 1
+fi
+
+validate_package "$1"
