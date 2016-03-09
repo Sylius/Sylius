@@ -7,9 +7,9 @@ Feature: Deleting a product variant
     Background:
         Given the store operates on a single channel in "France"
         And the store has a product "PHP Mug"
-        And the product "PHP Mug" has "Medium PHP Mug" variant priced at €40.00
+        And the product "PHP Mug" has "Medium PHP Mug" variant priced at "€40.00"
 
-    @todo
-    Scenario: Deleted variant disappears from the registry
+    @domain
+    Scenario: Deleted variant disappears from the product catalog
         When I delete the "Medium PHP Mug" variant of product "PHP Mug"
         Then this variant should not exist in the product catalog

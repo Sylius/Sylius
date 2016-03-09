@@ -19,7 +19,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface VariantInterface extends SoftDeletableInterface, TimestampableInterface, ResourceInterface
+interface VariantInterface extends TimestampableInterface, ResourceInterface
 {
     /**
      * Checks whether variant is master.

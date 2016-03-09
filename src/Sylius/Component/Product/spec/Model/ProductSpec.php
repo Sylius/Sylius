@@ -176,10 +176,9 @@ class ProductSpec extends ObjectBehavior
     function it_should_not_add_master_variant_twice_to_collection(VariantInterface $variant)
     {
         $variant->isMaster()->willReturn(true);
-        $variant->isDeleted()->willReturn(false);
 
-        $variant->setProduct($this)->shouldBeCalled();
-        $variant->setMaster(true)->shouldBeCalled();
+        $variant->setProduct($this)->shouldBeCalledTimes(1);
+        $variant->setMaster(true)->shouldBeCalledTimes(2);
 
         $this->setMasterVariant($variant);
         $this->setMasterVariant($variant);
@@ -195,7 +194,6 @@ class ProductSpec extends ObjectBehavior
     function its_hasVariants_should_return_true_only_if_any_variants_defined(VariantInterface $variant)
     {
         $variant->isMaster()->willReturn(false);
-        $variant->isDeleted()->willReturn(false);
 
         $variant->setProduct($this)->shouldBeCalled();
 

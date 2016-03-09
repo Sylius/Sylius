@@ -18,6 +18,7 @@ use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\OrderProcessing\OrderShipmentProcessorInterface;
 use Sylius\Component\Core\OrderProcessing\ShippingChargesProcessorInterface;
@@ -159,15 +160,32 @@ final class OrderContext implements Context
     /**
      * @Given the customer bought single :product
      */
-    public function theCustomerBoughtSingle(ProductInterface $product)
+    public function theCustomerBoughtSingleProduct(ProductInterface $product)
+    {
+        $this->addSingleProductVariantToOrder($product->getMasterVariant(), $product->getPrice());
+    }
+
+    /**
+     * @Given /^the customer bought single ("[^"]+" variant of product "[^"]+")$/
+     */
+    public function theCustomerBoughtSingleProductVariant(ProductVariantInterface $productVariant)
+    {
+        $this->addSingleProductVariantToOrder($productVariant, $productVariant->getPrice());
+    }
+
+    /**
+     * @param ProductVariantInterface $productVariant
+     * @param int $price
+     */
+    private function addSingleProductVariantToOrder(ProductVariantInterface $productVariant, $price)
     {
         /** @var OrderInterface $order */
         $order = $this->sharedStorage->get('order');
 
         /** @var OrderItemInterface $item */
         $item = $this->orderItemFactory->createNew();
-        $item->setVariant($product->getMasterVariant());
-        $item->setUnitPrice($product->getPrice());
+        $item->setVariant($productVariant);
+        $item->setUnitPrice($price);
 
         $this->itemQuantityModifier->modify($item, 1);
 
