@@ -19,3 +19,6 @@ doctrine_phpcr:
             type: memcached
             host: localhost
             port: 11211
+
+twig:
+    strict_variables: true
