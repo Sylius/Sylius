@@ -17,7 +17,7 @@ use Sylius\Behat\Page\External\PaypalExpressCheckoutPageInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class PaypalContext implements Context
+final class PaypalContext implements Context
 {
     /**
      * @var PaypalExpressCheckoutPageInterface
