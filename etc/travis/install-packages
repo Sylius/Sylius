@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-INSTALL_PACKAGE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/install-package"
-FIND_PACKAGES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/find-packages"
-
-"${FIND_PACKAGES}" | parallel --gnu -j3 "${INSTALL_PACKAGE} {}"

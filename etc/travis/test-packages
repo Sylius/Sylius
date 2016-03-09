@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-TEST_PACKAGE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/test-package"
-FIND_PACKAGES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/find-packages"
-
-"${FIND_PACKAGES}" | parallel--gnu  -j5 "${TEST_PACKAGE} {}"

@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-VALIDATE_PACKAGE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/validate-package"
-FIND_PACKAGES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/find-packages"
-
-"${FIND_PACKAGES}" | parallel --gnu -j8 "${VALIDATE_PACKAGE} {}"

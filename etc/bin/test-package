@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../bash/common.lib.sh"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../bash/output.lib.sh"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../bash/packages.lib.sh"
+
+test_package() {
+    local phpspec phpunit exit_code=0
+
+    print_header "Testing" "$(package_path_to_package_name "$1")"
+
+    cd "$1" 2>/dev/null
+    exit_on_error "Cannot change current directory to $1"
+
+    run_phpspec || exit_code=$?
+    run_phpunit || exit_code=$?
+
+    return ${exit_code}
+}
+
+run_phpspec() {
+    if [[ ! -e "phpspec.yml.dist" && ! -e "phpspec.yml" ]]; then
+        return 0
+    fi
+
+    phpspec="$(get_binary phpspec)"
+    if [ "$?" != 0 ]; then
+        print_error "Phpspec binary not found, make sure you included it in require-dev"
+        return 1
+    fi
+
+    run_command "${phpspec} run --ansi --no-interaction --format=dot"
+}
+
+run_phpunit() {
+    if [[ ! -e "phpunit.xml.dist" && ! -e "phpunit.xml" ]]; then
+        return 0
+    fi
+
+    phpunit="$(get_binary phpunit)"
+    if [ "$?" != 0 ]; then
+        print_error "Phpunit binary not found, make sure you included it in require-dev"
+        return 1
+    fi
+
+    run_command "${phpunit} --colors=always"
+}
+
+package_path="$(cast_package_argument_to_package_path "$1")"
+exit_on_error "Usage: $0 <package path or name>"
+
+test_package "${package_path}"

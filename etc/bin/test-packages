@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../bash/packages.lib.sh"
+
+test_package="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/test-package"
+
+locate_packages | parallel -j100% --gnu "${test_package} {}"

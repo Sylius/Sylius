@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../bash/common.lib.sh"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../bash/output.lib.sh"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../bash/packages.lib.sh"
+
+validate_package() {
+    print_header "Validating" "$(package_path_to_package_name "$1")"
+    run_command "composer validate --ansi --strict $1/composer.json"
+}
+
+package_path="$(cast_package_argument_to_package_path "$1")"
+exit_on_error "Usage: $0 <package path or name>"
+
+validate_package "${package_path}"

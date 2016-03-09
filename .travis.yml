@@ -47,8 +47,8 @@ before_install:
     - composer config -g github-oauth.github.com "$GITHUB_OAUTH_TOKEN" >/dev/null 2>&1
 
 install:
-    - composer install --no-interaction --prefer-dist --no-scripts
-    - etc/travis/install-packages
+    - composer install --no-interaction --no-scripts --prefer-dist
+    - etc/bin/install-packages
 
     - composer run-script travis-build --no-interaction
 
@@ -72,14 +72,14 @@ before_script:
 
 script:
     - composer validate
-    - etc/travis/validate-packages
+    - etc/bin/validate-packages
 
     - if [[ $TRAVIS_PHP_VERSION = 7.* ]]; then bin/kawaii gherkin:check --align=left features/; fi;
 
     - bin/phpspec run --no-interaction -f dot
     - bin/phpunit
 
-    - etc/travis/test-packages
+    - etc/bin/test-packages
 
     - etc/travis/prepare-javascript
     - etc/travis/run-behat

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../bash/output.lib.sh"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../bash/packages.lib.sh"
+
+build_package() {
+    eval "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/install-package $1"
+    eval "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/validate-package $1"
+    eval "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/test-package $1"
+    eval "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/clean-package $1"
+
+}
+
+package_path="$(cast_package_argument_to_package_path "$1")"
+exit_on_error "Usage: $0 <package path or name>"
+
+build_package "${package_path}"

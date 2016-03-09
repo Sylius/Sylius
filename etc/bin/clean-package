@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../bash/common.lib.sh"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../bash/output.lib.sh"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../bash/packages.lib.sh"
+
+clean_package() {
+    print_header "Cleaning" "$(package_path_to_package_name "$1")"
+    run_command "rm $1/composer.lock 2>/dev/null"
+    run_command "rm -r $1/vendor 2>/dev/null"
+    run_command "rm -r $1/bin 2>/dev/null"
+}
+
+package_path="$(cast_package_argument_to_package_path "$1")"
+exit_on_error "Usage: $0 <package path or name>"
+
+clean_package "${package_path}"
