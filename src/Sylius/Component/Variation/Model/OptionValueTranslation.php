@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Variation\Model;
 
-use Sylius\Component\Translation\Model\AbstractTranslation;
+use Sylius\Component\Resource\Model\AbstractTranslation;
 
 /**
  * @author Vincenzo Provenza <vincenzo.provenza89@gmail.com>

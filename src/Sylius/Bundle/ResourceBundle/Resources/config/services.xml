@@ -37,6 +37,10 @@
         <parameter key="sylius.validator.enabled.class">Sylius\Bundle\ResourceBundle\Validator\EnabledValidator</parameter>
         <parameter key="sylius.validator.disabled.class">Sylius\Bundle\ResourceBundle\Validator\DisabledValidator</parameter>
 
+        <parameter key="sylius.translation.translatable_listener.doctrine.orm.class">Sylius\Bundle\ResourceBundle\EventListener\ORMTranslatableListener</parameter>
+        <parameter key="sylius.translation.translatable_listener.doctrine.mongodb_odm.class">Sylius\Bundle\ResourceBundle\EventListener\MongoDBODMTranslatableListener</parameter>
+        <parameter key="sylius.translation.locale_provider.request.class">Sylius\Bundle\ResourceBundle\Provider\RequestLocaleProvider</parameter>
+
         <!-- Sylius State Machine -->
         <parameter key="sylius.state_machine.class">Sylius\Component\Resource\StateMachine\StateMachine</parameter>
 
@@ -76,6 +80,22 @@
         </service>
         <service id="sylius.validator.disabled" class="%sylius.validator.disabled.class%">
             <tag name="validator.constraint_validator" alias="sylius_resource_disabled_validator" />
+        </service>
+
+        <service id="sylius.translation.translatable_listener.doctrine.orm" class="%sylius.translation.translatable_listener.doctrine.orm.class%">
+            <argument type="service" id="sylius.resource_registry" />
+            <argument type="service" id="sylius.translation.locale_provider" />
+            <tag name="doctrine.event_subscriber" connection="default" priority="99" />
+        </service>
+        <service id="sylius.translation.translatable_listener.doctrine.mongodb_odm" class="%sylius.translation.translatable_listener.doctrine.mongodb_odm.class%">
+            <argument type="service" id="sylius.resource_registry" />
+            <argument type="service" id="sylius.translation.locale_provider" />
+            <tag name="doctrine_mongodb.odm.event_subscriber" connection="default" priority="99" />
+        </service>
+
+        <service id="sylius.translation.locale_provider.request" class="%sylius.translation.locale_provider.request.class%">
+            <argument>%sylius.translation.default_locale%</argument>
+            <tag name="kernel.event_subscriber" priority="98" />
         </service>
     </services>
 </container>

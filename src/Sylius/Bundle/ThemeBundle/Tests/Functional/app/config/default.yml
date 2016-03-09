@@ -26,6 +26,9 @@ sylius_theme:
             locations:
                 - "%kernel.root_dir%/../../Fixtures/themes"
 
+sylius_resource:
+    default_locale: en
+
 doctrine:
     dbal:
         driver: pdo_sqlite

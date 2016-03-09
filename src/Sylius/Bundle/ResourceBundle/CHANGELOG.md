@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+### v0.18.0
+
+* Merged TranslationBundle.
+
 ### v0.16.0
 
 * Introduce Factory for all resources.

@@ -52,7 +52,6 @@
         "phpunit/phpunit": "^4.8",
         "sensio/generator-bundle": "^3.0",
         "sylius/rbac-bundle": "0.18.*",
-        "sylius/translation-bundle": "0.18.*",
         "twig/twig": "~1.11"
     },
     "suggest": {
@@ -60,7 +59,6 @@
         "doctrine/orm": "^2.4.8,<2.5",
         "doctrine/phpcr-bundle": "~1.1",
         "sylius/rbac-bundle": "0.18.*",
-        "sylius/translation-bundle": "0.18.*"
     },
     "scripts": {
         "post-install-cmd": [
