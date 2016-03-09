@@ -3,7 +3,7 @@
 
 default:
     suites:
-        search:
+        legacy_search:
             contexts:
                 - Sylius\Bundle\SearchBundle\Behat\SearchContext
                 - Sylius\Bundle\CoreBundle\Behat\HookContext

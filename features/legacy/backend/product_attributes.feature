@@ -1,4 +1,4 @@
-@legacy @products
+@legacy @product
 Feature: Product attributes
     In order to show specific product parameters to customer
     As a store owner

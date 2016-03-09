@@ -1,4 +1,4 @@
-@legacy @promotions
+@legacy @promotion
 Feature: Checkout promotions with multiple rules and actions
     In order to handle product promotions
     As a store owner

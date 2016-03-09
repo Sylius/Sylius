@@ -1,4 +1,4 @@
-@legacy @promotions
+@legacy @promotion
 Feature: Checkout fixed discount promotions
     In order to handle product promotions
     As a store owner

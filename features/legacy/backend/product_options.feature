@@ -1,4 +1,4 @@
-@legacy @products
+@legacy @product
 Feature: Product options
     In order to offer my products in many different variations
     As a store owner

@@ -1,4 +1,4 @@
-@legacy @products
+@legacy @product
 Feature: Product reviews
     In order to rate and learn more about the products
     As a Visitor
