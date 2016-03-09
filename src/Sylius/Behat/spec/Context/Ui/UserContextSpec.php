@@ -12,10 +12,12 @@
 namespace spec\Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
+use PhpSpec\Exception\Example\FailureException;
 use PhpSpec\ObjectBehavior;
 use Sylius\Behat\Page\Customer\CustomerShowPageInterface;
 use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Page\User\LoginPageInterface;
+use Sylius\Behat\Page\User\RegisterPageInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
@@ -31,9 +33,10 @@ class UserContextSpec extends ObjectBehavior
         SharedStorageInterface $sharedStorage,
         UserRepositoryInterface $userRepository,
         CustomerShowPageInterface $customerShowPage,
-        LoginPageInterface $loginPage
+        LoginPageInterface $loginPage,
+        RegisterPageInterface $registerPage
     ) {
-        $this->beConstructedWith($sharedStorage, $userRepository, $customerShowPage, $loginPage);
+        $this->beConstructedWith($sharedStorage, $userRepository, $customerShowPage, $loginPage, $registerPage);
     }
 
     function it_is_initializable()
@@ -103,5 +106,27 @@ class UserContextSpec extends ObjectBehavior
         $customerShowPage->isRegistered()->willReturn(false);
 
         $this->accountShouldBeDeleted();
+    }
+
+    function it_tries_to_register_new_account($registerPage)
+    {
+        $registerPage->open()->shouldBeCalled();
+        $registerPage->register('ted@example.com')->shouldBeCalled();
+
+        $this->iTryToRegister('ted@example.com');
+    }
+
+    function it_checks_if_account_is_registered_successfully($registerPage)
+    {
+        $registerPage->wasRegistrationSuccessful()->willReturn(true);
+
+        $this->iShouldBeRegistered();
+    }
+
+    function it_checks_if_account_registration_was_not_successful($registerPage)
+    {
+        $registerPage->wasRegistrationSuccessful()->willReturn(false);
+
+        $this->shouldThrow(FailureException::class)->during('iShouldBeRegistered');
     }
 }

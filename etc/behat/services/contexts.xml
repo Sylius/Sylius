@@ -257,6 +257,7 @@
             <argument type="service" id="sylius.repository.user" container="symfony" />
             <argument type="service" id="sylius.behat.page.customer_show" />
             <argument type="service" id="sylius.behat.page.login" />
+            <argument type="service" id="sylius.behat.page.register" />
             <tag name="sylius.behat.context" />
         </service>
 
