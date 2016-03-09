@@ -17,7 +17,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class TaxonFilter implements TaxonFilterInterface
+class TaxonFilter implements FilterInterface
 {
     /**
      * {@inheritdoc}

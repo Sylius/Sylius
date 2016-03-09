@@ -1,0 +1,60 @@
+<?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace spec\Sylius\Component\Core\Promotion\Filter;
+
+use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Promotion\Filter\FilterInterface;
+
+/**
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ */
+class PriceRangeFilterSpec extends ObjectBehavior
+{
+    function it_is_initializable()
+    {
+        $this->shouldHaveType('Sylius\Component\Core\Promotion\Filter\PriceRangeFilter');
+    }
+
+    function it_implements_filter_interface()
+    {
+        $this->shouldImplement(FilterInterface::class);
+    }
+
+    function it_filters_items_which_has_product_with_price_that_fits_in_configured_range(
+        OrderItemInterface $item1,
+        OrderItemInterface $item2,
+        OrderItemInterface $item3,
+        ProductVariantInterface $item1Variant,
+        ProductVariantInterface $item2Variant,
+        ProductVariantInterface $item3Variant
+    ) {
+        $item1->getVariant()->willReturn($item1Variant);
+        $item2->getVariant()->willReturn($item2Variant);
+        $item3->getVariant()->willReturn($item3Variant);
+
+        $item1Variant->getPrice()->willReturn(500);
+        $item2Variant->getPrice()->willReturn(5000);
+        $item3Variant->getPrice()->willReturn(15000);
+
+        $this
+            ->filter([$item1, $item2, $item3], ['filters' => ['price_range' => ['min' => 1000, 'max' => 10000]]])
+            ->shouldReturn([$item2])
+        ;
+    }
+
+    function it_returns_all_items_if_configuration_is_invalid(OrderItemInterface $item1, OrderItemInterface $item2)
+    {
+        $this->filter([$item1, $item2], [])->shouldReturn([$item1, $item2]);
+    }
+}

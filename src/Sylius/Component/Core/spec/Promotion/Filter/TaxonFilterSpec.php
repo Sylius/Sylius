@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Core\Promotion\Filter\TaxonFilterInterface;
+use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -28,9 +28,9 @@ class TaxonFilterSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\Core\Promotion\Filter\TaxonFilter');
     }
 
-    function it_implements_taxon_filter_interface()
+    function it_implements_filter_interface()
     {
-        $this->shouldImplement(TaxonFilterInterface::class);
+        $this->shouldImplement(FilterInterface::class);
     }
 
     function it_filters_passed_order_items_with_given_configuration(
