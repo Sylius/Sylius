@@ -1,4 +1,4 @@
-@taxonomy
+@legacy_taxonomy
 Feature: taxonomy
     In order to categorize my merchandise
     As a store owner
@@ -20,7 +20,7 @@ Feature: taxonomy
 
     Scenario: Seeing index of all taxons
         Given I am on the dashboard page
-        When I follow "Taxons"
+        When I follow "Categorization"
         Then I should be on the taxon index page
         And I should see 10 taxons in the list
 
@@ -31,7 +31,7 @@ Feature: taxonomy
 
     Scenario: Accessing the taxon creation form
         Given I am on the dashboard page
-        When I follow "Taxons"
+        When I follow "Categorization"
         And I follow "Create taxon"
         Then I should be on the taxon creation page
 
