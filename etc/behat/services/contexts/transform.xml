@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="sylius.behat.context.transform.customer.class">Sylius\Behat\Context\Transform\CustomerContext</parameter>
+        <parameter key="sylius.behat.context.transform.addressing.class">Sylius\Behat\Context\Transform\AddressingContext</parameter>
+        <parameter key="sylius.behat.context.transform.lexical.class">Sylius\Behat\Context\Transform\LexicalContext</parameter>
+        <parameter key="sylius.behat.context.transform.shared_storage.class">Sylius\Behat\Context\Transform\SharedStorageContext</parameter>
+        <parameter key="sylius.behat.context.transform.channel.class">Sylius\Behat\Context\Transform\ChannelContext</parameter>
+        <parameter key="sylius.behat.context.transform.payment.class">Sylius\Behat\Context\Transform\PaymentContext</parameter>
+        <parameter key="sylius.behat.context.transform.product.class">Sylius\Behat\Context\Transform\ProductContext</parameter>
+        <parameter key="sylius.behat.context.transform.shipping.class">Sylius\Behat\Context\Transform\ShippingContext</parameter>
+        <parameter key="sylius.behat.context.transform.tax.class">Sylius\Behat\Context\Transform\TaxContext</parameter>
+        <parameter key="sylius.behat.context.transform.taxon.class">Sylius\Behat\Context\Transform\TaxonContext</parameter>
+        <parameter key="sylius.behat.context.transform.zone.class">Sylius\Behat\Context\Transform\ZoneContext</parameter>
+        <parameter key="sylius.behat.context.transform.theme.class">Sylius\Behat\Context\Transform\ThemeContext</parameter>
+    </parameters>
+    <services>
+        <service id="sylius.behat.context.transform.customer" class="%sylius.behat.context.transform.customer.class%" scope="scenario">
+            <argument type="service" id="sylius.repository.customer" container="symfony" />
+            <argument type="service" id="sylius.factory.customer" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.transform.addressing" class="%sylius.behat.context.transform.addressing.class%" scope="scenario">
+            <argument type="service" id="sylius.factory.address" container="symfony" />
+            <argument type="service" id="sylius.converter.country_name" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.transform.lexical" class="%sylius.behat.context.transform.lexical.class%" scope="scenario">
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.transform.shared_storage" class="%sylius.behat.context.transform.shared_storage.class%" scope="scenario">
+            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.transform.channel" class="%sylius.behat.context.transform.channel.class%" scope="scenario">
+            <argument type="service" id="sylius.repository.channel" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.transform.payment" class="%sylius.behat.context.transform.payment.class%" scope="scenario">
+            <argument type="service" id="sylius.repository.payment_method" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.transform.product" class="%sylius.behat.context.transform.product.class%" scope="scenario">
+            <argument type="service" id="sylius.repository.product" container="symfony" />
+            <argument type="service" id="sylius.repository.product_variant" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.transform.shipping" class="%sylius.behat.context.transform.shipping.class%" scope="scenario">
+            <argument type="service" id="sylius.repository.shipping_method" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.transform.tax" class="%sylius.behat.context.transform.tax.class%" scope="scenario">
+            <argument type="service" id="sylius.repository.tax_category" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.transform.taxon" class="%sylius.behat.context.transform.taxon.class%" scope="scenario">
+            <argument type="service" id="sylius.repository.taxon" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.transform.zone" class="%sylius.behat.context.transform.zone.class%" scope="scenario">
+            <argument type="service" id="sylius.repository.zone" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.transform.theme" class="%sylius.behat.context.transform.theme.class%" scope="scenario">
+            <argument type="service" id="sylius.repository.theme" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+    </services>
+</container>
