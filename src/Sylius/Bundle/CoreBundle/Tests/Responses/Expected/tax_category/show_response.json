@@ -1,0 +1,13 @@
+{
+    "id": @integer@,
+    "code": "TC1",
+    "name": "Tax Category 1",
+    "description": "@string@",
+    "created_at": "@string@.isDateTime()",
+    "updated_at": "@string@.isDateTime()",
+    "_links": {
+        "self": {
+            "href": "@string@"
+        }
+    }
+}

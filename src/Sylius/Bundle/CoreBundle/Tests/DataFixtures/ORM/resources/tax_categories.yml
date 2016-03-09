@@ -1,0 +1,5 @@
+Sylius\Component\Taxation\Model\TaxCategory:
+    tax_category_{1..3}:
+        code: TC<current()>
+        name: Tax Category <current()>
+        description: <sentence($nbWords = 6)>

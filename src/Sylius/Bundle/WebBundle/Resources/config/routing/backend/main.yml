@@ -93,7 +93,6 @@ sylius_backend_shipping_category:
        section: backend
        except: ['show']
        templates: SyliusWebBundle:Backend/ShippingCategory
-       grid: sylius_admin_shipping_category
     type: sylius.resource
 
 sylius_backend_shipping_method:

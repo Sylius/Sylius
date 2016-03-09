@@ -5,21 +5,21 @@
     "total": 3,
     "_links": {
         "self": {
-            "href": "\/api\/shipping-categories\/?sorting%5Bname%5D=asc&page=1&limit=10"
+            "href": "\/api\/tax-categories\/?page=1&limit=10"
         },
         "first": {
-            "href": "\/api\/shipping-categories\/?sorting%5Bname%5D=asc&page=1&limit=10"
+            "href": "\/api\/tax-categories\/?page=1&limit=10"
         },
         "last": {
-            "href": "\/api\/shipping-categories\/?sorting%5Bname%5D=asc&page=1&limit=10"
+            "href": "\/api\/tax-categories\/?page=1&limit=10"
         }
     },
     "_embedded": {
         "items": [
             {
                 "id": @integer@,
-                "code": "SC1",
-                "name": "Shipping Category 1",
+                "code": "TC1",
+                "name": "Tax Category 1",
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -28,8 +28,8 @@
             },
             {
                 "id": @integer@,
-                "code": "SC2",
-                "name": "Shipping Category 2",
+                "code": "TC2",
+                "name": "Tax Category 2",
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -38,8 +38,8 @@
             },
             {
                 "id": @integer@,
-                "code": "SC3",
-                "name": "Shipping Category 3",
+                "code": "TC3",
+                "name": "Tax Category 3",
                 "_links": {
                     "self": {
                         "href": "@string@"

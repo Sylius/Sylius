@@ -5,21 +5,21 @@
     "total": 1,
     "_links": {
         "self": {
-            "href": "\/api\/shipping-categories\/?criteria%5Bcode%5D=SC1&page=1&limit=10"
+            "href": "\/api\/tax-categories\/?criteria%5Bcode%5D=TC1&page=1&limit=10"
         },
         "first": {
-            "href": "\/api\/shipping-categories\/?criteria%5Bcode%5D=SC1&page=1&limit=10"
+            "href": "\/api\/tax-categories\/?criteria%5Bcode%5D=TC1&page=1&limit=10"
         },
         "last": {
-            "href": "\/api\/shipping-categories\/?criteria%5Bcode%5D=SC1&page=1&limit=10"
+            "href": "\/api\/tax-categories\/?criteria%5Bcode%5D=TC1&page=1&limit=10"
         }
     },
     "_embedded": {
         "items": [
             {
                 "id": @integer@,
-                "code": "SC1",
-                "name": "Shipping Category 1",
+                "code": "TC1",
+                "name": "Tax Category 1",
                 "_links": {
                     "self": {
                         "href": "@string@"

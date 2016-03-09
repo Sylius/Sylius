@@ -1,0 +1,13 @@
+{
+    "id": @integer@,
+    "code": "TC1",
+    "name": "Clothing & Accessories",
+    "description": "@string@",
+    "created_at": "@string@.isDateTime()",
+    "updated_at": "@string@.isDateTime()",
+    "_links": {
+        "self": {
+            "href": "@string@"
+        }
+    }
+}
