@@ -152,7 +152,7 @@ class RequestConfiguration
      */
     public function getRouteName($name)
     {
-        $sectionPrefix = $this->getSection() ? $this->getSection().'_' : '';
+        $sectionPrefix = $this->getSection() ? $this->getSection() . '_' : '';
 
         return sprintf('%s_%s%s_%s', $this->metadata->getApplicationName(), $sectionPrefix, $this->metadata->getName(), $name);
     }
@@ -194,7 +194,7 @@ class RequestConfiguration
             return null;
         }
 
-        return '#'.$redirect['hash'];
+        return '#' . $redirect['hash'];
     }
 
     /**
@@ -254,14 +254,14 @@ class RequestConfiguration
      */
     public function getLimit()
     {
-        $limit = null;
-
-        if ($this->isLimited()) {
-            $limit= $this->parameters->get('limit', 10);
-            $limit = (int) $this->request->get('limit', $limit);
+        if (!$this->isLimited()) {
+            return null;
         }
 
-        return $limit;
+        $limit = $this->parameters->get('limit', 10);
+        $limit = $this->request->get('limit', $limit);
+
+        return (int) $limit;
     }
 
     /**
@@ -271,9 +271,11 @@ class RequestConfiguration
     {
         $paginate = (bool) $this->parameters->get('paginate', true);
         $requestPaginate = $this->request->get('paginate', $paginate);
-        if(is_string($requestPaginate)){
-            $requestPaginate = filter_var($requestPaginate, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+
+        if (is_string($requestPaginate) && !is_numeric($requestPaginate)) {
+            $requestPaginate = filter_var($requestPaginate, FILTER_VALIDATE_BOOLEAN);
         }
+
         return (bool) $requestPaginate;
     }
 
@@ -285,6 +287,7 @@ class RequestConfiguration
         $maxPerPage = $this->parameters->get('paginate', 10);
         $maxPerPage = $this->request->get('limit', $maxPerPage);
         $maxPerPage = $this->request->get('paginate', $maxPerPage);
+
         return $maxPerPage;
     }
 
