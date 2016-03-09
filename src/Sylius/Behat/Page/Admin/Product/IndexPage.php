@@ -54,7 +54,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
 
         $row = $this->tableManipulator->getRowWithFields($table, ['id' => $product->getId()]);
 
-        return null === $row ? false : true;
+        return null === $row;
     }
 
     /**

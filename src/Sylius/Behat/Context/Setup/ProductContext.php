@@ -25,6 +25,7 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
 final class ProductContext implements Context
 {
@@ -80,7 +81,9 @@ final class ProductContext implements Context
      */
     public function storeHasAProductPricedAt($productName, $price = 0)
     {
+        /** @var ProductInterface $product */
         $product = $this->productFactory->createNew();
+
         $product->setName($productName);
         $product->setPrice($price);
         $product->setDescription('Awesome '.$productName);
@@ -94,20 +97,22 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^the (product "[^"]+") has "([^"]+)" variant priced at ("[^"]+")$/
      * @Given /^(this product) has "([^"]+)" variant priced at ("[^"]+")$/
      */
-    public function productHasAVariantPricedAt(ProductInterface $product, $variantName, $price)
+    public function theProductHasVariantPricedAt(ProductInterface $product, $productVariantName, $price)
     {
+        /** @var ProductVariantInterface $variant */
         $variant = $this->productVariantFactory->createNew();
-        $variant->setPresentation($variantName);
+
+        $variant->setPresentation($productVariantName);
         $variant->setPrice($price);
         $variant->setProduct($product);
-
         $product->addVariant($variant);
 
-        $this->sharedStorage->set('product_variant', $variant);
-
         $this->objectManager->flush();
+
+        $this->sharedStorage->set('variant', $variant);
     }
 
     /**
@@ -117,6 +122,7 @@ final class ProductContext implements Context
     {
         /** @var ProductInterface $product */
         $product = $this->productFactory->createNew();
+
         $product->setName($productName);
         $product->setPrice(0);
         $product->setDescription('Awesome ' . $productName);
@@ -140,7 +146,9 @@ final class ProductContext implements Context
     public function itComesInTheFollowingVariations(ProductInterface $product, TableNode $table)
     {
         foreach ($table->getHash() as $variantHash) {
+            /** @var ProductVariantInterface $variant */
             $variant = $this->productVariantFactory->createNew();
+
             $variant->setPresentation($variantHash['name']);
             $variant->setPrice($this->getPriceFromString(str_replace(['$', '€', '£'], '', $variantHash['price'])));
             $variant->setProduct($product);
@@ -157,23 +165,6 @@ final class ProductContext implements Context
     {
         $productVariant->setTaxCategory($taxCategory);
         $this->objectManager->flush($productVariant);
-    }
-
-    /**
-     * @Given /^the (product "[^"]+") has "([^"]+)" variant priced at ("[^"]+")$/
-     */
-    public function theProductHasVariantPricedAt(ProductInterface $product, $productVariantName, $price)
-    {
-        $variant = $this->productVariantFactory->createNew();
-
-        $variant->setPresentation($productVariantName);
-        $variant->setPrice($price);
-        $variant->setProduct($product);
-        $product->addVariant($variant);
-
-        $this->objectManager->flush();
-
-        $this->sharedStorage->set('variant', $variant);
     }
 
     /**

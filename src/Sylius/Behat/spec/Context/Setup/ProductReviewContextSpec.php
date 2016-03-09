@@ -29,9 +29,9 @@ class ProductReviewContextSpec extends ObjectBehavior
     function let(
         SharedStorageInterface $sharedStorage,
         FactoryInterface $reviewFactory,
-        ObjectManager $reviewManager
+        RepositoryInterface $reviewRepository
     ) {
-        $this->beConstructedWith($sharedStorage, $reviewFactory, $reviewManager);
+        $this->beConstructedWith($sharedStorage, $reviewFactory, $reviewRepository);
     }
 
     function it_is_initializable()
@@ -45,9 +45,9 @@ class ProductReviewContextSpec extends ObjectBehavior
     }
 
     function it_creates_a_review_for_a_given_product(
-        $reviewFactory,
-        $sharedStorage,
-        $reviewManager,
+        SharedStorageInterface $sharedStorage,
+        FactoryInterface $reviewFactory,
+        RepositoryInterface $productReviewRepository,
         ProductInterface $product,
         ReviewInterface $review
     ) {
@@ -60,7 +60,7 @@ class ProductReviewContextSpec extends ObjectBehavior
 
         $product->addReview($review)->shouldBeCalled();
 
-        $reviewManager->flush()->shouldBeCalled();
+        $productReviewRepository->add($review);
 
         $this->productHasAReview($product);
     }

@@ -21,6 +21,7 @@ use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
 final class ProductContext implements Context
 {

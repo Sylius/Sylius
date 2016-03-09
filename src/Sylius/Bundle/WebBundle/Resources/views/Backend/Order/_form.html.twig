@@ -76,7 +76,6 @@
                 <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}">
                     <h4 class="name">
                         {{ product.name }}
-                        {% if product.deleted %}<span class="label label-danger">{{ 'sylius.deleted'|trans }}</span>{% endif %}
                     </h4>
                 </a>
                 {% if product.hasOptions %}

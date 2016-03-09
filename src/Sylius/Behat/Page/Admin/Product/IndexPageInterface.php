@@ -10,6 +10,7 @@
  */
 
 namespace Sylius\Behat\Page\Admin\Product;
+
 use Sylius\Behat\Page\PageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 

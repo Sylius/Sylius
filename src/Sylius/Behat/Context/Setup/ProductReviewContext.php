@@ -21,7 +21,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
-class ProductReviewContext implements Context
+final class ProductReviewContext implements Context
 {
     /**
      * @var SharedStorageInterface
@@ -31,26 +31,26 @@ class ProductReviewContext implements Context
     /**
      * @var FactoryInterface
      */
-    private $reviewFactory;
+    private $productReviewFactory;
 
     /**
-     * @var ObjectManager
+     * @var RepositoryInterface
      */
-    private $reviewManager;
+    private $productReviewRepository;
 
     /**
      * @param SharedStorageInterface $sharedStorage
-     * @param FactoryInterface $reviewFactory
-     * @param ObjectManager $reviewManager
+     * @param FactoryInterface $productReviewFactory
+     * @param RepositoryInterface $productReviewRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        FactoryInterface $reviewFactory,
-        ObjectManager $reviewManager
+        FactoryInterface $productReviewFactory,
+        RepositoryInterface $productReviewRepository
     ) {
         $this->sharedStorage = $sharedStorage;
-        $this->reviewFactory = $reviewFactory;
-        $this->reviewManager = $reviewManager;
+        $this->productReviewFactory = $productReviewFactory;
+        $this->productReviewRepository = $productReviewRepository;
     }
 
     /**
@@ -58,13 +58,13 @@ class ProductReviewContext implements Context
      */
     public function productHasAReview(ProductInterface $product)
     {
-        $review = $this->reviewFactory->createNew();
+        $review = $this->productReviewFactory->createNew();
         $review->setTitle('title');
         $review->setRating(5);
         $review->setReviewSubject($product);
 
         $product->addReview($review);
 
-        $this->reviewManager->flush();
+        $this->productReviewRepository->add($review);
     }
 }

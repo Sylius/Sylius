@@ -92,7 +92,7 @@
         <service id="sylius.behat.context.setup.product_review" class="%sylius.behat.context.setup.product_review.class%" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.factory.product_review" container="symfony" />
-            <argument type="service" id="doctrine.orm.entity_manager" container="symfony" />
+            <argument type="service" id="sylius.repository.product_review" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 

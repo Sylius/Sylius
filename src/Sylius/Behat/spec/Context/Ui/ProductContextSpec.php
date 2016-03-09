@@ -45,7 +45,7 @@ class ProductContextSpec extends ObjectBehavior
         $this->shouldImplement(Context::class);
     }
 
-    function it_checks_if_i_am_be_able_to_access_product_page($productShowPage, ProductInterface $product)
+    function it_checks_if_i_am_able_to_access_product_page($productShowPage, ProductInterface $product)
     {
         $productShowPage->tryToOpen(['product' => $product])->shouldBeCalled();
         $productShowPage->isOpen(['product' => $product])->willReturn(true);
@@ -61,7 +61,7 @@ class ProductContextSpec extends ObjectBehavior
         $this->iShouldNotBeAbleToAccessProduct($product);
     }
 
-    function it_deletes_product($adminProductShowPage, $sharedStorage, ProductInterface $product)
+    function it_deletes_a_product($adminProductShowPage, $sharedStorage, ProductInterface $product)
     {
         $sharedStorage->set('product', $product)->shouldBeCalled();
         
@@ -74,7 +74,7 @@ class ProductContextSpec extends ObjectBehavior
         $this->iDeleteProduct($product);
     }
 
-    function it_checks_if_product_does_not_exist($sharedStorage, $productIndexPage, ProductInterface $product)
+    function it_checks_if_a_product_does_not_exist($sharedStorage, $productIndexPage, ProductInterface $product)
     {
         $sharedStorage->get('product')->willReturn($product);
 
