@@ -18,13 +18,13 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /**
- * Percentage discount action.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class PercentageDiscountAction extends DiscountAction
 {
+    const TYPE = 'percentage_discount';
+
     /**
      * {@inheritdoc}
      */

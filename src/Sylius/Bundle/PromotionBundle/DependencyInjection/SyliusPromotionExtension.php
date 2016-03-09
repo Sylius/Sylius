@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\PromotionBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
-use Sylius\Component\Promotion\Factory\ActionFactory;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

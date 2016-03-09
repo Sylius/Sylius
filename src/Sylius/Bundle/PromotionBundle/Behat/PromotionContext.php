@@ -152,6 +152,18 @@ class PromotionContext extends DefaultContext
     }
 
     /**
+     * @Given /^I add "([^"]*)" action$/
+     */
+    public function iAddAction($action)
+    {
+        $this->clickLink('Add action');
+
+        $this->getSession()->wait(100);
+
+        $this->selectOption('Type', $action);
+    }
+
+    /**
      * @return NodeElement
      *
      * @throws \Exception
