@@ -27,6 +27,7 @@ use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mark McKelvie <mark.mckelvie@reiss.com>
  */
 class OrderShipmentTaxesByZoneApplicatorSpec extends ObjectBehavior
 {
@@ -77,6 +78,34 @@ class OrderShipmentTaxesByZoneApplicatorSpec extends ObjectBehavior
 
         $adjustmentsFactory->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, 'Simple tax (10%)', 100, false)->willReturn($shippingTaxAdjustment);
         $order->addAdjustment($shippingTaxAdjustment)->shouldBeCalled();
+
+        $this->apply($order, $zone);
+    }
+
+    function it_does_nothing_if_there_are_no_shipment_taxes_on_order(
+        $adjustmentsFactory,
+        $calculator,
+        $taxRateResolver,
+        AdjustmentInterface $shippingAdjustment,
+        Collection $shippingAdjustments,
+        OrderInterface $order,
+        ShipmentInterface $shipment,
+        ShippingMethodInterface $shippingMethod,
+        TaxRateInterface $taxRate,
+        ZoneInterface $zone
+    ) {
+        $order->getLastShipment()->willReturn($shipment);
+        $shipment->getMethod()->willReturn($shippingMethod);
+        $taxRateResolver->resolve($shippingMethod, ['zone' => $zone])->willReturn($taxRate);
+
+        $order->getAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->willReturn($shippingAdjustments);
+        $shippingAdjustments->isEmpty()->willReturn(false);
+        $shippingAdjustments->last()->willReturn($shippingAdjustment);
+        $shippingAdjustment->getAmount()->willReturn(1000);
+
+        $calculator->calculate(1000, $taxRate)->willReturn(0);
+
+        $adjustmentsFactory->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, 'Simple tax (0%)', 0, false)->shouldNotBeCalled();
 
         $this->apply($order, $zone);
     }

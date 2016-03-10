@@ -20,6 +20,7 @@ use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mark McKelvie <mark.mckelvie@reiss.com>
  */
 class OrderShipmentTaxesByZoneApplicator implements OrderShipmentTaxesByZoneApplicatorInterface
 {
@@ -72,6 +73,9 @@ class OrderShipmentTaxesByZoneApplicator implements OrderShipmentTaxesByZoneAppl
 
         $lastShippingAdjustment = $shippingAdjustments->last();
         $taxAmount = $this->calculator->calculate($lastShippingAdjustment->getAmount(), $taxRate);
+        if (0 === $taxAmount) {
+            return;
+        }
 
         $this->addAdjustment($order, $taxAmount, $taxRate->getLabel(), $taxRate->isIncludedInPrice());
     }
