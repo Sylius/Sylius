@@ -20,10 +20,13 @@
         }
     ],
     "require": {
-        "php": "^5.5.9|^7.0"
+        "php": "^5.5.9|^7.0",
+
+        "sylius/registry": "^0.18"
     },
     "require-dev": {
-        "phpspec/phpspec": "^2.4"
+        "phpspec/phpspec": "^2.4",
+        "symfony/property-access": "^2.7.7"
     },
     "config": {
         "bin-dir": "bin"
@@ -34,9 +37,17 @@
     "autoload-dev": {
         "psr-4": { "Sylius\\Component\\Grid\\spec\\": "spec/" }
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../*/*"
+        }
+    ],
     "extra": {
         "branch-alias": {
-            "dev-master": "0.17-dev"
+            "dev-master": "0.18-dev"
         }
     }
 }
