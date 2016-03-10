@@ -21,4 +21,4 @@ doctrine_phpcr:
             port: 11211
 
 twig:
-    strict_variables: true
+    strict_variables: false
