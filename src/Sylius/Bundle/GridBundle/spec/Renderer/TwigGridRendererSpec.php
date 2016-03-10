@@ -14,7 +14,6 @@ namespace spec\Sylius\Bundle\GridBundle\Renderer;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\GridBundle\Renderer\TwigGridRenderer;
-use Sylius\Component\Grid\ActionTypes;
 use Sylius\Component\Grid\Definition\Action;
 use Sylius\Component\Grid\Definition\Field;
 use Sylius\Component\Grid\FieldTypes\FieldTypeInterface;
@@ -34,8 +33,8 @@ class TwigGridRendererSpec extends ObjectBehavior
     function let(\Twig_Environment $twig, ServiceRegistryInterface $fieldsRegistry, FormFactoryInterface $formFactory)
     {
         $actionTemplates = [
-            ActionTypes::LINK => 'SyliusGridBundle:Action:_link.html.twig',
-            ActionTypes::FORM => 'SyliusGridBundle:Action:_form.html.twig',
+            'link' => 'SyliusGridBundle:Action:_link.html.twig',
+            'form' => 'SyliusGridBundle:Action:_form.html.twig',
         ];
         $filterTemplates = [
             StringFilter::NAME => 'SyliusGridBundle:Filter:_string.html.twig',
@@ -68,7 +67,7 @@ class TwigGridRendererSpec extends ObjectBehavior
 
     function it_uses_Twig_to_render_the_action(\Twig_Environment $twig, GridView $gridView, Action $action)
     {
-        $action->getType()->willReturn(ActionTypes::LINK);
+        $action->getType()->willReturn('link');
         $twig->render('SyliusGridBundle:Action:_link.html.twig', ['grid' => $gridView, 'action' => $action, 'data' => null])->willReturn('<a href="#">Action!</a>');
 
         $this->renderAction($gridView, $action)->shouldReturn('<a href="#">Action!</a>');

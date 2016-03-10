@@ -65,6 +65,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
      */
     public function comparison($field, $operator, $value)
     {
+        throw new \BadMethodCallException('Not supported yet.');
         // TODO: Implement comparison() method.
     }
 

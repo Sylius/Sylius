@@ -58,10 +58,6 @@ class GridViewFactorySpec extends ObjectBehavior
     {
         return [
             'beSameGridViewAs' => function ($subject, $key) {
-                if (!$subject instanceof GridView || !$key instanceof GridView) {
-                    return false;
-                }
-
                 return serialize($subject) === serialize($key);
             },
         ];
