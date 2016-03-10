@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Authorization;
 
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
+use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface;
 
 /**
