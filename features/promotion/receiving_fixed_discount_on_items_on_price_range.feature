@@ -84,7 +84,7 @@ Feature: Receiving fixed discount on products from specific price range
         And my cart total should be "€110.00"
         And my discount should be "-€10.00"
 
-    @todo
+    @ui
     Scenario: Receiving different discounts on items from different price ranges
         Given the promotion gives "€10.00" off on every product with minimum price at "€80.00"
         And there is a promotion "Mugs promotion"

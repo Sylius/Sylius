@@ -66,7 +66,7 @@ class PriceRangeFilter implements FilterInterface
     private function isInvalidConfiguration(array $configuration)
     {
         return
-            !isset($configuration['filters']['price_range']['min']) ||
+            !isset($configuration['filters']['price_range']['min']) &&
             !isset($configuration['filters']['price_range']['max'])
         ;
     }
