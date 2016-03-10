@@ -16,6 +16,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Core\Factory\ActionFactoryInterface;
 use Sylius\Component\Core\Factory\RuleFactoryInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Test\Factory\TestPromotionFactoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
@@ -151,6 +152,20 @@ final class PromotionContext implements Context
     public function itGivesPercentageDiscountOnShippingToEveryOrder(PromotionInterface $promotion, $discount)
     {
         $action = $this->actionFactory->createPercentageShippingDiscount($discount);
+        $promotion->addAction($action);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^([^"]+) gives ("[^"]+%") off every product (classified as "[^"]+")$/
+     */
+    public function itGivesOffEveryProductClassifiedAs(PromotionInterface $promotion, $discount, TaxonInterface $taxon)
+    {
+        $action = $this->actionFactory->createItemPercentageDiscount($discount);
+        $configuration = array_merge(['filters' => ['taxons' => [$taxon->getCode()]]], $action->getConfiguration());
+        $action->setConfiguration($configuration);
+
         $promotion->addAction($action);
 
         $this->objectManager->flush();

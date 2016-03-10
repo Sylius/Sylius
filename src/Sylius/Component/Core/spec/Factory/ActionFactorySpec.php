@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Core\Factory;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Factory\ActionFactoryInterface;
 use Sylius\Component\Core\Promotion\Action\FixedDiscountAction;
+use Sylius\Component\Core\Promotion\Action\ItemPercentageDiscountAction;
 use Sylius\Component\Core\Promotion\Action\PercentageDiscountAction;
 use Sylius\Component\Core\Promotion\Action\ShippingDiscountAction;
 use Sylius\Component\Promotion\Model\ActionInterface;
@@ -64,6 +65,16 @@ class ActionFactorySpec extends ObjectBehavior
         $action->setConfiguration(['percentage' => 0.1])->shouldBeCalled();
 
         $this->createPercentageDiscount(0.1)->shouldReturn($action);
+    }
+
+    function it_creates_item_percentage_discount_action_with_given_discount_rate($decoratedFactory, ActionInterface $action)
+    {
+        $decoratedFactory->createNew()->willReturn($action);
+
+        $action->setType(ItemPercentageDiscountAction::TYPE)->shouldBeCalled();
+        $action->setConfiguration(['percentage' => 0.1])->shouldBeCalled();
+
+        $this->createItemPercentageDiscount(0.1)->shouldReturn($action);
     }
 
     function it_creates_shipping_discount_action_with_given_discount_rate($decoratedFactory, ActionInterface $action)

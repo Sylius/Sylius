@@ -14,14 +14,12 @@ Feature: Checkout promotions with multiple rules and actions
             | Item total    | Amount: 150   |
             | Cart quantity | Count: 2      |
         And promotion "150 EUR / 2 items" has following actions defined:
-            | type                | configuration |
-            | Fixed discount      | Amount: 20    |
-            | Percentage discount | Percentage: 5 |
+            | type                      | configuration |
+            | Order fixed discount      | Amount: 20    |
+            | Order percentage discount | Percentage: 5 |
         And there are following taxons defined:
-            | code | name     |
-            | RTX1 | Category |
-        And taxon "Category" has following children:
-            | Clothing[TX1] > Debian T-Shirts[TX2] |
+            | code | name            |
+            | TX1  | Debian T-Shirts |
         And the following products exist:
             | name   | price | taxons          |
             | Buzz   | 500   | Debian T-Shirts |

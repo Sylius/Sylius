@@ -19,6 +19,7 @@
     <parameters>
         <parameter key="sylius.templating.helper.restricted_zone.class">Sylius\Bundle\CoreBundle\Templating\Helper\RestrictedZoneHelper</parameter>
         <parameter key="sylius.templating.helper.money.class">Sylius\Bundle\CoreBundle\Templating\Helper\MoneyHelper</parameter>
+        <parameter key="sylius.templating.helper.regular_price.class">Sylius\Bundle\CoreBundle\Templating\Helper\RegularPriceHelper</parameter>
     </parameters>
 
     <services>
@@ -31,6 +32,10 @@
             <argument type="service" id="sylius.context.locale" />
             <argument type="service" id="sylius.context.currency" />
             <tag name="templating.helper" alias="sylius_money" />
+        </service>
+
+        <service id="sylius.templating.helper.regular_price" class="%sylius.templating.helper.regular_price.class%" lazy="true">
+            <tag name="templating.helper" alias="sylius_regular_price" />
         </service>
     </services>
 

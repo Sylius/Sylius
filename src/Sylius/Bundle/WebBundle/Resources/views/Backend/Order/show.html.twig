@@ -6,7 +6,7 @@
 
 {% set taxAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::TAX_ADJUSTMENT') %}
 {% set shippingAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::SHIPPING_ADJUSTMENT') %}
-{% set promotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::PROMOTION_ADJUSTMENT') %}
+{% set promotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT') %}
 
 {% block topbar %}
 <ol class="breadcrumb">
@@ -176,7 +176,7 @@
             </td>
             <td class="text-right" colspan="3">
                 <strong>{{ 'sylius.checkout.finalize.order.promotion_total'|trans }}</strong>:
-                <span class="amount">{{ order.adjustmentsTotal(promotionAdjustment)|sylius_price(order.currency) }}</span>
+                <span class="amount">{{ order.getPromotionsTotalRecursively()|sylius_price(order.currency) }}</span>
             </td>
         </tr>
         {% if not order.adjustments().isEmpty() %}

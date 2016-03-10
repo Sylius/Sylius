@@ -12,8 +12,10 @@
 namespace Sylius\Component\Core\Factory;
 
 use Sylius\Component\Core\Promotion\Action\FixedDiscountAction;
+use Sylius\Component\Core\Promotion\Action\ItemPercentageDiscountAction;
 use Sylius\Component\Core\Promotion\Action\PercentageDiscountAction;
 use Sylius\Component\Core\Promotion\Action\ShippingDiscountAction;
+use Sylius\Component\Promotion\Model\ActionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
@@ -47,11 +49,7 @@ class ActionFactory implements ActionFactoryInterface
      */
     public function createFixedDiscount($amount)
     {
-        $action = $this->createNew();
-        $action->setType(FixedDiscountAction::TYPE);
-        $action->setConfiguration(['amount' => $amount]);
-
-        return $action;
+        return $this->createAction(FixedDiscountAction::TYPE, ['amount' => $amount]);
     }
 
     /**
@@ -59,11 +57,15 @@ class ActionFactory implements ActionFactoryInterface
      */
     public function createPercentageDiscount($percentage)
     {
-        $action = $this->createNew();
-        $action->setType(PercentageDiscountAction::TYPE);
-        $action->setConfiguration(['percentage' => $percentage]);
+        return $this->createAction(PercentageDiscountAction::TYPE, ['percentage' => $percentage]);
+    }
 
-        return $action;
+    /**
+     * {@inheritdoc}
+     */
+    public function createItemPercentageDiscount($percentage)
+    {
+        return $this->createAction(ItemPercentageDiscountAction::TYPE, ['percentage' => $percentage]);
     }
 
     /**
@@ -71,9 +73,20 @@ class ActionFactory implements ActionFactoryInterface
      */
     public function createPercentageShippingDiscount($percentage)
     {
+        return $this->createAction(ShippingDiscountAction::TYPE, ['percentage' => $percentage]);
+    }
+
+    /**
+     * @param string $type
+     * @param array $configuration
+     *
+     * @return ActionInterface
+     */
+    private function createAction($type, array $configuration)
+    {
         $action = $this->createNew();
-        $action->setType(ShippingDiscountAction::TYPE);
-        $action->setConfiguration(['percentage' => $percentage]);
+        $action->setType($type);
+        $action->setConfiguration($configuration);
 
         return $action;
     }

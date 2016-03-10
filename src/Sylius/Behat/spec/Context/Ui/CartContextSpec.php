@@ -19,6 +19,8 @@ use Sylius\Behat\Context\Ui\CartContext;
 use Sylius\Behat\Page\Cart\CartSummaryPageInterface;
 use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Page\Product\ProductShowPageInterface;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
 /**
  * @mixin CartContext
@@ -27,9 +29,12 @@ use Sylius\Behat\Page\Product\ProductShowPageInterface;
  */
 class CartContextSpec extends ObjectBehavior
 {
-    public function let(CartSummaryPageInterface $cartSummaryPage, ProductShowPageInterface $productShowPage)
-    {
-        $this->beConstructedWith($cartSummaryPage, $productShowPage);
+    public function let(
+        SharedStorageInterface $sharedStorage,
+        CartSummaryPageInterface $cartSummaryPage,
+        ProductShowPageInterface $productShowPage
+    ) {
+        $this->beConstructedWith($sharedStorage, $cartSummaryPage, $productShowPage);
     }
 
     function it_is_initializable()
@@ -128,5 +133,59 @@ class CartContextSpec extends ObjectBehavior
         $cartSummaryPage->getPromotionTotal()->willThrow(new ElementNotFoundException('"promotion total" element is not present on the page'));
 
         $this->thereShouldBeNoDiscount();
+    }
+
+    function it_throws_exception_if_discount_info_is_present_on_the_page_but_should_not(CartSummaryPageInterface $cartSummaryPage)
+    {
+        $cartSummaryPage->open()->shouldBeCalled();
+        $cartSummaryPage->getPromotionTotal()->willReturn('$10.00');
+
+        $this->shouldThrow(new FailureException('Expected to get exception, none got.'))->during('thereShouldBeNoDiscount');
+    }
+
+    function it_checks_if_cart_item_has_correct_discount_price(CartSummaryPageInterface $cartSummaryPage, ProductInterface $product)
+    {
+        $cartSummaryPage->open()->shouldBeCalled();
+        $product->getName()->willReturn('Test product');
+
+        $cartSummaryPage->getItemDiscountPrice('Test product')->willReturn('€30.00');
+        $cartSummaryPage->getItemRegularPrice('Test product')->willReturn('€50.00');
+
+        $this->itsPriceShouldBeDecreasedBy($product, 2000);
+    }
+
+    function it_throws_not_equal_exception_if_cart_item_discount_is_incorrect(
+        CartSummaryPageInterface $cartSummaryPage,
+        ProductInterface $product
+    ) {
+        $cartSummaryPage->open()->shouldBeCalled();
+        $product->getName()->willReturn('Test product');
+
+        $cartSummaryPage->getItemDiscountPrice('Test product')->willReturn('€30.00');
+        $cartSummaryPage->getItemRegularPrice('Test product')->willReturn('€50.00');
+
+        $this->shouldThrow(NotEqualException::class)->during('itsPriceShouldBeDecreasedBy', [$product, 1000]);
+    }
+
+    function it_ensures_product_has_no_discount_price(CartSummaryPageInterface $cartSummaryPage, ProductInterface $product)
+    {
+        $cartSummaryPage->open()->shouldBeCalled();
+        $product->getName()->willReturn('Test product');
+
+        $cartSummaryPage->isItemDiscounted('Test product')->willReturn(false);
+
+        $this->productPriceShouldNotBeDecreased($product);
+    }
+
+    function it_throws_exception_if_discount_price_is_present_on_the_page_but_should_not(
+        CartSummaryPageInterface $cartSummaryPage,
+        ProductInterface $product
+    ) {
+        $cartSummaryPage->open()->shouldBeCalled();
+        $product->getName()->willReturn('Test product');
+
+        $cartSummaryPage->isItemDiscounted('Test product')->willReturn(true);
+
+        $this->shouldThrow(new FailureException('Expected <value>false</value>, but got <value>true</value>.'))->during('productPriceShouldNotBeDecreased', [$product]);
     }
 }
