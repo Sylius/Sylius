@@ -187,6 +187,35 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") off on every product (more|less) expensive than ("(?:€|£|\$)[^"]+")$/
+     */
+    public function thisPromotionGivesOffOnEveryProductMoreLessExpensiveThan(
+        PromotionInterface $promotion,
+        $discount,
+        $limit,
+        $amount
+    ) {
+        $limitType = ('more' === $limit) ? 'min' : 'max';
+        $filterConfiguration = ['filters' => ['price_range' => [$limitType => $amount]]];
+
+        $this->createPromotionWithPriceRangeFilter($promotion, $discount, $filterConfiguration);
+    }
+
+    /**
+     * @Given /^(this promotion) gives ("(?:€|£|\$)[^"]+") off on every product more expensive than ("(?:€|£|\$)[^"]+") and less expensive than ("(?:€|£|\$)[^"]+")$/
+     */
+    public function thisPromotionGivesOffOnEveryProductMoreExpensiveThanAndLessExpensiveThan(
+        PromotionInterface $promotion,
+        $discount,
+        $minAmount,
+        $maxAmount
+    ) {
+        $filterConfiguration = ['filters' => ['price_range' => ['min' => $minAmount, 'max' => $maxAmount]]];
+
+        $this->createPromotionWithPriceRangeFilter($promotion, $discount, $filterConfiguration);
+    }
+
+    /**
      * @param ActionInterface $action
      * @param array $taxonCodes
      *
@@ -198,5 +227,21 @@ final class PromotionContext implements Context
         $action->setConfiguration($configuration);
 
         return $action;
+    }
+
+    /**
+     * @param PromotionInterface $promotion
+     * @param int $discount
+     * @param array $configuration
+     */
+    private function createPromotionWithPriceRangeFilter(PromotionInterface $promotion, $discount, array $configuration)
+    {
+        $action = $this->actionFactory->createItemFixedDiscount($discount);
+        $configuration = array_merge($configuration, $action->getConfiguration());
+        $action->setConfiguration($configuration);
+
+        $promotion->addAction($action);
+
+        $this->objectManager->flush();
     }
 }
