@@ -8,7 +8,7 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../bash/travis.lib.sh"
 # Argument 1: Package directory
 install_package() {
     [[ "$(echo "$2" | grep -c "no-cache")" = "1" ]] && local cache_support=false
-    local cache_key="$(text_md5sum "$1")" exit_code=0
+    local cache_key="$(text_md5sum "$(package_path_to_package_name "$1")")" exit_code=0
 
     print_header "Installing" "$(package_path_to_package_name "$1")"
 

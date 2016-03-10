@@ -6,7 +6,7 @@ install_package="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/install-package"
 
 jobs="100%"
 if [[ "${TRAVIS}" = "true" ]]; then
-    jobs="3"
+    jobs="2"
 fi
 
 locate_packages | parallel -j ${jobs} --gnu "${install_package} {}"
