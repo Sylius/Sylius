@@ -105,7 +105,7 @@ class OrderShipmentTaxesByZoneApplicatorSpec extends ObjectBehavior
 
         $calculator->calculate(1000, $taxRate)->willReturn(0);
 
-        $adjustmentsFactory->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, 'Simple tax (0%)', 0, false)->shouldNotBeCalled();
+        $adjustmentsFactory->createWithData(Argument::any())->shouldNotBeCalled();
 
         $this->apply($order, $zone);
     }
