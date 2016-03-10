@@ -1,4 +1,4 @@
-@legacy_taxation
+@legacy @taxation
 Feature: Tax categories
     In order to apply different tax rates to my products
     As a store owner

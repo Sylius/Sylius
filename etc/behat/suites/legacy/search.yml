@@ -3,7 +3,7 @@
 
 default:
     suites:
-        search:
+        legacy_search:
             contexts:
                 - Sylius\Bundle\SearchBundle\Behat\SearchContext
                 - Sylius\Bundle\CoreBundle\Behat\HookContext
@@ -18,4 +18,4 @@ default:
                 - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
                 - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
             filters:
-                tags: "@legacy_search"
+                tags: "@legacy && @search"

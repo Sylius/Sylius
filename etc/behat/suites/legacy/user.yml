@@ -3,7 +3,7 @@
 
 default:
     suites:
-        users:
+        legacy_user:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\CoreBundle\Behat\HookContext
@@ -15,4 +15,4 @@ default:
                 - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
                 - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
             filters:
-                tags: "@legacy_users"
+                tags: "@legacy && @user"

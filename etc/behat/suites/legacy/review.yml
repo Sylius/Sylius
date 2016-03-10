@@ -3,7 +3,7 @@
 
 default:
     suites:
-        reviews:
+        legacy_review:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
@@ -17,4 +17,4 @@ default:
                 - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
             filters:
-                tags: "@legacy_reviews"
+                tags: "@legacy && @review"

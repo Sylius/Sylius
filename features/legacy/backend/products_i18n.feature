@@ -1,4 +1,4 @@
-@legacy_i18n
+@legacy @i18n
 Feature: Products
     In order to create my offer
     As a store owner

@@ -1,4 +1,4 @@
-@legacy_i18n
+@legacy @i18n
 Feature: Checkout addressing in preferred language
     In order to select the correct shipping country
     As a visitor

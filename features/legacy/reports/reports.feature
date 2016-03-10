@@ -1,4 +1,4 @@
-@legacy_reports
+@legacy @report
 Feature: Reports
     In order to see my store statistics
     As a store owner

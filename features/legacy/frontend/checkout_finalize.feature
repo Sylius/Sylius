@@ -1,4 +1,4 @@
-@legacy_checkout
+@legacy @checkout
 Feature: Checkout finalization
     In order to buy products
     As a visitor

@@ -1,4 +1,4 @@
-@legacy_i18n
+@legacy @i18n
 Feature: Browse products, categories, attributes and options in preferred language
     In order to be able to understand what is being sold in the shop
     As a visitor

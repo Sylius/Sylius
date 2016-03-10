@@ -1,4 +1,4 @@
-@legacy_i18n
+@legacy @i18n
 Feature: Checkout shipping in preferred language
     In order to understand shipping methods
     As a visitor

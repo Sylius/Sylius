@@ -1,4 +1,4 @@
-@legacy_reviews
+@legacy @review
 Feature: Reviews
     In orders to know customer's opinions about my products
     As a store owner

@@ -1,4 +1,4 @@
-@legacy_products
+@legacy @product
 Feature: Products
     In order to create my offer
     As a store owner

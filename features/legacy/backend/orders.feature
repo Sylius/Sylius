@@ -1,4 +1,4 @@
-@legacy_orders
+@legacy @order
 Feature: Orders management
     In order to manage my sales
     As a store owner

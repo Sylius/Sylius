@@ -1,4 +1,4 @@
-@legacy_taxation
+@legacy @taxation
 Feature: Tax rates
     In order to apply proper taxation to my merchandise
     As a store owner

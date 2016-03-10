@@ -3,20 +3,19 @@
 
 default:
     suites:
-        reports:
+        legacy_promotion:
             contexts:
-                - Sylius\Bundle\ReportBundle\Behat\ReportContext
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\CoreBundle\Behat\HookContext
                 - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
-                - Sylius\Bundle\ShippingBundle\Behat\ShippingContext
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
-                - Sylius\Bundle\PaymentBundle\Behat\PaymentContext
                 - Sylius\Bundle\ProductBundle\Behat\ProductContext
+                - Sylius\Bundle\PromotionBundle\Behat\PromotionContext
+                - Sylius\Bundle\ResourceBundle\Behat\FixtureContext
                 - Sylius\Bundle\TaxationBundle\Behat\TaxationContext
                 - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
                 - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
                 - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
             filters:
-                tags: "@legacy_reports"
+                tags: "@legacy && @promotion"

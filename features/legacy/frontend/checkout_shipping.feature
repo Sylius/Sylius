@@ -1,4 +1,4 @@
-@legacy_checkout
+@legacy @checkout
 Feature: Checkout shipping
     In order to select shipping method
     As a visitor

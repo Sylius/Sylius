@@ -1,4 +1,4 @@
-@legacy_products
+@legacy @product
 Feature: Product archetypes
     In order to create similar products faster
     As a store owner

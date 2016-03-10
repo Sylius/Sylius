@@ -1,4 +1,4 @@
-@legacy_localization
+@legacy @localization
 Feature: Locale selection
     In order to browse the website in my preferred language
     As a customer
