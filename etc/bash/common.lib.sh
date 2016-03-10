@@ -28,3 +28,14 @@ get_binary()
         return 1
     fi
 }
+
+get_number_of_jobs_for_parallel()
+{
+    local jobs="100%"
+
+    if [[ "${TRAVIS}" = "true" ]]; then
+        jobs="2"
+    fi
+
+    echo "${jobs}"
+}
