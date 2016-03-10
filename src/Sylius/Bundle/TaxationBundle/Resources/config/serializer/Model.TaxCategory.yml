@@ -6,18 +6,27 @@ Sylius\Component\Taxation\Model\TaxCategory:
             expose: true
             type: integer
             xml_attribute: true
-        code:
-            expose: true
-            type: string
+            groups: [Default, Detailed]
         name:
             expose: true
             type: string
+            groups: [Default, Detailed]
+        code:
+            expose: true
+            type: string
+            groups: [Default, Detailed]
+        description:
+            expose: true
+            type: string
+            groups: [Detailed]
         createdAt:
             expose: true
             type: DateTime
+            groups: [Detailed]
         updatedAt:
             expose: true
             type: DateTime
+            groups: [Detailed]
     relations:
         - rel: self
           href:

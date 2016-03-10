@@ -18,8 +18,8 @@
         "items": [
             {
                 "id": @integer@,
-                "code": "SC3",
-                "name": "Shipping Category 3",
+                "code": "SC1",
+                "name": "Shipping Category 1",
                 "_links": {
                     "self": {
                         "href": "@string@"
@@ -38,8 +38,8 @@
             },
             {
                 "id": @integer@,
-                "code": "SC1",
-                "name": "Shipping Category 1",
+                "code": "SC3",
+                "name": "Shipping Category 3",
                 "_links": {
                     "self": {
                         "href": "@string@"

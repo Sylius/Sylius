@@ -535,4 +535,26 @@ class RequestConfiguration
 
         return $parameters;
     }
+
+    /**
+     * @return bool
+     */
+    public function hasGrid()
+    {
+        return $this->parameters->has('grid');
+    }
+
+    /**
+     * @return string
+     *
+     * @throws \LogicException
+     */
+    public function getGrid()
+    {
+        if (!$this->hasGrid()) {
+            throw new \LogicException('Current action does not use grid.');
+        }
+
+        return $this->parameters->get('grid');
+    }
 }

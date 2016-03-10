@@ -47,6 +47,12 @@ class SyliusResourceExtension extends Extension implements PrependExtensionInter
             $loader->load($configFile);
         }
 
+        $bundles = $container->getParameter('kernel.bundles');
+
+        if (array_key_exists('SyliusGridBundle', $bundles)) {
+            $loader->load('grid.xml');
+        }
+
         $container->setParameter('sylius.translation.default_locale', $config['default_locale']);
         $container->setAlias('sylius.translation.locale_provider', $config['locale_provider']);
 

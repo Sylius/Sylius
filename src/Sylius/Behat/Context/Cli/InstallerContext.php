@@ -52,14 +52,14 @@ final class InstallerContext implements Context
     /**
      * @var array
      */
-    private $inputChoices = array(
+    private $inputChoices = [
         'currency' => '',
         'name' => ' Name',
         'surname' => ' Surname',
         'e-mail' => ' test@email.com',
         'password' => ' pswd',
         'confirmation' => ' pswd',
-    );
+    ];
 
     /**
      * @param KernelInterface $kernel
@@ -170,7 +170,7 @@ final class InstallerContext implements Context
      */
     private function iExecuteCommandWithInputChoices($name)
     {
-        $fullParameters = array_merge(array('command' => $name));
+        $fullParameters = array_merge(['command' => $name]);
         $this->dialog = $this->command->getHelper('dialog');
         $inputString = join(PHP_EOL, $this->inputChoices);
         $this->dialog->setInputStream($this->getInputStream($inputString.PHP_EOL));

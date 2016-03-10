@@ -50,16 +50,21 @@ sylius_api_promotion_coupon:
     prefix: /promotions/{promotionId}/coupons
 
 sylius_api_tax_category:
-    resource: @SyliusApiBundle/Resources/config/routing/tax_category.yml
-    prefix: /tax-categories
+    resource: |
+        alias: sylius.tax_category
+        section: api
+        grid: sylius_admin_tax_category
+    type: sylius.resource_api
 
 sylius_api_tax_rate:
     resource: @SyliusApiBundle/Resources/config/routing/tax_rate.yml
     prefix: /tax-rates
 
 sylius_api_shipping_category:
-    resource: @SyliusApiBundle/Resources/config/routing/shipping_category.yml
-    prefix: /shipping-categories
+    resource: |
+        alias: sylius.shipping_category
+        section: api
+    type: sylius.resource_api
 
 sylius_api_shipping_method:
     resource: @SyliusApiBundle/Resources/config/routing/shipping_method.yml

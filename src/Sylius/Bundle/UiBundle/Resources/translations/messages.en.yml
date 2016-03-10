@@ -12,7 +12,9 @@ sylius:
     delete: Delete
     disabled: Disabled
     edit: Edit
+    actions: Actions
     enabled: Enabled
+    description: Description
     an_error_occurred: An error occurred
     last_updated: Last updated
     manage_taxation_of_your_products: Manage taxation of your products
@@ -32,3 +34,14 @@ sylius:
     administration_panel_login: Administration panel login
     new_tax_category: New tax category
     edit_tax_category: Edit tax category
+    filter: Filter
+    clear_filters: Clear filters
+    contains: Contains
+    not_contains: Not contains
+    equal: Equal
+    empty: Empty
+    not_empty: Not empty
+    starts_with: Starts with
+    ends_with: Ends with
+    in: In
+    not_in: Not in

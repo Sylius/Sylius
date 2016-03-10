@@ -1,15 +1,9 @@
 {% macro render(paginator)  %}
     {% if paginator.haveToPaginate() %}
     <div class="ui pagination menu">
-        <a class="icon item">
-            <i class="left chevron icon"></i>
-        </a>
         {% for page_number in 1..paginator.nbPages %}
-        <a class="item">{{ page_number }}</a>
+        <a class="{% if page_number == paginator.currentPage %}active {% endif %}item" href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all)|merge({'page': page_number})) }}">{{ page_number }}</a>
         {% endfor %}
-        <a class="icon item">
-            <i class="right chevron icon"></i>
-        </a>
     </div>
     {% endif %}
 {% endmacro %}
