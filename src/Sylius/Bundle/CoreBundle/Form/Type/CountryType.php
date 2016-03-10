@@ -14,7 +14,6 @@ namespace Sylius\Bundle\CoreBundle\Form\Type;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -80,7 +79,7 @@ class CountryType extends AbstractResourceType
                 'button_add_label' => 'sylius.form.country.add_province',
             ])
             ->add('enabled', 'checkbox', [
-                'label' => 'enable',
+                'label' => 'sylius.form.country.enabled',
             ])
         ;
     }

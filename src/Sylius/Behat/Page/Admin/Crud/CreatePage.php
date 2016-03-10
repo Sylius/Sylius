@@ -23,7 +23,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * @var string
      */
-    protected $resourceName;
+    private $resourceName;
 
     /**
      * @param Session $session
@@ -35,15 +35,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     {
         parent::__construct($session, $parameters, $router);
 
-        $this->resourceName = $resourceName;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function fillName($name)
-    {
-        $this->getDocument()->fillField('Name', $name);
+        $this->resourceName = strtolower($resourceName);
     }
 
     /**
@@ -55,10 +47,18 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     protected function getRouteName()
     {
-        return 'sylius_admin_' . strtolower($this->resourceName) . '_create';
+        return sprintf('sylius_admin_%s_create', $this->resourceName);
+    }
+
+    /**
+     * @return string
+     */
+    protected function getResourceName()
+    {
+        return $this->resourceName;
     }
 }

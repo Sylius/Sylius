@@ -8,9 +8,9 @@ Feature: Adding country
         Given I am logged in as administrator
 
     @ui
-    Scenario: Adding new country
+    Scenario: Adding country
         Given I want to create new country
-        When I name it "France"
+        When I choose "France"
         And I add it
         Then I should be notified about success
-        And this country should appear in the store
+        And country "France" should appear in the store

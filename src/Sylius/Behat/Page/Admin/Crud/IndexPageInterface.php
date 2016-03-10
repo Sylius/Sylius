@@ -11,7 +11,6 @@
 
 namespace Sylius\Behat\Page\Admin\Crud;
 
-use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\PageInterface;
 
 /**
@@ -21,29 +20,21 @@ interface IndexPageInterface extends PageInterface
 {
     /**
      * @return bool
-     *
-     * @throws ElementNotFoundException
      */
-    public function isSuccessfulMessage();
+    public function hasSuccessMessage();
 
     /**
      * @return bool
-     *
-     * @throws ElementNotFoundException
      */
     public function isSuccessfullyCreated();
 
     /**
      * @return bool
-     *
-     * @throws ElementNotFoundException
      */
     public function isSuccessfullyUpdated();
 
     /**
      * @return bool
-     *
-     * @throws ElementNotFoundException
      */
     public function isSuccessfullyDeleted();
 
@@ -52,14 +43,12 @@ interface IndexPageInterface extends PageInterface
      *
      * @return bool
      */
-    public function isResourceAppearInTheStoreBy(array $parameters);
+    public function isResourceOnPage(array $parameters);
 
     /**
      * @param string $message
      *
      * @return bool
-     *
-     * @throws ElementNotFoundException
      */
     public function hasMessage($message);
 }

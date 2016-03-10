@@ -9,18 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Page\Admin\Crud;
+namespace Sylius\Behat\Page\Admin\Country;
 
-use Behat\Mink\Exception\ElementNotFoundException;
-use Sylius\Behat\Page\PageInterface;
+use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-interface CreatePageInterface extends PageInterface
+interface CreatePageInterface extends BaseCreatePageInterface
 {
     /**
-     * @throws ElementNotFoundException
+     * @param string $name
      */
-    public function create();
+    public function chooseName($name);
 }

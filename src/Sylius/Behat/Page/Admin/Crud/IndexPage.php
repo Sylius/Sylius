@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Page\Admin\Crud;
 
 use Behat\Mink\Session;
+use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\TableManipulatorInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -22,23 +23,23 @@ use Symfony\Component\Routing\RouterInterface;
 class IndexPage extends SymfonyPage implements IndexPageInterface
 {
     /**
-     * @var string
-     */
-    protected $resourceName;
-
-    /**
-     * @var TableManipulatorInterface
-     */
-    protected $tableManipulator;
-
-    /**
      * @var array
      */
-    protected  $elements = [
+    protected $elements = [
         'message' => '.message',
         'messageContent' => '.message > .content',
         'table' => '.table',
     ];
+
+    /**
+     * @var TableManipulatorInterface
+     */
+    private $tableManipulator;
+
+    /**
+     * @var string
+     */
+    private $resourceName;
 
     /**
      * @param Session $session
@@ -47,20 +48,29 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
      * @param TableManipulatorInterface $tableManipulator
      * @param string $resourceName
      */
-    public function __construct(Session $session, array $parameters, RouterInterface $router, TableManipulatorInterface $tableManipulator, $resourceName)
-    {
+    public function __construct(
+        Session $session,
+        array $parameters,
+        RouterInterface $router,
+        TableManipulatorInterface $tableManipulator,
+        $resourceName
+    ) {
         parent::__construct($session, $parameters, $router);
 
         $this->tableManipulator = $tableManipulator;
-        $this->resourceName = $resourceName;
+        $this->resourceName = strtolower($resourceName);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function isSuccessfulMessage()
+    public function hasSuccessMessage()
     {
-        return $this->getElement('message')->hasClass('positive');
+        try {
+            return $this->getElement('message')->hasClass('positive');
+        } catch (ElementNotFoundException $exception) {
+            return false;
+        }
     }
 
     /**
@@ -90,15 +100,17 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function isResourceAppearInTheStoreBy(array $parameters)
+    public function isResourceOnPage(array $parameters)
     {
-        $rows = $this->tableManipulator->getRowsWithFields($this->getElement('table'), $parameters);
+        try {
+            $rows = $this->tableManipulator->getRowsWithFields($this->getElement('table'), $parameters);
 
-        if (!empty($rows)) {
-            return true;
+            return 1 === count($rows);
+        } catch (\InvalidArgumentException $exception) {
+            return false;
+        } catch (ElementNotFoundException $exception) {
+            return false;
         }
-
-        return false;
     }
 
     /**
@@ -106,18 +118,34 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
      */
     public function hasMessage($message)
     {
-        if ($message === $this->getElement('messageContent')->getText()) {
-            return true;
+        try {
+            return $message === $this->getElement('messageContent')->getText();
+        } catch (ElementNotFoundException $exception) {
+            return false;
         }
+    }
 
-        return false;
+    /**
+     * {@inheritdoc}
+     */
+    protected function getRouteName()
+    {
+        return sprintf('sylius_admin_%s_index', $this->resourceName);
     }
 
     /**
      * @return string
      */
-    protected function getRouteName()
+    protected function getResourceName()
     {
-        return 'sylius_admin_' . strtolower($this->resourceName) . '_index';
+        return $this->resourceName;
+    }
+
+    /**
+     * @return TableManipulatorInterface
+     */
+    protected function getTableManipulator()
+    {
+        return $this->tableManipulator;
     }
 }

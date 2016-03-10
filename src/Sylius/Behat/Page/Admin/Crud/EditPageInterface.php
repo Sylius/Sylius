@@ -11,7 +11,6 @@
 
 namespace Sylius\Behat\Page\Admin\Crud;
 
-use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Page\PageInterface;
 
 /**
@@ -19,15 +18,5 @@ use Sylius\Behat\Page\PageInterface;
  */
 interface EditPageInterface extends PageInterface
 {
-    /**
-     * @param string $name
-     *
-     * @throws ElementNotFoundException
-     */
-    public function fillName($name);
-
-    /**
-     * @throws ElementNotFoundException
-     */
     public function saveChanges();
 }

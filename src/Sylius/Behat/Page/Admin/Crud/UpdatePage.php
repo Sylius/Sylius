@@ -18,7 +18,7 @@ use Symfony\Component\Routing\RouterInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class EditPage extends SymfonyPage implements EditPageInterface
+class UpdatePage extends SymfonyPage implements EditPageInterface
 {
     /**
      * @var string
@@ -33,15 +33,9 @@ class EditPage extends SymfonyPage implements EditPageInterface
      */
     public function __construct(Session $session, array $parameters, RouterInterface $router, $resourceName)
     {
-        $this->resourceName = $resourceName;
-    }
+        parent::__construct($session, $parameters, $router);
 
-    /**
-     * {@inheritdoc}
-     */
-    public function fillName($name)
-    {
-        $this->getDocument()->fillField('Name', $name);
+        $this->resourceName = strtolower($resourceName);
     }
 
     /**
@@ -53,10 +47,18 @@ class EditPage extends SymfonyPage implements EditPageInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     protected function getRouteName()
     {
-        return 'sylius_admin_' . strtolower($this->resourceName) . '_update';
+        return sprintf('sylius_admin_%s_update', $this->resourceName);
+    }
+
+    /**
+     * @return string
+     */
+    protected function getResourceName()
+    {
+        return $this->resourceName;
     }
 }

@@ -16,12 +16,12 @@ use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class CreatePage extends BaseCreatePage
+class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function fillName($name)
+    public function chooseName($name)
     {
         $this->getDocument()->selectFieldOption('Name', $name);
     }
