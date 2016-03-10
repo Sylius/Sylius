@@ -93,6 +93,8 @@ class SyliusRbacExtension extends AbstractResourceExtension implements PrependEx
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('resource_integration.xml');
 
-        $container->setAlias('sylius.resource_controller.authorization_checker', 'sylius.resource_controller.authorization_checker.rbac');
+        $container->prependExtensionConfig('sylius_resource', [
+            'authorization_checker' => 'sylius.resource_controller.authorization_checker.rbac',
+        ]);
     }
 }

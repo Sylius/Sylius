@@ -40,6 +40,15 @@ class Configuration implements ConfigurationInterface
         $this->addSettingsSection($rootNode);
         $this->addTranslationsSection($rootNode);
 
+        $rootNode
+            ->children()
+                ->scalarNode('authorization_checker')
+                    ->defaultValue('sylius.resource_controller.authorization_checker.disabled')
+                    ->cannotBeEmpty()
+                ->end()
+            ->end()
+        ;
+
         return $treeBuilder;
     }
 

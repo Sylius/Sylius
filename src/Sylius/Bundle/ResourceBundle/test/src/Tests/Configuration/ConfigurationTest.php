@@ -35,6 +35,47 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @test
+     */
+    public function it_has_default_authorization_checker()
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                []
+            ],
+            ['authorization_checker' => 'sylius.resource_controller.authorization_checker.disabled'],
+            'authorization_checker'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function its_authorization_checker_can_be_customized()
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                ['authorization_checker' => 'custom_service']
+            ],
+            ['authorization_checker' => 'custom_service'],
+            'authorization_checker'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function its_authorization_checker_cannot_be_empty()
+    {
+        $this->assertPartialConfigurationIsInvalid(
+            [
+                ['authorization_checker' => '']
+            ],
+            'authorization_checker'
+        );
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getConfiguration()

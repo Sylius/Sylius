@@ -84,9 +84,6 @@ class SyliusResourceExtension extends Extension
         }
 
         $container->setParameter('sylius.resource.settings', $config['settings']);
-
-        if (!$container->has('sylius.resource_controller.authorization_checker')) {
-            $container->setAlias('sylius.resource_controller.authorization_checker', 'sylius.resource_controller.authorization_checker.disabled');
-        }
+        $container->setAlias('sylius.resource_controller.authorization_checker', $config['authorization_checker']);
     }
 }
