@@ -4,6 +4,7 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../bash/common.lib.sh"
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../bash/output.lib.sh"
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../bash/packages.lib.sh"
 
+# Argument 1: Package path
 test_package() {
     [[ "$(echo "$2" | grep -c "no-phpspec")" = "1" ]] && local phpspec_support=false
     [[ "$(echo "$2" | grep -c "no-phpunit")" = "1" ]] && local phpunit_support=false
@@ -15,16 +16,17 @@ test_package() {
     exit_on_error "Cannot change current directory to $1"
 
     if ${phpspec_support}; then
-        run_phpspec || exit_code=$?
+        run_phpspec "$1" || exit_code=$?
     fi
 
     if ${phpunit_support}; then
-        run_phpunit || exit_code=$?
+        run_phpunit "$1" || exit_code=$?
     fi
 
     return ${exit_code}
 }
 
+# Argument 1: Package path
 run_phpspec() {
     local phpspec
     if [[ ! -e "phpspec.yml.dist" && ! -e "phpspec.yml" ]]; then
@@ -40,6 +42,7 @@ run_phpspec() {
     run_command "${phpspec} run --ansi --no-interaction --format=dot"
 }
 
+# Argument 1: Package path
 run_phpunit() {
     local phpunit
     if [[ ! -e "phpunit.xml.dist" && ! -e "phpunit.xml" ]]; then
@@ -50,6 +53,10 @@ run_phpunit() {
     if [ "$?" != "0" ]; then
         print_error "Phpunit binary not found, make sure you included it in require-dev"
         return 1
+    fi
+
+    if [ "$(package_path_to_package_name "$1")" = "ResourceBundle" ]; then
+        run_command "test/app/console doctrine:schema:update --ansi --no-interaction --force --quiet"
     fi
 
     run_command "${phpunit} --colors=always"

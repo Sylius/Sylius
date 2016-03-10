@@ -53,8 +53,12 @@ class SyliusResourceExtension extends Extension
             $loader->load('grid.xml');
         }
 
-        $container->setParameter('sylius.translation.default_locale', $config['default_locale']);
-        $container->setAlias('sylius.translation.locale_provider', $config['locale_provider']);
+        if ($config['translation']['enabled']) {
+            $loader->load('translation.xml');
+
+            $container->setParameter('sylius.translation.default_locale', $config['translation']['default_locale']);
+            $container->setAlias('sylius.translation.locale_provider', $config['translation']['locale_provider']);
+        }
 
         foreach ($config['resources'] as $alias => $resourceConfig) {
             $metadata = Metadata::fromAliasAndConfiguration($alias, $resourceConfig);

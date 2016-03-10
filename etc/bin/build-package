@@ -23,8 +23,6 @@ build_package() {
 
     if ${clean}; then
         eval "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/clean-package $1"
-    else
-        print_header "Cleaning" "Disabled"
     fi
 }
 
