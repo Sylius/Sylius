@@ -27,6 +27,9 @@ class SyliusResourceExtensionTest extends AbstractExtensionTestCase
      */
     public function it_registers_services_and_parameters_for_resources()
     {
+        // TODO: Move Resource-Grid integration to a dedicated compiler pass
+        $this->setParameter('kernel.bundles', []);
+
         $this->load([
             'resources' => [
                 'app.book' => [
@@ -56,6 +59,9 @@ class SyliusResourceExtensionTest extends AbstractExtensionTestCase
      */
     public function it_aliases_authorization_checker_with_the_one_given_in_configuration()
     {
+        // TODO: Move Resource-Grid integration to a dedicated compiler pass
+        $this->setParameter('kernel.bundles', []);
+
         $this->load(['authorization_checker' => 'custom_service']);
 
         $this->assertContainerBuilderHasAlias('sylius.resource_controller.authorization_checker', 'custom_service');

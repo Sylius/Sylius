@@ -48,7 +48,6 @@ class SyliusResourceExtension extends Extension
         }
 
         $bundles = $container->getParameter('kernel.bundles');
-
         if (array_key_exists('SyliusGridBundle', $bundles)) {
             $loader->load('grid.xml');
         }
