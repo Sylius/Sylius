@@ -26,6 +26,10 @@ build_package() {
     fi
 }
 
+display_help_message() {
+    print_error "Usage: $0 [--no-install] [--no-validate] [--no-test] [--no-clean] <package paths or names>"
+}
+
 main() {
     local packages=() options=() package_path
 
@@ -43,6 +47,10 @@ main() {
             --no-clean)
                 options+=("no-clean")
             ;;
+            --help)
+                display_help_message
+                exit 0
+            ;;
             -*)
                 print_error "Unknown option \"$1\""
                 exit 1
@@ -56,7 +64,7 @@ main() {
     done
 
     if [[ "${packages[@]}" = "" ]]; then
-        print_error "Usage: $0 [--no-install] [--no-validate] [--no-test] [--no-clean] <package paths or names>"
+        display_help_message
         exit 1
     fi
 
