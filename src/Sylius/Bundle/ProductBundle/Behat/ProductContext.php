@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ProductBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
+use Behat\Mink\Element\NodeElement;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\Attribute\AttributeType\CheckboxAttributeType;
@@ -399,4 +400,23 @@ class ProductContext extends DefaultContext
         $tr = $this->assertSession()->elementExists('css', sprintf('table#variants tbody tr:contains("%s")', $value));
         $tr->clickLink($button);
     }
+
+    /**
+     * @Given /^I fill in "([^"]*)" translation "([^"]*)" with "([^"]*)"$/
+     */
+    public function iFillInTranslationWith($label, $locale, $value)
+    {
+        /** @var NodeElement[] $inputs */
+        $inputs = $this->getSession()->getPage()->findAll('css', sprintf('label:contains("%s") ~ div input', $label));
+
+        foreach ($inputs as $input) {
+            $id = $input->getAttribute('id');
+            if(false !== stripos($id, $locale)){
+                return $input->setValue($value);
+            }
+        }
+
+        throw new \Exception('No locale translation!');
+    }
+
 }

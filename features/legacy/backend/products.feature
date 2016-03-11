@@ -132,7 +132,7 @@ Feature: Products
             | Price       | 59.99                   |
         And go to "Attributes" tab
         And I add "T-Shirt fabric" attribute
-        And I fill in "T-Shirt fabric" with "Polyester"
+        And I fill in "T-Shirt fabric" translation "en_US" with "Polyester"
         When I press "Create"
         Then I should be on the page of product "Manchester United tee"
         And "Product has been successfully created" should appear on the page
@@ -162,7 +162,7 @@ Feature: Products
         And I add following attributes:
             | T-Shirt fabric     |
             | T-Shirt fare trade |
-        And I fill in "T-Shirt fabric" with "Polyester"
+        And I fill in "T-Shirt fabric" translation "en_US" with "Polyester"
         And I check "T-Shirt fare trade"
         When I press "Create"
         Then I should be on the page of product "FC Barcelona tee"
@@ -179,7 +179,7 @@ Feature: Products
             | Price       | 59.99                   |
         And I go to "Attributes" tab
         And I add "T-Shirt fabric" attribute
-        And I fill in "T-Shirt fabric" with "X"
+        And I fill in "T-Shirt fabric" translation "en_US" with "X"
         When I press "Create"
         Then I should still be on the product creation page
         When I go to "Attributes" tab

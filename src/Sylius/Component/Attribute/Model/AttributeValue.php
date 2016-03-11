@@ -197,6 +197,7 @@ class AttributeValue implements AttributeValueInterface
      */
     public function getText()
     {
+        $this->assertLocaleIsSet();
         return $this->translate()->getValue();
     }
 
@@ -205,6 +206,7 @@ class AttributeValue implements AttributeValueInterface
      */
     public function setText($text)
     {
+        $this->assertLocaleIsSet();
         $this->translate()->setValue($text);
     }
 
@@ -278,6 +280,18 @@ class AttributeValue implements AttributeValueInterface
     {
         if (null === $this->attribute) {
             throw new \BadMethodCallException('The attribute is undefined, so you cannot access proxy methods.');
+        }
+    }
+
+    /**
+     * @return void
+     */
+    protected function assertLocaleIsSet()
+    {
+        $this->assertAttributeIsSet();
+        if (null === $this->getCurrentLocale() || null === $this->getFallbackLocale() ) {
+            $this->setCurrentLocale($this->attribute->getCurrentLocale());
+            $this->setFallbackLocale($this->attribute->getFallbackLocale());
         }
     }
 }
