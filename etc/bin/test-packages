@@ -5,4 +5,4 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../bash/packages.lib.sh"
 
 test_package="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/test-package"
 
-locate_packages | parallel -j "$(get_number_of_jobs_for_parallel)" --gnu "${test_package} {}"
+locate_packages | parallel -j "$(get_number_of_jobs_for_parallel)" --gnu "${test_package} {} $*"
