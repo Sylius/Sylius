@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1869786c64be6e6eab5a499236cb61a1",
-    "content-hash": "c81725d3a10cbd45e4c6376d1954ba27",
+    "hash": "ad226aefe9335182f5ea02cd222697bf",
+    "content-hash": "3c8ea86d828ddefea603976d90a0a4d0",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -8993,7 +8993,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Lakion/ApiTestCase/zipball/ae9e1b635f26780df66fb034c8c3566d52eca928",
+                "url": "https://api.github.com/repos/Lakion/ApiTestCase/zipball/441618f9e447ec55a17dfe10a5b72f0b990e6efa",
                 "reference": "466bd22a228c96a2dba971045ac8c0b0400df6d1",
                 "shasum": ""
             },

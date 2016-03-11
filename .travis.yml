@@ -7,8 +7,7 @@ env:
 
 cache:
     directories:
-        - bin
-        - vendor
+        - ~/.composer/cache/files
         - $SYLIUS_CACHE_DIR
 
 sudo: false
@@ -19,6 +18,7 @@ addons:
             - google-chrome
         packages:
             - google-chrome-stable
+            - parallel
 
 services:
     - memcached
@@ -29,7 +29,11 @@ php:
     - 5.5
 
 before_install:
+    # For packages testing
+    - git branch master 2>/dev/null || true
+
     - phpenv config-rm xdebug.ini || true
+    - echo "memory_limit=4096M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
     - mkdir -p $SYLIUS_CACHE_DIR
 
@@ -43,7 +47,9 @@ before_install:
     - composer config -g github-oauth.github.com "$GITHUB_OAUTH_TOKEN" >/dev/null 2>&1
 
 install:
-    - composer install --no-interaction --prefer-dist --no-scripts
+    - composer install --no-interaction --no-scripts --prefer-dist
+    - etc/bin/install-packages
+
     - composer run-script travis-build --no-interaction
 
 before_script:
@@ -66,11 +72,14 @@ before_script:
 
 script:
     - composer validate
+    - etc/bin/validate-packages
 
     - if [[ $TRAVIS_PHP_VERSION = 7.* ]]; then bin/kawaii gherkin:check --align=left features/; fi;
 
     - bin/phpspec run --no-interaction -f dot
     - bin/phpunit
+
+    - etc/bin/test-packages
 
     - etc/travis/prepare-javascript
     - etc/travis/run-behat
@@ -81,6 +90,7 @@ before_cache:
 after_failure:
     - export IMGUR_API_KEY=4907fcd89e761c6b07eeb8292d5a9b2a
 
+    - rm -fr "$SYLIUS_BUILD_DIR/*(0).log"
     - cp app/logs/test_cached.log "$SYLIUS_BUILD_DIR/symfony_app.log"
 
     - vendor/lakion/mink-debug-extension/travis/tools/upload-textfiles "$SYLIUS_BUILD_DIR/*.log"

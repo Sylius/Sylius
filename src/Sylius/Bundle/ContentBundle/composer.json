@@ -7,15 +7,15 @@
     "license": "MIT",
     "authors": [
         {
-            "name":     "Paweł Jędrzejewski",
+            "name": "Paweł Jędrzejewski",
             "homepage": "http://pjedrzejewski.com"
         },
         {
-            "name":     "Sylius project",
+            "name": "Sylius project",
             "homepage": "http://sylius.org"
         },
         {
-            "name":     "Community contributions",
+            "name": "Community contributions",
             "homepage": "http://github.com/Sylius/Sylius/contributors"
         }
     ],
@@ -23,7 +23,7 @@
         "php": "^5.5.9|^7.0",
 
         "jackalope/jackalope-doctrine-dbal": "^1.1.2",
-        "sylius/resource-bundle": "0.18.*",
+        "sylius/resource-bundle": "^0.18",
         "symfony/framework-bundle": "^2.7.7",
         "symfony-cmf/block-bundle": "~1.2",
         "symfony-cmf/content-bundle": "~1.2",
@@ -33,6 +33,7 @@
         "symfony-cmf/routing-bundle": "~1.2"
     },
     "require-dev": {
+        "liip/imagine-bundle": "^1.0",
         "phpspec/phpspec": "^2.4",
         "symfony/form": "^2.7"
     },
@@ -43,6 +44,13 @@
         "psr-4": { "Sylius\\Bundle\\ContentBundle\\": "" }
     },
     "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../*/*"
+        }
+    ],
     "extra": {
         "branch-alias": {
             "dev-master": "0.18-dev"

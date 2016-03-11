@@ -22,6 +22,8 @@
     "require": {
         "php": "^5.5.9|^7.0",
 
+        "sylius/grid": "^0.18",
+
         "symfony/form": "^2.7",
         "symfony/framework-bundle": "^2.7.7"
     },
@@ -39,9 +41,16 @@
         "psr-4": { "Sylius\\Bundle\\GridBundle\\": "" }
     },
     "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../*/*"
+        }
+    ],
     "extra": {
         "branch-alias": {
-            "dev-master": "0.14-dev"
+            "dev-master": "0.18-dev"
         }
     }
 }

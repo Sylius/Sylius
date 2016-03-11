@@ -40,6 +40,15 @@ class Configuration implements ConfigurationInterface
         $this->addSettingsSection($rootNode);
         $this->addTranslationsSection($rootNode);
 
+        $rootNode
+            ->children()
+                ->scalarNode('authorization_checker')
+                    ->defaultValue('sylius.resource_controller.authorization_checker.disabled')
+                    ->cannotBeEmpty()
+                ->end()
+            ->end()
+        ;
+
         return $treeBuilder;
     }
 
@@ -153,9 +162,13 @@ class Configuration implements ConfigurationInterface
     {
         $node
             ->children()
-                ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
-                ->scalarNode('default_locale')->isRequired()->cannotBeEmpty()->end()
-                ->scalarNode('locale_provider')->defaultValue('sylius.translation.locale_provider.request')->end()
+                ->arrayNode('translation')
+                    ->canBeEnabled()
+                    ->children()
+                        ->scalarNode('default_locale')->cannotBeEmpty()->end()
+                        ->scalarNode('locale_provider')->defaultValue('sylius.translation.locale_provider.request')->cannotBeEmpty()->end()
+                    ->end()
+                ->end()
             ->end()
         ;
     }

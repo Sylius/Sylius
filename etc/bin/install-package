@@ -1,0 +1,112 @@
+#!/usr/bin/env bash
+
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../bash/common.lib.sh"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../bash/output.lib.sh"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../bash/packages.lib.sh"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../bash/travis.lib.sh"
+
+# Argument 1: Package directory
+install_package() {
+    [[ "$(echo "$2" | grep -c "no-cache")" = "1" ]] && local cache_support=false
+    local cache_key="$(text_md5sum "$(package_path_to_package_name "$1")")" exit_code=0
+
+    print_header "Installing" "$(package_path_to_package_name "$1")"
+
+    if ${cache_support}; then
+        inform_about_sylius_cache
+    fi
+
+    # Change current directory to the package one
+    cd "$1" 2>/dev/null
+    exit_on_error "Cannot change current directory to $1"
+
+    # In case some local composer.lock exists
+    rm composer.lock 2>/dev/null
+
+    if ${cache_support} && has_sylius_cache && is_cache_fresh "${cache_key}"; then
+        print_info "Restoring composer.lock from cache (cache key: ${cache_key})"
+        restore_composer_lock_from_cache "${cache_key}"
+    fi
+
+    composer_install "$1" || exit_code=$?
+
+    if ${cache_support} && has_sylius_cache && ! is_cache_fresh "${cache_key}" && [[ ${exit_code} -eq 0 ]]; then
+        print_info "Storing composer.lock in cache (cache key: ${cache_key})"
+        store_composer_lock_in_cache "${cache_key}"
+    fi
+
+    return ${exit_code}
+}
+
+# Argument 1: Cache key
+store_composer_lock_in_cache() {
+    cp composer.lock "${SYLIUS_CACHE_DIR}/composer-$1.lock"
+    file_md5sum composer.json > "${SYLIUS_CACHE_DIR}/composer-$1.json.md5sum"
+}
+
+# Argument 1: Cache key
+restore_composer_lock_from_cache() {
+    cp "${SYLIUS_CACHE_DIR}/composer-$1.lock" composer.lock
+}
+
+# Argument 1: Cache key
+is_cache_fresh() {
+    local current_hash cached_hash
+
+    if [[ -f "${SYLIUS_CACHE_DIR}/composer-$1.lock" && -f "${SYLIUS_CACHE_DIR}/composer-$1.json.md5sum" ]]; then
+        current_hash="$(file_md5sum "composer.json")"
+        cached_hash="$(cat "${SYLIUS_CACHE_DIR}/composer-$1.json.md5sum")"
+
+        if [ "${current_hash}" = "${cached_hash}" ]; then
+            return 0
+        fi
+    fi
+
+    return 1
+}
+
+# Argument 1: Package path
+composer_install() {
+    local command="composer install --ansi --no-interaction --no-scripts --prefer-dist --quiet"
+
+    if [ "$(package_path_to_package_name "$1")" = "ResourceBundle" ]; then
+        command="$(echo "${command}" | sed "s/--no-scripts/--ignore-platform-reqs/g")"
+    fi
+
+    run_command "${command}"
+}
+
+main() {
+    local packages=() options=() package_path
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --no-cache)
+                options+=("no-cache")
+            ;;
+            -*)
+                print_error "Unknown option \"$1\""
+                exit 1
+            ;;
+            *)
+               packages+=("$1")
+            ;;
+        esac
+
+        shift
+    done
+
+    if [[ "${packages[@]}" = "" ]]; then
+        print_error "Usage: $0 [--no-cache] <package paths or names>"
+        exit 1
+    fi
+
+    for package in "${packages[@]}"; do
+        package_path="$(cast_package_argument_to_package_path "${package}")"
+        exit_on_error "Package \"${package}\" is not found"
+
+        install_package "${package_path}" "${options[*]}"
+    done
+}
+
+main "$@"

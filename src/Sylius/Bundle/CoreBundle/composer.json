@@ -7,15 +7,15 @@
     "license": "MIT",
     "authors": [
         {
-            "name":     "Paweł Jędrzejewski",
+            "name": "Paweł Jędrzejewski",
             "homepage": "http://pjedrzejewski.com"
         },
         {
-            "name":     "Sylius project",
+            "name": "Sylius project",
             "homepage": "http://sylius.org"
         },
         {
-            "name":     "Community contributions",
+            "name": "Community contributions",
             "homepage": "http://github.com/Sylius/Sylius/contributors"
         }
     ],
@@ -28,36 +28,37 @@
         "jms/translation-bundle": "1.1.*",
         "knplabs/knp-gaufrette-bundle": "~0.1",
         "mathiasverraes/money": "~1.2",
-        "sylius/core": "0.18.*",
-        "sylius/addressing-bundle": "0.18.*",
-        "sylius/api-bundle": "0.18.*",
-        "sylius/attribute-bundle": "0.18.*",
-        "sylius/cart-bundle": "0.18.*",
-        "sylius/contact-bundle": "0.18.*",
-        "sylius/content-bundle": "0.18.*",
-        "sylius/currency-bundle": "0.18.*",
-        "sylius/flow-bundle": "0.18.*",
-        "sylius/inventory-bundle": "0.18.*",
-        "sylius/locale-bundle": "0.18.*",
-        "sylius/money-bundle": "0.18.*",
-        "sylius/order-bundle": "0.18.*",
-        "sylius/payment-bundle": "0.18.*",
-        "sylius/payum-bundle": "0.18.*",
-        "sylius/pricing-bundle": "0.18.*",
-        "sylius/product-bundle": "0.18.*",
-        "sylius/promotion-bundle": "0.18.*",
-        "sylius/rbac-bundle": "0.18.*",
-        "sylius/report-bundle": "0.18.*",
-        "sylius/resource-bundle": "0.18.*",
-        "sylius/settings-bundle": "0.18.*",
-        "sylius/shipping-bundle": "0.18.*",
-        "sylius/taxation-bundle": "0.18.*",
-        "sylius/taxonomy-bundle": "0.18.*",
-        "sylius/user-bundle": "0.18.*",
-        "sylius/variation-bundle": "0.18.*",
-        "sylius/association-bundle": "0.18.*",
-        "sylius/review-bundle": "0.18.*",
-        "sylius/metadata-bundle": "0.18.*",
+        "sylius/core": "^0.18",
+        "sylius/addressing-bundle": "^0.18",
+        "sylius/api-bundle": "^0.18",
+        "sylius/attribute-bundle": "^0.18",
+        "sylius/cart-bundle": "^0.18",
+        "sylius/contact-bundle": "^0.18",
+        "sylius/content-bundle": "^0.18",
+        "sylius/currency-bundle": "^0.18",
+        "sylius/flow-bundle": "^0.18",
+        "sylius/inventory-bundle": "^0.18",
+        "sylius/locale-bundle": "^0.18",
+        "sylius/money-bundle": "^0.18",
+        "sylius/order-bundle": "^0.18",
+        "sylius/payment-bundle": "^0.18",
+        "sylius/payum-bundle": "^0.18",
+        "sylius/pricing-bundle": "^0.18",
+        "sylius/product-bundle": "^0.18",
+        "sylius/promotion-bundle": "^0.18",
+        "sylius/rbac-bundle": "^0.18",
+        "sylius/report-bundle": "^0.18",
+        "sylius/resource-bundle": "^0.18",
+        "sylius/settings-bundle": "^0.18",
+        "sylius/shipping-bundle": "^0.18",
+        "sylius/taxation-bundle": "^0.18",
+        "sylius/taxonomy-bundle": "^0.18",
+        "sylius/theme-bundle": "^0.18",
+        "sylius/user-bundle": "^0.18",
+        "sylius/variation-bundle": "^0.18",
+        "sylius/association-bundle": "^0.18",
+        "sylius/review-bundle": "^0.18",
+        "sylius/metadata-bundle": "^0.18",
         "symfony/framework-bundle": "^2.7.7",
         "symfony-cmf/routing-bundle": "~1.2",
         "swiftmailer/swiftmailer": "~5.0",
@@ -71,7 +72,7 @@
         "coduo/php-matcher": "^2.1@dev"
     },
     "suggest": {
-        "sylius/web-bundle":      "Provides default web interface",
+        "sylius/web-bundle": "Provides default web interface",
         "sylius/fixtures-bundle": "Provides default Sylius fixtures"
     },
     "config": {
@@ -84,6 +85,13 @@
         "psr-4": { "Sylius\\Bundle\\CoreBundle\\spec\\": "spec/" }
     },
     "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../*/*"
+        }
+    ],
     "extra": {
         "branch-alias": {
             "dev-master": "0.18-dev"

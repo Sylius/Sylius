@@ -7,15 +7,15 @@
     "license": "MIT",
     "authors": [
         {
-            "name":     "Paweł Jędrzejewski",
+            "name": "Paweł Jędrzejewski",
             "homepage": "http://pjedrzejewski.com"
         },
         {
-            "name":     "Sylius project",
+            "name": "Sylius project",
             "homepage": "http://sylius.org"
         },
         {
-            "name":     "Community contributions",
+            "name": "Community contributions",
             "homepage": "http://github.com/Sylius/Sylius/contributors"
         }
     ],
@@ -24,10 +24,10 @@
 
         "jms/translation-bundle": "1.1.*",
         "stof/doctrine-extensions-bundle": "~1.1",
-        "sylius/promotion": "0.18.*",
-        "sylius/registry": "0.18.*",
-        "sylius/money-bundle": "0.18.*",
-        "sylius/resource-bundle": "0.18.*",
+        "sylius/promotion": "^0.18",
+        "sylius/registry": "^0.18",
+        "sylius/money-bundle": "^0.18",
+        "sylius/resource-bundle": "^0.18",
         "symfony/framework-bundle": "^2.7.7"
     },
     "require-dev": {
@@ -46,6 +46,13 @@
         "psr-4": { "Sylius\\Bundle\\PromotionBundle\\spec\\": "spec/" }
     },
     "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../*/*"
+        }
+    ],
     "extra": {
         "branch-alias": {
             "dev-master": "0.18-dev"

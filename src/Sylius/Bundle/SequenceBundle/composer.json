@@ -7,27 +7,27 @@
     "license": "MIT",
     "authors": [
         {
-            "name":     "Paweł Jędrzejewski",
+            "name": "Paweł Jędrzejewski",
             "homepage": "http://pjedrzejewski.com"
         },
         {
-            "name":     "Alexandre Bacco",
+            "name": "Alexandre Bacco",
             "homepage": "http://alex.bacco.fr"
         },
         {
-            "name":     "Sylius project",
+            "name": "Sylius project",
             "homepage": "http://sylius.org"
         },
         {
-            "name":     "Community contributions",
+            "name": "Community contributions",
             "homepage": "http://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
         "php": "^5.5.9|^7.0",
 
-        "sylius/resource-bundle": "0.18.*",
-        "sylius/sequence": "0.18.*",
+        "sylius/resource-bundle": "^0.18",
+        "sylius/sequence": "^0.18",
         "symfony/framework-bundle": "^2.7.7"
     },
     "require-dev": {
@@ -44,6 +44,13 @@
         "psr-4": { "spec\\Sylius\\Bundle\\SequenceBundle\\": "spec/" }
     },
     "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../*/*"
+        }
+    ],
     "extra": {
         "branch-alias": {
             "dev-master": "0.18-dev"

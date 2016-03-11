@@ -9,24 +9,26 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ResourceBundle\Controller;
+namespace Sylius\Bundle\RbacBundle\Authorization;
 
-use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface as RbacAuthorizationCheckerInterface;
+use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface as ResourceBundleAuthorizationCheckerInterface;
+use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
+use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class RbacAuthorizationChecker implements AuthorizationCheckerInterface
+class RbacAuthorizationChecker implements ResourceBundleAuthorizationCheckerInterface
 {
     /**
-     * @var RbacAuthorizationCheckerInterface
+     * @var AuthorizationCheckerInterface
      */
     private $rbacAuthorizationChecker;
 
     /**
-     * @param RbacAuthorizationCheckerInterface $rbacAuhtorizationChecker
+     * @param AuthorizationCheckerInterface $rbacAuhtorizationChecker
      */
-    public function __construct(RbacAuthorizationCheckerInterface $rbacAuhtorizationChecker)
+    public function __construct(AuthorizationCheckerInterface $rbacAuhtorizationChecker)
     {
         $this->rbacAuthorizationChecker = $rbacAuhtorizationChecker;
     }

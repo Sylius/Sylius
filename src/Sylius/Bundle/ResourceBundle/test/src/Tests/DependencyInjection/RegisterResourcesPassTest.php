@@ -11,8 +11,6 @@
 
 namespace Sylius\Bundle\ResourceBundle\Tests\DependencyInjection;
 
-use AppBundle\Entity\Book;
-use AppBundle\Form\Type\BookType;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\ContainerHasParameterConstraint;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasMethodCallConstraint;
@@ -24,6 +22,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
+ * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 class RegisterResourcesPassTest extends AbstractCompilerPassTestCase
 {
@@ -32,67 +31,29 @@ class RegisterResourcesPassTest extends AbstractCompilerPassTestCase
      */
     public function it_adds_method_call_to_resource_registry_if_resources_exist()
     {
-        $resourceRegistry = new Definition(Registry::class);
-        $this->setDefinition('sylius.resource_registry', $resourceRegistry);
+        $this->setDefinition('sylius.resource_registry', new Definition());
 
         $this->setParameter(
-            'sylius.resources', [
-            'app.book' => [
-                'classes' => [
-                    'model' => Book::class,
-                    'form' => [
-                        'default' => BookType::class
-                    ]
-                ]
+            'sylius.resources',
+            [
+                'app.book' => ['classes' => ['model' => \stdClass::class]],
+                'app.author' => ['classes' => ['interface' => \Countable::class]],
             ]
-        ]);
+        );
 
         $this->compile();
 
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.resource_registry',
             'addFromAliasAndConfiguration',
-            [
-                'app.book',
-                [
-                    'classes' => [
-                        'model' => Book::class,
-                        'form' => [
-                            'default' => BookType::class
-                        ]
-                    ]
-                ]
-            ]
+            ['app.book', ['classes' => ['model' => \stdClass::class]]]
         );
-    }
 
-    /**
-     * @test
-     */
-    public function it_does_not_add_method_call_if_resources_do_not_exist()
-    {
-        $resourceRegistry = new Definition(Registry::class);
-        $this->setDefinition('sylius.resource_registry', $resourceRegistry);
-
-        $this->compile();
-
-        $this->assertContainerBuilderDoesNotHaveServiceDefinitionWithMethodCall(
+        $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.resource_registry',
             'addFromAliasAndConfiguration',
-            [
-                'app.book',
-                [
-                    'classes' => [
-                        'model' => Book::class,
-                        'form' => [
-                            'default' => BookType::class
-                        ]
-                    ]
-                ]
-            ]
+            ['app.author', ['classes' => ['interface' => \Countable::class]]]
         );
-
-        $this->assertContainerBuilderNotHasParameter('sylius.resources');
     }
 
     /**
@@ -101,34 +62,5 @@ class RegisterResourcesPassTest extends AbstractCompilerPassTestCase
     protected function registerCompilerPass(ContainerBuilder $container)
     {
         $container->addCompilerPass(new RegisterResourcesPass());
-    }
-
-    /**
-    * @param string $serviceId
-    * @param string $method
-    * @param array $arguments
-    */
-    private function assertContainerBuilderDoesNotHaveServiceDefinitionWithMethodCall($serviceId, $method, $arguments)
-    {
-        $definition = $this->container->findDefinition($serviceId);
-
-        self::assertThat(
-            $definition,
-            new \PHPUnit_Framework_Constraint_Not(new DefinitionHasMethodCallConstraint($method, $arguments))
-        );
-    }
-
-    /**
-     * @param $parameterName
-     * @param $expectedParameterValue
-     */
-    private function assertContainerBuilderNotHasParameter($parameterName, $expectedParameterValue = null)
-    {
-        $checkParameterValue = (func_num_args() > 1);
-
-        self::assertThat(
-            $this->container,
-            new \PHPUnit_Framework_Constraint_Not(new ContainerHasParameterConstraint($parameterName, $expectedParameterValue, $checkParameterValue))
-        );
     }
 }

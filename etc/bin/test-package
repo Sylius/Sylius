@@ -1,0 +1,101 @@
+#!/usr/bin/env bash
+
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../bash/common.lib.sh"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../bash/output.lib.sh"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../bash/packages.lib.sh"
+
+# Argument 1: Package path
+test_package() {
+    [[ "$(echo "$2" | grep -c "no-phpspec")" = "1" ]] && local phpspec_support=false
+    [[ "$(echo "$2" | grep -c "no-phpunit")" = "1" ]] && local phpunit_support=false
+    local exit_code=0
+
+    print_header "Testing" "$(package_path_to_package_name "$1")"
+
+    cd "$1" 2>/dev/null
+    exit_on_error "Cannot change current directory to $1"
+
+    if ${phpspec_support}; then
+        run_phpspec "$1" || exit_code=$?
+    fi
+
+    if ${phpunit_support}; then
+        run_phpunit "$1" || exit_code=$?
+    fi
+
+    return ${exit_code}
+}
+
+# Argument 1: Package path
+run_phpspec() {
+    local phpspec
+    if [[ ! -e "phpspec.yml.dist" && ! -e "phpspec.yml" ]]; then
+        return 0
+    fi
+
+    phpspec="$(get_binary phpspec)"
+    if [ "$?" != "0" ]; then
+        print_error "Phpspec binary not found, make sure you included it in require-dev"
+        return 1
+    fi
+
+    run_command "${phpspec} run --ansi --no-interaction --format=dot"
+}
+
+# Argument 1: Package path
+run_phpunit() {
+    local phpunit
+    if [[ ! -e "phpunit.xml.dist" && ! -e "phpunit.xml" ]]; then
+        return 0
+    fi
+
+    phpunit="$(get_binary phpunit)"
+    if [ "$?" != "0" ]; then
+        print_error "Phpunit binary not found, make sure you included it in require-dev"
+        return 1
+    fi
+
+    if [ "$(package_path_to_package_name "$1")" = "ResourceBundle" ]; then
+        run_command "test/app/console doctrine:schema:update --ansi --no-interaction --force --quiet"
+    fi
+
+    run_command "${phpunit} --colors=always"
+}
+
+main() {
+    local packages=() options=() package_path
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --no-phpspec)
+                options+=("no-phpspec")
+            ;;
+            --no-phpunit)
+                options+=("no-phpunit")
+            ;;
+            -*)
+                print_error "Unknown option \"$1\""
+                exit 1
+            ;;
+            *)
+               packages+=("$1")
+            ;;
+        esac
+
+        shift
+    done
+
+    if [[ "${packages[@]}" = "" ]]; then
+        print_error "Usage: $0 [--no-phpspec] [--no-phpunit] <package paths or names>"
+        exit 1
+    fi
+
+    for package in "${packages[@]}"; do
+        package_path="$(cast_package_argument_to_package_path "${package}")"
+        exit_on_error "Package \"${package}\" is not found"
+
+        test_package "${package_path}" "${options[*]}"
+    done
+}
+
+main "$@"

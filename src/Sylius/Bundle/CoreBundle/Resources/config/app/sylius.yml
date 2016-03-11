@@ -285,8 +285,9 @@ sylius_search:
                 value: ~
 
 sylius_resource:
-    default_locale: %sylius.locale%
-    locale_provider: sylius.translation.locale_provider.contextual
+    translation:
+        default_locale: %sylius.locale%
+        locale_provider: sylius.translation.locale_provider.contextual
 
 sylius_mailer:
     templates:
@@ -347,7 +348,7 @@ sylius_rbac:
         sylius.group.create: Create group
         sylius.group.update: Edit group
         sylius.group.delete: Delete group
-        
+
         sylius.manage.metadata_container: Manage metadata
         sylius.metadata_container.show: Show metadata
         sylius.metadata_container.index: List metadata

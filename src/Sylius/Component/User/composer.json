@@ -7,23 +7,23 @@
     "license": "MIT",
     "authors": [
         {
-            "name":     "Paweł Jędrzejewski",
+            "name": "Paweł Jędrzejewski",
             "homepage": "http://pjedrzejewski.com"
         },
         {
-            "name":     "Michał Marcinkowski",
-            "email":    "michal.marcinkowski@lakion.com"
+            "name": "Michał Marcinkowski",
+            "email": "michal.marcinkowski@lakion.com"
         },
         {
-            "name":     "Łukasz Chruściel",
-            "email":    "lukasz.chrusciel@lakion.com"
+            "name": "Łukasz Chruściel",
+            "email": "lukasz.chrusciel@lakion.com"
         },
         {
-            "name":     "Sylius project",
+            "name": "Sylius project",
             "homepage": "http://sylius.org"
         },
         {
-            "name":     "Community contributions",
+            "name": "Community contributions",
             "homepage": "http://github.com/Sylius/Sylius/contributors"
         }
     ],
@@ -31,8 +31,8 @@
         "php": "^5.5.9|^7.0",
 
         "doctrine/orm": "^2.4.8,<2.5",
-        "sylius/resource": "0.18.*",
-        "sylius/storage": "0.18.*",
+        "sylius/resource": "^0.18",
+        "sylius/storage": "^0.18",
         "symfony/security": "^2.7",
         "symfony/polyfill-mbstring": "~1.0"
     },
@@ -52,6 +52,13 @@
         "psr-4": { "Sylius\\Component\\User\\spec\\": "spec/" }
     },
     "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../*/*"
+        }
+    ],
     "extra": {
         "branch-alias": {
             "dev-master": "0.18-dev"

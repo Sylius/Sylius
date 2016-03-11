@@ -12,14 +12,14 @@
 namespace spec\Sylius\Bundle\SearchBundle\Query;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\Taxon;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
  * @author agounaris <agounaris@gmail.com>
  */
 class TaxonQuerySpec extends ObjectBehavior
 {
-    function let(Taxon $taxon)
+    function let(TaxonInterface $taxon)
     {
         $this->beConstructedWith($taxon, ['test']);
     }
@@ -29,9 +29,9 @@ class TaxonQuerySpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\SearchBundle\Query\TaxonQuery');
     }
 
-    public function it_has_a_taxon()
+    public function it_has_a_taxon(TaxonInterface $taxon)
     {
-        $this->getTaxon()->shouldBeAnInstanceOf(Taxon::class);
+        $this->getTaxon()->shouldReturn($taxon);
     }
 
     public function it_has_some_applied_filters()
