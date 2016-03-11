@@ -38,6 +38,7 @@ imports:
     - suites/ui/promotion.yml
     - suites/ui/theme.yml
     - suites/ui/user.yml
+    - suites/ui/localization.yml
 
     - suites/domain/order.yml
     - suites/domain/product.yml
