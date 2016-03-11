@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.templating.helper.grid.class">Sylius\Bundle\GridBundle\Templating\Helper\GridHelper</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.templating.helper.grid" class="%sylius.templating.helper.grid.class%" lazy="true">
+            <argument type="service" id="sylius.grid.renderer" />
+            <tag name="templating.helper" alias="sylius_grid" />
+        </service>
+    </services>
+
+</container>

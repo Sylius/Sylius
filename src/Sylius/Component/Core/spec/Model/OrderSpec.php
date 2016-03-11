@@ -357,4 +357,31 @@ class OrderSpec extends ObjectBehavior
         $this->removePromotion($promotion);
         $this->shouldNotHavePromotion($promotion);
     }
+
+    function it_returns_promotions_total_recursively(
+        AdjustmentInterface $orderPromotionAdjustment,
+        AdjustmentInterface $orderItemPromotionAdjustment,
+        OrderItemInterface $orderItem
+    ) {
+        $orderPromotionAdjustment->getAmount()->willReturn(10000);
+        $orderItemPromotionAdjustment->getAmount()->willReturn(5000);
+
+        $orderPromotionAdjustment->isNeutral()->willReturn(false);
+        $orderItemPromotionAdjustment->isNeutral()->willReturn(false);
+
+        $orderPromotionAdjustment->getType()->willReturn(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
+        $orderItemPromotionAdjustment->getType()->willReturn(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT);
+
+        $orderPromotionAdjustment->setAdjustable($this)->shouldBeCalled();
+
+        $orderItem->getAdjustmentsRecursively(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->willReturn([$orderItemPromotionAdjustment]);
+        $orderItem->setOrder($this)->shouldBeCalled();
+        $orderItem->getTotal()->willReturn(15000);
+        $orderItem->getAdjustmentsRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)->willReturn([]);
+
+        $this->addItem($orderItem);
+        $this->addAdjustment($orderPromotionAdjustment);
+
+        $this->getPromotionsTotalRecursively()->shouldReturn(15000);
+    }
 }

@@ -1,0 +1,66 @@
+{% import 'SyliusUiBundle:Macro:pagination.html.twig' as pagination %}
+{% import 'SyliusUiBundle:Macro:buttons.html.twig' as buttons %}
+{% import 'SyliusUiBundle:Macro:messages.html.twig' as messages %}
+
+{% set definition = grid.definition %}
+{% set data = grid.data %}
+
+{% if definition.filters|length > 0 %}
+    <div class="ui segment">
+        <form method="get" action="{{ path(grid.requestConfiguration.getRouteName('index')) }}" class="ui form">
+            <div class="two fields">
+            {% for filter in definition.filters %}
+                {{ sylius_grid_render_filter(grid, filter) }}
+
+                {% if loop.index0 % 2 %}
+                    </div>
+                    <div class="two fields">
+                {% endif %}
+            {% endfor %}
+            </div>
+            {{ buttons.filter() }}
+            {{ buttons.resetFilters(path(grid.requestConfiguration.getRouteName('index'))) }}
+        </form>
+    </div>
+{% endif %}
+
+<div class="ui segment">
+    {{ pagination.render(data) }}
+    {% if data|length > 0 %}
+        <table class="ui sortable stackable celled table">
+            <thead>
+            <tr>
+                {% for field in definition.fields %}
+                    <th{% if grid.isSortedBy(field.name) %} class="sorted {{ 'asc' == grid.getSortingOrder(field.name) ? 'ascending' : 'descending' }}"{% endif %}>
+                        {{ field.label|trans }}
+                    </th>
+                {% endfor %}
+                {% if definition.actionGroups.item is defined and definition.getActions('item')|length > 0 %}
+                    <th>{{ 'sylius.ui.actions'|trans }}</th>
+                {% endif %}
+            </tr>
+            </thead>
+            <tbody>
+            {% for row in data %}
+                <tr>
+                    {% for field in definition.fields %}
+                        <td>{{ sylius_grid_render_field(grid, field, row) }}</td>
+                    {% endfor %}
+                    {% if definition.actionGroups.item is defined and definition.getActions('item')|length > 0 %}
+                        <td>
+                            <div class="ui buttons">
+                                {% for action in definition.getActions('item') %}
+                                    {{ sylius_grid_render_action(grid, action, row) }}
+                                {% endfor %}
+                            </div>
+                        </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        {{ messages.info('sylius.ui.no_results_to_display'|trans) }}
+    {% endif %}
+    {{ pagination.render(data) }}
+</div>

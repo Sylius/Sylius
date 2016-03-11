@@ -12,21 +12,19 @@ Feature: Checkout percentage discount promotions
             | PR2  | 300 EUR | 10% Discount for orders over 300 EUR          |
         And promotion "5 items" has following rules defined:
             | type          | configuration |
-            | cart quantity | Count: 5      |
+            | Cart quantity | Count: 5      |
         And promotion "5 items" has following actions defined:
-            | type                | configuration  |
-            | percentage discount | percentage: 25 |
+            | type                      | configuration  |
+            | Order percentage discount | percentage: 25 |
         And promotion "300 EUR" has following rules defined:
             | type       | configuration |
             | Item total | Amount: 300   |
         And promotion "300 EUR" has following actions defined:
-            | type                | configuration  |
-            | Percentage discount | percentage: 10 |
+            | type                      | configuration  |
+            | Order percentage discount | percentage: 10 |
         And there are following taxons defined:
-            | code | name     |
-            | RTX1 | Category |
-        And taxon "Category" has following children:
-            | Clothing[TX1] > Debian T-Shirts[TX2] |
+            | code | name            |
+            | TX1  | Debian T-Shirts |
         And the following products exist:
             | name   | price | taxons          |
             | Buzz   | 500   | Debian T-Shirts |

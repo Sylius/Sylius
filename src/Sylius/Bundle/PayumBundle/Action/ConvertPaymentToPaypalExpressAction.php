@@ -69,7 +69,7 @@ class ConvertPaymentToPaypalExpressAction implements ActionInterface
             ++$m;
         }
 
-        if (0 !== $promotionTotal = $order->getAdjustmentsTotal(AdjustmentInterface::PROMOTION_ADJUSTMENT)) {
+        if (0 !== $promotionTotal = $order->getAdjustmentsTotal(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)) {
             $details['L_PAYMENTREQUEST_0_NAME'.$m] = 'Discount';
             $details['L_PAYMENTREQUEST_0_AMT'.$m] = round($promotionTotal / 100, 2);
             $details['L_PAYMENTREQUEST_0_QTY'.$m] = 1;

@@ -23,7 +23,7 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
  */
 class FixedDiscountAction extends DiscountAction
 {
-    const TYPE = 'fixed_discount';
+    const TYPE = 'order_fixed_discount';
 
     /**
      * {@inheritdoc}

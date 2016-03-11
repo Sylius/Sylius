@@ -37,6 +37,18 @@
     {{ buttons.default(url, message, id, 'pencil') }}
 {% endmacro %}
 
+{% macro filter(message) %}
+    <button class="ui blue labeled icon button" type="submit">
+        <i class="icon search"></i> {{ message is empty ? 'sylius.ui.filter'|trans : message }}
+    </button>
+{% endmacro %}
+
+{% macro resetFilters(url, message) %}
+    <a class="ui labeled icon button" href="{{ url }}">
+        <i class="icon remove"></i> {{ message is empty ? 'sylius.ui.clear_filters'|trans : message }}
+    </a>
+{% endmacro %}
+
 {% macro delete(url, message) %}
     <form action="{{ url }}" method="post">
         <input type="hidden" name="_method" value="DELETE">

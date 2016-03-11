@@ -14,19 +14,17 @@ Feature: Checkout usage limited promotions
             | type       | configuration |
             | Item total | Amount: 200   |
         And promotion "25% off over 200 EUR" has following actions defined:
-            | type                | configuration  |
-            | Percentage discount | Percentage: 25 |
+            | type                      | configuration  |
+            | Order percentage discount | Percentage: 25 |
         And promotion "Free order with at least 3 items" has following rules defined:
             | type          | configuration |
             | Cart quantity | Count: 3      |
         And promotion "Free order with at least 3 items" has following actions defined:
-            | type                | configuration   |
-            | Percentage discount | Percentage: 100 |
+            | type                      | configuration   |
+            | Order percentage discount | Percentage: 100 |
         And there are following taxons defined:
-            | code | name     |
-            | RTX1 | Category |
-        And taxon "Category" has following children:
-            | Clothing[TX1] > Debian T-Shirts[TX2] |
+            | code | name            |
+            | TX1  | Debian T-Shirts |
         And the following products exist:
             | name   | price | taxons          |
             | Buzz   | 500   | Debian T-Shirts |

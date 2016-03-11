@@ -38,35 +38,35 @@ Feature: Checkout fixed discount promotions
             | type          | configuration |
             | Cart quantity | Count: 4      |
         And promotion "3 items" has following actions defined:
-            | type           | configuration |
-            | Fixed discount | Amount: 15    |
+            | type                 | configuration |
+            | Order fixed discount | Amount: 15    |
         And promotion "300 EUR" has following rules defined:
             | type       | configuration |
             | Item total | Amount: 300   |
         And promotion "300 EUR" has following actions defined:
-            | type           | configuration |
-            | Fixed discount | Amount: 40    |
+            | type                 | configuration |
+            | Order fixed discount | Amount: 40    |
         And promotion "Shipping to Germany" has following rules defined:
             | type             | configuration    |
             | Shipping country | Country: Germany |
         And promotion "Shipping to Germany" has following actions defined:
-            | type           | configuration |
-            | Fixed discount | Amount: 40    |
+            | type                 | configuration |
+            | Order fixed discount | Amount: 40    |
         And promotion "Ubuntu T-Shirts" has following rules defined:
             | type  | configuration                      |
             | Taxon | Taxons: Ubuntu T-Shirts,Exclude: 0 |
         And promotion "Ubuntu T-Shirts" has following actions defined:
-            | type           | configuration |
-            | Fixed discount | Amount: 40    |
+            | type                 | configuration |
+            | Order fixed discount | Amount: 40    |
         And promotion "3rd order" has following rules defined:
             | type      | configuration |
             | Nth order | Nth: 3        |
         And promotion "3rd order" has following actions defined:
-            | type           | configuration |
-            | Fixed discount | Amount: 10    |
+            | type                 | configuration |
+            | Order fixed discount | Amount: 10    |
         And I am logged in as user "klaus@example.com"
 
-    Scenario: Fixed discount promotion is applied when the cart
+    Scenario: Order fixed discount promotion is applied when the cart
             has the required amount
         Given I am on the store homepage
         When I add product "Woody" to cart, with quantity "3"
@@ -74,7 +74,7 @@ Feature: Checkout fixed discount promotions
         And "Promotion total: -€40.00" should appear on the page
         And "Grand total: €335.00" should appear on the page
 
-    Scenario: Fixed discount promotion is not applied when the cart
+    Scenario: Order fixed discount promotion is not applied when the cart
             has not the required amount
         Given I am on the store homepage
         When I add product "Sarge" to cart, with quantity "3"

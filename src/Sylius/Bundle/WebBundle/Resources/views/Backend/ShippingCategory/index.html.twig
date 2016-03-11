@@ -5,10 +5,10 @@
 {% from 'SyliusWebBundle:Backend/ShippingCategory:macros.html.twig' import list %}
 
 {% block topbar %}
-<ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
-    <li>{{ 'sylius.breadcrumb.shipping_category.index'|trans }}</a></li>
-</ol>
+    <ol class="breadcrumb">
+        <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
+        <li>{{ 'sylius.breadcrumb.shipping_category.index'|trans }}</a></li>
+    </ol>
 {% endblock %}
 
 {% block content %}
@@ -23,5 +23,4 @@
 {{ pagination(shipping_categories) }}
 {{ list(shipping_categories) }}
 {{ pagination(shipping_categories) }}
-
 {% endblock %}

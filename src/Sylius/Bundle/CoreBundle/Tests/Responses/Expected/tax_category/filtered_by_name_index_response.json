@@ -1,0 +1,41 @@
+{
+    "page": 1,
+    "limit": 10,
+    "pages": 1,
+    "total": 2,
+    "_links": {
+        "self": {
+            "href": "\/api\/tax-categories\/?criteria%5Bname%5D=clothing&page=1&limit=10"
+        },
+        "first": {
+            "href": "\/api\/tax-categories\/?criteria%5Bname%5D=clothing&page=1&limit=10"
+        },
+        "last": {
+            "href": "\/api\/tax-categories\/?criteria%5Bname%5D=clothing&page=1&limit=10"
+        }
+    },
+    "_embedded": {
+        "items": [
+            {
+                "id": @integer@,
+                "code": "TC4",
+                "name": "Clothing",
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "TC5",
+                "name": "Clothing & Accessories",
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    }
+                }
+            }
+        ]
+    }
+}

@@ -57,6 +57,7 @@ sylius:
             sidebar:
                 api_clients: API clients
                 archetypes: Product archetypes
+                association_types: Product association types
                 assortment: Assortment
                 attributes: Configure attributes
                 blocks: Blocks
@@ -77,6 +78,7 @@ sylius:
                 locales: Locales
                 marketing: Marketing
                 menus: Menus
+                metadata: Metadata
                 new_order: Add new order
                 new_promotion: Add new promotion
                 options: Manage options
@@ -94,7 +96,6 @@ sylius:
                 routes: Routes
                 review: Reviews
                 attributes: Configure attributes
-                archetypes: Product archetypes
                 sales: Orders
                 security_settings: Security settings
                 shipments: Shipments

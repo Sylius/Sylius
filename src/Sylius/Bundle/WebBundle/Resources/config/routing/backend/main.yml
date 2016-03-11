@@ -88,8 +88,12 @@ sylius_backend_tax_rate:
     type: sylius.resource
 
 sylius_backend_shipping_category:
-    resource: @SyliusWebBundle/Resources/config/routing/backend/shipping_category.yml
-    prefix: /shipping-categories
+    resource: |
+       alias: sylius.shipping_category
+       section: backend
+       except: ['show']
+       templates: SyliusWebBundle:Backend/ShippingCategory
+    type: sylius.resource
 
 sylius_backend_shipping_method:
     resource: @SyliusWebBundle/Resources/config/routing/backend/shipping_method.yml

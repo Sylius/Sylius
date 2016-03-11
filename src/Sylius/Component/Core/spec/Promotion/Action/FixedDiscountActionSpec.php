@@ -55,7 +55,7 @@ class FixedDiscountActionSpec extends ObjectBehavior
         $order->getPromotionSubjectTotal()->willReturn(1000);
 
         $adjustment->setAmount(-500)->shouldBeCalled();
-        $adjustment->setType(AdjustmentInterface::PROMOTION_ADJUSTMENT)->shouldBeCalled();
+        $adjustment->setType(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)->shouldBeCalled();
         $adjustment->setLabel('promotion description')->shouldBeCalled();
 
         $originator->setOrigin($adjustment, $promotion)->shouldBeCalled();
@@ -79,7 +79,7 @@ class FixedDiscountActionSpec extends ObjectBehavior
         $order->getPromotionSubjectTotal()->willReturn(1000);
 
         $adjustment->setAmount(-1000)->shouldBeCalled();
-        $adjustment->setType(AdjustmentInterface::PROMOTION_ADJUSTMENT)->shouldBeCalled();
+        $adjustment->setType(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)->shouldBeCalled();
         $adjustment->setLabel('promotion description')->shouldBeCalled();
 
         $originator->setOrigin($adjustment, $promotion)->shouldBeCalled();

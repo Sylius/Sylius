@@ -33,7 +33,7 @@ final class SharedStorageContext implements Context
     }
 
     /**
-     * @Transform it
+     * @Transform /^(it|its|theirs)$/
      */
     public function getLatestResource()
     {

@@ -26,6 +26,9 @@
         <parameter key="sylius.behat.context.setup.tax.class">Sylius\Behat\Context\Setup\TaxContext</parameter>
         <parameter key="sylius.behat.context.setup.order.class">Sylius\Behat\Context\Setup\OrderContext</parameter>
         <parameter key="sylius.behat.context.setup.theme.class">Sylius\Behat\Context\Setup\ThemeContext</parameter>
+        <parameter key="sylius.behat.context.setup.customer.class">Sylius\Behat\Context\Setup\CustomerContext</parameter>
+        <parameter key="sylius.behat.context.setup.addressing.class">Sylius\Behat\Context\Setup\AddressingContext</parameter>
+        <parameter key="sylius.behat.context.setup.taxonomy.class">Sylius\Behat\Context\Setup\TaxonomyContext</parameter>
 
         <parameter key="sylius.behat.context.transform.customer.class">Sylius\Behat\Context\Transform\CustomerContext</parameter>
         <parameter key="sylius.behat.context.transform.addressing.class">Sylius\Behat\Context\Transform\AddressingContext</parameter>
@@ -36,6 +39,7 @@
         <parameter key="sylius.behat.context.transform.product.class">Sylius\Behat\Context\Transform\ProductContext</parameter>
         <parameter key="sylius.behat.context.transform.shipping.class">Sylius\Behat\Context\Transform\ShippingContext</parameter>
         <parameter key="sylius.behat.context.transform.tax.class">Sylius\Behat\Context\Transform\TaxContext</parameter>
+        <parameter key="sylius.behat.context.transform.taxon.class">Sylius\Behat\Context\Transform\TaxonContext</parameter>
         <parameter key="sylius.behat.context.transform.zone.class">Sylius\Behat\Context\Transform\ZoneContext</parameter>
         <parameter key="sylius.behat.context.transform.theme.class">Sylius\Behat\Context\Transform\ThemeContext</parameter>
 
@@ -151,6 +155,13 @@
             <tag name="sylius.behat.context" />
         </service>
 
+        <service id="sylius.behat.context.setup.taxonomy" class="%sylius.behat.context.setup.taxonomy.class%" scope="scenario">
+            <argument type="service" id="sylius.repository.taxon" container="symfony" />
+            <argument type="service" id="sylius.factory.taxon" container="symfony" />
+            <argument type="service" id="doctrine.orm.entity_manager" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
         <service id="sylius.behat.context.setup.order" class="%sylius.behat.context.setup.order.class%" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.repository.order" container="symfony" />
@@ -220,6 +231,11 @@
             <tag name="sylius.behat.context" />
         </service>
 
+        <service id="sylius.behat.context.transform.taxon" class="%sylius.behat.context.transform.taxon.class%" scope="scenario">
+            <argument type="service" id="sylius.repository.taxon" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
         <service id="sylius.behat.context.transform.zone" class="%sylius.behat.context.transform.zone.class%" scope="scenario">
             <argument type="service" id="sylius.repository.zone" container="symfony" />
             <tag name="sylius.behat.context" />
@@ -247,6 +263,7 @@
         </service>
 
         <service id="sylius.behat.context.ui.cart" class="%sylius.behat.context.ui.cart.class%" scope="scenario">
+            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.behat.page.cart_summary" />
             <argument type="service" id="sylius.behat.page.product_show" />
             <tag name="sylius.behat.context" />

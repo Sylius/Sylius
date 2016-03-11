@@ -523,4 +523,15 @@ class Order extends Cart implements OrderInterface
     {
         return $this->promotions;
     }
+
+    /**
+     * @return int
+     */
+    public function getPromotionsTotalRecursively()
+    {
+        return
+            $this->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT) +
+            $this->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)
+        ;
+    }
 }

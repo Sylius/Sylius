@@ -822,3 +822,12 @@ sylius_review:
             reviewer:
                 classes:
                     model: %sylius.model.customer.class%
+
+sylius_grid:
+    templates:
+        action:
+            create: SyliusAdminBundle:Grid/Action:create.html.twig
+            update: SyliusAdminBundle:Grid/Action:update.html.twig
+            delete: SyliusAdminBundle:Grid/Action:delete.html.twig
+        filter:
+            string: SyliusAdminBundle:Grid/Filter:string.html.twig
