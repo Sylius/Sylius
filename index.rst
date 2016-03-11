@@ -85,18 +85,6 @@ Learn how to write clean and reusable features, contexts and pages.
 
 .. include:: /behat/map.rst.inc
 
-Migration Guide
----------------
-
-Migrating to Sylius from other e-commerce platforms.
-
-.. toctree::
-   :hidden:
-
-   migration/index
-
-.. include:: /migration/map.rst.inc
-
 Bundles
 -------
 
