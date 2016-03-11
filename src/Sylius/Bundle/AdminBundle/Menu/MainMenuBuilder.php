@@ -51,6 +51,12 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
             ->setLabelAttribute('icon', 'tags')
         ;
 
+        $child
+            ->addChild('countries', ['route' => 'sylius_admin_country_index'])
+            ->setLabel('sylius.menu.admin.main.configuration.country')
+            ->setLabelAttribute('icon', 'flag')
+        ;
+
         if (!$child->hasChildren()) {
             $menu->removeChild('configuration');
         }

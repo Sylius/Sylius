@@ -1,0 +1,16 @@
+sylius_admin_country:
+    resource: |
+        alias: sylius.country
+        section: admin
+        templates: SyliusAdminBundle:Crud
+        except: ['show', 'update', 'delete']
+        redirect: index
+        grid: sylius_admin_country
+        vars:
+            all:
+                subheader: sylius.ui.manage_country
+                templates:
+                    form: SyliusAdminBundle:Country:_form.html.twig
+            index:
+                icon: flag
+    type: sylius.resource

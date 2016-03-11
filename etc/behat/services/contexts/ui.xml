@@ -21,6 +21,7 @@
         <parameter key="sylius.behat.context.ui.paypal.class">Sylius\Behat\Context\Ui\PaypalContext</parameter>
         <parameter key="sylius.behat.context.ui.customer.class">Sylius\Behat\Context\Ui\CustomerContext</parameter>
         <parameter key="sylius.behat.context.ui.theme.class">Sylius\Behat\Context\Ui\ThemeContext</parameter>
+        <parameter key="sylius.behat.context.ui.admin.managing_countries.class">Sylius\Behat\Context\Ui\Admin\ManagingCountriesContext</parameter>
     </parameters>
 
     <services>
@@ -83,6 +84,12 @@
             <argument type="service" id="sylius.behat.page.channel_index" />
             <argument type="service" id="sylius.behat.page.channel_update" />
             <argument type="service" id="sylius.behat.page.home" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.ui.admin.managing_countries" class="%sylius.behat.context.ui.admin.managing_countries.class%" scope="scenario">
+            <argument type="service" id="sylius.behat.page.admin.country.index" />
+            <argument type="service" id="sylius.behat.page.admin.country.create" />
             <tag name="sylius.behat.context" />
         </service>
     </services>

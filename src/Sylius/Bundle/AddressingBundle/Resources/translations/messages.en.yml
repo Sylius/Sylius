@@ -15,6 +15,7 @@ sylius:
             name: Name
             provinces: Provinces
             select: Select
+            enabled: Enabled
         province:
             name: Name
             abbreviation: Abbreviation
