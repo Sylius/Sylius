@@ -18,3 +18,6 @@ sylius_admin_tax_category:
 
 sylius_admin_country:
     resource: @SyliusAdminBundle/Resources/config/routing/country.yml
+
+sylius_admin_locale:
+    resource: @SyliusAdminBundle/Resources/config/routing/locale.yml

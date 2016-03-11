@@ -1,0 +1,25 @@
+sylius_grid:
+    grids:
+        sylius_admin_locale:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: %sylius.model.locale.class%
+            sorting:
+                code: asc
+            fields:
+                code:
+                    type: string
+                    label: sylius.ui.code
+                name:
+                    type: string
+                    label: sylius.ui.name
+                enabled:
+                    type: twig
+                    label: sylius.ui.enabled
+                    options:
+                        template: SyliusAdminBundle:Grid/Field:enabled.html.twig
+            actions:
+                main:
+                    create:
+                        type: create

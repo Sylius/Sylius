@@ -57,6 +57,12 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
             ->setLabelAttribute('icon', 'flag')
         ;
 
+        $child
+            ->addChild('locale', ['route' => 'sylius_admin_locale_index'])
+            ->setLabel('sylius.menu.admin.main.configuration.locales')
+            ->setLabelAttribute('icon', 'translate')
+        ;
+
         if (!$child->hasChildren()) {
             $menu->removeChild('configuration');
         }

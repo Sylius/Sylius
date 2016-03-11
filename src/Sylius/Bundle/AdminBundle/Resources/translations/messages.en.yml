@@ -6,3 +6,4 @@ sylius:
           header: Configuration
           tax_categories: Tax categories
           countries: Countries
+          locales: Locales
