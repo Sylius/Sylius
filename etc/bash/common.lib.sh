@@ -39,3 +39,8 @@ get_number_of_jobs_for_parallel()
 
     echo "${jobs}"
 }
+
+get_sylius_path()
+{
+    echo "$(cd "$(dirname "${BASH_SOURCE[0]}")/../../" && pwd)"
+}

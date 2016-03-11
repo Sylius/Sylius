@@ -1,4 +1,0 @@
-#!/bin/bash
-
-composer install
-app/console sylius:install
