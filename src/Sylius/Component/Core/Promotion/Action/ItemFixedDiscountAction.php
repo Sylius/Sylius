@@ -74,6 +74,13 @@ class ItemFixedDiscountAction extends ItemDiscountAction
         foreach ($filteredItems as $item) {
             $this->setUnitsAdjustments($item, $configuration['amount'], $promotion);
         }
+
+        $filteredItems = $this->priceRangeFilter->filter($subject->getItems()->toArray(), $configuration);
+        $filteredItems = $this->taxonFilter->filter($filteredItems, $configuration);
+
+        foreach ($filteredItems as $item) {
+            $this->setUnitsAdjustments($item, $configuration['amount'], $promotion);
+        }
     }
 
     /**

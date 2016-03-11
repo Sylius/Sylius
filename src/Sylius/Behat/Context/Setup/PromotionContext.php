@@ -13,13 +13,13 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
+use Payum\Core\Action\ActionInterface;
 use Sylius\Component\Core\Factory\ActionFactoryInterface;
 use Sylius\Component\Core\Factory\RuleFactoryInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Test\Factory\TestPromotionFactoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
-use Sylius\Component\Promotion\Model\ActionInterface;
 use Sylius\Component\Promotion\Factory\CouponFactoryInterface;
 use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
@@ -205,13 +205,13 @@ final class PromotionContext implements Context
     /**
      * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") off on every product (classified as "[^"]+")$/
      */
-    public function itGivesFixedOffEveryProductClassifiedAs(
-        PromotionInterface $promotion,
-        $discount,
-        TaxonInterface $taxon
-    ) {
+    public function itGivesFixedOffEveryProductClassifiedAs(PromotionInterface $promotion, $discount, TaxonInterface $taxon)
+    {
         $action = $this->actionFactory->createItemFixedDiscount($discount);
-        $promotion->addAction($this->configureActionTaxonFilter($action, [$taxon->getCode()]));
+        $configuration = array_merge(['filters' => ['taxons' => [$taxon->getCode()]]], $action->getConfiguration());
+        $action->setConfiguration($configuration);
+
+        $promotion->addAction($action);
 
         $this->objectManager->flush();
     }
@@ -226,7 +226,7 @@ final class PromotionContext implements Context
     ) {
         $filterConfiguration = ['filters' => ['price_range' => ['min' => $amount]]];
 
-        $this->createPromotionWithPriceRangeFilter($promotion, $discount, $filterConfiguration);
+        $this->createFixedPromotionWithPriceRangeFilter($promotion, $discount, $filterConfiguration);
     }
 
     /**
@@ -240,7 +240,36 @@ final class PromotionContext implements Context
     ) {
         $filterConfiguration = ['filters' => ['price_range' => ['min' => $minAmount, 'max' => $maxAmount]]];
 
-        $this->createPromotionWithPriceRangeFilter($promotion, $discount, $filterConfiguration);
+        $this->createFixedPromotionWithPriceRangeFilter($promotion, $discount, $filterConfiguration);
+    }
+
+    /**
+     * @Given /^([^"]+) gives ("[^"]+%") off on every product (more|less) expensive than ("(?:€|£|\$)[^"]+")$/
+     */
+    public function thisPromotionPercentageGivesOffOnEveryProductMoreLessExpensiveThan(
+        PromotionInterface $promotion,
+        $discount,
+        $limit,
+        $amount
+    ) {
+        $limitType = ('more' === $limit) ? 'min' : 'max';
+        $filterConfiguration = ['filters' => ['price_range' => [$limitType => $amount]]];
+
+        $this->createPercentagePromotionWithPriceRangeFilter($promotion, $discount, $filterConfiguration);
+    }
+
+    /**
+     * @Given /^(this promotion) gives ("[^"]+%") off on every product more expensive than ("(?:€|£|\$)[^"]+") and less expensive than ("(?:€|£|\$)[^"]+")$/
+     */
+    public function thisPromotionPercentageGivesOffOnEveryProductMoreExpensiveThanAndLessExpensiveThan(
+        PromotionInterface $promotion,
+        $discount,
+        $minAmount,
+        $maxAmount
+    ) {
+        $filterConfiguration = ['filters' => ['price_range' => ['min' => $minAmount, 'max' => $maxAmount]]];
+
+        $this->createPercentagePromotionWithPriceRangeFilter($promotion, $discount, $filterConfiguration);
     }
 
     /**
@@ -262,9 +291,28 @@ final class PromotionContext implements Context
      * @param int $discount
      * @param array $configuration
      */
-    private function createPromotionWithPriceRangeFilter(PromotionInterface $promotion, $discount, array $configuration)
+    private function createFixedPromotionWithPriceRangeFilter(PromotionInterface $promotion, $discount, array $configuration)
     {
-        $action = $this->actionFactory->createItemFixedDiscount($discount);
+        $this->persistPromotionWithAction($promotion, $this->actionFactory->createItemFixedDiscount($discount), $configuration);
+    }
+
+    /**
+     * @param PromotionInterface $promotion
+     * @param int $discount
+     * @param array $configuration
+     */
+    private function createPercentagePromotionWithPriceRangeFilter(PromotionInterface $promotion, $discount, array $configuration)
+    {
+        $this->persistPromotionWithAction($promotion, $this->actionFactory->createItemPercentageDiscount($discount), $configuration);
+    }
+
+    /**
+     * @param PromotionInterface $promotion
+     * @param ActionInterface $action
+     * @param array $configuration
+     */
+    private function persistPromotionWithAction(PromotionInterface $promotion, ActionInterface $action, array $configuration)
+    {
         $configuration = array_merge($configuration, $action->getConfiguration());
         $action->setConfiguration($configuration);
 
