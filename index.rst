@@ -37,18 +37,6 @@ This chapter covers the REST API of Sylius platform.
 
 .. include:: /api/map.rst.inc
 
-The User Guide
---------------
-
-The User's guide around the Sylius interface and configuration.
-
-.. toctree::
-   :hidden:
-
-   guide/index
-
-.. include:: /guide/map.rst.inc
-
 Cookbook
 --------
 
