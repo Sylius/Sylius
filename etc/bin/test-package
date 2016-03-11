@@ -62,6 +62,10 @@ run_phpunit() {
     run_command "${phpunit} --colors=always"
 }
 
+display_help_message() {
+    print_error "Usage: $0 [--no-phpspec] [--no-phpunit] <package paths or names>"
+}
+
 main() {
     local packages=() options=() package_path
 
@@ -72,6 +76,10 @@ main() {
             ;;
             --no-phpunit)
                 options+=("no-phpunit")
+            ;;
+            --help)
+                display_help_message
+                exit 0
             ;;
             -*)
                 print_error "Unknown option \"$1\""
@@ -86,7 +94,7 @@ main() {
     done
 
     if [[ "${packages[@]}" = "" ]]; then
-        print_error "Usage: $0 [--no-phpspec] [--no-phpunit] <package paths or names>"
+        display_help_message
         exit 1
     fi
 

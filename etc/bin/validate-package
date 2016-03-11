@@ -9,11 +9,19 @@ validate_package() {
     run_command "composer validate --ansi --strict $1/composer.json"
 }
 
+display_help_message() {
+    print_error "Usage: $0 <package paths or names>"
+}
+
 main() {
     local packages=() options=() package_path
 
     while [[ $# -gt 0 ]]; do
         case "$1" in
+            --help)
+                display_help_message
+                exit 0
+            ;;
             -*)
                 print_error "Unknown option \"$1\""
                 exit 1
@@ -27,7 +35,7 @@ main() {
     done
 
     if [[ "${packages[@]}" = "" ]]; then
-        print_error "Usage: $0 <package paths or names>"
+        display_help_message
         exit 1
     fi
 
