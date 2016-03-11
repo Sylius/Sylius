@@ -1,1 +1,0 @@
-* :doc:`/integrations/akeneo`
