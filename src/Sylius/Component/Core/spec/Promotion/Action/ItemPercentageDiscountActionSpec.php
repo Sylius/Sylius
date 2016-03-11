@@ -36,9 +36,10 @@ class ItemPercentageDiscountActionSpec extends ObjectBehavior
         FactoryInterface $adjustmentFactory,
         OriginatorInterface $originator,
         IntegerDistributorInterface $distributor,
+        FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter
     ) {
-        $this->beConstructedWith($adjustmentFactory, $originator, $distributor, $taxonFilter);
+        $this->beConstructedWith($adjustmentFactory, $originator, $distributor, $priceRangeFilter, $taxonFilter);
     }
 
     function it_is_initializable()
@@ -55,32 +56,37 @@ class ItemPercentageDiscountActionSpec extends ObjectBehavior
         $adjustmentFactory,
         $distributor,
         $originator,
+        $priceRangeFilter,
         $taxonFilter,
         AdjustmentInterface $promotionAdjustment1,
         AdjustmentInterface $promotionAdjustment2,
         Collection $originalItems,
-        Collection $filteredItems,
         Collection $units,
         OrderInterface $order,
-        OrderItemInterface $orderItem,
+        OrderItemInterface $orderItem1,
+        OrderItemInterface $orderItem2,
+        OrderItemInterface $orderItem3,
         OrderItemUnitInterface $unit1,
         OrderItemUnitInterface $unit2,
         PromotionInterface $promotion
     ) {
         $order->getItems()->willReturn($originalItems);
-        $originalItems->toArray()->willReturn([$orderItem]);
+        $originalItems->toArray()->willReturn([$orderItem1, $orderItem2, $orderItem3]);
+
+        $priceRangeFilter
+            ->filter([$orderItem1, $orderItem2, $orderItem3], ['percentage' => 0.2, 'filters' => ['taxons' => ['testTaxon']]])
+            ->willReturn([$orderItem1, $orderItem2])
+        ;
         $taxonFilter
-            ->filter([$orderItem], ['percentage' => 0.2, 'filters' => ['taxons' => ['testTaxon']]])
-            ->willReturn($filteredItems)
+            ->filter([$orderItem1, $orderItem2], ['percentage' => 0.2, 'filters' => ['taxons' => ['testTaxon']]])
+            ->willReturn([$orderItem1])
         ;
 
-        $filteredItems->getIterator()->willReturn(new \ArrayIterator([$orderItem->getWrappedObject()]));
-
-        $orderItem->getQuantity()->willReturn(2);
-        $orderItem->getUnits()->willReturn($units);
+        $orderItem1->getQuantity()->willReturn(2);
+        $orderItem1->getUnits()->willReturn($units);
         $units->getIterator()->willReturn(new \ArrayIterator([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
 
-        $orderItem->getTotal()->willReturn(1000);
+        $orderItem1->getTotal()->willReturn(1000);
         $distributor->distribute(200, 2)->willReturn([100, 100]);
 
         $promotion->getDescription()->willReturn('Test description');
@@ -109,31 +115,36 @@ class ItemPercentageDiscountActionSpec extends ObjectBehavior
         $adjustmentFactory,
         $distributor,
         $originator,
+        $priceRangeFilter,
         $taxonFilter,
         AdjustmentInterface $promotionAdjustment1,
         Collection $originalItems,
-        Collection $filteredItems,
         Collection $units,
         OrderInterface $order,
-        OrderItemInterface $orderItem,
+        OrderItemInterface $orderItem1,
+        OrderItemInterface $orderItem2,
+        OrderItemInterface $orderItem3,
         OrderItemUnitInterface $unit1,
         OrderItemUnitInterface $unit2,
         PromotionInterface $promotion
     ) {
         $order->getItems()->willReturn($originalItems);
-        $originalItems->toArray()->willReturn([$orderItem]);
+        $originalItems->toArray()->willReturn([$orderItem1, $orderItem2, $orderItem3]);
+
+        $priceRangeFilter
+            ->filter([$orderItem1, $orderItem2, $orderItem3], ['percentage' => 0.2, 'filters' => ['taxons' => ['testTaxon']]])
+            ->willReturn([$orderItem1, $orderItem2])
+        ;
         $taxonFilter
-            ->filter([$orderItem], ['percentage' => 0.2, 'filters' => ['taxons' => ['testTaxon']]])
-            ->willReturn($filteredItems)
+            ->filter([$orderItem1, $orderItem2], ['percentage' => 0.2, 'filters' => ['taxons' => ['testTaxon']]])
+            ->willReturn([$orderItem1])
         ;
 
-        $filteredItems->getIterator()->willReturn(new \ArrayIterator([$orderItem->getWrappedObject()]));
-
-        $orderItem->getQuantity()->willReturn(2);
-        $orderItem->getUnits()->willReturn($units);
+        $orderItem1->getQuantity()->willReturn(2);
+        $orderItem1->getUnits()->willReturn($units);
         $units->getIterator()->willReturn(new \ArrayIterator([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
 
-        $orderItem->getTotal()->willReturn(5);
+        $orderItem1->getTotal()->willReturn(5);
         $distributor->distribute(1, 2)->willReturn([1, 0]);
 
         $promotion->getDescription()->willReturn('Test description');

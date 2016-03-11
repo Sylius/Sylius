@@ -36,23 +36,31 @@ class ItemPercentageDiscountAction extends ItemDiscountAction
     /**
      * @var FilterInterface
      */
+    private $priceRangeFilter;
+
+    /**
+     * @var FilterInterface
+     */
     private $taxonFilter;
 
     /**
      * @param FactoryInterface $adjustmentFactory
      * @param OriginatorInterface $originator
      * @param IntegerDistributorInterface $distributor
+     * @param FilterInterface $priceRangeFilter
      * @param FilterInterface $taxonFilter
      */
     public function __construct(
         FactoryInterface $adjustmentFactory,
         OriginatorInterface $originator,
         IntegerDistributorInterface $distributor,
+        FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter
     ) {
         parent::__construct($adjustmentFactory, $originator);
 
         $this->distributor = $distributor;
+        $this->priceRangeFilter = $priceRangeFilter;
         $this->taxonFilter = $taxonFilter;
     }
 
@@ -65,7 +73,8 @@ class ItemPercentageDiscountAction extends ItemDiscountAction
             throw new UnexpectedTypeException($subject, OrderInterface::class);
         }
 
-        $filteredItems = $this->taxonFilter->filter($subject->getItems()->toArray(), $configuration);
+        $filteredItems = $this->priceRangeFilter->filter($subject->getItems()->toArray(), $configuration);
+        $filteredItems = $this->taxonFilter->filter($filteredItems, $configuration);
 
         foreach ($filteredItems as $item) {
             $promotionAmount = (int) round($item->getTotal() * $configuration['percentage']);

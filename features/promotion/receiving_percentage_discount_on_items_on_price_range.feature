@@ -52,7 +52,7 @@ Feature: Receiving percentage discount on products from specific price range
         And my cart total should be "€95.00"
         And my discount should be "-€25.00"
 
-    @todo
+    @ui
     Scenario: Receiving different discounts on items from different price ranges
         Given this promotion gives "10%" off on every product more expensive than "€80.00"
         And there is a promotion "Mugs promotion"
