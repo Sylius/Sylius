@@ -21,10 +21,7 @@
 /web/css
 /web/js
 
-/bin/*
-!/bin/install
-!/bin/sylius-cs-fixer
-
+/bin
 /vendor
 /node_modules
 
