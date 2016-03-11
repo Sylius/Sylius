@@ -17,7 +17,7 @@ use Sylius\Component\Core\OrderProcessing\OrderRecalculator;
 use Sylius\Component\Core\OrderProcessing\OrderRecalculatorInterface;
 use Sylius\Component\Core\OrderProcessing\PricesRecalculatorInterface;
 use Sylius\Component\Core\OrderProcessing\ShippingChargesProcessorInterface;
-use Sylius\Component\Core\Taxation\OrderTaxesApplicatorInterface;
+use Sylius\Component\Core\Taxation\Processor\OrderTaxesProcessorInterface;
 use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
 
 /**
@@ -28,12 +28,12 @@ use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
 class OrderRecalculatorSpec extends ObjectBehavior
 {
     function let(
-        OrderTaxesApplicatorInterface $taxesApplicator,
+        OrderTaxesProcessorInterface $taxesProcessor,
         PricesRecalculatorInterface $pricesRecalculator,
         PromotionProcessorInterface $promotionProcessor,
         ShippingChargesProcessorInterface $shippingChargesProcessor
     ) {
-        $this->beConstructedWith($taxesApplicator, $pricesRecalculator, $promotionProcessor, $shippingChargesProcessor);
+        $this->beConstructedWith($taxesProcessor, $pricesRecalculator, $promotionProcessor, $shippingChargesProcessor);
     }
 
     function it_is_initializable()
@@ -49,13 +49,13 @@ class OrderRecalculatorSpec extends ObjectBehavior
     function it_recalculates_order_promotions_taxes_and_shipping_charges(
         PromotionProcessorInterface $promotionProcessor,
         PricesRecalculatorInterface $pricesRecalculator,
-        OrderTaxesApplicatorInterface $taxesApplicator,
+        OrderTaxesProcessorInterface $taxesProcessor,
         ShippingChargesProcessorInterface $shippingChargesProcessor,
         OrderInterface $order
     ) {
         $pricesRecalculator->recalculate($order);
         $promotionProcessor->process($order)->shouldBeCalled();
-        $taxesApplicator->apply($order)->shouldBeCalled();
+        $taxesProcessor->applyTaxes($order)->shouldBeCalled();
         $shippingChargesProcessor->applyShippingCharges($order)->shouldBeCalled();
 
         $this->recalculate($order);

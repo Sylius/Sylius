@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Core\Taxation;
+namespace spec\Sylius\Component\Core\Taxation\Processor;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
@@ -21,42 +21,34 @@ use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Provider\ZoneProviderInterface;
-use Sylius\Component\Core\Taxation\OrderItemsTaxesByZoneApplicatorInterface;
-use Sylius\Component\Core\Taxation\OrderShipmentTaxesByZoneApplicatorInterface;
-use Sylius\Component\Core\Taxation\OrderTaxesApplicatorInterface;
+use Sylius\Component\Core\Taxation\Processor\OrderTaxesProcessorInterface;
+use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Mark McKelvie <mark.mckelvie@reiss.com>
  */
-class OrderTaxesApplicatorSpec extends ObjectBehavior
+class OrderTaxesProcessorSpec extends ObjectBehavior
 {
     function let(
         ZoneProviderInterface $defaultTaxZoneProvider,
-        OrderShipmentTaxesByZoneApplicatorInterface $orderShipmentTaxesApplicator,
-        OrderItemsTaxesByZoneApplicatorInterface $orderItemsTaxesApplicator,
-        ZoneMatcherInterface $zoneMatcher
+        ZoneMatcherInterface $zoneMatcher,
+        PrioritizedServiceRegistryInterface $strategyRegistry
     ) {
-        $this->beConstructedWith(
-            $defaultTaxZoneProvider,
-            $orderShipmentTaxesApplicator,
-            $orderItemsTaxesApplicator,
-            $zoneMatcher
-        );
+        $this->beConstructedWith($defaultTaxZoneProvider, $zoneMatcher, $strategyRegistry);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Taxation\OrderTaxesApplicator');
+        $this->shouldHaveType('Sylius\Component\Core\Taxation\Processor\OrderTaxesProcessor');
     }
 
     function it_implements_Sylius_taxation_processor_interface()
     {
-        $this->shouldImplement(OrderTaxesApplicatorInterface::class);
+        $this->shouldImplement(OrderTaxesProcessorInterface::class);
     }
 
     function it_applies_taxes_for_order_items_units_and_shipment(
-        $orderShipmentTaxesApplicator,
-        $orderItemsTaxesApplicator,
         $zoneMatcher,
         AddressInterface $address,
         \Iterator $iterator,
@@ -81,9 +73,6 @@ class OrderTaxesApplicatorSpec extends ObjectBehavior
         $order->getShippingAddress()->willReturn($address);
         $zoneMatcher->match($address)->willReturn($zone);
 
-        $orderItemsTaxesApplicator->apply($order, $zone)->shouldBeCalled();
-        $orderShipmentTaxesApplicator->apply($order, $zone)->shouldBeCalled();
-
         $this->apply($order);
     }
 
@@ -101,7 +90,6 @@ class OrderTaxesApplicatorSpec extends ObjectBehavior
     function it_does_not_apply_taxes_if_there_is_no_tax_zone(
         $defaultTaxZoneProvider,
         $zoneMatcher,
-        $orderItemsTaxesApplicator,
         AddressInterface $address,
         \Iterator $iterator,
         Collection $items,
@@ -124,8 +112,6 @@ class OrderTaxesApplicatorSpec extends ObjectBehavior
         $order->getShippingAddress()->willReturn($address);
         $zoneMatcher->match($address)->willReturn(null);
         $defaultTaxZoneProvider->getZone()->willReturn(null);
-
-        $orderItemsTaxesApplicator->apply(Argument::any())->shouldNotBeCalled();
 
         $this->apply($order);
     }

@@ -40,9 +40,14 @@
         <parameter key="sylius.order_processing.prices_recalculator.class">Sylius\Component\Core\OrderProcessing\PricesRecalculator</parameter>
         <parameter key="sylius.order_processing.order_recalculator.class">Sylius\Component\Core\OrderProcessing\OrderRecalculator</parameter>
 
-        <parameter key="sylius.taxation.order_taxes_applicator.class">Sylius\Component\Core\Taxation\OrderTaxesApplicator</parameter>
-        <parameter key="sylius.taxation.order_shipment_taxes_by_zone_applicator.class">Sylius\Component\Core\Taxation\OrderShipmentTaxesByZoneApplicator</parameter>
-        <parameter key="sylius.taxation.order_items_taxes_by_zone_applicator.class">Sylius\Component\Core\Taxation\OrderItemsTaxesByZoneApplicator</parameter>
+        <parameter key="sylius.form.type.tax_calculation_strategy_choice.class">Sylius\Bundle\CoreBundle\Form\Type\Taxation\TaxCalculationStrategyChoiceType</parameter>
+
+        <parameter key="sylius.taxation.order_shipment_taxes_applicator.class">Sylius\Component\Core\Taxation\Applicator\OrderShipmentTaxesApplicator</parameter>
+        <parameter key="sylius.taxation.order_items_taxes_applicator.class">Sylius\Component\Core\Taxation\Applicator\OrderItemsTaxesApplicator</parameter>
+        <parameter key="sylius.taxation.order_item_units_taxes_applicator.class">Sylius\Component\Core\Taxation\Applicator\OrderItemUnitsTaxesApplicator</parameter>
+
+        <parameter key="sylius.taxation.order_taxes_processor.class">Sylius\Component\Core\Taxation\Processor\OrderTaxesProcessor</parameter>
+        <parameter key="sylius.taxation.tax_calculation_strategy.class">Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategy</parameter>
 
         <parameter key="sylius.listener.cart_blamer.class">Sylius\Bundle\CoreBundle\EventListener\CartBlamerListener</parameter>
         <parameter key="sylius.listener.order_currency.class">Sylius\Bundle\CoreBundle\EventListener\OrderCurrencyListener</parameter>
@@ -237,22 +242,67 @@
             <argument type="service" id="sylius.repository.payment_method" />
         </service>
 
-        <service id="sylius.taxation.order_shipment_taxes_by_zone_applicator" class="%sylius.taxation.order_shipment_taxes_by_zone_applicator.class%">
+        <service id="sylius.form.type.tax_calculation_strategy_choice" class="%sylius.form.type.tax_calculation_strategy_choice.class%">
+            <argument>%sylius.tax_calculation_strategies%</argument>
+            <tag name="form.type" alias="sylius_tax_calculation_strategy_choice" />
+        </service>
+
+        <service id="sylius.taxation.order_shipment_taxes_applicator" class="%sylius.taxation.order_shipment_taxes_applicator.class%">
             <argument type="service" id="sylius.tax_calculator" />
             <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.tax_rate_resolver" />
         </service>
-        <service id="sylius.taxation.order_items_taxes_by_zone_applicator" class="%sylius.taxation.order_items_taxes_by_zone_applicator.class%">
+        <service id="sylius.taxation.order_items_taxes_applicator" class="%sylius.taxation.order_items_taxes_applicator.class%">
             <argument type="service" id="sylius.tax_calculator" />
             <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.integer_distributor" />
             <argument type="service" id="sylius.tax_rate_resolver" />
         </service>
-        <service id="sylius.taxation.order_taxes_applicator" class="%sylius.taxation.order_taxes_applicator.class%">
+        <service id="sylius.taxation.order_item_units_taxes_applicator" class="%sylius.taxation.order_item_units_taxes_applicator.class%">
+            <argument type="service" id="sylius.tax_calculator" />
+            <argument type="service" id="sylius.factory.adjustment" />
+            <argument type="service" id="sylius.tax_rate_resolver" />
+        </service>
+
+        <service id="sylius.taxation.order_taxes_processor" class="%sylius.taxation.order_taxes_processor.class%">
             <argument type="service" id="sylius.provider.default_zone_provider" />
-            <argument type="service" id="sylius.taxation.order_shipment_taxes_by_zone_applicator" />
-            <argument type="service" id="sylius.taxation.order_items_taxes_by_zone_applicator" />
             <argument type="service" id="sylius.zone_matcher" />
+            <argument type="service" id="sylius.registry.tax_calculation_strategy" />
+        </service>
+
+        <service id="sylius.taxation.order_items_based_strategy" class="%sylius.taxation.tax_calculation_strategy.class%">
+            <argument key="type">order_items_based</argument>
+            <argument type="service">
+                <service
+                        factory-service="sylius.settings.manager"
+                        factory-method="loadSettings"
+                        class="Sylius\Bundle\SettingsBundle\Model\Settings"
+                >
+                    <argument>sylius_taxation</argument>
+                </service>
+            </argument>
+            <argument type="collection">
+                <argument type="service" id="sylius.taxation.order_items_taxes_applicator" />
+                <argument type="service" id="sylius.taxation.order_shipment_taxes_applicator" />
+            </argument>
+            <tag name="sylius.taxation.calculation_strategy" type="order_items_based" label="Order items based" />
+        </service>
+        <service id="sylius.taxation.order_item_units_based_strategy" class="%sylius.taxation.tax_calculation_strategy.class%">
+            <argument key="type">order_item_units_based</argument>
+            <argument type="service">
+                <service
+                        factory-service="sylius.settings.manager"
+                        factory-method="loadSettings"
+                        class="Sylius\Bundle\SettingsBundle\Model\Settings"
+                >
+                    <argument>sylius_taxation</argument>
+                </service>
+            </argument>
+            <argument type="collection">
+                <argument type="service" id="sylius.taxation.order_item_units_taxes_applicator" />
+                <argument type="service" id="sylius.taxation.order_shipment_taxes_applicator" />
+            </argument>
+            <tag name="sylius.taxation.calculation_strategy" type="order_item_units_based" label="Order item units based" />
         </service>
 
         <service id="sylius.order_processing.shipping_processor" class="%sylius.order_processing.shipping_processor.class%">
@@ -264,7 +314,7 @@
             <argument type="service" id="sylius.price_calculator" />
         </service>
         <service id="sylius.order_processing.order_recalculator" class="%sylius.order_processing.order_recalculator.class%">
-            <argument type="service" id="sylius.taxation.order_taxes_applicator" />
+            <argument type="service" id="sylius.taxation.order_taxes_processor" />
             <argument type="service" id="sylius.order_processing.prices_recalculator" />
             <argument type="service" id="sylius.promotion_processor" />
             <argument type="service" id="sylius.order_processing.shipping_processor" />

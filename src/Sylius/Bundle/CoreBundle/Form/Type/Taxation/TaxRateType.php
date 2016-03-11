@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type;
+namespace Sylius\Bundle\CoreBundle\Form\Type\Taxation;
 
 use Sylius\Bundle\TaxationBundle\Form\Type\TaxRateType as BaseTaxRateType;
 use Symfony\Component\Form\FormBuilderInterface;

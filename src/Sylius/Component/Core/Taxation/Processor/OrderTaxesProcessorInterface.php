@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Taxation;
+namespace Sylius\Component\Core\Taxation\Processor;
 
 use Sylius\Component\Core\Model\OrderInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OrderTaxesApplicatorInterface
+interface OrderTaxesProcessorInterface
 {
     /**
      * @param OrderInterface $order
      */
-    public function apply(OrderInterface $order);
+    public function applyTaxes(OrderInterface $order);
 }

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Core\Taxation;
+namespace spec\Sylius\Component\Core\Taxation\Applicator;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
@@ -21,7 +21,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Core\Taxation\OrderItemsTaxesByZoneApplicatorInterface;
+use Sylius\Component\Core\Taxation\Applicator\OrderTaxesApplicatorInterface;
 use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
@@ -29,8 +29,9 @@ use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mark McKelvie <mark.mckelvie@reiss.com>
  */
-class OrderItemsTaxesByZoneApplicatorSpec extends ObjectBehavior
+class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
 {
     function let(
         CalculatorInterface $calculator,
@@ -43,12 +44,12 @@ class OrderItemsTaxesByZoneApplicatorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Taxation\OrderItemsTaxesByZoneApplicator');
+        $this->shouldHaveType('Sylius\Component\Core\Taxation\Applicator\OrderItemsTaxesApplicator');
     }
 
     function it_implements_order_shipment_taxes_applicator_interface()
     {
-        $this->shouldImplement(OrderItemsTaxesByZoneApplicatorInterface::class);
+        $this->shouldImplement(OrderTaxesApplicatorInterface::class);
     }
 
     function it_applies_taxes_on_units_based_on_item_total_and_rate(
