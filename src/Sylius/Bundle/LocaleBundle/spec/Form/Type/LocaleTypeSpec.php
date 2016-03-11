@@ -41,11 +41,13 @@ class LocaleTypeSpec extends ObjectBehavior
         $builder
             ->add('code', 'locale', Argument::any())
             ->willReturn($builder)
+            ->shouldBeCalled()
         ;
 
         $builder
             ->add('enabled', 'checkbox', Argument::any())
             ->willReturn($builder)
+            ->shouldBeCalled()
         ;
 
         $this->buildForm($builder, []);

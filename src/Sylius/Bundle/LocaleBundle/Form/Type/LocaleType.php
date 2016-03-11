@@ -28,6 +28,9 @@ class LocaleType extends AbstractResourceType
             ->add('code', 'locale', [
                 'label' => 'sylius.form.locale.name',
             ])
+            ->add('enabled', 'checkbox', [
+                'label' => 'sylius.form.locale.enabled',
+            ])
         ;
     }
 
