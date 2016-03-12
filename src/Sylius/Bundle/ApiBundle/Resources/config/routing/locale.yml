@@ -1,0 +1,35 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_api_locale_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.locale:indexAction
+        _sylius:
+            serialization_groups: [Default]
+            paginate:   $limit
+            filterable: true
+            sortable:   true
+            sorting:
+                createdAt: desc
+
+sylius_api_locale_create:
+    path: /
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.locale:createAction
+
+sylius_api_locale_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.locale:deleteAction
+
+sylius_api_locale_show:
+    path: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.locale:showAction
+        _sylius:
+            serialization_groups: [Detailed]
