@@ -46,6 +46,12 @@ class CurrencyTypeSpec extends ObjectBehavior
         ;
 
         $builder
+            ->add('enabled', 'checkbox', Argument::any())
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+
+        $builder
             ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
             ->willReturn($builder)
         ;

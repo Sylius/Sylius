@@ -115,3 +115,7 @@ sylius_api_setting:
 sylius_api_locale:
     resource: @SyliusApiBundle/Resources/config/routing/locale.yml
     prefix: /locales
+
+sylius_api_currency:
+    resource: @SyliusApiBundle/Resources/config/routing/currency.yml
+    prefix: /currencies

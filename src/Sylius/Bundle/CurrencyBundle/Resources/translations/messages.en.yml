@@ -3,3 +3,4 @@ sylius:
         currency:
             exchange_rate: Exchange rate
             enabled: Enabled
+            base: Base currency
