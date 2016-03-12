@@ -19,6 +19,7 @@ use Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProvider as BaseUserProvide
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
+use Sylius\Component\User\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface as SyliusUserInterface;
 use Sylius\Component\User\Model\UserOAuthInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
@@ -135,13 +136,26 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
      */
     protected function createUserByOAuthUserResponse(UserResponseInterface $response)
     {
+        /** @var \Sylius\Component\User\Model\UserInterface $user */
         $user = $this->userFactory->createNew();
+        /** @var CustomerInterface $customer */
         $customer = $this->customerFactory->createNew();
         $user->setCustomer($customer);
 
         // set default values taken from OAuth sign-in provider account
         if (null !== $email = $response->getEmail()) {
             $customer->setEmail($email);
+        }
+
+        if (null !== $firstName = $response->getFirstName()) {
+            $customer->setFirstName($firstName);
+        }
+        elseif (null !== $firstName = $response->getRealName()) {
+            $customer->setFirstName($firstName);
+        }
+
+        if (null !== $lastName = $response->getLastName()) {
+            $customer->setLastName($lastName);
         }
 
         if (!$user->getUsername()) {
