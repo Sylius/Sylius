@@ -1,0 +1,9 @@
+{
+    "id": @integer@,
+    "code": "BE",
+    "_links": {
+        "self": {
+            "href": @string@
+        }
+    }
+}
