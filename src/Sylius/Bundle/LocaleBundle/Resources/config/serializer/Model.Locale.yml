@@ -1,0 +1,24 @@
+Sylius\Component\Locale\Model\Locale:
+    exclusion_policy: ALL
+    xml_root_name: locale
+    properties:
+        id:
+            expose: true
+            type: integer
+            xml_attribute: true
+            groups: [Default, Detailed]
+        code:
+            expose: true
+            type: string
+            groups: [Default, Detailed]
+        enabled:
+            expose: true
+            groups: [Default, Detailed]
+        createdAt:
+            expose: true
+            type: DateTime
+            groups: [Detailed]
+        updatedAt:
+            expose: true
+            type: DateTime
+            groups: [Detailed]
