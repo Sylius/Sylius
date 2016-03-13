@@ -2,7 +2,7 @@
     "page": 1,
     "limit": 10,
     "pages": 1,
-    "total": 1,
+    "total": 2,
     "_links": {
         "self": {
             "href": "\/api\/countries\/?page=1&limit=10"
@@ -23,9 +23,17 @@
                     "self": {
                         "href": @string@
                     }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "BE",
+                "_links": {
+                    "self": {
+                        "href": @string@
+                    }
+                }
             }
-
-        }
         ]
     }
 }
