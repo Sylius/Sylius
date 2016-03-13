@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sylius\Bundle\AttributeBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
@@ -35,7 +44,7 @@ class AttributeValueTranslationType extends AbstractResourceType
         $valueTranslationType = 'sylius_attribute_type_'.$options['valueTranslationType'];
         $builder
             ->add('value', $valueTranslationType, [
-                'label' => 'sylius.form.attribute.name'
+                'label' => 'sylius.form.attribute.name',
             ])
         ;
     }

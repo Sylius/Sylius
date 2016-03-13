@@ -32,22 +32,22 @@ use Symfony\Component\Form\FormEvents;
  */
 class BuildAttributeValueFormSubscriberSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $attributeRepository)
+    public function let(RepositoryInterface $attributeRepository)
     {
         $this->beConstructedWith($attributeRepository);
     }
 
-    function it_is_initialized()
+    public function it_is_initialized()
     {
         $this->shouldHaveType('Sylius\Bundle\AttributeBundle\Form\EventSubscriber\BuildAttributeValueFormSubscriber');
     }
 
-    function it_subscribes_to_pre_set_data_event()
+    public function it_subscribes_to_pre_set_data_event()
     {
         self::getSubscribedEvents()->shouldReturn([FormEvents::PRE_SET_DATA => 'preSetData', FormEvents::PRE_SUBMIT => 'preSubmit']);
     }
 
-    function it_does_not_add_any_field_when_attribute_is_new_or_empty(FormEvent $event, Form $form)
+    public function it_does_not_add_any_field_when_attribute_is_new_or_empty(FormEvent $event, Form $form)
     {
         $event->getData()->willReturn(null);
         $event->getForm()->willReturn($form);
@@ -55,7 +55,7 @@ class BuildAttributeValueFormSubscriberSpec extends ObjectBehavior
         $form->add(Argument::any())->shouldNotBeCalled();
     }
 
-    function it_adds_a_value_form_field_with_correct_type_based_on_the_attribute(
+    public function it_adds_a_value_form_field_with_correct_type_based_on_the_attribute(
         AttributeInterface $attribute,
         AttributeValueInterface $attributeValue,
         Form $form,
@@ -75,7 +75,7 @@ class BuildAttributeValueFormSubscriberSpec extends ObjectBehavior
         $this->preSetData($event);
     }
 
-    function it_throws_an_exception_on_pre_submit_event_when_attribute_id_is_undefined(FormEvent $event)
+    public function it_throws_an_exception_on_pre_submit_event_when_attribute_id_is_undefined(FormEvent $event)
     {
         $event->getData()->willReturn([]);
 
@@ -85,7 +85,7 @@ class BuildAttributeValueFormSubscriberSpec extends ObjectBehavior
         ;
     }
 
-    function it_adds_a_value_form_field_with_correct_type_based_on_the_attribute_id(
+    public function it_adds_a_value_form_field_with_correct_type_based_on_the_attribute_id(
         $attributeRepository,
         AttributeInterface $attribute,
         Form $form,

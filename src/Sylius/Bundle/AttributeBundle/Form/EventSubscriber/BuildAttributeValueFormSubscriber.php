@@ -95,17 +95,16 @@ class BuildAttributeValueFormSubscriber implements EventSubscriberInterface
     {
         $options = ['auto_initialize' => false, 'label' => $attribute->getName()];
 
-        if($attribute->isValueTranslatable()) {
+        if ($attribute->isValueTranslatable()) {
             $form->add('translations', 'a2lix_translationsForms', [
                 'form_type' => sprintf('sylius_%s_attribute_value_translation', $this->subjectName),
                 'label' => 'sylius.form.value_translation.presentation',
                 'form_options' => [
-                    'valueTranslationType' => $attribute->getType()
+                    'valueTranslationType' => $attribute->getType(),
                 ],
             ]);
         } else {
             $form->add('value', 'sylius_attribute_type_'.$attribute->getType(), $options);
         }
-
     }
 }

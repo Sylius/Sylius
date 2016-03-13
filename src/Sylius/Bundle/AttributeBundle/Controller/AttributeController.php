@@ -13,7 +13,6 @@ namespace Sylius\Bundle\AttributeBundle\Controller;
 
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -77,18 +76,17 @@ class AttributeController extends ResourceController
 
         $attributes = $attributeRepository->findBy(['id' => $choices]);
         foreach ($attributes as $attribute) {
-
-            if($attribute->isValueTranslatable()) {
+            if ($attribute->isValueTranslatable()) {
                 $count = $request->query->get('count');
-                $subject = str_replace('_attribute','',$this->metadata->getName());
+                $subject = str_replace('_attribute', '', $this->metadata->getName());
                 $form = $this->get('form.factory')->createNamed('translations', 'a2lix_translationsForms', null, [
                     'form_type' => sprintf('sylius_%s_attribute_value_translation', 'product'),
                     'label' => $attribute->getName(),
                     'form_options' => [
                         'attr' => [
-                            'data-name' => 'sylius_'.$subject.'[attributes]['.$count.'][translations]'
+                            'data-name' => 'sylius_'.$subject.'[attributes]['.$count.'][translations]',
                         ],
-                        'valueTranslationType' => $attribute->getType()
+                        'valueTranslationType' => $attribute->getType(),
                     ],
                 ]);
             } else {
