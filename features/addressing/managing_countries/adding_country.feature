@@ -12,5 +12,5 @@ Feature: Adding a new country
         Given I want to add a new country
         When I choose "France"
         And I add it
-        Then I should be notified about success
+        Then I should be notified about successful creation
         And country "France" should appear in the store

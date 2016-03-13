@@ -8,9 +8,11 @@ default:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.transform.country
+                - sylius.behat.context.transform.shared_storage
 
-                - sylius.behat.context.setup.security
+                - sylius.behat.context.setup.admin.managing_countries
                 - sylius.behat.context.setup.geographical
+                - sylius.behat.context.setup.security
 
                 - sylius.behat.context.ui.admin.managing_countries
             filters:

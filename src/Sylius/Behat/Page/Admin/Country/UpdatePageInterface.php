@@ -9,19 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Page\Admin\Crud;
+namespace Sylius\Behat\Page\Admin\Country;
 
-use Sylius\Behat\Page\PageInterface;
+use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-interface IndexPageInterface extends PageInterface
+interface UpdatePageInterface extends BaseUpdatePageInterface
 {
-    /**
-     * @param array $parameters
-     *
-     * @return bool
-     */
-    public function isResourceOnPage(array $parameters);
+    public function enable();
+    public function disable();
 }

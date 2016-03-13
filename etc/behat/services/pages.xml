@@ -32,7 +32,8 @@
         <parameter key="sylius.behat.page.admin.channel.update.class">Sylius\Behat\Page\Admin\Channel\UpdatePage</parameter>
         <parameter key="sylius.behat.page.admin.channel.index.class">Sylius\Behat\Page\Admin\Channel\IndexPage</parameter>
         <parameter key="sylius.behat.page.admin.country.create.class">Sylius\Behat\Page\Admin\Country\CreatePage</parameter>
-        <parameter key="sylius.behat.page.admin.country.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
+        <parameter key="sylius.behat.page.admin.country.index.class">Sylius\Behat\Page\Admin\Country\IndexPage</parameter>
+        <parameter key="sylius.behat.page.admin.country.update.class">Sylius\Behat\Page\Admin\Country\UpdatePage</parameter>
         <parameter key="sylius.behat.page.admin.customer.show.class">Sylius\Behat\Page\Admin\Customer\ShowPage</parameter>
         <parameter key="sylius.behat.page.admin.locale.create.class">Sylius\Behat\Page\Admin\Locale\CreatePage</parameter>
         <parameter key="sylius.behat.page.admin.locale.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
@@ -57,6 +58,9 @@
             <argument type="string">country</argument>
         </service>
         <service id="sylius.behat.page.admin.country.create" class="%sylius.behat.page.admin.country.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
+            <argument type="string">country</argument>
+        </service>
+        <service id="sylius.behat.page.admin.country.update" class="%sylius.behat.page.admin.country.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
             <argument type="string">country</argument>
         </service>
         <service id="sylius.behat.page.admin.locale.index" class="%sylius.behat.page.admin.locale.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">

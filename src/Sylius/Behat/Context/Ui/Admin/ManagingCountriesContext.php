@@ -14,7 +14,9 @@ namespace Sylius\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Country\CreatePageInterface;
-use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
+use Sylius\Behat\Page\Admin\Country\IndexPageInterface;
+use Sylius\Behat\Page\Admin\Country\UpdatePageInterface;
+use Sylius\Behat\Service\Accessor\NotificationAccessorInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 
 /**
@@ -22,6 +24,8 @@ use Sylius\Component\Addressing\Model\CountryInterface;
  */
 final class ManagingCountriesContext implements Context
 {
+    const RESOURCE_NAME = 'country';
+
     /**
      * @var IndexPageInterface
      */
@@ -33,15 +37,31 @@ final class ManagingCountriesContext implements Context
     private $countryCreatePage;
 
     /**
+     * @var UpdatePageInterface
+     */
+    private $countryUpdatePage;
+
+    /**
+     * @var NotificationAccessorInterface
+     */
+    private $notificationAccessor;
+
+    /**
      * @param IndexPageInterface $countryIndexPage
      * @param CreatePageInterface $countryCreatePage
+     * @param UpdatePageInterface $countryUpdatePage
+     * @param NotificationAccessorInterface $notificationAccessor
      */
     public function __construct(
         IndexPageInterface $countryIndexPage,
-        CreatePageInterface $countryCreatePage
+        CreatePageInterface $countryCreatePage,
+        UpdatePageInterface $countryUpdatePage,
+        NotificationAccessorInterface $notificationAccessor
     ) {
         $this->countryIndexPage = $countryIndexPage;
         $this->countryCreatePage = $countryCreatePage;
+        $this->countryUpdatePage = $countryUpdatePage;
+        $this->notificationAccessor = $notificationAccessor;
     }
 
     /**
@@ -69,12 +89,21 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Then I should be notified about success
+     * @Then /^I should be notified about successful creation$/
      */
-    public function iShouldBeNotifiedAboutSuccess()
+    public function iShouldBeNotifiedAboutSuccessfulCreation()
     {
-        expect($this->countryIndexPage->hasSuccessMessage())->toBe(true);
-        expect($this->countryIndexPage->isSuccessfullyCreated())->toBe(true);
+        expect($this->notificationAccessor->hasSuccessMessage())->toBe(true);
+        expect($this->notificationAccessor->isSuccessfullyCreatedFor(self::RESOURCE_NAME))->toBe(true);
+    }
+
+    /**
+     * @Then /^I should be notified about successful edition$/
+     */
+    public function iShouldBeNotifiedAboutSuccessfulEdition()
+    {
+        expect($this->notificationAccessor->hasSuccessMessage())->toBe(true);
+        expect($this->notificationAccessor->isSuccessfullyUpdatedFor(self::RESOURCE_NAME))->toBe(true);
     }
 
     /**
@@ -83,6 +112,54 @@ final class ManagingCountriesContext implements Context
     public function countryWithNameShouldAppearInTheStore(CountryInterface $country)
     {
         expect($this->countryIndexPage->isResourceOnPage(['code' => $country->getCode()]))->toBe(true);
+    }
+
+    /**
+     * @Given /^I want to edit (this country)$/
+     */
+    public function iWantToEditThisCountry(CountryInterface $country)
+    {
+        $this->countryUpdatePage->open(['id' => $country->getId()]);
+    }
+
+    /**
+     * @When /^I disable it$/
+     */
+    public function iDisableIt()
+    {
+        $this->countryUpdatePage->disable();
+    }
+
+    /**
+     * @Given /^I save my changes$/
+     */
+    public function iSaveMyChanges()
+    {
+        $this->countryUpdatePage->saveChanges();
+    }
+
+    /**
+     * @Given /^(this country) should be disabled$/
+     */
+    public function thisCountryShouldBeDisabled(CountryInterface $country)
+    {
+        expect($this->countryIndexPage->isCountryDisabled($country))->toBe(true);
+    }
+
+    /**
+     * @When /^I enable it$/
+     */
+    public function iEnableIt()
+    {
+        $this->countryUpdatePage->enable();
+    }
+
+    /**
+     * @Given /^(this country) should be enabled$/
+     */
+    public function thisCountryShouldBeEnabled(CountryInterface $country)
+    {
+        expect($this->countryIndexPage->isCountryEnabled($country))->toBe(true);
     }
 
     /**

@@ -38,6 +38,7 @@ class CountryContextSpec extends ObjectBehavior
     {
         $this->shouldImplement(Context::class);
     }
+
     function it_gets_country_based_on_given_country_name(
         CountryNameConverterInterface $countryNameConverter,
         RepositoryInterface $countryRepository,

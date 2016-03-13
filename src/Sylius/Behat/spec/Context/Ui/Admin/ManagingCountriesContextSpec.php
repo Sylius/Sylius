@@ -15,19 +15,30 @@ use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
 use PhpSpec\Exception\Example\NotEqualException;
 use PhpSpec\ObjectBehavior;
+use Sylius\Behat\Context\Ui\Admin\ManagingCountriesContext;
 use Sylius\Behat\Page\Admin\Country\CreatePageInterface;
-use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
+use Sylius\Behat\Page\Admin\Country\IndexPageInterface;
+use Sylius\Behat\Page\Admin\Country\UpdatePageInterface;
+use Sylius\Behat\Service\Accessor\NotificationAccessorInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 class ManagingCountriesContextSpec extends ObjectBehavior
 {
-    function let(IndexPageInterface $countryIndexPage, CreatePageInterface $countryCreatePage)
-    {
-        $this->beConstructedWith($countryIndexPage, $countryCreatePage);
+    function let(
+        IndexPageInterface $countryIndexPage,
+        CreatePageInterface $countryCreatePage,
+        UpdatePageInterface $countryUpdatePage,
+        NotificationAccessorInterface $notificationAccessor
+    ) {
+        $this->beConstructedWith(
+            $countryIndexPage,
+            $countryCreatePage,
+            $countryUpdatePage,
+            $notificationAccessor
+        );
     }
 
     function it_is_initializable()
@@ -40,7 +51,7 @@ class ManagingCountriesContextSpec extends ObjectBehavior
         $this->shouldImplement(Context::class);
     }
 
-    function it_opens_country_creation_page(CreatePageInterface $countryCreatePage)
+    function it_opens_country_create_page(CreatePageInterface $countryCreatePage)
     {
         $countryCreatePage->open()->shouldBeCalled();
 
@@ -61,28 +72,52 @@ class ManagingCountriesContextSpec extends ObjectBehavior
         $this->iAddIt();
     }
 
-    function it_asserts_that_successful_message_appears(IndexPageInterface $countryIndexPage)
+    function it_asserts_that_successful_creation_message_appears(NotificationAccessorInterface $notificationAccessor)
     {
-        $countryIndexPage->hasSuccessMessage()->willReturn(true);
-        $countryIndexPage->isSuccessfullyCreated()->willReturn(true);
+        $notificationAccessor->hasSuccessMessage()->willReturn(true);
+        $notificationAccessor->isSuccessfullyCreatedFor(ManagingCountriesContext::RESOURCE_NAME)->willReturn(true);
 
-        $this->iShouldBeNotifiedAboutSuccess();
+        $this->iShouldBeNotifiedAboutSuccessfulCreation();
     }
 
-    function it_throws_not_equal_exception_if_message_is_not_successful(IndexPageInterface $countryIndexPage)
+    function it_asserts_that_successful_edition_message_appears(NotificationAccessorInterface $notificationAccessor)
     {
-        $countryIndexPage->hasSuccessMessage()->willReturn(false);
-        $countryIndexPage->isSuccessfullyCreated()->willReturn(true);
+        $notificationAccessor->hasSuccessMessage()->willReturn(true);
+        $notificationAccessor->isSuccessfullyUpdatedFor(ManagingCountriesContext::RESOURCE_NAME)->willReturn(true);
 
-        $this->shouldThrow(NotEqualException::class)->during('iShouldBeNotifiedAboutSuccess');
+        $this->iShouldBeNotifiedAboutSuccessfulEdition();
     }
 
-    function it_throws_not_equal_exception_if_successful_message_does_not_appear(IndexPageInterface $countryIndexPage)
+    function it_throws_not_equal_exception_if_creation_message_is_not_successful(NotificationAccessorInterface $notificationAccessor)
     {
-        $countryIndexPage->hasSuccessMessage()->willReturn(true);
-        $countryIndexPage->isSuccessfullyCreated()->willReturn(false);
+        $notificationAccessor->hasSuccessMessage()->willReturn(false);
+        $notificationAccessor->isSuccessfullyCreatedFor(ManagingCountriesContext::RESOURCE_NAME)->willReturn(true);
 
-        $this->shouldThrow(NotEqualException::class)->during('iShouldBeNotifiedAboutSuccess');
+        $this->shouldThrow(NotEqualException::class)->during('iShouldBeNotifiedAboutSuccessfulCreation');
+    }
+
+    function it_throws_not_equal_exception_if_edition_message_is_not_successful(NotificationAccessorInterface $notificationAccessor)
+    {
+        $notificationAccessor->hasSuccessMessage()->willReturn(false);
+        $notificationAccessor->isSuccessfullyUpdatedFor(ManagingCountriesContext::RESOURCE_NAME)->willReturn(true);
+
+        $this->shouldThrow(NotEqualException::class)->during('iShouldBeNotifiedAboutSuccessfulEdition');
+    }
+
+    function it_throws_not_equal_exception_if_successful_creation_message_does_not_appear(NotificationAccessorInterface $notificationAccessor)
+    {
+        $notificationAccessor->hasSuccessMessage()->willReturn(true);
+        $notificationAccessor->isSuccessfullyCreatedFor(ManagingCountriesContext::RESOURCE_NAME)->willReturn(false);
+
+        $this->shouldThrow(NotEqualException::class)->during('iShouldBeNotifiedAboutSuccessfulCreation');
+    }
+
+    function it_throws_not_equal_exception_if_successful_edition_message_does_not_appear(NotificationAccessorInterface $notificationAccessor)
+    {
+        $notificationAccessor->hasSuccessMessage()->willReturn(true);
+        $notificationAccessor->isSuccessfullyUpdatedFor(ManagingCountriesContext::RESOURCE_NAME)->willReturn(false);
+
+        $this->shouldThrow(NotEqualException::class)->during('iShouldBeNotifiedAboutSuccessfulEdition');
     }
 
     function it_asserts_that_country_appears_in_the_store(IndexPageInterface $countryIndexPage, CountryInterface $country)
@@ -103,6 +138,56 @@ class ManagingCountriesContextSpec extends ObjectBehavior
         $this->shouldThrow(NotEqualException::class)->during('countryWithNameShouldAppearInTheStore', [$country]);
     }
 
+    function it_opens_country_update_page(UpdatePageInterface $countryUpdatePage, CountryInterface $country)
+    {
+        $country->getId()->willReturn(10);
+        $countryUpdatePage->open(['id' => 10])->shouldBeCalled();
+
+        $this->iWantToEditThisCountry($country);
+    }
+
+    function it_disables_country(UpdatePageInterface $countryUpdatePage)
+    {
+        $countryUpdatePage->disable()->shouldBeCalled();
+
+        $this->iDisableIt();
+    }
+
+    function it_enables_country(UpdatePageInterface $countryUpdatePage)
+    {
+        $countryUpdatePage->enable()->shouldBeCalled();
+
+        $this->iEnableIt();
+    }
+
+    function it_saves_changes(UpdatePageInterface $countryUpdatePage)
+    {
+        $countryUpdatePage->saveChanges()->shouldBeCalled();
+
+        $this->iSaveMyChanges();
+    }
+
+    function it_asserts_that_country_is_disabled(IndexPageInterface $countryIndexPage, CountryInterface $country)
+    {
+        $countryIndexPage->isCountryDisabled($country)->willReturn(true);
+        $this->thisCountryShouldBeDisabled($country);
+    }
+
+    function it_asserts_that_country_is_enabled(IndexPageInterface $countryIndexPage, CountryInterface $country)
+    {
+        $countryIndexPage->isCountryEnabled($country)->willReturn(true);
+        $this->thisCountryShouldBeEnabled($country);
+    }
+
+    function it_throws_not_equal_exception_if_country_has_not_proper_status(IndexPageInterface $countryIndexPage, CountryInterface $country)
+    {
+        $countryIndexPage->isCountryDisabled($country)->willReturn(false);
+        $countryIndexPage->isCountryEnabled($country)->willReturn(false);
+
+        $this->shouldThrow(NotEqualException::class)->during('thisCountryShouldBeEnabled', [$country]);
+        $this->shouldThrow(NotEqualException::class)->during('thisCountryShouldBeDisabled', [$country]);
+    }
+
     function it_asserts_that_country_name_can_not_be_choosen_again(CreatePageInterface $countryCreatePage)
     {
         $countryCreatePage->chooseName('France')->willThrow(ElementNotFoundException::class);
@@ -110,7 +195,7 @@ class ManagingCountriesContextSpec extends ObjectBehavior
         $this->iShouldNotBeAbleToChoose('France');
     }
 
-    function it_thorws_exception_if_country_name_can_be_choosen_again(CreatePageInterface $countryCreatePage)
+    function it_throws_exception_if_country_name_can_be_chosen_again(CreatePageInterface $countryCreatePage)
     {
         $countryCreatePage->chooseName('France')->willThrow(\Exception::class);
 

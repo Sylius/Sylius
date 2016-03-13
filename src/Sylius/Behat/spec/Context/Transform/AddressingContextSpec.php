@@ -57,4 +57,11 @@ class AddressingContextSpec extends ObjectBehavior
 
         $this->createNewAddress('France')->shouldReturn($address);
     }
+
+    function it_throws_invalid_argument_exception_when_cannot_convert_name_to_code(CountryNameConverterInterface $countryNameConverter)
+    {
+        $countryNameConverter->convertToCode('France')->willThrow(\InvalidArgumentException::class);
+
+        $this->shouldThrow(\InvalidArgumentException::class)->during('createNewAddress', ['France']);
+    }
 }

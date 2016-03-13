@@ -7,20 +7,20 @@ Feature: Editing country
     Background:
         Given I am logged in as administrator
 
-    @todo
+    @ui
     Scenario: Disabling country
         Given the store has "France" country enabled
         And I want to edit this country
-        When I disable  it
+        When I disable it
         And I save my changes
-        Then I should be notified about success
+        Then I should be notified about successful edition
         And this country should be disabled
 
-    @todo
+    @ui
     Scenario: Enabling country
         Given the store has "France" country disabled
         And I want to edit this country
-        When I enable  it
+        When I enable it
         And I save my changes
-        Then I should be notified about success
+        Then I should be notified about successful edition
         And this country should be enabled

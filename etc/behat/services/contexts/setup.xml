@@ -13,6 +13,7 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
+        <parameter key="sylius.behat.context.setup.admin.managing_countries.class">Sylius\Behat\Context\Setup\Admin\ManagingCountriesContext</parameter>
         <parameter key="sylius.behat.context.setup.channel.class">Sylius\Behat\Context\Setup\ChannelContext</parameter>
         <parameter key="sylius.behat.context.setup.currency.class">Sylius\Behat\Context\Setup\CurrencyContext</parameter>
         <parameter key="sylius.behat.context.setup.geographical.class">Sylius\Behat\Context\Setup\GeographicalContext</parameter>
@@ -31,6 +32,14 @@
     </parameters>
 
     <services>
+        <service id="sylius.behat.context.setup.admin.managing_countries" class="%sylius.behat.context.setup.admin.managing_countries.class%" scope="scenario">
+            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
+            <argument type="service" id="sylius.repository.country" container="symfony" />
+            <argument type="service" id="sylius.converter.country_name" container="symfony" />
+            <argument type="service" id="sylius.factory.country" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
         <service id="sylius.behat.context.setup.channel" class="%sylius.behat.context.setup.channel.class%" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.behat.factory.default_france_channel" container="symfony" />
