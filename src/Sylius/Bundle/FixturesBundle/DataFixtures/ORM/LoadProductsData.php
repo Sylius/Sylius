@@ -107,9 +107,16 @@ class LoadProductsData extends DataFixture
         $randomCollection = sprintf('Symfony2 %s %s', $this->faker->randomElement(['Summer', 'Winter', 'Spring', 'Autumn']), rand(1995, 2012));
         $this->addAttribute($product, 'T-Shirt collection', $randomCollection);
 
-        // T-Shirt material.
+        // T-Shirt material with Spanish translations.
         $randomMaterial = $this->faker->randomElement(['Polyester', 'Wool', 'Polyester 10% / Wool 90%', 'Potato 100%']);
-        $this->addAttribute($product, 'T-Shirt material', $randomMaterial);
+        $esMaterialTranslations = [
+            'Polyester' => 'Poliéster',
+            'Wool' => 'Lana',
+            'Polyester 10% / Wool 90%' => 'Poliéster 10% / Lana 90%',
+            'Potato 100%' => 'Patata 100%'
+        ];
+        $randomMaterialTranslations = ['es_ES' => $esMaterialTranslations[$randomMaterial]];
+        $this->addAttribute($product, 'T-Shirt material', $randomMaterial, $randomMaterialTranslations);
 
         $product->addOption($this->getReference('Sylius.Option.t_shirt_size'));
         $product->addOption($this->getReference('Sylius.Option.t_shirt_color'));
@@ -292,14 +299,23 @@ class LoadProductsData extends DataFixture
      * @param ProductInterface $product
      * @param string           $name
      * @param string           $value
+     * @param array            $translations
      */
-    protected function addAttribute(ProductInterface $product, $name, $value)
+    protected function addAttribute(ProductInterface $product, $name, $value, $translations = [])
     {
         /* @var $attribute AttributeValueInterface */
         $attribute = $this->getProductAttributeValueFactory()->createNew();
         $attribute->setAttribute($this->getReference('Sylius.Attribute.'.$name));
         $attribute->setProduct($product);
         $attribute->setValue($value);
+
+        foreach ($translations as $locale => $translation) {
+            $attribute->setCurrentLocale($locale);
+            $attribute->setFallbackLocale($locale);
+            $attribute->setValue($translation);
+        }
+
+        $attribute->setCurrentLocale($this->defaultLocale);
 
         $product->addAttribute($attribute);
     }
