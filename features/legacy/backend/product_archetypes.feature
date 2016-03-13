@@ -85,9 +85,8 @@ Feature: Product archetypes
             | Description | Interesting description |
             | Price       | 59.99                   |
         And I go to "Attributes" tab
-        And I fill in the following:
-            | T-Shirt fabric     | Cotton 100%          |
-            | T-Shirt collection | Champions League '11 |
+        And I fill in "T-Shirt fabric" translation "en_US" with "Cotton 100%"
+        And I fill in "T-Shirt collection" translation "en_US" with "Champions League '11"
         And I press "Create"
         Then I should be on the page of product "Manchester United tee"
         And I should see "Product has been successfully created"

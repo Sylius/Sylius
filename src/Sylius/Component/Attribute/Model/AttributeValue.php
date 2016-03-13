@@ -39,16 +39,6 @@ class AttributeValue implements AttributeValueInterface
     protected $attribute;
 
     /**
-     * @var mixed
-     */
-    protected $value;
-
-    /**
-     * @var string
-     */
-    protected $text;
-
-    /**
      * @var bool
      */
     protected $boolean;
@@ -142,8 +132,8 @@ class AttributeValue implements AttributeValueInterface
     {
         $this->assertAttributeIsSet();
 
-        $property = $this->attribute->getStorageType();
-        $this->$property = $value;
+        $setter = 'set'.ucfirst($this->attribute->getStorageType());
+        $this->$setter($value);
     }
 
     /**

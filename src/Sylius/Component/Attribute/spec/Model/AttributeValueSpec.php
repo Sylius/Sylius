@@ -84,8 +84,8 @@ class AttributeValueSpec extends ObjectBehavior
         $attribute->getStorageType()->willReturn('text');
         $this->setAttribute($attribute);
 
-        $this->translate()->setValue('XXL');
-        $this->translate()->getValue()->shouldReturn('XXL');
+        $this->setValue('XXL');
+        $this->getValue()->shouldReturn('XXL');
     }
 
     function it_throws_exception_when_trying_to_get_code_without_attribute_defined()
