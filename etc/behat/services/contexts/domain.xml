@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="sylius.behat.context.domain.order.class">Sylius\Behat\Context\Domain\OrderContext</parameter>
+        <parameter key="sylius.behat.context.domain.payment.class">Sylius\Behat\Context\Domain\PaymentContext</parameter>
+        <parameter key="sylius.behat.context.domain.shipment.class">Sylius\Behat\Context\Domain\ShippingContext</parameter>
+        <parameter key="sylius.behat.context.domain.product.class">Sylius\Behat\Context\Domain\ProductContext</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.behat.context.domain.order" class="%sylius.behat.context.domain.order.class%" scope="scenario">
+            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
+            <argument type="service" id="sylius.repository.order" container="symfony"/>
+            <argument type="service" id="sylius.repository.order_item" container="symfony"/>
+            <argument type="service" id="sylius.repository.address" container="symfony"/>
+            <argument type="service" id="sylius.repository.adjustment" container="symfony"/>
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.domain.payment" class="%sylius.behat.context.domain.payment.class%" scope="scenario">
+            <argument type="service" id="sylius.repository.payment" container="symfony"/>
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.domain.shipment" class="%sylius.behat.context.domain.shipment.class%" scope="scenario">
+            <argument type="service" id="sylius.repository.shipment" container="symfony"/>
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.domain.product" class="%sylius.behat.context.domain.product.class%" scope="scenario">
+            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
+            <argument type="service" id="sylius.repository.product_variant" container="symfony"/>
+            <tag name="sylius.behat.context" />
+        </service>
+    </services>
+</container>

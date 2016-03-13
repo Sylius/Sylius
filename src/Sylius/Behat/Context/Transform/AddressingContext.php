@@ -34,13 +34,23 @@ final class AddressingContext implements Context
     private $countryNameConverter;
 
     /**
+     * @var RepositoryInterface
+     */
+    private $countryRepository;
+
+    /**
      * @param FactoryInterface $addressFactory
      * @param CountryNameConverterInterface $countryNameConverter
+     * @param RepositoryInterface $countryRepository
      */
-    public function __construct(FactoryInterface $addressFactory, CountryNameConverterInterface $countryNameConverter)
-    {
+    public function __construct(
+        FactoryInterface $addressFactory,
+        CountryNameConverterInterface $countryNameConverter,
+        RepositoryInterface $countryRepository
+    ) {
         $this->addressFactory = $addressFactory;
         $this->countryNameConverter = $countryNameConverter;
+        $this->countryRepository = $countryRepository;
     }
 
     /**
@@ -51,6 +61,21 @@ final class AddressingContext implements Context
         $countryCode = $this->countryNameConverter->convertToCode($countryName);
 
         return $this->createAddress($countryCode);
+    }
+
+    /**
+     * @Transform /^country "([^"]+)"$/
+     */
+    public function getCountryByName($countryName)
+    {
+        $countryCode = $this->countryNameConverter->convertToCode($countryName);
+        $country = $this->countryRepository->findOneBy(['code' => $countryCode]);
+
+        if (null === $country) {
+            throw new \InvalidArgumentException(sprintf('Country with name %s does not exist', $countryName));
+        }
+
+        return $country;
     }
 
     /**

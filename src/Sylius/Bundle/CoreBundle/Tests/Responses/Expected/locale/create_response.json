@@ -1,0 +1,7 @@
+{
+    "id": @integer@,
+    "code": "es",
+    "created_at": "@string@.isDateTime()",
+    "updated_at": "@string@.isDateTime()",
+    "enabled": true
+}

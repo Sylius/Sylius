@@ -1,0 +1,13 @@
+{
+    "code": 400,
+    "message": "Validation Failed",
+    "errors": {
+        "children": {
+            "code": {
+                "errors": [
+                    "Please enter locale code."
+                ]
+            }
+        }
+    }
+}

@@ -1,0 +1,39 @@
+{
+    "page": 1,
+    "limit": 10,
+    "pages": 1,
+    "total": 2,
+    "_links": {
+        "self": {
+            "href": "\/api\/countries\/?page=1&limit=10"
+        },
+        "first": {
+            "href": "\/api\/countries\/?page=1&limit=10"
+        },
+        "last": {
+            "href": "\/api\/countries\/?page=1&limit=10"
+        }
+    },
+    "_embedded": {
+        "items": [
+            {
+                "id": @integer@,
+                "code": "NL",
+                "_links": {
+                    "self": {
+                        "href": @string@
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "BE",
+                "_links": {
+                    "self": {
+                        "href": @string@
+                    }
+                }
+            }
+        ]
+    }
+}

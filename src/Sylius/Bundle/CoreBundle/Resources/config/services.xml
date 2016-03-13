@@ -23,7 +23,7 @@
 
         <parameter key="sylius.context.currency.class">Sylius\Bundle\CoreBundle\Context\CurrencyContext</parameter>
         <parameter key="sylius.context.channel.cached.class">Sylius\Component\Channel\Context\CachedPerRequestChannelContext</parameter>
-        <parameter key="sylius.theme.context.channel_based.class">Sylius\Component\Core\Theme\ChannelBasedThemeContext</parameter>
+        <parameter key="sylius.theme.context.channel_based.class">Sylius\Bundle\CoreBundle\Theme\ChannelBasedThemeContext</parameter>
 
         <parameter key="sylius.checkout_scenario.class">Sylius\Bundle\CoreBundle\Checkout\CheckoutProcessScenario</parameter>
         <parameter key="sylius.checkout_step.security.class">Sylius\Bundle\CoreBundle\Checkout\Step\SecurityStep</parameter>

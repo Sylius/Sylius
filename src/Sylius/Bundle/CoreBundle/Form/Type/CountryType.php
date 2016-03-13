@@ -78,6 +78,9 @@ class CountryType extends AbstractResourceType
                 'by_reference' => false,
                 'button_add_label' => 'sylius.form.country.add_province',
             ])
+            ->add('enabled', 'checkbox', [
+                'label' => 'sylius.form.country.enabled',
+            ])
         ;
     }
 

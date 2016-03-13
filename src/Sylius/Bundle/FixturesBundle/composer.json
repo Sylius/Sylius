@@ -7,22 +7,22 @@
     "license": "MIT",
     "authors": [
         {
-            "name":     "Paweł Jędrzejewski",
+            "name": "Paweł Jędrzejewski",
             "homepage": "http://pjedrzejewski.com"
         },
         {
-            "name":     "Sylius project",
+            "name": "Sylius project",
             "homepage": "http://sylius.org"
         },
         {
-            "name":     "Community contributions",
+            "name": "Community contributions",
             "homepage": "http://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
         "php": "^5.5.9|^7.0",
 
-        "sylius/core-bundle": "0.18.*"
+        "sylius/core-bundle": "^0.18"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "2.2.*",
@@ -35,6 +35,13 @@
         "psr-4": { "Sylius\\Bundle\\FixturesBundle\\": "" }
     },
     "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../*/*"
+        }
+    ],
     "extra": {
         "branch-alias": {
             "dev-master": "0.18-dev"

@@ -111,3 +111,7 @@ sylius_api_customer:
 sylius_api_setting:
     resource: @SyliusApiBundle/Resources/config/routing/setting.yml
     prefix: /settings
+
+sylius_api_locale:
+    resource: @SyliusApiBundle/Resources/config/routing/locale.yml
+    prefix: /locales

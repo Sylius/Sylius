@@ -22,7 +22,7 @@
     "require": {
         "php": "^5.5.9|^7.0",
 
-        "sylius/resource": "0.18.*",
+        "sylius/resource": "^0.18",
         "symfony/property-access": "^2.7",
         "symfony/options-resolver": "^2.7",
         "twig/twig": "~1.11"
@@ -41,6 +41,13 @@
         "psr-4": { "Sylius\\Component\\Metadata\\spec\\": "spec/" }
     },
     "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../*/*"
+        }
+    ],
     "extra": {
         "branch-alias": {
             "dev-master": "0.18-dev"

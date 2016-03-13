@@ -1,0 +1,10 @@
+{
+    "id": @integer@,
+    "code": "NL",
+    "_links": {
+        "self": {
+            "href": @string@
+        }
+    }
+
+}

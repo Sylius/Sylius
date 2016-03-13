@@ -24,7 +24,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class SyliusResourceExtension extends Extension implements PrependExtensionInterface
+class SyliusResourceExtension extends Extension
 {
     /**
      * {@inheritdoc}
@@ -48,13 +48,16 @@ class SyliusResourceExtension extends Extension implements PrependExtensionInter
         }
 
         $bundles = $container->getParameter('kernel.bundles');
-
         if (array_key_exists('SyliusGridBundle', $bundles)) {
             $loader->load('grid.xml');
         }
 
-        $container->setParameter('sylius.translation.default_locale', $config['default_locale']);
-        $container->setAlias('sylius.translation.locale_provider', $config['locale_provider']);
+        if ($config['translation']['enabled']) {
+            $loader->load('translation.xml');
+
+            $container->setParameter('sylius.translation.default_locale', $config['translation']['default_locale']);
+            $container->setAlias('sylius.translation.locale_provider', $config['translation']['locale_provider']);
+        }
 
         foreach ($config['resources'] as $alias => $resourceConfig) {
             $metadata = Metadata::fromAliasAndConfiguration($alias, $resourceConfig);
@@ -80,20 +83,6 @@ class SyliusResourceExtension extends Extension implements PrependExtensionInter
         }
 
         $container->setParameter('sylius.resource.settings', $config['settings']);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function prepend(ContainerBuilder $container)
-    {
-        $container->setAlias('sylius.resource_controller.authorization_checker', 'sylius.resource_controller.authorization_checker.disabled');
-
-        if ($container->hasExtension('sylius_rbac')) {
-            $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-            $loader->load('rbac.xml');
-
-            $container->setAlias('sylius.resource_controller.authorization_checker', 'sylius.resource_controller.authorization_checker.rbac');
-        }
+        $container->setAlias('sylius.resource_controller.authorization_checker', $config['authorization_checker']);
     }
 }

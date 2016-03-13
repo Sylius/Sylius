@@ -1,0 +1,28 @@
+sylius_grid:
+    grids:
+        sylius_admin_country:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: %sylius.model.country.class%
+            sorting:
+                code: asc
+            fields:
+                code:
+                    type: string
+                    label: sylius.ui.code
+                name:
+                    type: twig
+                    label: sylius.ui.name
+                    path: .
+                    options:
+                        template: SyliusAdminBundle:Country/Field:name.html.twig
+                enabled:
+                    type: twig
+                    label: sylius.ui.enabled
+                    options:
+                        template: SyliusAdminBundle:Grid/Field:enabled.html.twig
+            actions:
+                main:
+                    create:
+                        type: create

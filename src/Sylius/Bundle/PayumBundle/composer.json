@@ -7,19 +7,19 @@
     "license": "MIT",
     "authors": [
         {
-            "name":     "Paweł Jędrzejewski",
+            "name": "Paweł Jędrzejewski",
             "homepage": "http://pjedrzejewski.com"
         },
         {
-            "name":     "Kotlyar Maksim",
-            "email":    "kotlyar.maksim@gmail.com"
+            "name": "Kotlyar Maksim",
+            "email": "kotlyar.maksim@gmail.com"
         },
         {
-            "name":     "Sylius project",
+            "name": "Sylius project",
             "homepage": "http://sylius.org"
         },
         {
-            "name":     "Community contributions",
+            "name": "Community contributions",
             "homepage": "http://github.com/Sylius/Sylius/contributors"
         }
     ],
@@ -28,11 +28,11 @@
 
         "payum/payum": "~1.0",
         "payum/payum-bundle": "~1.0",
-        "sylius/core": "0.18.*",
-        "sylius/currency": "0.18.*",
-        "sylius/order-bundle": "0.18.*",
-        "sylius/payment-bundle": "0.18.*",
-        "sylius/resource-bundle": "0.18.*"
+        "sylius/core": "^0.18",
+        "sylius/currency": "^0.18",
+        "sylius/order-bundle": "^0.18",
+        "sylius/payment-bundle": "^0.18",
+        "sylius/resource-bundle": "^0.18"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.4"
@@ -47,6 +47,13 @@
         "psr-4": { "Sylius\\Bundle\\PayumBundle\\spec\\": "spec/" }
     },
     "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../*/*"
+        }
+    ],
     "extra": {
         "branch-alias": {
             "dev-master": "0.18-dev"

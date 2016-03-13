@@ -5,6 +5,7 @@
          xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.1/phpunit.xsd"
          backupGlobals="false"
          colors="true"
+         bootstrap="Tests/Functional/app/autoload.php"
 >
     <testsuites>
         <testsuite name="Sylius Test Suite">

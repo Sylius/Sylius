@@ -1,0 +1,44 @@
+{
+    "page": 1,
+    "limit": 10,
+    "pages": 1,
+    "total": 4,
+    "_links": {
+        "self": {
+            "href": "\/api\/locales\/?page=1&limit=10"
+        },
+        "first": {
+            "href": "\/api\/locales\/?page=1&limit=10"
+        },
+        "last": {
+            "href": "\/api\/locales\/?page=1&limit=10"
+        }
+    },
+    "_embedded": {
+        "items": [
+            {
+                "id": @integer@,
+                "code": "en",
+                "enabled": true
+            },
+            {
+
+                "id": @integer@,
+                "code": "nl",
+                "enabled": true
+            },
+            {
+
+                "id": @integer@,
+                "code": "fr",
+                "enabled": true
+            },
+            {
+
+                "id": @integer@,
+                "code": "de",
+                "enabled": false
+            }
+        ]
+    }
+}

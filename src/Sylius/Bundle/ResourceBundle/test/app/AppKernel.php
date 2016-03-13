@@ -9,6 +9,7 @@
  * file that was distributed with this source code.
  */
 
+use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
@@ -51,7 +52,7 @@ class AppKernel extends Kernel
     protected function getContainerBaseClass()
     {
         if ('test' === $this->environment) {
-            return '\PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer';
+            return MockerContainer::class;
         }
 
         return parent::getContainerBaseClass();

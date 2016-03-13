@@ -11,71 +11,68 @@
 
 namespace Sylius\Bundle\ResourceBundle\Tests;
 
-use AppBundle\Entity\Book;
-use AppBundle\Form\Type\BookType;
-use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionConfigurationTestCase;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Configuration;
-use Sylius\Bundle\ResourceBundle\DependencyInjection\SyliusResourceExtension;
-use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
-use Sylius\Component\Resource\Factory\Factory;
-use Symfony\Component\Config\Definition\ConfigurationInterface;
-use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
+ * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ConfigurationTest extends AbstractExtensionConfigurationTestCase
+class ConfigurationTest extends \PHPUnit_Framework_TestCase
 {
+    use ConfigurationTestCaseTrait;
+
     /**
      * @test
      */
-    public function it_processes_resource_configuration()
+    public function it_does_not_break_if_not_customized()
     {
-        $expectedConfiguration = [
-            'resources' => [
-                'app.book' => [
-                    'classes' => [
-                        'model' => Book::class,
-                        'form' => [
-                            'default' => BookType::class,
-                            'choice' => ResourceChoiceType::class
-                        ],
-                        'controller' => ResourceController::class,
-                        'factory' => Factory::class,
-                    ],
-                    'driver' => 'doctrine/orm',
-                    'validation_groups' => [
-                        'default' => []
-                    ],
-                ]
-            ],
-            'settings' => [
-                'paginate' => null,
-                'limit' => null,
-                'allowed_paginate' => [
-                    0 => 10,
-                    1 => 20,
-                    2 => 30,
-                ],
-                'default_page_size' => 10,
-                'sortable' => false,
-                'sorting' => null,
-                'filterable' => false,
-                'criteria' => null,
+        $this->assertConfigurationIsValid(
+            [
+                []
             ]
-        ];
-
-        $sources = [__DIR__.'/../../../app/config/resources.yml'];
-        $this->assertProcessedConfigurationEquals($expectedConfiguration, $sources);
+        );
     }
 
     /**
-     * {@inheritdoc}
+     * @test
      */
-    protected function getContainerExtension()
+    public function it_has_default_authorization_checker()
     {
-        return new SyliusResourceExtension();
+        $this->assertProcessedConfigurationEquals(
+            [
+                []
+            ],
+            ['authorization_checker' => 'sylius.resource_controller.authorization_checker.disabled'],
+            'authorization_checker'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function its_authorization_checker_can_be_customized()
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                ['authorization_checker' => 'custom_service']
+            ],
+            ['authorization_checker' => 'custom_service'],
+            'authorization_checker'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function its_authorization_checker_cannot_be_empty()
+    {
+        $this->assertPartialConfigurationIsInvalid(
+            [
+                ['authorization_checker' => '']
+            ],
+            'authorization_checker'
+        );
     }
 
     /**

@@ -1,0 +1,12 @@
+Sylius\Component\Addressing\Model\Country:
+    country_NL:
+        code: NL
+    country_BE:
+        code: BE
+
+Sylius\Component\Addressing\Model\Province:
+    province_BE_limburg:
+        name: Limburg
+        abbreviation: lim
+        code: be_lim
+        country: '@country_BE'

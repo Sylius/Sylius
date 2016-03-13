@@ -1,0 +1,14 @@
+{
+  "id": @integer@,
+  "code": "be_lim",
+  "name": "Limburg",
+  "abbreviation": "lim",
+  "_links": {
+    "self": {
+      "href": @string@
+    },
+    "country": {
+      "href": @string@
+    }
+  }
+}

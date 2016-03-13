@@ -7,22 +7,22 @@
     "license": "MIT",
     "authors": [
         {
-            "name":     "Paweł Jędrzejewski",
+            "name": "Paweł Jędrzejewski",
             "homepage": "http://pjedrzejewski.com"
         },
         {
-            "name":     "Sylius project",
+            "name": "Sylius project",
             "homepage": "http://sylius.org"
         },
         {
-            "name":     "Community contributions",
+            "name": "Community contributions",
             "homepage": "http://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
         "php": "^5.5.9|^7.0",
 
-        "sylius/resource": "0.18.*",
+        "sylius/resource": "^0.18",
         "symfony/form": "^2.7",
         "symfony/http-foundation": "^2.7",
         "zendframework/zend-stdlib": "^2.0|^3.0"
@@ -41,6 +41,12 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../*/*"
+        }
+    ],
     "extra": {
         "branch-alias": {
             "dev-master": "0.18-dev"
