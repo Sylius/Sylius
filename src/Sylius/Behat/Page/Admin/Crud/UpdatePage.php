@@ -18,7 +18,7 @@ use Symfony\Component\Routing\RouterInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class UpdatePage extends SymfonyPage implements EditPageInterface
+class UpdatePage extends SymfonyPage implements UpdatePageInterface
 {
     /**
      * @var string
