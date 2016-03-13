@@ -61,6 +61,6 @@
             <argument type="service" id="sylius.behat.table_manipulator" />
         </service>
         <service id="sylius.behat.page.admin.crud.create" class="%sylius.behat.page.admin.crud.create.class%" parent="sylius.behat.symfony_page" abstract="true" scope="scenario" public="false" />
-        <service id="sylius.behat.page.admin.crud.edit" class="%sylius.behat.page.admin.crud.update.class%" parent="sylius.behat.symfony_page" abstract="true" scope="scenario" public="false" />
+        <service id="sylius.behat.page.admin.crud.update" class="%sylius.behat.page.admin.crud.update.class%" parent="sylius.behat.symfony_page" abstract="true" scope="scenario" public="false" />
     </services>
 </container>

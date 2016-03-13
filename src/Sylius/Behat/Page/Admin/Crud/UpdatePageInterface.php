@@ -16,7 +16,7 @@ use Sylius\Behat\Page\PageInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-interface EditPageInterface extends PageInterface
+interface UpdatePageInterface extends PageInterface
 {
     public function saveChanges();
 }
