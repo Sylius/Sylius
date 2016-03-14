@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Bundle\LocaleBundle\Form\Type\LocaleType as BaseLocaleType;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,7 +22,7 @@ use Symfony\Component\Intl\Intl;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class LocaleType extends AbstractResourceType
+class LocaleType extends BaseLocaleType
 {
     /**
      * @var RepositoryInterface
@@ -46,6 +46,8 @@ class LocaleType extends AbstractResourceType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        parent::buildForm($builder, $options);
+
         $builder->addEventListener(
             FormEvents::PRE_SET_DATA,
             function (FormEvent $event) {
