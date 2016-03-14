@@ -76,7 +76,6 @@ gulp.task('admin-watch', function() {
     livereload.listen();
 
     gulp.watch(paths.admin.js, ['admin-js']);
-    gulp.watch(paths.admin.coffee, ['admin-js']);
     gulp.watch(paths.admin.sass, ['admin-css']);
     gulp.watch(paths.admin.css, ['admin-css']);
     gulp.watch(paths.admin.img, ['admin-img']);
