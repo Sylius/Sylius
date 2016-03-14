@@ -26,7 +26,6 @@
                 <cascade-remove/>
             </cascade>
             <join-column name="shipping_address_id" referenced-column-name="id" nullable="true" />
-            <gedmo:versioned />
         </one-to-one>
 
         <one-to-one field="billingAddress" target-entity="Sylius\Component\Addressing\Model\AddressInterface">
@@ -35,7 +34,6 @@
                 <cascade-remove/>
             </cascade>
             <join-column name="billing_address_id" referenced-column-name="id" nullable="true" />
-            <gedmo:versioned />
         </one-to-one>
 
         <one-to-one field="promotionCoupon" target-entity="Sylius\Component\Promotion\Model\CouponInterface">
