@@ -10,7 +10,7 @@
         {% set widget_class = multiple ? ' checkbox-inline' : ' radio-inline' %}
         {%- for child in form %}
             {% set child_label = child.vars.label %}
-            {% if child_label is not sameas(false) %}
+            {% if child_label is not same as(false) %}
                 {% set child_label_attr = child.vars.label_attr|merge({'class' : widget_class}) %}
                 {% if not child.vars.compound %}
                     {% set child_label_attr = child_label_attr|merge({'for': child.vars.id}) %}
@@ -21,7 +21,7 @@
                 <label{% for attrname, attrvalue in child_label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
             {% endif %}
             {{ form_widget(child) }}
-            {% if child_label is not sameas(false) %}
+            {% if child_label is not same as(false) %}
                 {% if child_label is empty %}
                     {% set child_label = name|humanize %}
                 {% endif %}
