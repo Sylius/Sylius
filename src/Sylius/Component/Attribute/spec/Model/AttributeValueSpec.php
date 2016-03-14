@@ -22,7 +22,7 @@ use Sylius\Component\Attribute\Model\AttributeValueInterface;
  */
 class AttributeValueSpec extends ObjectBehavior
 {
-    public function let()
+    function let()
     {
         $this->setCurrentLocale('en_US');
         $this->setFallbackLocale('en_US');
