@@ -7,6 +7,14 @@ run_command() {
     eval "$1"
 }
 
+retry_run_command() {
+    run_command "$1"
+
+    if [ "$?" != "0" ]; then
+        run_command "$1"
+    fi
+}
+
 # Argument 1: String to hash
 text_md5sum() {
     echo "$1" | md5sum | awk '{ print $1 }'
