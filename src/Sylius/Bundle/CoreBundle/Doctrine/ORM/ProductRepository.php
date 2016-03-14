@@ -159,7 +159,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
         return $this->createQueryBuilder('o')
             ->innerJoin('o.channels', 'channel')
             ->addOrderBy('o.createdAt', 'desc')
-            ->andWhere('o.enabled = 1')
+            ->andWhere('o.enabled = true')
             ->andWhere('channel = :channel')
             ->setParameter('channel', $channel)
             ->setMaxResults($limit)
