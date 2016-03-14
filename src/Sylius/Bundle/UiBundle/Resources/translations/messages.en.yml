@@ -45,3 +45,6 @@ sylius:
     ends_with: Ends with
     in: In
     not_in: Not in
+    countries: Countries
+    manage_country: Manage country
+    new_country: New country
