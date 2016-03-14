@@ -30,9 +30,14 @@
                 {% for shipment in order.shipments %}
                 <li>
                     <a href="{{ path('sylius_backend_shipment_show', {'id': shipment.id}) }}">
-                        <span class="label label-primary pull-right">{{ shipment.state|title }}</span>
+                    <span class="pull-right">
+                        {{ misc.state_label(shipment.state, 'shipment') }}
+                    </span>
                         {{ shipment.method.name }}
                     </a>
+                    {% if hide_form|default(false) is same as(false) %}
+                        {{ misc.shipment_form(shipment) }}
+                    {% endif %}
                 </li>
                 {% else %}
                 <li class="text-muted">

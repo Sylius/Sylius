@@ -50,3 +50,10 @@ sylius_backend_shipment_ship:
         _sylius:
             template: SyliusWebBundle:Backend/Shipment:show.html.twig
             redirect: sylius_backend_shipment_show
+
+sylius_backend_shipment_update_state:
+    path: /update-state/{id}/{transition}
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.shipment:updateStateAction
+        graph: sylius_shipment

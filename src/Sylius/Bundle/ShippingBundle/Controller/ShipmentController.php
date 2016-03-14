@@ -17,6 +17,11 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ShipmentController extends ResourceController
 {
+    /**
+     * @param Request $request
+     *
+     * @return mixed
+     */
     public function shipAction(Request $request)
     {
         $shipment = $this->findOr404($request);

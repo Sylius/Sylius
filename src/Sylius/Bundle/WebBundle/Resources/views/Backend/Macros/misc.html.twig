@@ -1,79 +1,97 @@
 {% macro pagination(paginator, options) %}
-{% if paginator.haveToPaginate()|default(false) %}
-<div class="row">
-    <div class="col-xs-9">
-        {{ pagerfanta(paginator, 'twitter_bootstrap3_translated', options|default({})) }}
-    </div>
+    {% if paginator.haveToPaginate()|default(false) %}
+    <div class="row">
+        <div class="col-xs-9">
+            {{ pagerfanta(paginator, 'twitter_bootstrap3_translated', options|default({})) }}
+        </div>
 
-    <div class="col-xs-3">
-        <div class="pull-right">
-            <div class="btn-group paginator">
-                {{ sylius_resource_paginate(paginator, [10,20,30]) }}
+        <div class="col-xs-3">
+            <div class="pull-right">
+                <div class="btn-group paginator">
+                    {{ sylius_resource_paginate(paginator, [10,20,30]) }}
+                </div>
             </div>
         </div>
     </div>
-</div>
-{% endif %}
+    {% endif %}
 {% endmacro %}
 
 {% macro shipment_state(state) %}
-
-{% if state == 'pending' %}
-    {% set class = 'danger' %}
-{% elseif state == 'dispatched' %}
-    {% set class = 'info' %}
-{% elseif state == 'returned' %}
-    {% set class = 'warning' %}
-{% else %}
-    {% set class = 'success' %}
-{% endif %}
-
-<span class="label label-{{ class }} label-state">{{ state|trans|humanize }}</span>
+    {% if state == 'pending' %}
+        {% set class = 'danger' %}
+    {% elseif state == 'dispatched' %}
+        {% set class = 'info' %}
+    {% elseif state == 'returned' %}
+        {% set class = 'warning' %}
+    {% else %}
+        {% set class = 'success' %}
+    {% endif %}
+    <span class="label label-{{ class }} label-state">{{ state|trans|humanize }}</span>
 {% endmacro %}
 
 {% macro state_label(state, type) %}
-{% if type == 'payment' %}
-    {% set label = 'sylius.payment.state.'~state %}
-    {% if state is same as('completed') %}
-        {% set class = 'label-success' %}
-    {% elseif state in ['checkout', 'processing', 'new'] %}
-        {% set class = 'label-primary' %}
+    {% if type == 'payment' %}
+        {% set label = 'sylius.payment.state.'~state %}
+        {% if state == 'completed' %}
+            {% set class = 'label-success' %}
+        {% elseif state in ['checkout', 'processing', 'new'] %}
+            {% set class = 'label-primary' %}
+        {% else %}
+            {% set class = 'label-danger' %}
+        {% endif %}
+    {% elseif type == 'shipment' %}
+        {% set label = 'sylius.shipment.state.'~state %}
+        {% if state == 'shipped' %}
+            {% set class = 'label-success' %}
+        {% elseif state in ['checkout', 'onhold', 'backordered', 'ready'] %}
+            {% set class = 'label-primary' %}
+        {% else %}
+            {% set class = 'label-danger' %}
+        {% endif %}
+    {% elseif type == 'order' %}
+        {% if state == 1 %}
+            {% set label = 'sylius.order.state.checkout' %}
+            {% set class = 'label-warning' %}
+        {% elseif state == 2 %}
+            {% set label = 'sylius.order.state.cart_locked' %}
+            {% set class = 'label-default' %}
+        {% elseif state == 3 %}
+            {% set label = 'sylius.order.state.ordered' %}
+            {% set class = 'label-info' %}
+        {% else %}
+            {% set label = 'sylius.order.state.order_confimed' %}
+            {% set class = 'label-success' %}
+        {% endif %}
     {% else %}
-        {% set class = 'label-danger' %}
+        {% if state %}
+            {% set label = 'sylius.yes' %}
+            {% set class = 'label-success' %}
+        {% else %}
+            {% set label = 'sylius.no' %}
+            {% set class = 'label-danger' %}
+        {% endif %}
     {% endif %}
-{% elseif type == 'order' %}
-    {% if state is same as(1) %}
-        {% set label = 'sylius.order.state.checkout' %}
-        {% set class = 'label-warning' %}
-    {% elseif state is same as(2) %}
-        {% set label = 'sylius.order.state.cart_locked' %}
-        {% set class = 'label-default' %}
-    {% elseif state is same as(3) %}
-        {% set label = 'sylius.order.state.ordered' %}
-        {% set class = 'label-info' %}
-    {% else %}
-        {% set label = 'sylius.order.state.order_confimed' %}
-        {% set class = 'label-success' %}
-    {% endif %}
-{% else %}
-    {% if state %}
-        {% set label = 'sylius.yes' %}
-        {% set class = 'label-success' %}
-    {% else %}
-        {% set label = 'sylius.no' %}
-        {% set class = 'label-danger' %}
-    {% endif %}
-{% endif %}
-<span class="label {{ class }}">{{ label|trans|upper }}</span>
+    <span class="label {{ class }}">{{ label|trans|upper }}</span>
 {% endmacro %}
 
 {% macro payment_form(payment) %}
-{% for transition in ['cancel', 'complete', 'refund'] if sm_can(payment, transition, 'sylius_payment') -%}
-    <form action="{{ path('sylius_backend_payment_update_state', {'id': payment.id, 'transition': transition}) }}" method="post" style="display: inline">
-        <input type="hidden" name="_method" value="PUT">
-        <button class="btn btn-{{ transition == 'cancel' ? 'warning' : 'primary' }}" type="submit">
-            <i class="glyphicon glyphicon-{{ transition == 'cancel' ? 'remove' : 'share' }}"></i> <span>{{ transition }}</span>
-        </button>
-    </form>
-{%- endfor %}
+    {% for transition in ['cancel', 'complete', 'refund'] if sm_can(payment, transition, 'sylius_payment') -%}
+        <form action="{{ path('sylius_backend_payment_update_state', {'id': payment.id, 'transition': transition}) }}" method="post" style="display: inline">
+            <input type="hidden" name="_method" value="PUT">
+            <button class="btn btn-{{ transition == 'cancel' ? 'warning' : 'primary' }}" type="submit">
+                <i class="glyphicon glyphicon-{{ transition == 'cancel' ? 'remove' : 'share' }}"></i> <span>{{ ('sylius.payment.transition.'~transition)|trans }}</span>
+            </button>
+        </form>
+    {%- endfor %}
+{% endmacro %}
+
+{% macro shipment_form(shipment) %}
+    {% for transition in ['hold', 'release', 'backorder', 'prepare', 'ship', 'cancel', 'return'] if sm_can(shipment, transition, 'sylius_shipment') -%}
+        <form action="{{ path('sylius_backend_shipment_update_state', {'id': shipment.id, 'transition': transition}) }}" method="post" style="display: inline">
+            <input type="hidden" name="_method" value="PUT">
+            <button class="btn btn-{{ transition == 'cancel' ? 'warning' : 'primary' }}" type="submit">
+                <i class="glyphicon glyphicon-{{ transition == 'cancel' ? 'remove' : 'share' }}"></i> <span>{{ ('sylius.shipment.transition.'~transition)|trans }}</span>
+            </button>
+        </form>
+    {%- endfor %}
 {% endmacro %}
