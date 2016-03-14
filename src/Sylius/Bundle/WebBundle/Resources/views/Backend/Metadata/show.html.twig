@@ -7,7 +7,7 @@
         <ul>
             {% for key, element in data %}
                 <li>
-                    {% if key is not sameas(loop.index0) %}<b>{{ key|humanize }}:</b> {% endif %}{{ _self.dataAsList(element) }}
+                    {% if key is not same as(loop.index0) %}<b>{{ key|humanize }}:</b> {% endif %}{{ _self.dataAsList(element) }}
                 </li>
             {% endfor %}
         </ul>
