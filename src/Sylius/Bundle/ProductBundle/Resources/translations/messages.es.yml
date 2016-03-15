@@ -10,8 +10,10 @@ sylius:
       options: Opciones de producto
       meta_keywords: Meta palabras clave
       meta_description: Meta descripción
+      taxons: Taxonomías
     product_variant:
       available_on: Disponible el
+      available_until: Disponible hasta
     product_archetype:
       name: Nombre
       parent: Padre
@@ -19,3 +21,6 @@ sylius:
       options: Opciones de producto
     association_type:
       name: Nombre
+    association:
+      type: Tipos de asociación
+      product: Producto asociado

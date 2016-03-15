@@ -18,6 +18,7 @@ sylius:
       name: ชื่อ
       provinces: จังหวัด
       select: เลือก
+      enabled: เปิดใช้งานแล้ว
     province:
       name: ชื่อ
       abbreviation: ตัวย่อ

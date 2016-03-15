@@ -24,6 +24,7 @@ sylius:
       birthday: تاریخ تولد
       billing_address: مشخصات پرداخت کننده
       different_billing_address: آدرس گیرنده با خریدار متفاوت است؟
+      only_customer_registration: ایجاد حساب?
     user_filter:
       query: جستجو
     user_change_password:

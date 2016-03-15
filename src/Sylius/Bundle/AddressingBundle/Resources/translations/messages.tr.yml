@@ -18,6 +18,7 @@ sylius:
       name: Ülke adı
       provinces: İller
       select: Ülke seçin
+      enabled: Etkin
     province:
       name: Ad
       select: Seçiniz

@@ -35,7 +35,7 @@ sylius:
         tax_categories: Categorii de taxe
         tax_rates: Taxe
         taxation_settings: Setări taxe
-        taxonomies: Categorizare
+        taxons: Categorizare
         zones: Zone
       sidebar:
         assortment: Sortiment
@@ -68,7 +68,7 @@ sylius:
         tax_categories: Categorii de taxe
         tax_rates: Taxe
         taxation_settings: Setări taxe
-        taxonomies: Categorizare
+        taxons: Categorizare
         zones: Zone
   frontend:
     menu:

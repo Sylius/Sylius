@@ -6,8 +6,7 @@ sylius:
     variant:
       presentation: Presentación
     option:
-      name: Nombre interno
-      presentation: Presentación
+      name: Nombre
       values: Valores posibles
     option_value:
       add_value: Añadir valor

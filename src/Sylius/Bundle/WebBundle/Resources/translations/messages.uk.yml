@@ -182,8 +182,8 @@ sylius:
     tax_rate:
       index: Податкові ставки
     taxation_settings: Налаштування оподаткування
-    taxonomy:
-      index: Категоризація
+    taxon:
+      index: Таксони
     update: Редагувати
     zone:
       index: Пояси
@@ -729,6 +729,7 @@ sylius:
     updated_at: Останнє оновлення
     zone: Зона
   taxon:
+    index_header: Таксони
     create: Створити таксон
     create_header: Новий таксон
     image: Вибрати зображення
@@ -736,16 +737,6 @@ sylius:
     no_image: Немає зображення для цього таксону
     product_index_header: 'Продукт категоризовано як "%name%"'
     update_header: Редагування таксону
-  taxonomy:
-    create: Створити класифікатор
-    create_header: Новий класифікатор
-    image: Вибрати зображення
-    index_header: 'Категоризація <small>тут ви бачите визначені класифікатори</small>'
-    manage: Керувати класифікаторами
-    name: Ім’я
-    no_image: Немає зображення для цього класифікатору
-    show_header: 'Таксономія <small><strong>%name%</strong></small>'
-    update_header: Редагування таксономії
   total_quantity: Загальна кількість
   ui:
     change_password: Змінити пароль

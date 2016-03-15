@@ -17,6 +17,7 @@ sylius:
       name: Nama
       provinces: Provinsi
       select: Pilih
+      enabled: Diaktifkan
     province:
       name: Nama
       select: Pilih

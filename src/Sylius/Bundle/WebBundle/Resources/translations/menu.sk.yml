@@ -9,7 +9,7 @@ sylius:
         archetypes: Produktové prototypy
         association_types: Priradenie produktov
         assortment: Sortiment
-        attributes: Produktové vlastnosti
+        attributes: Vlastnosti
         blocks: Bloky
         channels: Kanály
         configuration: Konfigurácia
@@ -52,13 +52,14 @@ sylius:
         tax_categories: Daňové kategórie
         tax_rates: Daňové sadzby
         taxation_settings: Nastavenie zdaňovania
-        taxonomies: Kategorizácia
+        taxons: Kategórie
         zones: Zóny
       sidebar:
         api_clients: API klienti
         archetypes: Produktové prototypy
+        association_types: Priradenie produktov
         assortment: Sortiment
-        attributes: Produktové vlastnosti
+        attributes: Nastavenia vlastností
         blocks: Bloky
         channels: Kanály
         configuration: Konfigurácia
@@ -77,20 +78,23 @@ sylius:
         locales: Jazyky
         marketing: Marketing
         menus: Menu
+        metadata: Metadáta
         new_order: Pridať novú objednávku
         new_promotion: Pridať novú akciu
-        options: Produktové voľby
+        options: Spravovať voľby
         orders: Aktuálne objednávky
         pages: Stránky
         payment_methods: Spôsoby platby
         payments: Platby
         permissions: Oprávnenia
+        product_review: Produktové recenzie
         products: Produkty
         promotions: Akcie
         redirects: Presmerovania
         report: Reporty
         roles: Role
         routes: URL cesty
+        review: Recenzie
         sales: Objednávky
         security_settings: Nastavenia bezpečnosti
         shipments: Zásielky
@@ -102,7 +106,7 @@ sylius:
         tax_categories: Daňové kategórie
         tax_rates: Daňové sadzby
         taxation_settings: Nastavenie zdaňovania
-        taxonomies: Kategorizácia
+        taxons: Kategórie
         zones: Zóny
   frontend:
     menu:

@@ -6,8 +6,6 @@ sylius:
     variant:
       presentation: Презентация
     option:
-      name: Вътрешно име
-      presentation: Презентация
       values: Възможни стойности
     option_value:
       add_value: Добавяне на стойност

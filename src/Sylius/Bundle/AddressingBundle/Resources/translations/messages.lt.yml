@@ -18,6 +18,7 @@ sylius:
       name: Pavadinimas
       provinces: Provincijos
       select: Pasirinkite
+      enabled: Įjungta
     province:
       name: Pavadinimas
       select: Pasirinkite

@@ -7,3 +7,5 @@ sylius:
       main:
         configuration:
           header: ตั้งค่าคอนฟิก
+          countries: ประเทศ
+          locales: ภาษาที่ใช้

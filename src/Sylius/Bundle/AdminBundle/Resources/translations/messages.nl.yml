@@ -7,3 +7,5 @@ sylius:
       main:
         configuration:
           header: Configuratie
+          countries: Landen
+          locales: "Talen/Regio's"

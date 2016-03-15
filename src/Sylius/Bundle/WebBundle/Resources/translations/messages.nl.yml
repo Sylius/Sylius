@@ -203,6 +203,8 @@ sylius:
       index: Promoties
     promotion_coupon:
       index: Coupons
+    product_association_type:
+      index: Associatietype
     redirect_route:
       index: Redirect routes
     report:
@@ -227,8 +229,8 @@ sylius:
     tax_rate:
       index: Belasting Tarieven
     taxation_settings: Belasting Instellingen
-    taxonomy:
-      index: Taxonomieën
+    taxon:
+      index: Taxons
     update: Bewerken
     zone:
       index: Zones
@@ -262,7 +264,6 @@ sylius:
     update: Bewerken
     update_header: Kanaal bewerken
     updated_at: Laatst bijgewerkt
-    url: URL
   checkout:
     addressing:
       header: Adresgegevens
@@ -691,6 +692,7 @@ sylius:
     no_tax_category: Geen belasting categorie
     no_taxons: Er zijn geen taxons voor dit product
     options: Opties
+    original_price: Oorspronkelijke prijs
     price: Retail prijs
     restricted_zone: Beperkte zone
     shipping_category: Verzend categorie
@@ -910,6 +912,7 @@ sylius:
     updated_at: Laatst bijgewerkt
     zone: Zone
   taxon:
+    index_header: Taxons
     create: Nieuwe taxon
     create_header: Taxon toevoegen
     image: Kies afbeelding
@@ -917,16 +920,6 @@ sylius:
     no_image: Er is geen afbeelding voor deze taxon
     product_index_header: 'Producten in "%name%"'
     update_header: Taxon bewerken
-  taxonomy:
-    create: Nieuwe taxonomie
-    create_header: Taxonomie toevoegen
-    image: Kies afbeelding
-    index_header: 'Categorisering <small>Hier ziet u de gedefinieerde taxonomieën</small>'
-    manage: Taxonomieën beheren
-    name: Naam
-    no_image: Er is geen afbeelding voor deze taxonomie
-    show_header: 'Taxonomie <small><strong>%name%</strong></small>'
-    update_header: Taxonomie bewerken
   total_quantity: Totale Hoeveelheid
   ui:
     change_password: Verander uw wachtwoord
@@ -967,6 +960,7 @@ sylius:
     delete_image: Verwijder Afbeelding
     last_update: Laatst bijgewerkt
     options: Opties
+    original_price: Oorspronkelijke prijs
     price: Prijs
     sku: SKU
     stock: Huidige voorraad

@@ -6,8 +6,7 @@ sylius:
     variant:
       presentation: ผู้ใช้มองเห็น
     option:
-      name: ชื่อภายใน
-      presentation: ผู้ใช้มองเห็น
+      name: ชื่อ
       values: ค่าที่เป็นไปได้
     option_value:
       add_value: เพิ่มค่า

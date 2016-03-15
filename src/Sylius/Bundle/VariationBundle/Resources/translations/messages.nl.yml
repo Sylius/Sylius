@@ -6,8 +6,7 @@ sylius:
     variant:
       presentation: Weergave
     option:
-      name: Interne naam
-      presentation: Weergave
+      name: Naam
       values: Mogelijke waarden
     option_value:
       add_value: Waarde toevoegen

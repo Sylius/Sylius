@@ -28,7 +28,7 @@ sylius:
         tax_categories: 税区分管理
         tax_rates: 税管理
         taxation_settings: 課税地域設定
-        taxonomies: カテゴリ管理
+        taxons: カテゴリ設定
         zones: 地域
       sidebar:
         assortment: 商品管理
@@ -54,7 +54,7 @@ sylius:
         tax_categories: 税区分管理
         tax_rates: 税管理
         taxation_settings: 課税地域設定
-        taxonomies: カテゴリ管理
+        taxons: カテゴリ設定
         zones: 地域の管理
   frontend:
     menu:

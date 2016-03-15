@@ -155,8 +155,6 @@ sylius:
     tax_rate:
       index: 税率
     taxation_settings: 税收的设置
-    taxonomy:
-      index: 分类
     update: 编辑
     zone:
       index: 区域
@@ -546,8 +544,6 @@ sylius:
     updated_at: 最后一次更新
     zone: 区域
   taxon:
-    name: 名称
-  taxonomy:
     name: 名称
   total_quantity: 总计数量
   ui:

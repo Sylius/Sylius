@@ -24,6 +24,7 @@ sylius:
       birthday: Dátum narodenia
       billing_address: Fakturačná adresa
       different_billing_address: Použiť inú fakturačnú adresu?
+      only_customer_registration: Vytvoriť účet?
     user_filter:
       query: Vyhľadať
     user_change_password:

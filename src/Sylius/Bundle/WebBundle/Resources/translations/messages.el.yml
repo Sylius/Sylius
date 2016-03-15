@@ -427,8 +427,6 @@ sylius:
     zone: Ζώνη
   taxon:
     name: Ονομασία
-  taxonomy:
-    name: Ονομασία
   ui:
     code: Κώδικος
     email: Ηλεκτρονικό ταχυδρομείο

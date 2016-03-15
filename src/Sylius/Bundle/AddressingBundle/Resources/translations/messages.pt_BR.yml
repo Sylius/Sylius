@@ -18,6 +18,7 @@ sylius:
       name: Nome
       provinces: Estados
       select: Selecione
+      enabled: Ativado
     province:
       name: Nome
       abbreviation: Abreviação

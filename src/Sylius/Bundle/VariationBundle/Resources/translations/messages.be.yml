@@ -6,8 +6,7 @@ sylius:
     variant:
       presentation: Выгляд
     option:
-      name: Унутранае імя
-      presentation: Выгляд
+      name: Імя
       values: Магчымыя значэнні
     option_value:
       add_value: Дадаць значэнне

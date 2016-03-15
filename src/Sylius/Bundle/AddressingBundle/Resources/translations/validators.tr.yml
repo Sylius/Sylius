@@ -12,7 +12,7 @@ sylius:
     first_name:
       max_length: İsim 255 karakterden uzun olmamalıdır.
       min_length: İsim en az 2 karakter uzunluğunda olmalıdır.
-      not_blank: Lütfen adınızı girin.
+      not_blank: Lütfen adınızı yazın.
     last_name:
       max_length: Soyadı 255 karakterden uzun olmamalıdır.
       min_length: Soyadı en az 2 karakter uzunluğunda olmalıdır.
@@ -28,12 +28,22 @@ sylius:
       min_length: Sokak adı en az 2 karakter uzunluğunda olmalıdır | Sokak adı en az 2 karakter uzunluğunda olmalıdır.
       not_blank: Lütfen sokak adı yazınız.
     not_shippable: Bu adres uygun bir kargo varış adresi değildir.
+  country:
+    code:
+      not_blank: Lütfen ülke ISO kodunu yazın.
+      unique: Ülke ISO kodu benzersiz olmalıdır.
   province:
+    code:
+      unique: İl kodunun benzersiz olmalıdır.
     name:
       max_length: Şehir adı 255 karakterden uzun olmamalıdır | Şehir adı 255 karakterden uzun olmamalıdır.
       min_length: Şehir adı en az 2 karakter uzunluğunda olmalıdır | Şehir adı en az 2 karakter uzunluğunda olmalıdır.
       not_blank: Lütfen şehir adını yazınız.
+      unique: İl adı benzersiz olmalıdır.
   zone:
+    code:
+      not_blank: Bölge kodunu yazın.
+      unique: Bölge kodu benzersiz olmalıdır.
     members:
       min_count: 'Lütfen en az {{ limit }} bölge üyesi ekleyiniz.'
     name:

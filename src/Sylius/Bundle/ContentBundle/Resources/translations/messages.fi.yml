@@ -22,6 +22,7 @@ sylius:
       name: Nimi
     menu_node_block:
       content: Sisältö
+      internal_name: Sisäinen nimi
       label: Otsikko
       route: Reitti
       uri: Osoite
@@ -33,9 +34,12 @@ sylius:
     route:
       parent: Vanhempi
     simple_block:
+      internal_name: Sisäinen nimi
       parent: Vanhempi
     slideshow_block:
+      internal_name: Sisäinen nimi
       parent: Vanhempi
     static_content:
       id: Id
+      internal_name: Sisäinen nimi
       parent: Vanhempi
