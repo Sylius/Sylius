@@ -23,7 +23,7 @@ class PriceRangeFilter implements FilterInterface
      */
     public function filter(array $items, array $configuration)
     {
-        if ($this->isInvalidConfiguration($configuration)) {
+        if (!$this->isConfigured($configuration)) {
             return $items;
         }
 
@@ -51,11 +51,7 @@ class PriceRangeFilter implements FilterInterface
             return $priceRange['min'] <= $price && $priceRange['max'] >= $price;
         }
 
-        if (isset($priceRange['min']) && !isset($priceRange['max'])) {
-            return $priceRange['min'] <= $price;
-        }
-
-        return $priceRange['max'] >= $price;
+        return $priceRange['min'] <= $price;
     }
 
     /**
@@ -63,11 +59,8 @@ class PriceRangeFilter implements FilterInterface
      *
      * @return bool
      */
-    private function isInvalidConfiguration(array $configuration)
+    private function isConfigured(array $configuration)
     {
-        return
-            !isset($configuration['filters']['price_range']['min']) &&
-            !isset($configuration['filters']['price_range']['max'])
-        ;
+        return isset($configuration['filters']['price_range']['min']);
     }
 }

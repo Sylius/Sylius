@@ -18,7 +18,7 @@ Feature: Receiving fixed discount on products from specific price range
         And my cart total should be "€90.00"
         And my discount should be "-€10.00"
 
-    @todo
+    @ui
     Scenario: Receiving fixed discount on a single item with price equal to filter minimum criteria
         Given the promotion gives "€10.00" off on every product with minimum price at "€100.00"
         When I add product "PHP T-Shirt" to the cart
@@ -34,7 +34,7 @@ Feature: Receiving fixed discount on products from specific price range
         And my cart total should be "€10.00"
         And my discount should be "-€10.00"
 
-    @todo
+    @ui
     Scenario: Receiving fixed discount on a single item with price equal to filter range minimum criteria
         Given the promotion gives "€10.00" off on every product priced between "€20.00" and "€50.00"
         When I add product "PHP Mug" to the cart
@@ -88,7 +88,7 @@ Feature: Receiving fixed discount on products from specific price range
     Scenario: Receiving different discounts on items from different price ranges
         Given the promotion gives "€10.00" off on every product with minimum price at "€80.00"
         And there is a promotion "Mugs promotion"
-        And it gives "€5.00" off on every product less expensive than "€25.00"
+        And it gives "€5.00" off on every product priced between "€10.00" and "€50.00"
         When I add product "PHP T-Shirt" to the cart
         And I add product "PHP Mug" to the cart
         Then product "PHP T-Shirt" price should be decreased by "€10.00"

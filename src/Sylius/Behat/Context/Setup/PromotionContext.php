@@ -187,24 +187,22 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") off on every product (more|less) expensive than ("(?:€|£|\$)[^"]+")$/
+     * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") off on every product with minimum price at ("(?:€|£|\$)[^"]+")$/
      */
-    public function thisPromotionGivesOffOnEveryProductMoreLessExpensiveThan(
+    public function thisPromotionGivesOffOnEveryProductWithMinimumPriceAt(
         PromotionInterface $promotion,
         $discount,
-        $limit,
         $amount
     ) {
-        $limitType = ('more' === $limit) ? 'min' : 'max';
-        $filterConfiguration = ['filters' => ['price_range' => [$limitType => $amount]]];
+        $filterConfiguration = ['filters' => ['price_range' => ['min' => $amount]]];
 
         $this->createPromotionWithPriceRangeFilter($promotion, $discount, $filterConfiguration);
     }
 
     /**
-     * @Given /^(this promotion) gives ("(?:€|£|\$)[^"]+") off on every product more expensive than ("(?:€|£|\$)[^"]+") and less expensive than ("(?:€|£|\$)[^"]+")$/
+     * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") off on every product priced between ("(?:€|£|\$)[^"]+") and ("(?:€|£|\$)[^"]+")$/
      */
-    public function thisPromotionGivesOffOnEveryProductMoreExpensiveThanAndLessExpensiveThan(
+    public function thisPromotionGivesOffOnEveryProductPricedBetween(
         PromotionInterface $promotion,
         $discount,
         $minAmount,
