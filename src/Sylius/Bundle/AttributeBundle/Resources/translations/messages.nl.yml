@@ -12,9 +12,15 @@ sylius:
       translations: Vertalingen
       type: Type
     attribute_type:
+      checkbox: Selectievakje
       configuration: Configuratie
       date: Datum
+      datetime: Datum / tijd
+      integer: Integer
       percent: Percentage
+      text: Tekst
+      textarea: Tekstgebied
+      title: Attribuuttype
       validation: Validatie
     attribute_type_configuration:
       datetime:

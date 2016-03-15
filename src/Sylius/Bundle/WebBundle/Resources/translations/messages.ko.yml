@@ -5,6 +5,9 @@ sylius:
   customer:
     phone_number: 전화번호
   "no": false
+  product_option:
+    presentation: 소개
+  remember_me: 아이디/암호 저장
   "yes": true
   zone:
     scope: 범위

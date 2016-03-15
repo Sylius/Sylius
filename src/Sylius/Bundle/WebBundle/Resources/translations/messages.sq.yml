@@ -266,8 +266,8 @@ sylius:
     tax_rate:
       index: Normat e taksimit
     taxation_settings: Parametrat e taksimit
-    taxonomy:
-      index: Kategorizimet
+    taxon:
+      index: Kategoritë
     update: Afisho
     zone:
       index: Zonat
@@ -303,7 +303,6 @@ sylius:
     update: Afisho
     update_header: Afishimi i kanalit
     updated_at: Ndryshimi i fundit
-    url: Url
   checkout:
     addressing:
       header: Adresa e dorëzimit
@@ -1050,6 +1049,7 @@ sylius:
     updated_at: Ndryshimi i fundit
     zone: Zona
   taxon:
+    index_header: Kategoritë
     create: Krijo taksonin
     create_header: Takson i ri
     image: Zgjidh figurën
@@ -1058,17 +1058,6 @@ sylius:
     no_results: "Nuk ka asnjë kategori për t'u shfaqur"
     product_index_header: 'Produkte të klasifikuar si "%name%"'
     update_header: Duke afishuar kategorinë
-  taxonomy:
-    create: Krijo kategorizimin
-    create_header: Kategorizim i ri
-    image: Zgjidh figurën
-    index_header: 'Kategorizim <small>Këtu shikoni kategoritë e përcaktuara</small>'
-    manage: Kontrollo kategorizimet
-    name: Emri
-    no_image: Nuk ka asnjë figurë për këtë kategorizim
-    no_results: Nuk ka asnjë kategorizim të përcaktuar
-    show_header: 'Kategorizim <small><strong>%name%</strong></small>'
-    update_header: Duke afishuar kategorizimin
   total_quantity: Sasia totale
   ui:
     account_panel_outline: Shijo të gjitha vetitë që shfaqen në hapësirën tënde personale, gjurmo dhe kontrollo të gjitha të dhënat

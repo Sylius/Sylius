@@ -18,6 +18,7 @@ sylius:
       name: Emri
       provinces: Rajonet
       select: Zgjidh
+      enabled: E aktivizuar
     province:
       name: Emri
       abbreviation: Shkurtim

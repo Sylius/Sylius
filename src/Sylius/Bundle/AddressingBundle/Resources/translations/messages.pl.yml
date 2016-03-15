@@ -18,6 +18,7 @@ sylius:
       name: Nazwa
       provinces: Województwa
       select: Wybierz
+      enabled: Włączone
     province:
       name: Nazwa
       abbreviation: Skrót

@@ -37,7 +37,7 @@ sylius:
         tax_categories: Categorias de tributação
         tax_rates: Impostos
         taxation_settings: Configurações de taxas
-        taxonomies: Categorização
+        taxons: Categorização
         zones: Regiões
       sidebar:
         assortment: Sortimento
@@ -72,7 +72,7 @@ sylius:
         tax_categories: Categorias de tributação
         tax_rates: Impostos
         taxation_settings: Configurações de taxas
-        taxonomies: Categorização
+        taxons: Categorização
         zones: Regiões
   frontend:
     menu:

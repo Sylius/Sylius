@@ -52,11 +52,12 @@ sylius:
         tax_categories: Налоговые категории
         tax_rates: Налоговые ставки
         taxation_settings: Настройки налогообложения
-        taxonomies: Каталоги
+        taxons: Каталоги
         zones: Зоны
       sidebar:
         api_clients: API клиенты
         archetypes: Прототипы продукта
+        association_types: Типы взаимосвязей продуктов
         assortment: Ассортимент
         attributes: Настройка атрибутов
         blocks: Блоки
@@ -77,6 +78,7 @@ sylius:
         locales: Языки
         marketing: Маркетинг
         menus: Элементы меню
+        metadata: Метаданные
         new_order: Создать заказ
         new_promotion: Создать рекламную акцию
         options: Настройка опций
@@ -102,7 +104,7 @@ sylius:
         tax_categories: Налоговые категории
         tax_rates: Налоговые ставки
         taxation_settings: Настройки налогообложения
-        taxonomies: Каталоги
+        taxons: Каталоги
         zones: Зоны
   frontend:
     menu:

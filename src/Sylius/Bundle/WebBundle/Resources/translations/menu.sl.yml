@@ -52,11 +52,12 @@ sylius:
         tax_categories: Kategorije obdavčitev
         tax_rates: Davčne stopnje
         taxation_settings: Nastavitve obdavčitve
-        taxonomies: Kategorizacija
+        taxons: Kategorizacija
         zones: Cone
       sidebar:
         api_clients: Klienti API
         archetypes: Prototipi izdelkov
+        association_types: Vrste združenj izdelkov
         assortment: Izbor
         attributes: Nastavite atribute
         blocks: Bloki
@@ -77,6 +78,7 @@ sylius:
         locales: Področne nastavitve
         marketing: Oglaševanje
         menus: Meniji
+        metadata: Metapodatki
         new_order: Dodaj novo naročilo
         new_promotion: Dodaj novo promocijo
         options: Upravljanje možnosti
@@ -102,7 +104,7 @@ sylius:
         tax_categories: Kategorije obdavčitev
         tax_rates: Davčne stopnje
         taxation_settings: Nastavitve obdavčitve
-        taxonomies: Kategorizacija
+        taxons: Kategorizacija
         zones: Cone
   frontend:
     menu:

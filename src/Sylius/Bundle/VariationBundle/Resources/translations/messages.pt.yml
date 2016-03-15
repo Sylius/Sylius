@@ -5,6 +5,3 @@ sylius:
   form:
     variant:
       presentation: Apresentação
-    option:
-      name: Nome interno
-      presentation: Apresentação

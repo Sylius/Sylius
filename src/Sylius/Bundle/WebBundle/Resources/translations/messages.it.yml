@@ -266,8 +266,8 @@ sylius:
     tax_rate:
       index: Imposte
     taxation_settings: Impostazioni tassazione
-    taxonomy:
-      index: Tassonomie
+    taxon:
+      index: Taxons
     update: Modifica
     zone:
       index: Zone
@@ -303,7 +303,6 @@ sylius:
     update: Modifica
     update_header: Modifica canale
     updated_at: Modificato
-    url: Url
   checkout:
     addressing:
       header: Step indirizzamento
@@ -1051,6 +1050,7 @@ sylius:
     updated_at: Ultima modifica
     zone: Zona aliquota fiscale
   taxon:
+    index_header: Taxons
     create: Crea categoria
     create_header: Nuova categoria
     image: Scegli immagine
@@ -1059,17 +1059,6 @@ sylius:
     no_results: Non ci sono categorie da mostrare
     product_index_header: 'Prodotti classificati come "%name%"'
     update_header: Modificando categoria
-  taxonomy:
-    create: Crea categorizzazione
-    create_header: Nuova categorizzazione
-    image: Scegli immagine
-    index_header: 'Categorizzazione <small>qua vedi definite le tue categorie</small>'
-    manage: Gestisci le tassonomie
-    name: Nome
-    no_image: Non ci sono immagini per questa categorizzazione
-    no_results: Non ci sono categorizzazioni definite
-    show_header: 'Categorizzazione <small><strong>%name%</strong></small>'
-    update_header: Modificando categorizzazione
   total_quantity: Q. tà totale
   ui:
     account_panel_outline: Godetevi tutte le funzionalità che sono disponibili sul tuo spazio personale per visualizzare, tenere traccia e gestire tutti i dati

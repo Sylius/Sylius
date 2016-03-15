@@ -35,6 +35,8 @@ sylius:
       currencies: Meny
       shipping_methods: Spôsoby doručenia
       payment_methods: Spôsoby platby
+      theme: Téma
+      hostname: Hostname
     image:
       file: Obrázok
     locale:

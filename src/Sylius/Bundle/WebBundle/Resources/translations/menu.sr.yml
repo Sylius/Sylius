@@ -31,7 +31,7 @@ sylius:
         tax_categories: Категорије пореза
         tax_rates: Пореске стопе
         taxation_settings: Подешавање пореза
-        taxonomies: Категоризација
+        taxons: Категоризација
         zones: Зоне
       sidebar:
         assortment: Избор
@@ -61,7 +61,7 @@ sylius:
         tax_categories: Категорије пореза
         tax_rates: Пореске стопе
         taxation_settings: Подешавања пореза
-        taxonomies: Категоризација
+        taxons: Категоризација
         zones: Зоне
   frontend:
     menu:

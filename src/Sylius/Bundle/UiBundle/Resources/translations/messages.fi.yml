@@ -5,3 +5,6 @@ sylius:
   form:
     login:
       username: Käyttäjänimi
+  ui:
+    "no": false
+    "yes": true

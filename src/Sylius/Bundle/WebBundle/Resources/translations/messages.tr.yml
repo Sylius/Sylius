@@ -83,7 +83,7 @@ sylius:
     logout: Çıkış yap
     quick_links:
       add_product: Yeni ürün
-      customers: müşteriler
+      customers: Müşteriler
       orders: Son siparişler
       products: Ürünleriniz
     statistics:
@@ -181,11 +181,11 @@ sylius:
     currency:
       index: Para birimi
     customer:
-      index: müşteriler
+      index: Müşteriler
     dashboard: Kontrol Paneli
     edit: Düzenle
     email:
-      index: E-posta
+      index: E-postalar
     general_settings: Genel Ayarlar
     generate: Oluştur
     group:
@@ -225,6 +225,8 @@ sylius:
       index: Raporlar
     role:
       index: Roller
+    review:
+      index: Yorumlar
     route:
       index: Rotalar
     sales: Satışlar
@@ -243,7 +245,7 @@ sylius:
     tax_rate:
       index: Vergi Oranları
     taxation_settings: Vergilendirme Ayarları
-    taxonomy:
+    taxon:
       index: Kategoriler
     update: Düzenle
     zone:
@@ -278,7 +280,6 @@ sylius:
     update: Düzenle
     update_header: Kanal düzenleme
     updated_at: Son gücelleme
-    url: Url
   checkout:
     addressing:
       header: Teslimat adresi
@@ -560,7 +561,7 @@ sylius:
     general_info: Genel bilgi
     guest: Konuk müşteri
     id: ID
-    index_header: Şuanki siparişler
+    index_header: Şimdiki Sipariş
     inventory_tracking: Stok takibi
     inventory_unit:
       backorder: Stokta yok
@@ -602,12 +603,14 @@ sylius:
     total: Toplam
     update_header: Sipariş düzenleme
   review:
+    index: Ürün Yorumları
     id: ID
     subject: Konu
     title: Başlık
     author: Hazırlayan
     guest: Konuk
     created_at: Oluşturulma tarihi
+    header: Ürün Yorumları
   order_item:
     product: Öğe
     quantity: Adet
@@ -658,7 +661,7 @@ sylius:
     create_header: Yeni ödeme yöntemi
     gateway: Ağ Geçidi
     id: ID
-    index_header: Ödeme tipleri
+    index_header: Ödeme Yöntemleri
     name: Ad
     update_header: Ödeme yöntemi düzenle
     updated_at: Son gücelleme
@@ -856,7 +859,7 @@ sylius:
   settings:
     general_header: Genel ayarlar
     security_header: Güvenlik ayarları
-    taxation_header: 'Kdv  ayarları'
+    taxation_header: Vergilendirme ayarları
   shipment:
     created_at: Oluşturulma tarihi
     id: ID
@@ -913,7 +916,7 @@ sylius:
     create_header: Yeni vergi kategorisi
     description: Açıklama
     id: ID
-    index_header: Kdv kategorileri
+    index_header: Vergi kategorileri
     manage: Vergi kategorilerini yönet
     name: Ad
     no_description: Açıklama yok
@@ -925,7 +928,7 @@ sylius:
     category: Kategori
     create: Vergi oranı oluştur
     create_header: Yeni vergi oranı
-    index_header: Kdv oranları
+    index_header: Vergi oranları
     manage: Vergi oranlarını yönet
     name: Ad
     show_header: Vergi oranı ayrıntıları
@@ -933,6 +936,7 @@ sylius:
     updated_at: Son gücelleme
     zone: Bölge
   taxon:
+    index_header: Kategoriler
     create: Sınıf oluştur
     create_header: Yeni sınıf
     image: Resim seç
@@ -940,16 +944,6 @@ sylius:
     no_image: Bu sınıf için bir resim yok
     product_index_header: 'Ürünler  "%name%" olarak kategorilendirildi'
     update_header: Sınıf düzenle
-  taxonomy:
-    create: Sınıflandırma oluştur
-    create_header: Yeni sınıflandırma
-    image: Resim seç
-    index_header: 'Kategori <small>burada tanımlanmış Taksonomiler görmek</small>'
-    manage: Taksonomiler yönetmek
-    name: Ad
-    no_image: Bu sınıf için bir resim yok
-    show_header: 'Taksonomi <small><strong>%name%</strong></small>'
-    update_header: Taksonomi düzenleme
   total_quantity: Toplam miktar
   ui:
     change_password: Parolanızı değiştirin
@@ -959,6 +953,7 @@ sylius:
     login: Giriş
     logout: Çıkış yap
     register: Üye ol
+    product_association_types: Ürün ilişki türleri
     name: Ad
     id: Id
   unknown: Bilinmiyor

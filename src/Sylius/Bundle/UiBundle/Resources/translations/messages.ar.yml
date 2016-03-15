@@ -5,3 +5,8 @@ sylius:
   form:
     login:
       password: كلمة السر
+  ui:
+    "no": false
+    "yes": true
+    new: جديد
+    countries: البلدان

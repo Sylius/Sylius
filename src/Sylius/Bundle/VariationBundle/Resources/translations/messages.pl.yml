@@ -6,8 +6,7 @@ sylius:
     variant:
       presentation: Nazwa publiczna
     option:
-      name: Nazwa w systemie
-      presentation: Nazwa publiczna
+      name: Nazwa
       values: Możliwe wartości
     option_value:
       add_value: Dodaj wartość

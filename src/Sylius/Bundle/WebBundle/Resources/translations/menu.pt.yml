@@ -26,7 +26,7 @@ sylius:
         stockables: Níveis de stock
         tax_categories: Categorias de tributação
         tax_rates: Impostos
-        taxonomies: Categorização
+        taxons: Categorização
         zones: Zonas
       sidebar:
         configuration: Configuração
@@ -52,7 +52,7 @@ sylius:
         stockables: Níveis de stock
         tax_categories: Categorias de tributação
         tax_rates: Impostos
-        taxonomies: Categorização
+        taxons: Categorização
         zones: Zonas
   frontend:
     menu:

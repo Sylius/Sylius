@@ -10,6 +10,7 @@ sylius:
       options: Opţiuni
       meta_keywords: Meta cuvinte cheie
       meta_description: Meta descriere
+      taxons: Categorii
     product_variant:
       available_on: Disponibil din
     product_archetype:

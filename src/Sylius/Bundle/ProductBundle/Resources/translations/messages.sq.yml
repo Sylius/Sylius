@@ -10,6 +10,7 @@ sylius:
       options: Opsionet
       meta_keywords: Meta fjalë kyçe
       meta_description: Meta përshkrim
+      taxons: Kategoritë
     product_variant:
       available_on: Gati më
       available_until: Në dispozicion deri në

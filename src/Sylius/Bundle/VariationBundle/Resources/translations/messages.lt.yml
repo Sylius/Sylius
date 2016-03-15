@@ -6,8 +6,7 @@ sylius:
     variant:
       presentation: Prezentacija
     option:
-      name: Vidinis pavadinimas
-      presentation: Prezentacija
+      name: Pavadinimas
       values: Galimos reikšmės
     option_value:
       add_value: Pridėti reikšmę

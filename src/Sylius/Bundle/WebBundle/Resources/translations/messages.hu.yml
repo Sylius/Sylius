@@ -163,8 +163,8 @@ sylius:
     tax_rate:
       index: Adókulcsok
     taxation_settings: Adózás-beállítások
-    taxonomy:
-      index: Taxonómiák
+    taxon:
+      index: Taxonok
     update: Szerkesztés
     zone:
       index: Zónák
@@ -692,6 +692,7 @@ sylius:
     updated_at: Utolsó frissítés
     zone: Zóna
   taxon:
+    index_header: Taxonok
     create: Taxon létrehozása
     create_header: Új taxon
     image: Kép választása
@@ -699,16 +700,6 @@ sylius:
     no_image: Ehhez a taxonhoz nem tartozik kép
     product_index_header: '"%name%" szerint kategorizált termékek'
     update_header: Taxon szerkesztése
-  taxonomy:
-    create: Taxonómia létrehozása
-    create_header: Új taxonómia
-    image: Kép választása
-    index_header: 'Kategoriák <small>Itt láthatók a definiált taxonómiák</small>'
-    manage: Taxonómiák kezelése
-    name: Név
-    no_image: Ehhez a taxonómiához nem tartozik kép
-    show_header: 'Taxonómia <small><strong>%name%</strong></small>'
-    update_header: Taxonómia szerkesztése
   total_quantity: Össz mennyiség
   ui:
     change_password: Jelszó módosítása

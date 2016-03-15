@@ -7,11 +7,13 @@ sylius:
       main:
         api_clients: Clientes API
         archetypes: Prototipos de producto
+        association_types: Tipos de asociación de productos
         assortment: Varios
         attributes: Configurar atributos
         blocks: Bloques
         channels: Canales
         configuration: Configuración
+        contact_requests: Solicitudes de contacto
         contact_topics: Configurar temas
         content: Contenido
         countries: Países
@@ -50,11 +52,12 @@ sylius:
         tax_categories: Categorías de impuestos
         tax_rates: Tasas de impuestos
         taxation_settings: Configuración de impuestos
-        taxonomies: Categorización
+        taxons: Categorización
         zones: Zonas
       sidebar:
         api_clients: Clientes API
         archetypes: Prototipos de producto
+        association_types: Tipos de asociación de productos
         assortment: Varios
         attributes: Configurar atributos
         blocks: Bloques
@@ -75,6 +78,7 @@ sylius:
         locales: Idiomas
         marketing: Márketing
         menus: Menús
+        metadata: Metadatos
         new_order: Añadir nuevo pedido
         new_promotion: Añadir nueva promoción
         options: Administrar opciones de producto
@@ -83,12 +87,14 @@ sylius:
         payment_methods: Modos de pago
         payments: Pagos
         permissions: Permisos
+        product_review: Reseñas de producto
         products: Productos
         promotions: Promociones
         redirects: Redirecciones
         report: Informes
         roles: Roles
         routes: Rutas
+        review: Reseñas
         sales: Pedidos
         security_settings: Ajustes de seguridad
         shipments: Envíos
@@ -100,7 +106,7 @@ sylius:
         tax_categories: Categorías de impuestos
         tax_rates: Tasas de impuestos
         taxation_settings: Configuración de impuestos
-        taxonomies: Categorización
+        taxons: Categorización
         zones: Zonas
   frontend:
     menu:

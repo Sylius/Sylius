@@ -18,6 +18,7 @@ sylius:
       name: Navn
       provinces: Provinser
       select: Vælg
+      enabled: Aktiveret
     province:
       name: Navn
       select: Vælg

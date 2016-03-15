@@ -7,3 +7,4 @@ sylius:
       main:
         configuration:
           header: Παραμετροποίηση
+          countries: Χώρες

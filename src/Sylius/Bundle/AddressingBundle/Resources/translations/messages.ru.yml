@@ -18,6 +18,7 @@ sylius:
       name: Страна
       provinces: Области
       select: Выбрать
+      enabled: Активен
     province:
       name: Округ
       abbreviation: Аббревиатура
