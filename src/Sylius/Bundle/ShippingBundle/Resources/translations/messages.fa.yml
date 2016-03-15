@@ -6,6 +6,7 @@ sylius:
     rule:
       unit_count_configuration:
         count: تعداد
+        equal: برابر با
       type: نوع قانون
     shipment:
       state: وضعیت
@@ -23,7 +24,9 @@ sylius:
         amount: مبلغ
       flexible_rate_configuration:
         label: نرخ متغیر
+        first_unit_cost: هزینه ی اولین سفارش
       per_unit_rate_configuration:
+        label: هزینه ی ثابت به ازای هر سفارش
         amount: مبلغ
       weight_rate_configuration:
         label: هزینه ی ارسال به ازای وزن محصول

@@ -35,7 +35,7 @@ sylius:
         tax_categories: Kategorije poreza
         tax_rates: Stope poreza
         taxation_settings: Postavke poreza
-        taxonomies: Kategorizacija
+        taxons: Kategorizacija
         zones: Regije
       sidebar:
         assortment: Ponuda
@@ -68,7 +68,7 @@ sylius:
         tax_categories: Postavke poreza
         tax_rates: Stope poreza
         taxation_settings: Postavke poreza
-        taxonomies: Kategorizacija
+        taxons: Kategorizacija
         zones: Regije
   frontend:
     menu:

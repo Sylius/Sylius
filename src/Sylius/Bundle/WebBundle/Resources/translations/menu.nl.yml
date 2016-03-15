@@ -49,7 +49,7 @@ sylius:
         tax_categories: BTW-groepen
         tax_rates: BTW-tarieven
         taxation_settings: Belasting instellingen
-        taxonomies: Categorisering
+        taxons: Categorisering
         zones: Zones
       sidebar:
         api_clients: API Klanten
@@ -98,7 +98,7 @@ sylius:
         tax_categories: Belasting categorieën
         tax_rates: Belastingtarieven
         taxation_settings: Belasting instellingen
-        taxonomies: Categorisering
+        taxons: Categorisering
         zones: Zones
   frontend:
     menu:

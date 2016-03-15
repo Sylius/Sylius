@@ -52,11 +52,12 @@ sylius:
         tax_categories: Kategorie podatkowe
         tax_rates: Stawki podatkowe
         taxation_settings: Podatek
-        taxonomies: Taksonomia
+        taxons: Kategoria
         zones: Strefy
       sidebar:
         api_clients: Klienci API
         archetypes: Szablony produktów
+        association_types: Rodzaje produktów towarzyszących
         assortment: Asortyment
         attributes: Konfigurowanie cech
         blocks: Bloki
@@ -102,7 +103,7 @@ sylius:
         tax_categories: Kategorie podatkowe
         tax_rates: Stawki podatkowe
         taxation_settings: Podatek
-        taxonomies: Taksonomia
+        taxons: Kategoria
         zones: Strefy
   frontend:
     menu:

@@ -318,8 +318,6 @@ sylius:
     updated_at: Cập nhật lần cuối
   taxon:
     name: Tên
-  taxonomy:
-    name: Tên
   ui:
     code: Mã
     links: Liên kết

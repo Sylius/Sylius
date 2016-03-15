@@ -52,11 +52,12 @@ sylius:
         tax_categories: Categorie di tassazione
         tax_rates: Aliquote fiscali
         taxation_settings: Impostazioni fiscali
-        taxonomies: Categorizzazione
+        taxons: Categorizzazione
         zones: Zone
       sidebar:
         api_clients: API dei client
         archetypes: Modelli di prodotto
+        association_types: Tipi di associazione di prodotto
         assortment: Assortimento
         attributes: Configurazione attributi
         blocks: Blocchi
@@ -77,6 +78,7 @@ sylius:
         locales: Localizzazioni
         marketing: Marketing
         menus: Menù
+        metadata: Metadati
         new_order: Aggiungi nuovo ordine
         new_promotion: Aggiungi nuova promozione
         options: Gestisci opzioni
@@ -102,7 +104,7 @@ sylius:
         tax_categories: Categorie tassazione
         tax_rates: Aliquote fiscali
         taxation_settings: Impostazioni fiscali
-        taxonomies: Categorizzazioni
+        taxons: Categorizzazione
         zones: Zone
   frontend:
     menu:

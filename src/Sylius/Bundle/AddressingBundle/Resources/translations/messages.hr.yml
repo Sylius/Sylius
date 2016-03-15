@@ -18,6 +18,7 @@ sylius:
       name: Naziv Države
       provinces: Pokrajine
       select: Odaberite
+      enabled: Omogući
     province:
       name: Naziv pokrajine
       select: Odaberite

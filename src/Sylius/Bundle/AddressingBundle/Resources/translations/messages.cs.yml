@@ -18,6 +18,7 @@ sylius:
       name: Jméno
       provinces: Provincie
       select: Vybrat
+      enabled: Povoleno
     province:
       name: Jméno
       select: Vybrat

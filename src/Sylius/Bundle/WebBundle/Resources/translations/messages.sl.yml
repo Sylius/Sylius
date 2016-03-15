@@ -264,8 +264,8 @@ sylius:
     tax_rate:
       index: Davčne stopnje
     taxation_settings: Nastavitve obdavčitve
-    taxonomy:
-      index: Taksonomije
+    taxon:
+      index: Taksoni
     update: Urejanje
     zone:
       index: Cone
@@ -301,7 +301,6 @@ sylius:
     update: Urejanje
     update_header: Urejanje kanalov
     updated_at: Zadnja posodobitev
-    url: URL
   checkout:
     addressing:
       header: Korak naslavljanja
@@ -1037,6 +1036,7 @@ sylius:
     updated_at: Zadnja posodobitev
     zone: Cona
   taxon:
+    index_header: Taksoni
     create: Ustvarite takson
     create_header: Novi takson
     image: Izberite sliko
@@ -1045,17 +1045,6 @@ sylius:
     no_results: Za prikaz ni nobenega taksona
     product_index_header: 'Proizvodi razvrščeni kot "%name%"'
     update_header: Urejanje taksona
-  taxonomy:
-    create: Ustvarite taksonomijo
-    create_header: Nova taksonomija
-    image: Izberite sliko
-    index_header: 'Kategorizacija <small>Tukaj vidite definirane taksonomije</small>'
-    manage: Upravljanje taksonomij
-    name: Ime
-    no_image: Za to taksonomijo ni na voljo nobene slike
-    no_results: Definirane ni nobene taksonomije
-    show_header: 'Taksonomija <small><strong>%name%</strong></small>'
-    update_header: Urejanje taksonomije
   total_quantity: Skupna količina
   ui:
     account_panel_outline: Uživajte vse lastnosti vašega osebnega prostora, ki so na voljo za ogled, sledenje in upravljanje vseh vaših podatkov

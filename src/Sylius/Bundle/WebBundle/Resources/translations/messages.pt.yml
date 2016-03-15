@@ -437,13 +437,6 @@ sylius:
     create_header: Novo táxon
     name: Nome
     update_header: Editando táxon
-  taxonomy:
-    create: Criar taxonomia
-    create_header: Nova taxonomia
-    index_header: 'Categorização <small>Aqui você vê as taxonomias definidas</small>'
-    name: Nome
-    show_header: 'Taxonomia <small><strong>%name%</strong></small>'
-    update_header: Editando taxonomia
   ui:
     login: Login
     logout: Sair

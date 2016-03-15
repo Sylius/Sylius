@@ -5,9 +5,28 @@ sylius:
   form:
     attribute:
       add: Přidat
+      add_attributes: Přidat atribut
       choices: Volby
       code: Kód
       name: Jméno
+      translations: Překlady
       type: Typ
     attribute_type:
+      checkbox: Zaškrt. pole
       configuration: Konfigurace
+      date: Datum
+      datetime: Datum a čas
+      integer: Číslo
+      percent: Procent
+      text: Text
+      textarea: Textové pole
+      title: Typ atributu
+      validation: Ověření
+    attribute_type_configuration:
+      datetime:
+        format: Formát
+      date:
+        format: Formát
+      text:
+        min: Min. délka
+        max: Max. délka

@@ -18,6 +18,7 @@ sylius:
       name: Nume
       provinces: Județe
       select: Selectaţi
+      enabled: Activat
     province:
       name: Nume
       select: Selectaţi

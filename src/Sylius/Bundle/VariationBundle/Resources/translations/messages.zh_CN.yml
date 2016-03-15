@@ -6,7 +6,6 @@ sylius:
     variant:
       presentation: 演示
     option:
-      name: 内部名称
-      presentation: 演示
+      name: 名称
     option_value:
       add_value: 添加值

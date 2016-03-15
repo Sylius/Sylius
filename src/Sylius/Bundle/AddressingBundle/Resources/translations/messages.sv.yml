@@ -17,6 +17,7 @@ sylius:
       name: Namn
       provinces: Län
       select: Välj
+      enabled: Aktiverad
     province:
       name: Namn
       select: Välj

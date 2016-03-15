@@ -6,8 +6,7 @@ sylius:
     variant:
       presentation: Presentasjon
     option:
-      name: Internt navn
-      presentation: Presentasjon
+      name: Navn
       values: Mulige verdier
     option_value:
       add_value: Legg til verdi

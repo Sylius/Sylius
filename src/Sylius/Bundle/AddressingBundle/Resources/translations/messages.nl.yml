@@ -18,8 +18,10 @@ sylius:
       name: Naam
       provinces: Provincies
       select: Selecteer
+      enabled: Toegestaan
     province:
       name: Naam
+      abbreviation: Afkorting
       select: Selecteer
     zone:
       add_member: Lid toevoegen

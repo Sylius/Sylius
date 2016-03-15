@@ -8,4 +8,20 @@ sylius:
       password: Senha
       remember_me: Lembrar
   ui:
+    create: Criar
     dashboard: Painel
+    delete: Excluir
+    edit: Editar
+    actions: Ações
+    enabled: Ativado
+    description: Descrição
+    "no": false
+    success: Sucesso
+    "yes": true
+    new: Novo
+    save_changes: Salvar alterações
+    new_tax_category: Nova categoria de imposto
+    filter: Filtrar
+    countries: Países
+    new_country: Novo país
+    locales: Localidades

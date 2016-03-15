@@ -5,6 +5,3 @@ sylius:
   form:
     variant:
       presentation: Приказ
-    option:
-      name: Интерни назив
-      presentation: Приказ

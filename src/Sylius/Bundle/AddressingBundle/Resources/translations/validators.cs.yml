@@ -9,6 +9,7 @@ sylius:
       not_blank: Zadejte město.
     country:
       not_blank: Zvolte zemi.
+      disabled: Vybrané země je zakázán. Prosím zvolte jinou.
     first_name:
       max_length: Křestní jméno nesmí být delší než 255 znaků|Křestní jméno nesmí být delší než 255 znaků.
       min_length: Jméno musí být dlouhé nejméně 2 znaky|Jméno musí být dlouhé nejméně 2 znaky.
@@ -28,14 +29,26 @@ sylius:
       min_length: Název ulice musí být dlouhý nejméně 2 znaky|Název ulice musí být dlouhý nejméně 2 znaky.
       not_blank: Zadejte ulici.
     not_shippable: Tato adresa není platnou dodací destinací.
+  country:
+    code:
+      not_blank: Zadejte prosím ISO kód země.
+      unique: ISO kód země musí být unikátní.
   province:
+    code:
+      not_blank: Zadejte prosím kód provincie.
+      unique: Provincie kód musí být jedinečný.
     name:
       max_length: Název státu nesmí být delší než 255 znaků|Název státu nesmí být delší než 255 znaků.
       min_length: Název státu musí být dlouhý nejméně 2 znaky|Název státu musí být dlouhý nejméně 2 znaky.
       not_blank: Zadejte prosím název státu.
   zone:
+    code:
+      not_blank: Zadejte prosím kód zóny.
     members:
       min_count: 'Prosím přidejte alespoň {{ limit }} člena oblasti.'
     name:
       max_length: Název oblasti nesmí být delší než 255 znaků|Název oblasti nesmí být delší než 255 znaků.
       not_blank: Prosím zadejte název oblasti.
+  zone_member:
+    code:
+      not_blank: Prosím zvolte člena zóny.

@@ -10,5 +10,6 @@ sylius:
     description:
       not_blank: La descripción del informe no puede estar en blanco
     code:
+      not_blank: El código del informe no puede estar en blanco.
       unique: El código ya está siendo utilizado.
       single_word: El código del informe debe ser una sola palabra.

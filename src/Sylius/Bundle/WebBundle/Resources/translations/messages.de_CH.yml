@@ -180,8 +180,6 @@ sylius:
     zone: Zone
   taxon:
     name: Name
-  taxonomy:
-    name: Name
   ui:
     code: Code
     name: Name

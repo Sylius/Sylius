@@ -34,7 +34,7 @@ sylius:
         tax_categories: Катэгорыі падаткаў
         tax_rates: Стаўка падатку
         taxation_settings: Налады падаткаабкладання
-        taxonomies: Класіфікацыя
+        taxons: Класіфікацыя
         zones: Зоны
       sidebar:
         assortment: Асартымент
@@ -66,7 +66,7 @@ sylius:
         tax_categories: Катэгорыі падаткаў
         tax_rates: Стаўка падатку
         taxation_settings: Налады падаткаабкладання
-        taxonomies: Класіфікацыя
+        taxons: Класіфікацыя
         zones: Зоны
   frontend:
     menu:

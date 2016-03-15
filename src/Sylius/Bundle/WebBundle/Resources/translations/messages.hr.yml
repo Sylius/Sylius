@@ -159,8 +159,8 @@ sylius:
     tax_rate:
       index: Stope poreza
     taxation_settings: Postavke oporezivanja
-    taxonomy:
-      index: Glavne kategorije
+    taxon:
+      index: Taksoni
     update: Uredi
     zone:
       index: Područja (Zone)
@@ -690,22 +690,13 @@ sylius:
     updated_at: Ažurirano
     zone: Zona
   taxon:
+    index_header: Taksoni
     create: Kreiraj kategoriju
     create_header: Nova kategorija
     image: Izaberite sliku
     name: Naziv
     no_image: Nema slika za ovu kategoriju.
     product_index_header: 'Proizvodi kategorizirani kao %name%'
-    update_header: Ažuriranje kategorije
-  taxonomy:
-    create: Kreirajte kategoriju
-    create_header: Nova kategorija
-    image: Odaberite sliku
-    index_header: 'Kategorija <small>Ovdje su vam definirane kategorije</small>'
-    manage: sylius.taxonomy.manage
-    name: Naziv
-    no_image: Nema slike za ovu kategoriju
-    show_header: 'Kategorija <small><strong>%name%</strong></small>'
     update_header: Ažuriranje kategorije
   total_quantity: Ukupna kol
   ui:
