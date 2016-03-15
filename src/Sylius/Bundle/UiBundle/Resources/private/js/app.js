@@ -40,6 +40,6 @@
       return $(this).closest('.message').transition('fade');
     });
 
-    $('[data-requires-confirmation').requireConfirmation();
+    $('[data-requires-confirmation]').requireConfirmation();
   });
 })(jQuery);
