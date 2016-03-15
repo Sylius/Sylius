@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\AttributeBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\AttributeBundle\Factory\AttributeValueTypeConfigurationFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -25,9 +26,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class AttributeValueTypeSpec extends ObjectBehavior
 {
-    function let(EntityRepository $attributeRepository)
-    {
-        $this->beConstructedWith('AttributeValue', ['sylius'], 'server', $attributeRepository);
+    function let(
+        EntityRepository $attributeRepository,
+        AttributeValueTypeConfigurationFactoryInterface $attributeValueTypeConfigurationFactory
+    ) {
+        $this->beConstructedWith('AttributeValue', ['sylius'], 'server', $attributeRepository, $attributeValueTypeConfigurationFactory);
     }
 
     function it_is_initializable()

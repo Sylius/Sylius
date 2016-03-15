@@ -11,7 +11,6 @@
                     {{ 'sylius.delete'|trans }}
                 </a>
             </p>
-
             <div class="form-group">
                 {% set id = form.vars.label|replace(' ', '_')|lower %}
                 <label class="col-lg-2 control-label required" for="{{ id }}">{{ form.vars.label }}</label>
@@ -30,10 +29,13 @@
 {% endfor %}
 
 {% macro formField(item, count, id, prefix, subject, applicationName) %}
-    {% if item.children|length > 0 %}
+    {% if (item.vars.name == "translations") %}
+        {% form_theme item 'SyliusAttributeBundle::attributeValueTranslation.html.twig' %}
+        {{ form_widget(item) }}
+    {% elseif (item.children|length > 0) %}
         {% set prefix = prefix~'_'~item.vars.name %}
         {% for child in item.children %}
-            {{ _self.formField(child, count, id, prefix) }}
+            {{ _self.formField(child, count, id, prefix, subject, applicationName) }}
         {% endfor %}
     {% elseif item.vars.name != '_token' %}
         {% set namePrefix = prefix|replace({'_': ']['}) %}

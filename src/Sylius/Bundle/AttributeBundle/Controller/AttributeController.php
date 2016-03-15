@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\AttributeBundle\Controller;
 
 use FOS\RestBundle\View\View;
+use Sylius\Bundle\AttributeBundle\Form\Type\AttributeValueType\Configuration\AttributeValueTypeConfigurationInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -73,20 +74,29 @@ class AttributeController extends ResourceController
         $forms = [];
 
         $choices = $request->query->get(sprintf('sylius_%s_choice', $this->metadata->getName()), []);
+        $count = $request->query->get('count');
 
         $attributes = $attributeRepository->findBy(['id' => $choices]);
         foreach ($attributes as $attribute) {
-            $attributeForm = 'sylius_attribute_type_'.$attribute->getType();
 
-            $options = ['label' => $attribute->getName()];
+            $subject = str_replace('_attribute', '', $this->metadata->getName());
+            /** @var AttributeValueTypeConfigurationInterface $attributeValueConfig */
+            $attributeValueConfig = $this->get('sylius.factory.attribute_value_type.configuration')
+                                         ->create($attribute, $subject, $count);
 
-            $form = $this->get('form.factory')->createNamed('value', $attributeForm, null, $options);
+            $form = $this->get('form.factory')->createNamed(
+                $attributeValueConfig->getName(),
+                $attributeValueConfig->getType(),
+                null,
+                $attributeValueConfig->getFormOptions()
+            );
+
             $forms[$attribute->getId()] = $form->createView();
         }
 
         return $this->render('SyliusAttributeBundle::attributeValueForms.html.twig', [
             'forms' => $forms,
-            'count' => $request->query->get('count'),
+            'count' => $count,
             'metadata' => $this->metadata,
         ]);
     }
