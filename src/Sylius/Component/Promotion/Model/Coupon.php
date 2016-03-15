@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Promotion\Model;
 
-use Sylius\Component\Resource\Model\SoftDeletableTrait;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
 /**
@@ -19,7 +18,7 @@ use Sylius\Component\Resource\Model\TimestampableTrait;
  */
 class Coupon implements CouponInterface
 {
-    use SoftDeletableTrait, TimestampableTrait;
+    use TimestampableTrait;
 
     /**
      * @var mixed

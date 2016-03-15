@@ -14,18 +14,23 @@ namespace spec\Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
+use Sylius\Behat\Context\Setup\PromotionContext;
 use Sylius\Component\Core\Factory\ActionFactoryInterface;
 use Sylius\Component\Core\Factory\RuleFactoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\CouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Test\Factory\TestPromotionFactoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Component\Promotion\Factory\CouponFactoryInterface;
 use Sylius\Component\Promotion\Model\ActionInterface;
 use Sylius\Component\Promotion\Model\RuleInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 
 /**
+ * @mixin PromotionContext
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class PromotionContextSpec extends ObjectBehavior
@@ -33,6 +38,7 @@ class PromotionContextSpec extends ObjectBehavior
     function let(
         SharedStorageInterface $sharedStorage,
         ActionFactoryInterface $actionFactory,
+        CouponFactoryInterface $couponFactory,
         RuleFactoryInterface $ruleFactory,
         TestPromotionFactoryInterface $testPromotionFactory,
         PromotionRepositoryInterface $promotionRepository,
@@ -41,6 +47,7 @@ class PromotionContextSpec extends ObjectBehavior
         $this->beConstructedWith(
             $sharedStorage,
             $actionFactory,
+            $couponFactory,
             $ruleFactory,
             $testPromotionFactory,
             $promotionRepository,
@@ -73,6 +80,30 @@ class PromotionContextSpec extends ObjectBehavior
         $sharedStorage->set('promotion', $promotion)->shouldBeCalled();
 
         $this->thereIsPromotion('Super promotion');
+    }
+
+    function it_creates_promotion_with_coupon(
+        SharedStorageInterface $sharedStorage,
+        CouponFactoryInterface $couponFactory,
+        TestPromotionFactoryInterface $testPromotionFactory,
+        PromotionRepositoryInterface $promotionRepository,
+        ChannelInterface $channel,
+        CouponInterface $coupon,
+        PromotionInterface $promotion
+    ) {
+        $couponFactory->createNew()->willReturn($coupon);
+        $coupon->setCode('Coupon galore')->shouldBeCalled();
+
+        $sharedStorage->get('channel')->willReturn($channel);
+        $testPromotionFactory->createForChannel('Promotion galore', $channel)->willReturn($promotion);
+        $promotion->addCoupon($coupon)->shouldBeCalled();
+        $promotion->setCouponBased(true)->shouldBeCalled();
+
+        $promotionRepository->add($promotion)->shouldBeCalled();
+        $sharedStorage->set('promotion', $promotion)->shouldBeCalled();
+        $sharedStorage->set('coupon', $coupon)->shouldBeCalled();
+
+        $this->thereIsPromotionWithCoupon('Promotion galore', 'Coupon galore');
     }
 
     function it_creates_fixed_discount_action_for_promotion(

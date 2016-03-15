@@ -13,6 +13,8 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Component\Core\Model\CouponInterface;
+use Sylius\Component\Core\OrderProcessing\OrderRecalculatorInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -70,9 +72,9 @@ final class OrderContext implements Context
     private $itemQuantityModifier;
 
     /**
-     * @var ShippingChargesProcessorInterface
+     * @var OrderRecalculatorInterface
      */
-    private $shippingChargesProcessor;
+    private $orderRecalculator;
 
     /**
      * @var ObjectManager
@@ -87,7 +89,8 @@ final class OrderContext implements Context
      * @param PaymentFactoryInterface $paymentFactory
      * @param FactoryInterface $orderItemFactory
      * @param OrderItemQuantityModifierInterface $itemQuantityModifier
-     * @param ShippingChargesProcessorInterface $shippingChargesProcessor
+     * @param SharedStorageInterface $sharedStorage
+     * @param OrderRecalculatorInterface $orderRecalculator
      * @param ObjectManager $objectManager
      */
     public function __construct(
@@ -98,7 +101,7 @@ final class OrderContext implements Context
         PaymentFactoryInterface $paymentFactory,
         FactoryInterface $orderItemFactory,
         OrderItemQuantityModifierInterface $itemQuantityModifier,
-        ShippingChargesProcessorInterface $shippingChargesProcessor,
+        OrderRecalculatorInterface $orderRecalculator,
         ObjectManager $objectManager
     ) {
         $this->sharedStorage = $sharedStorage;
@@ -108,7 +111,7 @@ final class OrderContext implements Context
         $this->paymentFactory = $paymentFactory;
         $this->orderItemFactory = $orderItemFactory;
         $this->itemQuantityModifier = $itemQuantityModifier;
-        $this->shippingChargesProcessor = $shippingChargesProcessor;
+        $this->orderRecalculator = $orderRecalculator;
         $this->objectManager = $objectManager;
     }
 
@@ -144,7 +147,7 @@ final class OrderContext implements Context
         $this->orderShipmentFactory->processOrderShipment($order);
         $order->getShipments()->first()->setMethod($shippingMethod);
 
-        $this->shippingChargesProcessor->applyShippingCharges($order);
+        $this->orderRecalculator->recalculate($order);
 
         $payment = $this->paymentFactory->createWithAmountAndCurrency($order->getTotal(), $order->getCurrency());
         $payment->setMethod($paymentMethod);
@@ -163,6 +166,8 @@ final class OrderContext implements Context
     public function theCustomerBoughtSingleProduct(ProductInterface $product)
     {
         $this->addSingleProductVariantToOrder($product->getMasterVariant(), $product->getPrice());
+
+        $this->objectManager->flush();
     }
 
     /**
@@ -171,15 +176,31 @@ final class OrderContext implements Context
     public function theCustomerBoughtSingleProductVariant(ProductVariantInterface $productVariant)
     {
         $this->addSingleProductVariantToOrder($productVariant, $productVariant->getPrice());
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given the customer bought single :product using :coupon coupon
+     */
+    public function theCustomerBoughtSingleUsing(ProductInterface $product, CouponInterface $coupon)
+    {
+        $order = $this->addSingleProductVariantToOrder($product->getMasterVariant(), $product->getPrice());
+        $order->setPromotionCoupon($coupon);
+
+        $this->orderRecalculator->recalculate($order);
+
+        $this->objectManager->flush();
     }
 
     /**
      * @param ProductVariantInterface $productVariant
      * @param int $price
+     *
+     * @return OrderInterface
      */
     private function addSingleProductVariantToOrder(ProductVariantInterface $productVariant, $price)
     {
-        /** @var OrderInterface $order */
         $order = $this->sharedStorage->get('order');
 
         /** @var OrderItemInterface $item */
@@ -191,6 +212,8 @@ final class OrderContext implements Context
 
         $order->addItem($item);
 
-        $this->objectManager->flush();
+        $this->orderRecalculator->recalculate($order);
+
+        return $order;
     }
 }

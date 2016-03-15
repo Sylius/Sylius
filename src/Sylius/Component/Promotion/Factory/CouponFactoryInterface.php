@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Promotion\Factory;
 
+use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**

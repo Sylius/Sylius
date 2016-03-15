@@ -12,8 +12,6 @@
 namespace spec\Sylius\Behat\Context\Domain;
 
 use Behat\Behat\Context\Context;
-use Behat\Mink\Exception\ExpectationException;
-use Behat\Mink\Tests\Exception\ExpectationExceptionTest;
 use PhpSpec\Exception\Example\NotEqualException;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
