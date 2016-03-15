@@ -7,5 +7,5 @@ sylius:
       code: Kód
       name: Názov
       parent: Nadradený prototyp
-      attributes: Produktové vlastnosti
-      options: Produktové voľby
+      attributes: Vlastnosti
+      options: Voľby

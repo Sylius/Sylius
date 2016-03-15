@@ -25,6 +25,8 @@ sylius:
       max: 'Priezvisko nesmie byť dlhšie ako {{ limit }} znakov.'
       min: 'Priezvisko musí obsahovať minimálne {{ limit }} znakov.'
       not_blank: Zadajte Vaše priezvisko.
+    gender:
+      not_blank: Pohlavie musí byť vyplnené.
     email:
       already_used: Tento e-mail sa už používa, prosím prihláste sa alebo použite reset hesla.
       max: 'E-mail nesmie byť dlhší ako {{ limit }} znakov.'

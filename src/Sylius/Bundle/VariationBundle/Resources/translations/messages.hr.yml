@@ -6,8 +6,7 @@ sylius:
     variant:
       presentation: Prezentacija
     option:
-      name: Interni naziv
-      presentation: Prezentacija
+      name: Naziv grupe
       values: Moguće vrijednosti
     option_value:
       add_value: Dodaj vrijednost

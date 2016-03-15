@@ -461,15 +461,6 @@ sylius:
     name: Име
     no_image: Наме слике за категоризацију
     update_header: Ажурирање категоризације
-  taxonomy:
-    create: Креирајте категоризацију
-    create_header: Нова категоризација
-    image: Изаберите слику
-    index_header: 'Категоризација <small>Дефинисане категорије</small>'
-    name: Име
-    no_image: Нема слика за категоризацију
-    show_header: 'Категоризација <small><стронг>%name%</стронг></small>'
-    update_header: Ажурирање категоризације
   ui:
     login: Пријави се
     logout: Одјави се

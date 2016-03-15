@@ -126,8 +126,6 @@ sylius:
     name: الاسم
   taxon:
     name: الاسم
-  taxonomy:
-    name: الاسم
   ui:
     email: البريد الإلكتروني
     name: الاسم

@@ -5,4 +5,4 @@ sylius:
   form:
     collection:
       add: Añadir
-      delete: sylius.account.address.action.delete
+      delete: Eliminar

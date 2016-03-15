@@ -215,8 +215,6 @@ sylius:
     zone: Zona
   taxon:
     name: Nama
-  taxonomy:
-    name: Nama
   ui:
     code: Kode
     name: Nama

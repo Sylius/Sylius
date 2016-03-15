@@ -35,7 +35,7 @@ sylius:
         tax_categories: Adózási kategóriák
         tax_rates: Adókulcsok
         taxation_settings: Adózás-beállítások
-        taxonomies: Kategorizálás
+        taxons: Kategorizálás
         zones: Zónák
       sidebar:
         assortment: Választék
@@ -68,7 +68,7 @@ sylius:
         tax_categories: Adózási kategóriák
         tax_rates: Adókulcsok
         taxation_settings: Adózás-beállítások
-        taxonomies: Kategorizálás
+        taxons: Kategorizálás
         zones: Zónák
   frontend:
     menu:

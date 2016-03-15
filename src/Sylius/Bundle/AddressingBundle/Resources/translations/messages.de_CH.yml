@@ -17,6 +17,7 @@ sylius:
       name: Name
       provinces: Kantone
       select: Auswählen
+      enabled: Aktiviert
     province:
       name: Name
       select: Auswählen

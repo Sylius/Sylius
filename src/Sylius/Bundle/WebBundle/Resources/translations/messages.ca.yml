@@ -303,8 +303,6 @@ sylius:
     zone: Zona
   taxon:
     name: Nom
-  taxonomy:
-    name: Nom
   ui:
     code: Codi
     email: Correu electrònic

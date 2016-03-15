@@ -8,7 +8,24 @@ sylius:
       password: Slaptažodis
       remember_me: Prisiminti mane
   ui:
+    create: Sukurti
+    dashboard: Skydelis
+    delete: Šalinti
+    edit: Redaguoti
+    actions: Veiksmai
+    enabled: Įjungta
+    description: Aprašymas
+    "no": false
+    powered_by: Sukurta
     sign_in: Prisijungti
     sign_out: Atsijungti
-    dashboard: Skydelis
-    powered_by: Sukurta
+    success: Pavyko
+    "yes": true
+    new: Naujas
+    save_changes: Išsaugoti pakeitimus
+    new_tax_category: Nauja mokesčių kategorija
+    filter: Filtruoti
+    empty: Išvalyti
+    countries: Šalys
+    new_country: Naujas šalis
+    locales: Lokalės

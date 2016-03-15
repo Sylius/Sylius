@@ -7,4 +7,20 @@ sylius:
       username: Brugernavn
       password: Adgangskode
   ui:
+    create: Opret
     dashboard: Kontrolpanel
+    delete: Slet
+    edit: Rediger
+    actions: Handlinger
+    enabled: Aktiveret
+    description: Beskrivelse
+    "no": false
+    success: Succes
+    "yes": true
+    new: Ny
+    save_changes: Gem ændringer
+    new_tax_category: Ny moms kategori
+    filter: Filter
+    countries: Lande
+    new_country: Nyt land
+    locales: Landekoder

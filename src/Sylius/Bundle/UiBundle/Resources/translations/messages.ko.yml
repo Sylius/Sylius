@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    login:
+      remember_me: 아이디/암호 저장
+  ui:
+    "no": false
+    "yes": true

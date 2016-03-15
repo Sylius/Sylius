@@ -6,8 +6,7 @@ sylius:
     variant:
       presentation: Bemutató
     option:
-      name: Belső név
-      presentation: Bemutató
+      name: Név
       values: Lehetséges értékek
     option_value:
       add_value: Adja hozzá az értéket

@@ -6,8 +6,7 @@ sylius:
     variant:
       presentation: Prezantimi
     option:
-      name: Emri i brendshëm
-      presentation: Prezantimi
+      name: Emri
       values: Vlera të mundshme
     option_value:
       add_value: Shto vlerën

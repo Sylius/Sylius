@@ -20,9 +20,11 @@ sylius:
       last_name: Apellidos
       email: Dirección de correo electrónico
       phone_number: Teléfono
+      gender: Sexo
       birthday: Fecha de nacimiento
       billing_address: Dirección de facturación
       different_billing_address: ¿Usar una dirección diferente para la facturación?
+      only_customer_registration: ¿Crear cuenta?
     user_filter:
       query: Búsqueda
     user_change_password:

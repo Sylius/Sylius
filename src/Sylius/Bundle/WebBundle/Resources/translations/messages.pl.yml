@@ -238,8 +238,8 @@ sylius:
     tax_rate:
       index: Stawki podatkowe
     taxation_settings: Ustawienia podatków
-    taxonomy:
-      index: Kategorie
+    taxon:
+      index: Taksony
     update: Edytuj
     zone:
       index: Strefy
@@ -274,7 +274,6 @@ sylius:
     update: Edytuj
     update_header: Edycja kanału
     updated_at: Zmodyfikowano
-    url: URL
   checkout:
     addressing:
       header: Adres
@@ -897,22 +896,13 @@ sylius:
     updated_at: Ostatnia aktualizacja
     zone: Strefa
   taxon:
+    index_header: Taksony
     create: Dodaj taksonomie
     create_header: Nowa taksonomia
     image: Wybierz zdjęcie
     name: Nazwa
     no_image: Brak zdjęcia
     product_index_header: 'Produkty sklasyfikowane jako "%name%"'
-    update_header: Edycja taksonomii
-  taxonomy:
-    create: Dodaj taksonomie
-    create_header: Nowa taksonomia
-    image: Wybierz zdjęcie
-    index_header: 'Kategoria <small>Tutaj znajdziesz zdefiniowane grupy produktów</small>'
-    manage: Zarządzanie kategoriami
-    name: Nazwa
-    no_image: Brak zdjęcia
-    show_header: 'Taksonomia <small><strong>%name%</strong></small>'
     update_header: Edycja taksonomii
   total_quantity: Całkowita ilość
   ui:

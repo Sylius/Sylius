@@ -5,7 +5,7 @@ sylius:
   form:
     attribute:
       add: Pridať
-      add_attributes: Pridať produktovú vlastnosť
+      add_attributes: Pridať vlastnosť
       choices: Voľby
       code: Kód
       name: Názov
@@ -20,7 +20,7 @@ sylius:
       percent: Percento
       text: Text
       textarea: Textové pole
-      title: Typy produktového variantu
+      title: Typy vlastností
       validation: Validácia
     attribute_type_configuration:
       datetime:

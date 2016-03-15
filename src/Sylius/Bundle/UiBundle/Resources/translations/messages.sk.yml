@@ -8,7 +8,25 @@ sylius:
       password: Heslo
       remember_me: Zapamätať si ma
   ui:
+    create: Vytvoriť
+    dashboard: Administračný panel
+    delete: Odstrániť
+    edit: Upraviť
+    actions: Akcie
+    enabled: Zapnuté
+    description: Popis
+    "no": false
+    powered_by: Vytvorené v systéme
     sign_in: Prihlásiť
     sign_out: Odhlásiť
-    dashboard: Administračný panel
-    powered_by: Vytvorené v systéme
+    status: Stav
+    success: Úspech
+    "yes": true
+    new: Nová
+    save_changes: Uložiť zmeny
+    new_tax_category: Nová daňová kategoria
+    filter: Filter
+    empty: Prázdne
+    countries: Krajiny
+    new_country: Nová krajina
+    locales: Jazyky

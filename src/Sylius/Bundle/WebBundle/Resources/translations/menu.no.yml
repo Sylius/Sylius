@@ -35,7 +35,7 @@ sylius:
         tax_categories: Beskatningskategorier
         tax_rates: Skattesatser
         taxation_settings: Beskatningsinnstillinger
-        taxonomies: Kategorisering
+        taxons: Kategorisering
         zones: Soner
       sidebar:
         assortment: Utvalg
@@ -68,7 +68,7 @@ sylius:
         tax_categories: Beskatningskategorier
         tax_rates: Skattesatser
         taxation_settings: Beskatningsinnstillinger
-        taxonomies: Kategorisering
+        taxons: Kategorisering
         zones: Soner
   frontend:
     menu:

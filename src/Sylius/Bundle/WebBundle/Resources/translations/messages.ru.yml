@@ -265,8 +265,8 @@ sylius:
     tax_rate:
       index: sylius.breadcrumb.tax_rate.index
     taxation_settings: Настройки налогооблажения
-    taxonomy:
-      index: Список каталогов
+    taxon:
+      index: Налоги
     update: sylius.breadcrumb.update
     zone:
       index: sylius.breadcrumb.zone.index
@@ -302,7 +302,6 @@ sylius:
     update: Редактировать
     update_header: Редактировать каналы
     updated_at: Изменено
-    url: Ссылка
   checkout:
     addressing:
       header: Адрес
@@ -878,6 +877,7 @@ sylius:
     updated_at: Последнее изменение
     zone: sylius.tax_rate.zone
   taxon:
+    index_header: Налоги
     create: Создать категорию
     create_header: Новая категория
     image: Выбрать изображение
@@ -885,16 +885,6 @@ sylius:
     no_image: Нет изображения для этой подкатегории
     product_index_header: 'Товары категории «%name%»'
     update_header: Редактировать подкатегорию
-  taxonomy:
-    create: Создать каталог
-    create_header: Новая категория
-    image: Выбрать изображение
-    index_header: 'Каталоги <small>Здесь вы можете изменить каталоги</small>'
-    manage: Редактировать каталоги
-    name: Название
-    no_image: Этот каталог не имеет изображения
-    show_header: 'Категория <small><strong>%name%</strong></small>'
-    update_header: Редактировать категорию
   total_quantity: Общее количество
   ui:
     account_panel_outline: Воспользуйтесь всеми возможными преимуществами для просмотра, отслеживания и управления своих данных

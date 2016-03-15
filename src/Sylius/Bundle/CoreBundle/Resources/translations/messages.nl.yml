@@ -111,6 +111,7 @@ sylius:
       images: Afbeeldingen
       on_hand: Huidige voorraad
       price: Prijs
+      original_price: Oorspronkelijke prijs
       sku: SKU
       weight: Gewicht
       width: Breedte
@@ -120,5 +121,7 @@ sylius:
         value: Waarde
     guest:
       email: E-mail
+    product_association:
+      type: Associatietype
     product_association_type:
       name: Naam

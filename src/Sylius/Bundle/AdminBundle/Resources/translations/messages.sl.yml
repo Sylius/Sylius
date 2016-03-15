@@ -7,3 +7,5 @@ sylius:
       main:
         configuration:
           header: Konfiguracija
+          countries: Države
+          locales: Področne nastavitve

@@ -7,4 +7,20 @@ sylius:
       username: ชื่อผู้ใช้
       password: รหัสผ่าน
   ui:
+    create: สร้าง
     dashboard: แดชบอร์ด
+    delete: ลบ
+    edit: แก้ไข
+    actions: ดำเนินการ
+    enabled: เปิดใช้งานแล้ว
+    description: คำอธิบาย
+    "no": false
+    success: สำเร็จ
+    "yes": true
+    new: รายการใหม่
+    save_changes: บันทึกการเปลี่ยนแปลง
+    new_tax_category: ประเภทภาษีใหม่
+    filter: ตัวกรอง
+    countries: ประเทศ
+    new_country: ประเทศใหม่
+    locales: ภาษาที่ใช้

@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  ui:
+    enabled: Aktiviert
+    "no": false
+    "yes": true
