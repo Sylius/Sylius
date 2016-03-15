@@ -70,7 +70,10 @@
         </service>
 
         <service id="sylius.behat.context.ui.product" class="%sylius.behat.context.ui.product.class%" scope="scenario">
+            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.behat.page.product_show" />
+            <argument type="service" id="sylius.behat.page.admin.product_show" />
+            <argument type="service" id="sylius.behat.page.admin.product_index" />
             <tag name="sylius.behat.context" />
         </service>
 

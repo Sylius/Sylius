@@ -12,25 +12,56 @@
 namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Page\Admin\Product\IndexPageInterface;
+use Sylius\Behat\Page\Admin\Product\ShowPageInterface;
+use Sylius\Behat\Page\Product\ProductShowPage;
+use Sylius\Behat\Page\Admin\Product\ShowPage as AdminProductShowPage;
 use Sylius\Behat\Page\Product\ProductShowPageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
 final class ProductContext implements Context
 {
     /**
-     * @var ProductShowPageInterface
+     * @var SharedStorageInterface
+     */
+    private $sharedStorage;
+
+    /**
+     * @var ProductShowPage
      */
     private $productShowPage;
 
     /**
-     * @param ProductShowPageInterface $productShowPage
+     * @var AdminProductShowPage
      */
-    public function __construct(ProductShowPageInterface $productShowPage)
-    {
+    private $adminProductShowPage;
+
+    /**
+     * @var IndexPageInterface
+     */
+    private $adminProductIndexPage;
+
+    /**
+     * @param SharedStorageInterface $sharedStorage
+     * @param ProductShowPageInterface $productShowPage
+     * @param ShowPageInterface $adminProductShowPage
+     * @param IndexPageInterface $adminProductIndexPage
+     */
+    public function __construct(
+        SharedStorageInterface $sharedStorage,
+        ProductShowPageInterface $productShowPage,
+        ShowPageInterface $adminProductShowPage,
+        IndexPageInterface $adminProductIndexPage
+    ) {
+        $this->sharedStorage = $sharedStorage;
         $this->productShowPage = $productShowPage;
+        $this->adminProductShowPage = $adminProductShowPage;
+        $this->adminProductIndexPage = $adminProductIndexPage;
     }
 
     /**
@@ -51,5 +82,27 @@ final class ProductContext implements Context
         $this->productShowPage->tryToOpen(['product' => $product]);
 
         expect($this->productShowPage->isOpen(['product' => $product]))->toBe(false);
+    }
+
+    /**
+     * @When I delete the :product product
+     */
+    public function iDeleteProduct(ProductInterface $product)
+    {
+        $this->adminProductShowPage->open(['id' => $product->getId()]);
+
+        $this->adminProductShowPage->deleteProduct();
+
+        $this->sharedStorage->set('product', $product);
+    }
+
+    /**
+     * @Then /^(this product) should not exist in the product catalog$/
+     */
+    public function productShouldNotExist(ProductInterface $product)
+    {
+        $this->adminProductIndexPage->open();
+
+        expect($this->adminProductIndexPage->isThereProduct($product))->toBe(false);
     }
 }

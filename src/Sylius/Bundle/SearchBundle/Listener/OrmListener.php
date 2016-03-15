@@ -96,7 +96,7 @@ class OrmListener implements EventSubscriber
     {
         $entity = $args->getEntity();
         if ($this->ormIndexer->isObjectIndexable($entity)) {
-            $this->scheduledForDeletion[] = $entity;
+            $this->scheduledForDeletion[] = ['id' => $entity->getId(), 'entity' => $entity];
         }
     }
 

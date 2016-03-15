@@ -82,14 +82,6 @@ Feature: Orders management
         Then I should be on the order index page
         And I should see "Order has been successfully deleted"
 
-    Scenario: Order integrity is preserved after deleting a product
-        Given I have deleted the product "Mug"
-        And I go to the order index page
-        When I click "Details" near "#000000001"
-        Then I should be viewing order with number "000000001"
-        And I should see "Mug"
-        And I should see "Total: €14.74"
-
     Scenario: Accessing the order details page from list
         Given I am on the order index page
         When I click "Details" near "#000000001"

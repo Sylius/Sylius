@@ -22,19 +22,15 @@
     {% else %}
         {{ buttons.enable(path('sylius_backend_product_enable', {'id': product.id})) }}
     {% endif %}
-    {% if not product.deleted %}
-        <a href="{{ path('sylius_backend_metadata_container_customize', { 'id': product.metadataIdentifier }) }}" class="btn btn-default">
-            <i class="glyphicon glyphicon-file"></i><span>{{ 'sylius.metadata.product.single_customize'|trans }}</span>
-        </a>
-        {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}
-        {{ buttons.delete(path('sylius_backend_product_delete', {'id': product.id}), null, false, true) }}
-        <a href="{{ path(product) }}" class="btn btn-info">
-           <i class="glyphicon glyphicon-shopping-cart"></i>
-            {{ 'sylius.product.show_in_store'|trans }}
-        </a>
-    {% else %}
-        {{ buttons.patch(path('sylius_backend_product_delete_restore', {'id': product.id}), 'sylius.restore'|trans, null, 'btn btn-primary') }}
-    {% endif %}
+    <a href="{{ path('sylius_backend_metadata_container_customize', { 'id': product.metadataIdentifier }) }}" class="btn btn-default">
+        <i class="glyphicon glyphicon-file"></i><span>{{ 'sylius.metadata.product.single_customize'|trans }}</span>
+    </a>
+    {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}
+    {{ buttons.delete(path('sylius_backend_product_delete', {'id': product.id}), null, false, true) }}
+    <a href="{{ path(product) }}" class="btn btn-info">
+       <i class="glyphicon glyphicon-shopping-cart"></i>
+        {{ 'sylius.product.show_in_store'|trans }}
+    </a>
     <a href="{{ path('sylius_backend_product_history', {'id': product.id}) }}" class="btn btn-info">
        <i class="glyphicon glyphicon-calendar"></i>
         {{ 'sylius.history.header'|trans }}
@@ -42,7 +38,6 @@
     </div>
     <h1>
         <i class="glyphicon glyphicon-info-sign"></i> {{ 'sylius.product.show_header'|trans({'%product%': product.name})|raw }}
-        {% if product.deleted %}<span class="label label-danger">{{ 'sylius.deleted'|trans }}</span>{% endif %}
     </h1>
 </div>
 
@@ -277,7 +272,6 @@
 
 <hr>
 
-{% if not product.deleted %}
 <div class="well well-sm">
     {{ buttons.create(path('sylius_backend_product_variant_create', {'productId': product.id}), 'sylius.variant.create'|trans) }}
     {% if product.hasOptions %}
@@ -287,7 +281,6 @@
         <strong>{{ 'sylius.product.variant_selection_method'|trans }}</strong>: {{ product.variantSelectionMethodLabel }}
     </div>
 </div>
-{% endif %}
 
 {{ list_variants(product.variants) }}
 

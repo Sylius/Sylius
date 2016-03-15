@@ -269,37 +269,6 @@ class ProductSpec extends ObjectBehavior
         $this->getUpdatedAt()->shouldReturn($date);
     }
 
-    function it_has_no_deletion_date_by_default()
-    {
-        $this->getDeletedAt()->shouldReturn(null);
-    }
-
-    function it_is_not_be_deleted_by_default()
-    {
-        $this->shouldNotBeDeleted();
-    }
-
-    function its_deletion_date_is_mutable()
-    {
-        $deletedAt = new \DateTime();
-
-        $this->setDeletedAt($deletedAt);
-        $this->getDeletedAt()->shouldReturn($deletedAt);
-    }
-
-    function it_is_deleted_only_if_deletion_date_is_in_past()
-    {
-        $deletedAt = new \DateTime('yesterday');
-
-        $this->setDeletedAt($deletedAt);
-        $this->shouldBeDeleted();
-
-        $deletedAt = new \DateTime('tomorrow');
-
-        $this->setDeletedAt($deletedAt);
-        $this->shouldNotBeDeleted();
-    }
-
     function it_is_enabled_by_default()
     {
         $this->shouldBeEnabled();
