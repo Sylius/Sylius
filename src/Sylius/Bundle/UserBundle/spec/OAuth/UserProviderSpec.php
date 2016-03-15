@@ -154,6 +154,7 @@ class UserProviderSpec extends ObjectBehavior
         $response->getEmail()->willReturn(null);
         $response->getUsername()->willReturn('username');
         $response->getNickname()->willReturn('user');
+        $response->getRealName()->willReturn('Name');
         $response->getResourceOwner()->willReturn($resourceOwner);
         $response->getAccessToken()->willReturn('access_token');
 
@@ -162,6 +163,7 @@ class UserProviderSpec extends ObjectBehavior
 
         $userFactory->createNew()->willReturn($user);
         $customerFactory->createNew()->willReturn($customer);
+        $customer->setFirstName('Name')->shouldBeCalled();
 
         $oauth->setIdentifier('username');
         $oauth->setProvider('google');
