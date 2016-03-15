@@ -48,3 +48,6 @@ sylius:
     countries: Countries
     manage_country: Manage country
     new_country: New country
+    locales: Locales
+    new_locale: New locale
+    manage_locale: Manage locale

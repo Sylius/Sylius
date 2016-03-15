@@ -1,3 +1,4 @@
 imports:
     - { resource: @SyliusAdminBundle/Resources/config/grids/tax_category.yml }
     - { resource: @SyliusAdminBundle/Resources/config/grids/country.yml }
+    - { resource: @SyliusAdminBundle/Resources/config/grids/locale.yml }
