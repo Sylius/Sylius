@@ -39,22 +39,20 @@ before_install:
 
     - etc/travis/prepare-memcached-extension
 
-    - phpenv config-add etc/travis/before-install-php.ini
-
     - composer self-update
 
     - if [[ -z "$GITHUB_OAUTH_TOKEN" ]]; then export GITHUB_OAUTH_TOKEN="66736022ed66ebbb2be87027ed45a24554cc8344"; fi
     - composer config -g github-oauth.github.com "$GITHUB_OAUTH_TOKEN" >/dev/null 2>&1
 
 install:
+    - phpenv config-add etc/travis/install-php.ini
+
     - composer install --no-interaction --no-scripts --prefer-dist
     - etc/bin/install-packages
 
     - composer run-script travis-build --no-interaction
 
 before_script:
-    - phpenv config-add etc/travis/before-script-php.ini
-
     - app/console doctrine:database:create --env=test_cached # have to be run with debug = true, to omit generating proxies before setting up the database
 
     - app/console cache:warmup --env=test_cached --no-debug
@@ -76,7 +74,7 @@ script:
 
     - if [[ $TRAVIS_PHP_VERSION = 7.* ]]; then bin/kawaii gherkin:check --align=left features/; fi;
 
-    - bin/phpspec run --no-interaction -f dot
+    - php -d opcache.enable_cli=0 bin/phpspec run --no-interaction -f dot
     - bin/phpunit
 
     - etc/bin/test-packages
