@@ -49,7 +49,7 @@ sylius:
         tax_categories: Категорії оподаткування
         tax_rates: Податкові ставки
         taxation_settings: Налаштування оподаткування
-        taxonomies: Категоризація
+        taxons: Категоризація
         zones: Пояси
       sidebar:
         api_clients: API клієнти
@@ -98,7 +98,7 @@ sylius:
         tax_categories: Категорії оподаткування
         tax_rates: Податкові ставки
         taxation_settings: Налаштування оподаткування
-        taxonomies: Категоризація
+        taxons: Категоризація
         zones: Пояси
   frontend:
     menu:

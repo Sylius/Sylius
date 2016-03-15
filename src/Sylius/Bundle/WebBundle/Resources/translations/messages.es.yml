@@ -7,7 +7,7 @@ sylius:
       action:
         billing: Establecer como dirección de facturación por defecto
         create: Crear una nueva dirección
-        delete: sylius.account.address.action.delete
+        delete: Eliminar
         edit: Editar
         shipping: Establecer como dirección de envío por defecto
       create: sylius.account.address.create
@@ -16,34 +16,44 @@ sylius:
         no_billing: sylius.account.address.default.no_billing
         no_shipping: sylius.account.address.default.no_shipping
         shipping: sylius.account.address.default.shipping
+      empty: No tiene ninguna dirección definida
       list: sylius.account.address.list
       update: sylius.account.address.update
     home:
       email: Dirección de correo electrónico
+      id: Identificador del cliente
       last5orders: Últimos 5 pedidos
+      outline: Disfrute de todas las características disponibles en su espacio personal para examinar, controlar y gestionar todos sus datos
       since: Eres cliente desde
       welcome: Bienvenido a tu espacio
     order:
       created_at: Hecho el
       details: Detalles de tu pedido
       download_invoice: Descargar la factura
+      empty: Aún no ha realizado ningún pedido
       invoice: Factura
       list: Todos tus pedidos
       number: Número
+      payment_mode: Modo de pago
       placed_at: 'Hecho el %at%'
       shipment:
         pending: Pendiente
         ready: 'Preparado desde %at%'
         returned: 'Devuelto %at%'
         shipped: 'Enviado %at%'
+      shipment_mode: Modo de envío
       state: Estado
       total: Total
       tracking_number: Número de seguimiento
     title: Mi cuenta
   add_to_cart: Añadir al carrito
   association_type:
+    index_header: Tipos de asociación
+    update_header: Editar tipo de asociación
+    create_header: Crear un tipo de asociación
     name: Nombre
     create: Crear
+    update: Actualizar
   address:
     city: Ciudad
     company: Empresa
@@ -66,6 +76,7 @@ sylius:
     create_header: Nuevo prototipo
     index_header: Prototipos de producto
     name: Nombre
+    no_results: No hay prototipos definidos
     options: Opciones de producto
     parent: Padre
     update_header: Editar prototipo
@@ -91,6 +102,7 @@ sylius:
       orders_this_month: Pedidos
       registrations_this_month: Usuarios
       sales_this_month: Ventas
+  backend_welcome: 'Hola <b>%name%</b>'
   billing_address: Facturar a
   block:
     imagine:
@@ -108,6 +120,7 @@ sylius:
       updated_at: Fecha de última modificación
     imagine_blocks: Bloque de imagen
     index_header: Bloques
+    no_results: No hay bloques para mostrar
     simple:
       body: Cuerpo
       create: Crear bloque simple
@@ -153,6 +166,8 @@ sylius:
       updated_at: Fecha de última modificación
     string_blocks: Bloques de texto
   breadcrumb:
+    archetype:
+      index: Prototipos
     assortment: Varios
     attribute:
       index: Atributos
@@ -199,6 +214,8 @@ sylius:
       index: Menús
     menu_node:
       index: Nodos de menú
+    metadata:
+      index: Metadatos
     new: Nuevo
     option:
       index: Opciones de producto
@@ -215,16 +232,24 @@ sylius:
       index: Permisos
     product:
       index: Productos
+    association_type:
+      index: Tipos de asociación
     promotion:
       index: Promociones
     promotion_coupon:
       index: sylius.breadcrumb.promotion_coupon.index
+    product_association:
+      index: Asociación
+    product_association_type:
+      index: Tipos de asociación
     redirect_route:
       index: Reglas de redireccion
     report:
       index: Informes
     role:
       index: Roles
+    review:
+      index: Reseñas
     route:
       index: Rutas
     sales: Ventas
@@ -243,8 +268,8 @@ sylius:
     tax_rate:
       index: Impuestos
     taxation_settings: Configuración de impuestos
-    taxonomy:
-      index: Categorización
+    taxon:
+      index: Taxonomías
     update: Actualizar
     zone:
       index: Zonas
@@ -273,12 +298,13 @@ sylius:
     enabled: Activado
     id: ID
     index_header: Canales
+    locale_default: Configuración regional predeterminada
     manage: Administrar canales
     name: Nombre
+    no_results: No hay ningún canal configurado
     update: Editar
     update_header: Editando canal
     updated_at: Fecha de última modificación
-    url: Url
   checkout:
     addressing:
       header: Dirección de entrega
@@ -296,6 +322,7 @@ sylius:
         street: Dirección
       header: Resumen del pedido
       order:
+        additional_information: Información adicional
         billing_address: Dirección de facturación
         items_total: Total
         no_items: Este pedido no contiene productos
@@ -329,8 +356,10 @@ sylius:
       proceed_order: Proceder con su orden
       register: Crear una cuenta
     shipping:
+      error: Lo sentimos, pero nuestra tienda no puede enviar productos al país que ha elegido
       header: Métodos de envío
   confirmation:
+    message: Desea eliminar este elemento
     title: Confirmación
   contact_request:
     create: Crear solicitud de contacto
@@ -341,6 +370,7 @@ sylius:
     index_header: Solicitud de contacto
     lastName: Apellidos
     message: Mensaje
+    no_results: No hay solicitudes de contacto para mostrar
     show_header: Detalles de la solicitud de contacto
     topic: Asunto
     update_header: Editando solicitudes de contacto
@@ -350,6 +380,7 @@ sylius:
     create_header: Nuevo tema de contacto
     id: ID
     index_header: Topicos de contacto
+    no_results: No hay temas de contacto para mostrar
     title: Título
     update_header: Editando tema de contacto
     updated_at: Fecha de última modificación
@@ -362,6 +393,7 @@ sylius:
     index_header: Países
     manage: Gestionar países
     name: Nombre
+    no_results: No hay países configurados
     show_header: Detalles del país
     update_header: Editar país
   create: Crear
@@ -375,10 +407,12 @@ sylius:
     id: ID
     index_header: Monedas
     name: Nombre
+    no_results: No hay monedas para mostrar
     update_header: Editando moneda
     updated_at: Fecha de última modificación
   customer:
     billing_address: Dirección de facturación
+    create: Crear cliente
     create_header: Nuevo cliente
     creation_date: Fecha de creación
     email: Dirección de correo electrónico
@@ -392,13 +426,18 @@ sylius:
     id: ID
     index_header: 'Clientes <small>Lista de todos los clientes en la tienda</small>'
     last_name: Apellidos
+    manage: Gestionar clientes
+    no_groups: No hay grupos de este cliente para mostrar
+    no_results: No hay clientes para mostrar
+    order:
+      no_results: No hay pedidos de este cliente para mostrar
     orders: Pedidos del cliente
     recent_header: Clientes recientes
     shipping_address: Dirección de envío
     show_header: Detalles del cliente
     update_header: Editando cliente
     phone_number: Teléfono
-  delete: sylius.account.address.action.delete
+  delete: Eliminar
   deleted: Eliminado
   disable: Desactivar
   edit: Editar
@@ -409,6 +448,7 @@ sylius:
     enabled: Activado
     index_header: Plantillas de correo electrónico
     manage: Administrar mensajes de correo electrónico
+    no_results: No hay ningún email configurado
     subject: Asunto
     update_header: Editando el correo electrónico
     updated_at: Fecha de última modificación
@@ -418,10 +458,13 @@ sylius:
       subject: Nuevo comentario publicado en el pedido
     order_confirmation:
       name: Confirmación de pedido
+      subject: Gracias por su pedido
     shipment_confirmation:
       name: Confirmación del envío
+      subject: Su pedido ha sido enviado
     user_confirmation:
       name: Confirmación de usuario
+      subject: Bienvenido a nuestra tienda
   enable: Activar
   filter: Filtrar
   form:
@@ -430,6 +473,7 @@ sylius:
     choose_file: Seleccionar fichero
     comment:
       comment: Comentario
+      notify_customer: Notificar al cliente
     frontend:
       password:
         confirmation: Confirmación
@@ -464,6 +508,7 @@ sylius:
     id: ID
     index_header: Grupos
     name: Nombre
+    no_results: No hay grupos para mostrar
     roles: Roles
     update_header: Editar grupo
   hide_deleted: Ocultar eliminados
@@ -474,6 +519,7 @@ sylius:
     empty: Vaciar
     header: Historial
     logged_at: Registrado en (versión)
+    no_results: No hay eventos registrados para mostrar
     revert: Revertir
   homepage:
     splash:
@@ -483,6 +529,7 @@ sylius:
     created_at: Fecha de creación
     inventory_state: Estado de inventario
     name: Nombre
+    no_results: Hay no hay unidades de inventario para mostrar
     shipping_state: Estado del envío
     sku: SKU
     updated_at: Fecha de última modificación
@@ -494,6 +541,7 @@ sylius:
     id: ID
     index_header: Índice de todos los idiomas configurados
     name: Nombre
+    no_results: No hay idiomas configurados
     update_header: Editar idioma
     updated_at: Fecha de última modificación
   login: Entrar
@@ -506,6 +554,7 @@ sylius:
     end_date: Fecha fin
     id: ID
     index_header: Menús
+    no_results: No hay menús para mostrar
     publishable: Publicado
     start_date: Fecha de inicio
     title: Título
@@ -515,25 +564,44 @@ sylius:
     create_header: Crear nodo de menú
     id: ID
     index_header: Nodos de menú
+    no_results: No hay nodos de menú para mostrar
     parent: Padre
     title: Título
     update_header: Editar nodo del menu
   meta:
     backend_title: Panel de administración
+    frontend_description: Sylius es una solución moderna de e-commerce desarrollada en PHP y basada en el framework Symfony2
+    frontend_keywords: Sylius, e-commerce, symfony2, tienda, carrito, webshop
     frontend_title: Sylius, e-commerce moderno para Symfony2
   metadata:
+    customize_header: Personalización de metadatos
+    show_header: Mostrar metadatos
     id: ID
+    customize: Personalizar metadatos
+    manage: Administrar metadatos
     content: Contenido
+    index_metadata: Metadatos
+    default_page:
+      group_customize: Personalizar metadatos predeterminados
+    product:
+      single_customize: Personalizar metadatos
+      group_customize: Personalizar metadatos de productos
+    product_variant:
+      single_customize: Personalizar metadatos
+  move_down: Bajar
+  move_up: Subir
   na: N/A
   newest: Novedades
   "no": false
   no_results: No hay resultados
   order:
+    additional_information: Información adicional
     adjustments:
       amount: Cantidad
       description: Descripción
       lock: Bloquear
       lock_all: Bloquear todos los ajustes
+      locked: Bloqueado
       manage: Manejar ajustes
       type: Tipo
       unlock: Desbloquear
@@ -560,6 +628,7 @@ sylius:
     general_info: Información general
     guest: Cliente invitado
     id: ID
+    immutable_warning: Los pedidos enviados ya no pueden ser modificados
     index_header: Pedidos actuales
     inventory_tracking: Control de inventario
     inventory_unit:
@@ -570,6 +639,7 @@ sylius:
     items_total: Total
     manage: Gestionar pedidos
     no_items: Este pedido no contiene productos
+    no_promotion: No fueron utilizados cupones
     no_results: No tiene pedidos nuevos
     no_shipments: No hay envíos para este pedido
     no_shipping_charges: Sin cargos de envío aplicados
@@ -593,8 +663,12 @@ sylius:
     shipping_total: Total de envío
     show_header: Orden
     state:
+      abandoned: Abandonado
       cancelled: Cancelado/a
+      cart_locked: Carrito bloqueado
       checkout: Completar pedido
+      order_confimed: Pedido confirmado
+      ordered: Pedido realizado
       returned: Devuelto
       shipped: Enviado
     tax_total: Total de impuestos
@@ -602,12 +676,23 @@ sylius:
     total: Total
     update_header: Editar orden
   review:
+    create: Nueva reseña
+    index: Reseñas de producto
+    manage: Gestionar reseñas
+    no_reviews: No hay reseñas.
     id: ID
     subject: Asunto
     title: Título
+    status: Estado
+    rating: Valoración
     author: Autor
     guest: Invitado
     created_at: Creando el
+    details: Detalles de reseña
+    editing: Editando reseña
+    header: Reseñas de productos
+    product_review: Reseñas de producto
+    no_results: Hay no hay reseñas para este producto.
   order_item:
     product: sylius.order_item.product
     quantity: Cantidad
@@ -622,6 +707,7 @@ sylius:
     end_date: Fecha fin
     id: ID
     index_header: Páginas
+    no_results: No hay páginas para mostrar
     no_route: Su contenido no aparecerá en la interfaz si no se ha definido ninguna ruta
     publishable: Publicado
     routes: Rutas
@@ -638,6 +724,7 @@ sylius:
     index_header: Pagos
     manage: sylius.payment.manage
     method: Metodo
+    no_results: No hay ningún pago configurado
     order: Orden
     state:
       cancelled: Cancelado/a
@@ -656,10 +743,12 @@ sylius:
   payment_method:
     create: Crear método de pago
     create_header: Nuevo método de pago
+    enabled: Está habilitado
     gateway: Puerta de Enlace
     id: ID
     index_header: Métodos de pago
     name: Nombre
+    no_results: No hay métodos de pago configurados
     update_header: Editar método de pago
     updated_at: Fecha de última modificación
   permission:
@@ -669,6 +758,7 @@ sylius:
     description: Descripción
     id: ID
     index_header: Permisos
+    no_results: No hay permisos definidos
     update_header: Editando el permiso
     updated_at: Fecha de última modificación
   pricing:
@@ -677,13 +767,16 @@ sylius:
         add: Añadir
       max: Volumen máximo
       min: Volumen mínimo
+      no_results: No configuración de precios
       price: Precio
   product:
     add_attribute: Añadir atributo
     archetype: Prototipo
     attributes: Atributos
+    association: Asociación
     available_on: Disponible el
     available_on_demand: Disponible bajo demanda
+    available_until: Disponible hasta
     categorization: Categorización
     contain_variants: Contiene Variantes
     create: Crear producto
@@ -692,28 +785,35 @@ sylius:
     generate_variants: generar variantes
     index_by_taxon_header: 'Productos <small>Categorizados bajo el taxon "%taxon%"</small>'
     index_header: Productos
+    main_taxon: Clasificación principal
     manage: Gestionar productos
     name: Nombre
     no_attributes: Este producto no tiene atributos definidos
     no_description: '<i>Sin descripción...</i>'
     no_images: No hay imágenes del producto
     no_options: No hay opciones para este producto
+    no_results: No hay productos
     no_shipping_category: Sin categoría de envío
     no_short_description: '<i>Sin descripción corta</i>'
     no_sku: '<i>No tiene SKU</i>'
     no_tax_category: Sin categoría de impuestos
+    no_taxon: No hay ningún taxón para este producto
     no_taxons: No taxons
     options: Opciones
+    original_price: Precio original
     price: Precio
+    rating: Valoración
     restricted_zone: Zona restringida
     remove_attribute: Remover atributo
     shipping_category: Categoría de envío
     show: Ver más
     show_header: 'Detalles del producto <small>"<strong>%product%</strong>"</small>'
+    show_in_store: Mostrar en la tienda
     sku: SKU
     stock: Stock actual
     tabs:
       attributes: Atributos
+      associations: Asociaciones
       categorization: Categorización
       channels: Canales
       images: Imágenes
@@ -726,6 +826,7 @@ sylius:
     updated_at: Última actualización
     variant_selection_method: étodo de selección de la variante
     variants: Variantes
+    view_details: 'Ver detalles de %product%'
     volume_based:
       price: Precio
       qty_max: Cantidad Maxima
@@ -739,15 +840,18 @@ sylius:
     index_header: Atributos del producto
     manage: Gestionar atributos
     name: Nombre
+    no_results: No hay atributos configurado
     type: Tipo
     update_header: Editando atributo
     updated_at: Fecha de última modificación
   product_association:
     code: Código
+    create: Crear asociación de producto
     create_header: Nuevo producto
     index_header: Atributos del producto
     manage: Gestionar atributos
     name: Nombre
+    no_results: No hay atributos configurados
     type: Tipo
     update_header: Editando atributo
     updated_at: Fecha de última modificación
@@ -758,9 +862,11 @@ sylius:
     index_header: Opciones del producto
     manage: Administrar opciones de producto
     name: Nombre
+    no_results: No hay opciones configuradas
     presentation: Presentación
     update_header: Editando opción
     updated_at: Fecha de última modificación
+    values: Valores
   promotion:
     actions: Acciones
     add_action: Añadir acción
@@ -777,6 +883,7 @@ sylius:
     index_header: Promociones actuales
     manage: Gestionar promociones
     name: Nombre
+    no_results: No hay promociones configuradas
     priority: Prioridad
     rules: Reglas
     show_header: Detalles de la promoción
@@ -797,6 +904,7 @@ sylius:
     generate_header: Generando cupones
     index: Listar cupones
     index_header: sylius.promotion_coupon.index_header
+    no_results: No hay cupones
     total_results:
       Total: '%total%'
     update_header: Editar cupón
@@ -810,6 +918,7 @@ sylius:
     create_header: Creando ruta de redirección
     id: ID
     index_header: Redirección de ruta
+    no_results: No hay rutas de redirección para mostrar
     title: Título
     update_header: Editar rutas de redireccion
   remember_me: Recordarme
@@ -819,13 +928,18 @@ sylius:
     create_header: Crear reporte nuevo
     data_fetcher: Tipo de obtención de datos
     description: Descripción
+    details: Detalles
     id: Id
     index_header: Informes
     manage: Administrar
     name: Nombre
+    no_data: No hay datos para mostrar
+    no_report: No hay informe para mostrar
+    no_results: No hay informes creados
     renderer: Tipo de procesador
     show_header: Detalles del reporte
     update_header: Editar reporte
+  restore: Recuperar
   role:
     code: Código
     create: Añadir nuevo rol
@@ -834,6 +948,7 @@ sylius:
     id: ID
     index_header: Roles
     name: Nombre
+    no_results: No hay roles definidos
     update_header: Editando rol
     updated_at: Fecha de última modificación
   route:
@@ -842,6 +957,7 @@ sylius:
     id: ID
     index_header: Rutas
     name: Nombre
+    no_results: No hay rutas para mostrar
     page: Página
     title: Título
     update_header: Editando ruta
@@ -851,8 +967,10 @@ sylius:
   security:
     login:
       button: Iniciar sesión
+      forgot_password: Contraseña olvidada
       header: 'Inicio de sesión <small>Tienda sylius</small>'
       info: 'Por favor ingrese usando <b>"sylius@example.com"</b> y <b>"sylius"</b> como contraseña'
+      no_account: Sin cuenta todavía
   settings:
     general_header: Encabezado general
     security_header: Ajustes de seguridad
@@ -866,6 +984,8 @@ sylius:
     method: Método
     modified: Fecha de modificacion
     name: Nombre
+    no_items: No hay elementos para mostrar
+    no_results: Hay no hay envíos para mostrar
     order: Orden
     ship: Envío
     show_header: Mostrar encabezado
@@ -885,6 +1005,7 @@ sylius:
     index_header: Categorías de envio
     manage: Gestionar
     name: Nombre
+    no_results: No hay categorías de envio configuradas
     update_header: Actualizar
     updated_at: Fecha de última modificación
   shipping_method:
@@ -897,16 +1018,22 @@ sylius:
     index_header: Métodos de envio
     manage: Gestionar
     name: Nombre
+    no_results: No hay métodos envío configurados
     show_header: Mostrar
     update_header: Actualizar
     updated_at: Fecha de última modificación
     zone: Zona
   shop_by: Comprado por
+  show: Detalles
   show_all: Ver todos
   show_deleted: Mostrar eliminados
   stockable:
     index_header: 'Inventory <small>Aquí puede ver los niveles de stock actuales</small>'
     name: Nombre
+    no_results: Hay no hay artículos en el inventario para mostrar
+    on_hand: Nivel de existencias
+    on_hold: En espera
+    sku: Sku (referencia)
     updated_at: Fecha de última modificación
   tax_category:
     create: Crear categoría de impuesto
@@ -917,6 +1044,7 @@ sylius:
     manage: Gestionar
     name: Nombre
     no_description: No descripción
+    no_results: No hay categorías de impuestos configurados
     update_header: Actualizar
     updated_at: Fecha de última modificación
   tax_rate:
@@ -925,53 +1053,74 @@ sylius:
     category: Categoria
     create: Crear tasa de impuesto
     create_header: Nueva tasa de impuesto
+    included_in_price: Incluido en el precio
     index_header: Tasas de impuesto
     manage: Gestionar
     name: Nombre
+    no_results: No hay tasas de impuestos configuradas
     show_header: Mostrar
     update_header: Actualizar
     updated_at: Última actualización
     zone: Zona
   taxon:
+    index_header: Taxonomías
     create: Crear taxon
     create_header: Nuevo taxon
     image: Elige una imagen
     name: Nombre
     no_image: No hay imagen para esta taxon
+    no_results: No hay taxones configurados
     product_index_header: 'Productos clasificados por "%name%"'
-    update_header: Actualizar
-  taxonomy:
-    create: Crear taxonomia
-    create_header: Nueva taxonomia
-    image: Elige una imagen
-    index_header: Taxonomias
-    manage: sylius.taxonomy.manage
-    name: Nombre
-    no_image: No hay imagen para esta taxonomía
-    show_header: Mostrar
     update_header: Actualizar
   total_quantity: Cant total
   ui:
+    account_panel_outline: Disfrute de todas las características disponibles en su espacio personal para examinar, controlar y gestionar todos sus datos
     change_password: Cambiar mi contraseña
     code: Código
+    customer:
+      id: Identificador del cliente
+    customer_since: Usted es cliente desde
     email: Dirección de correo electrónico
+    forgot_password: Contraseña olvidada
     links: Enlaces
+    logged_in_as: 'Conectado como %username%'
     login: Iniciar sesión
     logout: Cerrar sesión
+    no_account: Sin cuenta todavía
+    password:
+      reset:
+        button: Restablecer
+        header: Restablecer contraseña
+    profile: Perfil
     register: Registrarse
+    reset: Restablecer
+    reset_password: Restablecer contraseña
+    welcome: Bienvenido/a
+    add_association: Añadir asociación
+    product_associations: Asociaciones de producto
+    create_product_association: Crear asociación de producto
+    product_association_types: Tipos de asociación de productos
+    create_product_association_type: Crear tipo de asociación de producto
+    update_product_association_type: Actualizar tipo de asociación de producto
+    no_association_types_to_display: No hay tipos de asociación definidos
     name: Nombre
     id: Id
   unknown: Desconocido
   user:
+    create: Crear usuario
     create_header: Nuevo usuario
+    enabled: Confirmado
     general_info: Info General
     id: ID
     impersonate: Inicar sesión como este usuario
     index_header: Lista de todos los usuarios registrados en la tienda
     last_login: Ultimo Inicio de sesion
+    manage: Gestionar usuarios
+    no_results: No hay usuarios configurados
     oauth:
       access_token: Token de acceso
       identifier: Identificador
+      none: Sin cuentas de OAuth conectadas
       provider: Proveedor de OAuth
     recent_header: Usuario recientes
     register:
@@ -989,7 +1138,9 @@ sylius:
     create_header: Nueva variante
     delete_image: Borrar imagen
     last_update: Última actualización
+    no_results: No hay variantes configuradas
     options: Opciones
+    original_price: Precio original
     price: Precio
     sku: SKU
     stock: Stock actual
@@ -1002,6 +1153,7 @@ sylius:
     index_header: Zonas
     manage: Gestionar zonas
     name: Nombre
+    no_results: No hay zonas configuradas
     scope: Alcance
     show_header: Detalles de la zona
     type: Tipo

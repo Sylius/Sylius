@@ -35,7 +35,9 @@ sylius:
       unique: De land ISO code moet uniek zijn.
   province:
     code:
+      min_length: Provinciecode moet minstens 5 karakters lang zijn.
       not_blank: Gelieve een provincie code in te geven.
+      regex: 'Provinciecode zou het volgende formaat moeten hebben: XX-XX (bv. US-FL).'
       unique: De provincie code moet uniek zijn.
     name:
       max_length: Provincie naam mag niet langer dan 255 tekens zijn|Provincie naam mag niet langer dan 255 tekens zijn.
@@ -51,3 +53,7 @@ sylius:
     name:
       max_length: Zone naam mag niet langer dan 255 tekens zijn|Zone naam mag niet langer dan 255 tekens zijn.
       not_blank: Voer een zone naam in.
+  zone_member:
+    code:
+      not_blank: Kies een zonelid.
+    unique: Het gekozen zonelid zit reeds in deze zone.

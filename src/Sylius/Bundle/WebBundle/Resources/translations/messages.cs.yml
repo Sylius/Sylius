@@ -237,8 +237,8 @@ sylius:
     tax_rate:
       index: Daňové sazby
     taxation_settings: Nastavení zdanění
-    taxonomy:
-      index: Taxonomie
+    taxon:
+      index: Taxony
     update: Úpravy
     zone:
       index: Oblasti
@@ -272,7 +272,6 @@ sylius:
     update: Úpravy
     update_header: Editace kanálu
     updated_at: Poslední aktualizace
-    url: Adresa URL
   checkout:
     addressing:
       header: Krok řešení
@@ -910,6 +909,7 @@ sylius:
     updated_at: Poslední aktualizace
     zone: Oblast
   taxon:
+    index_header: Taxony
     create: Vytvořit taxon
     create_header: Nový taxon
     image: Zvolit obrázek
@@ -917,16 +917,6 @@ sylius:
     no_image: Žádný obrázek pro tento taxon
     product_index_header: 'Produkty zařazené jako "%name%"'
     update_header: Editace taxonu
-  taxonomy:
-    create: Vytvořit systematizaci
-    create_header: Nová systematizace
-    image: Zvolit obrázek
-    index_header: 'Kategorizace <small>zde můžete vidět definované systematizace</small>'
-    manage: Správa systematizování
-    name: Jméno
-    no_image: Není žádný obrázek pro tuto systematizaci
-    show_header: 'Systematizace <small><strong>%name%</strong></small>'
-    update_header: Editace systematizace
   total_quantity: Celkové množství
   ui:
     change_password: Změnit heslo

@@ -7,3 +7,6 @@ sylius:
       main:
         configuration:
           header: Konfigurácia
+          tax_categories: Daňové kategórie
+          countries: Krajiny
+          locales: Jazyky

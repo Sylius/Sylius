@@ -5,3 +5,7 @@ sylius:
   form:
     login:
       password: Kata sandi
+  ui:
+    enabled: Diaktifkan
+    "no": false
+    "yes": true

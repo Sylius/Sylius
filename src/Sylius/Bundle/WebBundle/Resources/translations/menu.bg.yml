@@ -33,7 +33,7 @@ sylius:
         tax_categories: Категории такси
         tax_rates: Данъчни ставки
         taxation_settings: Настройки на данъчно облагане
-        taxonomies: Категоризация
+        taxons: Категоризация
         zones: Зони
       sidebar:
         assortment: Асортимент
@@ -65,7 +65,7 @@ sylius:
         tax_categories: Категории такси
         tax_rates: Данъчни ставки
         taxation_settings: Настройки на данъчно облагане
-        taxonomies: Категоризация
+        taxons: Категоризация
         zones: Зони
   frontend:
     menu:

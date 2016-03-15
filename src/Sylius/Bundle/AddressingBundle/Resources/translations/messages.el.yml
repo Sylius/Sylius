@@ -17,6 +17,7 @@ sylius:
       name: Ονομασία
       provinces: Επαρχίες
       select: Επιλέξτε
+      enabled: Ενεργοποιημένο
     province:
       name: Ονομασία
       select: Επιλέξτε

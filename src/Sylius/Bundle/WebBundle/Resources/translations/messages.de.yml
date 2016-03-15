@@ -245,8 +245,8 @@ sylius:
     tax_rate:
       index: Steuersätze
     taxation_settings: Gruppeneinstellungen
-    taxonomy:
-      index: Klassifizierungen
+    taxon:
+      index: Gruppen
     update: Bearbeiten
     zone:
       index: Versandgebiete
@@ -281,7 +281,6 @@ sylius:
     update: Bearbeiten
     update_header: Channel editieren
     updated_at: Geändert
-    url: URL
   checkout:
     addressing:
       header: Lieferadresse
@@ -925,6 +924,7 @@ sylius:
     updated_at: Geändert
     zone: Gebiet
   taxon:
+    index_header: Gruppen
     create: Klassifizierung hinzufügen
     create_header: Klassifizierung hinzufügen
     image: Bild auswählen
@@ -932,16 +932,6 @@ sylius:
     no_image: Kein Bild für dieses Schlagwort vorhanden
     product_index_header: 'Produkte kategorisiert als "%name%"'
     update_header: Klassifizierung editieren
-  taxonomy:
-    create: Erstellen
-    create_header: Klassifizierung editieren
-    image: Bild auswählen
-    index_header: 'Gruppierung <small>Hier siehst du die definierten Gruppierungen</small>'
-    manage: Gruppierungen verwalten
-    name: Name
-    no_image: Kein Bild für diese Gruppierung vorhanden
-    show_header: 'Gruppierung <small><strong>%name%</strong></small>'
-    update_header: Gruppierung editieren
   total_quantity: Stück Ges.
   ui:
     change_password: Passwort ändern

@@ -36,7 +36,7 @@ sylius:
         tax_categories: 征税类别
         tax_rates: 税率
         taxation_settings: 税收的设置
-        taxonomies: 分类
+        taxons: 分类
         zones: 区域
       sidebar:
         assortment: 分类
@@ -70,7 +70,7 @@ sylius:
         tax_categories: 征税类别
         tax_rates: 税率
         taxation_settings: 税收的设置
-        taxonomies: 分类
+        taxons: 分类
         zones: 区域
   frontend:
     menu:

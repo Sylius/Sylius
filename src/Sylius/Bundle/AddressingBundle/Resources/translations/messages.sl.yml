@@ -18,6 +18,7 @@ sylius:
       name: Ime
       provinces: Province
       select: Izberite
+      enabled: Omogočeno
     province:
       name: Ime
       abbreviation: Kratica

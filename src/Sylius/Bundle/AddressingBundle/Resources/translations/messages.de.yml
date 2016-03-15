@@ -18,6 +18,7 @@ sylius:
       name: Name
       provinces: Bundesländer
       select: Bundesland auswählen
+      enabled: Aktiviert
     province:
       name: Name
       abbreviation: Abkürzung

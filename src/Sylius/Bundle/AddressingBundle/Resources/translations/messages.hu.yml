@@ -18,6 +18,7 @@ sylius:
       name: Név
       provinces: Tartományok
       select: Válassza ki
+      enabled: Engedélyezve
     province:
       name: Név
       select: Válasszon

@@ -12,10 +12,10 @@ sylius:
         shipping: تنظیم به عنوان آدرس تحویل پیش‌فرض
       create: افزودن آدرس جدید
       default:
-        billing: آدرس پیش فرض
-        no_billing: آدرس پیش فرض تعریف نشده
+        billing: آدرس پیش فرض صورت حساب
+        no_billing: آدرس پیش فرضی برای صورت حساب تعریف نشده
         no_shipping: آدرس پیش فرضی برای تحویل تعریف نشده
-        shipping: آدرس پیش فرض تحویل کالا
+        shipping: آدرس پیش فرض تحویل
       empty: هیچ آدرسی در حساب شما ثبت نشده است
       list: تمامی آدرس های شما
       update: ویرایش آدرس من
@@ -70,10 +70,10 @@ sylius:
     warning: هشدار
   archetype:
     attributes: قابلیت ها
-    build: ساخت قلم کالا
-    build_header: تعریف کالا از روی قلم کالا
-    create: ایجاد قلم کالا
-    create_header: قلم کالای جدید
+    build: ساخت قلم محصول
+    build_header: ایجاد محصول از روی قلم محصول
+    create: ایجاد قلم محصول
+    create_header: قلم محصول جدید
     index_header: اقلام محصول
     name: نام
     no_results: قلم کالایی تعریف نشده
@@ -96,7 +96,7 @@ sylius:
       add_product: کالای جدید
       customers: مشتریان
       orders: آخرین سفارش‌ها
-      products: کالاهای شما
+      products: محصولات شما
     statistics:
       header: آمار ماه جاری
       orders_this_month: کل سفارش ها
@@ -242,10 +242,14 @@ sylius:
       index: ارتباط ها
     product_association_type:
       index: نوع ارتباط
+    redirect_route:
+      index: آدرس داخلی
     report:
       index: گزارش ها
     role:
       index: نقش ها
+    review:
+      index: نقد و بررسی
     route:
       index: آدرس های داخلی
     sales: میزان فروش ماه جاری
@@ -264,12 +268,12 @@ sylius:
     tax_rate:
       index: نرخ های مالیات
     taxation_settings: تنظیمات مالیات
-    taxonomy:
-      index: رده بندی
+    taxon:
+      index: رده ها
     update: ويرايش
     zone:
       index: مناطق
-  browse_products: نمایش کالاها
+  browse_products: نمایش محصولات
   cancel: لغو
   cart:
     empty: سبد خرید شما خالی است
@@ -301,7 +305,6 @@ sylius:
     update: ويرايش
     update_header: ویرایش کانال
     updated_at: آخرین به روز رسانی
-    url: آدرس اینترنتی
   checkout:
     addressing:
       header: اطلاعات کاربر
@@ -673,12 +676,22 @@ sylius:
     total: قیمت کل
     update_header: ویرایش سفارش
   review:
+    create: نقد و بررسی جدید
+    index: نقد و بررسی محصول
+    manage: مدیریت نقد و بررسی ها
+    no_reviews: هیچ نقد و بررسی وجود ندارد.
     id: شناسه
     subject: عنوان
     title: عنوان
+    status: وضعیت
     author: نويسنده
     guest: می خواهم بدون ثبت نام ادامه دهم
     created_at: ایجاد شده در
+    details: جزئیات نقد و بررسی
+    editing: ویرایش نقد و بررسی
+    header: نقد و بررسی محصول
+    product_review: نقد و بررسی محصول
+    no_results: هیچ نقد و بررسی برای این محصول ثبت نشده است.
   order_item:
     product: کالا
     quantity: تعداد
@@ -899,8 +912,13 @@ sylius:
   province:
     provinces: استان ها
   redirect_route:
+    create: ایجاد آدرس داخلی
+    create_header: ایجاد آدرس داخلی
     id: شناسه
+    index_header: آدرس داخلی
+    no_results: هیچ آدرس داخلی برای نمایش وجود ندارد
     title: عنوان
+    update_header: ویرایش آدرس داخلی
   remember_me: مرا به خاطر بسپار
   report:
     code: نام انگلیسی
@@ -1043,6 +1061,7 @@ sylius:
     updated_at: آخرین به روز رسانی
     zone: منطقه
   taxon:
+    index_header: رده ها
     create: ایجاد زیر رده
     create_header: رده جدید
     image: انتخاب عکس
@@ -1051,17 +1070,6 @@ sylius:
     no_results: هیچ زیررده ای برای نمایش وجود ندارد
     product_index_header: 'محصولات زیر دسته ی %name%'
     update_header: ویرایش رده
-  taxonomy:
-    create: ایجاد رده اصلی
-    create_header: رده ی جدید
-    image: انتخاب عکس
-    index_header: 'دسته بندی <small>در اینجا رده های تعریف شده را می بینید</small>'
-    manage: مدیریت رده ها
-    name: نام
-    no_image: هیچ عکسی برای این رده وجود ندارد
-    no_results: هیچ رده ای تعریف نشده است
-    show_header: 'رده ی <small><strong>%name%</strong></small>'
-    update_header: ویرایش رده اصلی
   total_quantity: تعداد کل
   ui:
     account_panel_outline: از این صفحه می توانید برای مشاهده, دنبال کردن و مدیریت اطلاعاتتان استفاده کنید.

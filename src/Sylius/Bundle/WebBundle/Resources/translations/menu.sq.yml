@@ -52,11 +52,12 @@ sylius:
         tax_categories: Kategoritë e taksimit
         tax_rates: Normat e taksimit
         taxation_settings: Rregullat e taksimit
-        taxonomies: Kategorizimi
+        taxons: Kategorizimi
         zones: Zonat
       sidebar:
         api_clients: Klientët API
         archetypes: Prototipet e produktit
+        association_types: Tipet e lidhjes se produktit
         assortment: Asortimenti
         attributes: Konfiguro atributet
         blocks: Blloqet
@@ -77,6 +78,7 @@ sylius:
         locales: Rajonet
         marketing: Marketingu
         menus: Menutë
+        metadata: Metadata
         new_order: Shto porosi të re
         new_promotion: Shto reklamë të re
         options: Përdor opsionet
@@ -102,7 +104,7 @@ sylius:
         tax_categories: Kategoritë e taksimit
         tax_rates: Normat e taksimit
         taxation_settings: Rregullat e taksimit
-        taxonomies: Kategorizimi
+        taxons: Kategorizimi
         zones: Zonat
   frontend:
     menu:

@@ -7,3 +7,5 @@ sylius:
       main:
         configuration:
           header: Konfiguration
+          countries: Lande
+          locales: Landekoder

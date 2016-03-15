@@ -141,8 +141,6 @@ sylius:
     zone: Zon
   taxon:
     name: Namn
-  taxonomy:
-    name: Namn
   ui:
     code: Kod
     name: Namn

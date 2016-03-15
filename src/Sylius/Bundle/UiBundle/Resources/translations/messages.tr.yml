@@ -8,4 +8,21 @@ sylius:
       password: Şifre
       remember_me: Beni hatırla
   ui:
+    create: Oluştur
     dashboard: Kontrol Paneli
+    delete: Sil
+    edit: Düzenle
+    actions: Eylemler
+    enabled: Etkin
+    description: Açıklama
+    "no": false
+    success: Başarılı
+    "yes": true
+    new: Yeni
+    save_changes: Değişiklikleri kaydet
+    new_tax_category: Yeni vergi kategorisi
+    filter: Filtrele
+    empty: Boş
+    countries: Ülkeler
+    new_country: Yeni ülke
+    locales: Diller

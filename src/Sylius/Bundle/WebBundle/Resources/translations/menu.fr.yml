@@ -52,11 +52,12 @@ sylius:
         tax_categories: Catégories de taxes
         tax_rates: Taux de taxe
         taxation_settings: Configuration des taxes
-        taxonomies: Catégorisation
+        taxons: Catégorisation
         zones: Zones
       sidebar:
         api_clients: Clients API
         archetypes: Archétypes de produit
+        association_types: "Types d'association de produits"
         assortment: Assortiment
         attributes: Configurer les attributs
         blocks: Blocs
@@ -77,6 +78,7 @@ sylius:
         locales: Locales
         marketing: Marketing
         menus: Menus
+        metadata: Méta-données
         new_order: Ajouter une nouvelle commande
         new_promotion: Ajouter une nouvelle promotion
         options: Gérer les options
@@ -102,7 +104,7 @@ sylius:
         tax_categories: Catégories de taxes
         tax_rates: Taux de taxe
         taxation_settings: Configuration des taxes
-        taxonomies: Catégorisation
+        taxons: Catégorisation
         zones: Zones
   frontend:
     menu:

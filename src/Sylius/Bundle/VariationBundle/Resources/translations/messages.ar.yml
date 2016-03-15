@@ -6,7 +6,6 @@ sylius:
     variant:
       presentation: تقديم
     option:
-      name: اسم داخلي
-      presentation: تقديم
+      name: الاسم
     option_value:
       value: القيمة

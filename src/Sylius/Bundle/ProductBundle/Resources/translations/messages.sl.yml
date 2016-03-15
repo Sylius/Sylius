@@ -8,6 +8,7 @@ sylius:
       description: Opis
       attributes: Atributi
       options: Možnosti
+      taxons: Taksoni
     product_variant:
       available_on: Na voljo na
       available_until: Na voljo do

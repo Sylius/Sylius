@@ -166,8 +166,8 @@ sylius:
     tax_rate:
       index: Impozite si taxe
     taxation_settings: Setări taxe
-    taxonomy:
-      index: Categorizări
+    taxon:
+      index: Categorii
     update: Editare
     zone:
       index: Zone
@@ -700,6 +700,7 @@ sylius:
     updated_at: Ultima actualizare
     zone: Zonă
   taxon:
+    index_header: Categorii
     create: Creeare categorie
     create_header: Categorie nouă
     image: Selectaţi imagine
@@ -707,16 +708,6 @@ sylius:
     no_image: Nu există nici o imagine pentru această categorie
     product_index_header: 'Produse categorizate ca "%name%"'
     update_header: Editare categorie
-  taxonomy:
-    create: Creeare categorizare
-    create_header: Categorizare nouă
-    image: Selectaţi imagine
-    index_header: 'Categorizare <small>Aici vedeți categorizările</small>'
-    manage: Gestionare categorizări
-    name: Nume
-    no_image: Nu există nici o imagine pentru această categorizare
-    show_header: 'Detalii <small><strong>%name%</strong></small>'
-    update_header: Editare categorizare
   total_quantity: Cantitate totală
   ui:
     change_password: Modificare parolă

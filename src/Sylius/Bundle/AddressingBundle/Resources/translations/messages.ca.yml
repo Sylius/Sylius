@@ -17,6 +17,7 @@ sylius:
       name: Nom
       provinces: Províncies
       select: Tria
+      enabled: Activat
     province:
       name: Nom
       select: Tria

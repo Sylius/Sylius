@@ -22,7 +22,7 @@ sylius:
         sales: Παραγγελίες
         shipments: Αποστολές
         tax_rates: Φορολογικοί συντελεστές
-        taxonomies: Κατηγοριοποίηση
+        taxons: Κατηγοριοποίηση
         zones: Ζώνες
       sidebar:
         assortment: Κατάταξη
@@ -46,7 +46,7 @@ sylius:
         shipments: Αποστολές
         stockables: Επίπεδα αποθέματος
         tax_rates: Φορολογικοί συντελεστές
-        taxonomies: Κατηγοριοποίηση
+        taxons: Κατηγοριοποίηση
         zones: Ζώνες
   frontend:
     menu:

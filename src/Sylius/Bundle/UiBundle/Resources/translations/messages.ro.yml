@@ -7,4 +7,20 @@ sylius:
       username: Nume de utilizator
       password: Parolă
   ui:
+    create: Creează
     dashboard: Panou de administrare
+    delete: Șterge
+    edit: Editare
+    actions: Acțiuni
+    enabled: Activat
+    description: Descriere
+    "no": false
+    success: Succes
+    "yes": true
+    new: Nouă
+    save_changes: Salvează modificările
+    new_tax_category: Categorie de taxă nouă
+    filter: Filtrează
+    countries: Țări
+    new_country: Țară nouă
+    locales: Setări regionale

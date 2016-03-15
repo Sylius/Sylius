@@ -148,7 +148,7 @@ sylius:
     tax_rate:
       index: Памеры падаткаў
     taxation_settings: Падатковыя налады
-    taxonomy:
+    taxon:
       index: Катэгорыі
     update: Рэдагаваць
     zone:
@@ -670,6 +670,7 @@ sylius:
     updated_at: Апошняе абнаўленне
     zone: Зона
   taxon:
+    index_header: Катэгорыі
     create: Стварыць класіфікацыю
     create_header: Новы класіфікацыя
     image: Абраць выяву
@@ -677,16 +678,6 @@ sylius:
     no_image: Для гэтай класіфікацыйнай групы няма выявы
     product_index_header: 'Тавары, катэгарызаваныя як "%name%"'
     update_header: Рэдагаванне класіфікацыі
-  taxonomy:
-    create: Стварыць сістэматызацыю
-    create_header: Новая сістэматызацыя
-    image: Абраць выяву
-    index_header: 'Катэгарызацыя <small>Тут можна бачыць вызначаныя таксаноміі</small>'
-    manage: Кіраваць сістэматызацыяй
-    name: Імя
-    no_image: Для гэтай таксаноміі няма выявы
-    show_header: 'Сістэматызацыя<small><strong>%name%</strong></small>'
-    update_header: Рэдагаванне сістэматызацыі
   total_quantity: Агульная колькасць
   ui:
     change_password: Змяніць пароль

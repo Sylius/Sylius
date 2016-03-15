@@ -6,7 +6,6 @@ sylius:
     variant:
       presentation: Præsentation
     option:
-      name: System navn
-      presentation: Præsentation
+      name: Navn
     option_value:
       add_value: Tilføj værdi

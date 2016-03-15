@@ -3,6 +3,14 @@
 
 sylius:
   imagine_block:
+    name:
+      not_blank: Vul een imagine bloknaam in.
+    label:
+      not_blank: Vul een imagine bloklabel in.
+    filter:
+      not_blank: Vul een imagine blokfilter in.
+    image:
+      not_blank: Kies een imagine blokafbeelding.
     start_date:
       invalid_date: Start datum publiceren ongeldig.
     end_date:

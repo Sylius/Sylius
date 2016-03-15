@@ -6,5 +6,4 @@ sylius:
     variant:
       presentation: Präsentation
     option:
-      name: Interner Name
-      presentation: Präsentation
+      name: Name

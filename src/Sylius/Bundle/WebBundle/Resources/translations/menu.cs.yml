@@ -50,7 +50,7 @@ sylius:
         tax_categories: Typy zdanění
         tax_rates: Daňové sazby
         taxation_settings: Daně
-        taxonomies: Kategorizace
+        taxons: Kategorizace
         zones: Oblasti
       sidebar:
         api_clients: Klienti rozhraní API
@@ -100,7 +100,7 @@ sylius:
         tax_categories: Typy zdanění
         tax_rates: Daňové sazby
         taxation_settings: Daně
-        taxonomies: Kategorizace
+        taxons: Kategorizace
         zones: Oblasti
   frontend:
     menu:
