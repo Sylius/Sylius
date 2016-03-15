@@ -740,6 +740,10 @@ sylius:
             refunded: Refunded
             unknown: Unknown
             void: Void
+        transition:
+            complete: complete
+            cancel: cancel
+            refund: refund
         update_header: Editing payment
         updated_at: Last update
     payment_method:
@@ -995,6 +999,13 @@ sylius:
         sku: SKU
         state: State
         tracking_code: Tracking Code
+        transition:
+            release: release
+            backorder: backorder
+            prepare: prepare
+            ship: ship
+            cancel: cancel
+            return: return
         update: Edit
         update_header: Editing shipment
         updated_at: Last update

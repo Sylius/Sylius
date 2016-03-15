@@ -13,4 +13,4 @@
     {% set label = 'info' %}
 {% endif %}
 
-<span class="label label-{{ label }}">{{ state|title }}</span>
+{{ misc.state_label(state, 'shipment') }}
