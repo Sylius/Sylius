@@ -50,16 +50,6 @@ abstract class ItemDiscountAction implements PromotionActionInterface
     /**
      * {@inheritdoc}
      */
-    abstract public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion);
-
-    /**
-     * {@inheritdoc}
-     */
-    abstract public function getConfigurationFormType();
-
-    /**
-     * {@inheritdoc}
-     */
     public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
         if (!$subject instanceof OrderInterface) {
