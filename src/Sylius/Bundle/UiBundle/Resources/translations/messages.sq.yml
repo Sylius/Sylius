@@ -8,7 +8,24 @@ sylius:
       password: Fjalëkalimi
       remember_me: Më mbaj mend
   ui:
+    create: Krijo
+    dashboard: Paneli
+    delete: Fshi
+    edit: Afisho
+    actions: Veprimet
+    enabled: E aktivizuar
+    description: Përshkrimi
+    "no": false
+    powered_by: Mundësuar nga
     sign_in: Hyr
     sign_out: Dil
-    dashboard: Paneli
-    powered_by: Mundësuar nga
+    success: Sukses
+    "yes": true
+    new: E re
+    save_changes: Ruaj ndryshimet
+    new_tax_category: Kategori e re taksimi
+    filter: Filtri
+    empty: Bosh
+    countries: Vendet
+    new_country: Vend i ri
+    locales: Rajonet

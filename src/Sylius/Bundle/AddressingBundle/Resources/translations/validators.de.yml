@@ -44,6 +44,8 @@ sylius:
       not_blank: Bitte geben Sie Ihr Bundesland an.
       unique: Bundesland-Name muss eindeutig sein.
   zone:
+    code:
+      not_blank: Bitte geben Sie Ihre Vorwahl ein.
     members:
       min_count: 'Bitte geben Sie mindestens {{ limit }} Versandgebiete an.'
     name:

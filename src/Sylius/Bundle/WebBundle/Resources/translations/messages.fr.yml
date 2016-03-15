@@ -266,8 +266,8 @@ sylius:
     tax_rate:
       index: Taux de taxe
     taxation_settings: Configuration des taxes
-    taxonomy:
-      index: Taxonomies
+    taxon:
+      index: Famille de tags
     update: Modifier
     zone:
       index: Zones
@@ -303,7 +303,7 @@ sylius:
     update: Modifier
     update_header: "Mise à jour d'un canal"
     updated_at: Date de modification
-    url: Url
+    theme: Thème
   checkout:
     addressing:
       header: Adresse de livraison
@@ -1051,6 +1051,7 @@ sylius:
     updated_at: Dernière mise à jour
     zone: Zone
   taxon:
+    index_header: Famille de tags
     create: Créer un taxon
     create_header: Nouveau taxon
     image: Choisissez une image
@@ -1059,17 +1060,6 @@ sylius:
     no_results: "Il n'y a pas de taxons à afficher"
     product_index_header: 'Produits classés en tant que « %name% »'
     update_header: Modification d’un taxon
-  taxonomy:
-    create: Ajouter un taxon
-    create_header: Nouvelle taxonomie
-    image: Choisissez une image
-    index_header: Taxonomies
-    manage: Gérer les taxonomies
-    name: Nom
-    no_image: "Il n'y a pas d'image pour cette taxonomie"
-    no_results: "Il n'y a pas de taxonomies de définies"
-    show_header: Détail de la taxonomie
-    update_header: Modification d’une taxonomie
   total_quantity: Qté totale
   ui:
     account_panel_outline: Profitez de toutes les fonctionnalités qui sont disponibles sur votre espace personnel pour visualiser, suivre et gérer toutes vos données

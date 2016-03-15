@@ -6,8 +6,7 @@ sylius:
     variant:
       presentation: Prezentace
     option:
-      name: Interní název
-      presentation: Prezentace
+      name: Jméno
       values: Možné hodnoty
     option_value:
       add_value: Přidání hodnoty

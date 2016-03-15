@@ -7,6 +7,7 @@ sylius:
       main:
         api_clients: API İstemcileri
         archetypes: Ürün arketipler
+        association_types: Ürün ilişki türleri
         assortment: Çeşitlilik
         attributes: özellikleri yapılandırma
         blocks: Bloklar
@@ -17,9 +18,9 @@ sylius:
         countries: Ülkeler
         currencies: Para birimi
         customer: Müşteri
-        customers: müşteriler
+        customers: Müşteriler
         dashboard: Kontrol Paneli
-        emails: E-posta
+        emails: E-postalar
         general_settings: Genel ayarlar
         groups: Gruplar
         homepage: Mağazanız
@@ -29,9 +30,9 @@ sylius:
         new_order: Sipariş ekle
         new_promotion: Yeni promosyon ekle
         options: Ürün seçeneklerini yönet
-        orders: Şuanki siparişler
+        orders: Şimdiki Sipariş
         pages: Sayfalar
-        payment_methods: Ödeme tipleri
+        payment_methods: Ödeme Yöntemleri
         payments: Ödemeler
         permissions: İzinler
         products: Ürünler
@@ -46,15 +47,16 @@ sylius:
         shipping_methods: Gönderim metodları
         slideshow: Slayt gösterisi
         stockables: Stok düzeyleri
-        support: DESTEK
-        tax_categories: Kdv kategorileri
-        tax_rates: Kdv oranları
-        taxation_settings: 'Kdv  ayarları'
-        taxonomies: Sınıflandırma
+        support: Destek
+        tax_categories: Vergi kategorileri
+        tax_rates: Vergi oranları
+        taxation_settings: Vergilendirme ayarları
+        taxons: Sınıflandırma
         zones: Bölgeler
       sidebar:
         api_clients: API İstemcileri
         archetypes: Ürün arketipler
+        association_types: Ürün ilişki türleri
         assortment: Çeşitlilik
         attributes: özellikleri yapılandırma
         blocks: Bloklar
@@ -66,9 +68,9 @@ sylius:
         countries: Ülkeler
         currencies: Para birimi
         customer: Müşteri
-        customers: müşteriler
+        customers: Müşteriler
         dashboard: Kontrol Paneli
-        emails: E-posta
+        emails: E-postalar
         general_settings: Genel ayarlar
         groups: Gruplar
         homepage: Siteye dön
@@ -78,17 +80,19 @@ sylius:
         new_order: Sipariş ekle
         new_promotion: Yeni promosyon ekle
         options: Seçeneklerini yönet
-        orders: Şuanki siparişler
+        orders: Şimdiki Sipariş
         pages: Sayfalar
-        payment_methods: Ödeme tipleri
+        payment_methods: Ödeme Yöntemleri
         payments: Ödemeler
         permissions: İzinler
+        product_review: Ürün Yorumları
         products: Ürünler
         promotions: Promosyonlar
         redirects: ' yönlendirmeler'
         report: Raporlar
         roles: Roller
         routes: Rotalar
+        review: Yorumlar
         sales: Siparişler
         security_settings: Güvenlik ayarları
         shipments: Kargo İşlemleri
@@ -100,7 +104,7 @@ sylius:
         tax_categories: Vergi kategorileri
         tax_rates: Vergi oranları
         taxation_settings: Vergilendirme ayarları
-        taxonomies: Sınıflandırma
+        taxons: Sınıflandırma
         zones: Bölgeler
   frontend:
     menu:

@@ -149,8 +149,8 @@ sylius:
     tax_rate:
       index: Momssatser
     taxation_settings: Indstillinger for beskatning
-    taxonomy:
-      index: Taksonomier
+    taxon:
+      index: Taxons
     update: Rediger
     zone:
       index: Zoner
@@ -669,6 +669,7 @@ sylius:
     updated_at: Sidste opdatering
     zone: Zone
   taxon:
+    index_header: Taxons
     create: Opret taksionomisk gruppe
     create_header: Ny taksionomisk gruppe
     image: Vælg billede
@@ -676,16 +677,6 @@ sylius:
     no_image: Der er intet billede for denne taksinomiske gruppe
     product_index_header: 'Produkter kategoriseres som "%name%"'
     update_header: Rediger taksionomisk gruppe
-  taxonomy:
-    create: Opret taksonomi
-    create_header: Ny taksonomi
-    image: Vælg billede
-    index_header: 'Kategorisering, <small>her ser du de definerede taksonomier</small>'
-    manage: Administrer taksonomier
-    name: Navn
-    no_image: Der er intet billede for denne taksinomiske gruppe
-    show_header: 'Taksonomi <small><strong>%name%</strong></small>'
-    update_header: Rediger taksonomi
   total_quantity: Samlet antal
   ui:
     change_password: Ændre din adgangskode

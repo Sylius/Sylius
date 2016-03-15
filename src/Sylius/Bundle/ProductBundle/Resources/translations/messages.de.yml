@@ -10,6 +10,7 @@ sylius:
       options: Optionen
       meta_keywords: Metastichwörter
       meta_description: Metabeschreibung
+      taxons: Gruppen
     product_variant:
       available_on: Verfügbar ab
     product_archetype:

@@ -6,3 +6,15 @@ sylius:
     login:
       username: Όνομα χρήστη
       password: Κωδικός πρόσβασης
+  ui:
+    create: Δημιουργία
+    actions: Ενέργειες
+    enabled: Ενεργοποιημένο
+    description: Περιγραφή
+    "no": false
+    success: Επιτυχία
+    "yes": true
+    save_changes: Αποθήκευση αλλαγών
+    filter: Φίλτρο
+    countries: Χώρες
+    new_country: Νέα χώρα

@@ -18,6 +18,7 @@ sylius:
       name: Názov
       provinces: Provincie
       select: Vyberte
+      enabled: Zapnuté
     province:
       name: Názov
       abbreviation: Skratka

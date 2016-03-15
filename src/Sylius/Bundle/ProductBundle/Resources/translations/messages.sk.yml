@@ -6,18 +6,19 @@ sylius:
     product:
       name: Názov
       description: Popis
-      attributes: Produktové vlastnosti
-      options: Produktové voľby
+      attributes: Vlastnosti
+      options: Voľby
       meta_keywords: Meta kľúčové slová
       meta_description: Meta popis
+      taxons: Kategórie
     product_variant:
       available_on: Dostupný od
       available_until: Dostupný do
     product_archetype:
       name: Názov
       parent: Nadradená kategória
-      attributes: Produktové vlastnosti
-      options: Produktové voľby
+      attributes: Vlastnosti
+      options: Voľby
     association_type:
       name: Názov
     association:

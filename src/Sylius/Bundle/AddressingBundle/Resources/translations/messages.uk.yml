@@ -18,6 +18,7 @@ sylius:
       name: Країна
       provinces: Області
       select: Виберіть
+      enabled: Увімкнено
     province:
       name: Ім’я
       select: Виберіть

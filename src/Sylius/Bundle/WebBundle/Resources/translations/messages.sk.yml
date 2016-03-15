@@ -69,17 +69,17 @@ sylius:
     success: Úspech
     warning: Varovanie
   archetype:
-    attributes: Produktové vlastnosti
-    build: Vytvoriť produktový prototyp
-    build_header: Vytvoriť produkt z produktového prototypu
-    create: Vytvoriť produktový prototyp
-    create_header: Nový produktový prototyp
+    attributes: Vlastnosti
+    build: Vytvoriť prototyp
+    build_header: Vytvoriť produkt z prototypu
+    create: Vytvoriť prototyp
+    create_header: Nový prototyp
     index_header: Produktové prototypy
     name: Názov
-    no_results: Nie sú žiadne produktové prototypy
-    options: Produktové voľby
+    no_results: Nie sú žiadne prototypy
+    options: Voľby
     parent: Nadradená kategória
-    update_header: Úprava produktového prototypu
+    update_header: Úprava prototypu
     updated_at: Posledná aktualizácia
   backend:
     alert:
@@ -167,10 +167,10 @@ sylius:
     string_blocks: Textové bloky
   breadcrumb:
     archetype:
-      index: Produktové prototypy
+      index: Prototypy
     assortment: Sortiment
     attribute:
-      index: Produktové vlastnosti
+      index: Vlastnosti
     block:
       imagine:
         index: Obrazové bloky
@@ -218,7 +218,7 @@ sylius:
       index: Metadáta
     new: Nový
     option:
-      index: Produktové voľby
+      index: Voľby
     order:
       adjustments: Úpravy
       index: Objednávky
@@ -248,6 +248,8 @@ sylius:
       index: Reporty
     role:
       index: Role
+    review:
+      index: Recenzie
     route:
       index: URL cesty
     sales: Predaj
@@ -266,8 +268,8 @@ sylius:
     tax_rate:
       index: Sadzby dane
     taxation_settings: Nastavenie zdaňovania
-    taxonomy:
-      index: Triedenia
+    taxon:
+      index: Kategórie
     update: Upraviť
     zone:
       index: Zóny
@@ -303,7 +305,8 @@ sylius:
     update: Upraviť
     update_header: Úprava kanálu
     updated_at: Posledná aktualizácia
-    url: Url
+    hostname: Hostname
+    theme: Téma
   checkout:
     addressing:
       header: Doručenie
@@ -675,12 +678,23 @@ sylius:
     total: Spolu
     update_header: Úprava objednávky
   review:
+    create: Nová recenzia
+    index: Produktové recenzie
+    manage: Spravovať recenzie
+    no_reviews: Neexistujujú žiadne recenzie.
     id: ID
     subject: Predmet
     title: Názov
+    status: Stav
+    rating: Hodnotenie
     author: Autor
     guest: Návštevník
     created_at: Vytvorené
+    details: Detail recenzie
+    editing: Úprava recenzie
+    header: Produktové recenzie
+    product_review: Produktová recenzia
+    no_results: Pre tento produkt nie sú žiadne recenzie.
   order_item:
     product: Položka
     quantity: Množstvo
@@ -758,9 +772,9 @@ sylius:
       no_results: Neexistuje cenová konfigurácia
       price: Cena
   product:
-    add_attribute: Pridať produktovú vlastnosť
-    archetype: Produktový prototyp
-    attributes: Produktové vlastnosti
+    add_attribute: Pridať vlastnosť
+    archetype: Prototyp
+    attributes: Vlastnosti
     association: Priradenia
     available_on: Dostupný od
     available_on_demand: Na objednávku
@@ -776,10 +790,10 @@ sylius:
     main_taxon: Hlavná kategória
     manage: Spravovať produkty
     name: Názov
-    no_attributes: Produkt nemá žiadne produktovú vlastnosti
+    no_attributes: Produkt nemá žiadne vlastnosti
     no_description: '<i>Žiadny popis</i>'
     no_images: Pre produkt neexistujú žiadne obrázky
-    no_options: Nie sú žiadne produktové voľby
+    no_options: Nie sú žiadne voľby
     no_results: Neexistujú žiadne produkty na zobrazenie
     no_shipping_category: Žiadna kategória doručenia
     no_short_description: '<i>Žiadny stručný popis</i>'
@@ -787,11 +801,12 @@ sylius:
     no_tax_category: Žiadna daňová kategória
     no_taxon: Pre tento produkt nie je zvolená hlavná kategória
     no_taxons: Pre produkt neexistujú žiadne kategórie
-    options: Produktové voľby
+    options: Voľby
     original_price: Pôvodná cena
     price: Predajná cena
+    rating: Hodnotenie
     restricted_zone: Zóna s obmedzeným prístupom
-    remove_attribute: Odstrániť produktovú vlastnosť
+    remove_attribute: Odstrániť vlastnosť
     shipping_category: Kategória doručenia
     show: Zobraziť viac
     show_header: 'Detail produktu <small>pre "<strong>%product%</strong>"</small>'
@@ -799,12 +814,12 @@ sylius:
     sku: Skladový kód (SKU)
     stock: Položiek na sklade
     tabs:
-      attributes: Produktové vlastnosti
+      attributes: Vlastnosti
       associations: Priradenia
-      categorization: Kategorizácia
+      categorization: Kategórie
       channels: Kanály
       images: Obrázky
-      options: Produktové voľby
+      options: Voľby
       pricing: Cenník produktov
       product: Produkt
     tax_category: Daňová kategória
@@ -820,38 +835,38 @@ sylius:
       qty_min: Min. množstvo
     volume_price: Cena podľa objemu
   product_attribute:
-    add_choice: Pridať výber
+    add_choice: Pridať možnosť
     code: Kód
-    create: Vytvoriť produktovú vlastnosť
-    create_header: Nová produktová vlastnosť
-    index_header: Produktové vlastnosti
-    manage: Správa produktových vlastnosti
+    create: Vytvoriť vlastnosť
+    create_header: Nová vlastnosť
+    index_header: Vlastnosti
+    manage: Správa vlastnosti
     name: Názov
-    no_results: Nie sú nakonfigurované žiadne produktové vlastnosti
+    no_results: Nie sú nakonfigurované žiadne vlastnosti
     type: Typ
-    update_header: Úprava produktovej vlastnosti
+    update_header: Úprava vlastnosti
     updated_at: Posledná aktualizácia
   product_association:
     code: Kód
     create: Vytvoriť priradenie produktu
     create_header: Nový produkt
-    index_header: Produktové vlastnosti
-    manage: Správa produktových vlastnosti
+    index_header: Vlastnosti
+    manage: Správa vlastnosti
     name: Názov
-    no_results: Nie sú nakonfigurované žiadne produktové vlastnosti
+    no_results: Nie sú nakonfigurované žiadne vlastnosti
     type: Typ
-    update_header: Úprava produktovej vlastnosti
+    update_header: Úprava vlastnosti
     updated_at: Posledná aktualizácia
   product_not_available_in_zone: Nedostupné vo vašej krajine
   product_option:
-    create: Vytvoriť produktovú voľbu
+    create: Vytvoriť voľbu
     create_header: Nová produktová voľba
     index_header: Produktové volby
-    manage: Produktové voľby
+    manage: Spravovať voľby
     name: Názov
-    no_results: Nie sú nakonfigurované žiadne produktové volby
+    no_results: Nie sú nakonfigurované žiadne volby
     presentation: Verejný názov
-    update_header: Úprava produktovej volby
+    update_header: Úprava volby
     updated_at: Posledná aktualizácia
     values: Hodnoty
   promotion:
@@ -1050,6 +1065,7 @@ sylius:
     updated_at: Posledná aktualizácia
     zone: Zóna
   taxon:
+    index_header: Kategórie
     create: Vytvoriť kategóriu
     create_header: Nová kategória
     image: Vybrať obrázok
@@ -1058,17 +1074,6 @@ sylius:
     no_results: Nie sú žiadne kategórie na zobrazenie
     product_index_header: 'Produkty kategorizované ako "%name%"'
     update_header: Úprava kategórie
-  taxonomy:
-    create: Vytvoriť triedenie
-    create_header: Nové triedenie
-    image: Vybrať obrázok
-    index_header: 'Kategorizácia <small>tu vidíte definované tridenia</small>'
-    manage: Spravovať triedenia
-    name: Názov
-    no_image: Neexistuje žiadny obrázok pre triedenie
-    no_results: Nie sú definované žiadne triedenia
-    show_header: 'Triedenie <small><strong>%name%</strong></small>'
-    update_header: Úprava triedenia
   total_quantity: Celkové množstvo
   ui:
     account_panel_outline: Užite si všetky funkcie, ktoré sú k dispozícií k zobrazeniu, sledovaniu a spravovaniu vašich dát na vašom osobnom priestore
@@ -1136,7 +1141,7 @@ sylius:
     delete_image: Odstrániť obrázok
     last_update: Posledná aktualizácia
     no_results: Žiadne variatny na zobrazenie
-    options: Produktové voľby
+    options: Voľby
     original_price: Pôvodná cena
     price: Cena
     sku: Skladový kód (SKU)

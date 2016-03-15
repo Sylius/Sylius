@@ -50,7 +50,7 @@ sylius:
         tax_categories: Steuergruppen
         tax_rates: Steuersätze
         taxation_settings: Besteuerung
-        taxonomies: Kategorien
+        taxons: Kategorisierung
         zones: Versandgebiete
       sidebar:
         api_clients: API-Clients
@@ -100,7 +100,7 @@ sylius:
         tax_categories: Steuerkategorien
         tax_rates: Steuersätze
         taxation_settings: Gruppeneinstellungen
-        taxonomies: Gruppierung
+        taxons: Kategorisierung
         zones: Versandgebiete
   frontend:
     menu:

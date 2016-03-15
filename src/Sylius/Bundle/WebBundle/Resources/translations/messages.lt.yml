@@ -242,8 +242,8 @@ sylius:
     tax_rate:
       index: Mokesčių tarifai
     taxation_settings: Apmokestinimo nustatymai
-    taxonomy:
-      index: Taksonomijos
+    taxon:
+      index: Taksonai
     update: Redaguoti
     zone:
       index: Zonos
@@ -277,7 +277,6 @@ sylius:
     update: Redaguoti
     update_header: Kanalo redagavimas
     updated_at: Paskutinis atnaujinimas
-    url: Url
   checkout:
     addressing:
       header: Adresas
@@ -904,6 +903,7 @@ sylius:
     updated_at: Paskutinis atnaujinimas
     zone: Zona
   taxon:
+    index_header: Taksonai
     create: Sukurti taksoną
     create_header: Naujas taksonas
     image: Pasirinkite paveikslėlį
@@ -911,16 +911,6 @@ sylius:
     no_image: Šis taksonas neturi paveikslėlio
     product_index_header: 'Produktai klasifikuojami kaip "%name%"'
     update_header: Taksono redagavimas
-  taxonomy:
-    create: Sukurti taksonomiją
-    create_header: Nauja taksonomija
-    image: Pasirinkite paveikslėlį
-    index_header: 'Skirstymas į kategorijas <small>čia matote apibrėžtas taksonomijas</small>'
-    manage: Valdyti taksonomijas
-    name: Pavadinimas
-    no_image: Ši taksonomija neturi paveikslėlio
-    show_header: 'Taksonomija <small><strong>%name%</strong></small>'
-    update_header: Taksonomijos redagavimas
   total_quantity: Bendras kiekis
   ui:
     change_password: Pakeisti savo slaptažodį

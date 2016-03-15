@@ -8,7 +8,49 @@ sylius:
       password: Heslo
       remember_me: Zapamätať si ma
   ui:
+    are_your_sure_you_want_to_perform_this_action: Ste si istý, že chcete vykonať túto akciu?
+    confirm_your_action: Potvrďte vašu akciu
+    create: Vytvoriť
+    dashboard: Administračný panel
+    delete: Odstrániť
+    disabled: Vypnuté
+    edit: Upraviť
+    actions: Akcie
+    enabled: Zapnuté
+    description: Popis
+    an_error_occurred: Vyskytla sa chyba
+    last_updated: Posledná aktualizácia
+    manage_taxation_of_your_products: Spravovať zdaňovanie vašich produktov
+    "no": false
+    no_results_to_display: Neexistujú žiadne vysledky na zobrazenie
+    powered_by: Vytvorené v systéme
+    tax_categories: Daňové kategórie
+    show: Zobraziť
+    info: Info
     sign_in: Prihlásiť
     sign_out: Odhlásiť
-    dashboard: Administračný panel
-    powered_by: Vytvorené v systéme
+    status: Stav
+    success: Úspech
+    "yes": true
+    new: Nová
+    save_changes: Uložiť zmeny
+    administration_panel_login: Prihásenie do administračného rozhrania
+    new_tax_category: Nová daňová kategoria
+    edit_tax_category: Úprava daňovej kategórie
+    filter: Filter
+    clear_filters: Vymazať filter
+    contains: Obsahuje
+    not_contains: Neobsahuje
+    equal: Rovná sa
+    empty: Prázdne
+    not_empty: Nie je prázdny
+    starts_with: Začína na
+    ends_with: Končí na
+    in: V
+    not_in: Nie je v
+    countries: Krajiny
+    manage_country: Spravovať krajiny
+    new_country: Nová krajina
+    locales: Jazyky
+    new_locale: Nový jazyk
+    manage_locale: Spravovať jazyky

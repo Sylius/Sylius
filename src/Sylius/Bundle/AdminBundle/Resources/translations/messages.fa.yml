@@ -7,3 +7,5 @@ sylius:
       main:
         configuration:
           header: تنظیمات
+          countries: كشور‌ها
+          locales: زبان ها

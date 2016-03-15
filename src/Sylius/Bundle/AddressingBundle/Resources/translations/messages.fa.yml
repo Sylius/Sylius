@@ -18,6 +18,7 @@ sylius:
       name: نام
       provinces: استان ها
       select: انتخاب
+      enabled: فعال
     province:
       name: نام
       abbreviation: مخفف

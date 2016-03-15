@@ -18,6 +18,7 @@ sylius:
       name: Navn
       provinces: Fylker
       select: Velg
+      enabled: Aktivert
     province:
       name: Navn
       select: Velg

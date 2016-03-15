@@ -89,7 +89,7 @@ sylius:
     static_content:
       body: Obsah
       id: Id
-      internal_name: Interný názov
+      internal_name: Inerný názov
       menu_nodes: Menu elementy
       parent: Nadradená kategória
       publish_end_date: Dátum ukončenia zverejnenia

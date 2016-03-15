@@ -6,4 +6,4 @@ sylius:
     variant:
       presentation: Παρουσίαση
     option:
-      presentation: Παρουσίαση
+      name: Ονομασία

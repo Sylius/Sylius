@@ -159,8 +159,8 @@ sylius:
     tax_rate:
       index: Skattesatser
     taxation_settings: Beskatningsinnstillinger
-    taxonomy:
-      index: Kategorisering
+    taxon:
+      index: Taksonomier
     update: Rediger
     zone:
       index: Soner
@@ -689,22 +689,13 @@ sylius:
     updated_at: Sist oppdatert
     zone: Sone
   taxon:
+    index_header: Taksonomier
     create: Opprett taksonomi
     create_header: Ny taksonomi
     image: Velg bilde
     name: Navn
     no_image: Ingen bilde for denne taksonomi
     product_index_header: 'Produkter kategorisert som "%name%"'
-    update_header: Endrer taksonomi
-  taxonomy:
-    create: Opprett taksonomi
-    create_header: Ny taksonomi
-    image: Velg bilde
-    index_header: 'Kategorisering <small>Her ser du de definerte taksonomier</small>'
-    manage: Administrer taksonomier
-    name: Navn
-    no_image: Ingen bilde for denne taksonomi
-    show_header: 'Taksonomi <small><strong>%name%</strong></small>'
     update_header: Endrer taksonomi
   total_quantity: Totalt antall
   ui:

@@ -167,8 +167,8 @@ sylius:
     tax_rate:
       index: Taxas de imposto
     taxation_settings: Configurações de taxas
-    taxonomy:
-      index: Taxonomias
+    taxon:
+      index: Taxas
     update: Editar
     zone:
       index: Regiões
@@ -702,6 +702,7 @@ sylius:
     updated_at: Última atualização
     zone: Zona
   taxon:
+    index_header: Taxas
     create: Criar táxon
     create_header: Novo táxon
     image: Escolher imagem
@@ -709,16 +710,6 @@ sylius:
     no_image: Não há nenhuma imagem para estas taxas
     product_index_header: 'Produtos categorizados como "%name%"'
     update_header: Editando táxon
-  taxonomy:
-    create: Criar taxonomia
-    create_header: Nova taxonomia
-    image: Escolher imagem
-    index_header: 'Categorização <small>Aqui você vê as taxonomias definidas</small>'
-    manage: Gerenciar taxonomias
-    name: Nome
-    no_image: Não há nenhuma imagem para esta taxonomia
-    show_header: 'Taxonomia <small><strong>%name%</strong></small>'
-    update_header: Editando taxonomia
   total_quantity: Qtde total
   ui:
     change_password: Alterar sua senha

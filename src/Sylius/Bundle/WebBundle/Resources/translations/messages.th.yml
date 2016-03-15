@@ -148,8 +148,8 @@ sylius:
     tax_rate:
       index: อัตราภาษี
     taxation_settings: การตั้งค่าภาษี
-    taxonomy:
-      index: การจัดประเภท
+    taxon:
+      index: หมวดหมู่
     update: แก้ไข
     zone:
       index: โซน
@@ -670,22 +670,13 @@ sylius:
     updated_at: ปรับปรุงล่าสุด
     zone: โซน
   taxon:
+    index_header: หมวดหมู่
     create: สร้างประเภท
     create_header: ประเภทใหม่
     image: เลือกรูปภาพ
     name: ชื่อ
     no_image: มีไม่มีภาพในประเภทนี้
     product_index_header: 'สินค้าที่ถูกกำหนดประเภทไว้ภายใต้ "%name%"'
-    update_header: แก้ไขการจัดประเภท
-  taxonomy:
-    create: สร้างการจัดประเภท
-    create_header: การจัดประเภทใหม่
-    image: เลือกรูปภาพ
-    index_header: 'การจัดหมวดหมู่ <small>คุณสามารถดูการจัดประเภทได้ที่นี่</small>'
-    manage: จัดการการจัดประเภท
-    name: ชื่อ
-    no_image: มีไม่มีภาพในประเภทนี้
-    show_header: 'ประเภท <small><strong>%name%</strong></small>'
     update_header: แก้ไขการจัดประเภท
   total_quantity: ปริมาณรวม
   ui:

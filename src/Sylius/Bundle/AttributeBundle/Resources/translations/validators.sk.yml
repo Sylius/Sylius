@@ -8,7 +8,7 @@ sylius:
       min_length: 'Názov vlastnosti musí obsahovať minimálne 1 znak.|Názov vlastnosti musí obsahovať minimálne {{ limit }} znakov.'
       max_length: 'Názov vlastnosti nesmie byť dlhší ako 1 znak.|Názov vlastnosti nesmie byť dlhší ako {{ limit }} znakov.'
     code:
-      not_blank: Prosím, zadajte kód produktovej vlastnosti.
+      not_blank: Prosím, zadajte kód vlastnosti.
       unique: Tento kód sa už používa.
     presentation:
       not_blank: Zadajte verejný názov vlastnosti.

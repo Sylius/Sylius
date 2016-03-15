@@ -114,8 +114,6 @@ sylius:
     tax_rate:
       index: sylius.breadcrumb.tax_rate.index
     taxation_settings: sylius.breadcrumb.taxation_settings
-    taxonomy:
-      index: sylius.breadcrumb.taxonomy.index
     update: sylius.breadcrumb.update
     zone:
       index: sylius.breadcrumb.zone.index
@@ -480,16 +478,6 @@ sylius:
     image: 画像を選択
     name: カテゴリ名
     no_image: 画像未設定
-    update_header: カテゴリを編集
-  taxonomy:
-    create: カテゴリを登録する
-    create_header: カテゴリーを登録
-    image: 画像を選択
-    index_header: カテゴリ管理
-    manage: sylius.taxonomy.manage
-    name: カテゴリ名
-    no_image: 画像未設定
-    show_header: 'カテゴリ詳細： <small><strong>%name%</strong></small>'
     update_header: カテゴリを編集
   ui:
     change_password: パスワードの変更

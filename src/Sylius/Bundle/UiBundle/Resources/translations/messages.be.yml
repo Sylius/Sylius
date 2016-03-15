@@ -7,4 +7,20 @@ sylius:
       username: Юзернэйм
       password: Пароль
   ui:
+    create: Стварыць
     dashboard: Прыборная панэль
+    delete: Выдаліць
+    edit: Рэдагаваць
+    actions: Дзеянні
+    enabled: Уключана
+    description: Апісанне
+    "no": false
+    success: Поспех
+    "yes": true
+    new: Новы
+    save_changes: Захаваць змены
+    new_tax_category: Новая катэгорыя падатка
+    filter: Фільтр
+    countries: Краіны
+    new_country: Новая краіна
+    locales: Месцы размяшчэння

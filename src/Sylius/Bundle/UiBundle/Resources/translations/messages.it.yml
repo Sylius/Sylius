@@ -8,7 +8,24 @@ sylius:
       password: Password
       remember_me: Ricordami
   ui:
+    create: Crea
+    dashboard: Pannello amministrazione
+    delete: Cancella
+    edit: Modifica
+    actions: Azioni
+    enabled: Abilitato
+    description: Descrizione
+    "no": false
+    powered_by: Promosso da
     sign_in: Accedi
     sign_out: Esci
-    dashboard: Pannello amministrazione
-    powered_by: Promosso da
+    success: Successo
+    "yes": true
+    new: Nuovo
+    save_changes: Salva cambiamenti
+    new_tax_category: Nuova categoria fiscale
+    filter: Filtri
+    empty: Vuoto
+    countries: Paesi
+    new_country: Nuovo paese
+    locales: Localizzazioni

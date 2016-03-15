@@ -8,7 +8,24 @@ sylius:
       password: Mot de passe
       remember_me: Rester connecté
   ui:
+    create: Créer
+    dashboard: Tableau de bord
+    delete: Supprimer
+    edit: Modifier
+    actions: Actions
+    enabled: Activé
+    description: Description
+    "no": false
+    powered_by: Propulsé par
     sign_in: Connection
     sign_out: Déconnection
-    dashboard: Tableau de bord
-    powered_by: Propulsé par
+    success: Succès
+    "yes": true
+    new: Nouveau
+    save_changes: Enregistrer les modifications
+    new_tax_category: Nouvelle catégorie de taxe
+    filter: Filtrer
+    empty: Vide
+    countries: Pays
+    new_country: Nouveau pays
+    locales: Locales
