@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\Factory;
 
 use Sylius\Component\Core\Promotion\Action\FixedDiscountAction;
+use Sylius\Component\Core\Promotion\Action\ItemFixedDiscountAction;
 use Sylius\Component\Core\Promotion\Action\ItemPercentageDiscountAction;
 use Sylius\Component\Core\Promotion\Action\PercentageDiscountAction;
 use Sylius\Component\Core\Promotion\Action\ShippingDiscountAction;
@@ -50,6 +51,14 @@ class ActionFactory implements ActionFactoryInterface
     public function createFixedDiscount($amount)
     {
         return $this->createAction(FixedDiscountAction::TYPE, ['amount' => $amount]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createItemFixedDiscount($amount)
+    {
+        return $this->createAction(ItemFixedDiscountAction::TYPE, ['amount' => $amount]);
     }
 
     /**

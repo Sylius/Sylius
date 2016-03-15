@@ -14,7 +14,6 @@ namespace spec\Sylius\Component\Core\Promotion\Action;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -30,30 +29,28 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ItemPercentageDiscountActionSpec extends ObjectBehavior
+class ItemFixedDiscountActionSpec extends ObjectBehavior
 {
     function let(
         FactoryInterface $adjustmentFactory,
         OriginatorInterface $originator,
-        IntegerDistributorInterface $distributor,
         TaxonFilterInterface $taxonFilter
     ) {
-        $this->beConstructedWith($adjustmentFactory, $originator, $distributor, $taxonFilter);
+        $this->beConstructedWith($adjustmentFactory, $originator, $taxonFilter);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Promotion\Action\ItemPercentageDiscountAction');
+        $this->shouldHaveType('Sylius\Component\Core\Promotion\Action\ItemFixedDiscountAction');
     }
 
-    function it_is_item_discount_action()
+    function it_is_discount_action()
     {
         $this->shouldHaveType(ItemDiscountAction::class);
     }
 
     function it_applies_percentage_discount_on_every_unit_in_order(
         $adjustmentFactory,
-        $distributor,
         $originator,
         $taxonFilter,
         AdjustmentInterface $promotionAdjustment1,
@@ -70,7 +67,7 @@ class ItemPercentageDiscountActionSpec extends ObjectBehavior
         $order->getItems()->willReturn($originalItems);
         $originalItems->toArray()->willReturn([$orderItem]);
         $taxonFilter
-            ->filter([$orderItem], ['percentage' => 0.2, 'filters' => ['taxons' => ['testTaxon']]])
+            ->filter([$orderItem], ['amount' => 500, 'filters' => ['taxons' => ['testTaxon']]])
             ->willReturn($filteredItems)
         ;
 
@@ -80,37 +77,51 @@ class ItemPercentageDiscountActionSpec extends ObjectBehavior
         $orderItem->getUnits()->willReturn($units);
         $units->getIterator()->willReturn(new \ArrayIterator([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
 
-        $orderItem->getTotal()->willReturn(1000);
-        $distributor->distribute(200, 2)->willReturn([100, 100]);
-
         $promotion->getDescription()->willReturn('Test description');
 
         $adjustmentFactory->createNew()->willReturn($promotionAdjustment1, $promotionAdjustment2);
 
+        $unit1->getTotal()->willReturn(1000);
         $promotionAdjustment1->setType(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->shouldBeCalled();
         $promotionAdjustment1->setLabel('Test description')->shouldBeCalled();
-        $promotionAdjustment1->setAmount(-100)->shouldBeCalled();
+        $promotionAdjustment1->setAmount(-500)->shouldBeCalled();
 
         $originator->setOrigin($promotionAdjustment1, $promotion)->shouldBeCalled();
 
+        $unit2->getTotal()->willReturn(1000);
         $promotionAdjustment2->setType(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->shouldBeCalled();
         $promotionAdjustment2->setLabel('Test description')->shouldBeCalled();
-        $promotionAdjustment2->setAmount(-100)->shouldBeCalled();
+        $promotionAdjustment2->setAmount(-500)->shouldBeCalled();
 
         $originator->setOrigin($promotionAdjustment2, $promotion)->shouldBeCalled();
 
         $unit1->addAdjustment($promotionAdjustment1)->shouldBeCalled();
         $unit2->addAdjustment($promotionAdjustment2)->shouldBeCalled();
 
-        $this->execute($order, ['percentage' => 0.2, 'filters' => ['taxons' => ['testTaxon']]], $promotion);
+        $this->execute($order, ['amount' => 500, 'filters' => ['taxons' => ['testTaxon']]], $promotion);
     }
 
     function it_does_not_apply_promotions_with_amount_0(
         $adjustmentFactory,
-        $distributor,
+        OrderInterface $order,
+        OrderItemUnitInterface $unit1,
+        OrderItemUnitInterface $unit2,
+        PromotionInterface $promotion
+    ) {
+        $adjustmentFactory->createNew()->shouldNotBeCalled();
+
+        $unit1->addAdjustment(Argument::any())->shouldNotBeCalled();
+        $unit2->addAdjustment(Argument::any())->shouldNotBeCalled();
+
+        $this->execute($order, ['amount' => 0, 'filters' => ['taxons' => ['testTaxon']]], $promotion);
+    }
+
+    function it_does_not_apply_bigger_promotions_than_unit_total(
+        $adjustmentFactory,
         $originator,
         $taxonFilter,
         AdjustmentInterface $promotionAdjustment1,
+        AdjustmentInterface $promotionAdjustment2,
         Collection $originalItems,
         Collection $filteredItems,
         Collection $units,
@@ -123,7 +134,7 @@ class ItemPercentageDiscountActionSpec extends ObjectBehavior
         $order->getItems()->willReturn($originalItems);
         $originalItems->toArray()->willReturn([$orderItem]);
         $taxonFilter
-            ->filter([$orderItem], ['percentage' => 0.2, 'filters' => ['taxons' => ['testTaxon']]])
+            ->filter([$orderItem], ['amount' => 1000, 'filters' => ['taxons' => ['testTaxon']]])
             ->willReturn($filteredItems)
         ;
 
@@ -133,36 +144,41 @@ class ItemPercentageDiscountActionSpec extends ObjectBehavior
         $orderItem->getUnits()->willReturn($units);
         $units->getIterator()->willReturn(new \ArrayIterator([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
 
-        $orderItem->getTotal()->willReturn(5);
-        $distributor->distribute(1, 2)->willReturn([1, 0]);
-
         $promotion->getDescription()->willReturn('Test description');
 
-        $adjustmentFactory->createNew()->willReturn($promotionAdjustment1);
+        $adjustmentFactory->createNew()->willReturn($promotionAdjustment1, $promotionAdjustment2);
 
+        $unit1->getTotal()->willReturn(300);
         $promotionAdjustment1->setType(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->shouldBeCalled();
         $promotionAdjustment1->setLabel('Test description')->shouldBeCalled();
-        $promotionAdjustment1->setAmount(-1)->shouldBeCalled();
+        $promotionAdjustment1->setAmount(-300)->shouldBeCalled();
 
         $originator->setOrigin($promotionAdjustment1, $promotion)->shouldBeCalled();
 
-        $unit1->addAdjustment($promotionAdjustment1)->shouldBeCalled();
-        $unit2->addAdjustment(Argument::any())->shouldNotBeCalled();
+        $unit2->getTotal()->willReturn(200);
+        $promotionAdjustment2->setType(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->shouldBeCalled();
+        $promotionAdjustment2->setLabel('Test description')->shouldBeCalled();
+        $promotionAdjustment2->setAmount(-200)->shouldBeCalled();
 
-        $this->execute($order, ['percentage' => 0.2, 'filters' => ['taxons' => ['testTaxon']]], $promotion);
+        $originator->setOrigin($promotionAdjustment2, $promotion)->shouldBeCalled();
+
+        $unit1->addAdjustment($promotionAdjustment1)->shouldBeCalled();
+        $unit2->addAdjustment($promotionAdjustment2)->shouldBeCalled();
+
+        $this->execute($order, ['amount' => 1000, 'filters' => ['taxons' => ['testTaxon']]], $promotion);
     }
 
-    function it_throws_exception_if_passed_subject_is_not_order(
+    function it_throws_exception_if_passed_subject_to_execute_is_not_order(
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion
     ) {
         $this
             ->shouldThrow(UnexpectedTypeException::class)
-            ->during('execute', [$subject, ['percentage' => 0.2], $promotion])
+            ->during('execute', [$subject, ['amount' => 1000], $promotion])
         ;
     }
 
-    function it_reverts_proper_promotion_adjustment_from_all_units(
+    function it_revert_proper_promotion_adjustment_from_all_units(
         $originator,
         AdjustmentInterface $promotionAdjustment1,
         AdjustmentInterface $promotionAdjustment2,
@@ -193,7 +209,7 @@ class ItemPercentageDiscountActionSpec extends ObjectBehavior
         $originator->getOrigin($promotionAdjustment2)->willReturn($someOtherPromotion);
         $unit->removeAdjustment($promotionAdjustment2)->shouldNotBeCalled();
 
-        $this->revert($order, ['percentage' => 0.2], $promotion);
+        $this->revert($order, ['amount' => 1000], $promotion);
     }
 
     function it_throws_exception_if_passed_subject_to_revert_is_not_order(
@@ -202,12 +218,12 @@ class ItemPercentageDiscountActionSpec extends ObjectBehavior
     ) {
         $this
             ->shouldThrow(UnexpectedTypeException::class)
-            ->during('revert', [$subject, ['percentage' => 0.2], $promotion])
+            ->during('revert', [$subject, ['amount' => 1000], $promotion])
         ;
     }
 
     function it_has_configuration_form_type()
     {
-        $this->getConfigurationFormType()->shouldReturn('sylius_promotion_action_percentage_discount_configuration');
+        $this->getConfigurationFormType()->shouldReturn('sylius_promotion_action_fixed_discount_configuration');
     }
 }

@@ -19,6 +19,7 @@ use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Test\Factory\TestPromotionFactoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Component\Promotion\Model\ActionInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 
 /**
@@ -160,14 +161,42 @@ final class PromotionContext implements Context
     /**
      * @Given /^([^"]+) gives ("[^"]+%") off every product (classified as "[^"]+")$/
      */
-    public function itGivesOffEveryProductClassifiedAs(PromotionInterface $promotion, $discount, TaxonInterface $taxon)
-    {
+    public function itGivesPercentageOffEveryProductClassifiedAs(
+        PromotionInterface $promotion,
+        $discount,
+        TaxonInterface $taxon
+    ) {
         $action = $this->actionFactory->createItemPercentageDiscount($discount);
-        $configuration = array_merge(['filters' => ['taxons' => [$taxon->getCode()]]], $action->getConfiguration());
-        $action->setConfiguration($configuration);
-
-        $promotion->addAction($action);
+        $promotion->addAction($this->configureActionTaxonFilter($action, [$taxon->getCode()]));
 
         $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") off on every product (classified as "[^"]+")$/
+     */
+    public function itGivesFixedOffEveryProductClassifiedAs(
+        PromotionInterface $promotion,
+        $discount,
+        TaxonInterface $taxon
+    ) {
+        $action = $this->actionFactory->createItemFixedDiscount($discount);
+        $promotion->addAction($this->configureActionTaxonFilter($action, [$taxon->getCode()]));
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @param ActionInterface $action
+     * @param array $taxonCodes
+     *
+     * @return ActionInterface
+     */
+    private function configureActionTaxonFilter(ActionInterface $action, array $taxonCodes)
+    {
+        $configuration = array_merge(['filters' => ['taxons' => $taxonCodes]], $action->getConfiguration());
+        $action->setConfiguration($configuration);
+
+        return $action;
     }
 }
