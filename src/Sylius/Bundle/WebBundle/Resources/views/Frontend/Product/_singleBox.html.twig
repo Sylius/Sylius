@@ -4,6 +4,6 @@
     <a href="{{ path(product) }}">
         <img class="img-rounded img-responsive" src="{{ product.image ? product.image.path|imagine_filter('sylius_medium') : 'http://placehold.it/262x255' }}" alt="{{ product.name }}" />
         {{ sylius_display_price(product.masterVariant) }}
-        <button class="btn btn-success btn-xs pull-right"><i class="icon-shopping-cart icon-white"></i> {{ 'sylius.add_to_cart'|trans }}</button>
+        <button class="btn btn-success btn-xs pull-right"><i class="icon-shopping-cart icon-white"></i> {{ 'sylius.ui.add_to_cart'|trans }}</button>
     </a>
 </div>

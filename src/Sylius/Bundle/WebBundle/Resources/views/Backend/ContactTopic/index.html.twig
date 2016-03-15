@@ -5,17 +5,17 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.support'|trans }}</li>
-    <li>{{ 'sylius.breadcrumb.contact_topic.index'|trans }}</li>
+    <li>{{ 'sylius.ui.support'|trans }}</li>
+    <li>{{ 'sylius.ui.contact_topics'|trans }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_contact_topic_create'), 'sylius.contact_topic.create'|trans) }}
+        {{ buttons.create(path('sylius_backend_contact_topic_create'), 'sylius.ui.create_contact_topic'|trans) }}
     </div>
-    <h1>{{ 'sylius.contact_topic.index_header'|trans|raw }}</h1>
+    <h1>{{ 'sylius.ui.contact_topics'|trans|raw }}</h1>
 </div>
 
 {{ list(contact_topics) }}

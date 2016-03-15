@@ -1,10 +1,6 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-  customer:
-    phone_number: 전화번호
-  "no": false
-  "yes": true
-  zone:
-    scope: 범위
+    ui:
+        'no': false
+        phone_number: 전화번호
+        scope: 범위
+        'yes': true

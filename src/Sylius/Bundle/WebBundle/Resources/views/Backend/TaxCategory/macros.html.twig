@@ -7,11 +7,11 @@
 <table class="table">
     <thead>
         <tr>
-            <th>{{ sylius_resource_sort('id', 'sylius.tax_category.id'|trans) }}</th>
+            <th>{{ sylius_resource_sort('id', 'sylius.ui.id'|trans) }}</th>
             <th>{{ sylius_resource_sort('code', 'sylius.ui.code'|trans) }}</th>
-            <th>{{ sylius_resource_sort('name', 'sylius.tax_category.name'|trans) }}</th>
-            <th>{{ 'sylius.tax_category.description'|trans }}</th>
-            <th>{{ sylius_resource_sort('updatedAt', 'sylius.tax_category.updated_at'|trans) }}</th>
+            <th>{{ sylius_resource_sort('name', 'sylius.ui.name'|trans) }}</th>
+            <th>{{ 'sylius.ui.description'|trans }}</th>
+            <th>{{ sylius_resource_sort('updatedAt', 'sylius.ui.last_update'|trans) }}</th>
             <th></th>
         </tr>
     </thead>
@@ -21,7 +21,7 @@
             <td>{{ tax_category.id }}</td>
             <td>{{ tax_category.code }}</td>
             <td>{{ tax_category.name }}</td>
-            <td>{{ tax_category.description|default('sylius.tax_category.no_description'|trans) }}</td>
+            <td>{{ tax_category.description|default('sylius.ui.no_description'|trans) }}</td>
             <td>{{ tax_category.updatedAt|date }}</td>
             <td>
                 <div class="pull-right">
@@ -34,7 +34,7 @@
     </tbody>
 </table>
 {% else %}
-{{ alerts.info('sylius.tax_category.no_results'|trans) }}
+{{ alerts.info('sylius.ui.there_are_no_tax_categories_configured'|trans) }}
 {% endif %}
 
 {% endmacro %}

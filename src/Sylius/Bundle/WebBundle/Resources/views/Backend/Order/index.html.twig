@@ -6,22 +6,22 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.sales'|trans }}</li>
-    <li>{{ 'sylius.breadcrumb.order.index'|trans }}</li>
+    <li>{{ 'sylius.ui.sales'|trans }}</li>
+    <li>{{ 'sylius.ui.orders'|trans }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_order_create'), 'sylius.order.create'|trans) }}
+        {{ buttons.create(path('sylius_backend_order_create'), 'sylius.ui.create_order'|trans) }}
         {% if app.request.query.get('deleted') %}
-            <a href="{{ path('sylius_backend_order_index', {'deleted': false}) }}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> {{ 'sylius.hide_deleted'|trans }}</a>
+            <a href="{{ path('sylius_backend_order_index', {'deleted': false}) }}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> {{ 'sylius.ui.hide_deleted'|trans }}</a>
         {% else %}
-            <a href="{{ path('sylius_backend_order_index', {'deleted': true}) }}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> {{ 'sylius.show_deleted'|trans }}</a>
+            <a href="{{ path('sylius_backend_order_index', {'deleted': true}) }}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> {{ 'sylius.ui.show_deleted'|trans }}</a>
         {% endif %}
     </div>
-    <h1><span class="glyphicon glyphicon-shopping-cart"></span> {{ 'sylius.order.index_header'|trans|raw }}</h1>
+    <h1><span class="glyphicon glyphicon-shopping-cart"></span> {{ 'sylius.ui.current_orders'|trans|raw }}</h1>
 </div>
 
 {% render(controller('sylius.controller.backend.form:filterAction', {'type': 'sylius_order_filter', 'template': 'SyliusWebBundle:Backend/Order:filterForm.html.twig'})) %}

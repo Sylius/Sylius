@@ -7,7 +7,7 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>{{ sylius_resource_sort('title', 'sylius.contact_topic.title'|trans) }}</th>
+            <th>{{ sylius_resource_sort('title', 'sylius.ui.title'|trans) }}</th>
             <th></th>
         </tr>
     </thead>
@@ -26,7 +26,7 @@
     </tbody>
 </table>
 {% else %}
-{{ alerts.info('sylius.contact_topic.no_results'|trans) }}
+{{ alerts.info('sylius.ui.there_are_no_contact_topics_to_display'|trans) }}
 {% endif %}
 
 {% endmacro %}

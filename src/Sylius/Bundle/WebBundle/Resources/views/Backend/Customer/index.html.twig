@@ -6,16 +6,16 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.section.customer'|trans }}</li>
+    <li>{{ 'sylius.ui.customer'|trans }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_customer_create'), 'sylius.customer.create'|trans) }}
+        {{ buttons.create(path('sylius_backend_customer_create'), 'sylius.ui.create_customer'|trans) }}
     </div>
-    <h1><i class="glyphicon glyphicon-user"></i> {{ 'sylius.customer.index_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-user"></i> {{ 'sylius.ui.customers_list_of_all_customers_in_store'|trans|raw }}</h1>
 </div>
 
 {% render(controller('sylius.controller.backend.form:filterAction', {'type': 'sylius_customer_filter', 'template': 'SyliusWebBundle:Backend/Customer:filterForm.html.twig'})) %}
@@ -25,8 +25,8 @@
 <div class="row">
     <div class="col-md-12">
         <ul class="nav nav-tabs grid-tabs">
-            <li class="{{ activeTab == 'all' ? 'active' : '' }}"><a href="{{ path('sylius_backend_customer_index') }}">{{ 'sylius.customer.filter.all'|trans }}</a></li>
-            <li class="{{ activeTab == 'disabled' ? 'active' : '' }}"><a href="{{ path('sylius_backend_customer_index', {'criteria': {'enabled': false}}) }}"><i class="glyphicon glyphicon-info-sign"></i> {{ 'sylius.customer.filter.unconfirmed'|trans }}</a></li>
+            <li class="{{ activeTab == 'all' ? 'active' : '' }}"><a href="{{ path('sylius_backend_customer_index') }}">{{ 'sylius.ui.show_all_customers'|trans }}</a></li>
+            <li class="{{ activeTab == 'disabled' ? 'active' : '' }}"><a href="{{ path('sylius_backend_customer_index', {'criteria': {'enabled': false}}) }}"><i class="glyphicon glyphicon-info-sign"></i> {{ 'sylius.ui.show_unconfirmed_accounts'|trans }}</a></li>
         </ul>
     </div>
 </div>

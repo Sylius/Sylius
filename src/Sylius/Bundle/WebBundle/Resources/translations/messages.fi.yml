@@ -1,55 +1,17 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-  account:
-    home:
-      email: Sähköpostiosoite
-  archetype:
-    parent: Vanhempi
-  block:
-    imagine:
-      id: Id
-      label: Otsikko
-    simple:
-      id: Id
-      label: Otsikko
-    slideshow:
-      id: Id
-    string:
-      id: Id
-      label: Otsikko
-  checkout:
-    back: Edellinen
-  contact_request:
-    email: Sähköpostiosoite
-    message: Viesti
-    topic: Aihe
-  currency:
-    exchange_rate: Vaihtokurssi
-  customer:
-    email: Sähköpostiosoite
-    phone_number: Puhelinnumero
-  form:
-    login:
-      email: Sähköpostiosoite
-    profile:
-      email: Sähköpostiosoite
-  gallery:
-    next: Seuraava
-  menu_node:
-    parent: Vanhempi
-  "no": false
-  order:
-    currency: Valuutta
-  product:
-    tabs:
-      pricing: Hinnoittelu
-  report:
-    id: Id
-  ui:
-    email: Sähköpostiosoite
-    id: Id
-  user:
-    username: Käyttäjänimi
-  "yes": true
+    ui:
+        back: Edellinen
+        currency: Valuutta
+        email: Sähköpostiosoite
+        exchange_rate: Vaihtokurssi
+        id: Id
+        label: Otsikko
+        message: Viesti
+        next: Seuraava
+        'no': false
+        parent: Vanhempi
+        phone_number: Puhelinnumero
+        pricing: Hinnoittelu
+        topic: Aihe
+        username: Käyttäjänimi
+        'yes': true

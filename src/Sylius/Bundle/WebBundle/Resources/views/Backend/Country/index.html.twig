@@ -6,18 +6,18 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
-    <li>{{ 'sylius.breadcrumb.country.index'|trans }}</li>
+    <li>{{ 'sylius.ui.configuration'|trans }}</li>
+    <li>{{ 'sylius.ui.countries'|trans }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_country_create'), 'sylius.country.create'|trans) }}
-        {{ buttons.manage(path('sylius_backend_zone_index'), 'sylius.zone.manage'|trans) }}
+        {{ buttons.create(path('sylius_backend_country_create'), 'sylius.ui.create_country'|trans) }}
+        {{ buttons.manage(path('sylius_backend_zone_index'), 'sylius.ui.manage_zones'|trans) }}
     </div>
-    <h1><i class="glyphicon glyphicon-flag"></i> {{ 'sylius.country.index_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-flag"></i> {{ 'sylius.ui.countries'|trans|raw }}</h1>
 </div>
 
 {{ pagination(countries) }}

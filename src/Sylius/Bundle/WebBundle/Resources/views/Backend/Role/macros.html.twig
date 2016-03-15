@@ -8,9 +8,9 @@
     <table class="table">
         <thead>
             <tr>
-                <th>{{ 'sylius.role.name'|trans }}</th>
+                <th>{{ 'sylius.ui.name'|trans }}</th>
                 <th></th>
-                <th>{{ 'sylius.role.updated_at'|trans }}</th>
+                <th>{{ 'sylius.ui.last_update'|trans }}</th>
                 <th></th>
             </tr>
         </thead>
@@ -37,7 +37,7 @@
         </tbody>
     </table>
 {% else %}
-{{ alerts.info('sylius.role.no_results'|trans) }}
+{{ alerts.info('sylius.ui.there_are_no_roles_defined'|trans) }}
 {% endif %}
 
 {% endmacro %}

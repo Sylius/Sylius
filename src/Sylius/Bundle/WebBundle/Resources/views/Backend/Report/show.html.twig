@@ -4,8 +4,8 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
-    <li><a href="{{ path('sylius_backend_report_index') }}">{{ 'sylius.breadcrumb.report.index'|trans }}</a></li>
+    <li>{{ 'sylius.ui.configuration'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_report_index') }}">{{ 'sylius.ui.reports'|trans }}</a></li>
     <li>{{ report.name }}</a></li>
 </ol>
 {% endblock %}
@@ -13,7 +13,7 @@
 {% block content %}
     <div class="page-header">
         <div class="actions-menu">
-            {{ buttons.manage(path('sylius_backend_report_index'), 'sylius.report.manage'|trans) }}
+            {{ buttons.manage(path('sylius_backend_report_index'), 'sylius.ui.manage'|trans) }}
             {{ buttons.edit(path('sylius_backend_report_update', {'id': report.id})) }}
             {{ buttons.delete(path('sylius_backend_report_delete', {'id': report.id}), null, false, false) }}
         </div>
@@ -24,7 +24,7 @@
     {% for field in form %}
         {{ form_row(field) }}
     {% endfor %}
-    <button type="submit" class="btn btn-primary btn-block"><i class="glyphicon glyphicon-search"></i> {{ 'sylius.filter'|trans }}</button>
+    <button type="submit" class="btn btn-primary btn-block"><i class="glyphicon glyphicon-search"></i> {{ 'sylius.ui.filter'|trans }}</button>
     <br>
     </form>
     {{ report.description }}

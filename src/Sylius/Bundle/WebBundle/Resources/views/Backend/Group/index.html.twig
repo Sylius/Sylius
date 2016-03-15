@@ -6,18 +6,18 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.section.customer'|trans }}</li>
-    <li>{{ 'sylius.breadcrumb.group.index'|trans }}</li>
+    <li>{{ 'sylius.ui.customer'|trans }}</li>
+    <li>{{ 'sylius.ui.groups'|trans }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_group_create'), 'sylius.group.create'|trans) }}
-        {{ buttons.manage(path('sylius_backend_customer_index'), 'sylius.customer.manage'|trans) }}
+        {{ buttons.create(path('sylius_backend_group_create'), 'sylius.ui.create_group'|trans) }}
+        {{ buttons.manage(path('sylius_backend_customer_index'), 'sylius.ui.manage_customers'|trans) }}
     </div>
-    <h1><i class="glyphicon glyphicon-home"></i> {{ 'sylius.group.index_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-home"></i> {{ 'sylius.ui.groups'|trans|raw }}</h1>
 </div>
 
 {{ pagination(groups) }}

@@ -8,8 +8,8 @@
     <table class="table">
         <thead>
             <tr>
-                <th>{{ 'sylius.permission.code'|trans }}</th>
-                <th>{{ 'sylius.permission.updated_at'|trans }}</th>
+                <th>{{ 'sylius.ui.code'|trans }}</th>
+                <th>{{ 'sylius.ui.last_update'|trans }}</th>
                 <th></th>
             </tr>
         </thead>
@@ -33,7 +33,7 @@
         </tbody>
     </table>
 {% else %}
-{{ alerts.info('sylius.permission.no_results'|trans) }}
+{{ alerts.info('sylius.ui.there_are_no_permissions_defined'|trans) }}
 {% endif %}
 
 {% endmacro %}

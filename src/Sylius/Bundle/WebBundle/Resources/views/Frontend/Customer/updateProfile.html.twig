@@ -2,7 +2,7 @@
 {% extends 'SyliusWebBundle:Frontend/Account:layout.html.twig' %}
 
 {% block content %}
-    <h4>{{ 'sylius.form.frontend.profile.title'|trans }}</h4>
+    <h4>{{ 'sylius.ui.edit_your_personal_information'|trans }}</h4>
     <br>
 
     <form action="{{ path('sylius_account_profile_update') }}" {{ form_enctype(form) }} method="POST" class="form-horizontal">

@@ -4,16 +4,16 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.section.customer'|trans }}</li>
-    <li><a href="{{ path('sylius_backend_group_index') }}">{{ 'sylius.breadcrumb.group.index'|trans }}</a></li>
+    <li>{{ 'sylius.ui.customer'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_group_index') }}">{{ 'sylius.ui.groups'|trans }}</a></li>
     <li>{{ group.name }}</li>
-    <li>{{ 'sylius.breadcrumb.edit'|trans }}</li>
+    <li>{{ 'sylius.ui.edit'|trans }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
-    <h1><i class="glyphicon glyphicon-pencil"></i> {{ 'sylius.group.update_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-pencil"></i> {{ 'sylius.ui.edit_group'|trans|raw }}</h1>
 </div>
 
 {{ form_errors(form) }}

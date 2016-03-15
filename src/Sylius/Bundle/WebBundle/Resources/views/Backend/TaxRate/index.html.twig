@@ -6,18 +6,18 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
-    <li>{{ 'sylius.breadcrumb.tax_rate.index'|trans }}</li>
+    <li>{{ 'sylius.ui.configuration'|trans }}</li>
+    <li>{{ 'sylius.ui.tax_rates'|trans }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_tax_rate_create'), 'sylius.tax_rate.create'|trans) }}
-        {{ buttons.manage(path('sylius_backend_tax_category_index'), 'sylius.tax_category.manage'|trans) }}
+        {{ buttons.create(path('sylius_backend_tax_rate_create'), 'sylius.ui.create_tax_rate'|trans) }}
+        {{ buttons.manage(path('sylius_backend_tax_category_index'), 'sylius.ui.manage_tax_categories'|trans) }}
     </div>
-    <h1><i class="glyphicon glyphicon-cog"></i> {{ 'sylius.tax_rate.index_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-cog"></i> {{ 'sylius.ui.tax_rates'|trans|raw }}</h1>
 </div>
 
 

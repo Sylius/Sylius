@@ -6,18 +6,18 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.sales'|trans }}</li>
-    <li><a href="{{ path('sylius_backend_promotion_index') }}">{{ 'sylius.breadcrumb.promotion.index'|trans }}</a></li>
+    <li>{{ 'sylius.ui.sales'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_promotion_index') }}">{{ 'sylius.ui.promotions'|trans }}</a></li>
     <li><a href="{{ path('sylius_backend_promotion_show', {'id': promotion.id}) }}">{{ promotion.name }}</a></li>
-    <li><a href="{{ path('sylius_backend_promotion_coupon_index', {'promotionId': promotion.id}) }}">{{ 'sylius.breadcrumb.promotion_coupon.index'|trans }}</a></li>
+    <li><a href="{{ path('sylius_backend_promotion_coupon_index', {'promotionId': promotion.id}) }}">{{ 'sylius.ui.coupons'|trans }}</a></li>
     <li>{{ promotion_coupon.code }}</li>
-    <li>{{ 'sylius.breadcrumb.update'|trans }}</li>
+    <li>{{ 'sylius.ui.edit'|trans }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
-    <h1><i class="glyphicon glyphicon-pencil"></i> {{ 'sylius.promotion_coupon.update_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-pencil"></i> {{ 'sylius.ui.editing_coupon'|trans|raw }}</h1>
 </div>
 
 {{ form_errors(form) }}

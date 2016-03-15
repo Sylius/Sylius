@@ -6,14 +6,14 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.sales'|trans }}</li>
-    <li>{{ 'sylius.breadcrumb.payment.index'|trans }}</li>
+    <li>{{ 'sylius.ui.sales'|trans }}</li>
+    <li>{{ 'sylius.ui.payments'|trans }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
-    <h1><i class="glyphicon glyphicon-credit-card"></i> {{ 'sylius.payment.index_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-credit-card"></i> {{ 'sylius.ui.payments'|trans|raw }}</h1>
 </div>
 
 {% render(controller('sylius.controller.backend.form:filterAction', {'type': 'sylius_payment_filter', 'template': 'SyliusWebBundle:Backend/Payment:filterForm.html.twig'})) %}

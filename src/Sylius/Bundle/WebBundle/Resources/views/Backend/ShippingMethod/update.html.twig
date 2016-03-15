@@ -14,16 +14,16 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
-    <li><a href="{{ path('sylius_backend_shipping_method_index') }}">{{ 'sylius.breadcrumb.shipping_method.index'|trans }}</a></li>
+    <li>{{ 'sylius.ui.configuration'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_shipping_method_index') }}">{{ 'sylius.ui.shipping_methods'|trans }}</a></li>
     <li><a href="{{ path('sylius_backend_shipping_method_show', {'id': shipping_method.id}) }}">{{ shipping_method.name  }}</a></li>
-    <li>{{ 'sylius.breadcrumb.edit'|trans }}</li>
+    <li>{{ 'sylius.ui.edit'|trans }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
-    <h1><i class="glyphicon glyphicon-pencil"></i> {{ 'sylius.shipping_method.update_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-pencil"></i> {{ 'sylius.ui.editing_shipping_method'|trans|raw }}</h1>
 </div>
 
 {{ form_errors(form) }}

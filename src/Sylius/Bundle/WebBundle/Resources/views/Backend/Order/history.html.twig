@@ -8,17 +8,17 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.sales'|trans }}</li>
-    <li><a href="{{ path('sylius_backend_order_index') }}">{{ 'sylius.breadcrumb.order.index'|trans }}</a></li>
+    <li>{{ 'sylius.ui.sales'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_order_index') }}">{{ 'sylius.ui.orders'|trans }}</a></li>
     <li><a href="{{ path('sylius_backend_order_show', {'id': order.id}) }}">#{{ order.number }}</a></li>
-    <li>{{ 'sylius.history.header'|trans }}</li>
+    <li>{{ 'sylius.ui.history_header'|trans }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.manage(path('sylius_backend_order_index'), 'sylius.order.manage'|trans) }}
+        {{ buttons.manage(path('sylius_backend_order_index'), 'sylius.ui.manage_orders'|trans) }}
         {% if not order.deleted %}
             {% if not disabled %}
                 {{ buttons.edit(path('sylius_backend_order_update', {'id': order.id})) }}
@@ -26,14 +26,14 @@
             {{ buttons.delete(path('sylius_backend_order_delete', {'id': order.id})) }}
         {% endif %}
     </div>
-    <h1><span class="glyphicon glyphicon-calendar"></span> {{ 'sylius.order.show_header'|trans({'%number%': order.number}) }}</h1>
+    <h1><span class="glyphicon glyphicon-calendar"></span> {{ 'sylius.ui.order_show_header'|trans({'%number%': order.number}) }}</h1>
 </div>
 
 <ul class="nav nav-tabs">
-    <li class="active"><a href="#main" data-toggle="tab">{{ 'sylius.order.general_info'|trans }}</a></li>
-    <li><a href="#items" data-toggle="tab">{{ 'sylius.order.items'|trans }}</a></li>
-    <li><a href="#billing_address" data-toggle="tab">{{ 'sylius.order.billing_address'|trans }}</a></li>
-    <li><a href="#shipping_address" data-toggle="tab">{{ 'sylius.order.shipping_address'|trans }}</a></li>
+    <li class="active"><a href="#main" data-toggle="tab">{{ 'sylius.ui.general_info'|trans }}</a></li>
+    <li><a href="#items" data-toggle="tab">{{ 'sylius.ui.items'|trans }}</a></li>
+    <li><a href="#billing_address" data-toggle="tab">{{ 'sylius.ui.billing_address'|trans }}</a></li>
+    <li><a href="#shipping_address" data-toggle="tab">{{ 'sylius.ui.shipping_address'|trans }}</a></li>
 </ul>
 <br>
 
@@ -46,7 +46,7 @@
         {% for order_item in logs.order_items %}
             {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'revert_route': 'sylius_backend_order_revert', 'logs': order_item, 'disabled': disabled} %}
         {% else %}
-            {{ alerts.info('sylius.history.no_results'|trans) }}
+            {{ alerts.info('sylius.ui.there_are_no_logged_events_to_display'|trans) }}
         {% endfor %}
     </div>
 

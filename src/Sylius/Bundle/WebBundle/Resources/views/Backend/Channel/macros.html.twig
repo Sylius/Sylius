@@ -8,13 +8,13 @@
             <thead>
             <tr>
                 <th>{{ sylius_resource_sort('code', 'sylius.ui.code'|trans) }}</th>
-                <th>{{ sylius_resource_sort('name', 'sylius.channel.name'|trans) }}</th>
-                <th>{{ sylius_resource_sort('url', 'sylius.channel.hostname'|trans) }}</th>
-                <th>{{ sylius_resource_sort('defaultLocale', 'sylius.channel.locale_default'|trans) }}</th>
-                <th>{{ sylius_resource_sort('defaultCurrency', 'sylius.channel.currency_default'|trans) }}</th>
-                <th>{{ sylius_resource_sort('theme', 'sylius.channel.theme'|trans) }}</th>
-                <th>{{ sylius_resource_sort('enabled', 'sylius.channel.enabled'|trans) }}</th>
-                <th>{{ sylius_resource_sort('updatedAt', 'sylius.channel.updated_at'|trans) }}</th>
+                <th>{{ sylius_resource_sort('name', 'sylius.ui.name'|trans) }}</th>
+                <th>{{ sylius_resource_sort('url', 'sylius.ui.hostname'|trans) }}</th>
+                <th>{{ sylius_resource_sort('defaultLocale', 'sylius.ui.default_locale'|trans) }}</th>
+                <th>{{ sylius_resource_sort('defaultCurrency', 'sylius.ui.default_currency'|trans) }}</th>
+                <th>{{ sylius_resource_sort('theme', 'sylius.ui.theme'|trans) }}</th>
+                <th>{{ sylius_resource_sort('enabled', 'sylius.ui.enabled'|trans) }}</th>
+                <th>{{ sylius_resource_sort('updatedAt', 'sylius.ui.last_update'|trans) }}</th>
                 <th></th>
             </tr>
             </thead>
@@ -40,6 +40,6 @@
             </tbody>
         </table>
     {% else %}
-        {{ alerts.info('sylius.channel.no_results'|trans) }}
+        {{ alerts.info('sylius.ui.there_are_no_channels_configured'|trans) }}
     {% endif %}
 {% endmacro %}

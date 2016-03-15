@@ -1,7 +1,7 @@
 {% extends 'SyliusWebBundle:Frontend/Account:layout.html.twig' %}
 
 {% block content %}
-<h4>{{ message is defined ? message : 'sylius.confirmation.message'|trans }}</h4>
+<h4>{{ message is defined ? message : 'sylius.ui.do_you_want_to_delete_this_item'|trans }}</h4>
 <br>
 
 <div class="row">
@@ -10,9 +10,9 @@
         <input type="hidden" name="confirmed" value="1">
         <div class="form-actions">
             <button class="btn btn-danger" type="submit">
-                <i class="icon-trash"></i> <span>{{ 'sylius.delete'|trans }}</span>
+                <i class="icon-trash"></i> <span>{{ 'sylius.ui.delete'|trans }}</span>
             </button>
-            <a href="{{ app.request.headers.get('referer') }}" class="btn btn-info"><i class="icon-remove"></i> {{ 'sylius.cancel'|trans }}</a>
+            <a href="{{ app.request.headers.get('referer') }}" class="btn btn-info"><i class="icon-remove"></i> {{ 'sylius.ui.cancel'|trans }}</a>
         </div>
     </form>
 </div>

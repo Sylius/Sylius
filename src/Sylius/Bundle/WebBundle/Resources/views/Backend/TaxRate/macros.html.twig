@@ -10,13 +10,13 @@
         <tr>
             <th>{{ sylius_resource_sort('id', '#id') }}</th>
             <th>{{ sylius_resource_sort('code', 'sylius.ui.code'|trans) }}</th>
-            <th>{{ sylius_resource_sort('category', 'sylius.tax_rate.category'|trans) }}</th>
-            <th>{{ sylius_resource_sort('zone', 'sylius.tax_rate.zone'|trans) }}</th>
-            <th>{{ sylius_resource_sort('name', 'sylius.tax_rate.name'|trans) }}</th>
-            <th>{{ sylius_resource_sort('amount', 'sylius.tax_rate.amount'|trans) }}</th>
-            <th>{{ sylius_resource_sort('includedInPrice', 'sylius.tax_rate.included_in_price'|trans) }}</th>
-            <th>{{ sylius_resource_sort('calculator', 'sylius.tax_rate.calculator'|trans) }}</th>
-            <th>{{ sylius_resource_sort('updatedAt', 'sylius.tax_rate.updated_at'|trans) }}</th>
+            <th>{{ sylius_resource_sort('category', 'sylius.ui.category'|trans) }}</th>
+            <th>{{ sylius_resource_sort('zone', 'sylius.ui.zone'|trans) }}</th>
+            <th>{{ sylius_resource_sort('name', 'sylius.ui.name'|trans) }}</th>
+            <th>{{ sylius_resource_sort('amount', 'sylius.ui.amount'|trans) }}</th>
+            <th>{{ sylius_resource_sort('includedInPrice', 'sylius.ui.included_in_price'|trans) }}</th>
+            <th>{{ sylius_resource_sort('calculator', 'sylius.ui.calculator'|trans) }}</th>
+            <th>{{ sylius_resource_sort('updatedAt', 'sylius.ui.last_update'|trans) }}</th>
             <th></th>
         </tr>
     </thead>
@@ -46,7 +46,7 @@
     </tbody>
 </table>
 {% else %}
-{{ alerts.info('sylius.tax_rate.no_results'|trans) }}
+{{ alerts.info('sylius.ui.there_are_no_tax_rates_configured'|trans) }}
 {% endif %}
 
 {% endmacro %}

@@ -3,23 +3,23 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
-    <li><a href="{{ path('sylius_backend_tax_rate_index') }}">{{ 'sylius.breadcrumb.tax_rate.index'|trans }}</a></li>
+    <li>{{ 'sylius.ui.configuration'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_tax_rate_index') }}">{{ 'sylius.ui.tax_rates'|trans }}</a></li>
     <li>{{ tax_rate.name }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
-<h1>{{ 'sylius.tax_rate.show_header'|trans|raw }}</h1>
+<h1>{{ 'sylius.ui.tax_rate_details'|trans|raw }}</h1>
 </div>
 
 <div class="well">
     <a href="{{ path('sylius_backend_tax_rate_index') }}" class="btn btn-primary">
-        <i class="glyphicon glyphicon-list-alt"></i> {{ 'sylius.tax_rate.manage'|trans }}
+        <i class="glyphicon glyphicon-list-alt"></i> {{ 'sylius.ui.manage_tax_rates'|trans }}
     </a>
     <a href="{{ path('sylius_backend_tax_rate_update', {'id': tax_rate.id}) }}" class="btn">
-        <i class="glyphicon glyphicon-pencil"></i> {{ 'sylius.edit'|trans }}
+        <i class="glyphicon glyphicon-pencil"></i> {{ 'sylius.ui.edit'|trans }}
     </a>
     {{ buttons.delete(path('sylius_backend_tax_rate_delete', {'id': tax_rate.id})) }}
 </div>
@@ -27,10 +27,10 @@
 <table class="table table-bordered table-condensed">
     <thead>
         <tr>
-            <th>{{ 'sylius.tax_rate.category'|trans }}</th>
-            <th>{{ 'sylius.tax_rate.name'|trans }}</th>
-            <th>{{ 'sylius.tax_rate.zone'|trans }}</th>
-            <th>{{ 'sylius.tax_rate.amount'|trans }}</th>
+            <th>{{ 'sylius.ui.category'|trans }}</th>
+            <th>{{ 'sylius.ui.name'|trans }}</th>
+            <th>{{ 'sylius.ui.zone'|trans }}</th>
+            <th>{{ 'sylius.ui.amount'|trans }}</th>
         </tr>
     </thead>
     <tbody>

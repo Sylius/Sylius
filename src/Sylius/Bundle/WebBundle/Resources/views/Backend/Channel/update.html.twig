@@ -4,16 +4,16 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
-    <li><a href="{{ path('sylius_backend_channel_index') }}">{{ 'sylius.breadcrumb.channel.index'|trans }}</a></li>
+    <li>{{ 'sylius.ui.configuration'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_channel_index') }}">{{ 'sylius.ui.channels'|trans }}</a></li>
     <li>{{ channel.name }}</li>
-    <li>{{ 'sylius.breadcrumb.edit'|trans }}</li>
+    <li>{{ 'sylius.ui.edit'|trans }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
-    <h1><i class="glyphicon glyphicon-pencil"></i> {{ 'sylius.channel.update_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-pencil"></i> {{ 'sylius.ui.editing_channel'|trans|raw }}</h1>
 </div>
 
 {{ form_errors(form) }}

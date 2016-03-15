@@ -13,15 +13,15 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.section.customer'|trans }}</li>
-    <li><a href="{{ path('sylius_backend_customer_index') }}">{{ 'sylius.breadcrumb.customer.index'|trans }}</a></li>
-    <li>{{ 'sylius.breadcrumb.new'|trans }}</li>
+    <li>{{ 'sylius.ui.customer'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_customer_index') }}">{{ 'sylius.ui.customers'|trans }}</a></li>
+    <li>{{ 'sylius.ui.new'|trans }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
-    <h1><i class="glyphicon glyphicon-plus-sign"></i> {{ 'sylius.customer.create_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-plus-sign"></i> {{ 'sylius.ui.new_customer'|trans|raw }}</h1>
 </div>
 
 <form action="{{ path('sylius_backend_customer_create') }}" method="post" class="form-horizontal" novalidate>

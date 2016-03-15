@@ -9,14 +9,14 @@
             <tr>
                 <th>{{ sylius_resource_sort('id', '#id') }}</th>
                 <th>{{ sylius_resource_sort('code','sylius.ui.code'|trans) }}</th>
-                <th>{{ sylius_resource_sort('name', 'sylius.promotion.name'|trans) }}</th>
-                <th>{{ sylius_resource_sort('couponBased', 'sylius.promotion.coupon_based'|trans) }}</th>
-                <th>{{ sylius_resource_sort('usageLimit', 'sylius.promotion.usage_limit'|trans) }}</th>
-                <th>{{ sylius_resource_sort('used', 'sylius.promotion.used'|trans) }}</th>
-                <th>{{ sylius_resource_sort('exclusive', 'sylius.promotion.exclusive'|trans) }}</th>
-                <th>{{ sylius_resource_sort('priority', 'sylius.promotion.priority'|trans) }}</th>
-                <th>{{ sylius_resource_sort('startsAt', 'sylius.promotion.starts_at'|trans) }}</th>
-                <th>{{ sylius_resource_sort('endsAt', 'sylius.promotion.ends_at'|trans) }}</th>
+                <th>{{ sylius_resource_sort('name', 'sylius.ui.name'|trans) }}</th>
+                <th>{{ sylius_resource_sort('couponBased', 'sylius.ui.coupon_based'|trans) }}</th>
+                <th>{{ sylius_resource_sort('usageLimit', 'sylius.ui.usage_limit'|trans) }}</th>
+                <th>{{ sylius_resource_sort('used', 'sylius.ui.used'|trans) }}</th>
+                <th>{{ sylius_resource_sort('exclusive', 'sylius.ui.exclusive'|trans) }}</th>
+                <th>{{ sylius_resource_sort('priority', 'sylius.ui.priority'|trans) }}</th>
+                <th>{{ sylius_resource_sort('startsAt', 'sylius.ui.starts_at'|trans) }}</th>
+                <th>{{ sylius_resource_sort('endsAt', 'sylius.ui.ends_at'|trans) }}</th>
                 <th></th>
             </tr>
         </thead>
@@ -33,12 +33,12 @@
                 </td>
                 <td>
                     <span class="label label-{{ promotion.couponBased ? 'success' : 'default'}}">
-                        {{ promotion.couponBased ? 'sylius.yes'|trans : 'sylius.no'|trans }}
+                        {{ promotion.couponBased ? 'sylius.ui.yes'|trans : 'sylius.ui.no'|trans }}
                     </span>
                 </td>
                 <td>
                     <span class="label label-info">
-                        {{ promotion.usageLimit|default('sylius.no'|trans) }}
+                        {{ promotion.usageLimit|default('sylius.ui.no'|trans) }}
                     </span>
                 </td>
                 <td>
@@ -48,7 +48,7 @@
                 </td>
                 <td>
                     <span class="label label-{{ promotion.exclusive ? 'info' : 'default'}}">
-                        {{ promotion.exclusive ? 'sylius.yes'|trans : 'sylius.no'|trans }}
+                        {{ promotion.exclusive ? 'sylius.ui.yes'|trans : 'sylius.ui.no'|trans }}
                     </span>
                 </td>
                 <td>{{ promotion.priority }}</td>
@@ -68,7 +68,7 @@
         </tbody>
     </table>
 {% else %}
-    {{ alerts.info('sylius.promotion.no_results'|trans) }}
+    {{ alerts.info('sylius.ui.there_are_no_promotions_configured'|trans) }}
 {% endif %}
 
 {% endmacro %}

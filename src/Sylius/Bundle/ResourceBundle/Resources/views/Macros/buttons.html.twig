@@ -1,6 +1,6 @@
 {% macro show(url, message) %}
 <a href="{{ url }}" class="btn btn-default">
-   <i class="glyphicon glyphicon-book"></i><span>{{ message is empty ? 'sylius.show'|trans : message }}</span>
+   <i class="glyphicon glyphicon-book"></i><span>{{ message is empty ? 'sylius.ui.details'|trans : message }}</span>
 </a>
 {% endmacro %}
 
@@ -12,26 +12,26 @@
 
 {% macro create(url, message) %}
 <a href="{{ url }}" class="btn btn-primary">
-    <i class="glyphicon glyphicon-plus-sign"></i><span>{{ message is empty ? 'sylius.create'|trans : message }}</span>
+    <i class="glyphicon glyphicon-plus-sign"></i><span>{{ message is empty ? 'sylius.ui.create'|trans : message }}</span>
 </a>
 {% endmacro %}
 
 {% macro edit(url, message) %}
 <a href="{{ url }}" class="btn btn-primary">
-    <i class="glyphicon glyphicon-pencil"></i><span>{{ message is empty ? 'sylius.edit'|trans : message }}</span>
+    <i class="glyphicon glyphicon-pencil"></i><span>{{ message is empty ? 'sylius.ui.edit'|trans : message }}</span>
 </a>
 {% endmacro %}
 
 {% macro delete(url, message, disabled=false, modal=true) %}
 {% if disabled %}
 <span class="btn btn-danger disabled">
-    <i class="glyphicon glyphicon-trash"></i><span>{{ message is empty ? 'sylius.delete'|trans : message }}</span>
+    <i class="glyphicon glyphicon-trash"></i><span>{{ message is empty ? 'sylius.ui.delete'|trans : message }}</span>
 </span>
 {% else %}
 <form action="{{ url }}" method="post" class="delete-action-form" novalidate>
     <input type="hidden" name="_method" value="DELETE">
     <button class="btn btn-danger{% if modal %} btn-confirm{% endif %}" type="submit">
-        <i class="glyphicon glyphicon-trash"></i> <span>{{ message is empty ? 'sylius.delete'|trans : message }}</span>
+        <i class="glyphicon glyphicon-trash"></i> <span>{{ message is empty ? 'sylius.ui.delete'|trans : message }}</span>
     </button>
 </form>
 {% endif %}
@@ -39,7 +39,7 @@
 
 {% macro manage(url, message) %}
 <a href="{{ url }}" class="btn btn-success">
-    <i class="glyphicon glyphicon-folder-open"></i><span>{{ message is empty ? 'sylius.manage'|trans : message }}</span>
+    <i class="glyphicon glyphicon-folder-open"></i><span>{{ message is empty ? 'sylius.ui.manage'|trans : message }}</span>
 </a>
 {% endmacro %}
 
@@ -65,7 +65,7 @@
 <form action="{{ url }}" method="post" class="delete-action-form" novalidate>
     <input type="hidden" name="_method" value="PATCH">
     <button class="btn btn-{{ button|default('success') }}" type="submit">
-        <i class="glyphicon glyphicon-{{ icon|default('ok') }}"></i> <span>{{ message is empty ? 'sylius.enable'|trans : message }}</span>
+        <i class="glyphicon glyphicon-{{ icon|default('ok') }}"></i> <span>{{ message is empty ? 'sylius.ui.enable'|trans : message }}</span>
     </button>
 </form>
 {% endmacro %}
@@ -74,7 +74,7 @@
 <form action="{{ url }}" method="post" class="delete-action-form" novalidate>
     <input type="hidden" name="_method" value="PATCH">
     <button class="btn btn-{{ button|default('danger') }}" type="submit">
-        <i class="glyphicon glyphicon-{{ icon|default('remove') }}"></i> <span>{{ message is empty ? 'sylius.disable'|trans : message }}</span>
+        <i class="glyphicon glyphicon-{{ icon|default('remove') }}"></i> <span>{{ message is empty ? 'sylius.ui.disable'|trans : message }}</span>
     </button>
 </form>
 {% endmacro %}
