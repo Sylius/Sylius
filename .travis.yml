@@ -74,7 +74,7 @@ script:
 
     - if [[ $TRAVIS_PHP_VERSION = 7.* ]]; then bin/kawaii gherkin:check --align=left features/; fi;
 
-    - bin/phpspec run --no-interaction -f dot
+    - php -d opcache.enable_cli=0 bin/phpspec run --no-interaction -f dot
     - bin/phpunit
 
     - etc/bin/test-packages
