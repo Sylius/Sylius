@@ -39,7 +39,7 @@ run_phpspec() {
         return 1
     fi
 
-    run_command "${phpspec} run --ansi --no-interaction --format=dot"
+    retry_run_command "${phpspec} run --ansi --no-interaction --format=dot"
 }
 
 # Argument 1: Package path
@@ -59,7 +59,7 @@ run_phpunit() {
         run_command "test/app/console doctrine:schema:update --ansi --no-interaction --force --quiet"
     fi
 
-    run_command "${phpunit} --colors=always"
+    retry_run_command "${phpunit} --colors=always"
 }
 
 display_help_message() {
