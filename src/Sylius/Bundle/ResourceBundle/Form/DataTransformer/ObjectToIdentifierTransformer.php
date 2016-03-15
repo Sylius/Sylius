@@ -48,7 +48,7 @@ class ObjectToIdentifierTransformer implements DataTransformerInterface
      */
     public function transform($value)
     {
-        if (null === $value) {
+        if (empty($value)) {
             return '';
         }
 
