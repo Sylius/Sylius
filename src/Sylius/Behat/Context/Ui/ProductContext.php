@@ -16,6 +16,7 @@ use Sylius\Behat\Page\Admin\Product\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Product\ShowPageInterface;
 use Sylius\Behat\Page\Product\ProductShowPage;
 use Sylius\Behat\Page\Admin\Product\ShowPage as AdminProductShowPage;
+use Sylius\Behat\Page\Product\ProductShowPageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
@@ -43,24 +44,24 @@ final class ProductContext implements Context
     /**
      * @var IndexPageInterface
      */
-    private $productIndexPage;
+    private $adminProductIndexPage;
 
     /**
      * @param SharedStorageInterface $sharedStorage
-     * @param ProductShowPage $productShowPage
+     * @param ProductShowPageInterface $productShowPage
      * @param ShowPageInterface $adminProductShowPage
-     * @param IndexPageInterface $productIndexPage
+     * @param IndexPageInterface $adminProductIndexPage
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        ProductShowPage $productShowPage,
+        ProductShowPageInterface $productShowPage,
         ShowPageInterface $adminProductShowPage,
-        IndexPageInterface $productIndexPage
+        IndexPageInterface $adminProductIndexPage
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->productShowPage = $productShowPage;
         $this->adminProductShowPage = $adminProductShowPage;
-        $this->productIndexPage = $productIndexPage;
+        $this->adminProductIndexPage = $adminProductIndexPage;
     }
 
     /**
@@ -88,11 +89,11 @@ final class ProductContext implements Context
      */
     public function iDeleteProduct(ProductInterface $product)
     {
-        $this->sharedStorage->set('product', $product);
-
         $this->adminProductShowPage->open(['id' => $product->getId()]);
 
         $this->adminProductShowPage->deleteProduct();
+
+        $this->sharedStorage->set('product', $product);
     }
 
     /**
@@ -100,8 +101,8 @@ final class ProductContext implements Context
      */
     public function productShouldNotExist(ProductInterface $product)
     {
-        $this->productIndexPage->open();
+        $this->adminProductIndexPage->open();
 
-        expect($this->productIndexPage->isThereProduct($product))->toBe(false);
+        expect($this->adminProductIndexPage->isThereProduct($product))->toBe(false);
     }
 }

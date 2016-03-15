@@ -97,17 +97,9 @@ final class ProductContext implements Context
     }
 
     /**
-     * @When I should be notified that this variant is in use and cannot be deleted
+     * @When /^I should be notified that this (?:variant|product) is in use and cannot be deleted$/
      */
-    public function iShouldBeNotifiedThatThisVariantIsInUseAndCannotBeDeleted()
-    {
-        expect($this->sharedStorage->get('last_exception'))->toHaveType(DBALException::class);
-    }
-
-    /**
-     * @When I should be notified that this product is in use and cannot be deleted
-     */
-    public function iShouldBeNotifiedThatThisProductIsInUseAndCannotBeDeleted()
+    public function iShouldBeNotifiedThatThisProductVariantIsInUseAndCannotBeDeleted()
     {
         expect($this->sharedStorage->get('last_exception'))->toHaveType(DBALException::class);
     }

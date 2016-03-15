@@ -12,27 +12,32 @@
 namespace spec\Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
+use PhpSpec\Exception\Example\NotEqualException;
 use PhpSpec\ObjectBehavior;
+use Sylius\Behat\Context\Ui\ProductContext;
 use Sylius\Behat\Page\Admin\Product\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Product\ShowPageInterface;
 use Sylius\Behat\Page\Product\ProductShowPage;
 use Sylius\Behat\Page\Admin\Product\ShowPage as AdminProductShowPage;
+use Sylius\Behat\Page\Product\ProductShowPageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Test\Services\SharedStorage;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
 /**
+ * @mixin ProductContext
+ *
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
 class ProductContextSpec extends ObjectBehavior
 {
     public function let(
         SharedStorageInterface $sharedStorage,
-        ProductShowPage $productShowPage,
+        ProductShowPageInterface $productShowPage,
         ShowPageInterface $adminProductShowPage,
-        IndexPageInterface $productIndexPage
+        IndexPageInterface $adminProductIndexPage
     ) {
-        $this->beConstructedWith($sharedStorage, $productShowPage, $adminProductShowPage, $productIndexPage);
+        $this->beConstructedWith($sharedStorage, $productShowPage, $adminProductShowPage, $adminProductIndexPage);
     }
 
     function it_is_initializable()
@@ -45,7 +50,7 @@ class ProductContextSpec extends ObjectBehavior
         $this->shouldImplement(Context::class);
     }
 
-    function it_checks_if_i_am_able_to_access_product_page($productShowPage, ProductInterface $product)
+    function it_checks_if_i_am_able_to_access_product_page(ProductShowPageInterface $productShowPage, ProductInterface $product)
     {
         $productShowPage->tryToOpen(['product' => $product])->shouldBeCalled();
         $productShowPage->isOpen(['product' => $product])->willReturn(true);
@@ -53,7 +58,17 @@ class ProductContextSpec extends ObjectBehavior
         $this->iShouldBeAbleToAccessProduct($product);
     }
 
-    function it_checks_if_i_am_not_able_to_access_product_page($productShowPage, ProductInterface $product)
+    function it_throws_an_exception_if_i_am_not_able_to_access_product_page_when_i_should(
+        ProductShowPageInterface $productShowPage,
+        ProductInterface $product
+    ) {
+        $productShowPage->tryToOpen(['product' => $product])->shouldBeCalled();
+        $productShowPage->isOpen(['product' => $product])->willReturn(false);
+
+        $this->shouldThrow(NotEqualException::class)->during('iShouldBeAbleToAccessProduct',[$product]);
+    }
+
+    function it_checks_if_i_am_not_able_to_access_product_page(ProductShowPageInterface $productShowPage, ProductInterface $product)
     {
         $productShowPage->tryToOpen(['product' => $product])->shouldBeCalled();
         $productShowPage->isOpen(['product' => $product])->willReturn(false);
@@ -61,8 +76,21 @@ class ProductContextSpec extends ObjectBehavior
         $this->iShouldNotBeAbleToAccessProduct($product);
     }
 
-    function it_deletes_a_product($adminProductShowPage, $sharedStorage, ProductInterface $product)
-    {
+    function it_throws_an_exception_if_i_am_able_to_access_product_page_when_i_should_not(
+        ProductShowPageInterface $productShowPage,
+        ProductInterface $product
+    ) {
+        $productShowPage->tryToOpen(['product' => $product])->shouldBeCalled();
+        $productShowPage->isOpen(['product' => $product])->willReturn(true);
+
+        $this->shouldThrow(NotEqualException::class)->during('iShouldNotBeAbleToAccessProduct',[$product]);
+    }
+
+    function it_deletes_a_product(
+        ShowPageInterface $adminProductShowPage,
+        SharedStorageInterface $sharedStorage,
+        ProductInterface $product
+    ) {
         $sharedStorage->set('product', $product)->shouldBeCalled();
         
         $product->getName()->willReturn('Model');
@@ -74,13 +102,29 @@ class ProductContextSpec extends ObjectBehavior
         $this->iDeleteProduct($product);
     }
 
-    function it_checks_if_a_product_does_not_exist($sharedStorage, $productIndexPage, ProductInterface $product)
-    {
+    function it_checks_if_a_product_does_not_exist(
+        SharedStorageInterface $sharedStorage,
+        IndexPageInterface $adminProductIndexPage,
+        ProductInterface $product
+    ) {
         $sharedStorage->get('product')->willReturn($product);
 
-        $productIndexPage->open()->shouldBeCalled();
-        $productIndexPage->isThereProduct($product)->willReturn(false);
+        $adminProductIndexPage->open()->shouldBeCalled();
+        $adminProductIndexPage->isThereProduct($product)->willReturn(false);
 
         $this->productShouldNotExist($product);
+    }
+
+    function it_throws_an_exception_if_a_product_exists_when_it_should_not(
+        SharedStorageInterface $sharedStorage,
+        IndexPageInterface $adminProductIndexPage,
+        ProductInterface $product
+    ) {
+        $sharedStorage->get('product')->willReturn($product);
+
+        $adminProductIndexPage->open()->shouldBeCalled();
+        $adminProductIndexPage->isThereProduct($product)->willReturn(true);
+
+        $this->shouldThrow(NotEqualException::class)->during('productShouldNotExist', [$product]);
     }
 }
