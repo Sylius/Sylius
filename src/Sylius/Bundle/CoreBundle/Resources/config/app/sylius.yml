@@ -19,6 +19,7 @@ sylius_core:
                 sylius:
                     template: SyliusWebBundle:Frontend/Product:indexByTaxon.html.twig
                     permission: false
+    sitemap: ~
 
 sylius_money:
     currency: %sylius.currency%

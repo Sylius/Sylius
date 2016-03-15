@@ -49,3 +49,12 @@ facebook_login:
 
 google_login:
     path: /connect-login/check-google
+
+sylius_sitemap:
+    path: /sitemap.{_format}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.sitemap:showAction
+        _format: xml
+    requirements:
+        _format: xml
