@@ -134,7 +134,7 @@ abstract class Kernel extends BaseKernel
      */
     protected function getContainerBaseClass()
     {
-        if ('test' === $this->environment) {
+        if ('test' === $this->environment || 'test_cached' === $this->environment) {
             return MockerContainer::class;
         }
 
@@ -185,17 +185,5 @@ abstract class Kernel extends BaseKernel
     protected function isVagrantEnvironment()
     {
         return (getenv('HOME') === '/home/vagrant' || getenv('VAGRANT') === 'VAGRANT') && is_dir('/dev/shm');
-    }
-
-    /**
-     * @return string
-     */
-    protected function getContainerBaseClass()
-    {
-        if ('test' === $this->environment || 'test_cached' === $this->environment) {
-            return MockerContainer::class;
-        }
-
-        return parent::getContainerBaseClass();
     }
 }

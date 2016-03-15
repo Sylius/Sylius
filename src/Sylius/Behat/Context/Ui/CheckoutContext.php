@@ -19,7 +19,6 @@ use Sylius\Behat\Page\Checkout\CheckoutSecurityStepInterface;
 use Sylius\Behat\Page\Checkout\CheckoutShippingStepInterface;
 use Sylius\Behat\Page\Checkout\CheckoutThankYouPageInterface;
 use Sylius\Behat\Page\Order\OrderPaymentsPageInterface;
-use Sylius\Behat\PaypalApiMocker;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
@@ -77,11 +76,6 @@ final class CheckoutContext implements Context
     private $orderRepository;
 
     /**
-     * @var PaypalApiMocker
-     */
-    private $paypalApiMocker;
-
-    /**
      * @param SharedStorageInterface $sharedStorage
      * @param CheckoutSecurityStepInterface $checkoutSecurityStep
      * @param CheckoutAddressingStepInterface $checkoutAddressingStep
@@ -91,7 +85,6 @@ final class CheckoutContext implements Context
      * @param CheckoutThankYouPageInterface $checkoutThankYouPage
      * @param OrderPaymentsPageInterface $orderPaymentsPage
      * @param RepositoryInterface $orderRepository
-     * @param PaypalApiMocker $paypalApiMocker
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -102,8 +95,7 @@ final class CheckoutContext implements Context
         CheckoutFinalizeStepInterface $checkoutFinalizeStep,
         CheckoutThankYouPageInterface $checkoutThankYouPage,
         OrderPaymentsPageInterface $orderPaymentsPage,
-        RepositoryInterface $orderRepository,
-        PaypalApiMocker $paypalApiMocker
+        RepositoryInterface $orderRepository
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->checkoutSecurityStep = $checkoutSecurityStep;
@@ -114,7 +106,6 @@ final class CheckoutContext implements Context
         $this->checkoutThankYouPage = $checkoutThankYouPage;
         $this->orderPaymentsPage = $orderPaymentsPage;
         $this->orderRepository = $orderRepository;
-        $this->paypalApiMocker = $paypalApiMocker;
     }
 
     /**
@@ -229,7 +220,6 @@ final class CheckoutContext implements Context
      */
     public function iConfirmMyOrder()
     {
-        $this->paypalApiMocker->mockApiPaymentInitializeResponse();
         $this->checkoutFinalizeStep->confirmOrder();
     }
 
@@ -250,9 +240,9 @@ final class CheckoutContext implements Context
      */
     public function iShouldBeRedirectedBackToTheThankYouPage()
     {
-        $this->checkoutThankYouPage->waitForResponse(5, ['id' => $this->getLastOrder()->getId()]);
+        $this->checkoutThankYouPage->waitForResponse(5);
 
-        expect($this->checkoutThankYouPage->isOpen(['id' => $this->getLastOrder()->getId()]))->toBe(true);
+        expect($this->checkoutThankYouPage->isOpen())->toBe(true);
     }
 
     /**
@@ -263,17 +253,6 @@ final class CheckoutContext implements Context
         $this->orderPaymentsPage->waitForResponse(5, ['number' => $this->getLastOrder()->getNumber()]);
 
         expect($this->orderPaymentsPage->isOpen(['number' => $this->getLastOrder()->getNumber()]))->toBe(true);
-    }
-
-    /**
-     * @When I try to pay again
-     */
-    public function iTryToPayAgain()
-    {
-        $order = $this->getLastOrder();
-        $payment = $order->getLastPayment();
-        $this->paypalApiMocker->mockApiPaymentInitializeResponse();
-        $this->orderPaymentsPage->clickPayButtonForGivenPayment($payment);
     }
 
     /**

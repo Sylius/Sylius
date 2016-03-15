@@ -15,7 +15,6 @@ use Guzzle\Http\Message\Response;
 use Guzzle\Stream\Stream;
 use Mockery\Mock;
 use Payum\Core\Bridge\Guzzle\HttpClient;
-use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -23,9 +22,9 @@ use Symfony\Component\HttpKernel\KernelInterface;
 class PaypalApiMocker
 {
     /**
-     * @var BehatMockerInterface
+     * @var MockerInterface
      */
-    private $behatMocker;
+    private $mocker;
 
     /**
      * @var ResponseLoaderInterface
@@ -33,12 +32,12 @@ class PaypalApiMocker
     private $responseLoader;
 
     /**
-     * @param BehatMockerInterface $behatMocker
+     * @param MockerInterface $mocker
      * @param ResponseLoaderInterface $responseLoader
      */
-    public function __construct(BehatMockerInterface $behatMocker, ResponseLoaderInterface $responseLoader)
+    public function __construct(MockerInterface $mocker, ResponseLoaderInterface $responseLoader)
     {
-        $this->behatMocker = $behatMocker;
+        $this->mocker = $mocker;
         $this->responseLoader = $responseLoader;
     }
 
@@ -60,7 +59,7 @@ class PaypalApiMocker
         $getTransactionDetailsStream = $this->mockStream($mockedResponse['getTransactionDetails']);
         $getTransactionDetailsResponse = $this->mockHttpResponse(200, $getTransactionDetailsStream);
 
-        $this->behatMocker->mockService('payum.http_client', HttpClient::class)
+        $this->mocker->mockService('payum.http_client', HttpClient::class)
             ->shouldReceive('send')
             ->times(4)
             ->andReturn($firstGetExpressCheckoutDetailsResponse, $doExpressCheckoutPaymentResponse, $secondGetExpressCheckoutDetailsResponse, $getTransactionDetailsResponse)
@@ -79,7 +78,7 @@ class PaypalApiMocker
         $getExpressCheckoutDetailsStream = $this->mockStream($mockedResponse['getExpressCheckoutDetails']);
         $getExpressCheckoutDetailsResponse = $this->mockHttpResponse(200, $getExpressCheckoutDetailsStream);
 
-        $this->behatMocker->mockService('payum.http_client', HttpClient::class)
+        $this->mocker->mockService('payum.http_client', HttpClient::class)
             ->shouldReceive('send')
             ->twice()
             ->andReturn($setExpressCheckoutResponse, $getExpressCheckoutDetailsResponse)
@@ -93,7 +92,7 @@ class PaypalApiMocker
      */
     private function mockStream($content)
     {
-        $mockedStream = $this->behatMocker->mockCollaborator(Stream::class);
+        $mockedStream = $this->mocker->mockCollaborator(Stream::class);
         $mockedStream->shouldReceive('getContents')->once()->andReturn($content);
         $mockedStream->shouldReceive('close')->once()->andReturn();
 
@@ -108,7 +107,7 @@ class PaypalApiMocker
      */
     private function mockHttpResponse($statusCode, $streamMock)
     {
-        $mockedHttpResponse = $this->behatMocker->mockCollaborator(Response::class);
+        $mockedHttpResponse = $this->mocker->mockCollaborator(Response::class);
         $mockedHttpResponse->shouldReceive('getStatusCode')->once()->andReturn($statusCode);
         $mockedHttpResponse->shouldReceive('getBody')->once()->andReturn($streamMock);
 

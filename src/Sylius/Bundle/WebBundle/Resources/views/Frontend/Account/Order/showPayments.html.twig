@@ -19,7 +19,7 @@
                     <td>{{ payment.method.name }}</td>
                     <td>{{ payment.state }}</td>
                     <td>
-                        {%  if 'new' == payment.state %}
+                        {% if 'new' == payment.state %}
                             <a href="{{ url('sylius_order_purchase', { 'paymentId': payment.id }) }}" id="pay_{{ payment.id }}">Pay</a>
                         {% endif %}
                     </td>

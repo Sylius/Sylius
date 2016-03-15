@@ -16,7 +16,7 @@ use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class BehatMocker implements BehatMockerInterface
+class Mocker implements MockerInterface
 {
     /**
      * @var MockerContainer

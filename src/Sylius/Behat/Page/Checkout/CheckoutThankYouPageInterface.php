@@ -34,5 +34,5 @@ interface CheckoutThankYouPageInterface extends PageInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function waitForResponse($timeout, array $parameters);
+    public function waitForResponse($timeout, array $parameters = []);
 }

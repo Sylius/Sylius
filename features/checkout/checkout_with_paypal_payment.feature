@@ -16,7 +16,7 @@ Feature: Checkout with PayPal Express Checkout
         Given I am logged in as "john@example.com"
         And I added product "PHP T-Shirt" to the cart
         And I proceed selecting "PayPal Express Checkout" payment method
-        And I confirm my order
+        And I confirm my order with paypal payment
         When I sign in to PayPal and pay successfully
         Then I should be redirected back to the thank you page
 
@@ -25,7 +25,7 @@ Feature: Checkout with PayPal Express Checkout
         Given I am logged in as "john@example.com"
         And I added product "PHP T-Shirt" to the cart
         When I proceed selecting "PayPal Express Checkout" payment method
-        And I confirm my order
+        And I confirm my order with paypal payment
         And I cancel my PayPal payment
         Then I should be redirected back to the order payment page
 
@@ -34,7 +34,7 @@ Feature: Checkout with PayPal Express Checkout
         Given I am logged in as "john@example.com"
         And I added product "PHP T-Shirt" to the cart
         And I proceed selecting "PayPal Express Checkout" payment method
-        And I confirm my order
+        And I confirm my order with paypal payment
         But I cancel my PayPal payment
         And I should be redirected back to the order payment page
         When I try to pay again
@@ -46,7 +46,7 @@ Feature: Checkout with PayPal Express Checkout
         Given I am logged in as "john@example.com"
         And I added product "PHP T-Shirt" to the cart
         And I proceed selecting "PayPal Express Checkout" payment method
-        And I confirm my order
+        And I confirm my order with paypal payment
         But I cancel my PayPal payment
         And I should be redirected back to the order payment page
         When I try to pay again
@@ -54,10 +54,10 @@ Feature: Checkout with PayPal Express Checkout
         Then I should be redirected back to the order payment page
         And I should see two cancelled payments and new one ready to be paid
 
-    @ui @mink:chrome
+    @ui @mink:firefox
     Scenario: Being redirected to the PayPal Express Checkout page
         Given I am logged in as "john@example.com"
         And I added product "PHP T-Shirt" to the cart
         When I proceed selecting "PayPal Express Checkout" payment method
-        And I confirm my order
+        And I confirm my order with paypal payment
         Then I should be redirected to PayPal Express Checkout page

@@ -11,15 +11,17 @@
 
 namespace Sylius\Behat;
 
+use Mockery\MockInterface;
+
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-interface BehatMockerInterface
+interface MockerInterface
 {
     /**
      * @param string $className
      *
-     * @return \Mockery\MockInterface
+     * @return MockInterface
      */
     public function mockCollaborator($className);
 
@@ -27,7 +29,7 @@ interface BehatMockerInterface
      * @param string $serviceId
      * @param string $className
      *
-     * @return \Mockery\MockInterface
+     * @return MockInterface
      */
     public function mockService($serviceId, $className);
 }

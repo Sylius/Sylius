@@ -14,12 +14,12 @@ namespace spec\Sylius\Behat;
 use Payum\Core\Bridge\Guzzle\HttpClient;
 use PhpSpec\ObjectBehavior;
 use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
-use Sylius\Behat\BehatMockerInterface;
+use Sylius\Behat\MockerInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class BehatMockerSpec extends ObjectBehavior
+class MockerSpec extends ObjectBehavior
 {
     function let(MockerContainer $container)
     {
@@ -28,12 +28,12 @@ class BehatMockerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Behat\BehatMocker');
+        $this->shouldHaveType('Sylius\Behat\Mocker');
     }
 
     function it_implements_behat_mocker_interface()
     {
-        $this->shouldImplement(BehatMockerInterface::class);
+        $this->shouldImplement(MockerInterface::class);
     }
 
     function it_mocks_given_service($container)

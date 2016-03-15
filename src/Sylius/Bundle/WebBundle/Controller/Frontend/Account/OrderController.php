@@ -171,7 +171,7 @@ class OrderController extends FOSRestController
             return $this->redirectToRoute('sylius_order_payment_index', ['number' => $order->getNumber()]);
         }
 
-        return $this->redirectToRoute('sylius_checkout_thank_you', ['id' => $order->getId()]);
+        return $this->redirectToRoute('sylius_checkout_thank_you');
     }
 
     /**

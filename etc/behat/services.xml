@@ -23,12 +23,12 @@
         <parameter key="sylius.behat.table_manipulator.class">Sylius\Behat\TableManipulator</parameter>
         <parameter key="sylius.behat.page.class">Sylius\Behat\Page\Page</parameter>
         <parameter key="sylius.behat.symfony_page.class">Sylius\Behat\Page\SymfonyPage</parameter>
-        <parameter key="sylius.behat.paypal_mocked_api_responses.class">Sylius\Behat\PaypalApiMocker</parameter>
-        <parameter key="sylius.behat.mocker.class">Sylius\Behat\BehatMocker</parameter>
+        <parameter key="sylius.behat.paypal_api_mocker.class">Sylius\Behat\PaypalApiMocker</parameter>
+        <parameter key="sylius.behat.mocker.class">Sylius\Behat\Mocker</parameter>
+        <parameter key="sylius.behat.response_loader.class">Sylius\Behat\ResponseLoader</parameter>
         <parameter key="sylius.behat.page.admin.crud.index.class">Sylius\Behat\Page\Admin\Crud\IndexPage</parameter>
         <parameter key="sylius.behat.page.admin.crud.create.class">Sylius\Behat\Page\Admin\Crud\CreatePage</parameter>
         <parameter key="sylius.behat.page.admin.crud.update.class">Sylius\Behat\Page\Admin\Crud\UpdatePage</parameter>
-        <parameter key="sylius.behat.response_loader.class">Sylius\Behat\ResponseLoader</parameter>
     </parameters>
     <services>
         <service id="mink.default_session" class="Behat\Mink\Session" factory-service="mink" factory-method="getSession" lazy="true" scope="scenario" public="false" />
@@ -60,7 +60,7 @@
             <argument type="service" id="router" container="symfony_shared" />
         </service>
 
-        <service id="sylius.behat.paypal_mocked_api_responses" class="%sylius.behat.paypal_mocked_api_responses.class%" scope="scenario" public="false">
+        <service id="sylius.behat.paypal_api_mocker" class="%sylius.behat.paypal_api_mocker.class%" scope="scenario" public="false">
             <argument type="service" id="sylius.behat.mocker" />
             <argument type="service" id="sylius.behat.response_loader" />
         </service>
