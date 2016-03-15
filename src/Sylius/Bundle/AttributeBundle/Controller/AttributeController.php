@@ -76,11 +76,25 @@ class AttributeController extends ResourceController
 
         $attributes = $attributeRepository->findBy(['id' => $choices]);
         foreach ($attributes as $attribute) {
-            $attributeForm = 'sylius_attribute_type_'.$attribute->getType();
+            if ($attribute->isValueTranslatable()) {
+                $count = $request->query->get('count');
+                $subject = str_replace('_attribute', '', $this->metadata->getName());
+                $form = $this->get('form.factory')->createNamed('translations', 'a2lix_translationsForms', null, [
+                    'form_type' => sprintf('sylius_%s_attribute_value_translation', 'product'),
+                    'label' => $attribute->getName(),
+                    'form_options' => [
+                        'attr' => [
+                            'data-name' => 'sylius_'.$subject.'[attributes]['.$count.'][translations]',
+                        ],
+                        'valueTranslationType' => $attribute->getType(),
+                    ],
+                ]);
+            } else {
+                $options = ['label' => $attribute->getName()];
+                $attributeForm = 'sylius_attribute_type_'.$attribute->getType();
+                $form = $this->get('form.factory')->createNamed('value', $attributeForm, null, $options);
+            }
 
-            $options = ['label' => $attribute->getName()];
-
-            $form = $this->get('form.factory')->createNamed('value', $attributeForm, null, $options);
             $forms[$attribute->getId()] = $form->createView();
         }
 

@@ -21,7 +21,6 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="text" column="text_value" type="text" nullable="true" />
         <field name="boolean" column="boolean_value" type="boolean" nullable="true" />
         <field name="integer" column="integer_value" type="integer" nullable="true" />
         <field name="float" column="float_value" type="float" nullable="true" />

@@ -22,7 +22,7 @@ use Sylius\Component\Attribute\Model\AttributeInterface;
  */
 class AttributeSpec extends ObjectBehavior
 {
-    public function let()
+    function let()
     {
         $this->setCurrentLocale('en_US');
         $this->setFallbackLocale('en_US');
@@ -115,4 +115,17 @@ class AttributeSpec extends ObjectBehavior
         $this->setUpdatedAt($date);
         $this->getUpdatedAt()->shouldReturn($date);
     }
+
+    function its_value_is_translatable()
+    {
+        $this->setStorageType('text');
+        $this->isValueTranslatable()->shouldReturn(true);
+    }
+
+    function its_value_is_not_translatable()
+    {
+        $this->setStorageType('date');
+        $this->isValueTranslatable()->shouldReturn(false);
+    }
+
 }

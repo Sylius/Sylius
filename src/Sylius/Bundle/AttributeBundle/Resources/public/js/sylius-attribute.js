@@ -65,6 +65,7 @@
                 modifyModalOnItemDelete();
                 increaseAttributesNumber();
             });
+            form.trigger('reset');
         });
     }
 

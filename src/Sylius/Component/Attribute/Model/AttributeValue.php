@@ -11,12 +11,18 @@
 
 namespace Sylius\Component\Attribute\Model;
 
+use Sylius\Component\Resource\Model\TranslatableTrait;
+
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class AttributeValue implements AttributeValueInterface
 {
+    use TranslatableTrait {
+        __construct as private initializeTranslationsCollection;
+    }
+
     /**
      * @var mixed
      */
@@ -31,16 +37,6 @@ class AttributeValue implements AttributeValueInterface
      * @var AttributeInterface
      */
     protected $attribute;
-
-    /**
-     * @var mixed
-     */
-    protected $value;
-
-    /**
-     * @var string
-     */
-    protected $text;
 
     /**
      * @var bool
@@ -66,6 +62,14 @@ class AttributeValue implements AttributeValueInterface
      * @var \DateTime
      */
     protected $date;
+
+    /**
+     * AttributeValue constructor.
+     */
+    public function __construct()
+    {
+        $this->initializeTranslationsCollection();
+    }
 
     /**
      * {@inheritdoc}
@@ -128,8 +132,8 @@ class AttributeValue implements AttributeValueInterface
     {
         $this->assertAttributeIsSet();
 
-        $property = $this->attribute->getStorageType();
-        $this->$property = $value;
+        $setter = 'set'.ucfirst($this->attribute->getStorageType());
+        $this->$setter($value);
     }
 
     /**
@@ -183,7 +187,8 @@ class AttributeValue implements AttributeValueInterface
      */
     public function getText()
     {
-        return $this->text;
+        $this->assertLocaleIsSet();
+        return $this->translate()->getValue();
     }
 
     /**
@@ -191,7 +196,8 @@ class AttributeValue implements AttributeValueInterface
      */
     public function setText($text)
     {
-        $this->text = $text;
+        $this->assertLocaleIsSet();
+        $this->translate()->setValue($text);
     }
 
     /**
@@ -264,6 +270,18 @@ class AttributeValue implements AttributeValueInterface
     {
         if (null === $this->attribute) {
             throw new \BadMethodCallException('The attribute is undefined, so you cannot access proxy methods.');
+        }
+    }
+
+    /**
+     * @return void
+     */
+    protected function assertLocaleIsSet()
+    {
+        $this->assertAttributeIsSet();
+        if (null === $this->getCurrentLocale() || null === $this->getFallbackLocale() ) {
+            $this->setCurrentLocale($this->attribute->getCurrentLocale());
+            $this->setFallbackLocale($this->attribute->getFallbackLocale());
         }
     }
 }

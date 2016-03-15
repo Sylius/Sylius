@@ -66,6 +66,18 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <property name="translations">
+            <constraint name="Valid" />
+        </property>
+    </class>
+
+    <class name="Sylius\Component\Attribute\Model\AttributeValueTranslation">
+        <property name="value">
+            <constraint name="NotBlank">
+                <option name="message">sylius.attribute_value.presentation.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
     </class>
 
 </constraint-mapping>

@@ -29,11 +29,17 @@ class BuildAttributeValueFormSubscriber implements EventSubscriberInterface
     protected $attributeRepository;
 
     /**
+     * @var string
+     */
+    protected $subjectName;
+
+    /**
      * @param RepositoryInterface $attributeRepository
      */
-    public function __construct(RepositoryInterface $attributeRepository)
+    public function __construct(RepositoryInterface $attributeRepository, $subject = null)
     {
         $this->attributeRepository = $attributeRepository;
+        $this->subjectName = $subject;
     }
 
     /**
@@ -58,7 +64,10 @@ class BuildAttributeValueFormSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $this->addValueField($event->getForm(), $attributeValue->getAttribute());
+        $form = $event->getForm();
+        $attribute = $attributeValue->getAttribute();
+
+        $this->addValueField($form, $attribute);
     }
 
     /**
@@ -86,6 +95,16 @@ class BuildAttributeValueFormSubscriber implements EventSubscriberInterface
     {
         $options = ['auto_initialize' => false, 'label' => $attribute->getName()];
 
-        $form->add('value', 'sylius_attribute_type_'.$attribute->getType(), $options);
+        if ($attribute->isValueTranslatable()) {
+            $form->add('translations', 'a2lix_translationsForms', [
+                'form_type' => sprintf('sylius_%s_attribute_value_translation', $this->subjectName),
+                'label' => 'sylius.form.value_translation.presentation',
+                'form_options' => [
+                    'valueTranslationType' => $attribute->getType(),
+                ],
+            ]);
+        } else {
+            $form->add('value', 'sylius_attribute_type_'.$attribute->getType(), $options);
+        }
     }
 }

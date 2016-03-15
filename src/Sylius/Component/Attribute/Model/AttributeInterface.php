@@ -60,4 +60,9 @@ interface AttributeInterface extends
      * @param string $storageType
      */
     public function setStorageType($storageType);
+
+    /**
+     * @return bool
+     */
+    public function isValueTranslatable();
 }

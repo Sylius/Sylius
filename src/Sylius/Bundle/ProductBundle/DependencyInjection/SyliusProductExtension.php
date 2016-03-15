@@ -14,6 +14,8 @@ namespace Sylius\Bundle\ProductBundle\DependencyInjection;
 use Sylius\Bundle\ProductBundle\Controller\VariantController;
 use Sylius\Bundle\ProductBundle\Form\Type\VariantType;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Sylius\Component\Product\Model\AttributeValueTranslation;
+use Sylius\Component\Product\Model\AttributeValueTranslationInterface;
 use Sylius\Component\Product\Factory\ProductVariantFactory;
 use Sylius\Component\Product\Model\Attribute;
 use Sylius\Component\Product\Model\AttributeInterface;
@@ -106,6 +108,12 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
                             'classes' => [
                                 'model' => AttributeValue::class,
                                 'interface' => AttributeValueInterface::class,
+                            ],
+                            'translation' => [
+                                'classes' => [
+                                    'model' => AttributeValueTranslation::class,
+                                    'interface' => AttributeValueTranslationInterface::class,
+                                ],
                             ],
                         ],
                     ],
