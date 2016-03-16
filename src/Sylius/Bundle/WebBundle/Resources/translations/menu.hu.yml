@@ -8,8 +8,8 @@ sylius:
         assortment: Választék
         blocks: Tömbök
         configuration: Beállítások
-        countries: Országok
         content: Tartalom
+        countries: Országok
         dashboard: Vezérlőpult
         general_settings: Általános beállítások
         groups: Csoportok
@@ -24,17 +24,19 @@ sylius:
         payments: Fizetések
         products: Termékek
         promotions: Promóciók
+        roles: Szerepek
+        routes: Útvonalak
         sales: Rendelések
         shipments: Szállítások
         shipping_categories: Szállítási kategóriák
         shipping_methods: Szállítási módok
+        slideshow: Diavetítés
         stockables: Készletszintek
         tax_categories: Adózási kategóriák
         tax_rates: Adókulcsok
         taxation_settings: Adózás-beállítások
         taxonomies: Kategorizálás
         zones: Zónák
-        roles: Szerepek
       sidebar:
         assortment: Választék
         blocks: Tömbök
@@ -55,6 +57,8 @@ sylius:
         payments: Kifizetések
         products: Termékek
         promotions: Promóciók
+        roles: Szerepek
+        routes: Útvonalak
         sales: Rendelések
         shipments: Szállítmányok
         shipping_categories: Szállítási kategóriák
@@ -66,7 +70,6 @@ sylius:
         taxation_settings: Adózás-beállítások
         taxonomies: Kategorizálás
         zones: Zónák
-        roles: Szerepek
   frontend:
     menu:
       account:

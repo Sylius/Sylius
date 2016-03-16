@@ -22,7 +22,7 @@ class ShipmentRepository extends EntityRepository
      *
      * @return Pagerfanta
      */
-    public function createFilterPaginator($criteria = array(), $sorting = array())
+    public function createFilterPaginator($criteria = [], $sorting = [])
     {
         $this->_em->getFilters()->disable('softdeleteable');
 
@@ -68,7 +68,7 @@ class ShipmentRepository extends EntityRepository
 
         if (empty($sorting)) {
             if (!is_array($sorting)) {
-                $sorting = array();
+                $sorting = [];
             }
             $sorting['updatedAt'] = 'desc';
         }

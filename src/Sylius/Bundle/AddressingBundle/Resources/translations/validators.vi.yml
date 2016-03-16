@@ -28,12 +28,6 @@ sylius:
       min_length: Địa chỉ đường phải có ít nhất 2 ký tự|Địa chỉ đường phải có ít nhất 2 ký tự.
       not_blank: Vui lòng nhập địa chỉ (số nhà và tên đường).
     not_shippable: Địa chỉ này không phải là một điểm đến vận chuyển hợp lệ.
-  country:
-    iso_name:
-      not_blank: Vui lòng nhập mã ISO quốc gia.
-    name:
-      max_length: Tên quốc gia không được dài hơn 255 ký tự|Tên quốc gia không được dài hơn 255 ký tự.
-      not_blank: Vui lòng nhập tên quốc gia.
   province:
     name:
       max_length: Tên tỉnh không được dài hơn 255 ký tự|Tên tỉnh không được dài hơn 255 ký tự.

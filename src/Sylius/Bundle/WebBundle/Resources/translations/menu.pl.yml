@@ -5,16 +5,29 @@ sylius:
   backend:
     menu:
       main:
+        api_clients: Klienci API
+        archetypes: Szablony produktów
+        association_types: Rodzaje produktów towarzyszących
         assortment: Asortyment
+        attributes: Konfigurowanie cech
         blocks: Bloki
+        channels: Kanały
         configuration: Konfiguracja
-        countries: Kraje
+        contact_requests: Prośby o kontakt
+        contact_topics: Konfiguruj tytuły
         content: Treść
+        countries: Kraje
+        currencies: Waluty
+        customer: Klient
+        customers: Klienci
         dashboard: Panel
+        emails: Adresy email
         general_settings: Ogólne ustawienia
         groups: Grupy
         homepage: Wróć do sklepu
         locales: Ustawienia regionalne
+        marketing: Marketing
+        menus: Menu
         new_order: Dodaj nowe zamówienie
         new_promotion: Dodaj nową promocję
         options: Warianty
@@ -22,52 +35,75 @@ sylius:
         pages: Strony
         payment_methods: Metody płatności
         payments: Płatności
+        permissions: Uprawnienia
         products: Produkty
         promotions: Promocje
-        sales: Zamówienia
-        shipments: Przesyłki
-        shipping_categories: Kategorie wysyłki
-        shipping_methods: Metody wysyłki
-        stockables: Magazyn
-        tax_categories: Kategorie podatkowe
-        tax_rates: Stawki podatkowe
-        taxation_settings: Podatek
-        taxonomies: Taksonomia
-        zones: Strefy
+        report: Raporty
         roles: Role
-      sidebar:
-        assortment: Asortyment
-        blocks: Bloki
-        configuration: Konfiguracja
-        content: Treść
-        countries: Kraje
-        dashboard: Panel
-        general_settings: Ogólne ustawienia
-        groups: Grupy
-        homepage: Wróć do sklepu
-        locales: Ustawienia regionalne
-        new_order: Dodaj nowe zamówienie
-        new_promotion: Dodaj nową promocję
-        options: Warianty
-        orders: Aktualne zamówienia
-        pages: Strony
         routes: Ścieżki
-        payment_methods: Metody płatności
-        payments: Płatności
-        products: Produkty
-        promotions: Promocje
         sales: Zamówienia
+        security_settings: Ustawienia bezpieczeństwa
         shipments: Przesyłki
         shipping_categories: Kategorie wysyłki
         shipping_methods: Metody wysyłki
         slideshow: Pokaz slajdów
         stockables: Magazyn
+        support: Wsparcie techniczne
         tax_categories: Kategorie podatkowe
         tax_rates: Stawki podatkowe
         taxation_settings: Podatek
         taxonomies: Taksonomia
         zones: Strefy
+      sidebar:
+        api_clients: Klienci API
+        archetypes: Szablony produktów
+        assortment: Asortyment
+        attributes: Konfigurowanie cech
+        blocks: Bloki
+        channels: Kanały
+        configuration: Konfiguracja
+        contact_requests: Żądania
+        contact_topics: Konfiguruj tytuły
+        content: Treść
+        countries: Kraje
+        currencies: Waluty
+        customer: Klient
+        customers: Klienci
+        dashboard: Panel
+        emails: Adresy email
+        general_settings: Ogólne ustawienia
+        groups: Grupy
+        homepage: Wróć do sklepu
+        locales: Ustawienia regionalne
+        marketing: Marketing
+        menus: Menu
+        new_order: Dodaj nowe zamówienie
+        new_promotion: Dodaj nową promocję
+        options: Warianty
+        orders: Aktualne zamówienia
+        pages: Strony
+        payment_methods: Metody płatności
+        payments: Płatności
+        permissions: Uprawnienia
+        products: Produkty
+        promotions: Promocje
+        redirects: Przekierowania
+        report: Raporty
         roles: Role
+        routes: Ścieżki
+        sales: Zamówienia
+        security_settings: Ustawienia bezpieczeństwa
+        shipments: Przesyłki
+        shipping_categories: Kategorie wysyłki
+        shipping_methods: Metody wysyłki
+        slideshow: Pokaz slajdów
+        stockables: Magazyn
+        support: Wsparcie techniczne
+        tax_categories: Kategorie podatkowe
+        tax_rates: Stawki podatkowe
+        taxation_settings: Podatek
+        taxonomies: Taksonomia
+        zones: Strefy
   frontend:
     menu:
       account:
@@ -85,6 +121,8 @@ sylius:
         login: Zaloguj
         logout: Wyloguj
         register: Zarejestruj
+      sidebar:
+        links: Linki
       social:
         facebook: Facebook
         github: GitHub

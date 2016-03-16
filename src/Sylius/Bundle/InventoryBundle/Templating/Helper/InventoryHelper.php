@@ -51,7 +51,7 @@ class InventoryHelper extends Helper
      * stockable and quantity.
      *
      * @param StockableInterface $stockable
-     * @param integer            $quantity
+     * @param int            $quantity
      *
      * @return bool
      */

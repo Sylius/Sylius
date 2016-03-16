@@ -26,3 +26,11 @@ sylius:
       max_length: 'El nombre de método de pago debe ser {{ limit }} caracteres o menos.'
       min_length: 'El nombre del método de pago tiene que tener al menos {{ limit }} caracteres.'
       not_blank: Por favor introduzca el nombre de método de pago.
+    fee_calculator_configuration:
+      amount:
+        greater_than_or_equal: 'La cuota no puede ser inferior a {{ compared_value }}.'
+        not_blank: Por favor, introduce el importe de la cuota.
+      percent:
+        max_range: 'El porcentaje de la cuota no puede ser mayor que {{ limit }}.'
+        min_range: 'El porcentaje de la cuota no puede ser inferior a {{ limit }}.'
+        not_blank: Por favor, Introduzca el porcentaje de la cuota.

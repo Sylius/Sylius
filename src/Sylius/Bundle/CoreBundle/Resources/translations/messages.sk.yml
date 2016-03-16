@@ -2,15 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  checkout:
-    shipping_method:
-      not_blank: Prosím zadajte spôsob dopravy.
   form:
     action:
       add_product_configuration:
         price: Jednotková cena
         quantity: Množstvo
-        variant: Variácia
+        variant: Variant
       customer_group: Zákaznícka skupina
     block:
       body: Obsah
@@ -22,17 +19,19 @@ sylius:
       addressing:
         different_billing_address: Použiť inú fakturačnú adresu?
       payment_method: Spôsob platby
-      shipping_method: Spôsob prepravy
+      shipping_method: Spôsob dobpravy
     promotion:
       channels: Kanál
     coupon:
       per_customer_usage_limit: Obmedzenie použitia pre zákazníka
     group:
       name: Názov
-      roles: Rola
+      roles: Role
     channel:
-      taxonomies: Taxonómie
+      taxonomies: Triedenia
+      locale_default: Predvolený jazyk
       locales: Jazyky
+      currency_default: Predvolená mena
       currencies: Meny
       shipping_methods: Spôsoby doručenia
       payment_methods: Spôsoby platby
@@ -40,7 +39,7 @@ sylius:
       file: Obrázok
     locale:
       code: Kód
-      enabled: Povolené
+      enabled: Zapnuté
     order_filter:
       created_at_from: Vytvorené po
       created_at_to: Vytvorené pred
@@ -55,13 +54,15 @@ sylius:
       title: Názov
     product:
       restricted_zone: Zóna s obmedzeným prístupom
-      shipping_category: Prepravná kategória
+      shipping_category: Kategória doručenia
       short_description: Krátky popis
-      tax_category: Daňová kategória
-      variant_selection_method: Metóda výberu variantu
+      variant_selection_method: Spôsob výberu produktového variantu
+      main_taxon: Hlavná kategória
     product_filter:
       name: Názov
-      sku: Kód
+      sku: Skladový kód (SKU)
+    product_variant:
+      tax_category: Daňová kategória
     settings:
       general:
         currency: Predvolená mena
@@ -74,7 +75,7 @@ sylius:
       taxation:
         default_tax_zone: Predvolené daňové pásmo
       security:
-        enabled: Povoliť?
+        enabled: Zapnuť?
     shipment_filter:
       created_at_from: Od
       created_at_to: Do
@@ -85,7 +86,7 @@ sylius:
       created_at_from: Od
       created_at_to: Do
       number: Číslo objednávky
-      billing_address: Fakturačná adresa
+      billing_address: Fakturovať na
       channel: Všetky kanály
     shipping_method:
       zone: Zóna
@@ -96,13 +97,13 @@ sylius:
     user:
       billing_address: Fakturačná adresa
       different_billing_address: Použiť inú fakturačnú adresu?
-      enabled: Povolený
+      enabled: Zapnuté
       first_name: Meno
-      groups: Skupiny
-      roles: Rola
+      groups: Zákaznícke skupiny
+      roles: Role
       last_name: Priezvisko
       password: Heslo
-      shipping_address: Doručovacia adresa
+      shipping_address: Adresa doručenia
     user_filter:
       query: Vyhľadať
     variant:
@@ -110,9 +111,10 @@ sylius:
       depth: Hĺbka
       height: Výška
       images: Obrázky
-      on_hand: Aktuálne skladom
+      on_hand: Položiek na sklade
       price: Cena
-      sku: Kód
+      original_price: Pôvodná cena
+      sku: Skladový kód (SKU)
       weight: Hmotnosť
       width: Šírka
     attribute:
@@ -121,3 +123,8 @@ sylius:
         value: Hodnota
     guest:
       email: Email
+    product_association:
+      product: Priradený produkt
+      type: Typ priradenia
+    product_association_type:
+      name: Názov

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="sylius.theme.recursive_file_locator.class">Sylius\Bundle\ThemeBundle\Locator\RecursiveFileLocator</parameter>
+
+        <parameter key="sylius.theme.configuration.loader.json_file.class">Sylius\Bundle\ThemeBundle\Configuration\Loader\JsonFileConfigurationLoader</parameter>
+        <parameter key="sylius.theme.configuration.loader.processing.class">Sylius\Bundle\ThemeBundle\Configuration\Loader\ConfigurationProcessingLoader</parameter>
+
+        <parameter key="sylius.theme.configuration.provider.filesystem.class">Sylius\Bundle\ThemeBundle\Configuration\Provider\FilesystemConfigurationProvider</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.theme.recursive_file_locator" class="%sylius.theme.recursive_file_locator.class%" public="false">
+            <argument type="service" id="sylius.theme.finder_factory" />
+            <argument>%sylius.theme.configuration.filesystem.locations%</argument>
+        </service>
+
+        <!-- TODO: json_file.processing as decorator (some bug :/) -->
+        <service id="sylius.theme.configuration.loader.json_file" class="%sylius.theme.configuration.loader.json_file.class%" public="false">
+            <argument type="service" id="sylius.theme.filesystem" />
+        </service>
+
+        <service id="sylius.theme.configuration.loader.json_file.processing" class="%sylius.theme.configuration.loader.processing.class%" public="false">
+            <argument type="service" id="sylius.theme.configuration.loader.json_file" />
+            <argument type="service" id="sylius.theme.configuration.processor" />
+        </service>
+
+        <service id="sylius.theme.configuration.provider.filesystem" class="%sylius.theme.configuration.provider.filesystem.class%" public="false">
+            <argument type="service" id="sylius.theme.recursive_file_locator" />
+            <argument type="service" id="sylius.theme.configuration.loader.json_file.processing" />
+            <argument>composer.json</argument>
+        </service>
+    </services>
+</container>

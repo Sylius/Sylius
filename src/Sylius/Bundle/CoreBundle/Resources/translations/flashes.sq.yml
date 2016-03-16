@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  cart:
+    restricted_zone_removal: 'Produkti %product% i fshirë nga karroca sepse nuk është i vlefshëm në vendin tuaj.'
+  checkout:
+    restricted_zone: Ky produkt nuk është i vlefshëm në vendin tuaj.
+    success: Falmnderit për porosinë!
+    canceled: Pagesa juaj u fshi.
+    processing: Pagesa juaj po procesohet.
+    new: Pagesa juaj është e re.
+    failed: Pagesa juaj nuk u pranua.
+    unknown: Gabim i panjohur gjatë pagesës.
+    out_of_stock: 'Në rezerva ka vetëm %quantity% %name%.'

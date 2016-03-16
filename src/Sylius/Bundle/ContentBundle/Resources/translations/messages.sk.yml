@@ -1,8 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-auto: automaticky
-route: cesta
 sylius:
   form:
     action_block:
@@ -15,7 +13,7 @@ sylius:
       filter: Filter
       image: Obrázok
       internal_name: Inerný názov
-      label: Označenie
+      label: Popis
       link_url: URL odkaz
       parent: Nadradená kategória
       publish_end_date: Dátum ukončenia zverejnenia
@@ -25,16 +23,16 @@ sylius:
       slideshow_medium: Slideshow Stredný (obsah)
       slideshow_large: Slideshow veľký (celá šírka)
     menu:
-      childrens: Potomkovia
+      childrens: Podradené záznamy
       display: Zobraziť
-      display_children: Zobraziť potomkov
-      label: Označenie
+      display_children: Zobraziť podradené záznamy
+      label: Popis
       name: Názov
       parent: Nadradená kategória
       publish_end_date: Dátum ukončenia zverejnenia
       publish_start_date: Dátum začiatku zverejnenia
       publishable: Uverejnené
-      route: Cesta
+      route: URL Cesta
       uri: URI
     menu_block:
       body: Obsah
@@ -46,9 +44,9 @@ sylius:
     menu_node_block:
       content: Obsah
       display: Zobraziť
-      display_children: Zobraziť potomkov
+      display_children: Zobraziť podradené záznamy
       internal_name: Inerný názov
-      label: Označenie
+      label: Popis
       link_type: Typ odkazu
       publish_end_date: Dátum ukončenia zverejnenia
       publish_start_date: Dátum začiatku zverejnenia
@@ -58,7 +56,7 @@ sylius:
     redirect_route:
       id: Id
       name: Názov
-      route_name: Nazov_cesty
+      route_name: Názov URL cesty
       uri: URI
     reference_block:
       body: Obsah
@@ -81,7 +79,7 @@ sylius:
       title: Názov
     slideshow_block:
       add_slide: Pridať
-      childrens: Potomkovia
+      childrens: Podradené záznamy
       internal_name: Inetrný názov
       parent: Nadradená kategória
       publish_end_date: Dátum ukončenia zverejnenia
@@ -92,12 +90,12 @@ sylius:
       body: Obsah
       id: Id
       internal_name: Interný názov
-      menu_nodes: Uzly menu
+      menu_nodes: Menu elementy
       parent: Nadradená kategória
       publish_end_date: Dátum ukončenia zverejnenia
       publish_start_date: Dátum začiatku zverejnenia
       publishable: Uverejnené
-      routes: Trasy
+      routes: URL cesty
       title: Názov
     string_block:
       body: Obsah

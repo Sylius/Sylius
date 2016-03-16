@@ -16,6 +16,7 @@ use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 
 class AddressingContext extends DefaultContext
 {
@@ -26,7 +27,7 @@ class AddressingContext extends DefaultContext
     public function thereAreCountries(TableNode $table)
     {
         foreach ($table->getHash() as $data) {
-            $provinces = array_key_exists('provinces', $data) ? explode(',', $data['provinces']) : array();
+            $provinces = array_key_exists('provinces', $data) ? explode(',', $data['provinces']) : [];
 
             $enabled = isset($data['enabled']) ? 'no' !== $data['enabled'] : true;
 
@@ -51,12 +52,12 @@ class AddressingContext extends DefaultContext
      */
     public function thereIsCountry($name, $enabled = true, $provinces = null, $flush = true)
     {
-        $isoName = $this->getCountryCodeByEnglishCountryName($name);
+        $countryCode = $this->getCountryCodeByEnglishCountryName($name);
 
         /* @var $country CountryInterface */
-        if (null === $country = $this->getRepository('country')->findOneBy(array('isoName' => $isoName))) {
+        if (null === $country = $this->getRepository('country')->findOneBy(['code' => $countryCode])) {
             $country = $this->getFactory('country')->createNew();
-            $country->setIsoName(trim($isoName));
+            $country->setCode(trim($countryCode));
             $country->setEnabled($enabled);
 
             $this->addProvincesToCountry($country, $provinces);
@@ -86,9 +87,8 @@ class AddressingContext extends DefaultContext
             $this->thereIsZone(
                 $data['name'],
                 $data['type'],
-                explode(',', $data['members']),
-                $scope,
-                false
+                explode(', ', $data['members']),
+                $scope
             );
         }
 
@@ -99,26 +99,27 @@ class AddressingContext extends DefaultContext
      * @Given /^I created zone "([^"]*)"$/
      * @Given /^there is zone "([^"]*)"$/
      */
-    public function thereIsZone($name, $type = ZoneInterface::TYPE_COUNTRY, array $members = array(), $scope = null, $flush = true)
+    public function thereIsZone($name, $type = ZoneInterface::TYPE_COUNTRY, array $members = [], $scope = null, $flush = true)
     {
         $repository = $this->getRepository('zone');
 
         /* @var $zone ZoneInterface */
         $zone = $this->getFactory('zone')->createNew();
         $zone->setName($name);
+        $zone->setCode($name);
         $zone->setType($type);
         $zone->setScope($scope);
 
         foreach ($members as $memberName) {
-            $member = $this->getService('sylius.factory.zone_member_'.$type)->createNew();
             if (ZoneInterface::TYPE_ZONE === $type) {
-                $zoneable = $repository->findOneBy(array('name' => $memberName));
+                $zoneable = $repository->findOneBy(['name' => $memberName]);
             } else {
-                $zoneable = call_user_func(array($this, 'thereIs'.ucfirst($type)), $memberName);
+                $zoneable = call_user_func([$this, 'thereIs'.ucfirst($type)], $memberName);
             }
 
-            call_user_func(array($member, 'set'.ucfirst($type)), $zoneable);
-
+            /* @var ZoneMemberInterface $member */
+            $member = $this->getFactory('zone_member')->createNew();
+            $member->setCode($zoneable->getCode());
             $zone->addMember($member);
         }
 
@@ -134,11 +135,12 @@ class AddressingContext extends DefaultContext
     /**
      * @Given /^there is province "([^"]*)"$/
      */
-    public function thereIsProvince($name)
+    public function thereIsProvince($name, $countryCode = null)
     {
         /* @var $province ProvinceInterface */
         $province = $this->getFactory('province')->createNew();
         $province->setName($name);
+        $province->setCode(sprintf('%s-%s', $countryCode, $name));
 
         $this->getEntityManager()->persist($province);
 
@@ -150,10 +152,10 @@ class AddressingContext extends DefaultContext
      */
     public function storeOwnerSetCountryAsDisabled($name)
     {
-        $isoName = $this->getCountryCodeByEnglishCountryName($name);
+        $countryCode = $this->getCountryCodeByEnglishCountryName($name);
 
         /** @var CountryInterface $country */
-        $country = $this->getRepository("country")->findOneBy(array('isoName' => $isoName));
+        $country = $this->getRepository('country')->findOneBy(['code' => $countryCode]);
         $country->setEnabled(false);
 
         $manager = $this->getEntityManager();
@@ -170,7 +172,7 @@ class AddressingContext extends DefaultContext
         if (null !== $provinces) {
             $provinces = $provinces instanceof TableNode ? $provinces->getHash() : $provinces;
             foreach ($provinces as $provinceName) {
-                $country->addProvince($this->thereisProvince($provinceName));
+                $country->addProvince($this->thereisProvince($provinceName, $country->getCode()));
             }
         }
     }

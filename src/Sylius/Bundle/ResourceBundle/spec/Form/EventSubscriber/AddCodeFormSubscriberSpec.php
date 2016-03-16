@@ -11,8 +11,8 @@
 
 namespace spec\Sylius\Bundle\ResourceBundle\Form\EventSubscriber;
 
-use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -37,7 +37,7 @@ class AddCodeFormSubscriberSpec extends ObjectBehavior
 
     function it_subscribes_to_event()
     {
-        $this::getSubscribedEvents()->shouldReturn(array(FormEvents::PRE_SET_DATA => 'preSetData'));
+        $this::getSubscribedEvents()->shouldReturn([FormEvents::PRE_SET_DATA => 'preSetData']);
     }
 
     function it_sets_code_as_enabled_when_resource_is_new(FormEvent $event, FormInterface $form, CodeAwareInterface $resource)
@@ -79,10 +79,12 @@ class AddCodeFormSubscriberSpec extends ObjectBehavior
         $this->shouldThrow('\UnexpectedTypeException');
     }
 
-    function it_sets_code_as_enabled_when_resource_is_null(FormEvent $event, FormInterface $form)
-    {
-        $event->getForm()->willReturn($form);
+    function it_sets_code_as_enabled_when_there_is_no_resource(
+        FormEvent $event,
+        FormInterface $form
+    ) {
         $event->getData()->willReturn(null);
+        $event->getForm()->willReturn($form);
 
         $form
             ->add('code', 'text', Argument::withEntry('disabled', false))

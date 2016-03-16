@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.metadata.dynamic_form_choice_builder.class">Sylius\Bundle\MetadataBundle\DynamicForm\DynamicFormBuilder</parameter>
+        <parameter key="sylius.metadata.dynamic_forms_choices_map.class">Sylius\Bundle\MetadataBundle\DynamicForm\DynamicFormsChoicesMap</parameter>
+        <parameter key="sylius.metadata.form.type.dynamic_form_choice.class">Sylius\Bundle\MetadataBundle\DynamicForm\Type\DynamicFormChoiceType</parameter>
+
+        <parameter key="sylius.form.type.page_metadata.class">Sylius\Bundle\MetadataBundle\Form\Type\Custom\PageMetadataType</parameter>
+        <parameter key="sylius.form.type.twitter_card.class">Sylius\Bundle\MetadataBundle\Form\Type\Twitter\TwitterCardType</parameter>
+        <parameter key="sylius.form.type.twitter_summary_card.class">Sylius\Bundle\MetadataBundle\Form\Type\Twitter\SummaryCardType</parameter>
+        <parameter key="sylius.form.type.twitter_summary_large_image_card.class">Sylius\Bundle\MetadataBundle\Form\Type\Twitter\SummaryLargeImageCardType</parameter>
+        <parameter key="sylius.form.type.twitter_player_card.class">Sylius\Bundle\MetadataBundle\Form\Type\Twitter\PlayerCardType</parameter>
+        <parameter key="sylius.form.type.twitter_app_card.class">Sylius\Bundle\MetadataBundle\Form\Type\Twitter\AppCardType</parameter>
+
+        <parameter key="sylius.model.page_metadata.class">Sylius\Component\Metadata\Model\Custom\PageMetadata</parameter>
+        <parameter key="sylius.model.twitter_summary_card.class">Sylius\Component\Metadata\Model\Twitter\SummaryCard</parameter>
+        <parameter key="sylius.model.twitter_summary_large_image_card.class">Sylius\Component\Metadata\Model\Twitter\SummaryLargeImageCard</parameter>
+        <parameter key="sylius.model.twitter_player_card.class">Sylius\Component\Metadata\Model\Twitter\PlayerCard</parameter>
+        <parameter key="sylius.model.twitter_app_card.class">Sylius\Component\Metadata\Model\Twitter\AppCard</parameter>
+
+        <parameter key="sylius.validation_groups.page_metadata" type="collection"><parameter>Default</parameter></parameter>
+        <parameter key="sylius.validation_groups.twitter_summary_card" type="collection"><parameter>Default</parameter></parameter>
+        <parameter key="sylius.validation_groups.twitter_summary_large_image_card" type="collection"><parameter>Default</parameter></parameter>
+        <parameter key="sylius.validation_groups.twitter_player_card" type="collection"><parameter>Default</parameter></parameter>
+        <parameter key="sylius.validation_groups.twitter_app_card" type="collection"><parameter>Default</parameter></parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.metadata.dynamic_form_choice_builder" class="%sylius.metadata.dynamic_form_choice_builder.class%" public="false">
+            <argument type="service" id="sylius.metadata.dynamic_forms_choices_map" />
+            <argument type="service" id="property_accessor" />
+        </service>
+
+        <service id="sylius.metadata.dynamic_forms_choices_map" class="%sylius.metadata.dynamic_forms_choices_map.class%" public="false">
+            <argument type="collection" />
+        </service>
+
+        <service id="sylius.metadata.form.type.dynamic_form_choice" class="%sylius.metadata.form.type.dynamic_form_choice.class%">
+            <argument type="service" id="sylius.metadata.dynamic_forms_choices_map" />
+            <tag name="form.type" alias="sylius_dynamic_form" />
+        </service>
+
+        <service id="sylius.form.type.page_metadata" class="%sylius.form.type.page_metadata.class%">
+            <argument>%sylius.model.page_metadata.class%</argument>
+            <argument>%sylius.validation_groups.page_metadata%</argument>
+            <tag name="form.type" alias="sylius_page_metadata" />
+        </service>
+
+        <service id="sylius.form.type.twitter_card" class="%sylius.form.type.twitter_card.class%">
+            <tag name="form.type" alias="sylius_twitter_card" />
+        </service>
+
+        <service id="sylius.form.type.twitter_summary_card" class="%sylius.form.type.twitter_summary_card.class%">
+            <argument>%sylius.model.twitter_summary_card.class%</argument>
+            <argument>%sylius.validation_groups.twitter_summary_card%</argument>
+            <tag name="form.type" alias="sylius_twitter_summary_card" />
+        </service>
+
+        <service id="sylius.form.type.twitter_summary_large_image_card" class="%sylius.form.type.twitter_summary_large_image_card.class%">
+            <argument>%sylius.model.twitter_summary_large_image_card.class%</argument>
+            <argument>%sylius.validation_groups.twitter_summary_large_image_card%</argument>
+            <tag name="form.type" alias="sylius_twitter_summary_large_image_card" />
+        </service>
+
+        <service id="sylius.form.type.twitter_player_card" class="%sylius.form.type.twitter_player_card.class%">
+            <argument>%sylius.model.twitter_player_card.class%</argument>
+            <argument>%sylius.validation_groups.twitter_player_card%</argument>
+            <tag name="form.type" alias="sylius_twitter_player_card" />
+        </service>
+
+        <service id="sylius.form.type.twitter_app_card" class="%sylius.form.type.twitter_app_card.class%">
+            <argument>%sylius.model.twitter_app_card.class%</argument>
+            <argument>%sylius.validation_groups.twitter_app_card%</argument>
+            <tag name="form.type" alias="sylius_twitter_app_card" />
+        </service>
+    </services>
+
+</container>

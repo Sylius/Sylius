@@ -45,7 +45,7 @@ class LoadTaxationData extends DataFixture
         $manager->persist($taxRate);
         $manager->flush();
 
-        $taxableGoods->addRate($this->createTaxRate('TR3', 'No tax', 'Rest of World', 0.00));
+        $taxableGoods->addRate($this->createTaxRate('TR3', 'No tax', 'RoW', 0.00));
         $taxRate->setCategory($taxableGoods);
 
         $manager->persist($taxRate);
@@ -85,19 +85,19 @@ class LoadTaxationData extends DataFixture
      *
      * @param string  $code
      * @param string  $name
-     * @param string  $zoneName
+     * @param string  $zoneCode
      * @param float   $amount
-     * @param Boolean $includedInPrice
+     * @param bool $includedInPrice
      * @param string  $calculator
      *
      * @return TaxRateInterface
      */
-    protected function createTaxRate($code, $name, $zoneName, $amount, $includedInPrice = false, $calculator = 'default')
+    protected function createTaxRate($code, $name, $zoneCode, $amount, $includedInPrice = false, $calculator = 'default')
     {
         /* @var $rate TaxRateInterface */
         $rate = $this->getTaxRateFactory()->createNew();
         $rate->setName($name);
-        $rate->setZone($this->getZoneByName($zoneName));
+        $rate->setZone($this->getZoneByCode($zoneCode));
         $rate->setAmount($amount);
         $rate->setIncludedInPrice($includedInPrice);
         $rate->setCalculator($calculator);

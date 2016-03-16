@@ -9,9 +9,7 @@ sylius:
       configuration: Einstellung
     pricing:
       volume_based:
+        label: Preiskonfiguration
+        min: Mindestmenge
+        max: Maximale Menge
         price: Preis
-  pricing:
-    volume_based:
-      price: Preis
-      button:
-        add: Hinzufügen

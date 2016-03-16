@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  user:
+    email:
+      not_exist: Пользователь с этим e-mail не существует.
+    password:
+      invalid: Неправильный текущий пароль.
+      request:
+        success: Мы отправили Вам письмо с инструкциями для восстановления пароля!
+      reset:
+        success: Ваш пароль был успешно сброшен!
+      change:
+        success: Ваш пароль был успешно изменен!
+    reset_password:
+      requested: Если указанный e-mail существует в нашей системе, мы отправим на него инструкцию о том, как сбросить ваш пароль.

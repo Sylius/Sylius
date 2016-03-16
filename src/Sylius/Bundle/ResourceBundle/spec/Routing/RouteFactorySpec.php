@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Routing;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Routing\RouteFactory;
 use Sylius\Bundle\ResourceBundle\Routing\RouteFactoryInterface;
 use Symfony\Component\Routing\Route;
@@ -29,7 +28,7 @@ class RouteFactorySpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Routing\RouteFactory');
     }
-    
+
     function it_implements_route_factory_interface()
     {
         $this->shouldImplement(RouteFactoryInterface::class);
@@ -42,16 +41,16 @@ class RouteFactorySpec extends ObjectBehavior
 
     function it_creates_a_new_route()
     {
-        $defaults = array(
-            '_controller' => 'sylius.controller.product:showAction'
-        );
+        $defaults = [
+            '_controller' => 'sylius.controller.product:showAction',
+        ];
 
-        $requirements = array(
-            'format' => 'xml|json'
-        );
+        $requirements = [
+            'format' => 'xml|json',
+        ];
 
-        $expectedRoute = new Route('/products', $defaults, $requirements, array(), 'test.com', array('https'), array('GET', 'POST'), 'condition');
+        $expectedRoute = new Route('/products', $defaults, $requirements, [], 'test.com', ['https'], ['GET', 'POST'], 'condition');
 
-        $this->createRoute('/products', $defaults, $requirements, array(), 'test.com', array('https'), array('GET', 'POST'), 'condition')->shouldBeLike($expectedRoute);
+        $this->createRoute('/products', $defaults, $requirements, [], 'test.com', ['https'], ['GET', 'POST'], 'condition')->shouldBeLike($expectedRoute);
     }
 }

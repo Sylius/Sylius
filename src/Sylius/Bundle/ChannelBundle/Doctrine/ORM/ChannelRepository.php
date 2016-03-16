@@ -15,37 +15,23 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 
 /**
- * Default channel repository.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ChannelRepository extends EntityRepository implements ChannelRepositoryInterface
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
-    public function findMatchingHostname($hostname)
+    public function findOneByHostname($hostname)
     {
-        $queryBuilder = $this->getQueryBuilder();
-
-        $queryBuilder
-            ->andWhere($queryBuilder->expr()->like('o.url', ':hostname'))
-            ->setParameter('hostname', '%'.$hostname.'%')
-        ;
-
-        return $queryBuilder->getQuery()->getOneOrNullResult();
+        return $this->findOneBy(['hostname' => $hostname]);
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
-    public function findDefault()
+    public function findOneByCode($code)
     {
-        return $this
-            ->getCollectionQueryBuilder()
-            ->getQuery()
-            ->setMaxResults(1)
-            ->getSingleResult()
-        ;
+        return $this->findOneBy(['code' => $code]);
     }
 }

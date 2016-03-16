@@ -4,7 +4,6 @@
 sylius:
   form:
     channel:
-      code: Kode
       name: Navn
       description: Beskrivelse
       enabled: Aktivert

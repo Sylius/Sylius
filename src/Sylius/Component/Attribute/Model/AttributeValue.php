@@ -60,20 +60,12 @@ class AttributeValue implements AttributeValueInterface
     /**
      * @var \DateTime
      */
-    protected $dateTime;
+    protected $datetime;
 
     /**
      * @var \DateTime
      */
     protected $date;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __toString()
-    {
-        return $this->getValue();
-    }
 
     /**
      * {@inheritdoc}
@@ -143,6 +135,16 @@ class AttributeValue implements AttributeValueInterface
     /**
      * {@inheritdoc}
      */
+    public function getCode()
+    {
+        $this->assertAttributeIsSet();
+
+        return $this->attribute->getCode();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         $this->assertAttributeIsSet();
@@ -161,7 +163,7 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getBoolean()
     {
@@ -169,7 +171,7 @@ class AttributeValue implements AttributeValueInterface
     }
 
     /**
-     * @param boolean $boolean
+     * @param bool $boolean
      */
     public function setBoolean($boolean)
     {
@@ -227,17 +229,17 @@ class AttributeValue implements AttributeValueInterface
     /**
      * @return \DateTime
      */
-    public function getDateTime()
+    public function getDatetime()
     {
-        return $this->dateTime;
+        return $this->datetime;
     }
 
     /**
-     * @param \DateTime $dateTime
+     * @param \DateTime $datetime
      */
-    public function setDateTime(\DateTime $dateTime)
+    public function setDatetime(\DateTime $datetime)
     {
-        $this->dateTime = $dateTime;
+        $this->datetime = $datetime;
     }
 
     /**

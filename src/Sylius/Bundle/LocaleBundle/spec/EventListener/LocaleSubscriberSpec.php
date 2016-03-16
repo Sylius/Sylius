@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\LocaleBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,9 +37,9 @@ class LocaleSubscriberSpec extends ObjectBehavior
 
     function it_subscribes_to_event()
     {
-        $this::getSubscribedEvents()->shouldReturn(array(
-            KernelEvents::REQUEST => array(array('onKernelRequest', 35)),
-        ));
+        $this::getSubscribedEvents()->shouldReturn([
+            KernelEvents::REQUEST => [['onKernelRequest', 35]],
+        ]);
     }
 
     function it_set_the_locale_to_the_request($localeContext, GetResponseEvent $event, Request $request)

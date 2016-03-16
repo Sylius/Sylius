@@ -9,3 +9,5 @@ sylius:
       available_on: Dostupno
     product_archetype:
       name: Ime
+    association_type:
+      name: Ime

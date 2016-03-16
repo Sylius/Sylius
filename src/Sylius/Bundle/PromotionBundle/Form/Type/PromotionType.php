@@ -26,40 +26,40 @@ class PromotionType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', array(
+            ->add('name', 'text', [
                 'label' => 'sylius.form.promotion.name',
-            ))
-            ->add('description', 'text', array(
+            ])
+            ->add('description', 'text', [
                 'label' => 'sylius.form.promotion.description',
-            ))
-            ->add('exclusive', 'checkbox', array(
+            ])
+            ->add('exclusive', 'checkbox', [
                 'label' => 'sylius.form.promotion.exclusive',
-            ))
-            ->add('usageLimit', 'integer', array(
+            ])
+            ->add('usageLimit', 'integer', [
                 'label' => 'sylius.form.promotion.usage_limit',
-            ))
-            ->add('startsAt', 'datetime', array(
+            ])
+            ->add('startsAt', 'datetime', [
                 'label' => 'sylius.form.promotion.starts_at',
-                'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'empty_value' => /* @Ignore */ ['year' => '-', 'month' => '-', 'day' => '-'],
                 'time_widget' => 'text',
-            ))
-            ->add('endsAt', 'datetime', array(
+            ])
+            ->add('endsAt', 'datetime', [
                 'label' => 'sylius.form.promotion.ends_at',
-                'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'empty_value' => /* @Ignore */ ['year' => '-', 'month' => '-', 'day' => '-'],
                 'time_widget' => 'text',
-            ))
-            ->add('couponBased', 'checkbox', array(
+            ])
+            ->add('couponBased', 'checkbox', [
                 'label' => 'sylius.form.promotion.coupon_based',
                 'required' => false,
-            ))
-            ->add('rules', 'sylius_promotion_rule_collection', array(
+            ])
+            ->add('rules', 'sylius_promotion_rule_collection', [
                 'label' => 'sylius.form.promotion.rules',
-                'button_add_label' => 'sylius.promotion.add_rule',
-            ))
-            ->add('actions', 'sylius_promotion_action_collection', array(
+                'button_add_label' => 'sylius.form.promotion.add_rule',
+            ])
+            ->add('actions', 'sylius_promotion_action_collection', [
                 'label' => 'sylius.form.promotion.actions',
-                'button_add_label' => 'sylius.promotion.add_action',
-            ))
+                'button_add_label' => 'sylius.form.promotion.add_action',
+            ])
             ->addEventSubscriber(new AddCodeFormSubscriber())
         ;
     }

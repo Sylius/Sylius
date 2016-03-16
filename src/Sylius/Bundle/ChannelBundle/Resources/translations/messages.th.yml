@@ -4,7 +4,6 @@
 sylius:
   form:
     channel:
-      code: รหัส
       name: ชื่อ
       description: คำอธิบาย
       enabled: เปิดใช้งานแล้ว

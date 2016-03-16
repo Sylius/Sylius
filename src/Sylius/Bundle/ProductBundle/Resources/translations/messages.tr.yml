@@ -6,6 +6,7 @@ sylius:
     product:
       name: Ad
       description: Açıklama
+      attributes: Nitelikler
       options: Ayarlar
       meta_keywords: Meta anahtar kelimeleri
       meta_description: Meta açıklama
@@ -14,4 +15,7 @@ sylius:
     product_archetype:
       name: Ad
       parent: Üst
+      attributes: Nitelikler
       options: Ayarlar
+    association_type:
+      name: Ad

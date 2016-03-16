@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  payment:
+    complete: Pagesa u kompletua.
+    cancel: Pagesa u fshi.
+    transition_fail: Veprimi nuk mund të kryhet për shkak të gjendjes aktuale të pagesës

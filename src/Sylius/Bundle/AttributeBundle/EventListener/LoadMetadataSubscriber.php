@@ -43,9 +43,9 @@ class LoadMetadataSubscriber implements EventSubscriber
      */
     public function getSubscribedEvents()
     {
-        return array(
+        return [
             'loadClassMetadata',
-        );
+        ];
     }
 
     /**
@@ -63,32 +63,32 @@ class LoadMetadataSubscriber implements EventSubscriber
 
             $targetEntity = $class['subject'];
             $targetEntityMetadata = $metadataFactory->getMetadataFor($targetEntity);
-            $subjectMapping = array(
-                'fieldName'     => 'subject',
-                'targetEntity'  => $targetEntity,
-                'inversedBy'    => 'attributes',
-                'joinColumns'   => array(array(
-                    'name'                 => $subject.'_id',
+            $subjectMapping = [
+                'fieldName' => 'subject',
+                'targetEntity' => $targetEntity,
+                'inversedBy' => 'attributes',
+                'joinColumns' => [[
+                    'name' => $subject.'_id',
                     'referencedColumnName' => $targetEntityMetadata->fieldMappings['id']['columnName'],
-                    'nullable'             => false,
-                    'onDelete'             => 'CASCADE',
-                )),
-            );
+                    'nullable' => false,
+                    'onDelete' => 'CASCADE',
+                ]],
+            ];
 
             $this->mapManyToOne($metadata, $subjectMapping);
 
             $attributeModel = $class['attribute']['classes']['model'];
             $attributeMetadata = $metadataFactory->getMetadataFor($attributeModel);
-            $attributeMapping = array(
-                'fieldName'     => 'attribute',
-                'targetEntity'  => $attributeModel,
-                'joinColumns'   => array(array(
-                    'name'                 => 'attribute_id',
+            $attributeMapping = [
+                'fieldName' => 'attribute',
+                'targetEntity' => $attributeModel,
+                'joinColumns' => [[
+                    'name' => 'attribute_id',
                     'referencedColumnName' => $attributeMetadata->fieldMappings['id']['columnName'],
-                    'nullable'             => false,
-                    'onDelete'             => 'CASCADE',
-                )),
-            );
+                    'nullable' => false,
+                    'onDelete' => 'CASCADE',
+                ]],
+            ];
 
             $this->mapManyToOne($metadata, $attributeMapping);
         }

@@ -13,11 +13,6 @@ sylius:
     price:
       min: Cena nesmí být záporná.
       not_blank: Prosím vložte cenu.
-sylius_shipping:
-  method:
-    zone:
-      not_blank: Prosím vložte zónu dodací metody.
-sylius_taxation:
-  rate:
-    zone:
-      not_blank: Prosím zvolte zónu daňové sazby.
+  product_translation:
+    short_description:
+      max: 'Stručný popis nesmí být delší než {{ limit }} znaků.'

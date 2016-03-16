@@ -27,25 +27,25 @@ class ChannelType extends AbstractResourceType
     {
         $builder
             ->addEventSubscriber(new AddCodeFormSubscriber())
-            ->add('name', 'text', array(
+            ->add('name', 'text', [
                 'label' => 'sylius.form.channel.name',
-            ))
-            ->add('description', 'text', array(
-                'label'    => 'sylius.form.channel.description',
+            ])
+            ->add('description', 'text', [
+                'label' => 'sylius.form.channel.description',
                 'required' => false,
-            ))
-            ->add('enabled', 'checkbox', array(
-                'label'    => 'sylius.form.channel.enabled',
+            ])
+            ->add('enabled', 'checkbox', [
+                'label' => 'sylius.form.channel.enabled',
                 'required' => false,
-            ))
-            ->add('url', 'text', array(
-                'label'    => 'sylius.form.channel.url',
+            ])
+            ->add('hostname', 'text', [
+                'label' => 'sylius.form.channel.hostname',
                 'required' => false,
-            ))
-            ->add('color', 'text', array(
-                'label'    => 'sylius.form.channel.color',
+            ])
+            ->add('color', 'text', [
+                'label' => 'sylius.form.channel.color',
                 'required' => false,
-            ))
+            ])
         ;
     }
 

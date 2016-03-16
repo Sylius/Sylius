@@ -8,8 +8,8 @@ sylius:
         assortment: จัดประเภท
         blocks: บล็อก
         configuration: ตั้งค่าคอนฟิก
-        countries: ประเทศ
         content: เนื้อหา
+        countries: ประเทศ
         dashboard: แดชบอร์ด
         general_settings: ตั้งค่าทั่วไป
         groups: กลุ่ม
@@ -24,17 +24,18 @@ sylius:
         payments: การชำระเงิน
         products: สินค้า
         promotions: ส่งเสริมการขาย
+        roles: Roles
         sales: ใบสั่งซื้อ
         shipments: การจัดส่งสินค้า
         shipping_categories: ประเภทการจัดส่ง
         shipping_methods: วิธีการจัดส่ง
+        slideshow: ภาพสไลด์
         stockables: สินค้าคงคลัง
         tax_categories: ประเภทภาษี
         tax_rates: อัตราภาษี
         taxation_settings: การตั้งค่าภาษี
         taxonomies: การจัดประเภท
         zones: โซน
-        roles: Roles
       sidebar:
         assortment: จัดประเภท
         blocks: บล็อก
@@ -55,6 +56,7 @@ sylius:
         payments: การชำระเงิน
         products: สินค้า
         promotions: ส่งเสริมการขาย
+        roles: Roles
         sales: ใบสั่งซื้อ
         shipments: การจัดส่งสินค้า
         shipping_categories: ประเภทการจัดส่ง
@@ -66,7 +68,6 @@ sylius:
         taxation_settings: การตั้งค่าภาษี
         taxonomies: การจัดประเภท
         zones: โซน
-        roles: Roles
   frontend:
     menu:
       account:

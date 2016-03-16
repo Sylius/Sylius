@@ -4,6 +4,9 @@
 sylius:
   form:
     attribute:
-      name: Belső név
-      presentation: Bemutató
+      add: Hozzáadás
+      code: Kód
+      name: Név
       type: Típus
+    attribute_type:
+      configuration: Konfiguráció

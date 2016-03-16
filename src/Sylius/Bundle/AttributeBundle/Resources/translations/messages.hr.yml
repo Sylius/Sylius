@@ -4,6 +4,9 @@
 sylius:
   form:
     attribute:
-      name: Interni naziv
-      presentation: Prezentacija
+      add: Dodaj
+      code: ISO kod
+      name: Naziv grupe
       type: Vrsta
+    attribute_type:
+      configuration: Postavke

@@ -13,7 +13,7 @@ sylius:
       street: Đường Phố
       province: Tỉnh
     country:
-      iso_name: Mã ISO
+      add_province: Thêm tỉnh
       name: Tên
       provinces: Tỉnh
       select: Chọn
@@ -29,9 +29,6 @@ sylius:
         province: Tỉnh
         zone: Khu vực
       scope: Phạm vi
-    zone_member_country:
-      country: Quốc gia
-    zone_member_province:
-      province: Tỉnh
-    zone_member_zone:
-      zone: Khu vực
+      select: Chọn
+    zone_member:
+      select: Chọn

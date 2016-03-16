@@ -2,13 +2,31 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+  group:
+    name:
+      max: 'Naziv grupe ne smije biti duži od {{ limit }} znakova.'
+      min: 'Naziv grupe mora imati najmanje {{ limit }} znakova.'
+      not_blank: Unesite naziv grupe.
   user:
     email:
       not_blank: Molimo unesite vašu email adresu.
+      invalid: Ovaj e-mail nije valjan.
+    plainPassword:
+      not_blank: Molimo unesite vašu lozinku.
+      mismatch: Unesene lozinke se ne podudaraju
   customer:
     first_name:
+      max: 'Ime ne smije biti duže od {{ limit }} znakova.'
+      min: 'Ime mora imati najmanje {{ limit }} znaka.'
       not_blank: Molimo unesite Vaše ime.
     last_name:
+      max: 'Prezime ne smije biti duže od {{ limit }} znakova.'
+      min: 'Prezime mora imati najmanje {{ limit }} znakova.'
       not_blank: Molimo unesite Vaše prezime.
     email:
+      already_used: Ovaj e-mail se već koristi, molimo prijavite se ili koristite resetiranje lozinke.
+      max: 'Email ne smije imati više od {{ limit }} znakova.'
+      min: 'Email mora imati najmanje {{ limit }} znakova.'
       not_blank: Molimo unesite vašu email adresu.
+      invalid: Ovaj e-mail nije valjan.
+      unique: Ova e-pošta se već koristi.

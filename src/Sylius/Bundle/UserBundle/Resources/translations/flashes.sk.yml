@@ -7,8 +7,11 @@ sylius:
       not_exist: Používateľ s týmto e-mailom neexistuje.
     password:
       invalid: Nesprávne heslo.
+      request:
+        success: Poslali sme Vám e-mail s pokynmi na obnovenie hesla!
       reset:
         success: Vaše heslo bolo úspešne zmenené!
-        failed: Nepodarilo sa resetovať heslo.
       change:
         success: Vaše heslo bolo úspešne zmenené!
+    reset_password:
+      requested: Ak zadaný e-mail existuje v našom systéme, poslali sme naň inštrukcie ako si obnoviť Vaše heslo.

@@ -11,7 +11,8 @@
 
 namespace Sylius\Component\Payment\Model;
 
-use Sylius\Component\Payment\Calculator\DefaultFeeCalculators;
+use Sylius\Component\Resource\Model\TimestampableTrait;
+use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Translation\Model\AbstractTranslatable;
 
 /**
@@ -19,6 +20,8 @@ use Sylius\Component\Translation\Model\AbstractTranslatable;
  */
 class PaymentMethod extends AbstractTranslatable implements PaymentMethodInterface
 {
+    use TimestampableTrait, ToggleableTrait;
+
     /**
      * @var mixed
      */
@@ -28,11 +31,6 @@ class PaymentMethod extends AbstractTranslatable implements PaymentMethodInterfa
      * @var string
      */
     protected $code;
-
-    /**
-     * @var Boolean
-     */
-    protected $enabled = true;
 
     /**
      * @var string
@@ -53,26 +51,6 @@ class PaymentMethod extends AbstractTranslatable implements PaymentMethodInterfa
      * @var string
      */
     protected $environment;
-
-    /**
-     * @var string
-     */
-    protected $feeCalculator = DefaultFeeCalculators::FIXED;
-
-    /**
-     * @var array
-     */
-    protected $feeCalculatorConfiguration = array();
-
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
 
     public function __construct()
     {
@@ -116,22 +94,6 @@ class PaymentMethod extends AbstractTranslatable implements PaymentMethodInterfa
     /**
      * {@inheritdoc}
      */
-    public function isEnabled()
-    {
-        return $this->enabled;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setEnabled($enabled)
-    {
-        $this->enabled = (Boolean)$enabled;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return $this->translate()->getName();
@@ -143,8 +105,6 @@ class PaymentMethod extends AbstractTranslatable implements PaymentMethodInterfa
     public function setName($name)
     {
         $this->translate()->setName($name);
-
-        return $this;
     }
 
     /**
@@ -161,8 +121,6 @@ class PaymentMethod extends AbstractTranslatable implements PaymentMethodInterfa
     public function setDescription($description)
     {
         $this->translate()->setDescription($description);
-
-        return $this;
     }
 
     /**
@@ -195,69 +153,5 @@ class PaymentMethod extends AbstractTranslatable implements PaymentMethodInterfa
     public function setEnvironment($environment)
     {
         $this->environment = $environment;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFeeCalculator()
-    {
-        return $this->feeCalculator;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setFeeCalculator($feeCalculator)
-    {
-        $this->feeCalculator = $feeCalculator;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFeeCalculatorConfiguration()
-    {
-        return $this->feeCalculatorConfiguration;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setFeeCalculatorConfiguration(array $feeCalculatorConfiguration)
-    {
-        $this->feeCalculatorConfiguration = $feeCalculatorConfiguration;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
     }
 }

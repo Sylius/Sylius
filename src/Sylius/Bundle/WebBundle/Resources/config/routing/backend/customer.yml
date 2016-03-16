@@ -10,7 +10,7 @@ sylius_backend_customer_index:
             template: SyliusWebBundle:Backend/Customer:index.html.twig
             repository:
                 method: createFilterPaginator
-                arguments: [$criteria, $sorting, $deleted]
+                arguments: [$criteria, $sorting]
             sortable: true
 
 sylius_backend_customer_create:
@@ -30,15 +30,6 @@ sylius_backend_customer_update:
         _sylius:
             template: SyliusWebBundle:Backend/Customer:update.html.twig
             redirect: sylius_backend_customer_show
-
-sylius_backend_customer_delete:
-    path: /{id}
-    methods: [DELETE]
-    defaults:
-        _controller: sylius.controller.customer:deleteAction
-        _sylius:
-            template: SyliusWebBundle:Backend/Misc:delete.html.twig
-            redirect: sylius_backend_customer_index
 
 sylius_backend_customer_show:
     path: /{id}

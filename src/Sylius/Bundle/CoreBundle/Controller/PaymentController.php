@@ -11,8 +11,10 @@
 
 namespace Sylius\Bundle\CoreBundle\Controller;
 
+use FOS\RestBundle\View\View;
 use Gedmo\Loggable\Entity\LogEntry;
 use Sylius\Bundle\PaymentBundle\Controller\PaymentController as BasePaymentController;
+use Sylius\Component\Core\Model\Payment;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -33,7 +35,9 @@ class PaymentController extends BasePaymentController
      */
     public function historyAction(Request $request)
     {
-        $payment = $this->findOr404($request);
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        $payment = $this->findOr404($configuration);
 
         $logRepository = $this
             ->getDoctrine()
@@ -41,15 +45,14 @@ class PaymentController extends BasePaymentController
             ->getRepository(LogEntry::class)
         ;
 
-        $view = $this
-            ->view()
-            ->setTemplate($this->config->getTemplate('history.html'))
-            ->setData(array(
-                $this->config->getResourceName() => $payment,
-                'logs'                           => $logRepository->getLogEntries($payment)
-            ))
-        ;
+        $view = View::create();
 
-        return $this->handleView($view);
+        $view->setTemplate($configuration->getTemplate('history.html'));
+        $view->setData([
+            'payment' => $payment,
+            'logs' => $logRepository->getLogEntries($payment),
+        ]);
+
+        return $this->viewHandler->handle($configuration, $view);
     }
 }

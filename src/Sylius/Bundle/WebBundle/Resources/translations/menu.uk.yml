@@ -5,16 +5,26 @@ sylius:
   backend:
     menu:
       main:
+        api_clients: API клієнти
+        archetypes: Прототипи продуктів
         assortment: Асортимент
+        attributes: Настроювати атрибути
         blocks: Блоки
+        channels: Канали
         configuration: Конфігурація
-        countries: Країни
+        contact_topics: Налаштування теми
         content: Зміст
+        countries: Країни
+        customer: Клієнт
+        customers: Клієнти
         dashboard: Панель керування
+        emails: Повідомлення електронної пошти
         general_settings: Загальні налаштування
         groups: Групи
         homepage: Ваш магазин
         locales: Локалі
+        marketing: Маркетинг
+        menus: Меню
         new_order: Додати нове замовлення
         new_promotion: Додати нові акції
         options: Керувати опціями продукту
@@ -22,58 +32,80 @@ sylius:
         pages: Сторінки
         payment_methods: Варіанти оплати
         payments: Платежі
+        permissions: Дозволи
         products: Продукти
         promotions: Промо-акції
-        sales: Замовлення
-        shipments: Відправки
-        shipping_categories: Категорії доставки
-        shipping_methods: Методи доставки
-        stockables: Рівні запасів
-        tax_categories: Категорії оподаткування
-        tax_rates: Податкові ставки
-        taxation_settings: Налаштування оподаткування
-        taxonomies: Категоризація
-        zones: Пояси
+        report: Звіти
         roles: Ролі
-      sidebar:
-        assortment: Асортимент
-        blocks: Блоки
-        configuration: Конфігурація
-        content: Зміст
-        countries: Країни
-        dashboard: Панель керування
-        general_settings: Загальні налаштування
-        groups: Групи
-        homepage: Назад до інтерфейсу
-        locales: Локалі
-        new_order: Додати новий порядок
-        new_promotion: Додати нові акції
-        options: Керування опціями
-        orders: Поточний замовлень
-        pages: Сторінки
         routes: Маршрути
-        payment_methods: Варіанти оплати
-        payments: Платежі
-        products: Продукти
-        promotions: Промо-акції
         sales: Замовлення
+        security_settings: Налаштування безпеки
         shipments: Відправки
         shipping_categories: Категорії доставки
         shipping_methods: Методи доставки
         slideshow: Слайд-шоу
         stockables: Рівні запасів
+        support: Служба підтримки
         tax_categories: Категорії оподаткування
         tax_rates: Податкові ставки
         taxation_settings: Налаштування оподаткування
         taxonomies: Категоризація
         zones: Пояси
+      sidebar:
+        api_clients: API клієнти
+        archetypes: Прототипи продуктів
+        assortment: Асортимент
+        attributes: Настроювати атрибути
+        blocks: Блоки
+        channels: Канали
+        configuration: Конфігурація
+        contact_requests: Запити
+        contact_topics: Налаштування теми
+        content: Зміст
+        countries: Країни
+        customer: Клієнт
+        customers: Клієнти
+        dashboard: Панель керування
+        emails: Повідомлення електронної пошти
+        general_settings: Загальні налаштування
+        groups: Групи
+        homepage: Назад до інтерфейсу
+        locales: Локалі
+        marketing: Маркетинг
+        menus: Меню
+        new_order: Додати новий порядок
+        new_promotion: Додати нові акції
+        options: Керування опціями
+        orders: Поточний замовлень
+        pages: Сторінки
+        payment_methods: Варіанти оплати
+        payments: Платежі
+        permissions: Дозволи
+        products: Продукти
+        promotions: Промо-акції
+        redirects: Перенаправлення
+        report: Звіти
         roles: Ролі
+        routes: Маршрути
+        sales: Замовлення
+        security_settings: Налаштування безпеки
+        shipments: Відправки
+        shipping_categories: Категорії доставки
+        shipping_methods: Методи доставки
+        slideshow: Слайд-шоу
+        stockables: Рівні запасів
+        support: Служба підтримки
+        tax_categories: Категорії оподаткування
+        tax_rates: Податкові ставки
+        taxation_settings: Налаштування оподаткування
+        taxonomies: Категоризація
+        zones: Пояси
   frontend:
     menu:
       account:
-        addresses: Мій адресної книги
+        addresses: Моя адресна книга
         homepage: Головна
-        orders: Мої накази / мої рахунки-фактури
+        orders: Мої замовлення / мої рахунки-фактури
         password: Мій пароль
         profile: Моя особиста інформація
         shop: Назад до магазину
@@ -85,6 +117,8 @@ sylius:
         login: Логін
         logout: Вихід
         register: Зареєструватися
+      sidebar:
+        links: Посилання
       social:
         facebook: Facebook
         github: GitHub

@@ -26,3 +26,11 @@ sylius:
       max_length: 'Ödeme yöntemi adı maksimum {{ limit }} karakter uzunluğunda veya daha az olmalıdır.'
       min_length: 'Ödeme yöntemi adı en az {{ limit }} karakter uzunluğunda olmalıdır.'
       not_blank: Lütfen ödeme yöntemi adı girin.
+    fee_calculator_configuration:
+      amount:
+        greater_than_or_equal: 'Ücret {{ compared_value }} düşük olamaz.'
+        not_blank: Ücret tutarı giriniz.
+      percent:
+        max_range: 'Yüzde ücreti {{ limit }} büyük olamaz.'
+        min_range: 'Yüzde ücreti {{ limit }} düşük olamaz.'
+        not_blank: Lütfen ücreti yüzde olarak girin.

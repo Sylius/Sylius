@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  checkout:
-    shipping_method:
-      not_blank: Válasszon szállítási formát.
   form:
     action:
       add_product_configuration:
@@ -28,6 +25,7 @@ sylius:
     channel:
       taxonomies: Taxonómiák
       locales: Területi beállítások
+      currency_default: Alapértelmezett pénznem
       shipping_methods: Szállítási módok
       payment_methods: Fizetési módok
     image:
@@ -48,11 +46,12 @@ sylius:
       restricted_zone: Tiltott zóna
       shipping_category: Szállítási kategória
       short_description: Rövid leírás
-      tax_category: ÁFA-kategória
       variant_selection_method: Változat kiválasztási módszer
     product_filter:
       name: Név
       sku: SKU
+    product_variant:
+      tax_category: ÁFA-kategória
     settings:
       general:
         currency: Alapértelmezett pénznem
@@ -104,3 +103,5 @@ sylius:
         value: Érték
     guest:
       email: E-mail
+    product_association_type:
+      name: Név

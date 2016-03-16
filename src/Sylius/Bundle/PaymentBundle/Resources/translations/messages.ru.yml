@@ -17,6 +17,7 @@ sylius:
         header: Статус платежа
         checkout: Сверка
         completed: Завершен
+        authorized: Авторизовано
         failed: Провален
         new: Новый
         pending: Ожидает
@@ -30,6 +31,3 @@ sylius:
       enabled: Включен?
       gateway: Терминал
       name: Название
-      fee_calculator:
-        fixed:
-          amount: Сумма

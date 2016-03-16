@@ -14,6 +14,7 @@ namespace Sylius\Component\Attribute\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Attribute\AttributeType\TextAttributeType;
+use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Translation\Model\AbstractTranslatable;
 
 /**
@@ -23,6 +24,8 @@ use Sylius\Component\Translation\Model\AbstractTranslatable;
  */
 class Attribute extends AbstractTranslatable implements AttributeInterface
 {
+    use TimestampableTrait;
+
     /**
      * @var mixed
      */
@@ -41,7 +44,7 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     /**
      * @var array
      */
-    protected $configuration = array();
+    protected $configuration = [];
 
     /**
      * @var AttributeValueInterface[]|Collection
@@ -53,19 +56,10 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
      */
     protected $storageType;
 
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
-
     public function __construct()
     {
         parent::__construct();
+
         $this->values = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }
@@ -172,37 +166,5 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     public function getStorageType()
     {
         return $this->storageType;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
     }
 }

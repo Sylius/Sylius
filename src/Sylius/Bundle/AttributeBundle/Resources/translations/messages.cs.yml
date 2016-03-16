@@ -4,6 +4,10 @@
 sylius:
   form:
     attribute:
-      name: Interní název
-      presentation: Prezentace
+      add: Přidat
+      choices: Volby
+      code: Kód
+      name: Jméno
       type: Typ
+    attribute_type:
+      configuration: Konfigurace

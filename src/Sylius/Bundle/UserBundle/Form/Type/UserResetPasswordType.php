@@ -27,12 +27,12 @@ class UserResetPasswordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('password', 'repeated', array(
-                'type'            => 'password',
-                'first_options'   => array('label' => 'sylius.form.user.password.label'),
-                'second_options'  => array('label' => 'sylius.form.user.password.confirmation'),
+            ->add('password', 'repeated', [
+                'type' => 'password',
+                'first_options' => ['label' => 'sylius.form.user.password.label'],
+                'second_options' => ['label' => 'sylius.form.user.password.confirmation'],
                 'invalid_message' => 'sylius.user.plainPassword.mismatch',
-            ))
+            ])
         ;
     }
 
@@ -41,10 +41,10 @@ class UserResetPasswordType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => PasswordReset::class,
-            'validation_groups' => array('sylius'),
-        ));
+            'validation_groups' => ['sylius'],
+        ]);
     }
 
     /**

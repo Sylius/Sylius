@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="sylius.theme.templating.locator.class">Sylius\Bundle\ThemeBundle\Templating\Locator\TemplateLocator</parameter>
+        <parameter key="sylius.theme.templating.locator.cached.class">Sylius\Bundle\ThemeBundle\Templating\Locator\CachedTemplateLocator</parameter>
+        <parameter key="sylius.theme.templating.file_locator.class">Sylius\Bundle\ThemeBundle\Templating\Locator\TemplateFileLocator</parameter>
+
+        <parameter key="sylius.theme.templating.cache.clearer.class">Sylius\Bundle\ThemeBundle\Templating\Cache\Clearer\TemplatePathsCacheClearer</parameter>
+        <parameter key="sylius.theme.templating.cache.warmer.class">Sylius\Bundle\ThemeBundle\Templating\Cache\Warmer\TemplatePathsCacheWarmer</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.theme.templating.cache" class="Doctrine\Common\Cache\ArrayCache" />
+
+        <service id="sylius.theme.templating.locator" class="%sylius.theme.templating.locator.class%" public="false">
+            <argument type="service" id="sylius.theme.locator.resource" />
+        </service>
+
+        <service id="sylius.theme.templating.locator.cached" class="%sylius.theme.templating.locator.cached.class%" decorates="sylius.theme.templating.locator" public="false">
+            <argument type="service" id="sylius.theme.templating.locator.cached.inner" />
+            <argument type="service" id="sylius.theme.templating.cache" />
+        </service>
+
+        <service id="sylius.theme.templating.file_locator" class="%sylius.theme.templating.file_locator.class%" decorates="templating.locator" public="false">
+            <argument type="service" id="sylius.theme.templating.file_locator.inner" />
+            <argument type="service" id="sylius.context.theme" />
+            <argument type="service" id="sylius.theme.hierarchy_provider" />
+            <argument type="service" id="sylius.theme.templating.locator" />
+            <argument>%kernel.cache_dir%</argument>
+        </service>
+
+        <service id="sylius.theme.templating.cache.clearer" class="%sylius.theme.templating.cache.clearer.class%" public="false">
+            <argument type="service" id="sylius.theme.templating.cache" />
+            <tag name="kernel.cache_clearer" priority="20" />
+        </service>
+
+        <service id="sylius.theme.templating.cache.warmer" class="%sylius.theme.templating.cache.warmer.class%" public="false">
+            <argument type="service" id="templating.finder" />
+            <argument type="service" id="sylius.theme.templating.locator" />
+            <argument type="service" id="sylius.repository.theme" />
+            <argument type="service" id="sylius.theme.templating.cache" />
+            <tag name="kernel.cache_warmer" priority="20" />
+        </service>
+
+        <!-- Overrided services -->
+        <service id="templating.cache_warmer.template_paths" class="%templating.cache_warmer.template_paths.class%" public="false">
+            <argument type="service" id="templating.finder" />
+            <argument type="service" id="sylius.theme.templating.file_locator.inner" /> <!-- using default templating locator, as TemplatePathsCacheWarmer accepts TemplateLocator class instances only -->
+            <tag name="kernel.cache_warmer" priority="20" />
+        </service>
+    </services>
+</container>

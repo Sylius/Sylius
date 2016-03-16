@@ -46,7 +46,7 @@ class SearchStringQuery extends Query
     {
         $requestBag = $request->isMethod('GET') ? $request->query : $request->request;
 
-        $this->appliedFilters = $requestBag->get('filters', array());
+        $this->appliedFilters = $requestBag->get('filters', []);
         $this->searchTerm = str_replace('/', '\\/', $requestBag->get('q'));
         $this->searchParam = $requestBag->get('search_param');
         $this->dropdownFilterEnabled = (bool) $dropDownFilterEnabled;

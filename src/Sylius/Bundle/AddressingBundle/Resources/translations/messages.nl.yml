@@ -14,7 +14,7 @@ sylius:
       street: Straat
       province: Provincie
     country:
-      iso_name: ISO naam
+      add_province: Provincie toevoegen
       name: Naam
       provinces: Provincies
       select: Selecteer
@@ -22,6 +22,7 @@ sylius:
       name: Naam
       select: Selecteer
     zone:
+      add_member: Lid toevoegen
       members: Leden
       name: Naam
       type: Type
@@ -30,10 +31,7 @@ sylius:
         province: Provincie
         zone: Zone
       scope: Bereik
+      select: Selecteer
       select_scope: Selecteer bereik
-    zone_member_country:
-      country: Land
-    zone_member_province:
-      province: Provincie
-    zone_member_zone:
-      zone: Zone
+    zone_member:
+      select: Selecteer

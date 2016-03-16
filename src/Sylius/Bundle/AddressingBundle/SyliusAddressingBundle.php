@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\AddressingBundle;
 
+use Sylius\Bundle\AddressingBundle\DependencyInjection\Compiler\RegisterZoneFactoryPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Addressing\Model\AddressInterface;
@@ -18,6 +19,7 @@ use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Sylius addressing and zones management bundle.
@@ -32,9 +34,19 @@ class SyliusAddressingBundle extends AbstractResourceBundle
      */
     public static function getSupportedDrivers()
     {
-        return array(
+        return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        );
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+
+        $container->addCompilerPass(new RegisterZoneFactoryPass());
     }
 
     /**
@@ -42,13 +54,13 @@ class SyliusAddressingBundle extends AbstractResourceBundle
      */
     protected function getModelInterfaces()
     {
-        return array(
-            AddressInterface::class    => 'sylius.model.address.class',
-            CountryInterface::class    => 'sylius.model.country.class',
-            ProvinceInterface::class   => 'sylius.model.province.class',
-            ZoneInterface::class       => 'sylius.model.zone.class',
+        return [
+            AddressInterface::class => 'sylius.model.address.class',
+            CountryInterface::class => 'sylius.model.country.class',
+            ProvinceInterface::class => 'sylius.model.province.class',
+            ZoneInterface::class => 'sylius.model.zone.class',
             ZoneMemberInterface::class => 'sylius.model.zone_member.class',
-        );
+        ];
     }
 
     /**

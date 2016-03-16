@@ -2,28 +2,25 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    email: Correo electrónico
-    register: Registrarse
-    login: Iniciar sesión
-    logout: Cerrar sesión
-    change_password: Cambiar mi contraseña
-    account_panel_outline: Disfruta de todas las características disponibles en tu espacio personal para ver, seguir y gestionar toda tu información.
   form:
     group:
       name: Nombre
       roles: Roles
     user:
-      email: Correo electrónico
+      email: Dirección de correo electrónico
       enabled: Activado
       password:
         label: Contraseña
+        confirmation: Verificación
+      remember_me: Recordarme
       shipping_address: Dirección de envío
     customer:
       first_name: Nombre
       groups: Grupos
       last_name: Apellidos
-      email: Correo electrónico
+      email: Dirección de correo electrónico
+      phone_number: Teléfono
+      birthday: Fecha de nacimiento
       billing_address: Dirección de facturación
       different_billing_address: ¿Usar una dirección diferente para la facturación?
     user_filter:

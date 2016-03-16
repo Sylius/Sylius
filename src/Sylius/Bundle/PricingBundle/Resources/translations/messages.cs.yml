@@ -9,9 +9,7 @@ sylius:
       configuration: Nastavení
     pricing:
       volume_based:
+        label: Cenová konfigurace
+        min: Minimální objem
+        max: Maximální objem
         price: Cena
-  pricing:
-    volume_based:
-      price: Cena
-      button:
-        add: Přidat

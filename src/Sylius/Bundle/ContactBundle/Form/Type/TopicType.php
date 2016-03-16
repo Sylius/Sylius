@@ -28,10 +28,10 @@ class TopicType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('translations', 'a2lix_translationsForms', array(
+            ->add('translations', 'a2lix_translationsForms', [
                 'form_type' => 'sylius_contact_topic_translation',
-                'label'    => 'sylius.form.contact_topic.title',
-            ))
+                'label' => 'sylius.form.contact_topic.title',
+            ])
         ;
     }
 

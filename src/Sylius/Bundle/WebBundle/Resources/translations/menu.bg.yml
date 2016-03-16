@@ -8,8 +8,8 @@ sylius:
         assortment: Асортимент
         blocks: Блокове
         configuration: Конфигурация
-        countries: Страни
         content: Съдържание
+        countries: Страни
         dashboard: Табло
         general_settings: Общи настройки
         homepage: Вашият магазин
@@ -23,10 +23,12 @@ sylius:
         payments: Плащания
         products: Продукти
         promotions: Промоции
+        routes: Маршрути
         sales: Поръчки
         shipments: пратки
         shipping_categories: Категории за доставка
         shipping_methods: Начин на доставка
+        slideshow: Слайдшоу
         stockables: Нива на инвентара
         tax_categories: Категории такси
         tax_rates: Данъчни ставки
@@ -49,11 +51,11 @@ sylius:
         options: Управление на опциите
         orders: Текущи поръчки
         pages: Страници
-        routes: Маршрути
         payment_methods: Начин на плащане
         payments: Плащания
         products: Продукти
         promotions: Промоции
+        routes: Маршрути
         sales: Поръчки
         shipments: пратки
         shipping_categories: Категории за доставка

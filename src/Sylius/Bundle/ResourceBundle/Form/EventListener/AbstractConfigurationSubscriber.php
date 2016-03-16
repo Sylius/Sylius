@@ -37,11 +37,11 @@ abstract class AbstractConfigurationSubscriber implements EventSubscriberInterfa
     protected $registryIdentifier;
 
     public function __construct(
-        ServiceRegistryInterface $registry,
+        ServiceRegistryInterface $actionRegistry,
         FormFactoryInterface $factory,
         $registryIdentifier = null
     ) {
-        $this->registry = $registry;
+        $this->registry = $actionRegistry;
         $this->factory = $factory;
         $this->registryIdentifier = $registryIdentifier;
     }
@@ -51,11 +51,11 @@ abstract class AbstractConfigurationSubscriber implements EventSubscriberInterfa
      */
     public static function getSubscribedEvents()
     {
-        return array(
-            FormEvents::PRE_SET_DATA  => 'preSetData',
+        return [
+            FormEvents::PRE_SET_DATA => 'preSetData',
             FormEvents::POST_SET_DATA => 'postSetData',
-            FormEvents::PRE_SUBMIT    => 'preSubmit',
-        );
+            FormEvents::PRE_SUBMIT => 'preSubmit',
+        ];
     }
 
     /**
@@ -105,38 +105,32 @@ abstract class AbstractConfigurationSubscriber implements EventSubscriberInterfa
      * @param string        $registryIdentifier
      * @param array         $data
      */
-    protected function addConfigurationFields(FormInterface $form, $registryIdentifier, array $data = array())
+    protected function addConfigurationFields(FormInterface $form, $registryIdentifier, array $data = [])
     {
-        if (!$this->registry->has($registryIdentifier)) {
-            return;
-        }
-
         $model = $this->registry->get($registryIdentifier);
 
-        $form->add($this->factory->createNamed(
+        $configurationField = $this->factory->createNamed(
             'configuration',
             $model->getConfigurationFormType(),
             $data,
-            array(
+            [
                 'auto_initialize' => false,
                 'label' => false,
-            )
-        ));
+            ]
+        );
+
+        $form->add($configurationField);
     }
 
     /**
-     * Return the identifier of the rule/action registered in the registry.
-     *
-     * @param string $model
+     * Return the identifier of the rule/action registered in the registry
      *
      * @return string
      */
     abstract protected function getRegistryIdentifier($model);
 
     /**
-     * Return the rule/action configuration.
-     *
-     * @param string $model
+     * Return the rule/action configuration
      *
      * @return array
      */

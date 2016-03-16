@@ -22,18 +22,18 @@ interface CreditCardInterface extends PaymentSourceInterface, TimestampableInter
     /**
      * Supported CC brands.
      */
-    const BRAND_VISA               = 'visa';
-    const BRAND_MASTERCARD         = 'mastercard';
-    const BRAND_DISCOVER           = 'discover';
-    const BRAND_AMEX               = 'amex';
-    const BRAND_DINERS_CLUB        = 'diners_club';
-    const BRAND_JCB                = 'jcb';
-    const BRAND_SWITCH             = 'switch';
-    const BRAND_SOLO               = 'solo';
-    const BRAND_DANKORT            = 'dankort';
-    const BRAND_MAESTRO            = 'maestro';
+    const BRAND_VISA = 'visa';
+    const BRAND_MASTERCARD = 'mastercard';
+    const BRAND_DISCOVER = 'discover';
+    const BRAND_AMEX = 'amex';
+    const BRAND_DINERS_CLUB = 'diners_club';
+    const BRAND_JCB = 'jcb';
+    const BRAND_SWITCH = 'switch';
+    const BRAND_SOLO = 'solo';
+    const BRAND_DANKORT = 'dankort';
+    const BRAND_MAESTRO = 'maestro';
     const BRAND_FORBRUGSFORENINGEN = 'forbrugsforeningen';
-    const BRAND_LASER              = 'laser';
+    const BRAND_LASER = 'laser';
 
     /**
      * @return string
@@ -94,22 +94,22 @@ interface CreditCardInterface extends PaymentSourceInterface, TimestampableInter
     public function setSecurityCode($securityCode);
 
     /**
-     * @return integer
+     * @return int
      */
     public function getExpiryMonth();
 
     /**
-     * @param integer
+     * @param int
      */
     public function setExpiryMonth($expiryMonth);
 
     /**
-     * @return integer
+     * @return int
      */
     public function getExpiryYear();
 
     /**
-     * @param integer $expiryYear
+     * @param int $expiryYear
      */
     public function setExpiryYear($expiryYear);
 }

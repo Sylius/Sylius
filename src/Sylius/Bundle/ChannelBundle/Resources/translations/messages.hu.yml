@@ -4,7 +4,6 @@
 sylius:
   form:
     channel:
-      code: Kód
       name: Név
       description: Leírás
       enabled: Engedélyezve

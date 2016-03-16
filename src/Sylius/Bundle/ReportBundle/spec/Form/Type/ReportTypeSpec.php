@@ -35,7 +35,7 @@ class ReportTypeSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $rendererRegistry, ServiceRegistryInterface $dataFetcherRegistry)
     {
-        $this->beConstructedWith(Report::class, array('sylius'), $rendererRegistry, $dataFetcherRegistry);
+        $this->beConstructedWith(Report::class, ['sylius'], $rendererRegistry, $dataFetcherRegistry);
     }
 
     function it_is_initializable()
@@ -72,27 +72,27 @@ class ReportTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $renderer->getType()->willReturn('test_renderer');
-        $rendererRegistry->all()->willReturn(array('test_renderer' => $renderer));
+        $renderer->getType()->willReturn('sylius_renderer_test_renderer');
+        $rendererRegistry->all()->willReturn(['test_renderer' => $renderer]);
         $builder->create('rendererConfiguration', 'sylius_renderer_test_renderer')->willReturn($builder);
         $builder->getForm()->shouldBeCalled()->willReturn(Argument::type(Form::class));
 
         $dataFetcher->getType()->willReturn('test_data_fetcher');
-        $dataFetcherRegistry->all()->willReturn(array('test_data_fetcher' => $dataFetcher));
+        $dataFetcherRegistry->all()->willReturn(['test_data_fetcher' => $dataFetcher]);
         $builder->create('dataFetcherConfiguration', 'sylius_data_fetcher_test_data_fetcher')->willReturn($builder);
         $builder->getForm()->shouldBeCalled()->willReturn(Argument::type(Form::class));
 
-        $prototypes = array(
-            'renderers' => array(
+        $prototypes = [
+            'renderers' => [
                 'test_renderer' => Argument::type(Form::class),
-                ),
-            'dataFetchers' => array(
+                ],
+            'dataFetchers' => [
                 'test_data_fetcher' => Argument::type(Form::class),
-                ),
-            );
+                ],
+            ];
         $builder->setAttribute('prototypes', $prototypes)->shouldBeCalled();
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_builds_view(
@@ -102,17 +102,17 @@ class ReportTypeSpec extends ObjectBehavior
         FormInterface $formTable,
         FormInterface $formUserRegistration
     ) {
-        $prototypes = array(
-            'dataFetchers' => array('user_registration' => $formUserRegistration),
-            'renderers' => array('table' => $formTable),
-        );
+        $prototypes = [
+            'dataFetchers' => ['user_registration' => $formUserRegistration],
+            'renderers' => ['table' => $formTable],
+        ];
         $config->getAttribute('prototypes')->willReturn($prototypes);
         $form->getConfig()->willReturn($config);
 
         $formTable->createView($view)->shouldBeCalled();
         $formUserRegistration->createView($view)->shouldBeCalled();
 
-        $this->buildView($view, $form, array());
+        $this->buildView($view, $form, []);
     }
 
     function it_has_name()

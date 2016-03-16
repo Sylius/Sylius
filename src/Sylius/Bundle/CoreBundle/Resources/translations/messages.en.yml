@@ -1,7 +1,4 @@
 sylius:
-    checkout:
-        shipping_method:
-            not_blank: Please select shipping method.
     form:
         action:
             add_product_configuration:
@@ -36,6 +33,8 @@ sylius:
             currencies: Currencies
             shipping_methods: Shipping Methods
             payment_methods: Payment Methods
+            theme: Theme
+            hostname: Hostname
         image:
             file: Image
         locale:
@@ -57,12 +56,13 @@ sylius:
             restricted_zone: Restricted zone
             shipping_category: Shipping category
             short_description: Short description
-            tax_category: Tax category
             variant_selection_method: Variant selection method
             main_taxon: Main taxon
         product_filter:
             name: Name
             sku: SKU
+        product_variant:
+            tax_category: Tax category
         settings:
             affiliate:
                 enabled: Enable?
@@ -129,3 +129,8 @@ sylius:
                 value: Value
         guest:
             email: Email
+        product_association:
+            product: Associated product
+            type: Association type
+        product_association_type:
+            name: Name

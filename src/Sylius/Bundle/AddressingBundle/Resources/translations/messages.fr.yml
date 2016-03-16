@@ -14,14 +14,16 @@ sylius:
       street: Adresse
       province: Région
     country:
-      iso_name: Nom ISO
+      add_province: Ajouter une région
       name: Nom
       provinces: Etat
       select: Sélectionner
     province:
       name: Nom
+      abbreviation: Abréviation
       select: Sélectionner
     zone:
+      add_member: Ajouter un membre
       members: Membres
       name: Nom
       type: Type
@@ -30,10 +32,7 @@ sylius:
         province: Région
         zone: Zone
       scope: "Champ d'application"
+      select: Sélectionner
       select_scope: "Sélectionnez le champ d'application"
-    zone_member_country:
-      country: Pays
-    zone_member_province:
-      province: Etat
-    zone_member_zone:
-      zone: Zone
+    zone_member:
+      select: Sélectionner

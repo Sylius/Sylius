@@ -4,8 +4,7 @@
 sylius:
   form:
     email:
-      code: Kód
-      enabled: Povolené
+      enabled: Zapnuté
       subject: Predmet
       sender_name: Meno odosielateľa
       sender_address: Adresa odosielateľa

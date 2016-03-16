@@ -1,0 +1,54 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    formatters:
+        pretty:
+            verbose: true
+            paths: false
+            snippets: false
+
+    extensions:
+        Lakion\Behat\MinkDebugExtension:
+            directory: etc/build
+            clean_start: false
+            screenshot: true
+
+        Behat\MinkExtension:
+            base_url: http://localhost:8080/
+            default_session: symfony
+            javascript_session: chrome
+            sessions:
+                symfony:
+                    symfony2: ~
+                chrome:
+                    selenium2:
+                        browser: chrome
+                        capabilities:
+                            browserName: chrome
+                            browser: chrome
+                            version: ""
+                            chrome:
+                                switches:
+                                    - "start-fullscreen"
+                                    - "start-maximized"
+                                    - "no-sandbox"
+                firefox:
+                    selenium2:
+                        browser: firefox
+            show_auto: false
+
+        Behat\Symfony2Extension:
+            kernel:
+                class: TestKernel
+                path: app/TestKernel.php
+
+        Sylius\Behat\MultiContainerExtension:
+            imports:
+                - "etc/behat/services.xml"
+
+        Sylius\Behat\SymfonyExtension: ~
+
+    gherkin:
+        filters:
+            tags: "~@todo && ~@paypal"

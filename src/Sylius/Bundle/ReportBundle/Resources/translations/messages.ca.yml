@@ -6,4 +6,3 @@ sylius:
     report:
       name: Nom
       description: Descripció
-      code: Codi

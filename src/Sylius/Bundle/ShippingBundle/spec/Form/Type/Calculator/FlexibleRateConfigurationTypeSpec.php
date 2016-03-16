@@ -34,18 +34,18 @@ class FlexibleRateConfigurationTypeSpec extends ObjectBehavior
 
     function it_builds_a_form(FormBuilderInterface $builder)
     {
-        $builder->add('first_item_cost', 'sylius_money', Argument::withKey('constraints'))->shouldBeCalled()->willReturn($builder);
-        $builder->add('additional_item_cost', 'sylius_money', Argument::withKey('constraints'))->shouldBeCalled()->willReturn($builder);
-        $builder->add('additional_item_limit', 'integer', Argument::withKey('constraints'))->shouldBeCalled()->willReturn($builder);
+        $builder->add('first_unit_cost', 'sylius_money', Argument::withKey('constraints'))->shouldBeCalled()->willReturn($builder);
+        $builder->add('additional_unit_cost', 'sylius_money', Argument::withKey('constraints'))->shouldBeCalled()->willReturn($builder);
+        $builder->add('additional_unit_limit', 'integer', Argument::withKey('constraints'))->shouldBeCalled()->willReturn($builder);
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_has_options(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => null,
-        ))->shouldBeCalled();
+        ])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

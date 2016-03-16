@@ -17,6 +17,7 @@ sylius:
         header: Stav platby
         checkout: Objednat
         completed: Dokončeno
+        authorized: Autorizováno
         failed: Neúspěšné
         new: Nový
         pending: Čekající
@@ -30,6 +31,3 @@ sylius:
       enabled: Povoleno?
       gateway: Brána
       name: Jméno
-      fee_calculator:
-        fixed:
-          amount: Částka

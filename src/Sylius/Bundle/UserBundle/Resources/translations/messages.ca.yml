@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    email: Correu electrònic
-    account_panel_outline: Gaudeix de totes les característiques disponibles al teu espai personal. Pots veure, fer un seguiment i gestionar totes les teves dades.
   form:
     group:
       name: Nom
@@ -20,6 +17,7 @@ sylius:
       groups: Grups
       last_name: Cognoms
       email: Correu electrònic
+      phone_number: Telèfon
       billing_address: Adreça de facturació
       different_billing_address: Utilitzar diferent adreça de facturació?
     user_filter:

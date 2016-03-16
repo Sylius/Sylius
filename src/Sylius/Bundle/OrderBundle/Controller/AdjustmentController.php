@@ -11,11 +11,9 @@
 
 namespace Sylius\Bundle\OrderBundle\Controller;
 
-use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Order\Model\OrderInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -28,8 +26,10 @@ class AdjustmentController extends ResourceController
 {
     public function lockAction(Request $request, $id)
     {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
         /** @var $order OrderInterface */
-        if (!$order = $this->get('sylius.repository.order')->findOneById($id)) {
+        if (!$order = $this->container->get('sylius.repository.order')->findOneById($id)) {
             throw new NotFoundHttpException('Requested order does not exist.');
         }
 
@@ -51,37 +51,8 @@ class AdjustmentController extends ResourceController
             }
         }
 
-        $this->domainManager->update($order);
+        $this->manager->flush();
 
-        return $this->redirectHandler->redirectTo($order);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createNew()
-    {
-        if (null === $orderId = $this->getRequest()->get('orderId')) {
-            return new JsonResponse(array('error' => 'Missing order id.'), 400);
-        }
-
-        if (!$order = $this->getOrderRepository()->find($orderId)) {
-            $this->createNotFoundException('Requested order does not exist.');
-        }
-
-        $adjustment = parent::createNew();
-        $adjustment->setAdjustable($order);
-
-        return $adjustment;
-    }
-
-    /**
-     * Get order repository.
-     *
-     * @return ObjectRepository
-     */
-    protected function getOrderRepository()
-    {
-        return $this->get('sylius.repository.order');
+        return $this->redirectHandler->redirectToResource($configuration, $order);
     }
 }

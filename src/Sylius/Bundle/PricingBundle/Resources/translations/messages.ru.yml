@@ -9,9 +9,7 @@ sylius:
       configuration: Конфигурация
     pricing:
       volume_based:
+        label: Настройка цен
+        min: Мин. часть
+        max: Макс. часть
         price: Цена
-  pricing:
-    volume_based:
-      price: Цена
-      button:
-        add: Добавить

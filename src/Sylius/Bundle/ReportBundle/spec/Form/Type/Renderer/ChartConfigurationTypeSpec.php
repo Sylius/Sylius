@@ -41,6 +41,6 @@ class ChartConfigurationTypeSpec extends ObjectBehavior
         $builder->add('type', 'choice', Argument::any())->willReturn($builder);
         $builder->add('template', 'choice', Argument::any())->willReturn($builder);
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 }

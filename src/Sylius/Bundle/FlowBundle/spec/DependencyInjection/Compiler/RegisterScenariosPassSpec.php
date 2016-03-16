@@ -32,13 +32,13 @@ class RegisterScenariosPassSpec extends ObjectBehavior
     function it_processes(ContainerBuilder $container, Definition $coordinator)
     {
         $container->getDefinition('sylius.process.coordinator')->shouldBeCalled()->willreturn($coordinator);
-        $container->findTaggedServiceIds('sylius.process.scenario')->shouldBeCalled()->willreturn(array(
-            'id' => array(
-                array(
-                    'alias' => 'alias'
-                )
-            )
-        ));
+        $container->findTaggedServiceIds('sylius.process.scenario')->shouldBeCalled()->willreturn([
+            'id' => [
+                [
+                    'alias' => 'alias',
+                ],
+            ],
+        ]);
 
         $coordinator->addMethodCall('registerScenario', Argument::type('array'))->shouldBeCalled();
 

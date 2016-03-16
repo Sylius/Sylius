@@ -6,6 +6,12 @@ sylius:
     report:
       name: Name
       description: Beschreibung
-      code: Code
+      renderer:
+        template: Vorlage
       chart:
         type: Typ
+      user_registration:
+        start: Startdatum
+        end: End–Datum
+        period: Zeitraum
+        empty_records: Leere Datensätze drucken?

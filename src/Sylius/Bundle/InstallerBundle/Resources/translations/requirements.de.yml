@@ -12,6 +12,8 @@ sylius:
     gd: GD
     help: 'Installiere und aktiviere die %extension% Erweiterung.'
     iconv: Iconv
+    exif: Exif
+    fileinfo: Dateiinfo
     icu: ICU
     intl: Intl
     json_encode: JSON

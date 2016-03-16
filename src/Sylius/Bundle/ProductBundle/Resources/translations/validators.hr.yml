@@ -10,9 +10,6 @@ sylius:
       not_blank: Unesite naziv proizvoda.
       min_length: 'Naziv proizvoda mora imati najmanje jedan znak.|Naziv proizvoda mora imati najmanje {{ limit }} znakova.'
       max_length: 'Naziv proizvoda ne smije biti duži od jednog znaka.|Naziv proizvoda ne smije biti duži od {{ limit }} znakova.'
-    description:
-      not_blank: Unesite opis proizvoda.
-      min_length: 'Opis proizvoda mora imati najmanje jedan znak.|Opis proizvoda mora imati najmanje {{ limit }} znakova.'
   variant:
     sku:
       not_blank: Unesite alternativni kod proizvoda.

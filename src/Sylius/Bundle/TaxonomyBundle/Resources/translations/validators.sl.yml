@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  taxon:
+    name:
+      max_length: Ime taksona ne sme biti daljše od 255 znakov.
+      not_blank: Prosimo, vnesite ime taksona.
+    code:
+      unique: Takson z dano šifro že obstaja.
+      not_blank: Prosimo, vnesite kodo taksona.
+  taxonomy:
+    name:
+      max_length: Ime taksonomije ne sme biti daljše od 255 znakov.
+      not_blank: Prosimo, vnesite ime taksonomije.

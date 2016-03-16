@@ -14,7 +14,6 @@ sylius:
       street: Alamat
       province: Provinsi
     country:
-      iso_name: Nama ISO
       name: Nama
       provinces: Provinsi
       select: Pilih
@@ -30,10 +29,7 @@ sylius:
         province: Provinsi
         zone: Zona
       scope: Ruang lingkup
+      select: Pilih
       select_scope: Pilih cakupan
-    zone_member_country:
-      country: Negara
-    zone_member_province:
-      province: Provinsi
-    zone_member_zone:
-      zone: Zona
+    zone_member:
+      select: Pilih

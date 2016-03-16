@@ -11,9 +11,9 @@
 
 namespace Sylius\Component\Shipping\Checker;
 
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
-use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -67,9 +67,9 @@ class ShippingMethodEligibilityChecker implements ShippingMethodEligibilityCheck
 
         $numMatches = $numShippables = 0;
         foreach ($subject->getShippables() as $shippable) {
-            $numShippables++;
+            ++$numShippables;
             if ($category === $shippable->getShippingCategory()) {
-                $numMatches++;
+                ++$numMatches;
             }
         }
 

@@ -18,7 +18,6 @@ use PhpSpec\ObjectBehavior;
  */
 class SearchLogSpec extends ObjectBehavior
 {
-
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SearchBundle\Model\SearchLog');
@@ -41,5 +40,4 @@ class SearchLogSpec extends ObjectBehavior
         $this->setCreatedAt('2014-08-08 16:18:00');
         $this->getCreatedAt()->shouldReturn('2014-08-08 16:18:00');
     }
-
 }

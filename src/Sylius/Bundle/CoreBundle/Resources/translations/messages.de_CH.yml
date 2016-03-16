@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  checkout:
-    shipping_method:
-      not_blank: Bitte wählen Sie die Versandart.
   form:
     action:
       add_product_configuration:
@@ -25,6 +22,8 @@ sylius:
     group:
       name: Name
       roles: Rollen
+    channel:
+      currency_default: Standardwährung
     image:
       file: Bild
     locale:
@@ -45,11 +44,12 @@ sylius:
       restricted_zone: Beschränktes Versandgebiet
       shipping_category: Versandkategorie
       short_description: Kurzbeschreibung
-      tax_category: Steuerkategorie
       variant_selection_method: Varianten
     product_filter:
       name: Name
       sku: Bestandseinheit
+    product_variant:
+      tax_category: Steuerkategorie
     settings:
       general:
         currency: Standardwährung
@@ -82,3 +82,5 @@ sylius:
       roles: Rollen
     variant:
       sku: Bestandseinheit
+    product_association_type:
+      name: Name

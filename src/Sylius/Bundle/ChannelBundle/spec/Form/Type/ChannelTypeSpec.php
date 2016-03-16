@@ -25,7 +25,7 @@ class ChannelTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Channel', array('sylius'));
+        $this->beConstructedWith('Channel', ['sylius']);
     }
 
     function it_is_initializable()
@@ -65,7 +65,7 @@ class ChannelTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('url', 'text', Argument::any())
+            ->add('hostname', 'text', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
@@ -76,12 +76,12 @@ class ChannelTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_should_define_assigned_data_class(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array('data_class' => 'Channel', 'validation_groups' => array('sylius')))->shouldBeCalled();
+        $resolver->setDefaults(['data_class' => 'Channel', 'validation_groups' => ['sylius']])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

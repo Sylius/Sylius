@@ -39,17 +39,17 @@ class ObjectToIdentifierTypeSpec extends ObjectBehavior
             Argument::type(ObjectToIdentifierTransformer::class)
         )->shouldBeCalled();
 
-        $this->buildForm($builder, array(
+        $this->buildForm($builder, [
             'class' => 'class',
             'identifier' => 'identifier',
-        ));
+        ]);
     }
 
     function it_has_options(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'identifier' => 'id'
-        ))->willReturn($resolver);
+        $resolver->setDefaults([
+            'identifier' => 'id',
+        ])->willReturn($resolver);
 
         $resolver->setAllowedTypes('identifier', 'string')->willReturn($resolver);
 

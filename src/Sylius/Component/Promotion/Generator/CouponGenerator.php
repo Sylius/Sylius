@@ -17,8 +17,6 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * Default coupon generator.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class CouponGenerator implements CouponGeneratorInterface
@@ -55,8 +53,8 @@ class CouponGenerator implements CouponGeneratorInterface
      */
     public function generate(PromotionInterface $promotion, Instruction $instruction)
     {
-        $generatedCoupons = array();
-        for ($i = 0, $amount = $instruction->getAmount(); $i < $amount; $i++) {
+        $generatedCoupons = [];
+        for ($i = 0, $amount = $instruction->getAmount(); $i < $amount; ++$i) {
             $coupon = $this->couponFactory->createNew();
             $coupon->setPromotion($promotion);
             $coupon->setCode($this->generateUniqueCode());
@@ -78,12 +76,14 @@ class CouponGenerator implements CouponGeneratorInterface
      */
     public function generateUniqueCode()
     {
-        $code = null;
+        $this->manager->getFilters()->disable('softdeleteable');
 
         do {
             $hash = sha1(microtime(true));
             $code = strtoupper(substr($hash, mt_rand(0, 33), 6));
         } while ($this->isUsedCode($code));
+
+        $this->manager->getFilters()->enable('softdeleteable');
 
         return $code;
     }
@@ -91,16 +91,10 @@ class CouponGenerator implements CouponGeneratorInterface
     /**
      * @param string $code
      *
-     * @return Boolean
+     * @return bool
      */
     protected function isUsedCode($code)
     {
-        $this->manager->getFilters()->disable('softdeleteable');
-
-        $isUsed = null !== $this->repository->findOneBy(array('code' => $code));
-
-        $this->manager->getFilters()->enable('softdeleteable');
-
-        return $isUsed;
+        return null !== $this->repository->findOneBy(['code' => $code]);
     }
 }

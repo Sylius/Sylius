@@ -7,6 +7,7 @@ sylius:
       code: Код
       name: Ім’я
       description: Опис
+      permissions: Дозволи
       parent: "Батьківський об'єкт"
     permission:
       code: Код

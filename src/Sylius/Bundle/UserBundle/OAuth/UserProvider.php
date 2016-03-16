@@ -1,13 +1,13 @@
 <?php
 
 /*
-* This file is part of the Sylius package.
-*
-* (c) Paweł Jędrzejewski
-*
-* For the full copyright and license information, please view the LICENSE
-* file that was distributed with this source code.
-*/
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Sylius\Bundle\UserBundle\OAuth;
 
@@ -94,14 +94,14 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        $oauth = $this->oauthRepository->findOneBy(array(
-            'provider'   => $response->getResourceOwner()->getName(),
+        $oauth = $this->oauthRepository->findOneBy([
+            'provider' => $response->getResourceOwner()->getName(),
             'identifier' => $response->getUsername(),
-        ));
+        ]);
 
         if ($oauth instanceof UserOAuthInterface) {
             return $oauth->getUser();
@@ -118,7 +118,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function connect(UserInterface $user, UserResponseInterface $response)
     {

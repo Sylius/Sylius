@@ -28,9 +28,9 @@ use Symfony\Component\Form\FormInterface;
  */
 class BuildAddressFormSubscriberSpec extends ObjectBehavior
 {
-    function let(ObjectRepository $countryRepository, FormFactoryInterface $factory)
+    function let(ObjectRepository $countryRepository, FormFactoryInterface $formFactory)
     {
-        $this->beConstructedWith($countryRepository, $factory);
+        $this->beConstructedWith($countryRepository, $formFactory);
     }
 
     function it_is_initializable()
@@ -43,16 +43,16 @@ class BuildAddressFormSubscriberSpec extends ObjectBehavior
         $this->shouldImplement(EventSubscriberInterface::class);
     }
 
-    function it_subsribesto_event()
+    function it_subscribes_to_event()
     {
-        $this::getSubscribedEvents()->shouldReturn(array(
+        $this::getSubscribedEvents()->shouldReturn([
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT   => 'preSubmit'
-        ));
+            FormEvents::PRE_SUBMIT => 'preSubmit',
+        ]);
     }
 
     function it_adds_or_removes_provinces_on_pre_set_data(
-        $factory,
+        FormFactoryInterface $formFactory,
         FormEvent $event,
         FormInterface $form,
         FormInterface $provinceForm,
@@ -60,41 +60,38 @@ class BuildAddressFormSubscriberSpec extends ObjectBehavior
         CountryInterface $country,
         ProvinceInterface $province
     ) {
-        $event->getForm()->shouldBeCalled()->willReturn($form);
+        $event->getForm()->willReturn($form);
 
-        $event->getData()->shouldBeCalled()->willReturn($address);
-        $address->getCountry()->shouldBeCalled()->willReturn($country);
-        $country->hasProvinces()->shouldBeCalled()->willReturn(true);
-        $address->getProvince()->shouldBeCalled()->willReturn($province);
+        $event->getData()->willReturn($address);
+        $country->getCode()->willReturn('IE');
+        $address->getCountryCode()->willReturn('IE');
+        $country->hasProvinces()->willReturn(true);
+        $province->getCode()->willReturn('province');
+        $address->getProvinceCode()->willReturn('province');
 
-        $factory->createNamed('province', 'sylius_province_choice', $province, Argument::withKey('country'))
-            ->shouldBeCalled()
+        $formFactory->createNamed('provinceCode', 'sylius_province_code_choice', 'province', Argument::withKey('country'))
             ->willReturn($provinceForm);
-
-        $form->add($provinceForm)->shouldBeCalled();
 
         $this->preSetData($event);
     }
 
     function it_adds_or_removes_provinces_on_pre_submit(
-        $factory,
-        $countryRepository,
+        FormFactoryInterface $formFactory,
+        ObjectRepository $countryRepository,
         FormEvent $event,
         FormInterface $form,
         FormInterface $provinceForm,
-        ProvinceInterface $province,
         CountryInterface $country
     ) {
-        $event->getForm()->shouldBeCalled()->willReturn($form);
-        $event->getData()->shouldBeCalled()->willReturn(array(
-            'country' => 'France'
-        ));
+        $event->getForm()->willReturn($form);
+        $event->getData()->willReturn([
+            'countryCode' => 'FR',
+        ]);
 
-        $countryRepository->find('France')->shouldBeCalled()->willReturn($country);
+        $countryRepository->findOneBy(['code' => 'FR'])->willReturn($country);
         $country->hasProvinces()->willReturn(true);
 
-        $factory->createNamed('province', 'sylius_province_choice', null, Argument::withKey('country'))
-            ->shouldBeCalled()
+        $formFactory->createNamed('provinceCode', 'sylius_province_code_choice', null, Argument::withKey('country'))
             ->willReturn($provinceForm);
 
         $form->add($provinceForm)->shouldBeCalled();

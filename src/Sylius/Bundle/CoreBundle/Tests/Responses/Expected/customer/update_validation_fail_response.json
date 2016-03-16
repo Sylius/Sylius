@@ -1,0 +1,31 @@
+{
+    "code": 400,
+    "message": "Validation Failed",
+    "errors": {
+        "children": {
+            "firstName": {
+                "errors": [
+                    "Please enter your first name."
+                ]
+            },
+            "lastName": {
+                "errors": [
+                    "Please enter your last name."
+                ]
+            },
+            "email": {
+                "errors": [
+                    "Please enter your email."
+                ]
+            },
+            "birthday": {},
+            "gender": {
+                "errors": [
+                    "Please choose your gender."
+                ]
+            },
+            "phoneNumber": {},
+            "groups": {}
+        }
+    }
+}

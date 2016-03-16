@@ -34,33 +34,18 @@ class VariantController extends ResourceController
             throw new NotFoundHttpException('No product given.');
         }
 
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
         $product = $this->findProductOr404($productId);
         $this->getGenerator()->generate($product);
 
-        $manager = $this->get('sylius.manager.product');
+        $manager = $this->container->get('sylius.manager.product');
         $manager->persist($product);
         $manager->flush();
 
-        $this->flashHelper->setFlash('success', 'generate');
+        $this->flashHelper->addSuccessFlash($configuration, 'generate');
 
-        return $this->redirectHandler->redirectTo($product);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createNew()
-    {
-        if (null === $productId = $this->getRequest()->get('productId')) {
-            throw new NotFoundHttpException('No parent product given.');
-        }
-
-        $product = $this->findProductOr404($productId);
-
-        $variant = parent::createNew();
-        $variant->setProduct($product);
-
-        return $variant;
+        return $this->redirectHandler->redirectToResource($configuration, $product);
     }
 
     /**
@@ -70,7 +55,7 @@ class VariantController extends ResourceController
      */
     protected function getGenerator()
     {
-        return $this->get('sylius.generator.product_variant');
+        return $this->container->get('sylius.generator.product_variant');
     }
 
     /**
@@ -80,13 +65,13 @@ class VariantController extends ResourceController
      */
     protected function getProductRepository()
     {
-        return $this->get('sylius.repository.product');
+        return $this->container->get('sylius.repository.product');
     }
 
     /**
      * Get product or 404.
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return ProductInterface
      *

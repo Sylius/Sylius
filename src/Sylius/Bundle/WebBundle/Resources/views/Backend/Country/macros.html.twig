@@ -8,7 +8,7 @@
 <table class="table table-condensed">
     <thead>
         <tr>
-            <th>{{ sylius_resource_sort('isoName', 'sylius.country.iso_name'|trans) }}</th>
+            <th>{{ sylius_resource_sort('code', 'sylius.ui.code'|trans) }}</th>
             <th>{{ 'sylius.country.name'|trans }}</th>
             <th>{{ sylius_resource_sort('enabled', 'sylius.country.enabled'|trans) }}</th>
             <th></th>
@@ -17,8 +17,8 @@
     <tbody>
     {% for country in countries %}
         <tr>
-            <td><span class="label label-primary">{{ country.isoName }}</span></td>
-            <td><a href="{{ path('sylius_backend_country_show', {'id': country.id}) }}">{{ country.name }}</a></td>
+            <td><span class="label label-primary">{{ country.code }}</span></td>
+            <td><a href="{{ path('sylius_backend_country_show', {'id': country.id}) }}">{{ country.code|sylius_country_name }}</a></td>
             <td>{{ misc.state_label(country.enabled) }}</td>
             <td>
                 <div class="pull-right">

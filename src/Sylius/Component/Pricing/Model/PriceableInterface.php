@@ -21,14 +21,14 @@ interface PriceableInterface
     /**
      * Get standard price.
      *
-     * @return integer
+     * @return int
      */
     public function getPrice();
 
     /**
      * Set standard price.
      *
-     * @param integer $price
+     * @param int $price
      */
     public function setPrice($price);
 

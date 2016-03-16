@@ -7,14 +7,11 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * This model was inspired by FOS User-Bundle
  */
 
 namespace Sylius\Component\User\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
-use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
@@ -23,7 +20,6 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 interface CustomerInterface extends
     UserAwareInterface,
     TimestampableInterface,
-    SoftDeletableInterface,
     ResourceInterface
 {
     const UNKNOWN_GENDER = 'u';
@@ -31,7 +27,7 @@ interface CustomerInterface extends
     const FEMALE_GENDER = 'f';
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function hasUser();
 
@@ -115,4 +111,14 @@ interface CustomerInterface extends
      * @return bool
      */
     public function isFemale();
+
+    /**
+     * @return string
+     */
+    public function getPhoneNumber();
+
+    /**
+     * @param string $phoneNumber
+     */
+    public function setPhoneNumber($phoneNumber);
 }

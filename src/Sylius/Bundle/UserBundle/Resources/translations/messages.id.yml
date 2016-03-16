@@ -15,6 +15,7 @@ sylius:
       first_name: Nama Depan
       groups: Kelompok
       last_name: Nama belakang
+      phone_number: Nomor telepon
       billing_address: Alamat Penagihan
       different_billing_address: Menggunakan alamat berbeda untuk penagihan?
     user_filter:

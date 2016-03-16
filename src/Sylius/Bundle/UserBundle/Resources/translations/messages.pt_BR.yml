@@ -2,13 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    email: Email
-    register: Registre-se
-    login: Login
-    logout: Sair
-    change_password: Alterar sua senha
-    account_panel_outline: Aproveite todos os recursos que estão disponíveis no seu espaço pessoal para visualizar, rastrear e gerenciar todos os seus dados.
   form:
     group:
       name: Nome
@@ -18,12 +11,16 @@ sylius:
       enabled: Ativado
       password:
         label: Senha
+        confirmation: Verificação
+      remember_me: Lembrar
       shipping_address: Endereço de entrega
     customer:
       first_name: Nome
       groups: Grupos
       last_name: Sobrenome
       email: Email
+      phone_number: Número de Telefone
+      birthday: Data de Nascimento
       billing_address: Endereço de cobrança
       different_billing_address: Utilizar um endereço diferente para cobrança?
     user_filter:

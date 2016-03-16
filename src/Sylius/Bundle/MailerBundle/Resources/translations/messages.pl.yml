@@ -4,6 +4,10 @@
 sylius:
   form:
     email:
-      code: Kod
-      enabled: Aktywne
+      enabled: Włączone
+      subject: Temat
+      sender_name: Nazwa nadawcy
+      sender_address: Adres nadawcy
       content: Treść
+      template: Szablon
+      no_template: Użyj niestandardowego szablonu

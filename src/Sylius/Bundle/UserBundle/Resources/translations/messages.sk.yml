@@ -2,44 +2,25 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    email: Email
-    register: Registrovať
-    login: Prihlásenie
-    logout: Odhlásiť
-    logged_in_as: 'Prihlásený ako %username%'
-    no_account: Ešte nemáte konto?
-    forgot_password: Zabudli ste heslo?
-    reset_password: Resetovať heslo
-    reset: Resetovať
-    password:
-      reset:
-        header: Resetovať heslo
-        button: Resetovať
-    profile: Profil
-    change_password: Zmena hesla
-    account_panel_outline: Užite si všetky funkcie, ktoré sú k dispozícií k zobrazeniu, sledovaniu a spravovaniu vašich dát na vašom osobnom priestore.
-    customer_since: Ste zákazníkom od
-    welcome: Vitajte
-    customer:
-      id: ID zákazníka
   form:
     group:
       name: Názov
-      roles: Rola
+      roles: Role
     user:
       email: Email
-      enabled: Povolené
+      enabled: Zapnuté
       password:
         label: Heslo
         confirmation: Overenie
       remember_me: Zapamätať si ma
-      shipping_address: Doručovacia adresa
+      shipping_address: Adresa doručenia
     customer:
       first_name: Meno
-      groups: Skupiny
+      groups: Zákaznícke skupiny
       last_name: Priezvisko
       email: Email
+      phone_number: Telefónne číslo
+      gender: Pohlavie
       birthday: Dátum narodenia
       billing_address: Fakturačná adresa
       different_billing_address: Použiť inú fakturačnú adresu?

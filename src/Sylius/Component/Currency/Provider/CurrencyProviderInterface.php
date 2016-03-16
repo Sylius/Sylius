@@ -15,6 +15,7 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Fernando Caraballo Ortiz <caraballo.ortiz@gmail.com>
  */
 interface CurrencyProviderInterface
 {
@@ -22,4 +23,9 @@ interface CurrencyProviderInterface
      * @return CurrencyInterface[]
      */
     public function getAvailableCurrencies();
+
+    /**
+     * @return CurrencyInterface
+     */
+    public function getBaseCurrency();
 }

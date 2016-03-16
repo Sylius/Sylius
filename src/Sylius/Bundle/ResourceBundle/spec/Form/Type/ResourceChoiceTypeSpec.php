@@ -28,7 +28,7 @@ class ResourceChoiceTypeSpec extends ObjectBehavior
     function it_throws_unknown_driver_exception_when_constructing_with_invalid_driver()
     {
         $this->shouldThrow(UnknownDriverException::class)
-            ->during('__construct', array('CountryModel', 'badDriver', 'sylius_country_choice'));
+            ->during('__construct', ['CountryModel', 'badDriver', 'sylius_country_choice']);
     }
 
     function it_is_initializable()
@@ -78,9 +78,9 @@ class ResourceChoiceTypeSpec extends ObjectBehavior
     function it_defines_resource_options(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'class' => null,
-            ))
+            ])
             ->willReturn($resolver)
         ;
         $resolver

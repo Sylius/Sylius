@@ -13,7 +13,7 @@ namespace spec\Sylius\Component\Shipping\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
-use Sylius\Component\Shipping\Model\ShipmentItemInterface;
+use Sylius\Component\Shipping\Model\ShipmentUnitInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 
 /**
@@ -58,32 +58,32 @@ class ShipmentSpec extends ObjectBehavior
         $this->getMethod()->shouldReturn($shippingMethod);
     }
 
-    function it_initializes_items_collection_by_default()
+    function it_initializes_units_collection_by_default()
     {
-        $this->getItems()->shouldHaveType('Doctrine\Common\Collections\Collection');
+        $this->getUnits()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 
-    function it_adds_items(ShipmentItemInterface $shipmentItem)
+    function it_adds_units(ShipmentUnitInterface $shipmentUnit)
     {
-        $this->hasItem($shipmentItem)->shouldReturn(false);
+        $this->hasUnit($shipmentUnit)->shouldReturn(false);
 
-        $shipmentItem->setShipment($this)->shouldBeCalled();
-        $this->addItem($shipmentItem);
+        $shipmentUnit->setShipment($this)->shouldBeCalled();
+        $this->addUnit($shipmentUnit);
 
-        $this->hasItem($shipmentItem)->shouldReturn(true);
+        $this->hasUnit($shipmentUnit)->shouldReturn(true);
     }
 
-    function it_removes_item(ShipmentItemInterface $shipmentItem)
+    function it_removes_unit(ShipmentUnitInterface $shipmentUnit)
     {
-        $this->hasItem($shipmentItem)->shouldReturn(false);
+        $this->hasUnit($shipmentUnit)->shouldReturn(false);
 
-        $shipmentItem->setShipment($this)->shouldBeCalled();
-        $this->addItem($shipmentItem);
+        $shipmentUnit->setShipment($this)->shouldBeCalled();
+        $this->addUnit($shipmentUnit);
 
-        $shipmentItem->setShipment(null)->shouldBeCalled();
-        $this->removeItem($shipmentItem);
+        $shipmentUnit->setShipment(null)->shouldBeCalled();
+        $this->removeUnit($shipmentUnit);
 
-        $this->hasItem($shipmentItem)->shouldReturn(false);
+        $this->hasUnit($shipmentUnit)->shouldReturn(false);
     }
 
     function it_has_no_tracking_code_by_default()

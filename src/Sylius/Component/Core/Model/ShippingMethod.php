@@ -14,6 +14,7 @@ namespace Sylius\Component\Core\Model;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Shipping\Model\ShippingMethod as BaseShippingMethod;
 use Sylius\Component\Shipping\Model\ShippingMethodTranslation;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 /**
  * Shipping method available for selected zone.
@@ -24,11 +25,14 @@ use Sylius\Component\Shipping\Model\ShippingMethodTranslation;
 class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterface
 {
     /**
-     * Geographical zone.
-     *
      * @var ZoneInterface
      */
     protected $zone;
+
+    /**
+     * @var TaxCategoryInterface
+     */
+    protected $taxCategory;
 
     /**
      * {@inheritdoc}
@@ -54,5 +58,21 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
     public static function getTranslationClass()
     {
         return ShippingMethodTranslation::class;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTaxCategory()
+    {
+        return $this->taxCategory;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTaxCategory(TaxCategoryInterface $category = null)
+    {
+        $this->taxCategory = $category;
     }
 }

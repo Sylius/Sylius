@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  checkout:
-    shipping_method:
-      not_blank: เลือกวิธีการจัดส่ง
   form:
     action:
       add_product_configuration:
@@ -28,6 +25,7 @@ sylius:
     channel:
       taxonomies: การจัดประเภท
       locales: ภาษาที่ใช้
+      currency_default: สกุลเงินหลัก
       shipping_methods: วิธีการจัดส่ง
       payment_methods: วิธีการชำระเงิน
     image:
@@ -50,11 +48,12 @@ sylius:
       restricted_zone: จำกัดโซน
       shipping_category: ประเภทการจัดส่ง
       short_description: คำอธิบายโดยย่อ
-      tax_category: ประเภทภาษี
       variant_selection_method: วิธีการเลือกตัวแปร
     product_filter:
       name: ชื่อ
       sku: SKU
+    product_variant:
+      tax_category: ประเภทภาษี
     settings:
       general:
         currency: สกุลเงินหลัก
@@ -105,4 +104,6 @@ sylius:
       product_attribute_value:
         value: ค่า
     guest:
-      email: Email
+      email: อีเมล
+    product_association_type:
+      name: ชื่อ

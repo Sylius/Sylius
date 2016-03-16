@@ -2,13 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    email: E-mail
-    register: Registreren
-    login: Inloggen
-    logout: Uitloggen
-    change_password: Verander uw wachtwoord
-    account_panel_outline: Geniet van alle functies die beschikbaar zijn in uw persoonlijke ruimte om al uw gegevens te bekijken, bij te houden en te beheren.
   form:
     group:
       name: Naam
@@ -18,12 +11,16 @@ sylius:
       enabled: Toegestaan
       password:
         label: Wachtwoord
+        confirmation: Verificatie
+      remember_me: Onthoud mijn gegevens
       shipping_address: Bezorgadres
     customer:
       first_name: Voornaam
       groups: Groepen
       last_name: Achternaam
       email: E-mail
+      phone_number: Telefoonnummer
+      birthday: Verjaardag
       billing_address: Factuuradres
       different_billing_address: Gebruik een ander factuuradres?
     user_filter:

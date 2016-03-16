@@ -2,15 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  checkout:
-    shipping_method:
-      not_blank: Lütfen kargoyu seçiniz.
   form:
     action:
       add_product_configuration:
         price: Birim fiyatı
         quantity: Adet
         variant: Çeşit
+      customer_group: Müşteri Grubu
     block:
       body: İçerik
       id: ID
@@ -22,12 +20,18 @@ sylius:
         different_billing_address: Fatura için farklı bir adres kullanmak ister misiniz?
       payment_method: Ödeme Şekli
       shipping_method: Gönderim şekli
+    promotion:
+      channels: Kanal
+    coupon:
+      per_customer_usage_limit: Müşteri başına kullanım sınırı
     group:
       name: Ad
       roles: Roller
     channel:
       taxonomies: Kategoriler
       locales: Diller
+      currency_default: Varsayılan para birimi
+      currencies: Para birimi
       shipping_methods: Kargolama Yöntemleri
       payment_methods: Ödeme Yöntemleri
     image:
@@ -42,6 +46,7 @@ sylius:
       total_from: Kaynak
       total_to: Hedef
       payment_state: Ödeme durumu
+      channel: Tüm kanallar
     page:
       body: İçerik
       id: ID
@@ -50,11 +55,12 @@ sylius:
       restricted_zone: Kısıtlı bölge
       shipping_category: Teslimat kategorisi
       short_description: Kısa açıklama
-      tax_category: Vergi kategorisi
       variant_selection_method: Varyant seçme yöntemi
     product_filter:
       name: Ad
       sku: Stok Kodu
+    product_variant:
+      tax_category: Vergi kategorisi
     settings:
       general:
         currency: Varsayılan para birimi
@@ -62,17 +68,24 @@ sylius:
         meta_description: Meta açıklama
         meta_keywords: Meta anahtar kelimeleri
         title: Sayfa başlığı
+        tracking_code:
+          Tracking code (for example: Google Analytics kodu)
       taxation:
         default_tax_zone: Varsayılan vergi bölgesi
+      security:
+        enabled: Etkinleştir?
     shipment_filter:
       created_at_from: Kaynak
       created_at_to: Hedef
       number: Sipariş numarası
       shipping_address: Gönderi adı
+      channel: Tüm kanallar
     payment_filter:
       created_at_from: Kaynak
       created_at_to: Hedef
       number: Sipariş numarası
+      billing_address: Fatura adı
+      channel: Tüm kanallar
     shipping_method:
       zone: Bölge
     taxon:
@@ -103,6 +116,9 @@ sylius:
       width: Genişliği
     attribute:
       product_attribute_value:
+        attribute: Özellik
         value: Değer
     guest:
       email: E-posta
+    product_association_type:
+      name: Ad

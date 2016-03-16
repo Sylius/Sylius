@@ -25,7 +25,7 @@ class OptionValueTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('OptionValue', array(), 'server');
+        $this->beConstructedWith('OptionValue', [], 'server');
     }
 
     function it_is_initializable()
@@ -41,7 +41,7 @@ class OptionValueTypeSpec extends ObjectBehavior
     function it_builds_form_with_value_field(FormBuilder $builder)
     {
         $builder
-            ->add('value', 'text', Argument::any())
+            ->add('translations', 'a2lix_translationsForms', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
@@ -52,16 +52,16 @@ class OptionValueTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_defines_assigned_data_class_and_validation_groups(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'data_class' => 'OptionValue',
-                'validation_groups' => array()
-            ))
+                'validation_groups' => [],
+            ])
             ->shouldBeCalled();
 
         $this->configureOptions($resolver);

@@ -24,7 +24,6 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
  */
 class SyliusMailerExtension extends AbstractResourceExtension
 {
-
     /**
      * {@inheritdoc}
      */
@@ -35,9 +34,9 @@ class SyliusMailerExtension extends AbstractResourceExtension
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $configFiles = array(
+        $configFiles = [
             'services.xml',
-        );
+        ];
 
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
@@ -49,7 +48,7 @@ class SyliusMailerExtension extends AbstractResourceExtension
         $container->setParameter('sylius.mailer.sender_name', $config['sender']['name']);
         $container->setParameter('sylius.mailer.sender_address', $config['sender']['address']);
 
-        $templates = isset($config['templates']) ? $config['templates'] : array('Default' => 'SyliusMailerBundle::default.html.twig');
+        $templates = isset($config['templates']) ? $config['templates'] : ['Default' => 'SyliusMailerBundle::default.html.twig'];
 
         $container->setParameter('sylius.mailer.emails', $config['emails']);
         $container->setParameter('sylius.mailer.templates', $templates);

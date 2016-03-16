@@ -29,17 +29,12 @@ class Rule implements RuleInterface
     /**
      * @var array
      */
-    protected $configuration;
+    protected $configuration = [];
 
     /**
      * @var PromotionInterface
      */
     protected $promotion;
-
-    public function __construct()
-    {
-        $this->configuration = array();
-    }
 
     /**
      * {@inheritdoc}

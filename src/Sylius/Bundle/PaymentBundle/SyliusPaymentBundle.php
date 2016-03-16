@@ -11,13 +11,11 @@
 
 namespace Sylius\Bundle\PaymentBundle;
 
-use Sylius\Bundle\PaymentBundle\DependencyInjection\Compiler\RegisterFeeCalculatorsPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Payment\Model\CreditCardInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Payments component for Symfony2 applications.
@@ -31,19 +29,9 @@ class SyliusPaymentBundle extends AbstractResourceBundle
      */
     public static function getSupportedDrivers()
     {
-        return array(
+        return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function build(ContainerBuilder $container)
-    {
-        parent::build($container);
-
-        $container->addCompilerPass(new RegisterFeeCalculatorsPass());
+        ];
     }
 
     /**
@@ -51,11 +39,11 @@ class SyliusPaymentBundle extends AbstractResourceBundle
      */
     protected function getModelInterfaces()
     {
-        return array(
-            CreditCardInterface::class    => 'sylius.model.credit_card.class',
-            PaymentInterface::class       => 'sylius.model.payment.class',
+        return [
+            CreditCardInterface::class => 'sylius.model.credit_card.class',
+            PaymentInterface::class => 'sylius.model.payment.class',
             PaymentMethodInterface::class => 'sylius.model.payment_method.class',
-        );
+        ];
     }
 
     /**

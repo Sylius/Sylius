@@ -45,10 +45,10 @@ class KernelControllerSubscriber implements EventSubscriberInterface
     private $forceApiVersion = false;
 
     private $apiVersionHeader = 'Accept';
-    private $apiGroupsHeader  = 'Accept';
+    private $apiGroupsHeader = 'Accept';
 
     private $apiVersionRegexp = '/(v|version)=(?P<version>[0-9\.]+)/i';
-    private $apiGroupsRegexp  = '/(g|groups)=(?P<groups>[a-z,_\s]+)/i';
+    private $apiGroupsRegexp = '/(g|groups)=(?P<groups>[a-z,_\s]+)/i';
 
     public function __construct(ParametersParser $parametersParser, Parameters $parameters, array $settings, $forceApiVersion = false)
     {
@@ -63,9 +63,9 @@ class KernelControllerSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
-            'kernel.controller' => array('onKernelController', 0),
-        );
+        return [
+            'kernel.controller' => ['onKernelController', 0],
+        ];
     }
 
     /**
@@ -99,7 +99,7 @@ class KernelControllerSubscriber implements EventSubscriberInterface
         $controller->getConfiguration()->setRequest($request);
         $controller->getConfiguration()->setParameters($this->parameters);
 
-        $routeParams = $request->attributes->get('_route_params', array());
+        $routeParams = $request->attributes->get('_route_params', []);
         if (isset($routeParams['_sylius'])) {
             unset($routeParams['_sylius']);
 
@@ -114,7 +114,7 @@ class KernelControllerSubscriber implements EventSubscriberInterface
      */
     private function parseApiData(Request $request)
     {
-        $data = array();
+        $data = [];
         if ($request->headers->has($this->apiVersionHeader)) {
             if (preg_match($this->apiVersionRegexp, $request->headers->get($this->apiVersionHeader), $matches)) {
                 $data['serialization_version'] = $matches['version'];
@@ -131,6 +131,6 @@ class KernelControllerSubscriber implements EventSubscriberInterface
             }
         }
 
-        return array_merge($request->attributes->get('_sylius', array()), $data);
+        return array_merge($request->attributes->get('_sylius', []), $data);
     }
 }

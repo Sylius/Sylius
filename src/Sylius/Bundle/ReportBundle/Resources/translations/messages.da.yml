@@ -6,6 +6,5 @@ sylius:
     report:
       name: Navn
       description: Beskrivelse
-      code: Kode
       chart:
         type: Type

@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\UserBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Cart\Event\CartEvent;
+use Sylius\Bundle\UserBundle\EventListener\CustomerAwareListener;
 use Sylius\Component\User\Context\CustomerContextInterface;
 use Sylius\Component\User\Model\CustomerAwareInterface;
 use Sylius\Component\User\Model\CustomerInterface;
@@ -26,7 +26,7 @@ class CustomerAwareListenerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\UserBundle\EventListener\CustomerAwareListener');
+        $this->shouldHaveType(CustomerAwareListener::class);
     }
 
     function let(CustomerContextInterface $customerContext)
@@ -67,20 +67,6 @@ class CustomerAwareListenerSpec extends ObjectBehavior
         $customerContext->getCustomer()->willReturn($customer);
 
         $resource->setCustomer($customer)->shouldBeCalled();
-
-        $this->setCustomer($event);
-    }
-
-    function it_sets_customer_on_a_cart(
-        $customerContext,
-        CartEvent $event,
-        CustomerAwareInterface $cart,
-        CustomerInterface $customer
-    ) {
-        $event->getCart()->willReturn($cart);
-        $customerContext->getCustomer()->willReturn($customer);
-
-        $cart->setCustomer($customer)->shouldBeCalled();
 
         $this->setCustomer($event);
     }

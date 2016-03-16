@@ -30,7 +30,7 @@ class FormContext extends BaseFormContext
 
         while (0 !== $items) {
             $this->deleteCollectionItem($items);
-            $items--;
+            --$items;
         }
     }
 
@@ -39,7 +39,9 @@ class FormContext extends BaseFormContext
      */
     public function fillProvinceName($position, $fake, $value)
     {
+        $countryCode = $this->getSession()->getPage()->findField('sylius_country[code]')->getValue();
         $this->fillInField('sylius_country[provinces]['.($position - 1).'][name]', $value);
+        $this->fillInField('sylius_country[provinces]['.($position - 1).'][code]', sprintf('%s-%s', $countryCode, $value));
     }
 
     /**
@@ -51,9 +53,9 @@ class FormContext extends BaseFormContext
     }
 
     /**
-     * @Given /^I remove the first country$/
+     * @Given /^I remove the first (country|province)$/
      */
-    public function iRemoveTheFirstCountryMember()
+    public function iRemoveTheFirstMember()
     {
         $this->deleteCollectionItem(1);
     }

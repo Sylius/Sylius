@@ -7,4 +7,5 @@ sylius:
       code: Código
       name: Nombre
       parent: Padre
+      attributes: Atributos
       options: Opciones de producto

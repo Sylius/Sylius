@@ -70,7 +70,7 @@ abstract class FormContext extends RawMinkContext
      * Delete an item of the collection type
      *
      * @param string  $collectionSelector
-     * @param integer $position
+     * @param int $position
      * @param null    $buttonName
      * @param string  $buttonType
      */
@@ -101,6 +101,7 @@ abstract class FormContext extends RawMinkContext
      * @param  string           $position
      * @param  string           $label
      * @param  string           $collectionSelector
+     *
      * @return NodeElement|null
      */
     protected function isInvalidCollectionField($position, $label, $collectionSelector = null)
@@ -131,7 +132,7 @@ abstract class FormContext extends RawMinkContext
     /**
      * Fill a collection form field
      *
-     * @param integer $position
+     * @param int $position
      * @param string  $field
      * @param mixed   $value
      * @param string  $collectionSelector
@@ -188,9 +189,9 @@ abstract class FormContext extends RawMinkContext
         $escaper = new Escaper();
 
         if (null !== $container) {
-            $field = $container->find('named', array(
+            $field = $container->find('named', [
                 'field', $escaper->escapeLiteral($locator),
-            ));
+            ]);
         } else {
             $field = $this->getSession()->getPage()->findField($locator);
         }

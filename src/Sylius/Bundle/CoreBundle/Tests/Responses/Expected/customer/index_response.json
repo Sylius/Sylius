@@ -1,0 +1,75 @@
+{
+    "page": 1,
+    "limit": 10,
+    "pages": 1,
+    "total": 6,
+    "_links": {
+        "self": {
+            "href": "\/api\/customers\/?page=1&limit=10"
+        },
+        "first": {
+            "href": "\/api\/customers\/?page=1&limit=10"
+        },
+        "last": {
+            "href": "\/api\/customers\/?page=1&limit=10"
+        }
+    },
+    "_embedded": {
+        "items": [
+            {
+                "id": @integer@,
+                "email": "Joe@doe.com",
+                "first_name": "Joe",
+                "last_name": "Doe"
+            },
+            {
+                "id": @integer@,
+                "email": "Barry@doe.com",
+                "first_name": "Barry",
+                "last_name": "Doe"
+            },
+            {
+                "id": @integer@,
+                "user": {
+                    "id": @integer@,
+                    "username": "Thea@doe.com",
+                    "enabled": true
+                },
+                "email": "Thea@doe.com",
+                "first_name": "Thea",
+                "last_name": "Doe"
+            },
+            {
+                "id": @integer@,
+                "user": {
+                    "id": @integer@,
+                    "username": "Roy@doe.com",
+                    "enabled": true
+                },
+                "email": "Roy@doe.com",
+                "first_name": "Roy",
+                "last_name": "Doe"
+            },
+            {
+                "id": @integer@,
+                "user": {
+                    "id": @integer@,
+                    "username": "Oliver@doe.com",
+                    "enabled": true
+                },
+                "email": "Oliver@doe.com",
+                "first_name": "Oliver",
+                "last_name": "Doe"
+            },
+            {
+                "id": @integer@,
+                "user": {
+                    "id": @integer@,
+                    "username": "api@sylius.com",
+                    "enabled": true
+                },
+                "email": "api@sylius.com"
+            }
+        ]
+    }
+}

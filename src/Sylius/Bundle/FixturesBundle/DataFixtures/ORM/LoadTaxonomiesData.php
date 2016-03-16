@@ -30,22 +30,22 @@ class LoadTaxonomiesData extends DataFixture
     public function load(ObjectManager $manager)
     {
         $manager->persist($this->createTaxonomy(
-            'RTX1', array($this->defaultLocale => 'Category', 'es_ES' => 'Categoria'),
-            array(
-                array('code' => 'TX1', 'locales' => array($this->defaultLocale => 'T-Shirts', 'es_ES' => 'Camisetas')),
-                array('code' => 'TX2', 'locales' => array($this->defaultLocale => 'Stickers', 'es_ES' => 'Pegatinas')),
-                array('code' => 'TX3', 'locales' => array($this->defaultLocale => 'Mugs', 'es_ES' => 'Tazas')),
-                array('code' => 'TX4', 'locales' => array($this->defaultLocale => 'Books', 'es_ES' => 'Libros')),
-            )));
+            'RTX1', [$this->defaultLocale => 'Category', 'es_ES' => 'Categoria'],
+            [
+                ['code' => 'TX1', 'locales' => [$this->defaultLocale => 'T-Shirts', 'es_ES' => 'Camisetas']],
+                ['code' => 'TX2', 'locales' => [$this->defaultLocale => 'Stickers', 'es_ES' => 'Pegatinas']],
+                ['code' => 'TX3', 'locales' => [$this->defaultLocale => 'Mugs', 'es_ES' => 'Tazas']],
+                ['code' => 'TX4', 'locales' => [$this->defaultLocale => 'Books', 'es_ES' => 'Libros']],
+            ]));
 
         $manager->persist($this->createTaxonomy(
-            'RTX2', array($this->defaultLocale => 'Brand', 'es_ES' => 'Marca'),
-            array(
-                array('code' => 'TX5', 'locales' => array($this->defaultLocale => 'SuperTees', 'es_ES' => 'SuperCamisetas')),
-                array('code' => 'TX6', 'locales' => array($this->defaultLocale => 'Stickypicky', 'es_ES' => 'Pegapicky')),
-                array('code' => 'TX7', 'locales' => array($this->defaultLocale => 'Mugland', 'es_ES' => 'Mundotaza')),
-                array('code' => 'TX8', 'locales' => array($this->defaultLocale => 'Bookmania', 'es_ES' => 'Libromania')),
-            )));
+            'RTX2', [$this->defaultLocale => 'Brand', 'es_ES' => 'Marca'],
+            [
+                ['code' => 'TX5', 'locales' => [$this->defaultLocale => 'SuperTees', 'es_ES' => 'SuperCamisetas']],
+                ['code' => 'TX6', 'locales' => [$this->defaultLocale => 'Stickypicky', 'es_ES' => 'Pegapicky']],
+                ['code' => 'TX7', 'locales' => [$this->defaultLocale => 'Mugland', 'es_ES' => 'Mundotaza']],
+                ['code' => 'TX8', 'locales' => [$this->defaultLocale => 'Bookmania', 'es_ES' => 'Libromania']],
+            ]));
 
         $manager->flush();
     }

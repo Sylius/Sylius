@@ -17,7 +17,7 @@ use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ShippingBundle\Form\EventListener\BuildShippingMethodFormSubscriber;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Shipping\Calculator\FlatRateCalculator;
-use Sylius\Component\Shipping\Calculator\PerItemRateCalculator;
+use Sylius\Component\Shipping\Calculator\PerUnitRateCalculator;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -39,10 +39,10 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         FormBuilder $builder,
         FormFactoryInterface $factory
     ) {
-        $this->beConstructedWith('ShippingMethod', array('sylius'), $calculatorRegistry, $checkerRegistry, $formRegistry);
+        $this->beConstructedWith('ShippingMethod', ['sylius'], $calculatorRegistry, $checkerRegistry, $formRegistry);
 
         $builder->getFormFactory()->willReturn($factory);
-        $checkerRegistry->all()->willReturn(array());
+        $checkerRegistry->all()->willReturn([]);
     }
 
     function it_is_a_form_type()
@@ -52,7 +52,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
 
     function it_builds_form_with_proper_fields(FormBuilder $builder, $calculatorRegistry)
     {
-        $calculatorRegistry->all()->willReturn(array());
+        $calculatorRegistry->all()->willReturn([]);
 
         $builder
             ->addEventSubscriber(Argument::type(BuildShippingMethodFormSubscriber::class))
@@ -86,14 +86,14 @@ class ShippingMethodTypeSpec extends ObjectBehavior
 
         $builder->setAttribute(Argument::any(), Argument::any())->shouldBeCalled();
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_adds_build_shipping_method_event_subscriber(
         FormBuilder $builder,
         $calculatorRegistry
     ) {
-        $calculatorRegistry->all()->willReturn(array());
+        $calculatorRegistry->all()->willReturn([]);
         $builder->add(Argument::any(), Argument::cetera())->willReturn($builder);
 
         $builder
@@ -108,7 +108,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
 
         $builder->setAttribute(Argument::any(), Argument::any())->shouldBeCalled();
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_builds_prototypes_forms_for_calculators(
@@ -117,9 +117,9 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         FormBuilder $flatRateFormBuilder,
         Form $flatRateForm,
         FlatRateCalculator $flatRateCalculator,
-        FormBuilder $perItemFormBuilder,
-        Form $perItemForm,
-        PerItemRateCalculator $perItemRateCalculator,
+        FormBuilder $perUnitFormBuilder,
+        Form $perUnitForm,
+        PerUnitRateCalculator $perUnitRateCalculator,
         $formRegistry
     ) {
         $builder
@@ -137,18 +137,18 @@ class ShippingMethodTypeSpec extends ObjectBehavior
             ->willReturn('flat_rate')
         ;
 
-        $perItemRateCalculator
+        $perUnitRateCalculator
             ->getType()
-            ->willReturn('per_item_rate')
+            ->willReturn('per_unit_rate')
         ;
 
         $calculatorRegistry
             ->all()
             ->willReturn(
-                array(
-                    'flat_rate'     => $flatRateCalculator,
-                    'per_item_rate' => $perItemRateCalculator
-                )
+                [
+                    'flat_rate' => $flatRateCalculator,
+                    'per_unit_rate' => $perUnitRateCalculator,
+                ]
             )
         ;
 
@@ -162,43 +162,43 @@ class ShippingMethodTypeSpec extends ObjectBehavior
             ->willReturn($flatRateFormBuilder)
         ;
 
-        $perItemFormBuilder
+        $perUnitFormBuilder
             ->getForm()
-            ->willReturn($perItemForm)
+            ->willReturn($perUnitForm)
         ;
 
         $builder
-            ->create('configuration', 'sylius_shipping_calculator_per_item_rate')
-            ->willReturn($perItemFormBuilder)
+            ->create('configuration', 'sylius_shipping_calculator_per_unit_rate')
+            ->willReturn($perUnitFormBuilder)
         ;
 
-        $formRegistry->hasType('sylius_shipping_calculator_per_item_rate')->shouldBeCalled()->willReturn(true);
+        $formRegistry->hasType('sylius_shipping_calculator_per_unit_rate')->shouldBeCalled()->willReturn(true);
         $formRegistry->hasType('sylius_shipping_calculator_flat_rate')->shouldBeCalled()->willReturn(true);
 
         $builder
             ->setAttribute(
                 'prototypes',
-                array(
-                    'calculators' => array(
+                [
+                    'calculators' => [
                         'flat_rate' => $flatRateForm,
-                        'per_item_rate' => $perItemForm,
-                    ),
-                    'rules' => array()
-                )
+                        'per_unit_rate' => $perUnitForm,
+                    ],
+                    'rules' => [],
+                ]
             )
             ->shouldBeCalled()
         ;
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
-                'data_class'        => 'ShippingMethod',
-                'validation_groups' => array('sylius'),
-            ))
+            ->setDefaults([
+                'data_class' => 'ShippingMethod',
+                'validation_groups' => ['sylius'],
+            ])
             ->shouldBeCalled()
         ;
 

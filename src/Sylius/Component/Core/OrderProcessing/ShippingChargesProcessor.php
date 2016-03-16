@@ -63,11 +63,9 @@ class ShippingChargesProcessor implements ShippingChargesProcessorInterface
             $adjustment = $this->adjustmentFactory->createNew();
             $adjustment->setType(AdjustmentInterface::SHIPPING_ADJUSTMENT);
             $adjustment->setAmount($shippingCharge);
-            $adjustment->setDescription($shipment->getMethod()->getName());
+            $adjustment->setLabel($shipment->getMethod()->getName());
 
             $order->addAdjustment($adjustment);
         }
-
-        $order->calculateTotal();
     }
 }

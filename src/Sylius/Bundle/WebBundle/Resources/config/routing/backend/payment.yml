@@ -55,3 +55,4 @@ sylius_backend_payment_update_state:
     methods: [PUT]
     defaults:
         _controller: sylius.controller.payment:updateStateAction
+        graph: sylius_payment

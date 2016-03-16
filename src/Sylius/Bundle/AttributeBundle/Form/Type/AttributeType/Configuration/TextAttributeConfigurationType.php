@@ -25,8 +25,8 @@ class TextAttributeConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('min', 'number', array('label' => 'sylius.attribute_type_validation.text.min'))
-            ->add('max', 'number', array('label' => 'sylius.attribute_type_validation.text.max'))
+            ->add('min', 'number', ['label' => 'sylius.form.attribute_type_configuration.text.min'])
+            ->add('max', 'number', ['label' => 'sylius.form.attribute_type_configuration.text.max'])
         ;
     }
 

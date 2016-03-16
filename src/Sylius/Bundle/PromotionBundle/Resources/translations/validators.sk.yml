@@ -3,6 +3,9 @@
 
 sylius:
   promotion:
+    code:
+      unique: Zľava zo zadaným kódom už existuje.
+      not_blank: Prosím zadajte kód pre zľavu.
     description:
       max_length: 'Popis akcie nesmie byť dlhší ako 1 znak.|Popis akcie nesmie byť dlhší ako {{ limit }} znakov.'
       min_length: 'Popis akcie musí obsahovať aspoň 1 znak.|Popis akcie musí obsahovať aspoň {{ limit }} znakov.'
@@ -18,10 +21,10 @@ sylius:
       not_blank: Zadajte kód kupónu.
       unique: Tento kupón už existuje.
     usage_limit:
-      min: 'Limit použitia kupónu musí byť najmenej {{ limit }}.'
+      min: 'Limit pre použitie kupónu musí byť najmenej {{ limit }}.'
   promotion_coupon_generate_instruction:
     amount:
       min: 'Počet kupónov na vygenerovanie musí byť minimálne {{ limit }}.'
       not_blank: Zadajte počet kupónov na vygenerovanie.
     usage_limit:
-      min: 'Limit použitia generovaných kupónov musí byť najmenej {{ limit }}.'
+      min: 'Limit pre použitie generovaných kupónov musí byť najmenej {{ limit }}.'

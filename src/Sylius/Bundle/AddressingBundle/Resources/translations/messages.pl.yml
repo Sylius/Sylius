@@ -14,14 +14,16 @@ sylius:
       street: Adres
       province: Województwo
     country:
-      iso_name: Kod ISO
+      add_province: Dodaj województwo
       name: Nazwa
       provinces: Województwa
       select: Wybierz
     province:
       name: Nazwa
+      abbreviation: Skrót
       select: Wybierz
     zone:
+      add_member: Dodaj kraj
       members: Kraje należące do strefy
       name: Nazwa
       type: Typ
@@ -30,10 +32,7 @@ sylius:
         province: Województwo
         zone: Strefa
       scope: Zakres
+      select: Wybierz
       select_scope: Wybierz zakres
-    zone_member_country:
-      country: Kraj
-    zone_member_province:
-      province: Województwo
-    zone_member_zone:
-      zone: Strefa
+    zone_member:
+      select: Wybierz

@@ -53,20 +53,30 @@ class DoctrineODMDriver extends AbstractDoctrineDriver
             $repositoryClass = $metadata->getClass('repository');
         }
 
+        $repositoryReflection = new \ReflectionClass($repositoryClass);
+
         $unitOfWorkDefinition = new Definition('Doctrine\\ODM\\MongoDB\\UnitOfWork');
         $unitOfWorkDefinition
-            ->setFactory(array(new Reference($this->getManagerServiceId($metadata)), 'getUnitOfWork'))
+            ->setFactory([new Reference($this->getManagerServiceId($metadata)), 'getUnitOfWork'])
             ->setPublic(false)
         ;
 
         $definition = new Definition($repositoryClass);
-        $definition->setArguments(array(
+        $definition->setArguments([
             new Reference($metadata->getServiceId('manager')),
             $unitOfWorkDefinition,
-            $this->getClassMetadataDefinition($modelClass),
-        ));
+            $this->getClassMetadataDefinition($metadata),
+        ]);
+        $definition->setLazy(!$repositoryReflection->isFinal());
 
-        return $definition;
+        $container->setDefinition($metadata->getServiceId('repository'), $definition);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function addDefaultForm(ContainerBuilder $container, MetadataInterface $metadata)
+    {
     }
 
     /**

@@ -24,12 +24,17 @@ class Province implements ProvinceInterface
     /**
      * @var string
      */
+    protected $code;
+
+    /**
+     * @var string
+     */
     protected $name;
 
     /**
      * @var string
      */
-    protected $isoName;
+    protected $abbreviation;
 
     /**
      * @var CountryInterface
@@ -55,6 +60,22 @@ class Province implements ProvinceInterface
     /**
      * {@inheritdoc}
      */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return $this->name;
@@ -71,17 +92,17 @@ class Province implements ProvinceInterface
     /**
      * {@inheritdoc}
      */
-    public function getIsoName()
+    public function getAbbreviation()
     {
-        return $this->isoName;
+        return $this->abbreviation;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setIsoName($isoName)
+    public function setAbbreviation($abbreviation)
     {
-        $this->isoName = $isoName;
+        $this->abbreviation = $abbreviation;
     }
 
     /**

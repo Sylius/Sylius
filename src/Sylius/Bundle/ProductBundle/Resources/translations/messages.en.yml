@@ -1,17 +1,22 @@
 sylius:
-  form:
-    product:
-      name: Name
-      description: Description
-      attributes: Attributes
-      options: Options
-      meta_keywords: Meta keywords
-      meta_description: Meta description
-    product_variant:
-      available_on: Available on
-      available_until: Available until
-    product_archetype:
-      name: Name
-      parent: Parent
-      attributes: Attributes
-      options: Options
+    form:
+        product:
+            name: Name
+            description: Description
+            attributes: Attributes
+            options: Options
+            meta_keywords: Meta keywords
+            meta_description: Meta description
+        product_variant:
+            available_on: Available on
+            available_until: Available until
+        product_archetype:
+            name: Name
+            parent: Parent
+            attributes: Attributes
+            options: Options
+        association_type:
+            name: Name
+        association:
+            type: Association Type
+            product: Associated Product

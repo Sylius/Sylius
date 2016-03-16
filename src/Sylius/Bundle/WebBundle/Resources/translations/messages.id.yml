@@ -2,12 +2,16 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  emails:
-    order_confirmation:
-      subject: Terima kasih atas pesanan Anda!
+  account:
+    order:
+      number: Nomor
+  association_type:
+    name: Nama
   address:
     firstname: Nama Depan
     lastname: Nama belakang
+  archetype:
+    name: Nama
   block:
     imagine:
       id: Id
@@ -32,13 +36,19 @@ sylius:
       index: Kelompok
     menu_node:
       index: Menu node
-    route:
-      index: Rute
     role:
       index: Peran
+    route:
+      index: Rute
   cart:
     summary:
       unit_price: Harga
+  channel:
+    code: Kode
+    currency_default: Mata uang default
+    enabled: Diaktifkan
+    id: ID
+    name: Nama
   checkout:
     finalize:
       address:
@@ -49,26 +59,38 @@ sylius:
         shipping_address: Alamat pengiriman
       product:
         name: Nama
+  contact_request:
+    firstName: Nama Depan
+    id: ID
+    lastName: Nama belakang
+    message: Pesan
+    topic: Topik
+  contact_topic:
+    id: ID
+    title: Judul
   country:
-    id: ID
-    name: Nama
     enabled: Diaktifkan
-  email:
-    code: Kode
-  permission:
-    code: Kode
-    id: ID
-  role:
-    code: Kode
     id: ID
     name: Nama
-    index_header: Peran
   currency:
     code: Kode
+    enabled: Diaktifkan
     id: ID
     name: Nama
+  customer:
+    billing_address: Alamat Penagihan
+    first_name: Nama Depan
+    groups: Kelompok
+    id: ID
+    last_name: Nama belakang
+    shipping_address: Alamat pengiriman
+    phone_number: Nomor telepon
+  email:
+    code: Kode
     enabled: Diaktifkan
   form:
+    cart:
+      coupon: Kupon
     login:
       password: Kata sandi
     profile:
@@ -83,10 +105,10 @@ sylius:
     name: Nama
     sku: SKU
   locale:
-    id: ID
-    name: Nama
     code: Kode
     enabled: Diaktifkan
+    id: ID
+    name: Nama
   menu:
     id: ID
     title: Judul
@@ -94,32 +116,18 @@ sylius:
     id: ID
     index_header: Menu node
     title: Judul
+  metadata:
+    id: ID
   "no": false
   order:
     billing_address: Alamat Penagihan
+    currency: Mata Uang
     id: ID
     number: Nomor
     shipping_address: Alamat pengiriman
-    currency: Mata Uang
-    adjustments:
-      label: Label
-  route:
-    id: ID
-    index_header: Rute
-    name: Nama
-    title: Judul
-  redirect_route:
+  review:
     id: ID
     title: Judul
-  shipment:
-    id: ID
-    name: Nama
-    sku: SKU
-  channel:
-    code: Kode
-    enabled: Diaktifkan
-    id: ID
-    name: Nama
   order_item:
     unit_price: Harga Satuan
   page:
@@ -133,6 +141,12 @@ sylius:
   payment_method:
     id: ID
     name: Nama
+  permission:
+    code: Kode
+    id: ID
+  pricing:
+    volume_based:
+      price: Harga
   product:
     available_on_demand: Tersedia
     name: Nama
@@ -146,23 +160,53 @@ sylius:
     variant_selection_method: Metode Pilih Varian
     volume_based:
       price: Harga
+  product_attribute:
+    code: Kode
+    name: Nama
+  product_association:
+    code: Kode
+    name: Nama
+  product_option:
+    name: Nama
+    presentation: Presentasi
   promotion:
     id: ID
     name: Nama
   promotion_coupon:
     code: Kode
+  redirect_route:
+    id: ID
+    title: Judul
   report:
-    name: Nama
     code: Kode
+    id: Id
+    name: Nama
+  role:
+    code: Kode
+    id: ID
+    index_header: Peran
+    name: Nama
+  route:
+    id: ID
+    index_header: Rute
+    name: Nama
+    title: Judul
   search: Cari
+  shipment:
+    id: ID
+    name: Nama
+    sku: SKU
   shipping_address: Alamat pengiriman
   shipping_category:
     id: ID
     name: Nama
   shipping_method:
+    enabled: Diaktifkan
     id: ID
     name: Nama
     zone: Zona
+  stockable:
+    name: Nama
   tax_category:
     id: ID
     name: Nama
@@ -173,13 +217,10 @@ sylius:
     name: Nama
   taxonomy:
     name: Nama
-  customer:
-    billing_address: Alamat Penagihan
-    first_name: Nama Depan
-    id: ID
-    last_name: Nama belakang
-    shipping_address: Alamat pengiriman
-    groups: Kelompok
+  ui:
+    code: Kode
+    name: Nama
+    id: Id
   user:
     id: ID
   variant:
@@ -191,12 +232,3 @@ sylius:
   zone:
     name: Nama
     scope: Ruang lingkup
-  contact_topic:
-    id: ID
-    title: Judul
-  contact_request:
-    id: ID
-    firstName: Nama Depan
-    lastName: Nama belakang
-    message: Pesan
-    topic: Topik

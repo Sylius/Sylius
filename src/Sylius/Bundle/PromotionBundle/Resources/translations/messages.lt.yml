@@ -18,12 +18,10 @@ sylius:
       contains_product_configuration:
         variants: Produktai
         exclude: Neįtraukti
-      item_count_configuration:
+      cart_quantity_configuration:
         count: Kiekis
-        equal: Lygus
       item_total_configuration:
         amount: Suma
-        equal: Lygus
       nth_order_configuration:
         nth: N-tasis
       customer_loyalty_configuration:
@@ -39,7 +37,6 @@ sylius:
         country: Šalis
       type: Tipas
     coupon:
-      code: Kodas
       usage_limit: Naudojimo limitas
       expires_at: Nustoja galioti
     coupon_generate_instruction:
@@ -48,6 +45,8 @@ sylius:
       expires_at: Nustoja galioti
     promotion:
       actions: Veiksmai
+      add_action: Pridėti veiksmą
+      add_rule: Pridėti taisyklę
       coupon_based: Pagal kuponą
       exclusive: Išskirtinis
       description: Aprašymas

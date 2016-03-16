@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\UserBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -31,13 +30,13 @@ class GenderTypeSpec extends ObjectBehavior
 
     function it_has_options(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'choices' => array(
-                CustomerInterface::UNKNOWN_GENDER  => ' ',
+        $resolver->setDefaults([
+            'choices' => [
+                CustomerInterface::UNKNOWN_GENDER => ' ',
                 CustomerInterface::MALE_GENDER => 'sylius.gender.male',
                 CustomerInterface::FEMALE_GENDER => 'sylius.gender.female',
-            )
-        ))->shouldBeCalled();
+            ],
+        ])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

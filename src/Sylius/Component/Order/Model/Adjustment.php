@@ -11,11 +11,15 @@
 
 namespace Sylius\Component\Order\Model;
 
+use Sylius\Component\Resource\Model\TimestampableTrait;
+
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Adjustment implements AdjustmentInterface
 {
+    use TimestampableTrait;
+
     /**
      * @var mixed
      */
@@ -32,6 +36,11 @@ class Adjustment implements AdjustmentInterface
     protected $orderItem;
 
     /**
+     * @var OrderItemUnitInterface
+     */
+    protected $orderItemUnit;
+
+    /**
      * @var string
      */
     protected $type;
@@ -39,7 +48,7 @@ class Adjustment implements AdjustmentInterface
     /**
      * @var string
      */
-    protected $description;
+    protected $label;
 
     /**
      * @var int
@@ -69,16 +78,6 @@ class Adjustment implements AdjustmentInterface
      */
     protected $originType;
 
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
-
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -105,6 +104,10 @@ class Adjustment implements AdjustmentInterface
             return $this->orderItem;
         }
 
+        if (null !== $this->orderItemUnit) {
+            return $this->orderItemUnit;
+        }
+
         return null;
     }
 
@@ -113,15 +116,24 @@ class Adjustment implements AdjustmentInterface
      */
     public function setAdjustable(AdjustableInterface $adjustable = null)
     {
-        $this->order = $this->orderItem = null;
+        $this->assertNotLocked();
 
-        if ($adjustable instanceof OrderInterface) {
-            $this->order = $adjustable;
+        $currentAdjustable = $this->getAdjustable();
+        if ($currentAdjustable === $adjustable) {
+            return;
         }
 
-        if ($adjustable instanceof OrderItemInterface) {
-            $this->orderItem = $adjustable;
+        $this->order = $this->orderItem = $this->orderItemUnit = null;
+        if (null !== $currentAdjustable) {
+            $currentAdjustable->removeAdjustment($this);
         }
+
+        if (null === $adjustable) {
+            return;
+        }
+
+        $this->assignAdjustable($adjustable);
+        $adjustable->addAdjustment($this);
     }
 
     /**
@@ -143,17 +155,17 @@ class Adjustment implements AdjustmentInterface
     /**
      * {@inheritdoc}
      */
-    public function getDescription()
+    public function getLabel()
     {
-        return $this->description;
+        return $this->label;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setDescription($description)
+    public function setLabel($label)
     {
-        $this->description = $description;
+        $this->label = $label;
     }
 
     /**
@@ -174,6 +186,9 @@ class Adjustment implements AdjustmentInterface
         }
 
         $this->amount = $amount;
+        if (!$this->isNeutral()) {
+            $this->recalculateAdjustable();
+        }
     }
 
     /**
@@ -189,7 +204,12 @@ class Adjustment implements AdjustmentInterface
      */
     public function setNeutral($neutral)
     {
-        $this->neutral = (bool) $neutral;
+        $neutral = (bool) $neutral;
+
+        if ($this->neutral !== $neutral) {
+            $this->neutral = $neutral;
+            $this->recalculateAdjustable();
+        }
     }
 
     /**
@@ -214,8 +234,6 @@ class Adjustment implements AdjustmentInterface
     public function unlock()
     {
         $this->locked = false;
-
-        return $this;
     }
 
     /**
@@ -266,35 +284,39 @@ class Adjustment implements AdjustmentInterface
         $this->originType = $originType;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
+    private function recalculateAdjustable()
     {
-        return $this->createdAt;
+        $adjustable = $this->getAdjustable();
+        if (null !== $adjustable) {
+            $adjustable->recalculateAdjustmentsTotal();
+        }
     }
 
     /**
-     * {@inheritdoc}
+     * @param AdjustableInterface $adjustable
+     *
+     * @throws \InvalidArgumentException when adjustable class is not supported
      */
-    public function setCreatedAt(\DateTime $createdAt)
+    private function assignAdjustable(AdjustableInterface $adjustable)
     {
-        $this->createdAt = $createdAt;
+        if ($adjustable instanceof OrderInterface) {
+            $this->order = $adjustable;
+        } elseif ($adjustable instanceof OrderItemInterface) {
+            $this->orderItem = $adjustable;
+        } elseif ($adjustable instanceof OrderItemUnitInterface) {
+            $this->orderItemUnit = $adjustable;
+        } else {
+            throw new \InvalidArgumentException('Given adjustable object class is not supported.');
+        }
     }
 
     /**
-     * {@inheritdoc}
+     * @throws \LogicException when adjustment is locked
      */
-    public function getUpdatedAt()
+    private function assertNotLocked()
     {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
+        if ($this->isLocked()) {
+            throw new \LogicException('Adjustment is locked and cannot be modified.');
+        }
     }
 }

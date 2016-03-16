@@ -30,37 +30,32 @@ class ProductType extends BaseProductType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('translations', 'a2lix_translationsForms', array(
+            ->add('translations', 'a2lix_translationsForms', [
                 'form_type' => 'sylius_product_translation',
-                'label'    => 'sylius.form.product.translations'
-            ))
-            ->add('taxCategory', 'sylius_tax_category_choice', array(
-                'required'    => false,
+                'label' => 'sylius.form.product.translations',
+            ])
+            ->add('shippingCategory', 'sylius_shipping_category_choice', [
+                'required' => false,
                 'empty_value' => '---',
-                'label'       => 'sylius.form.product.tax_category'
-            ))
-            ->add('shippingCategory', 'sylius_shipping_category_choice', array(
-                'required'    => false,
-                'empty_value' => '---',
-                'label'       => 'sylius.form.product.shipping_category'
-            ))
+                'label' => 'sylius.form.product.shipping_category',
+            ])
             ->add('taxons', 'sylius_taxon_selection')
-            ->add('variantSelectionMethod', 'choice', array(
-                'label'   => 'sylius.form.product.variant_selection_method',
-                'choices' => Product::getVariantSelectionMethodLabels()
-            ))
-            ->add('channels', 'sylius_channel_choice', array(
-                'multiple'    => true,
-                'expanded'    => true,
-                'label'       => 'sylius.form.product.channels',
-            ))
-            ->add('restrictedZone', 'sylius_zone_choice', array(
+            ->add('variantSelectionMethod', 'choice', [
+                'label' => 'sylius.form.product.variant_selection_method',
+                'choices' => Product::getVariantSelectionMethodLabels(),
+            ])
+            ->add('channels', 'sylius_channel_choice', [
+                'multiple' => true,
+                'expanded' => true,
+                'label' => 'sylius.form.product.channels',
+            ])
+            ->add('restrictedZone', 'sylius_zone_choice', [
                 'empty_value' => '---',
-                'label'       => 'sylius.form.product.restricted_zone',
-            ))
-            ->add('mainTaxon', 'sylius_taxon_choice', array(
-                'label' => 'sylius.form.product.main_taxon'
-             ))
+                'label' => 'sylius.form.product.restricted_zone',
+            ])
+            ->add('mainTaxon', 'sylius_taxon_choice', [
+                'label' => 'sylius.form.product.main_taxon',
+             ])
         ;
     }
 }

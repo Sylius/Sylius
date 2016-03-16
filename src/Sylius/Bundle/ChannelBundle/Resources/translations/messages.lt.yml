@@ -4,7 +4,6 @@
 sylius:
   form:
     channel:
-      code: Kodas
       name: Pavadinimas
       description: Aprašymas
       url: URL

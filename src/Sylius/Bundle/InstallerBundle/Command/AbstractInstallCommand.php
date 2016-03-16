@@ -19,10 +19,10 @@ use Symfony\Component\Validator\ConstraintViolationList;
 
 abstract class AbstractInstallCommand extends ContainerAwareCommand
 {
-    const APP_CACHE                 = 'app/cache/';
-    const WEB_ASSETS_DIRECTORY      = 'web/assets/';
-    const WEB_BUNDLES_DIRECTORY     = 'web/bundles/';
-    const WEB_MEDIA_DIRECTORY       = 'web/media/';
+    const APP_CACHE = 'app/cache/';
+    const WEB_ASSETS_DIRECTORY = 'web/assets/';
+    const WEB_BUNDLES_DIRECTORY = 'web/bundles/';
+    const WEB_MEDIA_DIRECTORY = 'web/media/';
     const WEB_MEDIA_IMAGE_DIRECTORY = 'web/media/image/';
 
     /**
@@ -64,7 +64,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     protected function isDebug()
     {
@@ -108,7 +108,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
      * @param array $commands
      * @param InputInterface $input
      * @param OutputInterface $output
-     * @param boolean $displayProgress
+     * @param bool $displayProgress
      */
     protected function runCommands(array $commands, InputInterface $input, OutputInterface $output, $displayProgress = true)
     {
@@ -122,7 +122,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
                 $parameters = $value;
             } else {
                 $command = $value;
-                $parameters = array();
+                $parameters = [];
             }
 
             $this->commandExecutor->runCommand($command, $parameters);
@@ -148,7 +148,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
      *
      * @return mixed
      */
-    protected function askHidden(OutputInterface $output, $question, array $constraints = array())
+    protected function askHidden(OutputInterface $output, $question, array $constraints = [])
     {
         return $this->proceedAskRequest($output, $question, $constraints, null, true);
     }
@@ -161,7 +161,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
      *
      * @return mixed
      */
-    protected function ask(OutputInterface $output, $question, array $constraints = array(), $default = null)
+    protected function ask(OutputInterface $output, $question, array $constraints = [], $default = null)
     {
         return $this->proceedAskRequest($output, $question, $constraints, $default);
     }
@@ -170,9 +170,9 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
      * @param mixed $value
      * @param array $constraints
      *
-     * @return boolean
+     * @return bool
      */
-    protected function validate($value, array $constraints = array())
+    protected function validate($value, array $constraints = [])
     {
         return $this->get('validator')->validateValue($value, $constraints);
     }
@@ -193,11 +193,11 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
      * @param string          $question
      * @param array           $constraints
      * @param string          $default
-     * @param boolean         $hidden
+     * @param bool         $hidden
      *
      * @return mixed
      */
-    private function proceedAskRequest(OutputInterface $output, $question, array $constraints = array(), $default = null, $hidden = false)
+    private function proceedAskRequest(OutputInterface $output, $question, array $constraints = [], $default = null, $hidden = false)
     {
         do {
             $value = $this->getAnswerFromDialog($output, $question, $default, $hidden);
@@ -221,7 +221,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
      * @param OutputInterface $output
      * @param string $question
      * @param string|null $default
-     * @param boolean $hidden
+     * @param bool $hidden
      *
      * @return string
      */

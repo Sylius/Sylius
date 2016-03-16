@@ -15,3 +15,5 @@ sylius:
       name: 名称
       parent: 上一级
       options: 选项
+    association_type:
+      name: 名称

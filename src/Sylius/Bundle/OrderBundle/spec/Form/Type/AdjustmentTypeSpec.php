@@ -24,7 +24,7 @@ class AdjustmentTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Adjustment', array('sylius'));
+        $this->beConstructedWith('Adjustment', ['sylius']);
     }
 
     function it_is_initializable()
@@ -45,7 +45,7 @@ class AdjustmentTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('description', 'text', Argument::any())
+            ->add('label', 'text', Argument::any())
             ->willReturn($builder)
         ;
 
@@ -54,16 +54,16 @@ class AdjustmentTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
-                'data_class'        => 'Adjustment',
-                'validation_groups' => array('sylius'),
-            ))
+            ->setDefaults([
+                'data_class' => 'Adjustment',
+                'validation_groups' => ['sylius'],
+            ])
             ->shouldBeCalled()
         ;
 

@@ -29,10 +29,10 @@ class SyliusTaxonomyBundle extends AbstractResourceBundle
      */
     public static function getSupportedDrivers()
     {
-        return array(
+        return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
             SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM,
-        );
+        ];
     }
 
     /**
@@ -40,10 +40,10 @@ class SyliusTaxonomyBundle extends AbstractResourceBundle
      */
     protected function getModelInterfaces()
     {
-        return array(
+        return [
             TaxonomyInterface::class => 'sylius.model.taxonomy.class',
-            TaxonInterface::class    => 'sylius.model.taxon.class',
-        );
+            TaxonInterface::class => 'sylius.model.taxon.class',
+        ];
     }
 
     /**

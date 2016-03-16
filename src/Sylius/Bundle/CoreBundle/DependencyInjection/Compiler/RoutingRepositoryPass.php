@@ -26,12 +26,11 @@ class RoutingRepositoryPass implements CompilerPassInterface
     {
         if ($container->hasParameter('sylius.repository_by_classes') &&
             $container->hasDefinition('sylius.route_provider')) {
-
             $repositoryByClasses = $container->getParameter('sylius.repository_by_classes');
             $routeProvider = $container->getDefinition('sylius.route_provider');
 
             foreach ($repositoryByClasses as $class => $repository) {
-                $routeProvider->addMethodCall('addRepository', array($class, $repository));
+                $routeProvider->addMethodCall('addRepository', [$class, $repository]);
             }
         }
     }

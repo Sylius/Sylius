@@ -4,9 +4,8 @@
 sylius:
   form:
     channel:
-      code: Kód
       name: Názov
       description: Popis
       url: URL adresa
-      enabled: Povolené
+      enabled: Zapnuté
       color: Farba

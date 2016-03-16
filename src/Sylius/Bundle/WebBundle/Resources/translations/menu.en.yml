@@ -7,6 +7,7 @@ sylius:
             main:
                 api_clients: API clients
                 archetypes: Product archetypes
+                association_types: Product association types
                 assortment: Assortment
                 attributes: Configure attributes
                 blocks: Blocks
@@ -48,10 +49,10 @@ sylius:
                 slideshow: Slideshow
                 stockables: Inventory levels
                 support: Support
-                taxation_settings: Taxation settings
-                taxonomies: Categorization
                 tax_categories: Taxation categories
                 tax_rates: Tax rates
+                taxation_settings: Taxation settings
+                taxonomies: Categorization
                 zones: Zones
             sidebar:
                 affiliates: Affiliates
@@ -85,15 +86,19 @@ sylius:
                 options: Manage options
                 orders: Current orders
                 pages: Pages
-                payments: Payments
                 payment_methods: Payment methods
+                payments: Payments
                 permissions: Permissions
+                product_review: Product reviews
                 products: Products
                 promotions: Promotions
                 redirects: Redirects
                 report: Reports
                 roles: Roles
                 routes: Routes
+                review: Reviews
+                attributes: Configure attributes
+                archetypes: Product archetypes
                 sales: Orders
                 security_settings: Security settings
                 shipments: Shipments

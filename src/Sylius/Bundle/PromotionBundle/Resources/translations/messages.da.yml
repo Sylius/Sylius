@@ -18,23 +18,22 @@ sylius:
       contains_product_configuration:
         variants: Produkter
         exclude: Udelad
-      item_count_configuration:
+      cart_quantity_configuration:
         count: Antal
-        equal: Lige
       item_total_configuration:
         amount: Beløb
-        equal: Lige
       shipping_country_configuration:
         country: Land
       type: Type
     coupon:
-      code: Kode
       usage_limit: Brugsgrænse
     coupon_generate_instruction:
       amount: Beløb
       usage_limit: Brugsgrænse
     promotion:
       actions: Handlinger
+      add_action: Tilføj handling
+      add_rule: Tilføj regel
       coupon_based: Kupon baseret
       description: Beskrivelse
       ends_at: Slutter den

@@ -9,6 +9,7 @@ sylius:
       not_blank: Voer een stad in.
     country:
       not_blank: Selecteer een land.
+      disabled: Het gekozen land is uitgeschakeld. Gelieve een ander land te kiezen.
     first_name:
       max_length: Voornaam mag niet langer dan 255 tekens zijn|Voornaam mag niet langer dan 255 tekens zijn.
       min_length: Voornaam moet minstens 2 tekens lang zijn|Voornaam moet minstens 2 tekens lang zijn.
@@ -29,17 +30,22 @@ sylius:
       not_blank: Voer een straat in.
     not_shippable: Dit adres is geen geldige bestemming.
   country:
-    iso_name:
+    code:
       not_blank: Voer een ISO landcode in.
-    name:
-      max_length: Landnaam mag niet langer dan 255 tekens zijn|Landnaam mag niet langer dan 255 tekens zijn.
-      not_blank: Voer een landnaam in.
+      unique: De land ISO code moet uniek zijn.
   province:
+    code:
+      not_blank: Gelieve een provincie code in te geven.
+      unique: De provincie code moet uniek zijn.
     name:
       max_length: Provincie naam mag niet langer dan 255 tekens zijn|Provincie naam mag niet langer dan 255 tekens zijn.
       min_length: Provincie naam moet minstens 2 tekens lang zijn|Provincie naam moet minstens 2 tekens lang zijn.
       not_blank: Voer een provincie naam in.
+      unique: De provincie naam moet uniek zijn.
   zone:
+    code:
+      not_blank: Gelieve een zone code in te geven.
+      unique: De zone code moet uniek zijn.
     members:
       min_count: 'Voeg minstens {{ limit }} zone leden toe.'
     name:

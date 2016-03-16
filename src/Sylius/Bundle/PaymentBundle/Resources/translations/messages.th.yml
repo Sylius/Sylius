@@ -30,6 +30,3 @@ sylius:
       enabled: เปิดใช้งานแล้ว?
       gateway: ช่องทางการชำระเงิน
       name: ชื่อ
-      fee_calculator:
-        fixed:
-          amount: ยอดรวม

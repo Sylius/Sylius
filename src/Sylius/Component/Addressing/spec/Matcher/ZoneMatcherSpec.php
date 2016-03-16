@@ -17,14 +17,13 @@ use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Addressing\Model\ZoneMemberCountry;
-use Sylius\Component\Addressing\Model\ZoneMemberProvince;
-use Sylius\Component\Addressing\Model\ZoneMemberZone;
+use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
 class ZoneMatcherSpec extends ObjectBehavior
 {
@@ -38,218 +37,257 @@ class ZoneMatcherSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\Addressing\Matcher\ZoneMatcher');
     }
 
-    function it_is_Sylius_zone_matcher()
+    function it_implements_zone_matcher_interface()
     {
         $this->shouldImplement(ZoneMatcherInterface::class);
     }
 
-    function it_returns_null_if_there_are_no_zones($repository, AddressInterface $address)
+    function it_returns_null_if_there_are_no_zones(RepositoryInterface $repository, AddressInterface $address)
     {
-        $repository->findAll()->willReturn(array());
+        $repository->findAll()->willReturn([]);
         $this->match($address)->shouldReturn(null);
     }
 
     function it_should_match_address_by_province(
-        $repository,
+        RepositoryInterface $repository,
         ProvinceInterface $province,
         AddressInterface $address,
-        ZoneMemberProvince $memberProvince,
+        ZoneMemberInterface $memberProvince,
         ZoneInterface $zone
     ) {
-        $repository->findAll()->shouldBeCalled()->willReturn(array($zone));
-        $address->getProvince()->shouldBeCalled()->willReturn($province);
-        $memberProvince->getProvince()->shouldBeCalled()->willReturn($province);
-        $zone->getType()->shouldBeCalled()->willReturn(ZoneInterface::TYPE_PROVINCE);
-        $zone->getMembers()->shouldBeCalled()->willReturn(array($memberProvince));
+        $province->getCode()->willReturn('DU');
+        $repository->findAll()->willReturn([$zone]);
+        $address->getProvinceCode()->willReturn('DU');
+        $memberProvince->getCode()->willReturn('DU');
+
+        $zone->getType()->willReturn(ZoneInterface::TYPE_PROVINCE);
+        $zone->getMembers()->willReturn([$memberProvince]);
         $memberProvince->getBelongsTo()->willReturn($zone);
 
         $this->match($address)->shouldReturn($zone);
     }
 
     function it_should_match_address_by_province_and_scope(
-        $repository,
+        RepositoryInterface $repository,
         ProvinceInterface $province,
         AddressInterface $address,
-        ZoneMemberProvince $memberProvince,
+        ZoneMemberInterface $memberProvince,
         ZoneInterface $zone
     ) {
-        $repository->findBy(array('scope' => 'shipping'))->shouldBeCalled()->willReturn(array($zone));
-        $address->getProvince()->shouldBeCalled()->willReturn($province);
-        $memberProvince->getProvince()->shouldBeCalled()->willReturn($province);
-        $zone->getType()->shouldBeCalled()->willReturn(ZoneInterface::TYPE_PROVINCE);
-        $zone->getMembers()->shouldBeCalled()->willReturn(array($memberProvince));
+        $repository->findBy(['scope' => 'shipping'])->shouldBeCalled()->willReturn([$zone]);
+        $province->getCode()->willReturn('TX');
+        $address->getProvinceCode()->willReturn('TX');
+        $memberProvince->getCode()->willReturn('TX');
+        $zone->getType()->willReturn(ZoneInterface::TYPE_PROVINCE);
+        $zone->getMembers()->willReturn([$memberProvince]);
         $memberProvince->getBelongsTo()->willReturn($zone);
 
         $this->match($address, 'shipping')->shouldReturn($zone);
     }
 
     function it_should_match_address_by_country(
-        RepositoryInterface$repository,
+        RepositoryInterface $repository,
         CountryInterface $country,
         AddressInterface $address,
-        ZoneMemberCountry $memberCountry,
+        ZoneMemberInterface $memberCountry,
         ZoneInterface $zone
     ) {
-        $repository->findAll()->shouldBeCalled()->willReturn(array($zone));
-        $address->getCountry()->shouldBeCalled()->willReturn($country);
-        $memberCountry->getCountry()->shouldBeCalled()->willReturn($country);
-        $zone->getType()->shouldBeCalled()->willReturn(ZoneInterface::TYPE_COUNTRY);
-        $zone->getMembers()->shouldBeCalled()->willReturn(array($memberCountry));
+        $repository->findAll()->willReturn([$zone]);
+        $country->getCode()->willReturn('IE');
+        $address->getCountryCode()->willReturn('IE');
+        $memberCountry->getCode()->willReturn('IE');
+        $zone->getType()->willReturn(ZoneInterface::TYPE_COUNTRY);
+        $zone->getMembers()->willReturn([$memberCountry]);
         $memberCountry->getBelongsTo()->willReturn($zone);
 
         $this->match($address)->shouldReturn($zone);
     }
 
     function it_should_match_address_by_country_and_scope(
-        $repository,
+        RepositoryInterface $repository,
         CountryInterface $country,
         AddressInterface $address,
-        ZoneMemberCountry $memberCountry,
+        ZoneMemberInterface $memberCountry,
         ZoneInterface $zone
     ) {
-        $repository->findBy(array('scope' => 'shipping'))->shouldBeCalled()->willReturn(array($zone));
-        $address->getCountry()->shouldBeCalled()->willReturn($country);
-        $memberCountry->getCountry()->shouldBeCalled()->willReturn($country);
-        $zone->getType()->shouldBeCalled()->willReturn(ZoneInterface::TYPE_COUNTRY);
-        $zone->getMembers()->shouldBeCalled()->willReturn(array($memberCountry));
+        $repository->findBy(['scope' => 'shipping'])->willReturn([$zone]);
+        $country->getCode()->willReturn('IE');
+        $address->getCountryCode()->willReturn('IE');
+        $memberCountry->getCode()->willReturn('IE');
+        $zone->getType()->willReturn(ZoneInterface::TYPE_COUNTRY);
+        $zone->getMembers()->willReturn([$memberCountry]);
         $memberCountry->getBelongsTo()->willReturn($zone);
 
         $this->match($address, 'shipping')->shouldReturn($zone);
     }
 
     function it_should_match_address_for_nested_zones(
-        $repository,
+        RepositoryInterface $repository,
         CountryInterface $country,
         AddressInterface $address,
-        ZoneMemberCountry $memberCountry,
+        ZoneMemberInterface $memberCountry,
+        ZoneMemberInterface $memberZone,
         ZoneInterface $subZone,
-        ZoneMemberZone $memberZone,
         ZoneInterface $rootZone
     ) {
-        $address->getCountry()->shouldBeCalled()->willReturn($country);
-        $memberCountry->getCountry()->shouldBeCalled()->willReturn($country);
-        $subZone->getMembers()->shouldBeCalled()->willReturn(array($memberCountry));
-        $subZone->getType()->shouldBeCalled()->willReturn(ZoneInterface::TYPE_COUNTRY);
-        $memberZone->getZone()->shouldBeCalled()->willReturn($subZone);
-        $rootZone->getMembers()->shouldBeCalled()->willReturn(array($memberZone));
-        $rootZone->getType()->shouldBeCalled()->willReturn(ZoneInterface::TYPE_ZONE);
+        $country->getCode()->willReturn('IE');
+
+        $address->getCountryCode()->willReturn('IE');
+        $memberCountry->getCode()->willReturn('IE');
+        $subZone->getMembers()->willReturn([$memberCountry]);
+        $subZone->getType()->willReturn(ZoneInterface::TYPE_COUNTRY);
+        $subZone->getCode()->willReturn('Ireland');
+        $memberZone->getCode()->willReturn('Ireland');
+        $rootZone->getMembers()->willReturn([$memberZone]);
+        $rootZone->getType()->willReturn(ZoneInterface::TYPE_ZONE);
 
         $memberCountry->getBelongsTo()->willReturn($subZone);
         $memberZone->getBelongsTo()->willReturn($rootZone);
-        $repository->findAll()->shouldBeCalled()->willReturn(array($rootZone));
+        $repository->findOneBy(['code' => 'Ireland'])->willReturn($subZone);
+        $repository->findAll()->willReturn([$rootZone]);
 
         $this->match($address)->shouldReturn($rootZone);
     }
 
     function it_should_match_address_for_nested_zones_and_scope(
-        $repository,
+        RepositoryInterface $repository,
         CountryInterface $country,
         AddressInterface $address,
-        ZoneMemberCountry $memberCountry,
+        ZoneMemberInterface $memberCountry,
+        ZoneMemberInterface $memberZone,
         ZoneInterface $subZone,
-        ZoneMemberZone $memberZone,
         ZoneInterface $rootZone
     ) {
-        $address->getCountry()->shouldBeCalled()->willReturn($country);
-        $memberCountry->getCountry()->shouldBeCalled()->willReturn($country);
-        $subZone->getMembers()->shouldBeCalled()->willReturn(array($memberCountry));
-        $subZone->getType()->shouldBeCalled()->willReturn(ZoneInterface::TYPE_COUNTRY);
-        $memberZone->getZone()->shouldBeCalled()->willReturn($subZone);
-        $rootZone->getMembers()->shouldBeCalled()->willReturn(array($memberZone));
-        $rootZone->getType()->shouldBeCalled()->willReturn(ZoneInterface::TYPE_ZONE);
+        $country->getCode()->willReturn('IE');
+        $address->getCountryCode()->willReturn('IE');
+
+        $memberCountry->getCode()->willReturn('IE');
+        $subZone->getMembers()->willReturn([$memberCountry]);
+        $subZone->getType()->willReturn(ZoneInterface::TYPE_COUNTRY);
+        $subZone->getCode()->willReturn('Ireland');
+        $memberZone->getCode()->willReturn('Ireland');
+
+        $rootZone->getMembers()->willReturn([$memberZone]);
+        $rootZone->getType()->willReturn(ZoneInterface::TYPE_ZONE);
 
         $memberCountry->getBelongsTo()->willReturn($subZone);
         $memberZone->getBelongsTo()->willReturn($rootZone);
-        $repository->findBy(array('scope' => 'shipping'))->shouldBeCalled()->willReturn(array($rootZone));
+        $repository->findOneBy(['code' => 'Ireland'])->willReturn($subZone);
+        $repository->findBy(['scope' => 'shipping'])->willReturn([$rootZone]);
 
         $this->match($address, 'shipping')->shouldReturn($rootZone);
     }
 
-    function it_should_match_address_from_province_when_many_are_found(
-        $repository,
+    function it_matches_address_from_province_when_many_are_found(
+        RepositoryInterface $repository,
         CountryInterface $country,
         ProvinceInterface $province,
         AddressInterface $address,
-        ZoneMemberCountry $memberCountry,
-        ZoneMemberProvince $memberProvince,
+        ZoneMemberInterface $memberCountry,
+        ZoneMemberInterface $memberProvince,
         ZoneInterface $zoneCountry,
         ZoneInterface $zoneProvince
     ) {
-        $address->getProvince()->willReturn($province);
-        $address->getCountry()->willReturn($country);
-        $memberProvince->getProvince()->willReturn($province);
-        $memberCountry->getCountry()->willReturn($country);
+        $province->getCode()->willReturn('DU');
+        $country->getCode()->willReturn('IE');
 
-        $zoneProvince->getMembers()->willReturn(array($memberProvince));
+        $address->getCountryCode()->willReturn('IE');
+        $address->getProvinceCode()->willReturn('DU');
+
+        $memberCountry->getCode()->willReturn('IE');
+        $memberProvince->getCode()->willReturn('DU');
+
+        $zoneProvince->getMembers()->willReturn([$memberProvince]);
         $zoneProvince->getType()->willReturn(ZoneInterface::TYPE_PROVINCE);
-        $zoneCountry->getMembers()->willReturn(array($memberCountry));
+        $zoneCountry->getMembers()->willReturn([$memberCountry]);
         $zoneCountry->getType()->willReturn(ZoneInterface::TYPE_COUNTRY);
 
-        $repository->findAll()->shouldBeCalled()->willReturn(array($zoneCountry, $zoneProvince));
+        $repository->findAll()->willReturn([$zoneCountry, $zoneProvince]);
         $memberProvince->getBelongsTo()->willReturn($zoneProvince);
         $memberCountry->getBelongsTo()->willReturn($zoneCountry);
 
         $this->match($address)->shouldReturn($zoneProvince);
     }
 
-    function it_should_match_address_from_province_when_many_are_found_by_scope(
-        $repository,
-        CountryInterface $country,
-        ProvinceInterface $province,
+    function it_matches_address_from_province_when_many_are_found_by_scope(
+        RepositoryInterface $repository,
         AddressInterface $address,
-        ZoneMemberCountry $memberCountry,
-        ZoneMemberProvince $memberProvince,
+        ZoneMemberInterface $memberCountry,
+        ZoneMemberInterface $memberProvince,
         ZoneInterface $zoneCountry,
         ZoneInterface $zoneProvince
     ) {
-        $address->getProvince()->willReturn($province);
-        $address->getCountry()->willReturn($country);
-        $memberProvince->getProvince()->willReturn($province);
-        $memberCountry->getCountry()->willReturn($country);
+        $address->getCountryCode()->willReturn('IE');
+        $memberCountry->getCode()->willReturn('IE');
 
-        $zoneProvince->getMembers()->willReturn(array($memberProvince));
-        $zoneProvince->getType()->willReturn(ZoneInterface::TYPE_PROVINCE);
-        $zoneCountry->getMembers()->willReturn(array($memberCountry));
+        $address->getProvinceCode()->willReturn('DU');
+        $memberProvince->getCode()->willReturn('DU');
+
+        $zoneCountry->getMembers()->willReturn([$memberCountry]);
         $zoneCountry->getType()->willReturn(ZoneInterface::TYPE_COUNTRY);
 
-        $repository->findBy(array('scope' => 'shipping'))->shouldBeCalled()->willReturn(array($zoneCountry, $zoneProvince));
+        $zoneProvince->getMembers()->willReturn([$memberProvince]);
+        $zoneProvince->getType()->willReturn(ZoneInterface::TYPE_PROVINCE);
+
+        $repository->findBy(['scope' => 'shipping'])->willReturn([$zoneCountry, $zoneProvince]);
         $memberProvince->getBelongsTo()->willReturn($zoneProvince);
         $memberCountry->getBelongsTo()->willReturn($zoneCountry);
 
         $this->match($address, 'shipping')->shouldReturn($zoneProvince);
     }
 
-    function it_should_match_all_zones_when_one_zone_for_address_is_defined(
-        $repository,
-        CountryInterface $country,
+    function it_matches_all_zones_with_given_address(
+        RepositoryInterface $repository,
         AddressInterface $address,
-        ZoneMemberCountry $memberCountry,
-        ZoneInterface $zoneCountry
+        ZoneMemberInterface $memberProvince,
+        ZoneMemberInterface $memberCountry,
+        ZoneMemberInterface $memberZone,
+        ZoneInterface $zoneProvince,
+        ZoneInterface $zoneCountry,
+        ZoneInterface $zoneZone
     ) {
-        $repository->findAll()->shouldBeCalled()->willReturn(array($zoneCountry));
-        $address->getCountry()->shouldBeCalled()->willReturn($country);
-        $memberCountry->getCountry()->shouldBeCalled()->willReturn($country);
-        $zoneCountry->getType()->shouldBeCalled()->willReturn(ZoneInterface::TYPE_COUNTRY);
-        $zoneCountry->getMembers()->shouldBeCalled()->willReturn(array($memberCountry));
+        $repository->findAll()->willReturn([$zoneProvince, $zoneCountry, $zoneZone]);
+
+        $address->getProvinceCode()->willReturn('TX');
+        $memberProvince->getCode()->willReturn('TX');
+
+        $memberProvince->getBelongsTo()->willReturn($zoneProvince);
+        $zoneProvince->getType()->willReturn(ZoneInterface::TYPE_PROVINCE);
+        $zoneProvince->getMembers()->willReturn([$memberProvince]);
+
+        $address->getCountryCode()->willReturn('US');
+        $memberCountry->getCode()->willReturn('US');
+
+        $zoneCountry->getType()->willReturn(ZoneInterface::TYPE_COUNTRY);
+        $zoneCountry->getMembers()->willReturn([$memberCountry]);
+        $zoneCountry->getCode()->willReturn('USA');
         $memberCountry->getBelongsTo()->willReturn($zoneCountry);
 
-        $this->matchAll($address)->shouldReturn(array($zoneCountry));
+        $memberZone->getCode()->willReturn('USA');
+        $zoneZone->getType()->willReturn(ZoneInterface::TYPE_ZONE);
+        $zoneZone->getMembers()->willReturn([$memberZone]);
+        $memberZone->getBelongsTo()->willReturn($zoneZone);
+
+        $repository->findOneBy(['code' => 'USA'])->willReturn($zoneCountry);
+
+        $this->matchAll($address)->shouldReturn([$zoneProvince, $zoneCountry, $zoneZone]);
     }
 
-    function it_should_match_all_zones_by_scope_when_one_zone_for_address_is_defined(
-        $repository,
-        CountryInterface $country,
+    function it_matches_all_zones_by_scope_when_one_zone_for_address_is_defined(
+        RepositoryInterface $repository,
         AddressInterface $address,
-        ZoneMemberCountry $memberCountry,
+        ZoneMemberInterface $memberCountry,
         ZoneInterface $zoneCountry
     ) {
-        $repository->findBy(array('scope' => 'shipping'))->shouldBeCalled()->willReturn(array($zoneCountry));
-        $address->getCountry()->shouldBeCalled()->willReturn($country);
-        $memberCountry->getCountry()->shouldBeCalled()->willReturn($country);
-        $zoneCountry->getType()->shouldBeCalled()->willReturn(ZoneInterface::TYPE_COUNTRY);
-        $zoneCountry->getMembers()->shouldBeCalled()->willReturn(array($memberCountry));
+        $repository->findBy(['scope' => 'shipping'])->willReturn([$zoneCountry]);
+
+        $address->getCountryCode()->willReturn('US');
+
+        $memberCountry->getCode()->willReturn('US');
+        $zoneCountry->getType()->willReturn(ZoneInterface::TYPE_COUNTRY);
+        $zoneCountry->getMembers()->willReturn([$memberCountry]);
         $memberCountry->getBelongsTo()->willReturn($zoneCountry);
 
-        $this->matchAll($address, 'shipping')->shouldReturn(array($zoneCountry));
+        $this->matchAll($address, 'shipping')->shouldReturn([$zoneCountry]);
     }
 }

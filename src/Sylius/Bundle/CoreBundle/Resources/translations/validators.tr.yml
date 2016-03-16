@@ -13,11 +13,6 @@ sylius:
     price:
       min: Fiyat negatif olamaz.
       not_blank: Lütfen fiyatı giriniz.
-sylius_shipping:
-  method:
-    zone:
-      not_blank: Lütfen teslimat yöntemi bölgesini giriniz.
-sylius_taxation:
-  rate:
-    zone:
-      not_blank: Lütfen vergi oranı bölgesini giriniz.
+  product_translation:
+    short_description:
+      max: 'Kısa açıklama daha sonra {{ limit }} karakter olmalıdır.'

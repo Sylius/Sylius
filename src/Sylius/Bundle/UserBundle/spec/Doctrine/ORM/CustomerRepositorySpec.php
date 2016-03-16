@@ -24,10 +24,8 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 class CustomerRepositorySpec extends ObjectBehavior
 {
-    public function let(EntityManager $em, ClassMetadata $classMetadata, FilterCollection $collection)
+    public function let(EntityManager $em, ClassMetadata $classMetadata)
     {
-        $em->getFilters()->willReturn($collection);
-
         $this->beConstructedWith($em, $classMetadata);
     }
 
@@ -41,10 +39,8 @@ class CustomerRepositorySpec extends ObjectBehavior
         $this->shouldHaveType(EntityRepository::class);
     }
 
-    function it_finds_details($em, $collection, QueryBuilder $builder, Expr $expr, AbstractQuery $query)
+    function it_finds_details($em, QueryBuilder $builder, Expr $expr, AbstractQuery $query)
     {
-        $collection->disable('softdeleteable')->shouldBeCalled();
-
         $builder->expr()->shouldBeCalled()->willReturn($expr);
         $expr->eq('o.id', ':id')->shouldBeCalled()->willReturn($expr);
 
@@ -56,21 +52,15 @@ class CustomerRepositorySpec extends ObjectBehavior
         $builder->getQuery()->shouldBeCalled()->willReturn($query);
         $query->getOneOrNullResult()->shouldBeCalled();
 
-
-        $collection->enable('softdeleteable')->shouldBeCalled();
-
         $this->findForDetailsPage(1);
     }
 
     function it_creates_paginator(
         $em,
-        $collection,
         QueryBuilder $builder,
         Expr $expr,
         AbstractQuery $query
     ) {
-        $collection->disable('softdeleteable')->shouldBeCalled();
-
         $em->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
         $builder->select('o')->shouldBeCalled()->willReturn($builder);
         $builder->from(Argument::any(), 'o', Argument::cetera())->shouldBeCalled()->willReturn($builder);
@@ -96,12 +86,11 @@ class CustomerRepositorySpec extends ObjectBehavior
         $builder->getQuery()->shouldBeCalled()->willReturn($query);
 
         $this->createFilterPaginator(
-            array(
+            [
                 'enabled' => true,
-                'query' => 'arnaud'
-            ),
-            array('name' => 'asc'),
-            true
+                'query' => 'arnaud',
+            ],
+            ['name' => 'asc']
         )->shouldHaveType(Pagerfanta::class);
     }
 }

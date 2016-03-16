@@ -28,12 +28,6 @@ sylius:
       min_length: Gatvės pavadinimas turi būti bent 2 simbolių ilgio|Gatvės pavadinimas turi būti bent 2 simbolių ilgio.
       not_blank: Įveskite gatvę.
     not_shippable: Šis adresas nėra tinkamas pristatymui.
-  country:
-    iso_name:
-      not_blank: Įveskite šalies ISO kodą.
-    name:
-      max_length: Šalies pavadinimas neturi būti ilgesnis nei 255 simboliai|Šalies pavadinimas neturi būti ilgesnis nei 255 simboliai.
-      not_blank: Įveskite šalies pavadinimą.
   province:
     name:
       max_length: Provincijos pavadinimas neturi būti ilgesnis negu 255 simboliai|Provincijos pavadinimas neturi būti ilgesnis negu 255 simboliai.

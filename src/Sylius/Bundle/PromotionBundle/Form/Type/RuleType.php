@@ -28,15 +28,15 @@ class RuleType extends AbstractConfigurationType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options = array())
+    public function buildForm(FormBuilderInterface $builder, array $options = [])
     {
         $builder
-            ->add('type', 'sylius_promotion_rule_choice', array(
+            ->add('type', 'sylius_promotion_rule_choice', [
                 'label' => 'sylius.form.rule.type',
-                'attr' => array(
+                'attr' => [
                     'data-form-collection' => 'update',
-                ),
-            ))
+                ],
+            ])
             ->addEventSubscriber(
                 new BuildRuleFormSubscriber($this->registry, $builder->getFormFactory(), $options['configuration_type'])
             )
@@ -50,9 +50,9 @@ class RuleType extends AbstractConfigurationType
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'configuration_type' => RuleInterface::TYPE_ITEM_TOTAL,
-        ));
+        ]);
     }
 
     /**

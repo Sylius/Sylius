@@ -18,7 +18,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  */
 interface ActionInterface extends ResourceInterface
 {
-    const TYPE_FIXED_DISCOUNT      = 'fixed_discount';
+    const TYPE_FIXED_DISCOUNT = 'fixed_discount';
     const TYPE_PERCENTAGE_DISCOUNT = 'percentage_discount';
 
     /**

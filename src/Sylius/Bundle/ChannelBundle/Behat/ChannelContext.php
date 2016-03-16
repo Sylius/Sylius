@@ -25,7 +25,7 @@ class ChannelContext extends DefaultContext
     public function assignChannelToProducts($code)
     {
         /** @var ChannelInterface $channel */
-        $channel = $this->getRepository('channel')->findOneBy(array('code' => $code));
+        $channel = $this->getRepository('channel')->findOneBy(['code' => $code]);
         /** @var ProductInterface[] $products */
         $products = $this->getRepository('product')->findAll();
         foreach ($products as $product) {
@@ -49,11 +49,11 @@ class ChannelContext extends DefaultContext
     public function channelHasFollowingProductsAssigned($code, TableNode $table)
     {
         /** @var ChannelInterface $channel */
-        $channel = $this->getRepository('channel')->findOneBy(array('code' => $code));
+        $channel = $this->getRepository('channel')->findOneBy(['code' => $code]);
 
         foreach ($table->getHash() as $product) {
             /** @var ProductInterface $product */
-            $product = $this->getRepository('product')->findOneBy(array('name' => $product));
+            $product = $this->getRepository('product')->findOneBy(['name' => $product]);
 
             $product->addChannel($channel);
         }
@@ -67,7 +67,7 @@ class ChannelContext extends DefaultContext
     public function assignChannelToPromotions($code)
     {
         /** @var ChannelInterface $channel */
-        $channel = $this->getRepository('channel')->findOneBy(array('code' => $code));
+        $channel = $this->getRepository('channel')->findOneBy(['code' => $code]);
         /** @var ChannelsAwareInterface[] $promotions */
         $promotions = $this->getRepository('promotion')->findAll();
         foreach ($promotions as $promotion) {
@@ -90,7 +90,7 @@ class ChannelContext extends DefaultContext
      */
     public function setupDefaultChannel()
     {
-        $this->thereIsChannel('DEFAULT-WEB', "Default", "localhost", "en_US", "EUR");
+        $this->thereIsChannel('DEFAULT-WEB', 'Default', 'localhost', 'en_US', 'EUR');
     }
 
     /**
@@ -119,7 +119,7 @@ class ChannelContext extends DefaultContext
      */
     public function channelHasFollowingConfiguration($code, TableNode $table)
     {
-        $channel = $this->getRepository('channel')->findOneBy(array('code' => $code));
+        $channel = $this->getRepository('channel')->findOneBy(['code' => $code]);
 
         foreach ($table->getHash() as $data) {
             $this->configureChannel(
@@ -146,13 +146,13 @@ class ChannelContext extends DefaultContext
     /**
      * @Given /^There is channel "([^""]*)" named "([^""]*)" for url "([^""]*)"$/
      */
-    public function thereIsChannel($code, $name, $url, $locales = null, $currencies = "EUR", $shippingMethods = null, $paymentMethos = null, $flush = true)
+    public function thereIsChannel($code, $name, $url, $locales = null, $currencies = 'EUR', $shippingMethods = null, $paymentMethos = null, $flush = true)
     {
         /* @var $channel ChannelInterface */
         $channel = $this->getFactory('channel')->createNew();
         $channel->setCode($code);
         $channel->setName($name);
-        $channel->setUrl($url);
+        $channel->setHostname($url);
 
         $this->configureChannel($channel, $locales, $currencies, $shippingMethods, $paymentMethos);
 
@@ -170,14 +170,14 @@ class ChannelContext extends DefaultContext
         if ($shippingMethodNames) {
             $shippingMethodNames = array_map('trim', explode(',', $shippingMethodNames));
             foreach ($shippingMethodNames as $shippingMethodName) {
-                $shippingMethod = $shippingMethods = $this->getRepository('shipping_method')->findOneBy(array('name' => $shippingMethodName));
+                $shippingMethod = $shippingMethods = $this->getRepository('shipping_method')->findOneBy(['name' => $shippingMethodName]);
                 $channel->addShippingMethod($shippingMethod);
             }
         }
 
         if ($paymentMethodNames) {
             $paymentMethodNames = array_map('trim', explode(',', $paymentMethodNames));
-            $paymentMethods = $this->getRepository('payment_method')->findBy(array('name' => $paymentMethodNames));
+            $paymentMethods = $this->getRepository('payment_method')->findBy(['name' => $paymentMethodNames]);
             foreach ($paymentMethods as $paymentMethod) {
                 $channel->addPaymentMethod($paymentMethod);
             }
@@ -185,7 +185,7 @@ class ChannelContext extends DefaultContext
 
         if ($localeCodes) {
             $localeCodes = array_map('trim', explode(',', $localeCodes));
-            $locales = $this->getRepository('locale')->findBy(array('code' => $localeCodes));
+            $locales = $this->getRepository('locale')->findBy(['code' => $localeCodes]);
             foreach ($locales as $locale) {
                 $channel->addLocale($locale);
             }
@@ -193,7 +193,7 @@ class ChannelContext extends DefaultContext
 
         if ($currencyCodes) {
             $currencyCodes = array_map('trim', explode(',', $currencyCodes));
-            $currencies = $this->getRepository('currency')->findBy(array('code' => $currencyCodes));
+            $currencies = $this->getRepository('currency')->findBy(['code' => $currencyCodes]);
             foreach ($currencies as $currency) {
                 $channel->addCurrency($currency);
             }
@@ -203,7 +203,7 @@ class ChannelContext extends DefaultContext
             $taxonomyNames = array_map('trim', explode(',', $taxonomyNames));
 
             foreach ($taxonomyNames as $taxonomyName) {
-                $taxonomy = $this->getRepository('taxonomy')->findOneBy(array('name' => $taxonomyName));
+                $taxonomy = $this->getRepository('taxonomy')->findOneBy(['name' => $taxonomyName]);
                 $channel->addTaxonomy($taxonomy);
             }
         }

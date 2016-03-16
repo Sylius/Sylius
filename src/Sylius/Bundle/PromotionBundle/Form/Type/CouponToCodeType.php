@@ -53,10 +53,10 @@ class CouponToCodeType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'data_class' => null,
-                'label'      => 'sylius.ui.code'
-            ))
+                'label' => 'sylius.ui.code',
+            ])
         ;
     }
 

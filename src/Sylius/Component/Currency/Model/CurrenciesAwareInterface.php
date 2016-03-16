@@ -45,4 +45,3 @@ interface CurrenciesAwareInterface
      */
     public function removeCurrency(CurrencyInterface $currency);
 }
-

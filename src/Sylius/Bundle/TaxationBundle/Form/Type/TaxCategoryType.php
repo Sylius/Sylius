@@ -26,13 +26,13 @@ class TaxCategoryType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', array(
+            ->add('name', 'text', [
                 'label' => 'sylius.form.tax_category.name',
-            ))
-            ->add('description', 'textarea', array(
+            ])
+            ->add('description', 'textarea', [
                 'required' => false,
-                'label'    => 'sylius.form.tax_category.description',
-            ))
+                'label' => 'sylius.form.tax_category.description',
+            ])
             ->addEventSubscriber(new AddCodeFormSubscriber())
         ;
     }

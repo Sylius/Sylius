@@ -26,12 +26,12 @@ class UserType extends BaseUserType
     {
         parent::buildForm($builder, $options);
         $builder
-            ->add('authorizationRoles', 'sylius_role_choice', array(
-                'label'    => 'sylius.form.user.roles',
+            ->add('authorizationRoles', 'sylius_role_choice', [
+                'label' => 'sylius.form.user.roles',
                 'multiple' => true,
                 'expanded' => true,
-                'required' => false
-            ))
+                'required' => false,
+            ])
         ;
     }
 }

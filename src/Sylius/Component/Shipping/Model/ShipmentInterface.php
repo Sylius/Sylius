@@ -13,21 +13,22 @@ namespace Sylius\Component\Shipping\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface ShipmentInterface extends ShippingSubjectInterface, ResourceInterface
+interface ShipmentInterface extends ResourceInterface, ShippingSubjectInterface, TimestampableInterface
 {
     // Shipment default states.
-    const STATE_CHECKOUT    = 'checkout';
-    const STATE_ONHOLD      = 'onhold';
-    const STATE_PENDING     = 'pending';
-    const STATE_READY       = 'ready';
+    const STATE_CHECKOUT = 'checkout';
+    const STATE_ONHOLD = 'onhold';
+    const STATE_PENDING = 'pending';
+    const STATE_READY = 'ready';
     const STATE_BACKORDERED = 'backordered';
-    const STATE_SHIPPED     = 'shipped';
-    const STATE_RETURNED    = 'returned';
-    const STATE_CANCELLED   = 'cancelled';
+    const STATE_SHIPPED = 'shipped';
+    const STATE_RETURNED = 'returned';
+    const STATE_CANCELLED = 'cancelled';
 
     /**
      * @return string
@@ -50,26 +51,26 @@ interface ShipmentInterface extends ShippingSubjectInterface, ResourceInterface
     public function setMethod(ShippingMethodInterface $method);
 
     /**
-     * @return Collection|ShipmentItemInterface[]
+     * @return Collection|ShipmentUnitInterface[]
      */
-    public function getItems();
+    public function getUnits();
 
     /**
-     * @param ShipmentItemInterface $item
+     * @param ShipmentUnitInterface $unit
      */
-    public function addItem(ShipmentItemInterface $item);
+    public function addUnit(ShipmentUnitInterface $unit);
 
     /**
-     * @param ShipmentItemInterface $item
+     * @param ShipmentUnitInterface $unit
      */
-    public function removeItem(ShipmentItemInterface $item);
+    public function removeUnit(ShipmentUnitInterface $unit);
 
     /**
-     * @param ShipmentItemInterface $item
+     * @param ShipmentUnitInterface $unit
      *
      * @return bool
      */
-    public function hasItem(ShipmentItemInterface $item);
+    public function hasUnit(ShipmentUnitInterface $unit);
 
     /**
      * @return string

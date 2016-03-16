@@ -14,7 +14,6 @@ sylius:
       street: רחוב
       province: מחוז
     country:
-      iso_name: שם ISO
       name: שם
       provinces: מחוזות
       select: בחירה
@@ -28,5 +27,6 @@ sylius:
         country: מדינה
         province: מחוז
         zone: איזור
-    zone_member_country:
-      country: מדינה
+      select: בחירה
+    zone_member:
+      select: בחירה

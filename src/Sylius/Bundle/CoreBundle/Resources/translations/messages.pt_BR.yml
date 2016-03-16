@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  checkout:
-    shipping_method:
-      not_blank: Por favor, selecione a forma de envio.
   form:
     action:
       add_product_configuration:
@@ -28,6 +25,7 @@ sylius:
     channel:
       taxonomies: Taxonomias
       locales: Localidades
+      currency_default: Moeda padrão
       shipping_methods: Métodos de envio
       payment_methods: Meios de pagamentos
     image:
@@ -50,11 +48,12 @@ sylius:
       restricted_zone: Zona restrita
       shipping_category: Categoria de expedição
       short_description: Breve descrição
-      tax_category: Categoria de imposto
       variant_selection_method: Método de seleção da variação
     product_filter:
       name: Nome
       sku: SKU
+    product_variant:
+      tax_category: Categoria de imposto
     settings:
       general:
         currency: Moeda padrão
@@ -106,3 +105,5 @@ sylius:
         value: Valor
     guest:
       email: Email
+    product_association_type:
+      name: Nome

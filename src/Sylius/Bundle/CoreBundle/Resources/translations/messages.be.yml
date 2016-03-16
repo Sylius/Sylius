@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  checkout:
-    shipping_method:
-      not_blank: Калі ласка, выберыце метад дастаўкі.
   form:
     action:
       add_product_configuration:
@@ -28,6 +25,7 @@ sylius:
     channel:
       taxonomies: Катэгорыі
       locales: Месцы размяшчэння
+      currency_default: Галоўная валюта
       shipping_methods: Метады дастаўкі
       payment_methods: Метады аплаты
     image:
@@ -50,11 +48,12 @@ sylius:
       restricted_zone: Забароненая зона
       shipping_category: Катэгорыя дастаўкі
       short_description: Кароткае апісанне
-      tax_category: Катэгорыя падатку
       variant_selection_method: Метад выбару варыянта
     product_filter:
       name: Імя
       sku: SKU
+    product_variant:
+      tax_category: Катэгорыя падатку
     settings:
       general:
         currency: Галоўная валюта
@@ -106,3 +105,5 @@ sylius:
         value: Значэнне
     guest:
       email: Email
+    product_association_type:
+      name: Імя

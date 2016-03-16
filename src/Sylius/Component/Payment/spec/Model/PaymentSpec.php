@@ -31,11 +31,6 @@ class PaymentSpec extends ObjectBehavior
         $this->shouldImplement(PaymentInterface::class);
     }
 
-    function it_implements_sylius_subject_interface()
-    {
-        $this->shouldImplement('Sylius\Component\Payment\Model\PaymentSubjectInterface');
-    }
-
     function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
@@ -48,8 +43,8 @@ class PaymentSpec extends ObjectBehavior
 
     function its_payment_method_is_mutable(PaymentMethodInterface $method)
     {
-      $this->setMethod($method);
-      $this->getMethod()->shouldReturn($method);
+        $this->setMethod($method);
+        $this->getMethod()->shouldReturn($method);
     }
 
     function it_has_no_source_by_default()
@@ -99,7 +94,7 @@ class PaymentSpec extends ObjectBehavior
         $this->shouldThrow('\InvalidArgumentException')->duringSetAmount(44.98 * 100);
         $this->shouldThrow('\InvalidArgumentException')->duringSetAmount('4498');
         $this->shouldThrow('\InvalidArgumentException')->duringSetAmount(round(44.98 * 100));
-        $this->shouldThrow('\InvalidArgumentException')->duringSetAmount(array(4498));
+        $this->shouldThrow('\InvalidArgumentException')->duringSetAmount([4498]);
         $this->shouldThrow('\InvalidArgumentException')->duringSetAmount(new \stdClass());
     }
 
@@ -156,16 +151,16 @@ class PaymentSpec extends ObjectBehavior
 
     function its_details_are_mutable()
     {
-        $this->setDetails(array('foo', 'bar'));
-        $this->getDetails()->shouldReturn(array('foo', 'bar'));
+        $this->setDetails(['foo', 'bar']);
+        $this->getDetails()->shouldReturn(['foo', 'bar']);
     }
 
     function its_details_could_be_set_from_traversable()
     {
-        $details = new \ArrayObject(array('foo', 'bar'));
+        $details = new \ArrayObject(['foo', 'bar']);
 
         $this->setDetails($details);
-        $this->getDetails()->shouldReturn(array('foo', 'bar'));
+        $this->getDetails()->shouldReturn(['foo', 'bar']);
     }
 
     function it_throws_exception_if_details_given_are_neither_array_nor_traversable()

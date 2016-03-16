@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\VariationBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
@@ -29,13 +38,13 @@ class OptionValueChoiceTypeSpec extends ObjectBehavior
     {
         $resolver->setDefaults(Argument::withKey('choice_list'))->shouldBeCalled()->willReturn($resolver);
 
-        $resolver->setRequired(array(
-            'option'
-        ))->shouldBeCalled()->willReturn($resolver);
+        $resolver->setRequired([
+            'option',
+        ])->shouldBeCalled()->willReturn($resolver);
 
-        $resolver->addAllowedTypes(array(
-            'option' => OptionInterface::class
-        ))->shouldBeCalled()->willReturn($resolver);
+        $resolver->addAllowedTypes([
+            'option' => OptionInterface::class,
+        ])->shouldBeCalled()->willReturn($resolver);
 
         $this->configureOptions($resolver);
     }

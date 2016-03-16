@@ -2,16 +2,41 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+  account:
+    home:
+      email: البريد الإلكتروني
+  association_type:
+    name: الاسم
   address:
     country: البلد
     firstname: الاسم الأول
     lastname: اسم العائلة
+  archetype:
+    name: الاسم
+  block:
+    imagine:
+      label: ملصق
+      publishable: تم النشر
+    simple:
+      label: ملصق
+      publishable: تم النشر
+    slideshow:
+      publishable: تم النشر
+    string:
+      label: ملصق
+      publishable: تم النشر
   breadcrumb:
     country:
       index: البلدان
+    menu_node:
+      index: عقدة القائمة
     new: جديد
     page:
       index: الصفحات
+    route:
+      index: طرق
+  channel:
+    name: الاسم
   checkout:
     finalize:
       address:
@@ -19,14 +44,23 @@ sylius:
         lastname: اسم العائلة
       product:
         name: الاسم
+  contact_request:
+    email: البريد الإلكتروني
+    firstName: الاسم الأول
+    lastName: اسم العائلة
+    message: الرسالة
+    topic: الموضوع
   country:
     index_header: البلدان
     name: الاسم
-  role:
-    name: الاسم
   currency:
-    name: الاسم
     exchange_rate: سعر الصرف
+    name: الاسم
+  customer:
+    email: البريد الإلكتروني
+    first_name: الاسم الأول
+    last_name: اسم العائلة
+    phone_number: رقم الهاتف
   form:
     login:
       email: البريد الإلكتروني
@@ -41,30 +75,50 @@ sylius:
     name: الاسم
   locale:
     name: الاسم
+  menu:
+    publishable: تم النشر
+  menu_node:
+    index_header: عقدة القائمة
   "no": false
-  route:
-    name: الاسم
-  shipment:
-    name: الاسم
-  channel:
-    name: الاسم
   page:
     index_header: الصفحات
+    publishable: تم النشر
+    routes: طرق
   password: كلمة السر
   payment:
     state:
       new: جديد
   payment_method:
     name: الاسم
+  pricing:
+    volume_based:
+      button:
+        add: اضافة
   product:
     name: الاسم
+  product_attribute:
+    name: الاسم
+  product_association:
+    name: الاسم
+  product_option:
+    name: الاسم
+    presentation: تقديم
   promotion:
     name: الاسم
   report:
     name: الاسم
+  role:
+    name: الاسم
+  route:
+    index_header: طرق
+    name: الاسم
+  shipment:
+    name: الاسم
   shipping_category:
     name: الاسم
   shipping_method:
+    name: الاسم
+  stockable:
     name: الاسم
   tax_category:
     name: الاسم
@@ -74,14 +128,10 @@ sylius:
     name: الاسم
   taxonomy:
     name: الاسم
-  customer:
+  ui:
     email: البريد الإلكتروني
-    first_name: الاسم الأول
-    last_name: اسم العائلة
+    name: الاسم
   "yes": true
   zone:
     name: الاسم
-  contact_request:
-    firstName: الاسم الأول
-    lastName: اسم العائلة
-    email: البريد الإلكتروني
+    scope: نطاق

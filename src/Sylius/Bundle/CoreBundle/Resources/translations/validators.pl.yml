@@ -2,6 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+  checkout:
+    shipping_method:
+      not_blank: Proszę wybrać metodę dostawy.
   locale:
     code:
       not_blank: Proszę podać kod ISO języka.
@@ -13,11 +16,8 @@ sylius:
     price:
       min: Cena nie może być ujemna.
       not_blank: Proszę podać cenę.
-sylius_shipping:
-  method:
-    zone:
-      not_blank: Proszę wybrać strefę dla metody wysyłki.
-sylius_taxation:
-  rate:
-    zone:
-      not_blank: Proszę wybrać strefę opodatkowania.
+    original_price:
+      min: Oryginalna cena nie może być ujemna.
+  product_translation:
+    short_description:
+      max: 'Krótki opis nie może być dłuższy niż {{ limit }} znaków.'

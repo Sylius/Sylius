@@ -1,6 +1,5 @@
 <?php
 
-
 /*
  * This file is part of the Sylius package.
  *
@@ -23,11 +22,11 @@ class PaymentMethodRepository extends TranslatableResourceRepository implements 
     /**
      * {@inheritdoc}
      */
-    public function getQueryBuidlerForChoiceType(array $options)
+    public function getQueryBuilderForChoiceType(array $options)
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
 
-        if (!$options['disabled']) {
+        if (isset($options['disabled']) && !$options['disabled']) {
             $queryBuilder->where('method.enabled = true');
         }
 

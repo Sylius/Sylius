@@ -12,23 +12,15 @@
 namespace Sylius\Component\Mailer\Model;
 
 use Sylius\Component\Resource\Model\CodeAwareInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\ToggleableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface EmailInterface extends CodeAwareInterface, TimestampableInterface
+interface EmailInterface extends CodeAwareInterface, ResourceInterface, TimestampableInterface, ToggleableInterface
 {
-    /**
-     * @return bool
-     */
-    public function isEnabled();
-
-    /**
-     * @param bool $enabled
-     */
-    public function setEnabled($enabled);
-
     /**
      * @return string
      */

@@ -11,48 +11,43 @@
 
 namespace Sylius\Component\Addressing\Matcher;
 
-use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * Default zone matcher.
- *
  * This implementation can match addresses against zones by country and province.
  * It also handles sub-zones.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
 class ZoneMatcher implements ZoneMatcherInterface
 {
     /**
-     * Zone repository.
-     *
-     * @var ObjectRepository
+     * @var RepositoryInterface
      */
-    protected $repository;
+    protected $zoneRepository;
 
     /**
      * Zone matching priorities.
      *
      * @var array
      */
-    protected $priorities = array(
+    protected $priorities = [
         ZoneInterface::TYPE_PROVINCE,
         ZoneInterface::TYPE_COUNTRY,
         ZoneInterface::TYPE_ZONE,
-    );
+    ];
 
     /**
-     * Constructor.
-     *
-     * @param ObjectRepository $repository
+     * @param RepositoryInterface $zoneRepository
      */
-    public function __construct(ObjectRepository $repository)
+    public function __construct(RepositoryInterface $zoneRepository)
     {
-        $this->repository = $repository;
+        $this->zoneRepository = $zoneRepository;
     }
 
     /**
@@ -60,9 +55,10 @@ class ZoneMatcher implements ZoneMatcherInterface
      */
     public function match(AddressInterface $address, $scope = null)
     {
-        $zones = array();
+        $zones = [];
 
-        foreach ($this->getZones($scope) as $zone) {
+        /* @var ZoneInterface $zone */
+        foreach ($availableZones = $this->getZones($scope) as $zone) {
             if ($this->addressBelongsToZone($address, $zone)) {
                 $zones[$zone->getType()] = $zone;
             }
@@ -82,7 +78,7 @@ class ZoneMatcher implements ZoneMatcherInterface
      */
     public function matchAll(AddressInterface $address, $scope = null)
     {
-        $zones = array();
+        $zones = [];
 
         foreach ($this->getZones($scope) as $zone) {
             if ($this->addressBelongsToZone($address, $zone)) {
@@ -94,12 +90,10 @@ class ZoneMatcher implements ZoneMatcherInterface
     }
 
     /**
-     * Checks if address belongs to zone.
-     *
      * @param AddressInterface $address
      * @param ZoneInterface    $zone
      *
-     * @return Boolean
+     * @return bool
      */
     protected function addressBelongsToZone(AddressInterface $address, ZoneInterface $zone)
     {
@@ -113,28 +107,26 @@ class ZoneMatcher implements ZoneMatcherInterface
     }
 
     /**
-     * Checks if address belongs to particular zone member.
-     *
      * @param AddressInterface    $address
      * @param ZoneMemberInterface $member
      *
-     * @return Boolean
+     * @return bool
      *
      * @throws \InvalidArgumentException
      */
     protected function addressBelongsToZoneMember(AddressInterface $address, ZoneMemberInterface $member)
     {
-        $type = $member->getBelongsTo()->getType();
-
-        switch ($type) {
+        switch ($type = $member->getBelongsTo()->getType()) {
             case ZoneInterface::TYPE_PROVINCE:
-                return null !== $address->getProvince() && $address->getProvince() === $member->getProvince();
+                return null !== $address->getProvinceCode() && $address->getProvinceCode() === $member->getCode();
 
             case ZoneInterface::TYPE_COUNTRY:
-                return null !== $address->getCountry() && $address->getCountry() === $member->getCountry();
+                return null !== $address->getCountryCode() && $address->getCountryCode() === $member->getCode();
 
             case ZoneInterface::TYPE_ZONE:
-                return $this->addressBelongsToZone($address, $member->getZone());
+                $zone = $this->getZoneByCode($member->getCode());
+
+                return $this->addressBelongsToZone($address, $zone);
 
             default:
                 throw new \InvalidArgumentException(sprintf('Unexpected zone type "%s".', $type));
@@ -142,18 +134,26 @@ class ZoneMatcher implements ZoneMatcherInterface
     }
 
     /**
-     * Gets all zones
-     *
      * @param string|null $scope
      *
-     * @return array $zones
+     * @return array
      */
     protected function getZones($scope = null)
     {
         if (null === $scope) {
-            return $this->repository->findAll();
+            return $this->zoneRepository->findAll();
         }
 
-        return $this->repository->findBy(array('scope' => $scope));
+        return $this->zoneRepository->findBy(['scope' => $scope]);
+    }
+
+    /**
+     * @param string $code
+     *
+     * @return ZoneInterface
+     */
+    protected function getZoneByCode($code)
+    {
+        return $this->zoneRepository->findOneBy(['code' => $code]);
     }
 }

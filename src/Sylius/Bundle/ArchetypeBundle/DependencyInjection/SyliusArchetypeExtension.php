@@ -52,9 +52,9 @@ class SyliusArchetypeExtension extends AbstractResourceExtension
             }
         }
 
-        $configFiles = array(
+        $configFiles = [
             'services.xml',
-        );
+        ];
 
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
@@ -71,7 +71,7 @@ class SyliusArchetypeExtension extends AbstractResourceExtension
      */
     private function resolveResources(array $resources, ContainerBuilder $container)
     {
-        $subjects = array();
+        $subjects = [];
 
         foreach ($resources as $subject => $parameters) {
             $subjects[$subject] = $parameters;
@@ -79,7 +79,7 @@ class SyliusArchetypeExtension extends AbstractResourceExtension
 
         $container->setParameter('sylius.archetype.subjects', $subjects);
 
-        $resolvedResources = array();
+        $resolvedResources = [];
 
         foreach ($resources as $subjectName => $subjectConfig) {
             $this->createPrototypeBuilder($container, $subjectName);
@@ -94,7 +94,6 @@ class SyliusArchetypeExtension extends AbstractResourceExtension
         return $resolvedResources;
     }
 
-
     /**
      * Create prototype builder for subject.
      *
@@ -103,11 +102,11 @@ class SyliusArchetypeExtension extends AbstractResourceExtension
      */
     private function createPrototypeBuilder(ContainerBuilder $container, $subjectName)
     {
-        $builderDefintion = new Definition(ArchetypeBuilder::class);
-        $builderDefintion
-            ->setArguments(array(new Reference(sprintf('sylius.factory.%s_attribute_value', $subjectName))))
+        $builderDefinition = new Definition(ArchetypeBuilder::class);
+        $builderDefinition
+            ->setArguments([new Reference(sprintf('sylius.factory.%s_attribute_value', $subjectName))])
         ;
 
-        $container->setDefinition('sylius.builder.' . $subjectName . '_archetype', $builderDefintion);
+        $container->setDefinition('sylius.builder.'.$subjectName.'_archetype', $builderDefinition);
     }
 }

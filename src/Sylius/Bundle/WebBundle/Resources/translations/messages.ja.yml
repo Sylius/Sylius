@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  emails:
-    order_confirmation:
-      subject: ご注文を承りました。
   account:
     address:
       action:
@@ -18,19 +15,21 @@ sylius:
       list: sylius.account.address.list
       update: sylius.account.address.update
     home:
-      outline: お客様情報の確認と変更を行うことができます。
+      email: メールアドレス
       since: ご登録日時
       welcome: お客様専用ページへようこそ
     order:
       created_at: sylius.account.order.created_at
       details: sylius.account.order.details
-      empty: sylius.account.order.empty
       invoice: sylius.account.order.invoice
       list: sylius.account.order.list
+      number: 注文番号
       placed_at: sylius.account.order.placed_at
       tracking_number: sylius.account.order.tracking_number
     title: マイアカウント
   add_to_cart: カートに入れる
+  association_type:
+    create: 作成
   address:
     city: 市町村
     company: 会社名
@@ -45,6 +44,9 @@ sylius:
     info: 情報
     success: 成功
     warning: 警告
+  archetype:
+    options: sylius.breadcrumb.option.index
+    updated_at: 最終更新日
   backend:
     alert:
       info: 情報
@@ -64,7 +66,6 @@ sylius:
       orders_this_month: sylius.backend.statistics.orders_this_month
       registrations_this_month: sylius.backend.statistics.registrations_this_month
       sales_this_month: sylius.backend.statistics.sales_this_month
-  backend_welcome: sylius.backend_welcome
   block:
     imagine:
       updated_at: 最終更新日
@@ -133,6 +134,9 @@ sylius:
       unit_price: 単価
     summary_header: カートを見る
     total_items: '%count%個の商品'
+  channel:
+    currency_default: デフォルトの通貨
+    updated_at: 最終更新日
   checkout:
     addressing:
       header: 配送先入力
@@ -180,27 +184,33 @@ sylius:
       register: 登録
     shipping:
       header: 発送方法
+  contact_request:
+    email: メールアドレス
+    firstName: 名
+    lastName: 姓
+    updated_at: 最終更新日
+  contact_topic:
+    updated_at: 最終更新日
   country:
     add_province: 都道府県を設定する
     create: 国を登録する
     create_header: 国を登録
     index_header: 国の管理
-    iso_name: ISO略称
     manage: 国の管理
     name: 国名
-    no_results: 国は登録されていません。
     show_header: 国の詳細
     update_header: 国を編集
-  email:
-    updated_at: 最終更新日
   create: 作成
-  delete: 削除
-  edit: 編集
-  permission:
-    updated_at: 最終更新日
-  role:
-    updated_at: 最終更新日
   currency:
+    updated_at: 最終更新日
+  customer:
+    billing_address: ご請求先住所
+    email: メールアドレス
+    first_name: 名
+    last_name: 姓
+    shipping_address: 配送先住所
+  delete: sylius.account.address.action.delete
+  email:
     updated_at: 最終更新日
   filter: F絞り込む
   form:
@@ -233,7 +243,6 @@ sylius:
     created_at: 登録日時
     inventory_state: 在庫ステータス
     name: 商品名
-    no_results: 在庫情報がありません。
     shipping_state: 出荷ステータス
     updated_at: 最終更新日
   locale:
@@ -242,15 +251,9 @@ sylius:
   login_header: 管理
   manage: 管理
   meta:
-    frontend_description: SyliusはSymfony2フレームワークを使用した先進的なPHPのeコマースソフトウェアです。
-    frontend_keywords: sylius, eコマース, symfony2, ショップ, カート, ネットショップ
     frontend_title: Symfony2のeコマース、Sylius
   newest: 新着商品
   "no": false
-  product_option:
-    manage: 商品オプションの管理
-    name: 商品名
-    updated_at: 最終更新日時
   order:
     billing_address: 請求先
     create: 注文を登録
@@ -270,6 +273,7 @@ sylius:
     payment_state: 入金状況
     payment_states:
       balance_due: 未入金
+    promotion_coupons: sylius.breadcrumb.promotion_coupon.index
     promotion_total: プロモーション値引き額合計
     recent_header: 最近の注文
     shipment_state: 発送状況
@@ -279,27 +283,11 @@ sylius:
     shipping_address: 配送先
     shipping_charges: 送料
     shipping_total: 送料合計
+    show_header: 注文
     tax_total: 税の合計
     taxes: 税
     total: 総合計
     update_header: 注文を編集
-    promotion_coupons: sylius.breadcrumb.promotion_coupon.index
-  shipment:
-    created_at: 登録日時
-    index_header: 出荷管理
-    inventory_state: 在庫ステータス
-    manage: 出荷管理
-    method: 発送方法
-    modified: 更新日時
-    name: 配送名
-    no_items: 該当する商品がありません。
-    no_results: 該当する出荷がありません。
-    order: 注文
-    show_header: 出荷の詳細
-    state: 出荷ステータス
-    updated_at: 最終更新日時
-  channel:
-    updated_at: 最終更新日
   order_item:
     product: sylius.order_item.product
     quantity: 数量
@@ -309,7 +297,6 @@ sylius:
   out_of_stock: 在庫切れ
   password: パスワード
   payment:
-    order: 注文
     amount: 請求金額合計
     create: 入金を登録する
     create_header: 入金を登録
@@ -317,19 +304,21 @@ sylius:
     index_header: 入金管理
     manage: sylius.payment.manage
     method: お支払方法
-    no_results: 入金情報が登録されていません。
+    order: 注文
     update_header: 入金を編集
     updated_at: 最終更新日時
   payment_method:
     create: 支払い方法を登録する
     create_header: 支払い方法を登録
-    enabled: 有効
-    gateway: 決済ゲートウェイ
     index_header: 支払い方法の管理
     name: 支払い方法名
-    no_results: 支払い方法は登録されていません。
     update_header: 支払い方法の編集
     updated_at: 最終更新日時
+  permission:
+    updated_at: 最終更新日
+  pricing:
+    volume_based:
+      price: 価格
   product:
     available_on: 入荷日
     available_on_demand: 即納
@@ -345,7 +334,6 @@ sylius:
     no_description: '<i>説明未入力</i>'
     no_images: 画像未登録
     no_options: 商品オプション未設定
-    no_results: 該当する商品がありません。
     no_short_description: '<i>概要未入力</i>'
     no_sku: '<i>SKU未登録</i>'
     no_tax_category: 税区分未設定
@@ -354,7 +342,6 @@ sylius:
     price: 販売価格
     show: 詳細
     show_header: '商品詳細<small>"<strong>%product%</strong>"</small>'
-    show_in_store: 販売ページへ
     stock: 現在の在庫
     tabs:
       categorization: カテゴリ設定
@@ -367,11 +354,18 @@ sylius:
     variant_selection_method: バリエーション選択方法
     volume_based:
       price: 価格
+  product_attribute:
+    updated_at: 最終更新日
+  product_association:
+    create_header: sylius.backend.quick_links.add_product
+    updated_at: 最終更新日
+  product_option:
+    manage: 商品オプションの管理
+    updated_at: 最終更新日
   promotion:
     actions: 値引き設定
     add_action: 値引き設定を追加
     add_rule: 条件を追加
-    coupon_based: クーポン利用
     create: プロモーションを登録する
     create_header: プロモーションを登録
     created_at: 登録日時
@@ -382,7 +376,6 @@ sylius:
     index_header: 現在のプロモーション
     manage: プロモーション管理
     name: プロモーション
-    no_results: 該当するプロモーションがありません。
     rules: 条件
     show_header: プロモーション詳細
     starts_at: 開始日
@@ -400,23 +393,16 @@ sylius:
     generate_header: クーポンを作成
     index: クーポン一覧
     index_header: sylius.promotion_coupon.index_header
-    no_results: 該当するクーポンがありません。
     update_header: クーポンの編集
   promotion_rule:
     configuration: 条件設定
     type: 条件タイプ
-  product_attribute:
-    name: 商品名
-    updated_at: 最終更新日時
-  archetype:
-    name: 商品名
-    updated_at: 最終更新日時
   province:
     provinces: 都道府県
-  remember_me: 次回から自動ログイン
   report:
-    details: 詳細
     manage: 管理
+  role:
+    updated_at: 最終更新日
   save_changes: 保存
   search: 検索
   security:
@@ -425,6 +411,18 @@ sylius:
   settings:
     general_header: 一般的な設定
     taxation_header: 税設定
+  shipment:
+    created_at: 登録日時
+    index_header: 出荷管理
+    inventory_state: 在庫ステータス
+    manage: 出荷管理
+    method: 発送方法
+    modified: 更新日時
+    name: 配送名
+    order: 注文
+    show_header: 出荷の詳細
+    state: 出荷ステータス
+    updated_at: 最終更新日時
   shipment_category:
     manage: 配送カテゴリ管理
   shipping_address: 配送先住所
@@ -434,7 +432,6 @@ sylius:
     index_header: 配送カテゴリ
     manage: 配送カテゴリ管理
     name: 配送カテゴリ名
-    no_results: 配送カテゴリが登録されていません。
     update_header: 配送カテゴリの編集
     updated_at: 最終更新日時
   shipping_method:
@@ -442,25 +439,18 @@ sylius:
     category: 配送カテゴリ
     create: 配送方法を登録する
     create_header: 配送方法を登録
-    enabled: 有効
     index_header: 配送方法管理
     manage: 配送方法管理
     name: 配送方法名
-    no_results: 配送方法は登録されていません。
     show_header: 配送方法詳細
     update_header: 配送方法の編集
     updated_at: 最終更新日時
     zone: 配送先ゾーン
   shop_by: 商品検索
-  show: 詳細
   show_all: sylius.show_all
   stockable:
     index_header: 在庫照会
-    name: 商品名
-    no_results: 表示する在庫商品がありません。
-    on_hand: 在庫数
-    sku: SKU
-    updated_at: 最終更新日時
+    updated_at: 最終更新日
   tax_category:
     create: 税区分を登録する
     create_header: 税区分を登録
@@ -469,7 +459,6 @@ sylius:
     manage: 税区分管理
     name: 税区分名
     no_description: 説明未設定
-    no_results: 税区分は登録されていません。
     update_header: 税区分の編集
     updated_at: 最終更新日時
   tax_rate:
@@ -478,11 +467,9 @@ sylius:
     category: 税区分
     create: 税を登録する
     create_header: 税を登録
-    included_in_price: 税込
     index_header: 税管理
     manage: 税管理
     name: 名称
-    no_results: 税は登録されていません。
     show_header: 税詳細
     update_header: 税の編集
     updated_at: 最終更新日時
@@ -493,7 +480,6 @@ sylius:
     image: 画像を選択
     name: カテゴリ名
     no_image: 画像未設定
-    no_results: 該当するカテゴリがありません。
     update_header: カテゴリを編集
   taxonomy:
     create: カテゴリを登録する
@@ -503,23 +489,19 @@ sylius:
     manage: sylius.taxonomy.manage
     name: カテゴリ名
     no_image: 画像未設定
-    no_results: 該当するカテゴリがありません。
     show_header: 'カテゴリ詳細： <small><strong>%name%</strong></small>'
     update_header: カテゴリを編集
-  customer:
-    billing_address: ご請求先住所
-    first_name: 名
-    last_name: 姓
-    shipping_address: 配送先住所
+  ui:
+    change_password: パスワードの変更
+    email: メールアドレス
+    login: ログイン
+    logout: ログアウト
+    register: お客様登録
   user:
-    create: ユーザーを登録する
     create_header: ユーザーを登録
-    enabled: 認証
     general_info: 'ユーザー"%username%"の概要'
     index_header: 顧客管理
     last_login: 最終ログイン日時
-    manage: 顧客管理
-    no_results: 該当する顧客がありません。
     recent_header: 新着の顧客
     register:
       button: お客様登録
@@ -534,7 +516,6 @@ sylius:
     create_header: バリエーション登録
     delete_image: 画像を削除
     last_update: 最終更新日時
-    no_results: 該当するバリエーションがありません。
     options: オプション
     price: 価格
     stock: 現在の在庫数
@@ -547,15 +528,8 @@ sylius:
     index_header: ゾーン管理
     manage: ゾーン管理
     name: ゾーン名
-    no_results: ゾーンが登録されていません。
     show_header: ゾーン詳細
     type: タイプ
     update_header: ゾーンの編集
   zone_member:
     members: 地域
-  contact_topic:
-    updated_at: 最終更新日
-  contact_request:
-    firstName: 名
-    lastName: 姓
-    updated_at: 最終更新日

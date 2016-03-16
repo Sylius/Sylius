@@ -18,25 +18,24 @@ sylius:
       contains_product_configuration:
         variants: Proizvodi
         exclude: Ne uključuje
-      item_count_configuration:
+      cart_quantity_configuration:
         count: Brojač
-        equal: Jednak
       item_total_configuration:
         amount: Iznosu
-        equal: Jednak
       nth_order_configuration:
         nth: N-ti
       shipping_country_configuration:
         country: Država
       type: Tip
     coupon:
-      code: Kod za popust
       usage_limit: Ograničenje koda za popust
     coupon_generate_instruction:
       amount: Iznos
       usage_limit: Ograničenje generiranih kodova
     promotion:
       actions: Akcije
+      add_action: Dodajte akciju
+      add_rule: Dodajte pravilo
       coupon_based: Promocija bazirana na kuponima za popust
       description: Opis
       ends_at: Završava

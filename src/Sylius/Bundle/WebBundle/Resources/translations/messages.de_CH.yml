@@ -2,12 +2,16 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  emails:
-    order_confirmation:
-      subject: Vielen Dank für Ihre Bestellung!
+  account:
+    order:
+      number: Nummer
+  association_type:
+    name: Name
   address:
     firstname: Vorname
     street: Strasse / Nr.
+  archetype:
+    name: Name
   block:
     imagine:
       id: ID
@@ -30,6 +34,12 @@ sylius:
   breadcrumb:
     role:
       index: Rollen
+  channel:
+    code: Code
+    currency_default: Standardwährung
+    enabled: Aktiviert
+    id: ID
+    name: Name
   checkout:
     finalize:
       address:
@@ -39,26 +49,34 @@ sylius:
         billing_address: Rechnungsadresse
       product:
         name: Name
+  contact_request:
+    firstName: Vorname
+    id: ID
+    message: Nachricht
+    topic: Betreff
+  contact_topic:
+    id: ID
+    title: Titel
   country:
-    id: ID
-    name: Name
     enabled: Aktiviert
-  email:
-    code: Code
-  permission:
-    code: Code
-    id: ID
-  role:
-    code: Code
     id: ID
     name: Name
-    index_header: Rollen
   currency:
     code: Code
+    enabled: Aktiviert
     id: ID
     name: Name
+  customer:
+    billing_address: Rechnungsadresse
+    first_name: Vorname
+    id: ID
+    phone_number: Telefonnummber
+  email:
+    code: Code
     enabled: Aktiviert
   form:
+    cart:
+      coupon: Gutschein
     profile:
       firstName: Vorname
   group:
@@ -69,39 +87,26 @@ sylius:
     name: Name
     sku: Bestandseinheit
   locale:
-    id: ID
-    name: Name
     code: Code
     enabled: Aktiviert
+    id: ID
+    name: Name
   menu:
     id: ID
     title: Titel
   menu_node:
     id: ID
     title: Titel
+  metadata:
+    id: ID
   "no": false
   order:
     billing_address: Rechnungsadresse
     id: ID
     number: Nummer
-    adjustments:
-      label: Bezeichnung
-  route:
-    id: ID
-    name: Name
-    title: Titel
-  redirect_route:
+  review:
     id: ID
     title: Titel
-  shipment:
-    id: ID
-    name: Name
-    sku: Bestandseinheit
-  channel:
-    code: Code
-    enabled: Aktiviert
-    id: ID
-    name: Name
   order_item:
     unit_price: Stückpreis
   page:
@@ -113,6 +118,9 @@ sylius:
   payment_method:
     id: ID
     name: Name
+  permission:
+    code: Code
+    id: ID
   product:
     name: Name
     restricted_zone: Beschränktes Versandgebiet
@@ -120,21 +128,50 @@ sylius:
     sku: Bestandseinheit
     tax_category: Steuerkategorie
     variant_selection_method: Varianten
+  product_attribute:
+    code: Code
+    name: Name
+  product_association:
+    code: Code
+    name: Name
+  product_option:
+    name: Name
+    presentation: Präsentation
   promotion:
     id: ID
     name: Name
   promotion_coupon:
     code: Code
+  redirect_route:
+    id: ID
+    title: Titel
   report:
-    name: Name
     code: Code
+    id: ID
+    name: Name
+  role:
+    code: Code
+    id: ID
+    index_header: Rollen
+    name: Name
+  route:
+    id: ID
+    name: Name
+    title: Titel
+  shipment:
+    id: ID
+    name: Name
+    sku: Bestandseinheit
   shipping_category:
     id: ID
     name: Name
   shipping_method:
+    enabled: Aktiviert
     id: ID
     name: Name
     zone: Zone
+  stockable:
+    name: Name
   tax_category:
     id: ID
     name: Name
@@ -145,9 +182,9 @@ sylius:
     name: Name
   taxonomy:
     name: Name
-  customer:
-    billing_address: Rechnungsadresse
-    first_name: Vorname
+  ui:
+    code: Code
+    name: Name
     id: ID
   user:
     id: ID
@@ -157,11 +194,3 @@ sylius:
   zone:
     name: Name
     scope: Umfang
-  contact_topic:
-    id: ID
-    title: Titel
-  contact_request:
-    id: ID
-    firstName: Vorname
-    message: Nachricht
-    topic: Betreff

@@ -35,9 +35,9 @@ class LoadApiData extends DataFixture
             'api@example.com',
             'api',
             true,
-            array('ROLE_API')
+            ['ROLE_API_ACCESS']
         );
-        $user->addAuthorizationRole($this->get('sylius.repository.role')->findOneBy(array('code' => 'administrator')));
+        $user->addAuthorizationRole($this->get('sylius.repository.role')->findOneBy(['code' => 'administrator']));
 
         $manager->persist($user);
         $manager->flush();
@@ -49,13 +49,13 @@ class LoadApiData extends DataFixture
         $client->setRandomId('demo_client');
         $client->setSecret('secret_demo_client');
         $client->setAllowedGrantTypes(
-            array(
+            [
                 OAuth2::GRANT_TYPE_USER_CREDENTIALS,
                 OAuth2::GRANT_TYPE_IMPLICIT,
                 OAuth2::GRANT_TYPE_REFRESH_TOKEN,
                 OAuth2::GRANT_TYPE_AUTH_CODE,
                 OAuth2::GRANT_TYPE_CLIENT_CREDENTIALS,
-            )
+            ]
         );
         $clientManager->updateClient($client);
     }
@@ -69,7 +69,7 @@ class LoadApiData extends DataFixture
      *
      * @return UserInterface
      */
-    protected function createUser($email, $password, $enabled = true, array $roles = array('ROLE_USER'), $currency = 'EUR')
+    protected function createUser($email, $password, $enabled = true, array $roles = ['ROLE_USER'], $currency = 'EUR')
     {
         $canonicalizer = $this->get('sylius.user.canonicalizer');
 

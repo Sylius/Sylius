@@ -1,8 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-auto: auto
-route: Ruta
 sylius:
   form:
     action_block:
@@ -10,15 +8,20 @@ sylius:
       id: Id
       publish_end_date: Publicar la fecha de finalización
       publish_start_date: Publicar la fecha de inicio
+      publishable: Publicado
     imagine_block:
       filter: Filtrar
       image: Imagen
       internal_name: Nombre interno
       label: Etiqueta
+      link_url: Enlace
       parent: Padre
       publish_end_date: Publicar la fecha de finalización
       publish_start_date: Publicar la fecha de inicio
+      publishable: Publicado
+      slideshow_small: Presentación pequeña (lateral)
       slideshow_medium: Presentación de diapositivas medio (Contenido)
+      slideshow_large: Presentación grande (pantalla completa)
     menu:
       childrens: Hijos
       display: Visualización
@@ -28,6 +31,7 @@ sylius:
       parent: Padre
       publish_end_date: Publicar la fecha de finalización
       publish_start_date: Publicar la fecha de inicio
+      publishable: Publicado
       route: Ruta
       uri: URI
     menu_block:
@@ -36,6 +40,7 @@ sylius:
       name: Nombre
       publish_end_date: Publicar la fecha de finalización
       publish_start_date: Publicar la fecha de inicio
+      publishable: Publicado
     menu_node_block:
       content: Contenido
       display: Visualización
@@ -45,6 +50,7 @@ sylius:
       link_type: Tipo de Enlace
       publish_end_date: Publicar la fecha de finalización
       publish_start_date: Publicar la fecha de inicio
+      publishable: Publicado
       route: Ruta
       uri: URI
     redirect_route:
@@ -57,6 +63,7 @@ sylius:
       id: Id
       publish_end_date: Publicar la fecha de finalización
       publish_start_date: Publicar la fecha de inicio
+      publishable: Publicado
       title: Título
     route:
       content: Contenido
@@ -68,13 +75,16 @@ sylius:
       parent: Padre
       publish_end_date: Publicar la fecha de finalización
       publish_start_date: Publicar la fecha de inicio
+      publishable: Publicado
       title: Título
     slideshow_block:
+      add_slide: Añadir diapositiva
       childrens: Hijos
       internal_name: Nombre interno
       parent: Padre
       publish_end_date: Publicar la fecha de finalización
       publish_start_date: Publicar la fecha de inicio
+      publishable: Publicado
       title: Título
     static_content:
       body: Cuerpo
@@ -84,6 +94,7 @@ sylius:
       parent: Padre
       publish_end_date: Publicar la fecha de finalización
       publish_start_date: Publicar la fecha de inicio
+      publishable: Publicado
       routes: Rutas
       title: Título
     string_block:
@@ -92,3 +103,4 @@ sylius:
       name: Nombre
       publish_end_date: Publicar la fecha de finalización
       publish_start_date: Publicar la fecha de inicio
+      publishable: Publicado

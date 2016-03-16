@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection;
 
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Factory\Factory;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -75,7 +75,7 @@ class Configuration implements ConfigurationInterface
                                 ->children()
                                     ->arrayNode('default')
                                         ->prototype('scalar')->end()
-                                        ->defaultValue(array())
+                                        ->defaultValue([])
                                     ->end()
                                 ->end()
                             ->end()
@@ -101,13 +101,13 @@ class Configuration implements ConfigurationInterface
                                         ->children()
                                             ->arrayNode('default')
                                                 ->prototype('scalar')->end()
-                                                ->defaultValue(array())
+                                                ->defaultValue([])
                                             ->end()
                                         ->end()
                                     ->end()
                                     ->arrayNode('fields')
                                         ->prototype('scalar')->end()
-                                        ->defaultValue(array())
+                                        ->defaultValue([])
                                     ->end()
                                 ->end()
                             ->end()
@@ -132,7 +132,7 @@ class Configuration implements ConfigurationInterface
                         ->variableNode('limit')->defaultNull()->end()
                         ->arrayNode('allowed_paginate')
                             ->prototype('integer')->end()
-                            ->defaultValue(array(10, 20, 30))
+                            ->defaultValue([10, 20, 30])
                         ->end()
                         ->integerNode('default_page_size')->defaultValue(10)->end()
                         ->booleanNode('sortable')->defaultFalse()->end()

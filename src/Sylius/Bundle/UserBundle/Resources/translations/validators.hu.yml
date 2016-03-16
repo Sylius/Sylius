@@ -2,8 +2,15 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+  user:
+    email:
+      not_blank: Kérjük adja meg e-mail címét!
+      invalid: Ez az e-mail cím érvénytelen.
   customer:
     first_name:
-      not_blank: Kérjük, add meg a keresztneved.
+      not_blank: Kérjük adja meg keresztnevét!
     last_name:
-      not_blank: Kérjük, add meg a vezetéknevedet.
+      not_blank: Kérjük adja meg vezetéknevét!
+    email:
+      not_blank: Kérjük adja meg e-mail címét!
+      invalid: Ez az e-mail cím érvénytelen.

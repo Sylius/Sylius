@@ -8,8 +8,8 @@ sylius:
         assortment: Ponuda
         blocks: Blokovi
         configuration: Postavke
-        countries: Države
         content: Sadržaj
+        countries: Države
         dashboard: Kontrolna ploča
         general_settings: Osnovne postavke
         groups: Grupe
@@ -24,17 +24,19 @@ sylius:
         payments: Plaćanja
         products: Proizvodi
         promotions: Promocije
+        roles: Role (korisnička prava)
+        routes: Rute
         sales: Narudžbe
         shipments: Pošiljke
         shipping_categories: Kategorije pošiljki
         shipping_methods: Načini slanja
+        slideshow: Automatski prikaz
         stockables: Stanje zaliha
         tax_categories: Kategorije poreza
         tax_rates: Stope poreza
         taxation_settings: Postavke poreza
         taxonomies: Kategorizacija
         zones: Regije
-        roles: Role (korisnička prava)
       sidebar:
         assortment: Ponuda
         blocks: Blokovi
@@ -51,11 +53,12 @@ sylius:
         options: Uredi opcije
         orders: Trenutne narudžbe
         pages: Stranice
-        routes: Rute
         payment_methods: Načini plaćanja
         payments: Plaćanja
         products: Proizvodi
         promotions: Akcije
+        roles: Role (korisnička prava)
+        routes: Rute
         sales: Narudžbe
         shipments: Pošiljke
         shipping_categories: Kategorije pošiljki
@@ -67,7 +70,6 @@ sylius:
         taxation_settings: Postavke poreza
         taxonomies: Kategorizacija
         zones: Regije
-        roles: Role (korisnička prava)
   frontend:
     menu:
       account:

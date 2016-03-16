@@ -11,23 +11,22 @@
 
 namespace Sylius\Bundle\TaxonomyBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Resource\Factory\Factory;
-use Sylius\Component\Taxonomy\Factory\TaxonomyFactory;
-use Sylius\Component\Translation\Factory\TranslatableFactory;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
-use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonomyType;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonomyTranslationType;
-use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType;
+use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonomyType;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonTranslationType;
-use Sylius\Bundle\TaxonomyBundle\Controller\TaxonController;
+use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType;
+use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Component\Taxonomy\Factory\TaxonFactory;
+use Sylius\Component\Taxonomy\Factory\TaxonomyFactory;
+use Sylius\Component\Taxonomy\Model\Taxon;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\Taxonomy;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyTranslation;
 use Sylius\Component\Taxonomy\Model\TaxonomyTranslationInterface;
-use Sylius\Component\Taxonomy\Model\Taxon;
-use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\TaxonTranslation;
 use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
@@ -99,7 +98,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -128,13 +127,13 @@ class Configuration implements ConfigurationInterface
                                             ->children()
                                                 ->arrayNode('default')
                                                     ->prototype('scalar')->end()
-                                                    ->defaultValue(array('sylius'))
+                                                    ->defaultValue(['sylius'])
                                                 ->end()
                                             ->end()
                                         ->end()
                                         ->arrayNode('fields')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('name'))
+                                            ->defaultValue(['name'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -149,9 +148,9 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode('model')->defaultValue(Taxon::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(TaxonInterface::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('controller')->defaultValue(TaxonController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
-                                        ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->end()
+                                        ->scalarNode('factory')->defaultValue(TaxonFactory::class)->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()
                                             ->children()
@@ -165,7 +164,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -194,13 +193,13 @@ class Configuration implements ConfigurationInterface
                                             ->children()
                                                 ->arrayNode('default')
                                                     ->prototype('scalar')->end()
-                                                    ->defaultValue(array('sylius'))
+                                                    ->defaultValue(['sylius'])
                                                 ->end()
                                             ->end()
                                         ->end()
                                         ->arrayNode('fields')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('name', 'slug', 'permalink', 'description'))
+                                            ->defaultValue(['name', 'slug', 'permalink', 'description'])
                                         ->end()
                                     ->end()
                                 ->end()

@@ -19,8 +19,6 @@ use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Addressing extension.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
@@ -36,9 +34,10 @@ class SyliusAddressingExtension extends AbstractResourceExtension
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $configFiles = array(
+        $configFiles = [
             'services.xml',
-        );
+            'twig.xml',
+        ];
 
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
@@ -48,16 +47,37 @@ class SyliusAddressingExtension extends AbstractResourceExtension
 
         $container
             ->getDefinition('sylius.form.type.province_choice')
-            ->setArguments(array(
+            ->setArguments([
                 new Reference('sylius.repository.province'),
-            ))
+            ])
+        ;
+
+        $container
+            ->getDefinition('sylius.form.type.province_code_choice')
+            ->setArguments([
+                new Reference('sylius.repository.province'),
+            ])
         ;
 
         $container
             ->getDefinition('sylius.form.type.country_choice')
-            ->setArguments(array(
+            ->setArguments([
                 new Reference('sylius.repository.country'),
-            ))
+            ])
+        ;
+
+        $container
+            ->getDefinition('sylius.form.type.country_code_choice')
+            ->setArguments([
+                new Reference('sylius.repository.country'),
+            ])
+        ;
+
+        $container
+            ->getDefinition('sylius.form.type.zone_code_choice')
+            ->setArguments([
+                new Reference('sylius.repository.zone'),
+            ])
         ;
 
         $container

@@ -1,13 +1,13 @@
 <?php
 
 /*
-* This file is part of the Sylius package.
-*
-* (c) Paweł Jędrzejewski
-*
-* For the full copyright and license information, please view the LICENSE
-* file that was distributed with this source code.
-*/
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Sylius\Bundle\PayumBundle\Extension;
 
@@ -17,7 +17,7 @@ use Payum\Core\Request\Generic;
 use Payum\Core\Request\GetStatusInterface;
 use SM\Factory\FactoryInterface;
 use Sylius\Bundle\PayumBundle\Request\GetStatus;
-use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\PaymentTransitions;
 
 class UpdatePaymentStateExtension implements ExtensionInterface
@@ -36,21 +36,21 @@ class UpdatePaymentStateExtension implements ExtensionInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function onPreExecute(Context $context)
     {
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function onExecute(Context $context)
     {
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function onPostExecute(Context $context)
     {
@@ -63,6 +63,7 @@ class UpdatePaymentStateExtension implements ExtensionInterface
         if (false === $request instanceof Generic) {
             return;
         }
+
         if (false === $request instanceof GetStatusInterface) {
             return;
         }

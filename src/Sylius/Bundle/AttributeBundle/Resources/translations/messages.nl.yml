@@ -4,6 +4,23 @@
 sylius:
   form:
     attribute:
-      name: Interne naam
-      presentation: Weergave
+      add: Toevoegen
+      add_attributes: Attributen toevoegen
+      choices: Keuzes
+      code: Code
+      name: Naam
+      translations: Vertalingen
       type: Type
+    attribute_type:
+      configuration: Configuratie
+      date: Datum
+      percent: Percentage
+      validation: Validatie
+    attribute_type_configuration:
+      datetime:
+        format: Formaat
+      date:
+        format: Formaat
+      text:
+        min: Minimale lengte
+        max: Maximale lengte

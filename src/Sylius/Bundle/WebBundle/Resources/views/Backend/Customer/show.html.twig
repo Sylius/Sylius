@@ -14,15 +14,13 @@
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {% if customer.user is not null and customer.user.id is not same as(app.user.id) and not customer.deleted %}
+        {% if customer.user is not null and customer.user.id is not same as(app.user.id)%}
         {{ buttons.generic(path('sylius_account_profile_show', {'_switch_user': customer.user.username}), 'sylius.user.impersonate'|trans) }}
         {% endif %}
         {{ buttons.manage(path('sylius_backend_customer_index'), 'sylius.customer.manage'|trans) }}
-        {% if not customer.deleted %}
-            {{ buttons.edit(path('sylius_backend_customer_update', {'id': customer.id})) }}
-            {% if customer.user is null or customer.user.id is not same as(app.user.id) %}
-                {{ buttons.delete(path('sylius_backend_customer_delete', {'id': customer.id}), null, false, true) }}
-            {% endif %}
+        {{ buttons.edit(path('sylius_backend_customer_update', {'id': customer.id})) }}
+        {% if customer.user is not null and customer.user.id is not same as(app.user.id) %}
+            {{ buttons.delete(path('sylius_backend_user_delete', {'id': customer.user.id}), null, false, true) }}
         {% endif %}
     </div>
     <h1><i class="glyphicon glyphicon-info-sign"></i> {{ 'sylius.customer.show_header'|trans|raw }}</h1>
@@ -55,7 +53,7 @@
             {% endif %}
             <tr>
                 <td><strong>{{ 'sylius.user.username'|trans }}</strong></td>
-                <td>
+                <td id="username">
                 {% if customer.user is not null %}
                     {{ customer.user.username }}
                 {% endif %}
@@ -65,9 +63,15 @@
                 <td><strong>{{ 'sylius.customer.email'|trans }}</strong></td>
                 <td>{{ customer.email }}</td>
             </tr>
+            {% if customer.phoneNumber is not null %}
+                <tr>
+                    <td><strong>{{ 'sylius.customer.phone_number'|trans }}</strong></td>
+                    <td>{{ customer.phoneNumber }}</td>
+                </tr>
+            {% endif %}
             <tr>
                 <td><strong>{{ 'sylius.user.enabled'|trans }}</strong></td>
-                <td>
+                <td id="enabled">
                     {% if customer.user is not null %}
                         {{ state_label(customer.user.enabled) }}
                     {% endif %}

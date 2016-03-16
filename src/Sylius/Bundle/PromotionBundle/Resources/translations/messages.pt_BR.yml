@@ -18,25 +18,24 @@ sylius:
       contains_product_configuration:
         variants: Produtos
         exclude: Excluir
-      item_count_configuration:
+      cart_quantity_configuration:
         count: Contagem
-        equal: Igualdade
       item_total_configuration:
         amount: Quantidade
-        equal: Igualdade
       nth_order_configuration:
         nth: N-ésimo
       shipping_country_configuration:
         country: País
       type: Tipo
     coupon:
-      code: Código
       usage_limit: Limite de utilização
     coupon_generate_instruction:
       amount: Quantidade
       usage_limit: Limite de utilização
     promotion:
       actions: Ações
+      add_action: Adicionar ação
+      add_rule: Adicionar regra
       coupon_based: Cupom com base
       description: Descrição
       ends_at: Termina em

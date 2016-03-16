@@ -4,8 +4,9 @@
 sylius:
   form:
     rule:
-      item_count_configuration:
+      unit_count_configuration:
         count: Počet
+      type: Typ pravidla
     shipment:
       state: Stát
       states:
@@ -18,16 +19,19 @@ sylius:
       tracking_code: Sledovací kód
     shipping_calculator:
       flat_rate_configuration:
+        label: Paušální sazba za zásilku
         amount: Částka
       flexible_rate_configuration:
-        additional_item_cost: Další nákladová položka
-        additional_item_limit: Omezit další položky
-        first_item_cost: Cena první položky
-      per_item_rate_configuration:
+        label: Flexibilní sazba
+      per_unit_rate_configuration:
         amount: Částka
       weight_rate_configuration:
+        label: Sazba odvozena od váhy
+        fixed: Pevná částka
+        variable: Variabilní částka
         division: Divize
       volume_rate_configuration:
+        label: Sazba odvozena od objemu
         amount: Částka
         division: Divize
     shipping_category:

@@ -14,8 +14,10 @@ namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * The addressing step of checkout.
@@ -31,6 +33,9 @@ class AddressingStep extends CheckoutStep
     public function displayAction(ProcessContextInterface $context)
     {
         $order = $this->getCurrentCart();
+
+        $this->applyTransition(OrderCheckoutTransitions::TRANSITION_READDRESS, $order, true);
+
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::ADDRESSING_INITIALIZE, $order);
         $form = $this->createCheckoutAddressingForm($order, $this->getCustomer());
 
@@ -51,6 +56,8 @@ class AddressingStep extends CheckoutStep
         if ($form->handleRequest($request)->isValid()) {
             $this->dispatchCheckoutEvent(SyliusCheckoutEvents::ADDRESSING_PRE_COMPLETE, $order);
 
+            $this->applyTransition(OrderCheckoutTransitions::TRANSITION_ADDRESS, $order);
+
             $this->getManager()->persist($order);
             $this->getManager()->flush();
 
@@ -62,23 +69,31 @@ class AddressingStep extends CheckoutStep
         return $this->renderStep($context, $order, $form);
     }
 
+    /**
+     * @param ProcessContextInterface $context
+     * @param OrderInterface $order
+     * @param FormInterface $form
+     *
+     * @return Response
+     */
     protected function renderStep(ProcessContextInterface $context, OrderInterface $order, FormInterface $form)
     {
-        return $this->render($this->container->getParameter(sprintf('sylius.checkout.step.%s.template', $this->getName())), array(
-            'order'   => $order,
-            'form'    => $form->createView(),
-            'context' => $context
-        ));
+        return $this->render($this->container->getParameter(sprintf('sylius.checkout.step.%s.template', $this->getName())), [
+            'order' => $order,
+            'form' => $form->createView(),
+            'context' => $context,
+        ]);
     }
 
     /**
      * @param  OrderInterface    $order
      * @param  CustomerInterface $customer
+     *
      * @return FormInterface
      */
     protected function createCheckoutAddressingForm(OrderInterface $order, CustomerInterface $customer = null)
     {
-        return $this->createForm('sylius_checkout_addressing', $order, array('customer' => $customer));
+        return $this->createForm('sylius_checkout_addressing', $order, ['customer' => $customer]);
     }
 
     /**

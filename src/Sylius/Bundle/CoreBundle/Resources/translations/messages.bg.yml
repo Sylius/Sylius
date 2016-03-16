@@ -10,6 +10,10 @@ sylius:
       payment_methods: Методи на плащане
     order_filter:
       payment_state: Състояние на плащане
+    product_variant:
+      tax_category: Данъчна категория
     attribute:
       product_attribute_value:
         value: Стойност
+    guest:
+      email: Имейл

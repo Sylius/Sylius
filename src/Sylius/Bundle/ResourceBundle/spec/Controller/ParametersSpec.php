@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 /**
  * @author Arnaud Langade <arn0d.dev@gmail.com>
@@ -24,30 +23,30 @@ class ParametersSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\Parameters');
     }
 
-    function its_parameters_is_mutable()
+    function it_has_mutable_parameters()
     {
-        $this->replace(array());
+        $this->replace([]);
     }
 
     function it_has_parameters()
     {
-        $this->replace(array(
+        $this->replace([
             'criteria' => 'criteria',
-            'paginate' => 'paginate'
-        ));
+            'paginate' => 'paginate',
+        ]);
 
-        $this->all()->shouldReturn(array(
+        $this->all()->shouldReturn([
             'criteria' => 'criteria',
-            'paginate' => 'paginate'
-        ));
+            'paginate' => 'paginate',
+        ]);
     }
 
-    function it_get_parameter()
+    function it_gets_a_single_parameter_and_supports_default_value()
     {
-        $this->replace(array(
+        $this->replace([
             'criteria' => 'criteria',
-            'paginate' => 'paginate'
-        ));
+            'paginate' => 'paginate',
+        ]);
 
         $this->get('criteria')->shouldReturn('criteria');
         $this->get('sorting')->shouldReturn(null);

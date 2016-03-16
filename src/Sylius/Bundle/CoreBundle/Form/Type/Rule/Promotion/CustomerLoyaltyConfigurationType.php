@@ -27,28 +27,28 @@ class CustomerLoyaltyConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('time', 'integer', array(
-                'label'       => 'sylius.form.rule.customer_loyalty_configuration.time',
-                'constraints' => array(
+            ->add('time', 'integer', [
+                'label' => 'sylius.form.rule.customer_loyalty_configuration.time',
+                'constraints' => [
                     new NotBlank(),
-                    new Type(array('type' => 'numeric')),
-                )
-            ))
-            ->add('unit', 'choice', array(
-                'label'       => 'sylius.form.rule.customer_loyalty_configuration.unit.header',
-                'choices'     => array(
-                    'days'   => 'sylius.form.rule.customer_loyalty_configuration.unit.days',
-                    'weeks'  => 'sylius.form.rule.customer_loyalty_configuration.unit.weeks',
+                    new Type(['type' => 'numeric']),
+                ],
+            ])
+            ->add('unit', 'choice', [
+                'label' => 'sylius.form.rule.customer_loyalty_configuration.unit.header',
+                'choices' => [
+                    'days' => 'sylius.form.rule.customer_loyalty_configuration.unit.days',
+                    'weeks' => 'sylius.form.rule.customer_loyalty_configuration.unit.weeks',
                     'months' => 'sylius.form.rule.customer_loyalty_configuration.unit.months',
-                    'years'  => 'sylius.form.rule.customer_loyalty_configuration.unit.years',
-                ),
-                'constraints' => array(
+                    'years' => 'sylius.form.rule.customer_loyalty_configuration.unit.years',
+                ],
+                'constraints' => [
                     new NotBlank(),
-                )
-            ))
-            ->add('after', 'checkbox', array(
+                ],
+            ])
+            ->add('after', 'checkbox', [
                 'label' => 'sylius.form.rule.customer_loyalty_configuration.after',
-            ))
+            ])
         ;
     }
 

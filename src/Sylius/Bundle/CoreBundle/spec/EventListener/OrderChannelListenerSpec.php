@@ -1,9 +1,17 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -44,11 +52,25 @@ class OrderChannelListenerSpec extends ObjectBehavior
         ChannelContextInterface $channelContext,
         ChannelInterface $channel
     ) {
-        $event->getSubject()->shouldBeCalled()->willReturn($order);
+        $event->getSubject()->willReturn($order);
+        $order->getChannel()->willReturn(null);
 
         $channelContext->getChannel()->shouldBeCalled()->willReturn($channel);
 
         $order->setChannel($channel)->shouldBeCalled();
+
+        $this->processOrderChannel($event);
+    }
+
+    function it_does_not_proceed_order_channel_if_it_is_already_set(
+        GenericEvent $event,
+        OrderInterface $order,
+        ChannelInterface $channel
+    ) {
+        $event->getSubject()->willReturn($order);
+        $order->getChannel()->willReturn($channel);
+
+        $order->setChannel($channel)->shouldNotBeCalled();
 
         $this->processOrderChannel($event);
     }

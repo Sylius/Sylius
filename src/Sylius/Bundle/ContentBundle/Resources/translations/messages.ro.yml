@@ -1,8 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-auto: automatic
-route: rută
 sylius:
   form:
     action_block:
@@ -10,15 +8,20 @@ sylius:
       id: Id
       publish_end_date: Data de sfârșit a publicării
       publish_start_date: Data de început a publicării
+      publishable: Publicat
     imagine_block:
       filter: Filtrează
       image: Imagine
       internal_name: Denumire internă
       label: Label
+      link_url: Legătură URL
       parent: Părinte
       publish_end_date: Data de sfârșit a publicării
       publish_start_date: Data de început a publicării
+      publishable: Publicat
+      slideshow_small: Carusel mic (lateral)
       slideshow_medium: Slideshow mediu (conţinut)
+      slideshow_large: Carusel mare (toata lățimea)
     menu:
       childrens: Copii
       display: Afișare
@@ -28,6 +31,7 @@ sylius:
       parent: Părinte
       publish_end_date: Data de sfârșit a publicării
       publish_start_date: Data de început a publicării
+      publishable: Publicat
       route: Rută
       uri: URI
     menu_block:
@@ -36,6 +40,7 @@ sylius:
       name: Nume
       publish_end_date: Data de sfârșit a publicării
       publish_start_date: Data de început a publicării
+      publishable: Publicat
     menu_node_block:
       content: Conţinut
       display: Afișare
@@ -45,6 +50,7 @@ sylius:
       link_type: Tip link
       publish_end_date: Data de sfârșit a publicării
       publish_start_date: Data de început a publicării
+      publishable: Publicat
       route: Rută
       uri: URI
     redirect_route:
@@ -57,6 +63,7 @@ sylius:
       id: Id
       publish_end_date: Data de sfârșit a publicării
       publish_start_date: Data de început a publicării
+      publishable: Publicat
       title: Titlu
     route:
       content: Conţinut
@@ -68,13 +75,16 @@ sylius:
       parent: Părinte
       publish_end_date: Data de sfârșit a publicării
       publish_start_date: Data de început a publicării
+      publishable: Publicat
       title: Titlu
     slideshow_block:
+      add_slide: Adaugă diapozitiv
       childrens: Copii
       internal_name: Denumire internă
       parent: Părinte
       publish_end_date: Data de sfârșit a publicării
       publish_start_date: Data de început a publicării
+      publishable: Publicat
       title: Titlu
     static_content:
       body: Corp
@@ -84,6 +94,7 @@ sylius:
       parent: Părinte
       publish_end_date: Data de sfârșit a publicării
       publish_start_date: Publicare începând cu data de
+      publishable: Publicat
       routes: Rute
       title: Titlu
     string_block:
@@ -92,3 +103,4 @@ sylius:
       name: Nume
       publish_end_date: Data de sfârșit a publicării
       publish_start_date: Data de început a publicării
+      publishable: Publicat

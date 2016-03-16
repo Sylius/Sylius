@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="sylius.context.theme.class">Sylius\Bundle\ThemeBundle\Context\SettableThemeContext</parameter>
+        <parameter key="sylius.factory.theme_author.class">Sylius\Bundle\ThemeBundle\Factory\ThemeAuthorFactory</parameter>
+        <parameter key="sylius.theme.hydrator.class">Sylius\Bundle\ThemeBundle\Hydrator\ThemeHydrator</parameter>
+        <parameter key="sylius.theme.merger.class">Sylius\Bundle\ThemeBundle\Synchronizer\ThemeMerger</parameter>
+        <parameter key="sylius.theme.loader.class">Sylius\Bundle\ThemeBundle\Loader\ThemeLoader</parameter>
+        <parameter key="sylius.theme.synchronizer.class">Sylius\Bundle\ThemeBundle\Synchronizer\ThemeSynchronizer</parameter>
+        <parameter key="sylius.theme.repository.in_memory.class">Sylius\Bundle\ThemeBundle\Repository\InMemoryThemeRepository</parameter>
+        <parameter key="sylius.theme.circular_dependency_checker.class">Sylius\Bundle\ThemeBundle\Loader\CircularDependencyChecker</parameter>
+        <parameter key="sylius.theme.context.settable.class">Sylius\Bundle\ThemeBundle\Context\SettableThemeContext</parameter>
+        <parameter key="sylius.theme.data_collector.class">Sylius\Bundle\ThemeBundle\Collector\ThemeDataCollector</parameter>
+        <parameter key="sylius.theme.hierarchy_provider.class">Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProvider</parameter>
+        <parameter key="sylius.theme.filesystem.class">Sylius\Bundle\ThemeBundle\Filesystem\Filesystem</parameter>
+        <parameter key="sylius.theme.finder_factory.class">Sylius\Bundle\ThemeBundle\Factory\FinderFactory</parameter>
+        <parameter key="sylius.theme.form.type.theme_choice.class">Sylius\Bundle\ThemeBundle\Form\Type\ThemeChoiceType</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.theme.context.settable" class="%sylius.theme.context.settable.class%" public="false">
+            <argument type="service" id="sylius.theme.hierarchy_provider" />
+        </service>
+
+        <service id="sylius.factory.theme_author" class="%sylius.factory.theme_author.class%" public="false" />
+
+        <service id="sylius.theme.hydrator" class="%sylius.theme.hydrator.class%" public="false">
+            <argument type="service">
+                <service class="Zend\Hydrator\Reflection" />
+            </argument>
+        </service>
+
+        <service id="sylius.theme.merger" class="%sylius.theme.merger.class%" public="false">
+            <argument type="service" id="sylius.theme.hydrator" />
+        </service>
+
+        <service id="sylius.theme.circular_dependency_checker" class="%sylius.theme.circular_dependency_checker.class%" public="false" />
+
+        <service id="sylius.theme.loader" class="%sylius.theme.loader.class%" public="false">
+            <argument type="service" id="sylius.theme.configuration.provider" />
+            <argument type="service" id="sylius.factory.theme" />
+            <argument type="service" id="sylius.factory.theme_author" />
+            <argument type="service" id="sylius.theme.hydrator" />
+            <argument type="service" id="sylius.theme.circular_dependency_checker" />
+        </service>
+
+        <service id="sylius.theme.synchronizer" class="%sylius.theme.synchronizer.class%">
+            <argument type="service" id="sylius.theme.loader" />
+            <argument type="service" id="sylius.repository.theme" />
+            <argument type="service" id="sylius.theme.merger" />
+        </service>
+
+        <service id="sylius.theme.repository.in_memory" class="%sylius.theme.repository.in_memory.class%" lazy="true">
+            <argument type="service" id="sylius.theme.loader" />
+            <argument>%sylius.interface.theme.class%</argument>
+        </service>
+
+        <service id="sylius.theme.data_collector" class="%sylius.theme.data_collector.class%" public="false">
+            <argument type="service" id="sylius.repository.theme" />
+            <argument type="service" id="sylius.context.theme" />
+            <argument type="service" id="sylius.theme.hierarchy_provider" />
+            <tag name="data_collector" template="SyliusThemeBundle:Profiler:theme" id="sylius_theme" />
+        </service>
+
+        <service id="sylius.theme.hierarchy_provider" class="%sylius.theme.hierarchy_provider.class%" public="false" />
+
+        <service id="sylius.theme.filesystem" class="%sylius.theme.filesystem.class%" public="false" />
+
+        <service id="sylius.theme.finder_factory" class="%sylius.theme.finder_factory.class%" public="false" />
+    </services>
+</container>

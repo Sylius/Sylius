@@ -5,16 +5,26 @@ sylius:
   backend:
     menu:
       main:
+        api_clients: API Klanten
         assortment: Assortiment
+        attributes: Attributen configureren
         blocks: Blokken
+        channels: Kanalen
         configuration: Configuratie
-        countries: Landen
+        contact_topics: Configureren van onderwerpen
         content: Inhoud
+        countries: Landen
+        currencies: "Valuta's"
+        customer: Klant
+        customers: Klanten
         dashboard: Dashboard
+        emails: E-mails
         general_settings: Algemene instellingen
         groups: Groepen
         homepage: Uw winkel
         locales: "Talen/Regio's"
+        marketing: Marketing
+        menus: "Menu 's"
         new_order: Bestelling toevoegen
         new_promotion: Kortingsactie toevoegen
         options: Productopties
@@ -22,52 +32,74 @@ sylius:
         pages: "Pagina's"
         payment_methods: Betaalmethoden
         payments: Betalingen
+        permissions: Machtigingen
         products: Producten
         promotions: Promoties
-        sales: Bestellingen
-        shipments: Verzendingen
-        shipping_categories: Verzend categorieën
-        shipping_methods: Verzendmethoden
-        stockables: Voorraad
-        tax_categories: BTW-groepen
-        tax_rates: BTW-tarieven
-        taxation_settings: Belasting instellingen
-        taxonomies: Categorisering
-        zones: Zones
+        report: Rapporten
         roles: Rollen
-      sidebar:
-        assortment: Assortiment
-        blocks: Blokken
-        configuration: Configuratie
-        content: Inhoud
-        countries: Landen
-        dashboard: Dashboard
-        general_settings: Algemene instellingen
-        groups: Groepen
-        homepage: Terug naar de voorkant
-        locales: "Talen/Regio's"
-        new_order: Bestelling toevoegen
-        new_promotion: Kortingsactie toevoegen
-        options: Productopties
-        orders: Huidige bestellingen
-        pages: "Pagina's"
         routes: Routes
-        payment_methods: Betaalmethoden
-        payments: Betalingen
-        products: Producten
-        promotions: Promoties
         sales: Bestellingen
+        security_settings: Beveiligingsinstellingen
         shipments: Verzendingen
         shipping_categories: Verzend categorieën
         shipping_methods: Verzendmethoden
         slideshow: Slideshow
         stockables: Voorraad
+        support: Helpdesk
+        tax_categories: BTW-groepen
+        tax_rates: BTW-tarieven
+        taxation_settings: Belasting instellingen
+        taxonomies: Categorisering
+        zones: Zones
+      sidebar:
+        api_clients: API Klanten
+        assortment: Assortiment
+        attributes: Attributen configureren
+        blocks: Blokken
+        channels: Kanalen
+        configuration: Configuratie
+        contact_requests: Verzoeken
+        contact_topics: Configureren van onderwerpen
+        content: Inhoud
+        countries: Landen
+        currencies: "Valuta's"
+        customer: Klant
+        customers: Klanten
+        dashboard: Dashboard
+        emails: E-mails
+        general_settings: Algemene instellingen
+        groups: Groepen
+        homepage: Terug naar de voorkant
+        locales: "Talen/Regio's"
+        marketing: Marketing
+        menus: "Menu 's"
+        new_order: Bestelling toevoegen
+        new_promotion: Kortingsactie toevoegen
+        options: Productopties
+        orders: Huidige bestellingen
+        pages: "Pagina's"
+        payment_methods: Betaalmethoden
+        payments: Betalingen
+        permissions: Machtigingen
+        products: Producten
+        promotions: Promoties
+        redirects: Redirects
+        report: Rapporten
+        roles: Rollen
+        routes: Routes
+        sales: Bestellingen
+        security_settings: Beveiligingsinstellingen
+        shipments: Verzendingen
+        shipping_categories: Verzend categorieën
+        shipping_methods: Verzendmethoden
+        slideshow: Slideshow
+        stockables: Voorraad
+        support: Helpdesk
         tax_categories: Belasting categorieën
         tax_rates: Belastingtarieven
         taxation_settings: Belasting instellingen
         taxonomies: Categorisering
         zones: Zones
-        roles: Rollen
   frontend:
     menu:
       account:
@@ -85,6 +117,8 @@ sylius:
         login: Inloggen
         logout: Uitloggen
         register: Registreren
+      sidebar:
+        links: Links
       social:
         facebook: Facebook
         github: GitHub

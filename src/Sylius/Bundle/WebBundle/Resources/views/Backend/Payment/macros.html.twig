@@ -29,7 +29,7 @@
                 </a>
             </td>
             <td>{{ payment.method.name }}</td>
-            <td>{{ address.firstname }} {{ address.lastname }} ({{ address.city }}, {{ address.country }})</td>
+            <td>{{ address.firstname }} {{ address.lastname }} ({{ address.city }}, {{ address.countryCode|sylius_country_name }})</td>
             <td class="center-text">
                 {{ payment.amount|sylius_price(payment.currency) }}
             </td>

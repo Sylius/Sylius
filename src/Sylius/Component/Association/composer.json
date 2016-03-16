@@ -1,0 +1,55 @@
+{
+    "name": "sylius/association",
+    "type": "library",
+    "description": "Component for creating product associations for up or cross selling",
+    "keywords": ["shop", "ecommerce", "association", "feature"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Leszek Prabucki",
+            "email": "leszek.prabucki@gmail.com"
+        },
+        {
+            "name": "Łukasz Chruściel",
+            "email": "lukasz.chrusciel@lakion.com"
+        },
+        {
+            "name": "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": "^5.5.9|^7.0",
+
+        "sylius/resource":  "0.17.*",
+        "sylius/attribute": "0.17.*",
+        "sylius/variation": "0.17.*",
+        "doctrine/collections": "^1.0.0"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2.4"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Component\\Association\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Component\\Association\\spec\\": "spec/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.17-dev"
+        }
+    }
+}

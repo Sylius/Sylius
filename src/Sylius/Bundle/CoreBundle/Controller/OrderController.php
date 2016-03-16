@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Controller;
 
+use FOS\RestBundle\View\View;
 use Gedmo\Loggable\Entity\LogEntry;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -23,7 +24,7 @@ class OrderController extends ResourceController
 {
     /**
      * @param Request $request
-     * @param integer $id
+     * @param int $id
      *
      * @return Response
      *
@@ -31,31 +32,29 @@ class OrderController extends ResourceController
      */
     public function indexByCustomerAction(Request $request, $id)
     {
-        $customer = $this->get('sylius.repository.customer')->findForDetailsPage($id);
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+        $customer = $this->container->get('sylius.repository.customer')->findForDetailsPage($id);
 
         if (!$customer) {
             throw new NotFoundHttpException('Requested customer does not exist.');
         }
 
-        $paginator = $this
-            ->getRepository()
-            ->createByCustomerPaginator($customer, $this->config->getSorting())
-        ;
+        $paginator = $this->repository->createByCustomerPaginator($customer, $configuration->getSorting());
 
         $paginator->setCurrentPage($request->get('page', 1), true, true);
-        $paginator->setMaxPerPage($this->config->getPaginationMaxPerPage());
+        $paginator->setMaxPerPage($configuration->getPaginationMaxPerPage());
 
         // Fetch and cache deleted orders
-        $entityManager = $this->get('doctrine.orm.entity_manager');
+        $entityManager = $this->container->get('doctrine.orm.entity_manager');
         $entityManager->getFilters()->disable('softdeleteable');
         $paginator->getCurrentPageResults();
         $paginator->getNbResults();
         $entityManager->getFilters()->enable('softdeleteable');
 
-        return $this->render('SyliusWebBundle:Backend/Order:indexByCustomer.html.twig', array(
+        return $this->container->get('templating')->renderResponse('SyliusWebBundle:Backend/Order:indexByCustomer.html.twig', [
             'customer' => $customer,
-            'orders'   => $paginator
-        ));
+            'orders' => $paginator,
+        ]);
     }
 
     /**
@@ -67,16 +66,17 @@ class OrderController extends ResourceController
      */
     public function releaseInventoryAction(Request $request)
     {
-        $order = $this->findOr404($request);
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+        $order = $this->findOr404($configuration);
 
-        $this->get('sm.factory')
+        $this->container->get('sm.factory')
             ->get($order, OrderTransitions::GRAPH)
             ->apply(OrderTransitions::SYLIUS_RELEASE)
         ;
 
-        $this->domainManager->update($order);
+        $this->manager->flush();
 
-        return $this->redirectHandler->redirectToReferer();
+        return $this->redirectHandler->redirectToReferer($configuration);
     }
 
     /**
@@ -90,30 +90,30 @@ class OrderController extends ResourceController
      */
     public function historyAction(Request $request)
     {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         /** @var $order OrderInterface */
-        $order = $this->findOr404($request);
+        $order = $this->findOr404($configuration);
 
         $repository = $this->get('doctrine')->getManager()->getRepository(LogEntry::class);
 
-        $items = array();
+        $items = [];
         foreach ($order->getItems() as $item) {
             $items[] = $repository->getLogEntries($item);
         }
 
-        $view = $this
-            ->view()
-            ->setTemplate($this->config->getTemplate('history.html'))
-            ->setData(array(
+        $view = View::create()
+            ->setTemplate($configuration->getTemplate('history.html'))
+            ->setData([
                 'order' => $order,
-                'logs'  => array(
-                    'order'            => $repository->getLogEntries($order),
-                    'order_items'      => $items,
-                    'billing_address'  => $repository->getLogEntries($order->getBillingAddress()),
+                'logs' => [
+                    'order' => $repository->getLogEntries($order),
+                    'order_items' => $items,
+                    'billing_address' => $repository->getLogEntries($order->getBillingAddress()),
                     'shipping_address' => $repository->getLogEntries($order->getShippingAddress()),
-                ),
-            ))
+                ],
+            ])
         ;
 
-        return $this->handleView($view);
+        return $this->viewHandler->handle($configuration, $view);
     }
 }

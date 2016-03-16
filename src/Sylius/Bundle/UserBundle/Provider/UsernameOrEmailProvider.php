@@ -17,7 +17,7 @@ namespace Sylius\Bundle\UserBundle\Provider;
 class UsernameOrEmailProvider extends AbstractUserProvider
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function findUser($usernameOrEmail)
     {
@@ -25,6 +25,6 @@ class UsernameOrEmailProvider extends AbstractUserProvider
             return $this->userRepository->findOneByEmail($usernameOrEmail);
         }
 
-        return $this->userRepository->findOneBy(array('usernameCanonical' => $usernameOrEmail));
+        return $this->userRepository->findOneBy(['usernameCanonical' => $usernameOrEmail]);
     }
 }

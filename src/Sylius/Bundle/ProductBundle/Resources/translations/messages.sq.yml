@@ -1,0 +1,25 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    product:
+      name: Emri
+      description: Përshkrimi
+      attributes: Atributet
+      options: Opsionet
+      meta_keywords: Meta fjalë kyçe
+      meta_description: Meta përshkrim
+    product_variant:
+      available_on: Gati më
+      available_until: Në dispozicion deri në
+    product_archetype:
+      name: Emri
+      parent: Prind
+      attributes: Atributet
+      options: Opsionet
+    association_type:
+      name: Emri
+    association:
+      type: Tipi i lidhjes
+      product: Produkti i lidhur

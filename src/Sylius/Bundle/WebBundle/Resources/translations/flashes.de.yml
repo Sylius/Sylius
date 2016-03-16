@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  account:
+    password:
+      change_success: Ihr Passwort wurde erfolgreich geändert
+      invalid: Ihr aktuelles Passwort ist nicht korrekt

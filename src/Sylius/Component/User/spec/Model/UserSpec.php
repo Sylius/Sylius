@@ -15,7 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\User\Model\UserInterface;
 
 /**
- *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  * @author Bartosz Siejka <bartosz.siejka@lakion.com>
  */
@@ -60,26 +59,5 @@ class UserSpec extends ObjectBehavior
         $ttl = new \DateInterval('PT1H');
 
         $this->isPasswordRequestNonExpired($ttl)->shouldReturn(false);
-    }
-
-    function it_should_return_true_if_user_is_deleted()
-    {
-        $deletedAt = new \DateTime('yesterday');
-        $this->setDeletedAt($deletedAt);
-
-        $this->shouldBeDeleted();
-    }
-
-    function it_should_return_false_if_user_is_not_deleted()
-    {
-        $this->shouldNotBeDeleted();
-    }
-
-    function it_should_return_false_if_user_deleted_time_is_future_date()
-    {
-        $deletedAt = new \DateTime('tomorrow');
-        $this->setDeletedAt($deletedAt);
-
-        $this->shouldNotBeDeleted();
     }
 }

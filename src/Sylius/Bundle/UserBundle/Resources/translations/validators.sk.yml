@@ -11,18 +11,20 @@ sylius:
     email:
       not_blank: Zadajte Váš email.
       invalid: Tento email je neplatný.
+      not_registered: Používateľ s týmto e-mailom neexistuje. Prosím zaregistrujte sa.
     plainPassword:
       not_blank: Zadajte vaše heslo.
       mismatch: Zadané heslá sa nezhodujú
+      wrong_current: Zadané heslo sa nezhoduje zo súčasným.
   customer:
     first_name:
       max: 'Krstné meno nesmie byť dlhšie ako {{ limit }} znakov.'
       min: 'Krstné meno musí obsahovať minimálne {{ limit }} znakov.'
-      not_blank: Zadajte svoje krstné meno.
+      not_blank: Zadajte Vaše krstné meno.
     last_name:
       max: 'Priezvisko nesmie byť dlhšie ako {{ limit }} znakov.'
       min: 'Priezvisko musí obsahovať minimálne {{ limit }} znakov.'
-      not_blank: Zadajte svoje priezvisko.
+      not_blank: Zadajte Vaše priezvisko.
     email:
       already_used: Tento e-mail sa už používa, prosím prihláste sa alebo použite reset hesla.
       max: 'E-mail nesmie byť dlhší ako {{ limit }} znakov.'

@@ -14,11 +14,12 @@ namespace Sylius\Component\Channel\Model;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\ToggleableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface ChannelInterface extends CodeAwareInterface, TimestampableInterface, ResourceInterface
+interface ChannelInterface extends CodeAwareInterface, TimestampableInterface, ToggleableInterface, ResourceInterface
 {
     /**
      * @return string
@@ -43,12 +44,12 @@ interface ChannelInterface extends CodeAwareInterface, TimestampableInterface, R
     /**
      * @return string
      */
-    public function getUrl();
+    public function getHostname();
 
     /**
-     * @param string $url
+     * @param string $hostname
      */
-    public function setUrl($url);
+    public function setHostname($hostname);
 
     /**
      * @return string
@@ -59,14 +60,4 @@ interface ChannelInterface extends CodeAwareInterface, TimestampableInterface, R
      * @param string $color
      */
     public function setColor($color);
-
-    /**
-     * @return bool
-     */
-    public function isEnabled();
-
-    /**
-     * @param bool $enabled
-     */
-    public function setEnabled($enabled);
 }

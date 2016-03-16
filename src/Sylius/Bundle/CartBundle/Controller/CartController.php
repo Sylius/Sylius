@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CartBundle\Controller;
 
+use FOS\RestBundle\View\View;
 use Sylius\Component\Cart\Event\CartEvent;
 use Sylius\Component\Cart\SyliusCartEvents;
 use Sylius\Component\Resource\Event\FlashEvent;
@@ -32,23 +33,26 @@ class CartController extends Controller
      * Displays current cart summary page.
      * The parameters includes the form created from `sylius_cart` type.
      *
+     * @param Request $request
+     *
      * @return Response
      */
-    public function summaryAction()
+    public function summaryAction(Request $request)
     {
-        $cart = $this->getCurrentCart();
-        $form = $this->createForm('sylius_cart', $cart);
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
-        $view = $this
-            ->view()
-            ->setTemplate($this->config->getTemplate('summary.html'))
-            ->setData(array(
+        $cart = $this->getCurrentCart();
+        $form = $this->resourceFormFactory->create($configuration, $cart);
+
+        $view = View::create()
+            ->setTemplate($configuration->getTemplate('summary.html'))
+            ->setData([
                 'cart' => $cart,
-                'form' => $form->createView()
-            ))
+                'form' => $form->createView(),
+            ])
         ;
 
-        return $this->handleView($view);
+        return $this->viewHandler->handle($configuration, $view);
     }
 
     /**
@@ -64,8 +68,10 @@ class CartController extends Controller
      */
     public function saveAction(Request $request)
     {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
         $cart = $this->getCurrentCart();
-        $form = $this->createForm('sylius_cart', $cart);
+        $form = $this->resourceFormFactory->create($configuration, $cart);
 
         if ($form->handleRequest($request)->isValid()) {
             $event = new CartEvent($cart);
@@ -80,29 +86,32 @@ class CartController extends Controller
             // Write flash message
             $eventDispatcher->dispatch(SyliusCartEvents::CART_SAVE_COMPLETED, new FlashEvent());
 
-            return $this->redirectToCartSummary();
+            return $this->redirectToCartSummary($configuration);
         }
 
-        $view = $this
-            ->view()
-            ->setTemplate($this->config->getTemplate('summary.html'))
-            ->setData(array(
+        $view = View::create()
+            ->setTemplate($configuration->getTemplate('summary.html'))
+            ->setData([
                 'cart' => $cart,
-                'form' => $form->createView()
-            ))
+                'form' => $form->createView(),
+            ])
         ;
 
-        return $this->handleView($view);
+        return $this->viewHandler->handle($configuration, $view);
     }
 
     /**
      * Clears the current cart using the operator.
      * By default it redirects to cart summary page.
      *
+     * @param Request $request
+     *
      * @return Response
      */
-    public function clearAction()
+    public function clearAction(Request $request)
     {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
         $eventDispatcher = $this->getEventDispatcher();
 
         // Update models
@@ -111,6 +120,6 @@ class CartController extends Controller
         // Write flash message
         $eventDispatcher->dispatch(SyliusCartEvents::CART_CLEAR_COMPLETED, new FlashEvent());
 
-        return $this->redirectToCartSummary();
+        return $this->redirectToCartSummary($configuration);
     }
 }

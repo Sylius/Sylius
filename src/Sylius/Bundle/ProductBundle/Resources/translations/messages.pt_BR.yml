@@ -15,3 +15,5 @@ sylius:
       name: Nome
       parent: Pai
       options: Opções
+    association_type:
+      name: Nome

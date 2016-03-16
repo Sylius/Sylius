@@ -11,11 +11,16 @@
 
 namespace Sylius\Component\Channel\Model;
 
+use Sylius\Component\Resource\Model\TimestampableTrait;
+use Sylius\Component\Resource\Model\ToggleableTrait;
+
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Channel implements ChannelInterface
 {
+    use TimestampableTrait, ToggleableTrait;
+
     /**
      * @var mixed
      */
@@ -39,7 +44,7 @@ class Channel implements ChannelInterface
     /**
      * @var string
      */
-    protected $url;
+    protected $hostname;
 
     /**
      * @var string
@@ -47,20 +52,8 @@ class Channel implements ChannelInterface
     protected $color;
 
     /**
-     * @var bool
+     * Constructor
      */
-    protected $enabled = true;
-
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
-
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -130,17 +123,17 @@ class Channel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function getUrl()
+    public function getHostname()
     {
-        return $this->url;
+        return $this->hostname;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setUrl($url)
+    public function setHostname($hostname)
     {
-        $this->url = $url;
+        $this->hostname = $hostname;
     }
 
     /**
@@ -157,53 +150,5 @@ class Channel implements ChannelInterface
     public function setColor($color)
     {
         $this->color = $color;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isEnabled()
-    {
-        return $this->enabled;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setEnabled($enabled)
-    {
-        $this->enabled = (Boolean) $enabled;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
     }
 }

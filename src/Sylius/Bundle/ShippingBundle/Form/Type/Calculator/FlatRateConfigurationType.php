@@ -28,13 +28,13 @@ class FlatRateConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('amount', 'sylius_money', array(
+            ->add('amount', 'sylius_money', [
                 'label' => 'sylius.form.shipping_calculator.flat_rate_configuration.amount',
-                'constraints' => array(
+                'constraints' => [
                     new NotBlank(),
-                    new Type(array('type' => 'integer')),
-                ),
-            ))
+                    new Type(['type' => 'integer']),
+                ],
+            ])
         ;
     }
 
@@ -44,9 +44,9 @@ class FlatRateConfigurationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'data_class' => null,
-            ))
+            ])
         ;
     }
 

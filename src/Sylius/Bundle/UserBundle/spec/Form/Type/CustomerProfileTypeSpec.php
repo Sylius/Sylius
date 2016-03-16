@@ -20,7 +20,7 @@ class CustomerProfileTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Customer', array('sylius'));
+        $this->beConstructedWith('Customer', ['sylius']);
     }
 
     function it_is_initializable()
@@ -40,6 +40,7 @@ class CustomerProfileTypeSpec extends ObjectBehavior
         $builder->add('email', 'email', Argument::type('array'))->shouldbeCalled()->willReturn($builder);
         $builder->add('birthday', 'birthday', Argument::type('array'))->shouldbeCalled()->willReturn($builder);
         $builder->add('gender', 'sylius_gender', Argument::type('array'))->shouldbeCalled()->willReturn($builder);
+        $builder->add('phoneNumber', 'text', Argument::type('array'))->shouldbeCalled()->willReturn($builder);
 
         $this->buildForm($builder);
     }

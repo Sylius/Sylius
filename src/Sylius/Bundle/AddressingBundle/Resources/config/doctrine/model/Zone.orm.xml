@@ -18,6 +18,7 @@
             <generator strategy="AUTO" />
           </id>
 
+        <field name="code" column="code" type="string" unique="true" />
         <field name="name" column="name" type="string" />
         <field name="type" column="type" type="string" length="8" />
         <field name="scope" column="scope" type="string" nullable="true"/>

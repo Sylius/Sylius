@@ -22,26 +22,30 @@ class CustomerProfileType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options = array())
+    public function buildForm(FormBuilderInterface $builder, array $options = [])
     {
         $builder
-            ->add('firstName', 'text', array(
+            ->add('firstName', 'text', [
                 'label' => 'sylius.form.customer.first_name',
-            ))
-            ->add('lastName', 'text', array(
+            ])
+            ->add('lastName', 'text', [
                 'label' => 'sylius.form.customer.last_name',
-            ))
-            ->add('email', 'email', array(
+            ])
+            ->add('email', 'email', [
                 'label' => 'sylius.form.customer.email',
-            ))
-            ->add('birthday', 'birthday', array(
-                'label'    => 'sylius.form.customer.birthday',
-                'widget'   => 'single_text',
+            ])
+            ->add('birthday', 'birthday', [
+                'label' => 'sylius.form.customer.birthday',
+                'widget' => 'single_text',
                 'required' => false,
-            ))
-            ->add('gender', 'sylius_gender', array(
-                'label'    => 'sylius.form.customer.gender'
-            ))
+            ])
+            ->add('gender', 'sylius_gender', [
+                'label' => 'sylius.form.customer.gender',
+            ])
+            ->add('phoneNumber', 'text', [
+                'required' => false,
+                'label' => 'sylius.form.customer.phone_number',
+            ])
         ;
     }
 

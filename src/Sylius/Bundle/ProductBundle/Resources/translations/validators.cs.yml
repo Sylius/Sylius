@@ -10,10 +10,12 @@ sylius:
       not_blank: Zadejte název produktu.
       min_length: 'Vyplňte název produktu.|Název musí obsahovat alespoň {{ limit }} znaků.'
       max_length: 'Název produktu nesmí být delší než 1 znak. |Název produktu nesmí být delší než {{ limit }} znaků.'
-    description:
-      not_blank: Vyplňte popis produktu.
-      min_length: 'Popis výrobku musí být alespoň 1 znak. |Popis výrobku musí být alespoň {{ limit }} znaků.'
   variant:
     sku:
       not_blank: Prosím zvolte variantu Jednotky vedení skladu.
       unique: Varianta Jednotky vedení skladu musí být unikátní.
+  archetype:
+    name:
+      not_blank: Zadejte název prototypu.
+      min_length: 'Název prototypu musí mít alespoň 1 znak.|Název prototypu musí mít alespoň {{ limit }} znaků.'
+      max_length: 'Název prototypu nesmí být delší než 1 znak.|Název prototypu nesmí být delší než {{ limit }} znaků.'

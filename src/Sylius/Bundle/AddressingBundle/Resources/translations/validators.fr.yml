@@ -9,6 +9,7 @@ sylius:
       not_blank: Veuillez entrer une ville
     country:
       not_blank: Veuillez choisir un pays.
+      disabled: Le pays choisi est désactivé. Veuillez en choisir un autre.
     first_name:
       max_length: Le prénom ne doit pas comporter plus de 255 caractères.
       min_length: Le prénom doit comporter au moins 2 caractères.
@@ -29,19 +30,30 @@ sylius:
       not_blank: Veuillez entrer une adresse.
     not_shippable: "Cette adresse n'est pas une destination d'envoi valide."
   country:
-    iso_name:
+    code:
       not_blank: Veuillez entrer le code ISO du pays.
-    name:
-      max_length: Le nom du pays ne doit pas contenir plus de 255 caractères.
-      not_blank: Veuillez entrer le nom du pays.
+      unique: Le code ISO du pays doit être unique.
   province:
+    code:
+      min_length: Le code de la région doit comporter au moins 5 caractères.
+      not_blank: Veuillez entrer le code de la région.
+      regex: Le code de la région doit avoir le format suivant XX-XX (ex. FR-IF).
+      unique: Le code de la région doit être unique.
     name:
       max_length: Le nom de la région ne doit pas dépasser les 255 caractères.
       min_length: Le nom de la région doit comporter au moins 2 caractères.
       not_blank: Veuillez fournir le nom de la région.
+      unique: Le nom de la région doit être unique.
   zone:
+    code:
+      not_blank: Merci de saisir le code de la zone.
+      unique: Le code de la zone doit être unique.
     members:
       min_count: 'Veuillez ajouter au moins {{limit}} zone(s) membre(s).'
     name:
       max_length: Le nom de la zone ne doit pas dépasser les 255 caractères.
       not_blank: Veuillez fournir le nom de la zone.
+  zone_member:
+    code:
+      not_blank: Merci de choisir un membre de la zone.
+    unique: Le membre choisi fait déjà partie de cette zone.

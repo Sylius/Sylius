@@ -14,7 +14,7 @@ sylius:
       street: Adresă
       province: Județ
     country:
-      iso_name: Cod ISO
+      add_province: Adăugare județ
       name: Nume
       provinces: Județe
       select: Selectaţi
@@ -22,6 +22,7 @@ sylius:
       name: Nume
       select: Selectaţi
     zone:
+      add_member: Adaugă membru
       members: Membri
       name: Nume
       type: Tip
@@ -30,10 +31,7 @@ sylius:
         province: Județ
         zone: Zonă
       scope: Domeniul de aplicare
+      select: Selectaţi
       select_scope: Selectaţi domeniul de aplicare
-    zone_member_country:
-      country: Țară
-    zone_member_province:
-      province: Județ
-    zone_member_zone:
-      zone: Zonă
+    zone_member:
+      select: Selectaţi

@@ -1,4 +1,5 @@
 suites:
+    Association: { namespace: Sylius\Component\Association, psr4_prefix: Sylius\Component\Association, spec_path: src/Sylius/Component/Association, src_path: src/Sylius/Component/Association }
     Addressing: { namespace: Sylius\Component\Addressing, psr4_prefix: Sylius\Component\Addressing, spec_path: src/Sylius/Component/Addressing, src_path: src/Sylius/Component/Addressing }
     Archetype: { namespace: Sylius\Component\Archetype, psr4_prefix: Sylius\Component\Archetype, spec_path: src/Sylius/Component/Archetype, src_path: src/Sylius/Component/Archetype }
     Attribute: { namespace: Sylius\Component\Attribute, psr4_prefix: Sylius\Component\Attribute, spec_path: src/Sylius/Component/Attribute, src_path: src/Sylius/Component/Attribute }
@@ -10,6 +11,7 @@ suites:
     Inventory: { namespace: Sylius\Component\Inventory, psr4_prefix: Sylius\Component\Inventory, spec_path: src/Sylius/Component/Inventory, src_path: src/Sylius/Component/Inventory }
     Locale: { namespace: Sylius\Component\Locale, psr4_prefix: Sylius\Component\Locale, spec_path: src/Sylius/Component/Locale, src_path: src/Sylius/Component/Locale }
     Mailer: { namespace: Sylius\Component\Mailer, psr4_prefix: Sylius\Component\Mailer, spec_path: src/Sylius/Component/Mailer, src_path: src/Sylius/Component/Mailer }
+    Metadata: { namespace: Sylius\Component\Metadata, psr4_prefix: Sylius\Component\Metadata, spec_path: src/Sylius/Component/Metadata, src_path: src/Sylius/Component/Metadata }
     Order: { namespace: Sylius\Component\Order, psr4_prefix: Sylius\Component\Order, spec_path: src/Sylius/Component/Order, src_path: src/Sylius/Component/Order }
     Originator: { namespace: Sylius\Component\Originator, psr4_prefix: Sylius\Component\Originator, spec_path: src/Sylius/Component/Originator, src_path: src/Sylius/Component/Originator }
     Payment: { namespace: Sylius\Component\Payment, psr4_prefix: Sylius\Component\Payment, spec_path: src/Sylius/Component/Payment, src_path: src/Sylius/Component/Payment }
@@ -20,6 +22,7 @@ suites:
     Registry: { namespace: Sylius\Component\Registry, psr4_prefix: Sylius\Component\Registry, spec_path: src/Sylius/Component/Registry, src_path: src/Sylius/Component/Registry }
     Report: { namespace: Sylius\Component\Report, psr4_prefix: Sylius\Component\Report, spec_path: src/Sylius/Component/Report, src_path: src/Sylius/Component/Report }
     Resource: { namespace: Sylius\Component\Resource, psr4_prefix: Sylius\Component\Resource, spec_path: src/Sylius/Component/Resource, src_path: src/Sylius/Component/Resource }
+    Review: { namespace: Sylius\Component\Review, psr4_prefix: Sylius\Component\Review, spec_path: src/Sylius/Component/Review, src_path: src/Sylius/Component/Review }
     Sequence: { namespace: Sylius\Component\Sequence, psr4_prefix: Sylius\Component\Sequence, spec_path: src/Sylius/Component/Sequence, src_path: src/Sylius/Component/Sequence }
     Shipping: { namespace: Sylius\Component\Shipping, psr4_prefix: Sylius\Component\Shipping, spec_path: src/Sylius/Component/Shipping, src_path: src/Sylius/Component/Shipping }
     Storage: { namespace: Sylius\Component\Storage, psr4_prefix: Sylius\Component\Storage, spec_path: src/Sylius/Component/Storage, src_path: src/Sylius/Component/Storage }
@@ -29,7 +32,9 @@ suites:
     User: { namespace: Sylius\Component\User, psr4_prefix: Sylius\Component\User, spec_path: src/Sylius/Component/User, src_path: src/Sylius/Component/User }
     Variation: { namespace: Sylius\Component\Variation, psr4_prefix: Sylius\Component\Variation, spec_path: src/Sylius/Component/Variation, src_path: src/Sylius/Component/Variation }
 
+    AssociationBundle: { namespace: Sylius\Bundle\AssociationBundle, psr4_prefix: Sylius\Bundle\AssociationBundle, spec_path: src/Sylius/Bundle/AssociationBundle, src_path: src/Sylius/Bundle/AssociationBundle }
     AddressingBundle: { namespace: Sylius\Bundle\AddressingBundle, psr4_prefix: Sylius\Bundle\AddressingBundle, spec_path: src/Sylius/Bundle/AddressingBundle, src_path: src/Sylius/Bundle/AddressingBundle }
+    AdminBundle: { namespace: Sylius\Bundle\AdminBundle, psr4_prefix: Sylius\Bundle\AdminBundle, spec_path: src/Sylius/Bundle/AdminBundle, src_path: src/Sylius/Bundle/AdminBundle }
     ApiBundle: { namespace: Sylius\Bundle\ApiBundle, psr4_prefix: Sylius\Bundle\ApiBundle, spec_path: src/Sylius/Bundle/ApiBundle, src_path: src/Sylius/Bundle/ApiBundle }
     ArchetypeBundle: { namespace: Sylius\Bundle\ArchetypeBundle, psr4_prefix: Sylius\Bundle\ArchetypeBundle, spec_path: src/Sylius/Bundle/ArchetypeBundle, src_path: src/Sylius/Bundle/ArchetypeBundle }
     AttributeBundle: { namespace: Sylius\Bundle\AttributeBundle, psr4_prefix: Sylius\Bundle\AttributeBundle, spec_path: src/Sylius/Bundle/AttributeBundle, src_path: src/Sylius/Bundle/AttributeBundle }
@@ -44,6 +49,7 @@ suites:
     InventoryBundle: { namespace: Sylius\Bundle\InventoryBundle, psr4_prefix: Sylius\Bundle\InventoryBundle, spec_path: src/Sylius/Bundle/InventoryBundle, src_path: src/Sylius/Bundle/InventoryBundle }
     LocaleBundle: { namespace: Sylius\Bundle\LocaleBundle, psr4_prefix: Sylius\Bundle\LocaleBundle, spec_path: src/Sylius/Bundle/LocaleBundle, src_path: src/Sylius/Bundle/LocaleBundle }
     MailerBundle: { namespace: Sylius\Bundle\MailerBundle, psr4_prefix: Sylius\Bundle\MailerBundle, spec_path: src/Sylius/Bundle/MailerBundle, src_path: src/Sylius/Bundle/MailerBundle }
+    MetadataBundle: { namespace: Sylius\Bundle\MetadataBundle, psr4_prefix: Sylius\Bundle\MetadataBundle, spec_path: src/Sylius/Bundle/MetadataBundle, src_path: src/Sylius/Bundle/MetadataBundle }
     MoneyBundle: { namespace: Sylius\Bundle\MoneyBundle, psr4_prefix: Sylius\Bundle\MoneyBundle, spec_path: src/Sylius/Bundle/MoneyBundle, src_path: src/Sylius/Bundle/MoneyBundle }
     OrderBundle: { namespace: Sylius\Bundle\OrderBundle, psr4_prefix: Sylius\Bundle\OrderBundle, spec_path: src/Sylius/Bundle/OrderBundle, src_path: src/Sylius/Bundle/OrderBundle }
     PaymentBundle: { namespace: Sylius\Bundle\PaymentBundle, psr4_prefix: Sylius\Bundle\PaymentBundle, spec_path: src/Sylius/Bundle/PaymentBundle, src_path: src/Sylius/Bundle/PaymentBundle }
@@ -54,15 +60,19 @@ suites:
     RbacBundle: { namespace: Sylius\Bundle\RbacBundle, psr4_prefix: Sylius\Bundle\RbacBundle, spec_path: src/Sylius/Bundle/RbacBundle, src_path: src/Sylius/Bundle/RbacBundle }
     ReportBundle: { namespace: Sylius\Bundle\ReportBundle, psr4_prefix: Sylius\Bundle\ReportBundle, spec_path: src/Sylius/Bundle/ReportBundle, src_path: src/Sylius/Bundle/ReportBundle }
     ResourceBundle: { namespace: Sylius\Bundle\ResourceBundle, psr4_prefix: Sylius\Bundle\ResourceBundle, spec_path: src/Sylius/Bundle/ResourceBundle, src_path: src/Sylius/Bundle/ResourceBundle }
+    ReviewBundle: { namespace: Sylius\Bundle\ReviewBundle, psr4_prefix: Sylius\Bundle\ReviewBundle, spec_path: src/Sylius/Bundle/ReviewBundle, src_path: src/Sylius/Bundle/ReviewBundle }
     SearchBundle: { namespace: Sylius\Bundle\SearchBundle, psr4_prefix: Sylius\Bundle\SearchBundle, spec_path: src/Sylius/Bundle/SearchBundle, src_path: src/Sylius/Bundle/SearchBundle }
     SequenceBundle: { namespace: Sylius\Bundle\SequenceBundle, psr4_prefix: Sylius\Bundle\SequenceBundle, spec_path: src/Sylius/Bundle/SequenceBundle, src_path: src/Sylius/Bundle/SequenceBundle }
     SettingsBundle: { namespace: Sylius\Bundle\SettingsBundle, psr4_prefix: Sylius\Bundle\SettingsBundle, spec_path: src/Sylius/Bundle/SettingsBundle, src_path: src/Sylius/Bundle/SettingsBundle }
     ShippingBundle: { namespace: Sylius\Bundle\ShippingBundle, psr4_prefix: Sylius\Bundle\ShippingBundle, spec_path: src/Sylius/Bundle/ShippingBundle, src_path: src/Sylius/Bundle/ShippingBundle }
     TaxationBundle: { namespace: Sylius\Bundle\TaxationBundle, psr4_prefix: Sylius\Bundle\TaxationBundle, spec_path: src/Sylius/Bundle/TaxationBundle, src_path: src/Sylius/Bundle/TaxationBundle }
     TaxonomyBundle: { namespace: Sylius\Bundle\TaxonomyBundle, psr4_prefix: Sylius\Bundle\TaxonomyBundle, spec_path: src/Sylius/Bundle/TaxonomyBundle, src_path: src/Sylius/Bundle/TaxonomyBundle }
+    ThemeBundle: { namespace: Sylius\Bundle\ThemeBundle, psr4_prefix: Sylius\Bundle\ThemeBundle , spec_path: src/Sylius/Bundle/ThemeBundle, src_path: src/Sylius/Bundle/ThemeBundle }
     TranslationBundle: { namespace: Sylius\Bundle\TranslationBundle, psr4_prefix: Sylius\Bundle\TranslationBundle, spec_path: src/Sylius/Bundle/TranslationBundle, src_path: src/Sylius/Bundle/TranslationBundle }
+    UiBundle: { namespace: Sylius\Bundle\UiBundle, psr4_prefix: Sylius\Bundle\UiBundle, spec_path: src/Sylius/Bundle/UiBundle, src_path: src/Sylius/Bundle/UiBundle }
     UserBundle: { namespace: Sylius\Bundle\UserBundle, psr4_prefix: Sylius\Bundle\UserBundle, spec_path: src/Sylius/Bundle/UserBundle, src_path: src/Sylius/Bundle/UserBundle }
     VariationBundle: { namespace: Sylius\Bundle\VariationBundle, psr4_prefix: Sylius\Bundle\VariationBundle, spec_path: src/Sylius/Bundle/VariationBundle, src_path: src/Sylius/Bundle/VariationBundle }
 
+    SyliusBehat: { namespace: Sylius\Behat, psr4_prefix: Sylius\Behat, spec_path: src/Sylius/Behat, src_path: src/Sylius/Behat }
 extensions:
     - Akeneo\SkipExampleExtension

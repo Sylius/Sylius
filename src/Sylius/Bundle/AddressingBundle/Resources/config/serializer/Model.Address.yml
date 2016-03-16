@@ -30,17 +30,9 @@ Sylius\Component\Addressing\Model\Address:
         updatedAt:
             expose: true
             type: DateTime
-    relations:
-        - rel: country
-          href:
-                route: sylius_api_country_show
-                parameters:
-                    id: expr(object.getCountry().getId())
-        - rel: province
-          exclusion:
-                exclude_if: expr(!object.getProvince())
-          href:
-                route: sylius_api_province_show
-                parameters:
-                    countryId: expr(object.getCountry().getId())
-                    id: expr(object.getProvince().getId())
+        countryCode:
+            expose: true
+            type: string
+        provinceCode:
+            expose: true
+            type: string

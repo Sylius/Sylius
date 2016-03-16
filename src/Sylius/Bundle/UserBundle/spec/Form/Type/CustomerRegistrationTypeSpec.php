@@ -14,8 +14,8 @@ namespace spec\Sylius\Bundle\UserBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Bundle\UserBundle\Form\EventListener\CustomerRegistrationFormListener;
-use Sylius\Bundle\UserBundle\Form\EventListener\UserRegistrationFormListener;
+use Sylius\Bundle\UserBundle\Form\EventSubscriber\CustomerRegistrationFormSubscriber;
+use Sylius\Bundle\UserBundle\Form\EventSubscriber\UserRegistrationFormSubscriber;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\Test\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -24,7 +24,7 @@ class CustomerRegistrationTypeSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $customerRepository)
     {
-        $this->beConstructedWith('Customer', array('sylius'), $customerRepository);
+        $this->beConstructedWith('Customer', ['sylius'], $customerRepository);
     }
 
     function it_is_initializable()
@@ -44,10 +44,10 @@ class CustomerRegistrationTypeSpec extends ObjectBehavior
         $builder->add('email', 'email', Argument::type('array'))->shouldbeCalled()->willReturn($builder);
         $builder->add('user', 'sylius_user_registration', Argument::type('array'))->shouldbeCalled()->willReturn($builder);
         $builder->addEventSubscriber(
-            Argument::type(CustomerRegistrationFormListener::class)
+            Argument::type(CustomerRegistrationFormSubscriber::class)
         )->shouldbeCalled()->willReturn($builder);
         $builder->addEventSubscriber(
-            Argument::type(UserRegistrationFormListener::class)
+            Argument::type(UserRegistrationFormSubscriber::class)
         )->shouldbeCalled()->willReturn($builder);
         $builder->setDataLocked(false)->shouldbeCalled()->willReturn($builder);
 
@@ -56,11 +56,11 @@ class CustomerRegistrationTypeSpec extends ObjectBehavior
 
     function it_has_options(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'Customer',
-            'validation_groups' => array('sylius'),
-            'cascade_validation' => true
-        ))->shouldBeCalled();
+            'validation_groups' => ['sylius'],
+            'cascade_validation' => true,
+        ])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

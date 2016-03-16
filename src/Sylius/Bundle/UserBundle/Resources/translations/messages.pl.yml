@@ -2,29 +2,27 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    email: Email
-    register: Zarejestruj
-    login: Zaloguj
-    logout: Wyloguj
-    change_password: Zmiana hasła
-    account_panel_outline: sylius.account.home.outline
   form:
     group:
       name: Nazwa
       roles: Role
     user:
       email: Email
-      enabled: Aktywne
+      enabled: Włączone
       password:
         label: Hasło
-      shipping_address: Adres wysyłkowy
+        confirmation: Weryfikacja
+      remember_me: Zapamiętaj mnie
+      shipping_address: Adres dostawy
     customer:
       first_name: Imię
       groups: Grupy
       last_name: Nazwisko
       email: Email
-      billing_address: Adres rozliczeniowy
+      phone_number: Numer telefonu
+      gender: Płeć
+      birthday: Data urodzenia
+      billing_address: Adres do rachunku
       different_billing_address: Użyć innego adresu do rozliczeń?
     user_filter:
       query: Szukaj

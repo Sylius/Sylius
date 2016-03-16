@@ -1,0 +1,35 @@
+{% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
+
+{% block toolbar %}
+    {% set icon %}
+        <a href="#">
+            {# fake image span #}<span style="width: 0; height: 28px; vertical-align: middle;"></span>
+            <span class="sf-toolbar-status">{{ collector.channels|length }}</span>
+            <span class="sf-toolbar-value">
+                channel(s),
+                <b>{{ collector.currentChannel.name|default('Undefined') }}</b>
+            </span>
+        </a>
+    {% endset %}
+
+    {% set text %}
+        <div class="sf-toolbar-info-piece">
+            <table style="background-color: #FFF !important;">
+                <tr>
+                    <td>Name</td>
+                    <td>Hostname</td>
+                    <td>Action</td>
+                </tr>
+                {% for channel in collector.channels %}
+                    <tr>
+                        <td><b>{{ channel.name }}</b></td>
+                        <td>{{ channel.hostname }}</td>
+                        <td><a href="?_channel_code={{ channel.code }}">Change</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    {% endset %}
+
+    {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { link: false }) }}
+{% endblock %}

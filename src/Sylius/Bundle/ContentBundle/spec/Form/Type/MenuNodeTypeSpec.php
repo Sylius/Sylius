@@ -22,7 +22,7 @@ class MenuNodeTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('My\Resource\Model', array('validation_group'));
+        $this->beConstructedWith('My\Resource\Model', ['validation_group']);
     }
 
     function it_is_initializable()
@@ -32,17 +32,17 @@ class MenuNodeTypeSpec extends ObjectBehavior
 
     function it_builds_a_form(FormBuilderInterface $builder)
     {
-        $builder ->add('name', 'text', Argument::type('array'))->shouldBeCalled()->willReturn($builder);
-        $builder ->add('label', 'text', Argument::type('array'))->shouldBeCalled()->willReturn($builder);
-        $builder ->add('display', null, Argument::type('array'))->shouldBeCalled()->willReturn($builder);
-        $builder ->add('displayChildren', null, Argument::type('array'))->shouldBeCalled()->willReturn($builder);
-        $builder ->add('linkType', 'choice', Argument::type('array'))->shouldBeCalled()->willReturn($builder);
-        $builder ->add('publishable', null, Argument::type('array'))->shouldBeCalled()->willReturn($builder);
-        $builder ->add('publishStartDate', 'datetime', Argument::type('array'))->shouldBeCalled()->willReturn($builder);
-        $builder ->add('publishEndDate', 'datetime', Argument::type('array'))->shouldBeCalled()->willReturn($builder);
-        $builder ->add('route', null, Argument::type('array'))->shouldBeCalled()->willReturn($builder);
-        $builder ->add('content', 'sylius_static_content_choice',  Argument::type('array'))->shouldBeCalled()->willReturn($builder);
-        $builder ->add('uri', null, Argument::type('array'))->shouldBeCalled()->willReturn($builder);
+        $builder->add('name', 'text', Argument::type('array'))->shouldBeCalled()->willReturn($builder);
+        $builder->add('label', 'text', Argument::type('array'))->shouldBeCalled()->willReturn($builder);
+        $builder->add('display', null, Argument::type('array'))->shouldBeCalled()->willReturn($builder);
+        $builder->add('displayChildren', null, Argument::type('array'))->shouldBeCalled()->willReturn($builder);
+        $builder->add('linkType', 'choice', Argument::type('array'))->shouldBeCalled()->willReturn($builder);
+        $builder->add('publishable', null, Argument::type('array'))->shouldBeCalled()->willReturn($builder);
+        $builder->add('publishStartDate', 'datetime', Argument::type('array'))->shouldBeCalled()->willReturn($builder);
+        $builder->add('publishEndDate', 'datetime', Argument::type('array'))->shouldBeCalled()->willReturn($builder);
+        $builder->add('route', null, Argument::type('array'))->shouldBeCalled()->willReturn($builder);
+        $builder->add('content', 'sylius_static_content_choice',  Argument::type('array'))->shouldBeCalled()->willReturn($builder);
+        $builder->add('uri', null, Argument::type('array'))->shouldBeCalled()->willReturn($builder);
 
         $this->buildForm($builder);
     }

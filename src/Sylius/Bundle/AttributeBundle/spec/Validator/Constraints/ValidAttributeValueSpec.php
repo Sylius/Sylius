@@ -23,7 +23,7 @@ class ValidAttributeValueSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidAttributeValue');
     }
-    
+
     function it_is_constraint()
     {
         $this->shouldHaveType('Symfony\Component\Validator\Constraint');

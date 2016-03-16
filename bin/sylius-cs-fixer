@@ -1,4 +1,4 @@
 #!/bin/bash
 
-php-cs-fixer fix . --config-file etc/phpcs/.php_cs
-php-cs-fixer fix . --config-file etc/phpcs/.phpspec_cs --fixers=-visibility
+bin/php-cs-fixer fix . --config-file etc/phpcs/.php_cs
+bin/php-cs-fixer fix . --config-file etc/phpcs/.phpspec_cs

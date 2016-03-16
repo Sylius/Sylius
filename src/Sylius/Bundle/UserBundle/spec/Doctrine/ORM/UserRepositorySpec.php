@@ -25,10 +25,8 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 class UserRepositorySpec extends ObjectBehavior
 {
-    public function let(EntityManager $em, ClassMetadata $classMetadata, FilterCollection $collection)
+    public function let(EntityManager $em, ClassMetadata $classMetadata)
     {
-        $em->getFilters()->willReturn($collection);
-
         $this->beConstructedWith($em, $classMetadata);
     }
 
@@ -44,13 +42,10 @@ class UserRepositorySpec extends ObjectBehavior
 
     function it_create_paginator(
         $em,
-        $collection,
         QueryBuilder $builder,
         Expr $expr,
         AbstractQuery $query
     ) {
-        $collection->disable('softdeleteable')->shouldBeCalled();
-
         $em->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
         $builder->select('o')->shouldBeCalled()->willReturn($builder);
         $builder->from(Argument::any(), 'o', Argument::cetera())->shouldBeCalled()->willReturn($builder);
@@ -76,19 +71,16 @@ class UserRepositorySpec extends ObjectBehavior
         $builder->getQuery()->shouldBeCalled()->willReturn($query);
 
         $this->createFilterPaginator(
-            array(
+            [
                 'enabled' => true,
-                'query' => 'arnaud'
-            ),
-            array('name' => 'asc'),
-            true
+                'query' => 'arnaud',
+            ],
+            ['name' => 'asc']
         )->shouldHaveType(Pagerfanta::class);
     }
 
-    function it_finds_details($em, $collection, QueryBuilder $builder, Expr $expr, AbstractQuery $query)
+    function it_finds_details($em, QueryBuilder $builder, Expr $expr, AbstractQuery $query)
     {
-        $collection->disable('softdeleteable')->shouldBeCalled();
-
         $builder->expr()->shouldBeCalled()->willReturn($expr);
         $expr->eq('o.id', ':id')->shouldBeCalled()->willReturn($expr);
 
@@ -102,8 +94,6 @@ class UserRepositorySpec extends ObjectBehavior
 
         $builder->getQuery()->shouldBeCalled()->willReturn($query);
         $query->getOneOrNullResult()->shouldBeCalled();
-
-        $collection->enable('softdeleteable')->shouldBeCalled();
 
         $this->findForDetailsPage(10);
     }
@@ -138,14 +128,11 @@ class UserRepositorySpec extends ObjectBehavior
     }
 
     function it_finds_one_by_email(
-        $collection,
         $em,
         QueryBuilder $builder,
         Expr $expr,
         AbstractQuery $query
     ) {
-        $collection->disable('softdeleteable')->shouldBeCalled();
-
         $em->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
         $builder->select('o')->shouldBeCalled()->willReturn($builder);
         $builder->from(Argument::any(), 'o', Argument::cetera())->shouldBeCalled()->willReturn($builder);
@@ -161,8 +148,6 @@ class UserRepositorySpec extends ObjectBehavior
 
         $builder->getQuery()->shouldBeCalled()->willReturn($query);
         $query->getOneOrNullResult()->shouldBeCalled();
-
-        $collection->enable('softdeleteable')->shouldBeCalled();
 
         $this->findForDetailsPage(10);
     }

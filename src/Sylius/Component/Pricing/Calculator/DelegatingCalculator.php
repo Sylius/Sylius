@@ -42,7 +42,7 @@ class DelegatingCalculator implements DelegatingCalculatorInterface
     /**
      * {@inheritdoc}
      */
-    public function calculate(PriceableInterface $subject, array $context = array())
+    public function calculate(PriceableInterface $subject, array $context = [])
     {
         if (null === $type = $subject->getPricingCalculator()) {
             throw new \InvalidArgumentException('Cannot calculate the price for PriceableInterface instance without calculator defined.');

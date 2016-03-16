@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  checkout:
-    shipping_method:
-      not_blank: 発送方法を選択してください。
   form:
     checkout:
       addressing:
@@ -13,6 +10,7 @@ sylius:
       shipping_method: 発送方法
     channel:
       taxonomies: sylius.breadcrumb.taxonomy.index
+      currency_default: デフォルトの通貨
       shipping_methods: sylius.breadcrumb.shipping_method.index
       payment_methods: sylius.breadcrumb.payment_method.index
     image:
@@ -24,10 +22,11 @@ sylius:
       payment_state: 入金状況
     product:
       short_description: 商品概要
-      tax_category: 課税方法
       variant_selection_method: バリエーション指定方法
     product_filter:
       name: 商品名
+    product_variant:
+      tax_category: 税区分
     settings:
       general:
         currency: デフォルトの通貨
@@ -64,3 +63,5 @@ sylius:
       images: 画像
       on_hand: 在庫
       price: 価格
+    guest:
+      email: メールアドレス

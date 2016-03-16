@@ -2,15 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  checkout:
-    shipping_method:
-      not_blank: Per favore seleziona il metodo di spedizione.
   form:
     action:
       add_product_configuration:
         price: Prezzo unitario
         quantity: Quantità
         variant: Variante
+      customer_group: Gruppo clienti
     block:
       body: Testo
       id: ID
@@ -22,12 +20,19 @@ sylius:
         different_billing_address: Vuoi usare un indirizzo diverso per la fatturazione?
       payment_method: Metodo di pagamento
       shipping_method: Metodo di spedizione
+    promotion:
+      channels: Canale
+    coupon:
+      per_customer_usage_limit: Limite di utilizzo al cliente
     group:
       name: Nome
       roles: Regole
     channel:
       taxonomies: Tassonomie
+      locale_default: Locale predefinita
       locales: Localizzazioni
+      currency_default: Valuta predefinita
+      currencies: Monete
       shipping_methods: Metodi di spedizione
       payment_methods: Metodi di pagamento
     image:
@@ -42,6 +47,7 @@ sylius:
       total_from: Da
       total_to: A
       payment_state: Stato pagamento
+      channel: Tutti i canali
     page:
       body: Testo
       id: ID
@@ -50,11 +56,13 @@ sylius:
       restricted_zone: Zona soggetta a restrizioni
       shipping_category: Categoria di spedizione
       short_description: Descrizione breve
-      tax_category: Aliquota
       variant_selection_method: Metodo di selezione delle varianti
+      main_taxon: Taxon principale
     product_filter:
       name: Nome
       sku: SKU
+    product_variant:
+      tax_category: Categoria fiscale
     settings:
       general:
         currency: Valuta predefinita
@@ -62,17 +70,24 @@ sylius:
         meta_description: Meta descrizione
         meta_keywords: Meta keywords
         title: Titolo della pagina
+        tracking_code:
+          Tracking code (for example: Codice Google Analytics)
       taxation:
         default_tax_zone: Aliquota predefinita
+      security:
+        enabled: Abilitare?
     shipment_filter:
       created_at_from: Da
       created_at_to: A
       number: "Numero d'ordine"
       shipping_address: Spedisci a
+      channel: Tutti i canali
     payment_filter:
       created_at_from: Da
       created_at_to: A
       number: "Numero d'ordine"
+      billing_address: Fattura a nome di
+      channel: Tutti i canali
     shipping_method:
       zone: Zona
     taxon:
@@ -98,11 +113,18 @@ sylius:
       images: Immagini
       on_hand: Disponibilità attuale
       price: Prezzo
+      original_price: Prezzo originale
       sku: SKU
       weight: Peso
       width: Larghezza
     attribute:
       product_attribute_value:
+        attribute: Attributo
         value: Valore
     guest:
       email: Email
+    product_association:
+      product: Prodotto associato
+      type: Tipi di associazione
+    product_association_type:
+      name: Nome

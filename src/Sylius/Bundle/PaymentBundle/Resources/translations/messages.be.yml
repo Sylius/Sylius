@@ -30,6 +30,3 @@ sylius:
       enabled: Уключана?
       gateway: Шлюз
       name: Назва
-      fee_calculator:
-        fixed:
-          amount: Сума

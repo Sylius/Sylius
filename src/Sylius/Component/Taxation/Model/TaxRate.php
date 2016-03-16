@@ -11,11 +11,15 @@
 
 namespace Sylius\Component\Taxation\Model;
 
+use Sylius\Component\Resource\Model\TimestampableTrait;
+
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class TaxRate implements TaxRateInterface
 {
+    use TimestampableTrait;
+
     /**
      * @var mixed
      */
@@ -46,7 +50,7 @@ class TaxRate implements TaxRateInterface
     protected $amount = 0;
 
     /**
-     * @var Boolean
+     * @var bool
      */
     protected $includedInPrice = false;
 
@@ -54,16 +58,6 @@ class TaxRate implements TaxRateInterface
      * @var string
      */
     protected $calculator;
-
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
 
     public function __construct()
     {
@@ -139,7 +133,7 @@ class TaxRate implements TaxRateInterface
      */
     public function getAmountAsPercentage()
     {
-        return $this->getAmount() * 100;
+        return $this->amount * 100;
     }
 
     /**
@@ -183,34 +177,10 @@ class TaxRate implements TaxRateInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
-    public function getCreatedAt()
+    public function getLabel()
     {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
+        return sprintf('%s (%s%%)', $this->name, (float) $this->getAmountAsPercentage());
     }
 }

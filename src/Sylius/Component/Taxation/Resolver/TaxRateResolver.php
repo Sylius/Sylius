@@ -25,7 +25,7 @@ class TaxRateResolver implements TaxRateResolverInterface
     protected $taxRateRepository;
 
     /**
-     * @var RepositoryInterface $taxRateRepository
+     * @var RepositoryInterface
      */
     public function __construct(RepositoryInterface $taxRateRepository)
     {
@@ -35,13 +35,13 @@ class TaxRateResolver implements TaxRateResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function resolve(TaxableInterface $taxable, array $criteria = array())
+    public function resolve(TaxableInterface $taxable, array $criteria = [])
     {
         if (null === $category = $taxable->getTaxCategory()) {
             return null;
         }
 
-        $criteria = array_merge(array('category' => $category), $criteria);
+        $criteria = array_merge(['category' => $category], $criteria);
 
         return $this->taxRateRepository->findOneBy($criteria);
     }

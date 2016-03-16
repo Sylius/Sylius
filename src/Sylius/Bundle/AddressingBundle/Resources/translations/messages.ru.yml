@@ -14,14 +14,16 @@ sylius:
       street: Улица
       province: Район
     country:
-      iso_name: ISO код
+      add_province: Добавить регион
       name: Страна
       provinces: Области
       select: Выбрать
     province:
       name: Округ
+      abbreviation: Аббревиатура
       select: Выбрать
     zone:
+      add_member: Добавить
       members: Области
       name: Название
       type: Тип
@@ -30,10 +32,7 @@ sylius:
         province: Район
         zone: Зона
       scope: Область
+      select: Выбрать
       select_scope: Выберите область
-    zone_member_country:
-      country: Страна
-    zone_member_province:
-      province: Область
-    zone_member_zone:
-      zone: Округ
+    zone_member:
+      select: Выбрать

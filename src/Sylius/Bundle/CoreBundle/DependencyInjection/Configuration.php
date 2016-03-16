@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Core\Model\ProductVariantImage;
 use Sylius\Component\Core\Model\ProductVariantImageInterface;
+use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\NodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -138,6 +138,7 @@ class Configuration implements ConfigurationInterface
      *
      * @param $name
      * @param $defaultTemplate
+     *
      * @return NodeDefinition
      */
     private function addCheckoutStepNode($name, $defaultTemplate)

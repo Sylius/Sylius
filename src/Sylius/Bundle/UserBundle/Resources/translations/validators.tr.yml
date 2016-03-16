@@ -2,13 +2,32 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+  group:
+    name:
+      max: 'Grup ismi {{ limit }} karakterden uzun olamaz.'
+      min: 'Grup ismi en az {{ limit }} karakter uzunluğunda olmalıdır.'
+      not_blank: Lütfen grup adı giriniz.
   user:
     email:
       not_blank: Lütfen e-posta adresinizi girin.
+      invalid: Bu e-posta geçerli değil.
+    plainPassword:
+      not_blank: Lütfen parolanızı girin.
+      mismatch: Girilen parolalar uyuşmuyor
   customer:
     first_name:
+      max: 'İsim {{ limit }} karakterden uzun olamaz.'
+      min: 'İsim en az {{ limit }} karakter uzunluğunda olmalıdır.'
       not_blank: Lütfen adınızı giriniz.
     last_name:
+      max: 'Soyadı {{ limit }} karakterden daha uzun olamaz.'
+      min: 'Soyadı en az {{ limit }} karakter olmalıdır.'
       not_blank: Lütfen soyadınızı giriniz.
     email:
+      already_used: Bu e-posta zaten kullanılıyor, lütfen giriş yapın veya unutulan parolayı kullanın.
+      max: 'E-posta {{ limit }} karakterden uzun olmaması gerekir.'
+      min: 'E-posta {{ limit }} karakter uzunluğunda olmalıdır.'
       not_blank: Lütfen e-posta adresinizi girin.
+      invalid: Bu e-posta geçerli değil.
+      unique: Bu e-posta adresi zaten kullanılmakta.
+      registered: Bu e-posta zaten kullanılıyor, lütfen giriş yapın veya unutulan parolayı kullanın.

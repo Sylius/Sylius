@@ -38,7 +38,7 @@ interface AdjustableInterface
     /**
      * @param null|string $type
      *
-     * @return integer
+     * @return int
      */
     public function getAdjustmentsTotal($type = null);
 
@@ -49,5 +49,8 @@ interface AdjustableInterface
 
     public function clearAdjustments();
 
-    public function calculateAdjustmentsTotal();
+    /**
+     * Recalculates adjustments total. Should be used after adjustment change.
+     */
+    public function recalculateAdjustmentsTotal();
 }

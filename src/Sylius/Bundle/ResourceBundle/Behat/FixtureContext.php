@@ -118,7 +118,7 @@ class FixtureContext extends DefaultContext
      */
     public function iDeletedResource($type, $property, $value)
     {
-        $user = $this->findOneBy($type, array($property => $value));
+        $user = $this->findOneBy($type, [$property => $value]);
         $entityManager = $this->getEntityManager();
         $entityManager->remove($user);
         $entityManager->flush();

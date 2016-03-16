@@ -29,7 +29,7 @@ class DoctrineSluggablePass implements CompilerPassInterface
         if ($container->hasDefinition('stof_doctrine_extensions.listener.sluggable')) {
             $container
                 ->getDefinition('stof_doctrine_extensions.listener.sluggable')
-                ->addMethodCall('addManagedFilter', array('softdeleteable'))
+                ->addMethodCall('addManagedFilter', ['softdeleteable'])
             ;
         }
     }

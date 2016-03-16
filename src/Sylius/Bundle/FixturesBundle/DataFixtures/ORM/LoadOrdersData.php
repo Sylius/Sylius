@@ -31,43 +31,44 @@ class LoadOrdersData extends DataFixture
     {
         $orderFactory = $this->getOrderFactory();
         $orderItemFactory = $this->getOrderItemFactory();
+        $orderItemQuantityModifier = $this->get('sylius.order_item_quantity_modifier');
 
-        $channels = array(
-            'WEB-UK',
-            'WEB-DE',
-            'WEB-US',
-            'MOBILE',
-        );
+        $currencyExchangeRates = [
+            'GBP' => 0.8,
+            'USD' => 1.2,
+            'EUR' => 1.0,
+        ];
 
-        for ($i = 1; $i <= 50; $i++) {
+        for ($i = 1; $i <= 50; ++$i) {
             /* @var $order OrderInterface */
             $order = $orderFactory->createNew();
-            $channel = $this->getReference('Sylius.Channel.'.$this->faker->randomElement($channels));
+            $channel = $this->getReference('Sylius.Channel.DEFAULT');
 
             $order->setChannel($channel);
 
-            for ($j = 0, $items = rand(3, 6); $j <= $items; $j++) {
+            for ($j = 0, $items = rand(3, 6); $j <= $items; ++$j) {
                 $variant = $this->getReference('Sylius.Variant-'.rand(1, SYLIUS_FIXTURES_TOTAL_VARIANTS - 1));
 
                 /* @var $item OrderItemInterface */
                 $item = $orderItemFactory->createNew();
                 $item->setVariant($variant);
                 $item->setUnitPrice($variant->getPrice());
-                $item->setQuantity(rand(1, 5));
+
+                $orderItemQuantityModifier->modify($item, mt_rand(1, 5));
 
                 $order->addItem($item);
             }
 
             $this->createShipment($order);
 
-            $order->setCurrency($this->faker->randomElement(array('EUR', 'USD', 'GBP')));
+            $order->setCurrency($this->faker->randomElement(array_keys($currencyExchangeRates)));
+            $order->setExchangeRate($currencyExchangeRates[$order->getCurrency()]);
             $order->setShippingAddress($this->createAddress());
             $order->setBillingAddress($this->createAddress());
             $order->setCreatedAt($this->faker->dateTimeBetween('1 year ago', 'now'));
 
             $this->dispatchEvents($order);
 
-            $order->calculateTotal();
             $order->complete();
 
             $paymentState = PaymentInterface::STATE_COMPLETED;
@@ -103,7 +104,7 @@ class LoadOrdersData extends DataFixture
         /* @var $payment PaymentInterface */
         $payment = $this->getPaymentFactory()->createNew();
         $payment->setOrder($order);
-        $payment->setMethod($this->getReference('Sylius.PaymentMethod.StripeCheckout'));
+        $payment->setMethod($this->getReference('Sylius.PaymentMethod.Offline'));
         $payment->setAmount($order->getTotal());
         $payment->setCurrency($order->getCurrency());
         $payment->setState(null === $state ? $this->getPaymentState() : $state);
@@ -121,8 +122,8 @@ class LoadOrdersData extends DataFixture
         $shipment->setMethod($this->getReference('Sylius.ShippingMethod.UPS Ground'));
         $shipment->setState($this->getShipmentState());
 
-        foreach ($order->getInventoryUnits() as $item) {
-            $shipment->addItem($item);
+        foreach ($order->getItemUnits() as $item) {
+            $shipment->addUnit($item);
         }
 
         $order->addShipment($shipment);
@@ -138,7 +139,7 @@ class LoadOrdersData extends DataFixture
 
     protected function getPaymentState()
     {
-        return array_rand(array_flip(array(
+        return array_rand(array_flip([
             PaymentInterface::STATE_COMPLETED,
             PaymentInterface::STATE_FAILED,
             PaymentInterface::STATE_NEW,
@@ -148,12 +149,12 @@ class LoadOrdersData extends DataFixture
             PaymentInterface::STATE_CANCELLED,
             PaymentInterface::STATE_REFUNDED,
             PaymentInterface::STATE_UNKNOWN,
-        )));
+        ]));
     }
 
     protected function getShipmentState()
     {
-        return array_rand(array_flip(array(
+        return array_rand(array_flip([
             ShipmentInterface::STATE_PENDING,
             ShipmentInterface::STATE_ONHOLD,
             ShipmentInterface::STATE_CHECKOUT,
@@ -162,6 +163,6 @@ class LoadOrdersData extends DataFixture
             ShipmentInterface::STATE_BACKORDERED,
             ShipmentInterface::STATE_RETURNED,
             ShipmentInterface::STATE_CANCELLED,
-        )));
+        ]));
     }
 }

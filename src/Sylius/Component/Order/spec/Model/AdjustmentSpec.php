@@ -12,9 +12,11 @@
 namespace spec\Sylius\Component\Order\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Order\Model\AdjustableInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
+use Sylius\Component\Order\Model\OrderItemUnitInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -44,26 +46,59 @@ class AdjustmentSpec extends ObjectBehavior
 
     function it_allows_assigning_itself_to_an_adjustable(OrderInterface $order, OrderItemInterface $orderItem)
     {
+        $order->addAdjustment($this->getWrappedObject())->shouldBeCalled();
         $this->setAdjustable($order);
         $this->getAdjustable()->shouldReturn($order);
 
+        $order->removeAdjustment($this->getWrappedObject())->shouldBeCalled();
+        $orderItem->addAdjustment($this->getWrappedObject())->shouldBeCalled();
         $this->setAdjustable($orderItem);
         $this->getAdjustable()->shouldReturn($orderItem);
     }
 
-    function it_allows_detaching_itself_from_an_adjustable(OrderInterface $order, OrderItemInterface $orderItem)
-    {
+    function it_allows_detaching_itself_from_an_adjustable(
+        OrderInterface $order,
+        OrderItemInterface $orderItem,
+        OrderItemUnitInterface $orderItemUnit
+    ) {
+        $order->addAdjustment($this->getWrappedObject())->shouldBeCalled();
         $this->setAdjustable($order);
         $this->getAdjustable()->shouldReturn($order);
 
+        $order->removeAdjustment($this->getWrappedObject())->shouldBeCalled();
         $this->setAdjustable(null);
         $this->getAdjustable()->shouldReturn(null);
 
+        $orderItem->addAdjustment($this->getWrappedObject())->shouldBeCalled();
         $this->setAdjustable($orderItem);
         $this->getAdjustable()->shouldReturn($orderItem);
 
+        $orderItem->removeAdjustment($this->getWrappedObject())->shouldBeCalled();
         $this->setAdjustable(null);
         $this->getAdjustable()->shouldReturn(null);
+
+        $orderItemUnit->addAdjustment($this->getWrappedObject())->shouldBeCalled();
+        $this->setAdjustable($orderItemUnit);
+        $this->getAdjustable()->shouldReturn($orderItemUnit);
+
+        $orderItemUnit->removeAdjustment($this->getWrappedObject())->shouldBeCalled();
+        $this->setAdjustable(null);
+        $this->getAdjustable()->shouldReturn(null);
+    }
+
+    function it_throws_exception_during_not_supported_adjustable_class_set(AdjustableInterface $adjustable)
+    {
+        $this->shouldThrow(\InvalidArgumentException::class)->during('setAdjustable', [$adjustable]);
+    }
+
+    function it_throws_exception_during_adjustable_change_on_locked_adjustment(
+        OrderItemInterface $orderItem,
+        OrderItemInterface $otherOrderItem
+    ) {
+        $this->setAdjustable($orderItem);
+        $this->lock();
+        $this->shouldThrow(\LogicException::class)->during('setAdjustable', [null]);
+        $this->shouldThrow(\LogicException::class)->during('setAdjustable', [$otherOrderItem]);
     }
 
     function it_has_no_type_by_default()
@@ -77,15 +112,15 @@ class AdjustmentSpec extends ObjectBehavior
         $this->getType()->shouldReturn('some type');
     }
 
-    function it_has_no_description_by_default()
+    function it_has_no_label_by_default()
     {
-        $this->getDescription()->shouldReturn(null);
+        $this->getLabel()->shouldReturn(null);
     }
 
-    function its_description_is_mutable()
+    function its_label_is_mutable()
     {
-        $this->setDescription('Clothing tax (12%)');
-        $this->getDescription()->shouldReturn('Clothing tax (12%)');
+        $this->setLabel('Clothing tax (12%)');
+        $this->getLabel()->shouldReturn('Clothing tax (12%)');
     }
 
     function it_has_amount_equal_to_0_by_default()
@@ -99,15 +134,48 @@ class AdjustmentSpec extends ObjectBehavior
         $this->getAmount()->shouldReturn(399);
     }
 
+    function it_recalculates_adjustments_on_adjustable_entity_on_amount_change(
+        OrderInterface $order,
+        OrderItemInterface $orderItem,
+        OrderItemUnitInterface $orderItemUnit
+    ) {
+        $order->addAdjustment($this->getWrappedObject())->shouldBeCalled();
+        $this->setAdjustable($order);
+        $order->recalculateAdjustmentsTotal()->shouldBeCalled();
+        $this->setAmount(200);
+
+        $order->removeAdjustment($this->getWrappedObject())->shouldBeCalled();
+        $orderItem->addAdjustment($this->getWrappedObject())->shouldBeCalled();
+        $this->setAdjustable($orderItem);
+        $orderItem->recalculateAdjustmentsTotal()->shouldBeCalled();
+        $this->setAmount(300);
+
+        $orderItem->removeAdjustment($this->getWrappedObject())->shouldBeCalled();
+        $orderItemUnit->addAdjustment($this->getWrappedObject())->shouldBeCalled();
+        $this->setAdjustable($orderItemUnit);
+        $orderItemUnit->recalculateAdjustmentsTotal()->shouldBeCalled();
+        $this->setAmount(400);
+    }
+
+    function it_does_not_recalculate_adjustments_on_adjustable_entity_on_amount_change_when_adjustment_is_neutral(
+        OrderItemUnitInterface $orderItemUnit
+    ) {
+        $orderItemUnit->addAdjustment($this->getWrappedObject())->shouldBeCalled();
+        $this->setAdjustable($orderItemUnit);
+        $orderItemUnit->recalculateAdjustmentsTotal()->shouldBeCalledTimes(1);
+        $this->setNeutral(true);
+        $this->setAmount(400);
+    }
+
     function its_amount_should_accept_only_integer()
     {
         $this->setAmount(4498);
         $this->getAmount()->shouldBeInteger();
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetAmount(44.98 * 100);
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetAmount('4498');
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetAmount(round(44.98 * 100));
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetAmount(array(4498));
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetAmount(new \stdClass());
+        $this->shouldThrow(\InvalidArgumentException::class)->during('setAmount', [44.98 * 100]);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('setAmount', ['4498']);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('setAmount', [round(44.98 * 100)]);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('setAmount', [[4498]]);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('setAmount', [new \stdClass()]);
     }
 
     function it_is_not_neutral_by_default()
@@ -120,6 +188,23 @@ class AdjustmentSpec extends ObjectBehavior
         $this->shouldNotBeNeutral();
         $this->setNeutral(true);
         $this->shouldBeNeutral();
+    }
+
+    function it_recalculate_adjustments_on_adjustable_entity_on_neutral_change(OrderItemUnitInterface $orderItemUnit)
+    {
+        $orderItemUnit->addAdjustment($this->getWrappedObject())->shouldBeCalled();
+        $this->setAdjustable($orderItemUnit);
+        $orderItemUnit->recalculateAdjustmentsTotal()->shouldBeCalled();
+        $this->setNeutral(true);
+    }
+
+    function it_does_not_recalculate_adjustments_on_adjustable_entity_when_neutral_set_to_current_value(
+        OrderInterface $order
+    ) {
+        $order->addAdjustment($this->getWrappedObject())->shouldBeCalled();
+        $this->setAdjustable($order);
+        $order->recalculateAdjustmentsTotal()->shouldNotBeCalled();
+        $this->setNeutral(false);
     }
 
     function it_is_a_charge_if_amount_is_lesser_than_0()

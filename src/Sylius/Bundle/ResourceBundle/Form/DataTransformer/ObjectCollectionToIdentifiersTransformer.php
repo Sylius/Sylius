@@ -26,10 +26,10 @@ class ObjectCollectionToIdentifiersTransformer extends ObjectToIdentifierTransfo
     public function transform($value)
     {
         if (!is_array($value) && !$value instanceof \ArrayAccess) {
-            return array();
+            return [];
         }
 
-        $identifiers = array();
+        $identifiers = [];
         $accessor = PropertyAccess::createPropertyAccessor();
 
         foreach ($value as $object) {
@@ -45,9 +45,9 @@ class ObjectCollectionToIdentifiersTransformer extends ObjectToIdentifierTransfo
     public function reverseTransform($value)
     {
         if (empty($value)) {
-            return array();
+            return [];
         }
 
-        return $this->repository->findBy(array($this->identifier => $value));
+        return $this->repository->findBy([$this->identifier => $value]);
     }
 }

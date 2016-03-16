@@ -5,17 +5,26 @@ cmf_block:
     persistence:
         phpcr:
             block_basepath: /cms/blocks
+            string_document_class: %sylius.model.string_block.class%
+            simple_document_class: %sylius.model.simple_block.class%
+            imagine_document_class: %sylius.model.imagine_block.class%
+            action_document_class: %sylius.model.action_block.class%
+            menu_document_class: %sylius.model.menu_block.class%
+            slideshow_document_class: %sylius.model.slideshow_block.class%
 
 cmf_content:
     persistence:
         phpcr:
             content_basepath: /cms/pages
+            document_class: %sylius.model.static_content.class%
     default_template: SyliusWebBundle:Frontend/StaticContent:show.html.twig
 
 cmf_menu:
     persistence:
         phpcr:
             menu_basepath: /cms/menus
+            menu_document_class: %sylius.model.menu.class%
+            node_document_class: %sylius.model.menu_node.class%
 
 cmf_media:
     persistence:
@@ -33,6 +42,7 @@ cmf_routing:
         persistence:
             phpcr:
                 enabled: true
+                enable_initializer: true
                 route_basepath: /cms/routes
 
 doctrine_cache:

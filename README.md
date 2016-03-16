@@ -12,11 +12,11 @@ Sylius is an open source e-commerce solution for **PHP**, based on the [**Symfon
 
 Ultimate goal of the project is to create a webshop engine, which is user-friendly, *loved* by developers and has a helpful community.
 
-Sylius is constructed from fully decoupled components (bundles in Symfony2 glossary), which means that every feature (products catalog, shipping engine, promotions system...) can be used in any other application. 
+Sylius is constructed from fully decoupled components (bundles in Symfony2 glossary), which means that every feature (products catalog, shipping engine, promotions system...) can be used in any other application.
 
 We're using full-stack BDD methodology, with [phpspec](http://phpspec.net) and [Behat](http://behat.org).
 
-Windows support is a WIP! 
+Windows support is a WIP!
 
 [![Build status on Windows](https://img.shields.io/appveyor/ci/pjedrzejewski/sylius.svg)](https://ci.appveyor.com/project/pjedrzejewski/sylius/branch/master)
 
@@ -30,28 +30,40 @@ Quick Installation
 
 ```bash
 $ wget http://getcomposer.org/composer.phar
-$ php composer.phar create-project sylius/sylius:v0.15.0
+$ php composer.phar create-project sylius/sylius
 $ cd sylius
 $ php app/console sylius:install
+$ php app/console server:run
 ```
 
 The install script will give you the option to run fixtures that make testing and development phases much easier.
 
+If you want to try out new Sylius UI, please run the following commands:
+
+```bash
+$ npm install
+$ gulp
+```
+
 [Behat](http://behat.org) scenarios
 -----------------------------------
 
-You need to copy Behat default configuration file and enter your specific ``base_url``
-option there:
+By default Behat uses `http://localhost:8080/` as your application base url. If your one is different,
+you need to create `behat.yml` files that will overwrite it with your custom url:
 
-```bash
-$ cp behat.yml.dist behat.yml
-$ vi behat.yml
+```yaml
+imports: ["behat.yml.dist"]
+
+default:
+    extensions:
+        Behat\MinkExtension:
+            base_url: http://my.custom.url
 ```
 
-Then download [Selenium Server](http://seleniumhq.org/download/), and run it:
+Then run selenium-server-standalone:
 
 ```bash
-$ java -jar selenium-server-standalone-2.41.0.jar
+$ bin/selenium-server-standalone
 ```
 
 Then setup your test database:
@@ -64,8 +76,7 @@ $ php app/console doctrine:schema:create --env=test
 You can run Behat using the following commands:
 
 ```bash
-$ bin/behat # In order to run tests which don't need JS support
-$ bin/behat -p javascript # In order to run tests which need JS support
+$ bin/behat
 ```
 
 Troubleshooting

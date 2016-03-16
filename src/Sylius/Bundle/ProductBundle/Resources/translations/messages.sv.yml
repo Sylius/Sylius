@@ -9,3 +9,5 @@ sylius:
       meta_description: Metabeskrivning
     product_archetype:
       name: Namn
+    association_type:
+      name: Namn

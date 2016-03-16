@@ -99,6 +99,14 @@ class Metadata implements MetadataInterface
     /**
      * {@inheritdoc}
      */
+    public function getHumanizedName()
+    {
+        return trim(strtolower(preg_replace(['/([A-Z])/', '/[_\s]+/'], ['_$1', ' '], $this->name)));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getPluralName()
     {
         return Inflector::pluralize($this->name);
@@ -166,6 +174,14 @@ class Metadata implements MetadataInterface
     public function getServiceId($serviceName)
     {
         return sprintf('%s.%s.%s', $this->applicationName, $serviceName, $this->name);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPermissionCode($permissionName)
+    {
+        return sprintf('%s.%s.%s', $this->applicationName, $this->name, $permissionName);
     }
 
     /**

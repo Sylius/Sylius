@@ -27,6 +27,7 @@ class ElasticsearchFinder extends AbstractFinder
 {
     /**
      * TODO: maybe this should go to configuration, you can use setResultSetSize on the finder object for now
+     *
      * @var int
      */
     private $resultSetSize = 100;
@@ -110,7 +111,7 @@ class ElasticsearchFinder extends AbstractFinder
             $facets = $this->transformFacetsForPresentation($objects, $query->getAppliedFilters());
         }
 
-        $results = array();
+        $results = [];
         foreach ($objects as $object) {
             $results[$mapping[$object->getType()]['_meta']['model']][] = $object->getId();
         }
@@ -153,7 +154,7 @@ class ElasticsearchFinder extends AbstractFinder
             $facets = $this->transformFacetsForPresentation($objects, $query->getAppliedFilters());
         }
 
-        $results = array();
+        $results = [];
         foreach ($objects as $object) {
             $results[$mapping[$object->getType()]['_meta']['model']][] = $object->getId();
         }
@@ -180,7 +181,7 @@ class ElasticsearchFinder extends AbstractFinder
     public function compileElasticaTaxonQuery($facets = null, $configuration, $taxon, $types = null)
     {
         $elasticaQuery = new \Elastica\Query();
-        $boolFilter    = new \Elastica\Filter\BoolFilter();
+        $boolFilter = new \Elastica\Filter\BoolFilter();
 
         if (!empty($types)) {
             foreach ($types as $type) {
@@ -192,7 +193,7 @@ class ElasticsearchFinder extends AbstractFinder
 
         if ($channel = $this->channelContext->getChannel()) {
             $channelFilter = new \Elastica\Filter\Terms();
-            $channelFilter->setTerms('channels', array((string)$channel));
+            $channelFilter->setTerms('channels', [(string) $channel]);
             $boolFilter->addMust($channelFilter);
             $elasticaQuery->setPostFilter($boolFilter);
         }
@@ -200,7 +201,7 @@ class ElasticsearchFinder extends AbstractFinder
         $query = new \Elastica\Query\Filtered();
 
         $taxonFromRequestFilter = new \Elastica\Filter\Terms();
-        $taxonFromRequestFilter->setTerms('taxons', array($taxon));
+        $taxonFromRequestFilter->setTerms('taxons', [$taxon]);
         $boolFilter->addMust($taxonFromRequestFilter);
 
         $query->setFilter($boolFilter);
@@ -222,7 +223,7 @@ class ElasticsearchFinder extends AbstractFinder
     public function compileElasticSearchStringQuery($searchTerm, $appliedFilters = null, $configuration, $preSearchTaxonFilter, $types = null)
     {
         $elasticaQuery = new \Elastica\Query();
-        $boolFilter    = new \Elastica\Filter\BoolFilter();
+        $boolFilter = new \Elastica\Filter\BoolFilter();
         $query = new \Elastica\Query\QueryString($searchTerm);
 
         if (!empty($types)) {
@@ -235,7 +236,7 @@ class ElasticsearchFinder extends AbstractFinder
 
         if ($channel = $this->channelContext->getChannel()) {
             $channelFilter = new \Elastica\Filter\Terms();
-            $channelFilter->setTerms('channels', array((string)$channel));
+            $channelFilter->setTerms('channels', [(string) $channel]);
             $boolFilter->addMust($channelFilter);
             $elasticaQuery->setPostFilter($boolFilter);
         }
@@ -247,7 +248,7 @@ class ElasticsearchFinder extends AbstractFinder
             $query->setQuery(new \Elastica\Query\QueryString($searchTerm));
 
             $taxonFromRequestFilter = new \Elastica\Filter\Terms();
-            $taxonFromRequestFilter->setTerms('taxons', array($preSearchTaxonFilter));
+            $taxonFromRequestFilter->setTerms('taxons', [$preSearchTaxonFilter]);
             $boolFilter->addMust($taxonFromRequestFilter);
             $elasticaQuery->setPostFilter($boolFilter);
         }
@@ -286,7 +287,7 @@ class ElasticsearchFinder extends AbstractFinder
      */
     public function transformFacetsForPresentation($elements)
     {
-        $facets = array();
+        $facets = [];
         foreach ($elements->getAggregations() as $name => $facetData) {
             unset($facetData['doc_count']);
 
@@ -295,6 +296,12 @@ class ElasticsearchFinder extends AbstractFinder
             } else {
                 $facets[$name] = $facetData['buckets'];
             }
+        }
+        
+        foreach ($facets as &$facet) {
+            $facet = array_filter($facet, function($v){
+                return $v["doc_count"] != 0;
+            });
         }
 
         return array_reverse($facets);
@@ -324,7 +331,7 @@ class ElasticsearchFinder extends AbstractFinder
             $query = new \Elastica\Query\Filtered();
 
             $taxonFromRequestFilter = new \Elastica\Filter\Terms();
-            $taxonFromRequestFilter->setTerms('taxons', array($taxon));
+            $taxonFromRequestFilter->setTerms('taxons', [$taxon]);
             $boolFilter->addMust($taxonFromRequestFilter);
 
             $query->setFilter($boolFilter);
@@ -336,7 +343,7 @@ class ElasticsearchFinder extends AbstractFinder
                 $query->setQuery(new \Elastica\Query\QueryString($searchTerm));
 
                 $taxonFromRequestFilter = new \Elastica\Filter\Terms();
-                $taxonFromRequestFilter->setTerms('taxons', array($taxon));
+                $taxonFromRequestFilter->setTerms('taxons', [$taxon]);
                 $boolFilter->addMust($taxonFromRequestFilter);
 
                 $query->setFilter($boolFilter);
@@ -355,7 +362,7 @@ class ElasticsearchFinder extends AbstractFinder
      */
     public function createAggregations($configuration)
     {
-        $aggregations = array();
+        $aggregations = [];
         foreach ($configuration['filters']['facets'] as $name => $facet) {
             // terms facet creation
             if ($facet['type'] === 'terms') {
@@ -365,7 +372,7 @@ class ElasticsearchFinder extends AbstractFinder
                 ${$name.'Aggregation'}->setField($name);
                 ${$name.'Aggregation'}->setSize(550);
 
-                ${$name.'AggregationFilter'}->addAggregation(${$name . 'Aggregation'});
+                ${$name.'AggregationFilter'}->addAggregation(${$name.'Aggregation'});
             } // range facet creation
             elseif ('range' === $facet['type']) {
                 ${$name.'AggregationFilter'} = new \Elastica\Aggregation\Filter($name);
@@ -377,10 +384,10 @@ class ElasticsearchFinder extends AbstractFinder
                         ->addRange($value['from'], $value['to']);
                 }
 
-                ${$name.'AggregationFilter'}->addAggregation(${$name . 'Aggregation'});
+                ${$name.'AggregationFilter'}->addAggregation(${$name.'Aggregation'});
             }
 
-            $aggregations[$name]['aggregation']        = ${$name.'Aggregation'};
+            $aggregations[$name]['aggregation'] = ${$name.'Aggregation'};
             $aggregations[$name]['aggregation_filter'] = ${$name.'AggregationFilter'};
         }
 
@@ -409,7 +416,7 @@ class ElasticsearchFinder extends AbstractFinder
                     ${$normName.'RangeFilter'} = new \Elastica\Filter\Range();
 
                     foreach ($value as $range) {
-                        ${$normName.'RangeFilter'}->addField($name, array('gte' => $range['range'][0], 'lte' => $range['range'][1]));
+                        ${$normName.'RangeFilter'}->addField($name, ['gte' => $range['range'][0], 'lte' => $range['range'][1]]);
                         ${$normName.'BoolFilter'}->addMust($rangeFilters);
                     }
                 } else {
@@ -426,7 +433,7 @@ class ElasticsearchFinder extends AbstractFinder
                     $aggregations[$name]['aggregation_filter']->setFilter($boolFilter);
                 } elseif ($name != key($value)) {
                     if (isset(${key($value).'BoolFilter'})) {
-                        $aggregations[$name]['aggregation_filter']->setFilter(${key($value) . 'BoolFilter'});
+                        $aggregations[$name]['aggregation_filter']->setFilter(${key($value).'BoolFilter'});
                     }
                 }
             }
@@ -443,13 +450,14 @@ class ElasticsearchFinder extends AbstractFinder
      */
     public function applyFilterToElasticaQuery($appliedFilters, $elasticaQuery)
     {
-        $rangeFilters = new \Elastica\Filter\Range();
-        $boolFilter   = new \Elastica\Filter\BoolFilter();
+        $rangeFilters = new \Elastica\Filter\BoolOr();
+        $boolFilter = new \Elastica\Filter\BoolFilter();
 
-        $filters = array();
+        $filters = [];
+        $termFilters = [];
         foreach ($appliedFilters as $facet) {
-            if (strpos($facet[key($facet)], "|") !== false) {
-                $filters[key($facet)][] = array('range' => explode('|', $facet[key($facet)]));
+            if (strpos($facet[key($facet)], '|') !== false) {
+                $filters[key($facet)][] = ['range' => explode('|', $facet[key($facet)])];
             } else {
                 $filters[key($facet)][] = $facet[key($facet)];
             }
@@ -458,11 +466,13 @@ class ElasticsearchFinder extends AbstractFinder
         foreach ($filters as $name => $value) {
             if (is_array($value[0])) {
                 foreach ($value as $range) {
-                    $rangeFilters->addField($name, array('gte' => $range['range'][0], 'lte' => $range['range'][1]));
-                    $boolFilter->addShould($rangeFilters);
+                    $rangeFilter = new \Elastica\Filter\Range();
+                    $rangeFilter->addField($name, ['gte' => $range['range'][0], 'lte' => $range['range'][1]]);
+                    $rangeFilters->addFilter($rangeFilter);
                 }
+                $boolFilter->addShould($rangeFilters);
             } else {
-                $termFilters  = new \Elastica\Filter\Terms();
+                $termFilters = new \Elastica\Filter\Terms();
                 $termFilters->setTerms($name, $value);
                 $boolFilter->addShould($termFilters);
             }
@@ -470,7 +480,7 @@ class ElasticsearchFinder extends AbstractFinder
 
         $elasticaQuery->setFilter($boolFilter);
 
-        return array($termFilters, $rangeFilters, $boolFilter, $filters);
+        return [$termFilters, $rangeFilters, $boolFilter, $filters];
     }
 
     /**
@@ -490,7 +500,6 @@ class ElasticsearchFinder extends AbstractFinder
                     $elasticaQuery->addAggregation($aggregations[$name]['aggregation']);
                 }
             } else {
-
                 $elasticaQuery->addAggregation($aggregations[$name]['aggregation']);
             }
         }

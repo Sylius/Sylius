@@ -13,6 +13,8 @@ namespace spec\Sylius\Bundle\AddressingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,12 +22,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Julien Janvier <j.janvier@gmail.com>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
 class ZoneTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Zone', array('sylius'), array('shipping', 'pricing'));
+        $this->beConstructedWith('Zone', ['sylius'], ['shipping', 'pricing']);
     }
 
     function it_is_initializable()
@@ -43,40 +46,57 @@ class ZoneTypeSpec extends ObjectBehavior
         $this->getName()->shouldReturn('sylius_zone');
     }
 
-    function it_builds_form_with_proper_fields(FormBuilder $builder)
+    function it_builds_form_with_proper_fields(FormBuilder $builder, ZoneInterface $zone)
     {
+        $builder->getData()->willReturn($zone);
+        $zone->getType()->shouldBeCalled();
+
         $builder
             ->add('name', 'text', Argument::any())
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+
+        $builder
+            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('type', 'sylius_zone_type_choice', Argument::any())
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('scope', 'choice', Argument::any())
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('members', 'sylius_zone_member_collection', Argument::any())
+            ->add('members', 'collection', Argument::any())
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
-    function it_defines_assigned_data_class(OptionsResolver $resolver)
+    function it_configures_options(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults(
-                array(
-                    'data_class'        => 'Zone',
-                    'validation_groups' => array('sylius')
-                )
-            )
+                [
+                    'data_class' => 'Zone',
+                    'validation_groups' => ['sylius'],
+                ])
+            ->shouldBeCalled()
+        ;
+
+        $resolver
+            ->setDefault('zone_type', 'country')
             ->shouldBeCalled()
         ;
 

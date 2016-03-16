@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    priceable:
+      price: Çmimi
+      calculator: Çmimi
+      configuration: Konfigurimi
+    pricing:
+      volume_based:
+        label: Konfiguro çmimin
+        min: Sasia minimale
+        max: Sasia maksimale
+        price: Çmimi

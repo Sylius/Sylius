@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sylius\Component\Resource\Model;
 
 /**
@@ -8,12 +17,12 @@ namespace Sylius\Component\Resource\Model;
 interface ToggleableInterface
 {
     /**
-     * @return boolean
+     * @return bool
      */
     public function isEnabled();
 
     /**
-     * @param boolean $enabled
+     * @param bool $enabled
      */
     public function setEnabled($enabled);
 

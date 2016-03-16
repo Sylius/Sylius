@@ -2,8 +2,34 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+  group:
+    name:
+      max: 'Ime skupine ne sme biti daljše od {{ limit }} znakov.'
+      min: 'Ime skupine mora biti dolgo vsaj {{ limit }} znakov.'
+      not_blank: Prosimo, vnesite ime skupine.
+  user:
+    email:
+      not_blank: Prosimo, vnesite vaš elektronski naslov.
+      invalid: Ta e-pošta ni veljavna.
+      not_registered: Uporabnik s to e-pošto ne obstaja. Prosimo, najprej se registrirajte.
+    plainPassword:
+      not_blank: Prosimo, vnesite vaše geslo.
+      mismatch: Vneseni gesli se ne ujemata
+      wrong_current: Podano geslo je različno od sedanjega.
   customer:
     first_name:
+      max: 'Ime ne sme biti daljše od {{ limit }} znakov.'
+      min: 'Ime mora biti dolgo vsaj {{ limit }} znakov.'
       not_blank: Prosimo, vpišite ime.
     last_name:
+      max: 'Priimek ne sme biti daljši od {{ limit }} znakov.'
+      min: 'Priimek mora biti dolg vsaj {{ limit }} znakov.'
       not_blank: Prosimo, vpišite priimek.
+    email:
+      already_used: Ta e-pošta je že uporabljena, prosimo, prijavite se ali pa uporabite pozabljeno geslo.
+      max: 'E-pošta ne sme biti daljša od {{ limit }} znakov.'
+      min: 'Email mora biti dolga vsaj {{ limit }} znakov.'
+      not_blank: Prosimo, vnesite vaš elektronski naslov.
+      invalid: Ta e-pošta ni veljavna.
+      unique: Ta e-pošta je že v uporabi.
+      registered: Ta e-pošta je že uporabljena, prosimo, prijavite se ali pa uporabite pozabljeno geslo.

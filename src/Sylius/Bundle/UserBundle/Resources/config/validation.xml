@@ -17,14 +17,14 @@
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
     <class name="Sylius\Component\User\Model\Customer">
-        <constraint name="Sylius\Bundle\UserBundle\Validator\Constraints\RegisteredUser">
-            <option name="message">sylius.customer.email.registered</option>
-            <option name="groups">sylius_customer_guest</option>
-        </constraint>
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="message">sylius.customer.email.unique</option>
             <option name="fields">email</option>
             <option name="groups">sylius</option>
+        </constraint>
+        <constraint name="Sylius\Bundle\UserBundle\Validator\Constraints\RegisteredUser">
+            <option name="message">sylius.customer.email.registered</option>
+            <option name="groups">sylius_customer_guest</option>
         </constraint>
         <property name="firstName">
             <constraint name="NotBlank">
@@ -50,6 +50,12 @@
                 <option name="max">255</option>
                 <option name="maxMessage">sylius.customer.last_name.max</option>
                 <option name="groups">sylius_customer_profile</option>
+            </constraint>
+        </property>
+        <property name="gender">
+            <constraint name="NotBlank">
+                <option name="message">sylius.customer.gender.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
         <property name="email">

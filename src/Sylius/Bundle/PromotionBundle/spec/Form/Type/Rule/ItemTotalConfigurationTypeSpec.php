@@ -38,11 +38,6 @@ class ItemTotalConfigurationTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $builder
-            ->add('equal', 'checkbox', Argument::any())
-            ->willReturn($builder)
-        ;
-
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 }

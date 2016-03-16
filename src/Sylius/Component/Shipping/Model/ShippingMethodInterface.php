@@ -20,12 +20,12 @@ use Sylius\Component\Resource\Model\ToggleableInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface ShippingMethodInterface extends CodeAwareInterface, TimestampableInterface, ShippingMethodTranslationInterface, ToggleableInterface
+interface ShippingMethodInterface extends CodeAwareInterface, ShippingMethodTranslationInterface, TimestampableInterface, ToggleableInterface
 {
     // Shippables requirement to match given method.
     const CATEGORY_REQUIREMENT_MATCH_NONE = 0;
-    const CATEGORY_REQUIREMENT_MATCH_ANY  = 1;
-    const CATEGORY_REQUIREMENT_MATCH_ALL  = 2;
+    const CATEGORY_REQUIREMENT_MATCH_ANY = 1;
+    const CATEGORY_REQUIREMENT_MATCH_ALL = 2;
 
     /**
      * @return null|ShippingCategoryInterface

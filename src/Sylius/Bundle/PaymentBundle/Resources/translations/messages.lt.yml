@@ -13,7 +13,6 @@ sylius:
     payment:
       amount: Mokėjimo suma
       method: Apmokėjimo būdas
-      fee_calculator: Mokesčių skaičiuoklė
       state:
         header: Apmokėjimo būsena
         checkout: Apmokėjimas
@@ -32,8 +31,3 @@ sylius:
       enabled: Įjungtas?
       gateway: Apmokėjimo kanalas
       name: Pavadinimas
-      fee_calculator:
-        fixed:
-          amount: Suma
-        percent:
-          percent: '%'

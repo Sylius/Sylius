@@ -8,8 +8,8 @@ sylius:
         assortment: Utvalg
         blocks: Blokker
         configuration: Konfigurasjon
-        countries: Land
         content: Innhold
+        countries: Land
         dashboard: Panel
         general_settings: Generelle instillinger
         groups: Grupper
@@ -24,17 +24,19 @@ sylius:
         payments: Betalinger
         products: Produkter
         promotions: Kampanjer
+        roles: Roller
+        routes: Ruter
         sales: Bestillinger
         shipments: Forsendelser
         shipping_categories: Fraktkategorier
         shipping_methods: Leveringsmetoder
+        slideshow: Lysbildevisning
         stockables: Lagernivåer
         tax_categories: Beskatningskategorier
         tax_rates: Skattesatser
         taxation_settings: Beskatningsinnstillinger
         taxonomies: Kategorisering
         zones: Soner
-        roles: Roller
       sidebar:
         assortment: Utvalg
         blocks: Blokker
@@ -51,11 +53,12 @@ sylius:
         options: Endre innstillinger
         orders: Gjeldende ordrer
         pages: Sider
-        routes: Ruter
         payment_methods: Betalingsmetoder
         payments: Betalinger
         products: Produkter
         promotions: Kampanjer
+        roles: Roller
+        routes: Ruter
         sales: Bestillinger
         shipments: Forsendelser
         shipping_categories: Fraktkategorier
@@ -67,7 +70,6 @@ sylius:
         taxation_settings: Beskatningsinnstillinger
         taxonomies: Kategorisering
         zones: Soner
-        roles: Roller
   frontend:
     menu:
       account:

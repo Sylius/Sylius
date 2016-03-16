@@ -14,7 +14,7 @@ sylius:
       street: Utca
       province: Tartomány/állam
     country:
-      iso_name: ISO-név
+      add_province: Tartomány/megye hozzáadása
       name: Név
       provinces: Tartományok
       select: Válassza ki
@@ -22,6 +22,7 @@ sylius:
       name: Név
       select: Válasszon
     zone:
+      add_member: Tag hozzáadása
       members: Tagok
       name: Név
       type: Típus
@@ -30,10 +31,7 @@ sylius:
         province: Tartomány/állam
         zone: Zóna
       scope: Hatókör
+      select: Válassza ki
       select_scope: Hatókör kiválasztása
-    zone_member_country:
-      country: Ország
-    zone_member_province:
-      province: Tartomány/állam
-    zone_member_zone:
-      zone: Zóna
+    zone_member:
+      select: Válassza ki

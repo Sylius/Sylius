@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  inventory_unit:
+    backorder: Zaloga prednaročena.
+    sell: Zaloga izpolnjena.
+    return: Zaloga vrnjena.
+    transition_fail: Dejanja ni možno izvesti glede na trenutno stanje enote

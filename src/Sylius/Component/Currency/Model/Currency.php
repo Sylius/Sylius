@@ -11,6 +11,8 @@
 
 namespace Sylius\Component\Currency\Model;
 
+use Sylius\Component\Resource\Model\TimestampableTrait;
+use Sylius\Component\Resource\Model\ToggleableTrait;
 use Symfony\Component\Intl\Intl;
 
 /**
@@ -18,6 +20,8 @@ use Symfony\Component\Intl\Intl;
  */
 class Currency implements CurrencyInterface
 {
+    use TimestampableTrait, ToggleableTrait;
+
     /**
      * @var mixed
      */
@@ -36,17 +40,7 @@ class Currency implements CurrencyInterface
     /**
      * @var bool
      */
-    protected $enabled = true;
-
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
+    protected $base = false;
 
     public function __construct()
     {
@@ -106,15 +100,11 @@ class Currency implements CurrencyInterface
      */
     public function setExchangeRate($rate)
     {
-        $this->exchangeRate = $rate;
-    }
+        if ($this->isBase()) {
+            throw new \LogicException('You cannot change the exchange rate of the base currency!');
+        }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isEnabled()
-    {
-        return $this->enabled;
+        $this->exchangeRate = $rate;
     }
 
     /**
@@ -122,47 +112,11 @@ class Currency implements CurrencyInterface
      */
     public function setEnabled($enabled)
     {
+        if ($this->isBase()) {
+            throw new \LogicException('You cannot change the enabled status of the base currency!');
+        }
+
         $this->enabled = (bool) $enabled;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function enable()
-    {
-        $this->enabled = true;
     }
 
     /**
@@ -170,6 +124,26 @@ class Currency implements CurrencyInterface
      */
     public function disable()
     {
+        if ($this->isBase()) {
+            throw new \LogicException('You cannot change the enabled status of the base currency!');
+        }
+
         $this->enabled = false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isBase()
+    {
+        return $this->base;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setBase($base)
+    {
+        $this->base = $base;
     }
 }

@@ -22,9 +22,9 @@
     "require": {
         "php": "^5.5.9|^7.0",
 
-        "sylius/cart": "0.16.*",
-        "sylius/order-bundle": "0.16.*",
-        "symfony/framework-bundle": "^2.7.5"
+        "sylius/cart": "0.17.*",
+        "sylius/order-bundle": "0.17.*",
+        "symfony/framework-bundle": "^2.7.7"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.4",
@@ -45,7 +45,7 @@
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.16-dev"
+            "dev-master": "0.17-dev"
         }
     }
 }

@@ -16,6 +16,7 @@ use Sylius\Bundle\FlowBundle\Process\Step\ActionResult;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Sylius\Component\Resource\Event\ResourceEvent;
 use Symfony\Component\Form\FormInterface;
@@ -36,6 +37,8 @@ class SecurityStep extends CheckoutStep
     public function displayAction(ProcessContextInterface $context)
     {
         $order = $this->getCurrentCart();
+        $this->applyTransition(OrderCheckoutTransitions::TRANSITION_START, $order);
+
         // If user is already logged in, transparently jump to next step.
         if ($this->isUserLoggedIn()) {
             return $this->processUserLoggedIn($order);
@@ -55,8 +58,8 @@ class SecurityStep extends CheckoutStep
         $order = $this->getCurrentCart();
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SECURITY_INITIALIZE, $order);
 
-        $request          = $context->getRequest();
-        $guestForm        = $this->getGuestForm();
+        $request = $context->getRequest();
+        $guestForm = $this->getGuestForm();
         $registrationForm = $this->getRegistrationForm();
 
         if ($this->isGuestOrderAllowed() && $guestForm->handleRequest($request)->isValid()) {
@@ -77,11 +80,11 @@ class SecurityStep extends CheckoutStep
      */
     protected function renderStep(ProcessContextInterface $context, FormInterface $registrationForm, FormInterface $guestForm = null)
     {
-        return $this->render($this->container->getParameter(sprintf('sylius.checkout.step.%s.template', $this->getName())), array(
-            'context'           => $context,
+        return $this->render($this->container->getParameter(sprintf('sylius.checkout.step.%s.template', $this->getName())), [
+            'context' => $context,
             'registration_form' => $registrationForm->createView(),
-            'guest_form'        => null !== $guestForm ? $guestForm->createView() : null,
-        ));
+            'guest_form' => null !== $guestForm ? $guestForm->createView() : null,
+        ]);
     }
 
     /**
@@ -125,12 +128,13 @@ class SecurityStep extends CheckoutStep
      */
     protected function overrideSecurityTargetPath()
     {
-        $this->get('session')->set('_security.main.target_path', $this->generateUrl('sylius_checkout_security', array(), true));
+        $this->get('session')->set('_security.main.target_path', $this->generateUrl('sylius_checkout_security', [], true));
     }
 
     /**
      * @param FormInterface $guestForm
      * @param OrderInterface $order
+     *
      * @return ActionResult
      */
     protected function processGuestOrder(FormInterface $guestForm, OrderInterface $order)
@@ -146,6 +150,7 @@ class SecurityStep extends CheckoutStep
     /**
      * @param FormInterface  $registrationForm
      * @param OrderInterface $order
+     *
      * @return ActionResult
      */
     protected function processRegistration(FormInterface $registrationForm, OrderInterface $order)
@@ -159,6 +164,7 @@ class SecurityStep extends CheckoutStep
 
     /**
      * @param OrderInterface $order
+     *
      * @return ActionResult
      */
     protected function processUserLoggedIn(OrderInterface $order)

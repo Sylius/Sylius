@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  emails:
-    order_confirmation:
-      subject: Dziękujemy za zamówienie!
   account:
     address:
       action:
@@ -22,26 +19,31 @@ sylius:
       list: Wszystkie Twoje adresy
       update: Edytuj adres
     home:
-      outline: sylius.account.home.outline
+      email: Email
+      last5orders: 5 ostatnich zamówień
       since: Jesteś naszym klientem od
       welcome: Witaj w swoim panelu
     order:
       created_at: Umieszczone w
       details: 'Szczegóły  Twojego zamówienia'
       download_invoice: Pobierz fakturę
-      empty: Nie dokonałeś jeszcze żadnego zamówienia.
       invoice: Faktura
       list: Wszystkie Twoje zamówienia
+      number: Numer
       placed_at: 'Umieszczone w %at%'
       shipment:
         pending: Oczekujące
         ready: 'Gotowy od %at%'
         returned: 'Zwrócone %at%'
         shipped: 'Wysłane %at%'
+      state: Status
       total: Ogółem
       tracking_number: Numer śledzenia
     title: Moje konto
   add_to_cart: Dodaj do koszyka
+  association_type:
+    name: Nazwa
+    create: Utwórz
   address:
     city: Miasto
     company: Firma
@@ -56,6 +58,14 @@ sylius:
     info: Informacja
     success: Sukces
     warning: Ostrzeżenie
+  archetype:
+    attributes: Cechy
+    create: Stwórz archetyp
+    index_header: Szablony produktów
+    name: Nazwa
+    options: Warianty
+    parent: Rodzic
+    updated_at: Zmodyfikowano
   backend:
     alert:
       info: Informacja
@@ -69,49 +79,108 @@ sylius:
     logout: Wyloguj
     quick_links:
       add_product: Nowy produkt
+      customers: Klienci
       orders: Najnowsze zamówienia
       products: Twoje produkty
     statistics:
+      header: Statystyki bieżącego miesiąca
       orders_this_month: Zamówienia
       registrations_this_month: Rejestracje
       sales_this_month: Sprzedaż
-  backend_welcome: 'Witaj <b>%name%</b>!'
   block:
-    index_header: Bloki
-    no_results: Brak bloków do wyświetlenia.
     imagine:
+      create: Utwórz blok zdjęciowy
+      create_header: Tworzenie nowego bloku zdjęciowego
+      end_date: Data zakończenia
       id: Id
+      index: Bloki zdjęciowe
+      index_header: Bloki zdjęciowe
       label: Etykieta
+      publishable: Opublikowany
+      start_date: Data rozpoczęcia
       title: Tytuł
+      update_header: Edycja bloku zdjęciowego
       updated_at: Zmodyfikowano
+    imagine_blocks: Bloki zdjęciowe
+    index_header: Bloki
     simple:
       body: Zawartość
+      create: Tworzenie zwykłego bloku
+      create_header: Tworzenie nowego zwykłego bloku
+      end_date: Data zakończenia
       id: Id
+      index: Zwykłe bloki
+      index_header: Zwykłe bloki
       label: Etykieta
+      publishable: Opublikowany
+      start_date: Data rozpoczęcia
       title: Tytuł
+      update_header: Edycja zwykłego bloku
       updated_at: Zmodyfikowano
+    simple_blocks: Zwykłe bloki
     slideshow:
       body: Zawartość
+      create: 'Utwórz blok - pokaz slajdów'
+      create_header: 'Tworzenie nowego bloku - pokaz slajdów'
+      end_date: Data zakończenia
       id: Id
+      index: Bloki pokazu slajdów
+      index_header: Bloki pokazu slajdów
+      publishable: Opublikowany
+      start_date: Data rozpoczęcia
       title: Tytuł
+      update_header: 'Edycja bloku - pokaz slajdów'
       updated_at: Zmodyfikowano
+    slideshow_blocks: Bloki pokazu slajdów
     string:
       body: Zawartość
+      create: Utwórz blok tekstowy
+      create_header: Tworzenie bloku tekstowego
+      end_date: Data zakończenia
       id: Id
+      index: Bloki tekstowe
+      index_header: Bloki tekstowe
       label: Etykieta
+      publishable: Opublikowany
+      start_date: Data rozpoczęcia
       title: Tytuł
+      update_header: Edycja bloku tekstowego
       updated_at: Zmodyfikowano
+    string_blocks: Bloki tekstowe
   breadcrumb:
     assortment: Asortyment
+    attribute:
+      index: Cechy
     block:
+      imagine:
+        index: Bloki zdjęciowe
       index: Bloki
+      simple:
+        index: Zwykłe bloki
+      slideshow:
+        index: Bloki pokazu slajdów
+      string:
+        index: Bloki tekstowe
     build: Zbuduj
+    channel:
+      index: Kanały
     configuration: Konfiguracja
+    contact_request:
+      index: Prośby o kontakt
+      show: Prośba o kontakt
+    contact_topic:
+      index: Tematy
     content: Treść
     country:
       index: Kraje
+    currency:
+      index: Waluty
+    customer:
+      index: Klienci
     dashboard: Panel
     edit: Edytuj
+    email:
+      index: Adresy email
     general_settings: Ustawienia ogólne
     generate: Wygeneruj
     group:
@@ -120,12 +189,16 @@ sylius:
       index: Zapasy
     locale:
       index: Ustawienia regionalne
+    marketing: Marketing
+    menu:
+      index: Menu
     menu_node:
       index: Węzły menu
     new: Nowy
     option:
       index: Warianty
     order:
+      adjustments: Dostosowanie
       index: Zamówienia
     page:
       index: Strony
@@ -133,21 +206,33 @@ sylius:
       index: Płatności
     payment_method:
       index: Metody płatności
+    permission:
+      index: Uprawnienia
     product:
       index: Produkty
     promotion:
       index: Promocje
     promotion_coupon:
       index: Kupony
+    product_association_type:
+      index: Rodzaj powiązania
+    report:
+      index: Raporty
+    role:
+      index: Role
     route:
       index: Ścieżki
     sales: Sprzedaż
+    section:
+      customer: Klient
+    security_settings: Ustawienia bezpieczeństwa
     shipment:
       index: Wysyłka
     shipping_category:
       index: Kategorie wysyłki
     shipping_method:
       index: Metody wysyłki
+    support: Wsparcie techniczne
     tax_category:
       index: Kategorie podatkowe
     tax_rate:
@@ -156,8 +241,6 @@ sylius:
     taxonomy:
       index: Kategorie
     update: Edytuj
-    role:
-      index: Role
     zone:
       index: Strefy
   browse_products: Przeglądaj produkty
@@ -176,10 +259,28 @@ sylius:
       unit_price: Cena
     summary_header: Podsumowanie koszyka
     total_items: '1 produkt|%count% produkty'
+  channel:
+    code: Kod
+    create: Dodaj kanał
+    create_header: Dodaj kanał
+    created_at: Utworzono
+    currency_default: Domyślna waluta
+    enabled: Włączone
+    id: ID
+    index_header: Kanały
+    locale_default: Domyślne ustawienia regionalne
+    manage: Zarządzanie kanałami
+    name: Nazwa
+    update: Edytuj
+    update_header: Edycja kanału
+    updated_at: Zmodyfikowano
+    url: URL
   checkout:
     addressing:
       header: Adres
     back: Wróć
+    credit_card:
+      header: Szczegóły płatności
     finalize:
       address:
         city: Miejscowość
@@ -191,6 +292,7 @@ sylius:
         street: Adres
       header: Podsumowanie zamówienia
       order:
+        additional_information: Dodatkowe informacje
         billing_address: Adres rozliczeniowy
         items_total: Produkty łącznie
         no_items: To zamówienie nie zawiera żadnych produktów
@@ -217,62 +319,103 @@ sylius:
       header: Metoda płatności
     security:
       existing_customer: Istniejący Klient
+      guest: Gość
       header: 'Zaloguj się do sklepu <small>lub utwórz nowe konto</small>'
       login: Zaloguj
       new_customer: Nowy Klient
       register: Rejestracja
     shipping:
-      error: Przepraszamy, ale nasz sklep nie jest w stanie zapewnić wysyłki produktu do kraju który wybrałeś.
       header: Metoda wysyłki
   confirmation:
-    message: Czy chcesz usunąć ten element?
     title: Potwierdzenie
+  contact_request:
+    create: Utwórz prośbę o kontakt
+    create_header: Nowa prośba o kontakt
+    email: Email
+    firstName: Imię
+    id: ID
+    index_header: Prośby o kontakt
+    lastName: Nazwisko
+    message: Treść wiadomości
+    show_header: Szczegóły prośby o kontakt
+    topic: Temat wiadomości
+    update_header: Edycja prośby o kontakt
+    updated_at: Zmodyfikowano
+  contact_topic:
+    create_header: Nowy temat kontaktu
+    id: ID
+    index_header: Tematy
+    title: Tytuł
+    updated_at: Zmodyfikowano
   country:
     add_province: Dodaj województwo
     create: Dodaj kraj
     create_header: Nowy kraj
+    enabled: Włączone
     id: ID
     index_header: Kraje
-    iso_name: Kod ISO
     manage: Zarządzaj krajami
     name: Nazwa
-    no_results: Żaden kraj nie został skonfigurowany.
     show_header: Szczegóły kraju
     update_header: Edycja kraju
-    enabled: Aktywne
-  email:
-    code: Kod
-    enabled: Aktywna?
-    updated_at: Zmodyfikowano
   create: Utwórz
   created_at: Utworzono
-  delete: usuń
-  deleted: Usunięto
-  edit: edytuj
-  permission:
-    code: Kod
-    id: ID
-    description: Opis
-    updated_at: Zmodyfikowano
-  role:
-    code: Kod
-    id: ID
-    name: Nazwa
-    description: Opis
-    index_header: Role
-    updated_at: Zmodyfikowano
   currency:
     code: Kod
-    id: ID
-    name: Nazwa
-    enabled: Aktywne
+    create: Utwórz walutę
+    create_header: Nowa waluta
+    enabled: Włączone
     exchange_rate: Kurs wymiany
+    id: ID
+    index_header: Waluty
+    name: Nazwa
+    update_header: Edycja waluty
     updated_at: Zmodyfikowano
+  customer:
+    billing_address: Adres do rachunku
+    creation_date: Data utworzenia
+    email: Email
+    filter:
+      unconfirmed: Pokaż niepotwierdzone konta
+    first_name: Imię
+    groups: Grupy
+    id: ID
+    last_name: Nazwisko
+    orders: Zamówienia klienta
+    recent_header: Ostatni klienci
+    shipping_address: Adres dostawy
+    show_header: Dane Klienta
+    update_header: Edycja klienta
+    phone_number: Numer telefonu
+  delete: Usuń
+  deleted: Usunięto
+  disable: Wyłącz
+  edit: Edytuj
+  email:
+    code: Kod
+    enabled: Włączone
+    index_header: Szablony e-mail
+    subject: Temat
+    update_header: Edycja wiadomości E-mail
+    updated_at: Zmodyfikowano
+  emails:
+    order_comment:
+      name: Uwagi dotyczące zamówienia
+      subject: Nowy komentarz do zamówienia
+    order_confirmation:
+      name: Potwierdzenie zamówienia
+    shipment_confirmation:
+      name: Potwierdzenie dostawy
+    user_confirmation:
+      name: Potwierdzenia przez użytkownika
+  enable: Włącz
   filter: Filtruj
   form:
     cart:
-      coupon: Jeśli posiadasz kupon promocyjny, wpisz go tutaj
+      coupon: Kupon
     choose_file: Wybierz plik
+    comment:
+      comment: Komentarz
     frontend:
       password:
         confirmation: Powtórz nowe hasło
@@ -284,6 +427,8 @@ sylius:
     login:
       email: Email
       password: Hasło
+    menu:
+      add_menu_node: Dodaj element menu
     option_value:
       add_value: Dodaj wartość
     profile:
@@ -294,13 +439,16 @@ sylius:
     next: Następne
     previous: Poprzednie
     slideshow: Pokaz slajdów
+  gender:
+    female: Kobieta
+    male: Mężczyzna
   generate: Generuj
+  go_to_dashboard: Przejdź do panelu
   group:
     create: Dodaj grupę
     id: ID
     index_header: Grupy
     name: Nazwa
-    no_results: Nie ma żadnych grup do wyświetlenia.
     roles: Role
     update_header: Edytuj grupę
   hide_deleted: Ukryj usunięte
@@ -308,6 +456,8 @@ sylius:
     action: Akcja
     author: Autor
     data: Dane
+    empty: Brak
+    header: Historia
   homepage:
     splash:
       headline: Witaj w Sylius
@@ -316,19 +466,17 @@ sylius:
     created_at: Utworzono
     inventory_state: Stan zapasów
     name: Nazwa
-    no_results: Brak jednostek magazynowych do wyświetlenia.
     shipping_state: Status wysyłki
     sku: SKU
     updated_at: Zmodyfikowano
   locale:
-    id: ID
-    name: Nazwa
     code: Kod
     create: Dodaj ustawienia regionalne
     create_header: Dodaj nowe ustawienia regionalne
     enabled: Aktywne
+    id: ID
     index_header: Spis wszystkich skonfigurowanych ustawień regionalnych
-    no_results: Brak skonfigurowanych ustawień regionalnych.
+    name: Nazwa
     update_header: Edytuj ustawienia regionalne
     updated_at: Zmodyfikowano
   login: Zaloguj się
@@ -336,33 +484,65 @@ sylius:
   logo: Sylius
   manage: Zarządzaj
   menu:
+    create: Utwórz Menu
+    create_header: Tworzenie menu
+    end_date: Data zakończenia
     id: ID
+    index_header: Menu
+    publishable: Opublikowany
+    start_date: Data rozpoczęcia
     title: Tytuł
+    update_header: Edycja menu
   menu_node:
     id: ID
     index_header: Węzły menu
     parent: Rodzic
     title: Tytuł
   meta:
-    frontend_description: Sylius jest nowoczesnym rozwiązaniem ecommerce dla PHP, bazującym na frameworku Symfony2.
-    frontend_keywords: sylius, ecommerce, symfony2, sklep, koszyk, webshop
     frontend_title: Sylius, nowoczesny ecommerce dla Symfony2
+  metadata:
+    id: ID
+    content: Treść
   na: N/D
   newest: Najnowsze produkty
   "no": false
-  product_option:
-    manage: Warianty
-    name: nazwa
-    updated_at: ostatnia aktualizacja
+  no_results: Brak wyników
   order:
+    additional_information: Dodatkowe informacje
+    adjustments:
+      amount: Kwota
+      description: Opis
+      lock: Blokada
+      type: Typ
+      unlock: Odblokuj
     billing_address: Adres rozliczeniowy
+    channel: Kanał
+    comment:
+      author: Autor
+      comment: Komentarz
+      created_at: Utworzono
+      customer:
+        not_notified: Klient nie został powiadomiony
+        notified: Klient powiadomiony
+      header: Uwagi dotyczące zamówienia
+      no_comment: Bez komentarza
+      notify: Powiadomienie
+      state: Status
     create: Dodaj zamówienie
     create_header: Nowe zamówienie
     created_at: Data zamówienia
+    currency: Waluta
+    customer: Klient
+    details: Szczegóły zamówienia
     general_info: Informacje ogólne
     id: ID
     index_header: Aktualne zamówienia
     inventory_tracking: Śledzenie sprzedaży
+    inventory_unit:
+      backorder: Zamówiony
+      fulfill: Uzupełnij
+      return: Zwrot
+    items: Produkty
     items_total: Produkty łącznie
     manage: Zarządzaj zamówieniami
     no_items: To zamówienie nie posiada żadnych produktów
@@ -371,75 +551,39 @@ sylius:
     no_shipping_charges: Brak opłaty za wysyłkę
     no_taxes: Brak podatku
     number: Numer
+    order_state: Stan zamówienia
     payment: Płatności
     payment_state: Status płatności
     payment_states:
       balance_due: Saldo do zapłaty
+    promotion_coupons: Kupony
     promotion_total: Rabaty łącznie
     recent_header: Najnowsze zamówienia
+    release_inventory: Inwentarz wydań
     shipment_state: Status przesyłki
     shipment_states:
       pending: Oczekujące
     shipments: Wysyłka
-    release_inventory: Inwentarz wydań
-    inventory_unit:
-      backorder: Zamówiony
-      fulfill: Uzupełnij
-      return: Zwrot
     shipping_address: Adres do wysyłki
     shipping_charges: Koszty przesyłki
     shipping_total: Koszt wysyłki
-    state: Status
+    show_header: zamówienie
+    state:
+      cancelled: Anulowane
+      checkout: Koszyk
+      returned: Zwrócone
+      shipped: Dostarczono
     tax_total: Podatek łącznie
     taxes: Podatki
     total: Łącznie
     update_header: Edycja zamówienia
-    currency: Waluta
-    promotion_coupons: Kupony
-    adjustments:
-      label: Etykieta
-      description: Opis
-      amount: Kwota
-    comment:
-      author: Autor
-      created_at: Utworzono
-      state: Status
-  route:
+  review:
     id: ID
-    index_header: Ścieżki
-    name: Nazwa
+    subject: Temat
     title: Tytuł
-  redirect_route:
-    id: ID
-    title: Tytuł
-  shipment:
-    ship: Dostawa
-    created_at: data utworzenia
-    id: ID
-    index_header: Przesyłki
-    inventory_state: Status sprzedaży
-    manage: Zarządzanie przesyłkami
-    method: metoda
-    modified: modyfikacja
-    name: nazwa
-    no_items: Brak przedmiotów.
-    no_results: Brak przesyłek.
-    order: zamówienie
-    show_header: Szczegóły przesyłki
-    sku: SKU
-    state: status
-    tracking_code: Kod śledzenia
-    update: Edytuj
-    update_header: Edytuj wysyłkę
-    updated_at: ostatnia aktualizacja
-  channel:
+    author: Autor
+    guest: Gość
     created_at: Utworzono
-    code: Kod
-    enabled: Aktywne
-    id: ID
-    name: Nazwa
-    update: Edytuj
-    updated_at: Zmodyfikowano
   order_item:
     product: Element
     quantity: Ilość
@@ -450,13 +594,18 @@ sylius:
   page:
     body: Zawartość
     create: Dodaj nową stronę
+    create_header: Tworzenie nowej strony
+    end_date: Data zakończenia
     id: ID
     index_header: Strony
+    no_route: Treści nie będą wyświetlane na stronie jeśli trasa nie jest zdefiniowana
+    publishable: Opublikowany
     routes: Ścieżki
+    start_date: Data rozpoczęcia
     title: Tytuł
+    update_header: Edycja strony
   password: Hasło
   payment:
-    order: zamówienie
     amount: Kwota
     create: Dodaj płatność
     create_header: Nowa płatność
@@ -465,13 +614,13 @@ sylius:
     index_header: Płatności
     manage: Zarządzania płatnościami
     method: Metoda
-    no_results: Brak skonfigurowanych płatności.
+    order: zamówienie
     state:
-      header: Status
       cancelled: Anulowane
       checkout: Koszyk
       completed: Zakończone
       failed: Nieudane
+      header: Status
       new: Nowy
       pending: Oczekujący
       processing: Przetwarzany
@@ -483,17 +632,35 @@ sylius:
   payment_method:
     create: Dodaj metodę płatności
     create_header: Nowa metoda płatności
-    enabled: Aktywna?
     gateway: Bramka
     id: ID
     index_header: Metody płatności
     name: Nazwa
-    no_results: Brak skonfigurowanych metod płatności.
     update_header: Edycja metody płatności
     updated_at: Ostatnia aktualizacja
+  permission:
+    code: Kod
+    create: Dodaj nowe uprawnienia
+    create_header: Nowe uprawnienia
+    description: Opis
+    id: ID
+    index_header: Uprawnienia
+    update_header: Edycja uprawnienia
+    updated_at: Zmodyfikowano
+  pricing:
+    volume_based:
+      button:
+        add: Dodaj
+      max: Ilość maks.
+      min: Ilość min.
+      price: Cena
   product:
+    add_attribute: Dodaj cechę
+    archetype: Szablon
+    attributes: Cechy
     available_on: Dostępny od
     available_on_demand: Dostępny na zamówienie
+    available_until: Dostępne do
     categorization: Kategoria
     contain_variants: Zawiera Warianty
     create: Dodaj produkt
@@ -502,57 +669,83 @@ sylius:
     generate_variants: Generuj warianty
     index_by_taxon_header: 'Produkty <small>Należące do taksonomii "%taxon%"</small>'
     index_header: 'Produkty <small>Lista wszystkich produktów w Twoim sklepie</small>'
+    main_taxon: Główne grupy
     manage: Zarządzaj produktami
     name: Nazwa
+    no_attributes: Ten produkt nie posiada żadnych zdefiniowanych cech
     no_description: '<i>Brak opisu...</i>'
     no_images: Brak zdjęć dla tego produktu
     no_options: Brak wariantów dla tego produktu
-    no_results: Brak produktów do wyświetlenia.
     no_shipping_category: Brak kategorii wysyłki
     no_short_description: '<i>Brak krótkiego opisu</i>'
     no_sku: '<i>Brak SKU</i>'
     no_tax_category: Brak kategorii podatkowej
     no_taxons: Brak przypisanych kategorii
     options: Warianty
+    original_price: Oryginalna cena
     price: Cena detaliczna
     restricted_zone: Strefa zamknięta
+    remove_attribute: Usuń cechę
     shipping_category: Kategoria wysyłki
     show: Zobacz więcej
     show_header: 'Szczegóły produktu <small>Oglądasz produkt "<strong>%product%</strong>"</small>'
-    show_in_store: pokaż w sklepie
     sku: SKU
     stock: Ilość na magazynie
     tabs:
+      attributes: Cechy
       categorization: Kategorie
+      channels: Kanały
       images: Zdjęcia
       options: Warianty
-      product: Produkt
       pricing: Cennik
+      product: Produkt
     tax_category: Kategoria podatkowa
     unavailable: Niedostępne
     update_header: Edycja produktu
     updated_at: Ostatnia aktualizacja
     variant_selection_method: Metoda wyboru wariantu
-    view_details: 'Zobacz szczegóły %product%.'
+    variants: Warianty
     volume_based:
       price: Cena
+      qty_max: Ilość maks.
+      qty_min: Ilość min.
+  product_attribute:
+    add_choice: Dodaj wybór
+    code: Kod
+    name: Nazwa
+    type: Typ
+    update_header: Edytowanie atrybutu
+    updated_at: Zmodyfikowano
+  product_association:
+    code: Kod
+    create_header: Nowy produkt
+    name: Nazwa
+    type: Typ
+    update_header: Edytowanie atrybutu
+    updated_at: Zmodyfikowano
   product_not_available_in_zone: Niedostępne w Twoim kraju
+  product_option:
+    manage: Warianty
+    name: Nazwa
+    presentation: Nazwa publiczna
+    updated_at: Zmodyfikowano
   promotion:
     actions: Akcje
     add_action: Dodaj akcje
     add_rule: Dodaj regułę
-    coupon_based: Używa kuponów?
+    coupon_based: Z wykorzystaniem kuponów
     create: Dodaj promocję
     create_header: Nowa promocja
     created_at: Data utworzenia
     description: Opis
     ends_at: Data zakończenia
+    exclusive: Ekskluzywny
     general_info: Informacje ogólne
     id: ID
     index_header: Aktualne promocje
     manage: Zarządzanie promocjami
     name: Nazwa
-    no_results: Brak promocji.
+    priority: Priorytet
     rules: Reguły
     show_header: Szczegóły promocji
     starts_at: Data rozpoczęcia
@@ -567,32 +760,58 @@ sylius:
     code: Kod
     create: Dodaj kupon promocyjny
     create_header: Dodaj nowy kupon promocyjny
+    expires_at: Wygasa dnia
     generate: Wygeneruj kupony promocyjne
     generate_header: Generowanie kuponów promocyjnych
     index: Lista kuponów promocyjnych
     index_header: Kupony
-    no_results: Brak kuponów do wyświetlenia.
     total_results:
       Total: '%total%'
     update_header: Edytowanie kupony promocyjnego
   promotion_rule:
     configuration: Konfiguracja
     type: Typ
-  product_attribute:
-    name: nazwa
-    updated_at: ostatnia aktualizacja
-  archetype:
-    name: nazwa
-    updated_at: ostatnia aktualizacja
   province:
     provinces: Województwa
-  remember_me: Zapamiętaj mnie?
+  redirect_route:
+    create: Utwórz przekierowanie
+    create_header: Tworzenie przekierowania
+    id: ID
+    index_header: Przekieruj trasę
+    title: Tytuł
+    update_header: Edycja przekierowania
+  remember_me: Zapamiętaj mnie
   report:
-    details: szczegóły
-    name: Nazwa
     code: Kod
+    create: Utwórz raport
+    create_header: Utwórz nowy raport
     description: Opis
+    id: Id
+    index_header: Raporty
     manage: Zarządzaj
+    name: Nazwa
+    show_header: Szczegóły raportu
+  restore: Przywróć
+  role:
+    code: Kod
+    create: Dodawanie nowej roli
+    create_header: Nowa rola
+    description: Opis
+    id: ID
+    index_header: Role
+    name: Nazwa
+    update_header: Edycja roli
+    updated_at: Zmodyfikowano
+  route:
+    create: Utwórz trasę
+    create_header: Tworzenie trasy
+    id: ID
+    index_header: Ścieżki
+    name: Nazwa
+    page: Strona
+    title: Tytuł
+    update_header: Edycja trasy
+    view: Widok
   save_changes: Zapisz zmiany
   search: Szukaj
   security:
@@ -600,7 +819,26 @@ sylius:
       button: Zaloguj
   settings:
     general_header: Ustawienia ogólne
+    security_header: Ustawienia bezpieczeństwa
     taxation_header: Podatek
+  shipment:
+    created_at: data utworzenia
+    id: ID
+    index_header: Przesyłki
+    inventory_state: Status sprzedaży
+    manage: Zarządzanie przesyłkami
+    method: metoda
+    modified: modyfikacja
+    name: nazwa
+    order: zamówienie
+    ship: Dostawa
+    show_header: Szczegóły przesyłki
+    sku: SKU
+    state: status
+    tracking_code: Kod śledzenia
+    update: Edytuj
+    update_header: Edytuj wysyłkę
+    updated_at: ostatnia aktualizacja
   shipment_category:
     manage: Zarządzaj kategoriami wysyłki
   shipping_address: Adres wysyłkowy
@@ -611,7 +849,6 @@ sylius:
     index_header: Kategorie wysyłki
     manage: Zarządzaj kategoriami wysyłki
     name: Nazwa
-    no_results: Brak skonfigurowanych kategorii wysyłki.
     update_header: Edycja kategorii wysyłki
     updated_at: Ostatnia aktualizacja
   shipping_method:
@@ -619,28 +856,22 @@ sylius:
     category: Kategoria
     create: Dodaj metodę wysyłki
     create_header: Nowa metoda wysyłki
-    enabled: Aktywna?
+    enabled: Włączone
     id: ID
     index_header: Metody wysyłki
     manage: Zarządzaj metodami wysyłki
     name: Nazwa
-    no_results: Brak metod wysyłki.
     show_header: Szczegóły metody wysyłki
     update_header: Edycja metody wysyłki
     updated_at: Ostatnia aktualizacja
     zone: Strefa
   shop_by: Przeglądaj
-  show: szczegóły
   show_all: Pokaż wszystko
   show_deleted: Pokaż usunięte
   stockable:
     index_header: 'Magazyn <small>Tutaj możesz zobaczyć aktualne stany magazynowe</small>'
-    name: nazwa
-    no_results: Brak produktów do wyświetlenia.
-    on_hand: w magazynie
-    on_hold: zatrzymane
-    sku: sku
-    updated_at: ostatnia aktualizacja
+    name: Nazwa
+    updated_at: Zmodyfikowano
   tax_category:
     create: Dodaj kategorię podatkową
     create_header: Nowa kategoria podatkowa
@@ -650,7 +881,6 @@ sylius:
     manage: Zarządzaj kategoriami podatkowymi
     name: Nazwa
     no_description: Brak opisu
-    no_results: Brak skonfigurowanych kategorii podatkowych.
     update_header: Edycja kategorii podatkowej
     updated_at: Ostatnia aktualizacja
   tax_rate:
@@ -659,11 +889,9 @@ sylius:
     category: Kategoria
     create: Dodaj stawkę podatkową
     create_header: Nowa stawka podatkowa
-    included_in_price: Wliczony w cenę?
     index_header: Stawki podatkowe
     manage: Zarządzaj stawkami podatkowymi
     name: Nazwa
-    no_results: Brak skonfigurowanych stawek podatkowych.
     show_header: Szczegóły stawki podatkowej
     update_header: Edycja stawki podatkowej
     updated_at: Ostatnia aktualizacja
@@ -674,7 +902,6 @@ sylius:
     image: Wybierz zdjęcie
     name: Nazwa
     no_image: Brak zdjęcia
-    no_results: Brak elementów
     product_index_header: 'Produkty sklasyfikowane jako "%name%"'
     update_header: Edycja taksonomii
   taxonomy:
@@ -685,34 +912,36 @@ sylius:
     manage: Zarządzanie kategoriami
     name: Nazwa
     no_image: Brak zdjęcia
-    no_results: Brak zdefiniowanych grup produktów.
     show_header: 'Taksonomia <small><strong>%name%</strong></small>'
     update_header: Edycja taksonomii
   total_quantity: Całkowita ilość
-  unknown: Nieznany
-  customer:
-    billing_address: Adres rozliczeniowy
+  ui:
+    change_password: Zmiana hasła
+    code: Kod
     email: Email
-    first_name: Imię
-    id: ID
-    last_name: Nazwisko
-    shipping_address: Adres wysyłkowy
-    groups: Grupy
+    links: Linki
+    login: Zaloguj
+    logout: Wyloguj
+    register: Zarejestruj
+    product_association_types: Rodzaje produktów towarzyszących
+    name: Nazwa
+    id: Id
+  unknown: Nieznany
   user:
-    create: dodaj użytkownika
     create_header: Nowy użytkownik
-    enabled: Aktywny?
     general_info: 'Szczegóły użytkownika "%username%"'
     id: ID
+    impersonate: Zaloguj się jako użytkownik
     index_header: 'Użytkownicy <small>Lista wszystkich zarejestrowanych użytkowników w sklepie</small>'
     last_login: Ostatnio zalogowany
-    impersonate: Zaloguj się jako użytkownik
-    manage: zarządzaj użytkownikami
-    no_results: Brak użytkowników.
+    oauth:
+      access_token: Token dostępowy
+      identifier: Identyfikator
     recent_header: Ostatnio zarejestrowani użytkownicy
-    registration_date: Data rejestracji
     register:
       button: Zarejestruj
+      header: 'Rejestracja, <small>Załóż konto w sklepie</small>'
+    registration_date: Data rejestracji
     show_header: Szczegóły użytkownika
     update_header: Edycja użytkownika
     username: Nazwa użytkownika
@@ -724,8 +953,8 @@ sylius:
     create_header: Nowy wariant produktu
     delete_image: Usuń zdjęcie
     last_update: Ostatnia aktualizacja
-    no_results: Brak wariantów do wyświetlenia.
     options: Opcje
+    original_price: Oryginalna cena
     price: Cena
     sku: SKU
     stock: Aktualnie w magazynie
@@ -738,22 +967,9 @@ sylius:
     index_header: Strefy
     manage: Zarządzanie strefami
     name: Nazwa
-    no_results: Brak stref.
+    scope: Zakres
     show_header: Szczegóły strefy
     type: Typ
     update_header: Edycja strefy
-    scope: Zakres
   zone_member:
     members: Kraje należące do strefy
-  contact_topic:
-    id: ID
-    title: Tytuł
-    updated_at: Zmodyfikowano
-  contact_request:
-    id: ID
-    firstName: Imię
-    lastName: Nazwisko
-    email: Email
-    message: Treść wiadomości
-    topic: Temat wiadomości
-    updated_at: Zmodyfikowano

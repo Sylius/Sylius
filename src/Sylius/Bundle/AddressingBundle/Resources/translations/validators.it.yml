@@ -9,6 +9,7 @@ sylius:
       not_blank: Inserisci la città.
     country:
       not_blank: Inserisci la nazione.
+      disabled: Paese scelto è disabilitato. Si prega di scegliere uno diverso.
     first_name:
       max_length: Il nome non deve essere più lungo di 255 caratteri|Il nome non deve essere più lungo di 255 caratteri.
       min_length: Il nome deve essere lungo almeno due caratteri|Il nome deve essere lungo almeno due caratteri.
@@ -29,19 +30,30 @@ sylius:
       not_blank: "Inserisci l'indirizzo."
     not_shippable: Questo indirizzo non è una destinazione di spedizione valida.
   country:
-    iso_name:
-      not_blank: Inserisci il codice ISO della nazione.
-    name:
-      max_length: Il nome della nazione non deve essere più lungo di 255 caratteri|Il nome della nazione non deve essere più lungo di 255 caratteri.
-      not_blank: Inserisci il nome della nazione.
+    code:
+      not_blank: Inserisci il codice ISO del paese.
+      unique: Codice ISO del paese deve essere unico.
   province:
+    code:
+      min_length: Il nome della provincia deve essere almeno di due caratteri|Il nome della provincia deve essere almeno di due caratteri.
+      not_blank: Inserisci il codice di provincia.
+      regex: Il codice provincia dovrebbe avere il seguente formato XX-XX (ad es. U.S.-FL).
+      unique: Il codice di provincia deve essere unico.
     name:
       max_length: Il nome della provincia non deve essere più lungo di 255 caratteri|Il nome della provincia non deve essere più lungo di 255 caratteri.
       min_length: Il nome della provincia deve essere almeno di due caratteri|Il nome della provincia deve essere almeno di due caratteri.
       not_blank: Inserisci il nome della provincia.
+      unique: Il nome della provincia deve essere unico.
   zone:
+    code:
+      not_blank: Inserisci il codice della zona.
+      unique: Il codice di zona deve essere unico.
     members:
       min_count: 'Inserisci almeno {{ limit }} membri nella zona.'
     name:
       max_length: Il nome della zona non deve essere più lungo di 255 caratteri|Il nome della zona non deve essere più lungo di 255 caratteri.
       not_blank: Inserisci il nome della zona.
+  zone_member:
+    code:
+      not_blank: Si prega di scegliere un membro di zona.
+    unique: Il membro di zona di scelto è già in questa zona.

@@ -14,7 +14,7 @@ sylius:
       street: Ulica
       province: Pokrajina
     country:
-      iso_name: ISO kod
+      add_province: Dodaj provinciju
       name: Ime
       provinces: Provincije
       select: Izaberite
@@ -22,6 +22,7 @@ sylius:
       name: Ime
       select: Izaberite
     zone:
+      add_member: Dodajte člana
       members: Članovi
       name: Ime
       type: Tip
@@ -30,10 +31,7 @@ sylius:
         province: Provincija
         zone: Zona
       scope: Adresa isporuke
+      select: Izaberite
       select_scope: Izaberite adresu isporuke
-    zone_member_country:
-      country: Zemlja
-    zone_member_province:
-      province: Provincija
-    zone_member_zone:
-      zone: Zona
+    zone_member:
+      select: Izaberite

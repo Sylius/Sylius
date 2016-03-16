@@ -18,25 +18,24 @@ sylius:
       contains_product_configuration:
         variants: Produse
         exclude: Exclude
-      item_count_configuration:
+      cart_quantity_configuration:
         count: Număr
-        equal: Egal
       item_total_configuration:
         amount: Valoare
-        equal: Egal
       nth_order_configuration:
         nth: Al n-lea
       shipping_country_configuration:
         country: Țară
       type: Tip
     coupon:
-      code: Cod
       usage_limit: Limita de utilizare
     coupon_generate_instruction:
       amount: Valoare
       usage_limit: Limita de utilizare
     promotion:
       actions: Acțiuni
+      add_action: Adaugă acţiune
+      add_rule: Adaugă regulă
       coupon_based: Bazat pe cod promoțional
       description: Descriere
       ends_at: Se termină la

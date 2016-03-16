@@ -2,13 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    email: E-posta
-    register: Üye ol
-    login: Giriş
-    logout: Çıkış yap
-    change_password: Parolanızı değiştirin
-    account_panel_outline: Kişisel alanınızda görüntülemek, izlemek ve tüm verilerinizi yönetmek için kullanılabilen tüm özelliklerin keyfini çıkarın.
   form:
     group:
       name: Ad
@@ -18,12 +11,16 @@ sylius:
       enabled: Etkin
       password:
         label: Şifre
+        confirmation: Doğrulama
+      remember_me: Beni hatırla
       shipping_address: Teslimat adresi
     customer:
       first_name: Ad
       groups: Gruplar
       last_name: Soyad
       email: E-posta
+      phone_number: Telefon numarası
+      birthday: Doğum Günü
       billing_address: Fatura adresi
       different_billing_address: Fatura için farklı bir adres kullanmak ister misiniz?
     user_filter:

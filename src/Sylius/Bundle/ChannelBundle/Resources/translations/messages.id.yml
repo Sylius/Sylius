@@ -4,6 +4,5 @@
 sylius:
   form:
     channel:
-      code: Kode
       name: Nama
       enabled: Diaktifkan

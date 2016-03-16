@@ -8,8 +8,8 @@ sylius:
         assortment: Асартымент
         blocks: Блокі
         configuration: Канфігурацыя
-        countries: Краіны
         content: Змест
+        countries: Краіны
         dashboard: Прыборная панэль
         general_settings: Агульныя налады
         groups: Групы
@@ -24,17 +24,18 @@ sylius:
         payments: Плацяжы
         products: Тавары
         promotions: Прамоцыі
+        roles: Ролі
         sales: Замовы
         shipments: Дастаўка
         shipping_categories: Катэгорыі дастаўкі
         shipping_methods: Метады дастаўкі
+        slideshow: Слайдшоў
         stockables: Колькасць на складзе
         tax_categories: Катэгорыі падаткаў
         tax_rates: Стаўка падатку
         taxation_settings: Налады падаткаабкладання
         taxonomies: Класіфікацыя
         zones: Зоны
-        roles: Ролі
       sidebar:
         assortment: Асартымент
         blocks: Блокі
@@ -55,6 +56,7 @@ sylius:
         payments: Плацяжы
         products: Тавары
         promotions: Прамоцыі
+        roles: Ролі
         sales: Замовы
         shipments: Дастаўка
         shipping_categories: Катэгорыі дастаўкі
@@ -66,7 +68,6 @@ sylius:
         taxation_settings: Налады падаткаабкладання
         taxonomies: Класіфікацыя
         zones: Зоны
-        roles: Ролі
   frontend:
     menu:
       account:

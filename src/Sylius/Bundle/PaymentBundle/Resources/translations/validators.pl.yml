@@ -26,3 +26,14 @@ sylius:
       max_length: 'Nazwa metody płatności powinna mieć mniej niż {{ limit }} znaków.'
       min_length: 'Nazwa metody płatności musi składać się z co najmniej {{ limit }} znaków.'
       not_blank: Proszę podać nazwę metody płatności.
+    fee_calculator_configuration:
+      amount:
+        greater_than_or_equal: 'Opłata nie może być niższa niż {{ compared_value }}.'
+        not_blank: Wprowadź kwotę opłaty.
+      percent:
+        max_range: 'Opłata w procentach nie może być większa niż {{ limit }}.'
+        min_range: 'Opłata w procentach nie może być niższa niż {{ limit }}.'
+        not_blank: Wprowadź wartość opłaty w procentach.
+    code:
+      not_blank: Proszę podać kod metody płatności.
+      unique: Metoda płatności z danym kodem już istnieje.

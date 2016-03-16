@@ -22,7 +22,7 @@ class ActionChoiceTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(array());
+        $this->beConstructedWith([]);
     }
 
     function it_is_initializable()
@@ -37,7 +37,7 @@ class ActionChoiceTypeSpec extends ObjectBehavior
 
     function it_should_set_action_types_to_choose_from(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array('choices' => array()))->shouldBeCalled();
+        $resolver->setDefaults(['choices' => []])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

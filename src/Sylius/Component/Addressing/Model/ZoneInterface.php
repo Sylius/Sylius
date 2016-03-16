@@ -12,13 +12,14 @@
 namespace Sylius\Component\Addressing\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface ZoneInterface extends ResourceInterface
+interface ZoneInterface extends ResourceInterface, CodeAwareInterface
 {
     const TYPE_COUNTRY = 'country';
     const TYPE_PROVINCE = 'province';

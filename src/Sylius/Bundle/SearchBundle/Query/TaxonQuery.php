@@ -27,7 +27,7 @@ class TaxonQuery extends Query
      * @param TaxonInterface $taxon
      * @param mixed          $appliedFilters
      */
-    public function __construct(TaxonInterface $taxon, $appliedFilters = array())
+    public function __construct(TaxonInterface $taxon, $appliedFilters = [])
     {
         $this->appliedFilters = (array) $appliedFilters;
         $this->taxon = $taxon;

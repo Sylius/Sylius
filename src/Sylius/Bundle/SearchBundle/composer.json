@@ -24,16 +24,16 @@
 
         "doctrine/orm": "^2.4.8,<2.5",
         "friendsofsymfony/elastica-bundle": "~3.0.2",
-        "sylius/channel": "0.16.*",
-        "sylius/product-bundle": "0.16.*",
-        "sylius/resource-bundle": "0.16.*",
-        "symfony/framework-bundle": "^2.7.5",
+        "sylius/channel": "0.17.*",
+        "sylius/product-bundle": "0.17.*",
+        "sylius/resource-bundle": "0.17.*",
+        "symfony/framework-bundle": "^2.7.7",
         "symfony/property-access": "^2.7",
         "twig/twig": "~1.11"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.4",
-        "sylius/taxonomy": "0.16.*"
+        "sylius/taxonomy": "0.17.*"
     },
     "config": {
         "bin-dir": "bin"
@@ -47,7 +47,7 @@
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.16-dev"
+            "dev-master": "0.17-dev"
         }
     }
 }

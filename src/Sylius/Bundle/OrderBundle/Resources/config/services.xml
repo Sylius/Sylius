@@ -19,10 +19,17 @@
     <parameters>
         <parameter key="sylius.form.type.order_state_choice.class">Sylius\Bundle\OrderBundle\Form\Type\OrderStateChoiceType</parameter>
 
-        <parameter key="sylius.listener.order_update.class">Sylius\Bundle\OrderBundle\EventListener\OrderUpdateListener</parameter>
         <parameter key="sylius.callback.complete_order.class">Sylius\Bundle\OrderBundle\StateMachineCallback\CompleteOrderCallback</parameter>
 
         <parameter key="sylius.originator.class">Sylius\Component\Originator\Originator\Originator</parameter>
+
+        <parameter key="sylius.order_item_quantity_modifier.class">Sylius\Component\Order\Modifier\OrderItemQuantityModifier</parameter>
+        <parameter key="sylius.form.data_mapper.property_path.class">Symfony\Component\Form\Extension\Core\DataMapper\PropertyPathMapper</parameter>
+        <parameter key="sylius.form.data_mapper.order_item_quantity.class">Sylius\Bundle\OrderBundle\Form\DataMapper\OrderItemQuantityDataMapper</parameter>
+
+        <parameter key="sylius.adjustments_aggregator.class">Sylius\Component\Order\Aggregator\AdjustmentsByLabelAggregator</parameter>
+
+        <parameter key="sylius.custom_factory.adjustment.class">Sylius\Component\Order\Factory\AdjustmentFactory</parameter>
     </parameters>
 
     <services>
@@ -36,8 +43,21 @@
 
         <service id="sylius.callback.complete_order" class="%sylius.callback.complete_order.class%" />
 
-        <service id="sylius.listener.order_update" class="%sylius.listener.order_update.class%">
-            <tag name="kernel.event_listener" event="sylius.order.pre_update" method="recalculateOrderTotal" />
+        <service id="sylius.order_item_quantity_modifier" class="%sylius.order_item_quantity_modifier.class%">
+            <argument type="service" id="sylius.factory.order_item_unit" />
+        </service>
+        <service id="sylius.form.data_mapper.property_path" class="%sylius.form.data_mapper.property_path.class%">
+            <argument type="service" id="property_accessor" />
+        </service>
+        <service id="sylius.form.data_mapper.order_item_quantity" class="%sylius.form.data_mapper.order_item_quantity.class%">
+            <argument type="service" id="sylius.order_item_quantity_modifier" />
+            <argument type="service" id="sylius.form.data_mapper.property_path" />
+        </service>
+
+        <service id="sylius.adjustments_aggregator" class="%sylius.adjustments_aggregator.class%" />
+
+        <service id="sylius.custom_factory.adjustment" class="%sylius.custom_factory.adjustment.class%" decorates="sylius.factory.adjustment" public="false">
+            <argument type="service" id="sylius.custom_factory.adjustment.inner" />
         </service>
     </services>
 </container>

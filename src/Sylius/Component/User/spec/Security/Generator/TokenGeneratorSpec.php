@@ -32,18 +32,18 @@ class TokenGeneratorSpec extends ObjectBehavior
 
     public function it_throws_exception_when_not_int_given()
     {
-        $this->shouldThrow(\InvalidArgumentException::class)->during('generate', array('string'));
-        $this->shouldThrow(\InvalidArgumentException::class)->during('generate', array(new \stdClass()));
-        $this->shouldThrow(\InvalidArgumentException::class)->during('generate', array(1.2));
-        $this->shouldThrow(\InvalidArgumentException::class)->during('generate', array(array()));
+        $this->shouldThrow(\InvalidArgumentException::class)->during('generate', ['string']);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('generate', [new \stdClass()]);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('generate', [1.2]);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('generate', [[]]);
     }
 
     public function it_throws_exception_when_incorrect_length_provided()
     {
-        $this->shouldThrow(\InvalidArgumentException::class)->during('generate', array(-1));
-        $this->shouldThrow(\InvalidArgumentException::class)->during('generate', array(0));
-        $this->shouldThrow(\InvalidArgumentException::class)->during('generate', array(41));
-        $this->shouldThrow(\InvalidArgumentException::class)->during('generate', array(123));
+        $this->shouldThrow(\InvalidArgumentException::class)->during('generate', [-1]);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('generate', [0]);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('generate', [41]);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('generate', [123]);
     }
 
     public function it_generates_random_string()
@@ -64,10 +64,10 @@ class TokenGeneratorSpec extends ObjectBehavior
 
     public function getMatchers()
     {
-        return array(
+        return [
             'haveLength' => function ($subject, $key) {
                 return $key === strlen($subject);
             },
-        );
+        ];
     }
 }

@@ -26,3 +26,11 @@ sylius:
       max_length: 'Betaalmethode naam mag niet langer zijn dan {{ limit }} tekens.'
       min_length: 'Betaalmethode naam moet minstens {{ limit }} tekens lang zijn.'
       not_blank: Voer een betaalmethode naam in.
+    fee_calculator_configuration:
+      amount:
+        greater_than_or_equal: 'De vergoeding mag niet lager zijn dan {{ compared_value }}.'
+        not_blank: Voer het bedrag van de vergoeding in.
+      percent:
+        max_range: 'Percentage vergoeding kan niet groter zijn dan {{ limit }}.'
+        min_range: 'Percentage vergoeding kan niet lager is dan {{ limit }}.'
+        not_blank: Voer het percentage vergoeding in.

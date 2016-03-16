@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  checkout:
-    shipping_method:
-      not_blank: Odaberite način dostave
   form:
     action:
       add_product_configuration:
@@ -28,6 +25,7 @@ sylius:
     channel:
       taxonomies: Glavne kategorije
       locales: Lokaliteti
+      currency_default: Zadana valuta
       shipping_methods: Načini slanja
       payment_methods: Načini plaćanja
     image:
@@ -50,11 +48,12 @@ sylius:
       restricted_zone: Ograničena zona pristupa
       shipping_category: Kategorija pošiljke
       short_description: Kratak opis
-      tax_category: Porezna kategorija
       variant_selection_method: Način odabira varijante
     product_filter:
       name: Naziv
       sku: KOD (SKU)
+    product_variant:
+      tax_category: Kategorija artikla
     settings:
       general:
         currency: Zadana valuta
@@ -105,4 +104,6 @@ sylius:
       product_attribute_value:
         value: Vrijednost
     guest:
-      email: Email
+      email: E-mail
+    product_association_type:
+      name: Naziv grupe

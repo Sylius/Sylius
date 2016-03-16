@@ -2,13 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    email: 电子邮件
-    register: 注册
-    login: 登录
-    logout: 注销
-    change_password: 更改您的密码
-    account_panel_outline: 在您的个人空间查看、 跟踪和管理您的所有数据的所有功能。
   form:
     group:
       name: 名称
@@ -24,6 +17,7 @@ sylius:
       groups: 团体
       last_name: 姓氏
       email: 电子邮件
+      phone_number: 电话
       billing_address: 账单地址
       different_billing_address: 使用不同地址的帐单吗？
     user_filter:

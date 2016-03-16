@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CartBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Cart\Event\CartEvent;
 use Sylius\Component\Cart\Event\CartItemEvent;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
@@ -20,48 +21,46 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Validator\ValidatorInterface;
 
 /**
- * Cart & item changes listener.
- *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class CartSubscriber implements EventSubscriberInterface
 {
     /**
-     * Cart manager.
-     *
      * @var ObjectManager
      */
     protected $cartManager;
 
     /**
-     * Validator.
-     *
      * @var ValidatorInterface
      */
     protected $validator;
 
     /**
-     * Cart provider.
-     *
      * @var CartProviderInterface
      */
     protected $cartProvider;
 
     /**
-     * Constructor.
-     *
-     * @param ObjectManager         $cartManager
-     * @param ValidatorInterface    $validator
+     * @var OrderItemQuantityModifierInterface
+     */
+    protected $orderItemQuantityModifier;
+
+    /**
+     * @param ObjectManager $cartManager
+     * @param ValidatorInterface $validator
      * @param CartProviderInterface $cartProvider
+     * @param OrderItemQuantityModifierInterface $orderItemQuantityModifier
      */
     public function __construct(
         ObjectManager $cartManager,
         ValidatorInterface $validator,
-        CartProviderInterface $cartProvider
+        CartProviderInterface $cartProvider,
+        OrderItemQuantityModifierInterface $orderItemQuantityModifier
     ) {
-        $this->cartManager  = $cartManager;
-        $this->validator    = $validator;
+        $this->cartManager = $cartManager;
+        $this->validator = $validator;
         $this->cartProvider = $cartProvider;
+        $this->orderItemQuantityModifier = $orderItemQuantityModifier;
     }
 
     /**
@@ -69,12 +68,12 @@ class CartSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
-            SyliusCartEvents::ITEM_ADD_INITIALIZE    => 'addItem',
+        return [
+            SyliusCartEvents::ITEM_ADD_INITIALIZE => 'addItem',
             SyliusCartEvents::ITEM_REMOVE_INITIALIZE => 'removeItem',
-            SyliusCartEvents::CART_CLEAR_INITIALIZE  => 'clearCart',
-            SyliusCartEvents::CART_SAVE_INITIALIZE   => 'saveCart',
-        );
+            SyliusCartEvents::CART_CLEAR_INITIALIZE => 'clearCart',
+            SyliusCartEvents::CART_SAVE_INITIALIZE => 'saveCart',
+        ];
     }
 
     /**
@@ -83,7 +82,17 @@ class CartSubscriber implements EventSubscriberInterface
     public function addItem(CartItemEvent $event)
     {
         $cart = $event->getCart();
-        $cart->addItem($event->getItem());
+
+        $item = $event->getItem();
+        foreach ($cart->getItems() as $existingItem) {
+            if ($item->equals($existingItem)) {
+                $this->orderItemQuantityModifier->modify($existingItem, $existingItem->getQuantity() + $item->getQuantity());
+
+                return;
+            }
+        }
+
+        $cart->addItem($item);
     }
 
     /**
@@ -110,10 +119,10 @@ class CartSubscriber implements EventSubscriberInterface
      */
     public function saveCart(CartEvent $event)
     {
-        $cart  = $event->getCart();
+        $cart = $event->getCart();
 
         $errors = $this->validator->validate($cart);
-        $valid  = 0 === count($errors);
+        $valid = 0 === count($errors);
 
         if ($valid) {
             $this->cartManager->persist($cart);

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="sylius.theme.translation.translator.class">Sylius\Bundle\ThemeBundle\Translation\Translator</parameter>
+        <parameter key="sylius.theme.translation.theme_aware_translator.class">Sylius\Bundle\ThemeBundle\Translation\ThemeAwareTranslator</parameter>
+        <parameter key="sylius.theme.translation.loader_provider.class">Sylius\Bundle\ThemeBundle\Translation\Provider\TranslatorLoaderProvider</parameter>
+        <parameter key="sylius.theme.translation.resource_provider.class">Sylius\Bundle\ThemeBundle\Translation\Provider\CompositeTranslatorResourceProvider</parameter>
+        <parameter key="sylius.theme.translation.resource_provider.default.class">Sylius\Bundle\ThemeBundle\Translation\Provider\TranslatorResourceProvider</parameter>
+        <parameter key="sylius.theme.translation.resource_provider.theme_aware.class">Sylius\Bundle\ThemeBundle\Translation\Provider\ThemeTranslatorResourceProvider</parameter>
+        <parameter key="sylius.theme.translation.files_finder.class">Sylius\Bundle\ThemeBundle\Translation\Finder\TranslationFilesFinder</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.theme.translation.translator" class="%sylius.theme.translation.translator.class%" public="false">
+            <argument type="service" id="sylius.theme.translation.loader_provider" />
+            <argument type="service" id="sylius.theme.translation.resource_provider" />
+            <argument type="service" id="translator.selector" />
+            <argument>%kernel.default_locale%</argument>
+            <argument type="collection">
+                <argument key="cache_dir">%kernel.cache_dir%/translations</argument>
+                <argument key="debug">%kernel.debug%</argument>
+            </argument>
+        </service>
+
+        <service id="sylius.theme.translation.theme_aware_translator" class="%sylius.theme.translation.theme_aware_translator.class%" decorates="sylius.theme.translation.translator" public="false">
+            <argument type="service" id="sylius.theme.translation.theme_aware_translator.inner" />
+            <argument type="service" id="sylius.context.theme" />
+        </service>
+
+        <service id="sylius.theme.translation.loader_provider" class="%sylius.theme.translation.loader_provider.class%" public="false">
+            <argument type="collection" /> <!-- loaders -->
+        </service>
+
+        <service id="sylius.theme.translation.resource_provider" class="%sylius.theme.translation.resource_provider.class%" public="false">
+            <argument type="collection">
+                <argument type="service" id="sylius.theme.translation.resource_provider.default" />
+                <argument type="service" id="sylius.theme.translation.resource_provider.theme_aware" />
+            </argument>
+        </service>
+
+        <service id="sylius.theme.translation.resource_provider.default" class="%sylius.theme.translation.resource_provider.default.class%" public="false">
+            <argument type="collection" /> <!-- resources filepaths -->
+        </service>
+
+        <service id="sylius.theme.translation.resource_provider.theme_aware" class="%sylius.theme.translation.resource_provider.theme_aware.class%" public="false">
+            <argument type="service" id="sylius.theme.translation.files_finder" />
+            <argument type="service" id="sylius.repository.theme" />
+            <argument type="service" id="sylius.theme.hierarchy_provider" />
+        </service>
+
+        <service id="sylius.theme.translation.files_finder" class="%sylius.theme.translation.files_finder.class%" public="false">
+            <argument type="service" id="sylius.theme.finder_factory" />
+        </service>
+    </services>
+</container>

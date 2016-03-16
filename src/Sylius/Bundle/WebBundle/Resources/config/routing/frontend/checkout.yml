@@ -5,6 +5,11 @@ sylius_checkout_start:
     path: /
     defaults: { _controller: sylius.controller.process:startAction, scenarioAlias: 'sylius_checkout' }
 
+sylius_checkout_thank_you:
+    path: /thank-you
+    methods: [GET]
+    defaults: { _controller: sylius.controller.checkout:thankYouAction }
+
 sylius_checkout_display:
     path: /{stepName}
     defaults: { _controller: sylius.controller.process:displayAction, scenarioAlias: 'sylius_checkout' }

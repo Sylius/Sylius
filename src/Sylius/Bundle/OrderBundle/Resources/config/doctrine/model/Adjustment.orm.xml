@@ -23,7 +23,7 @@
         </id>
 
         <field name="type" column="type" type="string" />
-        <field name="description" column="description" type="string" nullable="true" />
+        <field name="label" column="label" type="string" nullable="true" />
         <field name="amount" column="amount" type="integer" />
         <field name="neutral" column="is_neutral" type="boolean" />
         <field name="locked" column="is_locked" type="boolean" />
@@ -44,6 +44,10 @@
 
         <many-to-one field="orderItem" target-entity="Sylius\Component\Order\Model\OrderItemInterface" inversed-by="adjustments">
             <join-column name="order_item_id" referenced-column-name="id" nullable="true" on-delete="CASCADE"/>
+        </many-to-one>
+
+        <many-to-one field="orderItemUnit" target-entity="Sylius\Component\Order\Model\OrderItemUnitInterface" inversed-by="adjustments">
+            <join-column name="order_item_unit_id" referenced-column-name="id" nullable="true" on-delete="CASCADE"/>
         </many-to-one>
     </mapped-superclass>
 

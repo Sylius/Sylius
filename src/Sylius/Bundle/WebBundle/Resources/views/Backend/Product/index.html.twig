@@ -15,6 +15,9 @@
 <div class="page-header">
     <div class="actions-menu">
         {{ buttons.create(path('sylius_backend_product_create'), 'sylius.product.create'|trans) }}
+        <a href="{{ path('sylius_backend_metadata_container_customize', { 'id': constant('Sylius\\Component\\Core\\Model\\ProductInterface::METADATA_CLASS_IDENTIFIER') }) }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-file"></i><span>{{ 'sylius.metadata.product.group_customize'|trans }}</span>
+        </a>
         {{ buttons.manage(path('sylius_backend_product_option_index'), 'sylius.product_option.manage'|trans) }}
         {{ buttons.manage(path('sylius_backend_product_attribute_index'), 'sylius.product_attribute.manage'|trans) }}
         {% if app.request.query.get('deleted') %}

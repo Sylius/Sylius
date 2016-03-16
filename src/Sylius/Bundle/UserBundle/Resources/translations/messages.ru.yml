@@ -2,13 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    email: Email
-    register: Регистрация
-    login: Вход
-    logout: Выход
-    change_password: Change my password
-    account_panel_outline: Воспользуйтесь всеми возможными преимуществами для просмотра, отслеживания и управления своими заказами.
   form:
     group:
       name: Название
@@ -18,12 +11,17 @@ sylius:
       enabled: Активен
       password:
         label: Пароль
+        confirmation: Верификация
+      remember_me: Запомнить меня
       shipping_address: Адрес доставки
     customer:
       first_name: Имя
       groups: Группы
       last_name: Фамилия
       email: Email
+      phone_number: Контактный телефон
+      gender: Пол
+      birthday: День рождения
       billing_address: Адрес для выставления счета
       different_billing_address: Использовать другой адрес для составления счета?
     user_filter:

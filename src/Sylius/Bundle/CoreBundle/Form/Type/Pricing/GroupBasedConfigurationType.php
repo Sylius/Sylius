@@ -40,10 +40,10 @@ class GroupBasedConfigurationType extends AbstractType
     {
         foreach ($this->groupRepository->findAll() as $group) {
             $builder
-                ->add($group->getId(), 'sylius_money', array(
-                    'label'    => $group->getName(),
+                ->add($group->getId(), 'sylius_money', [
+                    'label' => $group->getName(),
                     'required' => false,
-                ))
+                ])
             ;
         }
     }
@@ -54,9 +54,9 @@ class GroupBasedConfigurationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
-                'data_class' => null
-            ))
+            ->setDefaults([
+                'data_class' => null,
+            ])
         ;
     }
 

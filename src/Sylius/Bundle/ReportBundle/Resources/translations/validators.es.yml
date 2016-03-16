@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  report:
+    name:
+      not_blank: El nombre del informe no puede estar en blanco
+      min_length: El nombre del informe debe tener al menos 2 caracteres
+      max_length: El nombre del informe debe tener como máximo 255 caracteres
+    description:
+      not_blank: La descripción del informe no puede estar en blanco
+    code:
+      unique: El código ya está siendo utilizado.
+      single_word: El código del informe debe ser una sola palabra.

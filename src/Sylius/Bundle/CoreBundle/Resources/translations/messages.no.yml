@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  checkout:
-    shipping_method:
-      not_blank: Vennligst velg sendingsmetode.
   form:
     action:
       add_product_configuration:
@@ -28,6 +25,7 @@ sylius:
     channel:
       taxonomies: Kategorisering
       locales: Nasjonale innstillinger
+      currency_default: Standard valuta
       shipping_methods: Fraktalternativ
       payment_methods: Betalingsmetoder
     image:
@@ -50,11 +48,12 @@ sylius:
       restricted_zone: Begrenset sone
       shipping_category: Fraktkategori
       short_description: Kort beskrivelse
-      tax_category: Skattekategori
       variant_selection_method: Metode for valg av variant
     product_filter:
       name: Navn
       sku: Strekkode
+    product_variant:
+      tax_category: Skattekategori
     settings:
       general:
         currency: Standard valuta
@@ -106,3 +105,5 @@ sylius:
         value: Verdi
     guest:
       email: E-post
+    product_association_type:
+      name: Navn

@@ -32,6 +32,10 @@ sylius_backend_product:
     resource: @SyliusWebBundle/Resources/config/routing/backend/product.yml
     prefix: /products
 
+sylius_backend_product_association_type:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/product_association_type.yml
+    prefix: /product-association-types
+
 sylius_backend_inventory:
     resource: @SyliusWebBundle/Resources/config/routing/backend/inventory.yml
     prefix: /inventory
@@ -59,6 +63,10 @@ sylius_backend_taxonomy:
 sylius_backend_taxon:
     resource: @SyliusWebBundle/Resources/config/routing/backend/taxon.yml
     prefix: /taxonomies/{taxonomyId}/taxons
+
+sylius_backend_user:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/user.yml
+    prefix: /users
 
 sylius_backend_order:
     resource: @SyliusWebBundle/Resources/config/routing/backend/order.yml
@@ -182,3 +190,11 @@ sylius_backend_content:
 sylius_backend_report:
     resource: @SyliusWebBundle/Resources/config/routing/backend/report.yml
     prefix: /reports
+
+sylius_backend_metadata_container:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/metadata_container.yml
+    prefix: /metadata
+
+sylius_backend_product_review:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/product_review.yml
+    prefix: /product-reviews

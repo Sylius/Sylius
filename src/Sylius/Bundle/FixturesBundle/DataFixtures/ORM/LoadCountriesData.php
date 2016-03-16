@@ -24,7 +24,7 @@ use Symfony\Component\Intl\Intl;
  */
 class LoadCountriesData extends DataFixture
 {
-    protected $states = array(
+    protected $states = [
         'AL' => 'Alabama',
         'AK' => 'Alaska',
         'AZ' => 'Arizona',
@@ -76,7 +76,7 @@ class LoadCountriesData extends DataFixture
         'WV' => 'West Virginia',
         'WI' => 'Wisconsin',
         'WY' => 'Wyoming',
-    );
+    ];
 
     /**
      * {@inheritdoc}
@@ -86,18 +86,18 @@ class LoadCountriesData extends DataFixture
         $countryFactory = $this->getCountryFactory();
         $countries = Intl::getRegionBundle()->getCountryNames();
 
-        foreach ($countries as $isoName => $name) {
+        foreach ($countries as $countryCode => $name) {
             $country = $countryFactory->createNew();
 
-            $country->setIsoName($isoName);
+            $country->setCode($countryCode);
 
-            if ('US' === $isoName) {
+            if ('US' === $countryCode) {
                 $this->addUsStates($country);
             }
 
             $manager->persist($country);
 
-            $this->setReference('Sylius.Country.'.$isoName, $country);
+            $this->setReference('Sylius.Country.'.$countryCode, $country);
         }
 
         $manager->flush();
@@ -119,14 +119,16 @@ class LoadCountriesData extends DataFixture
     protected function addUsStates(CountryInterface $country)
     {
         $provinceFactory = $this->getProvinceFactory();
+        $countryCode = $country->getCode();
 
-        foreach ($this->states as $isoName => $name) {
+        foreach ($this->states as $baseProvinceCode => $name) {
             $province = $provinceFactory->createNew();
             $province->setName($name);
-            $province->setIsoName($isoName);
+            $newProvinceCode = sprintf('%s-%s', $countryCode, $baseProvinceCode);
+            $province->setCode($newProvinceCode);
             $country->addProvince($province);
 
-            $this->setReference('Sylius.Province.'.$isoName, $province);
+            $this->setReference('Sylius.Province.'.$newProvinceCode, $province);
         }
     }
 }

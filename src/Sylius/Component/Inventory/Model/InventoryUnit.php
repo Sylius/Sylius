@@ -11,11 +11,15 @@
 
 namespace Sylius\Component\Inventory\Model;
 
+use Sylius\Component\Resource\Model\TimestampableTrait;
+
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class InventoryUnit implements InventoryUnitInterface
 {
+    use TimestampableTrait;
+
     /**
      * @var mixed
      */
@@ -30,16 +34,6 @@ class InventoryUnit implements InventoryUnitInterface
      * @var string
      */
     protected $inventoryState = InventoryUnitInterface::STATE_CHECKOUT;
-
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
 
     public function __construct()
     {
@@ -63,19 +57,11 @@ class InventoryUnit implements InventoryUnitInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param StockableInterface $stockable
      */
     public function setStockable(StockableInterface $stockable)
     {
         $this->stockable = $stockable;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSku()
-    {
-        return $this->stockable->getSku();
     }
 
     /**
@@ -116,37 +102,5 @@ class InventoryUnit implements InventoryUnitInterface
     public function isBackordered()
     {
         return InventoryUnitInterface::STATE_BACKORDERED === $this->inventoryState;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createAt)
-    {
-        $this->createdAt = $createAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
     }
 }

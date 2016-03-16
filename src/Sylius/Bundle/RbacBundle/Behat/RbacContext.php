@@ -38,7 +38,7 @@ class RbacContext extends DefaultContext
         $manager->persist($root);
         $manager->flush();
 
-        $permissions = array();
+        $permissions = [];
 
         foreach ($table->getHash() as $data) {
             $permission = $factory->createNew();
@@ -82,7 +82,7 @@ class RbacContext extends DefaultContext
         $manager->persist($root);
         $manager->flush();
 
-        $roles = array();
+        $roles = [];
 
         foreach ($table->getHash() as $data) {
             $role = $factory->createNew();
@@ -97,7 +97,7 @@ class RbacContext extends DefaultContext
             }
 
             if (!empty($data['security roles'])) {
-                $securityRoles = array();
+                $securityRoles = [];
 
                 foreach (explode(',', $data['security roles']) as $securityRole) {
                     $securityRoles[] = trim($securityRole);
@@ -122,7 +122,7 @@ class RbacContext extends DefaultContext
         $role = $this->findOneByName('role', $roleName);
 
         foreach ($table->getRows() as $permission) {
-            $role->addPermission($this->findOneBy('permission', array('code' => $permission)));
+            $role->addPermission($this->findOneBy('permission', ['code' => $permission]));
         }
 
         $manager = $this->getEntityManager();

@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  emails:
-    order_confirmation:
-      subject: Vă mulțumim pentru comanda dumneavoastră!
   account:
     address:
       action:
@@ -22,26 +19,30 @@ sylius:
       list: Toate adresele
       update: Modificare adresă
     home:
-      outline: Bucuraţi-vă de toate facilitățile care sunt disponibile in contul personal, urmăriți şi gestionați toate datele dumneavoastră.
+      email: E-mail
       since: Sunt client din
       welcome: Bine ați venit
     order:
       created_at: Plasată la
       details: Detaliile comenzii dumneavoastră
       download_invoice: Descărcare factură
-      empty: Nu aţi plasat nici o comandă încă.
       invoice: Factură
       list: Toate comenzile dumneavoastre
+      number: Număr
       placed_at: 'Plasată la %at%'
       shipment:
         pending: În așteptare
         ready: 'Gata pentru livrare de la %at%'
         returned: 'Returnat la %at%'
         shipped: 'Livrat la %at%'
+      state: Status
       total: Total
       tracking_number: Număr de urmărire
     title: Contul meu
   add_to_cart: Adaugă în coș
+  association_type:
+    name: Nume
+    create: Creează
   address:
     city: Oraș
     company: Firmă
@@ -56,6 +57,12 @@ sylius:
     info: Informație
     success: Succes
     warning: Atenție
+  archetype:
+    attributes: Atribute
+    name: Nume
+    options: Opţiuni
+    parent: Părinte
+    updated_at: Data modificării
   backend:
     alert:
       info: Informație
@@ -75,34 +82,38 @@ sylius:
       orders_this_month: Număr comenzi
       registrations_this_month: Total înregistrări
       sales_this_month: Vânzări
-  backend_welcome: 'Bună ziua <b>%name%</b>!'
   block:
-    index_header: Block-uri
-    no_results: Nu este nici un bloc pentru afişare.
     imagine:
       id: Id
       label: Label
+      publishable: Publicat
       title: Titlu
       updated_at: Data modificării
+    index_header: Block-uri
     simple:
       body: Corp
       id: Id
       label: Label
+      publishable: Publicat
       title: Titlu
       updated_at: Data modificării
     slideshow:
       body: Corp
       id: Id
+      publishable: Publicat
       title: Titlu
       updated_at: Data modificării
     string:
       body: Corp
       id: Id
       label: Label
+      publishable: Publicat
       title: Titlu
       updated_at: Data modificării
   breadcrumb:
     assortment: Sortiment
+    attribute:
+      index: Atribute
     block:
       index: Block-uri
     build: Generare
@@ -139,6 +150,8 @@ sylius:
       index: Promoţii
     promotion_coupon:
       index: Coduri promoționale
+    role:
+      index: Roluri
     route:
       index: Rute
     sales: Vânzări
@@ -156,8 +169,6 @@ sylius:
     taxonomy:
       index: Categorizări
     update: Editare
-    role:
-      index: Roluri
     zone:
       index: Zone
   browse_products: Frunzărește produse
@@ -176,6 +187,15 @@ sylius:
       unit_price: Preț
     summary_header: Sumar coș
     total_items: '1 produs|%count% produse'
+  channel:
+    code: Cod
+    created_at: Creat la
+    currency_default: Moneda implicită
+    enabled: Activat
+    id: Id
+    name: Nume
+    update: Editare
+    updated_at: Data modificării
   checkout:
     addressing:
       header: Adrese
@@ -222,56 +242,61 @@ sylius:
       new_customer: Client nou
       register: Înregistrare
     shipping:
-      error: Ne pare rău, dar magazinul nostru nu furnizează produse in țara pe care aţi ales-o.
       header: Metoda de livrare
   confirmation:
-    message: Vreți să ștergeți acest produs?
     title: Confirmare
+  contact_request:
+    email: E-mail
+    firstName: Prenume
+    id: Id
+    lastName: Nume
+    message: Mesaj
+    topic: Subiect
+    updated_at: Data modificării
+  contact_topic:
+    id: Id
+    title: Titlu
+    updated_at: Data modificării
   country:
     add_province: Adăugare județ
     create: Adăugare țară
     create_header: Țară nouă
+    enabled: Activat
     id: Id
     index_header: Țări
-    iso_name: Cod ISO
     manage: Gestionare ţări
     name: Nume
-    no_results: Nu este configurată nici o țară.
     show_header: Detalii țară
     update_header: Modificare țară
-    enabled: Activat
-  email:
-    code: Cod
-    enabled: Activată?
-    updated_at: Data modificării
   create: Creează
   created_at: Creat la
-  delete: Șterge
-  deleted: Șters
-  edit: Editează
-  permission:
-    code: Cod
-    id: Id
-    description: Descriere
-    updated_at: Data modificării
-  role:
-    code: Cod
-    id: Id
-    name: Nume
-    description: Descriere
-    index_header: Roluri
-    updated_at: Data modificării
   currency:
     code: Cod
-    id: Id
-    name: Nume
     enabled: Activat
     exchange_rate: Cursul de schimb
+    id: Id
+    name: Nume
+    updated_at: Data modificării
+  customer:
+    billing_address: Adresa de facturare
+    email: E-mail
+    first_name: Prenume
+    groups: Grupuri
+    id: Id
+    last_name: Nume
+    shipping_address: Adresa de livrare
+    phone_number: Număr de telefon
+  delete: Șterge
+  deleted: Șters
+  edit: Editare
+  email:
+    code: Cod
+    enabled: Activat
     updated_at: Data modificării
   filter: Filtrează
   form:
     cart:
-      coupon: Dacă aveţi un cod promoțional, introduceţi-l aici
+      coupon: Cod promoțional
     choose_file: Alege fișier
     frontend:
       password:
@@ -300,7 +325,6 @@ sylius:
     id: Id
     index_header: Grupuri
     name: Nume
-    no_results: Nu există nici un grup de afişat.
     roles: Roluri
     update_header: Editare grup
   hide_deleted: Ascunde cele şterse
@@ -316,19 +340,17 @@ sylius:
     created_at: Creat
     inventory_state: Stare inventar
     name: Nume
-    no_results: Nu sunt produse pe stoc pentru afişare.
     shipping_state: Status livrare
     sku: SKU
     updated_at: Data modificării
   locale:
-    id: Id
-    name: Nume
     code: Cod
     create: Creeare localizare
     create_header: Adăugare localizare nouă
     enabled: Activat
+    id: Id
     index_header: Indicele tuturor localizărilor configurate
-    no_results: Nu există nici o localizare configurată.
+    name: Nume
     update_header: Editare setări localizare
     updated_at: Data modificării
   login: Conectaţi-vă
@@ -337,6 +359,7 @@ sylius:
   manage: Gestionare
   menu:
     id: Id
+    publishable: Publicat
     title: Titlu
   menu_node:
     id: Id
@@ -344,25 +367,35 @@ sylius:
     parent: Părinte
     title: Titlu
   meta:
-    frontend_description: Sylius este o soluție modernă de e-commerce pentru PHP, bazată pe framework-ul Symfony2.
-    frontend_keywords: sylius, e-commerce, symfony2, magazin, coș, webshop
     frontend_title: Sylius, e-commerce modern pentru Symfony2
+  metadata:
+    id: Id
+    content: Conţinut
   na: N/A
   newest: Produse noi
   "no": false
-  product_option:
-    manage: Gestionare opţiuni
-    name: nume
-    updated_at: ultima actualizare
   order:
+    adjustments:
+      amount: Valoare
+      description: Descriere
+      type: Tip
     billing_address: Adresă de facturare
+    comment:
+      author: Autor
+      created_at: Creat la
+      state: Status
     create: Creeare comandă
     create_header: Comandă nouă
     created_at: Data creării
+    currency: Monedă
     general_info: Informaţii generale
     id: Id
     index_header: Comenzi curente
     inventory_tracking: Urmărire inventar
+    inventory_unit:
+      backorder: Backorder
+      fulfill: Vânzare
+      return: Returnare
     items_total: Produse
     manage: Gestionare comenzi
     no_items: Comanda nu conține nici un produs
@@ -375,71 +408,32 @@ sylius:
     payment_state: Status plată
     payment_states:
       balance_due: Sold datorat
+    promotion_coupons: Coduri promoționale
     promotion_total: Total promoții
     recent_header: Comenzi recente
+    release_inventory: Golește stocurile
     shipment_state: Status livrare
     shipment_states:
       pending: În așteptare
     shipments: Livrări
-    release_inventory: Golește stocurile
-    inventory_unit:
-      backorder: Backorder
-      fulfill: Vânzare
-      return: Returnare
     shipping_address: Adresa de livrare
     shipping_charges: Cost livrare
     shipping_total: Total livrare
-    state: Status
+    show_header: Detalii comandă
+    state:
+      cancelled: Anulată
+      checkout: Trimite comanda
+      returned: Returnată
+      shipped: Expediată
     tax_total: Total taxe
     taxes: Taxe
     total: Total
     update_header: Modificare comandă
-    currency: Monedă
-    promotion_coupons: Coduri promoționale
-    adjustments:
-      label: Label
-      description: Descriere
-      amount: Valoare
-    comment:
-      author: Autor
-      created_at: Creat la
-      state: Status
-  route:
-    id: Id
-    index_header: Rute
-    name: Nume
-    title: Titlu
-  redirect_route:
+  review:
     id: Id
     title: Titlu
-  shipment:
-    ship: Expediere
+    author: Autor
     created_at: Creat la
-    id: Id
-    index_header: Livrări
-    inventory_state: Stare inventar
-    manage: Gestionare livrări
-    method: Metodă de livrare
-    modified: Modificat
-    name: Nume
-    no_items: Nu există elemente pentru afişare.
-    no_results: Nu există livrări pentru afişare.
-    order: Detalii comandă
-    show_header: Detalii livrare
-    sku: SKU
-    state: Status
-    tracking_code: Număr de urmărire
-    update: Editare
-    update_header: Editare livrare
-    updated_at: Ultima actualizare
-  channel:
-    created_at: Creat la
-    code: Cod
-    enabled: Activat
-    id: Id
-    name: Nume
-    update: Editare
-    updated_at: Data modificării
   order_item:
     product: Produs
     quantity: Cantitate
@@ -452,11 +446,11 @@ sylius:
     create: Creeare pagină nouă
     id: Id
     index_header: Pagini
+    publishable: Publicat
     routes: Rute
     title: Titlu
   password: Parolă
   payment:
-    order: Detalii comandă
     amount: Valoare
     create: Creeare plată
     create_header: Plată nouă
@@ -465,13 +459,13 @@ sylius:
     index_header: Plăți
     manage: Gestionare plăţi
     method: Metoda plății
-    no_results: Nu există nici o plată configurată.
+    order: Detalii comandă
     state:
-      header: Status
       cancelled: Anulată
       checkout: Finalizare comandă
       completed: Finalizat
       failed: Eșuată
+      header: Status
       new: Nouă
       pending: În așteptare
       processing: În curs de procesare
@@ -483,15 +477,24 @@ sylius:
   payment_method:
     create: Creeare metodă de plată
     create_header: Metodă nouă de plată
-    enabled: Este activat?
-    gateway: gateway
+    gateway: Gateway
     id: Id
     index_header: Metode de plată
     name: Nume
-    no_results: Nu există nici o metodă de plată configurată.
     update_header: Editare metodă de plată
     updated_at: Ultima modificare
+  permission:
+    code: Cod
+    description: Descriere
+    id: Id
+    updated_at: Data modificării
+  pricing:
+    volume_based:
+      button:
+        add: Adăugați
+      price: Preț
   product:
+    attributes: Atribute
     available_on: Disponibil din
     available_on_demand: Disponibil la comandă
     categorization: Categorizare
@@ -507,7 +510,6 @@ sylius:
     no_description: '<i>Fără descriere...</i>'
     no_images: Nu există imagini pentru acest produs
     no_options: Nu există opțiuni pentru acest produs
-    no_results: Nu există produse de afișat.
     no_shipping_category: Nici o categorie de livrare
     no_short_description: '<i>Fără descriere scurtă</i>'
     no_sku: Fără SKU
@@ -519,29 +521,44 @@ sylius:
     shipping_category: Categoria de livrare
     show: Detalii
     show_header: 'Detalii produs <small>Vizualizează produs "<strong>%product%</strong>"</small>'
-    show_in_store: Arată în magazin
     sku: SKU
     stock: Stoc curent
     tabs:
+      attributes: Atribute
       categorization: Categorizare
       images: Imagini
       options: Opţiuni
-      product: Produs
       pricing: Calculator
+      product: Produs
     tax_category: Categoria de taxă
     unavailable: Indisponibil
     update_header: Editare produs
     updated_at: Data modificării
     variant_selection_method: Metoda de selecţie a variantei
-    view_details: 'Vezi detalii %product%.'
     volume_based:
       price: Preț
+  product_attribute:
+    code: Cod
+    name: Nume
+    type: Tip
+    updated_at: Data modificării
+  product_association:
+    code: Cod
+    create_header: Produs nou
+    name: Nume
+    type: Tip
+    updated_at: Data modificării
   product_not_available_in_zone: Indisponibil în ţara dumneavoastră
+  product_option:
+    manage: Gestionare opţiuni
+    name: Nume
+    presentation: Prezentare
+    updated_at: Data modificării
   promotion:
     actions: Acțiuni
     add_action: Adaugă acţiune
     add_rule: Adaugă regulă
-    coupon_based: Bazat pe cod promo?
+    coupon_based: Bazat pe cod promoțional
     create: Creeare promoție
     create_header: Promoție nouă
     created_at: Creat la
@@ -552,7 +569,6 @@ sylius:
     index_header: Promoţii actuale
     manage: Gestionare promoții
     name: Nume
-    no_results: Nu există nici o promoție configurată.
     rules: Reguli
     show_header: Detalii promoție
     starts_at: Începe la
@@ -571,28 +587,35 @@ sylius:
     generate_header: Generare coduri promoționale
     index: Listare coduri promoționale
     index_header: Coduri promoționale
-    no_results: Nu există nici un cod promoțional pentru afişare.
     total_results:
       Total: '%total%'
     update_header: Editare cod promoțional
   promotion_rule:
     configuration: Configurare
     type: Tip
-  product_attribute:
-    name: nume
-    updated_at: ultima actualizare
-  archetype:
-    name: nume
-    updated_at: ultima actualizare
   province:
     provinces: Județe
-  remember_me: Ţine-mă minte
+  redirect_route:
+    id: Id
+    title: Titlu
   report:
-    details: detalii
-    name: Nume
     code: Cod
     description: Descriere
+    id: Id
     manage: Gestionare
+    name: Nume
+  role:
+    code: Cod
+    description: Descriere
+    id: Id
+    index_header: Roluri
+    name: Nume
+    updated_at: Data modificării
+  route:
+    id: Id
+    index_header: Rute
+    name: Nume
+    title: Titlu
   save_changes: Salvează modificările
   search: Căutare
   security:
@@ -601,6 +624,24 @@ sylius:
   settings:
     general_header: Setări generale
     taxation_header: Setări taxe
+  shipment:
+    created_at: Creat la
+    id: Id
+    index_header: Livrări
+    inventory_state: Stare inventar
+    manage: Gestionare livrări
+    method: Metodă de livrare
+    modified: Modificat
+    name: Nume
+    order: Detalii comandă
+    ship: Expediere
+    show_header: Detalii livrare
+    sku: SKU
+    state: Status
+    tracking_code: Număr de urmărire
+    update: Editare
+    update_header: Editare livrare
+    updated_at: Ultima actualizare
   shipment_category:
     manage: Gestionare categorii de livrare
   shipping_address: Adresa de livrare
@@ -611,7 +652,6 @@ sylius:
     index_header: Categorii de livrare
     manage: Gestionare categorii de livrare
     name: Nume
-    no_results: Nu sunt categorii de livrare configurate.
     update_header: Editare categorie de livrare
     updated_at: Ultima actualizare
   shipping_method:
@@ -619,28 +659,22 @@ sylius:
     category: Categorie
     create: Creeare metodă de livrare
     create_header: Metodă de livrare nouă
-    enabled: Este activat?
+    enabled: Activat
     id: Id
     index_header: Metode de livrare
     manage: Gestionare metode de livrare
     name: Nume
-    no_results: Nu sunt metode de livrare configurate.
     show_header: Detalii metodă de livrare
     update_header: Editare metodă de livrare
     updated_at: Data modificării
     zone: Zonă
   shop_by: Filtrează după
-  show: detalii
   show_all: Afişare toate
   show_deleted: Arată cele şterse
   stockable:
     index_header: 'Inventar <small>Aici puteţi vedea stocul actual</small>'
-    name: nume
-    no_results: Nu sunt stocuri pentru afişare.
-    on_hand: nivelul stocurilor
-    on_hold: în așteptare
-    sku: SKU
-    updated_at: ultima actualizare
+    name: Nume
+    updated_at: Data modificării
   tax_category:
     create: Creeare categorie de taxă
     create_header: Categorie de taxă nouă
@@ -650,7 +684,6 @@ sylius:
     manage: Gestionare categorii de taxe
     name: Nume
     no_description: Fără descriere
-    no_results: Nu este nici o categorie de taxă configurată.
     update_header: Editare categorie de taxă
     updated_at: Ultima actualizare
   tax_rate:
@@ -659,11 +692,9 @@ sylius:
     category: Categorie
     create: Creeare taxă
     create_header: Taxă nouă
-    included_in_price: Inclusă în preţ?
     index_header: Taxe
     manage: Gestionare taxe
     name: Nume
-    no_results: Nu există nici o taxă configurată.
     show_header: Detalii taxă
     update_header: Editare taxă
     updated_at: Ultima actualizare
@@ -674,7 +705,6 @@ sylius:
     image: Selectaţi imagine
     name: Nume
     no_image: Nu există nici o imagine pentru această categorie
-    no_results: Nu este nici o categorie pentru afişare.
     product_index_header: 'Produse categorizate ca "%name%"'
     update_header: Editare categorie
   taxonomy:
@@ -685,34 +715,30 @@ sylius:
     manage: Gestionare categorizări
     name: Nume
     no_image: Nu există nici o imagine pentru această categorizare
-    no_results: Nu există nici o categorizare.
     show_header: 'Detalii <small><strong>%name%</strong></small>'
     update_header: Editare categorizare
   total_quantity: Cantitate totală
-  unknown: Necunoscut
-  customer:
-    billing_address: Adresa de facturare
+  ui:
+    change_password: Modificare parolă
+    code: Cod
     email: E-mail
-    first_name: Prenume
+    login: Conectaţi-vă
+    logout: Deconectare
+    register: Creează cont nou
+    name: Nume
     id: Id
-    last_name: Nume
-    shipping_address: Adresa de livrare
-    groups: Grupuri
+  unknown: Necunoscut
   user:
-    create: creează utilizator
     create_header: Utilizator nou
-    enabled: Confirmat?
     general_info: 'Utilizatorul "%username%", informații generale'
     id: Id
+    impersonate: Autentificare în numele utilizatorului
     index_header: 'Utilizatori <small>Lista tuturor utilizatorilor înregistraţi</small>'
     last_login: Ultima autentificare
-    impersonate: Autentificare în numele utilizatorului
-    manage: Gestionare utilizatori
-    no_results: Nu există utilizatori pentru afişare.
     recent_header: Utilizatori recenți
-    registration_date: Data înregistrării
     register:
       button: Creează cont nou
+    registration_date: Data înregistrării
     show_header: Detalii utilizator
     update_header: Editare utilizator
     username: Nume de utilizator
@@ -724,7 +750,6 @@ sylius:
     create_header: Variantă de produs nouă
     delete_image: Șterge imagine
     last_update: Data modificării
-    no_results: Nu este nici o variantă pentru afişare.
     options: Opţiuni
     price: Preț
     sku: SKU
@@ -738,22 +763,9 @@ sylius:
     index_header: Zone
     manage: Gestionarea zonelor
     name: Nume
-    no_results: Nu sunt zone configurate.
+    scope: Domeniul de aplicare
     show_header: Detalii zonă
     type: Tip
     update_header: Editare zonă
-    scope: Domeniul de aplicare
   zone_member:
     members: Membri
-  contact_topic:
-    id: Id
-    title: Titlu
-    updated_at: Data modificării
-  contact_request:
-    id: Id
-    firstName: Prenume
-    lastName: Nume
-    email: E-mail
-    message: Mesaj
-    topic: Subiect
-    updated_at: Data modificării

@@ -2,13 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    register: Регистриране
-    login: Вход
-    logout: Изход
-    change_password: Смяна на парола
-    account_panel_outline: 'Насладете се на всички функции, които са налични  за преглед във вашето лично пространство, проследявайте и управлявайте всички ваши данни.'
   form:
+    user:
+      email: Имейл
+    customer:
+      email: Имейл
+      phone_number: Телефонен номер
     user_change_password:
       confirmation: Потвърждение
       current: Текуща парола

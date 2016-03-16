@@ -44,9 +44,9 @@ class BuildAttributeValueFormSubscriberSpec extends ObjectBehavior
 
     function it_subscribes_to_pre_set_data_event()
     {
-        self::getSubscribedEvents()->shouldReturn(array(FormEvents::PRE_SET_DATA => 'preSetData', FormEvents::PRE_SUBMIT => 'preSubmit'));
+        self::getSubscribedEvents()->shouldReturn([FormEvents::PRE_SET_DATA => 'preSetData', FormEvents::PRE_SUBMIT => 'preSubmit']);
     }
-    
+
     function it_does_not_add_any_field_when_attribute_is_new_or_empty(FormEvent $event, Form $form)
     {
         $event->getData()->willReturn(null);
@@ -76,11 +76,11 @@ class BuildAttributeValueFormSubscriberSpec extends ObjectBehavior
 
     function it_throws_an_exception_on_pre_submit_event_when_attribute_id_is_undefined(FormEvent $event)
     {
-        $event->getData()->willReturn(array());
+        $event->getData()->willReturn([]);
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('preSubmit', array($event))
+            ->during('preSubmit', [$event])
         ;
     }
 
@@ -90,14 +90,14 @@ class BuildAttributeValueFormSubscriberSpec extends ObjectBehavior
         Form $form,
         FormEvent $event
     ) {
-        $event->getData()->willReturn(array(
+        $event->getData()->willReturn([
             'attribute' => 6,
-            'value' => array(
-                'year'  => 2010,
+            'value' => [
+                'year' => 2010,
                 'month' => 01,
-                'day'   => 01,
-            ),
-        ));
+                'day' => 01,
+            ],
+        ]);
         $event->getForm()->willReturn($form);
 
         $attributeRepository->find(6)->willReturn($attribute);

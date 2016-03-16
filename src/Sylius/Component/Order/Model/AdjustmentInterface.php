@@ -12,12 +12,13 @@
 namespace Sylius\Component\Order\Model;
 
 use Sylius\Component\Originator\Model\OriginAwareInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface AdjustmentInterface extends TimestampableInterface, OriginAwareInterface
+interface AdjustmentInterface extends ResourceInterface, TimestampableInterface, OriginAwareInterface
 {
     /**
      * @return AdjustableInterface
@@ -42,12 +43,12 @@ interface AdjustmentInterface extends TimestampableInterface, OriginAwareInterfa
     /**
      * @return string
      */
-    public function getDescription();
+    public function getLabel();
 
     /**
-     * @param string $description
+     * @param string $label
      */
-    public function setDescription($description);
+    public function setLabel($label);
 
     /**
      * @return int

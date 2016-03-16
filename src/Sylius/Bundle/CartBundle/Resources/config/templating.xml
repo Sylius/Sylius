@@ -25,6 +25,7 @@
             <argument type="service" id="sylius.cart_provider" />
             <argument type="service" id="sylius.factory.cart_item" />
             <argument type="service" id="form.factory" />
+            <argument type="service" id="sylius.order_item_quantity_modifier" />
             <tag name="templating.helper" alias="sylius_cart" />
         </service>
     </services>

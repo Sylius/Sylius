@@ -22,8 +22,10 @@
     "require": {
         "php": "^5.5.9|^7.0",
 
-        "doctrine/orm": "^2.4.8,<2.5",
-        "sylius/resource": "0.16.*"
+        "sylius/resource": "0.17.*",
+        "symfony/form": "^2.7",
+        "symfony/http-foundation": "^2.7",
+        "zendframework/zend-stdlib": "^2.0|^3.0"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.4"
@@ -38,9 +40,10 @@
         "psr-4": { "Sylius\\Component\\Channel\\spec\\": "spec/" }
     },
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "extra": {
         "branch-alias": {
-            "dev-master": "0.16-dev"
+            "dev-master": "0.17-dev"
         }
     }
 }

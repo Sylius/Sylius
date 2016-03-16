@@ -18,25 +18,24 @@ sylius:
       contains_product_configuration:
         variants: Тавары
         exclude: Выключыць
-      item_count_configuration:
+      cart_quantity_configuration:
         count: Колькасць
-        equal: Роўна
       item_total_configuration:
         amount: Сума
-        equal: Роўна
       nth_order_configuration:
         nth: N-нны
       shipping_country_configuration:
         country: Краіна
       type: Тып
     coupon:
-      code: Код
       usage_limit: Ліміт карыстання
     coupon_generate_instruction:
       amount: Колькасць
       usage_limit: Ліміт карыстання
     promotion:
       actions: Дзеянні
+      add_action: Дадаць дзеянне
+      add_rule: Дадаць правіла
       coupon_based: Заснавана на купонах
       description: Апісанне
       ends_at: Канец

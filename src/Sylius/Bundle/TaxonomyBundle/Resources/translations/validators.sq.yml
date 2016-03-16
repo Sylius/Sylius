@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  taxon:
+    name:
+      max_length: Emri i taksës nuk duhet të përmbajë më shumë se 255 karaktere.
+      not_blank: Fut emrin e taksës.
+    code:
+      unique: Taksimi me kodin e dhënë tashmë egziston.
+      not_blank: Shto kodin e taksimit.
+  taxonomy:
+    name:
+      max_length: Emri i kategorisë së taksimit nuk duhet të përmbajë më shumë se 255 karaktere.
+      not_blank: Fut emrin e kategorisë së taksimit.

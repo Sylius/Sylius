@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+function checkBuild {
+    if [[ $1 -eq 0 ]] && [[ $2 -eq 0 ]]; then
+        exit 0
+    fi
+
+    exit 1
+}
+
+EXIT_BEHAT_TEST_CODE=0
+EXIT_BEHAT_PAYPAL_TEST_CODE=0
+
+bin/behat --strict -f progress -p cached ; EXIT_BEHAT_TEST_CODE=$?
+
+if [[ $EXIT_BEHAT_TEST_CODE -eq 1 ]]; then
+    bin/behat --strict -f progress -p cached --rerun; EXIT_BEHAT_TEST_CODE=$?
+fi;
+
+if [[ $TRAVIS_PULL_REQUEST = false && ! -z "$SYMFONY__PAYPAL__EXPRESS_CHECKOUT__USERNAME" ]]; then
+    bin/behat --strict -p cached --tags "@paypal && ~@todo"; EXIT_BEHAT_PAYPAL_TEST_CODE=$?
+fi;
+
+if [[ $EXIT_BEHAT_PAYPAL_TEST_CODE -eq 1 && $TRAVIS_PULL_REQUEST = false && ! -z "$SYMFONY__PAYPAL__EXPRESS_CHECKOUT__USERNAME" ]]; then
+    bin/behat --strict -p cached --rerun --tags "@paypal && ~@todo"; EXIT_BEHAT_PAYPAL_TEST_CODE=$?
+fi;
+
+checkBuild $EXIT_BEHAT_TEST_CODE $EXIT_BEHAT_PAYPAL_TEST_CODE

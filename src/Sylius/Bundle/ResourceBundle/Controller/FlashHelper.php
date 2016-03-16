@@ -11,21 +11,21 @@
 
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
+use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
+use Sylius\Component\Resource\Metadata\MetadataInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
- * Flashes helper.
- *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class FlashHelper
+class FlashHelper implements FlashHelperInterface
 {
     /**
-     * @var Configuration
+     * @var SessionInterface
      */
-    private $config;
+    private $session;
 
     /**
      * @var TranslatorInterface
@@ -33,65 +33,49 @@ class FlashHelper
     private $translator;
 
     /**
-     * @var SessionInterface
+     * @param SessionInterface $session
+     * @param TranslatorInterface $translator
      */
-    private $session;
-
-    public function __construct(Configuration $config, TranslatorInterface $translator, SessionInterface $session)
+    public function __construct(SessionInterface $session, TranslatorInterface $translator)
     {
-        $this->config = $config;
-        $this->translator = $translator;
         $this->session = $session;
+        $this->translator = $translator;
     }
 
     /**
-     * @param string $type
-     * @param string $eventName
-     * @param array  $params
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
-    public function setFlash($type, $eventName, $params = array())
+    public function addSuccessFlash(RequestConfiguration $requestConfiguration, $actionName, ResourceInterface $resource = null)
     {
-        /** @var FlashBag $flashBag */
-        $flashBag = $this->session->getBag('flashes');
-        $flashBag->add($type, $this->generateFlashMessage($eventName, $params));
+        $metadata = $requestConfiguration->getMetadata();
+        $flashMessage = $requestConfiguration->getFlashMessage($actionName);
 
-        return $this;
-    }
+        $translatedMessage = $this->translateMessage($flashMessage, $metadata);
 
-    /**
-     * @param string $eventName
-     * @param array  $params
-     *
-     * @return string
-     */
-    private function generateFlashMessage($eventName, $params = array())
-    {
-        if (false === strpos($eventName, 'sylius.')) {
-            $message = $this->config->getFlashMessage($eventName);
-            $translatedMessage = $this->translateFlashMessage($message, $params);
-
-            if ($message !== $translatedMessage) {
-                return $translatedMessage;
-            }
-
-            return $this->translateFlashMessage('sylius.resource.'.$eventName, $params);
+        if ($flashMessage === $translatedMessage) {
+            $translatedMessage = $this->translateMessage(sprintf('sylius.resource.%s', $actionName), $metadata);
         }
 
-        return $this->translateFlashMessage($eventName, $params);
+        $this->session->getBag('flashes')->add('success', $translatedMessage);
     }
 
     /**
-     * @param string $message
-     * @param array  $params
+     * {@inheritdoc}
+     */
+    public function addFlashFromEvent(RequestConfiguration $requestConfiguration, ResourceControllerEvent $event)
+    {
+        $translatedMessage = $this->translator->trans($event->getMessage(), $event->getMessageParameters(), 'flashes');
+        $this->session->getBag('flashes')->add($event->getMessageType(), $translatedMessage);
+    }
+
+    /**
+     * @param string $flashMessage
+     * @param MetadataInterface $metadata
      *
      * @return string
      */
-    private function translateFlashMessage($message, $params = array())
+    private function translateMessage($flashMessage, MetadataInterface $metadata)
     {
-        $resource = ucfirst(str_replace('_', ' ', $this->config->getResourceName()));
-
-        return $this->translator->trans($message, array_merge(array('%resource%' => $resource), $params), 'flashes');
+        return $this->translator->trans($flashMessage, ['%resource%' => ucfirst($metadata->getHumanizedName())], 'flashes');
     }
 }

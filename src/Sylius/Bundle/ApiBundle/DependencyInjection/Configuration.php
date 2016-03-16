@@ -11,21 +11,21 @@
 
 namespace Sylius\Bundle\ApiBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Resource\Factory\Factory;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
-use Symfony\Component\Config\Definition\Builder\TreeBuilder;
-use Symfony\Component\Config\Definition\ConfigurationInterface;
-use Sylius\Bundle\ApiBundle\Model\Client;
-use Sylius\Bundle\ApiBundle\Model\ClientInterface;
 use Sylius\Bundle\ApiBundle\Form\Type\ClientType;
 use Sylius\Bundle\ApiBundle\Model\AccessToken;
 use Sylius\Bundle\ApiBundle\Model\AccessTokenInterface;
-use Sylius\Bundle\ApiBundle\Model\RefreshToken;
-use Sylius\Bundle\ApiBundle\Model\RefreshTokenInterface;
 use Sylius\Bundle\ApiBundle\Model\AuthCode;
 use Sylius\Bundle\ApiBundle\Model\AuthCodeInterface;
+use Sylius\Bundle\ApiBundle\Model\Client;
+use Sylius\Bundle\ApiBundle\Model\ClientInterface;
+use Sylius\Bundle\ApiBundle\Model\RefreshToken;
+use Sylius\Bundle\ApiBundle\Model\RefreshTokenInterface;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Resource\Factory\Factory;
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
  * This class contains the configuration information for the bundle.
@@ -88,7 +88,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('interface')->defaultValue(ClientInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
-                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->cannotBeEmpty()->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()
                                             ->children()
@@ -102,7 +102,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -119,7 +119,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('interface')->defaultValue(AccessTokenInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
-                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                                 ->arrayNode('validation_groups')
@@ -127,7 +127,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -144,7 +144,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('interface')->defaultValue(RefreshTokenInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
-                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                                 ->arrayNode('validation_groups')
@@ -152,7 +152,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -169,7 +169,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('interface')->defaultValue(AuthCodeInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
-                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                                 ->arrayNode('validation_groups')
@@ -177,7 +177,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()

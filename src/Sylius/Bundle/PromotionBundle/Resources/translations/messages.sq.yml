@@ -1,0 +1,57 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    action:
+      fixed_discount_configuration:
+        amount: Shuma
+      percentage_discount_configuration:
+        percentage: Përqindja
+      shipping_discount_configuration:
+        percentage: Përqindja
+      type: Lloji
+    rule:
+      taxonomy_configuration:
+        taxons: Kategoritë
+        exclude: Përjashto
+      contains_product_configuration:
+        variants: Produktet
+        exclude: Përjashto
+      cart_quantity_configuration:
+        count: Numëro
+      item_total_configuration:
+        amount: Shuma
+      nth_order_configuration:
+        nth: Nth
+      customer_loyalty_configuration:
+        time: Koha
+        unit:
+          days: Ditët
+          weeks: Javët
+          months: Muajt
+          years: Vitet
+          header: Njësia
+        after: Përdorues i krijuar pas kësaj periudhe
+      shipping_country_configuration:
+        country: Vendi
+      type: Lloji
+    coupon:
+      usage_limit: Kufiri i përdorimit
+      expires_at: Skadon më
+    coupon_generate_instruction:
+      amount: Shuma
+      usage_limit: Kufiri i përdorimit
+      expires_at: Skadon më
+    promotion:
+      actions: Veprimet
+      add_action: Shto veprim
+      add_rule: Shto rregull
+      coupon_based: Bazuar në kupon
+      exclusive: Ekskluziv
+      description: Përshkrimi
+      ends_at: Përfundon më
+      name: Emri
+      rules: Rregullat
+      starts_at: Fillon më
+      usage_limit: Kufiri i përdorimit

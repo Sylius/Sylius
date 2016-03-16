@@ -2,12 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    register: Регистрација
-    login: Пријави се
-    logout: Одјави се
-    account_panel_outline: Уживајте у свим карактеристикама које су доступне на Вашој личној страници да видите, пратите и управљате свим Вашим подацима.
   form:
+    customer:
+      phone_number: Број телефона
     user_change_password:
       current: Тренутна лозинка
       new: Нова лозинка

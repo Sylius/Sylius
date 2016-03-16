@@ -4,6 +4,9 @@
 sylius:
   form:
     attribute:
-      name: System navn
-      presentation: Præsentation
+      choices: Valgmuligheder
+      code: Kode
+      name: Navn
       type: Type
+    attribute_type:
+      configuration: Konfiguration

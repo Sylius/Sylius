@@ -1,12 +1,289 @@
 UPGRADE
 =======
 
+## From 0.16 to 0.17.x
+
+### Promotion and PromotionBundle
+
+* Changed "item_count" promotion type into "cart_quantity". It now checks cart quantity instead different items number.
+
+### Resource and SyliusResourceBundle
+
+ * All resources must implement ``Sylius\Component\Resource\Model\ResourceInterface``;
+ * ResourceController has been rewritten from scratch but should maintain 100% of previous functionality;
+ * ``$this->config`` is no longer available and you should create it manually in every action;
+
+Before:
+
+```php
+<?php
+
+namespace AppBundle\Controller;
+
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+
+class BookController extends ResourceController
+{
+    public function customAction(Request $request)
+    {
+        return $this->render($this->config->getTemplate('custom.html'));
+    }
+}
+```
+
+After:
+
+```php
+<?php
+
+namespace AppBundle\Controller;
+
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+
+class BookController extends ResourceController
+{
+    public function customAction(Request $request)
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        return $this->render($configuration->getTemplate('custom.html'));
+    }
+}
+```
+
+ * Custom view handler has been introduced and ResourceController no longer extends FOSRestController:
+
+Before:
+
+```php
+<?php
+
+namespace AppBundle\Controller;
+
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+
+class BookController extends ResourceController
+{
+    public function customAction(Request $request)
+    {
+        return $this->handleView($this->view(null, 204));
+    }
+}
+```
+
+After:
+
+```php
+<?php
+
+namespace AppBundle\Controller;
+
+use FOS\RestBundle\View\View;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+
+class BookController extends ResourceController
+{
+    public function customAction(Request $request)
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        return $this->viewHandler->handle($configuration, View::create(null, 204));
+    }
+}
+```
+
+ * DomainManager has been replaced with standard manager and also repository is injected into the controller;
+
+Before:
+
+```php
+<?php
+
+namespace AppBundle\Controller;
+
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+
+class BookController extends ResourceController
+{
+    public function customAction(Request $request)
+    {
+        // ...
+
+        $this->domainManager->create($book);
+        $this->domainManager->update($book);
+        $this->domainManager->delete($book);
+    }
+}
+```
+
+After:
+
+```php
+<?php
+
+namespace AppBundle\Controller;
+
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+
+class BookController extends ResourceController
+{
+    public function customAction(Request $request)
+    {
+        // ...
+
+        $this->repository->add($book);
+        $this->manager->flush();
+        $this->repository->remove($book);
+    }
+}
+```
+
+ * ``getForm()`` has been removed in favor of properly injected service;
+
+Before:
+
+```php
+<?php
+
+namespace AppBundle\Controller;
+
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+
+class BookController extends ResourceController
+{
+    public function customAction(Request $request)
+    {
+        // ...
+
+        $form = $this->getForm($book);
+    }
+}
+```
+
+After:
+
+```php
+<?php
+
+namespace AppBundle\Controller;
+
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+
+class BookController extends ResourceController
+{
+    public function customAction(Request $request)
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        // ...
+
+        $form = $this->resourceFormFactory->create($configuration, $book);
+    }
+}
+```
+
+ * Events are no longer dispatched by the removed "DomainManager".
+
+Before:
+
+```php
+<?php
+
+namespace AppBundle\Controller;
+
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+
+class BookController extends ResourceController
+{
+    public function customAction(Request $request)
+    {
+        $this->domainManager->create($book);
+    }
+}
+```
+
+After:
+
+```php
+<?php
+
+namespace AppBundle\Controller;
+
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+
+class BookController extends ResourceController
+{
+    public function customAction(Request $request)
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $book);
+        $this->repository->add($book);
+        $event = $this->eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $book);
+    }
+}
+```
+
+### Core and CoreBundle
+
+* Moved ``taxCategory`` from ``Product`` to ``ProductVariant``;
+* ``OrderItem`` model from Core component no longer implements ``PromotionSubjectInterface``. Remove all usages of ``addPromotion``, etc. from your custom code. Custom actions targeting items need to be adjusted - see ``ContainsProductRuleChecker`` for reference.
+
+### Addressing and SyliusAddressingBundle
+
+* Extracted ``Country`` ISO code to name translation, from model to a twig extension: ``CountryNameExtension``;
+* Removed ``Address`` relations to ``Country`` and ``Province`` objects, their unique ``code`` is used instead;
+* Removed specific ``ZoneMembers`` i.e. ``ProvinceZoneMember`` in favor of a dynamic ``ZoneMember``;
+* https://github.com/Sylius/Sylius/pull/3696
+* ``exchangeRate`` is now recorded for ``Order`` at time of purchase for accurate cross-currency reporting.
+
+### Order and SyliusOrderBundle
+
+* Introduced ``OrderItemUnit``, which represents every single unit in ``Order``;
+* Replaced ``InventoryUnit`` with ``OrderItemUnit`` in the core. This entity will be used as ``InventoryUnit`` and ``ShipmentItem``;
+* Removed ``setQuantity()`` method from ``OrderItem``;
+* Introduced ``OrderItemUnitFactory`` creating unit for specific ``OrderItem`` by ``createForItem()`` method;
+* Introduced ``OrderItemQuantityModifier`` that is used to control ``OrderItem`` quantity and units;
+* Introduced ``OrderItemQuantityDataMapper``, which attached to ``OrderItemType`` uses proper service to modify ``OrderItem`` quantity;
+* Changed ``Adjustment`` ``description`` field to ``label``;
+
+### Shipping and ShippingBundle
+
+* Renamed ``ShipmentItem`` to ``ShipmentUnit`` to align with full-stack ``OrderItemUnit`` that it represents and avoid confusion
+against the similarly named ``OrderItem``.
+* Also renamed all associated 'item' wording to 'unit' in forms and form configuration (e.g. ``DefaultCalculators::PER_UNIT_RATE`` and ``RuleInterface::TYPE_UNIT_TOTAL``).
+* Shipping resources config must be updated:
+
+Before:
+
+```yml
+ sylius_shipping:
+     resources:
+         shipment_item:
+              classes:
+                  model: %sylius.model.order_item_unit.class%
+```
+
+After:
+
+```yml
+ sylius_shipping:
+     resources:
+         shipment_unit:
+              classes:
+                  model: %sylius.model.order_item_unit.class%
+```
+
+### Currency
+
+``CurrencyConverterInterface`` ``convert()`` method renamed to ``convertFromBase()``.
+
 ## From 0.15.0 to 0.16.x
 
 ### General
 
  * Configuration structure for all bundles has changed:
-  
+
 Before:
 
 ```yml
@@ -32,9 +309,9 @@ sylius_taxation:
             validation_groups:
                 default: [sylius, custom]
 ```
- 
+
  * Validation groups parameters have been renamed:
- 
+
 Before:
 
 ```
@@ -51,8 +328,8 @@ After:
 
  * Attribute system has been reworked and now every ``type`` is represented by ``AttributeTypeInterface`` instance;
  * https://github.com/Sylius/Sylius/pull/3608.
- 
-### SyliusPayumBundle 
+
+### SyliusPayumBundle
 
  * Changed configuration key `sylius_payum.classes.payment_config` to `sylius_payum.classes.gateway_config`;
  * ``PaymentConfig`` renamed to ``GatewayConfig``;
@@ -79,7 +356,7 @@ After:
  * In the checkout we depend on Customer not User;
  * In templates in many places we use Customer instead of User entity now.
 
-### Channel & SyliusChannelBundle 
+### Channel & SyliusChannelBundle
 
 https://github.com/Sylius/Sylius/pull/2752
 
@@ -91,14 +368,14 @@ https://github.com/Sylius/Sylius/pull/2717
 
  * Call ``` sylius:rbac:initialize ``` to create new roles in your system;
  * Execute migration script to migrate your data into the new model schema.
- 
+
 **The migration script migrates only default data, if you have some customizations on any of affected entities you should take care of them yourself!**
- 
+
 ### API Client
 
 https://github.com/Sylius/Sylius/pull/2887
 
-### SyliusApiBundle 
+### SyliusApiBundle
 
 When you create server client in Sylius, it's public id was a combination of Client internal id and it's random id. For example:
 
@@ -116,13 +393,13 @@ client_id: mpO5ZJ35hx
 
 Related discussion https://github.com/FriendsOfSymfony/FOSOAuthServerBundle/issues/328.
 
-### Addressing 
+### Addressing
 
 * Removed `CountryTranslation`, using `Intl` Symfony component instead to provide translated country names based on ISO country code. https://github.com/Sylius/Sylius/pull/3035
 
 ## From 0.9.0 to 0.10.x
 
-Version 0.10.x includes the new Sylius e-commerce components. 
+Version 0.10.x includes the new Sylius e-commerce components.
 All classes without Symfony dependency have been moved to separate ``Sylius\Component`` namespace.
 
 VariableProductBundle has been merged into ProductBundle.
@@ -140,7 +417,7 @@ hard-coded states. You can now configure all the states you want and the transit
 much more powerful. Please update your listeners to make them callbacks of state-machine transitions. Again, please
 refer to the state-machine configuration files to do so.*
 
-The signature of `PaymentInterface::setDetails` method was changed. Now it allows either array or instance of \Traversable. 
+The signature of `PaymentInterface::setDetails` method was changed. Now it allows either array or instance of \Traversable.
 
 ### Addressing
 

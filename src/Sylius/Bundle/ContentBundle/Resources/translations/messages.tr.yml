@@ -1,8 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-auto: Otomatik
-route: rota
 sylius:
   form:
     action_block:
@@ -10,24 +8,30 @@ sylius:
       id: Id
       publish_end_date: Yayın bitiş tarihi
       publish_start_date: Yayın başlangıç tarihi
+      publishable: yayınla
     imagine_block:
       filter: Filtrele
       image: Resim
       internal_name: Dahili isim
       label: Etiket
+      link_url: "link Bağlantı URL'si"
       parent: Üst
       publish_end_date: Yayın bitiş tarihi
       publish_start_date: Yayın başlangıç tarihi
+      publishable: yayınla
+      slideshow_small: Slayt gösterisi küçük (yan)
       slideshow_medium: Slayt gösterisi orta (içerik)
+      slideshow_large: Slayt gösterisi büyük (tam genişlik)
     menu:
-      childrens: Çocuklar
-      display: Görünüm
+      childrens: Çocuk
+      display: Ekran
       display_children: Çocukların görünümü
       label: Etiket
       name: Ad
       parent: Üst
       publish_end_date: Yayın bitiş tarihi
       publish_start_date: Yayın başlangıç tarihi
+      publishable: yayınla
       route: Rota
       uri: URI
     menu_block:
@@ -36,6 +40,7 @@ sylius:
       name: Ad
       publish_end_date: Yayın bitiş tarihi
       publish_start_date: Yayın başlangıç tarihi
+      publishable: yayınla
     menu_node_block:
       content: İçerik
       display: Görünüm
@@ -45,6 +50,7 @@ sylius:
       link_type: Bağlantı türü
       publish_end_date: Yayın bitiş tarihi
       publish_start_date: Yayın başlangıç tarihi
+      publishable: yayınla
       route: Rota
       uri: URI
     redirect_route:
@@ -57,6 +63,7 @@ sylius:
       id: Id
       publish_end_date: Yayın bitiş tarihi
       publish_start_date: Yayın başlangıç tarihi
+      publishable: yayınla
       title: Başlık
     route:
       content: İçerik
@@ -68,13 +75,16 @@ sylius:
       parent: Üst
       publish_end_date: Yayın bitiş tarihi
       publish_start_date: Yayın başlangıç tarihi
+      publishable: yayınla
       title: Başlık
     slideshow_block:
+      add_slide: Slayt Ekle
       childrens: Çocuklar
       internal_name: Dahili isim
       parent: Üst
       publish_end_date: Yayın bitiş tarihi
       publish_start_date: Yayın başlangıç tarihi
+      publishable: yayınla
       title: Başlık
     static_content:
       body: İçerik
@@ -84,6 +94,7 @@ sylius:
       parent: Üst
       publish_end_date: Yayın bitiş tarihi
       publish_start_date: Yayın başlangıç tarihi
+      publishable: yayınla
       routes: Rotalar
       title: Başlık
     string_block:
@@ -92,3 +103,4 @@ sylius:
       name: Ad
       publish_end_date: Yayın bitiş tarihi
       publish_start_date: Yayın başlangıç tarihi
+      publishable: yayınla

@@ -3,6 +3,7 @@
 
 imports:
     - { resource: config.yml }
+    - { resource: config_test.php }
 
 parameters:
     sylius.order.allow_guest_order: true
@@ -34,6 +35,9 @@ sylius_payment:
 
 sylius_rbac:
     authorization_checker: sylius.authorization_checker.toggleable
+
+sylius_channel:
+    fake_channel_support: true
 
 doctrine_cache:
     providers:

@@ -40,13 +40,13 @@ class PaymentMethodRepositorySpec extends ObjectBehavior
         $em->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
         $builder->select('method')->shouldBeCalled()->willReturn($builder);
         $builder->addSelect('translation')->shouldBeCalled()->willReturn($builder);
-        $builder->leftJoin("method.translations", "translation")->shouldBeCalled()->willReturn($builder);
+        $builder->leftJoin('method.translations', 'translation')->shouldBeCalled()->willReturn($builder);
         $builder->from(Argument::any(), 'method', Argument::cetera())->shouldBeCalled()->willReturn($builder);
         $builder->where('method.enabled = true')->shouldBeCalled()->willReturn($builder);
 
-        $this->getQueryBuidlerForChoiceType(array(
-            'disabled' => false
-        ))->shouldReturn($builder);
+        $this->getQueryBuilderForChoiceType([
+            'disabled' => false,
+        ])->shouldReturn($builder);
     }
 
     function it_creates_query_builder_for_all_status($em, QueryBuilder $builder)
@@ -54,11 +54,11 @@ class PaymentMethodRepositorySpec extends ObjectBehavior
         $em->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
         $builder->select('method')->shouldBeCalled()->willReturn($builder);
         $builder->addSelect('translation')->shouldBeCalled()->willReturn($builder);
-        $builder->leftJoin("method.translations", "translation")->shouldBeCalled()->willReturn($builder);
+        $builder->leftJoin('method.translations', 'translation')->shouldBeCalled()->willReturn($builder);
         $builder->from(Argument::any(), 'method', Argument::cetera())->shouldBeCalled()->willReturn($builder);
 
-        $this->getQueryBuidlerForChoiceType(array(
-            'disabled' => true
-        ))->shouldReturn($builder);
+        $this->getQueryBuilderForChoiceType([
+            'disabled' => true,
+        ])->shouldReturn($builder);
     }
 }

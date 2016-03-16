@@ -61,29 +61,29 @@ class ReportType extends AbstractResourceType
             ->addEventSubscriber(new AddCodeFormSubscriber())
             ->addEventSubscriber(new BuildReportDataFetcherFormSubscriber($this->dataFetcherRegistry, $builder->getFormFactory()))
             ->addEventSubscriber(new BuildReportRendererFormSubscriber($this->rendererRegistry, $builder->getFormFactory()))
-            ->add('name', 'text', array(
+            ->add('name', 'text', [
                 'label' => 'sylius.form.report.name',
                 'required' => true,
-            ))
-            ->add('description', 'textarea', array(
-                'label'    => 'sylius.form.report.description',
+            ])
+            ->add('description', 'textarea', [
+                'label' => 'sylius.form.report.description',
                 'required' => false,
-            ))
-            ->add('dataFetcher', 'sylius_data_fetcher_choice', array(
-                'label'    => 'sylius.form.report.data_fetcher',
-            ))
-            ->add('renderer', 'sylius_renderer_choice', array(
+            ])
+            ->add('dataFetcher', 'sylius_data_fetcher_choice', [
+                'label' => 'sylius.form.report.data_fetcher',
+            ])
+            ->add('renderer', 'sylius_renderer_choice', [
                 'label' => 'sylius.form.report.renderer.label',
-            ))
+            ])
         ;
 
-        $prototypes = array(
-            'renderers' => array(),
-            'dataFetchers' => array(),
-        );
+        $prototypes = [
+            'renderers' => [],
+            'dataFetchers' => [],
+        ];
 
         foreach ($this->rendererRegistry->all() as $type => $renderer) {
-            $formType = sprintf('sylius_renderer_%s', $renderer->getType());
+            $formType = $renderer->getType();
 
             if (!$formType) {
                 continue;
@@ -118,7 +118,7 @@ class ReportType extends AbstractResourceType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $view->vars['prototypes'] = array();
+        $view->vars['prototypes'] = [];
 
         foreach ($form->getConfig()->getAttribute('prototypes') as $group => $prototypes) {
             foreach ($prototypes as $type => $prototype) {

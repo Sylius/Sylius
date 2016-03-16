@@ -25,20 +25,21 @@ class ProductTranslationType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', array(
-                'label' => 'sylius.form.product.name'
-            ))
-            ->add('description', 'textarea', array(
-                'label' => 'sylius.form.product.description'
-            ))
-            ->add('metaKeywords', 'text', array(
+            ->add('name', 'text', [
+                'label' => 'sylius.form.product.name',
+            ])
+            ->add('description', 'textarea', [
                 'required' => false,
-                'label'    => 'sylius.form.product.meta_keywords'
-            ))
-            ->add('metaDescription', 'text', array(
+                'label' => 'sylius.form.product.description',
+            ])
+            ->add('metaKeywords', 'text', [
                 'required' => false,
-                'label'    => 'sylius.form.product.meta_description'
-            ))
+                'label' => 'sylius.form.product.meta_keywords',
+            ])
+            ->add('metaDescription', 'text', [
+                'required' => false,
+                'label' => 'sylius.form.product.meta_description',
+            ])
         ;
     }
 

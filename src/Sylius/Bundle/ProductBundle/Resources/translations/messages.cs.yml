@@ -6,6 +6,7 @@ sylius:
     product:
       name: Jméno
       description: Popis
+      attributes: Atributy
       options: Možnosti
       meta_keywords: Meta klíčová slova
       meta_description: Meta popis
@@ -14,4 +15,7 @@ sylius:
     product_archetype:
       name: Jméno
       parent: Rodič
+      attributes: Atributy
       options: Možnosti
+    association_type:
+      name: Jméno

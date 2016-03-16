@@ -4,6 +4,10 @@
 sylius:
   form:
     attribute:
-      name: "Внутрішнє ім'я"
-      presentation: Презентація
+      add: Додати
+      choices: Вибір
+      code: Код
+      name: Ім’я
       type: Тип
+    attribute_type:
+      configuration: Конфігурація

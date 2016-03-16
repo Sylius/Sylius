@@ -44,12 +44,12 @@ interface PermissionInterface extends CodeAwareInterface, TimestampableInterface
     public function setParent(PermissionInterface $permission);
 
     /**
-     * @return Collection
+     * @return Collection|PermissionInterface[]
      */
     public function getChildren();
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function hasChildren();
 
@@ -66,7 +66,7 @@ interface PermissionInterface extends CodeAwareInterface, TimestampableInterface
     /**
      * @param PermissionInterface $permission
      *
-     * @return boolean
+     * @return bool
      */
     public function hasChild(PermissionInterface $permission);
 

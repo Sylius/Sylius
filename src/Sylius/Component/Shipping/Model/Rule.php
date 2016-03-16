@@ -29,21 +29,13 @@ class Rule implements RuleInterface
     /**
      * @var array
      */
-    protected $configuration;
+    protected $configuration = [];
 
     /**
      * @var ShippingMethodInterface
      */
     protected $method;
 
-    public function __construct()
-    {
-        $this->configuration = array();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getId()
     {
         return $this->id;

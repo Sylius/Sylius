@@ -54,13 +54,13 @@ class ResourceLoader implements LoaderInterface
         $configurationDefinition = new Configuration();
 
         $configuration = Yaml::parse($resource);
-        $configuration = $processor->processConfiguration($configurationDefinition, array('routing' => $configuration));
+        $configuration = $processor->processConfiguration($configurationDefinition, ['routing' => $configuration]);
 
         if (!empty($configuration['only']) && !empty($configuration['except'])) {
             throw new \InvalidArgumentException('You can configure only one of "except" & "only" options.');
         }
 
-        $routesToGenerate = array('show', 'index', 'create', 'update', 'delete');
+        $routesToGenerate = ['show', 'index', 'create', 'update', 'delete'];
 
         if (!empty($configuration['only'])) {
             $routesToGenerate = $configuration['only'];
@@ -77,27 +77,27 @@ class ResourceLoader implements LoaderInterface
         $rootPath = sprintf('/%s/', isset($configuration['path']) ? $configuration['path'] : Urlizer::urlize($metadata->getPluralName()));
 
         if (in_array('index', $routesToGenerate)) {
-            $indexRoute = $this->createRoute($metadata, $configuration, $rootPath, 'index', array('GET'));
+            $indexRoute = $this->createRoute($metadata, $configuration, $rootPath, 'index', ['GET']);
             $routes->add($this->getRouteName($metadata, $configuration, 'index'), $indexRoute);
         }
 
         if (in_array('create', $routesToGenerate)) {
-            $createRoute = $this->createRoute($metadata, $configuration, $isApi ? $rootPath : $rootPath . 'new', 'create', $isApi ? array('POST') : array('GET', 'POST'));
+            $createRoute = $this->createRoute($metadata, $configuration, $isApi ? $rootPath : $rootPath.'new', 'create', $isApi ? ['POST'] : ['GET', 'POST']);
             $routes->add($this->getRouteName($metadata, $configuration, 'create'), $createRoute);
         }
 
         if (in_array('update', $routesToGenerate)) {
-            $updateRoute = $this->createRoute($metadata, $configuration, $isApi ? $rootPath . '{id}' : $rootPath . '{id}/edit', 'update', $isApi ? array('PUT', 'PATCH') : array('GET', 'PUT', 'PATCH'));
+            $updateRoute = $this->createRoute($metadata, $configuration, $isApi ? $rootPath.'{id}' : $rootPath.'{id}/edit', 'update', $isApi ? ['PUT', 'PATCH'] : ['GET', 'PUT', 'PATCH']);
             $routes->add($this->getRouteName($metadata, $configuration, 'update'), $updateRoute);
         }
 
         if (in_array('show', $routesToGenerate)) {
-            $showRoute = $this->createRoute($metadata, $configuration, $rootPath . '{id}', 'show', array('GET'));
+            $showRoute = $this->createRoute($metadata, $configuration, $rootPath.'{id}', 'show', ['GET']);
             $routes->add($this->getRouteName($metadata, $configuration, 'show'), $showRoute);
         }
 
         if (in_array('delete', $routesToGenerate)) {
-            $deleteRoute = $this->createRoute($metadata, $configuration, $rootPath . '{id}', 'delete', array('DELETE'));
+            $deleteRoute = $this->createRoute($metadata, $configuration, $rootPath.'{id}', 'delete', ['DELETE']);
             $routes->add($this->getRouteName($metadata, $configuration, 'delete'), $deleteRoute);
         }
 
@@ -139,24 +139,24 @@ class ResourceLoader implements LoaderInterface
      */
     private function createRoute(MetadataInterface $metadata, array $configuration, $path, $actionName, array $methods)
     {
-        $defaults = array(
-            '_controller' => $metadata->getServiceId('controller').sprintf(':%sAction', $actionName)
-        );
+        $defaults = [
+            '_controller' => $metadata->getServiceId('controller').sprintf(':%sAction', $actionName),
+        ];
 
-        if (isset($configuration['form']) && in_array($actionName, array('create', 'update'))) {
+        if (isset($configuration['form']) && in_array($actionName, ['create', 'update'])) {
             $defaults['_sylius']['form'] = $configuration['form'];
         }
         if (isset($configuration['section'])) {
             $defaults['_sylius']['section'] = $configuration['section'];
         }
-        if (isset($configuration['templates']) && in_array($actionName, array('show', 'index', 'create', 'update'))) {
+        if (isset($configuration['templates']) && in_array($actionName, ['show', 'index', 'create', 'update'])) {
             $defaults['_sylius']['template'] = sprintf('%s:%s.html.twig', $configuration['templates'], $actionName);
         }
-        if (isset($configuration['redirect']) && in_array($actionName, array('create', 'update'))) {
+        if (isset($configuration['redirect']) && in_array($actionName, ['create', 'update'])) {
             $defaults['_sylius']['redirect'] = $this->getRouteName($metadata, $configuration, $configuration['redirect']);
         }
 
-        return $this->routeFactory->createRoute($path, $defaults, array(), array(), '', array(), $methods);
+        return $this->routeFactory->createRoute($path, $defaults, [], [], '', [], $methods);
     }
 
     /**

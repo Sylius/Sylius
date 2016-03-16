@@ -3,8 +3,6 @@
 
 sylius:
   form:
-    coupon:
-      code: Codi
     promotion:
       description: Descripció
       name: Nom

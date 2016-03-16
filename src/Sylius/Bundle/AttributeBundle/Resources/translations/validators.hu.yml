@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  attribute:
+    name:
+      min_length: 'Az értéknek legalább 1 karakternek kell lennie.|Az értéknek legalább {{ limit }} karakternek kell lennie.'
+      max_length: 'Az értéknek hosszabbnak kell lennie 1 karakternél.|Az értéknek hosszabbnak kell lennie {{ limit }} karakternél.'
+  attribute_value:
+    attribute:
+      not_blank: Kérjük válasszon!
+    value:
+      not_blank: Kérjük adjon meg egy értéket!

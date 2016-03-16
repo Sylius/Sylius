@@ -34,14 +34,14 @@ class RegisterCalculatorsPassSpec extends ObjectBehavior
         $container->hasDefinition('sylius.registry.shipping_calculator')->shouldBeCalled()->willReturn(true);
         $container->getDefinition('sylius.registry.shipping_calculator')->shouldBeCalled()->willReturn($calculator);
 
-        $container->findTaggedServiceIds('sylius.shipping_calculator')->shouldBeCalled()->willReturn(array(
-            'calculator_id' => array(
-                array(
+        $container->findTaggedServiceIds('sylius.shipping_calculator')->shouldBeCalled()->willReturn([
+            'calculator_id' => [
+                [
                     'calculator' => 'calculator_name',
                     'label' => 'calculator_label',
-                )
-            )
-        ));
+                ],
+            ],
+        ]);
 
         $calculator->addMethodCall(
             'register',
@@ -50,7 +50,7 @@ class RegisterCalculatorsPassSpec extends ObjectBehavior
 
         $container->setParameter(
             'sylius.shipping_calculators',
-            array('calculator_name' => 'calculator_label')
+            ['calculator_name' => 'calculator_label']
         )->shouldBeCalled();
 
         $this->process($container);

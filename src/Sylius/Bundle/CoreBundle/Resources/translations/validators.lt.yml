@@ -2,6 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+  checkout:
+    shipping_method:
+      not_blank: Pasirinkite pristatymo būdą.
   locale:
     code:
       not_blank: Įveskite lokalės kodą.
@@ -13,14 +16,8 @@ sylius:
     price:
       min: Kaina negali būti neigiama.
       not_blank: Įveskite kainą.
+    original_price:
+      min: Pradinė kaina negali būti neigiama.
   product_translation:
     short_description:
       max: 'Trumpas aprašymas negali būti ilgesnis nei {{ limit }} simbolių.'
-sylius_shipping:
-  method:
-    zone:
-      not_blank: Įveskite siuntimo būdo zoną.
-sylius_taxation:
-  rate:
-    zone:
-      not_blank: Įveskite mokesčių tarifo zoną.

@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  checkout:
-    shipping_method:
-      not_blank: Vælg venligst forsendelsesmetode.
   form:
     action:
       add_product_configuration:
@@ -28,6 +25,7 @@ sylius:
     channel:
       taxonomies: Taksonomier
       locales: Landekoder
+      currency_default: Standard valuta
       shipping_methods: Fragtmetoder
       payment_methods: Betalingsmetoder
     image:
@@ -50,11 +48,12 @@ sylius:
       restricted_zone: Begrænset zone
       shipping_category: Fragt kategori
       short_description: Kort beskrivelse
-      tax_category: Momskategori
       variant_selection_method: Variant udvælgelsesmetode
     product_filter:
       name: Navn
       sku: SKU
+    product_variant:
+      tax_category: Momskategori
     settings:
       general:
         currency: Standard valuta
@@ -103,3 +102,5 @@ sylius:
       width: Bredde
     guest:
       email: Email
+    product_association_type:
+      name: Navn

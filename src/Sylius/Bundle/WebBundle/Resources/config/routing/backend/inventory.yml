@@ -20,3 +20,4 @@ sylius_backend_inventory_unit_update_state:
     methods: [PUT]
     defaults:
         _controller: sylius.controller.inventory_unit:updateStateAction
+        graph: sylius_inventory_unit

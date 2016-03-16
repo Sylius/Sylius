@@ -11,14 +11,20 @@ sylius:
       id: ID број
     string:
       id: ID број
-  currency:
-    exchange_rate: Курс на конверзија
-  "no": false
-  tax_rate:
-    included_in_price: Вклучено во цената?
-  "yes": true
-  zone:
-    scope: Опсег
   contact_request:
     message: Порака
     topic: Тема
+  currency:
+    exchange_rate: Курс на конверзија
+  customer:
+    phone_number: Телефонски Број
+  "no": false
+  product_option:
+    presentation: Презентација
+  report:
+    id: ID број
+  ui:
+    id: ID број
+  "yes": true
+  zone:
+    scope: Опсег

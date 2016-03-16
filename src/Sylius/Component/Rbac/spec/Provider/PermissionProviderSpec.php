@@ -39,14 +39,14 @@ class PermissionProviderSpec extends ObjectBehavior
 
     function it_looks_for_permission_via_repository($permissionRepository, PermissionInterface $permission)
     {
-        $permissionRepository->findOneBy(array('code' => 'can_dance_on_the_table'))->shouldBeCalled()->willReturn($permission);
+        $permissionRepository->findOneBy(['code' => 'can_dance_on_the_table'])->shouldBeCalled()->willReturn($permission);
 
         $this->getPermission('can_dance_on_the_table')->shouldReturn($permission);
     }
 
     function it_throws_an_exception_when_permission_does_not_exist($permissionRepository)
     {
-        $permissionRepository->findOneBy(array('code' => 'can_dance_on_the_fridge'))->shouldBeCalled()->willReturn(null);
+        $permissionRepository->findOneBy(['code' => 'can_dance_on_the_fridge'])->shouldBeCalled()->willReturn(null);
 
         $this->shouldThrow(new PermissionNotFoundException('can_dance_on_the_fridge'))->duringGetPermission('can_dance_on_the_fridge');
     }

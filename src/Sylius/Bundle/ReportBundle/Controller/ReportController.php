@@ -22,6 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Fernando Caraballo Ortiz <caraballo.ortiz@gmail.com>
  */
 class ReportController extends ResourceController
 {
@@ -32,10 +33,12 @@ class ReportController extends ResourceController
      */
     public function renderAction(Request $request)
     {
-        $report = $this->findOr404($request);
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        $report = $this->findOr404($configuration);
 
         $formType = sprintf('sylius_data_fetcher_%s', $report->getDataFetcher());
-        $configurationForm = $this->get('form.factory')->createNamed(
+        $configurationForm = $this->container->get('form.factory')->createNamed(
             'configuration',
             $formType,
             $report->getDataFetcherConfiguration()
@@ -45,11 +48,11 @@ class ReportController extends ResourceController
             $configurationForm->submit($request);
         }
 
-        return $this->render($this->config->getTemplate('show.html'), array(
+        return $this->container->get('templating')->renderResponse($configuration->getTemplate('show.html'), [
             'report' => $report,
             'form' => $configurationForm->createView(),
             'configuration' => $configurationForm->getData(),
-        ));
+        ]);
     }
 
     /**
@@ -59,17 +62,21 @@ class ReportController extends ResourceController
      *
      * @return Response
      */
-    public function embedAction(Request $request, $report, array $configuration = array())
+    public function embedAction(Request $request, $report, array $configuration = [])
     {
+        $currencyProvider = $this->get('sylius.currency_provider');
+
         if (!$report instanceof ReportInterface) {
-            $report = $this->getReportRepository()->findOneBy(array('code' => $report));
+            $report = $this->getReportRepository()->findOneBy(['code' => $report]);
         }
 
         if (null === $report) {
-            return $this->render('SyliusReportBundle::noDataTemplate.html.twig');
+            return $this->container->get('templating')->renderResponse('SyliusReportBundle::noDataTemplate.html.twig');
         }
 
         $configuration = $request->query->get('configuration', $configuration);
+        $configuration['baseCurrency'] = $currencyProvider->getBaseCurrency();
+
         $data = $this->getReportDataFetcher()->fetch($report, $configuration);
 
         return new Response($this->getReportRenderer()->render($report, $data));
@@ -80,7 +87,7 @@ class ReportController extends ResourceController
      */
     private function getReportRenderer()
     {
-        return $this->get('sylius.report.renderer');
+        return $this->container->get('sylius.report.renderer');
     }
 
     /**
@@ -88,7 +95,7 @@ class ReportController extends ResourceController
      */
     private function getReportDataFetcher()
     {
-        return $this->get('sylius.report.data_fetcher');
+        return $this->container->get('sylius.report.data_fetcher');
     }
 
     /**
@@ -96,6 +103,6 @@ class ReportController extends ResourceController
      */
     private function getReportRepository()
     {
-        return $this->get('sylius.repository.report');
+        return $this->container->get('sylius.repository.report');
     }
 }

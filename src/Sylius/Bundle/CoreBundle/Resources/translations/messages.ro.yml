@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  checkout:
-    shipping_method:
-      not_blank: Vă rugăm să alegeți metoda de livrare.
   form:
     action:
       add_product_configuration:
@@ -28,6 +25,7 @@ sylius:
     channel:
       taxonomies: Categorizări
       locales: Setări regionale
+      currency_default: Moneda implicită
       shipping_methods: Metode de livrare
       payment_methods: Metode de plată
     image:
@@ -50,11 +48,12 @@ sylius:
       restricted_zone: Zonă cu restricție
       shipping_category: Categoria de livrare
       short_description: Descriere scurtă
-      tax_category: Categoria de taxă
       variant_selection_method: Metoda de selectare a variantei
     product_filter:
       name: Nume
       sku: SKU
+    product_variant:
+      tax_category: Categoria de taxă
     settings:
       general:
         currency: Moneda implicită
@@ -106,3 +105,5 @@ sylius:
         value: Valoare
     guest:
       email: E-mail
+    product_association_type:
+      name: Nume

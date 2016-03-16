@@ -41,9 +41,9 @@
             <td>
                 <div class="pull-right">
                 {{ buttons.generic(path('sylius_backend_product_archetype_code_product_index', {'code': archetype.code}), 'sylius.browse_products'|trans) }}
-                {{ buttons.create(path('sylius_backend_product_create', {'archetype': archetype.code}), 'sylius.product.create'|trans) }}
-                {{ buttons.edit(path('sylius_backend_product_archetype_update', {'id': archetype.id})) }}
+                {{ buttons.create(path('sylius_backend_product_create_from_archetype', {'archetype': archetype.code}), 'sylius.product.create'|trans) }}
                 {{ buttons.delete(path('sylius_backend_product_archetype_delete', {'id': archetype.id})) }}
+                {{ buttons.edit(path('sylius_backend_product_archetype_update', {'id': archetype.id})) }}
                 </div>
             </td>
         </tr>

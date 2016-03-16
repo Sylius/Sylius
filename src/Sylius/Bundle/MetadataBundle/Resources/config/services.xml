@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.metadata.compiler.class">Sylius\Component\Metadata\Compiler\MetadataCompiler</parameter>
+        <parameter key="sylius.metadata.processor.class">Sylius\Component\Metadata\Processor\TwigMetadataProcessor</parameter>
+        <parameter key="sylius.metadata.accessor.class">Sylius\Component\Metadata\Accessor\MetadataAccessor</parameter>
+        <parameter key="sylius.metadata.twig_extension.class">Sylius\Component\Metadata\Twig\MetadataExtension</parameter>
+
+        <parameter key="sylius.metadata.renderer.options_resolver.class">Symfony\Component\OptionsResolver\OptionsResolver</parameter>
+        <parameter key="sylius.metadata.renderer.class">Sylius\Component\Metadata\Renderer\CompositeMetadataRenderer</parameter>
+        <parameter key="sylius.metadata.renderer.custom_page.class">Sylius\Component\Metadata\Renderer\Custom\PageMetadataRenderer</parameter>
+        <parameter key="sylius.metadata.renderer.twitter.class">Sylius\Component\Metadata\Renderer\Twitter\GenericTwitterMetadataRenderer</parameter>
+
+        <parameter key="sylius.metadata.provider.class">Sylius\Component\Metadata\Provider\MetadataProvider</parameter>
+        <parameter key="sylius.metadata.provider.processed.class">Sylius\Component\Metadata\Provider\ProcessedMetadataProvider</parameter>
+
+        <parameter key="sylius.metadata.hierarchy_provider.class">Sylius\Component\Metadata\HierarchyProvider\CompositeMetadataHierarchyProvider</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.metadata.compiler" class="%sylius.metadata.compiler.class%" public="false" />
+
+        <service id="sylius.metadata.processor" class="%sylius.metadata.processor.class%" public="false">
+            <argument type="service" id="twig" />
+        </service>
+
+        <service id="sylius.metadata.accessor" class="%sylius.metadata.accessor.class%">
+            <argument type="service" id="sylius.metadata.provider" />
+            <argument type="service" id="property_accessor" />
+        </service>
+
+        <service id="sylius.metadata.twig_extension" class="%sylius.metadata.twig_extension.class%" public="false">
+            <argument type="service" id="sylius.metadata.accessor" />
+            <argument type="service" id="sylius.metadata.renderer" />
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="sylius.metadata.renderer.options_resolver" class="%sylius.metadata.renderer.options_resolver.class%" scope="prototype" public="false" />
+
+        <service id="sylius.metadata.renderer" class="%sylius.metadata.renderer.class%">
+            <argument type="collection" /> <!-- Metadata renderers array -->
+        </service>
+
+        <service id="sylius.metadata.renderer.custom_page" class="%sylius.metadata.renderer.custom_page.class%" public="false">
+            <argument type="service" id="sylius.metadata.renderer.twitter" />
+            <argument type="service" id="sylius.metadata.renderer.options_resolver" strict="false" />
+            <argument type="service" id="property_accessor" />
+            <tag name="sylius.metadata_renderer" />
+        </service>
+        
+        <service id="sylius.metadata.renderer.twitter" class="%sylius.metadata.renderer.twitter.class%" public="false">
+            <argument type="service" id="sylius.metadata.renderer.options_resolver" strict="false" />
+            <tag name="sylius.metadata_renderer" />
+        </service>
+
+        <service id="sylius.metadata.provider" class="%sylius.metadata.provider.class%" public="false">
+            <argument type="service" id="sylius.repository.metadata_container" />
+            <argument type="service" id="sylius.metadata.compiler" />
+            <argument type="service" id="sylius.metadata.hierarchy_provider" />
+        </service>
+
+        <service id="sylius.metadata.provider.processed" class="%sylius.metadata.provider.processed.class%" decorates="sylius.metadata.provider" public="false">
+            <argument type="service" id="sylius.metadata.provider.processed.inner" />
+            <argument type="service" id="sylius.metadata.processor" />
+        </service>
+
+        <service id="sylius.metadata.hierarchy_provider" class="%sylius.metadata.hierarchy_provider.class%">
+            <argument type="collection" /> <!-- Metadata hierarchy provider array -->
+        </service>
+    </services>
+
+</container>

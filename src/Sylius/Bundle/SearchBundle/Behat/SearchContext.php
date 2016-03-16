@@ -74,7 +74,7 @@ class SearchContext extends DefaultContext
         });
 
         if (empty($result)) {
-            throw new \Exception("The entry does not exist in the index");
+            throw new \Exception('The entry does not exist in the index');
         }
 
         return true;
@@ -102,7 +102,7 @@ class SearchContext extends DefaultContext
                 return 0 === count($query->getResult()) ? true : false;
             });
         } catch (\RuntimeException $exception) {
-            throw new \Exception("The entry does exist in the index", 0, $exception);
+            throw new \Exception('The entry does exist in the index', 0, $exception);
         }
     }
 }

@@ -4,7 +4,29 @@
 sylius:
   form:
     attribute:
-      name: Interný názov
-      presentation: Prezentácia
+      add: Pridať
+      add_attributes: Pridať produktovú vlastnosť
+      choices: Voľby
+      code: Kód
+      name: Názov
+      translations: Preklady
       type: Typ
-      choices: Možnosti
+    attribute_type:
+      checkbox: Checkbox
+      configuration: Konfigurácia
+      date: Dátum
+      datetime: Dátum a čas
+      integer: Číslo
+      percent: Percento
+      text: Text
+      textarea: Textové pole
+      title: Typy produktového variantu
+      validation: Validácia
+    attribute_type_configuration:
+      datetime:
+        format: Formát
+      date:
+        format: Formát
+      text:
+        min: Min. dĺžka
+        max: Max dĺžka

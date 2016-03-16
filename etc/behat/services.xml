@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="services/contexts.xml"/>
+        <import resource="services/pages.xml"/>
+    </imports>
+    <parameters>
+        <parameter key="sylius.behat.cookie_setter.class">Sylius\Behat\CookieSetter</parameter>
+        <parameter key="sylius.behat.channel_context_setter.class">Sylius\Behat\ChannelContextSetter</parameter>
+        <parameter key="sylius.behat.security.class">Sylius\Behat\SecurityService</parameter>
+        <parameter key="sylius.behat.table_manipulator.class">Sylius\Behat\TableManipulator</parameter>
+        <parameter key="sylius.behat.page.class">Sylius\Behat\Page\Page</parameter>
+        <parameter key="sylius.behat.symfony_page.class">Sylius\Behat\Page\SymfonyPage</parameter>
+    </parameters>
+    <services>
+        <service id="mink.default_session" class="Behat\Mink\Session" factory-service="mink" factory-method="getSession" lazy="true" scope="scenario" public="false" />
+
+        <service id="sylius.behat.cookie_setter" class="%sylius.behat.cookie_setter.class%" scope="scenario" public="false">
+            <argument type="service" id="mink.default_session" />
+            <argument>%mink.parameters%</argument>
+        </service>
+
+        <service id="sylius.behat.channel_context_setter" class="%sylius.behat.channel_context_setter.class%" scope="scenario" public="false">
+            <argument type="service" id="sylius.behat.cookie_setter" />
+        </service>
+
+        <service id="sylius.behat.security" class="%sylius.behat.security.class%" scope="scenario" public="false">
+            <argument type="service" id="sylius.repository.user" container="symfony" />
+            <argument type="service" id="session" container="symfony" />
+            <argument type="service" id="sylius.behat.cookie_setter" />
+            <argument>user</argument>
+        </service>
+
+        <service id="sylius.behat.table_manipulator" class="%sylius.behat.table_manipulator.class%" public="false" />
+
+        <service id="sylius.behat.page" class="%sylius.behat.page.class%" abstract="true" scope="scenario" public="false">
+            <argument type="service" id="mink.default_session" />
+            <argument>%mink.parameters%</argument>
+        </service>
+
+        <service id="sylius.behat.symfony_page" class="%sylius.behat.symfony_page.class%" parent="sylius.behat.page" abstract="true" scope="scenario" public="false">
+            <argument type="service" id="router" container="symfony_shared" />
+        </service>
+    </services>
+</container>

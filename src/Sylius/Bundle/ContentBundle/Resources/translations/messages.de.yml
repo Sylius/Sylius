@@ -1,8 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-auto: automatisch
-route: Route
 sylius:
   form:
     action_block:
@@ -10,15 +8,20 @@ sylius:
       id: ID
       publish_end_date: Enddatum der Veröffentlichung
       publish_start_date: Startdatum der Veröffentlichung
+      publishable: Veröffentlicht
     imagine_block:
       filter: Filtern
       image: Foto
       internal_name: Interner Name
       label: Bezeichnung
+      link_url: Link URL
       parent: Übergeordnet
       publish_end_date: Enddatum der Veröffentlichung
       publish_start_date: Startdatum der Veröffentlichung
+      publishable: Veröffentlicht
+      slideshow_small: kleine Slideshow (seitlich)
       slideshow_medium: Slideshow mittel (Inhalt)
+      slideshow_large: große Slideshow (ganze Breite)
     menu:
       childrens: Kind-Elemente
       display: Anzeigen
@@ -28,6 +31,7 @@ sylius:
       parent: Übergeordnet
       publish_end_date: Enddatum der Veröffentlichung
       publish_start_date: Startdatum der Veröffentlichung
+      publishable: Veröffentlicht
       route: Pfad
       uri: URI
     menu_block:
@@ -36,6 +40,7 @@ sylius:
       name: Name
       publish_end_date: Enddatum der Veröffentlichung
       publish_start_date: Startdatum der Veröffentlichung
+      publishable: Veröffentlicht
     menu_node_block:
       content: Inhalt
       display: Darstellung
@@ -45,6 +50,7 @@ sylius:
       link_type: Link-Typ
       publish_end_date: Enddatum der Veröffentlichung
       publish_start_date: Startdatum der Veröffentlichung
+      publishable: Veröffentlicht
       route: Route
       uri: URI
     redirect_route:
@@ -57,6 +63,7 @@ sylius:
       id: ID
       publish_end_date: Enddatum der Veröffentlichung
       publish_start_date: Startdatum der Veröffentlichung
+      publishable: Veröffentlicht
       title: Titel
     route:
       content: Inhalt
@@ -68,13 +75,16 @@ sylius:
       parent: Übergeordnet
       publish_end_date: Enddatum der Veröffentlichung
       publish_start_date: Startdatum der Veröffentlichung
+      publishable: Veröffentlicht
       title: Titel
     slideshow_block:
+      add_slide: Slide hinzufügen
       childrens: Kind-Elemente
       internal_name: Interner Name
       parent: Übergeordnet
       publish_end_date: Enddatum der Veröffentlichung
       publish_start_date: Startdatum der Veröffentlichung
+      publishable: Veröffentlicht
       title: Titel
     static_content:
       body: Inhalt
@@ -84,6 +94,7 @@ sylius:
       parent: Übergeordnet
       publish_end_date: Veröffentlichen bis
       publish_start_date: Veröffentlichen von
+      publishable: Veröffentlicht
       routes: Pfade
       title: Titel
     string_block:
@@ -92,3 +103,4 @@ sylius:
       name: Name
       publish_end_date: Enddatum der Veröffentlichung
       publish_start_date: Startdatum der Veröffentlichung
+      publishable: Veröffentlicht

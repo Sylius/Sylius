@@ -1,0 +1,24 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  product:
+    sku:
+      not_blank: Fut kodin SKU të produktit.
+      unique: Kodi SKU i produktit duhet të jetë unik.
+    name:
+      not_blank: Fut emrin e produktit.
+      min_length: 'Emri i produktit duhet të përmbajë të paktën 1 karakter.|Emri i produktit duhet të përmbajë të paktën {{ limit }} karaktere.'
+      max_length: 'Emri i produktit nuk duhet të përmbajë më shumë se një 1 karakter.|Emri i produktit nuk duhet të përmbajë më shumë se {{ limit }} karaktere.'
+  variant:
+    sku:
+      not_blank: Fut variantin SKU.
+      unique: Varianti SKU duhet të jetë unik.
+  archetype:
+    name:
+      not_blank: Fut emrin e prototipit.
+      min_length: 'Emri i prototipit duhet të përmbajë të paktën 1 karakter.|Emri i prototipit duhet të përmbajë të paktën {{ limit }} karaktere.'
+      max_length: 'Emri i prototipit nuk duhet të përmbajë më shumë se 1 karakter.|Emri i prototipit nuk duhet të përmbajë më shumë se {{ limit }} karaktere.'
+    code:
+      unique: Prototipi me kodin e dhënë tashmë egziston.
+      not_blank: Shto kodin e prototipit.

@@ -18,26 +18,37 @@ sylius:
       contains_product_configuration:
         variants: Producten
         exclude: Uitsluiten
-      item_count_configuration:
+      cart_quantity_configuration:
         count: Aantal
-        equal: Gelijk
       item_total_configuration:
         amount: Hoeveelheid
-        equal: Gelijk
       nth_order_configuration:
         nth: Nde
+      customer_loyalty_configuration:
+        time: Tijd
+        unit:
+          days: Dagen
+          weeks: Weken
+          months: Maanden
+          years: Jaren
+          header: Eenheid
+        after: Gebruiker aangemaakt na deze periode
       shipping_country_configuration:
         country: Land
       type: Type
     coupon:
-      code: Code
       usage_limit: Gebruikslimiet
+      expires_at: Verloopt op
     coupon_generate_instruction:
       amount: Hoeveelheid
       usage_limit: Gebruikslimiet
+      expires_at: Verloopt op
     promotion:
       actions: Acties
+      add_action: Actie toevoegen
+      add_rule: Regel toevoegen
       coupon_based: Coupon gebaseerd
+      exclusive: Exclusief
       description: Omschrijving
       ends_at: Eindigt op
       name: Naam

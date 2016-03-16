@@ -7,4 +7,5 @@ sylius:
       code: Kod
       name: Ad
       parent: Üst
+      attributes: Nitelikler
       options: Ayarlar

@@ -4,7 +4,29 @@
 sylius:
   form:
     attribute:
-      name: Nom interne
-      presentation: Présentation
-      type: Type
+      add: Ajouter
+      add_attributes: Ajouter des attributs
       choices: Choix
+      code: Code
+      name: Nom
+      translations: Traductions
+      type: Type
+    attribute_type:
+      checkbox: Case à cocher
+      configuration: Configuration
+      date: Date
+      datetime: Date et heure
+      integer: Entier
+      percent: Pourcentage
+      text: Texte
+      textarea: Zone de texte
+      title: "Type de l'attribut"
+      validation: Validation
+    attribute_type_configuration:
+      datetime:
+        format: Format
+      date:
+        format: Format
+      text:
+        min: Longueur minimum
+        max: Longueur maximum

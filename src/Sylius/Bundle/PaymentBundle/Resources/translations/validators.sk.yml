@@ -18,7 +18,7 @@ sylius:
       max_length: 'CVV kód na karte musí obsahovať aspoň {{ limit }} čisiel.'
       min_length: 'CVV kód na karte nesmie obsahovať viac ako {{ limit }} číslic.'
     expiry_year:
-      not_blank: Prosím zvoľte rok expirácie.
+      not_blank: Prosím vyberte rok expirácie.
   payment_method:
     gateway:
       not_blank: Prosím zvolťe spôsob platby.
@@ -29,8 +29,11 @@ sylius:
     fee_calculator_configuration:
       amount:
         greater_than_or_equal: 'Poplatok nemôže byť nižšii ako {{ compared_value }}.'
-        not_blank: Zadajte čiastku poplatku.
+        not_blank: Zadajte poplatok.
       percent:
-        max_range: 'Percentný poplatok nesmie byť vyšší ako {{ limit }}.'
-        min_range: 'Percentný poplatok nemôže byť nižšii ako {{ limit }}.'
+        max_range: 'Percentualný poplatok nesmie byť vyšší ako {{ limit }}.'
+        min_range: 'Percentualný poplatok nemôže byť nižšii ako {{ limit }}.'
         not_blank: Zadajte poplatok percentom.
+    code:
+      not_blank: Zadajte kód pre spôsob platby.
+      unique: Spôsob platby s daným kódom už existuje.

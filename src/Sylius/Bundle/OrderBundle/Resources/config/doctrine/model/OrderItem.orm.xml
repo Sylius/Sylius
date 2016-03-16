@@ -28,6 +28,7 @@
         <field name="unitPrice" column="unit_price" type="integer">
             <gedmo:versioned />
         </field>
+        <field name="unitsTotal" column="units_total" type="integer" />
         <field name="adjustmentsTotal" column="adjustments_total" type="integer" />
         <field name="total" column="total" type="integer" />
         <field name="immutable" column="is_immutable" type="boolean" />
@@ -37,6 +38,12 @@
         </many-to-one>
 
         <one-to-many field="adjustments" target-entity="Sylius\Component\Order\Model\AdjustmentInterface" mapped-by="orderItem" orphan-removal="true">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
+
+        <one-to-many field="units" target-entity="Sylius\Component\Order\Model\OrderItemUnitInterface" mapped-by="orderItem" orphan-removal="true">
             <cascade>
                 <cascade-all/>
             </cascade>

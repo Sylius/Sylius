@@ -4,9 +4,8 @@
 sylius:
   form:
     rule:
-      item_count_configuration:
+      unit_count_configuration:
         count: Počet
-        equal: Rovná sa
       type: Typ pravidla
     shipment:
       state: Stav
@@ -15,7 +14,7 @@ sylius:
         pending: Čakajúca
         ready: Pripravená
         shipped: Odoslané
-        returned: Vrátený tovar
+        returned: Vrátené
         cancelled: Zrušené
       tracking_code: Sledovací kód
     shipping_calculator:
@@ -24,15 +23,11 @@ sylius:
         amount: Suma
       flexible_rate_configuration:
         label: Flexibilná sadzba
-        additional_item_cost: Cena za každý ďalší predmet
-        additional_item_limit: Obmedenie na ďalšie predmety
-        first_item_cost: Cena prvej položky
-      per_item_rate_configuration:
-        label: Paušálna sadzba za kus
+      per_unit_rate_configuration:
         amount: Suma
       weight_rate_configuration:
         label: Sadzba podľa hmotnosti
-        fixed: Fixná suma
+        fixed: Pevná sadzba
         variable: Variabilná suma
         division: Delenie
       volume_rate_configuration:
@@ -43,9 +38,9 @@ sylius:
       description: Popis
       name: Názov
     shipping_method:
-      calculator: Kalkulačka
+      calculator: Spôsob vypočtu
       category: Kategória
       category_requirement: Podmienka pre kategóriu doručenia
       configuration: Konfigurácia
-      enabled: Povolené
+      enabled: Zapnuté
       name: Názov

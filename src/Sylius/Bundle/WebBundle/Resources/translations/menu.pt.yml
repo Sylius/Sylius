@@ -6,8 +6,8 @@ sylius:
     menu:
       main:
         configuration: Configuração
-        countries: Países
         content: Conteúdo
+        countries: Países
         dashboard: Painel de Instrumentos
         general_settings: Configurações gerais
         homepage: Sua loja

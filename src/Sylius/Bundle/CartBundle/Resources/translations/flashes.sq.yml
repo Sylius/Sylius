@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  cart:
+    cart_save_completed: Karta u përditësua me sukses.
+    cart_clear_completed: Karta u fshi me sukses.
+    item_add_completed: Artikulli u shtua në kartë.
+    item_remove_completed: Artikulli u fshi nga karta.
+    item_add_error: Gabim gjatë shtimit të artikullit në kartë.
+    item_remove_error: Gabim gjatë fshirjes së artikullit nga karta.

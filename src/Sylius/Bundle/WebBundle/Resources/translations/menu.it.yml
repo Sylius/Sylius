@@ -5,16 +5,29 @@ sylius:
   backend:
     menu:
       main:
+        api_clients: API dei client
+        archetypes: Modelli di prodotto
+        association_types: Tipi di associazione di prodotto
         assortment: Assortimento
+        attributes: Configurazione attributi
         blocks: Blocchi
+        channels: Canali
         configuration: Configurazione
-        countries: Paesi
+        contact_requests: Richieste di contatto
+        contact_topics: Configurazione argomenti
         content: Contenuto
+        countries: Paesi
+        currencies: Monete
+        customer: Cliente
+        customers: Clienti
         dashboard: Pannello amministrazione
+        emails: Email
         general_settings: Impostazioni generali
         groups: Gruppi
         homepage: Il tuo negozio
         locales: Localizzazioni
+        marketing: Marketing
+        menus: Menù
         new_order: Aggiungi nuovo ordine
         new_promotion: Aggiungi nuova promozione
         options: Gestisci opzioni prodotto
@@ -22,52 +35,75 @@ sylius:
         pages: Pagine
         payment_methods: Metodi di pagamento
         payments: Pagamenti
+        permissions: Autorizzazioni
         products: Prodotti
         promotions: Promozioni
+        report: Rapporti
+        roles: Regole
+        routes: Rotte
         sales: Ordini
+        security_settings: Impostazioni di sicurezza
         shipments: Spedizioni
         shipping_categories: Categorie di spedizione
         shipping_methods: Metodi di spedizione
+        slideshow: Slideshow
         stockables: Livelli inventario
+        support: Assistenza
         tax_categories: Categorie di tassazione
         tax_rates: Aliquote fiscali
         taxation_settings: Impostazioni fiscali
         taxonomies: Categorizzazione
         zones: Zone
-        roles: Regole
       sidebar:
+        api_clients: API dei client
+        archetypes: Modelli di prodotto
         assortment: Assortimento
+        attributes: Configurazione attributi
         blocks: Blocchi
+        channels: Canali
         configuration: Configurazione
+        contact_requests: Richieste
+        contact_topics: Configurazione argomenti
         content: Contenuto
         countries: Paesi
+        currencies: Monete
+        customer: Cliente
+        customers: Clienti
         dashboard: Pannello amministrazione
+        emails: Email
         general_settings: Impostazioni generali
         groups: Gruppi
         homepage: Torna al frontend
         locales: Localizzazioni
+        marketing: Marketing
+        menus: Menù
         new_order: Aggiungi nuovo ordine
         new_promotion: Aggiungi nuova promozione
         options: Gestisci opzioni
         orders: Ordini correnti
         pages: Pagine
-        routes: Rotte
         payment_methods: Metodi di pagamento
         payments: Pagamenti
+        permissions: Autorizzazioni
         products: Prodotti
         promotions: Promozioni
+        redirects: Reindirizzamenti
+        report: Rapporti
+        roles: Regole
+        routes: Rotte
         sales: Ordini
+        security_settings: Impostazioni di sicurezza
         shipments: Spedizioni
         shipping_categories: Categorie spedizioni
         shipping_methods: Metodi di spedizione
         slideshow: Slideshow
         stockables: Livelli inventario
+        support: Assistenza
         tax_categories: Categorie tassazione
         tax_rates: Aliquote fiscali
         taxation_settings: Impostazioni fiscali
         taxonomies: Categorizzazioni
         zones: Zone
-        roles: Regole
   frontend:
     menu:
       account:
@@ -85,6 +121,8 @@ sylius:
         login: Login
         logout: Logout
         register: Registrati
+      sidebar:
+        links: Link
       social:
         facebook: Facebook
         github: GitHub

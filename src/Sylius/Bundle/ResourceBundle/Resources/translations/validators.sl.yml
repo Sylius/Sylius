@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  resource:
+    not_enabled: Dani vir je onemogočen
+    not_disabled: Dani vir je omogočen

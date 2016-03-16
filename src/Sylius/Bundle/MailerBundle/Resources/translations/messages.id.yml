@@ -4,5 +4,4 @@
 sylius:
   form:
     email:
-      code: Kode
       enabled: Diaktifkan

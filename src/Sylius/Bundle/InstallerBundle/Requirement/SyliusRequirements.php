@@ -16,7 +16,7 @@ use IteratorAggregate;
 
 class SyliusRequirements implements IteratorAggregate
 {
-    protected $collections = array();
+    protected $collections = [];
 
     public function __construct(array $requirementCollections)
     {

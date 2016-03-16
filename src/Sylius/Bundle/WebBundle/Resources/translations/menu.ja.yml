@@ -23,6 +23,7 @@ sylius:
         shipments: 出荷管理
         shipping_categories: 配送カテゴリ管理
         shipping_methods: 配送方法管理
+        slideshow: スライドショー
         stockables: 在庫チェック
         tax_categories: 税区分管理
         tax_rates: 税管理

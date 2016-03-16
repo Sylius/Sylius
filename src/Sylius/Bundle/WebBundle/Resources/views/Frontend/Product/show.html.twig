@@ -3,6 +3,14 @@
 {% set form = sylius_cart_form({'product': product}) %}
 {% from 'SyliusWebBundle:Frontend/Product:macros.html.twig' import sylius_display_price %}
 
+{% block head %}
+    {{ sylius_metadata_render(product, null, { 'defaults': {
+        'title': settings.title|default('sylius.meta.frontend_title'|trans),
+        'description': settings.meta_description|default('sylius.meta.frontend_description'|trans),
+        'keywords': settings.meta_description|default('sylius.meta.frontend_keywords'|trans)
+    } })|raw }}
+{% endblock %}
+
 {% block content %}
 <div class="row">
     <div class="col-md-3">
@@ -13,6 +21,9 @@
     <div class="col-md-9">
         <a href="{{ path(product) }}" class="btn btn-link"><h3>{{ product.name }}</h3></a>
         <p>{{ product.shortDescription|default('sylius.product.no_description')|trans|raw }}</p>
+        {% if product.averageRating %}
+        <h3>{{ 'sylius.product.rating'|trans }}: {{ product.averageRating|round(2, 'floor') }}</h3>
+        {% endif %}
     </div>
 </div>
 {% if product.images|length > 0 %}
@@ -58,7 +69,7 @@
     <div class="col-md-6">
         {% if product.hasVariants %}
             {% if product.isVariantSelectionMethodChoice %}
-            <table class="table table-condensed">
+            <table class="table table-condensed" id="product-variants">
                 <thead>
                     <tr>
                         <th></th>
@@ -125,4 +136,28 @@
     </div>
 </form>
 </div>
+
+<hr />
+
+<div>
+    <h3>{{ 'sylius.review.header'|trans }}</h3>
+    {% render(url('sylius_product_reviews', { 'productId': product.id, limit: 3 })) %}
+    <hr />
+    {% render(url('sylius_product_review_create', { 'productId': product.id })) %}
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts output='assets/compiled/backend_review.js'
+    'bundles/syliusreview/js/sylius-review.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    <script>
+        var createMessage = "{{ 'sylius.resource.create'|trans({'%resource%': 'sylius.review.product_review'|trans}, 'flashes') }}";
+        $(document).ready(function() {
+            initializeAjaxForm(createMessage);
+        });
+    </script>
+    {% endjavascripts %}
 {% endblock %}

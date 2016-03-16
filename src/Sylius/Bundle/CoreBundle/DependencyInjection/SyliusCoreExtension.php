@@ -12,10 +12,13 @@
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -29,7 +32,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
     /**
      * @var array
      */
-    private $bundles = array(
+    private $bundles = [
         'sylius_addressing',
         'sylius_affiliate',
         'sylius_api',
@@ -44,6 +47,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         'sylius_payum',
         'sylius_product',
         'sylius_promotion',
+        'sylius_review',
         'sylius_report',
         'sylius_search',
         'sylius_sequence',
@@ -56,7 +60,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         'sylius_variation',
         'sylius_translation',
         'sylius_rbac',
-    );
+    ];
 
     /**
      * {@inheritdoc}
@@ -68,7 +72,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $configFiles = array(
+        $configFiles = [
             'services.xml',
             'controller.xml',
             'form.xml',
@@ -78,7 +82,13 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
             'reports.xml',
             'state_machine.xml',
             'email.xml',
-        );
+            'metadata.xml',
+        ];
+
+        $env = $container->getParameter('kernel.environment');
+        if ('test' === $env || 'test_cached' === $env) {
+            $configFiles[] = 'test_services.xml';
+        }
 
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
@@ -88,6 +98,8 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
 
         $definition = $container->findDefinition('sylius.context.currency');
         $definition->replaceArgument(0, new Reference($config['currency_storage']));
+
+        $this->overwriteRuleFactory($container);
     }
 
     /**
@@ -99,21 +111,23 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
 
         foreach ($container->getExtensions() as $name => $extension) {
             if (in_array($name, $this->bundles)) {
-                $container->prependExtensionConfig($name, array('driver' => $config['driver']));
+                $container->prependExtensionConfig($name, ['driver' => $config['driver']]);
             }
         }
 
-        $routeClasses = $controllerByClasses = $repositoryByClasses = $syliusByClasses = array();
+        $routeClasses = $controllerByClasses = $repositoryByClasses = $syliusByClasses = [];
 
         foreach ($config['routing'] as $className => $routeConfig) {
-            $routeClasses[$className] = array(
-                'field'  => $routeConfig['field'],
+            $routeClasses[$className] = [
+                'field' => $routeConfig['field'],
                 'prefix' => $routeConfig['prefix'],
-            );
+            ];
             $controllerByClasses[$className] = $routeConfig['defaults']['controller'];
             $repositoryByClasses[$className] = $routeConfig['defaults']['repository'];
             $syliusByClasses[$className] = $routeConfig['defaults']['sylius'];
         }
+
+        $container->prependExtensionConfig('sylius_theme', ['context' => 'sylius.theme.context.channel_based']);
 
         $container->setParameter('sylius.route_classes', $routeClasses);
         $container->setParameter('sylius.controller_by_classes', $controllerByClasses);
@@ -132,5 +146,18 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         foreach ($config['steps'] as $name => $step) {
             $container->setParameter(sprintf('sylius.checkout.step.%s.template', $name), $step['template']);
         }
+    }
+
+
+    /**
+     * @param ContainerBuilder $container
+     */
+    private function overwriteRuleFactory(ContainerBuilder $container)
+    {
+        $baseFactoryDefinition = new Definition(Factory::class, [new Parameter('sylius.model.promotion_rule.class')]);
+        $promotionRuleFactoryClass = $container->getParameter('sylius.factory.promotion_rule.class');
+        $decoratedPromotionRuleFactoryDefinition = new Definition($promotionRuleFactoryClass, [$baseFactoryDefinition]);
+
+        $container->setDefinition('sylius.factory.promotion_rule', $decoratedPromotionRuleFactoryDefinition);
     }
 }

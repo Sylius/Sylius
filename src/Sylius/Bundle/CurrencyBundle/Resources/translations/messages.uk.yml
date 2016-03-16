@@ -4,6 +4,5 @@
 sylius:
   form:
     currency:
-      code: Код
       exchange_rate: Обмінний курс
       enabled: Увімкнено

@@ -29,7 +29,7 @@ class RegisterRuleCheckersPass implements CompilerPassInterface
         }
 
         $registry = $container->getDefinition('sylius.registry.shipping_rule_checker');
-        $checkers = array();
+        $checkers = [];
 
         foreach ($container->findTaggedServiceIds('sylius.shipping_rule_checker') as $id => $attributes) {
             if (!isset($attributes[0]['type']) || !isset($attributes[0]['label'])) {
@@ -37,7 +37,7 @@ class RegisterRuleCheckersPass implements CompilerPassInterface
             }
             $checkers[$attributes[0]['type']] = $attributes[0]['label'];
 
-            $registry->addMethodCall('register', array($attributes[0]['type'], new Reference($id)));
+            $registry->addMethodCall('register', [$attributes[0]['type'], new Reference($id)]);
         }
 
         $container->setParameter('sylius.shipping_rules', $checkers);

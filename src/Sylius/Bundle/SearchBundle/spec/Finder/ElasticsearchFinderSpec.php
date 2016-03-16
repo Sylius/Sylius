@@ -13,11 +13,9 @@ namespace spec\Sylius\Bundle\SearchBundle\Finder;
 
 use Elastica\Query;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\SearchBundle\Doctrine\ORM\SearchIndexRepository;
 use Sylius\Bundle\SearchBundle\QueryLogger\QueryLoggerInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
-
 
 /**
  * @author Argyrios Gounaris <agounaris@gmail.com>
@@ -31,8 +29,7 @@ class ElasticsearchFinderSpec extends ObjectBehavior
         $container,
         QueryLoggerInterface $queryLogger,
         ChannelContextInterface $channelContext
-    )
-    {
+    ) {
         $this->beConstructedWith(
             $searchRepository,
             $config,
@@ -50,84 +47,83 @@ class ElasticsearchFinderSpec extends ObjectBehavior
 
     function it_compiles_a_fulltext_elasticsearch_query()
     {
-        $config = array(
-            'filters' => array(
-                'facets' => array(
-                    'taxons'  => array(
+        $config = [
+            'filters' => [
+                'facets' => [
+                    'taxons' => [
                         'display_name' => 'Basic categories',
-                        'type'         => 'terms',
-                        'value'        => null,
-                        'values'       => array(),
-                    ),
-                    'price'   => array(
+                        'type' => 'terms',
+                        'value' => null,
+                        'values' => [],
+                    ],
+                    'price' => [
                         'display_name' => 'Available prices',
-                        'type'         => 'range',
-                        'value'        => null,
-                        'values'       => array(
-                            array('from' => 0, 'to' => 2000),
-                            array('from' => 2001, 'to' => 5000),
-                            array('from' => 5001, 'to' => 10000),
-                        ),
-                    ),
-                    'made_of' => array(
+                        'type' => 'range',
+                        'value' => null,
+                        'values' => [
+                            ['from' => 0, 'to' => 2000],
+                            ['from' => 2001, 'to' => 5000],
+                            ['from' => 5001, 'to' => 10000],
+                        ],
+                    ],
+                    'made_of' => [
                         'display_name' => 'Material',
-                        'type'         => 'terms',
-                        'value'        => null,
-                        'values'       => array(),
-                    ),
-                    'color'   => array(
+                        'type' => 'terms',
+                        'value' => null,
+                        'values' => [],
+                    ],
+                    'color' => [
                         'display_name' => 'Available colors',
-                        'type'         => 'terms',
-                        'value'        => null,
-                        'values'       => array(),
-                    ),
-                )
-            )
+                        'type' => 'terms',
+                        'value' => null,
+                        'values' => [],
+                    ],
+                ],
+            ],
 
-        );
+        ];
 
         $this->compileElasticSearchStringQuery('modi', null, $config, 'all', null)->shouldHaveType(Query::class);
     }
 
     function it_compiles_a_taxon_elasticsearch_query()
     {
-        $config = array(
-            'filters' => array(
-                'facets' => array(
-                    'taxons'  => array(
+        $config = [
+            'filters' => [
+                'facets' => [
+                    'taxons' => [
                         'display_name' => 'Basic categories',
-                        'type'         => 'terms',
-                        'value'        => null,
-                        'values'       => array(),
-                    ),
-                    'price'   => array(
+                        'type' => 'terms',
+                        'value' => null,
+                        'values' => [],
+                    ],
+                    'price' => [
                         'display_name' => 'Available prices',
-                        'type'         => 'range',
-                        'value'        => null,
-                        'values'       => array(
-                            array('from' => 0, 'to' => 2000),
-                            array('from' => 2001, 'to' => 5000),
-                            array('from' => 5001, 'to' => 10000),
-                        ),
-                    ),
-                    'made_of' => array(
+                        'type' => 'range',
+                        'value' => null,
+                        'values' => [
+                            ['from' => 0, 'to' => 2000],
+                            ['from' => 2001, 'to' => 5000],
+                            ['from' => 5001, 'to' => 10000],
+                        ],
+                    ],
+                    'made_of' => [
                         'display_name' => 'Material',
-                        'type'         => 'terms',
-                        'value'        => null,
-                        'values'       => array(),
-                    ),
-                    'color'   => array(
+                        'type' => 'terms',
+                        'value' => null,
+                        'values' => [],
+                    ],
+                    'color' => [
                         'display_name' => 'Available colors',
-                        'type'         => 'terms',
-                        'value'        => null,
-                        'values'       => array(),
-                    ),
-                )
-            )
+                        'type' => 'terms',
+                        'value' => null,
+                        'values' => [],
+                    ],
+                ],
+            ],
 
-        );
+        ];
 
         $this->compileElasticaTaxonQuery(null, $config, 'T-Shirts', null)->shouldHaveType(Query::class);
     }
-
 }

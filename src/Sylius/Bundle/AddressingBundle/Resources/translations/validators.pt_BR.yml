@@ -9,6 +9,7 @@ sylius:
       not_blank: Por favor, digite a cidade.
     country:
       not_blank: Por favor, selecione um país.
+      disabled: O país selecionado está desabilitado. Por favor, selecione um diferente.
     first_name:
       max_length: O nome não deve ter mais de 255 caracteres | O nome não deve ter mais que 255 caracteres.
       min_length: O nome deve ter no mínimo 2 caracteres| O nome deve ter no mínimo 2 caracteres.
@@ -29,12 +30,12 @@ sylius:
       not_blank: Por favor, digite a rua.
     not_shippable: Este endereço não é um endereço válido para envio.
   country:
-    iso_name:
-      not_blank: Por favor, digite o código ISO do país.
-    name:
-      max_length: O nome do país deve ter no máximo 255 caracteres|O nome do país deve ter no máximo 255 caracteres.
-      not_blank: Por favor, digite o nome do país.
+    code:
+      not_blank: Por favor, insira o código ISO do país.
+      unique: O código ISO deve ser único.
   province:
+    code:
+      not_blank: Por favor, insira o código do estado.
     name:
       max_length: O campo estado deve ter no máximo 255 caracteres|O campo estado deve ter no máximo 255 caracteres.
       min_length: O campo estado deve ter pelo menos 2 caracteres|O campo estado deve ter pelo menos 2 caracteres.

@@ -6,10 +6,7 @@ Sylius\Component\Addressing\Model\Country:
             expose: true
             type: integer
             xml_attribute: true
-        name:
-            expose: true
-            type: string
-        isoName:
+        code:
             expose: true
             type: string
         createdAt:

@@ -11,13 +11,16 @@
 
 namespace spec\Sylius\Bundle\CartBundle\EventListener;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Cart\Event\CartEvent;
 use Sylius\Component\Cart\Event\CartItemEvent;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Model\CartItemInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Order\Model\OrderItemInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\ValidatorInterface;
 
@@ -27,9 +30,9 @@ use Symfony\Component\Validator\ValidatorInterface;
  */
 class CartSubscriberSpec extends ObjectBehavior
 {
-    function let(ObjectManager $manager, ValidatorInterface $validator, CartProviderInterface $provider)
+    function let(ObjectManager $manager, ValidatorInterface $validator, CartProviderInterface $provider, OrderItemQuantityModifierInterface $orderItemQuantityModifier)
     {
-        $this->beConstructedWith($manager, $validator, $provider);
+        $this->beConstructedWith($manager, $validator, $provider, $orderItemQuantityModifier);
     }
 
     function it_is_initializable()
@@ -37,11 +40,55 @@ class CartSubscriberSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CartBundle\EventListener\CartSubscriber');
     }
 
-    function it_should_add_a_item_to_a_cart_from_event(CartItemEvent $event, CartInterface $cart, CartItemInterface $cartItem)
-    {
+    function it_adds_an_item_to_a_cart_from_event_if_does_not_already_exist(
+        CartItemEvent $event,
+        CartInterface $cart,
+        CartItemInterface $cartItem,
+        Collection $items,
+        OrderItemInterface $existingItem,
+        \Iterator $iterator
+    ) {
         $event->getCart()->willReturn($cart);
         $event->getItem()->willReturn($cartItem);
+
+        $cart->getItems()->willReturn($items);
+        $items->getIterator()->willReturn($iterator);
+        $iterator->rewind()->shouldBeCalled();
+        $iterator->valid()->willReturn(true, false);
+        $iterator->current()->willReturn($existingItem);
+        $iterator->next()->shouldBeCalled();
+
+        $cartItem->equals($existingItem)->willReturn(false);
+
         $cart->addItem($cartItem)->shouldBeCalled();
+
+        $this->addItem($event);
+    }
+
+    function it_merges_cart_items_if_equal(
+        $orderItemQuantityModifier,
+        CartItemEvent $event,
+        CartInterface $cart,
+        CartItemInterface $cartItem,
+        Collection $items,
+        OrderItemInterface $existingItem,
+        \Iterator $iterator
+    ) {
+        $event->getCart()->willReturn($cart);
+        $event->getItem()->willReturn($cartItem);
+
+        $cart->getItems()->willReturn($items);
+        $items->getIterator()->willReturn($iterator);
+        $iterator->rewind()->shouldBeCalled();
+        $iterator->valid()->willReturn(true, false);
+        $iterator->current()->willReturn($existingItem);
+
+        $cartItem->equals($existingItem)->willReturn(true);
+
+        $cartItem->getQuantity()->willReturn(3);
+        $existingItem->getQuantity()->willReturn(1);
+
+        $orderItemQuantityModifier->modify($existingItem, 4)->shouldBeCalled();
 
         $this->addItem($event);
     }

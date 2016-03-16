@@ -42,11 +42,11 @@ class VariantMatchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         foreach ($options['variable']->getOptions() as $i => $option) {
-            $builder->add(Urlizer::urlize($option->getName()), sprintf('sylius_%s_option_value_choice', $this->variableName), array(
-                'label'         => $option->getPresentation(),
-                'option'        => $option,
+            $builder->add(Urlizer::urlize($option->getName()), sprintf('sylius_%s_option_value_choice', $this->variableName), [
+                'label' => $option->getPresentation(),
+                'option' => $option,
                 'property_path' => '['.$i.']',
-            ));
+            ]);
         }
 
         $builder->addModelTransformer(new VariantToCombinationTransformer($options['variable']));
@@ -58,9 +58,9 @@ class VariantMatchType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setRequired(array(
+            ->setRequired([
                 'variable',
-            ))
+            ])
             ->setAllowedTypes('variable', VariableInterface::class)
         ;
     }

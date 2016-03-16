@@ -26,7 +26,7 @@
 {{ form_errors(form) }}
 
 <form action="{{ path('sylius_cart_save') }}" method="post" novalidate>
-<table class="table">
+<table class="table" id="cart-summary">
     <thead>
         <tr>
             <th>#</th>
@@ -52,22 +52,23 @@
         {% endif %}
         <tr>
             <td colspan="6" style="text-align: right;">
-                <strong>{{ 'sylius.order.shipping_total'|trans }}</strong>: {{ cart.adjustmentsTotal(shippingAdjustment)|sylius_price }}
+                {% set shippingTotal = cart.adjustmentsTotal(taxAdjustment) + cart.adjustmentsTotal(shippingAdjustment) %}
+                <strong>{{ 'sylius.order.shipping_total'|trans }}</strong>: {{ shippingTotal|sylius_price }}
             </td>
         </tr>
         <tr>
             <td colspan="4">
                 <p><strong>{{ 'sylius.order.taxes'|trans }}</strong></p>
                 <ul>
-                {% for taxAdjustment in cart.adjustments(taxAdjustment) %}
-                    <li>{{ taxAdjustment.description }} {{ taxAdjustment.amount|sylius_price }} </li>
+                {% for taxLabel, taxAmount in sylius_aggregate_adjustments(cart.getAdjustmentsRecursively(taxAdjustment)) %}
+                    <li>{{ taxLabel }} {{ taxAmount|sylius_price }} </li>
                 {% else %}
                     <li><span class="label label-info">{{ 'sylius.order.no_taxes'|trans }}</span></li>
                 {% endfor %}
                 </ul>
             </td>
             <td colspan="2" style="text-align: right;">
-                <strong>{{ 'sylius.order.tax_total'|trans }}</strong>: {{ cart.adjustmentsTotal(taxAdjustment)|sylius_price }}
+                <strong>{{ 'sylius.order.tax_total'|trans }}</strong>: {{ cart.getAdjustmentsTotalRecursively(taxAdjustment)|sylius_price }}
             </td>
         </tr>
         <tr>
@@ -78,12 +79,16 @@
     </tfoot>
 </table>
 
-<div id="sylius-cart-coupons" class="well well-sm" data-prototype="{{ form_row(form.promotionCoupons.vars.prototype)|e }}">
+<div id="sylius-cart-coupons" class="well well-sm">
     <div id="sylius-cart-coupons-collection">
-        {% for couponField in form.promotionCoupons %}
-        {{ form_row(couponField, {'label_attr': {'class': 'col-lg-12'}}) }}
-        {% endfor %}
+        {% if form.promotionCoupon in not null %}
+            {{ form_row(form.promotionCoupon , {'label_attr': {'class': 'col-lg-12'}}) }}
+        {% endif %}
     </div>
+</div>
+
+<div id="sylius-cart-additional-information" class="well well-sm">
+    {{ form_row(form.additionalInformation, {'label_attr': {'class': 'col-lg-12'}}) }}
 </div>
 
 {{ form_rest(form) }}

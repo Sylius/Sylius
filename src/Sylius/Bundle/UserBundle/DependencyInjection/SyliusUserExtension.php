@@ -34,9 +34,9 @@ class SyliusUserExtension extends AbstractResourceExtension
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $configFiles = array(
-            'services.xml'
-        );
+        $configFiles = [
+            'services.xml',
+        ];
 
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
@@ -56,7 +56,11 @@ class SyliusUserExtension extends AbstractResourceExtension
         ;
         $container
             ->getDefinition('sylius.form.type.customer_guest')
-            ->addArgument(new Reference('sylius.repository.customer'))
+            ->addArgument(new Reference('sylius.form.subscriber.guest_customer'))
+        ;
+        $container
+            ->getDefinition('sylius.form.type.customer')
+            ->addArgument(new Reference('sylius.form.event_subscriber.add_user_type'))
         ;
     }
 }

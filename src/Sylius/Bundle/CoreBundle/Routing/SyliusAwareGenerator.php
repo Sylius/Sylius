@@ -21,7 +21,7 @@ class SyliusAwareGenerator extends BaseContentAwareGenerator
      *
      * @var array
      */
-    protected $routeConfig = array();
+    protected $routeConfig = [];
 
     /**
      * @param array $routeConfig
@@ -32,9 +32,9 @@ class SyliusAwareGenerator extends BaseContentAwareGenerator
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
-    public function generate($name, $parameters = array(), $absolute = false)
+    public function generate($name, $parameters = [], $absolute = false)
     {
         if ($this->isSyliusClassInstance($name)) {
             return parent::generate($this->getRouteByName($name, $parameters), $parameters, $absolute);
@@ -44,7 +44,7 @@ class SyliusAwareGenerator extends BaseContentAwareGenerator
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function supports($name)
     {

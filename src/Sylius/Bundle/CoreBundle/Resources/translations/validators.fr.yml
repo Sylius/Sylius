@@ -2,6 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+  checkout:
+    shipping_method:
+      not_blank: Veuillez sélectionner un mode de livraison.
   locale:
     code:
       not_blank: Veuillez saisir le code de la locale.
@@ -13,11 +16,8 @@ sylius:
     price:
       min: Le tarif ne peut pas être négatif.
       not_blank: Veuillez entrer un prix.
-sylius_shipping:
-  method:
-    zone:
-      not_blank: Veuillez saisir la zone de livraison.
-sylius_taxation:
-  rate:
-    zone:
-      not_blank: Veuillez saisir le taux de taxe.
+    original_price:
+      min: Le prix initial ne peux pas être négatif.
+  product_translation:
+    short_description:
+      max: 'La description courte ne doit pas dépasser {{ limit }} caractères.'

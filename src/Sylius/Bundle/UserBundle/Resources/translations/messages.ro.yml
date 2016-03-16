@@ -2,13 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    email: E-mail
-    register: Creează cont nou
-    login: Conectaţi-vă
-    logout: Deconectare
-    change_password: Modificare parolă
-    account_panel_outline: Bucuraţi-vă de toate facilitățile care sunt disponibile in contul personal, urmăriți şi gestionați toate datele dumneavoastră.
   form:
     group:
       name: Nume
@@ -24,6 +17,7 @@ sylius:
       groups: Grupuri
       last_name: Nume
       email: E-mail
+      phone_number: Număr de telefon
       billing_address: Adresa de facturare
       different_billing_address: Folosiți o adresă de facturare diferită?
     user_filter:

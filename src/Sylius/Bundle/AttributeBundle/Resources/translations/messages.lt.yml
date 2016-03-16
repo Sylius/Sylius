@@ -4,7 +4,10 @@
 sylius:
   form:
     attribute:
-      name: Vidinis pavadinimas
-      presentation: Prezentacija
-      type: Tipas
+      add: Pridėti
       choices: Pasirinkimai
+      code: Kodas
+      name: Pavadinimas
+      type: Tipas
+    attribute_type:
+      configuration: Konfigūracija

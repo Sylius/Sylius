@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  emails:
-    order_confirmation:
-      subject: Gràcies per la seva comanda!
   account:
     address:
       action:
@@ -22,16 +19,16 @@ sylius:
       list: Totes les teves adreces
       update: Editar la meva adreça
     home:
-      outline: Gaudeix de totes les característiques disponibles al teu espai personal. Pots veure, fer un seguiment i gestionar totes les teves dades.
+      email: Correu electrònic
       since: Ets client des de
       welcome: Benvingut al teu espai
     order:
       created_at: Situat a
       details: Detalls de la teva comanda
       download_invoice: Descarregar la factura
-      empty: Encara Ja heu fet cap comanda.
       invoice: Factura
       list: Totes les seves comandes
+      number: Nombre
       placed_at: 'Situat a %at%'
       shipment:
         pending: Pendent
@@ -42,6 +39,8 @@ sylius:
       tracking_number: Número de seguiment
     title: El meu compte
   add_to_cart: Afegir a la cistella
+  association_type:
+    name: Nom
   address:
     city: Ciutat
     company: Empresa
@@ -56,6 +55,8 @@ sylius:
     info: Informació
     success: Realitzat amb èxit
     warning: Avís
+  archetype:
+    name: Nom
   backend:
     alert:
       info: Informació
@@ -82,14 +83,21 @@ sylius:
     group:
       index: Grups
     new: Nou
-    update: Editar
     role:
       index: Rols
+    update: Editar
   cart:
     summary:
       checkout: Realitza la compra
       total: Total
       unit_price: Preu
+  channel:
+    code: Codi
+    currency_default: Moneda predeterminada
+    enabled: Activat
+    id: ID
+    name: Nom
+    update: Editar
   checkout:
     back: Enrera
     finalize:
@@ -110,29 +118,41 @@ sylius:
         name: Nom
     payment:
       header: Mètode de pagament
+  contact_request:
+    email: Correu electrònic
+    firstName: Nom
+    id: ID
+    lastName: Cognoms
+    message: Missatge
+  contact_topic:
+    id: ID
+    title: Títol
   country:
-    id: ID
-    name: Nom
     enabled: Activat
-  email:
-    code: Codi
-    enabled: Activat?
-  permission:
-    code: Codi
-    id: ID
-    description: Descripció
-  role:
-    code: Codi
     id: ID
     name: Nom
-    description: Descripció
-    index_header: Rols
   currency:
     code: Codi
+    enabled: Activat
     id: ID
     name: Nom
+  customer:
+    billing_address: Adreça de facturació
+    email: Correu electrònic
+    first_name: Nom
+    groups: Grups
+    id: ID
+    last_name: Cognoms
+    shipping_address: "Adreça d'enviament"
+    phone_number: Telèfon
+  delete: Suprimir
+  edit: Editar
+  email:
+    code: Codi
     enabled: Activat
   form:
+    cart:
+      coupon: Cupó
     login:
       email: Correu electrònic
       password: Contrasenya
@@ -151,47 +171,36 @@ sylius:
     name: Nom
     sku: SKU
   locale:
-    id: ID
-    name: Nom
     code: Codi
     enabled: Activat
+    id: ID
+    name: Nom
   menu:
     id: ID
     title: Títol
   menu_node:
     id: ID
     title: Títol
+  metadata:
+    id: ID
   "no": false
   order:
+    adjustments:
+      description: Descripció
     billing_address: Adreça de facturació
+    currency: Moneda
     id: ID
     number: Nombre
     payment_state: Estat de pagament
     shipment_states:
       pending: Pendent
     shipping_address: "Adreça d'enviament"
+    state:
+      checkout: Realitza la compra
     total: Total
-    currency: Moneda
-    adjustments:
-      description: Descripció
-  route:
-    id: ID
-    name: Nom
-    title: Títol
-  redirect_route:
+  review:
     id: ID
     title: Títol
-  shipment:
-    id: ID
-    name: Nom
-    sku: SKU
-    update: Editar
-  channel:
-    code: Codi
-    enabled: Activat
-    id: ID
-    name: Nom
-    update: Editar
   order_item:
     total: Total
     unit_price: Preu per unitat
@@ -212,8 +221,16 @@ sylius:
       unknown: Desconegut
       void: Buit
   payment_method:
+    gateway: Pasarel·la
     id: ID
     name: Nom
+  permission:
+    code: Codi
+    description: Descripció
+    id: ID
+  pricing:
+    volume_based:
+      price: Preu
   product:
     available_on_demand: Disponible sota demanda
     description: Descripció
@@ -228,25 +245,55 @@ sylius:
     variant_selection_method: Mètode de selecció de variant
     volume_based:
       price: Preu
+  product_attribute:
+    code: Codi
+    name: Nom
+  product_association:
+    code: Codi
+    name: Nom
+  product_option:
+    name: Nom
+    presentation: Presentació
   promotion:
     description: Descripció
     id: ID
     name: Nom
   promotion_coupon:
     code: Codi
+  redirect_route:
+    id: ID
+    title: Títol
   report:
-    name: Nom
     code: Codi
     description: Descripció
+    name: Nom
+  role:
+    code: Codi
+    description: Descripció
+    id: ID
+    index_header: Rols
+    name: Nom
+  route:
+    id: ID
+    name: Nom
+    title: Títol
   search: Cerca
+  shipment:
+    id: ID
+    name: Nom
+    sku: SKU
+    update: Editar
   shipping_address: "Adreça d'enviament"
   shipping_category:
     id: ID
     name: Nom
   shipping_method:
+    enabled: Activat
     id: ID
     name: Nom
     zone: Zona
+  stockable:
+    name: Nom
   tax_category:
     description: Descripció
     id: ID
@@ -258,15 +305,11 @@ sylius:
     name: Nom
   taxonomy:
     name: Nom
-  unknown: Desconegut
-  customer:
-    billing_address: Adreça de facturació
+  ui:
+    code: Codi
     email: Correu electrònic
-    first_name: Nom
-    id: ID
-    last_name: Cognoms
-    shipping_address: "Adreça d'enviament"
-    groups: Grups
+    name: Nom
+  unknown: Desconegut
   user:
     id: ID
     username: "Nom d'usuari"
@@ -279,12 +322,3 @@ sylius:
   zone:
     name: Nom
     scope: "Àmbit d'aplicació"
-  contact_topic:
-    id: ID
-    title: Títol
-  contact_request:
-    id: ID
-    firstName: Nom
-    lastName: Cognoms
-    email: Correu electrònic
-    message: Missatge

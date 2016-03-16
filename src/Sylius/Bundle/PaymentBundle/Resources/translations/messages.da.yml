@@ -27,6 +27,3 @@ sylius:
       enabled: Aktiveret?
       gateway: Gateway
       name: Navn
-      fee_calculator:
-        fixed:
-          amount: Beløb

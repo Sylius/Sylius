@@ -1,0 +1,4 @@
+AppBundle\Entity\Book:
+    book{1..22}:
+        title: Book <current()>
+        author: <firstName()> <lastName()>

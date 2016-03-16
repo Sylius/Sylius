@@ -13,12 +13,15 @@ namespace Sylius\Component\User\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\TimestampableTrait;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class Customer implements CustomerInterface, GroupableInterface
 {
+    use TimestampableTrait;
+
     /**
      * @var mixed
      */
@@ -60,28 +63,15 @@ class Customer implements CustomerInterface, GroupableInterface
     protected $gender = CustomerInterface::UNKNOWN_GENDER;
 
     /**
-     * @var Collection
+     * @var Collection|GroupInterface[]
      */
     protected $groups;
 
     /**
-     * @var \DateTime
+     * @var string
      */
-    protected $createdAt;
+    protected $phoneNumber;
 
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $deletedAt;
-
-    /**
-     * Initialize Customer
-     */
     public function __construct()
     {
         $this->groups = new ArrayCollection();
@@ -264,8 +254,8 @@ class Customer implements CustomerInterface, GroupableInterface
      */
     public function getGroupNames()
     {
-        $names = array();
-        foreach ($this->getGroups() as $group) {
+        $names = [];
+        foreach ($this->groups as $group) {
             $names[] = $group->getName();
         }
 
@@ -277,8 +267,8 @@ class Customer implements CustomerInterface, GroupableInterface
      */
     public function addGroup(GroupInterface $group)
     {
-        if (!$this->getGroups()->contains($group)) {
-            $this->getGroups()->add($group);
+        if (!$this->groups->contains($group)) {
+            $this->groups->add($group);
         }
     }
 
@@ -287,65 +277,25 @@ class Customer implements CustomerInterface, GroupableInterface
      */
     public function removeGroup(GroupInterface $group)
     {
-        if ($this->getGroups()->contains($group)) {
-            $this->getGroups()->removeElement($group);
+        if ($this->groups->contains($group)) {
+            $this->groups->removeElement($group);
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getCreatedAt()
+    public function getPhoneNumber()
     {
-        return $this->createdAt;
+        return $this->phoneNumber;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setCreatedAt(\DateTime $createdAt)
+    public function setPhoneNumber($phoneNumber)
     {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDeletedAt()
-    {
-        return $this->deletedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDeletedAt(\DateTime $deletedAt = null)
-    {
-        $this->deletedAt = $deletedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isDeleted()
-    {
-        return (null !== $this->deletedAt) && ((new \DateTime()) >= $this->deletedAt);
+        $this->phoneNumber = $phoneNumber;
     }
 
     public function __toString()

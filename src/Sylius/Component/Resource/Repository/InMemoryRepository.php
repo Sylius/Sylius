@@ -211,7 +211,7 @@ class InMemoryRepository implements RepositoryInterface
         $results = $resources;
 
         foreach ($orderBy as $property => $order) {
-            $sortable = array();
+            $sortable = [];
 
             foreach ($results as $key => $object) {
                 $sortable[$key] = $this->accessor->getValue($object, $property);
@@ -224,7 +224,7 @@ class InMemoryRepository implements RepositoryInterface
                 arsort($sortable);
             }
 
-            $results = array();
+            $results = [];
 
             foreach ($sortable as $key => $propertyValue) {
                 $results[$key] = $resources[$key];

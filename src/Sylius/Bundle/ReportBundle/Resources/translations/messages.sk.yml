@@ -3,16 +3,10 @@
 
 sylius:
   form:
-    rule:
-      item_count_configuration:
-        count: Počet
-        equal: Rovná sa
-      type: Typ
     report:
       name: Názov
       description: Popis
       data_fetcher: Načítanie dát
-      code: Kód
       renderer:
         label: Vykreslenie
         template: Šablóna

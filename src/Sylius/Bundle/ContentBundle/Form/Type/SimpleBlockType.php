@@ -24,37 +24,36 @@ class SimpleBlockType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options = array())
+    public function buildForm(FormBuilderInterface $builder, array $options = [])
     {
         $builder
-            ->add('parentDocument', null, array(
-                'label' => 'sylius.form.simple_block.parent'
-            ))
-            ->add('name', 'text', array(
-                'label' => 'sylius.form.simple_block.internal_name'
-            ))
-            ->add('title', 'text', array(
-                'label' => 'sylius.form.simple_block.title'
-            ))
-            ->add('body', 'textarea', array(
+            ->add('parentDocument', null, [
+                'label' => 'sylius.form.simple_block.parent',
+            ])
+            ->add('name', 'text', [
+                'label' => 'sylius.form.simple_block.internal_name',
+            ])
+            ->add('title', 'text', [
+                'label' => 'sylius.form.simple_block.title',
+            ])
+            ->add('body', 'textarea', [
                 'required' => false,
-                'label'    => 'sylius.form.simple_block.body',
-            ))
-            ->add('publishable', null, array(
-                'label' => 'sylius.form.simple_block.publishable'
-            ))
-            ->add('publishStartDate', 'datetime', array(
+                'label' => 'sylius.form.simple_block.body',
+            ])
+            ->add('publishable', null, [
+                'label' => 'sylius.form.simple_block.publishable',
+            ])
+            ->add('publishStartDate', 'datetime', [
                 'label' => 'sylius.form.simple_block.publish_start_date',
-                'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'empty_value' => /* @Ignore */ ['year' => '-', 'month' => '-', 'day' => '-'],
                 'time_widget' => 'text',
-            ))
-            ->add('publishEndDate', 'datetime', array(
+            ])
+            ->add('publishEndDate', 'datetime', [
                 'label' => 'sylius.form.simple_block.publish_end_date',
-                'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'empty_value' => /* @Ignore */ ['year' => '-', 'month' => '-', 'day' => '-'],
                 'time_widget' => 'text',
-            ))
+            ])
         ;
-
     }
 
     /**

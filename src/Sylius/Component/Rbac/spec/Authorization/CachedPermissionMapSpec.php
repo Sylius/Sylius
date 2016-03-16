@@ -49,7 +49,7 @@ class CachedPermissionMapSpec extends ObjectBehavior
         $role->getCode()->shouldBeCalled()->willReturn('catalog_manager');
 
         $cache->contains('catalog_manager')->shouldBeCalled()->willReturn(true);
-        $cache->fetch('catalog_manager')->shouldBeCalled()->willReturn(array('can_eat_bananas', 'can_smash_bananas'));
+        $cache->fetch('catalog_manager')->shouldBeCalled()->willReturn(['can_eat_bananas', 'can_smash_bananas']);
 
         $this->hasPermission($role, 'can_eat_bananas')->shouldReturn(true);
         $this->hasPermission($role, 'can_eat_oranges')->shouldReturn(false);

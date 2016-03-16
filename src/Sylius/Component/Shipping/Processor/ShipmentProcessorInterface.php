@@ -12,7 +12,7 @@
 namespace Sylius\Component\Shipping\Processor;
 
 use Sylius\Component\Shipping\Model\ShipmentInterface;
-use Sylius\Component\Shipping\Model\ShipmentItemInterface;
+use Sylius\Component\Shipping\Model\ShipmentUnitInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -26,8 +26,8 @@ interface ShipmentProcessorInterface
     public function updateShipmentStates($shipments, $transition);
 
     /**
-     * @param ShipmentItemInterface[] $items
-     * @param string                  $transition ShipmentItemTransitions::*
+     * @param ShipmentUnitInterface[] $units
+     * @param string                  $transition ShipmentUnitTransitions::*
      */
-    public function updateItemStates($items, $transition);
+    public function updateUnitStates($units, $transition);
 }

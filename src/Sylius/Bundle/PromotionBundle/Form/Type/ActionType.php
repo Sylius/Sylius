@@ -28,15 +28,15 @@ class ActionType extends AbstractConfigurationType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options = array())
+    public function buildForm(FormBuilderInterface $builder, array $options = [])
     {
         $builder
-            ->add('type', 'sylius_promotion_action_choice', array(
+            ->add('type', 'sylius_promotion_action_choice', [
                 'label' => 'sylius.form.action.type',
-                'attr' => array(
+                'attr' => [
                     'data-form-collection' => 'update',
-                ),
-            ))
+                ],
+            ])
             ->addEventSubscriber(
                 new BuildActionFormSubscriber($this->registry, $builder->getFormFactory(), $options['configuration_type'])
             )
@@ -50,9 +50,9 @@ class ActionType extends AbstractConfigurationType
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'configuration_type' => ActionInterface::TYPE_FIXED_DISCOUNT,
-        ));
+        ]);
     }
 
     /**

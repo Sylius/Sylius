@@ -12,12 +12,11 @@
 namespace Sylius\Bundle\ApiBundle\Model;
 
 use FOS\OAuthServerBundle\Model\ClientInterface as BaseClientInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
- * API client interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface ClientInterface extends BaseClientInterface
+interface ClientInterface extends BaseClientInterface, ResourceInterface
 {
 }

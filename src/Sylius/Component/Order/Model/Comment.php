@@ -11,6 +11,8 @@
 
 namespace Sylius\Component\Order\Model;
 
+use Sylius\Component\Resource\Model\TimestampableTrait;
+
 /**
  * Order comment.
  *
@@ -18,8 +20,10 @@ namespace Sylius\Component\Order\Model;
  */
 class Comment implements CommentInterface
 {
+    use TimestampableTrait;
+
     /**
-     * @var int
+     * @var mixed
      */
     protected $id;
 
@@ -47,16 +51,6 @@ class Comment implements CommentInterface
      * @var string
      */
     protected $author;
-
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
 
     public function __construct()
     {
@@ -152,37 +146,5 @@ class Comment implements CommentInterface
     public function setAuthor($author)
     {
         $this->author = $author;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
     }
 }

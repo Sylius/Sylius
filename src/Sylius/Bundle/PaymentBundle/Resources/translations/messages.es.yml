@@ -17,6 +17,7 @@ sylius:
         header: Estado del pago
         checkout: Completar pedido
         completed: Completado
+        authorized: Autorizado
         failed: Fallido
         new: Nuevo
         pending: Pendiente
@@ -30,6 +31,3 @@ sylius:
       enabled: Activado?
       gateway: Puerta de Enlace
       name: Nombre
-      fee_calculator:
-        fixed:
-          amount: Cantidad

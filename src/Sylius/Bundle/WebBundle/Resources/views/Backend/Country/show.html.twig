@@ -6,7 +6,7 @@
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
     <li><a href="{{ path('sylius_backend_country_index') }}">{{ 'sylius.breadcrumb.country.index'|trans }}</a></li>
-    <li>{{ country.name }}</li>
+    <li>{{ country.code|sylius_country_name }}</li>
 </ol>
 {% endblock %}
 
@@ -22,34 +22,35 @@
 <table class="table table-bordered table-condensed">
     <thead>
         <tr>
+            <th>{{ 'sylius.ui.code'|trans }}</th>
             <th>{{ 'sylius.country.name'|trans }}</th>
-            <th>{{ 'sylius.country.iso_name'|trans }}</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>{{ country.name }}</td>
-            <td>{{ country.isoName }}</td>
+            <td>{{ country.code }}</td>
+            <td>{{ country.code|sylius_country_name }}</td>
         </tr>
     </tbody>
 </table>
 {% if country.hasProvinces %}
+    <div class="page-header">
+        <h1>{{ 'sylius.province.provinces'|trans|raw }}</h1>
+    </div>
     <table id="provinces" class="table table-bordered table-condensed">
         <thead>
             <tr>
-                <th>{{ 'sylius.province.provinces'|trans }}</th>
-                <th></th>
+                <th>{{ 'sylius.ui.code'|trans }}</th>
+                <th>{{ 'sylius.form.province.name'|trans }}</th>
+                <th>{{ 'sylius.form.province.abbreviation'|trans }}</th>
             </tr>
         </thead>
         <tbody>
             {% for province in country.provinces %}
                 <tr id="{{ province.id }}">
+                    <td>{{ province.code }}</td>
                     <td>{{ province.name }}</td>
-                    <td>
-                        <div class="pull-right">
-                            {{ buttons.delete(path('sylius_backend_province_delete', {'id': province.id, 'countryId' : country.id})) }}
-                        </div>
-                    </td>
+                    <td>{{ province.abbreviation }}</td>
                 </tr>
             {% endfor %}
         </tbody>

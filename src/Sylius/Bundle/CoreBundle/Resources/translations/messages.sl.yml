@@ -3,5 +3,113 @@
 
 sylius:
   form:
+    action:
+      add_product_configuration:
+        price: Cena za enoto
+        quantity: Količina
+        variant: Različica
+      customer_group: Skupina kupcev
+    block:
+      body: Telo
+      id: ID
+      title: Naslov
+    cart:
+      coupon: Kupon
+    checkout:
+      addressing:
+        different_billing_address: Uporabimo drug naslov za dostavo?
+      payment_method: Način plačila
+      shipping_method: Način pošiljanja
+    promotion:
+      channels: Kanal
+    coupon:
+      per_customer_usage_limit: Omejitev uporabe na kupca
+    group:
+      name: Ime
+      roles: Vloge
+    channel:
+      taxonomies: Taksonomije
+      locale_default: Privzeto območje
+      locales: Področne nastavitve
+      currency_default: Privzeta valuta
+      currencies: Valute
+      shipping_methods: Načini dostave
+      payment_methods: Načini plačil
+    image:
+      file: Slika
+    locale:
+      code: Koda
+      enabled: Omogočeno
+    order_filter:
+      created_at_from: Ustvarjeno po
+      created_at_to: Ustvarjeno pred
+      number: Številka
+      total_from: Od
+      total_to: Za
+      payment_state: Stanje plačila
+      channel: Vsi kanali
+    page:
+      body: Telo
+      id: ID
+      title: Naslov
+    product:
+      restricted_zone: Območje z omejitvami
+      shipping_category: Kategorija dostave
+      short_description: Kratek opis
+      variant_selection_method: Način izbora variante
+      main_taxon: Glavni takson
+    product_filter:
+      sku: SKU
+    product_variant:
+      tax_category: Kategorija davka
+    settings:
+      general:
+        currency: Privzeta valuta
+        locale: Jezik
+        tracking_code:
+          Tracking code (for example: Koda Google Analytics)
+      security:
+        enabled: Omogočeno?
+    shipment_filter:
+      created_at_from: Od
+      created_at_to: Za
+      number: Številka naročila
+      shipping_address: Dostava na ime
+      channel: Vsi kanali
+    payment_filter:
+      created_at_from: Od
+      created_at_to: Za
+      number: Številka naročila
+      billing_address: Račun na ime
+      channel: Vsi kanali
     shipping_method:
       zone: Cona
+    user:
+      groups: Skupine
+      roles: Vloge
+      password: Geslo
+      shipping_address: Naslov za dostavo
+    user_filter:
+      query: Iskanje
+    variant:
+      available_on_demand: Na voljo na zahtevo
+      depth: Globina
+      height: Višina
+      images: Slike
+      on_hand: Trenutna zaloga
+      price: Cena
+      original_price: Prvotna cena
+      sku: SKU
+      weight: Teža
+      width: Širina
+    attribute:
+      product_attribute_value:
+        attribute: Atribut
+        value: Vrednost
+    guest:
+      email: E-pošta
+    product_association:
+      product: Povezani izdelek
+      type: Vrsta združenja
+    product_association_type:
+      name: Ime

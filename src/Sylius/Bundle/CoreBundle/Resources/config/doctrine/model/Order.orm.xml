@@ -11,6 +11,7 @@
             <gedmo:versioned />
         </field>
 
+        <field name="exchangeRate" column="exchange_rate" type="decimal" precision="10" scale="5" />
         <field type="string" name="checkoutState" column="checkout_state" />
         <field type="string" name="paymentState" column="payment_state" />
         <field type="string" name="shippingState" column="shipping_state" />
@@ -35,18 +36,12 @@
             <gedmo:versioned />
         </many-to-one>
 
-
-        <many-to-many field="promotionCoupons" target-entity="Sylius\Component\Promotion\Model\CouponInterface">
-            <join-table name="sylius_promotion_coupon_order">
-                <join-columns>
-                    <join-column name="order_id" referenced-column-name="id" />
-                </join-columns>
-                <inverse-join-columns>
-                    <join-column name="promotion_coupon_id" referenced-column-name="id" />
-                </inverse-join-columns>
-            </join-table>
-            <gedmo:versioned />
-        </many-to-many>
+        <one-to-one field="promotionCoupon" target-entity="Sylius\Component\Promotion\Model\CouponInterface">
+            <join-column name="promotion_coupon_id" on-delete="SET NULL" />
+            <cascade>
+                <cascade-persist />
+            </cascade>
+        </one-to-one>
 
         <one-to-many field="payments" target-entity="Sylius\Component\Payment\Model\PaymentInterface" mapped-by="order" orphan-removal="true">
             <cascade>

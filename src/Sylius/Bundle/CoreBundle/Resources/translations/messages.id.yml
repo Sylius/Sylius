@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  checkout:
-    shipping_method:
-      not_blank: Silahkan Pilih metode pengiriman.
   form:
     action:
       add_product_configuration:
@@ -25,6 +22,8 @@ sylius:
     group:
       name: Nama
       roles: Peran
+    channel:
+      currency_default: Mata uang default
     image:
       file: Gambar
     locale:
@@ -42,11 +41,12 @@ sylius:
       restricted_zone: Zona Terbatas
       shipping_category: Kategori Pengiriman
       short_description: Deskripsi singkat
-      tax_category: Kategori Pajak
       variant_selection_method: Metode Pilih Varian
     product_filter:
       name: Nama
       sku: SKU
+    product_variant:
+      tax_category: Kategori Pajak
     settings:
       general:
         currency: Mata uang default
@@ -93,3 +93,5 @@ sylius:
       sku: SKU
       weight: Berat
       width: Lebar
+    product_association_type:
+      name: Nama

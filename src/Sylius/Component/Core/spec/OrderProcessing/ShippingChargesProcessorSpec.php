@@ -45,10 +45,8 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
 
     function it_removes_existing_shipping_adjustments(OrderInterface $order)
     {
-        $order->getShipments()->willReturn(array());
+        $order->getShipments()->willReturn([]);
         $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
-
-        $order->calculateTotal()->shouldBeCalled();
 
         $this->applyShippingCharges($order);
     }
@@ -56,10 +54,8 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
     function it_doesnt_apply_any_shipping_charge_if_order_has_no_shipments(OrderInterface $order)
     {
         $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
-        $order->getShipments()->willReturn(array());
+        $order->getShipments()->willReturn([]);
         $order->addAdjustment(Argument::any())->shouldNotBeCalled();
-
-        $order->calculateTotal()->shouldBeCalled();
 
         $this->applyShippingCharges($order);
     }
@@ -73,7 +69,7 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
         ShippingMethodInterface $shippingMethod
     ) {
         $adjustmentFactory->createNew()->willReturn($adjustment);
-        $order->getShipments()->willReturn(array($shipment));
+        $order->getShipments()->willReturn([$shipment]);
 
         $calculator->calculate($shipment)->willReturn(450);
 
@@ -82,12 +78,10 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
 
         $adjustment->setAmount(450)->shouldBeCalled();
         $adjustment->setType(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
-        $adjustment->setDescription('FedEx')->shouldBeCalled();
+        $adjustment->setLabel('FedEx')->shouldBeCalled();
 
         $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
         $order->addAdjustment($adjustment)->shouldBeCalled();
-
-        $order->calculateTotal()->shouldBeCalled();
 
         $this->applyShippingCharges($order);
     }

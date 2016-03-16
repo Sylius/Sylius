@@ -34,14 +34,14 @@ class RegisterRuleCheckersPassSpec extends ObjectBehavior
         $container->hasDefinition('sylius.registry.shipping_rule_checker')->shouldBeCalled()->willReturn(true);
         $container->getDefinition('sylius.registry.shipping_rule_checker')->shouldBeCalled()->willReturn($ruleChecker);
 
-        $container->findTaggedServiceIds('sylius.shipping_rule_checker')->shouldBeCalled()->willReturn(array(
-            'rule_checker_id' => array(
-                array(
+        $container->findTaggedServiceIds('sylius.shipping_rule_checker')->shouldBeCalled()->willReturn([
+            'rule_checker_id' => [
+                [
                     'type' => 'rule_checker_name',
                     'label' => 'rule_checker_label',
-                )
-            )
-        ));
+                ],
+            ],
+        ]);
 
         $ruleChecker->addMethodCall(
             'register',
@@ -50,7 +50,7 @@ class RegisterRuleCheckersPassSpec extends ObjectBehavior
 
         $container->setParameter(
             'sylius.shipping_rules',
-            array('rule_checker_name' => 'rule_checker_label')
+            ['rule_checker_name' => 'rule_checker_label']
         )->shouldBeCalled();
 
         $this->process($container);

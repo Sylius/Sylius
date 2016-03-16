@@ -23,7 +23,7 @@ class ShipmentTrackingTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('ShipmentTracking', array('sylius'));
+        $this->beConstructedWith('ShipmentTracking', ['sylius']);
     }
 
     function it_is_initializable()
@@ -40,9 +40,9 @@ class ShipmentTrackingTypeSpec extends ObjectBehavior
     {
         $builder->add('tracking', 'text', Argument::type('array'))->shouldBeCalled()->willreturn($builder);
 
-        $this->buildForm($builder, array(
-            'multiple' => true
-        ));
+        $this->buildForm($builder, [
+            'multiple' => true,
+        ]);
     }
 
     function it_has_a_name()

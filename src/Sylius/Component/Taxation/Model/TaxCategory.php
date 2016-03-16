@@ -13,12 +13,15 @@ namespace Sylius\Component\Taxation\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\TimestampableTrait;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class TaxCategory implements TaxCategoryInterface
 {
+    use TimestampableTrait;
+
     /**
      * @var mixed
      */
@@ -39,19 +42,9 @@ class TaxCategory implements TaxCategoryInterface
     protected $description;
 
     /**
-     * @var Collection
+     * @var Collection|TaxRateInterface[]
      */
     protected $rates;
-
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
 
     public function __construct()
     {
@@ -80,7 +73,7 @@ class TaxCategory implements TaxCategoryInterface
      */
     public function getCode()
     {
-         return $this->code;
+        return $this->code;
     }
 
     /**
@@ -159,37 +152,5 @@ class TaxCategory implements TaxCategoryInterface
     public function hasRate(TaxRateInterface $rate)
     {
         return $this->rates->contains($rate);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
     }
 }

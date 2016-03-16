@@ -17,6 +17,7 @@ sylius:
         header: Zahlungsstatus
         checkout: Zur Kasse
         completed: Abgeschlossen
+        authorized: Autorisiert
         failed: Fehlgeschlagen
         new: Neu
         pending: Ausstehend
@@ -30,6 +31,3 @@ sylius:
       enabled: Aktiviert?
       gateway: Schnittstelle
       name: Name
-      fee_calculator:
-        fixed:
-          amount: Anzahl

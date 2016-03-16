@@ -33,7 +33,7 @@ class ProductRepository extends BaseProductRepository
      *
      * @return Pagerfanta
      */
-    public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = array())
+    public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = [])
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
         $queryBuilder
@@ -58,7 +58,7 @@ class ProductRepository extends BaseProductRepository
      *
      * @return Pagerfanta
      */
-    public function createByProductArchetypePaginator(ArchetypeInterface $archetype, array $criteria = array())
+    public function createByProductArchetypePaginator(ArchetypeInterface $archetype, array $criteria = [])
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
         $queryBuilder
@@ -105,7 +105,7 @@ class ProductRepository extends BaseProductRepository
      *
      * @return Pagerfanta
      */
-    public function createFilterPaginator($criteria = array(), $sorting = array(), $deleted = false)
+    public function createFilterPaginator($criteria = [], $sorting = [], $deleted = false)
     {
         $queryBuilder = parent::getCollectionQueryBuilder()
             ->addSelect('variant')
@@ -127,7 +127,7 @@ class ProductRepository extends BaseProductRepository
 
         if (empty($sorting)) {
             if (!is_array($sorting)) {
-                $sorting = array();
+                $sorting = [];
             }
             $sorting['updatedAt'] = 'desc';
         }
@@ -181,7 +181,7 @@ class ProductRepository extends BaseProductRepository
      */
     public function findLatest($limit = 10, ChannelInterface $channel)
     {
-        return $this->findBy(array('channels' => array($channel)), array('createdAt' => 'desc'), $limit);
+        return $this->findBy(['channels' => [$channel], 'enabled' => true], ['createdAt' => 'desc'], $limit);
     }
 
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null)

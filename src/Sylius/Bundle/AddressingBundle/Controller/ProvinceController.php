@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\AddressingBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectRepository;
+use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -21,8 +22,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * Province controller.
- *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
 class ProvinceController extends ResourceController
@@ -39,27 +38,33 @@ class ProvinceController extends ResourceController
      */
     public function choiceFormAction(Request $request)
     {
-        if (!$request->isXmlHttpRequest() || null === $countryId = $request->query->get('countryId')) {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+        if (!$configuration->isHtmlRequest() || null === $countryCode = $request->query->get('countryCode')) {
             throw new AccessDeniedException();
         }
 
-        if (!$country = $this->getCountryRepository()->find($countryId)) {
+        /* @var CountryInterface $country */
+        if (!$country = $this->getCountryRepository()->findOneBy(['code' => $countryCode])) {
             throw new NotFoundHttpException('Requested country does not exist.');
         }
 
         if (!$country->hasProvinces()) {
-            return new JsonResponse(array('content' => false));
+            return new JsonResponse(['content' => false]);
         }
 
         $form = $this->createProvinceChoiceForm($country);
 
-        $content = $this->renderView($this->getConfiguration()->getTemplate('_provinceChoiceForm.html'), array(
-            'form' => $form->createView(),
-        ));
+        $view = View::create()
+            ->setData([
+                'metadata' => $this->metadata,
+                'form' => $form->createView(),
+            ])
+            ->setTemplate($configuration->getTemplate('_provinceChoiceForm.html'))
+        ;
 
-        return new JsonResponse(array(
-            'content' => $content,
-        ));
+        return new JsonResponse([
+            'content' => $this->viewHandler->handle($configuration, $view)->getContent(),
+        ]);
     }
 
     /**
@@ -67,14 +72,14 @@ class ProvinceController extends ResourceController
      */
     public function createNew()
     {
-        $request = $this->getRequest();
+        $request = $this->config->getRequest();
         if (null === $countryId = $request->get('countryId')) {
             throw new NotFoundHttpException('No country given');
         }
 
         $country = $this
             ->getCountryController()
-            ->findOr404($request, array('id' => $countryId))
+            ->findOr404($request, ['id' => $countryId])
         ;
 
         $province = parent::createNew();
@@ -84,8 +89,6 @@ class ProvinceController extends ResourceController
     }
 
     /**
-     * Get country controller.
-     *
      * @return ResourceController
      */
     protected function getCountryController()
@@ -94,8 +97,6 @@ class ProvinceController extends ResourceController
     }
 
     /**
-     * Get country repository.
-     *
      * @return ObjectRepository
      */
     protected function getCountryRepository()
@@ -104,18 +105,16 @@ class ProvinceController extends ResourceController
     }
 
     /**
-     * Create province choice form for given country.
-     *
      * @param CountryInterface $country
      *
      * @return FormInterface
      */
     protected function createProvinceChoiceForm(CountryInterface $country)
     {
-        return $this->get('form.factory')->createNamed('sylius_address_province', 'sylius_province_choice', null, array(
-            'country'     => $country,
-            'label'       => 'sylius.form.address.province',
+        return $this->get('form.factory')->createNamed('sylius_address_province', 'sylius_province_code_choice', null, [
+            'country' => $country,
+            'label' => 'sylius.form.address.province',
             'empty_value' => 'sylius.form.province.select',
-        ));
+        ]);
     }
 }

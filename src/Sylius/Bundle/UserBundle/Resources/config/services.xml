@@ -42,6 +42,8 @@
         <parameter key="sylius.form.type.user_change_password.class">Sylius\Bundle\UserBundle\Form\Type\UserChangePasswordType</parameter>
         <parameter key="sylius.form.type.gender.class">Sylius\Bundle\UserBundle\Form\Type\GenderType</parameter>
 
+        <parameter key="sylius.form.subscriber.guest_customer.class">Sylius\Bundle\UserBundle\Form\EventListener\GuestCustomerFormSubscriber</parameter>
+
         <parameter key="sylius.listener.default_username.class">Sylius\Bundle\UserBundle\EventListener\DefaultUsernameORMListener</parameter>
         <parameter key="sylius.listener.customer_aware.class">Sylius\Bundle\UserBundle\EventListener\CustomerAwareListener</parameter>
         <parameter key="sylius.listener.user_delete.class">Sylius\Bundle\UserBundle\EventListener\UserDeleteListener</parameter>
@@ -52,7 +54,9 @@
         <parameter key="sylius.listener.user_reloader.class">Sylius\Bundle\UserBundle\EventListener\UserReloaderListener</parameter>
         <parameter key="sylius.listener.user_mailer_listener.class">Sylius\Bundle\UserBundle\EventListener\MailerListener</parameter>
 
-        <parameter key="sylius.controller.security.class">Sylius\Bundle\UserBundle\Controller\SecurityController</parameter>
+        <parameter key="sylius.form.event_subscriber.add_user_type.class">Sylius\Bundle\UserBundle\Form\EventSubscriber\AddUserFormSubscriber</parameter>
+
+        <parameter key="sylius.controller.user_security.class">Sylius\Bundle\UserBundle\Controller\SecurityController</parameter>
 
         <parameter key="sylius.user.validator.unique_registered_user.class">Sylius\Bundle\UserBundle\Validator\Constraints\RegisteredUserValidator</parameter>
     </parameters>
@@ -65,7 +69,7 @@
         </service>
 
         <!-- Controllers -->
-        <service id="sylius.controller.security" class="%sylius.controller.security.class%">
+        <service id="sylius.controller.user_security" class="%sylius.controller.user_security.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
@@ -113,8 +117,7 @@
             <tag name="kernel.event_subscriber" />
         </service>
         <service id="sylius.listener.default_username" class="%sylius.listener.default_username.class%">
-            <tag name="doctrine.event_listener" event="prePersist" priority="10" />
-            <tag name="doctrine.event_listener" event="preUpdate" priority="10" />
+            <tag name="doctrine.event_listener" event="onFlush" />
         </service>
         <service id="sylius.listener.user_auto_login" class="%sylius.listener.user_auto_login.class%">
             <argument type="service" id="sylius.security.user_login" />
@@ -188,6 +191,16 @@
         </service>
         <service id="sylius.form.type.gender" class="%sylius.form.type.gender.class%">
             <tag name="form.type" alias="sylius_gender" />
+        </service>
+
+        <!-- Form event subscribers-->
+        <service id="sylius.form.event_subscriber.add_user_type" class="%sylius.form.event_subscriber.add_user_type.class%" />
+
+        <!-- Form listener -->
+        <service id="sylius.form.subscriber.guest_customer" class="%sylius.form.subscriber.guest_customer.class%">
+            <argument type="service" id="sylius.repository.customer" />
+            <argument type="service" id="sylius.factory.customer" />
+            <argument type="service" id="sylius.context.customer" />
         </service>
 
         <!-- Validators -->

@@ -18,26 +18,37 @@ sylius:
       contains_product_configuration:
         variants: Produkty
         exclude: Wyklucz
-      item_count_configuration:
+      cart_quantity_configuration:
         count: Ilość
-        equal: Równe
       item_total_configuration:
         amount: Kwota
-        equal: Równe
       nth_order_configuration:
         nth: N-ty
+      customer_loyalty_configuration:
+        time: Czas
+        unit:
+          days: Dni
+          weeks: Tygodnie
+          months: Miesiące
+          years: Lata
+          header: Jednostka
+        after: Użytkownik utworzony po tym okresie
       shipping_country_configuration:
         country: Kraj
       type: Typ
     coupon:
-      code: Kod
       usage_limit: Limit użycia
+      expires_at: Wygasa dnia
     coupon_generate_instruction:
       amount: Ilość
       usage_limit: Limit użycia
+      expires_at: Wygasa dnia
     promotion:
       actions: Akcje
-      coupon_based: Użyć kuponów?
+      add_action: Dodaj akcje
+      add_rule: Dodaj regułę
+      coupon_based: Z wykorzystaniem kuponów
+      exclusive: Ekskluzywny
       description: Opis
       ends_at: Data zakończenia
       name: Nazwa

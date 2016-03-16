@@ -4,5 +4,8 @@
 sylius:
   form:
     attribute:
-      presentation: Παρουσίαση
+      code: Κώδικος
+      name: Ονομασία
       type: Τύπος
+    attribute_type:
+      configuration: Παραμετροποίηση

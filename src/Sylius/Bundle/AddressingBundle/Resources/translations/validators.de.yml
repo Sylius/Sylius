@@ -9,6 +9,7 @@ sylius:
       not_blank: Bitte geben Sie Ihre Stadt an.
     country:
       not_blank: Bitte wählen Sie Ihr Land aus.
+      disabled: Gewählten Landes ist deaktiviert. Bitte wählen Sie ein anderes.
     first_name:
       max_length: Der Vorname darf nicht länger als 255 Zeichen sein|Der Vorname darf nicht länger als 255 Zeichen sein.
       min_length: Der Vorname muss mindestens 2 Zeichen lang sein|Der Vorname muss mindestens 2 Zeichen lang sein.
@@ -29,16 +30,19 @@ sylius:
       not_blank: Bitte geben Sie Ihre Straße an.
     not_shippable: Diese Adresse ist keine gültige Versandadresse.
   country:
-    iso_name:
+    code:
       not_blank: Bitte geben Sie den ISO Code des Landes an.
-    name:
-      max_length: Der Name des Landes darf nicht länger als 255 Zeichen sein|Der Name des Landes darf nicht länger als 255 Zeichen sein.
-      not_blank: Bitte geben Sie Ihr Land an.
+      unique: ISO-Ländercode muss eindeutig sein.
   province:
+    code:
+      min_length: Der Name des Bundeslandes muss mindestens 5 Zeichen lang sein|Der Name des Bundeslandes muss mindestens 5 Zeichen lang sein.
+      not_blank: Bitte geben Sie den Code des Bundeslandes ein.
+      unique: Bundesland-Code muss eindeutig sein.
     name:
       max_length: Der Name des Bundeslandes darf nicht länger als 255 Zeichen sein|Der Name des Bundeslandes darf nicht länger als 255 Zeichen sein.
       min_length: Der Name des Bundeslandes muss mindestens 2 Zeichen lang sein|Der Name des Bundeslandes muss mindestens 2 Zeichen lang sein.
       not_blank: Bitte geben Sie Ihr Bundesland an.
+      unique: Bundesland-Name muss eindeutig sein.
   zone:
     members:
       min_count: 'Bitte geben Sie mindestens {{ limit }} Versandgebiete an.'

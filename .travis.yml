@@ -20,19 +20,18 @@ addons:
         packages:
             - google-chrome-stable
 
-matrix:
-    include:
-        - php: 5.6
-          services: [memcached, mongodb]
-        - php: 7.0
-          services: [memcached]
-        - php: 5.5
-          services: [memcached, mongodb]
+services:
+    - memcached
+
+php:
+    - 7.0
+    - 5.6
+    - 5.5
 
 before_install:
-    - mkdir -p $SYLIUS_CACHE_DIR
-
     - phpenv config-rm xdebug.ini || true
+
+    - mkdir -p $SYLIUS_CACHE_DIR
 
     - etc/travis/prepare-memcached-extension
 
@@ -40,39 +39,49 @@ before_install:
 
     - composer self-update
 
-    - etc/travis/prepare-composer-doctrine-mongodb-odm
-    - composer install --no-interaction --prefer-dist --no-scripts
+    - if [[ -z "$GITHUB_OAUTH_TOKEN" ]]; then export GITHUB_OAUTH_TOKEN="66736022ed66ebbb2be87027ed45a24554cc8344"; fi
+    - composer config -g github-oauth.github.com "$GITHUB_OAUTH_TOKEN" >/dev/null 2>&1
 
+install:
+    - composer install --no-interaction --prefer-dist --no-scripts
     - composer run-script travis-build --no-interaction
 
 before_script:
-    - phpenv config-add etc/travis/before-install-php.ini
+    - phpenv config-add etc/travis/before-script-php.ini
 
-    - app/console doctrine:database:create --env=test_cached
+    - app/console doctrine:database:create --env=test_cached # have to be run with debug = true, to omit generating proxies before setting up the database
 
     - app/console cache:warmup --env=test_cached --no-debug
 
-    - app/console doctrine:schema:create --env=test_cached
-    - app/console doctrine:phpcr:repository:init --env=test_cached
+    - app/console doctrine:schema:create --env=test_cached --no-debug
+    - app/console doctrine:phpcr:repository:init --env=test_cached --no-debug
 
     - app/console assets:install --env=test_cached --no-debug
     - app/console assetic:dump --env=test_cached --no-debug
 
+    # Debug informations, PHP version & PHP configuration
+    # Its needed to remove the line with secret ariable, as it is listed in _SERVER variables
     - php -v
-    - php -i
+    - php -i | grep -v 'GITHUB_OAUTH_TOKEN\|SYMFONY__'
 
 script:
-    - bin/phpspec run -f dot
+    - composer validate
+
+    - if [[ $TRAVIS_PHP_VERSION = 7.* ]]; then bin/kawaii gherkin:check --align=left features/; fi;
+
+    - bin/phpspec run --no-interaction -f dot
     - bin/phpunit
-    - bin/behat --strict -f progress -p cached
 
     - etc/travis/prepare-javascript
-    - bin/behat --strict -f progress -p javascript_cached || bin/behat --strict -f progress -p javascript_cached --rerun
+    - etc/travis/run-behat
 
 before_cache:
     - yes 'Y' | rm -fr vendor/symfony-cmf/create-bundle/Resources/public/vendor/*
 
 after_failure:
     - export IMGUR_API_KEY=4907fcd89e761c6b07eeb8292d5a9b2a
+
+    - cp app/logs/test_cached.log "$SYLIUS_BUILD_DIR/symfony_app.log"
+
     - vendor/lakion/mink-debug-extension/travis/tools/upload-textfiles "$SYLIUS_BUILD_DIR/*.log"
     - vendor/lakion/mink-debug-extension/travis/tools/upload-screenshots "$SYLIUS_BUILD_DIR/*.png"

@@ -23,14 +23,12 @@ class CustomerRepository extends EntityRepository
     /**
      * Get the customer's data for the details page.
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return null|UserInterface
      */
     public function findForDetailsPage($id)
     {
-        $this->_em->getFilters()->disable('softdeleteable');
-
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
             ->andWhere($queryBuilder->expr()->eq('o.id', ':id'))
@@ -41,7 +39,6 @@ class CustomerRepository extends EntityRepository
             ->getQuery()
             ->getOneOrNullResult()
         ;
-        $this->_em->getFilters()->enable('softdeleteable');
 
         return $result;
     }
@@ -49,18 +46,13 @@ class CustomerRepository extends EntityRepository
     /**
      * @param array $criteria
      * @param array $sorting
-     * @param bool  $deleted
      *
      * @return Pagerfanta
      */
-    public function createFilterPaginator($criteria = array(), $sorting = array(), $deleted = false)
+    public function createFilterPaginator($criteria = [], $sorting = [])
     {
         $queryBuilder = parent::getCollectionQueryBuilder()
             ->leftJoin($this->getPropertyName('user'), 'user');
-
-        if ($deleted) {
-            $this->_em->getFilters()->disable('softdeleteable');
-        }
 
         if (isset($criteria['query'])) {
             $queryBuilder
@@ -80,7 +72,7 @@ class CustomerRepository extends EntityRepository
 
         if (empty($sorting)) {
             if (!is_array($sorting)) {
-                $sorting = array();
+                $sorting = [];
             }
             $sorting['updatedAt'] = 'desc';
         }

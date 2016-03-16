@@ -22,7 +22,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 class OrderShipmentFactory implements OrderShipmentFactoryInterface
 {
     /**
-    * Shipment repository.
+     * Shipment repository.
      *
      * @var FactoryInterface
      */
@@ -50,9 +50,9 @@ class OrderShipmentFactory implements OrderShipmentFactoryInterface
             $order->addShipment($shipment);
         }
 
-        foreach ($order->getInventoryUnits() as $inventoryUnit) {
-            if (null === $inventoryUnit->getShipment()) {
-                $shipment->addItem($inventoryUnit);
+        foreach ($order->getItemUnits() as $itemUnit) {
+            if (null === $itemUnit->getShipment()) {
+                $shipment->addUnit($itemUnit);
             }
         }
     }

@@ -6,12 +6,17 @@ sylius:
     product:
       name: Naam
       description: Omschrijving
+      attributes: Attributen
       options: Opties
       meta_keywords: Meta sleutelwoorden
       meta_description: Meta omschrijving
     product_variant:
       available_on: Beschikbaar op
+      available_until: Beschikbaar tot
     product_archetype:
       name: Naam
       parent: Ouder
+      attributes: Attributen
       options: Opties
+    association_type:
+      name: Naam

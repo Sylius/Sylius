@@ -25,7 +25,7 @@ class ProductTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Product', array('sylius'));
+        $this->beConstructedWith('Product', ['sylius']);
     }
 
     function it_is_initializable()
@@ -58,16 +58,22 @@ class ProductTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $builder
+            ->add('associations', 'collection', Argument::withEntry('type', 'sylius_product_association'))
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+
+        $this->buildForm($builder, []);
     }
 
     function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'data_class' => 'Product',
-                'validation_groups' => array('sylius')
-            ))
+                'validation_groups' => ['sylius'],
+            ])
             ->shouldBeCalled();
 
         $this->configureOptions($resolver);

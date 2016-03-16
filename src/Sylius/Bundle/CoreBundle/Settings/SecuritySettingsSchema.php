@@ -28,12 +28,12 @@ class SecuritySettingsSchema implements SchemaInterface
     public function buildSettings(SettingsBuilderInterface $builder)
     {
         $builder
-            ->setDefaults(array(
+            ->setDefaults([
                 'enabled' => false,
-            ))
-            ->setAllowedTypes(array(
-                'enabled' => array('bool'),
-            ))
+            ])
+            ->setAllowedTypes([
+                'enabled' => ['bool'],
+            ])
         ;
     }
 
@@ -43,9 +43,9 @@ class SecuritySettingsSchema implements SchemaInterface
     public function buildForm(FormBuilderInterface $builder)
     {
         $builder
-            ->add('enabled', 'checkbox', array(
+            ->add('enabled', 'checkbox', [
                 'label' => 'sylius.form.settings.security.enabled',
-            ))
+            ])
         ;
     }
 }

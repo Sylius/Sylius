@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\UserBundle\Controller;
 
+use FOS\RestBundle\View\View;
+use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\UserBundle\Form\Model\ChangePassword;
 use Sylius\Bundle\UserBundle\Form\Model\PasswordReset;
@@ -23,6 +25,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -31,123 +34,125 @@ class UserController extends ResourceController
 {
     public function changePasswordAction(Request $request)
     {
-        $this->denyAccessUnlessGranted(
-            'IS_AUTHENTICATED_REMEMBERED',
-            null,
-            'You have to be registered user to access this section.'
-        );
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
-        $user = $this->getUser();
+        if (!$this->container->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            throw new AccessDeniedException('You have to be registered user to access this section.');
+        }
+
+        $user = $this->container->get('security.context')->getToken()->getUser();
 
         $changePassword = new ChangePassword();
         $formType = $request->attributes->get('_sylius[form]', 'sylius_user_change_password', true);
-        $form = $this->createResourceForm($formType, $changePassword);
+        $form = $this->createResourceForm($configuration, $formType, $changePassword);
 
-        if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
-            return $this->handleChangePassword($user, $changePassword->getNewPassword());
+        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
+            return $this->handleChangePassword($configuration, $user, $changePassword->getNewPassword());
         }
 
-        if ($this->config->isApiRequest()) {
-            return $this->handleView($this->view($form, 400));
+        if (!$configuration->isHtmlRequest()) {
+            return $this->viewHandler->handle(View::create($form, 400));
         }
 
-        return $this->render(
-            $this->config->getTemplate('changePassword.html'),
-            array(
-                'form' => $form->createView(),
-            )
+        return $this->container->get('templating')->renderResponse(
+            $configuration->getTemplate('changePassword.html'),
+            ['form' => $form->createView()]
         );
     }
 
     public function requestPasswordResetTokenAction(Request $request)
     {
-        $generator = $this->get('sylius.user.token_provider');
+        $generator = $this->container->get('sylius.user.token_provider');
 
         return $this->prepareResetPasswordRequest($request, $generator, UserEvents::REQUEST_RESET_PASSWORD_TOKEN);
     }
 
     public function requestPasswordResetPinAction(Request $request)
     {
-        $generator = $this->get('sylius.user.pin_provider');
+        $generator = $this->container->get('sylius.user.pin_provider');
 
         return $this->prepareResetPasswordRequest($request, $generator, UserEvents::REQUEST_RESET_PASSWORD_PIN);
     }
 
     public function resetPasswordAction(Request $request, $token)
     {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $user = $this->findUserByToken($token);
 
         $lifetime = new \DateInterval($this->container->getParameter('sylius.user.resetting.token_ttl'));
         if (!$user->isPasswordRequestNonExpired($lifetime)) {
-            return $this->handleExpiredToken($token, $user);
+            return $this->handleExpiredToken($configuration, $token, $user);
         }
 
         $changePassword = new PasswordReset();
         $formType = $request->attributes->get('_sylius[form]', 'sylius_user_reset_password', true);
-        $form = $this->createResourceForm($formType, $changePassword);
+        $form = $this->createResourceForm($configuration, $formType, $changePassword);
 
-        if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
+        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             return $this->handleResetPassword($user, $changePassword->getPassword());
         }
 
-        if ($this->config->isApiRequest()) {
-            return $this->handleView($this->view($form, 400));
+        if (!$configuration->isHtmlRequest()) {
+            return $this->viewHandler->handle(View::create($form, 400));
         }
 
-        return $this->render(
-            $this->config->getTemplate('resetPassword.html'),
-            array(
+        return $this->container->get('templating')->renderResponse(
+            $configuration->getTemplate('resetPassword.html'),
+            [
                 'form' => $form->createView(),
                 'user' => $user,
-            )
+            ]
         );
     }
 
     protected function prepareResetPasswordRequest(Request $request, TokenProviderInterface $generator, $senderEvent)
     {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
         $passwordReset = new PasswordResetRequest();
         $formType = $request->attributes->get('_sylius[form]', 'sylius_user_request_password_reset', true);
-        $form = $this->createResourceForm($formType, $passwordReset);
+        $form = $this->createResourceForm($configuration, $formType, $passwordReset);
 
-        if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
-            $user = $this->getRepository()->findOneByEmail($passwordReset->getEmail());
+        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
+            $user = $this->repository->findOneByEmail($passwordReset->getEmail());
             if (null !== $user) {
                 $this->handleResetPasswordRequest($generator, $user, $senderEvent);
             }
 
-            if ($this->config->isApiRequest()) {
-                return $this->handleView($this->view($user, 204));
+            if (!$configuration->isHtmlRequest()) {
+                return $this->viewHandler->handle(View::create($user, 204));
             }
+
             $this->addFlash('success', 'sylius.user.reset_password.requested');
 
-            return new RedirectResponse($this->generateUrl('sylius_user_security_login'));
+            return new RedirectResponse($this->container->get('router')->generate('sylius_user_security_login'));
         }
 
-        if ($this->config->isApiRequest()) {
-            return $this->handleView($this->view($form, 400));
+        if (!$configuration->isHtmlRequest()) {
+            return $this->viewHandler->handle(View::create($form, 400));
         }
 
-        return $this->render(
-            $this->config->getTemplate('requestPasswordReset.html'),
-            array(
+        return $this->container->get('templating')->renderResponse(
+            $configuration->getTemplate('requestPasswordReset.html'),
+            [
                 'form' => $form->createView(),
-            )
+            ]
         );
     }
 
     protected function addFlash($type, $message)
     {
-        $translator = $this->get('translator');
-        $this->get('session')->getFlashBag()->add($type, $translator->trans($message, array(), 'flashes'));
+        $translator = $this->container->get('translator');
+        $this->container->get('session')->getFlashBag()->add($type, $translator->trans($message, [], 'flashes'));
     }
 
-    protected function createResourceForm($type, $resource)
+    protected function createResourceForm(RequestConfiguration $configuration, $type, $resource)
     {
-        if ($this->config->isApiRequest()) {
-            return $this->container->get('form.factory')->createNamed('', $type, $resource, array('csrf_protection' => false));
+        if (!$configuration->isHtmlRequest()) {
+            return $this->container->get('form.factory')->createNamed('', $type, $resource, ['csrf_protection' => false]);
         }
 
-        return $this->createForm($type, $resource);
+        return $this->container->get('form.factory')->create($type, $resource);
     }
 
     /**
@@ -156,15 +161,15 @@ class UserController extends ResourceController
      *
      * @return RedirectResponse
      */
-    protected function handleExpiredToken($token, UserInterface $user)
+    protected function handleExpiredToken(RequestConfiguration $configuration, $token, UserInterface $user)
     {
         $user->setConfirmationToken(null);
         $user->setPasswordRequestedAt(null);
 
-        $this->domainManager->update($user);
+        $this->manager->flush();
 
-        if ($this->config->isApiRequest()) {
-            return $this->handleView($this->view($user, 400));
+        if (!$configuration->isHtmlRequest()) {
+            return $this->viewHandler->handle(View::create($user, 400));
         }
 
         $this->addFlash('error', 'sylius.user.password.token_expired');
@@ -186,12 +191,12 @@ class UserController extends ResourceController
         $user->setConfirmationToken($generator->generateUniqueToken());
         $user->setPasswordRequestedAt(new \DateTime());
 
-        /** I have to use doctrine manager directly, because domain manager functions add a flash messages. I can't get rid of them.*/
-        $manager = $this->get('doctrine.orm.default_entity_manager');
+        /* I have to use doctrine manager directly, because domain manager functions add a flash messages. I can't get rid of them.*/
+        $manager = $this->container->get('doctrine.orm.default_entity_manager');
         $manager->persist($user);
         $manager->flush();
 
-        $dispatcher = $this->get('event_dispatcher');
+        $dispatcher = $this->container->get('event_dispatcher');
         $dispatcher->dispatch($senderEvent, new GenericEvent($user));
     }
 
@@ -201,24 +206,25 @@ class UserController extends ResourceController
      *
      * @return RedirectResponse
      */
-    protected function handleResetPassword(UserInterface $user, $newPassword)
+    protected function handleResetPassword(RequestConfiguration $configuration, UserInterface $user, $newPassword)
     {
         $user->setPlainPassword($newPassword);
         $user->setConfirmationToken(null);
         $user->setPasswordRequestedAt(null);
 
-        $dispatcher = $this->get('event_dispatcher');
+        $dispatcher = $this->container->get('event_dispatcher');
         $dispatcher->dispatch(UserEvents::PRE_PASSWORD_RESET, new GenericEvent($user));
 
-        $this->domainManager->update($user, 'sylius.user.password.reset.success');
+        $this->manager->flush();
+        $this->addFlash('success', 'sylius.user.password.reset.success');
 
         $dispatcher->dispatch(UserEvents::POST_PASSWORD_RESET, new GenericEvent($user));
 
-        if ($this->config->isApiRequest()) {
-            return $this->handleView($this->view($user, 204));
+        if (!$configuration->isHtmlRequest()) {
+            return $this->viewHandler->handle(View::create($user, 204));
         }
 
-        return new RedirectResponse($this->generateUrl('sylius_user_security_login'));
+        return new RedirectResponse($this->container->get('router')->generate('sylius_user_security_login'));
     }
 
     /**
@@ -227,22 +233,23 @@ class UserController extends ResourceController
      *
      * @return RedirectResponse
      */
-    protected function handleChangePassword(UserInterface $user, $newPassword)
+    protected function handleChangePassword(RequestConfiguration $configuration, UserInterface $user, $newPassword)
     {
         $user->setPlainPassword($newPassword);
 
-        $dispatcher = $this->get('event_dispatcher');
+        $dispatcher = $this->container->get('event_dispatcher');
         $dispatcher->dispatch(UserEvents::PRE_PASSWORD_CHANGE, new GenericEvent($user));
 
-        $this->domainManager->update($user, 'sylius.user.password.change.success');
+        $this->manager->flush();
+        $this->addFlash('success', 'sylius.user.password.change.success');
 
         $dispatcher->dispatch(UserEvents::POST_PASSWORD_CHANGE, new GenericEvent($user));
 
-        if ($this->config->isApiRequest()) {
-            return $this->handleView($this->view($user, 204));
+        if (!$configuration->isHtmlRequest()) {
+            return $this->viewHandler->handle(View::create($user, 204));
         }
 
-        return new RedirectResponse($this->generateUrl('sylius_account_profile_show'));
+        return new RedirectResponse($this->container->get('router')->generate('sylius_account_profile_show'));
     }
 
     /**
@@ -254,7 +261,7 @@ class UserController extends ResourceController
      */
     protected function findUserByToken($token)
     {
-        $user = $this->getRepository()->findOneBy(array('confirmationToken' => $token));
+        $user = $this->repository->findOneBy(['confirmationToken' => $token]);
         if (null === $user) {
             throw new NotFoundHttpException('This token does not exist');
         }
@@ -269,10 +276,12 @@ class UserController extends ResourceController
      */
     protected function generateResetPasswordRequestUrl($token)
     {
+        $router = $this->container->get('router');
+
         if (is_numeric($token)) {
-            return $this->generateUrl('sylius_user_request_password_reset_pin');
+            return $router->generate('sylius_user_request_password_reset_pin');
         }
 
-        return $this->generateUrl('sylius_user_request_password_reset_token');
+        return $router->generate('sylius_user_request_password_reset_token');
     }
 }

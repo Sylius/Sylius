@@ -4,21 +4,21 @@
 sylius:
   product:
     sku:
-      not_blank: Prosím, zadajte kód produktu.
-      unique: Kód produktu musí byť unikátny.
+      not_blank: Prosím, zadajte skladový kód (SKU) produktu.
+      unique: Skladový kód produktu (SKU) musí byť unikátny.
     name:
       not_blank: Prosím, zadajte názov produktu.
       min_length: 'Názov produktu musí mať aspoň 1 znak. | Názov produktu musí mať aspoň {{ limit }} znakov.'
       max_length: 'Názov produktu nesmie byť dlhší než 1 znak. | Názov produktu nesmie byť dlhší než {{ limit }} znakov.'
-    description:
-      not_blank: Prosím, zadajte popis produktu.
-      min_length: 'Popis produktu musí obsahovať aspoň 1 znak. | Názov produktu musí mať aspoň {{ limit }} znakov.'
   variant:
     sku:
-      not_blank: Prosím, zadajte kód varianty.
-      unique: Kód variácie musí byť unikátny.
+      not_blank: Prosím, zadajte skladový kód (SKU) variantu.
+      unique: Skladový kód (SKU) variantu musí byť unikátny.
   archetype:
     name:
-      not_blank: Zadajte názov produktového prototypu.
+      not_blank: Zadajte názov prototypu.
       min_length: 'Názov produktového prototypu musí byť mať aspoň 1 znak. | Názov produktového prototypu musí mať aspoň {{ limit }} znakov.'
       max_length: 'Názov produktového prototypu nesmie byť dlhší než 1 znak. | Názov produktového prototypu nesmie byť dlhší než {{ limit }} znakov.'
+    code:
+      unique: Produktový prototyp zo zadaným kódom už existuje.
+      not_blank: Prosím, zadajte kód.

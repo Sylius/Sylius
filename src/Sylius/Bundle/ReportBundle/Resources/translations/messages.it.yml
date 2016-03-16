@@ -6,6 +6,14 @@ sylius:
     report:
       name: Nome
       description: Descrizione
-      code: Codice
+      data_fetcher: Dati Fetcher
+      renderer:
+        label: Renderer
+        template: Modello
       chart:
         type: Tipo
+      user_registration:
+        start: Data di inizio
+        end: Data di fine
+        period: Periodo di tempo
+        empty_records: Stampare i record vuoti?

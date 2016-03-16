@@ -10,10 +10,3 @@ sylius:
       permalink: Permalink
     taxonomy:
       name: Názov
-  taxon:
-    create_taxon: Vytvoriť kategóriu
-    delete_taxonomy: Odstrániť triedenie
-    manage_taxonomies: Spravovať triedenia
-    no_taxonomies: Neexistujú žiadne triedenia na zobrazenie.
-    no_taxons: Neexistujú žiadne kategórie na zobrazenie.
-    update_taxonomy: Upraviť triedenie

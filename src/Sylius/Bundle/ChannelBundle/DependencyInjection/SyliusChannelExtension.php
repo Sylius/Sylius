@@ -35,9 +35,13 @@ class SyliusChannelExtension extends AbstractResourceExtension
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $configFiles = array(
+        $configFiles = [
             'services.xml',
-        );
+        ];
+
+        if ($config['fake_channel_support']) {
+            $configFiles[] = 'fake_channel.xml';
+        }
 
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);

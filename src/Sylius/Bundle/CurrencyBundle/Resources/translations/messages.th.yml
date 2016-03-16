@@ -4,6 +4,5 @@
 sylius:
   form:
     currency:
-      code: รหัส
       exchange_rate: อัตราแลกเปลี่ยน
       enabled: เปิดใช้งานแล้ว

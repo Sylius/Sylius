@@ -7,8 +7,11 @@ sylius:
       not_exist: "Cet email n'est associé avec aucun utilisateur."
     password:
       invalid: Le mot de passe actuel est invalide.
+      request:
+        success: Nous vous envoyons un e-mail avec les instructions pour réinitialiser votre mot de passe!
       reset:
         success: Votre mot de passe a été réinitialisé avec succès !
-        failed: Echec de la réinitialisation du mot de passe.
       change:
         success: Votre mot de passe a été mise à jour avec succès !
+    reset_password:
+      requested: "Si l'email que vous avez spécifié existe dans notre système, vous recevrez un message avec les instructions pour réinitialiser votre mot de passe."

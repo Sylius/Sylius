@@ -1,0 +1,37 @@
+framework:
+    secret:          test
+    router:
+        resource: "%kernel.root_dir%/%kernel.test_case%/routing.yml"
+    csrf_protection: ~
+    templating:
+        engines: ['twig']
+    default_locale:  en
+    trusted_hosts:   ~
+    trusted_proxies: ~
+    session:
+        handler_id:  ~
+    fragments:       ~
+    http_method_override: true
+    test: ~
+    translator: { fallback: [en] }
+    form: ~
+
+twig:
+    debug:            false
+    strict_variables: false
+
+sylius_theme:
+    sources:
+        filesystem:
+            locations:
+                - "%kernel.root_dir%/../../Fixtures/themes"
+
+doctrine:
+    dbal:
+        driver: pdo_sqlite
+        path: "%kernel.root_dir%/cache/db.sql"
+        charset: UTF8
+    orm:
+        entity_managers:
+            default:
+                auto_mapping: true

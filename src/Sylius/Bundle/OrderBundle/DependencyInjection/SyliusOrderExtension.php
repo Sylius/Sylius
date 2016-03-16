@@ -15,10 +15,9 @@ use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceE
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Sylius orders system extension.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SyliusOrderExtension extends AbstractResourceExtension
@@ -33,13 +32,18 @@ class SyliusOrderExtension extends AbstractResourceExtension
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $configFiles = array(
+        $configFiles = [
             'services.xml',
-            sprintf('driver/%s.xml', $config['driver'])
-        );
+            'templating.xml',
+            'twig.xml',
+            sprintf('driver/%s.xml', $config['driver']),
+        ];
 
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
         }
+
+        $orderItemType = $container->getDefinition('sylius.form.type.order_item');
+        $orderItemType->addArgument(new Reference('sylius.form.data_mapper.order_item_quantity'));
     }
 }

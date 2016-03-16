@@ -7,6 +7,9 @@ sylius:
       not_blank: Proszę podać nazwę atrybutu.
       min_length: 'Nazwa atrybutu musi mieć co najmniej 1 znak.|Nazwa atrybutu musi mieć co najmniej {{ limit }} znaków.'
       max_length: 'Nazwa atrybutu nie może mieć więcej niż 1 znak.|Nazwa atrybutu nie może mieć więcej niż {{ limit }} znaków.'
+    code:
+      not_blank: Proszę podać kod atrybutu.
+      unique: Ten kod jest już w użyciu.
     presentation:
       not_blank: Proszę wprowadzić opis atrybutu.
       min_length: 'Opis atrybutu musi zawierać co najmniej 1 znak.|Opis atrybutu musi zawierać co najmniej {{ limit }} znaków.'

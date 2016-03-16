@@ -13,11 +13,6 @@ sylius:
     price:
       min: El precio no debe ser negativo.
       not_blank: Por favor, introduzca el precio.
-sylius_shipping:
-  method:
-    zone:
-      not_blank: Por favor introduzca la zona del método de envío.
-sylius_taxation:
-  rate:
-    zone:
-      not_blank: Por favor introduzca la zona fiscal.
+  product_translation:
+    short_description:
+      max: 'Breve descripción. No debe superar {{ limit }} caractéres.'

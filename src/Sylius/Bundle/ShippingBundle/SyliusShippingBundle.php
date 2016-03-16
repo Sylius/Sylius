@@ -17,7 +17,7 @@ use Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler\RegisterCalculator
 use Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler\RegisterRuleCheckersPass;
 use Sylius\Component\Shipping\Model\RuleInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
-use Sylius\Component\Shipping\Model\ShipmentItemInterface;
+use Sylius\Component\Shipping\Model\ShipmentUnitInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -38,9 +38,9 @@ class SyliusShippingBundle extends AbstractResourceBundle
      */
     public static function getSupportedDrivers()
     {
-        return array(
+        return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        );
+        ];
     }
 
     /**
@@ -59,13 +59,13 @@ class SyliusShippingBundle extends AbstractResourceBundle
      */
     protected function getModelInterfaces()
     {
-        return array(
-            ShipmentInterface::class         => 'sylius.model.shipment.class',
-            ShipmentItemInterface::class     => 'sylius.model.shipment_item.class',
+        return [
+            ShipmentInterface::class => 'sylius.model.shipment.class',
+            ShipmentUnitInterface::class => 'sylius.model.shipment_unit.class',
             ShippingCategoryInterface::class => 'sylius.model.shipping_category.class',
-            ShippingMethodInterface::class   => 'sylius.model.shipping_method.class',
-            RuleInterface::class             => 'sylius.model.shipping_method_rule.class',
-        );
+            ShippingMethodInterface::class => 'sylius.model.shipping_method.class',
+            RuleInterface::class => 'sylius.model.shipping_method_rule.class',
+        ];
     }
 
     /**

@@ -10,10 +10,12 @@ sylius:
       not_blank: Por favor introduzca el nombre del producto.
       min_length: 'El nombre del producto debe tener al menos 1 carácter.|El nombre de producto debe tener al menos {{ limit }} caracteres.'
       max_length: 'El nombre de producto debe tener como máximo 1 carácter.|El nombre de producto no debe tener más de {{ limit }} caracteres.'
-    description:
-      not_blank: Por favor introduzca la descripción del producto.
-      min_length: 'La descripción de producto debe tener al menos 1 carácter.|La descripción de producto debe tener al menos {{ limit }} caracteres.'
   variant:
     sku:
       not_blank: Por favor introduzca el SKU de la variante.
       unique: El SKU de la variante debe ser único.
+  archetype:
+    name:
+      not_blank: Por favor, introduzca nombre prototipo.
+      min_length: 'El nombre del prototipo debe tener al menos 1 carácter.|El nombre del prototipo debe tener al menos {{ limit }} caracteres.'
+      max_length: 'El nombre del prototipo debe tener como máximo 1 carácter.|El nombre del prototipo no debe ser más largo de {{ limit }} caracteres.'

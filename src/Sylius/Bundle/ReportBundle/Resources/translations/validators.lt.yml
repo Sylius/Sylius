@@ -10,6 +10,5 @@ sylius:
     description:
       not_blank: Ataskaitos aprašymas negali būti tuščias
     code:
-      not_blank: Ataskaitos kodas negali būti tuščias
-      in_use: Šis kodas jau naudojamas.
+      unique: Šis kodas jau naudojamas.
       single_word: Ataskaitos kodas turėtų būti iš vieno žodžio.

@@ -13,7 +13,6 @@ sylius:
         payment:
             amount: Payment amount
             method: Payment method
-            fee_calculator: Fee calculator
             state:
                 header: Payment state
                 checkout: Checkout
@@ -32,8 +31,3 @@ sylius:
             enabled: Enabled?
             gateway: Gateway
             name: Name
-            fee_calculator:
-                fixed:
-                    amount: Amount
-                percent:
-                    percent: %

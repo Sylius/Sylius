@@ -34,11 +34,10 @@
     "require": {
         "php": "^5.5.9|^7.0",
 
-        "sylius/user": "0.16.*",
-        "sylius/cart": "0.16.*",
-        "sylius/resource-bundle": "0.16.*",
-        "sylius/mailer-bundle": "0.16.*",
-        "symfony/framework-bundle": "^2.7.5",
+        "sylius/user": "0.17.*",
+        "sylius/resource-bundle": "0.17.*",
+        "sylius/mailer-bundle": "0.17.*",
+        "symfony/framework-bundle": "^2.7.7",
         "hwi/oauth-bundle": "~0.3"
     },
     "require-dev": {
@@ -57,7 +56,7 @@
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.16-dev"
+            "dev-master": "0.17-dev"
         }
     }
 }

@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_product_review:
+    path: /products/{productId}/reviews/new
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.product_review:createAction
+        _sylius:
+            template: 'SyliusWebBundle:Frontend/Review:_form.html.twig'
+            factory:
+                method: createForSubject
+                arguments: [$productId]
+            permission: false
+            form: sylius_product_review
+        _format: json

@@ -23,7 +23,6 @@
         </id>
 
         <field name="code" column="code" type="string" unique="true" />
-        <field name="value" column="value" type="string" />
     </mapped-superclass>
 
 </doctrine-mapping>

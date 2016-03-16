@@ -1,8 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-auto: auto
-route: percorso
 sylius:
   form:
     action_block:
@@ -10,15 +8,20 @@ sylius:
       id: ID
       publish_end_date: Data di fine pubblicazione
       publish_start_date: Data di inizio pubblicazione
+      publishable: Pubblicato
     imagine_block:
       filter: Filtri
       image: Immagine
       internal_name: Nome interno
       label: Etichetta
+      link_url: URL Link
       parent: Genitore
       publish_end_date: Data di fine pubblicazione
       publish_start_date: Data di inizio pubblicazione
+      publishable: Pubblicato
+      slideshow_small: Slideshow piccola (lato)
       slideshow_medium: Slideshow medio (contenuto)
+      slideshow_large: Slideshow larga (larghezza completa)
     menu:
       childrens: Figli
       display: Mostra
@@ -28,6 +31,7 @@ sylius:
       parent: Genitore
       publish_end_date: Data di fine pubblicazione
       publish_start_date: Data di inizio pubblicazione
+      publishable: Pubblicato
       route: Percorso
       uri: URI
     menu_block:
@@ -36,6 +40,7 @@ sylius:
       name: Nome
       publish_end_date: Data di fine pubblicazione
       publish_start_date: Data di inizio pubblicazione
+      publishable: Pubblicato
     menu_node_block:
       content: Contenuto
       display: Mostra
@@ -45,6 +50,7 @@ sylius:
       link_type: Tipo di Link
       publish_end_date: Data di fine pubblicazione
       publish_start_date: Data di inizio pubblicazione
+      publishable: Pubblicato
       route: Percorso
       uri: URI
     redirect_route:
@@ -57,6 +63,7 @@ sylius:
       id: ID
       publish_end_date: Data di fine pubblicazione
       publish_start_date: Data di inizio pubblicazione
+      publishable: Pubblicato
       title: Titolo
     route:
       content: Contenuto
@@ -68,13 +75,16 @@ sylius:
       parent: Genitore
       publish_end_date: Data di fine pubblicazione
       publish_start_date: Data di inizio pubblicazione
+      publishable: Pubblicato
       title: Titolo
     slideshow_block:
+      add_slide: Aggiungi diapositiva
       childrens: Figli
       internal_name: Nome interno
       parent: Genitore
       publish_end_date: Data di fine pubblicazione
       publish_start_date: Data di inizio pubblicazione
+      publishable: Pubblicato
       title: Titolo
     static_content:
       body: Testo
@@ -84,6 +94,7 @@ sylius:
       parent: Genitore
       publish_end_date: Data di fine pubblicazione
       publish_start_date: Data di inizio pubblicazione
+      publishable: Pubblicato
       routes: Rotte
       title: Titolo
     string_block:
@@ -92,3 +103,4 @@ sylius:
       name: Nome
       publish_end_date: Data di fine pubblicazione
       publish_start_date: Data di inizio pubblicazione
+      publishable: Pubblicato

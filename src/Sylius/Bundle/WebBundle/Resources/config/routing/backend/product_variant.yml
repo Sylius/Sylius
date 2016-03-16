@@ -8,6 +8,9 @@ sylius_backend_product_variant_create:
         _controller: sylius.controller.product_variant:createAction
         _sylius:
             template: SyliusWebBundle:Backend/ProductVariant:create.html.twig
+            factory:
+                method: createForProductWithId
+                arguments: $productId
             redirect:
                 route: sylius_backend_product_show
                 parameters: {'id': $productId}

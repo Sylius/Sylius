@@ -13,7 +13,6 @@ namespace Sylius\Component\Promotion\Checker;
 
 use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionCouponAwareSubjectInterface;
-use Sylius\Component\Promotion\Model\PromotionCouponsAwareSubjectInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Model\RuleInterface;
@@ -97,7 +96,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
      * @param PromotionInterface        $promotion
      * @param RuleInterface             $rule
      *
-     * @return Boolean
+     * @return bool
      */
     protected function isEligibleToRule(PromotionSubjectInterface $subject, PromotionInterface $promotion, RuleInterface $rule)
     {
@@ -116,12 +115,6 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
             if (null !== $coupon && $promotion === $coupon->getPromotion()) {
                 $this->dispatcher->dispatch(SyliusPromotionEvents::COUPON_NOT_ELIGIBLE, new GenericEvent($promotion));
             }
-        } elseif ($subject instanceof PromotionCouponsAwareSubjectInterface) {
-            foreach ($subject->getPromotionCoupons() as $coupon) {
-                if ($promotion === $coupon->getPromotion()) {
-                    $this->dispatcher->dispatch(SyliusPromotionEvents::COUPON_NOT_ELIGIBLE, new GenericEvent($promotion));
-                }
-            }
         }
 
         return false;
@@ -132,7 +125,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
      *
      * @param PromotionInterface $promotion
      *
-     * @return Boolean
+     * @return bool
      */
     protected function isEligibleToDates(PromotionInterface $promotion)
     {
@@ -158,7 +151,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
      *
      * @param PromotionInterface $promotion
      *
-     * @return Boolean
+     * @return bool
      */
     protected function isEligibleToUsageLimit(PromotionInterface $promotion)
     {
@@ -186,14 +179,6 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
             $coupon = $subject->getPromotionCoupon();
             if (null !== $coupon && $promotion === $coupon->getPromotion()) {
                 $eligible = true;
-            }
-        } elseif ($subject instanceof PromotionCouponsAwareSubjectInterface) {
-            foreach ($subject->getPromotionCoupons() as $coupon) {
-                if ($promotion === $coupon->getPromotion()) {
-                    $eligible = true;
-
-                    break;
-                }
             }
         } else {
             return false;

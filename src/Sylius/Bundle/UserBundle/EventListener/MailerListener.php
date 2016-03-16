@@ -67,10 +67,10 @@ class MailerListener
         }
 
         $this->emailSender->send($emailCode,
-            array($user->getEmail()),
-            array(
+            [$user->getEmail()],
+            [
                 'user' => $user,
-            )
+            ]
         );
     }
 }

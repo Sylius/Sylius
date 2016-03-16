@@ -1,3 +1,5 @@
+/.php_cs.cache
+
 /app/*.cache
 /app/cache
 /app/logs
@@ -9,15 +11,21 @@
 /app/config/*.local.yml
 
 /web/bundles
-/web/css
-/web/js
+/web/assets/css
+/web/assets/js
+/web/assets/fonts
+/web/assets/img
 /web/assets/compiled
 /web/media
+/web/css
+/web/js
 
 /bin/*
 !/bin/install
 !/bin/sylius-cs-fixer
+
 /vendor
+/node_modules
 
 /etc/build/*
 !/etc/build/.gitkeep

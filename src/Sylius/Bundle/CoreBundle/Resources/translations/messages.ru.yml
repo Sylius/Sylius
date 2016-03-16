@@ -2,15 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  checkout:
-    shipping_method:
-      not_blank: Пожалуйста, выберите метод доставки.
   form:
     action:
       add_product_configuration:
         price: Цена
         quantity: Количество
         variant: Вариант
+      customer_group: Группа клиента
     block:
       body: Содержание
       id: ID
@@ -22,12 +20,19 @@ sylius:
         different_billing_address: Использовать другой адрес для составления счета?
       payment_method: Способ оплаты
       shipping_method: Способ доставки
+    promotion:
+      channels: Канал
+    coupon:
+      per_customer_usage_limit: Лимит использования на клиента
     group:
       name: Название
       roles: Роли
     channel:
       taxonomies: Список каталогов
+      locale_default: Локаль по умолчанию
       locales: Языки
+      currency_default: Валюта по умолчанию
+      currencies: Валюты
       shipping_methods: Список способов доставки
       payment_methods: Список методов оплаты
     image:
@@ -42,6 +47,7 @@ sylius:
       total_from: От
       total_to: До
       payment_state: Статус платежа
+      channel: Все каналы
     page:
       body: Содержание
       id: ID
@@ -50,11 +56,13 @@ sylius:
       restricted_zone: Зона ограничений
       shipping_category: Категория доставки
       short_description: Короткое описание
-      tax_category: Налоговая категория
       variant_selection_method: Метод выбора вариантов
+      main_taxon: Основной таксон
     product_filter:
       name: Название
       sku: Идентификатор товарной позиции
+    product_variant:
+      tax_category: Категория налогов
     settings:
       general:
         currency: Валюта по умолчанию
@@ -62,17 +70,24 @@ sylius:
         meta_description: Описание метаданных
         meta_keywords: Ключевые слова метаданных
         title: Заголовок страницы
+        tracking_code:
+          Tracking code (for example: Трекинг код (например код для Google Analytics)
       taxation:
         default_tax_zone: Налоговая зона по умолчанию
+      security:
+        enabled: Включить?
     shipment_filter:
       created_at_from: От
       created_at_to: До
       number: Номер заказа
       shipping_address: Имя получателя
+      channel: Все каналы
     payment_filter:
       created_at_from: От
       created_at_to: До
       number: Номер заказа
+      billing_address: Счет на имя
+      channel: Все каналы
     shipping_method:
       zone: Зона
     taxon:
@@ -98,11 +113,18 @@ sylius:
       images: Изображения
       on_hand: Количество на складе
       price: Цена
+      original_price: Исходная цена
       sku: Идентификатор товарной позиции
       weight: Вес
       width: Ширина
     attribute:
       product_attribute_value:
+        attribute: Атрибут
         value: Значение
     guest:
       email: Email
+    product_association:
+      product: Связанные продукты
+      type: Типы взаимосвязи
+    product_association_type:
+      name: Название

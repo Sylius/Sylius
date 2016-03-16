@@ -5,104 +5,114 @@ sylius:
   backend:
     menu:
       main:
+        api_clients: API klienti
+        archetypes: Produktové prototypy
+        association_types: Priradenie produktov
         assortment: Sortiment
+        attributes: Produktové vlastnosti
         blocks: Bloky
-        configuration: Konfigurácia
-        countries: Krajiny
-        customer: Zákazník
-        content: Obsah
         channels: Kanály
-        dashboard: Nástenka
+        configuration: Konfigurácia
+        contact_requests: Žiadosti
+        contact_topics: Témy
+        content: Obsah
+        countries: Krajiny
         currencies: Meny
+        customer: Zákazník
+        customers: Zákazníci
+        dashboard: Administračný panel
+        emails: E-maily
         general_settings: Základné nastavenia
-        groups: Skupiny
+        groups: Zákaznícke skupiny
         homepage: Zobraziť obchod
         locales: Jazyky
-        new_order: Pridať novú objednávku
-        new_promotion: Pridať novú akciu
-        options: Produktové voľby
-        orders: Aktuálne objednávky
-        pages: Stránky
-        payment_methods: Spôsoby platby
-        payments: Platby
-        products: Produkty
-        promotions: Akcie
-        attributes: Produktové vlastnosti
-        archetypes: Produktové prototypy
-        sales: Objednávky
-        shipments: Zásielky
-        shipping_categories: Kategórie doručenia
-        shipping_methods: Spôsoby doručenia
-        stockables: Skladové zásoby
-        tax_categories: Kategórie zdaňovania
-        tax_rates: Daňové sadzby
-        taxation_settings: Nastavenie zdaňovania
-        taxonomies: Kategorizácia
-        customers: Zákazníci
-        zones: Zóny
-        emails: E-maily
-        roles: Rola
-        permissions: Oprávnenia
-        report: Reporty
-      sidebar:
-        api_clients: API klienti
-        assortment: Sortiment
-        blocks: Bloky
-        configuration: Konfigurácia
-        content: Obsah
-        countries: Krajiny
-        channels: Kanály
-        customer: Zákazník
-        dashboard: Nástenka
-        currencies: Meny
-        general_settings: Základné nastavenia
-        groups: Skupiny
-        homepage: Naspäť na stránku
-        locales: Jazyky
-        new_order: Pridať novú objednávku
-        new_promotion: Pridať novú akciu
-        options: Produktové voľby
-        orders: Aktuálne objednávky
-        pages: Stránky
-        routes: Trasy
-        redirects: Presmerovania
+        marketing: Marketing
         menus: Menu
+        new_order: Pridať novú objednávku
+        new_promotion: Pridať novú akciu
+        options: Produktové voľby
+        orders: Aktuálne objednávky
+        pages: Stránky
         payment_methods: Spôsoby platby
         payments: Platby
+        permissions: Oprávnenia
         products: Produkty
         promotions: Akcie
         report: Reporty
-        attributes: Produktové vlastnosti
-        archetypes: Produktové prototypy
+        roles: Role
+        routes: URL cesty
         sales: Objednávky
-        security_settings: Bezpečnostné nastavenia
+        security_settings: Nastavenia bezpečnosti
         shipments: Zásielky
         shipping_categories: Kategórie doručenia
         shipping_methods: Spôsoby doručenia
         slideshow: Prezentácia
         stockables: Skladové zásoby
-        tax_categories: Kategórie zdaňovania
+        support: Podpora
+        tax_categories: Daňové kategórie
         tax_rates: Daňové sadzby
         taxation_settings: Nastavenie zdaňovania
         taxonomies: Kategorizácia
-        customers: Zákazníci
         zones: Zóny
-        emails: E-maily
-        roles: Rola
-        permissions: Oprávnenia
-        marketing: Marketing
-        support: Podpora
+      sidebar:
+        api_clients: API klienti
+        archetypes: Produktové prototypy
+        assortment: Sortiment
+        attributes: Produktové vlastnosti
+        blocks: Bloky
+        channels: Kanály
+        configuration: Konfigurácia
         contact_requests: Žiadosti
         contact_topics: Témy
+        content: Obsah
+        countries: Krajiny
+        currencies: Meny
+        customer: Zákazník
+        customers: Zákazníci
+        dashboard: Nástenka
+        emails: E-maily
+        general_settings: Základné nastavenia
+        groups: Zákaznícke skupiny
+        homepage: Naspäť na stránku
+        locales: Jazyky
+        marketing: Marketing
+        menus: Menu
+        new_order: Pridať novú objednávku
+        new_promotion: Pridať novú akciu
+        options: Produktové voľby
+        orders: Aktuálne objednávky
+        pages: Stránky
+        payment_methods: Spôsoby platby
+        payments: Platby
+        permissions: Oprávnenia
+        products: Produkty
+        promotions: Akcie
+        redirects: Presmerovania
+        report: Reporty
+        roles: Role
+        routes: URL cesty
+        sales: Objednávky
+        security_settings: Nastavenia bezpečnosti
+        shipments: Zásielky
+        shipping_categories: Kategórie doručenia
+        shipping_methods: Spôsoby doručenia
+        slideshow: Prezentácia
+        stockables: Skladové zásoby
+        support: Podpora
+        tax_categories: Daňové kategórie
+        tax_rates: Daňové sadzby
+        taxation_settings: Nastavenie zdaňovania
+        taxonomies: Kategorizácia
+        zones: Zóny
   frontend:
     menu:
       account:
         addresses: Môj adresár
-        homepage: Domov
+        homepage: Úvod
         orders: Moje objednávky / moje faktúry
         password: Moje heslo
         profile: Moje osobné údaje
-        shop: Späť na obchod
+        shop: Späť do obchodu
       currency: 'Zobraziť ceny v %currency%'
       main:
         account: Môj účet

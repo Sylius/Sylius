@@ -10,10 +10,12 @@ sylius:
       not_blank: Lütfen ürün adı girin.
       min_length: 'Ürün adı en az 1 karakter uzunluğunda olmalıdır.|Ürün adı en az {{ limit }} karakter uzunluğunda olmalıdır.'
       max_length: 'Ürün adı 1 karakterden uzun olmamalıdır.|Ürün adı {{ limit }} karakterden uzun olmamalıdır.'
-    description:
-      not_blank: Lütfen ürün açıklaması girin.
-      min_length: 'Ürün açıklaması en az 1 karakter uzunluğunda olmalıdır.|Ürün açıklaması en az {{ limit }} karakter uzunluğunda olmalıdır.'
   variant:
     sku:
       not_blank: Lütfen stok birimi varyantını girin.
       unique: Stok birimi varyantı benzersiz olmalıdır.
+  archetype:
+    name:
+      not_blank: Lütfen İlk Örnek Giriniz
+      min_length: 'Örnek içerik adı en az 1 karakter uzunluğunda olmalıdır.|Örnek içerik adı en az {{ limit }} karakter uzunluğunda olmalıdır.'
+      max_length: 'Örnek içerik adı 1 karakterden uzun olmalıdır.|Örnek içerik adı {{ limit }} karakterden uzun olmamalıdır.'

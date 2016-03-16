@@ -3,6 +3,9 @@
 
 sylius:
   option:
+    code:
+      not_blank: "Entrez le code de l'option."
+      unique: "Le code de l'option existe déjà."
     name:
       not_blank: "Veuillez saisir le nom de l'option."
       min_length: "Le nom de l'option doit contenir au moins 1 caractère.|Le nom de l'option ne doit pas dépasser les {{ limit }} caractères."
@@ -14,6 +17,9 @@ sylius:
     values:
       min_count: "Veuillez ajouter au moins {{ limit }} valeur pour l'option.|Veuillez ajouter au moins {{ limit }} valeurs pour l'option."
   option_value:
+    code:
+      not_blank: "Entrez la valeur de l'option."
+      unique: "La valeur de l'option existe déjà."
     value:
       not_blank: "Veuillez saisir la valeur de l'option."
   variant:

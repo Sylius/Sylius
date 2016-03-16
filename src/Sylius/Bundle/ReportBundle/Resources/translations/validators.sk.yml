@@ -10,6 +10,6 @@ sylius:
     description:
       not_blank: Popis reportu nemôže byť prázdny
     code:
-      not_blank: Kód reportu nemôže byť prázdny
-      in_use: Tento kód sa už používa.
+      not_blank: Kód reportu nemôže byť prázdny.
+      unique: Tento kód sa už používa.
       single_word: Kód reportu musí byť jednoslovný.

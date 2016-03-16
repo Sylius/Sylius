@@ -2,5 +2,1158 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+  account:
+    address:
+      action:
+        billing: Vendose si adresën kryesore të faturimit
+        create: Krijo një adresë të re
+        delete: Fshi
+        edit: Afisho
+        shipping: Vendose si adresën kryesore të dërgimit
+      create: Krijo një adresë të re
+      default:
+        billing: Adresa kryesore e faturimit
+        no_billing: Nuk ka adresë kryesore faturimi
+        no_shipping: Nuk ka adresë kryesore dërgimi
+        shipping: Adresa kryesore e dërgimit
+      empty: Nuk ke adresë të përcaktuar
+      list: Të gjitha adresat e tua
+      update: Afisho adresën time
+    home:
+      email: Email
+      id: ID e blerësit
+      last5orders: 5 porositë e tua të fundit
+      outline: Shijo të gjitha vetitë që shfaqen në hapësirën tënde personale, gjurmo dhe kontrollo të gjitha të dhënat
+      since: Ti je blerës qysh prej
+      welcome: Mirë se erdhët në hapësirën tuaj
+    order:
+      created_at: Porositur te
+      details: Hollësi të porosisë tënde
+      download_invoice: Shkarko faturën
+      empty: Nuk ke vendosur ende asnjë porosi
+      invoice: Fatura
+      list: Të gjitha porositë e tua
+      number: Numri
+      payment_mode: Mënyra e pagesës
+      placed_at: 'Porositur te %at%'
+      shipment:
+        pending: Në pritje
+        ready: 'Gati qysh nga %at%'
+        returned: 'Rikthyer më %at%'
+        shipped: 'Dërguar më %at%'
+      shipment_mode: Mënyra e dërgesës
+      state: Shteti
+      total: Totali
+      tracking_number: Numri i gjurmimit
+    title: Llogaria ime
+  add_to_cart: Shto në kartë
+  association_type:
+    index_header: Tipi i lidhjes
+    update_header: Ndrysho tipin e lidhjes
+    create_header: Krijo tipin e lidhjes
+    name: Emri
+    create: Krijo
+    update: Përditëso
+  address:
+    city: Qyteti
+    company: Kompania
+    country: Vendi
+    firstname: Emri
+    lastname: Mbiemri
+    postcode: Kodi postar
+    province: Rajoni
+    street: Rruga
+  alert:
+    error: Gabim
+    info: Informacion
+    success: Sukses
+    warning: Kujdes
+  archetype:
+    attributes: Atributet
+    build: Ndërto prototipin
+    build_header: Duke ndërtuar produktin nga prototipi
+    create: Krijo prototip
+    create_header: Prototip i ri
+    index_header: Prototipet e produktit
+    name: Emri
+    no_results: Nuk ka asnjë prototip të përcaktuar
+    options: Opsionet
+    parent: Prind
+    update_header: Duke afishuar prototipin
+    updated_at: Ndryshimi i fundit
+  backend:
+    alert:
+      info: Informacion
+    dashboard:
+      chart_order_count: Numri i porosive
+      chart_order_total: Vlera e porosisë
+      header: Paneli i administrimit
+      orders: Porositë e javës së fundit
+      revenue: Të ardhurat e javës së fundit
+      subheader: Gjendja e dyqanit tënd
+    logout: Dil
+    quick_links:
+      add_product: Produkt i ri
+      customers: Blerësit
+      orders: Porositë më të fundit
+      products: Produktet e tua
+    statistics:
+      header: Statistikat e muajit në vazhdim
+      orders_this_month: Porositë totale
+      registrations_this_month: Regjistrimet totale
+      sales_this_month: Shitjet
+  backend_welcome: 'Përshëndetje <b>%name%</b>'
+  billing_address: Faturoje për
+  block:
+    imagine:
+      create: Krijo bllok figure
+      create_header: Duke krijuar një bllok të ri figure
+      end_date: Data e mbarimit
+      id: Id
+      index: Blloqe figure
+      index_header: Blloqe figurash
+      label: Etiketa
+      publishable: Publikuar
+      start_date: Data e fillimit
+      title: Titulli
+      update_header: Duke afishuar bllok figure
+      updated_at: Ndryshimi i fundit
+    imagine_blocks: Blloqe figurash
+    index_header: Blloqet
+    no_results: "Nuk ka asnjë bllok për t'u shfaqur"
+    simple:
+      body: Përmbajtja e porosisë
+      create: Krijo bllok të thjeshtë
+      create_header: Duke krijuar një bllok të thjeshtë të ri
+      end_date: Data e mbarimit
+      id: Id
+      index: Blloqe të thjeshta
+      index_header: Blloqe të thjeshta
+      label: Etiketa
+      publishable: Publikuar
+      start_date: Data e fillimit
+      title: Titulli
+      update_header: Duke afishuar bllokun e thjeshtë
+      updated_at: Ndryshimi i fundit
+    simple_blocks: Blloqe të thjeshta
+    slideshow:
+      body: Përmbajtja e porosisë
+      create: Krijo bllok figurash rresht
+      create_header: Duke krijuar një bllok figurash rresht të ri
+      end_date: Data e mbarimit
+      id: Id
+      index: Blloqe figurash rresht
+      index_header: Blloqe figurash rresht
+      publishable: Publikuar
+      start_date: Data e fillimit
+      title: Titulli
+      update_header: Duke afishuar blloqe figurash rresht
+      updated_at: Ndryshimi i fundit
+    slideshow_blocks: Blloqe figurash rresht
+    string:
+      body: Përmbajtja e porosisë
+      create: Krijo bllok zinxhir
+      create_header: Duke krijuar një bllok zinxhir të ri
+      end_date: Data e mbarimit
+      id: Id
+      index: Blloqe zinxhir
+      index_header: Blloqe zinxhir
+      label: Etiketa
+      publishable: Publikuar
+      start_date: Data e fillimit
+      title: Titulli
+      update_header: Duke afishuar bllokun zinxhir
+      updated_at: Ndryshimi i fundit
+    string_blocks: Blloqe zinxhir
+  breadcrumb:
+    archetype:
+      index: Prototipet
+    assortment: Asortimenti
+    attribute:
+      index: Atributet
+    block:
+      imagine:
+        index: Blloqe figure
+      index: Blloqet
+      simple:
+        index: Blloqe të thjeshta
+      slideshow:
+        index: Blloqe figurash rresht
+      string:
+        index: Blloqe zinxhir
+    build: Ndërto
+    channel:
+      index: Kanalet
+    configuration: Konfigurimi
+    contact_request:
+      index: Kërkesa kontakti
+      show: Kërkesë kontakti
+    contact_topic:
+      index: Kategoria e kontaktit
+    content: Përmbajtja
+    country:
+      index: Vendet
+    currency:
+      index: Monedhat
+    customer:
+      index: Blerësit
+    dashboard: Paneli
+    edit: Afisho
+    email:
+      index: Email-et
+    general_settings: Parametrat e përgjithshëm
+    generate: Gjenero
+    group:
+      index: Grupet
+    inventory:
+      index: Gjendja e magazinës
+    locale:
+      index: Rajonet
+    marketing: Marketingu
+    menu:
+      index: Menutë
+    menu_node:
+      index: Nyjet e menusë
+    metadata:
+      index: Metadata
+    new: E re
+    option:
+      index: Opsionet
+    order:
+      adjustments: Rregullimet
+      index: Porositë
+    page:
+      index: Faqet
+    payment:
+      index: Pagesat
+    payment_method:
+      index: Mënyrat e pagesës
+    permission:
+      index: Lejet
+    product:
+      index: Produktet
+    association_type:
+      index: Tipi i lidhjes
+    promotion:
+      index: Reklamat
+    promotion_coupon:
+      index: Kuponat
+    product_association:
+      index: Lidhje
+    product_association_type:
+      index: Tipi i lidhjes
+    redirect_route:
+      index: Rishkruaj drejtimet
+    report:
+      index: Njoftimet
+    role:
+      index: Funksionet
+    route:
+      index: Rrugët
+    sales: Shitjet
+    section:
+      customer: Blerësi
+    security_settings: Parametrat e sigurisë
+    shipment:
+      index: Dërgesat
+    shipping_category:
+      index: Kategoritë e dërgesës
+    shipping_method:
+      index: Mënyrat e dërgesës
+    support: Mbështetja
+    tax_category:
+      index: Kategoritë e taksimit
+    tax_rate:
+      index: Normat e taksimit
+    taxation_settings: Parametrat e taksimit
+    taxonomy:
+      index: Kategorizimet
+    update: Afisho
+    zone:
+      index: Zonat
+  browse_products: Shfleto produktet
+  cancel: Fshi
+  cart:
+    empty: Karta jote është bosh
+    summary:
+      add_coupon: Shto kupon
+      checkout: Kontrolli
+      clear: Fshi kartën
+      grand_total: Totali
+      product: Produkti
+      quantity: Sasitë
+      save: Ruaj
+      total: Totali
+      unit_price: Çmimi
+    summary_header: Përmbajtja e karrocës
+    total_items: '1 artikull %count% artikuj'
+  channel:
+    code: Kodi
+    create: Shto kanal
+    create_header: Shto kanal
+    created_at: Krijuar më
+    currency_default: Monedha e paracaktuar
+    enabled: E aktivizuar
+    id: ID
+    index_header: Kanalet
+    locale_default: Lokalizimi i parazgjedhur
+    manage: Kontrollo kanalet
+    name: Emri
+    no_results: Nuk ka asnjë kanal të konfiguruar
+    update: Afisho
+    update_header: Afishimi i kanalit
+    updated_at: Ndryshimi i fundit
+    url: Url
+  checkout:
+    addressing:
+      header: Adresa e dorëzimit
+    back: Ktheu prapa
+    credit_card:
+      header: Hollësitë e pagesës
+    finalize:
+      address:
+        city: Qyteti
+        country: Vendi
+        firstname: Emri
+        lastname: Mbiemri
+        postcode: Kodi postar
+        province: Rajoni
+        street: Rruga
+      header: Përmbledhje e porosisë
+      order:
+        additional_information: Informacion shtesë
+        billing_address: Adresa e faturimit
+        items_total: Totali i artikujve
+        no_items: Kjo porosi nuk përmban asnjë artikull
+        no_promotion: Nuk është përdorur asnjë reklamë
+        no_shipping_charges: Nuk ka asnjë pagesë dërgimi
+        no_taxes: Nuk zbatohen taksa
+        promotion_discount: Zbritje promocionale
+        promotion_total: Totali i zbritjeve
+        shipping_address: Adresa e dërgimit
+        shipping_charges: Pagesat e dërgimit
+        shipping_total: Pagesa totale e dërgimit
+        tax_total: Totali i taksave
+        taxes: Taksat
+        total: Totali
+      order_item:
+        quantity: Sasitë
+        total: Totali
+        unit_price: Çmim unik
+      place_order: Shkruaj porosinë
+      product:
+        name: Emri
+    forward: Vazhdo
+    payment:
+      header: Mënyra e pagesës
+    security:
+      existing_customer: Blerës ekzistues
+      guest: I ftuar
+      header: 'Futu në dyqanin <small> ose krijo llogari të re </small>'
+      login: Futu
+      new_customer: Blerës i ri
+      proceed_order: Vazhdo me porosinë tënde
+      register: Regjistrohu
+    shipping:
+      error: Na vjen keq, por dyqani ynë nuk mund ta dërgojë produktin në vendin që ke zgjedhur
+      header: Mënyra e dërgimit
+  confirmation:
+    message: Dëshiron ta fshish këtë artikull
+    title: Konfirmo
+  contact_request:
+    create: Krijo kërkesë kontakti
+    create_header: Kërkesë e re kontakti
+    email: Email
+    firstName: Emri
+    id: ID
+    index_header: Kërkesa kontakti
+    lastName: Mbiemri
+    message: Mesazhi
+    no_results: "Nuk ka asnjë kërkesë kontakti për t'u shfaqur"
+    show_header: Hollësi të kërkesës së kontaktit
+    topic: Tema
+    update_header: Duke afishuar kërkesën e kontaktit
+    updated_at: Ndryshimi i fundit
+  contact_topic:
+    create: Krijo rubrikë kontakti
+    create_header: Rubrikë e re kontakti
+    id: ID
+    index_header: Kategoria e kontaktit
+    no_results: "Nuk ka asnjë rubrikë kontakti për t'u shfaqur"
+    title: Titulli
+    update_header: Duke afishuar rubrikën e kontaktit
+    updated_at: Ndryshimi i fundit
+  country:
+    add_province: Shto rajonin
+    create: Zgjidh vendin
+    create_header: Vend i ri
+    enabled: E aktivizuar
+    id: ID
+    index_header: Vendet
+    manage: Kontrollo vendet
+    name: Emri
+    no_results: Nuk ka asnjë vend të konfiguruar
+    show_header: Hollësi për vendin
+    update_header: Duke afishuar vendin
+  create: Krijo
+  created_at: Krijuar më
+  currency:
+    code: Kodi
+    create: Krijo llojin e monedhës
+    create_header: Lloj i ri monedhe
+    enabled: E aktivizuar
+    exchange_rate: Norma e shkëmbimit
+    id: ID
+    index_header: Monedhat
+    name: Emri
+    no_results: "Nuk ka asnjë lloj monedhe për t'u shfaqur"
+    update_header: Duke afishuar llojin e monedhës
+    updated_at: Ndryshimi i fundit
+  customer:
+    billing_address: Adresa e faturimit
+    create: Krijo blerësin
+    create_header: Blerës i ri
+    creation_date: Data e krijimit
+    email: Email
+    filter:
+      all: Shfaq të gjithë blerësit
+      registered: Shfaq blerësit e regjistruar
+      unconfirmed: Shfaq llogaritë e oakonfirmuara
+    first_name: Emri
+    general_info: 'Informacion i përgjithshëm për blerësin "%fullName%"'
+    groups: Grupet
+    id: ID
+    index_header: 'Blerësi <small>Lista e të gjithë blerësve në dyqan</small>'
+    last_name: Mbiemri
+    manage: Kontrollo blerësit
+    no_groups: Nuk ka asnjë grup për tu shfaqur për këtë blerës
+    no_results: "Nuk ka asnjë blerës për t'u shfaqur"
+    order:
+      no_results: "Nuk ka asnjë porosi të këtij blerësi për t'u shfaqur"
+    orders: Porositë e blerësit
+    recent_header: Blerësit e fundit
+    shipping_address: Adresa e dërgimit
+    show_header: Hollësi të blerësit
+    update_header: Duke afishuar blerësin
+    phone_number: Numri i telefonit
+  delete: Fshi
+  deleted: U fshi
+  disable: Çaktivizo
+  edit: Afisho
+  email:
+    code: Kodi
+    create: Shto adresë të re Email
+    create_header: Duke shtuar adresë të re Email
+    enabled: E aktivizuar
+    index_header: Modele Email
+    manage: Kontrollo Email-et
+    no_results: Nuk ka asnjë Email të konfiguruar
+    subject: Subjekti
+    update_header: Duke afishuar Email
+    updated_at: Ndryshimi i fundit
+  emails:
+    order_comment:
+      name: Komenti i porosisë
+      subject: Koment i ri i postuar për porosinë
+    order_confirmation:
+      name: Konfirmimi i porosisë
+      subject: Falmnderit për porosinë
+    shipment_confirmation:
+      name: Konfirmimi i dërgesës
+      subject: Porosia juaj u nis
+    user_confirmation:
+      name: Konfirmimi i përdoruesit
+      subject: Mirë se erdhët në dyqanin tonë
+  enable: Aktivizo
+  filter: Filtri
+  form:
+    cart:
+      coupon: Kuponi
+    choose_file: Përzgjidh fajlin
+    comment:
+      comment: Koment
+      notify_customer: Të njoftohet blerësi
+    frontend:
+      password:
+        confirmation: Konfirmo
+        current: Fjalëkalimi aktual
+        new: Fjalëkalim i ri
+        title: Ndrysho fjalëkalimin
+      profile:
+        title: Afisho informacionin tënd personal
+    login:
+      email: Email
+      password: Fjalëkalimi
+    menu:
+      add_menu_node: Shto element menuje
+    option_value:
+      add_value: Shto vlerën
+    profile:
+      email: Email
+      firstName: Emri
+      lastName: Mbiemri
+  gallery:
+    next: Hapi tjetër
+    previous: Kalo një hap prapa
+    slideshow: Slideshow
+  gender:
+    female: Femër
+    male: Mashkull
+  generate: Gjenero
+  go_to_dashboard: Shko te paneli kryesor
+  group:
+    create: Krijo grup
+    create_header: Duke shtuar grupe të teja blerësish
+    id: ID
+    index_header: Grupet
+    name: Emri
+    no_results: "Nuk ka asnjë grup për t'u shfaqur"
+    roles: Funksionet
+    update_header: Afisho grupin
+  hide_deleted: Fshihi elementet e fshira
+  history:
+    action: Vepro
+    author: Autori
+    data: Të dhëna
+    empty: Bosh
+    header: Historia
+    logged_at: Lidhur me (versioni)
+    no_results: "Nuk ka ngjarje të lidhura për t'u shfaqur"
+    revert: Rikthe
+  homepage:
+    splash:
+      headline: Mirë se erdhe në Sylius
+      subheadline: Ecommerce moderne për Symfony2
+  inventory_unit:
+    created_at: Krijuar
+    inventory_state: Gjendja e listës
+    name: Emri
+    no_results: "Nuk ka njësi të listës për t'u shfaqur"
+    shipping_state: Gjendja e dërgimit
+    sku: SKU
+    updated_at: Ndryshimi i fundit
+  locale:
+    code: Kodi
+    create: Shkruaj lokalizimin
+    create_header: Shtim i një lokalizimi të ri
+    enabled: E aktivizuar
+    id: ID
+    index_header: Treguesi i të gjitha vendeve të konfiguruara
+    name: Emri
+    no_results: Nuk ka vende të konfiguruara
+    update_header: Afisho vendin
+    updated_at: Ndryshimi i fundit
+  login: Futu
+  login_header: Administrimi
+  logo: Sylius
+  manage: Kontrollo
+  menu:
+    create: Krijo menu
+    create_header: Duke krijuar menu
+    end_date: Data e mbarimit
+    id: ID
+    index_header: Menutë
+    no_results: "Nuk ka asnjë menu për t'u shfaqur"
+    publishable: Publikuar
+    start_date: Data e fillimit
+    title: Titulli
+    update_header: Menuja e ndryshimeve
+  menu_node:
+    create: Krijo një element të menusë
+    create_header: Duke krijuar një element të menusë
+    id: ID
+    index_header: Nyjet e menusë
+    no_results: "Nuk ka asnjë element menuje për t'u shfaqur"
+    parent: Prind
+    title: Titulli
+    update_header: Afishimi i elementeve të menusë
+  meta:
+    backend_title: Paneli i Sylius-it
+    frontend_description: Sylius është zgjidhja moderne e ecommerce për PHP, bazuar në framework Symfony2
+    frontend_keywords: Sylius, ecommerce, symfony2, dyqan, karrocë, webshop
+    frontend_title: Sylius, ecommerce moderne për Symfony2
+  metadata:
+    customize_header: Personalizim i metadata
+    show_header: Shfaq metadata
+    id: ID
+    customize: Personalizo metadata
+    manage: Menaxho metadata
+    content: Përmbajtja
+    index_metadata: Metadata
+    default_page:
+      group_customize: Personalizo metadata baze
+    product:
+      single_customize: Personalizo metadata
+      group_customize: Personalizo metadata te produktit
+    product_variant:
+      single_customize: Personalizo metadata
+  move_down: Leviz poshte
+  move_up: Leviz lart
+  na: N/A
+  newest: Produktet më të reja
   "no": false
+  no_results: Asnjë rezultat
+  order:
+    additional_information: Informacion shtesë
+    adjustments:
+      amount: Shuma
+      description: Përshkrimi
+      lock: Kyç
+      lock_all: Kyçi të gjithë parametrat e vendosur
+      locked: Kyçur
+      manage: Kontrollo parametrat
+      type: Lloji
+      unlock: Shkyç
+      unlock_all: Shkyç të gjithë parametrat
+    billing_address: Adresa e faturimit
+    channel: Kanali
+    comment:
+      author: Autori
+      comment: Koment
+      created_at: Krijuar më
+      customer:
+        not_notified: Blerësi nuk u njoftua
+        notified: Blerësi u njoftua
+      header: Komente për porosinë
+      no_comment: Asnjë koment
+      notify: Njoftim
+      state: Shteti
+    create: Krijo porosi
+    create_header: Porosi e re
+    created_at: Koha e krijimit
+    currency: Monedha
+    customer: Blerësi
+    details: Hollësi të porosisë
+    general_info: Info e përgjithshme
+    guest: Blerës i ftuar
+    id: ID
+    immutable_warning: Porositë tashme te nisura nuk ndryshohen dot më
+    index_header: Porositë korrente
+    inventory_tracking: Gjurmimi i gjendjes së magazinës
+    inventory_unit:
+      backorder: Prenotim porosie
+      fulfill: Përmbyll
+      return: Rikthehu
+    items: Artikujt
+    items_total: Totali i artikujve
+    manage: Kontrollo porositë
+    no_items: Kjo porosi nuk përmban asnjë artikull
+    no_promotion: Asnjë kupon i përdorur
+    no_results: Nuk ke porosi të reja
+    no_shipments: Nuk ka asnjë dërgesë për këtë porosi
+    no_shipping_charges: Nuk ka asnjë pagesë dërgimi
+    no_taxes: Nuk zbatohen taksa
+    number: Numri
+    order_state: Gjendja e porosisë
+    payment: Pagesa
+    payment_state: Gjendja e pagesës
+    payment_states:
+      balance_due: Pagesa e pritur
+    promotion_coupons: Kuponat
+    promotion_total: Totali i zbritjeve
+    recent_header: Porositë e fundit
+    release_inventory: Lista e daljeve
+    shipment_state: Gjendja e dërgesës
+    shipment_states:
+      pending: Në pritje
+    shipments: Dërgesat
+    shipping_address: Adresa e dërgimit
+    shipping_charges: Pagesat e dërgimit
+    shipping_total: Pagesa totale e dërgimit
+    show_header: Porosia
+    state:
+      abandoned: I braktisur
+      cancelled: E fshirë
+      cart_locked: Karroca e kycur
+      checkout: Kontrolli
+      order_confimed: Porosia e konfirmuar
+      ordered: Porositur
+      returned: I kthyer
+      shipped: Dërguar
+    tax_total: Totali i taksave
+    taxes: Taksat
+    total: Totali
+    update_header: Duke afishuar porosinë
+  review:
+    id: ID
+    subject: Subjekti
+    title: Titulli
+    author: Autori
+    guest: I ftuar
+    created_at: Krijuar më
+  order_item:
+    product: Po ashtu
+    quantity: Sasitë
+    sellable: Produkti
+    total: Totali
+    unit_price: Çmimi për njësi
+  out_of_stock: Nuk ka në magazi
+  page:
+    body: Përmbajtja e porosisë
+    create: Krijo faqe të re
+    create_header: Duke krijuar faqe të re
+    end_date: Data e mbarimit
+    id: ID
+    index_header: Faqet
+    no_results: "Nuk ka asnjë faqe për t'u shfaqur"
+    no_route: Përmbajtja jote nuk do të shfaqet në faqen e parë nëse nuk ke përcaktuar rrugën
+    publishable: Publikuar
+    routes: Rrugët
+    start_date: Data e fillimit
+    title: Titulli
+    update_header: Duke afishuar faqen
+  password: Fjalëkalimi
+  payment:
+    amount: Shuma
+    create: Krijo pagesën
+    create_header: Pagesë e re
+    created_at: Krijuar më
+    id: ID
+    index_header: Pagesat
+    manage: Kontrollo pagesat
+    method: Mënyra
+    no_results: Nuk ka asnjë pagesë të konfiguruar
+    order: Porosia
+    state:
+      cancelled: E fshirë
+      checkout: Kontrolli
+      completed: Përfunduar
+      failed: Nuk u krye
+      header: Shteti
+      new: E re
+      pending: Në pritje
+      processing: Duke u procesuar
+      refunded: Rimbursuar
+      unknown: E panjohur
+      void: Bosh
+    update_header: Duke afishuar pagesën
+    updated_at: Ndryshimi i fundit
+  payment_method:
+    create: Krijo mënyrën e pagesës
+    create_header: Mënyrë e re pagese
+    enabled: U aktivizua
+    gateway: Gateway
+    id: ID
+    index_header: Mënyrat e pagesës
+    name: Emri
+    no_results: Nuk ka asnjë mënyrë pagese të konfiguruar
+    update_header: Duke afishuar mënyrën e pagesës
+    updated_at: Ndryshimi i fundit
+  permission:
+    code: Kodi
+    create: Shto leje të re
+    create_header: Leje e re
+    description: Përshkrimi
+    id: ID
+    index_header: Lejet
+    no_results: Nuk ka asnjë leje të përcaktuar
+    update_header: Duke afishuar lejen
+    updated_at: Ndryshimi i fundit
+  pricing:
+    volume_based:
+      button:
+        add: Shto
+      max: Sasia maksimale
+      min: Sasia minimale
+      no_results: Asnjë konfigurim për çmimin
+      price: Çmimi
+  product:
+    add_attribute: Shto atribut
+    archetype: Prototipi
+    attributes: Atributet
+    association: Lidhje
+    available_on: Gati më
+    available_on_demand: E mundshme me porosi
+    available_until: Në dispozicion deri në
+    categorization: Kategorizimi
+    contain_variants: Përmban variante
+    create: Krijo produkt
+    create_header: Produkt i ri
+    description: Përshkrimi
+    generate_variants: Krijo variante
+    index_by_taxon_header: 'Produkte <small>Të kategorizuar nën "%taxon%" taxon</small>'
+    index_header: 'Produkte <small>Indeksi i të gjitha produkteve në magazinën tuaj</small>'
+    main_taxon: Grupi kryesor
+    manage: Kontrollo produktet
+    name: Emri
+    no_attributes: Ky produkt nuk ka atribute të përcaktuara
+    no_description: '<i>Asnjë përshkrim...</i>'
+    no_images: Nuk ka pamje për këtë produkt
+    no_options: Nuk ka opsione për këtë produkt
+    no_results: "Nuk ka asnjë produkt për t'u shfaqur"
+    no_shipping_category: Nuk ka kategori dërgimi
+    no_short_description: '<i>Asnjë përshkrimi i shkurtër</i>'
+    no_sku: Asnjë SKU
+    no_tax_category: Asnjë kategori taksimi
+    no_taxon: Nuk ka asnjë taksim kryesor mbi këtë produkt
+    no_taxons: Nuk ka asnjë takson për këtë produkt
+    options: Opsionet
+    original_price: Çmimi fillestar
+    price: Çmimi me pakicë
+    restricted_zone: Zonë e kufizuar
+    remove_attribute: Fshi atributin
+    shipping_category: Kategoria e dërgesës
+    show: Shiko më shumë
+    show_header: 'Hollësi të produktit <small>Shikim i produktit "<strong>%product%</strong>"</small>'
+    show_in_store: Trego në magazinë
+    sku: SKU
+    stock: Fondi aktual
+    tabs:
+      attributes: Atributet
+      associations: Lidhje
+      categorization: Kategorizimi
+      channels: Kanalet
+      images: Imazhet
+      options: Opsionet
+      pricing: Çmimi
+      product: Produkti
+    tax_category: Kategoria e taksimit
+    unavailable: Nuk gjendet
+    update_header: Duke afishuar produktin
+    updated_at: Ndryshimi i fundit
+    variant_selection_method: Metoda rezervë e përzgjedhjes
+    variants: Variante
+    view_details: 'Shiko %product% hollësitë'
+    volume_based:
+      price: Çmimi
+      qty_max: Qty max
+      qty_min: Qty min
+    volume_price: Çmimi i bazuar në volum
+  product_attribute:
+    add_choice: Shto zgjedhje
+    code: Kodi
+    create: Krijo atribut produkti
+    create_header: Atribut i produktit të ri
+    index_header: Atribute të produktit
+    manage: Kontrollo atributet
+    name: Emri
+    no_results: Nuk ka asnjë atribut të konfiguruar
+    type: Lloji
+    update_header: Duke afishuar atributin
+    updated_at: Ndryshimi i fundit
+  product_association:
+    code: Kodi
+    create: Krijo lidhje te produktit
+    create_header: Produkt i ri
+    index_header: Atribute të produktit
+    manage: Kontrollo atributet
+    name: Emri
+    no_results: Nuk ka asnjë atribut të konfiguruar
+    type: Lloji
+    update_header: Duke afishuar atributin
+    updated_at: Ndryshimi i fundit
+  product_not_available_in_zone: I pamundur në vendin tuaj
+  product_option:
+    create: Krijo opsionin
+    create_header: Opsioni i produktit të ri
+    index_header: Opsionet e produktit
+    manage: Përdor opsionet
+    name: Emri
+    no_results: Nuk ka asnjë opsion të konfiguruar
+    presentation: Prezantimi
+    update_header: Afishimi i opsionit
+    updated_at: Ndryshimi i fundit
+    values: Vlerat
+  promotion:
+    actions: Veprimet
+    add_action: Shto veprim
+    add_rule: Shto rregull
+    coupon_based: Bazuar në kupon
+    create: Krijo promocion
+    create_header: Promocion i ri
+    created_at: Krijuar më
+    description: Përshkrimi
+    ends_at: Përfundon më
+    exclusive: Ekskluziv
+    general_info: Informacion i përgjithshëm
+    id: ID
+    index_header: Promocionet aktuale
+    manage: Kontrollo promocionet
+    name: Emri
+    no_results: Nuk ka asnjë promocion të konfiguruar
+    priority: Përparësia
+    rules: Rregullat
+    show_header: Hollësi të promocionit
+    starts_at: Fillon më
+    update_header: Duke afishuar promocionin
+    updated_at: Ndryshimi i fundit
+    usage_limit: Kufiri i përdorimit
+    used: I përdorur
+  promotion_action:
+    configuration: Konfigurimi
+    type: Lloji
+  promotion_coupon:
+    code: Kodi
+    create: Shto kupon
+    create_header: Krijo kupon të ri
+    expires_at: Skadon më
+    generate: Gjenero kupona
+    generate_header: Duke gjeneruar kupona
+    index: Listo kuponat
+    index_header: Kuponat
+    no_results: "Nuk ka asnjë kupon për t'u shfaqur"
+    total_results:
+      Total: '%total%'
+    update_header: Duke afishuar kuponin
+  promotion_rule:
+    configuration: Konfigurimi
+    type: Lloji
+  province:
+    provinces: Rajonet
+  redirect_route:
+    create: Krijo rrugë tjetër
+    create_header: Duke krijuar rrugë tjetër
+    id: ID
+    index_header: Rrugë tjetër
+    no_results: "Nuk ka asnjë rrugë tjetër për t'u shfaqur"
+    title: Titulli
+    update_header: Duke afishuar rrugën tjetër
+  remember_me: Më mbaj mend
+  report:
+    code: Kodi
+    create: Krijo raportin
+    create_header: Krijo raport të ri
+    data_fetcher: Të dhëna mbi llojin e sjellësit
+    description: Përshkrimi
+    details: Detajet
+    id: Id
+    index_header: Njoftimet
+    manage: Kontrollo
+    name: Emri
+    no_data: "Nuk ka asnjë të dhënë për t'u shfaqur"
+    no_report: "Nuk ka asnjë njoftim për t'u shfaqur"
+    no_results: Nuk është krijuar asnjë njoftim
+    renderer: Lloji i interpretimit
+    show_header: Hollësi të njoftimit
+    update_header: Afisho njoftimin
+  restore: Rivendos
+  role:
+    code: Kodi
+    create: Shto rol të ri
+    create_header: Rol i ri
+    description: Përshkrimi
+    id: ID
+    index_header: Funksionet
+    name: Emri
+    no_results: Nuk ka asnjë rol të përcaktuar
+    update_header: Duke afishuar rolin
+    updated_at: Ndryshimi i fundit
+  route:
+    create: Krijo rrugën
+    create_header: Duke krijuar rrugën
+    id: ID
+    index_header: Rrugët
+    name: Emri
+    no_results: "Nuk ka asnjë rrugë për t'u shfaqur"
+    page: Faqja
+    title: Titulli
+    update_header: Duke afishuar rrugën
+    view: Pamja (View)
+  save_changes: Ruaj ndryshimet
+  search: Kërko
+  security:
+    login:
+      button: Futu
+      forgot_password: Harruat fjalëkalimin
+      header: 'Login <small>Sylius store</small>'
+      info: 'Futu duke përdorur <b>"sylius@example.com"</b> email and <b>"sylius"</b> si fjalëkalim. <small>Mr. Sylius Demo Guide</small>'
+      no_account: Ende nuk keni krijuar account
+  settings:
+    general_header: Rregullimet kryesore
+    security_header: Parametrat e sigurisë
+    taxation_header: Rregullat e taksimit
+  shipment:
+    created_at: Krijuar më
+    id: ID
+    index_header: Dërgesat
+    inventory_state: Gjendja e listës
+    manage: Kontrollo dërgimet
+    method: Mënyra
+    modified: Ndryshuar
+    name: Emri
+    no_items: "Nuk ka asnjë artikull për t'u shfaqur"
+    no_results: "Nuk ka asnjë dërgesë për t'u shfaqur"
+    order: Porosia
+    ship: Dërgimi
+    show_header: Hollësi të dërgimit
+    sku: SKU
+    state: Shteti
+    tracking_code: Kodi i gjurmimit
+    update: Afisho
+    update_header: Afishimi i dërgesës
+    updated_at: Ndryshimi i fundit
+  shipment_category:
+    manage: Kontrollo kategoritë e dërgimit
+  shipping_address: Adresa e dërgimit
+  shipping_category:
+    create: Krijo kategorinë e dërgimit
+    create_header: Kategori e re dërgimi
+    id: ID
+    index_header: Kategoritë e dërgesave
+    manage: Kontrollo kategoritë e dërgimit
+    name: Emri
+    no_results: Nuk ka asnjë kategori dërgimi të konfiguruar
+    update_header: Duke afishuar kategorinë e dërgimit
+    updated_at: Ndryshimi i fundit
+  shipping_method:
+    calculator: Llogaritësi
+    category: Kategorija
+    create: Krijo mënyrën e dërgimit
+    create_header: Mënyrë e re dërgimi
+    enabled: E aktivizuar
+    id: ID
+    index_header: Mënyrat e dërgesave
+    manage: Kontrollo mënyrat e dërgimit
+    name: Emri
+    no_results: Nuk ka asnjë mënyrë dërgimi të konfiguruar
+    show_header: Hollësi të mënyrës së dërgimit
+    update_header: Duke afishuar mënyrën e dërgimit
+    updated_at: Ndryshimi i fundit
+    zone: Zona
+  shop_by: Bli me
+  show: Detajet
+  show_all: Shfaqi të gjitha
+  show_deleted: Shfaq të fshirat
+  stockable:
+    index_header: 'Inventari <small>Këtu mund të shikosh gjendjet aktuale të magazinës</small>'
+    name: Emri
+    no_results: "Nuk ka asnjë artikull inventari për t'u shfaqur"
+    on_hand: Gjendja e magazinës
+    on_hold: Ne pritje
+    sku: Sku
+    updated_at: Ndryshimi i fundit
+  tax_category:
+    create: Krijo një kategori taksimi
+    create_header: Kategori e re taksimi
+    description: Përshkrimi
+    id: ID
+    index_header: Kategoritë e taksimit
+    manage: Kontrollo kategoritë e taksimit
+    name: Emri
+    no_description: Asnjë përshkrim
+    no_results: Nuk ka asnjë kategori taksimi të konfiguruar
+    update_header: Duke afishuar kategorinë e taksimit
+    updated_at: Ndryshimi i fundit
+  tax_rate:
+    amount: Shuma
+    calculator: Llogaritësi
+    category: Kategorija
+    create: Krijo normën e taksimit
+    create_header: Normë e re taksimi
+    included_in_price: Përfshirë në çmim
+    index_header: Normat e taksimit
+    manage: Kontrollo normat e taksimit
+    name: Emri
+    no_results: Nuk ka asnjë normë taksimi të konfiguruar
+    show_header: Hollësi të normës së taksimit
+    update_header: Duke përditësuar normën e taksimit
+    updated_at: Ndryshimi i fundit
+    zone: Zona
+  taxon:
+    create: Krijo taksonin
+    create_header: Takson i ri
+    image: Zgjidh figurën
+    name: Emri
+    no_image: Nuk ka asnjë figurë për këtë kategori
+    no_results: "Nuk ka asnjë kategori për t'u shfaqur"
+    product_index_header: 'Produkte të klasifikuar si "%name%"'
+    update_header: Duke afishuar kategorinë
+  taxonomy:
+    create: Krijo kategorizimin
+    create_header: Kategorizim i ri
+    image: Zgjidh figurën
+    index_header: 'Kategorizim <small>Këtu shikoni kategoritë e përcaktuara</small>'
+    manage: Kontrollo kategorizimet
+    name: Emri
+    no_image: Nuk ka asnjë figurë për këtë kategorizim
+    no_results: Nuk ka asnjë kategorizim të përcaktuar
+    show_header: 'Kategorizim <small><strong>%name%</strong></small>'
+    update_header: Duke afishuar kategorizimin
+  total_quantity: Sasia totale
+  ui:
+    account_panel_outline: Shijo të gjitha vetitë që shfaqen në hapësirën tënde personale, gjurmo dhe kontrollo të gjitha të dhënat
+    change_password: Ndrysho fjalëkalimin
+    code: Kodi
+    customer:
+      id: ID e blerësit
+    customer_since: Ti je blerës që prej
+    email: Email
+    forgot_password: Harruat fjalëkalimin
+    links: Linket
+    logged_in_as: 'Loguar si %username%'
+    login: Futu
+    logout: Dil
+    no_account: Ende nuk keni krijuar account
+    password:
+      reset:
+        button: Rivendos
+        header: Rivendos fjalëkalimin
+    profile: Profili
+    register: Regjistrohu
+    reset: Rivendos
+    reset_password: Rivendos fjalëkalimin
+    welcome: Mirësevini
+    add_association: Shto lidhje
+    product_associations: Lidhje produkti
+    create_product_association: Krijo lidhje te produktit
+    product_association_types: Tipet e lidhjes se produktit
+    create_product_association_type: Krijo tipologji te lidhjes se produktit
+    update_product_association_type: Perditeso tipologji te lidhjes se produktit
+    no_association_types_to_display: Nuk ka tipologji lidhjesh te percaktuar
+    name: Emri
+    id: Id
+  unknown: E panjohur
+  user:
+    create: Krijo përdorues
+    create_header: Përdorues i ri
+    enabled: Konfirmuar
+    general_info: 'Informacion i përgjithshëm për "%username%"'
+    id: ID
+    impersonate: Logo si ky përdorues
+    index_header: 'Përdorues <small>Lista e të gjithë përdoruesve të regjistruar në dyqan</small>'
+    last_login: Login i fundit
+    manage: Menaxho përdoruesit
+    no_results: "Nuk ka asnjë përdorues për t'u shfaqur"
+    oauth:
+      access_token: Xhitoni i hyrjes
+      identifier: Identifikuesi
+      none: Nuk ka asnjë llogari OAuth të lidhur
+      provider: Furnizues OAuth
+    recent_header: Përdoruesit e fundit
+    register:
+      button: Regjistrohu
+      header: 'Regjistrimi <small>Krijo një llogari në dyqan</small>'
+    registration_date: Data e regjistrimit
+    show_header: Hollësi të përdoruesit
+    update_header: Duke afishuar përdoruesin
+    username: Username
+  variant:
+    add_image: Shto figurë
+    availability: Disponueshmëria
+    available_on_demand: E mundshme me porosi
+    create: Krijo variant
+    create_header: Variant i produktit të ri
+    delete_image: Fshi figurën
+    last_update: Ndryshimi i fundit
+    no_results: "Nuk ka asnjë variant për t'u shfaqur"
+    options: Opsionet
+    original_price: Çmimi fillestar
+    price: Çmimi
+    sku: SKU
+    stock: Fondi aktual
+    update_header: Duke afishuar variantin
   "yes": true
+  zone:
+    add_member: Shto anëtar
+    create: Krijo zonën
+    create_header: Zonë e re
+    index_header: Zonat
+    manage: Kontrollo zonat
+    name: Emri
+    no_results: Nuk ka asnjë zonë të konfiguruar
+    scope: Zona
+    show_header: Hollësi të zonës
+    type: Lloji
+    update_header: Duke afishuar zonën
+  zone_member:
+    members: Anëtarët

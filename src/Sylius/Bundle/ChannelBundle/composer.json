@@ -22,12 +22,14 @@
     "require": {
         "php": "^5.5.9|^7.0",
 
-        "sylius/channel": "0.16.*",
-        "sylius/resource-bundle": "0.16.*",
-        "symfony/framework-bundle": "^2.7.5"
+        "sylius/channel": "0.17.*",
+        "sylius/resource-bundle": "0.17.*",
+        "symfony/framework-bundle": "^2.7.7"
     },
     "require-dev": {
+        "matthiasnoback/symfony-dependency-injection-test": "^0.7.6",
         "phpspec/phpspec": "^2.4",
+        "phpunit/phpunit": "^4.1",
         "symfony/form": "^2.7",
         "twig/twig": "^1.0"
     },
@@ -41,9 +43,10 @@
         "psr-4": { "Sylius\\Bundle\\ChannelBundle\\spec\\": "spec/" }
     },
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "extra": {
         "branch-alias": {
-            "dev-master": "0.16-dev"
+            "dev-master": "0.17-dev"
         }
     }
 }

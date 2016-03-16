@@ -40,7 +40,6 @@
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
             <gedmo:timestampable on="update"/>
         </field>
-        <field name="deletedAt" column="deleted_at" type="datetime" nullable="true" />
 
         <one-to-one field="user" target-entity="Sylius\Component\User\Model\UserInterface" mapped-by="customer">
                 <cascade>
@@ -62,7 +61,8 @@
             </join-table>
         </many-to-many>
 
-        <gedmo:soft-deleteable field-name="deletedAt" />
+        <field name="phoneNumber" column="phone_number" type="string" nullable="true" />
+
     </mapped-superclass>
 
 </doctrine-mapping>

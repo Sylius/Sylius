@@ -14,14 +14,14 @@ namespace spec\Sylius\Component\Resource\Repository;
 use Pagerfanta\Pagerfanta;
 use PhpSpec\ObjectBehavior;
 use spec\Sylius\Component\Resource\Fixtures\SampleResourceInterface;
-use Sylius\Component\Resource\Exception\UnsupportedMethodException;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Sylius\Component\Resource\Repository\Exception\ExistingResourceException;
+use Sylius\Component\Resource\Exception\UnsupportedMethodException;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\Resource\Repository\Exception\ExistingResourceException;
 use Sylius\Component\Resource\Repository\InMemoryRepository;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-require_once __DIR__ . '/../Fixtures/SampleResourceInterface.php';
+require_once __DIR__.'/../Fixtures/SampleResourceInterface.php';
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
@@ -35,12 +35,12 @@ class InMemoryRepositorySpec extends ObjectBehavior
 
     function it_throws_invalid_argument_exception_when_constructing_with_null()
     {
-        $this->shouldThrow(\InvalidArgumentException::class)->during('__construct', array(null));
+        $this->shouldThrow(\InvalidArgumentException::class)->during('__construct', [null]);
     }
 
     function it_throws_unexpected_type_exception_when_constructing_without_resource_interface($void = 1)
     {
-        $this->shouldThrow(UnexpectedTypeException::class)->during('__construct', array($void));
+        $this->shouldThrow(UnexpectedTypeException::class)->during('__construct', [$void]);
     }
 
     function it_is_initializable()
@@ -55,7 +55,7 @@ class InMemoryRepositorySpec extends ObjectBehavior
 
     function it_throws_invalid_argument_exception_when_adding_wrong_resource_type(ResourceInterface $resource)
     {
-        $this->shouldThrow(\InvalidArgumentException::class)->during('add', array($resource));
+        $this->shouldThrow(\InvalidArgumentException::class)->during('add', [$resource]);
     }
 
     function it_adds_an_object(SampleResourceInterface $monocle)
@@ -63,13 +63,13 @@ class InMemoryRepositorySpec extends ObjectBehavior
         $monocle->getId()->willReturn(2);
 
         $this->add($monocle);
-        $this->findOneBy(array('id' => 2))->shouldReturn($monocle);
+        $this->findOneBy(['id' => 2])->shouldReturn($monocle);
     }
 
     function it_throws_existing_resource_exception_on_adding_a_resource_which_is_already_in_repository(SampleResourceInterface $bike)
     {
         $this->add($bike);
-        $this->shouldThrow(ExistingResourceException::class)->during('add', array($bike));
+        $this->shouldThrow(ExistingResourceException::class)->during('add', [$bike]);
     }
 
     function it_removes_a_resource(SampleResourceInterface $shirt)
@@ -79,12 +79,12 @@ class InMemoryRepositorySpec extends ObjectBehavior
         $this->add($shirt);
         $this->remove($shirt);
 
-        $this->findOneBy(array('id' => 5))->shouldReturn(null);
+        $this->findOneBy(['id' => 5])->shouldReturn(null);
     }
 
     function it_throws_unsupported_method_exception_while_using_find()
     {
-        $this->shouldThrow(UnsupportedMethodException::class)->during('find', array());
+        $this->shouldThrow(UnsupportedMethodException::class)->during('find', []);
     }
 
     function it_returns_all_objects_when_finding_by_an_empty_parameter_array(
@@ -100,7 +100,7 @@ class InMemoryRepositorySpec extends ObjectBehavior
         $this->add($book);
         $this->add($shirt);
 
-        $this->findBy(array())->shouldReturn(array($book, $shirt));
+        $this->findBy([])->shouldReturn([$book, $shirt]);
     }
 
     function it_finds_many_objects_by_multiple_criteria_orders_a_limit_and_an_offset(
@@ -146,22 +146,22 @@ class InMemoryRepositorySpec extends ObjectBehavior
         $this->add($wrongNameBook);
 
         $this->findBy(
-            $criteria = array(
+            $criteria = [
                 'name' => $name,
-                'id'   => $id,
-            ),
-            $orderBy = array(
+                'id' => $id,
+            ],
+            $orderBy = [
                 'rating' => RepositoryInterface::ORDER_ASCENDING,
-                'title'  => RepositoryInterface::ORDER_DESCENDING,
-            ),
+                'title' => RepositoryInterface::ORDER_DESCENDING,
+            ],
             $limit = 2,
             $offset = 1
-        )->shouldReturn(array($secondBook, $thirdBook));
+        )->shouldReturn([$secondBook, $thirdBook]);
     }
 
     function it_throws_invalid_argument_exception_when_finding_one_object_with_empty_parameter_array()
     {
-        $this->shouldThrow(\InvalidArgumentException::class)->during('findOneBy', array(array()));
+        $this->shouldThrow(\InvalidArgumentException::class)->during('findOneBy', [[]]);
     }
 
     function it_finds_one_object_by_parameter(SampleResourceInterface $book, SampleResourceInterface $shirt)
@@ -172,7 +172,7 @@ class InMemoryRepositorySpec extends ObjectBehavior
         $this->add($book);
         $this->add($shirt);
 
-        $this->findOneBy(array('name' => 'Book'))->shouldReturn($book);
+        $this->findOneBy(['name' => 'Book'])->shouldReturn($book);
     }
 
     function it_returns_first_result_while_finding_one_by_parameters(
@@ -185,7 +185,7 @@ class InMemoryRepositorySpec extends ObjectBehavior
         $this->add($book);
         $this->add($secondBook);
 
-        $this->findOneBy(array('name' => 'Book'))->shouldReturn($book);
+        $this->findOneBy(['name' => 'Book'])->shouldReturn($book);
     }
 
     function it_finds_all_objects_in_memory(SampleResourceInterface $book, SampleResourceInterface $shirt)
@@ -193,12 +193,12 @@ class InMemoryRepositorySpec extends ObjectBehavior
         $this->add($book);
         $this->add($shirt);
 
-        $this->findAll()->shouldReturn(array($book, $shirt));
+        $this->findAll()->shouldReturn([$book, $shirt]);
     }
 
     function it_return_empty_array_when_memory_is_empty()
     {
-        $this->findAll()->shouldReturn(array());
+        $this->findAll()->shouldReturn([]);
     }
 
     function it_creates_paginator()

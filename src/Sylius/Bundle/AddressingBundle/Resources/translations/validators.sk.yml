@@ -9,39 +9,51 @@ sylius:
       not_blank: Prosím zadajte mesto.
     country:
       not_blank: Prosím vyberte krajinu.
+      disabled: Vybraná krajina nie aktivovaná. Prosím vyberte inú.
     first_name:
       max_length: Meno nesmie byť dlhšie ako 255 znakov|Meno nesmie byť dlhšie ako 255 znakov.
       min_length: Meno musí mať minimálne 2 znaky|Meno musí mať minimálne 2 znaky.
-      not_blank: Prosím zadajte vaše meno.
+      not_blank: Prosím zadajte Vaše meno.
     last_name:
       max_length: Priezvisko nesmie byť dlhšie ako 255 znakov|Priezvisko nesmie byť dlhšie ako 255 znakov.
       min_length: Priezvisko musí mať minimálne 2 znaky|Priezvisko musí mať minimálne 2 znaky.
-      not_blank: Prosím zadajte vaše priezvisko.
+      not_blank: Prosím zadajte Vaše priezvisko.
     postcode:
-      max_length: PSČ nemôže byť dlhšie ako 255 znakov.
-      min_length: PSČ musí obsahovať minimálne 2 znaky.
-      not_blank: Prosím zadajte vaše PSČ.
+      max_length: PSČ nemôže byť dlhšie ako 255 znakov|PSČnemôže byť dlhšie ako 255 znakov.
+      min_length: PSČ musí obsahovať minimálne 2 znaky|PSČ musí obsahovať minimálne 2 znaky.
+      not_blank: Prosím zadajte Vaše PSČ.
     province:
       valid: Prosím vyberte správnu provinciu.
     street:
-      max_length: Ulica nesmie byť dlhšia ako 255 znakov.
+      max_length: Ulica nesmie byť dlhšia ako 255 znakov|Ulica nesmie byť dlhšia ako 255 znakov.
       min_length: Ulica musí obsahovať minimálne 2 znaky|Ulica musí obsahovať minimálne 2 znaky.
       not_blank: Prosím zadajte ulicu.
-    not_shippable: Táto adresa nie je platná pre doručenie.
+    not_shippable: Adresa nie je platná pre doručenie.
   country:
-    iso_name:
+    code:
       not_blank: Prosím zadajte ISO kód krajiny.
-    name:
-      max_length: Názov krajiny nesmie byť dlhší ako 255 znakov.
-      not_blank: Prosím zadajte názov krajiny.
+      unique: ISO kód krajiny musí byť jedinečný.
   province:
+    code:
+      min_length: Kód provincie musí obsahovať aspoň 5 znakov|Kód provincie musí obsahovať aspoň 5 znakov.
+      not_blank: Prosím zadajte kód provincie.
+      regex: Kód provincie musí mať nasledujúci formát XX-XX (napr USA-FL).
+      unique: Kód provincie musí byť jedinečný.
     name:
       max_length: Názov provincie nesmie byť dlhší ako 255 znakov|Názov provincie nesmie byť dlhší ako 255 znakov.
-      min_length: Názov provincie musí byť dlhší ako 2 znaky|Názov provincie musí byť dlhší ako 2 znaky.
+      min_length: Názov provincie musí obsahovať aspoň 2 znaky|Názov provincie musí obsahovať aspoň 2 znaky.
       not_blank: Prosím zadajte názov provincie.
+      unique: Názov provincie musí byť jedinečný.
   zone:
+    code:
+      not_blank: Prosím zadajte kód zóny.
+      unique: Kód zóny musí byť jedinečný.
     members:
       min_count: 'Prosím pridajte zóne aspoň {{ limit }} členov.'
     name:
-      max_length: Názov zóny nesmie byť dlhší ako 255 znakov.
+      max_length: Názov zóny nesmie byť dlhší ako 255 znakov|Názov zóny nesmie byť dlhší ako 255 znakov.
       not_blank: Prosím zadajte názov zóny.
+  zone_member:
+    code:
+      not_blank: Prosím zvolte členom zóny.
+    unique: Vybraný člen zóny je už v tejto zóne.

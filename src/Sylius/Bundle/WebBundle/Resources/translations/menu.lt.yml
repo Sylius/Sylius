@@ -5,19 +5,25 @@ sylius:
   backend:
     menu:
       main:
+        api_clients: API klientai
+        archetypes: Produkto archetipai
         assortment: Asortimentas
+        attributes: Konfigūruoti atributus
         blocks: Blokai
-        configuration: Konfigūracija
-        countries: Šalys
-        customer: Klienta
-        content: Turinys
         channels: Kanalai
-        dashboard: Skydelis
+        configuration: Konfigūracija
+        content: Turinys
+        countries: Šalys
         currencies: Valiutos
+        customer: Klienta
+        customers: Klientai
+        dashboard: Skydelis
+        emails: El. laiškai
         general_settings: Bendrieji nustatymai
         groups: Grupės
         homepage: Jūsų parduotuvė
         locales: Lokalės
+        menus: Meniu
         new_order: Pridėti naują užsakymą
         new_promotion: Pridėti naują akciją
         options: Valdyti produkto parinktis
@@ -25,55 +31,12 @@ sylius:
         pages: Puslapiai
         payment_methods: Apmokėjimo būdai
         payments: Mokėjimai
-        products: Produktai
-        promotions: Akcijos
-        attributes: Konfigūruoti atributus
-        archetypes: Produkto archetipai
-        sales: Užsakymai
-        shipments: Pristatymai
-        shipping_categories: Pristatymo kategorijos
-        shipping_methods: Pristatymo būdai
-        stockables: Atsargų lygiai
-        tax_categories: Apmokestinimo kategorijos
-        tax_rates: Mokesčių tarifai
-        taxation_settings: Apmokestinimo nustatymai
-        taxonomies: Skirstymas į kategorijas
-        customers: Klientai
-        zones: Zonos
-        emails: El. laiškai
-        roles: Rolės
         permissions: Prieigos teisės
-        report: Ataskaitos
-      sidebar:
-        api_clients: API klientai
-        assortment: Asortimentas
-        blocks: Blokai
-        configuration: Konfigūracija
-        content: Turinys
-        countries: Šalys
-        channels: Kanalai
-        customer: Klienta
-        dashboard: Skydelis
-        currencies: Valiutos
-        general_settings: Bendrieji nustatymai
-        groups: Grupės
-        homepage: Grįžti į svetainę
-        locales: Lokalės
-        new_order: Pridėti naują užsakymą
-        new_promotion: Pridėti naują akciją
-        options: Valdyti parinktis
-        orders: Esami užsakymai
-        pages: Puslapiai
-        routes: Maršrutai
-        redirects: Nukreipimai
-        menus: Meniu
-        payment_methods: Apmokėjimo būdai
-        payments: Mokėjimai
         products: Produktai
         promotions: Akcijos
         report: Ataskaitos
-        attributes: Konfigūruoti atributus
-        archetypes: Produkto archetipai
+        roles: Rolės
+        routes: Maršrutai
         sales: Užsakymai
         security_settings: Saugos parametrai
         shipments: Pristatymai
@@ -85,11 +48,53 @@ sylius:
         tax_rates: Mokesčių tarifai
         taxation_settings: Apmokestinimo nustatymai
         taxonomies: Skirstymas į kategorijas
-        customers: Klientai
         zones: Zonos
+      sidebar:
+        api_clients: API klientai
+        archetypes: Produkto archetipai
+        assortment: Asortimentas
+        attributes: Konfigūruoti atributus
+        blocks: Blokai
+        channels: Kanalai
+        configuration: Konfigūracija
+        content: Turinys
+        countries: Šalys
+        currencies: Valiutos
+        customer: Klienta
+        customers: Klientai
+        dashboard: Skydelis
         emails: El. laiškai
-        roles: Rolės
+        general_settings: Bendrieji nustatymai
+        groups: Grupės
+        homepage: Grįžti į svetainę
+        locales: Lokalės
+        menus: Meniu
+        new_order: Pridėti naują užsakymą
+        new_promotion: Pridėti naują akciją
+        options: Valdyti parinktis
+        orders: Esami užsakymai
+        pages: Puslapiai
+        payment_methods: Apmokėjimo būdai
+        payments: Mokėjimai
         permissions: Prieigos teisės
+        products: Produktai
+        promotions: Akcijos
+        redirects: Nukreipimai
+        report: Ataskaitos
+        roles: Rolės
+        routes: Maršrutai
+        sales: Užsakymai
+        security_settings: Saugos parametrai
+        shipments: Pristatymai
+        shipping_categories: Pristatymo kategorijos
+        shipping_methods: Pristatymo būdai
+        slideshow: Skaidrių demonstracija
+        stockables: Atsargų lygiai
+        tax_categories: Apmokestinimo kategorijos
+        tax_rates: Mokesčių tarifai
+        taxation_settings: Apmokestinimo nustatymai
+        taxonomies: Skirstymas į kategorijas
+        zones: Zonos
   frontend:
     menu:
       account:

@@ -19,7 +19,7 @@ class TaxonomyTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Taxonomy', array('sylius'));
+        $this->beConstructedWith('Taxonomy', ['sylius']);
     }
 
     function it_is_initializable()

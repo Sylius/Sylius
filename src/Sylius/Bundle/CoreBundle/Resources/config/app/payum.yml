@@ -12,29 +12,7 @@ payum:
             Sylius\Bundle\PayumBundle\Model\GatewayConfig: { doctrine: orm }
 
     gateways:
-        paypal_express_checkout:
-            paypal_express_checkout_nvp:
-                username:  %paypal.express_checkout.username%
-                password:  %paypal.express_checkout.password%
-                signature: %paypal.express_checkout.signature%
-                sandbox:   %paypal.express_checkout.sandbox%
-
-        be2bill_direct:
-            be2bill_direct:
-                identifier: %be2bill.identifier%
-                password:   %be2bill.password%
-                sandbox:    %be2bill.sandbox%
-
-        be2bill_offsite:
-            be2bill_offsite:
-                identifier: %be2bill.identifier%
-                password:   %be2bill.password%
-                sandbox:    %be2bill.sandbox%
-
-        stripe_checkout:
-            stripe_checkout:
-                publishable_key: %stripe.publishable_key%
-                secret_key: %stripe.secret_key%
-
-        dummy:
+        offline:
+            offline: ~
+        cash_on_delivery:
             offline: ~

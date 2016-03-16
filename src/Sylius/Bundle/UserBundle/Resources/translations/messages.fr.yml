@@ -2,13 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    email: E-mail
-    register: Créer un compte
-    login: Connexion
-    logout: Déconnexion
-    change_password: Modifier votre mot de passe
-    account_panel_outline: Profitez de toutes les fonctionnalités qui sont disponibles sur votre espace personnel pour visualiser, suivre et gérer toutes vos données.
   form:
     group:
       name: Nom
@@ -18,12 +11,17 @@ sylius:
       enabled: Activé
       password:
         label: Mot de passe
+        confirmation: Vérification
+      remember_me: Rester connecté
       shipping_address: Adresse de livraison
     customer:
       first_name: Prénom
       groups: Groupes
       last_name: Nom
       email: E-mail
+      phone_number: Téléphone
+      gender: Sexe 
+      birthday: Date d’anniversaire 
       billing_address: Adresse de facturation
       different_billing_address: Utiliser une adresse différente pour la facturation ?
     user_filter:

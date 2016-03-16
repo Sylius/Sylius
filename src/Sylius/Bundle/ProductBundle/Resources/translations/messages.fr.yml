@@ -6,12 +6,20 @@ sylius:
     product:
       name: Nom
       description: Description
+      attributes: Attributs
       options: Options
       meta_keywords: Meta mots-clés
       meta_description: Méta description
     product_variant:
       available_on: Disponible le
+      available_until: "Disponible jusqu'au"
     product_archetype:
       name: Nom
       parent: Parent
+      attributes: Attributs
       options: Options
+    association_type:
+      name: Nom
+    association:
+      type: "Type d'association"
+      product: Produits associés

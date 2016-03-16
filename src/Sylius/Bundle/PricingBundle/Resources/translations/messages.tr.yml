@@ -9,9 +9,7 @@ sylius:
       configuration: Ayarlar
     pricing:
       volume_based:
+        label: Fiyatlandırma yapılandırma
+        min: Min birim
+        max: Max birim
         price: Fiyatı
-  pricing:
-    volume_based:
-      price: Fiyatı
-      button:
-        add: Ekle

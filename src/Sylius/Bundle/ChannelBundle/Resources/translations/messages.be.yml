@@ -4,7 +4,6 @@
 sylius:
   form:
     channel:
-      code: Код
       name: Імя
       description: Апісанне
       enabled: Уключана

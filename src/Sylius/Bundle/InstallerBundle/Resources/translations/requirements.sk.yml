@@ -6,13 +6,14 @@ sylius:
     header: Rozšírenia
     accelerator:
       header: Akcelerátor
-      help: Nainštalujte a povoľte PHP akcelerátor ako APC (vysoko odporúčané).
+      help: Nainštalujte a povoľte PHP akcelerátor, napríklad APC (veľmi odporúčané).
     apc: APC
     ctype: Ctype
     gd: GD
     help: 'Nainštalujte a povoľte rozšírenie %extension%.'
     iconv: Iconv
     exif: Exif
+    fileinfo: Fileinfo
     icu: ICU
     intl: Intl
     json_encode: JSON
@@ -33,7 +34,7 @@ sylius:
         To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     exists: existuje
     logs:
-      header: logy
+      header: záznamy
       help:
         To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     not_exists: neexistuje

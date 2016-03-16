@@ -21,7 +21,7 @@ class OpenExchangeRatesImporter extends AbstractImporter
     /**
      * {@inheritdoc}
      */
-    public function configure(array $options = array())
+    public function configure(array $options = [])
     {
         if (!isset($options['app_id'])) {
             throw new \InvalidArgumentException('"OER_APP_ID" must be set in order to use OERImporter.');
@@ -33,7 +33,7 @@ class OpenExchangeRatesImporter extends AbstractImporter
     /**
      * {@inheritdoc}
      */
-    public function import(array $managedCurrencies = array())
+    public function import(array $managedCurrencies = [])
     {
         $data = @file_get_contents($this->url);
         $data = @json_decode($data, true);

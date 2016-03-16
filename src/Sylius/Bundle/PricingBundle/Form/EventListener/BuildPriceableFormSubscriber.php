@@ -54,11 +54,11 @@ class BuildPriceableFormSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT   => 'preSubmit',
-            FormEvents::POST_SUBMIT  => 'postSubmit'
-        );
+            FormEvents::PRE_SUBMIT => 'preSubmit',
+            FormEvents::POST_SUBMIT => 'postSubmit',
+        ];
     }
 
     /**
@@ -116,13 +116,13 @@ class BuildPriceableFormSubscriber implements EventSubscriberInterface
      * @param string        $calculatorType
      * @param array         $data
      */
-    protected function addConfigurationFields(FormInterface $form, $calculatorType, array $data = array())
+    protected function addConfigurationFields(FormInterface $form, $calculatorType, array $data = [])
     {
         $calculator = $this->calculatorRegistry->get($calculatorType);
         $formType = sprintf('sylius_price_calculator_%s', $calculator->getType());
 
         try {
-            $configurationField = $this->factory->createNamed('pricingConfiguration', $formType, $data, array('auto_initialize' => false));
+            $configurationField = $this->factory->createNamed('pricingConfiguration', $formType, $data, ['auto_initialize' => false]);
         } catch (\InvalidArgumentException $e) {
             return;
         }

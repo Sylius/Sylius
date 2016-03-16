@@ -1,0 +1,64 @@
+{% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
+
+{% block toolbar %}
+    <div class="sf-toolbar-block">
+        <div class="sf-toolbar-icon">
+            <a href="{{ path('_profiler', { 'token': token, 'panel': name }) }}">
+                {# fake image span #}<span style="width: 0; height: 28px; vertical-align: middle;"></span>
+                <span class="sf-toolbar-status">{{ collector.themeHierarchy|length }}</span>
+                <span class="sf-toolbar-value">themes</span>
+            </a>
+        </div>
+        <div class="sf-toolbar-info">
+            <div class="sf-toolbar-info-piece">
+                <b>Sorted by priority</b>
+                <ul>
+                    {% for theme in collector.themeHierarchy %}
+                        <li>
+                            {{ theme.name }} <small>({{ theme.name }})</small>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block menu %}
+    <span class="label">
+        <span class="icon"></span>
+        <strong>Themes</strong>
+        <span class="count">
+            <span>{{ collector.themeHierarchy|length }}</span>
+        </span>
+    </span>
+{% endblock %}
+
+{% block panel %}
+    <h2>Theme hierarchy({{ collector.themeHierarchy|length }})</h2>
+    {% set themes = collector.themeHierarchy %}
+    {{ block('table') }}
+
+    <h2>All themes ({{ collector.allThemes|length }})</h2>
+    {% set themes = collector.allThemes %}
+    {{ block('table') }}
+{% endblock %}
+
+{% block table %}
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Name</th>
+            <th>Path</th>
+            <th>Description</th>
+        </tr>
+        {% for theme in themes %}
+            <tr>
+                <td>{{ theme.name }}</td>
+                <td>{{ theme.name }}</td>
+                <td>{{ theme.path }}</td>
+                <td>{{ theme.description }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

@@ -14,7 +14,7 @@ sylius:
       street: Ulice
       province: Provincie
     country:
-      iso_name: ISO název
+      add_province: Přidat provincii
       name: Jméno
       provinces: Provincie
       select: Vybrat
@@ -22,6 +22,7 @@ sylius:
       name: Jméno
       select: Vybrat
     zone:
+      add_member: Přidat člena
       members: Členové
       name: Jméno
       type: Typ
@@ -30,10 +31,7 @@ sylius:
         province: Provincie
         zone: Oblast
       scope: Rozsah
+      select: Vybrat
       select_scope: Zvolte rozsah
-    zone_member_country:
-      country: Země
-    zone_member_province:
-      province: Provincie
-    zone_member_zone:
-      zone: Oblast
+    zone_member:
+      select: Vybrat

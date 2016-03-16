@@ -28,12 +28,6 @@ sylius:
       min_length: Jalan harus minimal 2 karakter long|Jalan harus minimal 2 karakter.
       not_blank: Masukkan Jalan / Alamat.
     not_shippable: Alamat ini bukanlah tujuan pengiriman berlaku.
-  country:
-    iso_name:
-      not_blank: Masukkan kode ISO negara.
-    name:
-      max_length: Nama negara tidak boleh lebih dari 255 karakter|Nama negara tidak boleh lebih dari 255 karakter.
-      not_blank: Masukkan nama negara.
   province:
     name:
       max_length: Nama Provinsi tidak boleh lebih dari 255 karakter|Nama Provinsi tidak boleh lebih dari 255 karakter.

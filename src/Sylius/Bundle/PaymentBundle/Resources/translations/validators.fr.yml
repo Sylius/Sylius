@@ -26,3 +26,14 @@ sylius:
       max_length: 'Le nom du moyen de paiement doit contenir au plus {{ limit }} caractères.'
       min_length: 'Le nom du moyen de paiement doit contenir au moins {{ limit }} caractères.'
       not_blank: Veuillez entrer le nom du moyen de paiement.
+    fee_calculator_configuration:
+      amount:
+        greater_than_or_equal: 'Les frais doivent être supérieur ou égal à {{ compared_value }}.'
+        not_blank: "Merci d'entrer le montant des frais."
+      percent:
+        max_range: 'Le pourcentage des frais ne peut être supérieur à {{ limit }}.'
+        min_range: 'Le pourcentage des frais ne peut être inférieure à {{ limit }}.'
+        not_blank: "Merci d'entrer le pourcentage de frais."
+    code:
+      not_blank: Veuillez entrez le code du mode de paiement.
+      unique: Ce code de mode de paiement existe déjà.

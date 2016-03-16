@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  promotion_coupon:
+    generate: Kuponat e promocionit u gjeneruan me sukses.
+    eligible: Kuponi yt i promocionit u shtua në kartë.
+    invalid: Kuponi yt i promocionit nuk është i vlefshëm.
+    not_eligible: Karta jote nuk është e përshtatshme për këtë kupon promocioni.

@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\ProductBundle\DependencyInjection;
 
-use Sylius\Bundle\ProductBundle\Controller\ProductController;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductTranslationType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
@@ -72,7 +71,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode('model')->defaultValue(Product::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(ProductInterface::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('controller')->defaultValue(ProductController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(ProductFactory::class)->end()
                                         ->arrayNode('form')
@@ -89,7 +88,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                             ->cannotBeEmpty()
                                         ->end()
                                     ->end()
@@ -119,14 +118,14 @@ class Configuration implements ConfigurationInterface
                                             ->children()
                                                 ->arrayNode('default')
                                                     ->prototype('scalar')->end()
-                                                    ->defaultValue(array('sylius'))
+                                                    ->defaultValue(['sylius'])
                                                     ->cannotBeEmpty()
                                                 ->end()
                                             ->end()
                                         ->end()
                                         ->arrayNode('fields')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('name', 'slug', 'description', 'meta_keywords', 'meta_description', 'short_description'))
+                                            ->defaultValue(['name', 'slug', 'description', 'meta_keywords', 'meta_description', 'short_description'])
                                         ->end()
                                     ->end()
                                 ->end()

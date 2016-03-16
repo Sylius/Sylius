@@ -4,6 +4,29 @@
 sylius:
   form:
     attribute:
-      name: Nazwa w systemie
-      presentation: Nazwa publiczna
+      add: Dodaj
+      add_attributes: Dodaj atrybuty
+      choices: Opcje
+      code: Kod
+      name: Nazwa
+      translations: Tłumaczenia
       type: Typ
+    attribute_type:
+      checkbox: Pole wyboru
+      configuration: Konfiguracja
+      date: Data
+      datetime: Data/godzina
+      integer: Liczba całkowita
+      percent: Procent
+      text: Tekst
+      textarea: Pole tekstowe
+      title: Typy atrybutu
+      validation: Walidacja
+    attribute_type_configuration:
+      datetime:
+        format: Format
+      date:
+        format: Format
+      text:
+        min: Minimalna długość
+        max: Maksymalna długość

@@ -17,6 +17,7 @@ sylius:
         header: Ödeme durumu
         checkout: 'Ödeme  yap'
         completed: Tamamlandı
+        authorized: Yetkili
         failed: Başarısız oldu
         new: Yeni
         pending: Beklemede
@@ -30,6 +31,3 @@ sylius:
       enabled: Etkin?
       gateway: Ağ Geçidi
       name: Ad
-      fee_calculator:
-        fixed:
-          amount: Miktar

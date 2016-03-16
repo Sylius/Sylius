@@ -4,6 +4,5 @@
 sylius:
   form:
     email:
-      code: ISO kod
       enabled: Omogući
       content: Sadržaj

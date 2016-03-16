@@ -24,10 +24,10 @@
 
         "jms/translation-bundle": "1.1.*",
         "stof/doctrine-extensions-bundle": "~1.1",
-        "sylius/taxonomy": "0.16.*",
-        "sylius/resource-bundle": "0.16.*",
-        "sylius/translation-bundle": "0.16.*",
-        "symfony/framework-bundle": "^2.7.5"
+        "sylius/taxonomy": "0.17.*",
+        "sylius/resource-bundle": "0.17.*",
+        "sylius/translation-bundle": "0.17.*",
+        "symfony/framework-bundle": "^2.7.7"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.4",
@@ -47,7 +47,7 @@
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.16-dev"
+            "dev-master": "0.17-dev"
         }
     }
 }

@@ -28,27 +28,27 @@ class SalesTotalType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('start', 'date', array(
+            ->add('start', 'date', [
                 'label' => 'sylius.form.report.user_registration.start',
-            ))
-            ->add('end', 'date', array(
+            ])
+            ->add('end', 'date', [
                 'label' => 'sylius.form.report.user_registration.end',
-            ))
-            ->add('period', 'choice', array(
-                'choices'  => SalesTotalDataFetcher::getPeriodChoices(),
+            ])
+            ->add('period', 'choice', [
+                'choices' => SalesTotalDataFetcher::getPeriodChoices(),
                 'multiple' => false,
                 'label' => 'sylius.form.report.user_registration.period',
-            ))
-            ->add('empty_records', 'checkbox', array(
+            ])
+            ->add('empty_records', 'checkbox', [
                 'label' => 'sylius.form.report.user_registration.empty_records',
                 'required' => false,
-            ))
+            ])
         ;
     }
 
     /**
-    * {@inheritdoc}
-    */
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sylius_data_fetcher_sales_total';

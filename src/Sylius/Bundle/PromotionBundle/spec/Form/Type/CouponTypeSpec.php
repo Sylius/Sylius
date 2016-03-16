@@ -25,7 +25,7 @@ class CouponTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Coupon', array('sylius'));
+        $this->beConstructedWith('Coupon', ['sylius']);
     }
 
     function it_is_initializable()
@@ -55,16 +55,16 @@ class CouponTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_should_define_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
-                'data_class'        => 'Coupon',
-                'validation_groups' => array('sylius'),
-            ))
+            ->setDefaults([
+                'data_class' => 'Coupon',
+                'validation_groups' => ['sylius'],
+            ])
             ->shouldBeCalled()
         ;
 

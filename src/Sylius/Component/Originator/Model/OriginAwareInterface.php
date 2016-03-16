@@ -27,8 +27,6 @@ interface OriginAwareInterface
      * Set origin identifier.
      *
      * @param int $originId
-     *
-     * @return self
      */
     public function setOriginId($originId);
 
@@ -43,8 +41,6 @@ interface OriginAwareInterface
      * Set origin type info.
      *
      * @param string $originType
-     *
-     * @return self
      */
     public function setOriginType($originType);
 }

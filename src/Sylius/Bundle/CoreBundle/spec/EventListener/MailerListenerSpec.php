@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
@@ -106,7 +115,7 @@ class MailerListenerSpec extends ObjectBehavior
         $user->isEnabled()->shouldBeCalled()->willReturn(true);
 
         $emailSender
-            ->send(Emails::USER_CONFIRMATION, array('fulanito@sylius.com'), array('user' => $user))
+            ->send(Emails::USER_CONFIRMATION, ['fulanito@sylius.com'], ['user' => $user])
             ->shouldBeCalled()
         ;
 
@@ -161,8 +170,8 @@ class MailerListenerSpec extends ObjectBehavior
         $emailSender
             ->send(
                 Emails::ORDER_COMMENT,
-                array('fulanito@sylius.com'),
-                array('order' => $order, 'comment' => $comment)
+                ['fulanito@sylius.com'],
+                ['order' => $order, 'comment' => $comment]
             )
             ->shouldBeCalled();
 

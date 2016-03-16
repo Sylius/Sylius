@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c); Paweł Jędrzejewski
+ * (c) Paweł Jędrzejewski
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -54,6 +54,13 @@ interface AttributeValueInterface extends ResourceInterface
      * @param mixed $value
      */
     public function setValue($value);
+
+    /**
+     * Proxy method to access the code from real attribute.
+     *
+     * @return string
+     */
+    public function getCode();
 
     /**
      * Proxy method to access the name from real attribute.

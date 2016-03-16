@@ -3,8 +3,63 @@
 
 sylius:
   extensions:
+    header: razširitve
+    accelerator:
+      header: Pospeševalnik
+      help: Namestite in omogočite PHP pospeševalnik kot je APC (zelo priporočljivo).
+    apc: APC
+    ctype: Ctype
+    gd: GD
+    help: 'Namestite in omogočite razširitev %extension%.'
+    iconv: Iconv
+    exif: Exif
+    fileinfo: Fileinfo
+    icu: ICU
+    intl: Intl
+    json_encode: JSON
+    mbstring: Večbajtni niz
     "off": false
     "on": true
+    pcre: PCRE
+    pdo: PDO
+    php_xml: PHP-XML
+    session_start: Seja
+    simplexml_import_dom: SimpleXML
+    token_get_all: Tokenizer
+  filesystem:
+    header: datotečni sistem
+    cache:
+      header: predpomnilnik
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+    exists: obstaja
+    logs:
+      header: dnevniki
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+    not_exists: ne obstaja
+    not_writable: nezapisljivo
+    parameters:
+      header: parameters.yml
+      help:
+        To set permissions run: 'sudo chmod a+w %path%'
+    vendors: izdelovalci
+    writable: zapisljivo
   settings:
+    header: PHP različica in nastavitve
+    any: katerakoli
+    detect_unicode: detect_unicode
+    magic_quotes_gpc: magic_quotes_gpc
+    non_deprecated: ni opuščeno
     "off": false
     "on": true
+    register_globals: register_globals
+    session:
+      auto_start: session.auto_start
+    short_open_tag: short_open_tag
+    timezone: časovni pas
+    timezone_deprecated:
+      header: Opuščeni časovni pas
+      help: 'Časovni pas %timezone% je opuščen. Popravite vašo datoteko php.ini (seznam opuščenih časovni pasov http://php.net/manual/en/timezones.others.php).'
+    version: Različica PHP
+    version_recommanded: Priporočena različica PHP

@@ -14,10 +14,10 @@ namespace spec\Sylius\Component\Registry;
 require_once __DIR__.'/Fixture/SampleServiceInterface.php';
 
 use PhpSpec\ObjectBehavior;
+use spec\Sylius\Component\Registry\Fixture\SampleServiceInterface;
 use Sylius\Component\Registry\ExistingServiceException;
 use Sylius\Component\Registry\NonExistingServiceException;
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use spec\Sylius\Component\Registry\Fixture\SampleServiceInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -41,7 +41,7 @@ class ServiceRegistrySpec extends ObjectBehavior
 
     function it_initializes_services_array_by_default()
     {
-        $this->all()->shouldReturn(array());
+        $this->all()->shouldReturn([]);
     }
 
     function it_registers_service_with_given_type(SampleServiceInterface $service)

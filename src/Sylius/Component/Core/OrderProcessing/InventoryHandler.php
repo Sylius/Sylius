@@ -12,11 +12,9 @@
 namespace Sylius\Component\Core\OrderProcessing;
 
 use Doctrine\Common\Collections\Collection;
-use SM\Factory\FactoryInterface;
-use Sylius\Component\Core\Model\InventoryUnitInterface;
+use SM\Factory\FactoryInterface as StateMachineFactoryInteraface;
+use Sylius\Component\Order\Factory\OrderItemUnitFactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Inventory\Factory\InventoryUnitFactoryInterface;
 use Sylius\Component\Inventory\InventoryUnitTransitions;
 use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
 
@@ -27,61 +25,33 @@ use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
 class InventoryHandler implements InventoryHandlerInterface
 {
     /**
-     * Inventory operator.
-     *
      * @var InventoryOperatorInterface
      */
     protected $inventoryOperator;
 
     /**
-     * Inventory unit factory.
-     *
-     * @var InventoryUnitFactoryInterface
+     * @var OrderItemUnitFactoryInterface
      */
-    protected $inventoryUnitFactory;
+    protected $orderItemUnitFactory;
 
     /**
-     * @var FactoryInterface
+     * @var StateMachineFactoryInteraface
      */
-    protected $factory;
+    protected $stateMachineFactory;
 
     /**
-     * Constructor.
-     *
-     * @param InventoryOperatorInterface    $inventoryOperator
-     * @param InventoryUnitFactoryInterface $inventoryUnitFactory
-     * @param FactoryInterface              $factory
+     * @param InventoryOperatorInterface $inventoryOperator
+     * @param OrderItemUnitFactoryInterface $orderItemUnitFactory
+     * @param StateMachineFactoryInteraface $stateMachineFactory
      */
     public function __construct(
         InventoryOperatorInterface $inventoryOperator,
-        InventoryUnitFactoryInterface $inventoryUnitFactory,
-        FactoryInterface $factory
+        OrderItemUnitFactoryInterface $orderItemUnitFactory,
+        StateMachineFactoryInteraface $stateMachineFactory
     ) {
-        $this->inventoryOperator    = $inventoryOperator;
-        $this->inventoryUnitFactory = $inventoryUnitFactory;
-        $this->factory              = $factory;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function processInventoryUnits(OrderItemInterface $item)
-    {
-        $nbUnits = $item->getInventoryUnits()->count();
-
-        if ($item->getQuantity() > $nbUnits) {
-            $this->createInventoryUnits($item, $item->getQuantity() - $nbUnits);
-        } elseif ($item->getQuantity() < $nbUnits) {
-            foreach ($item->getInventoryUnits()->slice(0, $nbUnits - $item->getQuantity()) as $unit) {
-                $item->removeInventoryUnit($unit);
-            }
-        }
-
-        foreach ($item->getInventoryUnits() as $unit) {
-            if ($unit->getStockable() !== $item->getVariant()) {
-                $unit->setStockable($item->getVariant());
-            }
-        }
+        $this->inventoryOperator = $inventoryOperator;
+        $this->orderItemUnitFactory = $orderItemUnitFactory;
+        $this->stateMachineFactory = $stateMachineFactory;
     }
 
     /**
@@ -90,7 +60,7 @@ class InventoryHandler implements InventoryHandlerInterface
     public function holdInventory(OrderInterface $order)
     {
         foreach ($order->getItems() as $item) {
-            $quantity = $this->applyTransition($item->getInventoryUnits(), InventoryUnitTransitions::SYLIUS_HOLD);
+            $quantity = $this->applyTransition($item->getUnits(), InventoryUnitTransitions::SYLIUS_HOLD);
 
             $this->inventoryOperator->hold($item->getVariant(), $quantity);
         }
@@ -102,7 +72,7 @@ class InventoryHandler implements InventoryHandlerInterface
     public function releaseInventory(OrderInterface $order)
     {
         foreach ($order->getItems() as $item) {
-            $quantity = $this->applyTransition($item->getInventoryUnits(), InventoryUnitTransitions::SYLIUS_RELEASE);
+            $quantity = $this->applyTransition($item->getUnits(), InventoryUnitTransitions::SYLIUS_RELEASE);
 
             $this->inventoryOperator->release($item->getVariant(), $quantity);
         }
@@ -114,14 +84,14 @@ class InventoryHandler implements InventoryHandlerInterface
     public function updateInventory(OrderInterface $order)
     {
         foreach ($order->getItems() as $item) {
-            $units = $item->getInventoryUnits();
+            $units = $item->getUnits();
             $quantity = 0;
 
             foreach ($units as $unit) {
-                $stateMachine = $this->factory->get($unit, InventoryUnitTransitions::GRAPH);
+                $stateMachine = $this->stateMachineFactory->get($unit, InventoryUnitTransitions::GRAPH);
                 if ($stateMachine->can(InventoryUnitTransitions::SYLIUS_SELL)) {
                     if ($stateMachine->can(InventoryUnitTransitions::SYLIUS_RELEASE)) {
-                        $quantity++;
+                        ++$quantity;
                     }
                     $stateMachine->apply(InventoryUnitTransitions::SYLIUS_SELL);
                 }
@@ -129,15 +99,6 @@ class InventoryHandler implements InventoryHandlerInterface
 
             $this->inventoryOperator->release($item->getVariant(), $quantity);
             $this->inventoryOperator->decrease($units);
-        }
-    }
-
-    protected function createInventoryUnits(OrderItemInterface $item, $quantity, $state = InventoryUnitInterface::STATE_CHECKOUT)
-    {
-        $units = $this->inventoryUnitFactory->createForStockable($item->getVariant(), $quantity, $state);
-
-        foreach ($units as $unit) {
-            $item->addInventoryUnit($unit);
         }
     }
 
@@ -154,10 +115,10 @@ class InventoryHandler implements InventoryHandlerInterface
         $quantity = 0;
 
         foreach ($units as $unit) {
-            $stateMachine = $this->factory->get($unit, InventoryUnitTransitions::GRAPH);
+            $stateMachine = $this->stateMachineFactory->get($unit, InventoryUnitTransitions::GRAPH);
             if ($stateMachine->can($transition)) {
                 $stateMachine->apply($transition);
-                $quantity++;
+                ++$quantity;
             }
         }
 

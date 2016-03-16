@@ -13,13 +13,15 @@ namespace Sylius\Component\Shipping\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\TimestampableTrait;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class Shipment implements ShipmentInterface, TimestampableInterface
+class Shipment implements ShipmentInterface
 {
+    use TimestampableTrait;
+
     /**
      * @var mixed
      */
@@ -36,28 +38,18 @@ class Shipment implements ShipmentInterface, TimestampableInterface
     protected $method;
 
     /**
-     * @var Collection|ShipmentItemInterface[]
+     * @var Collection|ShipmentUnitInterface[]
      */
-    protected $items;
+    protected $units;
 
     /**
      * @var string
      */
     protected $tracking;
 
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
-
     public function __construct()
     {
-        $this->items = new ArrayCollection();
+        $this->units = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }
 
@@ -66,7 +58,7 @@ class Shipment implements ShipmentInterface, TimestampableInterface
      */
     public function __toString()
     {
-        return $this->id;
+        return (string) $this->id;
     }
 
     /**
@@ -112,38 +104,38 @@ class Shipment implements ShipmentInterface, TimestampableInterface
     /**
      * {@inheritdoc}
      */
-    public function getItems()
+    public function getUnits()
     {
-        return $this->items;
+        return $this->units;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasItem(ShipmentItemInterface $item)
+    public function hasUnit(ShipmentUnitInterface $unit)
     {
-        return $this->items->contains($item);
+        return $this->units->contains($unit);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addItem(ShipmentItemInterface $item)
+    public function addUnit(ShipmentUnitInterface $unit)
     {
-        if (!$this->hasItem($item)) {
-            $item->setShipment($this);
-            $this->items->add($item);
+        if (!$this->hasUnit($unit)) {
+            $unit->setShipment($this);
+            $this->units->add($unit);
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function removeItem(ShipmentItemInterface $item)
+    public function removeUnit(ShipmentUnitInterface $unit)
     {
-        if ($this->hasItem($item)) {
-            $item->setShipment(null);
-            $this->items->removeElement($item);
+        if ($this->hasUnit($unit)) {
+            $unit->setShipment(null);
+            $this->units->removeElement($unit);
         }
     }
 
@@ -154,8 +146,8 @@ class Shipment implements ShipmentInterface, TimestampableInterface
     {
         $shippables = new ArrayCollection();
 
-        foreach ($this->items as $item) {
-            $shippable = $item->getShippable();
+        foreach ($this->units as $unit) {
+            $shippable = $unit->getShippable();
             if (!$shippables->contains($shippable)) {
                 $shippables->add($shippable);
             }
@@ -191,44 +183,12 @@ class Shipment implements ShipmentInterface, TimestampableInterface
     /**
      * {@inheritdoc}
      */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getShippingWeight()
     {
         $weight = 0;
 
-        foreach ($this->items as $item) {
-            $weight += $item->getShippable()->getShippingWeight();
+        foreach ($this->units as $unit) {
+            $weight += $unit->getShippable()->getShippingWeight();
         }
 
         return $weight;
@@ -241,19 +201,25 @@ class Shipment implements ShipmentInterface, TimestampableInterface
     {
         $volume = 0;
 
-        foreach ($this->items as $item) {
-            $volume += $item->getShippable()->getShippingVolume();
+        foreach ($this->units as $unit) {
+            $volume += $unit->getShippable()->getShippingVolume();
         }
 
         return $volume;
     }
 
-    public function getShippingItemCount()
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingUnitCount()
     {
-        return $this->items->count();
+        return $this->units->count();
     }
 
-    public function getShippingItemTotal()
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingUnitTotal()
     {
         return 0;
     }

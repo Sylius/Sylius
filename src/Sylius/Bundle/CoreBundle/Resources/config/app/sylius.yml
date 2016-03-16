@@ -61,10 +61,12 @@ sylius_cart:
     resources:
         cart:
             classes:
+                model: %sylius.model.order.class%
                 form:
                     default: Sylius\Bundle\CoreBundle\Form\Type\CartType
         cart_item:
             classes:
+                model: %sylius.model.order_item.class%
                 form:
                     default: Sylius\Bundle\CoreBundle\Form\Type\CartItemType
 
@@ -107,13 +109,20 @@ sylius_product:
                     form:
                         default: Sylius\Bundle\CoreBundle\Form\Type\ProductTranslationType
 
+sylius_association:
+    resources:
+        product:
+            subject: %sylius.model.product.class%
+            association:
+                classes:
+                    model: Sylius\Component\Product\Model\ProductAssociation
 
 sylius_archetype:
     resources:
         product:
             archetype:
                 classes:
-                    model: Sylius\Component\Product\Model\Archetype
+                    model: Sylius\Component\Core\Model\Archetype
                 translation:
                     classes:
                         model: Sylius\Component\Product\Model\ArchetypeTranslation
@@ -147,9 +156,9 @@ sylius_shipping:
             classes:
                 model: Sylius\Component\Core\Model\Shipment
                 repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ShipmentRepository
-        shipment_item:
+        shipment_unit:
             classes:
-                model: Sylius\Component\Core\Model\InventoryUnit
+                model: %sylius.model.order_item_unit.class%
         shipping_method:
             classes:
                 model: Sylius\Component\Core\Model\ShippingMethod
@@ -167,6 +176,9 @@ sylius_promotion:
                 repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\PromotionRepository
                 form:
                     default: Sylius\Bundle\CoreBundle\Form\Type\PromotionType
+        promotion_rule:
+            classes:
+                factory: Sylius\Component\Core\Factory\RuleFactory
         promotion_coupon:
             classes:
                 model: Sylius\Component\Core\Model\Coupon
@@ -179,10 +191,7 @@ sylius_inventory:
     resources:
         inventory_unit:
             classes:
-                model: Sylius\Component\Core\Model\InventoryUnit
-        stockable:
-            classes:
-                model: %sylius.model.product_variant.class%
+                model: %sylius.model.order_item_unit.class%
 
 sylius_payment:
     resources:
@@ -197,12 +206,7 @@ sylius_payment:
                 form:
                     choice: Sylius\Bundle\CoreBundle\Form\Type\Payment\PaymentMethodChoiceType
     gateways:
-        dummy: Test
         offline: Offline
-        stripe: Stripe
-        be2bill: Be2Bill
-        stripe_checkout: Stripe Checkout
-        paypal_express_checkout: Paypal Express Checkout
 
 sylius_payum: ~
 
@@ -231,6 +235,9 @@ sylius_order:
                 model: Sylius\Component\Core\Model\OrderItem
                 form:
                     default: Sylius\Bundle\CoreBundle\Form\Type\OrderItemType
+        order_item_unit:
+            classes:
+                model: Sylius\Component\Core\Model\OrderItemUnit
 
 sylius_sequence:
     generators:
@@ -363,7 +370,9 @@ sylius_rbac:
         sylius.customer.index: List customers
         sylius.customer.create: Create customer
         sylius.customer.update: Edit customer
-        sylius.customer.delete: Delete customer
+
+        sylius.manage.user: Manage users
+        sylius.user.delete: Delete user
 
         sylius.manage.group: Manage groups
         sylius.group.show: Show group
@@ -371,6 +380,13 @@ sylius_rbac:
         sylius.group.create: Create group
         sylius.group.update: Edit group
         sylius.group.delete: Delete group
+        
+        sylius.manage.metadata_container: Manage metadata
+        sylius.metadata_container.show: Show metadata
+        sylius.metadata_container.index: List metadata
+        sylius.metadata_container.create: Create metadata
+        sylius.metadata_container.update: Edit metadata
+        sylius.metadata_container.delete: Delete metadata
 
         sylius.manage.channel: Manage channels
         sylius.channel.show: Show channel
@@ -441,6 +457,13 @@ sylius_rbac:
         sylius.taxon.create: Create taxon
         sylius.taxon.update: Edit taxon
         sylius.taxon.delete: Delete taxon
+
+        sylius.manage.adjustment: Manage adjustments
+        sylius.adjustment.show: Show adjustment
+        sylius.adjustment.index: List adjustments
+        sylius.adjustment.create: Create adjustment
+        sylius.adjustment.update: Edit adjustment
+        sylius.adjustment.delete: Delete adjustment
 
         sylius.manage.order: Manage orders
         sylius.order.show: Show order
@@ -652,6 +675,13 @@ sylius_rbac:
         sylius.contact_request.update: Edit contact request
         sylius.contact_request.delete: Delete contact request
 
+        sylius.manage.product_association_type: Manage association types
+        sylius.product_association_type.show: Show association type
+        sylius.product_association_type.index: List association types
+        sylius.product_association_type.create: Create association type
+        sylius.product_association_type.update: Edit association type
+        sylius.product_association_type.delete: Delete association type
+
         sylius.manage.contact_topic: Manage contact topics
         sylius.contact_topic.show: Show contact topic
         sylius.contact_topic.index: List contact topics
@@ -664,6 +694,13 @@ sylius_rbac:
         sylius.settings.sylius_affiliate: Manage affiliate settings
         sylius.settings.sylius_security: Manage security settings
         sylius.settings.sylius_taxation: Manage taxation settings
+
+        sylius.manage.product_review: Manage product reviews
+        sylius.product_review.show: Show product review
+        sylius.product_review.index: List product reviews
+        sylius.product_review.create: Create product review
+        sylius.product_review.update: Edit product review
+        sylius.product_review.delete: Delete product review
 
         sylius.catalog: Manage products catalog
         sylius.sales: Manage sales
@@ -678,8 +715,10 @@ sylius_rbac:
         sylius.manage.affiliate: [sylius.affiliate.show, sylius.affiliate.index, sylius.affiliate.create, sylius.affiliate.update, sylius.affiliate.delete]
         sylius.manage.affiliate_banner: [sylius.affiliate_banner.index, sylius.affiliate_banner.create, sylius.affiliate_banner.update, sylius.affiliate_banner.delete]
         sylius.manage.affiliate_goal: [sylius.affiliate_goal.show, sylius.affiliate_goal.index, sylius.affiliate_goal.create, sylius.affiliate_goal.update, sylius.affiliate_goal.delete]
+        sylius.manage.metadata_container: [sylius.metadata_container.show, sylius.metadata_container.index, sylius.metadata_container.create, sylius.metadata_container.update, sylius.metadata_container.delete]
         sylius.manage.channel: [sylius.channel.show, sylius.channel.index, sylius.channel.create, sylius.channel.update, sylius.channel.delete]
-        sylius.manage.customer: [sylius.customer.show, sylius.customer.index, sylius.customer.create, sylius.customer.update, sylius.customer.delete]
+        sylius.manage.customer: [sylius.customer.show, sylius.customer.index, sylius.customer.create, sylius.customer.update]
+        sylius.manage.user: [sylius.user.delete]
         sylius.manage.group: [sylius.group.show, sylius.group.index, sylius.group.create, sylius.group.update, sylius.group.delete]
         sylius.manage.role: [sylius.role.show, sylius.role.index, sylius.role.create, sylius.role.update, sylius.role.delete]
         sylius.manage.permission: [sylius.permission.show, sylius.permission.index, sylius.permission.create, sylius.permission.update, sylius.permission.delete]
@@ -690,6 +729,7 @@ sylius_rbac:
         sylius.manage.product_variant: [sylius.product_variant.show, sylius.product_variant.index, sylius.product_variant.create, sylius.product_variant.update, sylius.product_variant.delete]
         sylius.manage.taxonomy: [sylius.taxonomy.show, sylius.taxonomy.index, sylius.taxonomy.create, sylius.taxonomy.update, sylius.taxonomy.delete]
         sylius.manage.taxon: [sylius.taxon.show, sylius.taxon.index, sylius.taxon.create, sylius.taxon.update, sylius.taxon.delete]
+        sylius.manage.adjustment: [sylius.adjustment.show, sylius.adjustment.index, sylius.adjustment.create, sylius.adjustment.update, sylius.adjustment.delete]
         sylius.manage.order: [sylius.order.show, sylius.order.index, sylius.order.create, sylius.order.update, sylius.order.delete]
         sylius.manage.order_item: [sylius.order_item.show, sylius.order_item.index, sylius.order_item.create, sylius.order_item.update, sylius.order_item.delete]
         sylius.manage.adjustment: [sylius.adjustment.show, sylius.adjustment.index, sylius.adjustment.create, sylius.adjustment.update, sylius.adjustment.delete]
@@ -718,17 +758,18 @@ sylius_rbac:
         sylius.manage.slideshow: [sylius.slideshow.show, sylius.slideshow.index, sylius.slideshow.create, sylius.slideshow.update, sylius.slideshow.delete]
         sylius.manage.email: [sylius.email.show, sylius.email.index, sylius.email.create, sylius.email.update, sylius.email.delete]
         sylius.manage.report: [sylius.report.show, sylius.report.index, sylius.report.create, sylius.report.update, sylius.report.delete]
+        sylius.manage.product_review: [sylius.product_review.show, sylius.product_review.index, sylius.product_review.create, sylius.product_review.update, sylius.product_review.delete]
         sylius.manage.contact_request: [sylius.contact_request.show, sylius.contact_request.index, sylius.contact_request.create, sylius.contact_request.update, sylius.contact_request.delete]
         sylius.manage.contact_topic: [sylius.contact_topic.show, sylius.contact_topic.index, sylius.contact_topic.create, sylius.contact_topic.update, sylius.contact_topic.delete]
         sylius.manage.settings: [sylius.settings.sylius_general, sylius.settings.sylius_security, sylius.settings.sylius_taxation, sylius.settings.sylius_affiliate]
-
-        sylius.catalog: [sylius.manage.product, sylius.manage.product_attribute, sylius.manage.product_option, sylius.manage.product_archetype, sylius.manage.product_variant, sylius.manage.taxonomy, sylius.manage.taxon]
-        sylius.sales: [sylius.manage.order, sylius.manage.order_item, sylius.manage.adjustment, sylius.manage.payment, sylius.manage.report]
-        sylius.marketing: [sylius.manage.promotion, sylius.manage.promotion_coupon, sylius.manage.email, sylius.manage.affiliate, sylius.manage.affiliate_banner, sylius.manage.affiliate_goal]
+        sylius.manage.product_association_type: [sylius.product_association_type.show, sylius.product_association_type.index, sylius.product_association_type.create, sylius.product_association_type.update, sylius.product_association_type.delete]
+        sylius.catalog: [sylius.manage.product, sylius.manage.product_attribute, sylius.manage.product_option, sylius.manage.product_archetype, sylius.manage.product_variant, sylius.manage.taxonomy, sylius.manage.taxon, sylius.manage.metadata_container, sylius.manage.product_association_type]
+        sylius.marketing: [sylius.manage.promotion, sylius.manage.promotion_coupon, sylius.manage.email, sylius.manage.metadata_container, sylius.manage.affiliate, sylius.manage.affiliate_banner, sylius.manage.affiliate_goal]
+        sylius.sales: [sylius.manage.adjustment, sylius.manage.order, sylius.manage.order_item, sylius.manage.adjustment, sylius.manage.payment, sylius.manage.report, sylius.manage.product_review]
         sylius.shipping: [sylius.manage.shipment, sylius.manage.shipping_method, sylius.manage.shipping_category]
-        sylius.content: [sylius.manage.static_content, sylius.manage.route, sylius.manage.simple_block, sylius.manage.menu, sylius.manage.slideshow, sylius.manage.string_block, sylius.manage.slideshow_block, sylius.manage.imagine_block]
-        sylius.security: [sylius.manage.permission, sylius.manage.role, sylius.manage.customer, sylius.manage.group, sylius.accounts]
-        sylius.accounts: [sylius.manage.customer, sylius.manage.group]
+        sylius.content: [sylius.manage.static_content, sylius.manage.route, sylius.manage.simple_block, sylius.manage.menu, sylius.manage.slideshow, sylius.manage.string_block, sylius.manage.slideshow_block, sylius.manage.imagine_block, sylius.manage.metadata_container]
+        sylius.security: [sylius.manage.permission, sylius.manage.role, sylius.manage.user, sylius.manage.customer, sylius.manage.group, sylius.accounts]
+        sylius.accounts: [sylius.manage.customer, sylius.manage.group, sylius.manage.user]
         sylius.taxes: [sylius.manage.tax_rate, sylius.manage.tax_category]
         sylius.support: [sylius.manage.contact_request, sylius.manage.contact_topic]
     security_roles:
@@ -740,7 +781,7 @@ sylius_rbac:
             name: Administrator
             description: Administrator user
             permissions: [sylius.manage.settings, sylius.manage.locale, sylius.manage.currency, sylius.manage.country, sylius.manage.province, sylius.manage.zone, sylius.manage.payment_method, sylius.manage.channel]
-            security_roles: [ROLE_ADMINISTRATION_ACCESS]
+            security_roles: [ROLE_ADMINISTRATION_ACCESS, ROLE_ALLOWED_TO_SWITCH]
         catalog_manager:
             name: Catalog Manager
             description: Users responsible for catalog product management
@@ -760,7 +801,7 @@ sylius_rbac:
             name: Accounts Manager
             description: Users responsible for managing customer accounts
             permissions: [sylius.accounts]
-            security_roles: [ROLE_ADMINISTRATION_ACCESS]
+            security_roles: [ROLE_ADMINISTRATION_ACCESS, ROLE_ALLOWED_TO_SWITCH]
         shipping_manager:
             name: Shipping Manager
             description: Shipping Department people
@@ -794,7 +835,7 @@ sylius_rbac:
             name: Support
             description: Support Team
             permissions: [sylius.support, sylius.customer.show, sylius.customer.index]
-            security_roles: [ROLE_ADMINISTRATION_ACCESS]
+            security_roles: [ROLE_ADMINISTRATION_ACCESS, ROLE_ALLOWED_TO_SWITCH]
     roles_hierarchy:
         administrator: [catalog_manager, sales_manager, marketing_manager, accounts_manager, shipping_manager, content_editor, tax_manager, it, support]
         it: [security_auditor, developer]
@@ -812,3 +853,17 @@ sylius_user:
             classes:
                 model: Sylius\Component\Core\Model\Customer
                 controller: Sylius\Bundle\CoreBundle\Controller\CustomerController
+
+sylius_review:
+    resources:
+        product:
+            subject: %sylius.model.product.class%
+            review:
+                classes:
+                    model: Sylius\Component\Core\Model\ProductReview
+                    form:
+                        default: Sylius\Bundle\CoreBundle\Form\Type\ProductReviewType
+                        admin: Sylius\Bundle\CoreBundle\Form\Type\ProductReviewAdminType
+            reviewer:
+                classes:
+                    model: %sylius.model.customer.class%

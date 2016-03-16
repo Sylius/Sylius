@@ -10,10 +10,12 @@ sylius:
       not_blank: Vă rugăm să completați numele produsului.
       min_length: 'Numele produsului trebuie să conţină cel puţin 1 caracter.|Numele produsului trebuie să conţină cel puţin {{ limit }} caractere.'
       max_length: 'Numele produsului nu poate depăși un caracter.|Numele produsului nu poate depăși {{ limit }} de caractere.'
-    description:
-      not_blank: Vă rugăm să completați descrierea produsului.
-      min_length: 'Descrierea produsului trebuie să conţină cel puţin 1 caracter.|Descrierea produsului trebuie să conţină cel puţin {{ limit }} caractere.'
   variant:
     sku:
       not_blank: Vă rugăm să completați codul SKU a variantei.
       unique: Codul SKU a variantei trebuie să fie unic.
+  archetype:
+    name:
+      not_blank: Vă rugăm să introduceţi numele de arhetip.
+      min_length: 'Numele arhetipului trebuie să aibe cel puţin 1 caracter. | Numele arhetipului trebuie să aibe cel puţin {{ limit }} caractere.'
+      max_length: 'Numele arhetipului nu trebuie să depășească 1 caracter. | Numele arhetipului nu trebuie să fie mai mare de {{ limit }} caractere.'

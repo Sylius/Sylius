@@ -4,6 +4,8 @@
 sylius:
   form:
     attribute:
-      name: Унутранае імя
-      presentation: Выгляд
+      code: Код
+      name: Імя
       type: Тып
+    attribute_type:
+      configuration: Канфігурацыя

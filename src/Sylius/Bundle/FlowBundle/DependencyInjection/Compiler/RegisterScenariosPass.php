@@ -30,7 +30,7 @@ class RegisterScenariosPass implements CompilerPassInterface
         $coordinator = $container->getDefinition('sylius.process.coordinator');
 
         foreach ($container->findTaggedServiceIds('sylius.process.scenario') as $id => $attributes) {
-            $coordinator->addMethodCall('registerScenario', array($attributes[0]['alias'], new Reference($id)));
+            $coordinator->addMethodCall('registerScenario', [$attributes[0]['alias'], new Reference($id)]);
         }
     }
 }

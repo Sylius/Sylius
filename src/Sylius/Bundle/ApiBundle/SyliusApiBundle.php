@@ -31,9 +31,9 @@ class SyliusApiBundle extends AbstractResourceBundle
      */
     public static function getSupportedDrivers()
     {
-        return array(
+        return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        );
+        ];
     }
 
     /**
@@ -41,13 +41,13 @@ class SyliusApiBundle extends AbstractResourceBundle
      */
     protected function getModelInterfaces()
     {
-        return array(
-            UserInterface::class         => 'sylius.model.api_user.class',
-            ClientInterface::class       => 'sylius.model.api_client.class',
-            AccessTokenInterface::class  => 'sylius.model.api_access_token.class',
+        return [
+            UserInterface::class => 'sylius.model.api_user.class',
+            ClientInterface::class => 'sylius.model.api_client.class',
+            AccessTokenInterface::class => 'sylius.model.api_access_token.class',
             RefreshTokenInterface::class => 'sylius.model.api_refresh_token.class',
-            AuthCodeInterface::class     => 'sylius.model.api_auth_code.class',
-        );
+            AuthCodeInterface::class => 'sylius.model.api_auth_code.class',
+        ];
     }
 
     /**

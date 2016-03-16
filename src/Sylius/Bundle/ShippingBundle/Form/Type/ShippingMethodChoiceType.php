@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ObjectToIdentifierTransformer;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 use Sylius\Component\Shipping\Resolver\MethodsResolverInterface;
@@ -87,17 +87,17 @@ class ShippingMethodChoiceType extends AbstractType
                 $methods = $this->repository->findBy($options['criteria']);
             }
 
-            return new ObjectChoiceList($methods, null, array(), null, 'id');
+            return new ObjectChoiceList($methods, null, [], null, 'id');
         };
 
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'choice_list' => $choiceList,
-                'criteria'    => array(),
-            ))
-            ->setDefined(array(
+                'criteria' => [],
+            ])
+            ->setDefined([
                 'subject',
-            ))
+            ])
             ->setAllowedTypes('subject', ShippingSubjectInterface::class)
             ->setAllowedTypes('criteria', 'array')
         ;
@@ -113,7 +113,7 @@ class ShippingMethodChoiceType extends AbstractType
         }
 
         $subject = $options['subject'];
-        $shippingCosts = array();
+        $shippingCosts = [];
 
         foreach ($view->vars['choices'] as $choiceView) {
             $method = $choiceView->data;

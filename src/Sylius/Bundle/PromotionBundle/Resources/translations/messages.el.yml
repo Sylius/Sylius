@@ -14,7 +14,7 @@ sylius:
     rule:
       contains_product_configuration:
         variants: Προϊόντα
-      item_count_configuration:
+      cart_quantity_configuration:
         count: Πλήθος
       item_total_configuration:
         amount: Ποσό
@@ -22,7 +22,6 @@ sylius:
         country: Χώρα
       type: Τύπος
     coupon:
-      code: Κώδικος
       usage_limit: Όριο χρήσης
     coupon_generate_instruction:
       amount: Ποσό

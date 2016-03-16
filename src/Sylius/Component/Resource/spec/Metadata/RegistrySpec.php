@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Resource\Metadata;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Metadata\RegistryInterface;
 
@@ -25,12 +24,12 @@ class RegistrySpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Component\Resource\Metadata\Registry');
     }
-    
+
     function it_implements_registry_interface()
     {
         $this->shouldImplement(RegistryInterface::class);
     }
-    
+
     function it_returns_all_resources_metadata(MetadataInterface $metadata1, MetadataInterface $metadata2)
     {
         $metadata1->getAlias()->willReturn('app.product');
@@ -38,24 +37,24 @@ class RegistrySpec extends ObjectBehavior
 
         $this->add($metadata1);
         $this->add($metadata2);
-       
-        $this->getAll()->shouldReturn(array('app.product' => $metadata1, 'app.order' => $metadata2));
+
+        $this->getAll()->shouldReturn(['app.product' => $metadata1, 'app.order' => $metadata2]);
     }
 
     function it_throws_an_exception_if_resource_is_not_registered()
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('get', array('foo.bar'))
+            ->during('get', ['foo.bar'])
         ;
     }
 
     function it_returns_specific_metadata(MetadataInterface $metadata)
     {
         $metadata->getAlias()->willReturn('app.shipping_method');
-        
+
         $this->add($metadata);
-        
+
         $this->get('app.shipping_method')->shouldReturn($metadata);
     }
 
@@ -63,7 +62,7 @@ class RegistrySpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('getByClass', array('App\Model\OrderItem'))
+            ->during('getByClass', ['App\Model\OrderItem'])
         ;
     }
 
@@ -77,19 +76,19 @@ class RegistrySpec extends ObjectBehavior
 
         $this->add($metadata1);
         $this->add($metadata2);
-        
+
         $this->getByClass('App\Model\Order')->shouldReturn($metadata2);
     }
 
     function it_adds_metadata_from_configuration_array()
     {
-        $this->addFromAliasAndConfiguration('app.product', array(
+        $this->addFromAliasAndConfiguration('app.product', [
             'driver' => 'doctrine/orm',
-            'classes' => array(
-                'model' => 'App\Model\Product'
-            )
-        ));
-        
+            'classes' => [
+                'model' => 'App\Model\Product',
+            ],
+        ]);
+
         $this->get('app.product')->shouldHaveType(MetadataInterface::class);
         $this->getByClass('App\Model\Product')->shouldHaveType(MetadataInterface::class);
     }

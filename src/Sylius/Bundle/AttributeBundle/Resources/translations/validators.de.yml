@@ -7,6 +7,9 @@ sylius:
       not_blank: Bitte Attributnamen angeben.
       min_length: 'Attributname muss mindestens 1 Zeichen lang sein.|Attributname muss mindestens {{ limit }} Zeichen lang sein.'
       max_length: 'Attributname darf nicht länger als 1 Zeichen sein.|Attributname darf nicht länger als {{ limit }} Zeichen sein.'
+    code:
+      not_blank: Bitte Attribut-Code eingeben.
+      unique: Dieser Code wird bereits verwendet.
     presentation:
       not_blank: Bitte Attributsanzeige auswählen.
       min_length: 'Attributsanzeige muss mindestens 1 Zeichen lang sein.|Attributsanzeige muss mindestens {{ limit }} Zeichen lang sein.'

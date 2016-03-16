@@ -2,11 +2,1145 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+  account:
+    address:
+      action:
+        billing: Nastavi kot privzeti naslov za izstavitev računa
+        create: Ustvarite nov naslov
+        delete: Zbriši
+        edit: Urejanje
+        shipping: Nastavi kot privzeti naslov za pošiljanje
+      create: Ustvarite nov naslov
+      default:
+        billing: Privzeti naslov za izstavitev računa
+        no_billing: Ni privzetega naslova za izstavitev računa
+        no_shipping: Ni privzetega naslova za dostavo
+        shipping: Privzeti naslov za pošiljanje
+      empty: Nimate določenega nobenega naslova
+      list: Vsi vaši naslovi
+      update: Uredite svoj naslov
+    home:
+      email: E-pošta
+      id: ID kupca
+      last5orders: Vaših zadnjih 5 naročil
+      outline: Uživajte vse lastnosti vašega osebnega prostora, ki so na voljo za ogled, sledenje in upravljanje vseh vaših podatkov
+      since: Kupec ste od
+      welcome: Dobrodošli v vaš prostor
+    order:
+      created_at: Postavljeno na
+      details: Podrobnosti vašega naročila
+      download_invoice: Prenos računa
+      empty: Oddali niste še nobenega naročila
+      invoice: Račun
+      list: Vsa vaša naročila
+      number: Številka
+      payment_mode: Način plačila
+      placed_at: 'Oddano na %at%'
+      shipment:
+        pending: Na čakanju
+        ready: 'Pripravljeno od %at%'
+        returned: 'Vrnjeno %at%'
+        shipped: 'Dostavljeno %at%'
+      shipment_mode: Način dobave
+      state: Stanje
+      total: Skupaj
+      tracking_number: Številka sledenja
+    title: Moj račun
+  add_to_cart: Dodajte v košarico
+  association_type:
+    index_header: Vrste združenj
+    update_header: Uredite vrsto združenja
+    create_header: Ustvarite vrsto združenja
+    name: Ime
+    create: Ustvarite
+    update: Posodobitev
+  address:
+    city: Mesto
+    company: Podjetje
+    country: Država
+    postcode: Poštna številka
+    province: Regija
+    street: Ulica
+  alert:
+    error: Napaka
+    info: Informacije
+    success: Uspešno
+    warning: Opozorilo
+  archetype:
+    attributes: Atributi
+    build: Zgradite prototip
+    build_header: Gradnja izdelka iz prototipa
+    create: Ustvarite prototip
+    create_header: Nov prototip
+    index_header: Prototipi izdelkov
+    name: Ime
+    no_results: Definiranega ni nobenega prototipa
+    options: Možnosti
+    parent: Nadrejeni
+    update_header: Urejanje prototipa
+    updated_at: Zadnja posodobitev
+  backend:
+    alert:
+      info: Informacije
+    dashboard:
+      chart_order_count: Število naročil
+      chart_order_total: Vrednost naročila
+      header: Administracijska nadzorna plošča
+      orders: Naročila prejšnjega tedna
+      revenue: Prihodki prejšnjega tedna
+      subheader: Pregled vaše trgovine
+    logout: Odjava
+    quick_links:
+      add_product: Nov izdelek
+      customers: Kupci
+      orders: Zadnja naročila
+      products: Vaši izdelki
+    statistics:
+      header: Statistika tega meseca
+      orders_this_month: Naročila skupaj
+      registrations_this_month: Skupaj registracij
+      sales_this_month: Prodaja
+  backend_welcome: 'Pozdravljeni, <b>%name%</b>'
+  billing_address: Račun na
+  block:
+    imagine:
+      create: Ustvarite blok imagine
+      create_header: Ustvarite nov blok imagine
+      end_date: Končni datum
+      id: Id
+      index: Bloki imagine
+      index_header: Bloki imagine
+      label: Oznaka
+      publishable: Objavljeno
+      start_date: Začetni datum
+      title: Naslov
+      update_header: Urejanje bloka imagine
+      updated_at: Zadnja posodobitev
+    imagine_blocks: Bloki imagine
+    index_header: Bloki
+    no_results: Noben blok ni na voljo za prikaz
+    simple:
+      body: Telo
+      create: Ustvarite preprost blok
+      create_header: Ustvarjanje novega preprostega bloka
+      end_date: Končni datum
+      id: Id
+      index: Preprosti bloki
+      index_header: Preprosti bloki
+      label: Oznaka
+      publishable: Objavljeno
+      start_date: Začetni datum
+      title: Naslov
+      update_header: Urejanje enostavnega bloka
+      updated_at: Zadnja posodobitev
+    simple_blocks: Preprosti bloki
+    slideshow:
+      body: Telo
+      create: Ustvarite gradnik predvajalnika
+      create_header: Ustvarjanje novega gradnika predvajalnika
+      end_date: Končni datum
+      id: Id
+      index: Gradniki predvajalnika
+      index_header: Gradniki predvajalnika
+      publishable: Objavljeno
+      start_date: Začetni datum
+      title: Naslov
+      update_header: Urejanje gradnikov predvajalnika
+      updated_at: Zadnja posodobitev
+    slideshow_blocks: Gradniki predvajalnika
+    string:
+      body: Telo
+      create: Ustvarite blok niza
+      create_header: Ustvarjanje novega bloka niza
+      end_date: Končni datum
+      id: Id
+      index: Bloki nizov
+      index_header: Bloki nizov
+      label: Oznaka
+      publishable: Objavljeno
+      start_date: Začetni datum
+      title: Naslov
+      update_header: Urejanje bloka niza
+      updated_at: Zadnja posodobitev
+    string_blocks: Bloki nizov
+  breadcrumb:
+    archetype:
+      index: Prototipi
+    assortment: Izbor
+    attribute:
+      index: Atributi
+    block:
+      imagine:
+        index: Bloki imagine
+      index: Bloki
+      simple:
+        index: Preprosti bloki
+      slideshow:
+        index: Gradniki predvajalnika
+      string:
+        index: Bloki nizov
+    build: Zgradi
+    channel:
+      index: Kanali
+    configuration: Konfiguracija
+    contact_request:
+      index: Zahteve stikov
+      show: Zahteva stika
+    contact_topic:
+      index: Teme stika
+    content: Vsebina
+    country:
+      index: Države
+    currency:
+      index: Valute
+    customer:
+      index: Kupci
+    dashboard: Nadzorna plošča
+    edit: Urejanje
+    email:
+      index: E-pošte
+    general_settings: Splošne nastavitve
+    generate: Ustvari
+    group:
+      index: Skupine
+    inventory:
+      index: Inventar
+    locale:
+      index: Področne nastavitve
+    marketing: Oglaševanje
+    menu:
+      index: Meniji
+    menu_node:
+      index: Vozlišča menija
+    metadata:
+      index: Metapodatki
+    new: Novo
+    option:
+      index: Možnosti
+    order:
+      adjustments: Prilagoditve
+      index: Naročila
+    page:
+      index: Strani
+    payment:
+      index: Plačila
+    payment_method:
+      index: Načini plačil
+    permission:
+      index: Dovoljenja
+    product:
+      index: Izdelki
+    association_type:
+      index: Vrste združenj
+    promotion:
+      index: Promocije
+    promotion_coupon:
+      index: Kuponi
+    product_association:
+      index: Povezave
+    product_association_type:
+      index: Vrsta združenja
+    redirect_route:
+      index: Poti preusmeritev
+    report:
+      index: Poročila
+    role:
+      index: Vloge
+    route:
+      index: Poti
+    sales: Prodaja
+    section:
+      customer: Kupec
+    security_settings: Varnostne nastavitve
+    shipment:
+      index: Pošiljke
+    shipping_category:
+      index: Kategorije dostave
+    shipping_method:
+      index: Načini dostave
+    support: Podpora
+    tax_category:
+      index: Davčne kategorije
+    tax_rate:
+      index: Davčne stopnje
+    taxation_settings: Nastavitve obdavčitve
+    taxonomy:
+      index: Taksonomije
+    update: Urejanje
+    zone:
+      index: Cone
+  browse_products: Brskanje izdelkov
+  cancel: Prekliči
+  cart:
+    empty: Vaša košarica je prazna
+    summary:
+      add_coupon: Dodaj kupon
+      checkout: Plačilo
+      clear: Spraznite košarico
+      grand_total: Skupaj
+      product: Izdelek
+      quantity: Količina
+      save: Shrani
+      total: Skupaj
+      unit_price: Cena
+    summary_header: Povzetek košarice
+    total_items: '1 element|%count% elementov'
+  channel:
+    code: Koda
+    create: Dodaj kanal
+    create_header: Dodaj kanal
+    created_at: Ustvarjeno ob
+    currency_default: Privzeta valuta
+    enabled: Omogočeno
+    id: ID
+    index_header: Kanali
+    locale_default: Privzeto območje
+    manage: Upravljanje kanalov
+    name: Ime
+    no_results: Kanali niso nastavljeni
+    update: Urejanje
+    update_header: Urejanje kanalov
+    updated_at: Zadnja posodobitev
+    url: URL
+  checkout:
+    addressing:
+      header: Korak naslavljanja
+    back: Nazaj
+    credit_card:
+      header: Podrobnosti o plačilu
+    finalize:
+      address:
+        city: Mesto
+        country: Država
+        postcode: Poštna številka
+        province: Regija
+        street: Ulica
+      header: Povzetek naročila
+      order:
+        additional_information: Dodatne informacije
+        items_total: Elementi skupaj
+        no_items: To naročilo ne vsebuje nobenega elementa
+        no_promotion: Uporabljene ni nobene promocije
+        no_shipping_charges: Stroški pošiljanja niso uporabljeni
+        no_taxes: Davki niso uporabljeni
+        promotion_discount: Popusti za promocijo
+        promotion_total: Promocije skupaj
+        shipping_address: Naslov za dostavo
+        shipping_charges: Stroški dostave
+        shipping_total: Pošiljanje skupaj
+        tax_total: Davek skupaj
+        taxes: Davki
+        total: Skupaj
+      order_item:
+        quantity: Količina
+        total: Skupaj
+        unit_price: Cena na enoto
+      place_order: Oddaj naročilo
+      product:
+        name: Ime
+    forward: Nadaljuj
+    payment:
+      header: Način plačila
+    security:
+      existing_customer: Obstoječa stranka
+      guest: Gost
+      header: 'Prijavite se v trgovino <small>ali ustvarite nov račun</small>'
+      login: Prijava
+      new_customer: Nov uporabnik
+      proceed_order: Nadaljujte z vašim naročilom
+      register: Registracija
+    shipping:
+      error: Žal, naša trgovina izdelka ne more poslati v izbrano državo
+      header: Način dostave
+  confirmation:
+    message: Ali želite izbrisati ta element
+    title: Potrditev
+  contact_request:
+    create: Ustvarite zahtevo stika
+    create_header: Nova zahteva stika
+    email: E-pošta
+    id: ID
+    index_header: Zahteve stikov
+    message: Sporočilo
+    no_results: Ni zahtev stikov za prikaz
+    show_header: Podrobnosti zahteve stika
+    topic: Tema
+    update_header: Urejanje zahteve stika
+    updated_at: Zadnja posodobitev
+  contact_topic:
+    create: Ustvarite temo stika
+    create_header: Nova tema stika
+    id: ID
+    index_header: Teme stika
+    no_results: Za prikaz ni na voljo tem stika
+    title: Naslov
+    update_header: Urejanje teme stika
+    updated_at: Zadnja posodobitev
+  country:
+    add_province: Dodaj provinco
+    create: Ustvarite državo
+    create_header: Nova država
+    enabled: Omogočeno
+    id: ID
+    index_header: Države
+    manage: Upravljanje držav
+    name: Ime
+    no_results: Nastavljene ni nobene države
+    show_header: Podrobnosti države
+    update_header: Urejanje države
+  create: Ustvarite
+  created_at: Ustvarjeno ob
+  currency:
+    code: Koda
+    create: Ustvarite valuto
+    create_header: Nova valuta
+    enabled: Omogočeno
+    exchange_rate: Menjalni tečaj
+    id: ID
+    index_header: Valute
+    name: Ime
+    no_results: Nobena valuta ni na voljo za prikaz
+    update_header: Urejanje valut
+    updated_at: Zadnja posodobitev
+  customer:
+    create: Ustvarjanje kupca
+    create_header: Nov kupec
+    creation_date: Datum nastanka
+    email: E-pošta
+    filter:
+      all: Prikaži vse kupce
+      registered: Prikaži registrirane kupce
+      unconfirmed: Prikaži nepotrjene račune
+    general_info: 'Splošne informacije kupca "%fullName%"'
+    groups: Skupine
+    id: ID
+    index_header: 'Kupci <small>Seznam vseh kupcev v trgovini</small>'
+    manage: Upravljanje strank
+    no_groups: Za prikaz ni na voljo nobene skupine tega kupca
+    no_results: Za prikaz ni na voljo nobenega kupca
+    order:
+      no_results: Za prikaz ni na voljo nobenega naročila tega kupca
+    orders: Naročila kupca
+    recent_header: Nedavni kupci
+    shipping_address: Naslov za dostavo
+    show_header: Podrobnosti o kupcu
+    update_header: Urejanje kupca
+    phone_number: Telefonska številka
+  delete: Zbriši
+  deleted: Izbrisano
+  disable: Onemogoči
+  edit: Urejanje
+  email:
+    code: Koda
+    create: Dodajte novo e-pošto
+    create_header: Dodajanje nove e-pošte
+    enabled: Omogočeno
+    index_header: E-poštne predloge
+    manage: Upravljanje e-pošte
+    no_results: Nastavljene ni nobene e-pošte
+    subject: Zadeva
+    update_header: Urejanje e-pošte
+    updated_at: Zadnja posodobitev
+  emails:
+    order_comment:
+      name: Opombe pri naročilu
+      subject: Nov komentar objavljen pri naročilu
+    order_confirmation:
+      name: Potrditev naročila
+      subject: Hvala za vaše naročilo
+    shipment_confirmation:
+      name: Potrditev pošiljke
+      subject: Vaše naročilo je bilo poslano
+    user_confirmation:
+      name: Potrditev uporabnika
+      subject: Dobrodošli v naši trgovini
+  enable: Omogočite
+  filter: Filter
+  form:
+    cart:
+      coupon: Kupon
+    choose_file: Izberite datoteko
+    comment:
+      comment: Komentar
+      notify_customer: Obvesti kupca
+    frontend:
+      password:
+        confirmation: Potrditev
+        current: Trenutno geslo
+        new: Novo geslo
+        title: Spremenite vaše geslo
+      profile:
+        title: Uredite vaše osebne podatke
+    login:
+      email: E-pošta
+      password: Geslo
+    menu:
+      add_menu_node: Dodajte menijski element
+    option_value:
+      add_value: Dodajte vrednost
+    profile:
+      email: E-pošta
+  gallery:
+    next: Naprej
+    previous: Nazaj
+    slideshow: Predvajanje
+  gender:
+    female: Ženska
+    male: Moški
+  generate: Ustvari
+  go_to_dashboard: Pojdite na nadzorno ploščo
+  group:
+    create: Ustvarite skupino
+    create_header: Dodajanje nove skupine kupcev
+    id: ID
+    index_header: Skupine
+    name: Ime
+    no_results: Ni skupin za prikaz
+    roles: Vloge
+    update_header: Urejanje skupine
+  hide_deleted: Skrijte izbrisane
+  history:
+    action: Dejanje
+    author: Avtor
+    data: Podatki
+    empty: Prazno
+    header: Zgodovina
+    logged_at: Prijavljeni v (verzija)
+    no_results: Ni dogodkov dnevnika za prikaz
+    revert: Povrni
+  homepage:
+    splash:
+      headline: Dobrodošli na Sylius
+      subheadline: Sodobna e-trgovina za Symfony2
+  inventory_unit:
+    created_at: Ustvarjeno
+    inventory_state: Stanje zaloge
+    name: Ime
+    no_results: Enote inventarja niso na voljo za prikaz
+    shipping_state: Stanje pošiljanja
+    sku: SKU
+    updated_at: Zadnja posodobitev
+  locale:
+    code: Koda
+    create: Ustvarjanje področne nastavitve
+    create_header: Dodajanje nove področne nastavitve
+    enabled: Omogočeno
+    id: ID
+    index_header: Indeks vseh konfiguriranih področnih nastavitev
+    name: Ime
+    no_results: Nastavljene ni nobene področne nastavitve
+    update_header: Urejanje področne nastavitve
+    updated_at: Zadnja posodobitev
+  login: Prijava
+  login_header: Administracija
+  logo: Sylius
+  manage: Upravljanje
+  menu:
+    create: Ustvarite meni
+    create_header: Ustvarjanje menija
+    end_date: Končni datum
+    id: ID
+    index_header: Meniji
+    no_results: Nobenega menija ni na voljo za prikaz
+    publishable: Objavljeno
+    start_date: Datum začetka
+    title: Naslov
+    update_header: Urejanje menija
+  menu_node:
+    create: Ustvarite vozlišča menija
+    create_header: Ustvarjanje vozlišča menija
+    id: ID
+    index_header: Vozlišča menija
+    no_results: Nobenega vozlišča menija ni na voljo za prikaz
+    parent: Nadrejeni
+    title: Naslov
+    update_header: Urejanje vozlišča menija
+  meta:
+    backend_title: Nadzorna plošča Sylius
+    frontend_description: Sylius je sodobna e-trgovinska rešitev za PHP, ki temelji na ogrodju Symfony
+    frontend_keywords: Sylius, e-trgovina, symfony2, trgovina, košarica, spletna trgovina
+    frontend_title: Sylius, sodobna e-trgovina za Symfony
+  metadata:
+    customize_header: Prilagajanje metapodatkov
+    show_header: Pokaži metapodatke
+    id: ID
+    customize: Prilagodite metapodatke
+    manage: Upravljanje metapodatkov
+    content: Vsebina
+    index_metadata: Metapodatki
+    default_page:
+      group_customize: Prilagodite privzete metapodatke
+    product:
+      single_customize: Prilagodite metapodatke
+      group_customize: Prilagodite metapodatke izdelkov
+    product_variant:
+      single_customize: Prilagodite metapodatke
+  move_down: Premakni dol
+  move_up: Premakni gor
+  na: Ni na voljo
+  newest: Najnovejši izdelki
   "no": false
+  no_results: Ni rezultatov
+  order:
+    additional_information: Dodatne informacije
+    adjustments:
+      amount: Znesek
+      description: Opis
+      lock: Zaklep
+      lock_all: Zaklep vseh prilagoditev
+      locked: Zaklenjeno
+      manage: Upravljanje prilagoditev
+      type: Vrsta
+      unlock: Odklep
+      unlock_all: Odklenite vse prilagoditve
+    channel: Kanal
+    comment:
+      author: Avtor
+      comment: Komentar
+      created_at: Ustvarjeno ob
+      customer:
+        not_notified: Kupec ni obveščen
+        notified: Kupec je obveščen
+      header: Opombe pri naročilu
+      no_comment: Brez komentarjev
+      notify: Obvestilo
+      state: Stanje
+    create: Ustvari naročilo
+    create_header: Novo naročilo
+    created_at: Čas nastanka
+    currency: Valuta
+    customer: Kupec
+    details: Podrobnosti naročila
+    general_info: Splošne informacije
+    guest: Kupec gost
+    id: ID
+    immutable_warning: Že poslana naročila so nespremenljiva
+    index_header: Trenutna naročila
+    inventory_tracking: Sledenje inventarja
+    inventory_unit:
+      backorder: Prednaročilo
+      fulfill: Izpolnitev
+      return: Vračilo
+    items: Izdelki
+    items_total: Elementi skupaj
+    manage: Upravljanje naročil
+    no_items: To naročilo ne vsebuje nobenega elementa
+    no_promotion: Uporabljenega ni bilo nobegega kupona
+    no_results: Nimate novih naročil
+    no_shipments: Za to naročilo ni na voljo nobenih pošiljk
+    no_shipping_charges: Stroški pošiljanja niso uporabljeni
+    no_taxes: Davki niso uporabljeni
+    number: Številka
+    order_state: Stanje naročila
+    payment: Plačilo
+    payment_state: Stanje plačila
+    payment_states:
+      balance_due: Stanje zapade
+    promotion_coupons: Kuponi
+    promotion_total: Promocije skupaj
+    recent_header: Nedavna naročila
+    release_inventory: Sprostitev inventarja
+    shipment_state: Stanje pošiljanja
+    shipment_states:
+      pending: Na čakanju
+    shipments: Pošiljke
+    shipping_address: Naslov za dostavo
+    shipping_charges: Stroški dostave
+    shipping_total: Pošiljanje skupaj
+    show_header: Naročilo
+    state:
+      abandoned: Opuščeno
+      cancelled: Preklicano
+      cart_locked: Košarica zaklenjena
+      checkout: Plačilo
+      order_confimed: Naročilo potrjeno
+      ordered: Naročeno
+      returned: Vrnjeno
+      shipped: Poslano
+    tax_total: Davek skupaj
+    taxes: Davki
+    total: Skupaj
+    update_header: Urejanje naročila
+  review:
+    id: ID
+    subject: Zadeva
+    title: Naslov
+    author: Avtor
+    guest: Gost
+    created_at: Ustvarjeno ob
+  order_item:
+    product: Izdelek
+    quantity: Količina
+    sellable: Izdelek
+    total: Skupaj
+    unit_price: Cena za enoto
+  out_of_stock: Ni na zalogi
+  page:
+    body: Telo
+    create: Ustvarite novo stran
+    create_header: Ustvarjanje nove strani
+    end_date: Končni datum
+    id: ID
+    index_header: Strani
+    no_results: Ni strani za prikaz
+    no_route: Vaša vsebina ne bo prikazana v ospredju, če ni definirane nobene poti
+    publishable: Objavljeno
+    routes: Poti
+    start_date: Začetni datum
+    title: Naslov
+    update_header: Urejanje strani
+  password: Geslo
+  payment:
+    amount: Znesek
+    create: Ustvarite plačilo
+    create_header: Novo plačilo
+    created_at: Ustvarjeno ob
+    id: ID
+    index_header: Plačila
+    manage: Upravljanje plačil
+    method: Način
+    no_results: Nastavljenega ni nobenega plačila
+    order: Naročilo
+    state:
+      cancelled: Preklicano
+      checkout: Plačilo
+      completed: Zaključeno
+      failed: Ni uspelo
+      header: Stanje
+      new: Novo
+      pending: Na čakanju
+      processing: V teku
+      refunded: Povrnjena kupnina
+      unknown: Ni znano
+      void: Nično
+    update_header: Urejanje plačila
+    updated_at: Zadnja posodobitev
+  payment_method:
+    create: Ustvarite način plačila
+    create_header: Nov način plačila
+    enabled: Omogočeno
+    gateway: Prehod
+    id: ID
+    index_header: Načini plačila
+    name: Ime
+    no_results: Nastavljenega ni nobenega načina plačila
+    update_header: Urejanje načina plačila
+    updated_at: Zadnja posodobitev
+  permission:
+    code: Koda
+    create: Dodaj novo dovoljenje
+    create_header: Novo dovoljenje
+    description: Opis
+    id: ID
+    index_header: Dovoljenja
+    no_results: Definirane ni nobene pravice
+    update_header: Urejanje dovoljenja
+    updated_at: Zadnja posodobitev
+  pricing:
+    volume_based:
+      button:
+        add: Dodaj
+      max: Največja prostornina
+      min: Najmanjša prostornina
+      no_results: Brez nastavitev cen
+      price: Cena
+  product:
+    add_attribute: Dodajte atribut
+    archetype: Prototip
+    attributes: Atributi
+    association: Povezave
+    available_on: Na voljo na
+    available_on_demand: Na voljo na zahtevo
+    available_until: Na voljo do
+    categorization: Kategorizacija
+    contain_variants: Vsebuje variante
+    create: Ustvarite izdelek
+    create_header: Nov izdelek
+    description: Opis
+    generate_variants: Ustvarite različice
+    index_by_taxon_header: 'Proizvodi <small>Razvrščeni v sistematsko skupino "%taxon%"</small>'
+    index_header: 'Izdelki <small>Indeks vseh izdelkov vaše trgovine</small>'
+    main_taxon: Glavni takson
+    manage: Upravljanje proizvodov
+    name: Ime
+    no_attributes: Ta izdelek nima definiranih atributov
+    no_description: '<i>Ni opisa ...</i>'
+    no_images: Za ta izdelek ni na voljo nobene slike
+    no_options: Za ta izdelek ni na voljo nobene možnosti
+    no_results: Ni izdelkov za prikaz
+    no_shipping_category: Na voljo ni nobene kategorije pošiljanja
+    no_short_description: '<i>Brez kratkega opisa</i>'
+    no_sku: Brez SKU
+    no_tax_category: Brez davčne kategorije
+    no_taxon: Za ta izdelek ni na voljo nobenega glavnega taksona
+    no_taxons: Za ta izdelek ni na voljo nobenega taksona
+    options: Možnosti
+    original_price: Prvotna cena
+    price: Maloprodajna cena
+    restricted_zone: Območje z omejitvami
+    remove_attribute: Odstrani atribut
+    shipping_category: Kategorija dostave
+    show: Poglejte si več
+    show_header: 'Podrobnosti izdelka <small>Ogled izdelka "<strong>%product%</strong>"</small>'
+    show_in_store: Prikažite v trgovini
+    sku: SKU
+    stock: Trenutna zaloga
+    tabs:
+      attributes: Atributi
+      associations: Povezave
+      categorization: Kategorizacija
+      channels: Kanali
+      images: Slike
+      options: Možnosti
+      pricing: Cenik
+      product: Izdelek
+    tax_category: Kategorija davka
+    unavailable: Ni na voljo
+    update_header: Urejanje izdelka
+    updated_at: Zadnja posodobitev
+    variant_selection_method: Način izbora variante
+    variants: Variante
+    view_details: 'Ogled podrobnosti %product%'
+    volume_based:
+      price: Cena
+      qty_max: Največja količina
+      qty_min: Najmanjša količina
+    volume_price: Določanje cen na osnovi količine
+  product_attribute:
+    add_choice: Dodajte izbiro
+    code: Koda
+    create: Ustvarite atribut izdelka
+    create_header: Nov atribut izdelka
+    index_header: Lastnosti izdelkov
+    manage: Upravljaljanje atributov
+    name: Ime
+    no_results: Na voljo ni nobenega nastavljenega atributa
+    type: Vrsta
+    update_header: Urejanje atributa
+    updated_at: Zadnja posodobitev
+  product_association:
+    code: Koda
+    create: Ustvarite povezavo izdelka
+    create_header: Nov izdelek
+    index_header: Lastnosti izdelkov
+    manage: Upravljaljanje atributov
+    name: Ime
+    no_results: Na voljo ni nobenega nastavljenega atributa
+    type: Vrsta
+    update_header: Urejanje atributa
+    updated_at: Zadnja posodobitev
+  product_not_available_in_zone: Ni na voljo v vaši državi
+  product_option:
+    create: Ustvarite možnost
+    create_header: Nova možnost izdelka
+    index_header: Možnosti izdelka
+    manage: Upravljanje možnosti
+    name: Ime
+    no_results: Na voljo ni nobenih nastavljenih možnosti
+    presentation: Predstavitev
+    update_header: Urejanje možnosti
+    updated_at: Zadnja posodobitev
+    values: Vrednosti
+  promotion:
+    actions: Dejanja
+    add_action: Dodajte dejanje
+    add_rule: Dodajte pravilo
+    coupon_based: Kupon, ki temelji
+    create: Ustvarite promocijo
+    create_header: Nova promocija
+    created_at: Ustvarjeno ob
+    description: Opis
+    ends_at: Konča se na
+    exclusive: Izključno
+    general_info: Splošne informacije
+    id: ID
+    index_header: Trenutne promocije
+    manage: Upravljanje promocij
+    name: Ime
+    no_results: Nastavljenih ni nobenih promocij
+    priority: Prednost
+    rules: Pravila
+    show_header: Podrobnosti promocije
+    starts_at: Se začne pri
+    update_header: Urejanje promocije
+    updated_at: Zadnja posodobitev
+    usage_limit: Omejitev uporabe
+    used: Uporabljeno
+  promotion_action:
+    configuration: Konfiguracija
+    type: Vrsta
+  promotion_coupon:
+    code: Koda
+    create: Dodaj kupon
+    create_header: Ustvarite nov kupon
+    expires_at: Poteče dne
+    generate: Generirajte kupone
+    generate_header: Generiranje kuponov
+    index: Seznam kuponov
+    index_header: Kuponi
+    no_results: Za prikaz ni na voljo kuponov
+    total_results:
+      Total: '%total%'
+    update_header: Urejanje kupona
+  promotion_rule:
+    configuration: Konfiguracija
+    type: Vrsta
+  province:
+    provinces: Province
+  redirect_route:
+    create: Ustvarite pot preusmeritve
+    create_header: Ustvarjanje poti preusmeritve
+    id: ID
+    index_header: Pot preusmeritve
+    no_results: Ni poti preusmeritev za prikaz
+    title: Naslov
+    update_header: Urejanje poti preusmeritve
+  remember_me: Zapomni si me
+  report:
+    code: Koda
+    create: Ustvari poročilo
+    create_header: Ustvarite novo poročilo
+    data_fetcher: Vrsta orodja za pridobivanje podatkov
+    description: Opis
+    details: Podrobnosti
+    id: Id
+    index_header: Poročila
+    manage: Upravljanje
+    name: Ime
+    no_data: Ni podatkov za prikaz
+    no_report: Ni nobenega poročila za prikaz
+    no_results: Ni ustvarjenih poročil
+    renderer: Vrsta upodabljalnika
+    show_header: Poročilo podrobnosti
+    update_header: Uredi poročilo
+  restore: Povrni
+  role:
+    code: Koda
+    create: Dodaj novo vlogo
+    create_header: Nova vloga
+    description: Opis
+    id: ID
+    index_header: Vloge
+    name: Ime
+    no_results: Nobene vloge ni definirane
+    update_header: Urejanje vloge
+    updated_at: Zadnja posodobitev
+  route:
+    create: Ustvarite pot
+    create_header: Ustvarjanje poti
+    id: ID
+    index_header: Poti
+    name: Ime
+    no_results: Ni poti za prikaz
+    page: Stran
+    title: Naslov
+    update_header: Urejanje poti
+    view: Pogled
+  save_changes: Shrani spremembe
+  search: Iskanje
+  security:
+    login:
+      button: Prijava
+      forgot_password: Pozabljeno geslo
+      header: 'Prijava <small>trgovina Sylius</small>'
+      info: 'Prosimo, prijavite se z e-pošto <b>"sylius@example.com"</b> in geslom <b>"sylius"</b>. <small>G. Sylius Demo vodič</small>'
+      no_account: Nimate še računa
+  settings:
+    general_header: Splošne nastavitve
+    security_header: Varnostne nastavitve
+    taxation_header: Nastavitve obdavčitve
+  shipment:
+    created_at: Ustvarjeno ob
+    id: ID
+    index_header: Pošiljke
+    inventory_state: Stanje zaloge
+    manage: Upravljanje pošiljk
+    method: Način
+    modified: Spremenjeno
+    name: Ime
+    no_items: Ni elementov za prikaz
+    no_results: Ni pošiljk za prikaz
+    order: Naročilo
+    ship: Pošlji
+    show_header: Podatki o pošiljki
+    sku: SKU
+    state: Stanje
+    tracking_code: Koda za sledenje
+    update: Urejanje
+    update_header: Urejanje pošiljke
+    updated_at: Zadnja posodobitev
+  shipment_category:
+    manage: Upravljanje kategorij dostave
+  shipping_address: Naslov za dostavo
+  shipping_category:
+    create: Ustvarite kategorijo pošiljanja
+    create_header: Nova kategorija pošiljanja
+    id: ID
+    index_header: Kategorije dostave
+    manage: Upravljanje kategorij dostave
+    name: Ime
+    no_results: Kategorije dostave niso nastavljene
+    update_header: Urejanje kategorij dostave
+    updated_at: Zadnja posodobitev
   shipping_method:
+    calculator: Kalkulator
+    category: Kategorija
+    create: Ustvarite način pošiljanja
+    create_header: Nov način pošiljanja
+    enabled: Omogočeno
+    id: ID
+    index_header: Načini dostave
+    manage: Upravljanje načinov pošiljanj
+    name: Ime
+    no_results: Načini pošiljanja niso nastavljeni
+    show_header: Podrobnosti o načinu dostave
+    update_header: Urejanje načina pošiljanja
+    updated_at: Zadnja posodobitev
     zone: Cona
+  shop_by: Nakupovanje po
+  show: Podrobnosti
+  show_all: Pokaži vse
+  show_deleted: Prikaz izbrisanih
+  stockable:
+    index_header: 'Zaloga <small>Tukaj lahko vidite trenutne ravni zaloge</small>'
+    name: Ime
+    no_results: Za prikaz ni elementov zaloge
+    on_hand: Raven zalog
+    on_hold: Na čakanju
+    sku: Sku
+    updated_at: Zadnja posodobitev
+  tax_category:
+    create: Ustvarite davčno kategorijo
+    create_header: Nova davčna kategorija
+    description: Opis
+    id: ID
+    index_header: Kategorije obdavčitev
+    manage: Upravljanje davčnih kategorij
+    name: Ime
+    no_description: Ni opisa
+    no_results: Davčne kategorije niso nastavljene
+    update_header: Urejanje davčnih kategorij
+    updated_at: Zadnja posodobitev
   tax_rate:
+    amount: Znesek
+    calculator: Kalkulator
+    category: Kategorija
+    create: Ustvarite davčno stopnjo
+    create_header: Nova davčna stopnja
+    included_in_price: Vključeno v ceno
+    index_header: Davčne stopnje
+    manage: Upravljanje davčnih stopenj
+    name: Ime
+    no_results: Davčne stopnje niso nastavljene
+    show_header: Podrobnosti davčne stopnje
+    update_header: Posodabljanje davčne stopnje
+    updated_at: Zadnja posodobitev
     zone: Cona
+  taxon:
+    create: Ustvarite takson
+    create_header: Novi takson
+    image: Izberite sliko
+    name: Ime
+    no_image: Za ta takson ni nobene slike
+    no_results: Za prikaz ni nobenega taksona
+    product_index_header: 'Proizvodi razvrščeni kot "%name%"'
+    update_header: Urejanje taksona
+  taxonomy:
+    create: Ustvarite taksonomijo
+    create_header: Nova taksonomija
+    image: Izberite sliko
+    index_header: 'Kategorizacija <small>Tukaj vidite definirane taksonomije</small>'
+    manage: Upravljanje taksonomij
+    name: Ime
+    no_image: Za to taksonomijo ni na voljo nobene slike
+    no_results: Definirane ni nobene taksonomije
+    show_header: 'Taksonomija <small><strong>%name%</strong></small>'
+    update_header: Urejanje taksonomije
+  total_quantity: Skupna količina
+  ui:
+    account_panel_outline: Uživajte vse lastnosti vašega osebnega prostora, ki so na voljo za ogled, sledenje in upravljanje vseh vaših podatkov
+    change_password: Spremenite vaše geslo
+    code: Koda
+    customer:
+      id: ID kupca
+    customer_since: Kupec ste od
+    email: E-pošta
+    forgot_password: Pozabljeno geslo
+    links: Povezave
+    logged_in_as: 'Prijavljeni kot %username%'
+    login: Prijava
+    logout: Odjava
+    no_account: Nimate še računa
+    password:
+      reset:
+        button: Ponastavitev
+        header: Ponastavitev gesla
+    profile: Profil
+    register: Registracija
+    reset: Ponastavitev
+    reset_password: Ponastavitev gesla
+    welcome: Dobrodošli
+    add_association: Dodajte povezavo
+    product_associations: Povezave izdelka
+    create_product_association: Ustvarite povezavo izdelka
+    product_association_types: Vrste združenj izdelkov
+    create_product_association_type: Ustvarite vrsto povezave izdelka
+    update_product_association_type: Posodobite vrsto povezave izdelka
+    no_association_types_to_display: Nobena vrsta povezave ni definirana
+    name: Ime
+    id: Id
+  unknown: Ni znano
+  user:
+    create: Ustvarjanje uporabnika
+    create_header: Nov uporabnik
+    enabled: Potrjeno
+    general_info: 'Splošne informacije uporabnika "%username%"'
+    id: ID
+    impersonate: Prijava s tem uporabnikom
+    index_header: 'Uporabniki <small>Seznam vseh registriranih uporabnikov v trgovini</small>'
+    last_login: Zadnja prijava
+    manage: Upravljanje uporabnikov
+    no_results: Za prikaz ni uporabnikov
+    oauth:
+      access_token: Žeton za dostop
+      identifier: Identifikator
+      none: Povezanega ni nobenega računa OAuth
+      provider: Ponudnik OAuth
+    recent_header: Nedavni uporabniki
+    register:
+      button: Registracija
+      header: 'Registracija <small>Ustvarite račun v trgovini</small>'
+    registration_date: Datum registracije
+    show_header: Podrobnosti uporabnika
+    update_header: Urejanje uporabnika
+    username: Uporabniško ime
+  variant:
+    add_image: Dodaj sliko
+    availability: Razpoložljivost
+    available_on_demand: Na voljo na zahtevo
+    create: Ustvarite različico
+    create_header: Nova različica izdelka
+    delete_image: Izbriši sliko
+    last_update: Zadnja posodobitev
+    no_results: Ni različic za prikaz
+    options: Možnosti
+    original_price: Prvotna cena
+    price: Cena
+    sku: SKU
+    stock: Trenutna zaloga
+    update_header: Urejanje različice
   "yes": true
   zone:
+    add_member: Dodaj člana
+    create: Ustvarite območje
+    create_header: Novo območje
+    index_header: Cone
+    manage: Upravljanje območij
+    name: Ime
+    no_results: Ni nastavljenih območij
     scope: Področje
+    show_header: Podrobnosti območja
+    type: Vrsta
+    update_header: Urejanje območja
+  zone_member:
+    members: Člani

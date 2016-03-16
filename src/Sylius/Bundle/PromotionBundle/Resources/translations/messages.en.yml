@@ -17,12 +17,10 @@ sylius:
             contains_product_configuration:
                 variants: Products
                 exclude: Exclude
-            item_count_configuration:
+            cart_quantity_configuration:
                 count: Count
-                equal: Equal
             item_total_configuration:
                 amount: Amount
-                equal: Equal
             nth_order_configuration:
                 nth: Nth
             customer_loyalty_configuration:
@@ -46,6 +44,8 @@ sylius:
             expires_at: Expires at
         promotion:
             actions: Actions
+            add_action: Add action
+            add_rule: Add rule
             coupon_based: Coupon based
             exclusive: Exclusive
             description: Description

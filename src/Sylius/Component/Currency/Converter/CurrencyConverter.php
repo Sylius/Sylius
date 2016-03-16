@@ -40,15 +40,29 @@ class CurrencyConverter implements CurrencyConverterInterface
     /**
      * {@inheritdoc}
      */
-    public function convert($value, $code)
+    public function convertFromBase($amount, $targetCurrencyCode)
     {
-        $currency = $this->getCurrency($code);
+        $currency = $this->getCurrency($targetCurrencyCode);
 
         if (null === $currency) {
-            throw new UnavailableCurrencyException($code);
+            throw new UnavailableCurrencyException($targetCurrencyCode);
         }
 
-        return (int) round($value * $currency->getExchangeRate());
+        return (int) round($amount * $currency->getExchangeRate());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function convertToBase($amount, $sourceCurrencyCode)
+    {
+        $currency = $this->getCurrency($sourceCurrencyCode);
+
+        if (null === $currency) {
+            throw new UnavailableCurrencyException($sourceCurrencyCode);
+        }
+
+        return (int) round($amount / $currency->getExchangeRate());
     }
 
     /**
@@ -62,6 +76,6 @@ class CurrencyConverter implements CurrencyConverterInterface
             return $this->cache[$code];
         }
 
-        return $this->cache[$code] = $this->currencyRepository->findOneBy(array('code' => $code));
+        return $this->cache[$code] = $this->currencyRepository->findOneBy(['code' => $code]);
     }
 }

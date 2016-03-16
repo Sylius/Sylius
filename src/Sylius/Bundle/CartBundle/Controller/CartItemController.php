@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CartBundle\Controller;
 
+use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Component\Cart\Event\CartItemEvent;
 use Sylius\Component\Cart\Resolver\ItemResolvingException;
 use Sylius\Component\Cart\SyliusCartEvents;
@@ -50,8 +51,10 @@ class CartItemController extends Controller
      */
     public function addAction(Request $request)
     {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
         $cart = $this->getCurrentCart();
-        $emptyItem = $this->createNew();
+        $emptyItem = $this->newResourceFactory->create($configuration, $this->factory);
 
         $eventDispatcher = $this->getEventDispatcher();
 
@@ -61,7 +64,7 @@ class CartItemController extends Controller
             // Write flash message
             $eventDispatcher->dispatch(SyliusCartEvents::ITEM_ADD_ERROR, new FlashEvent($exception->getMessage()));
 
-            return $this->redirectAfterAdd($request);
+            return $this->redirectAfterAdd($configuration);
         }
 
         $event = new CartItemEvent($cart, $item);
@@ -74,7 +77,7 @@ class CartItemController extends Controller
         // Write flash message
         $eventDispatcher->dispatch(SyliusCartEvents::ITEM_ADD_COMPLETED, new FlashEvent());
 
-        return $this->redirectAfterAdd($request);
+        return $this->redirectAfterAdd($configuration);
     }
 
     /**
@@ -84,13 +87,15 @@ class CartItemController extends Controller
      *
      * @return RedirectResponse
      */
-    private function redirectAfterAdd(Request $request)
+    private function redirectAfterAdd(RequestConfiguration $configuration)
     {
+        $request = $configuration->getRequest();
+
         if ($request->query->has('_redirect_to')) {
-            return $this->redirect($request->query->get('_redirect_to'));
+            return $this->redirectHandler->redirect($configuration, $request->query->get('_redirect_to'));
         }
 
-        return $this->redirectToCartSummary();
+        return $this->redirectToCartSummary($configuration);
     }
 
     /**
@@ -104,10 +109,12 @@ class CartItemController extends Controller
      *
      * @return Response
      */
-    public function removeAction($id)
+    public function removeAction(Request $request)
     {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
         $cart = $this->getCurrentCart();
-        $item = $this->getRepository()->find($id);
+        $item = $this->findOr404($configuration);
 
         $eventDispatcher = $this->getEventDispatcher();
 
@@ -115,7 +122,7 @@ class CartItemController extends Controller
             // Write flash message
             $eventDispatcher->dispatch(SyliusCartEvents::ITEM_REMOVE_ERROR, new FlashEvent());
 
-            return $this->redirectToCartSummary();
+            return $this->redirectToCartSummary($configuration);
         }
 
         $event = new CartItemEvent($cart, $item);
@@ -128,6 +135,6 @@ class CartItemController extends Controller
         // Write flash message
         $eventDispatcher->dispatch(SyliusCartEvents::ITEM_REMOVE_COMPLETED, new FlashEvent());
 
-        return $this->redirectToCartSummary();
+        return $this->redirectToCartSummary($configuration);
     }
 }

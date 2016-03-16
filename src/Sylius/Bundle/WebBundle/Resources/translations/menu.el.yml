@@ -7,8 +7,8 @@ sylius:
       main:
         blocks: Μπλοκ
         configuration: Ρυθμίσεις παραμέτρων
-        countries: Χώρες
         content: Περιεχόμενο
+        countries: Χώρες
         general_settings: Γενικές ρυθμίσεις
         groups: Ομάδες
         new_order: Προσθήκη νέας παραγγελίας
@@ -18,12 +18,12 @@ sylius:
         payments: Πληρωμές
         products: Προϊόντα
         promotions: Προσφορές
+        roles: Ρόλοι
         sales: Παραγγελίες
         shipments: Αποστολές
         tax_rates: Φορολογικοί συντελεστές
         taxonomies: Κατηγοριοποίηση
         zones: Ζώνες
-        roles: Ρόλοι
       sidebar:
         assortment: Κατάταξη
         blocks: Μπλοκ
@@ -41,13 +41,13 @@ sylius:
         payments: Πληρωμές
         products: Προϊόντα
         promotions: Προσφορές
+        roles: Ρόλοι
         sales: Παραγγελίες
         shipments: Αποστολές
         stockables: Επίπεδα αποθέματος
         tax_rates: Φορολογικοί συντελεστές
         taxonomies: Κατηγοριοποίηση
         zones: Ζώνες
-        roles: Ρόλοι
   frontend:
     menu:
       account:

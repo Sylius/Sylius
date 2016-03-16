@@ -37,17 +37,17 @@ class LoadShippingData extends DataFixture
         $manager->persist($regular);
         $manager->persist($heavy);
 
-        $config = array('first_item_cost' => 1000, 'additional_item_cost' => 500, 'additional_item_limit' => 0);
-        $manager->persist($this->createShippingMethod(array($this->defaultLocale => 'FedEx'), 'SM1', 'USA', DefaultCalculators::FLEXIBLE_RATE, $config));
+        $config = ['first_unit_cost' => 1000, 'additional_unit_cost' => 500, 'additional_unit_limit' => 0];
+        $manager->persist($this->createShippingMethod([$this->defaultLocale => 'FedEx'], 'SM1', 'USA', DefaultCalculators::FLEXIBLE_RATE, $config));
 
-        $config = array('amount' => 2500);
-        $manager->persist($this->createShippingMethod(array($this->defaultLocale => 'UPS Ground', 'es_ES' => 'UPS terrestre'), 'SM2', 'EU', DefaultCalculators::FLAT_RATE, $config));
+        $config = ['amount' => 2500];
+        $manager->persist($this->createShippingMethod([$this->defaultLocale => 'UPS Ground', 'es_ES' => 'UPS terrestre'], 'SM2', 'EU', DefaultCalculators::FLAT_RATE, $config));
 
-        $config = array('amount' => 2350);
-        $manager->persist($this->createShippingMethod(array($this->defaultLocale => 'DHL'), 'SM3', 'EU', DefaultCalculators::FLAT_RATE, $config));
+        $config = ['amount' => 2350];
+        $manager->persist($this->createShippingMethod([$this->defaultLocale => 'DHL'], 'SM3', 'EU', DefaultCalculators::FLAT_RATE, $config));
 
-        $config = array('first_item_cost' => 4000, 'additional_item_cost' => 500, 'additional_item_limit' => 10);
-        $manager->persist($this->createShippingMethod(array($this->defaultLocale => 'FedEx World Shipping', 'es_ES' => 'FedEx internacional'), 'SM4', 'Rest of World', DefaultCalculators::FLEXIBLE_RATE, $config));
+        $config = ['first_unit_cost' => 4000, 'additional_unit_cost' => 500, 'additional_unit_limit' => 10];
+        $manager->persist($this->createShippingMethod([$this->defaultLocale => 'FedEx World Shipping', 'es_ES' => 'FedEx internacional'], 'SM4', 'RoW', DefaultCalculators::FLEXIBLE_RATE, $config));
 
         $manager->flush();
     }
@@ -87,14 +87,14 @@ class LoadShippingData extends DataFixture
      *
      * @param array                     $translatedNames
      * @param string                    $code
-     * @param string                    $zoneName
+     * @param string                    $zoneCode
      * @param string                    $calculator
      * @param array                     $configuration
      * @param ShippingCategoryInterface $category
      *
      * @return ShippingMethodInterface
      */
-    protected function createShippingMethod(array $translatedNames, $code, $zoneName, $calculator = DefaultCalculators::PER_ITEM_RATE, array $configuration = array(), ShippingCategoryInterface $category = null)
+    protected function createShippingMethod(array $translatedNames, $code, $zoneCode, $calculator = DefaultCalculators::PER_UNIT_RATE, array $configuration = [], ShippingCategoryInterface $category = null)
     {
         /* @var $method ShippingMethodInterface */
         $method = $this->getShippingMethodFactory()->createNew();
@@ -109,7 +109,7 @@ class LoadShippingData extends DataFixture
             }
         }
 
-        $method->setZone($this->getZoneByName($zoneName));
+        $method->setZone($this->getZoneByCode($zoneCode));
         $method->setCode($code);
         $method->setCalculator($calculator);
         $method->setConfiguration($configuration);

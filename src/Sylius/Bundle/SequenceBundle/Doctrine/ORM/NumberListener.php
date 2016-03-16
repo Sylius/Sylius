@@ -55,12 +55,12 @@ class NumberListener
     /**
      * @var SequenceSubjectInterface[]
      */
-    protected $entitiesEnabled = array();
+    protected $entitiesEnabled = [];
 
     /**
      * @var array
      */
-    protected $sequences = array();
+    protected $sequences = [];
 
     /**
      * @var bool
@@ -73,9 +73,9 @@ class NumberListener
         EventDispatcherInterface $eventDispatcher,
         $sequenceClass
     ) {
-        $this->registry      = $registry;
-        $this->eventManager  = $eventManager;
-        $this->eventDispatcher  = $eventDispatcher;
+        $this->registry = $registry;
+        $this->eventManager = $eventManager;
+        $this->eventDispatcher = $eventDispatcher;
         $this->sequenceClass = $sequenceClass;
     }
 
@@ -145,7 +145,7 @@ class NumberListener
 
         $sequence = $em
             ->getRepository($this->sequenceClass)
-            ->findOneBy(array('type' => $type))
+            ->findOneBy(['type' => $type])
         ;
 
         if (null === $sequence) {

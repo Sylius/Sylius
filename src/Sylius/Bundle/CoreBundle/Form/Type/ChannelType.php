@@ -29,32 +29,37 @@ class ChannelType extends BaseChannelType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('taxonomies', 'sylius_taxonomy_choice', array(
-                'label'    => 'sylius.form.channel.taxonomies',
-                'multiple' => true
-            ))
-            ->add('locales', 'sylius_locale_choice', array(
-                'label'    => 'sylius.form.channel.locales',
-                'multiple' => true
-            ))
-            ->add('defaultLocale', 'sylius_locale_choice', array(
-                'label'    => 'sylius.form.channel.locale_default'
-            ))
-            ->add('currencies', 'sylius_currency_choice', array(
-                'label'    => 'sylius.form.channel.currencies',
-                'multiple' => true
-            ))
-            ->add('defaultCurrency', 'sylius_currency_choice', array(
-                'label'    => 'sylius.form.channel.currency_default'
-            ))
-            ->add('shippingMethods', 'sylius_shipping_method_choice', array(
-                'label'    => 'sylius.form.channel.shipping_methods',
-                'multiple' => true
-            ))
-            ->add('paymentMethods', 'sylius_payment_method_choice', array(
-                'label'    => 'sylius.form.channel.payment_methods',
-                'multiple' => true
-            ))
+            ->add('taxonomies', 'sylius_taxonomy_choice', [
+                'label' => 'sylius.form.channel.taxonomies',
+                'multiple' => true,
+            ])
+            ->add('locales', 'sylius_locale_choice', [
+                'label' => 'sylius.form.channel.locales',
+                'multiple' => true,
+            ])
+            ->add('defaultLocale', 'sylius_locale_choice', [
+                'label' => 'sylius.form.channel.locale_default',
+            ])
+            ->add('currencies', 'sylius_currency_choice', [
+                'label' => 'sylius.form.channel.currencies',
+                'multiple' => true,
+            ])
+            ->add('defaultCurrency', 'sylius_currency_choice', [
+                'label' => 'sylius.form.channel.currency_default',
+            ])
+            ->add('theme', 'sylius_theme_choice', [
+                'label' => 'sylius.form.channel.theme',
+                'required' => false,
+                'empty_data' => null,
+            ])
+            ->add('shippingMethods', 'sylius_shipping_method_choice', [
+                'label' => 'sylius.form.channel.shipping_methods',
+                'multiple' => true,
+            ])
+            ->add('paymentMethods', 'sylius_payment_method_choice', [
+                'label' => 'sylius.form.channel.payment_methods',
+                'multiple' => true,
+            ])
         ;
     }
 }

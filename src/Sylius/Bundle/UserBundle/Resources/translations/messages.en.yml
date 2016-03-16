@@ -1,25 +1,4 @@
 sylius:
-    ui:
-        email: Email
-        register: Register
-        login: Login
-        logout: Logout
-        logged_in_as: Logged in as %username%
-        no_account: No account yet?
-        forgot_password: Forgot password?
-        reset_password: Reset password
-        reset: Reset
-        password:
-            reset:
-                header: Reset password
-                button: Reset
-        profile: Profile
-        change_password: Change your password
-        account_panel_outline: Enjoy all the features that are available on your personal space to view, track and manage all your data.
-        customer_since: You are a customer since
-        welcome: Welcome
-        customer:
-            id: Customer ID
     form:
         group:
             name: Name
@@ -37,10 +16,12 @@ sylius:
             groups: Groups
             last_name: Last name
             email: Email
+            phone_number: Phone number
             gender: Gender
             birthday: Birthday
             billing_address: Billing address
             different_billing_address: Use different address for billing?
+            only_customer_registration: Create account?
         user_filter:
             query: Search
         user_change_password:

@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    login:
+      username: نام کاربری
+      password: کلمه عبور
+      remember_me: مرا به خاطر بسپار
+  ui:
+    sign_in: ورود
+    sign_out: خروج
+    dashboard: داشبورد
+    powered_by: قدرت گرفته از

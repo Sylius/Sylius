@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Sylius\Component\Review
+        psr4_prefix: Sylius\Component\Review
+        src_path: .

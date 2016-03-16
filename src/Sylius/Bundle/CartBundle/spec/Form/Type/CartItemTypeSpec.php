@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\CartBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,9 +23,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class CartItemTypeSpec extends ObjectBehavior
 {
-    function let()
+    function let(DataMapperInterface $orderItemQuantityDataMapper)
     {
-        $this->beConstructedWith('CartItem', array('sylius'));
+        $this->beConstructedWith('CartItem', ['sylius'], $orderItemQuantityDataMapper);
     }
 
     function it_is_initializable()
@@ -37,7 +38,7 @@ class CartItemTypeSpec extends ObjectBehavior
         $this->shouldImplement(FormTypeInterface::class);
     }
 
-    function it_builds_form_with_quantity_field(FormBuilder $builder)
+    function it_builds_form_with_quantity_field($orderItemQuantityDataMapper, FormBuilder $builder)
     {
         $builder
             ->add('quantity', 'integer', Argument::any())
@@ -45,16 +46,22 @@ class CartItemTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-        $this->buildForm($builder, array());
+        $builder
+            ->setDataMapper($orderItemQuantityDataMapper)
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+
+        $this->buildForm($builder, []);
     }
 
     function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
-                'data_class'        => 'CartItem',
-                'validation_groups' => array('sylius'),
-            ))
+            ->setDefaults([
+                'data_class' => 'CartItem',
+                'validation_groups' => ['sylius'],
+            ])
             ->shouldBeCalled()
         ;
 

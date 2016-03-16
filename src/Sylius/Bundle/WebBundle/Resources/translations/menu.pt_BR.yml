@@ -8,8 +8,8 @@ sylius:
         assortment: Sortimento
         blocks: Blocos
         configuration: Configuração
-        countries: Países
         content: Conteúdo
+        countries: Países
         dashboard: Painel
         general_settings: Configurações gerais
         groups: Grupos
@@ -22,19 +22,23 @@ sylius:
         pages: Páginas
         payment_methods: Meios de pagamentos
         payments: Pagamentos
+        permissions: Permissões
         products: Produtos
         promotions: Promoções
+        report: Relatórios
+        roles: Papéis
+        routes: Rotas
         sales: Pedidos
         shipments: Envios
         shipping_categories: Categorias de envio
         shipping_methods: Métodos de envio
+        slideshow: Apresentação de slides
         stockables: Níveis de estoque
         tax_categories: Categorias de tributação
         tax_rates: Impostos
         taxation_settings: Configurações de taxas
         taxonomies: Categorização
         zones: Regiões
-        roles: Papéis
       sidebar:
         assortment: Sortimento
         blocks: Blocos
@@ -51,11 +55,14 @@ sylius:
         options: Gerenciar opções
         orders: Pedidos atuais
         pages: Páginas
-        routes: Rotas
         payment_methods: Meios de pagamentos
         payments: Pagamentos
+        permissions: Permissões
         products: Produtos
         promotions: Promoções
+        report: Relatórios
+        roles: Papéis
+        routes: Rotas
         sales: Pedidos
         shipments: Envios
         shipping_categories: Categorias de envio
@@ -67,7 +74,6 @@ sylius:
         taxation_settings: Configurações de taxas
         taxonomies: Categorização
         zones: Regiões
-        roles: Papéis
   frontend:
     menu:
       account:

@@ -18,7 +18,6 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
  */
 interface CalculatorInterface
 {
-
     /**
      * @param ShippingSubjectInterface $subject
      * @param array                    $configuration
@@ -31,6 +30,4 @@ interface CalculatorInterface
      * @return string
      */
     public function getType();
-
-
 }

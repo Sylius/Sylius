@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  checkout:
-    shipping_method:
-      not_blank: 请选择配送方式。
   form:
     action:
       add_product_configuration:
@@ -28,6 +25,7 @@ sylius:
     channel:
       taxonomies: 分类
       locales: 区域设置
+      currency_default: 默认货币：
       shipping_methods: 发货方式
       payment_methods: 支付方式
     image:
@@ -48,11 +46,12 @@ sylius:
       restricted_zone: 限制的区
       shipping_category: 送货类别
       short_description: 简短说明：
-      tax_category: 税类别
       variant_selection_method: 变量选择方法
     product_filter:
       name: 名称
       sku: SKU
+    product_variant:
+      tax_category: 税类别
     settings:
       general:
         currency: 默认货币：
@@ -101,3 +100,5 @@ sylius:
       width: 宽度
     guest:
       email: 电子邮件
+    product_association_type:
+      name: 名称

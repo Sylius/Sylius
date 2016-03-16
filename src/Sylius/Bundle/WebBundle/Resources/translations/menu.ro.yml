@@ -8,8 +8,8 @@ sylius:
         assortment: Sortiment
         blocks: Block-uri
         configuration: Configurare
-        countries: Țări
         content: Conţinut
+        countries: Țări
         dashboard: Panou de administrare
         general_settings: Setări generale
         groups: Grupuri
@@ -24,17 +24,19 @@ sylius:
         payments: Plăți
         products: Produse
         promotions: Promoţii
+        roles: Roluri
+        routes: Rute
         sales: Comenzi
         shipments: Livrări
         shipping_categories: Categorii de livrare
         shipping_methods: Metode de livrare
+        slideshow: Slideshow
         stockables: Stocuri
         tax_categories: Categorii de taxe
         tax_rates: Taxe
         taxation_settings: Setări taxe
         taxonomies: Categorizare
         zones: Zone
-        roles: Roluri
       sidebar:
         assortment: Sortiment
         blocks: Block-uri
@@ -51,11 +53,12 @@ sylius:
         options: Gestionare opţiuni
         orders: Comenzi curente
         pages: Pagini
-        routes: Rute
         payment_methods: Metode de plată
         payments: Plăți
         products: Produse
         promotions: Promoţii
+        roles: Roluri
+        routes: Rute
         sales: Comenzi
         shipments: Livrări
         shipping_categories: Categorii de livrare
@@ -67,7 +70,6 @@ sylius:
         taxation_settings: Setări taxe
         taxonomies: Categorizare
         zones: Zone
-        roles: Roluri
   frontend:
     menu:
       account:

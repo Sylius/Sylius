@@ -30,11 +30,11 @@ class PasswordUpdater implements PasswordUpdaterInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function updatePassword(CredentialsHolderInterface $user)
     {
-        if (0 !== strlen($password = $user->getPlainPassword())) {
+        if ('' !== $password = $user->getPlainPassword()) {
             $user->setPassword($this->userPasswordEncoder->encode($user));
             $user->eraseCredentials();
         }

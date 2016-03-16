@@ -4,7 +4,6 @@
 sylius:
   form:
     channel:
-      code: 代码
       name: 名称
       description: 描述
       enabled: 已启用

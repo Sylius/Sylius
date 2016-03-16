@@ -4,6 +4,8 @@
 sylius:
   form:
     attribute:
-      name: ชื่อภายใน
-      presentation: แสดงหน้าเว็บ
+      code: รหัส
+      name: ชื่อ
       type: ชนิด
+    attribute_type:
+      configuration: ตั้งค่าคอนฟิก

@@ -11,9 +11,10 @@
 
 namespace Sylius\Component\Order\Model;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
-interface CommentInterface extends TimestampableInterface
+interface CommentInterface extends ResourceInterface, TimestampableInterface
 {
     /**
      * @return OrderInterface

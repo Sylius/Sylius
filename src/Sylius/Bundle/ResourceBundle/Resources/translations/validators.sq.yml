@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  resource:
+    not_enabled: Burimi i zgjedhur është i çaktivizuar
+    not_disabled: Burimi i zgjedhur është aktivizuar

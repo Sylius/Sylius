@@ -13,8 +13,6 @@ namespace spec\Sylius\Component\Addressing\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\AddressInterface;
-use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Addressing\Model\ProvinceInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -79,82 +77,53 @@ class AddressSpec extends ObjectBehavior
 
     function it_has_no_country_by_default()
     {
-        $this->getCountry()->shouldReturn(null);
+        $this->getCountryCode()->shouldReturn(null);
     }
 
-    function its_country_is_mutable(CountryInterface $country)
+    function its_country_code_is_mutable()
     {
-        $this->setCountry($country);
-        $this->getCountry()->shouldReturn($country);
+        $this->setCountryCode('IE');
+        $this->getCountryCode()->shouldReturn('IE');
     }
 
-    function it_allows_to_unset_the_country(CountryInterface $country)
+    function it_allows_to_unset_the_country_code()
     {
-        $this->setCountry($country);
-        $this->getCountry()->shouldReturn($country);
+        $this->setCountryCode('IE');
+        $this->getCountryCode()->shouldReturn('IE');
 
-        $this->setCountry(null);
-        $this->getCountry()->shouldReturn(null);
+        $this->setCountryCode(null);
+        $this->getCountryCode()->shouldReturn(null);
     }
 
-    function it_unsets_the_province_when_erasing_the_country(
-        CountryInterface $country,
-        ProvinceInterface $province
-    )
+    function it_unsets_the_province_code_when_erasing_country_code()
     {
-        $country->hasProvince($province)->willReturn(true);
+        $this->setCountryCode('IE');
+        $this->setProvinceCode('DU');
 
-        $this->setCountry($country);
-        $this->setProvince($province);
+        $this->setCountryCode(null);
 
-        $this->setCountry(null);
-
-        $this->getCountry()->shouldReturn(null);
-        $this->getProvince()->shouldReturn(null);
+        $this->getCountryCode()->shouldReturn(null);
+        $this->getProvinceCode()->shouldReturn(null);
     }
 
-    function it_has_no_province_by_default()
+    function it_has_no_province_code_by_default()
     {
-        $this->getProvince()->shouldReturn(null);
+        $this->getProvinceCode()->shouldReturn(null);
     }
 
-    function it_throws_exception_if_trying_to_define_province_without_country(ProvinceInterface $province)
+    function it_ignores_province_code_when_there_is_no_country_code()
     {
-        $this
-            ->shouldThrow(new \BadMethodCallException('Cannot define province on address without assigned country'))
-            ->duringSetProvince($province)
-        ;
+        $this->setCountryCode(null);
+        $this->setProvinceCode('DU');
+        $this->getProvinceCode()->shouldReturn(null);
     }
 
-    function its_province_is_mutable(
-        CountryInterface $country,
-        ProvinceInterface $province
-    )
+    function its_province_code_is_mutable()
     {
-        $country->hasProvince($province)->willReturn(true);
-        $this->setCountry($country);
+        $this->setCountryCode('IE');
 
-        $this->setProvince($province);
-        $this->getProvince()->shouldReturn($province);
-    }
-
-    function it_throws_if_trying_to_define_province_which_does_not_belong_to_country(
-        CountryInterface $country,
-        ProvinceInterface $province
-    )
-    {
-        $country->hasProvince($province)->willReturn(false);
-        $this->setCountry($country);
-
-        $country->getName()->willReturn('United States');
-        $province->getName()->willReturn('Quebec');
-
-        $expectedExceptionMessage = 'Cannot set province "Quebec", because it does not belong to country "United States"';
-
-        $this
-            ->shouldThrow(new \InvalidArgumentException($expectedExceptionMessage))
-            ->duringSetProvince($province)
-        ;
+        $this->setProvinceCode('DU');
+        $this->getProvinceCode()->shouldReturn('DU');
     }
 
     function it_has_no_company_by_default()

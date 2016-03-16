@@ -28,22 +28,29 @@ class ProductType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('masterVariant', 'sylius_product_variant', array(
+            ->add('masterVariant', 'sylius_product_variant', [
                 'master' => true,
-            ))
-            ->add('attributes', 'collection', array(
-                'required'     => false,
-                'type'         => 'sylius_product_attribute_value',
+            ])
+            ->add('attributes', 'collection', [
+                'required' => false,
+                'type' => 'sylius_product_attribute_value',
                 'prototype' => false,
-                'allow_add'    => true,
+                'allow_add' => true,
                 'allow_delete' => true,
-                'by_reference' => false
-            ))
-            ->add('options', 'sylius_product_option_choice', array(
+                'by_reference' => false,
+            ])
+            ->add('associations', 'collection', [
+                'type' => 'sylius_product_association',
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'button_add_label' => 'sylius.ui.add_association',
+            ])
+            ->add('options', 'sylius_product_option_choice', [
                 'required' => false,
                 'multiple' => true,
-                'label'    => 'sylius.form.product.options'
-            ))
+                'label' => 'sylius.form.product.options',
+            ])
         ;
     }
 

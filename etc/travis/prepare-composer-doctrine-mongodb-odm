@@ -1,7 +1,0 @@
-#!/bin/bash
-
-if [ $TRAVIS_PHP_VERSION == "7.0" ]; then
-    exit 0
-fi
-
-bash etc/travis/prepare-cached-composer etc/travis/mongodb

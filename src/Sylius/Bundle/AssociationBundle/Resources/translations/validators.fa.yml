@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  association_type:
+    name:
+      not_blank: لطفا نام ارتباط را وارد کنید.
+      min_length: 'نام ارتباط کالا باید بیش از 1 حرف باشد. | نام ارتباط کالا باید بیش از {{ limit }} حرف باشد.'
+      max_length: 'نام ارتباط نباید بیش از 1 حرف باشد. | نام ارتباط نباید بیش از {{ limit }} حرف باشد.'
+    code:
+      unique: ارتباطی با همین کد قبلا در فروشگاه ثبت شده است.
+      not_blank: لطفا کد ارتباط را وارد کنید.

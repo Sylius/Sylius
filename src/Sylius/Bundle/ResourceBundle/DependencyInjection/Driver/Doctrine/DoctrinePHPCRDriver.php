@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Doctrine;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
+use Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Parameter;
@@ -40,16 +41,37 @@ class DoctrinePHPCRDriver extends AbstractDoctrineDriver
         $repositoryClass = new Parameter('sylius.phpcr_odm.repository.class');
 
         if ($metadata->hasClass('repository')) {
-            $repositoryClass  = $metadata->getClass('repository');
+            $repositoryClass = $metadata->getClass('repository');
         }
 
+        $repositoryReflection = new \ReflectionClass($repositoryClass);
+
         $definition = new Definition($repositoryClass);
-        $definition->setArguments(array(
+        $definition->setArguments([
             new Reference($metadata->getServiceId('manager')),
             $this->getClassMetadataDefinition($metadata),
-        ));
+        ]);
+        $definition->setLazy(!$repositoryReflection->isFinal());
+
+        if ($metadata->hasParameter('translation')) {
+            $translatableRepositoryInterface = TranslatableResourceRepositoryInterface::class;
+            $translationConfig = $metadata->getParameter('translation');
+
+            if (interface_exists($translatableRepositoryInterface) && $repositoryReflection->implementsInterface($translatableRepositoryInterface)) {
+                if (isset($translationConfig['fields'])) {
+                    $definition->addMethodCall('setTranslatableFields', [$translationConfig['fields']]);
+                }
+            }
+        }
 
         $container->setDefinition($metadata->getServiceId('repository'), $definition);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function addDefaultForm(ContainerBuilder $container, MetadataInterface $metadata)
+    {
     }
 
     /**

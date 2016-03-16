@@ -6,4 +6,3 @@ sylius:
     report:
       name: 名称
       description: 描述
-      code: 代码

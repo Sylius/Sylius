@@ -1,5 +1,6 @@
 <?php
 
+use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 use Sylius\Bundle\CoreBundle\Kernel\Kernel;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -41,7 +42,7 @@ class TestKernel extends Kernel
 
         $services = $containerServicesPropertyReflection->getValue($container) ?: [];
         foreach ($services as $serviceId => $service) {
-            if ('kernel' === $serviceId) {
+            if ('kernel' === $serviceId || 'http_kernel' === $serviceId) {
                 continue;
             }
 
@@ -65,6 +66,6 @@ class TestKernel extends Kernel
 
     protected function getContainerBaseClass()
     {
-        return '\PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer';
+        return MockerContainer::class;
     }
 }

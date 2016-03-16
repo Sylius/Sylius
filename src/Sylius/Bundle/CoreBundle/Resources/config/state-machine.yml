@@ -6,27 +6,36 @@ winzou_state_machine:
         state_machine_class: %sylius.state_machine.class%
         states:
             cart: ~
-            addressing: ~
-            shipping: ~
-            payment: ~
-            finalize: ~
+            started: ~
+            addressed: ~
+            shipping_selected: ~
+            payment_selected: ~
             completed: ~
         transitions:
-            addressing:
+            start:
                 from: [cart]
-                to:   addressing
-            shipping:
-                from: [addressing]
-                to:   shipping
-            payment:
-                from: [shipping]
-                to:   payment
-            finalize:
-                from: [payment]
-                to:   finalize
+                to: started
+            address:
+                from: [started]
+                to: addressed
+            readdress:
+                from: [payment_selected, shipping_selected, addressed]
+                to: started
+            select_shipping:
+                from: [addressed]
+                to: shipping_selected
+            reselect_shipping:
+                from: [payment_selected, shipping_selected]
+                to: addressed
+            select_payment:
+                from: [shipping_selected]
+                to: payment_selected
+            reselect_payment:
+                from: [payment_selected]
+                to: shipping_selected
             complete:
-                from: [finalize]
-                to:   completed
+                from: [payment_selected]
+                to: completed
 
     sylius_order_shipping:
         class:         %sylius.model.order.class%
@@ -158,7 +167,7 @@ winzou_state_machine:
                 sylius_sync_shipping:
                     excluded_to: [sold]
                     do:   [@sm.callback.cascade_transition, 'apply']
-                    args: ['object', 'event', 'null', '"sylius_shipment_item"']
+                    args: ['object', 'event', 'null', '"sylius_shipment_unit"']
 
     sylius_shipment:
         callbacks:
@@ -170,4 +179,27 @@ winzou_state_machine:
                 sylius_shipping_confirmation_email:
                     to:   'shipped'
                     do:   [@sylius.email_manager.shipment, 'sendConfirmationEmail']
+                    args: ['object']
+
+    sylius_review:
+        class:         %sylius.model.product_review.class%
+        property_path: status
+        graph:         sylius_product_review
+        state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
+        states:
+            new:      ~
+            accepted: ~
+            rejected: ~
+        transitions:
+            accept:
+                from: [new]
+                to:   accepted
+            reject:
+                from: [new]
+                to:   rejected
+        callbacks:
+            after:
+                update_price:
+                    on: 'accept'
+                    do: [@sylius.review.updater.average_rating, updateFromReview]
                     args: ['object']

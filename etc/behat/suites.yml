@@ -1,0 +1,41 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+imports:
+    - suites/legacy/account.yml
+    - suites/legacy/addressing.yml
+    - suites/legacy/cart.yml
+    - suites/legacy/channels.yml
+    - suites/legacy/checkout.yml
+    - suites/legacy/currencies.yml
+    - suites/legacy/dashboard.yml
+    - suites/legacy/emails.yml
+    - suites/legacy/homepage.yml
+    - suites/legacy/i18n.yml
+    - suites/legacy/inventory.yml
+    - suites/legacy/localization.yml
+    - suites/legacy/metadata.yml
+    - suites/legacy/oauth.yml
+    - suites/legacy/orders.yml
+    - suites/legacy/payments.yml
+    - suites/legacy/pricing.yml
+    - suites/legacy/products.yml
+    - suites/legacy/promotions.yml
+    - suites/legacy/reports.yml
+    - suites/legacy/reviews.yml
+    - suites/legacy/search.yml
+    - suites/legacy/security.yml
+    - suites/legacy/settings.yml
+    - suites/legacy/shipping.yml
+    - suites/legacy/taxation.yml
+    - suites/legacy/taxonomies.yml
+    - suites/legacy/users.yml
+
+    - suites/ui_cart.yml
+    - suites/ui_channel.yml
+    - suites/ui_checkout.yml
+    - suites/ui_promotion.yml
+    - suites/ui_theme.yml
+    - suites/ui_user.yml
+
+    - suites/domain_order.yml

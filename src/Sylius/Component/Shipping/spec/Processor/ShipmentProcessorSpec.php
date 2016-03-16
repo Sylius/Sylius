@@ -12,14 +12,13 @@
 namespace spec\Sylius\Component\Shipping\Processor;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use SM\Factory\FactoryInterface;
 use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
-use Sylius\Component\Shipping\Model\ShipmentItemInterface;
+use Sylius\Component\Shipping\Model\ShipmentUnitInterface;
 use Sylius\Component\Shipping\Processor\ShipmentProcessorInterface;
-use Sylius\Component\Shipping\ShipmentItemTransitions;
 use Sylius\Component\Shipping\ShipmentTransitions;
+use Sylius\Component\Shipping\ShipmentUnitTransitions;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -50,18 +49,18 @@ class ShipmentProcessorSpec extends ObjectBehavior
 
         $sm->apply('transition', true)->shouldBeCalled();
 
-        $this->updateShipmentStates(array($shipment), 'transition');
+        $this->updateShipmentStates([$shipment], 'transition');
     }
 
-    function it_updates_item_states(
+    function it_updates_unit_states(
         $factory,
-        ShipmentItemInterface $item,
+        ShipmentUnitInterface $unit,
         StateMachineInterface $sm
     ) {
-        $factory->get($item, ShipmentItemTransitions::GRAPH)->shouldBeCalled()->willReturn($sm);
+        $factory->get($unit, ShipmentUnitTransitions::GRAPH)->shouldBeCalled()->willReturn($sm);
 
         $sm->apply('transition', true)->shouldBeCalled();
 
-        $this->updateItemStates(array($item), 'transition');
+        $this->updateUnitStates([$unit], 'transition');
     }
 }

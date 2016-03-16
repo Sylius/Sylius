@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Locale\Provider;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -46,13 +45,13 @@ class LocaleProviderSpec extends ObjectBehavior
         LocaleInterface $firstLocale,
         LocaleInterface $secondLocale
     ) {
-        $locales = array($firstLocale, $secondLocale);
-        $localeRepository->findBy(array('enabled' => true))->willReturn($locales);
+        $locales = [$firstLocale, $secondLocale];
+        $localeRepository->findBy(['enabled' => true])->willReturn($locales);
 
         $firstLocale->getCode()->willReturn('en_US');
         $secondLocale->getCode()->willReturn('pl_PL');
 
-        $this->getAvailableLocales()->shouldReturn(array('en_US', 'pl_PL'));
+        $this->getAvailableLocales()->shouldReturn(['en_US', 'pl_PL']);
     }
 
     function it_checks_if_the_locale_code_is_available(
@@ -60,8 +59,8 @@ class LocaleProviderSpec extends ObjectBehavior
         LocaleInterface $firstLocale,
         LocaleInterface $secondLocale
     ) {
-        $locales = array($firstLocale, $secondLocale);
-        $localeRepository->findBy(array('enabled' => true))->willReturn($locales);
+        $locales = [$firstLocale, $secondLocale];
+        $localeRepository->findBy(['enabled' => true])->willReturn($locales);
 
         $firstLocale->getCode()->willReturn('en_US');
         $secondLocale->getCode()->willReturn('pl_PL');

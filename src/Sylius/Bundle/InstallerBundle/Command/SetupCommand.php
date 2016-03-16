@@ -28,12 +28,12 @@ class SetupCommand extends AbstractInstallCommand
     /**
      * @var array
      */
-    private $currencies = array();
+    private $currencies = [];
 
     /**
      * @var array
      */
-    private $locales = array();
+    private $locales = [];
 
     /**
      * {@inheritdoc}
@@ -96,11 +96,11 @@ EOT
             $user->setEmail('sylius@example.com');
             $user->setPlainPassword('sylius');
         } else {
-            $customer->setFirstname($this->ask($output, 'Your firstname:', array(new NotBlank())));
-            $customer->setLastname($this->ask($output, 'Lastname:', array(new NotBlank())));
+            $customer->setFirstname($this->ask($output, 'Your firstname:', [new NotBlank()]));
+            $customer->setLastname($this->ask($output, 'Lastname:', [new NotBlank()]));
 
             do {
-                $email = $this->ask($output, 'E-Mail:', array(new NotBlank(), new Email()));
+                $email = $this->ask($output, 'E-Mail:', [new NotBlank(), new Email()]);
                 $exists = null !== $userRepository->findOneByEmail($email);
 
                 if ($exists) {
@@ -113,7 +113,7 @@ EOT
         }
 
         $user->setEnabled(true);
-        $user->addAuthorizationRole($this->get('sylius.repository.role')->findOneBy(array('code' => 'administrator')));
+        $user->addAuthorizationRole($this->get('sylius.repository.role')->findOneBy(['code' => 'administrator']));
 
         $userManager->persist($user);
         $userManager->flush();
@@ -135,7 +135,7 @@ EOT
             $valid = true;
 
             foreach ($locales as $code) {
-                if (0 !== count($errors = $this->validate(trim($code), array(new Locale())))) {
+                if (0 !== count($errors = $this->validate(trim($code), [new Locale()]))) {
                     $valid = false;
                 }
 
@@ -186,7 +186,7 @@ EOT
             $valid = true;
 
             foreach ($currencies as $code) {
-                if (0 !== count($errors = $this->validate(trim($code), array(new Currency())))) {
+                if (0 !== count($errors = $this->validate(trim($code), [new Currency()]))) {
                     $valid = false;
                 }
 
@@ -229,11 +229,11 @@ EOT
 
         do {
             $countries = $this->getCountriesCodes($input, $output);
-            
+
             $valid = true;
 
             foreach ($countries as $code) {
-                if (0 !== count($errors = $this->validate(trim($code), array(new Country())))) {
+                if (0 !== count($errors = $this->validate(trim($code), [new Country()]))) {
                     $valid = false;
                 }
 
@@ -247,12 +247,12 @@ EOT
 
             $output->writeln(sprintf('Adding <info>%s</info>.', $name));
 
-            if (null !== $countryRepository->findOneByIsoName($code)) {
+            if (null !== $countryRepository->findOneByCode($code)) {
                 continue;
             }
 
             $country = $countryFactory->createNew();
-            $country->setIsoName($code);
+            $country->setCode($code);
 
             $countryManager->persist($country);
         }
@@ -281,7 +281,7 @@ EOT
 
             /** @var ChannelInterface $channel */
             $channel = $channelFactory->createNew();
-            $channel->setUrl(null);
+            $channel->setHostname(null);
             $channel->setCode($code);
             $channel->setName($code);
             $channel->setColor(null);
@@ -374,11 +374,11 @@ EOT
     private function getCodes(InputInterface $input, OutputInterface $output, $question, $description, $defaultAnswer)
     {
         if ($input->getOption('no-interaction')) {
-            return array($defaultAnswer);
+            return [$defaultAnswer];
         }
 
         $output->writeln($description);
-        $codes = $this->ask($output, '<question>'.$question.'</question> ', array(), $defaultAnswer);
+        $codes = $this->ask($output, '<question>'.$question.'</question> ', [], $defaultAnswer);
 
         return explode(',', $codes);
     }
@@ -391,8 +391,8 @@ EOT
     private function getAdministratorPassword(OutputInterface $output)
     {
         do {
-            $password = $this->askHidden($output, 'Choose password:', array(new NotBlank()));
-            $repeatedPassword = $this->askHidden($output, 'Repeat password:', array(new NotBlank()));
+            $password = $this->askHidden($output, 'Choose password:', [new NotBlank()]);
+            $repeatedPassword = $this->askHidden($output, 'Repeat password:', [new NotBlank()]);
 
             if ($repeatedPassword !== $password) {
                 $output->writeln('<error>Passwords does not match confirmation!</error>');

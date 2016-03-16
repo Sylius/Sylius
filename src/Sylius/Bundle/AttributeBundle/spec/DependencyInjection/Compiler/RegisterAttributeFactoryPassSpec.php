@@ -40,6 +40,9 @@ class RegisterAttributeFactoryPassSpec extends ObjectBehavior
     ) {
         $container->hasDefinition('sylius.registry.attribute_type')->willReturn(true);
         $container->getDefinition('sylius.registry.attribute_type')->willReturn($attributeTypeRegistryDefinition);
+
+        $container->getParameter('sylius.attribute.subjects')->willReturn(['product' => []]);
+
         $container->getDefinition('sylius.factory.product_attribute')->willReturn($oldAttributeFactoryDefinition);
 
         $container->setDefinition('sylius.factory.product_attribute', Argument::type('Symfony\Component\DependencyInjection\Definition'))->willReturn($newAttributeFactoryDefinition);

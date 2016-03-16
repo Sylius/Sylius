@@ -4,8 +4,9 @@
 sylius:
   form:
     rule:
-      item_count_configuration:
+      unit_count_configuration:
         count: Anzahl
+      type: Regeltyp
     shipment:
       state: Versandstatus
       states:
@@ -18,16 +19,19 @@ sylius:
       tracking_code: Tracking-Code
     shipping_calculator:
       flat_rate_configuration:
+        label: Pauschale pro Sendung
         amount: Anzahl
       flexible_rate_configuration:
-        additional_item_cost: Preis jedes weiteren Artikels
-        additional_item_limit: Maximale Anzahl weiterer Artikel
-        first_item_cost: Preis des ersten Artikels
-      per_item_rate_configuration:
+        label: Flexible Rate
+      per_unit_rate_configuration:
         amount: Anzahl
       weight_rate_configuration:
+        label: Gewichtsbasierter Preis
+        fixed: Feste Pauschale
+        variable: Variable Pauschale
         division: Division
       volume_rate_configuration:
+        label: Volumenbasierte Pauschale
         amount: Anzahl
         division: Division
     shipping_category:

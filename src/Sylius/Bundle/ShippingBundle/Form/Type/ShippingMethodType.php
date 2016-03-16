@@ -67,40 +67,39 @@ class ShippingMethodType extends AbstractResourceType
         $builder
             ->addEventSubscriber(new BuildShippingMethodFormSubscriber($this->calculatorRegistry, $builder->getFormFactory(), $this->formRegistry))
             ->addEventSubscriber(new AddCodeFormSubscriber())
-            ->add('translations', 'a2lix_translationsForms', array(
+            ->add('translations', 'a2lix_translationsForms', [
                 'form_type' => 'sylius_shipping_method_translation',
                 'label' => 'sylius.form.shipping_method.name',
-            ))
-            ->add('category', 'sylius_shipping_category_choice', array(
+            ])
+            ->add('category', 'sylius_shipping_category_choice', [
                 'required' => false,
                 'label' => 'sylius.form.shipping_method.category',
-            ))
-            ->add('categoryRequirement', 'choice', array(
+            ])
+            ->add('categoryRequirement', 'choice', [
                 'choices' => ShippingMethod::getCategoryRequirementLabels(),
                 'multiple' => false,
                 'expanded' => true,
                 'label' => 'sylius.form.shipping_method.category_requirement',
-            ))
-            ->add('calculator', 'sylius_shipping_calculator_choice', array(
+            ])
+            ->add('calculator', 'sylius_shipping_calculator_choice', [
                 'label' => 'sylius.form.shipping_method.calculator',
-            ))
+            ])
         ;
 
-        $prototypes = array();
-        $prototypes['rules'] = array();
+        $prototypes = [];
+        $prototypes['rules'] = [];
         foreach ($this->checkerRegistry->all() as $type => $checker) {
             $prototypes['rules'][$type] = $builder->create('__name__', $checker->getConfigurationFormType())->getForm();
         }
-        $prototypes['calculators'] = array();
+        $prototypes['calculators'] = [];
         foreach ($this->calculatorRegistry->all() as $name => $calculator) {
+            $calculatorTypeName = sprintf('sylius_shipping_calculator_%s', $calculator->getType());
 
-            $calculatorTypeName = sprintf("sylius_shipping_calculator_%s", $calculator->getType());
-
-            if(!$this->formRegistry->hasType($calculatorTypeName)){
+            if (!$this->formRegistry->hasType($calculatorTypeName)) {
                 continue;
             }
 
-            $prototypes['calculators'][$name] = $builder->create('configuration',$calculatorTypeName)->getForm();
+            $prototypes['calculators'][$name] = $builder->create('configuration', $calculatorTypeName)->getForm();
         }
 
         $builder->setAttribute('prototypes', $prototypes);
@@ -111,7 +110,7 @@ class ShippingMethodType extends AbstractResourceType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $view->vars['prototypes'] = array();
+        $view->vars['prototypes'] = [];
         foreach ($form->getConfig()->getAttribute('prototypes') as $group => $prototypes) {
             foreach ($prototypes as $type => $prototype) {
                 $view->vars['prototypes'][$group.'_'.$type] = $prototype->createView($view);

@@ -62,7 +62,6 @@ class OrderPromotionListenerSpec extends ObjectBehavior
     ) {
         $event->getSubject()->willReturn($order);
         $promotionProcessor->process($order)->shouldBeCalled();
-        $order->calculateTotal()->shouldBeCalled();
 
         $this->processOrderPromotion($event);
     }
@@ -76,7 +75,7 @@ class OrderPromotionListenerSpec extends ObjectBehavior
         $event->getName()->willReturn(SyliusPromotionEvents::COUPON_ELIGIBLE);
 
         $translator
-            ->trans(Argument::any(), array(), 'flashes')
+            ->trans(Argument::any(), [], 'flashes')
             ->shouldBeCalled();
 
         $flashBag->add('success', Argument::any())->shouldBeCalled();
@@ -100,5 +99,4 @@ class OrderPromotionListenerSpec extends ObjectBehavior
 
         $this->handleCouponPromotion($event);
     }
-
 }

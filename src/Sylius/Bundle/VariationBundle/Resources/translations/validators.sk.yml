@@ -3,18 +3,24 @@
 
 sylius:
   option:
+    code:
+      not_blank: Zadajte kód produktovej volby.
+      unique: Produktová voľba zo zadaným kódom už existuje.
     name:
       not_blank: Prosím, zadajte názov voľby.
       min_length: 'Názov možnosti musí obsahovať aspoň 1 znak.|Názov možnosti musí obsahovať aspoň {{ limit }} znakov.'
-      max_length: 'Názov možnosti nesmie byť dlhší ako 1 znak.|Názov možnosti nesmie byť dlhší ako {{ limit }} znakov.'
+      max_length: 'Názov produktovej voľby nesmie byť dlhší ako 1 znak.|Názov produktovej voľby nesmie byť dlhší ako {{ limit }} znakov.'
     presentation:
-      not_blank: Prosím, zadajte prezentácie názov možnosti.
+      not_blank: Prosím, zadajte verejný názov produktovej voľby.
       min_length: 'Prezentáčný názov musí mať aspoň 1 znak. | Prezentáčný názov musí byť dlhý aspoň {{ limit }} znakov.'
       max_length: 'Prezentáčný názov nesmie byť dlhší ako 1 znak. | Prezentáčný názov nesmie byť dlhší ako {{ limit }} znakov.'
     values:
-      min_count: 'Prosím pridajte aspoň {{ limit }} hodnotu pre možnost. | Prosím pridajte aspoň {{ limit }} hodnôt pre možnost.'
+      min_count: 'Prosím pridajte aspoň {{ limit }} hodnotu pre produktovú voľbu. | Prosím pridajte aspoň {{ limit }} hodnôt pre produktové voľby.'
   option_value:
+    code:
+      not_blank: Prosím zadajte kód pre hodnotu produktovej voľby.
+      unique: Hodnota produktovej voľby zo zadaným kódom už existuje.
     value:
-      not_blank: Prosím, vyplňte hodnotu.
+      not_blank: Prosím, zadajte hodnotu produktovej voľby.
   variant:
-    combination: Variant s touto sadou možností už existuje.
+    combination: Variant s touto sadou produktových voľieb už existuje.

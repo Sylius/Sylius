@@ -2,25 +2,22 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+  checkout:
+    shipping_method:
+      not_blank: Prosím zadajte spôsob dopravy.
   locale:
     code:
       not_blank: Zadajte kód jazyka.
       unique: Tento jazyk už existuje.
   product_variant:
     onHand:
-      min: 'Na sklade musí byť viac ako {{ limit }}.'
-      not_blank: Prosím zadajte sklad.
+      min: 'Počet položiek na sklade musí byť viac ako {{ limit }}.'
+      not_blank: Prosím zadajte počet položiek na sklade.
     price:
       min: Cena nemôže obsahovať záporné hodnoty.
       not_blank: Zadajte cenu.
+    original_price:
+      min: Pôvodná cena nesmie byť záporná.
   product_translation:
     short_description:
       max: 'Stručný popis nesmie byť dlhší ako {{ limit }} znakov.'
-sylius_shipping:
-  method:
-    zone:
-      not_blank: Zadajte spôsob doručenia.
-sylius_taxation:
-  rate:
-    zone:
-      not_blank: Zadajte zónu zdaňovania.

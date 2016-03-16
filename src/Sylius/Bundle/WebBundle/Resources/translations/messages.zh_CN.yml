@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  emails:
-    order_confirmation:
-      subject: 谢谢您的订单 ！
   account:
     address:
       action:
@@ -22,16 +19,16 @@ sylius:
       list: 您的所有地址
       update: 编辑我的地址
     home:
-      outline: 在您的个人空间查看、 跟踪和管理您的所有数据的所有功能。
+      email: 电子邮件
       since: 您是客户自从
       welcome: 欢迎来到您的共享空间
     order:
       created_at: 放置在
       details: 您的订单的详细信息
       download_invoice: 下载发票
-      empty: 你尚未下任何订单。
       invoice: 发票
       list: 您的所有订单
+      number: 数量
       placed_at: '放置在 %at%'
       shipment:
         pending: 等待中
@@ -42,6 +39,9 @@ sylius:
       tracking_number: 追踪号码
     title: 我的账户
   add_to_cart: 放进购物车
+  association_type:
+    name: 名称
+    create: 创建
   address:
     city: 城市
     company: 公司
@@ -56,6 +56,11 @@ sylius:
     info: 信息
     success: 成功
     warning: 警示
+  archetype:
+    name: 名称
+    options: 选项
+    parent: 上一级
+    updated_at: 最后一次更新
   backend:
     alert:
       info: 信息
@@ -75,14 +80,12 @@ sylius:
       orders_this_month: 订单总数
       registrations_this_month: 注册总数
       sales_this_month: 销售额
-  backend_welcome: '您好 <b>%name%</b>！'
   block:
-    index_header: 块
-    no_results: 没有可以显示的板块
     imagine:
       id: Id
       title: 标题
       updated_at: 最后一次更新
+    index_header: 块
     simple:
       body: 正文
       id: Id
@@ -103,6 +106,8 @@ sylius:
     block:
       index: 块
     build: 开发
+    channel:
+      index: 频道
     configuration: 设置
     content: 内容
     country:
@@ -134,7 +139,11 @@ sylius:
       index: 促销活动
     promotion_coupon:
       index: 优惠券
+    role:
+      index: 角色
     sales: 销售额
+    section:
+      customer: 客户
     shipment:
       index: 发货
     shipping_category:
@@ -149,8 +158,6 @@ sylius:
     taxonomy:
       index: 分类
     update: 编辑
-    role:
-      index: 角色
     zone:
       index: 区域
   browse_products: 浏览产品
@@ -168,6 +175,16 @@ sylius:
       unit_price: 价格
     summary_header: 购物车总结
     total_items: '%count%项目'
+  channel:
+    code: 代码
+    created_at: 创建于
+    currency_default: 默认货币：
+    enabled: 已启用
+    id: ID
+    index_header: 频道
+    name: 名称
+    update: 编辑
+    updated_at: 最后一次更新
   checkout:
     addressing:
       header: 送货地址详情
@@ -214,55 +231,60 @@ sylius:
       new_customer: 新客户
       register: 注册
     shipping:
-      error: 非常抱歉，我们还不能为您选择的国家提供产品配送服务
       header: 发货方式
   confirmation:
-    message: 你想要删除此项目吗？
     title: 确认
+  contact_request:
+    email: 电子邮件
+    firstName: 名字
+    id: ID
+    lastName: 姓氏
+    message: 消息
+    topic: 主题
+    updated_at: 最后一次更新
+  contact_topic:
+    id: ID
+    title: 标题
+    updated_at: 最后一次更新
   country:
     add_province: 添加省
     create: 创建国家
     create_header: 新建国家
+    enabled: 已启用
     id: ID
     index_header: 国家
-    iso_name: ISO名称
     manage: 管理国家
     name: 名称
-    no_results: 没有配置国家
     show_header: 国家详细信息
     update_header: 编辑国家信息
-    enabled: 已启用
-  email:
-    code: 代码
-    enabled: 已启用
-    updated_at: 最后一次更新
   create: 创建
   created_at: 创建于
+  currency:
+    code: 代码
+    enabled: 已启用
+    id: ID
+    name: 名称
+    updated_at: 最后一次更新
+  customer:
+    billing_address: 账单地址
+    email: 电子邮件
+    first_name: 名字
+    groups: 团体
+    id: ID
+    last_name: 姓氏
+    shipping_address: 送货地址
+    phone_number: 电话
   delete: 删除
   deleted: 已删除
   edit: 编辑
-  permission:
+  email:
     code: 代码
-    id: ID
-    description: 描述
-    updated_at: 最后一次更新
-  role:
-    code: 代码
-    id: ID
-    name: 名称
-    description: 描述
-    index_header: 角色
-    updated_at: 最后一次更新
-  currency:
-    code: 代码
-    id: ID
-    name: 名称
     enabled: 已启用
     updated_at: 最后一次更新
   filter: 筛选器
   form:
     cart:
-      coupon: 如果您有促进的优惠券，请在这里输入
+      coupon: 优惠券
     choose_file: 选择文件
     frontend:
       password:
@@ -291,7 +313,6 @@ sylius:
     id: ID
     index_header: 团体
     name: 名称
-    no_results: 没有可以显示的组。
     roles: 角色
     update_header: 编辑组
   hide_deleted: 隐藏已删除
@@ -307,17 +328,16 @@ sylius:
     created_at: 创建
     inventory_state: 库存状态
     name: 名称
-    no_results: 没有库存单位来显示。
     shipping_state: 发货状态
     sku: SKU
     updated_at: 最后一次更新
   locale:
-    id: ID
-    name: 名称
     code: 代码
     create: 创建区域设置
     create_header: 添加新的语言环境
     enabled: 已启用
+    id: ID
+    name: 名称
     update_header: 编辑区域设置
     updated_at: 最后一次更新
   login: 登录
@@ -332,18 +352,22 @@ sylius:
     parent: 上一级
     title: 标题
   meta:
-    frontend_description: Sylius 是基于Symfony2(PHP)框架的现代电子商务解决方案。
-    frontend_keywords: sylius、 电子商务、 symfony2、 商店、 购物车、 网上商店
     frontend_title: Sylius，基于Symfony2的现代电子商务解决方案
+  metadata:
+    id: ID
+    content: 内容
   na: N/A
   newest: 最新产品
   "no": false
-  product_option:
-    manage: 管理选项
-    name: 名称
-    updated_at: 最后一次更新
   order:
+    adjustments:
+      description: 描述
     billing_address: 账单地址
+    comment:
+      author: 作者
+      created_at: 创建于
+    currency: 货币：
+    customer: 客户
     id: ID
     index_header: 当前订单
     items_total: 总计项目
@@ -352,6 +376,7 @@ sylius:
     no_taxes: 无税
     number: 数量
     payment_state: 付款状态
+    promotion_coupons: 优惠券
     promotion_total: 促进总计
     shipment_states:
       pending: 等待中
@@ -359,41 +384,16 @@ sylius:
     shipping_address: 送货地址
     shipping_charges: 运费
     shipping_total: 运费共计
+    state:
+      checkout: 结账
     tax_total: 税费总计
     taxes: 税
     total: 共计
-    currency: 货币：
-    promotion_coupons: 优惠券
-    adjustments:
-      description: 描述
-    comment:
-      author: 作者
-      created_at: 创建于
-  route:
-    id: ID
-    name: 名称
-    title: 标题
-  redirect_route:
+  review:
     id: ID
     title: 标题
-  shipment:
+    author: 作者
     created_at: 创建于
-    id: ID
-    index_header: 发货
-    inventory_state: 库存状态
-    name: 名称
-    sku: SKU
-    tracking_code: 快递单号
-    update: 编辑
-    updated_at: 最后一次更新
-  channel:
-    created_at: 创建于
-    code: 代码
-    enabled: 已启用
-    id: ID
-    name: 名称
-    update: 编辑
-    updated_at: 最后一次更新
   order_item:
     quantity: 数量
     sellable: 产品
@@ -422,10 +422,19 @@ sylius:
       void: 作废
     updated_at: 最后一次更新
   payment_method:
+    gateway: 网关
     id: ID
     index_header: 付款方法
     name: 名称
     updated_at: 最后一次更新
+  permission:
+    code: 代码
+    description: 描述
+    id: ID
+    updated_at: 最后一次更新
+  pricing:
+    volume_based:
+      price: 价格
   product:
     available_on: 可用
     available_on_demand: 可按用户要求
@@ -440,6 +449,7 @@ sylius:
     stock: 当前货架
     tabs:
       categorization: 分类
+      channels: 频道
       images: 图像
       options: 选项
       product: 产品
@@ -448,6 +458,20 @@ sylius:
     variant_selection_method: 变量选择方法
     volume_based:
       price: 价格
+  product_attribute:
+    code: 代码
+    name: 名称
+    updated_at: 最后一次更新
+  product_association:
+    code: 代码
+    create_header: 新产品
+    name: 名称
+    updated_at: 最后一次更新
+  product_option:
+    manage: 管理选项
+    name: 名称
+    presentation: 演示
+    updated_at: 最后一次更新
   promotion:
     created_at: 创建于
     description: 描述
@@ -457,17 +481,26 @@ sylius:
   promotion_coupon:
     code: 代码
     index_header: 优惠券
-  product_attribute:
-    name: 名称
-    updated_at: 最后一次更新
-  archetype:
-    name: 名称
-    updated_at: 最后一次更新
+  redirect_route:
+    id: ID
+    title: 标题
   report:
-    name: 名称
     code: 代码
     description: 描述
+    id: Id
     manage: 管理
+    name: 名称
+  role:
+    code: 代码
+    description: 描述
+    id: ID
+    index_header: 角色
+    name: 名称
+    updated_at: 最后一次更新
+  route:
+    id: ID
+    name: 名称
+    title: 标题
   search: 搜索
   security:
     login:
@@ -475,6 +508,16 @@ sylius:
   settings:
     general_header: 常规设置
     taxation_header: 税收的设置
+  shipment:
+    created_at: 创建于
+    id: ID
+    index_header: 发货
+    inventory_state: 库存状态
+    name: 名称
+    sku: SKU
+    tracking_code: 快递单号
+    update: 编辑
+    updated_at: 最后一次更新
   shipping_address: 送货地址
   shipping_category:
     id: ID
@@ -482,6 +525,7 @@ sylius:
     name: 名称
     updated_at: 最后一次更新
   shipping_method:
+    enabled: 已启用
     id: ID
     index_header: 发货方式
     name: 名称
@@ -497,7 +541,6 @@ sylius:
     name: 名称
     updated_at: 最后一次更新
   tax_rate:
-    included_in_price: 包含在价格中？
     index_header: 税率
     name: 名称
     updated_at: 最后一次更新
@@ -507,29 +550,26 @@ sylius:
   taxonomy:
     name: 名称
   total_quantity: 总计数量
-  unknown: 未知
-  customer:
-    billing_address: 账单地址
+  ui:
+    change_password: 更改您的密码
+    code: 代码
     email: 电子邮件
-    first_name: 名字
-    id: ID
-    last_name: 姓氏
-    shipping_address: 送货地址
-    groups: 团体
+    login: 登录
+    logout: 注销
+    register: 注册
+    name: 名称
+    id: Id
+  unknown: 未知
   user:
-    create: 创建用户
     create_header: 新用户
-    enabled: 已确认?
     general_info: '"%username%"的资料'
     id: ID
-    last_login: 最后登录时间
     impersonate: 作为此用户登录
-    manage: 管理用户
-    no_results: 没有可以显示的用户。
+    last_login: 最后登录时间
     recent_header: 最近用户
-    registration_date: 注册日期：
     register:
       button: 注册
+    registration_date: 注册日期：
     username: 用户名
   variant:
     available_on_demand: 可按用户要求
@@ -546,21 +586,9 @@ sylius:
     index_header: 区域
     manage: 管理区域
     name: 名称
+    scope: 范围
     show_header: 区域详细信息
     type: 类型
     update_header: 编辑区
-    scope: 范围
   zone_member:
     members: 会员
-  contact_topic:
-    id: ID
-    title: 标题
-    updated_at: 最后一次更新
-  contact_request:
-    id: ID
-    firstName: 名字
-    lastName: 姓氏
-    email: 电子邮件
-    message: 消息
-    topic: 主题
-    updated_at: 最后一次更新

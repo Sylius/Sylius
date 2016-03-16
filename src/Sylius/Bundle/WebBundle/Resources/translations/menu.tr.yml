@@ -5,16 +5,27 @@ sylius:
   backend:
     menu:
       main:
+        api_clients: API İstemcileri
+        archetypes: Ürün arketipler
         assortment: Çeşitlilik
+        attributes: özellikleri yapılandırma
         blocks: Bloklar
+        channels: Kanallar
         configuration: Ayarlar
-        countries: Ülkeler
+        contact_topics: Konuları yapılandırma
         content: İçerik
+        countries: Ülkeler
+        currencies: Para birimi
+        customer: Müşteri
+        customers: müşteriler
         dashboard: Kontrol Paneli
+        emails: E-posta
         general_settings: Genel ayarlar
         groups: Gruplar
         homepage: Mağazanız
         locales: Diller
+        marketing: Pazarlama
+        menus: Menü
         new_order: Sipariş ekle
         new_promotion: Yeni promosyon ekle
         options: Ürün seçeneklerini yönet
@@ -22,52 +33,75 @@ sylius:
         pages: Sayfalar
         payment_methods: Ödeme tipleri
         payments: Ödemeler
+        permissions: İzinler
         products: Ürünler
         promotions: Promosyonlar
-        sales: Siparişler
-        shipments: Kargo İşlemleri
-        shipping_categories: Kargo kategorileri
-        shipping_methods: Gönderim metodları
-        stockables: Stok düzeyleri
-        tax_categories: Vergi kategorileri
-        tax_rates: Vergi oranları
-        taxation_settings: Vergilendirme ayarları
-        taxonomies: Sınıflandırma
-        zones: Bölgeler
+        report: Raporlar
         roles: Roller
-      sidebar:
-        assortment: Çeşitlilik
-        blocks: Bloklar
-        configuration: Ayarlar
-        content: İçerik
-        countries: Ülkeler
-        dashboard: Kontrol Paneli
-        general_settings: Genel ayarlar
-        groups: Gruplar
-        homepage: Siteye dön
-        locales: Diller
-        new_order: Sipariş ekle
-        new_promotion: Yeni promosyon ekle
-        options: Seçeneklerini yönet
-        orders: Şuanki siparişler
-        pages: Sayfalar
         routes: Rotalar
-        payment_methods: Ödeme tipleri
-        payments: Ödemeler
-        products: Ürünler
-        promotions: Promosyonlar
         sales: Siparişler
+        security_settings: Güvenlik ayarları
         shipments: Kargo İşlemleri
         shipping_categories: Kargo kategorileri
         shipping_methods: Gönderim metodları
         slideshow: Slayt gösterisi
         stockables: Stok düzeyleri
+        support: DESTEK
+        tax_categories: Kdv kategorileri
+        tax_rates: Kdv oranları
+        taxation_settings: 'Kdv  ayarları'
+        taxonomies: Sınıflandırma
+        zones: Bölgeler
+      sidebar:
+        api_clients: API İstemcileri
+        archetypes: Ürün arketipler
+        assortment: Çeşitlilik
+        attributes: özellikleri yapılandırma
+        blocks: Bloklar
+        channels: Kanallar
+        configuration: Ayarlar
+        contact_requests: İstekler
+        contact_topics: Konuları yapılandırma
+        content: İçerik
+        countries: Ülkeler
+        currencies: Para birimi
+        customer: Müşteri
+        customers: müşteriler
+        dashboard: Kontrol Paneli
+        emails: E-posta
+        general_settings: Genel ayarlar
+        groups: Gruplar
+        homepage: Siteye dön
+        locales: Diller
+        marketing: Pazarlama
+        menus: Menü
+        new_order: Sipariş ekle
+        new_promotion: Yeni promosyon ekle
+        options: Seçeneklerini yönet
+        orders: Şuanki siparişler
+        pages: Sayfalar
+        payment_methods: Ödeme tipleri
+        payments: Ödemeler
+        permissions: İzinler
+        products: Ürünler
+        promotions: Promosyonlar
+        redirects: ' yönlendirmeler'
+        report: Raporlar
+        roles: Roller
+        routes: Rotalar
+        sales: Siparişler
+        security_settings: Güvenlik ayarları
+        shipments: Kargo İşlemleri
+        shipping_categories: Kargo kategorileri
+        shipping_methods: Gönderim metodları
+        slideshow: Slayt gösterisi
+        stockables: Stok düzeyleri
+        support: DESTEK
         tax_categories: Vergi kategorileri
         tax_rates: Vergi oranları
         taxation_settings: Vergilendirme ayarları
         taxonomies: Sınıflandırma
         zones: Bölgeler
-        roles: Roller
   frontend:
     menu:
       account:
@@ -85,6 +119,8 @@ sylius:
         login: Giriş
         logout: Çıkış yap
         register: Üye ol
+      sidebar:
+        links: Linkler
       social:
         facebook: Facebook
         github: GitHub

@@ -53,13 +53,13 @@ class PercentageDiscountActionSpec extends ObjectBehavior
 
         $adjustment->setAmount(-2500)->shouldBeCalled();
         $adjustment->setType(AdjustmentInterface::PROMOTION_ADJUSTMENT)->shouldBeCalled();
-        $adjustment->setDescription('promotion description')->shouldBeCalled();
+        $adjustment->setLabel('promotion description')->shouldBeCalled();
 
         $originator->setOrigin($adjustment, $promotion)->shouldBeCalled();
 
         $order->addAdjustment($adjustment)->shouldBeCalled();
 
-        $configuration = array('percentage' => 0.25);
+        $configuration = ['percentage' => 0.25];
 
         $this->execute($order, $configuration, $promotion);
     }

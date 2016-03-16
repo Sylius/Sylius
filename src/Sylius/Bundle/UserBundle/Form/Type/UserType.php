@@ -27,12 +27,12 @@ class UserType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('plainPassword', 'password', array(
+            ->add('plainPassword', 'password', [
                 'label' => 'sylius.form.user.password.label',
-            ))
-            ->add('enabled', 'checkbox', array(
+            ])
+            ->add('enabled', 'checkbox', [
                 'label' => 'sylius.form.user.enabled',
-            ))
+            ])
         ;
     }
 
@@ -42,7 +42,7 @@ class UserType extends AbstractResourceType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'data_class' => $this->dataClass,
                 'validation_groups' => function (FormInterface $form) {
                     $data = $form->getData();
@@ -52,7 +52,7 @@ class UserType extends AbstractResourceType
 
                     return $this->validationGroups;
                 },
-            ))
+            ])
         ;
     }
 

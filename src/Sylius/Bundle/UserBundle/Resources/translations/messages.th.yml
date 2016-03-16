@@ -2,19 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    email: Email
-    register: ลงทะเบียน
-    login: เข้าสู่ระบบ
-    logout: ออกจากระบบ
-    change_password: เปลี่ยนรหัสผ่านของคุณ
-    account_panel_outline: ยินดีด้วย คุณสามารถใช้งานคุณสมบัติของระบบได้ทั้งหมด
   form:
     group:
       name: ชื่อ
       roles: Roles
     user:
-      email: Email
+      email: อีเมล
       enabled: เปิดใช้งานแล้ว
       password:
         label: รหัสผ่าน
@@ -23,7 +16,8 @@ sylius:
       first_name: ชื่อ
       groups: กลุ่ม
       last_name: นามสกุล
-      email: Email
+      email: อีเมล
+      phone_number: หมายเลขโทรศัพท์
       billing_address: ที่อยู่สำหรับออกใบเสร็จ
       different_billing_address: ใช้ที่อยู่อื่นสำหรับเรียกเก็บเงินหรือไม่
     user_filter:

@@ -14,7 +14,7 @@ sylius:
       street: Вуліца
       province: Вобласць
     country:
-      iso_name: ISO код
+      add_province: Дадаць вобласць
       name: Назва
       provinces: Вобласці
       select: Выбярыце
@@ -22,6 +22,7 @@ sylius:
       name: Імя
       select: Абраць
     zone:
+      add_member: Дадаць удзельніка
       members: Удзельнікі
       name: Імя
       type: Тып
@@ -30,9 +31,6 @@ sylius:
         province: Вобласць
         zone: Зона
       scope: Абсяг
-    zone_member_country:
-      country: Краіна
-    zone_member_province:
-      province: Вобласць
-    zone_member_zone:
-      zone: Зона
+      select: Выбярыце
+    zone_member:
+      select: Выбярыце

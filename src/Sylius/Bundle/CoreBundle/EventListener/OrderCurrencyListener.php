@@ -23,8 +23,14 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class OrderCurrencyListener
 {
+    /**
+     * @var CurrencyContextInterface
+     */
     protected $currencyContext;
 
+    /**
+     * @param CurrencyContextInterface $currencyContext
+     */
     public function __construct(CurrencyContextInterface $currencyContext)
     {
         $this->currencyContext = $currencyContext;

@@ -21,10 +21,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class RuleChoiceTypeSpec extends ObjectBehavior
 {
-    private $choices = array(
-        RuleInterface::TYPE_ITEM_TOTAL => 'Order total',
-        RuleInterface::TYPE_ITEM_COUNT  => 'Order items count'
-    );
+    private $choices = [
+        RuleInterface::TYPE_UNIT_TOTAL => 'Order total',
+        RuleInterface::TYPE_UNIT_COUNT => 'Order units count',
+    ];
 
     function let()
     {
@@ -43,7 +43,7 @@ class RuleChoiceTypeSpec extends ObjectBehavior
 
     function it_should_set_rule_types_to_choose_from(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array('choices' => $this->choices))->shouldBeCalled();
+        $resolver->setDefaults(['choices' => $this->choices])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

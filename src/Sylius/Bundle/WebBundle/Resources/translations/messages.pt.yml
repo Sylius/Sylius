@@ -22,6 +22,8 @@ sylius:
       tracking_number: Número de Tracking
     title: A Minha Conta
   add_to_cart: Adicionar ao carrinho
+  association_type:
+    create: Criar
   address:
     city: Cidade
     company: Empresa
@@ -36,6 +38,8 @@ sylius:
     info: Info
     success: Sucesso
     warning: Aviso
+  archetype:
+    updated_at: Data de modificação
   backend:
     alert:
       info: Info
@@ -51,7 +55,6 @@ sylius:
       orders_this_month: Total de encomendas
       registrations_this_month: Total de registos
       sales_this_month: Vendas
-  backend_welcome: 'Olá <b>%name%</b>!'
   block:
     imagine:
       updated_at: Data de modificação
@@ -99,6 +102,9 @@ sylius:
       unit_price: Preço
     summary_header: Resumo do carrinho
     total_items: '1 item|%count% itens'
+  channel:
+    update: Editar
+    updated_at: Data de modificação
   checkout:
     addressing:
       header: Endereço
@@ -146,30 +152,29 @@ sylius:
       register: Cadastro
     shipping:
       header: Método de envio
+  contact_request:
+    message: Mensagem
+    topic: Assunto
+    updated_at: Data de modificação
+  contact_topic:
+    updated_at: Data de modificação
   country:
     add_province: Adicionar estado
     create: Criar país
     create_header: Novo país
     index_header: Países
-    iso_name: ISO
     manage: Gerenciar países
     name: Nome
-    no_results: Não há países cadastrados
     show_header: Detalhes do país
     update_header: Editando país
-  email:
-    enabled: Activo?
-    updated_at: Data de modificação
   create: Criar
-  delete: deletar
-  edit: editar
-  permission:
-    description: Descrição
-    updated_at: Data de modificação
-  role:
-    description: Descrição
-    updated_at: Data de modificação
   currency:
+    updated_at: Data de modificação
+  customer:
+    phone_number: Número de Telefone
+  delete: Apagar
+  edit: Editar
+  email:
     updated_at: Data de modificação
   filter: Filtrar
   form:
@@ -185,7 +190,6 @@ sylius:
     created_at: Data de criação
     inventory_state: Estado do inventário
     name: Nome
-    no_results: Não há itens no inventário
     shipping_state: Situação do envio
     updated_at: Data de modificação
   locale:
@@ -194,14 +198,14 @@ sylius:
   login_header: Administração
   manage: Gerenciar
   meta:
-    frontend_description: Sylius é uma solução moderna para e-commerce para PHP, baseado no framework Symfony2
-    frontend_keywords: sylius, e-commerce, symfony2, compras, carrinho, webshop
     frontend_title: Sylius, e-commerce moderno para Symfony2
+  metadata:
+    content: Conteúdo
   newest: Novos produtos
   "no": false
-  product_option:
-    manage: Gerir opções
   order:
+    adjustments:
+      description: Descrição
     billing_address: Endereço de faturamento
     create: Criar pedido
     create_header: Novo pedido
@@ -228,30 +232,14 @@ sylius:
     shipping_address: Endereço de entrega
     shipping_charges: Taxas de envio
     shipping_total: Valor do envio
+    show_header: Pedido
+    state:
+      cancelled: Cancelado
+      checkout: Finalizar compra
     tax_total: Totais de taxas
     taxes: Taxas
     total: Total
     update_header: Editar pedido
-    adjustments:
-      description: Descrição
-  shipment:
-    created_at: Data de criação
-    index_header: Envios
-    inventory_state: Situação do estoque
-    manage: Gerenciar envios
-    method: meio
-    modified: Data de modificação
-    name: Nome
-    no_items: Não há itens
-    no_results: Não há envios
-    order: Pedido
-    show_header: Detalhes do envio
-    state: situação
-    update: Editar
-    updated_at: Data de atualização
-  channel:
-    update: Editar
-    updated_at: Data de modificação
   order_item:
     quantity: Quantidade
     sellable: Produto
@@ -262,14 +250,13 @@ sylius:
     index_header: Páginas
   password: Senha
   payment:
-    order: Pedido
     amount: Quantidade
     create: Criar pagamento
     create_header: Novo pagamento
     created_at: Data de criação
     index_header: Pagamentos
     method: Método
-    no_results: Não há pagamentos configurados
+    order: Pedido
     state:
       cancelled: Cancelado
       checkout: Finalizar compra
@@ -286,13 +273,17 @@ sylius:
   payment_method:
     create: Criar meio de pagamento
     create_header: Novo meio de pagamento
-    enabled: Habilitado?
-    gateway: Gateway
     index_header: Meios de pagamentos
     name: Nome
-    no_results: Não há meios de pagamentos configurados
     update_header: Editando meio de pagamento
     updated_at: Ultima atualização
+  permission:
+    description: Descrição
+    updated_at: Data de modificação
+  pricing:
+    volume_based:
+      button:
+        add: Adicionar
   product:
     available_on: Disponível em
     available_on_demand: Disponível por demanda
@@ -308,7 +299,6 @@ sylius:
     no_description: '<i>Sem descrição...</i>'
     no_images: Não há imagens para este produto
     no_options: Não há opções para este produto
-    no_results: Não há produtos cadastrados
     no_short_description: '<i>Sem resumo</i>'
     no_sku: '<i>Sem SKU</i>'
     no_tax_category: Nenhuma categoria de imposto
@@ -325,6 +315,15 @@ sylius:
     update_header: Editando produto
     updated_at: Data de modificação
     variant_selection_method: Meio de seleção de variação
+  product_attribute:
+    updated_at: Data de modificação
+  product_association:
+    create_header: Novo produto
+    updated_at: Data de modificação
+  product_option:
+    manage: Gerir opções
+    presentation: Apresentação
+    updated_at: Data de modificação
   promotion:
     actions: Ações
     add_action: Adicionar ação
@@ -337,7 +336,6 @@ sylius:
     index_header: Promoções existentes
     manage: Gerenciar promoções
     name: Nome
-    no_results: Não há promoções cadastradas
     rules: Regras
     show_header: Detalhes da promoção
     starts_at: Começa em
@@ -354,18 +352,18 @@ sylius:
     generate: Gerar cupons
     generate_header: Gerando cupons
     index: Cupons
-    no_results: Não há cupons cadastrados
     update_header: Editando cupom
   promotion_rule:
     configuration: Configuração
     type: Tipo
   province:
     provinces: Estados
-  remember_me: Lembrar-me?
   report:
-    details: Detalhes
     description: Descrição
     manage: Gerenciar
+  role:
+    description: Descrição
+    updated_at: Data de modificação
   save_changes: Salvar modificações
   security:
     login:
@@ -373,6 +371,19 @@ sylius:
   settings:
     general_header: Configurações gerais
     taxation_header: Configurações de taxas
+  shipment:
+    created_at: Data de criação
+    index_header: Envios
+    inventory_state: Situação do estoque
+    manage: Gerenciar envios
+    method: meio
+    modified: Data de modificação
+    name: Nome
+    order: Pedido
+    show_header: Detalhes do envio
+    state: situação
+    update: Editar
+    updated_at: Data de atualização
   shipment_category:
     manage: Gerenciar categorias de envio
   shipping_category:
@@ -381,7 +392,6 @@ sylius:
     index_header: Categorias de envio
     manage: Gerenciar categorias de envio
     name: Nome
-    no_results: Não há categorias de envio cadastradas
     update_header: Editando categoria de envio
     updated_at: Data de atualização
   shipping_method:
@@ -389,20 +399,17 @@ sylius:
     category: Categoria
     create: Criar método de envio
     create_header: Novo método de envio
-    enabled: Habilitado?
     index_header: Métodos de envio
     manage: Gerenciar métodos de envio
     name: Nome
-    no_results: Não há métodos de envio cadastrados
     show_header: Detalhes de métodos de envio
     update_header: Editando método de envio
     updated_at: Data de atualização
     zone: Zona
   shop_by: Comprar por
-  show: Detalhes
   stockable:
     index_header: 'Estoque <small>Aqui você pode ver os nível do estoque atual</small>'
-    no_results: Não há itens no estoque
+    updated_at: Data de modificação
   tax_category:
     create: Criar categoria de imposto
     create_header: Nova categoria de imposto
@@ -411,7 +418,6 @@ sylius:
     manage: Gerenciar categorias de impostos
     name: Nome
     no_description: Sem descrição
-    no_results: Não há categorias de impostos cadastradas
     update_header: Editando categoria de imposto
     updated_at: Data de atualização
   tax_rate:
@@ -422,7 +428,6 @@ sylius:
     index_header: Impostos
     manage: Gerenciar impostos
     name: Nome
-    no_results: Não há impostos configurados
     show_header: Detalhes de imposto
     update_header: Atualizar imposto
     updated_at: Data de modificação
@@ -431,23 +436,22 @@ sylius:
     create: Criar táxon
     create_header: Novo táxon
     name: Nome
-    no_results: Não há táxons cadastrados
     update_header: Editando táxon
   taxonomy:
     create: Criar taxonomia
     create_header: Nova taxonomia
     index_header: 'Categorização <small>Aqui você vê as taxonomias definidas</small>'
     name: Nome
-    no_results: Não há taxonomias cadastradas
     show_header: 'Taxonomia <small><strong>%name%</strong></small>'
     update_header: Editando taxonomia
+  ui:
+    login: Login
+    logout: Sair
   unknown: Desconhecido
   user:
-    enabled: Habilitado?
     general_info: 'Informações gerais de "%username%"'
     index_header: 'Usuários <small>Lista de todos os usuários cadastros na loja</small>'
     last_login: Último login
-    no_results: Não há usuários cadastrados
     show_header: Detalhes do usuários
     username: Login
   variant:
@@ -458,7 +462,6 @@ sylius:
     create_header: Nova variação de produto
     delete_image: Deletar imagem
     last_update: Data de atualização
-    no_results: Não há variações cadastradas
     options: Opções
     price: Preço
     stock: Estoque atual
@@ -471,15 +474,8 @@ sylius:
     index_header: Zonas
     manage: Gerenciar zonas
     name: Nome
-    no_results: Não há zonas configuradas
     show_header: Detalhes de zona
     type: Tipo
     update_header: Editando zona
   zone_member:
     members: Membros
-  contact_topic:
-    updated_at: Data de modificação
-  contact_request:
-    message: Mensagem
-    topic: Assunto
-    updated_at: Data de modificação

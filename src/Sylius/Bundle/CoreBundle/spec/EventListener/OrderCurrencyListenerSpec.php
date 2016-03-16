@@ -31,8 +31,7 @@ class OrderCurrencyListenerSpec extends ObjectBehavior
     function it_throws_exception_if_event_has_non_order_subject(
         GenericEvent $event,
         \stdClass $invalidSubject
-    )
-    {
+    ) {
         $event->getSubject()->willReturn($invalidSubject);
 
         $this
@@ -45,8 +44,7 @@ class OrderCurrencyListenerSpec extends ObjectBehavior
         $currencyContext,
         GenericEvent $event,
         OrderInterface $order
-    )
-    {
+    ) {
         $event->getSubject()->willReturn($order);
         $currencyContext->getCurrency()->shouldBeCalled()->willReturn('PLN');
 

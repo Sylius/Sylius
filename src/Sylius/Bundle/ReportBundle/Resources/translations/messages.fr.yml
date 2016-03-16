@@ -6,6 +6,14 @@ sylius:
     report:
       name: Nom
       description: Description
-      code: Code
+      data_fetcher: Outil de récupération de données
+      renderer:
+        label: Moteur de rendu
+        template: Gabarit
       chart:
         type: Type
+      user_registration:
+        start: Date de début 
+        end: Date de fin
+        period: Période de temps
+        empty_records: Afficher les enregistrements vides ?

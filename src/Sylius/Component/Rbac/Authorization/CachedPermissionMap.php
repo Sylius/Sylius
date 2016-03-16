@@ -60,7 +60,7 @@ class CachedPermissionMap implements PermissionMapInterface
         }
 
         $permissions = $this->map->getPermissions($role);
-        $permissionsCache = array();
+        $permissionsCache = [];
 
         foreach ($permissions as $permission) {
             $permissionsCache[] = $permission->getCode();

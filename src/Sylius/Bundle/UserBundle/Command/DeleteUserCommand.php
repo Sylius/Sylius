@@ -32,9 +32,9 @@ class DeleteUserCommand extends ContainerAwareCommand
         $this
             ->setName('sylius:user:delete')
             ->setDescription('Deletes a user/customer account.')
-            ->setDefinition(array(
+            ->setDefinition([
                 new InputArgument('email', InputArgument::REQUIRED, 'Email'),
-            ))
+            ])
             ->setHelp(<<<EOT
 The <info>%command.name%</info> command deletes a user account and it's customer information.
 EOT
@@ -54,7 +54,7 @@ EOT
         $user = $this->getUserRepository()->findOneByEmail($email);
 
         if (null === $user) {
-            throw new \InvalidArgumentException(sprintf('Could not find user by email "%s"', $email));
+            throw new \InvalidArgumentException(sprintf('Could not find user identified by email "%s"', $email));
         }
 
         $manager->remove($user);

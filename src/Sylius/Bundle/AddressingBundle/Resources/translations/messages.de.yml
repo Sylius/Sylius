@@ -14,14 +14,16 @@ sylius:
       street: Straße
       province: Bundesland
     country:
-      iso_name: ISO-Name
+      add_province: Bundesland hinzufügen
       name: Name
       provinces: Bundesländer
       select: Bundesland auswählen
     province:
       name: Name
+      abbreviation: Abkürzung
       select: Bundesland auswählen
     zone:
+      add_member: Mitglied hinzufügen
       members: Mitglieder
       name: Name
       type: Typ
@@ -30,10 +32,7 @@ sylius:
         province: Region
         zone: Versandgebiet
       scope: Umfang
+      select: Bundesland auswählen
       select_scope: Bereich wählen
-    zone_member_country:
-      country: Land
-    zone_member_province:
-      province: Bundesland
-    zone_member_zone:
-      zone: Zone
+    zone_member:
+      select: Bundesland auswählen

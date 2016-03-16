@@ -13,24 +13,15 @@ namespace Sylius\Component\Payment\Model;
 
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\ToggleableInterface;
 
 /**
  * Payment method interface.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface PaymentMethodInterface extends CodeAwareInterface, TimestampableInterface, PaymentMethodTranslationInterface
+interface PaymentMethodInterface extends CodeAwareInterface, PaymentMethodTranslationInterface, TimestampableInterface, ToggleableInterface
 {
-    /**
-     * @return Boolean
-     */
-    public function isEnabled();
-
-    /**
-     * @param Boolean $enabled
-     */
-    public function setEnabled($enabled);
-
     /**
      * @return string
      */
@@ -52,8 +43,6 @@ interface PaymentMethodInterface extends CodeAwareInterface, TimestampableInterf
     public function setDescription($description);
 
     /**
-     * Set the payment gateway to use.
-     *
      * @return string
      */
     public function getGateway();
@@ -72,24 +61,4 @@ interface PaymentMethodInterface extends CodeAwareInterface, TimestampableInterf
      * @param string $environment
      */
     public function setEnvironment($environment);
-
-    /**
-     * @return string
-     */
-    public function getFeeCalculator();
-
-    /**
-     * @param string $feeCalculator
-     */
-    public function setFeeCalculator($feeCalculator);
-
-    /**
-     * @return array
-     */
-    public function getFeeCalculatorConfiguration();
-
-    /**
-     * @param array $feeCalculatorConfiguration
-     */
-    public function setFeeCalculatorConfiguration(array $feeCalculatorConfiguration);
 }

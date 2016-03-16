@@ -22,10 +22,10 @@ class CalculatorChoiceTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $choices = array(
-            'flat_rate'     => 'Flat rate per shipment',
-            'per_item_rate' => 'Per item rate'
-        );
+        $choices = [
+            'flat_rate' => 'Flat rate per shipment',
+            'per_unit_rate' => 'Per unit rate',
+        ];
 
         $this->beConstructedWith($choices);
     }
@@ -42,12 +42,12 @@ class CalculatorChoiceTypeSpec extends ObjectBehavior
 
     function it_defines_calculator_choices(OptionsResolver $resolver)
     {
-        $choices = array(
-            'flat_rate'     => 'Flat rate per shipment',
-            'per_item_rate' => 'Per item rate'
-        );
+        $choices = [
+            'flat_rate' => 'Flat rate per shipment',
+            'per_unit_rate' => 'Per unit rate',
+        ];
 
-        $resolver->setDefaults(array('choices' => $choices))->shouldBeCalled();
+        $resolver->setDefaults(['choices' => $choices])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

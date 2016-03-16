@@ -18,6 +18,7 @@ use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
  * ReportContext for ReportBundle scenarios.
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Fernando Caraballo Ortiz <caraballo.ortiz@gmail.com>
  */
 class ReportContext extends DefaultContext
 {
@@ -33,11 +34,11 @@ class ReportContext extends DefaultContext
             $this->thereIsReport(
                 $data['name'],
                 $data['description'],
-                $data["code"],
+                $data['code'],
                 $data['renderer'],
-                $data["renderer_configuration"],
-                $data["data_fetcher"],
-                $data["data_fetcher_configuration"],
+                $data['renderer_configuration'],
+                $data['data_fetcher'],
+                $data['data_fetcher_configuration'],
                 false
             );
         }
@@ -80,9 +81,9 @@ class ReportContext extends DefaultContext
         $report->setRendererConfiguration($this->getConfiguration($rendererConfiguration));
 
         $dataFetcherConfiguration = $this->getConfiguration($dataFetcherConfiguration);
-        $dataFetcherConfiguration["start"] = new \DateTime($dataFetcherConfiguration["start"]);
-        $dataFetcherConfiguration["end"] = new \DateTime($dataFetcherConfiguration["end"]);
-        $dataFetcherConfiguration["empty_records"] = isset($dataFetcherConfiguration["empty_records"]) ? false : true;
+        $dataFetcherConfiguration['start'] = new \DateTime($dataFetcherConfiguration['start']);
+        $dataFetcherConfiguration['end'] = new \DateTime($dataFetcherConfiguration['end']);
+        $dataFetcherConfiguration['empty_records'] = isset($dataFetcherConfiguration['empty_records']) ? false : true;
 
         $report->setDataFetcher($dataFetcherType);
         $report->setDataFetcherConfiguration($dataFetcherConfiguration);
@@ -95,5 +96,34 @@ class ReportContext extends DefaultContext
         }
 
         return $report;
+    }
+
+    /**
+     * @Then the report row for date :date will have a total amount of :total
+     */
+    public function theReportRowForDateWillHaveATotalAmountOf($date, $total)
+    {
+        $page = $this->getSession()->getPage();
+        $rows = $page->findAll('css', 'table tbody tr');
+        foreach ($rows as $row) {
+            $columns = $row->findAll('css', 'td');
+            if ($columns[1]->getText() === $date) {
+                \PHPUnit_Framework_Assert::assertEquals($columns[2]->getText(), $total);
+            }
+        }
+    }
+
+    /**
+     * @Given order #:orderNumber will be completed on :date
+     */
+    public function orderWillBeCompletedOn($orderNumber, $date)
+    {
+        $orderRepository = $this->getContainer()->get('sylius.repository.cart');
+        $orderManager = $this->getContainer()->get('sylius.manager.cart');
+
+        $order = $orderRepository->findOneBy(['number' => $orderNumber]);
+        $order->setCompletedAt(new \DateTime($date));
+
+        $orderManager->flush();
     }
 }

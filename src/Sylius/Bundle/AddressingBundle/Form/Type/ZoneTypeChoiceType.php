@@ -25,11 +25,11 @@ class ZoneTypeChoiceType extends AbstractType
      *
      * @var string[]
      */
-    protected $choices = array(
-        ZoneInterface::TYPE_COUNTRY  => 'sylius.form.zone.types.country',
+    protected $choices = [
+        ZoneInterface::TYPE_COUNTRY => 'sylius.form.zone.types.country',
         ZoneInterface::TYPE_PROVINCE => 'sylius.form.zone.types.province',
-        ZoneInterface::TYPE_ZONE     => 'sylius.form.zone.types.zone',
-    );
+        ZoneInterface::TYPE_ZONE => 'sylius.form.zone.types.zone',
+    ];
 
     /**
      * {@inheritdoc}
@@ -37,10 +37,10 @@ class ZoneTypeChoiceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
-                'label'   => 'sylius.form.zone.type',
+            ->setDefaults([
+                'label' => 'sylius.form.zone.type',
                 'choices' => $this->choices,
-            ))
+            ])
         ;
     }
 

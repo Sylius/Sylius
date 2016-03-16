@@ -75,6 +75,6 @@ class TextAttributeTypeSpec extends ObjectBehavior
         $constraintViolationBuilder->atPath('value')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->addViolation()->shouldBeCalled();
 
-        $this->validate($attributeValue, $context, array('min' => 2, 'max' => 255));
+        $this->validate($attributeValue, $context, ['min' => 2, 'max' => 255]);
     }
 }

@@ -12,16 +12,35 @@
 namespace Sylius\Bundle\AddressingBundle\Validator\Constraints;
 
 use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 /**
- * Validator which validates if a province is valid.
- *
  * @author Julien Janvier <j.janvier@gmail.com>
  */
 class ProvinceAddressConstraintValidator extends ConstraintValidator
 {
+    /**
+     * @var RepositoryInterface
+     */
+    private $countryRepository;
+
+    /**
+     * @var RepositoryInterface
+     */
+    private $provinceRepository;
+
+    /**
+     * @param RepositoryInterface $countryRepository
+     * @param RepositoryInterface $provinceRepository
+     */
+    public function __construct(RepositoryInterface $countryRepository, RepositoryInterface $provinceRepository)
+    {
+        $this->countryRepository = $countryRepository;
+        $this->provinceRepository = $provinceRepository;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -47,15 +66,14 @@ class ProvinceAddressConstraintValidator extends ConstraintValidator
     }
 
     /**
-     * Override this method to implement your logic.
-     *
      * @param AddressInterface $address
      *
      * @return bool
      */
     protected function isProvinceValid(AddressInterface $address)
     {
-        if (null === $country = $address->getCountry()) {
+        $countryCode = $address->getCountryCode();
+        if (null === $country = $this->countryRepository->findOneBy(['code' => $countryCode])) {
             return true;
         }
 
@@ -63,11 +81,15 @@ class ProvinceAddressConstraintValidator extends ConstraintValidator
             return true;
         }
 
-        if (null === $address->getProvince()) {
+        if (null === $address->getProvinceCode()) {
             return false;
         }
 
-        if ($country->hasProvince($address->getProvince())) {
+        if (null === $province = $this->provinceRepository->findOneBy(['code' => $address->getProvinceCode()])) {
+            return false;
+        }
+
+        if ($country->hasProvince($province)) {
             return true;
         }
 

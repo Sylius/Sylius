@@ -216,10 +216,10 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iAmOnTheShipmentPage($value)
     {
-        $shippingMethod = $this->findOneBy('shipping_method', array('name' => $value));
-        $shipment = $this->findOneBy('shipment', array('method' => $shippingMethod));
+        $shippingMethod = $this->findOneBy('shipping_method', ['name' => $value]);
+        $shipment = $this->findOneBy('shipment', ['method' => $shippingMethod]);
 
-        $this->getSession()->visit($this->generatePageUrl('backend_shipment_show', array('id' => $shipment->getId())));
+        $this->getSession()->visit($this->generatePageUrl('backend_shipment_show', ['id' => $shipment->getId()]));
     }
 
     /**
@@ -227,10 +227,10 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iShouldBeOnTheShipmentPageWithMethod($value)
     {
-        $shippingMethod = $this->findOneBy('shipping_method', array('name' => $value));
-        $shipment = $this->findOneBy('shipment', array('method' => $shippingMethod));
+        $shippingMethod = $this->findOneBy('shipping_method', ['name' => $value]);
+        $shipment = $this->findOneBy('shipment', ['method' => $shippingMethod]);
 
-        $this->assertSession()->addressEquals($this->generatePageUrl('backend_shipment_show', array('id' => $shipment->getId())));
+        $this->assertSession()->addressEquals($this->generatePageUrl('backend_shipment_show', ['id' => $shipment->getId()]));
         $this->assertStatusCodeEquals(200);
     }
 
@@ -254,7 +254,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     {
         $product = $this->findOneByName('product', $name);
 
-        $this->getSession()->visit($this->generatePageUrl('sylius_backend_product_variant_create', array('productId' => $product->getId())));
+        $this->getSession()->visit($this->generatePageUrl('sylius_backend_product_variant_create', ['productId' => $product->getId()]));
     }
 
     /**
@@ -264,7 +264,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     {
         $product = $this->findOneByName('product', $name);
 
-        $this->assertSession()->addressEquals($this->generatePageUrl('sylius_backend_product_variant_create', array('productId' => $product->getId())));
+        $this->assertSession()->addressEquals($this->generatePageUrl('sylius_backend_product_variant_create', ['productId' => $product->getId()]));
         $this->assertStatusCodeEquals(200);
     }
 
@@ -319,7 +319,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
         $this->fillField($base.'[street]', 'Pvt. Street 15');
         $this->fillField($base.'[city]', 'Lodz');
         $this->fillField($base.'[postcode]', '95-253');
-        $this->selectOption($base.'[country]', $country);
+        $this->selectOption($base.'[countryCode]', $country);
     }
 
     /**
@@ -368,8 +368,8 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iShouldNotSeeButtonInColumnInTable($button, $customer, $table)
     {
-        $this->assertSession()->elementExists('css', "#".$table." tr[data-customer='$customer']");
-        $this->assertSession()->elementNotExists('css', "#".$table." tr[data-customer='$customer'] form input[value=".strtoupper($button)."]");
+        $this->assertSession()->elementExists('css', '#'.$table." tr[data-customer='$customer']");
+        $this->assertSession()->elementNotExists('css', '#'.$table." tr[data-customer='$customer'] form input[value=".strtoupper($button).']');
     }
 
     /**
@@ -451,7 +451,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iAmOnTheProductPage($name)
     {
-        $product = $this->findOneBy('product', array('name' => $name));
+        $product = $this->findOneBy('product', ['name' => $name]);
 
         $this->getSession()->visit($this->generatePageUrl($product));
     }
@@ -462,7 +462,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iShouldBeOnTheProductPage($name)
     {
-        $product = $this->findOneBy('product', array('name' => $name));
+        $product = $this->findOneBy('product', ['name' => $name]);
 
         $this->assertSession()->addressEquals($this->generateUrl($product));
     }
@@ -473,9 +473,9 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iAmOnTheOrderPage($action, $number)
     {
-        $order = $this->findOneBy('order', array('number' => $number));
+        $order = $this->findOneBy('order', ['number' => $number]);
 
-        $this->getSession()->visit($this->generatePageUrl('sylius_account_order_'.$action, array('number' => $order->getNumber())));
+        $this->getSession()->visit($this->generatePageUrl('sylius_account_order_'.$action, ['number' => $order->getNumber()]));
     }
 
     /**
@@ -484,7 +484,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iShouldBeOnTheOrderPage($action, $number)
     {
-        $this->assertSession()->addressEquals($this->generatePageUrl('sylius_account_order_'.$action, array('number' => $number)));
+        $this->assertSession()->addressEquals($this->generatePageUrl('sylius_account_order_'.$action, ['number' => $number]));
     }
 
     /**
@@ -521,9 +521,9 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
         }
     }
 
-     /**
-      * @When /^I add option value "([^""]*)"$/
-      */
+    /**
+     * @When /^I add option value "([^""]*)"$/
+     */
     public function iAddOptionValue($optionValue)
     {
         $newItem = $this->addNewItemToFormCollection($this->getSession()->getPage(), 'option_values');
@@ -537,6 +537,14 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     {
         $newItem = $this->addNewItemToFormCollection($this->getSession()->getPage(), 'choices');
         $newItem->find('css', 'input')->setValue($value);
+    }
+
+    /**
+     * @When I want to create a :type zone
+     */
+    public function iWantToCreateZoneOfType($type)
+    {
+        $this->selectOption('zone_type', $type);
     }
 
     /**
@@ -605,7 +613,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
         $this->iSelectTheRadioButton('Credit Card');
         $this->pressButton('Continue');
         $this->iClick('Place order');
-        $this->assertSession()->pageTextContains('Thank you for your order!');
+        $this->assertSession()->pageTextContains('Thank you');
     }
 
     /**
@@ -613,12 +621,12 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iShouldSeeQuantityFor($property, $expectedValue, $item)
     {
-        $tr   = $this->assertSession()->elementExists('css', sprintf('table tbody tr:contains("%s")', $item));
+        $tr = $this->assertSession()->elementExists('css', sprintf('table tbody tr:contains("%s")', $item));
         $rows = $this->getSession()->getPage()->findAll('css', 'table thead tr th');
 
         $column = null;
         foreach ($rows as $key => $row) {
-            if ($row->getText() === $property) {
+            if (strtolower(trim($row->getText())) === strtolower(trim($property))) {
                 $column = $key;
                 break;
             }
@@ -635,25 +643,6 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
     public function iViewDeletedElements()
     {
         $this->clickLink('Show deleted');
-    }
-
-    /**
-     * @Then I should see table of :id sorted by lastName
-     */
-    public function iShouldSeeTableSortedByLastName($id)
-    {
-        $allNames = $this->getSession()->getPage()->findAll('css', '#'.$id.' > tbody > tr > td > p');
-        $allSurnames = array();
-
-        foreach ($allNames as $name) {
-            $spacePosition = strpos($name->getText(), ' ');
-            $surname = substr($name->getText(), $spacePosition + 1);
-            $allSurnames[] .= $surname;
-        }
-
-        sort($allSurnames);
-
-        $this->assertSession()->elementTextContains('css', '#'.$id.' > tbody > tr > td > p', $allSurnames[0]);
     }
 
     /**
@@ -685,10 +674,10 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     public function iDisplayPage($page)
     {
-        $pageMapping = array(
+        $pageMapping = [
             'my orders history' => 'sylius_account_order_index',
-            'my address book'   => 'sylius_account_address_index'
-        );
+            'my address book' => 'sylius_account_address_index',
+        ];
 
         $this->getSession()->visit($this->generatePageUrl($pageMapping[$page]));
     }
@@ -735,6 +724,22 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
         $this->assertSession()->elementAttributeContains('css', '[id$="code"]', 'disabled', 'disabled');
     }
 
+    /**
+     * @Then the customer should have username :username
+     */
+    public function theCustomerWithEmailShouldHaveUsername($username)
+    {
+        $this->assertSession()->elementContains('css', '#username', $username);
+    }
+
+    /**
+     * @Then the customer should be enabled
+     */
+    public function theCustomerShouldBeEnabled()
+    {
+        $this->assertSession()->elementContains('css', '#enabled', 'yes');
+    }
+
     private function assertRoute($route)
     {
         $this->assertSession()->addressEquals($this->generatePageUrl($route));
@@ -753,7 +758,7 @@ class WebContext extends BaseWebContext implements SnippetAcceptingContext
      */
     protected function getFormCollectionDiv(DocumentElement $page, $collectionName)
     {
-        return $page->find('css', 'div[data-form-type="collection"][id*="'. $collectionName .'"]');
+        return $page->find('css', 'div[data-form-type="collection"][id*="'.$collectionName.'"]');
     }
 
     /**

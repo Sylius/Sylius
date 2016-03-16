@@ -22,7 +22,7 @@ use Sylius\Component\Core\Model\UserInterface;
  */
 class LoadUsersData extends DataFixture
 {
-    private $usernames = array();
+    private $usernames = [];
 
     /**
      * {@inheritdoc}
@@ -33,16 +33,16 @@ class LoadUsersData extends DataFixture
             'sylius@example.com',
             'sylius',
             true,
-            array('ROLE_USER', 'ROLE_ADMINISTRATION_ACCESS')
+            ['ROLE_USER', 'ROLE_ADMINISTRATION_ACCESS']
         );
-        $user->addAuthorizationRole($this->get('sylius.repository.role')->findOneBy(array('code' => 'administrator')));
+        $user->addAuthorizationRole($this->get('sylius.repository.role')->findOneBy(['code' => 'administrator']));
 
         $manager->persist($user);
         $manager->flush();
 
         $this->setReference('Sylius.User-Administrator', $user);
 
-        for ($i = 1; $i <= 200; $i++) {
+        for ($i = 1; $i <= 200; ++$i) {
             $username = $this->faker->username;
 
             while (isset($this->usernames[$username])) {
@@ -90,7 +90,7 @@ class LoadUsersData extends DataFixture
      *
      * @return UserInterface
      */
-    protected function createUser($email, $password, $enabled = true, array $roles = array('ROLE_USER'), $currency = 'EUR')
+    protected function createUser($email, $password, $enabled = true, array $roles = ['ROLE_USER'], $currency = 'EUR')
     {
         $canonicalizer = $this->get('sylius.user.canonicalizer');
 

@@ -1,6 +1,7 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-form:
-  collection:
-    delete: Obrisati
+sylius:
+  form:
+    collection:
+      delete: Obrisati

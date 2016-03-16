@@ -4,6 +4,9 @@
 sylius:
   form:
     attribute:
-      name: Internt navn
-      presentation: Presentasjon
+      add: Legg til
+      code: Kode
+      name: Navn
       type: Type
+    attribute_type:
+      configuration: Konfigurasjon

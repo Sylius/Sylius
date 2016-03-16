@@ -12,14 +12,11 @@ sylius:
       street: それ以降の住所
       province: 都道府県
     country:
-      iso_name: ISO略称
+      add_province: 都道府県を設定する
       provinces: 都道府県
     zone:
+      add_member: 追加
       members: 地域
       types:
         province: 都道府県
         zone: 対象の地域
-    zone_member_province:
-      province: 都道府県
-    zone_member_zone:
-      zone: 対象の地域

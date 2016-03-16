@@ -4,8 +4,9 @@
 sylius:
   form:
     rule:
-      item_count_configuration:
+      unit_count_configuration:
         count: Ilość
+      type: Typ reguły
     shipment:
       state: Status
       states:
@@ -18,16 +19,19 @@ sylius:
       tracking_code: Kod śledzenia
     shipping_calculator:
       flat_rate_configuration:
+        label: Jednolita stawka za dostawę
         amount: Kwota
       flexible_rate_configuration:
-        additional_item_cost: Koszt kolejnych sztuk
-        additional_item_limit: Maksymalnie w paczce
-        first_item_cost: Koszt pierwszej sztuki
-      per_item_rate_configuration:
+        label: Zmienna stawka
+      per_unit_rate_configuration:
         amount: Kwota
       weight_rate_configuration:
+        label: Stawka zależna od wagi
+        fixed: Stała kwota
+        variable: Zmienna ilość
         division: Podział
       volume_rate_configuration:
+        label: Stawka zależna od ilości
         amount: Kwota
         division: Podział
     shipping_category:
@@ -38,5 +42,5 @@ sylius:
       category: Kategoria
       category_requirement: Wymagania kategorii
       configuration: Konfiguracja
-      enabled: Aktywne
+      enabled: Włączone
       name: Nazwa

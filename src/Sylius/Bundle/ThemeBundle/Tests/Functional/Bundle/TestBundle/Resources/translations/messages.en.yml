@@ -1,0 +1,8 @@
+test:
+  bundle: 'BUNDLE/Resources/translations'
+  app_bundle: 'BUNDLE/Resources/translations'
+  app: 'BUNDLE/Resources/translations'
+  theme_bundle: 'BUNDLE/Resources/translations'
+  theme: 'BUNDLE/Resources/translations'
+  parent_theme_bundle: 'BUNDLE/Resources/translations'
+  parent_theme: 'BUNDLE/Resources/translations'

@@ -56,7 +56,7 @@ class TaxonomyContext extends DefaultContext
         $taxonomy = $this->findOneByName('taxonomy', $taxonomyName);
         $manager = $this->getEntityManager();
 
-        $taxons = array();
+        $taxons = [];
 
         foreach ($taxonsTable->getRows() as $node) {
             $taxonList = explode('>', $node[0]);
@@ -64,7 +64,7 @@ class TaxonomyContext extends DefaultContext
 
             foreach ($taxonList as $taxon) {
                 $taxon = trim($taxon);
-                $taxonData = preg_split("[\\[|\\]]", $taxon, -1, PREG_SPLIT_NO_EMPTY);
+                $taxonData = preg_split('[\\[|\\]]', $taxon, -1, PREG_SPLIT_NO_EMPTY);
 
                 if (!isset($taxons[$taxonData[0]])) {
                     /* @var $taxon TaxonInterface */

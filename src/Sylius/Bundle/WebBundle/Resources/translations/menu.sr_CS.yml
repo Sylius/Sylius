@@ -23,6 +23,7 @@ sylius:
         shipments: Pošiljke
         shipping_categories: Kategorije slanja
         shipping_methods: Načini dostave
+        slideshow: Galerija
         stockables: Stanje zaliha
         tax_categories: Kategorije poreza
         tax_rates: Poreske stope

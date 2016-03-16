@@ -18,25 +18,24 @@ sylius:
       contains_product_configuration:
         variants: Продукти
         exclude: Виключити
-      item_count_configuration:
+      cart_quantity_configuration:
         count: Кількість
-        equal: Дорівнює
       item_total_configuration:
         amount: Кількість
-        equal: Дорівнює
       nth_order_configuration:
         nth: N-ний
       shipping_country_configuration:
         country: Країна
       type: Тип
     coupon:
-      code: Код
       usage_limit: Обмеження використання
     coupon_generate_instruction:
       amount: Кількість
       usage_limit: Обмеження використання
     promotion:
       actions: Дії
+      add_action: Додати дію
+      add_rule: Додати правило
       coupon_based: На основі купону
       description: Опис
       ends_at: Закінчується

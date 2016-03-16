@@ -27,12 +27,6 @@ sylius:
       max_length: Postiosoite saa olla korkeintaan 255 merkin pituinen|Postiosoite saa olla korkeintaan 255 merkin pituinen.
       min_length: Postiosoitteen tulee olla vähintään kahden merkin pituinen|Postiosoitteen tulee olla vähintään kahden merkin pituinen.
       not_blank: Lisää postiosoite.
-  country:
-    iso_name:
-      not_blank: Lisää maan ISO-koodi.
-    name:
-      max_length: Maa saa olla korkeintaan 255 merkin pituinen|Maa saa olla korkeintaan 255 merkin pituinen.
-      not_blank: Lisää maan nimi.
   province:
     name:
       max_length: Maakunnan nimi saa olla enintään 255 merkkiä pitkä|Maakunnan nimi ei saa yli 255 merkkiä pitkä.

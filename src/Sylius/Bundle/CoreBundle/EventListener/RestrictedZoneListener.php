@@ -21,12 +21,38 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class RestrictedZoneListener
 {
+    /**
+     * @var RestrictedZoneCheckerInterface
+     */
     private $restrictedZoneChecker;
+
+    /**
+     * @var CartProviderInterface
+     */
     private $cartProvider;
+
+    /**
+     * @var ObjectManager
+     */
     private $cartManager;
+
+    /**
+     * @var SessionInterface
+     */
     private $session;
+
+    /**
+     * @var TranslatorInterface
+     */
     private $translator;
 
+    /**
+     * @param RestrictedZoneCheckerInterface $restrictedZoneChecker
+     * @param CartProviderInterface $cartProvider
+     * @param ObjectManager $cartManager
+     * @param SessionInterface $session
+     * @param TranslatorInterface $translator
+     */
     public function __construct(RestrictedZoneCheckerInterface $restrictedZoneChecker, CartProviderInterface $cartProvider, ObjectManager $cartManager, SessionInterface $session, TranslatorInterface $translator)
     {
         $this->restrictedZoneChecker = $restrictedZoneChecker;
@@ -36,6 +62,9 @@ class RestrictedZoneListener
         $this->translator = $translator;
     }
 
+    /**
+     * @param GenericEvent $event
+     */
     public function handleRestrictedZone(GenericEvent $event)
     {
         $cart = $event->getSubject();
@@ -51,14 +80,12 @@ class RestrictedZoneListener
 
                 $this->session->getBag('flashes')->add(
                     'error',
-                    $this->translator->trans('sylius.cart.restricted_zone_removal', array('%product%' => $product->getName()), 'flashes')
+                    $this->translator->trans('sylius.cart.restricted_zone_removal', ['%product%' => $product->getName()], 'flashes')
                 );
             }
         }
 
         if ($removed) {
-            $cart->calculateTotal();
-
             $this->cartManager->persist($cart);
             $this->cartManager->flush();
         }

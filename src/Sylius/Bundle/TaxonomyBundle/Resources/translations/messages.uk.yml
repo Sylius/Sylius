@@ -10,10 +10,3 @@ sylius:
       permalink: Постійне посилання
     taxonomy:
       name: Ім’я
-  taxon:
-    create_taxon: Створити таксон
-    delete_taxonomy: Видалити таксономії
-    manage_taxonomies: Керувати таксономіями
-    no_taxonomies: Немає таксономій для відображення.
-    no_taxons: Немає таксонів для відображення.
-    update_taxonomy: Оновлення таксономії

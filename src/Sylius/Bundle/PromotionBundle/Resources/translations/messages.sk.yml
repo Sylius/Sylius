@@ -18,12 +18,10 @@ sylius:
       contains_product_configuration:
         variants: Produkty
         exclude: Vylúčiť
-      item_count_configuration:
+      cart_quantity_configuration:
         count: Počet
-        equal: Rovný
       item_total_configuration:
         amount: Suma
-        equal: Rovný
       nth_order_configuration:
         nth: N-ty
       customer_loyalty_configuration:
@@ -39,7 +37,6 @@ sylius:
         country: Krajina
       type: Typ
     coupon:
-      code: Kód
       usage_limit: Limit použitia
       expires_at: Platnosť do
     coupon_generate_instruction:
@@ -48,11 +45,13 @@ sylius:
       expires_at: Platnosť do
     promotion:
       actions: Akcie
-      coupon_based: Založená na kupónoch
+      add_action: Pridať podmienku
+      add_rule: Pridať pravidlo
+      coupon_based: Používať kupóny
       exclusive: Exkluzívne
       description: Popis
-      ends_at: Končí
+      ends_at: Koniec
       name: Názov
       rules: Pravidlá
-      starts_at: Začína
+      starts_at: Začiatok
       usage_limit: Limit použitia

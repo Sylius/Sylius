@@ -18,25 +18,24 @@ sylius:
       contains_product_configuration:
         variants: Produkter
         exclude: Eksluder
-      item_count_configuration:
+      cart_quantity_configuration:
         count: Antall
-        equal: Lik
       item_total_configuration:
         amount: Beløp
-        equal: Lik
       nth_order_configuration:
         nth: Nth
       shipping_country_configuration:
         country: Land
       type: Type
     coupon:
-      code: Kode
       usage_limit: Bruksgrense
     coupon_generate_instruction:
       amount: Beløp
       usage_limit: Bruksgrense
     promotion:
       actions: Handlinger
+      add_action: Legg til handling
+      add_rule: Legg til regel
       coupon_based: Kupongbasert
       description: Beskrivelse
       ends_at: Slutter på

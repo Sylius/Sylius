@@ -10,10 +10,15 @@ sylius:
       not_blank: Veuillez saisir le nom du produit.
       min_length: 'Le nom du produit doit contenir au moins 1 caractère.|Le nom du produit ne doit pas dépasser {{ limit }} caractères.'
       max_length: 'Le nom du produit ne doit pas dépasser 1 caractère.|Le nom du produit ne doit pas dépasser {{ limit }} caractères.'
-    description:
-      not_blank: Veuillez saisir la description du produit.
-      min_length: 'La description du produit doit contenir au moins 1 caractère.|La description du produit ne doit pas dépasser {{ limit }} caractères.'
   variant:
     sku:
       not_blank: "Veuillez saisir l'UGS (SKU) de la variante."
       unique: "L'UGS de la variante doit être unique."
+  archetype:
+    name:
+      not_blank: "Merci d'entrer le nom du prototype."
+      min_length: 'Le nom du prototype doit avoir au moins un caractère.|Le nom du prototype doit contenir au moins {{ limit }} caractères.'
+      max_length: 'Le nom du prototype ne doit pas dépasser un caractère.|Le nom du prototype ne doit pas dépasser les {{ limit }} caractères.'
+    code:
+      unique: Ce code de prototype existe déjà.
+      not_blank: "Merci d'entrer le code du prototype."

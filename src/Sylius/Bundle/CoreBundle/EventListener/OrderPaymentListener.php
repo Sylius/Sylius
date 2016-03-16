@@ -11,80 +11,40 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use SM\Factory\FactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\OrderProcessing\PaymentChargesProcessorInterface;
 use Sylius\Component\Core\OrderProcessing\PaymentProcessorInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * Order payment listener.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class OrderPaymentListener
 {
     /**
-     * Order payment processor.
-     *
      * @var PaymentProcessorInterface
      */
     protected $paymentProcessor;
 
     /**
-     * @var PaymentChargesProcessorInterface
-     */
-    protected $paymentChargesProcessor;
-
-    /**
-     * @var EventDispatcherInterface
-     */
-    protected $dispatcher;
-
-    /**
-     * @var FactoryInterface
-     */
-    protected $factory;
-
-    /**
-     * Constructor.
-     *
-     * @param PaymentProcessorInterface        $paymentProcessor
-     * @param PaymentChargesProcessorInterface $paymentChargesProcessor
-     * @param EventDispatcherInterface         $dispatcher
-     * @param FactoryInterface                 $factory
+     * @param PaymentProcessorInterface $paymentProcessor
      */
     public function __construct(
-        PaymentProcessorInterface $paymentProcessor,
-        PaymentChargesProcessorInterface $paymentChargesProcessor,
-        EventDispatcherInterface $dispatcher,
-        FactoryInterface $factory
+        PaymentProcessorInterface $paymentProcessor
     ) {
-        $this->paymentProcessor        = $paymentProcessor;
-        $this->paymentChargesProcessor = $paymentChargesProcessor;
-        $this->dispatcher              = $dispatcher;
-        $this->factory                 = $factory;
+        $this->paymentProcessor = $paymentProcessor;
     }
 
     /**
-     * Get the order from event and create payment.
-     *
      * @param GenericEvent $event
-     *
-     * @throws \InvalidArgumentException
      */
     public function createOrderPayment(GenericEvent $event)
     {
-        $this->paymentProcessor->createPayment($this->getOrder($event));
+        $this->paymentProcessor->processOrderPayments($this->getOrder($event));
     }
 
     /**
-     * Update order's payment.
-     *
      * @param GenericEvent $event
      *
      * @throws \InvalidArgumentException
@@ -101,16 +61,6 @@ class OrderPaymentListener
         $payment = $order->getPayments()->last();
         $payment->setCurrency($order->getCurrency());
         $payment->setAmount($order->getTotal());
-    }
-
-    /**
-     * @param GenericEvent $event
-     */
-    public function processOrderPaymentCharges(GenericEvent $event)
-    {
-        $this->paymentChargesProcessor->applyPaymentCharges(
-            $this->getOrder($event)
-        );
     }
 
     /**

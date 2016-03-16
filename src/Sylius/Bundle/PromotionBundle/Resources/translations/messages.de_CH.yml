@@ -3,7 +3,5 @@
 
 sylius:
   form:
-    coupon:
-      code: Code
     promotion:
       name: Name

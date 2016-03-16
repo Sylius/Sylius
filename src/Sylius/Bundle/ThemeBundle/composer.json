@@ -1,0 +1,54 @@
+{
+    "name": "sylius/theme-bundle",
+    "type": "symfony-bundle",
+    "description": "Themes management for Symfony2 projects.",
+    "keywords": ["themes", "theming"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name":     "Kamil Kokot",
+            "homepage": "http://kamil.kokot.me"
+        },
+        {
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": "^5.5.9|^7.0",
+
+        "sylius/resource-bundle": "^0.17",
+
+        "symfony/symfony": "^2.7.7",
+        "zendframework/zend-hydrator": "^1.0|^2.0"
+    },
+    "require-dev": {
+        "doctrine/doctrine-bundle": "^1.6",
+        "doctrine/orm": "^2.5",
+        "matthiasnoback/symfony-config-test": "^1.4.0",
+        "matthiasnoback/symfony-dependency-injection-test": "^0.7.6",
+        "phpspec/phpspec": "^2.4",
+        "phpunit/phpunit": "^4.1",
+        "symfony/twig-bundle": "^2.7.7"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Bundle\\ThemeBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Bundle\\ThemeBundle\\spec\\": "spec/" }
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.17-dev"
+        }
+    }
+}

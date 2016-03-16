@@ -5,24 +5,20 @@ Sylius\Component\User\Model\User:
         id:
             expose: true
             type: integer
+            groups: [Default, Detailed]
         username:
             expose: true
             type: string
+            groups: [Default, Detailed]
         usernameCanonical:
             expose: true
             type: string
+            groups: [Detailed]
         enabled:
             expose: true
             type: boolean
+            groups: [Default, Detailed]
         roles:
             expose: true
             type: array
-    relations:
-        - rel: user
-          href:
-              route: sylius_api_customer_show
-              parameters:
-                  id: expr(object.getCustomer().getId())
-          embedded:
-              content: expr(object.getCustomer())
-              xmlElementName: sylius_customer
+            groups: [Detailed]

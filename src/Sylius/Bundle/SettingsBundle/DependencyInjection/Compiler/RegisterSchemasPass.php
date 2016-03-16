@@ -41,7 +41,7 @@ class RegisterSchemasPass implements CompilerPassInterface
 
             $namespace = $attributes[0]['namespace'];
 
-            $schemaRegistry->addMethodCall('registerSchema', array($namespace, new Reference($id)));
+            $schemaRegistry->addMethodCall('registerSchema', [$namespace, new Reference($id)]);
         }
     }
 }

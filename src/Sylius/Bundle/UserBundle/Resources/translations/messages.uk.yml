@@ -2,13 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    email: Email
-    register: Зареєструватися
-    login: Логін
-    logout: Вихід
-    change_password: Змінити пароль
-    account_panel_outline: Користуйтеся всіма функціями, що доступні в вашому особистому просторі для перегляду, відстеження та керування вашими даними.
   form:
     group:
       name: Ім’я
@@ -24,6 +17,7 @@ sylius:
       groups: Групи
       last_name: Прізвище
       email: Email
+      phone_number: Номер Телефону
       billing_address: Платіжна адреса
       different_billing_address: Використовувати іншу платіжну адресу?
     user_filter:

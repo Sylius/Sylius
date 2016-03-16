@@ -29,9 +29,9 @@ class SyliusSettingsBundle extends AbstractResourceBundle
      */
     public static function getSupportedDrivers()
     {
-        return array(
+        return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        );
+        ];
     }
 
     /**
@@ -49,9 +49,9 @@ class SyliusSettingsBundle extends AbstractResourceBundle
      */
     protected function getModelInterfaces()
     {
-        return array(
+        return [
             ParameterInterface::class => 'sylius.model.parameter.class',
-        );
+        ];
     }
 
     /**

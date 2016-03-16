@@ -28,10 +28,10 @@ class SyliusAttributeExtension extends AbstractResourceExtension
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $configFiles = array(
+        $configFiles = [
             'services.xml',
             'attribute_types.xml',
-        );
+        ];
 
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
@@ -54,12 +54,6 @@ class SyliusAttributeExtension extends AbstractResourceExtension
                     $formTranslationDefinition->addArgument($subjectName);
                 }
 
-//                if (isset($resourceConfig['classes']['factory']) && 'attribute' === $resourceName) {
-//                    $container->setDefinition()
-//                    $factoryDefinition = $container->getDefinition('sylius.factory.'.$subjectName.'_attribute');
-//                    $factoryDefinition->addArgument($container->getDefinition('sylius.registry.attribute_type'));
-//                }
-
                 if (false !== strpos($resourceName, 'value')) {
                     $formDefinition->addArgument($container->getDefinition('sylius.repository.'.$subjectName.'_attribute'));
                 }
@@ -77,7 +71,7 @@ class SyliusAttributeExtension extends AbstractResourceExtension
      */
     private function resolveResources(array $resources, ContainerBuilder $container)
     {
-        $subjects = array();
+        $subjects = [];
 
         foreach ($resources as $subject => $parameters) {
             $subjects[$subject] = $parameters;
@@ -85,7 +79,7 @@ class SyliusAttributeExtension extends AbstractResourceExtension
 
         $container->setParameter('sylius.attribute.subjects', $subjects);
 
-        $resolvedResources = array();
+        $resolvedResources = [];
 
         foreach ($resources as $subjectName => $subjectConfig) {
             foreach ($subjectConfig as $resourceName => $resourceConfig) {

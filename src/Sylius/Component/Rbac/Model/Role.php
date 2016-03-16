@@ -13,6 +13,7 @@ namespace Sylius\Component\Rbac\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\TimestampableTrait;
 
 /**
  * Default role implementation.
@@ -21,6 +22,8 @@ use Doctrine\Common\Collections\Collection;
  */
 class Role implements RoleInterface
 {
+    use TimestampableTrait;
+
     /**
      * @var mixed
      */
@@ -47,7 +50,7 @@ class Role implements RoleInterface
     protected $parent;
 
     /**
-     * @var Collection
+     * @var Collection|RoleInterface[]
      */
     protected $children;
 
@@ -73,24 +76,14 @@ class Role implements RoleInterface
     protected $level;
 
     /**
-     * @var Collection
+     * @var Collection|PermissionInterface[]
      */
     protected $permissions;
 
     /**
      * @var array
      */
-    protected $securityRoles = array();
-
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
+    protected $securityRoles = [];
 
     public function __construct()
     {
@@ -239,8 +232,6 @@ class Role implements RoleInterface
     public function setLeft($left)
     {
         $this->left = $left;
-
-        return $this;
     }
 
     /**
@@ -257,8 +248,6 @@ class Role implements RoleInterface
     public function setRight($right)
     {
         $this->right = $right;
-
-        return $this;
     }
 
     /**
@@ -275,8 +264,6 @@ class Role implements RoleInterface
     public function setLevel($level)
     {
         $this->level = $level;
-
-        return $this;
     }
 
     /**
@@ -326,45 +313,8 @@ class Role implements RoleInterface
     /**
      * {@inheritdoc}
      */
-    public function setSecurityRoles($securityRoles)
+    public function setSecurityRoles(array $securityRoles)
     {
         $this->securityRoles = $securityRoles;
-    }
-
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 }

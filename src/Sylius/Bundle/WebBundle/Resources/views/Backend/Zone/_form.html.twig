@@ -4,7 +4,8 @@
     <div class="row">
         <div class="col-md-6">
             {{ form_row(form.name, {'attr': {'class': 'input-lg'}}) }}
-            {{ form_row(form.type, {'attr': {'data-form-prototype': 'update', 'data-form-prototype-prefix': 'sylius_zone_member_'}}) }}
+            {{ form_row(form.code, {'attr': {'class': 'input-lg'}}) }}
+            {{ form_row(form.type) }}
 
             {% if form.scope is defined %}
             {{ form_row(form.scope) }}

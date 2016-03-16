@@ -30,9 +30,9 @@ class SyliusTaxationBundle extends AbstractResourceBundle
      */
     public static function getSupportedDrivers()
     {
-        return array(
+        return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        );
+        ];
     }
 
     /**
@@ -50,10 +50,10 @@ class SyliusTaxationBundle extends AbstractResourceBundle
      */
     protected function getModelInterfaces()
     {
-        return array(
+        return [
             TaxCategoryInterface::class => 'sylius.model.tax_category.class',
-            TaxRateInterface::class     => 'sylius.model.tax_rate.class',
-        );
+            TaxRateInterface::class => 'sylius.model.tax_rate.class',
+        ];
     }
 
     /**

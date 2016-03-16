@@ -20,6 +20,12 @@ use Sylius\Component\Variation\Model\OptionValueInterface;
  */
 class OptionValueSpec extends ObjectBehavior
 {
+    public function let()
+    {
+        $this->setCurrentLocale('en_US');
+        $this->setFallbackLocale('en_US');
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Variation\Model\OptionValue');

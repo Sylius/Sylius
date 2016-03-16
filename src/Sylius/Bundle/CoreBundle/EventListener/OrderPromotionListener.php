@@ -20,15 +20,11 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
- * Order promotion listener.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderPromotionListener
 {
     /**
-     * Order promotion processor.
-     *
      * @var PromotionProcessorInterface
      */
     protected $promotionProcessor;
@@ -44,8 +40,6 @@ class OrderPromotionListener
     protected $translator;
 
     /**
-     * Constructor.
-     *
      * @param PromotionProcessorInterface $promotionProcessor
      * @param SessionInterface            $session
      * @param TranslatorInterface         $translator
@@ -54,16 +48,13 @@ class OrderPromotionListener
         PromotionProcessorInterface $promotionProcessor,
         SessionInterface $session,
         TranslatorInterface $translator
-    )
-    {
+    ) {
         $this->promotionProcessor = $promotionProcessor;
         $this->session = $session;
         $this->translator = $translator;
     }
 
     /**
-     * Get the order from event and run the promotion processor on it.
-     *
      * @param GenericEvent $event
      *
      * @throws UnexpectedTypeException
@@ -80,8 +71,6 @@ class OrderPromotionListener
         }
 
         $this->promotionProcessor->process($order);
-
-        $order->calculateTotal();
     }
 
     /**
@@ -103,6 +92,6 @@ class OrderPromotionListener
             $message = 'sylius.promotion_coupon.invalid';
         }
 
-        $this->session->getBag('flashes')->add($type, $this->translator->trans($message, array(), 'flashes'));
+        $this->session->getBag('flashes')->add($type, $this->translator->trans($message, [], 'flashes'));
     }
 }

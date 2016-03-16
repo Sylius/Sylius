@@ -4,6 +4,29 @@
 sylius:
   form:
     attribute:
-      name: Внутреннее название
-      presentation: Публичное название
+      add: Добавить
+      add_attributes: Добавить атрибуты
+      choices: Выбор
+      code: Код
+      name: Название
+      translations: ﻿Переводы
       type: Тип
+    attribute_type:
+      checkbox: Флажок
+      configuration: Конфигурация
+      date: Дата
+      datetime: Дата и время
+      integer: Целое число
+      percent: Процент
+      text: Текст
+      textarea: Текстовая область
+      title: Тип атрибута
+      validation: Проверка
+    attribute_type_configuration:
+      datetime:
+        format: Формат
+      date:
+        format: Формат
+      text:
+        min: Минимальная длина
+        max: Максимальная длина

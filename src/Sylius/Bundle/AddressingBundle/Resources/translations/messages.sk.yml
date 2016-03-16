@@ -5,23 +5,25 @@ sylius:
   form:
     address:
       city: Mesto
-      company: Firma
+      company: Spoločnosť
       country: Štát
       first_name: Meno
       last_name: Priezvisko
       phone_number: Telefónne číslo
       postcode: PSČ
-      street: Adresa
+      street: Ulica
       province: Provincia
     country:
-      iso_name: ISO názov
+      add_province: Pridať provinciu
       name: Názov
       provinces: Provincie
       select: Vyberte
     province:
       name: Názov
+      abbreviation: Skratka
       select: Vyberte
     zone:
+      add_member: Pridať člena
       members: Členovia
       name: Názov
       type: Typ
@@ -29,11 +31,8 @@ sylius:
         country: Krajina
         province: Provincia
         zone: Zóna
-      scope: Rozsah pôsobnosti
+      scope: Rozsah
+      select: Vyberte
       select_scope: Vyberte rozsah
-    zone_member_country:
-      country: Krajina
-    zone_member_province:
-      province: Provincia
-    zone_member_zone:
-      zone: Zóna
+    zone_member:
+      select: Vyberte

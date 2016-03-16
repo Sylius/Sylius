@@ -7,9 +7,11 @@ sylius:
       main:
         assortment: 分类
         blocks: 块
+        channels: 频道
         configuration: 配置
-        countries: 国家
         content: 内容
+        countries: 国家
+        customer: 客户
         dashboard: 仪表板
         general_settings: 常规设置
         groups: 团体
@@ -24,23 +26,26 @@ sylius:
         payments: 付款
         products: 产品
         promotions: 促销活动
+        roles: 角色
         sales: 订单
         shipments: 发货
         shipping_categories: 发货类别
         shipping_methods: 发货方式
+        slideshow: 幻灯片：
         stockables: 库存水平
         tax_categories: 征税类别
         tax_rates: 税率
         taxation_settings: 税收的设置
         taxonomies: 分类
         zones: 区域
-        roles: 角色
       sidebar:
         assortment: 分类
         blocks: 块
+        channels: 频道
         configuration: 配置
         content: 内容
         countries: 国家
+        customer: 客户
         dashboard: 仪表盘
         general_settings: 常规设置
         groups: 团体
@@ -55,6 +60,7 @@ sylius:
         payments: 付款
         products: 产品
         promotions: 促销活动
+        roles: 角色
         sales: 订单
         shipments: 发货
         shipping_categories: 发货类别
@@ -66,7 +72,6 @@ sylius:
         taxation_settings: 税收的设置
         taxonomies: 分类
         zones: 区域
-        roles: 角色
   frontend:
     menu:
       account:

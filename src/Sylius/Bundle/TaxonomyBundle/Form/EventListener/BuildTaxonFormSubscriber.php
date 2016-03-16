@@ -46,10 +46,10 @@ class BuildTaxonFormSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::POST_SUBMIT  => 'postSubmit',
-        );
+            FormEvents::POST_SUBMIT => 'postSubmit',
+        ];
     }
 
     /**
@@ -65,14 +65,14 @@ class BuildTaxonFormSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $event->getForm()->add($this->factory->createNamed('parent', 'sylius_taxon_choice', $taxon->getParent(), array(
-            'taxonomy'        => $taxon->getTaxonomy(),
-            'filter'          => $this->getFilterTaxonOption($taxon),
-            'required'        => false,
-            'label'           => 'sylius.form.taxon.parent',
-            'empty_value'     => '---',
+        $event->getForm()->add($this->factory->createNamed('parent', 'sylius_taxon_choice', $taxon->getParent(), [
+            'taxonomy' => $taxon->getTaxonomy(),
+            'filter' => $this->getFilterTaxonOption($taxon),
+            'required' => false,
+            'label' => 'sylius.form.taxon.parent',
+            'empty_value' => '---',
             'auto_initialize' => false,
-        )));
+        ]));
     }
 
     /**

@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    login:
+      username: Username
+      password: Fjalëkalimi
+      remember_me: Më mbaj mend
+  ui:
+    sign_in: Hyr
+    sign_out: Dil
+    dashboard: Paneli
+    powered_by: Mundësuar nga

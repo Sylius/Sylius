@@ -17,6 +17,7 @@ sylius:
         header: Betaalstatus
         checkout: Afrekenen
         completed: Voltooid
+        authorized: Gemachtigd
         failed: Mislukt
         new: Nieuw
         pending: In behandeling
@@ -30,6 +31,3 @@ sylius:
       enabled: Actief?
       gateway: Gateway
       name: Naam
-      fee_calculator:
-        fixed:
-          amount: Hoeveelheid

@@ -82,20 +82,27 @@ class AttributeValueSpec extends ObjectBehavior
         $this->getValue()->shouldReturn('XXL');
     }
 
-    function it_returns_its_value_when_converted_to_string(AttributeInterface $attribute)
+    function it_throws_exception_when_trying_to_get_code_without_attribute_defined()
     {
-        $attribute->getStorageType()->willReturn('text');
+        $this
+            ->shouldThrow(\BadMethodCallException::class)
+            ->during('getCode')
+        ;
+    }
+
+    function it_returns_its_attribute_code(AttributeInterface $attribute)
+    {
+        $attribute->getCode()->willReturn('tshirt_material');
         $this->setAttribute($attribute);
 
-        $this->setValue('S');
-        $this->__toString()->shouldReturn('S');
+        $this->getCode()->shouldReturn('tshirt_material');
     }
 
     function it_throws_exception_when_trying_to_get_name_without_attribute_defined()
     {
         $this
             ->shouldThrow(\BadMethodCallException::class)
-            ->duringGetName()
+            ->during('getName')
         ;
     }
 
@@ -111,7 +118,7 @@ class AttributeValueSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\BadMethodCallException::class)
-            ->duringGetType()
+            ->during('getType')
         ;
     }
 

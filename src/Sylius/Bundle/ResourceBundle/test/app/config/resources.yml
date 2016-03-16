@@ -1,0 +1,8 @@
+sylius_resource:
+    resources:
+        app.book:
+            classes:
+                model: AppBundle\Entity\Book
+                form:
+                    default: AppBundle\Form\Type\BookType
+                    choice: Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType

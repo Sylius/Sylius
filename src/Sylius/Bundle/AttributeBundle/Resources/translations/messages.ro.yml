@@ -4,6 +4,10 @@
 sylius:
   form:
     attribute:
-      name: Denumire internă
-      presentation: Prezentare
+      add: Adăugați
+      choices: Opțiuni
+      code: Cod
+      name: Nume
       type: Tip
+    attribute_type:
+      configuration: Configurare

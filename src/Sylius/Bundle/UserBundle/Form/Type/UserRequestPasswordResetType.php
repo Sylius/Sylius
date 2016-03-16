@@ -27,9 +27,9 @@ class UserRequestPasswordResetType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', 'email', array(
+            ->add('email', 'email', [
                 'label' => 'sylius.form.user.email',
-            ))
+            ])
         ;
     }
 
@@ -38,10 +38,10 @@ class UserRequestPasswordResetType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => PasswordResetRequest::class,
-            'validation_groups' => array('sylius'),
-        ));
+            'validation_groups' => ['sylius'],
+        ]);
     }
 
     /**

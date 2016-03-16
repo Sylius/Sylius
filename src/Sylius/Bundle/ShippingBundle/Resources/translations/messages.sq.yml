@@ -1,0 +1,46 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    rule:
+      unit_count_configuration:
+        count: Numëro
+      type: Lloji i rregullit
+    shipment:
+      state: Shteti
+      states:
+        checkout: Kontrolli
+        pending: Në pritje
+        ready: Gati
+        shipped: Dërguar
+        returned: I kthyer
+        cancelled: E fshirë
+      tracking_code: Kodi i gjurmimit
+    shipping_calculator:
+      flat_rate_configuration:
+        label: Taksa fikse për dërgimin
+        amount: Shuma
+      flexible_rate_configuration:
+        label: Taksa e ndryshueshme
+      per_unit_rate_configuration:
+        amount: Shuma
+      weight_rate_configuration:
+        label: Taksa e bazuar te pesha
+        fixed: Shuma fikse
+        variable: Shuma e ndryshueshme
+        division: Ndarja
+      volume_rate_configuration:
+        label: Taksa e bazuar te vëllimi
+        amount: Shuma
+        division: Ndarja
+    shipping_category:
+      description: Përshkrimi
+      name: Emri
+    shipping_method:
+      calculator: Llogaritësi
+      category: Kategorija
+      category_requirement: Kërkesa e kategorisë
+      configuration: Konfigurimi
+      enabled: E aktivizuar
+      name: Emri

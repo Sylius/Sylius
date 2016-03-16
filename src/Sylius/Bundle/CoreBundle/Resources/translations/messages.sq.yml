@@ -1,0 +1,130 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    action:
+      add_product_configuration:
+        price: Çmimi për njësi
+        quantity: Sasia
+        variant: Varianti i llojit të monedhës
+      customer_group: Grupi i blerësve
+    block:
+      body: Përmbajtja e porosisë
+      id: ID
+      title: Titulli
+    cart:
+      coupon: Kuponi
+    checkout:
+      addressing:
+        different_billing_address: Përdor adresë tjetër për faturën?
+      payment_method: Mënyra e pagesës
+      shipping_method: Mënyra e dërgesës
+    promotion:
+      channels: Kanali
+    coupon:
+      per_customer_usage_limit: Limiti i përdorimit për blerës
+    group:
+      name: Emri
+      roles: Funksionet
+    channel:
+      taxonomies: Kategorizimet
+      locale_default: Lokalizimi i parazgjedhur
+      locales: Rajonet
+      currency_default: Monedha e paracaktuar
+      currencies: Monedhat
+      shipping_methods: Mënyrat e dërgesës
+      payment_methods: Mënyrat e pagesës
+    image:
+      file: Imazhi
+    locale:
+      code: Kodi
+      enabled: E aktivizuar
+    order_filter:
+      created_at_from: Krijuar më pas
+      created_at_to: Krijuar më parë
+      number: Numri
+      total_from: Nga (dërguesi)
+      total_to: Për (marrësi)
+      payment_state: Gjendja e pagesës
+      channel: Të gjitha kanalet
+    page:
+      body: Përmbajtja e porosisë
+      id: ID
+      title: Titulli
+    product:
+      restricted_zone: Zonë e kufizuar
+      shipping_category: Kategoria e dërgesës
+      short_description: Përshkrim i shkurtër
+      variant_selection_method: Metoda rezervë e përzgjedhjes
+      main_taxon: Grupi kryesor
+    product_filter:
+      name: Emri
+      sku: SKU
+    product_variant:
+      tax_category: Kategoria e taksimit
+    settings:
+      general:
+        currency: Monedha e paracaktuar
+        locale: Gjuha
+        meta_description: Meta përshkrim
+        meta_keywords: Meta fjalë kyçe
+        title: Titulli i faqes
+        tracking_code:
+          Tracking code (for example: Kodi i gjurmimit (psh. Google Analytics)
+      taxation:
+        default_tax_zone: Zona e paracakruar e taksimit
+      security:
+        enabled: E aktivizon?
+    shipment_filter:
+      created_at_from: Nga (dërguesi)
+      created_at_to: Për (marrësi)
+      number: Numri i porosisë
+      shipping_address: Dërgoje në emrin
+      channel: Të gjitha kanalet
+    payment_filter:
+      created_at_from: Nga (dërguesi)
+      created_at_to: Për (marrësi)
+      number: Numri i porosisë
+      billing_address: Faturoje në emrin
+      channel: Të gjitha kanalet
+    shipping_method:
+      zone: Zona
+    taxon:
+      file: Zgjidh imazhin
+    taxonomy:
+      file: Zgjidh imazhin
+    user:
+      billing_address: Adresa e faturimit
+      different_billing_address: Përdor adresë tjetër për faturën?
+      enabled: E aktivizuar
+      first_name: Emri
+      groups: Grupet
+      roles: Funksionet
+      last_name: Mbiemri
+      password: Fjalëkalimi
+      shipping_address: Adresa e dërgimit
+    user_filter:
+      query: Kërko
+    variant:
+      available_on_demand: E mundshme me porosi
+      depth: Thellësia
+      height: Lartësia
+      images: Imazhet
+      on_hand: Fondi aktual
+      price: Çmimi
+      original_price: Çmimi fillestar
+      sku: SKU
+      weight: Pesha
+      width: Gjerësia
+    attribute:
+      product_attribute_value:
+        attribute: Atributi
+        value: Vlera
+    guest:
+      email: Email
+    product_association:
+      product: Produkt i lidhur
+      type: Tipi i lidhjes
+    product_association_type:
+      name: Emri

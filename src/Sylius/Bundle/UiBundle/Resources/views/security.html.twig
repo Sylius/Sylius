@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>{% block title %}Sylius{% endblock %}</title>
+
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    {% block metatags %}
+    {% endblock %}
+
+    {% block stylesheets %}
+        {% include 'SyliusUiBundle::_stylesheets.html.twig' %}
+    {% endblock %}
+</head>
+<body class="hold-transition login-page skin-sylius">
+{% block content %}
+{% endblock %}
+
+{% block javascripts %}
+    {% include 'SyliusUiBundle::_javascripts.html.twig' %}
+{% endblock %}
+</body>
+</html>

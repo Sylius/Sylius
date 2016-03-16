@@ -53,5 +53,4 @@ class SearchIndexSpec extends ObjectBehavior
         $this->setCreatedAt('2014-08-08 15:53:07');
         $this->getCreatedAt()->shouldReturn('2014-08-08 15:53:07');
     }
-
 }

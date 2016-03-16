@@ -1,0 +1,18 @@
+{% extends 'SyliusUiBundle::base.html.twig' %}
+
+{% block title %}Sylius | {% endblock %}
+
+{% block logo %}
+<a href="{{ path('sylius_admin_dashboard') }}" class="logo">
+    <span class="logo-mini"><b>S</b></span>
+    <span class="logo-lg"><b>Sylius</b></span>
+</a>
+{% endblock %}
+
+{% block sidebar %}
+{{ knp_menu_render('sylius.admin.main', {'template': 'SyliusUiBundle:Menu:sidebar.html.twig'}) }}
+{% endblock %}
+
+{% block footer %}
+{{ 'sylius.ui.powered_by'|trans }} <a href="http://sylius.org" target="_blank">Sylius</a>.
+{% endblock %}

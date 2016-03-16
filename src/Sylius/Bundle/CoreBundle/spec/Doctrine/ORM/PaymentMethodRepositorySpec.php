@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -41,17 +50,17 @@ class PaymentMethodRepositorySpec extends ObjectBehavior
         $em->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
         $builder->select('method')->shouldBeCalled()->willReturn($builder);
         $builder->addSelect('translation')->shouldBeCalled()->willReturn($builder);
-        $builder->leftJoin("method.translations", "translation")->shouldBeCalled()->willReturn($builder);
+        $builder->leftJoin('method.translations', 'translation')->shouldBeCalled()->willReturn($builder);
         $builder->from(Argument::any(), 'method', Argument::cetera())->shouldBeCalled()->willReturn($builder);
         $builder->andWhere('method IN (:methods)')->shouldBeCalled()->willReturn($builder);
 
         $channel->getPaymentMethods()->shouldBeCalled()->willReturn($paymentMethods);
-        $paymentMethods->toArray()->shouldBeCalled()->willReturn(array($paymentMethod));
-        $builder->setParameter('methods', array($paymentMethod))->shouldBeCalled()->willReturn($builder);
+        $paymentMethods->toArray()->shouldBeCalled()->willReturn([$paymentMethod]);
+        $builder->setParameter('methods', [$paymentMethod])->shouldBeCalled()->willReturn($builder);
 
-        $this->getQueryBuidlerForChoiceType(array(
+        $this->getQueryBuilderForChoiceType([
             'channel' => $channel,
             'disabled' => true,
-        ))->shouldReturn($builder);
+        ])->shouldReturn($builder);
     }
 }

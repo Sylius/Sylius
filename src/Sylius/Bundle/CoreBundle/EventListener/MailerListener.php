@@ -66,7 +66,7 @@ class MailerListener
             return;
         }
 
-        $this->emailSender->send(Emails::USER_CONFIRMATION, array($email), array('user' => $user));
+        $this->emailSender->send(Emails::USER_CONFIRMATION, [$email], ['user' => $user]);
     }
 
     /**
@@ -103,11 +103,11 @@ class MailerListener
 
         $this->emailSender->send(
             Emails::ORDER_COMMENT,
-            array($email),
-            array(
+            [$email],
+            [
                 'order' => $order,
                 'comment' => $comment,
-            )
+            ]
         );
     }
 }

@@ -11,35 +11,37 @@
 
 namespace Sylius\Bundle\ContentBundle\DependencyInjection;
 
+use Sylius\Bundle\ContentBundle\Document\ActionBlock;
+use Sylius\Bundle\ContentBundle\Document\ImagineBlock;
+use Sylius\Bundle\ContentBundle\Document\Menu;
+use Sylius\Bundle\ContentBundle\Document\MenuBlock;
+use Sylius\Bundle\ContentBundle\Document\MenuNode;
+use Sylius\Bundle\ContentBundle\Document\RedirectRoute;
+use Sylius\Bundle\ContentBundle\Document\ReferenceBlock;
+use Sylius\Bundle\ContentBundle\Document\Route;
+use Sylius\Bundle\ContentBundle\Document\SimpleBlock;
+use Sylius\Bundle\ContentBundle\Document\SlideshowBlock;
+use Sylius\Bundle\ContentBundle\Document\StaticContent;
+use Sylius\Bundle\ContentBundle\Document\StringBlock;
+use Sylius\Bundle\ContentBundle\Form\Type\ActionBlockType;
+use Sylius\Bundle\ContentBundle\Form\Type\ImagineBlockType;
+use Sylius\Bundle\ContentBundle\Form\Type\MenuBlockType;
+use Sylius\Bundle\ContentBundle\Form\Type\MenuNodeType;
+use Sylius\Bundle\ContentBundle\Form\Type\MenuType;
+use Sylius\Bundle\ContentBundle\Form\Type\RedirectRouteType;
+use Sylius\Bundle\ContentBundle\Form\Type\ReferenceBlockType;
+use Sylius\Bundle\ContentBundle\Form\Type\RouteType;
+use Sylius\Bundle\ContentBundle\Form\Type\SimpleBlockType;
+use Sylius\Bundle\ContentBundle\Form\Type\SlideshowBlockType;
+use Sylius\Bundle\ContentBundle\Form\Type\StaticContentChoiceType;
+use Sylius\Bundle\ContentBundle\Form\Type\StaticContentType;
+use Sylius\Bundle\ContentBundle\Form\Type\StringBlockType;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Factory\Factory;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
-use Sylius\Bundle\ContentBundle\Form\Type\SimpleBlockType;
-use Sylius\Bundle\ContentBundle\Form\Type\StringBlockType;
-use Sylius\Bundle\ContentBundle\Form\Type\ActionBlockType;
-use Sylius\Bundle\ContentBundle\Form\Type\MenuBlockType;
-use Sylius\Bundle\ContentBundle\Form\Type\ImagineBlockType;
-use Sylius\Bundle\ContentBundle\Form\Type\ReferenceBlockType;
-use Sylius\Bundle\ContentBundle\Form\Type\SlideshowBlockType;
-use Sylius\Bundle\ContentBundle\Form\Type\RouteType;
-use Sylius\Bundle\ContentBundle\Form\Type\RedirectRouteType;
-use Sylius\Bundle\ContentBundle\Form\Type\MenuType;
-use Sylius\Bundle\ContentBundle\Form\Type\MenuNodeType;
-use Sylius\Bundle\ContentBundle\Form\Type\StaticContentType;
-use Sylius\Bundle\ContentBundle\Form\Type\StaticContentChoiceType;
-use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SimpleBlock;
-use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\StringBlock;
-use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ActionBlock;
-use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
-use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SlideshowBlock;
-use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route;
-use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\RedirectRoute;
-use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\Menu;
-use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode;
-use Symfony\Cmf\Bundle\ContentBundle\Doctrine\Phpcr\StaticContent;
 
 class Configuration implements ConfigurationInterface
 {
@@ -97,7 +99,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -127,7 +129,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -157,7 +159,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -170,7 +172,7 @@ class Configuration implements ConfigurationInterface
                                 ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('model')->defaultValue(SimpleBlock::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('model')->defaultValue(MenuBlock::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
@@ -187,7 +189,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -217,7 +219,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -230,7 +232,7 @@ class Configuration implements ConfigurationInterface
                                 ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('model')->defaultValue(SimpleBlock::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('model')->defaultValue(ReferenceBlock::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
@@ -247,7 +249,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -277,7 +279,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -307,7 +309,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -337,7 +339,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -367,7 +369,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -397,7 +399,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -428,7 +430,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('sylius'))
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                     ->end()
                                 ->end()

@@ -4,6 +4,5 @@
 sylius:
   form:
     locale:
-      code: Κώδικος
       enabled: Ενεργοποιημένο
       name: Ονομασία

@@ -4,8 +4,9 @@
 sylius:
   form:
     rule:
-      item_count_configuration:
+      unit_count_configuration:
         count: Contador
+      type: Tipo de regla
     shipment:
       state: Estado
       states:
@@ -18,16 +19,19 @@ sylius:
       tracking_code: Código de seguimiento
     shipping_calculator:
       flat_rate_configuration:
+        label: Tarifa plana por envío
         amount: Cantidad
       flexible_rate_configuration:
-        additional_item_cost: Costo adicional de artículo
-        additional_item_limit: Límite de artículos adicionales
-        first_item_cost: Costo del primer artículo
-      per_item_rate_configuration:
+        label: Tarifa plana
+      per_unit_rate_configuration:
         amount: Cantidad
       weight_rate_configuration:
+        label: Tarifa basada en peso
+        fixed: Cantidad fija
+        variable: Cantidad variable
         division: División
       volume_rate_configuration:
+        label: Tarifa basada en volumen
         amount: Cantidad
         division: División
     shipping_category:

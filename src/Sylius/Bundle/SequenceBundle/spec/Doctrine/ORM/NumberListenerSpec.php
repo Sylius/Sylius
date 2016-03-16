@@ -73,7 +73,7 @@ class NumberListenerSpec extends ObjectBehavior
         $entity->getSequenceType()->willReturn('sequence_type');
 
         $entityManager->getRepository(Sequence::class)->willReturn($sequenceRepository);
-        $sequenceRepository->findOneBy(array('type' => 'sequence_type'))->willReturn($sequence);
+        $sequenceRepository->findOneBy(['type' => 'sequence_type'])->willReturn($sequence);
 
         $eventDispatcher->dispatch(
             sprintf(SyliusSequenceEvents::PRE_GENERATE, 'sequence_type'),
@@ -89,4 +89,4 @@ class NumberListenerSpec extends ObjectBehavior
 
         $this->preFlush($args);
     }
-} 
+}

@@ -27,7 +27,7 @@ class InsufficientStockException extends \UnderflowException
 
     /**
      * @param StockableInterface $stockable
-     * @param integer            $quantity
+     * @param int            $quantity
      */
     public function __construct(StockableInterface $stockable, $quantity)
     {

@@ -42,24 +42,24 @@ class TableRenderer implements RendererInterface
     public function render(ReportInterface $report, Data $data)
     {
         if (null !== $data->getData()) {
-            $data = array(
+            $data = [
                 'report' => $report,
                 'values' => $data->getData(),
                 'labels' => $data->getLabels(),
                 'fields' => array_keys($data->getData()),
-            );
+            ];
 
             $rendererConfiguration = $report->getRendererConfiguration();
 
-            return $this->templating->render($rendererConfiguration["template"], array(
+            return $this->templating->render($rendererConfiguration['template'], [
                 'data' => $data,
                 'configuration' => $rendererConfiguration,
-            ));
+            ]);
         }
 
-        return $this->templating->render("SyliusReportBundle::noDataTemplate.html.twig", array(
+        return $this->templating->render('SyliusReportBundle::noDataTemplate.html.twig', [
             'report' => $report,
-        ));
+        ]);
     }
 
     /**

@@ -71,12 +71,12 @@ class PriceableTypeExtension extends AbstractTypeExtension
     {
         $builder
             ->addEventSubscriber($this->formSubscriber)
-            ->add('pricingCalculator', 'sylius_price_calculator_choice', array(
-                'label' => 'sylius.form.priceable.calculator'
-            ))
+            ->add('pricingCalculator', 'sylius_price_calculator_choice', [
+                'label' => 'sylius.form.priceable.calculator',
+            ])
         ;
 
-        $prototypes = array();
+        $prototypes = [];
 
         /** @var CalculatorInterface $calculator */
         foreach ($this->calculatorRegistry->all() as $type => $calculator) {
@@ -101,7 +101,7 @@ class PriceableTypeExtension extends AbstractTypeExtension
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $view->vars['prototypes'] = array();
+        $view->vars['prototypes'] = [];
 
         foreach ($form->getConfig()->getAttribute('prototypes') as $type => $prototype) {
             $view->vars['prototypes'][$type] = $prototype->createView($view);

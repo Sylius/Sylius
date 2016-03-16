@@ -4,6 +4,10 @@
 sylius:
   form:
     attribute:
-      name: Dahili isim
-      presentation: Sunum
+      add: Ekle
+      choices: Seçimler
+      code: Kod
+      name: Ad
       type: Türü
+    attribute_type:
+      configuration: Ayarlar

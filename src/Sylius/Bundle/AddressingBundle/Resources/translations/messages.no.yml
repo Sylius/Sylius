@@ -14,7 +14,7 @@ sylius:
       street: Gate
       province: Fylke
     country:
-      iso_name: ISO-kode
+      add_province: Legg til fylke
       name: Navn
       provinces: Fylker
       select: Velg
@@ -22,6 +22,7 @@ sylius:
       name: Navn
       select: Velg
     zone:
+      add_member: Legg til medlem
       members: Medlemmer
       name: Navn
       type: Type
@@ -30,10 +31,7 @@ sylius:
         province: Fylke
         zone: Sone
       scope: Omfang
+      select: Velg
       select_scope: Velg omfang
-    zone_member_country:
-      country: Land
-    zone_member_province:
-      province: Fylke
-    zone_member_zone:
-      zone: Sone
+    zone_member:
+      select: Velg

@@ -10,8 +10,3 @@ sylius:
     pricing:
       volume_based:
         price: Cijena
-  pricing:
-    volume_based:
-      price: Cijena
-      button:
-        add: Dodaj

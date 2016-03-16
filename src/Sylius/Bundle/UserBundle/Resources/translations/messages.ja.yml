@@ -2,20 +2,16 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    register: お客様登録
-    login: ログイン
-    logout: ログアウト
-    change_password: パスワードの変更
-    account_panel_outline: お客様情報の確認と変更を行うことができます。
   form:
     user:
+      email: メールアドレス
       password:
         label: パスワード
       shipping_address: 配送先住所
     customer:
       first_name: 名
       last_name: 姓
+      email: メールアドレス
       billing_address: ご請求先住所
       different_billing_address: 請求先として別の住所を指定する
     user_filter:

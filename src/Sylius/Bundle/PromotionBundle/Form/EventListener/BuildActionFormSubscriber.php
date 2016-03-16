@@ -36,7 +36,7 @@ class BuildActionFormSubscriber extends AbstractConfigurationSubscriber
             return $action->getConfiguration();
         }
 
-        return array();
+        return [];
     }
 
     /**

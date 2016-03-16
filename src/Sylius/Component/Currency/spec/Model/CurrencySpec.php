@@ -91,6 +91,17 @@ class CurrencySpec extends ObjectBehavior
         $this->shouldNotBeEnabled();
     }
 
+    function it_is_not_base_currency_by_default()
+    {
+        $this->shouldNotBeBase();
+    }
+
+    function it_can_can_be_base_currency()
+    {
+        $this->setBase(true);
+        $this->shouldBeBase();
+    }
+
     function it_initializes_creation_date_by_default()
     {
         $this->getCreatedAt()->shouldHaveType(\DateTime::class);
@@ -115,5 +126,21 @@ class CurrencySpec extends ObjectBehavior
 
         $this->setUpdatedAt($date);
         $this->getUpdatedAt()->shouldReturn($date);
+    }
+
+    function its_exchange_rate_cannot_be_changed_if_it_is_base()
+    {
+        $this->setExchangeRate(1);
+        $this->setBase(true);
+
+        $this->shouldThrow(\LogicException::class)->duringSetExchangeRate(2.61);
+    }
+
+    function its_enabled_state_cannot_be_changed_if_it_is_base()
+    {
+        $this->setBase(true);
+
+        $this->shouldThrow(\LogicException::class)->duringDisable();
+        $this->shouldThrow(\LogicException::class)->duringSetEnabled(false);
     }
 }

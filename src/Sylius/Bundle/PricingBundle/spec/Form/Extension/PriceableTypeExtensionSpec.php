@@ -44,7 +44,7 @@ class PriceableTypeExtensionSpec extends ObjectBehavior
         $builder->addEventSubscriber($subscriber)->shouldBeCalled()->willreturn($builder);
         $builder->add('pricingCalculator', 'sylius_price_calculator_choice', Argument::type('array'))->shouldBeCalled();
 
-        $calculatorRegistry->all()->shouldBeCalled()->willReturn(array('type' => $calculator));
+        $calculatorRegistry->all()->shouldBeCalled()->willReturn(['type' => $calculator]);
         $calculator->getType()->shouldBeCalled()->willReturn('standard');
 
         $builder->create('pricingConfiguration', 'sylius_price_calculator_standard')
@@ -53,19 +53,19 @@ class PriceableTypeExtensionSpec extends ObjectBehavior
 
         $formBuilder->getForm()->shouldBeCalled()->willReturn($form);
 
-        $builder->setAttribute('prototypes', array('type' => $form))->shouldBeCalled();
+        $builder->setAttribute('prototypes', ['type' => $form])->shouldBeCalled();
 
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 
     function it_builds_view(FormView $view, FormInterface $form, FormConfigInterface $formConfig)
     {
         $form->getConfig()->shouldBeCalled()->willReturn($formConfig);
-        $formConfig->getAttribute('prototypes')->shouldBeCalled()->willReturn(array('type' => $form));
+        $formConfig->getAttribute('prototypes')->shouldBeCalled()->willReturn(['type' => $form]);
 
         $form->createView($view)->shouldBeCalled();
 
-        $this->buildView($view, $form, array());
+        $this->buildView($view, $form, []);
     }
 
     function it_extends_a_form_type()

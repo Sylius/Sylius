@@ -93,6 +93,9 @@
                 {{ product.updatedAt|date('Y/m/d') }}
             </td>
             <td class="center-text">
+                <a href="{{ path('sylius_backend_metadata_container_customize', { 'id': product.metadataIdentifier }) }}" class="btn btn-default">
+                    <i class="glyphicon glyphicon-file"></i><span>{{ 'sylius.metadata.product.single_customize'|trans }}</span>
+                </a>
                 {% if product.deleted %}
                     {{ buttons.patch(path('sylius_backend_product_delete_restore', {'id': product.id}), 'sylius.restore'|trans, null, 'btn btn-primary') }}
                 {% else %}

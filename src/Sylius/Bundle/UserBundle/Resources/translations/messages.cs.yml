@@ -2,13 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    email: Email
-    register: Registrace
-    login: Přihlásit
-    logout: Odhlásit
-    change_password: Změnit heslo
-    account_panel_outline: Užijte si všechny funkce, které jsou dostupné ve vašem osobním prostoru k prohlížení, sledování a spravování všech vašich dat.
   form:
     group:
       name: Jméno
@@ -18,12 +11,16 @@ sylius:
       enabled: Povoleno
       password:
         label: Heslo
+        confirmation: Ověření
+      remember_me: Pamatuj si mě
       shipping_address: Doručovací adresa
     customer:
       first_name: Křestní Jméno
       groups: Skupiny
       last_name: Příjmení
       email: Email
+      phone_number: Telefonní číslo
+      birthday: Narozeniny
       billing_address: Fakturační adresa
       different_billing_address: Použít jinou adresu pro fakturaci?
     user_filter:

@@ -8,8 +8,8 @@ sylius:
         assortment: Избор
         blocks: Блокови
         configuration: Подешавања
-        countries: Земље
         content: Садржај
+        countries: Земље
         dashboard: Командна Табла
         general_settings: Општа подешавања
         homepage: Ваша продавница
@@ -26,6 +26,7 @@ sylius:
         shipments: Пошиљке
         shipping_categories: Категорије испорука
         shipping_methods: Начини доставе
+        slideshow: Галерија
         stockables: Стање залиха
         tax_categories: Категорије пореза
         tax_rates: Пореске стопе

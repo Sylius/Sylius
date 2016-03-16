@@ -19,14 +19,12 @@ sylius:
       list: Све Ваше адресе
       update: Измени моју адресу
     home:
-      outline: Уживајте у свим карактеристикама које су доступне на Вашој личној страници да видите, пратите и управљате свим Вашим подацима.
       since: Ви сте купац још од
       welcome: Добро дошли на Вашу страницу
     order:
       created_at: Постављен на
       details: Детаљи Ваше наруџбине
       download_invoice: Преузмите фактуру
-      empty: Још увек нисте направили поруџбину.
       invoice: Фактура
       list: Све Ваше наруџбине
       placed_at: 'Постављен на %at%'
@@ -39,6 +37,8 @@ sylius:
       tracking_number: Број за праћење поруџбине
     title: Мој налог
   add_to_cart: Додај у корпу
+  association_type:
+    create: Креирај
   address:
     city: Град
     company: Предузеће
@@ -53,6 +53,8 @@ sylius:
     info: Обавештење
     success: Успех
     warning: Упозпрење
+  archetype:
+    updated_at: Ажурирано
   backend:
     alert:
       info: Обавештење
@@ -72,12 +74,10 @@ sylius:
       orders_this_month: Укупно поруџбина
       registrations_this_month: Укупно пријављених
       sales_this_month: Продаје
-  backend_welcome: 'Здраво <b>%name%</b>!'
   block:
-    index_header: Блокови
-    no_results: Нема блокова за приказивање.
     imagine:
       updated_at: Ажурирано
+    index_header: Блокови
     simple:
       updated_at: Ажурирано
     slideshow:
@@ -124,6 +124,9 @@ sylius:
       unit_price: Цена
     summary_header: Резиме корпе
     total_items: '1 предмет|%count% предмет(а)'
+  channel:
+    update: Измени
+    updated_at: Ажурирано
   checkout:
     addressing:
       header: Адреса
@@ -171,33 +174,31 @@ sylius:
       register: Региструјте се
     shipping:
       header: Начин доставе
+  contact_request:
+    updated_at: Ажурирано
+  contact_topic:
+    updated_at: Ажурирано
   country:
     add_province: Додај провинцију
     create: Додај земљу
     create_header: Нова земља
     id: ИД
     index_header: Земље
-    iso_name: ИСО код
     manage: Управљај земљама
     name: Име
-    no_results: Нису конфигурисане земље.
     show_header: Детаљи земље
     update_header: Измените земљу
-  email:
-    updated_at: Ажурирано
   create: Креирај
-  delete: Избриши
-  edit: Ажурирај
-  permission:
-    updated_at: Ажурирано
-  role:
-    updated_at: Ажурирано
   currency:
+    updated_at: Ажурирано
+  customer:
+    phone_number: Број телефона
+  delete: Обриши
+  edit: Измени
+  email:
     updated_at: Ажурирано
   filter: Филтер
   form:
-    cart:
-      coupon: Ако имате промотивни купон, унесите га овде
     choose_file: Фајл
     frontend:
       password:
@@ -219,7 +220,6 @@ sylius:
     created_at: Креиран
     inventory_state: Стање залиха
     name: Име
-    no_results: Нема производа за приказ.
     shipping_state: Стање пошиљке
     sku: СКУ
     updated_at: Ажурирано
@@ -230,15 +230,11 @@ sylius:
   logo: Сyлиус
   manage: Управљајте
   meta:
-    frontend_description: Сyлиус је модерно решење за ПХП, базирано на Сyмфонy2 фрејмворку.
-    frontend_keywords: сyлиус, е-комерц, сyмфонy2, продавница, корпа
     frontend_title: Сyлиус, модерни е-комерц за Сyмфонy2
+  metadata:
+    content: Садржај
   newest: Најновији производи
   "no": false
-  product_option:
-    manage: Управљај опцијама
-    name: Име
-    updated_at: ажурирано
   order:
     billing_address: Адреса за наплату
     create: Креирајте наруџбину
@@ -268,30 +264,11 @@ sylius:
     shipping_address: Адреса за слање
     shipping_charges: Цена испоруке
     shipping_total: Укупно испорука
+    show_header: наруџбина
     tax_total: Укупно порези
     taxes: Порези
     total: Укупно
     update_header: Ажурирање наруџбине
-  shipment:
-    created_at: направљено
-    id: ИД
-    index_header: Испоруке
-    inventory_state: стање залиха
-    manage: Управљајте пошиљкама
-    method: метод
-    modified: измењено
-    name: име
-    no_items: Нема производа за приказ.
-    no_results: Нема пошиљака за приказ.
-    order: наруџбина
-    show_header: Детаљи пошиљке
-    sku: СКУ
-    state: стање
-    update: Измени
-    updated_at: ажурирано
-  channel:
-    update: Измени
-    updated_at: Ажурирано
   order_item:
     quantity: Количина
     sellable: Производ
@@ -302,7 +279,6 @@ sylius:
     index_header: Стране
   password: Лозинка
   payment:
-    order: наруџбина
     amount: Количина
     create: Креирај плаћање
     create_header: Ново плаћање
@@ -310,19 +286,18 @@ sylius:
     id: ИД
     index_header: Плаћање
     method: Метод
-    no_results: Нису конфигурисана плаћања.
+    order: наруџбина
     update_header: Ажурирање плаћања
     updated_at: Ажурирано
   payment_method:
     create: Креирајте метод плаћања
     create_header: Нови метод плаћања
-    enabled: Активно?
-    gateway: капија
     id: ИД
     index_header: Метод плаћања
     name: Име
-    no_results: Нема конфигурисаних метода плаћања.
     update_header: Ажурирање метода плаћања
+    updated_at: Ажурирано
+  permission:
     updated_at: Ажурирано
   product:
     available_on: Доступно
@@ -339,7 +314,6 @@ sylius:
     no_description: '<и>Нема описа...</и>'
     no_images: Нема слика за овај производ
     no_options: Нема опција за овај производ
-    no_results: Нема производа за приказ.
     no_short_description: '<и>Нема кратког описа</и>'
     no_sku: '<и>Нема СКУ</и>'
     no_tax_category: Нема категорије пореза
@@ -359,11 +333,19 @@ sylius:
     update_header: Ажурирање производа
     updated_at: Ажурирано
     variant_selection_method: Метод избора варијанте производа
+  product_attribute:
+    updated_at: Ажурирано
+  product_association:
+    create_header: Нови производ
+    updated_at: Ажурирано
+  product_option:
+    manage: Управљај опцијама
+    presentation: Приказ
+    updated_at: Ажурирано
   promotion:
     actions: Акције
     add_action: Додајте акцију
     add_rule: Додајте правило
-    coupon_based: Базирано на купону?
     create: Креирајте промоцију
     create_header: Нова промоција
     created_at: Креирано
@@ -372,7 +354,6 @@ sylius:
     index_header: Тренутне промоције
     manage: Управљајте промоцијама
     name: Име
-    no_results: Нема конфигурисаних промоција.
     rules: Правила
     show_header: Детаљи промоције
     starts_at: Почиње
@@ -389,23 +370,16 @@ sylius:
     generate: Генериши купоне
     generate_header: Генерисање купона
     index: Листа купона
-    no_results: Нема купона за приказ.
     update_header: Ажурирање купона
   promotion_rule:
     configuration: Конфигурација
     type: Тип
-  product_attribute:
-    name: Име
-    updated_at: ажурирано
-  archetype:
-    name: Име
-    updated_at: ажурирано
   province:
     provinces: Провинције
-  remember_me: Запамти ме?
   report:
-    details: Детаљи
     manage: Управљајте
+  role:
+    updated_at: Ажурирано
   save_changes: Сачувај измене
   security:
     login:
@@ -413,6 +387,21 @@ sylius:
   settings:
     general_header: Генерална подешавања
     taxation_header: Подешавања пореза
+  shipment:
+    created_at: направљено
+    id: ИД
+    index_header: Испоруке
+    inventory_state: стање залиха
+    manage: Управљајте пошиљкама
+    method: метод
+    modified: измењено
+    name: име
+    order: наруџбина
+    show_header: Детаљи пошиљке
+    sku: СКУ
+    state: стање
+    update: Измени
+    updated_at: ажурирано
   shipment_category:
     manage: Управљајте категоријама слања
   shipping_category:
@@ -422,7 +411,6 @@ sylius:
     index_header: Категорије слања
     manage: Управљајте категоријама слања
     name: Име
-    no_results: Нема конфигурисаних категорија слања.
     update_header: Ажурирање категорије слања
     updated_at: ажурирано
   shipping_method:
@@ -430,25 +418,18 @@ sylius:
     category: Категорија
     create: Нови начин доставе
     create_header: Нови начин доставе
-    enabled: Активно?
     id: ИД
     index_header: Начини доставе
     manage: Управљајте начинима доставе
     name: Име
-    no_results: Нема конфигурисаних начина доставе.
     show_header: Детаљи налина доставе
     update_header: Ажурирање начина доставе
     updated_at: ажурирано
     zone: Зона
   shop_by: Купујте по
-  show: Детаљи
   stockable:
     index_header: 'Лагер <small>Преглед стања залиха</small>'
-    name: Име
-    no_results: Нема залиха.
-    on_hand: ниво залиха
-    sku: СКУ
-    updated_at: ажурирано
+    updated_at: Ажурирано
   tax_category:
     create: Креирајте категорију пореза
     create_header: Нова категорија пореза
@@ -458,7 +439,6 @@ sylius:
     manage: Управљајте категоријама пореза
     name: Име
     no_description: Нема описа
-    no_results: Нема конфигурисаних категорија пореза.
     update_header: Ажурирање категорије пореза
     updated_at: ажурирано
   tax_rate:
@@ -467,11 +447,9 @@ sylius:
     category: Категорија пореске стопе
     create: Креирајте порез
     create_header: Нови порез
-    included_in_price: Укљуцен у цену?
     index_header: Пореске стопе
     manage: Управљајте пореским стопама
     name: Име
-    no_results: Нема конфигурисаних пореских стопа.
     show_header: Детаљи пореза
     update_header: Ажурирање пореске стопе
     updated_at: ажурирано
@@ -482,7 +460,6 @@ sylius:
     image: Изаберите слику
     name: Име
     no_image: Наме слике за категоризацију
-    no_results: Нема резултата.
     update_header: Ажурирање категоризације
   taxonomy:
     create: Креирајте категоризацију
@@ -491,16 +468,17 @@ sylius:
     index_header: 'Категоризација <small>Дефинисане категорије</small>'
     name: Име
     no_image: Нема слика за категоризацију
-    no_results: Нема дефинисаних категоризација.
     show_header: 'Категоризација <small><стронг>%name%</стронг></small>'
     update_header: Ажурирање категоризације
+  ui:
+    login: Пријави се
+    logout: Одјави се
+    register: Регистрација
   user:
-    enabled: Омогућено?
     general_info: 'Корисник "%username%"'
     id: ИД
     index_header: 'Корисници <small>Листа свих регистрованих корисника</small>'
     last_login: Последње пријављивање
-    no_results: Нема корисника за приказ.
     recent_header: Последњи корисници
     register:
       button: Регистрација
@@ -514,7 +492,6 @@ sylius:
     create_header: Нова варијанта производа
     delete_image: Избришите слику
     last_update: последња измена
-    no_results: Нема варијанти производа за приказ.
     options: Опције
     price: Цена
     stock: Залихе
@@ -527,14 +504,9 @@ sylius:
     index_header: Зоне
     manage: Управљајте зонама
     name: Име
-    no_results: Нема конфигурисаних зона.
+    scope: Обухват
     show_header: Детаљи зоне
     type: Тип
     update_header: Ажурирање зоне
-    scope: Обухват
   zone_member:
     members: Чланови
-  contact_topic:
-    updated_at: Ажурирано
-  contact_request:
-    updated_at: Ажурирано

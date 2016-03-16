@@ -3,6 +3,9 @@
 
 sylius:
   promotion:
+    code:
+      unique: Promocja z podanym kodem już istnieje.
+      not_blank: Proszę wprowadzić kod promocyjny.
     description:
       max_length: '{1} Opis promocji nie może być dłuższy niż 1 znak.|{2,3,4} Opis promocji nie może być dłuższy niż {{ limit }} znaki.|[5,Inf[ Opis promocji nie może być dłuższy niż {{ limit}} znaków.'
       min_length: '{1} Opis promocji musi być dłuższy niż 1 znak.|{2,3,4} Opis promocji musi być dłuższy niż {{ limit }} znaki.|[5,Inf[ Opis promocji musi być dłuższy niż {{ limit }} znaków.'
@@ -16,6 +19,7 @@ sylius:
       max_length: '{1} Kod kuponu promocyjnego nie może być dłuższy niż 1 znak.|{2,3,4} Kod kuponu promocyjnego nie może być dłuższy niż {{ limit }} znaki.|[5,Inf[ Kod kuponu promocyjnego nie może być dłuższy niż {{ limit}} znaków.'
       min_length: '{1} Kod kuponu promocyjnego musi być dłuższy niż 1 znak.|{2,3,4} Kod kuponu promocyjnego musi być dłuższy niż {{ limit }} znaki.|[5,Inf[ Kod kuponu promocyjnego musi być dłuższy niż {{ limit }} znaków.'
       not_blank: Proszę podać kod kuponu.
+      unique: Ten kupon już istnieje.
     usage_limit:
       min: 'Ograniczenie użycia musi wynosić co najmniej {{ limit }}.'
   promotion_coupon_generate_instruction:

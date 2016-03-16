@@ -2,22 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    emails:
-        order_confirmation:
-            name: Order confirmation
-            subject: Thank you for your order!
-
-        order_comment:
-            name: Order comment
-            subject: New comment posted on order #{{ order.number }}
-
-        shipment_confirmation:
-            name: Shipment confirmation
-            subject: Your order has been shipped!
-
-        user_confirmation:
-            name: User confirmation
-            subject: Welcome to our store!
     account:
         address:
             action:
@@ -32,7 +16,7 @@ sylius:
                 no_billing: No default billing address
                 no_shipping: No default shipping address
                 shipping: Default shipping address
-            empty: You have no addresses defined.
+            empty: You have no addresses defined
             list: All your addresses
             update: Edit my address
         affiliate:
@@ -64,33 +48,40 @@ sylius:
                 earning: Earnings
                 empty: You have no referrals yet.
         home:
-            email: Email :
-            id: Customer ID :
-            outline: Enjoy all the features that are available on your personal space to view, track and manage all your data.
+            email: Email
+            id: Customer ID
+            last5orders: Your last 5 orders
+            outline: Enjoy all the features that are available on your personal space to view, track and manage all your data
             since: You are customer since
             welcome: Welcome to your space
-            last5orders: Your last 5 orders
         order:
             created_at: Placed at
             details: Details of your order
             download_invoice: Download the invoice
-            empty: You have placed no order yet.
+            empty: You have placed no order yet
             invoice: Invoice
             list: All your orders
-            number: Number :
-            payment_mode: Payment mode :
+            number: Number
+            payment_mode: Payment mode
             placed_at: Placed at %at%
             shipment:
                 pending: Pending
                 ready: Ready since %at%
                 returned: Returned %at%
                 shipped: Shipped %at%
-            shipment_mode: Shipment mode :
-            state: State :
+            shipment_mode: Shipment mode
+            state: State
             total: Total
             tracking_number: Tracking number
         title: My account
     add_to_cart: Add to cart
+    association_type:
+        index_header: Association types
+        update_header: Edit Association type
+        create_header: Create Association type
+        name: Name
+        create: Create
+        update: Update
     address:
         city: City
         company: Company
@@ -105,6 +96,19 @@ sylius:
         info: Information
         success: Success
         warning: Warning
+    archetype:
+        attributes: Attributes
+        build: Build archetype
+        build_header: Building product from archetype
+        create: Create archetype
+        create_header: New archetype
+        index_header: Product archetypes
+        name: Name
+        no_results: There are no archetypes defined
+        options: Options
+        parent: Parent
+        update_header: Editing archetype
+        updated_at: Last update
     backend:
         alert:
             info: Information
@@ -118,22 +122,17 @@ sylius:
         logout: Logout
         quick_links:
             add_product: New product
+            customers: Customers
             orders: Latest orders
             products: Your products
-            customers: Customers
         statistics:
             header: This month's statistics
             orders_this_month: Total orders
             registrations_this_month: Total registrations
             sales_this_month: Sales
-    backend_welcome: Hello <b>%name%</b>!
+    backend_welcome: Hello <b>%name%</b>
+    billing_address: Bill to
     block:
-        index_header: Blocks
-        no_results: There are no blocks to display.
-        simple_blocks: Simple blocks
-        string_blocks: String blocks
-        imagine_blocks: Imagine blocks
-        slideshow_blocks: Slideshow blocks
         imagine:
             create: Create imagine block
             create_header: Creating a new imagine block
@@ -147,6 +146,9 @@ sylius:
             title: Title
             update_header: Editing imagine block
             updated_at: Last update
+        imagine_blocks: Imagine blocks
+        index_header: Blocks
+        no_results: There are no blocks to display
         simple:
             body: Body
             create: Create simple block
@@ -161,6 +163,7 @@ sylius:
             title: Title
             update_header: Editing simple block
             updated_at: Last update
+        simple_blocks: Simple blocks
         slideshow:
             body: Body
             create: Create slideshow block
@@ -174,6 +177,7 @@ sylius:
             title: Title
             update_header: Editing slideshow block
             updated_at: Last update
+        slideshow_blocks: Slideshow blocks
         string:
             body: Body
             create: Create string block
@@ -188,6 +192,7 @@ sylius:
             title: Title
             update_header: Editing string block
             updated_at: Last update
+        string_blocks: String blocks
     affiliate:
         id: ID
         status: Status
@@ -257,12 +262,15 @@ sylius:
                 index:
                     Affiliate Goals
         affiliate_settings: Affiliate Settings
+        archetype:
+            index: Archetypes
         assortment: Assortment
+        attribute:
+            index: Attributes
         block:
             imagine:
                 index: Imagine Blocks
-            index:
-                Blocks
+            index: Blocks
             simple:
                 index: Simple Blocks
             slideshow:
@@ -270,24 +278,25 @@ sylius:
             string:
                 index: String Blocks
         build: Build
+        channel:
+            index: Channels
         configuration: Configuration
-        content: Content
-        country:
-            index: Countries
-        section:
-            customer: Customer
-        customer:
-            index: Customers
-        dashboard: Dashboard
-        edit: Edit
         contact_request:
             index: Contact requests
             show: Contact request
         contact_topic:
             index: Contact topics
         content: Content
+        country:
+            index: Countries
         currency:
             index: Currencies
+        customer:
+            index: Customers
+        dashboard: Dashboard
+        edit: Edit
+        email:
+            index: Emails
         general_settings: General Settings
         generate: Generate
         group:
@@ -301,35 +310,47 @@ sylius:
             index: Menus
         menu_node:
             index: Menu nodes
+        metadata:
+            index: Metadata
         new: New
         option:
             index: Options
         order:
-            index: Orders
             adjustments: Adjustments
+            index: Orders
         page:
             index: Pages
         payment:
             index: Payments
         payment_method:
             index: Payment Methods
+        permission:
+            index: Permissions
         product:
             index: Products
+        association_type:
+            index: Association types
         promotion:
             index: Promotions
         promotion_coupon:
             index: Coupons
-        attribute:
-            index: Attributes
-        archetype:
-            index: archetypes
+        product_association:
+            index: Association
+        product_association_type:
+            index: Association type
         redirect_route:
             index: Redirect routes
         report:
             index: Reports
+        role:
+            index: Roles
+        review:
+            index: Reviews
         route:
             index: Routes
         sales: Sales
+        section:
+            customer: Customer
         security_settings: Security Settings
         shipment:
             index: Shipments
@@ -345,15 +366,7 @@ sylius:
         taxation_settings: Taxation Settings
         taxonomy:
             index: Taxonomies
-        email:
-            index: Emails
-        channel:
-            index: Channels
         update: Edit
-        permission:
-            index: Permissions
-        role:
-            index: Roles
         zone:
             index: Zones
     browse_products: Browse products
@@ -372,6 +385,24 @@ sylius:
             unit_price: Price
         summary_header: Cart summary
         total_items: 1 item|%count% items
+    channel:
+        code: Code
+        create: Add channel
+        create_header: Add channel
+        created_at: Created at
+        currency_default: Default currency
+        enabled: Enabled
+        id: ID
+        index_header: Channels
+        locale_default: Default locale
+        manage: Manage channels
+        name: Name
+        no_results: There are no channels configured
+        update: Edit
+        update_header: Editing channel
+        updated_at: Last update
+        hostname: Hostname
+        theme: Theme
     checkout:
         addressing:
             header: Addressing step
@@ -389,14 +420,13 @@ sylius:
                 street: Street
             header: Order summary
             order:
+                additional_information: Additional information
                 billing_address: Billing address
                 items_total: Items total
                 no_items: This order does not contain any items
                 no_promotion: No promotion applied
                 no_shipping_charges: No shipping charges applied
                 no_taxes: No taxes applied
-                payment_charges: Payment charges
-                payment_total: Payment total
                 promotion_discount: Promotion discounts
                 promotion_total: Promotion total
                 shipping_address: Shipping address
@@ -417,87 +447,131 @@ sylius:
             header: Payment method
         security:
             existing_customer: Existing Customer
+            guest: Guest
             header: Sign in to the store <small>or create new account</small>
             login: Login
             new_customer: New Customer
-            register: Register
-            guest: Guest
             proceed_order: Proceed with your order
+            register: Register
         shipping:
-            error: We're sorry, but our shop is not able to provide product shipping to country which you have chosen.
+            error: We're sorry, but our shop is not able to provide product shipping to country which you have chosen
             header: Shipping method
     confirmation:
-        message: Do you want to delete this item?
+        message: Do you want to delete this item
         title: Confirmation
+    contact_request:
+        create: Create contact request
+        create_header: New contact request
+        email: Email
+        firstName: First name
+        id: ID
+        index_header: Contact requests
+        lastName: Last name
+        message: Message
+        no_results: There are no contact requests to display
+        show_header: Contact request details
+        topic: Topic
+        update_header: Editing contact request
+        updated_at: Last update
+    contact_topic:
+        create: Create contact topic
+        create_header: New contact topic
+        id: ID
+        index_header: Contact topics
+        no_results: There are no contact topics to display
+        title: Title
+        update_header: Editing contact topic
+        updated_at: Last update
     country:
         add_province: Add province
         create: Create country
         create_header: New country
+        enabled: Enabled
         id: ID
         index_header: Countries
-        iso_name: ISO name
         manage: Manage countries
         name: Name
-        no_results: There are no countries configured.
+        no_results: There are no countries configured
         show_header: Country details
         update_header: Editing country
-        enabled: Enabled
-    email:
-        create: Add new Email
-        create_header: Adding new Email
-        index_header: Email Templates
-        manage: Manage Emails
-        no_results: There are no emails configured.
-        update_header: Editing Email
-        code: Code
-        enabled: Enabled?
-        subject: Subject
-        updated_at: Last update
     create: Create
     created_at: Created at
-    delete: delete
-    deleted: Deleted
-    edit: edit
-    move_up: move up
-    move_down: move down
-    permission:
-        create: Add new permission
-        create_header: New permission
-        code: Code
-        id: ID
-        description: Description
-        index_header: Permissions
-        no_results: There are no permissions defined.
-        update_header: Editing permission
-        updated_at: Last update
-    role:
-        create: Add new role
-        create_header: New role
-        code: Code
-        id: ID
-        name: Name
-        description: Description
-        index_header: Roles
-        no_results: There are no roles defined.
-        update_header: Editing role
-        updated_at: Last update
     currency:
+        code: Code
         create: Create currency
         create_header: New currency
-        code: Code
-        id: ID
-        name: Name
         enabled: Enabled
-        index_header: Currencies
-        no_results: There are no currencies to display.
         exchange_rate: Exchange rate
+        id: ID
+        index_header: Currencies
+        name: Name
+        no_results: There are no currencies to display
         update_header: Editing currency
         updated_at: Last update
+    customer:
+        billing_address: Billing address
+        create: Create customer
+        create_header: New customer
+        creation_date: Creation date
+        email: Email
+        filter:
+            all: Show all customers
+            registered: Show registered customers
+            unconfirmed: Show unconfirmed accounts
+        first_name: First name
+        general_info: Customer "%fullName%" general info
+        groups: Groups
+        id: ID
+        index_header: Customers <small>List of all customers in store</small>
+        last_name: Last name
+        manage: Manage customers
+        no_groups: There are no groups for this customer to display
+        no_results: There are no customers to display
+        order:
+            no_results: There are no orders for this customer to display
+        orders: Customer orders
+        recent_header: Recent customers
+        shipping_address: Shipping address
+        show_header: Customer details
+        update_header: Editing customer
+        phone_number: Phone number
+    delete: Delete
+    deleted: Deleted
+    disable: Disable
+    edit: Edit
+    email:
+        code: Code
+        create: Add new Email
+        create_header: Adding new Email
+        enabled: Enabled
+        index_header: Email Templates
+        manage: Manage Emails
+        no_results: There are no emails configured
+        subject: Subject
+        update_header: Editing Email
+        updated_at: Last update
+    emails:
+        order_comment:
+            name: Order comment
+            subject: New comment posted on order
+        order_confirmation:
+            name: Order confirmation
+            subject: Thank you for your order
+        shipment_confirmation:
+            name: Shipment confirmation
+            subject: Your order has been shipped
+        user_confirmation:
+            name: User confirmation
+            subject: Welcome to our store
+    enable: Enable
     filter: Filter
     form:
         cart:
-            coupon: If you have a promotion coupon, enter it here
+            coupon: Coupon
         choose_file: Choose file
+        comment:
+            comment: Comment
+            notify_customer: Notify Customer
         frontend:
             password:
                 confirmation: Confirmation
@@ -517,13 +591,13 @@ sylius:
             email: Email
             firstName: First name
             lastName: Last name
-        comment:
-            comment: Comment
-            notify_customer: Notify Customer?
     gallery:
         next: Next
         previous: Previous
         slideshow: Slideshow
+    gender:
+        female: Female
+        male: Male
     generate: Generate
     go_to_dashboard: Go to dashboard
     group:
@@ -532,19 +606,19 @@ sylius:
         id: ID
         index_header: Groups
         name: Name
-        no_results: There are no groups to display.
+        no_results: There are no groups to display
         roles: Roles
         update_header: Edit group
     hide_deleted: Hide deleted
     history:
-        header: History
         action: Action
         author: Author
         data: Data
-        logged_at: Logged at (version)
-        revert: Revert
-        no_results: There are no logged events to display.
         empty: Empty
+        header: History
+        logged_at: Logged at (version)
+        no_results: There are no logged events to display
+        revert: Revert
     homepage:
         splash:
             headline: Welcome to Sylius
@@ -553,19 +627,19 @@ sylius:
         created_at: Created
         inventory_state: Inventory state
         name: Name
-        no_results: There are no inventory units to display.
+        no_results: There are no inventory units to display
         shipping_state: Shipping state
         sku: SKU
         updated_at: Last update
     locale:
-        id: ID
-        name: Name
         code: Code
         create: Create locale
         create_header: Adding new locale
         enabled: Enabled
+        id: ID
         index_header: Index of all configured locales
-        no_results: There are no locales configured.
+        name: Name
+        no_results: There are no locales configured
         update_header: Edit locale
         updated_at: Last update
     login: Login
@@ -578,7 +652,7 @@ sylius:
         end_date: End date
         id: ID
         index_header: Menus
-        no_results: There are no menus to display.
+        no_results: There are no menus to display
         publishable: Published
         start_date: Start date
         title: Title
@@ -588,46 +662,82 @@ sylius:
         create_header: Creating menu node
         id: ID
         index_header: Menu nodes
-        no_results: There are no menu nodes to display.
+        no_results: There are no menu nodes to display
         parent: Parent
         title: Title
         update_header: Editing menu node
     meta:
         backend_title: Sylius Dashboard
-        frontend_description: Sylius is modern ecommerce solution for PHP, based on the Symfony2 framework.
-        frontend_keywords: sylius, ecommerce, symfony2, shop, cart, webshop
+        frontend_description: Sylius is modern ecommerce solution for PHP, based on the Symfony2 framework
+        frontend_keywords: Sylius, ecommerce, symfony2, shop, cart, webshop
         frontend_title: Sylius, modern ecommerce for Symfony2
+    metadata:
+        customize_header: Customizing metadata
+        show_header: Show metadata
+        id: ID
+        customize: Customize metadata
+        manage: Manage metadata
+        content: Content
+        index_metadata: Metadata
+        default_page:
+            group_customize: Customize default metadata
+        product:
+            single_customize: Customize metadata
+            group_customize: Customize products metadata
+        product_variant:
+            single_customize: Customize metadata
+    move_down: Move down
+    move_up: Move up
     na: N/A
     newest: Newest products
-    no: no
+    no: No
     no_results: No results
-    product_option:
-        create: Create option
-        create_header: New product option
-        index_header: Product options
-        manage: Manage options
-        name: name
-        no_results: There are no options configured.
-        presentation: presentation
-        update_header: Editing option
-        updated_at: last update
-        values: values
     order:
+        additional_information: Additional information
+        adjustments:
+            amount: Amount
+            description: Description
+            lock: Lock
+            lock_all: Lock all adjustments
+            locked: Locked
+            manage: Manage adjustments
+            type: Type
+            unlock: Unlock
+            unlock_all: Unlock all adjustments
         billing_address: Billing address
+        channel: Channel
+        comment:
+            author: Author
+            comment: Comment
+            created_at: Created at
+            customer:
+                not_notified: Customer not notified
+                notified: Customer notified
+            header: Order comments
+            no_comment: No comment
+            notify: Notification
+            state: State
         create: Create order
         create_header: New order
         created_at: Creation time
+        currency: Currency
+        customer: Customer
         details: Order details
         general_info: General info
         guest: Guest customer
         id: ID
+        immutable_warning: Already shipped orders are immutable
         index_header: Current orders
         inventory_tracking: Inventory tracking
-        items_total: Items total
+        inventory_unit:
+            backorder: Backorder
+            fulfill: Fulfill
+            return: Return
         items: Items
-        channel: Channel
+        items_total: Items total
         manage: Manage orders
         no_items: This order does not contain any items
+        no_promotion: No coupons were used
         no_results: You have no new orders
         no_shipments: There are no shipments for this order
         no_shipping_charges: No shipping charges applied
@@ -638,117 +748,49 @@ sylius:
         payment_state: Payment state
         payment_states:
             balance_due: Balance due
+        promotion_coupons: Coupons
         promotion_total: Promotion total
         recent_header: Recent orders
+        release_inventory: Release inventory
         shipment_state: Shipment state
         shipment_states:
             pending: Pending
         shipments: Shipments
-        release_inventory: Release inventory
-        inventory_unit:
-            backorder: Backorder
-            fulfill: Fulfill
-            return: Return
         shipping_address: Shipping address
         shipping_charges: Shipping charges
         shipping_total: Shipping total
-        show_header: "Order #%number%"
+        show_header: Order #%number%
         state:
+            abandoned: Abandoned
+            cancelled: Cancelled
             cart_locked: Cart locked
             checkout: Checkout
             order_confimed: Order confirmed
             ordered: Ordered
-            shipped: Shipped
-            abandoned: Abandoned
-            cancelled: Cancelled
             returned: Returned
+            shipped: Shipped
         tax_total: Tax total
         taxes: Taxes
         total: Total
         update_header: Editing order
-        customer: customer
-        currency: Currency
-        state: State
-        immutable_warning: Already shipped orders are immutable.
-        promotion_coupons: Coupons
-        no_promotion: No coupons were used.order:
-        adjustments:
-            manage: Manage adjustments
-            type: Type
-            description: Description
-            amount: Amount
-            locked: Locked?
-            lock: Lock
-            unlock: Unlock
-            lock_all: Lock all adjustments
-            unlock_all: Unlock all adjustments
-        comment:
-            header: Order comments
-            comment: Comment
-            author: Author
-            created_at: Created at
-            notify: Notification
-            state: State
-            customer:
-                notified: Customer notified
-                not_notified: Customer not notified
-            no_comment: No comment
-    route:
-        create: Create route
-        create_header: Creating route
+    review:
+        create: New review
+        index: Product reviews
+        manage: Manage reviews
+        no_reviews: There are no reviews.
         id: ID
-        index_header: Routes
-        name: Name
-        no_results: There are no routes to display.
-        page: Page
+        subject: Subject
         title: Title
-        update_header: Editing route
-        view: View
-    redirect_route:
-        create: Create redirect route
-        create_header: Creating redirect route
-        id: ID
-        index_header: Redirect route
-        no_results: There are no redirect routes to display.
-        title: Title
-        update_header: Editing redirect route
-    shipment:
-        ship: Ship
+        status: Status
+        rating: Rating
+        author: Author
+        guest: Guest
         created_at: Created at
-        id: ID
-        index_header: Shipments
-        inventory_state: Inventory state
-        manage: Manage shipments
-        method: Method
-        modified: Modified
-        name: Name
-        no_items: There are no items to display.
-        no_results: There are no shipments to display.
-        order: Order
-        show_header: Shipment details
-        sku: SKU
-        state: State
-        tracking_code: Tracking Code
-        update: Edit
-        update_header: Editing shipment
-        updated_at: Last update
-    channel:
-        create: Add channel
-        created_at: Created at
-        code: Code
-        currency_default: Default currency
-        enabled: Enabled
-        id: ID
-        index_header: Channels
-        locale_default: Default locale
-        manage: Manage channels
-        create_header: Add channel
-        name: Name
-        url: Url
-        no_results: There are no channels configured.
-        update: Edit
-        update_header: Editing channel
-        updated_at: Last update
+        details: Review details
+        editing: Editing review
+        header: Product reviews
+        product_review: Product review
+        no_results: There are no reviews for this product.
     order_item:
         product: Item
         quantity: Qty
@@ -760,19 +802,18 @@ sylius:
         body: Body
         create: Create new page
         create_header: Creating new page
+        end_date: End date
         id: ID
         index_header: Pages
-        no_results: There are no pages to display.
+        no_results: There are no pages to display
         no_route: Your content will not appear in frontend if no route is defined
         publishable: Published
-        start_date: Start Date
-        end_date: End date
         routes: Routes
+        start_date: Start Date
         title: Title
         update_header: Editing page
     password: Password
     payment:
-        order: Order
         amount: Amount
         create: Create payment
         create_header: New payment
@@ -781,13 +822,14 @@ sylius:
         index_header: Payments
         manage: Manage payments
         method: Method
-        no_results: There are no payments configured.
+        no_results: There are no payments configured
+        order: Order
         state:
-            header: State
             cancelled: Cancelled
             checkout: Checkout
             completed: Completed
             failed: Failed
+            header: State
             new: New
             pending: Pending
             processing: Processing
@@ -799,118 +841,97 @@ sylius:
     payment_method:
         create: Create payment method
         create_header: New payment method
-        enabled: Is enabled?
-        gateway: gateway
+        enabled: Is enabled
+        gateway: Gateway
         id: ID
         index_header: Payment methods
         name: Name
-        no_results: There are no payment methods configured.
+        no_results: There are no payment methods configured
         update_header: Editing payment method
         updated_at: Last update
+    permission:
+        code: Code
+        create: Add new permission
+        create_header: New permission
+        description: Description
+        id: ID
+        index_header: Permissions
+        no_results: There are no permissions defined
+        update_header: Editing permission
+        updated_at: Last update
+    pricing:
+        volume_based:
+            button:
+                add: Add
+            max: Max Volume
+            min: Min Volume
+            no_results: No pricing configuration
+            price: Price
     product:
         add_attribute: Add attribute
+        archetype: Archetype
+        attributes: Attributes
+        association: Association
         available_on: Available on
-        available_until: Available until
         available_on_demand: Available on demand
+        available_until: Available until
         categorization: Categorization
         contain_variants: Contain Variants
         create: Create product
         create_header: New product
-        archetype: Archetype
         description: Description
         generate_variants: Generate variants
         index_by_taxon_header: Products <small>Categorized under "%taxon%" taxon</small>
         index_header: Products <small>Index of all products in your store</small>
+        main_taxon: Main taxon
         manage: Manage products
         name: Name
+        no_attributes: This product has no attributes defined
         no_description: <i>No description...</i>
         no_images: There are no images for this product
         no_options: There are no options for this product
-        no_attributes: This product has no attributes defined
-        no_results: There are no products to display.
+        no_results: There are no products to display
         no_shipping_category: No shipping category
         no_short_description: <i>No short description</i>
         no_sku: No SKU
         no_tax_category: No tax category
-        no_taxons: There are no taxons for this product
         no_taxon: There is no main taxon for this product
+        no_taxons: There are no taxons for this product
         options: Options
-        variants: Variants
-        price: Retail price
         original_price: Original price
+        price: Retail price
         attributes: Attributes
+        rating: Rating
         restricted_zone: Restricted zone
         remove_attribute: Remove attribute
+        restricted_zone: Restricted zone
         shipping_category: Shipping category
-        main_taxon: Main taxon
         show: View more
         show_header: Product details <small>Viewing product "<strong>%product%</strong>"</small>
-        show_in_store: show in store
+        show_in_store: Show in store
         sku: SKU
         stock: Current stock
         tabs:
+            attributes: Attributes
+            associations: Associations
             categorization: Categorization
+            channels: Channels
             images: Images
             options: Options
-            product: Product
-            attributes: Attributes
-            channels: Channels
             pricing: Pricing
+            product: Product
         tax_category: Tax category
         unavailable: Unavailable
         update_header: Editing product
         updated_at: Last update
         variant_selection_method: Variant selection method
-        view_details: View %product% details.
-        volume_price: Volume based pricing
+        variants: Variants
+        view_details: View %product% details
         volume_based:
-            qty_min: Qty min
-            qty_max: Qty max
             price: Price
-    product_not_available_in_zone: Not available in your country
-    promotion:
-        actions: Actions
-        add_action: Add action
-        add_rule: Add rule
-        coupon_based: Coupon based?
-        create: Create promotion
-        create_header: New promotion
-        created_at: Created at
-        description: Description
-        ends_at: Ends at
-        general_info: General Info
-        id: ID
-        index_header: Current promotions
-        manage: Manage promotions
-        name: Name
-        no_results: There are no promotions configured.
-        rules: Rules
-        show_header: Promotion details
-        starts_at: Starts at
-        update_header: Editing promotion
-        updated_at: Last update
-        usage_limit: Usage limit
-        used: Used
-        priority: Priority
-        exclusive: Exclusive
-    promotion_action:
-        configuration: Configuration
-        type: Type
-    promotion_coupon:
-        code: Code
-        create: Add coupon
-        create_header: Create new coupon
-        generate: Generate coupons
-        generate_header: Generating coupons
-        index: List coupons
-        index_header: Coupons
-        no_results: There are no coupon to display.
-        total_results: Total: %total%
-        update_header: Editing coupon
-        expires_at: Expires at
-    promotion_rule:
-        configuration: Configuration
-        type: Type
+            qty_max: Qty max
+            qty_min: Qty min
+        volume_price: Volume based pricing
     product_attribute:
         add_choice: Add choice
         code: Code
@@ -918,63 +939,165 @@ sylius:
         create_header: New product attribute
         index_header: Product attributes
         manage: Manage attributes
-        name: name
-        no_results: There are no attributes configured.
-        type: type
+        name: Name
+        no_results: There are no attributes configured
+        type: Type
         update_header: Editing attribute
-        updated_at: last update
-    archetype:
-        build: Build archetype
-        build_header: Building product from archetype
-        create: Create archetype
-        create_header: New archetype
-        index_header: Product archetypes
-        name: name
-        no_results: There are no archetypes defined.
-        options: options
-        attributes: attributes
-        parent: parent
-        update_header: Editing archetype
-        updated_at: last update
+        updated_at: Last update
+    product_association:
+        code: Code
+        create: Create product association
+        create_header: New product
+        index_header: Product attributes
+        manage: Manage attributes
+        name: Name
+        no_results: There are no attributes configured
+        type: Type
+        update_header: Editing attribute
+        updated_at: Last update
+    product_not_available_in_zone: Not available in your country
+    product_option:
+        create: Create option
+        create_header: New product option
+        index_header: Product options
+        manage: Manage options
+        name: Name
+        no_results: There are no options configured
+        presentation: Presentation
+        update_header: Editing option
+        updated_at: Last update
+        values: Values
+    promotion:
+        actions: Actions
+        add_action: Add action
+        add_rule: Add rule
+        coupon_based: Coupon based
+        create: Create promotion
+        create_header: New promotion
+        created_at: Created at
+        description: Description
+        ends_at: Ends at
+        exclusive: Exclusive
+        general_info: General Info
+        id: ID
+        index_header: Current promotions
+        manage: Manage promotions
+        name: Name
+        no_results: There are no promotions configured
+        priority: Priority
+        rules: Rules
+        show_header: Promotion details
+        starts_at: Starts at
+        update_header: Editing promotion
+        updated_at: Last update
+        usage_limit: Usage limit
+        used: Used
+    promotion_action:
+        configuration: Configuration
+        type: Type
+    promotion_coupon:
+        code: Code
+        create: Add coupon
+        create_header: Create new coupon
+        expires_at: Expires at
+        generate: Generate coupons
+        generate_header: Generating coupons
+        index: List coupons
+        index_header: Coupons
+        no_results: There are no coupon to display
+        total_results: Total: %total%
+        update_header: Editing coupon
+    promotion_rule:
+        configuration: Configuration
+        type: Type
     province:
         provinces: Provinces
-    remember_me: Remember me?
+    redirect_route:
+        create: Create redirect route
+        create_header: Creating redirect route
+        id: ID
+        index_header: Redirect route
+        no_results: There are no redirect routes to display
+        title: Title
+        update_header: Editing redirect route
+    remember_me: Remember me
     report:
+        code: Code
         create: Create report
         create_header: Create new report
-        no_results: There are no reports created.
-        show_header: Report details
-        details: details
-        id: id
-        name: Name
-        code: Code
-        description: Description
-        manage: Manage
-        update_header: Edit report
-        renderer: Renderer type
         data_fetcher: Data fetcher type
+        description: Description
+        details: Details
+        id: Id
         index_header: Reports
-        no_data: There is no data to display.
-        no_report: There is no report to display.
+        manage: Manage
+        name: Name
+        no_data: There is no data to display
+        no_report: There is no report to display
+        no_results: There are no reports created
+        renderer: Renderer type
+        show_header: Report details
+        update_header: Edit report
     restore: Restore
+    role:
+        code: Code
+        create: Add new role
+        create_header: New role
+        description: Description
+        id: ID
+        index_header: Roles
+        name: Name
+        no_results: There are no roles defined
+        update_header: Editing role
+        updated_at: Last update
+    route:
+        create: Create route
+        create_header: Creating route
+        id: ID
+        index_header: Routes
+        name: Name
+        no_results: There are no routes to display
+        page: Page
+        title: Title
+        update_header: Editing route
+        view: View
     save_changes: Save changes
     search: Search
     security:
         login:
+            button: Login
+            forgot_password: Forgot password
             header: Login <small>Sylius store</small>
             info: Please login using <b>"sylius@example.com"</b> email and <b>"sylius"</b> as password. <small>Mr. Sylius Demo Guide</small>
-            no_account: No account yet?
-            forgot_password: Forgot password?
-            button: Login
+            no_account: No account yet
     settings:
         affiliate_header: Affiliate settings
         general_header: General settings
         security_header: Security settings
         taxation_header: Taxation settings
+    shipment:
+        created_at: Created at
+        id: ID
+        index_header: Shipments
+        inventory_state: Inventory state
+        manage: Manage shipments
+        method: Method
+        modified: Modified
+        name: Name
+        no_items: There are no items to display
+        no_results: There are no shipments to display
+        order: Order
+        ship: Ship
+        show_header: Shipment details
+        sku: SKU
+        state: State
+        tracking_code: Tracking Code
+        update: Edit
+        update_header: Editing shipment
+        updated_at: Last update
     shipment_category:
         manage: Manage shipping categories
     shipping_address: Shipping address
-    billing_address: Bill to
     shipping_category:
         create: Create shipping category
         create_header: New shipping category
@@ -982,7 +1105,7 @@ sylius:
         index_header: Shipping categories
         manage: Manage shipping categories
         name: Name
-        no_results: There are no shipping categories configured.
+        no_results: There are no shipping categories configured
         update_header: Editing shipping category
         updated_at: Last update
     shipping_method:
@@ -990,28 +1113,28 @@ sylius:
         category: Category
         create: Create shipping method
         create_header: New shipping method
-        enabled: enabled
+        enabled: Enabled
         id: ID
         index_header: Shipping methods
         manage: Manage shipping methods
         name: Name
-        no_results: There are no shipping methods configured.
+        no_results: There are no shipping methods configured
         show_header: Shipping method details
         update_header: Editing shipping method
         updated_at: Last update
         zone: Zone
     shop_by: Shop by
-    show: details
+    show: Details
     show_all: Show all
     show_deleted: Show deleted
     stockable:
         index_header: Inventory <small>Here you can see current stock levels</small>
-        name: name
-        no_results: There are no inventory items to display.
-        on_hand: stock level
-        on_hold: on hold
-        sku: sku
-        updated_at: last update
+        name: Name
+        no_results: There are no inventory items to display
+        on_hand: Stock level
+        on_hold: On hold
+        sku: Sku
+        updated_at: Last update
     tax_category:
         create: Create tax category
         create_header: New tax category
@@ -1021,7 +1144,7 @@ sylius:
         manage: Manage tax categories
         name: Name
         no_description: No description
-        no_results: There are no tax categories configured.
+        no_results: There are no tax categories configured
         update_header: Editing tax category
         updated_at: Last update
     tax_rate:
@@ -1030,11 +1153,11 @@ sylius:
         category: Category
         create: Create tax rate
         create_header: New tax rate
-        included_in_price: Included in price?
+        included_in_price: Included in price
         index_header: Tax rates
         manage: Manage tax rates
         name: Name
-        no_results: There are no tax rates configured.
+        no_results: There are no tax rates configured
         show_header: Tax rate details
         update_header: Updating tax rate
         updated_at: Last update
@@ -1045,7 +1168,7 @@ sylius:
         image: Choose image
         name: Name
         no_image: There is no image for this taxon
-        no_results: There are no taxons to display.
+        no_results: There are no taxons to display
         product_index_header: Products categorized as "%name%"
         update_header: Editing taxon
     taxonomy:
@@ -1056,58 +1179,64 @@ sylius:
         manage: Manage taxonomies
         name: Name
         no_image: There is no image for this taxonomy
-        no_results: There are no taxonomies defined.
+        no_results: There are no taxonomies defined
         show_header: Taxonomy <small><strong>%name%</strong></small>
         update_header: Editing taxonomy
     total_quantity: Total Qty
-    unknown: Unknown
-    customer:
-        billing_address: Billing address
-        create: create customer
-        create_header: New customer
+    ui:
+        account_panel_outline: Enjoy all the features that are available on your personal space to view, track and manage all your data
+        change_password: Change your password
+        code: Code
+        customer:
+            id: Customer ID
+        customer_since: You are a customer since
         email: Email
-        filter:
-            all: Show all customers
-            registered: Show registered customers
-            unconfirmed: Show unconfirmed accounts
-        general_info: Customer "%fullName%" general info
-        first_name: First name
-        id: ID
-        index_header: Customers <small>List of all customers in store</small>
-        last_name: Last name
-        manage: manage customers
-        no_results: There are no customers to display.
-        order:
-            no_results: There are no orders for this customer to display.
-        orders: Customer orders
-        recent_header: Recent customers
-        creation_date: Creation date
-        shipping_address: Shipping address
-        show_header: Customer details
-        update_header: Editing customer
-        groups: Groups
-        no_groups: There are no groups for this customer to display.
+        forgot_password: Forgot password
+        links: Links
+        logged_in_as: Logged in as %username%
+        login: Login
+        logout: Logout
+        no_account: No account yet
+        password:
+            reset:
+                button: Reset
+                header: Reset password
+        profile: Profile
+        register: Register
+        reset: Reset
+        reset_password: Reset password
+        welcome: Welcome
+        add_association: Add association
+        product_associations: Product associations
+        create_product_association: Create product association
+        product_association_types: Product association types
+        create_product_association_type: Create product association type
+        update_product_association_type: Update product association type
+        no_association_types_to_display: There are no association types defined
+        name: Name
+        id: Id
+    unknown: Unknown
     user:
-        create: create user
+        create: Create user
         create_header: New user
-        enabled: Confirmed?
+        enabled: Confirmed
         general_info: User "%username%" general info
         id: ID
+        impersonate: Log in as this user
         index_header: Users <small>List of all users registered in store</small>
         last_login: Last login
-        impersonate: Log in as this user
-        manage: manage users
-        no_results: There are no users to display.
+        manage: Manage users
+        no_results: There are no users to display
         oauth:
-            provider: OAuth Provider
-            identifier: Identifier
             access_token: Access Token
-            none: No OAuth accounts connected.
+            identifier: Identifier
+            none: No OAuth accounts connected
+            provider: OAuth Provider
         recent_header: Recent users
-        registration_date: Registration date
         register:
             button: Register
             header: Registration <small>Create an account in store</small>
+        registration_date: Registration date
         show_header: User details
         update_header: Editing user
         username: Username
@@ -1119,14 +1248,14 @@ sylius:
         create_header: New product variant
         delete_image: Delete image
         last_update: Last update
-        no_results: There are no variants to display.
+        no_results: There are no variants to display
         options: Options
-        price: Price
         original_price: Original price
+        price: Price
         sku: SKU
         stock: Current stock
         update_header: Editing variant
-    yes: yes
+    yes: Yes
     zone:
         add_member: Add member
         create: Create zone
@@ -1134,41 +1263,10 @@ sylius:
         index_header: Zones
         manage: Manage zones
         name: Name
-        no_results: There are no zones configured.
+        no_results: There are no zones configured
+        scope: Scope
         show_header: Zone details
         type: Type
         update_header: Editing zone
-        scope: Scope
     zone_member:
         members: Members
-    contact_topic:
-        create: Create contact topic
-        create_header: New contact topic
-        id: ID
-        title: Title
-        index_header: Contact topics
-        no_results: There are no contact topics to display.
-        update_header: Editing contact topic
-        updated_at: Last update
-    contact_request:
-        create: Create contact request
-        create_header: New contact request
-        id: ID
-        firstName: First name
-        lastName: Last name
-        email: Email
-        message: Message
-        topic: Topic
-        index_header: Contact requests
-        no_results: There are no contact requests to display.
-        update_header: Editing contact request
-        updated_at: Last update
-        show_header: Contact request details
-    gender:
-        male: Male
-        female: Female
-    enable: Enable
-    disable: Disable
-    ui:
-        links: Links
-        code:  Code

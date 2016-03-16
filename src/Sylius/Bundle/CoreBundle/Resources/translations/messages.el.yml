@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  checkout:
-    shipping_method:
-      not_blank: Παρακαλούμε επιλέξτε μέθοδο αποστολής.
   form:
     action:
       add_product_configuration:
@@ -24,6 +21,8 @@ sylius:
     group:
       name: Ονομασία
       roles: Ρόλοι
+    channel:
+      currency_default: Προεπιλεγμένο νόμισμα
     image:
       file: Εικόνα
     locale:
@@ -41,11 +40,12 @@ sylius:
       restricted_zone: Απαγορευμένη ζώνη
       shipping_category: Κατηγορία αποστολής
       short_description: Σύντομη περιγραφή
-      tax_category: Φορολογική κατηγορία
       variant_selection_method: Μέθοδος επιλογής παραλλαγής
     product_filter:
       name: Ονομασία
       sku: ΚΩΔΙΚΟΣ ΠΡΟΪΟΝΤΟΣ
+    product_variant:
+      tax_category: Φορολογική κατηγορία
     settings:
       general:
         currency: Προεπιλεγμένο νόμισμα
@@ -93,3 +93,5 @@ sylius:
       width: Πλάτος
     guest:
       email: Ηλεκτρονικό ταχυδρομείο
+    product_association_type:
+      name: Ονομασία

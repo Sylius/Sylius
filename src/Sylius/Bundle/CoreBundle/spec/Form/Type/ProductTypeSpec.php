@@ -25,7 +25,7 @@ class ProductTypeSpec extends ObjectBehavior
 {
     function let(CanonicalizerInterface $canonicalizer)
     {
-        $this->beConstructedWith(Product::class, array('sylius'), $canonicalizer);
+        $this->beConstructedWith(Product::class, ['sylius'], $canonicalizer);
     }
 
     function it_is_initializable()
@@ -38,7 +38,7 @@ class ProductTypeSpec extends ObjectBehavior
         $this->shouldHaveType(ProductType::class);
     }
 
-    function it_bulids_form(FormBuilderInterface $builder)
+    function it_builds_form(FormBuilderInterface $builder)
     {
         $builder
             ->add('masterVariant', 'sylius_product_variant', Argument::cetera())
@@ -51,17 +51,17 @@ class ProductTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
         $builder
+            ->add('associations', 'collection', Argument::cetera())
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+        $builder
             ->add('options', 'sylius_product_option_choice', Argument::cetera())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
         $builder
             ->add('translations', 'a2lix_translationsForms', Argument::cetera())
-            ->shouldBeCalled()
-            ->willReturn($builder)
-        ;
-        $builder
-            ->add('taxCategory', 'sylius_tax_category_choice', Argument::cetera())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
@@ -95,6 +95,6 @@ class ProductTypeSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, []);
     }
 }

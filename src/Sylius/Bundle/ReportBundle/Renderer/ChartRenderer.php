@@ -23,12 +23,12 @@ use Symfony\Component\Templating\EngineInterface;
  */
 class ChartRenderer implements RendererInterface
 {
-    const BAR_CHART        = 'bar';
-    const LINE_CHART       = 'line';
-    const RADAR_CHART      = 'radar';
-    const POLAR_CHART      = 'polar';
-    const PIE_CHART        = 'pie';
-    const DOUGHNUT_CHART   = 'doughnut';
+    const BAR_CHART = 'bar';
+    const LINE_CHART = 'line';
+    const RADAR_CHART = 'radar';
+    const POLAR_CHART = 'polar';
+    const PIE_CHART = 'pie';
+    const DOUGHNUT_CHART = 'doughnut';
 
     /**
      * @var EngineInterface
@@ -49,23 +49,23 @@ class ChartRenderer implements RendererInterface
     public function render(ReportInterface $report, Data $data)
     {
         if (null !== $data->getData()) {
-            $rendererData = array(
+            $rendererData = [
                 'report' => $report,
                 'values' => $data->getData(),
                 'labels' => array_keys($data->getData()),
-            );
+            ];
 
             $rendererConfiguration = $report->getRendererConfiguration();
 
-            return $this->templating->render($rendererConfiguration["template"], array(
+            return $this->templating->render($rendererConfiguration['template'], [
                 'data' => $rendererData,
                 'configuration' => $rendererConfiguration,
-            ));
+            ]);
         }
 
-        return $this->templating->render("SyliusReportBundle::noDataTemplate.html.twig", array(
+        return $this->templating->render('SyliusReportBundle::noDataTemplate.html.twig', [
             'report' => $report,
-        ));
+        ]);
     }
 
     /**
@@ -81,13 +81,13 @@ class ChartRenderer implements RendererInterface
      */
     public static function getChartTypes()
     {
-        return array(
-            self::BAR_CHART      => 'Bar chart',
-            self::LINE_CHART     => 'Line chart',
-            self::RADAR_CHART    => 'Radar chart',
-            self::POLAR_CHART    => 'Polar chart',
-            self::PIE_CHART      => 'Pie chart',
+        return [
+            self::BAR_CHART => 'Bar chart',
+            self::LINE_CHART => 'Line chart',
+            self::RADAR_CHART => 'Radar chart',
+            self::POLAR_CHART => 'Polar chart',
+            self::PIE_CHART => 'Pie chart',
             self::DOUGHNUT_CHART => 'Doughnut chart',
-        );
+        ];
     }
 }

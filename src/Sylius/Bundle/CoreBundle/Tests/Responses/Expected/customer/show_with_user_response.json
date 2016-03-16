@@ -1,0 +1,19 @@
+{
+    "id": @integer@,
+    "user": {
+        "id": @integer@,
+        "username": "Roy@doe.com",
+        "username_canonical": "roy@doe.com",
+        "roles": [
+            "ROLE_USER"
+        ],
+        "enabled": true
+    },
+    "email": "Roy@doe.com",
+    "email_canonical": "roy@doe.com",
+    "first_name": "Roy",
+    "last_name": "Doe",
+    "birthday": "@string@.isDateTime()",
+    "gender": "u",
+    "groups": []
+}

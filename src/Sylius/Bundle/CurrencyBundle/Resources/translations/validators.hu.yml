@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  currency:
+    code:
+      not_blank: Kérjük adja meg a pénznem kódját!
+      unique: A pénznem kódja már meg lett adva.
+    exchange_rate:
+      not_blank: Kérjük adja meg az árfolyamot!

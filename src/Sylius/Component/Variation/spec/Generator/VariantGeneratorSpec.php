@@ -58,20 +58,20 @@ class VariantGeneratorSpec extends ObjectBehavior
     ) {
         $productVariable->hasOptions()->willReturn(true);
 
-        $productVariable->getOptions()->willReturn(array($colorOption));
+        $productVariable->getOptions()->willReturn([$colorOption]);
 
-        $colorOption->getValues()->willReturn(array($blackColor, $whiteColor, $redColor));
+        $colorOption->getValues()->willReturn([$blackColor, $whiteColor, $redColor]);
 
         // Stubbing `OptionValue` instead of `OptionValueInterface` in order to stub `getId` method.
         $blackColor->getId()->willReturn('black1');
         $whiteColor->getId()->willReturn('white2');
         $redColor->getId()->willReturn('red3');
 
-        $setBuilder->build(array(
-            array('black1', 'white2', 'red3'),
-        ))->willReturn(array(
-            array('black1', 'white2', 'red3'),
-        ));
+        $setBuilder->build([
+            ['black1', 'white2', 'red3'],
+        ])->willReturn([
+            ['black1', 'white2', 'red3'],
+        ]);
 
         $productVariable->getMasterVariant()->willReturn($masterVariant);
 
@@ -95,10 +95,10 @@ class VariantGeneratorSpec extends ObjectBehavior
     ) {
         $productVariable->hasOptions()->willReturn(true);
 
-        $productVariable->getOptions()->willReturn(array($colorOption, $sizeOption));
+        $productVariable->getOptions()->willReturn([$colorOption, $sizeOption]);
 
-        $colorOption->getValues()->willReturn(array($blackColor, $whiteColor, $redColor));
-        $sizeOption->getValues()->willReturn(array($smallSize, $mediumSize, $largeSize));
+        $colorOption->getValues()->willReturn([$blackColor, $whiteColor, $redColor]);
+        $sizeOption->getValues()->willReturn([$smallSize, $mediumSize, $largeSize]);
 
         $blackColor->getId()->willReturn('black1');
         $whiteColor->getId()->willReturn('white2');
@@ -107,20 +107,20 @@ class VariantGeneratorSpec extends ObjectBehavior
         $mediumSize->getId()->willReturn('medium5');
         $largeSize->getId()->willReturn('large6');
 
-        $setBuilder->build(array(
-            array('black1', 'white2', 'red3'),
-            array('small4', 'medium5', 'large6')
-        ))->willReturn(array(
-            array('black1', 'small4'),
-            array('black1', 'medium5'),
-            array('black1', 'large6'),
-            array('white2', 'small4'),
-            array('white2', 'medium5'),
-            array('white2', 'large6'),
-            array('red3', 'small4'),
-            array('red3', 'medium5'),
-            array('red3', 'large6'),
-        ));
+        $setBuilder->build([
+            ['black1', 'white2', 'red3'],
+            ['small4', 'medium5', 'large6'],
+        ])->willReturn([
+            ['black1', 'small4'],
+            ['black1', 'medium5'],
+            ['black1', 'large6'],
+            ['white2', 'small4'],
+            ['white2', 'medium5'],
+            ['white2', 'large6'],
+            ['red3', 'small4'],
+            ['red3', 'medium5'],
+            ['red3', 'large6'],
+        ]);
 
         $productVariable->getMasterVariant()->willReturn($masterVariant);
 

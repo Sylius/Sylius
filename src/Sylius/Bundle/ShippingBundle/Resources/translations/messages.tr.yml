@@ -4,8 +4,9 @@
 sylius:
   form:
     rule:
-      item_count_configuration:
+      unit_count_configuration:
         count: Sayısı
+      type: Kural türü
     shipment:
       state: Durum
       states:
@@ -18,16 +19,19 @@ sylius:
       tracking_code: İzleme Kodu
     shipping_calculator:
       flat_rate_configuration:
+        label: Sevkıyat başına sabit oran
         amount: Miktar
       flexible_rate_configuration:
-        additional_item_cost: Ek içerik maliyeti
-        additional_item_limit: Ek içerik limiti
-        first_item_cost: İlk içerik maliyeti
-      per_item_rate_configuration:
+        label: Esnek oranı
+      per_unit_rate_configuration:
         amount: Miktar
       weight_rate_configuration:
+        label: Temel ağırlık oranı
+        fixed: Sabit tutar
+        variable: Değişken tutar
         division: Bölüm
       volume_rate_configuration:
+        label: Temel birim oranı
         amount: Miktar
         division: Bölüm
     shipping_category:

@@ -11,11 +11,15 @@
 
 namespace Sylius\Component\Shipping\Model;
 
+use Sylius\Component\Resource\Model\TimestampableTrait;
+
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ShippingCategory implements ShippingCategoryInterface
 {
+    use TimestampableTrait;
+
     /**
      * @var mixed
      */
@@ -35,16 +39,6 @@ class ShippingCategory implements ShippingCategoryInterface
      * @var string
      */
     protected $description;
-
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
 
     public function __construct()
     {
@@ -113,37 +107,5 @@ class ShippingCategory implements ShippingCategoryInterface
     public function setDescription($description)
     {
         $this->description = $description;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
     }
 }

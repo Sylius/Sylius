@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sylius\Migrations;
 
 use Doctrine\DBAL\Migrations\AbstractMigration;
@@ -14,7 +23,7 @@ class Version20141214134644 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
-        
+
         $this->addSql('ALTER TABLE sylius_product_prototype_attribute DROP FOREIGN KEY FK_E0C4700125998077');
         $this->addSql('ALTER TABLE sylius_product_prototype_option DROP FOREIGN KEY FK_1AD7AAC525998077');
         $this->addSql('CREATE TABLE sylius_product_archetype (id INT AUTO_INCREMENT NOT NULL, parent_id INT DEFAULT NULL, name VARCHAR(255) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME DEFAULT NULL, INDEX IDX_A4001B52727ACA70 (parent_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
@@ -34,7 +43,7 @@ class Version20141214134644 extends AbstractMigration
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
-        
+
         $this->addSql('ALTER TABLE sylius_product_archetype DROP FOREIGN KEY FK_A4001B52727ACA70');
         $this->addSql('ALTER TABLE sylius_product_archetype_option DROP FOREIGN KEY FK_BCE763A7FE884EAC');
         $this->addSql('ALTER TABLE sylius_product_archetype_attribute DROP FOREIGN KEY FK_97763342732C6CC7');

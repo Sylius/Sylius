@@ -12,37 +12,29 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\OrderProcessing\TaxationProcessorInterface;
+use Sylius\Component\Core\Taxation\OrderTaxesApplicatorInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * Order taxation listener.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderTaxationListener
 {
     /**
-     * Order taxation processor.
-     *
-     * @var TaxationProcessorInterface
+     * @var OrderTaxesApplicatorInterface
      */
-    protected $taxationProcessor;
+    protected $orderTaxesApplicator;
 
     /**
-     * Constructor.
-     *
-     * @param TaxationProcessorInterface $taxationProcessor
+     * @param OrderTaxesApplicatorInterface $orderTaxesApplicator
      */
-    public function __construct(TaxationProcessorInterface $taxationProcessor)
+    public function __construct(OrderTaxesApplicatorInterface $orderTaxesApplicator)
     {
-        $this->taxationProcessor = $taxationProcessor;
+        $this->orderTaxesApplicator = $orderTaxesApplicator;
     }
 
     /**
-     * Get the order from event and run the taxation processor on it.
-     *
      * @param GenericEvent $event
      *
      * @throws UnexpectedTypeException
@@ -58,8 +50,6 @@ class OrderTaxationListener
             );
         }
 
-        $this->taxationProcessor->applyTaxes($order);
-
-        $order->calculateTotal();
+        $this->orderTaxesApplicator->apply($order);
     }
 }

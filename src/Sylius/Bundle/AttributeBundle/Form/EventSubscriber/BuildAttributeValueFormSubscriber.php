@@ -41,10 +41,10 @@ class BuildAttributeValueFormSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT   => 'preSubmit',
-        );
+            FormEvents::PRE_SUBMIT => 'preSubmit',
+        ];
     }
 
     /**
@@ -68,15 +68,14 @@ class BuildAttributeValueFormSubscriber implements EventSubscriberInterface
     {
         $attributeValue = $event->getData();
 
-        if (!isset($attributeValue['value']) || !isset($attributeValue['attribute'])) {
-            throw new \InvalidArgumentException('Cannot create an attribute value form on pre submit event without "attribute" and "value" keys in data.');
+        if (!isset($attributeValue['attribute'])) {
+            throw new \InvalidArgumentException('Cannot create an attribute value form on pre submit event without an "attribute" key in data.');
         }
 
         $form = $event->getForm();
         $attribute = $this->attributeRepository->find($attributeValue['attribute']);
 
         $this->addValueField($form, $attribute);
-
     }
 
     /**
@@ -85,7 +84,7 @@ class BuildAttributeValueFormSubscriber implements EventSubscriberInterface
      */
     private function addValueField(FormInterface $form, AttributeInterface $attribute)
     {
-        $options = array('auto_initialize' => false, 'label' => $attribute->getName());
+        $options = ['auto_initialize' => false, 'label' => $attribute->getName()];
 
         $form->add('value', 'sylius_attribute_type_'.$attribute->getType(), $options);
     }

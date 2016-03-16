@@ -1,0 +1,30 @@
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+<div class="login-box">
+    <div class="login-logo">
+        <a href="http://sylius.org" target="_blank">
+            <img src="{{ asset('assets/img/logo.png') }}" alt="Sylius" class="login-logo-sylius" />
+        </a>
+    </div>
+    <div class="login-box-body">
+        {% if last_error %}
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                {{ last_error.message }}
+            </div>
+        {% endif %}
+
+        <form action="{{ action|default('/') }}" method="post">
+            {{ form_row(form._username, {'value': last_username|default('')}) }}
+            {{ form_row(form._password) }}
+            {{ form_row(form._remember_me) }}
+            <div class="row">
+                <div class="col-xs-8">
+                </div>
+                <div class="col-xs-4">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">{{ 'sylius.ui.sign_in'|trans }}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

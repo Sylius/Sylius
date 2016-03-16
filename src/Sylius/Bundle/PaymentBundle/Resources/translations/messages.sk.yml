@@ -13,7 +13,6 @@ sylius:
     payment:
       amount: Suma platby
       method: Spôsob platby
-      fee_calculator: Vypočet poplatku
       state:
         header: Stav platby
         checkout: Košík
@@ -26,14 +25,9 @@ sylius:
         unknown: Neznáme
         void: Neplatné
         cancelled: Zrušené
-        refunded: Vrátené
+        refunded: Vrátené peniaze
     payment_method:
       description: Popis
-      enabled: Povolené?
+      enabled: Zapnuté?
       gateway: Brána
       name: Názov
-      fee_calculator:
-        fixed:
-          amount: Suma
-        percent:
-          percent: '%'

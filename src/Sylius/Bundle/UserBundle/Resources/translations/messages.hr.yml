@@ -2,28 +2,25 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    email: Email
-    register: Registracija
-    login: Prijavi se
-    logout: Odjavi se
-    change_password: Promijenite lozinku
-    account_panel_outline: Uživajte u svim opcijama koje su vam dostupne.
   form:
     group:
       name: Naziv grupe
       roles: Role (korisnička prava)
     user:
-      email: Email
+      email: E-mail
       enabled: Omogući
       password:
         label: Lozinka
+        confirmation: Verifikacija
+      remember_me: Zapamti me
       shipping_address: Adresa za dostavu
     customer:
       first_name: Ime
       groups: Grupe
       last_name: Prezime
-      email: Email
+      email: E-mail
+      phone_number: Kontakt telefon
+      birthday: Datum rođenja
       billing_address: Adresa za dostavu
       different_billing_address: Želim koristiti drugu adresu za račun.
     user_filter:

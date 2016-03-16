@@ -19,57 +19,15 @@
     <parameters>
         <parameter key="sylius.context.cart.class">Sylius\Component\Cart\Context\CartContext</parameter>
 
-        <parameter key="sylius.model.cart.class">%sylius.model.order.class%</parameter>
-        <parameter key="sylius.model.cart_item.class">%sylius.model.order_item.class%</parameter>
-
         <parameter key="sylius.cart_provider.default.class">Sylius\Bundle\CartBundle\Provider\CartProvider</parameter>
 
         <parameter key="sylius.listener.cart.class">Sylius\Bundle\CartBundle\EventListener\CartSubscriber</parameter>
         <parameter key="sylius.listener.cart_flash.class">Sylius\Bundle\CartBundle\EventListener\FlashSubscriber</parameter>
-        <parameter key="sylius.listener.cart_refresh.class">Sylius\Bundle\CartBundle\EventListener\RefreshCartListener</parameter>
 
         <parameter key="sylius.cart.purger.class">Sylius\Bundle\CartBundle\Purger\ExpiredCartsPurger</parameter>
     </parameters>
 
     <services>
-        <service id="sylius.controller.cart" class="%sylius.controller.cart.class%">
-            <argument type="service">
-                <service factory-service="sylius.controller.configuration_factory" factory-method="createConfiguration" class="Sylius\Bundle\ResourceBundle\Controller\Configuration">
-                    <argument>sylius</argument>
-                    <argument>cart</argument>
-                    <argument>SyliusCartBundle:Cart</argument>
-                </service>
-            </argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-
-        <service id="sylius.controller.cart_item" class="%sylius.controller.cart_item.class%">
-            <argument type="service">
-                <service factory-service="sylius.controller.configuration_factory" factory-method="createConfiguration" class="Sylius\Bundle\ResourceBundle\Controller\Configuration">
-                    <argument>sylius</argument>
-                    <argument>cart_item</argument>
-                    <argument>SyliusCartBundle:CartItem</argument>
-                </service>
-            </argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-
-        <service id="sylius.form.type.cart" class="%sylius.form.type.cart.class%">
-            <argument>%sylius.model.cart.class%</argument>
-            <argument>%sylius.validation_groups.cart%</argument>
-            <tag name="form.type" alias="sylius_cart" />
-        </service>
-
-        <service id="sylius.form.type.cart_item" class="%sylius.form.type.cart_item.class%">
-            <argument>%sylius.model.cart_item.class%</argument>
-            <argument>%sylius.validation_groups.cart_item%</argument>
-            <tag name="form.type" alias="sylius_cart_item" />
-        </service>
-
         <service id="sylius.context.cart" class="%sylius.context.cart.class%">
             <argument /> <!-- Storage service name comes from config -->
         </service>
@@ -86,6 +44,7 @@
             <argument type="service" id="sylius.manager.cart" />
             <argument type="service" id="validator" />
             <argument type="service" id="sylius.cart_provider" />
+            <argument type="service" id="sylius.order_item_quantity_modifier" />
         </service>
 
         <service id="sylius.listener.cart_flash" class="%sylius.listener.cart_flash.class%">
@@ -93,10 +52,6 @@
             <argument type="service" id="session" />
             <argument type="service" id="translator" />
             <call method="setMessages"/>
-        </service>
-
-        <service id="sylius.listener.cart_refresh" class="%sylius.listener.cart_refresh.class%">
-            <tag name="kernel.event_listener" event="sylius.cart_change" method="refreshCart" priority="255" />
         </service>
 
         <service id="sylius.cart.purger" class="%sylius.cart.purger.class%">

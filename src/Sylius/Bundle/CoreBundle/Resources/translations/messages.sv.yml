@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  checkout:
-    shipping_method:
-      not_blank: Välj ett leveranssätt.
   form:
     action:
       add_product_configuration:
@@ -21,6 +18,8 @@ sylius:
     group:
       name: Namn
       roles: Roller
+    channel:
+      currency_default: Standardvaluta
     image:
       file: Bild
     locale:
@@ -36,10 +35,11 @@ sylius:
     product:
       shipping_category: Kategori
       short_description: Kort beskrivning
-      tax_category: Momskategori
     product_filter:
       name: Namn
       sku: SKU
+    product_variant:
+      tax_category: Momskategori
     settings:
       general:
         currency: Standardvaluta
@@ -73,3 +73,5 @@ sylius:
       roles: Roller
     variant:
       sku: SKU
+    product_association_type:
+      name: Namn

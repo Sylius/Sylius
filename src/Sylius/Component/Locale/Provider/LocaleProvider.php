@@ -64,10 +64,10 @@ class LocaleProvider implements LocaleProviderInterface
      */
     protected function getEnabledLocalesCodes()
     {
-        $localesCodes = array();
+        $localesCodes = [];
 
         /** @var LocaleInterface[] $locales */
-        $locales = $this->localeRepository->findBy(array('enabled' => true));
+        $locales = $this->localeRepository->findBy(['enabled' => true]);
         foreach ($locales as $locale) {
             $localesCodes[] = $locale->getCode();
         }

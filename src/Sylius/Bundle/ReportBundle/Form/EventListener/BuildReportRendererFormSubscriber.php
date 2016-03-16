@@ -46,10 +46,10 @@ class BuildReportRendererFormSubscriber implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT   => 'preBind',
-        );
+            FormEvents::PRE_SUBMIT => 'preBind',
+        ];
     }
 
     public function preSetData(FormEvent $event)
@@ -85,17 +85,17 @@ class BuildReportRendererFormSubscriber implements EventSubscriberInterface
      * @param string        $rendererType
      * @param array         $data
      */
-    public function addConfigurationFields(FormInterface $form, $rendererType, array $data = array())
+    public function addConfigurationFields(FormInterface $form, $rendererType, array $data = [])
     {
         $renderer = $this->rendererRegistry->get($rendererType);
-        $formType = sprintf('sylius_renderer_%s', $renderer->getType());
+        $formType = $renderer->getType();
 
         try {
             $configurationField = $this->factory->createNamed(
                 'rendererConfiguration',
                 $formType,
                 $data,
-                array('auto_initialize' => false)
+                ['auto_initialize' => false]
             );
         } catch (\InvalidArgumentException $e) {
             return;

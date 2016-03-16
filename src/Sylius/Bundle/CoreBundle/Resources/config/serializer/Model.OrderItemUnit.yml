@@ -1,0 +1,9 @@
+Sylius\Component\Core\Model\OrderItemUnit:
+    exclusion_policy: ALL
+    xml_root_name: order-item-unit
+    relations:
+        - rel: order
+          href:
+                route: sylius_api_order_show
+                parameters:
+                    id: expr(object.getOrderItem().getOrder().getId())

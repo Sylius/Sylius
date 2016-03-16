@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\AddressingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -24,7 +25,7 @@ class ProvinceTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Province', array('sylius'));
+        $this->beConstructedWith('Province', ['sylius']);
     }
 
     function it_is_initializable()
@@ -47,21 +48,33 @@ class ProvinceTypeSpec extends ObjectBehavior
         $builder
             ->add('name', 'text', Argument::any())
             ->shouldBeCalled()
-            ->willReturn($builder);
+            ->willReturn($builder)
+        ;
 
-        $this->buildForm($builder, array());
+        $builder
+            ->add('abbreviation', 'text', Argument::any())
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+
+        $builder
+            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+
+        $this->buildForm($builder, []);
     }
 
     function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(
-                array(
-                    'data_class'        => 'Province',
-                    'validation_groups' => array('sylius')
-                )
-            )
-            ->shouldBeCalled();
+            ->setDefaults([
+                'data_class' => 'Province',
+                'validation_groups' => ['sylius'],
+            ])
+            ->shouldBeCalled()
+        ;
 
         $this->configureOptions($resolver);
     }

@@ -17,15 +17,11 @@ namespace Sylius\Component\Resource\Model;
 interface SlugAwareInterface
 {
     /**
-     * Get permalink/slug.
-     *
      * @return string
      */
     public function getSlug();
 
     /**
-     * Set permalink/slug.
-     *
      * @param string $slug
      */
     public function setSlug($slug = null);

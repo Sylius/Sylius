@@ -38,9 +38,9 @@ class RbacExtension extends \Twig_Extension
      */
     public function getFunctions()
     {
-        return array(
-            new \Twig_SimpleFunction('sylius_is_granted', array($this, 'isGranted')),
-        );
+        return [
+            new \Twig_SimpleFunction('sylius_is_granted', [$this, 'isGranted']),
+        ];
     }
 
     /**

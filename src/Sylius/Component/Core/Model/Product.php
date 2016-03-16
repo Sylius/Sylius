@@ -16,8 +16,8 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Product\Model\Product as BaseProduct;
+use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
-use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
 
 /**
@@ -25,46 +25,29 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class Product extends BaseProduct implements ProductInterface
+class Product extends BaseProduct implements ProductInterface, ReviewableProductInterface
 {
     /**
-     * Variant selection method.
-     *
      * @var string
      */
     protected $variantSelectionMethod;
 
     /**
-     * Taxons.
-     *
      * @var Collection|BaseTaxonInterface[]
      */
     protected $taxons;
 
     /**
-     * Tax category.
-     *
-     * @var TaxCategoryInterface
-     */
-    protected $taxCategory;
-
-    /**
-     * Shipping category.
-     *
      * @var ShippingCategoryInterface
      */
     protected $shippingCategory;
 
     /**
-     * Not allowed to ship in this zone.
-     *
      * @var ZoneInterface
      */
     protected $restrictedZone;
 
     /**
-     * Channels in which this product is available.
-     *
      * @var ChannelInterface[]|Collection
      */
     protected $channels;
@@ -75,16 +58,40 @@ class Product extends BaseProduct implements ProductInterface
     protected $mainTaxon;
 
     /**
-     * Constructor.
+     * @var Collection|ReviewInterface[]
      */
+    protected $reviews;
+
+    /**
+     * @var float
+     */
+    protected $averageRating = 0;
+
     public function __construct()
     {
         parent::__construct();
 
         $this->taxons = new ArrayCollection();
         $this->channels = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
 
         $this->variantSelectionMethod = self::VARIANT_SELECTION_CHOICE;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMetadataClassIdentifier()
+    {
+        return self::METADATA_CLASS_IDENTIFIER;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMetadataIdentifier()
+    {
+        return $this->getMetadataClassIdentifier().'-'.$this->getId();
     }
 
     /**
@@ -118,7 +125,7 @@ class Product extends BaseProduct implements ProductInterface
      */
     public function setVariantSelectionMethod($variantSelectionMethod)
     {
-        if (!in_array($variantSelectionMethod, array(self::VARIANT_SELECTION_CHOICE, self::VARIANT_SELECTION_MATCH))) {
+        if (!in_array($variantSelectionMethod, [self::VARIANT_SELECTION_CHOICE, self::VARIANT_SELECTION_MATCH])) {
             throw new \InvalidArgumentException(sprintf('Wrong variant selection method "%s" given.', $variantSelectionMethod));
         }
 
@@ -215,24 +222,6 @@ class Product extends BaseProduct implements ProductInterface
     public function setPrice($price)
     {
         $this->getMasterVariant()->setPrice($price);
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTaxCategory()
-    {
-        return $this->taxCategory;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setTaxCategory(TaxCategoryInterface $category = null)
-    {
-        $this->taxCategory = $category;
 
         return $this;
     }
@@ -340,10 +329,10 @@ class Product extends BaseProduct implements ProductInterface
      */
     public static function getVariantSelectionMethodLabels()
     {
-        return array(
+        return [
             self::VARIANT_SELECTION_CHOICE => 'Variant choice',
-            self::VARIANT_SELECTION_MATCH  => 'Options matching',
-        );
+            self::VARIANT_SELECTION_MATCH => 'Options matching',
+        ];
     }
 
     /**
@@ -360,7 +349,6 @@ class Product extends BaseProduct implements ProductInterface
     public function setShortDescription($shortDescription)
     {
         $this->translate()->setShortDescription($shortDescription);
-        return $this;
     }
 
     /**
@@ -368,7 +356,7 @@ class Product extends BaseProduct implements ProductInterface
      */
     public function getMainTaxon()
     {
-       return $this->mainTaxon;
+        return $this->mainTaxon;
     }
 
     /**
@@ -377,5 +365,45 @@ class Product extends BaseProduct implements ProductInterface
     public function setMainTaxon(TaxonInterface $mainTaxon = null)
     {
         $this->mainTaxon = $mainTaxon;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getReviews()
+    {
+        return $this->reviews;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addReview(ReviewInterface $review)
+    {
+        $this->reviews->add($review);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeReview(ReviewInterface $review)
+    {
+        $this->reviews->remove($review);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAverageRating($averageRating)
+    {
+        $this->averageRating = $averageRating;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAverageRating()
+    {
+        return $this->averageRating;
     }
 }

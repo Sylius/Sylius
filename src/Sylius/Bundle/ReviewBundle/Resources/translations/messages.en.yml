@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        review:
+            header: Add a review
+            rating: Rating
+            title: Title
+            comment: Comment
+            author: Author
+            status:
+                label: Status
+                new: New
+                approved: Approved
+                rejected: Rejected
+            submit: Submit

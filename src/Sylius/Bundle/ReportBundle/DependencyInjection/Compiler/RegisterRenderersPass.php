@@ -33,7 +33,7 @@ class RegisterRenderersPass implements CompilerPassInterface
         }
 
         $registry = $container->getDefinition('sylius.registry.report.renderer');
-        $renderers = array();
+        $renderers = [];
 
         foreach ($container->findTaggedServiceIds('sylius.report.renderer') as $id => $attributes) {
             if (!isset($attributes[0]['renderer']) || !isset($attributes[0]['label'])) {
@@ -42,7 +42,7 @@ class RegisterRenderersPass implements CompilerPassInterface
 
             $name = $attributes[0]['renderer'];
             $renderers[$name] = $attributes[0]['label'];
-            $registry->addMethodCall('register', array($name, new Reference($id)));
+            $registry->addMethodCall('register', [$name, new Reference($id)]);
         }
 
         $container->setParameter('sylius.report.renderers', $renderers);

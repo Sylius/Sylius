@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sylius\Bundle\InstallerBundle\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
@@ -36,10 +45,10 @@ EOT
             return 1;
         }
 
-        $commands = array(
+        $commands = [
             'assets:install',
             'assetic:dump',
-        );
+        ];
 
         $this->runCommands($commands, $input, $output);
     }

@@ -57,7 +57,7 @@ class Coordinator implements CoordinatorInterface
      *
      * @var array
      */
-    protected $scenarios = array();
+    protected $scenarios = [];
 
     /**
      * Constructor.
@@ -104,23 +104,7 @@ class Coordinator implements CoordinatorInterface
         try {
             $this->context->rewindHistory();
         } catch (NotFoundHttpException $e) {
-            // The step we are supposed to display was not found in the history.
-            if (null === $this->context->getPreviousStep()) {
-                // There is no previous step go to start
-                return $this->start($scenarioAlias, $queryParameters);
-            }
-
-            // We will go back to previous step...
-            $history = $this->context->getStepHistory();
-            if (empty($history)) {
-                // There is no history
-                return $this->start($scenarioAlias);
-            }
-            $step = $process->getStepByName(end($history));
-
-            $this->context->initialize($process, $step);
-
-            return $this->redirectToStepDisplayAction($process, $step);
+            return $this->goToLastValidStep($process, $scenarioAlias);
         }
 
         return $this->processStepResult(
@@ -138,7 +122,12 @@ class Coordinator implements CoordinatorInterface
         $step = $process->getStepByName($stepName);
 
         $this->context->initialize($process, $step);
-        $this->context->rewindHistory();
+
+        try {
+            $this->context->rewindHistory();
+        } catch (NotFoundHttpException $e) {
+            return $this->goToLastValidStep($process, $scenarioAlias);
+        }
 
         return $this->processStepResult(
             $process,
@@ -227,18 +216,18 @@ class Coordinator implements CoordinatorInterface
         if (null !== $route = $process->getDisplayRoute()) {
             $url = $this->router->generate($route, array_merge(
                 $process->getDisplayRouteParams(),
-                array('stepName' => $step->getName()),
-                $queryParameters ? $queryParameters->all() : array()
+                ['stepName' => $step->getName()],
+                $queryParameters ? $queryParameters->all() : []
             ));
 
             return new RedirectResponse($url);
         }
 
         // Default parameters for display route
-        $routeParameters = array(
+        $routeParameters = [
             'scenarioAlias' => $process->getScenarioAlias(),
-            'stepName'      => $step->getName(),
-        );
+            'stepName' => $step->getName(),
+        ];
 
         if (null !== $queryParameters) {
             $routeParameters = array_merge($queryParameters->all(), $routeParameters);
@@ -247,6 +236,33 @@ class Coordinator implements CoordinatorInterface
         return new RedirectResponse(
             $this->router->generate('sylius_flow_display', $routeParameters)
         );
+    }
+
+    /**
+     * @param ProcessInterface $process
+     * @param string           $scenarioAlias
+     *
+     * @return RedirectResponse
+     */
+    protected function goToLastValidStep(ProcessInterface $process, $scenarioAlias)
+    {
+        //the step we are supposed to display was not found in the history.
+        if (null === $this->context->getPreviousStep()) {
+            //there is no previous step go to start
+            return $this->start($scenarioAlias);
+        }
+
+        //we will go back to previous step...
+        $history = $this->context->getStepHistory();
+        if (empty($history)) {
+            //there is no history
+            return $this->start($scenarioAlias);
+        }
+        $step = $process->getStepByName(end($history));
+
+        $this->context->initialize($process, $step);
+
+        return $this->redirectToStepDisplayAction($process, $step);
     }
 
     /**
