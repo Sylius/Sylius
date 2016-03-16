@@ -4,8 +4,10 @@
 sylius:
   form:
     review:
+      rating: Ocena
       title: Tytuł
       comment: Komentarz
       author: Autor
       status:
+        label: Status
         new: Nowy

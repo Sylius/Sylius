@@ -8,6 +8,8 @@ sylius:
       password: Mot de passe
       remember_me: Rester connecté
   ui:
+    are_your_sure_you_want_to_perform_this_action: Êtes-vous sûr de vouloir effectuer cette action ?
+    confirm_your_action: Confirmez votre action
     create: Créer
     dashboard: Tableau de bord
     delete: Supprimer
@@ -15,10 +17,16 @@ sylius:
     actions: Actions
     enabled: Activé
     description: Description
+    an_error_occurred: "Une erreur s'est produite"
+    last_updated: Dernière mise à jour
+    manage_taxation_of_your_products: Gérer la fiscalité de vos produits
     "no": false
+    no_results_to_display: "Il n'y a aucun résultat à afficher"
     powered_by: Propulsé par
+    tax_categories: Catégories de taxes
     sign_in: Connection
     sign_out: Déconnection
+    status: Statut
     success: Succès
     "yes": true
     new: Nouveau
@@ -26,6 +34,9 @@ sylius:
     new_tax_category: Nouvelle catégorie de taxe
     filter: Filtrer
     empty: Vide
+    starts_with: Commence par
+    ends_with: Se termine par
     countries: Pays
+    manage_country: Gérer le pays
     new_country: Nouveau pays
     locales: Locales

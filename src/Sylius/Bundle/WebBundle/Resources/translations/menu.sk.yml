@@ -59,7 +59,7 @@ sylius:
         archetypes: Produktové prototypy
         association_types: Priradenie produktov
         assortment: Sortiment
-        attributes: Nastavenia vlastností
+        attributes: Spravovať vlastností
         blocks: Bloky
         channels: Kanály
         configuration: Konfigurácia

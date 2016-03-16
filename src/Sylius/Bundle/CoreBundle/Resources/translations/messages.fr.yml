@@ -36,6 +36,7 @@ sylius:
       shipping_methods: Modes de livraison
       payment_methods: Moyens de paiement
       theme: Thème
+      hostname: "Nom d'hôte"
     image:
       file: Image
     locale:

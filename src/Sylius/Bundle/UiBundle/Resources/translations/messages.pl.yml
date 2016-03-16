@@ -16,6 +16,7 @@ sylius:
     enabled: Włączone
     description: Opis
     "no": false
+    status: Status
     success: Sukces
     "yes": true
     new: Nowy
