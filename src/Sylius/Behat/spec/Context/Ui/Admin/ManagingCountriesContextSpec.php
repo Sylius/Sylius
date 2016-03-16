@@ -13,6 +13,7 @@ namespace spec\Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
+use PhpSpec\Exception\Example\NotEqualException;
 use PhpSpec\ObjectBehavior;
 use Sylius\Behat\Context\Ui\Admin\ManagingCountriesContext;
 use Sylius\Behat\Page\Admin\Country\CreatePageInterface;
@@ -22,6 +23,8 @@ use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 
 /**
+ * @mixin ManagingCountriesContext
+ *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 class ManagingCountriesContextSpec extends ObjectBehavior
@@ -54,7 +57,7 @@ class ManagingCountriesContextSpec extends ObjectBehavior
     {
         $countryCreatePage->open()->shouldBeCalled();
 
-        $this->iWantToCreateNewCountry();
+        $this->iWantToAddNewCountry();
     }
 
     function it_chooses_name_in_creation_form(CreatePageInterface $countryCreatePage)
@@ -177,5 +180,23 @@ class ManagingCountriesContextSpec extends ObjectBehavior
     {
         $countryUpdatePage->isCodeFieldDisabled()->willReturn(false);
         $this->shouldThrow(\InvalidArgumentException::class)->during('theCodeFieldShouldBeDisabled');
+    }
+
+    function it_asserts_that_a_country_has_the_province(CountryInterface $country, UpdatePageInterface $countryUpdatePage)
+    {
+        $country->getId()->willReturn(1);
+        $countryUpdatePage->isOpen(['id' => 1])->willReturn(true);
+        $countryUpdatePage->isThereProvince('Scotland')->willReturn(true);
+
+        $this->countryShouldHaveProvince($country, 'Scotland');
+    }
+
+    function it_throws_exception_if_a_country_does_not_have_the_province(CountryInterface $country, UpdatePageInterface $countryUpdatePage)
+    {
+        $country->getId()->willReturn(1);
+        $countryUpdatePage->isOpen(['id' => 1])->willReturn(true);
+        $countryUpdatePage->isThereProvince('Scotland')->willReturn(false);
+
+        $this->shouldThrow(NotEqualException::class)->during('countryShouldHaveProvince', [$country, 'Scotland']);
     }
 }

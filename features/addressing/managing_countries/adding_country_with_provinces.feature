@@ -7,12 +7,12 @@ Feature: Adding countries with provinces
     Background:
         Given I am logged in as administrator
 
-    @todo
+    @ui
     Scenario: Adding a country with a province
-        Given I want to create a new country with a province
+        Given I want to add a new country with a province
         When I choose "United Kingdom"
         And I add the "Scotland" province with "GB-SCT" code
         And I add it
-        Then I should be notified about success
+        Then I should be notified about successful creation
         And the country "United Kingdom" should appear in the store
-        And it should have the "Scotland" province
+        And this country should have the "Scotland" province
