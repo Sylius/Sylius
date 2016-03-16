@@ -91,6 +91,7 @@ EOT
         ];
 
         $this->runCommands($commands, $input, $output);
+        $output->writeln('');
 
         $this->commandExecutor->runCommand('sylius:install:sample-data', [], $output);
     }
