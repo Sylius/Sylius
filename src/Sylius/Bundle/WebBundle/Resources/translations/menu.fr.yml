@@ -93,6 +93,7 @@ sylius:
         report: Rapports
         roles: Rôles
         routes: Chemins
+        review: Avis
         sales: Commandes
         security_settings: Paramètres de sécurité
         shipments: Expéditions

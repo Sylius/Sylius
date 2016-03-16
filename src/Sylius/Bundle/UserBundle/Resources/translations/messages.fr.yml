@@ -24,6 +24,7 @@ sylius:
       birthday: Date d’anniversaire 
       billing_address: Adresse de facturation
       different_billing_address: Utiliser une adresse différente pour la facturation ?
+      only_customer_registration: Créer un compte ?
     user_filter:
       query: Rechercher
     user_change_password:

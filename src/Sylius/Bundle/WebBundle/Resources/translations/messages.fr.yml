@@ -248,6 +248,8 @@ sylius:
       index: Rapports
     role:
       index: Rôles
+    review:
+      index: Avis
     route:
       index: Chemins
     sales: Ventes
@@ -303,6 +305,7 @@ sylius:
     update: Modifier
     update_header: "Mise à jour d'un canal"
     updated_at: Date de modification
+    hostname: "Nom d'hôte"
     theme: Thème
   checkout:
     addressing:
@@ -675,9 +678,14 @@ sylius:
     total: Total
     update_header: Modification de la commande
   review:
+    create: Nouvel avis
+    manage: Gérer les avis
+    no_reviews: "Il n'y a aucun avis."
     id: ID
     subject: Sujet
     title: Titre
+    status: Statut
+    rating: Note
     author: Auteur
     guest: Invité
     created_at: Date de création
@@ -790,6 +798,7 @@ sylius:
     options: Options
     original_price: "Prix d'origine"
     price: Prix
+    rating: Note
     restricted_zone: Restriction de zone
     remove_attribute: "Supprimer l'attribut"
     shipping_category: Catégorie de livraison

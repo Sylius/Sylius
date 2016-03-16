@@ -78,6 +78,7 @@ sylius:
         locales: Ustawienia regionalne
         marketing: Marketing
         menus: Menu
+        metadata: Informacje o dokumencie
         new_order: Dodaj nowe zamówienie
         new_promotion: Dodaj nową promocję
         options: Warianty

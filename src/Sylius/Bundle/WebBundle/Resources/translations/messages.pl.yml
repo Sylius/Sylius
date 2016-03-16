@@ -16,10 +16,12 @@ sylius:
         no_billing: Brak domyślnego adresu rozliczeniowego
         no_shipping: Brak domyślnego adresu wysyłkowego
         shipping: Domyślny adres wysyłkowy
+      empty: Nie masz ustawionych adresów
       list: Wszystkie Twoje adresy
       update: Edytuj adres
     home:
       email: Email
+      id: ID klienta
       last5orders: 5 ostatnich zamówień
       since: Jesteś naszym klientem od
       welcome: Witaj w swoim panelu
@@ -42,6 +44,7 @@ sylius:
     title: Moje konto
   add_to_cart: Dodaj do koszyka
   association_type:
+    index_header: Typy powiązań
     name: Nazwa
     create: Utwórz
   address:
@@ -60,11 +63,14 @@ sylius:
     warning: Ostrzeżenie
   archetype:
     attributes: Cechy
+    build: Zbuduj prototyp
     create: Stwórz archetyp
+    create_header: Nowy prototyp
     index_header: Szablony produktów
     name: Nazwa
     options: Warianty
     parent: Rodzic
+    update_header: Edytowanie prototypu
     updated_at: Zmodyfikowano
   backend:
     alert:
@@ -194,6 +200,8 @@ sylius:
       index: Menu
     menu_node:
       index: Węzły menu
+    metadata:
+      index: Informacje o dokumencie
     new: Nowy
     option:
       index: Warianty
@@ -210,16 +218,22 @@ sylius:
       index: Uprawnienia
     product:
       index: Produkty
+    association_type:
+      index: Typy powiązań
     promotion:
       index: Promocje
     promotion_coupon:
       index: Kupony
+    product_association:
+      index: Powiązanie
     product_association_type:
       index: Rodzaj powiązania
     report:
       index: Raporty
     role:
       index: Role
+    review:
+      index: Opinie
     route:
       index: Ścieżki
     sales: Sprzedaż
@@ -271,9 +285,11 @@ sylius:
     locale_default: Domyślne ustawienia regionalne
     manage: Zarządzanie kanałami
     name: Nazwa
+    no_results: Nie ma żadnych skonfigurowanych kanałów
     update: Edytuj
     update_header: Edycja kanału
     updated_at: Zmodyfikowano
+    theme: Motyw
   checkout:
     addressing:
       header: Adres
@@ -322,6 +338,7 @@ sylius:
       header: 'Zaloguj się do sklepu <small>lub utwórz nowe konto</small>'
       login: Zaloguj
       new_customer: Nowy Klient
+      proceed_order: Kontynuuj zamówienie
       register: Rejestracja
     shipping:
       header: Metoda wysyłki
@@ -375,11 +392,13 @@ sylius:
     creation_date: Data utworzenia
     email: Email
     filter:
+      all: Pokaż wszystkich klientów
       unconfirmed: Pokaż niepotwierdzone konta
     first_name: Imię
     groups: Grupy
     id: ID
     last_name: Nazwisko
+    manage: Zarządzanie klientami
     orders: Zamówienia klienta
     recent_header: Ostatni klienci
     shipping_address: Adres dostawy
@@ -502,6 +521,7 @@ sylius:
   metadata:
     id: ID
     content: Treść
+    index_metadata: Informacje o dokumencie
   na: N/D
   newest: Najnowsze produkty
   "no": false
@@ -570,6 +590,7 @@ sylius:
     state:
       cancelled: Anulowane
       checkout: Koszyk
+      ordered: Zamówione
       returned: Zwrócone
       shipped: Dostarczono
     tax_total: Podatek łącznie
@@ -580,6 +601,8 @@ sylius:
     id: ID
     subject: Temat
     title: Tytuł
+    status: Status
+    rating: Ocena
     author: Autor
     guest: Gość
     created_at: Utworzono
@@ -657,6 +680,7 @@ sylius:
     add_attribute: Dodaj cechę
     archetype: Szablon
     attributes: Cechy
+    association: Powiązanie
     available_on: Dostępny od
     available_on_demand: Dostępny na zamówienie
     available_until: Dostępne do
@@ -683,6 +707,7 @@ sylius:
     options: Warianty
     original_price: Oryginalna cena
     price: Cena detaliczna
+    rating: Ocena
     restricted_zone: Strefa zamknięta
     remove_attribute: Usuń cechę
     shipping_category: Kategoria wysyłki
