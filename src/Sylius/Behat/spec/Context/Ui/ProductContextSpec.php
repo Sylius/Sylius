@@ -17,11 +17,8 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Behat\Context\Ui\ProductContext;
 use Sylius\Behat\Page\Admin\Product\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Product\ShowPageInterface;
-use Sylius\Behat\Page\Product\ProductShowPage;
-use Sylius\Behat\Page\Admin\Product\ShowPage as AdminProductShowPage;
 use Sylius\Behat\Page\Product\ProductShowPageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Test\Services\SharedStorage;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
 /**

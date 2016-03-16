@@ -14,8 +14,6 @@ namespace Sylius\Behat\Context\Ui;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Product\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Product\ShowPageInterface;
-use Sylius\Behat\Page\Product\ProductShowPage;
-use Sylius\Behat\Page\Admin\Product\ShowPage as AdminProductShowPage;
 use Sylius\Behat\Page\Product\ProductShowPageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
@@ -32,12 +30,12 @@ final class ProductContext implements Context
     private $sharedStorage;
 
     /**
-     * @var ProductShowPage
+     * @var ProductShowPageInterface
      */
     private $productShowPage;
 
     /**
-     * @var AdminProductShowPage
+     * @var ShowPageInterface
      */
     private $adminProductShowPage;
 

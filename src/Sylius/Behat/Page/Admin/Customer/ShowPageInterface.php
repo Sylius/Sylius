@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Page\Customer;
+namespace Sylius\Behat\Page\Admin\Customer;
 
 use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Page\PageInterface;
@@ -17,7 +17,7 @@ use Sylius\Behat\Page\PageInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-interface CustomerShowPageInterface extends PageInterface
+interface ShowPageInterface extends PageInterface
 {
     /**
      * Checks if the customer on whose page we are currently on is registered,

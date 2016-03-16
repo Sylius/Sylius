@@ -43,24 +43,24 @@ final class ProductContext implements Context
     /**
      * @var RepositoryInterface
      */
-    private $reviewRepository;
+    private $productReviewRepository;
 
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param RepositoryInterface $productRepository
      * @param ProductVariantRepositoryInterface $productVariantRepository
-     * @param RepositoryInterface $reviewRepository
+     * @param RepositoryInterface $productReviewRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         RepositoryInterface $productRepository,
         ProductVariantRepositoryInterface $productVariantRepository,
-        RepositoryInterface $reviewRepository
+        RepositoryInterface $productReviewRepository
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->productRepository = $productRepository;
         $this->productVariantRepository = $productVariantRepository;
-        $this->reviewRepository = $reviewRepository;
+        $this->productReviewRepository = $productReviewRepository;
     }
 
     /**
@@ -153,7 +153,7 @@ final class ProductContext implements Context
      */
     public function thereAreNoProductReviews(ProductInterface $product)
     {
-        expect($this->reviewRepository->findBy(['reviewSubject' => $product]))->toBe([]);
+        expect($this->productReviewRepository->findBy(['reviewSubject' => $product]))->toBe([]);
     }
 
     /**

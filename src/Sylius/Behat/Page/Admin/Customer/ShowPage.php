@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Page\Customer;
+namespace Sylius\Behat\Page\Admin\Customer;
 
 use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
@@ -17,7 +17,7 @@ use Sylius\Behat\Page\SymfonyPage;
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
-class CustomerShowPage extends SymfonyPage implements CustomerShowPageInterface
+class ShowPage extends SymfonyPage implements ShowPageInterface
 {
     /**
      * {@inheritdoc}
