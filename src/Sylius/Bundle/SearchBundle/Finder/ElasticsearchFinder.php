@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\SearchBundle\Finder;
 
+use Elastica\Filter\BoolFilter;
 use Sylius\Bundle\SearchBundle\Doctrine\ORM\SearchIndexRepository;
 use Sylius\Bundle\SearchBundle\Query\Query;
 use Sylius\Bundle\SearchBundle\Query\SearchStringQuery;
@@ -22,6 +23,7 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
  * Elasticsearch Finder
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
+ * @author Nicolas Adler <nicolas.adler@openizi.com>
  */
 class ElasticsearchFinder extends AbstractFinder
 {
@@ -183,6 +185,9 @@ class ElasticsearchFinder extends AbstractFinder
         $elasticaQuery = new \Elastica\Query();
         $boolFilter = new \Elastica\Filter\BoolFilter();
 
+        // Add available filter
+        $this->addAvailableProductsFilters($boolFilter);
+
         if (!empty($types)) {
             foreach ($types as $type) {
                 $typeFilter = new \Elastica\Filter\Type($type);
@@ -205,7 +210,6 @@ class ElasticsearchFinder extends AbstractFinder
         $boolFilter->addMust($taxonFromRequestFilter);
 
         $query->setFilter($boolFilter);
-
         $elasticaQuery->setQuery($query);
 
         return $this->compileElasticsearchQuery($elasticaQuery, $facets, $configuration);
@@ -224,35 +228,34 @@ class ElasticsearchFinder extends AbstractFinder
     {
         $elasticaQuery = new \Elastica\Query();
         $boolFilter = new \Elastica\Filter\BoolFilter();
-        $query = new \Elastica\Query\QueryString($searchTerm);
+        $query = new \Elastica\Query\Filtered();
+        $query->setQuery(new \Elastica\Query\QueryString($searchTerm));
+
+        // Add available filter (enabled, etc.)
+        $this->addAvailableProductsFilters($boolFilter);
 
         if (!empty($types)) {
             foreach ($types as $type) {
                 $typeFilter = new \Elastica\Filter\Type($type);
                 $boolFilter->addMust($typeFilter);
             }
-            $elasticaQuery->setPostFilter($boolFilter);
         }
 
         if ($channel = $this->channelContext->getChannel()) {
             $channelFilter = new \Elastica\Filter\Terms();
             $channelFilter->setTerms('channels', [(string) $channel]);
             $boolFilter->addMust($channelFilter);
-            $elasticaQuery->setPostFilter($boolFilter);
         }
 
         // this is currently the only pre search filter and it's a taxon
         // this should be abstracted out if other types of pre search filters are desired
         if ('all' !== $preSearchTaxonFilter) {
-            $query = new \Elastica\Query\Filtered();
-            $query->setQuery(new \Elastica\Query\QueryString($searchTerm));
-
             $taxonFromRequestFilter = new \Elastica\Filter\Terms();
             $taxonFromRequestFilter->setTerms('taxons', [$preSearchTaxonFilter]);
             $boolFilter->addMust($taxonFromRequestFilter);
-            $elasticaQuery->setPostFilter($boolFilter);
         }
 
+        $query->setFilter($boolFilter);
         $elasticaQuery->setQuery($query);
 
         return $this->compileElasticsearchQuery($elasticaQuery, $appliedFilters, $configuration);
@@ -281,6 +284,74 @@ class ElasticsearchFinder extends AbstractFinder
     }
 
     /**
+     * Add available products filters
+     *
+     * Add filter in order to display only available products to purchase
+     *
+     * @param BoolFilter $boolFilter
+     */
+    public function addAvailableProductsFilters(BoolFilter $boolFilter)
+    {
+        // Add enabled filter
+        $enabledFilter = new \Elastica\Filter\Term(array('enabled' => true));
+        $boolFilter->addMust($enabledFilter);
+
+        $nestedOrFilter = new \Elastica\Filter\BoolOr();
+        $this->addAvailableProductsVariantFilters($nestedOrFilter, 'variants');
+        $this->addAvailableProductsVariantFilters($nestedOrFilter, 'masterVariant');
+
+        // Add to global boolFilter
+        $boolFilter->addMust($nestedOrFilter);
+    }
+
+    /**
+     * Add available products filter for variants (or master variant)
+     *
+     * @param \Elastica\Filter\BoolOr $nestedOrFilter Nested or filter
+     * @param string                  $nestedProperty Nested property (can be 'variants' or 'masterVariant')
+     */
+    private function addAvailableProductsVariantFilters(\Elastica\Filter\BoolOr $nestedOrFilter, $nestedProperty)
+    {
+        // Add nested requirements
+        $variantsNestedBool = new \Elastica\Query\BoolQuery();
+        $variantsNestedBool->setMinimumNumberShouldMatch(1);
+
+        // Add availableOn
+        $availableOn = new \Elastica\Query\Range($nestedProperty . '.availableOn', array('lte' => "now"));
+        $variantsNestedBool->addMust($availableOn);
+
+        // Add availableUntil (if setted!)
+        $availableUntil = new \Elastica\Query\Filtered();
+        $availableUntilFilter = new \Elastica\Filter\BoolOr();
+
+        // Deal with null values
+        $availableUntilNull = new \Elastica\Filter\Missing($nestedProperty . '.availableUntil');
+        $availableUntilFilter->addFilter($availableUntilNull);
+
+        // Deal with setted values
+        $availableUntilGte = new \Elastica\Filter\Range($nestedProperty . '.availableUntil', array('gte' => time()));
+        $availableUntilFilter->addFilter($availableUntilGte);
+
+        $availableUntil->setFilter($availableUntilFilter);
+        $variantsNestedBool->addMust($availableUntil);
+
+        // Add availableOnDemand  or onHold/onHand
+        $availableOnDemand = new \Elastica\Query\Term(array($nestedProperty . '.availableOnDemand' => true));
+        $variantsNestedBool->addShould($availableOnDemand);
+
+        $onHand = new \Elastica\Query\Range($nestedProperty . '.onHand', array('gt' => 0));
+        $variantsNestedBool->addShould($onHand);
+
+        // Create nested filter
+        $nested = new \Elastica\Filter\Nested();
+        $nested->setPath($nestedProperty);
+        $nested->setQuery($variantsNestedBool);
+
+        // Add it to nested or filter
+        $nestedOrFilter->addFilter($nested);
+    }
+
+    /**
      * @param $elements
      *
      * @return array
@@ -297,7 +368,7 @@ class ElasticsearchFinder extends AbstractFinder
                 $facets[$name] = $facetData['buckets'];
             }
         }
-        
+
         foreach ($facets as &$facet) {
             $facet = array_filter($facet, function($v){
                 return $v["doc_count"] != 0;

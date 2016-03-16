@@ -166,4 +166,50 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
             ],
         ]);
     }
+
+    /**
+     * Add elastica product listener
+     *
+     * Only if elastica is search engine
+     *
+     * @param ContainerBuilder $container
+     */
+    public function prependElasticaProductListener(ContainerBuilder $container)
+    {
+        $config = $this->processConfiguration(new Configuration(), $container->getExtensionConfig($this->getAlias()));
+
+        if (!$container->hasExtension('fos_elastica') || !$container->hasExtension('sylius_search')) {
+            return;
+        }
+
+        $syliusSearchConfigs = $container->getExtensionConfig('sylius_search');
+
+        // Get engine
+        $engine = null;
+        foreach ($syliusSearchConfigs as $syliusSearchConfig) {
+            if (isset($syliusSearchConfig['engine'])) {
+                $engine = $syliusSearchConfig['engine'];
+            }
+        }
+
+        if ($engine === 'elasticsearch') {
+            $elasticaConfigs = $container->getExtensionConfig('fos_elastica');
+            foreach ($elasticaConfigs as $elasticaConfig) {
+                foreach ($elasticaConfig['indexes'] as $index => $config) {
+                    $tags = array('doctrine.event_listener' => array(
+                        array('name' => 'doctrine.event_listener', 'event' => 'postPersist'),
+                        array('name' => 'doctrine.event_listener', 'event' => 'postUpdate'),
+                        array('name' => 'doctrine.event_listener', 'event' => 'postRemove'),
+                        array('name' => 'doctrine.event_listener', 'event' => 'postFlush'),
+                    ));
+
+                    $elasticaProductListenerDefinition = new Definition(ElasticaProductListener::class);
+                    $elasticaProductListenerDefinition->addArgument(new Reference('fos_elastica.object_persister.' . $index . '.product'));
+                    $elasticaProductListenerDefinition->setTags($tags);
+
+                    $container->setDefinition('sylius_product.listener.product_update', $elasticaProductListenerDefinition);
+                }
+            }
+        }
+    }
 }
