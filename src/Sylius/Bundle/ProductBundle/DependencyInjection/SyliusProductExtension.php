@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ProductBundle\DependencyInjection;
 
 use Sylius\Bundle\ProductBundle\Controller\VariantController;
 use Sylius\Bundle\ProductBundle\Form\Type\VariantType;
+use Sylius\Bundle\ProductBundle\EventListener\ElasticaProductListener;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Sylius\Component\Product\Factory\ProductVariantFactory;
 use Sylius\Component\Product\Model\Attribute;
