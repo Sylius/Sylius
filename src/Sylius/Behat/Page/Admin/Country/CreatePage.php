@@ -21,4 +21,15 @@ use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
     use ChoosesName;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function fillProvinceNameAndCode($name, $code)
+    {
+        $this->getDocument()->pressButton('Add province');
+
+        $this->getDocument()->fillField('Name', $name);
+        $this->getDocument()->fillField('Code', $code);
+    }
 }
