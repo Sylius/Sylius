@@ -67,8 +67,9 @@ final class ManagingCountriesContext implements Context
 
     /**
      * @Given I want to add a new country
+     * @Given I want to add a new country with a province
      */
-    public function iWantToCreateNewCountry()
+    public function iWantToAddNewCountry()
     {
         $this->countryCreatePage->open();
     }
@@ -87,6 +88,14 @@ final class ManagingCountriesContext implements Context
     public function iChoose($name)
     {
         $this->countryCreatePage->chooseName($name);
+    }
+
+    /**
+     * @When I add the :provinceName province with :prvinceCode code
+     */
+    public function iAddProvinceWithCode($provinceName, $provinceCode)
+    {
+        $this->countryCreatePage->fillProvinceNameAndCode($provinceName, $provinceCode);
     }
 
     /**
@@ -138,7 +147,7 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Then /^(country "[^"]+") should appear in the store$/
+     * @Then /^the (country "([^"]*)") should appear in the store$/
      */
     public function countryShouldAppearInTheStore(CountryInterface $country)
     {
@@ -188,5 +197,15 @@ final class ManagingCountriesContext implements Context
             $this->countryUpdatePage->isCodeFieldDisabled(),
             'Code field should be disabled but is not'
         );
+    }
+
+    /**
+     * @Then /^(this country) should have the "([^"]+)" province$/
+     */
+    public function countryShouldHaveProvince(CountryInterface $country, $provinceName)
+    {
+        expect($this->countryUpdatePage->isOpen(['id' => $country->getId()]))->toBe(true);
+
+        expect($this->countryUpdatePage->isThereProvince($provinceName))->toBe(true);
     }
 }

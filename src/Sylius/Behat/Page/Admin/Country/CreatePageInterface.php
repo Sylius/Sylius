@@ -22,4 +22,10 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param string $name
      */
     public function chooseName($name);
+
+    /**
+     * @param string $name
+     * @param string $code
+     */
+    public function fillProvinceNameAndCode($name, $code);
 }
