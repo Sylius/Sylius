@@ -31,6 +31,8 @@
         <parameter key="sylius.form.extension.date.class">Sylius\Bundle\ResourceBundle\Form\Extension\DateExtension</parameter>
         <parameter key="sylius.form.type.resource_choice.class">Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType</parameter>
 
+        <parameter key="sylius.event_subscriber.resource_delete.class">Sylius\Bundle\ResourceBundle\EventListener\ResourceDeleteSubscriber</parameter>
+
         <parameter key="sylius.event_subscriber.load_orm_metadata.class">Sylius\Bundle\ResourceBundle\EventListener\LoadORMMetadataSubscriber</parameter>
         <parameter key="sylius.event_subscriber.load_odm_metadata.class">Sylius\Bundle\ResourceBundle\EventListener\LoadODMMetadataSubscriber</parameter>
 
@@ -54,6 +56,13 @@
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
+        </service>
+
+        <service id="sylius.event_subscriber.resource_delete" class="%sylius.event_subscriber.resource_delete.class%">
+            <argument type="service" id="router" />
+            <argument type="service" id="session" />
+            <argument type="service" id="translator" />
+            <tag name="kernel.event_subscriber" event="kernel.exception" />
         </service>
 
         <service id="sylius.event_subscriber.load_orm_metadata" class="%sylius.event_subscriber.load_orm_metadata.class%">

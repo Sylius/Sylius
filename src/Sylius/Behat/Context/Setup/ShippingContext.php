@@ -94,6 +94,14 @@ final class ShippingContext implements Context
     }
 
     /**
+     * @Given /^the store allows shipping with "([^"]*)"$/
+     */
+    public function theStoreAllowsShippingMethod($shippingMethodName)
+    {
+        $this->createShippingMethod($shippingMethodName);
+    }
+
+    /**
      * @Given /^the store has "([^"]*)" shipping method with ("[^"]+") fee$/
      * @Given /^the store has "([^"]*)" shipping method with ("[^"]+") fee within ("([^"]*)" zone)$/
      * @Given /^the store has "([^"]*)" shipping method with ("[^"]+") fee for (the rest of the world)$/
@@ -114,14 +122,14 @@ final class ShippingContext implements Context
 
     /**
      * @param string $name
+     * @param ZoneInterface|null $zone
      * @param string $locale
      * @param array $configuration
      * @param string $calculator
-     * @param ZoneInterface|null $zone
      */
     private function createShippingMethod(
         $name,
-        $zone = null,
+        ZoneInterface $zone = null,
         $locale = 'en',
         $configuration = ['amount' => 0],
         $calculator = DefaultCalculators::FLAT_RATE
@@ -130,6 +138,7 @@ final class ShippingContext implements Context
             $zone = $this->sharedStorage->get('zone');
         }
 
+        /** @var ShippingMethodInterface $shippingMethod */
         $shippingMethod = $this->shippingMethodFactory->createNew();
         $shippingMethod->setCode($this->generateCodeFromNameAndZone($name, $zone->getCode()));
         $shippingMethod->setName($name);

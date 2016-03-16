@@ -15,10 +15,10 @@
         <div class="actions-menu">
             {{ buttons.manage(path('sylius_backend_shipping_method_index'), 'sylius.shipping_method.manage'|trans) }}
             {{ buttons.edit(path('sylius_backend_shipping_method_update', {'id': shipping_method.id})) }}
+            {{ buttons.delete(path('sylius_backend_shipping_method_delete', {'id': shipping_method.id})) }}
         </div>
         <h1><i class="glyphicon glyphicon-cog"></i> {{ 'sylius.shipping_method.show_header'|trans|raw }}</h1>
     </div>
-
 
     <table class="table table-bordered table-condensed">
         <thead>

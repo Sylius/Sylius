@@ -79,6 +79,30 @@ class ShippingContextSpec extends ObjectBehavior
         $this->storeShipsEverythingForFree();
     }
 
+    function it_configures_store_to_have_a_specific_shipping_method(
+        $shippingMethodRepository,
+        $shippingMethodFactory,
+        $sharedStorage,
+        ShippingMethod $shippingMethod,
+        ZoneInterface $zone
+    ) {
+        $sharedStorage->get('zone')->willReturn($zone);
+        $shippingMethodFactory->createNew()->willReturn($shippingMethod);
+
+        $zone->getCode()->willReturn('UE');
+
+        $shippingMethod->setCode('dhl_express_ue')->shouldBeCalled();
+        $shippingMethod->setName('DHL Express')->shouldBeCalled();
+        $shippingMethod->setCurrentLocale('en')->shouldBeCalled();
+        $shippingMethod->setConfiguration(['amount' => 0])->shouldBeCalled();
+        $shippingMethod->setCalculator(DefaultCalculators::FLAT_RATE)->shouldBeCalled();
+        $shippingMethod->setZone($zone)->shouldBeCalled();
+
+        $shippingMethodRepository->add($shippingMethod)->shouldBeCalled();
+
+        $this->theStoreAllowsShippingMethod('DHL Express');
+    }
+
     function it_configures_shipping_method_with_given_data(
         $shippingMethodRepository,
         $shippingMethodFactory,
