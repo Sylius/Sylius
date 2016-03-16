@@ -22,6 +22,7 @@ use Sylius\Component\Core\Repository\PromotionRepositoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Promotion\Model\PromotionInterface;
 
 /**
  * @mixin PromotionContext
@@ -139,6 +140,62 @@ class PromotionContextSpec extends ObjectBehavior
         $this
             ->shouldThrow(FailureException::class)
             ->during('couponShouldStillExistInTheRegistry', [$coupon])
+        ;
+    }
+
+    function it_removes_a_promotion(
+        PromotionRepositoryInterface $promotionRepository,
+        SharedStorageInterface $sharedStorage,
+        PromotionInterface $promotion
+    ) {
+        $promotion->getId()->willReturn(5);
+        $sharedStorage->set('promotion_id', 5)->shouldBeCalled();
+        $promotionRepository->remove($promotion)->shouldBeCalled();
+
+        $this->iDeletePromotion($promotion);
+    }
+
+    function it_checks_whether_a_promotion_does_not_exist_in_the_registry(
+        PromotionRepositoryInterface $promotionRepository
+    ) {
+        $promotionRepository->find(5)->willReturn(null);
+
+        $this->promotionShouldNotExistInTheRegistry(5);
+    }
+
+    function it_throws_exception_when_a_promotion_is_found_but_it_should_not_exist(
+        PromotionRepositoryInterface $promotionRepository,
+        PromotionInterface $promotion
+    ) {
+        $promotion->getId()->willReturn(5);
+        $promotionRepository->find(5)->willReturn($promotion);
+
+        $this
+            ->shouldThrow(NotEqualException::class)
+            ->during('promotionShouldNotExistInTheRegistry', [5])
+        ;
+    }
+
+    function it_checks_whether_a_promotion_exists_in_the_registry(
+        PromotionRepositoryInterface $promotionRepository,
+        PromotionInterface $promotion
+    ) {
+        $promotion->getId()->willReturn(5);
+        $promotionRepository->find(5)->willReturn($promotion);
+
+        $this->promotionShouldStillExistInTheRegistry($promotion);
+    }
+
+    function it_throws_exception_when_a_promotion_is_not_found_but_it_should_exist(
+        PromotionRepositoryInterface $promotionRepository,
+        PromotionInterface $promotion
+    ) {
+        $promotion->getId()->willReturn(5);
+        $promotionRepository->find(5)->willReturn(null);
+
+        $this
+            ->shouldThrow(FailureException::class)
+            ->during('promotionShouldStillExistInTheRegistry', [$promotion])
         ;
     }
 }

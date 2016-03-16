@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Promotion\Model\CouponInterface;
+use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -77,7 +78,7 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @Then /^([^"]+ should no longer) exist in the registry$/
+     * @Then /^([^"]+ should no longer) exist in the coupon registry$/
      */
     public function couponShouldNotExistInTheRegistry($couponId)
     {
@@ -100,6 +101,45 @@ final class PromotionContext implements Context
     public function couponShouldStillExistInTheRegistry(CouponInterface $coupon)
     {
         expect($this->couponRepository->find($coupon->getId()))->toNotBe(null);
+    }
+
+    /**
+     * @When /^I try to delete (promotion "([^"]+)")$/
+     */
+    public function iTryToDeletePromotion(PromotionInterface $promotion)
+    {
+        try {
+            $this->promotionRepository->remove($promotion);
+
+            throw new \Exception(sprintf('Promotion "%s" has been removed, but it should not.', $promotion->getName()));
+        } catch (ForeignKeyConstraintViolationException $exception) {
+            $this->sharedStorage->set('last_exception', $exception);
+        }
+    }
+
+    /**
+     * @When /^I delete (promotion "([^"]+)")$/
+     */
+    public function iDeletePromotion(PromotionInterface $promotion)
+    {
+        $this->sharedStorage->set('promotion_id', $promotion->getId());
+        $this->promotionRepository->remove($promotion);
+    }
+
+    /**
+     * @Then /^([^"]+ should no longer) exist in the promotion registry$/
+     */
+    public function promotionShouldNotExistInTheRegistry($promotionId)
+    {
+        expect($this->promotionRepository->find($promotionId))->toBe(null);
+    }
+
+    /**
+     * @Then promotion :promotion should still exist in the registry
+     */
+    public function promotionShouldStillExistInTheRegistry(PromotionInterface $promotion)
+    {
+        expect($this->promotionRepository->find($promotion->getId()))->toNotBe(null);
     }
 
     /**

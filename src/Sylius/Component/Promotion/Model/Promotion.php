@@ -21,7 +21,7 @@ use Sylius\Component\Resource\Model\TimestampableTrait;
  */
 class Promotion implements PromotionInterface
 {
-    use SoftDeletableTrait, TimestampableTrait;
+    use TimestampableTrait;
 
     /**
      * @var mixed
