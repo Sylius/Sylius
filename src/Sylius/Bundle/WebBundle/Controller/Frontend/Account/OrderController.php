@@ -110,7 +110,7 @@ class OrderController extends FOSRestController
             'margin-bottom' => 10,
             'margin-left' => 5,
         ]);
-        
+
         return new Response(
             $generator->getOutputFromHtml($html),
             200,
