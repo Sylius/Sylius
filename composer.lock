@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ad226aefe9335182f5ea02cd222697bf",
-    "content-hash": "3c8ea86d828ddefea603976d90a0a4d0",
+    "hash": "9932dd01512d6cb380c5d05e0929dbb0",
+    "content-hash": "2da4bc590bf31c6250bb036dc5e16bd0",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -10495,11 +10495,12 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "gedmo/doctrine-extensions": 20,
         "symfony-cmf/routing-bundle": 5,
         "coduo/php-matcher": 20,
         "lakion/api-test-case": 20
     },
-    "prefer-stable": false,
+    "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^5.5.9|^7.0",
