@@ -27,6 +27,7 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install gd \
     && docker-php-ext-install zip
 
-COPY php.ini    /usr/local/etc/php/conf.d/
+COPY php.ini        /usr/local/etc/php/conf.d/
+COPY default.conf    /usr/local/etc/php-fpm.d/www.conf
 
 EXPOSE 9000
