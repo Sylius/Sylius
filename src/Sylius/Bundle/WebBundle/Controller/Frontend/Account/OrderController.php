@@ -104,8 +104,13 @@ class OrderController extends FOSRestController
             'footer-line' => true,
             'footer-font-name' => '"Helvetica Neue",​Helvetica,​Arial,​sans-serif',
             'footer-font-size' => 10,
+            'viewport-size' => '1200x1024',
+            'margin-top' => 10,
+            'margin-right' => 5,
+            'margin-bottom' => 10,
+            'margin-left' => 5,
         ]);
-
+        
         return new Response(
             $generator->getOutputFromHtml($html),
             200,
