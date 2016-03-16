@@ -79,7 +79,7 @@ class CommandDirectoryChecker
     private function createDirectory($directory, OutputInterface $output)
     {
         try {
-            $this->filesystem->mkdir($directory, 755);
+            $this->filesystem->mkdir($directory, 0755);
         } catch (IOException $exception) {
             $output->writeln($this->createUnexistingDirectoryMessage(getcwd().'/'.$directory));
 

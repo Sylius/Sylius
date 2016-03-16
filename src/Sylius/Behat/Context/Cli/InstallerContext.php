@@ -198,12 +198,11 @@ final class InstallerContext implements Context
      */
     private function iExecuteCommandWithInputChoices($name)
     {
-        $fullParameters = array_merge(['command' => $name]);
         $this->dialog = $this->command->getHelper('dialog');
         $inputString = join(PHP_EOL, $this->inputChoices);
         $this->dialog->setInputStream($this->getInputStream($inputString.PHP_EOL));
 
-        $this->tester->execute($fullParameters);
+        $this->tester->execute(['command' => $name]);
     }
 
     /**
@@ -211,11 +210,10 @@ final class InstallerContext implements Context
      */
     private function iExecuteCommandAndConfirm($name)
     {
-        $fullParameters = array_merge(array('command' => $name));
         $this->dialog = $this->command->getHelper('dialog');
         $inputString = 'y'.PHP_EOL;
         $this->dialog->setInputStream($this->getInputStream($inputString));
 
-        $this->tester->execute($fullParameters);
+        $this->tester->execute(['command' => $name]);
     }
 }

@@ -55,6 +55,8 @@ EOT
             $this->ensureDirectoryExistsAndIsWritable(self::WEB_MEDIA_DIRECTORY, $output);
             $this->ensureDirectoryExistsAndIsWritable(self::WEB_MEDIA_IMAGE_DIRECTORY, $output);
         } catch (\RuntimeException $exception) {
+            $output->writeln($exception->getMessage());
+
             return 1;
         }
 
