@@ -25,4 +25,11 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @return bool
      */
     public function isCodeFieldDisabled();
+
+    /**
+     * @param $provinceName
+     *
+     * @return bool
+     */
+    public function isThereProvince($provinceName);
 }

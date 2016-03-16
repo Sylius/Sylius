@@ -87,6 +87,9 @@ class LoadCountriesData extends DataFixture
         $countries = Intl::getRegionBundle()->getCountryNames();
 
         foreach ($countries as $countryCode => $name) {
+            if ('AC' === $countryCode) {
+                continue;
+            }
             $country = $countryFactory->createNew();
 
             $country->setCode($countryCode);
