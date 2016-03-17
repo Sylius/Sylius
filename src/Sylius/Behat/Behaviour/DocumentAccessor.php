@@ -9,15 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Page\Admin\Locale;
+namespace Sylius\Behat\Behaviour;
 
-use Sylius\Behat\Behaviour\ChoosesName;
-use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
+use Behat\Mink\Element\DocumentElement;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class CreatePage extends BaseCreatePage implements CreatePageInterface
+trait DocumentAccessor
 {
-    use ChoosesName;
+    /**
+     * @return DocumentElement
+     */
+    abstract public function getDocument();
 }

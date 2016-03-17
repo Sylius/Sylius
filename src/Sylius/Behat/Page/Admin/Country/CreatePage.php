@@ -11,18 +11,14 @@
 
 namespace Sylius\Behat\Page\Admin\Country;
 
+use Sylius\Behat\Behaviour\ChoosesName;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function chooseName($name)
-    {
-        $this->getDocument()->selectFieldOption('Name', $name);
-    }
+    use ChoosesName;
 }
