@@ -41,9 +41,6 @@ before_install:
 
     - composer self-update
 
-    - if [[ -z "$GITHUB_OAUTH_TOKEN" ]]; then export GITHUB_OAUTH_TOKEN="66736022ed66ebbb2be87027ed45a24554cc8344"; fi
-    - composer config -g github-oauth.github.com "$GITHUB_OAUTH_TOKEN" >/dev/null 2>&1
-
 install:
     - phpenv config-add etc/travis/install-php.ini
 
@@ -53,7 +50,7 @@ install:
     - composer run-script travis-build --no-interaction
 
 before_script:
-    - app/console doctrine:database:create --env=test_cached # have to be run with debug = true, to omit generating proxies before setting up the database
+    - app/console doctrine:database:create --env=test_cached # Have to be run with debug = true, to omit generating proxies before setting up the database
 
     - app/console cache:warmup --env=test_cached --no-debug
 
@@ -64,9 +61,9 @@ before_script:
     - app/console assetic:dump --env=test_cached --no-debug
 
     # Debug informations, PHP version & PHP configuration
-    # Its needed to remove the line with secret variable, as it is listed in _SERVER variables
+    # Its needed to remove the line with secret variables, as it is listed in _SERVER variables
     - php -v
-    - php -i | grep -v 'GITHUB_OAUTH_TOKEN\|SYMFONY__'
+    - php -i | grep -v 'SYMFONY__'
 
 script:
     - composer validate
