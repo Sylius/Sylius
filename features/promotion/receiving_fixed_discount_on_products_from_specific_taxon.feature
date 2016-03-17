@@ -43,7 +43,7 @@ Feature: Receiving fixed discount on products from specific taxon
         And it gives "€30.00" off on every product classified as "Mugs"
         When I add 2 products "PHP Mug" to the cart
         Then theirs price should be decreased by "€40.00"
-        Then my cart total should be "€0.00"
+        And my cart total should be "€0.00"
         And my discount should be "-€40.00"
 
     @ui
