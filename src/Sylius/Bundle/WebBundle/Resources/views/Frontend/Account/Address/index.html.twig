@@ -33,24 +33,16 @@
                             {% endif %}
 
                             {% if address != customer.billingAddress %}
-                                {{ buttons.patch(
-                                    path('sylius_account_address_set_default_billing', {'id': address.id}),
-                                    'sylius.account.address.action.billing', 'star-empty') }}
+                                {{ buttons.patch(path('sylius_account_address_set_default_billing', {'id': address.id}), 'sylius.ui.set_as_default_billing_address'|trans, 'star-empty') }}
                                 <br>
                             {% endif %}
                             {% if address != customer.shippingAddress %}
-                                {{ buttons.patch(
-                                    path('sylius_account_address_set_default_shipping', {'id': address.id}),
-                                    'sylius.account.address.action.shipping', 'star') }}
+                                {{ buttons.patch(path('sylius_account_address_set_default_shipping', {'id': address.id}), 'sylius.ui.set_as_default_shipping_address'|trans, 'star-empty') }}
                             {% endif %}
                         </td>
                         <td>
-                            {{ buttons.edit(
-                                path('sylius_account_address_update', {'id': address.id}),
-                                'sylius.account.address.action.edit') }}&nbsp;
-                            {{ buttons.delete(
-                                path('sylius_account_address_delete', {'id': address.id}),
-                                'sylius.ui.delete'|trans) }}
+                            {{ buttons.edit(path('sylius_account_address_update', {'id': address.id}), 'sylius.ui.edit'|trans) }}&nbsp;
+                            {{ buttons.delete(path('sylius_account_address_delete', {'id': address.id}), 'sylius.ui.delete'|trans) }}
                         </td>
                     </tr>
                 {% endfor %}
@@ -59,6 +51,6 @@
         {% else %}
             <p>{{ 'sylius.ui.you_have_no_addresses_defined'|trans }}</p>
         {% endif %}
-        <p>{{ buttons.create(path('sylius_account_address_create'), 'sylius.account.address.action.create') }}</p>
+        <p>{{ buttons.create(path('sylius_account_address_create'), 'sylius.ui.create_a_new_address'|trans) }}</p>
     </div>
 {% endblock %}
