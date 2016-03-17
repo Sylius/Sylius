@@ -35,23 +35,15 @@ class OrderShippingListener
     protected $shippingProcessor;
 
     /**
-     * @var ShippingChargesProcessorInterface
-     */
-    protected $shippingChargesProcessor;
-
-    /**
      * @param OrderShipmentProcessorInterface $orderShipmentProcessor
      * @param ShipmentProcessorInterface $shippingProcessor
-     * @param ShippingChargesProcessorInterface $shippingChargesProcessor
      */
     public function __construct(
         OrderShipmentProcessorInterface $orderShipmentProcessor,
-        ShipmentProcessorInterface $shippingProcessor,
-        ShippingChargesProcessorInterface $shippingChargesProcessor
+        ShipmentProcessorInterface $shippingProcessor
     ) {
         $this->orderShipmentProcessor = $orderShipmentProcessor;
         $this->shippingProcessor = $shippingProcessor;
-        $this->shippingChargesProcessor = $shippingChargesProcessor;
     }
 
     /**
@@ -65,14 +57,6 @@ class OrderShippingListener
     /**
      * @param GenericEvent $event
      */
-    public function processOrderShippingCharges(GenericEvent $event)
-    {
-        $this->shippingChargesProcessor->applyShippingCharges($this->getOrder($event));
-    }
-
-    /**
-     * @param GenericEvent $event
-     */
     public function updateShipmentStatesOnhold(GenericEvent $event)
     {
         $this->shippingProcessor->updateShipmentStates(
@@ -81,6 +65,11 @@ class OrderShippingListener
         );
     }
 
+    /**
+     * @param GenericEvent $event
+     *
+     * @return mixed
+     */
     protected function getOrder(GenericEvent $event)
     {
         $order = $event->getSubject();

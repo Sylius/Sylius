@@ -28,42 +28,14 @@ use Symfony\Component\Translation\TranslatorInterface;
  */
 class OrderPromotionListenerSpec extends ObjectBehavior
 {
-    function let(
-        PromotionProcessorInterface $promotionProcessor,
-        SessionInterface $session,
-        TranslatorInterface $translator
-    ) {
-        $this->beConstructedWith(
-            $promotionProcessor,
-            $session,
-            $translator
-        );
+    function let(SessionInterface $session, TranslatorInterface $translator)
+    {
+        $this->beConstructedWith($session, $translator);
     }
 
     function it_is_initializable()
     {
         $this->shouldHaveType(OrderPromotionListener::class);
-    }
-
-    function it_throws_exception_if_subject_is_not_order(
-        GenericEvent $event,
-        \stdClass $nonOrder
-    ) {
-        $event->getSubject()->willReturn($nonOrder);
-
-        $this->shouldThrow(UnexpectedTypeException::class)
-            ->duringProcessOrderPromotion($event);
-    }
-
-    function it_processes_promotion_on_orders(
-        GenericEvent $event,
-        OrderInterface $order,
-        $promotionProcessor
-    ) {
-        $event->getSubject()->willReturn($order);
-        $promotionProcessor->process($order)->shouldBeCalled();
-
-        $this->processOrderPromotion($event);
     }
 
     function it_adds_success_message_to_flashbag_when_coupon_is_eligible(

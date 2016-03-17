@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Taxation\OrderTaxesApplicatorInterface;
+use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
 
 /**
@@ -21,9 +22,9 @@ use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
 class OrderRecalculator implements OrderRecalculatorInterface
 {
     /**
-     * @var PromotionProcessorInterface
+     * @var DelegatingCalculatorInterface
      */
-    private $promotionProcessor;
+    private $priceCalculator;
 
     /**
      * @var OrderTaxesApplicatorInterface
@@ -31,22 +32,30 @@ class OrderRecalculator implements OrderRecalculatorInterface
     private $taxesApplicator;
 
     /**
+     * @var PromotionProcessorInterface
+     */
+    private $promotionProcessor;
+
+    /**
      * @var ShippingChargesProcessorInterface
      */
     private $shippingChargesProcessor;
 
     /**
-     * @param PromotionProcessorInterface $promotionProcessor
+     * @param DelegatingCalculatorInterface $priceCalculator
      * @param OrderTaxesApplicatorInterface $taxesApplicator
+     * @param PromotionProcessorInterface $promotionProcessor
      * @param ShippingChargesProcessorInterface $shippingChargesProcessor
      */
     public function __construct(
-        PromotionProcessorInterface $promotionProcessor,
+        DelegatingCalculatorInterface $priceCalculator,
         OrderTaxesApplicatorInterface $taxesApplicator,
+        PromotionProcessorInterface $promotionProcessor,
         ShippingChargesProcessorInterface $shippingChargesProcessor
     ) {
-        $this->promotionProcessor = $promotionProcessor;
+        $this->priceCalculator = $priceCalculator;
         $this->taxesApplicator = $taxesApplicator;
+        $this->promotionProcessor = $promotionProcessor;
         $this->shippingChargesProcessor = $shippingChargesProcessor;
     }
 
@@ -57,8 +66,34 @@ class OrderRecalculator implements OrderRecalculatorInterface
      */
     public function recalculate(OrderInterface $order)
     {
+        $this->recalculatePrices($order);
+        $this->shippingChargesProcessor->applyShippingCharges($order);
         $this->promotionProcessor->process($order);
         $this->taxesApplicator->apply($order);
-        $this->shippingChargesProcessor->applyShippingCharges($order);
+    }
+
+    /**
+     * @param OrderInterface $order
+     */
+    private function recalculatePrices(OrderInterface $order)
+    {
+        $context = [];
+        if (null !== $customer = $order->getCustomer()) {
+            $context['customer'] = $customer;
+            $context['groups'] = $customer->getGroups()->toArray();
+        }
+
+        if (null !== $order->getChannel()) {
+            $context['channel'] = [$order->getChannel()];
+        }
+
+        foreach ($order->getItems() as $item) {
+            if ($item->isImmutable()) {
+                continue;
+            }
+
+            $context['quantity'] = $item->getQuantity();
+            $item->setUnitPrice($this->priceCalculator->calculate($item->getVariant(), $context));
+        }
     }
 }

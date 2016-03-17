@@ -14,9 +14,11 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Channel\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\OrderProcessing\OrderRecalculatorInterface;
+use Sylius\Component\Core\OrderProcessing\OrderShipmentProcessorInterface;
 use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -24,28 +26,32 @@ use Sylius\Component\User\Model\GroupableInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * @author Manuel Gonzalez <mgonyan@gmail.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class OrderPricingListenerSpec extends ObjectBehavior
+class OrderRecalculationListenerSpec extends ObjectBehavior
 {
-    function let(DelegatingCalculatorInterface $priceCalculator)
-    {
-        $this->beConstructedWith($priceCalculator);
+    function let(
+        OrderRecalculatorInterface $orderRecalculator,
+        OrderShipmentProcessorInterface $orderShipmentProcessor,
+        DelegatingCalculatorInterface $priceCalculator
+    ) {
+        $this->beConstructedWith($orderRecalculator, $orderShipmentProcessor, $priceCalculator);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\OrderPricingListener');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\OrderRecalculationListener');
     }
 
-    function it_should_throw_an_exception_if_its_subjet_is_not_order_interface(GenericEvent $event)
-    {
-        $wrongOrderClass = new \stdClass();
-        $exception = new UnexpectedTypeException($wrongOrderClass, OrderInterface::class);
+    function it_uses_order_recalculator_to_recalculate_order(
+        $orderRecalculator,
+        GenericEvent $event,
+        OrderInterface $order
+    ) {
+        $event->getSubject()->willReturn($order);
+        $orderRecalculator->recalculate($order)->shouldBeCalled();
 
-        $event->getSubject()->shouldBeCalled()->willReturn($wrongOrderClass);
-
-        $this->shouldThrow($exception)->duringRecalculatePrices($event);
+        $this->recalculateOrder($event);
     }
 
     function it_recalculates_prices_adding_customer_to_the_context(
@@ -146,5 +152,33 @@ class OrderPricingListenerSpec extends ObjectBehavior
         )->shouldBeCalled()->willReturn(10);
 
         $this->recalculatePrices($event);
+    }
+
+    function it_processes_shipments($orderShipmentProcessor, GenericEvent $event, OrderInterface $order)
+    {
+        $event->getSubject()->willReturn($order);
+        $orderShipmentProcessor->processOrderShipment($order)->shouldBeCalled();
+
+        $this->processShipments($event);
+    }
+
+    function it_throws_exception_if_event_subject_is_not_order(GenericEvent $event)
+    {
+        $event->getSubject()->willReturn('badObject');
+
+        $this
+            ->shouldThrow(new UnexpectedTypeException('badObject', OrderInterface::class))
+            ->during('recalculateOrder', [$event])
+        ;
+
+        $this
+            ->shouldThrow(new UnexpectedTypeException('badObject', OrderInterface::class))
+            ->during('recalculatePrices', [$event])
+        ;
+
+        $this
+            ->shouldThrow(new UnexpectedTypeException('badObject', OrderInterface::class))
+            ->during('processShipments', [$event])
+        ;
     }
 }

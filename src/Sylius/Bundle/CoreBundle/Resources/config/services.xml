@@ -51,9 +51,7 @@
         <parameter key="sylius.listener.order_payment.class">Sylius\Bundle\CoreBundle\EventListener\OrderPaymentListener</parameter>
         <parameter key="sylius.listener.order_channel.class">Sylius\Bundle\CoreBundle\EventListener\OrderChannelListener</parameter>
         <parameter key="sylius.listener.order_promotion.class">Sylius\Bundle\CoreBundle\EventListener\OrderPromotionListener</parameter>
-        <parameter key="sylius.listener.order_pricing.class">Sylius\Bundle\CoreBundle\EventListener\OrderPricingListener</parameter>
         <parameter key="sylius.listener.order_shipping.class">Sylius\Bundle\CoreBundle\EventListener\OrderShippingListener</parameter>
-        <parameter key="sylius.listener.order_taxation.class">Sylius\Bundle\CoreBundle\EventListener\OrderTaxationListener</parameter>
         <parameter key="sylius.listener.restricted_zone.class">Sylius\Bundle\CoreBundle\EventListener\RestrictedZoneListener</parameter>
         <parameter key="sylius.listener.purchase.class">Sylius\Bundle\CoreBundle\EventListener\PurchaseListener</parameter>
         <parameter key="sylius.listener.checkout_addressing.class">Sylius\Bundle\CoreBundle\EventListener\CheckoutAddressingListener</parameter>
@@ -62,6 +60,7 @@
         <parameter key="sylius.listener.channel.class">Sylius\Bundle\CoreBundle\EventListener\ChannelDeletionListener</parameter>
         <parameter key="sylius.listener.customer_aware.class">Sylius\Bundle\CoreBundle\EventListener\CustomerAwareListener</parameter>
         <parameter key="sylius.listener.customer_reviews_delete.class">Sylius\Bundle\CoreBundle\EventListener\CustomerReviewsDeleteListener</parameter>
+        <parameter key="sylius.listener.order_recalculation.class">Sylius\Bundle\CoreBundle\EventListener\OrderRecalculationListener</parameter>
 
         <parameter key="sylius.active_promotions_by_channel_provider.class">Sylius\Component\Core\Provider\ActivePromotionsByChannelProvider</parameter>
 
@@ -258,8 +257,9 @@
         </service>
 
         <service id="sylius.order_processing.order_recalculator" class="%sylius.order_processing.order_recalculator.class%">
-            <argument type="service" id="sylius.promotion_processor" />
+            <argument type="service" id="sylius.price_calculator" />
             <argument type="service" id="sylius.taxation.order_taxes_applicator" />
+            <argument type="service" id="sylius.promotion_processor" />
             <argument type="service" id="sylius.order_processing.shipping_processor" />
         </service>
 
@@ -293,31 +293,16 @@
             <tag name="doctrine.event_listener" event="prePersist" />
             <tag name="doctrine.event_listener" event="onFlush" />
         </service>
-        <service id="sylius.listener.order_pricing" class="%sylius.listener.order_pricing.class%">
-            <argument type="service" id="sylius.price_calculator" />
-            <tag name="kernel.event_listener" event="sylius.cart_change" method="recalculatePrices" />
-            <tag name="kernel.event_listener" event="sylius.checkout.finalize.initialize" method="recalculatePrices" />
-            <tag name="kernel.event_listener" event="sylius.checkout.security.pre_complete" method="recalculatePrices" />
-        </service>
         <service id="sylius.listener.order_state" class="%sylius.listener.order_state.class%">
             <argument type="service" id="sylius.order_processing.state_resolver" />
             <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="resolveOrderStates" priority="-100" />
             <tag name="kernel.event_listener" event="sylius.checkout.purchase.pre_complete" method="resolveOrderStates" priority="-100" />
             <tag name="kernel.event_listener" event="winzou.state_machine.post_transition" method="resolveOrderStatesOnTransition" priority="-100" />
         </service>
-        <service id="sylius.listener.order_taxation" class="%sylius.listener.order_taxation.class%">
-            <argument type="service" id="sylius.taxation.order_taxes_applicator" />
-            <tag name="kernel.event_listener" event="sylius.cart_change" method="applyTaxes" />
-            <tag name="kernel.event_listener" event="sylius.checkout.security.pre_complete" method="applyTaxes" />
-            <tag name="kernel.event_listener" event="sylius.checkout.addressing.pre_complete" method="applyTaxes" />
-            <tag name="kernel.event_listener" event="sylius.checkout.payment.pre_complete" method="applyTaxes" />
-        </service>
         <service id="sylius.listener.order_shipping" class="%sylius.listener.order_shipping.class%">
             <argument type="service" id="sylius.order_processing.shipment_processor" />
             <argument type="service" id="sylius.processor.shipment_processor" />
-            <argument type="service" id="sylius.order_processing.shipping_processor" />
             <tag name="kernel.event_listener" event="sylius.checkout.shipping.initialize" method="processOrderShipments" />
-            <tag name="kernel.event_listener" event="sylius.checkout.shipping.pre_complete" method="processOrderShippingCharges" />
             <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="updateShipmentStatesOnhold" />
         </service>
         <service id="sylius.listener.order_payment" class="%sylius.listener.order_payment.class%">
@@ -329,23 +314,9 @@
             <argument type="service" id="sylius.context.channel" />
             <tag name="kernel.event_listener" event="sylius.cart_change" method="processOrderChannel" />
         </service>
-
-        <service id="sylius.active_promotions_by_channel_provider" class="%sylius.active_promotions_by_channel_provider.class%">
-            <argument type="service" id="sylius.repository.promotion" />
-        </service>
-        <service id="sylius.promotion_processor" class="%sylius.promotion_processor.class%">
-            <argument type="service" id="sylius.active_promotions_by_channel_provider" />
-            <argument type="service" id="sylius.promotion_eligibility_checker" />
-            <argument type="service" id="sylius.promotion_applicator" />
-        </service>
-
         <service id="sylius.listener.order_promotion" class="%sylius.listener.order_promotion.class%">
-            <argument type="service" id="sylius.promotion_processor" />
             <argument type="service" id="session" />
             <argument type="service" id="translator" />
-            <tag name="kernel.event_listener" event="sylius.cart_change" method="processOrderPromotion" priority="-50" />
-            <tag name="kernel.event_listener" event="sylius.checkout.addressing.pre_complete" method="processOrderPromotion" />
-            <tag name="kernel.event_listener" event="sylius.checkout.shipping.pre_complete" method="processOrderPromotion" />
             <tag name="kernel.event_listener" event="sylius.promotion.coupon_invalid" method="handleCouponPromotion" />
             <tag name="kernel.event_listener" event="sylius.promotion.coupon_eligible" method="handleCouponPromotion" />
             <tag name="kernel.event_listener" event="sylius.promotion.coupon_not_eligible" method="handleCouponPromotion" />
@@ -399,6 +370,25 @@
             <tag name="kernel.event_listener" event="sylius.product_variant.pre_update" method="uploadProductImage" />
             <tag name="kernel.event_listener" event="sylius.taxon.pre_create" method="uploadTaxonImage" />
             <tag name="kernel.event_listener" event="sylius.taxon.pre_update" method="uploadTaxonImage" />
+        </service>
+
+        <service id="sylius.listener.order_recalculation" class="%sylius.listener.order_recalculation.class%">
+            <argument type="service" id="sylius.order_processing.order_recalculator" />
+            <tag name="kernel.event_listener" event="sylius.cart_change" method="recalculateOrder"/>
+            <tag name="kernel.event_listener" event="sylius.checkout.security.pre_complete" method="recalculateOrder" />
+            <tag name="kernel.event_listener" event="sylius.checkout.addressing.pre_complete" method="recalculateOrder" />
+            <tag name="kernel.event_listener" event="sylius.checkout.shipping.pre_complete" method="recalculateOrder" />
+            <tag name="kernel.event_listener" event="sylius.checkout.payment.pre_complete" method="recalculateOrder" />
+            <tag name="kernel.event_listener" event="sylius.checkout.finalize.initialize" method="recalculateOrder" />
+        </service>
+
+        <service id="sylius.active_promotions_by_channel_provider" class="%sylius.active_promotions_by_channel_provider.class%">
+            <argument type="service" id="sylius.repository.promotion" />
+        </service>
+        <service id="sylius.promotion_processor" class="%sylius.promotion_processor.class%">
+            <argument type="service" id="sylius.active_promotions_by_channel_provider" />
+            <argument type="service" id="sylius.promotion_eligibility_checker" />
+            <argument type="service" id="sylius.promotion_applicator" />
         </service>
 
         <service id="sylius.image_uploader" class="%sylius.image_uploader.class%">
