@@ -44,7 +44,7 @@ class CommentController extends ResourceController
 
             $this->repository->add($resource);
 
-            return $this->redirectHandler->redirectToRoute('sylius_backend_order_show', ['id' => $order->getId()]);
+            return $this->redirectHandler->redirectToRoute($configuration, 'sylius_backend_order_show', ['id' => $order->getId()]);
         }
 
         if (!$configuration->isHtmlRequest()) {
