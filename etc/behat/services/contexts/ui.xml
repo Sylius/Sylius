@@ -22,7 +22,7 @@
         <parameter key="sylius.behat.context.ui.customer.class">Sylius\Behat\Context\Ui\CustomerContext</parameter>
         <parameter key="sylius.behat.context.ui.theme.class">Sylius\Behat\Context\Ui\ThemeContext</parameter>
         <parameter key="sylius.behat.context.ui.admin.managing_countries.class">Sylius\Behat\Context\Ui\Admin\ManagingCountriesContext</parameter>
-        <parameter key="sylius.behat.context.ui.admin.managing_locale.class">Sylius\Behat\Context\Ui\Admin\ManagingLocaleContext</parameter>
+        <parameter key="sylius.behat.context.ui.admin.managing_locale.class">Sylius\Behat\Context\Ui\Admin\ManagingLocalesContext</parameter>
         <parameter key="sylius.behat.context.ui.admin.managing_shipping_methods.class">Sylius\Behat\Context\Ui\Admin\ManagingShippingMethodsContext</parameter>
     </parameters>
 

@@ -14,16 +14,16 @@ namespace spec\Sylius\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use PhpSpec\Exception\Example\NotEqualException;
 use PhpSpec\ObjectBehavior;
-use Sylius\Behat\Context\Ui\Admin\ManagingLocaleContext;
+use Sylius\Behat\Context\Ui\Admin\ManagingLocalesContext;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Locale\CreatePageInterface;
 
 /**
- * @mixin ManagingLocaleContext
+ * @mixin ManagingLocalesContext
  *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class ManagingLocaleContextSpec extends ObjectBehavior
+class ManagingLocalesContextSpec extends ObjectBehavior
 {
     function let(IndexPageInterface $indexPage, CreatePageInterface $createPage)
     {
@@ -32,7 +32,7 @@ class ManagingLocaleContextSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Behat\Context\Ui\Admin\ManagingLocaleContext');
+        $this->shouldHaveType('Sylius\Behat\Context\Ui\Admin\ManagingLocalesContext');
     }
 
     function it_implements_context_interface()
