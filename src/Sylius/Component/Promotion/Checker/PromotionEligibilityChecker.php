@@ -22,12 +22,10 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * Checks if promotion rules are eligible.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterface
+class PromotionEligibilityChecker implements PromotionSubjectEligibilityCheckerInterface
 {
     /**
      * @var ServiceRegistryInterface

@@ -12,7 +12,7 @@
 namespace Sylius\Component\Promotion\Processor;
 
 use Sylius\Component\Promotion\Action\PromotionApplicatorInterface;
-use Sylius\Component\Promotion\Checker\PromotionEligibilityCheckerInterface;
+use Sylius\Component\Promotion\Checker\PromotionSubjectEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Provider\PreQualifiedPromotionsProviderInterface;
 
@@ -31,7 +31,7 @@ class PromotionProcessor implements PromotionProcessorInterface
     protected $preQualifiedPromotionsProvider;
 
     /**
-     * @var PromotionEligibilityCheckerInterface
+     * @var PromotionSubjectEligibilityCheckerInterface
      */
     protected $checker;
 
@@ -42,12 +42,12 @@ class PromotionProcessor implements PromotionProcessorInterface
 
     /**
      * @param PreQualifiedPromotionsProviderInterface $preQualifiedPromotionsProvider
-     * @param PromotionEligibilityCheckerInterface $checker
+     * @param PromotionSubjectEligibilityCheckerInterface $checker
      * @param PromotionApplicatorInterface $applicator
      */
     public function __construct(
         PreQualifiedPromotionsProviderInterface $preQualifiedPromotionsProvider,
-        PromotionEligibilityCheckerInterface $checker,
+        PromotionSubjectEligibilityCheckerInterface $checker,
         PromotionApplicatorInterface $applicator
     ) {
         $this->preQualifiedPromotionsProvider = $preQualifiedPromotionsProvider;

@@ -13,7 +13,7 @@ namespace spec\Sylius\Component\Promotion\Processor;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Action\PromotionApplicatorInterface;
-use Sylius\Component\Promotion\Checker\PromotionEligibilityCheckerInterface;
+use Sylius\Component\Promotion\Checker\PromotionSubjectEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
@@ -26,7 +26,7 @@ class PromotionProcessorSpec extends ObjectBehavior
 {
     function let(
         PreQualifiedPromotionsProviderInterface $activePromotionsProvider,
-        PromotionEligibilityCheckerInterface $checker,
+        PromotionSubjectEligibilityCheckerInterface $checker,
         PromotionApplicatorInterface $applicator
     ) {
         $this->beConstructedWith($activePromotionsProvider, $checker, $applicator);
