@@ -5,7 +5,7 @@ Feature: Locale unique code validation
     I want to be prevented from adding a locale with an existing code
 
     Background:
-        Given the store is available in  the Norwegian language
+        Given the store is available in the Norwegian language
         And I am logged in as administrator
 
     @todo
