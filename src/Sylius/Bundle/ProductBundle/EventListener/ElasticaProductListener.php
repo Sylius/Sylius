@@ -123,7 +123,7 @@ class ElasticaProductListener implements EventSubscriber
      */
     public function index(PostFlushEventArgs $args)
     {
-        if (count($this->scheduledForUpdate)) {
+        if (!empty($this->scheduledForUpdate)) {
             $this->objectPersister->replaceMany($this->scheduledForUpdate);
         }
     }

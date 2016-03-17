@@ -193,20 +193,21 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
         foreach ($syliusSearchConfigs as $syliusSearchConfig) {
             if (isset($syliusSearchConfig['engine'])) {
                 $engine = $syliusSearchConfig['engine'];
+                break;
             }
         }
 
         if ($engine === 'elasticsearch') {
+            $tags = array('doctrine.event_listener' => array(
+                array('name' => 'doctrine.event_listener', 'event' => 'postPersist'),
+                array('name' => 'doctrine.event_listener', 'event' => 'postUpdate'),
+                array('name' => 'doctrine.event_listener', 'event' => 'postRemove'),
+                array('name' => 'doctrine.event_listener', 'event' => 'postFlush'),
+            ));
+
             $elasticaConfigs = $container->getExtensionConfig('fos_elastica');
             foreach ($elasticaConfigs as $elasticaConfig) {
                 foreach ($elasticaConfig['indexes'] as $index => $config) {
-                    $tags = array('doctrine.event_listener' => array(
-                        array('name' => 'doctrine.event_listener', 'event' => 'postPersist'),
-                        array('name' => 'doctrine.event_listener', 'event' => 'postUpdate'),
-                        array('name' => 'doctrine.event_listener', 'event' => 'postRemove'),
-                        array('name' => 'doctrine.event_listener', 'event' => 'postFlush'),
-                    ));
-
                     $elasticaProductListenerDefinition = new Definition(ElasticaProductListener::class);
                     $elasticaProductListenerDefinition->addArgument(new Reference('fos_elastica.object_persister.' . $index . '.product'));
                     $elasticaProductListenerDefinition->setTags($tags);
