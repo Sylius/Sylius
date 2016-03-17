@@ -217,6 +217,33 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") off on every product with minimum price at ("(?:€|£|\$)[^"]+")$/
+     */
+    public function thisPromotionGivesOffOnEveryProductWithMinimumPriceAt(
+        PromotionInterface $promotion,
+        $discount,
+        $amount
+    ) {
+        $filterConfiguration = ['filters' => ['price_range' => ['min' => $amount]]];
+
+        $this->createPromotionWithPriceRangeFilter($promotion, $discount, $filterConfiguration);
+    }
+
+    /**
+     * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") off on every product priced between ("(?:€|£|\$)[^"]+") and ("(?:€|£|\$)[^"]+")$/
+     */
+    public function thisPromotionGivesOffOnEveryProductPricedBetween(
+        PromotionInterface $promotion,
+        $discount,
+        $minAmount,
+        $maxAmount
+    ) {
+        $filterConfiguration = ['filters' => ['price_range' => ['min' => $minAmount, 'max' => $maxAmount]]];
+
+        $this->createPromotionWithPriceRangeFilter($promotion, $discount, $filterConfiguration);
+    }
+
+    /**
      * @param ActionInterface $action
      * @param array $taxonCodes
      *
@@ -228,5 +255,21 @@ final class PromotionContext implements Context
         $action->setConfiguration($configuration);
 
         return $action;
+    }
+
+    /**
+     * @param PromotionInterface $promotion
+     * @param int $discount
+     * @param array $configuration
+     */
+    private function createPromotionWithPriceRangeFilter(PromotionInterface $promotion, $discount, array $configuration)
+    {
+        $action = $this->actionFactory->createItemFixedDiscount($discount);
+        $configuration = array_merge($configuration, $action->getConfiguration());
+        $action->setConfiguration($configuration);
+
+        $promotion->addAction($action);
+
+        $this->objectManager->flush();
     }
 }

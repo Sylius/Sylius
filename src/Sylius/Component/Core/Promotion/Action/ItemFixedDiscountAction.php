@@ -11,11 +11,9 @@
 
 namespace Sylius\Component\Core\Promotion\Action;
 
-use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Core\Model\OrderItemUnitInterface;
-use Sylius\Component\Core\Promotion\Filter\TaxonFilterInterface;
+use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -30,22 +28,30 @@ class ItemFixedDiscountAction extends ItemDiscountAction
     const TYPE = 'item_fixed_discount';
 
     /**
-     * @var TaxonFilterInterface
+     * @var FilterInterface
+     */
+    private $priceRangeFilter;
+
+    /**
+     * @var FilterInterface
      */
     private $taxonFilter;
 
     /**
      * @param FactoryInterface $adjustmentFactory
      * @param OriginatorInterface $originator
-     * @param TaxonFilterInterface $taxonFilter
+     * @param FilterInterface $priceRangeFilter
+     * @param FilterInterface $taxonFilter
      */
     public function __construct(
         FactoryInterface $adjustmentFactory,
         OriginatorInterface $originator,
-        TaxonFilterInterface $taxonFilter
+        FilterInterface $priceRangeFilter,
+        FilterInterface $taxonFilter
     ) {
         parent::__construct($adjustmentFactory, $originator);
 
+        $this->priceRangeFilter = $priceRangeFilter;
         $this->taxonFilter = $taxonFilter;
     }
 
@@ -62,7 +68,8 @@ class ItemFixedDiscountAction extends ItemDiscountAction
             return;
         }
 
-        $filteredItems = $this->taxonFilter->filter($subject->getItems()->toArray(), $configuration);
+        $filteredItems = $this->priceRangeFilter->filter($subject->getItems()->toArray(), $configuration);
+        $filteredItems = $this->taxonFilter->filter($filteredItems, $configuration);
 
         foreach ($filteredItems as $item) {
             $this->setUnitsAdjustments($item, $configuration['amount'], $promotion);

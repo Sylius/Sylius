@@ -20,7 +20,7 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Promotion\Action\ItemDiscountAction;
-use Sylius\Component\Core\Promotion\Filter\TaxonFilterInterface;
+use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -34,9 +34,10 @@ class ItemFixedDiscountActionSpec extends ObjectBehavior
     function let(
         FactoryInterface $adjustmentFactory,
         OriginatorInterface $originator,
-        TaxonFilterInterface $taxonFilter
+        FilterInterface $priceRangeFilter,
+        FilterInterface $taxonFilter
     ) {
-        $this->beConstructedWith($adjustmentFactory, $originator, $taxonFilter);
+        $this->beConstructedWith($adjustmentFactory, $originator, $priceRangeFilter, $taxonFilter);
     }
 
     function it_is_initializable()
@@ -52,29 +53,34 @@ class ItemFixedDiscountActionSpec extends ObjectBehavior
     function it_applies_percentage_discount_on_every_unit_in_order(
         $adjustmentFactory,
         $originator,
+        $priceRangeFilter,
         $taxonFilter,
         AdjustmentInterface $promotionAdjustment1,
         AdjustmentInterface $promotionAdjustment2,
         Collection $originalItems,
-        Collection $filteredItems,
         Collection $units,
         OrderInterface $order,
-        OrderItemInterface $orderItem,
+        OrderItemInterface $orderItem1,
+        OrderItemInterface $orderItem2,
+        OrderItemInterface $orderItem3,
         OrderItemUnitInterface $unit1,
         OrderItemUnitInterface $unit2,
         PromotionInterface $promotion
     ) {
         $order->getItems()->willReturn($originalItems);
-        $originalItems->toArray()->willReturn([$orderItem]);
+        $originalItems->toArray()->willReturn([$orderItem1, $orderItem2, $orderItem3]);
+
+        $priceRangeFilter
+            ->filter([$orderItem1, $orderItem2, $orderItem3], ['amount' => 500, 'filters' => ['taxons' => ['testTaxon']]])
+            ->willReturn([$orderItem1, $orderItem2])
+        ;
         $taxonFilter
-            ->filter([$orderItem], ['amount' => 500, 'filters' => ['taxons' => ['testTaxon']]])
-            ->willReturn($filteredItems)
+            ->filter([$orderItem1, $orderItem2], ['amount' => 500, 'filters' => ['taxons' => ['testTaxon']]])
+            ->willReturn([$orderItem1])
         ;
 
-        $filteredItems->getIterator()->willReturn(new \ArrayIterator([$orderItem->getWrappedObject()]));
-
-        $orderItem->getQuantity()->willReturn(2);
-        $orderItem->getUnits()->willReturn($units);
+        $orderItem1->getQuantity()->willReturn(2);
+        $orderItem1->getUnits()->willReturn($units);
         $units->getIterator()->willReturn(new \ArrayIterator([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
 
         $promotion->getDescription()->willReturn('Test description');
@@ -119,29 +125,34 @@ class ItemFixedDiscountActionSpec extends ObjectBehavior
     function it_does_not_apply_bigger_promotions_than_unit_total(
         $adjustmentFactory,
         $originator,
+        $priceRangeFilter,
         $taxonFilter,
         AdjustmentInterface $promotionAdjustment1,
         AdjustmentInterface $promotionAdjustment2,
         Collection $originalItems,
-        Collection $filteredItems,
         Collection $units,
         OrderInterface $order,
-        OrderItemInterface $orderItem,
+        OrderItemInterface $orderItem1,
+        OrderItemInterface $orderItem2,
+        OrderItemInterface $orderItem3,
         OrderItemUnitInterface $unit1,
         OrderItemUnitInterface $unit2,
         PromotionInterface $promotion
     ) {
         $order->getItems()->willReturn($originalItems);
-        $originalItems->toArray()->willReturn([$orderItem]);
+        $originalItems->toArray()->willReturn([$orderItem1, $orderItem2, $orderItem3]);
+
+        $priceRangeFilter
+            ->filter([$orderItem1, $orderItem2, $orderItem3], ['amount' => 1000, 'filters' => ['taxons' => ['testTaxon']]])
+            ->willReturn([$orderItem1, $orderItem3])
+        ;
         $taxonFilter
-            ->filter([$orderItem], ['amount' => 1000, 'filters' => ['taxons' => ['testTaxon']]])
-            ->willReturn($filteredItems)
+            ->filter([$orderItem1, $orderItem3], ['amount' => 1000, 'filters' => ['taxons' => ['testTaxon']]])
+            ->willReturn([$orderItem1])
         ;
 
-        $filteredItems->getIterator()->willReturn(new \ArrayIterator([$orderItem->getWrappedObject()]));
-
-        $orderItem->getQuantity()->willReturn(2);
-        $orderItem->getUnits()->willReturn($units);
+        $orderItem1->getQuantity()->willReturn(2);
+        $orderItem1->getUnits()->willReturn($units);
         $units->getIterator()->willReturn(new \ArrayIterator([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
 
         $promotion->getDescription()->willReturn('Test description');

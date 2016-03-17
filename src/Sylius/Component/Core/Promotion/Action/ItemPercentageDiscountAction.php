@@ -14,7 +14,7 @@ namespace Sylius\Component\Core\Promotion\Action;
 use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Core\Promotion\Filter\TaxonFilterInterface;
+use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -34,7 +34,7 @@ class ItemPercentageDiscountAction extends ItemDiscountAction
     private $distributor;
 
     /**
-     * @var TaxonFilterInterface
+     * @var FilterInterface
      */
     private $taxonFilter;
 
@@ -42,13 +42,13 @@ class ItemPercentageDiscountAction extends ItemDiscountAction
      * @param FactoryInterface $adjustmentFactory
      * @param OriginatorInterface $originator
      * @param IntegerDistributorInterface $distributor
-     * @param TaxonFilterInterface $taxonFilter
+     * @param FilterInterface $taxonFilter
      */
     public function __construct(
         FactoryInterface $adjustmentFactory,
         OriginatorInterface $originator,
         IntegerDistributorInterface $distributor,
-        TaxonFilterInterface $taxonFilter
+        FilterInterface $taxonFilter
     ) {
         parent::__construct($adjustmentFactory, $originator);
 

@@ -21,7 +21,7 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Promotion\Action\ItemDiscountAction;
-use Sylius\Component\Core\Promotion\Filter\TaxonFilterInterface;
+use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -36,7 +36,7 @@ class ItemPercentageDiscountActionSpec extends ObjectBehavior
         FactoryInterface $adjustmentFactory,
         OriginatorInterface $originator,
         IntegerDistributorInterface $distributor,
-        TaxonFilterInterface $taxonFilter
+        FilterInterface $taxonFilter
     ) {
         $this->beConstructedWith($adjustmentFactory, $originator, $distributor, $taxonFilter);
     }

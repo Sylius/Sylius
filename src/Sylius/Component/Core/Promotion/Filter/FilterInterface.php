@@ -17,7 +17,7 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface TaxonFilterInterface
+interface FilterInterface
 {
     /**
      * @param array $items

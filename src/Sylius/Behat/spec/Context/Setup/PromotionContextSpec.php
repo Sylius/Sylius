@@ -216,4 +216,38 @@ class PromotionContextSpec extends ObjectBehavior
 
         $this->itGivesPercentageOffEveryProductClassifiedAs($promotion, 0.1, $taxon);
     }
+
+    function it_creates_item_fixed_discount_action_for_promotion_products_with_specific_minimum_price(
+        ActionFactoryInterface $actionFactory,
+        ActionInterface $action,
+        ObjectManager $objectManager,
+        PromotionInterface $promotion
+    ) {
+        $actionFactory->createItemFixedDiscount(1000)->willReturn($action);
+        $action->getConfiguration()->willReturn([]);
+        $action->setConfiguration(['filters' => ['price_range' => ['min' => 5000]]])->shouldBeCalled();
+
+        $promotion->addAction($action)->shouldBeCalled();
+
+        $objectManager->flush()->shouldBeCalled();
+
+        $this->thisPromotionGivesOffOnEveryProductWithMinimumPriceAt($promotion, 1000, 5000);
+    }
+
+    function it_creates_item_fixed_discount_action_for_promotion_products_priced_between(
+        ActionFactoryInterface $actionFactory,
+        ActionInterface $action,
+        ObjectManager $objectManager,
+        PromotionInterface $promotion
+    ) {
+        $actionFactory->createItemFixedDiscount(1000)->willReturn($action);
+        $action->getConfiguration()->willReturn([]);
+        $action->setConfiguration(['filters' => ['price_range' => ['min' => 5000, 'max' => 10000]]])->shouldBeCalled();
+
+        $promotion->addAction($action)->shouldBeCalled();
+
+        $objectManager->flush()->shouldBeCalled();
+
+        $this->thisPromotionGivesOffOnEveryProductPricedBetween($promotion, 1000, 5000, 10000);
+    }
 }
