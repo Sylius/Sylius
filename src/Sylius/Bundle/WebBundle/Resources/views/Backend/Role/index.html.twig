@@ -5,17 +5,17 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.section.customer'|trans }}</li>
-    <li>{{ 'sylius.breadcrumb.role.index'|trans }}</a></li>
+    <li>{{ 'sylius.ui.customer'|trans }}</li>
+    <li>{{ 'sylius.ui.roles'|trans }}</a></li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_role_create'), 'sylius.role.create'|trans) }}
+        {{ buttons.create(path('sylius_backend_role_create'), 'sylius.ui.add_new_role'|trans) }}
     </div>
-    <h1><i class="glyphicon glyphicon-sort-by-attributes"></i> {{ 'sylius.role.index_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-sort-by-attributes"></i> {{ 'sylius.ui.roles'|trans|raw }}</h1>
 </div>
 
 {{ list(roles) }}

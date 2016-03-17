@@ -13,7 +13,7 @@
     {% import _self as buttons %}
 
     {% if message is empty %}
-        {% set message = 'sylius.show'|trans %}
+        {% set message = 'sylius.ui.details'|trans %}
     {% endif %}
 
     {{ buttons.btn(url, message, id, 'book', 'btn-default') }}
@@ -23,7 +23,7 @@
     {% import _self as buttons %}
 
     {% if message is empty %}
-        {% set message = 'sylius.create'|trans %}
+        {% set message = 'sylius.ui.create'|trans %}
     {% endif %}
 
     {{ buttons.btn(url, message, id, 'plus-sign', 'btn-primary') }}
@@ -33,7 +33,7 @@
     {% import _self as buttons %}
 
     {% if message is empty %}
-        {% set message = 'sylius.edit'|trans %}
+        {% set message = 'sylius.ui.edit'|trans %}
     {% endif %}
 
     {{ buttons.btn(url, message, id, 'pencil', 'btn-primary') }}
@@ -42,13 +42,13 @@
 {% macro delete(url, message, disabled) %}
 {% if disabled %}
 <span class="btn btn-danger disabled">
-    <i class="icon-trash"></i><span>{{ message is empty ? 'sylius.delete'|trans : message }}</span>
+    <i class="icon-trash"></i><span>{{ message is empty ? 'sylius.ui.delete'|trans : message }}</span>
 </span>
 {% else %}
 <form action="{{ url }}" method="post" style="display: inline;">
     <input type="hidden" name="_method" value="DELETE">
     <button class="btn btn-danger btn-confirm" type="submit">
-        <i class="icon-trash"></i> <span>{{ message is empty ? 'sylius.delete'|trans : message }}</span>
+        <i class="icon-trash"></i> <span>{{ message is empty ? 'sylius.ui.delete'|trans : message }}</span>
     </button>
 </form>
 {% endif %}

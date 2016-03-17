@@ -1,153 +1,40 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-  account:
-    order:
-      number: Nummer
-  association_type:
-    name: Namn
-  address:
-    firstname: Förnamn
-  archetype:
-    name: Namn
-  block:
-    imagine:
-      id: Id
-      publishable: Publicerad
-    simple:
-      id: Id
-      publishable: Publicerad
-    slideshow:
-      id: Id
-      publishable: Publicerad
-    string:
-      id: Id
-      publishable: Publicerad
-  breadcrumb:
-    group:
-      index: Grupper
-    role:
-      index: Roller
-    route:
-      index: Rutter
-  channel:
-    code: Kod
-    currency_default: Standardvaluta
-    enabled: Aktiverad
-    name: Namn
-  checkout:
-    finalize:
-      address:
-        firstname: Förnamn
-      order:
+    block:
+        imagine:
+            publishable: Publicerad
+        simple:
+            publishable: Publicerad
+        slideshow:
+            publishable: Publicerad
+        string:
+            publishable: Publicerad
+    menu:
+        publishable: Publicerad
+    page:
+        publishable: Publicerad
+    ui:
         billing_address: Faktureringsadress
-      product:
+        code: Kod
+        coupon: Rabattkupong
+        default_currency: Standardvaluta
+        enabled: Aktiverad
+        first_name: Förnamn
+        firstname: Förnamn
+        groups: Grupper
+        id: Id
+        message: Meddelande
         name: Namn
-  contact_request:
-    firstName: Förnamn
-    message: Meddelande
-    topic: Ämne
-  country:
-    enabled: Aktiverad
-    name: Namn
-  currency:
-    code: Kod
-    enabled: Aktiverad
-    name: Namn
-  customer:
-    billing_address: Faktureringsadress
-    first_name: Förnamn
-    groups: Grupper
-    phone_number: Telefonnummer
-  email:
-    code: Kod
-    enabled: Aktiverad
-  form:
-    cart:
-      coupon: Rabattkupong
-    profile:
-      firstName: Förnamn
-  group:
-    index_header: Grupper
-    name: Namn
-    roles: Roller
-  inventory_unit:
-    name: Namn
-    sku: SKU
-  locale:
-    code: Kod
-    enabled: Aktiverad
-    name: Namn
-  menu:
-    publishable: Publicerad
-  "no": false
-  order:
-    billing_address: Faktureringsadress
-    number: Nummer
-  order_item:
-    unit_price: Enhetspris
-  page:
-    publishable: Publicerad
-    routes: Rutter
-  payment_method:
-    name: Namn
-  permission:
-    code: Kod
-  product:
-    name: Namn
-    shipping_category: Kategori
-    sku: SKU
-    tax_category: Momskategori
-  product_attribute:
-    code: Kod
-    name: Namn
-  product_association:
-    code: Kod
-    name: Namn
-  product_option:
-    name: Namn
-    presentation: Presentation
-  promotion:
-    name: Namn
-  promotion_coupon:
-    code: Kod
-  report:
-    code: Kod
-    id: Id
-    name: Namn
-  role:
-    code: Kod
-    index_header: Roller
-    name: Namn
-  route:
-    index_header: Rutter
-    name: Namn
-  shipment:
-    name: Namn
-    sku: SKU
-  shipping_category:
-    name: Namn
-  shipping_method:
-    enabled: Aktiverad
-    name: Namn
-    zone: Zon
-  stockable:
-    name: Namn
-  tax_category:
-    name: Namn
-  tax_rate:
-    name: Namn
-    zone: Zon
-  taxon:
-    name: Namn
-  ui:
-    code: Kod
-    name: Namn
-    id: Id
-  variant:
-    sku: SKU
-  "yes": true
-  zone:
-    name: Namn
-    scope: Omfattning
+        'no': false
+        number: Nummer
+        phone_number: Telefonnummer
+        presentation: Presentation
+        roles: Roller
+        routes: Rutter
+        scope: Omfattning
+        shipping_category: Kategori
+        sku: SKU
+        tax_category: Momskategori
+        topic: Ämne
+        unit_price: Enhetspris
+        'yes': true
+        zone: Zon

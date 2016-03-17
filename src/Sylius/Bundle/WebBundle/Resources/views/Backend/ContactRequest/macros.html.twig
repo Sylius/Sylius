@@ -7,10 +7,10 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>{{ sylius_resource_sort('firstName', 'sylius.contact_request.firstName'|trans) }}</th>
-            <th>{{ sylius_resource_sort('lastName', 'sylius.contact_request.lastName'|trans) }}</th>
-            <th>{{ sylius_resource_sort('email', 'sylius.contact_request.email'|trans) }}</th>
-            <th>{{ sylius_resource_sort('topic', 'sylius.contact_request.topic'|trans) }}</th>
+            <th>{{ sylius_resource_sort('firstName', 'sylius.ui.firstname'|trans) }}</th>
+            <th>{{ sylius_resource_sort('lastName', 'sylius.ui.lastname'|trans) }}</th>
+            <th>{{ sylius_resource_sort('email', 'sylius.ui.email'|trans) }}</th>
+            <th>{{ sylius_resource_sort('topic', 'sylius.ui.topic'|trans) }}</th>
             <th></th>
         </tr>
     </thead>
@@ -33,7 +33,7 @@
     </tbody>
 </table>
 {% else %}
-{{ alerts.info('sylius.contact_request.no_results'|trans) }}
+{{ alerts.info('sylius.ui.there_are_no_contact_requests_to_display'|trans) }}
 {% endif %}
 
 {% endmacro %}

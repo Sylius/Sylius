@@ -22,7 +22,7 @@
         <a href="{{ path(product) }}" class="btn btn-link"><h3>{{ product.name }}</h3></a>
         <p>{{ product.shortDescription|default('sylius.product.no_description')|trans|raw }}</p>
         {% if product.averageRating %}
-        <h3>{{ 'sylius.product.rating'|trans }}: {{ product.averageRating|round(2, 'floor') }}</h3>
+        <h3>{{ 'sylius.ui.rating'|trans }}: {{ product.averageRating|round(2, 'floor') }}</h3>
         {% endif %}
     </div>
 </div>
@@ -43,7 +43,7 @@
         <table class="table table-condensed">
             <thead>
                 <tr>
-                    <th colspan="2">{{ 'sylius.product.attributes'|trans }}</th>
+                    <th colspan="2">{{ 'sylius.ui.attributes'|trans }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -59,7 +59,7 @@
         {% endif %}
     </div>
     <div class="col-md-6">
-        <h4>{{ 'sylius.product.description'|trans }}</h4>
+        <h4>{{ 'sylius.ui.description'|trans }}</h4>
         <p>{{ product.description|default('sylius.product.no_description')|trans|raw }}</p>
     </div>
 </div>
@@ -73,7 +73,7 @@
                 <thead>
                     <tr>
                         <th></th>
-                        <th>{{ 'sylius.variant.price'|trans }}</th>
+                        <th>{{ 'sylius.ui.price'|trans }}</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -98,7 +98,7 @@
                         {% if sylius_inventory_is_available(variant) %}
                             {{ form_widget(form.variant[loop.index0]) }}
                         {% else %}
-                            <span class="label label-warning">{{ 'sylius.out_of_stock'|trans }}</span>
+                            <span class="label label-warning">{{ 'sylius.ui.out_of_stock'|trans }}</span>
                         {% endif %}
                         </td>
                     </tr>
@@ -115,22 +115,22 @@
                 <span class="pull-right">
                    {{ sylius_display_price(product.masterVariant) }}
                 </span>
-                {{ 'sylius.variant.price'|trans }}
+                {{ 'sylius.ui.price'|trans }}
             </h4>
         {% endif %}
     </div>
     <div class="col-md-6 pull-right">
         {% if not product.hasVariants and not sylius_inventory_is_available(product.masterVariant) %}
-            <span class="label label-warning">{{ 'sylius.out_of_stock'|trans }}</span>
+            <span class="label label-warning">{{ 'sylius.ui.out_of_stock'|trans }}</span>
         {% else %}
             {{ form_row(form.quantity, {'attr': {'class': 'center-text'}, 'empty_value': '1'}) }}
             {{ form_widget(form._token) }}
             <br>
             <br>
             {% if sylius_is_restricted(product) %}
-            <button disabled="disabled" class="btn btn-success btn-lg btn-block"><i class="icon-shopping-cart icon-white icon-large"></i> {{ 'sylius.product_not_available_in_zone'|trans }}</button>
+            <button disabled="disabled" class="btn btn-success btn-lg btn-block"><i class="icon-shopping-cart icon-white icon-large"></i> {{ 'sylius.ui.not_available_in_your_country'|trans }}</button>
             {% else %}
-                <button type="submit" class="btn btn-success btn-lg btn-block"><i class="icon-shopping-cart icon-white icon-large"></i> {{ 'sylius.add_to_cart'|trans }}</button>
+                <button type="submit" class="btn btn-success btn-lg btn-block"><i class="icon-shopping-cart icon-white icon-large"></i> {{ 'sylius.ui.add_to_cart'|trans }}</button>
             {% endif %}
         {% endif %}
     </div>
@@ -152,7 +152,7 @@
 <hr />
 
 <div>
-    <h3>{{ 'sylius.review.header'|trans }}</h3>
+    <h3>{{ 'sylius.ui.product_reviews'|trans }}</h3>
     {% render(url('sylius_product_reviews', { 'productId': product.id, limit: 3 })) %}
     <hr />
     {% render(url('sylius_product_review_create', { 'productId': product.id })) %}
@@ -166,7 +166,7 @@
     %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     <script>
-        var createMessage = "{{ 'sylius.resource.create'|trans({'%resource%': 'sylius.review.product_review'|trans}, 'flashes') }}";
+        var createMessage = "{{ 'sylius.resource.create'|trans({'%resource%': 'sylius.ui.product_review'|trans}, 'flashes') }}";
         $(document).ready(function() {
             initializeAjaxForm(createMessage);
         });

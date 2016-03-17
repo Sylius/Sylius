@@ -6,18 +6,18 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
-    <li>{{ 'sylius.breadcrumb.inventory.index'|trans }}</li>
+    <li>{{ 'sylius.ui.assortment'|trans }}</li>
+    <li>{{ 'sylius.ui.inventory_index'|trans }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_product_create'), 'sylius.product.create'|trans) }}
-        {{ buttons.manage(path('sylius_backend_product_index'), 'sylius.product.manage'|trans) }}
+        {{ buttons.create(path('sylius_backend_product_create'), 'sylius.ui.create_product'|trans) }}
+        {{ buttons.manage(path('sylius_backend_product_index'), 'sylius.ui.manage_products'|trans) }}
     </div>
-    <h1><i class="glyphicon glyphicon-tasks"></i> {{ 'sylius.stockable.index_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-tasks"></i> {{ 'sylius.ui.inventory_here_you_can_see_current_stock_levels'|trans|raw }}</h1>
 </div>
 
 {% render(controller('sylius.controller.backend.form:filterAction', {'type': 'sylius_product_filter', 'template': 'SyliusWebBundle:Backend/Product:filterForm.html.twig'})) %}

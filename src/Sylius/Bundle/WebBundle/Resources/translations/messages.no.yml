@@ -1,751 +1,390 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-  account:
-    address:
-      action:
-        billing: Standard faktureringsadresse
-        create: Lag en ny adresse
-        delete: Slett
-        edit: Rediger
-        shipping: Sett til standard leveringsadresse
-      create: Lag en ny adresse
-      default:
-        billing: Standard faktureringsadresse
-        no_billing: Ingen standard faktureringsadresse
-        no_shipping: Ingen standard leveringsadresse
-        shipping: Standard leveringsadresse
-      list: Alle adressene
-      update: Rediger min adresse
-    home:
-      email: E-post
-      since: Du har vært kunde siden
-      welcome: Velkommen til ditt område
-    order:
-      created_at: Plassert på
-      details: Nærmere opplysninger om bestillingen
-      download_invoice: Last ned fakturaen
-      invoice: Faktura
-      list: Alle bestillinger
-      number: Nummer
-      placed_at: 'Plassert på %at%'
-      shipment:
-        pending: Venter
-        ready: 'Klar siden %at%'
-        returned: 'Returnert %at%'
-        shipped: 'Sendt %at%'
-      state: Tilstand
-      total: Totalt
-      tracking_number: Sporingsnummer
-    title: Min konto
-  add_to_cart: Legg i handlekurv
-  association_type:
-    name: Navn
-    create: Opprett
-  address:
-    city: By
-    company: Firma
-    country: Land
-    firstname: Fornavn
-    lastname: Etternavn
-    postcode: Postnummer
-    province: Provins
-    street: Gate
-  alert:
-    error: Feil
-    info: Informasjon
-    success: Suksess
-    warning: Advarsel
-  archetype:
-    name: Navn
-    options: Instillinger
-    parent: Forelder
-    updated_at: Sist oppdatert
-  backend:
-    alert:
-      info: Informasjon
-    dashboard:
-      chart_order_count: Antall ordrer
-      chart_order_total: Ordeverdi
-      header: Administrasjon dashboard
-      orders: Forrige ukes ordrer
-      revenue: Forrige ukes inntekter
-      subheader: Oversikt over butikken
-    logout: Logg ut
-    quick_links:
-      add_product: Nytt produkt
-      orders: Siste ordre
-      products: Produkter
-    statistics:
-      orders_this_month: Totale bestillinger
-      registrations_this_month: Totalt antall registreringer
-      sales_this_month: Salg
-  block:
-    imagine:
-      id: Id
-      label: Etikett
-      title: Tittel
-      updated_at: Sist oppdatert
-    index_header: Blokker
-    simple:
-      body: Kropp
-      id: Id
-      label: Etikett
-      title: Tittel
-      updated_at: Sist oppdatert
-    slideshow:
-      body: Kropp
-      id: Id
-      title: Tittel
-      updated_at: Sist oppdatert
-    string:
-      body: Kropp
-      id: Id
-      label: Etikett
-      title: Tittel
-      updated_at: Sist oppdatert
-  breadcrumb:
-    assortment: Utvalg
-    block:
-      index: Blokker
-    build: Bygg
-    configuration: Konfigurasjon
-    content: Innhold
-    country:
-      index: Land
-    dashboard: Panel
-    edit: Rediger
-    general_settings: Generelle instillinger
-    generate: Opprett
-    group:
-      index: Grupper
-    inventory:
-      index: Lager
-    locale:
-      index: Nasjonale innstillinger
-    menu_node:
-      index: Menynoder
-    new: Ny
-    option:
-      index: Instillinger
-    order:
-      index: Bestillinger
-    page:
-      index: Sider
-    payment:
-      index: Betalinger
-    payment_method:
-      index: Betalingsmetoder
-    product:
-      index: Produkter
-    promotion:
-      index: Kampanjer
-    promotion_coupon:
-      index: Kuponger
-    role:
-      index: Roller
-    route:
-      index: Ruter
-    sales: Salg
-    shipment:
-      index: Forsendelser
-    shipping_category:
-      index: Fraktkategorier
-    shipping_method:
-      index: Fraktalternativ
-    tax_category:
-      index: Merverdikategorier
-    tax_rate:
-      index: Skattesatser
-    taxation_settings: Beskatningsinnstillinger
-    taxon:
-      index: Taksonomier
-    update: Rediger
-    zone:
-      index: Soner
-  browse_products: Bla gjennom produkter
-  cancel: Avbryt
-  cart:
-    empty: Handlevognen er tom
-    summary:
-      add_coupon: Legg til rabattkupong
-      checkout: Betaling
-      clear: Tøm handlevogn
-      grand_total: Total
-      product: Produkt
-      quantity: Antall
-      save: Lagre
-      total: Totalt
-      unit_price: Enhetspris
-    summary_header: Oppsummering
-    total_items: '1 vare|%count% varer'
-  channel:
-    code: Kode
-    created_at: Opprettet på
-    currency_default: Standard valuta
-    enabled: Aktivert
-    id: ID
-    name: Navn
-    update: Rediger
-    updated_at: Sist oppdatert
-  checkout:
-    addressing:
-      header: Adresseringssteg
-    back: Tilbake
-    finalize:
-      address:
-        city: By
-        country: Land
-        firstname: Fornavn
-        lastname: Etternavn
-        postcode: Postnummer
-        province: Provins
-        street: Gate
-      header: Ordreoversikt
-      order:
-        billing_address: Fakturaadresse
-        items_total: Antall varer
-        no_items: Denne ordren inneholder ingen varer
-        no_promotion: Ingen tilbudskode
-        no_shipping_charges: Ingen fraktkostnader lagt til
-        no_taxes: Ingen mva lagt til
-        promotion_discount: Kampanjerabatt
-        promotion_total: Total kampanje
-        shipping_address: Leveringsadresse
-        shipping_charges: Fraktkostnader
-        shipping_total: Frakt totalt
-        tax_total: Sum avgifter
-        taxes: Avgifter
-        total: Totalt
-      order_item:
-        quantity: Antall
-        total: Totalt
-        unit_price: Enhetspris
-      place_order: Legg inn bestilling
-      product:
-        name: Navn
-    forward: Gå videre
-    payment:
-      header: Betalingsmetode
-    security:
-      existing_customer: Eksisterende kunde
-      header: 'Logg på butikken <small>eller opprett ny konto</small>'
-      login: Logg inn
-      new_customer: Ny kunde
-      register: Registrer
-    shipping:
-      header: Fraktalternativ
-  confirmation:
-    title: Bekreft
-  contact_request:
-    email: E-post
-    firstName: Fornavn
-    id: ID
-    lastName: Etternavn
-    message: Melding
-    topic: Emne
-    updated_at: Sist oppdatert
-  contact_topic:
-    id: ID
-    title: Tittel
-    updated_at: Sist oppdatert
-  country:
-    add_province: Legg til fylke
-    create: Opprett land
-    create_header: Nytt land
-    enabled: Aktivert
-    id: ID
-    index_header: Land
-    manage: Administrer land
-    name: Navn
-    show_header: Detaljer for land
-    update_header: Rediger land
-  create: Opprett
-  created_at: Opprettet på
-  currency:
-    code: Kode
-    enabled: Aktivert
-    exchange_rate: Valutakurs
-    id: ID
-    name: Navn
-    updated_at: Sist oppdatert
-  customer:
-    billing_address: Fakturaadresse
-    email: E-post
-    first_name: Fornavn
-    groups: Grupper
-    id: ID
-    last_name: Etternavn
-    shipping_address: Leveringsadresse
-    phone_number: Telefonnummer
-  delete: Slett
-  deleted: Slettet
-  edit: Rediger
-  email:
-    code: Kode
-    enabled: Aktivert
-    updated_at: Sist oppdatert
-  filter: Filtrer
-  form:
+    account:
+        order:
+            details: 'Nærmere opplysninger om bestillingen'
+            download_invoice: 'Last ned fakturaen'
+            list: 'Alle bestillinger'
+            placed_at: 'Plassert på %at%'
+            shipment:
+                ready: 'Klar siden %at%'
+                returned: 'Returnert %at%'
+                shipped: 'Sendt %at%'
+        title: 'Min konto'
     cart:
-      coupon: Kupong
-    choose_file: Velg fil
-    frontend:
-      password:
+        empty: 'Handlevognen er tom'
+        summary:
+            clear: 'Tøm handlevogn'
+            quantity: Antall
+        total_items: '1 vare|%count% varer'
+    checkout:
+        finalize:
+            order:
+                no_items: 'Denne ordren inneholder ingen varer'
+                no_promotion: 'Ingen tilbudskode'
+                no_shipping_charges: 'Ingen fraktkostnader lagt til'
+                no_taxes: 'Ingen mva lagt til'
+                promotion_discount: Kampanjerabatt
+            order_item:
+                quantity: Antall
+        forward: 'Gå videre'
+    homepage:
+        splash:
+            headline: 'Velkommen til Sylius'
+            subheadline: 'Moderne netthandel for Symfony2'
+    meta:
+        frontend_title: 'Sylius, moderne netthandel for Symfony2'
+    order:
+        no_items: 'Denne ordren inneholder ingen varer'
+        no_shipments: 'Det er ingen forsendelser for denne bestillingen'
+        no_shipping_charges: 'Ingen fraktkostnader lagt til'
+        no_taxes: 'Ingen mva lagt til'
+    order_item:
+        quantity: Antall
+        sellable: Produkt
+    promotion_coupon:
+        generate: 'Generer kuponger'
+        index: 'List ut kuponger'
+        total_results:
+            Total: '%total%'
+    shipment:
+        update: Rediger
+    taxon:
+        image: 'Velg bilde'
+        no_image: 'Ingen bilde for denne taksonomi'
+    ui:
+        action: Handling
+        actions: Handlinger
+        add: 'Legg til'
+        add_action: 'Legg til handling'
+        add_coupon: 'Legg til rabattkupong'
+        add_image: 'Legg til bilde'
+        add_member: 'Legg til medlem'
+        add_province: 'Legg til fylke'
+        add_rule: 'Legg til regel'
+        add_to_cart: 'Legg i handlekurv'
+        add_value: 'Legg til verdi'
+        adding_new_locale: 'Legge til nytt språk/land'
+        addressing_step: Adresseringssteg
+        administration: Administrasjon
+        administration_dashboard: 'Administrasjon dashboard'
+        all_your_addresses: 'Alle adressene'
+        amount: Beløp
+        assortment: Utvalg
+        author: Forfatter
+        availability: Tilgjengelighet
+        available_on: Tilgjengelig
+        available_on_demand: 'Tilgjengelig på forespørsel'
+        back: Tilbake
+        backorder: Restordre
+        balance_due: 'Forfalt saldo'
+        billing_address: Fakturaadresse
+        blocks: Blokker
+        body: Kropp
+        browse_products: 'Bla gjennom produkter'
+        build: Bygg
+        calculator: Kalkulator
+        cancel: Avbryt
+        cancelled: Avbrutt
+        cart_summary_header: Oppsummering
+        categorization: Kategorisering
+        category: Kategori
+        change_password: 'Endre passord'
+        change_your_password: 'Endre passord'
+        checkout: 'Gå til kassen'
+        choose_file: 'Velg fil'
+        city: By
+        code: Kode
+        company: Firma
+        completed: Fullført
+        configuration: Konfigurasjon
         confirmation: Bekreft
-        current: Gjeldende passord
-        new: Nytt Passord
-        title: Endre passord
-      profile:
-        title: Endre din personlige informasjon
-    login:
-      email: E-post
-      password: Passord
-    option_value:
-      add_value: Legg til verdi
-    profile:
-      email: E-post
-      firstName: Fornavn
-      lastName: Etternavn
-  gallery:
-    next: Neste
-    previous: Forrige
-    slideshow: Lysbildevisning
-  generate: Opprett
-  group:
-    create: Opprett gruppe
-    id: ID
-    index_header: Grupper
-    name: Navn
-    roles: Roller
-    update_header: Rediger gruppe
-  hide_deleted: Skjul slettet
-  history:
-    action: Handling
-    author: Forfatter
-    data: Data
-  homepage:
-    splash:
-      headline: Velkommen til Sylius
-      subheadline: Moderne netthandel for Symfony2
-  inventory_unit:
-    created_at: Opprettet
-    inventory_state: Lagertilstand
-    name: Navn
-    shipping_state: Fraktstatus
-    sku: Strekkode
-    updated_at: Sist oppdatert
-  locale:
-    code: Kode
-    create: Definer språk/land
-    create_header: Legge til nytt språk/land
-    enabled: Aktivert
-    id: ID
-    index_header: Liste av alle konfigurerte nasjonale innstillinger
-    name: Navn
-    update_header: Redigere språk/land
-    updated_at: Sist oppdatert
-  login: Logg inn
-  login_header: Administrasjon
-  logo: Sylius
-  manage: Administrer
-  menu:
-    id: ID
-    title: Tittel
-  menu_node:
-    id: ID
-    index_header: Menynoder
-    parent: Forelder
-    title: Tittel
-  meta:
-    frontend_title: Sylius, moderne netthandel for Symfony2
-  metadata:
-    id: ID
-    content: Innhold
-  na: Ikke tilgjengelig
-  newest: Nyeste produkter
-  "no": false
-  order:
-    adjustments:
-      amount: Beløp
-      description: Beskrivelse
-      type: Type
-    billing_address: Fakturaadresse
-    comment:
-      author: Forfatter
-      created_at: Opprettet på
-      state: Tilstand
-    create: Opprette ordre
-    create_header: Ny ordre
-    created_at: Opprettingstidspunkt
-    currency: Valuta
-    general_info: Generell info
-    id: ID
-    index_header: Gjeldende ordrer
-    inventory_tracking: Sporing av Inventar
-    inventory_unit:
-      backorder: Restordre
-      fulfill: Oppfylle
-      return: Retur
-    items_total: Antall varer
-    manage: Behandle ordrer
-    no_items: Denne ordren inneholder ingen varer
-    no_results: Du har ingen nye ordrer
-    no_shipments: Det er ingen forsendelser for denne bestillingen
-    no_shipping_charges: Ingen fraktkostnader lagt til
-    no_taxes: Ingen mva lagt til
-    number: Nummer
-    payment: Betaling
-    payment_state: Betalingsstatus
-    payment_states:
-      balance_due: Forfalt saldo
-    promotion_coupons: Kuponger
-    promotion_total: Total kampanje
-    recent_header: Siste ordrer
-    release_inventory: Utgivelselager
-    shipment_state: Forsendelsestatus
-    shipment_states:
-      pending: Venter
-    shipments: Forsendelser
-    shipping_address: Leveringsadresse
-    shipping_charges: Fraktkostnader
-    shipping_total: Frakt totalt
-    show_header: Ordre
-    state:
-      cancelled: Avbrutt
-      checkout: Gå til kassen
-      returned: Returnert
-      shipped: Sendt
-    tax_total: Sum avgifter
-    taxes: Avgifter
-    total: Totalt
-    update_header: Redigere rekkefølge
-  review:
-    id: ID
-    title: Tittel
-    author: Forfatter
-    created_at: Opprettet på
-  order_item:
-    product: Produkt
-    quantity: Antall
-    sellable: Produkt
-    total: Totalt
-    unit_price: Enhetspris
-  out_of_stock: Ikke på lager
-  page:
-    body: Kropp
-    create: Opprett ny side
-    id: ID
-    index_header: Sider
-    routes: Ruter
-    title: Tittel
-  password: Passord
-  payment:
-    amount: Beløp
-    create: Opprette betaling
-    create_header: Ny betaling
-    created_at: Opprettet på
-    id: ID
-    index_header: Betalinger
-    manage: Behandle betalinger
-    method: Metode
-    order: Ordre
-    state:
-      cancelled: Avbrutt
-      checkout: Gå til kassen
-      completed: Fullført
-      failed: Mislyktes
-      header: Tilstand
-      new: Ny
-      pending: Venter
-      processing: Behandler
-      refunded: Refundert
-      unknown: Ukjent
-      void: Ugyldig
-    update_header: Rediger betaling
-    updated_at: Sist oppdatert
-  payment_method:
-    create: Opprett betalingsmåte
-    create_header: Ny betalingsmåte
-    gateway: Rute
-    id: ID
-    index_header: Betalingsmetoder
-    name: Navn
-    update_header: Rediger betalingsmåte
-    updated_at: Sist oppdatert
-  permission:
-    code: Kode
-    description: Beskrivelse
-    id: ID
-    updated_at: Sist oppdatert
-  pricing:
-    volume_based:
-      button:
-        add: Legg til
-      price: Pris
-  product:
-    available_on: Tilgjengelig
-    available_on_demand: Tilgjengelig på forespørsel
-    categorization: Kategorisering
-    contain_variants: Inneholder varianter
-    create: Lag produkt
-    create_header: Nytt produkt
-    description: Beskrivelse
-    generate_variants: Generer varianter
-    index_by_taxon_header: 'Produkter <small>kategorisert under "%taxon%" gruppe</small>'
-    index_header: 'Produkter <small>indeks over alle produkter i butikken</small>'
-    manage: Administrere produkter
-    name: Navn
-    no_description: '<i>Ingen beskrivelse...</i>'
-    no_images: Det er ingen bilder for dette produktet
-    no_options: Det er ingen alternativer for dette produktet
-    no_shipping_category: Ingen fraktkategori
-    no_short_description: '<i>Ingen kort beskrivelse</i>'
-    no_sku: Ingen vareenhet
-    no_tax_category: Ingen skattekategori
-    no_taxons: Det er ingen grupper for dette produktet
-    options: Instillinger
-    price: Utsalgspris
-    restricted_zone: Begrenset sone
-    shipping_category: Fraktkategori
-    show: Vis mer
-    show_header: 'Produktdetaljer <small>Ser på produkt "<strong>%product%</strong>"</small>'
-    sku: Strekkode
-    stock: På lager
-    tabs:
-      categorization: Kategorisering
-      images: Bilder
-      options: Instillinger
-      pricing: Prising
-      product: Produkt
-    tax_category: Skattekategori
-    unavailable: Ikke tilgjengelig
-    update_header: Endrer produkt
-    updated_at: Sist oppdatert
-    variant_selection_method: Metode for valg av variant
-    volume_based:
-      price: Pris
-  product_attribute:
-    code: Kode
-    name: Navn
-    type: Type
-    updated_at: Sist oppdatert
-  product_association:
-    code: Kode
-    create_header: Nytt produkt
-    name: Navn
-    type: Type
-    updated_at: Sist oppdatert
-  product_not_available_in_zone: Ikke tilgjengelig i ditt land
-  product_option:
-    manage: Endre innstillinger
-    name: Navn
-    presentation: Presentasjon
-    updated_at: Sist oppdatert
-  promotion:
-    actions: Handlinger
-    add_action: Legg til handling
-    add_rule: Legg til regel
-    coupon_based: Kupongbasert
-    create: Opprett kampanje
-    create_header: Ny kampanje
-    created_at: Opprettet på
-    description: Beskrivelse
-    ends_at: Slutter på
-    general_info: Generell info
-    id: ID
-    index_header: Nåværende kampanjer
-    manage: Behandle kampanjer
-    name: Navn
-    rules: Regler
-    show_header: Kampanjedetaljer
-    starts_at: Starter på
-    update_header: Endrer kampanje
-    updated_at: Sist oppdatert
-    usage_limit: Bruksgrense
-    used: Brukt
-  promotion_action:
-    configuration: Konfigurasjon
-    type: Type
-  promotion_coupon:
-    code: Kode
-    create: Legg til rabattkupong
-    create_header: Lag ny rabattkupong
-    generate: Generer kuponger
-    generate_header: Genererer kuponger
-    index: List ut kuponger
-    index_header: Kuponger
-    total_results:
-      Total: '%total%'
-    update_header: Endrer kupong
-  promotion_rule:
-    configuration: Konfigurasjon
-    type: Type
-  province:
-    provinces: Fylker
-  redirect_route:
-    id: ID
-    title: Tittel
-  report:
-    code: Kode
-    description: Beskrivelse
-    id: Id
-    manage: Administrer
-    name: Navn
-  role:
-    code: Kode
-    description: Beskrivelse
-    id: ID
-    index_header: Roller
-    name: Navn
-    updated_at: Sist oppdatert
-  route:
-    id: ID
-    index_header: Ruter
-    name: Navn
-    title: Tittel
-  save_changes: Lagre endringer
-  search: Søk
-  security:
-    login:
-      button: Logg inn
-  settings:
-    general_header: Generelle instillinger
-    taxation_header: Beskatningsinnstillinger
-  shipment:
-    created_at: Opprettet på
-    id: ID
-    index_header: Forsendelser
-    inventory_state: Lagertilstand
-    manage: Behandle forsendelser
-    method: Metode
-    modified: Endret
-    name: Navn
-    order: Ordre
-    ship: Frakt
-    show_header: Forsendelsedetaljer
-    sku: Strekkode
-    state: Tilstand
-    tracking_code: Sporingskode
-    update: Rediger
-    update_header: Rediger forsendelse
-    updated_at: Sist oppdatert
-  shipment_category:
-    manage: Behandle fraktkategorier
-  shipping_address: Leveringsadresse
-  shipping_category:
-    create: Opprett fraktkategori
-    create_header: Ny fraktkategori
-    id: ID
-    index_header: Fraktkategorier
-    manage: Behandle fraktkategorier
-    name: Navn
-    update_header: Endrer fraktkategori
-    updated_at: Sist oppdatert
-  shipping_method:
-    calculator: Kalkulator
-    category: Kategori
-    create: Opprett fraktmetode
-    create_header: Ny fraktmetode
-    enabled: Aktivert
-    id: ID
-    index_header: Leveringsmetoder
-    manage: Behandle fraktmetoder
-    name: Navn
-    show_header: Fraktmetodedetaljer
-    update_header: Endrer fraktmetode
-    updated_at: Sist oppdatert
-    zone: Sone
-  shop_by: Butikk av
-  show_all: Vis alle
-  show_deleted: Vis slettede
-  stockable:
-    index_header: 'Lagerbeholdning <small>Her kan du se gjeldende lagernivå</small>'
-    name: Navn
-    updated_at: Sist oppdatert
-  tax_category:
-    create: Oprett momskategori
-    create_header: Ny momskategori
-    description: Beskrivelse
-    id: ID
-    index_header: Beskatningskategorier
-    manage: Administrer momskategorier
-    name: Navn
-    no_description: Ingen beskrivelse
-    update_header: Endrer skattekategori
-    updated_at: Sist oppdatert
-  tax_rate:
-    amount: Beløp
-    calculator: Kalkulator
-    category: Kategori
-    create: Opprett skatterate
-    create_header: Ny skatterate
-    index_header: Skattesatser
-    manage: Behandle skatterater
-    name: Navn
-    show_header: Skatteratedetaljer
-    update_header: Oppdaterer skatterate
-    updated_at: Sist oppdatert
-    zone: Sone
-  taxon:
-    index_header: Taksonomier
-    create: Opprett taksonomi
-    create_header: Ny taksonomi
-    image: Velg bilde
-    name: Navn
-    no_image: Ingen bilde for denne taksonomi
-    product_index_header: 'Produkter kategorisert som "%name%"'
-    update_header: Endrer taksonomi
-  total_quantity: Totalt antall
-  ui:
-    change_password: Endre passord
-    code: Kode
-    email: E-post
-    login: Logg inn
-    logout: Logg ut
-    register: Registrer
-    name: Navn
-    id: Id
-  unknown: Ukjent
-  user:
-    create_header: Ny bruker
-    general_info: 'Bruker "%username%" generell info'
-    id: ID
-    impersonate: Logg inn som denne brukeren
-    index_header: 'Brukere <small>Liste over alle brukere registrert i butikken</small>'
-    last_login: Siste pålogging
-    recent_header: Nylige brukere
-    register:
-      button: Registrer
-    registration_date: Registreringdato
-    show_header: Brukerdetaljer
-    update_header: Endrer bruker
-    username: Brukernavn
-  variant:
-    add_image: Legg til bilde
-    availability: Tilgjengelighet
-    available_on_demand: Tilgjengelig på forespørsel
-    create: Lag variant
-    create_header: Ny produktvariant
-    delete_image: Slett bilde
-    last_update: Sist oppdatert
-    options: Instillinger
-    price: Pris
-    sku: Strekkode
-    stock: På lager
-    update_header: Endrer variant
-  "yes": true
-  zone:
-    add_member: Legg til medlem
-    create: Opprett sone
-    create_header: Ny sone
-    index_header: Soner
-    manage: Behandle soner
-    name: Navn
-    scope: Omfang
-    show_header: Sonedetaljer
-    type: Type
-    update_header: Endrer sone
-  zone_member:
-    members: Medlemmer
+        confirmation_title: Bekreft
+        contain_variants: 'Inneholder varianter'
+        content: Innhold
+        countries: Land
+        country: Land
+        country_details: 'Detaljer for land'
+        coupon: Kupong
+        coupon_based: Kupongbasert
+        coupons: Kuponger
+        create: Opprett
+        create_a_new_address: 'Lag en ny adresse'
+        create_country: 'Opprett land'
+        create_group: 'Opprett gruppe'
+        create_locale: 'Definer språk/land'
+        create_new_coupon: 'Lag ny rabattkupong'
+        create_new_page: 'Opprett ny side'
+        create_order: 'Opprette ordre'
+        create_payment: 'Opprette betaling'
+        create_payment_method: 'Opprett betalingsmåte'
+        create_product: 'Lag produkt'
+        create_promotion: 'Opprett kampanje'
+        create_shipping_category: 'Opprett fraktkategori'
+        create_shipping_method: 'Opprett fraktmetode'
+        create_tax_category: 'Oprett momskategori'
+        create_tax_rate: 'Opprett skatterate'
+        create_taxon: 'Opprett taksonomi'
+        create_variant: 'Lag variant'
+        create_zone: 'Opprett sone'
+        created_at: 'Opprettet på'
+        creation_time: Opprettingstidspunkt
+        currency: Valuta
+        current_orders: 'Gjeldende ordrer'
+        current_password: 'Gjeldende passord'
+        current_promotions: 'Nåværende kampanjer'
+        current_stock: 'På lager'
+        dashboard: Panel
+        data: Data
+        default_billing_address: 'Standard faktureringsadresse'
+        default_currency: 'Standard valuta'
+        default_shipping_address: 'Standard leveringsadresse'
+        delete: Slett
+        delete_image: 'Slett bilde'
+        deleted: Slettet
+        description: Beskrivelse
+        edit: Rediger
+        edit_group: 'Rediger gruppe'
+        edit_locale: 'Redigere språk/land'
+        edit_my_address: 'Rediger min adresse'
+        edit_your_personal_information: 'Endre din personlige informasjon'
+        editing_country: 'Rediger land'
+        editing_coupon: 'Endrer kupong'
+        editing_order: 'Redigere rekkefølge'
+        editing_payment: 'Rediger betaling'
+        editing_payment_method: 'Rediger betalingsmåte'
+        editing_product: 'Endrer produkt'
+        editing_promotion: 'Endrer kampanje'
+        editing_shipment: 'Rediger forsendelse'
+        editing_shipping_category: 'Endrer fraktkategori'
+        editing_shipping_method: 'Endrer fraktmetode'
+        editing_tax_category: 'Endrer skattekategori'
+        editing_taxon: 'Endrer taksonomi'
+        editing_user: 'Endrer bruker'
+        editing_variant: 'Endrer variant'
+        editing_zone: 'Endrer sone'
+        email: E-post
+        enabled: Aktivert
+        ends_at: 'Slutter på'
+        error: Feil
+        exchange_rate: Valutakurs
+        existing_customer: 'Eksisterende kunde'
+        failed: Mislyktes
+        filter: Filtrer
+        first_name: Fornavn
+        firstname: Fornavn
+        fulfill: Oppfylle
+        gateway: Rute
+        general_info: 'Generell info'
+        general_settings: 'Generelle instillinger'
+        generate: Opprett
+        generate_variants: 'Generer varianter'
+        generating_coupons: 'Genererer kuponger'
+        grand_total: Total
+        groups: Grupper
+        hide_deleted: 'Skjul slettet'
+        id: ID
+        images: Bilder
+        index_of_all_configured_locales: 'Liste av alle konfigurerte nasjonale innstillinger'
+        information: Informasjon
+        inventory_here_you_can_see_current_stock_levels: 'Lagerbeholdning <small>Her kan du se gjeldende lagernivå</small>'
+        inventory_index: Lager
+        inventory_state: Lagertilstand
+        inventory_tracking: 'Sporing av Inventar'
+        invoice: Faktura
+        items_total: 'Antall varer'
+        label: Etikett
+        last_login: 'Siste pålogging'
+        last_name: Etternavn
+        last_update: 'Sist oppdatert'
+        last_week_orders: 'Forrige ukes ordrer'
+        last_week_revenue: 'Forrige ukes inntekter'
+        lastname: Etternavn
+        latest_orders: 'Siste ordre'
+        locales: 'Nasjonale innstillinger'
+        login: 'Logg inn'
+        login_button: 'Logg inn'
+        logout: 'Logg ut'
+        manage: Administrer
+        manage_countries: 'Administrer land'
+        manage_options: 'Endre innstillinger'
+        manage_orders: 'Behandle ordrer'
+        manage_payments: 'Behandle betalinger'
+        manage_products: 'Administrere produkter'
+        manage_promotions: 'Behandle kampanjer'
+        manage_shipments: 'Behandle forsendelser'
+        manage_shipping_categories: 'Behandle fraktkategorier'
+        manage_shipping_methods: 'Behandle fraktmetoder'
+        manage_tax_categories: 'Administrer momskategorier'
+        manage_tax_rates: 'Behandle skatterater'
+        manage_zones: 'Behandle soner'
+        members: Medlemmer
+        menu_nodes: Menynoder
+        message: Melding
+        method: Metode
+        modified: Endret
+        n_a: 'Ikke tilgjengelig'
+        name: Navn
+        new: Ny
+        new_country: 'Nytt land'
+        new_customer: 'Ny kunde'
+        new_order: 'Ny ordre'
+        new_password: 'Nytt Passord'
+        new_payment: 'Ny betaling'
+        new_payment_method: 'Ny betalingsmåte'
+        new_product: 'Nytt produkt'
+        new_product_variant: 'Ny produktvariant'
+        new_promotion: 'Ny kampanje'
+        new_shipping_category: 'Ny fraktkategori'
+        new_shipping_method: 'Ny fraktmetode'
+        new_tax_category: 'Ny momskategori'
+        new_tax_rate: 'Ny skatterate'
+        new_taxon: 'Ny taksonomi'
+        new_user: 'Ny bruker'
+        new_zone: 'Ny sone'
+        newest_products: 'Nyeste produkter'
+        next: Neste
+        'no': false
+        no_default_billing_address: 'Ingen standard faktureringsadresse'
+        no_default_shipping_address: 'Ingen standard leveringsadresse'
+        no_description: 'Ingen beskrivelse'
+        no_shipping_category: 'Ingen fraktkategori'
+        no_short_description: '<i>Ingen kort beskrivelse</i>'
+        no_sku: 'Ingen vareenhet'
+        no_tax_category: 'Ingen skattekategori'
+        not_available_in_your_country: 'Ikke tilgjengelig i ditt land'
+        number: Nummer
+        number_of_orders: 'Antall ordrer'
+        options: Instillinger
+        order: Ordre
+        order_item_product: Produkt
+        order_show_header: Ordre
+        order_summary: Ordreoversikt
+        order_value: Ordeverdi
+        orders: Bestillinger
+        out_of_stock: 'Ikke på lager'
+        overview_of_your_store: 'Oversikt over butikken'
+        pages: Sider
+        parent: Forelder
+        password: Passord
+        payment: Betaling
+        payment_method: Betalingsmetode
+        payment_methods: Betalingsmetoder
+        payment_state: Betalingsstatus
+        payments: Betalinger
+        pending: Venter
+        phone_number: Telefonnummer
+        place_order: 'Legg inn bestilling'
+        placed_at: 'Plassert på'
+        postcode: Postnummer
+        presentation: Presentasjon
+        previous: Forrige
+        price: Pris
+        pricing: Prising
+        processing: Behandler
+        product: Produkt
+        product_details_viewing_product_product: 'Produktdetaljer <small>Ser på produkt "<strong>%product%</strong>"</small>'
+        products: Produkter
+        products_categorized_as_name: 'Produkter kategorisert som "%name%"'
+        products_categorized_under_taxon_taxon: 'Produkter <small>kategorisert under "%taxon%" gruppe</small>'
+        products_index_of_all_products_in_your_store: 'Produkter <small>indeks over alle produkter i butikken</small>'
+        promotion_coupons: Kuponger
+        promotion_details: Kampanjedetaljer
+        promotion_total: 'Total kampanje'
+        promotions: Kampanjer
+        province: Provins
+        provinces: Fylker
+        recent_orders: 'Siste ordrer'
+        recent_users: 'Nylige brukere'
+        refunded: Refundert
+        register: Registrer
+        register_button: Registrer
+        registration_date: Registreringdato
+        release_inventory: Utgivelselager
+        restricted_zone: 'Begrenset sone'
+        retail_price: Utsalgspris
+        return: Retur
+        returned: Returnert
+        roles: Roller
+        routes: Ruter
+        rules: Regler
+        sales: Salg
+        sales_this_month: Salg
+        save: Lagre
+        save_changes: 'Lagre endringer'
+        scope: Omfang
+        search: Søk
+        set_as_default_billing_address: 'Standard faktureringsadresse'
+        set_as_default_shipping_address: 'Sett til standard leveringsadresse'
+        ship: Frakt
+        shipment_details: Forsendelsedetaljer
+        shipment_state: Forsendelsestatus
+        shipments: Forsendelser
+        shipped: Sendt
+        shipping_address: Leveringsadresse
+        shipping_categories: Fraktkategorier
+        shipping_category: Fraktkategori
+        shipping_charges: Fraktkostnader
+        shipping_method: Fraktalternativ
+        shipping_method_details: Fraktmetodedetaljer
+        shipping_methods: Fraktalternativ
+        shipping_state: Fraktstatus
+        shipping_total: 'Frakt totalt'
+        shop_by: 'Butikk av'
+        show_all: 'Vis alle'
+        show_deleted: 'Vis slettede'
+        sign_in_to_the_store_or_create_new_account: 'Logg på butikken <small>eller opprett ny konto</small>'
+        sku: Strekkode
+        slideshow: Lysbildevisning
+        starts_at: 'Starter på'
+        state: Tilstand
+        state_header: Tilstand
+        street: Gate
+        success: Suksess
+        sylius_logo: Sylius
+        tax_categories: Merverdikategorier
+        tax_category: Skattekategori
+        tax_rate_details: Skatteratedetaljer
+        tax_rates: Skattesatser
+        tax_total: 'Sum avgifter'
+        taxation_categories: Beskatningskategorier
+        taxation_settings: Beskatningsinnstillinger
+        taxes: Avgifter
+        taxons: Taksonomier
+        there_are_no_images_for_this_product: 'Det er ingen bilder for dette produktet'
+        there_are_no_options_for_this_product: 'Det er ingen alternativer for dette produktet'
+        there_are_no_taxons_for_this_product: 'Det er ingen grupper for dette produktet'
+        title: Tittel
+        topic: Emne
+        total: Totalt
+        total_orders: 'Totale bestillinger'
+        total_qty: 'Totalt antall'
+        total_registrations: 'Totalt antall registreringer'
+        tracking_code: Sporingskode
+        tracking_number: Sporingsnummer
+        type: Type
+        unavailable: 'Ikke tilgjengelig'
+        unit_price: Enhetspris
+        unknown: Ukjent
+        updating_tax_rate: 'Oppdaterer skatterate'
+        usage_limit: Bruksgrense
+        used: Brukt
+        user_details: Brukerdetaljer
+        username: Brukernavn
+        users_list_of_all_users_registered_in_store: 'Brukere <small>Liste over alle brukere registrert i butikken</small>'
+        variant_selection_method: 'Metode for valg av variant'
+        view_more: 'Vis mer'
+        void: Ugyldig
+        warning: Advarsel
+        welcome_to_your_space: 'Velkommen til ditt område'
+        'yes': true
+        you_are_customer_since: 'Du har vært kunde siden'
+        you_have_no_new_orders: 'Du har ingen nye ordrer'
+        your_products: Produkter
+        zone: Sone
+        zone_details: Sonedetaljer
+        zones: Soner
+    user:
+        general_info: 'Bruker "%username%" generell info'
+        impersonate: 'Logg inn som denne brukeren'
+    variant:
+        stock: 'På lager'

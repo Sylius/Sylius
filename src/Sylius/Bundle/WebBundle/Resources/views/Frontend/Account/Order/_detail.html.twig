@@ -4,25 +4,25 @@
 
 <div class="row well well-sm" id="information">
     <div class="col-md-6">
-        <strong>{{ 'sylius.account.order.created_at'|trans }} {{ order.createdAt|date() }}</strong><br><br>
-        {#{{ 'sylius.account.order.shipment_mode'|trans }} <strong>TODO</strong><br>#}
-        {#{{ 'sylius.account.order.payment_mode'|trans }} <strong>TODO</strong><br>#}
+        <strong>{{ 'sylius.ui.placed_at'|trans }} {{ order.createdAt|date() }}</strong><br><br>
+        {#{{ 'sylius.ui.shipment_mode'|trans }} <strong>TODO</strong><br>#}
+        {#{{ 'sylius.ui.payment_mode'|trans }} <strong>TODO</strong><br>#}
     </div>
     <div class="col-md-6">
         <br><br>
-        {{ 'sylius.account.order.number'|trans }} <strong>{{ order.number }}</strong><br>
-        {{ 'sylius.account.order.state'|trans }}
+        {{ 'sylius.ui.number'|trans }} <strong>{{ order.number }}</strong><br>
+        {{ 'sylius.ui.state'|trans }}
         {% include "SyliusWebBundle:Frontend/Account:Order/_state.html.twig" %}
     </div>
 </div>
 
 <div class="row">
     <div class="col-md-6">
-        <h4>{{ 'sylius.checkout.finalize.order.shipping_address'|trans }}</h4>
+        <h4>{{ 'sylius.ui.shipping_address'|trans }}</h4>
         {% include 'SyliusWebBundle:Common/Address:_show.html.twig' with { 'address': order.shippingAddress } %}
     </div>
     <div class="col-md-6">
-        <h4>{{ 'sylius.checkout.finalize.order.billing_address'|trans }}</h4>
+        <h4>{{ 'sylius.ui.billing_address'|trans }}</h4>
         {% include 'SyliusWebBundle:Common/Address:_show.html.twig' with { 'address': order.billingAddress } %}
     </div>
 </div>
@@ -33,8 +33,8 @@
         <tr>
             <th>{{ 'sylius.order_item.sellable'|trans }}</th>
             <th>{{ 'sylius.order_item.quantity'|trans }}</th>
-            <th>{{ 'sylius.order_item.unit_price'|trans }}</th>
-            <th>{{ 'sylius.order_item.total'|trans }}</th>
+            <th>{{ 'sylius.ui.unit_price'|trans }}</th>
+            <th>{{ 'sylius.ui.total'|trans }}</th>
         </tr>
         </thead>
         <tbody>
@@ -54,7 +54,7 @@
             <tr>
                 <th colspan="3">
                     <span class="pull-right">
-                        {{ 'sylius.order.items_total'|trans }}
+                        {{ 'sylius.ui.items_total'|trans }}
                     </span>
                 </th>
                 <th>{{ order.itemsTotal|sylius_money(order.currency) }}</th>
@@ -62,7 +62,7 @@
             <tr>
                 <td colspan="3">
                     <span class="pull-right">
-                        {{ 'sylius.order.tax_total'|trans }}
+                        {{ 'sylius.ui.tax_total'|trans }}
                     </span>
                 </td>
                 <td>{{ order.getAdjustmentsTotalRecursively(taxAdjustment)|sylius_money(order.currency) }}</td>
@@ -70,7 +70,7 @@
             <tr>
                 <td colspan="3">
                     <span class="pull-right">
-                        {{ 'sylius.order.shipping_total'|trans }}
+                        {{ 'sylius.ui.shipping_total'|trans }}
                     </span>
                 </td>
                 <td>{{ order.adjustmentsTotal(shippingAdjustment)|sylius_money(order.currency) }}</td>
@@ -78,7 +78,7 @@
             <tr>
                 <td colspan="3">
                     <span class="pull-right">
-                        {{ 'sylius.order.promotion_total'|trans }}
+                        {{ 'sylius.ui.promotion_total'|trans }}
                     </span>
                 </td>
                 <td>{{ order.adjustmentsTotal(promotionAdjustment)|sylius_money(order.currency) }}</td>
@@ -86,7 +86,7 @@
             <tr>
                 <th colspan="3">
                     <span class="pull-right">
-                        {{ 'sylius.order.total'|trans }}
+                        {{ 'sylius.ui.total'|trans }}
                     </span>
                 </th>
                 <th>{{ order.total|sylius_money(order.currency) }}</th>

@@ -1,988 +1,578 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-  account:
-    address:
-      action:
-        billing: Als Standardrechnungsadresse setzen
-        create: Neue Adresse hinzufügen
-        delete: Löschen
-        edit: Bearbeiten
-        shipping: Als Standard-Lieferadresse setzen
-      create: Neue Adresse hinzufügen
-      default:
-        billing: Standard-Rechnungsadresse
-        no_billing: Keine Standard-Rechnungsadresse
-        no_shipping: Keine Standard-Lieferadresse
-        shipping: Standard-Lieferadresse
-      list: Alle Adressen
-      update: Adresse bearbeiten
-    home:
-      email: E-Mail
-      last5orders: Ihre letzten 5 Bestellungen
-      since: Kunde seit
-      welcome: Willkommen in deinem persönlichen Bereich
-    order:
-      created_at: Bestellt am
-      details: Bestelldetails
-      download_invoice: Rechnung herunterladen
-      invoice: Rechnung
-      list: Alle Bestellungen
-      number: Nummer
-      placed_at: 'Bestellt am %at%'
-      shipment:
-        pending: Ausstehend
-        ready: 'Bereit seit %at%'
-        returned: 'Retour am %at%'
-        shipped: 'Geliefert am %at%'
-      state: Versandstatus
-      total: Total
-      tracking_number: Sendungsnummer
-    title: Mein Account
-  add_to_cart: In den Warenkorb
-  association_type:
-    name: Name
-    create: Erstellen
-  address:
-    city: Stadt
-    company: Firma
-    country: Land
-    firstname: Vorname
-    lastname: Nachname
-    postcode: PLZ
-    province: Region
-    street: Straße
-  alert:
-    error: Fehler
-    info: Hinweis
-    success: Erfolgreich
-    warning: Warnung
-  archetype:
-    attributes: Attribute
-    build: Archetype erstellen
-    build_header: Produkt aus Archetype erstellen
-    create: Archetype hinzufügen
-    create_header: Neuer Archetype
-    index_header: Produkt-Vorlagen
-    name: Name
-    options: Optionen
-    parent: Übergeordnet
-    update_header: Archetype editieren
-    updated_at: Geändert
-  backend:
-    alert:
-      info: Hinweis
-    dashboard:
-      chart_order_count: Anzahl der Bestellungen
-      chart_order_total: Bestellwert
-      header: Administration Dashboard
-      orders: Bestellungen der letzten Woche
-      revenue: Einnahmen der letzten Woche
-      subheader: Überblick Ihres Shops
-    logout: Abmelden
-    quick_links:
-      add_product: Neues Produkt
-      customers: Kunden
-      orders: Letzte Bestellungen
-      products: Ihre Produkte
-    statistics:
-      header: Statistiken dieses Monats
-      orders_this_month: Gesamtbestellungen
-      registrations_this_month: Gesamteregistrierungen
-      sales_this_month: Verkäufe
-  billing_address: Rechnung an
-  block:
-    imagine:
-      create: Slideshow Block erstellen
-      create_header: Neuen Bild-Block erstellen
-      end_date: End–Datum
-      id: ID
-      index: Imagine Blöcke
-      index_header: Bild Blöcke
-      label: Bezeichnung
-      publishable: Veröffentlicht
-      start_date: Start–Datum
-      title: Titel
-      update_header: Bild-Element editieren
-      updated_at: Geändert
-    imagine_blocks: Bild Blöcke
-    index_header: Blöcke
-    simple:
-      body: Inhalt
-      create: Einfaches Element erstellen
-      create_header: Einfaches Element erstellen
-      end_date: End–Datum
-      id: ID
-      index: Einfache Elemente
-      index_header: Einfache Elemente
-      label: Bezeichnung
-      publishable: Veröffentlicht
-      start_date: Start–Datum
-      title: Titel
-      update_header: Einfaches Element editieren
-      updated_at: Geändert
-    simple_blocks: Einfache Elemente
-    slideshow:
-      body: Inhalt
-      create: Slideshow–Element erstellen
-      create_header: Neues Slideshow–Element erstellen
-      end_date: End–Datum
-      id: ID
-      index: Slideshow–Elemente
-      index_header: Slideshow Blöcke
-      publishable: Veröffentlicht
-      start_date: Start–Datum
-      title: Titel
-      update_header: Slideshow Block bearbeiten
-      updated_at: Geändert
-    slideshow_blocks: Slideshow Blöcke
-    string:
-      body: Inhalt
-      create: String Block erstellen
-      create_header: Neuen String Block erstellen
-      end_date: End–Datum
-      id: ID
-      index: Zeichenketten–Elemente
-      index_header: Zeichenketten–Elemente
-      label: Bezeichnung
-      publishable: Veröffentlicht
-      start_date: Start–Datum
-      title: Titel
-      update_header: String block editieren
-      updated_at: Geändert
-    string_blocks: Zeichenketten–Elemente
-  breadcrumb:
-    assortment: Sortiment
-    attribute:
-      index: Attribute
+    account:
+        order:
+            details: Bestelldetails
+            download_invoice: 'Rechnung herunterladen'
+            list: 'Alle Bestellungen'
+            placed_at: 'Bestellt am %at%'
+            shipment:
+                ready: 'Bereit seit %at%'
+                returned: 'Retour am %at%'
+                shipped: 'Geliefert am %at%'
+        title: 'Mein Account'
+    archetype:
+        build: 'Archetype erstellen'
     block:
-      imagine:
-        index: Imagine Blöcke
-      index: Blöcke
-      simple:
-        index: Simple Blöcke
-      slideshow:
-        index: Slideshow–Elemente
-      string:
-        index: String Blöcke
-    build: Erstellen
-    channel:
-      index: Ausgabekanäle
-    configuration: Konfiguration
-    contact_request:
-      index: Kontaktanfragen
-      show: Kontaktanfrage
-    contact_topic:
-      index: Supportthemen
-    content: Inhalt
-    country:
-      index: Länder
-    currency:
-      index: Währungen
-    customer:
-      index: Kunden
-    dashboard: Dashboard
-    edit: Bearbeiten
-    email:
-      index: E-Mails
-    general_settings: Allgemeine Einstellungen
-    generate: Generieren
-    group:
-      index: Gruppen
-    inventory:
-      index: Lagerbestände
-    locale:
-      index: Gebietsschemata
-    marketing: Marketing
-    menu:
-      index: Menüpunkte
-    menu_node:
-      index: Menüpunkte
-    new: Neu
-    option:
-      index: Optionen
-    order:
-      adjustments: Änderungen
-      index: Bestellungen
-    page:
-      index: Seiten
-    payment:
-      index: Bezahlungen
-    payment_method:
-      index: Zahlungsmethoden
-    permission:
-      index: Berechtigungen
-    product:
-      index: Produkte
-    promotion:
-      index: Aktionen
-    promotion_coupon:
-      index: Gutscheine
-    product_association_type:
-      index: Assoziationstyp
-    redirect_route:
-      index: Umleitungen (Redirects)
-    report:
-      index: Berichte
-    role:
-      index: Rollen
-    route:
-      index: Pfade
-    sales: Verkäufe
-    section:
-      customer: Kunde
-    security_settings: Sicherheitseinstellungen
-    shipment:
-      index: Lieferungen
-    shipping_category:
-      index: Versandgruppen
-    shipping_method:
-      index: Versandmethoden
-    support: Support
-    tax_category:
-      index: Steuerkategorien
-    tax_rate:
-      index: Steuersätze
-    taxation_settings: Gruppeneinstellungen
-    taxon:
-      index: Gruppen
-    update: Bearbeiten
-    zone:
-      index: Versandgebiete
-  browse_products: Produkte durchsuchen
-  cancel: Abbrechen
-  cart:
-    empty: Ihr Warenkorb ist leer
-    summary:
-      add_coupon: Erstellt
-      checkout: Zur Kasse
-      clear: Warenkorb leeren
-      grand_total: Gesamtbetrag
-      product: Artikel
-      quantity: Anzahl
-      save: Speichern
-      total: Gesamt
-      unit_price: Preis
-    summary_header: Warenkorb-Übersicht
-    total_items: '1 Artikel|%count% Artikel'
-  channel:
-    code: Code
-    create: Kanal hinzufügen
-    create_header: Kanal hinzufügen
-    created_at: Erstellt am
-    currency_default: Standardwährung
-    enabled: Aktiviert
-    id: ID
-    index_header: Ausgabekanäle
-    locale_default: Standard Lokalisierung
-    manage: Kanäle verwalten
-    name: Name
-    update: Bearbeiten
-    update_header: Channel editieren
-    updated_at: Geändert
-  checkout:
-    addressing:
-      header: Lieferadresse
-    back: Zurück
-    credit_card:
-      header: Zahlungsdetails
-    finalize:
-      address:
-        city: Stadt
-        country: Land
-        firstname: Vorname
-        lastname: Nachname
-        postcode: Postleitzahl
-        province: Region
-        street: Straße
-      header: Bestellungsübersicht
-      order:
-        billing_address: Rechnungsadresse
-        items_total: Gesamt
-        no_items: Diese Bestellung hat keine Artikel
-        no_promotion: Keine Reklame
-        no_shipping_charges: Keine Versandkosten
-        no_taxes: Keine Steuern
-        promotion_discount: Rabatt
-        promotion_total: Vergünstigung
-        shipping_address: Lieferadresse
-        shipping_charges: Lieferungsgebühren
-        shipping_total: Lieferungssumme
-        tax_total: Steuersumme
-        taxes: Steuern
-        total: Gesamt
-      order_item:
-        quantity: Menge
-        total: Gesamt
-        unit_price: Stückpreis
-      place_order: Bestellung aufgeben
-      product:
-        name: Name
-    forward: Weiter
-    payment:
-      header: Zahlungsweise
-    security:
-      existing_customer: Existierender Benutzer
-      guest: Gastbestellung
-      header: 'Anmelden <small> oder neuen Benutzer anlegen</small>'
-      login: Login
-      new_customer: Neuer Benutzer
-      proceed_order: Mit der Bestellung fortfahren
-      register: Registrieren
-    shipping:
-      header: Lieferverfahren
-  confirmation:
-    title: Bestätigung
-  contact_request:
-    email: E-Mail
-    firstName: Vorname
-    id: ID
-    index_header: Kontaktanfragen
-    lastName: Nachname
-    message: Nachricht
-    topic: Thema
-    updated_at: Geändert
-  contact_topic:
-    id: ID
-    index_header: Supportthemen
-    title: Titel
-    updated_at: Geändert
-  country:
-    add_province: Bundesland hinzufügen
-    create: Land erstellen
-    create_header: Neues Land
-    enabled: Aktiviert
-    id: ID
-    index_header: Länder
-    manage: Länder verwalten
-    name: Name
-    show_header: Landdetails
-    update_header: Land editieren
-  create: Erstellen
-  created_at: Erstellt am
-  currency:
-    code: Code
-    create: Währung erstellen
-    create_header: Neue Währung
-    enabled: Aktiviert
-    exchange_rate: Wechselkurs
-    id: ID
-    index_header: Währungen
-    name: Name
-    update_header: Währung editieren
-    updated_at: Geändert
-  customer:
-    billing_address: Rechnungsadresse
-    create_header: Neue Kunde
-    creation_date: Erstellt am
-    email: E-Mail
-    filter:
-      all: Alle Kunden anzeigen
-      registered: Registrierte Kunden anzeigen
-      unconfirmed: Unbestätigte Kunden anzeigen
-    first_name: Vorname
-    general_info: 'Allgemeine Kundeninformation : "%fullName%"'
-    groups: Gruppen
-    id: ID
-    index_header: 'Kunden<small>Liste aller Kunden</small>'
-    last_name: Nachname
-    orders: Kundenbestellungen
-    recent_header: Neuste Kunden
-    shipping_address: Lieferadresse
-    show_header: Kundendetails
-    update_header: Kunde bearbeiten
-    phone_number: Telefonnummer
-  delete: Löschen
-  deleted: Gelöscht
-  edit: Bearbeiten
-  email:
-    code: Code
-    create: Neue E-Mail hinzufügen
-    create_header: Neue E-Mail hinzufügen
-    enabled: Aktiviert
-    index_header: E-Mail Templates
-    manage: E-Mails verwalten
-    subject: Betreff
-    update_header: E-Mail editieren
-    updated_at: Geändert
-  emails:
-    order_comment:
-      name: Kommentar
-      subject: Neuer Kommentar zu einer Bestellung
-    order_confirmation:
-      name: Bestellbestätigung
-    shipment_confirmation:
-      name: Versandbestätigung
-    user_confirmation:
-      name: Bestätigung durch den Benutzer
-  filter: Filtern
-  form:
+        imagine:
+            index: 'Imagine Blöcke'
+            publishable: Veröffentlicht
+        simple:
+            index: 'Einfache Elemente'
+            publishable: Veröffentlicht
+        slideshow:
+            index: Slideshow–Elemente
+            publishable: Veröffentlicht
+        string:
+            index: Zeichenketten–Elemente
+            publishable: Veröffentlicht
     cart:
-      coupon: Gutschein
-    choose_file: Datei wählen
-    comment:
-      comment: Anmerkung
-    frontend:
-      password:
-        confirmation: Bestätigung
-        current: Aktuelles Passwort
-        new: Neues Passwort
-        title: Passwort ändern
-      profile:
-        title: Persönliche Informationen bearbeiten
-    login:
-      email: E-Mail
-      password: Passwort
+        empty: 'Ihr Warenkorb ist leer'
+        summary:
+            clear: 'Warenkorb leeren'
+            quantity: Anzahl
+        total_items: '1 Artikel|%count% Artikel'
+    checkout:
+        finalize:
+            order:
+                no_items: 'Diese Bestellung hat keine Artikel'
+                no_promotion: 'Keine Reklame'
+                no_shipping_charges: 'Keine Versandkosten'
+                no_taxes: 'Keine Steuern'
+                promotion_discount: Rabatt
+            order_item:
+                quantity: Menge
+        forward: Weiter
+        security:
+            proceed_order: 'Mit der Bestellung fortfahren'
+    customer:
+        filter:
+            all: 'Alle Kunden anzeigen'
+            registered: 'Registrierte Kunden anzeigen'
+            unconfirmed: 'Unbestätigte Kunden anzeigen'
+        general_info: 'Allgemeine Kundeninformation : "%fullName%"'
+    history:
+        logged_at: 'geloggt am (version)'
+    homepage:
+        splash:
+            headline: 'Willkommen bei Sylius'
+            subheadline: 'Modernes eCommerce für Symfony2'
     menu:
-      add_menu_node: Menü Element hinzufügen
-    option_value:
-      add_value: Wert hinzufügen
-    profile:
-      email: E-Mail
-      firstName: Vorname
-      lastName: Nachname
-  gallery:
-    next: Nächstes Bild
-    previous: Vorheriges Bild
-    slideshow: Slideshow
-  generate: Generieren
-  go_to_dashboard: Zum Dashboard
-  group:
-    create: Gruppe anlegen
-    create_header: Neue Kundengruppe hinzufügen
-    id: ID
-    index_header: Gruppen
-    name: Name
-    roles: Rollen
-    update_header: Gruppe bearbeiten
-  hide_deleted: Gelöschte Elemente ausblenden
-  history:
-    action: Aktion
-    author: Autor
-    data: Daten
-    empty: Leeren
-    header: Verlauf
-    logged_at: geloggt am (version)
-    revert: Wiederherstellen
-  homepage:
-    splash:
-      headline: Willkommen bei Sylius
-      subheadline: Modernes eCommerce für Symfony2
-  inventory_unit:
-    created_at: Erstellt
-    inventory_state: Bestand Status
-    name: Name
-    shipping_state: Versandstatus
-    sku: Artikelposition
-    updated_at: Geändert
-  locale:
-    code: Code
-    create: Gebietsschema anlegen
-    create_header: Neue Gebietsschemata anlegen
-    enabled: Aktiviert
-    id: ID
-    index_header: Übersicht der konfigurierten Gebietsschemen
-    name: Name
-    update_header: Gebietsschema bearbeiten
-    updated_at: Letzte Aktualisierung
-  login: Anmelden
-  login_header: Login
-  logo: Sylius
-  manage: Verwaltung
-  menu:
-    create: Menü hinzufügen
-    create_header: Menü hinzufügen
-    end_date: End–Datum
-    id: ID
-    index_header: Menüpunkte
-    publishable: Veröffentlicht
-    start_date: Startdatum
-    title: Titel
-    update_header: Menü editieren
-  menu_node:
-    create: Menüpunkt erstellen
-    create_header: Erstelle einen Menüpunkt
-    id: ID
-    index_header: Menüpunkte
-    parent: Übergeordnet
-    title: Titel
-    update_header: Menüpunkt editieren
-  meta:
-    backend_title: Sylius Dashboard
-    frontend_title: Titel
-  metadata:
-    id: ID
-    content: Inhalt
-  na: Nicht verfügbar
-  newest: Neueste Produkte
-  "no": false
-  no_results: Keine Ergebnisse für diese Anfrage gefunden
-  order:
-    adjustments:
-      amount: Anzahl
-      description: Beschreibung
-      lock: Sperren
-      lock_all: Sperre alle Anpassungen
-      manage: Verwalten von Anpassungen
-      type: Typ
-      unlock: Entsperren
-      unlock_all: Entsperre alle Anpassungen
-    billing_address: Rechnungsadresse
-    channel: Promotionskanäle
-    comment:
-      author: Autor
-      comment: Anmerkung
-      created_at: Erstellt am
-      customer:
-        not_notified: Kunde nicht benachrichtigt
-        notified: Kunde benachrichtigt
-      header: Kommentar
-      no_comment: Kein Kommentar
-      notify: Benachrichtigung
-      state: Versandstatus
-    create: Bestellreihenfolge
-    create_header: Neue Bestellung
-    created_at: Erstellungszeit
-    currency: Währung
-    customer: Kunde
-    details: Bestelldetails
-    general_info: Allgemeine info
-    guest: Gast Kunde
-    id: ID
-    index_header: Aktuelle Bestellungen
-    inventory_tracking: Warenbestandsverfolgung
-    inventory_unit:
-      backorder: Lieferrückstand
-      fulfill: Zu erfüllen
-      return: Zurückschicken
-    items: Artikel
-    items_total: Gesamtanzahl
-    manage: Bestellungsverwaltung
-    no_items: Diese Bestellung hat keine Artikel
-    no_results: Sie haben keine neuen Bestellungen
-    no_shipments: Kein Versand für diese Bestellung
-    no_shipping_charges: Keine Versandkosten
-    no_taxes: Keine Steuern
-    number: Nummer
-    order_state: Bestellstatus
-    payment: Zahlung
-    payment_state: Zahlungsstatus
-    payment_states:
-      balance_due: Zahlung fällig
-    promotion_coupons: Gutscheine
-    promotion_total: Reklame gesamt
-    recent_header: Letzte Bestellungen
-    release_inventory: Warenbestand freigeben
-    shipment_state: Versandstatus
-    shipment_states:
-      pending: Ausstehend
-    shipments: Lieferungen
-    shipping_address: Lieferadresse
-    shipping_charges: Versandkosten
-    shipping_total: Versandkosten gesamt
-    show_header: Reihenfolge
-    state:
-      cancelled: Abgebrochen
-      checkout: Zur Kasse
-      returned: Zurückgesandt
-      shipped: Versandt
-    tax_total: Steuern gesamt
-    taxes: Steuern
-    total: Total
-    update_header: Bestellung editieren
-  review:
-    id: ID
-    subject: Betreff
-    title: Titel
-    author: Autor
-    guest: Gastbestellung
-    created_at: Erstellt am
-  order_item:
-    product: Produkt
-    quantity: Artikelmenge
-    sellable: Verkäuflich
-    total: Gesamt
-    unit_price: Einzelpreis
-  out_of_stock: Ausverkauft
-  page:
-    body: Inhalt
-    create: Neue Seite erstellen
-    create_header: Neue Seite erstellen
-    end_date: End–Datum
-    id: ID
-    index_header: Seiten
-    no_route: Die Seite wird nicht im Frontend angezeigt, da keine Route definiert worden ist
-    publishable: Veröffentlicht
-    routes: Pfade
-    start_date: Start–Datum
-    title: Titel
-    update_header: Seite editieren
-  password: Passwort
-  payment:
-    amount: Menge
-    create: Erstellen
-    create_header: Zahlungsmethode erstellen
-    created_at: Erstellt
-    id: ID
-    index_header: Zahlungsmethoden
-    manage: Zahlungen verwalten
-    method: Zahlungsmethode
-    order: Reihenfolge
-    state:
-      cancelled: Abgebrochen
-      checkout: Zur Kasse
-      completed: Abgeschlossen
-      failed: Fehlgeschlagen
-      header: Versandstatus
-      new: Neu
-      pending: Ausstehend
-      processing: Wird verarbeitet
-      refunded: Rückerstattet
-      unknown: Unbekannt
-      void: Leer
-    update_header: Zahlart editieren
-    updated_at: Geändert
-  payment_method:
-    create: Erstellen
-    create_header: Zahlart erstellen
-    gateway: Schnittstelle
-    id: ID
-    index_header: Zahlarten
-    name: Name
-    update_header: Zahlart editieren
-    updated_at: Geändert
-  permission:
-    code: Code
-    create: Neue Berechtigung hinzufügen
-    create_header: neue Berechtigung
-    description: Beschreibung
-    id: ID
-    index_header: Berechtigungen
-    update_header: Berechtigung editieren
-    updated_at: Geändert
-  pricing:
-    volume_based:
-      button:
+        publishable: Veröffentlicht
+    meta:
+        backend_title: 'Sylius Dashboard'
+        frontend_title: Titel
+    order:
+        adjustments:
+            lock_all: 'Sperre alle Anpassungen'
+            unlock_all: 'Entsperre alle Anpassungen'
+        comment:
+            notify: Benachrichtigung
+        guest: 'Gast Kunde'
+        no_items: 'Diese Bestellung hat keine Artikel'
+        no_shipments: 'Kein Versand für diese Bestellung'
+        no_shipping_charges: 'Keine Versandkosten'
+        no_taxes: 'Keine Steuern'
+    order_item:
+        quantity: Artikelmenge
+        sellable: Verkäuflich
+    page:
+        no_route: 'Die Seite wird nicht im Frontend angezeigt, da keine Route definiert worden ist'
+        publishable: Veröffentlicht
+    pricing:
+        volume_based:
+            max: 'Maximale Menge'
+            min: Mindestmenge
+    promotion_coupon:
+        generate: Generieren
+        index: Gutscheine
+        total_results:
+            Total: '%total%'
+    report:
+        data_fetcher: 'Datenquelle Typ'
+        renderer: Renderer-Typ
+    security:
+        login:
+            info: 'Bitte logge Dich mit folgen Daten ein. E-Mail: <b>"sylius@example.com"</b> und Passwort: <b>"sylius"</b>'
+    shipment:
+        update: Bearbeiten
+    taxon:
+        image: 'Bild auswählen'
+        no_image: 'Kein Bild für dieses Schlagwort vorhanden'
+    ui:
+        action: Aktion
+        actions: Aktionen
         add: Hinzufügen
-      max: Maximale Menge
-      min: Mindestmenge
-      price: Preis
-  product:
-    add_attribute: Attribut hinzufügen
-    archetype: Archetypen
-    attributes: Attribute
-    available_on: Verfügbar ab
-    available_on_demand: Auf Nachfrage verfügbar
-    categorization: Kategorisierung
-    contain_variants: Enthält Varianten
-    create: Produkt erstellen
-    create_header: Neues Produkt
-    description: Produktbeschreibung
-    generate_variants: Generiere Varianten
-    index_by_taxon_header: 'Produkte <small>kategorisiert als "%taxon%</small>"'
-    index_header: 'Produkte <small> Alle Produkte in Ihrem Shop</small>'
-    main_taxon: Haupt-Taxonomie
-    manage: Produkte verwalten
-    name: Name
-    no_attributes: Für dieses Produkt wurden keine Attribute definiert
-    no_description: '<i>Keine Beschreibung...</i>'
-    no_images: Keine Bilder für dieses Produkt vorhanden
-    no_options: Es gibt keine Optionen für dieses Produkt
-    no_shipping_category: Keine Versandkategorie
-    no_short_description: '<i>Keine Kurzbeschreibung</i>'
-    no_sku: Keine Artikelpositionen verfügbar
-    no_tax_category: Keine Steuerkategorie
-    no_taxons: Keine Klassifizierungen
-    options: Optionen
-    original_price: Ursprünglicher Preis
-    price: Listenpreis
-    restricted_zone: Eingeschränktes Versandgebiet
-    remove_attribute: Attribute entfernen
-    shipping_category: Versandkategorie
-    show: Mehr anzeigen
-    show_header: 'Produktdetails <small> Anzeige von Produkt "<strong>%product%</strong>"</small>'
-    sku: Bestandseinheit
-    stock: Aktueller Lagerbestand
-    tabs:
-      attributes: Attribute
-      categorization: Produktkategorisierung
-      channels: Ausgabekanäle
-      images: Bilder
-      options: Optionen
-      pricing: Preisgestaltung
-      product: Produkt
-    tax_category: Steuerkategorie
-    unavailable: Nicht verfügbar
-    update_header: Produkt editieren
-    updated_at: Zuletzt geändert
-    variant_selection_method: Variantenauswahlmethode
-    variants: Varianten
-    volume_based:
-      price: Preis
-      qty_max: Maximal Anzahl
-      qty_min: Mindestanzahl
-    volume_price: Mengenbasierte Preise (Volume based)
-  product_attribute:
-    add_choice: Auswahl hinzufügen
-    code: Code
-    create: Produkt Attribute hinzufügen
-    create_header: Neues Produkt Attribut
-    index_header: Produkt Attribute
-    manage: Attribute verwalten
-    name: Name
-    type: Typ
-    update_header: Attribute editieren
-    updated_at: Geändert
-  product_association:
-    code: Code
-    create_header: Neues Produkt
-    index_header: Produkt Attribute
-    manage: Attribute verwalten
-    name: Name
-    type: Typ
-    update_header: Attribute editieren
-    updated_at: Geändert
-  product_not_available_in_zone: In Ihrem Land nicht verfügbar
-  product_option:
-    create: Option erstellen
-    create_header: Neue Produktoption
-    index_header: Produktoptionen
-    manage: Produktoptionen verwalten
-    name: Name
-    presentation: Präsentation
-    updated_at: Geändert
-  promotion:
-    actions: Aktionen
-    add_action: Aktion hinzufügen
-    add_rule: Regel hinzufügen
-    coupon_based: Gutschein basierend
-    create: Aktion erstellen
-    create_header: Neue Aktion
-    created_at: Erstellt am
-    description: Beschreibung
-    ends_at: Endet
-    exclusive: Exklusiv
-    general_info: Allgemeine Informationen
-    id: ID
-    index_header: Aktuelle Aktionen
-    manage: Aktionsverwaltung
-    name: Name
-    priority: Priorität
-    rules: Regeln
-    show_header: Aktion anzeigen
-    starts_at: Beginnt
-    update_header: Aktion editieren
-    updated_at: Geändert
-    usage_limit: Aktionslimit
-    used: Aktion wird verwendet
-  promotion_action:
-    configuration: Aktionskonfiguration
-    type: Aktionstyp
-  promotion_coupon:
-    code: Code
-    create: Erstellt
-    create_header: Gutschein erstellen
-    expires_at: Verfällt am
-    generate: Generieren
-    generate_header: Generiere Gutscheine
-    index: Gutscheine
-    index_header: Gutscheine
-    total_results:
-      Total: '%total%'
-    update_header: Gutschein editieren
-  promotion_rule:
-    configuration: Aktionsregeln konfigurieren
-    type: Aktionsregeltyp
-  province:
-    provinces: Bundesländer
-  redirect_route:
-    create: Umleitung anlegen
-    create_header: Umleitung anlegen
-    id: ID
-    index_header: Umleitung
-    title: Titel
-    update_header: Umleitung bearbeiten
-  remember_me: Eingeloggt bleiben
-  report:
-    code: Code
-    create: Bericht erstellen
-    create_header: Neuen Report erstellen
-    data_fetcher: Datenquelle Typ
-    description: Beschreibung
-    id: ID
-    index_header: Berichte
-    manage: Verwaltung
-    name: Name
-    renderer: Renderer-Typ
-    show_header: Berichtdetails
-    update_header: Bericht editieren
-  role:
-    code: Code
-    create: Neue Rolle hinzufügen
-    create_header: Neue Rolle
-    description: Beschreibung
-    id: ID
-    index_header: Rollen
-    name: Name
-    update_header: Rolle editieren
-    updated_at: Geändert
-  route:
-    create: Route erstellen
-    create_header: Route erstellen
-    id: ID
-    index_header: Pfade
-    name: Name
-    page: Seite
-    title: Titel
-    update_header: Route bearbeiten
-    view: Anzeigen
-  save_changes: Änderungen speichern
-  search: Suchen
-  security:
-    login:
-      button: Anmelden
-      header: 'Login <small>Sylius Webshop</small>'
-      info: 'Bitte logge Dich mit folgen Daten ein. E-Mail: <b>"sylius@example.com"</b> und Passwort: <b>"sylius"</b>'
-  settings:
-    general_header: Allgemeine Einstellungen
-    security_header: Sicherheitseinstellungen
-    taxation_header: Steuereinstellungen
-  shipment:
-    created_at: Erstellt am
-    id: ID
-    index_header: Versandarten
-    inventory_state: Bestand Status
-    manage: Verwalten
-    method: Methode
-    modified: Geändert
-    name: Name
-    order: Reihenfolge
-    ship: Lieferung
-    show_header: Versandart Details
-    sku: Artikelposition
-    state: Versandstatus
-    tracking_code: Tracking-Code
-    update: Bearbeiten
-    update_header: Lieferung bearbeiten
-    updated_at: Geändert
-  shipment_category:
-    manage: Versandkategorie verwalten
-  shipping_address: Lieferadresse
-  shipping_category:
-    create: Versandkategorie erstellen
-    create_header: Neue Versandkategorie
-    id: ID
-    index_header: Versandkategorien
-    manage: Versandkategorie verwalten
-    name: Name
-    update_header: Versandkategorien bearbeiten
-    updated_at: Letztes Update
-  shipping_method:
-    calculator: Versandkostenrechner
-    category: Kategorie
-    create: Versandmethode erstellen
-    create_header: Neue Versandart
-    enabled: Aktiviert
-    id: ID
-    index_header: Versandarten
-    manage: Versandarten verwalten
-    name: Name
-    show_header: Versandartenetails
-    update_header: Versandart editieren
-    updated_at: Zuletzt geändert
-    zone: Versandgebiet
-  shop_by: Shop von
-  show_all: Alle anzeigen
-  show_deleted: Gelöschte anzeigen
-  stockable:
-    index_header: 'Lagerbestand <small>Hier können Sie den aktuellen Lagerbestand sehen </small>'
-    name: Name
-    updated_at: Geändert
-  tax_category:
-    create: Steuerkategorie erstellen
-    create_header: Neue Steuerkategorie
-    description: Beschreibung
-    id: ID
-    index_header: Steuerkategorien
-    manage: Steuerkategorie verwalten
-    name: Name
-    no_description: Keine Beschreibung
-    update_header: Steuerkategorie bearbeiten
-    updated_at: Letztes Update
-  tax_rate:
-    amount: Steuersatz
-    calculator: Steuersatzrechner
-    category: Kategorie
-    create: Erstellen
-    create_header: Steuersatz erstellen
-    index_header: Steuersätze
-    manage: Verwalten
-    name: Name
-    show_header: Steuersätze
-    update_header: Steuersätze editieren
-    updated_at: Geändert
-    zone: Gebiet
-  taxon:
-    index_header: Gruppen
-    create: Klassifizierung hinzufügen
-    create_header: Klassifizierung hinzufügen
-    image: Bild auswählen
-    name: Name
-    no_image: Kein Bild für dieses Schlagwort vorhanden
-    product_index_header: 'Produkte kategorisiert als "%name%"'
-    update_header: Klassifizierung editieren
-  total_quantity: Stück Ges.
-  ui:
-    change_password: Passwort ändern
-    code: Code
-    email: E-Mail
-    links: Links
-    login: Anmelden
-    logout: Abmelden
-    register: Registrieren
-    name: Name
-    id: ID
-  unknown: Unbekannt
-  user:
-    create_header: sylius.user.create_header
-    general_info: Informationen
-    id: ID
-    impersonate: Melden Sie sich als diesen Benutzer an
-    index_header: Benutzer
-    last_login: Letzter Login
-    recent_header: Neueste Benutzer
-    register:
-      button: Registrieren
-    registration_date: Anmeldedatum
-    show_header: Benutzer
-    update_header: Bearbeite Benutzer
-    username: Benutzername
-  variant:
-    add_image: Bild hinzufügen
-    availability: Verfügbarkeit
-    available_on_demand: Auf Nachfrage verfügbar
-    create: Variante erstellen
-    create_header: Neue Produktvariante
-    delete_image: Bild löschen
-    last_update: Letztes Update
-    options: Optionen
-    original_price: Ursprünglicher Preis
-    price: Preis
-    sku: Bestandseinheit
-    stock: Aktueller Lagerbestand
-    update_header: Variante bearbeiten
-  "yes": true
-  zone:
-    add_member: Mitglied hinzufügen
-    create: Gebiet hinzufügen
-    create_header: Neues Gebiet
-    index_header: Gebiete
-    manage: Gebiete verwalten
-    name: Name
-    scope: Umfang
-    show_header: Gebietedetails
-    type: Typ
-    update_header: Gebiet bearbeiten
-  zone_member:
-    members: Mitglieder
+        add_action: 'Aktion hinzufügen'
+        add_attribute: 'Attribut hinzufügen'
+        add_channel: 'Kanal hinzufügen'
+        add_choice: 'Auswahl hinzufügen'
+        add_coupon: Erstellt
+        add_image: 'Bild hinzufügen'
+        add_member: 'Mitglied hinzufügen'
+        add_menu_element: 'Menü Element hinzufügen'
+        add_new_email: 'Neue E-Mail hinzufügen'
+        add_new_permission: 'Neue Berechtigung hinzufügen'
+        add_new_role: 'Neue Rolle hinzufügen'
+        add_province: 'Bundesland hinzufügen'
+        add_rule: 'Regel hinzufügen'
+        add_to_cart: 'In den Warenkorb'
+        add_value: 'Wert hinzufügen'
+        adding_new_customer_groups: 'Neue Kundengruppe hinzufügen'
+        adding_new_email: 'Neue E-Mail hinzufügen'
+        adding_new_locale: 'Neue Gebietsschemata anlegen'
+        addressing_step: Lieferadresse
+        adjustments: Änderungen
+        administration: Login
+        administration_dashboard: 'Administration Dashboard'
+        all_your_addresses: 'Alle Adressen'
+        amount: Steuersatz
+        archetype: Archetypen
+        assortment: Sortiment
+        attributes: Attribute
+        author: Autor
+        availability: Verfügbarkeit
+        available_on: 'Verfügbar ab'
+        available_on_demand: 'Auf Nachfrage verfügbar'
+        back: Zurück
+        backorder: Lieferrückstand
+        balance_due: 'Zahlung fällig'
+        bill_to: 'Rechnung an'
+        billing_address: Rechnungsadresse
+        blocks: Blöcke
+        body: Inhalt
+        browse_products: 'Produkte durchsuchen'
+        build: Erstellen
+        building_product_from_archetype: 'Produkt aus Archetype erstellen'
+        calculator: Steuersatzrechner
+        cancel: Abbrechen
+        cancelled: Abgebrochen
+        cart_summary_header: Warenkorb-Übersicht
+        categorization: Produktkategorisierung
+        category: Kategorie
+        change_password: 'Passwort ändern'
+        change_your_password: 'Passwort ändern'
+        channel: Promotionskanäle
+        channels: Ausgabekanäle
+        checkout: 'Zur Kasse'
+        choose_file: 'Datei wählen'
+        city: Stadt
+        code: Code
+        comment: Anmerkung
+        company: Firma
+        completed: Abgeschlossen
+        configuration: 'Aktionsregeln konfigurieren'
+        confirmation: Bestätigung
+        confirmation_title: Bestätigung
+        contact_request_show: Kontaktanfrage
+        contact_requests: Kontaktanfragen
+        contact_topics: Supportthemen
+        contain_variants: 'Enthält Varianten'
+        content: Inhalt
+        countries: Länder
+        country: Land
+        country_details: Landdetails
+        coupon: Gutschein
+        coupon_based: 'Gutschein basierend'
+        coupons: Gutscheine
+        create: Erstellen
+        create_a_new_address: 'Neue Adresse hinzufügen'
+        create_archetype: 'Archetype hinzufügen'
+        create_country: 'Land erstellen'
+        create_currency: 'Währung erstellen'
+        create_group: 'Gruppe anlegen'
+        create_imagine_block: 'Slideshow Block erstellen'
+        create_locale: 'Gebietsschema anlegen'
+        create_menu: 'Menü hinzufügen'
+        create_menu_node: 'Menüpunkt erstellen'
+        create_new_coupon: 'Gutschein erstellen'
+        create_new_page: 'Neue Seite erstellen'
+        create_new_report: 'Neuen Report erstellen'
+        create_option: 'Option erstellen'
+        create_order: Bestellreihenfolge
+        create_payment: Erstellen
+        create_payment_method: Erstellen
+        create_product: 'Produkt erstellen'
+        create_product_attribute: 'Produkt Attribute hinzufügen'
+        create_promotion: 'Aktion erstellen'
+        create_redirect_route: 'Umleitung anlegen'
+        create_report: 'Bericht erstellen'
+        create_route: 'Route erstellen'
+        create_shipping_category: 'Versandkategorie erstellen'
+        create_shipping_method: 'Versandmethode erstellen'
+        create_simple_block: 'Einfaches Element erstellen'
+        create_slideshow_block: 'Slideshow–Element erstellen'
+        create_string_block: 'String Block erstellen'
+        create_tax_category: 'Steuerkategorie erstellen'
+        create_tax_rate: Erstellen
+        create_taxon: 'Klassifizierung hinzufügen'
+        create_variant: 'Variante erstellen'
+        create_zone: 'Gebiet hinzufügen'
+        created_at: 'Erstellt am'
+        creating_a_new_imagine_block: 'Neuen Bild-Block erstellen'
+        creating_a_new_simple_block: 'Einfaches Element erstellen'
+        creating_a_new_slideshow_block: 'Neues Slideshow–Element erstellen'
+        creating_a_new_string_block: 'Neuen String Block erstellen'
+        creating_menu: 'Menü hinzufügen'
+        creating_menu_node: 'Erstelle einen Menüpunkt'
+        creating_new_page: 'Neue Seite erstellen'
+        creating_redirect_route: 'Umleitung anlegen'
+        creating_route: 'Route erstellen'
+        creation_date: 'Erstellt am'
+        creation_time: Erstellungszeit
+        currencies: Währungen
+        currency: Währung
+        current_orders: 'Aktuelle Bestellungen'
+        current_password: 'Aktuelles Passwort'
+        current_promotions: 'Aktuelle Aktionen'
+        current_stock: 'Aktueller Lagerbestand'
+        customer: Kunde
+        customer_details: Kundendetails
+        customer_not_notified: 'Kunde nicht benachrichtigt'
+        customer_notified: 'Kunde benachrichtigt'
+        customer_orders: Kundenbestellungen
+        customers: Kunden
+        customers_list_of_all_customers_in_store: 'Kunden<small>Liste aller Kunden</small>'
+        dashboard: Dashboard
+        data: Daten
+        default_billing_address: Standard-Rechnungsadresse
+        default_currency: Standardwährung
+        default_locale: 'Standard Lokalisierung'
+        default_shipping_address: Standard-Lieferadresse
+        delete: Löschen
+        delete_image: 'Bild löschen'
+        deleted: Gelöscht
+        description: Beschreibung
+        edit: Bearbeiten
+        edit_group: 'Gruppe bearbeiten'
+        edit_locale: 'Gebietsschema bearbeiten'
+        edit_my_address: 'Adresse bearbeiten'
+        edit_report: 'Bericht editieren'
+        edit_your_personal_information: 'Persönliche Informationen bearbeiten'
+        editing_archetype: 'Archetype editieren'
+        editing_attribute: 'Attribute editieren'
+        editing_channel: 'Channel editieren'
+        editing_country: 'Land editieren'
+        editing_coupon: 'Gutschein editieren'
+        editing_currency: 'Währung editieren'
+        editing_customer: 'Kunde bearbeiten'
+        editing_email: 'E-Mail editieren'
+        editing_imagine_block: 'Bild-Element editieren'
+        editing_menu: 'Menü editieren'
+        editing_menu_node: 'Menüpunkt editieren'
+        editing_order: 'Bestellung editieren'
+        editing_page: 'Seite editieren'
+        editing_payment: 'Zahlart editieren'
+        editing_payment_method: 'Zahlart editieren'
+        editing_permission: 'Berechtigung editieren'
+        editing_product: 'Produkt editieren'
+        editing_promotion: 'Aktion editieren'
+        editing_redirect_route: 'Umleitung bearbeiten'
+        editing_role: 'Rolle editieren'
+        editing_route: 'Route bearbeiten'
+        editing_shipment: 'Lieferung bearbeiten'
+        editing_shipping_category: 'Versandkategorien bearbeiten'
+        editing_shipping_method: 'Versandart editieren'
+        editing_simple_block: 'Einfaches Element editieren'
+        editing_slideshow_block: 'Slideshow Block bearbeiten'
+        editing_string_block: 'String block editieren'
+        editing_tax_category: 'Steuerkategorie bearbeiten'
+        editing_taxon: 'Klassifizierung editieren'
+        editing_user: 'Bearbeite Benutzer'
+        editing_variant: 'Variante bearbeiten'
+        editing_zone: 'Gebiet bearbeiten'
+        email: E-Mail
+        email_templates: 'E-Mail Templates'
+        emails: E-Mails
+        empty: Leeren
+        enabled: Aktiviert
+        end_date: End–Datum
+        ends_at: Endet
+        error: Fehler
+        exchange_rate: Wechselkurs
+        exclusive: Exklusiv
+        existing_customer: 'Existierender Benutzer'
+        expires_at: 'Verfällt am'
+        failed: Fehlgeschlagen
+        filter: Filtern
+        first_name: Vorname
+        firstname: Vorname
+        fulfill: 'Zu erfüllen'
+        gateway: Schnittstelle
+        general_info: 'Allgemeine Informationen'
+        general_settings: 'Allgemeine Einstellungen'
+        generate: Generieren
+        generate_variants: 'Generiere Varianten'
+        generating_coupons: 'Generiere Gutscheine'
+        go_to_dashboard: 'Zum Dashboard'
+        grand_total: Gesamtbetrag
+        groups: Gruppen
+        guest: Gastbestellung
+        hide_deleted: 'Gelöschte Elemente ausblenden'
+        history_header: Verlauf
+        id: ID
+        images: Bilder
+        imagine_blocks: 'Bild Blöcke'
+        index_of_all_configured_locales: 'Übersicht der konfigurierten Gebietsschemen'
+        information: Hinweis
+        inventory_here_you_can_see_current_stock_levels: 'Lagerbestand <small>Hier können Sie den aktuellen Lagerbestand sehen </small>'
+        inventory_index: Lagerbestände
+        inventory_state: 'Bestand Status'
+        inventory_tracking: Warenbestandsverfolgung
+        invoice: Rechnung
+        items: Artikel
+        items_total: Gesamtanzahl
+        label: Bezeichnung
+        last_login: 'Letzter Login'
+        last_name: Nachname
+        last_update: 'Letztes Update'
+        last_week_orders: 'Bestellungen der letzten Woche'
+        last_week_revenue: 'Einnahmen der letzten Woche'
+        lastname: Nachname
+        latest_orders: 'Letzte Bestellungen'
+        links: Links
+        locales: Gebietsschemata
+        lock: Sperren
+        login: Login
+        login_button: Anmelden
+        login_sylius_store: 'Login <small>Sylius Webshop</small>'
+        logout: Abmelden
+        main_taxon: Haupt-Taxonomie
+        manage: Verwaltung
+        manage_adjustments: 'Verwalten von Anpassungen'
+        manage_attributes: 'Attribute verwalten'
+        manage_channels: 'Kanäle verwalten'
+        manage_countries: 'Länder verwalten'
+        manage_emails: 'E-Mails verwalten'
+        manage_options: 'Produktoptionen verwalten'
+        manage_orders: Bestellungsverwaltung
+        manage_payments: 'Zahlungen verwalten'
+        manage_products: 'Produkte verwalten'
+        manage_promotions: Aktionsverwaltung
+        manage_shipments: Verwalten
+        manage_shipping_categories: 'Versandkategorie verwalten'
+        manage_shipping_methods: 'Versandarten verwalten'
+        manage_tax_categories: 'Steuerkategorie verwalten'
+        manage_tax_rates: Verwalten
+        manage_zones: 'Gebiete verwalten'
+        marketing: Marketing
+        members: Mitglieder
+        menu_nodes: Menüpunkte
+        menus: Menüpunkte
+        message: Nachricht
+        method: Methode
+        modified: Geändert
+        n_a: 'Nicht verfügbar'
+        name: Name
+        new: Neu
+        new_archetype: 'Neuer Archetype'
+        new_comment_posted_on_order: 'Neuer Kommentar zu einer Bestellung'
+        new_country: 'Neues Land'
+        new_currency: 'Neue Währung'
+        new_customer: 'Neuer Benutzer'
+        new_order: 'Neue Bestellung'
+        new_password: 'Neues Passwort'
+        new_payment: 'Zahlungsmethode erstellen'
+        new_payment_method: 'Zahlart erstellen'
+        new_permission: 'neue Berechtigung'
+        new_product: 'Neues Produkt'
+        new_product_attribute: 'Neues Produkt Attribut'
+        new_product_option: 'Neue Produktoption'
+        new_product_variant: 'Neue Produktvariante'
+        new_promotion: 'Neue Aktion'
+        new_role: 'Neue Rolle'
+        new_shipping_category: 'Neue Versandkategorie'
+        new_shipping_method: 'Neue Versandart'
+        new_tax_category: 'Neue Steuerkategorie'
+        new_tax_rate: 'Steuersatz erstellen'
+        new_taxon: 'Klassifizierung hinzufügen'
+        new_user: sylius.user.create_header
+        new_zone: 'Neues Gebiet'
+        newest_products: 'Neueste Produkte'
+        next: 'Nächstes Bild'
+        'no': false
+        no_comment: 'Kein Kommentar'
+        no_default_billing_address: 'Keine Standard-Rechnungsadresse'
+        no_default_shipping_address: 'Keine Standard-Lieferadresse'
+        no_description: 'Keine Beschreibung'
+        no_results: 'Keine Ergebnisse für diese Anfrage gefunden'
+        no_shipping_category: 'Keine Versandkategorie'
+        no_short_description: '<i>Keine Kurzbeschreibung</i>'
+        no_sku: 'Keine Artikelpositionen verfügbar'
+        no_tax_category: 'Keine Steuerkategorie'
+        not_available_in_your_country: 'In Ihrem Land nicht verfügbar'
+        number: Nummer
+        number_of_orders: 'Anzahl der Bestellungen'
+        options: Optionen
+        order: Reihenfolge
+        order_comment_name: Kommentar
+        order_comments: Kommentar
+        order_confirmation_name: Bestellbestätigung
+        order_details: Bestelldetails
+        order_item_product: Produkt
+        order_show_header: Reihenfolge
+        order_state: Bestellstatus
+        order_summary: Bestellungsübersicht
+        order_value: Bestellwert
+        orders: Bestellungen
+        original_price: 'Ursprünglicher Preis'
+        out_of_stock: Ausverkauft
+        overview_of_your_store: 'Überblick Ihres Shops'
+        page: Seite
+        pages: Seiten
+        parent: Übergeordnet
+        password: Passwort
+        payment: Zahlung
+        payment_details: Zahlungsdetails
+        payment_method: Zahlungsweise
+        payment_methods: Zahlungsmethoden
+        payment_state: Zahlungsstatus
+        payments: Bezahlungen
+        pending: Ausstehend
+        permissions: Berechtigungen
+        phone_number: Telefonnummer
+        place_order: 'Bestellung aufgeben'
+        placed_at: 'Bestellt am'
+        postcode: Postleitzahl
+        presentation: Präsentation
+        previous: 'Vorheriges Bild'
+        price: Preis
+        pricing: Preisgestaltung
+        priority: Priorität
+        processing: 'Wird verarbeitet'
+        product: Artikel
+        product_archetypes: Produkt-Vorlagen
+        product_association_type_index: Assoziationstyp
+        product_attributes: 'Produkt Attribute'
+        product_details_viewing_product_product: 'Produktdetails <small> Anzeige von Produkt "<strong>%product%</strong>"</small>'
+        product_options: Produktoptionen
+        products: Produkte
+        products_categorized_as_name: 'Produkte kategorisiert als "%name%"'
+        products_categorized_under_taxon_taxon: 'Produkte <small>kategorisiert als "%taxon%</small>"'
+        products_index_of_all_products_in_your_store: 'Produkte <small> Alle Produkte in Ihrem Shop</small>'
+        promotion_coupons: Gutscheine
+        promotion_details: 'Aktion anzeigen'
+        promotion_total: 'Reklame gesamt'
+        promotions: Aktionen
+        province: Region
+        provinces: Bundesländer
+        qty_max: 'Maximal Anzahl'
+        qty_min: Mindestanzahl
+        recent_customers: 'Neuste Kunden'
+        recent_orders: 'Letzte Bestellungen'
+        recent_users: 'Neueste Benutzer'
+        redirect_route_index_header: Umleitung
+        redirect_routes: 'Umleitungen (Redirects)'
+        refunded: Rückerstattet
+        register: Registrieren
+        register_button: Registrieren
+        registration_date: Anmeldedatum
+        release_inventory: 'Warenbestand freigeben'
+        remember_me: 'Eingeloggt bleiben'
+        remove_attribute: 'Attribute entfernen'
+        report_details: Berichtdetails
+        reports: Berichte
+        restricted_zone: 'Eingeschränktes Versandgebiet'
+        retail_price: Listenpreis
+        return: Zurückschicken
+        returned: Zurückgesandt
+        revert: Wiederherstellen
+        roles: Rollen
+        routes: Pfade
+        rules: Regeln
+        sales: Verkäufe
+        sales_this_month: Verkäufe
+        save: Speichern
+        save_changes: 'Änderungen speichern'
+        scope: Umfang
+        search: Suchen
+        security_settings: Sicherheitseinstellungen
+        set_as_default_billing_address: 'Als Standardrechnungsadresse setzen'
+        set_as_default_shipping_address: 'Als Standard-Lieferadresse setzen'
+        ship: Lieferung
+        shipment_confirmation_name: Versandbestätigung
+        shipment_details: 'Versandart Details'
+        shipment_state: Versandstatus
+        shipments: Lieferungen
+        shipped: Versandt
+        shipping_address: Lieferadresse
+        shipping_categories: Versandgruppen
+        shipping_category: Versandkategorie
+        shipping_charges: Versandkosten
+        shipping_method: Lieferverfahren
+        shipping_method_details: Versandartenetails
+        shipping_methods: Versandmethoden
+        shipping_state: Versandstatus
+        shipping_total: 'Versandkosten gesamt'
+        shop_by: 'Shop von'
+        show_all: 'Alle anzeigen'
+        show_deleted: 'Gelöschte anzeigen'
+        sign_in_to_the_store_or_create_new_account: 'Anmelden <small> oder neuen Benutzer anlegen</small>'
+        simple_blocks: 'Einfache Elemente'
+        sku: Bestandseinheit
+        slideshow: Slideshow
+        slideshow_blocks: 'Slideshow Blöcke'
+        start_date: Start–Datum
+        starts_at: Beginnt
+        state: Versandstatus
+        state_header: Versandstatus
+        street: Straße
+        string_blocks: Zeichenketten–Elemente
+        subject: Betreff
+        success: Erfolgreich
+        support: Support
+        sylius_logo: Sylius
+        tax_categories: Steuerkategorien
+        tax_category: Steuerkategorie
+        tax_rate_details: Steuersätze
+        tax_rates: Steuersätze
+        tax_total: 'Steuern gesamt'
+        taxation_categories: Steuerkategorien
+        taxation_settings: Gruppeneinstellungen
+        taxes: Steuern
+        taxons: Gruppen
+        there_are_no_images_for_this_product: 'Keine Bilder für dieses Produkt vorhanden'
+        there_are_no_options_for_this_product: 'Es gibt keine Optionen für dieses Produkt'
+        there_are_no_taxons_for_this_product: 'Keine Klassifizierungen'
+        this_months_statistics: 'Statistiken dieses Monats'
+        this_product_has_no_attributes_defined: 'Für dieses Produkt wurden keine Attribute definiert'
+        title: Titel
+        topic: Thema
+        total: Gesamt
+        total_orders: Gesamtbestellungen
+        total_qty: 'Stück Ges.'
+        total_registrations: Gesamteregistrierungen
+        tracking_code: Tracking-Code
+        tracking_number: Sendungsnummer
+        type: Typ
+        unavailable: 'Nicht verfügbar'
+        unit_price: Einzelpreis
+        unknown: Unbekannt
+        unlock: Entsperren
+        updating_tax_rate: 'Steuersätze editieren'
+        usage_limit: Aktionslimit
+        used: 'Aktion wird verwendet'
+        user_confirmation_name: 'Bestätigung durch den Benutzer'
+        user_details: Benutzer
+        username: Benutzername
+        users_list_of_all_users_registered_in_store: Benutzer
+        variant_selection_method: Variantenauswahlmethode
+        variants: Varianten
+        view: Anzeigen
+        view_more: 'Mehr anzeigen'
+        void: Leer
+        volume_based_pricing: 'Mengenbasierte Preise (Volume based)'
+        warning: Warnung
+        welcome_to_your_space: 'Willkommen in deinem persönlichen Bereich'
+        'yes': true
+        you_are_customer_since: 'Kunde seit'
+        you_have_no_new_orders: 'Sie haben keine neuen Bestellungen'
+        your_last_5_orders: 'Ihre letzten 5 Bestellungen'
+        your_products: 'Ihre Produkte'
+        zone: Gebiet
+        zone_details: Gebietedetails
+        zones: Versandgebiete
+    user:
+        general_info: Informationen
+        impersonate: 'Melden Sie sich als diesen Benutzer an'
+    variant:
+        stock: 'Aktueller Lagerbestand'

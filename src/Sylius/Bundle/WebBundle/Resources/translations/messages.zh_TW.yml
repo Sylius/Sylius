@@ -1,8 +1,5 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-  "no": false
-  "yes": true
-  zone:
-    scope: 範圍
+    ui:
+        'no': false
+        scope: 範圍
+        'yes': true

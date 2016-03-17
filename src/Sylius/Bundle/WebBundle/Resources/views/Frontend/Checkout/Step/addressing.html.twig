@@ -11,7 +11,7 @@
 
 {% block content %}
 <div class="page-header">
-    <h1>{{ 'sylius.checkout.addressing.header'|trans|raw }}</h1>
+    <h1>{{ 'sylius.ui.addressing_step'|trans|raw }}</h1>
 </div>
 
 {% include 'SyliusWebBundle:Frontend/Checkout:_progressBar.html.twig' %}
@@ -24,14 +24,14 @@
     <div class="row">
         <div class="col-md-6 address-container">
             <div class="well">
-                <h4>{{ 'sylius.checkout.finalize.order.shipping_address'|trans }}</h4>
+                <h4>{{ 'sylius.ui.shipping_address'|trans }}</h4>
                 {% include 'SyliusWebBundle:Frontend/Address:_form.html.twig' with {'form': form.shippingAddress} %}
                 {{ form_row(form.differentBillingAddress, {'attr': {'class': 'sylius-different-billing-address-trigger'}}) }}
             </div>
         </div>
         <div class="col-md-6 hidden address-container" id="sylius-billing-address-container">
             <div class="well">
-                <h4>{{ 'sylius.checkout.finalize.order.billing_address'|trans }}</h4>
+                <h4>{{ 'sylius.ui.billing_address'|trans }}</h4>
                 {% include 'SyliusWebBundle:Frontend/Address:_form.html.twig' with {'form': form.billingAddress} %}
             </div>
         </div>
@@ -41,7 +41,7 @@
 {{ form_widget(form._token) }}
 
 <div class="form-actions">
-    <a href="{{ path('sylius_cart_summary') }}" class="btn btn-lg"><i class="icon-chevron-left"></i> {{ 'sylius.checkout.back'|trans }}</a> &nbsp;
+    <a href="{{ path('sylius_cart_summary') }}" class="btn btn-lg"><i class="icon-chevron-left"></i> {{ 'sylius.ui.back'|trans }}</a> &nbsp;
     <button type="submit" class="btn btn-primary btn-lg">{{ 'sylius.checkout.forward'|trans }} <i class="icon-chevron-right"></i></button>
 </div>
 

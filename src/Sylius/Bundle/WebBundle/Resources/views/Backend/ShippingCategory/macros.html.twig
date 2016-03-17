@@ -7,10 +7,10 @@
     <table class="table">
         <thead>
         <tr>
-            <th>{{ sylius_resource_sort('id', 'sylius.shipping_category.id'|trans) }}</th>
+            <th>{{ sylius_resource_sort('id', 'sylius.ui.id'|trans) }}</th>
             <th>{{ sylius_resource_sort('code', 'sylius.ui.code'|trans) }}</th>
-            <th>{{ sylius_resource_sort('name', 'sylius.shipping_category.name'|trans) }}</th>
-            <th>{{ sylius_resource_sort('updatedAt', 'sylius.shipping_category.updated_at'|trans) }}</th>
+            <th>{{ sylius_resource_sort('name', 'sylius.ui.name'|trans) }}</th>
+            <th>{{ sylius_resource_sort('updatedAt', 'sylius.ui.last_update'|trans) }}</th>
             <th></th>
         </tr>
         </thead>
@@ -32,6 +32,6 @@
         </tbody>
     </table>
 {% else %}
-    {{ alerts.info('sylius.shipping_category.no_results'|trans) }}
+    {{ alerts.info('sylius.ui.there_are_no_shipping_categories_configured'|trans) }}
 {% endif %}
 {% endmacro %}

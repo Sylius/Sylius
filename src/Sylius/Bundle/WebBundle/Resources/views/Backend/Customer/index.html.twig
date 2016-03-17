@@ -6,16 +6,16 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.section.customer'|trans }}</li>
+    <li>{{ 'sylius.ui.customer'|trans }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_customer_create'), 'sylius.customer.create'|trans) }}
+        {{ buttons.create(path('sylius_backend_customer_create'), 'sylius.ui.create_customer'|trans) }}
     </div>
-    <h1><i class="glyphicon glyphicon-user"></i> {{ 'sylius.customer.index_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-user"></i> {{ 'sylius.ui.customers_list_of_all_customers_in_store'|trans|raw }}</h1>
 </div>
 
 {% render(controller('sylius.controller.backend.form:filterAction', {'type': 'sylius_customer_filter', 'template': 'SyliusWebBundle:Backend/Customer:filterForm.html.twig'})) %}

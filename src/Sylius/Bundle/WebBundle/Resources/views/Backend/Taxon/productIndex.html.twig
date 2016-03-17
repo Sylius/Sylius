@@ -7,8 +7,8 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
-    <li><a href="{{ path('sylius_backend_taxon_index') }}">{{ 'sylius.breadcrumb.taxon.index'|trans }}</a></li>
+    <li>{{ 'sylius.ui.assortment'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_taxon_index') }}">{{ 'sylius.ui.taxons'|trans }}</a></li>
     <li><a href="{{ path('sylius_backend_taxon_show', {'id': taxon.id})}}">{{ taxon.name }}</a></li>
     <li>{{ taxon.name }}</li>
 </ol>
@@ -17,10 +17,10 @@
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_taxon_create'), 'sylius.taxon.create'|trans) }}
+        {{ buttons.create(path('sylius_backend_taxon_create'), 'sylius.ui.create_taxon'|trans) }}
         {{ buttons.manage(path('sylius_backend_taxon_index'), 'sylius.taxon.manage'|trans) }}
     </div>
-    <h1><i class="glyphicon glyphicon-tags"></i> {{ 'sylius.taxon.product_index_header'|trans({'%name%': taxon.name})|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-tags"></i> {{ 'sylius.ui.products_categorized_as_name'|trans({'%name%': taxon.name})|raw }}</h1>
 </div>
 
 {{ pagination(products) }}

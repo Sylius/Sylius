@@ -6,17 +6,17 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.marketing'|trans }}</li>
-    <li>{{ 'sylius.breadcrumb.email.index'|trans }}</a></li>
+    <li>{{ 'sylius.ui.marketing'|trans }}</li>
+    <li>{{ 'sylius.ui.emails'|trans }}</a></li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_email_create'), 'sylius.email.create'|trans) }}
+        {{ buttons.create(path('sylius_backend_email_create'), 'sylius.ui.add_new_email'|trans) }}
     </div>
-    <h1><i class="glyphicon glyphicon-envelope"></i> {{ 'sylius.email.index_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-envelope"></i> {{ 'sylius.ui.email_templates'|trans|raw }}</h1>
 </div>
 
 {{ pagination(emails) }}

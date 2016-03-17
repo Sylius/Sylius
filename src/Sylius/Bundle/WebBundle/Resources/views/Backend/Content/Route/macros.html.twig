@@ -9,8 +9,8 @@
     <table class="table">
         <thead>
             <tr>
-                <th>{{ 'sylius.route.name'|trans }}</th>
-                <th>{{ sylius_resource_sort('page', 'sylius.route.page'|trans) }}</th>
+                <th>{{ 'sylius.ui.name'|trans }}</th>
+                <th>{{ sylius_resource_sort('page', 'sylius.ui.page'|trans) }}</th>
                 <th></th>
             </tr>
         </thead>
@@ -26,7 +26,7 @@
                 <td>
                     <div class="pull-right">
                         {% if route.content.title is defined %}
-                            {{ buttons.show(path('sylius_homepage') ~ route.name, 'sylius.route.view'|trans ) }}
+                            {{ buttons.show(path('sylius_homepage') ~ route.name, 'sylius.ui.view'|trans ) }}
                         {% endif %}
                         {{ buttons.edit(path('sylius_backend_route_update', {'id': route.id})) }}
                         {{ buttons.delete(path('sylius_backend_route_delete', {'id': route.id})) }}
@@ -37,7 +37,7 @@
         </tbody>
     </table>
 {% else %}
-{{ alerts.info('sylius.no_results'|trans) }}
+{{ alerts.info('sylius.ui.no_results'|trans) }}
 {% endif %}
 
 {% endmacro %}

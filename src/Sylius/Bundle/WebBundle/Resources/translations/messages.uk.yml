@@ -1,791 +1,418 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-  account:
-    address:
-      action:
-        billing: Встановити як платіжну адресу за замовчуванням
-        create: Створити нову адресу
-        delete: Видалити
-        edit: Редагувати
-        shipping: Встановити, як адресу доставки за замовчуванням
-      create: Створити нову адресу
-      default:
-        billing: Платіжна адреса за замовчуванням
-        no_billing: Немає платіжної адреси за замовчуванням
-        no_shipping: Немає адреси доставки за замовчуванням
-        shipping: Адреса доставки за замовчуванням
-      list: Усі ваші адреси
-      update: Редагувати мою адресу
-    home:
-      email: Email
-      last5orders: 5 останніх замовлень
-      since: Ви є клієнтом з
-      welcome: Ласкаво просимо до вашого простору
-    order:
-      created_at: Розміщено
-      details: Деталі вашого замовлення
-      download_invoice: Завантажити рахунок
-      invoice: Рахунок
-      list: Всі ваші замовлення
-      number: Номер
-      placed_at: 'Розміщене %at%'
-      shipment:
-        pending: В очікуванні
-        ready: 'Готове з %at%'
-        returned: 'Повернене %at%'
-        shipped: 'Відправлене %at%'
-      state: Статус
-      total: Усього
-      tracking_number: Трекінг-номер
-    title: Мій обліковий запис
-  add_to_cart: У кошик
-  association_type:
-    name: Ім’я
-    create: Створити
-  address:
-    city: Місто
-    company: Компанія
-    country: Країна
-    firstname: Iм’я
-    lastname: Прізвище
-    postcode: Iндекс
-    province: Область
-    street: Вулиця
-  alert:
-    error: Помилка
-    info: Інформація
-    success: Успішно
-    warning: Попередження
-  archetype:
-    index_header: Прототипи продуктів
-    name: Ім’я
-    options: Опції
-    parent: "Батьківський об'єкт"
-    updated_at: Останнє оновлення
-  backend:
-    alert:
-      info: Інформація
-    dashboard:
-      chart_order_count: Кількість замовлень
-      chart_order_total: Вартість замовлення
-      header: Панель адміністрування
-      orders: Замовлення минулого тижня
-      revenue: Доходи за минулий тиждень
-      subheader: Огляд вашого магазину
-    logout: Вихід
-    quick_links:
-      add_product: Новий товар
-      customers: Клієнти
-      orders: Останні замовлення
-      products: Ваші продукти
-    statistics:
-      orders_this_month: Всього замовлень
-      registrations_this_month: Всього реєстрацій
-      sales_this_month: Продажі
-  block:
-    imagine:
-      id: ID
-      label: Назва
-      publishable: Опублікований
-      title: Назва
-      updated_at: Останнє оновлення
-    index_header: Блоки
-    simple:
-      body: Тіло
-      id: ID
-      label: Назва
-      publishable: Опублікований
-      title: Назва
-      updated_at: Останнє оновлення
-    slideshow:
-      body: Тіло
-      id: ID
-      publishable: Опублікований
-      title: Назва
-      updated_at: Останнє оновлення
-    string:
-      body: Тіло
-      id: ID
-      label: Назва
-      publishable: Опублікований
-      title: Назва
-      updated_at: Останнє оновлення
-  breadcrumb:
-    assortment: Асортимент
+    account:
+        order:
+            details: 'Деталі вашого замовлення'
+            download_invoice: 'Завантажити рахунок'
+            list: 'Всі ваші замовлення'
+            placed_at: 'Розміщене %at%'
+            shipment:
+                ready: 'Готове з %at%'
+                returned: 'Повернене %at%'
+                shipped: 'Відправлене %at%'
+        title: 'Мій обліковий запис'
     block:
-      index: Блоки
-    build: Побудувати
-    channel:
-      index: Канали
-    configuration: Конфігурація
-    content: Зміст
-    country:
-      index: Країни
-    customer:
-      index: Клієнти
-    dashboard: Панель керування
-    edit: Редагувати
-    email:
-      index: Повідомлення електронної пошти
-    general_settings: Загальні налаштування
-    generate: Генерувати
-    group:
-      index: Групи
-    inventory:
-      index: Інвентаризація
-    locale:
-      index: Локалі
-    marketing: Маркетинг
-    menu:
-      index: Меню
-    menu_node:
-      index: Елементи меню
-    new: Новий
-    option:
-      index: Опції
-    order:
-      index: Замовлення
-    page:
-      index: Сторінки
-    payment:
-      index: Платежі
-    payment_method:
-      index: Способи оплати
-    permission:
-      index: Дозволи
-    product:
-      index: Продукти
-    promotion:
-      index: Промо-акції
-    promotion_coupon:
-      index: Купони
-    report:
-      index: Звіти
-    role:
-      index: Ролі
-    route:
-      index: Маршрути
-    sales: Продажі
-    section:
-      customer: Клієнт
-    shipment:
-      index: Відправки
-    shipping_category:
-      index: Категорії доставки
-    shipping_method:
-      index: Методи доставки
-    support: Служба підтримки
-    tax_category:
-      index: Категорії оподаткування
-    tax_rate:
-      index: Податкові ставки
-    taxation_settings: Налаштування оподаткування
-    taxon:
-      index: Таксони
-    update: Редагувати
-    zone:
-      index: Пояси
-  browse_products: Перегляд товарів
-  cancel: Відмінити
-  cart:
-    empty: Ваш кошик пустий
-    summary:
-      add_coupon: Додати купон
-      checkout: Оформити замовлення
-      clear: Очистити кошик
-      grand_total: Загальний підсумок
-      product: Товар
-      quantity: К-сть
-      save: Зберегти
-      total: Усього
-      unit_price: Ціна
-    summary_header: Вміст кошика
-    total_items: '1 елемент|%count% елементів'
-  channel:
-    code: Код
-    created_at: Створено
-    currency_default: Валюта за замовчуванням
-    enabled: Увімкнено
-    id: ID
-    index_header: Канали
-    name: Ім’я
-    update: Редагувати
-    updated_at: Останнє оновлення
-  checkout:
-    addressing:
-      header: Крок адресації
-    back: Назад
-    finalize:
-      address:
-        city: Місто
-        country: Країна
-        firstname: Iм’я
-        lastname: Прізвище
-        postcode: Iндекс
-        province: Область
-        street: Вулиця
-      header: Підсумок замовлення
-      order:
-        billing_address: Платіжна адреса
-        items_total: Загальна кількість елементів
-        no_items: Це замолвення не містить жодних елементів
-        no_promotion: Промо-код не застосовано
-        no_shipping_charges: Націнки за доставку не застосовано
-        no_taxes: Податки не застосовані
-        promotion_discount: Промо-знижки
-        promotion_total: Загальна сума промо-знижки
-        shipping_address: Адреса доставки
-        shipping_charges: Націнки за доставку
-        shipping_total: Всього за доставку
-        tax_total: Всього податок
-        taxes: Податки
-        total: Усього
-      order_item:
-        quantity: К-сть
-        total: Усього
-        unit_price: Ціна одиниці
-      place_order: Розмістити замовлення
-      product:
-        name: Ім’я
-    forward: Продовжити
-    payment:
-      header: Спосіб оплати
-    security:
-      existing_customer: Існуючий клієнт
-      header: 'Ввійдіть до магазину <small>або створіть новий обліковий запис</small>'
-      login: Логін
-      new_customer: Новий клієнт
-      register: Зареєструватися
-    shipping:
-      header: Метод доставки
-  confirmation:
-    title: Підтвердження
-  contact_request:
-    email: Email
-    firstName: Iм’я
-    id: ID
-    lastName: Прізвище
-    message: Повідомлення
-    topic: Тема
-    updated_at: Останнє оновлення
-  contact_topic:
-    id: ID
-    title: Назва
-    updated_at: Останнє оновлення
-  country:
-    add_province: Додати провінцію
-    create: Створити країну
-    create_header: Нова країна
-    enabled: Увімкнено
-    id: ID
-    index_header: Країни
-    manage: Управління країнами
-    name: Ім’я
-    show_header: Подробиці про країну
-    update_header: Редагування країни
-  create: Створити
-  created_at: Створено
-  currency:
-    code: Код
-    enabled: Увімкнено
-    exchange_rate: Обмінний курс
-    id: ID
-    name: Ім’я
-    updated_at: Останнє оновлення
-  customer:
-    billing_address: Платіжна адреса
-    email: Email
-    first_name: Iм’я
-    groups: Групи
-    id: ID
-    last_name: Прізвище
-    shipping_address: Адреса доставки
-    phone_number: Номер Телефону
-  delete: Видалити
-  deleted: Видалено
-  edit: Редагувати
-  email:
-    code: Код
-    enabled: Увімкнено
-    updated_at: Останнє оновлення
-  emails:
-    order_comment:
-      name: Коментар до замовлення
-      subject: Новий коментар, доданий до замовлення
-    order_confirmation:
-      name: Підтвердження замовлення
-    shipment_confirmation:
-      name: Підтвердження відвантаження
-    user_confirmation:
-      name: Підтвердження користувача
-  filter: Фільтр
-  form:
+        imagine:
+            publishable: Опублікований
+        simple:
+            publishable: Опублікований
+        slideshow:
+            publishable: Опублікований
+        string:
+            publishable: Опублікований
     cart:
-      coupon: Купон
-    choose_file: Обрати файл
-    frontend:
-      password:
-        confirmation: Підтвердження
-        current: Поточний пароль
-        new: Новий пароль
-        title: Змінити пароль
-      profile:
-        title: Редагувати особисті відомості
-    login:
-      email: Email
-      password: Пароль
-    option_value:
-      add_value: Додати значення
-    profile:
-      email: Email
-      firstName: Iм’я
-      lastName: Прізвище
-  gallery:
-    next: Наступний
-    previous: Попередній
-    slideshow: Слайд-шоу
-  generate: Генерувати
-  group:
-    create: Створити групу
-    id: ID
-    index_header: Групи
-    name: Ім’я
-    roles: Ролі
-    update_header: Редагувати групу
-  hide_deleted: Приховати видалений
-  history:
-    action: Дія
-    author: Автор
-    data: Дані
-  homepage:
-    splash:
-      headline: Ласкаво просимо до Sylius
-      subheadline: Сучасна система електронної комерції для Symfony2
-  inventory_unit:
-    created_at: Створено
-    inventory_state: Статус інвентаризації
-    name: Ім’я
-    shipping_state: Статус доставки
-    sku: Артикул
-    updated_at: Останнє оновлення
-  locale:
-    code: Код
-    create: Створити мову
-    create_header: Додавання нової мови
-    enabled: Увімкнено
-    id: ID
-    index_header: Список усіх сконфігурованих мов
-    name: Ім’я
-    update_header: Редагувати мову
-    updated_at: Останнє оновлення
-  login: Логін
-  login_header: Адміністрування
-  logo: Sylius
-  manage: Управління
-  menu:
-    id: ID
-    index_header: Меню
-    publishable: Опублікований
-    title: Назва
-  menu_node:
-    id: ID
-    index_header: Елементи меню
-    parent: "Батьківський об'єкт"
-    title: Назва
-  meta:
-    frontend_title: Sylius, сучасна система електронної комерції для Symfony2
-  metadata:
-    id: ID
-    content: Зміст
-  na: N/A
-  newest: Найновіші продукти
-  "no": false
-  order:
-    adjustments:
-      amount: Кількість
-      description: Опис
-      type: Тип
-    billing_address: Платіжна адреса
-    comment:
-      author: Автор
-      created_at: Створено
-      state: Статус
-    create: Створити замовлення
-    create_header: Нове замовлення
-    created_at: Час створення
-    currency: Валюта
-    customer: Клієнт
-    general_info: Основна інформація
-    id: ID
-    index_header: Поточні замовлення
-    inventory_tracking: Відстеження інвентаризації
-    inventory_unit:
-      backorder: Звільняється
-      fulfill: Виконано
-      return: Повернення
-    items_total: Загальна кількість елементів
-    manage: Керувати замовленнями
-    no_items: Це замолвення не містить жодних елементів
-    no_results: У вас немає нових замовлень
-    no_shipments: Немає відправлень для цього замовлення
-    no_shipping_charges: Націнки за доставку не застосовано
-    no_taxes: Податки не застосовані
-    number: Номер
-    payment: Оплата
-    payment_state: Статус платежу
-    payment_states:
-      balance_due: Сума до сплати
-    promotion_coupons: Купони
-    promotion_total: Загальна сума промо-знижки
-    recent_header: Останні замовлення
-    release_inventory: Інвентаризація випуску
-    shipment_state: Статус доставки
-    shipment_states:
-      pending: В очікуванні
-    shipments: Відправки
-    shipping_address: Адреса доставки
-    shipping_charges: Націнки за доставку
-    shipping_total: Всього за доставку
-    show_header: Замовлення
-    state:
-      cancelled: Відхилено
-      checkout: Оформити замовлення
-      returned: Повернуто
-      shipped: Відправлено
-    tax_total: Всього податок
-    taxes: Податки
-    total: Усього
-    update_header: Редагування замовлення
-  review:
-    id: ID
-    title: Назва
-    author: Автор
-    created_at: Створено
-  order_item:
-    product: Елемент
-    quantity: К-сть
-    sellable: Товар
-    total: Усього
-    unit_price: Ціна одиниці
-  out_of_stock: Немає в наявності
-  page:
-    body: Тіло
-    create: Створити нову сторінку
-    id: ID
-    index_header: Сторінки
-    publishable: Опублікований
-    routes: Маршрути
-    title: Назва
-  password: Пароль
-  payment:
-    amount: Сума
-    create: Створити оплату
-    create_header: Нова оплата
-    created_at: Створено
-    id: ID
-    index_header: Платежі
-    manage: Керувати платежами
-    method: Метод
-    order: Замовлення
-    state:
-      cancelled: Відхилено
-      checkout: Оформити замовлення
-      completed: Завершено
-      failed: Помилка
-      header: Статус
-      new: Новий
-      pending: В очікуванні
-      processing: В процесі
-      refunded: Повернуто
-      unknown: Не вказаний
-      void: Порожньо
-    update_header: Редагування оплати
-    updated_at: Останнє оновлення
-  payment_method:
-    create: Створити метод оплати
-    create_header: Новий метод оплати
-    gateway: Шлюз
-    id: ID
-    index_header: Варіанти оплати
-    name: Ім’я
-    update_header: Редагування способу оплати
-    updated_at: Останнє оновлення
-  permission:
-    code: Код
-    description: Опис
-    id: ID
-    index_header: Дозволи
-    updated_at: Останнє оновлення
-  pricing:
-    volume_based:
-      button:
+        empty: 'Ваш кошик пустий'
+        summary:
+            clear: 'Очистити кошик'
+            quantity: К-сть
+        total_items: '1 елемент|%count% елементів'
+    checkout:
+        finalize:
+            order:
+                no_items: 'Це замолвення не містить жодних елементів'
+                no_promotion: 'Промо-код не застосовано'
+                no_shipping_charges: 'Націнки за доставку не застосовано'
+                no_taxes: 'Податки не застосовані'
+                promotion_discount: Промо-знижки
+            order_item:
+                quantity: К-сть
+        forward: Продовжити
+    homepage:
+        splash:
+            headline: 'Ласкаво просимо до Sylius'
+            subheadline: 'Сучасна система електронної комерції для Symfony2'
+    menu:
+        publishable: Опублікований
+    meta:
+        frontend_title: 'Sylius, сучасна система електронної комерції для Symfony2'
+    order:
+        no_items: 'Це замолвення не містить жодних елементів'
+        no_shipments: 'Немає відправлень для цього замовлення'
+        no_shipping_charges: 'Націнки за доставку не застосовано'
+        no_taxes: 'Податки не застосовані'
+    order_item:
+        quantity: К-сть
+        sellable: Товар
+    page:
+        publishable: Опублікований
+    promotion_coupon:
+        generate: 'Генерувати купони'
+        index: 'Список купонів'
+        total_results:
+            Total: '%total%'
+    shipment:
+        update: Редагувати
+    taxon:
+        image: 'Вибрати зображення'
+        no_image: 'Немає зображення для цього таксону'
+    ui:
+        action: Дія
+        actions: Дії
         add: Додати
-      price: Ціна
-  product:
-    available_on: Доступно
-    available_on_demand: На вимогу
-    categorization: Категоризація
-    contain_variants: Містять варіанти
-    create: Створити продукт
-    create_header: Новий товар
-    description: Опис
-    generate_variants: Генерувати варіанти
-    index_by_taxon_header: 'Товари <small> категорії "%taxon%" </small>'
-    manage: Керування продуктами
-    name: Ім’я
-    no_description: '<i>Немає опису...</i>'
-    no_images: Немає зображень для цього продукту
-    no_options: Немає опцій для цього продукту
-    no_shipping_category: Без категорії доставки
-    no_short_description: '<i>Без короткого опису</i>'
-    no_sku: Без SKU
-    no_tax_category: Без категорії оподаткування
-    no_taxons: Немає таксонів для цього продукту
-    options: Опції
-    price: Роздрібна ціна
-    restricted_zone: Заборонена зона
-    shipping_category: Категорія доставки
-    show: Детальніше
-    sku: Артикул
-    stock: Кількість на складі
-    tabs:
-      categorization: Категоризація
-      channels: Канали
-      images: Зображення
-      options: Опції
-      pricing: Ціноутворення
-      product: Товар
-    tax_category: Категорія податку
-    unavailable: Недоступно
-    update_header: Редагування продукту
-    updated_at: Останнє оновлення
-    variant_selection_method: Метод вибору варіанту
-    volume_based:
-      price: Ціна
-  product_attribute:
-    code: Код
-    name: Ім’я
-    type: Тип
-    updated_at: Останнє оновлення
-  product_association:
-    code: Код
-    create_header: Новий товар
-    name: Ім’я
-    type: Тип
-    updated_at: Останнє оновлення
-  product_not_available_in_zone: Не доступно у вашій країні
-  product_option:
-    manage: Керування опціями
-    name: Ім’я
-    presentation: Презентація
-    updated_at: Останнє оновлення
-  promotion:
-    actions: Дії
-    add_action: Додати дію
-    add_rule: Додати правило
-    coupon_based: На основі купону
-    create: Створити акцію
-    create_header: Нова акція
-    created_at: Створено
-    description: Опис
-    ends_at: Закінчується
-    general_info: Основна інформація
-    id: ID
-    index_header: Діючі акції
-    manage: Керувати акціями
-    name: Ім’я
-    rules: Правила
-    show_header: Подробиці акції
-    starts_at: Початок
-    update_header: Редагування акції
-    updated_at: Останнє оновлення
-    usage_limit: Обмеження використання
-    used: Використано
-  promotion_action:
-    configuration: Конфігурація
-    type: Тип
-  promotion_coupon:
-    code: Код
-    create: Додати купон
-    create_header: Створити новий купон
-    generate: Генерувати купони
-    generate_header: Створення купонів
-    index: Список купонів
-    index_header: Купони
-    total_results:
-      Total: '%total%'
-    update_header: Редагування купону
-  promotion_rule:
-    configuration: Конфігурація
-    type: Тип
-  province:
-    provinces: Провінції
-  redirect_route:
-    id: ID
-    title: Назва
-  report:
-    code: Код
-    description: Опис
-    id: ID
-    index_header: Звіти
-    manage: Управління
-    name: Ім’я
-  role:
-    code: Код
-    description: Опис
-    id: ID
-    index_header: Ролі
-    name: Ім’я
-    updated_at: Останнє оновлення
-  route:
-    id: ID
-    index_header: Маршрути
-    name: Ім’я
-    title: Назва
-  save_changes: Зберегти зміни
-  search: Пошук
-  security:
-    login:
-      button: Логін
-  settings:
-    general_header: Загальні налаштування
-    security_header: Налаштування безпеки
-    taxation_header: Налаштування оподаткування
-  shipment:
-    created_at: Створено
-    id: ID
-    index_header: Відправки
-    inventory_state: Статус інвентаризації
-    manage: Керування відправками
-    method: Метод
-    modified: Змінено
-    name: Ім’я
-    order: Замовлення
-    ship: Доставити
-    show_header: Деталі відправки
-    sku: Артикул
-    state: Штат
-    tracking_code: Трекінг-код
-    update: Редагувати
-    update_header: Редагування відправки
-    updated_at: Останнє оновлення
-  shipment_category:
-    manage: Управління категоріями доставки
-  shipping_address: Адреса доставки
-  shipping_category:
-    create: Створити категорію доставки
-    create_header: Нова категорія доставки
-    id: ID
-    index_header: Категорії доставки
-    manage: Управління категоріями доставки
-    name: Ім’я
-    update_header: Редагування категорії доставки
-    updated_at: Останнє оновлення
-  shipping_method:
-    calculator: Калькулятор
-    category: Категорія
-    create: Створити спосіб доставки
-    create_header: Новий спосіб доставки
-    enabled: Увімкнено
-    id: ID
-    index_header: Методи доставки
-    manage: Керувати методами доставки
-    name: Ім’я
-    show_header: Деталі способу доставки
-    update_header: Редагування методу доставки
-    updated_at: Останнє оновлення
-    zone: Зона
-  shop_by: Купуйте по
-  show_all: Показати все
-  show_deleted: Показати видалені
-  stockable:
-    index_header: 'Інвентаризація <small>Тут ви можете побачити поточний рівень запасів</small>'
-    name: Ім’я
-    updated_at: Останнє оновлення
-  tax_category:
-    create: Створення категорії оподаткування
-    create_header: Нова категорія оподаткування
-    description: Опис
-    id: ID
-    index_header: Категорії оподаткування
-    manage: Управління категоріями оподаткування
-    name: Ім’я
-    no_description: Немає опису
-    update_header: Редагування категорій оподаткування
-    updated_at: Останнє оновлення
-  tax_rate:
-    amount: Кількість
-    calculator: Калькулятор
-    category: Категорія
-    create: Створити ставку податку
-    create_header: Нова ставка податку
-    index_header: Податкові ставки
-    manage: Керувати податковими ставками
-    name: Ім’я
-    show_header: Подробиці про податкову ставку
-    update_header: Оновлення ставки податку
-    updated_at: Останнє оновлення
-    zone: Зона
-  taxon:
-    index_header: Таксони
-    create: Створити таксон
-    create_header: Новий таксон
-    image: Вибрати зображення
-    name: Ім’я
-    no_image: Немає зображення для цього таксону
-    product_index_header: 'Продукт категоризовано як "%name%"'
-    update_header: Редагування таксону
-  total_quantity: Загальна кількість
-  ui:
-    change_password: Змінити пароль
-    code: Код
-    email: Email
-    links: Посилання
-    login: Логін
-    logout: Вихід
-    register: Зареєструватися
-    name: Ім’я
-    id: ID
-  unknown: Не вказаний
-  user:
-    create_header: Новий користувач
-    general_info: 'Загальна інформація користувача "%username%"'
-    id: ID
-    impersonate: Увійти в систему як цей користувач
-    last_login: Останній вхід
-    recent_header: Недавні користувачі
-    register:
-      button: Зареєструватися
-    registration_date: Дата реєстрації
-    show_header: Інформація про користувача
-    update_header: Редагування користувача
-    username: "Ім'я користувача"
-  variant:
-    add_image: Додати зображення
-    availability: Доступність
-    available_on_demand: На вимогу
-    create: Створити варіант
-    create_header: Новий варіант продукту
-    delete_image: Видалити зображення
-    last_update: Останнє оновлення
-    options: Опції
-    price: Ціна
-    sku: Артикул
-    stock: Кількість на складі
-    update_header: Редагування варіанту
-  "yes": true
-  zone:
-    add_member: Додати члена групи
-    create: Створити зону
-    create_header: Нова зона
-    index_header: Пояси
-    manage: Керувати зонами
-    name: Ім’я
-    scope: Сфера
-    show_header: Подробиці про зону
-    type: Тип
-    update_header: Редагування зони
-  zone_member:
-    members: Члени
+        add_action: 'Додати дію'
+        add_coupon: 'Додати купон'
+        add_image: 'Додати зображення'
+        add_member: 'Додати члена групи'
+        add_province: 'Додати провінцію'
+        add_rule: 'Додати правило'
+        add_to_cart: 'У кошик'
+        add_value: 'Додати значення'
+        adding_new_locale: 'Додавання нової мови'
+        addressing_step: 'Крок адресації'
+        administration: Адміністрування
+        administration_dashboard: 'Панель адміністрування'
+        all_your_addresses: 'Усі ваші адреси'
+        amount: Кількість
+        assortment: Асортимент
+        author: Автор
+        availability: Доступність
+        available_on: Доступно
+        available_on_demand: 'На вимогу'
+        back: Назад
+        backorder: Звільняється
+        balance_due: 'Сума до сплати'
+        billing_address: 'Платіжна адреса'
+        blocks: Блоки
+        body: Тіло
+        browse_products: 'Перегляд товарів'
+        build: Побудувати
+        calculator: Калькулятор
+        cancel: Відмінити
+        cancelled: Відхилено
+        cart_summary_header: 'Вміст кошика'
+        categorization: Категоризація
+        category: Категорія
+        change_password: 'Змінити пароль'
+        change_your_password: 'Змінити пароль'
+        channels: Канали
+        checkout: 'Оформити замовлення'
+        choose_file: 'Обрати файл'
+        city: Місто
+        code: Код
+        company: Компанія
+        completed: Завершено
+        configuration: Конфігурація
+        confirmation: Підтвердження
+        confirmation_title: Підтвердження
+        contain_variants: 'Містять варіанти'
+        content: Зміст
+        countries: Країни
+        country: Країна
+        country_details: 'Подробиці про країну'
+        coupon: Купон
+        coupon_based: 'На основі купону'
+        coupons: Купони
+        create: Створити
+        create_a_new_address: 'Створити нову адресу'
+        create_country: 'Створити країну'
+        create_group: 'Створити групу'
+        create_locale: 'Створити мову'
+        create_new_coupon: 'Створити новий купон'
+        create_new_page: 'Створити нову сторінку'
+        create_order: 'Створити замовлення'
+        create_payment: 'Створити оплату'
+        create_payment_method: 'Створити метод оплати'
+        create_product: 'Створити продукт'
+        create_promotion: 'Створити акцію'
+        create_shipping_category: 'Створити категорію доставки'
+        create_shipping_method: 'Створити спосіб доставки'
+        create_tax_category: 'Створення категорії оподаткування'
+        create_tax_rate: 'Створити ставку податку'
+        create_taxon: 'Створити таксон'
+        create_variant: 'Створити варіант'
+        create_zone: 'Створити зону'
+        created_at: Створено
+        creation_time: 'Час створення'
+        currency: Валюта
+        current_orders: 'Поточні замовлення'
+        current_password: 'Поточний пароль'
+        current_promotions: 'Діючі акції'
+        current_stock: 'Кількість на складі'
+        customer: Клієнт
+        customers: Клієнти
+        dashboard: 'Панель керування'
+        data: Дані
+        default_billing_address: 'Платіжна адреса за замовчуванням'
+        default_currency: 'Валюта за замовчуванням'
+        default_shipping_address: 'Адреса доставки за замовчуванням'
+        delete: Видалити
+        delete_image: 'Видалити зображення'
+        deleted: Видалено
+        description: Опис
+        edit: Редагувати
+        edit_group: 'Редагувати групу'
+        edit_locale: 'Редагувати мову'
+        edit_my_address: 'Редагувати мою адресу'
+        edit_your_personal_information: 'Редагувати особисті відомості'
+        editing_country: 'Редагування країни'
+        editing_coupon: 'Редагування купону'
+        editing_order: 'Редагування замовлення'
+        editing_payment: 'Редагування оплати'
+        editing_payment_method: 'Редагування способу оплати'
+        editing_product: 'Редагування продукту'
+        editing_promotion: 'Редагування акції'
+        editing_shipment: 'Редагування відправки'
+        editing_shipping_category: 'Редагування категорії доставки'
+        editing_shipping_method: 'Редагування методу доставки'
+        editing_tax_category: 'Редагування категорій оподаткування'
+        editing_taxon: 'Редагування таксону'
+        editing_user: 'Редагування користувача'
+        editing_variant: 'Редагування варіанту'
+        editing_zone: 'Редагування зони'
+        email: Email
+        emails: 'Повідомлення електронної пошти'
+        enabled: Увімкнено
+        ends_at: Закінчується
+        error: Помилка
+        exchange_rate: 'Обмінний курс'
+        existing_customer: 'Існуючий клієнт'
+        failed: Помилка
+        filter: Фільтр
+        first_name: Iм’я
+        firstname: Iм’я
+        fulfill: Виконано
+        gateway: Шлюз
+        general_info: 'Основна інформація'
+        general_settings: 'Загальні налаштування'
+        generate: Генерувати
+        generate_variants: 'Генерувати варіанти'
+        generating_coupons: 'Створення купонів'
+        grand_total: 'Загальний підсумок'
+        groups: Групи
+        hide_deleted: 'Приховати видалений'
+        id: ID
+        images: Зображення
+        index_of_all_configured_locales: 'Список усіх сконфігурованих мов'
+        information: Інформація
+        inventory_here_you_can_see_current_stock_levels: 'Інвентаризація <small>Тут ви можете побачити поточний рівень запасів</small>'
+        inventory_index: Інвентаризація
+        inventory_state: 'Статус інвентаризації'
+        inventory_tracking: 'Відстеження інвентаризації'
+        invoice: Рахунок
+        items_total: 'Загальна кількість елементів'
+        label: Назва
+        last_login: 'Останній вхід'
+        last_name: Прізвище
+        last_update: 'Останнє оновлення'
+        last_week_orders: 'Замовлення минулого тижня'
+        last_week_revenue: 'Доходи за минулий тиждень'
+        lastname: Прізвище
+        latest_orders: 'Останні замовлення'
+        links: Посилання
+        locales: Локалі
+        login: Логін
+        login_button: Логін
+        logout: Вихід
+        manage: Управління
+        manage_countries: 'Управління країнами'
+        manage_options: 'Керування опціями'
+        manage_orders: 'Керувати замовленнями'
+        manage_payments: 'Керувати платежами'
+        manage_products: 'Керування продуктами'
+        manage_promotions: 'Керувати акціями'
+        manage_shipments: 'Керування відправками'
+        manage_shipping_categories: 'Управління категоріями доставки'
+        manage_shipping_methods: 'Керувати методами доставки'
+        manage_tax_categories: 'Управління категоріями оподаткування'
+        manage_tax_rates: 'Керувати податковими ставками'
+        manage_zones: 'Керувати зонами'
+        marketing: Маркетинг
+        members: Члени
+        menu_nodes: 'Елементи меню'
+        menus: Меню
+        message: Повідомлення
+        method: Метод
+        modified: Змінено
+        n_a: N/A
+        name: Ім’я
+        new: Новий
+        new_comment_posted_on_order: 'Новий коментар, доданий до замовлення'
+        new_country: 'Нова країна'
+        new_customer: 'Новий клієнт'
+        new_order: 'Нове замовлення'
+        new_password: 'Новий пароль'
+        new_payment: 'Нова оплата'
+        new_payment_method: 'Новий метод оплати'
+        new_product: 'Новий товар'
+        new_product_variant: 'Новий варіант продукту'
+        new_promotion: 'Нова акція'
+        new_shipping_category: 'Нова категорія доставки'
+        new_shipping_method: 'Новий спосіб доставки'
+        new_tax_category: 'Нова категорія оподаткування'
+        new_tax_rate: 'Нова ставка податку'
+        new_taxon: 'Новий таксон'
+        new_user: 'Новий користувач'
+        new_zone: 'Нова зона'
+        newest_products: 'Найновіші продукти'
+        next: Наступний
+        'no': false
+        no_default_billing_address: 'Немає платіжної адреси за замовчуванням'
+        no_default_shipping_address: 'Немає адреси доставки за замовчуванням'
+        no_description: 'Немає опису'
+        no_shipping_category: 'Без категорії доставки'
+        no_short_description: '<i>Без короткого опису</i>'
+        no_sku: 'Без SKU'
+        no_tax_category: 'Без категорії оподаткування'
+        not_available_in_your_country: 'Не доступно у вашій країні'
+        number: Номер
+        number_of_orders: 'Кількість замовлень'
+        options: Опції
+        order: Замовлення
+        order_comment_name: 'Коментар до замовлення'
+        order_confirmation_name: 'Підтвердження замовлення'
+        order_item_product: Елемент
+        order_show_header: Замовлення
+        order_summary: 'Підсумок замовлення'
+        order_value: 'Вартість замовлення'
+        orders: Замовлення
+        out_of_stock: 'Немає в наявності'
+        overview_of_your_store: 'Огляд вашого магазину'
+        pages: Сторінки
+        parent: 'Батьківський об''єкт'
+        password: Пароль
+        payment: Оплата
+        payment_method: 'Спосіб оплати'
+        payment_methods: 'Способи оплати'
+        payment_state: 'Статус платежу'
+        payments: Платежі
+        pending: 'В очікуванні'
+        permissions: Дозволи
+        phone_number: 'Номер Телефону'
+        place_order: 'Розмістити замовлення'
+        placed_at: Розміщено
+        postcode: Iндекс
+        presentation: Презентація
+        previous: Попередній
+        price: Ціна
+        pricing: Ціноутворення
+        processing: 'В процесі'
+        product: Товар
+        product_archetypes: 'Прототипи продуктів'
+        products: Продукти
+        products_categorized_as_name: 'Продукт категоризовано як "%name%"'
+        products_categorized_under_taxon_taxon: 'Товари <small> категорії "%taxon%" </small>'
+        promotion_coupons: Купони
+        promotion_details: 'Подробиці акції'
+        promotion_total: 'Загальна сума промо-знижки'
+        promotions: Промо-акції
+        province: Область
+        provinces: Провінції
+        recent_orders: 'Останні замовлення'
+        recent_users: 'Недавні користувачі'
+        refunded: Повернуто
+        register: Зареєструватися
+        register_button: Зареєструватися
+        registration_date: 'Дата реєстрації'
+        release_inventory: 'Інвентаризація випуску'
+        reports: Звіти
+        restricted_zone: 'Заборонена зона'
+        retail_price: 'Роздрібна ціна'
+        return: Повернення
+        returned: Повернуто
+        roles: Ролі
+        routes: Маршрути
+        rules: Правила
+        sales: Продажі
+        sales_this_month: Продажі
+        save: Зберегти
+        save_changes: 'Зберегти зміни'
+        scope: Сфера
+        search: Пошук
+        security_settings: 'Налаштування безпеки'
+        set_as_default_billing_address: 'Встановити як платіжну адресу за замовчуванням'
+        set_as_default_shipping_address: 'Встановити, як адресу доставки за замовчуванням'
+        ship: Доставити
+        shipment_confirmation_name: 'Підтвердження відвантаження'
+        shipment_details: 'Деталі відправки'
+        shipment_state: 'Статус доставки'
+        shipments: Відправки
+        shipped: Відправлено
+        shipping_address: 'Адреса доставки'
+        shipping_categories: 'Категорії доставки'
+        shipping_category: 'Категорія доставки'
+        shipping_charges: 'Націнки за доставку'
+        shipping_method: 'Метод доставки'
+        shipping_method_details: 'Деталі способу доставки'
+        shipping_methods: 'Методи доставки'
+        shipping_state: 'Статус доставки'
+        shipping_total: 'Всього за доставку'
+        shop_by: 'Купуйте по'
+        show_all: 'Показати все'
+        show_deleted: 'Показати видалені'
+        sign_in_to_the_store_or_create_new_account: 'Ввійдіть до магазину <small>або створіть новий обліковий запис</small>'
+        sku: Артикул
+        slideshow: Слайд-шоу
+        starts_at: Початок
+        state: Штат
+        state_header: Статус
+        street: Вулиця
+        success: Успішно
+        support: 'Служба підтримки'
+        sylius_logo: Sylius
+        tax_categories: 'Категорії оподаткування'
+        tax_category: 'Категорія податку'
+        tax_rate_details: 'Подробиці про податкову ставку'
+        tax_rates: 'Податкові ставки'
+        tax_total: 'Всього податок'
+        taxation_categories: 'Категорії оподаткування'
+        taxation_settings: 'Налаштування оподаткування'
+        taxes: Податки
+        taxons: Таксони
+        there_are_no_images_for_this_product: 'Немає зображень для цього продукту'
+        there_are_no_options_for_this_product: 'Немає опцій для цього продукту'
+        there_are_no_taxons_for_this_product: 'Немає таксонів для цього продукту'
+        title: Назва
+        topic: Тема
+        total: Усього
+        total_orders: 'Всього замовлень'
+        total_qty: 'Загальна кількість'
+        total_registrations: 'Всього реєстрацій'
+        tracking_code: Трекінг-код
+        tracking_number: Трекінг-номер
+        type: Тип
+        unavailable: Недоступно
+        unit_price: 'Ціна одиниці'
+        unknown: 'Не вказаний'
+        updating_tax_rate: 'Оновлення ставки податку'
+        usage_limit: 'Обмеження використання'
+        used: Використано
+        user_confirmation_name: 'Підтвердження користувача'
+        user_details: 'Інформація про користувача'
+        username: 'Ім''я користувача'
+        variant_selection_method: 'Метод вибору варіанту'
+        view_more: Детальніше
+        void: Порожньо
+        warning: Попередження
+        welcome_to_your_space: 'Ласкаво просимо до вашого простору'
+        'yes': true
+        you_are_customer_since: 'Ви є клієнтом з'
+        you_have_no_new_orders: 'У вас немає нових замовлень'
+        your_last_5_orders: '5 останніх замовлень'
+        your_products: 'Ваші продукти'
+        zone: Зона
+        zone_details: 'Подробиці про зону'
+        zones: Пояси
+    user:
+        general_info: 'Загальна інформація користувача "%username%"'
+        impersonate: 'Увійти в систему як цей користувач'
+    variant:
+        stock: 'Кількість на складі'

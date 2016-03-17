@@ -9,9 +9,9 @@
             <tr>
                 <th>{{ sylius_resource_sort('id', '#id') }}</th>
                 <th>{{ sylius_resource_sort('code', 'sylius.ui.code'|trans) }}</th>
-                <th>{{ 'sylius.product_option.name'|trans }}</th>
-                <th>{{ 'sylius.product_option.values'|trans }}</th>
-                <th>{{ sylius_resource_sort('updatedAt', 'sylius.product_option.updated_at'|trans) }}</th>
+                <th>{{ 'sylius.ui.name'|trans }}</th>
+                <th>{{ 'sylius.ui.values'|trans }}</th>
+                <th>{{ sylius_resource_sort('updatedAt', 'sylius.ui.last_update'|trans) }}</th>
                 <th></th>
             </tr>
         </thead>
@@ -40,7 +40,7 @@
         </tbody>
     </table>
 {% else %}
-{{ alerts.info('sylius.product_option.no_results'|trans) }}
+{{ alerts.info('sylius.ui.there_are_no_options_configured'|trans) }}
 {% endif %}
 
 {% endmacro %}

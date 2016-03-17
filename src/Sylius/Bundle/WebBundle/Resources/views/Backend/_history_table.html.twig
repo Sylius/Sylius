@@ -4,7 +4,7 @@
 {% elseif key == 'price' or key == 'unitPrice' %}
     {{ value|sylius_price() }}
 {% elseif value is empty %}
-    <em>{{ 'sylius.history.empty'|trans }}</em>
+    <em>{{ 'sylius.ui.empty'|trans }}</em>
 {% elseif value is iterable %}
     {{ value|json_encode }}
 {% else %}
@@ -17,10 +17,10 @@
 <table class="table">
     <thead>
         <tr>
-            <th class="action">{{ 'sylius.history.action'|trans }}</th>
+            <th class="action">{{ 'sylius.ui.action'|trans }}</th>
             <th class="logged-at">{{ 'sylius.history.logged_at'|trans }}</th>
-            <th class="data">{{ 'sylius.history.data'|trans }}</th>
-            <th class="author">{{ 'sylius.history.author'|trans }}</th>
+            <th class="data">{{ 'sylius.ui.data'|trans }}</th>
+            <th class="author">{{ 'sylius.ui.author'|trans }}</th>
             <th></th>
         </tr>
     </thead>
@@ -54,7 +54,7 @@
             <td>{{ log.username|default('unknown') }}</td>
             <td>
                 {% if revert_route is defined and (log.version != 1 or length > 1) and not loop.first and not disabled is defined %}
-                    {{ buttons.patch(path(revert_route, {'id': log.objectId, 'version': log.version}), 'sylius.history.revert'|trans) }}
+                    {{ buttons.patch(path(revert_route, {'id': log.objectId, 'version': log.version}), 'sylius.ui.revert'|trans) }}
                 {% endif %}
             </td>
         </tr>
@@ -62,5 +62,5 @@
     </tbody>
 </table>
 {% else %}
-{{ alerts.info('sylius.history.no_results'|trans) }}
+{{ alerts.info('sylius.ui.there_are_no_logged_events_to_display'|trans) }}
 {% endif %}

@@ -44,7 +44,7 @@
 
     {% if 'file' == type %}
         {% set attr = attr|merge({'class': attr.class|default('') ~ ' hidden'}) %}
-        <label for="{{ id }}" class="btn-primary btn-lg file-overlay"><i class="glyphicon glyphicon-folder-open"></i>&nbsp; {{ 'sylius.form.choose_file'|trans }}</label>
+        <label for="{{ id }}" class="btn-primary btn-lg file-overlay"><i class="glyphicon glyphicon-folder-open"></i>&nbsp; {{ 'sylius.ui.choose_file'|trans }}</label>
         &nbsp;
     {% endif %}
     {{ parent() }}

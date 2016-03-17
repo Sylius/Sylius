@@ -6,18 +6,18 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
-    <li>{{ 'sylius.breadcrumb.taxon.index'|trans }}</li>
+    <li>{{ 'sylius.ui.assortment'|trans }}</li>
+    <li>{{ 'sylius.ui.taxons'|trans }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_taxon_create'), 'sylius.taxon.create'|trans) }}
-        {{ buttons.manage(path('sylius_backend_product_index'), 'sylius.product.manage'|trans) }}
+        {{ buttons.create(path('sylius_backend_taxon_create'), 'sylius.ui.create_taxon'|trans) }}
+        {{ buttons.manage(path('sylius_backend_product_index'), 'sylius.ui.manage_products'|trans) }}
     </div>
-    <h1><i class="glyphicon glyphicon-folder-close"></i> {{ 'sylius.taxon.index_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-folder-close"></i> {{ 'sylius.ui.taxons'|trans|raw }}</h1>
 </div>
 
 {{ pagination(taxons) }}

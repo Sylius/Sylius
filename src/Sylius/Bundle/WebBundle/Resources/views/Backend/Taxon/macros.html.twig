@@ -6,7 +6,7 @@
             <thead>
                 <tr>
                     <th>{{ 'sylius.ui.code'|trans  }}</th>
-                    <th>{{ 'sylius.taxon.name'|trans }}</th>
+                    <th>{{ 'sylius.ui.name'|trans }}</th>
                     <th></th>
                 </tr>
             </thead>
@@ -15,7 +15,7 @@
             </tbody>
         </table>
     {% else %}
-        {{ alerts.info('sylius.taxon.no_results'|trans) }}
+        {{ alerts.info('sylius.ui.there_are_no_taxons_to_display'|trans) }}
     {% endif %}
 
 {% endmacro %}
@@ -40,7 +40,7 @@
             </td>
             <td>
                 <div class="pull-right">
-                {{ buttons.generic(path('sylius_backend_taxon_product_index', {'id': taxon.id}), 'sylius.browse_products'|trans) }}
+                {{ buttons.generic(path('sylius_backend_taxon_product_index', {'id': taxon.id}), 'sylius.ui.browse_products'|trans) }}
                 {{ buttons.edit(path('sylius_backend_taxon_update', {'id': taxon.id})) }}
                 {{ buttons.delete(path('sylius_backend_taxon_delete', {'id': taxon.id})) }}
                 </div>

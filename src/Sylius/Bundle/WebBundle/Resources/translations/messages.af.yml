@@ -1,10 +1,6 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-  "no": false
-  product_option:
-    presentation: Weergawe
-  "yes": true
-  zone:
-    scope: Gebied
+    ui:
+        'no': false
+        presentation: Weergawe
+        scope: Gebied
+        'yes': true

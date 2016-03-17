@@ -4,16 +4,16 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.sales'|trans }}</li>
-    <li><a href="{{ path('sylius_backend_shipment_index') }}">{{ 'sylius.breadcrumb.shipment.index'|trans }}</a></li>
+    <li>{{ 'sylius.ui.sales'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_shipment_index') }}">{{ 'sylius.ui.shipments'|trans }}</a></li>
     <li>{{ shipment.method }} (#{{ shipment.order.number }})</li>
-    <li>{{ 'sylius.breadcrumb.edit'|trans }}</a></li>
+    <li>{{ 'sylius.ui.edit'|trans }}</a></li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
-    <h1><i class="glyphicon glyphicon-pencil"></i> {{ 'sylius.shipment.update_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-pencil"></i> {{ 'sylius.ui.editing_shipment'|trans|raw }}</h1>
 </div>
 
 {{ form_errors(form) }}

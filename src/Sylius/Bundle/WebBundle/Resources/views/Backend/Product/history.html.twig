@@ -6,33 +6,33 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
-    <li><a href="{{ path('sylius_backend_product_index') }}">{{ 'sylius.breadcrumb.product.index'|trans }}</a></li>
+    <li>{{ 'sylius.ui.assortment'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_product_index') }}">{{ 'sylius.ui.products'|trans }}</a></li>
     <li><a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}">{{ product.name }}</a></li>
-    <li>{{ 'sylius.history.header'|trans }}</li>
+    <li>{{ 'sylius.ui.history_header'|trans }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-    {{ buttons.manage(path('sylius_backend_product_index'), 'sylius.product.manage'|trans) }}
+    {{ buttons.manage(path('sylius_backend_product_index'), 'sylius.ui.manage_products'|trans) }}
     {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}
     {{ buttons.delete(path('sylius_backend_product_delete', {'id': product.id}), null, false, false) }}
     <a href="{{ path(product) }}" class="btn btn-info">
        <i class="glyphicon glyphicon-shopping-cart"></i>
-        {{ 'sylius.product.show_in_store'|trans }}
+        {{ 'sylius.ui.show_in_store'|trans }}
     </a>
     </div>
-    <h1><i class="glyphicon glyphicon-calendar"></i> {{ 'sylius.product.show_header'|trans({'%product%': product.name})|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-calendar"></i> {{ 'sylius.ui.product_details_viewing_product_product'|trans({'%product%': product.name})|raw }}</h1>
 </div>
 
 <ul class="nav nav-tabs">
-    <li class="active"><a href="#main" data-toggle="tab">{{ 'sylius.product.tabs.product'|trans }}</a></li>
+    <li class="active"><a href="#main" data-toggle="tab">{{ 'sylius.ui.product'|trans }}</a></li>
     {% if not product.hasVariants %}
-        <li><a href="#options" data-toggle="tab">{{ 'sylius.product.tabs.options'|trans }}</a></li>
+        <li><a href="#options" data-toggle="tab">{{ 'sylius.ui.options'|trans }}</a></li>
     {% endif %}
-    <li><a href="#attributes" data-toggle="tab">{{ 'sylius.product.tabs.attributes'|trans }}</a></li>
+    <li><a href="#attributes" data-toggle="tab">{{ 'sylius.ui.attributes'|trans }}</a></li>
 </ul>
 <br>
 
@@ -42,11 +42,11 @@
 
         <hr>
 
-        <h4>{{ 'sylius.product.variants'|trans }}</h4>
+        <h4>{{ 'sylius.ui.variants'|trans }}</h4>
         {% for variant in logs.variants %}
             {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'revert_route': 'sylius_backend_product_revert', 'logs': variant} %}
         {% else %}
-            {{ alerts.info('sylius.history.no_results'|trans) }}
+            {{ alerts.info('sylius.ui.there_are_no_logged_events_to_display'|trans) }}
         {% endfor %}
     </div>
 
@@ -54,7 +54,7 @@
         {% for attribute in logs.attributes %}
             {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'revert_route': 'sylius_backend_product_revert', 'logs': attribute} %}
         {% else %}
-            {{ alerts.info('sylius.history.no_results'|trans) }}
+            {{ alerts.info('sylius.ui.there_are_no_logged_events_to_display'|trans) }}
         {% endfor %}
     </div>
 
@@ -63,7 +63,7 @@
         {% for option in logs.options %}
             {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'revert_route': 'sylius_backend_product_revert', 'logs': option} %}
         {% else %}
-            {{ alerts.info('sylius.history.no_results'|trans) }}
+            {{ alerts.info('sylius.ui.there_are_no_logged_events_to_display'|trans) }}
         {% endfor %}
     </div>
     {% endif %}

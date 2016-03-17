@@ -8,10 +8,10 @@
 <table class="table">
     <thead>
         <tr>
-            <th>{{ sylius_resource_sort('id', 'sylius.report.id'|trans) }}</th>
-            <th>{{ sylius_resource_sort('name', 'sylius.report.name'|trans) }}</th>
+            <th>{{ sylius_resource_sort('id', 'sylius.ui.id'|trans) }}</th>
+            <th>{{ sylius_resource_sort('name', 'sylius.ui.name'|trans) }}</th>
             <th>{{ sylius_resource_sort('code', 'sylius.ui.code'|trans) }}</th>
-            <th>{{ sylius_resource_sort('description', 'sylius.report.description'|trans) }}</th>
+            <th>{{ sylius_resource_sort('description', 'sylius.ui.description'|trans) }}</th>
             <th>{{ sylius_resource_sort('renderer', 'sylius.report.renderer'|trans) }}</th>
             <th>{{ sylius_resource_sort('data_fetcher', 'sylius.report.data_fetcher'|trans) }}</th>
             <th></th>
@@ -38,7 +38,7 @@
     </tbody>
 </table>
 {% else %}
-{{ alerts.info('sylius.report.no_results'|trans) }}
+{{ alerts.info('sylius.ui.there_are_no_reports_created'|trans) }}
 {% endif %}
 
 {% endmacro %}

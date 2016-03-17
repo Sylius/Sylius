@@ -1,13 +1,8 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-  customer:
-    phone_number: 전화번호
-  "no": false
-  product_option:
-    presentation: 소개
-  remember_me: 아이디/암호 저장
-  "yes": true
-  zone:
-    scope: 범위
+    ui:
+        'no': false
+        phone_number: 전화번호
+        presentation: 소개
+        remember_me: '아이디/암호 저장'
+        scope: 범위
+        'yes': true

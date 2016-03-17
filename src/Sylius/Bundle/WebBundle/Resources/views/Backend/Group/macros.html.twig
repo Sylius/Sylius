@@ -7,8 +7,8 @@
 <table id="groups" class="table">
     <thead>
         <tr>
-            <th>{{ sylius_resource_sort('id', 'sylius.group.id'|trans) }}</th>
-            <th>{{ sylius_resource_sort('name', 'sylius.group.name'|trans) }}</th>
+            <th>{{ sylius_resource_sort('id', 'sylius.ui.id'|trans) }}</th>
+            <th>{{ sylius_resource_sort('name', 'sylius.ui.name'|trans) }}</th>
             <th></th>
         </tr>
     </thead>
@@ -28,6 +28,6 @@
     </tbody>
 </table>
 {% else %}
-{{ alerts.info('sylius.group.no_results'|trans) }}
+{{ alerts.info('sylius.ui.there_are_no_groups_to_display'|trans) }}
 {% endif %}
 {% endmacro %}
