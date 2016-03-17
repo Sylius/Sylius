@@ -16,7 +16,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Component\Resource\Event\ResourceEvent;
+use Sylius\Component\Resource\ResourceActions;
+use FOS\RestBundle\View\View;
 use Sylius\Component\Affiliate\Model\AffiliateInterface;
 
 class AffiliateController extends ResourceController
@@ -59,21 +60,22 @@ class AffiliateController extends ResourceController
      */
     protected function status(Request $request, $status, $flash)
     {
-        $this->isGrantedOr403('update');
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
-        $affiliate = $this->findOr404($request);
+        $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
+
+        $affiliate = $this->findOr404($configuration);
         $affiliate->setStatus($status);
 
-        $this->domainManager->update($affiliate, $flash);
+        $this->manager->persist($affiliate);
+        $this->manager->flush();
 
-        if ($this->config->isApiRequest()) {
-            if ($affiliate instanceof ResourceEvent) {
-                throw new HttpException($affiliate->getErrorCode(), $affiliate->getMessage());
-            }
-
-            return $this->handleView($this->view($affiliate, 204));
+        if (!$configuration->isHtmlRequest()) {
+            return $this->viewHandler->handle($configuration, View::create($affiliate, 201));
         }
 
-        return $this->redirectHandler->redirectToIndex();
+        $this->flashHelper->addSuccessFlash($configuration, $flash, $affiliate);
+
+        return $this->redirectHandler->redirectToIndex($configuration, $affiliate);
     }
 }

@@ -12,8 +12,9 @@
 namespace Sylius\Component\Affiliate\Model;
 
 use Sylius\Component\Core\Model\ImageInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
-interface BannerInterface extends ImageInterface
+interface BannerInterface extends ImageInterface, ResourceInterface
 {
     /**
      * Get name.

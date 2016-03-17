@@ -357,7 +357,7 @@ class FrontendMenuBuilder extends MenuBuilder
             'labelAttributes' => ['icon' => 'icon-envelope', 'iconOnly' => false],
         ])->setLabel($this->translate('sylius.frontend.menu.account.addresses'));
 
-        if ($this->securityContext->getToken()->getUser()->getCustomer()->getAffiliate()) {
+        if ($this->tokenStorage->getToken()->getUser()->getCustomer()->getAffiliate()) {
             $child->addChild('affiliate', [
                 'route' => 'sylius_account_affiliate_index',
                 'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.account.affiliate')),

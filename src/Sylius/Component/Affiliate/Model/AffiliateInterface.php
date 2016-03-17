@@ -13,11 +13,12 @@ namespace Sylius\Component\Affiliate\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
-interface AffiliateInterface extends ReferralInterface, TimestampableInterface
+interface AffiliateInterface extends ReferralInterface, TimestampableInterface, ResourceInterface
 {
     const AFFILIATE_ENABLED  = 1;
     const AFFILIATE_PAUSED   = 0;

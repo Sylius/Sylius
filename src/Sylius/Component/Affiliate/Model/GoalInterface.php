@@ -13,10 +13,11 @@ namespace Sylius\Component\Affiliate\Model;
 
 use Doctrine\Common\Collections\Collection;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
-interface GoalInterface extends RuleAwareInterface, SoftDeletableInterface, TimestampableInterface
+interface GoalInterface extends RuleAwareInterface, SoftDeletableInterface, TimestampableInterface, ResourceInterface
 {
     /**
      * Get name.
