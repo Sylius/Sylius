@@ -11,27 +11,33 @@
 
 namespace spec\Sylius\Component\Inventory\Operator;
 
-use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use SM\Factory\FactoryInterface;
+use SM\StateMachine\StateMachineInterface;
+use Sylius\Component\Inventory\InventoryUnitTransitions;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Inventory\Operator\BackordersHandler;
 use Sylius\Component\Inventory\Operator\BackordersHandlerInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Inventory\Repository\InventoryUnitRepositoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Robin Jansen <robinjansen51@gmail.com>
  */
 class BackordersHandlerSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $repository)
-    {
-        $this->beConstructedWith($repository);
+    function let(
+        InventoryUnitRepositoryInterface $repository,
+        FactoryInterface $factory
+    ) {
+        $this->beConstructedWith($repository, $factory);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Inventory\Operator\BackordersHandler');
+        $this->shouldHaveType(BackordersHandler::class);
     }
 
     function it_implements_Sylius_inventory_backorders_handler_interface()
@@ -75,87 +81,71 @@ class BackordersHandlerSpec extends ObjectBehavior
         ;
     }
 
-    function it_partially_fills_backordered_units_if_not_enough_in_stock(
+    function it_partially_fills_backordered_units(
+        $repository,
+        $factory,
+        StateMachineInterface $stateMachine,
         StockableInterface $stockable,
-        InventoryUnitInterface $inventoryUnit1,
-        InventoryUnitInterface $inventoryUnit2,
-        ObjectRepository $repository
+        InventoryUnitInterface $inventoryUnit1
     ) {
         $stockable->getOnHand()->shouldBeCalled()->willReturn(1);
         $stockable->setOnHand(0)->shouldBeCalled();
 
-        $inventoryUnit1->setInventoryState(InventoryUnitInterface::STATE_SOLD)->shouldBeCalled();
-        $inventoryUnit2->setInventoryState(InventoryUnitInterface::STATE_SOLD)->shouldNotBeCalled();
-
         $repository
-            ->findBy(
-                [
-                    'stockable' => $stockable,
-                    'inventoryState' => InventoryUnitInterface::STATE_BACKORDERED,
-                ],
-                [
-                    'createdAt' => 'ASC',
-                ]
+            ->findByStockableAndInventoryState(
+                $stockable,
+                InventoryUnitInterface::STATE_BACKORDERED,
+                1
             )
-            ->willReturn([$inventoryUnit1, $inventoryUnit2])
+            ->shouldBeCalled()
+            ->willReturn([$inventoryUnit1])
+        ;
+
+        $factory->get($inventoryUnit1, InventoryUnitTransitions::GRAPH)
+            ->shouldBeCalled()
+            ->willReturn($stateMachine)
+        ;
+
+        $stateMachine->apply(InventoryUnitTransitions::SYLIUS_SELL)
+            ->shouldBeCalledTimes(1)
+            ->willReturn(true)
         ;
 
         $this->fillBackorders($stockable);
     }
 
-    function it_fills_all_backordered_units_if_enough_in_stock(
+    function it_fills_backordered_units(
+        $repository,
+        $factory,
+        StateMachineInterface $stateMachine,
         StockableInterface $stockable,
         InventoryUnitInterface $inventoryUnit1,
-        InventoryUnitInterface $inventoryUnit2,
-        InventoryUnitInterface $inventoryUnit3,
-        ObjectRepository $repository
-    ) {
-        $stockable->getOnHand()->shouldBeCalled()->willReturn(3);
-        $stockable->setOnHand(0)->shouldBeCalled();
-
-        $inventoryUnit1->setInventoryState(InventoryUnitInterface::STATE_SOLD)->shouldBeCalled();
-        $inventoryUnit2->setInventoryState(InventoryUnitInterface::STATE_SOLD)->shouldBeCalled();
-        $inventoryUnit3->setInventoryState(InventoryUnitInterface::STATE_SOLD)->shouldBeCalled();
-
-        $repository
-            ->findBy(
-                [
-                    'stockable' => $stockable,
-                    'inventoryState' => InventoryUnitInterface::STATE_BACKORDERED,
-                ],
-                [
-                    'createdAt' => 'ASC',
-                ]
-            )
-            ->willReturn([$inventoryUnit1, $inventoryUnit2, $inventoryUnit3])
-        ;
-
-        $this->fillBackorders($stockable);
-    }
-
-    function it_partially_fills_backordered_units_and_updates_stock_accordingly(
-        StockableInterface $stockable,
-        InventoryUnitInterface $inventoryUnit1,
-        InventoryUnitInterface $inventoryUnit2,
-        ObjectRepository $repository
+        InventoryUnitInterface $inventoryUnit2
     ) {
         $stockable->getOnHand()->shouldBeCalled()->willReturn(5);
         $stockable->setOnHand(3)->shouldBeCalled();
 
-        $inventoryUnit1->setInventoryState(InventoryUnitInterface::STATE_SOLD)->shouldBeCalled();
-        $inventoryUnit2->setInventoryState(InventoryUnitInterface::STATE_SOLD)->shouldBeCalled();
-
         $repository
-            ->findBy(
-                [
-                    'stockable' => $stockable,
-                    'inventoryState' => InventoryUnitInterface::STATE_BACKORDERED,
-                ],
-                [
-                    'createdAt' => 'ASC',
-                ]
+            ->findByStockableAndInventoryState(
+                $stockable,
+                InventoryUnitInterface::STATE_BACKORDERED,
+                5
             )
+            ->shouldBeCalled()
             ->willReturn([$inventoryUnit1, $inventoryUnit2])
+        ;
+
+        $factory->get($inventoryUnit1, InventoryUnitTransitions::GRAPH)
+            ->willReturn($stateMachine)
+        ;
+
+        $factory->get($inventoryUnit2, InventoryUnitTransitions::GRAPH)
+            ->willReturn($stateMachine)
+        ;
+
+        $stateMachine->apply(InventoryUnitTransitions::SYLIUS_SELL)
+            ->shouldBeCalledTimes(2)
+            ->willReturn(true)
         ;
 
         $this->fillBackorders($stockable);
