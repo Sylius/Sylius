@@ -38,10 +38,10 @@ class CheckoutThankYouPage extends SymfonyPage implements CheckoutThankYouPageIn
     /**
      * {@inheritdoc}
      */
-    public function waitForResponse($timeout)
+    public function waitForResponse($timeout, array $parameters = [])
     {
-        $this->getDocument()->waitFor($timeout, function () {
-            return $this->isOpen();
+        $this->getDocument()->waitFor($timeout, function () use ($parameters) {
+            return $this->isOpen($parameters);
         });
     }
 

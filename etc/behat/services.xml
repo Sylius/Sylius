@@ -23,6 +23,9 @@
         <parameter key="sylius.behat.table_manipulator.class">Sylius\Behat\TableManipulator</parameter>
         <parameter key="sylius.behat.page.class">Sylius\Behat\Page\Page</parameter>
         <parameter key="sylius.behat.symfony_page.class">Sylius\Behat\Page\SymfonyPage</parameter>
+        <parameter key="sylius.behat.paypal_api_mocker.class">Sylius\Behat\PaypalApiMocker</parameter>
+        <parameter key="sylius.behat.mocker.class">Sylius\Behat\Mocker</parameter>
+        <parameter key="sylius.behat.response_loader.class">Sylius\Behat\ResponseLoader</parameter>
         <parameter key="sylius.behat.page.admin.crud.index.class">Sylius\Behat\Page\Admin\Crud\IndexPage</parameter>
         <parameter key="sylius.behat.page.admin.crud.create.class">Sylius\Behat\Page\Admin\Crud\CreatePage</parameter>
         <parameter key="sylius.behat.page.admin.crud.update.class">Sylius\Behat\Page\Admin\Crud\UpdatePage</parameter>
@@ -56,6 +59,15 @@
         <service id="sylius.behat.symfony_page" class="%sylius.behat.symfony_page.class%" parent="sylius.behat.page" abstract="true" scope="scenario" public="false">
             <argument type="service" id="router" container="symfony_shared" />
         </service>
+
+        <service id="sylius.behat.paypal_api_mocker" class="%sylius.behat.paypal_api_mocker.class%" scope="scenario" public="false">
+            <argument type="service" id="sylius.behat.mocker" />
+            <argument type="service" id="sylius.behat.response_loader" />
+        </service>
+        <service id="sylius.behat.mocker" class="%sylius.behat.mocker.class%" scope="scenario" public="false">
+            <argument type="service" id="service_container" container="symfony" />
+        </service>
+        <service id="sylius.behat.response_loader" class="%sylius.behat.response_loader.class%" scope="scenario" public="false" />
 
         <service id="sylius.behat.page.admin.crud.index" class="%sylius.behat.page.admin.crud.index.class%" parent="sylius.behat.symfony_page" abstract="true" scope="scenario" public="false">
             <argument type="service" id="sylius.behat.table_manipulator" />

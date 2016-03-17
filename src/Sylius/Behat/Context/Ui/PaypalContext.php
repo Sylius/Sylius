@@ -12,7 +12,13 @@
 namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Page\Checkout\CheckoutFinalizeStepInterface;
 use Sylius\Behat\Page\External\PaypalExpressCheckoutPageInterface;
+use Sylius\Behat\Page\Order\OrderPaymentsPageInterface;
+use Sylius\Behat\PaypalApiMocker;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -20,33 +26,66 @@ use Sylius\Behat\Page\External\PaypalExpressCheckoutPageInterface;
 final class PaypalContext implements Context
 {
     /**
+     * @var SharedStorageInterface
+     */
+    private $sharedStorage;
+
+    /**
+     * @var OrderPaymentsPageInterface
+     */
+    private $orderPaymentsPage;
+
+    /**
      * @var PaypalExpressCheckoutPageInterface
      */
     private $paypalExpressCheckoutPage;
 
     /**
-     * @var string
+     * @var CheckoutFinalizeStepInterface
      */
-    private $paypalAccountName;
+    private $checkoutFinalizeStep;
 
     /**
-     * @var string
+     * @var PaypalApiMocker
      */
-    private $paypalAccountPassword;
+    private $paypalApiMocker;
 
     /**
+     * @var OrderRepositoryInterface
+     */
+    private $orderRepository;
+
+    /**
+     * @param SharedStorageInterface $sharedStorage
+     * @param OrderPaymentsPageInterface $orderPaymentsPage
      * @param PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage
-     * @param string $paypalAccountName
-     * @param string $paypalAccountPassword
+     * @param CheckoutFinalizeStepInterface $checkoutFinalizeStep
+     * @param PaypalApiMocker $paypalApiMocker
+     * @param OrderRepositoryInterface $orderRepository
      */
     public function __construct(
+        SharedStorageInterface $sharedStorage,
+        OrderPaymentsPageInterface $orderPaymentsPage,
         PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage,
-        $paypalAccountName,
-        $paypalAccountPassword
+        CheckoutFinalizeStepInterface $checkoutFinalizeStep,
+        PaypalApiMocker $paypalApiMocker,
+        OrderRepositoryInterface $orderRepository
     ) {
+        $this->sharedStorage = $sharedStorage;
+        $this->orderPaymentsPage = $orderPaymentsPage;
         $this->paypalExpressCheckoutPage = $paypalExpressCheckoutPage;
-        $this->paypalAccountName = $paypalAccountName;
-        $this->paypalAccountPassword = $paypalAccountPassword;
+        $this->checkoutFinalizeStep = $checkoutFinalizeStep;
+        $this->paypalApiMocker = $paypalApiMocker;
+        $this->orderRepository = $orderRepository;
+    }
+
+    /**
+     * @Given /^I confirm my order with paypal payment$/
+     */
+    public function iConfirmMyOrderWithPaypalPayment()
+    {
+        $this->paypalApiMocker->mockApiPaymentInitializeResponse();
+        $this->checkoutFinalizeStep->confirmOrder();
     }
 
     /**
@@ -62,7 +101,7 @@ final class PaypalContext implements Context
      */
     public function iSignInToPaypalAndPaySuccessfully()
     {
-        $this->paypalExpressCheckoutPage->logIn($this->paypalAccountName, $this->paypalAccountPassword);
+        $this->paypalApiMocker->mockApiSuccessfulPaymentResponse();
         $this->paypalExpressCheckoutPage->pay();
     }
 
@@ -72,5 +111,34 @@ final class PaypalContext implements Context
     public function iCancelMyPaypalPayment()
     {
         $this->paypalExpressCheckoutPage->cancel();
+    }
+
+    /**
+     * @When I try to pay again
+     */
+    public function iTryToPayAgain()
+    {
+        $order = $this->getLastOrder();
+        $payment = $order->getLastPayment();
+        $this->paypalApiMocker->mockApiPaymentInitializeResponse();
+        $this->orderPaymentsPage->clickPayButtonForGivenPayment($payment);
+    }
+
+    /**
+     * @return OrderInterface
+     *
+     * @throws \RuntimeException
+     */
+    private function getLastOrder()
+    {
+        $customer = $this->sharedStorage->get('user')->getCustomer();
+        $orders = $this->orderRepository->findByCustomer($customer);
+        $lastOrder = end($orders);
+
+        if (false === $lastOrder) {
+            throw new \RuntimeException(sprintf('There is no last order for %s', $customer->getFullName()));
+        }
+
+        return $lastOrder;
     }
 }

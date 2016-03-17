@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Controller;
 use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\Controller\FOSRestController;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderCheckoutTransitions;
@@ -198,8 +199,8 @@ class CheckoutController extends FOSRestController
      */
     public function thankYouAction()
     {
-        $id = $this->get('session')->get('sylius_order_id');
-        $order = $this->findOrderOr404($id);
+        $orderId = $this->get('session')->get('sylius_order_id');
+        $order = $this->findOrderOr404($orderId);
 
         return $this->render('SyliusWebBundle:Frontend/Checkout/Step:thankYou.html.twig', ['order' => $order]);
     }
@@ -293,5 +294,13 @@ class CheckoutController extends FOSRestController
     private function createApiForm($type, $value = null, array $options = [])
     {
         return $this->get('form.factory')->createNamed('', $type, $value, array_merge($options, ['csrf_protection' => false]));
+    }
+
+    /**
+     * @return null|CustomerInterface
+     */
+    protected function getCustomer()
+    {
+        return $this->get('sylius.context.customer')->getCustomer();
     }
 }

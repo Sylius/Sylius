@@ -134,7 +134,7 @@ abstract class Kernel extends BaseKernel
      */
     protected function getContainerBaseClass()
     {
-        if ('test' === $this->environment) {
+        if ('test' === $this->environment || 'test_cached' === $this->environment) {
             return MockerContainer::class;
         }
 

@@ -35,6 +35,8 @@
             <argument type="service" id="sylius.behat.page.checkout_payment" />
             <argument type="service" id="sylius.behat.page.checkout_finalize" />
             <argument type="service" id="sylius.behat.page.checkout_thank_you" />
+            <argument type="service" id="sylius.behat.page.order_payments" />
+            <argument type="service" id="sylius.repository.order" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 
@@ -55,9 +57,12 @@
         </service>
 
         <service id="sylius.behat.context.ui.paypal" class="%sylius.behat.context.ui.paypal.class%" scope="scenario">
+            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
+            <argument type="service" id="sylius.behat.page.order_payments" />
             <argument type="service" id="sylius.behat.page.external.paypal_checkout_express" />
-            <argument>%paypal.express_checkout.buyer.username%</argument>
-            <argument>%paypal.express_checkout.buyer.password%</argument>
+            <argument type="service" id="sylius.behat.page.checkout_finalize" />
+            <argument type="service" id="sylius.behat.paypal_api_mocker" />
+            <argument type="service" id="sylius.repository.order" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 

@@ -89,5 +89,8 @@ class FinalizeStep extends CheckoutStep
 
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::FINALIZE_COMPLETE, $order);
         $this->dispatchCheckoutEvent(SyliusOrderEvents::POST_CREATE, $order);
+
+        $cartProvider = $this->getCartProvider();
+        $cartProvider->abandonCart();
     }
 }

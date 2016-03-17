@@ -1,4 +1,4 @@
-@checkout @ui @insulated @mink:firefox @paypal
+@checkout @paypal
 Feature: Checkout with PayPal Express Checkout
     In order to buy products
     As a Customer
@@ -11,47 +11,53 @@ Feature: Checkout with PayPal Express Checkout
         And the store ships everywhere for free
         And the store allows paying "PayPal Express Checkout"
 
-    Scenario: Being redirected to the PayPal Express Checkout page
-        Given I am logged in as "john@example.com"
-        And I added product "PHP T-Shirt" to the cart
-        When I proceed selecting "PayPal Express Checkout" payment method
-        And I confirm my order
-        Then I should be redirected to PayPal Express Checkout page
-
+    @ui
     Scenario: Successful payment
         Given I am logged in as "john@example.com"
         And I added product "PHP T-Shirt" to the cart
         And I proceed selecting "PayPal Express Checkout" payment method
-        And I confirm my order
+        And I confirm my order with paypal payment
         When I sign in to PayPal and pay successfully
         Then I should be redirected back to the thank you page
 
-    @todo
+    @ui
     Scenario: Cancelling the payment
-        Given I added product "PHP T-Shirt" to the cart
-        And I confirmed my order selecting PayPal Checkout Express payment method
-        And I am on the PayPal Checkout Express page
-        When I cancel my PayPal payment
+        Given I am logged in as "john@example.com"
+        And I added product "PHP T-Shirt" to the cart
+        When I proceed selecting "PayPal Express Checkout" payment method
+        And I confirm my order with paypal payment
+        And I cancel my PayPal payment
         Then I should be redirected back to the order payment page
-        And I should see one cancelled payment and new one ready to be paid
 
-    @todo
+    @ui
     Scenario: Retrying the payment with success
-        Given I added product "PHP T-Shirt" to the cart
-        And I confirmed my order selecting PayPal Checkout Express payment method
-        But I failed to pay
-        And I am redirected back to the order payment page
+        Given I am logged in as "john@example.com"
+        And I added product "PHP T-Shirt" to the cart
+        And I proceed selecting "PayPal Express Checkout" payment method
+        And I confirm my order with paypal payment
+        But I cancel my PayPal payment
+        And I should be redirected back to the order payment page
         When I try to pay again
         And I sign in to PayPal and pay successfully
         Then I should be redirected back to the thank you page
 
-    @todo
+    @ui
     Scenario: Retrying the payment and failing
-        Given I added product "PHP T-Shirt" to the cart
-        And I confirmed my order selecting PayPal Checkout Express payment method
-        But I failed to pay
-        And I am redirected back to the order payment page
+        Given I am logged in as "john@example.com"
+        And I added product "PHP T-Shirt" to the cart
+        And I proceed selecting "PayPal Express Checkout" payment method
+        And I confirm my order with paypal payment
+        But I cancel my PayPal payment
+        And I should be redirected back to the order payment page
         When I try to pay again
-        And I sign in to PayPal but fail to pay
+        And I cancel my PayPal payment
         Then I should be redirected back to the order payment page
-        And I should see two failed payments and new one ready to be paid
+        And I should see two cancelled payments and new one ready to be paid
+
+    @ui @mink:firefox
+    Scenario: Being redirected to the PayPal Express Checkout page
+        Given I am logged in as "john@example.com"
+        And I added product "PHP T-Shirt" to the cart
+        When I proceed selecting "PayPal Express Checkout" payment method
+        And I confirm my order with paypal payment
+        Then I should be redirected to PayPal Express Checkout page
