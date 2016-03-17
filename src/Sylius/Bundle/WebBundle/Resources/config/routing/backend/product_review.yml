@@ -46,6 +46,10 @@ sylius_backend_product_review_update_state:
     pattern: /update-state/{id}/{transition}
     methods: [PUT]
     defaults:
-        _controller: sylius.controller.product_review:updateStateAction
-        graph: sylius_product_review
+        _controller: sylius.controller.product_review:applyStateMachineTransitionAction
+        _sylius:
+            state_machine:
+                graph: sylius_product_review
+                transition: $transition
+            redirect: referer
 
