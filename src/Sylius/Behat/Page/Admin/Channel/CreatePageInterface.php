@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Page\Shop\User;
+namespace Sylius\Behat\Page\Admin\Channel;
 
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\PageInterface;
@@ -17,13 +17,24 @@ use Sylius\Behat\Page\PageInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-interface LoginPageInterface extends PageInterface
+interface CreatePageInterface extends PageInterface
 {
     /**
-     * @param string $email
-     * @param string $password
+     * @param string $name
      *
      * @throws ElementNotFoundException
      */
-    public function logIn($email, $password);
+    public function fillName($name);
+
+    /**
+     * @param string $code
+     *
+     * @throws ElementNotFoundException
+     */
+    public function fillCode($code);
+
+    /**
+     * @throws ElementNotFoundException
+     */
+    public function create();
 }

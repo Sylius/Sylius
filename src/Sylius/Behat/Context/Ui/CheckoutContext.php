@@ -12,13 +12,13 @@
 namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Checkout\CheckoutAddressingStepInterface;
-use Sylius\Behat\Page\Checkout\CheckoutFinalizeStepInterface;
-use Sylius\Behat\Page\Checkout\CheckoutPaymentStepInterface;
-use Sylius\Behat\Page\Checkout\CheckoutSecurityStepInterface;
-use Sylius\Behat\Page\Checkout\CheckoutShippingStepInterface;
-use Sylius\Behat\Page\Checkout\CheckoutThankYouPageInterface;
-use Sylius\Behat\Page\Order\OrderPaymentsPageInterface;
+use Sylius\Behat\Page\Shop\Order\OrderPaymentsPageInterface;
+use Sylius\Behat\Page\Shop\Checkout\AddressingStepInterface;
+use Sylius\Behat\Page\Shop\Checkout\FinalizeStepInterface;
+use Sylius\Behat\Page\Shop\Checkout\PaymentStepInterface;
+use Sylius\Behat\Page\Shop\Checkout\SecurityStepInterface;
+use Sylius\Behat\Page\Shop\Checkout\ShippingStepInterface;
+use Sylius\Behat\Page\Shop\Checkout\ThankYouPageInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
@@ -36,32 +36,32 @@ final class CheckoutContext implements Context
     private $sharedStorage;
 
     /**
-     * @var CheckoutSecurityStepInterface
+     * @var SecurityStepInterface
      */
     private $checkoutSecurityStep;
 
     /**
-     * @var CheckoutAddressingStepInterface
+     * @var AddressingStepInterface
      */
     private $checkoutAddressingStep;
 
     /**
-     * @var CheckoutShippingStepInterface
+     * @var ShippingStepInterface
      */
     private $checkoutShippingStep;
 
     /**
-     * @var CheckoutPaymentStepInterface
+     * @var PaymentStepInterface
      */
     private $checkoutPaymentStep;
 
     /**
-     * @var CheckoutFinalizeStepInterface
+     * @var FinalizeStepInterface
      */
     private $checkoutFinalizeStep;
 
     /**
-     * @var CheckoutThankYouPageInterface
+     * @var ThankYouPageInterface
      */
     private $checkoutThankYouPage;
 
@@ -77,23 +77,23 @@ final class CheckoutContext implements Context
 
     /**
      * @param SharedStorageInterface $sharedStorage
-     * @param CheckoutSecurityStepInterface $checkoutSecurityStep
-     * @param CheckoutAddressingStepInterface $checkoutAddressingStep
-     * @param CheckoutShippingStepInterface $checkoutShippingStep
-     * @param CheckoutPaymentStepInterface $checkoutPaymentStep
-     * @param CheckoutFinalizeStepInterface $checkoutFinalizeStep
-     * @param CheckoutThankYouPageInterface $checkoutThankYouPage
+     * @param SecurityStepInterface $checkoutSecurityStep
+     * @param AddressingStepInterface $checkoutAddressingStep
+     * @param ShippingStepInterface $checkoutShippingStep
+     * @param PaymentStepInterface $checkoutPaymentStep
+     * @param FinalizeStepInterface $checkoutFinalizeStep
+     * @param ThankYouPageInterface $checkoutThankYouPage
      * @param OrderPaymentsPageInterface $orderPaymentsPage
      * @param RepositoryInterface $orderRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        CheckoutSecurityStepInterface $checkoutSecurityStep,
-        CheckoutAddressingStepInterface $checkoutAddressingStep,
-        CheckoutShippingStepInterface $checkoutShippingStep,
-        CheckoutPaymentStepInterface $checkoutPaymentStep,
-        CheckoutFinalizeStepInterface $checkoutFinalizeStep,
-        CheckoutThankYouPageInterface $checkoutThankYouPage,
+        SecurityStepInterface $checkoutSecurityStep,
+        AddressingStepInterface $checkoutAddressingStep,
+        ShippingStepInterface $checkoutShippingStep,
+        PaymentStepInterface $checkoutPaymentStep,
+        FinalizeStepInterface $checkoutFinalizeStep,
+        ThankYouPageInterface $checkoutThankYouPage,
         OrderPaymentsPageInterface $orderPaymentsPage,
         RepositoryInterface $orderRepository
     ) {

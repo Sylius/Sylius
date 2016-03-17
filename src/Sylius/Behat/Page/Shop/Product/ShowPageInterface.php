@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Page\Shop\User;
+namespace Sylius\Behat\Page\Shop\Product;
 
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\PageInterface;
@@ -17,13 +17,24 @@ use Sylius\Behat\Page\PageInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-interface LoginPageInterface extends PageInterface
+interface ShowPageInterface extends PageInterface
 {
     /**
-     * @param string $email
-     * @param string $password
+     * @throws ElementNotFoundException
+     */
+    public function addToCart();
+
+    /**
+     * @param string $quantity
      *
      * @throws ElementNotFoundException
      */
-    public function logIn($email, $password);
+    public function addToCartWithQuantity($quantity);
+
+    /**
+     * @param string $variant
+     *
+     * @throws ElementNotFoundException
+     */
+    public function addToCartWithVariant($variant);
 }

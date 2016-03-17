@@ -12,10 +12,10 @@
 namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Customer\CustomerShowPageInterface;
+use Sylius\Behat\Page\Admin\Customer\ShowPageInterface;
 use Sylius\Behat\Page\ElementNotFoundException;
-use Sylius\Behat\Page\User\LoginPageInterface;
-use Sylius\Behat\Page\User\RegisterPageInterface;
+use Sylius\Behat\Page\Shop\User\LoginPageInterface;
+use Sylius\Behat\Page\Shop\User\RegisterPageInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 
@@ -36,7 +36,7 @@ final class UserContext implements Context
     private $userRepository;
 
     /**
-     * @var CustomerShowPageInterface
+     * @var ShowPageInterface
      */
     private $customerShowPage;
 
@@ -53,14 +53,14 @@ final class UserContext implements Context
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param UserRepositoryInterface $userRepository
-     * @param CustomerShowPageInterface $customerShowPage
+     * @param ShowPageInterface $customerShowPage
      * @param LoginPageInterface $loginPage
      * @param RegisterPageInterface $registerPage
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         UserRepositoryInterface $userRepository,
-        CustomerShowPageInterface $customerShowPage,
+        ShowPageInterface $customerShowPage,
         LoginPageInterface $loginPage,
         RegisterPageInterface $registerPage
     ) {

@@ -9,21 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Page\Shop\User;
+namespace Sylius\Behat\Page\Admin\Channel;
 
-use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\PageInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-interface LoginPageInterface extends PageInterface
+interface IndexPageInterface extends PageInterface
 {
     /**
-     * @param string $email
-     * @param string $password
+     * @param string $channelCode
      *
-     * @throws ElementNotFoundException
+     * @return string|null
      */
-    public function logIn($email, $password);
+    public function getUsedThemeName($channelCode);
 }

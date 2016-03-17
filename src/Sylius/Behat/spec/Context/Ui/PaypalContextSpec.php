@@ -14,9 +14,9 @@ namespace spec\Sylius\Behat\Context\Ui;
 use Behat\Behat\Context\Context;
 use PhpSpec\Exception\Example\NotEqualException;
 use PhpSpec\ObjectBehavior;
-use Sylius\Behat\Page\Checkout\CheckoutFinalizeStepInterface;
+use Sylius\Behat\Page\Shop\Checkout\FinalizeStepInterface;
 use Sylius\Behat\Page\External\PaypalExpressCheckoutPageInterface;
-use Sylius\Behat\Page\Order\OrderPaymentsPageInterface;
+use Sylius\Behat\Page\Shop\Order\OrderPaymentsPageInterface;
 use Sylius\Behat\PaypalApiMocker;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -34,7 +34,7 @@ class PaypalContextSpec extends ObjectBehavior
         SharedStorageInterface $sharedStorage,
         OrderPaymentsPageInterface $orderPaymentsPage,
         PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage,
-        CheckoutFinalizeStepInterface $checkoutFinalizeStep,
+        FinalizeStepInterface $checkoutFinalizeStep,
         PaypalApiMocker $paypalApiMocker,
         OrderRepositoryInterface $orderRepository
     ) {

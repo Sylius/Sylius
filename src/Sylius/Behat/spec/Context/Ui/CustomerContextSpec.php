@@ -13,6 +13,7 @@ namespace spec\Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
 use PhpSpec\ObjectBehavior;
+use Sylius\Behat\Page\Admin\Customer\ShowPageInterface;
 use Sylius\Behat\Page\Customer\CustomerShowPageInterface;
 use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
@@ -26,7 +27,7 @@ class CustomerContextSpec extends ObjectBehavior
 {
     public function let(
         SharedStorageInterface $sharedStorage,
-        CustomerShowPageInterface $customerShowPage
+        ShowPageInterface $customerShowPage
     ) {
         $this->beConstructedWith($sharedStorage, $customerShowPage);
     }
@@ -42,7 +43,7 @@ class CustomerContextSpec extends ObjectBehavior
     }
 
     function it_ensures_customer_is_not_deleted_again(
-        CustomerShowPageInterface $customerShowPage,
+        ShowPageInterface $customerShowPage,
         SharedStorageInterface $sharedStorage,
         CustomerInterface $customer
     ) {
@@ -57,7 +58,7 @@ class CustomerContextSpec extends ObjectBehavior
     }
 
     function it_checks_if_customer_still_exists(
-        CustomerShowPageInterface $customerShowPage,
+        ShowPageInterface $customerShowPage,
         SharedStorageInterface $sharedStorage,
         CustomerInterface $customer,
         UserInterface $user

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Page\User;
+namespace Sylius\Behat\Page\Shop\User;
 
 use Sylius\Behat\Page\SymfonyPage;
 

@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Customer\CustomerShowPageInterface;
+use Sylius\Behat\Page\Admin\Customer\ShowPageInterface;
 use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
@@ -27,17 +27,17 @@ final class CustomerContext implements Context
     private $sharedStorage;
 
     /**
-     * @var CustomerShowPageInterface
+     * @var ShowPageInterface
      */
     private $customerShowPage;
 
     /**
      * @param SharedStorageInterface $sharedStorage
-     * @param CustomerShowPageInterface $customerShowPage
+     * @param ShowPageInterface $customerShowPage
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        CustomerShowPageInterface $customerShowPage
+        ShowPageInterface $customerShowPage
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->customerShowPage = $customerShowPage;

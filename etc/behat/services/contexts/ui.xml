@@ -29,38 +29,38 @@
     <services>
         <service id="sylius.behat.context.ui.checkout" class="%sylius.behat.context.ui.checkout.class%" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
-            <argument type="service" id="sylius.behat.page.checkout_security" />
-            <argument type="service" id="sylius.behat.page.checkout_addressing" />
-            <argument type="service" id="sylius.behat.page.checkout_shipping" />
-            <argument type="service" id="sylius.behat.page.checkout_payment" />
-            <argument type="service" id="sylius.behat.page.checkout_finalize" />
-            <argument type="service" id="sylius.behat.page.checkout_thank_you" />
-            <argument type="service" id="sylius.behat.page.order_payments" />
+            <argument type="service" id="sylius.behat.page.shop.checkout.security_step" />
+            <argument type="service" id="sylius.behat.page.shop.checkout.addressing_step" />
+            <argument type="service" id="sylius.behat.page.shop.checkout.shipping_step" />
+            <argument type="service" id="sylius.behat.page.shop.checkout.payment_step" />
+            <argument type="service" id="sylius.behat.page.shop.checkout.finalize_step" />
+            <argument type="service" id="sylius.behat.page.shop.checkout.thank_you" />
+            <argument type="service" id="sylius.behat.page.shop.order.order_payments" />
             <argument type="service" id="sylius.repository.order" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 
         <service id="sylius.behat.context.ui.cart" class="%sylius.behat.context.ui.cart.class%" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
-            <argument type="service" id="sylius.behat.page.cart_summary" />
-            <argument type="service" id="sylius.behat.page.product_show" />
+            <argument type="service" id="sylius.behat.page.shop.cart.cart_summary" />
+            <argument type="service" id="sylius.behat.page.shop.product.show" />
             <tag name="sylius.behat.context" />
         </service>
 
         <service id="sylius.behat.context.ui.user" class="%sylius.behat.context.ui.user.class%" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.repository.user" container="symfony" />
-            <argument type="service" id="sylius.behat.page.customer_show" />
-            <argument type="service" id="sylius.behat.page.login" />
-            <argument type="service" id="sylius.behat.page.register" />
+            <argument type="service" id="sylius.behat.page.admin.customer_show" />
+            <argument type="service" id="sylius.behat.page.shop.user.login" />
+            <argument type="service" id="sylius.behat.page.shop.user.register" />
             <tag name="sylius.behat.context" />
         </service>
 
         <service id="sylius.behat.context.ui.paypal" class="%sylius.behat.context.ui.paypal.class%" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
-            <argument type="service" id="sylius.behat.page.order_payments" />
+            <argument type="service" id="sylius.behat.page.shop.order.order_payments" />
             <argument type="service" id="sylius.behat.page.external.paypal_checkout_express" />
-            <argument type="service" id="sylius.behat.page.checkout_finalize" />
+            <argument type="service" id="sylius.behat.page.shop.checkout.finalize_step" />
             <argument type="service" id="sylius.behat.paypal_api_mocker" />
             <argument type="service" id="sylius.repository.order" container="symfony" />
             <tag name="sylius.behat.context" />
@@ -70,14 +70,14 @@
             <argument type="service" id="sylius.behat.shared_storage" container="symfony"/>
             <argument type="service" id="sylius.behat.channel_context_setter" />
             <argument type="service" id="sylius.repository.channel" container="symfony"/>
-            <argument type="service" id="sylius.behat.page.channel_create" />
-            <argument type="service" id="sylius.behat.page.home" />
+            <argument type="service" id="sylius.behat.page.admin.channel_create" />
+            <argument type="service" id="sylius.behat.page.shop.home" />
             <tag name="sylius.behat.context" />
         </service>
 
         <service id="sylius.behat.context.ui.product" class="%sylius.behat.context.ui.product.class%" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
-            <argument type="service" id="sylius.behat.page.product_show" />
+            <argument type="service" id="sylius.behat.page.shop.product.show" />
             <argument type="service" id="sylius.behat.page.admin.product_show" />
             <argument type="service" id="sylius.behat.page.admin.product_index" />
             <tag name="sylius.behat.context" />
@@ -85,15 +85,15 @@
 
         <service id="sylius.behat.context.ui.customer" class="%sylius.behat.context.ui.customer.class%" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
-            <argument type="service" id="sylius.behat.page.customer_show" />
+            <argument type="service" id="sylius.behat.page.admin.customer_show" />
             <tag name="sylius.behat.context" />
         </service>
 
         <service id="sylius.behat.context.ui.theme" class="%sylius.behat.context.ui.theme.class%" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" container="symfony"/>
-            <argument type="service" id="sylius.behat.page.channel_index" />
-            <argument type="service" id="sylius.behat.page.channel_update" />
-            <argument type="service" id="sylius.behat.page.home" />
+            <argument type="service" id="sylius.behat.page.admin.channel_index" />
+            <argument type="service" id="sylius.behat.page.admin.channel_update" />
+            <argument type="service" id="sylius.behat.page.shop.home" />
             <tag name="sylius.behat.context" />
         </service>
 
