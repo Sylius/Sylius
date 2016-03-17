@@ -102,9 +102,9 @@ final class ShippingContext implements Context
     }
 
     /**
-     * @Given /^the store has "([^"]*)" shipping method with ("[^"]+") fee$/
-     * @Given /^the store has "([^"]*)" shipping method with ("[^"]+") fee within ("([^"]*)" zone)$/
-     * @Given /^the store has "([^"]*)" shipping method with ("[^"]+") fee for (the rest of the world)$/
+     * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee$/
+     * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee within ("[^"]+" zone)$/
+     * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee for (the rest of the world)$/
      */
     public function storeHasShippingMethodWithFee($shippingMethodName, $fee, ZoneInterface $zone = null)
     {

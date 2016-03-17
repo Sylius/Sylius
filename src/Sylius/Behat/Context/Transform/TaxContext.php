@@ -35,7 +35,7 @@ final class TaxContext implements Context
     /**
      * @Transform /^"([^"]+)" tax category$/
      * @Transform /^tax category "([^"]+)"$/
-     * @Transform :taxCategory tax category
+     * @Transform :taxCategory
      */
     public function getTaxCategoryByName($taxCategoryName)
     {
