@@ -1,4 +1,4 @@
-@localization
+@locale
 Feature: Locale validation
     In order to avoid making mistakes when managing locales
     As an Administrator
