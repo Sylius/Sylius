@@ -45,11 +45,11 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     private function checkCountryStatus(CountryInterface $country, $status)
     {
         try {
-            $tableManipulator = $this->getTableManipulator();
+            $tableAccessor = $this->getTableAccessor();
             $table = $this->getElement('table');
 
-            $row = $tableManipulator->getRowWithFields($table, ['code' => $country->getCode()]);
-            $enabledField = $tableManipulator->getFieldFromRow($table, $row, 'Enabled');
+            $row = $tableAccessor->getRowWithFields($table, ['code' => $country->getCode()]);
+            $enabledField = $tableAccessor->getFieldFromRow($table, $row, 'Enabled');
 
             return $enabledField->getText() === $status;
         } catch (\InvalidArgumentException $exception) {

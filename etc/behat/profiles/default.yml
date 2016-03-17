@@ -43,11 +43,11 @@ default:
                 class: TestKernel
                 path: app/TestKernel.php
 
-        Sylius\Behat\MultiContainerExtension:
+        Sylius\Behat\Extension\MultiContainerExtension:
             imports:
                 - "etc/behat/services.xml"
 
-        Sylius\Behat\SymfonyExtension: ~
+        Sylius\Behat\Extension\SymfonyExtension: ~
 
     gherkin:
         filters:

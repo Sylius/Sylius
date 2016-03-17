@@ -13,7 +13,7 @@ namespace Sylius\Behat\Page\Shop\Order;
 
 use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
-use Sylius\Behat\TableManipulatorInterface;
+use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -30,25 +30,25 @@ class OrderPaymentsPage extends SymfonyPage implements OrderPaymentsPageInterfac
     ];
 
     /**
-     * @var TableManipulatorInterface
+     * @var TableAccessorInterface
      */
-    private $tableManipulator;
+    private $tableAccessor;
 
     /**
      * @param Session $session
      * @param array $parameters
      * @param RouterInterface $router
-     * @param TableManipulatorInterface $tableManipulator
+     * @param TableAccessorInterface $tableAccessor
      */
     public function __construct(
         Session $session,
         array $parameters,
         RouterInterface $router,
-        TableManipulatorInterface $tableManipulator
+        TableAccessorInterface $tableAccessor
     ) {
         parent::__construct($session, $parameters, $router);
 
-        $this->tableManipulator = $tableManipulator;
+        $this->tableAccessor = $tableAccessor;
     }
 
     /**
@@ -57,8 +57,8 @@ class OrderPaymentsPage extends SymfonyPage implements OrderPaymentsPageInterfac
     public function clickPayButtonForGivenPayment(PaymentInterface $payment)
     {
         $table = $this->getElement('table');
-        $row = $this->tableManipulator->getRowWithFields($this->getElement('table'), ['#' => $payment->getId()]);
-        $actions = $this->tableManipulator->getFieldFromRow($table, $row, 'Action');
+        $row = $this->tableAccessor->getRowWithFields($this->getElement('table'), ['#' => $payment->getId()]);
+        $actions = $this->tableAccessor->getFieldFromRow($table, $row, 'Action');
 
         $actions->clickLink('Pay');
     }
@@ -68,7 +68,7 @@ class OrderPaymentsPage extends SymfonyPage implements OrderPaymentsPageInterfac
      */
     public function countPaymentWithSpecificState($state)
     {
-        $rows = $this->tableManipulator->getRowsWithFields($this->getElement('table'), ['state' => $state]);
+        $rows = $this->tableAccessor->getRowsWithFields($this->getElement('table'), ['state' => $state]);
 
         return count($rows);
     }
