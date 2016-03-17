@@ -1346,7 +1346,7 @@ class ResourceControllerSpec extends ObjectBehavior
         ;
     }
 
-    function it_applies_state_machine_transition_to_resource_and_redirects_by_for_html_request(
+    function it_applies_state_machine_transition_to_resource_and_redirects_for_html_request(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -1433,7 +1433,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $this->applyStateMachineTransitionAction($request)->shouldReturn($redirectResponse);
     }
 
-    function it_applies_state_machine_transition_on_resource_and_returns_204_for_non_html_requests(
+    function it_applies_state_machine_transition_on_resource_and_returns_200_for_non_html_requests(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         RequestConfiguration $configuration,
@@ -1469,7 +1469,7 @@ class ResourceControllerSpec extends ObjectBehavior
 
         $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
 
-        $expectedView = View::create(null, 204);
+        $expectedView = View::create($resource, 200);
 
         $viewHandler->handle($configuration, Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
 

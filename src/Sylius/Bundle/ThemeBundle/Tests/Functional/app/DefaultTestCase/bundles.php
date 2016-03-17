@@ -14,6 +14,7 @@ return [
 
     new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
     new Symfony\Bundle\TwigBundle\TwigBundle(),
+    new \winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
 
     new Sylius\Bundle\ThemeBundle\SyliusThemeBundle(),
 ];
