@@ -55,5 +55,9 @@ sylius_backend_shipment_update_state:
     path: /update-state/{id}/{transition}
     methods: [PUT]
     defaults:
-        _controller: sylius.controller.shipment:updateStateAction
-        graph: sylius_shipment
+        _controller: sylius.controller.shipment:applyStateMachineTransitionAction
+        _sylius:
+            state_machine:
+                graph: sylius_shipment
+                transition: $transition
+            redirect: referer

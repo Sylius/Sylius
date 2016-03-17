@@ -54,5 +54,9 @@ sylius_backend_payment_update_state:
     path: /update-state/{id}/{transition}
     methods: [PUT]
     defaults:
-        _controller: sylius.controller.payment:updateStateAction
-        graph: sylius_payment
+        _controller: sylius.controller.payment:applyStateMachineTransitionAction
+        _sylius:
+            state_machine:
+                graph: sylius_payment
+                transition: $transition
+            redirect: referer
