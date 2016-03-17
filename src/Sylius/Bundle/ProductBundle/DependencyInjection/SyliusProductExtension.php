@@ -17,6 +17,7 @@ use Sylius\Bundle\ProductBundle\Form\Type\VariantType;
 use Sylius\Bundle\ProductBundle\EventListener\ElasticaProductListener;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Sylius\Bundle\SearchBundle\DependencyInjection\Configuration as SyliusSearchConfiguration;
+use Symfony\Component\Config\Definition\Processor;
 use Sylius\Component\Product\Factory\ProductVariantFactory;
 use Sylius\Component\Product\Model\Attribute;
 use Sylius\Component\Product\Model\AttributeInterface;
