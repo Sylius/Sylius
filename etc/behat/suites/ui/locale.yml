@@ -3,7 +3,7 @@
 
 default:
     suites:
-        ui_localization:
+        ui_locale:
             contexts_as_services:
                 - sylius.behat.context.hook.doctrine_orm
 
@@ -11,4 +11,4 @@ default:
 
                 - sylius.behat.context.ui.admin.managing_locale
             filters:
-                tags: @localization && @ui
+                tags: @locale && @ui

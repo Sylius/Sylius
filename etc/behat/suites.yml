@@ -13,7 +13,7 @@ imports:
     - suites/legacy/homepage.yml
     - suites/legacy/i18n.yml
     - suites/legacy/inventory.yml
-    - suites/legacy/localization.yml
+    - suites/legacy/locale.yml
     - suites/legacy/metadata.yml
     - suites/legacy/oauth.yml
     - suites/legacy/order.yml
@@ -38,7 +38,7 @@ imports:
     - suites/ui/promotion.yml
     - suites/ui/theme.yml
     - suites/ui/user.yml
-    - suites/ui/localization.yml
+    - suites/ui/locale.yml
     - suites/ui/product.yml
     - suites/ui/shipping.yml
 

@@ -1,4 +1,4 @@
-@localization
+@locale
 Feature: Adding a new locale
     In order to provide service to my customers in their preferred language
     As an Administrator
