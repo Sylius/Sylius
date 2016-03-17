@@ -7,4 +7,5 @@ sylius:
       code: Код
       name: Ім’я
       parent: "Батьківський об'єкт"
+      attributes: Властивості
       options: Опції

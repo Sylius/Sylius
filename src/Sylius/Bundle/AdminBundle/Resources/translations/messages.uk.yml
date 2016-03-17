@@ -7,5 +7,6 @@ sylius:
       main:
         configuration:
           header: Конфігурація
+          tax_categories: Категорії оподаткування
           countries: Країни
           locales: Локалі
