@@ -8,11 +8,11 @@
 </div>
 
 <div class="row">
-    <button type="button" class="btn btn-info">{{ 'sylius.cancel'|trans }}</button>
+    <button type="button" class="btn btn-info">{{ 'sylius.ui.cancel'|trans }}</button>
     <form action="{{ url }}" method="post">
         <input type="hidden" name="_method" value="DELETE">
         <button class="btn btn-danger">
-            <span class="glyphicon glyphicon-trash"></span><span>{{ message is empty ? 'sylius.delete'|trans : message }}</span>
+            <span class="glyphicon glyphicon-trash"></span><span>{{ message is empty ? 'sylius.ui.delete'|trans : message }}</span>
         </button>
     </form>
 </div>

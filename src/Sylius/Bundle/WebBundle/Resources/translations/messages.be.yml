@@ -1,731 +1,379 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-  account:
-    address:
-      action:
-        billing: Зрабіць галоўным адрасам для аплаты
-        create: Стварыць новы адрас
-        delete: Выдаліць
-        edit: Рэдагаваць
-        shipping: Зрабіць галоўным адрасам дла дастаўкі
-      create: Стварыць новы адрас
-      default:
-        billing: Галоўны адрас для аплаты
-        no_billing: Няма галоўнага адраса для аплаты
-        no_shipping: Галоўны адрас для дастаўкі адсутнічае
-        shipping: Галоўны адрас для дастаўкі
-      list: Усе Вашы адрасы
-      update: Рэдагаваць адрас
-    home:
-      email: Email
-      since: "Вы з'яўляецеся пакупніком з"
-      welcome: Вітаем у вашай прасторы
-    order:
-      created_at: Размешчана
-      details: Звесткі аб вашай замове
-      download_invoice: Спампаваць інвойс
-      invoice: Інвойс
-      list: Усе вашыя замовы
-      number: Нумар
-      placed_at: 'Размешчана на %at%'
-      shipment:
-        pending: У чаканні
-        ready: 'Готова з %at%'
-        returned: Вернута
-        shipped: 'Адпраўлена %at%'
-      state: Статус
-      total: Агулам
-      tracking_number: Нумар адпраўлення
-    title: Мой рахунак
-  add_to_cart: Дадаць у кошык
-  association_type:
-    name: Імя
-    create: Стварыць
-  address:
-    city: Горад
-    company: Кампанія
-    country: Краіна
-    firstname: Імя
-    lastname: Прозвішча
-    postcode: Паштовы код
-    province: Вобласць
-    street: Вуліца
-  alert:
-    error: Памылка
-    info: Інфармацыя
-    success: Поспех
-    warning: Папярэджанне
-  archetype:
-    name: Імя
-    options: Опцыі
-    parent: "Бацькоўскі аб'ект"
-    updated_at: Апошняе абнаўленне
-  backend:
-    alert:
-      info: Інфармацыя
-    dashboard:
-      chart_order_count: Колькасць замоў
-      chart_order_total: кошт замовы
-      header: Панэль адміністратара
-      orders: Заказы мінулага тыдня
-      revenue: Даход мінулага тыдня
-      subheader: Аглядзець сваю краму
-    logout: Выйсці
-    quick_links:
-      add_product: Новы тавар
-      orders: Апошнія замовы
-      products: Вашыя тавары
-    statistics:
-      orders_this_month: Усе замовы
-      registrations_this_month: Усе рэгістрацыі
-      sales_this_month: Распродаж
-  block:
-    imagine:
-      title: Назва
-      updated_at: Апошняе абнаўленне
-    index_header: Блокі
-    simple:
-      body: Цела
-      title: Назва
-      updated_at: Апошняе абнаўленне
-    slideshow:
-      body: Цела
-      title: Назва
-      updated_at: Апошняе абнаўленне
-    string:
-      body: Цела
-      title: Назва
-      updated_at: Апошняе абнаўленне
-  breadcrumb:
-    assortment: Асартымент
-    block:
-      index: Блокі
-    build: Пабудаваць
-    configuration: Канфігурацыя
-    content: Змест
-    country:
-      index: Краіны
-    dashboard: Прыборная панэль
-    edit: Рэдагаваць
-    general_settings: Галоўныя налады
-    generate: Генерацыя
-    group:
-      index: Групы
-    inventory:
-      index: Інвентар
-    locale:
-      index: Лакалі
-    new: Новы
-    option:
-      index: Опцыі
-    order:
-      index: Заказы
-    page:
-      index: Старонкі
-    payment:
-      index: Аплаты
-    payment_method:
-      index: Метады аплаты
-    product:
-      index: Тавары
-    promotion:
-      index: Прамоцыі
-    promotion_coupon:
-      index: Купоны
-    role:
-      index: Ролі
-    sales: Продаж
-    shipment:
-      index: Дастаўкі
-    shipping_category:
-      index: Катэгорыі дастаўкі
-    shipping_method:
-      index: Метады дастаўкі
-    tax_category:
-      index: Катэгорыі падаткаў
-    tax_rate:
-      index: Памеры падаткаў
-    taxation_settings: Падатковыя налады
-    taxon:
-      index: Катэгорыі
-    update: Рэдагаваць
-    zone:
-      index: Зоны
-  browse_products: Прагляд тавараў
-  cancel: Адмяніць
-  cart:
-    empty: Ваш кошык пусты
-    summary:
-      add_coupon: Дадаць купон
-      checkout: Перайсці да афармлення
-      clear: Ачысціць кошык
-      grand_total: Усяго
-      product: Тавар
-      quantity: Колькасць
-      save: Захаваць
-      total: Усяго
-      unit_price: Кошт
-    summary_header: Кошт кошыка
-    total_items: '1 адзінка|%count% адзінак'
-  channel:
-    code: Код
-    created_at: Створана на
-    currency_default: Галоўная валюта
-    enabled: Уключана
-    id: ID
-    name: Імя
-    update: Рэдагаваць
-    updated_at: Апошняе абнаўленне
-  checkout:
-    addressing:
-      header: Адрас
-    back: Назад
-    finalize:
-      address:
-        city: Горад
-        country: Краіна
-        firstname: Імя
-        lastname: Прозвішча
-        postcode: Паштовы код
-        province: Вобласць
-        street: Вуліца
-      header: Апісанне замовы
-      order:
-        billing_address: Адрас для аплаты
-        items_total: Усяго тавараў
-        no_items: У гэтай замове няма тавараў
-        no_promotion: Прамоцыя не дададзеная
-        no_shipping_charges: Без платы за дастаўку
-        no_taxes: Без падаткаў
-        promotion_discount: Прамацыйныя зніжкі
-        promotion_total: Агульная зніжка
-        shipping_address: Адрас дастаўкі
-        shipping_charges: Тарыфы за дастаўку
-        shipping_total: Усяго за дастаўку
-        tax_total: Усяго падатку
-        taxes: Падаткі
-        total: Агулам
-      order_item:
-        quantity: Колькасць
-        total: Агулам
-        unit_price: Цана адзінкі
-      place_order: Размесціць замову
-      product:
-        name: Імя
-    forward: Працягнуць
-    payment:
-      header: Метад аплаты
-    security:
-      existing_customer: Існуючы пакупнік
-      header: 'Увайдзіце ў краму <small>альбо стварыце новы рахунак</small>'
-      login: Увайсці
-      new_customer: Новы пакупнік
-      register: Зарэгістравацца
-    shipping:
-      header: Метад дастаўкі
-  confirmation:
-    title: Пацверджанне
-  contact_request:
-    email: Email
-    firstName: Імя
-    id: ID
-    lastName: Прозвішча
-    updated_at: Апошняе абнаўленне
-  contact_topic:
-    id: ID
-    title: Назва
-    updated_at: Апошняе абнаўленне
-  country:
-    add_province: Дадаць вобласць
-    create: Стварыць краіну
-    create_header: Новая краіна
-    enabled: Уключана
-    id: ID
-    index_header: Краіны
-    manage: Кіраваць краінамі
-    name: Імя
-    show_header: Дэталі краіны
-    update_header: Рэдагаванне краіны
-  create: Стварыць
-  created_at: Створана на
-  currency:
-    code: Код
-    enabled: Уключана
-    exchange_rate: Абменны курс
-    id: ID
-    name: Імя
-    updated_at: Апошняе абнаўленне
-  customer:
-    billing_address: Адрас для аплаты
-    email: Email
-    first_name: Імя
-    groups: Групы
-    id: ID
-    last_name: Прозвішча
-    shipping_address: Адрас дастаўкі
-    phone_number: Нумар тэлефону
-  delete: Выдаліць
-  deleted: Выдалена
-  edit: Рэдагаваць
-  email:
-    code: Код
-    enabled: Уключана
-    updated_at: Апошняе абнаўленне
-  filter: Фільтр
-  form:
+    account:
+        order:
+            details: 'Звесткі аб вашай замове'
+            download_invoice: 'Спампаваць інвойс'
+            list: 'Усе вашыя замовы'
+            placed_at: 'Размешчана на %at%'
+            shipment:
+                ready: 'Готова з %at%'
+                returned: Вернута
+                shipped: 'Адпраўлена %at%'
+        title: 'Мой рахунак'
     cart:
-      coupon: Купон
-    choose_file: Абярыце файл
-    frontend:
-      password:
+        empty: 'Ваш кошык пусты'
+        summary:
+            clear: 'Ачысціць кошык'
+            quantity: Колькасць
+        total_items: '1 адзінка|%count% адзінак'
+    checkout:
+        finalize:
+            order:
+                no_items: 'У гэтай замове няма тавараў'
+                no_promotion: 'Прамоцыя не дададзеная'
+                no_shipping_charges: 'Без платы за дастаўку'
+                no_taxes: 'Без падаткаў'
+                promotion_discount: 'Прамацыйныя зніжкі'
+            order_item:
+                quantity: Колькасць
+        forward: Працягнуць
+    homepage:
+        splash:
+            headline: 'Вітаем у Sylius'
+            subheadline: 'Сучасны электронны гандль для Symfony2'
+    meta:
+        frontend_title: 'Sylius, сучасны электронны гандль для Symfony2'
+    order:
+        no_items: 'У гэтай замове няма тавараў'
+        no_shipments: 'Для гэтага тавара няма дастаўкі'
+        no_shipping_charges: 'Без платы за дастаўку'
+        no_taxes: 'Без падаткаў'
+    order_item:
+        quantity: Колькасць
+        sellable: Тавар
+    promotion_coupon:
+        generate: 'Генераваць купоны'
+        index: 'Стварыць спіс купонаў'
+    shipment:
+        update: Рэдагаваць
+    taxon:
+        image: 'Абраць выяву'
+        no_image: 'Для гэтай класіфікацыйнай групы няма выявы'
+    ui:
+        action: Дзеянне
+        actions: Дзеянні
+        add_action: 'Дадаць дзеянне'
+        add_coupon: 'Дадаць купон'
+        add_image: 'Дадаць выяву'
+        add_member: 'Дадаць удзельніка'
+        add_province: 'Дадаць вобласць'
+        add_rule: 'Дадаць правіла'
+        add_to_cart: 'Дадаць у кошык'
+        add_value: 'Дадаць значэнне'
+        adding_new_locale: 'Дадаць новую лакацыю'
+        addressing_step: Адрас
+        administration: Адміністрацыя
+        administration_dashboard: 'Панэль адміністратара'
+        all_your_addresses: 'Усе Вашы адрасы'
+        amount: Сума
+        assortment: Асартымент
+        author: Аўтар
+        availability: Наяўнасць
+        available_on: 'У наяўнасці з'
+        available_on_demand: 'Па запросу'
+        back: Назад
+        backorder: 'Замовіць тавар, якога няма на складзе'
+        balance_due: 'Баланс за'
+        billing_address: 'Адрас для аплаты'
+        blocks: Блокі
+        body: Цела
+        browse_products: 'Прагляд тавараў'
+        build: Пабудаваць
+        calculator: Калькулятар
+        cancel: Адмяніць
+        cancelled: Адменена
+        categorization: Класіфікацыя
+        category: Катэгорыя
+        change_password: 'Змяніць пароль'
+        change_your_password: 'Змяніць пароль'
+        checkout: 'Афрмленне замовы'
+        choose_file: 'Абярыце файл'
+        city: Горад
+        code: Код
+        company: Кампанія
+        completed: Завершана
+        configuration: Канфігурацыя
         confirmation: Пацвярджэнне
-        current: Бягучы пароль
-        new: Новы пароль
-        title: Змяніць пароль
-      profile:
-        title: Рэдагаваць асабістыя звесткі
-    login:
-      email: Email
-      password: Пароль
-    option_value:
-      add_value: Дадаць значэнне
-    profile:
-      email: Email
-      firstName: Імя
-      lastName: Прозвішча
-  gallery:
-    next: Далей
-    previous: Папярэдне
-    slideshow: Слайдшоў
-  generate: Стварыць
-  group:
-    create: Стварыць групу
-    id: ID
-    index_header: Групы
-    name: Імя
-    roles: Ролі
-    update_header: Рэдагаваць групу
-  hide_deleted: Схаваць выдаленае
-  history:
-    action: Дзеянне
-    author: Аўтар
-    data: Звесткі
-  homepage:
-    splash:
-      headline: Вітаем у Sylius
-      subheadline: Сучасны электронны гандль для Symfony2
-  inventory_unit:
-    created_at: Створаны
-    inventory_state: На складзе
-    name: Імя
-    shipping_state: Стан дастаўкі
-    sku: SKU
-    updated_at: Апошняе абнаўленне
-  locale:
-    code: Код
-    create: Стварыць лакацыю
-    create_header: Дадаць новую лакацыю
-    enabled: Уключана
-    id: ID
-    index_header: Індэкс усіх зададзеных лакацыяў
-    name: Імя
-    update_header: Рэдагаваць лакацыю
-    updated_at: Апошняе абнаўленне
-  login: Увайсці
-  login_header: Адміністрацыя
-  logo: Sylius
-  manage: Кіраваць
-  menu:
-    id: ID
-    title: Назва
-  menu_node:
-    id: ID
-    parent: "Бацькоўскі аб'ект"
-    title: Назва
-  meta:
-    frontend_title: Sylius, сучасны электронны гандль для Symfony2
-  metadata:
-    id: ID
-    content: Змест
-  na: Няма адказу
-  newest: Навінкі
-  "no": false
-  order:
-    adjustments:
-      amount: Сума
-      description: Апісанне
-      type: Тып
-    billing_address: Адрас для аплаты
-    comment:
-      author: Аўтар
-      created_at: Створана на
-      state: Статус
-    create: Стварыць замову
-    create_header: Новая замова
-    created_at: Час стварэння
-    currency: Валюта
-    general_info: Агульная інфармацыя
-    id: ID
-    index_header: Бягучыя замовы
-    inventory_tracking: Сачыць за складам
-    inventory_unit:
-      backorder: Замовіць тавар, якога няма на складзе
-      fulfill: Выканаць
-      return: Вярнуць
-    items_total: Усяго тавараў
-    manage: Кіраваць таварамі
-    no_items: У гэтай замове няма тавараў
-    no_results: У вас няма новых замоваў
-    no_shipments: Для гэтага тавара няма дастаўкі
-    no_shipping_charges: Без платы за дастаўку
-    no_taxes: Без падаткаў
-    number: Нумар
-    payment: Плацяжы
-    payment_state: Статус аплаты
-    payment_states:
-      balance_due: Баланс за
-    promotion_coupons: Купоны
-    promotion_total: Агульная зніжка
-    recent_header: Нядаўнія замовы
-    release_inventory: Правесці інвентарызацыю
-    shipment_state: Статус дастаўкі
-    shipment_states:
-      pending: У чаканні
-    shipments: Дастаўка
-    shipping_address: Адрас дастаўкі
-    shipping_charges: Тарыфы за дастаўку
-    shipping_total: Усяго за дастаўку
-    show_header: Замова
-    state:
-      cancelled: Адменена
-      checkout: Афрмленне замовы
-      returned: Вернута
-      shipped: Дастаўлена
-    tax_total: Усяго падатку
-    taxes: Падаткі
-    total: Агулам
-    update_header: Рэдагаванне замовы
-  review:
-    id: ID
-    title: Назва
-    author: Аўтар
-    created_at: Створана на
-  order_item:
-    product: Тавар
-    quantity: Колькасць
-    sellable: Тавар
-    total: Агулам
-    unit_price: Кошт адзінкі
-  out_of_stock: Няма на складзе
-  page:
-    body: Цела
-    create: Стварыць новую старонку
-    id: ID
-    index_header: Старонкі
-    title: Назва
-  password: Пароль
-  payment:
-    amount: Сума
-    create: Стварыць плацёж
-    create_header: Новы плацёж
-    created_at: Створана на
-    id: ID
-    index_header: Плацяжы
-    manage: Кіраваць плацяжамі
-    method: Метад
-    order: Замова
-    state:
-      cancelled: Адменена
-      checkout: Афрмленне замовы
-      completed: Завершана
-      failed: Памылка
-      header: Статус
-      new: Новы
-      pending: У чаканні
-      processing: Апрацоўваецца
-      refunded: Вернута
-      unknown: Невядома
-      void: Пусты
-    update_header: Рэдагаванне плацяжу
-    updated_at: Апошняе абнаўленне
-  payment_method:
-    create: Стварыць метад аплаты
-    create_header: Новы метад аплаты
-    gateway: Шлюз
-    id: ID
-    index_header: Метады аплаты
-    name: Імя
-    update_header: Рэдагаванне метаду аплаты
-    updated_at: Апошняе абнаўленне
-  permission:
-    code: Код
-    description: Апісанне
-    id: ID
-    updated_at: Апошняе абнаўленне
-  pricing:
-    volume_based:
-      price: Кошт
-  product:
-    available_on: У наяўнасці з
-    available_on_demand: Па запросу
-    categorization: Класіфікацыя
-    contain_variants: Змясціць варыянты
-    create: Стварыць тавар
-    create_header: Новы тавар
-    description: Апісанне
-    generate_variants: Стварыць варыянты
-    index_by_taxon_header: 'Тавары <small>з раздзелу "%taxon%" taxon</small>'
-    index_header: 'Тавары <small>індэкс усіх тавараў у Вашай краме</small>'
-    manage: Кіраваць таварамі
-    name: Імя
-    no_description: '<i>Няма апісання...</i>'
-    no_images: Для гэтага тавару няма выяваў
-    no_options: Для гэтага тавару няма опцый
-    no_shipping_category: Няма катэгорыі адпраўкі
-    no_short_description: '<i>Без кароткага апісання</i>'
-    no_sku: Без SKU
-    no_tax_category: Няма падаткавай катэгорыі
-    no_taxons: Гэты тавар не абкладаецца падаткам
-    options: Опцыі
-    price: Рознічная цана
-    restricted_zone: Забароненая зона
-    shipping_category: Катэгорыя дастаўкі
-    show: Глядзець болей
-    show_header: 'Дэталі тавара <small>Прагляд тавара "<strong>%product%</strong>"</small>'
-    sku: SKU
-    stock: Наяўнасць на складзе
-    tabs:
-      categorization: Класіфікацыя
-      images: Малюнкі
-      options: Опцыі
-      pricing: Цэнаўтварэнне
-      product: Тавар
-    tax_category: Катэгорыя падатку
-    unavailable: Не даступны
-    update_header: Рэдагаванне тавараў
-    updated_at: Апошняе абнаўленне
-    variant_selection_method: Метад выбару варыянта
-    volume_based:
-      price: Кошт
-  product_attribute:
-    code: Код
-    name: Імя
-    type: Тып
-    updated_at: Апошняе абнаўленне
-  product_association:
-    code: Код
-    create_header: Новы тавар
-    name: Імя
-    type: Тып
-    updated_at: Апошняе абнаўленне
-  product_not_available_in_zone: Няма ў наяўнасці ў Вашай краіне
-  product_option:
-    manage: Кіраваць опцыямі
-    name: Імя
-    presentation: Выгляд
-    updated_at: Апошняе абнаўленне
-  promotion:
-    actions: Дзеянні
-    add_action: Дадаць дзеянне
-    add_rule: Дадаць правіла
-    coupon_based: Заснавана на купонах
-    create: Стварыць прамоцыю
-    create_header: Новая прамоцыя
-    created_at: Створана на
-    description: Апісанне
-    ends_at: Канец
-    general_info: Агульная інфармацыя
-    id: ID
-    index_header: Бягучыя промоцыі
-    manage: Кіраваць прамоцыямі
-    name: Імя
-    rules: Правілы
-    show_header: Дэталі прамоцыі
-    starts_at: Пачатак
-    update_header: Рэдагаванне прамоцыі
-    updated_at: Апошняе абнаўленне
-    usage_limit: Ліміт карыстання
-    used: Выкарыстана
-  promotion_action:
-    configuration: Канфігурацыя
-    type: Тып
-  promotion_coupon:
-    code: Код
-    create: Дадаць купон
-    create_header: Стварыць новы купон
-    generate: Генераваць купоны
-    generate_header: Купоны генеруюцца
-    index: Стварыць спіс купонаў
-    index_header: Купоны
-    total_results:
-      Total: '%агулам%'
-    update_header: Рэдагаванне купону
-  promotion_rule:
-    configuration: Канфігурацыя
-    type: Тып
-  province:
-    provinces: Вобласці
-  redirect_route:
-    id: ID
-    title: Назва
-  report:
-    code: Код
-    description: Апісанне
-    manage: Кіраваць
-    name: Імя
-  role:
-    code: Код
-    description: Апісанне
-    id: ID
-    index_header: Ролі
-    name: Імя
-    updated_at: Апошняе абнаўленне
-  route:
-    id: ID
-    name: Імя
-    title: Назва
-  save_changes: Захаваць змены
-  search: Пошук
-  security:
-    login:
-      button: Увайсці
-  settings:
-    general_header: Агульныя налады
-    taxation_header: Налады падаткаабкладання
-  shipment:
-    created_at: Сворана ў
-    id: ID
-    index_header: Дастаўка
-    inventory_state: На складзе
-    manage: Кіраваць дастаўкамі
-    method: Метад
-    modified: Мадыфікавана
-    name: Імя
-    order: Замова
-    ship: Адправіць
-    show_header: Дэталі дастаўкі
-    sku: SKU
-    state: Статус
-    tracking_code: Трэкінг-код
-    update: Рэдагаваць
-    update_header: Рэдагаванне дастаўкі
-    updated_at: Апошняе абнаўленне
-  shipment_category:
-    manage: Кіраваць катэгорыямі дастаўкі
-  shipping_address: Адрас дастаўкі
-  shipping_category:
-    create: Стварыць катэгорыю дастаўкі
-    create_header: Новая катэгорыя дастаўкі
-    id: ID
-    index_header: Катэгорыі дастаўкі
-    manage: Кіраваць катэгорыямі дастаўкі
-    name: Імя
-    update_header: Рэдагаванне катэгорыі дастаўкі
-    updated_at: Апошняе абнаўленне
-  shipping_method:
-    calculator: Калькулятар
-    category: Катэгорыя
-    create: Стварыць метад дастаўкі
-    create_header: Новы метад дастаўкі
-    enabled: Уключана
-    id: ID
-    index_header: Метады дастаўкі
-    manage: Кіраваць метадамі дастаўкі
-    name: Імя
-    show_header: Дэталі метаду дастаўкі
-    update_header: Рэдагаванне метаду дастаўкі
-    updated_at: Апошняе абнаўленне
-    zone: Зона
-  shop_by: Набыць у
-  show_all: Паказаць усё
-  show_deleted: Паказ выдалены
-  stockable:
-    index_header: 'Склад <small>Тут Вы можаце бачыць бягучы стан складу</small>'
-    name: Імя
-    updated_at: Апошняе абнаўленне
-  tax_category:
-    create: стварыць катэгорыю падатка
-    create_header: Новая катэгорыя падатка
-    description: Апісанне
-    id: ID
-    index_header: Катэгорыі падаткаў
-    manage: Кіраваць катэгорыямі падаткаў
-    name: Імя
-    no_description: Няма апісання
-    update_header: Рэдагаванне катэгорыі падатка
-    updated_at: Апошняе абнаўленне
-  tax_rate:
-    amount: Сума
-    calculator: Калькулятар
-    category: Катэгорыя
-    create: Сварыць стаўку падатка
-    create_header: Новая стаўка падатка
-    index_header: Стаўка падатку
-    manage: Кіраваць стаўкамі падатка
-    name: Імя
-    show_header: Дэталі стаўкі падатку
-    update_header: Абнаўленне стаўкі падатка
-    updated_at: Апошняе абнаўленне
-    zone: Зона
-  taxon:
-    index_header: Катэгорыі
-    create: Стварыць класіфікацыю
-    create_header: Новы класіфікацыя
-    image: Абраць выяву
-    name: Імя
-    no_image: Для гэтай класіфікацыйнай групы няма выявы
-    product_index_header: 'Тавары, катэгарызаваныя як "%name%"'
-    update_header: Рэдагаванне класіфікацыі
-  total_quantity: Агульная колькасць
-  ui:
-    change_password: Змяніць пароль
-    code: Код
-    email: Email
-    login: Увайсці
-    logout: Выйсці
-    register: Зарэгістравацца
-    name: Імя
-  unknown: Невядома
-  user:
-    create_header: Новы карыстальнік
-    general_info: 'Агульныя звесткі аб карыстальніку "%username%"'
-    id: ID
-    impersonate: Увайсці як дадзены карыстальнік
-    index_header: 'Карыстальнікі<small>Спіс усіх карыстальнікаў у краме</small>'
-    last_login: Апошняе наведванне
-    recent_header: Нядаўнія карыстальнікі
-    register:
-      button: Зарэгістравацца
-    registration_date: Рэгістрацыйныя звесткі
-    show_header: Звесткі аб карыстальніку
-    update_header: Рэдагаванне карыстальніка
-    username: Юзернэйм
-  variant:
-    add_image: Дадаць выяву
-    availability: Наяўнасць
-    available_on_demand: Па запросу
-    create: Стварыць варыянт
-    create_header: Варыянт новага тавара
-    delete_image: Выдаліць выяву
-    last_update: Апошняе абнаўленне
-    options: Опцыі
-    price: Кошт
-    sku: SKU
-    stock: Наяўнасць на складзе
-    update_header: Рэдагаванне варыянту
-  "yes": true
-  zone:
-    add_member: Дадаць удзельніка
-    create: Стварыць зону
-    create_header: Новая зона
-    index_header: Зоны
-    manage: Кіраваць зонамі
-    name: Імя
-    scope: Абсяг
-    show_header: Дэталі зоны
-    type: Тып
-    update_header: Рэдагаванне зоны
-  zone_member:
-    members: Удзельнікі
+        confirmation_title: Пацверджанне
+        contain_variants: 'Змясціць варыянты'
+        content: Змест
+        countries: Краіны
+        country: Краіна
+        country_details: 'Дэталі краіны'
+        coupon: Купон
+        coupon_based: 'Заснавана на купонах'
+        coupons: Купоны
+        create: Стварыць
+        create_a_new_address: 'Стварыць новы адрас'
+        create_country: 'Стварыць краіну'
+        create_group: 'Стварыць групу'
+        create_locale: 'Стварыць лакацыю'
+        create_new_coupon: 'Стварыць новы купон'
+        create_new_page: 'Стварыць новую старонку'
+        create_order: 'Стварыць замову'
+        create_payment: 'Стварыць плацёж'
+        create_payment_method: 'Стварыць метад аплаты'
+        create_product: 'Стварыць тавар'
+        create_promotion: 'Стварыць прамоцыю'
+        create_shipping_category: 'Стварыць катэгорыю дастаўкі'
+        create_shipping_method: 'Стварыць метад дастаўкі'
+        create_tax_category: 'стварыць катэгорыю падатка'
+        create_tax_rate: 'Сварыць стаўку падатка'
+        create_taxon: 'Стварыць класіфікацыю'
+        create_variant: 'Стварыць варыянт'
+        create_zone: 'Стварыць зону'
+        created_at: 'Сворана ў'
+        creation_time: 'Час стварэння'
+        currency: Валюта
+        current_orders: 'Бягучыя замовы'
+        current_password: 'Бягучы пароль'
+        current_promotions: 'Бягучыя промоцыі'
+        current_stock: 'Наяўнасць на складзе'
+        dashboard: 'Прыборная панэль'
+        data: Звесткі
+        default_billing_address: 'Галоўны адрас для аплаты'
+        default_currency: 'Галоўная валюта'
+        default_shipping_address: 'Галоўны адрас для дастаўкі'
+        delete: Выдаліць
+        delete_image: 'Выдаліць выяву'
+        deleted: Выдалена
+        description: Апісанне
+        edit: Рэдагаваць
+        edit_group: 'Рэдагаваць групу'
+        edit_locale: 'Рэдагаваць лакацыю'
+        edit_my_address: 'Рэдагаваць адрас'
+        edit_your_personal_information: 'Рэдагаваць асабістыя звесткі'
+        editing_country: 'Рэдагаванне краіны'
+        editing_coupon: 'Рэдагаванне купону'
+        editing_order: 'Рэдагаванне замовы'
+        editing_payment: 'Рэдагаванне плацяжу'
+        editing_payment_method: 'Рэдагаванне метаду аплаты'
+        editing_product: 'Рэдагаванне тавараў'
+        editing_promotion: 'Рэдагаванне прамоцыі'
+        editing_shipment: 'Рэдагаванне дастаўкі'
+        editing_shipping_category: 'Рэдагаванне катэгорыі дастаўкі'
+        editing_shipping_method: 'Рэдагаванне метаду дастаўкі'
+        editing_tax_category: 'Рэдагаванне катэгорыі падатка'
+        editing_taxon: 'Рэдагаванне класіфікацыі'
+        editing_user: 'Рэдагаванне карыстальніка'
+        editing_variant: 'Рэдагаванне варыянту'
+        editing_zone: 'Рэдагаванне зоны'
+        email: Email
+        enabled: Уключана
+        ends_at: Канец
+        error: Памылка
+        exchange_rate: 'Абменны курс'
+        existing_customer: 'Існуючы пакупнік'
+        failed: Памылка
+        filter: Фільтр
+        first_name: Імя
+        firstname: Імя
+        fulfill: Выканаць
+        gateway: Шлюз
+        general_info: 'Агульная інфармацыя'
+        general_settings: 'Галоўныя налады'
+        generate: Генерацыя
+        generate_variants: 'Стварыць варыянты'
+        generating_coupons: 'Купоны генеруюцца'
+        grand_total: Усяго
+        groups: Групы
+        hide_deleted: 'Схаваць выдаленае'
+        id: ID
+        images: Малюнкі
+        index_of_all_configured_locales: 'Індэкс усіх зададзеных лакацыяў'
+        information: Інфармацыя
+        inventory_here_you_can_see_current_stock_levels: 'Склад <small>Тут Вы можаце бачыць бягучы стан складу</small>'
+        inventory_index: Інвентар
+        inventory_state: 'На складзе'
+        inventory_tracking: 'Сачыць за складам'
+        invoice: Інвойс
+        items_total: 'Усяго тавараў'
+        last_login: 'Апошняе наведванне'
+        last_name: Прозвішча
+        last_update: 'Апошняе абнаўленне'
+        last_week_orders: 'Заказы мінулага тыдня'
+        last_week_revenue: 'Даход мінулага тыдня'
+        lastname: Прозвішча
+        latest_orders: 'Апошнія замовы'
+        locales: Лакалі
+        login: Увайсці
+        login_button: Увайсці
+        logout: Выйсці
+        manage: Кіраваць
+        manage_countries: 'Кіраваць краінамі'
+        manage_options: 'Кіраваць опцыямі'
+        manage_orders: 'Кіраваць таварамі'
+        manage_payments: 'Кіраваць плацяжамі'
+        manage_products: 'Кіраваць таварамі'
+        manage_promotions: 'Кіраваць прамоцыямі'
+        manage_shipments: 'Кіраваць дастаўкамі'
+        manage_shipping_categories: 'Кіраваць катэгорыямі дастаўкі'
+        manage_shipping_methods: 'Кіраваць метадамі дастаўкі'
+        manage_tax_categories: 'Кіраваць катэгорыямі падаткаў'
+        manage_tax_rates: 'Кіраваць стаўкамі падатка'
+        manage_zones: 'Кіраваць зонамі'
+        members: Удзельнікі
+        method: Метад
+        modified: Мадыфікавана
+        n_a: 'Няма адказу'
+        name: Імя
+        new: Новы
+        new_country: 'Новая краіна'
+        new_customer: 'Новы пакупнік'
+        new_order: 'Новая замова'
+        new_password: 'Новы пароль'
+        new_payment: 'Новы плацёж'
+        new_payment_method: 'Новы метад аплаты'
+        new_product: 'Новы тавар'
+        new_product_variant: 'Варыянт новага тавара'
+        new_promotion: 'Новая прамоцыя'
+        new_shipping_category: 'Новая катэгорыя дастаўкі'
+        new_shipping_method: 'Новы метад дастаўкі'
+        new_tax_category: 'Новая катэгорыя падатка'
+        new_tax_rate: 'Новая стаўка падатка'
+        new_taxon: 'Новы класіфікацыя'
+        new_user: 'Новы карыстальнік'
+        new_zone: 'Новая зона'
+        newest_products: Навінкі
+        next: Далей
+        'no': false
+        no_default_billing_address: 'Няма галоўнага адраса для аплаты'
+        no_default_shipping_address: 'Галоўны адрас для дастаўкі адсутнічае'
+        no_description: 'Няма апісання'
+        no_shipping_category: 'Няма катэгорыі адпраўкі'
+        no_short_description: '<i>Без кароткага апісання</i>'
+        no_sku: 'Без SKU'
+        no_tax_category: 'Няма падаткавай катэгорыі'
+        not_available_in_your_country: 'Няма ў наяўнасці ў Вашай краіне'
+        number: Нумар
+        number_of_orders: 'Колькасць замоў'
+        options: Опцыі
+        order: Замова
+        order_item_product: Тавар
+        order_summary: 'Апісанне замовы'
+        order_value: 'кошт замовы'
+        orders: Заказы
+        out_of_stock: 'Няма на складзе'
+        overview_of_your_store: 'Аглядзець сваю краму'
+        pages: Старонкі
+        parent: 'Бацькоўскі аб''ект'
+        password: Пароль
+        payment: Плацяжы
+        payment_method: 'Метад аплаты'
+        payment_methods: 'Метады аплаты'
+        payment_state: 'Статус аплаты'
+        payments: Аплаты
+        pending: 'У чаканні'
+        phone_number: 'Нумар тэлефону'
+        place_order: 'Размесціць замову'
+        placed_at: Размешчана
+        postcode: 'Паштовы код'
+        presentation: Выгляд
+        previous: Папярэдне
+        price: Кошт
+        pricing: Цэнаўтварэнне
+        processing: Апрацоўваецца
+        product: Тавар
+        product_details_viewing_product_product: 'Дэталі тавара <small>Прагляд тавара "<strong>%product%</strong>"</small>'
+        products: Тавары
+        products_categorized_as_name: 'Тавары, катэгарызаваныя як "%name%"'
+        products_categorized_under_taxon_taxon: 'Тавары <small>з раздзелу "%taxon%" taxon</small>'
+        products_index_of_all_products_in_your_store: 'Тавары <small>індэкс усіх тавараў у Вашай краме</small>'
+        promotion_coupons: Купоны
+        promotion_details: 'Дэталі прамоцыі'
+        promotion_total: 'Агульная зніжка'
+        promotions: Прамоцыі
+        province: Вобласць
+        provinces: Вобласці
+        recent_orders: 'Нядаўнія замовы'
+        recent_users: 'Нядаўнія карыстальнікі'
+        refunded: Вернута
+        register: Зарэгістравацца
+        register_button: Зарэгістравацца
+        registration_date: 'Рэгістрацыйныя звесткі'
+        release_inventory: 'Правесці інвентарызацыю'
+        restricted_zone: 'Забароненая зона'
+        retail_price: 'Рознічная цана'
+        return: Вярнуць
+        returned: Вернута
+        roles: Ролі
+        rules: Правілы
+        sales: Продаж
+        sales_this_month: Распродаж
+        save: Захаваць
+        save_changes: 'Захаваць змены'
+        scope: Абсяг
+        search: Пошук
+        set_as_default_billing_address: 'Зрабіць галоўным адрасам для аплаты'
+        set_as_default_shipping_address: 'Зрабіць галоўным адрасам дла дастаўкі'
+        ship: Адправіць
+        shipment_details: 'Дэталі дастаўкі'
+        shipment_state: 'Статус дастаўкі'
+        shipments: Дастаўка
+        shipped: Дастаўлена
+        shipping_address: 'Адрас дастаўкі'
+        shipping_categories: 'Катэгорыі дастаўкі'
+        shipping_category: 'Катэгорыя дастаўкі'
+        shipping_charges: 'Тарыфы за дастаўку'
+        shipping_method: 'Метад дастаўкі'
+        shipping_method_details: 'Дэталі метаду дастаўкі'
+        shipping_methods: 'Метады дастаўкі'
+        shipping_state: 'Стан дастаўкі'
+        shipping_total: 'Усяго за дастаўку'
+        shop_by: 'Набыць у'
+        show_all: 'Паказаць усё'
+        show_deleted: 'Паказ выдалены'
+        sign_in_to_the_store_or_create_new_account: 'Увайдзіце ў краму <small>альбо стварыце новы рахунак</small>'
+        sku: SKU
+        slideshow: Слайдшоў
+        starts_at: Пачатак
+        state: Статус
+        street: Вуліца
+        success: Поспех
+        sylius_logo: Sylius
+        tax_categories: 'Катэгорыі падаткаў'
+        tax_category: 'Катэгорыя падатку'
+        tax_rate_details: 'Дэталі стаўкі падатку'
+        tax_rates: 'Памеры падаткаў'
+        tax_total: 'Усяго падатку'
+        taxation_categories: 'Катэгорыі падаткаў'
+        taxation_settings: 'Падатковыя налады'
+        taxes: Падаткі
+        taxons: Катэгорыі
+        there_are_no_images_for_this_product: 'Для гэтага тавару няма выяваў'
+        there_are_no_options_for_this_product: 'Для гэтага тавару няма опцый'
+        there_are_no_taxons_for_this_product: 'Гэты тавар не абкладаецца падаткам'
+        title: Назва
+        total: Агулам
+        total_orders: 'Усе замовы'
+        total_qty: 'Агульная колькасць'
+        total_registrations: 'Усе рэгістрацыі'
+        tracking_code: Трэкінг-код
+        tracking_number: 'Нумар адпраўлення'
+        type: Тып
+        unavailable: 'Не даступны'
+        unit_price: 'Кошт адзінкі'
+        unknown: Невядома
+        updating_tax_rate: 'Абнаўленне стаўкі падатка'
+        usage_limit: 'Ліміт карыстання'
+        used: Выкарыстана
+        user_details: 'Звесткі аб карыстальніку'
+        username: Юзернэйм
+        users_list_of_all_users_registered_in_store: 'Карыстальнікі<small>Спіс усіх карыстальнікаў у краме</small>'
+        variant_selection_method: 'Метад выбару варыянта'
+        view_more: 'Глядзець болей'
+        void: Пусты
+        warning: Папярэджанне
+        welcome_to_your_space: 'Вітаем у вашай прасторы'
+        'yes': true
+        you_are_customer_since: 'Вы з''яўляецеся пакупніком з'
+        you_have_no_new_orders: 'У вас няма новых замоваў'
+        your_products: 'Вашыя тавары'
+        zone: Зона
+        zone_details: 'Дэталі зоны'
+        zones: Зоны
+    user:
+        general_info: 'Агульныя звесткі аб карыстальніку "%username%"'
+        impersonate: 'Увайсці як дадзены карыстальнік'
+    variant:
+        stock: 'Наяўнасць на складзе'

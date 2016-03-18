@@ -1,194 +1,31 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-  account:
-    order:
-      number: Nummer
-  association_type:
-    name: Name
-  address:
-    firstname: Vorname
-    street: Strasse / Nr.
-  archetype:
-    name: Name
-  block:
-    imagine:
-      id: ID
-      label: Bezeichnung
-      title: Titel
-    simple:
-      body: Body
-      id: ID
-      label: Bezeichnung
-      title: Titel
-    slideshow:
-      body: Body
-      id: ID
-      title: Titel
-    string:
-      body: Body
-      id: ID
-      label: Bezeichnung
-      title: Titel
-  breadcrumb:
-    role:
-      index: Rollen
-  channel:
-    code: Code
-    currency_default: Standardwährung
-    enabled: Aktiviert
-    id: ID
-    name: Name
-  checkout:
-    finalize:
-      address:
-        firstname: Vorname
-        street: Strasse / Nr.
-      order:
+    ui:
         billing_address: Rechnungsadresse
-      product:
+        body: Body
+        code: Code
+        coupon: Gutschein
+        default_currency: Standardwährung
+        enabled: Aktiviert
+        first_name: Vorname
+        firstname: Vorname
+        id: ID
+        label: Bezeichnung
+        message: Nachricht
         name: Name
-  contact_request:
-    firstName: Vorname
-    id: ID
-    message: Nachricht
-    topic: Betreff
-  contact_topic:
-    id: ID
-    title: Titel
-  country:
-    enabled: Aktiviert
-    id: ID
-    name: Name
-  currency:
-    code: Code
-    enabled: Aktiviert
-    id: ID
-    name: Name
-  customer:
-    billing_address: Rechnungsadresse
-    first_name: Vorname
-    id: ID
-    phone_number: Telefonnummber
-  email:
-    code: Code
-    enabled: Aktiviert
-  form:
-    cart:
-      coupon: Gutschein
-    profile:
-      firstName: Vorname
-  group:
-    id: ID
-    name: Name
-    roles: Rollen
-  inventory_unit:
-    name: Name
-    sku: Bestandseinheit
-  locale:
-    code: Code
-    enabled: Aktiviert
-    id: ID
-    name: Name
-  menu:
-    id: ID
-    title: Titel
-  menu_node:
-    id: ID
-    title: Titel
-  metadata:
-    id: ID
-  "no": false
-  order:
-    billing_address: Rechnungsadresse
-    id: ID
-    number: Nummer
-  review:
-    id: ID
-    title: Titel
-  order_item:
-    unit_price: Stückpreis
-  page:
-    body: Body
-    id: ID
-    title: Titel
-  payment:
-    id: ID
-  payment_method:
-    id: ID
-    name: Name
-  permission:
-    code: Code
-    id: ID
-  product:
-    name: Name
-    restricted_zone: Beschränktes Versandgebiet
-    shipping_category: Versandkategorie
-    sku: Bestandseinheit
-    tax_category: Steuerkategorie
-    variant_selection_method: Varianten
-  product_attribute:
-    code: Code
-    name: Name
-  product_association:
-    code: Code
-    name: Name
-  product_option:
-    name: Name
-    presentation: Präsentation
-  promotion:
-    id: ID
-    name: Name
-  promotion_coupon:
-    code: Code
-  redirect_route:
-    id: ID
-    title: Titel
-  report:
-    code: Code
-    id: ID
-    name: Name
-  role:
-    code: Code
-    id: ID
-    index_header: Rollen
-    name: Name
-  route:
-    id: ID
-    name: Name
-    title: Titel
-  shipment:
-    id: ID
-    name: Name
-    sku: Bestandseinheit
-  shipping_category:
-    id: ID
-    name: Name
-  shipping_method:
-    enabled: Aktiviert
-    id: ID
-    name: Name
-    zone: Zone
-  stockable:
-    name: Name
-  tax_category:
-    id: ID
-    name: Name
-  tax_rate:
-    name: Name
-    zone: Zone
-  taxon:
-    name: Name
-  ui:
-    code: Code
-    name: Name
-    id: ID
-  user:
-    id: ID
-  variant:
-    sku: Bestandseinheit
-  "yes": true
-  zone:
-    name: Name
-    scope: Umfang
+        'no': false
+        number: Nummer
+        phone_number: Telefonnummber
+        presentation: Präsentation
+        restricted_zone: 'Beschränktes Versandgebiet'
+        roles: Rollen
+        scope: Umfang
+        shipping_category: Versandkategorie
+        sku: Bestandseinheit
+        street: 'Strasse / Nr.'
+        tax_category: Steuerkategorie
+        title: Titel
+        topic: Betreff
+        unit_price: Stückpreis
+        variant_selection_method: Varianten
+        'yes': true
+        zone: Zone

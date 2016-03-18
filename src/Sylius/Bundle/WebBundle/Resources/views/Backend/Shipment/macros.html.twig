@@ -8,12 +8,12 @@
 <table class="table">
     <thead>
         <tr>
-            <th>{{ sylius_resource_sort('order', 'sylius.shipment.order'|trans) }}</th>
-            <th>{{ sylius_resource_sort('method', 'sylius.shipment.method'|trans) }}</th>
-            <th>{{ sylius_resource_sort('state', 'sylius.shipment.state'|trans) }}</th>
-            <th>{{ 'sylius.shipping_address'|trans }}</th>
-            <th class="text-center">{{ 'sylius.total_quantity'|trans }}</th>
-            <th>{{ sylius_resource_sort('createdAt', 'sylius.created_at'|trans) }}</th>
+            <th>{{ sylius_resource_sort('order', 'sylius.ui.order'|trans) }}</th>
+            <th>{{ sylius_resource_sort('method', 'sylius.ui.method'|trans) }}</th>
+            <th>{{ sylius_resource_sort('state', 'sylius.ui.state'|trans) }}</th>
+            <th>{{ 'sylius.ui.shipping_address'|trans }}</th>
+            <th class="text-center">{{ 'sylius.ui.total_qty'|trans }}</th>
+            <th>{{ sylius_resource_sort('createdAt', 'sylius.ui.created_at'|trans) }}</th>
             <th></th>
         </tr>
     </thead>
@@ -45,7 +45,7 @@
     </tbody>
 </table>
 {% else %}
-{{ alerts.info('sylius.shipment.no_results'|trans) }}
+{{ alerts.info('sylius.ui.there_are_no_shipments_to_display'|trans) }}
 {% endif %}
 
 {% endmacro %}

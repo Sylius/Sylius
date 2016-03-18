@@ -4,15 +4,15 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
-    <li><a href="{{ path('sylius_backend_locale_index') }}">{{ 'sylius.breadcrumb.locale.index'|trans }}</a></li>
-    <li>{{ 'sylius.breadcrumb.new'|trans }}</li>
+    <li>{{ 'sylius.ui.configuration'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_locale_index') }}">{{ 'sylius.ui.locales'|trans }}</a></li>
+    <li>{{ 'sylius.ui.new'|trans }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
-    <h1><i class="glyphicon glyphicon-plus-sign"></i> {{ 'sylius.locale.create_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-plus-sign"></i> {{ 'sylius.ui.adding_new_locale'|trans|raw }}</h1>
 </div>
 
 {{ form_errors(form) }}

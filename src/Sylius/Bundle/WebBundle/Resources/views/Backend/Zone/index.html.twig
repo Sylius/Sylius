@@ -7,8 +7,8 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
-    <li>{{ 'sylius.breadcrumb.zone.index'|trans }}</li>
+    <li>{{ 'sylius.ui.configuration'|trans }}</li>
+    <li>{{ 'sylius.ui.zones'|trans }}</li>
 </ol>
 {% endblock %}
 
@@ -16,10 +16,10 @@
 <div class="page-header">
     <div class="actions-menu">
         {% include 'SyliusWebBundle:Backend/Zone:_zone_type_form.html.twig' %}
-        {{ updateRoute("this.href=document.getElementById('zone_type').value+'/new'", 'sylius.zone.create') }}
-        {{ manage(path('sylius_backend_country_index'), 'sylius.country.manage'|trans) }}
+        {{ updateRoute("this.href=document.getElementById('zone_type').value+'/new'", 'sylius.ui.create'|trans) }}
+        {{ manage(path('sylius_backend_country_index'), 'sylius.ui.manage_countries'|trans) }}
     </div>
-    <h1><i class="glyphicon glyphicon-globe"></i> {{ 'sylius.zone.index_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-globe"></i> {{ 'sylius.ui.zones'|trans|raw }}</h1>
 </div>
 
 {{ pagination(zones) }}

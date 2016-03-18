@@ -8,11 +8,11 @@
     <thead>
         <tr>
             <th class="id">{{ sylius_resource_sort('id', '#id') }}</th>
-            <th class="info">{{ sylius_resource_sort('archetype', 'sylius.product.archetype'|trans) }}</th>
-            <th class="info">{{ sylius_resource_sort('name', 'sylius.product.name'|trans) }}</th>
-            <th class="stock">{{ 'sylius.product.stock'|trans }}</th>
-            <th class="retail-price">{{ 'sylius.product.price'|trans }}</th>
-            <th class="original-price">{{ 'sylius.product.original_price'|trans }}</th>
+            <th class="info">{{ sylius_resource_sort('archetype', 'sylius.ui.archetype'|trans) }}</th>
+            <th class="info">{{ sylius_resource_sort('name', 'sylius.ui.name'|trans) }}</th>
+            <th class="stock">{{ 'sylius.ui.current_stock'|trans }}</th>
+            <th class="retail-price">{{ 'sylius.ui.retail_price'|trans }}</th>
+            <th class="original-price">{{ 'sylius.ui.original_price'|trans }}</th>
             <th class="updated-at">{{ sylius_resource_sort('updatedAt', 'Updated At') }}</th>
             <th></th>
         </tr>
@@ -33,23 +33,23 @@
             <td class="info">
                 <div class="media">
                     <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}" class="pull-left"
-                       title="{{ 'sylius.product.view_details'|trans({'%product%': product.name})|escape('html_attr') }}">
+                       title="{{ 'sylius.ui.view_product_details'|trans({'%product%': product.name})|escape('html_attr') }}">
                         <img src="{{ product.image ? product.image.path|imagine_filter('sylius_small') : 'http://placehold.it/50x40' }}" alt="" class="imgmedia-object" />
                     </a>
                     <div class="media-body">
                         <h5 class="media-heading">
                             <a class="name"
                                href="{{ path('sylius_backend_product_show', {'id': product.id}) }}"
-                               title="{{ 'sylius.product.view_details'|trans({'%product%': product.name})|escape('html_attr') }}">
+                               title="{{ 'sylius.ui.view_product_details'|trans({'%product%': product.name})|escape('html_attr') }}">
                                 {{ product.name }}
                             </a>
                             {% if not product.isAvailable %}
-                                <span class="label label-default">{{ 'sylius.product.unavailable'|trans }}</span>
+                                <span class="label label-default">{{ 'sylius.ui.unavailable'|trans }}</span>
                             {% endif %}
                         </h5>
                         <div class="media-body">
                             {% if product.sku %}
-                                <strong>{{ 'sylius.product.sku'|trans }}: </strong> <code class="sku">{{ product.sku }}</code>
+                                <strong>{{ 'sylius.ui.sku'|trans }}: </strong> <code class="sku">{{ product.sku }}</code>
                             {% endif %}
                         </div>
                     </div>
@@ -57,7 +57,7 @@
             </td>
             {% if product.hasOptions %}
                 <td class="stock contain-variants text-muted">
-                    <em>{{ 'sylius.product.contain_variants'|trans }}</em>
+                    <em>{{ 'sylius.ui.contain_variants'|trans }}</em>
                 </td>
             {% else %}
                 {% if product.masterVariant.onHand > 0 and product.masterVariant.isAvailable %}
@@ -66,7 +66,7 @@
                     </td>
                 {% else %}
                     <td class="stock out-of-stock text-muted">
-                        <em>{{ 'sylius.out_of_stock'|trans }}</em>
+                        <em>{{ 'sylius.ui.out_of_stock'|trans }}</em>
                     </td>
                 {% endif %}
             {% endif %}
@@ -82,10 +82,10 @@
                 </td>
             {% else %}
                 <td class="retail-price text-muted">
-                    <em>{{ 'sylius.na'|trans }}</em>
+                    <em>{{ 'sylius.ui.n_a'|trans }}</em>
                 </td>
                 <td class="original-price text-muted">
-                    <em>{{ 'sylius.na'|trans }}</em>
+                    <em>{{ 'sylius.ui.n_a'|trans }}</em>
                 </td>
             {% endif %}
 
@@ -94,7 +94,7 @@
             </td>
             <td class="center-text">
                 <a href="{{ path('sylius_backend_metadata_container_customize', { 'id': product.metadataIdentifier }) }}" class="btn btn-default">
-                    <i class="glyphicon glyphicon-file"></i><span>{{ 'sylius.metadata.product.single_customize'|trans }}</span>
+                    <i class="glyphicon glyphicon-file"></i><span>{{ 'sylius.ui.customize_metadata'|trans }}</span>
                 </a>
                 {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}
                 {{ buttons.delete(path('sylius_backend_product_delete', {'id': product.id})) }}
@@ -104,7 +104,7 @@
     </tbody>
 </table>
 {% else %}
-{{ alerts.info('sylius.product.no_results'|trans) }}
+{{ alerts.info('sylius.ui.there_are_no_products_to_display'|trans) }}
 {% endif %}
 
 {% endmacro %}

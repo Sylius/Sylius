@@ -1,232 +1,45 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-  account:
-    order:
-      number: Nomor
-  association_type:
-    name: Nama
-  address:
-    firstname: Nama Depan
-    lastname: Nama belakang
-  archetype:
-    name: Nama
-  block:
-    imagine:
-      id: Id
-      label: Label
-      title: Judul
-    simple:
-      body: Body
-      id: Id
-      label: Label
-      title: Judul
-    slideshow:
-      body: Body
-      id: Id
-      title: Judul
-    string:
-      body: Body
-      id: Id
-      label: Label
-      title: Judul
-  breadcrumb:
-    group:
-      index: Kelompok
-    menu_node:
-      index: Menu node
-    role:
-      index: Peran
-    route:
-      index: Rute
-  cart:
-    summary:
-      unit_price: Harga
-  channel:
-    code: Kode
-    currency_default: Mata uang default
-    enabled: Diaktifkan
-    id: ID
-    name: Nama
-  checkout:
-    finalize:
-      address:
-        firstname: Nama Depan
-        lastname: Nama belakang
-      order:
-        billing_address: Alamat Penagihan
-        shipping_address: Alamat pengiriman
-      product:
+    ui:
+        available_on_demand: Tersedia
+        billing_address: 'Alamat Penagihan'
+        body: Body
+        code: Kode
+        coupon: Kupon
+        currency: 'Mata Uang'
+        current_stock: Stok
+        default_currency: 'Mata uang default'
+        enabled: Diaktifkan
+        first_name: 'Nama Depan'
+        firstname: 'Nama Depan'
+        groups: Kelompok
+        id: ID
+        images: Gambar
+        label: Label
+        last_name: 'Nama belakang'
+        lastname: 'Nama belakang'
+        menu_nodes: 'Menu node'
+        message: Pesan
         name: Nama
-  contact_request:
-    firstName: Nama Depan
-    id: ID
-    lastName: Nama belakang
-    message: Pesan
-    topic: Topik
-  contact_topic:
-    id: ID
-    title: Judul
-  country:
-    enabled: Diaktifkan
-    id: ID
-    name: Nama
-  currency:
-    code: Kode
-    enabled: Diaktifkan
-    id: ID
-    name: Nama
-  customer:
-    billing_address: Alamat Penagihan
-    first_name: Nama Depan
-    groups: Kelompok
-    id: ID
-    last_name: Nama belakang
-    shipping_address: Alamat pengiriman
-    phone_number: Nomor telepon
-  email:
-    code: Kode
-    enabled: Diaktifkan
-  form:
-    cart:
-      coupon: Kupon
-    login:
-      password: Kata sandi
-    profile:
-      firstName: Nama Depan
-      lastName: Nama belakang
-  group:
-    id: ID
-    index_header: Kelompok
-    name: Nama
-    roles: Peran
-  inventory_unit:
-    name: Nama
-    sku: SKU
-  locale:
-    code: Kode
-    enabled: Diaktifkan
-    id: ID
-    name: Nama
-  menu:
-    id: ID
-    title: Judul
-  menu_node:
-    id: ID
-    index_header: Menu node
-    title: Judul
-  metadata:
-    id: ID
-  "no": false
-  order:
-    billing_address: Alamat Penagihan
-    currency: Mata Uang
-    id: ID
-    number: Nomor
-    shipping_address: Alamat pengiriman
-  review:
-    id: ID
-    title: Judul
-  order_item:
-    unit_price: Harga Satuan
-  page:
-    body: Body
-    id: ID
-    routes: Rute
-    title: Judul
-  password: Kata sandi
-  payment:
-    id: ID
-  payment_method:
-    id: ID
-    name: Nama
-  permission:
-    code: Kode
-    id: ID
-  pricing:
-    volume_based:
-      price: Harga
-  product:
-    available_on_demand: Tersedia
-    name: Nama
-    restricted_zone: Zona Terbatas
-    shipping_category: Kategori Pengiriman
-    sku: SKU
-    stock: Stok
-    tabs:
-      images: Gambar
-    tax_category: Kategori Pajak
-    variant_selection_method: Metode Pilih Varian
-    volume_based:
-      price: Harga
-  product_attribute:
-    code: Kode
-    name: Nama
-  product_association:
-    code: Kode
-    name: Nama
-  product_option:
-    name: Nama
-    presentation: Presentasi
-  promotion:
-    id: ID
-    name: Nama
-  promotion_coupon:
-    code: Kode
-  redirect_route:
-    id: ID
-    title: Judul
-  report:
-    code: Kode
-    id: Id
-    name: Nama
-  role:
-    code: Kode
-    id: ID
-    index_header: Peran
-    name: Nama
-  route:
-    id: ID
-    index_header: Rute
-    name: Nama
-    title: Judul
-  search: Cari
-  shipment:
-    id: ID
-    name: Nama
-    sku: SKU
-  shipping_address: Alamat pengiriman
-  shipping_category:
-    id: ID
-    name: Nama
-  shipping_method:
-    enabled: Diaktifkan
-    id: ID
-    name: Nama
-    zone: Zona
-  stockable:
-    name: Nama
-  tax_category:
-    id: ID
-    name: Nama
-  tax_rate:
-    name: Nama
-    zone: Zona
-  taxon:
-    name: Nama
-  ui:
-    code: Kode
-    name: Nama
-    id: Id
-  user:
-    id: ID
-  variant:
-    available_on_demand: Tersedia
-    price: Harga
-    sku: SKU
-    stock: Stok
-  "yes": true
-  zone:
-    name: Nama
-    scope: Ruang lingkup
+        'no': false
+        number: Nomor
+        password: 'Kata sandi'
+        phone_number: 'Nomor telepon'
+        presentation: Presentasi
+        price: Harga
+        restricted_zone: 'Zona Terbatas'
+        roles: Peran
+        routes: Rute
+        scope: 'Ruang lingkup'
+        search: Cari
+        shipping_address: 'Alamat pengiriman'
+        shipping_category: 'Kategori Pengiriman'
+        sku: SKU
+        tax_category: 'Kategori Pajak'
+        title: Judul
+        topic: Topik
+        unit_price: 'Harga Satuan'
+        variant_selection_method: 'Metode Pilih Varian'
+        'yes': true
+        zone: Zona
+    variant:
+        stock: Stok

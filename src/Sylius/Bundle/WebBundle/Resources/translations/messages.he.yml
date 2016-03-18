@@ -1,8 +1,5 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-  customer:
-    phone_number: מספר טלפון
-  "no": false
-  "yes": true
+    ui:
+        'no': false
+        phone_number: 'מספר טלפון'
+        'yes': true

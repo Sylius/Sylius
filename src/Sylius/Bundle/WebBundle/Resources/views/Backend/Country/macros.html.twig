@@ -9,8 +9,8 @@
     <thead>
         <tr>
             <th>{{ sylius_resource_sort('code', 'sylius.ui.code'|trans) }}</th>
-            <th>{{ 'sylius.country.name'|trans }}</th>
-            <th>{{ sylius_resource_sort('enabled', 'sylius.country.enabled'|trans) }}</th>
+            <th>{{ 'sylius.ui.name'|trans }}</th>
+            <th>{{ sylius_resource_sort('enabled', 'sylius.ui.enabled'|trans) }}</th>
             <th></th>
         </tr>
     </thead>
@@ -35,7 +35,7 @@
     </tbody>
 </table>
 {% else %}
-    {{ alerts.info('sylius.country.no_results'|trans) }}
+    {{ alerts.info('sylius.ui.there_are_no_countries_configured'|trans) }}
 {% endif %}
 
 {% endmacro %}

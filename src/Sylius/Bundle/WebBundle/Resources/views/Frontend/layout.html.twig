@@ -62,7 +62,7 @@
             <div class="currency-menu masthead pull-right">
                 {{ knp_menu_render('sylius.frontend.currency', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
             </div>
-            <h1 class="logo"><a href="{{ path('sylius_homepage') }}" title="{{ 'sylius.logo'|trans }}"><span>{{ 'sylius.logo'|trans }}</span></a></h1>
+            <h1 class="logo"><a href="{{ path('sylius_homepage') }}" title="{{ 'sylius.ui.sylius_logo'|trans }}"><span>{{ 'sylius.ui.sylius_logo'|trans }}</span></a></h1>
         {% endblock %}
 
         {% block flashes %}
@@ -85,7 +85,7 @@
                 <div class="pull-left" style="margin-bottom: 10px;">
                     {% render controller('sylius.controller.search:formAction', {'request':app.request}) %}
                 </div>
-                <h4>{{ 'sylius.shop_by'|trans }}</h4><br>
+                <h4>{{ 'sylius.ui.shop_by'|trans }}</h4><br>
                 {% include 'SyliusSearchBundle::filter_form.html.twig' %}<br>
 
                 {{ knp_menu_render('sylius.frontend.taxons', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}

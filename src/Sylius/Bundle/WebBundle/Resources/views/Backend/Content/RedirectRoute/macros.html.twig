@@ -9,8 +9,8 @@
     <table class="table">
         <thead>
             <tr>
-                <th>{{ 'sylius.redirect_route.id'|trans }}</th>
-                <th>{{ sylius_resource_sort('title', 'sylius.redirect_route.title'|trans) }}</th>
+                <th>{{ 'sylius.ui.id'|trans }}</th>
+                <th>{{ sylius_resource_sort('title', 'sylius.ui.title'|trans) }}</th>
                 <th></th>
             </tr>
         </thead>
@@ -30,7 +30,7 @@
         </tbody>
     </table>
 {% else %}
-{{ alerts.info('sylius.no_results'|trans) }}
+{{ alerts.info('sylius.ui.no_results'|trans) }}
 {% endif %}
 
 {% endmacro %}

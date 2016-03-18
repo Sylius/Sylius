@@ -1,731 +1,379 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-  account:
-    address:
-      action:
-        billing: ตั้งเป็นค่าเริ่มต้นที่อยู่ในการเรียกเก็บเงิน
-        create: สร้างที่อยู่ใหม่
-        delete: ลบ
-        edit: แก้ไข
-        shipping: ตั้งเป็นค่าเริ่มต้นที่อยู่ในการจัดส่งสินค้า
-      create: สร้างที่อยู่ใหม่
-      default:
-        billing: ค่าเริ่มต้นที่อยู่เรียกเก็บเงิน
-        no_billing: ไม่มีค่าเริ่มต้นที่อยู่สำหรับเรียกเก็บเงิน
-        no_shipping: ไม่มีค่าเริ่มต้นที่อยู่ในการจัดส่ง
-        shipping: ค่าเริ่มต้นที่อยู่ในการจัดส่ง
-      list: รายการที่อยู่ทั้งหมดของคุณ
-      update: แก้ไขที่อยู่ของฉัน
-    home:
-      email: อีเมล
-      since: คุณเป็นลูกค้าตั้งแต่
-      welcome: ยินดีต้อนรับสู่พื้นที่ของคุณ
+    account:
+        order:
+            details: รายละเอียดใบสั่งซื้อ
+            download_invoice: ดาวน์โหลดใบแจ้งหนี้
+            list: ใบสั่งซื้อทั้งหมดของคุณ
+            placed_at: 'Placed at %at%'
+            shipment:
+                ready: 'พร้อมตั้งแต่ %at%'
+                returned: 'ส่งคืน %at%'
+                shipped: 'จัดส่ง %at%'
+        title: บัญชีของฉัน
+    cart:
+        empty: รถเข็นของคุณว่างเปล่า
+        summary:
+            clear: ล้างรถเข็น
+            quantity: ปริมาณ
+        total_items: '1 รายการ|%count% รายการ'
+    checkout:
+        finalize:
+            order:
+                no_items: 'ใบสั่งซื้อนี้ไม่ประกอบด้วยรายการใด ๆ'
+                no_promotion: ไม่รวมโปรโมชั่น
+                no_shipping_charges: ไม่มีค่าธรรมเนียมการจัดส่ง
+                no_taxes: ไม่รวมภาษี
+                promotion_discount: ส่วนลดจากโปรโมชั่น
+            order_item:
+                quantity: ปริมาณ
+        forward: ดำเนินการต่อ
+    homepage:
+        splash:
+            headline: 'ยินดีต้อนรับสู่ ツ Sylius'
+            subheadline: 'อีคอมเมิร์ซที่ทันสมัยสำหรับ Symfony2'
+    meta:
+        frontend_title: 'Sylius อีคอมเมิร์ซที่ทันสมัยสำหรับ Symfony2'
     order:
-      created_at: Placed at
-      details: รายละเอียดใบสั่งซื้อ
-      download_invoice: ดาวน์โหลดใบแจ้งหนี้
-      invoice: ใบแจ้งหนี้
-      list: ใบสั่งซื้อทั้งหมดของคุณ
-      number: หมายเลข
-      placed_at: 'Placed at %at%'
-      shipment:
-        pending: อยู่ระหว่างการพิจารณา
-        ready: 'พร้อมตั้งแต่ %at%'
-        returned: 'ส่งคืน %at%'
-        shipped: 'จัดส่ง %at%'
-      state: สถานะ
-      total: ผลรวม
-      tracking_number: หมายเลขการติดตาม
-    title: บัญชีของฉัน
-  add_to_cart: หยิบใส่ตระกร้าสินค้า
-  association_type:
-    name: ชื่อ
-    create: สร้าง
-  address:
-    city: เมือง
-    company: บริษัท
-    country: ประเทศ
-    firstname: ชื่อ
-    lastname: นามสกุล
-    postcode: รหัสไปรษณีย์
-    province: จังหวัด
-    street: ถนน
-  alert:
-    error: ข้อผิดพลาด
-    info: ข้อมูล
-    success: สำเร็จ
-    warning: คำเตือน
-  archetype:
-    name: ชื่อ
-    options: ตัวเลือก
-    parent: หมวดแม่
-    updated_at: ปรับปรุงล่าสุด
-  backend:
-    alert:
-      info: ข้อมูล
-    dashboard:
-      chart_order_count: จำนวนใบสั่งซื้อ
-      chart_order_total: มูลค่าการสั่งซื้อ
-      header: แดชบอร์ดสำหรับผู้ดูแลระบบ
-      orders: รายการสั่งซื้อสัปดาห์ล่าสุด
-      revenue: รายได้สัปดาห์ล่าสุด
-      subheader: ภาพรวมของร้านค้าของคุณ
-    logout: ออกจากระบบ
-    quick_links:
-      add_product: สินค้าใหม่
-      orders: การสั่งซื้อล่าสุด
-      products: สินค้าของคุณ
-    statistics:
-      orders_this_month: ใบสั่งซื้อทั้งหมด
-      registrations_this_month: การลงทะเบียนทั้งหมด
-      sales_this_month: ขาย
-  block:
-    imagine:
-      title: หัวข้อ
-      updated_at: ปรับปรุงล่าสุด
-    index_header: บล็อก
-    simple:
-      body: Body
-      title: หัวข้อ
-      updated_at: ปรับปรุงล่าสุด
-    slideshow:
-      body: Body
-      title: หัวข้อ
-      updated_at: ปรับปรุงล่าสุด
-    string:
-      body: Body
-      title: หัวข้อ
-      updated_at: ปรับปรุงล่าสุด
-  breadcrumb:
-    assortment: จัดประเภท
-    block:
-      index: บล็อก
-    build: สร้าง
-    configuration: ตั้งค่าคอนฟิก
-    content: เนื้อหา
-    country:
-      index: ประเทศ
-    dashboard: แดชบอร์ด
-    edit: แก้ไข
-    general_settings: ตั้งค่าทั่วไป
-    generate: สร้าง
-    group:
-      index: กลุ่ม
-    inventory:
-      index: คลังสินค้า
-    locale:
-      index: ภาษาที่ใช้
-    new: ใหม่
-    option:
-      index: ตัวเลือก
-    order:
-      index: ใบสั่งซื้อ
-    page:
-      index: หน้า
-    payment:
-      index: การชำระเงิน
-    payment_method:
-      index: วิธีการชำระเงิน
-    product:
-      index: สินค้า
-    promotion:
-      index: ส่งเสริมการขาย
-    promotion_coupon:
-      index: คูปอง
-    role:
-      index: Roles
-    sales: ขาย
-    shipment:
-      index: การจัดส่งสินค้า
-    shipping_category:
-      index: ประเภทการจัดส่ง
-    shipping_method:
-      index: วิธีการจัดส่ง
-    tax_category:
-      index: ประเภทภาษี
-    tax_rate:
-      index: อัตราภาษี
-    taxation_settings: การตั้งค่าภาษี
-    taxon:
-      index: หมวดหมู่
-    update: แก้ไข
-    zone:
-      index: โซน
-  browse_products: ค้นหาผลิตภัณฑ์
-  cancel: ยกเลิก
-  cart:
-    empty: รถเข็นของคุณว่างเปล่า
-    summary:
-      add_coupon: เพิ่มคูปอง
-      checkout: ชำระเงิน
-      clear: ล้างรถเข็น
-      grand_total: ผลรวมทั้งหมด
-      product: สินค้า
-      quantity: ปริมาณ
-      save: บันทึก
-      total: ผลรวม
-      unit_price: ราคา
-    summary_header: รายละเอียดสินค้าในตะกร้า
-    total_items: '1 รายการ|%count% รายการ'
-  channel:
-    code: รหัส
-    created_at: สร้างเมื่อ
-    currency_default: สกุลเงินหลัก
-    enabled: เปิดใช้งานแล้ว
-    id: ID
-    name: ชื่อ
-    update: แก้ไข
-    updated_at: ปรับปรุงล่าสุด
-  checkout:
-    addressing:
-      header: กำหนดที่อยู่
-    back: ย้อนกลับ
-    finalize:
-      address:
-        city: เมือง
-        country: ประเทศ
-        firstname: ชื่อ
-        lastname: นามสกุล
-        postcode: รหัสไปรษณีย์
-        province: จังหวัด
-        street: ถนน
-      header: รายละเอียดการสั่งซื้อ
-      order:
-        billing_address: ที่อยู่สำหรับออกใบเสร็จ
-        items_total: สินค้าทั้งหมด
-        no_items: ใบสั่งซื้อนี้ไม่ประกอบด้วยรายการใด ๆ
-        no_promotion: ไม่รวมโปรโมชั่น
+        no_items: 'ใบสั่งซื้อนี้ไม่ประกอบด้วยรายการใด ๆ'
+        no_shipments: ไม่มีการจัดส่งสำหรับใบสั่งซื้อนี้
         no_shipping_charges: ไม่มีค่าธรรมเนียมการจัดส่ง
         no_taxes: ไม่รวมภาษี
-        promotion_discount: ส่วนลดจากโปรโมชั่น
-        promotion_total: รวมโปรโมชั่น
-        shipping_address: ที่อยู่สำหรับจัดส่งสินค้า
-        shipping_charges: ค่าจัดส่ง
-        shipping_total: รวมค่าจัดส่ง
-        tax_total: ยอดรวมภาษี
-        taxes: ภาษี
-        total: ผลรวม
-      order_item:
+    order_item:
         quantity: ปริมาณ
-        total: ผลรวม
-        unit_price: ราคาต่อหน่วย
-      place_order: สั่งซื้อสินค้า
-      product:
-        name: ชื่อ
-    forward: ดำเนินการต่อ
-    payment:
-      header: วิธีการชำระเงิน
-    security:
-      existing_customer: ลูกค้าที่มีอยู่
-      header: 'เข้าสู่ระบบ <small>หรือสร้างบัญชีใหม่</small>'
-      login: เข้าสู่ระบบ
-      new_customer: ลูกค้าใหม่
-      register: ลงทะเบียน
-    shipping:
-      header: วิธีการจัดส่ง
-  confirmation:
-    title: การยืนยัน
-  contact_request:
-    email: อีเมล
-    firstName: ชื่อ
-    id: ID
-    lastName: นามสกุล
-    updated_at: ปรับปรุงล่าสุด
-  contact_topic:
-    id: ID
-    title: หัวข้อ
-    updated_at: ปรับปรุงล่าสุด
-  country:
-    add_province: เพิ่มจังหวัด
-    create: สร้างประเทศ
-    create_header: ประเทศใหม่
-    enabled: เปิดใช้งานแล้ว
-    id: ID
-    index_header: ประเทศ
-    manage: จัดการประเทศ
-    name: ชื่อ
-    show_header: รายละเอียดประเทศ
-    update_header: แก้ไขประเทศ
-  create: สร้าง
-  created_at: สร้างเมื่อ
-  currency:
-    code: รหัส
-    enabled: เปิดใช้งานแล้ว
-    exchange_rate: อัตราแลกเปลี่ยน
-    id: ID
-    name: ชื่อ
-    updated_at: ปรับปรุงล่าสุด
-  customer:
-    billing_address: ที่อยู่สำหรับออกใบเสร็จ
-    email: อีเมล
-    first_name: ชื่อ
-    groups: กลุ่ม
-    id: ID
-    last_name: นามสกุล
-    shipping_address: ที่อยู่สำหรับจัดส่งสินค้า
-    phone_number: หมายเลขโทรศัพท์
-  delete: ลบ
-  deleted: ลบทิ้งแล้ว
-  edit: แก้ไข
-  email:
-    code: รหัส
-    enabled: เปิดใช้งานแล้ว
-    updated_at: ปรับปรุงล่าสุด
-  filter: ตัวกรอง
-  form:
-    cart:
-      coupon: คูปอง
-    choose_file: เลือกไฟล์
-    frontend:
-      password:
+        sellable: สินค้า
+    promotion_coupon:
+        generate: สร้างคูปอง
+        index: รายการคูปอง
+    shipment:
+        update: แก้ไข
+    taxon:
+        image: เลือกรูปภาพ
+        no_image: มีไม่มีภาพในประเภทนี้
+    ui:
+        action: การดำเนินการ
+        actions: ดำเนินการ
+        add_action: เพิ่มการดำเนินการ
+        add_coupon: เพิ่มคูปอง
+        add_image: เพิ่มรูปภาพ
+        add_member: เพิ่มสมาชิก
+        add_province: เพิ่มจังหวัด
+        add_rule: เพิ่มกติกา
+        add_to_cart: หยิบใส่ตระกร้าสินค้า
+        add_value: เพิ่มค่า
+        adding_new_locale: เพิ่มตำแหน่งที่ตั้งใหม่
+        addressing_step: กำหนดที่อยู่
+        administration: การจัดการระบบ
+        administration_dashboard: แดชบอร์ดสำหรับผู้ดูแลระบบ
+        all_your_addresses: รายการที่อยู่ทั้งหมดของคุณ
+        amount: ยอดเงิน
+        assortment: จัดประเภท
+        author: ผู้เขียน
+        availability: Availability
+        available_on: พร้อมจำหน่ายเมื่อ
+        available_on_demand: 'Available on demand'
+        back: ย้อนกลับ
+        backorder: สั่งซื้อเมื่อมีของ
+        balance_due: 'Balance due'
+        billing_address: ที่อยู่สำหรับออกใบเสร็จ
+        blocks: บล็อก
+        body: Body
+        browse_products: ค้นหาผลิตภัณฑ์
+        build: สร้าง
+        calculator: การคำนวณ
+        cancel: ยกเลิก
+        cancelled: ถูกยกเลิก
+        categorization: การจัดประเภท
+        category: ประเภท
+        change_password: เปลี่ยนรหัสผ่านของคุณ
+        change_your_password: เปลี่ยนรหัสผ่านของคุณ
+        checkout: ชำระเงิน
+        choose_file: เลือกไฟล์
+        city: เมือง
+        code: รหัส
+        company: บริษัท
+        completed: เสร็จสมบูรณ์
+        configuration: ตั้งค่าคอนฟิก
         confirmation: การยืนยัน
-        current: รหัสผ่านปัจจุบัน
-        new: รหัสผ่านใหม่
-        title: เปลี่ยนรหัสผ่านของคุณ
-      profile:
-        title: แก้ไขข้อมูลส่วนบุคคลของคุณ
-    login:
-      email: อีเมล
-      password: รหัสผ่าน
-    option_value:
-      add_value: เพิ่มค่า
-    profile:
-      email: อีเมล
-      firstName: ชื่อ
-      lastName: นามสกุล
-  gallery:
-    next: ถัดไป
-    previous: ก่อนหน้านี้
-    slideshow: ภาพสไลด์
-  generate: สร้าง
-  group:
-    create: สร้างกลุ่ม
-    id: ID
-    index_header: กลุ่ม
-    name: ชื่อ
-    roles: Roles
-    update_header: แก้ไขกลุ่ม
-  hide_deleted: ซ่อนรายการที่ลบแล้ว
-  history:
-    action: การดำเนินการ
-    author: ผู้เขียน
-    data: ข้อมูล
-  homepage:
-    splash:
-      headline: ยินดีต้อนรับสู่ ツ Sylius
-      subheadline: อีคอมเมิร์ซที่ทันสมัยสำหรับ Symfony2
-  inventory_unit:
-    created_at: สร้าง
-    inventory_state: สถานะสินค้าคงคลัง
-    name: ชื่อ
-    shipping_state: สถานะการจัดส่ง
-    sku: SKU
-    updated_at: ปรับปรุงล่าสุด
-  locale:
-    code: รหัส
-    create: สร้างตำแหน่งที่ตั้ง
-    create_header: เพิ่มตำแหน่งที่ตั้งใหม่
-    enabled: เปิดใช้งานแล้ว
-    id: ID
-    index_header: รายการทั้งหมด
-    name: ชื่อ
-    update_header: แก้ไขตำแหน่งที่ตั้ง
-    updated_at: ปรับปรุงล่าสุด
-  login: เข้าสู่ระบบ
-  login_header: การจัดการระบบ
-  logo: ツ Sylius
-  manage: จัดการ
-  menu:
-    id: ID
-    title: หัวข้อ
-  menu_node:
-    id: ID
-    parent: หมวดแม่
-    title: หัวข้อ
-  meta:
-    frontend_title: Sylius อีคอมเมิร์ซที่ทันสมัยสำหรับ Symfony2
-  metadata:
-    id: ID
-    content: เนื้อหา
-  na: N/A
-  newest: สินค้าใหม่ล่าสุด
-  "no": false
-  order:
-    adjustments:
-      amount: ยอดรวม
-      description: คำอธิบาย
-      type: ชนิด
-    billing_address: ที่อยู่สำหรับออกใบเสร็จ
-    comment:
-      author: ผู้เขียน
-      created_at: สร้างเมื่อ
-      state: สถานะ
-    create: สร้างใบสั่งซื้อ
-    create_header: ใบสั่งซื้อใหม่
-    created_at: เวลาที่สร้าง
-    currency: สกุลเงิน
-    general_info: ข้อมูลทั่วไป
-    id: ID
-    index_header: ใบสั่งซื้อปัจจุบัน
-    inventory_tracking: ติดตามสินค้าคงคลัง
-    inventory_unit:
-      backorder: สั่งซื้อเมื่อมีของ
-      fulfill: Fulfill
-      return: ส่งกลับ
-    items_total: สินค้าทั้งหมด
-    manage: จัดการใบสั่งซื้อ
-    no_items: ใบสั่งซื้อนี้ไม่ประกอบด้วยรายการใด ๆ
-    no_results: คุณมีไม่มีใบสั่งซื้อใหม่
-    no_shipments: ไม่มีการจัดส่งสำหรับใบสั่งซื้อนี้
-    no_shipping_charges: ไม่มีค่าธรรมเนียมการจัดส่ง
-    no_taxes: ไม่รวมภาษี
-    number: หมายเลข
-    payment: การชำระเงิน
-    payment_state: สถานะการชำระเงิน
-    payment_states:
-      balance_due: Balance due
-    promotion_coupons: คูปอง
-    promotion_total: รวมโปรโมชั่น
-    recent_header: ใบสั่งซื้อล่าสุด
-    release_inventory: Release inventory
-    shipment_state: สถานะการจัดส่ง
-    shipment_states:
-      pending: อยู่ระหว่างการพิจารณา
-    shipments: การจัดส่งสินค้า
-    shipping_address: ที่อยู่สำหรับจัดส่งสินค้า
-    shipping_charges: ค่าจัดส่ง
-    shipping_total: รวมค่าจัดส่ง
-    show_header: ใบสั่งซื้อ
-    state:
-      cancelled: ถูกยกเลิก
-      checkout: ชำระเงิน
-      returned: ถูกส่งคืน
-      shipped: ส่งของแล้ว
-    tax_total: ยอดรวมภาษี
-    taxes: ภาษี
-    total: ผลรวม
-    update_header: แก้ไขใบสั่งซื้อ
-  review:
-    id: ID
-    title: หัวข้อ
-    author: ผู้เขียน
-    created_at: สร้างเมื่อ
-  order_item:
-    product: รายการ
-    quantity: ปริมาณ
-    sellable: สินค้า
-    total: ผลรวม
-    unit_price: ราคาต่อหน่วย
-  out_of_stock: สินค้าหมดสต๊อก
-  page:
-    body: Body
-    create: สร้างหน้าเพจใหม่
-    id: ID
-    index_header: หน้า
-    title: หัวข้อ
-  password: รหัสผ่าน
-  payment:
-    amount: ยอดเงิน
-    create: สร้างการชำระเงิน
-    create_header: การชำระเงินใหม่
-    created_at: สร้างเมื่อ
-    id: ID
-    index_header: การชำระเงิน
-    manage: จัดการการชำระเงิน
-    method: วิธีการ
-    order: ใบสั่งซื้อ
-    state:
-      cancelled: ถูกยกเลิก
-      checkout: ชำระเงิน
-      completed: เสร็จสมบูรณ์
-      failed: ล้มเหลว
-      header: สถานะ
-      new: ใหม่
-      pending: อยู่ระหว่างการพิจารณา
-      processing: กำลังประมวลผล
-      refunded: คืนเงินแล้ว
-      unknown: ไม่ระบุ
-      void: Void
-    update_header: แก้ไขการชำระเงิน
-    updated_at: ปรับปรุงล่าสุด
-  payment_method:
-    create: สร้างวิธีการชำระเงิน
-    create_header: วิธีการชำระเงินใหม่
-    gateway: ช่องทางการชำระเงิน
-    id: ID
-    index_header: วิธีการชำระเงิน
-    name: ชื่อ
-    update_header: แก้ไขวิธีการชำระเงิน
-    updated_at: ปรับปรุงล่าสุด
-  permission:
-    code: รหัส
-    description: คำอธิบาย
-    id: ID
-    updated_at: ปรับปรุงล่าสุด
-  pricing:
-    volume_based:
-      price: ราคา
-  product:
-    available_on: พร้อมจำหน่ายเมื่อ
-    available_on_demand: Available on demand
-    categorization: การจัดประเภท
-    contain_variants: มีตัวแปร
-    create: สร้างสินค้า
-    create_header: สินค้าใหม่
-    description: คำอธิบาย
-    generate_variants: สร้างตัวแปร
-    index_by_taxon_header: 'สินค้า <small>ถูกจัดไว้ภายใต้ "%taxon%"</small>'
-    index_header: 'สินค้า <small>สินค้าทั้งหมดในร้านค้าของคุณ</small>'
-    manage: จัดการสินค้า
-    name: ชื่อ
-    no_description: '<i>ไม่มีคำอธิบาย...</i>'
-    no_images: ไม่มีภาพสำหรับผลิตภัณฑ์นี้
-    no_options: ไม่มีตัวเลือกสำหรับผลิตภัณฑ์นี้
-    no_shipping_category: ไม่มีประเภทการจัดส่ง
-    no_short_description: '<i>ไม่มีคำอธิบายสั้น ๆ</i>'
-    no_sku: ไม่มี SKU
-    no_tax_category: ไม่มีประเภทภาษี
-    no_taxons: มีไม่มีการจัดประเภทสำหรับผลิตภัณฑ์นี้
-    options: ตัวเลือก
-    price: ราคาขายปลีก
-    restricted_zone: จำกัดโซน
-    shipping_category: ประเภทการจัดส่ง
-    show: ดูเพิ่มเติม
-    show_header: รายละเอียดสินค้า
-    sku: SKU
-    stock: สต๊อคปัจจุบัน
-    tabs:
-      categorization: การจัดประเภท
-      images: ภาพ
-      options: ตัวเลือก
-      pricing: การกำหนดราคา
-      product: สินค้า
-    tax_category: ประเภทภาษี
-    unavailable: ไม่สามารถใช้ได้
-    update_header: แก้ไขสินค้า
-    updated_at: ปรับปรุงล่าสุด
-    variant_selection_method: วิธีการเลือกตัวแปร
-    volume_based:
-      price: ราคา
-  product_attribute:
-    code: รหัส
-    name: ชื่อ
-    type: ชนิด
-    updated_at: ปรับปรุงล่าสุด
-  product_association:
-    code: รหัส
-    create_header: สินค้าใหม่
-    name: ชื่อ
-    type: ชนิด
-    updated_at: ปรับปรุงล่าสุด
-  product_not_available_in_zone: ไม่มีในประเทศของคุณ
-  product_option:
-    manage: จัดการตัวเลือก
-    name: ชื่อ
-    presentation: ผู้ใช้มองเห็น
-    updated_at: ปรับปรุงล่าสุด
-  promotion:
-    actions: ดำเนินการ
-    add_action: เพิ่มการดำเนินการ
-    add_rule: เพิ่มกติกา
-    coupon_based: ขึ้นกับคูปอง
-    create: สร้างโปรโมชั่น
-    create_header: โปรโมชั่นใหม่
-    created_at: สร้างเมื่อ
-    description: คำอธิบาย
-    ends_at: สิ้นสุด
-    general_info: ข้อมูลทั่วไป
-    id: ID
-    index_header: โปรโมชั่นปัจจุบัน
-    manage: จัดการโปรโมชั่น
-    name: ชื่อ
-    rules: กติกา
-    show_header: รายละเอียดโปรโมชั่น
-    starts_at: เริ่มต้น
-    update_header: แก้ไขโปรโมชั่น
-    updated_at: ปรับปรุงล่าสุด
-    usage_limit: ขีดจำกัดการใช้งาน
-    used: ใช้
-  promotion_action:
-    configuration: ตั้งค่าคอนฟิก
-    type: ชนิด
-  promotion_coupon:
-    code: รหัส
-    create: เพิ่มคูปอง
-    create_header: สร้างคูปองใหม่
-    generate: สร้างคูปอง
-    generate_header: สร้างคูปอง
-    index: รายการคูปอง
-    index_header: คูปอง
-    total_results:
-      Total: '%total%'
-    update_header: แก้ไขคูปอง
-  promotion_rule:
-    configuration: ตั้งค่าคอนฟิก
-    type: ชนิด
-  province:
-    provinces: จังหวัด
-  redirect_route:
-    id: ID
-    title: หัวข้อ
-  report:
-    code: รหัส
-    description: คำอธิบาย
-    manage: จัดการ
-    name: ชื่อ
-  role:
-    code: รหัส
-    description: คำอธิบาย
-    id: ID
-    index_header: Roles
-    name: ชื่อ
-    updated_at: ปรับปรุงล่าสุด
-  route:
-    id: ID
-    name: ชื่อ
-    title: หัวข้อ
-  save_changes: บันทึกการเปลี่ยนแปลง
-  search: ค้นหา
-  security:
-    login:
-      button: เข้าสู่ระบบ
-  settings:
-    general_header: ตั้งค่าทั่วไป
-    taxation_header: การตั้งค่าภาษี
-  shipment:
-    created_at: สร้างเมื่อ
-    id: ID
-    index_header: การจัดส่งสินค้า
-    inventory_state: สถานะสินค้าคงคลัง
-    manage: จัดการการจัดส่ง
-    method: วิธีการ
-    modified: การปรับเปลี่ยน
-    name: ชื่อ
-    order: ใบสั่งซื้อ
-    ship: จัดส่ง
-    show_header: รายละเอียดการจัดส่ง
-    sku: SKU
-    state: สถานะ
-    tracking_code: รหัสการติดตาม
-    update: แก้ไข
-    update_header: แก้ไขการจัดส่ง
-    updated_at: ปรับปรุงล่าสุด
-  shipment_category:
-    manage: จัดการประเภทการจัดส่ง
-  shipping_address: ที่อยู่สำหรับจัดส่งสินค้า
-  shipping_category:
-    create: สร้างประเภทการจัดส่ง
-    create_header: ประเภทการจัดส่งใหม่
-    id: ID
-    index_header: ประเภทการจัดส่ง
-    manage: จัดการประเภทการจัดส่ง
-    name: ชื่อ
-    update_header: แก้ไขประเภทการจัดส่ง
-    updated_at: ปรับปรุงล่าสุด
-  shipping_method:
-    calculator: การคำนวณ
-    category: หมวดหมู่
-    create: สร้างวิธีการจัดส่ง
-    create_header: วิธีการจัดส่งใหม่
-    enabled: เปิดใช้งานแล้ว
-    id: ID
-    index_header: วิธีการจัดส่ง
-    manage: จัดการวิธีการจัดส่ง
-    name: ชื่อ
-    show_header: รายละเอียดวิธีการจัดส่ง
-    update_header: แก้ไขวิธีการจัดส่ง
-    updated_at: ปรับปรุงล่าสุด
-    zone: โซน
-  shop_by: Shop by
-  show_all: แสดงทั้งหมด
-  show_deleted: แสดงรายการที่ลบ
-  stockable:
-    index_header: 'คลังสินค้า <small>คุณสามารถดูสินค้าคงคลังได้ที่นี่</small>'
-    name: ชื่อ
-    updated_at: ปรับปรุงล่าสุด
-  tax_category:
-    create: สร้างประเภทภาษี
-    create_header: ประเภทภาษีใหม่
-    description: คำอธิบาย
-    id: ID
-    index_header: ประเภทภาษี
-    manage: จัดการประเภทภาษี
-    name: ชื่อ
-    no_description: ไม่มีคำอธิบาย
-    update_header: แก้ไขประเภทภาษี
-    updated_at: ปรับปรุงล่าสุด
-  tax_rate:
-    amount: ยอดเงิน
-    calculator: การคำนวณ
-    category: ประเภท
-    create: สร้างอัตราภาษี
-    create_header: อัตราภาษีใหม่
-    index_header: อัตราภาษี
-    manage: จัดการอัตราภาษี
-    name: ชื่อ
-    show_header: รายละเอียดอัตราภาษี
-    update_header: ปรับปรุงอัตราภาษี
-    updated_at: ปรับปรุงล่าสุด
-    zone: โซน
-  taxon:
-    index_header: หมวดหมู่
-    create: สร้างประเภท
-    create_header: ประเภทใหม่
-    image: เลือกรูปภาพ
-    name: ชื่อ
-    no_image: มีไม่มีภาพในประเภทนี้
-    product_index_header: 'สินค้าที่ถูกกำหนดประเภทไว้ภายใต้ "%name%"'
-    update_header: แก้ไขการจัดประเภท
-  total_quantity: ปริมาณรวม
-  ui:
-    change_password: เปลี่ยนรหัสผ่านของคุณ
-    code: รหัส
-    email: อีเมล
-    login: เข้าสู่ระบบ
-    logout: ออกจากระบบ
-    register: ลงทะเบียน
-    name: ชื่อ
-  unknown: ไม่ระบุ
-  user:
-    create_header: ผู้ใช้ใหม่
-    general_info: 'ข้อมูลทั่วไปของ "%username%"'
-    id: ID
-    impersonate: เข้าสู่ระบบในฐานะผู้ใช้นี้
-    index_header: 'ผู้ใช้ <small>รายชื่อผู้ใช้ทั้งหมด</small>'
-    last_login: เข้าสู่ระบบล่าสุด
-    recent_header: ผู้ใช้ล่าสุด
-    register:
-      button: ลงทะเบียน
-    registration_date: วันที่สมัครสมาชิก
-    show_header: รายละเอียดผู้ใช้
-    update_header: แก้ไขผู้ใช้
-    username: ชื่อผู้ใช้
-  variant:
-    add_image: เพิ่มรูปภาพ
-    availability: Availability
-    available_on_demand: Available on demand
-    create: สร้างตัวแปร
-    create_header: ตัวแปรสินค้าใหม่
-    delete_image: ลบรูปภาพ
-    last_update: ปรับปรุงล่าสุด
-    options: ตัวเลือก
-    price: ราคา
-    sku: SKU
-    stock: สต๊อคปัจจุบัน
-    update_header: แก้ไขตัวแปร
-  "yes": true
-  zone:
-    add_member: เพิ่มสมาชิก
-    create: สร้างโซน
-    create_header: โซนใหม่
-    index_header: โซน
-    manage: จัดการโซน
-    name: ชื่อ
-    scope: Scope
-    show_header: รายละเอียดโซน
-    type: ชนิด
-    update_header: แก้ไขโซน
-  zone_member:
-    members: สมาชิก
+        confirmation_title: การยืนยัน
+        contain_variants: มีตัวแปร
+        content: เนื้อหา
+        countries: ประเทศ
+        country: ประเทศ
+        country_details: รายละเอียดประเทศ
+        coupon: คูปอง
+        coupon_based: ขึ้นกับคูปอง
+        coupons: คูปอง
+        create: สร้าง
+        create_a_new_address: สร้างที่อยู่ใหม่
+        create_country: สร้างประเทศ
+        create_group: สร้างกลุ่ม
+        create_locale: สร้างตำแหน่งที่ตั้ง
+        create_new_coupon: สร้างคูปองใหม่
+        create_new_page: สร้างหน้าเพจใหม่
+        create_order: สร้างใบสั่งซื้อ
+        create_payment: สร้างการชำระเงิน
+        create_payment_method: สร้างวิธีการชำระเงิน
+        create_product: สร้างสินค้า
+        create_promotion: สร้างโปรโมชั่น
+        create_shipping_category: สร้างประเภทการจัดส่ง
+        create_shipping_method: สร้างวิธีการจัดส่ง
+        create_tax_category: สร้างประเภทภาษี
+        create_tax_rate: สร้างอัตราภาษี
+        create_taxon: สร้างประเภท
+        create_variant: สร้างตัวแปร
+        create_zone: สร้างโซน
+        created_at: สร้างเมื่อ
+        creation_time: เวลาที่สร้าง
+        currency: สกุลเงิน
+        current_orders: ใบสั่งซื้อปัจจุบัน
+        current_password: รหัสผ่านปัจจุบัน
+        current_promotions: โปรโมชั่นปัจจุบัน
+        current_stock: สต๊อคปัจจุบัน
+        dashboard: แดชบอร์ด
+        data: ข้อมูล
+        default_billing_address: ค่าเริ่มต้นที่อยู่เรียกเก็บเงิน
+        default_currency: สกุลเงินหลัก
+        default_shipping_address: ค่าเริ่มต้นที่อยู่ในการจัดส่ง
+        delete: ลบ
+        delete_image: ลบรูปภาพ
+        deleted: ลบทิ้งแล้ว
+        description: คำอธิบาย
+        edit: แก้ไข
+        edit_group: แก้ไขกลุ่ม
+        edit_locale: แก้ไขตำแหน่งที่ตั้ง
+        edit_my_address: แก้ไขที่อยู่ของฉัน
+        edit_your_personal_information: แก้ไขข้อมูลส่วนบุคคลของคุณ
+        editing_country: แก้ไขประเทศ
+        editing_coupon: แก้ไขคูปอง
+        editing_order: แก้ไขใบสั่งซื้อ
+        editing_payment: แก้ไขการชำระเงิน
+        editing_payment_method: แก้ไขวิธีการชำระเงิน
+        editing_product: แก้ไขสินค้า
+        editing_promotion: แก้ไขโปรโมชั่น
+        editing_shipment: แก้ไขการจัดส่ง
+        editing_shipping_category: แก้ไขประเภทการจัดส่ง
+        editing_shipping_method: แก้ไขวิธีการจัดส่ง
+        editing_tax_category: แก้ไขประเภทภาษี
+        editing_taxon: แก้ไขการจัดประเภท
+        editing_user: แก้ไขผู้ใช้
+        editing_variant: แก้ไขตัวแปร
+        editing_zone: แก้ไขโซน
+        email: อีเมล
+        enabled: เปิดใช้งานแล้ว
+        ends_at: สิ้นสุด
+        error: ข้อผิดพลาด
+        exchange_rate: อัตราแลกเปลี่ยน
+        existing_customer: ลูกค้าที่มีอยู่
+        failed: ล้มเหลว
+        filter: ตัวกรอง
+        first_name: ชื่อ
+        firstname: ชื่อ
+        fulfill: Fulfill
+        gateway: ช่องทางการชำระเงิน
+        general_info: ข้อมูลทั่วไป
+        general_settings: ตั้งค่าทั่วไป
+        generate: สร้าง
+        generate_variants: สร้างตัวแปร
+        generating_coupons: สร้างคูปอง
+        grand_total: ผลรวมทั้งหมด
+        groups: กลุ่ม
+        hide_deleted: ซ่อนรายการที่ลบแล้ว
+        id: ID
+        images: ภาพ
+        index_of_all_configured_locales: รายการทั้งหมด
+        information: ข้อมูล
+        inventory_here_you_can_see_current_stock_levels: 'คลังสินค้า <small>คุณสามารถดูสินค้าคงคลังได้ที่นี่</small>'
+        inventory_index: คลังสินค้า
+        inventory_state: สถานะสินค้าคงคลัง
+        inventory_tracking: ติดตามสินค้าคงคลัง
+        invoice: ใบแจ้งหนี้
+        items_total: สินค้าทั้งหมด
+        last_login: เข้าสู่ระบบล่าสุด
+        last_name: นามสกุล
+        last_update: ปรับปรุงล่าสุด
+        last_week_orders: รายการสั่งซื้อสัปดาห์ล่าสุด
+        last_week_revenue: รายได้สัปดาห์ล่าสุด
+        lastname: นามสกุล
+        latest_orders: การสั่งซื้อล่าสุด
+        locales: ภาษาที่ใช้
+        login: เข้าสู่ระบบ
+        login_button: เข้าสู่ระบบ
+        logout: ออกจากระบบ
+        manage: จัดการ
+        manage_countries: จัดการประเทศ
+        manage_options: จัดการตัวเลือก
+        manage_orders: จัดการใบสั่งซื้อ
+        manage_payments: จัดการการชำระเงิน
+        manage_products: จัดการสินค้า
+        manage_promotions: จัดการโปรโมชั่น
+        manage_shipments: จัดการการจัดส่ง
+        manage_shipping_categories: จัดการประเภทการจัดส่ง
+        manage_shipping_methods: จัดการวิธีการจัดส่ง
+        manage_tax_categories: จัดการประเภทภาษี
+        manage_tax_rates: จัดการอัตราภาษี
+        manage_zones: จัดการโซน
+        members: สมาชิก
+        method: วิธีการ
+        modified: การปรับเปลี่ยน
+        n_a: N/A
+        name: ชื่อ
+        new: ใหม่
+        new_country: ประเทศใหม่
+        new_customer: ลูกค้าใหม่
+        new_order: ใบสั่งซื้อใหม่
+        new_password: รหัสผ่านใหม่
+        new_payment: การชำระเงินใหม่
+        new_payment_method: วิธีการชำระเงินใหม่
+        new_product: สินค้าใหม่
+        new_product_variant: ตัวแปรสินค้าใหม่
+        new_promotion: โปรโมชั่นใหม่
+        new_shipping_category: ประเภทการจัดส่งใหม่
+        new_shipping_method: วิธีการจัดส่งใหม่
+        new_tax_category: ประเภทภาษีใหม่
+        new_tax_rate: อัตราภาษีใหม่
+        new_taxon: ประเภทใหม่
+        new_user: ผู้ใช้ใหม่
+        new_zone: โซนใหม่
+        newest_products: สินค้าใหม่ล่าสุด
+        next: ถัดไป
+        'no': false
+        no_default_billing_address: ไม่มีค่าเริ่มต้นที่อยู่สำหรับเรียกเก็บเงิน
+        no_default_shipping_address: ไม่มีค่าเริ่มต้นที่อยู่ในการจัดส่ง
+        no_description: ไม่มีคำอธิบาย
+        no_shipping_category: ไม่มีประเภทการจัดส่ง
+        no_short_description: '<i>ไม่มีคำอธิบายสั้น ๆ</i>'
+        no_sku: 'ไม่มี SKU'
+        no_tax_category: ไม่มีประเภทภาษี
+        not_available_in_your_country: ไม่มีในประเทศของคุณ
+        number: หมายเลข
+        number_of_orders: จำนวนใบสั่งซื้อ
+        options: ตัวเลือก
+        order: ใบสั่งซื้อ
+        order_item_product: รายการ
+        order_summary: รายละเอียดการสั่งซื้อ
+        order_value: มูลค่าการสั่งซื้อ
+        orders: ใบสั่งซื้อ
+        out_of_stock: สินค้าหมดสต๊อก
+        overview_of_your_store: ภาพรวมของร้านค้าของคุณ
+        pages: หน้า
+        parent: หมวดแม่
+        password: รหัสผ่าน
+        payment: การชำระเงิน
+        payment_method: วิธีการชำระเงิน
+        payment_methods: วิธีการชำระเงิน
+        payment_state: สถานะการชำระเงิน
+        payments: การชำระเงิน
+        pending: อยู่ระหว่างการพิจารณา
+        phone_number: หมายเลขโทรศัพท์
+        place_order: สั่งซื้อสินค้า
+        placed_at: 'Placed at'
+        postcode: รหัสไปรษณีย์
+        presentation: ผู้ใช้มองเห็น
+        previous: ก่อนหน้านี้
+        price: ราคา
+        pricing: การกำหนดราคา
+        processing: กำลังประมวลผล
+        product: สินค้า
+        product_details_viewing_product_product: รายละเอียดสินค้า
+        products: สินค้า
+        products_categorized_as_name: 'สินค้าที่ถูกกำหนดประเภทไว้ภายใต้ "%name%"'
+        products_categorized_under_taxon_taxon: 'สินค้า <small>ถูกจัดไว้ภายใต้ "%taxon%"</small>'
+        products_index_of_all_products_in_your_store: 'สินค้า <small>สินค้าทั้งหมดในร้านค้าของคุณ</small>'
+        promotion_coupons: คูปอง
+        promotion_details: รายละเอียดโปรโมชั่น
+        promotion_total: รวมโปรโมชั่น
+        promotions: ส่งเสริมการขาย
+        province: จังหวัด
+        provinces: จังหวัด
+        recent_orders: ใบสั่งซื้อล่าสุด
+        recent_users: ผู้ใช้ล่าสุด
+        refunded: คืนเงินแล้ว
+        register: ลงทะเบียน
+        register_button: ลงทะเบียน
+        registration_date: วันที่สมัครสมาชิก
+        release_inventory: 'Release inventory'
+        restricted_zone: จำกัดโซน
+        retail_price: ราคาขายปลีก
+        return: ส่งกลับ
+        returned: ถูกส่งคืน
+        roles: Roles
+        rules: กติกา
+        sales: ขาย
+        sales_this_month: ขาย
+        save: บันทึก
+        save_changes: บันทึกการเปลี่ยนแปลง
+        scope: Scope
+        search: ค้นหา
+        set_as_default_billing_address: ตั้งเป็นค่าเริ่มต้นที่อยู่ในการเรียกเก็บเงิน
+        set_as_default_shipping_address: ตั้งเป็นค่าเริ่มต้นที่อยู่ในการจัดส่งสินค้า
+        ship: จัดส่ง
+        shipment_details: รายละเอียดการจัดส่ง
+        shipment_state: สถานะการจัดส่ง
+        shipments: การจัดส่งสินค้า
+        shipped: ส่งของแล้ว
+        shipping_address: ที่อยู่สำหรับจัดส่งสินค้า
+        shipping_categories: ประเภทการจัดส่ง
+        shipping_category: ประเภทการจัดส่ง
+        shipping_charges: ค่าจัดส่ง
+        shipping_method: วิธีการจัดส่ง
+        shipping_method_details: รายละเอียดวิธีการจัดส่ง
+        shipping_methods: วิธีการจัดส่ง
+        shipping_state: สถานะการจัดส่ง
+        shipping_total: รวมค่าจัดส่ง
+        shop_by: 'Shop by'
+        show_all: แสดงทั้งหมด
+        show_deleted: แสดงรายการที่ลบ
+        sign_in_to_the_store_or_create_new_account: 'เข้าสู่ระบบ <small>หรือสร้างบัญชีใหม่</small>'
+        sku: SKU
+        slideshow: ภาพสไลด์
+        starts_at: เริ่มต้น
+        state: สถานะ
+        street: ถนน
+        success: สำเร็จ
+        sylius_logo: 'ツ Sylius'
+        tax_categories: ประเภทภาษี
+        tax_category: ประเภทภาษี
+        tax_rate_details: รายละเอียดอัตราภาษี
+        tax_rates: อัตราภาษี
+        tax_total: ยอดรวมภาษี
+        taxation_categories: ประเภทภาษี
+        taxation_settings: การตั้งค่าภาษี
+        taxes: ภาษี
+        taxons: หมวดหมู่
+        there_are_no_images_for_this_product: ไม่มีภาพสำหรับผลิตภัณฑ์นี้
+        there_are_no_options_for_this_product: ไม่มีตัวเลือกสำหรับผลิตภัณฑ์นี้
+        there_are_no_taxons_for_this_product: มีไม่มีการจัดประเภทสำหรับผลิตภัณฑ์นี้
+        title: หัวข้อ
+        total: ผลรวม
+        total_orders: ใบสั่งซื้อทั้งหมด
+        total_qty: ปริมาณรวม
+        total_registrations: การลงทะเบียนทั้งหมด
+        tracking_code: รหัสการติดตาม
+        tracking_number: หมายเลขการติดตาม
+        type: ชนิด
+        unavailable: ไม่สามารถใช้ได้
+        unit_price: ราคาต่อหน่วย
+        unknown: ไม่ระบุ
+        updating_tax_rate: ปรับปรุงอัตราภาษี
+        usage_limit: ขีดจำกัดการใช้งาน
+        used: ใช้
+        user_details: รายละเอียดผู้ใช้
+        username: ชื่อผู้ใช้
+        users_list_of_all_users_registered_in_store: 'ผู้ใช้ <small>รายชื่อผู้ใช้ทั้งหมด</small>'
+        variant_selection_method: วิธีการเลือกตัวแปร
+        view_more: ดูเพิ่มเติม
+        void: Void
+        warning: คำเตือน
+        welcome_to_your_space: ยินดีต้อนรับสู่พื้นที่ของคุณ
+        'yes': true
+        you_are_customer_since: คุณเป็นลูกค้าตั้งแต่
+        you_have_no_new_orders: คุณมีไม่มีใบสั่งซื้อใหม่
+        your_products: สินค้าของคุณ
+        zone: โซน
+        zone_details: รายละเอียดโซน
+        zones: โซน
+    user:
+        general_info: 'ข้อมูลทั่วไปของ "%username%"'
+        impersonate: เข้าสู่ระบบในฐานะผู้ใช้นี้
+    variant:
+        stock: สต๊อคปัจจุบัน

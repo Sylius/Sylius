@@ -4,10 +4,10 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.sales'|trans }}</li>
-    <li><a href="{{ path('sylius_backend_order_index') }}">{{ 'sylius.breadcrumb.order.index'|trans }}</a></li>
+    <li>{{ 'sylius.ui.sales'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_order_index') }}">{{ 'sylius.ui.orders'|trans }}</a></li>
     <li><a href="{{ path('sylius_backend_order_show', {'id': order.id}) }}">#{{ order.number }}</a></li>
-    <li>{{ 'sylius.breadcrumb.edit'|trans }}</li>
+    <li>{{ 'sylius.ui.edit'|trans }}</li>
 </ol>
 {% endblock %}
 
@@ -75,10 +75,10 @@
     <div class="actions-menu">
         <a href="{{ path('sylius_backend_order_history', {'id': order.id}) }}" class="btn btn-info">
             <i class="glyphicon glyphicon-calendar"></i>
-            {{ 'sylius.history.header'|trans }}
+            {{ 'sylius.ui.history'|trans }}
         </a>
     </div>
-    <h1><span class="glyphicon glyphicon-pencil"></span> {{ 'sylius.order.update_header'|trans|raw }}</h1>
+    <h1><span class="glyphicon glyphicon-pencil"></span> {{ 'sylius.ui.editing_order'|trans|raw }}</h1>
 </div>
 
 {{ form_errors(form) }}

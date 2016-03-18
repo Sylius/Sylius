@@ -4,15 +4,15 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
-    <li><a href="{{ path('sylius_backend_shipping_category_index') }}">{{ 'sylius.breadcrumb.shipping_category.index'|trans }}</a></li>
-    <li>{{ 'sylius.breadcrumb.new'|trans }}</li>
+    <li>{{ 'sylius.ui.configuration'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_shipping_category_index') }}">{{ 'sylius.ui.shipping_categories'|trans }}</a></li>
+    <li>{{ 'sylius.ui.new'|trans }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
-    <h1><i class="glyphicon glyphicon-plus-sign"></i> {{ 'sylius.shipping_category.create_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-plus-sign"></i> {{ 'sylius.ui.new_shipping_category'|trans|raw }}</h1>
 </div>
 
 {{ form_errors(form) }}

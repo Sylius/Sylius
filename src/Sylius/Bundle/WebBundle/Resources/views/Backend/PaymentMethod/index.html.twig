@@ -6,18 +6,18 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
-    <li>{{ 'sylius.breadcrumb.payment_method.index'|trans }}</a></li>
+    <li>{{ 'sylius.ui.configuration'|trans }}</li>
+    <li>{{ 'sylius.ui.payment_methods'|trans }}</a></li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_payment_method_create'), 'sylius.payment_method.create'|trans) }}
-        {{ buttons.manage(path('sylius_backend_payment_index'), 'sylius.payment.manage'|trans) }}
+        {{ buttons.create(path('sylius_backend_payment_method_create'), 'sylius.ui.create_payment_method'|trans) }}
+        {{ buttons.manage(path('sylius_backend_payment_index'), 'sylius.ui.manage_payments'|trans) }}
     </div>
-    <h1><i class="glyphicon glyphicon-credit-card"></i> {{ 'sylius.payment_method.index_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-credit-card"></i> {{ 'sylius.ui.payment_methods'|trans|raw }}</h1>
 </div>
 
 {{ pagination(payment_methods) }}

@@ -2,7 +2,7 @@
 {% extends 'SyliusWebBundle:Frontend/Account:layout.html.twig' %}
 
 {% block content %}
-    <h4>{{ 'sylius.account.address.update'|trans }}</h4>
+    <h4>{{ 'sylius.ui.edit_my_address'|trans }}</h4>
 
     <div class="row">
         <form action="{{ path('sylius_account_address_update', {'id': address.id}) }}" method="post" class="form-horizontal" novalidate>

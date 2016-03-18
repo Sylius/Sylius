@@ -5,15 +5,15 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.content'|trans }}</li>
-    <li><a href="{{ path('sylius_backend_menu_node_index') }}">{{ 'sylius.breadcrumb.menu_node.index'|trans }}</a></li>
-    <li>{{ 'sylius.breadcrumb.new'|trans }}</li>
+    <li>{{ 'sylius.ui.content'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_menu_node_index') }}">{{ 'sylius.ui.menu_nodes'|trans }}</a></li>
+    <li>{{ 'sylius.ui.new'|trans }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
-    <h1><i class="glyphicon glyphicon-plus-sign"></i> {{ 'sylius.menu_node.create_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-plus-sign"></i> {{ 'sylius.ui.creating_menu_node'|trans|raw }}</h1>
 </div>
 
 {{ form_errors(form) }}

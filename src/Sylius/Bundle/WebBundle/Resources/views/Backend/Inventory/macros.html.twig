@@ -9,10 +9,10 @@
     <thead>
         <tr>
             <th>{{ sylius_resource_sort('id', '#id') }}</th>
-            <th>{{ sylius_resource_sort('sku', 'sylius.stockable.sku'|trans) }}</th>
-            <th>{{ sylius_resource_sort('name', 'sylius.product.name'|trans) }}</th>
+            <th>{{ sylius_resource_sort('sku', 'sylius.ui.sku'|trans) }}</th>
+            <th>{{ sylius_resource_sort('name', 'sylius.ui.name'|trans) }}</th>
             <th>{{ sylius_resource_sort('onHand', 'sylius.stockable.on_hand'|trans) }}</th>
-            <th>{{ sylius_resource_sort('onHold', 'sylius.stockable.on_hold'|trans) }}</th>
+            <th>{{ sylius_resource_sort('onHold', 'sylius.ui.on_hold'|trans) }}</th>
             <th></th>
         </tr>
     </thead>
@@ -58,8 +58,8 @@
                         <thead>
                             <tr>
                                 <th>id</th>
-                                <th>{{ 'sylius.variant.availability'|trans }}</th>
-                                <th>{{ 'sylius.variant.options'|trans }}</th>
+                                <th>{{ 'sylius.ui.availability'|trans }}</th>
+                                <th>{{ 'sylius.ui.options'|trans }}</th>
                                 <th></th>
                                 <th colspan="2"></th>
                             </tr>
@@ -94,7 +94,7 @@
     </tbody>
 </table>
 {% else %}
-{{ alerts.info('sylius.product.no_results'|trans) }}
+{{ alerts.info('sylius.ui.there_are_no_products_to_display'|trans) }}
 {% endif %}
 
 {% endmacro %}

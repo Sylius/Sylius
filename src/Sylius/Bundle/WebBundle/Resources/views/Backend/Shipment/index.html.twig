@@ -6,19 +6,19 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.sales'|trans }}</li>
-    <li>{{ 'sylius.breadcrumb.shipment.index'|trans }}</li>
+    <li>{{ 'sylius.ui.sales'|trans }}</li>
+    <li>{{ 'sylius.ui.shipments'|trans }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.manage(path('sylius_backend_order_index'), 'sylius.order.manage'|trans) }}
-        {{ buttons.create(path('sylius_backend_shipping_category_index'), 'sylius.shipping_category.manage'|trans) }}
-        {{ buttons.create(path('sylius_backend_shipping_method_index'), 'sylius.shipping_method.manage'|trans) }}
+        {{ buttons.manage(path('sylius_backend_order_index'), 'sylius.ui.manage_orders'|trans) }}
+        {{ buttons.create(path('sylius_backend_shipping_category_index'), 'sylius.ui.manage_shipping_categories'|trans) }}
+        {{ buttons.create(path('sylius_backend_shipping_method_index'), 'sylius.ui.manage_shipping_methods'|trans) }}
     </div>
-    <h1><i class="glyphicon glyphicon-plane"></i> {{ 'sylius.shipment.index_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-plane"></i> {{ 'sylius.ui.shipments'|trans|raw }}</h1>
 </div>
 
 {% render(controller('sylius.controller.backend.form:filterAction', {'type': 'sylius_shipment_filter', 'template': 'SyliusWebBundle:Backend/Shipment:filterForm.html.twig'})) %}

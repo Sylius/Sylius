@@ -6,22 +6,22 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
-    <li>{{ 'sylius.breadcrumb.product.index'|trans }}</a></li>
+    <li>{{ 'sylius.ui.assortment'|trans }}</li>
+    <li>{{ 'sylius.ui.products'|trans }}</a></li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_product_create'), 'sylius.product.create'|trans) }}
+        {{ buttons.create(path('sylius_backend_product_create'), 'sylius.ui.create_product'|trans) }}
         <a href="{{ path('sylius_backend_metadata_container_customize', { 'id': constant('Sylius\\Component\\Core\\Model\\ProductInterface::METADATA_CLASS_IDENTIFIER') }) }}" class="btn btn-default">
-            <i class="glyphicon glyphicon-file"></i><span>{{ 'sylius.metadata.product.group_customize'|trans }}</span>
+            <i class="glyphicon glyphicon-file"></i><span>{{ 'sylius.ui.customize_products_metadata'|trans }}</span>
         </a>
-        {{ buttons.manage(path('sylius_backend_product_option_index'), 'sylius.product_option.manage'|trans) }}
-        {{ buttons.manage(path('sylius_backend_product_attribute_index'), 'sylius.product_attribute.manage'|trans) }}
+        {{ buttons.manage(path('sylius_backend_product_option_index'), 'sylius.ui.manage_options'|trans) }}
+        {{ buttons.manage(path('sylius_backend_product_attribute_index'), 'sylius.ui.manage_attributes'|trans) }}
     </div>
-    <h1><i class="glyphicon glyphicon-th-list"></i> {{ 'sylius.product.index_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-th-list"></i> {{ 'sylius.ui.products_index_of_all_products_in_your_store'|trans|raw }}</h1>
 </div>
 
 {% render(controller('sylius.controller.backend.form:filterAction', {'type': 'sylius_product_filter', 'template': 'SyliusWebBundle:Backend/Product:filterForm.html.twig'})) %}

@@ -4,15 +4,15 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.section.customer'|trans }}</li>
-    <li><a href="{{ path('sylius_backend_permission_index') }}">{{ 'sylius.breadcrumb.permission.index'|trans }}</a></li>
-    <li>{{ 'sylius.breadcrumb.edit'|trans }}</li>
+    <li>{{ 'sylius.ui.customer'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_permission_index') }}">{{ 'sylius.ui.permissions'|trans }}</a></li>
+    <li>{{ 'sylius.ui.edit'|trans }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
-    <h1><i class="glyphicon glyphicon-pencil"></i> {{ 'sylius.permission.update_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-pencil"></i> {{ 'sylius.ui.editing_permission'|trans|raw }}</h1>
 </div>
 
 {{ form_errors(form) }}

@@ -1,340 +1,98 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-  association_type:
-    name: Tên
-    create: Tạo
-  address:
-    city: Thành phố
-    company: Công ty
-    country: Quốc gia
-    firstname: Tên
-    lastname: Họ
-    postcode: Mã bưu chính
-    province: Tỉnh
-    street: Địa chỉ
-  alert:
-    error: Lỗi
-    info: Thông tin
-    success: Thành công
-    warning: Cảnh báo
-  archetype:
-    name: Tên
-    options: Tùy chọn
-    updated_at: Cập nhật lần cuối
-  backend:
-    alert:
-      info: Thông tin
-    dashboard:
-      chart_order_count: Số lượng đơn đặt hàng
-      chart_order_total: Giá trị đơn đặt hàng
-      orders: Đơn đặt hàng tuần trước
-      revenue: Doanh thu tuần trước
-    logout: Đăng xuất
-    quick_links:
-      customers: Khách hàng
-  block:
-    imagine:
-      title: Tiêu đề
-      updated_at: Cập nhật lần cuối
-    simple:
-      title: Tiêu đề
-      updated_at: Cập nhật lần cuối
-    slideshow:
-      title: Tiêu đề
-      updated_at: Cập nhật lần cuối
-    string:
-      title: Tiêu đề
-      updated_at: Cập nhật lần cuối
-  breadcrumb:
-    channel:
-      index: Kênh
-    country:
-      index: Quốc gia
-    customer:
-      index: Khách hàng
-    dashboard: Bảng tin
-    edit: Chỉnh sửa
-    general_settings: Cài đặt chung
-    generate: Tạo
-    group:
-      index: Nhóm
-    inventory:
-      index: Hàng tồn kho
-    locale:
-      index: Miền địa phương
-    marketing: Tiếp thị
-    menu:
-      index: Menu
-    new: Mới
-    option:
-      index: Tùy chọn
-    order:
-      index: Đơn đặt hàng
-    page:
-      index: Trang
-    payment:
-      index: Thanh toán
-    payment_method:
-      index: Phương thức thanh toán
-    product:
-      index: Sản phẩm
-    promotion:
-      index: Chương trình khuyến mãi
-    report:
-      index: Báo cáo
-    role:
-      index: Vai trò
-    section:
-      customer: Khách hàng
-    shipment:
-      index: Vận chuyển
-  cart:
-    summary:
-      quantity: Số lượng
-      save: Lưu lại
-      total: Tổng cộng
-      unit_price: Giá
-  channel:
-    code: Mã
-    created_at: Được tạo vào lúc
-    id: ID
-    index_header: Kênh
-    name: Tên
-    updated_at: Cập nhật lần cuối
-  checkout:
-    finalize:
-      address:
-        city: Thành phố
-        postcode: Mã bưu chính
-        province: Tỉnh
-        street: Địa chỉ
-      order:
-        taxes: Thuế
-        total: Tổng cộng
-      order_item:
-        quantity: Số lượng
-        total: Tổng cộng
-        unit_price: Đơn giá
-      place_order: Đặt hàng
-      product:
-        name: Sản phẩm
-    forward: Tiếp tục
-    payment:
-      header: Phương thức thanh toán
-    security:
-      existing_customer: Khách hàng hiện tại
-      header: 'Đăng nhập vào <small>hoặc tạo tài khoản mới</small>'
-      login: Đăng nhập
-      new_customer: Khách hàng mới
-      register: Đăng kí
-    shipping:
-      header: Phương pháp vận chuyển
-  confirmation:
-    title: Xác nhận
-  contact_request:
-    id: ID
-    updated_at: Cập nhật lần cuối
-  contact_topic:
-    id: ID
-    title: Tiêu đề
-    updated_at: Cập nhật lần cuối
-  country:
-    add_province: Thêm tỉnh
-    create: Tạo quốc gia
-    create_header: Tạo quốc gia mới
-    id: ID
-    index_header: Quốc gia
-    manage: Quản lý quốc gia
-    name: Tên
-  create: Tạo
-  created_at: Được tạo vào lúc
-  currency:
-    code: Mã
-    id: ID
-    name: Tên
-    updated_at: Cập nhật lần cuối
-  customer:
-    groups: Nhóm
-    id: ID
-  deleted: Đã bị xoá
-  email:
-    code: Mã
-    updated_at: Cập nhật lần cuối
-  form:
     cart:
-      coupon: Phiếu giảm giá
-    frontend:
-      password:
-        confirmation: Xác nhận
-    login:
-      password: Mật khẩu
-  generate: Tạo
-  group:
-    id: ID
-    index_header: Nhóm
-    name: Tên
-    roles: Vai trò
-  inventory_unit:
-    name: Tên
-    sku: MÃ SẢN PHẨM
-    updated_at: Cập nhật lần cuối
-  locale:
-    code: Mã
-    enabled: Đã được kích hoạt
-    id: ID
-    name: Tên
-    updated_at: Cập nhật lần cuối
-  login: Đăng nhập
-  logo: Sylius
-  manage: Quản lý
-  menu:
-    id: ID
-    index_header: Menu
-    title: Tiêu đề
-  menu_node:
-    id: ID
-    title: Tiêu đề
-  metadata:
-    id: ID
-  newest: Sản phẩm mới nhất
-  "no": false
-  order:
-    comment:
-      created_at: Được tạo vào lúc
-    customer: Khách hàng
-    id: ID
-    index_header: Đơn đặt hàng hiện tại
-    shipments: Vận chuyển
-    taxes: Thuế
-  review:
-    id: ID
-    title: Tiêu đề
-    created_at: Được tạo vào lúc
-  order_item:
-    quantity: Số lượng
-  page:
-    id: ID
-    index_header: Trang
-    title: Tiêu đề
-  password: Mật khẩu
-  payment:
-    created_at: Được tạo vào lúc
-    id: ID
-    index_header: Thanh toán
-    updated_at: Cập nhật lần cuối
-  payment_method:
-    id: ID
-    index_header: Phương thức thanh toán
-    name: Tên
-    updated_at: Cập nhật lần cuối
-  permission:
-    code: Mã
-    id: ID
-    updated_at: Cập nhật lần cuối
-  pricing:
-    volume_based:
-      price: Giá
-  product:
-    name: Tên
-    options: Tùy chọn
-    sku: MÃ SẢN PHẨM
-    tabs:
-      channels: Kênh
-      images: Hình ảnh
-      options: Tùy chọn
-    updated_at: Cập nhật lần cuối
-    volume_based:
-      price: Giá
-  product_attribute:
-    code: Mã
-    name: Tên
-    updated_at: Cập nhật lần cuối
-  product_association:
-    code: Mã
-    name: Tên
-    updated_at: Cập nhật lần cuối
-  product_option:
-    name: Tên
-    updated_at: Cập nhật lần cuối
-  promotion:
-    created_at: Được tạo vào lúc
-    id: ID
-    name: Tên
-    updated_at: Cập nhật lần cuối
-  promotion_coupon:
-    code: Mã
-  redirect_route:
-    id: ID
-    title: Tiêu đề
-  report:
-    code: Mã
-    index_header: Báo cáo
-    manage: Quản lý
-    name: Tên
-  role:
-    code: Mã
-    id: ID
-    index_header: Vai trò
-    name: Tên
-    updated_at: Cập nhật lần cuối
-  route:
-    id: ID
-    name: Tên
-    title: Tiêu đề
-  search: Tìm kiếm
-  security:
-    login:
-      button: Đăng nhập
-  settings:
-    general_header: Cài đặt chung
-  shipment:
-    created_at: Được tạo vào lúc
-    id: ID
-    index_header: Vận chuyển
-    name: Tên
-    sku: MÃ SẢN PHẨM
-    updated_at: Cập nhật lần cuối
-  shipping_category:
-    id: ID
-    index_header: Thể loại
-    name: Tên
-    updated_at: Cập nhật lần cuối
-  shipping_method:
-    id: ID
-    index_header: Phương thức vận chuyển
-    name: Tên
-    updated_at: Cập nhật lần cuối
-  stockable:
-    name: Tên
-    updated_at: Cập nhật lần cuối
-  tax_category:
-    id: ID
-    name: Tên
-    updated_at: Cập nhật lần cuối
-  tax_rate:
-    name: Tên
-    updated_at: Cập nhật lần cuối
-  taxon:
-    name: Tên
-  ui:
-    code: Mã
-    links: Liên kết
-    login: Đăng nhập
-    logout: Đăng xuất
-    register: Đăng ký
-    name: Tên
-  user:
-    id: ID
-    register:
-      button: Đăng ký
-  variant:
-    last_update: Cập nhật lần cuối
-    options: Tùy chọn
-    price: Giá
-    sku: MÃ SẢN PHẨM
-  "yes": true
-  zone:
-    name: Tên
-    scope: Phạm vi
+        summary:
+            quantity: 'Số lượng'
+    checkout:
+        finalize:
+            order_item:
+                quantity: 'Số lượng'
+        forward: 'Tiếp tục'
+    order_item:
+        quantity: 'Số lượng'
+    ui:
+        add_province: 'Thêm tỉnh'
+        channels: Kênh
+        city: 'Thành phố'
+        code: Mã
+        company: 'Công ty'
+        confirmation: 'Xác nhận'
+        confirmation_title: 'Xác nhận'
+        countries: 'Quốc gia'
+        country: 'Quốc gia'
+        coupon: 'Phiếu giảm giá'
+        create: Tạo
+        create_country: 'Tạo quốc gia'
+        created_at: 'Được tạo vào lúc'
+        current_orders: 'Đơn đặt hàng hiện tại'
+        customer: 'Khách hàng'
+        customers: 'Khách hàng'
+        dashboard: 'Bảng tin'
+        deleted: 'Đã bị xoá'
+        edit: 'Chỉnh sửa'
+        enabled: 'Đã được kích hoạt'
+        error: Lỗi
+        existing_customer: 'Khách hàng hiện tại'
+        firstname: Tên
+        general_settings: 'Cài đặt chung'
+        generate: Tạo
+        groups: Nhóm
+        id: ID
+        images: 'Hình ảnh'
+        information: 'Thông tin'
+        inventory_index: 'Hàng tồn kho'
+        last_update: 'Cập nhật lần cuối'
+        last_week_orders: 'Đơn đặt hàng tuần trước'
+        last_week_revenue: 'Doanh thu tuần trước'
+        lastname: Họ
+        links: 'Liên kết'
+        locales: 'Miền địa phương'
+        login: 'Đăng nhập'
+        login_button: 'Đăng nhập'
+        logout: 'Đăng xuất'
+        manage: 'Quản lý'
+        manage_countries: 'Quản lý quốc gia'
+        marketing: 'Tiếp thị'
+        menus: Menu
+        name: Tên
+        new: Mới
+        new_country: 'Tạo quốc gia mới'
+        new_customer: 'Khách hàng mới'
+        newest_products: 'Sản phẩm mới nhất'
+        'no': false
+        number_of_orders: 'Số lượng đơn đặt hàng'
+        options: 'Tùy chọn'
+        order_value: 'Giá trị đơn đặt hàng'
+        orders: 'Đơn đặt hàng'
+        pages: Trang
+        password: 'Mật khẩu'
+        payment_method: 'Phương thức thanh toán'
+        payment_methods: 'Phương thức thanh toán'
+        payments: 'Thanh toán'
+        place_order: 'Đặt hàng'
+        postcode: 'Mã bưu chính'
+        price: Giá
+        products: 'Sản phẩm'
+        promotions: 'Chương trình khuyến mãi'
+        province: Tỉnh
+        register: 'Đăng kí'
+        register_button: 'Đăng ký'
+        reports: 'Báo cáo'
+        roles: 'Vai trò'
+        save: 'Lưu lại'
+        scope: 'Phạm vi'
+        search: 'Tìm kiếm'
+        shipments: 'Vận chuyển'
+        shipping_categories: 'Thể loại'
+        shipping_method: 'Phương pháp vận chuyển'
+        shipping_methods: 'Phương thức vận chuyển'
+        sign_in_to_the_store_or_create_new_account: 'Đăng nhập vào <small>hoặc tạo tài khoản mới</small>'
+        sku: 'MÃ SẢN PHẨM'
+        street: 'Địa chỉ'
+        success: 'Thành công'
+        sylius_logo: Sylius
+        taxes: Thuế
+        title: 'Tiêu đề'
+        total: 'Tổng cộng'
+        unit_price: 'Đơn giá'
+        warning: 'Cảnh báo'
+        'yes': true

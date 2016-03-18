@@ -5,8 +5,8 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.section.customer'|trans }}</li>
-    <li><a href="{{ path('sylius_backend_customer_index') }}">{{ 'sylius.breadcrumb.customer.index'|trans }}</a></li>
+    <li>{{ 'sylius.ui.customer'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_customer_index') }}">{{ 'sylius.ui.customers'|trans }}</a></li>
     <li>{{ customer.fullName }}</li>
 </ol>
 {% endblock %}
@@ -17,13 +17,13 @@
         {% if customer.user is not null and customer.user.id is not same as(app.user.id)%}
         {{ buttons.generic(path('sylius_account_profile_show', {'_switch_user': customer.user.username}), 'sylius.user.impersonate'|trans) }}
         {% endif %}
-        {{ buttons.manage(path('sylius_backend_customer_index'), 'sylius.customer.manage'|trans) }}
+        {{ buttons.manage(path('sylius_backend_customer_index'), 'sylius.ui.manage_customers'|trans) }}
         {{ buttons.edit(path('sylius_backend_customer_update', {'id': customer.id})) }}
         {% if customer.user is not null and customer.user.id is not same as(app.user.id) %}
             {{ buttons.delete(path('sylius_backend_user_delete', {'id': customer.user.id}), null, false, true) }}
         {% endif %}
     </div>
-    <h1><i class="glyphicon glyphicon-info-sign"></i> {{ 'sylius.customer.show_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-info-sign"></i> {{ 'sylius.ui.customer_details'|trans|raw }}</h1>
 </div>
 
 <div class="row">
@@ -36,23 +36,23 @@
             </thead>
             <tbody>
             <tr>
-                <td><strong>{{ 'sylius.customer.id'|trans }}</strong></td>
+                <td><strong>{{ 'sylius.ui.id'|trans }}</strong></td>
                 <td>{{ customer.id }}</td>
             </tr>
             {% if customer.firstName %}
                 <tr>
-                    <td><strong>{{ 'sylius.customer.first_name'|trans }}</strong></td>
+                    <td><strong>{{ 'sylius.ui.first_name'|trans }}</strong></td>
                     <td>{{ customer.firstName }}</td>
                 </tr>
             {% endif %}
             {% if customer.lastName %}
                 <tr>
-                    <td><strong>{{ 'sylius.customer.last_name'|trans }}</strong></td>
+                    <td><strong>{{ 'sylius.ui.last_name'|trans }}</strong></td>
                     <td>{{ customer.lastName }}</td>
                 </tr>
             {% endif %}
             <tr>
-                <td><strong>{{ 'sylius.user.username'|trans }}</strong></td>
+                <td><strong>{{ 'sylius.ui.username'|trans }}</strong></td>
                 <td id="username">
                 {% if customer.user is not null %}
                     {{ customer.user.username }}
@@ -60,17 +60,17 @@
                 </td>
             </tr>
             <tr>
-                <td><strong>{{ 'sylius.customer.email'|trans }}</strong></td>
+                <td><strong>{{ 'sylius.ui.email'|trans }}</strong></td>
                 <td>{{ customer.email }}</td>
             </tr>
             {% if customer.phoneNumber is not null %}
                 <tr>
-                    <td><strong>{{ 'sylius.customer.phone_number'|trans }}</strong></td>
+                    <td><strong>{{ 'sylius.ui.phone_number'|trans }}</strong></td>
                     <td>{{ customer.phoneNumber }}</td>
                 </tr>
             {% endif %}
             <tr>
-                <td><strong>{{ 'sylius.user.enabled'|trans }}</strong></td>
+                <td><strong>{{ 'sylius.ui.confirmed'|trans }}</strong></td>
                 <td id="enabled">
                     {% if customer.user is not null %}
                         {{ state_label(customer.user.enabled) }}
@@ -79,12 +79,12 @@
             </tr>
             {% if customer.user is not null and customer.user.lastLogin %}
                 <tr>
-                    <td><strong>{{ 'sylius.user.last_login'|trans }}</strong></td>
+                    <td><strong>{{ 'sylius.ui.last_login'|trans }}</strong></td>
                     <td>{{ customer.user.lastLogin|date }}</td>
                 </tr>
             {% endif %}
             <tr>
-                <td><strong>{{ 'sylius.customer.groups'|trans }}</strong></td>
+                <td><strong>{{ 'sylius.ui.groups'|trans }}</strong></td>
                 <td>
                     {% if customer.groups|length > 0 %}
                         <ul>
@@ -107,9 +107,9 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>{{ 'sylius.user.oauth.provider'|trans }}</th>
-                    <th>{{ 'sylius.user.oauth.identifier'|trans }}</th>
-                    <th>{{ 'sylius.user.oauth.access_token'|trans }}</th>
+                    <th>{{ 'sylius.ui.oauth_provider'|trans }}</th>
+                    <th>{{ 'sylius.ui.identifier'|trans }}</th>
+                    <th>{{ 'sylius.ui.access_token'|trans }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -134,13 +134,13 @@
 <div class="row">
     {% if customer.shippingAddress %}
         <div class="col-md-6">
-            <h4>{{ 'sylius.customer.shipping_address'|trans }}</h4>
+            <h4>{{ 'sylius.ui.shipping_address'|trans }}</h4>
             {% include 'SyliusWebBundle:Backend/Address:_show.html.twig' with {'address': customer.shippingAddress } %}
         </div>
     {% endif %}
     {% if customer.billingAddress %}
         <div class="col-md-6">
-            <h4>{{ 'sylius.customer.billing_address'|trans }}</h4>
+            <h4>{{ 'sylius.ui.billing_address'|trans }}</h4>
             {% include 'SyliusWebBundle:Backend/Address:_show.html.twig' with {'address': customer.billingAddress } %}
         </div>
     {% endif %}

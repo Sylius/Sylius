@@ -3,7 +3,7 @@
     {{ ('sylius.account.order.shipment.' ~ shipment.state) |trans({'%at%': shipment.updatedAt|date}) }}
     {% if shipment.tracking %}
         <br>
-        {{ 'sylius.account.order.tracking_number'|trans}}
+        {{ 'sylius.ui.tracking_number'|trans}}
         {{ shipment.tracking }}
     {% endif %}
 {% else %}

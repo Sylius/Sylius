@@ -1,456 +1,171 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
-  account:
-    home:
-      email: Ηλεκτρονικό ταχυδρομείο
-    order:
-      number: Αριθμός
-      shipment:
-        pending: Σε εκκρεμότητα
-      state: Νομός
-  add_to_cart: Προσθήκη στο καλάθι
-  association_type:
-    name: Ονομασία
-    create: Δημιουργία
-  address:
-    city: Πόλη
-    country: Χώρα
-    firstname: Όνομα
-    lastname: Επώνυμο
-    postcode: Ταχ. Κώδικας
-    province: Επαρχία
-    street: Οδός
-  alert:
-    error: Σφάλμα
-    info: Πληροφορίες
-    success: Επιτυχία
-    warning: Προειδοποίηση
-  archetype:
-    name: Ονομασία
-    options: Επιλογές
-    updated_at: Τροποποιήθηκε την
-  backend:
-    alert:
-      info: Πληροφορίες
-  block:
-    imagine:
-      title: Τίτλος
-      updated_at: Τροποποιήθηκε την
-    index_header: Μπλοκ
-    simple:
-      title: Τίτλος
-      updated_at: Τροποποιήθηκε την
-    slideshow:
-      title: Τίτλος
-      updated_at: Τροποποιήθηκε την
-    string:
-      title: Τίτλος
-      updated_at: Τροποποιήθηκε την
-  breadcrumb:
-    block:
-      index: Μπλοκ
-    configuration: Παραμετροποίηση
-    content: Περιεχόμενο
-    country:
-      index: Χώρες
-    group:
-      index: Ομάδες
-    option:
-      index: Επιλογές
-    order:
-      index: Παραγγελίες
-    page:
-      index: Σελίδες
-    payment:
-      index: Πληρωμές
-    product:
-      index: Προϊόντα
-    promotion:
-      index: Προσφορές
-    role:
-      index: Ρόλοι
-    shipment:
-      index: Αποστολές
-    zone:
-      index: Ζώνες
-  cancel: Άκυρο
-  cart:
-    empty: Το καλάθι είναι άδειο
-    summary:
-      checkout: Ολοκλήρωση αγορών
-      clear: Καθαρισμός καλαθιού
-      grand_total: Γενικό σύνολο
-      product: Προϊόν
-      quantity: Ποσότητα
-      save: Αποθήκευση
-      total: Σύνολο
-      unit_price: Τιμή
-    summary_header: Σύνοψη καλαθιού
-    total_items: '1 στοιχείο|%count% στοιχεία'
-  channel:
-    code: Κώδικος
-    currency_default: Προεπιλεγμένο νόμισμα
-    enabled: Ενεργοποιημένο
-    id: ID
-    name: Ονομασία
-    updated_at: Τροποποιήθηκε την
-  checkout:
-    back: Επιστροφή
-    finalize:
-      address:
-        city: Πόλη
-        country: Χώρα
-        firstname: Όνομα
-        lastname: Επώνυμο
-        postcode: Ταχ. Κώδικας
-        province: Επαρχία
-        street: Οδός
-      header: Σύνοψη παραγγελίας
-      order:
-        billing_address: Διεύθυνση χρέωσης
-        items_total: Σύνολο στοιχείων
-        no_items: Αυτή η παραγγελία δεν περιέχει κανένα στοιχείο
-        no_promotion: Δεν έχει εφαρμοστεί προώθηση
-        no_shipping_charges: Δεν έχουν εφαρμοστεί έξοδα αποστολής
-        no_taxes: Δεν έχουν εφαρμοστεί φόροι
-        promotion_discount: Έκπτωση προώθησης
-        promotion_total: Σύνολο προώθησης
-        shipping_address: Διεύθυνση αποστολής
-        shipping_charges: Έξοδα αποστολής
-        shipping_total: Σύνολο εξόδων αποστολής
-        tax_total: Σύνολο φόρων
-        taxes: Φόροι
-        total: Σύνολο
-      order_item:
-        quantity: Ποσότητα
-        total: Σύνολο
-        unit_price: Τιμή μονάδας
-      place_order: Παραγγελία
-      product:
-        name: Ονομασία
-    forward: Συνέχεια
-    payment:
-      header: Τρόπος πληρωμής
-    security:
-      existing_customer: Υφιστάμενος Πελάτης
-      header: 'Είσοδος στο κατάστημα <small>ή να δημιουργήσετε νέο λογαριασμό</small>'
-      login: Είσοδος
-      new_customer: Νεος Πελάτης
-      register: Καταχώρηση
-    shipping:
-      header: Τρόπος αποστολής
-  contact_request:
-    email: Ηλεκτρονικό ταχυδρομείο
-    firstName: Όνομα
-    id: ID
-    lastName: Επώνυμο
-    updated_at: Τροποποιήθηκε την
-  contact_topic:
-    id: ID
-    title: Τίτλος
-    updated_at: Τροποποιήθηκε την
-  country:
-    add_province: Προσθήκη επαρχίας
-    create: Δημιουργία χώρας
-    create_header: Νέα χώρα
-    enabled: Ενεργοποιημένο
-    id: ID
-    index_header: Χώρες
-    manage: Διαχείριση χωρών
-    name: Ονομασία
-    show_header: Λεπτομέρειες χώρας
-    update_header: Επεξεργασία χώρας
-  create: Δημιουργία
-  currency:
-    code: Κώδικος
-    enabled: Ενεργοποιημένο
-    id: ID
-    name: Ονομασία
-    updated_at: Τροποποιήθηκε την
-  customer:
-    billing_address: Διεύθυνση τιμολόγησης
-    email: Ηλεκτρονικό ταχυδρομείο
-    first_name: Όνομα
-    groups: Ομάδες
-    id: ID
-    last_name: Επώνυμο
-    shipping_address: Διεύθυνση αποστολής
-  email:
-    code: Κώδικος
-    enabled: Ενεργοποιημένο
-    updated_at: Τροποποιήθηκε την
-  filter: Φίλτρο
-  form:
     cart:
-      coupon: Κουπόνι
-    choose_file: Επιλογή αρχείου
-    login:
-      email: Ηλεκτρονικό ταχυδρομείο
-      password: Κωδικός
-    profile:
-      email: Ηλεκτρονικό ταχυδρομείο
-      firstName: Όνομα
-      lastName: Επώνυμο
-  gallery:
-    next: Επόμενο
-  generate: Δημιουργία
-  group:
-    id: ID
-    index_header: Ομάδες
-    name: Ονομασία
-    roles: Ρόλοι
-  homepage:
-    splash:
-      headline: Καλώς ήρθατε στο Sylius
-      subheadline: Σύγχρονη εφαρμογή ηλεκτρονικού εμπορίου για το Symfony2
-  inventory_unit:
-    created_at: Δημιουργήθηκε
-    inventory_state: Κατάσταση απογραφής
-    name: Ονομασία
-    shipping_state: Κατάσταση μεταφορικών
-    sku: ΚΩΔΙΚΟΣ ΠΡΟΪΟΝΤΟΣ
-    updated_at: Τροποποιήθηκε την
-  locale:
-    code: Κώδικος
-    enabled: Ενεργοποιημένο
-    id: ID
-    name: Ονομασία
-    updated_at: Τροποποιήθηκε την
-  login: Είσοδος
-  login_header: Διαχείριση
-  manage: Διαχείριση
-  menu:
-    id: ID
-    title: Τίτλος
-  menu_node:
-    id: ID
-    title: Τίτλος
-  metadata:
-    id: ID
-    content: Περιεχόμενο
-  newest: Νεότερα προϊόντα
-  "no": false
-  order:
-    adjustments:
-      amount: Ποσό
-      description: Περιγραφή
-      type: Τύπος
-    billing_address: Διεύθυνση χρέωσης
-    comment:
-      state: Νομός
-    create: Δημιουργία παραγγελίας
-    create_header: Νεα παραγγελία
-    created_at: Δημιουργήθηκε την
-    currency: Νόμισμα
-    id: ID
-    index_header: Τρέχουσες παραγγελίες
-    items_total: Σύνολο στοιχείων
-    no_items: Αυτή η παραγγελία δεν περιέχει κανένα στοιχείο
-    no_shipping_charges: Δεν έχουν εφαρμοστεί έξοδα αποστολής
-    no_taxes: Δεν έχουν εφαρμοστεί φόροι
-    number: Αριθμός
-    payment_state: Κατάσταση πληρωμής
-    promotion_total: Σύνολο προώθησης
-    shipment_states:
-      pending: Σε εκκρεμότητα
-    shipments: Αποστολές
-    shipping_address: Διεύθυνση αποστολής
-    shipping_charges: Έξοδα αποστολής
-    shipping_total: Σύνολο εξόδων αποστολής
-    show_header: παραγγελία
-    state:
-      checkout: Ολοκλήρωση αγορών
-      returned: Επεστράφησαν
-      shipped: Αποστάλθηκαν
-    tax_total: Σύνολο φόρων
-    taxes: Φόροι
-    total: Σύνολο
-  review:
-    id: ID
-    title: Τίτλος
-  order_item:
-    quantity: Ποσότητα
-    sellable: Προϊόν
-    unit_price: Τιμή μονάδας
-  page:
-    id: ID
-    index_header: Σελίδες
-    title: Τίτλος
-  password: Κωδικός
-  payment:
-    amount: Ποσό
-    id: ID
-    index_header: Πληρωμές
-    method: τρόπος
-    order: παραγγελία
-    state:
-      checkout: Ολοκλήρωση αγορών
-      header: Νομός
-      pending: Σε εκκρεμότητα
-      processing: Σε εξέλιξη
-      unknown: Άγνωστο
-    updated_at: Τροποποιήθηκε την
-  payment_method:
-    gateway: Πύλη
-    id: ID
-    index_header: Τρόποι πληρωμής
-    name: Ονομασία
-    updated_at: Τροποποιήθηκε την
-  permission:
-    code: Κώδικος
-    description: Περιγραφή
-    id: ID
-    updated_at: Τροποποιήθηκε την
-  pricing:
-    volume_based:
-      price: Τιμή
-  product:
-    available_on: Διαθέσιμο την
-    categorization: Κατηγοριοποίηση
-    create: Δημιουργία προϊόντος
-    create_header: Νεο προϊόν
-    description: Περιγραφή
-    name: Ονομασία
-    options: Επιλογές
-    price: Τιμή
-    restricted_zone: Απαγορευμένη ζώνη
-    shipping_category: Κατηγορία αποστολής
-    sku: ΚΩΔΙΚΟΣ ΠΡΟΪΟΝΤΟΣ
-    stock: Τρέχων απόθεμα
-    tabs:
-      categorization: Κατηγοριοποίηση
-      images: Εικόνες
-      options: Επιλογές
-      product: Προϊόν
-    tax_category: Φορολογική κατηγορία
-    updated_at: Τροποποιήθηκε την
-    variant_selection_method: Μέθοδος επιλογής παραλλαγής
-    volume_based:
-      price: Τιμή
-  product_attribute:
-    code: Κώδικος
-    name: Ονομασία
-    type: Τύπος
-    updated_at: Τροποποιήθηκε την
-  product_association:
-    code: Κώδικος
-    name: Ονομασία
-    type: Τύπος
-    updated_at: Τροποποιήθηκε την
-  product_option:
-    manage: Διαχείριση επιλογών
-    name: Ονομασία
-    presentation: Παρουσίαση
-    updated_at: Τροποποιήθηκε την
-  promotion:
-    actions: Ενέργειες
-    description: Περιγραφή
-    ends_at: Τελειώνει σε
-    id: ID
-    name: Ονομασία
-    rules: Κανόνες
-    starts_at: Αρχίζει με
-    updated_at: Τροποποιήθηκε την
-    usage_limit: Όριο χρήσης
-  promotion_action:
-    configuration: Παραμετροποίηση
-    type: Τύπος
-  promotion_coupon:
-    code: Κώδικος
-  promotion_rule:
-    configuration: Παραμετροποίηση
-    type: Τύπος
-  redirect_route:
-    id: ID
-    title: Τίτλος
-  report:
-    code: Κώδικος
-    description: Περιγραφή
-    manage: Διαχείριση
-    name: Ονομασία
-  role:
-    code: Κώδικος
-    description: Περιγραφή
-    id: ID
-    index_header: Ρόλοι
-    name: Ονομασία
-    updated_at: Τροποποιήθηκε την
-  route:
-    id: ID
-    name: Ονομασία
-    title: Τίτλος
-  save_changes: Αποθήκευση αλλαγών
-  search: Αναζήτηση
-  settings:
-    general_header: Γενικές ρυθμίσεις
-  shipment:
-    id: ID
-    index_header: Αποστολές
-    inventory_state: Κατάσταση απογραφής
-    manage: Διαχείριση αποστολών
-    method: τρόπος
-    name: ονομασία
-    order: παραγγελία
-    sku: ΚΩΔΙΚΟΣ ΠΡΟΪΟΝΤΟΣ
-    state: κατάσταση
-    tracking_code: Κωδικός παρακολούθησης
-    updated_at: Τροποποιήθηκε την
-  shipping_address: Διεύθυνση αποστολής
-  shipping_category:
-    id: ID
-    name: Ονομασία
-    updated_at: Τροποποιήθηκε την
-  shipping_method:
-    category: Κατηγορία
-    enabled: Ενεργοποιημένο
-    id: ID
-    name: Ονομασία
-    updated_at: Τροποποιήθηκε την
-    zone: Ζώνη
-  stockable:
-    name: Ονομασία
-    updated_at: Τροποποιήθηκε την
-  tax_category:
-    description: Περιγραφή
-    id: ID
-    name: Ονομασία
-    updated_at: Τροποποιήθηκε την
-  tax_rate:
-    amount: Ποσό
-    category: Κατηγορία
-    index_header: Φορολογικοί συντελεστές
-    manage: Διαχείριση φορολόγισης
-    name: Ονομασία
-    updated_at: Τροποποιήθηκε την
-    zone: Ζώνη
-  taxon:
-    name: Ονομασία
-  ui:
-    code: Κώδικος
-    email: Ηλεκτρονικό ταχυδρομείο
-    name: Ονομασία
-  unknown: Άγνωστο
-  user:
-    id: ID
-    username: Όνομα χρήστη
-  variant:
-    last_update: Τροποποιήθηκε την
-    options: Επιλογές
-    price: Τιμή
-    sku: ΚΩΔΙΚΟΣ ΠΡΟΪΟΝΤΟΣ
-    stock: Τρέχων απόθεμα
-  "yes": true
-  zone:
-    add_member: Προσθήκη μέλους
-    create: Δημιουργία ζώνης
-    create_header: Νεα ζώνη
-    index_header: Ζώνες
-    manage: Διαχείριση ζωνών
-    name: Ονομασία
-    show_header: Λεπτομέρειες ζώνης
-    type: Τύπος
-    update_header: Επεξεργασία ζώνης
-  zone_member:
-    members: Μέλη
+        empty: 'Το καλάθι είναι άδειο'
+        summary:
+            clear: 'Καθαρισμός καλαθιού'
+            quantity: Ποσότητα
+        total_items: '1 στοιχείο|%count% στοιχεία'
+    checkout:
+        finalize:
+            order:
+                no_items: 'Αυτή η παραγγελία δεν περιέχει κανένα στοιχείο'
+                no_promotion: 'Δεν έχει εφαρμοστεί προώθηση'
+                no_shipping_charges: 'Δεν έχουν εφαρμοστεί έξοδα αποστολής'
+                no_taxes: 'Δεν έχουν εφαρμοστεί φόροι'
+                promotion_discount: 'Έκπτωση προώθησης'
+            order_item:
+                quantity: Ποσότητα
+        forward: Συνέχεια
+    homepage:
+        splash:
+            headline: 'Καλώς ήρθατε στο Sylius'
+            subheadline: 'Σύγχρονη εφαρμογή ηλεκτρονικού εμπορίου για το Symfony2'
+    order:
+        no_items: 'Αυτή η παραγγελία δεν περιέχει κανένα στοιχείο'
+        no_shipping_charges: 'Δεν έχουν εφαρμοστεί έξοδα αποστολής'
+        no_taxes: 'Δεν έχουν εφαρμοστεί φόροι'
+    order_item:
+        quantity: Ποσότητα
+        sellable: Προϊόν
+    ui:
+        actions: Ενέργειες
+        add_member: 'Προσθήκη μέλους'
+        add_province: 'Προσθήκη επαρχίας'
+        add_to_cart: 'Προσθήκη στο καλάθι'
+        administration: Διαχείριση
+        amount: Ποσό
+        available_on: 'Διαθέσιμο την'
+        back: Επιστροφή
+        billing_address: 'Διεύθυνση χρέωσης'
+        blocks: Μπλοκ
+        cancel: Άκυρο
+        categorization: Κατηγοριοποίηση
+        category: Κατηγορία
+        checkout: 'Ολοκλήρωση αγορών'
+        choose_file: 'Επιλογή αρχείου'
+        city: Πόλη
+        code: Κώδικος
+        configuration: Παραμετροποίηση
+        content: Περιεχόμενο
+        countries: Χώρες
+        country: Χώρα
+        country_details: 'Λεπτομέρειες χώρας'
+        coupon: Κουπόνι
+        create: Δημιουργία
+        create_country: 'Δημιουργία χώρας'
+        create_order: 'Δημιουργία παραγγελίας'
+        create_product: 'Δημιουργία προϊόντος'
+        create_zone: 'Δημιουργία ζώνης'
+        created_at: Δημιουργήθηκε
+        creation_time: 'Δημιουργήθηκε την'
+        currency: Νόμισμα
+        current_orders: 'Τρέχουσες παραγγελίες'
+        current_stock: 'Τρέχων απόθεμα'
+        default_currency: 'Προεπιλεγμένο νόμισμα'
+        description: Περιγραφή
+        editing_country: 'Επεξεργασία χώρας'
+        editing_zone: 'Επεξεργασία ζώνης'
+        email: 'Ηλεκτρονικό ταχυδρομείο'
+        enabled: Ενεργοποιημένο
+        ends_at: 'Τελειώνει σε'
+        error: Σφάλμα
+        existing_customer: 'Υφιστάμενος Πελάτης'
+        filter: Φίλτρο
+        first_name: Όνομα
+        firstname: Όνομα
+        gateway: Πύλη
+        general_settings: 'Γενικές ρυθμίσεις'
+        generate: Δημιουργία
+        grand_total: 'Γενικό σύνολο'
+        groups: Ομάδες
+        id: ID
+        images: Εικόνες
+        information: Πληροφορίες
+        inventory_state: 'Κατάσταση απογραφής'
+        items_total: 'Σύνολο στοιχείων'
+        last_name: Επώνυμο
+        last_update: 'Τροποποιήθηκε την'
+        lastname: Επώνυμο
+        login: Είσοδος
+        manage: Διαχείριση
+        manage_countries: 'Διαχείριση χωρών'
+        manage_options: 'Διαχείριση επιλογών'
+        manage_shipments: 'Διαχείριση αποστολών'
+        manage_tax_rates: 'Διαχείριση φορολόγισης'
+        manage_zones: 'Διαχείριση ζωνών'
+        members: Μέλη
+        method: τρόπος
+        name: Ονομασία
+        new_country: 'Νέα χώρα'
+        new_customer: 'Νεος Πελάτης'
+        new_order: 'Νεα παραγγελία'
+        new_product: 'Νεο προϊόν'
+        new_zone: 'Νεα ζώνη'
+        newest_products: 'Νεότερα προϊόντα'
+        next: Επόμενο
+        'no': false
+        number: Αριθμός
+        options: Επιλογές
+        order: παραγγελία
+        order_summary: 'Σύνοψη παραγγελίας'
+        orders: Παραγγελίες
+        pages: Σελίδες
+        password: Κωδικός
+        payment_method: 'Τρόπος πληρωμής'
+        payment_methods: 'Τρόποι πληρωμής'
+        payment_state: 'Κατάσταση πληρωμής'
+        payments: Πληρωμές
+        pending: 'Σε εκκρεμότητα'
+        place_order: Παραγγελία
+        postcode: 'Ταχ. Κώδικας'
+        presentation: Παρουσίαση
+        price: Τιμή
+        processing: 'Σε εξέλιξη'
+        product: Προϊόν
+        products: Προϊόντα
+        promotion_total: 'Σύνολο προώθησης'
+        promotions: Προσφορές
+        province: Επαρχία
+        register: Καταχώρηση
+        restricted_zone: 'Απαγορευμένη ζώνη'
+        retail_price: Τιμή
+        returned: Επεστράφησαν
+        roles: Ρόλοι
+        rules: Κανόνες
+        save: Αποθήκευση
+        save_changes: 'Αποθήκευση αλλαγών'
+        search: Αναζήτηση
+        shipments: Αποστολές
+        shipped: Αποστάλθηκαν
+        shipping_address: 'Διεύθυνση αποστολής'
+        shipping_category: 'Κατηγορία αποστολής'
+        shipping_charges: 'Έξοδα αποστολής'
+        shipping_method: 'Τρόπος αποστολής'
+        shipping_state: 'Κατάσταση μεταφορικών'
+        shipping_total: 'Σύνολο εξόδων αποστολής'
+        sign_in_to_the_store_or_create_new_account: 'Είσοδος στο κατάστημα <small>ή να δημιουργήσετε νέο λογαριασμό</small>'
+        sku: 'ΚΩΔΙΚΟΣ ΠΡΟΪΟΝΤΟΣ'
+        starts_at: 'Αρχίζει με'
+        state: Νομός
+        street: Οδός
+        success: Επιτυχία
+        tax_category: 'Φορολογική κατηγορία'
+        tax_rates: 'Φορολογικοί συντελεστές'
+        tax_total: 'Σύνολο φόρων'
+        taxes: Φόροι
+        title: Τίτλος
+        total: Σύνολο
+        tracking_code: 'Κωδικός παρακολούθησης'
+        type: Τύπος
+        unit_price: 'Τιμή μονάδας'
+        unknown: Άγνωστο
+        usage_limit: 'Όριο χρήσης'
+        username: 'Όνομα χρήστη'
+        variant_selection_method: 'Μέθοδος επιλογής παραλλαγής'
+        warning: Προειδοποίηση
+        'yes': true
+        zone: Ζώνη
+        zone_details: 'Λεπτομέρειες ζώνης'
+        zones: Ζώνες
+    variant:
+        stock: 'Τρέχων απόθεμα'

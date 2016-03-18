@@ -6,19 +6,19 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
-    <li>{{ 'sylius.breadcrumb.archetype.index'|trans }}</a></li>
+    <li>{{ 'sylius.ui.assortment'|trans }}</li>
+    <li>{{ 'sylius.ui.archetypes'|trans }}</a></li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_product_archetype_create'), 'sylius.archetype.create'|trans) }}
-        {{ buttons.manage(path('sylius_backend_product_option_index'), 'sylius.product_option.manage'|trans) }}
-        {{ buttons.manage(path('sylius_backend_product_attribute_index'), 'sylius.product_attribute.manage'|trans) }}
+        {{ buttons.create(path('sylius_backend_product_archetype_create'), 'sylius.ui.create_archetype'|trans) }}
+        {{ buttons.manage(path('sylius_backend_product_option_index'), 'sylius.ui.manage_options'|trans) }}
+        {{ buttons.manage(path('sylius_backend_product_attribute_index'), 'sylius.ui.manage_attributes'|trans) }}
     </div>
-    <h1><i class="glyphicon glyphicon-compressed"></i> {{ 'sylius.archetype.index_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-compressed"></i> {{ 'sylius.ui.product_archetypes'|trans|raw }}</h1>
 </div>
 
 {{ pagination(product_archetypes) }}

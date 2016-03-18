@@ -8,11 +8,11 @@
     <thead>
         <tr>
             <th>{{ sylius_resource_sort('code', 'sylius.ui.code'|trans) }}</th>
-            <th>{{ 'sylius.archetype.name'|trans }}</th>
-            <th>{{ 'sylius.archetype.parent'|trans }}</th>
-            <th>{{ 'sylius.archetype.options'|trans }}</th>
-            <th>{{ 'sylius.archetype.attributes'|trans }}</th>
-            <th>{{ sylius_resource_sort('updatedAt', 'sylius.archetype.updated_at'|trans) }}</th>
+            <th>{{ 'sylius.ui.name'|trans }}</th>
+            <th>{{ 'sylius.ui.parent'|trans }}</th>
+            <th>{{ 'sylius.ui.options'|trans }}</th>
+            <th>{{ 'sylius.ui.attributes'|trans }}</th>
+            <th>{{ sylius_resource_sort('updatedAt', 'sylius.ui.last_update'|trans) }}</th>
             <th></th>
         </tr>
     </thead>
@@ -40,8 +40,8 @@
             <td>{{ archetype.updatedAt|date }}</td>
             <td>
                 <div class="pull-right">
-                {{ buttons.generic(path('sylius_backend_product_archetype_code_product_index', {'code': archetype.code}), 'sylius.browse_products'|trans) }}
-                {{ buttons.create(path('sylius_backend_product_create_from_archetype', {'archetype': archetype.code}), 'sylius.product.create'|trans) }}
+                {{ buttons.generic(path('sylius_backend_product_archetype_code_product_index', {'code': archetype.code}), 'sylius.ui.browse_products'|trans) }}
+                {{ buttons.create(path('sylius_backend_product_create_from_archetype', {'archetype': archetype.code}), 'sylius.ui.create_product'|trans) }}
                 {{ buttons.delete(path('sylius_backend_product_archetype_delete', {'id': archetype.id})) }}
                 {{ buttons.edit(path('sylius_backend_product_archetype_update', {'id': archetype.id})) }}
                 </div>
@@ -51,7 +51,7 @@
     </tbody>
 </table>
 {% else %}
-{{ alerts.info('sylius.archetype.no_results'|trans) }}
+{{ alerts.info('sylius.ui.there_are_no_archetypes_defined'|trans) }}
 {% endif %}
 
 {% endmacro %}

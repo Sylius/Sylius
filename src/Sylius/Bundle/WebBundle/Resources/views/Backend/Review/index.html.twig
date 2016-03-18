@@ -6,18 +6,18 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.review.index'|trans }}</li>
-    <li>{{ 'sylius.review.index'|trans }}</li>
+    <li>{{ 'sylius.ui.reviews'|trans }}</li>
+    <li>{{ 'sylius.ui.product_reviews'|trans }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_product_review_create'), 'sylius.review.create'|trans) }}
-        {{ buttons.manage(path('sylius_backend_product_review_index'), 'sylius.review.manage'|trans) }}
+        {{ buttons.create(path('sylius_backend_product_review_create'), 'sylius.ui.new_review'|trans) }}
+        {{ buttons.manage(path('sylius_backend_product_review_index'), 'sylius.ui.manage_reviews'|trans) }}
     </div>
-    <h1><i class="icon-th"></i> {{ 'sylius.review.index'|trans }}</h1>
+    <h1><i class="icon-th"></i> {{ 'sylius.ui.product_reviews'|trans }}</h1>
 </div>
 
 {{ pagination(product_reviews) }}

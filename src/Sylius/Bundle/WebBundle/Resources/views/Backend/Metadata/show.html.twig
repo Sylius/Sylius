@@ -20,8 +20,8 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
-    <li><a href="{{ path('sylius_backend_metadata_container_index') }}">{{ 'sylius.breadcrumb.metadata.index'|trans }}</a></li>
+    <li>{{ 'sylius.ui.configuration'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_metadata_container_index') }}">{{ 'sylius.ui.metadata_index'|trans }}</a></li>
     <li>{{ metadata_container.id }}</li>
 </ol>
 {% endblock %}
@@ -29,18 +29,18 @@
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.manage(path('sylius_backend_metadata_container_index'), 'sylius.metadata.manage'|trans) }}
+        {{ buttons.manage(path('sylius_backend_metadata_container_index'), 'sylius.ui.manage_metadata'|trans) }}
         {{ buttons.edit(path('sylius_backend_metadata_container_customize', { 'id': metadata_container.id })) }}
         {{ buttons.delete(path('sylius_backend_metadata_container_delete', { 'id': metadata_container.id }), null, false, false) }}
     </div>
-    <h1><i class="glyphicon glyphicon-flag"></i> {{ 'sylius.metadata.show_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-flag"></i> {{ 'sylius.ui.show_metadata'|trans|raw }}</h1>
 </div>
 
 <table class="table table-bordered table-condensed">
     <thead>
         <tr>
-            <th>{{ 'sylius.metadata.id'|trans }}</th>
-            <th>{{ 'sylius.metadata.content'|trans }}</th>
+            <th>{{ 'sylius.ui.id'|trans }}</th>
+            <th>{{ 'sylius.ui.content'|trans }}</th>
         </tr>
     </thead>
     <tbody>

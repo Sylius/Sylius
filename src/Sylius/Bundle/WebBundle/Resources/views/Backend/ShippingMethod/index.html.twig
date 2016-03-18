@@ -6,18 +6,18 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
-    <li>{{ 'sylius.breadcrumb.shipping_method.index'|trans }}</li>
+    <li>{{ 'sylius.ui.configuration'|trans }}</li>
+    <li>{{ 'sylius.ui.shipping_methods'|trans }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_shipping_method_create'), 'sylius.shipping_method.create'|trans) }}
-        {{ buttons.manage(path('sylius_backend_shipping_category_index'), 'sylius.shipping_category.manage'|trans) }}
+        {{ buttons.create(path('sylius_backend_shipping_method_create'), 'sylius.ui.create_shipping_method'|trans) }}
+        {{ buttons.manage(path('sylius_backend_shipping_category_index'), 'sylius.ui.manage_shipping_categories'|trans) }}
     </div>
-    <h1><i class="glyphicon glyphicon-cog"></i> {{ 'sylius.shipping_method.index_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-cog"></i> {{ 'sylius.ui.shipping_methods'|trans|raw }}</h1>
 </div>
 
 {{ pagination(shipping_methods) }}

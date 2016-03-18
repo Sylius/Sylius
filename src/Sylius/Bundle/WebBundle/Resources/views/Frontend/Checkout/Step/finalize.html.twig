@@ -6,18 +6,18 @@
 
 {% block content %}
 <div class="page-header">
-    <h1>{{ 'sylius.checkout.finalize.header'|trans|raw }}</h1>
+    <h1>{{ 'sylius.ui.order_summary'|trans|raw }}</h1>
 </div>
 
 {% include 'SyliusWebBundle:Frontend/Checkout:_progressBar.html.twig' %}
 
 <div class="row">
     <div class="col-md-6">
-        <h4>{{ 'sylius.checkout.finalize.order.shipping_address'|trans }}</h4>
+        <h4>{{ 'sylius.ui.shipping_address'|trans }}</h4>
         {% include 'SyliusWebBundle:Common/Address:_show.html.twig' with { 'address': order.shippingAddress } %}
     </div>
     <div class="col-md-6">
-        <h4>{{ 'sylius.checkout.finalize.order.billing_address'|trans }}</h4>
+        <h4>{{ 'sylius.ui.billing_address'|trans }}</h4>
         {% include 'SyliusWebBundle:Common/Address:_show.html.twig' with { 'address': order.billingAddress } %}
     </div>
 </div>
@@ -26,10 +26,10 @@
     <thead>
         <tr>
             <th>#</th>
-            <th>{{ 'sylius.checkout.finalize.product.name'|trans }}</th>
+            <th>{{ 'sylius.ui.name'|trans }}</th>
             <th>{{ 'sylius.checkout.finalize.order_item.quantity'|trans }}</th>
-            <th><span class="pull-right">{{ 'sylius.checkout.finalize.order_item.unit_price'|trans }}</span></th>
-            <th><span class="pull-right">{{ 'sylius.checkout.finalize.order_item.total'|trans }}</span></th>
+            <th><span class="pull-right">{{ 'sylius.ui.unit_price'|trans }}</span></th>
+            <th><span class="pull-right">{{ 'sylius.ui.total'|trans }}</span></th>
         </tr>
     </thead>
     <tbody>
@@ -48,13 +48,13 @@
         <tr>
             <td colspan="6">
                 <span class="pull-right">
-                <strong>{{ 'sylius.checkout.finalize.order.items_total'|trans }}</strong>: {{ order.itemsTotal|sylius_price }}
+                <strong>{{ 'sylius.ui.items_total'|trans }}</strong>: {{ order.itemsTotal|sylius_price }}
                 </span>
             </td>
         </tr>
         <tr>
             <td colspan="4">
-            <p><strong>{{ 'sylius.checkout.finalize.order.taxes'|trans }}</strong></p>
+            <p><strong>{{ 'sylius.ui.taxes'|trans }}</strong></p>
             <ul>
             {% for taxLabel, taxAmount in sylius_aggregate_adjustments(order.getAdjustmentsRecursively(taxAdjustment)) %}
                 <li>{{ taxLabel }} {{ taxAmount|sylius_price }} </li>
@@ -65,13 +65,13 @@
             </td>
             <td colspan="2">
                 <span class="pull-right">
-                <strong>{{ 'sylius.checkout.finalize.order.tax_total'|trans }}</strong>: {{ order.getAdjustmentsTotalRecursively(taxAdjustment)|sylius_price }}
+                <strong>{{ 'sylius.ui.tax_total'|trans }}</strong>: {{ order.getAdjustmentsTotalRecursively(taxAdjustment)|sylius_price }}
                 </span>
             </td>
         </tr>
         <tr>
             <td colspan="4">
-            <p><strong>{{ 'sylius.checkout.finalize.order.shipping_charges'|trans }}</strong></p>
+            <p><strong>{{ 'sylius.ui.shipping_charges'|trans }}</strong></p>
             <ul>
             {% for adjustment in order.adjustments(shippingAdjustment) %}
                 <li>{{ adjustment.label }} {{ adjustment.amount|sylius_price }} </li>
@@ -83,7 +83,7 @@
             <td colspan="2">
                 <span class="pull-right">
                     {% set shippingTotal = order.adjustmentsTotal(taxAdjustment) + order.adjustmentsTotal(shippingAdjustment) %}
-                    <strong>{{ 'sylius.checkout.finalize.order.shipping_total'|trans }}</strong>: {{ shippingTotal|sylius_price }}
+                    <strong>{{ 'sylius.ui.shipping_total'|trans }}</strong>: {{ shippingTotal|sylius_price }}
                 </span>
             </td>
         </tr>
@@ -100,7 +100,7 @@
                 {% set promotionTotal = cart.getPromotionsTotalRecursively() %}
                 <td colspan="2">
                     <span class="pull-right">
-                    <strong>{{ 'sylius.checkout.finalize.order.promotion_total'|trans }}</strong>: -{{ (-1 * promotionTotal)|sylius_price }}
+                    <strong>{{ 'sylius.ui.promotion_total'|trans }}</strong>: -{{ (-1 * promotionTotal)|sylius_price }}
                     </span>
                 </td>
             </tr>
@@ -108,7 +108,7 @@
         <tr style="background-color: #f1f1f1;">
             <td colspan="6">
                 <span class="pull-right">
-                <strong>{{ 'sylius.checkout.finalize.order.total'|trans }}</strong>: {{ order.total|sylius_price }}
+                <strong>{{ 'sylius.ui.total'|trans }}</strong>: {{ order.total|sylius_price }}
                 </span>
             </td>
         </tr>
@@ -117,7 +117,7 @@
 
 {% if order.additionalInformation is not empty %}
     <div id="sylius-order-additional-information" class="well well-sm">
-        <strong>{{ 'sylius.checkout.finalize.order.additional_information'|trans }}</strong>:
+        <strong>{{ 'sylius.ui.additional_information'|trans }}</strong>:
         {{ order.additionalInformation }}
     </div>
 {% endif %}
@@ -125,9 +125,9 @@
 <div class="form-horizontal">
     <div class="form-actions">
         {% if context.previousStep is not null %}
-        <a href="{{ path(context.process.displayRoute, {'stepName': context.previousStep.name}) }}" class="btn btn-lg"><i class="icon-chevron-left"></i> {{ 'sylius.checkout.back'|trans }}</a> &nbsp;
+        <a href="{{ path(context.process.displayRoute, {'stepName': context.previousStep.name}) }}" class="btn btn-lg"><i class="icon-chevron-left"></i> {{ 'sylius.ui.back'|trans }}</a> &nbsp;
         {% endif %}
-        <a href="{{ path(context.process.forwardRoute, {'stepName': context.currentStep.name}) }}" class="btn btn-lg btn-success"><i class="icon-ok"></i> {{ 'sylius.checkout.finalize.place_order'|trans }}</a> &nbsp;
+        <a href="{{ path(context.process.forwardRoute, {'stepName': context.currentStep.name}) }}" class="btn btn-lg btn-success"><i class="icon-ok"></i> {{ 'sylius.ui.place_order'|trans }}</a> &nbsp;
     </div>
 </div>
 {% endblock %}

@@ -8,10 +8,10 @@
     <thead>
         <tr>
             <th>{{ sylius_resource_sort('id', '#id') }}</th>
-            <th>{{ sylius_resource_sort('name', 'sylius.zone.name'|trans) }}</th>
+            <th>{{ sylius_resource_sort('name', 'sylius.ui.name'|trans) }}</th>
             <th>{{ sylius_resource_sort('code', 'sylius.ui.code'|trans) }}</th>
-            <th>{{ sylius_resource_sort('type', 'sylius.zone.type'|trans) }}</th>
-            <th>{{ sylius_resource_sort('scope', 'sylius.zone.scope'|trans) }}</th>
+            <th>{{ sylius_resource_sort('type', 'sylius.ui.type'|trans) }}</th>
+            <th>{{ sylius_resource_sort('scope', 'sylius.ui.scope'|trans) }}</th>
             <th></th>
         </tr>
     </thead>
@@ -34,7 +34,7 @@
     </tbody>
 </table>
 {% else %}
-{{ alerts.info('sylius.zone.no_results'|trans) }}
+{{ alerts.info('sylius.ui.there_are_no_zones_configured'|trans) }}
 {% endif %}
 
 {% endmacro %}

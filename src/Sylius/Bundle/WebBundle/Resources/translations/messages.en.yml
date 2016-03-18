@@ -1,1176 +1,740 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
     account:
-        address:
-            action:
-                billing: Set as default billing address
-                create: Create a new address
-                delete: Delete
-                edit: Edit
-                shipping: Set as default shipping address
-            create: Create a new address
-            default:
-                billing: Default billing address
-                no_billing: No default billing address
-                no_shipping: No default shipping address
-                shipping: Default shipping address
-            empty: You have no addresses defined
-            list: All your addresses
-            update: Edit my address
-        home:
-            email: Email
-            id: Customer ID
-            last5orders: Your last 5 orders
-            outline: Enjoy all the features that are available on your personal space to view, track and manage all your data
-            since: You are customer since
-            welcome: Welcome to your space
         order:
-            created_at: Placed at
-            details: Details of your order
-            download_invoice: Download the invoice
-            empty: You have placed no order yet
-            invoice: Invoice
-            list: All your orders
-            number: Number
-            payment_mode: Payment mode
-            placed_at: Placed at %at%
+            details: 'Details of your order'
+            download_invoice: 'Download the invoice'
+            empty: 'You have placed no order yet'
+            list: 'All your orders'
+            placed_at: 'Placed at %at%'
             shipment:
-                pending: Pending
-                ready: Ready since %at%
-                returned: Returned %at%
-                shipped: Shipped %at%
-            shipment_mode: Shipment mode
-            state: State
-            total: Total
-            tracking_number: Tracking number
-        title: My account
-    add_to_cart: Add to cart
-    association_type:
-        index_header: Association types
-        update_header: Edit Association type
-        create_header: Create Association type
-        name: Name
-        create: Create
-        update: Update
-    address:
-        city: City
-        company: Company
-        country: Country
-        firstname: First name
-        lastname: Last name
-        postcode: Postcode
-        province: Province
-        street: Street
-    alert:
-        error: Error
-        info: Information
-        success: Success
-        warning: Warning
+                ready: 'Ready since %at%'
+                returned: 'Returned %at%'
+                shipped: 'Shipped %at%'
+        title: 'My account'
     archetype:
-        attributes: Attributes
-        build: Build archetype
-        build_header: Building product from archetype
-        create: Create archetype
-        create_header: New archetype
-        index_header: Product archetypes
-        name: Name
-        no_results: There are no archetypes defined
-        options: Options
-        parent: Parent
-        update_header: Editing archetype
-        updated_at: Last update
-    backend:
-        alert:
-            info: Information
-        dashboard:
-            chart_order_count: Number of orders
-            chart_order_total: Order value
-            header: Administration dashboard
-            orders: Last week orders
-            revenue: Last week revenue
-            subheader: Overview of your store
-        logout: Logout
-        quick_links:
-            add_product: New product
-            customers: Customers
-            orders: Latest orders
-            products: Your products
-        statistics:
-            header: This month's statistics
-            orders_this_month: Total orders
-            registrations_this_month: Total registrations
-            sales_this_month: Sales
-    backend_welcome: Hello <b>%name%</b>
-    billing_address: Bill to
+        build: 'Build archetype'
     block:
         imagine:
-            create: Create imagine block
-            create_header: Creating a new imagine block
-            end_date: End date
-            id: Id
-            index: Imagine Blocks
-            index_header: Imagine blocks
-            label: Label
+            index: 'Imagine Blocks'
             publishable: Published
-            start_date: Start Date
-            title: Title
-            update_header: Editing imagine block
-            updated_at: Last update
-        imagine_blocks: Imagine blocks
-        index_header: Blocks
-        no_results: There are no blocks to display
         simple:
-            body: Body
-            create: Create simple block
-            create_header: Creating a new simple block
-            end_date: End date
-            id: Id
-            index: Simple blocks
-            index_header: Simple blocks
-            label: Label
+            index: 'Simple blocks'
             publishable: Published
-            start_date: Start Date
-            title: Title
-            update_header: Editing simple block
-            updated_at: Last update
-        simple_blocks: Simple blocks
         slideshow:
-            body: Body
-            create: Create slideshow block
-            create_header: Creating a new slideshow block
-            end_date: End date
-            id: Id
-            index: Slideshow Blocks
-            index_header: Slideshow blocks
+            index: 'Slideshow Blocks'
             publishable: Published
-            start_date: Start Date
-            title: Title
-            update_header: Editing slideshow block
-            updated_at: Last update
-        slideshow_blocks: Slideshow blocks
         string:
-            body: Body
-            create: Create string block
-            create_header: Creating a new string block
-            end_date: End date
-            id: Id
-            index: String blocks
-            index_header: String blocks
-            label: Label
+            index: 'String blocks'
             publishable: Published
-            start_date: Start Date
-            title: Title
-            update_header: Editing string block
-            updated_at: Last update
-        string_blocks: String blocks
-    breadcrumb:
-        archetype:
-            index: Archetypes
-        assortment: Assortment
-        attribute:
-            index: Attributes
-        block:
-            imagine:
-                index: Imagine Blocks
-            index: Blocks
-            simple:
-                index: Simple Blocks
-            slideshow:
-                index: Slideshow Blocks
-            string:
-                index: String Blocks
-        build: Build
-        channel:
-            index: Channels
-        configuration: Configuration
-        contact_request:
-            index: Contact requests
-            show: Contact request
-        contact_topic:
-            index: Contact topics
-        content: Content
-        country:
-            index: Countries
-        currency:
-            index: Currencies
-        customer:
-            index: Customers
-        dashboard: Dashboard
-        edit: Edit
-        email:
-            index: Emails
-        general_settings: General Settings
-        generate: Generate
-        group:
-            index: Groups
-        inventory:
-            index: Inventory
-        locale:
-            index: Locales
-        marketing: Marketing
-        menu:
-            index: Menus
-        menu_node:
-            index: Menu nodes
-        metadata:
-            index: Metadata
-        new: New
-        option:
-            index: Options
-        order:
-            adjustments: Adjustments
-            index: Orders
-        page:
-            index: Pages
-        payment:
-            index: Payments
-        payment_method:
-            index: Payment Methods
-        permission:
-            index: Permissions
-        product:
-            index: Products
-        association_type:
-            index: Association types
-        promotion:
-            index: Promotions
-        promotion_coupon:
-            index: Coupons
-        product_association:
-            index: Association
-        product_association_type:
-            index: Association type
-        redirect_route:
-            index: Redirect routes
-        report:
-            index: Reports
-        role:
-            index: Roles
-        review:
-            index: Reviews
-        route:
-            index: Routes
-        sales: Sales
-        section:
-            customer: Customer
-        security_settings: Security Settings
-        shipment:
-            index: Shipments
-        shipping_category:
-            index: Shipping Categories
-        shipping_method:
-            index: Shipping Methods
-        support: Support
-        tax_category:
-            index: Tax Categories
-        tax_rate:
-            index: Tax Rates
-        taxation_settings: Taxation Settings
-        taxon:
-            index: Taxons
-        update: Edit
-        zone:
-            index: Zones
-    browse_products: Browse products
-    cancel: Cancel
     cart:
-        empty: Your cart is empty
+        empty: 'Your cart is empty'
         summary:
-            add_coupon: Add coupon
-            checkout: Checkout
-            clear: Clear cart
-            grand_total: Grand total
-            product: Product
+            clear: 'Clear cart'
             quantity: Qty
-            save: Save
-            total: Total
-            unit_price: Price
-        summary_header: Cart summary
-        total_items: 1 item|%count% items
-    channel:
-        code: Code
-        create: Add channel
-        create_header: Add channel
-        created_at: Created at
-        currency_default: Default currency
-        enabled: Enabled
-        id: ID
-        index_header: Channels
-        locale_default: Default locale
-        manage: Manage channels
-        name: Name
-        no_results: There are no channels configured
-        update: Edit
-        update_header: Editing channel
-        updated_at: Last update
-        hostname: Hostname
-        theme: Theme
+        total_items: '1 item|%count% items'
     checkout:
-        addressing:
-            header: Addressing step
-        back: Back
-        credit_card:
-            header: Payment details
         finalize:
-            address:
-                city: City
-                country: Country
-                firstname: First name
-                lastname: Last name
-                postcode: Postcode
-                province: Province
-                street: Street
-            header: Order summary
             order:
-                additional_information: Additional information
-                billing_address: Billing address
-                items_total: Items total
-                no_items: This order does not contain any items
-                no_promotion: No promotion applied
-                no_shipping_charges: No shipping charges applied
-                no_taxes: No taxes applied
-                promotion_discount: Promotion discounts
-                promotion_total: Promotion total
-                shipping_address: Shipping address
-                shipping_charges: Shipping charges
-                shipping_total: Shipping total
-                tax_total: Tax total
-                taxes: Taxes
-                total: Total
+                no_items: 'This order does not contain any items'
+                no_promotion: 'No promotion applied'
+                no_shipping_charges: 'No shipping charges applied'
+                no_taxes: 'No taxes applied'
+                promotion_discount: 'Promotion discounts'
             order_item:
                 quantity: Qty
-                total: Total
-                unit_price: Unit Price
-            place_order: Place order
-            product:
-                name: Name
         forward: Continue
-        payment:
-            header: Payment method
         security:
-            existing_customer: Existing Customer
-            guest: Guest
-            header: Sign in to the store <small>or create new account</small>
-            login: Login
-            new_customer: New Customer
-            proceed_order: Proceed with your order
-            register: Register
+            proceed_order: 'Proceed with your order'
         shipping:
-            error: We're sorry, but our shop is not able to provide product shipping to country which you have chosen
-            header: Shipping method
+            error: 'We''re sorry, but our shop is not able to provide product shipping to country which you have chosen'
     confirmation:
-        message: Do you want to delete this item
-        title: Confirmation
-    contact_request:
-        create: Create contact request
-        create_header: New contact request
-        email: Email
-        firstName: First name
-        id: ID
-        index_header: Contact requests
-        lastName: Last name
-        message: Message
-        no_results: There are no contact requests to display
-        show_header: Contact request details
-        topic: Topic
-        update_header: Editing contact request
-        updated_at: Last update
-    contact_topic:
-        create: Create contact topic
-        create_header: New contact topic
-        id: ID
-        index_header: Contact topics
-        no_results: There are no contact topics to display
-        title: Title
-        update_header: Editing contact topic
-        updated_at: Last update
-    country:
-        add_province: Add province
-        create: Create country
-        create_header: New country
-        enabled: Enabled
-        id: ID
-        index_header: Countries
-        manage: Manage countries
-        name: Name
-        no_results: There are no countries configured
-        show_header: Country details
-        update_header: Editing country
-    create: Create
-    created_at: Created at
-    currency:
-        code: Code
-        create: Create currency
-        create_header: New currency
-        enabled: Enabled
-        exchange_rate: Exchange rate
-        id: ID
-        index_header: Currencies
-        name: Name
-        no_results: There are no currencies to display
-        update_header: Editing currency
-        updated_at: Last update
+        message: 'Do you want to delete this item'
     customer:
-        billing_address: Billing address
-        create: Create customer
-        create_header: New customer
-        creation_date: Creation date
-        email: Email
         filter:
-            all: Show all customers
-            registered: Show registered customers
-            unconfirmed: Show unconfirmed accounts
-        first_name: First name
-        general_info: Customer "%fullName%" general info
-        groups: Groups
-        id: ID
-        index_header: Customers <small>List of all customers in store</small>
-        last_name: Last name
-        manage: Manage customers
-        no_groups: There are no groups for this customer to display
-        no_results: There are no customers to display
-        order:
-            no_results: There are no orders for this customer to display
-        orders: Customer orders
-        recent_header: Recent customers
-        shipping_address: Shipping address
-        show_header: Customer details
-        update_header: Editing customer
-        phone_number: Phone number
-    delete: Delete
-    deleted: Deleted
-    disable: Disable
-    edit: Edit
-    email:
-        code: Code
-        create: Add new Email
-        create_header: Adding new Email
-        enabled: Enabled
-        index_header: Email Templates
-        manage: Manage Emails
-        no_results: There are no emails configured
-        subject: Subject
-        update_header: Editing Email
-        updated_at: Last update
-    emails:
-        order_comment:
-            name: Order comment
-            subject: New comment posted on order
-        order_confirmation:
-            name: Order confirmation
-            subject: Thank you for your order
-        shipment_confirmation:
-            name: Shipment confirmation
-            subject: Your order has been shipped
-        user_confirmation:
-            name: User confirmation
-            subject: Welcome to our store
-    enable: Enable
-    filter: Filter
-    form:
-        cart:
-            coupon: Coupon
-        choose_file: Choose file
-        comment:
-            comment: Comment
-            notify_customer: Notify Customer
-        frontend:
-            password:
-                confirmation: Confirmation
-                current: Current password
-                new: New password
-                title: Change your password
-            profile:
-                title: Edit your personal information
-        login:
-            email: Email
-            password: Password
-        menu:
-            add_menu_node: Add menu element
-        option_value:
-            add_value: Add value
-        profile:
-            email: Email
-            firstName: First name
-            lastName: Last name
-    gallery:
-        next: Next
-        previous: Previous
-        slideshow: Slideshow
-    gender:
-        female: Female
-        male: Male
-    generate: Generate
-    go_to_dashboard: Go to dashboard
-    group:
-        create: Create group
-        create_header: Adding new customer groups
-        id: ID
-        index_header: Groups
-        name: Name
-        no_results: There are no groups to display
-        roles: Roles
-        update_header: Edit group
-    hide_deleted: Hide deleted
+            all: 'Show all customers'
+            registered: 'Show registered customers'
+            unconfirmed: 'Show unconfirmed accounts'
+        general_info: 'Customer "%fullName%" general info'
+        no_groups: 'There are no groups for this customer to display'
     history:
-        action: Action
-        author: Author
-        data: Data
-        empty: Empty
-        header: History
-        logged_at: Logged at (version)
-        no_results: There are no logged events to display
-        revert: Revert
+        logged_at: 'Logged at (version)'
     homepage:
         splash:
-            headline: Welcome to Sylius
-            subheadline: Modern ecommerce for Symfony2
-    inventory_unit:
-        created_at: Created
-        inventory_state: Inventory state
-        name: Name
-        no_results: There are no inventory units to display
-        shipping_state: Shipping state
-        sku: SKU
-        updated_at: Last update
-    locale:
-        code: Code
-        create: Create locale
-        create_header: Adding new locale
-        enabled: Enabled
-        id: ID
-        index_header: Index of all configured locales
-        name: Name
-        no_results: There are no locales configured
-        update_header: Edit locale
-        updated_at: Last update
-    login: Login
-    login_header: Administration
-    logo: Sylius
-    manage: Manage
+            headline: 'Welcome to Sylius'
+            subheadline: 'Modern ecommerce for Symfony2'
     menu:
-        create: Create menu
-        create_header: Creating menu
-        end_date: End date
-        id: ID
-        index_header: Menus
-        no_results: There are no menus to display
         publishable: Published
-        start_date: Start date
-        title: Title
-        update_header: Editing menu
-    menu_node:
-        create: Create menu node
-        create_header: Creating menu node
-        id: ID
-        index_header: Menu nodes
-        no_results: There are no menu nodes to display
-        parent: Parent
-        title: Title
-        update_header: Editing menu node
     meta:
-        backend_title: Sylius Dashboard
-        frontend_description: Sylius is modern ecommerce solution for PHP, based on the Symfony2 framework
-        frontend_keywords: Sylius, ecommerce, symfony2, shop, cart, webshop
-        frontend_title: Sylius, modern ecommerce for Symfony2
-    metadata:
-        customize_header: Customizing metadata
-        show_header: Show metadata
-        id: ID
-        customize: Customize metadata
-        manage: Manage metadata
-        content: Content
-        index_metadata: Metadata
-        default_page:
-            group_customize: Customize default metadata
-        product:
-            single_customize: Customize metadata
-            group_customize: Customize products metadata
-        product_variant:
-            single_customize: Customize metadata
-    move_down: Move down
-    move_up: Move up
-    na: N/A
-    newest: Newest products
-    no: No
-    no_results: No results
+        backend_title: 'Sylius Dashboard'
+        frontend_description: 'Sylius is modern ecommerce solution for PHP, based on the Symfony2 framework'
+        frontend_keywords: 'Sylius, ecommerce, symfony2, shop, cart, webshop'
+        frontend_title: 'Sylius, modern ecommerce for Symfony2'
     order:
-        additional_information: Additional information
         adjustments:
-            amount: Amount
-            description: Description
-            lock: Lock
-            lock_all: Lock all adjustments
-            locked: Locked
-            manage: Manage adjustments
-            type: Type
-            unlock: Unlock
-            unlock_all: Unlock all adjustments
-        billing_address: Billing address
-        channel: Channel
+            lock_all: 'Lock all adjustments'
+            unlock_all: 'Unlock all adjustments'
         comment:
-            author: Author
-            comment: Comment
-            created_at: Created at
-            customer:
-                not_notified: Customer not notified
-                notified: Customer notified
-            header: Order comments
-            no_comment: No comment
             notify: Notification
-            state: State
-        create: Create order
-        create_header: New order
-        created_at: Creation time
-        currency: Currency
-        customer: Customer
-        details: Order details
-        general_info: General info
-        guest: Guest customer
-        id: ID
-        immutable_warning: Already shipped orders are immutable
-        index_header: Current orders
-        inventory_tracking: Inventory tracking
-        inventory_unit:
-            backorder: Backorder
-            fulfill: Fulfill
-            return: Return
-        items: Items
-        items_total: Items total
-        manage: Manage orders
-        no_items: This order does not contain any items
-        no_promotion: No coupons were used
-        no_results: You have no new orders
-        no_shipments: There are no shipments for this order
-        no_shipping_charges: No shipping charges applied
-        no_taxes: No taxes applied
-        number: Number
-        order_state: Order state
-        payment: Payment
-        payment_state: Payment state
-        payment_states:
-            balance_due: Balance due
-        promotion_coupons: Coupons
-        promotion_total: Promotion total
-        recent_header: Recent orders
-        release_inventory: Release inventory
-        shipment_state: Shipment state
-        shipment_states:
-            pending: Pending
-        shipments: Shipments
-        shipping_address: Shipping address
-        shipping_charges: Shipping charges
-        shipping_total: Shipping total
-        show_header: Order #%number%
+        guest: 'Guest customer'
+        immutable_warning: 'Already shipped orders are immutable'
+        no_items: 'This order does not contain any items'
+        no_promotion: 'No coupons were used'
+        no_shipments: 'There are no shipments for this order'
+        no_shipping_charges: 'No shipping charges applied'
+        no_taxes: 'No taxes applied'
         state:
-            abandoned: Abandoned
-            cancelled: Cancelled
-            cart_locked: Cart locked
-            checkout: Checkout
-            order_confimed: Order confirmed
-            ordered: Ordered
-            returned: Returned
-            shipped: Shipped
-        tax_total: Tax total
-        taxes: Taxes
-        total: Total
-        update_header: Editing order
-    review:
-        create: New review
-        index: Product reviews
-        manage: Manage reviews
-        no_reviews: There are no reviews.
-        id: ID
-        subject: Subject
-        title: Title
-        status: Status
-        rating: Rating
-        author: Author
-        guest: Guest
-        created_at: Created at
-        details: Review details
-        editing: Editing review
-        header: Product reviews
-        product_review: Product review
-        no_results: There are no reviews for this product.
+            order_confimed: 'Order confirmed'
     order_item:
-        product: Item
         quantity: Qty
         sellable: Product
-        total: Total
-        unit_price: Unit price
-    out_of_stock: Out of stock
     page:
-        body: Body
-        create: Create new page
-        create_header: Creating new page
-        end_date: End date
-        id: ID
-        index_header: Pages
-        no_results: There are no pages to display
-        no_route: Your content will not appear in frontend if no route is defined
+        no_route: 'Your content will not appear in frontend if no route is defined'
         publishable: Published
-        routes: Routes
-        start_date: Start Date
-        title: Title
-        update_header: Editing page
-    password: Password
     payment:
-        amount: Amount
-        create: Create payment
-        create_header: New payment
-        created_at: Created at
-        id: ID
-        index_header: Payments
-        manage: Manage payments
-        method: Method
-        no_results: There are no payments configured
-        order: Order
-        state:
-            cancelled: Cancelled
-            checkout: Checkout
-            completed: Completed
-            failed: Failed
-            header: State
-            new: New
-            pending: Pending
-            processing: Processing
-            refunded: Refunded
-            unknown: Unknown
-            void: Void
         transition:
-            complete: complete
             cancel: cancel
+            complete: complete
             refund: refund
-        update_header: Editing payment
-        updated_at: Last update
-    payment_method:
-        create: Create payment method
-        create_header: New payment method
-        enabled: Is enabled
-        gateway: Gateway
-        id: ID
-        index_header: Payment methods
-        name: Name
-        no_results: There are no payment methods configured
-        update_header: Editing payment method
-        updated_at: Last update
-    permission:
-        code: Code
-        create: Add new permission
-        create_header: New permission
-        description: Description
-        id: ID
-        index_header: Permissions
-        no_results: There are no permissions defined
-        update_header: Editing permission
-        updated_at: Last update
     pricing:
         volume_based:
-            button:
-                add: Add
-            max: Max Volume
-            min: Min Volume
-            no_results: No pricing configuration
-            price: Price
-    product:
-        add_attribute: Add attribute
-        archetype: Archetype
-        attributes: Attributes
-        association: Association
-        available_on: Available on
-        available_on_demand: Available on demand
-        available_until: Available until
-        categorization: Categorization
-        contain_variants: Contain Variants
-        create: Create product
-        create_header: New product
-        description: Description
-        generate_variants: Generate variants
-        index_by_taxon_header: Products <small>Categorized under "%taxon%" taxon</small>
-        index_header: Products <small>Index of all products in your store</small>
-        main_taxon: Main taxon
-        manage: Manage products
-        name: Name
-        no_attributes: This product has no attributes defined
-        no_description: <i>No description...</i>
-        no_images: There are no images for this product
-        no_options: There are no options for this product
-        no_results: There are no products to display
-        no_shipping_category: No shipping category
-        no_short_description: <i>No short description</i>
-        no_sku: No SKU
-        no_tax_category: No tax category
-        no_taxon: There is no main taxon for this product
-        no_taxons: There are no taxons for this product
-        options: Options
-        original_price: Original price
-        price: Retail price
-        attributes: Attributes
-        rating: Rating
-        restricted_zone: Restricted zone
-        remove_attribute: Remove attribute
-        restricted_zone: Restricted zone
-        shipping_category: Shipping category
-        show: View more
-        show_header: Product details <small>Viewing product "<strong>%product%</strong>"</small>
-        show_in_store: Show in store
-        sku: SKU
-        stock: Current stock
-        tabs:
-            attributes: Attributes
-            associations: Associations
-            categorization: Categorization
-            channels: Channels
-            images: Images
-            options: Options
-            pricing: Pricing
-            product: Product
-        tax_category: Tax category
-        unavailable: Unavailable
-        update_header: Editing product
-        updated_at: Last update
-        variant_selection_method: Variant selection method
-        variants: Variants
-        view_details: View %product% details
-        volume_based:
-            price: Price
-            qty_max: Qty max
-            qty_min: Qty min
-        volume_price: Volume based pricing
-    product_attribute:
-        add_choice: Add choice
-        code: Code
-        create: Create product attribute
-        create_header: New product attribute
-        index_header: Product attributes
-        manage: Manage attributes
-        name: Name
-        no_results: There are no attributes configured
-        type: Type
-        update_header: Editing attribute
-        updated_at: Last update
-    product_association:
-        code: Code
-        create: Create product association
-        create_header: New product
-        index_header: Product attributes
-        manage: Manage attributes
-        name: Name
-        no_results: There are no attributes configured
-        type: Type
-        update_header: Editing attribute
-        updated_at: Last update
-    product_not_available_in_zone: Not available in your country
-    product_option:
-        create: Create option
-        create_header: New product option
-        index_header: Product options
-        manage: Manage options
-        name: Name
-        no_results: There are no options configured
-        presentation: Presentation
-        update_header: Editing option
-        updated_at: Last update
-        values: Values
-    promotion:
-        actions: Actions
-        add_action: Add action
-        add_rule: Add rule
-        coupon_based: Coupon based
-        create: Create promotion
-        create_header: New promotion
-        created_at: Created at
-        description: Description
-        ends_at: Ends at
-        exclusive: Exclusive
-        general_info: General Info
-        id: ID
-        index_header: Current promotions
-        manage: Manage promotions
-        name: Name
-        no_results: There are no promotions configured
-        priority: Priority
-        rules: Rules
-        show_header: Promotion details
-        starts_at: Starts at
-        update_header: Editing promotion
-        updated_at: Last update
-        usage_limit: Usage limit
-        used: Used
-    promotion_action:
-        configuration: Configuration
-        type: Type
+            max: 'Max Volume'
+            min: 'Min Volume'
     promotion_coupon:
-        code: Code
-        create: Add coupon
-        create_header: Create new coupon
-        expires_at: Expires at
-        generate: Generate coupons
-        generate_header: Generating coupons
-        index: List coupons
-        index_header: Coupons
-        no_results: There are no coupon to display
-        total_results: Total: %total%
-        update_header: Editing coupon
-    promotion_rule:
-        configuration: Configuration
-        type: Type
-    province:
-        provinces: Provinces
-    redirect_route:
-        create: Create redirect route
-        create_header: Creating redirect route
-        id: ID
-        index_header: Redirect route
-        no_results: There are no redirect routes to display
-        title: Title
-        update_header: Editing redirect route
-    remember_me: Remember me
+        generate: 'Generate coupons'
+        index: 'List coupons'
+        total_results: 'Total: %total%'
     report:
-        code: Code
-        create: Create report
-        create_header: Create new report
-        data_fetcher: Data fetcher type
-        description: Description
-        details: Details
-        id: Id
-        index_header: Reports
-        manage: Manage
-        name: Name
-        no_data: There is no data to display
-        no_report: There is no report to display
-        no_results: There are no reports created
-        renderer: Renderer type
-        show_header: Report details
-        update_header: Edit report
-    restore: Restore
-    role:
-        code: Code
-        create: Add new role
-        create_header: New role
-        description: Description
-        id: ID
-        index_header: Roles
-        name: Name
-        no_results: There are no roles defined
-        update_header: Editing role
-        updated_at: Last update
-    route:
-        create: Create route
-        create_header: Creating route
-        id: ID
-        index_header: Routes
-        name: Name
-        no_results: There are no routes to display
-        page: Page
-        title: Title
-        update_header: Editing route
-        view: View
-    save_changes: Save changes
-    search: Search
+        data_fetcher: 'Data fetcher type'
+        no_data: 'There is no data to display'
+        no_report: 'There is no report to display'
+        renderer: 'Renderer type'
+    review:
+        no_results: 'There are no reviews for this product.'
+        no_reviews: 'There are no reviews.'
     security:
         login:
-            button: Login
-            forgot_password: Forgot password
-            header: Login <small>Sylius store</small>
-            info: Please login using <b>"sylius@example.com"</b> email and <b>"sylius"</b> as password. <small>Mr. Sylius Demo Guide</small>
-            no_account: No account yet
-    settings:
-        general_header: General settings
-        security_header: Security settings
-        taxation_header: Taxation settings
+            info: 'Please login using <b>"sylius@example.com"</b> email and <b>"sylius"</b> as password. <small>Mr. Sylius Demo Guide</small>'
+            no_account: 'No account yet'
     shipment:
-        created_at: Created at
+        no_items: 'There are no items to display'
+        transition:
+            backorder: backorder
+            cancel: cancel
+            prepare: prepare
+            release: release
+            return: return
+            ship: ship
+        update: Edit
+    stockable:
+        on_hand: 'Stock level'
+    taxon:
+        image: 'Choose image'
+        no_image: 'There is no image for this taxon'
+    ui:
+        abandoned: Abandoned
+        access_token: 'Access Token'
+        account_panel_outline: 'Enjoy all the features that are available on your personal space to view, track and manage all your data'
+        action: Action
+        actions: Actions
+        add: Add
+        add_action: 'Add action'
+        add_association: 'Add association'
+        add_attribute: 'Add attribute'
+        add_channel: 'Add channel'
+        add_choice: 'Add choice'
+        add_coupon: 'Add coupon'
+        add_image: 'Add image'
+        add_member: 'Add member'
+        add_menu_element: 'Add menu element'
+        add_new_email: 'Add new Email'
+        add_new_permission: 'Add new permission'
+        add_new_role: 'Add new role'
+        add_province: 'Add province'
+        add_rule: 'Add rule'
+        add_to_cart: 'Add to cart'
+        add_value: 'Add value'
+        adding_new_customer_groups: 'Adding new customer groups'
+        adding_new_email: 'Adding new Email'
+        adding_new_locale: 'Adding new locale'
+        additional_information: 'Additional information'
+        addressing_step: 'Addressing step'
+        adjustments: Adjustments
+        administration: Administration
+        administration_dashboard: 'Administration dashboard'
+        all_your_addresses: 'All your addresses'
+        amount: Amount
+        archetype: Archetype
+        archetypes: Archetypes
+        association: Association
+        association_types: 'Association types'
+        associations: Associations
+        assortment: Assortment
+        attributes: Attributes
+        author: Author
+        availability: Availability
+        available_on: 'Available on'
+        available_on_demand: 'Available on demand'
+        available_until: 'Available until'
+        back: Back
+        backorder: Backorder
+        balance_due: 'Balance due'
+        bill_to: 'Bill to'
+        billing_address: 'Billing address'
+        blocks: Blocks
+        body: Body
+        browse_products: 'Browse products'
+        build: Build
+        building_product_from_archetype: 'Building product from archetype'
+        calculator: Calculator
+        cancel: Cancel
+        cancelled: Cancelled
+        cart_locked: 'Cart locked'
+        cart_summary: 'Cart summary'
+        categorization: Categorization
+        category: Category
+        change_password: 'Change your password'
+        change_your_password: 'Change your password'
+        channel: Channel
+        channels: Channels
+        checkout: Checkout
+        choose_file: 'Choose file'
+        city: City
+        code: Code
+        comment: Comment
+        company: Company
+        completed: Completed
+        configuration: Configuration
+        confirmation: Confirmation
+        confirmation_title: Confirmation
+        confirmed: Confirmed
+        contact_request_details: 'Contact request details'
+        contact_request_show: 'Contact request'
+        contact_requests: 'Contact requests'
+        contact_topics: 'Contact topics'
+        contain_variants: 'Contain Variants'
+        content: Content
+        countries: Countries
+        country: Country
+        country_details: 'Country details'
+        coupon: Coupon
+        coupon_based: 'Coupon based'
+        coupons: Coupons
+        create: Create
+        create_a_new_address: 'Create a new address'
+        create_archetype: 'Create archetype'
+        create_association_type: 'Create Association type'
+        create_contact_request: 'Create contact request'
+        create_contact_topic: 'Create contact topic'
+        create_country: 'Create country'
+        create_currency: 'Create currency'
+        create_customer: 'Create customer'
+        create_group: 'Create group'
+        create_imagine_block: 'Create imagine block'
+        create_locale: 'Create locale'
+        create_menu: 'Create menu'
+        create_menu_node: 'Create menu node'
+        create_new_coupon: 'Create new coupon'
+        create_new_page: 'Create new page'
+        create_new_report: 'Create new report'
+        create_option: 'Create option'
+        create_order: 'Create order'
+        create_payment: 'Create payment'
+        create_payment_method: 'Create payment method'
+        create_product: 'Create product'
+        create_product_association: 'Create product association'
+        create_product_association_type: 'Create product association type'
+        create_product_attribute: 'Create product attribute'
+        create_promotion: 'Create promotion'
+        create_redirect_route: 'Create redirect route'
+        create_report: 'Create report'
+        create_route: 'Create route'
+        create_shipping_category: 'Create shipping category'
+        create_shipping_method: 'Create shipping method'
+        create_simple_block: 'Create simple block'
+        create_slideshow_block: 'Create slideshow block'
+        create_string_block: 'Create string block'
+        create_tax_category: 'Create tax category'
+        create_tax_rate: 'Create tax rate'
+        create_taxon: 'Create taxon'
+        create_user: 'Create user'
+        create_variant: 'Create variant'
+        create_zone: 'Create zone'
+        created_at: 'Created at'
+        creating_a_new_imagine_block: 'Creating a new imagine block'
+        creating_a_new_simple_block: 'Creating a new simple block'
+        creating_a_new_slideshow_block: 'Creating a new slideshow block'
+        creating_a_new_string_block: 'Creating a new string block'
+        creating_menu: 'Creating menu'
+        creating_menu_node: 'Creating menu node'
+        creating_new_page: 'Creating new page'
+        creating_redirect_route: 'Creating redirect route'
+        creating_route: 'Creating route'
+        creation_date: 'Creation date'
+        creation_time: 'Creation time'
+        currencies: Currencies
+        currency: Currency
+        current_orders: 'Current orders'
+        current_password: 'Current password'
+        current_promotions: 'Current promotions'
+        current_stock: 'Current stock'
+        customer: Customer
+        customer_details: 'Customer details'
+        customer_id: 'Customer ID'
+        customer_not_notified: 'Customer not notified'
+        customer_notified: 'Customer notified'
+        customer_orders: 'Customer orders'
+        customer_since: 'You are a customer since'
+        customers: Customers
+        customers_list_of_all_customers_in_store: 'Customers <small>List of all customers in store</small>'
+        customize_default_metadata: 'Customize default metadata'
+        customize_metadata: 'Customize metadata'
+        customize_products_metadata: 'Customize products metadata'
+        customizing_metadata: 'Customizing metadata'
+        dashboard: Dashboard
+        data: Data
+        default_billing_address: 'Default billing address'
+        default_currency: 'Default currency'
+        default_locale: 'Default locale'
+        default_shipping_address: 'Default shipping address'
+        delete: Delete
+        delete_image: 'Delete image'
+        deleted: Deleted
+        description: Description
+        details: Details
+        disable: Disable
+        edit: Edit
+        edit_association_type: 'Edit Association type'
+        edit_group: 'Edit group'
+        edit_locale: 'Edit locale'
+        edit_my_address: 'Edit my address'
+        edit_report: 'Edit report'
+        edit_your_personal_information: 'Edit your personal information'
+        editing_archetype: 'Editing archetype'
+        editing_attribute: 'Editing attribute'
+        editing_channel: 'Editing channel'
+        editing_contact_request: 'Editing contact request'
+        editing_contact_topic: 'Editing contact topic'
+        editing_country: 'Editing country'
+        editing_coupon: 'Editing coupon'
+        editing_currency: 'Editing currency'
+        editing_customer: 'Editing customer'
+        editing_email: 'Editing Email'
+        editing_imagine_block: 'Editing imagine block'
+        editing_menu: 'Editing menu'
+        editing_menu_node: 'Editing menu node'
+        editing_option: 'Editing option'
+        editing_order: 'Editing order'
+        editing_page: 'Editing page'
+        editing_payment: 'Editing payment'
+        editing_payment_method: 'Editing payment method'
+        editing_permission: 'Editing permission'
+        editing_product: 'Editing product'
+        editing_promotion: 'Editing promotion'
+        editing_redirect_route: 'Editing redirect route'
+        editing_review: 'Editing review'
+        editing_role: 'Editing role'
+        editing_route: 'Editing route'
+        editing_shipment: 'Editing shipment'
+        editing_shipping_category: 'Editing shipping category'
+        editing_shipping_method: 'Editing shipping method'
+        editing_simple_block: 'Editing simple block'
+        editing_slideshow_block: 'Editing slideshow block'
+        editing_string_block: 'Editing string block'
+        editing_tax_category: 'Editing tax category'
+        editing_taxon: 'Editing taxon'
+        editing_user: 'Editing user'
+        editing_variant: 'Editing variant'
+        editing_zone: 'Editing zone'
+        email: Email
+        email_templates: 'Email Templates'
+        emails: Emails
+        empty: Empty
+        enable: Enable
+        enabled: Enabled
+        end_date: 'End date'
+        ends_at: 'Ends at'
+        enjoy_all_the_features_that_are_available_on_your_personal_space_to_view_track_and_manage_all_your_data: 'Enjoy all the features that are available on your personal space to view, track and manage all your data'
+        error: Error
+        exchange_rate: 'Exchange rate'
+        exclusive: Exclusive
+        existing_customer: 'Existing Customer'
+        expires_at: 'Expires at'
+        failed: Failed
+        female: Female
+        filter: Filter
+        first_name: 'First name'
+        firstname: 'First name'
+        forgot_password: 'Forgot password'
+        fulfill: Fulfill
+        gateway: Gateway
+        general_info: 'General Info'
+        general_settings: 'General Settings'
+        generate: Generate
+        generate_variants: 'Generate variants'
+        generating_coupons: 'Generating coupons'
+        go_to_dashboard: 'Go to dashboard'
+        grand_total: 'Grand total'
+        groups: Groups
+        guest: Guest
+        hello_name: 'Hello <b>%name%</b>'
+        hide_deleted: 'Hide deleted'
+        hostname: Hostname
         id: ID
-        index_header: Shipments
-        inventory_state: Inventory state
-        manage: Manage shipments
+        identifier: Identifier
+        images: Images
+        imagine_blocks: 'Imagine blocks'
+        included_in_price: 'Included in price'
+        index_metadata: Metadata
+        index_of_all_configured_locales: 'Index of all configured locales'
+        information: Information
+        inventory_here_you_can_see_current_stock_levels: 'Inventory <small>Here you can see current stock levels</small>'
+        inventory_index: Inventory
+        inventory_state: 'Inventory state'
+        inventory_tracking: 'Inventory tracking'
+        invoice: Invoice
+        is_enabled: 'Is enabled'
+        items: Items
+        items_total: 'Items total'
+        label: Label
+        last_login: 'Last login'
+        last_name: 'Last name'
+        last_update: 'Last update'
+        last_week_orders: 'Last week orders'
+        last_week_revenue: 'Last week revenue'
+        lastname: 'Last name'
+        latest_orders: 'Latest orders'
+        links: Links
+        locales: Locales
+        lock: Lock
+        locked: Locked
+        logged_in_as: 'Logged in as %username%'
+        login: Login
+        login_button: Login
+        login_sylius_store: 'Login <small>Sylius store</small>'
+        logout: Logout
+        main_taxon: 'Main taxon'
+        male: Male
+        manage: Manage
+        manage_adjustments: 'Manage adjustments'
+        manage_attributes: 'Manage attributes'
+        manage_channels: 'Manage channels'
+        manage_countries: 'Manage countries'
+        manage_customers: 'Manage customers'
+        manage_emails: 'Manage Emails'
+        manage_metadata: 'Manage metadata'
+        manage_options: 'Manage options'
+        manage_orders: 'Manage orders'
+        manage_payments: 'Manage payments'
+        manage_products: 'Manage products'
+        manage_promotions: 'Manage promotions'
+        manage_reviews: 'Manage reviews'
+        manage_shipments: 'Manage shipments'
+        manage_shipping_categories: 'Manage shipping categories'
+        manage_shipping_methods: 'Manage shipping methods'
+        manage_tax_categories: 'Manage tax categories'
+        manage_tax_rates: 'Manage tax rates'
+        manage_users: 'Manage users'
+        manage_zones: 'Manage zones'
+        marketing: Marketing
+        members: Members
+        menu_nodes: 'Menu nodes'
+        menus: Menus
+        message: Message
+        metadata_index: Metadata
         method: Method
         modified: Modified
+        move_down: 'Move down'
+        move_up: 'Move up'
+        n_a: N/A
         name: Name
-        no_items: There are no items to display
-        no_results: There are no shipments to display
-        order: Order
-        ship: Ship
-        show_header: Shipment details
-        sku: SKU
-        state: State
-        tracking_code: Tracking Code
-        transition:
-            release: release
-            backorder: backorder
-            prepare: prepare
-            ship: ship
-            cancel: cancel
-            return: return
-        update: Edit
-        update_header: Editing shipment
-        updated_at: Last update
-    shipment_category:
-        manage: Manage shipping categories
-    shipping_address: Shipping address
-    shipping_category:
-        create: Create shipping category
-        create_header: New shipping category
-        id: ID
-        index_header: Shipping categories
-        manage: Manage shipping categories
-        name: Name
-        no_results: There are no shipping categories configured
-        update_header: Editing shipping category
-        updated_at: Last update
-    shipping_method:
-        calculator: Calculator
-        category: Category
-        create: Create shipping method
-        create_header: New shipping method
-        enabled: Enabled
-        id: ID
-        index_header: Shipping methods
-        manage: Manage shipping methods
-        name: Name
-        no_results: There are no shipping methods configured
-        show_header: Shipping method details
-        update_header: Editing shipping method
-        updated_at: Last update
-        zone: Zone
-    shop_by: Shop by
-    show: Details
-    show_all: Show all
-    show_deleted: Show deleted
-    stockable:
-        index_header: Inventory <small>Here you can see current stock levels</small>
-        name: Name
-        no_results: There are no inventory items to display
-        on_hand: Stock level
-        on_hold: On hold
-        sku: Sku
-        updated_at: Last update
-    tax_category:
-        create: Create tax category
-        create_header: New tax category
-        description: Description
-        id: ID
-        index_header: Taxation categories
-        manage: Manage tax categories
-        name: Name
-        no_description: No description
-        no_results: There are no tax categories configured
-        update_header: Editing tax category
-        updated_at: Last update
-    tax_rate:
-        amount: Amount
-        calculator: Calculator
-        category: Category
-        create: Create tax rate
-        create_header: New tax rate
-        included_in_price: Included in price
-        index_header: Tax rates
-        manage: Manage tax rates
-        name: Name
-        no_results: There are no tax rates configured
-        show_header: Tax rate details
-        update_header: Updating tax rate
-        updated_at: Last update
-        zone: Zone
-    taxon:
-        index_header: Taxons
-        create: Create taxon
-        create_header: New taxon
-        image: Choose image
-        name: Name
-        no_image: There is no image for this taxon
-        no_results: There are no taxons to display
-        product_index_header: Products categorized as "%name%"
-        update_header: Editing taxon
-    total_quantity: Total Qty
-    ui:
-        account_panel_outline: Enjoy all the features that are available on your personal space to view, track and manage all your data
-        change_password: Change your password
-        code: Code
-        customer:
-            id: Customer ID
-        customer_since: You are a customer since
-        email: Email
-        forgot_password: Forgot password
-        links: Links
-        logged_in_as: Logged in as %username%
-        login: Login
-        logout: Logout
-        no_account: No account yet
-        password:
-            reset:
-                button: Reset
-                header: Reset password
-        profile: Profile
-        register: Register
-        reset: Reset
-        reset_password: Reset password
-        welcome: Welcome
-        add_association: Add association
-        product_associations: Product associations
-        create_product_association: Create product association
-        product_association_types: Product association types
-        create_product_association_type: Create product association type
-        update_product_association_type: Update product association type
-        no_association_types_to_display: There are no association types defined
-        name: Name
-        id: Id
-    unknown: Unknown
-    user:
-        create: Create user
-        create_header: New user
-        enabled: Confirmed
-        general_info: User "%username%" general info
-        id: ID
-        impersonate: Log in as this user
-        index_header: Users <small>List of all users registered in store</small>
-        last_login: Last login
-        manage: Manage users
-        no_results: There are no users to display
-        oauth:
-            access_token: Access Token
-            identifier: Identifier
-            none: No OAuth accounts connected
-            provider: OAuth Provider
-        recent_header: Recent users
-        register:
-            button: Register
-            header: Registration <small>Create an account in store</small>
-        registration_date: Registration date
-        show_header: User details
-        update_header: Editing user
-        username: Username
-    variant:
-        add_image: Add image
-        availability: Availability
-        available_on_demand: Available on demand
-        create: Create variant
-        create_header: New product variant
-        delete_image: Delete image
-        last_update: Last update
-        no_results: There are no variants to display
+        new: New
+        new_archetype: 'New archetype'
+        new_comment_posted_on_order: 'New comment posted on order'
+        new_contact_request: 'New contact request'
+        new_contact_topic: 'New contact topic'
+        new_country: 'New country'
+        new_currency: 'New currency'
+        new_customer: 'New Customer'
+        new_order: 'New order'
+        new_password: 'New password'
+        new_payment: 'New payment'
+        new_payment_method: 'New payment method'
+        new_permission: 'New permission'
+        new_product: 'New product'
+        new_product_attribute: 'New product attribute'
+        new_product_option: 'New product option'
+        new_product_variant: 'New product variant'
+        new_promotion: 'New promotion'
+        new_review: 'New review'
+        new_role: 'New role'
+        new_shipping_category: 'New shipping category'
+        new_shipping_method: 'New shipping method'
+        new_tax_category: 'New tax category'
+        new_tax_rate: 'New tax rate'
+        new_taxon: 'New taxon'
+        new_user: 'New user'
+        new_zone: 'New zone'
+        newest_products: 'Newest products'
+        next: Next
+        'no': 'No'
+        no_account: 'No account yet'
+        no_association_types_to_display: 'There are no association types defined'
+        no_comment: 'No comment'
+        no_default_billing_address: 'No default billing address'
+        no_default_shipping_address: 'No default shipping address'
+        no_description: 'No description'
+        no_pricing_configuration: 'No pricing configuration'
+        no_results: 'No results'
+        no_shipping_category: 'No shipping category'
+        no_short_description: '<i>No short description</i>'
+        no_sku: 'No SKU'
+        no_tax_category: 'No tax category'
+        not_available_in_your_country: 'Not available in your country'
+        notify_customer: 'Notify Customer'
+        number: Number
+        number_of_orders: 'Number of orders'
+        oauth_provider: 'OAuth Provider'
+        on_hold: 'On hold'
         options: Options
-        original_price: Original price
+        order: Order
+        order_comment_name: 'Order comment'
+        order_comments: 'Order comments'
+        order_confirmation_name: 'Order confirmation'
+        order_details: 'Order details'
+        order_item_product: Item
+        order_state: 'Order state'
+        order_summary: 'Order summary'
+        order_value: 'Order value'
+        ordered: Ordered
+        orders: Orders
+        original_price: 'Original price'
+        out_of_stock: 'Out of stock'
+        overview_of_your_store: 'Overview of your store'
+        page: Page
+        pages: Pages
+        parent: Parent
+        password: Password
+        payment: Payment
+        payment_details: 'Payment details'
+        payment_method: 'Payment method'
+        payment_methods: 'Payment Methods'
+        payment_mode: 'Payment mode'
+        payment_state: 'Payment state'
+        payments: Payments
+        pending: Pending
+        permissions: Permissions
+        phone_number: 'Phone number'
+        place_order: 'Place order'
+        placed_at: 'Placed at'
+        postcode: Postcode
+        presentation: Presentation
+        previous: Previous
         price: Price
-        sku: SKU
-        stock: Current stock
-        update_header: Editing variant
-    yes: Yes
-    zone:
-        add_member: Add member
-        create: Create zone
-        create_header: New zone
-        index_header: Zones
-        manage: Manage zones
-        name: Name
-        no_results: There are no zones configured
+        pricing: Pricing
+        priority: Priority
+        processing: Processing
+        product: Product
+        product_archetypes: 'Product archetypes'
+        product_association_index: Association
+        product_association_type_index: 'Association type'
+        product_association_types: 'Product association types'
+        product_associations: 'Product associations'
+        product_attributes: 'Product attributes'
+        product_details_viewing_product_product: 'Product details <small>Viewing product "<strong>%product%</strong>"</small>'
+        product_options: 'Product options'
+        product_review: 'Product review'
+        product_reviews: 'Product reviews'
+        products: Products
+        products_categorized_as_name: 'Products categorized as "%name%"'
+        products_categorized_under_taxon_taxon: 'Products <small>Categorized under "%taxon%" taxon</small>'
+        products_index_of_all_products_in_your_store: 'Products <small>Index of all products in your store</small>'
+        profile: Profile
+        promotion_coupons: Coupons
+        promotion_details: 'Promotion details'
+        promotion_total: 'Promotion total'
+        promotions: Promotions
+        province: Province
+        provinces: Provinces
+        qty_max: 'Qty max'
+        qty_min: 'Qty min'
+        rating: Rating
+        recent_customers: 'Recent customers'
+        recent_orders: 'Recent orders'
+        recent_users: 'Recent users'
+        redirect_routes: 'Redirect routes'
+        refunded: Refunded
+        register: Register
+        register_button: Register
+        registration_create_an_account_in_store: 'Registration <small>Create an account in store</small>'
+        registration_date: 'Registration date'
+        release_inventory: 'Release inventory'
+        remember_me: 'Remember me'
+        remove_attribute: 'Remove attribute'
+        report_details: 'Report details'
+        reports: Reports
+        reset: Reset
+        reset_button: Reset
+        reset_password: 'Reset password'
+        restore: Restore
+        restricted_zone: 'Restricted zone'
+        retail_price: 'Retail price'
+        return: Return
+        returned: Returned
+        revert: Revert
+        review_details: 'Review details'
+        reviews: Reviews
+        roles: Roles
+        routes: Routes
+        rules: Rules
+        sales: Sales
+        sales_this_month: Sales
+        save: Save
+        save_changes: 'Save changes'
         scope: Scope
-        show_header: Zone details
+        search: Search
+        security_settings: 'Security Settings'
+        set_as_default_billing_address: 'Set as default billing address'
+        set_as_default_shipping_address: 'Set as default shipping address'
+        ship: Ship
+        shipment_confirmation_name: 'Shipment confirmation'
+        shipment_details: 'Shipment details'
+        shipment_mode: 'Shipment mode'
+        shipment_state: 'Shipment state'
+        shipments: Shipments
+        shipped: Shipped
+        shipping_address: 'Shipping address'
+        shipping_categories: 'Shipping Categories'
+        shipping_category: 'Shipping category'
+        shipping_charges: 'Shipping charges'
+        shipping_method: 'Shipping method'
+        shipping_method_details: 'Shipping method details'
+        shipping_methods: 'Shipping Methods'
+        shipping_state: 'Shipping state'
+        shipping_total: 'Shipping total'
+        shop_by: 'Shop by'
+        show_all: 'Show all'
+        show_deleted: 'Show deleted'
+        show_in_store: 'Show in store'
+        show_metadata: 'Show metadata'
+        sign_in_to_the_store_or_create_new_account: 'Sign in to the store <small>or create new account</small>'
+        simple_blocks: 'Simple blocks'
+        sku: SKU
+        slideshow: Slideshow
+        slideshow_blocks: 'Slideshow blocks'
+        start_date: 'Start Date'
+        starts_at: 'Starts at'
+        state: State
+        status: Status
+        street: Street
+        string_blocks: 'String blocks'
+        subject: Subject
+        success: Success
+        support: Support
+        sylius_logo: Sylius
+        tax_categories: 'Tax Categories'
+        tax_category: 'Tax category'
+        tax_rate_details: 'Tax rate details'
+        tax_rates: 'Tax Rates'
+        tax_total: 'Tax total'
+        taxation_categories: 'Taxation categories'
+        taxation_settings: 'Taxation Settings'
+        taxes: Taxes
+        taxons: Taxons
+        thank_you_for_your_order: 'Thank you for your order'
+        theme: Theme
+        there_are_no_archetypes_defined: 'There are no archetypes defined'
+        there_are_no_attributes_configured: 'There are no attributes configured'
+        there_are_no_blocks_to_display: 'There are no blocks to display'
+        there_are_no_channels_configured: 'There are no channels configured'
+        there_are_no_contact_requests_to_display: 'There are no contact requests to display'
+        there_are_no_contact_topics_to_display: 'There are no contact topics to display'
+        there_are_no_countries_configured: 'There are no countries configured'
+        there_are_no_coupon_to_display: 'There are no coupon to display'
+        there_are_no_currencies_to_display: 'There are no currencies to display'
+        there_are_no_customers_to_display: 'There are no customers to display'
+        there_are_no_emails_configured: 'There are no emails configured'
+        there_are_no_groups_to_display: 'There are no groups to display'
+        there_are_no_images_for_this_product: 'There are no images for this product'
+        there_are_no_inventory_items_to_display: 'There are no inventory items to display'
+        there_are_no_inventory_units_to_display: 'There are no inventory units to display'
+        there_are_no_locales_configured: 'There are no locales configured'
+        there_are_no_logged_events_to_display: 'There are no logged events to display'
+        there_are_no_menu_nodes_to_display: 'There are no menu nodes to display'
+        there_are_no_menus_to_display: 'There are no menus to display'
+        there_are_no_options_configured: 'There are no options configured'
+        there_are_no_options_for_this_product: 'There are no options for this product'
+        there_are_no_orders_for_this_customer_to_display: 'There are no orders for this customer to display'
+        there_are_no_pages_to_display: 'There are no pages to display'
+        there_are_no_payment_methods_configured: 'There are no payment methods configured'
+        there_are_no_payments_configured: 'There are no payments configured'
+        there_are_no_permissions_defined: 'There are no permissions defined'
+        there_are_no_products_to_display: 'There are no products to display'
+        there_are_no_promotions_configured: 'There are no promotions configured'
+        there_are_no_redirect_routes_to_display: 'There are no redirect routes to display'
+        there_are_no_reports_created: 'There are no reports created'
+        there_are_no_roles_defined: 'There are no roles defined'
+        there_are_no_routes_to_display: 'There are no routes to display'
+        there_are_no_shipments_to_display: 'There are no shipments to display'
+        there_are_no_shipping_categories_configured: 'There are no shipping categories configured'
+        there_are_no_shipping_methods_configured: 'There are no shipping methods configured'
+        there_are_no_tax_categories_configured: 'There are no tax categories configured'
+        there_are_no_tax_rates_configured: 'There are no tax rates configured'
+        there_are_no_taxons_for_this_product: 'There are no taxons for this product'
+        there_are_no_taxons_to_display: 'There are no taxons to display'
+        there_are_no_users_to_display: 'There are no users to display'
+        there_are_no_variants_to_display: 'There are no variants to display'
+        there_are_no_zones_configured: 'There are no zones configured'
+        there_is_no_main_taxon_for_this_product: 'There is no main taxon for this product'
+        this_months_statistics: 'This month''s statistics'
+        this_product_has_no_attributes_defined: 'This product has no attributes defined'
+        title: Title
+        topic: Topic
+        total: Total
+        total_orders: 'Total orders'
+        total_qty: 'Total Qty'
+        total_registrations: 'Total registrations'
+        tracking_code: 'Tracking Code'
+        tracking_number: 'Tracking number'
         type: Type
-        update_header: Editing zone
-    zone_member:
-        members: Members
+        unavailable: Unavailable
+        unit_price: 'Unit price'
+        unknown: Unknown
+        unlock: Unlock
+        update: Update
+        update_product_association_type: 'Update product association type'
+        updating_tax_rate: 'Updating tax rate'
+        usage_limit: 'Usage limit'
+        used: Used
+        user_confirmation_name: 'User confirmation'
+        user_details: 'User details'
+        username: Username
+        users_list_of_all_users_registered_in_store: 'Users <small>List of all users registered in store</small>'
+        values: Values
+        variant_selection_method: 'Variant selection method'
+        variants: Variants
+        view: View
+        view_more: 'View more'
+        view_product_details: 'View %product% details'
+        void: Void
+        volume_based_pricing: 'Volume based pricing'
+        warning: Warning
+        welcome: Welcome
+        welcome_to_our_store: 'Welcome to our store'
+        welcome_to_your_space: 'Welcome to your space'
+        'yes': 'Yes'
+        you_are_customer_since: 'You are customer since'
+        you_have_no_addresses_defined: 'You have no addresses defined'
+        you_have_no_new_orders: 'You have no new orders'
+        your_last_5_orders: 'Your last 5 orders'
+        your_order_has_been_shipped: 'Your order has been shipped'
+        your_products: 'Your products'
+        zone: Zone
+        zone_details: 'Zone details'
+        zones: Zones
+    user:
+        general_info: 'User "%username%" general info'
+        impersonate: 'Log in as this user'
+        oauth:
+            none: 'No OAuth accounts connected'
+    variant:
+        stock: 'Current stock'

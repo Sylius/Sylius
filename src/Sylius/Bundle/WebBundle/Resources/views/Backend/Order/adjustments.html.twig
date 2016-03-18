@@ -7,10 +7,10 @@
 
 {% block topbar %}
     <ol class="breadcrumb">
-        <li>{{ 'sylius.breadcrumb.sales'|trans }}</li>
-        <li><a href="{{ path('sylius_backend_order_index') }}">{{ 'sylius.breadcrumb.order.index'|trans }}</a></li>
+        <li>{{ 'sylius.ui.sales'|trans }}</li>
+        <li><a href="{{ path('sylius_backend_order_index') }}">{{ 'sylius.ui.orders'|trans }}</a></li>
         <li><a href="{{ path('sylius_backend_order_show', {'id': order.id}) }}">#{{ order.number }}</a></li>
-        <li>{{ 'sylius.breadcrumb.order.adjustments'|trans }}</li>
+        <li>{{ 'sylius.ui.adjustments'|trans }}</li>
     </ol>
 {% endblock %}
 
@@ -26,22 +26,22 @@
         {% endif %}
         <a href="{{ path('sylius_backend_order_history', {'id': order.id}) }}" class="btn btn-info">
             <i class="glyphicon glyphicon-calendar"></i>
-            {{ 'sylius.history.header'|trans }}
+            {{ 'sylius.ui.history'|trans }}
         </a>
     </div>
     <h1>
-        <span class="glyphicon glyphicon-file"></span> {{ 'sylius.order.show_header'|trans({'%number%': order.number}) }}
-        {% if order.deleted %}<span class="label label-danger">{{ 'sylius.deleted'|trans }}</span>{% endif %}
+        <span class="glyphicon glyphicon-file"></span> {{ 'sylius.ui.order'|trans({'%number%': order.number}) }}
+        {% if order.deleted %}<span class="label label-danger">{{ 'sylius.ui.deleted'|trans }}</span>{% endif %}
     </h1>
 </div>
 
 <table class="table">
     <thead>
         <tr>
-            <th>{{ 'sylius.order.adjustments.type'|trans }}</th>
+            <th>{{ 'sylius.ui.type'|trans }}</th>
             <th>{{ 'sylius.order.adjustments.label'|trans }}</th>
-            <th>{{ 'sylius.order.adjustments.amount'|trans }}</th>
-            <th>{{ 'sylius.order.adjustments.locked'|trans }}</th>
+            <th>{{ 'sylius.ui.amount'|trans }}</th>
+            <th>{{ 'sylius.ui.locked'|trans }}</th>
             <th></th>
         </tr>
     </thead>
