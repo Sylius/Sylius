@@ -22,7 +22,7 @@ use Sylius\Component\Taxation\Repository\TaxCategoryRepositoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class TaxContext implements Context
+final class TaxationContext implements Context
 {
     /**
      * @var FactoryInterface
@@ -90,6 +90,14 @@ final class TaxContext implements Context
     }
 
     /**
+     * @Given the store has a tax category :name with a code :code
+     */
+    public function theStoreHasTaxCategoryWithCode($name, $code)
+    {
+        $this->createTaxCategory($name, $code);
+    }
+
+    /**
      * @param string $taxCategoryName
      *
      * @return TaxCategoryInterface
@@ -106,14 +114,20 @@ final class TaxContext implements Context
 
     /**
      * @param string $taxCategoryName
+     * @param string|null $taxCategoryCode
      *
      * @return TaxCategoryInterface
      */
-    private function createTaxCategory($taxCategoryName)
+    private function createTaxCategory($taxCategoryName, $taxCategoryCode = null)
     {
+        /** @var TaxCategoryInterface $taxCategory */
         $taxCategory = $this->taxCategoryFactory->createNew();
+        if (null === $taxCategoryCode) {
+            $taxCategoryCode = $this->getCodeFromName($taxCategoryName);
+        }
+
         $taxCategory->setName($taxCategoryName);
-        $taxCategory->setCode($this->getCodeFromName($taxCategoryName));
+        $taxCategory->setCode($taxCategoryCode);
 
         $this->taxCategoryRepository->add($taxCategory);
 

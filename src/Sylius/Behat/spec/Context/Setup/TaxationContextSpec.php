@@ -13,6 +13,7 @@ namespace spec\Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use PhpSpec\ObjectBehavior;
+use Sylius\Behat\Context\Setup\TaxationContext;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
 use Sylius\Component\Core\Model\TaxRateInterface;
@@ -22,9 +23,11 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxation\Repository\TaxCategoryRepositoryInterface;
 
 /**
+ * @mixin TaxationContext
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class TaxContextSpec extends ObjectBehavior
+class TaxationContextSpec extends ObjectBehavior
 {
     function let(
         FactoryInterface $taxRateFactory,
@@ -44,7 +47,7 @@ class TaxContextSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Behat\Context\Setup\TaxContext');
+        $this->shouldHaveType('Sylius\Behat\Context\Setup\TaxationContext');
     }
 
     function it_implements_context_interface()
@@ -82,5 +85,19 @@ class TaxContextSpec extends ObjectBehavior
         $taxRateRepository->add($taxRate)->shouldBeCalled();
 
         $this->storeHasTaxRateWithinZone('Low VAT', '23%', 'Clothes', $zone);
+    }
+
+    function it_creates_a_tax_category_with_name_and_code(
+        TaxCategoryInterface $taxCategory,
+        TaxCategoryRepositoryInterface $taxCategoryRepository,
+        FactoryInterface $taxCategoryFactory
+    ) {
+        $taxCategoryFactory->createNew()->willReturn($taxCategory);
+
+        $taxCategory->setName('Alcohol')->shouldBeCalled();
+        $taxCategory->setCode('alcohol')->shouldBeCalled();
+        $taxCategoryRepository->add($taxCategory)->shouldBeCalled();
+
+        $this->theStoreHasTaxCategoryWithCode('Alcohol', 'alcohol');
     }
 }
