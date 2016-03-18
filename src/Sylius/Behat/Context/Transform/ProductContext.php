@@ -13,7 +13,6 @@ namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
-use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -24,20 +23,12 @@ final class ProductContext implements Context
      * @var ProductRepositoryInterface
      */
     private $productRepository;
-
-    /**
-     * @var ProductVariantRepositoryInterface
-     */
-    private $productVariantRepository;
-
     /**
      * @param ProductRepositoryInterface $productRepository
-     * @param ProductVariantRepositoryInterface $productVariantRepository
      */
-    public function __construct(ProductRepositoryInterface $productRepository, ProductVariantRepositoryInterface $productVariantRepository)
+    public function __construct(ProductRepositoryInterface $productRepository)
     {
         $this->productRepository = $productRepository;
-        $this->productVariantRepository = $productVariantRepository;
     }
 
     /**
@@ -53,20 +44,5 @@ final class ProductContext implements Context
         }
 
         return $product;
-    }
-
-    /**
-     * @Transform /^"([^"]+)" variant of product "([^"]+)"$/
-     */
-    public function getProductVariantByNameAndProduct($variantName, $productName)
-    {
-        $product = $this->getProductByName($productName);
-
-        $productVariant = $this->productVariantRepository->findOneBy(['presentation' => $variantName, 'object' => $product]);
-        if (null === $productVariant) {
-            throw new \InvalidArgumentException(sprintf('Product variant with name "%s" of product "%s" does not exist', $variantName, $productName));
-        }
-
-        return $productVariant;
     }
 }

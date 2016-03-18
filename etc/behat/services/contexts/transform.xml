@@ -21,6 +21,7 @@
         <parameter key="sylius.behat.context.transform.lexical.class">Sylius\Behat\Context\Transform\LexicalContext</parameter>
         <parameter key="sylius.behat.context.transform.payment.class">Sylius\Behat\Context\Transform\PaymentContext</parameter>
         <parameter key="sylius.behat.context.transform.product.class">Sylius\Behat\Context\Transform\ProductContext</parameter>
+        <parameter key="sylius.behat.context.transform.product_variant.class">Sylius\Behat\Context\Transform\ProductVariantContext</parameter>
         <parameter key="sylius.behat.context.transform.promotion.class">Sylius\Behat\Context\Transform\PromotionContext</parameter>
         <parameter key="sylius.behat.context.transform.shared_storage.class">Sylius\Behat\Context\Transform\SharedStorageContext</parameter>
         <parameter key="sylius.behat.context.transform.shipping_method.class">Sylius\Behat\Context\Transform\ShippingMethodContext</parameter>
@@ -68,6 +69,11 @@
         </service>
 
         <service id="sylius.behat.context.transform.product" class="%sylius.behat.context.transform.product.class%" scope="scenario">
+            <argument type="service" id="sylius.repository.product" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.transform.product_variant" class="%sylius.behat.context.transform.product_variant.class%" scope="scenario">
             <argument type="service" id="sylius.repository.product" container="symfony" />
             <argument type="service" id="sylius.repository.product_variant" container="symfony" />
             <tag name="sylius.behat.context" />
