@@ -1,4 +1,4 @@
-@localization
+@locale
 Feature: Toggling a locale
     In order to change locales in which the service is available to my customers
     As an Administrator
