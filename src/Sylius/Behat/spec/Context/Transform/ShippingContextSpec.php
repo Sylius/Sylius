@@ -19,7 +19,7 @@ use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class ShippingContextSpec extends ObjectBehavior
+class ShippingMethodContextSpec extends ObjectBehavior
 {
     function let(ShippingMethodRepositoryInterface $shippingMethodRepository) {
         $this->beConstructedWith($shippingMethodRepository);
@@ -27,7 +27,7 @@ class ShippingContextSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Behat\Context\Transform\ShippingContext');
+        $this->shouldHaveType('Sylius\Behat\Context\Transform\ShippingMethodContext');
     }
 
     function it_implements_context_interface()

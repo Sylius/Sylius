@@ -23,7 +23,7 @@
         <parameter key="sylius.behat.context.transform.product.class">Sylius\Behat\Context\Transform\ProductContext</parameter>
         <parameter key="sylius.behat.context.transform.promotion.class">Sylius\Behat\Context\Transform\PromotionContext</parameter>
         <parameter key="sylius.behat.context.transform.shared_storage.class">Sylius\Behat\Context\Transform\SharedStorageContext</parameter>
-        <parameter key="sylius.behat.context.transform.shipping.class">Sylius\Behat\Context\Transform\ShippingContext</parameter>
+        <parameter key="sylius.behat.context.transform.shipping_method.class">Sylius\Behat\Context\Transform\ShippingMethodContext</parameter>
         <parameter key="sylius.behat.context.transform.tax_category.class">Sylius\Behat\Context\Transform\TaxCategoryContext</parameter>
         <parameter key="sylius.behat.context.transform.taxon.class">Sylius\Behat\Context\Transform\TaxonContext</parameter>
         <parameter key="sylius.behat.context.transform.theme.class">Sylius\Behat\Context\Transform\ThemeContext</parameter>
@@ -83,7 +83,7 @@
             <tag name="sylius.behat.context" />
         </service>
 
-        <service id="sylius.behat.context.transform.shipping" class="%sylius.behat.context.transform.shipping.class%" scope="scenario">
+        <service id="sylius.behat.context.transform.shipping_method" class="%sylius.behat.context.transform.shipping_method.class%" scope="scenario">
             <argument type="service" id="sylius.repository.shipping_method" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
