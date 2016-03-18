@@ -9,15 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Page\Admin\Locale;
-
-use Sylius\Behat\Behaviour\ChoosesName;
-use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
+namespace Sylius\Behat\Behaviour;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class CreatePage extends BaseCreatePage implements CreatePageInterface
+trait ChoosesName
 {
-    use ChoosesName;
+    use DocumentAccessor;
+
+    /**
+     * @param string $name
+     */
+    public function chooseName($name)
+    {
+        $this->getDocument()->selectFieldOption('Name', $name);
+    }
 }
