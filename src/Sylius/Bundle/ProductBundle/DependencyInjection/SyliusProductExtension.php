@@ -191,7 +191,7 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
         $engine = $syliusSearchConfig['engine'];
 
         if ($engine === 'elasticsearch') {
-            $tags = ['doctrine.event_listener' => array(
+            $tags = ['doctrine.event_listener' => [
                 ['name' => 'doctrine.event_listener', 'event' => 'postPersist'],
                 ['name' => 'doctrine.event_listener', 'event' => 'postUpdate'],
                 ['name' => 'doctrine.event_listener', 'event' => 'postRemove'],
