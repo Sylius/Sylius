@@ -740,6 +740,10 @@ sylius:
       refunded: Vrátené peniaze
       unknown: Neznáme
       void: Neplatné
+    transition:
+      complete: dokončené
+      cancel: zrušiť
+      refund: refundované
     update_header: Úprava platby
     updated_at: Posledná aktualizácia
   payment_method:
@@ -994,6 +998,13 @@ sylius:
     sku: Skladový kód (SKU)
     state: Stav
     tracking_code: Sledovací kód
+    transition:
+      release: vydané
+      backorder: predobjednané
+      prepare: pripravené
+      ship: odoslané
+      cancel: zrušiť
+      return: vrátené
     update: Upraviť
     update_header: Úprava zásielky
     updated_at: Posledná aktualizácia
