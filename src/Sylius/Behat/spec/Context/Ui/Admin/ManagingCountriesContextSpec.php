@@ -12,6 +12,7 @@
 namespace spec\Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Mink\Exception\ElementNotFoundException;
 use PhpSpec\Exception\Example\NotEqualException;
 use PhpSpec\ObjectBehavior;
 use Sylius\Behat\Page\Admin\Country\CreatePageInterface;
@@ -100,5 +101,19 @@ class ManagingCountriesContextSpec extends ObjectBehavior
         $countryIndexPage->isResourceOnPage(['code' => 'FR'])->willReturn(false);
 
         $this->shouldThrow(NotEqualException::class)->during('countryWithNameShouldAppearInTheStore', [$country]);
+    }
+
+    function it_asserts_that_country_name_can_not_be_choosen_again(CreatePageInterface $countryCreatePage)
+    {
+        $countryCreatePage->chooseName('France')->willThrow(ElementNotFoundException::class);
+
+        $this->iShouldNotBeAbleToChoose('France');
+    }
+
+    function it_thorws_exception_if_country_name_can_be_choosen_again(CreatePageInterface $countryCreatePage)
+    {
+        $countryCreatePage->chooseName('France')->willThrow(\Exception::class);
+
+        $this->shouldThrow(\Exception::class)->during('iShouldNotBeAbleToChoose', ['France']);
     }
 }

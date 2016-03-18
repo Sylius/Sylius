@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Country\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
@@ -83,4 +84,13 @@ final class ManagingCountriesContext implements Context
     {
         expect($this->countryIndexPage->isResourceOnPage(['code' => $country->getCode()]))->toBe(true);
     }
+
+    /**
+     * @Then /^I should not be able to choose "([^"]*)"$/
+     */
+    public function iShouldNotBeAbleToChoose($name)
+    {
+        expect($this->countryCreatePage)->toThrow(ElementNotFoundException::class)->during('chooseName', [$name]);
+    }
+
 }

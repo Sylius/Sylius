@@ -1,4 +1,4 @@
-@localization
+@addressing
 Feature: Country unique code validation
     In order to avoid making mistakes when managing countries
     As an Administrator
@@ -8,7 +8,7 @@ Feature: Country unique code validation
         Given the store operates in "Norway"
         And I am logged in as administrator
 
-    @todo
+    @ui
     Scenario: Trying to add a new country with used code
         When I want to create new country
         Then I should not be able to choose "Norway"
