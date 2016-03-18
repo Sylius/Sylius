@@ -11,7 +11,7 @@
     <li>{{ 'sylius.ui.sales'|trans }}</li>
     <li><a href="{{ path('sylius_backend_order_index') }}">{{ 'sylius.ui.orders'|trans }}</a></li>
     <li><a href="{{ path('sylius_backend_order_show', {'id': order.id}) }}">#{{ order.number }}</a></li>
-    <li>{{ 'sylius.ui.history_header'|trans }}</li>
+    <li>{{ 'sylius.ui.history'|trans }}</li>
 </ol>
 {% endblock %}
 
@@ -26,7 +26,7 @@
             {{ buttons.delete(path('sylius_backend_order_delete', {'id': order.id})) }}
         {% endif %}
     </div>
-    <h1><span class="glyphicon glyphicon-calendar"></span> {{ 'sylius.ui.order_show_header'|trans({'%number%': order.number}) }}</h1>
+    <h1><span class="glyphicon glyphicon-calendar"></span> {{ 'sylius.ui.order'|trans({'%number%': order.number}) }}</h1>
 </div>
 
 <ul class="nav nav-tabs">

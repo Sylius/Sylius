@@ -44,8 +44,6 @@ sylius:
     promotion_coupon:
         generate: 'Generirajte kod za popust'
         index: 'Izlist kodova za popust'
-        total_results:
-            Total: '%total%'
     shipment:
         update: Uredi
     taxon:
@@ -85,7 +83,6 @@ sylius:
         calculator: Kalkulator
         cancel: Prekini
         cancelled: Otkazano
-        cart_summary_header: 'Pregled narudžbe'
         categorization: Kategorizacija
         category: 'Kategorija porezne stope'
         change_password: 'Promijenite lozinku'
@@ -257,7 +254,6 @@ sylius:
         options: Opcije
         order: Narudžba
         order_item_product: sylius.order_item.product
-        order_show_header: Narudžba
         order_summary: 'Pregled narudžbe'
         order_value: 'Vrijednost narudžbi'
         orders: Narudžbe
@@ -338,7 +334,6 @@ sylius:
         slideshow: 'Automatski prikaz'
         starts_at: Početak
         state: Stanje
-        state_header: Stanje
         street: Ulica
         success: Uspješno
         sylius_logo: Syius

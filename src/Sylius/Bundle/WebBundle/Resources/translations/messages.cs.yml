@@ -80,8 +80,6 @@ sylius:
     promotion_coupon:
         generate: 'Generovat kupóny'
         index: 'Seznam kupónů'
-        total_results:
-            Total: '%total%'
     shipment:
         update: Úpravy
     taxon:
@@ -134,7 +132,6 @@ sylius:
         calculator: Kalkulačka
         cancel: Zrušit
         cancelled: Zrušeno
-        cart_summary_header: 'Obsah košíku'
         categorization: Kategorizace
         category: Kategorie
         change_password: 'Změnit heslo'
@@ -294,7 +291,6 @@ sylius:
         groups: Skupiny
         guest: 'Neregistrovaný náštěvník'
         hide_deleted: 'Skrýt odstraněné'
-        history_header: Historie
         id: ID
         images: Obrázky
         imagine_blocks: 'Imagine bloky'
@@ -395,7 +391,6 @@ sylius:
         order_confirmation_name: 'Potvrzení objednávky'
         order_details: 'Podrobnosti objednávky'
         order_item_product: Položka
-        order_show_header: Objednávka
         order_state: 'Stav objednávky'
         order_summary: 'Shrnutí objednávky'
         order_value: 'Hodnota objednávky'
@@ -443,7 +438,6 @@ sylius:
         qty_min: 'Množství min'
         recent_orders: 'Poslední objednávky'
         recent_users: 'Poslední uživatelé'
-        redirect_route_index_header: Přesměrování
         redirect_routes: 'Přesměrovávací pravidla'
         refunded: 'Platba vrácena'
         register: Registrace
@@ -497,7 +491,6 @@ sylius:
         start_date: 'Datum zahájení'
         starts_at: Začíná
         state: Stát
-        state_header: Stát
         street: Ulice
         string_blocks: 'Řetězcové bloky'
         subject: Předmět

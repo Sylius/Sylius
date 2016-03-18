@@ -73,7 +73,6 @@ sylius:
         blocks: Блокови
         calculator: Калкулатор
         cancel: Откажи
-        cart_summary_header: 'Резиме корпе'
         categorization: Категоризација
         category: 'Категорија пореске стопе'
         checkout: 'Завршите куповину'
@@ -201,7 +200,6 @@ sylius:
         number_of_orders: 'Број наруџбина'
         options: Опције
         order: наруџбина
-        order_show_header: наруџбина
         order_summary: 'Резиме наруџбине'
         order_value: 'Вредност наруџбине'
         orders: Наруџбине

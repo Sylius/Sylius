@@ -25,11 +25,11 @@
         {{ buttons.delete(path('sylius_backend_order_delete', {'id': order.id})) }}
         <a href="{{ path('sylius_backend_order_history', {'id': order.id}) }}" class="btn btn-info">
             <i class="glyphicon glyphicon-calendar"></i>
-            {{ 'sylius.ui.history_header'|trans }}
+            {{ 'sylius.ui.history'|trans }}
         </a>
     </div>
     <h1>
-        <span class="glyphicon glyphicon-file"></span> {{ 'sylius.ui.order_show_header'|trans({'%number%': order.number}) }}
+        <span class="glyphicon glyphicon-file"></span> {{ 'sylius.ui.order'|trans({'%number%': order.number}) }}
         via
         <span style="color: {{ order.channel.color }};">{{ order.channel.code }}</span>
     </h1>

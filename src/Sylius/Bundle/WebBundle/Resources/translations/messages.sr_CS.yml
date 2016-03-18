@@ -63,7 +63,6 @@ sylius:
         billing_address: 'Adresa za naplatu'
         calculator: Kalkulator
         cancel: Otkaži
-        cart_summary_header: 'Rezime korpe'
         categorization: Kategorizacija
         category: 'Kategorija poreske stope'
         checkout: 'Završite kupovinu'
@@ -188,7 +187,6 @@ sylius:
         number_of_orders: 'Broj narudžbina'
         options: Opcije
         order: narudžbina
-        order_show_header: narudžbina
         order_summary: 'Rezime narudžbine'
         order_value: 'Vrednost narudžbine'
         orders: Narudžbine

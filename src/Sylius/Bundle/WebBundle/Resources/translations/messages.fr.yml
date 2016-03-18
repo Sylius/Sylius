@@ -97,8 +97,6 @@ sylius:
     promotion_coupon:
         generate: 'Générer des coupons'
         index: 'Liste des coupons'
-        total_results:
-            Total: '%total%'
     report:
         data_fetcher: 'Type d''outil de récupération de données'
         no_data: 'Il n''y a pas de donnée à afficher'
@@ -177,7 +175,6 @@ sylius:
         cancel: Annuler
         cancelled: Annulé
         cart_locked: 'Panier verrouillé'
-        cart_summary_header: 'Récapitulatif du panier'
         categorization: Catégorisation
         category: Catégorie
         change_password: 'Modifier votre mot de passe'
@@ -365,7 +362,6 @@ sylius:
         guest: Invité
         hello_name: 'Bonjour <b>%name%</b>'
         hide_deleted: 'Cacher les supprimés'
-        history_header: Historique
         hostname: 'Nom d''hôte'
         id: ID
         identifier: Identifiant
@@ -490,7 +486,6 @@ sylius:
         order_confirmation_name: 'Confirmation de commande'
         order_details: 'Détail de la commande'
         order_item_product: Élément
-        order_show_header: Commande
         order_state: 'Statut de la commande'
         order_summary: 'Récapitulatif de la commande'
         order_value: 'Valeur de la commande'
@@ -548,7 +543,6 @@ sylius:
         recent_customers: 'Clients récents'
         recent_orders: 'Commandes récentes'
         recent_users: 'Utilisateurs récents'
-        redirect_route_index_header: 'Route de redirection'
         redirect_routes: Redirections
         refunded: Remboursé
         register: 'Créer un compte'
@@ -611,7 +605,6 @@ sylius:
         start_date: 'Date de début'
         starts_at: 'Débute le'
         state: État
-        state_header: État
         status: Statut
         street: Adresse
         string_blocks: 'Blocs de type chaine'

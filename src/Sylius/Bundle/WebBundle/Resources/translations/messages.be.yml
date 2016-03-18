@@ -44,8 +44,6 @@ sylius:
     promotion_coupon:
         generate: 'Генераваць купоны'
         index: 'Стварыць спіс купонаў'
-        total_results:
-            Total: '%агулам%'
     shipment:
         update: Рэдагаваць
     taxon:
@@ -84,7 +82,6 @@ sylius:
         calculator: Калькулятар
         cancel: Адмяніць
         cancelled: Адменена
-        cart_summary_header: 'Кошт кошыка'
         categorization: Класіфікацыя
         category: Катэгорыя
         change_password: 'Змяніць пароль'
@@ -253,7 +250,6 @@ sylius:
         options: Опцыі
         order: Замова
         order_item_product: Тавар
-        order_show_header: Замова
         order_summary: 'Апісанне замовы'
         order_value: 'кошт замовы'
         orders: Заказы
@@ -332,7 +328,6 @@ sylius:
         slideshow: Слайдшоў
         starts_at: Пачатак
         state: Статус
-        state_header: Статус
         street: Вуліца
         success: Поспех
         sylius_logo: Sylius

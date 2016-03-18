@@ -97,8 +97,6 @@ sylius:
     promotion_coupon:
         generate: 'ایجاد کد تخفیف'
         index: 'لیست کدهای تخفیف'
-        total_results:
-            Total: '%total%'
     report:
         data_fetcher: 'نوع منبع اطلاعات'
         no_data: 'اطلاعاتی برای نمایش وجود ندارد'
@@ -178,7 +176,6 @@ sylius:
         cancel: لغو
         cancelled: 'پرداخت لغو شده'
         cart_locked: 'سبد خرید قفل شده'
-        cart_summary_header: 'سبد خرید'
         categorization: 'دسته بندی'
         category: دسته
         change_password: 'تغییر کلمه عبور'
@@ -367,7 +364,6 @@ sylius:
         guest: 'می خواهم بدون ثبت نام ادامه دهم'
         hello_name: 'سلام <b>%name%</b>'
         hide_deleted: 'مخفی کردن آیتم های حذف شده'
-        history_header: پيشينه
         id: شناسه
         identifier: شناسه
         images: 'عکس ها'
@@ -491,7 +487,6 @@ sylius:
         order_confirmation_name: 'تایید سفارش'
         order_details: 'جزییات سفارش'
         order_item_product: کالا
-        order_show_header: سفارش
         order_state: 'وضعیت سفارش'
         order_summary: 'فاکتور نهایی خرید'
         order_value: 'رقم کلیه ی سفارش ها'
@@ -550,7 +545,6 @@ sylius:
         recent_customers: 'مشتریان اخیر'
         recent_orders: 'سفارش های اخیر'
         recent_users: 'کاربران اخیر'
-        redirect_route_index_header: 'آدرس داخلی'
         redirect_routes: 'آدرس داخلی'
         refunded: 'پرداخت برگشت داده شده'
         register: 'ثبت نام'
@@ -614,7 +608,6 @@ sylius:
         start_date: 'تاریخ شروع'
         starts_at: 'شروع از'
         state: وضعیت
-        state_header: وضعیت
         status: وضعیت
         street: 'آدرس پستی'
         string_blocks: 'بلاک های متنی'

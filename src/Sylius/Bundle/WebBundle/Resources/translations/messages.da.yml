@@ -44,8 +44,6 @@ sylius:
     promotion_coupon:
         generate: 'Generere kuponer'
         index: 'Kupon liste'
-        total_results:
-            Total: '%total%'
     shipment:
         update: Rediger
     taxon:
@@ -83,7 +81,6 @@ sylius:
         build: Byg
         calculator: Beregner
         cancel: Anuller
-        cart_summary_header: 'Indkøbskurv oversigt'
         categorization: Kategorisering
         category: Kategori
         change_password: 'Ændre din adgangskode'
@@ -253,7 +250,6 @@ sylius:
         options: Indstillinger
         order: Ordre
         order_item_product: Varen
-        order_show_header: Ordre
         order_summary: 'Ordre resume'
         order_value: Ordreværdi
         orders: Ordrer
@@ -330,7 +326,6 @@ sylius:
         slideshow: Slideshow
         starts_at: 'Starter ved'
         state: Status
-        state_header: Status
         street: Gade
         success: Succes
         sylius_logo: Sylius

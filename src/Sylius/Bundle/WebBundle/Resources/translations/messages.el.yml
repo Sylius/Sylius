@@ -39,7 +39,6 @@ sylius:
         billing_address: 'Διεύθυνση χρέωσης'
         blocks: Μπλοκ
         cancel: Άκυρο
-        cart_summary_header: 'Σύνοψη καλαθιού'
         categorization: Κατηγοριοποίηση
         category: Κατηγορία
         checkout: 'Ολοκλήρωση αγορών'
@@ -108,7 +107,6 @@ sylius:
         number: Αριθμός
         options: Επιλογές
         order: παραγγελία
-        order_show_header: παραγγελία
         order_summary: 'Σύνοψη παραγγελίας'
         orders: Παραγγελίες
         pages: Σελίδες
@@ -148,8 +146,7 @@ sylius:
         sign_in_to_the_store_or_create_new_account: 'Είσοδος στο κατάστημα <small>ή να δημιουργήσετε νέο λογαριασμό</small>'
         sku: 'ΚΩΔΙΚΟΣ ΠΡΟΪΟΝΤΟΣ'
         starts_at: 'Αρχίζει με'
-        state: κατάσταση
-        state_header: Νομός
+        state: Νομός
         street: Οδός
         success: Επιτυχία
         tax_category: 'Φορολογική κατηγορία'

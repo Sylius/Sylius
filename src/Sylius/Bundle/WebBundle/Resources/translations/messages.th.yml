@@ -44,8 +44,6 @@ sylius:
     promotion_coupon:
         generate: สร้างคูปอง
         index: รายการคูปอง
-        total_results:
-            Total: '%total%'
     shipment:
         update: แก้ไข
     taxon:
@@ -84,7 +82,6 @@ sylius:
         calculator: การคำนวณ
         cancel: ยกเลิก
         cancelled: ถูกยกเลิก
-        cart_summary_header: รายละเอียดสินค้าในตะกร้า
         categorization: การจัดประเภท
         category: ประเภท
         change_password: เปลี่ยนรหัสผ่านของคุณ
@@ -253,7 +250,6 @@ sylius:
         options: ตัวเลือก
         order: ใบสั่งซื้อ
         order_item_product: รายการ
-        order_show_header: ใบสั่งซื้อ
         order_summary: รายละเอียดการสั่งซื้อ
         order_value: มูลค่าการสั่งซื้อ
         orders: ใบสั่งซื้อ
@@ -332,7 +328,6 @@ sylius:
         slideshow: ภาพสไลด์
         starts_at: เริ่มต้น
         state: สถานะ
-        state_header: สถานะ
         street: ถนน
         success: สำเร็จ
         sylius_logo: 'ツ Sylius'

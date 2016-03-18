@@ -97,8 +97,6 @@ sylius:
     promotion_coupon:
         generate: 'Gjenero kupona'
         index: 'Listo kuponat'
-        total_results:
-            Total: '%total%'
     report:
         data_fetcher: 'Të dhëna mbi llojin e sjellësit'
         no_data: 'Nuk ka asnjë të dhënë për t''u shfaqur'
@@ -175,7 +173,6 @@ sylius:
         cancel: Fshi
         cancelled: 'E fshirë'
         cart_locked: 'Karroca e kycur'
-        cart_summary_header: 'Përmbajtja e karrocës'
         categorization: Kategorizimi
         category: Kategorija
         change_password: 'Ndrysho fjalëkalimin'
@@ -363,7 +360,6 @@ sylius:
         guest: 'I ftuar'
         hello_name: 'Përshëndetje <b>%name%</b>'
         hide_deleted: 'Fshihi elementet e fshira'
-        history_header: Historia
         id: ID
         identifier: Identifikuesi
         images: Imazhet
@@ -485,7 +481,6 @@ sylius:
         order_confirmation_name: 'Konfirmimi i porosisë'
         order_details: 'Hollësi të porosisë'
         order_item_product: 'Po ashtu'
-        order_show_header: Porosia
         order_state: 'Gjendja e porosisë'
         order_summary: 'Përmbledhje e porosisë'
         order_value: 'Vlera e porosisë'
@@ -542,7 +537,6 @@ sylius:
         recent_customers: 'Blerësit e fundit'
         recent_orders: 'Porositë e fundit'
         recent_users: 'Përdoruesit e fundit'
-        redirect_route_index_header: 'Rrugë tjetër'
         redirect_routes: 'Rishkruaj drejtimet'
         refunded: Rimbursuar
         register: Regjistrohu
@@ -604,7 +598,6 @@ sylius:
         start_date: 'Data e fillimit'
         starts_at: 'Fillon më'
         state: Shteti
-        state_header: Shteti
         street: Rruga
         string_blocks: 'Blloqe zinxhir'
         subject: Subjekti

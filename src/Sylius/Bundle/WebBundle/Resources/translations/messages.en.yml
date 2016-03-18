@@ -189,7 +189,6 @@ sylius:
         cancel: Cancel
         cancelled: Cancelled
         cart_locked: 'Cart locked'
-        cart_summary_header: 'Cart summary'
         categorization: Categorization
         category: Category
         change_password: 'Change your password'
@@ -378,7 +377,6 @@ sylius:
         guest: Guest
         hello_name: 'Hello <b>%name%</b>'
         hide_deleted: 'Hide deleted'
-        history_header: History
         hostname: Hostname
         id: ID
         identifier: Identifier
@@ -503,7 +501,6 @@ sylius:
         order_confirmation_name: 'Order confirmation'
         order_details: 'Order details'
         order_item_product: Item
-        order_show_header: Order
         order_state: 'Order state'
         order_summary: 'Order summary'
         order_value: 'Order value'
@@ -563,7 +560,6 @@ sylius:
         recent_customers: 'Recent customers'
         recent_orders: 'Recent orders'
         recent_users: 'Recent users'
-        redirect_route_index_header: 'Redirect route'
         redirect_routes: 'Redirect routes'
         refunded: Refunded
         register: Register
@@ -627,7 +623,6 @@ sylius:
         start_date: 'Start Date'
         starts_at: 'Starts at'
         state: State
-        state_header: State
         status: Status
         street: Street
         string_blocks: 'String blocks'

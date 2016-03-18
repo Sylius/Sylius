@@ -85,8 +85,6 @@ sylius:
     promotion_coupon:
         generate: 'Kuponlar oluşturmak'
         index: 'Kupon Listeleri'
-        total_results:
-            Total: '%total%'
     report:
         data_fetcher: 'Veri alıcısı türü'
         renderer: 'İşleyici türü'
@@ -147,7 +145,6 @@ sylius:
         calculator: Hesaplayıcı
         cancel: İptal
         cancelled: 'İptal Edildi'
-        cart_summary_header: 'Sepet toplamı'
         categorization: Sınıflandırma
         category: Kategori
         change_password: 'Parolanızı değiştirin'
@@ -317,7 +314,6 @@ sylius:
         groups: Gruplar
         guest: Konuk
         hide_deleted: 'Silineni gizle'
-        history_header: Geçmiş
         id: ID
         identifier: Tanımlayıcı
         images: Resimleri
@@ -422,7 +418,6 @@ sylius:
         order_confirmation_name: 'Sipariş Onayı'
         order_details: 'Sipariş Detayları'
         order_item_product: Öğe
-        order_show_header: Sipariş
         order_state: 'Sipariş durumu'
         order_summary: Sepetiniz
         order_value: 'Sipariş değeri'
@@ -473,7 +468,6 @@ sylius:
         recent_customers: 'Son müşteriler'
         recent_orders: 'Son siparişler'
         recent_users: 'Son kullanıcılar'
-        redirect_route_index_header: 'Yönlendirme yolları'
         redirect_routes: 'Yönlendirme yolları'
         refunded: 'İade Edildi'
         register: 'Üye ol'
@@ -529,7 +523,6 @@ sylius:
         start_date: 'Başlangıç Tarihi'
         starts_at: ''' Dan başlar (start at)'
         state: Durum
-        state_header: Durum
         street: Adres
         string_blocks: 'Dize blokları'
         subject: Konu

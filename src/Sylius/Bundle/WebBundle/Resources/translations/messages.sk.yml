@@ -97,8 +97,6 @@ sylius:
     promotion_coupon:
         generate: 'Vygenerovať kupóny'
         index: 'Zoznam kupónov'
-        total_results:
-            Total: '%total%'
     report:
         data_fetcher: 'Spôsob načitania údajov'
         no_data: 'Nie sú žiadne údaje na zobrazenie'
@@ -178,7 +176,6 @@ sylius:
         cancel: Zrušiť
         cancelled: Zrušené
         cart_locked: 'Košík uzamknutý'
-        cart_summary_header: 'Obsah košíka'
         categorization: Kategórie
         category: Kategória
         change_password: 'Zmena hesla'
@@ -367,7 +364,6 @@ sylius:
         guest: Návštevník
         hello_name: 'Ahoj <b>%name%</b>'
         hide_deleted: 'Skryť odstránené'
-        history_header: História
         hostname: Hostname
         id: ID
         identifier: Identifikátor
@@ -492,7 +488,6 @@ sylius:
         order_confirmation_name: 'Potvrdenie objednávky'
         order_details: 'Detail objednávky'
         order_item_product: Položka
-        order_show_header: Objednávka
         order_state: 'Stav objednávky'
         order_summary: 'Prehľad objednávky'
         order_value: 'Cena objednávky'
@@ -552,7 +547,6 @@ sylius:
         recent_customers: 'Najnovši zákaznici'
         recent_orders: 'Posledné objednávky'
         recent_users: 'Poslední používatelia'
-        redirect_route_index_header: Presmerovania
         redirect_routes: Presmerovania
         refunded: 'Vrátené peniaze'
         register: Registrovať
@@ -616,7 +610,6 @@ sylius:
         start_date: 'Dátum začiatku zverejnenia'
         starts_at: Začiatok
         state: Stav
-        state_header: Stav
         status: Stav
         street: Ulica
         string_blocks: 'Textové bloky'

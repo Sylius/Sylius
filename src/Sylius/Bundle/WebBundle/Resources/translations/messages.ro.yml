@@ -57,8 +57,6 @@ sylius:
     promotion_coupon:
         generate: 'Generare coduri promoționale'
         index: 'Listare coduri promoționale'
-        total_results:
-            Total: '%total%'
     shipment:
         update: Editare
     taxon:
@@ -99,7 +97,6 @@ sylius:
         calculator: Calculator
         cancel: Anulează
         cancelled: Anulată
-        cart_summary_header: 'Sumar coș'
         categorization: Categorizare
         category: Categorie
         change_password: 'Modificare parolă'
@@ -271,7 +268,6 @@ sylius:
         options: Opţiuni
         order: 'Detalii comandă'
         order_item_product: Produs
-        order_show_header: 'Detalii comandă'
         order_summary: 'Sumar comandă'
         order_value: 'Valoarea comenzii'
         orders: Comenzi
@@ -351,7 +347,6 @@ sylius:
         slideshow: Slideshow
         starts_at: 'Începe la'
         state: Status
-        state_header: Status
         street: Adresă
         success: Succes
         sylius_logo: Sylius

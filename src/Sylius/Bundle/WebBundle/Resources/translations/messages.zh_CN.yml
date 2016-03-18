@@ -64,7 +64,6 @@ sylius:
         browse_products: 浏览产品
         build: 开发
         cancel: '取消 '
-        cart_summary_header: 购物车总结
         categorization: 分类
         change_password: 更改您的密码
         change_your_password: 更改您的密码

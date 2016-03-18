@@ -57,8 +57,6 @@ sylius:
     promotion_coupon:
         generate: 'Kuponok generálása'
         index: 'Kuponok listázása'
-        total_results:
-            Total: '%total%'
     shipment:
         update: Szerkesztés
     taxon:
@@ -97,7 +95,6 @@ sylius:
         build: Létrehozás
         calculator: Számológép
         cancel: Mégse
-        cart_summary_header: 'A kosár végösszege'
         categorization: Kategorizálás
         category: Kategória
         change_password: 'Jelszó módosítása'
@@ -269,7 +266,6 @@ sylius:
         options: Beállítások
         order: Rendelés
         order_item_product: Cikk
-        order_show_header: Rendelés
         order_summary: 'Rendelés végösszege'
         order_value: 'Rendelés értéke'
         orders: Rendelések
@@ -348,7 +344,6 @@ sylius:
         slideshow: Diavetítés
         starts_at: Kezdődik
         state: Állapot
-        state_header: Állapot
         street: Utca
         success: Siker
         sylius_logo: Sylius

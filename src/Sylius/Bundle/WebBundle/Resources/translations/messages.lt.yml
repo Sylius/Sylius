@@ -79,8 +79,6 @@ sylius:
     promotion_coupon:
         generate: 'Generuoti kuponus'
         index: 'Kuponų sąrašas'
-        total_results:
-            Total: '%total%'
     shipment:
         update: Redaguoti
     taxon:
@@ -133,7 +131,6 @@ sylius:
         calculator: Skaičiuoklė
         cancel: Atšaukti
         cancelled: Atšaukta
-        cart_summary_header: 'Krepšelio santrauka'
         categorization: 'Skirstymas į kategorijas'
         category: Kategorija
         change_password: 'Pakeisti savo slaptažodį'
@@ -290,7 +287,6 @@ sylius:
         groups: Grupės
         guest: Svečias
         hide_deleted: 'Slėpti pašalintus'
-        history_header: Istorija
         id: ID
         images: Paveikslėliai
         imagine_blocks: 'Paveikslėlių blokai'
@@ -388,7 +384,6 @@ sylius:
         order_confirmation_name: 'Užsakymo patvirtinimas'
         order_details: 'Užsakymo informacija'
         order_item_product: Produktas
-        order_show_header: Užsakymas
         order_state: 'Užsakymo būsena'
         order_summary: 'Užsakymo santrauka'
         order_value: 'Užsakymo vertė'
@@ -436,7 +431,6 @@ sylius:
         qty_min: 'Kiekis min'
         recent_orders: 'Naujausi užsakymai'
         recent_users: 'Naujausi vartotojai'
-        redirect_route_index_header: Nukreipimas
         redirect_routes: 'Nukreipimo maršrutai'
         refunded: Grąžinta
         register: Užsiregistruoti
@@ -490,7 +484,6 @@ sylius:
         start_date: 'Pradžios data'
         starts_at: Prasideda
         state: Būsena
-        state_header: Būsena
         street: Gatvė
         string_blocks: 'Simbolių blokai'
         subject: Tema

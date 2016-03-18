@@ -85,8 +85,6 @@ sylius:
     promotion_coupon:
         generate: Generieren
         index: Gutscheine
-        total_results:
-            Total: '%total%'
     report:
         data_fetcher: 'Datenquelle Typ'
         renderer: Renderer-Typ
@@ -146,7 +144,6 @@ sylius:
         calculator: Steuersatzrechner
         cancel: Abbrechen
         cancelled: Abgebrochen
-        cart_summary_header: Warenkorb-Übersicht
         categorization: Produktkategorisierung
         category: Kategorie
         change_password: 'Passwort ändern'
@@ -308,7 +305,6 @@ sylius:
         groups: Gruppen
         guest: Gastbestellung
         hide_deleted: 'Gelöschte Elemente ausblenden'
-        history_header: Verlauf
         id: ID
         images: Bilder
         imagine_blocks: 'Bild Blöcke'
@@ -409,7 +405,6 @@ sylius:
         order_confirmation_name: Bestellbestätigung
         order_details: Bestelldetails
         order_item_product: Produkt
-        order_show_header: Reihenfolge
         order_state: Bestellstatus
         order_summary: Bestellungsübersicht
         order_value: Bestellwert
@@ -460,7 +455,6 @@ sylius:
         recent_customers: 'Neuste Kunden'
         recent_orders: 'Letzte Bestellungen'
         recent_users: 'Neueste Benutzer'
-        redirect_route_index_header: Umleitung
         redirect_routes: 'Umleitungen (Redirects)'
         refunded: Rückerstattet
         register: Registrieren
@@ -514,7 +508,6 @@ sylius:
         start_date: Start–Datum
         starts_at: Beginnt
         state: Versandstatus
-        state_header: Versandstatus
         street: Straße
         string_blocks: Zeichenketten–Elemente
         subject: Betreff

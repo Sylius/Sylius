@@ -76,8 +76,6 @@ sylius:
     promotion_coupon:
         generate: 'Wygeneruj kupony promocyjne'
         index: 'Lista kuponów promocyjnych'
-        total_results:
-            Total: '%total%'
     shipment:
         update: Edytuj
     taxon:
@@ -131,7 +129,6 @@ sylius:
         calculator: Kalkulator
         cancel: Anuluj
         cancelled: Anulowane
-        cart_summary_header: 'Podsumowanie koszyka'
         categorization: Kategorie
         category: Kategoria
         change_password: 'Zmiana hasła'
@@ -293,7 +290,6 @@ sylius:
         groups: Grupy
         guest: Gość
         hide_deleted: 'Ukryj usunięte'
-        history_header: Historia
         id: ID
         identifier: Identyfikator
         images: Zdjęcia
@@ -395,7 +391,6 @@ sylius:
         order_confirmation_name: 'Potwierdzenie zamówienia'
         order_details: 'Szczegóły zamówienia'
         order_item_product: Element
-        order_show_header: zamówienie
         order_state: 'Stan zamówienia'
         order_summary: 'Podsumowanie zamówienia'
         order_value: 'Wartość zamówień'
@@ -448,7 +443,6 @@ sylius:
         recent_customers: 'Ostatni klienci'
         recent_orders: 'Najnowsze zamówienia'
         recent_users: 'Ostatnio zarejestrowani użytkownicy'
-        redirect_route_index_header: 'Przekieruj trasę'
         refunded: Zwrócone
         register: Rejestracja
         register_button: Zarejestruj
@@ -502,8 +496,7 @@ sylius:
         slideshow_blocks: 'Bloki pokazu slajdów'
         start_date: 'Data rozpoczęcia'
         starts_at: 'Data rozpoczęcia'
-        state: status
-        state_header: Status
+        state: Status
         status: Status
         street: Adres
         string_blocks: 'Bloki tekstowe'

@@ -66,7 +66,6 @@ sylius:
         build: sylius.breadcrumb.build
         calculator: 算出方法
         cancel: キャンセル
-        cart_summary_header: カートを見る
         categorization: カテゴリ設定
         category: 税区分
         change_password: パスワードの変更
@@ -207,7 +206,6 @@ sylius:
         options: オプション
         order: 注文
         order_item_product: sylius.order_item.product
-        order_show_header: 注文
         order_summary: ご注文内容の確認
         order_value: 注文
         orders: sylius.breadcrumb.order.index

@@ -57,8 +57,6 @@ sylius:
     promotion_coupon:
         generate: 'Генерувати купони'
         index: 'Список купонів'
-        total_results:
-            Total: '%total%'
     shipment:
         update: Редагувати
     taxon:
@@ -98,7 +96,6 @@ sylius:
         calculator: Калькулятор
         cancel: Відмінити
         cancelled: Відхилено
-        cart_summary_header: 'Вміст кошика'
         categorization: Категоризація
         category: Категорія
         change_password: 'Змінити пароль'
@@ -280,7 +277,6 @@ sylius:
         order_comment_name: 'Коментар до замовлення'
         order_confirmation_name: 'Підтвердження замовлення'
         order_item_product: Елемент
-        order_show_header: Замовлення
         order_summary: 'Підсумок замовлення'
         order_value: 'Вартість замовлення'
         orders: Замовлення
@@ -362,8 +358,7 @@ sylius:
         sku: Артикул
         slideshow: Слайд-шоу
         starts_at: Початок
-        state: Штат
-        state_header: Статус
+        state: Статус
         street: Вулиця
         success: Успішно
         support: 'Служба підтримки'

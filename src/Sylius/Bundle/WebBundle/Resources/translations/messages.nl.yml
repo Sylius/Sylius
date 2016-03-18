@@ -83,8 +83,6 @@ sylius:
     promotion_coupon:
         generate: 'Coupons genereren'
         index: 'Lijst van coupons'
-        total_results:
-            Total: '%total%'
     security:
         login:
             info: 'Gelieve in te loggen met behulp van e-mail <b>"sylius@example.com"</b> en <b>"sylius"</b> als wachtwoord. <small>Mr. Sylius Demo gids</small>'
@@ -141,7 +139,6 @@ sylius:
         calculator: Calculator
         cancel: Annuleren
         cancelled: Geannuleerd
-        cart_summary_header: 'Winkelwagen overzicht'
         categorization: Categorisering
         category: Categorie
         change_password: 'Verander uw wachtwoord'
@@ -299,7 +296,6 @@ sylius:
         guest: Gast
         hello_name: 'Hallo <b>%name%</b>'
         hide_deleted: 'Verberg verwijderd'
-        history_header: Geschiedenis
         id: ID
         identifier: Identifier
         images: Afbeeldingen
@@ -402,7 +398,6 @@ sylius:
         order_confirmation_name: 'Order bevestiging'
         order_details: Besteloverzicht
         order_item_product: Artikel
-        order_show_header: Bestelling
         order_state: 'Bestel status'
         order_summary: Bestellingsoverzicht
         order_value: Bestellingswaarde
@@ -453,7 +448,6 @@ sylius:
         recent_customers: 'Recente klanten'
         recent_orders: 'Recente bestellingen'
         recent_users: 'Recente gebruikers'
-        redirect_route_index_header: 'Redirect route'
         redirect_routes: 'Redirect routes'
         refunded: Terugbetaald
         register: Registreren
@@ -507,7 +501,6 @@ sylius:
         start_date: Begindatum
         starts_at: 'Begint op'
         state: Status
-        state_header: Status
         street: Straat
         string_blocks: 'String blokken'
         subject: Onderwerp

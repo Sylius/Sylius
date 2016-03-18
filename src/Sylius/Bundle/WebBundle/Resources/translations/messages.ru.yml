@@ -80,8 +80,6 @@ sylius:
     promotion_coupon:
         generate: 'Генерировать купоны'
         index: 'Список купонов'
-        total_results:
-            Total: '%total%'
     shipment:
         update: Редактировать
     taxon:
@@ -134,7 +132,6 @@ sylius:
         calculator: Калькулятор
         cancel: Отмена
         cancelled: Отменён
-        cart_summary_header: Корзина
         categorization: Каталоги
         category: sylius.tax_rate.category
         change_password: 'Change my password'
@@ -367,7 +364,6 @@ sylius:
         order_comment_name: 'Комментарий к заказу'
         order_confirmation_name: 'Подтверждение заказа'
         order_item_product: Товар
-        order_show_header: заказ
         order_summary: 'Ваш заказ'
         order_value: 'Стоимость заказа'
         orders: 'Список заказов'
@@ -465,7 +461,6 @@ sylius:
         start_date: 'Дата начала'
         starts_at: Начало
         state: Cтатус
-        state_header: Cтатус
         street: Улица
         string_blocks: 'Текстовые блоки'
         success: Успешно
