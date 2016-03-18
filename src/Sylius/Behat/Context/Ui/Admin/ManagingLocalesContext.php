@@ -18,7 +18,7 @@ use Sylius\Behat\Page\Admin\Locale\CreatePageInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-final class ManagingLocaleContext implements Context
+final class ManagingLocalesContext implements Context
 {
     /**
      * @var IndexPageInterface
