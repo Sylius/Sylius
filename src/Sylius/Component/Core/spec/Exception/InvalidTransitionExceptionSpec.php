@@ -13,15 +13,19 @@ namespace spec\Sylius\Component\Core\Exception;
 
 use PhpSpec\ObjectBehavior;
 use SM\SMException;
+use SM\StateMachine\StateMachineInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class InvalidTransitionExceptionSpec extends ObjectBehavior
 {
-    function let()
+    function let(StateMachineInterface $stateMachine)
     {
-        $this->beConstructedWith('start_checkout');
+        $stateMachine->getGraph()->willReturn('checkout_state_machine');
+        $stateMachine->getPossibleTransitions()->willReturn(['start', 'abandon']);
+        
+        $this->beConstructedWith('start_checkout', $stateMachine);
     }
 
     function it_is_initializable()
@@ -36,6 +40,9 @@ class InvalidTransitionExceptionSpec extends ObjectBehavior
 
     function it_has_message()
     {
-        $this->getMessage()->shouldReturn('Transition "start_checkout" is invalid for this state machine.');
+        $this
+            ->getMessage()
+            ->shouldReturn('Transition "start_checkout" is invalid for "checkout_state_machine" state machine. Possible transitions are: start and abandon.')
+        ;
     }
 }

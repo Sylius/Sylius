@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Symfony\Component\Form\FormInterface;
@@ -34,7 +35,9 @@ class AddressingStep extends CheckoutStep
     {
         $order = $this->getCurrentCart();
 
-        $this->applyTransition(OrderCheckoutTransitions::TRANSITION_READDRESS, $order, true);
+        if (OrderCheckoutStates::STATE_STARTED !== $order->getCheckoutState()) {
+            $this->applyTransition(OrderCheckoutTransitions::TRANSITION_READDRESS, $order);
+        }
 
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::ADDRESSING_INITIALIZE, $order);
         $form = $this->createCheckoutAddressingForm($order, $this->getCustomer());

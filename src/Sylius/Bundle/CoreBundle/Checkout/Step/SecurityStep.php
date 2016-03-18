@@ -16,6 +16,7 @@ use Sylius\Bundle\FlowBundle\Process\Step\ActionResult;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Sylius\Component\Resource\Event\ResourceEvent;
@@ -37,7 +38,10 @@ class SecurityStep extends CheckoutStep
     public function displayAction(ProcessContextInterface $context)
     {
         $order = $this->getCurrentCart();
-        $this->applyTransition(OrderCheckoutTransitions::TRANSITION_START, $order);
+
+        if (OrderCheckoutStates::STATE_CART === $order->getCheckoutState()) {
+            $this->applyTransition(OrderCheckoutTransitions::TRANSITION_START, $order);
+        }
 
         // If user is already logged in, transparently jump to next step.
         if ($this->isUserLoggedIn()) {

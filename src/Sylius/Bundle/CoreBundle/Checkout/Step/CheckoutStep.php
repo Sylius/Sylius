@@ -95,13 +95,13 @@ abstract class CheckoutStep extends AbstractControllerStep
      *
      * @throws InvalidTransitionException
      */
-    protected function applyTransition($transition, OrderInterface $order, $flush = false)
+    protected function applyTransition($transition, OrderInterface $order, $flush = true)
     {
         $stateMachineFactory = $this->get('sm.factory');
         $cartStateMachine = $stateMachineFactory->get($order, 'sylius_order_checkout');
 
         if (!$cartStateMachine->can($transition)) {
-            throw new InvalidTransitionException($transition);
+            throw new InvalidTransitionException($transition, $cartStateMachine);
         }
 
         $cartStateMachine->apply($transition);
