@@ -13,7 +13,6 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\OrderShipmentProcessorInterface;
-use Sylius\Component\Core\OrderProcessing\ShippingChargesProcessorInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Shipping\Processor\ShipmentProcessorInterface;
 use Sylius\Component\Shipping\ShipmentTransitions;
@@ -68,7 +67,7 @@ class OrderShippingListener
     /**
      * @param GenericEvent $event
      *
-     * @return mixed
+     * @return OrderInterface
      */
     protected function getOrder(GenericEvent $event)
     {

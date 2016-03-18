@@ -22,14 +22,14 @@ use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
 class OrderRecalculator implements OrderRecalculatorInterface
 {
     /**
-     * @var DelegatingCalculatorInterface
-     */
-    private $priceCalculator;
-
-    /**
      * @var OrderTaxesApplicatorInterface
      */
     private $taxesApplicator;
+
+    /**
+     * @var PricesRecalculatorInterface
+     */
+    private $pricesRecalculator;
 
     /**
      * @var PromotionProcessorInterface
@@ -42,19 +42,19 @@ class OrderRecalculator implements OrderRecalculatorInterface
     private $shippingChargesProcessor;
 
     /**
-     * @param DelegatingCalculatorInterface $priceCalculator
      * @param OrderTaxesApplicatorInterface $taxesApplicator
+     * @param PricesRecalculatorInterface $pricesRecalculator
      * @param PromotionProcessorInterface $promotionProcessor
      * @param ShippingChargesProcessorInterface $shippingChargesProcessor
      */
     public function __construct(
-        DelegatingCalculatorInterface $priceCalculator,
         OrderTaxesApplicatorInterface $taxesApplicator,
+        PricesRecalculatorInterface $pricesRecalculator,
         PromotionProcessorInterface $promotionProcessor,
         ShippingChargesProcessorInterface $shippingChargesProcessor
     ) {
-        $this->priceCalculator = $priceCalculator;
         $this->taxesApplicator = $taxesApplicator;
+        $this->pricesRecalculator = $pricesRecalculator;
         $this->promotionProcessor = $promotionProcessor;
         $this->shippingChargesProcessor = $shippingChargesProcessor;
     }
@@ -66,34 +66,9 @@ class OrderRecalculator implements OrderRecalculatorInterface
      */
     public function recalculate(OrderInterface $order)
     {
-        $this->recalculatePrices($order);
+        $this->pricesRecalculator->recalculate($order);
         $this->shippingChargesProcessor->applyShippingCharges($order);
         $this->promotionProcessor->process($order);
         $this->taxesApplicator->apply($order);
-    }
-
-    /**
-     * @param OrderInterface $order
-     */
-    private function recalculatePrices(OrderInterface $order)
-    {
-        $context = [];
-        if (null !== $customer = $order->getCustomer()) {
-            $context['customer'] = $customer;
-            $context['groups'] = $customer->getGroups()->toArray();
-        }
-
-        if (null !== $order->getChannel()) {
-            $context['channel'] = [$order->getChannel()];
-        }
-
-        foreach ($order->getItems() as $item) {
-            if ($item->isImmutable()) {
-                continue;
-            }
-
-            $context['quantity'] = $item->getQuantity();
-            $item->setUnitPrice($this->priceCalculator->calculate($item->getVariant(), $context));
-        }
     }
 }
