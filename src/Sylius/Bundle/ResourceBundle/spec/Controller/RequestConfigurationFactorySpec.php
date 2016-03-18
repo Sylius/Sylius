@@ -54,13 +54,53 @@ class RequestConfigurationFactorySpec extends ObjectBehavior
         $request->attributes = $attributesBag;
 
         $headersBag->has('Accept')->willReturn(false);
-        $headersBag->has('Accept')->willReturn(false);
 
         $configuration = ['template' => ':Product:show.html.twig'];
 
-        $attributesBag->get('_sylius', [])->shouldBeCalled()->willReturn($configuration);
+        $attributesBag->get('_sylius', [])->willReturn($configuration);
         $parametersParser->parseRequestValues($configuration, $request)->willReturn($configuration);
 
         $this->create($metadata, $request)->shouldHaveType(RequestConfiguration::class);
+    }
+
+    function it_creates_configuration_without_default_settings(
+        MetadataInterface $metadata,
+        Request $request,
+        ParametersParser $parametersParser,
+        ParameterBag $headersBag,
+        ParameterBag $attributesBag
+    ) {
+        $request->headers = $headersBag;
+        $request->attributes = $attributesBag;
+
+        $configuration = ['template' => ':Product:list.html.twig'];
+
+        $attributesBag->get('_sylius', [])->willReturn($configuration);
+        $parametersParser->parseRequestValues($configuration, $request)->willReturn($configuration);
+
+        $this->create($metadata, $request)->isSortable()->shouldReturn(false);
+    }
+
+    function it_creates_configuration_with_default_settings(
+        MetadataInterface $metadata,
+        Request $request,
+        ParametersParser $parametersParser,
+        ParameterBag $headersBag,
+        ParameterBag $attributesBag
+    ) {
+        $defaultParameters = ['sortable' => true];
+
+        $this->beConstructedWith($parametersParser, RequestConfiguration::class, $defaultParameters);
+
+        $request->headers = $headersBag;
+        $request->attributes = $attributesBag;
+
+        $configuration = ['template' => ':Product:list.html.twig'];
+        $attributesBag->get('_sylius', [])->willReturn($configuration);
+
+        $configuration = ['template' => ':Product:list.html.twig', 'sortable' => true];
+        $parametersParser->parseRequestValues($configuration, $request)->willReturn($configuration);
+
+        $this->create($metadata, $request)->isSortable()->shouldReturn(true);
     }
 }

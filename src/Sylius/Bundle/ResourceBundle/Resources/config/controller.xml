@@ -42,6 +42,7 @@
         <service id="sylius.resource_controller.request_configuration_factory" class="%sylius.resource_controller.request_configuration_factory.class%">
             <argument type="service" id="sylius.resource_controller.parameters_parser" />
             <argument>%sylius.resource_controller.request_configuration.class%</argument>
+            <argument>%sylius.resource.settings%</argument>
         </service>
         <service id="sylius.resource_controller.new_resource_factory" class="%sylius.resource_controller.new_resource_factory.class%" />
         <service id="sylius.resource_controller.single_resource_provider" class="%sylius.resource_controller.single_resource_provider.class%" />
