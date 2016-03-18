@@ -375,11 +375,6 @@
         <service id="sylius.listener.order_recalculation" class="%sylius.listener.order_recalculation.class%">
             <argument type="service" id="sylius.order_processing.order_recalculator" />
             <tag name="kernel.event_listener" event="sylius.cart_change" method="recalculateOrder"/>
-            <tag name="kernel.event_listener" event="sylius.checkout.security.pre_complete" method="recalculateOrder" />
-            <tag name="kernel.event_listener" event="sylius.checkout.addressing.pre_complete" method="recalculateOrder" />
-            <tag name="kernel.event_listener" event="sylius.checkout.shipping.pre_complete" method="recalculateOrder" />
-            <tag name="kernel.event_listener" event="sylius.checkout.payment.pre_complete" method="recalculateOrder" />
-            <tag name="kernel.event_listener" event="sylius.checkout.finalize.initialize" method="recalculateOrder" />
         </service>
 
         <service id="sylius.active_promotions_by_channel_provider" class="%sylius.active_promotions_by_channel_provider.class%">
