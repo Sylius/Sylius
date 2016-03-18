@@ -13,7 +13,6 @@ namespace spec\Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
-use PhpSpec\Exception\Example\NotEqualException;
 use PhpSpec\ObjectBehavior;
 use Sylius\Behat\Context\Ui\Admin\ManagingCountriesContext;
 use Sylius\Behat\Page\Admin\Country\CreatePageInterface;
@@ -93,7 +92,7 @@ class ManagingCountriesContextSpec extends ObjectBehavior
         $notificationAccessor->hasSuccessMessage()->willReturn(false);
         $notificationAccessor->isSuccessfullyCreatedFor(ManagingCountriesContext::RESOURCE_NAME)->willReturn(true);
 
-        $this->shouldThrow(NotEqualException::class)->during('iShouldBeNotifiedAboutSuccessfulCreation');
+        $this->shouldThrow(\InvalidArgumentException::class)->during('iShouldBeNotifiedAboutSuccessfulCreation');
     }
 
     function it_throws_not_equal_exception_if_edition_message_is_not_successful(NotificationAccessorInterface $notificationAccessor)
@@ -101,7 +100,7 @@ class ManagingCountriesContextSpec extends ObjectBehavior
         $notificationAccessor->hasSuccessMessage()->willReturn(false);
         $notificationAccessor->isSuccessfullyUpdatedFor(ManagingCountriesContext::RESOURCE_NAME)->willReturn(true);
 
-        $this->shouldThrow(NotEqualException::class)->during('iShouldBeNotifiedAboutSuccessfulEdition');
+        $this->shouldThrow(\InvalidArgumentException::class)->during('iShouldBeNotifiedAboutSuccessfulEdition');
     }
 
     function it_throws_not_equal_exception_if_successful_creation_message_does_not_appear(NotificationAccessorInterface $notificationAccessor)
@@ -109,7 +108,7 @@ class ManagingCountriesContextSpec extends ObjectBehavior
         $notificationAccessor->hasSuccessMessage()->willReturn(true);
         $notificationAccessor->isSuccessfullyCreatedFor(ManagingCountriesContext::RESOURCE_NAME)->willReturn(false);
 
-        $this->shouldThrow(NotEqualException::class)->during('iShouldBeNotifiedAboutSuccessfulCreation');
+        $this->shouldThrow(\InvalidArgumentException::class)->during('iShouldBeNotifiedAboutSuccessfulCreation');
     }
 
     function it_throws_not_equal_exception_if_successful_edition_message_does_not_appear(NotificationAccessorInterface $notificationAccessor)
@@ -117,7 +116,7 @@ class ManagingCountriesContextSpec extends ObjectBehavior
         $notificationAccessor->hasSuccessMessage()->willReturn(true);
         $notificationAccessor->isSuccessfullyUpdatedFor(ManagingCountriesContext::RESOURCE_NAME)->willReturn(false);
 
-        $this->shouldThrow(NotEqualException::class)->during('iShouldBeNotifiedAboutSuccessfulEdition');
+        $this->shouldThrow(\InvalidArgumentException::class)->during('iShouldBeNotifiedAboutSuccessfulEdition');
     }
 
     function it_asserts_that_country_appears_in_the_store(IndexPageInterface $countryIndexPage, CountryInterface $country)
@@ -125,7 +124,7 @@ class ManagingCountriesContextSpec extends ObjectBehavior
         $country->getCode()->willReturn('FR');
         $countryIndexPage->isResourceOnPage(['code' => 'FR'])->willReturn(true);
 
-        $this->countryWithNameShouldAppearInTheStore($country);
+        $this->countryShouldAppearInTheStore($country);
     }
 
     function it_throws_not_equal_exception_if_country_does_not_appear_in_the_store(
@@ -135,7 +134,7 @@ class ManagingCountriesContextSpec extends ObjectBehavior
         $country->getCode()->willReturn('FR');
         $countryIndexPage->isResourceOnPage(['code' => 'FR'])->willReturn(false);
 
-        $this->shouldThrow(NotEqualException::class)->during('countryWithNameShouldAppearInTheStore', [$country]);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('countryShouldAppearInTheStore', [$country]);
     }
 
     function it_opens_country_update_page(UpdatePageInterface $countryUpdatePage, CountryInterface $country)
@@ -184,8 +183,8 @@ class ManagingCountriesContextSpec extends ObjectBehavior
         $countryIndexPage->isCountryDisabled($country)->willReturn(false);
         $countryIndexPage->isCountryEnabled($country)->willReturn(false);
 
-        $this->shouldThrow(NotEqualException::class)->during('thisCountryShouldBeEnabled', [$country]);
-        $this->shouldThrow(NotEqualException::class)->during('thisCountryShouldBeDisabled', [$country]);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('thisCountryShouldBeEnabled', [$country]);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('thisCountryShouldBeDisabled', [$country]);
     }
 
     function it_asserts_that_country_name_can_not_be_choosen_again(CreatePageInterface $countryCreatePage)

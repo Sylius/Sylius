@@ -18,6 +18,7 @@ use Sylius\Behat\Page\Admin\Country\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Country\UpdatePageInterface;
 use Sylius\Behat\Service\Accessor\NotificationAccessorInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -73,6 +74,14 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
+     * @Given /^I want to edit (this country)$/
+     */
+    public function iWantToEditThisCountry(CountryInterface $country)
+    {
+        $this->countryUpdatePage->open(['id' => $country->getId()]);
+    }
+
+    /**
      * @When /^I choose "([^"]*)"$/
      */
     public function iChoose($name)
@@ -89,65 +98,7 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Then /^I should be notified about successful creation$/
-     */
-    public function iShouldBeNotifiedAboutSuccessfulCreation()
-    {
-        expect($this->notificationAccessor->hasSuccessMessage())->toBe(true);
-        expect($this->notificationAccessor->isSuccessfullyCreatedFor(self::RESOURCE_NAME))->toBe(true);
-    }
-
-    /**
-     * @Then /^I should be notified about successful edition$/
-     */
-    public function iShouldBeNotifiedAboutSuccessfulEdition()
-    {
-        expect($this->notificationAccessor->hasSuccessMessage())->toBe(true);
-        expect($this->notificationAccessor->isSuccessfullyUpdatedFor(self::RESOURCE_NAME))->toBe(true);
-    }
-
-    /**
-     * @Given /^(country "([^"]*)") should appear in the store$/
-     */
-    public function countryWithNameShouldAppearInTheStore(CountryInterface $country)
-    {
-        expect($this->countryIndexPage->isResourceOnPage(['code' => $country->getCode()]))->toBe(true);
-    }
-
-    /**
-     * @Given /^I want to edit (this country)$/
-     */
-    public function iWantToEditThisCountry(CountryInterface $country)
-    {
-        $this->countryUpdatePage->open(['id' => $country->getId()]);
-    }
-
-    /**
-     * @When /^I disable it$/
-     */
-    public function iDisableIt()
-    {
-        $this->countryUpdatePage->disable();
-    }
-
-    /**
-     * @Given /^I save my changes$/
-     */
-    public function iSaveMyChanges()
-    {
-        $this->countryUpdatePage->saveChanges();
-    }
-
-    /**
-     * @Given /^(this country) should be disabled$/
-     */
-    public function thisCountryShouldBeDisabled(CountryInterface $country)
-    {
-        expect($this->countryIndexPage->isCountryDisabled($country))->toBe(true);
-    }
-
-    /**
-     * @When /^I enable it$/
+     * @When I enable it
      */
     public function iEnableIt()
     {
@@ -155,11 +106,91 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Given /^(this country) should be enabled$/
+     * @When I disable it
+     */
+    public function iDisableIt()
+    {
+        $this->countryUpdatePage->disable();
+    }
+
+    /**
+     * @When I save my changes
+     */
+    public function iSaveMyChanges()
+    {
+        $this->countryUpdatePage->saveChanges();
+    }
+
+    /**
+     * @Then I should be notified about successful creation
+     */
+    public function iShouldBeNotifiedAboutSuccessfulCreation()
+    {
+        $doesSuccessMessageAppear = $this->notificationAccessor->hasSuccessMessage();
+        Assert::true(
+            $doesSuccessMessageAppear,
+            sprintf('Message type is not positive')
+        );
+
+        $doesSuccessfulCreationMessageAppear = $this->notificationAccessor->isSuccessfullyCreatedFor(self::RESOURCE_NAME);
+        Assert::true(
+            $doesSuccessfulCreationMessageAppear,
+            sprintf('Successful creation message does not appear')
+        );
+    }
+
+    /**
+     * @Then I should be notified about successful edition
+     */
+    public function iShouldBeNotifiedAboutSuccessfulEdition()
+    {
+        $doesSuccessMessageAppear = $this->notificationAccessor->hasSuccessMessage();
+        Assert::true(
+            $doesSuccessMessageAppear,
+            'Message type is not positive'
+        );
+
+        $doesSuccessfulEditionMessageAppear = $this->notificationAccessor->isSuccessfullyUpdatedFor(self::RESOURCE_NAME);
+        Assert::true(
+            $doesSuccessfulEditionMessageAppear,
+            'Successful edition message does not appear'
+        );
+    }
+
+    /**
+     * @Then /^(country "([^"]*)") should appear in the store$/
+     */
+    public function countryShouldAppearInTheStore(CountryInterface $country)
+    {
+        $doesCountryExist = $this->countryIndexPage->isResourceOnPage(['code' => $country->getCode()]);
+        Assert::true(
+            $doesCountryExist,
+            sprintf('Country %s should exist but it does not', $country->getCode())
+        );
+    }
+
+    /**
+     * @Then /^(this country) should be enabled$/
      */
     public function thisCountryShouldBeEnabled(CountryInterface $country)
     {
-        expect($this->countryIndexPage->isCountryEnabled($country))->toBe(true);
+        $isCountryEnabled = $this->countryIndexPage->isCountryEnabled($country);
+        Assert::true(
+            $isCountryEnabled,
+            sprintf('Country %s should be enabled but it is not', $country->getCode())
+        );
+    }
+
+    /**
+     * @Then /^(this country) should be disabled$/
+     */
+    public function thisCountryShouldBeDisabled(CountryInterface $country)
+    {
+        $isCountryDisabled = $this->countryIndexPage->isCountryDisabled($country);
+        Assert::true(
+            $isCountryDisabled,
+            sprintf('Country %s should be disabled but it is not', $country->getCode())
+        );
     }
 
     /**

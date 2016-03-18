@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -26,9 +27,10 @@ class GeographicalContextSpec extends ObjectBehavior
     function let(
         FactoryInterface $countryFactory,
         RepositoryInterface $countryRepository,
-        CountryNameConverterInterface $nameToCodeConverter
+        CountryNameConverterInterface $nameToCodeConverter,
+        SharedStorageInterface $sharedStorage
     ) {
-        $this->beConstructedWith($countryFactory, $countryRepository, $nameToCodeConverter);
+        $this->beConstructedWith($countryFactory, $countryRepository, $nameToCodeConverter, $sharedStorage);
     }
 
     function it_is_initializable()
@@ -64,5 +66,53 @@ class GeographicalContextSpec extends ObjectBehavior
         $nameToCodeConverter->convertToCode('France')->willReturn('FR');
 
         $this->storeShipsTo('Australia', 'China', 'France');
+    }
+
+    function it_throws_invalid_argument_exception_when_cannot_convert_name_to_code(
+        CountryInterface $country,
+        FactoryInterface $countryFactory,
+        CountryNameConverterInterface $nameToCodeConverter
+    ) {
+        $countryFactory->createNew()->willReturn($country);
+        $nameToCodeConverter->convertToCode('France')->willThrow(\InvalidArgumentException::class);
+
+        $this->shouldThrow(\InvalidArgumentException::class)->during('storeShipsTo', ['France']);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('theStoreOperatesIn', ['France']);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('theStoreHasDisabledCountry', ['France']);
+    }
+
+    function it_configures_that_store_operates_in_given_country(
+        CountryInterface $country,
+        CountryNameConverterInterface $nameToCodeConverter,
+        FactoryInterface $countryFactory,
+        RepositoryInterface $countryRepository,
+        SharedStorageInterface $sharedStorage
+    ) {
+        $countryFactory->createNew()->willReturn($country);
+        $nameToCodeConverter->convertToCode('France')->willReturn('FR');
+
+        $country->setCode('FR')->shouldBeCalled();
+        $sharedStorage->set('country', $country)->shouldBeCalled();
+        $countryRepository->add($country)->shouldBeCalled();
+
+        $this->theStoreOperatesIn('France');
+    }
+
+    function it_configures_that_store_operates_in_given_country_disabled_by_default(
+        CountryInterface $country,
+        CountryNameConverterInterface $nameToCodeConverter,
+        FactoryInterface $countryFactory,
+        RepositoryInterface $countryRepository,
+        SharedStorageInterface $sharedStorage
+    ) {
+        $countryFactory->createNew()->willReturn($country);
+        $nameToCodeConverter->convertToCode('France')->willReturn('FR');
+
+        $country->setCode('FR')->shouldBeCalled();
+        $country->disable()->shouldBeCalled();
+        $sharedStorage->set('country', $country)->shouldBeCalled();
+        $countryRepository->add($country)->shouldBeCalled();
+
+        $this->theStoreHasDisabledCountry('France');
     }
 }

@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Admin\Country;
 
+use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 
 /**
@@ -25,13 +26,38 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         'enabled' => '#sylius_country_enabled',
     ];
 
+    /**
+     * {@inheritdoc}
+     */
     public function enable()
     {
-        $this->getElement('enabled')->check();
+        $enabled = $this->getElement('enabled');
+        $this->assertPriorStateOfToggleableElement($enabled, false);
+
+        $enabled->check();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function disable()
     {
-        $this->getElement('enabled')->uncheck();
+        $enabled = $this->getElement('enabled');
+        $this->assertPriorStateOfToggleableElement($enabled, true);
+
+        $enabled->uncheck();
+    }
+
+    /**
+     * @param NodeElement $toggleableElement
+     * @param bool $expectedState
+     *
+     * @throws \RuntimeException
+     */
+    private function assertPriorStateOfToggleableElement(NodeElement $toggleableElement, $expectedState)
+    {
+        if ($toggleableElement->isChecked() !== $expectedState) {
+            throw new \RuntimeException('Toggleable element state %s but expected %s', $toggleableElement->isChecked(), $expectedState);
+        }
     }
 }

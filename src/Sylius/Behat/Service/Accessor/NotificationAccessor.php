@@ -91,7 +91,7 @@ final class NotificationAccessor implements NotificationAccessorInterface
      */
     private function getMessageElement()
     {
-        $messageElement = $this->createMessageElement();
+        $messageElement = $this->session->getPage()->find('css', self::NOTIFICATION_ELEMENT_CSS);
         $this->assertElementExistsOnPage($messageElement);
 
         return $messageElement;
@@ -104,33 +104,8 @@ final class NotificationAccessor implements NotificationAccessorInterface
      */
     private function assertElementExistsOnPage(NodeElement $element)
     {
-        if (!$element->has('xpath', $element->getXpath())) {
+        if (null === $element) {
             throw new ElementNotFoundException(sprintf('%s element is not present on the page', self::NOTIFICATION_ELEMENT_CSS));
         }
-    }
-
-    /**
-     * @return NodeElement
-     */
-    private function createMessageElement()
-    {
-        return new NodeElement(
-            $this->getSelectorAsXpath(self::NOTIFICATION_ELEMENT_CSS, $this->session->getSelectorsHandler()),
-            $this->session
-        );
-    }
-
-    /**
-     * @param string|array $selector
-     * @param SelectorsHandler $selectorsHandler
-     *
-     * @return string
-     */
-    private function getSelectorAsXpath($selector, SelectorsHandler $selectorsHandler)
-    {
-        $selectorType = is_array($selector) ? key($selector) : 'css';
-        $locator = is_array($selector) ? $selector[$selectorType] : $selector;
-
-        return $selectorsHandler->selectorToXpath($selectorType, $locator);
     }
 }

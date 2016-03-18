@@ -24,14 +24,14 @@ final class ManagingLocalesContext implements Context
     const RESOURCE_NAME = 'locale';
 
     /**
-     * @var IndexPageInterface
-     */
-    private $indexPage;
-
-    /**
      * @var CreatePageInterface
      */
     private $createPage;
+
+    /**
+     * @var IndexPageInterface
+     */
+    private $indexPage;
 
     /**
      * @var NotificationAccessorInterface
@@ -39,17 +39,17 @@ final class ManagingLocalesContext implements Context
     private $notificationAccessor;
 
     /**
-     * @param IndexPageInterface $indexPage
      * @param CreatePageInterface $createPage
+     * @param IndexPageInterface $indexPage
      * @param NotificationAccessorInterface $notificationAccessor
      */
     public function __construct(
-        IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
+        IndexPageInterface $indexPage,
         NotificationAccessorInterface $notificationAccessor
     ) {
-        $this->indexPage = $indexPage;
         $this->createPage = $createPage;
+        $this->indexPage = $indexPage;
         $this->notificationAccessor = $notificationAccessor;
     }
 

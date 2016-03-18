@@ -27,11 +27,11 @@ use Sylius\Behat\Service\Accessor\NotificationAccessorInterface;
 class ManagingLocalesContextSpec extends ObjectBehavior
 {
     function let(
-        IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
+        IndexPageInterface $indexPage,
         NotificationAccessorInterface $notificationAccessor
     ) {
-        $this->beConstructedWith($indexPage, $createPage, $notificationAccessor);
+        $this->beConstructedWith($createPage, $indexPage, $notificationAccessor);
     }
 
     function it_is_initializable()
@@ -68,7 +68,7 @@ class ManagingLocalesContextSpec extends ObjectBehavior
     function it_asserts_that_resource_was_successfully_created(NotificationAccessorInterface $notificationAccessor)
     {
         $notificationAccessor->hasSuccessMessage()->willReturn(true);
-        $notificationAccessor->isSuccessfullyCreatedFor(ManagingLocaleContext::RESOURCE_NAME)->willReturn(true);
+        $notificationAccessor->isSuccessfullyCreatedFor(ManagingLocalesContext::RESOURCE_NAME)->willReturn(true);
 
         $this->iShouldBeNotifiedAboutSuccess();
     }
@@ -76,7 +76,7 @@ class ManagingLocalesContextSpec extends ObjectBehavior
     function it_throws_an_exception_if_there_is_no_success_message(NotificationAccessorInterface $notificationAccessor)
     {
         $notificationAccessor->hasSuccessMessage()->willReturn(false);
-        $notificationAccessor->isSuccessfullyCreatedFor(ManagingLocaleContext::RESOURCE_NAME)->willReturn(true);
+        $notificationAccessor->isSuccessfullyCreatedFor(ManagingLocalesContext::RESOURCE_NAME)->willReturn(true);
 
         $this->shouldThrow(NotEqualException::class)->during('iShouldBeNotifiedAboutSuccess');
     }
@@ -84,7 +84,7 @@ class ManagingLocalesContextSpec extends ObjectBehavior
     function it_throws_an_exception_if_resource_was_not_successfully_created(NotificationAccessorInterface $notificationAccessor)
     {
         $notificationAccessor->hasSuccessMessage()->willReturn(true);
-        $notificationAccessor->isSuccessfullyCreatedFor(ManagingLocaleContext::RESOURCE_NAME)->willReturn(false);
+        $notificationAccessor->isSuccessfullyCreatedFor(ManagingLocalesContext::RESOURCE_NAME)->willReturn(false);
 
         $this->shouldThrow(NotEqualException::class)->during('iShouldBeNotifiedAboutSuccess');
     }
