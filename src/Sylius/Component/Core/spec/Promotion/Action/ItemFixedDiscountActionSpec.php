@@ -50,7 +50,7 @@ class ItemFixedDiscountActionSpec extends ObjectBehavior
         $this->shouldHaveType(ItemDiscountAction::class);
     }
 
-    function it_applies_percentage_discount_on_every_unit_in_order(
+    function it_applies_fixed_discount_on_every_unit_in_order(
         $adjustmentFactory,
         $originator,
         $priceRangeFilter,

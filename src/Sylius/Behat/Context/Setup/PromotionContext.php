@@ -19,8 +19,8 @@ use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Test\Factory\TestPromotionFactoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
-use Sylius\Component\Promotion\Model\ActionInterface;
 use Sylius\Component\Promotion\Factory\CouponFactoryInterface;
+use Sylius\Component\Promotion\Model\ActionInterface;
 use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 
@@ -226,7 +226,7 @@ final class PromotionContext implements Context
     ) {
         $filterConfiguration = ['filters' => ['price_range' => ['min' => $amount]]];
 
-        $this->createPromotionWithPriceRangeFilter($promotion, $discount, $filterConfiguration);
+        $this->createFixedPromotionWithPriceRangeFilter($promotion, $discount, $filterConfiguration);
     }
 
     /**
@@ -240,7 +240,34 @@ final class PromotionContext implements Context
     ) {
         $filterConfiguration = ['filters' => ['price_range' => ['min' => $minAmount, 'max' => $maxAmount]]];
 
-        $this->createPromotionWithPriceRangeFilter($promotion, $discount, $filterConfiguration);
+        $this->createFixedPromotionWithPriceRangeFilter($promotion, $discount, $filterConfiguration);
+    }
+
+    /**
+     * @Given /^([^"]+) gives ("[^"]+%") off on every product with minimum price at ("(?:€|£|\$)[^"]+")$/
+     */
+    public function thisPromotionPercentageGivesOffOnEveryProductWithMinimumPriceAt(
+        PromotionInterface $promotion,
+        $discount,
+        $amount
+    ) {
+        $filterConfiguration = ['filters' => ['price_range' => ['min' => $amount]]];
+
+        $this->createPercentagePromotionWithPriceRangeFilter($promotion, $discount, $filterConfiguration);
+    }
+
+    /**
+     * @Given /^([^"]+) gives ("[^"]+%") off on every product priced between ("(?:€|£|\$)[^"]+") and ("(?:€|£|\$)[^"]+")$/
+     */
+    public function thisPromotionPercentageGivesOffOnEveryProductPricedBetween(
+        PromotionInterface $promotion,
+        $discount,
+        $minAmount,
+        $maxAmount
+    ) {
+        $filterConfiguration = ['filters' => ['price_range' => ['min' => $minAmount, 'max' => $maxAmount]]];
+
+        $this->createPercentagePromotionWithPriceRangeFilter($promotion, $discount, $filterConfiguration);
     }
 
     /**
@@ -262,9 +289,28 @@ final class PromotionContext implements Context
      * @param int $discount
      * @param array $configuration
      */
-    private function createPromotionWithPriceRangeFilter(PromotionInterface $promotion, $discount, array $configuration)
+    private function createFixedPromotionWithPriceRangeFilter(PromotionInterface $promotion, $discount, array $configuration)
     {
-        $action = $this->actionFactory->createItemFixedDiscount($discount);
+        $this->persistPromotionWithAction($promotion, $this->actionFactory->createItemFixedDiscount($discount), $configuration);
+    }
+
+    /**
+     * @param PromotionInterface $promotion
+     * @param int $discount
+     * @param array $configuration
+     */
+    private function createPercentagePromotionWithPriceRangeFilter(PromotionInterface $promotion, $discount, array $configuration)
+    {
+        $this->persistPromotionWithAction($promotion, $this->actionFactory->createItemPercentageDiscount($discount), $configuration);
+    }
+
+    /**
+     * @param PromotionInterface $promotion
+     * @param ActionInterface $action
+     * @param array $configuration
+     */
+    private function persistPromotionWithAction(PromotionInterface $promotion, ActionInterface $action, array $configuration)
+    {
         $configuration = array_merge($configuration, $action->getConfiguration());
         $action->setConfiguration($configuration);
 
