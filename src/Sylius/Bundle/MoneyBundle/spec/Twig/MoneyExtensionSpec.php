@@ -12,14 +12,14 @@
 namespace spec\Sylius\Bundle\MoneyBundle\Twig;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelper;
+use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelperInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class MoneyExtensionSpec extends ObjectBehavior
 {
-    function let(MoneyHelper $helper)
+    function let(MoneyHelperInterface $helper)
     {
         $this->beConstructedWith($helper);
     }

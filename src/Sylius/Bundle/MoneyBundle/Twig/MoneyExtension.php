@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\MoneyBundle\Twig;
 
-use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelper;
+use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelperInterface;
 
 /**
  * Sylius money Twig helper.
@@ -21,14 +21,14 @@ use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelper;
 class MoneyExtension extends \Twig_Extension
 {
     /**
-     * @var MoneyHelper
+     * @var MoneyHelperInterface
      */
     protected $helper;
 
     /**
-     * @param MoneyHelper $helper
+     * @param MoneyHelperInterface $helper
      */
-    public function __construct(MoneyHelper $helper)
+    public function __construct(MoneyHelperInterface $helper)
     {
         $this->helper = $helper;
     }

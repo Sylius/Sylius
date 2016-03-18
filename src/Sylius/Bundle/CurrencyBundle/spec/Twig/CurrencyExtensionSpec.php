@@ -12,14 +12,14 @@
 namespace spec\Sylius\Bundle\CurrencyBundle\Twig;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper;
+use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelperInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class CurrencyExtensionSpec extends ObjectBehavior
 {
-    function let(CurrencyHelper $helper)
+    function let(CurrencyHelperInterface $helper)
     {
         $this->beConstructedWith($helper);
     }

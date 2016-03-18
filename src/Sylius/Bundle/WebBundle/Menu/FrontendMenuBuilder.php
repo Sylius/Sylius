@@ -13,7 +13,7 @@ namespace Sylius\Bundle\WebBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
-use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper;
+use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelperInterface;
 use Sylius\Bundle\WebBundle\Event\MenuBuilderEvent;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
@@ -58,7 +58,7 @@ class FrontendMenuBuilder extends MenuBuilder
     /**
      * Currency converter helper.
      *
-     * @var CurrencyHelper
+     * @var CurrencyHelperInterface
      */
     protected $currencyHelper;
 
@@ -81,7 +81,7 @@ class FrontendMenuBuilder extends MenuBuilder
      * @param CurrencyProviderInterface $currencyProvider
      * @param TaxonRepositoryInterface $taxonRepository
      * @param CartProviderInterface $cartProvider
-     * @param CurrencyHelper $currencyHelper
+     * @param CurrencyHelperInterface $currencyHelper
      * @param ChannelContextInterface $channelContext
      * @param TokenStorageInterface $tokenStorage
      */
@@ -94,7 +94,7 @@ class FrontendMenuBuilder extends MenuBuilder
         CurrencyProviderInterface $currencyProvider,
         TaxonRepositoryInterface $taxonRepository,
         CartProviderInterface $cartProvider,
-        CurrencyHelper $currencyHelper,
+        CurrencyHelperInterface $currencyHelper,
         ChannelContextInterface $channelContext,
         TokenStorageInterface $tokenStorage
     ) {
