@@ -16,6 +16,7 @@
         <parameter key="sylius.behat.context.transform.addressing.class">Sylius\Behat\Context\Transform\AddressingContext</parameter>
         <parameter key="sylius.behat.context.transform.channel.class">Sylius\Behat\Context\Transform\ChannelContext</parameter>
         <parameter key="sylius.behat.context.transform.country.class">Sylius\Behat\Context\Transform\CountryContext</parameter>
+        <parameter key="sylius.behat.context.transform.coupon.class">Sylius\Behat\Context\Transform\CouponContext</parameter>
         <parameter key="sylius.behat.context.transform.customer.class">Sylius\Behat\Context\Transform\CustomerContext</parameter>
         <parameter key="sylius.behat.context.transform.lexical.class">Sylius\Behat\Context\Transform\LexicalContext</parameter>
         <parameter key="sylius.behat.context.transform.payment.class">Sylius\Behat\Context\Transform\PaymentContext</parameter>
@@ -46,6 +47,11 @@
             <tag name="sylius.behat.context" />
         </service>
 
+        <service id="sylius.behat.context.transform.coupon" class="%sylius.behat.context.transform.coupon.class%" scope="scenario">
+            <argument type="service" id="sylius.repository.promotion_coupon" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
         <service id="sylius.behat.context.transform.customer" class="%sylius.behat.context.transform.customer.class%" scope="scenario">
             <argument type="service" id="sylius.repository.customer" container="symfony" />
             <argument type="service" id="sylius.factory.customer" container="symfony" />
@@ -69,7 +75,6 @@
 
         <service id="sylius.behat.context.transform.promotion" class="%sylius.behat.context.transform.promotion.class%" scope="scenario">
             <argument type="service" id="sylius.repository.promotion" container="symfony" />
-            <argument type="service" id="sylius.repository.promotion_coupon" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 

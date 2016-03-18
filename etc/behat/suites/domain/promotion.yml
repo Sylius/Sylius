@@ -14,6 +14,7 @@ default:
                 - sylius.behat.context.transform.payment
                 - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.promotion
+                - sylius.behat.context.transform.coupon
                 - sylius.behat.context.transform.shipping
 
                 - sylius.behat.context.setup.channel
