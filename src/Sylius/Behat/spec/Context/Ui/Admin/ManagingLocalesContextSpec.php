@@ -17,6 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Behat\Context\Ui\Admin\ManagingLocalesContext;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Locale\CreatePageInterface;
+use Sylius\Behat\Service\Accessor\NotificationAccessorInterface;
 
 /**
  * @mixin ManagingLocalesContext
@@ -25,9 +26,12 @@ use Sylius\Behat\Page\Admin\Locale\CreatePageInterface;
  */
 class ManagingLocalesContextSpec extends ObjectBehavior
 {
-    function let(IndexPageInterface $indexPage, CreatePageInterface $createPage)
-    {
-        $this->beConstructedWith($indexPage, $createPage);
+    function let(
+        IndexPageInterface $indexPage,
+        CreatePageInterface $createPage,
+        NotificationAccessorInterface $notificationAccessor
+    ) {
+        $this->beConstructedWith($indexPage, $createPage, $notificationAccessor);
     }
 
     function it_is_initializable()
@@ -61,26 +65,26 @@ class ManagingLocalesContextSpec extends ObjectBehavior
         $this->iAdd();
     }
 
-    function it_asserts_that_resource_was_successfully_created(IndexPageInterface $indexPage)
+    function it_asserts_that_resource_was_successfully_created(NotificationAccessorInterface $notificationAccessor)
     {
-        $indexPage->hasSuccessMessage()->willReturn(true);
-        $indexPage->isSuccessfullyCreated()->willReturn(true);
+        $notificationAccessor->hasSuccessMessage()->willReturn(true);
+        $notificationAccessor->isSuccessfullyCreatedFor(ManagingLocaleContext::RESOURCE_NAME)->willReturn(true);
 
         $this->iShouldBeNotifiedAboutSuccess();
     }
 
-    function it_throws_an_exception_if_there_is_no_success_message(IndexPageInterface $indexPage)
+    function it_throws_an_exception_if_there_is_no_success_message(NotificationAccessorInterface $notificationAccessor)
     {
-        $indexPage->hasSuccessMessage()->willReturn(false);
-        $indexPage->isSuccessfullyCreated()->willReturn(true);
+        $notificationAccessor->hasSuccessMessage()->willReturn(false);
+        $notificationAccessor->isSuccessfullyCreatedFor(ManagingLocaleContext::RESOURCE_NAME)->willReturn(true);
 
         $this->shouldThrow(NotEqualException::class)->during('iShouldBeNotifiedAboutSuccess');
     }
 
-    function it_throws_an_exception_if_resource_was_not_successfully_created(IndexPageInterface $indexPage)
+    function it_throws_an_exception_if_resource_was_not_successfully_created(NotificationAccessorInterface $notificationAccessor)
     {
-        $indexPage->hasSuccessMessage()->willReturn(true);
-        $indexPage->isSuccessfullyCreated()->willReturn(false);
+        $notificationAccessor->hasSuccessMessage()->willReturn(true);
+        $notificationAccessor->isSuccessfullyCreatedFor(ManagingLocaleContext::RESOURCE_NAME)->willReturn(false);
 
         $this->shouldThrow(NotEqualException::class)->during('iShouldBeNotifiedAboutSuccess');
     }

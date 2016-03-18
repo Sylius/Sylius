@@ -14,12 +14,15 @@ namespace Sylius\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Locale\CreatePageInterface;
+use Sylius\Behat\Service\Accessor\NotificationAccessorInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class ManagingLocalesContext implements Context
 {
+    const RESOURCE_NAME = 'locale';
+
     /**
      * @var IndexPageInterface
      */
@@ -31,13 +34,23 @@ final class ManagingLocalesContext implements Context
     private $createPage;
 
     /**
+     * @var NotificationAccessorInterface
+     */
+    private $notificationAccessor;
+
+    /**
      * @param IndexPageInterface $indexPage
      * @param CreatePageInterface $createPage
+     * @param NotificationAccessorInterface $notificationAccessor
      */
-    public function __construct(IndexPageInterface $indexPage, CreatePageInterface $createPage)
-    {
+    public function __construct(
+        IndexPageInterface $indexPage,
+        CreatePageInterface $createPage,
+        NotificationAccessorInterface $notificationAccessor
+    ) {
         $this->indexPage = $indexPage;
         $this->createPage = $createPage;
+        $this->notificationAccessor = $notificationAccessor;
     }
 
     /**
@@ -69,8 +82,8 @@ final class ManagingLocalesContext implements Context
      */
     public function iShouldBeNotifiedAboutSuccess()
     {
-        expect($this->indexPage->hasSuccessMessage())->toBe(true);
-        expect($this->indexPage->isSuccessfullyCreated())->toBe(true);
+        expect($this->notificationAccessor->hasSuccessMessage())->toBe(true);
+        expect($this->notificationAccessor->isSuccessfullyCreatedFor(self::RESOURCE_NAME))->toBe(true);
     }
 
     /**
