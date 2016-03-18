@@ -189,6 +189,7 @@ sylius:
         cancel: Cancel
         cancelled: Cancelled
         cart_locked: 'Cart locked'
+        cart_summary: 'Cart summary'
         categorization: Categorization
         category: Category
         change_password: 'Change your password'
