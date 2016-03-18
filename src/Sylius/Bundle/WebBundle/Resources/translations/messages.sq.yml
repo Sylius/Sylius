@@ -248,6 +248,8 @@ sylius:
       index: Njoftimet
     role:
       index: Funksionet
+    review:
+      index: Recensionet
     route:
       index: Rrugët
     sales: Shitjet
@@ -303,6 +305,8 @@ sylius:
     update: Afisho
     update_header: Afishimi i kanalit
     updated_at: Ndryshimi i fundit
+    hostname: Emri i hostit
+    theme: Tema
   checkout:
     addressing:
       header: Adresa e dorëzimit
@@ -674,12 +678,23 @@ sylius:
     total: Totali
     update_header: Duke afishuar porosinë
   review:
+    create: Recension i ri
+    index: Recensionet e produktit
+    manage: Menaxho recensionet
+    no_reviews: Nuk ka recensione.
     id: ID
     subject: Subjekti
     title: Titulli
+    status: Statusi
+    rating: Vlersimi
     author: Autori
     guest: I ftuar
     created_at: Krijuar më
+    details: Detajet e recensionit
+    editing: Modifikim i recensionit
+    header: Recensionet e produktit
+    product_review: Recensioni i produktit
+    no_results: Nuk ka recensione per kete produkt.
   order_item:
     product: Po ashtu
     quantity: Sasitë
@@ -725,6 +740,10 @@ sylius:
       refunded: Rimbursuar
       unknown: E panjohur
       void: Bosh
+    transition:
+      complete: perfundo
+      cancel: anulo
+      refund: rimburso
     update_header: Duke afishuar pagesën
     updated_at: Ndryshimi i fundit
   payment_method:
@@ -789,6 +808,7 @@ sylius:
     options: Opsionet
     original_price: Çmimi fillestar
     price: Çmimi me pakicë
+    rating: Vlersimi
     restricted_zone: Zonë e kufizuar
     remove_attribute: Fshi atributin
     shipping_category: Kategoria e dërgesës
@@ -978,6 +998,13 @@ sylius:
     sku: SKU
     state: Shteti
     tracking_code: Kodi i gjurmimit
+    transition:
+      release: lesho
+      backorder: kthe urdherin
+      prepare: pergatit
+      ship: trasporto
+      cancel: anulo
+      return: kthe
     update: Afisho
     update_header: Afishimi i dërgesës
     updated_at: Ndryshimi i fundit
