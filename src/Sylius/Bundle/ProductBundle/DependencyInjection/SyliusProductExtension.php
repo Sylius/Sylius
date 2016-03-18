@@ -85,7 +85,7 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
 
     /**
      * @param ContainerBuilder $container
-     * @param array            $config
+     * @param array $config
      */
     private function prependAttribute(ContainerBuilder $container, array $config)
     {
@@ -122,7 +122,7 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
 
     /**
      * @param ContainerBuilder $container
-     * @param array            $config
+     * @param array $config
      */
     private function prependVariation(ContainerBuilder $container, array $config)
     {
@@ -175,10 +175,6 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
     }
 
     /**
-     * Add elastica product listener
-     *
-     * Only if elastica is search engine
-     *
      * @param ContainerBuilder $container
      */
     public function prependElasticaProductListener(ContainerBuilder $container)
@@ -189,19 +185,18 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
             return;
         }
 
-        // Get engine
         $configuration = new SyliusSearchConfiguration();
         $processor = new Processor();
         $syliusSearchConfig = $processor->processConfiguration($configuration, $container->getExtensionConfig('sylius_search'));
         $engine = $syliusSearchConfig['engine'];
 
         if ($engine === 'elasticsearch') {
-            $tags = array('doctrine.event_listener' => array(
-                array('name' => 'doctrine.event_listener', 'event' => 'postPersist'),
-                array('name' => 'doctrine.event_listener', 'event' => 'postUpdate'),
-                array('name' => 'doctrine.event_listener', 'event' => 'postRemove'),
-                array('name' => 'doctrine.event_listener', 'event' => 'postFlush'),
-            ));
+            $tags = ['doctrine.event_listener' => array(
+                ['name' => 'doctrine.event_listener', 'event' => 'postPersist'],
+                ['name' => 'doctrine.event_listener', 'event' => 'postUpdate'],
+                ['name' => 'doctrine.event_listener', 'event' => 'postRemove'],
+                ['name' => 'doctrine.event_listener', 'event' => 'postFlush'],
+            ]];
 
             $configuration = new FosElasticaConfiguration(false);
             $processor = new Processor();

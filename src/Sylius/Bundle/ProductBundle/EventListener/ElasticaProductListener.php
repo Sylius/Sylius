@@ -16,12 +16,11 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PostFlushEventArgs;
 use FOS\ElasticaBundle\Persister\ObjectPersister;
 use Sylius\Component\Product\Model\AttributeValueInterface;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductTranslation;
 use Sylius\Component\Variation\Model\VariantInterface;
 
 /**
- * Elastica product listener
- *
  * @author Nicolas Adler <nicolas.adler@openizi.com>
  */
 class ElasticaProductListener implements EventSubscriber
@@ -32,12 +31,12 @@ class ElasticaProductListener implements EventSubscriber
     protected $objectPersister;
 
     /**
-     * Objects scheduled for update
+     * @var array
      */
-    public $scheduledForUpdate = [];
+    protected $scheduledForUpdate = [];
 
     /**
-     * @param OrmIndexer $ormIndexer
+     * @param ObjectPersister $objectPersister
      */
     public function __construct(ObjectPersister $objectPersister)
     {
@@ -82,49 +81,42 @@ class ElasticaProductListener implements EventSubscriber
     }
 
     /**
-     * Update product when variant is updated
-     *
-     * @param  $entity
-     */
-    private function update($entity)
-    {
-        if ($entity instanceof VariantInterface) {
-            $product = $entity->getObject();
-            if ($this->objectPersister->handlesObject($product)) {
-                $this->scheduledForUpdate[] = $product;
-            }
-        }
-
-        if ($entity instanceof AttributeValueInterface) {
-            $product = $entity->getSubject();
-            if ($this->objectPersister->handlesObject($product)) {
-                $this->scheduledForUpdate[] = $product;
-            }
-        }
-
-        if ($entity instanceof ProductTranslation) {
-            $product = $entity->getTranslatable();
-            if ($this->objectPersister->handlesObject($product)) {
-                $this->scheduledForUpdate[] = $product;
-            }
-        }
-    }
-
-    /**
      * @param PostFlushEventArgs $args
      */
     public function postFlush(PostFlushEventArgs $args)
     {
-        $this->index($args);
+        if (!empty($this->scheduledForUpdate)) {
+            $this->objectPersister->replaceMany($this->scheduledForUpdate);
+        }
     }
 
     /**
-     * @param PostFlushEventArgs $args
+     * Update product when variant is updated
+     *
+     * @param mixed $entity
      */
-    public function index(PostFlushEventArgs $args)
+    private function update($entity)
     {
-        if (!empty($this->scheduledForUpdate)) {
-            $this->objectPersister->replaceMany($this->scheduledForUpdate);
+        if ($entity instanceof VariantInterface) {
+            $this->addScheduledForUpdate($entity->getObject());
+        }
+
+        if ($entity instanceof AttributeValueInterface) {
+            $this->addScheduledForUpdate($entity->getSubject());
+        }
+
+        if ($entity instanceof ProductTranslation) {
+            $this->addScheduledForUpdate($entity->getTranslatable());
+        }
+    }
+
+    /**
+     * @param ProductInterface $product
+     */
+    private function addScheduledForUpdate(ProductInterface $product)
+    {
+        if ($this->objectPersister->handlesObject($product)) {
+            $this->scheduledForUpdate[] = $product;
         }
     }
 }
