@@ -14,10 +14,10 @@ namespace spec\Sylius\Behat\Context\Ui;
 use Behat\Behat\Context\Context;
 use PhpSpec\Exception\Example\FailureException;
 use PhpSpec\ObjectBehavior;
-use Sylius\Behat\Page\Customer\CustomerShowPageInterface;
+use Sylius\Behat\Page\Admin\Customer\ShowPageInterface;
 use Sylius\Behat\Page\ElementNotFoundException;
-use Sylius\Behat\Page\User\LoginPageInterface;
-use Sylius\Behat\Page\User\RegisterPageInterface;
+use Sylius\Behat\Page\Shop\User\LoginPageInterface;
+use Sylius\Behat\Page\Shop\User\RegisterPageInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
@@ -32,7 +32,7 @@ class UserContextSpec extends ObjectBehavior
     public function let(
         SharedStorageInterface $sharedStorage,
         UserRepositoryInterface $userRepository,
-        CustomerShowPageInterface $customerShowPage,
+        ShowPageInterface $customerShowPage,
         LoginPageInterface $loginPage,
         RegisterPageInterface $registerPage
     ) {
@@ -49,7 +49,7 @@ class UserContextSpec extends ObjectBehavior
         $this->shouldImplement(Context::class);
     }
 
-    function it_logs_in_user_with_given_credentials($loginPage)
+    function it_logs_in_user_with_given_credentials(LoginPageInterface $loginPage)
     {
         $loginPage->open()->shouldBeCalled();
         $loginPage->logIn('john.doe@example.com', 'password123')->shouldBeCalled();
@@ -58,9 +58,9 @@ class UserContextSpec extends ObjectBehavior
     }
 
     function it_deletes_account(
-        $userRepository,
-        $customerShowPage,
-        $sharedStorage,
+        UserRepositoryInterface $userRepository,
+        ShowPageInterface $customerShowPage,
+        SharedStorageInterface $sharedStorage,
         UserInterface $user,
         CustomerInterface $customer
     ) {
@@ -78,7 +78,9 @@ class UserContextSpec extends ObjectBehavior
     }
 
     function it_does_not_allow_deleting_my_own_account(
-        SharedStorageInterface $sharedStorage, UserInterface $admin, CustomerShowPageInterface $customerShowPage
+        SharedStorageInterface $sharedStorage,
+        UserInterface $admin,
+        ShowPageInterface $customerShowPage
     ) {
         $sharedStorage->get('admin')->willReturn($admin);
 
@@ -94,7 +96,7 @@ class UserContextSpec extends ObjectBehavior
         SharedStorageInterface $sharedStorage,
         UserInterface $user,
         CustomerInterface $customer,
-        CustomerShowPageInterface $customerShowPage
+        ShowPageInterface $customerShowPage
     ) {
         $sharedStorage->get('deleted_user')->willReturn($user);
 
@@ -108,7 +110,7 @@ class UserContextSpec extends ObjectBehavior
         $this->accountShouldBeDeleted();
     }
 
-    function it_tries_to_register_new_account($registerPage)
+    function it_tries_to_register_new_account(RegisterPageInterface $registerPage)
     {
         $registerPage->open()->shouldBeCalled();
         $registerPage->register('ted@example.com')->shouldBeCalled();
@@ -116,14 +118,14 @@ class UserContextSpec extends ObjectBehavior
         $this->iTryToRegister('ted@example.com');
     }
 
-    function it_checks_if_account_is_registered_successfully($registerPage)
+    function it_checks_if_account_is_registered_successfully(RegisterPageInterface $registerPage)
     {
         $registerPage->wasRegistrationSuccessful()->willReturn(true);
 
         $this->iShouldBeRegistered();
     }
 
-    function it_checks_if_account_registration_was_not_successful($registerPage)
+    function it_checks_if_account_registration_was_not_successful(RegisterPageInterface $registerPage)
     {
         $registerPage->wasRegistrationSuccessful()->willReturn(false);
 

@@ -13,7 +13,7 @@ namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\ChannelContextSetterInterface;
-use Sylius\Behat\Page\Channel\ChannelCreatePageInterface;
+use Sylius\Behat\Page\Admin\Channel\CreatePageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -40,7 +40,7 @@ final class ChannelContext implements Context
     private $channelRepository;
 
     /**
-     * @var ChannelCreatePageInterface
+     * @var CreatePageInterface
      */
     private $channelCreatePage;
 
@@ -53,14 +53,14 @@ final class ChannelContext implements Context
      * @param SharedStorageInterface $sharedStorage
      * @param ChannelContextSetterInterface $channelContextSetter
      * @param ChannelRepositoryInterface $channelRepository
-     * @param ChannelCreatePageInterface $channelCreatePage
+     * @param CreatePageInterface $channelCreatePage
      * @param HomePageInterface $homePage
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ChannelContextSetterInterface $channelContextSetter,
         ChannelRepositoryInterface $channelRepository,
-        ChannelCreatePageInterface $channelCreatePage,
+        CreatePageInterface $channelCreatePage,
         HomePageInterface $homePage
     ) {
         $this->sharedStorage = $sharedStorage;

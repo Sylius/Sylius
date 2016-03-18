@@ -12,8 +12,8 @@
 namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Channel\ChannelIndexPageInterface;
-use Sylius\Behat\Page\Channel\ChannelUpdatePageInterface;
+use Sylius\Behat\Page\Admin\Channel\IndexPageInterface;
+use Sylius\Behat\Page\Admin\Channel\UpdatePageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -30,12 +30,12 @@ final class ThemeContext implements Context
     private $sharedStorage;
 
     /**
-     * @var ChannelIndexPageInterface
+     * @var IndexPageInterface
      */
     private $channelIndexPage;
 
     /**
-     * @var ChannelUpdatePageInterface
+     * @var UpdatePageInterface
      */
     private $channelUpdatePage;
 
@@ -46,14 +46,14 @@ final class ThemeContext implements Context
 
     /**
      * @param SharedStorageInterface $sharedStorage
-     * @param ChannelIndexPageInterface $channelIndexPage
-     * @param ChannelUpdatePageInterface $channelUpdatePage
+     * @param IndexPageInterface $channelIndexPage
+     * @param UpdatePageInterface $channelUpdatePage
      * @param HomePageInterface $homePage
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        ChannelIndexPageInterface $channelIndexPage,
-        ChannelUpdatePageInterface $channelUpdatePage,
+        IndexPageInterface $channelIndexPage,
+        UpdatePageInterface $channelUpdatePage,
         HomePageInterface $homePage
     ) {
         $this->sharedStorage = $sharedStorage;

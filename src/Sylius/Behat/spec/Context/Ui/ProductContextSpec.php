@@ -16,12 +16,9 @@ use PhpSpec\Exception\Example\NotEqualException;
 use PhpSpec\ObjectBehavior;
 use Sylius\Behat\Context\Ui\ProductContext;
 use Sylius\Behat\Page\Admin\Product\IndexPageInterface;
-use Sylius\Behat\Page\Admin\Product\ShowPageInterface;
-use Sylius\Behat\Page\Product\ProductShowPage;
-use Sylius\Behat\Page\Admin\Product\ShowPage as AdminProductShowPage;
-use Sylius\Behat\Page\Product\ProductShowPageInterface;
+use Sylius\Behat\Page\Admin\Product\ShowPageInterface as AdminProductShowPageInterface;
+use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Test\Services\SharedStorage;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
 /**
@@ -33,8 +30,8 @@ class ProductContextSpec extends ObjectBehavior
 {
     public function let(
         SharedStorageInterface $sharedStorage,
-        ProductShowPageInterface $productShowPage,
-        ShowPageInterface $adminProductShowPage,
+        ShowPageInterface $productShowPage,
+        AdminProductShowPageInterface $adminProductShowPage,
         IndexPageInterface $adminProductIndexPage
     ) {
         $this->beConstructedWith($sharedStorage, $productShowPage, $adminProductShowPage, $adminProductIndexPage);
@@ -50,7 +47,7 @@ class ProductContextSpec extends ObjectBehavior
         $this->shouldImplement(Context::class);
     }
 
-    function it_checks_if_i_am_able_to_access_product_page(ProductShowPageInterface $productShowPage, ProductInterface $product)
+    function it_checks_if_i_am_able_to_access_product_page(ShowPageInterface $productShowPage, ProductInterface $product)
     {
         $productShowPage->tryToOpen(['product' => $product])->shouldBeCalled();
         $productShowPage->isOpen(['product' => $product])->willReturn(true);
@@ -59,7 +56,7 @@ class ProductContextSpec extends ObjectBehavior
     }
 
     function it_throws_an_exception_if_i_am_not_able_to_access_product_page_when_i_should(
-        ProductShowPageInterface $productShowPage,
+        ShowPageInterface $productShowPage,
         ProductInterface $product
     ) {
         $productShowPage->tryToOpen(['product' => $product])->shouldBeCalled();
@@ -68,7 +65,7 @@ class ProductContextSpec extends ObjectBehavior
         $this->shouldThrow(NotEqualException::class)->during('iShouldBeAbleToAccessProduct',[$product]);
     }
 
-    function it_checks_if_i_am_not_able_to_access_product_page(ProductShowPageInterface $productShowPage, ProductInterface $product)
+    function it_checks_if_i_am_not_able_to_access_product_page(ShowPageInterface $productShowPage, ProductInterface $product)
     {
         $productShowPage->tryToOpen(['product' => $product])->shouldBeCalled();
         $productShowPage->isOpen(['product' => $product])->willReturn(false);
@@ -77,7 +74,7 @@ class ProductContextSpec extends ObjectBehavior
     }
 
     function it_throws_an_exception_if_i_am_able_to_access_product_page_when_i_should_not(
-        ProductShowPageInterface $productShowPage,
+        ShowPageInterface $productShowPage,
         ProductInterface $product
     ) {
         $productShowPage->tryToOpen(['product' => $product])->shouldBeCalled();
@@ -87,7 +84,7 @@ class ProductContextSpec extends ObjectBehavior
     }
 
     function it_deletes_a_product(
-        ShowPageInterface $adminProductShowPage,
+        AdminProductShowPageInterface $adminProductShowPage,
         SharedStorageInterface $sharedStorage,
         ProductInterface $product
     ) {

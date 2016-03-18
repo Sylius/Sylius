@@ -161,8 +161,10 @@ final class ProductContext implements Context
     /**
      * @Given /^("[^"]+" variant of product "[^"]+") belongs to ("[^"]+" tax category)$/
      */
-    public function productVariantBelongsToTaxCategory(ProductVariantInterface $productVariant, TaxCategoryInterface $taxCategory)
-    {
+    public function productVariantBelongsToTaxCategory(
+        ProductVariantInterface $productVariant,
+        TaxCategoryInterface $taxCategory
+    ) {
         $productVariant->setTaxCategory($taxCategory);
         $this->objectManager->flush($productVariant);
     }

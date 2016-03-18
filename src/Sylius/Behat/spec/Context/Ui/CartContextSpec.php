@@ -16,9 +16,9 @@ use PhpSpec\Exception\Example\FailureException;
 use PhpSpec\Exception\Example\NotEqualException;
 use PhpSpec\ObjectBehavior;
 use Sylius\Behat\Context\Ui\CartContext;
-use Sylius\Behat\Page\Cart\CartSummaryPageInterface;
 use Sylius\Behat\Page\ElementNotFoundException;
-use Sylius\Behat\Page\Product\ProductShowPageInterface;
+use Sylius\Behat\Page\Shop\Cart\CartSummaryPageInterface;
+use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
@@ -32,7 +32,7 @@ class CartContextSpec extends ObjectBehavior
     public function let(
         SharedStorageInterface $sharedStorage,
         CartSummaryPageInterface $cartSummaryPage,
-        ProductShowPageInterface $productShowPage
+        ShowPageInterface $productShowPage
     ) {
         $this->beConstructedWith($sharedStorage, $cartSummaryPage, $productShowPage);
     }
