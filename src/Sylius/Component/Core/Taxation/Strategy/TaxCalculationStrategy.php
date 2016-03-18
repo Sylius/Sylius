@@ -27,7 +27,7 @@ class TaxCalculationStrategy implements TaxCalculationStrategyInterface
     protected $type;
 
     /**
-     * @var Settings
+     * @var Settings|null
      */
     protected $settings;
 
@@ -38,16 +38,16 @@ class TaxCalculationStrategy implements TaxCalculationStrategyInterface
 
     /**
      * @param string $type
-     * @param Settings $settings
      * @param OrderTaxesApplicatorInterface[] $applicators
+     * @param Settings $settings
      */
-    public function __construct($type, Settings $settings, array $applicators)
+    public function __construct($type, array $applicators, Settings $settings = null)
     {
         $this->assertApplicatorsHaveCorrectType($applicators);
 
         $this->type = $type;
-        $this->settings = $settings;
         $this->applicators = $applicators;
+        $this->settings = $settings;
     }
 
     /**
@@ -73,7 +73,11 @@ class TaxCalculationStrategy implements TaxCalculationStrategyInterface
      */
     public function supports(OrderInterface $order, ZoneInterface $zone)
     {
-        return $this->settings->get('default_tax_calculation_strategy') === $this->type;
+        if (null !== $this->settings) {
+            return $this->settings->get('default_tax_calculation_strategy') === $this->type;
+        }
+
+        return false;
     }
 
     /**
