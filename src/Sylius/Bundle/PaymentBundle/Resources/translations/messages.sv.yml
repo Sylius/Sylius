@@ -3,5 +3,8 @@
 
 sylius:
   form:
+    payment:
+      state:
+        header: Betalningsstatus
     payment_method:
       name: Namn

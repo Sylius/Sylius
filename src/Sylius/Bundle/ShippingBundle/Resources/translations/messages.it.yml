@@ -6,6 +6,7 @@ sylius:
     rule:
       unit_count_configuration:
         count: Conta
+        equal: Uguale a
       type: Tipo di regola
     shipment:
       state: Stato
@@ -23,7 +24,11 @@ sylius:
         amount: Importo
       flexible_rate_configuration:
         label: Tariffa flessibile
+        additional_unit_cost: Costo aggiuntivo di unità
+        additional_unit_limit: Limite di unità aggiuntive
+        first_unit_cost: Costo della prima unità
       per_unit_rate_configuration:
+        label: Tariffa fissa per unità
         amount: Valore
       weight_rate_configuration:
         label: Tariffa basata sul peso

@@ -104,6 +104,6 @@ sylius:
       product_attribute_value:
         value: Valoare
     guest:
-      email: E-mail
+      email: Adresă e-mail
     product_association_type:
       name: Nume
