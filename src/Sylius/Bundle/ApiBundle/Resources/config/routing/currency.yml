@@ -1,0 +1,40 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_api_currency_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.currency:indexAction
+        _sylius:
+            serialization_groups: [Default]
+            paginate: $limit
+            sortable: true
+            sorting:
+                code: desc
+
+sylius_api_currency_create:
+    path: /
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.currency:createAction
+
+sylius_api_currency_update:
+    path: /{id}
+    methods: [PUT, PATCH]
+    defaults:
+        _controller: sylius.controller.currency:updateAction
+
+sylius_api_currency_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.currency:deleteAction
+
+sylius_api_currency_show:
+    path: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.currency:showAction
+        _sylius:
+            serialization_groups: [Detailed]

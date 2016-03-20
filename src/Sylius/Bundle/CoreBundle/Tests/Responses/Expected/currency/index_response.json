@@ -1,0 +1,42 @@
+{
+    "page": 1,
+    "limit": 10,
+    "pages": 1,
+    "total": 3,
+    "_links": {
+        "self": {
+            "href": "\/api\/currencies\/?page=1&limit=10"
+        },
+        "first": {
+            "href": "\/api\/currencies\/?page=1&limit=10"
+        },
+        "last": {
+            "href": "\/api\/currencies\/?page=1&limit=10"
+        }
+    },
+    "_embedded": {
+        "items": [
+            {
+                "id": @integer@,
+                "code": "USD",
+                "exchange_rate": 1,
+                "enabled": true,
+                "base": true
+            },
+            {
+                "id": @integer@,
+                "code": "GBP",
+                "exchange_rate": 0.69514,
+                "enabled": false,
+                "base": false
+            },
+            {
+                "id": @integer@,
+                "code": "EUR",
+                "exchange_rate": 0.89688,
+                "enabled": true,
+                "base": false
+            }
+        ]
+    }
+}

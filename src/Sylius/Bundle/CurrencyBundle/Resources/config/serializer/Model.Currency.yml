@@ -1,0 +1,33 @@
+Sylius\Component\Currency\Model\Currency:
+    exclusion_policy: ALL
+    xml_root_name: currency
+    properties:
+        id:
+            expose: true
+            type: integer
+            xml_attribute: true
+            groups: [Default, Detailed]
+        code:
+            expose: true
+            type: string
+            groups: [Default, Detailed]
+        exchangeRate:
+            expose: true
+            type: float
+            groups: [Default, Detailed]
+        enabled:
+            expose: true
+            type: boolean
+            groups: [Default, Detailed]
+        base:
+            expose: true
+            type: boolean
+            groups: [Default, Detailed]
+        createdAt:
+            expose: true
+            type: DateTime
+            groups: [Detailed]
+        updatedAt:
+            expose: true
+            type: DateTime
+            groups: [Detailed]

@@ -3,5 +3,6 @@ sylius:
         code:
             not_blank: Please choose currency code.
             unique: Currency code must be unique.
+            exact_length: Currency code must be exactly 3 characters long.
         exchange_rate:
             not_blank: Please enter exchange rate.
