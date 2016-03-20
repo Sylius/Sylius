@@ -7,5 +7,6 @@ sylius:
       main:
         configuration:
           header: Configuración
+          tax_categories: Categorías de Impuestos
           countries: Países
           locales: Idiomas

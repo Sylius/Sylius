@@ -28,7 +28,7 @@ sylius:
       type: Tip
       types:
         country: Zemlja
-        province: Provincija
+        province: Pokrajina
         zone: Zona
       scope: Adresa isporuke
       select: Izaberite

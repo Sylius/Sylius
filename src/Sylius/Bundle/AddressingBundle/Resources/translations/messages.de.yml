@@ -30,7 +30,7 @@ sylius:
       type: Typ
       types:
         country: Land
-        province: Region
+        province: Bundesland
         zone: Versandgebiet
       scope: Umfang
       select: Bundesland auswählen

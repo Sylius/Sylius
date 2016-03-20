@@ -7,7 +7,7 @@ sylius:
       name: Pavadinimas
       roles: Rolės
     user:
-      email: Elektroninis paštas
+      email: El. paštas
       enabled: Įjungta
       password:
         label: Slaptažodis
@@ -18,7 +18,7 @@ sylius:
       first_name: Vardas
       groups: Grupės
       last_name: Pavardė
-      email: Elektroninis paštas
+      email: El. paštas
       phone_number: Telefono numeris
       birthday: Gimimo diena
       billing_address: Mokėtojo adresas
