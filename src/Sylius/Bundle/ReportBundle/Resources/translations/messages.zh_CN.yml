@@ -6,3 +6,7 @@ sylius:
     report:
       name: 名称
       description: 描述
+  report:
+    index_header: 全部报表
+    no_results: 空的
+    create: 创建
