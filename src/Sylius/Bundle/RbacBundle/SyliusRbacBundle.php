@@ -13,8 +13,6 @@ namespace Sylius\Bundle\RbacBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Rbac\Model\PermissionInterface;
-use Sylius\Component\Rbac\Model\RoleInterface;
 
 /**
  * Rbac bundle.
@@ -30,17 +28,6 @@ class SyliusRbacBundle extends AbstractResourceBundle
     {
         return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getModelInterfaces()
-    {
-        return [
-            RoleInterface::class => 'sylius.model.role.class',
-            PermissionInterface::class => 'sylius.model.permission.class',
         ];
     }
 

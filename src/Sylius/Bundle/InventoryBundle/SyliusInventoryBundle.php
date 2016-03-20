@@ -13,7 +13,6 @@ namespace Sylius\Bundle\InventoryBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 
 /**
  * Flexible inventory management for Symfony2 applications.
@@ -30,16 +29,6 @@ class SyliusInventoryBundle extends AbstractResourceBundle
         return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
             SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM,
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getModelInterfaces()
-    {
-        return [
-            InventoryUnitInterface::class => 'sylius.model.inventory_unit.class',
         ];
     }
 
