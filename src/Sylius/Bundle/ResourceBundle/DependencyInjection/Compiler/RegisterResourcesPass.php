@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler;
 
+use Sylius\Bundle\ResourceBundle\DependencyInjection\DoctrineTargetEntitiesResolver;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -33,8 +34,18 @@ class RegisterResourcesPass implements CompilerPassInterface
         $resources = $container->getParameter('sylius.resources');
         $registry = $container->getDefinition('sylius.resource_registry');
 
+        $interfaces = [];
+
         foreach ($resources as $alias => $configuration) {
             $registry->addMethodCall('addFromAliasAndConfiguration', [$alias, $configuration]);
+
+            if (array_key_exists('interface', $configuration['classes'])) {
+                $alias = explode('.', $alias);
+                $interfaces[$configuration['classes']['interface']] = sprintf('%s.model.%s.class', $alias[0], $alias[1]);
+            }
         }
+
+        $resolver = new DoctrineTargetEntitiesResolver();
+        $resolver->resolve($container, $interfaces);
     }
 }

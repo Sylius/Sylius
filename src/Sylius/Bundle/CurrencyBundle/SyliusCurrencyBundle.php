@@ -13,7 +13,6 @@ namespace Sylius\Bundle\CurrencyBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Currency\Model\CurrencyInterface;
 
 /**
  * Currency bundle.
@@ -30,16 +29,6 @@ class SyliusCurrencyBundle extends AbstractResourceBundle
         return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
             SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM,
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getModelInterfaces()
-    {
-        return [
-            CurrencyInterface::class => 'sylius.model.currency.class',
         ];
     }
 

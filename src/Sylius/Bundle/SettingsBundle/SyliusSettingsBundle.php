@@ -14,7 +14,6 @@ namespace Sylius\Bundle\SettingsBundle;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\SettingsBundle\DependencyInjection\Compiler\RegisterSchemasPass;
-use Sylius\Bundle\SettingsBundle\Model\ParameterInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -42,16 +41,6 @@ class SyliusSettingsBundle extends AbstractResourceBundle
         parent::build($container);
 
         $container->addCompilerPass(new RegisterSchemasPass());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getModelInterfaces()
-    {
-        return [
-            ParameterInterface::class => 'sylius.model.parameter.class',
-        ];
     }
 
     /**

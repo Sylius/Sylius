@@ -13,9 +13,6 @@ namespace Sylius\Bundle\ContactBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Contact\Model\RequestInterface;
-use Sylius\Component\Contact\Model\TopicInterface;
-use Sylius\Component\Contact\Model\TopicTranslationInterface;
 
 /**
  * Contact bundle.
@@ -32,18 +29,6 @@ class SyliusContactBundle extends AbstractResourceBundle
     {
         return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getModelInterfaces()
-    {
-        return [
-            RequestInterface::class => 'sylius.model.contact_request.class',
-            TopicInterface::class => 'sylius.model.contact_topic.class',
-            TopicTranslationInterface::class => 'sylius.model.contact_topic_translation.class',
         ];
     }
 
