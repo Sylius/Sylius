@@ -82,5 +82,7 @@ sylius:
       roles: Rollen
     variant:
       sku: Bestandseinheit
+    guest:
+      email: E-Mail
     product_association_type:
       name: Name

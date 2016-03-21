@@ -3,7 +3,9 @@
 
 sylius:
   extensions:
+    header: 扩展组件
     accelerator:
+      header: 加速器
       help: 安装并启用一个像 APC的PHP加速器（强烈推荐）。
     apc: APC
     ctype: Ctype

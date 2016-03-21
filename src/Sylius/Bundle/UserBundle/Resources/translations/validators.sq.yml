@@ -25,6 +25,8 @@ sylius:
       max: 'Mbiemri nuk duhet të përmbajë më shumë se {{ limit }} karaktere.'
       min: 'Mbiemri duhet të përmbajë të paktën {{ limit }} karaktere.'
       not_blank: Shkruaj mbiemrin.
+    gender:
+      not_blank: Te lutem zgjidh gjinine tende.
     email:
       already_used: Ky email është përdorur tashmë, login ose përdor rikujtimin e fjalëkalimit.
       max: 'Email nuk duhet të përmbajë më shumë se {{ limit }} karaktere.'

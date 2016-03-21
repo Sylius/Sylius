@@ -6,5 +6,6 @@ sylius:
     admin:
       main:
         configuration:
+          header: 配置
           countries: 国家
           locales: 区域设置

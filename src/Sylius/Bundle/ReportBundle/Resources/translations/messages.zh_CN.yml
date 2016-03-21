@@ -6,3 +6,6 @@ sylius:
     report:
       name: 名称
       description: 描述
+      renderer:
+        label: 渲染器
+        template: 模板
