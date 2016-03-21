@@ -3,6 +3,17 @@
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../bash/common.lib.sh"
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../bash/packages.lib.sh"
 
+reset_cache() {
+    local packages="$(locate_packages)"
+
+    for package in "${packages[@]}"; do
+        if ! is_package_cache_fresh "$(get_package_cache_key "$package")"; then
+            echo "--reset-cache"
+            break
+        fi
+    done
+}
+
 install_package="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/install-package"
 
-locate_packages | parallel -j "$(get_number_of_jobs_for_parallel)" --gnu "${install_package} {} $*"
+locate_packages | parallel -j "$(get_number_of_jobs_for_parallel)" --gnu "${install_package} {} $* $(reset_cache)"
