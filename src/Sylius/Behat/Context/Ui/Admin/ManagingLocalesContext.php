@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Locale\CreatePageInterface;
 use Sylius\Behat\Service\Accessor\NotificationAccessorInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -78,12 +79,21 @@ final class ManagingLocalesContext implements Context
     }
 
     /**
-     * @Then I should be notified about success
+     * @Then I should be notified about successful creation
      */
-    public function iShouldBeNotifiedAboutSuccess()
+    public function iShouldBeNotifiedAboutSuccessfulCreation()
     {
-        expect($this->notificationAccessor->hasSuccessMessage())->toBe(true);
-        expect($this->notificationAccessor->isSuccessfullyCreatedFor(self::RESOURCE_NAME))->toBe(true);
+        $doesSuccessMessageAppear = $this->notificationAccessor->hasSuccessMessage();
+        Assert::true(
+            $doesSuccessMessageAppear,
+            sprintf('Message type is not positive')
+        );
+
+        $doesSuccessfulCreationMessageAppear = $this->notificationAccessor->isSuccessfullyCreatedFor(self::RESOURCE_NAME);
+        Assert::true(
+            $doesSuccessfulCreationMessageAppear,
+            sprintf('Successful creation message does not appear')
+        );
     }
 
     /**
@@ -91,6 +101,10 @@ final class ManagingLocalesContext implements Context
      */
     public function storeShouldBeAvailableInLanguage($name)
     {
-        expect($this->indexPage->isResourceOnPage(['name' => $name]))->toBe(true);
+        $doesLocaleExist = $this->indexPage->isResourceOnPage(['name' => $name]);
+        Assert::true(
+            $doesLocaleExist,
+            sprintf('Locale %s should exist but it does not', $name)
+        );
     }
 }

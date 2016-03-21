@@ -12,5 +12,5 @@ Feature: Adding a new locale
         Given I want to create a new locale
         When I choose Norwegian
         And I add it
-        Then I should be notified about success
+        Then I should be notified about successful creation
         And the store should be available in the Norwegian language

@@ -12,7 +12,6 @@
 namespace spec\Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use PhpSpec\Exception\Example\NotEqualException;
 use PhpSpec\ObjectBehavior;
 use Sylius\Behat\Context\Ui\Admin\ManagingLocalesContext;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
@@ -70,7 +69,7 @@ class ManagingLocalesContextSpec extends ObjectBehavior
         $notificationAccessor->hasSuccessMessage()->willReturn(true);
         $notificationAccessor->isSuccessfullyCreatedFor(ManagingLocalesContext::RESOURCE_NAME)->willReturn(true);
 
-        $this->iShouldBeNotifiedAboutSuccess();
+        $this->iShouldBeNotifiedAboutSuccessfulCreation();
     }
 
     function it_throws_an_exception_if_there_is_no_success_message(NotificationAccessorInterface $notificationAccessor)
@@ -78,7 +77,7 @@ class ManagingLocalesContextSpec extends ObjectBehavior
         $notificationAccessor->hasSuccessMessage()->willReturn(false);
         $notificationAccessor->isSuccessfullyCreatedFor(ManagingLocalesContext::RESOURCE_NAME)->willReturn(true);
 
-        $this->shouldThrow(NotEqualException::class)->during('iShouldBeNotifiedAboutSuccess');
+        $this->shouldThrow(\InvalidArgumentException::class)->during('iShouldBeNotifiedAboutSuccessfulCreation');
     }
 
     function it_throws_an_exception_if_resource_was_not_successfully_created(NotificationAccessorInterface $notificationAccessor)
@@ -86,7 +85,7 @@ class ManagingLocalesContextSpec extends ObjectBehavior
         $notificationAccessor->hasSuccessMessage()->willReturn(true);
         $notificationAccessor->isSuccessfullyCreatedFor(ManagingLocalesContext::RESOURCE_NAME)->willReturn(false);
 
-        $this->shouldThrow(NotEqualException::class)->during('iShouldBeNotifiedAboutSuccess');
+        $this->shouldThrow(\InvalidArgumentException::class)->during('iShouldBeNotifiedAboutSuccessfulCreation');
     }
 
     function it_asserts_if_store_is_available_in_given_language(IndexPageInterface $indexPage)
@@ -100,6 +99,6 @@ class ManagingLocalesContextSpec extends ObjectBehavior
     {
         $indexPage->isResourceOnPage(['name' => 'Norwegian'])->willReturn(false);
 
-        $this->shouldThrow(NotEqualException::class)->during('storeShouldBeAvailableInLanguage', ['Norwegian']);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('storeShouldBeAvailableInLanguage', ['Norwegian']);
     }
 }
