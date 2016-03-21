@@ -8,11 +8,12 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../bash/travis.lib.sh"
 # Argument 1: Package directory
 install_package() {
     [[ "$(echo "$2" | grep -c "no-cache")" = "1" ]] && local cache_support=false
+    [[ "$(echo "$2" | grep -c "reset-cache")" = "1" ]] || local reset_cache=false
     local cache_key="$(text_md5sum "$(package_path_to_package_name "$1")")" exit_code=0
 
     print_header "Installing" "$(package_path_to_package_name "$1")"
 
-    if ${cache_support}; then
+    if ! ${reset_cache} && ${cache_support}; then
         inform_about_sylius_cache
     fi
 
@@ -22,6 +23,11 @@ install_package() {
 
     # In case some local composer.lock exists
     rm composer.lock 2>/dev/null
+
+    if ${reset_cache} && ${cache_support}; then
+        rm -fr "${SYLIUS_CACHE_DIR}/composer-${cache_key}.lock" 2>/dev/null
+        rm -fr "${SYLIUS_CACHE_DIR}/composer-${cache_key}.json.md5sum" 2>/dev/null
+    fi
 
     if ${cache_support} && has_sylius_cache && is_cache_fresh "${cache_key}"; then
         print_info "Restoring composer.lock from cache (cache key: ${cache_key})"
@@ -77,7 +83,7 @@ composer_install() {
 }
 
 display_help_message() {
-    print_error "Usage: $0 [--no-cache] <package paths or names>"
+    print_error "Usage: $0 [--no-cache] [--reset-cache] <package paths or names>"
 }
 
 main() {
@@ -87,6 +93,9 @@ main() {
         case "$1" in
             --no-cache)
                 options+=("no-cache")
+            ;;
+            --reset-cache)
+                options+=("reset-cache")
             ;;
             --help)
                 display_help_message
