@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Symfony\Component\Form\FormInterface;
@@ -34,7 +35,9 @@ class PaymentStep extends CheckoutStep
         $order = $this->getCurrentCart();
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PAYMENT_INITIALIZE, $order);
 
-        $this->applyTransition(OrderCheckoutTransitions::TRANSITION_RESELECT_PAYMENT, $order, true);
+        if (OrderCheckoutStates::STATE_SHIPPING_SELECTED !== $order->getCheckoutState()) {
+            $this->applyTransition(OrderCheckoutTransitions::TRANSITION_RESELECT_PAYMENT, $order);
+        }
 
         $form = $this->createCheckoutPaymentForm($order);
 
