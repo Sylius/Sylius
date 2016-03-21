@@ -65,7 +65,7 @@ final class NotificationAccessor implements NotificationAccessorInterface
      */
     public function isSuccessfullyCreatedFor($resourceName)
     {
-        return $this->hasMessage(sprintf('Success %s has been successfully created.', ucfirst($resourceName)));
+        return $this->hasMessage(sprintf('Success %s has been successfully created.', $this->humanizeResourceName($resourceName)));
     }
 
     /**
@@ -73,7 +73,7 @@ final class NotificationAccessor implements NotificationAccessorInterface
      */
     public function isSuccessfullyUpdatedFor($resourceName)
     {
-        return $this->hasMessage(sprintf('Success %s has been successfully updated.', ucfirst($resourceName)));
+        return $this->hasMessage(sprintf('Success %s has been successfully updated.', $this->humanizeResourceName($resourceName)));
     }
 
     /**
@@ -81,7 +81,7 @@ final class NotificationAccessor implements NotificationAccessorInterface
      */
     public function isSuccessfullyDeletedFor($resourceName)
     {
-        return $this->hasMessage(sprintf('Success %s has been successfully deleted.', ucfirst($resourceName)));
+        return $this->hasMessage(sprintf('Success %s has been successfully deleted.', $this->humanizeResourceName($resourceName)));
     }
 
     /**
@@ -107,5 +107,15 @@ final class NotificationAccessor implements NotificationAccessorInterface
         if (null === $element) {
             throw new ElementNotFoundException(sprintf('%s element is not present on the page', self::NOTIFICATION_ELEMENT_CSS));
         }
+    }
+
+    /**
+     * @param string $resourceName
+     *
+     * @return string
+     */
+    private function humanizeResourceName($resourceName)
+    {
+        return ucfirst(str_replace('_', ' ', $resourceName));
     }
 }

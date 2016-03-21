@@ -45,5 +45,6 @@ imports:
     - suites/ui/product.yml
     - suites/ui/promotion.yml
     - suites/ui/shipping.yml
+    - suites/ui/taxation.yml
     - suites/ui/theme.yml
     - suites/ui/user.yml
