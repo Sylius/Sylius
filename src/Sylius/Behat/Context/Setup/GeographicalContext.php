@@ -56,6 +56,7 @@ final class GeographicalContext implements Context
      * @Given /^the store ships to "([^"]+)"$/
      * @Given /^the store ships to "([^"]+)" and "([^"]+)"$/
      * @Given /^the store ships to "([^"]+)", "([^"]+)" and "([^"]+)"$/
+     * @Given the store operates in :country
      */
     public function storeShipsTo($country1, $country2 = null, $country3 = null)
     {
