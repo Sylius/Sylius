@@ -2,22 +2,22 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  checkout:
-    shipping_method:
-      not_blank: Veuillez sélectionner un mode de livraison.
-  locale:
-    code:
-      not_blank: Veuillez saisir le code de la locale.
-      unique: Ce paramètre régional existe déjà.
-  product_variant:
-    onHand:
-      min: 'Le stock disponible doit être plus grand que {{ limit }}.'
-      not_blank: Veuillez saisir le stock disponible.
-    price:
-      min: Le tarif ne peut pas être négatif.
-      not_blank: Veuillez entrer un prix.
-    original_price:
-      min: Le prix initial ne peux pas être négatif.
-  product_translation:
-    short_description:
-      max: 'La description courte ne doit pas dépasser {{ limit }} caractères.'
+    checkout:
+        shipping_method:
+            not_blank: Veuillez sélectionner un mode de livraison.
+    locale:
+        code:
+            not_blank: Veuillez saisir le code de la locale.
+            unique: Ce paramètre régional existe déjà.
+    product_variant:
+        onHand:
+            min: 'Le stock disponible doit être plus grand que {{ limit }}.'
+            not_blank: Veuillez saisir le stock disponible.
+        price:
+            min: Le tarif ne peut pas être négatif.
+            not_blank: Veuillez entrer un prix.
+        original_price:
+            min: Le prix initial ne peux pas être négatif.
+    product_translation:
+        short_description:
+            max: 'La description courte ne doit pas dépasser {{ limit }} caractères.'

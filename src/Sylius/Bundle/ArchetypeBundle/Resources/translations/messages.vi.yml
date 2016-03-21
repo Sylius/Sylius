@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    archetype:
-      code: Mã
-      name: Tên
-      options: Tùy chọn
+    form:
+        archetype:
+            code: Mã
+            name: Tên
+            options: Tùy chọn

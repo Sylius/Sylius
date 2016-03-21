@@ -2,12 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    contact_request:
-      first_name: Meno
-      last_name: Priezvisko
-      email: Email
-      message: Správa
-      topic: Téma
-    contact_topic:
-      title: Názov
+    form:
+        contact_request:
+            first_name: Meno
+            last_name: Priezvisko
+            email: Email
+            message: Správa
+            topic: Téma
+        contact_topic:
+            title: Názov

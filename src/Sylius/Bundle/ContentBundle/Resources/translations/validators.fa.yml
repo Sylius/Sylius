@@ -2,83 +2,83 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  imagine_block:
-    name:
-      not_blank: لطفا نام بلاک عکس را وارد کنید.
-    label:
-      not_blank: لطفا عنوان عکس را وارد کنید.
-    filter:
-      not_blank: لطفا فیلتر عکس را انتخاب کنید.
-    image:
-      not_blank: لطفا عکسی را برای این بلاک آپلود کنید.
-    start_date:
-      invalid_date: تاريخ انتشار نامعتبر است.
-    end_date:
-      invalid_date: تاریخ پایان انتشار نامعتبر است.
-  menu:
-    name:
-      not_blank: لطفا نام منو را وارد کنید.
-    label:
-      not_blank: لطفا عنوان منو را وارد کنید.
-    start_date:
-      invalid_date: تاريخ انتشار نامعتبر است.
-    end_date:
-      invalid_date: تاریخ پایان انتشار نامعتبر است.
-  menu_node:
-    name:
-      not_blank: لطفا نام زیرمنو را وارد کنید.
-    label:
-      not_blank: لطفا عنوان منو را وارد کنید.
-    start_date:
-      invalid_date: تاريخ انتشار نامعتبر است.
-    end_date:
-      invalid_date: تاریخ پایان انتشار نامعتبر است.
-  route:
-    name:
-      not_blank: لطفا نام آدرس داخلی را وارد کنید.
-    content:
-      not_blank: لطفا محتوای آدرس داخلی را وارد کنید.
-    start_date:
-      invalid_date: تاريخ انتشار نامعتبر است.
-    end_date:
-      invalid_date: تاریخ پایان انتشار نامعتبر است.
-  slideshow_block:
-    name:
-      not_blank: لطفا نام اسلایدشو را وارد کنید.
-    title:
-      not_blank: لطفا عنوان اسلایدشو را وارد کنید.
-    start_date:
-      invalid_date: تاريخ انتشار نامعتبر است.
-    end_date:
-      invalid_date: تاریخ پایان انتشار نامعتبر است.
-  simple_block:
-    name:
-      not_blank: لطفا نام بلاک ساده را وارد کنید.
-    title:
-      not_blank: لطفا عنوان بلاک ساده را وارد کنید.
-    body:
-      not_blank: لطفا محتوای بلاک ساده را وارد کنید.
-    start_date:
-      invalid_date: تاريخ انتشار نامعتبر است.
-    end_date:
-      invalid_date: تاریخ پایان انتشار نامعتبر است.
-  string_block:
-    name:
-      not_blank: لطفا نام بلاک ساده را وارد کنید.
-    body:
-      not_blank: لطفا محتوای بلاک ساده را وارد کنید.
-    start_date:
-      invalid_date: تاريخ انتشار نامعتبر است.
-    end_date:
-      invalid_date: تاریخ پایان انتشار نامعتبر است.
-  static_content:
-    name:
-      not_blank: لطفا صفحه ی محتوایی را وارد کنید.
-    title:
-      not_blank: لطفا عنوان صفحه ی محتوایی را وارد کنید.
-    body:
-      not_blank: لطفا متن صفحه ی محتوایی را وارد کنید.
-    start_date:
-      invalid_date: تاريخ انتشار نامعتبر است.
-    end_date:
-      invalid_date: تاریخ پایان انتشار نامعتبر است.
+    imagine_block:
+        name:
+            not_blank: لطفا نام بلاک عکس را وارد کنید.
+        label:
+            not_blank: لطفا عنوان عکس را وارد کنید.
+        filter:
+            not_blank: لطفا فیلتر عکس را انتخاب کنید.
+        image:
+            not_blank: لطفا عکسی را برای این بلاک آپلود کنید.
+        start_date:
+            invalid_date: تاريخ انتشار نامعتبر است.
+        end_date:
+            invalid_date: تاریخ پایان انتشار نامعتبر است.
+    menu:
+        name:
+            not_blank: لطفا نام منو را وارد کنید.
+        label:
+            not_blank: لطفا عنوان منو را وارد کنید.
+        start_date:
+            invalid_date: تاريخ انتشار نامعتبر است.
+        end_date:
+            invalid_date: تاریخ پایان انتشار نامعتبر است.
+    menu_node:
+        name:
+            not_blank: لطفا نام زیرمنو را وارد کنید.
+        label:
+            not_blank: لطفا عنوان منو را وارد کنید.
+        start_date:
+            invalid_date: تاريخ انتشار نامعتبر است.
+        end_date:
+            invalid_date: تاریخ پایان انتشار نامعتبر است.
+    route:
+        name:
+            not_blank: لطفا نام آدرس داخلی را وارد کنید.
+        content:
+            not_blank: لطفا محتوای آدرس داخلی را وارد کنید.
+        start_date:
+            invalid_date: تاريخ انتشار نامعتبر است.
+        end_date:
+            invalid_date: تاریخ پایان انتشار نامعتبر است.
+    slideshow_block:
+        name:
+            not_blank: لطفا نام اسلایدشو را وارد کنید.
+        title:
+            not_blank: لطفا عنوان اسلایدشو را وارد کنید.
+        start_date:
+            invalid_date: تاريخ انتشار نامعتبر است.
+        end_date:
+            invalid_date: تاریخ پایان انتشار نامعتبر است.
+    simple_block:
+        name:
+            not_blank: لطفا نام بلاک ساده را وارد کنید.
+        title:
+            not_blank: لطفا عنوان بلاک ساده را وارد کنید.
+        body:
+            not_blank: لطفا محتوای بلاک ساده را وارد کنید.
+        start_date:
+            invalid_date: تاريخ انتشار نامعتبر است.
+        end_date:
+            invalid_date: تاریخ پایان انتشار نامعتبر است.
+    string_block:
+        name:
+            not_blank: لطفا نام بلاک ساده را وارد کنید.
+        body:
+            not_blank: لطفا محتوای بلاک ساده را وارد کنید.
+        start_date:
+            invalid_date: تاريخ انتشار نامعتبر است.
+        end_date:
+            invalid_date: تاریخ پایان انتشار نامعتبر است.
+    static_content:
+        name:
+            not_blank: لطفا صفحه ی محتوایی را وارد کنید.
+        title:
+            not_blank: لطفا عنوان صفحه ی محتوایی را وارد کنید.
+        body:
+            not_blank: لطفا متن صفحه ی محتوایی را وارد کنید.
+        start_date:
+            invalid_date: تاريخ انتشار نامعتبر است.
+        end_date:
+            invalid_date: تاریخ پایان انتشار نامعتبر است.

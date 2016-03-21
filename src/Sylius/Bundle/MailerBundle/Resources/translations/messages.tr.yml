@@ -2,12 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    email:
-      enabled: Etkin
-      subject: Konu
-      sender_name: Gönderen adı
-      sender_address: Gönderen adresi
-      content: İçerik
-      template: Şablon
-      no_template: Özel şablonu kullan
+    form:
+        email:
+            enabled: Etkin
+            subject: Konu
+            sender_name: Gönderen adı
+            sender_address: Gönderen adresi
+            content: İçerik
+            template: Şablon
+            no_template: Özel şablonu kullan

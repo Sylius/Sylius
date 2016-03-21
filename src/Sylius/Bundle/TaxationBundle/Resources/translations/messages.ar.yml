@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    tax_category:
-      name: الاسم
-    tax_rate:
-      name: الاسم
+    form:
+        tax_category:
+            name: الاسم
+        tax_rate:
+            name: الاسم

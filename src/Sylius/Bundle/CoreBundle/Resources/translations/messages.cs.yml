@@ -2,123 +2,123 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    action:
-      add_product_configuration:
-        price: Jednotná cena
-        quantity: Počet
-        variant: Varianta
-      customer_group: Skupina zákazníků
-    block:
-      body: Tělo
-      id: ID
-      title: Název
-    cart:
-      coupon: Kupón
-    checkout:
-      addressing:
-        different_billing_address: Použít jinou adresu pro fakturaci?
-      payment_method: Způsob Platby
-      shipping_method: Způsob Dopravy
-    promotion:
-      channels: Kanál
-    coupon:
-      per_customer_usage_limit: Omezení použití na zákazníka
-    group:
-      name: Jméno
-      roles: Role
-    channel:
-      taxonomies: Taxonomie
-      locales: Lokalizace
-      currency_default: Výchozí měna
-      currencies: Měny
-      shipping_methods: Způsoby dopravy
-      payment_methods: Způsoby platby
-    image:
-      file: Obrázek
-    locale:
-      code: Kód
-      enabled: Povoleno
-    order_filter:
-      created_at_from: Vytvořeno po
-      created_at_to: Vytvořeno před
-      number: Číslo
-      total_from: Od
-      total_to: Do
-      payment_state: Stav platby
-      channel: Všechny kanály
-    page:
-      body: Tělo
-      id: ID
-      title: Název
-    product:
-      restricted_zone: Zóna s omezeným přístupem
-      shipping_category: Typ dopravy
-      short_description: Stručný popis
-      variant_selection_method: Metoda výběru varianty
-    product_filter:
-      name: Název
-      sku: SKU
-    product_variant:
-      tax_category: Typ daně
-    settings:
-      general:
-        currency: Výchozí měna
-        locale: Jazyk
-        meta_description: Meta popis
-        meta_keywords: Meta klíčová slova
-        title: Název stránky
-        tracking_code:
-          Tracking code (for example: Kód Google Analytics)
-      taxation:
-        default_tax_zone: Výchozí sazba DPH
-      security:
-        enabled: Povolit?
-    shipment_filter:
-      created_at_from: Od
-      created_at_to: Do
-      number: Číslo objednávky
-      shipping_address: Jméno příjemce
-      channel: Všechny kanály
-    payment_filter:
-      created_at_from: Od
-      created_at_to: Do
-      number: Číslo objednávky
-      billing_address: Fakturační adresa – jméno
-      channel: Všechny kanály
-    shipping_method:
-      zone: Oblast
-    taxon:
-      file: Vybrat obrázek
-    taxonomy:
-      file: Vybrat obrázek
-    user:
-      billing_address: Fakturační adresa
-      different_billing_address: Použít jinou adresu pro fakturaci?
-      enabled: Povoleno
-      first_name: Křestní Jméno
-      groups: Skupiny
-      roles: Role
-      last_name: Příjmení
-      password: Heslo
-      shipping_address: Doručovací adresa
-    user_filter:
-      query: Hledat
-    variant:
-      available_on_demand: K dispozici na požádání
-      depth: Hloubka
-      height: Výška
-      images: Obrázky
-      on_hand: Aktuálně skladem
-      price: Cena
-      sku: SKU
-      weight: Hmotnost
-      width: Šířka
-    attribute:
-      product_attribute_value:
-        attribute: Atribut
-        value: Hodnota
-    guest:
-      email: Email
-    product_association_type:
-      name: Jméno
+    form:
+        action:
+            add_product_configuration:
+                price: Jednotná cena
+                quantity: Počet
+                variant: Varianta
+            customer_group: Skupina zákazníků
+        block:
+            body: Tělo
+            id: ID
+            title: Název
+        cart:
+            coupon: Kupón
+        checkout:
+            addressing:
+                different_billing_address: Použít jinou adresu pro fakturaci?
+            payment_method: Způsob Platby
+            shipping_method: Způsob Dopravy
+        promotion:
+            channels: Kanál
+        coupon:
+            per_customer_usage_limit: Omezení použití na zákazníka
+        group:
+            name: Jméno
+            roles: Role
+        channel:
+            taxonomies: Taxonomie
+            locales: Lokalizace
+            currency_default: Výchozí měna
+            currencies: Měny
+            shipping_methods: Způsoby dopravy
+            payment_methods: Způsoby platby
+        image:
+            file: Obrázek
+        locale:
+            code: Kód
+            enabled: Povoleno
+        order_filter:
+            created_at_from: Vytvořeno po
+            created_at_to: Vytvořeno před
+            number: Číslo
+            total_from: Od
+            total_to: Do
+            payment_state: Stav platby
+            channel: Všechny kanály
+        page:
+            body: Tělo
+            id: ID
+            title: Název
+        product:
+            restricted_zone: Zóna s omezeným přístupem
+            shipping_category: Typ dopravy
+            short_description: Stručný popis
+            variant_selection_method: Metoda výběru varianty
+        product_filter:
+            name: Název
+            sku: SKU
+        product_variant:
+            tax_category: Typ daně
+        settings:
+            general:
+                currency: Výchozí měna
+                locale: Jazyk
+                meta_description: Meta popis
+                meta_keywords: Meta klíčová slova
+                title: Název stránky
+                tracking_code:
+                    Tracking code (for example: Kód Google Analytics)
+            taxation:
+                default_tax_zone: Výchozí sazba DPH
+            security:
+                enabled: Povolit?
+        shipment_filter:
+            created_at_from: Od
+            created_at_to: Do
+            number: Číslo objednávky
+            shipping_address: Jméno příjemce
+            channel: Všechny kanály
+        payment_filter:
+            created_at_from: Od
+            created_at_to: Do
+            number: Číslo objednávky
+            billing_address: Fakturační adresa – jméno
+            channel: Všechny kanály
+        shipping_method:
+            zone: Oblast
+        taxon:
+            file: Vybrat obrázek
+        taxonomy:
+            file: Vybrat obrázek
+        user:
+            billing_address: Fakturační adresa
+            different_billing_address: Použít jinou adresu pro fakturaci?
+            enabled: Povoleno
+            first_name: Křestní Jméno
+            groups: Skupiny
+            roles: Role
+            last_name: Příjmení
+            password: Heslo
+            shipping_address: Doručovací adresa
+        user_filter:
+            query: Hledat
+        variant:
+            available_on_demand: K dispozici na požádání
+            depth: Hloubka
+            height: Výška
+            images: Obrázky
+            on_hand: Aktuálně skladem
+            price: Cena
+            sku: SKU
+            weight: Hmotnost
+            width: Šířka
+        attribute:
+            product_attribute_value:
+                attribute: Atribut
+                value: Hodnota
+        guest:
+            email: Email
+        product_association_type:
+            name: Jméno

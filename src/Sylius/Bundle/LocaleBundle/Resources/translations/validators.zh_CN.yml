@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    locale:
+        code:
+            not_blank: 请选择区域设置代码。
+            unique: 区域编码必须是唯一的。

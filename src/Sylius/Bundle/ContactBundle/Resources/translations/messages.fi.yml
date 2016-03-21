@@ -2,12 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    contact_request:
-      first_name: Etunimi
-      last_name: Sukunimi
-      email: Sähköpostiosoite
-      message: Viesti
-      topic: Aihe
-    contact_topic:
-      title: Otsikko
+    form:
+        contact_request:
+            first_name: Etunimi
+            last_name: Sukunimi
+            email: Sähköpostiosoite
+            message: Viesti
+            topic: Aihe
+        contact_topic:
+            title: Otsikko

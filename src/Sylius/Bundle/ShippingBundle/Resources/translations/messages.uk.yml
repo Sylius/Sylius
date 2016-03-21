@@ -2,37 +2,37 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    rule:
-      unit_count_configuration:
-        count: Кількість
-    shipment:
-      state: Статус
-      states:
-        checkout: Оформити замовлення
-        pending: В очікуванні
-        ready: Готовий
-        shipped: Відправлено
-        returned: Повернуто
-        cancelled: Відхилено
-      tracking_code: Трекінг-код
-    shipping_calculator:
-      flat_rate_configuration:
-        amount: Кількість
-      per_unit_rate_configuration:
-        amount: Кількість
-      weight_rate_configuration:
-        division: Ділення
-      volume_rate_configuration:
-        amount: Кількість
-        division: Ділення
-    shipping_category:
-      description: Опис
-      name: Ім’я
-    shipping_method:
-      calculator: Калькулятор
-      category: Категорія
-      category_requirement: Вимоги категорії
-      configuration: Конфігурація
-      enabled: Увімкнено
-      name: Ім’я
+    form:
+        rule:
+            unit_count_configuration:
+                count: Кількість
+        shipment:
+            state: Статус
+            states:
+                checkout: Оформити замовлення
+                pending: В очікуванні
+                ready: Готовий
+                shipped: Відправлено
+                returned: Повернуто
+                cancelled: Відхилено
+            tracking_code: Трекінг-код
+        shipping_calculator:
+            flat_rate_configuration:
+                amount: Кількість
+            per_unit_rate_configuration:
+                amount: Кількість
+            weight_rate_configuration:
+                division: Ділення
+            volume_rate_configuration:
+                amount: Кількість
+                division: Ділення
+        shipping_category:
+            description: Опис
+            name: Ім’я
+        shipping_method:
+            calculator: Калькулятор
+            category: Категорія
+            category_requirement: Вимоги категорії
+            configuration: Конфігурація
+            enabled: Увімкнено
+            name: Ім’я

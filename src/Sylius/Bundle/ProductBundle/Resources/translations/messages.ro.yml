@@ -2,21 +2,21 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    product:
-      name: Nume
-      description: Descriere
-      attributes: Atribute
-      options: Opţiuni
-      meta_keywords: Meta cuvinte cheie
-      meta_description: Meta descriere
-      taxons: Categorii
-    product_variant:
-      available_on: Disponibil din
-    product_archetype:
-      name: Nume
-      parent: Părinte
-      attributes: Atribute
-      options: Opţiuni
-    association_type:
-      name: Nume
+    form:
+        product:
+            name: Nume
+            description: Descriere
+            attributes: Atribute
+            options: Opţiuni
+            meta_keywords: Meta cuvinte cheie
+            meta_description: Meta descriere
+            taxons: Categorii
+        product_variant:
+            available_on: Disponibil din
+        product_archetype:
+            name: Nume
+            parent: Părinte
+            attributes: Atribute
+            options: Opţiuni
+        association_type:
+            name: Nume

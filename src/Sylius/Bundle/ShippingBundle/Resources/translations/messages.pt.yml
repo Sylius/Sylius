@@ -2,11 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    shipment:
-      states:
-        checkout: Finalizar compra
-        pending: Pendente
-        cancelled: Cancelado
-    shipping_category:
-      description: Descrição
+    form:
+        shipment:
+            states:
+                checkout: Finalizar compra
+                pending: Pendente
+                cancelled: Cancelado
+        shipping_category:
+            description: Descrição

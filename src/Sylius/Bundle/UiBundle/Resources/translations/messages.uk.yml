@@ -2,25 +2,25 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    login:
-      username: "Ім'я користувача"
-      password: Пароль
-  ui:
-    create: Створити
-    dashboard: Панель керування
-    delete: Видалити
-    edit: Редагувати
-    actions: Дії
-    enabled: Увімкнено
-    description: Опис
-    "no": false
-    success: Успішно
-    "yes": true
-    new: Новий
-    save_changes: Зберегти зміни
-    new_tax_category: Нова категорія оподаткування
-    filter: Фільтр
-    countries: Країни
-    new_country: Нова країна
-    locales: Локалі
+    form:
+        login:
+            username: "Ім'я користувача"
+            password: Пароль
+    ui:
+        create: Створити
+        dashboard: Панель керування
+        delete: Видалити
+        edit: Редагувати
+        actions: Дії
+        enabled: Увімкнено
+        description: Опис
+        "no": false
+        success: Успішно
+        "yes": true
+        new: Новий
+        save_changes: Зберегти зміни
+        new_tax_category: Нова категорія оподаткування
+        filter: Фільтр
+        countries: Країни
+        new_country: Нова країна
+        locales: Локалі

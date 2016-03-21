@@ -1,3 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
     account:
         order:
@@ -194,7 +197,6 @@ sylius:
         new_zone: ゾーンを登録
         newest_products: 新着商品
         next: 次へ
-        'no': false
         no_default_billing_address: sylius.account.address.default.no_billing
         no_default_shipping_address: sylius.account.address.default.no_shipping
         no_description: 説明未設定
@@ -257,7 +259,7 @@ sylius:
         shipping_total: 送料合計
         shop_by: 商品検索
         show_all: sylius.show_all
-        sign_in_to_the_store_or_create_new_account: ログイン<small>又は新規顧客登録</small>
+        sign_in_to_the_store_or_create_new_account: 'ログイン<small>又は新規顧客登録</small>'
         slideshow: スライドショー
         starts_at: 開始日
         state: 出荷ステータス
@@ -290,7 +292,6 @@ sylius:
         view_more: 詳細
         warning: 警告
         welcome_to_your_space: お客様専用ページへようこそ
-        'yes': true
         you_are_customer_since: ご登録日時
         you_have_no_new_orders: 新規注文はありません。
         your_products: sylius.backend.quick_links.products

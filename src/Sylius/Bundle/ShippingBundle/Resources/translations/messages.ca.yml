@@ -2,14 +2,14 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    shipment:
-      states:
-        checkout: Realitza la compra
-        pending: Pendent
-    shipping_category:
-      description: Descripció
-      name: Nom
-    shipping_method:
-      enabled: Activat
-      name: Nom
+    form:
+        shipment:
+            states:
+                checkout: Realitza la compra
+                pending: Pendent
+        shipping_category:
+            description: Descripció
+            name: Nom
+        shipping_method:
+            enabled: Activat
+            name: Nom

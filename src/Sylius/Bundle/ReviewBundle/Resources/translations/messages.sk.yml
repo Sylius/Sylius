@@ -2,16 +2,16 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    review:
-      header: Pridať recenziu
-      rating: Hodnotenie
-      title: Názov
-      comment: Komentár
-      author: Autor
-      status:
-        label: Stav
-        new: Nová
-        approved: Schválené
-        rejected: Zamietnuté
-      submit: Odoslať
+    form:
+        review:
+            header: Pridať recenziu
+            rating: Hodnotenie
+            title: Názov
+            comment: Komentár
+            author: Autor
+            status:
+                label: Stav
+                new: Nová
+                approved: Schválené
+                rejected: Zamietnuté
+            submit: Odoslať

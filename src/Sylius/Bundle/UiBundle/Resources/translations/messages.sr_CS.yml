@@ -2,18 +2,18 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    login:
-      username: Krosnicko ime
-  ui:
-    create: Kreiraj
-    dashboard: Komandna Tabla
-    delete: Obrisati
-    edit: Izmeniti
-    "no": false
-    success: Uspeh
-    "yes": true
-    save_changes: Sačuvaj izmene
-    new_tax_category: Nova kategorija poreza
-    countries: Zemlje
-    new_country: Nova zemlja
+    form:
+        login:
+            username: Krosnicko ime
+    ui:
+        create: Kreiraj
+        dashboard: Komandna Tabla
+        delete: Obrisati
+        edit: Izmeniti
+        "no": false
+        success: Uspeh
+        "yes": true
+        save_changes: Sačuvaj izmene
+        new_tax_category: Nova kategorija poreza
+        countries: Zemlje
+        new_country: Nova zemlja

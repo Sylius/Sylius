@@ -2,11 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    priceable:
-      price: Кошт
-      calculator: Цэнаўтварэнне
-      configuration: Канфігурацыя
-    pricing:
-      volume_based:
-        price: Кошт
+    form:
+        priceable:
+            price: Кошт
+            calculator: Цэнаўтварэнне
+            configuration: Канфігурацыя
+        pricing:
+            volume_based:
+                price: Кошт

@@ -2,44 +2,44 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    action_block:
-      id: Id
-    imagine_block:
-      internal_name: Sisäinen nimi
-      label: Otsikko
-      parent: Vanhempi
-      slideshow_medium: Diaesitys keskikokoinen (sisältö)
-    menu:
-      label: Otsikko
-      name: Nimi
-      parent: Vanhempi
-      route: Reitti
-      uri: Osoite
-    menu_block:
-      body: Sisältö
-      id: Id
-      name: Nimi
-    menu_node_block:
-      content: Sisältö
-      internal_name: Sisäinen nimi
-      label: Otsikko
-      route: Reitti
-      uri: Osoite
-    redirect_route:
-      id: Id
-      uri: Osoite
-    reference_block:
-      id: Id
-    route:
-      parent: Vanhempi
-    simple_block:
-      internal_name: Sisäinen nimi
-      parent: Vanhempi
-    slideshow_block:
-      internal_name: Sisäinen nimi
-      parent: Vanhempi
-    static_content:
-      id: Id
-      internal_name: Sisäinen nimi
-      parent: Vanhempi
+    form:
+        action_block:
+            id: Id
+        imagine_block:
+            internal_name: Sisäinen nimi
+            label: Otsikko
+            parent: Vanhempi
+            slideshow_medium: Diaesitys keskikokoinen (sisältö)
+        menu:
+            label: Otsikko
+            name: Nimi
+            parent: Vanhempi
+            route: Reitti
+            uri: Osoite
+        menu_block:
+            body: Sisältö
+            id: Id
+            name: Nimi
+        menu_node_block:
+            content: Sisältö
+            internal_name: Sisäinen nimi
+            label: Otsikko
+            route: Reitti
+            uri: Osoite
+        redirect_route:
+            id: Id
+            uri: Osoite
+        reference_block:
+            id: Id
+        route:
+            parent: Vanhempi
+        simple_block:
+            internal_name: Sisäinen nimi
+            parent: Vanhempi
+        slideshow_block:
+            internal_name: Sisäinen nimi
+            parent: Vanhempi
+        static_content:
+            id: Id
+            internal_name: Sisäinen nimi
+            parent: Vanhempi

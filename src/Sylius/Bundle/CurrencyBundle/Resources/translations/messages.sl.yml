@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    currency:
-      exchange_rate: Menjalni tečaj
-      enabled: Omogočeno
+    form:
+        currency:
+            exchange_rate: Menjalni tečaj
+            enabled: Omogočeno

@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  payment:
-    complete: Zahlung wurde abgeschlossen.
-    cancel: Zahlung wurde abgebrochen.
-    transition_fail: Die Aktion konnte mit dem aktuellen Zahlungsstatus nicht ausgeführt werden
+    payment:
+        complete: Zahlung wurde abgeschlossen.
+        cancel: Zahlung wurde abgebrochen.
+        transition_fail: Die Aktion konnte mit dem aktuellen Zahlungsstatus nicht ausgeführt werden

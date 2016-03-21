@@ -2,14 +2,14 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    priceable:
-      price: Precio
-      calculator: Fijación de precios
-      configuration: Configuración
-    pricing:
-      volume_based:
-        label: Configuración de precios
-        min: Volumen mínimo
-        max: Volumen máximo
-        price: Precio
+    form:
+        priceable:
+            price: Precio
+            calculator: Fijación de precios
+            configuration: Configuración
+        pricing:
+            volume_based:
+                label: Configuración de precios
+                min: Volumen mínimo
+                max: Volumen máximo
+                price: Precio

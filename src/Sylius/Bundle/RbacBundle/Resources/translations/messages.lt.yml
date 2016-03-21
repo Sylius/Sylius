@@ -2,14 +2,14 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    role:
-      code: Kodas
-      name: Pavadinimas
-      description: Aprašymas
-      permissions: Prieigos teisės
-      parent: Motininis elementas
-    permission:
-      code: Kodas
-      description: Aprašymas
-      parent: Motininis elementas
+    form:
+        role:
+            code: Kodas
+            name: Pavadinimas
+            description: Aprašymas
+            permissions: Prieigos teisės
+            parent: Motininis elementas
+        permission:
+            code: Kodas
+            description: Aprašymas
+            parent: Motininis elementas

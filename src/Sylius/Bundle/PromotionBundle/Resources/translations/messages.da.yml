@@ -2,42 +2,42 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    action:
-      fixed_discount_configuration:
-        amount: Beløb
-      percentage_discount_configuration:
-        percentage: Procent
-      shipping_discount_configuration:
-        percentage: Procent
-      type: Type
-    rule:
-      taxonomy_configuration:
-        taxons: Taxons
-        exclude: Udelad
-      contains_product_configuration:
-        variants: Produkter
-        exclude: Udelad
-      cart_quantity_configuration:
-        count: Antal
-      item_total_configuration:
-        amount: Beløb
-      shipping_country_configuration:
-        country: Land
-      type: Type
-    coupon:
-      usage_limit: Brugsgrænse
-    coupon_generate_instruction:
-      amount: Beløb
-      usage_limit: Brugsgrænse
-    promotion:
-      actions: Handlinger
-      add_action: Tilføj handling
-      add_rule: Tilføj regel
-      coupon_based: Kupon baseret
-      description: Beskrivelse
-      ends_at: Slutter den
-      name: Navn
-      rules: Regler
-      starts_at: Starter ved
-      usage_limit: Brugsgrænse
+    form:
+        action:
+            fixed_discount_configuration:
+                amount: Beløb
+            percentage_discount_configuration:
+                percentage: Procent
+            shipping_discount_configuration:
+                percentage: Procent
+            type: Type
+        rule:
+            taxonomy_configuration:
+                taxons: Taxons
+                exclude: Udelad
+            contains_product_configuration:
+                variants: Produkter
+                exclude: Udelad
+            cart_quantity_configuration:
+                count: Antal
+            item_total_configuration:
+                amount: Beløb
+            shipping_country_configuration:
+                country: Land
+            type: Type
+        coupon:
+            usage_limit: Brugsgrænse
+        coupon_generate_instruction:
+            amount: Beløb
+            usage_limit: Brugsgrænse
+        promotion:
+            actions: Handlinger
+            add_action: Tilføj handling
+            add_rule: Tilføj regel
+            coupon_based: Kupon baseret
+            description: Beskrivelse
+            ends_at: Slutter den
+            name: Navn
+            rules: Regler
+            starts_at: Starter ved
+            usage_limit: Brugsgrænse

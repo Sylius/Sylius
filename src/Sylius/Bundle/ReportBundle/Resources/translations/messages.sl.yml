@@ -2,18 +2,18 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    report:
-      name: Ime
-      description: Opis
-      data_fetcher: Ujem podatkov
-      renderer:
-        label: Upodabljalnik
-        template: Predloga
-      chart:
-        type: Vrsta
-      user_registration:
-        start: Datum začetka
-        end: Končni datum
-        period: Časovno obdobje
-        empty_records: Tiskanje praznih vnosov?
+    form:
+        report:
+            name: Ime
+            description: Opis
+            data_fetcher: Ujem podatkov
+            renderer:
+                label: Upodabljalnik
+                template: Predloga
+            chart:
+                type: Vrsta
+            user_registration:
+                start: Datum začetka
+                end: Končni datum
+                period: Časovno obdobje
+                empty_records: Tiskanje praznih vnosov?

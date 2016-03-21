@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    currency:
-      exchange_rate: Курс на конверзија
-      enabled: Овозможено
+    form:
+        currency:
+            exchange_rate: Курс на конверзија
+            enabled: Овозможено

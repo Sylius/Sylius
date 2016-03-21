@@ -2,38 +2,38 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    address:
-      city: Ville
-      company: Société
-      country: Pays
-      first_name: Prénom
-      last_name: Nom
-      phone_number: Téléphone
-      postcode: Code postal
-      street: Adresse
-      province: Région
-    country:
-      add_province: Ajouter une région
-      name: Nom
-      provinces: Etat
-      select: Sélectionner
-      enabled: Activé
-    province:
-      name: Nom
-      abbreviation: Abréviation
-      select: Sélectionner
-    zone:
-      add_member: Ajouter un membre
-      members: Membres
-      name: Nom
-      type: Type
-      types:
-        country: Pays
-        province: Région
-        zone: Zone
-      scope: "Champ d'application"
-      select: Sélectionner
-      select_scope: "Sélectionnez le champ d'application"
-    zone_member:
-      select: Sélectionner
+    form:
+        address:
+            city: Ville
+            company: Société
+            country: Pays
+            first_name: Prénom
+            last_name: Nom
+            phone_number: Téléphone
+            postcode: Code postal
+            street: Adresse
+            province: Région
+        country:
+            add_province: Ajouter une région
+            name: Nom
+            provinces: Etat
+            select: Sélectionner
+            enabled: Activé
+        province:
+            name: Nom
+            abbreviation: Abréviation
+            select: Sélectionner
+        zone:
+            add_member: Ajouter un membre
+            members: Membres
+            name: Nom
+            type: Type
+            types:
+                country: Pays
+                province: Région
+                zone: Zone
+            scope: "Champ d'application"
+            select: Sélectionner
+            select_scope: "Sélectionnez le champ d'application"
+        zone_member:
+            select: Sélectionner

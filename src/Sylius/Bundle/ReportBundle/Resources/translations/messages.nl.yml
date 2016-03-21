@@ -2,18 +2,18 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    report:
-      name: Naam
-      description: Omschrijving
-      data_fetcher: Gegevens ophaler
-      renderer:
-        label: Renderer
-        template: Sjabloon
-      chart:
-        type: Type
-      user_registration:
-        start: Begindatum
-        end: Einddatum
-        period: Tijd Periode
-        empty_records: Lege regels afdrukken?
+    form:
+        report:
+            name: Naam
+            description: Omschrijving
+            data_fetcher: Gegevens ophaler
+            renderer:
+                label: Renderer
+                template: Sjabloon
+            chart:
+                type: Type
+            user_registration:
+                start: Begindatum
+                end: Einddatum
+                period: Tijd Periode
+                empty_records: Lege regels afdrukken?

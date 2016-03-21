@@ -2,18 +2,18 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    imagine_block:
-      filter: Филтер
-      internal_name: Интерни назив
-    menu_node_block:
-      content: Садржај
-      internal_name: Интерни назив
-    route:
-      content: Садржај
-    simple_block:
-      internal_name: Интерни назив
-    slideshow_block:
-      internal_name: Интерни назив
-    static_content:
-      internal_name: Интерни назив
+    form:
+        imagine_block:
+            filter: Филтер
+            internal_name: Интерни назив
+        menu_node_block:
+            content: Садржај
+            internal_name: Интерни назив
+        route:
+            content: Садржај
+        simple_block:
+            internal_name: Интерни назив
+        slideshow_block:
+            internal_name: Интерни назив
+        static_content:
+            internal_name: Интерни назив

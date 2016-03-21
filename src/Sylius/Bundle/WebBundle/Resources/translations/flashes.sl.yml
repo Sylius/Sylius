@@ -2,16 +2,16 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  account:
-    address:
-      create: Vaš naslov je bil uspešno dodan
-      delete: Vaš naslov je bil uspešno izbrisan
-      set_as_billing: Vaš naslov za izstavitev računa je bil spremenjen
-      set_as_shipping: Vaš naslov za pošiljanje je bil spremenjen
-      update: Vaš naslov je bil uspešno posodobljen
-    password:
-      change_success: Geslo je bilo spremenjeno
-      invalid: Napačno trenutno geslo
-  channel:
-    error:
-      at_least_one: Kanala ni mogoče izbrisati, zahtevan je vsaj en omogočen kanal
+    account:
+        address:
+            create: Vaš naslov je bil uspešno dodan
+            delete: Vaš naslov je bil uspešno izbrisan
+            set_as_billing: Vaš naslov za izstavitev računa je bil spremenjen
+            set_as_shipping: Vaš naslov za pošiljanje je bil spremenjen
+            update: Vaš naslov je bil uspešno posodobljen
+        password:
+            change_success: Geslo je bilo spremenjeno
+            invalid: Napačno trenutno geslo
+    channel:
+        error:
+            at_least_one: Kanala ni mogoče izbrisati, zahtevan je vsaj en omogočen kanal

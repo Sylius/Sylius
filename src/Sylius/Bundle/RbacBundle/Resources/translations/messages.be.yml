@@ -2,13 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    role:
-      code: Код
-      name: Імя
-      description: Апісанне
-      parent: "Бацькоўскі аб'ект"
-    permission:
-      code: Код
-      description: Апісанне
-      parent: "Бацькоўскі аб'ект"
+    form:
+        role:
+            code: Код
+            name: Імя
+            description: Апісанне
+            parent: "Бацькоўскі аб'ект"
+        permission:
+            code: Код
+            description: Апісанне
+            parent: "Бацькоўскі аб'ект"

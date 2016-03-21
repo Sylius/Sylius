@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    variant:
-      presentation: Presentació
-    option:
-      name: Nom
+    form:
+        variant:
+            presentation: Presentació
+        option:
+            name: Nom

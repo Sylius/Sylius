@@ -2,31 +2,31 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    credit_card:
-      cardholder_name: Vlasnik kartice
-      expiry_month: Mjesec isteka kartice
-      expiry_year: Godina isteka kartice
-      number: Broj kartice
-      security_code: Sigurnosni (CVV) Kod
-      type: Tip kartice
-    payment:
-      amount: Iznos
-      method: Način plaćanja
-      state:
-        header: Stanje plaćanja
-        checkout: Blagajna
-        completed: Završeno
-        failed: Neuspješno
-        new: Novo
-        pending: Na čekanju
-        processing: U obradi
-        unknown: Nepoznato
-        void: Nevažeće
-        cancelled: Otkazano
-        refunded: Refundirano
-    payment_method:
-      description: Opis
-      enabled: Omogući?
-      gateway: Gateway
-      name: Naziv
+    form:
+        credit_card:
+            cardholder_name: Vlasnik kartice
+            expiry_month: Mjesec isteka kartice
+            expiry_year: Godina isteka kartice
+            number: Broj kartice
+            security_code: Sigurnosni (CVV) Kod
+            type: Tip kartice
+        payment:
+            amount: Iznos
+            method: Način plaćanja
+            state:
+                header: Stanje plaćanja
+                checkout: Blagajna
+                completed: Završeno
+                failed: Neuspješno
+                new: Novo
+                pending: Na čekanju
+                processing: U obradi
+                unknown: Nepoznato
+                void: Nevažeće
+                cancelled: Otkazano
+                refunded: Refundirano
+        payment_method:
+            description: Opis
+            enabled: Omogući?
+            gateway: Gateway
+            name: Naziv

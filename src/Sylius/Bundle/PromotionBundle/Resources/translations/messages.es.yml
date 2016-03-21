@@ -2,56 +2,56 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    action:
-      fixed_discount_configuration:
-        amount: Cantidad
-      percentage_discount_configuration:
-        percentage: Porcentaje
-      shipping_discount_configuration:
-        percentage: Porcentaje
-      type: Tipo
-    rule:
-      taxonomy_configuration:
-        taxons: Taxonomías
-        exclude: Excluir
-      contains_product_configuration:
-        variants: Productos
-        exclude: Excluir
-      cart_quantity_configuration:
-        count: Contador
-      item_total_configuration:
-        amount: Cantidad
-      nth_order_configuration:
-        nth: Enésimo
-      customer_loyalty_configuration:
-        time: Fecha
-        unit:
-          days: Días
-          weeks: Semanas
-          months: Meses
-          years: Años
-          header: Unidad
-        after: Usuario creado después de este período
-      shipping_country_configuration:
-        country: País
-      type: Tipo
-    coupon:
-      usage_limit: Limite de uso
-      expires_at: Caduca en
-    coupon_generate_instruction:
-      amount: Cantidad
-      usage_limit: Límite de uso
-      expires_at: Caduca en
-    promotion:
-      actions: Acciones
-      add_action: Añadir acción
-      add_rule: Añadir regla
-      coupon_based: Basado en cupones
-      exclusive: Exclusivo
-      description: Descripción
-      ends_at: Termina el
-      name: Nombre
-      rules: Reglas
-      starts_at: Empieza el
-      usage_limit: Límite de uso
+    form:
+        action:
+            fixed_discount_configuration:
+                amount: Cantidad
+            percentage_discount_configuration:
+                percentage: Porcentaje
+            shipping_discount_configuration:
+                percentage: Porcentaje
+            type: Tipo
+        rule:
+            taxonomy_configuration:
+                taxons: Taxonomías
+                exclude: Excluir
+            contains_product_configuration:
+                variants: Productos
+                exclude: Excluir
+            cart_quantity_configuration:
+                count: Contador
+            item_total_configuration:
+                amount: Cantidad
+            nth_order_configuration:
+                nth: Enésimo
+            customer_loyalty_configuration:
+                time: Fecha
+                unit:
+                    days: Días
+                    weeks: Semanas
+                    months: Meses
+                    years: Años
+                    header: Unidad
+                after: Usuario creado después de este período
+            shipping_country_configuration:
+                country: País
+            type: Tipo
+        coupon:
+            usage_limit: Limite de uso
+            expires_at: Caduca en
+        coupon_generate_instruction:
+            amount: Cantidad
+            usage_limit: Límite de uso
+            expires_at: Caduca en
+        promotion:
+            actions: Acciones
+            add_action: Añadir acción
+            add_rule: Añadir regla
+            coupon_based: Basado en cupones
+            exclusive: Exclusivo
+            description: Descripción
+            ends_at: Termina el
+            name: Nombre
+            rules: Reglas
+            starts_at: Empieza el
+            usage_limit: Límite de uso

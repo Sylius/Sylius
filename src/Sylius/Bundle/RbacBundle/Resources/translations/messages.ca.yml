@@ -2,11 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    role:
-      code: Codi
-      name: Nom
-      description: Descripció
-    permission:
-      code: Codi
-      description: Descripció
+    form:
+        role:
+            code: Codi
+            name: Nom
+            description: Descripció
+        permission:
+            code: Codi
+            description: Descripció

@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  promotion_coupon:
-    generate: Kampagne kuponer er succesfuldt blevet genereret.
-    eligible: Din kampagne kode er blevet tilføjet til indkøbskurven.
-    invalid: Din kampagne kupon er ikke gyldig.
-    not_eligible: Din indkøbsvogn er ikke berettiget til denne kampagne kupon.
+    promotion_coupon:
+        generate: Kampagne kuponer er succesfuldt blevet genereret.
+        eligible: Din kampagne kode er blevet tilføjet til indkøbskurven.
+        invalid: Din kampagne kupon er ikke gyldig.
+        not_eligible: Din indkøbsvogn er ikke berettiget til denne kampagne kupon.

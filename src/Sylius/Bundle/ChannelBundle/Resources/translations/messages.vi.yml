@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    channel:
-      name: Tên
+    form:
+        channel:
+            name: Tên

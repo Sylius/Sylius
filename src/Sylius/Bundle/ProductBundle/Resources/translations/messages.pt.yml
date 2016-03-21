@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    product:
-      description: Descrição
-    product_variant:
-      available_on: Disponível em
+    form:
+        product:
+            description: Descrição
+        product_variant:
+            available_on: Disponível em

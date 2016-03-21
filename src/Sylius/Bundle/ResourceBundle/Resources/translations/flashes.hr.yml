@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  resource:
-    create: '%resource% je uspješno izvršen.'
-    update: '%resource% je uspješno ažuriran.'
-    delete: '%resource% je uspješno obrisan.'
+    resource:
+        create: '%resource% je uspješno izvršen.'
+        update: '%resource% je uspješno ažuriran.'
+        delete: '%resource% je uspješno obrisan.'

@@ -2,13 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  resource:
-    create: '%resource% успешно создан.'
-    update: '%resource% успешно изменен.'
-    delete: '%resource% удален успешно.'
-    move: '%resource% успешно перемещен.'
-    generate: '% resource%ы созданы успешно.'
-    revert: '%resource% успешно откачен.'
-    restore_deleted: '%resource% успешно восстановлен.'
-    enable: '%resource% успешно включен.'
-    disable: '%resource% успешно отключен.'
+    resource:
+        create: '%resource% успешно создан.'
+        update: '%resource% успешно изменен.'
+        delete: '%resource% удален успешно.'
+        move: '%resource% успешно перемещен.'
+        generate: '% resource%ы созданы успешно.'
+        revert: '%resource% успешно откачен.'
+        restore_deleted: '%resource% успешно восстановлен.'
+        enable: '%resource% успешно включен.'
+        disable: '%resource% успешно отключен.'

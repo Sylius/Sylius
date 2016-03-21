@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    channel:
-      name: ชื่อ
-      description: คำอธิบาย
-      enabled: เปิดใช้งานแล้ว
+    form:
+        channel:
+            name: ชื่อ
+            description: คำอธิบาย
+            enabled: เปิดใช้งานแล้ว

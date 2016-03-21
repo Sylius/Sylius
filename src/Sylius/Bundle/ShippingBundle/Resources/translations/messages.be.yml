@@ -2,37 +2,37 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    rule:
-      unit_count_configuration:
-        count: Колькасць
-    shipment:
-      state: Статус
-      states:
-        checkout: Афармленне заказа
-        pending: У апрацоўцы
-        ready: Гатова
-        shipped: Дастаўлена
-        returned: Вернута
-        cancelled: Адменена
-      tracking_code: Трэкінг-код
-    shipping_calculator:
-      flat_rate_configuration:
-        amount: Сума
-      per_unit_rate_configuration:
-        amount: Сума
-      weight_rate_configuration:
-        division: Падзел
-      volume_rate_configuration:
-        amount: Сума
-        division: Падзел
-    shipping_category:
-      description: Апісанне
-      name: Назва
-    shipping_method:
-      calculator: Калькулятар
-      category: Катэгорыя
-      category_requirement: Умовы катэгорыі
-      configuration: Канфігурацыя
-      enabled: Уключана
-      name: Назва
+    form:
+        rule:
+            unit_count_configuration:
+                count: Колькасць
+        shipment:
+            state: Статус
+            states:
+                checkout: Афармленне заказа
+                pending: У апрацоўцы
+                ready: Гатова
+                shipped: Дастаўлена
+                returned: Вернута
+                cancelled: Адменена
+            tracking_code: Трэкінг-код
+        shipping_calculator:
+            flat_rate_configuration:
+                amount: Сума
+            per_unit_rate_configuration:
+                amount: Сума
+            weight_rate_configuration:
+                division: Падзел
+            volume_rate_configuration:
+                amount: Сума
+                division: Падзел
+        shipping_category:
+            description: Апісанне
+            name: Назва
+        shipping_method:
+            calculator: Калькулятар
+            category: Катэгорыя
+            category_requirement: Умовы катэгорыі
+            configuration: Канфігурацыя
+            enabled: Уключана
+            name: Назва

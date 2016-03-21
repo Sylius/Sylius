@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  email:
-    code:
-      not_blank: Fut kodin email.
-      unique: Kodi email duhet të jetë unik.
-    subject:
-      not_blank: Fut titullin e email-it.
+    email:
+        code:
+            not_blank: Fut kodin email.
+            unique: Kodi email duhet të jetë unik.
+        subject:
+            not_blank: Fut titullin e email-it.

@@ -2,22 +2,24 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    login:
-      username: 用户名
-      password: 密码
-  ui:
-    create: 创建
-    dashboard: 仪表板
-    delete: 删除
-    edit: 编辑
-    enabled: 已启用
-    description: 描述
-    "no": false
-    success: 成功
-    "yes": true
-    new: 新增
-    filter: 筛选器
-    countries: 国家
-    new_country: 新建国家
-    locales: 区域设置
+    form:
+        login:
+            username: 用户名
+            password: 密码
+    ui:
+        are_your_sure_you_want_to_perform_this_action: 是否确实执行此操作？
+        confirm_your_action: 请确认你的行为
+        create: 创建
+        dashboard: 仪表板
+        delete: 删除
+        edit: 编辑
+        enabled: 已启用
+        description: 描述
+        "no": false
+        success: 成功
+        "yes": true
+        new: 新增
+        filter: 筛选器
+        countries: 国家
+        new_country: 新建国家
+        locales: 区域设置

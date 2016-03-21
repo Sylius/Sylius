@@ -2,6 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    collection:
-      delete: 删除
+    form:
+        collection:
+            add: 新增
+            delete: 删除

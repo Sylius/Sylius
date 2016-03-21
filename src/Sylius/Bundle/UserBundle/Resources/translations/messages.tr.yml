@@ -2,33 +2,33 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    group:
-      name: Ad
-      roles: Roller
-    user:
-      email: E-posta
-      enabled: Etkin
-      password:
-        label: Şifre
-        confirmation: Doğrulama
-      remember_me: Beni hatırla
-      shipping_address: Teslimat adresi
-    customer:
-      first_name: Ad
-      groups: Gruplar
-      last_name: Soyad
-      email: E-posta
-      phone_number: Telefon numarası
-      birthday: Doğum Günü
-      billing_address: Fatura adresi
-      different_billing_address: Fatura için farklı bir adres kullanmak ister misiniz?
-    user_filter:
-      query: Arama
-    user_change_password:
-      confirmation: Doğrulama
-      current: Geçerli parola
-      new: Yeni parola
-    user_reset_password:
-      confirmation: Doğrulama
-      new: Yeni parola
+    form:
+        group:
+            name: Ad
+            roles: Roller
+        user:
+            email: E-posta
+            enabled: Etkin
+            password:
+                label: Şifre
+                confirmation: Doğrulama
+            remember_me: Beni hatırla
+            shipping_address: Teslimat adresi
+        customer:
+            first_name: Ad
+            groups: Gruplar
+            last_name: Soyad
+            email: E-posta
+            phone_number: Telefon numarası
+            birthday: Doğum Günü
+            billing_address: Fatura adresi
+            different_billing_address: Fatura için farklı bir adres kullanmak ister misiniz?
+        user_filter:
+            query: Arama
+        user_change_password:
+            confirmation: Doğrulama
+            current: Geçerli parola
+            new: Yeni parola
+        user_reset_password:
+            confirmation: Doğrulama
+            new: Yeni parola

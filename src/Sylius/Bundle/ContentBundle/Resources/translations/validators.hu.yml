@@ -2,59 +2,59 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  imagine_block:
-    start_date:
-      invalid_date: A megjelenés kezdetének dátuma érvénytelen.
-    end_date:
-      invalid_date: A megjelenés végének dátuma érvénytelen.
-  menu:
-    name:
-      not_blank: Kérjük adja meg a menü nevét!
-    label:
-      not_blank: Kérjük adja meg a menü címkéjét!
-    start_date:
-      invalid_date: A megjelenés kezdetének dátuma érvénytelen.
-    end_date:
-      invalid_date: A megjelenés végének dátuma érvénytelen.
-  menu_node:
-    name:
-      not_blank: Kérjük adja meg a menüpont nevét!
-    label:
-      not_blank: Kérjük adja meg a menüpont címkéjét!
-    start_date:
-      invalid_date: A megjelenés kezdetének dátuma érvénytelen.
-    end_date:
-      invalid_date: A megjelenés végének dátuma érvénytelen.
-  route:
-    name:
-      not_blank: Kérjük adja meg az útvonal nevét!
-    content:
-      not_blank: Kérjük adja meg az útvonal tartalmát!
-    start_date:
-      invalid_date: A megjelenés kezdetének dátuma érvénytelen.
-    end_date:
-      invalid_date: A megjelenés végének dátuma érvénytelen.
-  slideshow_block:
-    name:
-      not_blank: Kérjük adja meg a diavetítés nevét!
-    title:
-      not_blank: Kérjük adja meg a diavetítés címkéjét!
-    start_date:
-      invalid_date: A megjelenés kezdetének dátuma érvénytelen.
-    end_date:
-      invalid_date: A megjelenés végének dátuma érvénytelen.
-  simple_block:
-    start_date:
-      invalid_date: A megjelenés kezdetének dátuma érvénytelen.
-    end_date:
-      invalid_date: A megjelenés végének dátuma érvénytelen.
-  string_block:
-    start_date:
-      invalid_date: A megjelenés kezdetének dátuma érvénytelen.
-    end_date:
-      invalid_date: A megjelenés végének dátuma érvénytelen.
-  static_content:
-    start_date:
-      invalid_date: A megjelenés kezdetének dátuma érvénytelen.
-    end_date:
-      invalid_date: A megjelenés végének dátuma érvénytelen.
+    imagine_block:
+        start_date:
+            invalid_date: A megjelenés kezdetének dátuma érvénytelen.
+        end_date:
+            invalid_date: A megjelenés végének dátuma érvénytelen.
+    menu:
+        name:
+            not_blank: Kérjük adja meg a menü nevét!
+        label:
+            not_blank: Kérjük adja meg a menü címkéjét!
+        start_date:
+            invalid_date: A megjelenés kezdetének dátuma érvénytelen.
+        end_date:
+            invalid_date: A megjelenés végének dátuma érvénytelen.
+    menu_node:
+        name:
+            not_blank: Kérjük adja meg a menüpont nevét!
+        label:
+            not_blank: Kérjük adja meg a menüpont címkéjét!
+        start_date:
+            invalid_date: A megjelenés kezdetének dátuma érvénytelen.
+        end_date:
+            invalid_date: A megjelenés végének dátuma érvénytelen.
+    route:
+        name:
+            not_blank: Kérjük adja meg az útvonal nevét!
+        content:
+            not_blank: Kérjük adja meg az útvonal tartalmát!
+        start_date:
+            invalid_date: A megjelenés kezdetének dátuma érvénytelen.
+        end_date:
+            invalid_date: A megjelenés végének dátuma érvénytelen.
+    slideshow_block:
+        name:
+            not_blank: Kérjük adja meg a diavetítés nevét!
+        title:
+            not_blank: Kérjük adja meg a diavetítés címkéjét!
+        start_date:
+            invalid_date: A megjelenés kezdetének dátuma érvénytelen.
+        end_date:
+            invalid_date: A megjelenés végének dátuma érvénytelen.
+    simple_block:
+        start_date:
+            invalid_date: A megjelenés kezdetének dátuma érvénytelen.
+        end_date:
+            invalid_date: A megjelenés végének dátuma érvénytelen.
+    string_block:
+        start_date:
+            invalid_date: A megjelenés kezdetének dátuma érvénytelen.
+        end_date:
+            invalid_date: A megjelenés végének dátuma érvénytelen.
+    static_content:
+        start_date:
+            invalid_date: A megjelenés kezdetének dátuma érvénytelen.
+        end_date:
+            invalid_date: A megjelenés végének dátuma érvénytelen.

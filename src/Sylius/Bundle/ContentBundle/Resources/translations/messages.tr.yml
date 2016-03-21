@@ -2,105 +2,105 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    action_block:
-      action_name: Eylem Adı
-      id: Id
-      publish_end_date: Yayın bitiş tarihi
-      publish_start_date: Yayın başlangıç tarihi
-      publishable: yayınla
-    imagine_block:
-      filter: Filtrele
-      image: Resim
-      internal_name: Dahili isim
-      label: Etiket
-      link_url: "link Bağlantı URL'si"
-      parent: Üst
-      publish_end_date: Yayın bitiş tarihi
-      publish_start_date: Yayın başlangıç tarihi
-      publishable: yayınla
-      slideshow_small: Slayt gösterisi küçük (yan)
-      slideshow_medium: Slayt gösterisi orta (içerik)
-      slideshow_large: Slayt gösterisi büyük (tam genişlik)
-    menu:
-      childrens: Çocuk
-      display: Ekran
-      display_children: Çocukların görünümü
-      label: Etiket
-      name: Ad
-      parent: Üst
-      publish_end_date: Yayın bitiş tarihi
-      publish_start_date: Yayın başlangıç tarihi
-      publishable: yayınla
-      route: Rota
-      uri: URI
-    menu_block:
-      body: İçerik
-      id: Id
-      name: Ad
-      publish_end_date: Yayın bitiş tarihi
-      publish_start_date: Yayın başlangıç tarihi
-      publishable: yayınla
-    menu_node_block:
-      content: İçerik
-      display: Görünüm
-      display_children: Çocukların görünümü
-      internal_name: Dahili isim
-      label: Etiket
-      link_type: Bağlantı türü
-      publish_end_date: Yayın bitiş tarihi
-      publish_start_date: Yayın başlangıç tarihi
-      publishable: yayınla
-      route: Rota
-      uri: URI
-    redirect_route:
-      id: Id
-      name: Ad
-      route_name: Rota İsmi
-      uri: URI
-    reference_block:
-      body: İçerik
-      id: Id
-      publish_end_date: Yayın bitiş tarihi
-      publish_start_date: Yayın başlangıç tarihi
-      publishable: yayınla
-      title: Başlık
-    route:
-      content: İçerik
-      name: Ad
-      parent: Üst
-    simple_block:
-      body: İçerik
-      internal_name: Dahili isim
-      parent: Üst
-      publish_end_date: Yayın bitiş tarihi
-      publish_start_date: Yayın başlangıç tarihi
-      publishable: yayınla
-      title: Başlık
-    slideshow_block:
-      add_slide: Slayt Ekle
-      childrens: Çocuklar
-      internal_name: Dahili isim
-      parent: Üst
-      publish_end_date: Yayın bitiş tarihi
-      publish_start_date: Yayın başlangıç tarihi
-      publishable: yayınla
-      title: Başlık
-    static_content:
-      body: İçerik
-      id: Id
-      internal_name: Dahili isim
-      menu_nodes: Menü düğümleri
-      parent: Üst
-      publish_end_date: Yayın bitiş tarihi
-      publish_start_date: Yayın başlangıç tarihi
-      publishable: yayınla
-      routes: Rotalar
-      title: Başlık
-    string_block:
-      body: İçerik
-      id: ID
-      name: Ad
-      publish_end_date: Yayın bitiş tarihi
-      publish_start_date: Yayın başlangıç tarihi
-      publishable: yayınla
+    form:
+        action_block:
+            action_name: Eylem Adı
+            id: Id
+            publish_end_date: Yayın bitiş tarihi
+            publish_start_date: Yayın başlangıç tarihi
+            publishable: yayınla
+        imagine_block:
+            filter: Filtrele
+            image: Resim
+            internal_name: Dahili isim
+            label: Etiket
+            link_url: "link Bağlantı URL'si"
+            parent: Üst
+            publish_end_date: Yayın bitiş tarihi
+            publish_start_date: Yayın başlangıç tarihi
+            publishable: yayınla
+            slideshow_small: Slayt gösterisi küçük (yan)
+            slideshow_medium: Slayt gösterisi orta (içerik)
+            slideshow_large: Slayt gösterisi büyük (tam genişlik)
+        menu:
+            childrens: Çocuk
+            display: Ekran
+            display_children: Çocukların görünümü
+            label: Etiket
+            name: Ad
+            parent: Üst
+            publish_end_date: Yayın bitiş tarihi
+            publish_start_date: Yayın başlangıç tarihi
+            publishable: yayınla
+            route: Rota
+            uri: URI
+        menu_block:
+            body: İçerik
+            id: Id
+            name: Ad
+            publish_end_date: Yayın bitiş tarihi
+            publish_start_date: Yayın başlangıç tarihi
+            publishable: yayınla
+        menu_node_block:
+            content: İçerik
+            display: Görünüm
+            display_children: Çocukların görünümü
+            internal_name: Dahili isim
+            label: Etiket
+            link_type: Bağlantı türü
+            publish_end_date: Yayın bitiş tarihi
+            publish_start_date: Yayın başlangıç tarihi
+            publishable: yayınla
+            route: Rota
+            uri: URI
+        redirect_route:
+            id: Id
+            name: Ad
+            route_name: Rota İsmi
+            uri: URI
+        reference_block:
+            body: İçerik
+            id: Id
+            publish_end_date: Yayın bitiş tarihi
+            publish_start_date: Yayın başlangıç tarihi
+            publishable: yayınla
+            title: Başlık
+        route:
+            content: İçerik
+            name: Ad
+            parent: Üst
+        simple_block:
+            body: İçerik
+            internal_name: Dahili isim
+            parent: Üst
+            publish_end_date: Yayın bitiş tarihi
+            publish_start_date: Yayın başlangıç tarihi
+            publishable: yayınla
+            title: Başlık
+        slideshow_block:
+            add_slide: Slayt Ekle
+            childrens: Çocuklar
+            internal_name: Dahili isim
+            parent: Üst
+            publish_end_date: Yayın bitiş tarihi
+            publish_start_date: Yayın başlangıç tarihi
+            publishable: yayınla
+            title: Başlık
+        static_content:
+            body: İçerik
+            id: Id
+            internal_name: Dahili isim
+            menu_nodes: Menü düğümleri
+            parent: Üst
+            publish_end_date: Yayın bitiş tarihi
+            publish_start_date: Yayın başlangıç tarihi
+            publishable: yayınla
+            routes: Rotalar
+            title: Başlık
+        string_block:
+            body: İçerik
+            id: ID
+            name: Ad
+            publish_end_date: Yayın bitiş tarihi
+            publish_start_date: Yayın başlangıç tarihi
+            publishable: yayınla

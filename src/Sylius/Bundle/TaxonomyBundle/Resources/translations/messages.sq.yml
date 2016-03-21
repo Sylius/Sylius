@@ -2,11 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    taxon:
-      description: Përshkrimi
-      name: Emri
-      parent: Prind
-      permalink: Permalink
-    taxonomy:
-      name: Emri
+    form:
+        taxon:
+            description: Përshkrimi
+            name: Emri
+            parent: Prind
+            permalink: Permalink
+        taxonomy:
+            name: Emri

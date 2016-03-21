@@ -2,11 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  taxon:
-    name:
-      max_length: 分类名称不能超过 255 个字符。
-      not_blank: 请输入分类名称。
-  taxonomy:
-    name:
-      max_length: 分类名称不能超过 255 个字符。
-      not_blank: 请输入分类名称。
+    taxon:
+        name:
+            max_length: 分类名称不能超过 255 个字符。
+            not_blank: 请输入分类名称。
+        code:
+            not_blank: 请输入分类代码。
+    taxonomy:
+        name:
+            max_length: 分类名称不能超过 255 个字符。
+            not_blank: 请输入分类名称。

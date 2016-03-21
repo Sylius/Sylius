@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    role:
-      description: Descrição
-    permission:
-      description: Descrição
+    form:
+        role:
+            description: Descrição
+        permission:
+            description: Descrição

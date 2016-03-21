@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    currency:
-      exchange_rate: Árfolyam
-      enabled: Engedélyezve
+    form:
+        currency:
+            exchange_rate: Árfolyam
+            enabled: Engedélyezve

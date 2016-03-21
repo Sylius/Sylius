@@ -2,25 +2,25 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    action_block:
-      action_name: Име на акцијата
-      id: ID број
-    imagine_block:
-      internal_name: Интерно име
-      parent: Родител
-    menu_block:
-      id: ID број
-    menu_node_block:
-      internal_name: Интерно име
-    redirect_route:
-      id: ID број
-    reference_block:
-      id: ID број
-    simple_block:
-      internal_name: Интерно име
-    slideshow_block:
-      internal_name: Интерно име
-    static_content:
-      id: ID број
-      internal_name: Интерно име
+    form:
+        action_block:
+            action_name: Име на акцијата
+            id: ID број
+        imagine_block:
+            internal_name: Интерно име
+            parent: Родител
+        menu_block:
+            id: ID број
+        menu_node_block:
+            internal_name: Интерно име
+        redirect_route:
+            id: ID број
+        reference_block:
+            id: ID број
+        simple_block:
+            internal_name: Интерно име
+        slideshow_block:
+            internal_name: Интерно име
+        static_content:
+            id: ID број
+            internal_name: Интерно име

@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    cart_item:
-      quantity: Kiekis
+    form:
+        cart_item:
+            quantity: Kiekis

@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    product_variant:
-      available_on: Доступно
+    form:
+        product_variant:
+            available_on: Доступно

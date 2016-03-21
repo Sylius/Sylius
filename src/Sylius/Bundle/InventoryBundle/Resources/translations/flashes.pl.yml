@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  inventory_unit:
-    backorder: Towar zamówiony u dostawcy.
-    sell: Towar potwierdzony.
-    return: Towar zwrócony.
-    transition_fail: Działanie nie może być wykonywane z obecnym statusem towaru
+    inventory_unit:
+        backorder: Towar zamówiony u dostawcy.
+        sell: Towar potwierdzony.
+        return: Towar zwrócony.
+        transition_fail: Działanie nie może być wykonywane z obecnym statusem towaru

@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    contact_request:
-      email: E-pošta
-      message: Sporočilo
-      topic: Tema
-    contact_topic:
-      title: Naslov
+    form:
+        contact_request:
+            email: E-pošta
+            message: Sporočilo
+            topic: Tema
+        contact_topic:
+            title: Naslov

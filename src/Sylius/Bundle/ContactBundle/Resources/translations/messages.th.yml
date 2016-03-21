@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    contact_request:
-      first_name: ชื่อ
-      last_name: นามสกุล
-      email: อีเมล
-    contact_topic:
-      title: หัวข้อ
+    form:
+        contact_request:
+            first_name: ชื่อ
+            last_name: นามสกุล
+            email: อีเมล
+        contact_topic:
+            title: หัวข้อ

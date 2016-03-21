@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    contact_topic:
-      title: Tiêu đề
+    form:
+        contact_topic:
+            title: Tiêu đề

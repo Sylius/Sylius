@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    attribute:
-      code: รหัส
-      name: ชื่อ
-      type: ชนิด
-    attribute_type:
-      configuration: ตั้งค่าคอนฟิก
+    form:
+        attribute:
+            code: รหัส
+            name: ชื่อ
+            type: ชนิด
+        attribute_type:
+            configuration: ตั้งค่าคอนฟิก

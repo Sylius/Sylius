@@ -1,4 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
     ui:
-        'no': false
-        'yes': true
+        city: Bandar
+        company: Syarikat
+        postcode: Poskod

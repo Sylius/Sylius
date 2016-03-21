@@ -2,105 +2,105 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    action_block:
-      action_name: Numele acţiunii
-      id: Id
-      publish_end_date: Data de sfârșit a publicării
-      publish_start_date: Data de început a publicării
-      publishable: Publicat
-    imagine_block:
-      filter: Filtrează
-      image: Imagine
-      internal_name: Denumire internă
-      label: Label
-      link_url: Legătură URL
-      parent: Părinte
-      publish_end_date: Data de sfârșit a publicării
-      publish_start_date: Data de început a publicării
-      publishable: Publicat
-      slideshow_small: Carusel mic (lateral)
-      slideshow_medium: Slideshow mediu (conţinut)
-      slideshow_large: Carusel mare (toata lățimea)
-    menu:
-      childrens: Copii
-      display: Afișare
-      display_children: Afişare copii
-      label: Label
-      name: Nume
-      parent: Părinte
-      publish_end_date: Data de sfârșit a publicării
-      publish_start_date: Data de început a publicării
-      publishable: Publicat
-      route: Rută
-      uri: URI
-    menu_block:
-      body: Corp
-      id: Id
-      name: Nume
-      publish_end_date: Data de sfârșit a publicării
-      publish_start_date: Data de început a publicării
-      publishable: Publicat
-    menu_node_block:
-      content: Conţinut
-      display: Afișare
-      display_children: Afişare copii
-      internal_name: Denumire internă
-      label: Label
-      link_type: Tip link
-      publish_end_date: Data de sfârșit a publicării
-      publish_start_date: Data de început a publicării
-      publishable: Publicat
-      route: Rută
-      uri: URI
-    redirect_route:
-      id: Id
-      name: Nume
-      route_name: Numele rutei
-      uri: URI
-    reference_block:
-      body: Corp
-      id: Id
-      publish_end_date: Data de sfârșit a publicării
-      publish_start_date: Data de început a publicării
-      publishable: Publicat
-      title: Titlu
-    route:
-      content: Conţinut
-      name: Nume
-      parent: Părinte
-    simple_block:
-      body: Corp
-      internal_name: Denumire internă
-      parent: Părinte
-      publish_end_date: Data de sfârșit a publicării
-      publish_start_date: Data de început a publicării
-      publishable: Publicat
-      title: Titlu
-    slideshow_block:
-      add_slide: Adaugă diapozitiv
-      childrens: Copii
-      internal_name: Denumire internă
-      parent: Părinte
-      publish_end_date: Data de sfârșit a publicării
-      publish_start_date: Data de început a publicării
-      publishable: Publicat
-      title: Titlu
-    static_content:
-      body: Corp
-      id: Id
-      internal_name: Denumire internă
-      menu_nodes: Noduri meniu
-      parent: Părinte
-      publish_end_date: Data de sfârșit a publicării
-      publish_start_date: Publicare începând cu data de
-      publishable: Publicat
-      routes: Rute
-      title: Titlu
-    string_block:
-      body: Corp
-      id: Id
-      name: Nume
-      publish_end_date: Data de sfârșit a publicării
-      publish_start_date: Data de început a publicării
-      publishable: Publicat
+    form:
+        action_block:
+            action_name: Numele acţiunii
+            id: Id
+            publish_end_date: Data de sfârșit a publicării
+            publish_start_date: Data de început a publicării
+            publishable: Publicat
+        imagine_block:
+            filter: Filtrează
+            image: Imagine
+            internal_name: Denumire internă
+            label: Label
+            link_url: Legătură URL
+            parent: Părinte
+            publish_end_date: Data de sfârșit a publicării
+            publish_start_date: Data de început a publicării
+            publishable: Publicat
+            slideshow_small: Carusel mic (lateral)
+            slideshow_medium: Slideshow mediu (conţinut)
+            slideshow_large: Carusel mare (toata lățimea)
+        menu:
+            childrens: Copii
+            display: Afișare
+            display_children: Afişare copii
+            label: Label
+            name: Nume
+            parent: Părinte
+            publish_end_date: Data de sfârșit a publicării
+            publish_start_date: Data de început a publicării
+            publishable: Publicat
+            route: Rută
+            uri: URI
+        menu_block:
+            body: Corp
+            id: Id
+            name: Nume
+            publish_end_date: Data de sfârșit a publicării
+            publish_start_date: Data de început a publicării
+            publishable: Publicat
+        menu_node_block:
+            content: Conţinut
+            display: Afișare
+            display_children: Afişare copii
+            internal_name: Denumire internă
+            label: Label
+            link_type: Tip link
+            publish_end_date: Data de sfârșit a publicării
+            publish_start_date: Data de început a publicării
+            publishable: Publicat
+            route: Rută
+            uri: URI
+        redirect_route:
+            id: Id
+            name: Nume
+            route_name: Numele rutei
+            uri: URI
+        reference_block:
+            body: Corp
+            id: Id
+            publish_end_date: Data de sfârșit a publicării
+            publish_start_date: Data de început a publicării
+            publishable: Publicat
+            title: Titlu
+        route:
+            content: Conţinut
+            name: Nume
+            parent: Părinte
+        simple_block:
+            body: Corp
+            internal_name: Denumire internă
+            parent: Părinte
+            publish_end_date: Data de sfârșit a publicării
+            publish_start_date: Data de început a publicării
+            publishable: Publicat
+            title: Titlu
+        slideshow_block:
+            add_slide: Adaugă diapozitiv
+            childrens: Copii
+            internal_name: Denumire internă
+            parent: Părinte
+            publish_end_date: Data de sfârșit a publicării
+            publish_start_date: Data de început a publicării
+            publishable: Publicat
+            title: Titlu
+        static_content:
+            body: Corp
+            id: Id
+            internal_name: Denumire internă
+            menu_nodes: Noduri meniu
+            parent: Părinte
+            publish_end_date: Data de sfârșit a publicării
+            publish_start_date: Publicare începând cu data de
+            publishable: Publicat
+            routes: Rute
+            title: Titlu
+        string_block:
+            body: Corp
+            id: Id
+            name: Nume
+            publish_end_date: Data de sfârșit a publicării
+            publish_start_date: Data de început a publicării
+            publishable: Publicat

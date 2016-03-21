@@ -2,37 +2,37 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  metadata:
-    type:
-      none: ' -Ничего не выбрано- '
-      twitter_summary_card: Резюме
-      twitter_summary_large_image_card: Резюме с большим изображением
-      twitter_player_card: Плейер
-      twitter_app_card: Приложение
-    page:
-      title: Название
-      description: Описание
-      keywords: Ключевые слова
-      twitter: Карта Twitter
-    twitter:
-      title: Название
-      description: Описание
-      site: Сайт
-      site_id: ID сайта
-      creator: Создатель
-      creator_id: Идентификатор создателя
-      image: Изображение
-      player: Плейер
-      player_width: Ширина плеера
-      player_height: Высота плейера
-      player_stream: Поток плейера
-      player_stream_content_type: Тип содержимого потока плейера
-      app_name_iphone: Название приложения iPhone
-      app_id_iphone: Идентификатор приложения iPhone
-      app_url_iphone: Url-адрес приложения iPhone
-      app_name_ipad: Название приложения iPad
-      app_id_ipad: Идентификатор приложения iPad
-      app_url_ipad: Url-адрес приложения iPad
-      app_name_googleplay: Название приложения в Google Play
-      app_id_googleplay: Идентификатор приложения в Google Play
-      app_url_googleplay: Url-адрес приложения Google Play
+    metadata:
+        type:
+            none: ' -Ничего не выбрано- '
+            twitter_summary_card: Резюме
+            twitter_summary_large_image_card: Резюме с большим изображением
+            twitter_player_card: Плейер
+            twitter_app_card: Приложение
+        page:
+            title: Название
+            description: Описание
+            keywords: Ключевые слова
+            twitter: Карта Twitter
+        twitter:
+            title: Название
+            description: Описание
+            site: Сайт
+            site_id: ID сайта
+            creator: Создатель
+            creator_id: Идентификатор создателя
+            image: Изображение
+            player: Плейер
+            player_width: Ширина плеера
+            player_height: Высота плейера
+            player_stream: Поток плейера
+            player_stream_content_type: Тип содержимого потока плейера
+            app_name_iphone: Название приложения iPhone
+            app_id_iphone: Идентификатор приложения iPhone
+            app_url_iphone: Url-адрес приложения iPhone
+            app_name_ipad: Название приложения iPad
+            app_id_ipad: Идентификатор приложения iPad
+            app_url_ipad: Url-адрес приложения iPad
+            app_name_googleplay: Название приложения в Google Play
+            app_id_googleplay: Идентификатор приложения в Google Play
+            app_url_googleplay: Url-адрес приложения Google Play

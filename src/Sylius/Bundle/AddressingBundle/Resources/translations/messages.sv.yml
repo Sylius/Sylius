@@ -2,34 +2,34 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    address:
-      city: Ort
-      company: Företag
-      country: Land
-      first_name: Förnamn
-      last_name: Efternamn
-      phone_number: Telefonnummer
-      postcode: Postnummer
-      street: Gatuadress
-      province: Län
-    country:
-      name: Namn
-      provinces: Län
-      select: Välj
-      enabled: Aktiverad
-    province:
-      name: Namn
-      select: Välj
-    zone:
-      members: Medlemmar
-      name: Namn
-      type: Typ
-      types:
-        country: Land
-        province: Län
-        zone: Zon
-      scope: Omfattning
-      select: Välj
-    zone_member:
-      select: Välj
+    form:
+        address:
+            city: Ort
+            company: Företag
+            country: Land
+            first_name: Förnamn
+            last_name: Efternamn
+            phone_number: Telefonnummer
+            postcode: Postnummer
+            street: Gatuadress
+            province: Län
+        country:
+            name: Namn
+            provinces: Län
+            select: Välj
+            enabled: Aktiverad
+        province:
+            name: Namn
+            select: Välj
+        zone:
+            members: Medlemmar
+            name: Namn
+            type: Typ
+            types:
+                country: Land
+                province: Län
+                zone: Zon
+            scope: Omfattning
+            select: Välj
+        zone_member:
+            select: Välj

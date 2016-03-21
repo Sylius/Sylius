@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  locale:
-    code:
-      not_blank: Introduïu un codi local.
-      unique: Aquest codi local ja existeix.
+    locale:
+        code:
+            not_blank: Introduïu un codi local.
+            unique: Aquest codi local ja existeix.

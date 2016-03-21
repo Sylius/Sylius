@@ -2,18 +2,18 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    report:
-      name: Nazwa
-      description: Opis
-      data_fetcher: Źródło danych
-      renderer:
-        label: Obrazowanie
-        template: Szablon
-      chart:
-        type: Typ
-      user_registration:
-        start: Data rozpoczęcia
-        end: Data zakończenia
-        period: Okres
-        empty_records: Wydrukować puste rekordy?
+    form:
+        report:
+            name: Nazwa
+            description: Opis
+            data_fetcher: Źródło danych
+            renderer:
+                label: Obrazowanie
+                template: Szablon
+            chart:
+                type: Typ
+            user_registration:
+                start: Data rozpoczęcia
+                end: Data zakończenia
+                period: Okres
+                empty_records: Wydrukować puste rekordy?

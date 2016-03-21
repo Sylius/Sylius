@@ -1,6 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
     ui:
-        'no': false
+        city: Stad
+        company: Maatskappy
+        members: Lede
+        postcode: Poskode
         presentation: Weergawe
+        province: Provinsie
+        provinces: Provinsies
         scope: Gebied
-        'yes': true
+        street: Straat

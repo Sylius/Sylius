@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  inventory_unit:
-    backorder: Inventari i paraporositur i njësisë.
-    sell: Inventari i shitur i njësisë.
-    return: Inventarit i mbetur i njësisë.
-    transition_fail: Veprimi nuk mund të kryhet për shkak të gjendjes aktuale të njësisë
+    inventory_unit:
+        backorder: Inventari i paraporositur i njësisë.
+        sell: Inventari i shitur i njësisë.
+        return: Inventarit i mbetur i njësisë.
+        transition_fail: Veprimi nuk mund të kryhet për shkak të gjendjes aktuale të njësisë

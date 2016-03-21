@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    archetype:
-      code: Kod
-      name: Ad
-      parent: Üst
-      attributes: Nitelikler
-      options: Ayarlar
+    form:
+        archetype:
+            code: Kod
+            name: Ad
+            parent: Üst
+            attributes: Nitelikler
+            options: Ayarlar

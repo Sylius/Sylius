@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    attribute:
-      code: Κώδικος
-      name: Ονομασία
-      type: Τύπος
-    attribute_type:
-      configuration: Παραμετροποίηση
+    form:
+        attribute:
+            code: Κώδικος
+            name: Ονομασία
+            type: Τύπος
+        attribute_type:
+            configuration: Παραμετροποίηση

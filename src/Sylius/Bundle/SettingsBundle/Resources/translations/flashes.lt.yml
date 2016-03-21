@@ -2,5 +2,5 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  settings:
-    update: Nustatymai sėkmingai atnaujinti.
+    settings:
+        update: Nustatymai sėkmingai atnaujinti.

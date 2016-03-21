@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    account:
+        address:
+            create: 已成功添加您的地址
+            set_as_shipping: 您的送货地址已更改
+            update: 已成功更新您的地址

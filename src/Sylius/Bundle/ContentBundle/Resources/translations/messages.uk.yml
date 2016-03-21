@@ -2,105 +2,105 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    action_block:
-      action_name: Дія
-      id: ID
-      publish_end_date: Опублікувати до
-      publish_start_date: Опублікувати від
-      publishable: Опублікований
-    imagine_block:
-      filter: Фільтр
-      image: Зображення
-      internal_name: "Внутрішнє ім'я"
-      label: Назва
-      link_url: URL посилання
-      parent: "Батьківський об'єкт"
-      publish_end_date: Опублікувати до
-      publish_start_date: Опублікувати від
-      publishable: Опублікований
-      slideshow_small: Мале слайд-шоу (по ширині контекту)
-      slideshow_medium: Середнє слайд-шоу (по ширині контекту)
-      slideshow_large: Велике слайд-шоу (повний розмір)
-    menu:
-      childrens: Нащадки
-      display: Відобразити
-      display_children: Відобразити нащадків
-      label: Назва
-      name: Ім’я
-      parent: "Батьківський об'єкт"
-      publish_end_date: Опублікувати до
-      publish_start_date: Опублікувати від
-      publishable: Опублікований
-      route: Маршрут
-      uri: Адрес
-    menu_block:
-      body: Тіло
-      id: ID
-      name: Ім’я
-      publish_end_date: Опублікувати до
-      publish_start_date: Опублікувати від
-      publishable: Опублікований
-    menu_node_block:
-      content: Зміст
-      display: Відобразити
-      display_children: Відобразити нащадків
-      internal_name: "Внутрішнє ім'я"
-      label: Назва
-      link_type: Тип посилання
-      publish_end_date: Опублікувати до
-      publish_start_date: Опублікувати від
-      publishable: Опублікований
-      route: Маршрут
-      uri: Адрес
-    redirect_route:
-      id: ID
-      name: Ім’я
-      route_name: Назва маршруту
-      uri: Адрес
-    reference_block:
-      body: Тіло
-      id: ID
-      publish_end_date: Опублікувати до
-      publish_start_date: Опублікувати від
-      publishable: Опублікований
-      title: Назва
-    route:
-      content: Зміст
-      name: Ім’я
-      parent: "Батьківський об'єкт"
-    simple_block:
-      body: Тіло
-      internal_name: "Внутрішнє ім'я"
-      parent: "Батьківський об'єкт"
-      publish_end_date: Опублікувати до
-      publish_start_date: Опублікувати від
-      publishable: Опублікований
-      title: Назва
-    slideshow_block:
-      add_slide: Додати слайд
-      childrens: Нащадки
-      internal_name: "Внутрішнє ім'я"
-      parent: "Батьківський об'єкт"
-      publish_end_date: Опублікувати до
-      publish_start_date: Опублікувати від
-      publishable: Опублікований
-      title: Назва
-    static_content:
-      body: Тіло
-      id: ID
-      internal_name: "Внутрішнє ім'я"
-      menu_nodes: Елементи меню
-      parent: "Батьківський об'єкт"
-      publish_end_date: Опублікувати до
-      publish_start_date: Опублікувати від
-      publishable: Опублікований
-      routes: Маршрути
-      title: Заголовок
-    string_block:
-      body: Тіло
-      id: ID
-      name: Ім’я
-      publish_end_date: Опублікувати до
-      publish_start_date: Опублікувати від
-      publishable: Опублікований
+    form:
+        action_block:
+            action_name: Дія
+            id: ID
+            publish_end_date: Опублікувати до
+            publish_start_date: Опублікувати від
+            publishable: Опублікований
+        imagine_block:
+            filter: Фільтр
+            image: Зображення
+            internal_name: "Внутрішнє ім'я"
+            label: Назва
+            link_url: URL посилання
+            parent: "Батьківський об'єкт"
+            publish_end_date: Опублікувати до
+            publish_start_date: Опублікувати від
+            publishable: Опублікований
+            slideshow_small: Мале слайд-шоу (по ширині контекту)
+            slideshow_medium: Середнє слайд-шоу (по ширині контекту)
+            slideshow_large: Велике слайд-шоу (повний розмір)
+        menu:
+            childrens: Нащадки
+            display: Відобразити
+            display_children: Відобразити нащадків
+            label: Назва
+            name: Ім’я
+            parent: "Батьківський об'єкт"
+            publish_end_date: Опублікувати до
+            publish_start_date: Опублікувати від
+            publishable: Опублікований
+            route: Маршрут
+            uri: Адрес
+        menu_block:
+            body: Тіло
+            id: ID
+            name: Ім’я
+            publish_end_date: Опублікувати до
+            publish_start_date: Опублікувати від
+            publishable: Опублікований
+        menu_node_block:
+            content: Зміст
+            display: Відобразити
+            display_children: Відобразити нащадків
+            internal_name: "Внутрішнє ім'я"
+            label: Назва
+            link_type: Тип посилання
+            publish_end_date: Опублікувати до
+            publish_start_date: Опублікувати від
+            publishable: Опублікований
+            route: Маршрут
+            uri: Адрес
+        redirect_route:
+            id: ID
+            name: Ім’я
+            route_name: Назва маршруту
+            uri: Адрес
+        reference_block:
+            body: Тіло
+            id: ID
+            publish_end_date: Опублікувати до
+            publish_start_date: Опублікувати від
+            publishable: Опублікований
+            title: Назва
+        route:
+            content: Зміст
+            name: Ім’я
+            parent: "Батьківський об'єкт"
+        simple_block:
+            body: Тіло
+            internal_name: "Внутрішнє ім'я"
+            parent: "Батьківський об'єкт"
+            publish_end_date: Опублікувати до
+            publish_start_date: Опублікувати від
+            publishable: Опублікований
+            title: Назва
+        slideshow_block:
+            add_slide: Додати слайд
+            childrens: Нащадки
+            internal_name: "Внутрішнє ім'я"
+            parent: "Батьківський об'єкт"
+            publish_end_date: Опублікувати до
+            publish_start_date: Опублікувати від
+            publishable: Опублікований
+            title: Назва
+        static_content:
+            body: Тіло
+            id: ID
+            internal_name: "Внутрішнє ім'я"
+            menu_nodes: Елементи меню
+            parent: "Батьківський об'єкт"
+            publish_end_date: Опублікувати до
+            publish_start_date: Опублікувати від
+            publishable: Опублікований
+            routes: Маршрути
+            title: Заголовок
+        string_block:
+            body: Тіло
+            id: ID
+            name: Ім’я
+            publish_end_date: Опублікувати до
+            publish_start_date: Опублікувати від
+            publishable: Опублікований

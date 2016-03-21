@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    priceable:
-      price: Preu
-    pricing:
-      volume_based:
-        price: Preu
+    form:
+        priceable:
+            price: Preu
+        pricing:
+            volume_based:
+                price: Preu

@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  channel:
-    code:
-      not_blank: Voer kanaal code in.
-      unique: Kanaal code moet uniek zijn.
-    name:
-      not_blank: Voer kanaal naam in.
+    channel:
+        code:
+            not_blank: Voer kanaal code in.
+            unique: Kanaal code moet uniek zijn.
+        name:
+            not_blank: Voer kanaal naam in.

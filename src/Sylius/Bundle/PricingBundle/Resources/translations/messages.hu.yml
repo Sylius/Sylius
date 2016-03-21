@@ -2,11 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    priceable:
-      price: Ár
-      calculator: Árazás
-      configuration: Konfiguráció
-    pricing:
-      volume_based:
-        price: Ár
+    form:
+        priceable:
+            price: Ár
+            calculator: Árazás
+            configuration: Konfiguráció
+        pricing:
+            volume_based:
+                price: Ár

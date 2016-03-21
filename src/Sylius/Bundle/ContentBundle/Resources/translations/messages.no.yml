@@ -2,91 +2,91 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    action_block:
-      action_name: Navn på handlingen
-      id: Id
-      publish_end_date: Sluttdato for publisering
-      publish_start_date: Startdato for publisering
-    imagine_block:
-      filter: Filtrer
-      image: Bilde
-      internal_name: Internt navn
-      label: Etikett
-      parent: Forelder
-      publish_end_date: Sluttdato for publisering
-      publish_start_date: Startdato for publisering
-      slideshow_medium: Slideshow Medium (innhold)
-    menu:
-      childrens: Barn
-      display: Vis
-      display_children: Vis barn
-      label: Etikett
-      name: Navn
-      parent: Forelder
-      publish_end_date: Sluttdato for publisering
-      publish_start_date: Startdato for publisering
-      route: Rute
-      uri: URI
-    menu_block:
-      body: Kropp
-      id: Id
-      name: Navn
-      publish_end_date: Sluttdato for publisering
-      publish_start_date: Startdato for publisering
-    menu_node_block:
-      content: Innhold
-      display: Vis
-      display_children: Vis barn
-      internal_name: Internt navn
-      label: Etikett
-      link_type: Lenketype
-      publish_end_date: Sluttdato for publisering
-      publish_start_date: Startdato for publisering
-      route: Rute
-      uri: URI
-    redirect_route:
-      id: Id
-      name: Navn
-      route_name: Navn på rute
-      uri: URI
-    reference_block:
-      body: Kropp
-      id: Id
-      publish_end_date: Sluttdato for publisering
-      publish_start_date: Startdato for publisering
-      title: Tittel
-    route:
-      content: Innhold
-      name: Navn
-      parent: Forelder
-    simple_block:
-      body: Kropp
-      internal_name: Internt navn
-      parent: Forelder
-      publish_end_date: Sluttdato for publisering
-      publish_start_date: Startdato for publisering
-      title: Tittel
-    slideshow_block:
-      childrens: Barn
-      internal_name: Internt navn
-      parent: Forelder
-      publish_end_date: Sluttdato for publisering
-      publish_start_date: Startdato for publisering
-      title: Tittel
-    static_content:
-      body: Kropp
-      id: Id
-      internal_name: Internt navn
-      menu_nodes: Menynoder
-      parent: Forelder
-      publish_end_date: Sluttdato for publisering
-      publish_start_date: Startdato for publisering
-      routes: Ruter
-      title: Tittel
-    string_block:
-      body: Kropp
-      id: ID
-      name: Navn
-      publish_end_date: Sluttdato for publisering
-      publish_start_date: Startdato for publisering
+    form:
+        action_block:
+            action_name: Navn på handlingen
+            id: Id
+            publish_end_date: Sluttdato for publisering
+            publish_start_date: Startdato for publisering
+        imagine_block:
+            filter: Filtrer
+            image: Bilde
+            internal_name: Internt navn
+            label: Etikett
+            parent: Forelder
+            publish_end_date: Sluttdato for publisering
+            publish_start_date: Startdato for publisering
+            slideshow_medium: Slideshow Medium (innhold)
+        menu:
+            childrens: Barn
+            display: Vis
+            display_children: Vis barn
+            label: Etikett
+            name: Navn
+            parent: Forelder
+            publish_end_date: Sluttdato for publisering
+            publish_start_date: Startdato for publisering
+            route: Rute
+            uri: URI
+        menu_block:
+            body: Kropp
+            id: Id
+            name: Navn
+            publish_end_date: Sluttdato for publisering
+            publish_start_date: Startdato for publisering
+        menu_node_block:
+            content: Innhold
+            display: Vis
+            display_children: Vis barn
+            internal_name: Internt navn
+            label: Etikett
+            link_type: Lenketype
+            publish_end_date: Sluttdato for publisering
+            publish_start_date: Startdato for publisering
+            route: Rute
+            uri: URI
+        redirect_route:
+            id: Id
+            name: Navn
+            route_name: Navn på rute
+            uri: URI
+        reference_block:
+            body: Kropp
+            id: Id
+            publish_end_date: Sluttdato for publisering
+            publish_start_date: Startdato for publisering
+            title: Tittel
+        route:
+            content: Innhold
+            name: Navn
+            parent: Forelder
+        simple_block:
+            body: Kropp
+            internal_name: Internt navn
+            parent: Forelder
+            publish_end_date: Sluttdato for publisering
+            publish_start_date: Startdato for publisering
+            title: Tittel
+        slideshow_block:
+            childrens: Barn
+            internal_name: Internt navn
+            parent: Forelder
+            publish_end_date: Sluttdato for publisering
+            publish_start_date: Startdato for publisering
+            title: Tittel
+        static_content:
+            body: Kropp
+            id: Id
+            internal_name: Internt navn
+            menu_nodes: Menynoder
+            parent: Forelder
+            publish_end_date: Sluttdato for publisering
+            publish_start_date: Startdato for publisering
+            routes: Ruter
+            title: Tittel
+        string_block:
+            body: Kropp
+            id: ID
+            name: Navn
+            publish_end_date: Sluttdato for publisering
+            publish_start_date: Startdato for publisering

@@ -2,105 +2,105 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    action_block:
-      action_name: Actienaam
-      id: Id
-      publish_end_date: Einddatum publiceren
-      publish_start_date: Begindatum publiceren
-      publishable: Gepubliceerd
-    imagine_block:
-      filter: Filter
-      image: Afbeelding
-      internal_name: Interne naam
-      label: Label
-      link_url: Link URL
-      parent: Ouder
-      publish_end_date: Einddatum publiceren
-      publish_start_date: Begindatum publiceren
-      publishable: Gepubliceerd
-      slideshow_small: Slideshow Klein (kant)
-      slideshow_medium: Slideshow medium (inhoud)
-      slideshow_large: Slideshow Groot (volledige breedte)
-    menu:
-      childrens: Kinderen
-      display: Weergeven
-      display_children: Toon kinderen
-      label: Label
-      name: Naam
-      parent: Ouder
-      publish_end_date: Einddatum publiceren
-      publish_start_date: Begindatum publiceren
-      publishable: Gepubliceerd
-      route: Route
-      uri: URI
-    menu_block:
-      body: Inhoud
-      id: Id
-      name: Naam
-      publish_end_date: Einddatum publiceren
-      publish_start_date: Begindatum publiceren
-      publishable: Gepubliceerd
-    menu_node_block:
-      content: Inhoud
-      display: Weergeven
-      display_children: Toon kinderen
-      internal_name: Interne naam
-      label: Label
-      link_type: Koppelingstype
-      publish_end_date: Einddatum publiceren
-      publish_start_date: Begindatum publiceren
-      publishable: Gepubliceerd
-      route: Route
-      uri: URI
-    redirect_route:
-      id: Id
-      name: Naam
-      route_name: Route_naam
-      uri: URI
-    reference_block:
-      body: Inhoud
-      id: Id
-      publish_end_date: Einddatum publiceren
-      publish_start_date: Begindatum publiceren
-      publishable: Gepubliceerd
-      title: Titel
-    route:
-      content: Inhoud
-      name: Naam
-      parent: Ouder
-    simple_block:
-      body: Inhoud
-      internal_name: Interne naam
-      parent: Ouder
-      publish_end_date: Einddatum publiceren
-      publish_start_date: Begindatum publiceren
-      publishable: Gepubliceerd
-      title: Titel
-    slideshow_block:
-      add_slide: Dia toevoegen
-      childrens: Kinderen
-      internal_name: Interne naam
-      parent: Ouder
-      publish_end_date: Einddatum publiceren
-      publish_start_date: Begindatum publiceren
-      publishable: Gepubliceerd
-      title: Titel
-    static_content:
-      body: Inhoud
-      id: Id
-      internal_name: Interne naam
-      menu_nodes: Menu items
-      parent: Ouder
-      publish_end_date: Einddatum publiceren
-      publish_start_date: Begindatum publiceren
-      publishable: Gepubliceerd
-      routes: Routes
-      title: Titel
-    string_block:
-      body: Inhoud
-      id: ID
-      name: Naam
-      publish_end_date: Einddatum publiceren
-      publish_start_date: Begindatum publiceren
-      publishable: Gepubliceerd
+    form:
+        action_block:
+            action_name: Actienaam
+            id: Id
+            publish_end_date: Einddatum publiceren
+            publish_start_date: Begindatum publiceren
+            publishable: Gepubliceerd
+        imagine_block:
+            filter: Filter
+            image: Afbeelding
+            internal_name: Interne naam
+            label: Label
+            link_url: Link URL
+            parent: Ouder
+            publish_end_date: Einddatum publiceren
+            publish_start_date: Begindatum publiceren
+            publishable: Gepubliceerd
+            slideshow_small: Slideshow Klein (kant)
+            slideshow_medium: Slideshow medium (inhoud)
+            slideshow_large: Slideshow Groot (volledige breedte)
+        menu:
+            childrens: Kinderen
+            display: Weergeven
+            display_children: Toon kinderen
+            label: Label
+            name: Naam
+            parent: Ouder
+            publish_end_date: Einddatum publiceren
+            publish_start_date: Begindatum publiceren
+            publishable: Gepubliceerd
+            route: Route
+            uri: URI
+        menu_block:
+            body: Inhoud
+            id: Id
+            name: Naam
+            publish_end_date: Einddatum publiceren
+            publish_start_date: Begindatum publiceren
+            publishable: Gepubliceerd
+        menu_node_block:
+            content: Inhoud
+            display: Weergeven
+            display_children: Toon kinderen
+            internal_name: Interne naam
+            label: Label
+            link_type: Koppelingstype
+            publish_end_date: Einddatum publiceren
+            publish_start_date: Begindatum publiceren
+            publishable: Gepubliceerd
+            route: Route
+            uri: URI
+        redirect_route:
+            id: Id
+            name: Naam
+            route_name: Route_naam
+            uri: URI
+        reference_block:
+            body: Inhoud
+            id: Id
+            publish_end_date: Einddatum publiceren
+            publish_start_date: Begindatum publiceren
+            publishable: Gepubliceerd
+            title: Titel
+        route:
+            content: Inhoud
+            name: Naam
+            parent: Ouder
+        simple_block:
+            body: Inhoud
+            internal_name: Interne naam
+            parent: Ouder
+            publish_end_date: Einddatum publiceren
+            publish_start_date: Begindatum publiceren
+            publishable: Gepubliceerd
+            title: Titel
+        slideshow_block:
+            add_slide: Dia toevoegen
+            childrens: Kinderen
+            internal_name: Interne naam
+            parent: Ouder
+            publish_end_date: Einddatum publiceren
+            publish_start_date: Begindatum publiceren
+            publishable: Gepubliceerd
+            title: Titel
+        static_content:
+            body: Inhoud
+            id: Id
+            internal_name: Interne naam
+            menu_nodes: Menu items
+            parent: Ouder
+            publish_end_date: Einddatum publiceren
+            publish_start_date: Begindatum publiceren
+            publishable: Gepubliceerd
+            routes: Routes
+            title: Titel
+        string_block:
+            body: Inhoud
+            id: ID
+            name: Naam
+            publish_end_date: Einddatum publiceren
+            publish_start_date: Begindatum publiceren
+            publishable: Gepubliceerd

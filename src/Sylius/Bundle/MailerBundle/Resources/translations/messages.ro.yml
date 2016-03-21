@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    email:
-      enabled: Activat
-      content: Conţinut
+    form:
+        email:
+            enabled: Activat
+            content: Conţinut

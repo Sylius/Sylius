@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  email:
-    code:
-      not_blank: Prašome įvesti elektroninio pašto kodą.
-      unique: Pašto kodas turi būti unikalus.
-    subject:
-      not_blank: Prašome įvesti el. pašto temą.
+    email:
+        code:
+            not_blank: Prašome įvesti elektroninio pašto kodą.
+            unique: Pašto kodas turi būti unikalus.
+        subject:
+            not_blank: Prašome įvesti el. pašto temą.

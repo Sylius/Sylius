@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  metadata:
-    twitter:
-      image: 画像
+    metadata:
+        twitter:
+            image: 画像

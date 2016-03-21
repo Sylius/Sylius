@@ -2,11 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    taxon:
-      description: Beskrivelse
-      name: Navn
-      parent: Overordnede
-      permalink: Permanent link
-    taxonomy:
-      name: Navn
+    form:
+        taxon:
+            description: Beskrivelse
+            name: Navn
+            parent: Overordnede
+            permalink: Permanent link
+        taxonomy:
+            name: Navn

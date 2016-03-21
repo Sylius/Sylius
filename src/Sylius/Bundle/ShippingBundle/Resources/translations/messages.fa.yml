@@ -2,48 +2,48 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    rule:
-      unit_count_configuration:
-        count: تعداد
-        equal: برابر با
-      type: نوع قانون
-    shipment:
-      state: وضعیت
-      states:
-        checkout: پرداخت نشده
-        pending: پرداخت منتظر تایید
-        ready: آماده ارسال
-        shipped: ارسال شده
-        returned: برگشت داده شده
-        cancelled: پرداخت لغو شده
-      tracking_code: کد پیگیری
-    shipping_calculator:
-      flat_rate_configuration:
-        label: نرخ ثابت به ازای هر ارسال
-        amount: مبلغ
-      flexible_rate_configuration:
-        label: نرخ متغیر
-        first_unit_cost: هزینه ی اولین سفارش
-      per_unit_rate_configuration:
-        label: هزینه ی ثابت به ازای هر سفارش
-        amount: مبلغ
-      weight_rate_configuration:
-        label: هزینه ی ارسال به ازای وزن محصول
-        fixed: هزیه ی ثابت
-        variable: هزینه متغیر
-        division: معیار وزن (به عنوان مثال هر ۲ کیلوگرم)
-      volume_rate_configuration:
-        label: هزینه ارسال محصول به ازای حجم سفارش
-        amount: مبلغ
-        division: معیار وزن (به عنوان مثال هر ۲ کیلوگرم)
-    shipping_category:
-      description: شرح
-      name: نام
-    shipping_method:
-      calculator: نوع محاسبه
-      category: دسته
-      category_requirement: نیازمندی های دسته
-      configuration: تنظیمات
-      enabled: فعال
-      name: نام
+    form:
+        rule:
+            unit_count_configuration:
+                count: تعداد
+                equal: برابر با
+            type: نوع قانون
+        shipment:
+            state: وضعیت
+            states:
+                checkout: پرداخت نشده
+                pending: پرداخت منتظر تایید
+                ready: آماده ارسال
+                shipped: ارسال شده
+                returned: برگشت داده شده
+                cancelled: پرداخت لغو شده
+            tracking_code: کد پیگیری
+        shipping_calculator:
+            flat_rate_configuration:
+                label: نرخ ثابت به ازای هر ارسال
+                amount: مبلغ
+            flexible_rate_configuration:
+                label: نرخ متغیر
+                first_unit_cost: هزینه ی اولین سفارش
+            per_unit_rate_configuration:
+                label: هزینه ی ثابت به ازای هر سفارش
+                amount: مبلغ
+            weight_rate_configuration:
+                label: هزینه ی ارسال به ازای وزن محصول
+                fixed: هزیه ی ثابت
+                variable: هزینه متغیر
+                division: معیار وزن (به عنوان مثال هر ۲ کیلوگرم)
+            volume_rate_configuration:
+                label: هزینه ارسال محصول به ازای حجم سفارش
+                amount: مبلغ
+                division: معیار وزن (به عنوان مثال هر ۲ کیلوگرم)
+        shipping_category:
+            description: شرح
+            name: نام
+        shipping_method:
+            calculator: نوع محاسبه
+            category: دسته
+            category_requirement: نیازمندی های دسته
+            configuration: تنظیمات
+            enabled: فعال
+            name: نام

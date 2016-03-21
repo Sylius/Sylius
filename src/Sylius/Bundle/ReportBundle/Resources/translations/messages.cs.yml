@@ -2,17 +2,17 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    report:
-      name: Jméno
-      description: Popis
-      renderer:
-        label: Vykreslovač
-        template: Šablona
-      chart:
-        type: Typ
-      user_registration:
-        start: Datum zahájení
-        end: Datum ukončení
-        period: Časové období
-        empty_records: Tisknout prázdné záznamy?
+    form:
+        report:
+            name: Jméno
+            description: Popis
+            renderer:
+                label: Vykreslovač
+                template: Šablona
+            chart:
+                type: Typ
+            user_registration:
+                start: Datum zahájení
+                end: Datum ukončení
+                period: Časové období
+                empty_records: Tisknout prázdné záznamy?

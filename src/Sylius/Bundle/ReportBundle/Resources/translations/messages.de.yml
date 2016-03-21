@@ -2,16 +2,16 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    report:
-      name: Name
-      description: Beschreibung
-      renderer:
-        template: Vorlage
-      chart:
-        type: Typ
-      user_registration:
-        start: Startdatum
-        end: End–Datum
-        period: Zeitraum
-        empty_records: Leere Datensätze drucken?
+    form:
+        report:
+            name: Name
+            description: Beschreibung
+            renderer:
+                template: Vorlage
+            chart:
+                type: Typ
+            user_registration:
+                start: Startdatum
+                end: End–Datum
+                period: Zeitraum
+                empty_records: Leere Datensätze drucken?

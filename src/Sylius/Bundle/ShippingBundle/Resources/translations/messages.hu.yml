@@ -2,36 +2,36 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    rule:
-      unit_count_configuration:
-        count: Mennyiség
-    shipment:
-      state: Állapot
-      states:
-        checkout: Fizetés
-        pending: Függőben
-        ready: Kész
-        shipped: Kiszállítva
-        returned: Visszaküldött
-      tracking_code: Követési kód
-    shipping_calculator:
-      flat_rate_configuration:
-        amount: Összeg
-      per_unit_rate_configuration:
-        amount: Összeg
-      weight_rate_configuration:
-        division: Részleg
-      volume_rate_configuration:
-        amount: Összeg
-        division: Részleg
-    shipping_category:
-      description: Leírás
-      name: Név
-    shipping_method:
-      calculator: Számológép
-      category: Kategória
-      category_requirement: Kategória követelmény
-      configuration: Konfiguráció
-      enabled: Engedélyezve
-      name: Név
+    form:
+        rule:
+            unit_count_configuration:
+                count: Mennyiség
+        shipment:
+            state: Állapot
+            states:
+                checkout: Fizetés
+                pending: Függőben
+                ready: Kész
+                shipped: Kiszállítva
+                returned: Visszaküldött
+            tracking_code: Követési kód
+        shipping_calculator:
+            flat_rate_configuration:
+                amount: Összeg
+            per_unit_rate_configuration:
+                amount: Összeg
+            weight_rate_configuration:
+                division: Részleg
+            volume_rate_configuration:
+                amount: Összeg
+                division: Részleg
+        shipping_category:
+            description: Leírás
+            name: Név
+        shipping_method:
+            calculator: Számológép
+            category: Kategória
+            category_requirement: Kategória követelmény
+            configuration: Konfiguráció
+            enabled: Engedélyezve
+            name: Név

@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    review:
-      title: Pavadinimas
-      comment: Komentaras
-      author: Autorius
-      status:
-        new: Naujas
+    form:
+        review:
+            title: Pavadinimas
+            comment: Komentaras
+            author: Autorius
+            status:
+                new: Naujas

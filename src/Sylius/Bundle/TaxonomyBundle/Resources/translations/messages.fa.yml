@@ -2,11 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    taxon:
-      description: شرح
-      name: نام
-      parent: رده پدر
-      permalink: نشانی وب
-    taxonomy:
-      name: نام
+    form:
+        taxon:
+            description: شرح
+            name: نام
+            parent: رده پدر
+            permalink: نشانی وب
+        taxonomy:
+            name: نام

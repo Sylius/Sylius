@@ -2,30 +2,30 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    login:
-      username: Uporabniško ime
-      password: Geslo
-      remember_me: Zapomni si me
-  ui:
-    create: Ustvarite
-    dashboard: Nadzorna plošča
-    delete: Zbriši
-    edit: Urejanje
-    actions: Dejanja
-    enabled: Omogočeno
-    description: Opis
-    "no": false
-    powered_by: Poganja
-    sign_in: Prijava
-    sign_out: Odjava
-    success: Uspešno
-    "yes": true
-    new: Novo
-    save_changes: Shrani spremembe
-    new_tax_category: Nova davčna kategorija
-    filter: Filter
-    empty: Prazno
-    countries: Države
-    new_country: Nova država
-    locales: Področne nastavitve
+    form:
+        login:
+            username: Uporabniško ime
+            password: Geslo
+            remember_me: Zapomni si me
+    ui:
+        create: Ustvarite
+        dashboard: Nadzorna plošča
+        delete: Zbriši
+        edit: Urejanje
+        actions: Dejanja
+        enabled: Omogočeno
+        description: Opis
+        "no": false
+        powered_by: Poganja
+        sign_in: Prijava
+        sign_out: Odjava
+        success: Uspešno
+        "yes": true
+        new: Novo
+        save_changes: Shrani spremembe
+        new_tax_category: Nova davčna kategorija
+        filter: Filter
+        empty: Prazno
+        countries: Države
+        new_country: Nova država
+        locales: Področne nastavitve

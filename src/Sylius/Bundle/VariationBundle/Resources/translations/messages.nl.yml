@@ -2,12 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    variant:
-      presentation: Weergave
-    option:
-      name: Naam
-      values: Mogelijke waarden
-    option_value:
-      add_value: Waarde toevoegen
-      value: Waarde
+    form:
+        variant:
+            presentation: Weergave
+        option:
+            name: Naam
+            values: Mogelijke waarden
+        option_value:
+            add_value: Waarde toevoegen
+            value: Waarde

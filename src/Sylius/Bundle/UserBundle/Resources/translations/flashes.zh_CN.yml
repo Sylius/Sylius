@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    user:
+        email:
+            not_exist: 此电子邮件的用户不存在。
+        password:
+            invalid: 当前密码错误。
+            reset:
+                success: 已成功重置您的密码 ！
+            change:
+                success: 已成功更改您的密码 ！

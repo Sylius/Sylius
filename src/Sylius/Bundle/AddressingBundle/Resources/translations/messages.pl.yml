@@ -2,38 +2,38 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    address:
-      city: Miejscowość
-      company: Firma
-      country: Kraj
-      first_name: Imię
-      last_name: Nazwisko
-      phone_number: Numer telefonu
-      postcode: Kod pocztowy
-      street: Adres
-      province: Województwo
-    country:
-      add_province: Dodaj województwo
-      name: Nazwa
-      provinces: Województwa
-      select: Wybierz
-      enabled: Włączone
-    province:
-      name: Nazwa
-      abbreviation: Skrót
-      select: Wybierz
-    zone:
-      add_member: Dodaj kraj
-      members: Kraje należące do strefy
-      name: Nazwa
-      type: Typ
-      types:
-        country: Kraj
-        province: Województwo
-        zone: Strefa
-      scope: Zakres
-      select: Wybierz
-      select_scope: Wybierz zakres
-    zone_member:
-      select: Wybierz
+    form:
+        address:
+            city: Miejscowość
+            company: Firma
+            country: Kraj
+            first_name: Imię
+            last_name: Nazwisko
+            phone_number: Numer telefonu
+            postcode: Kod pocztowy
+            street: Adres
+            province: Województwo
+        country:
+            add_province: Dodaj województwo
+            name: Nazwa
+            provinces: Województwa
+            select: Wybierz
+            enabled: Włączone
+        province:
+            name: Nazwa
+            abbreviation: Skrót
+            select: Wybierz
+        zone:
+            add_member: Dodaj kraj
+            members: Kraje należące do strefy
+            name: Nazwa
+            type: Typ
+            types:
+                country: Kraj
+                province: Województwo
+                zone: Strefa
+            scope: Zakres
+            select: Wybierz
+            select_scope: Wybierz zakres
+        zone_member:
+            select: Wybierz

@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  promotion_coupon:
-    generate: Kodovi za popust su uspješno generirani.
-    eligible: Kupon za dodatne popuste je dodan u košaricu.
-    invalid: Kupon koji ste unijeli nije ispravan.
-    not_eligible: Na vašu košaricu nije moguće dodati kupon za popust.
+    promotion_coupon:
+        generate: Kodovi za popust su uspješno generirani.
+        eligible: Kupon za dodatne popuste je dodan u košaricu.
+        invalid: Kupon koji ste unijeli nije ispravan.
+        not_eligible: Na vašu košaricu nije moguće dodati kupon za popust.

@@ -2,6 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    payment_method:
-      name: Namn
+    form:
+        payment:
+            state:
+                header: Betalningsstatus
+        payment_method:
+            name: Namn

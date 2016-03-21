@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  promotion_coupon:
-    generate: Promosyon kuponları başarıyla oluşturuldu.
-    eligible: Promosyon kuponunuz sepetinize uygulandı.
-    invalid: Promosyon kuponunuz geçerli değil.
-    not_eligible: Sepetiniz bu promosyon kuponu için uygun değil.
+    promotion_coupon:
+        generate: Promosyon kuponları başarıyla oluşturuldu.
+        eligible: Promosyon kuponunuz sepetinize uygulandı.
+        invalid: Promosyon kuponunuz geçerli değil.
+        not_eligible: Sepetiniz bu promosyon kuponu için uygun değil.

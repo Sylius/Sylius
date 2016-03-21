@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    priceable:
-      price: 価格
-    pricing:
-      volume_based:
-        price: 価格
+    form:
+        priceable:
+            price: 価格
+        pricing:
+            volume_based:
+                price: 価格

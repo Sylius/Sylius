@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    archetype:
-      code: Kode
-      name: Navn
-      parent: Forelder
-      options: Instillinger
+    form:
+        archetype:
+            code: Kode
+            name: Navn
+            parent: Forelder
+            options: Instillinger

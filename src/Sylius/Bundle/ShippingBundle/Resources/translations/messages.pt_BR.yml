@@ -2,37 +2,37 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    rule:
-      unit_count_configuration:
-        count: Contagem
-    shipment:
-      state: Estado
-      states:
-        checkout: Finalizar compra
-        pending: Pendente
-        ready: Pronto
-        shipped: Enviado
-        returned: Devolvido
-        cancelled: Cancelado
-      tracking_code: Código de rastreamento
-    shipping_calculator:
-      flat_rate_configuration:
-        amount: Quantidade
-      per_unit_rate_configuration:
-        amount: Quantidade
-      weight_rate_configuration:
-        division: Divisão
-      volume_rate_configuration:
-        amount: Quantidade
-        division: Divisão
-    shipping_category:
-      description: Descrição
-      name: Nome
-    shipping_method:
-      calculator: Calculadora
-      category: Categoria
-      category_requirement: Requerimentos da categoria
-      configuration: Configuração
-      enabled: Ativado
-      name: Nome
+    form:
+        rule:
+            unit_count_configuration:
+                count: Contagem
+        shipment:
+            state: Estado
+            states:
+                checkout: Finalizar compra
+                pending: Pendente
+                ready: Pronto
+                shipped: Enviado
+                returned: Devolvido
+                cancelled: Cancelado
+            tracking_code: Código de rastreamento
+        shipping_calculator:
+            flat_rate_configuration:
+                amount: Quantidade
+            per_unit_rate_configuration:
+                amount: Quantidade
+            weight_rate_configuration:
+                division: Divisão
+            volume_rate_configuration:
+                amount: Quantidade
+                division: Divisão
+        shipping_category:
+            description: Descrição
+            name: Nome
+        shipping_method:
+            calculator: Calculadora
+            category: Categoria
+            category_requirement: Requerimentos da categoria
+            configuration: Configuração
+            enabled: Ativado
+            name: Nome

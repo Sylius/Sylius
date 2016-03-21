@@ -2,11 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    taxon:
-      description: Апісанне
-      name: Назва
-      parent: "Бацькоўскі аб'ект"
-      permalink: Пастаянная спасылка
-    taxonomy:
-      name: Назва
+    form:
+        taxon:
+            description: Апісанне
+            name: Назва
+            parent: "Бацькоўскі аб'ект"
+            permalink: Пастаянная спасылка
+        taxonomy:
+            name: Назва

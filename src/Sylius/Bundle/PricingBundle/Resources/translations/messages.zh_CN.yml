@@ -2,9 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    priceable:
-      price: 价格
-    pricing:
-      volume_based:
-        price: 价格
+    form:
+        priceable:
+            price: 价格
+            calculator: 定价
+        pricing:
+            volume_based:
+                label: 定价配置
+                min: 最小值
+                price: 价格

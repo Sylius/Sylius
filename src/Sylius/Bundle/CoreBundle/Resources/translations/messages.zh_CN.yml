@@ -2,103 +2,107 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    action:
-      add_product_configuration:
-        price: 单价
-        quantity: 数量
-        variant: 变量
-    block:
-      body: 正文
-      id: ID
-      title: 标题
-    cart:
-      coupon: 优惠券
-    checkout:
-      addressing:
-        different_billing_address: 使用不同地址的帐单吗？
-      payment_method: 付款方式
-      shipping_method: 配送方式
-    group:
-      name: 名称
-      roles: 角色
-    channel:
-      taxonomies: 分类
-      locales: 区域设置
-      currency_default: 默认货币：
-      shipping_methods: 发货方式
-      payment_methods: 支付方式
-    image:
-      file: 图像
-    locale:
-      code: 代码
-      enabled: 已启用
-    order_filter:
-      number: 数量
-      total_from: 从
-      total_to: 到
-      payment_state: 付款状态
-    page:
-      body: 正文
-      id: ID
-      title: 标题
-    product:
-      restricted_zone: 限制的区
-      shipping_category: 送货类别
-      short_description: 简短说明：
-      variant_selection_method: 变量选择方法
-    product_filter:
-      name: 名称
-      sku: SKU
-    product_variant:
-      tax_category: 税类别
-    settings:
-      general:
-        currency: 默认货币：
-        locale: 语言
-        meta_description: META描述
-        meta_keywords: Meta关键字：
-        title: 页标题
-      taxation:
-        default_tax_zone: 默认税区
-    shipment_filter:
-      created_at_from: 从
-      created_at_to: 到
-      number: 订单编号
-      shipping_address: 发货到名称
-    payment_filter:
-      created_at_from: 从
-      created_at_to: 到
-      number: 订单编号
-    shipping_method:
-      zone: 区域
-    taxon:
-      file: 选择图像
-    taxonomy:
-      file: 选择图像
-    user:
-      billing_address: 账单地址
-      different_billing_address: 使用不同地址的帐单吗？
-      enabled: 已启用
-      first_name: 名字
-      groups: 团体
-      roles: 角色
-      last_name: 姓氏
-      password: 密码
-      shipping_address: 送货地址
-    user_filter:
-      query: 搜索
-    variant:
-      available_on_demand: 可按用户要求
-      depth: 深度
-      height: 高度
-      images: 图像
-      on_hand: 当前货架
-      price: 价格
-      sku: SKU
-      weight: 重量
-      width: 宽度
-    guest:
-      email: 电子邮件
-    product_association_type:
-      name: 名称
+    form:
+        action:
+            add_product_configuration:
+                price: 单价
+                quantity: 数量
+                variant: 变量
+            customer_group: 客户组
+        block:
+            body: 正文
+            id: ID
+            title: 标题
+        cart:
+            coupon: 优惠券
+        checkout:
+            addressing:
+                different_billing_address: 使用不同地址的帐单吗？
+            payment_method: 付款方式
+            shipping_method: 配送方式
+        group:
+            name: 名称
+            roles: 角色
+        channel:
+            taxonomies: 分类
+            locales: 区域设置
+            currency_default: 默认货币：
+            shipping_methods: 发货方式
+            payment_methods: 支付方式
+        image:
+            file: 图像
+        locale:
+            code: 代码
+            enabled: 已启用
+        order_filter:
+            number: 数量
+            total_from: 从
+            total_to: 到
+            payment_state: 付款状态
+        page:
+            body: 正文
+            id: ID
+            title: 标题
+        product:
+            restricted_zone: 限制的区
+            shipping_category: 送货类别
+            short_description: 简短说明：
+            variant_selection_method: 变量选择方法
+        product_filter:
+            name: 名称
+            sku: SKU
+        product_variant:
+            tax_category: 税类别
+        settings:
+            general:
+                currency: 默认货币：
+                locale: 语言
+                meta_description: META描述
+                meta_keywords: Meta关键字：
+                title: 页标题
+            taxation:
+                default_tax_zone: 默认税区
+        shipment_filter:
+            created_at_from: 从
+            created_at_to: 到
+            number: 订单编号
+            shipping_address: 发货到名称
+        payment_filter:
+            created_at_from: 从
+            created_at_to: 到
+            number: 订单编号
+        shipping_method:
+            zone: 区域
+        taxon:
+            file: 选择图像
+        taxonomy:
+            file: 选择图像
+        user:
+            billing_address: 账单地址
+            different_billing_address: 使用不同地址的帐单吗？
+            enabled: 已启用
+            first_name: 名字
+            groups: 团体
+            roles: 角色
+            last_name: 姓氏
+            password: 密码
+            shipping_address: 送货地址
+        user_filter:
+            query: 搜索
+        variant:
+            available_on_demand: 可按用户要求
+            depth: 深度
+            height: 高度
+            images: 图像
+            on_hand: 当前货架
+            price: 价格
+            sku: SKU
+            weight: 重量
+            width: 宽度
+        attribute:
+            product_attribute_value:
+                value: 值
+        guest:
+            email: 电子邮件
+        product_association_type:
+            name: 名称

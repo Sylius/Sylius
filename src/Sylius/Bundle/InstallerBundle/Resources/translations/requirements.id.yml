@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  extensions:
-    "off": false
-    "on": true
-  settings:
-    "off": false
-    "on": true
+    extensions:
+        "off": false
+        "on": true
+    settings:
+        "off": false
+        "on": true

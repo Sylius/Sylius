@@ -2,11 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    taxon:
-      description: Opis
-      name: Ime
-      parent: Nadrejeni
-      permalink: Trajna povezava (permalink)
-    taxonomy:
-      name: Ime
+    form:
+        taxon:
+            description: Opis
+            name: Ime
+            parent: Nadrejeni
+            permalink: Trajna povezava (permalink)
+        taxonomy:
+            name: Ime

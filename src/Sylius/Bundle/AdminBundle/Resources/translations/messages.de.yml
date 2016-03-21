@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  menu:
-    admin:
-      main:
-        configuration:
-          header: Einstellung
-          countries: Länder
-          locales: Gebietsschemata
+    menu:
+        admin:
+            main:
+                configuration:
+                    header: Einstellung
+                    countries: Länder
+                    locales: Gebietsschemata

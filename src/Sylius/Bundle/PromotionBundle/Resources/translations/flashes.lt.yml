@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  promotion_coupon:
-    generate: Nuolaidų kuponai sėkmingai sugeneruoti.
-    eligible: Jūsų nuolaidų kuponas buvo įdėtas į krepšelį.
-    invalid: Jūsų nuolaidos kuponas negalioja.
-    not_eligible: Jūsų krepšelis neatitinka šio nuolaidos kupono.
+    promotion_coupon:
+        generate: Nuolaidų kuponai sėkmingai sugeneruoti.
+        eligible: Jūsų nuolaidų kuponas buvo įdėtas į krepšelį.
+        invalid: Jūsų nuolaidos kuponas negalioja.
+        not_eligible: Jūsų krepšelis neatitinka šio nuolaidos kupono.

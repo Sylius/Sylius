@@ -2,129 +2,129 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    action:
-      add_product_configuration:
-        price: Cena jednostkowa
-        quantity: Ilość
-        variant: Wariant
-      customer_group: Grupa klientów
-    block:
-      body: Zawartość
-      id: ID
-      title: Tytuł
-    cart:
-      coupon: Kupon
-    checkout:
-      addressing:
-        different_billing_address: Użyć innego adresu do rozliczeń?
-      payment_method: Metoda płatności
-      shipping_method: Metoda wysyłki
-    promotion:
-      channels: Kanał
-    coupon:
-      per_customer_usage_limit: Limit użycia na 1 klienta
-    group:
-      name: Nazwa
-      roles: Role
-    channel:
-      taxonomies: Kategorie
-      locale_default: Domyślne ustawienia regionalne
-      locales: Ustawienia regionalne
-      currency_default: Domyślna waluta
-      currencies: Waluty
-      shipping_methods: Metody wysyłki
-      payment_methods: Metody płatności
-    image:
-      file: Zdjęcie
-    locale:
-      code: Kod
-      enabled: Włączone
-    order_filter:
-      created_at_from: Stworzony po
-      created_at_to: Stworzony przed
-      number: Numer
-      total_from: Od
-      total_to: Do
-      payment_state: Status płatności
-      channel: Wszystkie kanały
-    page:
-      body: Zawartość
-      id: ID
-      title: Tytuł
-    product:
-      restricted_zone: Strefa
-      shipping_category: Kategoria wysyłki
-      short_description: Krótki opis
-      variant_selection_method: Metody wyboru wariantu
-      main_taxon: Główne grupy
-    product_filter:
-      name: Nazwa
-      sku: SKU
-    product_variant:
-      tax_category: Kategoria podatkowa
-    settings:
-      general:
-        currency: Domyślna waluta
-        locale: Język
-        meta_description: Opis w sekcji meta
-        meta_keywords: Słowa kluczowe w sekcji meta
-        title: Tytuł strony
-        tracking_code:
-          Tracking code (for example: Kod Google Analytics)
-      taxation:
-        default_tax_zone: Domyślna strefa podatkowa
-      security:
-        enabled: Włączone?
-    shipment_filter:
-      created_at_from: Od
-      created_at_to: Do
-      number: Numer zamówienia
-      shipping_address: Dostarcz do
-      channel: Wszystkie kanały
-    payment_filter:
-      created_at_from: Od
-      created_at_to: Do
-      number: Numer zamówienia
-      billing_address: Dane do rachunku
-      channel: Wszystkie kanały
-    shipping_method:
-      zone: Strefa
-    taxon:
-      file: Wybierz zdjęcie
-    taxonomy:
-      file: Wybierz zdjęcie
-    user:
-      billing_address: Adres do rachunku
-      different_billing_address: Użyć innego adresu do rozliczeń?
-      enabled: Aktywne
-      first_name: Imię
-      groups: Grupy
-      roles: Role
-      last_name: Nazwisko
-      password: Hasło
-      shipping_address: Adres dostawy
-    user_filter:
-      query: Szukaj
-    variant:
-      available_on_demand: Dostępny na zamówienie
-      depth: Głębokość
-      height: Wysokość
-      images: Zdjęcia
-      on_hand: Dostępny
-      price: Cena
-      original_price: Oryginalna cena
-      sku: SKU
-      weight: Waga
-      width: Szerokość
-    attribute:
-      product_attribute_value:
-        attribute: Cecha
-        value: Wartość
-    guest:
-      email: Email
-    product_association:
-      product: Powiązany produkt
-      type: Rodzaj powiązania
-    product_association_type:
-      name: Nazwa
+    form:
+        action:
+            add_product_configuration:
+                price: Cena jednostkowa
+                quantity: Ilość
+                variant: Wariant
+            customer_group: Grupa klientów
+        block:
+            body: Zawartość
+            id: ID
+            title: Tytuł
+        cart:
+            coupon: Kupon
+        checkout:
+            addressing:
+                different_billing_address: Użyć innego adresu do rozliczeń?
+            payment_method: Metoda płatności
+            shipping_method: Metoda wysyłki
+        promotion:
+            channels: Kanał
+        coupon:
+            per_customer_usage_limit: Limit użycia na 1 klienta
+        group:
+            name: Nazwa
+            roles: Role
+        channel:
+            taxonomies: Kategorie
+            locale_default: Domyślne ustawienia regionalne
+            locales: Ustawienia regionalne
+            currency_default: Domyślna waluta
+            currencies: Waluty
+            shipping_methods: Metody wysyłki
+            payment_methods: Metody płatności
+        image:
+            file: Zdjęcie
+        locale:
+            code: Kod
+            enabled: Włączone
+        order_filter:
+            created_at_from: Stworzony po
+            created_at_to: Stworzony przed
+            number: Numer
+            total_from: Od
+            total_to: Do
+            payment_state: Status płatności
+            channel: Wszystkie kanały
+        page:
+            body: Zawartość
+            id: ID
+            title: Tytuł
+        product:
+            restricted_zone: Strefa
+            shipping_category: Kategoria wysyłki
+            short_description: Krótki opis
+            variant_selection_method: Metody wyboru wariantu
+            main_taxon: Główne grupy
+        product_filter:
+            name: Nazwa
+            sku: SKU
+        product_variant:
+            tax_category: Kategoria podatkowa
+        settings:
+            general:
+                currency: Domyślna waluta
+                locale: Język
+                meta_description: Opis w sekcji meta
+                meta_keywords: Słowa kluczowe w sekcji meta
+                title: Tytuł strony
+                tracking_code:
+                    Tracking code (for example: Kod Google Analytics)
+            taxation:
+                default_tax_zone: Domyślna strefa podatkowa
+            security:
+                enabled: Włączone?
+        shipment_filter:
+            created_at_from: Od
+            created_at_to: Do
+            number: Numer zamówienia
+            shipping_address: Dostarcz do
+            channel: Wszystkie kanały
+        payment_filter:
+            created_at_from: Od
+            created_at_to: Do
+            number: Numer zamówienia
+            billing_address: Dane do rachunku
+            channel: Wszystkie kanały
+        shipping_method:
+            zone: Strefa
+        taxon:
+            file: Wybierz zdjęcie
+        taxonomy:
+            file: Wybierz zdjęcie
+        user:
+            billing_address: Adres do rachunku
+            different_billing_address: Użyć innego adresu do rozliczeń?
+            enabled: Aktywne
+            first_name: Imię
+            groups: Grupy
+            roles: Role
+            last_name: Nazwisko
+            password: Hasło
+            shipping_address: Adres dostawy
+        user_filter:
+            query: Szukaj
+        variant:
+            available_on_demand: Dostępny na zamówienie
+            depth: Głębokość
+            height: Wysokość
+            images: Zdjęcia
+            on_hand: Dostępny
+            price: Cena
+            original_price: Oryginalna cena
+            sku: SKU
+            weight: Waga
+            width: Szerokość
+        attribute:
+            product_attribute_value:
+                attribute: Cecha
+                value: Wartość
+        guest:
+            email: Email
+        product_association:
+            product: Powiązany produkt
+            type: Rodzaj powiązania
+        product_association_type:
+            name: Nazwa

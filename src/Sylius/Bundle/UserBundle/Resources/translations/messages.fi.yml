@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    user:
-      email: Sähköpostiosoite
-    customer:
-      email: Sähköpostiosoite
-      phone_number: Puhelinnumero
+    form:
+        user:
+            email: Sähköpostiosoite
+        customer:
+            email: Sähköpostiosoite
+            phone_number: Puhelinnumero

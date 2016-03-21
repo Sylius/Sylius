@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    taxon:
-      name: Tên
-    taxonomy:
-      name: Tên
+    form:
+        taxon:
+            name: Tên
+        taxonomy:
+            name: Tên

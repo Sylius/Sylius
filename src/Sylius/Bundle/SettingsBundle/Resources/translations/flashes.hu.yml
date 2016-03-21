@@ -2,5 +2,5 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  settings:
-    update: A beállítások sikeresen frissítve.
+    settings:
+        update: A beállítások sikeresen frissítve.

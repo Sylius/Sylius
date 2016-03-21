@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    variant:
-      presentation: Приказ
+    form:
+        variant:
+            presentation: Приказ

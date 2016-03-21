@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    locale:
-      enabled: Activé
-      name: Nom
+    form:
+        locale:
+            enabled: Activé
+            name: Nom

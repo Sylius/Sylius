@@ -2,13 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    product:
-      name: Nom
-      description: Descripció
-      meta_keywords: Meta keywords
-      meta_description: Metadescripció
-    product_archetype:
-      name: Nom
-    association_type:
-      name: Nom
+    form:
+        product:
+            name: Nom
+            description: Descripció
+            meta_keywords: Meta keywords
+            meta_description: Metadescripció
+        product_archetype:
+            name: Nom
+        association_type:
+            name: Nom

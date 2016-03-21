@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    currency:
-      exchange_rate: Směnný kurz
-      enabled: Povoleno
+    form:
+        currency:
+            exchange_rate: Směnný kurz
+            enabled: Povoleno

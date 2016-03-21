@@ -2,12 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    variant:
-      presentation: Prezentacija
-    option:
-      name: Pavadinimas
-      values: Galimos reikšmės
-    option_value:
-      add_value: Pridėti reikšmę
-      value: Reikšmė
+    form:
+        variant:
+            presentation: Prezentacija
+        option:
+            name: Pavadinimas
+            values: Galimos reikšmės
+        option_value:
+            add_value: Pridėti reikšmę
+            value: Reikšmė

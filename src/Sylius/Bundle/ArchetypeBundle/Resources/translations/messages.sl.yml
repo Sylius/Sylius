@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    archetype:
-      code: Koda
-      name: Ime
-      parent: Nadrejeni
-      attributes: Atributi
-      options: Možnosti
+    form:
+        archetype:
+            code: Koda
+            name: Ime
+            parent: Nadrejeni
+            attributes: Atributi
+            options: Možnosti

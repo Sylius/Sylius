@@ -2,38 +2,38 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    address:
-      city: Stad
-      company: Bedrijf
-      country: Land
-      first_name: Voornaam
-      last_name: Achternaam
-      phone_number: Telefoonnummer
-      postcode: Postcode
-      street: Straat
-      province: Provincie
-    country:
-      add_province: Provincie toevoegen
-      name: Naam
-      provinces: Provincies
-      select: Selecteer
-      enabled: Toegestaan
-    province:
-      name: Naam
-      abbreviation: Afkorting
-      select: Selecteer
-    zone:
-      add_member: Lid toevoegen
-      members: Leden
-      name: Naam
-      type: Type
-      types:
-        country: Land
-        province: Provincie
-        zone: Zone
-      scope: Bereik
-      select: Selecteer
-      select_scope: Selecteer bereik
-    zone_member:
-      select: Selecteer
+    form:
+        address:
+            city: Stad
+            company: Bedrijf
+            country: Land
+            first_name: Voornaam
+            last_name: Achternaam
+            phone_number: Telefoonnummer
+            postcode: Postcode
+            street: Straat
+            province: Provincie
+        country:
+            add_province: Provincie toevoegen
+            name: Naam
+            provinces: Provincies
+            select: Selecteer
+            enabled: Toegestaan
+        province:
+            name: Naam
+            abbreviation: Afkorting
+            select: Selecteer
+        zone:
+            add_member: Lid toevoegen
+            members: Leden
+            name: Naam
+            type: Type
+            types:
+                country: Land
+                province: Provincie
+                zone: Zone
+            scope: Bereik
+            select: Selecteer
+            select_scope: Selecteer bereik
+        zone_member:
+            select: Selecteer

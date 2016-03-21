@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  locale:
-    code:
-      not_blank: Bitte Gebietsscode auswählen.
-      unique: Gebeitscode muss eindeutig sein.
+    locale:
+        code:
+            not_blank: Bitte Gebietsscode auswählen.
+            unique: Gebeitscode muss eindeutig sein.

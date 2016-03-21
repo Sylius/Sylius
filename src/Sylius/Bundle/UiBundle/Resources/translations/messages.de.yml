@@ -2,27 +2,27 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    login:
-      username: Benutzername
-      password: Passwort
-      remember_me: Eingeloggt bleiben
-  ui:
-    create: Erstellen
-    dashboard: Dashboard
-    delete: Löschen
-    edit: Bearbeiten
-    actions: Aktionen
-    enabled: Aktiviert
-    description: Beschreibung
-    "no": false
-    success: Erfolgreich
-    "yes": true
-    new: Neu
-    save_changes: Änderungen speichern
-    new_tax_category: Neue Steuerkategorie
-    filter: Filtern
-    empty: Leeren
-    countries: Länder
-    new_country: Neues Land
-    locales: Gebietsschemata
+    form:
+        login:
+            username: Benutzername
+            password: Passwort
+            remember_me: Eingeloggt bleiben
+    ui:
+        create: Erstellen
+        dashboard: Dashboard
+        delete: Löschen
+        edit: Bearbeiten
+        actions: Aktionen
+        enabled: Aktiviert
+        description: Beschreibung
+        "no": false
+        success: Erfolgreich
+        "yes": true
+        new: Neu
+        save_changes: Änderungen speichern
+        new_tax_category: Neue Steuerkategorie
+        filter: Filtern
+        empty: Leeren
+        countries: Länder
+        new_country: Neues Land
+        locales: Gebietsschemata

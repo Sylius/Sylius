@@ -2,108 +2,108 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    action:
-      add_product_configuration:
-        price: Ціна одиниці
-        quantity: Кількість
-        variant: Варіант
-    block:
-      body: Тіло
-      id: ID
-      title: Назва
-    cart:
-      coupon: Купон
-    checkout:
-      addressing:
-        different_billing_address: Використовувати іншу платіжну адресу?
-      payment_method: Спосіб оплати
-      shipping_method: Метод доставки
-    group:
-      name: Ім’я
-      roles: Ролі
-    channel:
-      taxonomies: Категоризація
-      locales: Локалі
-      currency_default: Валюта за замовчуванням
-      shipping_methods: Методи доставки
-      payment_methods: Способи оплати
-    image:
-      file: Зображення
-    locale:
-      code: Код
-      enabled: Увімкнено
-    order_filter:
-      created_at_from: Створені після
-      created_at_to: Створений перед
-      number: Номер
-      total_from: Від
-      total_to: До
-      payment_state: Статус платежу
-    page:
-      body: Тіло
-      id: ID
-      title: Назва
-    product:
-      restricted_zone: Заборонена зона
-      shipping_category: Категорія доставки
-      short_description: Короткий опис
-      variant_selection_method: Метод вибору варіанту
-    product_filter:
-      name: Ім’я
-      sku: Артикул
-    product_variant:
-      tax_category: Категорія податку
-    settings:
-      general:
-        currency: Валюта за замовчуванням
-        locale: Мова
-        meta_description: Мета-опис
-        meta_keywords: Мета ключові слова
-        title: Заголовок сторінки
-      taxation:
-        default_tax_zone: Податкова зона за замовчуванням
-    shipment_filter:
-      created_at_from: Від
-      created_at_to: До
-      number: Номер замовлення
-      shipping_address: "Ім'я одержувача"
-    payment_filter:
-      created_at_from: Від
-      created_at_to: До
-      number: Номер замовлення
-    shipping_method:
-      zone: Зона
-    taxon:
-      file: Обрати зображення
-    taxonomy:
-      file: Обрати зображення
-    user:
-      billing_address: Платіжна адреса
-      different_billing_address: Використовувати іншу платіжну адресу?
-      enabled: Ввімкнено
-      first_name: Iм’я
-      groups: Групи
-      roles: Ролі
-      last_name: Прізвище
-      password: Пароль
-      shipping_address: Адреса доставки
-    user_filter:
-      query: Пошук
-    variant:
-      available_on_demand: На вимогу
-      depth: Глибина
-      height: Висота
-      images: Зображення
-      on_hand: Кількість на складі
-      price: Ціна
-      sku: Артикул
-      weight: Вага
-      width: Ширина
-    attribute:
-      product_attribute_value:
-        value: Значення
-    guest:
-      email: Email
-    product_association_type:
-      name: Ім’я
+    form:
+        action:
+            add_product_configuration:
+                price: Ціна одиниці
+                quantity: Кількість
+                variant: Варіант
+        block:
+            body: Тіло
+            id: ID
+            title: Назва
+        cart:
+            coupon: Купон
+        checkout:
+            addressing:
+                different_billing_address: Використовувати іншу платіжну адресу?
+            payment_method: Спосіб оплати
+            shipping_method: Метод доставки
+        group:
+            name: Ім’я
+            roles: Ролі
+        channel:
+            taxonomies: Категоризація
+            locales: Локалі
+            currency_default: Валюта за замовчуванням
+            shipping_methods: Методи доставки
+            payment_methods: Способи оплати
+        image:
+            file: Зображення
+        locale:
+            code: Код
+            enabled: Увімкнено
+        order_filter:
+            created_at_from: Створені після
+            created_at_to: Створений перед
+            number: Номер
+            total_from: Від
+            total_to: До
+            payment_state: Статус платежу
+        page:
+            body: Тіло
+            id: ID
+            title: Назва
+        product:
+            restricted_zone: Заборонена зона
+            shipping_category: Категорія доставки
+            short_description: Короткий опис
+            variant_selection_method: Метод вибору варіанту
+        product_filter:
+            name: Ім’я
+            sku: Артикул
+        product_variant:
+            tax_category: Категорія податку
+        settings:
+            general:
+                currency: Валюта за замовчуванням
+                locale: Мова
+                meta_description: Мета-опис
+                meta_keywords: Мета ключові слова
+                title: Заголовок сторінки
+            taxation:
+                default_tax_zone: Податкова зона за замовчуванням
+        shipment_filter:
+            created_at_from: Від
+            created_at_to: До
+            number: Номер замовлення
+            shipping_address: "Ім'я одержувача"
+        payment_filter:
+            created_at_from: Від
+            created_at_to: До
+            number: Номер замовлення
+        shipping_method:
+            zone: Зона
+        taxon:
+            file: Обрати зображення
+        taxonomy:
+            file: Обрати зображення
+        user:
+            billing_address: Платіжна адреса
+            different_billing_address: Використовувати іншу платіжну адресу?
+            enabled: Ввімкнено
+            first_name: Iм’я
+            groups: Групи
+            roles: Ролі
+            last_name: Прізвище
+            password: Пароль
+            shipping_address: Адреса доставки
+        user_filter:
+            query: Пошук
+        variant:
+            available_on_demand: На вимогу
+            depth: Глибина
+            height: Висота
+            images: Зображення
+            on_hand: Кількість на складі
+            price: Ціна
+            sku: Артикул
+            weight: Вага
+            width: Ширина
+        attribute:
+            product_attribute_value:
+                value: Значення
+        guest:
+            email: Email
+        product_association_type:
+            name: Ім’я

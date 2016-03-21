@@ -2,5 +2,5 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  settings:
-    update: تنظیمات با موفقیت به روز شد.
+    settings:
+        update: تنظیمات با موفقیت به روز شد.

@@ -2,12 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    variant:
-      presentation: Presentasjon
-    option:
-      name: Navn
-      values: Mulige verdier
-    option_value:
-      add_value: Legg til verdi
-      value: Verdi
+    form:
+        variant:
+            presentation: Presentasjon
+        option:
+            name: Navn
+            values: Mulige verdier
+        option_value:
+            add_value: Legg til verdi
+            value: Verdi

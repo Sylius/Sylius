@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    archetype:
-      code: نام انگلیسی
-      name: نام
-      parent: رده پدر
-      attributes: قابلیت ها
-      options: آپشن ها
+    form:
+        archetype:
+            code: نام انگلیسی
+            name: نام
+            parent: رده پدر
+            attributes: قابلیت ها
+            options: آپشن ها

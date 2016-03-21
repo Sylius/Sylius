@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  resource:
-    create: 'Το %resource% δημιουργήθηκε με επιτυχία.'
-    update: 'Το %resource% ενημερώθηκε με επιτυχία.'
-    delete: 'Το %resource% διαγράφηκε με επιτυχία.'
+    resource:
+        create: 'Το %resource% δημιουργήθηκε με επιτυχία.'
+        update: 'Το %resource% ενημερώθηκε με επιτυχία.'
+        delete: 'Το %resource% διαγράφηκε με επιτυχία.'

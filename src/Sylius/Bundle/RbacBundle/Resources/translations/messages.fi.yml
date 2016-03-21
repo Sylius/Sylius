@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    role:
-      parent: Vanhempi
-    permission:
-      parent: Vanhempi
+    form:
+        role:
+            parent: Vanhempi
+        permission:
+            parent: Vanhempi

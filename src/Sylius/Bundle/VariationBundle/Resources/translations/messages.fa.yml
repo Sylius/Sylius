@@ -2,12 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    variant:
-      presentation: عنوان برای مشتری
-    option:
-      name: نام
-      values: مقادیر قابل قبول
-    option_value:
-      add_value: افزودن مقدار
-      value: مقدار
+    form:
+        variant:
+            presentation: عنوان برای مشتری
+        option:
+            name: نام
+            values: مقادیر قابل قبول
+        option_value:
+            add_value: افزودن مقدار
+            value: مقدار

@@ -2,11 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  menu:
-    admin:
-      main:
-        configuration:
-          header: Configuration
-          tax_categories: Catégories de taxes
-          countries: Pays
-          locales: Locales
+    menu:
+        admin:
+            main:
+                configuration:
+                    header: Configuration
+                    tax_categories: Catégories de taxes
+                    countries: Pays
+                    locales: Locales

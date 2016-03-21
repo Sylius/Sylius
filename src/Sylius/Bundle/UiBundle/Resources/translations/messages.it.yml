@@ -2,30 +2,55 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    login:
-      username: Nome utente
-      password: Password
-      remember_me: Ricordami
-  ui:
-    create: Crea
-    dashboard: Pannello amministrazione
-    delete: Cancella
-    edit: Modifica
-    actions: Azioni
-    enabled: Abilitato
-    description: Descrizione
-    "no": false
-    powered_by: Promosso da
-    sign_in: Accedi
-    sign_out: Esci
-    success: Successo
-    "yes": true
-    new: Nuovo
-    save_changes: Salva cambiamenti
-    new_tax_category: Nuova categoria fiscale
-    filter: Filtri
-    empty: Vuoto
-    countries: Paesi
-    new_country: Nuovo paese
-    locales: Localizzazioni
+    form:
+        login:
+            username: Nome utente
+            password: Password
+            remember_me: Ricordami
+    ui:
+        are_your_sure_you_want_to_perform_this_action: Sei sicuro di voler eseguire questa azione?
+        confirm_your_action: "Confermare l'azione"
+        create: Crea
+        dashboard: Pannello amministrazione
+        delete: Cancella
+        disabled: Disattivato
+        edit: Modifica
+        actions: Azioni
+        enabled: Abilitato
+        description: Descrizione
+        an_error_occurred: Si è verificato un errore
+        last_updated: Ultimo aggiornamento
+        manage_taxation_of_your_products: Gestire la tassazione dei vostri prodotti
+        "no": false
+        no_results_to_display: Non ci sono risultati da visualizzare
+        powered_by: Promosso da
+        tax_categories: Categorie di tassazione
+        show: Mostra
+        info: Info
+        sign_in: Accedi
+        sign_out: Esci
+        status: Stato
+        success: Successo
+        "yes": true
+        new: Nuovo
+        save_changes: Salva cambiamenti
+        administration_panel_login: Login del pannello di amministrazione
+        new_tax_category: Nuova categoria fiscale
+        edit_tax_category: Modificare la categoria fiscale
+        filter: Filtri
+        clear_filters: Cancella filtri
+        contains: Contiene
+        not_contains: Non contiene
+        equal: Uguale
+        empty: Vuoto
+        not_empty: Non è vuoto
+        starts_with: Inizia con
+        ends_with: Finisce con
+        in: In
+        not_in: Non in
+        countries: Paesi
+        manage_country: Gestisci paese
+        new_country: Nuovo paese
+        locales: Localizzazioni
+        new_locale: Nuovo locale
+        manage_locale: Gestisci locale

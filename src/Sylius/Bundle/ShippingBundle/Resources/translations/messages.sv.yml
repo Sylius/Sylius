@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    shipping_category:
-      name: Namn
-    shipping_method:
-      enabled: Aktiverad
-      name: Namn
+    form:
+        shipping_category:
+            name: Namn
+        shipping_method:
+            enabled: Aktiverad
+            name: Namn

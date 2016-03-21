@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  resource:
-    create: '%resource% ถูกสร้างเรียบร้อยแล้ว'
-    update: '%resource% ถูกปรับปรุงเรียบร้อยแล้ว'
-    delete: '%resource% ถูกลบทิ้งแล้ว'
+    resource:
+        create: '%resource% ถูกสร้างเรียบร้อยแล้ว'
+        update: '%resource% ถูกปรับปรุงเรียบร้อยแล้ว'
+        delete: '%resource% ถูกลบทิ้งแล้ว'

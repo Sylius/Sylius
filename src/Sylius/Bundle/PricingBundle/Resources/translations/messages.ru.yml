@@ -2,14 +2,14 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    priceable:
-      price: Цена
-      calculator: ценообразование
-      configuration: Конфигурация
-    pricing:
-      volume_based:
-        label: Настройка цен
-        min: Мин. часть
-        max: Макс. часть
-        price: Цена
+    form:
+        priceable:
+            price: Цена
+            calculator: ценообразование
+            configuration: Конфигурация
+        pricing:
+            volume_based:
+                label: Настройка цен
+                min: Мин. часть
+                max: Макс. часть
+                price: Цена

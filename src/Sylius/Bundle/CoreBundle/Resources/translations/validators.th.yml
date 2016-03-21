@@ -2,14 +2,14 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  locale:
-    code:
-      not_blank: ระบุรหัสภาษา
-      unique: มีภาษานี้อยู่แล้ว
-  product_variant:
-    onHand:
-      min: 'On hand ต้องมากกว่า {{ limit }}.'
-      not_blank: กรุณาระบุ on hand
-    price:
-      min: ราคาต้องไม่เป็นค่าลบ
-      not_blank: กรุณาระบุราคา
+    locale:
+        code:
+            not_blank: ระบุรหัสภาษา
+            unique: มีภาษานี้อยู่แล้ว
+    product_variant:
+        onHand:
+            min: 'On hand ต้องมากกว่า {{ limit }}.'
+            not_blank: กรุณาระบุ on hand
+        price:
+            min: ราคาต้องไม่เป็นค่าลบ
+            not_blank: กรุณาระบุราคา

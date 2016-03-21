@@ -2,13 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    role:
-      code: รหัส
-      name: ชื่อ
-      description: คำอธิบาย
-      parent: หมวดแม่
-    permission:
-      code: รหัส
-      description: คำอธิบาย
-      parent: หมวดแม่
+    form:
+        role:
+            code: รหัส
+            name: ชื่อ
+            description: คำอธิบาย
+            parent: หมวดแม่
+        permission:
+            code: รหัส
+            description: คำอธิบาย
+            parent: หมวดแม่

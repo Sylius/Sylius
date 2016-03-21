@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  currency:
-    code:
-      not_blank: Kies valutacode.
-      unique: Valutacode moet uniek zijn.
-    exchange_rate:
-      not_blank: Voer de wisselkoers in.
+    currency:
+        code:
+            not_blank: Kies valutacode.
+            unique: Valutacode moet uniek zijn.
+        exchange_rate:
+            not_blank: Voer de wisselkoers in.

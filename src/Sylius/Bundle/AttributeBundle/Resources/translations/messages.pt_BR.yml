@@ -2,23 +2,23 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    attribute:
-      add: Adicionar
-      add_attributes: Adicionar atributos
-      choices: Opções
-      code: Código
-      name: Nome
-      translations: Traduções
-      type: Tipo
-    attribute_type:
-      configuration: Configuração
-      validation: Validação
-    attribute_type_configuration:
-      datetime:
-        format: Formato
-      date:
-        format: Formato
-      text:
-        min: Tamanho mínimo
-        max: Tamanho máximo
+    form:
+        attribute:
+            add: Adicionar
+            add_attributes: Adicionar atributos
+            choices: Opções
+            code: Código
+            name: Nome
+            translations: Traduções
+            type: Tipo
+        attribute_type:
+            configuration: Configuração
+            validation: Validação
+        attribute_type_configuration:
+            datetime:
+                format: Formato
+            date:
+                format: Formato
+            text:
+                min: Tamanho mínimo
+                max: Tamanho máximo

@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  currency:
-    code:
-      not_blank: กรุณาเลือกรหัสสกุลเงิน
-      unique: รหัสสกุลเงินต้องไม่ซ้ำกัน
-    exchange_rate:
-      not_blank: กรุณาระบุอัตราแลกเปลี่ยน
+    currency:
+        code:
+            not_blank: กรุณาเลือกรหัสสกุลเงิน
+            unique: รหัสสกุลเงินต้องไม่ซ้ำกัน
+        exchange_rate:
+            not_blank: กรุณาระบุอัตราแลกเปลี่ยน

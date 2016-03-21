@@ -2,18 +2,18 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    report:
-      name: Pavadinimas
-      description: Aprašymas
-      data_fetcher: Duomenų gavėjas
-      renderer:
-        label: Vaizdo generatorius
-        template: Šablonas
-      chart:
-        type: Tipas
-      user_registration:
-        start: Pradžios data
-        end: Pabaigos data
-        period: Laikotarpis
-        empty_records: Spausdinti tuščius įrašus?
+    form:
+        report:
+            name: Pavadinimas
+            description: Aprašymas
+            data_fetcher: Duomenų gavėjas
+            renderer:
+                label: Vaizdo generatorius
+                template: Šablonas
+            chart:
+                type: Tipas
+            user_registration:
+                start: Pradžios data
+                end: Pabaigos data
+                period: Laikotarpis
+                empty_records: Spausdinti tuščius įrašus?

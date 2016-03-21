@@ -2,5 +2,5 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  settings:
-    update: Ayarlar başarıyla güncellendi.
+    settings:
+        update: Ayarlar başarıyla güncellendi.

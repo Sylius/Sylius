@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  metadata:
-    page:
-      title: Judul
-    twitter:
-      title: Judul
-      image: Gambar
+    metadata:
+        page:
+            title: Judul
+        twitter:
+            title: Judul
+            image: Gambar

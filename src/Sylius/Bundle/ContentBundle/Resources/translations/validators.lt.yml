@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  menu:
-    name:
-      not_blank: Įveskite meniu pavadinimą.
+    menu:
+        name:
+            not_blank: Įveskite meniu pavadinimą.

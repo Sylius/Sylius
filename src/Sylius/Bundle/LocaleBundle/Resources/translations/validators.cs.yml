@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  locale:
-    code:
-      not_blank: Zvolte kód národního prostředí (locale).
-      unique: Místní kód (locale) musí být unikátní.
+    locale:
+        code:
+            not_blank: Zvolte kód národního prostředí (locale).
+            unique: Místní kód (locale) musí být unikátní.

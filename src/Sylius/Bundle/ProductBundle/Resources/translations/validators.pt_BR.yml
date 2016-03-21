@@ -2,15 +2,15 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  product:
-    sku:
-      not_blank: Por favor, insira o SKU do produto.
-      unique: SKU de produto deve ser único.
-    name:
-      not_blank: Por favor, digite o nome do produto.
-      min_length: 'Nome do produto deve ser pelo menos 1 caracter. |Nome do produto deve ter pelo menos {{limit}} caracteres.'
-      max_length: 'Nome do produto não deve ser superior a 1 caractere. |Nome do produto não deve ter mais de {{limit}} caracteres.'
-  variant:
-    sku:
-      not_blank: Por favor insira a variante SKU.
-      unique: SKU variante deve ser único.
+    product:
+        sku:
+            not_blank: Por favor, insira o SKU do produto.
+            unique: SKU de produto deve ser único.
+        name:
+            not_blank: Por favor, digite o nome do produto.
+            min_length: 'Nome do produto deve ser pelo menos 1 caracter. |Nome do produto deve ter pelo menos {{limit}} caracteres.'
+            max_length: 'Nome do produto não deve ser superior a 1 caractere. |Nome do produto não deve ter mais de {{limit}} caracteres.'
+    variant:
+        sku:
+            not_blank: Por favor insira a variante SKU.
+            unique: SKU variante deve ser único.

@@ -2,37 +2,37 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  metadata:
-    type:
-      none: ' -NESSUNO- '
-      twitter_summary_card: Riepilogo
-      twitter_summary_large_image_card: Riepilogo con grande immagine
-      twitter_player_card: Giocatore
-      twitter_app_card: Applicazione
-    page:
-      title: Titolo
-      description: Descrizione
-      keywords: Parole chiavi
-      twitter: Carta di Twitter
-    twitter:
-      title: Titolo
-      description: Descrizione
-      site: Sito
-      site_id: ID del sito
-      creator: Creator
-      creator_id: ID creatore
-      image: Immagine
-      player: Giocatore
-      player_width: Larghezza del giocatore
-      player_height: Altezza del giocatore
-      player_stream: Giocatore corrente
-      player_stream_content_type: Tipo di contenuto del giocatore corrente
-      app_name_iphone: "Nome dell'applicazione iPhone"
-      app_id_iphone: ID applicazione iPhone
-      app_url_iphone: "Url dell'applicazione iPhone"
-      app_name_ipad: "Nome dell'applicazione iPad"
-      app_id_ipad: ID applicazione iPad
-      app_url_ipad: "Url dell'applicazione iPad"
-      app_name_googleplay: "Nome dell'applicazione Google Play"
-      app_id_googleplay: ID applicazione Google Play
-      app_url_googleplay: "Url dell'applicazione Google Play"
+    metadata:
+        type:
+            none: ' -NESSUNO- '
+            twitter_summary_card: Riepilogo
+            twitter_summary_large_image_card: Riepilogo con grande immagine
+            twitter_player_card: Giocatore
+            twitter_app_card: Applicazione
+        page:
+            title: Titolo
+            description: Descrizione
+            keywords: Parole chiavi
+            twitter: Carta di Twitter
+        twitter:
+            title: Titolo
+            description: Descrizione
+            site: Sito
+            site_id: ID del sito
+            creator: Creator
+            creator_id: ID creatore
+            image: Immagine
+            player: Giocatore
+            player_width: Larghezza del giocatore
+            player_height: Altezza del giocatore
+            player_stream: Giocatore corrente
+            player_stream_content_type: Tipo di contenuto del giocatore corrente
+            app_name_iphone: "Nome dell'applicazione iPhone"
+            app_id_iphone: ID applicazione iPhone
+            app_url_iphone: "Url dell'applicazione iPhone"
+            app_name_ipad: "Nome dell'applicazione iPad"
+            app_id_ipad: ID applicazione iPad
+            app_url_ipad: "Url dell'applicazione iPad"
+            app_name_googleplay: "Nome dell'applicazione Google Play"
+            app_id_googleplay: ID applicazione Google Play
+            app_url_googleplay: "Url dell'applicazione Google Play"

@@ -2,14 +2,14 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    role:
-      code: Codice
-      name: Nome
-      description: Descrizione
-      permissions: Autorizzazioni
-      parent: Genitore
-    permission:
-      code: Codice
-      description: Descrizione
-      parent: Genitore
+    form:
+        role:
+            code: Codice
+            name: Nome
+            description: Descrizione
+            permissions: Autorizzazioni
+            parent: Genitore
+        permission:
+            code: Codice
+            description: Descrizione
+            parent: Genitore

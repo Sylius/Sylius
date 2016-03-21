@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    review:
-      status:
-        new: جديد
+    form:
+        review:
+            status:
+                new: جديد

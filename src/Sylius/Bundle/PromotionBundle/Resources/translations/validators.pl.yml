@@ -2,29 +2,29 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  promotion:
-    code:
-      unique: Promocja z podanym kodem już istnieje.
-      not_blank: Proszę wprowadzić kod promocyjny.
-    description:
-      max_length: '{1} Opis promocji nie może być dłuższy niż 1 znak.|{2,3,4} Opis promocji nie może być dłuższy niż {{ limit }} znaki.|[5,Inf[ Opis promocji nie może być dłuższy niż {{ limit}} znaków.'
-      min_length: '{1} Opis promocji musi być dłuższy niż 1 znak.|{2,3,4} Opis promocji musi być dłuższy niż {{ limit }} znaki.|[5,Inf[ Opis promocji musi być dłuższy niż {{ limit }} znaków.'
-      not_blank: Proszę podać opis promocji.
-    name:
-      max_length: '{1} Nazwa promocji nie może być dłuższa niż 1 znak.|{2,3,4} Nazwa promocji nie może być dłuższa niż {{ limit }} znaki.|[5,Inf[ Nazwa promocji nie może być dłuższa niż {{ limit}} znaków.'
-      min_length: '{1} Nazwa promocji musi być dłuższa niż 1 znak.|{2,3,4} Nazwa promocji musi być dłuższa niż {{ limit }} znaki.|[5,Inf[ Nazwa promocji musi być dłuższa niż {{ limit }} znaków.'
-      not_blank: Proszę podać nazwę promocji.
-  promotion_coupon:
-    code:
-      max_length: '{1} Kod kuponu promocyjnego nie może być dłuższy niż 1 znak.|{2,3,4} Kod kuponu promocyjnego nie może być dłuższy niż {{ limit }} znaki.|[5,Inf[ Kod kuponu promocyjnego nie może być dłuższy niż {{ limit}} znaków.'
-      min_length: '{1} Kod kuponu promocyjnego musi być dłuższy niż 1 znak.|{2,3,4} Kod kuponu promocyjnego musi być dłuższy niż {{ limit }} znaki.|[5,Inf[ Kod kuponu promocyjnego musi być dłuższy niż {{ limit }} znaków.'
-      not_blank: Proszę podać kod kuponu.
-      unique: Ten kupon już istnieje.
-    usage_limit:
-      min: 'Ograniczenie użycia musi wynosić co najmniej {{ limit }}.'
-  promotion_coupon_generate_instruction:
-    amount:
-      min: 'Liczba kuponów do wygenerowania musi wynosić co najmniej {{ limit }}.'
-      not_blank: Proszę podać liczbę kuponów do wygenerowania.
-    usage_limit:
-      min: 'Ograniczenie użycia wygenerowanych kuponów musi wynosić co najmniej {{ limit }}.'
+    promotion:
+        code:
+            unique: Promocja z podanym kodem już istnieje.
+            not_blank: Proszę wprowadzić kod promocyjny.
+        description:
+            max_length: '{1} Opis promocji nie może być dłuższy niż 1 znak.|{2,3,4} Opis promocji nie może być dłuższy niż {{ limit }} znaki.|[5,Inf[ Opis promocji nie może być dłuższy niż {{ limit}} znaków.'
+            min_length: '{1} Opis promocji musi być dłuższy niż 1 znak.|{2,3,4} Opis promocji musi być dłuższy niż {{ limit }} znaki.|[5,Inf[ Opis promocji musi być dłuższy niż {{ limit }} znaków.'
+            not_blank: Proszę podać opis promocji.
+        name:
+            max_length: '{1} Nazwa promocji nie może być dłuższa niż 1 znak.|{2,3,4} Nazwa promocji nie może być dłuższa niż {{ limit }} znaki.|[5,Inf[ Nazwa promocji nie może być dłuższa niż {{ limit}} znaków.'
+            min_length: '{1} Nazwa promocji musi być dłuższa niż 1 znak.|{2,3,4} Nazwa promocji musi być dłuższa niż {{ limit }} znaki.|[5,Inf[ Nazwa promocji musi być dłuższa niż {{ limit }} znaków.'
+            not_blank: Proszę podać nazwę promocji.
+    promotion_coupon:
+        code:
+            max_length: '{1} Kod kuponu promocyjnego nie może być dłuższy niż 1 znak.|{2,3,4} Kod kuponu promocyjnego nie może być dłuższy niż {{ limit }} znaki.|[5,Inf[ Kod kuponu promocyjnego nie może być dłuższy niż {{ limit}} znaków.'
+            min_length: '{1} Kod kuponu promocyjnego musi być dłuższy niż 1 znak.|{2,3,4} Kod kuponu promocyjnego musi być dłuższy niż {{ limit }} znaki.|[5,Inf[ Kod kuponu promocyjnego musi być dłuższy niż {{ limit }} znaków.'
+            not_blank: Proszę podać kod kuponu.
+            unique: Ten kupon już istnieje.
+        usage_limit:
+            min: 'Ograniczenie użycia musi wynosić co najmniej {{ limit }}.'
+    promotion_coupon_generate_instruction:
+        amount:
+            min: 'Liczba kuponów do wygenerowania musi wynosić co najmniej {{ limit }}.'
+            not_blank: Proszę podać liczbę kuponów do wygenerowania.
+        usage_limit:
+            min: 'Ograniczenie użycia wygenerowanych kuponów musi wynosić co najmniej {{ limit }}.'

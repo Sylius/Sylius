@@ -2,37 +2,37 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  metadata:
-    type:
-      none: ' - ASNJE - '
-      twitter_summary_card: Permbledhje
-      twitter_summary_large_image_card: Permbledhje me imazh te gjere
-      twitter_player_card: Lojtar
-      twitter_app_card: Aplikacion
-    page:
-      title: Titulli
-      description: Përshkrimi
-      keywords: Fjalë kyçe
-      twitter: Karta Twitter
-    twitter:
-      title: Titulli
-      description: Përshkrimi
-      site: Faqe interneti
-      site_id: ID i faqes se internetit
-      creator: Krijues
-      creator_id: ID i krijuesit
-      image: Imazhi
-      player: Lojtar
-      player_width: Gjeresia e lojtarit
-      player_height: Lartesia e lojtarit
-      player_stream: Niveli i lojtarit
-      player_stream_content_type: Tipi i permbajtes se nivelit te lojtarit
-      app_name_iphone: Emri i aplikacionit te Iphone
-      app_id_iphone: ID i aplikacionit te Iphone
-      app_url_iphone: Url e aplikacionit te Iphone
-      app_name_ipad: Emri i aplikacionit te Ipad
-      app_id_ipad: ID i aplikacionit te Ipad
-      app_url_ipad: Url e aplikacionit te Ipad
-      app_name_googleplay: Emri i aplikacionit te Google Play
-      app_id_googleplay: ID e aplikacionit te Google Play
-      app_url_googleplay: Url e aplikacionit te Google Play
+    metadata:
+        type:
+            none: ' - ASNJE - '
+            twitter_summary_card: Permbledhje
+            twitter_summary_large_image_card: Permbledhje me imazh te gjere
+            twitter_player_card: Lojtar
+            twitter_app_card: Aplikacion
+        page:
+            title: Titulli
+            description: Përshkrimi
+            keywords: Fjalë kyçe
+            twitter: Karta Twitter
+        twitter:
+            title: Titulli
+            description: Përshkrimi
+            site: Faqe interneti
+            site_id: ID i faqes se internetit
+            creator: Krijues
+            creator_id: ID i krijuesit
+            image: Imazhi
+            player: Lojtar
+            player_width: Gjeresia e lojtarit
+            player_height: Lartesia e lojtarit
+            player_stream: Niveli i lojtarit
+            player_stream_content_type: Tipi i permbajtes se nivelit te lojtarit
+            app_name_iphone: Emri i aplikacionit te Iphone
+            app_id_iphone: ID i aplikacionit te Iphone
+            app_url_iphone: Url e aplikacionit te Iphone
+            app_name_ipad: Emri i aplikacionit te Ipad
+            app_id_ipad: ID i aplikacionit te Ipad
+            app_url_ipad: Url e aplikacionit te Ipad
+            app_name_googleplay: Emri i aplikacionit te Google Play
+            app_id_googleplay: ID e aplikacionit te Google Play
+            app_url_googleplay: Url e aplikacionit te Google Play

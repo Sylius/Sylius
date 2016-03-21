@@ -2,13 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  resource:
-    create: '%resource% is succesvol aangemaakt.'
-    update: '%resource% is succesvol bijgewerkt.'
-    delete: '%resource% is succesvol verwijderd.'
-    move: '%resource% is verplaatst.'
-    generate: '% resource%s zijn gegenereerd.'
-    revert: '%resource% is met succes omgekeerd.'
-    restore_deleted: '%resource% is succesvol hersteld.'
-    enable: '%resource% is ingesteld.'
-    disable: '%resource% is uitgeschakeld.'
+    resource:
+        create: '%resource% is succesvol aangemaakt.'
+        update: '%resource% is succesvol bijgewerkt.'
+        delete: '%resource% is succesvol verwijderd.'
+        move: '%resource% is verplaatst.'
+        generate: '% resource%s zijn gegenereerd.'
+        revert: '%resource% is met succes omgekeerd.'
+        restore_deleted: '%resource% is succesvol hersteld.'
+        enable: '%resource% is ingesteld.'
+        disable: '%resource% is uitgeschakeld.'

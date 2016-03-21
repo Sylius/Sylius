@@ -2,11 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  backend:
-    menu:
-      main:
-        groups: Grups
-        roles: Rols
-      sidebar:
-        groups: Grups
-        roles: Rols
+    backend:
+        menu:
+            main:
+                groups: Grups
+                roles: Rols
+            sidebar:
+                groups: Grups
+                roles: Rols

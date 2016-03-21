@@ -2,11 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    taxon:
-      description: Popis
-      name: Jméno
-      parent: Rodič
-      permalink: Permalink
-    taxonomy:
-      name: Jméno
+    form:
+        taxon:
+            description: Popis
+            name: Jméno
+            parent: Rodič
+            permalink: Permalink
+        taxonomy:
+            name: Jméno

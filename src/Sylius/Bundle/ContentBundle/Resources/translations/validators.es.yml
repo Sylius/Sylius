@@ -2,83 +2,83 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  imagine_block:
-    name:
-      not_blank: Por favor ingrese el nombre del bloque de imagen.
-    label:
-      not_blank: Por favor ingrese la etiqueta del bloque de imagen.
-    filter:
-      not_blank: Por favor ingrese el filtro del bloque de imagen.
-    image:
-      not_blank: Por favor ingrese la imagen del bloque de imagen.
-    start_date:
-      invalid_date: La fecha de inicio de publicación no es válida.
-    end_date:
-      invalid_date: La fecha fin de publicación no es válida.
-  menu:
-    name:
-      not_blank: Por favor, introduce el nombre del menú.
-    label:
-      not_blank: Por favor, introduce una etiqueta para el menú.
-    start_date:
-      invalid_date: La fecha de inicio de publicación no es válida.
-    end_date:
-      invalid_date: La fecha fin de publicación no es válida.
-  menu_node:
-    name:
-      not_blank: Por favor ingrese el nombre del nodo del menu.
-    label:
-      not_blank: Por favor ingrese la etiqueta del nodo del menu.
-    start_date:
-      invalid_date: La fecha de inicio de publicación no es válida.
-    end_date:
-      invalid_date: La fecha fin de publicación no es válida.
-  route:
-    name:
-      not_blank: Por favor, introduce un nombre de ruta.
-    content:
-      not_blank: Por favor, introduce un contenido para la ruta.
-    start_date:
-      invalid_date: La fecha de inicio de publicación no es válida.
-    end_date:
-      invalid_date: La fecha fin de publicación no es válida.
-  slideshow_block:
-    name:
-      not_blank: Por favor, introduzca un nombre para la presentación.
-    title:
-      not_blank: Por favor, introduzca un título para la presentación.
-    start_date:
-      invalid_date: La fecha de inicio de publicación no es válida.
-    end_date:
-      invalid_date: La fecha fin de publicación no es válida.
-  simple_block:
-    name:
-      not_blank: Por favor introduzca nombre de bloque simple.
-    title:
-      not_blank: Por favor ingrese el título de bloque simple.
-    body:
-      not_blank: Por favor ingrese el cuerpo del bloque simple.
-    start_date:
-      invalid_date: La fecha de inicio de publicación no es válida.
-    end_date:
-      invalid_date: La fecha fin de publicación no es válida.
-  string_block:
-    name:
-      not_blank: Por favor introduzca nombre de bloque simple.
-    body:
-      not_blank: Por favor ingrese el cuerpo del bloque simple.
-    start_date:
-      invalid_date: La fecha de inicio de publicación no es válida.
-    end_date:
-      invalid_date: La fecha fin de publicación no es válida.
-  static_content:
-    name:
-      not_blank: Por favor introduzca nombre de contenido estático.
-    title:
-      not_blank: Por favor introduce el titulo del contenido estatico.
-    body:
-      not_blank: Por favor ingrese el contenido estatico del cuerpo.
-    start_date:
-      invalid_date: La fecha de inicio de publicación no es válida.
-    end_date:
-      invalid_date: La fecha fin de publicación no es válida.
+    imagine_block:
+        name:
+            not_blank: Por favor ingrese el nombre del bloque de imagen.
+        label:
+            not_blank: Por favor ingrese la etiqueta del bloque de imagen.
+        filter:
+            not_blank: Por favor ingrese el filtro del bloque de imagen.
+        image:
+            not_blank: Por favor ingrese la imagen del bloque de imagen.
+        start_date:
+            invalid_date: La fecha de inicio de publicación no es válida.
+        end_date:
+            invalid_date: La fecha fin de publicación no es válida.
+    menu:
+        name:
+            not_blank: Por favor, introduce el nombre del menú.
+        label:
+            not_blank: Por favor, introduce una etiqueta para el menú.
+        start_date:
+            invalid_date: La fecha de inicio de publicación no es válida.
+        end_date:
+            invalid_date: La fecha fin de publicación no es válida.
+    menu_node:
+        name:
+            not_blank: Por favor ingrese el nombre del nodo del menu.
+        label:
+            not_blank: Por favor ingrese la etiqueta del nodo del menu.
+        start_date:
+            invalid_date: La fecha de inicio de publicación no es válida.
+        end_date:
+            invalid_date: La fecha fin de publicación no es válida.
+    route:
+        name:
+            not_blank: Por favor, introduce un nombre de ruta.
+        content:
+            not_blank: Por favor, introduce un contenido para la ruta.
+        start_date:
+            invalid_date: La fecha de inicio de publicación no es válida.
+        end_date:
+            invalid_date: La fecha fin de publicación no es válida.
+    slideshow_block:
+        name:
+            not_blank: Por favor, introduzca un nombre para la presentación.
+        title:
+            not_blank: Por favor, introduzca un título para la presentación.
+        start_date:
+            invalid_date: La fecha de inicio de publicación no es válida.
+        end_date:
+            invalid_date: La fecha fin de publicación no es válida.
+    simple_block:
+        name:
+            not_blank: Por favor introduzca nombre de bloque simple.
+        title:
+            not_blank: Por favor ingrese el título de bloque simple.
+        body:
+            not_blank: Por favor ingrese el cuerpo del bloque simple.
+        start_date:
+            invalid_date: La fecha de inicio de publicación no es válida.
+        end_date:
+            invalid_date: La fecha fin de publicación no es válida.
+    string_block:
+        name:
+            not_blank: Por favor introduzca nombre de bloque simple.
+        body:
+            not_blank: Por favor ingrese el cuerpo del bloque simple.
+        start_date:
+            invalid_date: La fecha de inicio de publicación no es válida.
+        end_date:
+            invalid_date: La fecha fin de publicación no es válida.
+    static_content:
+        name:
+            not_blank: Por favor introduzca nombre de contenido estático.
+        title:
+            not_blank: Por favor introduce el titulo del contenido estatico.
+        body:
+            not_blank: Por favor ingrese el contenido estatico del cuerpo.
+        start_date:
+            invalid_date: La fecha de inicio de publicación no es válida.
+        end_date:
+            invalid_date: La fecha fin de publicación no es válida.

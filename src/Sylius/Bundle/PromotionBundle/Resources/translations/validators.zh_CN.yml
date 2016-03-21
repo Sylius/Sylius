@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    promotion:
+        code:
+            unique: 促销编号已存在。
+        description:
+            not_blank: 请输入促销的描述。
+        name:
+            max_length: '选项名称的长度必须超过 1 个字符。 |选项名称的长度不能超过 {{ limit }} 字符。'

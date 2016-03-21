@@ -2,32 +2,32 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    address:
-      city: Stad
-      company: Maatskappy
-      country: Land
-      first_name: Naam
-      last_name: Van
-      postcode: Poskode
-      street: Straat
-      province: Provinsie
-    country:
-      name: Naam
-      provinces: Provinsies
-      select: Kies
-    province:
-      name: Naam
-      select: Kies
-    zone:
-      members: Lede
-      name: Naam
-      type: Tipe
-      types:
-        country: Land
-        province: Provinsie
-        zone: Area
-      scope: Gebied
-      select: Kies
-    zone_member:
-      select: Kies
+    form:
+        address:
+            city: Stad
+            company: Maatskappy
+            country: Land
+            first_name: Naam
+            last_name: Van
+            postcode: Poskode
+            street: Straat
+            province: Provinsie
+        country:
+            name: Naam
+            provinces: Provinsies
+            select: Kies
+        province:
+            name: Naam
+            select: Kies
+        zone:
+            members: Lede
+            name: Naam
+            type: Tipe
+            types:
+                country: Land
+                province: Provinsie
+                zone: Area
+            scope: Gebied
+            select: Kies
+        zone_member:
+            select: Kies

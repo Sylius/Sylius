@@ -2,13 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  resource:
-    create: '%resource% başarılı olarak oluşturuldu.'
-    update: '%resource% başarılı olarak güncellendi.'
-    delete: '%resource% başarılı olarak silindi.'
-    move: '%resource% başarıyla taşındı.'
-    generate: '% resource%s başarıyla oluşturdu.'
-    revert: '%resource% başarıyla döndürüldü.'
-    restore_deleted: '%resource% başarılı olarak silindi.'
-    enable: '%resource% başarıyla etkinleştirildi.'
-    disable: '%resource% başarıyla devre dışı bırakıldı.'
+    resource:
+        create: '%resource% başarılı olarak oluşturuldu.'
+        update: '%resource% başarılı olarak güncellendi.'
+        delete: '%resource% başarılı olarak silindi.'
+        move: '%resource% başarıyla taşındı.'
+        generate: '% resource%s başarıyla oluşturdu.'
+        revert: '%resource% başarıyla döndürüldü.'
+        restore_deleted: '%resource% başarılı olarak silindi.'
+        enable: '%resource% başarıyla etkinleştirildi.'
+        disable: '%resource% başarıyla devre dışı bırakıldı.'

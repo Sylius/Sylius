@@ -2,7 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    currency:
-      exchange_rate: Výmenný kurz
-      enabled: Zapnuté
+    form:
+        currency:
+            exchange_rate: Výmenný kurz
+            enabled: Zapnuté
+            base: Základná mena

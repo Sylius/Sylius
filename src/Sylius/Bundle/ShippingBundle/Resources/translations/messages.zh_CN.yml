@@ -2,14 +2,24 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    shipment:
-      states:
-        checkout: 结账
-        pending: 等待中
-    shipping_category:
-      description: 描述
-      name: 名称
-    shipping_method:
-      enabled: 已启用
-      name: 名称
+    form:
+        rule:
+            unit_count_configuration:
+                count: 计数
+        shipment:
+            states:
+                checkout: 结账
+                pending: 等待中
+        shipping_calculator:
+            flat_rate_configuration:
+                amount: 金额
+            per_unit_rate_configuration:
+                amount: 金额
+            volume_rate_configuration:
+                amount: 金额
+        shipping_category:
+            description: 描述
+            name: 名称
+        shipping_method:
+            enabled: 已启用
+            name: 名称

@@ -2,19 +2,19 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    product:
-      name: Ім’я
-      description: Опис
-      options: Опції
-      meta_keywords: Мета ключові слова
-      meta_description: Мета-опис
-      taxons: Таксони
-    product_variant:
-      available_on: Доступно
-    product_archetype:
-      name: Ім’я
-      parent: "Батьківський об'єкт"
-      options: Опції
-    association_type:
-      name: Ім’я
+    form:
+        product:
+            name: Ім’я
+            description: Опис
+            options: Опції
+            meta_keywords: Мета ключові слова
+            meta_description: Мета-опис
+            taxons: Таксони
+        product_variant:
+            available_on: Доступно
+        product_archetype:
+            name: Ім’я
+            parent: "Батьківський об'єкт"
+            options: Опції
+        association_type:
+            name: Ім’я

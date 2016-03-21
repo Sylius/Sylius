@@ -2,58 +2,58 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  address:
-    city:
-      max_length: Plaats mag niet langer dan 255 tekens zijn|Plaats mag niet langer dan 255 tekens zijn.
-      min_length: Stad moet minstens 2 tekens lang zijn|Stad moet minstens 2 tekens lang zijn.
-      not_blank: Voer een stad in.
+    address:
+        city:
+            max_length: Plaats mag niet langer dan 255 tekens zijn|Plaats mag niet langer dan 255 tekens zijn.
+            min_length: Stad moet minstens 2 tekens lang zijn|Stad moet minstens 2 tekens lang zijn.
+            not_blank: Voer een stad in.
+        country:
+            not_blank: Selecteer een land.
+            disabled: Het gekozen land is uitgeschakeld. Gelieve een ander land te kiezen.
+        first_name:
+            max_length: Voornaam mag niet langer dan 255 tekens zijn|Voornaam mag niet langer dan 255 tekens zijn.
+            min_length: Voornaam moet minstens 2 tekens lang zijn|Voornaam moet minstens 2 tekens lang zijn.
+            not_blank: Voer een voornaam in.
+        last_name:
+            max_length: Achternaam mag niet langer dan 255 tekens zijn|Achternaam mag niet langer dan 255 tekens zijn.
+            min_length: Achternaam moet minstens 2 tekens lang zijn|Achternaam moet minstens 2 tekens lang zijn.
+            not_blank: Voer een achternaam in.
+        postcode:
+            max_length: Postcode mag niet langer dan 255 tekens zijn|Postcode mag niet langer dan 255 tekens zijn.
+            min_length: Postcode moet minstens 2 tekens lang zijn|Postcode moet minstens 2 tekens lang zijn.
+            not_blank: Voer een postcode in.
+        province:
+            valid: Selecteer een provincie.
+        street:
+            max_length: Straat mag niet langer dan 255 tekens zijn|Straat mag niet langer dan 255 tekens zijn.
+            min_length: Straat moet minstens 2 tekens lang zijn|Straat moet minstens 2 tekens lang zijn.
+            not_blank: Voer een straat in.
+        not_shippable: Dit adres is geen geldige bestemming.
     country:
-      not_blank: Selecteer een land.
-      disabled: Het gekozen land is uitgeschakeld. Gelieve een ander land te kiezen.
-    first_name:
-      max_length: Voornaam mag niet langer dan 255 tekens zijn|Voornaam mag niet langer dan 255 tekens zijn.
-      min_length: Voornaam moet minstens 2 tekens lang zijn|Voornaam moet minstens 2 tekens lang zijn.
-      not_blank: Voer een voornaam in.
-    last_name:
-      max_length: Achternaam mag niet langer dan 255 tekens zijn|Achternaam mag niet langer dan 255 tekens zijn.
-      min_length: Achternaam moet minstens 2 tekens lang zijn|Achternaam moet minstens 2 tekens lang zijn.
-      not_blank: Voer een achternaam in.
-    postcode:
-      max_length: Postcode mag niet langer dan 255 tekens zijn|Postcode mag niet langer dan 255 tekens zijn.
-      min_length: Postcode moet minstens 2 tekens lang zijn|Postcode moet minstens 2 tekens lang zijn.
-      not_blank: Voer een postcode in.
+        code:
+            not_blank: Voer een ISO landcode in.
+            unique: De land ISO code moet uniek zijn.
     province:
-      valid: Selecteer een provincie.
-    street:
-      max_length: Straat mag niet langer dan 255 tekens zijn|Straat mag niet langer dan 255 tekens zijn.
-      min_length: Straat moet minstens 2 tekens lang zijn|Straat moet minstens 2 tekens lang zijn.
-      not_blank: Voer een straat in.
-    not_shippable: Dit adres is geen geldige bestemming.
-  country:
-    code:
-      not_blank: Voer een ISO landcode in.
-      unique: De land ISO code moet uniek zijn.
-  province:
-    code:
-      min_length: Provinciecode moet minstens 5 karakters lang zijn.
-      not_blank: Gelieve een provincie code in te geven.
-      regex: 'Provinciecode zou het volgende formaat moeten hebben: XX-XX (bv. US-FL).'
-      unique: De provincie code moet uniek zijn.
-    name:
-      max_length: Provincie naam mag niet langer dan 255 tekens zijn|Provincie naam mag niet langer dan 255 tekens zijn.
-      min_length: Provincie naam moet minstens 2 tekens lang zijn|Provincie naam moet minstens 2 tekens lang zijn.
-      not_blank: Voer een provincie naam in.
-      unique: De provincie naam moet uniek zijn.
-  zone:
-    code:
-      not_blank: Gelieve een zone code in te geven.
-      unique: De zone code moet uniek zijn.
-    members:
-      min_count: 'Voeg minstens {{ limit }} zone leden toe.'
-    name:
-      max_length: Zone naam mag niet langer dan 255 tekens zijn|Zone naam mag niet langer dan 255 tekens zijn.
-      not_blank: Voer een zone naam in.
-  zone_member:
-    code:
-      not_blank: Kies een zonelid.
-    unique: Het gekozen zonelid zit reeds in deze zone.
+        code:
+            min_length: Provinciecode moet minstens 5 karakters lang zijn.
+            not_blank: Gelieve een provincie code in te geven.
+            regex: 'Provinciecode zou het volgende formaat moeten hebben: XX-XX (bv. US-FL).'
+            unique: De provincie code moet uniek zijn.
+        name:
+            max_length: Provincie naam mag niet langer dan 255 tekens zijn|Provincie naam mag niet langer dan 255 tekens zijn.
+            min_length: Provincie naam moet minstens 2 tekens lang zijn|Provincie naam moet minstens 2 tekens lang zijn.
+            not_blank: Voer een provincie naam in.
+            unique: De provincie naam moet uniek zijn.
+    zone:
+        code:
+            not_blank: Gelieve een zone code in te geven.
+            unique: De zone code moet uniek zijn.
+        members:
+            min_count: 'Voeg minstens {{ limit }} zone leden toe.'
+        name:
+            max_length: Zone naam mag niet langer dan 255 tekens zijn|Zone naam mag niet langer dan 255 tekens zijn.
+            not_blank: Voer een zone naam in.
+    zone_member:
+        code:
+            not_blank: Kies een zonelid.
+        unique: Het gekozen zonelid zit reeds in deze zone.

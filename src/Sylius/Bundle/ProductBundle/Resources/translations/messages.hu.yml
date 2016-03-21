@@ -2,19 +2,19 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    product:
-      name: Név
-      description: Leírás
-      options: Beállítások
-      meta_keywords: Meta kulcsszavak
-      meta_description: Meta leírás
-      taxons: Taxonok
-    product_variant:
-      available_on: A rendelkezésre álló
-    product_archetype:
-      name: Név
-      parent: Szülő
-      options: Beállítások
-    association_type:
-      name: Név
+    form:
+        product:
+            name: Név
+            description: Leírás
+            options: Beállítások
+            meta_keywords: Meta kulcsszavak
+            meta_description: Meta leírás
+            taxons: Taxonok
+        product_variant:
+            available_on: A rendelkezésre álló
+        product_archetype:
+            name: Név
+            parent: Szülő
+            options: Beállítások
+        association_type:
+            name: Név

@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    tax_category:
-      name: Nom
-      description: Descripció
-    tax_rate:
-      name: Nom
+    form:
+        tax_category:
+            name: Nom
+            description: Descripció
+        tax_rate:
+            name: Nom

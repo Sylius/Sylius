@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    archetype:
-      code: Codice
-      name: Nome
-      parent: Genitore
-      attributes: Attributi
-      options: Opzioni
+    form:
+        archetype:
+            code: Codice
+            name: Nome
+            parent: Genitore
+            attributes: Attributi
+            options: Opzioni

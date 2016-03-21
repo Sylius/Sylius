@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  menu:
-    admin:
-      main:
-        configuration:
-          countries: Quốc gia
-          locales: Miền địa phương
+    menu:
+        admin:
+            main:
+                configuration:
+                    countries: Quốc gia
+                    locales: Miền địa phương

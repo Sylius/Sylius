@@ -2,37 +2,37 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    rule:
-      unit_count_configuration:
-        count: Antall
-    shipment:
-      state: Tilstand
-      states:
-        checkout: Sjekk ut
-        pending: Venter
-        ready: Klar
-        shipped: Sendt
-        returned: Returnert
-        cancelled: Avbrutt
-      tracking_code: Sporingskode
-    shipping_calculator:
-      flat_rate_configuration:
-        amount: Beløp
-      per_unit_rate_configuration:
-        amount: Beløp
-      weight_rate_configuration:
-        division: Avdeling
-      volume_rate_configuration:
-        amount: Beløp
-        division: Avdeling
-    shipping_category:
-      description: Beskrivelse
-      name: Navn
-    shipping_method:
-      calculator: Kalkulator
-      category: Kategori
-      category_requirement: Kategorikrav
-      configuration: Konfigurasjon
-      enabled: Aktivert
-      name: Navn
+    form:
+        rule:
+            unit_count_configuration:
+                count: Antall
+        shipment:
+            state: Tilstand
+            states:
+                checkout: Sjekk ut
+                pending: Venter
+                ready: Klar
+                shipped: Sendt
+                returned: Returnert
+                cancelled: Avbrutt
+            tracking_code: Sporingskode
+        shipping_calculator:
+            flat_rate_configuration:
+                amount: Beløp
+            per_unit_rate_configuration:
+                amount: Beløp
+            weight_rate_configuration:
+                division: Avdeling
+            volume_rate_configuration:
+                amount: Beløp
+                division: Avdeling
+        shipping_category:
+            description: Beskrivelse
+            name: Navn
+        shipping_method:
+            calculator: Kalkulator
+            category: Kategori
+            category_requirement: Kategorikrav
+            configuration: Konfigurasjon
+            enabled: Aktivert
+            name: Navn

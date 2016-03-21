@@ -2,14 +2,14 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    role:
-      code: Koda
-      name: Ime
-      description: Opis
-      permissions: Dovoljenja
-      parent: Nadrejeni
-    permission:
-      code: Koda
-      description: Opis
-      parent: Nadrejeni
+    form:
+        role:
+            code: Koda
+            name: Ime
+            description: Opis
+            permissions: Dovoljenja
+            parent: Nadrejeni
+        permission:
+            code: Koda
+            description: Opis
+            parent: Nadrejeni

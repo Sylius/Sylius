@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    channel:
-      description: Descrição
+    form:
+        channel:
+            description: Descrição

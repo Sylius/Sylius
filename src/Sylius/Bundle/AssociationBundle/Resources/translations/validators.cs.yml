@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  association_type:
-    name:
-      not_blank: Zadejte prosím název asociace.
-    code:
-      not_blank: Zadejte prosím kód asociace.
+    association_type:
+        name:
+            not_blank: Zadejte prosím název asociace.
+        code:
+            not_blank: Zadejte prosím kód asociace.

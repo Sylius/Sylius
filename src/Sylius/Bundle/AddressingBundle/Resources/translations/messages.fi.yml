@@ -2,27 +2,29 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    address:
-      city: Kaupunki
-      company: Yritys
-      country: Maa
-      first_name: Etunimi
-      last_name: Sukunimi
-      phone_number: Puhelinnumero
-      postcode: Postinumero
-      street: Katuosoite
-      province: Lääni
-    country:
-      name: Nimi
-      select: Valitse
-    province:
-      name: Nimi
-      select: Valitse
-    zone:
-      members: Jäsenet
-      name: Nimi
-      type: Tyyppi
-      select: Valitse
-    zone_member:
-      select: Valitse
+    form:
+        address:
+            city: Kaupunki
+            company: Yritys
+            country: Maa
+            first_name: Etunimi
+            last_name: Sukunimi
+            phone_number: Puhelinnumero
+            postcode: Postinumero
+            street: Katuosoite
+            province: Lääni
+        country:
+            name: Nimi
+            select: Valitse
+        province:
+            name: Nimi
+            select: Valitse
+        zone:
+            members: Jäsenet
+            name: Nimi
+            type: Tyyppi
+            types:
+                province: Lääni
+            select: Valitse
+        zone_member:
+            select: Valitse

@@ -2,52 +2,64 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    action_block:
-      action_name: 方法名
-      id: Id
-    imagine_block:
-      filter: 筛选器
-      image: 图像
-      internal_name: 内部名称
-      parent: 上一级
-    menu:
-      name: 名称
-      parent: 上一级
-    menu_block:
-      body: 正文
-      id: Id
-      name: 名称
-    menu_node_block:
-      content: 内容
-      internal_name: 内部名称
-    redirect_route:
-      id: Id
-      name: 名称
-    reference_block:
-      body: 正文
-      id: Id
-      title: 标题
-    route:
-      content: 内容
-      name: 名称
-      parent: 上一级
-    simple_block:
-      body: 正文
-      internal_name: 内部名称
-      parent: 上一级
-      title: 标题
-    slideshow_block:
-      internal_name: 内部名称
-      parent: 上一级
-      title: 标题
-    static_content:
-      body: 正文
-      id: Id
-      internal_name: 内部名称
-      parent: 上一级
-      title: 标题
-    string_block:
-      body: 正文
-      id: ID
-      name: 名称
+    form:
+        action_block:
+            action_name: 方法名
+            id: Id
+            publish_end_date: 结束日期
+            publish_start_date: 开始日期
+            publishable: 发布
+        imagine_block:
+            filter: 筛选器
+            image: 图像
+            internal_name: 内部名称
+            parent: 上一级
+            publishable: 发布
+        menu:
+            name: 名称
+            parent: 上一级
+            publishable: 发布
+        menu_block:
+            body: 正文
+            id: Id
+            name: 名称
+            publishable: 发布
+        menu_node_block:
+            content: 内容
+            internal_name: 内部名称
+            publishable: 发布
+        redirect_route:
+            id: Id
+            name: 名称
+        reference_block:
+            body: 正文
+            id: Id
+            publishable: 发布
+            title: 标题
+        route:
+            content: 内容
+            name: 名称
+            parent: 上一级
+        simple_block:
+            body: 正文
+            internal_name: 内部名称
+            parent: 上一级
+            publishable: 发布
+            title: 标题
+        slideshow_block:
+            internal_name: 内部名称
+            parent: 上一级
+            publishable: 发布
+            title: 标题
+        static_content:
+            body: 正文
+            id: Id
+            internal_name: 内部名称
+            parent: 上一级
+            publishable: 发布
+            title: 标题
+        string_block:
+            body: 正文
+            id: ID
+            name: 名称
+            publishable: 发布

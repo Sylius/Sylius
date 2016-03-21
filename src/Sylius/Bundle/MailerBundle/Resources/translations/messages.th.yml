@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    email:
-      enabled: เปิดใช้งานแล้ว
-      content: เนื้อหา
+    form:
+        email:
+            enabled: เปิดใช้งานแล้ว
+            content: เนื้อหา

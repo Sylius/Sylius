@@ -2,34 +2,34 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    address:
-      city: Cidade
-      company: Empresa
-      country: País
-      first_name: Nome
-      last_name: Apelido
-      phone_number: Número de Telefone
-      postcode: Código postal
-      street: Rua
-      province: Distrito
-    country:
-      add_province: Adicionar estado
-      name: Nome
-      provinces: Distritos
-      select: Seleccionar
-    province:
-      name: Nome
-      select: Seleccionar
-    zone:
-      add_member: Adicionar membro
-      members: Membros
-      name: Nome
-      type: Tipo
-      types:
-        country: País
-        province: Distrito
-        zone: Zona
-      select: Seleccionar
-    zone_member:
-      select: Seleccionar
+    form:
+        address:
+            city: Cidade
+            company: Empresa
+            country: País
+            first_name: Nome
+            last_name: Apelido
+            phone_number: Número de Telefone
+            postcode: Código postal
+            street: Rua
+            province: Distrito
+        country:
+            add_province: Adicionar estado
+            name: Nome
+            provinces: Distritos
+            select: Seleccionar
+        province:
+            name: Nome
+            select: Seleccionar
+        zone:
+            add_member: Adicionar membro
+            members: Membros
+            name: Nome
+            type: Tipo
+            types:
+                country: País
+                province: Distrito
+                zone: Zona
+            select: Seleccionar
+        zone_member:
+            select: Seleccionar

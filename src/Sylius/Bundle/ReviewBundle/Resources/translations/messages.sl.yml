@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    review:
-      title: Naslov
-      comment: Komentar
-      author: Avtor
-      status:
-        new: Novo
+    form:
+        review:
+            title: Naslov
+            comment: Komentar
+            author: Avtor
+            status:
+                new: Novo

@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    imagine_block:
-      filter: F絞り込む
-      image: 画像
+    form:
+        imagine_block:
+            filter: F絞り込む
+            image: 画像

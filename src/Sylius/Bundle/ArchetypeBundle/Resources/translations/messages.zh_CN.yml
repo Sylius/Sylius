@@ -2,9 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    archetype:
-      code: 代码
-      name: 名称
-      parent: 上一级
-      options: 选项
+    form:
+        archetype:
+            code: 代码
+            name: 名称
+            parent: 上一级
+            attributes: 属性
+            options: 选项

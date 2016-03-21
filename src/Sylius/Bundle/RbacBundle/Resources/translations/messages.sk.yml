@@ -2,14 +2,14 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    role:
-      code: Kód
-      name: Názov
-      description: Popis
-      permissions: Oprávnenia
-      parent: Nadradená kategória
-    permission:
-      code: Kód
-      description: Popis
-      parent: Nadradená kategória
+    form:
+        role:
+            code: Kód
+            name: Názov
+            description: Popis
+            permissions: Oprávnenia
+            parent: Nadradená kategória
+        permission:
+            code: Kód
+            description: Popis
+            parent: Nadradená kategória

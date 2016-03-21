@@ -2,19 +2,19 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    group:
-      name: الاسم
-    product_filter:
-      name: الاسم
-    user:
-      first_name: الاسم الأول
-      last_name: اسم العائلة
-      password: كلمة السر
-    attribute:
-      product_attribute_value:
-        value: القيمة
-    guest:
-      email: البريد الإلكتروني
-    product_association_type:
-      name: الاسم
+    form:
+        group:
+            name: الاسم
+        product_filter:
+            name: الاسم
+        user:
+            first_name: الاسم الأول
+            last_name: اسم العائلة
+            password: كلمة السر
+        attribute:
+            product_attribute_value:
+                value: القيمة
+        guest:
+            email: البريد الإلكتروني
+        product_association_type:
+            name: الاسم

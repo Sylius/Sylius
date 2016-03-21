@@ -2,11 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    attribute:
-      add: Hozzáadás
-      code: Kód
-      name: Név
-      type: Típus
-    attribute_type:
-      configuration: Konfiguráció
+    form:
+        attribute:
+            add: Hozzáadás
+            code: Kód
+            name: Név
+            type: Típus
+        attribute_type:
+            configuration: Konfiguráció

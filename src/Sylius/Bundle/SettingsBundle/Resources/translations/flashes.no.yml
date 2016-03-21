@@ -2,5 +2,5 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  settings:
-    update: Innstillingene er oppdatert.
+    settings:
+        update: Innstillingene er oppdatert.

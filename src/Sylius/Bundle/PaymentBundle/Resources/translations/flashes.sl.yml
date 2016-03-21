@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  payment:
-    complete: Plačilo je zaključeno.
-    cancel: Plačilo je bilo preklicano.
-    transition_fail: Dejanja ni možno izvesti glede na trenutno stanje plačila
+    payment:
+        complete: Plačilo je zaključeno.
+        cancel: Plačilo je bilo preklicano.
+        transition_fail: Dejanja ni možno izvesti glede na trenutno stanje plačila

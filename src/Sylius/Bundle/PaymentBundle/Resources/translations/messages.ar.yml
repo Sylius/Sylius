@@ -2,11 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    credit_card:
-      number: رقم البطاقة
-    payment:
-      state:
-        new: جديد
-    payment_method:
-      name: الاسم
+    form:
+        credit_card:
+            number: رقم البطاقة
+        payment:
+            state:
+                new: جديد
+        payment_method:
+            name: الاسم

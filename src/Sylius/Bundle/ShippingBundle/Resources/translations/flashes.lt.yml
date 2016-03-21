@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  shipment:
-    ship:
-      success: Pristatymas įvykdytas.
+    shipment:
+        ship:
+            success: Pristatymas įvykdytas.

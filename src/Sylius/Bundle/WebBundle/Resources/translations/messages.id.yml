@@ -1,45 +1,54 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
     ui:
         available_on_demand: Tersedia
-        billing_address: 'Alamat Penagihan'
+        billing_address: Alamat Penagihan
         body: Body
+        city: Kota
         code: Kode
+        company: Perusahaan
         coupon: Kupon
-        currency: 'Mata Uang'
+        currency: Mata Uang
         current_stock: Stok
-        default_currency: 'Mata uang default'
+        default_currency: Mata uang default
+        email: Email
         enabled: Diaktifkan
-        first_name: 'Nama Depan'
-        firstname: 'Nama Depan'
+        first_name: Nama Depan
+        firstname: Nama Depan
         groups: Kelompok
         id: ID
         images: Gambar
         label: Label
-        last_name: 'Nama belakang'
-        lastname: 'Nama belakang'
-        menu_nodes: 'Menu node'
+        last_name: Nama belakang
+        lastname: Nama belakang
+        members: Anggota
+        menu_nodes: Menu node
         message: Pesan
         name: Nama
-        'no': false
         number: Nomor
-        password: 'Kata sandi'
-        phone_number: 'Nomor telepon'
+        password: Kata sandi
+        phone_number: Nomor telepon
+        postcode: Kodepos
         presentation: Presentasi
         price: Harga
-        restricted_zone: 'Zona Terbatas'
+        province: Provinsi
+        provinces: Provinsi
+        restricted_zone: Zona Terbatas
         roles: Peran
         routes: Rute
-        scope: 'Ruang lingkup'
+        scope: Ruang lingkup
         search: Cari
-        shipping_address: 'Alamat pengiriman'
-        shipping_category: 'Kategori Pengiriman'
+        shipping_address: Alamat pengiriman
+        shipping_category: Kategori Pengiriman
         sku: SKU
-        tax_category: 'Kategori Pajak'
+        street: Alamat
+        tax_category: Kategori Pajak
         title: Judul
         topic: Topik
-        unit_price: 'Harga Satuan'
-        variant_selection_method: 'Metode Pilih Varian'
-        'yes': true
+        unit_price: Harga Satuan
+        variant_selection_method: Metode Pilih Varian
         zone: Zona
     variant:
         stock: Stok

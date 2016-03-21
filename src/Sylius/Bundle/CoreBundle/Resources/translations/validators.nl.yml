@@ -2,22 +2,22 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  checkout:
-    shipping_method:
-      not_blank: Gelieve een verzendmethode te kiezen.
-  locale:
-    code:
-      not_blank: Voer een locatie code in.
-      unique: Deze locatie bestaat al.
-  product_variant:
-    onHand:
-      min: 'Verkoopbare voorraad moet groter zijn dan {{ limit }}.'
-      not_blank: Vul de verkoopbare voorraad in.
-    price:
-      min: Prijs mag niet negatief zijn.
-      not_blank: Voer de prijs in.
-    original_price:
-      min: De originele prijs mag niet negatief zijn.
-  product_translation:
-    short_description:
-      max: 'Korte omschrijving mag niet langer zijn dan {{ limit }} tekens bevatten.'
+    checkout:
+        shipping_method:
+            not_blank: Gelieve een verzendmethode te kiezen.
+    locale:
+        code:
+            not_blank: Voer een locatie code in.
+            unique: Deze locatie bestaat al.
+    product_variant:
+        onHand:
+            min: 'Verkoopbare voorraad moet groter zijn dan {{ limit }}.'
+            not_blank: Vul de verkoopbare voorraad in.
+        price:
+            min: Prijs mag niet negatief zijn.
+            not_blank: Voer de prijs in.
+        original_price:
+            min: De originele prijs mag niet negatief zijn.
+    product_translation:
+        short_description:
+            max: 'Korte omschrijving mag niet langer zijn dan {{ limit }} tekens bevatten.'

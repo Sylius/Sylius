@@ -2,14 +2,14 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  backend:
-    menu:
-      main:
-        countries: البلدان
-        homepage: متجرك
-        pages: الصفحات
-        routes: طرق
-      sidebar:
-        countries: البلدان
-        pages: الصفحات
-        routes: طرق
+    backend:
+        menu:
+            main:
+                countries: البلدان
+                homepage: متجرك
+                pages: الصفحات
+                routes: طرق
+            sidebar:
+                countries: البلدان
+                pages: الصفحات
+                routes: طرق

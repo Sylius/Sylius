@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  contact_request:
-    first_name:
-      not_blank: กรุณาระบุชื่อ
-    last_name:
-      not_blank: กรุณาระบุนามสกุลของคุณ
+    contact_request:
+        first_name:
+            not_blank: กรุณาระบุชื่อ
+        last_name:
+            not_blank: กรุณาระบุนามสกุลของคุณ

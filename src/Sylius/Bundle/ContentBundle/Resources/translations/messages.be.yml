@@ -2,45 +2,45 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    imagine_block:
-      filter: Фільтр
-      image: малюнак
-      internal_name: Унутранае імя
-      parent: "Бацькоўскі аб'ект"
-    menu:
-      name: Імя
-      parent: "Бацькоўскі аб'ект"
-    menu_block:
-      body: Цела
-      name: Імя
-    menu_node_block:
-      content: Змест
-      internal_name: Унутранае імя
-    redirect_route:
-      name: Імя
-    reference_block:
-      body: Цела
-      title: Назва
-    route:
-      content: Змест
-      name: Імя
-      parent: "Бацькоўскі аб'ект"
-    simple_block:
-      body: Цела
-      internal_name: Унутранае імя
-      parent: "Бацькоўскі аб'ект"
-      title: Назва
-    slideshow_block:
-      internal_name: Унутранае імя
-      parent: "Бацькоўскі аб'ект"
-      title: Назва
-    static_content:
-      body: Цела
-      internal_name: Унутранае імя
-      parent: "Бацькоўскі аб'ект"
-      title: Назва
-    string_block:
-      body: Цела
-      id: ID
-      name: Імя
+    form:
+        imagine_block:
+            filter: Фільтр
+            image: малюнак
+            internal_name: Унутранае імя
+            parent: "Бацькоўскі аб'ект"
+        menu:
+            name: Імя
+            parent: "Бацькоўскі аб'ект"
+        menu_block:
+            body: Цела
+            name: Імя
+        menu_node_block:
+            content: Змест
+            internal_name: Унутранае імя
+        redirect_route:
+            name: Імя
+        reference_block:
+            body: Цела
+            title: Назва
+        route:
+            content: Змест
+            name: Імя
+            parent: "Бацькоўскі аб'ект"
+        simple_block:
+            body: Цела
+            internal_name: Унутранае імя
+            parent: "Бацькоўскі аб'ект"
+            title: Назва
+        slideshow_block:
+            internal_name: Унутранае імя
+            parent: "Бацькоўскі аб'ект"
+            title: Назва
+        static_content:
+            body: Цела
+            internal_name: Унутранае імя
+            parent: "Бацькоўскі аб'ект"
+            title: Назва
+        string_block:
+            body: Цела
+            id: ID
+            name: Імя

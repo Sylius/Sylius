@@ -2,12 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    variant:
-      presentation: Prezantimi
-    option:
-      name: Emri
-      values: Vlera të mundshme
-    option_value:
-      add_value: Shto vlerën
-      value: Vlera
+    form:
+        variant:
+            presentation: Prezantimi
+        option:
+            name: Emri
+            values: Vlera të mundshme
+        option_value:
+            add_value: Shto vlerën
+            value: Vlera

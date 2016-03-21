@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  promotion_coupon:
-    code:
-      not_blank: Παρακαλώ εισάγετε το κωδικό κουπονιού.
+    promotion_coupon:
+        code:
+            not_blank: Παρακαλώ εισάγετε το κωδικό κουπονιού.

@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  inventory_unit:
-    backorder: Inventario unità preordinate.
-    sell: Inventario vendite.
-    return: Inventario resi.
-    transition_fail: "L'azione non poteva essere eseguita dati lo stato attuale dell'unità"
+    inventory_unit:
+        backorder: Inventario unità preordinate.
+        sell: Inventario vendite.
+        return: Inventario resi.
+        transition_fail: "L'azione non poteva essere eseguita dati lo stato attuale dell'unità"

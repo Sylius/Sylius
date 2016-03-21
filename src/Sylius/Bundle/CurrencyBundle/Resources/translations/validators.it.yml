@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  currency:
-    code:
-      not_blank: Si prega di scegliere un codice valuta.
-      unique: Il codice valuta deve essere univoco.
-    exchange_rate:
-      not_blank: Inserisci il tasso di cambio.
+    currency:
+        code:
+            not_blank: Si prega di scegliere un codice valuta.
+            unique: Il codice valuta deve essere univoco.
+        exchange_rate:
+            not_blank: Inserisci il tasso di cambio.
