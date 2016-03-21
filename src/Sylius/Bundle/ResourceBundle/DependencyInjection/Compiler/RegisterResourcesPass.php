@@ -39,8 +39,13 @@ class RegisterResourcesPass implements CompilerPassInterface
         foreach ($resources as $alias => $configuration) {
             $registry->addMethodCall('addFromAliasAndConfiguration', [$alias, $configuration]);
 
-            if (array_key_exists('interface', $configuration['classes'])) {
+            if (isset($configuration['classes']['interface'])) {
                 $alias = explode('.', $alias);
+
+                if (!isset($alias[0]) || !isset($alias[1])) {
+                    throw new \RuntimeException(sprintf('Error configuring "%s" resource. The resource alias should follow the "prefix.name" format.', $alias[0]));
+                }
+
                 $interfaces[$configuration['classes']['interface']] = sprintf('%s.model.%s.class', $alias[0], $alias[1]);
             }
         }
