@@ -75,7 +75,9 @@
         <service id="sylius.behat.page.shop.product.show" class="%sylius.behat.page.shop.product.show.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.shop.user.login" class="%sylius.behat.page.shop.user.login.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.shop.user.register" class="%sylius.behat.page.shop.user.register.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
-        <service id="sylius.behat.page.shop.order.order_payments" class="%sylius.behat.page.shop.order.order_payments.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+        <service id="sylius.behat.page.shop.order.order_payments" class="%sylius.behat.page.shop.order.order_payments.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false">
+            <argument type="service" id="sylius.behat.table_manipulator" />
+        </service>
         <service id="sylius.behat.page.shop.checkout.thank_you" class="%sylius.behat.page.shop.checkout.thank_you.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.shop.checkout.addressing_step" class="%sylius.behat.page.shop.checkout.addressing_step.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.shop.checkout.finalize_step" class="%sylius.behat.page.shop.checkout.finalize_step.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />

@@ -57,7 +57,7 @@ payum:
     gateways:
         paypal_express_checkout:
             paypal_express_checkout_nvp:
-                username: EDITME
-                password: EDITME
-                signature: EDITME
+                username: TEST
+                password: TEST
+                signature: TEST
                 sandbox: true

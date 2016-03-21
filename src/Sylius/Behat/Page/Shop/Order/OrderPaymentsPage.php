@@ -11,8 +11,11 @@
 
 namespace Sylius\Behat\Page\Shop\Order;
 
+use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\TableManipulatorInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Symfony\Component\Routing\RouterInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -20,11 +23,44 @@ use Sylius\Component\Core\Model\PaymentInterface;
 class OrderPaymentsPage extends SymfonyPage implements OrderPaymentsPageInterface
 {
     /**
+     * @var array
+     */
+    protected $elements = [
+        'table' => '.table'
+    ];
+
+    /**
+     * @var TableManipulatorInterface
+     */
+    private $tableManipulator;
+
+    /**
+     * @param Session $session
+     * @param array $parameters
+     * @param RouterInterface $router
+     * @param TableManipulatorInterface $tableManipulator
+     */
+    public function __construct(
+        Session $session,
+        array $parameters,
+        RouterInterface $router,
+        TableManipulatorInterface $tableManipulator
+    ) {
+        parent::__construct($session, $parameters, $router);
+
+        $this->tableManipulator = $tableManipulator;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function clickPayButtonForGivenPayment(PaymentInterface $payment)
     {
-        $this->getDocument()->clickLink(sprintf('pay_%s', $payment->getId()));
+        $table = $this->getElement('table');
+        $row = $this->tableManipulator->getRowWithFields($this->getElement('table'), ['#' => $payment->getId()]);
+        $actions = $this->tableManipulator->getFieldFromRow($table, $row, 'Action');
+
+        $actions->clickLink('Pay');
     }
 
     /**
@@ -32,18 +68,9 @@ class OrderPaymentsPage extends SymfonyPage implements OrderPaymentsPageInterfac
      */
     public function countPaymentWithSpecificState($state)
     {
-        $elements = $this->getDocument()->findAll('css', '#payments > tr');
+        $rows = $this->tableManipulator->getRowsWithFields($this->getElement('table'), ['state' => $state]);
 
-        $counter = 0;
-        foreach ($elements as $element) {
-            $text = $element->getText();
-
-            if (false !== strpos($text, $state)) {
-                $counter++;
-            }
-        }
-
-        return $counter;
+        return count($rows);
     }
 
     /**
