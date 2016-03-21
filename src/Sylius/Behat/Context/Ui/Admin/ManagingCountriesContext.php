@@ -78,7 +78,7 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Then /^(country "([^"]*)") should appear in the store$/
+     * @Then /^(country "[^"]+") should appear in the store$/
      */
     public function countryWithNameShouldAppearInTheStore(CountryInterface $country)
     {
