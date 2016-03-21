@@ -50,7 +50,7 @@ Sylius\Component\Promotion\Model\Promotion:
                 parameters:
                     id: expr(object.getId())
         - rel: coupons
-          exclude_if: exprt(!object.isCouponBased() || !object.getId())
+          exclude_if: expr(!object.isCouponBased() || !object.getId())
           href:
                 route: sylius_api_promotion_coupon_index
                 parameters:
