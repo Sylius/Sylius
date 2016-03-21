@@ -48,11 +48,14 @@ class SharedStorageContextSpec extends ObjectBehavior
 
     function it_transforms_this_that_and_the_with_resource_name_to_current_resource_of_this_type(
         $sharedStorage,
-        CustomerInterface $customer
+        CustomerInterface $customer,
+        \stdClass $taxCategory
     ) {
         $sharedStorage->get('customer')->willReturn($customer);
+        $sharedStorage->get('tax_category')->willReturn($taxCategory);
 
         $this->getResource('customer')->shouldReturn($customer);
+        $this->getResource('tax category')->shouldReturn($taxCategory);
     }
 
     function it_transforms_this_that_and_the_should_no_longer_with_resource_name_to_current_id_set_for_that_resource(
