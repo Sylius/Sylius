@@ -1,0 +1,45 @@
+.wy-nav-content-wrap {
+    background-image: url("../img/swan.png");
+    background-position: -20px bottom;
+    background-size: 20% auto;
+    background-repeat: no-repeat;
+}
+
+.wy-menu-vertical li.current a:hover {
+    color: #fff;
+    background: #222;
+}
+.wy-menu-vertical li.current a {
+    color: #999;
+    background-color: #222;
+    border-right: 0;
+}
+.wy-menu-vertical li.current > a {
+    color: #fff;
+    background-color: #1abb9c;
+    border-top: 0;
+    border-bottom: 0;
+}
+.wy-menu-vertical li.current > a:hover {
+    color: #fff;
+    background-color: #1abb9c;
+    border-top: 0;
+    border-bottom: 0;
+}
+.wy-side-nav-logo {
+    padding: 20px;
+    background-color: #fff;
+    text-align: center;
+}
+.wy-side-nav-search {
+    margin-bottom: 30px;
+}
+.wy-side-nav-search input[type=text] {
+    border-color: #eee;
+}
+.wy-menu-vertical li.toctree-l2.current > a {
+    background-color: #333;
+}
+.wy-menu-vertical li.toctree-l2.current > a:hover {
+    background-color: #333;
+}
