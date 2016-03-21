@@ -26,6 +26,8 @@ interface RequestConfigurationFactoryInterface
      * @param Request $request
      *
      * @return RequestConfiguration
+     *
+     * @throws \InvalidArgumentException
      */
     public function create(MetadataInterface $metadata, Request $request);
 }

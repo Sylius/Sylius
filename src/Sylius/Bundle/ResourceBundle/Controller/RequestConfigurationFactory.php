@@ -57,7 +57,7 @@ class RequestConfigurationFactory implements RequestConfigurationFactoryInterfac
      */
     public function create(MetadataInterface $metadata, Request $request)
     {
-        $parameters = $this->parseApiParameters($request);
+        $parameters = array_merge($this->defaultParameters, $this->parseApiParameters($request));
         $parameters = $this->parametersParser->parseRequestValues($parameters, $request);
 
         return new $this->configurationClass($metadata, $request, new Parameters($parameters));
@@ -67,6 +67,8 @@ class RequestConfigurationFactory implements RequestConfigurationFactoryInterfac
      * @param Request $request
      *
      * @return array
+     *
+     * @throws \InvalidArgumentException
      */
     private function parseApiParameters(Request $request)
     {
@@ -86,4 +88,5 @@ class RequestConfigurationFactory implements RequestConfigurationFactoryInterfac
 
         return array_merge($request->attributes->get('_sylius', []), $parameters);
     }
+
 }
