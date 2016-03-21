@@ -70,9 +70,9 @@ class LoadMetadataSubscriber implements EventSubscriber
     }
 
     /**
-     * @param string               $subject
-     * @param string               $subjectClass
-     * @param ClassMetadataInfo    $metadata
+     * @param string $subject
+     * @param string $subjectClass
+     * @param ClassMetadataInfo $metadata
      * @param ClassMetadataFactory $metadataFactory
      */
     private function mapSubjectOnAttributeValue(
@@ -141,7 +141,7 @@ class LoadMetadataSubscriber implements EventSubscriber
 
     /**
      * @param ClassMetadataInfo|ClassMetadata $metadata
-     * @param array                           $subjectMapping
+     * @param array $subjectMapping
      */
     private function mapManyToOne(ClassMetadataInfo $metadata, array $subjectMapping)
     {
