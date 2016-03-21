@@ -10,5 +10,5 @@ Feature: Country unique code validation
 
     @ui
     Scenario: Trying to add a new country with used code
-        When I want to create new country
+        When I want to add a new country
         Then I should not be able to choose "Norway"

@@ -45,7 +45,7 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Given I want to create new country
+     * @Given I want to add a new country
      */
     public function iWantToCreateNewCountry()
     {
