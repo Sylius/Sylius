@@ -18,6 +18,7 @@
             "homepage": "http://github.com/Sylius/Sylius/contributors"
         }
     ],
+    "prefer-stable": true,
     "require": {
         "php": "^5.5.9|^7.0",
         "ext-exif": "*",
@@ -54,7 +55,7 @@
         "payum/payum-bundle": "~1.0",
         "sensio/distribution-bundle": "~3.0",
         "stof/doctrine-extensions-bundle": "~1.1",
-        "gedmo/doctrine-extensions": "^2.4.12",
+        "gedmo/doctrine-extensions": "^2.4.12|^3.0@dev",
         "swiftmailer/swiftmailer": "~5.0",
         "symfony-cmf/block-bundle": "~1.2",
         "symfony-cmf/content-bundle": "~1.2",
