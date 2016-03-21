@@ -49,6 +49,7 @@ sylius:
             min_count: Please add at least {{ limit }} zone member.
         name:
             max_length: Zone name must not be longer than 255 characters|Zone name must not be longer than 255 characters.
+            min_length: Zone name must be at least 2 characters long|Zone name must be at least 2 characters long.
             not_blank: Please enter zone name.
     zone_member:
         code:
