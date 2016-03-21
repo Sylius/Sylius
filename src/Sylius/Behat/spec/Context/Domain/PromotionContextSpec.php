@@ -55,7 +55,7 @@ class PromotionContextSpec extends ObjectBehavior
         CouponInterface $coupon
     ) {
         $coupon->getId()->willReturn(5);
-        $sharedStorage->set('coupon_id', 5)->shouldBeCalled();
+        $sharedStorage->set('coupon', $coupon)->shouldBeCalled();
         $couponRepository->remove($coupon)->shouldBeCalled();
 
         $this->iDeleteCoupon($coupon);
@@ -67,7 +67,7 @@ class PromotionContextSpec extends ObjectBehavior
         CouponInterface $coupon
     ) {
         $coupon->getId()->willReturn(5);
-        $sharedStorage->set('coupon_id', 5)->shouldBeCalled();
+        $sharedStorage->set('coupon', $coupon)->shouldBeCalled();
         $couponRepository->remove($coupon)->willThrow(ForeignKeyConstraintViolationException::class);
 
         $this->shouldThrow(ForeignKeyConstraintViolationException::class)->during('iDeleteCoupon', [$coupon]);
@@ -98,25 +98,25 @@ class PromotionContextSpec extends ObjectBehavior
     }
 
     function it_checks_whether_a_coupon_is_not_in_the_registry(
+        CouponInterface $coupon,
         RepositoryInterface $couponRepository
     ) {
-        $couponRepository->find(5)->willReturn(null);
+        $coupon->getCode()->willReturn('christmas_coupon');
+        $couponRepository->findOneBy(['code' => 'christmas_coupon'])->willReturn(null);
 
-        $this->couponShouldNotExistInTheRegistry(5);
+        $this->couponShouldNotExistInTheRegistry($coupon);
     }
 
     function it_throws_exception_when_a_coupon_is_found_but_it_should_not_exist(
-        SharedStorageInterface $sharedStorage,
-        RepositoryInterface $couponRepository,
-        CouponInterface $coupon
+        CouponInterface $coupon,
+        RepositoryInterface $couponRepository
     ) {
-        $coupon->getId()->willReturn(5);
-        $sharedStorage->get('coupon_id')->willReturn(5);
-        $couponRepository->find(5)->willReturn($coupon);
+        $coupon->getCode()->willReturn('christmas_coupon');
+        $couponRepository->findOneBy(['code' => 'christmas_coupon'])->willReturn($coupon);
 
         $this
             ->shouldThrow(NotEqualException::class)
-            ->during('couponShouldNotExistInTheRegistry', [5])
+            ->during('couponShouldNotExistInTheRegistry', [$coupon])
         ;
     }
 
@@ -148,31 +148,32 @@ class PromotionContextSpec extends ObjectBehavior
         SharedStorageInterface $sharedStorage,
         PromotionInterface $promotion
     ) {
-        $promotion->getId()->willReturn(5);
-        $sharedStorage->set('promotion_id', 5)->shouldBeCalled();
+        $sharedStorage->set('promotion', $promotion)->shouldBeCalled();
         $promotionRepository->remove($promotion)->shouldBeCalled();
 
         $this->iDeletePromotion($promotion);
     }
 
     function it_checks_whether_a_promotion_does_not_exist_in_the_registry(
+        PromotionInterface $promotion,
         PromotionRepositoryInterface $promotionRepository
     ) {
-        $promotionRepository->find(5)->willReturn(null);
+        $promotion->getCode()->willReturn('christmas_promotion');
+        $promotionRepository->findOneBy(['code' => 'christmas_promotion'])->willReturn(null);
 
-        $this->promotionShouldNotExistInTheRegistry(5);
+        $this->promotionShouldNotExistInTheRegistry($promotion);
     }
 
     function it_throws_exception_when_a_promotion_is_found_but_it_should_not_exist(
-        PromotionRepositoryInterface $promotionRepository,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
+        PromotionRepositoryInterface $promotionRepository
     ) {
-        $promotion->getId()->willReturn(5);
-        $promotionRepository->find(5)->willReturn($promotion);
+        $promotion->getCode()->willReturn('christmas_promotion');
+        $promotionRepository->findOneBy(['code' => 'christmas_promotion'])->willReturn($promotion);
 
         $this
             ->shouldThrow(NotEqualException::class)
-            ->during('promotionShouldNotExistInTheRegistry', [5])
+            ->during('promotionShouldNotExistInTheRegistry', [$promotion])
         ;
     }
 
