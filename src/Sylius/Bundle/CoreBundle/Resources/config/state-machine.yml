@@ -6,21 +6,17 @@ winzou_state_machine:
         state_machine_class: %sylius.state_machine.class%
         states:
             cart: ~
-            started: ~
             addressed: ~
             shipping_selected: ~
             payment_selected: ~
             completed: ~
         transitions:
-            start:
-                from: [cart]
-                to: started
             address:
-                from: [started]
+                from: [cart]
                 to: addressed
             readdress:
                 from: [payment_selected, shipping_selected, addressed]
-                to: started
+                to: cart
             select_shipping:
                 from: [addressed]
                 to: shipping_selected
@@ -39,7 +35,7 @@ winzou_state_machine:
         callbacks:
             after:
                 recalculate_order:
-                    on: ['start', 'address', 'readdress', 'select_shipping', 'reselect_shipping', 'select_payment', 'reselect_payment', 'complete']
+                    on: ['address', 'readdress', 'select_shipping', 'reselect_shipping', 'select_payment', 'reselect_payment', 'complete']
                     do: [@sylius.order_processing.order_recalculator, 'recalculate']
                     args: ['object']
 

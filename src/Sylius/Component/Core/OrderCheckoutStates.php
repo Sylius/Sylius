@@ -21,5 +21,4 @@ class OrderCheckoutStates
     const STATE_COMPLETED = 'completed';
     const STATE_PAYMENT_SELECTED = 'payment_selected';
     const STATE_SHIPPING_SELECTED = 'shipping_selected';
-    const STATE_STARTED = 'started';
 }
