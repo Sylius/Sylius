@@ -35,11 +35,6 @@
             <tag name="sylius.behat.context" />
         </service>
 
-        <service id="sylius.behat.context.domain.shipment" class="%sylius.behat.context.domain.shipment.class%" scope="scenario">
-            <argument type="service" id="sylius.repository.shipment" container="symfony"/>
-            <tag name="sylius.behat.context" />
-        </service>
-
         <service id="sylius.behat.context.domain.product" class="%sylius.behat.context.domain.product.class%" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.repository.product" container="symfony" />
@@ -52,6 +47,11 @@
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.repository.promotion" container="symfony" />
             <argument type="service" id="sylius.repository.promotion_coupon" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.domain.shipment" class="%sylius.behat.context.domain.shipment.class%" scope="scenario">
+            <argument type="service" id="sylius.repository.shipment" container="symfony"/>
             <tag name="sylius.behat.context" />
         </service>
     </services>
