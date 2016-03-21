@@ -19,14 +19,14 @@ interface ResponseLoaderInterface
     /**
      * @param string $source
      *
-     * @return
+     * @return array
      */
     public function getMockedResponse($source);
 
     /**
      * @param string $source
      *
-     * @return
+     * @return array
      */
     public function getExpectedResponse($source);
 }

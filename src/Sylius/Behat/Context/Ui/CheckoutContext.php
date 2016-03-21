@@ -22,8 +22,8 @@ use Sylius\Behat\Page\Shop\Checkout\ThankYouPageInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -71,7 +71,7 @@ final class CheckoutContext implements Context
     private $orderPaymentsPage;
 
     /**
-     * @var RepositoryInterface
+     * @var OrderRepositoryInterface
      */
     private $orderRepository;
 
@@ -84,7 +84,7 @@ final class CheckoutContext implements Context
      * @param FinalizeStepInterface $checkoutFinalizeStep
      * @param ThankYouPageInterface $checkoutThankYouPage
      * @param OrderPaymentsPageInterface $orderPaymentsPage
-     * @param RepositoryInterface $orderRepository
+     * @param OrderRepositoryInterface $orderRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -95,7 +95,7 @@ final class CheckoutContext implements Context
         FinalizeStepInterface $checkoutFinalizeStep,
         ThankYouPageInterface $checkoutThankYouPage,
         OrderPaymentsPageInterface $orderPaymentsPage,
-        RepositoryInterface $orderRepository
+        OrderRepositoryInterface $orderRepository
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->checkoutSecurityStep = $checkoutSecurityStep;

@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Behat;
 
+use Mockery\MockInterface;
 use Payum\Core\Bridge\Guzzle\HttpClient;
 use PhpSpec\ObjectBehavior;
 use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
@@ -45,6 +46,6 @@ class MockerSpec extends ObjectBehavior
 
     function it_mocks_collaborator()
     {
-        $this->mockCollaborator(HttpClient::class)->shouldHaveType('\Mockery\MockInterface');
+        $this->mockCollaborator(HttpClient::class)->shouldHaveType(MockInterface::class);
     }
 }
