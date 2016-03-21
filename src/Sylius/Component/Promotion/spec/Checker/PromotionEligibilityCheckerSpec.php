@@ -13,6 +13,8 @@ namespace spec\Sylius\Component\Promotion\Checker;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Promotion\Checker\PromotionEligibilityChecker;
+use Sylius\Component\Promotion\Checker\PromotionEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Checker\PromotionSubjectEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\CouponInterface;
@@ -25,13 +27,24 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * @author Saša Stamenković <umpirsky@gmail.com>
+ * @mixin PromotionEligibilityChecker
+ *
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class PromotionEligibilityCheckerSpec extends ObjectBehavior
 {
-    function let(ServiceRegistryInterface $registry, EventDispatcherInterface $dispatcher)
-    {
-        $this->beConstructedWith($registry, $dispatcher);
+    function let(
+        PromotionEligibilityCheckerInterface $datesEligibilityChecker,
+        PromotionEligibilityCheckerInterface $usageLimitEligibilityChecker,
+        PromotionSubjectEligibilityCheckerInterface $couponsEligibilityChecker,
+        PromotionSubjectEligibilityCheckerInterface $rulesEligibilityChecker
+    ) {
+        $this->beConstructedWith(
+            $datesEligibilityChecker,
+            $usageLimitEligibilityChecker,
+            $couponsEligibilityChecker,
+            $rulesEligibilityChecker
+        );
     }
 
     function it_is_a_rule_checker()
@@ -39,157 +52,92 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $this->shouldBeAnInstanceOf(PromotionSubjectEligibilityCheckerInterface::class);
     }
 
-    function it_recognizes_subject_as_eligible_if_all_checkers_recognize_it_as_eligible(
-        $registry,
-        RuleCheckerInterface $checker,
-        PromotionCouponAwareSubjectInterface $subject,
+    function it_returns_false_if_promotion_is_not_eligible_to_dates(
+        PromotionEligibilityCheckerInterface $datesEligibilityChecker,
         PromotionInterface $promotion,
-        RuleInterface $rule
+        PromotionSubjectInterface $subject
     ) {
-        $promotion->getStartsAt()->willReturn(null);
-        $promotion->getEndsAt()->willReturn(null);
-        $promotion->getUsageLimit()->willReturn(null);
-        $promotion->hasRules()->willReturn(true);
-        $registry->get(RuleInterface::TYPE_ITEM_TOTAL)->willReturn($checker);
-        $promotion->getRules()->willReturn([$rule]);
-        $promotion->isCouponBased()->willReturn(false);
-
-        $rule->getType()->willReturn(RuleInterface::TYPE_ITEM_TOTAL);
-        $rule->getConfiguration()->willReturn([]);
-
-        $registry->get(RuleInterface::TYPE_ITEM_TOTAL)->willReturn($checker);
-        $checker->isEligible($subject, [])->willReturn(true);
-
-        $subject->getPromotionCoupon()->willReturn(null);
-
-        $this->isEligible($subject, $promotion)->shouldReturn(true);
-    }
-
-    function it_recognizes_subject_as_not_eligible_if_any_checker_recognize_it_as_not_eligible(
-        $registry,
-        RuleCheckerInterface $checker,
-        PromotionSubjectInterface $subject,
-        PromotionInterface $promotion,
-        RuleInterface $rule
-    ) {
-        $promotion->getStartsAt()->willReturn(null);
-        $promotion->getEndsAt()->willReturn(null);
-        $promotion->getUsageLimit()->willReturn(null);
-        $promotion->hasRules()->willReturn(true);
-        $registry->get(RuleInterface::TYPE_ITEM_TOTAL)->willReturn($checker);
-        $promotion->getRules()->willReturn([$rule]);
-        $promotion->isCouponBased()->willReturn(false);
-
-        $rule->getType()->willReturn(RuleInterface::TYPE_ITEM_TOTAL);
-        $rule->getConfiguration()->willReturn([]);
-
-        $registry->get(RuleInterface::TYPE_ITEM_TOTAL)->willReturn($checker);
-        $checker->isEligible($subject, [])->willReturn(false);
+        $datesEligibilityChecker->isEligible($promotion)->willReturn(false);
 
         $this->isEligible($subject, $promotion)->shouldReturn(false);
     }
 
-    function it_recognizes_subject_as_not_eligible_if_any_checker_recognize_it_as_not_eligible_even_when_coupon_matches(
-        $registry,
-        RuleCheckerInterface $checker,
-        PromotionCouponAwareSubjectInterface $subject,
+    function it_returns_false_if_promotion_is_not_eligible_to_usage_limit(
+        PromotionEligibilityCheckerInterface $datesEligibilityChecker,
+        PromotionEligibilityCheckerInterface $usageLimitEligibilityChecker,
         PromotionInterface $promotion,
-        CouponInterface $coupon,
-        RuleInterface $rule
+        PromotionSubjectInterface $subject
     ) {
-        $promotion->getStartsAt()->willReturn(null);
-        $promotion->getEndsAt()->willReturn(null);
-        $promotion->getUsageLimit()->willReturn(null);
-        $promotion->hasRules()->willReturn(true);
-        $registry->get(RuleInterface::TYPE_ITEM_TOTAL)->willReturn($checker);
-        $promotion->getRules()->willReturn([$rule]);
-        $promotion->isCouponBased()->willReturn(true);
-
-        $rule->getType()->willReturn(RuleInterface::TYPE_ITEM_TOTAL);
-        $rule->getConfiguration()->willReturn([]);
-
-        $registry->get(RuleInterface::TYPE_ITEM_TOTAL)->willReturn($checker);
-        $checker->isEligible($subject, [])->willReturn(false);
-
-        $subject->getPromotionCoupon()->willReturn($coupon);
-        $coupon->getPromotion()->willReturn($promotion);
+        $datesEligibilityChecker->isEligible($promotion)->willReturn(true);
+        $usageLimitEligibilityChecker->isEligible($promotion)->willReturn(false);
 
         $this->isEligible($subject, $promotion)->shouldReturn(false);
     }
 
-    function it_recognizes_subject_as_eligible_if_promotion_have_no_coupon_codes(
-        PromotionSubjectInterface $subject,
-        PromotionInterface $promotion
+    function it_returns_false_if_promotion_is_not_eligible_to_rules(
+        PromotionEligibilityCheckerInterface $datesEligibilityChecker,
+        PromotionEligibilityCheckerInterface $usageLimitEligibilityChecker,
+        PromotionSubjectEligibilityCheckerInterface $rulesEligibilityChecker,
+        PromotionInterface $promotion,
+        PromotionSubjectInterface $subject
     ) {
-        $promotion->getStartsAt()->willReturn(null);
-        $promotion->getEndsAt()->willReturn(null);
-        $promotion->getUsageLimit()->willReturn(null);
-        $promotion->hasRules()->willReturn(false);
+        $datesEligibilityChecker->isEligible($promotion)->willReturn(true);
+        $usageLimitEligibilityChecker->isEligible($promotion)->willReturn(true);
+        $rulesEligibilityChecker->isEligible($subject, $promotion)->willReturn(false);
+
+        $this->isEligible($subject, $promotion)->shouldReturn(false);
+    }
+
+    function it_returns_true_if_promotion_is_not_coupon_based_and_eligible_to_rules(
+        PromotionEligibilityCheckerInterface $datesEligibilityChecker,
+        PromotionEligibilityCheckerInterface $usageLimitEligibilityChecker,
+        PromotionSubjectEligibilityCheckerInterface $rulesEligibilityChecker,
+        PromotionInterface $promotion,
+        PromotionSubjectInterface $subject
+    ) {
+        $datesEligibilityChecker->isEligible($promotion)->willReturn(true);
+        $usageLimitEligibilityChecker->isEligible($promotion)->willReturn(true);
+        $rulesEligibilityChecker->isEligible($subject, $promotion)->willReturn(true);
+
         $promotion->isCouponBased()->willReturn(false);
 
         $this->isEligible($subject, $promotion)->shouldReturn(true);
     }
 
-    function it_recognizes_subject_as_not_eligible_if_coupon_code_does_not_match(
-        PromotionCouponAwareSubjectInterface $subject,
+    function it_returns_false_if_promotion_is_coupon_based_and_eligible_to_rules_but_not_eligible_to_coupons(
+        PromotionEligibilityCheckerInterface $datesEligibilityChecker,
+        PromotionEligibilityCheckerInterface $usageLimitEligibilityChecker,
+        PromotionSubjectEligibilityCheckerInterface $couponsEligibilityChecker,
+        PromotionSubjectEligibilityCheckerInterface $rulesEligibilityChecker,
         PromotionInterface $promotion,
-        CouponInterface $coupon
+        PromotionSubjectInterface $subject
     ) {
-        $subject->getPromotionCoupon()->willReturn($coupon);
+        $datesEligibilityChecker->isEligible($promotion)->willReturn(true);
+        $usageLimitEligibilityChecker->isEligible($promotion)->willReturn(true);
+        $rulesEligibilityChecker->isEligible($subject, $promotion)->willReturn(true);
 
-        $promotion->getStartsAt()->willReturn(null);
-        $promotion->getEndsAt()->willReturn(null);
-        $promotion->getUsageLimit()->willReturn(null);
-        $promotion->hasRules()->willReturn(false);
         $promotion->isCouponBased()->willReturn(true);
-        $coupon->getPromotion()->willReturn(null);
+
+        $couponsEligibilityChecker->isEligible($subject, $promotion)->willReturn(false);
 
         $this->isEligible($subject, $promotion)->shouldReturn(false);
     }
 
-    function it_recognizes_subject_as_not_eligible_if_promotion_subject_is_not_coupon_aware(
-        $registry,
-        RuleCheckerInterface $checker,
-        PromotionSubjectInterface $subject,
+    function it_returns_true_if_promotion_is_coupon_based_and_eligible_to_rules_and_eligible_to_coupons(
+        PromotionEligibilityCheckerInterface $datesEligibilityChecker,
+        PromotionEligibilityCheckerInterface $usageLimitEligibilityChecker,
+        PromotionSubjectEligibilityCheckerInterface $couponsEligibilityChecker,
+        PromotionSubjectEligibilityCheckerInterface $rulesEligibilityChecker,
         PromotionInterface $promotion,
-        CouponInterface $coupon,
-        RuleInterface $rule
+        PromotionSubjectInterface $subject
     ) {
-        $promotion->getStartsAt()->willReturn(null);
-        $promotion->getEndsAt()->willReturn(null);
-        $promotion->getUsageLimit()->willReturn(null);
-        $promotion->hasRules()->willReturn(true);
+        $datesEligibilityChecker->isEligible($promotion)->willReturn(true);
+        $usageLimitEligibilityChecker->isEligible($promotion)->willReturn(true);
+        $rulesEligibilityChecker->isEligible($subject, $promotion)->willReturn(true);
+
         $promotion->isCouponBased()->willReturn(true);
-        $coupon->getPromotion()->willReturn($promotion);
 
-        $registry->get(RuleInterface::TYPE_ITEM_TOTAL)->willReturn($checker);
-        $promotion->getRules()->willReturn([$rule]);
-
-        $rule->getType()->willReturn(RuleInterface::TYPE_ITEM_TOTAL);
-        $rule->getConfiguration()->willReturn([]);
-
-        $registry->get(RuleInterface::TYPE_ITEM_TOTAL)->willReturn($checker);
-        $checker->isEligible($subject, [])->willReturn(false);
-
-        $this->isEligible($subject, $promotion)->shouldReturn(false);
-    }
-
-    function it_recognizes_subject_as_eligible_if_coupon_code_match(
-        $dispatcher,
-        PromotionCouponAwareSubjectInterface $subject,
-        PromotionInterface $promotion,
-        CouponInterface $coupon
-    ) {
-        $subject->getPromotionCoupon()->willReturn($coupon);
-
-        $promotion->getStartsAt()->willReturn(null);
-        $promotion->getEndsAt()->willReturn(null);
-        $promotion->getUsageLimit()->willReturn(null);
-        $promotion->hasRules()->willReturn(false);
-        $promotion->isCouponBased()->willReturn(true);
-        $coupon->getPromotion()->willReturn($promotion);
-
-        $dispatcher->dispatch(SyliusPromotionEvents::COUPON_ELIGIBLE, Argument::any())->shouldBeCalled();
+        $couponsEligibilityChecker->isEligible($subject, $promotion)->willReturn(true);
 
         $this->isEligible($subject, $promotion)->shouldReturn(true);
     }
