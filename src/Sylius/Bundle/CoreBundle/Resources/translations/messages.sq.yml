@@ -35,6 +35,8 @@ sylius:
       currencies: Monedhat
       shipping_methods: Mënyrat e dërgesës
       payment_methods: Mënyrat e pagesës
+      theme: Tema
+      hostname: Emri i hostit
     image:
       file: Imazhi
     locale:

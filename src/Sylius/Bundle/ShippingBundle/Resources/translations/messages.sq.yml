@@ -6,6 +6,7 @@ sylius:
     rule:
       unit_count_configuration:
         count: Numëro
+        equal: I barabartë me
       type: Lloji i rregullit
     shipment:
       state: Shteti
@@ -23,7 +24,11 @@ sylius:
         amount: Shuma
       flexible_rate_configuration:
         label: Taksa e ndryshueshme
+        additional_unit_cost: Kosto shtese per njesi
+        additional_unit_limit: Kufizo njesine shtese
+        first_unit_cost: Kostoja per njesine e pare
       per_unit_rate_configuration:
+        label: Tarife fikse per njesi
         amount: Shuma
       weight_rate_configuration:
         label: Taksa e bazuar te pesha

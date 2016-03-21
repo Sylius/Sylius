@@ -4,7 +4,9 @@
 sylius:
   form:
     review:
+      header: 添加评论
       title: 标题
+      comment: 备注
       author: 作者
       status:
         new: 新增
