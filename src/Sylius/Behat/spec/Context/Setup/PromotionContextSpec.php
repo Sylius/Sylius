@@ -12,8 +12,10 @@
 namespace spec\Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Behat\Context\Setup\PromotionContext;
 use Sylius\Component\Core\Factory\ActionFactoryInterface;
 use Sylius\Component\Core\Factory\RuleFactoryInterface;
@@ -283,5 +285,56 @@ class PromotionContextSpec extends ObjectBehavior
         $objectManager->flush()->shouldBeCalled();
 
         $this->thisPromotionPercentageGivesOffOnEveryProductPricedBetween($promotion, 0.1, 5000, 10000);
+    }
+
+    function it_creates_fixed_discount_promotion_with_taxon_rule_for_one_taxon(
+        ActionFactoryInterface $actionFactory,
+        ActionInterface $action,
+        ObjectManager $objectManager,
+        PromotionInterface $promotion,
+        RuleFactoryInterface $ruleFactory,
+        RuleInterface $rule,
+        TaxonInterface $taxon
+    ) {
+        $taxon->getId()->willReturn(1);
+        $ruleFactory->createTaxon([1])->willReturn($rule);
+
+        $actionFactory->createFixedDiscount(1000)->willReturn($action);
+        $action->getConfiguration()->willReturn([]);
+        $action->setConfiguration([])->shouldBeCalled();
+
+        $promotion->addAction($action)->shouldBeCalled();
+        $promotion->addRule($rule)->shouldBeCalled();
+
+        $objectManager->flush()->shouldBeCalled();
+
+        $this->thePromotionGivesOffIfOrderContainsProductsClassifiedAs($promotion, 1000, $taxon);
+    }
+
+    function it_creates_fixed_discount_promotion_with_taxon_rule_for_multiple_taxons(
+        ActionFactoryInterface $actionFactory,
+        ActionInterface $action,
+        ObjectManager $objectManager,
+        PromotionInterface $promotion,
+        RuleFactoryInterface $ruleFactory,
+        RuleInterface $rule,
+        TaxonInterface $firstTaxon,
+        TaxonInterface $secondTaxon
+    ) {
+        $firstTaxon->getId()->willReturn(1);
+        $secondTaxon->getId()->willReturn(4);
+
+        $ruleFactory->createTaxon([1, 4])->willReturn($rule);
+
+        $actionFactory->createFixedDiscount(1000)->willReturn($action);
+        $action->getConfiguration()->willReturn([]);
+        $action->setConfiguration([])->shouldBeCalled();
+
+        $promotion->addAction($action)->shouldBeCalled();
+        $promotion->addRule($rule)->shouldBeCalled();
+
+        $objectManager->flush()->shouldBeCalled();
+
+        $this->thePromotionGivesOffIfOrderContainsProductsClassifiedAsOr($promotion, 1000, [$firstTaxon, $secondTaxon]);
     }
 }

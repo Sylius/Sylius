@@ -45,4 +45,15 @@ final class TaxonContext implements Context
 
         return $taxon;
     }
+
+    /**
+     * @Transform classified as :firstTaxon or :secondTaxon
+     */
+    public function getTaxonsByNames($firstTaxon, $secondTaxon)
+    {
+        return [
+            $this->getTaxonByName($firstTaxon),
+            $this->getTaxonByName($secondTaxon)
+        ];
+    }
 }
