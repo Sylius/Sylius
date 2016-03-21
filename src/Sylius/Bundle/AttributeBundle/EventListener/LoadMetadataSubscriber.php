@@ -14,6 +14,7 @@ namespace Sylius\Bundle\AttributeBundle\EventListener;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
+use Doctrine\ORM\Mapping\ClassMetadataFactory;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 
 /**
@@ -57,41 +58,85 @@ class LoadMetadataSubscriber implements EventSubscriber
         $metadataFactory = $eventArgs->getEntityManager()->getMetadataFactory();
 
         foreach ($this->subjects as $subject => $class) {
-            if ($class['attribute_value']['classes']['model'] !== $metadata->getName()) {
-                continue;
+            if ($class['attribute_value']['classes']['model'] === $metadata->getName()) {
+                $this->mapSubjectOnAttributeValue($subject, $class['subject'], $metadata, $metadataFactory);
+                $this->mapAttributeOnAttributeValue($class['attribute']['classes']['model'], $metadata, $metadataFactory);
             }
 
-            $targetEntity = $class['subject'];
-            $targetEntityMetadata = $metadataFactory->getMetadataFor($targetEntity);
-            $subjectMapping = [
-                'fieldName' => 'subject',
-                'targetEntity' => $targetEntity,
-                'inversedBy' => 'attributes',
-                'joinColumns' => [[
-                    'name' => $subject.'_id',
-                    'referencedColumnName' => $targetEntityMetadata->fieldMappings['id']['columnName'],
-                    'nullable' => false,
-                    'onDelete' => 'CASCADE',
-                ]],
-            ];
-
-            $this->mapManyToOne($metadata, $subjectMapping);
-
-            $attributeModel = $class['attribute']['classes']['model'];
-            $attributeMetadata = $metadataFactory->getMetadataFor($attributeModel);
-            $attributeMapping = [
-                'fieldName' => 'attribute',
-                'targetEntity' => $attributeModel,
-                'joinColumns' => [[
-                    'name' => 'attribute_id',
-                    'referencedColumnName' => $attributeMetadata->fieldMappings['id']['columnName'],
-                    'nullable' => false,
-                    'onDelete' => 'CASCADE',
-                ]],
-            ];
-
-            $this->mapManyToOne($metadata, $attributeMapping);
+            if ($class['attribute']['classes']['model'] === $metadata->getName()) {
+                $this->mapValuesOnAttribute($class['attribute_value']['classes']['model'], $metadata);
+            }
         }
+    }
+
+    /**
+     * @param string               $subject
+     * @param string               $subjectClass
+     * @param ClassMetadataInfo    $metadata
+     * @param ClassMetadataFactory $metadataFactory
+     */
+    private function mapSubjectOnAttributeValue(
+        $subject,
+        $subjectClass,
+        ClassMetadataInfo $metadata,
+        ClassMetadataFactory $metadataFactory
+    ) {
+        $targetEntityMetadata = $metadataFactory->getMetadataFor($subjectClass);
+        $subjectMapping = [
+            'fieldName' => 'subject',
+            'targetEntity' => $subjectClass,
+            'inversedBy' => 'attributes',
+            'joinColumns' => [[
+                'name' => $subject.'_id',
+                'referencedColumnName' => $targetEntityMetadata->fieldMappings['id']['columnName'],
+                'nullable' => false,
+                'onDelete' => 'CASCADE',
+            ]],
+        ];
+
+        $this->mapManyToOne($metadata, $subjectMapping);
+    }
+
+    /**
+     * @param string $attributeClass
+     * @param ClassMetadataInfo $metadata
+     * @param ClassMetadataFactory $metadataFactory
+     */
+    private function mapAttributeOnAttributeValue(
+        $attributeClass,
+        ClassMetadataInfo $metadata,
+        ClassMetadataFactory $metadataFactory
+    ) {
+        $attributeMetadata = $metadataFactory->getMetadataFor($attributeClass);
+        $attributeMapping = [
+            'fieldName' => 'attribute',
+            'targetEntity' => $attributeClass,
+            'joinColumns' => [[
+                'name' => 'attribute_id',
+                'referencedColumnName' => $attributeMetadata->fieldMappings['id']['columnName'],
+                'nullable' => false,
+                'onDelete' => 'CASCADE',
+            ]],
+        ];
+
+        $this->mapManyToOne($metadata, $attributeMapping);
+    }
+
+    /**
+     * @param string $attributeValueClass
+     * @param ClassMetadataInfo $metadata
+     */
+    private function mapValuesOnAttribute(
+        $attributeValueClass,
+        ClassMetadataInfo $metadata
+    ) {
+        $valuesMapping = [
+            'fieldName' => 'values',
+            'targetEntity' => $attributeValueClass,
+            'mappedBy' => 'subject',
+        ];
+
+        $metadata->mapOneToMany($valuesMapping);
     }
 
     /**

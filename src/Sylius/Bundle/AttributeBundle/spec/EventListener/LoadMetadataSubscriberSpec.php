@@ -124,4 +124,44 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
 
         $this->loadClassMetadata($eventArgs);
     }
+
+    function it_does_not_add_values_one_to_many_mapping_if_the_class_is_not_a_configured_attribute_model(
+        LoadClassMetadataEventArgs $eventArgs,
+        ClassMetadataInfo $metadata,
+        EntityManager $entityManager,
+        ClassMetadataFactory $classMetadataFactory
+    ) {
+        $eventArgs->getEntityManager()->willReturn($entityManager);
+        $entityManager->getMetadataFactory()->willReturn($classMetadataFactory);
+
+        $eventArgs->getClassMetadata()->willReturn($metadata);
+        $metadata->getName()->willReturn('KeepMoving\ThisClass\DoesNot\Concern\You');
+
+        $metadata->mapOneToMany(Argument::any())->shouldNotBeCalled();
+
+        $this->loadClassMetadata($eventArgs);
+    }
+
+    function it_maps_values_one_to_many_association_from_the_attribute_model_to_the_attribute_value_model(
+        LoadClassMetadataEventArgs $eventArgs,
+        ClassMetadataInfo $metadata,
+        EntityManager $entityManager,
+        ClassMetadataFactory $classMetadataFactory
+    ) {
+        $eventArgs->getEntityManager()->willReturn($entityManager);
+        $entityManager->getMetadataFactory()->willReturn($classMetadataFactory);
+
+        $eventArgs->getClassMetadata()->willReturn($metadata);
+        $metadata->getName()->willReturn('Some\App\Product\Entity\Attribute');
+
+        $valuesMapping = [
+            'fieldName' => 'values',
+            'targetEntity' => 'Some\App\Product\Entity\AttributeValue',
+            'mappedBy' => 'subject',
+        ];
+
+        $metadata->mapOneToMany($valuesMapping)->shouldBeCalled();
+
+        $this->loadClassMetadata($eventArgs);
+    }
 }
