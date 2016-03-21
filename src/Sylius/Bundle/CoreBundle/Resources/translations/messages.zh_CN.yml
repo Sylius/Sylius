@@ -2,6 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+  backend_welcome: 欢迎
   form:
     action:
       add_product_configuration:

@@ -70,6 +70,53 @@ sylius:
         channels: 频道
         checkout: 结账
         choose_file: 选择文件
+        index: 发货
+    shipping_category:
+      index: 发货类别
+    shipping_method:
+      index: 发货方式
+    tax_category:
+      index: 税类别
+    tax_rate:
+      index: 税率
+    taxation_settings: 税收的设置
+    update: 编辑
+    zone:
+      index: 区域
+    report:
+      index: 报表
+
+  browse_products: 浏览产品
+  cancel: '取消 '
+  cart:
+    empty: 您的购物车是空的
+    summary:
+      checkout: 结账
+      clear: 清空购物车
+      grand_total: 总计
+      product: 产品
+      quantity: 数量
+      save: 保存
+      total: 共计
+      unit_price: 价格
+    summary_header: 购物车总结
+    total_items: '%count%项目'
+  channel:
+    code: 代码
+    created_at: 创建于
+    currency_default: 默认货币：
+    enabled: 已启用
+    id: ID
+    index_header: 频道
+    name: 名称
+    update: 编辑
+    updated_at: 最后一次更新
+  checkout:
+    addressing:
+      header: 送货地址详情
+    back: 返回
+    finalize:
+      address:
         city: 城市
         code: 代码
         company: 公司
