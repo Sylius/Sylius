@@ -12,8 +12,11 @@ sylius_grid:
                     type: string
                     label: sylius.ui.code
                 name:
-                    type: string
+                    type: twig
                     label: sylius.ui.name
+                    path: .
+                    options:
+                        template: SyliusAdminBundle:Locale/Field:name.html.twig
                 enabled:
                     type: twig
                     label: sylius.ui.enabled
