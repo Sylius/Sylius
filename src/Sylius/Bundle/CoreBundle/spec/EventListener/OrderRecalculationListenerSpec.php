@@ -41,9 +41,9 @@ class OrderRecalculationListenerSpec extends ObjectBehavior
     }
 
     function it_uses_order_recalculator_to_recalculate_order(
-        $orderRecalculator,
         GenericEvent $event,
-        OrderInterface $order
+        OrderInterface $order,
+        OrderRecalculatorInterface $orderRecalculator
     ) {
         $event->getSubject()->willReturn($order);
         $orderRecalculator->recalculate($order)->shouldBeCalled();

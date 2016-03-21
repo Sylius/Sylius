@@ -62,6 +62,7 @@
         <parameter key="sylius.listener.customer_aware.class">Sylius\Bundle\CoreBundle\EventListener\CustomerAwareListener</parameter>
         <parameter key="sylius.listener.customer_reviews_delete.class">Sylius\Bundle\CoreBundle\EventListener\CustomerReviewsDeleteListener</parameter>
         <parameter key="sylius.listener.order_recalculation.class">Sylius\Bundle\CoreBundle\EventListener\OrderRecalculationListener</parameter>
+        <parameter key="sylius.listener.user_cart_recalculation.class">Sylius\Bundle\CoreBundle\EventListener\UserCartRecalculationListener</parameter>
 
         <parameter key="sylius.active_promotions_by_channel_provider.class">Sylius\Component\Core\Provider\ActivePromotionsByChannelProvider</parameter>
 
@@ -379,6 +380,12 @@
         <service id="sylius.listener.order_recalculation" class="%sylius.listener.order_recalculation.class%">
             <argument type="service" id="sylius.order_processing.order_recalculator" />
             <tag name="kernel.event_listener" event="sylius.cart_change" method="recalculateOrder"/>
+        </service>
+        <service id="sylius.listener.user_cart_recalculation" class="%sylius.listener.user_cart_recalculation.class%">
+            <argument type="service" id="sylius.cart_provider" />
+            <argument type="service" id="sylius.order_processing.order_recalculator" />
+            <tag name="kernel.event_listener" event="sylius.user.security.implicit_login" method="recalculateCartWhileLogin" />
+            <tag name="kernel.event_listener" event="security.interactive_login" method="recalculateCartWhileInteractiveLogin" />
         </service>
 
         <service id="sylius.active_promotions_by_channel_provider" class="%sylius.active_promotions_by_channel_provider.class%">

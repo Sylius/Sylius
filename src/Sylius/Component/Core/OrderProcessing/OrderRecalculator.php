@@ -13,7 +13,6 @@ namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Taxation\OrderTaxesApplicatorInterface;
-use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
 
 /**
