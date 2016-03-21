@@ -29,7 +29,7 @@ sylius:
       type: Vrsta
       types:
         country: Država
-        province: Županija
+        province: Pokrajina
         zone: Regija
       scope: Djelokrug
       select: Odaberite

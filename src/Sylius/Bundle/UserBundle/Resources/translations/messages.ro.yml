@@ -7,7 +7,7 @@ sylius:
       name: Nume
       roles: Roluri
     user:
-      email: E-mail
+      email: Adresă e-mail
       enabled: Activat
       password:
         label: Parolă
@@ -16,7 +16,7 @@ sylius:
       first_name: Prenume
       groups: Grupuri
       last_name: Nume
-      email: E-mail
+      email: Adresă e-mail
       phone_number: Număr de telefon
       billing_address: Adresa de facturare
       different_billing_address: Folosiți o adresă de facturare diferită?

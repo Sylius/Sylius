@@ -7,4 +7,5 @@ sylius:
       code: 代码
       name: 名称
       parent: 上一级
+      attributes: 属性
       options: 选项

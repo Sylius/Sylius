@@ -23,6 +23,8 @@ sylius:
       members: Jäsenet
       name: Nimi
       type: Tyyppi
+      types:
+        province: Lääni
       select: Valitse
     zone_member:
       select: Valitse

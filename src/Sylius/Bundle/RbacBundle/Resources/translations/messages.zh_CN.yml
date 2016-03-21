@@ -7,6 +7,7 @@ sylius:
       code: 代码
       name: 名称
       description: 描述
+      permissions: 权限
       parent: 上一级
     permission:
       code: 代码

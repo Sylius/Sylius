@@ -87,12 +87,14 @@ sylius:
         payment_methods: Mënyrat e pagesës
         payments: Pagesat
         permissions: Lejet
+        product_review: Recensionet e produktit
         products: Produktet
         promotions: Reklamat
         redirects: Riadreso
         report: Njoftimet
         roles: Funksionet
         routes: Rrugët
+        review: Recensionet
         sales: Porositë
         security_settings: Parametrat e sigurisë
         shipments: Dërgesat

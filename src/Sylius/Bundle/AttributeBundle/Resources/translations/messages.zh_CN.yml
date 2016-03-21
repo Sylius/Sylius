@@ -4,5 +4,7 @@
 sylius:
   form:
     attribute:
+      add: 新增
+      add_attributes: 添加属性
       code: 代码
       name: 名称

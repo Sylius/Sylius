@@ -8,6 +8,7 @@ sylius:
         price: 单价
         quantity: 数量
         variant: 变量
+      customer_group: 客户组
     block:
       body: 正文
       id: ID
@@ -98,6 +99,9 @@ sylius:
       sku: SKU
       weight: 重量
       width: 宽度
+    attribute:
+      product_attribute_value:
+        value: 值
     guest:
       email: 电子邮件
     product_association_type:

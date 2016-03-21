@@ -16,6 +16,7 @@ sylius:
     enabled: Toegestaan
     description: Omschrijving
     "no": false
+    status: Status
     success: Succes
     "yes": true
     new: Nieuw

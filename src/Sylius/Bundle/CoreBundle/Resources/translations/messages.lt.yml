@@ -119,6 +119,6 @@ sylius:
         attribute: Atributas
         value: Reikšmė
     guest:
-      email: Elektroninis paštas
+      email: El. paštas
     product_association_type:
       name: Pavadinimas
