@@ -67,6 +67,7 @@ class Configuration implements ConfigurationInterface
                                         ->addDefaultsIfNotSet()
                                         ->children()
                                             ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
+                                            ->scalarNode('interface')->isRequired()->cannotBeEmpty()->end()
                                             ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                             ->scalarNode('factory')->defaultValue(Factory::class)->cannotBeEmpty()->end()
                                             ->scalarNode('repository')->cannotBeEmpty()->end()
