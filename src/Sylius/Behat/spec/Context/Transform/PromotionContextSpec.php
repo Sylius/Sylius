@@ -15,10 +15,8 @@ use Behat\Behat\Context\Context;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Behat\Context\Transform\PromotionContext;
-use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @mixin PromotionContext
@@ -27,9 +25,9 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class PromotionContextSpec extends ObjectBehavior
 {
-    function let(PromotionRepositoryInterface $promotionRepository, RepositoryInterface $couponRepository)
+    function let(PromotionRepositoryInterface $promotionRepository)
     {
-        $this->beConstructedWith($promotionRepository, $couponRepository);
+        $this->beConstructedWith($promotionRepository);
     }
 
     function it_is_initializable()
@@ -58,20 +56,5 @@ class PromotionContextSpec extends ObjectBehavior
         $promotionRepository->findOneBy(['name' => 'Wrong Promotion'])->willReturn(null);
 
         $this->shouldThrow(\InvalidArgumentException::class)->during('getPromotionByName', ['Wrong Promotion']);
-    }
-
-    function it_gets_coupon_by_its_code(RepositoryInterface $couponRepository, CouponInterface $coupon)
-    {
-        $coupon->getCode()->willReturn('BEST-CODE');
-        $couponRepository->findOneBy(['code' => 'BEST-CODE'])->willReturn($coupon);
-
-        $this->getCouponByCode('BEST-CODE');
-    }
-
-    function it_throws_exception_when_coupon_with_given_code_was_not_found(RepositoryInterface $couponRepository)
-    {
-        $couponRepository->findOneBy(['code' => 'NO-CODE'])->willReturn(null);
-
-        $this->shouldThrow(\InvalidArgumentException::class)->during('getCouponByCode', ['NO-CODE']);
     }
 }

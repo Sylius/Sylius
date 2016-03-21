@@ -13,7 +13,6 @@ namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
@@ -26,20 +25,12 @@ final class PromotionContext implements Context
     private $promotionRepository;
 
     /**
-     * @var RepositoryInterface
-     */
-    private $couponRepository;
-
-    /**
      * @param PromotionRepositoryInterface $promotionRepository
-     * @param RepositoryInterface $couponRepository
      */
     public function __construct(
-        PromotionRepositoryInterface $promotionRepository,
-        RepositoryInterface $couponRepository
+        PromotionRepositoryInterface $promotionRepository
     ) {
         $this->promotionRepository = $promotionRepository;
-        $this->couponRepository = $couponRepository;
     }
 
     /**
@@ -57,22 +48,5 @@ final class PromotionContext implements Context
         }
 
         return $promotion;
-    }
-
-    /**
-     * @Transform /^coupon "([^"]+)"$/
-     * @Transform /^"([^"]+)" coupon$/
-     * @Transform :coupon
-     */
-    public function getCouponByCode($couponCode)
-    {
-        $coupon = $this->couponRepository->findOneBy(['code' => $couponCode]);
-        if (null === $coupon) {
-            throw new \InvalidArgumentException(
-                sprintf('Coupon with code "%s" does not exist in the coupon repository.', $couponCode)
-            );
-        }
-
-        return $coupon;
     }
 }

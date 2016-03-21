@@ -13,10 +13,8 @@ namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
-use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -34,23 +32,15 @@ final class AddressingContext implements Context
     private $countryNameConverter;
 
     /**
-     * @var RepositoryInterface
-     */
-    private $countryRepository;
-
-    /**
      * @param FactoryInterface $addressFactory
      * @param CountryNameConverterInterface $countryNameConverter
-     * @param RepositoryInterface $countryRepository
      */
     public function __construct(
         FactoryInterface $addressFactory,
-        CountryNameConverterInterface $countryNameConverter,
-        RepositoryInterface $countryRepository
+        CountryNameConverterInterface $countryNameConverter
     ) {
         $this->addressFactory = $addressFactory;
         $this->countryNameConverter = $countryNameConverter;
-        $this->countryRepository = $countryRepository;
     }
 
     /**
@@ -61,21 +51,6 @@ final class AddressingContext implements Context
         $countryCode = $this->countryNameConverter->convertToCode($countryName);
 
         return $this->createAddress($countryCode);
-    }
-
-    /**
-     * @Transform /^country "([^"]+)"$/
-     */
-    public function getCountryByName($countryName)
-    {
-        $countryCode = $this->countryNameConverter->convertToCode($countryName);
-        $country = $this->countryRepository->findOneBy(['code' => $countryCode]);
-
-        if (null === $country) {
-            throw new \InvalidArgumentException(sprintf('Country with name %s does not exist', $countryName));
-        }
-
-        return $country;
     }
 
     /**

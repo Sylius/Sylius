@@ -33,9 +33,9 @@ final class ThemeContext implements Context
     }
 
     /**
-     * @Transform :theme
      * @Transform /^"([^"]+)" theme$/
      * @Transform /^theme "([^"]+)"$/
+     * @Transform :theme
      */
     public function getThemeByThemeTitle($themeTitle)
     {

@@ -17,7 +17,7 @@ use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-final class ShippingContext implements Context
+final class ShippingMethodContext implements Context
 {
     /**
      * @var ShippingMethodRepositoryInterface
@@ -33,9 +33,9 @@ final class ShippingContext implements Context
     }
 
     /**
-     * @Transform :shippingMethodName shipping method
-     * @Transform shipping method :shippingMethodName
-     * @Transform /^"([^"]*)" shipping method$/
+     * @Transform /^"([^"]+)" shipping method$/
+     * @Transform /^shipping method "([^"]+)"$/
+     * @Transform :shippingMethod
      */
     public function getShippingMethodByName($shippingMethodName)
     {

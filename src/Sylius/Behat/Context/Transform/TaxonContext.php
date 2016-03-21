@@ -33,8 +33,8 @@ final class TaxonContext implements Context
     }
 
     /**
-     * @Transform classified as :taxonName
-     * @Transform belongs to :taxonName
+     * @Transform /^classified as "([^"]+)"$/
+     * @Transform /^belongs to "([^"]+)"$/
      */
     public function getTaxonByName($taxonName)
     {

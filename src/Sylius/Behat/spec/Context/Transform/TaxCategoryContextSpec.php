@@ -19,7 +19,7 @@ use Sylius\Component\Taxation\Repository\TaxCategoryRepositoryInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class TaxContextSpec extends ObjectBehavior
+class TaxCategoryContextSpec extends ObjectBehavior
 {
     function let(TaxCategoryRepositoryInterface $taxCategoryRepository) {
         $this->beConstructedWith($taxCategoryRepository);
@@ -27,7 +27,7 @@ class TaxContextSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Behat\Context\Transform\TaxContext');
+        $this->shouldHaveType('Sylius\Behat\Context\Transform\TaxCategoryContext');
     }
 
     function it_implements_context_interface()
