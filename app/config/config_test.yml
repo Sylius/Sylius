@@ -3,7 +3,6 @@
 
 imports:
     - { resource: config.yml }
-    - { resource: config_test.php }
 
 parameters:
     sylius.order.allow_guest_order: true
@@ -53,3 +52,12 @@ monolog:
 
 twig:
     exception_controller: 'Sylius\Bundle\CoreBundle\Controller\VerboseExceptionController::showAction'
+
+payum:
+    gateways:
+        paypal_express_checkout:
+            paypal_express_checkout_nvp:
+                username: EDITME
+                password: EDITME
+                signature: EDITME
+                sandbox: true
