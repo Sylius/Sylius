@@ -24,6 +24,7 @@ sylius:
       flexible_rate_configuration:
         label: Taux variable
       per_unit_rate_configuration:
+        label: Montant forfaitaire par unité
         amount: Montant
       weight_rate_configuration:
         label: Taux basé sur le poids

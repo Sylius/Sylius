@@ -9,3 +9,4 @@ sylius:
       name: 名称
     option_value:
       add_value: 添加值
+      value: 值

@@ -7,5 +7,6 @@ sylius:
       main:
         configuration:
           header: Konfigurimi
+          tax_categories: Kategoritë e taksimit
           countries: Vendet
           locales: Rajonet

@@ -5,7 +5,10 @@ sylius:
   backend:
     menu:
       main:
+        api_clients: API 客户端
+        archetypes: 产品原型
         assortment: 分类
+        attributes: 配置属性
         blocks: 块
         channels: 频道
         configuration: 配置
@@ -39,7 +42,9 @@ sylius:
         taxons: 分类
         zones: 区域
       sidebar:
+        archetypes: 产品原型
         assortment: 分类
+        attributes: 配置属性
         blocks: 块
         channels: 频道
         configuration: 配置

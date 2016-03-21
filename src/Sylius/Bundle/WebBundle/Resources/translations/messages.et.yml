@@ -1,4 +1,0 @@
-sylius:
-    ui:
-        'no': false
-        'yes': true
