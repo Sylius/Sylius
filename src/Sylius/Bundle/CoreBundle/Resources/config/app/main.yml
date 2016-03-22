@@ -5,11 +5,7 @@ imports:
     - { resource: payum.yml }
     - { resource: cmf.yml }
 
-    - { resource: @SyliusPaymentBundle/Resources/config/state-machine.yml }
-    - { resource: @SyliusShippingBundle/Resources/config/state-machine.yml }
-    - { resource: @SyliusOrderBundle/Resources/config/state-machine.yml }
-    - { resource: @SyliusInventoryBundle/Resources/config/state-machine.yml }
-    - { resource: @SyliusCoreBundle/Resources/config/state-machine.yml }
+    - { resource: ../state_machine.yml }
 
 twig:
     exception_controller: 'FOS\RestBundle\Controller\ExceptionController::showAction'
