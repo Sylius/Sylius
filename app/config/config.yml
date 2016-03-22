@@ -3,7 +3,6 @@
 
 imports:
     - { resource: parameters.yml }
-    - { resource: migrations.yml }
     - { resource: @SyliusCoreBundle/Resources/config/app/main.yml }
     - { resource: @SyliusAdminBundle/Resources/config/grids.yml }
 
