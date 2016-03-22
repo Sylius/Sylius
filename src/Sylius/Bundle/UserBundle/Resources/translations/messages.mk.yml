@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        user:
-            email: Е-пошта
-        customer:
-            email: Е-пошта
-            phone_number: Телефонски Број
+  form:
+    user:
+      email: Е-пошта
+    customer:
+      email: Е-пошта
+      phone_number: Телефонски Број
