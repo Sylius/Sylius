@@ -65,9 +65,6 @@ doctrine:
                     softdeleteable:
                         class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
                         enabled: true
-                dql:
-                    string_functions:
-                        MATCH: Sylius\Bundle\SearchBundle\Extension\Doctrine\MatchAgainstFunction
 
 doctrine_phpcr:
     session:
