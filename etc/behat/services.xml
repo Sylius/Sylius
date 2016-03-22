@@ -29,6 +29,7 @@
         <parameter key="sylius.behat.page.admin.crud.index.class">Sylius\Behat\Page\Admin\Crud\IndexPage</parameter>
         <parameter key="sylius.behat.page.admin.crud.create.class">Sylius\Behat\Page\Admin\Crud\CreatePage</parameter>
         <parameter key="sylius.behat.page.admin.crud.update.class">Sylius\Behat\Page\Admin\Crud\UpdatePage</parameter>
+        <parameter key="sylius.behat.service.accessor.notification_accessor.class">Sylius\Behat\Service\Accessor\NotificationAccessor</parameter>
     </parameters>
     <services>
         <service id="mink.default_session" class="Behat\Mink\Session" factory-service="mink" factory-method="getSession" lazy="true" scope="scenario" public="false" />
@@ -74,5 +75,9 @@
         </service>
         <service id="sylius.behat.page.admin.crud.create" class="%sylius.behat.page.admin.crud.create.class%" parent="sylius.behat.symfony_page" abstract="true" scope="scenario" public="false" />
         <service id="sylius.behat.page.admin.crud.update" class="%sylius.behat.page.admin.crud.update.class%" parent="sylius.behat.symfony_page" abstract="true" scope="scenario" public="false" />
+
+        <service id="sylius.behat.service.accessor.notification_accessor" class="%sylius.behat.service.accessor.notification_accessor.class%" scope="scenario" public="false">
+            <argument type="service" id="mink.default_session" />
+        </service>
     </services>
 </container>

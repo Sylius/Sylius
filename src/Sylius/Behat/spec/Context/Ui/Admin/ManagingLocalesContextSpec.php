@@ -12,11 +12,11 @@
 namespace spec\Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use PhpSpec\Exception\Example\NotEqualException;
 use PhpSpec\ObjectBehavior;
 use Sylius\Behat\Context\Ui\Admin\ManagingLocalesContext;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Locale\CreatePageInterface;
+use Sylius\Behat\Service\Accessor\NotificationAccessorInterface;
 
 /**
  * @mixin ManagingLocalesContext
@@ -25,9 +25,12 @@ use Sylius\Behat\Page\Admin\Locale\CreatePageInterface;
  */
 class ManagingLocalesContextSpec extends ObjectBehavior
 {
-    function let(IndexPageInterface $indexPage, CreatePageInterface $createPage)
-    {
-        $this->beConstructedWith($indexPage, $createPage);
+    function let(
+        CreatePageInterface $createPage,
+        IndexPageInterface $indexPage,
+        NotificationAccessorInterface $notificationAccessor
+    ) {
+        $this->beConstructedWith($createPage, $indexPage, $notificationAccessor);
     }
 
     function it_is_initializable()
@@ -61,28 +64,28 @@ class ManagingLocalesContextSpec extends ObjectBehavior
         $this->iAdd();
     }
 
-    function it_asserts_that_resource_was_successfully_created(IndexPageInterface $indexPage)
+    function it_asserts_that_resource_was_successfully_created(NotificationAccessorInterface $notificationAccessor)
     {
-        $indexPage->hasSuccessMessage()->willReturn(true);
-        $indexPage->isSuccessfullyCreated()->willReturn(true);
+        $notificationAccessor->hasSuccessMessage()->willReturn(true);
+        $notificationAccessor->isSuccessfullyCreatedFor(ManagingLocalesContext::RESOURCE_NAME)->willReturn(true);
 
-        $this->iShouldBeNotifiedAboutSuccess();
+        $this->iShouldBeNotifiedAboutSuccessfulCreation();
     }
 
-    function it_throws_an_exception_if_there_is_no_success_message(IndexPageInterface $indexPage)
+    function it_throws_an_exception_if_there_is_no_success_message(NotificationAccessorInterface $notificationAccessor)
     {
-        $indexPage->hasSuccessMessage()->willReturn(false);
-        $indexPage->isSuccessfullyCreated()->willReturn(true);
+        $notificationAccessor->hasSuccessMessage()->willReturn(false);
+        $notificationAccessor->isSuccessfullyCreatedFor(ManagingLocalesContext::RESOURCE_NAME)->willReturn(true);
 
-        $this->shouldThrow(NotEqualException::class)->during('iShouldBeNotifiedAboutSuccess');
+        $this->shouldThrow(\InvalidArgumentException::class)->during('iShouldBeNotifiedAboutSuccessfulCreation');
     }
 
-    function it_throws_an_exception_if_resource_was_not_successfully_created(IndexPageInterface $indexPage)
+    function it_throws_an_exception_if_resource_was_not_successfully_created(NotificationAccessorInterface $notificationAccessor)
     {
-        $indexPage->hasSuccessMessage()->willReturn(true);
-        $indexPage->isSuccessfullyCreated()->willReturn(false);
+        $notificationAccessor->hasSuccessMessage()->willReturn(true);
+        $notificationAccessor->isSuccessfullyCreatedFor(ManagingLocalesContext::RESOURCE_NAME)->willReturn(false);
 
-        $this->shouldThrow(NotEqualException::class)->during('iShouldBeNotifiedAboutSuccess');
+        $this->shouldThrow(\InvalidArgumentException::class)->during('iShouldBeNotifiedAboutSuccessfulCreation');
     }
 
     function it_asserts_if_store_is_available_in_given_language(IndexPageInterface $indexPage)
@@ -96,6 +99,6 @@ class ManagingLocalesContextSpec extends ObjectBehavior
     {
         $indexPage->isResourceOnPage(['name' => 'Norwegian'])->willReturn(false);
 
-        $this->shouldThrow(NotEqualException::class)->during('storeShouldBeAvailableInLanguage', ['Norwegian']);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('storeShouldBeAvailableInLanguage', ['Norwegian']);
     }
 }

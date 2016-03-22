@@ -14,6 +14,7 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -38,25 +39,32 @@ final class GeographicalContext implements Context
     private $countryNameConverter;
 
     /**
+     * @var SharedStorageInterface
+     */
+    private $sharedStorage;
+
+    /**
      * @param FactoryInterface $countryFactory
      * @param RepositoryInterface $countryRepository
      * @param CountryNameConverterInterface $countryNameConverter
+     * @param SharedStorageInterface $sharedStorage
      */
     public function __construct(
         FactoryInterface $countryFactory,
         RepositoryInterface $countryRepository,
-        CountryNameConverterInterface $countryNameConverter
+        CountryNameConverterInterface $countryNameConverter,
+        SharedStorageInterface $sharedStorage
     ) {
         $this->countryFactory = $countryFactory;
         $this->countryRepository = $countryRepository;
         $this->countryNameConverter = $countryNameConverter;
+        $this->sharedStorage = $sharedStorage;
     }
 
     /**
      * @Given /^the store ships to "([^"]+)"$/
      * @Given /^the store ships to "([^"]+)" and "([^"]+)"$/
      * @Given /^the store ships to "([^"]+)", "([^"]+)" and "([^"]+)"$/
-     * @Given the store operates in :country
      */
     public function storeShipsTo($country1, $country2 = null, $country3 = null)
     {
@@ -65,12 +73,38 @@ final class GeographicalContext implements Context
                 continue;
             }
 
-            $this->createCountryNamed(trim($countryName));
+            $this->countryRepository->add($this->createCountryNamed(trim($countryName)));
         }
     }
 
     /**
+     * @Given /^the store operates in "([^"]*)"$/
+     * @Given /^the store has country "([^"]*)"$/
+     */
+    public function theStoreOperatesIn($countryName)
+    {
+        $country = $this->createCountryNamed(trim($countryName));
+        $this->sharedStorage->set('country', $country);
+
+        $this->countryRepository->add($country);
+    }
+
+    /**
+     * @Given /^the store has disabled country "([^"]*)"$/
+     */
+    public function theStoreHasDisabledCountry($countryName)
+    {
+        $country = $this->createCountryNamed(trim($countryName));
+        $country->disable();
+
+        $this->sharedStorage->set('country', $country);
+        $this->countryRepository->add($country);
+    }
+
+    /**
      * @param string $name
+     *
+     * @return CountryInterface
      */
     private function createCountryNamed($name)
     {
@@ -78,6 +112,6 @@ final class GeographicalContext implements Context
         $country = $this->countryFactory->createNew();
         $country->setCode($this->countryNameConverter->convertToCode($name));
 
-        $this->countryRepository->add($country);
+        return $country;
     }
 }

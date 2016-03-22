@@ -26,8 +26,6 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
      * @var array
      */
     protected $elements = [
-        'message' => '.message',
-        'messageContent' => '.message > .content',
         'table' => '.table',
     ];
 
@@ -64,42 +62,6 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasSuccessMessage()
-    {
-        try {
-            return $this->getElement('message')->hasClass('positive');
-        } catch (ElementNotFoundException $exception) {
-            return false;
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isSuccessfullyCreated()
-    {
-        return $this->hasMessage(sprintf('Success %s has been successfully created.', ucfirst($this->resourceName)));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isSuccessfullyUpdated()
-    {
-        return $this->hasMessage(sprintf('Success %s has been successfully updated.', ucfirst($this->resourceName)));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isSuccessfullyDeleted()
-    {
-        return $this->hasMessage(sprintf('Success %s has been successfully deleted.', ucfirst($this->resourceName)));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function isResourceOnPage(array $parameters)
     {
         try {
@@ -108,18 +70,6 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
             return 1 === count($rows);
         } catch (\InvalidArgumentException $exception) {
             return false;
-        } catch (ElementNotFoundException $exception) {
-            return false;
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasMessage($message)
-    {
-        try {
-            return $message === $this->getElement('messageContent')->getText();
         } catch (ElementNotFoundException $exception) {
             return false;
         }

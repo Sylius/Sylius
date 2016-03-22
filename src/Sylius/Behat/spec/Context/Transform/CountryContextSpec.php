@@ -34,10 +34,11 @@ class CountryContextSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Behat\Context\Transform\CountryContext');
     }
 
-    function it_implements_context_interface()
+    function it_is_context()
     {
         $this->shouldImplement(Context::class);
     }
+
     function it_gets_country_based_on_given_country_name(
         CountryNameConverterInterface $countryNameConverter,
         RepositoryInterface $countryRepository,
