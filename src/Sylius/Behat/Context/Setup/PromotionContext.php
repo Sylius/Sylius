@@ -280,7 +280,7 @@ final class PromotionContext implements Context
         $discount,
         TaxonInterface $taxon
     ) {
-        $rule = $this->ruleFactory->createTaxon([$taxon->getId()]);
+        $rule = $this->ruleFactory->createTaxon([$taxon->getCode()]);
 
         $this->createFixedPromotion($promotion, $discount, [], $rule);
     }
@@ -293,7 +293,7 @@ final class PromotionContext implements Context
         $discount,
         array $taxons
     ) {
-        $rule = $this->ruleFactory->createTaxon([$taxons[0]->getId(), $taxons[1]->getId()]);
+        $rule = $this->ruleFactory->createTaxon([$taxons[0]->getCode(), $taxons[1]->getCode()]);
 
         $this->createFixedPromotion($promotion, $discount, [], $rule);
     }

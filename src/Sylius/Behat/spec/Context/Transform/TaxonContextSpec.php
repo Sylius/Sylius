@@ -48,7 +48,7 @@ class TaxonContextSpec extends ObjectBehavior
         $taxonRepository->findOneByName('Bows')->willReturn($bows);
         $taxonRepository->findOneByName('Swords')->willReturn($swords);
 
-        $this->getTaxonsByNames('Bows', 'Swords')->willReturn([$bows, $swords]);
+        $this->getTaxonsByNames('Bows', 'Swords')->shouldReturn([$bows, $swords]);
     }
 
     function it_throws_exception_if_taxon_with_given_name_does_not_exist($taxonRepository)

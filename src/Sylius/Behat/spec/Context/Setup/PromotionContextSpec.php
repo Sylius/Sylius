@@ -294,10 +294,10 @@ class PromotionContextSpec extends ObjectBehavior
         PromotionInterface $promotion,
         RuleFactoryInterface $ruleFactory,
         RuleInterface $rule,
-        TaxonInterface $taxon
+        TaxonInterface $tanks
     ) {
-        $taxon->getId()->willReturn(1);
-        $ruleFactory->createTaxon([1])->willReturn($rule);
+        $tanks->getCode()->willReturn('tanks');
+        $ruleFactory->createTaxon(['tanks'])->willReturn($rule);
 
         $actionFactory->createFixedDiscount(1000)->willReturn($action);
         $action->getConfiguration()->willReturn([]);
@@ -308,7 +308,7 @@ class PromotionContextSpec extends ObjectBehavior
 
         $objectManager->flush()->shouldBeCalled();
 
-        $this->thePromotionGivesOffIfOrderContainsProductsClassifiedAs($promotion, 1000, $taxon);
+        $this->thePromotionGivesOffIfOrderContainsProductsClassifiedAs($promotion, 1000, $tanks);
     }
 
     function it_creates_fixed_discount_promotion_with_taxon_rule_for_multiple_taxons(
@@ -318,13 +318,13 @@ class PromotionContextSpec extends ObjectBehavior
         PromotionInterface $promotion,
         RuleFactoryInterface $ruleFactory,
         RuleInterface $rule,
-        TaxonInterface $firstTaxon,
-        TaxonInterface $secondTaxon
+        TaxonInterface $tanks,
+        TaxonInterface $cannons
     ) {
-        $firstTaxon->getId()->willReturn(1);
-        $secondTaxon->getId()->willReturn(4);
+        $tanks->getCode()->willReturn('tanks');
+        $cannons->getCode()->willReturn('cannons');
 
-        $ruleFactory->createTaxon([1, 4])->willReturn($rule);
+        $ruleFactory->createTaxon(['tanks', 'cannons'])->willReturn($rule);
 
         $actionFactory->createFixedDiscount(1000)->willReturn($action);
         $action->getConfiguration()->willReturn([]);
@@ -335,6 +335,6 @@ class PromotionContextSpec extends ObjectBehavior
 
         $objectManager->flush()->shouldBeCalled();
 
-        $this->thePromotionGivesOffIfOrderContainsProductsClassifiedAsOr($promotion, 1000, [$firstTaxon, $secondTaxon]);
+        $this->thePromotionGivesOffIfOrderContainsProductsClassifiedAsOr($promotion, 1000, [$tanks, $cannons]);
     }
 }

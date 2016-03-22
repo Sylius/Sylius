@@ -45,7 +45,7 @@ Feature: Receiving discount based on products from specific taxon
     Scenario: Receiving discount on order while buying product from both of promoted taxon
         Given the promotion gives "€10.00" off if order contains products classified as "T-Shirts"
         And there is a promotion "Mugs promotion"
-        Given the promotion gives "€5.00" off if order contains products classified as "Mugs"
+        And this promotion gives "€5.00" off if order contains products classified as "Mugs"
         When I add product "PHP T-Shirt" to the cart
         And I add product "PHP Mug" to the cart
         And my cart total should be "€105.00"
