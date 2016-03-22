@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.order_processing.inventory_handler.class">Sylius\Component\Core\OrderProcessing\InventoryHandler</parameter>
+        <parameter key="sylius.order_processing.state_resolver.class">Sylius\Component\Core\OrderProcessing\StateResolver</parameter>
+        <parameter key="sylius.order_processing.shipment_processor.class">Sylius\Component\Core\OrderProcessing\OrderShipmentProcessor</parameter>
+        <parameter key="sylius.order_processing.payment_processor.class">Sylius\Component\Core\OrderProcessing\PaymentProcessor</parameter>
+        <parameter key="sylius.order_processing.shipping_processor.class">Sylius\Component\Core\OrderProcessing\ShippingChargesProcessor</parameter>
+        <parameter key="sylius.order_processing.prices_recalculator.class">Sylius\Component\Core\OrderProcessing\PricesRecalculator</parameter>
+        <parameter key="sylius.order_processing.order_recalculator.class">Sylius\Component\Core\OrderProcessing\OrderRecalculator</parameter>
+
+        <parameter key="sylius.order.purger.class">Sylius\Bundle\CoreBundle\Purger\ExpiredOrdersPurger</parameter>
+        <parameter key="sylius.order.releaser.class">Sylius\Bundle\CoreBundle\Releaser\ExpiredOrdersReleaser</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.order_processing.inventory_handler" class="%sylius.order_processing.inventory_handler.class%">
+            <argument type="service" id="sylius.inventory_operator" />
+            <argument type="service" id="sylius.factory.order_item_unit" />
+            <argument type="service" id="sm.factory" />
+        </service>
+        <service id="sylius.order_processing.state_resolver" class="%sylius.order_processing.state_resolver.class%" />
+        <service id="sylius.order_processing.shipment_processor" class="%sylius.order_processing.shipment_processor.class%">
+            <argument type="service" id="sylius.factory.shipment" />
+        </service>
+        <service id="sylius.order_processing.payment_processor" class="%sylius.order_processing.payment_processor.class%">
+            <argument type="service" id="sylius.factory.payment" />
+            <argument type="service" id="sylius.repository.payment_method" />
+        </service>
+        <service id="sylius.order_processing.shipping_processor" class="%sylius.order_processing.shipping_processor.class%">
+            <argument type="service" id="sylius.factory.adjustment" />
+            <argument type="service" id="sylius.shipping_calculator" />
+        </service>
+        <service id="sylius.order_processing.prices_recalculator" class="%sylius.order_processing.prices_recalculator.class%">
+            <argument type="service" id="sylius.price_calculator" />
+        </service>
+        <service id="sylius.order_processing.order_recalculator" class="%sylius.order_processing.order_recalculator.class%">
+            <argument type="service" id="sylius.taxation.order_taxes_applicator" />
+            <argument type="service" id="sylius.order_processing.prices_recalculator" />
+            <argument type="service" id="sylius.promotion_processor" />
+            <argument type="service" id="sylius.order_processing.shipping_processor" />
+        </service>
+
+        <service id="sylius.order.purger" class="%sylius.order.purger.class%">
+            <argument type="service" id="sylius.manager.order" />
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sm.factory" />
+        </service>
+
+        <service id="sylius.order.releaser" class="%sylius.order.releaser.class%">
+            <argument type="service" id="sylius.manager.order" />
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sm.factory" />
+        </service>
+    </services>
+
+</container>

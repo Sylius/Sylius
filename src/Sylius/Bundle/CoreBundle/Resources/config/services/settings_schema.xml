@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.settings_schema.general.class">Sylius\Bundle\CoreBundle\Settings\GeneralSettingsSchema</parameter>
+        <parameter key="sylius.settings_schema.taxation.class">Sylius\Bundle\CoreBundle\Settings\TaxationSettingsSchema</parameter>
+        <parameter key="sylius.settings_schema.security.class">Sylius\Bundle\CoreBundle\Settings\SecuritySettingsSchema</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.settings_schema.general" class="%sylius.settings_schema.general.class%">
+            <argument type="collection">
+                <argument key="currency">%sylius.money.currency%</argument>
+                <argument key="locale">%sylius.locale%</argument>
+            </argument>
+            <tag name="sylius.settings_schema" namespace="sylius_general" />
+        </service>
+        <service id="sylius.settings_schema.taxation" class="%sylius.settings_schema.taxation.class%">
+            <argument type="service" id="sylius.repository.zone" />
+            <tag name="sylius.settings_schema" namespace="sylius_taxation" />
+        </service>
+        <service id="sylius.settings_schema.security" class="%sylius.settings_schema.security.class%">
+            <tag name="sylius.settings_schema" namespace="sylius_security" />
+        </service>
+    </services>
+
+</container>

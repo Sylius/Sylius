@@ -153,8 +153,8 @@ class Configuration implements ConfigurationInterface
     /**
      * Helper method to append checkout step nodes.
      *
-     * @param $name
-     * @param $defaultTemplate
+     * @param string $name
+     * @param string $defaultTemplate
      *
      * @return NodeDefinition
      */

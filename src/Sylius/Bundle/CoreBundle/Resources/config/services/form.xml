@@ -17,11 +17,6 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.checkout_form.addressing.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressingStepType</parameter>
-        <parameter key="sylius.checkout_form.shipping.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShippingStepType</parameter>
-        <parameter key="sylius.checkout_form.shipment.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShipmentType</parameter>
-        <parameter key="sylius.checkout_form.payment.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\PaymentStepType</parameter>
-
         <parameter key="sylius.form.type.image.class">Sylius\Bundle\CoreBundle\Form\Type\ImageType</parameter>
         <parameter key="sylius.form.type.list.class">Sylius\Bundle\CoreBundle\Form\Type\ListType</parameter>
         <parameter key="sylius.form.type.advanced_order.class">Sylius\Bundle\CoreBundle\Form\Type\AdvancedOrderType</parameter>
@@ -50,32 +45,10 @@
         <parameter key="sylius.form.type.promotion_action.add_product_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Action\AddProductConfigurationType</parameter>
 
         <parameter key="sylius.form.type.data_transformer.taxons_to_codes.class">Sylius\Bundle\CoreBundle\Form\DataTransformer\TaxonsToCodesTransformer</parameter>
+        <parameter key="sylius.form.type.product_review.class">Sylius\Bundle\CoreBundle\Form\Type\ProductReviewType</parameter>
     </parameters>
 
     <services>
-        <!-- checkout forms -->
-        <service id="sylius.checkout_form.addressing" class="%sylius.checkout_form.addressing.class%">
-            <argument>%sylius.model.cart.class%</argument>
-            <tag name="form.type" alias="sylius_checkout_addressing" />
-        </service>
-        <service id="sylius.checkout_form.shipping" class="%sylius.checkout_form.shipping.class%">
-            <argument>%sylius.model.order.class%</argument>
-            <argument>%sylius.validation_groups.order%</argument>
-            <argument type="service" id="sylius.context.channel"/>
-            <tag name="form.type" alias="sylius_checkout_shipping" />
-        </service>
-        <service id="sylius.checkout_form.shipment" class="%sylius.checkout_form.shipment.class%">
-            <argument>%sylius.model.shipment.class%</argument>
-            <argument type="service" id="translator" />
-            <tag name="form.type" alias="sylius_checkout_shipment" />
-        </service>
-        <service id="sylius.checkout_form.payment" class="%sylius.checkout_form.payment.class%">
-            <argument>%sylius.model.order.class%</argument>
-            <argument>%sylius.validation_groups.order%</argument>
-            <argument type="service" id="sylius.context.channel" />
-            <tag name="form.type" alias="sylius_checkout_payment" />
-        </service>
-
         <service id="sylius.form.type.cart" class="%sylius.form.type.cart.class%">
             <argument>%sylius.model.cart.class%</argument>
             <argument>%sylius.validation_groups.cart%</argument>

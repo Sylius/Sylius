@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.taxation.order_taxes_applicator.class">Sylius\Component\Core\Taxation\OrderTaxesApplicator</parameter>
+        <parameter key="sylius.taxation.order_shipment_taxes_by_zone_applicator.class">Sylius\Component\Core\Taxation\OrderShipmentTaxesByZoneApplicator</parameter>
+        <parameter key="sylius.taxation.order_items_taxes_by_zone_applicator.class">Sylius\Component\Core\Taxation\OrderItemsTaxesByZoneApplicator</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.taxation.order_shipment_taxes_by_zone_applicator" class="%sylius.taxation.order_shipment_taxes_by_zone_applicator.class%">
+            <argument type="service" id="sylius.tax_calculator" />
+            <argument type="service" id="sylius.factory.adjustment" />
+            <argument type="service" id="sylius.tax_rate_resolver" />
+        </service>
+        <service id="sylius.taxation.order_items_taxes_by_zone_applicator" class="%sylius.taxation.order_items_taxes_by_zone_applicator.class%">
+            <argument type="service" id="sylius.tax_calculator" />
+            <argument type="service" id="sylius.factory.adjustment" />
+            <argument type="service" id="sylius.integer_distributor" />
+            <argument type="service" id="sylius.tax_rate_resolver" />
+        </service>
+        <service id="sylius.taxation.order_taxes_applicator" class="%sylius.taxation.order_taxes_applicator.class%">
+            <argument type="service" id="sylius.provider.default_zone_provider" />
+            <argument type="service" id="sylius.taxation.order_shipment_taxes_by_zone_applicator" />
+            <argument type="service" id="sylius.taxation.order_items_taxes_by_zone_applicator" />
+            <argument type="service" id="sylius.zone_matcher" />
+        </service>
+    </services>
+
+</container>
