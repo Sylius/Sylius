@@ -9,14 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Tests;
+namespace Sylius\Bundle\CoreBundle\Test;
 
 use Doctrine\DBAL\Driver\PDOMySql\Driver;
 
-class MySqlDriver extends Driver
+final class MySqlDriver extends Driver
 {
+    /**
+     * @var Driver
+     */
     private static $connection;
 
+    /**
+     * {@inheritdoc}
+     */
     public function connect(array $params, $username = null, $password = null, array $driverOptions = [])
     {
         if (null === self::$connection) {
