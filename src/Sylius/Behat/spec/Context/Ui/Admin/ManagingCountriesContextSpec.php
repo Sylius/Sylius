@@ -200,4 +200,16 @@ class ManagingCountriesContextSpec extends ObjectBehavior
 
         $this->shouldThrow(\Exception::class)->during('iShouldNotBeAbleToChoose', ['France']);
     }
+
+    function it_asserts_that_country_code_field_is_disabled(UpdatePageInterface $countryUpdatePage)
+    {
+        $countryUpdatePage->isCodeFieldDisabled()->willReturn(true);
+        $this->theCodeFieldShouldBeDisabled();
+    }
+
+    function it_throws_not_equal_exception_if_country_code_field_is_not_disabled(UpdatePageInterface $countryUpdatePage)
+    {
+        $countryUpdatePage->isCodeFieldDisabled()->willReturn(false);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('theCodeFieldShouldBeDisabled');
+    }
 }

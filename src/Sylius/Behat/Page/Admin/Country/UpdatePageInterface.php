@@ -27,4 +27,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @throws \RuntimeException
      */
     public function disable();
+
+    /**
+     * @return bool
+     */
+    public function isCodeFieldDisabled();
 }

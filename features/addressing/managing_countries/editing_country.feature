@@ -25,7 +25,7 @@ Feature: Editing country
         Then I should be notified about successful edition
         And this country should be enabled
 
-    @todo
+    @ui
     Scenario: Seeing disabled code field while editing country
         Given the store has country "France"
         When I want to edit this country

@@ -126,15 +126,13 @@ final class ManagingCountriesContext implements Context
      */
     public function iShouldBeNotifiedAboutSuccessfulCreation()
     {
-        $doesSuccessMessageAppear = $this->notificationAccessor->hasSuccessMessage();
         Assert::true(
-            $doesSuccessMessageAppear,
+            $this->notificationAccessor->hasSuccessMessage(),
             sprintf('Message type is not positive')
         );
 
-        $doesSuccessfulCreationMessageAppear = $this->notificationAccessor->isSuccessfullyCreatedFor(self::RESOURCE_NAME);
         Assert::true(
-            $doesSuccessfulCreationMessageAppear,
+            $this->notificationAccessor->isSuccessfullyCreatedFor(self::RESOURCE_NAME),
             sprintf('Successful creation message does not appear')
         );
     }
@@ -144,15 +142,13 @@ final class ManagingCountriesContext implements Context
      */
     public function iShouldBeNotifiedAboutSuccessfulEdition()
     {
-        $doesSuccessMessageAppear = $this->notificationAccessor->hasSuccessMessage();
         Assert::true(
-            $doesSuccessMessageAppear,
+            $this->notificationAccessor->hasSuccessMessage(),
             'Message type is not positive'
         );
 
-        $doesSuccessfulEditionMessageAppear = $this->notificationAccessor->isSuccessfullyUpdatedFor(self::RESOURCE_NAME);
         Assert::true(
-            $doesSuccessfulEditionMessageAppear,
+            $this->notificationAccessor->isSuccessfullyUpdatedFor(self::RESOURCE_NAME),
             'Successful edition message does not appear'
         );
     }
@@ -162,9 +158,8 @@ final class ManagingCountriesContext implements Context
      */
     public function countryShouldAppearInTheStore(CountryInterface $country)
     {
-        $doesCountryExist = $this->countryIndexPage->isResourceOnPage(['code' => $country->getCode()]);
         Assert::true(
-            $doesCountryExist,
+            $this->countryIndexPage->isResourceOnPage(['code' => $country->getCode()]),
             sprintf('Country %s should exist but it does not', $country->getCode())
         );
     }
@@ -174,9 +169,8 @@ final class ManagingCountriesContext implements Context
      */
     public function thisCountryShouldBeEnabled(CountryInterface $country)
     {
-        $isCountryEnabled = $this->countryIndexPage->isCountryEnabled($country);
         Assert::true(
-            $isCountryEnabled,
+            $this->countryIndexPage->isCountryEnabled($country),
             sprintf('Country %s should be enabled but it is not', $country->getCode())
         );
     }
@@ -201,4 +195,14 @@ final class ManagingCountriesContext implements Context
         expect($this->countryCreatePage)->toThrow(ElementNotFoundException::class)->during('chooseName', [$name]);
     }
 
+    /**
+     * @Then the code field should be disabled
+     */
+    public function theCodeFieldShouldBeDisabled()
+    {
+        Assert::true(
+            $this->countryUpdatePage->isCodeFieldDisabled(),
+            'Code field should be disabled but is not'
+        );
+    }
 }
