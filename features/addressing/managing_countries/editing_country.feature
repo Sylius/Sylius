@@ -24,3 +24,9 @@ Feature: Editing country
         And I save my changes
         Then I should be notified about successful edition
         And this country should be enabled
+
+    @todo
+    Scenario: Seeing disabled code field while editing country
+        Given the store has country "France"
+        When I want to edit this country
+        Then the code field should be disabled
