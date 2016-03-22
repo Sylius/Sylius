@@ -1,38 +1,38 @@
 winzou_state_machine:
     sylius_payment:
-        class:         %sylius.model.payment.class%
+        class: %sylius.model.payment.class%
         property_path: state
-        graph:         sylius_payment
+        graph: sylius_payment
         state_machine_class: %sylius.state_machine.class%
         states:
-            new:        ~
-            unknown:    ~
-            pending:    ~
+            new: ~
+            unknown: ~
+            pending: ~
             processing: ~
-            completed:  ~
-            failed:     ~
-            cancelled:  ~
-            void:       ~
-            refunded:   ~
+            completed: ~
+            failed: ~
+            cancelled: ~
+            void: ~
+            refunded: ~
         transitions:
             create:
                 from: [new]
-                to:   pending
+                to: pending
             process:
                 from: [new, pending]
-                to:   processing
+                to: processing
             complete:
                 from: [new, pending, processing]
-                to:   completed
+                to: completed
             fail:
                 from: [new, pending, processing]
-                to:   failed
+                to: failed
             cancel:
                 from: [new, pending, processing]
-                to:   cancelled
+                to: cancelled
             refund:
                 from: [completed]
-                to:   refunded
+                to: refunded
             void:
                 from: [new, pending]
-                to:   void
+                to: void

@@ -1,48 +1,48 @@
 winzou_state_machine:
     sylius_order:
-        class:         %sylius.model.order.class%
+        class: %sylius.model.order.class%
         property_path: state
-        graph:         sylius_order
+        graph: sylius_order
         state_machine_class: %sylius.state_machine.class%
         states:
-            cart:        ~
+            cart: ~
             cart_locked: ~
-            pending:     ~
-            released:    ~
-            confirmed:   ~
-            shipped:     ~
-            abandoned:   ~
-            cancelled:   ~
-            returned:    ~
+            pending: ~
+            released: ~
+            confirmed: ~
+            shipped: ~
+            abandoned: ~
+            cancelled: ~
+            returned: ~
         transitions:
             lock_cart:
                 from: [cart]
-                to:   cart_locked
+                to: cart_locked
             unlock_cart:
                 from: [cart_locked]
-                to:   cart
+                to: cart
             create:
                 from: [cart]
-                to:   pending
+                to: pending
             release:
                 from: [pending]
-                to:   released
+                to: released
             confirm:
                 from: [cart, pending, released]
-                to:   confirmed
+                to: confirmed
             ship:
                 from: [confirmed]
-                to:   shipped
+                to: shipped
             abandon:
                 from: [cart, pending]
-                to:   abandoned
+                to: abandoned
             cancel:
                 from: [confirmed]
-                to:   cancelled
+                to: cancelled
             return:
                 from: [shipped]
-                to:   returned
+                to: returned
         callbacks:
             after:
                 sylius_complete: { on: 'create', do: [@sylius.callback.complete_order,           'completeOrder'], args: ['object'] }
-                sylius_number:   { on: 'create', do: [@sylius.sequence.doctrine_number_listener, 'enableEntity'],  args: ['object'] }
+                sylius_number: { on: 'create', do: [@sylius.sequence.doctrine_number_listener, 'enableEntity'],  args: ['object'] }
