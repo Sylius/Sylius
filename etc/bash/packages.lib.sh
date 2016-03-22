@@ -32,3 +32,25 @@ cast_package_argument_to_package_path() {
 
     echo "${package_path}"
 }
+
+# Argument 1: Cache key
+is_package_cache_fresh() {
+    local current_hash cached_hash
+
+    if [[ -f "${SYLIUS_CACHE_DIR}/composer-$1.lock" && -f "${SYLIUS_CACHE_DIR}/composer-$1.json.md5sum" ]]; then
+        current_hash="$(file_md5sum "composer.json")"
+        cached_hash="$(cat "${SYLIUS_CACHE_DIR}/composer-$1.json.md5sum")"
+
+        if [ "${current_hash}" = "${cached_hash}" ]; then
+            return 0
+        fi
+    fi
+
+    return 1
+}
+
+# Argument 1: Package path or name
+get_package_cache_key()
+{
+    text_md5sum "$(package_path_to_package_name "$1")"
+}
