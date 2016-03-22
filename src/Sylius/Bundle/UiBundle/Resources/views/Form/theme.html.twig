@@ -59,7 +59,7 @@
              data-form-type="collection"
                 {{ block('widget_container_attributes') }}
                 {% if prototype is defined and allow_add %}
-            data-prototype='{{ _self.collectionItem(prototype, allow_delete, button_delete_label, '__name__')|e }}'
+                    data-prototype='{{ _self.collectionItem(prototype, allow_delete, button_delete_label, '__name__')|e }}'
                 {%- endif -%}>
 
             {{ error(form.vars.errors) }}
