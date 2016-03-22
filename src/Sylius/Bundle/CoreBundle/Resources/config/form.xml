@@ -48,6 +48,8 @@
         <parameter key="sylius.form.type.promotion_rule.customer_group_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\CustomerGroupType</parameter>
         <parameter key="sylius.form.type.promotion_action.shipping_discount_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Action\ShippingDiscountConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_action.add_product_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Action\AddProductConfigurationType</parameter>
+
+        <parameter key="sylius.form.type.data_transformer.taxons_to_codes.class">Sylius\Bundle\CoreBundle\Form\DataTransformer\TaxonsToCodesTransformer</parameter>
     </parameters>
 
     <services>
@@ -140,6 +142,7 @@
             <tag name="form.type" alias="sylius_promotion_rule_shipping_country_configuration" />
         </service>
         <service id="sylius.form.type.promotion_rule.taxon_configuration" class="%sylius.form.type.promotion_rule.taxon_configuration.class%">
+            <argument type="service" id="sylius.form.type.data_transformer.taxons_to_codes" />
             <tag name="form.type" alias="sylius_promotion_rule_taxon_configuration" />
         </service>
         <service id="sylius.form.type.promotion_rule.contains_product_configuration" class="%sylius.form.type.promotion_rule.contains_product_configuration.class%">
@@ -169,6 +172,10 @@
         <service id="sylius.form.type.price_calculator.zone_based" class="%sylius.form.type.price_calculator.zone_based.class%">
             <argument type="service" id="sylius.repository.zone" />
             <tag name="form.type" alias="sylius_price_calculator_zone_based" />
+        </service>
+
+        <service id="sylius.form.type.data_transformer.taxons_to_codes" class="%sylius.form.type.data_transformer.taxons_to_codes.class%">
+            <argument type="service" id="sylius.repository.taxon" />
         </service>
     </services>
 
