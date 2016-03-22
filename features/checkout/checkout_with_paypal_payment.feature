@@ -1,4 +1,4 @@
-@checkout @paypal
+@checkout
 Feature: Checkout with PayPal Express Checkout
     In order to buy products
     As a Customer
@@ -53,11 +53,3 @@ Feature: Checkout with PayPal Express Checkout
         And I cancel my PayPal payment
         Then I should be redirected back to the order payment page
         And I should see two cancelled payments and new one ready to be paid
-
-    @ui @mink:firefox
-    Scenario: Being redirected to the PayPal Express Checkout page
-        Given I am logged in as "john@example.com"
-        And I added product "PHP T-Shirt" to the cart
-        When I proceed selecting "PayPal Express Checkout" payment method
-        And I confirm my order with paypal payment
-        Then I should be redirected to PayPal Express Checkout page

@@ -26,7 +26,6 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Scope;
 
@@ -70,7 +69,6 @@ final class MultiContainerExtension implements Extension
      */
     public function load(ContainerBuilder $container, array $config)
     {
-        $this->loadEnvironmentParameters($container);
         $this->enableLazyServicesSupport($container);
 
         $this->registerAutoloader($container);
@@ -182,15 +180,5 @@ final class MultiContainerExtension implements Extension
         $definition->addTag(EventDispatcherExtension::SUBSCRIBER_TAG);
 
         $container->setDefinition('sylius_multi_container.scope_manipulator', $definition);
-    }
-
-    /**
-     * @param ContainerBuilder $container
-     */
-    private function loadEnvironmentParameters(ContainerBuilder $container)
-    {
-        $basePath = $container->getParameter('paths.base');
-        $phpLoader = new PhpFileLoader($container, new FileLocator($basePath));
-        $phpLoader->load('etc/behat/services/environment_parameters.php');
     }
 }

@@ -51,4 +51,4 @@ default:
 
     gherkin:
         filters:
-            tags: "~@todo && ~@paypal"
+            tags: "~@todo"
