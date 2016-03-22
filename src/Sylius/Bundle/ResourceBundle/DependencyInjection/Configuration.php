@@ -167,6 +167,8 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->scalarNode('default_locale')->cannotBeEmpty()->end()
                         ->scalarNode('locale_provider')->defaultValue('sylius.translation.locale_provider.request')->cannotBeEmpty()->end()
+                        ->scalarNode('available_locales_provider')->defaultValue('sylius.translation.locales_provider.array')->cannotBeEmpty()->end()
+                        ->arrayNode('available_locales') ->prototype('scalar')->end()
                     ->end()
                 ->end()
             ->end()

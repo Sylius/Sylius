@@ -41,7 +41,6 @@
 
         <parameter key="sylius.translation.translatable_listener.doctrine.orm.class">Sylius\Bundle\ResourceBundle\EventListener\ORMTranslatableListener</parameter>
         <parameter key="sylius.translation.translatable_listener.doctrine.mongodb_odm.class">Sylius\Bundle\ResourceBundle\EventListener\MongoDBODMTranslatableListener</parameter>
-        <parameter key="sylius.translation.locale_provider.request.class">Sylius\Bundle\ResourceBundle\Provider\RequestLocaleProvider</parameter>
 
         <!-- Sylius State Machine -->
         <parameter key="sylius.state_machine.class">Sylius\Component\Resource\StateMachine\StateMachine</parameter>

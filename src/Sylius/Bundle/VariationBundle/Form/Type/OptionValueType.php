@@ -43,9 +43,9 @@ class OptionValueType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('translations', 'a2lix_translationsForms', [
-                'form_type' => sprintf('sylius_%s_option_value_translation', $this->variableName),
-                'label' => 'sylius.form.option.name',
+            ->add('translations', 'sylius_translations', [
+                'type' => sprintf('sylius_%s_option_value_translation', $this->variableName),
+                'label' => 'sylius.form.option.presentation',
             ])
             ->addEventSubscriber(new AddCodeFormSubscriber())
         ;

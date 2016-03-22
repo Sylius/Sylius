@@ -61,7 +61,7 @@ class ProductTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
         $builder
-            ->add('translations', 'a2lix_translationsForms', Argument::cetera())
+            ->add('translations', 'sylius_translations', Argument::cetera())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;

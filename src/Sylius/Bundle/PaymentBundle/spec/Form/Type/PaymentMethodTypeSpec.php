@@ -38,7 +38,7 @@ class PaymentMethodTypeSpec extends ObjectBehavior
         FormBuilder $builder
     ) {
         $builder
-            ->add('translations', 'a2lix_translationsForms', Argument::any())
+            ->add('translations', 'sylius_translations', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder);
 

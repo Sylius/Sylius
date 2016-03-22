@@ -289,6 +289,7 @@ sylius_resource:
     translation:
         default_locale: %sylius.locale%
         locale_provider: sylius.translation.locale_provider.contextual
+        available_locales_provider: sylius.translation.locales_provider
 
 sylius_mailer:
     templates:

@@ -27,7 +27,11 @@ class BookApiTest extends JsonApiTestCase
         $data =
 <<<EOT
         {
-            "title": "Star Wars: Dark Disciple",
+            "translations": {
+                "en_US": {
+                    "title": "Star Wars: Dark Disciple"
+                }
+            },
             "author": "Christie Golden"
         }
 EOT;
@@ -47,7 +51,14 @@ EOT;
         $data =
 <<<EOT
         {
-            "title": "Star Wars: Dark Disciple",
+             "translations": {
+                "en_US": {
+                    "title": "Star Wars: Dark Disciple"
+                },
+                "pl_PL": {
+                    "title": "Gwiezdne Wojny: Mroczny Uczeń"
+                }
+            },
             "author": "Christie Golden"
         }
 EOT;
@@ -67,7 +78,7 @@ EOT;
         $data =
  <<<EOT
         {
-            "title": "Star Wars: Dark Disciple"
+            "author": "Christie Golden"
         }
 EOT;
 

@@ -1,4 +1,6 @@
 AppBundle\Entity\Book:
     book{1..22}:
+        fallbackLocale: en_US
+        currentLocale:  en_US
         title: Book <current()>
         author: <firstName()> <lastName()>

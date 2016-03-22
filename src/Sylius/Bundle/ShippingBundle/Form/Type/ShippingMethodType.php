@@ -67,8 +67,8 @@ class ShippingMethodType extends AbstractResourceType
         $builder
             ->addEventSubscriber(new BuildShippingMethodFormSubscriber($this->calculatorRegistry, $builder->getFormFactory(), $this->formRegistry))
             ->addEventSubscriber(new AddCodeFormSubscriber())
-            ->add('translations', 'a2lix_translationsForms', [
-                'form_type' => 'sylius_shipping_method_translation',
+            ->add('translations', 'sylius_translations', [
+                'type' => 'sylius_shipping_method_translation',
                 'label' => 'sylius.form.shipping_method.name',
             ])
             ->add('category', 'sylius_shipping_category_choice', [

@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\Provider;
 
 use Sylius\Component\Resource\Provider\LocaleProviderInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
@@ -75,6 +76,14 @@ class RequestLocaleProvider implements LocaleProviderInterface, EventSubscriberI
      * {@inheritdoc}
      */
     public function getFallbackLocale()
+    {
+        return $this->defaultLocale;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDefaultLocale()
     {
         return $this->defaultLocale;
     }

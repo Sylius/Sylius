@@ -21,6 +21,8 @@
         <parameter key="sylius.translation.translatable_listener.doctrine.mongodb_odm.class">Sylius\Bundle\ResourceBundle\EventListener\MongoDBODMTranslatableListener</parameter>
 
         <parameter key="sylius.translation.locale_provider.request.class">Sylius\Bundle\ResourceBundle\Provider\RequestLocaleProvider</parameter>
+        <parameter key="sylius.translation.locales_provider.array.class">Sylius\Bundle\ResourceBundle\Provider\ArrayLocalesProvider</parameter>
+        <parameter key="sylius.form.type.resource_translations.class">Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType</parameter>
     </parameters>
 
     <services>
@@ -39,5 +41,15 @@
             <argument>%sylius.translation.default_locale%</argument>
             <tag name="kernel.event_subscriber" priority="98" />
         </service>
+
+        <service id="sylius.translation.locales_provider.array" class="%sylius.translation.locales_provider.array.class%" >
+            <argument>%sylius.translation.available_locales%</argument>
+        </service>
+        <service id="sylius.form.type.resource_translations" class="%sylius.form.type.resource_translations.class%">
+            <argument type="service" id="sylius.translation.locale_provider"/>
+            <argument type="service" id="sylius.translation.available_locales_provider"/>
+            <tag name="form.type" alias="sylius_translations" />
+        </service>
+
     </services>
 </container>

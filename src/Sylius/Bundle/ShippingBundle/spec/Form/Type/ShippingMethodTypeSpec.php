@@ -65,7 +65,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('translations', 'a2lix_translationsForms', Argument::any())
+            ->add('translations', 'sylius_translations', Argument::any())
             ->willReturn($builder)
         ;
 

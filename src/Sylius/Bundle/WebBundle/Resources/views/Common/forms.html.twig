@@ -163,3 +163,14 @@
         {% endif %}
     {% endspaceless %}
 {% endblock %}
+
+{% block sylius_translations_widget %}
+    {% for translation in form %}
+        <div class="form-group">
+            {{ form_label(translation, translation.vars.name) }}
+            <div class="col-lg-10">
+                {{ form_widget(translation) }}
+            </div>
+        </div>
+    {% endfor %}
+{%  endblock %}

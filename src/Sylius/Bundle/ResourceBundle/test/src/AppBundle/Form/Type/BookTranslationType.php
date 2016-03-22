@@ -9,30 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ContactBundle\Form\Type;
+namespace AppBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Sylius contact topic form type.
- *
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- * @author Gustavo Perdomo <gperdomor@gmail.com>
+ * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class TopicType extends AbstractResourceType
+class BookTranslationType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('translations', 'sylius_translations', [
-                'type' => 'sylius_contact_topic_translation',
-                'label' => 'sylius.form.contact_topic.title',
-            ])
-        ;
+        $builder->add('title', 'text');
     }
 
     /**
@@ -40,6 +32,6 @@ class TopicType extends AbstractResourceType
      */
     public function getName()
     {
-        return 'sylius_contact_topic';
+        return 'app_book_translation';
     }
 }
