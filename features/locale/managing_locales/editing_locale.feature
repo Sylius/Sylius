@@ -7,7 +7,7 @@ Feature: Editing a locale
     Background:
         Given I am logged in as administrator
 
-    @todo
+    @ui
     Scenario: Disabling the locale
         Given the store has locale "Norwegian"
         And I want to edit this locale
