@@ -124,6 +124,7 @@ final class ManagingCountriesContext implements Context
 
     /**
      * @When I save my changes
+     * @When I try to save my changes
      */
     public function iSaveMyChanges()
     {
@@ -218,6 +219,16 @@ final class ManagingCountriesContext implements Context
         expect($this->countryUpdatePage->isOpen(['id' => $country->getId()]))->toBe(true);
 
         expect($this->countryUpdatePage->isThereProvince($provinceName))->toBe(true);
+    }
+
+    /**
+     * @Then /^(this country) should not have the "([^"]+)" province$/
+     */
+    public function countryShouldNotHaveProvince(CountryInterface $country, $provinceName)
+    {
+        expect($this->countryUpdatePage->isOpen(['id' => $country->getId()]))->toBe(true);
+
+        expect($this->countryUpdatePage->isThereProvince($provinceName))->toBe(false);
     }
 
 }
