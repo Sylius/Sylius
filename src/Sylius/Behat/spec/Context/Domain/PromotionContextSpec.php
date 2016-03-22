@@ -54,7 +54,6 @@ class PromotionContextSpec extends ObjectBehavior
         RepositoryInterface $couponRepository,
         CouponInterface $coupon
     ) {
-        $coupon->getId()->willReturn(5);
         $sharedStorage->set('coupon', $coupon)->shouldBeCalled();
         $couponRepository->remove($coupon)->shouldBeCalled();
 
@@ -66,7 +65,6 @@ class PromotionContextSpec extends ObjectBehavior
         RepositoryInterface $couponRepository,
         CouponInterface $coupon
     ) {
-        $coupon->getId()->willReturn(5);
         $sharedStorage->set('coupon', $coupon)->shouldBeCalled();
         $couponRepository->remove($coupon)->willThrow(ForeignKeyConstraintViolationException::class);
 
@@ -78,7 +76,6 @@ class PromotionContextSpec extends ObjectBehavior
         RepositoryInterface $couponRepository,
         CouponInterface $coupon
     ) {
-        $coupon->getId()->willReturn(5);
         $couponRepository->remove($coupon)->willThrow(ForeignKeyConstraintViolationException::class);
         $sharedStorage->set('last_exception', Argument::type(ForeignKeyConstraintViolationException::class))->shouldBeCalled();
 
@@ -90,7 +87,6 @@ class PromotionContextSpec extends ObjectBehavior
         RepositoryInterface $couponRepository,
         CouponInterface $coupon
     ) {
-        $coupon->getId()->willReturn(5);
         $couponRepository->remove($coupon)->shouldBeCalled();
         $sharedStorage->set('last_exception', Argument::any())->shouldNotBeCalled();
 
