@@ -27,7 +27,7 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function isCodeFieldDisabled();
 
     /**
-     * @param $provinceName
+     * @param string $provinceName
      *
      * @return bool
      */

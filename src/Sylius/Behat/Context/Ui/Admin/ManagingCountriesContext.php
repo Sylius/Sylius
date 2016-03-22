@@ -91,7 +91,15 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @When I add the :provinceName province with :prvinceCode code
+     * @When /^I select "([^"]*)"$/
+     */
+    public function iSelect($name)
+    {
+        $this->countryCreatePage->selectName($name);
+    }
+
+    /**
+     * @When I add the :provinceName province with :provinceCode code
      */
     public function iAddProvinceWithCode($provinceName, $provinceCode)
     {
@@ -147,7 +155,7 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Then /^the (country "([^"]*)") should appear in the store$/
+     * @Then /^the (country "([^"]+)") should appear in the store$/
      */
     public function countryShouldAppearInTheStore(CountryInterface $country)
     {
@@ -204,7 +212,7 @@ final class ManagingCountriesContext implements Context
      */
     public function countryShouldHaveProvince(CountryInterface $country, $provinceName)
     {
-        expect($this->countryUpdatePage->isOpen(['id' => $country->getId()]))->toBe(true);
+        $this->countryUpdatePage->open(['id' => $country->getId()]);
 
         expect($this->countryUpdatePage->isThereProvince($provinceName))->toBe(true);
     }
