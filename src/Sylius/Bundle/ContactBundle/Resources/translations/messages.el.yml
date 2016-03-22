@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    contact_request:
-      first_name: Όνομα
-      last_name: Επώνυμο
-      email: Ηλεκτρονικό ταχυδρομείο
-    contact_topic:
-      title: Τίτλος
+    form:
+        contact_request:
+            first_name: Όνομα
+            last_name: Επώνυμο
+            email: Ηλεκτρονικό ταχυδρομείο
+        contact_topic:
+            title: Τίτλος

@@ -2,31 +2,31 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    attribute:
-      add: Toevoegen
-      add_attributes: Attributen toevoegen
-      choices: Keuzes
-      code: Code
-      name: Naam
-      translations: Vertalingen
-      type: Type
-    attribute_type:
-      checkbox: Selectievakje
-      configuration: Configuratie
-      date: Datum
-      datetime: Datum / tijd
-      integer: Integer
-      percent: Percentage
-      text: Tekst
-      textarea: Tekstgebied
-      title: Attribuuttype
-      validation: Validatie
-    attribute_type_configuration:
-      datetime:
-        format: Formaat
-      date:
-        format: Formaat
-      text:
-        min: Minimale lengte
-        max: Maximale lengte
+    form:
+        attribute:
+            add: Toevoegen
+            add_attributes: Attributen toevoegen
+            choices: Keuzes
+            code: Code
+            name: Naam
+            translations: Vertalingen
+            type: Type
+        attribute_type:
+            checkbox: Selectievakje
+            configuration: Configuratie
+            date: Datum
+            datetime: Datum / tijd
+            integer: Integer
+            percent: Percentage
+            text: Tekst
+            textarea: Tekstgebied
+            title: Attribuuttype
+            validation: Validatie
+        attribute_type_configuration:
+            datetime:
+                format: Formaat
+            date:
+                format: Formaat
+            text:
+                min: Minimale lengte
+                max: Maximale lengte

@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  channel:
-    code:
-      not_blank: Por favor, digite o código do canal.
-      unique: Código do canal deve ser único.
-    name:
-      not_blank: Por favor, digite o nome do canal.
+    channel:
+        code:
+            not_blank: Por favor, digite o código do canal.
+            unique: Código do canal deve ser único.
+        name:
+            not_blank: Por favor, digite o nome do canal.

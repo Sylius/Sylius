@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  menu:
-    admin:
-      main:
-        configuration:
-          header: تنظیمات
-          countries: كشور‌ها
-          locales: زبان ها
+    menu:
+        admin:
+            main:
+                configuration:
+                    header: تنظیمات
+                    countries: كشور‌ها
+                    locales: زبان ها

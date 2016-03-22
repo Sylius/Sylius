@@ -2,36 +2,36 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    address:
-      city: Град
-      company: Компанија
-      country: Земља
-      first_name: Име
-      last_name: Презиме
-      phone_number: Број телефона
-      postcode: Поштански број
-      street: Улица
-      province: Провинција
-    country:
-      add_province: Додај провинцију
-      name: Име
-      provinces: Провинције
-      select: Изаберите
-    province:
-      name: Име
-      select: Изаберите
-    zone:
-      add_member: Додајте члана
-      members: Чланови
-      name: Име
-      type: Тип
-      types:
-        country: Земља
-        province: Провинција
-        zone: Зона
-      scope: Обухват
-      select: Изаберите
-      select_scope: Изабери обухват
-    zone_member:
-      select: Изаберите
+    form:
+        address:
+            city: Град
+            company: Компанија
+            country: Земља
+            first_name: Име
+            last_name: Презиме
+            phone_number: Број телефона
+            postcode: Поштански број
+            street: Улица
+            province: Провинција
+        country:
+            add_province: Додај провинцију
+            name: Име
+            provinces: Провинције
+            select: Изаберите
+        province:
+            name: Име
+            select: Изаберите
+        zone:
+            add_member: Додајте члана
+            members: Чланови
+            name: Име
+            type: Тип
+            types:
+                country: Земља
+                province: Провинција
+                zone: Зона
+            scope: Обухват
+            select: Изаберите
+            select_scope: Изабери обухват
+        zone_member:
+            select: Изаберите

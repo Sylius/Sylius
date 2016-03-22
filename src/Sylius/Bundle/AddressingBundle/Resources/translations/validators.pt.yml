@@ -2,15 +2,15 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  address:
-    city:
-      max_length: O campo cidade não deve ter mais de 255 caracteres.
-      min_length: O campo cidade deve conter pelo menos 2 caracteres.
-      not_blank: Por favor introduza a cidade.
-    country:
-      not_blank: Por favor selecione um país.
-    first_name:
-      max_length: Primeiro nome não deve ter mais de 255 characters| Primeiro nome não deve ter mais de 255 caracteres.
-      min_length: O primeiro nome deve ter pelo menos 2 caracteres| O primeiro nome deve ter pelo menos 2 caracteres.
-    postcode:
-      not_blank: Por favor introduza o código postal.
+    address:
+        city:
+            max_length: O campo cidade não deve ter mais de 255 caracteres.
+            min_length: O campo cidade deve conter pelo menos 2 caracteres.
+            not_blank: Por favor introduza a cidade.
+        country:
+            not_blank: Por favor selecione um país.
+        first_name:
+            max_length: Primeiro nome não deve ter mais de 255 characters| Primeiro nome não deve ter mais de 255 caracteres.
+            min_length: O primeiro nome deve ter pelo menos 2 caracteres| O primeiro nome deve ter pelo menos 2 caracteres.
+        postcode:
+            not_blank: Por favor introduza o código postal.

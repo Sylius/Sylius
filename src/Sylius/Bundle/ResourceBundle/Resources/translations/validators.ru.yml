@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  resource:
-    not_enabled: Данный ресурс отключен
-    not_disabled: Данный ресурс включен
+    resource:
+        not_enabled: Данный ресурс отключен
+        not_disabled: Данный ресурс включен

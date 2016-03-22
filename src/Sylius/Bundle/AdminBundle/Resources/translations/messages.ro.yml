@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  menu:
-    admin:
-      main:
-        configuration:
-          header: Configurare
-          countries: Țări
-          locales: Setări regionale
+    menu:
+        admin:
+            main:
+                configuration:
+                    header: Configurare
+                    countries: Țări
+                    locales: Setări regionale

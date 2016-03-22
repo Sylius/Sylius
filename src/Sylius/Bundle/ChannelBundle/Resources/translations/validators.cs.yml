@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  channel:
-    code:
-      not_blank: Prosím zadejte kód kanálu.
-      unique: Kód kanálu musí být unikátní.
-    name:
-      not_blank: Zadejte název kanálu.
+    channel:
+        code:
+            not_blank: Prosím zadejte kód kanálu.
+            unique: Kód kanálu musí být unikátní.
+        name:
+            not_blank: Zadejte název kanálu.

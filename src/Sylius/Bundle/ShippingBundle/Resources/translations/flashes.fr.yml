@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  shipment:
-    ship:
-      success: Votre commande a été expédiée.
+    shipment:
+        ship:
+            success: Votre commande a été expédiée.

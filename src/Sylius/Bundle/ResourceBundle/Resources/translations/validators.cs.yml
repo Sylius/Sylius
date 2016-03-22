@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  resource:
-    not_enabled: Uvedený prostředek je zakázán
-    not_disabled: Uvedený prostředek je povolen
+    resource:
+        not_enabled: Uvedený prostředek je zakázán
+        not_disabled: Uvedený prostředek je povolen

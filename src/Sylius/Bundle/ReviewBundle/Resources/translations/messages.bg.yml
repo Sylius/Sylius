@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    review:
-      author: Автор
+    form:
+        review:
+            author: Автор

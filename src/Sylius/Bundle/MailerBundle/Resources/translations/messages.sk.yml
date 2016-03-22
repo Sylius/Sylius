@@ -2,12 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    email:
-      enabled: Zapnuté
-      subject: Predmet
-      sender_name: Meno odosielateľa
-      sender_address: Adresa odosielateľa
-      content: Obsah
-      template: Šablóna
-      no_template: Použiť vlastnú šablónu
+    form:
+        email:
+            enabled: Zapnuté
+            subject: Predmet
+            sender_name: Meno odosielateľa
+            sender_address: Adresa odosielateľa
+            content: Obsah
+            template: Šablóna
+            no_template: Použiť vlastnú šablónu

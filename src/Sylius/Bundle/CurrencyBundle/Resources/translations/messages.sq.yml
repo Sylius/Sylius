@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    currency:
-      exchange_rate: Norma e shkëmbimit
-      enabled: E aktivizuar
+    form:
+        currency:
+            exchange_rate: Norma e shkëmbimit
+            enabled: E aktivizuar

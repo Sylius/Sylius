@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    currency:
-      exchange_rate: Tasa o tipo de cambio
-      enabled: Activado
+    form:
+        currency:
+            exchange_rate: Tasa o tipo de cambio
+            enabled: Activado

@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    review:
-      title: Titel
-      comment: Anmerkung
-      author: Autor
-      status:
-        new: Neu
+    form:
+        review:
+            title: Titel
+            comment: Anmerkung
+            author: Autor
+            status:
+                new: Neu

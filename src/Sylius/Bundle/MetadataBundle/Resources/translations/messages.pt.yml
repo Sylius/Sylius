@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  metadata:
-    page:
-      description: Descrição
-    twitter:
-      description: Descrição
+    metadata:
+        page:
+            description: Descrição
+        twitter:
+            description: Descrição

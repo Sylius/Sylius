@@ -2,17 +2,17 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    report:
-      name: Название
-      description: Описание
-      data_fetcher: Сборщик данных
-      renderer:
-        label: Рендерер
-        template: Шаблон
-      chart:
-        type: Тип
-      user_registration:
-        end: Дата окончания
-        period: Временной период
-        empty_records: Печатать пустые записи?
+    form:
+        report:
+            name: Название
+            description: Описание
+            data_fetcher: Сборщик данных
+            renderer:
+                label: Рендерер
+                template: Шаблон
+            chart:
+                type: Тип
+            user_registration:
+                end: Дата окончания
+                period: Временной период
+                empty_records: Печатать пустые записи?

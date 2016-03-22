@@ -2,6 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    currency:
-      enabled: 已启用
+    form:
+        currency:
+            exchange_rate: 汇率
+            enabled: 已启用

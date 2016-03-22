@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    report:
-      name: Nom
-      description: Descripció
+    form:
+        report:
+            name: Nom
+            description: Descripció

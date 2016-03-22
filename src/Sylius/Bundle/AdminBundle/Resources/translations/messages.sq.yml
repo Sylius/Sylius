@@ -2,10 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  menu:
-    admin:
-      main:
-        configuration:
-          header: Konfigurimi
-          countries: Vendet
-          locales: Rajonet
+    menu:
+        admin:
+            main:
+                configuration:
+                    header: Konfigurimi
+                    tax_categories: Kategoritë e taksimit
+                    countries: Vendet
+                    locales: Rajonet

@@ -2,11 +2,16 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  locale:
-    code:
-      not_blank: 请输入区域设置代码。
-      unique: 此区域设置已存在。
-  product_variant:
-    price:
-      min: 价格不能为负。
-      not_blank: 请输入价格。
+    checkout:
+        shipping_method:
+            not_blank: 请选择配送方式。
+    locale:
+        code:
+            not_blank: 请输入区域设置代码。
+            unique: 此区域设置已存在。
+    product_variant:
+        onHand:
+            not_blank: 请输入库存量
+        price:
+            min: 价格不能为负。
+            not_blank: 请输入价格。

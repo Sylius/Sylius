@@ -2,13 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  backend:
-    menu:
-      main:
-        groups: Grupper
-        roles: Roller
-        routes: Rutter
-      sidebar:
-        groups: Grupper
-        roles: Roller
-        routes: Rutter
+    backend:
+        menu:
+            main:
+                groups: Grupper
+                roles: Roller
+                routes: Rutter
+            sidebar:
+                groups: Grupper
+                roles: Roller
+                routes: Rutter

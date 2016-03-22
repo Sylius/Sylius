@@ -2,12 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    email:
-      enabled: Įjungta
-      subject: Tema
-      sender_name: Siuntėjo pavadinimas
-      sender_address: Siuntėjo adresas
-      content: Turinys
-      template: Šablonas
-      no_template: Naudoti pasirinktinį šabloną
+    form:
+        email:
+            enabled: Įjungta
+            subject: Tema
+            sender_name: Siuntėjo pavadinimas
+            sender_address: Siuntėjo adresas
+            content: Turinys
+            template: Šablonas
+            no_template: Naudoti pasirinktinį šabloną

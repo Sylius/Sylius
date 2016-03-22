@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  promotion_coupon:
-    generate: Akciové kupóny boli úspešne vygenerované.
-    eligible: Váš akciový kupón bol pridaný do košíka.
-    invalid: Váš akciový kupón je neplatný.
-    not_eligible: Váš košík neobsahuje položky na ktoré je možné uplatniť tento akciový kupón.
+    promotion_coupon:
+        generate: Akciové kupóny boli úspešne vygenerované.
+        eligible: Váš akciový kupón bol pridaný do košíka.
+        invalid: Váš akciový kupón je neplatný.
+        not_eligible: Váš košík neobsahuje položky na ktoré je možné uplatniť tento akciový kupón.

@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  menu:
-    admin:
-      main:
-        configuration:
-          header: Konfiguracija
-          countries: Države
-          locales: Področne nastavitve
+    menu:
+        admin:
+            main:
+                configuration:
+                    header: Konfiguracija
+                    countries: Države
+                    locales: Področne nastavitve

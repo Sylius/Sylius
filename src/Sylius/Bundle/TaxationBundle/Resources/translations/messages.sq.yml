@@ -2,13 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    tax_category:
-      name: Emri
-      description: Përshkrimi
-    tax_rate:
-      category: Kategorija
-      name: Emri
-      amount: Shuma
-      included_in_price: Përfshirë në çmim?
-      calculator: Llogaritësi
+    form:
+        tax_category:
+            name: Emri
+            description: Përshkrimi
+        tax_rate:
+            category: Kategorija
+            name: Emri
+            amount: Shuma
+            included_in_price: Përfshirë në çmim?
+            calculator: Llogaritësi

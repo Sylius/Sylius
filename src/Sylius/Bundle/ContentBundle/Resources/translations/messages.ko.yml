@@ -2,14 +2,14 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    imagine_block:
-      internal_name: 내부명칭
-    menu_node_block:
-      internal_name: 내부명칭
-    simple_block:
-      internal_name: 내부명칭
-    slideshow_block:
-      internal_name: 내부명칭
-    static_content:
-      internal_name: 내부명칭
+    form:
+        imagine_block:
+            internal_name: 내부명칭
+        menu_node_block:
+            internal_name: 내부명칭
+        simple_block:
+            internal_name: 내부명칭
+        slideshow_block:
+            internal_name: 내부명칭
+        static_content:
+            internal_name: 내부명칭

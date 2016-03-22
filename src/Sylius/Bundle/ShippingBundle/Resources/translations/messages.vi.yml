@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    shipping_category:
-      name: Tên
-    shipping_method:
-      name: Tên
+    form:
+        shipping_category:
+            name: Tên
+        shipping_method:
+            name: Tên

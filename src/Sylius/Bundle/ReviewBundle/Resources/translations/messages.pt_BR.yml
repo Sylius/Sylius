@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    review:
-      title: Título
-      author: Autor
-      status:
-        new: Novo
+    form:
+        review:
+            title: Título
+            author: Autor
+            status:
+                new: Novo

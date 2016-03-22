@@ -2,12 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    product:
-      name: Tên
-      options: Tùy chọn
-    product_archetype:
-      name: Tên
-      options: Tùy chọn
-    association_type:
-      name: Tên
+    form:
+        product:
+            name: Tên
+            options: Tùy chọn
+        product_archetype:
+            name: Tên
+            options: Tùy chọn
+        association_type:
+            name: Tên

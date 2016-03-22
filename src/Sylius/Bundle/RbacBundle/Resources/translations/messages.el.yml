@@ -2,11 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    role:
-      code: Κώδικος
-      name: Ονομασία
-      description: Περιγραφή
-    permission:
-      code: Κώδικος
-      description: Περιγραφή
+    form:
+        role:
+            code: Κώδικος
+            name: Ονομασία
+            description: Περιγραφή
+        permission:
+            code: Κώδικος
+            description: Περιγραφή

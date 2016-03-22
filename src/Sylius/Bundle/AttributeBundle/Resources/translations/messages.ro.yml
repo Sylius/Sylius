@@ -2,12 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    attribute:
-      add: Adăugați
-      choices: Opțiuni
-      code: Cod
-      name: Nume
-      type: Tip
-    attribute_type:
-      configuration: Configurare
+    form:
+        attribute:
+            add: Adăugați
+            choices: Opțiuni
+            code: Cod
+            name: Nume
+            type: Tip
+        attribute_type:
+            configuration: Configurare

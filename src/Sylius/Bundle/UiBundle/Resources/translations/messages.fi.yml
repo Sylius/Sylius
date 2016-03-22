@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    login:
-      username: Käyttäjänimi
-  ui:
-    "no": false
-    "yes": true
+    form:
+        login:
+            username: Käyttäjänimi
+    ui:
+        "no": false
+        "yes": true

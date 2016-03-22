@@ -2,105 +2,105 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    action_block:
-      action_name: Действие
-      id: ID
-      publish_end_date: Публиковать до
-      publish_start_date: Публиковать от
-      publishable: Опубликовано
-    imagine_block:
-      filter: Фильтр
-      image: Изображение
-      internal_name: Внутреннее название
-      label: Заголовок
-      link_url: URL ссылки
-      parent: Родитель
-      publish_end_date: Публиковать до
-      publish_start_date: Публиковать от
-      publishable: Опубликовано
-      slideshow_small: Слайд-шоу маленькое (сбоку)
-      slideshow_medium: Среднее слайдшоу (контент)
-      slideshow_large: Слайд-шоу большое (полной ширины)
-    menu:
-      childrens: Потомки
-      display: Отображать
-      display_children: Показать потомков
-      label: Заголовок
-      name: Название
-      parent: Родитель
-      publish_end_date: Публиковать до
-      publish_start_date: Публиковать от
-      publishable: Опубликовано
-      route: Маршрут
-      uri: URI
-    menu_block:
-      body: Содержание
-      id: ID
-      name: Название
-      publish_end_date: Публиковать до
-      publish_start_date: Публиковать от
-      publishable: Опубликовано
-    menu_node_block:
-      content: Контент
-      display: Отображать
-      display_children: Показать потомков
-      internal_name: Внутреннее название
-      label: Заголовок
-      link_type: Тип ссылки
-      publish_end_date: Публиковать до
-      publish_start_date: Публиковать от
-      publishable: Опубликовано
-      route: Маршрут
-      uri: URI
-    redirect_route:
-      id: ID
-      name: Название
-      route_name: Имя маршрута
-      uri: URI
-    reference_block:
-      body: Содержание
-      id: ID
-      publish_end_date: Публиковать до
-      publish_start_date: Публиковать от
-      publishable: Опубликовано
-      title: Название
-    route:
-      content: Контент
-      name: Название
-      parent: Родитель
-    simple_block:
-      body: Содержание
-      internal_name: Внутреннее название
-      parent: Родитель
-      publish_end_date: Публиковать до
-      publish_start_date: Публиковать от
-      publishable: Опубликовано
-      title: Название
-    slideshow_block:
-      add_slide: Добавить слайд
-      childrens: Потомки
-      internal_name: Внутреннее название
-      parent: Родитель
-      publish_end_date: Публиковать до
-      publish_start_date: Публиковать от
-      publishable: Опубликовано
-      title: Название
-    static_content:
-      body: Содержание
-      id: ID
-      internal_name: Внутреннее название
-      menu_nodes: Узлы меню
-      parent: Родитель
-      publish_end_date: Публиковать до
-      publish_start_date: Публиковать от
-      publishable: Опубликовано
-      routes: Маршруты
-      title: Название
-    string_block:
-      body: Содержание
-      id: ID
-      name: Название
-      publish_end_date: Публиковать до
-      publish_start_date: Публиковать от
-      publishable: Опубликовано
+    form:
+        action_block:
+            action_name: Действие
+            id: ID
+            publish_end_date: Публиковать до
+            publish_start_date: Публиковать от
+            publishable: Опубликовано
+        imagine_block:
+            filter: Фильтр
+            image: Изображение
+            internal_name: Внутреннее название
+            label: Заголовок
+            link_url: URL ссылки
+            parent: Родитель
+            publish_end_date: Публиковать до
+            publish_start_date: Публиковать от
+            publishable: Опубликовано
+            slideshow_small: Слайд-шоу маленькое (сбоку)
+            slideshow_medium: Среднее слайдшоу (контент)
+            slideshow_large: Слайд-шоу большое (полной ширины)
+        menu:
+            childrens: Потомки
+            display: Отображать
+            display_children: Показать потомков
+            label: Заголовок
+            name: Название
+            parent: Родитель
+            publish_end_date: Публиковать до
+            publish_start_date: Публиковать от
+            publishable: Опубликовано
+            route: Маршрут
+            uri: URI
+        menu_block:
+            body: Содержание
+            id: ID
+            name: Название
+            publish_end_date: Публиковать до
+            publish_start_date: Публиковать от
+            publishable: Опубликовано
+        menu_node_block:
+            content: Контент
+            display: Отображать
+            display_children: Показать потомков
+            internal_name: Внутреннее название
+            label: Заголовок
+            link_type: Тип ссылки
+            publish_end_date: Публиковать до
+            publish_start_date: Публиковать от
+            publishable: Опубликовано
+            route: Маршрут
+            uri: URI
+        redirect_route:
+            id: ID
+            name: Название
+            route_name: Имя маршрута
+            uri: URI
+        reference_block:
+            body: Содержание
+            id: ID
+            publish_end_date: Публиковать до
+            publish_start_date: Публиковать от
+            publishable: Опубликовано
+            title: Название
+        route:
+            content: Контент
+            name: Название
+            parent: Родитель
+        simple_block:
+            body: Содержание
+            internal_name: Внутреннее название
+            parent: Родитель
+            publish_end_date: Публиковать до
+            publish_start_date: Публиковать от
+            publishable: Опубликовано
+            title: Название
+        slideshow_block:
+            add_slide: Добавить слайд
+            childrens: Потомки
+            internal_name: Внутреннее название
+            parent: Родитель
+            publish_end_date: Публиковать до
+            publish_start_date: Публиковать от
+            publishable: Опубликовано
+            title: Название
+        static_content:
+            body: Содержание
+            id: ID
+            internal_name: Внутреннее название
+            menu_nodes: Узлы меню
+            parent: Родитель
+            publish_end_date: Публиковать до
+            publish_start_date: Публиковать от
+            publishable: Опубликовано
+            routes: Маршруты
+            title: Название
+        string_block:
+            body: Содержание
+            id: ID
+            name: Название
+            publish_end_date: Публиковать до
+            publish_start_date: Публиковать от
+            publishable: Опубликовано

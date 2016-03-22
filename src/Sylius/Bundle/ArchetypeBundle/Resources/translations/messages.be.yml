@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    archetype:
-      code: Код
-      name: Імя
-      parent: "Бацькоўскі аб'ект"
-      options: Опцыі
+    form:
+        archetype:
+            code: Код
+            name: Імя
+            parent: "Бацькоўскі аб'ект"
+            options: Опцыі

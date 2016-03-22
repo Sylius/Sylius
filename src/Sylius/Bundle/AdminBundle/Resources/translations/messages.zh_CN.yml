@@ -2,9 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  menu:
-    admin:
-      main:
-        configuration:
-          countries: 国家
-          locales: 区域设置
+    menu:
+        admin:
+            main:
+                configuration:
+                    header: 配置
+                    countries: 国家
+                    locales: 区域设置

@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  metadata:
-    page:
-      title: Tiêu đề
-    twitter:
-      title: Tiêu đề
-      image: Hình ảnh
+    metadata:
+        page:
+            title: Tiêu đề
+        twitter:
+            title: Tiêu đề
+            image: Hình ảnh

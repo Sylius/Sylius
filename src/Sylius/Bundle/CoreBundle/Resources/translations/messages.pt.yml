@@ -2,8 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    order_filter:
-      payment_state: Situação do pagamento
-    product_variant:
-      tax_category: Categoria de imposto
+    form:
+        order_filter:
+            payment_state: Situação do pagamento
+        product_variant:
+            tax_category: Categoria de imposto
+        guest:
+            email: Endereço de email

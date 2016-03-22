@@ -2,40 +2,40 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  address:
-    city:
-      max_length: Oraşul nu poate depăși 255 de caractere|Oraşul nu poate depăși 255 de caractere.
-      min_length: Oraşul trebuie să conțină cel puţin 2 caractere|Oraşul trebuie să conțină cel puţin 2 caractere.
-      not_blank: Vă rugăm să completați orașul.
-    country:
-      not_blank: Vă rugăm să alegeți țara.
-    first_name:
-      max_length: Prenumele nu poate depăși 255 de caractere|Prenumele nu poate depăși 255 de caractere.
-      min_length: Prenumele trebuie să conțină cel puţin 2 caractere|Prenumele trebuie să conțină cel puţin 2 caractere.
-      not_blank: Vă rugăm să completați prenumele.
-    last_name:
-      max_length: Numele nu poate depăși 255 de caractere|Numele nu poate depăși 255 de caractere.
-      min_length: Numele trebuie să conțină cel puţin 2 caractere|Numele trebuie să conțină cel puţin 2 caractere.
-      not_blank: Vă rugăm să completați numele.
-    postcode:
-      max_length: Codul poştal nu poate depăși 255 de caractere|Cod poştal nu poate depăși 255 de caractere.
-      min_length: Codul poştal trebuie să conţină cel puţin 2 caractere|Codul poştal trebuie să conţină cel puţin 2 caractere.
-      not_blank: Vă rugăm să completați codul poştal.
+    address:
+        city:
+            max_length: Oraşul nu poate depăși 255 de caractere|Oraşul nu poate depăși 255 de caractere.
+            min_length: Oraşul trebuie să conțină cel puţin 2 caractere|Oraşul trebuie să conțină cel puţin 2 caractere.
+            not_blank: Vă rugăm să completați orașul.
+        country:
+            not_blank: Vă rugăm să alegeți țara.
+        first_name:
+            max_length: Prenumele nu poate depăși 255 de caractere|Prenumele nu poate depăși 255 de caractere.
+            min_length: Prenumele trebuie să conțină cel puţin 2 caractere|Prenumele trebuie să conțină cel puţin 2 caractere.
+            not_blank: Vă rugăm să completați prenumele.
+        last_name:
+            max_length: Numele nu poate depăși 255 de caractere|Numele nu poate depăși 255 de caractere.
+            min_length: Numele trebuie să conțină cel puţin 2 caractere|Numele trebuie să conțină cel puţin 2 caractere.
+            not_blank: Vă rugăm să completați numele.
+        postcode:
+            max_length: Codul poştal nu poate depăși 255 de caractere|Cod poştal nu poate depăși 255 de caractere.
+            min_length: Codul poştal trebuie să conţină cel puţin 2 caractere|Codul poştal trebuie să conţină cel puţin 2 caractere.
+            not_blank: Vă rugăm să completați codul poştal.
+        province:
+            valid: Vă rugăm să alegeți un judeţ corespunzător.
+        street:
+            max_length: Adresa nu poate depăși 255 de caractere|Adresa nu poate depăși 255 de caractere.
+            min_length: Adresa trebuie să conţină cel puţin 2 caractere|Adresa trebuie să conţină cel puţin 2 caractere.
+            not_blank: Vă rugăm să completați adresa.
+        not_shippable: Această adresă nu este o destinaţie de livrare validă.
     province:
-      valid: Vă rugăm să alegeți un judeţ corespunzător.
-    street:
-      max_length: Adresa nu poate depăși 255 de caractere|Adresa nu poate depăși 255 de caractere.
-      min_length: Adresa trebuie să conţină cel puţin 2 caractere|Adresa trebuie să conţină cel puţin 2 caractere.
-      not_blank: Vă rugăm să completați adresa.
-    not_shippable: Această adresă nu este o destinaţie de livrare validă.
-  province:
-    name:
-      max_length: Numele județului nu poate depăși 255 de caractere|Numele județului nu poate depăși 255 de caractere.
-      min_length: Numele județului trebuie să conţină cel puţin 2 caractere|Numele județului trebuie să conţină cel puţin 2 caractere.
-      not_blank: Vă rugăm să completați numele județului.
-  zone:
-    members:
-      min_count: 'Vă rugăm să adăugaţi cel puţin {{ limit }} membri de zonă.'
-    name:
-      max_length: Numele zonei nu poate depăși 255 de caractere|Numele zonei nu poate depăși 255 de caractere.
-      not_blank: Vă rugăm să completați numele zonei.
+        name:
+            max_length: Numele județului nu poate depăși 255 de caractere|Numele județului nu poate depăși 255 de caractere.
+            min_length: Numele județului trebuie să conţină cel puţin 2 caractere|Numele județului trebuie să conţină cel puţin 2 caractere.
+            not_blank: Vă rugăm să completați numele județului.
+    zone:
+        members:
+            min_count: 'Vă rugăm să adăugaţi cel puţin {{ limit }} membri de zonă.'
+        name:
+            max_length: Numele zonei nu poate depăși 255 de caractere|Numele zonei nu poate depăși 255 de caractere.
+            not_blank: Vă rugăm să completați numele zonei.

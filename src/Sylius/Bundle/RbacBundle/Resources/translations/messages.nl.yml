@@ -2,14 +2,14 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    role:
-      code: Code
-      name: Naam
-      description: Omschrijving
-      permissions: Machtigingen
-      parent: Ouder
-    permission:
-      code: Code
-      description: Omschrijving
-      parent: Ouder
+    form:
+        role:
+            code: Code
+            name: Naam
+            description: Omschrijving
+            permissions: Machtigingen
+            parent: Ouder
+        permission:
+            code: Code
+            description: Omschrijving
+            parent: Ouder

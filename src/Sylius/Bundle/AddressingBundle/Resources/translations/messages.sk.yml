@@ -2,38 +2,38 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    address:
-      city: Mesto
-      company: Spoločnosť
-      country: Štát
-      first_name: Meno
-      last_name: Priezvisko
-      phone_number: Telefónne číslo
-      postcode: PSČ
-      street: Ulica
-      province: Provincia
-    country:
-      add_province: Pridať provinciu
-      name: Názov
-      provinces: Provincie
-      select: Vyberte
-      enabled: Zapnuté
-    province:
-      name: Názov
-      abbreviation: Skratka
-      select: Vyberte
-    zone:
-      add_member: Pridať člena
-      members: Členovia
-      name: Názov
-      type: Typ
-      types:
-        country: Krajina
-        province: Provincia
-        zone: Zóna
-      scope: Rozsah
-      select: Vyberte
-      select_scope: Vyberte rozsah
-    zone_member:
-      select: Vyberte
+    form:
+        address:
+            city: Mesto
+            company: Spoločnosť
+            country: Štát
+            first_name: Meno
+            last_name: Priezvisko
+            phone_number: Telefónne číslo
+            postcode: PSČ
+            street: Ulica
+            province: Provincia
+        country:
+            add_province: Pridať provinciu
+            name: Názov
+            provinces: Provincie
+            select: Vyberte
+            enabled: Zapnuté
+        province:
+            name: Názov
+            abbreviation: Skratka
+            select: Vyberte
+        zone:
+            add_member: Pridať člena
+            members: Členovia
+            name: Názov
+            type: Typ
+            types:
+                country: Krajina
+                province: Provincia
+                zone: Zóna
+            scope: Rozsah
+            select: Vyberte
+            select_scope: Vyberte rozsah
+        zone_member:
+            select: Vyberte

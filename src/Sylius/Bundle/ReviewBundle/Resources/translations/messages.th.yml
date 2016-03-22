@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    review:
-      title: หัวข้อ
-      author: ผู้เขียน
-      status:
-        new: รายการใหม่
+    form:
+        review:
+            title: หัวข้อ
+            author: ผู้เขียน
+            status:
+                new: รายการใหม่

@@ -2,30 +2,30 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    group:
-      name: ชื่อ
-      roles: Roles
-    user:
-      email: อีเมล
-      enabled: เปิดใช้งานแล้ว
-      password:
-        label: รหัสผ่าน
-      shipping_address: ที่อยู่สำหรับจัดส่งสินค้า
-    customer:
-      first_name: ชื่อ
-      groups: กลุ่ม
-      last_name: นามสกุล
-      email: อีเมล
-      phone_number: หมายเลขโทรศัพท์
-      billing_address: ที่อยู่สำหรับออกใบเสร็จ
-      different_billing_address: ใช้ที่อยู่อื่นสำหรับเรียกเก็บเงินหรือไม่
-    user_filter:
-      query: ค้นหา
-    user_change_password:
-      confirmation: การยืนยัน
-      current: รหัสผ่านปัจจุบัน
-      new: รหัสผ่านใหม่
-    user_reset_password:
-      confirmation: การยืนยัน
-      new: รหัสผ่านใหม่
+    form:
+        group:
+            name: ชื่อ
+            roles: Roles
+        user:
+            email: อีเมล
+            enabled: เปิดใช้งานแล้ว
+            password:
+                label: รหัสผ่าน
+            shipping_address: ที่อยู่สำหรับจัดส่งสินค้า
+        customer:
+            first_name: ชื่อ
+            groups: กลุ่ม
+            last_name: นามสกุล
+            email: อีเมล
+            phone_number: หมายเลขโทรศัพท์
+            billing_address: ที่อยู่สำหรับออกใบเสร็จ
+            different_billing_address: ใช้ที่อยู่อื่นสำหรับเรียกเก็บเงินหรือไม่
+        user_filter:
+            query: ค้นหา
+        user_change_password:
+            confirmation: การยืนยัน
+            current: รหัสผ่านปัจจุบัน
+            new: รหัสผ่านใหม่
+        user_reset_password:
+            confirmation: การยืนยัน
+            new: รหัสผ่านใหม่

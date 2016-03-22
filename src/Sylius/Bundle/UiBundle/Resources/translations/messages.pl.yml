@@ -2,28 +2,28 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    login:
-      username: Nazwa użytkownika
-      password: Hasło
-      remember_me: Zapamiętaj mnie
-  ui:
-    create: Utwórz
-    dashboard: Panel
-    delete: Usuń
-    edit: Edytuj
-    actions: Akcje
-    enabled: Włączone
-    description: Opis
-    "no": false
-    status: Status
-    success: Sukces
-    "yes": true
-    new: Nowy
-    save_changes: Zapisz zmiany
-    new_tax_category: Nowa kategoria podatkowa
-    filter: Filtruj
-    empty: Brak
-    countries: Kraje
-    new_country: Nowy kraj
-    locales: Ustawienia regionalne
+    form:
+        login:
+            username: Nazwa użytkownika
+            password: Hasło
+            remember_me: Zapamiętaj mnie
+    ui:
+        create: Utwórz
+        dashboard: Panel
+        delete: Usuń
+        edit: Edytuj
+        actions: Akcje
+        enabled: Włączone
+        description: Opis
+        "no": false
+        status: Status
+        success: Sukces
+        "yes": true
+        new: Nowy
+        save_changes: Zapisz zmiany
+        new_tax_category: Nowa kategoria podatkowa
+        filter: Filtruj
+        empty: Brak
+        countries: Kraje
+        new_country: Nowy kraj
+        locales: Ustawienia regionalne

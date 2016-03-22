@@ -2,35 +2,35 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    action:
-      fixed_discount_configuration:
-        amount: Ποσό
-      percentage_discount_configuration:
-        percentage: Ποσοστό
-      shipping_discount_configuration:
-        percentage: Ποσοστό
-      type: Τύπος
-    rule:
-      contains_product_configuration:
-        variants: Προϊόντα
-      cart_quantity_configuration:
-        count: Πλήθος
-      item_total_configuration:
-        amount: Ποσό
-      shipping_country_configuration:
-        country: Χώρα
-      type: Τύπος
-    coupon:
-      usage_limit: Όριο χρήσης
-    coupon_generate_instruction:
-      amount: Ποσό
-      usage_limit: Όριο χρήσης
-    promotion:
-      actions: Ενέργειες
-      description: Περιγραφή
-      ends_at: Τελειώνει σε
-      name: Ονομασία
-      rules: Κανόνες
-      starts_at: Αρχίζει με
-      usage_limit: Όριο χρήσης
+    form:
+        action:
+            fixed_discount_configuration:
+                amount: Ποσό
+            percentage_discount_configuration:
+                percentage: Ποσοστό
+            shipping_discount_configuration:
+                percentage: Ποσοστό
+            type: Τύπος
+        rule:
+            contains_product_configuration:
+                variants: Προϊόντα
+            cart_quantity_configuration:
+                count: Πλήθος
+            item_total_configuration:
+                amount: Ποσό
+            shipping_country_configuration:
+                country: Χώρα
+            type: Τύπος
+        coupon:
+            usage_limit: Όριο χρήσης
+        coupon_generate_instruction:
+            amount: Ποσό
+            usage_limit: Όριο χρήσης
+        promotion:
+            actions: Ενέργειες
+            description: Περιγραφή
+            ends_at: Τελειώνει σε
+            name: Ονομασία
+            rules: Κανόνες
+            starts_at: Αρχίζει με
+            usage_limit: Όριο χρήσης

@@ -2,33 +2,33 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    group:
-      name: Nome
-      roles: Papéis
-    user:
-      email: Email
-      enabled: Ativado
-      password:
-        label: Senha
-        confirmation: Verificação
-      remember_me: Lembrar
-      shipping_address: Endereço de entrega
-    customer:
-      first_name: Nome
-      groups: Grupos
-      last_name: Sobrenome
-      email: Email
-      phone_number: Número de Telefone
-      birthday: Data de Nascimento
-      billing_address: Endereço de cobrança
-      different_billing_address: Utilizar um endereço diferente para cobrança?
-    user_filter:
-      query: Pesquisar
-    user_change_password:
-      confirmation: Confirmação
-      current: Senha Atual
-      new: Nova senha
-    user_reset_password:
-      confirmation: Confirmação
-      new: Nova senha
+    form:
+        group:
+            name: Nome
+            roles: Papéis
+        user:
+            email: Email
+            enabled: Ativado
+            password:
+                label: Senha
+                confirmation: Verificação
+            remember_me: Lembrar
+            shipping_address: Endereço de entrega
+        customer:
+            first_name: Nome
+            groups: Grupos
+            last_name: Sobrenome
+            email: Email
+            phone_number: Número de Telefone
+            birthday: Data de Nascimento
+            billing_address: Endereço de cobrança
+            different_billing_address: Utilizar um endereço diferente para cobrança?
+        user_filter:
+            query: Pesquisar
+        user_change_password:
+            confirmation: Confirmação
+            current: Senha Atual
+            new: Nova senha
+        user_reset_password:
+            confirmation: Confirmação
+            new: Nova senha

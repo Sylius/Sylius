@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    archetype:
-      code: Kodi
-      name: Emri
-      parent: Prind
-      attributes: Atributet
-      options: Opsionet
+    form:
+        archetype:
+            code: Kodi
+            name: Emri
+            parent: Prind
+            attributes: Atributet
+            options: Opsionet

@@ -2,94 +2,94 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  backend:
-    menu:
-      main:
-        assortment: Választék
-        blocks: Tömbök
-        configuration: Beállítások
-        content: Tartalom
-        countries: Országok
-        dashboard: Vezérlőpult
-        general_settings: Általános beállítások
-        groups: Csoportok
-        homepage: Saját bolt
-        locales: Területi beállítások
-        new_order: Új rendelés
-        new_promotion: Új promóció
-        options: Termék beállítások kezelése
-        orders: Aktuális rendelések
-        pages: Oldalak
-        payment_methods: Fizetési módok
-        payments: Fizetések
-        products: Termékek
-        promotions: Promóciók
-        roles: Szerepek
-        routes: Útvonalak
-        sales: Rendelések
-        shipments: Szállítások
-        shipping_categories: Szállítási kategóriák
-        shipping_methods: Szállítási módok
-        slideshow: Diavetítés
-        stockables: Készletszintek
-        tax_categories: Adózási kategóriák
-        tax_rates: Adókulcsok
-        taxation_settings: Adózás-beállítások
-        taxons: Kategorizálás
-        zones: Zónák
-      sidebar:
-        assortment: Választék
-        blocks: Tömbök
-        configuration: Beállítások
-        content: Tartalom
-        countries: Országok
-        dashboard: Vezérlőpult
-        general_settings: Általános beállítások
-        groups: Csoportok
-        homepage: Vissza az oldalra
-        locales: Területi beállítások
-        new_order: Új rendelés
-        new_promotion: Új promóció hozzáadása
-        options: Beállítások kezelése
-        orders: Függőben lévő rendelések
-        pages: Oldalak
-        payment_methods: Fizetési módok
-        payments: Kifizetések
-        products: Termékek
-        promotions: Promóciók
-        roles: Szerepek
-        routes: Útvonalak
-        sales: Rendelések
-        shipments: Szállítmányok
-        shipping_categories: Szállítási kategóriák
-        shipping_methods: Szállítási módok
-        slideshow: Diavetítés
-        stockables: Készletszintek
-        tax_categories: Adózási kategóriák
-        tax_rates: Adókulcsok
-        taxation_settings: Adózás-beállítások
-        taxons: Kategorizálás
-        zones: Zónák
-  frontend:
-    menu:
-      account:
-        addresses: Címjegyzék
-        homepage: Főoldal
-        orders: Megrendeléseim / számláim
-        password: Jelszó
-        profile: Személyes információk
-        shop: Vissza az áruházba
-      currency: 'Az árak megjelenítése %currency% pénznemben'
-      main:
-        account: Fiókom
-        administration: Adminisztráció
-        cart: 'Kosár (%items%) %total%'
-        login: Belépés
-        logout: Kilépés
-        register: Regisztráció
-      social:
-        facebook: Facebook
-        github: GitHub
-        google: Google+
-        linkedin: LinkedIn
-        twitter: Twitter
+    backend:
+        menu:
+            main:
+                assortment: Választék
+                blocks: Tömbök
+                configuration: Beállítások
+                content: Tartalom
+                countries: Országok
+                dashboard: Vezérlőpult
+                general_settings: Általános beállítások
+                groups: Csoportok
+                homepage: Saját bolt
+                locales: Területi beállítások
+                new_order: Új rendelés
+                new_promotion: Új promóció
+                options: Termék beállítások kezelése
+                orders: Aktuális rendelések
+                pages: Oldalak
+                payment_methods: Fizetési módok
+                payments: Fizetések
+                products: Termékek
+                promotions: Promóciók
+                roles: Szerepek
+                routes: Útvonalak
+                sales: Rendelések
+                shipments: Szállítások
+                shipping_categories: Szállítási kategóriák
+                shipping_methods: Szállítási módok
+                slideshow: Diavetítés
+                stockables: Készletszintek
+                tax_categories: Adózási kategóriák
+                tax_rates: Adókulcsok
+                taxation_settings: Adózás-beállítások
+                taxons: Kategorizálás
+                zones: Zónák
+            sidebar:
+                assortment: Választék
+                blocks: Tömbök
+                configuration: Beállítások
+                content: Tartalom
+                countries: Országok
+                dashboard: Vezérlőpult
+                general_settings: Általános beállítások
+                groups: Csoportok
+                homepage: Vissza az oldalra
+                locales: Területi beállítások
+                new_order: Új rendelés
+                new_promotion: Új promóció hozzáadása
+                options: Beállítások kezelése
+                orders: Függőben lévő rendelések
+                pages: Oldalak
+                payment_methods: Fizetési módok
+                payments: Kifizetések
+                products: Termékek
+                promotions: Promóciók
+                roles: Szerepek
+                routes: Útvonalak
+                sales: Rendelések
+                shipments: Szállítmányok
+                shipping_categories: Szállítási kategóriák
+                shipping_methods: Szállítási módok
+                slideshow: Diavetítés
+                stockables: Készletszintek
+                tax_categories: Adózási kategóriák
+                tax_rates: Adókulcsok
+                taxation_settings: Adózás-beállítások
+                taxons: Kategorizálás
+                zones: Zónák
+    frontend:
+        menu:
+            account:
+                addresses: Címjegyzék
+                homepage: Főoldal
+                orders: Megrendeléseim / számláim
+                password: Jelszó
+                profile: Személyes információk
+                shop: Vissza az áruházba
+            currency: 'Az árak megjelenítése %currency% pénznemben'
+            main:
+                account: Fiókom
+                administration: Adminisztráció
+                cart: 'Kosár (%items%) %total%'
+                login: Belépés
+                logout: Kilépés
+                register: Regisztráció
+            social:
+                facebook: Facebook
+                github: GitHub
+                google: Google+
+                linkedin: LinkedIn
+                twitter: Twitter

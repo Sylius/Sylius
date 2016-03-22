@@ -1,11 +1,21 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
     ui:
-        exchange_rate: 'Курс на конверзија'
-        id: 'ID број'
+        add_value: Додај вредност
+        city: Град
+        company: Компанија
+        email: Е-пошта
+        exchange_rate: Курс на конверзија
+        id: ID број
+        members: Членови
         message: Порака
-        'no': false
-        phone_number: 'Телефонски Број'
+        phone_number: Телефонски Број
+        postcode: Поштенски Број
         presentation: Презентација
+        province: Регион
+        provinces: Региони
         scope: Опсег
+        street: Улица
         topic: Тема
-        'yes': true

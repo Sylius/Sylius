@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  resource:
-    create: '%resource% er opprettet.'
-    update: '%resource% er oppdatert.'
-    delete: '%resource% er slettet.'
+    resource:
+        create: '%resource% er opprettet.'
+        update: '%resource% er oppdatert.'
+        delete: '%resource% er slettet.'

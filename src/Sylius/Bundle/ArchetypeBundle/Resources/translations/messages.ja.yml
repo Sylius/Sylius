@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    archetype:
-      options: sylius.breadcrumb.option.index
+    form:
+        archetype:
+            options: sylius.breadcrumb.option.index

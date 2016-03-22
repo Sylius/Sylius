@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    collection:
-      delete: ลบ
+    form:
+        collection:
+            delete: ลบ

@@ -2,28 +2,28 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    credit_card:
-      cardholder_name: Kortindehavers navn
-      expiry_month: Udløbsmåned
-      expiry_year: Udløbsår
-      number: Kortnummer
-      security_code: Sikkerhedskode (CVV)
-      type: Korttype
-    payment:
-      amount: Beløb til betaling
-      method: Betalingsmåde
-      state:
-        header: Betalingsstatus
-        checkout: Til kassen
-        completed: Gennemført
-        failed: Mislykkedes
-        new: Ny
-        pending: Afventer
-        processing: Behandler
-        unknown: Ukendt
-    payment_method:
-      description: Beskrivelse
-      enabled: Aktiveret?
-      gateway: Gateway
-      name: Navn
+    form:
+        credit_card:
+            cardholder_name: Kortindehavers navn
+            expiry_month: Udløbsmåned
+            expiry_year: Udløbsår
+            number: Kortnummer
+            security_code: Sikkerhedskode (CVV)
+            type: Korttype
+        payment:
+            amount: Beløb til betaling
+            method: Betalingsmåde
+            state:
+                header: Betalingsstatus
+                checkout: Til kassen
+                completed: Gennemført
+                failed: Mislykkedes
+                new: Ny
+                pending: Afventer
+                processing: Behandler
+                unknown: Ukendt
+        payment_method:
+            description: Beskrivelse
+            enabled: Aktiveret?
+            gateway: Gateway
+            name: Navn

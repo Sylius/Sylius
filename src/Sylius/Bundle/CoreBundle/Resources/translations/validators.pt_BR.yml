@@ -2,14 +2,14 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  locale:
-    code:
-      not_blank: Por favor, digite o código do locale.
-      unique: Este locale já existe.
-  product_variant:
-    onHand:
-      min: 'O campo em mãos deve ser maior que {{limit}}.'
-      not_blank: Por favor digite o campo em mãos.
-    price:
-      min: Preço não pode ser negativo.
-      not_blank: Por favor, digite o preço.
+    locale:
+        code:
+            not_blank: Por favor, digite o código do locale.
+            unique: Este locale já existe.
+    product_variant:
+        onHand:
+            min: 'O campo em mãos deve ser maior que {{limit}}.'
+            not_blank: Por favor digite o campo em mãos.
+        price:
+            min: Preço não pode ser negativo.
+            not_blank: Por favor, digite o preço.

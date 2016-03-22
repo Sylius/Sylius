@@ -2,18 +2,18 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    block:
-      id: ID
-    group:
-      name: Ime
-    order_filter:
-      payment_state: Stanje plaćanja
-    page:
-      id: ID
-    product_filter:
-      name: Ime
-    product_variant:
-      tax_category: Kategorija proizvoda
-    product_association_type:
-      name: Ime
+    form:
+        block:
+            id: ID
+        group:
+            name: Ime
+        order_filter:
+            payment_state: Stanje plaćanja
+        page:
+            id: ID
+        product_filter:
+            name: Ime
+        product_variant:
+            tax_category: Kategorija proizvoda
+        product_association_type:
+            name: Ime

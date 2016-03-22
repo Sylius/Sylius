@@ -2,32 +2,32 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    credit_card:
-      cardholder_name: Meno držiteľa karty
-      expiry_month: Mesiac expirácie
-      expiry_year: Rok expirácie
-      number: Číslo karty
-      security_code: Bezpečnostný (CVV) kód
-      type: Typ karty
-    payment:
-      amount: Suma platby
-      method: Spôsob platby
-      state:
-        header: Stav platby
-        checkout: Košík
-        completed: Dokončené
-        authorized: Povolené
-        failed: Neúspešné
-        new: Nová
-        pending: Čakajúca
-        processing: Spracúvava sa
-        unknown: Neznáme
-        void: Neplatné
-        cancelled: Zrušené
-        refunded: Vrátené peniaze
-    payment_method:
-      description: Popis
-      enabled: Zapnuté?
-      gateway: Brána
-      name: Názov
+    form:
+        credit_card:
+            cardholder_name: Meno držiteľa karty
+            expiry_month: Mesiac expirácie
+            expiry_year: Rok expirácie
+            number: Číslo karty
+            security_code: Bezpečnostný (CVV) kód
+            type: Typ karty
+        payment:
+            amount: Suma platby
+            method: Spôsob platby
+            state:
+                header: Stav platby
+                checkout: Košík
+                completed: Dokončené
+                authorized: Povolené
+                failed: Neúspešné
+                new: Nová
+                pending: Čakajúca
+                processing: Spracúvava sa
+                unknown: Neznáme
+                void: Neplatné
+                cancelled: Zrušené
+                refunded: Vrátené peniaze
+        payment_method:
+            description: Popis
+            enabled: Zapnuté?
+            gateway: Brána
+            name: Názov

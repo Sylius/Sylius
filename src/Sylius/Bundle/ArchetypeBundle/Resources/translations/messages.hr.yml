@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    archetype:
-      code: ISO kod
-      name: Naziv grupe
-      parent: Nadređena kategorija
-      options: Opcije
+    form:
+        archetype:
+            code: ISO kod
+            name: Naziv grupe
+            parent: Nadređena kategorija
+            options: Opcije

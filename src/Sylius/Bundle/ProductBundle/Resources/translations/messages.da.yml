@@ -2,19 +2,19 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    product:
-      name: Navn
-      description: Beskrivelse
-      options: Indstillinger
-      meta_keywords: Meta søgeord
-      meta_description: Meta beskrivelse
-      taxons: Taxons
-    product_variant:
-      available_on: Tilgængelig
-    product_archetype:
-      name: Navn
-      parent: Overordnede
-      options: Indstillinger
-    association_type:
-      name: Navn
+    form:
+        product:
+            name: Navn
+            description: Beskrivelse
+            options: Indstillinger
+            meta_keywords: Meta søgeord
+            meta_description: Meta beskrivelse
+            taxons: Taxons
+        product_variant:
+            available_on: Tilgængelig
+        product_archetype:
+            name: Navn
+            parent: Overordnede
+            options: Indstillinger
+        association_type:
+            name: Navn

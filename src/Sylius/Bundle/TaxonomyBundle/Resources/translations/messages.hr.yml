@@ -2,11 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    taxon:
-      description: Opis
-      name: Naziv
-      parent: Nadređena kategorija
-      permalink: Trajni link
-    taxonomy:
-      name: Naziv
+    form:
+        taxon:
+            description: Opis
+            name: Naziv
+            parent: Nadređena kategorija
+            permalink: Trajni link
+        taxonomy:
+            name: Naziv

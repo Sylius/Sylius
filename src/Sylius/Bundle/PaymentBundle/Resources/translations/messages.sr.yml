@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    payment:
-      state:
-        header: Стање плаћања
+    form:
+        payment:
+            state:
+                header: Стање плаћања

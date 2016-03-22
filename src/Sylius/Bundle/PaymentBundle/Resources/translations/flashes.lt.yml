@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  payment:
-    complete: Mokėjimas baigtas.
-    cancel: Mokėjimas atšauktas.
-    transition_fail: Veiksmas negalėjo būti atliktas atsižvelgiant į dabartinę mokėjimo būseną
+    payment:
+        complete: Mokėjimas baigtas.
+        cancel: Mokėjimas atšauktas.
+        transition_fail: Veiksmas negalėjo būti atliktas atsižvelgiant į dabartinę mokėjimo būseną

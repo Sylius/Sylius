@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  inventory_unit:
-    backorder: Unitate de stock în backorder.
-    sell: Unitate de stoc vândută.
-    return: Unitate de stoc returnată.
-    transition_fail: Acţiunea nu a putut fi efectuat având în vedere starea actuală a unității de stoc
+    inventory_unit:
+        backorder: Unitate de stock în backorder.
+        sell: Unitate de stoc vândută.
+        return: Unitate de stoc returnată.
+        transition_fail: Acţiunea nu a putut fi efectuat având în vedere starea actuală a unității de stoc

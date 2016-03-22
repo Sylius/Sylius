@@ -2,16 +2,16 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    login:
-      username: "Nom d'usuari"
-      password: Contrasenya
-  ui:
-    delete: Suprimir
-    edit: Editar
-    enabled: Activat
-    description: Descripció
-    "no": false
-    success: Realitzat amb èxit
-    "yes": true
-    new: Nou
+    form:
+        login:
+            username: "Nom d'usuari"
+            password: Contrasenya
+    ui:
+        delete: Suprimir
+        edit: Editar
+        enabled: Activat
+        description: Descripció
+        "no": false
+        success: Realitzat amb èxit
+        "yes": true
+        new: Nou

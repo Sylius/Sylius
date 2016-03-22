@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    review:
-      title: Cím
-      author: Szerző
-      status:
-        new: Új
+    form:
+        review:
+            title: Cím
+            author: Szerző
+            status:
+                new: Új

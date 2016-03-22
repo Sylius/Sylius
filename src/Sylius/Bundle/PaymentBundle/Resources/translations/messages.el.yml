@@ -2,21 +2,21 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    credit_card:
-      cardholder_name: Όνομα κατόχου της κάρτας
-      number: Αριθμός κάρτας
-      type: Τύπος κάρτας
-    payment:
-      amount: Ποσό πληρωμής
-      method: Τρόπος πληρωμής
-      state:
-        header: Κατάσταση πληρωμής
-        checkout: Ολοκλήρωση αγορών
-        pending: Σε εκκρεμότητα
-        processing: Σε εξέλιξη
-        unknown: Άγνωστο
-    payment_method:
-      description: Περιγραφή
-      gateway: Πύλη
-      name: Ονομασία
+    form:
+        credit_card:
+            cardholder_name: Όνομα κατόχου της κάρτας
+            number: Αριθμός κάρτας
+            type: Τύπος κάρτας
+        payment:
+            amount: Ποσό πληρωμής
+            method: Τρόπος πληρωμής
+            state:
+                header: Κατάσταση πληρωμής
+                checkout: Ολοκλήρωση αγορών
+                pending: Σε εκκρεμότητα
+                processing: Σε εξέλιξη
+                unknown: Άγνωστο
+        payment_method:
+            description: Περιγραφή
+            gateway: Πύλη
+            name: Ονομασία

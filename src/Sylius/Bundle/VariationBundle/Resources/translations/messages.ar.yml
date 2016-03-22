@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    variant:
-      presentation: تقديم
-    option:
-      name: الاسم
-    option_value:
-      value: القيمة
+    form:
+        variant:
+            presentation: تقديم
+        option:
+            name: الاسم
+        option_value:
+            value: القيمة

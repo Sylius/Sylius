@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  customer:
-    first_name:
-      not_blank: Παρακαλώ εισάγετε το όνομά σας.
-    last_name:
-      not_blank: Παρακαλούμε εισάγετε το επώνυμό σας.
+    customer:
+        first_name:
+            not_blank: Παρακαλώ εισάγετε το όνομά σας.
+        last_name:
+            not_blank: Παρακαλούμε εισάγετε το επώνυμό σας.

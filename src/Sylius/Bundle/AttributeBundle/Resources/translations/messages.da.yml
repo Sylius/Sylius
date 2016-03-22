@@ -2,11 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    attribute:
-      choices: Valgmuligheder
-      code: Kode
-      name: Navn
-      type: Type
-    attribute_type:
-      configuration: Konfiguration
+    form:
+        attribute:
+            choices: Valgmuligheder
+            code: Kode
+            name: Navn
+            type: Type
+        attribute_type:
+            configuration: Konfiguration

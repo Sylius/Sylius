@@ -2,11 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    rule:
-      contains_product_configuration:
-        variants: Produtos
-    promotion:
-      add_action: Adicionar ação
-      add_rule: Adicionar regra
-      description: Descrição
+    form:
+        rule:
+            contains_product_configuration:
+                variants: Produtos
+        promotion:
+            add_action: Adicionar ação
+            add_rule: Adicionar regra
+            description: Descrição

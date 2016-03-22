@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    review:
-      title: Titlu
-      author: Autor
-      status:
-        new: Nouă
+    form:
+        review:
+            title: Titlu
+            author: Autor
+            status:
+                new: Nouă

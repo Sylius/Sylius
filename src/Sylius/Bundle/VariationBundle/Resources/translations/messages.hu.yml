@@ -2,12 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    variant:
-      presentation: Bemutató
-    option:
-      name: Név
-      values: Lehetséges értékek
-    option_value:
-      add_value: Adja hozzá az értéket
-      value: Érték
+    form:
+        variant:
+            presentation: Bemutató
+        option:
+            name: Név
+            values: Lehetséges értékek
+        option_value:
+            add_value: Adja hozzá az értéket
+            value: Érték

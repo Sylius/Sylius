@@ -2,11 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    taxon:
-      description: Açıklama
-      name: Ad
-      parent: Üst
-      permalink: Kalıcı Bağlantı
-    taxonomy:
-      name: Ad
+    form:
+        taxon:
+            description: Açıklama
+            name: Ad
+            parent: Üst
+            permalink: Kalıcı Bağlantı
+        taxonomy:
+            name: Ad

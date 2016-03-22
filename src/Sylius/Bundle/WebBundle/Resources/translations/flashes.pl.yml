@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  account:
-    password:
-      change_success: Hasło zostało zmienione
-      invalid: Błędne hasło
+    account:
+        password:
+            change_success: Hasło zostało zmienione
+            invalid: Błędne hasło

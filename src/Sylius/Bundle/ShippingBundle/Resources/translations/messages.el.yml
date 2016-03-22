@@ -2,31 +2,31 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    rule:
-      unit_count_configuration:
-        count: Πλήθος
-    shipment:
-      state: Νομός
-      states:
-        checkout: Ολοκλήρωση αγορών
-        pending: Σε εκκρεμότητα
-        ready: Έτοιμα
-        shipped: Αποστάλθηκαν
-        returned: Επεστράφησαν
-      tracking_code: Κωδικός παρακολούθησης
-    shipping_calculator:
-      flat_rate_configuration:
-        amount: Ποσό
-      per_unit_rate_configuration:
-        amount: Ποσό
-      volume_rate_configuration:
-        amount: Ποσό
-    shipping_category:
-      description: Περιγραφή
-      name: Ονομασία
-    shipping_method:
-      category: Κατηγορία
-      configuration: Παραμετροποίηση
-      enabled: Ενεργοποιημένο
-      name: Ονομασία
+    form:
+        rule:
+            unit_count_configuration:
+                count: Πλήθος
+        shipment:
+            state: Νομός
+            states:
+                checkout: Ολοκλήρωση αγορών
+                pending: Σε εκκρεμότητα
+                ready: Έτοιμα
+                shipped: Αποστάλθηκαν
+                returned: Επεστράφησαν
+            tracking_code: Κωδικός παρακολούθησης
+        shipping_calculator:
+            flat_rate_configuration:
+                amount: Ποσό
+            per_unit_rate_configuration:
+                amount: Ποσό
+            volume_rate_configuration:
+                amount: Ποσό
+        shipping_category:
+            description: Περιγραφή
+            name: Ονομασία
+        shipping_method:
+            category: Κατηγορία
+            configuration: Παραμετροποίηση
+            enabled: Ενεργοποιημένο
+            name: Ονομασία

@@ -2,13 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    role:
-      code: Cod
-      name: Nume
-      description: Descriere
-      parent: Părinte
-    permission:
-      code: Cod
-      description: Descriere
-      parent: Părinte
+    form:
+        role:
+            code: Cod
+            name: Nume
+            description: Descriere
+            parent: Părinte
+        permission:
+            code: Cod
+            description: Descriere
+            parent: Părinte

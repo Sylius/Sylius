@@ -1,0 +1,34 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    imagine_block:
+        name:
+            not_blank: 请输入图片块的名称。
+        label:
+            not_blank: 请输入图片块的名称。
+        image:
+            not_blank: 请选择图片块名称。
+        start_date:
+            invalid_date: 开始日期无效。
+    menu:
+        start_date:
+            invalid_date: 开始日期无效。
+    menu_node:
+        start_date:
+            invalid_date: 开始日期无效。
+    route:
+        start_date:
+            invalid_date: 开始日期无效。
+    slideshow_block:
+        start_date:
+            invalid_date: 开始日期无效。
+    simple_block:
+        start_date:
+            invalid_date: 开始日期无效。
+    string_block:
+        start_date:
+            invalid_date: 开始日期无效。
+    static_content:
+        start_date:
+            invalid_date: 开始日期无效。

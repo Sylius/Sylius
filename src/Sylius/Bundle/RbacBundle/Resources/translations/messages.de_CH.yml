@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    role:
-      code: Code
-      name: Name
-    permission:
-      code: Code
+    form:
+        role:
+            code: Code
+            name: Name
+        permission:
+            code: Code

@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  shipment:
-    ship:
-      success: Wysyłka zakończona.
+    shipment:
+        ship:
+            success: Wysyłka zakończona.

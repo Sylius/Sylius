@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    priceable:
-      price: Hinta
-      calculator: Hinnoittelu
-      configuration: Asetukset
+    form:
+        priceable:
+            price: Hinta
+            calculator: Hinnoittelu
+            configuration: Asetukset

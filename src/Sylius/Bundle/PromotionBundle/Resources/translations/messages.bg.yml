@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    rule:
-      contains_product_configuration:
-        variants: Продукти
-    promotion:
-      add_action: Добавяне на действие
-      add_rule: Добавяне на правило
+    form:
+        rule:
+            contains_product_configuration:
+                variants: Продукти
+        promotion:
+            add_action: Добавяне на действие
+            add_rule: Добавяне на правило

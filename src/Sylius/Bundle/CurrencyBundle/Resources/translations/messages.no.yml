@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    currency:
-      exchange_rate: Valutakurs
-      enabled: Aktivert
+    form:
+        currency:
+            exchange_rate: Valutakurs
+            enabled: Aktivert

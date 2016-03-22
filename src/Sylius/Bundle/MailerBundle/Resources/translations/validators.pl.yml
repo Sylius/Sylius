@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  email:
-    code:
-      not_blank: Proszę wprowadzić kod e-mail.
-      unique: Kod e-mail musi być unikatowy.
-    subject:
-      not_blank: Proszę wpisać temat wiadomości e-mail.
+    email:
+        code:
+            not_blank: Proszę wprowadzić kod e-mail.
+            unique: Kod e-mail musi być unikatowy.
+        subject:
+            not_blank: Proszę wpisać temat wiadomości e-mail.

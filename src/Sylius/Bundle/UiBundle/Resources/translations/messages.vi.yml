@@ -2,15 +2,15 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    login:
-      password: Mật khẩu
-  ui:
-    create: Tạo
-    dashboard: Bảng tin
-    "no": false
-    success: Thành công
-    "yes": true
-    countries: Quốc gia
-    new_country: Tạo quốc gia mới
-    locales: Miền địa phương
+    form:
+        login:
+            password: Mật khẩu
+    ui:
+        create: Tạo
+        dashboard: Bảng tin
+        "no": false
+        success: Thành công
+        "yes": true
+        countries: Quốc gia
+        new_country: Tạo quốc gia mới
+        locales: Miền địa phương

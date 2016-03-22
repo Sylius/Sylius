@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  review:
-    author:
-      already_exists: Tento e-mail je již registrován, prosím přihlašte se nebo obnovte své heslo.
+    review:
+        author:
+            already_exists: Tento e-mail je již registrován, prosím přihlašte se nebo obnovte své heslo.

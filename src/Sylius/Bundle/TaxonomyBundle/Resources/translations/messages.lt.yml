@@ -2,11 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    taxon:
-      description: Aprašymas
-      name: Pavadinimas
-      parent: Motininis elementas
-      permalink: Nuolatinė nuoroda
-    taxonomy:
-      name: Pavadinimas
+    form:
+        taxon:
+            description: Aprašymas
+            name: Pavadinimas
+            parent: Motininis elementas
+            permalink: Nuolatinė nuoroda
+        taxonomy:
+            name: Pavadinimas

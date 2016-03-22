@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    review:
-      title: Títol
-      status:
-        new: Nou
+    form:
+        review:
+            title: Títol
+            status:
+                new: Nou

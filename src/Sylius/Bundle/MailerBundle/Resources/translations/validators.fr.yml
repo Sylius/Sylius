@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  email:
-    code:
-      not_blank: Veuillez entrer un code e-mail.
-      unique: Le code e-mail doit être unique.
-    subject:
-      not_blank: "Veuillez saisir l'objet du mail."
+    email:
+        code:
+            not_blank: Veuillez entrer un code e-mail.
+            unique: Le code e-mail doit être unique.
+        subject:
+            not_blank: "Veuillez saisir l'objet du mail."

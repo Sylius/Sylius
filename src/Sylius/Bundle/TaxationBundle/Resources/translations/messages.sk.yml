@@ -2,13 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    tax_category:
-      name: Názov
-      description: Popis
-    tax_rate:
-      category: Kategória
-      name: Názov
-      amount: Suma
-      included_in_price: Zahrnutá v cene?
-      calculator: Spôsob vypočtu
+    form:
+        tax_category:
+            name: Názov
+            description: Popis
+        tax_rate:
+            category: Kategória
+            name: Názov
+            amount: Suma
+            included_in_price: Zahrnutá v cene?
+            calculator: Spôsob vypočtu

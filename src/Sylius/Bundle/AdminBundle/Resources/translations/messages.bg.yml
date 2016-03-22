@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  menu:
-    admin:
-      main:
-        configuration:
-          countries: Страни
-          locales: Езикови променливи
+    menu:
+        admin:
+            main:
+                configuration:
+                    countries: Страни
+                    locales: Езикови променливи

@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  menu:
-    admin:
-      main:
-        configuration:
-          countries: Países
+    menu:
+        admin:
+            main:
+                configuration:
+                    countries: Países

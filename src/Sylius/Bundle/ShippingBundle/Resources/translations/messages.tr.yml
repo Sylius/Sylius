@@ -2,45 +2,45 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    rule:
-      unit_count_configuration:
-        count: Sayısı
-      type: Kural türü
-    shipment:
-      state: Durum
-      states:
-        checkout: 'Ödeme  yap'
-        pending: Beklemede
-        ready: Hazır
-        shipped: Kargolandı
-        returned: İade Edildi
-        cancelled: İptal Edildi
-      tracking_code: İzleme Kodu
-    shipping_calculator:
-      flat_rate_configuration:
-        label: Sevkıyat başına sabit oran
-        amount: Miktar
-      flexible_rate_configuration:
-        label: Esnek oranı
-      per_unit_rate_configuration:
-        amount: Miktar
-      weight_rate_configuration:
-        label: Temel ağırlık oranı
-        fixed: Sabit tutar
-        variable: Değişken tutar
-        division: Bölüm
-      volume_rate_configuration:
-        label: Temel birim oranı
-        amount: Miktar
-        division: Bölüm
-    shipping_category:
-      description: Açıklama
-      name: Ad
-    shipping_method:
-      calculator: Hesaplayıcı
-      category: Kategori
-      category_requirement: Kategori gereksinimi
-      configuration: Ayarlar
-      enabled: Etkin
-      name: Ad
+    form:
+        rule:
+            unit_count_configuration:
+                count: Sayısı
+            type: Kural türü
+        shipment:
+            state: Durum
+            states:
+                checkout: 'Ödeme  yap'
+                pending: Beklemede
+                ready: Hazır
+                shipped: Kargolandı
+                returned: İade Edildi
+                cancelled: İptal Edildi
+            tracking_code: İzleme Kodu
+        shipping_calculator:
+            flat_rate_configuration:
+                label: Sevkıyat başına sabit oran
+                amount: Miktar
+            flexible_rate_configuration:
+                label: Esnek oranı
+            per_unit_rate_configuration:
+                amount: Miktar
+            weight_rate_configuration:
+                label: Temel ağırlık oranı
+                fixed: Sabit tutar
+                variable: Değişken tutar
+                division: Bölüm
+            volume_rate_configuration:
+                label: Temel birim oranı
+                amount: Miktar
+                division: Bölüm
+        shipping_category:
+            description: Açıklama
+            name: Ad
+        shipping_method:
+            calculator: Hesaplayıcı
+            category: Kategori
+            category_requirement: Kategori gereksinimi
+            configuration: Ayarlar
+            enabled: Etkin
+            name: Ad

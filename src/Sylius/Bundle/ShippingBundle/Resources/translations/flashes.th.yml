@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  shipment:
-    ship:
-      success: การจัดส่งสินค้าเสร็จสมบูรณ์แล้ว
+    shipment:
+        ship:
+            success: การจัดส่งสินค้าเสร็จสมบูรณ์แล้ว

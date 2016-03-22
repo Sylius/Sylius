@@ -2,12 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    contact_request:
-      first_name: Keresztnév
-      last_name: Vezetéknév
-      email: E-mail
-      message: Üzenet
-      topic: Téma
-    contact_topic:
-      title: Cím
+    form:
+        contact_request:
+            first_name: Keresztnév
+            last_name: Vezetéknév
+            email: E-mail
+            message: Üzenet
+            topic: Téma
+        contact_topic:
+            title: Cím

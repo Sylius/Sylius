@@ -2,29 +2,29 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  promotion:
-    code:
-      unique: La promozione con il codice dato esiste già.
-      not_blank: Inserisci il codice della promozione.
-    description:
-      max_length: 'La descrizione della promozione non deve essere più lunga di 1 carattere.|La descrizione della promozione non deve essere più lunga di {{ limit }} caratteri.'
-      min_length: 'La descrizione della promozione deve essere lunga almeno 1 carattere.|La descrizione della promozione deve essere lunga almeno {{ limit }} caratteri.'
-      not_blank: Inserisci la descrizione della promozione.
-    name:
-      max_length: 'Il nome della promozione non deve essere più lungo di 1 carattere. | Il nome della promozione non deve essere più lungo di {{ limit }} caratteri.'
-      min_length: 'Il nome della promozione deve essere lungo almeno di 1 carattere. | Il nome della promozione deve essere lunga almeno {{ limit }} caratteri.'
-      not_blank: Inserisci il nome della promozione.
-  promotion_coupon:
-    code:
-      max_length: 'Il codice del coupon non deve essere più lungo di 1 carattere. |Il codice del coupon non deve essere più lungo di {{ limit }} caratteri.'
-      min_length: 'Il codice del coupon deve essere lungo almeno 1 carattere. |Il codice del coupon deve essere lungo almeno {{ limit }} caratteri.'
-      not_blank: Per favore inserisci il codice coupon.
-      unique: Questo coupon esiste già.
-    usage_limit:
-      min: 'Il limite di utilizzo dei coupon deve essere minimo {{ limit }}.'
-  promotion_coupon_generate_instruction:
-    amount:
-      min: 'Il totale dei coupon da generare deve essere minimo {{ limit }}.'
-      not_blank: Inserisci la quantità di coupon da generare.
-    usage_limit:
-      min: 'Il limite di utilizzo dei coupon generati deve essere minimo {{ limit }}.'
+    promotion:
+        code:
+            unique: La promozione con il codice dato esiste già.
+            not_blank: Inserisci il codice della promozione.
+        description:
+            max_length: 'La descrizione della promozione non deve essere più lunga di 1 carattere.|La descrizione della promozione non deve essere più lunga di {{ limit }} caratteri.'
+            min_length: 'La descrizione della promozione deve essere lunga almeno 1 carattere.|La descrizione della promozione deve essere lunga almeno {{ limit }} caratteri.'
+            not_blank: Inserisci la descrizione della promozione.
+        name:
+            max_length: 'Il nome della promozione non deve essere più lungo di 1 carattere. | Il nome della promozione non deve essere più lungo di {{ limit }} caratteri.'
+            min_length: 'Il nome della promozione deve essere lungo almeno di 1 carattere. | Il nome della promozione deve essere lunga almeno {{ limit }} caratteri.'
+            not_blank: Inserisci il nome della promozione.
+    promotion_coupon:
+        code:
+            max_length: 'Il codice del coupon non deve essere più lungo di 1 carattere. |Il codice del coupon non deve essere più lungo di {{ limit }} caratteri.'
+            min_length: 'Il codice del coupon deve essere lungo almeno 1 carattere. |Il codice del coupon deve essere lungo almeno {{ limit }} caratteri.'
+            not_blank: Per favore inserisci il codice coupon.
+            unique: Questo coupon esiste già.
+        usage_limit:
+            min: 'Il limite di utilizzo dei coupon deve essere minimo {{ limit }}.'
+    promotion_coupon_generate_instruction:
+        amount:
+            min: 'Il totale dei coupon da generare deve essere minimo {{ limit }}.'
+            not_blank: Inserisci la quantità di coupon da generare.
+        usage_limit:
+            min: 'Il limite di utilizzo dei coupon generati deve essere minimo {{ limit }}.'

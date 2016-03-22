@@ -2,18 +2,18 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    imagine_block:
-      filter: Filtrar
-      internal_name: Nome interno
-    menu_node_block:
-      content: Conteúdo
-      internal_name: Nome interno
-    route:
-      content: Conteúdo
-    simple_block:
-      internal_name: Nome interno
-    slideshow_block:
-      internal_name: Nome interno
-    static_content:
-      internal_name: Nome interno
+    form:
+        imagine_block:
+            filter: Filtrar
+            internal_name: Nome interno
+        menu_node_block:
+            content: Conteúdo
+            internal_name: Nome interno
+        route:
+            content: Conteúdo
+        simple_block:
+            internal_name: Nome interno
+        slideshow_block:
+            internal_name: Nome interno
+        static_content:
+            internal_name: Nome interno

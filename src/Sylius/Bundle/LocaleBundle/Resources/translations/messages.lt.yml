@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    locale:
-      enabled: Įjungta
-      name: Pavadinimas
+    form:
+        locale:
+            enabled: Įjungta
+            name: Pavadinimas

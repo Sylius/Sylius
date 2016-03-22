@@ -2,37 +2,37 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  metadata:
-    type:
-      none: ' -ŽIADNE- '
-      twitter_summary_card: Zhrnutie
-      twitter_summary_large_image_card: Zhrnutie s veľkým obrazom
-      twitter_player_card: Prehrávač
-      twitter_app_card: Aplikácia
-    page:
-      title: Názov
-      description: Popis
-      keywords: Kľúčové slová
-      twitter: Twitter karta
-    twitter:
-      title: Názov
-      description: Popis
-      site: Stránka
-      site_id: ID stánky
-      creator: Autor
-      creator_id: ID autora
-      image: Obrázok
-      player: Prehrávač
-      player_width: Šírka prehrávača
-      player_height: Výška prehrávača
-      player_stream: Stream prehrávača
-      player_stream_content_type: Typ obsahu prehrávača
-      app_name_iphone: Názov iPhone aplikácie
-      app_id_iphone: ID aplikácie iPhone
-      app_url_iphone: URL Adresa aplikácie iPhone
-      app_name_ipad: Názov aplikácie iPad
-      app_id_ipad: ID aplikácie iPad
-      app_url_ipad: URL Adresa aplikácie iPad
-      app_name_googleplay: Názov aplikácie Google Play
-      app_id_googleplay: ID aplikácie Google Play
-      app_url_googleplay: URL address aplikácie Google Play
+    metadata:
+        type:
+            none: ' -ŽIADNE- '
+            twitter_summary_card: Zhrnutie
+            twitter_summary_large_image_card: Zhrnutie s veľkým obrazom
+            twitter_player_card: Prehrávač
+            twitter_app_card: Aplikácia
+        page:
+            title: Názov
+            description: Popis
+            keywords: Kľúčové slová
+            twitter: Twitter karta
+        twitter:
+            title: Názov
+            description: Popis
+            site: Stránka
+            site_id: ID stánky
+            creator: Autor
+            creator_id: ID autora
+            image: Obrázok
+            player: Prehrávač
+            player_width: Šírka prehrávača
+            player_height: Výška prehrávača
+            player_stream: Stream prehrávača
+            player_stream_content_type: Typ obsahu prehrávača
+            app_name_iphone: Názov iPhone aplikácie
+            app_id_iphone: ID aplikácie iPhone
+            app_url_iphone: URL Adresa aplikácie iPhone
+            app_name_ipad: Názov aplikácie iPad
+            app_id_ipad: ID aplikácie iPad
+            app_url_ipad: URL Adresa aplikácie iPad
+            app_name_googleplay: Názov aplikácie Google Play
+            app_id_googleplay: ID aplikácie Google Play
+            app_url_googleplay: URL address aplikácie Google Play

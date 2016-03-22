@@ -2,7 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    attribute:
-      product_attribute_value:
-        value: Вредност
+    form:
+        attribute:
+            product_attribute_value:
+                value: Вредност
+        guest:
+            email: Е-пошта

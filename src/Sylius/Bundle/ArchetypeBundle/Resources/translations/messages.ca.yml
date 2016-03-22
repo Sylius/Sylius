@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    archetype:
-      code: Codi
-      name: Nom
+    form:
+        archetype:
+            code: Codi
+            name: Nom

@@ -2,21 +2,21 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    product:
-      name: Name
-      description: Beschreibung
-      attributes: Attribute
-      options: Optionen
-      meta_keywords: Metastichwörter
-      meta_description: Metabeschreibung
-      taxons: Gruppen
-    product_variant:
-      available_on: Verfügbar ab
-    product_archetype:
-      name: Name
-      parent: Übergeordnet
-      attributes: Attribute
-      options: Optionen
-    association_type:
-      name: Name
+    form:
+        product:
+            name: Name
+            description: Beschreibung
+            attributes: Attribute
+            options: Optionen
+            meta_keywords: Metastichwörter
+            meta_description: Metabeschreibung
+            taxons: Gruppen
+        product_variant:
+            available_on: Verfügbar ab
+        product_archetype:
+            name: Name
+            parent: Übergeordnet
+            attributes: Attribute
+            options: Optionen
+        association_type:
+            name: Name

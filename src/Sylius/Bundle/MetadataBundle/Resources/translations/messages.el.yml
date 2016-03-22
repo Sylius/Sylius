@@ -2,11 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  metadata:
-    page:
-      title: Τίτλος
-      description: Περιγραφή
-    twitter:
-      title: Τίτλος
-      description: Περιγραφή
-      image: Εικόνα
+    metadata:
+        page:
+            title: Τίτλος
+            description: Περιγραφή
+        twitter:
+            title: Τίτλος
+            description: Περιγραφή
+            image: Εικόνα

@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    channel:
-      name: Імя
-      description: Апісанне
-      enabled: Уключана
+    form:
+        channel:
+            name: Імя
+            description: Апісанне
+            enabled: Уключана

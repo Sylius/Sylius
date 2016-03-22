@@ -1,3 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
     block:
         imagine:
@@ -14,7 +17,9 @@ sylius:
         publishable: Publicerad
     ui:
         billing_address: Faktureringsadress
+        city: Ort
         code: Kod
+        company: Företag
         coupon: Rabattkupong
         default_currency: Standardvaluta
         enabled: Aktiverad
@@ -22,19 +27,23 @@ sylius:
         firstname: Förnamn
         groups: Grupper
         id: Id
+        members: Medlemmar
         message: Meddelande
         name: Namn
-        'no': false
         number: Nummer
+        payment_state: Betalningsstatus
         phone_number: Telefonnummer
+        postcode: Postnummer
         presentation: Presentation
+        province: Län
+        provinces: Län
         roles: Roller
         routes: Rutter
         scope: Omfattning
         shipping_category: Kategori
         sku: SKU
+        street: Gatuadress
         tax_category: Momskategori
         topic: Ämne
         unit_price: Enhetspris
-        'yes': true
         zone: Zon

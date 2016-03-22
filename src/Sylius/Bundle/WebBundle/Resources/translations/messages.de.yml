@@ -1,23 +1,26 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
     account:
         order:
             details: Bestelldetails
-            download_invoice: 'Rechnung herunterladen'
-            list: 'Alle Bestellungen'
+            download_invoice: Rechnung herunterladen
+            list: Alle Bestellungen
             placed_at: 'Bestellt am %at%'
             shipment:
                 ready: 'Bereit seit %at%'
                 returned: 'Retour am %at%'
                 shipped: 'Geliefert am %at%'
-        title: 'Mein Account'
+        title: Mein Account
     archetype:
-        build: 'Archetype erstellen'
+        build: Archetype erstellen
     block:
         imagine:
-            index: 'Imagine Blöcke'
+            index: Imagine Blöcke
             publishable: Veröffentlicht
         simple:
-            index: 'Einfache Elemente'
+            index: Einfache Elemente
             publishable: Veröffentlicht
         slideshow:
             index: Slideshow–Elemente
@@ -26,67 +29,67 @@ sylius:
             index: Zeichenketten–Elemente
             publishable: Veröffentlicht
     cart:
-        empty: 'Ihr Warenkorb ist leer'
+        empty: Ihr Warenkorb ist leer
         summary:
-            clear: 'Warenkorb leeren'
+            clear: Warenkorb leeren
             quantity: Anzahl
         total_items: '1 Artikel|%count% Artikel'
     checkout:
         finalize:
             order:
-                no_items: 'Diese Bestellung hat keine Artikel'
-                no_promotion: 'Keine Reklame'
-                no_shipping_charges: 'Keine Versandkosten'
-                no_taxes: 'Keine Steuern'
+                no_items: Diese Bestellung hat keine Artikel
+                no_promotion: Keine Reklame
+                no_shipping_charges: Keine Versandkosten
+                no_taxes: Keine Steuern
                 promotion_discount: Rabatt
             order_item:
                 quantity: Menge
         forward: Weiter
         security:
-            proceed_order: 'Mit der Bestellung fortfahren'
+            proceed_order: Mit der Bestellung fortfahren
     customer:
         filter:
-            all: 'Alle Kunden anzeigen'
-            registered: 'Registrierte Kunden anzeigen'
-            unconfirmed: 'Unbestätigte Kunden anzeigen'
+            all: Alle Kunden anzeigen
+            registered: Registrierte Kunden anzeigen
+            unconfirmed: Unbestätigte Kunden anzeigen
         general_info: 'Allgemeine Kundeninformation : "%fullName%"'
     history:
-        logged_at: 'geloggt am (version)'
+        logged_at: geloggt am (version)
     homepage:
         splash:
-            headline: 'Willkommen bei Sylius'
-            subheadline: 'Modernes eCommerce für Symfony2'
+            headline: Willkommen bei Sylius
+            subheadline: Modernes eCommerce für Symfony2
     menu:
         publishable: Veröffentlicht
     meta:
-        backend_title: 'Sylius Dashboard'
+        backend_title: Sylius Dashboard
         frontend_title: Titel
     order:
         adjustments:
-            lock_all: 'Sperre alle Anpassungen'
-            unlock_all: 'Entsperre alle Anpassungen'
+            lock_all: Sperre alle Anpassungen
+            unlock_all: Entsperre alle Anpassungen
         comment:
             notify: Benachrichtigung
-        guest: 'Gast Kunde'
-        no_items: 'Diese Bestellung hat keine Artikel'
-        no_shipments: 'Kein Versand für diese Bestellung'
-        no_shipping_charges: 'Keine Versandkosten'
-        no_taxes: 'Keine Steuern'
+        guest: Gast Kunde
+        no_items: Diese Bestellung hat keine Artikel
+        no_shipments: Kein Versand für diese Bestellung
+        no_shipping_charges: Keine Versandkosten
+        no_taxes: Keine Steuern
     order_item:
         quantity: Artikelmenge
         sellable: Verkäuflich
     page:
-        no_route: 'Die Seite wird nicht im Frontend angezeigt, da keine Route definiert worden ist'
+        no_route: Die Seite wird nicht im Frontend angezeigt, da keine Route definiert worden ist
         publishable: Veröffentlicht
     pricing:
         volume_based:
-            max: 'Maximale Menge'
+            max: Maximale Menge
             min: Mindestmenge
     promotion_coupon:
         generate: Generieren
         index: Gutscheine
     report:
-        data_fetcher: 'Datenquelle Typ'
+        data_fetcher: Datenquelle Typ
         renderer: Renderer-Typ
     security:
         login:
@@ -94,138 +97,138 @@ sylius:
     shipment:
         update: Bearbeiten
     taxon:
-        image: 'Bild auswählen'
-        no_image: 'Kein Bild für dieses Schlagwort vorhanden'
+        image: Bild auswählen
+        no_image: Kein Bild für dieses Schlagwort vorhanden
     ui:
         action: Aktion
         actions: Aktionen
         add: Hinzufügen
-        add_action: 'Aktion hinzufügen'
-        add_attribute: 'Attribut hinzufügen'
-        add_channel: 'Kanal hinzufügen'
-        add_choice: 'Auswahl hinzufügen'
+        add_action: Aktion hinzufügen
+        add_attribute: Attribut hinzufügen
+        add_channel: Kanal hinzufügen
+        add_choice: Auswahl hinzufügen
         add_coupon: Erstellt
-        add_image: 'Bild hinzufügen'
-        add_member: 'Mitglied hinzufügen'
-        add_menu_element: 'Menü Element hinzufügen'
-        add_new_email: 'Neue E-Mail hinzufügen'
-        add_new_permission: 'Neue Berechtigung hinzufügen'
-        add_new_role: 'Neue Rolle hinzufügen'
-        add_province: 'Bundesland hinzufügen'
-        add_rule: 'Regel hinzufügen'
-        add_to_cart: 'In den Warenkorb'
-        add_value: 'Wert hinzufügen'
-        adding_new_customer_groups: 'Neue Kundengruppe hinzufügen'
-        adding_new_email: 'Neue E-Mail hinzufügen'
-        adding_new_locale: 'Neue Gebietsschemata anlegen'
+        add_image: Bild hinzufügen
+        add_member: Mitglied hinzufügen
+        add_menu_element: Menü Element hinzufügen
+        add_new_email: Neue E-Mail hinzufügen
+        add_new_permission: Neue Berechtigung hinzufügen
+        add_new_role: Neue Rolle hinzufügen
+        add_province: Bundesland hinzufügen
+        add_rule: Regel hinzufügen
+        add_to_cart: In den Warenkorb
+        add_value: Wert hinzufügen
+        adding_new_customer_groups: Neue Kundengruppe hinzufügen
+        adding_new_email: Neue E-Mail hinzufügen
+        adding_new_locale: Neue Gebietsschemata anlegen
         addressing_step: Lieferadresse
         adjustments: Änderungen
         administration: Login
-        administration_dashboard: 'Administration Dashboard'
-        all_your_addresses: 'Alle Adressen'
+        administration_dashboard: Administration Dashboard
+        all_your_addresses: Alle Adressen
         amount: Steuersatz
         archetype: Archetypen
         assortment: Sortiment
         attributes: Attribute
         author: Autor
         availability: Verfügbarkeit
-        available_on: 'Verfügbar ab'
-        available_on_demand: 'Auf Nachfrage verfügbar'
+        available_on: Verfügbar ab
+        available_on_demand: Auf Nachfrage verfügbar
         back: Zurück
         backorder: Lieferrückstand
-        balance_due: 'Zahlung fällig'
-        bill_to: 'Rechnung an'
+        balance_due: Zahlung fällig
+        bill_to: Rechnung an
         billing_address: Rechnungsadresse
         blocks: Blöcke
         body: Inhalt
-        browse_products: 'Produkte durchsuchen'
+        browse_products: Produkte durchsuchen
         build: Erstellen
-        building_product_from_archetype: 'Produkt aus Archetype erstellen'
+        building_product_from_archetype: Produkt aus Archetype erstellen
         calculator: Steuersatzrechner
         cancel: Abbrechen
         cancelled: Abgebrochen
         categorization: Produktkategorisierung
         category: Kategorie
-        change_password: 'Passwort ändern'
-        change_your_password: 'Passwort ändern'
+        change_password: Passwort ändern
+        change_your_password: Passwort ändern
         channel: Promotionskanäle
         channels: Ausgabekanäle
-        checkout: 'Zur Kasse'
-        choose_file: 'Datei wählen'
+        checkout: Zur Kasse
+        choose_file: Datei wählen
         city: Stadt
         code: Code
         comment: Anmerkung
         company: Firma
         completed: Abgeschlossen
-        configuration: 'Aktionsregeln konfigurieren'
+        configuration: Aktionsregeln konfigurieren
         confirmation: Bestätigung
         confirmation_title: Bestätigung
         contact_request_show: Kontaktanfrage
         contact_requests: Kontaktanfragen
         contact_topics: Supportthemen
-        contain_variants: 'Enthält Varianten'
+        contain_variants: Enthält Varianten
         content: Inhalt
         countries: Länder
         country: Land
         country_details: Landdetails
         coupon: Gutschein
-        coupon_based: 'Gutschein basierend'
+        coupon_based: Gutschein basierend
         coupons: Gutscheine
         create: Erstellen
-        create_a_new_address: 'Neue Adresse hinzufügen'
-        create_archetype: 'Archetype hinzufügen'
-        create_country: 'Land erstellen'
-        create_currency: 'Währung erstellen'
-        create_group: 'Gruppe anlegen'
-        create_imagine_block: 'Slideshow Block erstellen'
-        create_locale: 'Gebietsschema anlegen'
-        create_menu: 'Menü hinzufügen'
-        create_menu_node: 'Menüpunkt erstellen'
-        create_new_coupon: 'Gutschein erstellen'
-        create_new_page: 'Neue Seite erstellen'
-        create_new_report: 'Neuen Report erstellen'
-        create_option: 'Option erstellen'
+        create_a_new_address: Neue Adresse hinzufügen
+        create_archetype: Archetype hinzufügen
+        create_country: Land erstellen
+        create_currency: Währung erstellen
+        create_group: Gruppe anlegen
+        create_imagine_block: Slideshow Block erstellen
+        create_locale: Gebietsschema anlegen
+        create_menu: Menü hinzufügen
+        create_menu_node: Menüpunkt erstellen
+        create_new_coupon: Gutschein erstellen
+        create_new_page: Neue Seite erstellen
+        create_new_report: Neuen Report erstellen
+        create_option: Option erstellen
         create_order: Bestellreihenfolge
         create_payment: Erstellen
         create_payment_method: Erstellen
-        create_product: 'Produkt erstellen'
-        create_product_attribute: 'Produkt Attribute hinzufügen'
-        create_promotion: 'Aktion erstellen'
-        create_redirect_route: 'Umleitung anlegen'
-        create_report: 'Bericht erstellen'
-        create_route: 'Route erstellen'
-        create_shipping_category: 'Versandkategorie erstellen'
-        create_shipping_method: 'Versandmethode erstellen'
-        create_simple_block: 'Einfaches Element erstellen'
-        create_slideshow_block: 'Slideshow–Element erstellen'
-        create_string_block: 'String Block erstellen'
-        create_tax_category: 'Steuerkategorie erstellen'
+        create_product: Produkt erstellen
+        create_product_attribute: Produkt Attribute hinzufügen
+        create_promotion: Aktion erstellen
+        create_redirect_route: Umleitung anlegen
+        create_report: Bericht erstellen
+        create_route: Route erstellen
+        create_shipping_category: Versandkategorie erstellen
+        create_shipping_method: Versandmethode erstellen
+        create_simple_block: Einfaches Element erstellen
+        create_slideshow_block: Slideshow–Element erstellen
+        create_string_block: String Block erstellen
+        create_tax_category: Steuerkategorie erstellen
         create_tax_rate: Erstellen
-        create_taxon: 'Klassifizierung hinzufügen'
-        create_variant: 'Variante erstellen'
-        create_zone: 'Gebiet hinzufügen'
-        created_at: 'Erstellt am'
-        creating_a_new_imagine_block: 'Neuen Bild-Block erstellen'
-        creating_a_new_simple_block: 'Einfaches Element erstellen'
-        creating_a_new_slideshow_block: 'Neues Slideshow–Element erstellen'
-        creating_a_new_string_block: 'Neuen String Block erstellen'
-        creating_menu: 'Menü hinzufügen'
-        creating_menu_node: 'Erstelle einen Menüpunkt'
-        creating_new_page: 'Neue Seite erstellen'
-        creating_redirect_route: 'Umleitung anlegen'
-        creating_route: 'Route erstellen'
-        creation_date: 'Erstellt am'
+        create_taxon: Klassifizierung hinzufügen
+        create_variant: Variante erstellen
+        create_zone: Gebiet hinzufügen
+        created_at: Erstellt am
+        creating_a_new_imagine_block: Neuen Bild-Block erstellen
+        creating_a_new_simple_block: Einfaches Element erstellen
+        creating_a_new_slideshow_block: Neues Slideshow–Element erstellen
+        creating_a_new_string_block: Neuen String Block erstellen
+        creating_menu: Menü hinzufügen
+        creating_menu_node: Erstelle einen Menüpunkt
+        creating_new_page: Neue Seite erstellen
+        creating_redirect_route: Umleitung anlegen
+        creating_route: Route erstellen
+        creation_date: Erstellt am
         creation_time: Erstellungszeit
         currencies: Währungen
         currency: Währung
-        current_orders: 'Aktuelle Bestellungen'
-        current_password: 'Aktuelles Passwort'
-        current_promotions: 'Aktuelle Aktionen'
-        current_stock: 'Aktueller Lagerbestand'
+        current_orders: Aktuelle Bestellungen
+        current_password: Aktuelles Passwort
+        current_promotions: Aktuelle Aktionen
+        current_stock: Aktueller Lagerbestand
         customer: Kunde
         customer_details: Kundendetails
-        customer_not_notified: 'Kunde nicht benachrichtigt'
-        customer_notified: 'Kunde benachrichtigt'
+        customer_not_notified: Kunde nicht benachrichtigt
+        customer_notified: Kunde benachrichtigt
         customer_orders: Kundenbestellungen
         customers: Kunden
         customers_list_of_all_customers_in_store: 'Kunden<small>Liste aller Kunden</small>'
@@ -233,52 +236,52 @@ sylius:
         data: Daten
         default_billing_address: Standard-Rechnungsadresse
         default_currency: Standardwährung
-        default_locale: 'Standard Lokalisierung'
+        default_locale: Standard Lokalisierung
         default_shipping_address: Standard-Lieferadresse
         delete: Löschen
-        delete_image: 'Bild löschen'
+        delete_image: Bild löschen
         deleted: Gelöscht
         description: Beschreibung
         edit: Bearbeiten
-        edit_group: 'Gruppe bearbeiten'
-        edit_locale: 'Gebietsschema bearbeiten'
-        edit_my_address: 'Adresse bearbeiten'
-        edit_report: 'Bericht editieren'
-        edit_your_personal_information: 'Persönliche Informationen bearbeiten'
-        editing_archetype: 'Archetype editieren'
-        editing_attribute: 'Attribute editieren'
-        editing_channel: 'Channel editieren'
-        editing_country: 'Land editieren'
-        editing_coupon: 'Gutschein editieren'
-        editing_currency: 'Währung editieren'
-        editing_customer: 'Kunde bearbeiten'
-        editing_email: 'E-Mail editieren'
-        editing_imagine_block: 'Bild-Element editieren'
-        editing_menu: 'Menü editieren'
-        editing_menu_node: 'Menüpunkt editieren'
-        editing_order: 'Bestellung editieren'
-        editing_page: 'Seite editieren'
-        editing_payment: 'Zahlart editieren'
-        editing_payment_method: 'Zahlart editieren'
-        editing_permission: 'Berechtigung editieren'
-        editing_product: 'Produkt editieren'
-        editing_promotion: 'Aktion editieren'
-        editing_redirect_route: 'Umleitung bearbeiten'
-        editing_role: 'Rolle editieren'
-        editing_route: 'Route bearbeiten'
-        editing_shipment: 'Lieferung bearbeiten'
-        editing_shipping_category: 'Versandkategorien bearbeiten'
-        editing_shipping_method: 'Versandart editieren'
-        editing_simple_block: 'Einfaches Element editieren'
-        editing_slideshow_block: 'Slideshow Block bearbeiten'
-        editing_string_block: 'String block editieren'
-        editing_tax_category: 'Steuerkategorie bearbeiten'
-        editing_taxon: 'Klassifizierung editieren'
-        editing_user: 'Bearbeite Benutzer'
-        editing_variant: 'Variante bearbeiten'
-        editing_zone: 'Gebiet bearbeiten'
+        edit_group: Gruppe bearbeiten
+        edit_locale: Gebietsschema bearbeiten
+        edit_my_address: Adresse bearbeiten
+        edit_report: Bericht editieren
+        edit_your_personal_information: Persönliche Informationen bearbeiten
+        editing_archetype: Archetype editieren
+        editing_attribute: Attribute editieren
+        editing_channel: Channel editieren
+        editing_country: Land editieren
+        editing_coupon: Gutschein editieren
+        editing_currency: Währung editieren
+        editing_customer: Kunde bearbeiten
+        editing_email: E-Mail editieren
+        editing_imagine_block: Bild-Element editieren
+        editing_menu: Menü editieren
+        editing_menu_node: Menüpunkt editieren
+        editing_order: Bestellung editieren
+        editing_page: Seite editieren
+        editing_payment: Zahlart editieren
+        editing_payment_method: Zahlart editieren
+        editing_permission: Berechtigung editieren
+        editing_product: Produkt editieren
+        editing_promotion: Aktion editieren
+        editing_redirect_route: Umleitung bearbeiten
+        editing_role: Rolle editieren
+        editing_route: Route bearbeiten
+        editing_shipment: Lieferung bearbeiten
+        editing_shipping_category: Versandkategorien bearbeiten
+        editing_shipping_method: Versandart editieren
+        editing_simple_block: Einfaches Element editieren
+        editing_slideshow_block: Slideshow Block bearbeiten
+        editing_string_block: String block editieren
+        editing_tax_category: Steuerkategorie bearbeiten
+        editing_taxon: Klassifizierung editieren
+        editing_user: Bearbeite Benutzer
+        editing_variant: Variante bearbeiten
+        editing_zone: Gebiet bearbeiten
         email: E-Mail
-        email_templates: 'E-Mail Templates'
+        email_templates: E-Mail Templates
         emails: E-Mails
         empty: Leeren
         enabled: Aktiviert
@@ -287,69 +290,69 @@ sylius:
         error: Fehler
         exchange_rate: Wechselkurs
         exclusive: Exklusiv
-        existing_customer: 'Existierender Benutzer'
-        expires_at: 'Verfällt am'
+        existing_customer: Existierender Benutzer
+        expires_at: Verfällt am
         failed: Fehlgeschlagen
         filter: Filtern
         first_name: Vorname
         firstname: Vorname
-        fulfill: 'Zu erfüllen'
+        fulfill: Zu erfüllen
         gateway: Schnittstelle
-        general_info: 'Allgemeine Informationen'
-        general_settings: 'Allgemeine Einstellungen'
+        general_info: Allgemeine Informationen
+        general_settings: Allgemeine Einstellungen
         generate: Generieren
-        generate_variants: 'Generiere Varianten'
-        generating_coupons: 'Generiere Gutscheine'
-        go_to_dashboard: 'Zum Dashboard'
+        generate_variants: Generiere Varianten
+        generating_coupons: Generiere Gutscheine
+        go_to_dashboard: Zum Dashboard
         grand_total: Gesamtbetrag
         groups: Gruppen
         guest: Gastbestellung
-        hide_deleted: 'Gelöschte Elemente ausblenden'
+        hide_deleted: Gelöschte Elemente ausblenden
         id: ID
         images: Bilder
-        imagine_blocks: 'Bild Blöcke'
-        index_of_all_configured_locales: 'Übersicht der konfigurierten Gebietsschemen'
+        imagine_blocks: Bild Blöcke
+        index_of_all_configured_locales: Übersicht der konfigurierten Gebietsschemen
         information: Hinweis
         inventory_here_you_can_see_current_stock_levels: 'Lagerbestand <small>Hier können Sie den aktuellen Lagerbestand sehen </small>'
         inventory_index: Lagerbestände
-        inventory_state: 'Bestand Status'
+        inventory_state: Bestand Status
         inventory_tracking: Warenbestandsverfolgung
         invoice: Rechnung
         items: Artikel
         items_total: Gesamtanzahl
         label: Bezeichnung
-        last_login: 'Letzter Login'
+        last_login: Letzter Login
         last_name: Nachname
-        last_update: 'Letztes Update'
-        last_week_orders: 'Bestellungen der letzten Woche'
-        last_week_revenue: 'Einnahmen der letzten Woche'
+        last_update: Letztes Update
+        last_week_orders: Bestellungen der letzten Woche
+        last_week_revenue: Einnahmen der letzten Woche
         lastname: Nachname
-        latest_orders: 'Letzte Bestellungen'
+        latest_orders: Letzte Bestellungen
         links: Links
         locales: Gebietsschemata
         lock: Sperren
-        login: Login
+        login: Anmelden
         login_button: Anmelden
         login_sylius_store: 'Login <small>Sylius Webshop</small>'
         logout: Abmelden
         main_taxon: Haupt-Taxonomie
         manage: Verwaltung
-        manage_adjustments: 'Verwalten von Anpassungen'
-        manage_attributes: 'Attribute verwalten'
-        manage_channels: 'Kanäle verwalten'
-        manage_countries: 'Länder verwalten'
-        manage_emails: 'E-Mails verwalten'
-        manage_options: 'Produktoptionen verwalten'
+        manage_adjustments: Verwalten von Anpassungen
+        manage_attributes: Attribute verwalten
+        manage_channels: Kanäle verwalten
+        manage_countries: Länder verwalten
+        manage_emails: E-Mails verwalten
+        manage_options: Produktoptionen verwalten
         manage_orders: Bestellungsverwaltung
-        manage_payments: 'Zahlungen verwalten'
-        manage_products: 'Produkte verwalten'
+        manage_payments: Zahlungen verwalten
+        manage_products: Produkte verwalten
         manage_promotions: Aktionsverwaltung
         manage_shipments: Verwalten
-        manage_shipping_categories: 'Versandkategorie verwalten'
-        manage_shipping_methods: 'Versandarten verwalten'
-        manage_tax_categories: 'Steuerkategorie verwalten'
+        manage_shipping_categories: Versandkategorie verwalten
+        manage_shipping_methods: Versandarten verwalten
+        manage_tax_categories: Steuerkategorie verwalten
         manage_tax_rates: Verwalten
-        manage_zones: 'Gebiete verwalten'
+        manage_zones: Gebiete verwalten
         marketing: Marketing
         members: Mitglieder
         menu_nodes: Menüpunkte
@@ -357,47 +360,46 @@ sylius:
         message: Nachricht
         method: Methode
         modified: Geändert
-        n_a: 'Nicht verfügbar'
+        n_a: Nicht verfügbar
         name: Name
         new: Neu
-        new_archetype: 'Neuer Archetype'
-        new_comment_posted_on_order: 'Neuer Kommentar zu einer Bestellung'
-        new_country: 'Neues Land'
-        new_currency: 'Neue Währung'
-        new_customer: 'Neuer Benutzer'
-        new_order: 'Neue Bestellung'
-        new_password: 'Neues Passwort'
-        new_payment: 'Zahlungsmethode erstellen'
-        new_payment_method: 'Zahlart erstellen'
-        new_permission: 'neue Berechtigung'
-        new_product: 'Neues Produkt'
-        new_product_attribute: 'Neues Produkt Attribut'
-        new_product_option: 'Neue Produktoption'
-        new_product_variant: 'Neue Produktvariante'
-        new_promotion: 'Neue Aktion'
-        new_role: 'Neue Rolle'
-        new_shipping_category: 'Neue Versandkategorie'
-        new_shipping_method: 'Neue Versandart'
-        new_tax_category: 'Neue Steuerkategorie'
-        new_tax_rate: 'Steuersatz erstellen'
-        new_taxon: 'Klassifizierung hinzufügen'
+        new_archetype: Neuer Archetype
+        new_comment_posted_on_order: Neuer Kommentar zu einer Bestellung
+        new_country: Neues Land
+        new_currency: Neue Währung
+        new_customer: Neuer Benutzer
+        new_order: Neue Bestellung
+        new_password: Neues Passwort
+        new_payment: Zahlungsmethode erstellen
+        new_payment_method: Zahlart erstellen
+        new_permission: neue Berechtigung
+        new_product: Neues Produkt
+        new_product_attribute: Neues Produkt Attribut
+        new_product_option: Neue Produktoption
+        new_product_variant: Neue Produktvariante
+        new_promotion: Neue Aktion
+        new_role: Neue Rolle
+        new_shipping_category: Neue Versandkategorie
+        new_shipping_method: Neue Versandart
+        new_tax_category: Neue Steuerkategorie
+        new_tax_rate: Steuersatz erstellen
+        new_taxon: Klassifizierung hinzufügen
         new_user: sylius.user.create_header
-        new_zone: 'Neues Gebiet'
-        newest_products: 'Neueste Produkte'
-        next: 'Nächstes Bild'
-        'no': false
-        no_comment: 'Kein Kommentar'
-        no_default_billing_address: 'Keine Standard-Rechnungsadresse'
-        no_default_shipping_address: 'Keine Standard-Lieferadresse'
-        no_description: 'Keine Beschreibung'
-        no_results: 'Keine Ergebnisse für diese Anfrage gefunden'
-        no_shipping_category: 'Keine Versandkategorie'
+        new_zone: Neues Gebiet
+        newest_products: Neueste Produkte
+        next: Nächstes Bild
+        no_comment: Kein Kommentar
+        no_default_billing_address: Keine Standard-Rechnungsadresse
+        no_default_shipping_address: Keine Standard-Lieferadresse
+        no_description: Keine Beschreibung
+        no_results: Keine Ergebnisse für diese Anfrage gefunden
+        no_shipping_category: Keine Versandkategorie
         no_short_description: '<i>Keine Kurzbeschreibung</i>'
-        no_sku: 'Keine Artikelpositionen verfügbar'
-        no_tax_category: 'Keine Steuerkategorie'
-        not_available_in_your_country: 'In Ihrem Land nicht verfügbar'
+        no_sku: Keine Artikelpositionen verfügbar
+        no_tax_category: Keine Steuerkategorie
+        not_available_in_your_country: In Ihrem Land nicht verfügbar
         number: Nummer
-        number_of_orders: 'Anzahl der Bestellungen'
+        number_of_orders: Anzahl der Bestellungen
         options: Optionen
         order: Reihenfolge
         order_comment_name: Kommentar
@@ -409,9 +411,9 @@ sylius:
         order_summary: Bestellungsübersicht
         order_value: Bestellwert
         orders: Bestellungen
-        original_price: 'Ursprünglicher Preis'
+        original_price: Ursprünglicher Preis
         out_of_stock: Ausverkauft
-        overview_of_your_store: 'Überblick Ihres Shops'
+        overview_of_your_store: Überblick Ihres Shops
         page: Seite
         pages: Seiten
         parent: Übergeordnet
@@ -425,19 +427,19 @@ sylius:
         pending: Ausstehend
         permissions: Berechtigungen
         phone_number: Telefonnummer
-        place_order: 'Bestellung aufgeben'
-        placed_at: 'Bestellt am'
+        place_order: Bestellung aufgeben
+        placed_at: Bestellt am
         postcode: Postleitzahl
         presentation: Präsentation
-        previous: 'Vorheriges Bild'
+        previous: Vorheriges Bild
         price: Preis
         pricing: Preisgestaltung
         priority: Priorität
-        processing: 'Wird verarbeitet'
+        processing: Wird verarbeitet
         product: Artikel
         product_archetypes: Produkt-Vorlagen
         product_association_type_index: Assoziationstyp
-        product_attributes: 'Produkt Attribute'
+        product_attributes: Produkt Attribute
         product_details_viewing_product_product: 'Produktdetails <small> Anzeige von Produkt "<strong>%product%</strong>"</small>'
         product_options: Produktoptionen
         products: Produkte
@@ -445,27 +447,27 @@ sylius:
         products_categorized_under_taxon_taxon: 'Produkte <small>kategorisiert als "%taxon%</small>"'
         products_index_of_all_products_in_your_store: 'Produkte <small> Alle Produkte in Ihrem Shop</small>'
         promotion_coupons: Gutscheine
-        promotion_details: 'Aktion anzeigen'
-        promotion_total: 'Reklame gesamt'
+        promotion_details: Aktion anzeigen
+        promotion_total: Reklame gesamt
         promotions: Aktionen
         province: Region
         provinces: Bundesländer
-        qty_max: 'Maximal Anzahl'
+        qty_max: Maximal Anzahl
         qty_min: Mindestanzahl
-        recent_customers: 'Neuste Kunden'
-        recent_orders: 'Letzte Bestellungen'
-        recent_users: 'Neueste Benutzer'
-        redirect_routes: 'Umleitungen (Redirects)'
+        recent_customers: Neuste Kunden
+        recent_orders: Letzte Bestellungen
+        recent_users: Neueste Benutzer
+        redirect_routes: Umleitungen (Redirects)
         refunded: Rückerstattet
         register: Registrieren
         register_button: Registrieren
         registration_date: Anmeldedatum
-        release_inventory: 'Warenbestand freigeben'
-        remember_me: 'Eingeloggt bleiben'
-        remove_attribute: 'Attribute entfernen'
+        release_inventory: Warenbestand freigeben
+        remember_me: Eingeloggt bleiben
+        remove_attribute: Attribute entfernen
         report_details: Berichtdetails
         reports: Berichte
-        restricted_zone: 'Eingeschränktes Versandgebiet'
+        restricted_zone: Eingeschränktes Versandgebiet
         retail_price: Listenpreis
         return: Zurückschicken
         returned: Zurückgesandt
@@ -476,15 +478,15 @@ sylius:
         sales: Verkäufe
         sales_this_month: Verkäufe
         save: Speichern
-        save_changes: 'Änderungen speichern'
+        save_changes: Änderungen speichern
         scope: Umfang
         search: Suchen
         security_settings: Sicherheitseinstellungen
-        set_as_default_billing_address: 'Als Standardrechnungsadresse setzen'
-        set_as_default_shipping_address: 'Als Standard-Lieferadresse setzen'
+        set_as_default_billing_address: Als Standardrechnungsadresse setzen
+        set_as_default_shipping_address: Als Standard-Lieferadresse setzen
         ship: Lieferung
         shipment_confirmation_name: Versandbestätigung
-        shipment_details: 'Versandart Details'
+        shipment_details: Versandart Details
         shipment_state: Versandstatus
         shipments: Lieferungen
         shipped: Versandt
@@ -496,15 +498,15 @@ sylius:
         shipping_method_details: Versandartenetails
         shipping_methods: Versandmethoden
         shipping_state: Versandstatus
-        shipping_total: 'Versandkosten gesamt'
-        shop_by: 'Shop von'
-        show_all: 'Alle anzeigen'
-        show_deleted: 'Gelöschte anzeigen'
+        shipping_total: Versandkosten gesamt
+        shop_by: Shop von
+        show_all: Alle anzeigen
+        show_deleted: Gelöschte anzeigen
         sign_in_to_the_store_or_create_new_account: 'Anmelden <small> oder neuen Benutzer anlegen</small>'
-        simple_blocks: 'Einfache Elemente'
+        simple_blocks: Einfache Elemente
         sku: Bestandseinheit
         slideshow: Slideshow
-        slideshow_blocks: 'Slideshow Blöcke'
+        slideshow_blocks: Slideshow Blöcke
         start_date: Start–Datum
         starts_at: Beginnt
         state: Versandstatus
@@ -513,59 +515,57 @@ sylius:
         subject: Betreff
         success: Erfolgreich
         support: Support
-        sylius_logo: Sylius
         tax_categories: Steuerkategorien
         tax_category: Steuerkategorie
         tax_rate_details: Steuersätze
         tax_rates: Steuersätze
-        tax_total: 'Steuern gesamt'
+        tax_total: Steuern gesamt
         taxation_categories: Steuerkategorien
         taxation_settings: Gruppeneinstellungen
         taxes: Steuern
         taxons: Gruppen
-        there_are_no_images_for_this_product: 'Keine Bilder für dieses Produkt vorhanden'
-        there_are_no_options_for_this_product: 'Es gibt keine Optionen für dieses Produkt'
-        there_are_no_taxons_for_this_product: 'Keine Klassifizierungen'
-        this_months_statistics: 'Statistiken dieses Monats'
-        this_product_has_no_attributes_defined: 'Für dieses Produkt wurden keine Attribute definiert'
+        there_are_no_images_for_this_product: Keine Bilder für dieses Produkt vorhanden
+        there_are_no_options_for_this_product: Es gibt keine Optionen für dieses Produkt
+        there_are_no_taxons_for_this_product: Keine Klassifizierungen
+        this_months_statistics: Statistiken dieses Monats
+        this_product_has_no_attributes_defined: Für dieses Produkt wurden keine Attribute definiert
         title: Titel
         topic: Thema
         total: Gesamt
         total_orders: Gesamtbestellungen
-        total_qty: 'Stück Ges.'
+        total_qty: Stück Ges.
         total_registrations: Gesamteregistrierungen
         tracking_code: Tracking-Code
         tracking_number: Sendungsnummer
         type: Typ
-        unavailable: 'Nicht verfügbar'
+        unavailable: Nicht verfügbar
         unit_price: Einzelpreis
         unknown: Unbekannt
         unlock: Entsperren
-        updating_tax_rate: 'Steuersätze editieren'
+        updating_tax_rate: Steuersätze editieren
         usage_limit: Aktionslimit
-        used: 'Aktion wird verwendet'
-        user_confirmation_name: 'Bestätigung durch den Benutzer'
+        used: Aktion wird verwendet
+        user_confirmation_name: Bestätigung durch den Benutzer
         user_details: Benutzer
         username: Benutzername
         users_list_of_all_users_registered_in_store: Benutzer
         variant_selection_method: Variantenauswahlmethode
         variants: Varianten
         view: Anzeigen
-        view_more: 'Mehr anzeigen'
+        view_more: Mehr anzeigen
         void: Leer
-        volume_based_pricing: 'Mengenbasierte Preise (Volume based)'
+        volume_based_pricing: Mengenbasierte Preise (Volume based)
         warning: Warnung
-        welcome_to_your_space: 'Willkommen in deinem persönlichen Bereich'
-        'yes': true
-        you_are_customer_since: 'Kunde seit'
-        you_have_no_new_orders: 'Sie haben keine neuen Bestellungen'
-        your_last_5_orders: 'Ihre letzten 5 Bestellungen'
-        your_products: 'Ihre Produkte'
+        welcome_to_your_space: Willkommen in deinem persönlichen Bereich
+        you_are_customer_since: Kunde seit
+        you_have_no_new_orders: Sie haben keine neuen Bestellungen
+        your_last_5_orders: Ihre letzten 5 Bestellungen
+        your_products: Ihre Produkte
         zone: Gebiet
         zone_details: Gebietedetails
         zones: Versandgebiete
     user:
         general_info: Informationen
-        impersonate: 'Melden Sie sich als diesen Benutzer an'
+        impersonate: Melden Sie sich als diesen Benutzer an
     variant:
-        stock: 'Aktueller Lagerbestand'
+        stock: Aktueller Lagerbestand

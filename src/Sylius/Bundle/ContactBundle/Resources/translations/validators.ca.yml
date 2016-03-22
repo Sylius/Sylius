@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  contact_request:
-    first_name:
-      not_blank: Si us plau, introdueix el teu nom.
-    last_name:
-      not_blank: Si us plau, introdueix el teu cognom.
+    contact_request:
+        first_name:
+            not_blank: Si us plau, introdueix el teu nom.
+        last_name:
+            not_blank: Si us plau, introdueix el teu cognom.

@@ -2,14 +2,14 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    role:
-      code: نام انگلیسی
-      name: نام
-      description: شرح
-      permissions: دسترسی ها
-      parent: رده پدر
-    permission:
-      code: نام انگلیسی
-      description: شرح
-      parent: رده پدر
+    form:
+        role:
+            code: نام انگلیسی
+            name: نام
+            description: شرح
+            permissions: دسترسی ها
+            parent: رده پدر
+        permission:
+            code: نام انگلیسی
+            description: شرح
+            parent: رده پدر

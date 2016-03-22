@@ -2,12 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    variant:
-      presentation: Presentación
-    option:
-      name: Nombre
-      values: Valores posibles
-    option_value:
-      add_value: Añadir valor
-      value: Valor
+    form:
+        variant:
+            presentation: Presentación
+        option:
+            name: Nombre
+            values: Valores posibles
+        option_value:
+            add_value: Añadir valor
+            value: Valor

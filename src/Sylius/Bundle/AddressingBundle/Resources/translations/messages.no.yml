@@ -2,37 +2,37 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    address:
-      city: Poststed
-      company: Firma
-      country: Land
-      first_name: Fornavn
-      last_name: Etternavn
-      phone_number: Telefonnummer
-      postcode: Postnummer
-      street: Gate
-      province: Fylke
-    country:
-      add_province: Legg til fylke
-      name: Navn
-      provinces: Fylker
-      select: Velg
-      enabled: Aktivert
-    province:
-      name: Navn
-      select: Velg
-    zone:
-      add_member: Legg til medlem
-      members: Medlemmer
-      name: Navn
-      type: Type
-      types:
-        country: Land
-        province: Fylke
-        zone: Sone
-      scope: Omfang
-      select: Velg
-      select_scope: Velg omfang
-    zone_member:
-      select: Velg
+    form:
+        address:
+            city: Poststed
+            company: Firma
+            country: Land
+            first_name: Fornavn
+            last_name: Etternavn
+            phone_number: Telefonnummer
+            postcode: Postnummer
+            street: Gate
+            province: Fylke
+        country:
+            add_province: Legg til fylke
+            name: Navn
+            provinces: Fylker
+            select: Velg
+            enabled: Aktivert
+        province:
+            name: Navn
+            select: Velg
+        zone:
+            add_member: Legg til medlem
+            members: Medlemmer
+            name: Navn
+            type: Type
+            types:
+                country: Land
+                province: Fylke
+                zone: Sone
+            scope: Omfang
+            select: Velg
+            select_scope: Velg omfang
+        zone_member:
+            select: Velg

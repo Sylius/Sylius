@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  payment:
-    complete: Uplata je dovršena.
-    cancel: Uplata je odbijena.
-    transition_fail: Akcija se ne može izvršiti s obzirom na trenutno stanje uplate.
+    payment:
+        complete: Uplata je dovršena.
+        cancel: Uplata je odbijena.
+        transition_fail: Akcija se ne može izvršiti s obzirom na trenutno stanje uplate.

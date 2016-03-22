@@ -2,31 +2,31 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    attribute:
-      add: Añadir
-      add_attributes: Agregar atributos
-      choices: Opciones
-      code: Código
-      name: Nombre
-      translations: Traducciones
-      type: Tipo
-    attribute_type:
-      checkbox: Casilla de verificación
-      configuration: Configuración
-      date: Fecha
-      datetime: Fecha y Hora
-      integer: Número entero
-      percent: Porcentaje
-      text: Texto
-      textarea: Área de Texto
-      title: Tipo de atributo
-      validation: Validación
-    attribute_type_configuration:
-      datetime:
-        format: Formato
-      date:
-        format: Formato
-      text:
-        min: Longitud mínima
-        max: Longitud máxima
+    form:
+        attribute:
+            add: Añadir
+            add_attributes: Agregar atributos
+            choices: Opciones
+            code: Código
+            name: Nombre
+            translations: Traducciones
+            type: Tipo
+        attribute_type:
+            checkbox: Casilla de verificación
+            configuration: Configuración
+            date: Fecha
+            datetime: Fecha y Hora
+            integer: Número entero
+            percent: Porcentaje
+            text: Texto
+            textarea: Área de Texto
+            title: Tipo de atributo
+            validation: Validación
+        attribute_type_configuration:
+            datetime:
+                format: Formato
+            date:
+                format: Formato
+            text:
+                min: Longitud mínima
+                max: Longitud máxima

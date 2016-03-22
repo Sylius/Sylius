@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    attribute:
-      add: اضافة
-      choices: الخيارات
-      name: الاسم
+    form:
+        attribute:
+            add: اضافة
+            choices: الخيارات
+            name: الاسم

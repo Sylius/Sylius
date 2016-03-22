@@ -2,11 +2,16 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  metadata:
-    page:
-      title: 标题
-      description: 描述
-    twitter:
-      title: 标题
-      description: 描述
-      image: 图像
+    metadata:
+        type:
+            none: ' -无- '
+            twitter_player_card: 玩家
+            twitter_app_card: 程序
+        page:
+            title: 标题
+            description: 描述
+        twitter:
+            title: 标题
+            description: 描述
+            image: 图像
+            player: 玩家

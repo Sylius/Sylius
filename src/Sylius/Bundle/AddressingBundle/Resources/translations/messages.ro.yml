@@ -2,37 +2,37 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    address:
-      city: Oraș
-      company: Firmă
-      country: Țară
-      first_name: Prenume
-      last_name: Nume
-      phone_number: Număr de telefon
-      postcode: Cod poștal
-      street: Adresă
-      province: Județ
-    country:
-      add_province: Adăugare județ
-      name: Nume
-      provinces: Județe
-      select: Selectaţi
-      enabled: Activat
-    province:
-      name: Nume
-      select: Selectaţi
-    zone:
-      add_member: Adaugă membru
-      members: Membri
-      name: Nume
-      type: Tip
-      types:
-        country: Țară
-        province: Județ
-        zone: Zonă
-      scope: Domeniul de aplicare
-      select: Selectaţi
-      select_scope: Selectaţi domeniul de aplicare
-    zone_member:
-      select: Selectaţi
+    form:
+        address:
+            city: Oraș
+            company: Firmă
+            country: Țară
+            first_name: Prenume
+            last_name: Nume
+            phone_number: Număr de telefon
+            postcode: Cod poștal
+            street: Adresă
+            province: Județ
+        country:
+            add_province: Adăugare județ
+            name: Nume
+            provinces: Județe
+            select: Selectaţi
+            enabled: Activat
+        province:
+            name: Nume
+            select: Selectaţi
+        zone:
+            add_member: Adaugă membru
+            members: Membri
+            name: Nume
+            type: Tip
+            types:
+                country: Țară
+                province: Județ
+                zone: Zonă
+            scope: Domeniul de aplicare
+            select: Selectaţi
+            select_scope: Selectaţi domeniul de aplicare
+        zone_member:
+            select: Selectaţi

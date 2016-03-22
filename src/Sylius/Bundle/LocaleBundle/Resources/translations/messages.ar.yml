@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    locale:
-      name: الاسم
+    form:
+        locale:
+            name: الاسم

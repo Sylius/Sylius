@@ -2,30 +2,30 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    group:
-      name: Navn
-      roles: Roller
-    user:
-      email: Email
-      enabled: Aktiveret
-      password:
-        label: Adgangskode
-      shipping_address: Leveringsadresse
-    customer:
-      first_name: Fornavn
-      groups: Grupper
-      last_name: Efternavn
-      email: Email
-      phone_number: Telefonnummer
-      billing_address: Faktureringsadresse
-      different_billing_address: Brug anden faktureringsadresse?
-    user_filter:
-      query: Søg
-    user_change_password:
-      confirmation: Bekræftelse
-      current: Nuværende adgangskode
-      new: Ny adgangskode
-    user_reset_password:
-      confirmation: Bekræftelse
-      new: Ny adgangskode
+    form:
+        group:
+            name: Navn
+            roles: Roller
+        user:
+            email: Email
+            enabled: Aktiveret
+            password:
+                label: Adgangskode
+            shipping_address: Leveringsadresse
+        customer:
+            first_name: Fornavn
+            groups: Grupper
+            last_name: Efternavn
+            email: Email
+            phone_number: Telefonnummer
+            billing_address: Faktureringsadresse
+            different_billing_address: Brug anden faktureringsadresse?
+        user_filter:
+            query: Søg
+        user_change_password:
+            confirmation: Bekræftelse
+            current: Nuværende adgangskode
+            new: Ny adgangskode
+        user_reset_password:
+            confirmation: Bekræftelse
+            new: Ny adgangskode

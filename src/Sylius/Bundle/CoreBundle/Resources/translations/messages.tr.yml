@@ -2,123 +2,123 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    action:
-      add_product_configuration:
-        price: Birim fiyatı
-        quantity: Adet
-        variant: Çeşit
-      customer_group: Müşteri Grubu
-    block:
-      body: İçerik
-      id: ID
-      title: Başlık
-    cart:
-      coupon: Kupon
-    checkout:
-      addressing:
-        different_billing_address: Fatura için farklı bir adres kullanmak ister misiniz?
-      payment_method: Ödeme Şekli
-      shipping_method: Gönderim şekli
-    promotion:
-      channels: Kanal
-    coupon:
-      per_customer_usage_limit: Müşteri başına kullanım sınırı
-    group:
-      name: Ad
-      roles: Roller
-    channel:
-      taxonomies: Kategoriler
-      locales: Diller
-      currency_default: Varsayılan para birimi
-      currencies: Para birimi
-      shipping_methods: Kargolama Yöntemleri
-      payment_methods: Ödeme Yöntemleri
-    image:
-      file: Resim
-    locale:
-      code: Kod
-      enabled: Etkin
-    order_filter:
-      created_at_from: Tarihinden sonra oluşturulan
-      created_at_to: Tarihinden önce oluşturulan
-      number: Sayı
-      total_from: Kaynak
-      total_to: Hedef
-      payment_state: Ödeme durumu
-      channel: Tüm kanallar
-    page:
-      body: İçerik
-      id: ID
-      title: Başlık
-    product:
-      restricted_zone: Kısıtlı bölge
-      shipping_category: Teslimat kategorisi
-      short_description: Kısa açıklama
-      variant_selection_method: Varyant seçme yöntemi
-    product_filter:
-      name: Ad
-      sku: Stok Kodu
-    product_variant:
-      tax_category: Vergi kategorisi
-    settings:
-      general:
-        currency: Varsayılan para birimi
-        locale: Dil
-        meta_description: Meta açıklama
-        meta_keywords: Meta anahtar kelimeleri
-        title: Sayfa başlığı
-        tracking_code:
-          Tracking code (for example: Google Analytics kodu)
-      taxation:
-        default_tax_zone: Varsayılan vergi bölgesi
-      security:
-        enabled: Etkinleştir?
-    shipment_filter:
-      created_at_from: Kaynak
-      created_at_to: Hedef
-      number: Sipariş numarası
-      shipping_address: Gönderi adı
-      channel: Tüm kanallar
-    payment_filter:
-      created_at_from: Kaynak
-      created_at_to: Hedef
-      number: Sipariş numarası
-      billing_address: Fatura adı
-      channel: Tüm kanallar
-    shipping_method:
-      zone: Bölge
-    taxon:
-      file: Resim seç
-    taxonomy:
-      file: Resim seç
-    user:
-      billing_address: Fatura adresi
-      different_billing_address: Fatura için farklı bir adres kullanmak ister misiniz?
-      enabled: Etkin
-      first_name: Ad
-      groups: Gruplar
-      roles: Roller
-      last_name: Soyad
-      password: Şifre
-      shipping_address: Teslimat adresi
-    user_filter:
-      query: Arama
-    variant:
-      available_on_demand: İsteğe bağlı olarak mevcuttur
-      depth: Derinliği
-      height: Yüksekliği
-      images: Resimleri
-      on_hand: Mevcut stok
-      price: Fiyatı
-      sku: Stok Kodu
-      weight: Ağırlığı
-      width: Genişliği
-    attribute:
-      product_attribute_value:
-        attribute: Özellik
-        value: Değer
-    guest:
-      email: E-posta
-    product_association_type:
-      name: Ad
+    form:
+        action:
+            add_product_configuration:
+                price: Birim fiyatı
+                quantity: Adet
+                variant: Çeşit
+            customer_group: Müşteri Grubu
+        block:
+            body: İçerik
+            id: ID
+            title: Başlık
+        cart:
+            coupon: Kupon
+        checkout:
+            addressing:
+                different_billing_address: Fatura için farklı bir adres kullanmak ister misiniz?
+            payment_method: Ödeme Şekli
+            shipping_method: Gönderim şekli
+        promotion:
+            channels: Kanal
+        coupon:
+            per_customer_usage_limit: Müşteri başına kullanım sınırı
+        group:
+            name: Ad
+            roles: Roller
+        channel:
+            taxonomies: Kategoriler
+            locales: Diller
+            currency_default: Varsayılan para birimi
+            currencies: Para birimi
+            shipping_methods: Kargolama Yöntemleri
+            payment_methods: Ödeme Yöntemleri
+        image:
+            file: Resim
+        locale:
+            code: Kod
+            enabled: Etkin
+        order_filter:
+            created_at_from: Tarihinden sonra oluşturulan
+            created_at_to: Tarihinden önce oluşturulan
+            number: Sayı
+            total_from: Kaynak
+            total_to: Hedef
+            payment_state: Ödeme durumu
+            channel: Tüm kanallar
+        page:
+            body: İçerik
+            id: ID
+            title: Başlık
+        product:
+            restricted_zone: Kısıtlı bölge
+            shipping_category: Teslimat kategorisi
+            short_description: Kısa açıklama
+            variant_selection_method: Varyant seçme yöntemi
+        product_filter:
+            name: Ad
+            sku: Stok Kodu
+        product_variant:
+            tax_category: Vergi kategorisi
+        settings:
+            general:
+                currency: Varsayılan para birimi
+                locale: Dil
+                meta_description: Meta açıklama
+                meta_keywords: Meta anahtar kelimeleri
+                title: Sayfa başlığı
+                tracking_code:
+                    Tracking code (for example: Google Analytics kodu)
+            taxation:
+                default_tax_zone: Varsayılan vergi bölgesi
+            security:
+                enabled: Etkinleştir?
+        shipment_filter:
+            created_at_from: Kaynak
+            created_at_to: Hedef
+            number: Sipariş numarası
+            shipping_address: Gönderi adı
+            channel: Tüm kanallar
+        payment_filter:
+            created_at_from: Kaynak
+            created_at_to: Hedef
+            number: Sipariş numarası
+            billing_address: Fatura adı
+            channel: Tüm kanallar
+        shipping_method:
+            zone: Bölge
+        taxon:
+            file: Resim seç
+        taxonomy:
+            file: Resim seç
+        user:
+            billing_address: Fatura adresi
+            different_billing_address: Fatura için farklı bir adres kullanmak ister misiniz?
+            enabled: Etkin
+            first_name: Ad
+            groups: Gruplar
+            roles: Roller
+            last_name: Soyad
+            password: Şifre
+            shipping_address: Teslimat adresi
+        user_filter:
+            query: Arama
+        variant:
+            available_on_demand: İsteğe bağlı olarak mevcuttur
+            depth: Derinliği
+            height: Yüksekliği
+            images: Resimleri
+            on_hand: Mevcut stok
+            price: Fiyatı
+            sku: Stok Kodu
+            weight: Ağırlığı
+            width: Genişliği
+        attribute:
+            product_attribute_value:
+                attribute: Özellik
+                value: Değer
+        guest:
+            email: E-posta
+        product_association_type:
+            name: Ad

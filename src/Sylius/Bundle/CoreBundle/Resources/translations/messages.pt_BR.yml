@@ -2,108 +2,108 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    action:
-      add_product_configuration:
-        price: Preço unitário
-        quantity: Quantidade
-        variant: Variante
-    block:
-      body: Texto
-      id: ID
-      title: Título
-    cart:
-      coupon: Cupom
-    checkout:
-      addressing:
-        different_billing_address: Utilizar um endereço diferente para cobrança?
-      payment_method: Forma de Pagamento
-      shipping_method: Forma de envio
-    group:
-      name: Nome
-      roles: Papéis
-    channel:
-      taxonomies: Taxonomias
-      locales: Localidades
-      currency_default: Moeda padrão
-      shipping_methods: Métodos de envio
-      payment_methods: Meios de pagamentos
-    image:
-      file: Imagem
-    locale:
-      code: Código
-      enabled: Ativado
-    order_filter:
-      created_at_from: Criado após
-      created_at_to: Criado antes
-      number: Número
-      total_from: De
-      total_to: Para
-      payment_state: Situação do pagamento
-    page:
-      body: Texto
-      id: ID
-      title: Título
-    product:
-      restricted_zone: Zona restrita
-      shipping_category: Categoria de expedição
-      short_description: Breve descrição
-      variant_selection_method: Método de seleção da variação
-    product_filter:
-      name: Nome
-      sku: SKU
-    product_variant:
-      tax_category: Categoria de imposto
-    settings:
-      general:
-        currency: Moeda padrão
-        locale: Língua
-        meta_description: Meta descrição
-        meta_keywords: Meta palavra-chaves
-        title: Título da página
-      taxation:
-        default_tax_zone: Zona de imposto do padrão
-    shipment_filter:
-      created_at_from: De
-      created_at_to: Para
-      number: Número do pedido
-      shipping_address: Nome do meio de expedição
-    payment_filter:
-      created_at_from: De
-      created_at_to: Para
-      number: Número do pedido
-    shipping_method:
-      zone: Zona
-    taxon:
-      file: Selecione a imagem
-    taxonomy:
-      file: Selecione a imagem
-    user:
-      billing_address: Endereço de cobrança
-      different_billing_address: Utilizar um endereço diferente para cobrança?
-      enabled: Ativado
-      first_name: Nome
-      groups: Grupos
-      roles: Papéis
-      last_name: Sobrenome
-      password: Senha
-      shipping_address: Endereço de entrega
-    user_filter:
-      query: Pesquisar
-    variant:
-      available_on_demand: Disponível por demanda
-      depth: Profundidade
-      height: Altura
-      images: Imagens
-      on_hand: Estoque atual
-      price: Preço
-      sku: SKU
-      weight: Peso
-      width: Largura
-    attribute:
-      product_attribute_value:
-        value: Valor
-    guest:
-      email: Email
-    product_association_type:
-      name: Nome
+    form:
+        action:
+            add_product_configuration:
+                price: Preço unitário
+                quantity: Quantidade
+                variant: Variante
+        block:
+            body: Texto
+            id: ID
+            title: Título
+        cart:
+            coupon: Cupom
+        checkout:
+            addressing:
+                different_billing_address: Utilizar um endereço diferente para cobrança?
+            payment_method: Forma de Pagamento
+            shipping_method: Forma de envio
+        group:
+            name: Nome
+            roles: Papéis
+        channel:
+            taxonomies: Taxonomias
+            locales: Localidades
+            currency_default: Moeda padrão
+            shipping_methods: Métodos de envio
+            payment_methods: Meios de pagamentos
+        image:
+            file: Imagem
+        locale:
+            code: Código
+            enabled: Ativado
+        order_filter:
+            created_at_from: Criado após
+            created_at_to: Criado antes
+            number: Número
+            total_from: De
+            total_to: Para
+            payment_state: Situação do pagamento
+        page:
+            body: Texto
+            id: ID
+            title: Título
+        product:
+            restricted_zone: Zona restrita
+            shipping_category: Categoria de expedição
+            short_description: Breve descrição
+            variant_selection_method: Método de seleção da variação
+        product_filter:
+            name: Nome
+            sku: SKU
+        product_variant:
+            tax_category: Categoria de imposto
+        settings:
+            general:
+                currency: Moeda padrão
+                locale: Língua
+                meta_description: Meta descrição
+                meta_keywords: Meta palavra-chaves
+                title: Título da página
+            taxation:
+                default_tax_zone: Zona de imposto do padrão
+        shipment_filter:
+            created_at_from: De
+            created_at_to: Para
+            number: Número do pedido
+            shipping_address: Nome do meio de expedição
+        payment_filter:
+            created_at_from: De
+            created_at_to: Para
+            number: Número do pedido
+        shipping_method:
+            zone: Zona
+        taxon:
+            file: Selecione a imagem
+        taxonomy:
+            file: Selecione a imagem
+        user:
+            billing_address: Endereço de cobrança
+            different_billing_address: Utilizar um endereço diferente para cobrança?
+            enabled: Ativado
+            first_name: Nome
+            groups: Grupos
+            roles: Papéis
+            last_name: Sobrenome
+            password: Senha
+            shipping_address: Endereço de entrega
+        user_filter:
+            query: Pesquisar
+        variant:
+            available_on_demand: Disponível por demanda
+            depth: Profundidade
+            height: Altura
+            images: Imagens
+            on_hand: Estoque atual
+            price: Preço
+            sku: SKU
+            weight: Peso
+            width: Largura
+        attribute:
+            product_attribute_value:
+                value: Valor
+        guest:
+            email: Email
+        product_association_type:
+            name: Nome

@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    taxon:
-      name: Namn
-    taxonomy:
-      name: Namn
+    form:
+        taxon:
+            name: Namn
+        taxonomy:
+            name: Namn

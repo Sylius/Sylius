@@ -2,83 +2,83 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  imagine_block:
-    name:
-      not_blank: Shkruaj emrin e menduar të bllokut.
-    label:
-      not_blank: Shkruaj etiketën e menduar të bllokut.
-    filter:
-      not_blank: Shkruaj filtrin e menduar të bllokut.
-    image:
-      not_blank: Zgjidh imazhin e menduar të bllokut.
-    start_date:
-      invalid_date: Data e fillimit të publikimit nuk është e vlefshme.
-    end_date:
-      invalid_date: Data e mbarimit të publikimit nuk është e vlefshme.
-  menu:
-    name:
-      not_blank: Shkruaj emrin e menusë.
-    label:
-      not_blank: Shkruaj etiketën e menusë.
-    start_date:
-      invalid_date: Data e fillimit të publikimit nuk është e vlefshme.
-    end_date:
-      invalid_date: Data e mbarimit të publikimit nuk është e vlefshme.
-  menu_node:
-    name:
-      not_blank: Shkruaj emrin e nyjes së menusë.
-    label:
-      not_blank: Shkruaj etiketën e nyjes së menusë.
-    start_date:
-      invalid_date: Data e fillimit të publikimit nuk është e vlefshme.
-    end_date:
-      invalid_date: Data e mbarimit të publikimit nuk është e vlefshme.
-  route:
-    name:
-      not_blank: Shkruaj emrin e rrugës.
-    content:
-      not_blank: Shkruaj përmbajtjen e rrugës.
-    start_date:
-      invalid_date: Data e fillimit të publikimit nuk është e vlefshme.
-    end_date:
-      invalid_date: Data e mbarimit të publikimit nuk është e vlefshme.
-  slideshow_block:
-    name:
-      not_blank: Shkruaj emrin e pamjes.
-    title:
-      not_blank: Shkruaj titullin e pamjes.
-    start_date:
-      invalid_date: Data e fillimit të publikimit nuk është e vlefshme.
-    end_date:
-      invalid_date: Data e mbarimit të publikimit nuk është e vlefshme.
-  simple_block:
-    name:
-      not_blank: Shkruaj vetëm emrin e bllokut.
-    title:
-      not_blank: Shkruaj vetëm titullin e bllokut.
-    body:
-      not_blank: Shkruaj vetëm përmbajtjen trupit të bllokut.
-    start_date:
-      invalid_date: Data e fillimit të publikimit nuk është e vlefshme.
-    end_date:
-      invalid_date: Data e mbarimit të publikimit nuk është e vlefshme.
-  string_block:
-    name:
-      not_blank: Shkruaj vetëm emrin e bllokut.
-    body:
-      not_blank: Shkruaj vetëm përmbajtjen trupit të bllokut.
-    start_date:
-      invalid_date: Data e fillimit të publikimit nuk është e vlefshme.
-    end_date:
-      invalid_date: Data e mbarimit të publikimit nuk është e vlefshme.
-  static_content:
-    name:
-      not_blank: Shkruaj emrin e përmbajtjes statike.
-    title:
-      not_blank: Shkruaj titullin e përmbajtjes statike.
-    body:
-      not_blank: Shkruaj përmbajtjen e trupit statik.
-    start_date:
-      invalid_date: Data e fillimit të publikimit nuk është e vlefshme.
-    end_date:
-      invalid_date: Data e mbarimit të publikimit nuk është e vlefshme.
+    imagine_block:
+        name:
+            not_blank: Shkruaj emrin e menduar të bllokut.
+        label:
+            not_blank: Shkruaj etiketën e menduar të bllokut.
+        filter:
+            not_blank: Shkruaj filtrin e menduar të bllokut.
+        image:
+            not_blank: Zgjidh imazhin e menduar të bllokut.
+        start_date:
+            invalid_date: Data e fillimit të publikimit nuk është e vlefshme.
+        end_date:
+            invalid_date: Data e mbarimit të publikimit nuk është e vlefshme.
+    menu:
+        name:
+            not_blank: Shkruaj emrin e menusë.
+        label:
+            not_blank: Shkruaj etiketën e menusë.
+        start_date:
+            invalid_date: Data e fillimit të publikimit nuk është e vlefshme.
+        end_date:
+            invalid_date: Data e mbarimit të publikimit nuk është e vlefshme.
+    menu_node:
+        name:
+            not_blank: Shkruaj emrin e nyjes së menusë.
+        label:
+            not_blank: Shkruaj etiketën e nyjes së menusë.
+        start_date:
+            invalid_date: Data e fillimit të publikimit nuk është e vlefshme.
+        end_date:
+            invalid_date: Data e mbarimit të publikimit nuk është e vlefshme.
+    route:
+        name:
+            not_blank: Shkruaj emrin e rrugës.
+        content:
+            not_blank: Shkruaj përmbajtjen e rrugës.
+        start_date:
+            invalid_date: Data e fillimit të publikimit nuk është e vlefshme.
+        end_date:
+            invalid_date: Data e mbarimit të publikimit nuk është e vlefshme.
+    slideshow_block:
+        name:
+            not_blank: Shkruaj emrin e pamjes.
+        title:
+            not_blank: Shkruaj titullin e pamjes.
+        start_date:
+            invalid_date: Data e fillimit të publikimit nuk është e vlefshme.
+        end_date:
+            invalid_date: Data e mbarimit të publikimit nuk është e vlefshme.
+    simple_block:
+        name:
+            not_blank: Shkruaj vetëm emrin e bllokut.
+        title:
+            not_blank: Shkruaj vetëm titullin e bllokut.
+        body:
+            not_blank: Shkruaj vetëm përmbajtjen trupit të bllokut.
+        start_date:
+            invalid_date: Data e fillimit të publikimit nuk është e vlefshme.
+        end_date:
+            invalid_date: Data e mbarimit të publikimit nuk është e vlefshme.
+    string_block:
+        name:
+            not_blank: Shkruaj vetëm emrin e bllokut.
+        body:
+            not_blank: Shkruaj vetëm përmbajtjen trupit të bllokut.
+        start_date:
+            invalid_date: Data e fillimit të publikimit nuk është e vlefshme.
+        end_date:
+            invalid_date: Data e mbarimit të publikimit nuk është e vlefshme.
+    static_content:
+        name:
+            not_blank: Shkruaj emrin e përmbajtjes statike.
+        title:
+            not_blank: Shkruaj titullin e përmbajtjes statike.
+        body:
+            not_blank: Shkruaj përmbajtjen e trupit statik.
+        start_date:
+            invalid_date: Data e fillimit të publikimit nuk është e vlefshme.
+        end_date:
+            invalid_date: Data e mbarimit të publikimit nuk është e vlefshme.

@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  locale:
-    code:
-      not_blank: Veuillez choisir le code régional.
-      unique: Le code régional doit être unique.
+    locale:
+        code:
+            not_blank: Veuillez choisir le code régional.
+            unique: Le code régional doit être unique.

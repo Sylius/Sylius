@@ -2,5 +2,5 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  settings:
-    update: ตั้งค่าได้ถูกปรับปรุงเรียบร้อยแล้ว
+    settings:
+        update: ตั้งค่าได้ถูกปรับปรุงเรียบร้อยแล้ว

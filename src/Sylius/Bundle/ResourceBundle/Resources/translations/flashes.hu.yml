@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  resource:
-    create: '%resource% sikeresen létrehozva.'
-    update: '%resource% sikeresen frissítve.'
-    delete: '%resource% sikeresen törölve.'
+    resource:
+        create: '%resource% sikeresen létrehozva.'
+        update: '%resource% sikeresen frissítve.'
+        delete: '%resource% sikeresen törölve.'

@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    review:
-      title: Назва
-      author: Автор
-      status:
-        new: Новий
+    form:
+        review:
+            title: Назва
+            author: Автор
+            status:
+                new: Новий

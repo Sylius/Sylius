@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  ui:
-    enabled: Aktiverad
-    "no": false
-    "yes": true
+    ui:
+        enabled: Aktiverad
+        "no": false
+        "yes": true

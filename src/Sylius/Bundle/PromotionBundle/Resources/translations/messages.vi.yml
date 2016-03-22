@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    rule:
-      contains_product_configuration:
-        variants: Sản phẩm
-    promotion:
-      name: Tên
+    form:
+        rule:
+            contains_product_configuration:
+                variants: Sản phẩm
+        promotion:
+            name: Tên

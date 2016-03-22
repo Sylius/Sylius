@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    tax_category:
-      description: Descrição
+    form:
+        tax_category:
+            description: Descrição

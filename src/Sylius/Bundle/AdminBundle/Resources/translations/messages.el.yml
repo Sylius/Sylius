@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  menu:
-    admin:
-      main:
-        configuration:
-          header: Παραμετροποίηση
-          countries: Χώρες
+    menu:
+        admin:
+            main:
+                configuration:
+                    header: Παραμετροποίηση
+                    countries: Χώρες

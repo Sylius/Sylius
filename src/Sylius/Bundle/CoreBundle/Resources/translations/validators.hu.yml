@@ -2,11 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  locale:
-    code:
-      not_blank: Kérjük, írja be a hely kódját.
-      unique: A területi beállítás már létezik.
-  product_variant:
-    price:
-      min: Az ár nem lehet negatív szám.
-      not_blank: Kérjük, írja be az árat.
+    locale:
+        code:
+            not_blank: Kérjük, írja be a hely kódját.
+            unique: A területi beállítás már létezik.
+    product_variant:
+        price:
+            min: Az ár nem lehet negatív szám.
+            not_blank: Kérjük, írja be az árat.

@@ -2,46 +2,46 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    block:
-      id: ID
-      title: Tiêu đề
-    cart:
-      coupon: Phiếu giảm giá
-    group:
-      name: Tên
-      roles: Vai trò
-    channel:
-      locales: Miền địa phương
-      payment_methods: Phương thức thanh toán
-    image:
-      file: Hình ảnh
-    locale:
-      code: Mã
-    page:
-      id: ID
-      title: Tiêu đề
-    product_filter:
-      name: Tên
-      sku: MÃ SẢN PHẨM
-    settings:
-      general:
-        locale: Ngôn ngữ
-    taxon:
-      file: Chọn ảnh
-    taxonomy:
-      file: Chọn ảnh
-    user:
-      groups: Nhóm
-      roles: Vai trò
-      password: Mật khẩu
-    user_filter:
-      query: Tìm kiếm
-    variant:
-      height: Chiều cao
-      images: Hình ảnh
-      price: Giá
-      sku: MÃ SẢN PHẨM
-      width: Chiều rộng
-    product_association_type:
-      name: Tên
+    form:
+        block:
+            id: ID
+            title: Tiêu đề
+        cart:
+            coupon: Phiếu giảm giá
+        group:
+            name: Tên
+            roles: Vai trò
+        channel:
+            locales: Miền địa phương
+            payment_methods: Phương thức thanh toán
+        image:
+            file: Hình ảnh
+        locale:
+            code: Mã
+        page:
+            id: ID
+            title: Tiêu đề
+        product_filter:
+            name: Tên
+            sku: MÃ SẢN PHẨM
+        settings:
+            general:
+                locale: Ngôn ngữ
+        taxon:
+            file: Chọn ảnh
+        taxonomy:
+            file: Chọn ảnh
+        user:
+            groups: Nhóm
+            roles: Vai trò
+            password: Mật khẩu
+        user_filter:
+            query: Tìm kiếm
+        variant:
+            height: Chiều cao
+            images: Hình ảnh
+            price: Giá
+            sku: MÃ SẢN PHẨM
+            width: Chiều rộng
+        product_association_type:
+            name: Tên

@@ -2,12 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  review:
-    title:
-      not_blank: Názov recenzie nemôže byť prázdny.
-      min_length: Názov recenzie musí mať aspoň 2 znaky
-      max_length: Názov recenzie nemôže mať viac ako 255 znakov
-    rating:
-      not_blank: Musíte vyplniť hodnotenie recenzie.
-    author:
-      already_exists: Tento e-mail je už registrovaný, prosím prihláste sa alebo použite reset hesla.
+    review:
+        title:
+            not_blank: Názov recenzie nemôže byť prázdny.
+            min_length: Názov recenzie musí mať aspoň 2 znaky
+            max_length: Názov recenzie nemôže mať viac ako 255 znakov
+        rating:
+            not_blank: Musíte vyplniť hodnotenie recenzie.
+        author:
+            already_exists: Tento e-mail je už registrovaný, prosím prihláste sa alebo použite reset hesla.

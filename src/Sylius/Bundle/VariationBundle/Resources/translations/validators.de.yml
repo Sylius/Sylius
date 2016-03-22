@@ -2,19 +2,19 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  option:
-    name:
-      not_blank: Bitte Optionsnamen eingeben.
-      min_length: 'Der Optionsname muss mindestens 1 Zeichen lang sein.|Der Optionsname muss mindestens {{ limit }} Zeichen lang sein.'
-      max_length: 'Der Optionsname darf nicht länger als 1 Zeichen sein.|Der Optionsname darf nicht länger als {{ limit }} Zeichen sein.'
-    presentation:
-      not_blank: Bitte geben Sie die Option für die Gestaltung an.
-      min_length: 'Die Option für die Anzeige muss mindestens 1 Zeichen lang sein.|Die Option für die Anzeige muss mindestens {{ limit }} Zeichen lang sein.'
-      max_length: 'Die Option für die Gestaltung darf nicht länger als 1 Zeichen sein.|Die Option für die Gestaltung darf nicht länger als {{ limit }} Zeichen lang sein.'
-    values:
-      min_count: 'Bitte geben Sie mindestens {{ limit }} Wert für diese Option ein.|Bitte geben Sie mindestens {{ limit }} Werte für diese Option ein.'
-  option_value:
-    value:
-      not_blank: Bitte geben Sie einen Wert für diese Option ein.
-  variant:
-    combination: Die Variante mit den gewählten Einstellungen existiert schon.
+    option:
+        name:
+            not_blank: Bitte Optionsnamen eingeben.
+            min_length: 'Der Optionsname muss mindestens 1 Zeichen lang sein.|Der Optionsname muss mindestens {{ limit }} Zeichen lang sein.'
+            max_length: 'Der Optionsname darf nicht länger als 1 Zeichen sein.|Der Optionsname darf nicht länger als {{ limit }} Zeichen sein.'
+        presentation:
+            not_blank: Bitte geben Sie die Option für die Gestaltung an.
+            min_length: 'Die Option für die Anzeige muss mindestens 1 Zeichen lang sein.|Die Option für die Anzeige muss mindestens {{ limit }} Zeichen lang sein.'
+            max_length: 'Die Option für die Gestaltung darf nicht länger als 1 Zeichen sein.|Die Option für die Gestaltung darf nicht länger als {{ limit }} Zeichen lang sein.'
+        values:
+            min_count: 'Bitte geben Sie mindestens {{ limit }} Wert für diese Option ein.|Bitte geben Sie mindestens {{ limit }} Werte für diese Option ein.'
+    option_value:
+        value:
+            not_blank: Bitte geben Sie einen Wert für diese Option ein.
+    variant:
+        combination: Die Variante mit den gewählten Einstellungen existiert schon.

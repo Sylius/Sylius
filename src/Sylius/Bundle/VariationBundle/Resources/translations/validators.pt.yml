@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  option_value:
-    value:
-      not_blank: Por favore insira uma opção válida.
+    option_value:
+        value:
+            not_blank: Por favore insira uma opção válida.

@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    archetype:
-      code: Kód
-      name: Názov
-      parent: Nadradený prototyp
-      attributes: Vlastnosti
-      options: Voľby
+    form:
+        archetype:
+            code: Kód
+            name: Názov
+            parent: Nadradený prototyp
+            attributes: Vlastnosti
+            options: Voľby

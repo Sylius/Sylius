@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    promotion:
-      name: Namn
+    form:
+        promotion:
+            name: Namn

@@ -2,7 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    attribute:
-      code: 代码
-      name: 名称
+    form:
+        attribute:
+            add: 新增
+            add_attributes: 添加属性
+            code: 代码
+            name: 名称

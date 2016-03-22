@@ -2,21 +2,21 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  tax_category:
-    name:
-      not_blank: Zadajte názov daňovej kategórie.
-    code:
-      not_blank: Zadajte kód daňovej kategórie.
-      unique: Daňová kategória s daným kódom už existuje.
-  tax_rate:
-    category:
-      not_blank: Prosím vyberte daňovú kategóriu.
-    name:
-      not_blank: Zadajte názov sadzby dane.
-    amount:
-      not_blank: Zadajte čiastku sadzby dane.
-    calculator:
-      not_blank: Vyberte spôsob výpočtu daňe.
-    code:
-      not_blank: Zadajte kód daňovej sadzby.
-      unique: Sadzba dane s daným kódom už existuje.
+    tax_category:
+        name:
+            not_blank: Zadajte názov daňovej kategórie.
+        code:
+            not_blank: Zadajte kód daňovej kategórie.
+            unique: Daňová kategória s daným kódom už existuje.
+    tax_rate:
+        category:
+            not_blank: Prosím vyberte daňovú kategóriu.
+        name:
+            not_blank: Zadajte názov sadzby dane.
+        amount:
+            not_blank: Zadajte čiastku sadzby dane.
+        calculator:
+            not_blank: Vyberte spôsob výpočtu daňe.
+        code:
+            not_blank: Zadajte kód daňovej sadzby.
+            unique: Sadzba dane s daným kódom už existuje.

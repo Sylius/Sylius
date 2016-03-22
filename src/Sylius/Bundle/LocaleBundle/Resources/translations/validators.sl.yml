@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  locale:
-    code:
-      not_blank: Prosimo, izberite kodo območnih nastavitev.
-      unique: Koda območnih nastavitev mora biti unikatna.
+    locale:
+        code:
+            not_blank: Prosimo, izberite kodo območnih nastavitev.
+            unique: Koda območnih nastavitev mora biti unikatna.

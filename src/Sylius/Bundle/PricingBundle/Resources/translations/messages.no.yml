@@ -2,11 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    priceable:
-      price: Pris
-      calculator: Prising
-      configuration: Konfigurasjon
-    pricing:
-      volume_based:
-        price: Pris
+    form:
+        priceable:
+            price: Pris
+            calculator: Prising
+            configuration: Konfigurasjon
+        pricing:
+            volume_based:
+                price: Pris

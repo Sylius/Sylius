@@ -2,31 +2,31 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    address:
-      city: עיר
-      company: חברה
-      country: מדינה
-      first_name: שם פרטי
-      last_name: שם משפחה
-      phone_number: מספר טלפון
-      postcode: מיקוד
-      street: רחוב
-      province: מחוז
-    country:
-      name: שם
-      provinces: מחוזות
-      select: בחירה
-    province:
-      name: שם
-      select: בחירה
-    zone:
-      name: שם
-      type: סוג
-      types:
-        country: מדינה
-        province: מחוז
-        zone: איזור
-      select: בחירה
-    zone_member:
-      select: בחירה
+    form:
+        address:
+            city: עיר
+            company: חברה
+            country: מדינה
+            first_name: שם פרטי
+            last_name: שם משפחה
+            phone_number: מספר טלפון
+            postcode: מיקוד
+            street: רחוב
+            province: מחוז
+        country:
+            name: שם
+            provinces: מחוזות
+            select: בחירה
+        province:
+            name: שם
+            select: בחירה
+        zone:
+            name: שם
+            type: סוג
+            types:
+                country: מדינה
+                province: מחוז
+                zone: איזור
+            select: בחירה
+        zone_member:
+            select: בחירה

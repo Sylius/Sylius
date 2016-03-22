@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  menu:
-    admin:
-      main:
-        configuration:
-          header: Konfiguráció
-          countries: Országok
-          locales: Területi beállítások
+    menu:
+        admin:
+            main:
+                configuration:
+                    header: Konfiguráció
+                    countries: Országok
+                    locales: Területi beállítások

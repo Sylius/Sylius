@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  locale:
-    code:
-      not_blank: Pasirinkite lokalės kodą.
-      unique: Lokalės kodas turi būti unikalus.
+    locale:
+        code:
+            not_blank: Pasirinkite lokalės kodą.
+            unique: Lokalės kodas turi būti unikalus.

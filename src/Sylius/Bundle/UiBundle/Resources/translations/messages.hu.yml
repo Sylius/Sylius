@@ -2,25 +2,25 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    login:
-      username: Felhasználónév
-      password: Jelszó
-  ui:
-    create: Létrehozás
-    dashboard: Vezérlőpult
-    delete: Törlés
-    edit: Szerkesztés
-    actions: Műveletek
-    enabled: Engedélyezve
-    description: Leírás
-    "no": false
-    success: Siker
-    "yes": true
-    new: Új
-    save_changes: Módosítások mentése
-    new_tax_category: Új adókategória
-    filter: Szűrő
-    countries: Országok
-    new_country: Új ország
-    locales: Területi beállítások
+    form:
+        login:
+            username: Felhasználónév
+            password: Jelszó
+    ui:
+        create: Létrehozás
+        dashboard: Vezérlőpult
+        delete: Törlés
+        edit: Szerkesztés
+        actions: Műveletek
+        enabled: Engedélyezve
+        description: Leírás
+        "no": false
+        success: Siker
+        "yes": true
+        new: Új
+        save_changes: Módosítások mentése
+        new_tax_category: Új adókategória
+        filter: Szűrő
+        countries: Országok
+        new_country: Új ország
+        locales: Területi beállítások

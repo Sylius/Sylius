@@ -2,28 +2,28 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    login:
-      username: Логин
-      password: Пароль
-      remember_me: Запомнить меня
-  ui:
-    create: Добавить
-    dashboard: Приборная панель
-    delete: sylius.account.address.action.delete
-    edit: Редактировать
-    actions: Действия
-    enabled: Активен
-    description: Описание
-    "no": false
-    sign_in: Войти
-    sign_out: Выйти
-    success: Успешно
-    "yes": true
-    new: Новый
-    save_changes: Сохранить изменения
-    new_tax_category: Создать налоговую категорию
-    filter: Фильтр
-    countries: Страны
-    new_country: Добавить страну
-    locales: Языки
+    form:
+        login:
+            username: Логин
+            password: Пароль
+            remember_me: Запомнить меня
+    ui:
+        create: Добавить
+        dashboard: Приборная панель
+        delete: sylius.account.address.action.delete
+        edit: Редактировать
+        actions: Действия
+        enabled: Активен
+        description: Описание
+        "no": false
+        sign_in: Войти
+        sign_out: Выйти
+        success: Успешно
+        "yes": true
+        new: Новый
+        save_changes: Сохранить изменения
+        new_tax_category: Создать налоговую категорию
+        filter: Фильтр
+        countries: Страны
+        new_country: Добавить страну
+        locales: Языки

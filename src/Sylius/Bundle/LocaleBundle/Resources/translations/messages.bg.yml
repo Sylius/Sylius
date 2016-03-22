@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    locale:
-      enabled: Разрешено
+    form:
+        locale:
+            enabled: Разрешено

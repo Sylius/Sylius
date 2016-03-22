@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  currency:
-    code:
-      not_blank: Velg valutakode.
-      unique: Valutakoden må være unik.
-    exchange_rate:
-      not_blank: Angi valutakurs.
+    currency:
+        code:
+            not_blank: Velg valutakode.
+            unique: Valutakoden må være unik.
+        exchange_rate:
+            not_blank: Angi valutakurs.

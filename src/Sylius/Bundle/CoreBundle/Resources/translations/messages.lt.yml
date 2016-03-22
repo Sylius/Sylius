@@ -2,123 +2,123 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    action:
-      add_product_configuration:
-        price: Vieneto kaina
-        quantity: Kiekis
-        variant: Variantas
-      customer_group: Pirkėjų grupė
-    block:
-      body: Bloko turinys
-      id: ID
-      title: Pavadinimas
-    cart:
-      coupon: Kuponas
-    checkout:
-      addressing:
-        different_billing_address: Naudoti kitą adresą apmokėjimui?
-      payment_method: Apmokėjimo būdas
-      shipping_method: Pristatymo būdas
-    promotion:
-      channels: Kanalas
-    coupon:
-      per_customer_usage_limit: Kliento naudojimosi ribos
-    group:
-      name: Pavadinimas
-      roles: Rolės
-    channel:
-      taxonomies: Taksonomijos
-      locales: Lokalės
-      currency_default: Numatytoji valiuta
-      currencies: Valiutos
-      shipping_methods: Pristatymo būdai
-      payment_methods: Mokėjimo būdai
-    image:
-      file: Paveikslėlis
-    locale:
-      code: Kodas
-      enabled: Įjungta
-    order_filter:
-      created_at_from: Sukurta po
-      created_at_to: Sukurta prieš
-      number: Numeris
-      total_from: Nuo
-      total_to: Iki
-      payment_state: Apmokėjimo būsena
-      channel: Visi kanalai
-    page:
-      body: Bloko turinys
-      id: ID
-      title: Pavadinimas
-    product:
-      restricted_zone: Apribota zona
-      shipping_category: Pristatymo kategorija
-      short_description: Trumpas aprašymas
-      variant_selection_method: Varianto pasirinkimo būdas
-    product_filter:
-      name: Pavadinimas
-      sku: Kodas
-    product_variant:
-      tax_category: Mokesčių kategorija
-    settings:
-      general:
-        currency: Numatytoji valiuta
-        locale: Kalba
-        meta_description: Meta aprašymas
-        meta_keywords: Meta raktažodžiai
-        title: Puslapio antraštė
-        tracking_code:
-          Tracking code (for example: Google Analytics kodas)
-      taxation:
-        default_tax_zone: Numatyta mokesčių zona
-      security:
-        enabled: Įgalinti?
-    shipment_filter:
-      created_at_from: Nuo
-      created_at_to: Iki
-      number: Užsakymo numeris
-      shipping_address: Pristatyti vardu
-      channel: Visi kanalai
-    payment_filter:
-      created_at_from: Nuo
-      created_at_to: Iki
-      number: Užsakymo numeris
-      billing_address: Mokėtojo pavadinimas
-      channel: Visi kanalai
-    shipping_method:
-      zone: Zona
-    taxon:
-      file: Pasirinkite paveikslėlį
-    taxonomy:
-      file: Pasirinkite paveikslėlį
-    user:
-      billing_address: Mokėtojo adresas
-      different_billing_address: Naudoti kitą adresą apmokėjimui?
-      enabled: Įjungta
-      first_name: Vardas
-      groups: Grupės
-      roles: Rolės
-      last_name: Pavardė
-      password: Slaptažodis
-      shipping_address: Pristatymo adresas
-    user_filter:
-      query: Ieškoti
-    variant:
-      available_on_demand: Prieinamas pagal poreikį
-      depth: Gylis
-      height: Aukštis
-      images: Paveikslėliai
-      on_hand: Dabartinės atsargos
-      price: Kaina
-      sku: Kodas
-      weight: Svoris
-      width: Plotis
-    attribute:
-      product_attribute_value:
-        attribute: Atributas
-        value: Reikšmė
-    guest:
-      email: Elektroninis paštas
-    product_association_type:
-      name: Pavadinimas
+    form:
+        action:
+            add_product_configuration:
+                price: Vieneto kaina
+                quantity: Kiekis
+                variant: Variantas
+            customer_group: Pirkėjų grupė
+        block:
+            body: Bloko turinys
+            id: ID
+            title: Pavadinimas
+        cart:
+            coupon: Kuponas
+        checkout:
+            addressing:
+                different_billing_address: Naudoti kitą adresą apmokėjimui?
+            payment_method: Apmokėjimo būdas
+            shipping_method: Pristatymo būdas
+        promotion:
+            channels: Kanalas
+        coupon:
+            per_customer_usage_limit: Kliento naudojimosi ribos
+        group:
+            name: Pavadinimas
+            roles: Rolės
+        channel:
+            taxonomies: Taksonomijos
+            locales: Lokalės
+            currency_default: Numatytoji valiuta
+            currencies: Valiutos
+            shipping_methods: Pristatymo būdai
+            payment_methods: Mokėjimo būdai
+        image:
+            file: Paveikslėlis
+        locale:
+            code: Kodas
+            enabled: Įjungta
+        order_filter:
+            created_at_from: Sukurta po
+            created_at_to: Sukurta prieš
+            number: Numeris
+            total_from: Nuo
+            total_to: Iki
+            payment_state: Apmokėjimo būsena
+            channel: Visi kanalai
+        page:
+            body: Bloko turinys
+            id: ID
+            title: Pavadinimas
+        product:
+            restricted_zone: Apribota zona
+            shipping_category: Pristatymo kategorija
+            short_description: Trumpas aprašymas
+            variant_selection_method: Varianto pasirinkimo būdas
+        product_filter:
+            name: Pavadinimas
+            sku: Kodas
+        product_variant:
+            tax_category: Mokesčių kategorija
+        settings:
+            general:
+                currency: Numatytoji valiuta
+                locale: Kalba
+                meta_description: Meta aprašymas
+                meta_keywords: Meta raktažodžiai
+                title: Puslapio antraštė
+                tracking_code:
+                    Tracking code (for example: Google Analytics kodas)
+            taxation:
+                default_tax_zone: Numatyta mokesčių zona
+            security:
+                enabled: Įgalinti?
+        shipment_filter:
+            created_at_from: Nuo
+            created_at_to: Iki
+            number: Užsakymo numeris
+            shipping_address: Pristatyti vardu
+            channel: Visi kanalai
+        payment_filter:
+            created_at_from: Nuo
+            created_at_to: Iki
+            number: Užsakymo numeris
+            billing_address: Mokėtojo pavadinimas
+            channel: Visi kanalai
+        shipping_method:
+            zone: Zona
+        taxon:
+            file: Pasirinkite paveikslėlį
+        taxonomy:
+            file: Pasirinkite paveikslėlį
+        user:
+            billing_address: Mokėtojo adresas
+            different_billing_address: Naudoti kitą adresą apmokėjimui?
+            enabled: Įjungta
+            first_name: Vardas
+            groups: Grupės
+            roles: Rolės
+            last_name: Pavardė
+            password: Slaptažodis
+            shipping_address: Pristatymo adresas
+        user_filter:
+            query: Ieškoti
+        variant:
+            available_on_demand: Prieinamas pagal poreikį
+            depth: Gylis
+            height: Aukštis
+            images: Paveikslėliai
+            on_hand: Dabartinės atsargos
+            price: Kaina
+            sku: Kodas
+            weight: Svoris
+            width: Plotis
+        attribute:
+            product_attribute_value:
+                attribute: Atributas
+                value: Reikšmė
+        guest:
+            email: El. paštas
+        product_association_type:
+            name: Pavadinimas

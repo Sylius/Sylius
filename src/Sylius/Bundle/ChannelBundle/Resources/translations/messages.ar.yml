@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    channel:
-      name: الاسم
-      url: عنوان URL
-      color: اللون
+    form:
+        channel:
+            name: الاسم
+            url: عنوان URL
+            color: اللون

@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    email:
+        code:
+            not_blank: 请输入电子邮件的代码。
+            unique: 电子邮件代码必须唯一。

@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    archetype:
-      code: รหัส
-      name: ชื่อ
-      parent: หมวดแม่
-      options: ตัวเลือก
+    form:
+        archetype:
+            code: รหัส
+            name: ชื่อ
+            parent: หมวดแม่
+            options: ตัวเลือก

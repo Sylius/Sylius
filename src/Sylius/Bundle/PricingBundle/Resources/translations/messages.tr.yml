@@ -2,14 +2,14 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    priceable:
-      price: Fiyatı
-      calculator: Fiyatlandırma
-      configuration: Ayarlar
-    pricing:
-      volume_based:
-        label: Fiyatlandırma yapılandırma
-        min: Min birim
-        max: Max birim
-        price: Fiyatı
+    form:
+        priceable:
+            price: Fiyatı
+            calculator: Fiyatlandırma
+            configuration: Ayarlar
+        pricing:
+            volume_based:
+                label: Fiyatlandırma yapılandırma
+                min: Min birim
+                max: Max birim
+                price: Fiyatı

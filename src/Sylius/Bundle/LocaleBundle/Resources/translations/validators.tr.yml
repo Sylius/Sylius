@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  locale:
-    code:
-      not_blank: Lütfen dil kodunu seçiniz.
-      unique: Dil kodu mutlaka benzersiz olmalıdır.
+    locale:
+        code:
+            not_blank: Lütfen dil kodunu seçiniz.
+            unique: Dil kodu mutlaka benzersiz olmalıdır.

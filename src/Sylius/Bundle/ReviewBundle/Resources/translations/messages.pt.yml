@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    review:
-      status:
-        new: Novo
+    form:
+        review:
+            status:
+                new: Novo

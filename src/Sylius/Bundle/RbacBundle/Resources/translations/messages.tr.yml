@@ -2,14 +2,14 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    role:
-      code: Kod
-      name: Ad
-      description: Açıklama
-      permissions: İzinler
-      parent: Üst
-    permission:
-      code: Kod
-      description: Açıklama
-      parent: Üst
+    form:
+        role:
+            code: Kod
+            name: Ad
+            description: Açıklama
+            permissions: İzinler
+            parent: Üst
+        permission:
+            code: Kod
+            description: Açıklama
+            parent: Üst

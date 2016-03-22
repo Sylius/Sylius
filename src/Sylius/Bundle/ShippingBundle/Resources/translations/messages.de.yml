@@ -2,45 +2,45 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    rule:
-      unit_count_configuration:
-        count: Anzahl
-      type: Regeltyp
-    shipment:
-      state: Versandstatus
-      states:
-        checkout: Zur Kasse
-        pending: Ausstehend
-        ready: Bereit
-        shipped: Versandt
-        returned: Zurückgesandt
-        cancelled: Abgebrochen
-      tracking_code: Tracking-Code
-    shipping_calculator:
-      flat_rate_configuration:
-        label: Pauschale pro Sendung
-        amount: Anzahl
-      flexible_rate_configuration:
-        label: Flexible Rate
-      per_unit_rate_configuration:
-        amount: Anzahl
-      weight_rate_configuration:
-        label: Gewichtsbasierter Preis
-        fixed: Feste Pauschale
-        variable: Variable Pauschale
-        division: Division
-      volume_rate_configuration:
-        label: Volumenbasierte Pauschale
-        amount: Anzahl
-        division: Division
-    shipping_category:
-      description: Beschreibung
-      name: Name
-    shipping_method:
-      calculator: Rechner
-      category: Kategorie
-      category_requirement: Kategorievoraussetzungen
-      configuration: Einstellung
-      enabled: Aktiviert
-      name: Name
+    form:
+        rule:
+            unit_count_configuration:
+                count: Anzahl
+            type: Regeltyp
+        shipment:
+            state: Versandstatus
+            states:
+                checkout: Zur Kasse
+                pending: Ausstehend
+                ready: Bereit
+                shipped: Versandt
+                returned: Zurückgesandt
+                cancelled: Abgebrochen
+            tracking_code: Tracking-Code
+        shipping_calculator:
+            flat_rate_configuration:
+                label: Pauschale pro Sendung
+                amount: Anzahl
+            flexible_rate_configuration:
+                label: Flexible Rate
+            per_unit_rate_configuration:
+                amount: Anzahl
+            weight_rate_configuration:
+                label: Gewichtsbasierter Preis
+                fixed: Feste Pauschale
+                variable: Variable Pauschale
+                division: Division
+            volume_rate_configuration:
+                label: Volumenbasierte Pauschale
+                amount: Anzahl
+                division: Division
+        shipping_category:
+            description: Beschreibung
+            name: Name
+        shipping_method:
+            calculator: Rechner
+            category: Kategorie
+            category_requirement: Kategorievoraussetzungen
+            configuration: Einstellung
+            enabled: Aktiviert
+            name: Name

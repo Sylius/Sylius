@@ -2,11 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    customer:
-      phone_number: Број телефона
-    user_change_password:
-      current: Тренутна лозинка
-      new: Нова лозинка
-    user_reset_password:
-      new: Нова лозинка
+    form:
+        customer:
+            phone_number: Број телефона
+        user_change_password:
+            current: Тренутна лозинка
+            new: Нова лозинка
+        user_reset_password:
+            new: Нова лозинка

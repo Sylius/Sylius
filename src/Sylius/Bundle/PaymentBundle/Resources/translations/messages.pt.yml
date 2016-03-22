@@ -2,30 +2,30 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    credit_card:
-      cardholder_name: Titular do cartão
-      expiry_month: Mês de validade
-      expiry_year: Ano de validade
-      number: Número do cartão
-      security_code: Código de segurança (CVV)
-      type: Tipo de cartão
-    payment:
-      amount: Valor a pagar
-      method: Método de pagamento
-      state:
-        header: Situação do pagamento
-        checkout: Finalizar compra
-        completed: Concluído
-        failed: Falhado
-        new: Novo
-        pending: Pendente
-        processing: Em processamento
-        unknown: Desconhecido
-        void: Vazio
-        cancelled: Cancelado
-        refunded: Reembolsado
-    payment_method:
-      description: Descrição
-      enabled: Activo?
-      name: Nome
+    form:
+        credit_card:
+            cardholder_name: Titular do cartão
+            expiry_month: Mês de validade
+            expiry_year: Ano de validade
+            number: Número do cartão
+            security_code: Código de segurança (CVV)
+            type: Tipo de cartão
+        payment:
+            amount: Valor a pagar
+            method: Método de pagamento
+            state:
+                header: Situação do pagamento
+                checkout: Finalizar compra
+                completed: Concluído
+                failed: Falhado
+                new: Novo
+                pending: Pendente
+                processing: Em processamento
+                unknown: Desconhecido
+                void: Vazio
+                cancelled: Cancelado
+                refunded: Reembolsado
+        payment_method:
+            description: Descrição
+            enabled: Activo?
+            name: Nome

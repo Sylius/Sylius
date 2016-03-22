@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    collection:
-      add: Dodaj
-      delete: Zbriši
+    form:
+        collection:
+            add: Dodaj
+            delete: Zbriši

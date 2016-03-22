@@ -2,14 +2,14 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  locale:
-    code:
-      not_blank: Будь ласка, введіть код локалі.
-      unique: Ця локаль вже існує.
-  product_variant:
-    onHand:
-      min: 'На руках має бути більше, ніж {{ limit }}.'
-      not_blank: Будь ласка, вкажіть кількість товару на складі.
-    price:
-      min: Ціна не має бути негативною.
-      not_blank: Будь ласка, введіть ціну.
+    locale:
+        code:
+            not_blank: Будь ласка, введіть код локалі.
+            unique: Ця локаль вже існує.
+    product_variant:
+        onHand:
+            min: 'На руках має бути більше, ніж {{ limit }}.'
+            not_blank: Будь ласка, вкажіть кількість товару на складі.
+        price:
+            min: Ціна не має бути негативною.
+            not_blank: Будь ласка, введіть ціну.

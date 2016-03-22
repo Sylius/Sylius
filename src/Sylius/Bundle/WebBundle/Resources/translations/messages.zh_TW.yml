@@ -1,5 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
     ui:
-        'no': false
+        city: 城市
+        company: 公司
+        members: 會員
+        postcode: 郵編
+        province: 省
+        provinces: 省份
         scope: 範圍
-        'yes': true
+        street: 街道

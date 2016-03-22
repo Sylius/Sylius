@@ -1,152 +1,153 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
     account:
         order:
-            details: 'Details van uw bestelling'
-            download_invoice: 'Download de factuur'
-            empty: 'U heeft nog geen bestelling geplaatst'
-            list: 'Uw bestellingen'
+            details: Details van uw bestelling
+            download_invoice: Download de factuur
+            empty: U heeft nog geen bestelling geplaatst
+            list: Uw bestellingen
             placed_at: 'Geplaatst op %at%'
             shipment:
                 ready: 'Gereed sinds %at%'
                 returned: 'Geretourneerd op %at%'
                 shipped: 'Verzonden op %at%'
-        title: 'Mijn account'
+        title: Mijn account
     block:
         imagine:
             publishable: Gepubliceerd
         simple:
-            index: 'Eenvoudige blokken'
+            index: Eenvoudige blokken
             publishable: Gepubliceerd
         slideshow:
-            index: 'Slideshow blokken'
+            index: Slideshow blokken
             publishable: Gepubliceerd
         string:
-            index: 'String blokken'
+            index: String blokken
             publishable: Gepubliceerd
     cart:
-        empty: 'Uw winkelwagen is leeg'
+        empty: Uw winkelwagen is leeg
         summary:
-            clear: 'Winkelwagen leeg maken'
+            clear: Winkelwagen leeg maken
             quantity: Hoeveelheid
         total_items: '1 product|%count% producten'
     checkout:
         finalize:
             order:
-                no_items: 'Deze bestelling bevat geen artikelen'
-                no_promotion: 'Geen promotie toegepast'
-                no_shipping_charges: 'Geen verzendkosten'
-                no_taxes: 'Geen belasting toegepast'
+                no_items: Deze bestelling bevat geen artikelen
+                no_promotion: Geen promotie toegepast
+                no_shipping_charges: Geen verzendkosten
+                no_taxes: Geen belasting toegepast
                 promotion_discount: Korting
             order_item:
                 quantity: Aantal
         forward: Volgende
         security:
-            proceed_order: 'Doorgaan met uw bestelling'
+            proceed_order: Doorgaan met uw bestelling
     customer:
         filter:
-            all: 'Toon alle klanten'
-            registered: 'Geregistreerde klanten laten zien'
-            unconfirmed: 'Onbevestigde accounts weergeven'
-        general_info: 'Klant ''%fullName%'' algemene info'
+            all: Toon alle klanten
+            registered: Geregistreerde klanten laten zien
+            unconfirmed: Onbevestigde accounts weergeven
+        general_info: "Klant '%fullName%' algemene info"
     history:
-        logged_at: 'Ingelogd (versie)'
+        logged_at: Ingelogd (versie)
     homepage:
         splash:
-            headline: 'Welkom bij Sylius'
-            subheadline: 'Moderne ecommerce voor Symfony2'
+            headline: Welkom bij Sylius
+            subheadline: Moderne ecommerce voor Symfony2
     menu:
         publishable: Gepubliceerd
     meta:
-        backend_title: 'Sylius Dashboard'
-        frontend_title: 'Sylius, een moderne ecommerce oplossing voor Symfony2'
+        backend_title: Sylius Dashboard
+        frontend_title: Sylius, een moderne ecommerce oplossing voor Symfony2
     order:
         adjustments:
-            lock_all: 'Vergrendelen van alle aanpassingen'
-            unlock_all: 'Ontgrendelen alle aanpassingen'
+            lock_all: Vergrendelen van alle aanpassingen
+            unlock_all: Ontgrendelen alle aanpassingen
         comment:
             notify: Notificaties
-        guest: 'Gast klant'
-        no_items: 'Deze bestelling heeft geen artikelen'
-        no_shipments: 'Er zijn geen verzendingen voor deze bestelling'
-        no_shipping_charges: 'Geen verzendkosten'
-        no_taxes: 'Geen belastingen'
+        guest: Gast klant
+        no_items: Deze bestelling heeft geen artikelen
+        no_shipments: Er zijn geen verzendingen voor deze bestelling
+        no_shipping_charges: Geen verzendkosten
+        no_taxes: Geen belastingen
     order_item:
         quantity: Hoeveelheid
         sellable: Product
     page:
-        no_route: 'Uw inhoud wordt niet weergegeven in frontend als er geen route gedefinieerd is'
+        no_route: Uw inhoud wordt niet weergegeven in frontend als er geen route gedefinieerd is
         publishable: Gepubliceerd
     pricing:
         volume_based:
-            max: 'Maximum Volume'
-            min: 'Minimum Volume'
+            max: Maximum Volume
+            min: Minimum Volume
     promotion_coupon:
-        generate: 'Coupons genereren'
-        index: 'Lijst van coupons'
+        generate: Coupons genereren
+        index: Lijst van coupons
     security:
         login:
             info: 'Gelieve in te loggen met behulp van e-mail <b>"sylius@example.com"</b> en <b>"sylius"</b> als wachtwoord. <small>Mr. Sylius Demo gids</small>'
     shipment:
         update: Bewerken
     taxon:
-        image: 'Kies afbeelding'
-        no_image: 'Er is geen afbeelding voor deze taxon'
+        image: Kies afbeelding
+        no_image: Er is geen afbeelding voor deze taxon
     ui:
-        access_token: 'Access Token'
         action: Actie
         actions: Acties
         add: Toevoegen
-        add_action: 'Actie toevoegen'
-        add_attribute: 'Attribuut toevoegen'
-        add_channel: 'Kanaal toevoegen'
-        add_choice: 'Keuze toevoegen'
-        add_coupon: 'Nieuwe coupon'
-        add_image: 'Afbeelding toevoegen'
-        add_member: 'Lid toevoegen'
-        add_menu_element: 'Menu element toevoegen'
-        add_new_email: 'Toevoegen van nieuwe E-mail'
-        add_new_permission: 'Toevoegen van nieuwe machtiging'
-        add_new_role: 'Nieuwe rol toevoegen'
-        add_province: 'Provincie toevoegen'
-        add_rule: 'Regel toevoegen'
-        add_to_cart: 'In winkelwagen'
-        add_value: 'Voeg waarde toe'
-        adding_new_customer_groups: 'Nieuwe klantgroepen toevoegen'
-        adding_new_email: 'Toevoegen van nieuwe E-mail'
-        adding_new_locale: 'Nieuwe locatie toevoegen'
+        add_action: Actie toevoegen
+        add_attribute: Attribuut toevoegen
+        add_channel: Kanaal toevoegen
+        add_choice: Keuze toevoegen
+        add_coupon: Nieuwe coupon
+        add_image: Afbeelding toevoegen
+        add_member: Lid toevoegen
+        add_menu_element: Menu element toevoegen
+        add_new_email: Toevoegen van nieuwe E-mail
+        add_new_permission: Toevoegen van nieuwe machtiging
+        add_new_role: Nieuwe rol toevoegen
+        add_province: Provincie toevoegen
+        add_rule: Regel toevoegen
+        add_to_cart: In winkelwagen
+        add_value: Voeg waarde toe
+        adding_new_customer_groups: Nieuwe klantgroepen toevoegen
+        adding_new_email: Toevoegen van nieuwe E-mail
+        adding_new_locale: Nieuwe locatie toevoegen
         addressing_step: Adresgegevens
         adjustments: Aanpassingen
         administration: Beheer
-        administration_dashboard: 'Beheer Dashboard'
-        all_your_addresses: 'Al uw adressen'
+        administration_dashboard: Beheer Dashboard
+        all_your_addresses: Al uw adressen
         amount: Bedrag
         assortment: Assortiment
         attributes: Attributen
         author: Auteur
         availability: Beschikbaarheid
-        available_on: 'Beschikbaar op'
-        available_on_demand: 'Beschikbaar op aanvraag'
-        available_until: 'Beschikbaar tot'
+        available_on: Beschikbaar op
+        available_on_demand: Beschikbaar op aanvraag
+        available_until: Beschikbaar tot
         back: Terug
-        backorder: Backorder
-        balance_due: 'Nog te betalen'
-        bill_to: 'Factureer naar'
+        balance_due: Nog te betalen
+        bill_to: Factureer naar
         billing_address: Factuuradres
         blocks: Blokken
         body: Inhoud
-        browse_products: 'Bekijk producten'
+        browse_products: Bekijk producten
         build: Bouwen
         calculator: Calculator
         cancel: Annuleren
         cancelled: Geannuleerd
         categorization: Categorisering
         category: Categorie
-        change_password: 'Verander uw wachtwoord'
-        change_your_password: 'Verander uw wachtwoord'
+        change_password: Verander uw wachtwoord
+        change_your_password: Verander uw wachtwoord
         channel: Kanalen
         channels: Kanalen
         checkout: Afrekenen
-        choose_file: 'Kies bestand'
+        choose_file: Kies bestand
         city: Stad
         code: Code
         comment: Commentaar
@@ -155,116 +156,115 @@ sylius:
         configuration: Configuratie
         confirmation: Bevestiging
         confirmation_title: Bevestiging
-        contact_request_details: 'Details contact verzoek'
-        contact_request_show: 'Contact verzoek'
-        contact_requests: 'Contact verzoeken'
-        contact_topics: 'Contact onderwerpen'
-        contain_variants: 'Bevat Varianten'
+        contact_request_details: Details contact verzoek
+        contact_request_show: Contact verzoek
+        contact_requests: Contact verzoeken
+        contact_topics: Contact onderwerpen
+        contain_variants: Bevat Varianten
         content: Inhoud
         countries: Landen
         country: Land
-        country_details: 'Land details'
+        country_details: Land details
         coupon: Coupon
-        coupon_based: 'Coupon gebaseerd'
-        coupons: Coupons
+        coupon_based: Coupon gebaseerd
         create: Creëer
-        create_a_new_address: 'Voeg nieuw adres toe'
-        create_contact_request: 'Contact verzoek aanmaken'
-        create_contact_topic: 'Contact thema aanmaken'
-        create_country: 'Nieuw land'
-        create_currency: 'Valuta maken'
-        create_group: 'Nieuwe groep'
-        create_locale: 'Nieuwe locatie'
-        create_menu: 'Menu aanmaken'
-        create_menu_node: 'Menu node aanmaken'
-        create_new_coupon: 'Nieuwe coupon toevoegen'
-        create_new_page: 'Nieuwe pagina'
-        create_option: 'Optie aanmaken'
-        create_order: 'Nieuwe bestelling'
-        create_payment: 'Nieuwe betaling'
-        create_payment_method: 'Nieuwe betaalmethode'
-        create_product: 'Nieuw product'
-        create_product_attribute: 'Productattribuut aanmaken'
-        create_promotion: 'Nieuwe promotie'
-        create_redirect_route: 'Redirect route aanmaken'
-        create_route: 'Route aanmaken'
-        create_shipping_category: 'Nieuwe verzendcategorie'
-        create_shipping_method: 'Nieuwe verzendmethode'
-        create_simple_block: 'Aanmaken eenvoudige blok'
-        create_slideshow_block: 'Aanmaken slideshow blok'
-        create_string_block: 'String blok maken'
-        create_tax_category: 'Nieuwe belastingcategorie'
-        create_tax_rate: 'Nieuw belastingtarief'
-        create_taxon: 'Nieuwe taxon'
-        create_variant: 'Nieuwe variant'
-        create_zone: 'Nieuwe zone'
-        created_at: 'Aangemaakt op'
-        creating_a_new_simple_block: 'Creëren van een nieuw eenvoudige blok'
-        creating_a_new_slideshow_block: 'Creëren van een nieuw slideshow blok'
-        creating_menu: 'Menu maken'
-        creating_new_page: 'Nieuwe pagina aanmaken'
-        creating_redirect_route: 'Redirect-route creëren'
-        creating_route: 'Route creëren'
-        creation_date: 'Aangemaakt op'
+        create_a_new_address: Voeg nieuw adres toe
+        create_contact_request: Contact verzoek aanmaken
+        create_contact_topic: Contact thema aanmaken
+        create_country: Nieuw land
+        create_currency: Valuta maken
+        create_group: Nieuwe groep
+        create_locale: Nieuwe locatie
+        create_menu: Menu aanmaken
+        create_menu_node: Menu node aanmaken
+        create_new_coupon: Nieuwe coupon toevoegen
+        create_new_page: Nieuwe pagina
+        create_option: Optie aanmaken
+        create_order: Nieuwe bestelling
+        create_payment: Nieuwe betaling
+        create_payment_method: Nieuwe betaalmethode
+        create_product: Nieuw product
+        create_product_attribute: Productattribuut aanmaken
+        create_promotion: Nieuwe promotie
+        create_redirect_route: Redirect route aanmaken
+        create_route: Route aanmaken
+        create_shipping_category: Nieuwe verzendcategorie
+        create_shipping_method: Nieuwe verzendmethode
+        create_simple_block: Aanmaken eenvoudige blok
+        create_slideshow_block: Aanmaken slideshow blok
+        create_string_block: String blok maken
+        create_tax_category: Nieuwe belastingcategorie
+        create_tax_rate: Nieuw belastingtarief
+        create_taxon: Nieuwe taxon
+        create_variant: Nieuwe variant
+        create_zone: Nieuwe zone
+        created_at: Aangemaakt op
+        creating_a_new_simple_block: Creëren van een nieuw eenvoudige blok
+        creating_a_new_slideshow_block: Creëren van een nieuw slideshow blok
+        creating_menu: Menu maken
+        creating_new_page: Nieuwe pagina aanmaken
+        creating_redirect_route: Redirect-route creëren
+        creating_route: Route creëren
+        creation_date: Aangemaakt op
         creation_time: Aanmaakdatum
-        currencies: 'Valuta''s'
+        currencies: "Valuta's"
         currency: Valuta
-        current_orders: 'Huidige bestellingen'
-        current_password: 'Huidig wachtwoord'
-        current_promotions: 'Huidige promoties'
-        current_stock: 'Huidige voorraad'
+        current_orders: Huidige bestellingen
+        current_password: Huidig wachtwoord
+        current_promotions: Huidige promoties
+        current_stock: Huidige voorraad
         customer: Klant
         customer_details: Klantgegevens
-        customer_not_notified: 'Klant is niet geïnformeerd'
-        customer_notified: 'Klant op de hoogte gesteld'
+        customer_not_notified: Klant is niet geïnformeerd
+        customer_notified: Klant op de hoogte gesteld
         customer_orders: Klantorders
         customers: Klanten
         customers_list_of_all_customers_in_store: 'Klanten een <small>lijst van alle klanten in de winkel</small>'
         dashboard: Dashboard
         data: Gegevens
-        default_billing_address: 'Standaard factuuradres'
-        default_currency: 'Standaard valuta'
-        default_shipping_address: 'Standaard verzendadres'
+        default_billing_address: Standaard factuuradres
+        default_currency: Standaard valuta
+        default_shipping_address: Standaard verzendadres
         delete: Verwijderen
-        delete_image: 'Verwijder Afbeelding'
+        delete_image: Verwijder Afbeelding
         deleted: Verwijderd
         description: Omschrijving
         disable: Uitschakelen
         edit: Bewerken
-        edit_group: 'Bewerk groep'
-        edit_locale: 'Bewerk locatie'
-        edit_my_address: 'Bewerk mijn adres'
-        edit_your_personal_information: 'Bewerk uw persoonlijke informatie'
-        editing_channel: 'Kanaal bewerken'
-        editing_contact_request: 'Contact verzoek bewerken'
-        editing_contact_topic: 'Contact thema bewerken'
-        editing_country: 'Land bewerken'
-        editing_coupon: 'Coupon bewerken'
-        editing_currency: 'Valuta bewerken'
-        editing_customer: 'Klant bewerken'
-        editing_email: 'E-mail bewerken'
-        editing_menu: 'Menu bewerken'
-        editing_option: 'Optie bewerken'
-        editing_order: 'Bestelling bewerken'
-        editing_page: 'Pagina bewerken'
-        editing_payment: 'Bewerk betaling'
-        editing_payment_method: 'Betaalmethode bewerken'
-        editing_permission: 'Machtiging bewerken'
-        editing_product: 'Product bewerken'
-        editing_promotion: 'Promotie bewerken'
-        editing_redirect_route: 'Redirect route bewerken'
-        editing_role: 'Rol bewerken'
-        editing_route: 'Route bewerken'
-        editing_shipment: 'Verzending bewerken'
-        editing_shipping_category: 'Bewerk verzendcategorie'
-        editing_shipping_method: 'Bewerk verzendmethode'
-        editing_simple_block: 'Bewerk eenvoudige blok'
-        editing_slideshow_block: 'Slideshow blok bewerken'
-        editing_tax_category: 'Bewerk belastingcategorie'
-        editing_taxon: 'Taxon bewerken'
-        editing_user: 'Gebruiker bewerken'
-        editing_variant: 'Variant bewerken'
-        editing_zone: 'Zone bewerken'
+        edit_group: Bewerk groep
+        edit_locale: Bewerk locatie
+        edit_my_address: Bewerk mijn adres
+        edit_your_personal_information: Bewerk uw persoonlijke informatie
+        editing_channel: Kanaal bewerken
+        editing_contact_request: Contact verzoek bewerken
+        editing_contact_topic: Contact thema bewerken
+        editing_country: Land bewerken
+        editing_coupon: Coupon bewerken
+        editing_currency: Valuta bewerken
+        editing_customer: Klant bewerken
+        editing_email: E-mail bewerken
+        editing_menu: Menu bewerken
+        editing_option: Optie bewerken
+        editing_order: Bestelling bewerken
+        editing_page: Pagina bewerken
+        editing_payment: Bewerk betaling
+        editing_payment_method: Betaalmethode bewerken
+        editing_permission: Machtiging bewerken
+        editing_product: Product bewerken
+        editing_promotion: Promotie bewerken
+        editing_redirect_route: Redirect route bewerken
+        editing_role: Rol bewerken
+        editing_route: Route bewerken
+        editing_shipment: Verzending bewerken
+        editing_shipping_category: Bewerk verzendcategorie
+        editing_shipping_method: Bewerk verzendmethode
+        editing_simple_block: Bewerk eenvoudige blok
+        editing_slideshow_block: Slideshow blok bewerken
+        editing_tax_category: Bewerk belastingcategorie
+        editing_taxon: Taxon bewerken
+        editing_user: Gebruiker bewerken
+        editing_variant: Variant bewerken
+        editing_zone: Zone bewerken
         email: E-mail
         email_templates: E-mailsjablonen
         emails: E-mails
@@ -272,12 +272,12 @@ sylius:
         enable: Inschakelen
         enabled: Toegestaan
         end_date: Einddatum
-        ends_at: 'Eindigt op'
+        ends_at: Eindigt op
         error: Fout
         exchange_rate: Wisselkoers
         exclusive: Exclusief
-        existing_customer: 'Bestaande klant'
-        expires_at: 'Verloopt op'
+        existing_customer: Bestaande klant
+        expires_at: Verloopt op
         failed: Mislukt
         female: Vrouw
         filter: Filter
@@ -285,128 +285,123 @@ sylius:
         firstname: Voornaam
         fulfill: Vervullen
         gateway: Gateway
-        general_info: 'Algemene Info'
-        general_settings: 'Algemene instellingen'
+        general_info: Algemene Info
+        general_settings: Algemene instellingen
         generate: Genereren
-        generate_variants: 'Genereer varianten'
-        generating_coupons: 'Genereer coupons'
-        go_to_dashboard: 'Ga naar dashboard'
+        generate_variants: Genereer varianten
+        generating_coupons: Genereer coupons
+        go_to_dashboard: Ga naar dashboard
         grand_total: Totaal
         groups: Groepen
         guest: Gast
         hello_name: 'Hallo <b>%name%</b>'
-        hide_deleted: 'Verberg verwijderd'
+        hide_deleted: Verberg verwijderd
         id: ID
-        identifier: Identifier
         images: Afbeeldingen
-        index_of_all_configured_locales: 'Index van alle ingestelde locaties'
+        index_of_all_configured_locales: Index van alle ingestelde locaties
         information: Informatie
         inventory_here_you_can_see_current_stock_levels: 'Voorraad<small>Hier kunt u de huidige voorraadniveaus zien</small>'
         inventory_index: Locaties
         inventory_state: Voorraadstatus
         inventory_tracking: Voorraadbeheer
         invoice: Factuur
-        items: Items
-        items_total: 'Artikelen Totaal'
+        items_total: Artikelen Totaal
         label: Label
-        last_login: 'Laatst ingelogd'
+        last_login: Laatst ingelogd
         last_name: Achternaam
-        last_update: 'Laatst bijgewerkt'
-        last_week_orders: 'Bestellingen van vorige week'
-        last_week_revenue: 'Omzet van vorige week'
+        last_update: Laatst bijgewerkt
+        last_week_orders: Bestellingen van vorige week
+        last_week_revenue: Omzet van vorige week
         lastname: Achternaam
-        latest_orders: 'Laatste bestellingen'
+        latest_orders: Laatste bestellingen
         links: Links
         locales: Locaties
         lock: Vergrendelen
         login: Inloggen
         login_button: Inloggen
-        login_sylius_store: 'Login <small>Sylius store</small>'
         logout: Uitloggen
         male: Man
         manage: Beheer
-        manage_adjustments: 'Aanpassingen beheren'
-        manage_attributes: 'Beheer attributen'
-        manage_channels: 'Kanalen beheren'
-        manage_countries: 'Beheer landen'
-        manage_emails: 'E-mails beheren'
+        manage_adjustments: Aanpassingen beheren
+        manage_attributes: Beheer attributen
+        manage_channels: Kanalen beheren
+        manage_countries: Beheer landen
+        manage_emails: E-mails beheren
         manage_options: Productopties
-        manage_orders: 'Bestellingen beheren'
-        manage_payments: 'Betalingen beheren'
-        manage_products: 'Beheer producten'
-        manage_promotions: 'Promoties beheren'
-        manage_shipments: 'Verzendingen beheren'
-        manage_shipping_categories: 'Beheer verzendcategorieën'
-        manage_shipping_methods: 'Beheer verzendmethodes'
-        manage_tax_categories: 'Belastingcategorieën beheren'
-        manage_tax_rates: 'Belastingtarieven beheren'
-        manage_zones: 'Zones beheren'
+        manage_orders: Bestellingen beheren
+        manage_payments: Betalingen beheren
+        manage_products: Beheer producten
+        manage_promotions: Promoties beheren
+        manage_shipments: Verzendingen beheren
+        manage_shipping_categories: Beheer verzendcategorieën
+        manage_shipping_methods: Beheer verzendmethodes
+        manage_tax_categories: Belastingcategorieën beheren
+        manage_tax_rates: Belastingtarieven beheren
+        manage_zones: Zones beheren
         marketing: Marketing
         members: Leden
-        menu_nodes: 'Menu items'
-        menus: 'Menu ''s'
+        menu_nodes: Menu items
+        menus: "Menu 's"
         message: Bericht
         method: Methode
         modified: Aangepast
         n_a: N/B
         name: Naam
         new: Nieuw
-        new_comment_posted_on_order: 'Nieuwe commentaar gepost op bestelling'
-        new_contact_request: 'Nieuwe contact verzoek'
-        new_contact_topic: 'Nieuw contact thema'
-        new_country: 'NIeuw land toevoegen'
-        new_currency: 'Nieuwe valuta'
-        new_customer: 'Nieuwe klant'
-        new_order: 'Nieuwe bestelling toevoegen'
-        new_password: 'Nieuw wachtwoord'
-        new_payment: 'Nieuwe betaling toevoegen'
-        new_payment_method: 'Nieuwe betaalmethode toevoegen'
-        new_permission: 'Nieuwe machtiging'
-        new_product: 'Nieuw product'
-        new_product_attribute: 'Nieuw productattribuut'
-        new_product_option: 'Nieuwe product optie'
-        new_product_variant: 'Nieuwe productvariant'
-        new_promotion: 'Nieuwe promotie toevoegen'
-        new_role: 'Nieuwe rol'
-        new_shipping_category: 'Nieuwe verzendcategorie toevoegen'
-        new_shipping_method: 'Nieuwe verzendmethode toevoegen'
-        new_tax_category: 'Nieuwe belastingcategorie toevoegen'
-        new_tax_rate: 'Nieuw belastingtarief aanmaken'
-        new_taxon: 'Taxon toevoegen'
-        new_user: 'Nieuwe gebruiker toevoegen'
-        new_zone: 'Nieuwe zone toevoegen'
-        newest_products: 'Nieuwste producten'
+        new_comment_posted_on_order: Nieuwe commentaar gepost op bestelling
+        new_contact_request: Nieuwe contact verzoek
+        new_contact_topic: Nieuw contact thema
+        new_country: NIeuw land toevoegen
+        new_currency: Nieuwe valuta
+        new_customer: Nieuwe klant
+        new_order: Nieuwe bestelling toevoegen
+        new_password: Nieuw wachtwoord
+        new_payment: Nieuwe betaling toevoegen
+        new_payment_method: Nieuwe betaalmethode toevoegen
+        new_permission: Nieuwe machtiging
+        new_product: Nieuw product
+        new_product_attribute: Nieuw productattribuut
+        new_product_option: Nieuwe product optie
+        new_product_variant: Nieuwe productvariant
+        new_promotion: Nieuwe promotie toevoegen
+        new_role: Nieuwe rol
+        new_shipping_category: Nieuwe verzendcategorie toevoegen
+        new_shipping_method: Nieuwe verzendmethode toevoegen
+        new_tax_category: Nieuwe belastingcategorie toevoegen
+        new_tax_rate: Nieuw belastingtarief aanmaken
+        new_taxon: Taxon toevoegen
+        new_user: Nieuwe gebruiker toevoegen
+        new_zone: Nieuwe zone toevoegen
+        newest_products: Nieuwste producten
         next: Volgende
-        'no': false
-        no_comment: 'Geen commentaar'
-        no_default_billing_address: 'Geen standaard factuuradres'
-        no_default_shipping_address: 'Geen standaard verzendadres'
-        no_description: 'Geen omschrijving'
-        no_results: 'Geen resultaten'
-        no_shipping_category: 'Geen verzendcategorie'
+        no_comment: Geen commentaar
+        no_default_billing_address: Geen standaard factuuradres
+        no_default_shipping_address: Geen standaard verzendadres
+        no_description: Geen omschrijving
+        no_results: Geen resultaten
+        no_shipping_category: Geen verzendcategorie
         no_short_description: '<i>Geen korte omschrijving</i>'
         no_sku: '<i>Geen SKU</i>'
-        no_tax_category: 'Geen belasting categorie'
-        not_available_in_your_country: 'Niet beschikbaar in uw land'
+        no_tax_category: Geen belasting categorie
+        not_available_in_your_country: Niet beschikbaar in uw land
         number: Nummer
-        number_of_orders: 'Aantal bestellingen'
-        oauth_provider: 'OAuth Provider'
+        number_of_orders: Aantal bestellingen
         options: Opties
         order: Bestelling
-        order_comment_name: 'Order Opmerkingen'
-        order_comments: 'Order Opmerkingen'
-        order_confirmation_name: 'Order bevestiging'
+        order_comment_name: Order Opmerkingen
+        order_comments: Order Opmerkingen
+        order_confirmation_name: Order bevestiging
         order_details: Besteloverzicht
         order_item_product: Artikel
-        order_state: 'Bestel status'
+        order_state: Bestel status
         order_summary: Bestellingsoverzicht
         order_value: Bestellingswaarde
         orders: Bestellingen
-        original_price: 'Oorspronkelijke prijs'
-        out_of_stock: 'Geen voorraad'
-        overview_of_your_store: 'Overzicht van uw winkel'
+        original_price: Oorspronkelijke prijs
+        out_of_stock: Geen voorraad
+        overview_of_your_store: Overzicht van uw winkel
         page: Pagina
-        pages: 'Pagina''s'
+        pages: "Pagina's"
         parent: Ouder
         password: Wachtwoord
         payment: Betaling
@@ -419,15 +414,15 @@ sylius:
         pending: Wachtende
         permissions: Machtigingen
         phone_number: Telefoonnummer
-        place_order: 'Plaats bestelling'
-        placed_at: 'Geplaatst op'
+        place_order: Plaats bestelling
+        placed_at: Geplaatst op
         postcode: Postcode
         presentation: Weergave
         previous: Vorige
         price: Prijs
         pricing: Prijsstelling
         priority: Prioriteit
-        processing: 'In Behandeling'
+        processing: In Behandeling
         product: Product
         product_association_type_index: Associatietype
         product_attributes: Productattributen
@@ -437,28 +432,27 @@ sylius:
         products_categorized_as_name: 'Producten in "%name%"'
         products_categorized_under_taxon_taxon: 'Producten<small>Gecategoriseerd onder "%taxon%" taxon</small>'
         products_index_of_all_products_in_your_store: 'Producten <small>Index van alle producten in uw winkel</small>'
-        promotion_coupons: Coupons
-        promotion_details: 'Promotie details'
-        promotion_total: 'Korting totaal'
+        promotion_details: Promotie details
+        promotion_total: Korting totaal
         promotions: Promoties
         province: Provincie
         provinces: Provincies
-        qty_max: 'Maximum aantal'
-        qty_min: 'Minimum aantal'
-        recent_customers: 'Recente klanten'
-        recent_orders: 'Recente bestellingen'
-        recent_users: 'Recente gebruikers'
-        redirect_routes: 'Redirect routes'
+        qty_max: Maximum aantal
+        qty_min: Minimum aantal
+        rating: Beoordeling
+        recent_customers: Recente klanten
+        recent_orders: Recente bestellingen
+        recent_users: Recente gebruikers
         refunded: Terugbetaald
         register: Registreren
         register_button: Registreren
         registration_create_an_account_in_store: 'Registratie <small>Creëer een account in de winkel</small>'
         registration_date: Aanmelddatum
-        release_inventory: 'Voorraad vrijgeven'
-        remember_me: 'Onthoud mijn gegevens'
+        release_inventory: Voorraad vrijgeven
+        remember_me: Onthoud mijn gegevens
         reports: Rapporten
-        restricted_zone: 'Beperkte zone'
-        retail_price: 'Retail prijs'
+        restricted_zone: Beperkte zone
+        retail_price: Retail prijs
         return: Retourneren
         returned: Geretourneerd
         revert: Terugkeren
@@ -468,101 +462,99 @@ sylius:
         sales: Omzet
         sales_this_month: Omzet
         save: Opslaan
-        save_changes: 'Aanpassingen opslaan'
+        save_changes: Aanpassingen opslaan
         scope: Bereik
         search: Zoeken
         security_settings: Beveiligingsinstellingen
-        set_as_default_billing_address: 'Instellen als standaard factuuradres'
-        set_as_default_shipping_address: 'Instellen als standaard verzendadres'
+        set_as_default_billing_address: Instellen als standaard factuuradres
+        set_as_default_shipping_address: Instellen als standaard verzendadres
         ship: Verzend
-        shipment_confirmation_name: 'Bevestiging van de verzending'
-        shipment_details: 'Verzending details'
+        shipment_confirmation_name: Bevestiging van de verzending
+        shipment_details: Verzending details
         shipment_mode: Verzendmethode
         shipment_state: Verzendstatus
         shipments: Verzendingen
         shipped: Verzonden
         shipping_address: Bezorgadres
         shipping_categories: Verzendcategorieën
-        shipping_category: 'Verzend categorie'
+        shipping_category: Verzend categorie
         shipping_charges: Verzendkosten
         shipping_method: Verzendmethode
-        shipping_method_details: 'Verzendmethode details'
+        shipping_method_details: Verzendmethode details
         shipping_methods: Verzendmethodes
         shipping_state: Verzendstatus
-        shipping_total: 'Verzendkosten totaal'
-        shop_by: 'Filter op'
-        show_all: 'Toon alles'
-        show_deleted: 'Toon verwijderd'
+        shipping_total: Verzendkosten totaal
+        shop_by: Filter op
+        show_all: Toon alles
+        show_deleted: Toon verwijderd
         sign_in_to_the_store_or_create_new_account: 'Inloggen <small>of maak een nieuw account</small>'
-        simple_blocks: 'Eenvoudige blokken'
+        simple_blocks: Eenvoudige blokken
         sku: SKU
         slideshow: Slideshow
-        slideshow_blocks: 'Slideshow blokken'
+        slideshow_blocks: Slideshow blokken
         start_date: Begindatum
-        starts_at: 'Begint op'
+        starts_at: Begint op
         state: Status
+        status: Status
         street: Straat
-        string_blocks: 'String blokken'
+        string_blocks: String blokken
         subject: Onderwerp
         success: Succes
         support: Helpdesk
-        sylius_logo: Sylius
-        tax_categories: 'Belasting Tarieven'
-        tax_category: 'Belasting categorie'
-        tax_rate_details: 'Belastingtarief details'
-        tax_rates: 'Belasting Tarieven'
-        tax_total: 'Belasting totaal'
+        tax_categories: Belasting Tarieven
+        tax_category: Belasting categorie
+        tax_rate_details: Belastingtarief details
+        tax_rates: Belasting Tarieven
+        tax_total: Belasting totaal
         taxation_categories: Belastingcategorieën
-        taxation_settings: 'Belasting Instellingen'
+        taxation_settings: Belasting Instellingen
         taxes: Belastingen
         taxons: Taxons
-        there_are_no_contact_requests_to_display: 'Er zijn geen contact verzoeken om weer te geven'
-        there_are_no_contact_topics_to_display: 'Er zijn geen contact onderwerpen weer te geven'
-        there_are_no_countries_configured: 'Er zijn geen landen geconfigureerd'
-        there_are_no_currencies_to_display: 'Er zijn geen valuta''s om weer te geven'
-        there_are_no_emails_configured: 'Er zijn geen e-mails geconfigureerd'
-        there_are_no_images_for_this_product: 'Er zijn geen afbeeldingen voor dit product'
-        there_are_no_options_for_this_product: 'Er zijn geen opties voor dit product'
-        there_are_no_taxons_for_this_product: 'Er zijn geen taxons voor dit product'
-        this_months_statistics: 'Statistieken van deze maand'
+        there_are_no_contact_requests_to_display: Er zijn geen contact verzoeken om weer te geven
+        there_are_no_contact_topics_to_display: Er zijn geen contact onderwerpen weer te geven
+        there_are_no_countries_configured: Er zijn geen landen geconfigureerd
+        there_are_no_currencies_to_display: "Er zijn geen valuta's om weer te geven"
+        there_are_no_emails_configured: Er zijn geen e-mails geconfigureerd
+        there_are_no_images_for_this_product: Er zijn geen afbeeldingen voor dit product
+        there_are_no_options_for_this_product: Er zijn geen opties voor dit product
+        there_are_no_taxons_for_this_product: Er zijn geen taxons voor dit product
+        this_months_statistics: Statistieken van deze maand
         title: Titel
         topic: Onderwerp
         total: Totaal
-        total_orders: 'Aantal bestellingen'
-        total_qty: 'Totale Hoeveelheid'
-        total_registrations: 'Aantal registraties'
-        tracking_code: 'Tracking Code'
-        tracking_number: 'Tracking code'
+        total_orders: Aantal bestellingen
+        total_qty: Totale Hoeveelheid
+        total_registrations: Aantal registraties
+        tracking_code: Tracking Code
+        tracking_number: Tracking code
         type: Type
         unavailable: Onbeschikbaar
         unit_price: Stukprijs
         unknown: Onbekend
         unlock: Ontgrendelen
-        updating_tax_rate: 'Belastingtarief bewerken'
+        updating_tax_rate: Belastingtarief bewerken
         usage_limit: Gebruikslimiet
         used: Gebruikt
-        user_confirmation_name: 'Bevestiging van de gebruiker'
+        user_confirmation_name: Bevestiging van de gebruiker
         user_details: Gebruikersdetails
         username: Gebruikersnaam
         users_list_of_all_users_registered_in_store: 'Gebruikers <small>Lijst van alle gebruikers in de winkel</small>'
-        variant_selection_method: 'Variant selectiemethode'
+        variant_selection_method: Variant selectiemethode
         variants: Varianten
         view: Weergave
-        view_more: 'Bekijk details'
+        view_more: Bekijk details
         void: Leeg
         warning: Waarschuwing
-        welcome_to_your_space: 'Welkom in uw account'
-        'yes': true
-        you_are_customer_since: 'U bent klant sinds'
-        you_have_no_new_orders: 'U heeft geen nieuwe bestellingen'
-        your_last_5_orders: 'Uw laatste 5 bestellingen'
-        your_order_has_been_shipped: 'Uw bestelling is verzonden'
-        your_products: 'Uw producten'
+        welcome_to_your_space: Welkom in uw account
+        you_are_customer_since: U bent klant sinds
+        you_have_no_new_orders: U heeft geen nieuwe bestellingen
+        your_last_5_orders: Uw laatste 5 bestellingen
+        your_order_has_been_shipped: Uw bestelling is verzonden
+        your_products: Uw producten
         zone: Zone
-        zone_details: 'Zone details'
         zones: Zones
     user:
         general_info: 'Gebruiker "%username%" algemene informatie'
-        impersonate: 'Inloggen als gebruiker'
+        impersonate: Inloggen als gebruiker
     variant:
-        stock: 'Huidige voorraad'
+        stock: Huidige voorraad

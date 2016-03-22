@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    variant:
-      presentation: 소개
-    option:
-      values: 예상값
+    form:
+        variant:
+            presentation: 소개
+        option:
+            values: 예상값

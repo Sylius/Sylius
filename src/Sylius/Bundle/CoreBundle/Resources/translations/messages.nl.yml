@@ -2,126 +2,126 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    action:
-      add_product_configuration:
-        price: Stukprijs
-        quantity: Hoeveelheid
-        variant: Variant
-      customer_group: Gebruikersgroep
-    block:
-      body: Inhoud
-      id: ID
-      title: Titel
-    cart:
-      coupon: Coupon
-    checkout:
-      addressing:
-        different_billing_address: Gebruik een ander factuuradres?
-      payment_method: Betalingsmethode
-      shipping_method: Verzendmethode
-    promotion:
-      channels: Kanalen
-    coupon:
-      per_customer_usage_limit: Gebruikslimiet per klant
-    group:
-      name: Naam
-      roles: Rollen
-    channel:
-      taxonomies: Taxonomieën
-      locales: "Talen/Regio's"
-      currency_default: Standaard valuta
-      currencies: "Valuta's"
-      shipping_methods: Verzendmethodes
-      payment_methods: Betaalmethodes
-    image:
-      file: Afbeelding
-    locale:
-      code: Code
-      enabled: Toegestaan
-    order_filter:
-      created_at_from: Gemaakt na
-      created_at_to: Gemaakt voor
-      number: Nummer
-      total_from: Van
-      total_to: Tot
-      payment_state: Betaalstatus
-      channel: Alle kanalen
-    page:
-      body: Inhoud
-      id: ID
-      title: Titel
-    product:
-      restricted_zone: Beperkte zone
-      shipping_category: Verzend categorie
-      short_description: Korte omschrijving
-      variant_selection_method: Variant selectie methode
-    product_filter:
-      name: Naam
-      sku: SKU
-    product_variant:
-      tax_category: Belasting categorie
-    settings:
-      general:
-        currency: Standaard valuta
-        locale: Taal
-        meta_description: Meta omschrijving
-        meta_keywords: Meta sleutelwoorden
-        title: Pagina titel
-        tracking_code:
-          Tracking code (for example: Tracking Code (bijvoorbeeld Google Analytics)
-      taxation:
-        default_tax_zone: Standaard belastingzone
-      security:
-        enabled: Inschakelen?
-    shipment_filter:
-      created_at_from: Van
-      created_at_to: Tot
-      number: Ordernummer
-      shipping_address: Verzend naar naam
-      channel: Alle kanalen
-    payment_filter:
-      created_at_from: Van
-      created_at_to: Tot
-      number: Ordernummer
-      billing_address: Facturatie aan gebruiker
-      channel: Alle kanalen
-    shipping_method:
-      zone: Zone
-    taxon:
-      file: Selecteer afbeelding
-    taxonomy:
-      file: Selecteer afbeelding
-    user:
-      billing_address: Factuuradres
-      different_billing_address: Gebruik een ander adres voor facturering?
-      enabled: Actief
-      first_name: Voornaam
-      groups: Groepen
-      roles: Rollen
-      last_name: Achternaam
-      password: Wachtwoord
-      shipping_address: Bezorgadres
-    user_filter:
-      query: Zoeken
-    variant:
-      available_on_demand: Beschikbaar op aanvraag
-      depth: Diepte
-      height: Hoogte
-      images: Afbeeldingen
-      on_hand: Huidige voorraad
-      price: Prijs
-      original_price: Oorspronkelijke prijs
-      sku: SKU
-      weight: Gewicht
-      width: Breedte
-    attribute:
-      product_attribute_value:
-        attribute: Attribuut
-        value: Waarde
-    guest:
-      email: E-mail
-    product_association:
-      type: Associatietype
-    product_association_type:
-      name: Naam
+    form:
+        action:
+            add_product_configuration:
+                price: Stukprijs
+                quantity: Hoeveelheid
+                variant: Variant
+            customer_group: Gebruikersgroep
+        block:
+            body: Inhoud
+            id: ID
+            title: Titel
+        cart:
+            coupon: Coupon
+        checkout:
+            addressing:
+                different_billing_address: Gebruik een ander factuuradres?
+            payment_method: Betalingsmethode
+            shipping_method: Verzendmethode
+        promotion:
+            channels: Kanalen
+        coupon:
+            per_customer_usage_limit: Gebruikslimiet per klant
+        group:
+            name: Naam
+            roles: Rollen
+        channel:
+            taxonomies: Taxonomieën
+            locales: "Talen/Regio's"
+            currency_default: Standaard valuta
+            currencies: "Valuta's"
+            shipping_methods: Verzendmethodes
+            payment_methods: Betaalmethodes
+        image:
+            file: Afbeelding
+        locale:
+            code: Code
+            enabled: Toegestaan
+        order_filter:
+            created_at_from: Gemaakt na
+            created_at_to: Gemaakt voor
+            number: Nummer
+            total_from: Van
+            total_to: Tot
+            payment_state: Betaalstatus
+            channel: Alle kanalen
+        page:
+            body: Inhoud
+            id: ID
+            title: Titel
+        product:
+            restricted_zone: Beperkte zone
+            shipping_category: Verzend categorie
+            short_description: Korte omschrijving
+            variant_selection_method: Variant selectie methode
+        product_filter:
+            name: Naam
+            sku: SKU
+        product_variant:
+            tax_category: Belasting categorie
+        settings:
+            general:
+                currency: Standaard valuta
+                locale: Taal
+                meta_description: Meta omschrijving
+                meta_keywords: Meta sleutelwoorden
+                title: Pagina titel
+                tracking_code:
+                    Tracking code (for example: Tracking Code (bijvoorbeeld Google Analytics)
+            taxation:
+                default_tax_zone: Standaard belastingzone
+            security:
+                enabled: Inschakelen?
+        shipment_filter:
+            created_at_from: Van
+            created_at_to: Tot
+            number: Ordernummer
+            shipping_address: Verzend naar naam
+            channel: Alle kanalen
+        payment_filter:
+            created_at_from: Van
+            created_at_to: Tot
+            number: Ordernummer
+            billing_address: Facturatie aan gebruiker
+            channel: Alle kanalen
+        shipping_method:
+            zone: Zone
+        taxon:
+            file: Selecteer afbeelding
+        taxonomy:
+            file: Selecteer afbeelding
+        user:
+            billing_address: Factuuradres
+            different_billing_address: Gebruik een ander adres voor facturering?
+            enabled: Actief
+            first_name: Voornaam
+            groups: Groepen
+            roles: Rollen
+            last_name: Achternaam
+            password: Wachtwoord
+            shipping_address: Bezorgadres
+        user_filter:
+            query: Zoeken
+        variant:
+            available_on_demand: Beschikbaar op aanvraag
+            depth: Diepte
+            height: Hoogte
+            images: Afbeeldingen
+            on_hand: Huidige voorraad
+            price: Prijs
+            original_price: Oorspronkelijke prijs
+            sku: SKU
+            weight: Gewicht
+            width: Breedte
+        attribute:
+            product_attribute_value:
+                attribute: Attribuut
+                value: Waarde
+        guest:
+            email: E-mail
+        product_association:
+            type: Associatietype
+        product_association_type:
+            name: Naam

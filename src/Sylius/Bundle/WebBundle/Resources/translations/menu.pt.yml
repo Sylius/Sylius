@@ -2,69 +2,69 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  backend:
-    menu:
-      main:
-        configuration: Configuração
-        content: Conteúdo
-        countries: Países
-        dashboard: Painel de Instrumentos
-        general_settings: Configurações gerais
-        homepage: Sua loja
-        new_order: Adicionar nova encomenda
-        new_promotion: Adicionar nova promoção
-        orders: Encomendas atuais
-        pages: Páginas
-        payment_methods: Métodos de pagamento
-        payments: Pagamentos
-        products: Produtos
-        promotions: Promoções
-        sales: Encomendas
-        shipments: Envios
-        shipping_categories: Categorias de envio
-        shipping_methods: Métodos de envio
-        stockables: Níveis de stock
-        tax_categories: Categorias de tributação
-        tax_rates: Impostos
-        taxons: Categorização
-        zones: Zonas
-      sidebar:
-        configuration: Configuração
-        content: Conteúdo
-        countries: Países
-        dashboard: Painel de Instrumentos
-        general_settings: Configurações gerais
-        groups: Grupos
-        homepage: Voltar para o frontend
-        new_order: Adicionar nova encomenda
-        new_promotion: Adicionar nova promoção
-        options: Gerir opções
-        orders: Encomendas atuais
-        pages: Páginas
-        payment_methods: Métodos de pagamento
-        payments: Pagamentos
-        products: Produtos
-        promotions: Promoções
-        sales: Encomendas
-        shipments: Envios
-        shipping_categories: Categorias de envio
-        shipping_methods: Métodos de envio
-        stockables: Níveis de stock
-        tax_categories: Categorias de tributação
-        tax_rates: Impostos
-        taxons: Categorização
-        zones: Zonas
-  frontend:
-    menu:
-      account:
-        homepage: Home
-      main:
-        cart: 'Ver carrinho (%items%) %total%'
-        login: Login
-        logout: Sair
-      social:
-        facebook: Facebook
-        github: GitHub
-        google: Google +
-        linkedin: LinkedIn
-        twitter: Twitter
+    backend:
+        menu:
+            main:
+                configuration: Configuração
+                content: Conteúdo
+                countries: Países
+                dashboard: Painel de Instrumentos
+                general_settings: Configurações gerais
+                homepage: Sua loja
+                new_order: Adicionar nova encomenda
+                new_promotion: Adicionar nova promoção
+                orders: Encomendas atuais
+                pages: Páginas
+                payment_methods: Métodos de pagamento
+                payments: Pagamentos
+                products: Produtos
+                promotions: Promoções
+                sales: Encomendas
+                shipments: Envios
+                shipping_categories: Categorias de envio
+                shipping_methods: Métodos de envio
+                stockables: Níveis de stock
+                tax_categories: Categorias de tributação
+                tax_rates: Impostos
+                taxons: Categorização
+                zones: Zonas
+            sidebar:
+                configuration: Configuração
+                content: Conteúdo
+                countries: Países
+                dashboard: Painel de Instrumentos
+                general_settings: Configurações gerais
+                groups: Grupos
+                homepage: Voltar para o frontend
+                new_order: Adicionar nova encomenda
+                new_promotion: Adicionar nova promoção
+                options: Gerir opções
+                orders: Encomendas atuais
+                pages: Páginas
+                payment_methods: Métodos de pagamento
+                payments: Pagamentos
+                products: Produtos
+                promotions: Promoções
+                sales: Encomendas
+                shipments: Envios
+                shipping_categories: Categorias de envio
+                shipping_methods: Métodos de envio
+                stockables: Níveis de stock
+                tax_categories: Categorias de tributação
+                tax_rates: Impostos
+                taxons: Categorização
+                zones: Zonas
+    frontend:
+        menu:
+            account:
+                homepage: Home
+            main:
+                cart: 'Ver carrinho (%items%) %total%'
+                login: Login
+                logout: Sair
+            social:
+                facebook: Facebook
+                github: GitHub
+                google: Google +
+                linkedin: LinkedIn
+                twitter: Twitter

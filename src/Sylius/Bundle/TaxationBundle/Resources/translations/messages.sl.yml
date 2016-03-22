@@ -2,13 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    tax_category:
-      name: Ime
-      description: Opis
-    tax_rate:
-      category: Kategorija
-      name: Ime
-      amount: Znesek
-      included_in_price: Vključeno v ceno?
-      calculator: Kalkulator
+    form:
+        tax_category:
+            name: Ime
+            description: Opis
+        tax_rate:
+            category: Kategorija
+            name: Ime
+            amount: Znesek
+            included_in_price: Vključeno v ceno?
+            calculator: Kalkulator

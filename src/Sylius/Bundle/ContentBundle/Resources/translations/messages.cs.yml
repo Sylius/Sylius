@@ -2,105 +2,105 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    action_block:
-      action_name: Název akce
-      id: ID
-      publish_end_date: Publikovat k datu ukončení
-      publish_start_date: Publikovat datum zahájení
-      publishable: Publikováno
-    imagine_block:
-      filter: Filtr
-      image: Obrázek
-      internal_name: Interní název
-      label: Popisek
-      link_url: URL odkazu
-      parent: Rodič
-      publish_end_date: Publikovat k datu ukončení
-      publish_start_date: Publikovat datum zahájení
-      publishable: Publikováno
-      slideshow_small: Malá prezentace (postranní)
-      slideshow_medium: Prezentace střední (obsah)
-      slideshow_large: Velká prezentace (plná šíře)
-    menu:
-      childrens: Potomci
-      display: Zobrazit
-      display_children: Zobrazit potomky
-      label: Popisek
-      name: Jméno
-      parent: Rodič
-      publish_end_date: Publikovat k datu ukončení
-      publish_start_date: Publikovat datum zahájení
-      publishable: Publikováno
-      route: Cesta
-      uri: URI
-    menu_block:
-      body: Tělo
-      id: ID
-      name: Jméno
-      publish_end_date: Publikovat k datu ukončení
-      publish_start_date: Publikovat datum zahájení
-      publishable: Publikováno
-    menu_node_block:
-      content: Obsah
-      display: Zobrazit
-      display_children: Zobrazit potomky
-      internal_name: Interní název
-      label: Popisek
-      link_type: Typ vazby
-      publish_end_date: Publikovat k datu ukončení
-      publish_start_date: Publikovat datum zahájení
-      publishable: Publikováno
-      route: Cesta
-      uri: URI
-    redirect_route:
-      id: ID
-      name: Jméno
-      route_name: Nazev_cesty
-      uri: URI
-    reference_block:
-      body: Tělo
-      id: ID
-      publish_end_date: Publikovat k datu ukončení
-      publish_start_date: Publikovat datum zahájení
-      publishable: Publikováno
-      title: Název
-    route:
-      content: Obsah
-      name: Jméno
-      parent: Rodič
-    simple_block:
-      body: Tělo
-      internal_name: Interní název
-      parent: Rodič
-      publish_end_date: Publikovat k datu ukončení
-      publish_start_date: Publikovat datum zahájení
-      publishable: Publikováno
-      title: Název
-    slideshow_block:
-      add_slide: Přidat snímek
-      childrens: Potomci
-      internal_name: Interní název
-      parent: Rodič
-      publish_end_date: Publikovat k datu ukončení
-      publish_start_date: Publikovat datum zahájení
-      publishable: Publikováno
-      title: Název
-    static_content:
-      body: Tělo
-      id: ID
-      internal_name: Interní název
-      menu_nodes: Nabídka uzlů
-      parent: Rodič
-      publish_end_date: Publikovat k datu ukončení
-      publish_start_date: Publikovat datum zahájení
-      publishable: Publikováno
-      routes: Cesty
-      title: Název
-    string_block:
-      body: Tělo
-      id: ID
-      name: Jméno
-      publish_end_date: Publikovat k datu ukončení
-      publish_start_date: Publikovat datum zahájení
-      publishable: Publikováno
+    form:
+        action_block:
+            action_name: Název akce
+            id: ID
+            publish_end_date: Publikovat k datu ukončení
+            publish_start_date: Publikovat datum zahájení
+            publishable: Publikováno
+        imagine_block:
+            filter: Filtr
+            image: Obrázek
+            internal_name: Interní název
+            label: Popisek
+            link_url: URL odkazu
+            parent: Rodič
+            publish_end_date: Publikovat k datu ukončení
+            publish_start_date: Publikovat datum zahájení
+            publishable: Publikováno
+            slideshow_small: Malá prezentace (postranní)
+            slideshow_medium: Prezentace střední (obsah)
+            slideshow_large: Velká prezentace (plná šíře)
+        menu:
+            childrens: Potomci
+            display: Zobrazit
+            display_children: Zobrazit potomky
+            label: Popisek
+            name: Jméno
+            parent: Rodič
+            publish_end_date: Publikovat k datu ukončení
+            publish_start_date: Publikovat datum zahájení
+            publishable: Publikováno
+            route: Cesta
+            uri: URI
+        menu_block:
+            body: Tělo
+            id: ID
+            name: Jméno
+            publish_end_date: Publikovat k datu ukončení
+            publish_start_date: Publikovat datum zahájení
+            publishable: Publikováno
+        menu_node_block:
+            content: Obsah
+            display: Zobrazit
+            display_children: Zobrazit potomky
+            internal_name: Interní název
+            label: Popisek
+            link_type: Typ vazby
+            publish_end_date: Publikovat k datu ukončení
+            publish_start_date: Publikovat datum zahájení
+            publishable: Publikováno
+            route: Cesta
+            uri: URI
+        redirect_route:
+            id: ID
+            name: Jméno
+            route_name: Nazev_cesty
+            uri: URI
+        reference_block:
+            body: Tělo
+            id: ID
+            publish_end_date: Publikovat k datu ukončení
+            publish_start_date: Publikovat datum zahájení
+            publishable: Publikováno
+            title: Název
+        route:
+            content: Obsah
+            name: Jméno
+            parent: Rodič
+        simple_block:
+            body: Tělo
+            internal_name: Interní název
+            parent: Rodič
+            publish_end_date: Publikovat k datu ukončení
+            publish_start_date: Publikovat datum zahájení
+            publishable: Publikováno
+            title: Název
+        slideshow_block:
+            add_slide: Přidat snímek
+            childrens: Potomci
+            internal_name: Interní název
+            parent: Rodič
+            publish_end_date: Publikovat k datu ukončení
+            publish_start_date: Publikovat datum zahájení
+            publishable: Publikováno
+            title: Název
+        static_content:
+            body: Tělo
+            id: ID
+            internal_name: Interní název
+            menu_nodes: Nabídka uzlů
+            parent: Rodič
+            publish_end_date: Publikovat k datu ukončení
+            publish_start_date: Publikovat datum zahájení
+            publishable: Publikováno
+            routes: Cesty
+            title: Název
+        string_block:
+            body: Tělo
+            id: ID
+            name: Jméno
+            publish_end_date: Publikovat k datu ukončení
+            publish_start_date: Publikovat datum zahájení
+            publishable: Publikováno

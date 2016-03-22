@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  locale:
-    code:
-      not_blank: กรุณาเลือกรหัสภาษา
-      unique: รหัสภาษาต้องไม่ซ้ำกัน
+    locale:
+        code:
+            not_blank: กรุณาเลือกรหัสภาษา
+            unique: รหัสภาษาต้องไม่ซ้ำกัน

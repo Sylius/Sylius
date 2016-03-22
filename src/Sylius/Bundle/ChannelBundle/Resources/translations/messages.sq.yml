@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    channel:
-      name: Emri
-      description: Përshkrimi
-      url: URL
-      enabled: E aktivizuar
-      color: Ngjyra
+    form:
+        channel:
+            name: Emri
+            description: Përshkrimi
+            url: URL
+            enabled: E aktivizuar
+            color: Ngjyra

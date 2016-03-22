@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    attribute:
-      code: Kode
-      name: Nama
+    form:
+        attribute:
+            code: Kode
+            name: Nama

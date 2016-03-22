@@ -2,37 +2,37 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    rule:
-      unit_count_configuration:
-        count: จำนวน
-    shipment:
-      state: สถานะ
-      states:
-        checkout: ชำระเงิน
-        pending: อยู่ระหว่างดำเนินการ
-        ready: พร้อมส่ง
-        shipped: ส่งของแล้ว
-        returned: ถูกส่งคืน
-        cancelled: ถูกยกเลิก
-      tracking_code: รหัสการติดตาม
-    shipping_calculator:
-      flat_rate_configuration:
-        amount: ยอดเงิน
-      per_unit_rate_configuration:
-        amount: ยอดรวม
-      weight_rate_configuration:
-        division: สัดส่วน
-      volume_rate_configuration:
-        amount: ยอดรวม
-        division: สัดส่วน
-    shipping_category:
-      description: คำอธิบาย
-      name: ชื่อ
-    shipping_method:
-      calculator: การคำนวณราคา
-      category: หมวดหมู่
-      category_requirement: ความต้องการสำหรับหมวดหมู่
-      configuration: ตั้งค่าคอนฟิก
-      enabled: เปิดใช้งานแล้ว
-      name: ชื่อ
+    form:
+        rule:
+            unit_count_configuration:
+                count: จำนวน
+        shipment:
+            state: สถานะ
+            states:
+                checkout: ชำระเงิน
+                pending: อยู่ระหว่างดำเนินการ
+                ready: พร้อมส่ง
+                shipped: ส่งของแล้ว
+                returned: ถูกส่งคืน
+                cancelled: ถูกยกเลิก
+            tracking_code: รหัสการติดตาม
+        shipping_calculator:
+            flat_rate_configuration:
+                amount: ยอดเงิน
+            per_unit_rate_configuration:
+                amount: ยอดรวม
+            weight_rate_configuration:
+                division: สัดส่วน
+            volume_rate_configuration:
+                amount: ยอดรวม
+                division: สัดส่วน
+        shipping_category:
+            description: คำอธิบาย
+            name: ชื่อ
+        shipping_method:
+            calculator: การคำนวณราคา
+            category: หมวดหมู่
+            category_requirement: ความต้องการสำหรับหมวดหมู่
+            configuration: ตั้งค่าคอนฟิก
+            enabled: เปิดใช้งานแล้ว
+            name: ชื่อ

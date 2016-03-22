@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    report:
-      name: ชื่อ
-      description: คำอธิบาย
-      chart:
-        type: ชนิด
+    form:
+        report:
+            name: ชื่อ
+            description: คำอธิบาย
+            chart:
+                type: ชนิด

@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    cart_item:
-      quantity: Ποσότητα
+    form:
+        cart_item:
+            quantity: Ποσότητα

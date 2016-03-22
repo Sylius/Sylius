@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    review:
-      title: Başlık
-      comment: Yorum
-      author: Hazırlayan
-      status:
-        new: Yeni
+    form:
+        review:
+            title: Başlık
+            comment: Yorum
+            author: Hazırlayan
+            status:
+                new: Yeni

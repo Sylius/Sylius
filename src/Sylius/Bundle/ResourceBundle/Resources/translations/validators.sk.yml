@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  resource:
-    not_enabled: Zdroj je vypnutý
-    not_disabled: Zdroj je zapnutý
+    resource:
+        not_enabled: Zdroj je vypnutý
+        not_disabled: Zdroj je zapnutý

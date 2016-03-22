@@ -2,129 +2,129 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    action:
-      add_product_configuration:
-        price: Precio unitario
-        quantity: Cantidad
-        variant: Variante
-      customer_group: Grupo de clientes
-    block:
-      body: Cuerpo
-      id: ID
-      title: Título
-    cart:
-      coupon: Cupón
-    checkout:
-      addressing:
-        different_billing_address: ¿Usar una dirección diferente para la facturación?
-      payment_method: Método de pago
-      shipping_method: Método de envío
-    promotion:
-      channels: Canal
-    coupon:
-      per_customer_usage_limit: Límite de uso por cliente
-    group:
-      name: Nombre
-      roles: Roles
-    channel:
-      taxonomies: Categorización
-      locale_default: Configuración regional predeterminada
-      locales: Idiomas
-      currency_default: Moneda por defecto
-      currencies: Monedas
-      shipping_methods: Métodos de envío
-      payment_methods: Métodos de pago
-    image:
-      file: Imagen
-    locale:
-      code: Código
-      enabled: Activado
-    order_filter:
-      created_at_from: Creado después de
-      created_at_to: Creado antes de
-      number: Número
-      total_from: Desde
-      total_to: Hasta
-      payment_state: Estado del pago
-      channel: Todos los canales
-    page:
-      body: Cuerpo
-      id: ID
-      title: Título
-    product:
-      restricted_zone: Zona restringida
-      shipping_category: Categoría de envío
-      short_description: Descripción breve
-      variant_selection_method: Método de selección variante
-      main_taxon: Clasificación principal
-    product_filter:
-      name: Nombre
-      sku: SKU
-    product_variant:
-      tax_category: Categoría de impuestos
-    settings:
-      general:
-        currency: Moneda por defecto
-        locale: Idioma
-        meta_description: Meta descripción
-        meta_keywords: Meta palabras clave
-        title: Título de la página
-        tracking_code:
-          Tracking code (for example: Código de Google Analytics
-      taxation:
-        default_tax_zone: Zona fiscal por defecto
-      security:
-        enabled: ¿Activar?
-    shipment_filter:
-      created_at_from: Desde
-      created_at_to: Hasta
-      number: Número de pedido
-      shipping_address: Enviar a
-      channel: Todos los canales
-    payment_filter:
-      created_at_from: Desde
-      created_at_to: Hasta
-      number: Número de pedido
-      billing_address: Factura a nombre de
-      channel: Todos los canales
-    shipping_method:
-      zone: Zona
-    taxon:
-      file: Seleccione una imagen
-    taxonomy:
-      file: Seleccione una imagen
-    user:
-      billing_address: Dirección de facturación
-      different_billing_address: Usar una dirección diferente para la facturación?
-      enabled: Activado
-      first_name: Nombre
-      groups: Grupos
-      roles: Roles
-      last_name: Apellidos
-      password: Contraseña
-      shipping_address: Dirección de envío
-    user_filter:
-      query: Búsqueda
-    variant:
-      available_on_demand: Disponible bajo demanda
-      depth: Profundidad
-      height: Alto
-      images: Imágenes
-      on_hand: Existencias actuales
-      price: Precio
-      original_price: Precio original
-      sku: SKU
-      weight: Peso
-      width: Ancho
-    attribute:
-      product_attribute_value:
-        attribute: Atributo
-        value: Valor
-    guest:
-      email: Dirección de correo electrónico
-    product_association:
-      product: Producto asociado
-      type: Tipos de asociación
-    product_association_type:
-      name: Nombre
+    form:
+        action:
+            add_product_configuration:
+                price: Precio unitario
+                quantity: Cantidad
+                variant: Variante
+            customer_group: Grupo de clientes
+        block:
+            body: Cuerpo
+            id: ID
+            title: Título
+        cart:
+            coupon: Cupón
+        checkout:
+            addressing:
+                different_billing_address: ¿Usar una dirección diferente para la facturación?
+            payment_method: Método de pago
+            shipping_method: Método de envío
+        promotion:
+            channels: Canal
+        coupon:
+            per_customer_usage_limit: Límite de uso por cliente
+        group:
+            name: Nombre
+            roles: Roles
+        channel:
+            taxonomies: Categorización
+            locale_default: Configuración regional predeterminada
+            locales: Idiomas
+            currency_default: Moneda por defecto
+            currencies: Monedas
+            shipping_methods: Métodos de envío
+            payment_methods: Métodos de pago
+        image:
+            file: Imagen
+        locale:
+            code: Código
+            enabled: Activado
+        order_filter:
+            created_at_from: Creado después de
+            created_at_to: Creado antes de
+            number: Número
+            total_from: Desde
+            total_to: Hasta
+            payment_state: Estado del pago
+            channel: Todos los canales
+        page:
+            body: Cuerpo
+            id: ID
+            title: Título
+        product:
+            restricted_zone: Zona restringida
+            shipping_category: Categoría de envío
+            short_description: Descripción breve
+            variant_selection_method: Método de selección variante
+            main_taxon: Clasificación principal
+        product_filter:
+            name: Nombre
+            sku: SKU
+        product_variant:
+            tax_category: Categoría de impuestos
+        settings:
+            general:
+                currency: Moneda por defecto
+                locale: Idioma
+                meta_description: Meta descripción
+                meta_keywords: Meta palabras clave
+                title: Título de la página
+                tracking_code:
+                    Tracking code (for example: Código de Google Analytics
+            taxation:
+                default_tax_zone: Zona fiscal por defecto
+            security:
+                enabled: ¿Activar?
+        shipment_filter:
+            created_at_from: Desde
+            created_at_to: Hasta
+            number: Número de pedido
+            shipping_address: Enviar a
+            channel: Todos los canales
+        payment_filter:
+            created_at_from: Desde
+            created_at_to: Hasta
+            number: Número de pedido
+            billing_address: Factura a nombre de
+            channel: Todos los canales
+        shipping_method:
+            zone: Zona
+        taxon:
+            file: Seleccione una imagen
+        taxonomy:
+            file: Seleccione una imagen
+        user:
+            billing_address: Dirección de facturación
+            different_billing_address: Usar una dirección diferente para la facturación?
+            enabled: Activado
+            first_name: Nombre
+            groups: Grupos
+            roles: Roles
+            last_name: Apellidos
+            password: Contraseña
+            shipping_address: Dirección de envío
+        user_filter:
+            query: Búsqueda
+        variant:
+            available_on_demand: Disponible bajo demanda
+            depth: Profundidad
+            height: Alto
+            images: Imágenes
+            on_hand: Existencias actuales
+            price: Precio
+            original_price: Precio original
+            sku: SKU
+            weight: Peso
+            width: Ancho
+        attribute:
+            product_attribute_value:
+                attribute: Atributo
+                value: Valor
+        guest:
+            email: Dirección de correo electrónico
+        product_association:
+            product: Producto asociado
+            type: Tipos de asociación
+        product_association_type:
+            name: Nombre

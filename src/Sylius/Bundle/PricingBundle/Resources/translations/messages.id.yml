@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    priceable:
-      price: Harga
-    pricing:
-      volume_based:
-        price: Harga
+    form:
+        priceable:
+            price: Harga
+        pricing:
+            volume_based:
+                price: Harga

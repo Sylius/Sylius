@@ -2,8 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    channel:
-      name: 名称
-      description: 描述
-      enabled: 已启用
+    form:
+        channel:
+            name: 名称
+            description: 描述
+            enabled: 已启用
+            color: 颜色

@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    shipping_category:
-      name: Ime
-    shipping_method:
-      name: Ime
+    form:
+        shipping_category:
+            name: Ime
+        shipping_method:
+            name: Ime

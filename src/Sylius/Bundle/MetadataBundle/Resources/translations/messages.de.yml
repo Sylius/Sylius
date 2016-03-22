@@ -2,37 +2,37 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  metadata:
-    type:
-      none: ' - KEINE - '
-      twitter_summary_card: Zusammenfassung
-      twitter_summary_large_image_card: Zusammenfassung mit großem Bild
-      twitter_player_card: Player
-      twitter_app_card: Anwendung
-    page:
-      title: Titel
-      description: Beschreibung
-      keywords: Keywords
-      twitter: Twitter-Karte
-    twitter:
-      title: Titel
-      description: Beschreibung
-      site: Webseite
-      site_id: Website-ID
-      creator: Verfasser
-      creator_id: Verfasser-ID
-      image: Foto
-      player: Player
-      player_width: Playerbreite
-      player_height: Playerhöhe
-      player_stream: Player-stream
-      player_stream_content_type: Player-Stream-Content-type
-      app_name_iphone: Name der iPhone-Anwendung
-      app_id_iphone: iPhone Anwendungs ID
-      app_url_iphone: iPhone Anwendung URL
-      app_name_ipad: iPad Anwendungsname
-      app_id_ipad: iPad Anwendungs ID
-      app_url_ipad: iPad Anwendungs URL
-      app_name_googleplay: Google Play Anwendungsname
-      app_id_googleplay: Google Play Anwendungs ID
-      app_url_googleplay: Google Play Anwendungs URL
+    metadata:
+        type:
+            none: ' - KEINE - '
+            twitter_summary_card: Zusammenfassung
+            twitter_summary_large_image_card: Zusammenfassung mit großem Bild
+            twitter_player_card: Player
+            twitter_app_card: Anwendung
+        page:
+            title: Titel
+            description: Beschreibung
+            keywords: Keywords
+            twitter: Twitter-Karte
+        twitter:
+            title: Titel
+            description: Beschreibung
+            site: Webseite
+            site_id: Website-ID
+            creator: Verfasser
+            creator_id: Verfasser-ID
+            image: Foto
+            player: Player
+            player_width: Playerbreite
+            player_height: Playerhöhe
+            player_stream: Player-stream
+            player_stream_content_type: Player-Stream-Content-type
+            app_name_iphone: Name der iPhone-Anwendung
+            app_id_iphone: iPhone Anwendungs ID
+            app_url_iphone: iPhone Anwendung URL
+            app_name_ipad: iPad Anwendungsname
+            app_id_ipad: iPad Anwendungs ID
+            app_url_ipad: iPad Anwendungs URL
+            app_name_googleplay: Google Play Anwendungsname
+            app_id_googleplay: Google Play Anwendungs ID
+            app_url_googleplay: Google Play Anwendungs URL

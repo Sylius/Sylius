@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    report:
-      name: Naziv grupe
-      description: Opis
-      chart:
-        type: Vrsta
+    form:
+        report:
+            name: Naziv grupe
+            description: Opis
+            chart:
+                type: Vrsta

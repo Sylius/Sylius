@@ -2,37 +2,37 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  metadata:
-    type:
-      none: ' -هیچ- '
-      twitter_summary_card: خلاصه
-      twitter_summary_large_image_card: خلاصه با تصویر بزرگ
-      twitter_player_card: پخش کننده
-      twitter_app_card: اپلیکیشن
-    page:
-      title: عنوان
-      description: شرح
-      keywords: کلمات کلیدی
-      twitter: کارت توییتر
-    twitter:
-      title: عنوان
-      description: شرح
-      site: آدرس سایت
-      site_id: شناسه سایت
-      creator: سازنده
-      creator_id: شناسه سازنده
-      image: عکس
-      player: پخش کننده
-      player_width: عرض پخش کننده (پیکسل)
-      player_height: طول پخش کننده (پیکسل)
-      player_stream: آدرس محتوای قابل پخش (به عنوان مثال http://localhost/video.mp4)
-      player_stream_content_type: نوع محتوای قابل پخش (به عنوان مثال video/mp4)
-      app_name_iphone: نام اپلیکیشن آیفون
-      app_id_iphone: آی دی اپلیکیشن آیفون
-      app_url_iphone: آدرس اینترنتی اپلیکیشن آیفون
-      app_name_ipad: نام اپلیکیشن آیپد
-      app_id_ipad: آی دی اپلیکیشن آیپد
-      app_url_ipad: آدرس اینترنتی اپلیکیشن آیپد
-      app_name_googleplay: نام اپلیکیشن گوگل پلی
-      app_id_googleplay: آی دی اپلیکیشن گوگل پلی
-      app_url_googleplay: آدرس اینترنتی اپلیکیشن گوگل پلی
+    metadata:
+        type:
+            none: ' -هیچ- '
+            twitter_summary_card: خلاصه
+            twitter_summary_large_image_card: خلاصه با تصویر بزرگ
+            twitter_player_card: پخش کننده
+            twitter_app_card: اپلیکیشن
+        page:
+            title: عنوان
+            description: شرح
+            keywords: کلمات کلیدی
+            twitter: کارت توییتر
+        twitter:
+            title: عنوان
+            description: شرح
+            site: آدرس سایت
+            site_id: شناسه سایت
+            creator: سازنده
+            creator_id: شناسه سازنده
+            image: عکس
+            player: پخش کننده
+            player_width: عرض پخش کننده (پیکسل)
+            player_height: طول پخش کننده (پیکسل)
+            player_stream: آدرس محتوای قابل پخش (به عنوان مثال http://localhost/video.mp4)
+            player_stream_content_type: نوع محتوای قابل پخش (به عنوان مثال video/mp4)
+            app_name_iphone: نام اپلیکیشن آیفون
+            app_id_iphone: آی دی اپلیکیشن آیفون
+            app_url_iphone: آدرس اینترنتی اپلیکیشن آیفون
+            app_name_ipad: نام اپلیکیشن آیپد
+            app_id_ipad: آی دی اپلیکیشن آیپد
+            app_url_ipad: آدرس اینترنتی اپلیکیشن آیپد
+            app_name_googleplay: نام اپلیکیشن گوگل پلی
+            app_id_googleplay: آی دی اپلیکیشن گوگل پلی
+            app_url_googleplay: آدرس اینترنتی اپلیکیشن گوگل پلی

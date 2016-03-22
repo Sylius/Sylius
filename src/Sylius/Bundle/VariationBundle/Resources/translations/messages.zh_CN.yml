@@ -2,10 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    variant:
-      presentation: 演示
-    option:
-      name: 名称
-    option_value:
-      add_value: 添加值
+    form:
+        variant:
+            presentation: 演示
+        option:
+            name: 名称
+        option_value:
+            add_value: 添加值
+            value: 值

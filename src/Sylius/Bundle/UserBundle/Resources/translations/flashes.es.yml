@@ -2,16 +2,16 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  user:
-    email:
-      not_exist: No existe ningún usuario con este correo electrónico.
-    password:
-      invalid: La contraseña actual es incorrecta.
-      request:
-        success: ¡Te hemos enviado un correo con las instrucciones para reestablecer tu contraseña!
-      reset:
-        success: ¡Tu contraseña se ha restablecido con éxito!
-      change:
-        success: ¡Tu contraseña ha sido cambiada exitosamente!
-    reset_password:
-      requested: Si el correo electrónico que ha especificado existe en nuestro sistema, le hemos enviado las instrucciones para restablecer su contraseña.
+    user:
+        email:
+            not_exist: No existe ningún usuario con este correo electrónico.
+        password:
+            invalid: La contraseña actual es incorrecta.
+            request:
+                success: ¡Te hemos enviado un correo con las instrucciones para reestablecer tu contraseña!
+            reset:
+                success: ¡Tu contraseña se ha restablecido con éxito!
+            change:
+                success: ¡Tu contraseña ha sido cambiada exitosamente!
+        reset_password:
+            requested: Si el correo electrónico que ha especificado existe en nuestro sistema, le hemos enviado las instrucciones para restablecer su contraseña.

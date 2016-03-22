@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    report:
-      name: Nome
-      description: Descrição
-      chart:
-        type: Tipo
+    form:
+        report:
+            name: Nome
+            description: Descrição
+            chart:
+                type: Tipo

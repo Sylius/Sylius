@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    archetype:
-      code: Code
-      name: Naam
-      parent: Ouder
-      attributes: Attributen
-      options: Opties
+    form:
+        archetype:
+            code: Code
+            name: Naam
+            parent: Ouder
+            attributes: Attributen
+            options: Opties

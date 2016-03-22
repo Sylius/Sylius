@@ -2,37 +2,37 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  metadata:
-    type:
-      none: ' -NINGUNO- '
-      twitter_summary_card: Resumen
-      twitter_summary_large_image_card: Resumen con imágenes grandes
-      twitter_player_card: Reproductor
-      twitter_app_card: Aplicación
-    page:
-      title: Título
-      description: Descripción
-      keywords: Palabras Clave
-      twitter: Twitter Card
-    twitter:
-      title: Título
-      description: Descripción
-      site: Sitio
-      site_id: Identificador del sitio
-      creator: Creador
-      creator_id: Identificación del creador
-      image: Imagen
-      player: Reproductor
-      player_width: Anchura del reproductor
-      player_height: Altura del reproductor
-      player_stream: Flujo del reproductor
-      player_stream_content_type: Tipo de contenido del flujo del reproductor
-      app_name_iphone: Nombre de la aplicación de iPhone
-      app_id_iphone: Identificador de la aplicación de iPhone
-      app_url_iphone: Url de la aplicación de iPhone
-      app_name_ipad: Nombre de la aplicación de iPad
-      app_id_ipad: ID de la aplicación de iPad
-      app_url_ipad: Url de la aplicación de iPad
-      app_name_googleplay: Nombre de la aplicación de Google Play
-      app_id_googleplay: Identificador de la aplicación de Google Play
-      app_url_googleplay: Url de la aplicación de Google Play
+    metadata:
+        type:
+            none: ' -NINGUNO- '
+            twitter_summary_card: Resumen
+            twitter_summary_large_image_card: Resumen con imágenes grandes
+            twitter_player_card: Reproductor
+            twitter_app_card: Aplicación
+        page:
+            title: Título
+            description: Descripción
+            keywords: Palabras Clave
+            twitter: Twitter Card
+        twitter:
+            title: Título
+            description: Descripción
+            site: Sitio
+            site_id: Identificador del sitio
+            creator: Creador
+            creator_id: Identificación del creador
+            image: Imagen
+            player: Reproductor
+            player_width: Anchura del reproductor
+            player_height: Altura del reproductor
+            player_stream: Flujo del reproductor
+            player_stream_content_type: Tipo de contenido del flujo del reproductor
+            app_name_iphone: Nombre de la aplicación de iPhone
+            app_id_iphone: Identificador de la aplicación de iPhone
+            app_url_iphone: Url de la aplicación de iPhone
+            app_name_ipad: Nombre de la aplicación de iPad
+            app_id_ipad: ID de la aplicación de iPad
+            app_url_ipad: Url de la aplicación de iPad
+            app_name_googleplay: Nombre de la aplicación de Google Play
+            app_id_googleplay: Identificador de la aplicación de Google Play
+            app_url_googleplay: Url de la aplicación de Google Play

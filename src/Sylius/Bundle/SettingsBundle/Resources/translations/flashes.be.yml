@@ -2,5 +2,5 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  settings:
-    update: Налады паспяхова абноўлены.
+    settings:
+        update: Налады паспяхова абноўлены.

@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    channel:
-      name: Jméno
-      description: Popis
-      url: URL
-      enabled: Povoleno
-      color: Barva
+    form:
+        channel:
+            name: Jméno
+            description: Popis
+            url: URL
+            enabled: Povoleno
+            color: Barva

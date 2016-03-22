@@ -2,38 +2,38 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    rule:
-      unit_count_configuration:
-        count: Kiekis
-      type: Taisyklės tipas
-    shipment:
-      state: Būsena
-      states:
-        checkout: Apmokėjimas
-        pending: Laukiama
-        ready: Paruošta
-        shipped: Pristatytas
-        returned: Grąžintas
-        cancelled: Atšaukta
-      tracking_code: Sekimo kodas
-    shipping_calculator:
-      flat_rate_configuration:
-        amount: Suma
-      per_unit_rate_configuration:
-        amount: Suma
-      weight_rate_configuration:
-        division: Dalyba
-      volume_rate_configuration:
-        amount: Suma
-        division: Dalyba
-    shipping_category:
-      description: Aprašymas
-      name: Pavadinimas
-    shipping_method:
-      calculator: Skaičiuoklė
-      category: Kategorija
-      category_requirement: Kategorijos reikalavimas
-      configuration: Konfigūracija
-      enabled: Įjungta
-      name: Pavadinimas
+    form:
+        rule:
+            unit_count_configuration:
+                count: Kiekis
+            type: Taisyklės tipas
+        shipment:
+            state: Būsena
+            states:
+                checkout: Apmokėjimas
+                pending: Laukiama
+                ready: Paruošta
+                shipped: Pristatytas
+                returned: Grąžintas
+                cancelled: Atšaukta
+            tracking_code: Sekimo kodas
+        shipping_calculator:
+            flat_rate_configuration:
+                amount: Suma
+            per_unit_rate_configuration:
+                amount: Suma
+            weight_rate_configuration:
+                division: Dalyba
+            volume_rate_configuration:
+                amount: Suma
+                division: Dalyba
+        shipping_category:
+            description: Aprašymas
+            name: Pavadinimas
+        shipping_method:
+            calculator: Skaičiuoklė
+            category: Kategorija
+            category_requirement: Kategorijos reikalavimas
+            configuration: Konfigūracija
+            enabled: Įjungta
+            name: Pavadinimas

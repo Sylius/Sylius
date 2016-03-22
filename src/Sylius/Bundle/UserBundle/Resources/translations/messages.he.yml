@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    customer:
-      phone_number: מספר טלפון
+    form:
+        customer:
+            phone_number: מספר טלפון

@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  locale:
-    code:
-      not_blank: Venligst angiv landekode.
-      unique: Denne landekode eksisterer allerede.
+    locale:
+        code:
+            not_blank: Venligst angiv landekode.
+            unique: Denne landekode eksisterer allerede.

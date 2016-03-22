@@ -2,7 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    report:
-      name: 名称
-      description: 描述
+    form:
+        report:
+            name: 名称
+            description: 描述
+            renderer:
+                label: 渲染器
+                template: 模板

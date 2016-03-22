@@ -2,31 +2,31 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    attribute:
-      add: Додати
-      add_attributes: Додати атрибути
-      choices: Вибір
-      code: Код
-      name: Ім’я
-      translations: Переклади
-      type: Тип
-    attribute_type:
-      checkbox: Прапорець
-      configuration: Конфігурація
-      date: Дата
-      datetime: Дата та час
-      integer: Ціле число
-      percent: Відсотоки
-      text: Текст
-      textarea: Текстове поле
-      title: Тип атрибуту
-      validation: Перевірено
-    attribute_type_configuration:
-      datetime:
-        format: Формат
-      date:
-        format: Формат
-      text:
-        min: Мінімальна довжина
-        max: Максимальна довжина
+    form:
+        attribute:
+            add: Додати
+            add_attributes: Додати атрибути
+            choices: Вибір
+            code: Код
+            name: Ім’я
+            translations: Переклади
+            type: Тип
+        attribute_type:
+            checkbox: Прапорець
+            configuration: Конфігурація
+            date: Дата
+            datetime: Дата та час
+            integer: Ціле число
+            percent: Відсотоки
+            text: Текст
+            textarea: Текстове поле
+            title: Тип атрибуту
+            validation: Перевірено
+        attribute_type_configuration:
+            datetime:
+                format: Формат
+            date:
+                format: Формат
+            text:
+                min: Мінімальна довжина
+                max: Максимальна довжина

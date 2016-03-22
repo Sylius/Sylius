@@ -2,12 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    variant:
-      presentation: Prezentacija
-    option:
-      name: Naziv grupe
-      values: Moguće vrijednosti
-    option_value:
-      add_value: Dodaj vrijednost
-      value: Vrijednost
+    form:
+        variant:
+            presentation: Prezentacija
+        option:
+            name: Naziv grupe
+            values: Moguće vrijednosti
+        option_value:
+            add_value: Dodaj vrijednost
+            value: Vrijednost

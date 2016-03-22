@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  resource:
-    not_enabled: Gegeven resource is uitgeschakeld
-    not_disabled: Gegeven resource is ingeschakeld
+    resource:
+        not_enabled: Gegeven resource is uitgeschakeld
+        not_disabled: Gegeven resource is ingeschakeld

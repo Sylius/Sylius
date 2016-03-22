@@ -2,12 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  user:
-    email:
-      not_exist: Uživatel s tímto e-mailem neexistuje.
-    password:
-      invalid: Chybné aktuální heslo.
-      reset:
-        success: Vaše heslo bylo úspěšně přenastaveno!
-      change:
-        success: Vaše heslo bylo úspěšně změněno!
+    user:
+        email:
+            not_exist: Uživatel s tímto e-mailem neexistuje.
+        password:
+            invalid: Chybné aktuální heslo.
+            reset:
+                success: Vaše heslo bylo úspěšně přenastaveno!
+            change:
+                success: Vaše heslo bylo úspěšně změněno!

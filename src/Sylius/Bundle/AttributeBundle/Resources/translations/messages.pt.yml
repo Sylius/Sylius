@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    attribute:
-      add: Adicionar
+    form:
+        attribute:
+            add: Adicionar

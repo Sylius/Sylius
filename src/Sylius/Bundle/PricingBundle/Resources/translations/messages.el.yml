@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    priceable:
-      price: Τιμή
-      configuration: Παραμετροποίηση
-    pricing:
-      volume_based:
-        price: Τιμή
+    form:
+        priceable:
+            price: Τιμή
+            configuration: Παραμετροποίηση
+        pricing:
+            volume_based:
+                price: Τιμή

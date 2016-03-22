@@ -2,45 +2,45 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    rule:
-      unit_count_configuration:
-        count: Кол-во
-      type: Тип измерения
-    shipment:
-      state: Cтатус
-      states:
-        checkout: Оформление заказа
-        pending: В обработке
-        ready: Готов
-        shipped: Доставлено
-        returned: Возвращено
-        cancelled: Отменён
-      tracking_code: Код отслеживания
-    shipping_calculator:
-      flat_rate_configuration:
-        label: Фиксированная ставка за доставку
-        amount: Сумма
-      flexible_rate_configuration:
-        label: Гибкий курс
-      per_unit_rate_configuration:
-        amount: Сумма
-      weight_rate_configuration:
-        label: Ставка основная на весе
-        fixed: Фиксированная сумма
-        variable: Динамическая сумма
-        division: Деление
-      volume_rate_configuration:
-        label: Ставка на основе
-        amount: Сумма
-        division: Деление
-    shipping_category:
-      description: Описание
-      name: Название
-    shipping_method:
-      calculator: Калькулятор
-      category: Категория
-      category_requirement: Условия категории
-      configuration: Конфигурация
-      enabled: Активен
-      name: Название
+    form:
+        rule:
+            unit_count_configuration:
+                count: Кол-во
+            type: Тип измерения
+        shipment:
+            state: Cтатус
+            states:
+                checkout: Оформление заказа
+                pending: В обработке
+                ready: Готов
+                shipped: Доставлено
+                returned: Возвращено
+                cancelled: Отменён
+            tracking_code: Код отслеживания
+        shipping_calculator:
+            flat_rate_configuration:
+                label: Фиксированная ставка за доставку
+                amount: Сумма
+            flexible_rate_configuration:
+                label: Гибкий курс
+            per_unit_rate_configuration:
+                amount: Сумма
+            weight_rate_configuration:
+                label: Ставка основная на весе
+                fixed: Фиксированная сумма
+                variable: Динамическая сумма
+                division: Деление
+            volume_rate_configuration:
+                label: Ставка на основе
+                amount: Сумма
+                division: Деление
+        shipping_category:
+            description: Описание
+            name: Название
+        shipping_method:
+            calculator: Калькулятор
+            category: Категория
+            category_requirement: Условия категории
+            configuration: Конфигурация
+            enabled: Активен
+            name: Название

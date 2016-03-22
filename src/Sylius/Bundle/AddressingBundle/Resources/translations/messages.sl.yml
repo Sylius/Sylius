@@ -2,38 +2,38 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    address:
-      city: Mesto
-      company: Podjetje
-      country: Država
-      first_name: Ime
-      last_name: Priimek
-      phone_number: Telefonska številka
-      postcode: Poštna številka
-      street: Ulica
-      province: Regija
-    country:
-      add_province: Dodaj provinco
-      name: Ime
-      provinces: Province
-      select: Izberite
-      enabled: Omogočeno
-    province:
-      name: Ime
-      abbreviation: Kratica
-      select: Izberite
-    zone:
-      add_member: Dodaj člana
-      members: Člani
-      name: Ime
-      type: Vrsta
-      types:
-        country: Država
-        province: Provinca
-        zone: Območje
-      scope: Področje
-      select: Izberite
-      select_scope: Izberite področje
-    zone_member:
-      select: Izberite
+    form:
+        address:
+            city: Mesto
+            company: Podjetje
+            country: Država
+            first_name: Ime
+            last_name: Priimek
+            phone_number: Telefonska številka
+            postcode: Poštna številka
+            street: Ulica
+            province: Regija
+        country:
+            add_province: Dodaj provinco
+            name: Ime
+            provinces: Province
+            select: Izberite
+            enabled: Omogočeno
+        province:
+            name: Ime
+            abbreviation: Kratica
+            select: Izberite
+        zone:
+            add_member: Dodaj člana
+            members: Člani
+            name: Ime
+            type: Vrsta
+            types:
+                country: Država
+                province: Provinca
+                zone: Območje
+            scope: Področje
+            select: Izberite
+            select_scope: Izberite področje
+        zone_member:
+            select: Izberite

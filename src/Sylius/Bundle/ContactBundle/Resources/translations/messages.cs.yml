@@ -2,12 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    contact_request:
-      first_name: Křestní Jméno
-      last_name: Příjmení
-      email: Email
-      message: Zpráva
-      topic: Téma
-    contact_topic:
-      title: Název
+    form:
+        contact_request:
+            first_name: Křestní Jméno
+            last_name: Příjmení
+            email: Email
+            message: Zpráva
+            topic: Téma
+        contact_topic:
+            title: Název

@@ -2,37 +2,37 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    rule:
-      unit_count_configuration:
-        count: Brojač
-    shipment:
-      state: Stanje
-      states:
-        checkout: Blagajna
-        pending: Na čekanju
-        ready: Spremno
-        shipped: Poslano
-        returned: Vraćeno
-        cancelled: Otkazano
-      tracking_code: Kod za praćenje
-    shipping_calculator:
-      flat_rate_configuration:
-        amount: Iznos
-      per_unit_rate_configuration:
-        amount: Iznos
-      weight_rate_configuration:
-        division: Odjel
-      volume_rate_configuration:
-        amount: Iznos
-        division: Odjel
-    shipping_category:
-      description: Opis
-      name: Naziv
-    shipping_method:
-      calculator: Kalkulator
-      category: Kategorija
-      category_requirement: Zahtjevi kategorije
-      configuration: Postavke
-      enabled: Omogući
-      name: Naziv
+    form:
+        rule:
+            unit_count_configuration:
+                count: Brojač
+        shipment:
+            state: Stanje
+            states:
+                checkout: Blagajna
+                pending: Na čekanju
+                ready: Spremno
+                shipped: Poslano
+                returned: Vraćeno
+                cancelled: Otkazano
+            tracking_code: Kod za praćenje
+        shipping_calculator:
+            flat_rate_configuration:
+                amount: Iznos
+            per_unit_rate_configuration:
+                amount: Iznos
+            weight_rate_configuration:
+                division: Odjel
+            volume_rate_configuration:
+                amount: Iznos
+                division: Odjel
+        shipping_category:
+            description: Opis
+            name: Naziv
+        shipping_method:
+            calculator: Kalkulator
+            category: Kategorija
+            category_requirement: Zahtjevi kategorije
+            configuration: Postavke
+            enabled: Omogući
+            name: Naziv

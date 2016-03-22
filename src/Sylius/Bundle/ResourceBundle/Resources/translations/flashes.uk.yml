@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  resource:
-    create: '%resource% був успішно створений.'
-    update: '%resource% був успішно оновлений.'
-    delete: '%resource% був успішно видалений.'
+    resource:
+        create: '%resource% був успішно створений.'
+        update: '%resource% був успішно оновлений.'
+        delete: '%resource% був успішно видалений.'

@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  locale:
-    code:
-      not_blank: Изберете код на място.
-      unique: Кода на мястото трябва да е уникален.
+    locale:
+        code:
+            not_blank: Изберете код на място.
+            unique: Кода на мястото трябва да е уникален.

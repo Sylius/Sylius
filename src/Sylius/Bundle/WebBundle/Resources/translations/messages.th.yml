@@ -1,3 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
     account:
         order:
@@ -19,7 +22,7 @@ sylius:
     checkout:
         finalize:
             order:
-                no_items: 'ใบสั่งซื้อนี้ไม่ประกอบด้วยรายการใด ๆ'
+                no_items: ใบสั่งซื้อนี้ไม่ประกอบด้วยรายการใด ๆ
                 no_promotion: ไม่รวมโปรโมชั่น
                 no_shipping_charges: ไม่มีค่าธรรมเนียมการจัดส่ง
                 no_taxes: ไม่รวมภาษี
@@ -29,12 +32,12 @@ sylius:
         forward: ดำเนินการต่อ
     homepage:
         splash:
-            headline: 'ยินดีต้อนรับสู่ ツ Sylius'
-            subheadline: 'อีคอมเมิร์ซที่ทันสมัยสำหรับ Symfony2'
+            headline: ยินดีต้อนรับสู่ ツ Sylius
+            subheadline: อีคอมเมิร์ซที่ทันสมัยสำหรับ Symfony2
     meta:
-        frontend_title: 'Sylius อีคอมเมิร์ซที่ทันสมัยสำหรับ Symfony2'
+        frontend_title: Sylius อีคอมเมิร์ซที่ทันสมัยสำหรับ Symfony2
     order:
-        no_items: 'ใบสั่งซื้อนี้ไม่ประกอบด้วยรายการใด ๆ'
+        no_items: ใบสั่งซื้อนี้ไม่ประกอบด้วยรายการใด ๆ
         no_shipments: ไม่มีการจัดส่งสำหรับใบสั่งซื้อนี้
         no_shipping_charges: ไม่มีค่าธรรมเนียมการจัดส่ง
         no_taxes: ไม่รวมภาษี
@@ -68,12 +71,10 @@ sylius:
         amount: ยอดเงิน
         assortment: จัดประเภท
         author: ผู้เขียน
-        availability: Availability
         available_on: พร้อมจำหน่ายเมื่อ
-        available_on_demand: 'Available on demand'
+        available_on_demand: Available on demand
         back: ย้อนกลับ
         backorder: สั่งซื้อเมื่อมีของ
-        balance_due: 'Balance due'
         billing_address: ที่อยู่สำหรับออกใบเสร็จ
         blocks: บล็อก
         body: Body
@@ -168,7 +169,6 @@ sylius:
         filter: ตัวกรอง
         first_name: ชื่อ
         firstname: ชื่อ
-        fulfill: Fulfill
         gateway: ช่องทางการชำระเงิน
         general_info: ข้อมูลทั่วไป
         general_settings: ตั้งค่าทั่วไป
@@ -215,7 +215,6 @@ sylius:
         members: สมาชิก
         method: วิธีการ
         modified: การปรับเปลี่ยน
-        n_a: N/A
         name: ชื่อ
         new: ใหม่
         new_country: ประเทศใหม่
@@ -236,13 +235,12 @@ sylius:
         new_zone: โซนใหม่
         newest_products: สินค้าใหม่ล่าสุด
         next: ถัดไป
-        'no': false
         no_default_billing_address: ไม่มีค่าเริ่มต้นที่อยู่สำหรับเรียกเก็บเงิน
         no_default_shipping_address: ไม่มีค่าเริ่มต้นที่อยู่ในการจัดส่ง
         no_description: ไม่มีคำอธิบาย
         no_shipping_category: ไม่มีประเภทการจัดส่ง
         no_short_description: '<i>ไม่มีคำอธิบายสั้น ๆ</i>'
-        no_sku: 'ไม่มี SKU'
+        no_sku: ไม่มี SKU
         no_tax_category: ไม่มีประเภทภาษี
         not_available_in_your_country: ไม่มีในประเทศของคุณ
         number: หมายเลข
@@ -266,7 +264,6 @@ sylius:
         pending: อยู่ระหว่างการพิจารณา
         phone_number: หมายเลขโทรศัพท์
         place_order: สั่งซื้อสินค้า
-        placed_at: 'Placed at'
         postcode: รหัสไปรษณีย์
         presentation: ผู้ใช้มองเห็น
         previous: ก่อนหน้านี้
@@ -291,7 +288,6 @@ sylius:
         register: ลงทะเบียน
         register_button: ลงทะเบียน
         registration_date: วันที่สมัครสมาชิก
-        release_inventory: 'Release inventory'
         restricted_zone: จำกัดโซน
         retail_price: ราคาขายปลีก
         return: ส่งกลับ
@@ -320,7 +316,6 @@ sylius:
         shipping_methods: วิธีการจัดส่ง
         shipping_state: สถานะการจัดส่ง
         shipping_total: รวมค่าจัดส่ง
-        shop_by: 'Shop by'
         show_all: แสดงทั้งหมด
         show_deleted: แสดงรายการที่ลบ
         sign_in_to_the_store_or_create_new_account: 'เข้าสู่ระบบ <small>หรือสร้างบัญชีใหม่</small>'
@@ -330,7 +325,7 @@ sylius:
         state: สถานะ
         street: ถนน
         success: สำเร็จ
-        sylius_logo: 'ツ Sylius'
+        sylius_logo: ツ Sylius
         tax_categories: ประเภทภาษี
         tax_category: ประเภทภาษี
         tax_rate_details: รายละเอียดอัตราภาษี
@@ -362,10 +357,9 @@ sylius:
         users_list_of_all_users_registered_in_store: 'ผู้ใช้ <small>รายชื่อผู้ใช้ทั้งหมด</small>'
         variant_selection_method: วิธีการเลือกตัวแปร
         view_more: ดูเพิ่มเติม
-        void: Void
+        void: โมฆะ
         warning: คำเตือน
         welcome_to_your_space: ยินดีต้อนรับสู่พื้นที่ของคุณ
-        'yes': true
         you_are_customer_since: คุณเป็นลูกค้าตั้งแต่
         you_have_no_new_orders: คุณมีไม่มีใบสั่งซื้อใหม่
         your_products: สินค้าของคุณ

@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  resource:
-    not_enabled: La data risorsa è disattivata
-    not_disabled: La data risorsa è abilitata
+    resource:
+        not_enabled: La data risorsa è disattivata
+        not_disabled: La data risorsa è abilitata

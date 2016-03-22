@@ -2,36 +2,36 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    address:
-      city: Горад
-      company: Кампанія
-      country: Краіна
-      first_name: Імя
-      last_name: Прозвішча
-      phone_number: Нумар тэлефону
-      postcode: Індэкс
-      street: Вуліца
-      province: Вобласць
-    country:
-      add_province: Дадаць вобласць
-      name: Назва
-      provinces: Вобласці
-      select: Выбярыце
-      enabled: Уключана
-    province:
-      name: Імя
-      select: Абраць
-    zone:
-      add_member: Дадаць удзельніка
-      members: Удзельнікі
-      name: Імя
-      type: Тып
-      types:
-        country: Краіна
-        province: Вобласць
-        zone: Зона
-      scope: Абсяг
-      select: Выбярыце
-    zone_member:
-      select: Выбярыце
+    form:
+        address:
+            city: Горад
+            company: Кампанія
+            country: Краіна
+            first_name: Імя
+            last_name: Прозвішча
+            phone_number: Нумар тэлефону
+            postcode: Індэкс
+            street: Вуліца
+            province: Вобласць
+        country:
+            add_province: Дадаць вобласць
+            name: Назва
+            provinces: Вобласці
+            select: Выбярыце
+            enabled: Уключана
+        province:
+            name: Імя
+            select: Абраць
+        zone:
+            add_member: Дадаць удзельніка
+            members: Удзельнікі
+            name: Імя
+            type: Тып
+            types:
+                country: Краіна
+                province: Вобласць
+                zone: Зона
+            scope: Абсяг
+            select: Выбярыце
+        zone_member:
+            select: Выбярыце

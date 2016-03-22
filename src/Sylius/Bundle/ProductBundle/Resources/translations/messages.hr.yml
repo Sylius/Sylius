@@ -2,19 +2,19 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    product:
-      name: Naziv grupe
-      description: Opis
-      options: Opcije
-      meta_keywords: Ključne riječi (Meta Keywords)
-      meta_description: Opis (Meta Description)
-      taxons: Taksoni
-    product_variant:
-      available_on: Dostupno
-    product_archetype:
-      name: Naziv grupe
-      parent: Nadređena kategorija
-      options: Opcije
-    association_type:
-      name: Naziv grupe
+    form:
+        product:
+            name: Naziv grupe
+            description: Opis
+            options: Opcije
+            meta_keywords: Ključne riječi (Meta Keywords)
+            meta_description: Opis (Meta Description)
+            taxons: Taksoni
+        product_variant:
+            available_on: Dostupno
+        product_archetype:
+            name: Naziv grupe
+            parent: Nadređena kategorija
+            options: Opcije
+        association_type:
+            name: Naziv grupe

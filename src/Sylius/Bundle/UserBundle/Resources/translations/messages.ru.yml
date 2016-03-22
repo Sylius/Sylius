@@ -2,34 +2,34 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    group:
-      name: Название
-      roles: Роли
-    user:
-      email: Email
-      enabled: Активен
-      password:
-        label: Пароль
-        confirmation: Верификация
-      remember_me: Запомнить меня
-      shipping_address: Адрес доставки
-    customer:
-      first_name: Имя
-      groups: Группы
-      last_name: Фамилия
-      email: Email
-      phone_number: Контактный телефон
-      gender: Пол
-      birthday: День рождения
-      billing_address: Адрес для выставления счета
-      different_billing_address: Использовать другой адрес для составления счета?
-    user_filter:
-      query: Поиск
-    user_change_password:
-      confirmation: Подтверждение
-      current: Текущий пароль
-      new: Новый пароль
-    user_reset_password:
-      confirmation: Подтверждение
-      new: Новый пароль
+    form:
+        group:
+            name: Название
+            roles: Роли
+        user:
+            email: Email
+            enabled: Активен
+            password:
+                label: Пароль
+                confirmation: Верификация
+            remember_me: Запомнить меня
+            shipping_address: Адрес доставки
+        customer:
+            first_name: Имя
+            groups: Группы
+            last_name: Фамилия
+            email: Email
+            phone_number: Контактный телефон
+            gender: Пол
+            birthday: День рождения
+            billing_address: Адрес для выставления счета
+            different_billing_address: Использовать другой адрес для составления счета?
+        user_filter:
+            query: Поиск
+        user_change_password:
+            confirmation: Подтверждение
+            current: Текущий пароль
+            new: Новый пароль
+        user_reset_password:
+            confirmation: Подтверждение
+            new: Новый пароль

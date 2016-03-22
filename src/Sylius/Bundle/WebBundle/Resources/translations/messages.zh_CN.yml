@@ -1,3 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
     account:
         order:
@@ -6,10 +9,19 @@ sylius:
             list: 您的所有订单
             placed_at: '放置在 %at%'
             shipment:
-                ready: 准备好时间：%at%
+                ready: '准备好时间：%at%'
                 returned: '返回时间： %at%'
                 shipped: '发货时间： %at%'
         title: 我的账户
+    block:
+        imagine:
+            publishable: 发布
+        simple:
+            publishable: 发布
+        slideshow:
+            publishable: 发布
+        string:
+            publishable: 发布
     cart:
         empty: 您的购物车是空的
         summary:
@@ -29,8 +41,10 @@ sylius:
         forward: 继续
     homepage:
         splash:
-            headline: '欢迎来到 Sylius'
-            subheadline: 'Symfony2 的的现代电子商务'
+            headline: 欢迎来到 Sylius
+            subheadline: Symfony2 的的现代电子商务
+    menu:
+        publishable: 发布
     meta:
         frontend_title: Sylius，基于Symfony2的现代电子商务解决方案
     order:
@@ -40,10 +54,16 @@ sylius:
     order_item:
         quantity: 数量
         sellable: 产品
+    page:
+        publishable: 发布
+    pricing:
+        volume_based:
+            min: 最小值
     shipment:
         update: 编辑
     ui:
         action: 行动
+        add: 新增
         add_member: 添加成员
         add_province: 添加省
         add_to_cart: 放进购物车
@@ -53,6 +73,7 @@ sylius:
         administration: 管理
         administration_dashboard: 管理仪表板
         all_your_addresses: 您的所有地址
+        amount: 金额
         assortment: 分类
         author: 作者
         available_on: 可用
@@ -72,6 +93,7 @@ sylius:
         choose_file: 选择文件
         city: 城市
         code: 代码
+        comment: 备注
         company: 公司
         completed: 已完成
         configuration: 设置
@@ -114,6 +136,7 @@ sylius:
         email: 电子邮件
         enabled: 已启用
         error: 错误
+        exchange_rate: 汇率
         existing_customer: 现有客户
         failed: 失败
         filter: 筛选器
@@ -149,7 +172,6 @@ sylius:
         manage_zones: 管理区域
         members: 会员
         message: 消息
-        n_a: N/A
         name: 名称
         new: 新增
         new_country: 新建国家
@@ -160,7 +182,6 @@ sylius:
         new_zone: 新的区域
         newest_products: 最新产品
         next: 下一步
-        'no': false
         no_default_billing_address: 没有默认的帐单地址
         no_default_shipping_address: 没有默认发货地址
         number: 数量
@@ -186,13 +207,16 @@ sylius:
         presentation: 演示
         previous: 上一步
         price: 价格
+        pricing: 定价
         processing: 处理中...
         product: 产品
+        product_archetypes: 产品原型
         products: 产品
         promotion_coupons: 优惠券
         promotion_total: 促进总计
         promotions: 促销活动
         province: 省/直辖市/自治区
+        provinces: 省份
         recent_users: 最近用户
         register: 注册
         register_button: 注册
@@ -219,8 +243,8 @@ sylius:
         sku: SKU
         slideshow: 幻灯片：
         street: 街道
+        subject: 主题
         success: 成功
-        sylius_logo: Sylius
         tax_categories: 税类别
         tax_category: 税类别
         tax_rates: 税率
@@ -228,6 +252,7 @@ sylius:
         taxation_categories: 征税类别
         taxation_settings: 税收的设置
         taxes: 税
+        taxons: 分类
         title: 标题
         topic: 主题
         total: 共计
@@ -244,7 +269,6 @@ sylius:
         void: 作废
         warning: 警示
         welcome_to_your_space: 欢迎来到您的共享空间
-        'yes': true
         you_are_customer_since: 您是客户自从
         your_products: 您的商品
         zone: 区域

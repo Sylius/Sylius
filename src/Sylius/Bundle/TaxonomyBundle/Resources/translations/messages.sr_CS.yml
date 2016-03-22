@@ -2,8 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  form:
-    taxon:
-      name: Ime
-    taxonomy:
-      name: Ime
+    form:
+        taxon:
+            name: Ime
+        taxonomy:
+            name: Ime
