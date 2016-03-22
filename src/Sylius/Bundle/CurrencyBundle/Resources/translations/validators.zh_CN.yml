@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    currency:
-        code:
-            not_blank: 请选择币种代码。
-            unique: 币种代码必须是唯一的。
+  currency:
+    code:
+      not_blank: 请选择币种代码。
+      unique: 币种代码必须是唯一的。

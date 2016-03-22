@@ -2,280 +2,280 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    account:
-        order:
-            details: 您的订单的详细信息
-            download_invoice: 下载发票
-            list: 您的所有订单
-            placed_at: '放置在 %at%'
-            shipment:
-                ready: '准备好时间：%at%'
-                returned: '返回时间： %at%'
-                shipped: '发货时间： %at%'
-        title: 我的账户
-    block:
-        imagine:
-            publishable: 发布
-        simple:
-            publishable: 发布
-        slideshow:
-            publishable: 发布
-        string:
-            publishable: 发布
-    cart:
-        empty: 您的购物车是空的
-        summary:
-            clear: 清空购物车
-            quantity: 数量
-        total_items: '%count%项目'
-    checkout:
-        finalize:
-            order:
-                no_items: 本订单不包含任何项目
-                no_promotion: 没有推广应用
-                no_shipping_charges: 无运费
-                no_taxes: 无税
-                promotion_discount: 促销折扣
-            order_item:
-                quantity: 数量
-        forward: 继续
-    homepage:
-        splash:
-            headline: 欢迎来到 Sylius
-            subheadline: Symfony2 的的现代电子商务
-    menu:
-        publishable: 发布
-    meta:
-        frontend_title: Sylius，基于Symfony2的现代电子商务解决方案
+  account:
     order:
+      details: 您的订单的详细信息
+      download_invoice: 下载发票
+      list: 您的所有订单
+      placed_at: '放置在 %at%'
+      shipment:
+        ready: '准备好时间：%at%'
+        returned: '返回时间： %at%'
+        shipped: '发货时间： %at%'
+    title: 我的账户
+  block:
+    imagine:
+      publishable: 发布
+    simple:
+      publishable: 发布
+    slideshow:
+      publishable: 发布
+    string:
+      publishable: 发布
+  cart:
+    empty: 您的购物车是空的
+    summary:
+      clear: 清空购物车
+      quantity: 数量
+    total_items: '%count%项目'
+  checkout:
+    finalize:
+      order:
         no_items: 本订单不包含任何项目
+        no_promotion: 没有推广应用
         no_shipping_charges: 无运费
         no_taxes: 无税
-    order_item:
+        promotion_discount: 促销折扣
+      order_item:
         quantity: 数量
-        sellable: 产品
-    page:
-        publishable: 发布
-    pricing:
-        volume_based:
-            min: 最小值
-    shipment:
-        update: 编辑
-    ui:
-        action: 行动
-        add: 新增
-        add_member: 添加成员
-        add_province: 添加省
-        add_to_cart: 放进购物车
-        add_value: 添加值
-        adding_new_locale: 添加新的语言环境
-        addressing_step: 送货地址详情
-        administration: 管理
-        administration_dashboard: 管理仪表板
-        all_your_addresses: 您的所有地址
-        amount: 金额
-        assortment: 分类
-        author: 作者
-        available_on: 可用
-        available_on_demand: 可按用户要求
-        back: 返回
-        billing_address: 账单地址
-        blocks: 块
-        body: 正文
-        browse_products: 浏览产品
-        build: 开发
-        cancel: '取消 '
-        categorization: 分类
-        change_password: 更改您的密码
-        change_your_password: 更改您的密码
-        channels: 频道
-        checkout: 结账
-        choose_file: 选择文件
-        city: 城市
-        code: 代码
-        comment: 备注
-        company: 公司
-        completed: 已完成
-        configuration: 设置
-        confirmation: 确认
-        confirmation_title: 确认
-        content: 内容
-        countries: 国家
-        country: 国家
-        country_details: 国家详细信息
-        coupon: 优惠券
-        coupons: 优惠券
-        create: 创建
-        create_a_new_address: 创建一个新的地址
-        create_country: 创建国家
-        create_group: 创建组
-        create_locale: 创建区域设置
-        create_new_page: 创建新页
-        create_zone: 创建区域
-        created_at: 创建于
-        currency: 货币：
-        current_orders: 当前订单
-        current_password: 当前密码
-        current_stock: 当前货架
-        customer: 客户
-        dashboard: 仪表板
-        data: 数据
-        default_billing_address: 默认帐单地址
-        default_currency: 默认货币：
-        default_shipping_address: 默认的送货地址
-        delete: 删除
-        deleted: 已删除
-        description: 描述
-        edit: 编辑
-        edit_group: 编辑组
-        edit_locale: 编辑区域设置
-        edit_my_address: 编辑我的地址
-        edit_your_personal_information: 编辑您的个人信息。
-        editing_country: 编辑国家信息
-        editing_zone: 编辑区
-        email: 电子邮件
-        enabled: 已启用
-        error: 错误
-        exchange_rate: 汇率
-        existing_customer: 现有客户
-        failed: 失败
-        filter: 筛选器
-        first_name: 名字
-        firstname: 名字
-        gateway: 网关
-        general_settings: 常规设置
-        generate: 生成
-        grand_total: 总计
-        groups: 团体
-        hide_deleted: 隐藏已删除
-        id: ID
-        images: 图像
-        information: 信息
-        inventory_index: 库存
-        inventory_state: 库存状态
-        invoice: 发票
-        items_total: 总计项目
-        last_login: 最后登录时间
-        last_name: 姓氏
-        last_update: 最后一次更新
-        last_week_orders: 上个星期的订单
-        last_week_revenue: 上个星期的收入
-        lastname: 姓氏
-        latest_orders: 最新订单
-        locales: 区域设置
-        login: 登录
-        login_button: 登录
-        logout: 注销
-        manage: 管理
-        manage_countries: 管理国家
-        manage_options: 管理选项
-        manage_zones: 管理区域
-        members: 会员
-        message: 消息
-        name: 名称
-        new: 新增
-        new_country: 新建国家
-        new_customer: 新客户
-        new_password: 新密码
-        new_product: 新产品
-        new_user: 新用户
-        new_zone: 新的区域
-        newest_products: 最新产品
-        next: 下一步
-        no_default_billing_address: 没有默认的帐单地址
-        no_default_shipping_address: 没有默认发货地址
-        number: 数量
-        number_of_orders: 订单数
-        options: 选项
-        order_summary: 订单汇总
-        order_value: 订单价值
-        orders: 订单
-        out_of_stock: 售罄
-        overview_of_your_store: 所有存货
-        pages: 页
-        parent: 上一级
-        password: 密码
-        payment_method: 付款方式：
-        payment_methods: 支付方式
-        payment_state: 付款状态
-        payments: 付款
-        pending: 等待中
-        phone_number: 电话
-        place_order: 下订单
-        placed_at: 放置在
-        postcode: 邮编
-        presentation: 演示
-        previous: 上一步
-        price: 价格
-        pricing: 定价
-        processing: 处理中...
-        product: 产品
-        product_archetypes: 产品原型
-        products: 产品
-        promotion_coupons: 优惠券
-        promotion_total: 促进总计
-        promotions: 促销活动
-        province: 省/直辖市/自治区
-        provinces: 省份
-        recent_users: 最近用户
-        register: 注册
-        register_button: 注册
-        registration_date: 注册日期：
-        restricted_zone: 限制的区
-        roles: 角色
-        sales: 销售额
-        sales_this_month: 销售额
-        save: 保存
-        scope: 范围
-        search: 搜索
-        set_as_default_billing_address: 设置为默认帐单地址
-        set_as_default_shipping_address: 设置为默认发货地址
-        shipments: 发货
-        shipping_address: 送货地址
-        shipping_categories: 发货类别
-        shipping_category: 送货类别
-        shipping_charges: 运费
-        shipping_method: 发货方式
-        shipping_methods: 发货方式
-        shipping_state: 发货状态
-        shipping_total: 运费共计
-        sign_in_to_the_store_or_create_new_account: 登录/注册
-        sku: SKU
-        slideshow: 幻灯片：
-        street: 街道
-        subject: 主题
-        success: 成功
-        tax_categories: 税类别
-        tax_category: 税类别
-        tax_rates: 税率
-        tax_total: 税费总计
-        taxation_categories: 征税类别
-        taxation_settings: 税收的设置
-        taxes: 税
-        taxons: 分类
-        title: 标题
-        topic: 主题
-        total: 共计
-        total_orders: 订单总数
-        total_qty: 总计数量
-        total_registrations: 注册总数
-        tracking_code: 快递单号
-        tracking_number: 追踪号码
-        type: 类型
-        unit_price: 单价
-        unknown: 未知
-        username: 用户名
-        variant_selection_method: 变量选择方法
-        void: 作废
-        warning: 警示
-        welcome_to_your_space: 欢迎来到您的共享空间
-        you_are_customer_since: 您是客户自从
-        your_products: 您的商品
-        zone: 区域
-        zone_details: 区域详细信息
-        zones: 区域
-    user:
-        general_info: '"%username%"的资料'
-        impersonate: 作为此用户登录
-    variant:
-        stock: 当前货架
+    forward: 继续
+  homepage:
+    splash:
+      headline: 欢迎来到 Sylius
+      subheadline: Symfony2 的的现代电子商务
+  menu:
+    publishable: 发布
+  meta:
+    frontend_title: Sylius，基于Symfony2的现代电子商务解决方案
+  order:
+    no_items: 本订单不包含任何项目
+    no_shipping_charges: 无运费
+    no_taxes: 无税
+  order_item:
+    quantity: 数量
+    sellable: 产品
+  page:
+    publishable: 发布
+  pricing:
+    volume_based:
+      min: 最小值
+  shipment:
+    update: 编辑
+  ui:
+    action: 行动
+    add: 新增
+    add_member: 添加成员
+    add_province: 添加省
+    add_to_cart: 放进购物车
+    add_value: 添加值
+    adding_new_locale: 添加新的语言环境
+    addressing_step: 送货地址详情
+    administration: 管理
+    administration_dashboard: 管理仪表板
+    all_your_addresses: 您的所有地址
+    amount: 金额
+    assortment: 分类
+    author: 作者
+    available_on: 可用
+    available_on_demand: 可按用户要求
+    back: 返回
+    billing_address: 账单地址
+    blocks: 块
+    body: 正文
+    browse_products: 浏览产品
+    build: 开发
+    cancel: '取消 '
+    categorization: 分类
+    change_password: 更改您的密码
+    change_your_password: 更改您的密码
+    channels: 频道
+    checkout: 结账
+    choose_file: 选择文件
+    city: 城市
+    code: 代码
+    comment: 备注
+    company: 公司
+    completed: 已完成
+    configuration: 设置
+    confirmation: 确认
+    confirmation_title: 确认
+    content: 内容
+    countries: 国家
+    country: 国家
+    country_details: 国家详细信息
+    coupon: 优惠券
+    coupons: 优惠券
+    create: 创建
+    create_a_new_address: 创建一个新的地址
+    create_country: 创建国家
+    create_group: 创建组
+    create_locale: 创建区域设置
+    create_new_page: 创建新页
+    create_zone: 创建区域
+    created_at: 创建于
+    currency: 货币：
+    current_orders: 当前订单
+    current_password: 当前密码
+    current_stock: 当前货架
+    customer: 客户
+    dashboard: 仪表板
+    data: 数据
+    default_billing_address: 默认帐单地址
+    default_currency: 默认货币：
+    default_shipping_address: 默认的送货地址
+    delete: 删除
+    deleted: 已删除
+    description: 描述
+    edit: 编辑
+    edit_group: 编辑组
+    edit_locale: 编辑区域设置
+    edit_my_address: 编辑我的地址
+    edit_your_personal_information: 编辑您的个人信息。
+    editing_country: 编辑国家信息
+    editing_zone: 编辑区
+    email: 电子邮件
+    enabled: 已启用
+    error: 错误
+    exchange_rate: 汇率
+    existing_customer: 现有客户
+    failed: 失败
+    filter: 筛选器
+    first_name: 名字
+    firstname: 名字
+    gateway: 网关
+    general_settings: 常规设置
+    generate: 生成
+    grand_total: 总计
+    groups: 团体
+    hide_deleted: 隐藏已删除
+    id: ID
+    images: 图像
+    information: 信息
+    inventory_index: 库存
+    inventory_state: 库存状态
+    invoice: 发票
+    items_total: 总计项目
+    last_login: 最后登录时间
+    last_name: 姓氏
+    last_update: 最后一次更新
+    last_week_orders: 上个星期的订单
+    last_week_revenue: 上个星期的收入
+    lastname: 姓氏
+    latest_orders: 最新订单
+    locales: 区域设置
+    login: 登录
+    login_button: 登录
+    logout: 注销
+    manage: 管理
+    manage_countries: 管理国家
+    manage_options: 管理选项
+    manage_zones: 管理区域
+    members: 会员
+    message: 消息
+    name: 名称
+    new: 新增
+    new_country: 新建国家
+    new_customer: 新客户
+    new_password: 新密码
+    new_product: 新产品
+    new_user: 新用户
+    new_zone: 新的区域
+    newest_products: 最新产品
+    next: 下一步
+    no_default_billing_address: 没有默认的帐单地址
+    no_default_shipping_address: 没有默认发货地址
+    number: 数量
+    number_of_orders: 订单数
+    options: 选项
+    order_summary: 订单汇总
+    order_value: 订单价值
+    orders: 订单
+    out_of_stock: 售罄
+    overview_of_your_store: 所有存货
+    pages: 页
+    parent: 上一级
+    password: 密码
+    payment_method: 付款方式：
+    payment_methods: 支付方式
+    payment_state: 付款状态
+    payments: 付款
+    pending: 等待中
+    phone_number: 电话
+    place_order: 下订单
+    placed_at: 放置在
+    postcode: 邮编
+    presentation: 演示
+    previous: 上一步
+    price: 价格
+    pricing: 定价
+    processing: 处理中...
+    product: 产品
+    product_archetypes: 产品原型
+    products: 产品
+    promotion_coupons: 优惠券
+    promotion_total: 促进总计
+    promotions: 促销活动
+    province: 省/直辖市/自治区
+    provinces: 省份
+    recent_users: 最近用户
+    register: 注册
+    register_button: 注册
+    registration_date: 注册日期：
+    restricted_zone: 限制的区
+    roles: 角色
+    sales: 销售额
+    sales_this_month: 销售额
+    save: 保存
+    scope: 范围
+    search: 搜索
+    set_as_default_billing_address: 设置为默认帐单地址
+    set_as_default_shipping_address: 设置为默认发货地址
+    shipments: 发货
+    shipping_address: 送货地址
+    shipping_categories: 发货类别
+    shipping_category: 送货类别
+    shipping_charges: 运费
+    shipping_method: 发货方式
+    shipping_methods: 发货方式
+    shipping_state: 发货状态
+    shipping_total: 运费共计
+    sign_in_to_the_store_or_create_new_account: 登录/注册
+    sku: SKU
+    slideshow: 幻灯片：
+    street: 街道
+    subject: 主题
+    success: 成功
+    tax_categories: 税类别
+    tax_category: 税类别
+    tax_rates: 税率
+    tax_total: 税费总计
+    taxation_categories: 征税类别
+    taxation_settings: 税收的设置
+    taxes: 税
+    taxons: 分类
+    title: 标题
+    topic: 主题
+    total: 共计
+    total_orders: 订单总数
+    total_qty: 总计数量
+    total_registrations: 注册总数
+    tracking_code: 快递单号
+    tracking_number: 追踪号码
+    type: 类型
+    unit_price: 单价
+    unknown: 未知
+    username: 用户名
+    variant_selection_method: 变量选择方法
+    void: 作废
+    warning: 警示
+    welcome_to_your_space: 欢迎来到您的共享空间
+    you_are_customer_since: 您是客户自从
+    your_products: 您的商品
+    zone: 区域
+    zone_details: 区域详细信息
+    zones: 区域
+  user:
+    general_info: '"%username%"的资料'
+    impersonate: 作为此用户登录
+  variant:
+    stock: 当前货架

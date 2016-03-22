@@ -2,48 +2,48 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    block:
-        imagine:
-            publishable: Publicerad
-        simple:
-            publishable: Publicerad
-        slideshow:
-            publishable: Publicerad
-        string:
-            publishable: Publicerad
-    menu:
-        publishable: Publicerad
-    page:
-        publishable: Publicerad
-    ui:
-        billing_address: Faktureringsadress
-        city: Ort
-        code: Kod
-        company: Företag
-        coupon: Rabattkupong
-        default_currency: Standardvaluta
-        enabled: Aktiverad
-        first_name: Förnamn
-        firstname: Förnamn
-        groups: Grupper
-        id: Id
-        members: Medlemmar
-        message: Meddelande
-        name: Namn
-        number: Nummer
-        payment_state: Betalningsstatus
-        phone_number: Telefonnummer
-        postcode: Postnummer
-        presentation: Presentation
-        province: Län
-        provinces: Län
-        roles: Roller
-        routes: Rutter
-        scope: Omfattning
-        shipping_category: Kategori
-        sku: SKU
-        street: Gatuadress
-        tax_category: Momskategori
-        topic: Ämne
-        unit_price: Enhetspris
-        zone: Zon
+  block:
+    imagine:
+      publishable: Publicerad
+    simple:
+      publishable: Publicerad
+    slideshow:
+      publishable: Publicerad
+    string:
+      publishable: Publicerad
+  menu:
+    publishable: Publicerad
+  page:
+    publishable: Publicerad
+  ui:
+    billing_address: Faktureringsadress
+    city: Ort
+    code: Kod
+    company: Företag
+    coupon: Rabattkupong
+    default_currency: Standardvaluta
+    enabled: Aktiverad
+    first_name: Förnamn
+    firstname: Förnamn
+    groups: Grupper
+    id: Id
+    members: Medlemmar
+    message: Meddelande
+    name: Namn
+    number: Nummer
+    payment_state: Betalningsstatus
+    phone_number: Telefonnummer
+    postcode: Postnummer
+    presentation: Presentation
+    province: Län
+    provinces: Län
+    roles: Roller
+    routes: Rutter
+    scope: Omfattning
+    shipping_category: Kategori
+    sku: SKU
+    street: Gatuadress
+    tax_category: Momskategori
+    topic: Ämne
+    unit_price: Enhetspris
+    zone: Zon
