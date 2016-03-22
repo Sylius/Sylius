@@ -18,8 +18,6 @@ use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
- * Checks if order contains products with given taxon.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class TaxonRuleChecker implements RuleCheckerInterface
@@ -29,6 +27,10 @@ class TaxonRuleChecker implements RuleCheckerInterface
      */
     public function isEligible(PromotionSubjectInterface $subject, array $configuration)
     {
+        if (!isset($configuration['taxons'])) {
+            return;
+        }
+
         if (!$subject instanceof OrderInterface) {
             throw new UnsupportedTypeException($subject, OrderInterface::class);
         }
@@ -36,13 +38,13 @@ class TaxonRuleChecker implements RuleCheckerInterface
         /* @var $item OrderItemInterface */
         foreach ($subject->getItems() as $item) {
             foreach ($item->getProduct()->getTaxons() as $taxon) {
-                if ($configuration['taxons']->contains($taxon->getId())) {
-                    return !$configuration['exclude'];
+                if (in_array($taxon->getCode(), $configuration['taxons'])) {
+                    return true;
                 }
             }
         }
 
-        return (Boolean) $configuration['exclude'];
+        return false;
     }
 
     /**
