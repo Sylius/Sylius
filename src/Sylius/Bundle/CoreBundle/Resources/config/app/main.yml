@@ -1,4 +1,5 @@
 imports:
+    - { resource: @SyliusCoreBundle/Resources/config/app/security.yml }
     - { resource: @SyliusCoreBundle/Resources/config/app/sylius.yml }
     - { resource: @SyliusCoreBundle/Resources/config/app/payum.yml }
     - { resource: @SyliusCoreBundle/Resources/config/app/cmf.yml }
