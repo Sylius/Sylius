@@ -4,7 +4,6 @@
 imports:
     - { resource: @SyliusCoreBundle/Resources/config/app/parameters.yml }
     - { resource: parameters.yml }
-    - { resource: migrations.yml }
     - { resource: @SyliusCoreBundle/Resources/config/app/main.yml }
     - { resource: @SyliusAdminBundle/Resources/config/app/main.yml }
 
