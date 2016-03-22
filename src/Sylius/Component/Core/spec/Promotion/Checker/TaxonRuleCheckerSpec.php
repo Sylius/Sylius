@@ -15,8 +15,8 @@ use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Core\Model\Product;
-use Sylius\Component\Core\Model\Taxon;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
 use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -40,8 +40,8 @@ class TaxonRuleCheckerSpec extends ObjectBehavior
     function it_recognizes_subject_as_eligible_if_product_taxon_is_matched(
         OrderInterface $subject,
         OrderItemInterface $item,
-        Product $bastardSword,
-        Taxon $swords
+        ProductInterface $bastardSword,
+        TaxonInterface $swords
     ) {
         $configuration = ['taxons' => ['swords']];
 
@@ -56,8 +56,8 @@ class TaxonRuleCheckerSpec extends ObjectBehavior
     function it_recognizes_subject_as_eligible_if_product_taxon_is_matched_to_one_of_required_taxons(
         OrderInterface $subject,
         OrderItemInterface $item,
-        Product $bastardSword,
-        Taxon $swords
+        ProductInterface $bastardSword,
+        TaxonInterface $swords
     ) {
         $configuration = ['taxons' => ['swords', 'axes']];
 
@@ -72,8 +72,8 @@ class TaxonRuleCheckerSpec extends ObjectBehavior
     function it_recognizes_subject_as_not_eligible_if_product_taxon_is_not_matched(
         OrderInterface $subject,
         OrderItemInterface $item,
-        Product $reflexBow,
-        Taxon $bows
+        ProductInterface $reflexBow,
+        TaxonInterface $bows
     ) {
         $configuration = ['taxons' => ['swords', 'axes']];
 

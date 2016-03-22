@@ -30,14 +30,14 @@ class TaxonsToCodesTransformerSpec extends ObjectBehavior
         $this->beConstructedWith($taxonRepository);
     }
 
-    function it_implements_data_transformer_interface()
-    {
-        $this->shouldImplement(DataTransformerInterface::class);
-    }
-
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\DataTransformer\TaxonsToCodesTransformer');
+    }
+
+    function it_implements_data_transformer_interface()
+    {
+        $this->shouldImplement(DataTransformerInterface::class);
     }
 
     function it_transforms_array_of_taxons_codes_to_taxons_collection(
@@ -45,10 +45,20 @@ class TaxonsToCodesTransformerSpec extends ObjectBehavior
         TaxonInterface $bows,
         TaxonInterface $swords
     ) {
-        $taxonRepository->findOneBy(['code' => 'bows'])->willReturn($bows);
-        $taxonRepository->findOneBy(['code' => 'swords'])->willReturn($swords);
+        $taxonRepository->findBy(['code' => ['bows', 'swords']])->willReturn([$bows, $swords]);
 
         $taxons = new ArrayCollection([$bows->getWrappedObject(), $swords->getWrappedObject()]);
+
+        $this->transform(['taxons' => ['bows', 'swords']])->shouldBeCollection($taxons);
+    }
+
+    function it_transforms_only_existing_taxons(
+        TaxonRepositoryInterface $taxonRepository,
+        TaxonInterface $bows
+    ) {
+        $taxonRepository->findBy(['code' => ['bows', 'swords']])->willReturn([$bows]);
+
+        $taxons = new ArrayCollection([$bows->getWrappedObject()]);
 
         $this->transform(['taxons' => ['bows', 'swords']])->shouldBeCollection($taxons);
     }

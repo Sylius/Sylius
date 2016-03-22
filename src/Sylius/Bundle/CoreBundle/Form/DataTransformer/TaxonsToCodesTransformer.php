@@ -49,12 +49,7 @@ class TaxonsToCodesTransformer implements DataTransformerInterface
             return new ArrayCollection();
         }
 
-        $taxons = new ArrayCollection();
-        foreach ($value['taxons'] as $code) {
-            $taxons->add($this->taxonRepository->findOneBy(['code' => $code]));
-        }
-
-        return $taxons;
+        return new ArrayCollection($this->taxonRepository->findBy(['code' => $value['taxons']]));
     }
 
     /**

@@ -53,8 +53,8 @@ Feature: Checkout fixed discount promotions
             | type                 | configuration |
             | Order fixed discount | Amount: 40    |
         And promotion "Ubuntu T-Shirts" has following rules defined:
-            | type  | configuration                      |
-            | Taxon | Taxons: Ubuntu T-Shirts,Exclude: 0 |
+            | type  | configuration           |
+            | Taxon | Taxons: Ubuntu T-Shirts |
         And promotion "Ubuntu T-Shirts" has following actions defined:
             | type                 | configuration |
             | Order fixed discount | Amount: 40    |

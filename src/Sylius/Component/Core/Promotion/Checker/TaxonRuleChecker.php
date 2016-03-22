@@ -38,7 +38,7 @@ class TaxonRuleChecker implements RuleCheckerInterface
         /* @var $item OrderItemInterface */
         foreach ($subject->getItems() as $item) {
             foreach ($item->getProduct()->getTaxons() as $taxon) {
-                if (in_array($taxon->getCode(), $configuration['taxons'])) {
+                if (in_array($taxon->getCode(), $configuration['taxons'], true)) {
                     return true;
                 }
             }
