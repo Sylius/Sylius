@@ -64,11 +64,9 @@
         "winzou/state-machine-bundle": "~0.2"
     },
     "require-dev": {
+        "matthiasnoback/symfony-dependency-injection-test": "^0.7",
         "phpspec/phpspec": "^2.4",
-        "fzaninotto/faker": "~1.2",
-        "symfony/form": "^2.7",
-        "lakion/api-test-case": "^1.0@dev",
-        "coduo/php-matcher": "^2.1@dev"
+        "phpunit/phpunit": "^4.8"
     },
     "suggest": {
         "sylius/web-bundle": "Provides default web interface",
