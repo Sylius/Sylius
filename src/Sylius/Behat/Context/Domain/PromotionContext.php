@@ -73,16 +73,16 @@ final class PromotionContext implements Context
      */
     public function iDeleteCoupon(CouponInterface $coupon)
     {
-        $this->sharedStorage->set('coupon_id', $coupon->getId());
+        $this->sharedStorage->set('coupon', $coupon);
         $this->couponRepository->remove($coupon);
     }
 
     /**
-     * @Then /^([^"]+ should no longer) exist in the coupon registry$/
+     * @Then /^(this coupon) should no longer exist in the coupon registry$/
      */
-    public function couponShouldNotExistInTheRegistry($couponId)
+    public function couponShouldNotExistInTheRegistry(CouponInterface $coupon)
     {
-        expect($this->couponRepository->find($couponId))->toBe(null);
+        expect($this->couponRepository->findOneBy(['code' => $coupon->getCode()]))->toBe(null);
     }
 
     /**
@@ -122,16 +122,16 @@ final class PromotionContext implements Context
      */
     public function iDeletePromotion(PromotionInterface $promotion)
     {
-        $this->sharedStorage->set('promotion_id', $promotion->getId());
+        $this->sharedStorage->set('promotion', $promotion);
         $this->promotionRepository->remove($promotion);
     }
 
     /**
-     * @Then /^([^"]+ should no longer) exist in the promotion registry$/
+     * @Then /^(this promotion) should no longer exist in the promotion registry$/
      */
-    public function promotionShouldNotExistInTheRegistry($promotionId)
+    public function promotionShouldNotExistInTheRegistry(PromotionInterface $promotion)
     {
-        expect($this->promotionRepository->find($promotionId))->toBe(null);
+        expect($this->promotionRepository->findOneBy(['code' => $promotion->getCode()]))->toBe(null);
     }
 
     /**
