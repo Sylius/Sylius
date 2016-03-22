@@ -67,8 +67,9 @@ final class ManagingCountriesContext implements Context
 
     /**
      * @Given I want to add a new country
+     * @Given I want to add a new country with a province
      */
-    public function iWantToCreateNewCountry()
+    public function iWantToAddNewCountry()
     {
         $this->countryCreatePage->open();
     }
@@ -87,6 +88,14 @@ final class ManagingCountriesContext implements Context
     public function iChoose($name)
     {
         $this->countryCreatePage->chooseName($name);
+    }
+
+    /**
+     * @When I add the :provinceName province with :prvinceCode code
+     */
+    public function iAddProvinceWithCode($provinceName, $provinceCode)
+    {
+        $this->countryCreatePage->fillProvinceNameAndCode($provinceName, $provinceCode);
     }
 
     /**
@@ -115,6 +124,7 @@ final class ManagingCountriesContext implements Context
 
     /**
      * @When I save my changes
+     * @When I try to save my changes
      */
     public function iSaveMyChanges()
     {
@@ -158,7 +168,7 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Then /^(country "([^"]*)") should appear in the store$/
+     * @Then /^the (country "([^"]*)") should appear in the store$/
      */
     public function countryShouldAppearInTheStore(CountryInterface $country)
     {
@@ -199,6 +209,26 @@ final class ManagingCountriesContext implements Context
     public function iShouldNotBeAbleToChoose($name)
     {
         expect($this->countryCreatePage)->toThrow(ElementNotFoundException::class)->during('chooseName', [$name]);
+    }
+
+    /**
+     * @Then /^(this country) should have the "([^"]+)" province$/
+     */
+    public function countryShouldHaveProvince(CountryInterface $country, $provinceName)
+    {
+        expect($this->countryUpdatePage->isOpen(['id' => $country->getId()]))->toBe(true);
+
+        expect($this->countryUpdatePage->isThereProvince($provinceName))->toBe(true);
+    }
+
+    /**
+     * @Then /^(this country) should not have the "([^"]+)" province$/
+     */
+    public function countryShouldNotHaveProvince(CountryInterface $country, $provinceName)
+    {
+        expect($this->countryUpdatePage->isOpen(['id' => $country->getId()]))->toBe(true);
+
+        expect($this->countryUpdatePage->isThereProvince($provinceName))->toBe(false);
     }
 
 }

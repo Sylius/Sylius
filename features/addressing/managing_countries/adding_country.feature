@@ -13,4 +13,4 @@ Feature: Adding a new country
         When I choose "France"
         And I add it
         Then I should be notified about successful creation
-        And country "France" should appear in the store
+        And the country "France" should appear in the store

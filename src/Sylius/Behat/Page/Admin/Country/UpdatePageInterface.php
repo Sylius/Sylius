@@ -27,4 +27,11 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @throws \RuntimeException
      */
     public function disable();
+
+    /**
+     * @param $provinceName
+     *
+     * @return bool
+     */
+    public function isThereProvince($provinceName);
 }
