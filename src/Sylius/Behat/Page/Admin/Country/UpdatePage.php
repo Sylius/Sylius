@@ -46,11 +46,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         $province = $this->getElement($provinceName);
 
-        if (null === $province) {
-            return false;
-        }
-
-        return true;
+        return null !== $province;
     }
 
     /**

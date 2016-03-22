@@ -29,9 +29,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         $this->getDocument()->clickLink('Add province');
 
-        $provinces = $this->getDocument()->find('css', 'div:contains("Provinces")');
+        $provinces = $this->getDocument()->find('css', '#sylius_country_provinces');
 
-        $provinces->fillField('Name', $name);
-        $provinces->fillField('Code', $code);
+        $provinces->fillField('sylius_country_provinces_0_name', $name);
+        $provinces->fillField('sylius_country_provinces_0_code', $code);
     }
 }

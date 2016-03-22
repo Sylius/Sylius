@@ -77,6 +77,25 @@ abstract class SymfonyPage extends Page
     }
 
     /**
+     * @param NodeElement $collection
+     *
+     * @return NodeElement|bool
+     */
+    protected function waitForCollectionItemToAppear(NodeElement $collection)
+    {
+        $itemCount = count($collection->findAll('css', 'div[data-form-collection=item]'));
+
+        $this->getDocument()->waitFor(1, function () use ($itemCount, $collection) {
+            $items = $collection->findAll('css', 'div[data-form-collection=item]');
+            if (count($items) === $itemCount + 1) {
+                return end($items);
+            }
+
+            return false;
+        });
+    }
+
+    /**
      * {@inheritdoc}
      *
      * Not used by Symfony page.

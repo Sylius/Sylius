@@ -191,8 +191,10 @@ class ManagingCountriesContextSpec extends ObjectBehavior
         $this->countryShouldHaveProvince($country, 'Scotland');
     }
 
-    function it_throws_exception_if_a_country_does_not_have_the_province(CountryInterface $country, UpdatePageInterface $countryUpdatePage)
-    {
+    function it_throws_exception_if_a_country_does_not_have_the_province(
+        CountryInterface $country,
+        UpdatePageInterface $countryUpdatePage
+    ) {
         $country->getId()->willReturn(1);
         $countryUpdatePage->isOpen(['id' => 1])->willReturn(true);
         $countryUpdatePage->isThereProvince('Scotland')->willReturn(false);
