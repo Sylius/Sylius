@@ -6,7 +6,7 @@ Feature: Deleting the user account
 
     Background:
         Given there is user "theodore@example.com" identified by "pswd"
-        And I am logged in as administrator
+        And I am logged in as an administrator
 
     @ui @javascript
     Scenario: The account of currently logged in user cannot be deleted

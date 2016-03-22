@@ -5,7 +5,7 @@ Feature: Editing country
     I want to be able to edit a country
 
     Background:
-        Given I am logged in as administrator
+        Given I am logged in as an administrator
 
     @ui
     Scenario: Disabling country

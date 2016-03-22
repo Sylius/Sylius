@@ -82,9 +82,9 @@ final class SecurityContext implements Context
     }
 
     /**
-     * @Given I am logged in as administrator
+     * @Given I am logged in as an administrator
      */
-    public function iAmLoggedInAsAdministrator()
+    public function iAmLoggedInAsAnAdministrator()
     {
         $admin = $this->testUserFactory->createDefaultAdmin();
         $this->userRepository->add($admin);

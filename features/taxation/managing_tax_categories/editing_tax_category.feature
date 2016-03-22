@@ -6,7 +6,7 @@ Feature: Editing tax category
 
     Background:
         Given the store has "Alcohol" tax category with code "alcohol"
-        And I am logged in as administrator
+        And I am logged in as an administrator
 
     @todo
     Scenario: Trying to change tax category code

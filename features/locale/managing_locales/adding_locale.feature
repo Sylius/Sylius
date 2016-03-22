@@ -5,7 +5,7 @@ Feature: Adding a new locale
     I want to add a new locale to the registry
 
     Background:
-        Given I am logged in as administrator
+        Given I am logged in as an administrator
 
     @ui
     Scenario: Adding a new locale

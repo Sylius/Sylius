@@ -6,7 +6,7 @@ Feature: Locale validation
 
     Background:
         Given the store is available in the Norwegian language
-        And I am logged in as administrator
+        And I am logged in as an administrator
 
     @todo
     Scenario: Trying to add a locale without specifying a code
