@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Page\Admin\Country;
 
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 
 /**
@@ -46,6 +47,20 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $this->assertPriorStateOfToggleableElement($enabled, true);
 
         $enabled->uncheck();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isThereProvince($provinceName)
+    {
+        $province = $this->getElement($provinceName);
+
+        if (null === $province) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
