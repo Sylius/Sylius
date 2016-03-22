@@ -1,0 +1,22 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+security:
+    access_control:
+        - { path: ^/login.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/connect.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "/account.*", role: ROLE_USER }
+
+        - { path: ^/administration/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/administration/login-check, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "/administration.*", role: ROLE_ADMINISTRATION_ACCESS }
+
+        - { path: ^/admin/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/login-check, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "/admin.*", role: ROLE_ADMINISTRATION_ACCESS }
+
+        - { path: ^/api, role: ROLE_API_ACCESS }
+
+        - { path: "/_partial.*", ip: 127.0.0.1 }

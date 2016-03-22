@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+security:
+    providers:
+        sylius_user_provider:
+            id: sylius.user_provider.name_or_email

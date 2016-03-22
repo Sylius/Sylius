@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+security:
+    encoders:
+        Sylius\Component\User\Model\UserInterface: sha512
