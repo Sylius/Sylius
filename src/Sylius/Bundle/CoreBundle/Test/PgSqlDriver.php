@@ -9,14 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Tests;
+namespace Sylius\Bundle\CoreBundle\Test;
 
 use Doctrine\DBAL\Driver\PDOPgSql\Driver;
 
-class PgSqlDriver extends Driver
+final class PgSqlDriver extends Driver
 {
+    /**
+     * @var Driver
+     */
     private static $connection;
 
+    /**
+     * {@inheritdoc}
+     */
     public function connect(array $params, $username = null, $password = null, array $driverOptions = [])
     {
         if (null === self::$connection) {
