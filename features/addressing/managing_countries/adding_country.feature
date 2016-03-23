@@ -5,7 +5,7 @@ Feature: Adding a new country
     I want to add a new country to the store
 
     Background:
-        Given I am logged in as administrator
+        Given I am logged in as an administrator
 
     @ui
     Scenario: Adding country

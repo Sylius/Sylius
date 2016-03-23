@@ -5,7 +5,7 @@ Feature: Adding tax category
     I want to add new tax category to the registry
 
     Background:
-        Given I am logged in as administrator
+        Given I am logged in as an administrator
 
     @todo
     Scenario: Adding new tax category

@@ -6,7 +6,7 @@ Feature: Locale unique code validation
 
     Background:
         Given the store is available in the Norwegian language
-        And I am logged in as administrator
+        And I am logged in as an administrator
 
     @todo
     Scenario: Trying to add new locale with used code

@@ -6,7 +6,7 @@ Feature: Toggling a locale
 
     Background:
         Given the store is available in the Armenian language
-        And I am logged in as administrator
+        And I am logged in as an administrator
 
     @todo
     Scenario: Disabling the locale

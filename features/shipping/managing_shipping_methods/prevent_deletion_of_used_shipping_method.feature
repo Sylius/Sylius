@@ -12,7 +12,7 @@ Feature: Prevent deletion of used shipping method
         And the customer "john.doe@gmail.com" placed an order "#00000022"
         And the customer chose "DHL Express" shipping method to "France" with "Cash on Delivery" payment
         And the customer bought single "PHP T-Shirt"
-        And I am logged in as administrator
+        And I am logged in as an administrator
 
     @ui @javascript
     Scenario: Being unable to delete a shipping method which is in use

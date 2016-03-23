@@ -9,7 +9,7 @@ Feature: Deleting a product
         And the store has a product "Toyota GT86 model"
         And this product has "1:43" variant priced at "€15.00"
         And this product has one review
-        And I am logged in as administrator
+        And I am logged in as an administrator
 
     @ui @javascript
     Scenario: Deleted product disappears from the product catalog

@@ -6,7 +6,7 @@ Feature: Country unique code validation
 
     Background:
         Given the store operates in "Norway"
-        And I am logged in as administrator
+        And I am logged in as an administrator
 
     @ui
     Scenario: Trying to add a new country with used code

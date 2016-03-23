@@ -5,7 +5,7 @@ Feature: Tax category validation
     I want to be prevented from adding it without code or name
 
     Background:
-        Given I am logged in as administrator
+        Given I am logged in as an administrator
 
     @todo
     Scenario: Trying to add new tax category without specifying code

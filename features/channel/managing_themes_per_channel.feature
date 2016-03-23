@@ -7,7 +7,7 @@ Feature: Managing themes per channel
     Background:
         Given the store operates on a channel named "France"
         And the store has "Maverick Meerkat" theme
-        And I am logged in as administrator
+        And I am logged in as an administrator
 
     @ui
     Scenario: None of the themes are used by default
