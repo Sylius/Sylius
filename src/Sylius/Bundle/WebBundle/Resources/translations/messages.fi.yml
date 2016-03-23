@@ -2,23 +2,23 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    ui:
-        back: Edellinen
-        city: Kaupunki
-        company: Yritys
-        currency: Valuutta
-        email: Sähköpostiosoite
-        exchange_rate: Vaihtokurssi
-        id: Id
-        label: Otsikko
-        members: Jäsenet
-        message: Viesti
-        next: Seuraava
-        parent: Vanhempi
-        phone_number: Puhelinnumero
-        postcode: Postinumero
-        pricing: Hinnoittelu
-        province: Lääni
-        street: Katuosoite
-        topic: Aihe
-        username: Käyttäjänimi
+  ui:
+    back: Edellinen
+    city: Kaupunki
+    company: Yritys
+    currency: Valuutta
+    email: Sähköpostiosoite
+    exchange_rate: Vaihtokurssi
+    id: Id
+    label: Otsikko
+    members: Jäsenet
+    message: Viesti
+    next: Seuraava
+    parent: Vanhempi
+    phone_number: Puhelinnumero
+    postcode: Postinumero
+    pricing: Hinnoittelu
+    province: Lääni
+    street: Katuosoite
+    topic: Aihe
+    username: Käyttäjänimi

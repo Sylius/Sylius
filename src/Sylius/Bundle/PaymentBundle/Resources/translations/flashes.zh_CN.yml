@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    payment:
-        complete: 已完成付款。
-        cancel: 付款已被取消。
+  payment:
+    complete: 已完成付款。
+    cancel: 付款已被取消。
