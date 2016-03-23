@@ -92,21 +92,11 @@ final class NotificationAccessor implements NotificationAccessorInterface
     private function getMessageElement()
     {
         $messageElement = $this->session->getPage()->find('css', self::NOTIFICATION_ELEMENT_CSS);
-        $this->assertElementExistsOnPage($messageElement);
-
-        return $messageElement;
-    }
-
-    /**
-     * @param NodeElement $element
-     *
-     * @throws ElementNotFoundException
-     */
-    private function assertElementExistsOnPage(NodeElement $element)
-    {
-        if (null === $element) {
+        if (null === $messageElement) {
             throw new ElementNotFoundException(sprintf('%s element is not present on the page', self::NOTIFICATION_ELEMENT_CSS));
         }
+
+        return $messageElement;
     }
 
     /**
