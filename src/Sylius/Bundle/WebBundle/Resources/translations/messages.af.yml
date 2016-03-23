@@ -2,13 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    ui:
-        city: Stad
-        company: Maatskappy
-        members: Lede
-        postcode: Poskode
-        presentation: Weergawe
-        province: Provinsie
-        provinces: Provinsies
-        scope: Gebied
-        street: Straat
+  ui:
+    city: Stad
+    company: Maatskappy
+    members: Lede
+    postcode: Poskode
+    presentation: Weergawe
+    province: Provinsie
+    provinces: Provinsies
+    scope: Gebied
+    street: Straat
