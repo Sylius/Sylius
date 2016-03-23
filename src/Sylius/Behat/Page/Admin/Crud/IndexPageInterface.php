@@ -24,4 +24,11 @@ interface IndexPageInterface extends PageInterface
      * @return bool
      */
     public function isResourceOnPage(array $parameters);
+
+    /**
+     * @param array $parameters
+     *
+     * @return bool
+     */
+    public function deleteResourceOnPage(array $parameters);
 }

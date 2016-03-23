@@ -78,6 +78,20 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
+    public function deleteResourceOnPage(array $parameters)
+    {
+        $tableManipulator = $this->getTableManipulator();
+        $table = $this->getElement('table');
+
+        $deletedRow = $tableManipulator->getRowWithFields($table, $parameters);
+        $actionButtons = $tableManipulator->getFieldFromRow($table, $deletedRow, 'Actions');
+
+        $actionButtons->pressButton('Delete');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getRouteName()
     {
         return sprintf('sylius_admin_%s_index', $this->resourceName);
