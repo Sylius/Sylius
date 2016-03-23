@@ -28,6 +28,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     protected $elements = [
         'code' => '#sylius_tax_category_code',
+        'name' => '#sylius_tax_category_name',
     ];
 
     /**

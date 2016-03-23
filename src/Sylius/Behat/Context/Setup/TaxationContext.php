@@ -14,6 +14,7 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
+use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
@@ -24,6 +25,11 @@ use Sylius\Component\Taxation\Repository\TaxCategoryRepositoryInterface;
  */
 final class TaxationContext implements Context
 {
+    /**
+     * @var SharedStorageInterface
+     */
+    private $sharedStorage;
+
     /**
      * @var FactoryInterface
      */
@@ -50,6 +56,7 @@ final class TaxationContext implements Context
     private $zoneRepository;
 
     /**
+     * @param SharedStorageInterface $sharedStorage
      * @param FactoryInterface $taxRateFactory
      * @param FactoryInterface $taxCategoryFactory
      * @param RepositoryInterface $taxRateRepository
@@ -57,12 +64,14 @@ final class TaxationContext implements Context
      * @param ZoneRepositoryInterface $zoneRepository
      */
     public function __construct(
+        SharedStorageInterface $sharedStorage,
         FactoryInterface $taxRateFactory,
         FactoryInterface $taxCategoryFactory,
         RepositoryInterface $taxRateRepository,
         TaxCategoryRepositoryInterface $taxCategoryRepository,
         ZoneRepositoryInterface $zoneRepository
     ) {
+        $this->sharedStorage = $sharedStorage;
         $this->taxRateFactory = $taxRateFactory;
         $this->taxCategoryFactory = $taxCategoryFactory;
         $this->taxRateRepository = $taxRateRepository;
@@ -94,7 +103,9 @@ final class TaxationContext implements Context
      */
     public function theStoreHasTaxCategoryWithCode($name, $code)
     {
-        $this->createTaxCategory($name, $code);
+        $taxCategory = $this->createTaxCategory($name, $code);
+
+        $this->sharedStorage->set('tax_category', $taxCategory);
     }
 
     /**

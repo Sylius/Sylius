@@ -16,7 +16,6 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\TaxCategory\UpdatePageInterface;
 use Sylius\Behat\Service\Accessor\NotificationAccessorInterface;
 use Sylius\Behat\Page\Admin\TaxCategory\CreatePageInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Webmozart\Assert\Assert;
 
@@ -26,11 +25,6 @@ use Webmozart\Assert\Assert;
 final class ManagingTaxCategoryContext implements Context
 {
     const RESOURCE_NAME = 'tax_category';
-
-    /**
-     * @var SharedStorageInterface
-     */
-    private $sharedStorage;
 
     /**
      * @var IndexPageInterface
@@ -53,20 +47,17 @@ final class ManagingTaxCategoryContext implements Context
     private $notificationAccessor;
 
     /**
-     * @param SharedStorageInterface $sharedStorage
      * @param IndexPageInterface $taxCategoryIndexPage
      * @param CreatePageInterface $taxCategoryCreatePage
      * @param UpdatePageInterface $taxCategoryUpdatePage
      * @param NotificationAccessorInterface $notificationAccessor
      */
     public function __construct(
-        SharedStorageInterface $sharedStorage,
         IndexPageInterface $taxCategoryIndexPage,
         CreatePageInterface $taxCategoryCreatePage,
         UpdatePageInterface $taxCategoryUpdatePage,
         NotificationAccessorInterface $notificationAccessor
     ) {
-        $this->sharedStorage = $sharedStorage;
         $this->taxCategoryIndexPage = $taxCategoryIndexPage;
         $this->taxCategoryCreatePage = $taxCategoryCreatePage;
         $this->taxCategoryUpdatePage = $taxCategoryUpdatePage;
@@ -80,7 +71,6 @@ final class ManagingTaxCategoryContext implements Context
     {
         $this->taxCategoryIndexPage->open();
         $this->taxCategoryIndexPage->deleteResourceOnPage(['code' => $taxCategory->getCode()]);
-        $this->sharedStorage->set('tax_category', $taxCategory);
     }
 
     /**
@@ -122,7 +112,7 @@ final class ManagingTaxCategoryContext implements Context
      * @When I specify its code as :code
      * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs($code = null)
+    public function iSpecifyItsCodeAs($code = '')
     {
         $this->taxCategoryCreatePage->specifyCode($code);
     }
@@ -130,8 +120,10 @@ final class ManagingTaxCategoryContext implements Context
     /**
      * @When I name it :name
      * @When I rename it to :name
+     * @When I do not name it
+     * @When I remove its name
      */
-    public function iNameIt($name)
+    public function iNameIt($name = null)
     {
         $this->taxCategoryCreatePage->nameIt($name);
     }
@@ -198,6 +190,7 @@ final class ManagingTaxCategoryContext implements Context
 
     /**
      * @When I save my changes
+     * @When I try to save my changes
      */
     public function iSaveMyChanges()
     {
@@ -237,11 +230,7 @@ final class ManagingTaxCategoryContext implements Context
     public function thisTaxCategoryNameShouldBe($taxCategoryName)
     {
         Assert::true(
-            $this->taxCategoryUpdatePage->hasResourceValues(
-                [
-                    'name' => $taxCategoryName,
-                ]
-            ),
+            $this->taxCategoryUpdatePage->hasResourceValues(['name' => $taxCategoryName]),
             'Tax category name was not assigned properly'
         );
     }
@@ -258,14 +247,45 @@ final class ManagingTaxCategoryContext implements Context
     }
 
     /**
-     * @Then there should still be only one tax category with code :code
+     * @Then there should still be only one tax category with :element :code
      */
-    public function thereShouldStillBeOnlyOneTaxCategoryWithCode($code)
+    public function thereShouldStillBeOnlyOneTaxCategoryWith($element, $code)
     {
         $this->taxCategoryIndexPage->open();
         Assert::true(
-            $this->taxCategoryIndexPage->isResourceOnPage(['code' => $code]),
-            sprintf('Tax category with code %s was found, but fields are not assigned properly', $code)
+            $this->taxCategoryIndexPage->isResourceOnPage([$element => $code]),
+            sprintf('Tax category with %s %s cannot be founded', $element, $code)
         );
+    }
+
+    /**
+     * @Then I should be notified that :element is required
+     */
+    public function iShouldBeNotifiedThatIsRequired($element)
+    {
+        Assert::true(
+            $this->taxCategoryCreatePage->checkValidationMessageFor($element, sprintf('Please enter tax category %s.', $element)),
+            sprintf('Tax category %s should be required', $element)
+        );
+    }
+
+    /**
+     * @Then tax category with :element :name should not be added
+     */
+    public function taxCategoryNamedShouldNotBeAdded($element, $name)
+    {
+        $this->taxCategoryIndexPage->open();
+        Assert::false(
+            $this->taxCategoryIndexPage->isResourceOnPage([$element => $name]),
+            sprintf('Tax category with %s %s was created, but it should not', $element, $name)
+        );
+    }
+
+    /**
+     * @Then this tax category should still be named :taxCategoryName
+     */
+    public function thereShouldStillBeOneTaxCategoryWithName($name)
+    {
+        $this->thereShouldStillBeOnlyOneTaxCategoryWith('name', $name);
     }
 }

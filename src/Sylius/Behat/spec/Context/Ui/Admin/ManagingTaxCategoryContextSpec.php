@@ -18,7 +18,6 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\TaxCategory\CreatePageInterface;
 use Sylius\Behat\Page\Admin\TaxCategory\UpdatePageInterface;
 use Sylius\Behat\Service\Accessor\NotificationAccessorInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 /**
@@ -29,14 +28,12 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 class ManagingTaxCategoryContextSpec extends ObjectBehavior
 {
     function let(
-        SharedStorageInterface $sharedStorage,
         IndexPageInterface $taxCategoryIndexPage,
         CreatePageInterface $taxCategoryCreatePage,
         UpdatePageInterface $taxCategoryUpdatePage,
         NotificationAccessorInterface $notificationAccessor
     ) {
         $this->beConstructedWith(
-            $sharedStorage,
             $taxCategoryIndexPage,
             $taxCategoryCreatePage,
             $taxCategoryUpdatePage,
@@ -56,14 +53,12 @@ class ManagingTaxCategoryContextSpec extends ObjectBehavior
 
     function it_deletes_a_tax_cateogory(
         IndexPageInterface $taxCategoryIndexPage,
-        SharedStorageInterface $sharedStorage,
         TaxCategoryInterface $taxCategory
     ) {
         $taxCategory->getCode()->willReturn('alcohol');
 
         $taxCategoryIndexPage->deleteResourceOnPage(['code' => 'alcohol'])->shouldBeCalled();
         $taxCategoryIndexPage->open()->shouldBeCalled();
-        $sharedStorage->set('tax_category', $taxCategory)->shouldBeCalled();
 
         $this->iDeletedTaxCategory($taxCategory);
     }
@@ -323,7 +318,7 @@ class ManagingTaxCategoryContextSpec extends ObjectBehavior
         $taxCategoryIndexPage->open()->shouldBeCalled();
         $taxCategoryIndexPage->isResourceOnPage(['code' => 'alcohol'])->willReturn(true);
 
-        $this->thereShouldStillBeOnlyOneTaxCategoryWithCode('alcohol');
+        $this->thereShouldStillBeOnlyOneTaxCategoryWith('code', 'alcohol');
     }
 
     function it_throws_an_exception_if_not_only_one_resource_with_given_code_exist(IndexPageInterface $taxCategoryIndexPage)
@@ -332,8 +327,63 @@ class ManagingTaxCategoryContextSpec extends ObjectBehavior
         $taxCategoryIndexPage->isResourceOnPage(['code' => 'alcohol'])->willReturn(false);
 
         $this
-            ->shouldThrow(new \InvalidArgumentException('Tax category with code alcohol was found, but fields are not assigned properly'))
-            ->during('thereShouldStillBeOnlyOneTaxCategoryWithCode', ['alcohol'])
+            ->shouldThrow(new \InvalidArgumentException('Tax category with code alcohol cannot be founded'))
+            ->during('thereShouldStillBeOnlyOneTaxCategoryWith', ['code', 'alcohol'])
+        ;
+    }
+
+    function it_asserts_that_the_resource_with_given_name_exist(IndexPageInterface $taxCategoryIndexPage)
+    {
+        $taxCategoryIndexPage->open()->shouldBeCalled();
+        $taxCategoryIndexPage->isResourceOnPage(['name' => 'Alcohol'])->willReturn(true);
+
+        $this->thereShouldStillBeOneTaxCategoryWithName('Alcohol');
+    }
+
+    function it_throws_an_exception_if_the_resource_with_given_name_does_not_exist(IndexPageInterface $taxCategoryIndexPage)
+    {
+        $taxCategoryIndexPage->open()->shouldBeCalled();
+        $taxCategoryIndexPage->isResourceOnPage(['name' => 'Alcohol'])->willReturn(false);
+
+        $this
+            ->shouldThrow(new \InvalidArgumentException('Tax category with name Alcohol cannot be founded'))
+            ->during('thereShouldStillBeOneTaxCategoryWithName', ['Alcohol'])
+        ;
+    }
+
+    function it_checks_if_a_resource_was_not_created_because_of_required_code_violation(CreatePageInterface $taxCategoryCreatePage)
+    {
+        $taxCategoryCreatePage->checkValidationMessageFor('code', 'Please enter tax category code.')->willReturn(true);
+
+        $this->iShouldBeNotifiedThatIsRequired('code');
+    }
+
+    function it_throws_an_exception_if_the_message_on_a_page_is_not_related_to_required_code_validation(CreatePageInterface $taxCategoryCreatePage)
+    {
+        $taxCategoryCreatePage->checkValidationMessageFor('code', 'Please enter tax category code.')->willReturn(false);
+
+        $this
+            ->shouldThrow(new \InvalidArgumentException('Tax category code should be required'))
+            ->during('iShouldBeNotifiedThatIsRequired', ['code'])
+        ;
+    }
+
+    function it_asserts_that_any_resource_with_given_code_exist(IndexPageInterface $taxCategoryIndexPage)
+    {
+        $taxCategoryIndexPage->open()->shouldBeCalled();
+        $taxCategoryIndexPage->isResourceOnPage(['name' => 'Food and Beverage'])->willReturn(false);
+
+        $this->taxCategoryNamedShouldNotBeAdded('name', 'Food and Beverage');
+    }
+
+    function it_throws_an_exception_if_resource_with_given_code_exist_but_it_should_not(IndexPageInterface $taxCategoryIndexPage)
+    {
+        $taxCategoryIndexPage->open()->shouldBeCalled();
+        $taxCategoryIndexPage->isResourceOnPage(['name' => 'Food and Beverage'])->willReturn(true);
+
+        $this
+            ->shouldThrow(new \InvalidArgumentException('Tax category with name Food and Beverage was created, but it should not'))
+            ->during('taxCategoryNamedShouldNotBeAdded', ['name', 'Food and Beverage'])
         ;
     }
 }
