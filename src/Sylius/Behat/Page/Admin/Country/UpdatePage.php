@@ -13,6 +13,7 @@ namespace Sylius\Behat\Page\Admin\Country;
 
 use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
+use Sylius\Behat\Page\ElementNotFoundException;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -24,6 +25,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     protected $elements = [
         'enabled' => '#sylius_country_enabled',
+        'code' => '#sylius_country_code',
     ];
 
     /**
@@ -46,6 +48,16 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $this->assertPriorStateOfToggleableElement($enabled, true);
 
         $enabled->uncheck();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isCodeFieldDisabled()
+    {
+        $codeField = $this->getElement('code');
+
+        return $codeField->getAttribute('disabled') === 'disabled';
     }
 
     /**
