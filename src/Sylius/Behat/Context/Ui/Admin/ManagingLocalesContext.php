@@ -37,31 +37,31 @@ final class ManagingLocalesContext implements Context
     private $indexPage;
 
     /**
-     * @var NotificationAccessorInterface
-     */
-    private $notificationAccessor;
-
-    /**
      * @var UpdatePageInterface
      */
     private $updatePage;
 
     /**
+     * @var NotificationAccessorInterface
+     */
+    private $notificationAccessor;
+
+    /**
      * @param CreatePageInterface $createPage
      * @param IndexPageInterface $indexPage
-     * @param NotificationAccessorInterface $notificationAccessor
      * @param UpdatePageInterface $updatePage
+     * @param NotificationAccessorInterface $notificationAccessor
      */
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
-        NotificationAccessorInterface $notificationAccessor,
-        UpdatePageInterface $updatePage
+        UpdatePageInterface $updatePage,
+        NotificationAccessorInterface $notificationAccessor
     ) {
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
-        $this->notificationAccessor = $notificationAccessor;
         $this->updatePage = $updatePage;
+        $this->notificationAccessor = $notificationAccessor;
     }
 
     /**

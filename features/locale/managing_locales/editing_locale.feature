@@ -5,10 +5,10 @@ Feature: Editing a locale
     I want to be able to edit a locale
 
     Background:
-        Given I am logged in as administrator
+        Given I am logged in as an administrator
 
     @ui
-    Scenario: Disabling the locale
+    Scenario: Disabling a locale
         Given the store has locale "Norwegian"
         And I want to edit this locale
         When I disable it
@@ -17,7 +17,7 @@ Feature: Editing a locale
         And this locale should be disabled
 
     @ui
-    Scenario: Enabling the locale
+    Scenario: Enabling a locale
         Given the store has disabled locale "Norwegian"
         And I want to edit this locale
         When I enable it

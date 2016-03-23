@@ -20,8 +20,13 @@ use Symfony\Component\Intl\Intl;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class LocaleContext implements Context
+final class LocaleContext implements Context
 {
+    /**
+     * @var SharedStorageInterface
+     */
+    private $sharedStorage;
+
     /**
      * @var FactoryInterface
      */
@@ -33,19 +38,14 @@ class LocaleContext implements Context
     private $localeRepository;
 
     /**
-     * @var SharedStorageInterface
-     */
-    private $sharedStorage;
-
-    /**
+     * @param SharedStorageInterface $sharedStorage
      * @param FactoryInterface $localeFactory
      * @param RepositoryInterface $localeRepository
-     * @param SharedStorageInterface $sharedStorage
      */
     public function __construct(
+        SharedStorageInterface $sharedStorage,
         FactoryInterface $localeFactory,
-        RepositoryInterface $localeRepository,
-        SharedStorageInterface $sharedStorage
+        RepositoryInterface $localeRepository
     ) {
         $this->localeFactory = $localeFactory;
         $this->localeRepository = $localeRepository;
@@ -53,7 +53,7 @@ class LocaleContext implements Context
     }
 
     /**
-     * @Given /^the store has locale "([^"]*)"$/
+     * @Given the store has locale :localeName
      */
     public function theStoreHasLocale($localeName)
     {
@@ -65,7 +65,7 @@ class LocaleContext implements Context
     }
 
     /**
-     * @Given /^the store has disabled locale "([^"]*)"$/
+     * @Given the store has disabled locale :localeName
      */
     public function theStoreHasDisabledLocale($localeName)
     {

@@ -27,11 +27,11 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class LocaleContextSpec extends ObjectBehavior
 {
     function let(
+        SharedStorageInterface $sharedStorage,
         FactoryInterface $localeFactory,
-        RepositoryInterface $localeRepository,
-        SharedStorageInterface $sharedStorage
+        RepositoryInterface $localeRepository
     ) {
-        $this->beConstructedWith($localeFactory, $localeRepository, $sharedStorage);
+        $this->beConstructedWith($sharedStorage, $localeFactory, $localeRepository);
     }
 
     function it_is_initializable()
@@ -39,7 +39,7 @@ class LocaleContextSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Behat\Context\Setup\LocaleContext');
     }
 
-    function it_should_implement_context_interface()
+    function it_implements_context_interface()
     {
         $this->shouldImplement(Context::class);
     }

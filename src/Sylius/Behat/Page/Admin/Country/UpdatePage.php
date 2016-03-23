@@ -38,4 +38,12 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
         return $codeField->getAttribute('disabled') === 'disabled';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getToggleableElement()
+    {
+        return $this->getElement('enabled');
+    }
 }

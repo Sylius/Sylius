@@ -18,13 +18,6 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
  */
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
-    /**
-     * @throws \RuntimeException
-     */
     public function enable();
-
-    /**
-     * @throws \RuntimeException
-     */
     public function disable();
 }

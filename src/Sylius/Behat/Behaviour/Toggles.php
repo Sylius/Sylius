@@ -12,34 +12,42 @@
 namespace Sylius\Behat\Behaviour;
 
 use Behat\Mink\Element\NodeElement;
+use Sylius\Behat\Page\ElementNotFoundException;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 trait Toggles
 {
-    use ElementAccessor;
+    /**
+     * @return NodeElement
+     *
+     * @throws ElementNotFoundException
+     */
+    abstract protected function getToggleableElement();
 
     /**
-     * {@inheritdoc}
+     * @throws ElementNotFoundException
+     * @throws \RuntimeException
      */
     public function enable()
     {
-        $enabled = $this->getElement('enabled');
-        $this->assertPriorStateOfToggleableElement($enabled, false);
+        $toggleableElement = $this->getToggleableElement();
+        $this->assertCheckboxState($toggleableElement, false);
 
-        $enabled->check();
+        $toggleableElement->check();
     }
 
     /**
-     * {@inheritdoc}
+     * @throws ElementNotFoundException
+     * @throws \RuntimeException
      */
     public function disable()
     {
-        $enabled = $this->getElement('enabled');
-        $this->assertPriorStateOfToggleableElement($enabled, true);
+        $toggleableElement = $this->getToggleableElement();
+        $this->assertCheckboxState($toggleableElement, true);
 
-        $enabled->uncheck();
+        $toggleableElement->uncheck();
     }
 
     /**
@@ -48,10 +56,10 @@ trait Toggles
      *
      * @throws \RuntimeException
      */
-    private function assertPriorStateOfToggleableElement(NodeElement $toggleableElement, $expectedState)
+    private function assertCheckboxState(NodeElement $toggleableElement, $expectedState)
     {
         if ($toggleableElement->isChecked() !== $expectedState) {
-            throw new \RuntimeException('Toggleable element state %s but expected %s', $toggleableElement->isChecked(), $expectedState);
+            throw new \RuntimeException('Toggleable element state %s but expected %s.', $toggleableElement->isChecked(), $expectedState);
         }
     }
 }

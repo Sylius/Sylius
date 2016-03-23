@@ -30,10 +30,10 @@ class ManagingLocalesContextSpec extends ObjectBehavior
     function let(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
-        NotificationAccessorInterface $notificationAccessor,
-        UpdatePageInterface $updatePage
+        UpdatePageInterface $updatePage,
+        NotificationAccessorInterface $notificationAccessor
     ) {
-        $this->beConstructedWith($createPage, $indexPage, $notificationAccessor, $updatePage);
+        $this->beConstructedWith($createPage, $indexPage, $updatePage, $notificationAccessor);
     }
 
     function it_is_initializable()

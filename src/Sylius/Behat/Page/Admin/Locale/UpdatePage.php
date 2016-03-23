@@ -27,4 +27,12 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     protected $elements = [
         'enabled' => '#sylius_locale_enabled',
     ];
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getToggleableElement()
+    {
+        return $this->getElement('enabled');
+    }
 }

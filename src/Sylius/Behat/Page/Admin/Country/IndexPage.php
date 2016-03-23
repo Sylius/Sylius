@@ -41,21 +41,17 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
      * @param string $status
      *
      * @return bool
+     *
+     * @throws ElementNotFoundException
      */
     private function checkCountryStatus(CountryInterface $country, $status)
     {
-        try {
-            $tableAccessor = $this->getTableAccessor();
-            $table = $this->getElement('table');
+        $tableAccessor = $this->getTableAccessor();
+        $table = $this->getElement('table');
 
-            $row = $tableAccessor->getRowWithFields($table, ['code' => $country->getCode()]);
-            $enabledField = $tableAccessor->getFieldFromRow($table, $row, 'Enabled');
+        $row = $tableAccessor->getRowWithFields($table, ['code' => $country->getCode()]);
+        $enabledField = $tableAccessor->getFieldFromRow($table, $row, 'Enabled');
 
-            return $enabledField->getText() === $status;
-        } catch (\InvalidArgumentException $exception) {
-            return false;
-        } catch (ElementNotFoundException $exception) {
-            return false;
-        }
+        return $enabledField->getText() === $status;
     }
 }
