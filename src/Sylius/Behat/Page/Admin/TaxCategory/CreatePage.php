@@ -22,4 +22,19 @@ use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
     use SpecifyCode, NameIt, DescribeItAs;
+
+    /**
+     * @var array
+     */
+    protected $elements = [
+        'code' => '#sylius_tax_category_code',
+    ];
+
+    /**
+     * {@inheritdoc}
+     */
+    public function checkValidationMessageFor($element, $message)
+    {
+        return $message === $this->getElement($element)->getParent()->find('css', '.pointing')->getText();
+    }
 }

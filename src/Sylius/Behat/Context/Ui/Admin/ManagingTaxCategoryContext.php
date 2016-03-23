@@ -120,8 +120,9 @@ final class ManagingTaxCategoryContext implements Context
 
     /**
      * @When I specify its code as :code
+     * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs($code)
+    public function iSpecifyItsCodeAs($code = null)
     {
         $this->taxCategoryCreatePage->specifyCode($code);
     }
@@ -137,6 +138,7 @@ final class ManagingTaxCategoryContext implements Context
 
     /**
      * @When I add it
+     * @When I try to add it
      */
     public function iAddIt()
     {
@@ -241,6 +243,29 @@ final class ManagingTaxCategoryContext implements Context
                 ]
             ),
             'Tax category name was not assigned properly'
+        );
+    }
+
+    /**
+     * @Then I should be notified that tax category with this code already exists
+     */
+    public function iShouldBeNotifiedThatTaxCategoryWithThisCodeAlreadyExists()
+    {
+        Assert::true(
+            $this->taxCategoryCreatePage->checkValidationMessageFor('code', 'The tax category with given code already exists.'),
+            'Unique code violation message should appear on page, but it does not'
+        );
+    }
+
+    /**
+     * @Then there should still be only one tax category with code :code
+     */
+    public function thereShouldStillBeOnlyOneTaxCategoryWithCode($code)
+    {
+        $this->taxCategoryIndexPage->open();
+        Assert::true(
+            $this->taxCategoryIndexPage->isResourceOnPage(['code' => $code]),
+            sprintf('Tax category with code %s was found, but fields are not assigned properly', $code)
         );
     }
 }

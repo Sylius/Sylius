@@ -300,4 +300,40 @@ class ManagingTaxCategoryContextSpec extends ObjectBehavior
             ->during('thisTaxCategoryNameShouldBe', ['Food and Beverage'])
         ;
     }
+
+    function it_checks_if_a_resource_was_not_created_because_of_unique_code_violation(CreatePageInterface $taxCategoryCreatePage)
+    {
+        $taxCategoryCreatePage->checkValidationMessageFor('code', 'The tax category with given code already exists.')->willReturn(true);
+
+        $this->iShouldBeNotifiedThatTaxCategoryWithThisCodeAlreadyExists();
+    }
+
+    function it_throws_an_exception_if_the_message_on_a_page_is_not_related_to_unique_code_validation(CreatePageInterface $taxCategoryCreatePage)
+    {
+        $taxCategoryCreatePage->checkValidationMessageFor('code', 'The tax category with given code already exists.')->willReturn(false);
+
+        $this
+            ->shouldThrow(new \InvalidArgumentException('Unique code violation message should appear on page, but it does not'))
+            ->during('iShouldBeNotifiedThatTaxCategoryWithThisCodeAlreadyExists', [])
+        ;
+    }
+
+    function it_asserts_that_only_one_resource_with_given_code_exist(IndexPageInterface $taxCategoryIndexPage)
+    {
+        $taxCategoryIndexPage->open()->shouldBeCalled();
+        $taxCategoryIndexPage->isResourceOnPage(['code' => 'alcohol'])->willReturn(true);
+
+        $this->thereShouldStillBeOnlyOneTaxCategoryWithCode('alcohol');
+    }
+
+    function it_throws_an_exception_if_not_only_one_resource_with_given_code_exist(IndexPageInterface $taxCategoryIndexPage)
+    {
+        $taxCategoryIndexPage->open()->shouldBeCalled();
+        $taxCategoryIndexPage->isResourceOnPage(['code' => 'alcohol'])->willReturn(false);
+
+        $this
+            ->shouldThrow(new \InvalidArgumentException('Tax category with code alcohol was found, but fields are not assigned properly'))
+            ->during('thereShouldStillBeOnlyOneTaxCategoryWithCode', ['alcohol'])
+        ;
+    }
 }
