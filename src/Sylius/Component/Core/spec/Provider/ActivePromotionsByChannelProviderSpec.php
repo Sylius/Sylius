@@ -53,6 +53,16 @@ class ActivePromotionsByChannelProviderSpec extends ObjectBehavior
         $this->getPromotions($subject)->shouldReturn([$promotion1, $promotion2]);
     }
 
+    function it_throws_exception_if_order_has_no_channel(OrderInterface $subject)
+    {
+        $subject->getChannel()->willReturn(null);
+
+        $this
+            ->shouldThrow(new \InvalidArgumentException('Order has no channel, but it should.'))
+            ->during('getPromotions', [$subject])
+        ;
+    }
+
     function it_throws_exception_if_passed_subject_is_not_order(PromotionSubjectInterface $subject)
     {
         $this->shouldThrow(UnexpectedTypeException::class)->during('getPromotions', [$subject]);
