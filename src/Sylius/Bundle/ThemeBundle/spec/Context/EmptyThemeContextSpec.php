@@ -20,6 +20,7 @@ use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
  * @mixin EmptyThemeContext
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Rafał Muszyński <rafal.muszynski@sourcefabric.org>
  */
 class EmptyThemeContextSpec extends ObjectBehavior
 {
@@ -36,5 +37,6 @@ class EmptyThemeContextSpec extends ObjectBehavior
     function it_always_returns_null()
     {
         $this->getTheme()->shouldReturn(null);
+        $this->getName()->shouldReturn(null);
     }
 }

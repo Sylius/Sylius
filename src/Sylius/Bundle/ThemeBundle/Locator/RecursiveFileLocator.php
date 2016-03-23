@@ -12,11 +12,12 @@
 namespace Sylius\Bundle\ThemeBundle\Locator;
 
 use Sylius\Bundle\ThemeBundle\Factory\FinderFactoryInterface;
-use Symfony\Component\Finder\Finder;
+use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
 use Symfony\Component\Finder\SplFileInfo;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Rafał Muszyński <rafal.muszynski@sourcefabric.org>
  */
 final class RecursiveFileLocator implements FileLocatorInterface
 {
@@ -30,9 +31,11 @@ final class RecursiveFileLocator implements FileLocatorInterface
      */
     private $paths;
 
+    private $themeContext;
+
     /**
      * @param FinderFactoryInterface $finderFactory
-     * @param array $paths An array of paths where to look for resources
+     * @param array                  $paths         An array of paths where to look for resources
      */
     public function __construct(FinderFactoryInterface $finderFactory, array $paths)
     {
@@ -57,6 +60,16 @@ final class RecursiveFileLocator implements FileLocatorInterface
     }
 
     /**
+     * Sets the Theme Context.
+     *
+     * @param ThemeContextInterface|null $themeContext Theme context
+     */
+    public function setThemeContext(ThemeContextInterface $themeContext = null)
+    {
+        $this->themeContext = $themeContext;
+    }
+
+    /**
      * @param string $name
      *
      * @return \Generator
@@ -64,7 +77,7 @@ final class RecursiveFileLocator implements FileLocatorInterface
     private function doLocateFilesNamed($name)
     {
         $this->assertNameIsNotEmpty($name);
-
+        $this->applySuffixForPaths();
         $found = false;
         foreach ($this->paths as $path) {
             try {
@@ -92,6 +105,20 @@ final class RecursiveFileLocator implements FileLocatorInterface
                 implode(', ', $this->paths)
             ));
         }
+    }
+
+    private function applySuffixForPaths()
+    {
+        if (!isset($this->themeContext) || null === $this->themeContext->getName()) {
+            return;
+        }
+
+        $paths = [];
+        foreach ($this->paths as $path) {
+            $paths[] = rtrim($path, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$this->themeContext->getName();
+        }
+
+        $this->paths = $paths;
     }
 
     /**

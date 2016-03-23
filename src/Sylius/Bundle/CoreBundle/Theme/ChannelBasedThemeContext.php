@@ -18,6 +18,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Rafał Muszyński <rafal.muszynski@sourcefabric.org>
  */
 final class ChannelBasedThemeContext implements ThemeContextInterface
 {
@@ -41,7 +42,7 @@ final class ChannelBasedThemeContext implements ThemeContextInterface
     {
         try {
             /** @var ChannelInterface $channel */
-            $channel = $this->channelContext->getChannel();
+            $channel = $this->getChannel();
 
             return $channel->getTheme();
         } catch (ChannelNotFoundException $exception) {
@@ -49,5 +50,25 @@ final class ChannelBasedThemeContext implements ThemeContextInterface
         } catch (\Exception $exception) {
             return null;
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        try {
+            /** @var ChannelInterface $channel */
+            $channel = $this->getChannel();
+
+            return $channel->getCode();
+        } catch (ChannelNotFoundException $exception) {
+            return null;
+        }
+    }
+
+    private function getChannel()
+    {
+        return $this->channelContext->getChannel();
     }
 }

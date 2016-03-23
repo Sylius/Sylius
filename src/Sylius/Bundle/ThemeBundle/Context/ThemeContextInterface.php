@@ -24,4 +24,11 @@ interface ThemeContextInterface
      * @return ThemeInterface|null
      */
     public function getTheme();
+
+    /**
+     * Returns context name.
+     *
+     * @return string|null
+     */
+    public function getName();
 }

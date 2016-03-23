@@ -22,6 +22,7 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
  * @mixin SettableThemeContext
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Rafał Muszyński <rafal.muszynski@sourcefabric.org>
  */
 class SettableThemeContextSpec extends ObjectBehavior
 {
@@ -41,5 +42,10 @@ class SettableThemeContextSpec extends ObjectBehavior
 
         $this->setTheme($theme);
         $this->getTheme()->shouldReturn($theme);
+    }
+
+    function its_name_is_empty(ThemeInterface $theme)
+    {
+        $this->getName()->shouldReturn(null);
     }
 }

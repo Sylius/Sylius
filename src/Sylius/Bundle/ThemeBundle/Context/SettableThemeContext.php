@@ -38,4 +38,12 @@ final class SettableThemeContext implements ThemeContextInterface
     {
         return $this->theme;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return;
+    }
 }
