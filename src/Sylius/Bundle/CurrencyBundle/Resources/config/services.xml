@@ -20,6 +20,7 @@
         <parameter key="sylius.context.currency.class">Sylius\Component\Currency\Context\CurrencyContext</parameter>
 
         <parameter key="sylius.currency_converter.class">Sylius\Component\Currency\Converter\CurrencyConverter</parameter>
+        <parameter key="sylius.converter.currency_name.class">Sylius\Component\Currency\Converter\CurrencyNameConverter</parameter>
         <parameter key="sylius.currency_provider.class">Sylius\Component\Currency\Provider\CurrencyProvider</parameter>
 
         <parameter key="sylius.currency_importer.european_central_bank.class">Sylius\Component\Currency\Importer\EuropeanCentralBankImporter</parameter>
@@ -49,6 +50,8 @@
         <service id="sylius.currency_converter" class="%sylius.currency_converter.class%">
             <argument type="service" id="sylius.repository.currency" />
         </service>
+
+        <service id="sylius.converter.currency_name" class="%sylius.converter.currency_name.class%" />
 
         <service id="sylius.currency_provider" class="%sylius.currency_provider.class%">
             <argument type="service" id="sylius.repository.currency" />

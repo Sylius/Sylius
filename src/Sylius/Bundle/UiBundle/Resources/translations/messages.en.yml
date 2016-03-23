@@ -16,6 +16,7 @@ sylius:
         confirm_your_action: Confirm your action
         contains: Contains
         countries: Countries
+        currencies: Currencies
         create: Create
         dashboard: Dashboard
         delete: Delete
@@ -23,6 +24,7 @@ sylius:
         disabled: Disabled
         edit: Edit
         edit_country: Edit country
+        edit_currency: Edit currency
         edit_customer: Edit customer
         edit_payment_method: Edit payment method
         edit_promotion: Edit promotion
@@ -38,6 +40,7 @@ sylius:
         last_updated: Last updated
         locales: Locales
         manage_country: Manage country
+        manage_currencies_available_in_the_store: Manage currencies available in the store
         manage_customer: Manage customers
         manage_languages_available_in_the_store: Manage languages available in the store
         manage_payment_method: Manage payment methods
@@ -46,6 +49,7 @@ sylius:
         manage_taxation_of_your_products: Manage taxation of your products
         new: New
         new_country: New country
+        new_currency: New currency
         new_locale: New locale
         new_tax_category: New tax category
         no: No

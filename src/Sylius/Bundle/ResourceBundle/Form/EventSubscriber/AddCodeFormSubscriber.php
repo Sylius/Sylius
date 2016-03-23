@@ -28,11 +28,18 @@ class AddCodeFormSubscriber implements EventSubscriberInterface
     private $type;
 
     /**
-     * @param string $type
+     * @var string
      */
-    public function __construct($type = 'text')
+    private $label;
+
+    /**
+     * @param string $type
+     * @param string $label
+     */
+    public function __construct($type = 'text', $label = 'sylius.ui.code')
     {
         $this->type = $type;
+        $this->label = $label;
     }
 
     /**
@@ -60,6 +67,6 @@ class AddCodeFormSubscriber implements EventSubscriberInterface
         }
 
         $form = $event->getForm();
-        $form->add('code', $this->type, ['label' => 'sylius.ui.code', 'disabled' => $disabled]);
+        $form->add('code', $this->type, ['label' => $this->label, 'disabled' => $disabled]);
     }
 }

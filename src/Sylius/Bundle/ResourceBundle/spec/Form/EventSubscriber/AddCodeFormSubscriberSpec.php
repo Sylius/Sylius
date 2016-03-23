@@ -126,4 +126,42 @@ class AddCodeFormSubscriberSpec extends ObjectBehavior
 
         $this->preSetData($event);
     }
+
+    function it_adds_code_with_label_sylius_ui_code_by_default(
+        FormEvent $event,
+        FormInterface $form,
+        CodeAwareInterface $resource
+    ) {
+        $event->getData()->willReturn($resource);
+        $event->getForm()->willReturn($form);
+
+        $resource->getCode()->willReturn('banana_resource');
+
+        $form
+            ->add('code', 'text', Argument::withEntry('label', 'sylius.ui.code'))
+            ->shouldBeCalled()
+        ;
+
+        $this->preSetData($event);
+    }
+
+    function it_adds_code_with_specified_type_and_label(
+        FormEvent $event,
+        FormInterface $form,
+        CodeAwareInterface $resource
+    ) {
+        $this->beConstructedWith('currency', 'sylius.ui.name');
+
+        $event->getData()->willReturn($resource);
+        $event->getForm()->willReturn($form);
+
+        $resource->getCode()->willReturn('Code12');
+
+        $form
+            ->add('code', 'currency', Argument::withEntry('label', 'sylius.ui.name'))
+            ->shouldBeCalled()
+        ;
+
+        $this->preSetData($event);
+    }
 }

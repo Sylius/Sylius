@@ -4,6 +4,7 @@ sylius:
             main:
                 configuration:
                     countries: Countries
+                    currencies: Currencies
                     header: Configuration
                     locales: Locales
                     payment_methods: Payment methods
