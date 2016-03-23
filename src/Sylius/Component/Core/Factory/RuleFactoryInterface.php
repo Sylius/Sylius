@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Factory;
 
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Promotion\Model\RuleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
@@ -39,4 +40,12 @@ interface RuleFactoryInterface extends FactoryInterface
      * @return RuleInterface
      */
     public function createTaxon(array $taxons);
+
+    /**
+     * @param TaxonInterface $taxon
+     * @param int $amount
+     *
+     * @return RuleInterface
+     */
+    public function createItemsFromTaxonTotal(TaxonInterface $taxon, $amount);
 }
