@@ -183,4 +183,31 @@ final class ManagingTaxCategoryContext implements Context
             'Successful creation message does not appear'
         );
     }
+
+    /**
+     * @Given I want to modify tax category :taxCategory
+     */
+    public function iWantToModifyNewTaxCategory(TaxCategoryInterface $taxCategory)
+    {
+        $this->taxCategoryUpdatePage->open(['id' => $taxCategory->getId()]);
+    }
+
+    /**
+     * @When I save my changes
+     */
+    public function iSaveMyChanges()
+    {
+        $this->taxCategoryUpdatePage->saveChanges();
+    }
+
+    /**
+     * @Then the code field should be disabled
+     */
+    public function theCodeFieldShouldBeDisabled()
+    {
+        Assert::true(
+            $this->taxCategoryUpdatePage->isCodeDisabled(),
+            'Code should be immutable, but it does not'
+        );
+    }
 }

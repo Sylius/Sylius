@@ -11,6 +11,8 @@
 
 namespace Sylius\Behat\Page\Admin\TaxCategory;
 
+use Behat\Mink\Element\NodeElement;
+use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 
 /**
@@ -18,6 +20,8 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
  */
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
+    use ChecksCodeImmutability;
+
     /**
      * @var array
      */
@@ -39,5 +43,13 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         }
 
         return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function getCodeElement()
+    {
+        return $this->getElement('code');
     }
 }

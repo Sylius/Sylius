@@ -121,21 +121,21 @@ class ManagingTaxCategoryContextSpec extends ObjectBehavior
         $this->iWantToCreateNewTaxCategory();
     }
 
-    function it_specifies_tax_categories_code(CreatePageInterface $taxCategoryCreatePage)
+    function it_specifies_tax_category_code(CreatePageInterface $taxCategoryCreatePage)
     {
         $taxCategoryCreatePage->specifyCode('food_and_beverage')->shouldBeCalled();
 
         $this->iSpecifyItsCodeAs('food_and_beverage');
     }
 
-    function it_specifies_tax_categories_name(CreatePageInterface $taxCategoryCreatePage)
+    function it_specifies_tax_category_name(CreatePageInterface $taxCategoryCreatePage)
     {
         $taxCategoryCreatePage->nameIt('Food and Beverage')->shouldBeCalled();
 
         $this->iNameIt('Food and Beverage');
     }
 
-    function it_specifies_tax_categories_description(CreatePageInterface $taxCategoryCreatePage)
+    function it_specifies_tax_category_description(CreatePageInterface $taxCategoryCreatePage)
     {
         $taxCategoryCreatePage->describeItAs('Best stuff to get wasted in town')->shouldBeCalled();
 
@@ -215,5 +215,37 @@ class ManagingTaxCategoryContextSpec extends ObjectBehavior
             ->shouldThrow(new \InvalidArgumentException('Successful creation message does not appear'))
             ->during('iShouldBeNotifiedAboutSuccessfulCreation', [])
         ;
+    }
+
+    function it_opens_an_update_page(UpdatePageInterface $taxCategoryUpdatePage, TaxCategoryInterface $taxCategory)
+    {
+        $taxCategory->getId()->willReturn(1);
+        $taxCategoryUpdatePage->open(['id' => 1])->shouldBeCalled();
+
+        $this->iWantToModifyNewTaxCategory($taxCategory);
+    }
+
+    function it_checks_if_the_code_cannot_be_changed(UpdatePageInterface $taxCategoryUpdatePage)
+    {
+        $taxCategoryUpdatePage->isCodeDisabled()->willReturn(true);
+
+        $this->theCodeFieldShouldBeDisabled();
+    }
+
+    function it_throws_an_exception_if_the_code_field_is_not_immutable(UpdatePageInterface $taxCategoryUpdatePage)
+    {
+        $taxCategoryUpdatePage->isCodeDisabled()->willReturn(false);
+
+        $this
+            ->shouldThrow(new \InvalidArgumentException('Code should be immutable, but it does not'))
+            ->during('theCodeFieldShouldBeDisabled')
+        ;
+    }
+
+    function it_saves_changes(UpdatePageInterface $taxCategoryUpdatePage)
+    {
+        $taxCategoryUpdatePage->saveChanges()->shouldBeCalled();
+
+        $this->iSaveMyChanges();
     }
 }

@@ -24,4 +24,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @return bool
      */
     public function hasResourceValues(array $parameters);
+
+    /**
+     * @return bool
+     */
+    public function isCodeDisabled();
 }

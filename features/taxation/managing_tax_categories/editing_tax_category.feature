@@ -5,7 +5,7 @@ Feature: Editing tax category
     I want to be able to edit tax category
 
     Background:
-        Given the store has "Alcohol" tax category with code "alcohol"
+        Given the store has a tax category "Alcohol" with a code "alcohol"
         And I am logged in as an administrator
 
     @todo
@@ -16,7 +16,7 @@ Feature: Editing tax category
         Then I should be notified that code cannot be changed
         And tax category "Alcohol" should still have code "alcohol"
 
-    @todo
+    @ui
     Scenario: Seeing disabled code field when editing tax category
         When I want to modify tax category "Alcohol"
         Then the code field should be disabled
