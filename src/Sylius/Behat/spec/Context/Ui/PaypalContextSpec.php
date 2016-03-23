@@ -17,7 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Behat\Page\Shop\Checkout\FinalizeStepInterface;
 use Sylius\Behat\Page\External\PaypalExpressCheckoutPageInterface;
 use Sylius\Behat\Page\Shop\Order\OrderPaymentsPageInterface;
-use Sylius\Behat\PaypalApiMocker;
+use Sylius\Behat\Service\Mocker\PaypalApiMocker;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;

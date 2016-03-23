@@ -13,7 +13,7 @@ namespace Sylius\Behat\Page\Admin\Channel;
 
 use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
-use Sylius\Behat\TableManipulatorInterface;
+use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -22,24 +22,24 @@ use Symfony\Component\Routing\RouterInterface;
 class IndexPage extends SymfonyPage implements IndexPageInterface
 {
     /**
-     * @var TableManipulatorInterface
+     * @var TableAccessorInterface
      */
-    private $tableManipulator;
+    private $tableAccessor;
 
     /**
      * {@inheritdoc}
      *
-     * @param TableManipulatorInterface $tableManipulator
+     * @param TableAccessorInterface $tableAccessor
      */
     public function __construct(
         Session $session,
         array $parameters,
         RouterInterface $router,
-        TableManipulatorInterface $tableManipulator
+        TableAccessorInterface $tableAccessor
     ) {
         parent::__construct($session, $parameters, $router);
 
-        $this->tableManipulator = $tableManipulator;
+        $this->tableAccessor = $tableAccessor;
     }
 
     /**
@@ -49,9 +49,9 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     {
         $table = $this->getDocument()->find('css', 'table');
 
-        $row = $this->tableManipulator->getRowWithFields($table, ['code' => $channelCode]);
+        $row = $this->tableAccessor->getRowWithFields($table, ['code' => $channelCode]);
 
-        return trim($this->tableManipulator->getFieldFromRow($table, $row, 'theme')->getText());
+        return trim($this->tableAccessor->getFieldFromRow($table, $row, 'theme')->getText());
     }
 
     /**

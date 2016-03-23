@@ -14,7 +14,7 @@ namespace Sylius\Behat\Page\Admin\Crud;
 use Behat\Mink\Session;
 use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
-use Sylius\Behat\TableManipulatorInterface;
+use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -30,9 +30,9 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     ];
 
     /**
-     * @var TableManipulatorInterface
+     * @var TableAccessorInterface
      */
-    private $tableManipulator;
+    private $tableAccessor;
 
     /**
      * @var string
@@ -43,19 +43,19 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
      * @param Session $session
      * @param array $parameters
      * @param RouterInterface $router
-     * @param TableManipulatorInterface $tableManipulator
+     * @param TableAccessorInterface $tableAccessor
      * @param string $resourceName
      */
     public function __construct(
         Session $session,
         array $parameters,
         RouterInterface $router,
-        TableManipulatorInterface $tableManipulator,
+        TableAccessorInterface $tableAccessor,
         $resourceName
     ) {
         parent::__construct($session, $parameters, $router);
 
-        $this->tableManipulator = $tableManipulator;
+        $this->tableAccessor = $tableAccessor;
         $this->resourceName = strtolower($resourceName);
     }
 
@@ -65,7 +65,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     public function isResourceOnPage(array $parameters)
     {
         try {
-            $rows = $this->tableManipulator->getRowsWithFields($this->getElement('table'), $parameters);
+            $rows = $this->tableAccessor->getRowsWithFields($this->getElement('table'), $parameters);
 
             return 1 === count($rows);
         } catch (\InvalidArgumentException $exception) {
@@ -106,10 +106,10 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     }
 
     /**
-     * @return TableManipulatorInterface
+     * @return TableAccessorInterface
      */
-    protected function getTableManipulator()
+    protected function getTableAccessor()
     {
-        return $this->tableManipulator;
+        return $this->tableAccessor;
     }
 }

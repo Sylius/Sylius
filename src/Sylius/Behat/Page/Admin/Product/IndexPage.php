@@ -13,7 +13,7 @@ namespace Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
-use Sylius\Behat\TableManipulatorInterface;
+use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -23,24 +23,24 @@ use Symfony\Component\Routing\RouterInterface;
 class IndexPage extends SymfonyPage implements IndexPageInterface
 {
     /**
-     * @var TableManipulatorInterface
+     * @var TableAccessorInterface
      */
-    private $tableManipulator;
+    private $tableAccessor;
 
     /**
      * {@inheritdoc}
      *
-     * @param TableManipulatorInterface $tableManipulator
+     * @param TableAccessorInterface $tableAccessor
      */
     public function __construct(
         Session $session,
         array $parameters,
         RouterInterface $router,
-        TableManipulatorInterface $tableManipulator
+        TableAccessorInterface $tableAccessor
     ) {
         parent::__construct($session, $parameters, $router);
 
-        $this->tableManipulator = $tableManipulator;
+        $this->tableAccessor = $tableAccessor;
     }
 
     /**
@@ -52,7 +52,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
             return false;
         }
 
-        $row = $this->tableManipulator->getRowWithFields($table, ['id' => $product->getId()]);
+        $row = $this->tableAccessor->getRowWithFields($table, ['id' => $product->getId()]);
 
         return null === $row;
     }
