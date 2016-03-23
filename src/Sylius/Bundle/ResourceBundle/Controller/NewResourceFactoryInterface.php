@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Symfony\Component\Config\Resource\ResourceInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
