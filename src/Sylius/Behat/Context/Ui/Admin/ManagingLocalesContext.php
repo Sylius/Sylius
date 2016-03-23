@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Locale\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Locale\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Locale\UpdatePageInterface;
+use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Service\Accessor\NotificationAccessorInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Webmozart\Assert\Assert;
@@ -186,5 +187,13 @@ final class ManagingLocalesContext implements Context
             $this->indexPage->isLocaleDisabled($locale),
             sprintf('Locale %s should be disabled but it is not', $locale->getCode())
         );
+    }
+
+    /**
+     * @Then I should not be able to choose :name
+     */
+    public function iShouldNotBeAbleToChoose($name)
+    {
+        expect($this->createPage)->toThrow(ElementNotFoundException::class)->during('chooseName', [$name]);
     }
 }
