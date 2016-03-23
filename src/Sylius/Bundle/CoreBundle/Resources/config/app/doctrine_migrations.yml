@@ -1,3 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 doctrine_migrations:
     dir_name: @SyliusCoreBundle/Migrations
     namespace: Sylius\Bundle\CoreBundle\Migrations

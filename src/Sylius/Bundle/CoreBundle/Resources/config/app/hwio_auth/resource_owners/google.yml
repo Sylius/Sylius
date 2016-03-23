@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+hwi_oauth:
+    firewall_name: main
+    resource_owners:
+        google:
+            type: google
+            client_id: %sylius.oauth.google.clientid%
+            client_secret: %sylius.oauth.google.clientsecret%
+            scope: "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
+            options:
+                access_type: online
+                approval_prompt: force
+                display: popup
+                login_hint: email address

@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+imports:
+    - { resource: doctrine/dbal.yml }
+    - { resource: doctrine/orm.yml }

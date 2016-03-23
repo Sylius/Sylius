@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+twig:
+    debug: %kernel.debug%
+    strict_variables: %kernel.debug%
+    exception_controller: 'FOS\RestBundle\Controller\ExceptionController::showAction'
+    paths:
+        "%kernel.root_dir%/../vendor/payum/payum/src/Payum/Core/Resources/views": PayumCore
+        "%kernel.root_dir%/../vendor/payum/payum/src/Payum/Stripe/Resources/views": PayumStripe
+    form:
+        resources:
+            - SyliusWebBundle:Common:forms.html.twig
+            - SyliusResourceBundle::forms.html.twig
+            - CmfMediaBundle:Form:fields.html.twig

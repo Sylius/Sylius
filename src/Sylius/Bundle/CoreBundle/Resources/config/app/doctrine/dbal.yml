@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+doctrine:
+    dbal:
+        driver: %sylius.database.driver%
+        host: %sylius.database.host%
+        port: %sylius.database.port%
+        dbname: %sylius.database.name%
+        user: %sylius.database.user%
+        password: %sylius.database.password%
+        charset: UTF8

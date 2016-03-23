@@ -1,6 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius_core:
     routing:
-        %sylius.model.product.class%:
+        "%sylius.model.product.class%":
             field: slug
             prefix: /p
             defaults:
@@ -10,7 +13,7 @@ sylius_core:
                     template: SyliusWebBundle:Frontend/Product:show.html.twig
                     criteria: {slug: $slug}
                     permission: false
-        %sylius.model.taxon.class%:
+        "%sylius.model.taxon.class%":
             field: permalink
             prefix: /t
             defaults:
