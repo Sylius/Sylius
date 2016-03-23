@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+swiftmailer:
+    transport: %mailer_transport%
+    host: %mailer_host%
+    username: %mailer_user%
+    password: %mailer_password%

@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+stof_doctrine_extensions:
+    default_locale: %locale%
+    orm:
+        default:
+            tree: true
+            sluggable: true
+            timestampable: true
+            softdeleteable: true
+            loggable: true
+            sortable: true

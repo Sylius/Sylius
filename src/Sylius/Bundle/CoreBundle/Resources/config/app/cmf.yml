@@ -1,3 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 cmf_core:
     publish_workflow: true
     persistence:
@@ -33,7 +36,7 @@ cmf_media:
     persistence:
         phpcr:
             media_basepath: /cms/medias
-            
+
 cmf_routing:
     chain:
         routers_by_id:

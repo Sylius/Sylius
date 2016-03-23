@@ -1,0 +1,21 @@
+imports:
+    - { resource: assetic.yml }
+    - { resource: cmf.yml }
+    - { resource: doctrine.yml }
+    - { resource: doctrine_migrations.yml }
+    - { resource: doctrine_phpcr.yml }
+    - { resource: fos_rest.yml }
+    - { resource: framework.yml }
+    - { resource: jms_serializer.yml }
+    - { resource: knp_gaufrette.yml }
+    - { resource: knp_snappy.yml }
+    - { resource: liip_imagine.yml }
+    - { resource: payum.yml }
+    - { resource: security.yml }
+    - { resource: sonata_block.yml }
+    - { resource: stof_doctrine_extensions.yml }
+    - { resource: swiftmailer.yml }
+    - { resource: sylius.yml }
+    - { resource: twig.yml }
+
+    - { resource: ../state_machine.yml }

@@ -2,9 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 imports:
-    - { resource: @SyliusCoreBundle/Resources/config/app/parameters.yml }
     - { resource: parameters.yml }
-    - { resource: @SyliusCoreBundle/Resources/config/app/main.yml }
+    - { resource: @SyliusCoreBundle/Resources/config/app/config.yml }
     - { resource: @SyliusAdminBundle/Resources/config/app/main.yml }
 
 framework:

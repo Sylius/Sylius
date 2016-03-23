@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+doctrine_phpcr:
+    session:
+        backend: %phpcr_backend%
+        workspace: %phpcr_workspace%
+        username: %phpcr_user%
+        password: %phpcr_password%
+    odm:
+        auto_mapping: true
+        auto_generate_proxy_classes: %kernel.debug%
