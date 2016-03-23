@@ -16,6 +16,7 @@
         <parameter key="sylius.behat.context.setup.channel.class">Sylius\Behat\Context\Setup\ChannelContext</parameter>
         <parameter key="sylius.behat.context.setup.currency.class">Sylius\Behat\Context\Setup\CurrencyContext</parameter>
         <parameter key="sylius.behat.context.setup.geographical.class">Sylius\Behat\Context\Setup\GeographicalContext</parameter>
+        <parameter key="sylius.behat.context.setup.locale.class">Sylius\Behat\Context\Setup\LocaleContext</parameter>
         <parameter key="sylius.behat.context.setup.order.class">Sylius\Behat\Context\Setup\OrderContext</parameter>
         <parameter key="sylius.behat.context.setup.payment.class">Sylius\Behat\Context\Setup\PaymentContext</parameter>
         <parameter key="sylius.behat.context.setup.product.class">Sylius\Behat\Context\Setup\ProductContext</parameter>
@@ -51,6 +52,13 @@
             <argument type="service" id="sylius.factory.country" container="symfony" />
             <argument type="service" id="sylius.repository.country" container="symfony" />
             <argument type="service" id="sylius.converter.country_name" container="symfony" />
+            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.setup.locale" class="%sylius.behat.context.setup.locale.class%" scope="scenario">
+            <argument type="service" id="sylius.factory.locale" container="symfony" />
+            <argument type="service" id="sylius.repository.locale" container="symfony" />
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>

@@ -11,15 +11,17 @@
 
 namespace Sylius\Behat\Behaviour;
 
-use Behat\Mink\Element\DocumentElement;
+use Behat\Mink\Element\NodeElement;
 
 /**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-trait DocumentAccessor
+trait ElementAccessor
 {
     /**
-     * @return DocumentElement
+     * @param string $name
+     * 
+     * @return NodeElement
      */
-    abstract protected function getDocument();
+    abstract public function getElement($name);
 }

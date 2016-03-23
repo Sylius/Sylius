@@ -16,7 +16,7 @@ Feature: Editing a locale
         Then I should be notified about successful edition
         And this locale should be disabled
 
-    @todo
+    @ui
     Scenario: Enabling the locale
         Given the store has disabled locale "Norwegian"
         And I want to edit this locale

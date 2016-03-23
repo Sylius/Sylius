@@ -41,6 +41,7 @@
             <argument type="service" id="sylius.behat.page.admin.locale.create" />
             <argument type="service" id="sylius.behat.page.admin.locale.index" />
             <argument type="service" id="sylius.behat.service.accessor.notification_accessor" />
+            <argument type="service" id="sylius.behat.page.admin.locale.update" />
             <tag name="sylius.behat.context" />
         </service>
 
