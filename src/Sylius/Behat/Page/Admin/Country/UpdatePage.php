@@ -55,12 +55,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     public function isCodeFieldDisabled()
     {
-        try {
-            $codeField = $this->getElement('code');
-            return $codeField->getAttribute('disabled') === 'disabled';
-        } catch (ElementNotFoundException $exception) {
-            return false;
-        }
+        $codeField = $this->getElement('code');
+
+        return $codeField->getAttribute('disabled') === 'disabled';
     }
 
     /**
