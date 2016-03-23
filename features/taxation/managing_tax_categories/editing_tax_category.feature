@@ -10,7 +10,7 @@ Feature: Editing tax category
 
     @todo
     Scenario: Trying to change tax category code
-        Given I want to modify tax category "Alcohol"
+        Given I want to modify a tax category "Alcohol"
         When I change its code to "beverages"
         And I save my changes
         Then I should be notified that code cannot be changed
@@ -18,13 +18,13 @@ Feature: Editing tax category
 
     @ui
     Scenario: Seeing disabled code field when editing tax category
-        When I want to modify tax category "Alcohol"
+        When I want to modify a tax category "Alcohol"
         Then the code field should be disabled
 
-    @todo
+    @ui
     Scenario: Renaming the tax category
-        Given I want to modify tax category "Alcohol"
+        Given I want to modify a tax category "Alcohol"
         When I rename it to "Food & Alcohol"
         And I save my changes
-        Then I should be notified about success
+        Then I should be notified about successful edition
         And this tax category name should be "Food & Alcohol"

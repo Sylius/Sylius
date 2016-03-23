@@ -248,4 +248,56 @@ class ManagingTaxCategoryContextSpec extends ObjectBehavior
 
         $this->iSaveMyChanges();
     }
+
+    function it_checks_if_a_resource_was_successfully_updated(NotificationAccessorInterface $notificationAccessor)
+    {
+        $notificationAccessor->hasSuccessMessage()->willReturn(true);
+        $notificationAccessor->isSuccessfullyUpdatedFor('tax_category')->willReturn(true);
+
+        $this->iShouldBeNotifiedAboutSuccessfulEdition();
+    }
+
+    function it_throws_an_exception_if_the_updation_page_does_not_have_success_message(NotificationAccessorInterface $notificationAccessor)
+    {
+        $notificationAccessor->hasSuccessMessage()->willReturn(false);
+
+        $this
+            ->shouldThrow(new \InvalidArgumentException('Message type is not positive'))
+            ->during('iShouldBeNotifiedAboutSuccessfulEdition', [])
+        ;
+    }
+
+    function it_throws_an_exception_if_the_message_on_a_page_is_not_related_to_edition(NotificationAccessorInterface $notificationAccessor)
+    {
+        $notificationAccessor->hasSuccessMessage()->willReturn(true);
+        $notificationAccessor->isSuccessfullyUpdatedFor('tax_category')->willReturn(false);
+
+        $this
+            ->shouldThrow(new \InvalidArgumentException('Successful edition message does not appear'))
+            ->during('iShouldBeNotifiedAboutSuccessfulEdition', [])
+        ;
+    }
+
+    function it_asserts_if_a_resource_was_successfully_updated(
+        UpdatePageInterface $taxCategoryUpdatePage
+    ) {
+        $taxCategoryUpdatePage->hasResourceValues([
+            'name' => 'Food and Beverage',
+        ])->willReturn(true);
+
+        $this->thisTaxCategoryNameShouldBe('Food and Beverage');
+    }
+
+    function it_throws_an_exception_if_resource_does_not_have_proper_filled_fields_after_edition(
+        UpdatePageInterface $taxCategoryUpdatePage
+    ) {
+        $taxCategoryUpdatePage->hasResourceValues([
+            'name' => 'Food and Beverage',
+        ])->willReturn(false);
+
+        $this
+            ->shouldThrow(new \InvalidArgumentException('Tax category name was not assigned properly'))
+            ->during('thisTaxCategoryNameShouldBe', ['Food and Beverage'])
+        ;
+    }
 }

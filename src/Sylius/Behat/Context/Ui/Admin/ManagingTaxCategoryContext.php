@@ -128,6 +128,7 @@ final class ManagingTaxCategoryContext implements Context
 
     /**
      * @When I name it :name
+     * @When I rename it to :name
      */
     public function iNameIt($name)
     {
@@ -185,7 +186,8 @@ final class ManagingTaxCategoryContext implements Context
     }
 
     /**
-     * @Given I want to modify tax category :taxCategory
+     * @Given I want to modify a tax category :taxCategory
+     * @Given /^I want to modify (this tax category)$/
      */
     public function iWantToModifyNewTaxCategory(TaxCategoryInterface $taxCategory)
     {
@@ -208,6 +210,37 @@ final class ManagingTaxCategoryContext implements Context
         Assert::true(
             $this->taxCategoryUpdatePage->isCodeDisabled(),
             'Code should be immutable, but it does not'
+        );
+    }
+
+    /**
+     * @Then I should be notified about successful edition
+     */
+    public function iShouldBeNotifiedAboutSuccessfulEdition()
+    {
+        Assert::true(
+            $this->notificationAccessor->hasSuccessMessage(),
+            'Message type is not positive'
+        );
+
+        Assert::true(
+            $this->notificationAccessor->isSuccessfullyUpdatedFor(self::RESOURCE_NAME),
+            'Successful edition message does not appear'
+        );
+    }
+
+    /**
+     * @Then this tax category name should be :taxCategoryName
+     */
+    public function thisTaxCategoryNameShouldBe($taxCategoryName)
+    {
+        Assert::true(
+            $this->taxCategoryUpdatePage->hasResourceValues(
+                [
+                    'name' => $taxCategoryName,
+                ]
+            ),
+            'Tax category name was not assigned properly'
         );
     }
 }
