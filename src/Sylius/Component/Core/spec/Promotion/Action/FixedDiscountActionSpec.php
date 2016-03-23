@@ -14,13 +14,14 @@ namespace spec\Sylius\Component\Core\Promotion\Action;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Promotion\Action\FixedDiscountAction;
 use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Action\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
- * @mixin \Sylius\Component\Core\Promotion\Action\FixedDiscountAction
+ * @mixin FixedDiscountAction
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
