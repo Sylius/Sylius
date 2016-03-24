@@ -202,7 +202,8 @@
             "dev-master": "0.19-dev"
         },
         "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
+            "file": "app/config/parameters.yml",
+            "dist-file": "src/Sylius/Bundle/CoreBundle/Resources/config/app/parameters.yml.dist"
         },
         "symfony-app-dir": "app",
         "symfony-web-dir": "web"
