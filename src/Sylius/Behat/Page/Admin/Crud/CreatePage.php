@@ -49,6 +49,14 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function checkValidationMessageFor($element, $message)
+    {
+        return $message === $this->getElement($element)->getParent()->find('css', '.pointing')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getRouteName()
     {
         return sprintf('sylius_admin_%s_create', $this->resourceName);

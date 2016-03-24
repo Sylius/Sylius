@@ -15,7 +15,7 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\Exception;
 use Behat\Mink\Exception\ExpectationException;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
-use Sylius\Behat\Behaviour\NameIt;
+use Sylius\Behat\Behaviour\NamesIt;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 
 /**
@@ -23,7 +23,8 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
  */
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
-    use ChecksCodeImmutability, NameIt;
+    use ChecksCodeImmutability;
+    use NamesIt;
 
     /**
      * @var array
@@ -40,7 +41,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     public function hasResourceValues(array $parameters)
     {
         foreach ($parameters as $element => $value) {
-            if($this->getElement($element)->getValue() !== (string) $value) {
+            if ($this->getElement($element)->getValue() !== (string) $value) {
                 return false;
             }
         }

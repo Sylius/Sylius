@@ -11,9 +11,9 @@
 
 namespace Sylius\Behat\Page\Admin\TaxCategory;
 
-use Sylius\Behat\Behaviour\DescribeItAs;
-use Sylius\Behat\Behaviour\NameIt;
-use Sylius\Behat\Behaviour\SpecifyCode;
+use Sylius\Behat\Behaviour\DescribesIt;
+use Sylius\Behat\Behaviour\NamesIt;
+use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 
 /**
@@ -21,7 +21,9 @@ use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
  */
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
-    use SpecifyCode, NameIt, DescribeItAs;
+    use SpecifiesItsCode;
+    use NamesIt;
+    use DescribesIt;
 
     /**
      * @var array
@@ -30,12 +32,4 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         'code' => '#sylius_tax_category_code',
         'name' => '#sylius_tax_category_name',
     ];
-
-    /**
-     * {@inheritdoc}
-     */
-    public function checkValidationMessageFor($element, $message)
-    {
-        return $message === $this->getElement($element)->getParent()->find('css', '.pointing')->getText();
-    }
 }

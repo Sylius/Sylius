@@ -23,4 +23,14 @@ interface CreatePageInterface extends PageInterface
      * @throws ElementNotFoundException
      */
     public function create();
+
+    /**
+     * @param string $element
+     * @param string $message
+     *
+     * @return bool
+     *
+     * @throws ElementNotFoundException
+     */
+    public function checkValidationMessageFor($element, $message);
 }

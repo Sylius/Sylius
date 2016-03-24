@@ -29,17 +29,17 @@ final class ManagingTaxCategoryContext implements Context
     /**
      * @var IndexPageInterface
      */
-    private $taxCategoryIndexPage;
+    private $indexPage;
 
     /**
      * @var CreatePageInterface
      */
-    private $taxCategoryCreatePage;
+    private $createPage;
 
     /**
      * @var UpdatePageInterface
      */
-    private $taxCategoryUpdatePage;
+    private $updatePage;
 
     /**
      * @var NotificationAccessorInterface
@@ -47,20 +47,20 @@ final class ManagingTaxCategoryContext implements Context
     private $notificationAccessor;
 
     /**
-     * @param IndexPageInterface $taxCategoryIndexPage
-     * @param CreatePageInterface $taxCategoryCreatePage
-     * @param UpdatePageInterface $taxCategoryUpdatePage
+     * @param IndexPageInterface $indexPage
+     * @param CreatePageInterface $createPage
+     * @param UpdatePageInterface $updatePage
      * @param NotificationAccessorInterface $notificationAccessor
      */
     public function __construct(
-        IndexPageInterface $taxCategoryIndexPage,
-        CreatePageInterface $taxCategoryCreatePage,
-        UpdatePageInterface $taxCategoryUpdatePage,
+        IndexPageInterface $indexPage,
+        CreatePageInterface $createPage,
+        UpdatePageInterface $updatePage,
         NotificationAccessorInterface $notificationAccessor
     ) {
-        $this->taxCategoryIndexPage = $taxCategoryIndexPage;
-        $this->taxCategoryCreatePage = $taxCategoryCreatePage;
-        $this->taxCategoryUpdatePage = $taxCategoryUpdatePage;
+        $this->indexPage = $indexPage;
+        $this->createPage = $createPage;
+        $this->updatePage = $updatePage;
         $this->notificationAccessor = $notificationAccessor;
     }
 
@@ -69,8 +69,8 @@ final class ManagingTaxCategoryContext implements Context
      */
     public function iDeletedTaxCategory(TaxCategoryInterface $taxCategory)
     {
-        $this->taxCategoryIndexPage->open();
-        $this->taxCategoryIndexPage->deleteResourceOnPage(['code' => $taxCategory->getCode()]);
+        $this->indexPage->open();
+        $this->indexPage->deleteResourceOnPage(['code' => $taxCategory->getCode()]);
     }
 
     /**
@@ -79,7 +79,7 @@ final class ManagingTaxCategoryContext implements Context
     public function thisTaxCategoryShouldNoLongerExistInTheRegistry(TaxCategoryInterface $taxCategory)
     {
         Assert::false(
-            $this->taxCategoryIndexPage->isResourceOnPage(['code' => $taxCategory->getCode()]),
+            $this->indexPage->isResourceOnPage(['code' => $taxCategory->getCode()]),
             sprintf('Tax category with code %s exists but should not.', $taxCategory->getCode())
         );
     }
@@ -105,16 +105,16 @@ final class ManagingTaxCategoryContext implements Context
      */
     public function iWantToCreateNewTaxCategory()
     {
-        $this->taxCategoryCreatePage->open();
+        $this->createPage->open();
     }
 
     /**
      * @When I specify its code as :code
      * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs($code = '')
+    public function iSpecifyItsCodeAs($code = null)
     {
-        $this->taxCategoryCreatePage->specifyCode($code);
+        $this->createPage->specifyCode($code);
     }
 
     /**
@@ -125,7 +125,7 @@ final class ManagingTaxCategoryContext implements Context
      */
     public function iNameIt($name = null)
     {
-        $this->taxCategoryCreatePage->nameIt($name);
+        $this->createPage->nameIt($name);
     }
 
     /**
@@ -134,39 +134,33 @@ final class ManagingTaxCategoryContext implements Context
      */
     public function iAddIt()
     {
-        $this->taxCategoryCreatePage->create();
+        $this->createPage->create();
     }
 
     /**
-     * @Then the tax category :taxCategory should appear in the registry
+     * @Then the tax category :taxCategoryName should appear in the registry
      */
-    public function thisTaxCategoryShouldAppearInTheRegistry(TaxCategoryInterface $taxCategory)
+    public function theTaxCategoryShouldAppearInTheRegistry($taxCategoryName)
     {
-        $this->taxCategoryUpdatePage->isOpen();
+        $this->indexPage->open();
         Assert::true(
-            $this->taxCategoryUpdatePage->hasResourceValues(
-                [
-                    'name' => $taxCategory->getName(),
-                    'code' => $taxCategory->getCode(),
-                    'description' => $taxCategory->getDescription(),
-                ]
-            ),
-            sprintf('Tax category with code %s was found, but fields are not assigned properly.', $taxCategory->getCode())
+            $this->indexPage->isResourceOnPage(['name' => $taxCategoryName]),
+            sprintf('Tax category with name %s has not been found.', $taxCategoryName)
         );
     }
 
     /**
-     * @When I describe it as :describes
+     * @When I describe it as :description
      */
-    public function iDescribeItAs($describes)
+    public function iDescribeItAs($description)
     {
-        $this->taxCategoryCreatePage->describeItAs($describes);
+        $this->createPage->describeItAs($description);
     }
 
     /**
      * @Then I should be notified that it has been successfully created
      */
-    public function iShouldBeNotifiedAboutSuccessfulCreation()
+    public function iShouldBeNotifiedItHasBeenSuccessfulCreation()
     {
         Assert::true(
             $this->notificationAccessor->hasSuccessMessage(),
@@ -183,9 +177,9 @@ final class ManagingTaxCategoryContext implements Context
      * @Given I want to modify a tax category :taxCategory
      * @Given /^I want to modify (this tax category)$/
      */
-    public function iWantToModifyNewTaxCategory(TaxCategoryInterface $taxCategory)
+    public function iWantToModifyTaxCategory(TaxCategoryInterface $taxCategory)
     {
-        $this->taxCategoryUpdatePage->open(['id' => $taxCategory->getId()]);
+        $this->updatePage->open(['id' => $taxCategory->getId()]);
     }
 
     /**
@@ -194,7 +188,7 @@ final class ManagingTaxCategoryContext implements Context
      */
     public function iSaveMyChanges()
     {
-        $this->taxCategoryUpdatePage->saveChanges();
+        $this->updatePage->saveChanges();
     }
 
     /**
@@ -203,7 +197,7 @@ final class ManagingTaxCategoryContext implements Context
     public function theCodeFieldShouldBeDisabled()
     {
         Assert::true(
-            $this->taxCategoryUpdatePage->isCodeDisabled(),
+            $this->updatePage->isCodeDisabled(),
             'Code should be immutable, but it does not.'
         );
     }
@@ -225,13 +219,15 @@ final class ManagingTaxCategoryContext implements Context
     }
 
     /**
-     * @Then this tax category name should be :taxCategoryName
+     * @Then /^(this tax category) name should be "([^"]+)"$/
+     * @Then /^(this tax category) should still be named "([^"]+)"$/
      */
-    public function thisTaxCategoryNameShouldBe($taxCategoryName)
+    public function thisTaxCategoryNameShouldBe(TaxCategoryInterface $taxCategory, $taxCategoryName)
     {
+        $this->indexPage->open();
         Assert::true(
-            $this->taxCategoryUpdatePage->hasResourceValues(['name' => $taxCategoryName]),
-            'Tax category name was not assigned properly.'
+            $this->indexPage->isResourceOnPage(['code' => $taxCategory->getCode(), 'name' => $taxCategoryName]),
+            sprintf('Tax category name %s was not assigned properly.', $taxCategoryName)
         );
     }
 
@@ -241,7 +237,7 @@ final class ManagingTaxCategoryContext implements Context
     public function iShouldBeNotifiedThatTaxCategoryWithThisCodeAlreadyExists()
     {
         Assert::true(
-            $this->taxCategoryCreatePage->checkValidationMessageFor('code', 'The tax category with given code already exists.'),
+            $this->createPage->checkValidationMessageFor('code', 'The tax category with given code already exists.'),
             'Unique code violation message should appear on page, but it does not.'
         );
     }
@@ -251,9 +247,9 @@ final class ManagingTaxCategoryContext implements Context
      */
     public function thereShouldStillBeOnlyOneTaxCategoryWith($element, $code)
     {
-        $this->taxCategoryIndexPage->open();
+        $this->indexPage->open();
         Assert::true(
-            $this->taxCategoryIndexPage->isResourceOnPage([$element => $code]),
+            $this->indexPage->isResourceOnPage([$element => $code]),
             sprintf('Tax category with %s %s cannot be founded.', $element, $code)
         );
     }
@@ -264,7 +260,7 @@ final class ManagingTaxCategoryContext implements Context
     public function iShouldBeNotifiedThatIsRequired($element)
     {
         Assert::true(
-            $this->taxCategoryCreatePage->checkValidationMessageFor($element, sprintf('Please enter tax category %s.', $element)),
+            $this->createPage->checkValidationMessageFor($element, sprintf('Please enter tax category %s.', $element)),
             sprintf('Tax category %s should be required.', $element)
         );
     }
@@ -272,20 +268,12 @@ final class ManagingTaxCategoryContext implements Context
     /**
      * @Then tax category with :element :name should not be added
      */
-    public function taxCategoryNamedShouldNotBeAdded($element, $name)
+    public function taxCategoryWithElementValueShouldNotBeAdded($element, $name)
     {
-        $this->taxCategoryIndexPage->open();
+        $this->indexPage->open();
         Assert::false(
-            $this->taxCategoryIndexPage->isResourceOnPage([$element => $name]),
+            $this->indexPage->isResourceOnPage([$element => $name]),
             sprintf('Tax category with %s %s was created, but it should not.', $element, $name)
         );
-    }
-
-    /**
-     * @Then this tax category should still be named :taxCategoryName
-     */
-    public function thereShouldStillBeOneTaxCategoryWithName($name)
-    {
-        $this->thereShouldStillBeOnlyOneTaxCategoryWith('name', $name);
     }
 }

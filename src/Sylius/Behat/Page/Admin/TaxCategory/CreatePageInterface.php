@@ -33,14 +33,4 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param string $description
      */
     public function describeItAs($description);
-
-    /**
-     * @param string $element
-     * @param string $message
-     *
-     * @return bool
-     *
-     * @throws ElementNotFoundException
-     */
-    public function checkValidationMessageFor($element, $message);
 }
