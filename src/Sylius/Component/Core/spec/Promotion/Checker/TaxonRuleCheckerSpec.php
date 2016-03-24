@@ -11,16 +11,19 @@
 
 namespace spec\Sylius\Component\Core\Promotion\Checker;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Core\Model\Product;
-use Sylius\Component\Core\Model\Taxon;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
+use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
+use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class TaxonRuleCheckerSpec extends ObjectBehavior
 {
@@ -29,84 +32,73 @@ class TaxonRuleCheckerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\Core\Promotion\Checker\TaxonRuleChecker');
     }
 
-    function it_should_be_sylius_rule_checker()
+    function it_is_rule_checker()
     {
         $this->shouldImplement(RuleCheckerInterface::class);
     }
 
-    function it_should_recognize_subject_as_eligible_if_product_taxon_is_matched(
+    function it_recognizes_subject_as_eligible_if_product_taxon_is_matched(
         OrderInterface $subject,
         OrderItemInterface $item,
-        Taxon $taxon,
-        Product $product,
-        ArrayCollection $collection
+        ProductInterface $bastardSword,
+        TaxonInterface $swords
     ) {
-        $configuration = ['taxons' => $collection, 'exclude' => false];
+        $configuration = ['taxons' => ['swords']];
 
-        $collection->contains(1)->willReturn(true);
-
-        $taxon->getId()->willReturn(1);
-        $product->getTaxons()->willReturn([$taxon]);
-        $item->getProduct()->willReturn($product);
+        $swords->getCode()->willReturn('swords');
+        $bastardSword->getTaxons()->willReturn([$swords]);
+        $item->getProduct()->willReturn($bastardSword);
         $subject->getItems()->willReturn([$item]);
 
         $this->isEligible($subject, $configuration)->shouldReturn(true);
     }
 
-    function it_should_recognize_subject_as_not_eligible_if_product_taxon_is_not_matched(
+    function it_recognizes_subject_as_eligible_if_product_taxon_is_matched_to_one_of_required_taxons(
         OrderInterface $subject,
         OrderItemInterface $item,
-        Taxon $taxon,
-        Product $product,
-        ArrayCollection $collection
+        ProductInterface $bastardSword,
+        TaxonInterface $swords
     ) {
-        $configuration = ['taxons' => $collection, 'exclude' => false];
+        $configuration = ['taxons' => ['swords', 'axes']];
 
-        $collection->contains(1)->willReturn(false);
-
-        $taxon->getId()->willReturn(1);
-        $product->getTaxons()->willReturn([$taxon]);
-        $item->getProduct()->willReturn($product);
-        $subject->getItems()->willReturn([$item]);
-
-        $this->isEligible($subject, $configuration)->shouldReturn(false);
-    }
-
-    function it_should_recognize_subject_as_eligible_if_product_taxon_is_not_matched_and_exclude_is_set(
-        OrderInterface $subject,
-        OrderItemInterface $item,
-        Taxon $taxon,
-        Product $product,
-        ArrayCollection $collection
-    ) {
-        $configuration = ['taxons' => $collection, 'exclude' => true];
-
-        $collection->contains(1)->willReturn(false);
-
-        $taxon->getId()->willReturn(1);
-        $product->getTaxons()->willReturn([$taxon]);
-        $item->getProduct()->willReturn($product);
+        $swords->getCode()->willReturn('swords');
+        $bastardSword->getTaxons()->willReturn([$swords]);
+        $item->getProduct()->willReturn($bastardSword);
         $subject->getItems()->willReturn([$item]);
 
         $this->isEligible($subject, $configuration)->shouldReturn(true);
     }
 
-    function it_should_recognize_subject_as_not_eligible_if_product_taxon_is_matched_and_exclude_is_set(
+    function it_recognizes_subject_as_not_eligible_if_product_taxon_is_not_matched(
         OrderInterface $subject,
         OrderItemInterface $item,
-        Taxon $taxon,
-        Product $product,
-        ArrayCollection $collection
+        ProductInterface $reflexBow,
+        TaxonInterface $bows
     ) {
-        $configuration = ['taxons' => $collection, 'exclude' => true];
+        $configuration = ['taxons' => ['swords', 'axes']];
 
-        $collection->contains(2)->willReturn(true);
-
-        $taxon->getId()->willReturn(2);
-        $product->getTaxons()->willReturn([$taxon]);
-        $item->getProduct()->willReturn($product);
+        $bows->getCode()->willReturn('bows');
+        $reflexBow->getTaxons()->willReturn([$bows]);
+        $item->getProduct()->willReturn($reflexBow);
         $subject->getItems()->willReturn([$item]);
 
         $this->isEligible($subject, $configuration)->shouldReturn(false);
+    }
+
+    function it_does_nothing_if_configuration_is_invalid(OrderInterface $subject)
+    {
+        $subject->getItems()->shouldNotBeCalled();
+
+        $this->isEligible($subject, []);
+    }
+
+    function it_throws_exception_if_promotion_subject_is_not_order(
+        Collection $taxonsCollection,
+        PromotionSubjectInterface $subject
+    ) {
+        $this
+            ->shouldThrow(new UnsupportedTypeException($subject->getWrappedObject(), OrderInterface::class))
+            ->during('isEligible', [$subject, ['taxons' => $taxonsCollection]])
+        ;
     }
 }

@@ -200,7 +200,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
                     break;
 
                 case 'taxons':
-                    $configuration[$key] = new ArrayCollection([$this->getRepository('taxon')->findOneByName(trim($value))->getId()]);
+                    $configuration[$key] = [$this->getRepository('taxon')->findOneByName(trim($value))->getCode()];
                     break;
 
                 case 'variant':

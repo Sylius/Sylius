@@ -9,6 +9,10 @@ UPGRADE
 * Merged ``TranslationBundle`` with ``ResourceBundle``
 * Renamed ``TranslatableResourceRepository`` to ``TranslatableRepository``
 
+### Core and CoreBundle
+
+* Removed "exclude" option from ``taxon`` rule
+
 
 ## From 0.16 to 0.17.x
 
