@@ -80,22 +80,7 @@ class ChannelBasedThemeContextSpec extends ObjectBehavior
         $this->getTheme()->shouldReturn(null);
     }
 
-    function it_returns_a_name(
-        ChannelContextInterface $channelContext,
-        ChannelInterface $channel,
-        ThemeInterface $theme
-    ) {
-        $channelContext->getChannel()->willReturn($channel);
-        $channel->getCode()->willReturn('default');
-
-        $this->getName()->shouldReturn('default');
-    }
-
-    function its_name_is_null_if_there_is_no_channel(
-        ChannelContextInterface $channelContext
-    ) {
-        $channelContext->getChannel()->willThrow(ChannelNotFoundException::class);
-
+    function its_name_is_null() {
         $this->getName()->shouldReturn(null);
     }
 }

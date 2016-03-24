@@ -28,6 +28,9 @@
             <call method="setThemeContext">
                 <argument type="service" id="sylius.context.theme" />
             </call>
+            <call method="isContextAware">
+                <argument>%sylius.theme.context.context_aware_paths%</argument>
+            </call>
         </service>
 
         <!-- TODO: json_file.processing as decorator (some bug :/) -->

@@ -80,6 +80,7 @@ class RecursiveFileLocatorSpec extends ObjectBehavior
 
         $splFileInfo->getPathname()->willReturn('/search/path/context_dir/nested/readme.md');
 
+        $this->isContextAware(true)->shouldBeNull();
         $this->setThemeContext($themeContext)->shouldBeNull();
         $this->locateFileNamed('readme.md')->shouldReturn('/search/path/context_dir/nested/readme.md');
     }
@@ -104,6 +105,32 @@ class RecursiveFileLocatorSpec extends ObjectBehavior
 
         $splFileInfo->getPathname()->willReturn('/search/path/nested/readme.md');
 
+        $this->isContextAware(true)->shouldBeNull();
+        $this->setThemeContext($themeContext)->shouldBeNull();
+        $this->locateFileNamed('readme.md')->shouldReturn('/search/path/nested/readme.md');
+    }
+
+    function it_should_not_make_context_aware_paths_when_setting_disabled(
+        FinderFactoryInterface $finderFactory,
+        Finder $finder,
+        SplFileInfo $splFileInfo,
+        ThemeContextInterface $themeContext
+    ) {
+        $finderFactory->create()->willReturn($finder);
+        $themeContext->getName()->shouldNotBeCalled();
+
+        $finder->name('readme.md')->shouldBeCalled()->willReturn($finder);
+        $finder->in('/search/path/')->shouldBeCalled()->willReturn($finder);
+        $finder->ignoreUnreadableDirs()->shouldBeCalled()->willReturn($finder);
+        $finder->files()->shouldBeCalled()->willReturn($finder);
+
+        $finder->getIterator()->willReturn(new \ArrayIterator([
+            $splFileInfo->getWrappedObject(),
+        ]));
+
+        $splFileInfo->getPathname()->willReturn('/search/path/nested/readme.md');
+
+        $this->isContextAware(false)->shouldBeNull();
         $this->setThemeContext($themeContext)->shouldBeNull();
         $this->locateFileNamed('readme.md')->shouldReturn('/search/path/nested/readme.md');
     }
@@ -158,6 +185,7 @@ class RecursiveFileLocatorSpec extends ObjectBehavior
         $firstSplFileInfo->getPathname()->willReturn('/search/path/context_dir/nested1/readme.md');
         $secondSplFileInfo->getPathname()->willReturn('/search/path/context_dir/nested2/readme.md');
 
+        $this->isContextAware(true)->shouldBeNull();
         $this->setThemeContext($themeContext)->shouldBeNull();
         $this->locateFilesNamed('readme.md')->shouldReturn([
             '/search/path/context_dir/nested1/readme.md',

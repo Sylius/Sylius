@@ -42,7 +42,7 @@ final class ChannelBasedThemeContext implements ThemeContextInterface
     {
         try {
             /** @var ChannelInterface $channel */
-            $channel = $this->getChannel();
+            $channel = $this->channelContext->getChannel();
 
             return $channel->getTheme();
         } catch (ChannelNotFoundException $exception) {
@@ -57,18 +57,6 @@ final class ChannelBasedThemeContext implements ThemeContextInterface
      */
     public function getName()
     {
-        try {
-            /** @var ChannelInterface $channel */
-            $channel = $this->getChannel();
-
-            return $channel->getCode();
-        } catch (ChannelNotFoundException $exception) {
-            return null;
-        }
-    }
-
-    private function getChannel()
-    {
-        return $this->channelContext->getChannel();
+        return;
     }
 }

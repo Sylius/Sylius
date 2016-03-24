@@ -31,7 +31,15 @@ final class RecursiveFileLocator implements FileLocatorInterface
      */
     private $paths;
 
+    /**
+     * @var ThemeContextInterface|null
+     */
     private $themeContext;
+
+    /**
+     * @var bool
+     */
+    private $isContextAware;
 
     /**
      * @param FinderFactoryInterface $finderFactory
@@ -67,6 +75,16 @@ final class RecursiveFileLocator implements FileLocatorInterface
     public function setThemeContext(ThemeContextInterface $themeContext = null)
     {
         $this->themeContext = $themeContext;
+    }
+
+    /**
+     * Is context aware path.
+     *
+     * @param bool Determines if the themes path should be context aware.
+     */
+    public function isContextAware($isContextAware = false)
+    {
+        $this->isContextAware = $isContextAware;
     }
 
     /**
@@ -107,20 +125,6 @@ final class RecursiveFileLocator implements FileLocatorInterface
         }
     }
 
-    private function applySuffixForPaths()
-    {
-        if (!isset($this->themeContext) || null === $this->themeContext->getName()) {
-            return;
-        }
-
-        $paths = [];
-        foreach ($this->paths as $path) {
-            $paths[] = rtrim($path, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$this->themeContext->getName();
-        }
-
-        $this->paths = $paths;
-    }
-
     /**
      * @param string $name
      */
@@ -131,5 +135,22 @@ final class RecursiveFileLocator implements FileLocatorInterface
                 'An empty file name is not valid to be located.'
             );
         }
+    }
+
+    private function applySuffixForPaths()
+    {
+        if (!$this->isContextAware ||
+            !isset($this->themeContext) ||
+            null === $this->themeContext->getName()
+        ) {
+            return;
+        }
+
+        $paths = [];
+        foreach ($this->paths as $path) {
+            $paths[] = rtrim($path, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$this->themeContext->getName();
+        }
+
+        $this->paths = $paths;
     }
 }
