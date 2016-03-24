@@ -3,4 +3,18 @@
 
 imports:
     - { resource: config.yml }
-    - { resource: @SyliusCoreBundle/Resources/config/app/config_prod.yml }
+
+framework:
+    router:
+        strict_requirements: null
+
+monolog:
+    handlers:
+        main:
+            type: fingers_crossed
+            action_level: error
+            handler: nested
+        nested:
+            type: stream
+            path: %kernel.logs_dir%/%kernel.environment%.log
+            level: debug
