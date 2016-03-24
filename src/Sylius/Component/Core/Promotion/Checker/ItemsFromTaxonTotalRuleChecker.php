@@ -16,6 +16,7 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -23,6 +24,19 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 class ItemsFromTaxonTotalRuleChecker implements RuleCheckerInterface
 {
     const TYPE = 'items_from_taxon_total';
+
+    /**
+     * @var TaxonRepositoryInterface
+     */
+    private $taxonRepository;
+
+    /**
+     * @param TaxonRepositoryInterface $taxonRepository
+     */
+    public function __construct(TaxonRepositoryInterface $taxonRepository)
+    {
+        $this->taxonRepository = $taxonRepository;
+    }
 
     /**
      * {@inheritdoc}
@@ -37,10 +51,16 @@ class ItemsFromTaxonTotalRuleChecker implements RuleCheckerInterface
             return false;
         }
 
+        $targetTaxon = $this->taxonRepository->findOneBy(['code' => $configuration['taxon']]);
+        if (null === $targetTaxon) {
+            throw new \InvalidArgumentException(sprintf('Taxon with code "%s" does not exist.', $configuration['taxon']));
+        }
+
         $itemsWithTaxonTotal = 0;
+
         /** @var OrderItemInterface $item */
         foreach ($subject->getItems() as $item) {
-            if ($item->getProduct()->hasTaxon($configuration['taxon'])) {
+            if ($item->getProduct()->hasTaxon($targetTaxon)) {
                 $itemsWithTaxonTotal += $item->getTotal();
             }
         }

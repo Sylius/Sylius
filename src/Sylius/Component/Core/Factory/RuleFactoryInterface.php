@@ -42,10 +42,10 @@ interface RuleFactoryInterface extends FactoryInterface
     public function createTaxon(array $taxons);
 
     /**
-     * @param TaxonInterface $taxon
+     * @param string $taxon
      * @param int $amount
      *
      * @return RuleInterface
      */
-    public function createItemsFromTaxonTotal(TaxonInterface $taxon, $amount);
+    public function createItemsFromTaxonTotal($taxon, $amount);
 }
