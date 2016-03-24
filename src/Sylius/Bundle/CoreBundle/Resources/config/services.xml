@@ -385,7 +385,7 @@
             <argument type="service" id="sylius.cart_provider" />
             <argument type="service" id="sylius.order_processing.order_recalculator" />
             <tag name="kernel.event_listener" event="sylius.user.security.implicit_login" method="recalculateCartWhileLogin" />
-            <tag name="kernel.event_listener" event="security.interactive_login" method="recalculateCartWhileInteractiveLogin" />
+            <tag name="kernel.event_listener" event="security.interactive_login" method="recalculateCartWhileLogin" />
         </service>
 
         <service id="sylius.active_promotions_by_channel_provider" class="%sylius.active_promotions_by_channel_provider.class%">

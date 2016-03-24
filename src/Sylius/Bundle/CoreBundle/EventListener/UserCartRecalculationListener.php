@@ -11,12 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\OrderRecalculatorInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Symfony\Component\EventDispatcher\Event;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -44,22 +43,11 @@ class UserCartRecalculationListener
     }
 
     /**
-     * @param UserEvent $event
+     * @param Event $event
+     *
+     * @throws UnexpectedTypeException
      */
-    public function recalculateCartWhileLogin(UserEvent $event)
-    {
-        $this->recalculateCart();
-    }
-
-    /**
-     * @param InteractiveLoginEvent $event
-     */
-    public function recalculateCartWhileInteractiveLogin(InteractiveLoginEvent $event)
-    {
-        $this->recalculateCart();
-    }
-
-    private function recalculateCart()
+    public function recalculateCartWhileLogin(Event $event)
     {
         if (!$this->cartProvider->hasCart()) {
             return;

@@ -120,7 +120,12 @@ class PricesRecalculatorSpec extends ObjectBehavior
         $priceCalculator
             ->calculate(
                 $variant,
-                ['customer' => $customer, 'groups' => ['group1', 'group2'], 'channel' => [$channel], 'quantity' => 5]
+                [
+                    'customer' => $customer,
+                    'groups' => ['group1', 'group2'],
+                    'channel' => [$channel],
+                    'quantity' => 5
+                ]
             )
             ->willReturn(10)
         ;
