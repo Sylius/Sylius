@@ -12,14 +12,16 @@
 namespace Sylius\Bundle\SearchBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Sylius\Bundle\SearchBundle\Extension\Doctrine\MatchAgainstFunction;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 /**
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
-class SyliusSearchExtension extends AbstractResourceExtension
+class SyliusSearchExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
     /**
      * {@inheritdoc}
@@ -53,5 +55,37 @@ class SyliusSearchExtension extends AbstractResourceExtension
         $container->setParameter('sylius_search.pre_search_filter.taxon', $config['filters']['pre_search_filter']['taxon']);
 
         $container->setParameter('sylius_search.custom.accessor.class', $config['custom_accessor']);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prepend(ContainerBuilder $container)
+    {
+        $this->prependDoctrineOrm($container);
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     */
+    private function prependDoctrineOrm(ContainerBuilder $container)
+    {
+        if (!$container->hasExtension('doctrine')) {
+            return;
+        }
+
+        $container->prependExtensionConfig('doctrine', [
+            'orm' => [
+                'entity_managers' => [
+                    'default' => [
+                        'dql' => [
+                            'string_functions' => [
+                                'MATCH' => MatchAgainstFunction::class,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ]);
     }
 }

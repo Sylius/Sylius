@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+assetic:
+    debug: %kernel.debug%
+    use_controller: false
+    bundles: ['SyliusWebBundle', 'CmfCreateBundle', 'SyliusResourceBundle']
+    filters:
+        cssrewrite: ~

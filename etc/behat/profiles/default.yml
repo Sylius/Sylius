@@ -40,7 +40,7 @@ default:
 
         Behat\Symfony2Extension:
             kernel:
-                class: TestKernel
+                class: Sylius\Application\TestKernel
                 path: app/TestKernel.php
 
         Sylius\Behat\Extension\MultiContainerExtension:

@@ -1,22 +1,22 @@
 parameters:
-    sylius.database.driver:           pdo_mysql
-    sylius.database.host:             127.0.0.1
-    sylius.database.port:             ~
-    sylius.database.name:             sylius
-    sylius.database.path:             ~
-    sylius.database.user:             root
-    sylius.database.password:         ~
+    sylius.database.driver: pdo_mysql
+    sylius.database.host: 127.0.0.1
+    sylius.database.port: ~
+    sylius.database.name: sylius
+    sylius.database.path: ~
+    sylius.database.user: root
+    sylius.database.password: ~
 
-    sylius.mailer.transport:          smtp
-    sylius.mailer.host:               127.0.0.1
-    sylius.mailer.port:               ~
-    sylius.mailer.user:               ~
-    sylius.mailer.password:           ~
+    sylius.mailer.transport: smtp
+    sylius.mailer.host: 127.0.0.1
+    sylius.mailer.port: ~
+    sylius.mailer.user: ~
+    sylius.mailer.password: ~
 
-    sylius.secret:                    EDITME
+    sylius.secret: EDITME
 
-    sylius.locale:                    en_US
-    sylius.currency:                  USD
+    sylius.locale: en_US
+    sylius.currency: USD
 
     sylius.cache:
         type: file_system
@@ -36,12 +36,12 @@ parameters:
     sylius.currency_importer.open_exchange_rates: EDITME
     sylius.currency_importer.ecb.base_currency: EUR
 
-    sylius.oauth.amazon.clientid:       EDITME
-    sylius.oauth.amazon.clientsecret:   EDITME
-    sylius.oauth.facebook.clientid:     EDITME
+    sylius.oauth.amazon.clientid: EDITME
+    sylius.oauth.amazon.clientsecret: EDITME
+    sylius.oauth.facebook.clientid: EDITME
     sylius.oauth.facebook.clientsecret: EDITME
-    sylius.oauth.google.clientid:       EDITME
-    sylius.oauth.google.clientsecret:   EDITME
+    sylius.oauth.google.clientid: EDITME
+    sylius.oauth.google.clientsecret: EDITME
 
     sylius.inventory.backorders_enabled: true
     sylius.inventory.tracking_enabled: true

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.controller.checkout.class">Sylius\Bundle\CoreBundle\Controller\CheckoutController</parameter>
+
+        <parameter key="sylius.checkout_form.addressing.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressingStepType</parameter>
+        <parameter key="sylius.checkout_form.shipping.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShippingStepType</parameter>
+        <parameter key="sylius.checkout_form.shipment.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShipmentType</parameter>
+        <parameter key="sylius.checkout_form.payment.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\PaymentStepType</parameter>
+
+        <parameter key="sylius.checkout_scenario.class">Sylius\Bundle\CoreBundle\Checkout\CheckoutProcessScenario</parameter>
+        <parameter key="sylius.checkout_step.security.class">Sylius\Bundle\CoreBundle\Checkout\Step\SecurityStep</parameter>
+        <parameter key="sylius.checkout_step.addressing.class">Sylius\Bundle\CoreBundle\Checkout\Step\AddressingStep</parameter>
+        <parameter key="sylius.checkout_step.shipping.class">Sylius\Bundle\CoreBundle\Checkout\Step\ShippingStep</parameter>
+        <parameter key="sylius.checkout_step.payment.class">Sylius\Bundle\CoreBundle\Checkout\Step\PaymentStep</parameter>
+        <parameter key="sylius.checkout_step.finalize.class">Sylius\Bundle\CoreBundle\Checkout\Step\FinalizeStep</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.controller.checkout" class="%sylius.controller.checkout.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="sylius.checkout_form.addressing" class="%sylius.checkout_form.addressing.class%">
+            <argument>%sylius.model.cart.class%</argument>
+            <tag name="form.type" alias="sylius_checkout_addressing" />
+        </service>
+        <service id="sylius.checkout_form.shipping" class="%sylius.checkout_form.shipping.class%">
+            <argument>%sylius.model.order.class%</argument>
+            <argument>%sylius.validation_groups.order%</argument>
+            <argument type="service" id="sylius.context.channel"/>
+            <tag name="form.type" alias="sylius_checkout_shipping" />
+        </service>
+        <service id="sylius.checkout_form.shipment" class="%sylius.checkout_form.shipment.class%">
+            <argument>%sylius.model.shipment.class%</argument>
+            <argument type="service" id="translator" />
+            <tag name="form.type" alias="sylius_checkout_shipment" />
+        </service>
+        <service id="sylius.checkout_form.payment" class="%sylius.checkout_form.payment.class%">
+            <argument>%sylius.model.order.class%</argument>
+            <argument>%sylius.validation_groups.order%</argument>
+            <argument type="service" id="sylius.context.channel" />
+            <tag name="form.type" alias="sylius_checkout_payment" />
+        </service>
+
+        <service id="sylius.checkout_scenario" class="%sylius.checkout_scenario.class%">
+            <argument type="service" id="sylius.cart_provider" />
+            <tag name="sylius.process.scenario" alias="sylius_checkout" />
+        </service>
+
+        <service id="sylius.checkout_step.security" class="%sylius.checkout_step.security.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+            <tag name="sylius.process.step" alias="sylius_checkout_security" />
+        </service>
+        <service id="sylius.checkout_step.addressing" class="%sylius.checkout_step.addressing.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+            <tag name="sylius.process.step" alias="sylius_checkout_addressing" />
+        </service>
+        <service id="sylius.checkout_step.shipping" class="%sylius.checkout_step.shipping.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+            <tag name="sylius.process.step" alias="sylius_checkout_shipping" />
+        </service>
+        <service id="sylius.checkout_step.payment" class="%sylius.checkout_step.payment.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+            <tag name="sylius.process.step" alias="sylius_checkout_payment" />
+        </service>
+        <service id="sylius.checkout_step.finalize" class="%sylius.checkout_step.finalize.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+            <tag name="sylius.process.step" alias="sylius_checkout_finalize" />
+        </service>
+    </services>
+
+</container>

@@ -66,32 +66,10 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
     public function load(array $config, ContainerBuilder $container)
     {
         $config = $this->processConfiguration(new Configuration(), $config);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $configFiles = [
-            'services.xml',
-            'controller.xml',
-            'form.xml',
-            'api_form.xml',
-            'templating.xml',
-            'twig.xml',
-            'reports.xml',
-            'state_machine.xml',
-            'email.xml',
-            'metadata.xml',
-            'sitemap.xml',
-        ];
-
-        $env = $container->getParameter('kernel.environment');
-        if ('test' === $env || 'test_cached' === $env) {
-            $configFiles[] = 'test_services.xml';
-        }
-
-        foreach ($configFiles as $configFile) {
-            $loader->load($configFile);
-        }
+        $this->loadServices($container);
 
         $this->loadCheckoutConfiguration($config['checkout'], $container);
 
@@ -126,7 +104,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
             $syliusByClasses[$className] = $routeConfig['defaults']['sylius'];
         }
 
-        $container->prependExtensionConfig('sylius_theme', ['context' => 'sylius.theme.context.channel_based']);
+        $container->prependExtensionConfig('sylius_theme', ['context' => 'sylius.context.theme.channel_based']);
 
         $container->setParameter('sylius.route_classes', $routeClasses);
         $container->setParameter('sylius.controller_by_classes', $controllerByClasses);
@@ -160,5 +138,19 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         $decoratedPromotionRuleFactoryDefinition = new Definition($promotionRuleFactoryClass, [$baseFactoryDefinition]);
 
         $container->setDefinition('sylius.factory.promotion_rule', $decoratedPromotionRuleFactoryDefinition);
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     */
+    private function loadServices(ContainerBuilder $container)
+    {
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader->load('services.xml');
+
+        $environment = $container->getParameter('kernel.environment');
+        if (0 === strpos($environment, 'test')) {
+            $loader->load('services_test.xml');
+        }
     }
 }

@@ -2,94 +2,28 @@
 # (c) Paweł Jędrzejewski
 
 imports:
-    - { resource: parameters.yml }
-    - { resource: security.yml }
-    - { resource: migrations.yml }
-    - { resource: @SyliusCoreBundle/Resources/config/app/main.yml }
+    - { resource: parameters.yml, ignore_errors: true }
+
+    - { resource: common/assetic.yml }
+    - { resource: common/cmf.yml }
+    - { resource: common/doctrine.yml }
+    - { resource: common/doctrine_cache.yml }
+    - { resource: common/doctrine_migrations.yml }
+    - { resource: common/doctrine_phpcr.yml }
+    - { resource: common/fos_rest.yml }
+    - { resource: common/framework.yml }
+    - { resource: common/hwio_auth.yml }
+    - { resource: common/jms_serializer.yml }
+    - { resource: common/knp_gaufrette.yml }
+    - { resource: common/knp_snappy.yml }
+    - { resource: common/liip_imagine.yml }
+    - { resource: common/payum.yml }
+    - { resource: common/security.yml }
+    - { resource: common/sonata_block.yml }
+    - { resource: common/stof_doctrine_extensions.yml }
+    - { resource: common/swiftmailer.yml }
+    - { resource: common/sylius.yml }
+    - { resource: common/twig.yml }
+    - { resource: common/winzou_state_machine.yml }
+
     - { resource: @SyliusAdminBundle/Resources/config/grids.yml }
-
-framework:
-    translator:      { fallback: %sylius.locale% }
-    secret:          %sylius.secret%
-    router:
-        resource: "%kernel.root_dir%/config/routing.yml"
-        strict_requirements: %kernel.debug%
-    form:            true
-    csrf_protection: true
-    validation:      { enable_annotations: true }
-    templating:      { engines: ['twig'] }
-    default_locale:  "%sylius.locale%"
-    trusted_proxies: ~
-    session:
-        # handler_id set to null will use default session handler from php.ini
-        handler_id:  ~
-
-twig:
-    form:
-        resources:
-            - SyliusWebBundle:Common:forms.html.twig
-            - SyliusResourceBundle::forms.html.twig
-            - CmfMediaBundle:Form:fields.html.twig
-    debug:            %kernel.debug%
-    strict_variables: %kernel.debug%
-    paths:
-        %kernel.root_dir%/../vendor/payum/payum/src/Payum/Core/Resources/views: PayumCore
-        %kernel.root_dir%/../vendor/payum/payum/src/Payum/Stripe/Resources/views: PayumStripe
-
-assetic:
-    debug:          %kernel.debug%
-    use_controller: false
-    bundles:        ['SyliusWebBundle', 'CmfCreateBundle', 'SyliusResourceBundle']
-    filters:
-        cssrewrite: ~
-
-doctrine:
-    dbal:
-        driver:   %sylius.database.driver%
-        host:     %sylius.database.host%
-        port:     %sylius.database.port%
-        dbname:   %sylius.database.name%
-        user:     %sylius.database.user%
-        password: %sylius.database.password%
-        charset:  UTF8
-    orm:
-        auto_generate_proxy_classes: %kernel.debug%
-        entity_managers:
-            default:
-                auto_mapping: true
-                mappings:
-                    gedmo_loggable:
-                        type: annotation
-                        prefix: Gedmo\Loggable\Entity
-                        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
-                        is_bundle: false
-                filters:
-                    softdeleteable:
-                        class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
-                        enabled: true
-                dql:
-                    string_functions:
-                        MATCH: Sylius\Bundle\SearchBundle\Extension\Doctrine\MatchAgainstFunction
-
-doctrine_phpcr:
-    session:
-        backend: %sylius.phpcr.backend%
-        workspace: %sylius.phpcr.workspace%
-        username: %sylius.phpcr.user%
-        password: %sylius.phpcr.pass%
-    odm:
-        auto_mapping: true
-        auto_generate_proxy_classes: %kernel.debug%
-
-swiftmailer:
-    transport: %sylius.mailer.transport%
-    host:      %sylius.mailer.host%
-    port:      %sylius.mailer.port%
-    username:  %sylius.mailer.user%
-    password:  %sylius.mailer.password%
-
-fos_rest:
-    format_listener:
-        rules:
-            - { path: '^/api', priorities: ['json', 'xml'], fallback_format: json, prefer_extension: true }
-            - { path: '^/', stop: true }

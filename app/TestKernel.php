@@ -1,7 +1,17 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Sylius\Application;
+
 use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
-use Sylius\Bundle\CoreBundle\Kernel\Kernel;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -18,7 +28,7 @@ class TestKernel extends Kernel
             return;
         }
 
-        if (!in_array($this->environment, ['test', 'test_cached'])) {
+        if (!in_array($this->environment, ['test', 'test_cached'], true)) {
             parent::shutdown();
 
             return;

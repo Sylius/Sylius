@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+hwi_oauth:
+    resource_owners:
+        amazon:
+            type: amazon
+            client_id: %sylius.oauth.amazon.clientid%
+            client_secret: %sylius.oauth.amazon.clientsecret%
