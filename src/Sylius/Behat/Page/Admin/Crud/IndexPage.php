@@ -80,11 +80,11 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
      */
     public function deleteResourceOnPage(array $parameters)
     {
-        $tableManipulator = $this->getTableManipulator();
+        $tableAccessor = $this->getTableAccessor();
         $table = $this->getElement('table');
 
-        $deletedRow = $tableManipulator->getRowWithFields($table, $parameters);
-        $actionButtons = $tableManipulator->getFieldFromRow($table, $deletedRow, 'Actions');
+        $deletedRow = $tableAccessor->getRowWithFields($table, $parameters);
+        $actionButtons = $tableAccessor->getFieldFromRow($table, $deletedRow, 'Actions');
 
         $actionButtons->pressButton('Delete');
     }
