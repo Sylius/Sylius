@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Page\Admin\Country;
+namespace Sylius\Behat\Page\Admin\Locale;
 
 use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
 use Sylius\Behat\Page\ElementNotFoundException;
-use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Locale\Model\LocaleInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -23,33 +23,33 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function isCountryDisabled(CountryInterface $country)
+    public function isLocaleDisabled(LocaleInterface $locale)
     {
-        return $this->checkCountryStatus($country, 'Disabled');
+        return $this->checkLocaleStatus($locale, 'Disabled');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function isCountryEnabled(CountryInterface $country)
+    public function isLocaleEnabled(LocaleInterface $locale)
     {
-        return $this->checkCountryStatus($country, 'Enabled');
+        return $this->checkLocaleStatus($locale, 'Enabled');
     }
 
     /**
-     * @param CountryInterface $country
+     * @param LocaleInterface $locale
      * @param string $status
      *
      * @return bool
      *
      * @throws ElementNotFoundException
      */
-    private function checkCountryStatus(CountryInterface $country, $status)
+    private function checkLocaleStatus(LocaleInterface $locale, $status)
     {
         $tableAccessor = $this->getTableAccessor();
         $table = $this->getElement('table');
 
-        $row = $tableAccessor->getRowWithFields($table, ['code' => $country->getCode()]);
+        $row = $tableAccessor->getRowWithFields($table, ['code' => $locale->getCode()]);
         $enabledField = $tableAccessor->getFieldFromRow($table, $row, 'Enabled');
 
         return $enabledField->getText() === $status;

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Page\Admin\Country;
+namespace Sylius\Behat\Page\Admin\Locale;
 
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
@@ -20,9 +20,4 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 {
     public function enable();
     public function disable();
-
-    /**
-     * @return bool
-     */
-    public function isCodeFieldDisabled();
 }

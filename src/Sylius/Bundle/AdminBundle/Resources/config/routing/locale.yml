@@ -3,7 +3,7 @@ sylius_admin_locale:
         alias: sylius.locale
         section: admin
         templates: SyliusAdminBundle:Crud
-        except: ['show', 'update', 'delete']
+        except: ['show', 'delete']
         redirect: index
         grid: sylius_admin_locale
         vars:

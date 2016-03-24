@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Page\Admin\Country;
+namespace Sylius\Behat\Page\Admin\Locale;
 
 use Sylius\Behat\Behaviour\Toggles;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
@@ -25,19 +25,8 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      * @var array
      */
     protected $elements = [
-        'enabled' => '#sylius_country_enabled',
-        'code' => '#sylius_country_code',
+        'enabled' => '#sylius_locale_enabled',
     ];
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isCodeFieldDisabled()
-    {
-        $codeField = $this->getElement('code');
-
-        return $codeField->getAttribute('disabled') === 'disabled';
-    }
 
     /**
      * {@inheritdoc}

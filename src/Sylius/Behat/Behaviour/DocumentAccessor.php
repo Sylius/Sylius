@@ -21,5 +21,5 @@ trait DocumentAccessor
     /**
      * @return DocumentElement
      */
-    abstract public function getDocument();
+    abstract protected function getDocument();
 }
