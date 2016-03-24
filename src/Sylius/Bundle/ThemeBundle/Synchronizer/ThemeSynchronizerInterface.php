@@ -11,13 +11,17 @@
 
 namespace Sylius\Bundle\ThemeBundle\Synchronizer;
 
+use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
+
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 interface ThemeSynchronizerInterface
 {
     /**
+     * @param null|ThemeInterface $theme The theme
+     *
      * @throws SynchronizationFailedException If synchronization fails
      */
-    public function synchronize();
+    public function synchronize(ThemeInterface $theme = null);
 }

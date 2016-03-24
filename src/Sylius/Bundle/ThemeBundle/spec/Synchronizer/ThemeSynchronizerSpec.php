@@ -24,6 +24,7 @@ use Sylius\Bundle\ThemeBundle\Synchronizer\ThemeMergerInterface;
  * @mixin ThemeSynchronizer
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Rafał Muszyński <rafal.muszynski@sourcefabric.org>
  */
 class ThemeSynchronizerSpec extends ObjectBehavior
 {
@@ -64,6 +65,31 @@ class ThemeSynchronizerSpec extends ObjectBehavior
         $themeRepository->add($theme)->shouldBeCalled();
 
         $this->synchronize();
+    }
+
+    function it_updates_single_existing_theme(
+        ThemeLoaderInterface $themeLoader,
+        ThemeRepositoryInterface $themeRepository,
+        ThemeMergerInterface $themeMerger,
+        ThemeInterface $loadedTheme,
+        ThemeInterface $existingTheme
+    ) {
+        $themeRepository->findAll()->shouldNotBeCalled();
+
+        $loadedTheme->getName()->willReturn('theme/name');
+        $loadedTheme->getParents()->willReturn([]);
+        $existingTheme->getName()->willReturn('theme/name');
+        $existingTheme->getParents()->willReturn([]);
+
+        $themeLoader->load()->willReturn([$loadedTheme]);
+        $themeRepository->findOneByName('theme/name')->willReturn($existingTheme);
+
+        $themeMerger->merge($existingTheme, $loadedTheme)->willReturn($existingTheme);
+
+        $themeRepository->add($existingTheme)->shouldBeCalled();
+        $themeRepository->add($loadedTheme)->shouldNotBeCalled();
+
+        $this->synchronize($existingTheme);
     }
 
     function it_overrides_existing_theme_by_freshly_loaded_theme(
@@ -109,6 +135,24 @@ class ThemeSynchronizerSpec extends ObjectBehavior
         $this->synchronize();
     }
 
+    function it_removes_persisted_theme(
+        ThemeLoaderInterface $themeLoader,
+        ThemeRepositoryInterface $themeRepository,
+        ThemeInterface $themeToRemove
+    ) {
+        $themeRepository->findAll()->shouldNotBeCalled();
+        $themeLoader->load()->willReturn([]);
+
+        $themeToRemove->getName()->willReturn('theme/name');
+        $themeToRemove->getParents()->willReturn([]);
+
+        $themeToRemove->getName()->willReturn('toRemove/theme');
+
+        $themeRepository->remove($themeToRemove)->shouldBeCalled();
+
+        $this->synchronize($themeToRemove);
+    }
+
     function it_ensures_cohesion_between_parent_themes(
         ThemeLoaderInterface $themeLoader,
         ThemeRepositoryInterface $themeRepository,
@@ -140,5 +184,38 @@ class ThemeSynchronizerSpec extends ObjectBehavior
         $themeRepository->add($loadedParentTheme)->shouldNotBeCalled();
 
         $this->synchronize();
+    }
+
+    function it_ensures_cohesion_between_parent_themes_when_single_theme_given(
+        ThemeLoaderInterface $themeLoader,
+        ThemeRepositoryInterface $themeRepository,
+        ThemeMergerInterface $themeMerger,
+        ThemeInterface $loadedTheme,
+        ThemeInterface $loadedParentTheme,
+        ThemeInterface $existingParentTheme
+    ) {
+        $themeRepository->findAll()->shouldNotBeCalled();
+        $existingParentTheme->getName()->willReturn('parent-theme/name');
+
+        $themeLoader->load()->willReturn([$loadedTheme, $loadedParentTheme]);
+
+        $loadedTheme->getName()->willReturn('theme/name');
+        $loadedTheme->getParents()->willReturn([$loadedParentTheme]);
+        $themeRepository->findOneByName('theme/name')->willReturn(null);
+
+        $loadedParentTheme->getName()->willReturn('parent-theme/name');
+        $loadedParentTheme->getParents()->willReturn([]);
+        $themeRepository->findOneByName('parent-theme/name')->willReturn($existingParentTheme);
+
+        $loadedTheme->removeParent($loadedParentTheme)->shouldBeCalled();
+        $loadedTheme->addParent($existingParentTheme)->shouldBeCalled();
+
+        $themeMerger->merge($existingParentTheme, $loadedParentTheme)->willReturn($existingParentTheme);
+
+        $themeRepository->add($loadedTheme)->shouldBeCalled();
+        $themeRepository->add($existingParentTheme)->shouldBeCalled();
+        $themeRepository->add($loadedParentTheme)->shouldNotBeCalled();
+
+        $this->synchronize($existingParentTheme);
     }
 }
