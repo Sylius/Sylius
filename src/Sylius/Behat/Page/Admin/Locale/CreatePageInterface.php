@@ -25,4 +25,11 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @throws ElementNotFoundException
      */
     public function chooseName($name);
+
+    /**
+     * @param string $name
+     *
+     * @return bool
+     */
+    public function isOptionAvailable($name);
 }

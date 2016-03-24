@@ -15,7 +15,6 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Locale\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Locale\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Locale\UpdatePageInterface;
-use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Service\Accessor\NotificationAccessorInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Webmozart\Assert\Assert;
@@ -67,6 +66,7 @@ final class ManagingLocalesContext implements Context
 
     /**
      * @Given I want to create a new locale
+     * @Given I want to add a new locale
      */
     public function iWantToCreateNewLocale()
     {
@@ -194,6 +194,9 @@ final class ManagingLocalesContext implements Context
      */
     public function iShouldNotBeAbleToChoose($name)
     {
-        expect($this->createPage)->toThrow(ElementNotFoundException::class)->during('chooseName', [$name]);
+        Assert::false(
+            $this->createPage->isOptionAvailable($name),
+            sprintf('I can choose %s, but i should not be able to do it', $name)
+        );
     }
 }

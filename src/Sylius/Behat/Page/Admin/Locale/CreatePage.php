@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Admin\Locale;
 
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\ChoosesName;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 
@@ -20,4 +21,18 @@ use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
     use ChoosesName;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isOptionAvailable($name)
+    {
+        try {
+            $this->chooseName($name);
+
+            return true;
+        } catch (ElementNotFoundException $exception) {
+            return false;
+        }
+    }
 }
