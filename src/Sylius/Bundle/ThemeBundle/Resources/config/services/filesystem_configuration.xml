@@ -29,7 +29,7 @@
                 <argument type="service" id="sylius.context.theme" />
             </call>
             <call method="isContextAware">
-                <argument>%sylius.theme.context.context_aware_paths%</argument>
+                <argument>%sylius.theme.configuration.context.context_aware_paths%</argument>
             </call>
         </service>
 

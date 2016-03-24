@@ -44,7 +44,7 @@ class SyliusThemeExtension extends AbstractResourceExtension
         $container->setAlias('sylius.theme.configuration.loader', 'sylius.theme.configuration.loader.json_file');
         $container->setAlias('sylius.theme.configuration.provider', 'sylius.theme.configuration.provider.filesystem');
         $container->setParameter('sylius.theme.configuration.filesystem.locations', $config['sources']['filesystem']['locations']);
-        $container->setParameter('sylius.theme.context.context_aware_paths', $config['context']['context_aware_paths']);
+        $container->setParameter('sylius.theme.configuration.context.context_aware_paths', $config['context']['context_aware_paths']);
 
         $loader->load(sprintf('driver/%s.xml', $config['driver']));
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
