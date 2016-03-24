@@ -81,7 +81,7 @@ class ManagingTaxCategoryContextSpec extends ObjectBehavior
         $taxCategoryIndexPage->isResourceOnPage(['code' => 'alcohol'])->willReturn(true);
 
         $this
-            ->shouldThrow(new \InvalidArgumentException("Tax category with code alcohol exists but should not"))
+            ->shouldThrow(new \InvalidArgumentException("Tax category with code alcohol exists but should not."))
             ->during('thisTaxCategoryShouldNoLongerExistInTheRegistry', [$taxCategory])
         ;
     }
@@ -98,7 +98,10 @@ class ManagingTaxCategoryContextSpec extends ObjectBehavior
     {
         $notificationAccessor->hasSuccessMessage()->willReturn(false);
 
-        $this->shouldThrow(new \InvalidArgumentException('Message type is not positive'))->during('iShouldBeNotifiedAboutSuccessfulDeletion', []);
+        $this
+            ->shouldThrow(new \InvalidArgumentException('Message type is not positive.'))
+            ->during('iShouldBeNotifiedAboutSuccessfulDeletion', [])
+        ;
     }
 
     function it_throws_an_exception_if_the_message_on_a_page_is_not_related_to_deletion(NotificationAccessorInterface $notificationAccessor)
@@ -106,7 +109,10 @@ class ManagingTaxCategoryContextSpec extends ObjectBehavior
         $notificationAccessor->hasSuccessMessage()->willReturn(true);
         $notificationAccessor->isSuccessfullyDeletedFor('tax_category')->willReturn(false);
 
-        $this->shouldThrow(new \InvalidArgumentException('Successful deletion message does not appear'))->during('iShouldBeNotifiedAboutSuccessfulDeletion', []);
+        $this
+            ->shouldThrow(new \InvalidArgumentException('Successful deletion message does not appear.'))
+            ->during('iShouldBeNotifiedAboutSuccessfulDeletion', [])
+        ;
     }
 
     function it_opens_a_create_page(CreatePageInterface $taxCategoryCreatePage)
@@ -178,7 +184,7 @@ class ManagingTaxCategoryContextSpec extends ObjectBehavior
         $taxCategory->getDescription()->willReturn('Best stuff to get wasted in town');
 
         $this
-            ->shouldThrow(new \InvalidArgumentException('Tax category with code food_and_beverage was found, but fields are not assigned properly'))
+            ->shouldThrow(new \InvalidArgumentException('Tax category with code food_and_beverage was found, but fields are not assigned properly.'))
             ->during('thisTaxCategoryShouldAppearInTheRegistry', [$taxCategory])
         ;
     }
@@ -196,7 +202,7 @@ class ManagingTaxCategoryContextSpec extends ObjectBehavior
         $notificationAccessor->hasSuccessMessage()->willReturn(false);
 
         $this
-            ->shouldThrow(new \InvalidArgumentException('Message type is not positive'))
+            ->shouldThrow(new \InvalidArgumentException('Message type is not positive.'))
             ->during('iShouldBeNotifiedAboutSuccessfulCreation', [])
         ;
     }
@@ -207,7 +213,7 @@ class ManagingTaxCategoryContextSpec extends ObjectBehavior
         $notificationAccessor->isSuccessfullyCreatedFor('tax_category')->willReturn(false);
 
         $this
-            ->shouldThrow(new \InvalidArgumentException('Successful creation message does not appear'))
+            ->shouldThrow(new \InvalidArgumentException('Successful creation message does not appear.'))
             ->during('iShouldBeNotifiedAboutSuccessfulCreation', [])
         ;
     }
@@ -232,7 +238,7 @@ class ManagingTaxCategoryContextSpec extends ObjectBehavior
         $taxCategoryUpdatePage->isCodeDisabled()->willReturn(false);
 
         $this
-            ->shouldThrow(new \InvalidArgumentException('Code should be immutable, but it does not'))
+            ->shouldThrow(new \InvalidArgumentException('Code should be immutable, but it does not.'))
             ->during('theCodeFieldShouldBeDisabled')
         ;
     }
@@ -257,7 +263,7 @@ class ManagingTaxCategoryContextSpec extends ObjectBehavior
         $notificationAccessor->hasSuccessMessage()->willReturn(false);
 
         $this
-            ->shouldThrow(new \InvalidArgumentException('Message type is not positive'))
+            ->shouldThrow(new \InvalidArgumentException('Message type is not positive.'))
             ->during('iShouldBeNotifiedAboutSuccessfulEdition', [])
         ;
     }
@@ -268,7 +274,7 @@ class ManagingTaxCategoryContextSpec extends ObjectBehavior
         $notificationAccessor->isSuccessfullyUpdatedFor('tax_category')->willReturn(false);
 
         $this
-            ->shouldThrow(new \InvalidArgumentException('Successful edition message does not appear'))
+            ->shouldThrow(new \InvalidArgumentException('Successful edition message does not appear.'))
             ->during('iShouldBeNotifiedAboutSuccessfulEdition', [])
         ;
     }
@@ -291,7 +297,7 @@ class ManagingTaxCategoryContextSpec extends ObjectBehavior
         ])->willReturn(false);
 
         $this
-            ->shouldThrow(new \InvalidArgumentException('Tax category name was not assigned properly'))
+            ->shouldThrow(new \InvalidArgumentException('Tax category name was not assigned properly.'))
             ->during('thisTaxCategoryNameShouldBe', ['Food and Beverage'])
         ;
     }
@@ -308,7 +314,7 @@ class ManagingTaxCategoryContextSpec extends ObjectBehavior
         $taxCategoryCreatePage->checkValidationMessageFor('code', 'The tax category with given code already exists.')->willReturn(false);
 
         $this
-            ->shouldThrow(new \InvalidArgumentException('Unique code violation message should appear on page, but it does not'))
+            ->shouldThrow(new \InvalidArgumentException('Unique code violation message should appear on page, but it does not.'))
             ->during('iShouldBeNotifiedThatTaxCategoryWithThisCodeAlreadyExists', [])
         ;
     }
@@ -327,7 +333,7 @@ class ManagingTaxCategoryContextSpec extends ObjectBehavior
         $taxCategoryIndexPage->isResourceOnPage(['code' => 'alcohol'])->willReturn(false);
 
         $this
-            ->shouldThrow(new \InvalidArgumentException('Tax category with code alcohol cannot be founded'))
+            ->shouldThrow(new \InvalidArgumentException('Tax category with code alcohol cannot be founded.'))
             ->during('thereShouldStillBeOnlyOneTaxCategoryWith', ['code', 'alcohol'])
         ;
     }
@@ -346,7 +352,7 @@ class ManagingTaxCategoryContextSpec extends ObjectBehavior
         $taxCategoryIndexPage->isResourceOnPage(['name' => 'Alcohol'])->willReturn(false);
 
         $this
-            ->shouldThrow(new \InvalidArgumentException('Tax category with name Alcohol cannot be founded'))
+            ->shouldThrow(new \InvalidArgumentException('Tax category with name Alcohol cannot be founded.'))
             ->during('thereShouldStillBeOneTaxCategoryWithName', ['Alcohol'])
         ;
     }
@@ -363,7 +369,7 @@ class ManagingTaxCategoryContextSpec extends ObjectBehavior
         $taxCategoryCreatePage->checkValidationMessageFor('code', 'Please enter tax category code.')->willReturn(false);
 
         $this
-            ->shouldThrow(new \InvalidArgumentException('Tax category code should be required'))
+            ->shouldThrow(new \InvalidArgumentException('Tax category code should be required.'))
             ->during('iShouldBeNotifiedThatIsRequired', ['code'])
         ;
     }
@@ -382,7 +388,7 @@ class ManagingTaxCategoryContextSpec extends ObjectBehavior
         $taxCategoryIndexPage->isResourceOnPage(['name' => 'Food and Beverage'])->willReturn(true);
 
         $this
-            ->shouldThrow(new \InvalidArgumentException('Tax category with name Food and Beverage was created, but it should not'))
+            ->shouldThrow(new \InvalidArgumentException('Tax category with name Food and Beverage was created, but it should not.'))
             ->during('taxCategoryNamedShouldNotBeAdded', ['name', 'Food and Beverage'])
         ;
     }

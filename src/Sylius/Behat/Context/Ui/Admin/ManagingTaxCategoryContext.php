@@ -80,7 +80,7 @@ final class ManagingTaxCategoryContext implements Context
     {
         Assert::false(
             $this->taxCategoryIndexPage->isResourceOnPage(['code' => $taxCategory->getCode()]),
-            sprintf('Tax category with code %s exists but should not', $taxCategory->getCode())
+            sprintf('Tax category with code %s exists but should not.', $taxCategory->getCode())
         );
     }
 
@@ -91,12 +91,12 @@ final class ManagingTaxCategoryContext implements Context
     {
         Assert::true(
             $this->notificationAccessor->hasSuccessMessage(),
-            'Message type is not positive'
+            'Message type is not positive.'
         );
 
         Assert::true(
             $this->notificationAccessor->isSuccessfullyDeletedFor(self::RESOURCE_NAME),
-            'Successful deletion message does not appear'
+            'Successful deletion message does not appear.'
         );
     }
 
@@ -151,7 +151,7 @@ final class ManagingTaxCategoryContext implements Context
                     'description' => $taxCategory->getDescription(),
                 ]
             ),
-            sprintf('Tax category with code %s was found, but fields are not assigned properly', $taxCategory->getCode())
+            sprintf('Tax category with code %s was found, but fields are not assigned properly.', $taxCategory->getCode())
         );
     }
 
@@ -170,12 +170,12 @@ final class ManagingTaxCategoryContext implements Context
     {
         Assert::true(
             $this->notificationAccessor->hasSuccessMessage(),
-            'Message type is not positive'
+            'Message type is not positive.'
         );
 
         Assert::true(
             $this->notificationAccessor->isSuccessfullyCreatedFor(self::RESOURCE_NAME),
-            'Successful creation message does not appear'
+            'Successful creation message does not appear.'
         );
     }
 
@@ -204,7 +204,7 @@ final class ManagingTaxCategoryContext implements Context
     {
         Assert::true(
             $this->taxCategoryUpdatePage->isCodeDisabled(),
-            'Code should be immutable, but it does not'
+            'Code should be immutable, but it does not.'
         );
     }
 
@@ -215,12 +215,12 @@ final class ManagingTaxCategoryContext implements Context
     {
         Assert::true(
             $this->notificationAccessor->hasSuccessMessage(),
-            'Message type is not positive'
+            'Message type is not positive.'
         );
 
         Assert::true(
             $this->notificationAccessor->isSuccessfullyUpdatedFor(self::RESOURCE_NAME),
-            'Successful edition message does not appear'
+            'Successful edition message does not appear.'
         );
     }
 
@@ -231,7 +231,7 @@ final class ManagingTaxCategoryContext implements Context
     {
         Assert::true(
             $this->taxCategoryUpdatePage->hasResourceValues(['name' => $taxCategoryName]),
-            'Tax category name was not assigned properly'
+            'Tax category name was not assigned properly.'
         );
     }
 
@@ -242,7 +242,7 @@ final class ManagingTaxCategoryContext implements Context
     {
         Assert::true(
             $this->taxCategoryCreatePage->checkValidationMessageFor('code', 'The tax category with given code already exists.'),
-            'Unique code violation message should appear on page, but it does not'
+            'Unique code violation message should appear on page, but it does not.'
         );
     }
 
@@ -254,7 +254,7 @@ final class ManagingTaxCategoryContext implements Context
         $this->taxCategoryIndexPage->open();
         Assert::true(
             $this->taxCategoryIndexPage->isResourceOnPage([$element => $code]),
-            sprintf('Tax category with %s %s cannot be founded', $element, $code)
+            sprintf('Tax category with %s %s cannot be founded.', $element, $code)
         );
     }
 
@@ -265,7 +265,7 @@ final class ManagingTaxCategoryContext implements Context
     {
         Assert::true(
             $this->taxCategoryCreatePage->checkValidationMessageFor($element, sprintf('Please enter tax category %s.', $element)),
-            sprintf('Tax category %s should be required', $element)
+            sprintf('Tax category %s should be required.', $element)
         );
     }
 
@@ -277,7 +277,7 @@ final class ManagingTaxCategoryContext implements Context
         $this->taxCategoryIndexPage->open();
         Assert::false(
             $this->taxCategoryIndexPage->isResourceOnPage([$element => $name]),
-            sprintf('Tax category with %s %s was created, but it should not', $element, $name)
+            sprintf('Tax category with %s %s was created, but it should not.', $element, $name)
         );
     }
 
