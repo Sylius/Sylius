@@ -3,5 +3,27 @@
 
 imports:
     - { resource: parameters.yml }
-    - { resource: @SyliusCoreBundle/Resources/config/app/config.yml }
+
+    - { resource: common/assetic.yml }
+    - { resource: common/cmf.yml }
+    - { resource: common/doctrine.yml }
+    - { resource: common/doctrine_cache.yml }
+    - { resource: common/doctrine_migrations.yml }
+    - { resource: common/doctrine_phpcr.yml }
+    - { resource: common/fos_rest.yml }
+    - { resource: common/framework.yml }
+    - { resource: common/hwio_auth.yml }
+    - { resource: common/jms_serializer.yml }
+    - { resource: common/knp_gaufrette.yml }
+    - { resource: common/knp_snappy.yml }
+    - { resource: common/liip_imagine.yml }
+    - { resource: common/payum.yml }
+    - { resource: common/security.yml }
+    - { resource: common/sonata_block.yml }
+    - { resource: common/stof_doctrine_extensions.yml }
+    - { resource: common/swiftmailer.yml }
+    - { resource: common/sylius.yml }
+    - { resource: common/twig.yml }
+    - { resource: common/winzou_state_machine.yml }
+
     - { resource: @SyliusAdminBundle/Resources/config/grids.yml }
