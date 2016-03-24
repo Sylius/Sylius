@@ -12,7 +12,8 @@
 namespace Sylius\Bundle\ThemeBundle\Locator;
 
 use Sylius\Bundle\ThemeBundle\Factory\FinderFactoryInterface;
-use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
+use Sylius\Bundle\ThemeBundle\Helper\PathHelperInterface;
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Finder\SplFileInfo;
 
 /**
@@ -32,23 +33,20 @@ final class RecursiveFileLocator implements FileLocatorInterface
     private $paths;
 
     /**
-     * @var ThemeContextInterface|null
+     * @var PathHelperInterface
      */
-    private $themeContext;
-
-    /**
-     * @var bool
-     */
-    private $isContextAware;
+    private $helper;
 
     /**
      * @param FinderFactoryInterface $finderFactory
      * @param array                  $paths         An array of paths where to look for resources
+     * @param PathHelperInterface    $helper
      */
-    public function __construct(FinderFactoryInterface $finderFactory, array $paths)
+    public function __construct(FinderFactoryInterface $finderFactory, array $paths, PathHelperInterface $helper)
     {
         $this->finderFactory = $finderFactory;
         $this->paths = $paths;
+        $this->helper = $helper;
     }
 
     /**
@@ -68,26 +66,6 @@ final class RecursiveFileLocator implements FileLocatorInterface
     }
 
     /**
-     * Sets the Theme Context.
-     *
-     * @param ThemeContextInterface|null $themeContext Theme context
-     */
-    public function setThemeContext(ThemeContextInterface $themeContext = null)
-    {
-        $this->themeContext = $themeContext;
-    }
-
-    /**
-     * Is context aware path.
-     *
-     * @param bool Determines if the themes path should be context aware.
-     */
-    public function isContextAware($isContextAware = false)
-    {
-        $this->isContextAware = $isContextAware;
-    }
-
-    /**
      * @param string $name
      *
      * @return \Generator
@@ -95,7 +73,8 @@ final class RecursiveFileLocator implements FileLocatorInterface
     private function doLocateFilesNamed($name)
     {
         $this->assertNameIsNotEmpty($name);
-        $this->applySuffixForPaths();
+
+        $this->paths = $this->helper->applySuffixFor($this->paths);
         $found = false;
         foreach ($this->paths as $path) {
             try {
@@ -135,22 +114,5 @@ final class RecursiveFileLocator implements FileLocatorInterface
                 'An empty file name is not valid to be located.'
             );
         }
-    }
-
-    private function applySuffixForPaths()
-    {
-        if (!$this->isContextAware ||
-            !isset($this->themeContext) ||
-            null === $this->themeContext->getName()
-        ) {
-            return;
-        }
-
-        $paths = [];
-        foreach ($this->paths as $path) {
-            $paths[] = rtrim($path, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$this->themeContext->getName();
-        }
-
-        $this->paths = $paths;
     }
 }

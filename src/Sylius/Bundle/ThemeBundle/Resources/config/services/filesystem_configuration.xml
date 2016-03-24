@@ -25,12 +25,7 @@
         <service id="sylius.theme.recursive_file_locator" class="%sylius.theme.recursive_file_locator.class%" public="false">
             <argument type="service" id="sylius.theme.finder_factory" />
             <argument>%sylius.theme.configuration.filesystem.locations%</argument>
-            <call method="setThemeContext">
-                <argument type="service" id="sylius.context.theme" />
-            </call>
-            <call method="isContextAware">
-                <argument>%sylius.theme.configuration.context.context_aware_paths%</argument>
-            </call>
+            <argument type="service" id="sylius.theme.path_helper" />
         </service>
 
         <!-- TODO: json_file.processing as decorator (some bug :/) -->
