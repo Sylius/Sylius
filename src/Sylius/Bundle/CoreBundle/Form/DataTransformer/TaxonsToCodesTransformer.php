@@ -65,6 +65,10 @@ class TaxonsToCodesTransformer implements DataTransformerInterface
             return [];
         }
 
+        if (!is_array($value->get('taxons'))) {
+            throw new \InvalidArgumentException('"taxons" element of collection should be an array.');
+        }
+
         $taxons = [];
         /** @var TaxonInterface $taxon */
         foreach ($value->get('taxons') as $taxon) {

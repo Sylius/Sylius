@@ -76,7 +76,7 @@ class TaxonsToCodesTransformerSpec extends ObjectBehavior
         ;
     }
 
-    function it_reverse_transforms_taxons_collection_into_taxons_ids_and_names_array(
+    function it_reverse_transforms_into_array_of_taxons_codes(
         TaxonInterface $axes,
         TaxonInterface $shields
     ) {
@@ -105,6 +105,14 @@ class TaxonsToCodesTransformerSpec extends ObjectBehavior
     function it_returns_empty_array_if_passed_collection_has_no_taxon_element()
     {
         $this->reverseTransform(new ArrayCollection(['test' => ['test']]))->shouldReturn([]);
+    }
+
+    function it_throws_exception_while_reverse_transform_if_taxons_element_is_not_an_array(TaxonInterface $axes)
+    {
+        $this
+            ->shouldThrow(new \InvalidArgumentException('"taxons" element of collection should be an array.'))
+            ->during('reverseTransform', [new ArrayCollection(['taxons' => $axes->getWrappedObject()])])
+        ;
     }
 
     /**
