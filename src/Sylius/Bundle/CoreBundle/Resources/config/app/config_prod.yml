@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+framework:
+    router:
+        strict_requirements: null
+
+monolog:
+    handlers:
+        main:
+            type: fingers_crossed
+            action_level: error
+            handler: nested
+        nested:
+            type: stream
+            path: %kernel.logs_dir%/%kernel.environment%.log
+            level: debug

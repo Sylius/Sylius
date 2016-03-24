@@ -1,21 +1,24 @@
-imports:
-    - { resource: assetic.yml }
-    - { resource: cmf.yml }
-    - { resource: doctrine.yml }
-    - { resource: doctrine_migrations.yml }
-    - { resource: doctrine_phpcr.yml }
-    - { resource: fos_rest.yml }
-    - { resource: framework.yml }
-    - { resource: jms_serializer.yml }
-    - { resource: knp_gaufrette.yml }
-    - { resource: knp_snappy.yml }
-    - { resource: liip_imagine.yml }
-    - { resource: payum.yml }
-    - { resource: security.yml }
-    - { resource: sonata_block.yml }
-    - { resource: stof_doctrine_extensions.yml }
-    - { resource: swiftmailer.yml }
-    - { resource: sylius.yml }
-    - { resource: twig.yml }
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
 
-    - { resource: ../state_machine.yml }
+imports:
+    - { resource: default/assetic.yml }
+    - { resource: default/cmf.yml }
+    - { resource: default/doctrine.yml }
+    - { resource: default/doctrine_cache.yml }
+    - { resource: default/doctrine_migrations.yml }
+    - { resource: default/doctrine_phpcr.yml }
+    - { resource: default/fos_rest.yml }
+    - { resource: default/framework.yml }
+    - { resource: default/jms_serializer.yml }
+    - { resource: default/knp_gaufrette.yml }
+    - { resource: default/knp_snappy.yml }
+    - { resource: default/liip_imagine.yml }
+    - { resource: default/payum.yml }
+    - { resource: default/security.yml }
+    - { resource: default/sonata_block.yml }
+    - { resource: default/stof_doctrine_extensions.yml }
+    - { resource: default/swiftmailer.yml }
+    - { resource: default/sylius.yml }
+    - { resource: default/twig.yml }
+    - { resource: default/winzou_state_machine.yml }
