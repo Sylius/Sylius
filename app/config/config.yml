@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 imports:
-    - { resource: parameters.yml }
+    - { resource: parameters.yml, ignore_errors: true }
 
     - { resource: common/assetic.yml }
     - { resource: common/cmf.yml }
