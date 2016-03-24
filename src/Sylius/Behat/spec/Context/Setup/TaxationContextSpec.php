@@ -17,6 +17,7 @@ use Sylius\Behat\Context\Setup\TaxationContext;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
 use Sylius\Component\Core\Model\TaxRateInterface;
+use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
@@ -30,6 +31,7 @@ use Sylius\Component\Taxation\Repository\TaxCategoryRepositoryInterface;
 class TaxationContextSpec extends ObjectBehavior
 {
     function let(
+        SharedStorageInterface $sharedStorage,
         FactoryInterface $taxRateFactory,
         FactoryInterface $taxCategoryFactory,
         RepositoryInterface $taxRateRepository,
@@ -37,6 +39,7 @@ class TaxationContextSpec extends ObjectBehavior
         ZoneRepositoryInterface $zoneRepository
     ) {
         $this->beConstructedWith(
+            $sharedStorage,
             $taxRateFactory,
             $taxCategoryFactory,
             $taxRateRepository,
@@ -88,6 +91,7 @@ class TaxationContextSpec extends ObjectBehavior
     }
 
     function it_creates_a_tax_category_with_name_and_code(
+        SharedStorageInterface $sharedStorage,
         TaxCategoryInterface $taxCategory,
         TaxCategoryRepositoryInterface $taxCategoryRepository,
         FactoryInterface $taxCategoryFactory
@@ -97,6 +101,8 @@ class TaxationContextSpec extends ObjectBehavior
         $taxCategory->setName('Alcohol')->shouldBeCalled();
         $taxCategory->setCode('alcohol')->shouldBeCalled();
         $taxCategoryRepository->add($taxCategory)->shouldBeCalled();
+
+        $sharedStorage->set('tax_category', $taxCategory)->shouldBeCalled();
 
         $this->theStoreHasTaxCategoryWithCode('Alcohol', 'alcohol');
     }

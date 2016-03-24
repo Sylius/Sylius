@@ -15,8 +15,9 @@ use Behat\Behat\Context\Context;
 use PhpSpec\ObjectBehavior;
 use Sylius\Behat\Context\Ui\Admin\ManagingTaxCategoryContext;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
+use Sylius\Behat\Page\Admin\TaxCategory\CreatePageInterface;
+use Sylius\Behat\Page\Admin\TaxCategory\UpdatePageInterface;
 use Sylius\Behat\Service\Accessor\NotificationAccessorInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 /**
@@ -27,11 +28,17 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 class ManagingTaxCategoryContextSpec extends ObjectBehavior
 {
     function let(
-        SharedStorageInterface $sharedStorage,
-        IndexPageInterface $taxCategoryIndexPage,
+        IndexPageInterface $indexPage,
+        CreatePageInterface $createPage,
+        UpdatePageInterface $updatePage,
         NotificationAccessorInterface $notificationAccessor
     ) {
-        $this->beConstructedWith($sharedStorage, $taxCategoryIndexPage, $notificationAccessor);
+        $this->beConstructedWith(
+            $indexPage,
+            $createPage,
+            $updatePage,
+            $notificationAccessor
+        );
     }
 
     function it_is_initializable()
@@ -45,38 +52,36 @@ class ManagingTaxCategoryContextSpec extends ObjectBehavior
     }
 
     function it_deletes_a_tax_cateogory(
-        IndexPageInterface $taxCategoryIndexPage,
-        SharedStorageInterface $sharedStorage,
+        IndexPageInterface $indexPage,
         TaxCategoryInterface $taxCategory
     ) {
         $taxCategory->getCode()->willReturn('alcohol');
 
-        $taxCategoryIndexPage->deleteResourceOnPage(['code' => 'alcohol'])->shouldBeCalled();
-        $taxCategoryIndexPage->open()->shouldBeCalled();
-        $sharedStorage->set('tax_category', $taxCategory)->shouldBeCalled();
+        $indexPage->deleteResourceOnPage(['code' => 'alcohol'])->shouldBeCalled();
+        $indexPage->open()->shouldBeCalled();
 
         $this->iDeletedTaxCategory($taxCategory);
     }
 
     function it_checks_if_a_tax_category_does_not_exist_in_the_registry_anymore(
         TaxCategoryInterface $taxCategory,
-        IndexPageInterface $taxCategoryIndexPage
+        IndexPageInterface $indexPage
     ) {
         $taxCategory->getCode()->willReturn('alcohol');
-        $taxCategoryIndexPage->isResourceOnPage(['code' => 'alcohol'])->willReturn(false);
+        $indexPage->isResourceOnPage(['code' => 'alcohol'])->willReturn(false);
 
         $this->thisTaxCategoryShouldNoLongerExistInTheRegistry($taxCategory);
     }
 
     function it_throws_an_exception_if_a_tax_category_still_exist_in_the_registry(
         TaxCategoryInterface $taxCategory,
-        IndexPageInterface $taxCategoryIndexPage
+        IndexPageInterface $indexPage
     ) {
         $taxCategory->getCode()->willReturn('alcohol');
-        $taxCategoryIndexPage->isResourceOnPage(['code' => 'alcohol'])->willReturn(true);
+        $indexPage->isResourceOnPage(['code' => 'alcohol'])->willReturn(true);
 
         $this
-            ->shouldThrow(new \InvalidArgumentException("Tax category with code alcohol exists but should not"))
+            ->shouldThrow(new \InvalidArgumentException("Tax category with code alcohol exists but should not."))
             ->during('thisTaxCategoryShouldNoLongerExistInTheRegistry', [$taxCategory])
         ;
     }
@@ -89,18 +94,273 @@ class ManagingTaxCategoryContextSpec extends ObjectBehavior
         $this->iShouldBeNotifiedAboutSuccessfulDeletion();
     }
 
-    function it_throws_an_exception_if_the_page_does_not_have_success_message(NotificationAccessorInterface $notificationAccessor)
-    {
+    function it_throws_an_exception_if_the_page_does_not_have_success_message(
+        NotificationAccessorInterface $notificationAccessor
+    ) {
         $notificationAccessor->hasSuccessMessage()->willReturn(false);
 
-        $this->shouldThrow(new \InvalidArgumentException('Message type is not positive'))->during('iShouldBeNotifiedAboutSuccessfulDeletion', []);
+        $this
+            ->shouldThrow(new \InvalidArgumentException('Message type is not positive.'))
+            ->during('iShouldBeNotifiedAboutSuccessfulDeletion', [])
+        ;
     }
 
-    function it_throws_an_exception_if_the_message_on_a_page_is_not_related_to_deletion(NotificationAccessorInterface $notificationAccessor)
-    {
+    function it_throws_an_exception_if_the_message_on_a_page_is_not_related_to_deletion(
+        NotificationAccessorInterface $notificationAccessor
+    ) {
         $notificationAccessor->hasSuccessMessage()->willReturn(true);
         $notificationAccessor->isSuccessfullyDeletedFor('tax_category')->willReturn(false);
 
-        $this->shouldThrow(new \InvalidArgumentException('Successful deletion message does not appear'))->during('iShouldBeNotifiedAboutSuccessfulDeletion', []);
+        $this
+            ->shouldThrow(new \InvalidArgumentException('Successful deletion message does not appear.'))
+            ->during('iShouldBeNotifiedAboutSuccessfulDeletion', [])
+        ;
+    }
+
+    function it_opens_a_create_page(CreatePageInterface $createPage)
+    {
+        $createPage->open()->shouldBeCalled();
+
+        $this->iWantToCreateNewTaxCategory();
+    }
+
+    function it_specifies_tax_category_code(CreatePageInterface $createPage)
+    {
+        $createPage->specifyCode('food_and_beverage')->shouldBeCalled();
+
+        $this->iSpecifyItsCodeAs('food_and_beverage');
+    }
+
+    function it_specifies_tax_category_name(CreatePageInterface $createPage)
+    {
+        $createPage->nameIt('Food and Beverage')->shouldBeCalled();
+
+        $this->iNameIt('Food and Beverage');
+    }
+
+    function it_specifies_tax_category_description(CreatePageInterface $createPage)
+    {
+        $createPage->describeItAs('Best stuff to get wasted in town')->shouldBeCalled();
+
+        $this->iDescribeItAs('Best stuff to get wasted in town');
+    }
+
+    function it_creates_a_resource(CreatePageInterface $createPage)
+    {
+        $createPage->create()->shouldBeCalled();
+
+        $this->iAddIt();
+    }
+
+    function it_asserts_if_a_resource_was_successfully_created(IndexPageInterface $indexPage) {
+        $indexPage->open()->shouldBeCalled();
+        $indexPage->isResourceOnPage(['name' => 'Food and Beverage'])->willReturn(true);
+
+        $this->theTaxCategoryShouldAppearInTheRegistry('Food and Beverage');
+    }
+
+    function it_throws_an_exception_if_resource_does_not_have_proper_fields_filled(IndexPageInterface $indexPage) {
+        $indexPage->open()->shouldBeCalled();
+        $indexPage->isResourceOnPage(['name' => 'Food and Beverage'])->willReturn(false);
+
+        $this
+            ->shouldThrow(new \InvalidArgumentException('Tax category with name Food and Beverage has not been found.'))
+            ->during('theTaxCategoryShouldAppearInTheRegistry', ['Food and Beverage'])
+        ;
+    }
+
+    function it_checks_if_a_resource_was_successfully_created(NotificationAccessorInterface $notificationAccessor)
+    {
+        $notificationAccessor->hasSuccessMessage()->willReturn(true);
+        $notificationAccessor->isSuccessfullyCreatedFor('tax_category')->willReturn(true);
+
+        $this->iShouldBeNotifiedItHasBeenSuccessfulCreation();
+    }
+
+    function it_throws_an_exception_if_the_creation_page_does_not_have_success_message(
+        NotificationAccessorInterface $notificationAccessor
+    ) {
+        $notificationAccessor->hasSuccessMessage()->willReturn(false);
+
+        $this
+            ->shouldThrow(new \InvalidArgumentException('Message type is not positive.'))
+            ->during('iShouldBeNotifiedItHasBeenSuccessfulCreation', [])
+        ;
+    }
+
+    function it_throws_an_exception_if_the_message_on_a_page_is_not_related_to_creation(
+        NotificationAccessorInterface $notificationAccessor
+    ) {
+        $notificationAccessor->hasSuccessMessage()->willReturn(true);
+        $notificationAccessor->isSuccessfullyCreatedFor('tax_category')->willReturn(false);
+
+        $this
+            ->shouldThrow(new \InvalidArgumentException('Successful creation message does not appear.'))
+            ->during('iShouldBeNotifiedItHasBeenSuccessfulCreation', [])
+        ;
+    }
+
+    function it_opens_an_update_page(UpdatePageInterface $updatePage, TaxCategoryInterface $taxCategory)
+    {
+        $taxCategory->getId()->willReturn(1);
+        $updatePage->open(['id' => 1])->shouldBeCalled();
+
+        $this->iWantToModifyTaxCategory($taxCategory);
+    }
+
+    function it_checks_if_the_code_cannot_be_changed(UpdatePageInterface $updatePage)
+    {
+        $updatePage->isCodeDisabled()->willReturn(true);
+
+        $this->theCodeFieldShouldBeDisabled();
+    }
+
+    function it_throws_an_exception_if_the_code_field_is_not_immutable(UpdatePageInterface $updatePage)
+    {
+        $updatePage->isCodeDisabled()->willReturn(false);
+
+        $this
+            ->shouldThrow(new \InvalidArgumentException('Code should be immutable, but it does not.'))
+            ->during('theCodeFieldShouldBeDisabled')
+        ;
+    }
+
+    function it_saves_changes(UpdatePageInterface $updatePage)
+    {
+        $updatePage->saveChanges()->shouldBeCalled();
+
+        $this->iSaveMyChanges();
+    }
+
+    function it_checks_if_a_resource_was_successfully_updated(NotificationAccessorInterface $notificationAccessor)
+    {
+        $notificationAccessor->hasSuccessMessage()->willReturn(true);
+        $notificationAccessor->isSuccessfullyUpdatedFor('tax_category')->willReturn(true);
+
+        $this->iShouldBeNotifiedAboutSuccessfulEdition();
+    }
+
+    function it_throws_an_exception_if_the_updation_page_does_not_have_success_message(
+        NotificationAccessorInterface $notificationAccessor
+    ) {
+        $notificationAccessor->hasSuccessMessage()->willReturn(false);
+
+        $this
+            ->shouldThrow(new \InvalidArgumentException('Message type is not positive.'))
+            ->during('iShouldBeNotifiedAboutSuccessfulEdition', [])
+        ;
+    }
+
+    function it_throws_an_exception_if_the_message_on_a_page_is_not_related_to_edition(
+        NotificationAccessorInterface $notificationAccessor
+    ) {
+        $notificationAccessor->hasSuccessMessage()->willReturn(true);
+        $notificationAccessor->isSuccessfullyUpdatedFor('tax_category')->willReturn(false);
+
+        $this
+            ->shouldThrow(new \InvalidArgumentException('Successful edition message does not appear.'))
+            ->during('iShouldBeNotifiedAboutSuccessfulEdition', [])
+        ;
+    }
+
+    function it_asserts_if_a_resource_was_successfully_updated(
+        IndexPageInterface $indexPage,
+        TaxCategoryInterface $taxCategory
+    ) {
+        $indexPage->open()->shouldBeCalled();
+        $indexPage->isResourceOnPage(['code' => 'food_and_beverage', 'name' => 'Food and Beverage'])->willReturn(true);
+
+        $taxCategory->getCode()->willReturn('food_and_beverage');
+
+        $this->thisTaxCategoryNameShouldBe($taxCategory, 'Food and Beverage');
+    }
+
+    function resource_has_incorrectly_filled_fields_after_edition(
+        IndexPageInterface $indexPage,
+        TaxCategoryInterface $taxCategory
+    ) {
+        $indexPage->open()->shouldBeCalled();
+        $indexPage->isResourceOnPage(['code' => 'food_and_beverage', 'name' => 'Food and Beverage'])->willReturn(false);
+
+        $taxCategory->getCode()->willReturn('food_and_beverage');
+
+        $this
+            ->shouldThrow(new \InvalidArgumentException('Tax category name Food and Beverage was not assigned properly.'))
+            ->during('thisTaxCategoryNameShouldBe', [$taxCategory, 'Food and Beverage'])
+        ;
+    }
+
+    function it_checks_if_a_resource_was_not_created_because_of_unique_code_violation(CreatePageInterface $createPage)
+    {
+        $createPage->checkValidationMessageFor('code', 'The tax category with given code already exists.')->willReturn(true);
+
+        $this->iShouldBeNotifiedThatTaxCategoryWithThisCodeAlreadyExists();
+    }
+
+    function it_throws_an_exception_if_the_message_on_a_page_is_not_related_to_unique_code_validation(
+        CreatePageInterface $createPage
+    ) {
+        $createPage->checkValidationMessageFor('code', 'The tax category with given code already exists.')->willReturn(false);
+
+        $this
+            ->shouldThrow(new \InvalidArgumentException('Unique code violation message should appear on page, but it does not.'))
+            ->during('iShouldBeNotifiedThatTaxCategoryWithThisCodeAlreadyExists', [])
+        ;
+    }
+
+    function it_asserts_that_only_one_resource_with_given_code_exist(IndexPageInterface $indexPage)
+    {
+        $indexPage->open()->shouldBeCalled();
+        $indexPage->isResourceOnPage(['code' => 'alcohol'])->willReturn(true);
+
+        $this->thereShouldStillBeOnlyOneTaxCategoryWith('code', 'alcohol');
+    }
+
+    function it_throws_an_exception_if_not_only_one_resource_with_given_code_exist(IndexPageInterface $indexPage)
+    {
+        $indexPage->open()->shouldBeCalled();
+        $indexPage->isResourceOnPage(['code' => 'alcohol'])->willReturn(false);
+
+        $this
+            ->shouldThrow(new \InvalidArgumentException('Tax category with code alcohol cannot be founded.'))
+            ->during('thereShouldStillBeOnlyOneTaxCategoryWith', ['code', 'alcohol'])
+        ;
+    }
+
+    function it_checks_if_a_resource_was_not_created_because_of_required_code_violation(CreatePageInterface $createPage)
+    {
+        $createPage->checkValidationMessageFor('code', 'Please enter tax category code.')->willReturn(true);
+
+        $this->iShouldBeNotifiedThatIsRequired('code');
+    }
+
+    function it_throws_an_exception_if_the_message_on_a_page_is_not_related_to_required_code_validation(
+        CreatePageInterface $createPage
+    ) {
+        $createPage->checkValidationMessageFor('code', 'Please enter tax category code.')->willReturn(false);
+
+        $this
+            ->shouldThrow(new \InvalidArgumentException('Tax category code should be required.'))
+            ->during('iShouldBeNotifiedThatIsRequired', ['code'])
+        ;
+    }
+
+    function it_checks_that_any_resource_with_given_name_exist(IndexPageInterface $indexPage)
+    {
+        $indexPage->open()->shouldBeCalled();
+        $indexPage->isResourceOnPage(['name' => 'Food and Beverage'])->willReturn(false);
+
+        $this->taxCategoryWithElementValueShouldNotBeAdded('name', 'Food and Beverage');
+    }
+
+    function it_throws_an_exception_if_resource_with_given_name_exist_but_it_should_not(IndexPageInterface $indexPage)
+    {
+        $indexPage->open()->shouldBeCalled();
+        $indexPage->isResourceOnPage(['name' => 'Food and Beverage'])->willReturn(true);
+
+        $this
+            ->shouldThrow(new \InvalidArgumentException('Tax category with name Food and Beverage was created, but it should not.'))
+            ->during('taxCategoryWithElementValueShouldNotBeAdded', ['name', 'Food and Beverage'])
+        ;
     }
 }

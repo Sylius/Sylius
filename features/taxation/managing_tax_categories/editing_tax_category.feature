@@ -5,26 +5,26 @@ Feature: Editing tax category
     I want to be able to edit tax category
 
     Background:
-        Given the store has "Alcohol" tax category with code "alcohol"
+        Given the store has a tax category "Alcohol" with a code "alcohol"
         And I am logged in as an administrator
 
     @todo
     Scenario: Trying to change tax category code
-        Given I want to modify tax category "Alcohol"
+        Given I want to modify a tax category "Alcohol"
         When I change its code to "beverages"
         And I save my changes
         Then I should be notified that code cannot be changed
         And tax category "Alcohol" should still have code "alcohol"
 
-    @todo
+    @ui
     Scenario: Seeing disabled code field when editing tax category
-        When I want to modify tax category "Alcohol"
+        When I want to modify a tax category "Alcohol"
         Then the code field should be disabled
 
-    @todo
+    @ui
     Scenario: Renaming the tax category
-        Given I want to modify tax category "Alcohol"
+        Given I want to modify a tax category "Alcohol"
         When I rename it to "Food & Alcohol"
         And I save my changes
-        Then I should be notified about success
+        Then I should be notified about successful edition
         And this tax category name should be "Food & Alcohol"
