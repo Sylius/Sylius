@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+jms_serializer:
+    metadata:
+        directories:
+            sylius-variation:
+                namespace_prefix: "Sylius\\Component\\Variation"
+                path: "@SyliusVariationBundle/Resources/config/serializer"

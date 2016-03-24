@@ -2,24 +2,24 @@
 # (c) Paweł Jędrzejewski
 
 imports:
-    - { resource: config.yml }
+    - { resource: "config.yml" }
+
+framework:
+    router: { resource: "%kernel.root_dir%/config/routing_dev.yml" }
+    profiler: { only_exceptions: false }
 
 assetic:
     use_controller: true
 
 doctrine:
     dbal:
-        dbname: %database_name%_dev
-
-framework:
-    router: { resource: "%kernel.root_dir%/config/routing_dev.yml" }
-    profiler: { only_exceptions: false }
+        dbname: "%database_name%_dev"
 
 monolog:
     handlers:
         main:
             type: stream
-            path: %kernel.logs_dir%/%kernel.environment%.log
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
         firephp:
             type: firephp

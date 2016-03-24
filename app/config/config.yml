@@ -2,27 +2,56 @@
 # (c) Paweł Jędrzejewski
 
 imports:
-    - { resource: parameters.yml }
+    - { resource: "parameters.yml" }
+    - { resource: "security.yml" }
 
-    - { resource: common/assetic.yml }
-    - { resource: common/cmf.yml }
-    - { resource: common/doctrine.yml }
-    - { resource: common/doctrine_cache.yml }
-    - { resource: common/doctrine_migrations.yml }
-    - { resource: common/doctrine_phpcr.yml }
-    - { resource: common/fos_rest.yml }
-    - { resource: common/framework.yml }
-    - { resource: common/jms_serializer.yml }
-    - { resource: common/knp_gaufrette.yml }
-    - { resource: common/knp_snappy.yml }
-    - { resource: common/liip_imagine.yml }
-    - { resource: common/payum.yml }
-    - { resource: common/security.yml }
-    - { resource: common/sonata_block.yml }
-    - { resource: common/stof_doctrine_extensions.yml }
-    - { resource: common/swiftmailer.yml }
-    - { resource: common/sylius.yml }
-    - { resource: common/twig.yml }
-    - { resource: common/winzou_state_machine.yml }
+    - { resource: "@SyliusCoreBundle/Resources/config/config.yml" }
+    - { resource: "@SyliusWebBundle/Resources/config/config.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/config.yml" }
 
-    - { resource: "@SyliusAdminBundle/Resources/config/app/main.yml" }
+framework:
+    translator: { fallback: "%locale%" }
+    secret: "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: "%kernel.debug%"
+    form: true
+    csrf_protection: true
+    validation: { enable_annotations: true }
+    templating: { engines: ["twig"] }
+    default_locale: "%locale%"
+    trusted_proxies: ~
+    session:
+        handler_id: ~
+
+doctrine:
+    dbal:
+        driver: "%database_driver%"
+        host: "%database_host%"
+        port: "%database_port%"
+        dbname: "%database_name%"
+        user: "%database_user%"
+        password: "%database_password%"
+        charset: UTF8
+
+swiftmailer:
+    transport: "%mailer_transport%"
+    host: "%mailer_host%"
+    username: "%mailer_user%"
+    password: "%mailer_password%"
+
+twig:
+    form_themes:
+        - "SyliusWebBundle:Common:forms.html.twig"
+        - "SyliusResourceBundle::forms.html.twig"
+
+fos_rest:
+    view:
+        formats:
+            json: true
+            xml:  true
+        empty_content: 204
+    format_listener:
+        rules:
+            - { path: '^/api', priorities: ['json', 'xml'], fallback_format: json, prefer_extension: true }
+            - { path: '^/', stop: true }

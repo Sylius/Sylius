@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-use Sylius\Application\Kernel;
 use Symfony\Component\HttpFoundation\Request;
 
 /*
@@ -26,9 +25,9 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
 }
 
 require_once __DIR__.'/../app/bootstrap.php.cache';
-require_once __DIR__.'/../app/Kernel.php';
+require_once __DIR__.'/../app/AppKernel.php';
 
-$kernel = new Kernel('test_cached', false);
+$kernel = new AppKernel('test_cached', false);
 $kernel->loadClassCache();
 
 $request = Request::createFromGlobals();

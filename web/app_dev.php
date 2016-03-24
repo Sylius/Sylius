@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-use Sylius\Application\Kernel;
 use Symfony\Component\Debug\Debug;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -32,11 +31,11 @@ if (!getenv("SYLIUS_APP_DEV_PERMITTED") && (
 }
 
 require_once __DIR__.'/../app/bootstrap.php.cache';
-require_once __DIR__.'/../app/Kernel.php';
+require_once __DIR__.'/../app/AppKernel.php';
 
 Debug::enable();
 
-$kernel = new Kernel('dev', true);
+$kernel = new AppKernel('dev', true);
 
 $request = Request::createFromGlobals();
 

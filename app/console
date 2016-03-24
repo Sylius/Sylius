@@ -13,9 +13,8 @@
 set_time_limit(0);
 
 require_once __DIR__.'/bootstrap.php.cache';
-require_once __DIR__.'/Kernel.php';
+require_once __DIR__.'/AppKernel.php';
 
-use Sylius\Application\Kernel;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
 
@@ -23,5 +22,5 @@ $input = new ArgvInput();
 $env = $input->getParameterOption(array('--env', '-e'), getenv('SYMFONY_ENV') ?: 'dev');
 $debug = getenv('SYMFONY_DEBUG') !== '0' && !$input->hasParameterOption(array('--no-debug', '')) && $env !== 'live';
 
-$application = new Application(new Kernel($env, $debug));
+$application = new Application(new AppKernel($env, $debug));
 $application->run($input);

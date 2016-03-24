@@ -1,8 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-doctrine_migrations:
-    dir_name: @SyliusCoreBundle/Migrations
-    namespace: Sylius\Bundle\CoreBundle\Migrations
-    table_name: sylius_migrations
-    name: Sylius Migrations

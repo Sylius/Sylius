@@ -2,11 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 imports:
-    - { resource: config.yml }
-
-framework:
-    router:
-        strict_requirements: null
+    - { resource: "config.yml" }
 
 monolog:
     handlers:
@@ -16,5 +12,5 @@ monolog:
             handler: nested
         nested:
             type: stream
-            path: %kernel.logs_dir%/%kernel.environment%.log
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug

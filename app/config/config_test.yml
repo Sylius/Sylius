@@ -2,21 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 imports:
-    - { resource: config.yml }
+    - { resource: "config.yml" }
 
 parameters:
     sylius.order.allow_guest_order: true
-
-doctrine:
-    dbal:
-        dbname: %database_name%_test
-        path: %database_path%
-        driver_class: Sylius\Bundle\CoreBundle\Test\MySqlDriver
-
-doctrine_cache:
-    providers:
-        sylius_settings:
-            type: array
 
 framework:
     test: ~
@@ -24,11 +13,21 @@ framework:
     session:
         storage_id: session.storage.mock_file
 
+doctrine:
+    dbal:
+        dbname: "%database_name%_test"
+        driver_class: Sylius\Bundle\CoreBundle\Test\MySqlDriver
+
+doctrine_cache:
+    providers:
+        sylius_settings:
+            type: array
+
 monolog:
     handlers:
         main:
             type: stream
-            path: %kernel.logs_dir%/%kernel.environment%.log
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
             level: error
 
 payum:
@@ -43,21 +42,26 @@ payum:
 swiftmailer:
     disable_delivery: true
 
-sylius_money:
-    currency: EUR
-    locale: en_US
+sylius_channel:
+    fake_channel_support: true
 
 sylius_payment:
     gateways:
         cc: Credit Card
         test: Test
         stripe: Stripe
+        paypal_express_checkout: Paypal Express Checkout
 
 sylius_rbac:
     authorization_checker: sylius.authorization_checker.toggleable
 
-sylius_channel:
-    fake_channel_support: true
+sylius_money:
+    currency: EUR
+    locale: en_US
+
+sylius_theme:
+    sources:
+        test: ~
 
 twig:
-    exception_controller: 'Sylius\Bundle\CoreBundle\Controller\VerboseExceptionController::showAction'
+    exception_controller: "Sylius\\Bundle\\CoreBundle\\Controller\\VerboseExceptionController::showAction"

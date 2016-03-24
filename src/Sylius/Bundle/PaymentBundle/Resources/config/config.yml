@@ -1,0 +1,48 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+jms_serializer:
+    metadata:
+        directories:
+            sylius-payment:
+                namespace_prefix: "Sylius\\Component\\Payment"
+                path: "@SyliusPaymentBundle/Resources/config/serializer"
+
+winzou_state_machine:
+    sylius_payment:
+        class: "%sylius.model.payment.class%"
+        property_path: state
+        graph: sylius_payment
+        state_machine_class: "%sylius.state_machine.class%"
+        states:
+            new: ~
+            unknown: ~
+            pending: ~
+            processing: ~
+            completed: ~
+            failed: ~
+            cancelled: ~
+            void: ~
+            refunded: ~
+        transitions:
+            create:
+                from: [new]
+                to: pending
+            process:
+                from: [new, pending]
+                to: processing
+            complete:
+                from: [new, pending, processing]
+                to: completed
+            fail:
+                from: [new, pending, processing]
+                to: failed
+            cancel:
+                from: [new, pending, processing]
+                to: cancelled
+            refund:
+                from: [completed]
+                to: refunded
+            void:
+                from: [new, pending]
+                to: void

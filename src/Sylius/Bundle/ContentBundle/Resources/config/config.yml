@@ -1,0 +1,105 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+assetic:
+    bundles:
+        - "CmfCreateBundle"
+
+cmf_block:
+    persistence:
+        phpcr:
+            block_basepath: /cms/blocks
+            string_document_class: "%sylius.model.string_block.class%"
+            simple_document_class: "%sylius.model.simple_block.class%"
+            imagine_document_class: "%sylius.model.imagine_block.class%"
+            action_document_class: "%sylius.model.action_block.class%"
+            menu_document_class: "%sylius.model.menu_block.class%"
+            slideshow_document_class: "%sylius.model.slideshow_block.class%"
+
+cmf_content:
+    persistence:
+        phpcr:
+            content_basepath: /cms/pages
+            document_class: "%sylius.model.static_content.class%"
+    default_template: "SyliusWebBundle:Frontend/StaticContent:show.html.twig"
+
+cmf_core:
+    publish_workflow: true
+    persistence:
+        phpcr:
+            enabled: true
+
+cmf_create:
+    security:
+      role: ROLE_ADMINISTRATION_ACCESS
+    persistence:
+        phpcr:
+            image: false
+
+cmf_media:
+    persistence:
+        phpcr:
+            media_basepath: /cms/medias
+
+cmf_menu:
+    persistence:
+        phpcr:
+            menu_basepath: /cms/menus
+            menu_document_class: "%sylius.model.menu.class%"
+            node_document_class: "%sylius.model.menu_node.class%"
+
+cmf_routing:
+    chain:
+        routers_by_id:
+            router.default: 100
+            sylius.dynamic_router: 50
+            cmf_routing.dynamic_router: 20
+    dynamic:
+        generic_controller: "cmf_content.controller:indexAction"
+        persistence:
+            phpcr:
+                enabled: true
+                enable_initializer: true
+                route_basepath: /cms/routes
+
+doctrine_cache:
+    providers:
+        phpcr_meta: "%sylius.cache%"
+        phpcr_nodes: "%sylius.cache%"
+
+liip_imagine:
+    filter_sets:
+        slideshow_default:
+            data_loader: cmf_media_doctrine_phpcr
+            format: jpg
+            quality: 90
+            filters:
+                thumbnail: { size: [850, 300], mode: inset }
+        slideshow_small:
+            data_loader: cmf_media_doctrine_phpcr
+            format: jpg
+            quality: 90
+            filters:
+                thumbnail: { size: [260, 200], mode: inset }
+        slideshow_medium:
+            data_loader: cmf_media_doctrine_phpcr
+            format: jpg
+            quality: 90
+            filters:
+                thumbnail: { size: [850, 300], mode: inset }
+        slideshow_large:
+            data_loader: cmf_media_doctrine_phpcr
+            format: jpg
+            quality: 90
+            filters:
+                thumbnail: { size: [1170, 380], mode: inset }
+        image_upload_thumbnail:
+            quality: 85
+            format: jpg
+            data_loader: cmf_media_doctrine_phpcr
+            filters:
+                thumbnail: { size: [300, 150], mode: inset }
+
+twig:
+    form_themes:
+        - "CmfMediaBundle:Form:fields.html.twig"

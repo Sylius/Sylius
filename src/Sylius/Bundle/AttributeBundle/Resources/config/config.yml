@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+jms_serializer:
+    metadata:
+        directories:
+            sylius-attribute:
+                namespace_prefix: "Sylius\\Component\\Attribute"
+                path: "@SyliusAttributeBundle/Resources/config/serializer"

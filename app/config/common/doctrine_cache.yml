@@ -1,7 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-doctrine_cache:
-    providers:
-        sylius_settings: %sylius.cache%
-        sylius_rbac: %sylius.cache%
