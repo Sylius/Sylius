@@ -25,5 +25,4 @@ class OrderCheckoutTransitions
     const TRANSITION_RESELECT_SHIPPING = 'reselect_shipping';
     const TRANSITION_SELECT_PAYMENT = 'select_payment';
     const TRANSITION_SELECT_SHIPPING = 'select_shipping';
-    const TRANSITION_START = 'start';
 }

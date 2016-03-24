@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\OrderRecalculator;
 use Sylius\Component\Core\OrderProcessing\OrderRecalculatorInterface;
+use Sylius\Component\Core\OrderProcessing\PricesRecalculatorInterface;
 use Sylius\Component\Core\OrderProcessing\ShippingChargesProcessorInterface;
 use Sylius\Component\Core\Taxation\OrderTaxesApplicatorInterface;
 use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
@@ -27,11 +28,12 @@ use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
 class OrderRecalculatorSpec extends ObjectBehavior
 {
     function let(
-        PromotionProcessorInterface $promotionProcessor,
         OrderTaxesApplicatorInterface $taxesApplicator,
+        PricesRecalculatorInterface $pricesRecalculator,
+        PromotionProcessorInterface $promotionProcessor,
         ShippingChargesProcessorInterface $shippingChargesProcessor
     ) {
-        $this->beConstructedWith($promotionProcessor, $taxesApplicator, $shippingChargesProcessor);
+        $this->beConstructedWith($taxesApplicator, $pricesRecalculator, $promotionProcessor, $shippingChargesProcessor);
     }
 
     function it_is_initializable()
@@ -46,10 +48,12 @@ class OrderRecalculatorSpec extends ObjectBehavior
 
     function it_recalculates_order_promotions_taxes_and_shipping_charges(
         PromotionProcessorInterface $promotionProcessor,
+        PricesRecalculatorInterface $pricesRecalculator,
         OrderTaxesApplicatorInterface $taxesApplicator,
         ShippingChargesProcessorInterface $shippingChargesProcessor,
         OrderInterface $order
     ) {
+        $pricesRecalculator->recalculate($order);
         $promotionProcessor->process($order)->shouldBeCalled();
         $taxesApplicator->apply($order)->shouldBeCalled();
         $shippingChargesProcessor->applyShippingCharges($order)->shouldBeCalled();

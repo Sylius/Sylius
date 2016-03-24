@@ -11,10 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
 use Sylius\Component\Promotion\SyliusPromotionEvents;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -24,11 +21,6 @@ use Symfony\Component\Translation\TranslatorInterface;
  */
 class OrderPromotionListener
 {
-    /**
-     * @var PromotionProcessorInterface
-     */
-    protected $promotionProcessor;
-
     /**
      * @var SessionInterface
      */
@@ -40,37 +32,15 @@ class OrderPromotionListener
     protected $translator;
 
     /**
-     * @param PromotionProcessorInterface $promotionProcessor
-     * @param SessionInterface            $session
-     * @param TranslatorInterface         $translator
+     * @param SessionInterface $session
+     * @param TranslatorInterface $translator
      */
     public function __construct(
-        PromotionProcessorInterface $promotionProcessor,
         SessionInterface $session,
         TranslatorInterface $translator
     ) {
-        $this->promotionProcessor = $promotionProcessor;
         $this->session = $session;
         $this->translator = $translator;
-    }
-
-    /**
-     * @param GenericEvent $event
-     *
-     * @throws UnexpectedTypeException
-     */
-    public function processOrderPromotion(GenericEvent $event)
-    {
-        $order = $event->getSubject();
-
-        if (!$order instanceof OrderInterface) {
-            throw new UnexpectedTypeException(
-                $order,
-                OrderInterface::class
-            );
-        }
-
-        $this->promotionProcessor->process($order);
     }
 
     /**

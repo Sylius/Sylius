@@ -9,17 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\EventListener;
+namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class OrderPricingListener
+class PricesRecalculator implements PricesRecalculatorInterface
 {
     /**
      * @var DelegatingCalculatorInterface
@@ -35,18 +33,10 @@ class OrderPricingListener
     }
 
     /**
-     * @param GenericEvent $event
-     *
-     * @throws UnexpectedTypeException
+     * {@inheritdoc}
      */
-    public function recalculatePrices(GenericEvent $event)
+    public function recalculate(OrderInterface $order)
     {
-        $order = $event->getSubject();
-
-        if (!$order instanceof OrderInterface) {
-            throw new UnexpectedTypeException($order, OrderInterface::class);
-        }
-
         $context = [];
         if (null !== $customer = $order->getCustomer()) {
             $context['customer'] = $customer;

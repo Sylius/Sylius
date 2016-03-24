@@ -21,9 +21,6 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * The addressing step of checkout.
- * User enters the shipping and shipping address.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class AddressingStep extends CheckoutStep
@@ -35,7 +32,7 @@ class AddressingStep extends CheckoutStep
     {
         $order = $this->getCurrentCart();
 
-        if (OrderCheckoutStates::STATE_STARTED !== $order->getCheckoutState()) {
+        if (OrderCheckoutStates::STATE_CART !== $order->getCheckoutState()) {
             $this->applyTransition(OrderCheckoutTransitions::TRANSITION_READDRESS, $order);
         }
 

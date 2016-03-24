@@ -21,14 +21,19 @@ use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
 class OrderRecalculator implements OrderRecalculatorInterface
 {
     /**
-     * @var PromotionProcessorInterface
-     */
-    private $promotionProcessor;
-
-    /**
      * @var OrderTaxesApplicatorInterface
      */
     private $taxesApplicator;
+
+    /**
+     * @var PricesRecalculatorInterface
+     */
+    private $pricesRecalculator;
+
+    /**
+     * @var PromotionProcessorInterface
+     */
+    private $promotionProcessor;
 
     /**
      * @var ShippingChargesProcessorInterface
@@ -36,17 +41,20 @@ class OrderRecalculator implements OrderRecalculatorInterface
     private $shippingChargesProcessor;
 
     /**
-     * @param PromotionProcessorInterface $promotionProcessor
      * @param OrderTaxesApplicatorInterface $taxesApplicator
+     * @param PricesRecalculatorInterface $pricesRecalculator
+     * @param PromotionProcessorInterface $promotionProcessor
      * @param ShippingChargesProcessorInterface $shippingChargesProcessor
      */
     public function __construct(
-        PromotionProcessorInterface $promotionProcessor,
         OrderTaxesApplicatorInterface $taxesApplicator,
+        PricesRecalculatorInterface $pricesRecalculator,
+        PromotionProcessorInterface $promotionProcessor,
         ShippingChargesProcessorInterface $shippingChargesProcessor
     ) {
-        $this->promotionProcessor = $promotionProcessor;
         $this->taxesApplicator = $taxesApplicator;
+        $this->pricesRecalculator = $pricesRecalculator;
+        $this->promotionProcessor = $promotionProcessor;
         $this->shippingChargesProcessor = $shippingChargesProcessor;
     }
 
@@ -57,8 +65,9 @@ class OrderRecalculator implements OrderRecalculatorInterface
      */
     public function recalculate(OrderInterface $order)
     {
+        $this->pricesRecalculator->recalculate($order);
+        $this->shippingChargesProcessor->applyShippingCharges($order);
         $this->promotionProcessor->process($order);
         $this->taxesApplicator->apply($order);
-        $this->shippingChargesProcessor->applyShippingCharges($order);
     }
 }

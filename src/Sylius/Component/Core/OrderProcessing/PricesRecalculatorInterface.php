@@ -9,16 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core;
+namespace Sylius\Component\Core\OrderProcessing;
+
+use Sylius\Component\Core\Model\OrderInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class OrderCheckoutStates
+interface PricesRecalculatorInterface
 {
-    const STATE_ADDRESSED = 'addressed';
-    const STATE_CART = 'cart';
-    const STATE_COMPLETED = 'completed';
-    const STATE_PAYMENT_SELECTED = 'payment_selected';
-    const STATE_SHIPPING_SELECTED = 'shipping_selected';
+    /**
+     * @param OrderInterface $order
+     */
+    public function recalculate(OrderInterface $order);
 }

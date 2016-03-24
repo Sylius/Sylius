@@ -24,10 +24,6 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Security step.
- *
- * If user is not logged in, displays login & registration form.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SecurityStep extends CheckoutStep
@@ -38,10 +34,6 @@ class SecurityStep extends CheckoutStep
     public function displayAction(ProcessContextInterface $context)
     {
         $order = $this->getCurrentCart();
-
-        if (OrderCheckoutStates::STATE_CART === $order->getCheckoutState()) {
-            $this->applyTransition(OrderCheckoutTransitions::TRANSITION_START, $order);
-        }
 
         // If user is already logged in, transparently jump to next step.
         if ($this->isUserLoggedIn()) {

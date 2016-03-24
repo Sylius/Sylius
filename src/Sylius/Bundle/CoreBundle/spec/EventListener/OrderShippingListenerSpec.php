@@ -14,7 +14,6 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\OrderShipmentProcessorInterface;
-use Sylius\Component\Core\OrderProcessing\ShippingChargesProcessorInterface;
 use Sylius\Component\Shipping\Processor\ShipmentProcessorInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -24,11 +23,10 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 class OrderShippingListenerSpec extends ObjectBehavior
 {
     function let(
-        OrderShipmentProcessorInterface $shipmentFactory,
-        ShipmentProcessorInterface $shippingProcessor,
-        ShippingChargesProcessorInterface $shippingChargesProcessor
+        OrderShipmentProcessorInterface $orderShipmentProcessor,
+        ShipmentProcessorInterface $shippingProcessor
     ) {
-        $this->beConstructedWith($shipmentFactory, $shippingProcessor, $shippingChargesProcessor);
+        $this->beConstructedWith($orderShipmentProcessor, $shippingProcessor);
     }
 
     function it_is_initializable()
@@ -44,18 +42,18 @@ class OrderShippingListenerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->duringProcessOrderShippingCharges($event)
+            ->during('processOrderShipments', [$event])
         ;
     }
 
     function it_calls_shipping_processor_on_order(
-        ShippingChargesProcessorInterface $shippingChargesProcessor,
+        OrderShipmentProcessorInterface $orderShipmentProcessor,
         GenericEvent $event,
         OrderInterface $order
     ) {
         $event->getSubject()->willReturn($order);
-        $shippingChargesProcessor->applyShippingCharges($order)->shouldBeCalled();
+        $orderShipmentProcessor->processOrderShipment($order)->shouldBeCalled();
 
-        $this->processOrderShippingCharges($event);
+        $this->processOrderShipments($event);
     }
 }
