@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Hateoas\Configuration\Route;
+use Hateoas\Representation\CollectionRepresentation;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 use Pagerfanta\Pagerfanta;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -35,8 +36,10 @@ class ResourcesCollectionProvider implements ResourcesCollectionProviderInterfac
      * @param ResourcesResolverInterface $resourcesResolver
      * @param PagerfantaFactory $pagerfantaRepresentationFactory
      */
-    public function __construct(ResourcesResolverInterface $resourcesResolver, PagerfantaFactory $pagerfantaRepresentationFactory)
-    {
+    public function __construct(
+        ResourcesResolverInterface $resourcesResolver,
+        PagerfantaFactory $pagerfantaRepresentationFactory
+    ) {
         $this->resourcesResolver = $resourcesResolver;
         $this->pagerfantaRepresentationFactory = $pagerfantaRepresentationFactory;
     }
@@ -54,12 +57,26 @@ class ResourcesCollectionProvider implements ResourcesCollectionProviderInterfac
             $resources->setCurrentPage($request->query->get('page', 1));
 
             if (!$requestConfiguration->isHtmlRequest()) {
-                $route = new Route($request->attributes->get('_route'), array_merge($request->attributes->get('_route_params'), $request->query->all()));
+                $route = new Route(
+                    $request->attributes->get('_route'),
+                    array_merge($request->attributes->get('_route_params'), $request->query->all())
+                );
+                $inline = $this->createInlineCollectionRepresentation($resources);
 
-                return $this->pagerfantaRepresentationFactory->createRepresentation($resources, $route);
+                return $this->pagerfantaRepresentationFactory->createRepresentation($resources, $route, $inline);
             }
         }
 
         return $resources;
+    }
+
+    /**
+     * @param Pagerfanta $pager
+     *
+     * @return CollectionRepresentation
+     */
+    protected function createInlineCollectionRepresentation(Pagerfanta $pager)
+    {
+        return new CollectionRepresentation($pager->getCurrentPageResults());
     }
 }
