@@ -192,7 +192,16 @@
         ]
     },
     "autoload": {
-        "psr-0": { "Sylius\\": "src/" }
+        "psr-4": {
+            "Sylius\\Application\\": "app/",
+            "Sylius\\Bundle\\": "src/Sylius/Bundle/",
+            "Sylius\\Component\\": "src/Sylius/Component/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Sylius\\Behat\\": "src/Sylius/Behat/"
+        }
     },
     "config": {
         "bin-dir": "bin"
@@ -202,8 +211,7 @@
             "dev-master": "0.19-dev"
         },
         "incenteev-parameters": {
-            "file": "app/config/parameters.yml",
-            "dist-file": "src/Sylius/Bundle/CoreBundle/Resources/config/app/parameters.yml.dist"
+            "file": "app/config/parameters.yml"
         },
         "symfony-app-dir": "app",
         "symfony-web-dir": "web"

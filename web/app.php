@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Symfony\Component\ClassLoader\ApcClassLoader;
+use Sylius\Application\Kernel;
 use Symfony\Component\HttpFoundation\Request;
 
 /*
@@ -18,9 +18,9 @@ use Symfony\Component\HttpFoundation\Request;
  */
 
 require_once __DIR__.'/../app/bootstrap.php.cache';
-require_once __DIR__.'/../app/AppKernel.php';
+require_once __DIR__.'/../app/Kernel.php';
 
-$kernel = new AppKernel('prod', false);
+$kernel = new Kernel('prod', false);
 $kernel->loadClassCache();
 
 $request = Request::createFromGlobals();

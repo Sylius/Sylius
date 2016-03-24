@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Kernel;
+namespace Sylius\Application;
 
 use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 use Symfony\Component\Config\Loader\LoaderInterface;
-use Symfony\Component\HttpKernel\Kernel as BaseKernel;
+use Symfony\Component\HttpKernel\Kernel as HttpKernel;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-abstract class Kernel extends BaseKernel
+class Kernel extends HttpKernel
 {
     const VERSION = '0.19.0-dev';
     const VERSION_ID = '00190';
@@ -31,7 +31,7 @@ abstract class Kernel extends BaseKernel
     const ENV_DEV = 'dev';
     const ENV_PROD = 'prod';
     const ENV_TEST = 'test';
-    const ENV_STAGING = 'staging';
+    const ENV_TEST_CACHED = 'test_cached';
 
     /**
      * {@inheritdoc}
@@ -121,6 +121,11 @@ abstract class Kernel extends BaseKernel
             new \Sylius\Bundle\PayumBundle\SyliusPayumBundle(), // must be added after PayumBundle.
             new \Sylius\Bundle\ThemeBundle\SyliusThemeBundle(), // must be added after FrameworkBundle
         ];
+
+        if (in_array($this->environment, array('dev', 'test'))) {
+            $bundles[] = new \Symfony\Bundle\DebugBundle\DebugBundle();
+            $bundles[] = new \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
+        }
 
         return $bundles;
     }
