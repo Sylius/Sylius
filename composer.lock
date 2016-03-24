@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ad226aefe9335182f5ea02cd222697bf",
-    "content-hash": "3c8ea86d828ddefea603976d90a0a4d0",
+    "hash": "72714fd6d3e84603508773c6279b6356",
+    "content-hash": "c4230c6292ff1f55ea4e1554f2a0ab09",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -8722,7 +8722,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/coduo/php-matcher/zipball/5fc8221869aa54200bba709310f3383c3d6f404c",
+                "url": "https://api.github.com/repos/coduo/php-matcher/zipball/fddefee866d44f673f68d2bc7716b7fa824b6942",
                 "reference": "c4917b16314900eb186de2422f81191afb7125a3",
                 "shasum": ""
             },
