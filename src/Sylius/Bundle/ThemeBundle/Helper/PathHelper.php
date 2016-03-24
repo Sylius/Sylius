@@ -50,7 +50,7 @@ final class PathHelper implements PathHelperInterface
 
         $contextAwarePaths = [];
         foreach ($paths as $path) {
-            $paths[] = rtrim($path, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$this->themeContext->getName();
+            $contextAwarePaths[] = rtrim($path, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$this->themeContext->getName();
         }
 
         return $contextAwarePaths;
@@ -63,20 +63,13 @@ final class PathHelper implements PathHelperInterface
      */
     private function canBeContextAware()
     {
-        $this->isContextAware = true;
-        if ($this->isContextAware &&
-            isset($this->themeContext) &&
-            null === $this->themeContext->getName()
-        ) {
+        if ($this->isContextAware && null === $this->themeContext->getName()) {
             throw new InvalidConfigurationException(
                 sprintf('You have enabled "context_aware_paths" setting but your "%s::getName()" method must return a name!', get_class($this->themeContext))
             );
         }
 
-        if (!$this->isContextAware ||
-            !isset($this->themeContext) ||
-            null === $this->themeContext->getName()
-        ) {
+        if (!$this->isContextAware || null === $this->themeContext->getName()) {
             return false;
         }
 
