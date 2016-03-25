@@ -83,6 +83,7 @@ final class ManagingTaxRateContext implements Context
 
     /**
      * @When I specify its amount as :amount%
+     * @When I change its amount to :amount%
      */
     public function iSpecifyItsAmountAs($amount)
     {
@@ -195,6 +196,87 @@ final class ManagingTaxRateContext implements Context
         Assert::true(
             $this->notificationAccessor->isSuccessfullyDeletedFor(self::RESOURCE_NAME),
             'Successful deletion message does not appear.'
+        );
+    }
+
+    /**
+     * @Given I want to modify a tax rate :taxRate
+     */
+    public function iWantToModifyTaxRate(TaxRateInterface $taxRate)
+    {
+        $this->updatePage->open(['id' => $taxRate->getId()]);
+    }
+
+    /**
+     * @Then the code field should be disabled
+     */
+    public function theCodeFieldShouldBeDisabled()
+    {
+        Assert::true(
+            $this->updatePage->isCodeDisabled(),
+            'Code should be immutable, but it does not.'
+        );
+    }
+
+    /**
+     * @When I save my changes
+     * @When I try to save my changes
+     */
+    public function iSaveMyChanges()
+    {
+        $this->updatePage->saveChanges();
+    }
+
+    /**
+     * @Then I should be notified about successful edition
+     */
+    public function iShouldBeNotifiedAboutSuccessfulEdition()
+    {
+        Assert::true(
+            $this->notificationAccessor->hasSuccessMessage(),
+            'Message type is not positive.'
+        );
+
+        Assert::true(
+            $this->notificationAccessor->isSuccessfullyUpdatedFor(self::RESOURCE_NAME),
+            'Successful edition message does not appear.'
+        );
+    }
+
+    /**
+     * @Then /^(this tax rate) name should be "([^"]+)"$/
+     * @Then /^(this tax rate) should still be named "([^"]+)"$/
+     */
+    public function thisTaxRateNameShouldBe(TaxRateInterface $taxRate, $taxRateName)
+    {
+        $this->assertFieldValue($taxRate, 'name', $taxRateName);
+    }
+
+    /**
+     * @Then /^(this tax rate) amount should be ([^"]+)%$/
+     */
+    public function thisTaxRateAmountShouldBe(TaxRateInterface $taxRate, $taxRateAmount)
+    {
+        $this->assertFieldValue($taxRate, 'amount', $taxRateAmount);
+    }
+
+    /**
+     * @param TaxRateInterface $taxRate
+     * @param string $element
+     * @param string $taxRateElement
+     */
+    private function assertFieldValue(TaxRateInterface $taxRate, $element, $taxRateElement)
+    {
+        $this->indexPage->open();
+
+        Assert::true(
+            $this->indexPage->isResourceOnPage(
+                [
+                    'code' => $taxRate->getCode(),
+                    $element => $taxRateElement,
+                ]
+            ),
+            sprintf('Tax rate %s %s has not been assigned properly.', $element, $taxRateElement)
         );
     }
 }

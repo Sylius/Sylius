@@ -14,12 +14,17 @@ sylius_grid:
                 name:
                     type: string
                     label: sylius.ui.name
+                code:
+                    type: string
+                    label: sylius.ui.code
                 zone:
                     type: string
                     label: sylius.ui.zone
                 amount:
-                    type: string
+                    type: twig
                     label: sylius.ui.amount
+                    options:
+                        template: SyliusAdminBundle:TaxRate/Field:amount.html.twig
             actions:
                 main:
                     create:
