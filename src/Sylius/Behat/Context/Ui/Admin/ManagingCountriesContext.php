@@ -16,7 +16,7 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Country\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Country\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Country\UpdatePageInterface;
-use Sylius\Behat\Service\Accessor\NotificationAccessorInterface;
+use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Webmozart\Assert\Assert;
 
@@ -43,26 +43,26 @@ final class ManagingCountriesContext implements Context
     private $countryUpdatePage;
 
     /**
-     * @var NotificationAccessorInterface
+     * @var NotificationCheckerInterface
      */
-    private $notificationAccessor;
+    private $notificationChecker;
 
     /**
      * @param IndexPageInterface $countryIndexPage
      * @param CreatePageInterface $countryCreatePage
      * @param UpdatePageInterface $countryUpdatePage
-     * @param NotificationAccessorInterface $notificationAccessor
+     * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
         IndexPageInterface $countryIndexPage,
         CreatePageInterface $countryCreatePage,
         UpdatePageInterface $countryUpdatePage,
-        NotificationAccessorInterface $notificationAccessor
+        NotificationCheckerInterface $notificationChecker
     ) {
         $this->countryIndexPage = $countryIndexPage;
         $this->countryCreatePage = $countryCreatePage;
         $this->countryUpdatePage = $countryUpdatePage;
-        $this->notificationAccessor = $notificationAccessor;
+        $this->notificationChecker = $notificationChecker;
     }
 
     /**
@@ -126,15 +126,7 @@ final class ManagingCountriesContext implements Context
      */
     public function iShouldBeNotifiedAboutSuccessfulCreation()
     {
-        Assert::true(
-            $this->notificationAccessor->hasSuccessMessage(),
-            sprintf('Message type is not positive')
-        );
-
-        Assert::true(
-            $this->notificationAccessor->isSuccessfullyCreatedFor(self::RESOURCE_NAME),
-            sprintf('Successful creation message does not appear')
-        );
+        $this->notificationChecker->checkCreationNotification(self::RESOURCE_NAME);
     }
 
     /**
@@ -142,15 +134,7 @@ final class ManagingCountriesContext implements Context
      */
     public function iShouldBeNotifiedAboutSuccessfulEdition()
     {
-        Assert::true(
-            $this->notificationAccessor->hasSuccessMessage(),
-            'Message type is not positive'
-        );
-
-        Assert::true(
-            $this->notificationAccessor->isSuccessfullyUpdatedFor(self::RESOURCE_NAME),
-            'Successful edition message does not appear'
-        );
+        $this->notificationChecker->checkEditionNotification(self::RESOURCE_NAME);
     }
 
     /**

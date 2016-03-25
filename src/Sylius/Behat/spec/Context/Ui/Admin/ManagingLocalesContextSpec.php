@@ -17,7 +17,7 @@ use Sylius\Behat\Context\Ui\Admin\ManagingLocalesContext;
 use Sylius\Behat\Page\Admin\Locale\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Locale\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Locale\UpdatePageInterface;
-use Sylius\Behat\Service\Accessor\NotificationAccessorInterface;
+use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 
 /**
@@ -31,9 +31,9 @@ class ManagingLocalesContextSpec extends ObjectBehavior
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
         UpdatePageInterface $updatePage,
-        NotificationAccessorInterface $notificationAccessor
+        NotificationCheckerInterface $notificationValidator
     ) {
-        $this->beConstructedWith($createPage, $indexPage, $updatePage, $notificationAccessor);
+        $this->beConstructedWith($createPage, $indexPage, $updatePage, $notificationValidator);
     }
 
     function it_is_initializable()
@@ -96,10 +96,9 @@ class ManagingLocalesContextSpec extends ObjectBehavior
         $this->iSaveMyChanges();
     }
 
-    function it_asserts_that_resource_was_successfully_created(NotificationAccessorInterface $notificationAccessor)
+    function it_asserts_that_resource_was_successfully_created(NotificationCheckerInterface $notificationValidator)
     {
-        $notificationAccessor->hasSuccessMessage()->willReturn(true);
-        $notificationAccessor->isSuccessfullyCreatedFor(ManagingLocalesContext::RESOURCE_NAME)->willReturn(true);
+        $notificationValidator->checkCreationNotification('locale')->shouldBeCalled();
 
         $this->iShouldBeNotifiedAboutSuccessfulCreation();
     }
@@ -125,22 +124,6 @@ class ManagingLocalesContextSpec extends ObjectBehavior
 
         $this->shouldThrow(\InvalidArgumentException::class)->during('thisLocaleShouldBeDisabled', [$locale]);
         $this->shouldThrow(\InvalidArgumentException::class)->during('thisLocaleShouldBeEnabled', [$locale]);
-    }
-
-    function it_throws_an_exception_if_there_is_no_success_message(NotificationAccessorInterface $notificationAccessor)
-    {
-        $notificationAccessor->hasSuccessMessage()->willReturn(false);
-        $notificationAccessor->isSuccessfullyCreatedFor(ManagingLocalesContext::RESOURCE_NAME)->willReturn(true);
-
-        $this->shouldThrow(\InvalidArgumentException::class)->during('iShouldBeNotifiedAboutSuccessfulCreation');
-    }
-
-    function it_throws_an_exception_if_resource_was_not_successfully_created(NotificationAccessorInterface $notificationAccessor)
-    {
-        $notificationAccessor->hasSuccessMessage()->willReturn(true);
-        $notificationAccessor->isSuccessfullyCreatedFor(ManagingLocalesContext::RESOURCE_NAME)->willReturn(false);
-
-        $this->shouldThrow(\InvalidArgumentException::class)->during('iShouldBeNotifiedAboutSuccessfulCreation');
     }
 
     function it_asserts_if_store_is_available_in_given_language(IndexPageInterface $indexPage)

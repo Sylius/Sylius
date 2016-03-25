@@ -12,9 +12,7 @@
 namespace Sylius\Behat\Service\Accessor;
 
 use Behat\Mink\Element\NodeElement;
-use Behat\Mink\Selector\SelectorsHandler;
 use Behat\Mink\Session;
-use Sylius\Behat\Page\ElementNotFoundException;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -41,11 +39,12 @@ final class NotificationAccessor implements NotificationAccessorInterface
      */
     public function hasSuccessMessage()
     {
-        try {
-            return $this->getMessageElement()->hasClass('positive');
-        } catch (ElementNotFoundException $exception) {
+        $messageElement = $this->getMessageElement();
+        if (null === $messageElement) {
             return false;
         }
+
+        return $this->getMessageElement()->hasClass('positive');
     }
 
     /**
@@ -53,59 +52,53 @@ final class NotificationAccessor implements NotificationAccessorInterface
      */
     public function hasMessage($message)
     {
-        try {
-            return $message === $this->getMessageElement()->getText();
-        } catch (ElementNotFoundException $exception) {
+        $messageElement = $this->getMessageElement();
+        if (null === $messageElement) {
             return false;
         }
+
+        return $message === $messageElement->getText();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function isSuccessfullyCreatedFor($resourceName)
+    public function getMessage()
     {
-        return $this->hasMessage(sprintf('Success %s has been successfully created.', $this->humanizeResourceName($resourceName)));
+        $messageElement = $this->getMessageElement();
+        if (null === $messageElement) {
+            return '';
+        }
+
+        return $messageElement->getText();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function isSuccessfullyUpdatedFor($resourceName)
+    public function getMessageType()
     {
-        return $this->hasMessage(sprintf('Success %s has been successfully updated.', $this->humanizeResourceName($resourceName)));
-    }
+        $messageElement = $this->getMessageElement();
+        if (null === $messageElement) {
+            return '';
+        }
+        
+        if ($this->getMessageElement()->hasClass('positive')) {
+            return 'success';
+        }
+        
+        if ($this->getMessageElement()->hasClass('negative')) {
+            return 'failure';
+        }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isSuccessfullyDeletedFor($resourceName)
-    {
-        return $this->hasMessage(sprintf('Success %s has been successfully deleted.', $this->humanizeResourceName($resourceName)));
+        return '';
     }
 
     /**
      * @return NodeElement
-     *
-     * @throws ElementNotFoundException
      */
     private function getMessageElement()
     {
-        $messageElement = $this->session->getPage()->find('css', self::NOTIFICATION_ELEMENT_CSS);
-        if (null === $messageElement) {
-            throw new ElementNotFoundException(sprintf('%s element is not present on the page', self::NOTIFICATION_ELEMENT_CSS));
-        }
-
-        return $messageElement;
-    }
-
-    /**
-     * @param string $resourceName
-     *
-     * @return string
-     */
-    private function humanizeResourceName($resourceName)
-    {
-        return ucfirst(str_replace('_', ' ', $resourceName));
+        return $this->session->getPage()->find('css', self::NOTIFICATION_ELEMENT_CSS);
     }
 }

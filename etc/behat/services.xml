@@ -25,6 +25,7 @@
         <parameter key="sylius.behat.mocker.class">Sylius\Behat\Service\Mocker\Mocker</parameter>
         <parameter key="sylius.behat.response_loader.class">Sylius\Behat\Service\ResponseLoader</parameter>
         <parameter key="sylius.behat.notification_accessor.class">Sylius\Behat\Service\Accessor\NotificationAccessor</parameter>
+        <parameter key="sylius.behat.service.notification_checker.class">Sylius\Behat\Service\NotificationChecker</parameter>
     </parameters>
     <services>
         <service id="mink.default_session" class="Behat\Mink\Session" factory-service="mink" factory-method="getSession" lazy="true" scope="scenario" public="false" />
@@ -58,6 +59,9 @@
 
         <service id="sylius.behat.notification_accessor" class="%sylius.behat.notification_accessor.class%" scope="scenario" public="false">
             <argument type="service" id="mink.default_session" />
+        </service>
+        <service id="sylius.behat.notification_checker" class="%sylius.behat.service.notification_checker.class%" scope="scenario" public="false">
+            <argument type="service" id="sylius.behat.notification_accessor" />
         </service>
     </services>
 </container>
