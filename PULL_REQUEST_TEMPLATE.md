@@ -6,5 +6,4 @@
 | Deprecations?   | no|yes
 | Related tickets | fixes #X, partially #Y, mentioned in #Z
 | License         | MIT
-| Doc PR          | Sylius/Sylius-Docs#X
 
