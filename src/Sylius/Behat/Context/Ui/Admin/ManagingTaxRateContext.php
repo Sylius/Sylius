@@ -16,6 +16,7 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\TaxRate\UpdatePageInterface;
 use Sylius\Behat\Service\Accessor\NotificationAccessorInterface;
 use Sylius\Behat\Page\Admin\TaxRate\CreatePageInterface;
+use Sylius\Component\Core\Model\TaxRateInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -158,6 +159,42 @@ final class ManagingTaxRateContext implements Context
         Assert::true(
             $this->notificationAccessor->isSuccessfullyCreatedFor(self::RESOURCE_NAME), 
             'Successful creation message does not appear.'
+        );
+    }
+
+    /**
+     * @When I delete tax rate :taxRate
+     */
+    public function iDeletedTaxRate(TaxRateInterface $taxRate)
+    {
+        $this->indexPage->open();
+        $this->indexPage->deleteResourceOnPage(['name' => $taxRate->getName()]);
+    }
+
+    /**
+     * @Then /^(this tax rate) should no longer exist in the registry$/
+     */
+    public function thisTaxRateShouldNoLongerExistInTheRegistry(TaxRateInterface $taxRate)
+    {
+        Assert::false(
+            $this->indexPage->isResourceOnPage(['code' => $taxRate->getCode()]),
+            sprintf('Tax rate with code %s exists but should not.', $taxRate->getCode())
+        );
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully deleted
+     */
+    public function iShouldBeNotifiedAboutSuccessfulDeletion()
+    {
+        Assert::true(
+            $this->notificationAccessor->hasSuccessMessage(),
+            'Message type is not positive.'
+        );
+
+        Assert::true(
+            $this->notificationAccessor->isSuccessfullyDeletedFor(self::RESOURCE_NAME),
+            'Successful deletion message does not appear.'
         );
     }
 }

@@ -7,7 +7,10 @@ default:
             contexts_as_services:
                 - sylius.behat.context.hook.doctrine_orm
 
+                - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.tax_category
+                - sylius.behat.context.transform.tax_rate
+                - sylius.behat.context.transform.zone
 
                 - sylius.behat.context.setup.security
                 - sylius.behat.context.setup.taxation

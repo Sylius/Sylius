@@ -96,6 +96,8 @@ final class TaxationContext implements Context
         $taxRate->setCalculator('default');
 
         $this->taxRateRepository->add($taxRate);
+
+        $this->sharedStorage->set('tax_rate', $taxRate);
     }
 
     /**
