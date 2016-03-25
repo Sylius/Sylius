@@ -63,6 +63,12 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
             ->setLabelAttribute('icon', 'translate')
         ;
 
+        $child
+            ->addChild('tax_rates', ['route' => 'sylius_admin_tax_rate_index'])
+            ->setLabel('sylius.menu.admin.main.configuration.tax_rates')
+            ->setLabelAttribute('icon', 'dollar')
+        ;
+
         if (!$child->hasChildren()) {
             $menu->removeChild('configuration');
         }

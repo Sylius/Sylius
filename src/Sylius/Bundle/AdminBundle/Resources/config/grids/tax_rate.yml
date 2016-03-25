@@ -1,0 +1,31 @@
+sylius_grid:
+    grids:
+        sylius_admin_tax_rate:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: %sylius.model.tax_rate.class%
+            sorting:
+                name: asc
+            fields:
+                category:
+                    type: string
+                    label: sylius.ui.category
+                name:
+                    type: string
+                    label: sylius.ui.name
+                zone:
+                    type: string
+                    label: sylius.ui.zone
+                amount:
+                    type: string
+                    label: sylius.ui.amount
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete

@@ -51,3 +51,4 @@ sylius:
     locales: Locales
     new_locale: New locale
     manage_locale: Manage locale
+    edit_tax_rate: Edit tax rate
