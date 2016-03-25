@@ -18,6 +18,7 @@ use Sylius\Behat\Page\Admin\Country\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Country\UpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -26,6 +27,11 @@ use Webmozart\Assert\Assert;
 final class ManagingCountriesContext implements Context
 {
     const RESOURCE_NAME = 'country';
+
+    /**
+     * @var SharedStorageInterface
+     */
+    private $sharedStorage;
 
     /**
      * @var IndexPageInterface
@@ -48,17 +54,20 @@ final class ManagingCountriesContext implements Context
     private $notificationChecker;
 
     /**
+     * @param SharedStorageInterface $sharedStorage
      * @param IndexPageInterface $countryIndexPage
      * @param CreatePageInterface $countryCreatePage
      * @param UpdatePageInterface $countryUpdatePage
      * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
+        SharedStorageInterface $sharedStorage,
         IndexPageInterface $countryIndexPage,
         CreatePageInterface $countryCreatePage,
         UpdatePageInterface $countryUpdatePage,
         NotificationCheckerInterface $notificationChecker
     ) {
+        $this->sharedStorage = $sharedStorage;
         $this->countryIndexPage = $countryIndexPage;
         $this->countryCreatePage = $countryCreatePage;
         $this->countryUpdatePage = $countryUpdatePage;
@@ -100,14 +109,16 @@ final class ManagingCountriesContext implements Context
 
     /**
      * @When I add the :provinceName province with :provinceCode code
+     * @When I add the :provinceName province with :provinceCode code and :provinceAbbreviation abbreviation
      */
-    public function iAddProvinceWithCode($provinceName, $provinceCode)
+    public function iAddProvinceWithCode($provinceName, $provinceCode, $provinceAbbreviation = null)
     {
-        $this->countryCreatePage->fillProvinceNameAndCode($provinceName, $provinceCode);
+        $this->countryCreatePage->fillProvinceData($provinceName, $provinceCode, $provinceAbbreviation);
     }
 
     /**
      * @When I add it
+     * @When I add this country
      */
     public function iAddIt()
     {
@@ -159,10 +170,9 @@ final class ManagingCountriesContext implements Context
      */
     public function countryShouldAppearInTheStore(CountryInterface $country)
     {
-        Assert::true(
-            $this->countryIndexPage->isResourceOnPage(['code' => $country->getCode()]),
-            sprintf('Country %s should exist but it does not', $country->getCode())
-        );
+        expect($this->countryUpdatePage->isOpen(['id' => $country->getId()]))->toBe(true);
+
+        $this->sharedStorage->set('country', $country);
     }
 
     /**
@@ -170,6 +180,8 @@ final class ManagingCountriesContext implements Context
      */
     public function thisCountryShouldBeEnabled(CountryInterface $country)
     {
+        $this->countryIndexPage->open();
+
         Assert::true(
             $this->countryIndexPage->isCountryEnabled($country),
             sprintf('Country %s should be enabled but it is not', $country->getCode())
@@ -181,9 +193,10 @@ final class ManagingCountriesContext implements Context
      */
     public function thisCountryShouldBeDisabled(CountryInterface $country)
     {
-        $isCountryDisabled = $this->countryIndexPage->isCountryDisabled($country);
+        $this->countryIndexPage->open();
+
         Assert::true(
-            $isCountryDisabled,
+            $this->countryIndexPage->isCountryDisabled($country),
             sprintf('Country %s should be disabled but it is not', $country->getCode())
         );
     }
@@ -212,8 +225,14 @@ final class ManagingCountriesContext implements Context
      */
     public function countryShouldHaveProvince(CountryInterface $country, $provinceName)
     {
-        $this->countryUpdatePage->open(['id' => $country->getId()]);
+        Assert::true(
+            $this->countryUpdatePage->isOpen(['id' => $country->getId()]),
+            'Country does not exist.'
+        );
 
-        expect($this->countryUpdatePage->isThereProvince($provinceName))->toBe(true);
+        Assert::true(
+            $this->countryUpdatePage->isThereProvince($provinceName),
+            sprintf('%s is not a province of this country.', $provinceName)
+        );
     }
 }

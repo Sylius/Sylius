@@ -23,15 +23,33 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     use ChoosesName;
 
     /**
+     * @var int
+     */
+    private $provincesCount = 0;
+
+    /**
+     * @var array
+     */
+    protected $elements = [
+        'provinces' => '#sylius_country_provinces',
+    ];
+
+    /**
      * {@inheritdoc}
      */
-    public function fillProvinceNameAndCode($name, $code)
+    public function fillProvinceData($name, $code, $abbreviation = null)
     {
         $this->getDocument()->clickLink('Add province');
 
-        $provinces = $this->getDocument()->find('css', '#sylius_country_provinces');
+        $provinces = $this->getElement('provinces');
 
-        $provinces->fillField('sylius_country_provinces_0_name', $name);
-        $provinces->fillField('sylius_country_provinces_0_code', $code);
+        $provinces->fillField('sylius_country_provinces_'.$this->provincesCount.'_name', $name);
+        $provinces->fillField('sylius_country_provinces_'.$this->provincesCount.'_code', $code);
+
+        if ($abbreviation) {
+            $provinces->fillField('sylius_country_provinces_'.$this->provincesCount.'_abbreviation', $abbreviation);
+        }
+
+        $this->provincesCount++;
     }
 }

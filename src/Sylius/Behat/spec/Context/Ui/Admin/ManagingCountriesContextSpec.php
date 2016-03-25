@@ -21,6 +21,7 @@ use Sylius\Behat\Page\Admin\Country\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Country\UpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
 /**
  * @mixin ManagingCountriesContext
@@ -30,12 +31,14 @@ use Sylius\Component\Addressing\Model\CountryInterface;
 class ManagingCountriesContextSpec extends ObjectBehavior
 {
     function let(
+        SharedStorageInterface $sharedStorage,
         IndexPageInterface $countryIndexPage,
         CreatePageInterface $countryCreatePage,
         UpdatePageInterface $countryUpdatePage,
         NotificationCheckerInterface $notificationValidator
     ) {
         $this->beConstructedWith(
+            $sharedStorage,
             $countryIndexPage,
             $countryCreatePage,
             $countryUpdatePage,
@@ -88,22 +91,22 @@ class ManagingCountriesContextSpec extends ObjectBehavior
         $this->iShouldBeNotifiedAboutSuccessfulEdition();
     }
 
-    function it_asserts_that_country_appears_in_the_store(IndexPageInterface $countryIndexPage, CountryInterface $country)
+    function it_asserts_that_country_appears_in_the_store(UpdatePageInterface $countryUpdatePage, CountryInterface $country)
     {
-        $country->getCode()->willReturn('FR');
-        $countryIndexPage->isResourceOnPage(['code' => 'FR'])->willReturn(true);
+        $country->getId()->willReturn(1);
+        $countryUpdatePage->isOpen(['id' => 1])->willReturn(true);
 
         $this->countryShouldAppearInTheStore($country);
     }
 
     function it_throws_not_equal_exception_if_country_does_not_appear_in_the_store(
-        IndexPageInterface $countryIndexPage,
+        UpdatePageInterface $countryUpdatePage,
         CountryInterface $country
     ) {
-        $country->getCode()->willReturn('FR');
-        $countryIndexPage->isResourceOnPage(['code' => 'FR'])->willReturn(false);
+        $country->getId()->willReturn(1);
+        $countryUpdatePage->isOpen(['id' => 1])->willReturn(false);
 
-        $this->shouldThrow(\InvalidArgumentException::class)->during('countryShouldAppearInTheStore', [$country]);
+        $this->shouldThrow(NotEqualException::class)->during('countryShouldAppearInTheStore', [$country]);
     }
 
     function it_opens_country_update_page(UpdatePageInterface $countryUpdatePage, CountryInterface $country)
@@ -137,18 +140,22 @@ class ManagingCountriesContextSpec extends ObjectBehavior
 
     function it_asserts_that_country_is_disabled(IndexPageInterface $countryIndexPage, CountryInterface $country)
     {
+        $countryIndexPage->open()->shouldBeCalled();
         $countryIndexPage->isCountryDisabled($country)->willReturn(true);
         $this->thisCountryShouldBeDisabled($country);
     }
 
     function it_asserts_that_country_is_enabled(IndexPageInterface $countryIndexPage, CountryInterface $country)
     {
+        $countryIndexPage->open()->shouldBeCalled();
         $countryIndexPage->isCountryEnabled($country)->willReturn(true);
         $this->thisCountryShouldBeEnabled($country);
     }
 
     function it_throws_not_equal_exception_if_country_has_not_proper_status(IndexPageInterface $countryIndexPage, CountryInterface $country)
     {
+        $countryIndexPage->open()->shouldBeCalled();
+
         $countryIndexPage->isCountryDisabled($country)->willReturn(false);
         $countryIndexPage->isCountryEnabled($country)->willReturn(false);
 
@@ -199,6 +206,6 @@ class ManagingCountriesContextSpec extends ObjectBehavior
         $countryUpdatePage->isOpen(['id' => 1])->willReturn(true);
         $countryUpdatePage->isThereProvince('Scotland')->willReturn(false);
 
-        $this->shouldThrow(NotEqualException::class)->during('countryShouldHaveProvince', [$country, 'Scotland']);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('countryShouldHaveProvince', [$country, 'Scotland']);
     }
 }
