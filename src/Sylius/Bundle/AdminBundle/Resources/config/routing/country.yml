@@ -4,7 +4,7 @@ sylius_admin_country:
         section: admin
         templates: SyliusAdminBundle:Crud
         except: ['show', 'delete']
-        redirect: index
+        redirect: update
         grid: sylius_admin_country
         vars:
             all:

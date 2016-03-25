@@ -22,6 +22,15 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     use Toggles;
 
     /**
+     * @var array
+     */
+    protected $elements = [
+        'enabled' => '#sylius_country_enabled',
+        'code' => '#sylius_country_code',
+        'provinces' => '#sylius_country_provinces',
+    ];
+
+    /**
      * {@inheritdoc}
      */
     public function isCodeFieldDisabled()
@@ -36,9 +45,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     public function isThereProvince($provinceName)
     {
-        $province = $this->getElement($provinceName);
+        $provinces = $this->getElement('provinces');
 
-        return null !== $province;
+        return $provinces->has('css', '[value = "'.$provinceName.'"]');
     }
 
     /**

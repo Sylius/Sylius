@@ -27,6 +27,8 @@ trait ChoosesName
     }
 
     /**
+     * If the scenario is using "@javascript" tag
+     *
      * @param string $name
      */
     public function selectName($name)
