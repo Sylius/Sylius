@@ -12,18 +12,18 @@ Contributing
 Before contributing, you need to become familiar with the :doc:`markup
 language <format>` used by the documentation.
 
-The Sylius documentation is hosted on GitHub:
+The Sylius documentation is hosted on GitHub, in the main repository:
 
 .. code-block:: text
 
-    https://github.com/Sylius/Sylius-Docs
+    https://github.com/Sylius/Sylius
 
 If you want to submit a patch, `fork`_ the official repository on GitHub and
 then clone your fork:
 
 .. code-block:: bash
 
-    $ git clone git://github.com/YOURUSERNAME/Sylius-Docs.git
+    $ git clone git://github.com/YOURUSERNAME/Sylius.git
 
 The ``master`` branch holds the documentation for the development branch of the code.
 
@@ -31,7 +31,7 @@ Create a dedicated branch for your changes (for organization):
 
 .. code-block:: bash
 
-    $ git checkout -b improving_foo_and_bar
+    $ git checkout -b docs/improving_foo_and_bar
 
 You can now make your changes directly to this branch and commit them. When
 you're done, push this branch to *your* GitHub fork and initiate a pull request.
@@ -40,7 +40,7 @@ Creating a Pull Request
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 Following the example, the pull request will default to be between your
-``improving_foo_and_bar`` branch and the ``Sylius-Docs`` ``master`` branch.
+``improving_foo_and_bar`` branch and the ``Sylius`` ``master`` branch.
 
 GitHub covers the topic of `pull requests`_ in detail.
 
@@ -61,36 +61,6 @@ You can also prefix the title of your pull request in a few cases:
   change is rejected).
 
 .. _doc-contributing-pr-format:
-
-Pull Request Format
-~~~~~~~~~~~~~~~~~~~
-
-Unless you're fixing some minor typos, the pull request description **must**
-include the following checklist to ensure that contributions may be reviewed
-without needless feedback loops and that your contributions can be included
-into the documentation as quickly as possible:
-
-.. code-block:: text
-
-    | Q             | A
-    | ------------- | ---
-    | Doc fix?      | [yes|no]
-    | New docs?     | [yes|no] (PR # on Sylius/Sylius if applicable)
-    | Fixed tickets | [comma separated list of tickets fixed by the PR]
-
-An example submission could now look as follows:
-
-.. code-block:: text
-
-    | Q             | A
-    | ------------- | ---
-    | Doc fix?      | yes
-    | New docs?     | yes (Sylius/Sylius#1250)
-    | Fixed tickets | #1075
-
-.. tip::
-
-    Online documentation is rebuilt on every code-push to github.
 
 Documenting new Features or Behavior Changes
 --------------------------------------------
