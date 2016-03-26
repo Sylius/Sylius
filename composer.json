@@ -96,7 +96,6 @@
         "behat/mink-selenium2-driver": "~1.2",
         "behat/symfony2-extension": "~2.0",
         "bossa/phpspec2-expect": "^1.0",
-        "coduo/php-matcher": "^2.1@dev",
         "fabpot/php-cs-fixer": "^1.11",
         "lakion/api-test-case": "^1.0@dev",
         "lakion/mink-debug-extension": "^1.0.3",
