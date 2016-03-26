@@ -18,6 +18,7 @@ sylius:
         "no": false
         sign_in: Войти
         sign_out: Выйти
+        status: Статус
         success: Успешно
         "yes": true
         new: Новый

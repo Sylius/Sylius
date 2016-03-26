@@ -7,5 +7,6 @@ sylius:
             main:
                 configuration:
                     header: Konfiguráció
+                    tax_categories: Adó kategóriák
                     countries: Országok
                     locales: Területi beállítások

@@ -7,4 +7,5 @@ sylius:
             title: Название
             author: Автор
             status:
+                label: Статус
                 new: Новый
