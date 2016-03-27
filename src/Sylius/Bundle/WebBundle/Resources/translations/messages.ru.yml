@@ -463,6 +463,7 @@ sylius:
         start_date: Дата начала
         starts_at: Начало
         state: Cтатус
+        status: Статус
         street: Улица
         string_blocks: Текстовые блоки
         success: Успешно

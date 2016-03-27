@@ -6,6 +6,7 @@ sylius:
         login:
             username: Felhasználónév
             password: Jelszó
+            remember_me: Emlékezzen rám
     ui:
         create: Létrehozás
         dashboard: Vezérlőpult

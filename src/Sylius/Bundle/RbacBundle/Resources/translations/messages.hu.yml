@@ -7,6 +7,7 @@ sylius:
             code: Kód
             name: Név
             description: Leírás
+            permissions: Engedélyek
             parent: Szülő
         permission:
             code: Kód

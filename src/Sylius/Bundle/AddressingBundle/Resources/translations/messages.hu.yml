@@ -21,6 +21,7 @@ sylius:
             enabled: Engedélyezve
         province:
             name: Név
+            abbreviation: Rövidítés
             select: Válasszon
         zone:
             add_member: Tag hozzáadása

@@ -102,6 +102,7 @@ sylius:
         category: Kategória
         change_password: Jelszó módosítása
         change_your_password: Jelszó módosítása
+        channels: Csatornák
         checkout: Fizetés
         choose_file: Válassza ki a fájlt
         city: Település
@@ -145,6 +146,8 @@ sylius:
         current_password: Aktuális jelszó
         current_promotions: Aktuális promóciók
         current_stock: Aktuális készlet
+        customer: Ügyfél
+        customers: Ügyfelek
         dashboard: Vezérlőpult
         data: Adatok
         default_billing_address: Alapértelmezett számlázási cím
@@ -175,6 +178,7 @@ sylius:
         editing_variant: Változat szerkesztése
         editing_zone: Zóna szerkesztés
         email: E-mail
+        emails: E-mailek
         enabled: Engedélyezve
         ends_at: Végződik
         error: Hiba
@@ -196,6 +200,7 @@ sylius:
         hide_deleted: Törölt elem elrejtése
         id: Azonosító
         images: Képek
+        index_metadata: Metaadat
         index_of_all_configured_locales: Az összes konfigurált terület indexelése
         information: Információk
         inventory_here_you_can_see_current_stock_levels: 'Leltár <small>Az aktuális raktárkészlet</small>'
@@ -212,6 +217,7 @@ sylius:
         last_week_revenue: Múlt heti bevételek
         lastname: Vezetéknév
         latest_orders: Utolsó rendelések
+        links: Linkek
         locales: Területi beállítások
         login: Bejelentkezés
         login_button: Belépés
@@ -229,9 +235,12 @@ sylius:
         manage_tax_categories: Adókategóriák kezelése
         manage_tax_rates: Adókulcsok kezelése
         manage_zones: Zónák kezelése
+        marketing: Marketing
         members: Tagok
         menu_nodes: Menüpont hozzáadása
+        menus: Menük
         message: Üzenet
+        metadata_index: Metaadat
         method: Mód
         modified: Módosítva
         name: Név
@@ -281,6 +290,7 @@ sylius:
         payment_state: Fizetés állapota
         payments: Kifizetések
         pending: Függőben
+        permissions: Engedélyek
         phone_number: Telefonszám
         place_order: Megrendelés
         placed_at: Elhelyezve
@@ -291,7 +301,10 @@ sylius:
         pricing: Árazás
         processing: Feldolgozás alatt
         product: Termék
+        product_archetypes: Termék alaptípusok
+        product_association_types: Termék asszocciáló típusok
         product_details_viewing_product_product: 'Termék részletei <small>Termék megtekintése - "<strong>%product%</strong>"</small>'
+        product_reviews: Termék értékelések
         products: Termékek
         products_categorized_as_name: '"%name%" szerint kategorizált termékek'
         products_categorized_under_taxon_taxon: 'Termékek <small>"%taxon%" taxon alatt kategorizálva</small>'
@@ -308,10 +321,12 @@ sylius:
         register_button: Regisztráció
         registration_date: Regisztráció dátuma
         release_inventory: Kibocsáthatható készlet
+        reports: Jelentések
         restricted_zone: Tiltott zóna
         retail_price: Kiskereskedelmi ár
         return: Vissza
         returned: Visszaküldött
+        reviews: Értékelések
         roles: Szerepek
         routes: Útvonalak
         rules: Szabályok
@@ -347,6 +362,7 @@ sylius:
         state: Állapot
         street: Utca
         success: Siker
+        support: Támogatás
         tax_categories: Adó kategóriák
         tax_category: ÁFA-kategória
         tax_rate_details: Adó mérték részletei
