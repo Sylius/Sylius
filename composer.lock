@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ad226aefe9335182f5ea02cd222697bf",
-    "content-hash": "3c8ea86d828ddefea603976d90a0a4d0",
+    "hash": "913dfbf73d1351648517f204219bb000",
+    "content-hash": "30632c1576d8e0959be5cea11210135f",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -2692,9 +2692,9 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -5692,9 +5692,9 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -7824,7 +7824,7 @@
             ],
             "authors": [
                 {
-                    "name": "William DURAND",
+                    "name": "William Durand",
                     "email": "william.durand1@gmail.com",
                     "homepage": "http://www.willdurand.fr"
                 }
@@ -8714,23 +8714,23 @@
         },
         {
             "name": "coduo/php-matcher",
-            "version": "dev-master",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/coduo/php-matcher.git",
-                "reference": "c4917b16314900eb186de2422f81191afb7125a3"
+                "reference": "fddefee866d44f673f68d2bc7716b7fa824b6942"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/coduo/php-matcher/zipball/5fc8221869aa54200bba709310f3383c3d6f404c",
-                "reference": "c4917b16314900eb186de2422f81191afb7125a3",
+                "url": "https://api.github.com/repos/coduo/php-matcher/zipball/fddefee866d44f673f68d2bc7716b7fa824b6942",
+                "reference": "fddefee866d44f673f68d2bc7716b7fa824b6942",
                 "shasum": ""
             },
             "require": {
                 "coduo/php-to-string": "^2",
                 "doctrine/lexer": "1.0.*",
                 "ext-filter": "*",
-                "openlss/lib-array2xml": "0.0.10",
+                "openlss/lib-array2xml": "~0.0.9",
                 "php": ">=5.3.0",
                 "symfony/expression-language": "^2.3|^3.0",
                 "symfony/property-access": "^2.3|^3.0"
@@ -8745,9 +8745,8 @@
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Coduo\\PHPMatcher": "src/",
-                    "Coduo\\PHPMatcher\\Tests": "tests/"
+                "psr-4": {
+                    "Coduo\\PHPMatcher\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -8764,30 +8763,31 @@
                     "email": "dabrowski@brillante.pl"
                 }
             ],
+            "description": "PHP Matcher enables you to match values with patterns",
             "keywords": [
+                "Match",
                 "json",
                 "matcher",
                 "tests"
             ],
-            "time": "2015-12-14 11:10:29"
+            "time": "2016-03-18 09:28:02"
         },
         {
             "name": "coduo/php-to-string",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/coduo/php-to-string.git",
-                "reference": "5a55f3bd3af772175b458ce48648a36a1d15b54a"
+                "reference": "4c1d7e2e76017719edc70e944ace0ec570748a78"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/coduo/php-to-string/zipball/5a55f3bd3af772175b458ce48648a36a1d15b54a",
-                "reference": "5a55f3bd3af772175b458ce48648a36a1d15b54a",
+                "url": "https://api.github.com/repos/coduo/php-to-string/zipball/4c1d7e2e76017719edc70e944ace0ec570748a78",
+                "reference": "4c1d7e2e76017719edc70e944ace0ec570748a78",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0",
-                "symfony/intl": "~2.5"
+                "php": ">=5.3.0"
             },
             "require-dev": {
                 "coduo/phpspec-data-provider-extension": "^1",
@@ -8824,7 +8824,7 @@
                 "to",
                 "to string"
             ],
-            "time": "2015-12-13 13:15:40"
+            "time": "2016-01-20 18:29:02"
         },
         {
             "name": "fabpot/php-cs-fixer",
@@ -8989,22 +8989,23 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Lakion/ApiTestCase.git",
-                "reference": "466bd22a228c96a2dba971045ac8c0b0400df6d1"
+                "reference": "c4d37eccbaa49f06a317d22198649517627ed599"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Lakion/ApiTestCase/zipball/441618f9e447ec55a17dfe10a5b72f0b990e6efa",
-                "reference": "466bd22a228c96a2dba971045ac8c0b0400df6d1",
+                "url": "https://api.github.com/repos/Lakion/ApiTestCase/zipball/c4d37eccbaa49f06a317d22198649517627ed599",
+                "reference": "c4d37eccbaa49f06a317d22198649517627ed599",
                 "shasum": ""
             },
             "require": {
-                "coduo/php-matcher": "^2.1@dev",
+                "coduo/php-matcher": "^2.0",
                 "doctrine/data-fixtures": "^1.1",
                 "doctrine/doctrine-bundle": "^1.6",
                 "doctrine/orm": "^2.4.8",
-                "nelmio/alice": "@dev",
+                "nelmio/alice": "^2.1.4",
+                "php": "^5.5.9|^7.0",
                 "phpspec/php-diff": "^1.0",
-                "phpunit/phpunit": "^4.8",
+                "phpunit/phpunit": "^4.8|^5.0",
                 "polishsymfonycommunity/symfony-mocker-container": "^1.0",
                 "symfony/browser-kit": "^2.3|^3.0",
                 "symfony/console": "^2.3|^3.0",
@@ -9058,7 +9059,7 @@
                 "testcase",
                 "xml"
             ],
-            "time": "2015-12-23 11:45:48"
+            "time": "2016-03-26 13:06:40"
         },
         {
             "name": "lakion/mink-debug-extension",
@@ -9336,16 +9337,16 @@
         },
         {
             "name": "nelmio/alice",
-            "version": "2.1.2",
+            "version": "2.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nelmio/alice.git",
-                "reference": "f9afb65c8511967d672b6bc451d7156ea437d796"
+                "reference": "c8cb3413ab5d1fa76ee84296dafe356b0c703014"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nelmio/alice/zipball/f9afb65c8511967d672b6bc451d7156ea437d796",
-                "reference": "f9afb65c8511967d672b6bc451d7156ea437d796",
+                "url": "https://api.github.com/repos/nelmio/alice/zipball/c8cb3413ab5d1fa76ee84296dafe356b0c703014",
+                "reference": "c8cb3413ab5d1fa76ee84296dafe356b0c703014",
                 "shasum": ""
             },
             "require": {
@@ -9390,7 +9391,7 @@
                 "orm",
                 "test"
             ],
-            "time": "2015-12-10 10:03:17"
+            "time": "2016-01-07 14:44:47"
         },
         {
             "name": "openlss/lib-array2xml",
@@ -9517,7 +9518,8 @@
             "authors": [
                 {
                     "name": "Chris Boulton",
-                    "homepage": "http://github.com/chrisboulton"
+                    "homepage": "http://github.com/chrisboulton",
+                    "role": "Original developer"
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
@@ -10496,7 +10498,6 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "symfony-cmf/routing-bundle": 5,
-        "coduo/php-matcher": 20,
         "lakion/api-test-case": 20
     },
     "prefer-stable": false,
