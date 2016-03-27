@@ -15,7 +15,10 @@ sylius:
         actions: Akcje
         enabled: Włączone
         description: Opis
+        last_updated: Ostatnia aktualizacja
         "no": false
+        no_results_to_display: Brak wyników do wyświetlenia
+        show: Pokaż
         status: Status
         success: Sukces
         "yes": true

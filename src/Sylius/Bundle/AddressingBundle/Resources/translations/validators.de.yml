@@ -37,6 +37,7 @@ sylius:
         code:
             min_length: Der Name des Bundeslandes muss mindestens 5 Zeichen lang sein|Der Name des Bundeslandes muss mindestens 5 Zeichen lang sein.
             not_blank: Bitte geben Sie den Code des Bundeslandes ein.
+            regex: Der Code des Bundeslands sollte das Format XX-XX haben (z.B. DE-BY).
             unique: Bundesland-Code muss eindeutig sein.
         name:
             max_length: Der Name des Bundeslandes darf nicht länger als 255 Zeichen sein|Der Name des Bundeslandes darf nicht länger als 255 Zeichen sein.
@@ -46,8 +47,14 @@ sylius:
     zone:
         code:
             not_blank: Bitte geben Sie Ihre Vorwahl ein.
+            unique: Die Vorwahl muss eindeutig sein.
         members:
             min_count: 'Bitte geben Sie mindestens {{ limit }} Versandgebiete an.'
         name:
             max_length: Der Name eines Versandgebietes darf nicht länger als 255 Zeichen sein|Der Name eines Versandgebietes darf nicht länger als 255 Zeichen sein.
+            min_length: Der Name eines Versandgebietes muss mindestens zwei Zeichen lang sein|Der Name eines Versandgebietes muss mindestens zwei Zeichen lang sein.
             not_blank: Bitte geben Sie den Namen des Versandgebietes an.
+    zone_member:
+        code:
+            not_blank: Bitte wählen Sie ein Versandgebiet aus.
+        unique: Das gewählte Versandgebiet is bereits in diesem Versandgebiet.

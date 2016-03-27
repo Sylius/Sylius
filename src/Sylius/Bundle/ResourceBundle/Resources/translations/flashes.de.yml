@@ -12,3 +12,4 @@ sylius:
         restore_deleted: '%resource% wurde erfolgreich wiederhergestellt.'
         enable: '%resource% wurde erfolgreich aktiviert.'
         disable: '%resource% wurde erfolgreich deaktiviert.'
+        delete_error: 'Löschen fehlgeschlagen, %resource% wird benutzt.'

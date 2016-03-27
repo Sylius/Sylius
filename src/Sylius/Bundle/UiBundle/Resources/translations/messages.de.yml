@@ -8,21 +8,49 @@ sylius:
             password: Passwort
             remember_me: Eingeloggt bleiben
     ui:
+        are_your_sure_you_want_to_perform_this_action: Möchten Sie diese Aktion sicher durchführen?
+        confirm_your_action: Aktion bestätigen
         create: Erstellen
         dashboard: Dashboard
         delete: Löschen
+        disabled: Deaktiviert
         edit: Bearbeiten
         actions: Aktionen
         enabled: Aktiviert
         description: Beschreibung
+        an_error_occurred: Es ist ein Fehler aufgetreten
+        last_updated: Letzte Aktualisierung
+        manage_taxation_of_your_products: Besteuerung der Produkte verwalten
         "no": false
+        no_results_to_display: Es gibt keine Ergebnisse zum Anzeigen
+        powered_by: Powered by
+        tax_categories: Steuerkategorien
+        show: Anzeigen
+        info: Info
+        sign_in: Anmelden
+        sign_out: Abmelden
+        status: Status
         success: Erfolgreich
         "yes": true
         new: Neu
         save_changes: Änderungen speichern
+        administration_panel_login: Administrations-Bereich Anmeldung
         new_tax_category: Neue Steuerkategorie
+        edit_tax_category: Steuerkategorien bearbeiten
         filter: Filtern
+        clear_filters: Filter löschen
+        contains: Enthält
+        not_contains: Enthält nicht
+        equal: Gleich
         empty: Leeren
+        not_empty: Nicht leer
+        starts_with: Beginnt mit
+        ends_with: Endet mit
+        in: In
+        not_in: Nicht in
         countries: Länder
+        manage_country: Land verwalten
         new_country: Neues Land
         locales: Gebietsschemata
+        new_locale: Neue Lokalisierung
+        manage_locale: Lokalisierungen verwalten

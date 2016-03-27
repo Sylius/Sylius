@@ -35,6 +35,7 @@ sylius:
             currencies: Waluty
             shipping_methods: Metody wysyłki
             payment_methods: Metody płatności
+            theme: Motyw
         image:
             file: Zdjęcie
         locale:

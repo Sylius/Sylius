@@ -80,6 +80,8 @@ sylius:
         generate: Wygeneruj kupony promocyjne
         index: Lista kuponów promocyjnych
     shipment:
+        transition:
+            cancel: anuluj
         update: Edytuj
     taxon:
         image: Wybierz zdjęcie
@@ -491,6 +493,7 @@ sylius:
         shop_by: Przeglądaj
         show_all: Pokaż wszystko
         show_deleted: Pokaż usunięte
+        show_in_store: Pokaż w sklepie
         sign_in_to_the_store_or_create_new_account: 'Zaloguj się do sklepu <small>lub utwórz nowe konto</small>'
         simple_blocks: Zwykłe bloki
         sku: SKU
@@ -518,6 +521,7 @@ sylius:
         there_are_no_channels_configured: Nie ma żadnych skonfigurowanych kanałów
         there_are_no_images_for_this_product: Brak zdjęć dla tego produktu
         there_are_no_options_for_this_product: Brak wariantów dla tego produktu
+        there_are_no_shipments_to_display: Brak przesyłek do wyświetlenia
         there_are_no_taxons_for_this_product: Brak przypisanych kategorii
         this_months_statistics: Statystyki bieżącego miesiąca
         this_product_has_no_attributes_defined: Ten produkt nie posiada żadnych zdefiniowanych cech

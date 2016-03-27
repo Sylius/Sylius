@@ -6,5 +6,6 @@ sylius:
         code:
             not_blank: Bitte Währungscode auswählen.
             unique: Währungscode muss eindeutig sein.
+            exact_length: Währungscode muss exakt drei Zeichen lang sein.
         exchange_rate:
             not_blank: Bitte Wechselkurs angeben.

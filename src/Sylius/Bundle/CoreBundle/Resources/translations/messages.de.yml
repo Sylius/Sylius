@@ -35,6 +35,8 @@ sylius:
             currencies: Währungen
             shipping_methods: Versandmethoden
             payment_methods: Zahlungsmethoden
+            theme: Template
+            hostname: Server-Name
         image:
             file: Foto
         locale:

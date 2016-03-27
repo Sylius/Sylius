@@ -3,6 +3,9 @@
 
 sylius:
     promotion:
+        code:
+            unique: Eine Aktion mit diesem Kürzel existiert bereits.
+            not_blank: Bitte geben Sie ein Kürzel an.
         description:
             max_length: 'Die Beschreibung darf nicht länger als 1 Zeichen sein.|Die Beschreibung darf nicht länger als {{ limit }} Zeichen sein.'
             min_length: 'Die Beschreibung muss länger als 1 Zeichen sein.|Die Beschreibung muss mindestens {{ limit }} Zeichen lang sein.'

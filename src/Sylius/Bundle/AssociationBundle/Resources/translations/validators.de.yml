@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    association_type:
+        name:
+            not_blank: Bitte geben Sie den Namen der Zuordnung ein.
+            min_length: 'Der Name der Zuordnung muss mindestens 1 Zeichen lang sein.|Der Name der Zuordnung muss mindestens {{ limit }} Zeichen lang sein.'
+            max_length: 'Der Name der Zuordnung darf nicht länger als 1 Zeichen sein.|Der Name der Zuordnung darf nicht länger als {{ limit }} Zeichen sein.'
+        code:
+            unique: Eine Zuordnung mit diesem Kürzel existiert bereits.
+            not_blank: Bitte geben Sie ein Kürzel für die Zuordnung an.

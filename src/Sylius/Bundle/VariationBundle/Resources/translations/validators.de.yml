@@ -3,6 +3,9 @@
 
 sylius:
     option:
+        code:
+            not_blank: Bitte geben Sie ein Kürzel für die Option an.
+            unique: Eine Option mit diesem Kürzel existiert bereits.
         name:
             not_blank: Bitte Optionsnamen eingeben.
             min_length: 'Der Optionsname muss mindestens 1 Zeichen lang sein.|Der Optionsname muss mindestens {{ limit }} Zeichen lang sein.'

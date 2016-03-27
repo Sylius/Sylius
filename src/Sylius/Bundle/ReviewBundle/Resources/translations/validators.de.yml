@@ -3,5 +3,11 @@
 
 sylius:
     review:
+        title:
+            not_blank: Der Titel der Rezension soll nicht leer sein.
+            min_length: Der Titel der Rezension muss mindestens 2 Zeichen enthalten
+            max_length: Der Titel der Rezension darf maximal 255 Zeichen enthalten
+        rating:
+            not_blank: Sie müssen eine Bewertung abgeben.
         author:
             already_exists: Diese E-Mail wird bereits verwendet, haben Sie ihr Passwort vergessen?
