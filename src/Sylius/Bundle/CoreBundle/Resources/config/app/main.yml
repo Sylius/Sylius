@@ -18,6 +18,8 @@ doctrine_cache:
 
 liip_imagine:
     filter_sets:
+        sylius_default:
+            data_loader: cmf_media_doctrine_phpcr
         sylius_small:
             data_loader: cmf_media_doctrine_phpcr
             filters:
@@ -30,6 +32,14 @@ liip_imagine:
             data_loader: cmf_media_doctrine_phpcr
             filters:
                 thumbnail: { size: [640, 480], mode: outbound }
+
+cmf_media:
+    # LiipImagine will re-create the caches when images using filters below have changed.
+    extra_filters:
+        - sylius_default
+        - sylius_small
+        - sylius_medium
+        - sylius_large
 
 knp_snappy:
     pdf:

@@ -26,12 +26,18 @@ class SyliusImageExtension extends \Twig_Extension
     protected $mediaHelper;
 
     /**
-     * @param CmfMediaHelper $mediaHelper
+     * @var bool
      */
-    public function __construct(
-        CmfMediaHelper $mediaHelper
-    ) {
+    protected $useImagine;
+
+    /**
+     * @param CmfMediaHelper $mediaHelper
+     * @param bool $useImagine
+     */
+    public function __construct(CmfMediaHelper $mediaHelper, $useImagine)
+    {
         $this->mediaHelper = $mediaHelper;
+        $this->useImagine = $useImagine;
     }
 
     /**
@@ -60,6 +66,11 @@ class SyliusImageExtension extends \Twig_Extension
             $options = [
                 'imagine_filter' => $options,
             ];
+        }
+
+        if ($this->useImagine && !isset($options['imagine_filter'])) {
+            // Should use an imagine filter so that images are cached on filesystem.
+            $options['imagine_filter'] = 'sylius_default';
         }
 
         if ($image instanceof ImageInterface) {

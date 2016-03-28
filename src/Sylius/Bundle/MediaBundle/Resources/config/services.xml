@@ -37,6 +37,7 @@
         <!-- Twig Extensions -->
         <service id="sylius.twig.extension.image" class="%sylius.twig.extension.image.class%">
             <argument type="service" id="cmf_media.templating.helper" />
+            <argument>%cmf_media.use_imagine%</argument>
             <tag name="twig.extension" />
         </service>
 

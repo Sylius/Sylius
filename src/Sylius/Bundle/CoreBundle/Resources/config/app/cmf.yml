@@ -32,6 +32,11 @@ cmf_media:
         phpcr:
             media_basepath: /cms/medias
             enabled: true
+    extra_filters:
+        - slideshow_default
+        - slideshow_small
+        - slideshow_medium
+        - slideshow_large
 
 cmf_routing:
     chain:

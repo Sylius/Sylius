@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Image\Model;
+namespace spec\Sylius\Component\Media\Model;
 
 use PhpSpec\ObjectBehavior;
 use Symfony\Cmf\Bundle\MediaBundle\ImageInterface as CmfImageInterface;
