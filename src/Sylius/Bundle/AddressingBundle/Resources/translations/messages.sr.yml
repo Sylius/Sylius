@@ -18,8 +18,10 @@ sylius:
             name: Име
             provinces: Провинције
             select: Изаберите
+            enabled: Омогућено
         province:
             name: Име
+            abbreviation: Скраћеница
             select: Изаберите
         zone:
             add_member: Додајте члана

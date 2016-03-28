@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        archetype:
+            code: Кôд
+            name: Име
+            parent: Родитељ
+            attributes: Атрибути
+            options: Опције
