@@ -3,6 +3,8 @@
 
 sylius:
     account:
+        address:
+            create: Twój adres został pomyślnie dodany
         password:
             change_success: Hasło zostało zmienione
             invalid: Błędne hasło

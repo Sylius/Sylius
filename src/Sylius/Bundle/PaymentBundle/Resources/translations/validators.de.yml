@@ -34,3 +34,6 @@ sylius:
                 max_range: 'Prozentuale Gebühr darf nicht höher als {{ limit }} sein.'
                 min_range: 'Prozentuale Gebühr darf nicht unter {{ limit }} sein.'
                 not_blank: Bitte geben Sie die prozentuale Gebühr ein.
+        code:
+            not_blank: Bitte geben Sie ein Kürzel für die Zahlungsmethode an.
+            unique: Eine Zahlungsmethode mit diesem Kürzel existiert bereits.

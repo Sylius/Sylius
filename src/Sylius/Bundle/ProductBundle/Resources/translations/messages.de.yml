@@ -13,6 +13,7 @@ sylius:
             taxons: Gruppen
         product_variant:
             available_on: Verfügbar ab
+            available_until: Verfügbar bis
         product_archetype:
             name: Name
             parent: Übergeordnet
@@ -20,3 +21,6 @@ sylius:
             options: Optionen
         association_type:
             name: Name
+        association:
+            type: Verbindungs-Typ
+            product: Zugehöriges Produkt

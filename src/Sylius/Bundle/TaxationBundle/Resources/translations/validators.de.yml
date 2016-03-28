@@ -5,6 +5,9 @@ sylius:
     tax_category:
         name:
             not_blank: Bitte geben Sie den Namen der Steuerkategorie an.
+        code:
+            not_blank: Bitte geben Sie ein Kürzel für die Kategorie an.
+            unique: Eine Kategorie mit diesem Kürzel existiert bereits.
     tax_rate:
         category:
             not_blank: Bitte wählen Sie eine Steuerkategorie aus.
@@ -14,3 +17,6 @@ sylius:
             not_blank: Bitte geben Sie den Wert des Kurses der Steuerkategorie an.
         calculator:
             not_blank: Bitte wählen Sie den Kursrechner aus.
+        code:
+            not_blank: Bitte geben Sie ein Kürzel für die Besteuerung an.
+            unique: Eine Besteuerung mit diesem Kürzel existiert bereits.

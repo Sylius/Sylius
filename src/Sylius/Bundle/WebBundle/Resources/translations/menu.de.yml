@@ -12,6 +12,7 @@ sylius:
                 blocks: Blöcke
                 channels: Ausgabekanäle
                 configuration: Konfiguration
+                contact_requests: Kontaktanfragen
                 contact_topics: Themen konfigurieren
                 content: Inhalt
                 countries: Länder
@@ -75,6 +76,7 @@ sylius:
                 locales: Gebietsschemata
                 marketing: Marketing
                 menus: Menüpunkte
+                metadata: Metadaten
                 new_order: Neue Bestellung
                 new_promotion: Neue Aktion hinzufügen
                 options: Produktoptionen verwalten
@@ -83,12 +85,14 @@ sylius:
                 payment_methods: Bezahlmethoden
                 payments: Zahlungen
                 permissions: Berechtigungen
+                product_review: Produkt-Bewertung
                 products: Produkte
                 promotions: Aktionen
                 redirects: Weiterleitungen
                 report: Berichte
                 roles: Rollen
                 routes: Pfade
+                review: Rezensionen
                 sales: Aufträge
                 security_settings: Sicherheitseinstellungen
                 shipments: Lieferungen
