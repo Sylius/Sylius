@@ -28,7 +28,7 @@
                     <td>{% if channel.defaultCurrency is not null %}{{ channel.defaultCurrency.code }}{% endif %}</td>
                     <td>{{ channel.theme.title|default('') }}</td>
                     <td>{{ misc.state_label(channel.enabled) }}</td>
-                    <td>{{ channel.updatedAt|date }}</td>
+                    <td>{{ channel.updatedAt|sylius_localized_date }}</td>
                     <td>
                         <div class="pull-right">
                             {{ buttons.edit(path('sylius_backend_channel_update', {'id': channel.id})) }}

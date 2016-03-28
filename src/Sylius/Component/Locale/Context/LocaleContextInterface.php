@@ -16,6 +16,7 @@ namespace Sylius\Component\Locale\Context;
  * locale.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Aram Alipoor <aram.alipoor@gmail.com>
  */
 interface LocaleContextInterface
 {
@@ -33,4 +34,16 @@ interface LocaleContextInterface
      * @param string $locale
      */
     public function setCurrentLocale($locale);
+
+    /**
+     * @return string `rtl` or `ltr`
+     */
+    public function getCurrentDirection();
+
+    /**
+     * @return string
+     *
+     * @see \Sylius\Component\Locale\Calendars
+     */
+    public function getCurrentCalendar();
 }

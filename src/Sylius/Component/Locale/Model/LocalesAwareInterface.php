@@ -14,7 +14,7 @@ namespace Sylius\Component\Locale\Model;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * Interface implemented by objects related to multiple locales
+ * Interface implemented by objects related to multiple locales.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
