@@ -6,4 +6,7 @@ sylius:
         admin:
             main:
                 configuration:
+                    header: Подешавања
+                    tax_categories: Категорија пореза
                     countries: Земље
+                    locales: Локални
