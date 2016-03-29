@@ -14,6 +14,7 @@ namespace spec\Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use PhpSpec\ObjectBehavior;
 use Sylius\Behat\Context\Setup\LocaleContext;
+use Sylius\Component\Locale\Converter\LocaleNameConverterInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -29,9 +30,10 @@ class LocaleContextSpec extends ObjectBehavior
     function let(
         SharedStorageInterface $sharedStorage,
         FactoryInterface $localeFactory,
+        LocaleNameConverterInterface $localeNameConverter,
         RepositoryInterface $localeRepository
     ) {
-        $this->beConstructedWith($sharedStorage, $localeFactory, $localeRepository);
+        $this->beConstructedWith($sharedStorage, $localeFactory, $localeNameConverter, $localeRepository);
     }
 
     function it_is_initializable()
@@ -47,10 +49,12 @@ class LocaleContextSpec extends ObjectBehavior
     function it_creates_locale(
         FactoryInterface $localeFactory,
         LocaleInterface $locale,
+        LocaleNameConverterInterface $localeNameConverter,
         RepositoryInterface $localeRepository,
         SharedStorageInterface $sharedStorage
     ) {
         $localeFactory->createNew()->willReturn($locale);
+        $localeNameConverter->convertToCode('Norwegian')->willReturn('no');
 
         $locale->setCode('no')->shouldBeCalled();
         $sharedStorage->set('locale', $locale)->shouldBeCalled();
@@ -62,10 +66,12 @@ class LocaleContextSpec extends ObjectBehavior
     function it_creates_disabled_locale(
         FactoryInterface $localeFactory,
         LocaleInterface $locale,
+        LocaleNameConverterInterface $localeNameConverter,
         RepositoryInterface $localeRepository,
         SharedStorageInterface $sharedStorage
     ) {
         $localeFactory->createNew()->willReturn($locale);
+        $localeNameConverter->convertToCode('Norwegian')->willReturn('no');
 
         $locale->setCode('no')->shouldBeCalled();
         $locale->disable()->shouldBeCalled();
@@ -79,10 +85,13 @@ class LocaleContextSpec extends ObjectBehavior
     function it_throws_invalid_argument_exception_if_cannot_convert_locale_name_to_code(
         FactoryInterface $localeFactory,
         LocaleInterface $locale,
+        LocaleNameConverterInterface $localeNameConverter,
         RepositoryInterface $localeRepository,
         SharedStorageInterface $sharedStorage
     ) {
         $localeFactory->createNew()->willReturn($locale);
+        $localeNameConverter->convertToCode('xyz')->willThrow(\InvalidArgumentException::class);
+
         $locale->setCode('no')->shouldNotBeCalled();
         $sharedStorage->set('locale', $locale)->shouldNotBeCalled();
         $localeRepository->add($locale)->shouldNotBeCalled();
