@@ -23,7 +23,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-abstract class AbstractRoleCommand extends ContainerAwareCommand implements RoleCommandInterface
+abstract class AbstractRoleCommand extends ContainerAwareCommand
 {
     /**
      * {@inheritdoc}
@@ -131,4 +131,12 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand implements Role
     {
         return $this->getContainer()->get('sylius.repository.user');
     }
+
+    /**
+     * @param OutputInterface $output
+     * @param UserInterface $user
+     * @param array $roles
+     * @param array $securityRoles
+     */
+    abstract protected function executeRoleCommand(OutputInterface $output, UserInterface $user, array $roles, array $securityRoles);
 }

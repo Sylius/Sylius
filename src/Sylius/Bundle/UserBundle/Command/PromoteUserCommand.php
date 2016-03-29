@@ -46,7 +46,7 @@ EOT
     /**
      * {@inheritdoc}
      */
-    public function executeRoleCommand(OutputInterface $output, UserInterface $user, array $roles, array $securityRoles)
+    protected function executeRoleCommand(OutputInterface $output, UserInterface $user, array $roles, array $securityRoles)
     {
         $error = false;
 
