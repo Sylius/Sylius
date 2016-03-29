@@ -92,6 +92,7 @@ final class ManagingTaxRateContext implements Context
 
     /**
      * @When I define it for the :zoneName zone
+     * @When I change its zone to :zoneName
      */
     public function iDefineItForTheZone($zoneName)
     {
@@ -100,6 +101,7 @@ final class ManagingTaxRateContext implements Context
 
     /**
      * @When I make it applicable for the :taxCategoryName tax category
+     * @When I change it to be applicable for the :taxCategoryName tax category
      */
     public function iMakeItApplicableForTheTaxCategory($taxCategoryName)
     {
@@ -282,6 +284,22 @@ final class ManagingTaxRateContext implements Context
             $this->indexPage->isResourceOnPage([$element => $code]),
             sprintf('Tax rate with %s %s cannot be founded.', $element, $code)
         );
+    }
+
+    /**
+     * @Then /^(this tax rate) should be applicable for the "([^"]+)" tax category$/
+     */
+    public function thisTaxRateShouldBeApplicableForTaxCategory(TaxRateInterface $taxRate, $taxCategory)
+    {
+        $this->assertFieldValue($taxRate, 'category', $taxCategory);
+    }
+
+    /**
+     * @Then /^(this tax rate) should be applicable in "([^"]+)" zone$/
+     */
+    public function thisTaxRateShouldBeApplicableInZone(TaxRateInterface $taxRate, $zone)
+    {
+        $this->assertFieldValue($taxRate, 'zone', $zone);
     }
 
     /**

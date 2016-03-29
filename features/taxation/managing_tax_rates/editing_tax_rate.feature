@@ -38,3 +38,21 @@ Feature: Editing tax rate
         And I save my changes
         Then I should be notified about successful edition
         And this tax rate amount should be 16%
+
+    @ui
+    Scenario: Changing related tax category
+        Given the store has a tax category "Food and Beverage" also
+        And I want to modify a tax rate "European Union Sales Tax"
+        And I change it to be applicable for the "Food and Beverage" tax category
+        And I save my changes
+        Then I should be notified about successful edition
+        And this tax rate should be applicable for the "Food and Beverage" tax category
+
+    @ui
+    Scenario: Changing related zone
+        Given there is a zone "The Rest of the World" containing all other countries
+        And I want to modify a tax rate "European Union Sales Tax"
+        And I change its zone to "The Rest of the World"
+        And I save my changes
+        Then I should be notified about successful edition
+        And this tax rate should be applicable in "The Rest of the World" zone

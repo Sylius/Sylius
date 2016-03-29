@@ -108,6 +108,7 @@ final class TaxationContext implements Context
     /**
      * @Given the store has a tax category :name with a code :code
      * @Given the store has a tax category :name
+     * @Given the store has a tax category :name also
      */
     public function theStoreHasTaxCategoryWithCode($name, $code = null)
     {
