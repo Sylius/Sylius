@@ -21,9 +21,9 @@ use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ItemsFromTaxonTotalRuleChecker implements RuleCheckerInterface
+class TotalOfItemsFromTaxonRuleChecker implements RuleCheckerInterface
 {
-    const TYPE = 'items_from_taxon_total';
+    const TYPE = 'total_of_items_from_taxon';
 
     /**
      * @var TaxonRepositoryInterface
@@ -53,7 +53,7 @@ class ItemsFromTaxonTotalRuleChecker implements RuleCheckerInterface
 
         $targetTaxon = $this->taxonRepository->findOneBy(['code' => $configuration['taxon']]);
         if (null === $targetTaxon) {
-            throw new \InvalidArgumentException(sprintf('Taxon with code "%s" does not exist.', $configuration['taxon']));
+            return false;
         }
 
         $itemsWithTaxonTotal = 0;
@@ -65,11 +65,7 @@ class ItemsFromTaxonTotalRuleChecker implements RuleCheckerInterface
             }
         }
 
-        if ($itemsWithTaxonTotal < $configuration['amount']) {
-            return false;
-        }
-
-        return true;
+        return $itemsWithTaxonTotal >= $configuration['amount'];
     }
 
     /**

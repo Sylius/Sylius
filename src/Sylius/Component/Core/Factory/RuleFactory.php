@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Core\Factory;
 
-use Sylius\Component\Core\Promotion\Checker\ItemsFromTaxonTotalRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\TotalOfItemsFromTaxonRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\TaxonRuleChecker;
 use Sylius\Component\Promotion\Model\RuleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -88,7 +88,7 @@ class RuleFactory implements RuleFactoryInterface
     {
         /** @var RuleInterface $rule */
         $rule = $this->createNew();
-        $rule->setType(ItemsFromTaxonTotalRuleChecker::TYPE);
+        $rule->setType(TotalOfItemsFromTaxonRuleChecker::TYPE);
         $rule->setConfiguration(['taxon' => $taxon, 'amount' => $amount]);
 
         return $rule;

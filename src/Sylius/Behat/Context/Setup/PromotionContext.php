@@ -299,7 +299,7 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") off if order contains products (classified as "[^"]+") and priced at ("(?:€|£|\$)[^"]+")$/
+     * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") off if order contains products (classified as "[^"]+") with a minimum value of ("(?:€|£|\$)[^"]+")$/
      */
     public function thePromotionGivesOffIfOrderContainsProductsClassifiedAsAndPricedAt(
         PromotionInterface $promotion,

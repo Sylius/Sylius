@@ -16,18 +16,18 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Core\Promotion\Checker\ItemsFromTaxonTotalRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\TotalOfItemsFromTaxonRuleChecker;
 use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 /**
- * @mixin ItemsFromTaxonTotalRuleChecker
+ * @mixin TotalOfItemsFromTaxonRuleChecker
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ItemsFromTaxonTotalRuleCheckerSpec extends ObjectBehavior
+class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
 {
     function let(TaxonRepositoryInterface $taxonRepository)
     {
@@ -36,7 +36,7 @@ class ItemsFromTaxonTotalRuleCheckerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Promotion\Checker\ItemsFromTaxonTotalRuleChecker');
+        $this->shouldHaveType('Sylius\Component\Core\Promotion\Checker\TotalOfItemsFromTaxonRuleChecker');
     }
 
     function it_implements_rule_checker_interface()
@@ -46,9 +46,9 @@ class ItemsFromTaxonTotalRuleCheckerSpec extends ObjectBehavior
 
     function it_recognizes_subject_as_eligible_if_it_has_items_from_configured_taxon_which_has_required_total(
         OrderInterface $order,
-        OrderItemInterface $item1,
-        OrderItemInterface $item2,
-        OrderItemInterface $item3,
+        OrderItemInterface $compositeBowItem,
+        OrderItemInterface $longswordItem,
+        OrderItemInterface $reflexBowItem,
         ProductInterface $compositeBow,
         ProductInterface $longsword,
         ProductInterface $reflexBow,
@@ -58,71 +58,71 @@ class ItemsFromTaxonTotalRuleCheckerSpec extends ObjectBehavior
         $order
             ->getItems()
             ->willReturn(
-                new \ArrayIterator([$item1->getWrappedObject(), $item2->getWrappedObject(), $item3->getWrappedObject()])
+                new \ArrayIterator([$compositeBowItem->getWrappedObject(), $longswordItem->getWrappedObject(), $reflexBowItem->getWrappedObject()])
             )
         ;
 
         $taxonRepository->findOneBy(['code' => 'bows'])->willReturn($bows);
 
-        $item1->getProduct()->willReturn($compositeBow);
+        $compositeBowItem->getProduct()->willReturn($compositeBow);
         $compositeBow->hasTaxon($bows)->willReturn(true);
-        $item1->getTotal()->willReturn(5000);
+        $compositeBowItem->getTotal()->willReturn(5000);
 
-        $item2->getProduct()->willReturn($longsword);
+        $longswordItem->getProduct()->willReturn($longsword);
         $longsword->hasTaxon($bows)->willReturn(false);
-        $item2->getTotal()->willReturn(4000);
+        $longswordItem->getTotal()->willReturn(4000);
 
-        $item3->getProduct()->willReturn($reflexBow);
+        $reflexBowItem->getProduct()->willReturn($reflexBow);
         $reflexBow->hasTaxon($bows)->willReturn(true);
-        $item3->getTotal()->willReturn(9000);
+        $reflexBowItem->getTotal()->willReturn(9000);
 
         $this->isEligible($order, ['taxon' => 'bows', 'amount' => 10000])->shouldReturn(true);
     }
 
     function it_recognizes_subject_as_eligible_if_it_has_items_from_configured_taxon_which_has_total_equal_with_required(
         OrderInterface $order,
-        OrderItemInterface $item1,
-        OrderItemInterface $item2,
+        OrderItemInterface $compositeBowItem,
+        OrderItemInterface $reflexBowItem,
         ProductInterface $compositeBow,
         ProductInterface $reflexBow,
         TaxonInterface $bows,
         TaxonRepositoryInterface $taxonRepository
     ) {
-        $order->getItems()->willReturn(new \ArrayIterator([$item1->getWrappedObject(), $item2->getWrappedObject()]));
+        $order->getItems()->willReturn(new \ArrayIterator([$compositeBowItem->getWrappedObject(), $reflexBowItem->getWrappedObject()]));
 
         $taxonRepository->findOneBy(['code' => 'bows'])->willReturn($bows);
 
-        $item1->getProduct()->willReturn($compositeBow);
+        $compositeBowItem->getProduct()->willReturn($compositeBow);
         $compositeBow->hasTaxon($bows)->willReturn(true);
-        $item1->getTotal()->willReturn(5000);
+        $compositeBowItem->getTotal()->willReturn(5000);
 
-        $item2->getProduct()->willReturn($reflexBow);
+        $reflexBowItem->getProduct()->willReturn($reflexBow);
         $reflexBow->hasTaxon($bows)->willReturn(true);
-        $item2->getTotal()->willReturn(5000);
+        $reflexBowItem->getTotal()->willReturn(5000);
 
         $this->isEligible($order, ['taxon' => 'bows', 'amount' => 10000])->shouldReturn(true);
     }
 
     function it_does_not_recognize_subject_as_eligible_if_items_from_required_taxon_has_too_low_total(
         OrderInterface $order,
-        OrderItemInterface $item1,
-        OrderItemInterface $item2,
+        OrderItemInterface $compositeBowItem,
+        OrderItemInterface $longswordItem,
         ProductInterface $compositeBow,
         ProductInterface $longsword,
         TaxonInterface $bows,
         TaxonRepositoryInterface $taxonRepository
     ) {
-        $order->getItems()->willReturn(new \ArrayIterator([$item1->getWrappedObject(), $item2->getWrappedObject()]));
+        $order->getItems()->willReturn(new \ArrayIterator([$compositeBowItem->getWrappedObject(), $longswordItem->getWrappedObject()]));
 
         $taxonRepository->findOneBy(['code' => 'bows'])->willReturn($bows);
 
-        $item1->getProduct()->willReturn($compositeBow);
+        $compositeBowItem->getProduct()->willReturn($compositeBow);
         $compositeBow->hasTaxon($bows)->willReturn(true);
-        $item1->getTotal()->willReturn(5000);
+        $compositeBowItem->getTotal()->willReturn(5000);
 
-        $item2->getProduct()->willReturn($longsword);
+        $longswordItem->getProduct()->willReturn($longsword);
         $longsword->hasTaxon($bows)->willReturn(false);
-        $item2->getTotal()->willReturn(4000);
+        $longswordItem->getTotal()->willReturn(4000);
 
         $this->isEligible($order, ['taxon' => 'bows', 'amount' => 10000])->shouldReturn(false);
     }
@@ -142,16 +142,13 @@ class ItemsFromTaxonTotalRuleCheckerSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_exception_if_taxon_with_configured_code_cannot_be_found(
+    function it_returns_false_if_taxon_with_configured_code_cannot_be_found(
         OrderInterface $order,
         TaxonRepositoryInterface $taxonRepository
     ) {
         $taxonRepository->findOneBy(['code' => 'sniper_rifles'])->willReturn(null);
 
-        $this
-            ->shouldThrow(new \InvalidArgumentException('Taxon with code "sniper_rifles" does not exist.'))
-            ->during('isEligible', [$order, ['taxon' => 'sniper_rifles', 'amount' => 1000]])
-        ;
+        $this->isEligible($order, ['taxon' => 'sniper_rifles', 'amount' => 1000])->shouldReturn(false);
     }
 
     function it_has_configuration_form_type()

@@ -13,7 +13,7 @@ namespace spec\Sylius\Component\Core\Factory;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Factory\RuleFactoryInterface;
-use Sylius\Component\Core\Promotion\Checker\ItemsFromTaxonTotalRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\TotalOfItemsFromTaxonRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\TaxonRuleChecker;
 use Sylius\Component\Promotion\Model\RuleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -72,10 +72,10 @@ class RuleFactorySpec extends ObjectBehavior
         $this->createTaxon([1, 6])->shouldReturn($rule);
     }
 
-    function it_creates_items_from_taxon_total_rule($decoratedFactory, RuleInterface $rule)
+    function it_creates_total_of_items_from_taxon_rule($decoratedFactory, RuleInterface $rule)
     {
         $decoratedFactory->createNew()->willReturn($rule);
-        $rule->setType(ItemsFromTaxonTotalRuleChecker::TYPE)->shouldBeCalled();
+        $rule->setType(TotalOfItemsFromTaxonRuleChecker::TYPE)->shouldBeCalled();
         $rule->setConfiguration(['taxon' => 'spears', 'amount' => 1000])->shouldBeCalled();
 
         $this->createItemsFromTaxonTotal('spears', 1000)->shouldReturn($rule);
