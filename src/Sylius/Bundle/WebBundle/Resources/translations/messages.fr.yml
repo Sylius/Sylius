@@ -93,6 +93,9 @@ sylius:
     page:
         no_route: "Votre contenu ne va pas apparaître sur la boutique si aucune route n'est définie"
         publishable: Publié
+    payment:
+        transition:
+            cancel: annuler
     pricing:
         volume_based:
             max: Volume maximum
@@ -100,6 +103,7 @@ sylius:
     promotion_coupon:
         generate: Générer des coupons
         index: Liste des coupons
+        total_results: 'Total : %total%'
     report:
         data_fetcher: "Type d'outil de récupération de données"
         no_data: "Il n'y a pas de donnée à afficher"
@@ -114,6 +118,8 @@ sylius:
             no_account: "Vous n'avez encore pas de compte"
     shipment:
         no_items: "Il n'y a aucun élément à afficher"
+        transition:
+            cancel: annuler
         update: Modifier
     stockable:
         on_hand: Niveau de stock
@@ -124,6 +130,7 @@ sylius:
         abandoned: Abandonné
         access_token: "Jeton d'accès"
         account_panel_outline: Profitez de toutes les fonctionnalités qui sont disponibles sur votre espace personnel pour visualiser, suivre et gérer toutes vos données
+        action: Action
         actions: Actions
         add: Ajouter
         add_action: Ajouter une action
@@ -176,6 +183,7 @@ sylius:
         cancel: Annuler
         cancelled: Annulé
         cart_locked: Panier verrouillé
+        cart_summary: Détail du panier
         categorization: Catégorisation
         category: Catégorie
         change_password: Modifier votre mot de passe
@@ -492,6 +500,7 @@ sylius:
         original_price: "Prix d'origine"
         out_of_stock: Rupture de stock
         overview_of_your_store: "Vue d'ensemble de votre magasin"
+        page: Page
         pages: Pages
         parent: Parent
         password: Mot de passe
@@ -522,6 +531,7 @@ sylius:
         product_attributes: Propriété de produit
         product_details_viewing_product_product: Détails du produit
         product_options: Options de produit
+        product_reviews: Avis produit
         products: Produits
         products_categorized_as_name: 'Produits classés en tant que « %name% »'
         products_categorized_under_taxon_taxon: 'Produits <small>catégorisés sous le taxon "%taxon%"</small>'
@@ -607,6 +617,7 @@ sylius:
         subject: Sujet
         success: Succès
         support: Support
+        sylius_logo: Sylius
         tax_categories: Catégories de taxe
         tax_category: Catégorie de taxe
         tax_rate_details: Détails du taux
@@ -614,6 +625,7 @@ sylius:
         tax_total: Total des taxes
         taxation_categories: Catégories de taxes
         taxation_settings: Configuration des taxes
+        taxes: Taxes
         taxons: Famille de tags
         thank_you_for_your_order: Merci pour votre commande
         theme: Thème
@@ -664,6 +676,7 @@ sylius:
         this_product_has_no_attributes_defined: "Ce produit ne comporte pas d'attributs"
         title: Titre
         topic: Sujet
+        total: Total
         total_orders: Nombre total de commandes
         total_qty: Qté totale
         total_registrations: "Nombre total d'inscriptions"
@@ -695,6 +708,7 @@ sylius:
         welcome: Bienvenue
         welcome_to_our_store: Bienvenue dans notre boutique
         welcome_to_your_space: Bienvenue dans votre espace
+        "yes": Oui
         you_are_customer_since: Vous êtes client depuis
         you_have_no_addresses_defined: "Vous n'avez défini aucune adresse"
         you_have_no_new_orders: "Vous n'avez aucune nouvelle commande"
