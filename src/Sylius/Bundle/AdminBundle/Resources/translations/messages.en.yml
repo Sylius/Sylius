@@ -7,3 +7,4 @@ sylius:
           tax_categories: Tax categories
           countries: Countries
           locales: Locales
+          tax_rates: Tax rates

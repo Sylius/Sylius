@@ -17,6 +17,7 @@
         <parameter key="sylius.behat.context.ui.admin.managing_locale.class">Sylius\Behat\Context\Ui\Admin\ManagingLocalesContext</parameter>
         <parameter key="sylius.behat.context.ui.admin.managing_shipping_methods.class">Sylius\Behat\Context\Ui\Admin\ManagingShippingMethodsContext</parameter>
         <parameter key="sylius.behat.context.ui.admin.managing_tax_category.class">Sylius\Behat\Context\Ui\Admin\ManagingTaxCategoryContext</parameter>
+        <parameter key="sylius.behat.context.ui.admin.managing_tax_rate.class">Sylius\Behat\Context\Ui\Admin\ManagingTaxRateContext</parameter>
 
         <parameter key="sylius.behat.context.ui.cart.class">Sylius\Behat\Context\Ui\CartContext</parameter>
         <parameter key="sylius.behat.context.ui.channel.class">Sylius\Behat\Context\Ui\ChannelContext</parameter>
@@ -56,6 +57,14 @@
             <argument type="service" id="sylius.behat.page.admin.tax_category.index" />
             <argument type="service" id="sylius.behat.page.admin.tax_category.create" />
             <argument type="service" id="sylius.behat.page.admin.tax_category.update" />
+            <argument type="service" id="sylius.behat.service.accessor.notification_accessor" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.ui.admin.managing_tax_rate" class="%sylius.behat.context.ui.admin.managing_tax_rate.class%" scope="scenario">
+            <argument type="service" id="sylius.behat.page.admin.tax_rate.index" />
+            <argument type="service" id="sylius.behat.page.admin.tax_rate.create" />
+            <argument type="service" id="sylius.behat.page.admin.tax_rate.update" />
             <argument type="service" id="sylius.behat.service.accessor.notification_accessor" />
             <tag name="sylius.behat.context" />
         </service>

@@ -81,27 +81,36 @@ final class TaxationContext implements Context
 
     /**
      * @Given the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within :zone zone
+     * @Given the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within :zone zone identified by :taxRateCode code 
      * @Given /^the store has "([^"]+)" tax rate of ([^"]+)% for "([^"]+)" for (the rest of the world)$/
      */
-    public function storeHasTaxRateWithinZone($taxRateName, $taxRateAmount, $taxCategoryName, ZoneInterface $zone)
+    public function storeHasTaxRateWithinZone($taxRateName, $taxRateAmount, $taxCategoryName, ZoneInterface $zone, $taxRateCode = null)
     {
         $taxCategory = $this->getOrCreateTaxCategory($taxCategoryName);
 
+        if(null === $taxRateCode) {
+            $taxRateCode = $this->getCodeFromNameAndZoneCode($taxRateName, $zone->getCode());
+        }
+
         $taxRate = $this->taxRateFactory->createNew();
         $taxRate->setName($taxRateName);
-        $taxRate->setCode($this->getCodeFromNameAndZoneCode($taxRateName, $zone->getCode()));
+        $taxRate->setCode($taxRateCode);
         $taxRate->setZone($zone);
         $taxRate->setAmount($this->getAmountFromString($taxRateAmount));
         $taxRate->setCategory($taxCategory);
         $taxRate->setCalculator('default');
 
         $this->taxRateRepository->add($taxRate);
+
+        $this->sharedStorage->set('tax_rate', $taxRate);
     }
 
     /**
      * @Given the store has a tax category :name with a code :code
+     * @Given the store has a tax category :name
+     * @Given the store has a tax category :name also
      */
-    public function theStoreHasTaxCategoryWithCode($name, $code)
+    public function theStoreHasTaxCategoryWithCode($name, $code = null)
     {
         $taxCategory = $this->createTaxCategory($name, $code);
 

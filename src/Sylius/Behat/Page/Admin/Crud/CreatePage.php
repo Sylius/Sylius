@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Page\Admin\Crud;
 
 use Behat\Mink\Session;
+use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -51,7 +52,12 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
      */
     public function checkValidationMessageFor($element, $message)
     {
-        return $message === $this->getElement($element)->getParent()->find('css', '.pointing')->getText();
+        $foundedElement = $this->getElement($element)->getParent()->find('css', '.pointing');
+        if(null === $foundedElement) {
+            throw new ElementNotFoundException(sprintf('Element %s was not found, so asserting its validation message was not possible.', $element));
+        }
+
+        return $message === $foundedElement->getText();
     }
 
     /**
