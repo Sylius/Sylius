@@ -66,11 +66,11 @@ class AffiliateGoal implements AffiliateGoalInterface
     protected $provisions;
 
     /**
-     * Transactions made for this goal.
+     * Rewards made for this goal.
      *
-     * @var Collection|TransactionInterface[]
+     * @var Collection|RewardInterface[]
      */
-    protected $transactions;
+    protected $rewards;
 
     /**
      * Start date.
@@ -311,35 +311,35 @@ class AffiliateGoal implements AffiliateGoalInterface
     /**
      * {@inheritdoc}
      */
-    public function hasTransactions()
+    public function hasRewards()
     {
-        return !$this->transactions->isEmpty();
+        return !$this->rewards->isEmpty();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getTransactions()
+    public function getRewards()
     {
-        return $this->transactions;
+        return $this->rewards;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasTransaction(TransactionInterface $transaction)
+    public function hasReward(RewardInterface $reward)
     {
-        return $this->transactions->contains($transaction);
+        return $this->rewards->contains($reward);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addTransaction(TransactionInterface $transaction)
+    public function addReward(RewardInterface $reward)
     {
-        if (!$this->hasTransaction($transaction)) {
-            $transaction->setGoal($this);
-            $this->transactions->add($transaction);
+        if (!$this->hasReward($reward)) {
+            $reward->setGoal($this);
+            $this->rewards->add($reward);
         }
 
         return $this;
@@ -348,11 +348,11 @@ class AffiliateGoal implements AffiliateGoalInterface
     /**
      * {@inheritdoc}
      */
-    public function removeTransaction(TransactionInterface $transaction)
+    public function removeReward(RewardInterface $reward)
     {
-        if ($this->hasTransaction($transaction)) {
-            $transaction->setGoal(null);
-            $this->transactions->removeElement($transaction);
+        if ($this->hasReward($reward)) {
+            $reward->setGoal(null);
+            $this->rewards->removeElement($reward);
         }
 
         return $this;

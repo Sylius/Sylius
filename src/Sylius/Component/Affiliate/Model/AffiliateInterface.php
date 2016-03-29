@@ -118,21 +118,21 @@ interface AffiliateInterface extends ReferralInterface, TimestampableInterface, 
     public function setStatus($status);
 
     /**
-     * @return Collection|TransactionInterface[]
+     * @return Collection|RewardInterface[]
      */
-    public function getTransactions();
+    public function getRewards();
 
     /**
-     * @param TransactionInterface $transaction
+     * @param RewardInterface $reward
      *
      * @return self
      */
-    public function addTransaction(TransactionInterface $transaction);
+    public function addReward(RewardInterface $reward);
 
     /**
-     * @param TransactionInterface $transaction
+     * @param RewardInterface $reward
      *
      * @return self
      */
-    public function removeTransaction(TransactionInterface $transaction);
+    public function removeReward(RewardInterface $reward);
 }

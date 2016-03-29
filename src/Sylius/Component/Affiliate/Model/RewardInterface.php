@@ -16,7 +16,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
-interface TransactionInterface extends AffiliateAwareInterface, TimestampableInterface
+interface RewardInterface extends AffiliateAwareInterface, TimestampableInterface
 {
     const TYPE_EARNING = 1;
     const TYPE_PAYOUT  = 2;
@@ -29,21 +29,21 @@ interface TransactionInterface extends AffiliateAwareInterface, TimestampableInt
     public function getId();
 
     /**
-     * Is transaction earning?
+     * Is reward earning?
      *
      * @return bool
      */
     public function isEarning();
 
     /**
-     * Is transaction payment?
+     * Is reward payment?
      *
      * @return bool
      */
     public function isPayment();
 
     /**
-     * Set type of transaction.
+     * Set type of reward.
      *
      * @param int $type
      *
@@ -84,14 +84,14 @@ interface TransactionInterface extends AffiliateAwareInterface, TimestampableInt
     public function setCurrency($currency);
 
     /**
-     * Set affiliate goal this transaction applies to.
+     * Set affiliate goal this reward applies to.
      *
      * @return self
      */
     public function setGoal(AffiliateGoalInterface $goal);
 
     /**
-     * Returns affiliate goal this transaction applies to.
+     * Returns affiliate goal this reward applies to.
      *
      * @return AffiliateGoalInterface
      */

@@ -23,7 +23,7 @@ class FixedProvision extends AbstractProvision
     {
         $configuration = $provision->getConfiguration();
 
-        $adjustment = $this->createTransaction($affiliate, $provision->getGoal());
+        $adjustment = $this->createReward($affiliate, $provision->getGoal());
         $adjustment->setAmount(- $configuration['amount']);
     }
 

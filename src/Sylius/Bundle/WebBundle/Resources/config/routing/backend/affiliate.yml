@@ -72,11 +72,11 @@ sylius_backend_affiliate_pause:
             redirect: sylius_backend_affiliate_index
 
 
-sylius_backend_affiliate_transaction_delete:
-    path: /transaction/{id}
+sylius_backend_affiliate_reward_delete:
+    path: /reward/{id}
     methods: [DELETE]
     defaults:
-        _controller: sylius.controller.transaction:deleteAction
+        _controller: sylius.controller.reward:deleteAction
         _sylius:
             template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect:

@@ -29,7 +29,7 @@ use Sylius\Bundle\AffiliateBundle\Form\Type\ProvisionType;
 use Sylius\Component\Affiliate\Model\Banner;
 use Sylius\Bundle\AffiliateBundle\Form\Type\BannerType;
 use Sylius\Component\Affiliate\Model\Invitation;
-use Sylius\Component\Affiliate\Model\Transaction;
+use Sylius\Component\Affiliate\Model\Reward;
 
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
@@ -250,7 +250,7 @@ class Configuration implements ConfigurationInterface
                                 ->end()
                             ->end()
                         ->end()
-                        ->arrayNode('transaction')
+                        ->arrayNode('reward')
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->variableNode('options')->end()
@@ -258,7 +258,7 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->end()
-                                        ->scalarNode('model')->isRequired()->defaultValue(Transaction::class)->end()
+                                        ->scalarNode('model')->isRequired()->defaultValue(Reward::class)->end()
                                         ->scalarNode('repository')->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                     ->end()

@@ -13,37 +13,37 @@ namespace Sylius\Component\Affiliate\Provision;
 
 use Sylius\Component\Affiliate\Model\AffiliateGoalInterface;
 use Sylius\Component\Affiliate\Model\AffiliateInterface;
-use Sylius\Component\Affiliate\Model\TransactionInterface;
+use Sylius\Component\Affiliate\Model\RewardInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 
 abstract class AbstractProvision implements AffiliateProvisionInterface
 {
     protected $currency = 'EUR';
-    protected $transactionFactory;
+    protected $rewardFactory;
     protected $currencyContext;
 
-    public function __construct(CurrencyContextInterface $currencyContext, FactoryInterface $transactionFactory)
+    public function __construct(CurrencyContextInterface $currencyContext, FactoryInterface $rewardFactory)
     {
         $this->currencyContext = $currencyContext;
-        $this->transactionFactory = $transactionFactory;
+        $this->rewardFactory = $rewardFactory;
     }
 
     /**
      * @param AffiliateInterface $affiliate
      *
-     * @return TransactionInterface
+     * @return RewardInterface
      */
-    protected function createTransaction(AffiliateInterface $affiliate, AffiliateGoalInterface $goal)
+    protected function createReward(AffiliateInterface $affiliate, AffiliateGoalInterface $goal)
     {
-        /** @var $transaction TransactionInterface */
-        $transaction = $this->transactionFactory->createNew();
-        $transaction->setAffiliate($affiliate);
-        $transaction->setCurrency($this->currencyContext->getCurrency());
-        $transaction->setGoal($goal);
+        /** @var $reward RewardInterface */
+        $reward = $this->rewardFactory->createNew();
+        $reward->setAffiliate($affiliate);
+        $reward->setCurrency($this->currencyContext->getCurrency());
+        $reward->setGoal($goal);
 
-        $affiliate->addTransaction($transaction);
+        $affiliate->addReward($reward);
 
-        return $transaction;
+        return $reward;
     }
 }

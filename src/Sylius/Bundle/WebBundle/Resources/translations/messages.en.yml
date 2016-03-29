@@ -36,17 +36,19 @@ sylius:
             history:
                 title: History of your earnings & payouts
                 created_at: Logged at
-                type: Type of transaction
+                type: Type of reward
+                goal: Goal
                 payouts: Payouts
                 earnings: Earnings
                 amount: Amount
-                empty: You have no logged transaction yet.
+                empty: You have no logged reward yet.
             referrals:
                 title: List of your referrals
                 name: Name
                 created_at: Registered at
                 earning: Earnings
                 empty: You have no referrals yet.
+            rewards: Rewards
         home:
             email: Email
             id: Customer ID
@@ -198,7 +200,7 @@ sylius:
         status: Status
         referral_code: Referral code
         referrals: Referrals
-        transactions: Transactions
+        rewards: Rewards
         updated_at: Last update
         create: Create new affiliate
         create_header: Create new affiliate
@@ -212,7 +214,7 @@ sylius:
             enabled: Enabled
             paused: Paused
             disabled: Disabled
-        transaction:
+        reward:
             date: Logged at
             amount: Amount
             type: Type

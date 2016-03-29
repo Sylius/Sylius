@@ -18,7 +18,7 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 interface AffiliateProvisionInterface
 {
     /**
-     * Applies the transaction to its affiliation.
+     * Applies the reward to its affiliation.
      *
      * @param object             $subject
      * @param ProvisionInterface $provision

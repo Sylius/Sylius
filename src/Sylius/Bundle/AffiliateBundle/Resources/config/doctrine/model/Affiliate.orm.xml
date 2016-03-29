@@ -29,7 +29,7 @@
         <field name="status" column="status" type="integer" />
         <field name="referralCode" column="referral_code" type="string" unique="true" />
 
-        <one-to-many field="transactions" target-entity="Sylius\Component\Affiliate\Model\TransactionInterface" mapped-by="affiliate">
+        <one-to-many field="rewards" target-entity="Sylius\Component\Affiliate\Model\RewardInterface" mapped-by="affiliate">
             <cascade>
                 <cascade-all />
             </cascade>

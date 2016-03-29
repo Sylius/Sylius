@@ -23,7 +23,7 @@ class PercentageProvision extends AbstractProvision
     {
         $configuration = $provision->getConfiguration();
 
-        $adjustment = $this->createTransaction($affiliate, $provision->getGoal());
+        $adjustment = $this->createReward($affiliate, $provision->getGoal());
         $adjustment->setAmount((int) round($subject->getTotal() * $configuration['percentage']));
     }
 

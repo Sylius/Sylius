@@ -17,9 +17,8 @@ use FOS\RestBundle\Controller\FOSRestController;
 use Sylius\Component\Affiliate\Generator\Instruction;
 use Sylius\Component\Affiliate\Generator\InvitationGeneratorInterface;
 use Sylius\Component\Affiliate\Model\AffiliateInterface;
-use Sylius\Component\Affiliate\Model\TransactionInterface;
+use Sylius\Component\Affiliate\Model\RewardInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -53,7 +52,7 @@ class AffiliateController extends FOSRestController
                 'affiliate'          => $affiliate,
                 'query_parameter'    => $this->getParameter('sylius_affiliate.referral.query_parameter'),
                 'referrals_count'    => $affiliate->getReferrals()->count(),
-                'transactions_count' => $affiliate->getTransactions()->count(),
+                'rewards_count'      => $affiliate->getRewards()->count(),
             ))
         ;
 
@@ -111,7 +110,7 @@ class AffiliateController extends FOSRestController
     }
 
     /**
-     * Get history of transactions of the current user.
+     * Get history of rewards of the current customer.
      *
      * @return Response
      *
@@ -120,16 +119,16 @@ class AffiliateController extends FOSRestController
     public function historyAction()
     {
         $affiliate = $this->getAffiliate();
-        $earning = $affiliate->getTransactions()->matching(
+        $earning = $affiliate->getRewards()->matching(
             Criteria::create()
-                ->where(Criteria::expr()->eq('type', TransactionInterface::TYPE_EARNING))
+                ->where(Criteria::expr()->eq('type', RewardInterface::TYPE_EARNING))
                 ->orderBy(array(
                     'updatedAt' => 'desc',
                 ))
         );
-        $payout = $affiliate->getTransactions()->matching(
+        $payout = $affiliate->getRewards()->matching(
             Criteria::create()
-                ->where(Criteria::expr()->eq('type', TransactionInterface::TYPE_PAYOUT))
+                ->where(Criteria::expr()->eq('type', RewardInterface::TYPE_PAYOUT))
                 ->orderBy(array(
                     'updatedAt' => 'desc',
                 ))
@@ -139,7 +138,7 @@ class AffiliateController extends FOSRestController
             ->view()
             ->setTemplate('SyliusWebBundle:Frontend/Account:Affiliate/history.html.twig')
             ->setData(array(
-                'transactions' => array(
+                'rewards' => array(
                     'earning' => $earning,
                     'payout' => $payout
                 ),

@@ -14,7 +14,7 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 use Sylius\Component\Affiliate\Model\AffiliateInterface;
-use Sylius\Component\Affiliate\Model\TransactionInterface;
+use Sylius\Component\Affiliate\Model\RewardInterface;
 use Sylius\Component\Core\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -66,18 +66,18 @@ class LoadAffiliateData extends DataFixture
      * @param int       $type
      * @param int       $amount
      *
-     * @return TransactionInterface
+     * @return RewardInterface
      */
-    protected function createTransaction(\DateTime $date, $type, $amount)
+    protected function createReward(\DateTime $date, $type, $amount)
     {
-        /** @var $transaction TransactionInterface */
-        $transaction = $this->get('sylius.factory.transaction')->createNew();
-        $transaction->setType($type);
-        $transaction->setAmount($amount);
-        $transaction->setCurrency('EUR');
-        $transaction->setCreatedAt($date);
+        /** @var $reward RewardInterface */
+        $reward = $this->get('sylius.factory.reward')->createNew();
+        $reward->setType($type);
+        $reward->setAmount($amount);
+        $reward->setCurrency('EUR');
+        $reward->setCreatedAt($date);
 
-        return $transaction;
+        return $reward;
     }
 
     /**

@@ -51,7 +51,7 @@ class Affiliate implements AffiliateInterface
     /**
      * @var Collection|ReferralInterface[]
      */
-    protected $transactions;
+    protected $rewards;
 
     /**
      * Creation time.
@@ -70,7 +70,7 @@ class Affiliate implements AffiliateInterface
     public function __construct()
     {
         $this->referrals    = new ArrayCollection();
-        $this->transactions = new ArrayCollection();
+        $this->rewards = new ArrayCollection();
         $this->createdAt    = new \DateTime();
     }
 
@@ -205,20 +205,20 @@ class Affiliate implements AffiliateInterface
     /**
      * {@inheritdoc}
      */
-    public function getTransactions()
+    public function getRewards()
     {
-        return $this->transactions;
+        return $this->rewards;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addTransaction(TransactionInterface $transaction)
+    public function addReward(RewardInterface $reward)
     {
-        if (!$this->transactions->contains($transaction)) {
-            $this->transactions->add($transaction);
+        if (!$this->rewards->contains($reward)) {
+            $this->rewards->add($reward);
 
-            $transaction->setAffiliate($this);
+            $reward->setAffiliate($this);
         }
 
         return $this;
@@ -227,12 +227,12 @@ class Affiliate implements AffiliateInterface
     /**
      * {@inheritdoc}
      */
-    public function removeTransaction(TransactionInterface $transaction)
+    public function removeReward(RewardInterface $reward)
     {
-        if ($this->transactions->contains($transaction)) {
-            $this->transactions->removeElement($transaction);
+        if ($this->rewards->contains($reward)) {
+            $this->rewards->removeElement($reward);
 
-            $transaction->setAffiliate(null);
+            $reward->setAffiliate(null);
         }
 
         return $this;

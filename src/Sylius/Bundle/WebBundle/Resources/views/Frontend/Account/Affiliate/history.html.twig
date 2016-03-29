@@ -14,15 +14,17 @@
         <table class="table">
             <thead>
             <tr>
+                <td>{{ 'sylius.account.affiliate.history.goal'|trans }}</td>
                 <td>{{ 'sylius.account.affiliate.history.created_at'|trans }}</td>
                 <td>{{ 'sylius.account.affiliate.history.amount'|trans }}</td>
             </tr>
             </thead>
             <tbody>
-            {% for transaction in transactions.earning %}
-                <tr class="transaction">
-                    <td>{{ transaction.createdAt|date }}</td>
-                    <td>{{ transaction.amount|sylius_price }}</td>
+            {% for reward in rewards.earning %}
+                <tr class="reward">
+                    <td>{{ reward.goal.name }}</td>
+                    <td>{{ reward.createdAt|date }}</td>
+                    <td>{{ reward.amount|sylius_price }}</td>
                 </tr>
             {% else %}
                 <p>{{ 'sylius.account.affiliate.history.empty'|trans }}</p>
@@ -40,10 +42,10 @@
             </tr>
             </thead>
             <tbody>
-            {% for transaction in transactions.payout %}
-                <tr class="transaction">
-                    <td>{{ transaction.createdAt|date }}</td>
-                    <td>{{ transaction.amount|sylius_price }}</td>
+            {% for reward in rewards.payout %}
+                <tr class="reward">
+                    <td>{{ reward.createdAt|date }}</td>
+                    <td>{{ reward.amount|sylius_price }}</td>
                 </tr>
             {% else %}
                 <p>{{ 'sylius.account.affiliate.history.empty'|trans }}</p>

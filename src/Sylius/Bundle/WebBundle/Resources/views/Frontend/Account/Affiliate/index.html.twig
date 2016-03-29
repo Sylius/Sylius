@@ -9,7 +9,7 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <p>{{ 'sylius.account.affiliate.index.referral_code'|trans }} : {{ affiliate.referralCode }}</p>
-                <p>{{ 'sylius.account.affiliate.index.example_link'|trans }} : {{ url('sylius_homepage') }} <b>?{{ query_parameter }}={{ affiliate.referralCode }}</b></p>
+                <p>{{ 'sylius.account.affiliate.index.example_link'|trans }} : {{ url('sylius_homepage') }}<b>?{{ query_parameter }}={{ affiliate.referralCode }}</b></p>
             </div>
         </div>
 
@@ -34,9 +34,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><strong>{{ 'sylius.affiliate.transactions'|trans }}</strong></td>
+                    <td><strong>{{ 'sylius.account.affiliate.rewards'|trans }}</strong></td>
                     <td>
-                        {{ transactions_count }}
+                        {{ rewards_count }}
                         <a class="btn btn-primary pull-right" href="{{ url('sylius_account_affiliate_history') }}">{{ 'sylius.account.affiliate.history.title'|trans }}</a>
                     </td>
                 </tr>

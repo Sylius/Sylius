@@ -15,31 +15,31 @@ use Sylius\Component\Affiliate\Model\AffiliateGoalInterface;
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
-class Transaction implements TransactionInterface
+class Reward implements RewardInterface
 {
     /**
-     * Transaction id.
+     * Reward id.
      *
      * @var int
      */
     protected $id;
 
     /**
-     * Transaction type.
+     * Reward type.
      *
      * @var int
      */
-    protected $type = TransactionInterface::TYPE_EARNING;
+    protected $type = RewardInterface::TYPE_EARNING;
 
     /**
-     * Transaction amount.
+     * Reward amount.
      *
      * @var float
      */
     protected $amount = 0;
 
     /**
-     * Transaction currency.
+     * Reward currency.
      *
      * @var string
      */
@@ -125,7 +125,7 @@ class Transaction implements TransactionInterface
      */
     public function isEarning()
     {
-        return TransactionInterface::TYPE_EARNING === $this->type;
+        return RewardInterface::TYPE_EARNING === $this->type;
     }
 
     /**
@@ -133,7 +133,7 @@ class Transaction implements TransactionInterface
      */
     public function isPayment()
     {
-        return TransactionInterface::TYPE_PAYOUT === $this->type;
+        return RewardInterface::TYPE_PAYOUT === $this->type;
     }
 
     /**

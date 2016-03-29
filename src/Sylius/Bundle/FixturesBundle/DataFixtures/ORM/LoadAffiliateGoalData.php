@@ -84,7 +84,7 @@ class LoadAffiliateGoalData extends DataFixture
             ],
         ]);
 
-        $this->createTransactions();
+        $this->createRewards();
     }
 
     protected function createRules(array $rules)
@@ -122,7 +122,7 @@ class LoadAffiliateGoalData extends DataFixture
         $this->manager->flush();
     }
 
-    protected function createTransactions()
+    protected function createRewards()
     {
         for ($i = 2; $i <= 15; $i++) {
             $referralCount = rand(0,3);

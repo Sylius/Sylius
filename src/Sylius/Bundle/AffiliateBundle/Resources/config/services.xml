@@ -112,13 +112,13 @@
 
         <service id="sylius.affiliate_goal_provision.fixed_provision" class="%sylius.affiliate_goal_provision.fixed_provision.class%">
             <argument type="service" id="sylius.context.currency" />
-            <argument type="service" id="sylius.factory.transaction" />
+            <argument type="service" id="sylius.factory.Reward" />
             <tag name="sylius.affiliate_goal_provision" type="fixed_provision" label="Fixed provision" />
         </service>
 
         <service id="sylius.affiliate_goal_provision.percentage_provision" class="%sylius.affiliate_goal_provision.percentage_provision.class%">
             <argument type="service" id="sylius.context.currency" />
-            <argument type="service" id="sylius.factory.transaction" />
+            <argument type="service" id="sylius.factory.reward" />
             <tag name="sylius.affiliate_goal_provision" type="percentage_provision" label="Percentage provision" />
         </service>
 

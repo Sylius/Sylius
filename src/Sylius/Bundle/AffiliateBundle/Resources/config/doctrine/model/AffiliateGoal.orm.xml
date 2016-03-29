@@ -37,7 +37,7 @@
                 <cascade-all />
             </cascade>
         </one-to-many>
-        <one-to-many field="transactions" target-entity="Sylius\Component\Affiliate\Model\TransactionInterface" mapped-by="goal">
+        <one-to-many field="rewards" target-entity="Sylius\Component\Affiliate\Model\RewardInterface" mapped-by="goal">
             <cascade>
                 <cascade-all />
             </cascade>

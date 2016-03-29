@@ -21,7 +21,7 @@ use Sylius\Component\Affiliate\Model\BannerInterface;
 use Sylius\Component\Affiliate\Model\InvitationInterface;
 use Sylius\Component\Affiliate\Model\ProvisionInterface;
 use Sylius\Component\Affiliate\Model\RuleInterface;
-use Sylius\Component\Affiliate\Model\TransactionInterface;
+use Sylius\Component\Affiliate\Model\RewardInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -62,7 +62,7 @@ class SyliusAffiliateBundle extends AbstractResourceBundle
             ProvisionInterface::class     => 'sylius.model.affiliate_provision.class',
             RuleInterface::class          => 'sylius.model.affiliate_rule.class',
             InvitationInterface::class    => 'sylius.model.invitation.class',
-            TransactionInterface::class   => 'sylius.model.transaction.class',
+            RewardInterface::class        => 'sylius.model.reward.class',
         );
     }
 

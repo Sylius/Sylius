@@ -84,32 +84,32 @@
     </div>
 
     <div class="col-md-6">
-        {% if affiliate.transactions|length > 0 %}
-        <h4>{{ 'sylius.affiliate.transactions'|trans }}</h4>
+        {% if affiliate.rewards|length > 0 %}
+        <h4>{{ 'sylius.affiliate.rewards'|trans }}</h4>
         <table id="actions" class="table table-condensed">
             <thead>
                 <tr>
-                    <th>{{ 'sylius.affiliate.transaction.date'|trans }}</th>
-                    <th>{{ 'sylius.affiliate.transaction.type'|trans }}</th>
-                    <th>{{ 'sylius.affiliate.transaction.amount'|trans }}</th>
+                    <th>{{ 'sylius.affiliate.reward.date'|trans }}</th>
+                    <th>{{ 'sylius.affiliate.reward.type'|trans }}</th>
+                    <th>{{ 'sylius.affiliate.reward.amount'|trans }}</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                {% for transaction in affiliate.transactions %}
-                    <tr id="{{ transaction.id }}">
-                        <td>{{ transaction.createdAt|date }}</td>
+                {% for reward in affiliate.rewards %}
+                    <tr id="{{ reward.id }}">
+                        <td>{{ reward.createdAt|date }}</td>
                         <td>
-                            {% if transaction.earning %}
-                                <span class="label label-success">{{ 'sylius.affiliate.transaction.earning'|trans }}</span>
+                            {% if reward.earning %}
+                                <span class="label label-success">{{ 'sylius.affiliate.reward.earning'|trans }}</span>
                             {% else %}
-                                <span class="label label-danger">{{ 'sylius.affiliate.transaction.payout'|trans }}</span>
+                                <span class="label label-danger">{{ 'sylius.affiliate.reward.payout'|trans }}</span>
                             {% endif %}
                         </td>
-                        <td><span class="label label-{{ transaction.earning ? 'info' : 'danger' }}">{{ transaction.amount|sylius_price }}</span></td>
+                        <td><span class="label label-{{ reward.earning ? 'info' : 'danger' }}">{{ reward.amount|sylius_price }}</span></td>
                         <td>
                             <div class="btn-group pull-right">
-                                {{ buttons.delete(path('sylius_backend_affiliate_transaction_delete', {'id': transaction.id, 'affiliateId': affiliate.id})) }}
+                                {{ buttons.delete(path('sylius_backend_affiliate_reward_delete', {'id': reward.id, 'affiliateId': affiliate.id})) }}
                             </div>
                         </td>
                     </tr>
