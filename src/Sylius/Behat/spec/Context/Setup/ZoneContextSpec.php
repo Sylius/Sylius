@@ -57,7 +57,7 @@ class ZoneContextSpec extends ObjectBehavior
 
         $zoneRepository->add($zone)->shouldBeCalled();
 
-        $this->thereIsEUZoneContainingAllMembersOfEuropeanUnion();
+        $this->thereIsAZoneEUContainingAllMembersOfEuropeanUnion();
     }
 
     function it_creates_rest_of_the_world_zone($zoneRepository, $zoneFactory, ZoneInterface $zone)
@@ -65,12 +65,12 @@ class ZoneContextSpec extends ObjectBehavior
         $zoneFactory->createWithMembers(Argument::type('array'))->willReturn($zone);
 
         $zone->setType(ZoneInterface::TYPE_COUNTRY)->shouldBeCalled();
-        $zone->setName('Rest of the World')->shouldBeCalled();
+        $zone->setName('The Rest of the World')->shouldBeCalled();
         $zone->setCode('RoW')->shouldBeCalled();
 
         $zoneRepository->add($zone)->shouldBeCalled();
 
-        $this->thereIsRestOfTheWorldZoneContainingAllOtherCountries();
+        $this->thereIsAZoneTheRestOfTheWorldContainingAllOtherCountries();
     }
 
     function it_sets_default_zone($settingsManager, Settings $settings, ZoneInterface $zone)

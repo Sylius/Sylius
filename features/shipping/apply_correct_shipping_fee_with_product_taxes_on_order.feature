@@ -7,8 +7,8 @@ Feature: Apply correct shipping fee with product taxes on order
     Background:
         Given the store operates on a single channel
         And the store ships to "Australia" and "France"
-        And there is "EU" zone containing all members of European Union
-        And there is rest of the world zone containing all other countries
+        And there is a zone "EU" containing all members of the European Union
+        And there is a zone "The Rest of the World" containing all other countries
         And default currency is "EUR"
         And default tax zone is "EU"
         And the store has "EU VAT" tax rate of 23% for "Clothes" within "EU" zone

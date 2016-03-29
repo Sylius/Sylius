@@ -63,9 +63,9 @@ final class ZoneContext implements Context
     }
 
     /**
-     * @Given /^there is "EU" zone containing all members of European Union$/
+     * @Given /^there is a zone "EU" containing all members of the European Union$/
      */
-    public function thereIsEUZoneContainingAllMembersOfEuropeanUnion()
+    public function thereIsAZoneEUContainingAllMembersOfEuropeanUnion()
     {
         $zone = $this->zoneFactory->createWithMembers($this->euMembers);
         $zone->setType(ZoneInterface::TYPE_COUNTRY);
@@ -76,9 +76,9 @@ final class ZoneContext implements Context
     }
 
     /**
-     * @Given /^there is rest of the world zone containing all other countries$/
+     * @Given /^there is a zone "The Rest of the World" containing all other countries$/
      */
-    public function thereIsRestOfTheWorldZoneContainingAllOtherCountries()
+    public function thereIsAZoneTheRestOfTheWorldContainingAllOtherCountries()
     {
         $restOfWorldCountries = array_diff(
             array_keys(Intl::getRegionBundle()->getCountryNames('en')),
@@ -88,7 +88,7 @@ final class ZoneContext implements Context
         $zone = $this->zoneFactory->createWithMembers($restOfWorldCountries);
         $zone->setType(ZoneInterface::TYPE_COUNTRY);
         $zone->setCode('RoW');
-        $zone->setName('Rest of the World');
+        $zone->setName('The Rest of the World');
 
         $this->zoneRepository->add($zone);
     }
