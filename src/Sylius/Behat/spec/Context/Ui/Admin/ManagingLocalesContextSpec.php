@@ -156,4 +156,18 @@ class ManagingLocalesContextSpec extends ObjectBehavior
 
         $this->shouldThrow(\InvalidArgumentException::class)->during('storeShouldBeAvailableInLanguage', ['Norwegian']);
     }
+
+    function it_asserts_if_resource_can_be_choose(CreatePageInterface $createPage)
+    {
+        $createPage->isOptionAvailable('France')->willReturn(false);
+
+        $this->iShouldNotBeAbleToChoose('France');
+    }
+
+    function it_throws_an_exception_if_resource_can_be_choose_but_it_should_not_be(CreatePageInterface $createPage)
+    {
+        $createPage->isOptionAvailable('France')->willReturn(true);
+
+        $this->shouldThrow(\InvalidArgumentException::class)->during('iShouldNotBeAbleToChoose', ['France']);
+    }
 }

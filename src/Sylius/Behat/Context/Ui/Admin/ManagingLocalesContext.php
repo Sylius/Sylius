@@ -66,6 +66,7 @@ final class ManagingLocalesContext implements Context
 
     /**
      * @Given I want to create a new locale
+     * @Given I want to add a new locale
      */
     public function iWantToCreateNewLocale()
     {
@@ -185,6 +186,17 @@ final class ManagingLocalesContext implements Context
         Assert::true(
             $this->indexPage->isLocaleDisabled($locale),
             sprintf('Locale %s should be disabled but it is not', $locale->getCode())
+        );
+    }
+
+    /**
+     * @Then I should not be able to choose :name
+     */
+    public function iShouldNotBeAbleToChoose($name)
+    {
+        Assert::false(
+            $this->createPage->isOptionAvailable($name),
+            sprintf('I can choose %s, but i should not be able to do it', $name)
         );
     }
 }
