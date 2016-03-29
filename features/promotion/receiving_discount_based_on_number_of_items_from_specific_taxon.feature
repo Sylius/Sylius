@@ -15,28 +15,28 @@ Feature: Receiving discount based on number of products from specific taxon
         And it belongs to "Mugs"
         And there is a promotion "T-Shirts promotion"
 
-    @todo
+    @ui
     Scenario: Receiving discount on order while buying required number of products from promoted taxon
         Given the promotion gives "€50.00" off if order contains 2 products classified as "T-Shirts"
         When I add 3 products "PHP T-Shirt" to the cart
         Then my cart total should be "€250.00"
         And my discount should be "-€50.00"
 
-    @todo
+    @ui
     Scenario: Receiving discount on order while buying equal with required number of products from promoted taxon
         Given the promotion gives "€50.00" off if order contains 2 products classified as "T-Shirts"
         When I add 2 products "PHP T-Shirt" to the cart
         Then my cart total should be "€150.00"
         And my discount should be "-€50.00"
 
-    @todo
+    @ui
     Scenario: Receiving no discount on order while buying less than required number of products from promoted taxon
         Given the promotion gives "€50.00" off if order contains 2 products classified as "T-Shirts"
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "€100.00"
         And there should be no discount
 
-    @todo
+    @ui
     Scenario: Receiving discount on order while buying multiple items with products from promoted taxon which fit number criteria
         Given the promotion gives "€100.00" off if order contains 4 products classified as "T-Shirts"
         When I add 3 products "PHP T-Shirt" to the cart
@@ -44,7 +44,7 @@ Feature: Receiving discount based on number of products from specific taxon
         Then my cart total should be "€500.00"
         And my discount should be "-€100.00"
 
-    @todo
+    @ui
     Scenario: Receiving different discount on different promotions checking number of products from specific taxon
         Given the promotion gives "€50.00" off if order contains 2 products classified as "T-Shirts"
         And there is a promotion "Mugs promotion"

@@ -425,6 +425,7 @@
             <tag name="sylius.promotion_rule_checker" type="contains_product" label="Contains Product" />
         </service>
         <service id="sylius.promotion_rule_checker.contains_taxon" class="%sylius.promotion_rule_checker.contains_taxon.class%">
+            <argument type="service" id="sylius.repository.taxon" />
             <tag name="sylius.promotion_rule_checker" type="contains_taxon" label="Contains taxon" />
         </service>
         <service id="sylius.promotion_rule_checker.customer_group" class="%sylius.promotion_rule_checker.customer_group.class%">
