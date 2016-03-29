@@ -88,7 +88,7 @@ final class TaxationContext implements Context
     {
         $taxCategory = $this->getOrCreateTaxCategory($taxCategoryName);
 
-        if(null === $taxRateCode) {
+        if (null === $taxRateCode) {
             $taxRateCode = $this->getCodeFromNameAndZoneCode($taxRateName, $zone->getCode());
         }
 

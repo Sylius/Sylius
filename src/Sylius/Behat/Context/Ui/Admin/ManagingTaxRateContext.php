@@ -14,6 +14,7 @@ namespace Sylius\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\TaxRate\UpdatePageInterface;
+use Sylius\Behat\Service\CurrentPageResolverInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Page\Admin\TaxRate\CreatePageInterface;
 use Sylius\Component\Core\Model\TaxRateInterface;
@@ -42,6 +43,11 @@ final class ManagingTaxRateContext implements Context
     private $updatePage;
 
     /**
+     * @var CurrentPageResolverInterface
+     */
+    private $currentPageResolver;
+
+    /**
      * @var NotificationCheckerInterface
      */
     private $notificationChecker;
@@ -50,17 +56,20 @@ final class ManagingTaxRateContext implements Context
      * @param IndexPageInterface $indexPage
      * @param CreatePageInterface $createPage
      * @param UpdatePageInterface $updatePage
+     * @param CurrentPageResolverInterface $currentPageResolver
      * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
-        IndexPageInterface $indexPage, 
+        IndexPageInterface $indexPage,
         CreatePageInterface $createPage, 
         UpdatePageInterface $updatePage, 
+        CurrentPageResolverInterface $currentPageResolver, 
         NotificationCheckerInterface $notificationChecker
     ) {
         $this->indexPage = $indexPage;
         $this->createPage = $createPage;
         $this->updatePage = $updatePage;
+        $this->currentPageResolver = $currentPageResolver;
         $this->notificationChecker = $notificationChecker;
     }
 
@@ -84,8 +93,9 @@ final class ManagingTaxRateContext implements Context
     /**
      * @When I specify its amount as :amount%
      * @When I change its amount to :amount%
+     * @When I do not specify its amount
      */
-    public function iSpecifyItsAmountAs($amount)
+    public function iSpecifyItsAmountAs($amount = null)
     {
         $this->createPage->specifyAmount($amount);
     }
@@ -276,6 +286,32 @@ final class ManagingTaxRateContext implements Context
     public function thisTaxRateShouldBeApplicableInZone(TaxRateInterface $taxRate, $zone)
     {
         $this->assertFieldValue($taxRate, 'zone', $zone);
+    }
+
+    /**
+     * @Then I should be notified that :element is required
+     */
+    public function iShouldBeNotifiedThatIsRequired($element)
+    {
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+
+        Assert::true(
+            $currentPage->checkValidationMessageFor($element, sprintf('Please enter tax rate %s.', $element)),
+            sprintf('Tax rate %s should be required.', $element)
+        );
+    }
+
+    /**
+     * @Then tax rate with :element :name should not be added
+     */
+    public function taxRateWithElementValueShouldNotBeAdded($element, $name)
+    {
+        $this->indexPage->open();
+
+        Assert::false(
+            $this->indexPage->isResourceOnPage([$element => $name]),
+            sprintf('Tax rate with %s %s was created, but it should not.', $element, $name)
+        );
     }
 
     /**
