@@ -12,7 +12,7 @@
 namespace Sylius\Component\Affiliate\Checker;
 
 use Sylius\Component\Affiliate\Model\AffiliateInterface;
-use Sylius\Component\Affiliate\Model\GoalInterface;
+use Sylius\Component\Affiliate\Model\AffiliateGoalInterface;
 use Sylius\Component\Affiliate\Model\RuleInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -44,7 +44,7 @@ class ReferralEligibilityChecker implements ReferralEligibilityCheckerInterface
     /**
      * {@inheritdoc}
      */
-    public function isEligible(GoalInterface $goal, AffiliateInterface $affiliate, $subject = null)
+    public function isEligible(AffiliateGoalInterface $goal, AffiliateInterface $affiliate, $subject = null)
     {
         if (!$this->isEligibleToDates($goal)) {
             return false;
@@ -87,11 +87,11 @@ class ReferralEligibilityChecker implements ReferralEligibilityCheckerInterface
      * Checks is a goal is eligible to a subject for a given rule.
      *
      * @param mixed $subject
-     * @param GoalInterface $goal
+     * @param AffiliateGoalInterface $goal
      * @param RuleInterface $rule
      * @return bool
      */
-    protected function isEligibleToRule($subject, GoalInterface $goal, RuleInterface $rule)
+    protected function isEligibleToRule($subject, AffiliateGoalInterface $goal, RuleInterface $rule)
     {
         $checker = $this->registry->get($rule->getType());
 
@@ -105,11 +105,11 @@ class ReferralEligibilityChecker implements ReferralEligibilityCheckerInterface
     /**
      * Checks if the current is between date constraints.
      *
-     * @param GoalInterface $goal
+     * @param AffiliateGoalInterface $goal
      *
      * @return Boolean
      */
-    protected function isEligibleToDates(GoalInterface $goal)
+    protected function isEligibleToDates(AffiliateGoalInterface $goal)
     {
         $now = new \DateTime();
 
@@ -131,11 +131,11 @@ class ReferralEligibilityChecker implements ReferralEligibilityCheckerInterface
     /**
      * Checks if goal usage limit has been reached.
      *
-     * @param GoalInterface $goal
+     * @param AffiliateGoalInterface $goal
      *
      * @return Boolean
      */
-    protected function isEligibleToUsageLimit(GoalInterface $goal)
+    protected function isEligibleToUsageLimit(AffiliateGoalInterface $goal)
     {
         if (null !== $usageLimit = $goal->getUsageLimit()) {
             if ($goal->getUsed() >= $usageLimit) {
@@ -149,11 +149,11 @@ class ReferralEligibilityChecker implements ReferralEligibilityCheckerInterface
     /**
      * Checks if goal is affiliate specific.
      *
-     * @param GoalInterface $goal
+     * @param AffiliateGoalInterface $goal
      * @see ReferrerRuleChecker
      * @return Boolean
      */
-    protected function isEligibleToAffiliate(GoalInterface $goal, AffiliateInterface $affiliate)
+    protected function isEligibleToAffiliate(AffiliateGoalInterface $goal, AffiliateInterface $affiliate)
     {
         if ($goal->hasRules()) {
             /* @var RuleInterface $rule */

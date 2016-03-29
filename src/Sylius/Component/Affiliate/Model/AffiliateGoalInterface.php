@@ -17,7 +17,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
-interface GoalInterface extends RuleAwareInterface, SoftDeletableInterface, TimestampableInterface, ResourceInterface
+interface AffiliateGoalInterface extends RuleAwareInterface, SoftDeletableInterface, TimestampableInterface, ResourceInterface
 {
     /**
      * Get name.

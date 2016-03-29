@@ -15,6 +15,13 @@ use Sylius\Bundle\AffiliateBundle\DependencyInjection\Compiler\RegisterGoalProvi
 use Sylius\Bundle\AffiliateBundle\DependencyInjection\Compiler\RegisterRuleCheckersPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Affiliate\Model\AffiliateInterface;
+use Sylius\Component\Affiliate\Model\AffiliateGoalInterface;
+use Sylius\Component\Affiliate\Model\BannerInterface;
+use Sylius\Component\Affiliate\Model\InvitationInterface;
+use Sylius\Component\Affiliate\Model\ProvisionInterface;
+use Sylius\Component\Affiliate\Model\RuleInterface;
+use Sylius\Component\Affiliate\Model\TransactionInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -27,9 +34,9 @@ class SyliusAffiliateBundle extends AbstractResourceBundle
      */
     public static function getSupportedDrivers()
     {
-        return array(
+        return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        );
+        ];
     }
 
     /**
@@ -49,13 +56,13 @@ class SyliusAffiliateBundle extends AbstractResourceBundle
     protected function getModelInterfaces()
     {
         return array(
-            'Sylius\Component\Affiliate\Model\AffiliateInterface'   => 'sylius.model.affiliate.class',
-            'Sylius\Component\Affiliate\Model\BannerInterface'      => 'sylius.model.affiliate_banner.class',
-            'Sylius\Component\Affiliate\Model\GoalInterface'        => 'sylius.model.affiliate_goal.class',
-            'Sylius\Component\Affiliate\Model\ProvisionInterface'   => 'sylius.model.affiliate_provision.class',
-            'Sylius\Component\Affiliate\Model\RuleInterface'        => 'sylius.model.affiliate_rule.class',
-            'Sylius\Component\Affiliate\Model\InvitationInterface'  => 'sylius.model.invitation.class',
-            'Sylius\Component\Affiliate\Model\TransactionInterface' => 'sylius.model.transaction.class',
+            AffiliateInterface::class     => 'sylius.model.affiliate.class',
+            BannerInterface::class        => 'sylius.model.affiliate_banner.class',
+            AffiliateGoalInterface::class => 'sylius.model.affiliate_goal.class',
+            ProvisionInterface::class     => 'sylius.model.affiliate_provision.class',
+            RuleInterface::class          => 'sylius.model.affiliate_rule.class',
+            InvitationInterface::class    => 'sylius.model.invitation.class',
+            TransactionInterface::class   => 'sylius.model.transaction.class',
         );
     }
 

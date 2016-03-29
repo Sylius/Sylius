@@ -82,4 +82,18 @@ interface TransactionInterface extends AffiliateAwareInterface, TimestampableInt
      * @return self
      */
     public function setCurrency($currency);
+
+    /**
+     * Set affiliate goal this transaction applies to.
+     *
+     * @return self
+     */
+    public function setGoal(AffiliateGoalInterface $goal);
+
+    /**
+     * Returns affiliate goal this transaction applies to.
+     *
+     * @return AffiliateGoalInterface
+     */
+    public function getGoal();
 }

@@ -15,7 +15,7 @@ use JMS\TranslationBundle\Annotation\Ignore;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class GoalType extends AbstractResourceType
+class AffiliateGoalType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

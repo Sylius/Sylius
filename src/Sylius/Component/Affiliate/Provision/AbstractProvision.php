@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Affiliate\Provision;
 
+use Sylius\Component\Affiliate\Model\AffiliateGoalInterface;
 use Sylius\Component\Affiliate\Model\AffiliateInterface;
 use Sylius\Component\Affiliate\Model\TransactionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -33,12 +34,13 @@ abstract class AbstractProvision implements AffiliateProvisionInterface
      *
      * @return TransactionInterface
      */
-    protected function createTransaction(AffiliateInterface $affiliate)
+    protected function createTransaction(AffiliateInterface $affiliate, AffiliateGoalInterface $goal)
     {
         /** @var $transaction TransactionInterface */
         $transaction = $this->transactionFactory->createNew();
         $transaction->setAffiliate($affiliate);
         $transaction->setCurrency($this->currencyContext->getCurrency());
+        $transaction->setGoal($goal);
 
         $affiliate->addTransaction($transaction);
 

@@ -13,7 +13,7 @@ namespace Sylius\Component\Affiliate\Provision;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Affiliate\Model\AffiliateInterface;
-use Sylius\Component\Affiliate\Model\GoalInterface;
+use Sylius\Component\Affiliate\Model\AffiliateGoalInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
 class ProvisionApplicator implements ProvisionApplicatorInterface
@@ -30,12 +30,12 @@ class ProvisionApplicator implements ProvisionApplicatorInterface
     /**
      * {@inheritdoc}
      */
-    public function apply($subject, AffiliateInterface $affiliate, GoalInterface $goal)
+    public function apply($subject, AffiliateInterface $affiliate, AffiliateGoalInterface $goal)
     {
         foreach ($goal->getProvisions() as $provision) {
             $this->registry
                 ->get($provision->getType())
-                ->execute($subject, $provision->getConfiguration(), $affiliate)
+                ->apply($subject, $provision, $affiliate)
             ;
 
             $goal->incrementUsed();

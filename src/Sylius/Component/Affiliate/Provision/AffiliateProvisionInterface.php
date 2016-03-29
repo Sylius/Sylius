@@ -12,6 +12,7 @@
 namespace Sylius\Component\Affiliate\Provision;
 
 use Sylius\Component\Affiliate\Model\AffiliateInterface;
+use Sylius\Component\Affiliate\Model\ProvisionInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 interface AffiliateProvisionInterface
@@ -20,12 +21,12 @@ interface AffiliateProvisionInterface
      * Applies the transaction to its affiliation.
      *
      * @param object             $subject
-     * @param array              $configuration
+     * @param ProvisionInterface $provision
      * @param AffiliateInterface $affiliate
      *
      * @throws UnexpectedTypeException
      */
-    public function execute($subject, array $configuration, AffiliateInterface $affiliate);
+    public function apply($subject, ProvisionInterface $provision, AffiliateInterface $affiliate);
 
     /**
      * Returns the form name related to this provision.

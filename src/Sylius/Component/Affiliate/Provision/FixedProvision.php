@@ -12,15 +12,18 @@
 namespace Sylius\Component\Affiliate\Provision;
 
 use Sylius\Component\Affiliate\Model\AffiliateInterface;
+use Sylius\Component\Affiliate\Model\ProvisionInterface;
 
 class FixedProvision extends AbstractProvision
 {
     /**
      * {@inheritdoc}
      */
-    public function execute($subject, array $configuration, AffiliateInterface $affiliate)
+    public function apply($subject, ProvisionInterface $provision, AffiliateInterface $affiliate)
     {
-        $adjustment = $this->createTransaction($affiliate);
+        $configuration = $provision->getConfiguration();
+
+        $adjustment = $this->createTransaction($affiliate, $provision->getGoal());
         $adjustment->setAmount(- $configuration['amount']);
     }
 

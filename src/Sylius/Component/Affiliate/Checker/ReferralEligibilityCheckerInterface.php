@@ -12,16 +12,16 @@
 namespace Sylius\Component\Affiliate\Checker;
 
 use Sylius\Component\Affiliate\Model\AffiliateInterface;
-use Sylius\Component\Affiliate\Model\GoalInterface;
+use Sylius\Component\Affiliate\Model\AffiliateGoalInterface;
 
 interface ReferralEligibilityCheckerInterface
 {
     /**
-     * @param GoalInterface             $goal
+     * @param AffiliateGoalInterface    $goal
      * @param AffiliateInterface        $affiliate
      * @param mixed                     $subject
      *
      * @return Boolean
      */
-    public function isEligible(GoalInterface $goal, AffiliateInterface $affiliate, $subject = null);
+    public function isEligible(AffiliateGoalInterface $goal, AffiliateInterface $affiliate, $subject = null);
 }

@@ -12,14 +12,14 @@
 namespace Sylius\Component\Affiliate\Provision;
 
 use Sylius\Component\Affiliate\Model\AffiliateInterface;
-use Sylius\Component\Affiliate\Model\GoalInterface;
+use Sylius\Component\Affiliate\Model\AffiliateGoalInterface;
 
 interface ProvisionApplicatorInterface
 {
     /**
-     * @param object             $subject
-     * @param AffiliateInterface $affiliate
-     * @param GoalInterface      $goal
+     * @param object                    $subject
+     * @param AffiliateInterface        $affiliate
+     * @param AffiliateGoalInterface    $goal
      */
-    public function apply($subject, AffiliateInterface $affiliate, GoalInterface $goal);
+    public function apply($subject, AffiliateInterface $affiliate, AffiliateGoalInterface $goal);
 }

@@ -30,34 +30,34 @@ class LoadAffiliateData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        /** @var $user UserInterface */
-        $user = $this->getReference('Sylius.User-Administrator');
+        /** @var $admin UserInterface */
+        $admin = $this->getReference('Sylius.User-Administrator');
 
         /** @var $affiliate AffiliateInterface */
         $affiliate = $this->get('sylius.factory.affiliate')->createNew();
-
-        for ($i = 1; $i <= 50; $i++) {
-            $transaction = $this->createTransaction(
-                $this->faker->dateTimeBetween('1 month ago', 'now'),
-                $i % 15 === 0 ? TransactionInterface::TYPE_PAYOUT : TransactionInterface::TYPE_EARNING,
-                $i % 15 === 0 ? -rand(1000, 2000) : rand(100, 500)
-            );
-
-            $affiliate->addTransaction($transaction);
-
-            $manager->persist($transaction);
-        }
 
         for ($i = 2; $i <= 200; $i += 2) {
             $affiliate->addReferral($this->getReference('Sylius.Customer-'.$i));
         }
 
-        $user->getCustomer()->setAffiliate($affiliate);
+        $admin->getCustomer()->setAffiliate($affiliate);
 
         $this->get('event_dispatcher')->dispatch('sylius.affiliate.pre_create', new GenericEvent($affiliate));
 
-        $manager->persist($user);
+        $manager->persist($admin);
         $manager->persist($affiliate);
+        $manager->flush();
+
+        for ($i = 2; $i <= 15; $i++) {
+            $customer  = $this->getReference('Sylius.Customer-' . $i);
+            $affiliate = $this->get('sylius.factory.affiliate')->createNew();
+
+            $customer->setAffiliate($affiliate);
+            $this->get('event_dispatcher')->dispatch('sylius.affiliate.pre_create', new GenericEvent($affiliate));
+            $manager->persist($customer);
+            $manager->persist($affiliate);
+        }
+
         $manager->flush();
     }
 
@@ -78,11 +78,6 @@ class LoadAffiliateData extends DataFixture
         $transaction->setCreatedAt($date);
 
         return $transaction;
-    }
-
-    private function getAffiliateRepository()
-    {
-        return $this->get('sylius.repository.affiliate');
     }
 
     /**

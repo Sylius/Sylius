@@ -21,7 +21,7 @@ class Provision implements ProvisionInterface
     protected $id;
 
     /**
-     * @var GoalInterface
+     * @var AffiliateGoalInterface
      */
     protected $goal;
 
@@ -60,7 +60,7 @@ class Provision implements ProvisionInterface
     /**
      * {@inheritdoc}
      */
-    public function setGoal(GoalInterface $goal = null)
+    public function setGoal(AffiliateGoalInterface $goal = null)
     {
         $this->goal = $goal;
 

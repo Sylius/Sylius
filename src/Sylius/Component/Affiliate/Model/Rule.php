@@ -23,7 +23,7 @@ class Rule implements RuleInterface
     /**
      * Associated goal
      *
-     * @var GoalInterface
+     * @var AffiliateGoalInterface
      */
     protected $goal;
 
@@ -62,7 +62,7 @@ class Rule implements RuleInterface
     /**
      * {@inheritdoc}
      */
-    public function setGoal(GoalInterface $goal = null)
+    public function setGoal(AffiliateGoalInterface $goal = null)
     {
         $this->goal = $goal;
 

@@ -14,7 +14,7 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 use Sylius\Component\Affiliate\Model\ProvisionInterface;
-use Sylius\Component\Affiliate\Model\GoalInterface;
+use Sylius\Component\Affiliate\Model\AffiliateGoalInterface;
 use Sylius\Component\Affiliate\Model\RuleInterface;
 
 /**
@@ -24,46 +24,119 @@ use Sylius\Component\Affiliate\Model\RuleInterface;
  */
 class LoadAffiliateGoalData extends DataFixture
 {
+    protected $manager;
+
     /**
      * {@inheritdoc}
      */
     public function load(ObjectManager $manager)
     {
-        $goal = $this->createGoal(
-            'Registration',
-            'Provision for registration.',
-            array($this->createRule(RuleInterface::TYPE_REGISTRATION, array('count' => 1))),
-            array($this->createProvision(ProvisionInterface::TYPE_FIXED_PROVISION, array('amount' => 2500)))
-        );
+        $this->manager = $manager;
 
-        $manager->persist($goal);
+        $this->createRules([
+            [
+                'type' => RuleInterface::TYPE_REGISTRATION,
+                'config' => ['count' => 1]
+            ],
+            [
+                'type' => RuleInterface::TYPE_NTH_ORDER,
+                'config' => ['count' => 1]
+            ],
+            [
+                'type' => RuleInterface::TYPE_URI_VISIT,
+                'config' => ['uri' => '/cart']
+            ],
+        ]);
 
-        $goal = $this->createGoal(
-            '1st order',
-            'Provision for 1st order',
-            array($this->createRule(RuleInterface::TYPE_NTH_ORDER, array('count' => 1))),
-            array($this->createProvision(ProvisionInterface::TYPE_PERCENTAGE_PROVISION, array('amount' => 5)))
-        );
+        $this->createProvisions([
+            [
+                'type' => ProvisionInterface::TYPE_FIXED_PROVISION,
+                'config' => ['amount' => 2500]
+            ],
+            [
+                'type' => ProvisionInterface::TYPE_PERCENTAGE_PROVISION,
+                'config' => ['percentage' => 5]
+            ],
+            [
+                'type' => ProvisionInterface::TYPE_FIXED_PROVISION,
+                'config' => ['amount' => 5000]
+            ],
+        ]);
 
-        $manager->persist($goal);
+        $this->createGoals([
+            [
+                'name' => 'Registration',
+                'desc' => 'Provision for registration',
+                'rules' => [$this->getReference('Sylius.AffiliateRule.0')],
+                'provisions' => [$this->getReference('Sylius.AffiliateProvision.0')],
+            ],
+            [
+                'name' => '1st order',
+                'desc' => 'Provision for 1st order',
+                'rules' => [$this->getReference('Sylius.AffiliateRule.1')],
+                'provisions' => [$this->getReference('Sylius.AffiliateProvision.1')],
+            ],
+            [
+                'name' => 'Visit cart uri',
+                'desc' => 'Provision for visiting the /cart uri',
+                'rules' => [$this->getReference('Sylius.AffiliateRule.2')],
+                'provisions' => [$this->getReference('Sylius.AffiliateProvision.2')],
+            ],
+        ]);
 
-        $goal = $this->createGoal(
-            'Visit cart',
-            'Provision for visiting the /cart uri.',
-            array($this->createRule(RuleInterface::TYPE_URI_VISIT, array('uri' => '/cart'))),
-            array($this->createProvision(ProvisionInterface::TYPE_FIXED_PROVISION, array('amount' => 5000)))
-        );
-
-        $manager->persist($goal);
-        $manager->flush();
+        $this->createTransactions();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getOrder()
+    protected function createRules(array $rules)
     {
-        return 60;
+        foreach ($rules as $key => $rule) {
+            $rule = $this->createRule($rule['type'], $rule['config']);
+            $this->setReference('Sylius.AffiliateRule.' . $key, $rule);
+            $this->manager->persist($rule);
+        }
+        $this->manager->flush();
+    }
+
+    protected function createProvisions(array $provisions)
+    {
+        foreach ($provisions as $key => $provision) {
+            $provision = $this->createProvision($provision['type'], $provision['config']);
+            $this->setReference('Sylius.AffiliateProvision.' . $key, $provision);
+            $this->manager->persist($provision);
+        }
+        $this->manager->flush();
+    }
+
+    protected function createGoals(array $goals)
+    {
+        foreach ($goals as $key => $goal) {
+            $goal = $this->createGoal(
+                $goal['name'],
+                $goal['desc'],
+                $goal['rules'],
+                $goal['provisions']
+            );
+            $this->setReference('Sylius.AffiliateGoal.' . $key, $goal);
+            $this->manager->persist($goal);
+        }
+        $this->manager->flush();
+    }
+
+    protected function createTransactions()
+    {
+        for ($i = 2; $i <= 15; $i++) {
+            $referralCount = rand(0,3);
+            $customer = $this->getReference('Sylius.Customer-' . $i);
+            $affiliate = $customer->getAffiliate();
+
+            for ($y = 0; $y < $referralCount; $y++) {
+                $orderNum = rand(1, 50);
+                $goal = $this->getReference('Sylius.AffiliateGoal.' . rand(0, 2));
+
+                $this->get('sylius.affiliate_provision_applicator')->apply($this->getReference('Sylius.Order-' . $orderNum), $affiliate, $goal);
+                $this->manager->flush();
+            }
+        }
     }
 
     /**
@@ -110,14 +183,15 @@ class LoadAffiliateGoalData extends DataFixture
      * @param array  $rules
      * @param array  $provisions
      *
-     * @return GoalInterface
+     * @return AffiliateGoalInterface
      */
     protected function createGoal($name, $description, array $rules, array $provisions)
     {
-        /** @var $goal GoalInterface */
+        /** @var $goal AffiliateGoalInterface */
         $goal = $this->get('sylius.factory.affiliate_goal')->createNew();
         $goal->setName($name);
         $goal->setDescription($description);
+        $goal->addChannel($this->getReference('Sylius.Channel.DEFAULT'));
 
         foreach ($rules as $rule) {
             $goal->addRule($rule);
@@ -129,5 +203,13 @@ class LoadAffiliateGoalData extends DataFixture
         $this->setReference('Sylius.AffiliateGoal.'.$name, $goal);
 
         return $goal;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOrder()
+    {
+        return 70;
     }
 }

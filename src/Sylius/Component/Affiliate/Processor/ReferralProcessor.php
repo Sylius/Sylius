@@ -13,24 +13,37 @@ namespace Sylius\Component\Affiliate\Processor;
 
 use Sylius\Component\Affiliate\Checker\ReferralEligibilityCheckerInterface;
 use Sylius\Component\Affiliate\Model\AffiliateInterface;
-use Sylius\Component\Affiliate\Model\GoalInterface;
+use Sylius\Component\Affiliate\Model\AffiliateGoalInterface;
+use Sylius\Component\Affiliate\Provider\AffiliateGoalsProviderInterface;
 use Sylius\Component\Affiliate\Provision\ProvisionApplicatorInterface;
+use Sylius\Component\Affiliate\Repository\AffiliateGoalRepositoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 class ReferralProcessor implements ReferralProcessorInterface
 {
-    protected $repository;
+    /**
+     * @var AffiliateGoalsProviderInterface
+     */
+    protected $provider;
+
+    /**
+     * @var ReferralEligibilityCheckerInterface
+     */
     protected $checker;
+
+    /**
+     * @var ProvisionApplicatorInterface
+     */
     protected $applicator;
 
     /**
-     * @var GoalInterface[]
+     * @var AffiliateGoalInterface[]
      */
     protected $goals;
 
-    public function __construct(RepositoryInterface $repository, ReferralEligibilityCheckerInterface $checker, ProvisionApplicatorInterface $applicator)
+    public function __construct(AffiliateGoalsProviderInterface $provider, ReferralEligibilityCheckerInterface $checker, ProvisionApplicatorInterface $applicator)
     {
-        $this->repository = $repository;
+        $this->provider   = $provider;
         $this->checker    = $checker;
         $this->applicator = $applicator;
     }
@@ -56,6 +69,6 @@ class ReferralProcessor implements ReferralProcessorInterface
             return $this->goals;
         }
 
-        return $this->goals = $this->repository->findBy(array('deletedAt' => null));
+        return $this->goals = $this->provider->getAffiliateGoals();
     }
 }

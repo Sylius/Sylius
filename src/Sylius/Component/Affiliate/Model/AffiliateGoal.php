@@ -14,7 +14,7 @@ namespace Sylius\Component\Affiliate\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-class Goal implements GoalInterface
+class AffiliateGoal implements AffiliateGoalInterface
 {
     /**
      * Id.
@@ -64,6 +64,13 @@ class Goal implements GoalInterface
      * @var Collection|ProvisionInterface[]
      */
     protected $provisions;
+
+    /**
+     * Transactions made for this goal.
+     *
+     * @var Collection|TransactionInterface[]
+     */
+    protected $transactions;
 
     /**
      * Start date.
@@ -296,6 +303,56 @@ class Goal implements GoalInterface
         if ($this->hasProvision($provision)) {
             $provision->setGoal(null);
             $this->provisions->removeElement($provision);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasTransactions()
+    {
+        return !$this->transactions->isEmpty();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTransactions()
+    {
+        return $this->transactions;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasTransaction(TransactionInterface $transaction)
+    {
+        return $this->transactions->contains($transaction);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addTransaction(TransactionInterface $transaction)
+    {
+        if (!$this->hasTransaction($transaction)) {
+            $transaction->setGoal($this);
+            $this->transactions->add($transaction);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeTransaction(TransactionInterface $transaction)
+    {
+        if ($this->hasTransaction($transaction)) {
+            $transaction->setGoal(null);
+            $this->transactions->removeElement($transaction);
         }
 
         return $this;

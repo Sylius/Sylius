@@ -24,7 +24,7 @@
         <field name="type" type="string" />
         <field name="configuration" type="array" />
 
-        <many-to-one field="goal" target-entity="Sylius\Component\Affiliate\Model\GoalInterface" inversed-by="provisions">
+        <many-to-one field="goal" target-entity="Sylius\Component\Affiliate\Model\AffiliateGoalInterface" inversed-by="provisions">
             <join-column name="goal_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
     </mapped-superclass>

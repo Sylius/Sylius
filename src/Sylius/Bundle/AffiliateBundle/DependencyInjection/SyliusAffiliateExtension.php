@@ -35,9 +35,9 @@ class SyliusAffiliateExtension extends AbstractResourceExtension
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
         $this->mapFormValidationGroupsParameters($config, $container);
 
-        $configFiles = array(
+        $configFiles = [
             'services.xml',
-        );
+        ];
 
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
@@ -59,6 +59,5 @@ class SyliusAffiliateExtension extends AbstractResourceExtension
             ->getDefinition('sylius.form.type.affiliate_provision')
             ->replaceArgument(1, new Reference('sylius.registry.affiliate_goal_provision'))
         ;
-
     }
 }

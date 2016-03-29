@@ -10,6 +10,7 @@
  */
 
 namespace Sylius\Component\Affiliate\Model;
+use Sylius\Component\Affiliate\Model\AffiliateGoalInterface;
 
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
@@ -48,6 +49,13 @@ class Transaction implements TransactionInterface
      * @var AffiliateInterface
      */
     protected $affiliate;
+
+    /**
+     * Affiliate goal that was completed
+     *
+     * @var AffiliateGoalInterface
+     */
+    protected $goal;
 
     /**
      * Creation time.
@@ -136,6 +144,22 @@ class Transaction implements TransactionInterface
         $this->type = $type;
 
         return $this;
+    }
+
+    /**
+     * @return AffiliateGoalInterface
+     */
+    public function getGoal()
+    {
+        return $this->goal;
+    }
+
+    /**
+     * @param AffiliateGoalInterface $goal
+     */
+    public function setGoal(AffiliateGoalInterface $goal)
+    {
+        $this->goal = $goal;
     }
 
     /**

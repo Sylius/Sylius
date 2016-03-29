@@ -20,16 +20,16 @@ interface RuleInterface
     /**
      * Get associated goal.
      *
-     * @return GoalInterface
+     * @return AffiliateGoalInterface
      */
     public function getGoal();
 
     /**
      * Set associated goal.
      *
-     * @param GoalInterface $goal
+     * @param AffiliateGoalInterface $goal
      */
-    public function setGoal(GoalInterface $goal = null);
+    public function setGoal(AffiliateGoalInterface $goal = null);
 
     /**
      * Get type.

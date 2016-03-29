@@ -26,6 +26,7 @@ sylius:
             status: Status
             referral_code: Referral code
             terms: Terms & Conditions
+            channels: Channels
         affiliate_goal:
             description: Description
             ends_at: Ends at

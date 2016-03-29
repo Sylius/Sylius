@@ -19,9 +19,9 @@ use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\Core\Model\Affiliate;
 use Sylius\Bundle\AffiliateBundle\Form\Type\AffiliateType;
 use Sylius\Bundle\AffiliateBundle\Controller\AffiliateController;
-use Sylius\Component\Affiliate\Model\Goal;
+use Sylius\Component\Affiliate\Model\AffiliateGoal;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Bundle\AffiliateBundle\Form\Type\GoalType;
+use Sylius\Bundle\AffiliateBundle\Form\Type\AffiliateGoalType;
 use Sylius\Component\Affiliate\Model\Rule;
 use Sylius\Bundle\AffiliateBundle\Form\Type\RuleType;
 use Sylius\Component\Affiliate\Model\Provision;
@@ -115,14 +115,14 @@ class Configuration implements ConfigurationInterface
                                 ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('model')->defaultValue(Goal::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('model')->defaultValue(AffiliateGoal::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()
                                             ->children()
-                                                ->scalarNode('default')->defaultValue(GoalType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('default')->defaultValue(AffiliateGoalType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
                                     ->end()

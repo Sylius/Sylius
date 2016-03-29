@@ -30,6 +30,8 @@
         <parameter key="sylius.referral_eligibility_checker.class">Sylius\Component\Affiliate\Checker\ReferralEligibilityChecker</parameter>
         <parameter key="sylius.affiliate_provision_applicator.class">Sylius\Component\Affiliate\Provision\ProvisionApplicator</parameter>
 
+        <parameter key="sylius.active_affiliate_goals_provider.class">Sylius\Component\Affiliate\Provider\ActiveAffiliateGoalsProvider</parameter>
+
         <parameter key="sylius.affiliate_provision.fixed_provision.class">Sylius\Component\Affiliate\Provision\FixedProvisionProvision</parameter>
         <parameter key="sylius.form.type.affiliate_provision.fixed_provision_configuration.class">Sylius\Bundle\PromotionBundle\Form\Type\Provision\FixedDiscountConfigurationType</parameter>
 
@@ -46,7 +48,7 @@
 
         <parameter key="sylius.form.type.invitations.class">Sylius\Bundle\AffiliateBundle\Form\Type\InvitationsType</parameter>
 
-        <parameter key="sylius.form.type.affiliate_goal.class">Sylius\Bundle\AffiliateBundle\Form\Type\GoalType</parameter>
+        <parameter key="sylius.form.type.affiliate_goal.class">Sylius\Bundle\AffiliateBundle\Form\Type\AffiliateGoalType</parameter>
         <parameter key="sylius.form.type.affiliate_goal_rule.class">Sylius\Bundle\AffiliateBundle\Form\Type\RuleType</parameter>
         <parameter key="sylius.form.type.affiliate_goal_rule.collection.class">Sylius\Bundle\AffiliateBundle\Form\Type\RuleCollectionType</parameter>
         <parameter key="sylius.form.type.affiliate_goal_rule_choice.class">Sylius\Bundle\AffiliateBundle\Form\Type\RuleChoiceType</parameter>
@@ -71,10 +73,9 @@
         </service>
 
         <service id="sylius.referral_processor" class="%sylius.referral_processor.class%">
-            <argument type="service" id="sylius.repository.affiliate_goal" />
+            <argument type="service" id="sylius.active_affiliate_goals_provider" />
             <argument type="service" id="sylius.referral_eligibility_checker" />
             <argument type="service" id="sylius.affiliate_provision_applicator" />
-            <argument type="service" id="sylius.context.affiliate" />
         </service>
 
         <service id="sylius.referral_eligibility_checker" class="%sylius.referral_eligibility_checker.class%">
@@ -126,6 +127,10 @@
         </service>
         <service id="sylius.registry.affiliate_goal_provision" class="%sylius.registry.affiliate_goal_provision.class%">
             <argument>Sylius\Component\Affiliate\Provision\AffiliateProvisionInterface</argument>
+        </service>
+
+        <service id="sylius.active_affiliate_goals_provider" class="%sylius.active_affiliate_goals_provider.class%">
+            <argument type="service" id="sylius.repository.affiliate_goal" />
         </service>
 
         <service id="sylius.form.type.affiliate_goal_rule.collection" class="%sylius.form.type.affiliate_goal_rule.collection.class%">
