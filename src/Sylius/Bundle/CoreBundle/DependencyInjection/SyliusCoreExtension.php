@@ -11,12 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
-use FOS\ElasticaBundle\DependencyInjection\Configuration as FosElasticaConfiguration;
-use Sylius\Bundle\CoreBundle\EventListener\ElasticaProductListener;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
-use Sylius\Bundle\SearchBundle\DependencyInjection\Configuration as SyliusSearchConfiguration;
 use Sylius\Component\Resource\Factory\Factory;
-use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -140,8 +136,6 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         $container->setParameter('sylius.route_uri_filter_regexp', $config['route_uri_filter_regexp']);
         $container->setParameter('sylius.sitemap', $config['sitemap']);
         $container->setParameter('sylius.sitemap_template', $config['sitemap']['template']);
-
-        $this->prependElasticaProductListener($container);
     }
 
     /**
@@ -166,41 +160,5 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         $decoratedPromotionRuleFactoryDefinition = new Definition($promotionRuleFactoryClass, [$baseFactoryDefinition]);
 
         $container->setDefinition('sylius.factory.promotion_rule', $decoratedPromotionRuleFactoryDefinition);
-    }
-
-    /**
-     * @param ContainerBuilder $container
-     */
-    private function prependElasticaProductListener(ContainerBuilder $container)
-    {
-        if (!$container->hasExtension('fos_elastica') || !$container->hasExtension('sylius_search')) {
-            return;
-        }
-
-        $configuration = new SyliusSearchConfiguration();
-        $processor = new Processor();
-        $syliusSearchConfig = $processor->processConfiguration($configuration, $container->getExtensionConfig('sylius_search'));
-        $engine = $syliusSearchConfig['engine'];
-
-        if ($engine === 'elasticsearch') {
-            $tags = ['doctrine.event_listener' => [
-                ['name' => 'doctrine.event_listener', 'event' => 'postPersist'],
-                ['name' => 'doctrine.event_listener', 'event' => 'postUpdate'],
-                ['name' => 'doctrine.event_listener', 'event' => 'postRemove'],
-                ['name' => 'doctrine.event_listener', 'event' => 'postFlush'],
-            ]];
-
-            $configuration = new FosElasticaConfiguration(false);
-            $processor = new Processor();
-            $elasticaConfig = $processor->processConfiguration($configuration, $container->getExtensionConfig('fos_elastica'));
-
-            foreach ($elasticaConfig['indexes'] as $index => $config) {
-                $elasticaProductListenerDefinition = new Definition(ElasticaProductListener::class);
-                $elasticaProductListenerDefinition->addArgument(new Reference('fos_elastica.object_persister.' . $index . '.product'));
-                $elasticaProductListenerDefinition->setTags($tags);
-
-                $container->setDefinition('sylius_product.listener.index_' . $index . '.product_update', $elasticaProductListenerDefinition);
-            }
-        }
     }
 }
