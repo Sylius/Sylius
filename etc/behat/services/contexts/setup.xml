@@ -23,6 +23,7 @@
         <parameter key="sylius.behat.context.setup.product.class">Sylius\Behat\Context\Setup\ProductContext</parameter>
         <parameter key="sylius.behat.context.setup.product_review.class">Sylius\Behat\Context\Setup\ProductReviewContext</parameter>
         <parameter key="sylius.behat.context.setup.promotion.class">Sylius\Behat\Context\Setup\PromotionContext</parameter>
+        <parameter key="sylius.behat.context.setup.province.class">Sylius\Behat\Context\Setup\ProvinceContext</parameter>
         <parameter key="sylius.behat.context.setup.security.class">Sylius\Behat\Context\Setup\SecurityContext</parameter>
         <parameter key="sylius.behat.context.setup.shipping.class">Sylius\Behat\Context\Setup\ShippingContext</parameter>
         <parameter key="sylius.behat.context.setup.taxation.class">Sylius\Behat\Context\Setup\TaxationContext</parameter>
@@ -120,6 +121,12 @@
             <argument type="service" id="sylius.test.factory.promotion" container="symfony" />
             <argument type="service" id="sylius.repository.promotion" container="symfony" />
             <argument type="service" id="doctrine.orm.entity_manager" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.setup.province" class="%sylius.behat.context.setup.province.class%" scope="scenario">
+            <argument type="service" id="sylius.factory.province" container="symfony" />
+            <argument type="service" id="sylius.repository.province" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 

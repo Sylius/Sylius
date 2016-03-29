@@ -11,7 +11,11 @@ Feature: Adding a new zone with country type members
         And the store has a zone "North America" with code "NA"
         And the store has a zone "South America" with code "SA"
 
+<<<<<<< HEAD
     @ui @javascript
+=======
+    @ui
+>>>>>>> 8c44b9c... [Behat] Add province setup context
     Scenario: Adding a zone with a country type member
         Given I want to create a new zone with country members
         When I name it "European Union"
