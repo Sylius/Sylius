@@ -109,9 +109,14 @@ abstract class AbstractConfigurationSubscriber implements EventSubscriberInterfa
     {
         $model = $this->registry->get($registryIdentifier);
 
+        // temporary solution to prevent errors while rendering unexisting rule configuration type
+        if (null === $configuration = $model->getConfigurationFormType()) {
+            return;
+        }
+
         $configurationField = $this->factory->createNamed(
             'configuration',
-            $model->getConfigurationFormType(),
+            $configuration,
             $data,
             [
                 'auto_initialize' => false,
