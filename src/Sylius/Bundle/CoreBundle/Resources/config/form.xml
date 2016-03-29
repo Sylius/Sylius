@@ -52,6 +52,7 @@
         <parameter key="sylius.form.type.affiliate_rule.nth_order_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\Affiliate\NthOrderConfigurationType</parameter>
         <parameter key="sylius.form.type.affiliate_rule.taxonomy_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\Affiliate\TaxonomyConfigurationType</parameter>
         <parameter key="sylius.form.type.affiliate_rule.contains_product_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\Affiliate\ContainsProductConfigurationType</parameter>
+        <parameter key="sylius.form.type.affiliate_rule.customer_group_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\Affiliate\CustomerGroupType</parameter>
         <parameter key="sylius.form.type.affiliate_rule.route_visit_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\Affiliate\RouteVisitConfigurationType</parameter>
         <parameter key="sylius.form.type.affiliate_rule.uri_visit_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\Affiliate\UriVisitConfigurationType</parameter>
         <parameter key="sylius.form.type.affiliate_rule.registration_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\Affiliate\RegistrationConfigurationType</parameter>
@@ -177,6 +178,10 @@
         <service id="sylius.form.type.affiliate_rule.contains_product_configuration" class="%sylius.form.type.affiliate_rule.contains_product_configuration.class%">
             <argument type="service" id="sylius.repository.product_variant" />
             <tag name="form.type" alias="sylius_affiliate_rule_contains_product_configuration" />
+        </service>
+        <service id="sylius.form.type.affiliate_rule.customer_group_configuration" class="%sylius.form.type.affiliate_rule.customer_group_configuration.class%">
+            <argument type="service" id="sylius.repository.group" />
+            <tag name="form.type" alias="sylius_affiliate_rule_customer_group_configuration" />
         </service>
         <service id="sylius.form.type.affiliate_rule.route_visit_configuration" class="%sylius.form.type.affiliate_rule.route_visit_configuration.class%">
             <tag name="form.type" alias="sylius_affiliate_rule_route_visit_configuration" />

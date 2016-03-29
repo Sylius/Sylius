@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type\Rule\Promotion;
+namespace Sylius\Bundle\CoreBundle\Form\Type\Rule\Affiliate;
 
 use Sylius\Bundle\CoreBundle\Form\Type\Rule\CustomerGroupType as BaseCustomerGroupType;
 
@@ -23,6 +23,6 @@ class CustomerGroupType extends BaseCustomerGroupType
      */
     public function getName()
     {
-        return 'sylius_promotion_rule_customer_group_configuration';
+        return 'sylius_affiliate_rule_customer_group_configuration';
     }
 }

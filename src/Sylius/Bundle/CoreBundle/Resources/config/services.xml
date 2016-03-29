@@ -87,6 +87,7 @@
         <parameter key="sylius.affiliate_goal_provision.percentage_provision.class">Sylius\Component\Core\Affiliate\Provision\PercentageProvision</parameter>
 
         <parameter key="sylius.affiliate_goal_rule_checker.contains_product.class">Sylius\Component\Core\Affiliate\Checker\ContainsProductRuleChecker</parameter>
+        <parameter key="sylius.affiliate_goal_rule_checker.customer_group.class">Sylius\Component\Core\Affiliate\Checker\CustomerGroupRuleChecker</parameter>
         <parameter key="sylius.affiliate_goal_rule_checker.nth_order.class">Sylius\Component\Core\Affiliate\Checker\NthOrderRuleChecker</parameter>
         <parameter key="sylius.affiliate_goal_rule_checker.registration.class">Sylius\Component\Core\Affiliate\Checker\RegistrationRuleChecker</parameter>
         <parameter key="sylius.affiliate_goal_rule_checker.route_visit.class">Sylius\Component\Core\Affiliate\Checker\RouteVisitRuleChecker</parameter>
@@ -515,6 +516,9 @@
         </service>
         <service id="sylius.affiliate_goal_rule_checker.contains_product" class="%sylius.affiliate_goal_rule_checker.contains_product.class%">
             <tag name="sylius.affiliate_goal_rule_checker" type="contains_product" label="Order Contains Product" />
+        </service>
+        <service id="sylius.affiliate_goal_rule_checker.customer_group" class="%sylius.affiliate_goal_rule_checker.customer_group.class%">
+            <tag name="sylius.affiliate_goal_rule_checker" type="customer_group" label="Customer Group" />
         </service>
         <service id="sylius.affiliate_goal_rule_checker.registration" class="%sylius.affiliate_goal_rule_checker.registration.class%">
             <tag name="sylius.affiliate_goal_rule_checker" type="registration" label="Customer Registration" />
