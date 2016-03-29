@@ -261,6 +261,30 @@ final class ManagingTaxRateContext implements Context
     }
 
     /**
+     * @Then I should be notified that tax rate with this code already exists
+     */
+    public function iShouldBeNotifiedThatTaxRateWithThisCodeAlreadyExists()
+    {
+        Assert::true(
+            $this->createPage->checkValidationMessageFor('code', 'The tax rate with given code already exists.'),
+            'Unique code violation message should appear on page, but it does not.'
+        );
+    }
+
+    /**
+     * @Then there should still be only one tax rate with :element :code
+     */
+    public function thereShouldStillBeOnlyOneTaxRateWith($element, $code)
+    {
+        $this->indexPage->open();
+
+        Assert::true(
+            $this->indexPage->isResourceOnPage([$element => $code]),
+            sprintf('Tax rate with %s %s cannot be founded.', $element, $code)
+        );
+    }
+
+    /**
      * @param TaxRateInterface $taxRate
      * @param string $element
      * @param string $taxRateElement
