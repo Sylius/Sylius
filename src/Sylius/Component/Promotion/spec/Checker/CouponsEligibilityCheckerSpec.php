@@ -48,8 +48,8 @@ class CouponsEligibilityCheckerSpec extends ObjectBehavior
         PromotionInterface $promotion,
         PromotionCouponAwareSubjectInterface $subject
     ) {
-        $coupon->getPromotion()->willReturn($promotion);
         $subject->getPromotionCoupon()->willReturn($coupon);
+        $coupon->getPromotion()->willReturn($promotion);
 
         $eventDispatcher
             ->dispatch(SyliusPromotionEvents::COUPON_ELIGIBLE, Argument::type(GenericEvent::class))
@@ -66,7 +66,23 @@ class CouponsEligibilityCheckerSpec extends ObjectBehavior
         PromotionInterface $otherPromotion,
         PromotionCouponAwareSubjectInterface $subject
     ) {
+        $subject->getPromotionCoupon()->willReturn($coupon);
         $coupon->getPromotion()->willReturn($otherPromotion);
+
+        $eventDispatcher
+            ->dispatch(SyliusPromotionEvents::COUPON_NOT_ELIGIBLE, Argument::type(GenericEvent::class))
+            ->shouldBeCalled()
+        ;
+
+        $this->isEligible($subject, $promotion)->shouldReturn(false);
+    }
+
+    function it_returns_false_if_subject_has_no_coupon(
+        $eventDispatcher,
+        PromotionInterface $promotion,
+        PromotionCouponAwareSubjectInterface $subject
+    ) {
+        $subject->getPromotionCoupon()->willReturn(null);
 
         $eventDispatcher
             ->dispatch(SyliusPromotionEvents::COUPON_NOT_ELIGIBLE, Argument::type(GenericEvent::class))

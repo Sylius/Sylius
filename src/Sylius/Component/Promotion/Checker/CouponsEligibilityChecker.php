@@ -26,7 +26,7 @@ class CouponsEligibilityChecker implements PromotionSubjectEligibilityCheckerInt
     /**
      * @var EventDispatcherInterface
      */
-    private $eventDispatcher;
+    protected $eventDispatcher;
 
     /**
      * @param EventDispatcherInterface $eventDispatcher
@@ -45,8 +45,7 @@ class CouponsEligibilityChecker implements PromotionSubjectEligibilityCheckerInt
             return false;
         }
 
-        $coupon = $subject->getPromotionCoupon();
-        if (null === $coupon || $promotion !== $coupon->getPromotion()) {
+        if (!$this->isCouponEligible($promotion, $subject)) {
             $this->eventDispatcher->dispatch(SyliusPromotionEvents::COUPON_NOT_ELIGIBLE, new GenericEvent($promotion));
 
             return false;
@@ -55,5 +54,18 @@ class CouponsEligibilityChecker implements PromotionSubjectEligibilityCheckerInt
         $this->eventDispatcher->dispatch(SyliusPromotionEvents::COUPON_ELIGIBLE, new GenericEvent($promotion));
 
         return true;
+    }
+
+    /**
+     * @param PromotionInterface $promotion
+     * @param PromotionCouponAwareSubjectInterface $subject
+     *
+     * @return bool
+     */
+    protected function isCouponEligible(PromotionInterface $promotion, PromotionCouponAwareSubjectInterface $subject)
+    {
+        $coupon = $subject->getPromotionCoupon();
+
+        return null !== $coupon && $promotion === $coupon->getPromotion();
     }
 }

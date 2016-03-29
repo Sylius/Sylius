@@ -70,7 +70,7 @@
             <argument type="service" id="sylius.promotion.eligibility_checker.dates" />
             <argument type="service" id="sylius.promotion.eligibility_checker.usage_limit" />
             <argument type="service" id="sylius.promotion.eligibility_checker.coupons" />
-            <argument type="service" id="sylius.registry.promotion_rule_checker" />
+            <argument type="service" id="sylius.promotion.eligibility_checker.rules" />
         </service>
 
         <service id="sylius.promotion_rule_checker.item_total" class="%sylius.promotion_rule_checker.item_total.class%">
