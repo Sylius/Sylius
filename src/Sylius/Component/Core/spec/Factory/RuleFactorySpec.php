@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Core\Factory;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Factory\RuleFactoryInterface;
+use Sylius\Component\Core\Promotion\Checker\TaxonRuleChecker;
 use Sylius\Component\Promotion\Model\RuleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
@@ -59,5 +60,14 @@ class RuleFactorySpec extends ObjectBehavior
         $rule->setConfiguration(['amount' => 1000])->shouldBeCalled();
 
         $this->createItemTotal(1000)->shouldReturn($rule);
+    }
+
+    function it_creates_taxon_rule($decoratedFactory, RuleInterface $rule)
+    {
+        $decoratedFactory->createNew()->willReturn($rule);
+        $rule->setType(TaxonRuleChecker::TYPE)->shouldBeCalled();
+        $rule->setConfiguration(['taxons' => [1, 6]])->shouldBeCalled();
+
+        $this->createTaxon([1, 6])->shouldReturn($rule);
     }
 }
