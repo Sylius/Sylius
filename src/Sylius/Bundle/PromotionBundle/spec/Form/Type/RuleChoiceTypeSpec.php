@@ -43,7 +43,10 @@ class RuleChoiceTypeSpec extends ObjectBehavior
 
     function it_should_set_rule_types_to_choose_from(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(['choices' => $this->choices])->shouldBeCalled();
+        $resolver->setDefaults([
+            'choices' => $this->choices,
+            'choices_as_values' => true,
+        ])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

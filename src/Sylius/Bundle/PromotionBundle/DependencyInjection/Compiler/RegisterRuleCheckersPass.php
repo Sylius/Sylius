@@ -16,8 +16,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Registers all rule checkers in registry service.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class RegisterRuleCheckersPass implements CompilerPassInterface
@@ -32,11 +30,11 @@ class RegisterRuleCheckersPass implements CompilerPassInterface
         $checkers = [];
 
         foreach ($container->findTaggedServiceIds('sylius.promotion_rule_checker') as $id => $attributes) {
-            if (!isset($attributes[0]['type']) || !isset($attributes[0]['label'])) {
+            if (!isset($attributes[0]['type'], $attributes[0]['label'])) {
                 throw new \InvalidArgumentException('Tagged rule checker needs to have `type` and `label` attributes.');
             }
 
-            $checkers[$attributes[0]['type']] = $attributes[0]['label'];
+            $checkers[$attributes[0]['label']] = $attributes[0]['type'];
 
             $registry->addMethodCall('register', [$attributes[0]['type'], new Reference($id)]);
         }

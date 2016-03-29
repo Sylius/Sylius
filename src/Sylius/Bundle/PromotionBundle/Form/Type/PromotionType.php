@@ -13,6 +13,10 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -26,37 +30,37 @@ class PromotionType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', [
+            ->add('name', TextType::class, [
                 'label' => 'sylius.form.promotion.name',
             ])
-            ->add('description', 'text', [
+            ->add('description', TextType::class, [
                 'label' => 'sylius.form.promotion.description',
             ])
-            ->add('exclusive', 'checkbox', [
+            ->add('exclusive', CheckboxType::class, [
                 'label' => 'sylius.form.promotion.exclusive',
             ])
-            ->add('usageLimit', 'integer', [
+            ->add('usageLimit', IntegerType::class, [
                 'label' => 'sylius.form.promotion.usage_limit',
             ])
-            ->add('startsAt', 'datetime', [
+            ->add('startsAt', DateTimeType::class, [
                 'label' => 'sylius.form.promotion.starts_at',
                 'empty_value' => /* @Ignore */ ['year' => '-', 'month' => '-', 'day' => '-'],
                 'time_widget' => 'text',
             ])
-            ->add('endsAt', 'datetime', [
+            ->add('endsAt', DateTimeType::class, [
                 'label' => 'sylius.form.promotion.ends_at',
                 'empty_value' => /* @Ignore */ ['year' => '-', 'month' => '-', 'day' => '-'],
                 'time_widget' => 'text',
             ])
-            ->add('couponBased', 'checkbox', [
+            ->add('couponBased', CheckboxType::class, [
                 'label' => 'sylius.form.promotion.coupon_based',
                 'required' => false,
             ])
-            ->add('rules', 'sylius_promotion_rule_collection', [
+            ->add('rules', RuleCollectionType::class, [
                 'label' => 'sylius.form.promotion.rules',
                 'button_add_label' => 'sylius.form.promotion.add_rule',
             ])
-            ->add('actions', 'sylius_promotion_action_collection', [
+            ->add('actions', ActionCollectionType::class, [
                 'label' => 'sylius.form.promotion.actions',
                 'button_add_label' => 'sylius.form.promotion.add_action',
             ])

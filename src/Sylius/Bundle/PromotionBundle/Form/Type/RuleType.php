@@ -18,8 +18,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Promotion rule form type.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
@@ -31,7 +29,7 @@ class RuleType extends AbstractConfigurationType
     public function buildForm(FormBuilderInterface $builder, array $options = [])
     {
         $builder
-            ->add('type', 'sylius_promotion_rule_choice', [
+            ->add('type', RuleChoiceType::class, [
                 'label' => 'sylius.form.rule.type',
                 'attr' => [
                     'data-form-collection' => 'update',

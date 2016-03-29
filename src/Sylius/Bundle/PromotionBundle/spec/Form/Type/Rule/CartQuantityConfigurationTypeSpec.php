@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\PromotionBundle\Form\Type\Rule;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilder;
 
 /**
@@ -34,7 +35,7 @@ class CartQuantityConfigurationTypeSpec extends ObjectBehavior
     function it_should_build_form_with_count_field_and_equal_checkbox(FormBuilder $builder)
     {
         $builder
-            ->add('count', 'integer', Argument::any())
+            ->add('count', IntegerType::class, Argument::any())
             ->willReturn($builder)
         ;
 

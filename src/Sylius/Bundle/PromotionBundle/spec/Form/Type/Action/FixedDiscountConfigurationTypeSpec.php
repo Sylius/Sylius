@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\PromotionBundle\Form\Type\Action;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 
@@ -34,7 +35,7 @@ class FixedDiscountConfigurationTypeSpec extends ObjectBehavior
     function it_should_build_form_with_count_field_and_equal_checkbox(FormBuilder $builder)
     {
         $builder
-            ->add('amount', 'sylius_money', Argument::any())
+            ->add('amount', MoneyType::class, Argument::any())
             ->willReturn($builder)
         ;
 

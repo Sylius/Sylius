@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\PromotionBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildActionFormSubscriber;
+use Sylius\Bundle\PromotionBundle\Form\Type\ActionChoiceType;
 use Sylius\Bundle\PromotionBundle\Form\Type\ActionType;
 use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType;
 use Sylius\Component\Promotion\Model\ActionInterface;
@@ -48,7 +49,7 @@ class ActionTypeSpec extends ObjectBehavior
         FormFactoryInterface $factory
     ) {
         $builder
-            ->add('type', 'sylius_promotion_action_choice', Argument::type('array'))
+            ->add('type', ActionChoiceType::class, Argument::type('array'))
             ->willReturn($builder)
         ;
 

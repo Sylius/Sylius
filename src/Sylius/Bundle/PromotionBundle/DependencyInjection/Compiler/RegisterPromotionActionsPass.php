@@ -16,8 +16,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Registers all promotion actions in registry service.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class RegisterPromotionActionsPass implements CompilerPassInterface
@@ -32,11 +30,11 @@ class RegisterPromotionActionsPass implements CompilerPassInterface
         $actions = [];
 
         foreach ($container->findTaggedServiceIds('sylius.promotion_action') as $id => $attributes) {
-            if (!isset($attributes[0]['type']) || !isset($attributes[0]['label'])) {
+            if (!isset($attributes[0]['type'], $attributes[0]['label'])) {
                 throw new \InvalidArgumentException('Tagged promotion action needs to have `type` and `label` attributes.');
             }
 
-            $actions[$attributes[0]['type']] = $attributes[0]['label'];
+            $actions[$attributes[0]['label']] = $attributes[0]['type'];
 
             $registry->addMethodCall('register', [$attributes[0]['type'], new Reference($id)]);
         }
