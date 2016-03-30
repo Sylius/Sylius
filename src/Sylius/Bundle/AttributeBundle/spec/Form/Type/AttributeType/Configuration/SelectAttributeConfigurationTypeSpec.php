@@ -44,7 +44,7 @@ class SelectAttributeConfigurationTypeSpec extends ObjectBehavior
 
         $builder
             ->add('multiple', 'checkbox', [
-                'label' => 'sylius.attribute_type_configuration.select.multiple',
+                'label' => 'sylius.form.attribute_type_configuration_select.multiple',
             ])
             ->willReturn($builder)
         ;
