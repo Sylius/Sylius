@@ -10,3 +10,4 @@ sylius:
                     tax_categories: Категорија пореза
                     countries: Земље
                     locales: Локални
+                    tax_rates: Пореске стопе

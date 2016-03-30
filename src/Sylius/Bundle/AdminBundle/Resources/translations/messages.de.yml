@@ -10,3 +10,4 @@ sylius:
                     tax_categories: Steuerkategorien
                     countries: Länder
                     locales: Gebietsschemata
+                    tax_rates: Steuersätze

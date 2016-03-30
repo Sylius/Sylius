@@ -9,3 +9,4 @@ sylius:
                     header: Ayarlar
                     countries: Ülkeler
                     locales: Diller
+                    tax_rates: Vergi oranları

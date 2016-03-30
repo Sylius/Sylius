@@ -9,3 +9,4 @@ sylius:
                     header: ตั้งค่าคอนฟิก
                     countries: ประเทศ
                     locales: ภาษาที่ใช้
+                    tax_rates: อัตราภาษี

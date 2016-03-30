@@ -10,3 +10,4 @@ sylius:
                     tax_categories: Список налоговых категорий
                     countries: Страны
                     locales: Языки
+                    tax_rates: Налоговые ставки

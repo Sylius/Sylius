@@ -7,3 +7,4 @@ sylius:
             main:
                 configuration:
                     countries: Países
+                    tax_rates: Impostos

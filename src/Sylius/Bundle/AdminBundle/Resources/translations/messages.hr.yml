@@ -9,3 +9,4 @@ sylius:
                     header: Postavke
                     countries: Države
                     locales: Lokaliteti
+                    tax_rates: Stope poreza

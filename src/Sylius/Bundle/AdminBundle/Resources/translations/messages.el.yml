@@ -8,3 +8,4 @@ sylius:
                 configuration:
                     header: Παραμετροποίηση
                     countries: Χώρες
+                    tax_rates: Φορολογικοί συντελεστές

@@ -10,3 +10,4 @@ sylius:
                     tax_categories: Catégories de taxes
                     countries: Pays
                     locales: Locales
+                    tax_rates: Taux de taxe
