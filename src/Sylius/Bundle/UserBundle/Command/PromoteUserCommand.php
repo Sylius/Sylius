@@ -37,7 +37,7 @@ class PromoteUserCommand extends AbstractRoleCommand
             ->setHelp(<<<EOT
 The <info>sylius:user:promote</info> command promotes a user by adding security roles
 
-  <info>php app/console fos:user:promote matthieu@email.com</info>
+  <info>php app/console sylius:user:promote matthieu@email.com</info>
 EOT
             );
     }

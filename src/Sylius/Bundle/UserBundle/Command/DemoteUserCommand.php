@@ -37,7 +37,7 @@ class DemoteUserCommand extends AbstractRoleCommand
             ->setHelp(<<<EOT
 The <info>sylius:user:demote</info> command demotes a user by removing security roles
 
-  <info>php app/console fos:user:demote matthieu@email.com</info>
+  <info>php app/console sylius:user:demote matthieu@email.com</info>
 EOT
             );
     }
