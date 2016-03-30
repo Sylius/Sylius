@@ -16,12 +16,21 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface PromotionEligibilityCheckerInterface
+class UsageLimitEligibilityChecker implements PromotionEligibilityCheckerInterface
 {
     /**
-     * @param PromotionInterface $promotion
-     *
-     * @return bool
+     * {@inheritdoc}
      */
-    public function isEligible(PromotionInterface $promotion);
+    public function isEligible(PromotionInterface $promotion)
+    {
+        if (null === $usageLimit = $promotion->getUsageLimit()) {
+            return true;
+        }
+
+        if ($promotion->getUsed() < $usageLimit) {
+            return true;
+        }
+
+        return false;
+    }
 }

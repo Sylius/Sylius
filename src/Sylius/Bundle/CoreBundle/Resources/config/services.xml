@@ -79,7 +79,7 @@
         <parameter key="sylius.promotion_action.item_percentage_discount.class">Sylius\Component\Core\Promotion\Action\ItemPercentageDiscountAction</parameter>
         <parameter key="sylius.promotion_action.shipping_discount.class">Sylius\Component\Core\Promotion\Action\ShippingDiscountAction</parameter>
         <parameter key="sylius.promotion_action.add_product.class">Sylius\Component\Core\Promotion\Action\AddProductAction</parameter>
-        <parameter key="sylius.promotion_eligibility_checker.class">Sylius\Component\Core\Promotion\Checker\PromotionEligibilityChecker</parameter>
+        <parameter key="sylius.promotion.eligibility_checker.coupons.class">Sylius\Component\Core\Promotion\Checker\CouponsEligibilityChecker</parameter>
 
         <parameter key="sylius.promotion_filter.taxon.class">Sylius\Component\Core\Promotion\Filter\TaxonFilter</parameter>
         <parameter key="sylius.promotion_filter.price_range.class">Sylius\Component\Core\Promotion\Filter\PriceRangeFilter</parameter>
@@ -467,10 +467,9 @@
             <tag name="sylius.promotion_action" type="add_product" label="Add product" />
         </service>
 
-        <service id="sylius.promotion_eligibility_checker" class="%sylius.promotion_eligibility_checker.class%">
-            <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="sylius.registry.promotion_rule_checker" />
+        <service id="sylius.promotion.eligibility_checker.coupons" class="%sylius.promotion.eligibility_checker.coupons.class%">
             <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="sylius.repository.order" />
         </service>
 
         <service id="sylius.promotion_filter.taxon" class="%sylius.promotion_filter.taxon.class%" />
