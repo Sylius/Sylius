@@ -7,3 +7,4 @@ sylius:
             main:
                 configuration:
                     countries: Zemlje
+                    tax_rates: Poreske stope

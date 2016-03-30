@@ -10,3 +10,4 @@ sylius:
                     tax_categories: Категорії оподаткування
                     countries: Країни
                     locales: Локалі
+                    tax_rates: Податкові ставки

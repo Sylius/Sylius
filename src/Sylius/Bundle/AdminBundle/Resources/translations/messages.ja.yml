@@ -7,3 +7,4 @@ sylius:
             main:
                 configuration:
                     countries: 国の設定
+                    tax_rates: 税管理

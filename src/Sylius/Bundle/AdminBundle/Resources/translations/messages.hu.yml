@@ -10,3 +10,4 @@ sylius:
                     tax_categories: Adó kategóriák
                     countries: Országok
                     locales: Területi beállítások
+                    tax_rates: Adókulcsok

@@ -9,3 +9,4 @@ sylius:
                     header: Канфігурацыя
                     countries: Краіны
                     locales: Месцы размяшчэння
+                    tax_rates: Стаўка падатку

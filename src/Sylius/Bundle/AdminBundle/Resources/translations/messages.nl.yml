@@ -9,3 +9,4 @@ sylius:
                     header: Configuratie
                     countries: Landen
                     locales: "Talen/Regio's"
+                    tax_rates: BTW-tarieven

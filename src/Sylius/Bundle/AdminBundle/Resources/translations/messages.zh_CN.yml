@@ -9,3 +9,4 @@ sylius:
                     header: 配置
                     countries: 国家
                     locales: 区域设置
+                    tax_rates: 税率

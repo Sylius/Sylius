@@ -9,3 +9,4 @@ sylius:
                     header: Konfiguration
                     countries: Lande
                     locales: Landekoder
+                    tax_rates: Momssatser

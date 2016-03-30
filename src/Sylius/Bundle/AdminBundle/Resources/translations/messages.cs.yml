@@ -9,3 +9,4 @@ sylius:
                     header: Konfigurace
                     countries: Země
                     locales: Lokalizace
+                    tax_rates: Daňové sazby

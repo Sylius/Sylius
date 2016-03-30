@@ -379,6 +379,7 @@ sylius:
         included_in_price: Inclus dans le prix
         index_metadata: Méta-données
         index_of_all_configured_locales: Index de tous les paramètres régionaux configurés
+        information: Informations
         inventory_here_you_can_see_current_stock_levels: 'Inventaire <small>États des stocks</small>'
         inventory_index: Stock
         inventory_state: État du stock

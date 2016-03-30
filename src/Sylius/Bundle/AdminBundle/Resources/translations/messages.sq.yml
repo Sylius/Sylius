@@ -10,3 +10,4 @@ sylius:
                     tax_categories: Kategoritë e taksimit
                     countries: Vendet
                     locales: Rajonet
+                    tax_rates: Normat e taksimit

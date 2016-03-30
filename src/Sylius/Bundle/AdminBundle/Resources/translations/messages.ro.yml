@@ -9,3 +9,4 @@ sylius:
                     header: Configurare
                     countries: Țări
                     locales: Setări regionale
+                    tax_rates: Taxe

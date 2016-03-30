@@ -10,3 +10,4 @@ sylius:
                     tax_categories: Categorie di tassazione
                     countries: Paesi
                     locales: Localizzazioni
+                    tax_rates: Aliquote fiscali

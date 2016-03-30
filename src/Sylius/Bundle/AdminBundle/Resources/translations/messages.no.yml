@@ -9,3 +9,4 @@ sylius:
                     header: Konfigurasjon
                     countries: Land
                     locales: Nasjonale innstillinger
+                    tax_rates: Skattesatser

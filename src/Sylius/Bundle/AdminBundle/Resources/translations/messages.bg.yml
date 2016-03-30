@@ -8,3 +8,4 @@ sylius:
                 configuration:
                     countries: Страни
                     locales: Езикови променливи
+                    tax_rates: Данъчни ставки

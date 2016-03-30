@@ -9,3 +9,4 @@ sylius:
                     header: Configuração
                     countries: Países
                     locales: Localidades
+                    tax_rates: Impostos

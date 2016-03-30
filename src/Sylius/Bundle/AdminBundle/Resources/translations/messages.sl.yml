@@ -9,3 +9,4 @@ sylius:
                     header: Konfiguracija
                     countries: Države
                     locales: Področne nastavitve
+                    tax_rates: Davčne stopnje

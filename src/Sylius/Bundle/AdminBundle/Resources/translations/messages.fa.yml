@@ -9,3 +9,4 @@ sylius:
                     header: تنظیمات
                     countries: كشور‌ها
                     locales: زبان ها
+                    tax_rates: نرخ های مالیات

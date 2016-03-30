@@ -10,3 +10,4 @@ sylius:
                     tax_categories: Categorías de Impuestos
                     countries: Países
                     locales: Idiomas
+                    tax_rates: Tasas de impuestos

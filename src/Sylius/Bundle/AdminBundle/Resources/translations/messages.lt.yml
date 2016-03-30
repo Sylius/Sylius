@@ -9,3 +9,4 @@ sylius:
                     header: Konfigūracija
                     countries: Šalys
                     locales: Lokalės
+                    tax_rates: Mokesčių tarifai

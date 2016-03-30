@@ -10,3 +10,4 @@ sylius:
                     tax_categories: Daňové kategórie
                     countries: Krajiny
                     locales: Jazyky
+                    tax_rates: Daňové sadzby
