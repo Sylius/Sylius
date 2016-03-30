@@ -1,6 +1,6 @@
-AppBundle\Entity\BookTranslation:
+AppBundle\Entity\Book:
     type: entity
-    table: app_book_translation
+    table: app_book
     id:
         id:
             type: integer
@@ -8,6 +8,6 @@ AppBundle\Entity\BookTranslation:
             generator:
                 strategy: AUTO
     fields:
-        title:
+        author:
             type: string
             length: 255

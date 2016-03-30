@@ -77,7 +77,7 @@
     "autoload-dev": {
         "psr-4": {
             "Sylius\\Bundle\\ResourceBundle\\spec\\": "spec/",
-            "AppBundle\\": "test/src/AppBundle/"
+            "AppBundle\\": "test/Functional/src/AppBundle/"
         }
     },
     "minimum-stability": "dev",
@@ -93,8 +93,8 @@
             "dev-master": "0.18-dev"
         },
         "incenteev-parameters": {
-            "file": "test/app/config/parameters.yml",
-            "dist-file": "test/app/config/parameters.yml.dist"
+            "file": "test/Functional/app/config/parameters.yml",
+            "dist-file": "test/Functional/app/config/parameters.yml.dist"
         }
     }
 }

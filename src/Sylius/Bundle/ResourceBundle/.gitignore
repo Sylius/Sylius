@@ -1,11 +1,8 @@
-vendor/
-bin/
+/vendor/
+/bin/
 
-composer.phar
-composer.lock
+/composer.phar
+/composer.lock
 
-test/app/cache
-test/app/logs
-
-test/app/config/parameters.yml
-test/app/db.sql
+/phpspec.yml
+/phpunit.xml

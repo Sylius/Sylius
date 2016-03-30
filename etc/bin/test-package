@@ -56,7 +56,7 @@ run_phpunit() {
     fi
 
     if [ "$(package_path_to_package_name "$1")" = "ResourceBundle" ]; then
-        run_command "test/app/console doctrine:schema:update --ansi --no-interaction --force --quiet"
+        run_command "test/Functional/app/console doctrine:schema:update --ansi --no-interaction --force --quiet"
     fi
 
     retry_run_command "${phpunit} --colors=always"
