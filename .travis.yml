@@ -60,6 +60,8 @@ before_script:
     - app/console assets:install --env=test_cached --no-debug
     - app/console assetic:dump --env=test_cached --no-debug
 
+    - npm install
+
     # Debug informations, PHP version & PHP configuration
     # Its needed to remove the line with secret variables, as it is listed in _SERVER variables
     - php -v
@@ -75,6 +77,8 @@ script:
     - bin/phpunit
 
     - etc/bin/test-packages
+
+    - gulp admin-css admin-js
 
     - etc/travis/prepare-javascript
     - etc/travis/run-behat
