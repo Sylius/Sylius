@@ -53,7 +53,7 @@ interface RuleFactoryInterface extends FactoryInterface
      * @param string $taxon
      * @param int $count
      *
-     * @return mixed
+     * @return RuleInterface
      */
     public function createContainsTaxon($taxon, $count);
 }

@@ -71,7 +71,7 @@ class ContainsTaxonRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($order, ['taxon' => 'bows', 'count' => 5])->shouldReturn(true);
     }
 
-    function it_returns_false_if_order_has_not_required_number_of_products_from_configured_taxon(
+    function it_returns_false_if_an_order_does_not_have_the_required_number_of_products_from_a_configured_taxon(
         OrderInterface $order,
         OrderItemInterface $compositeBowItem,
         OrderItemInterface $longbowItem,
@@ -141,7 +141,7 @@ class ContainsTaxonRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($order, ['taxon' => 'bows', 'count' => 10])->shouldReturn(false);
     }
 
-    function it_throws_exception_if_promotion_subject_is_not_order(PromotionSubjectInterface $subject)
+    function it_throws_exception_if_the_promotion_subject_is_not_an_order(PromotionSubjectInterface $subject)
     {
         $this
             ->shouldThrow(new UnexpectedTypeException($subject->getWrappedObject(), OrderInterface::class))

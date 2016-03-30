@@ -70,7 +70,7 @@ final class TaxonomyContext implements Context
     }
 
     /**
-     * @Given /^(it) (belongs to "[^"]+")$/
+     * @Given /^(it|this product) (belongs to "[^"]+")$/
      */
     public function itBelongsTo(ProductInterface $product, TaxonInterface $taxon)
     {

@@ -363,7 +363,7 @@ class PromotionContextSpec extends ObjectBehavior
         $this->thePromotionGivesOffIfOrderContainsProductsClassifiedAsAndPricedAt($promotion, 500, $tanks, 1000);
     }
 
-    function it_creates_fixed_discount_promotion_with_contains_taxon_rule(
+    function it_creates_a_fixed_discount_promotion_which_contains_a_taxon_rule(
         ActionFactoryInterface $actionFactory,
         ActionInterface $action,
         ObjectManager $objectManager,
