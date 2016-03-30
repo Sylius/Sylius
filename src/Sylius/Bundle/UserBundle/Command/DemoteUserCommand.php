@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\UserBundle\Command;
 
-use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -35,7 +35,7 @@ class DemoteUserCommand extends AbstractRoleCommand
                 new InputOption('super-admin', null, InputOption::VALUE_NONE, 'Unset the user as super admin'),
             ))
             ->setHelp(<<<EOT
-The <info>sylius:user:demote</info> command demotes a user by removing roles
+The <info>sylius:user:demote</info> command demotes a user by removing security roles
 
   <info>php app/console fos:user:demote matthieu@email.com</info>
 EOT
@@ -45,22 +45,9 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function executeRoleCommand(OutputInterface $output, UserInterface $user, array $roles, array $securityRoles)
+    protected function executeRoleCommand(OutputInterface $output, UserInterface $user, array $securityRoles)
     {
         $error = false;
-
-        foreach ($roles as $code) {
-            $role = $this->findAuthorizationRole($code);
-
-            if (!$user->hasAuthorizationRole($role)) {
-                $output->writeln(sprintf('<error>User "%s" didn\'t have "%s" RBAC role.</error>', (string)$user, $role));
-                $error = true;
-                continue;
-            }
-
-            $user->removeAuthorizationRole($role);
-            $output->writeln(sprintf('RBAC role <comment>%s</comment> has been removed from user <comment>%s</comment>', $role, (string)$user));
-        }
 
         foreach ($securityRoles as $securityRole) {
             if (!$user->hasRole($securityRole)) {

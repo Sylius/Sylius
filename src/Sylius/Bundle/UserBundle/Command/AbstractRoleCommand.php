@@ -12,11 +12,9 @@
 namespace Sylius\Bundle\UserBundle\Command;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Component\Core\Model\UserInterface;
-use Sylius\Component\Rbac\Model\RoleInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -64,10 +62,8 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $email = $input->getArgument('email');
-        $roles = $input->getArgument('roles');
+        $securityRoles = $input->getArgument('roles');
         $superAdmin = $input->getOption('super-admin');
-
-        $securityRoles = array();
 
         if ($superAdmin) {
             $securityRoles[] = 'ROLE_ADMINISTRATION_ACCESS';
@@ -76,7 +72,7 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
         /** @var UserInterface $user */
         $user = $this->findUserByEmail($email);
 
-        $this->executeRoleCommand($output, $user, $roles, $securityRoles);
+        $this->executeRoleCommand($output, $user, $securityRoles);
     }
 
     /**
@@ -94,26 +90,6 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
         }
 
         return $user;
-    }
-
-    /**
-     * @param string $role
-     *
-     * @return RoleInterface
-     */
-    protected function findAuthorizationRole($role)
-    {
-        $roleRepository = $this->getContainer()->get('sylius.repository.role');
-        /** @var RoleInterface $role */
-        $authorizationRole = $roleRepository->findOneBy(array('code' => $role));
-
-        if (null === $authorizationRole) {
-            throw new \InvalidArgumentException(
-                sprintf('No role with code `%s` does not exist.', $role)
-            );
-        }
-
-        return $authorizationRole;
     }
 
     /**
@@ -135,8 +111,7 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
     /**
      * @param OutputInterface $output
      * @param UserInterface $user
-     * @param array $roles
      * @param array $securityRoles
      */
-    abstract protected function executeRoleCommand(OutputInterface $output, UserInterface $user, array $roles, array $securityRoles);
+    abstract protected function executeRoleCommand(OutputInterface $output, UserInterface $user, array $securityRoles);
 }
