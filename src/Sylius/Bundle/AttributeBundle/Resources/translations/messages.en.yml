@@ -15,6 +15,7 @@ sylius:
             datetime: Datetime
             integer: Integer
             percent: Percent
+            select: Select
             text: Text
             textarea: Textarea
             title: Attribute types
@@ -24,6 +25,8 @@ sylius:
                 format: Format
             date:
                 format: Format
+            select:
+                multiple: Multiple
             text:
                 min: Min length
                 max: Max length
