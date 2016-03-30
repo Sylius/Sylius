@@ -21,15 +21,10 @@
         <parameter key="sylius.behat.channel_context_setter.class">Sylius\Behat\Service\Setter\ChannelContextSetter</parameter>
         <parameter key="sylius.behat.security.class">Sylius\Behat\Service\SecurityService</parameter>
         <parameter key="sylius.behat.table_accessor.class">Sylius\Behat\Service\Accessor\TableAccessor</parameter>
-        <parameter key="sylius.behat.page.class">Sylius\Behat\Page\Page</parameter>
-        <parameter key="sylius.behat.symfony_page.class">Sylius\Behat\Page\SymfonyPage</parameter>
         <parameter key="sylius.behat.paypal_api_mocker.class">Sylius\Behat\Service\Mocker\PaypalApiMocker</parameter>
         <parameter key="sylius.behat.mocker.class">Sylius\Behat\Service\Mocker\Mocker</parameter>
         <parameter key="sylius.behat.response_loader.class">Sylius\Behat\Service\ResponseLoader</parameter>
-        <parameter key="sylius.behat.page.admin.crud.index.class">Sylius\Behat\Page\Admin\Crud\IndexPage</parameter>
-        <parameter key="sylius.behat.page.admin.crud.create.class">Sylius\Behat\Page\Admin\Crud\CreatePage</parameter>
-        <parameter key="sylius.behat.page.admin.crud.update.class">Sylius\Behat\Page\Admin\Crud\UpdatePage</parameter>
-        <parameter key="sylius.behat.service.accessor.notification_accessor.class">Sylius\Behat\Service\Accessor\NotificationAccessor</parameter>
+        <parameter key="sylius.behat.notification_accessor.class">Sylius\Behat\Service\Accessor\NotificationAccessor</parameter>
     </parameters>
     <services>
         <service id="mink.default_session" class="Behat\Mink\Session" factory-service="mink" factory-method="getSession" lazy="true" scope="scenario" public="false" />
@@ -52,15 +47,6 @@
 
         <service id="sylius.behat.table_accessor" class="%sylius.behat.table_accessor.class%" public="false" />
 
-        <service id="sylius.behat.page" class="%sylius.behat.page.class%" abstract="true" scope="scenario" public="false">
-            <argument type="service" id="mink.default_session" />
-            <argument>%mink.parameters%</argument>
-        </service>
-
-        <service id="sylius.behat.symfony_page" class="%sylius.behat.symfony_page.class%" parent="sylius.behat.page" abstract="true" scope="scenario" public="false">
-            <argument type="service" id="router" container="symfony_shared" />
-        </service>
-
         <service id="sylius.behat.paypal_api_mocker" class="%sylius.behat.paypal_api_mocker.class%" scope="scenario" public="false">
             <argument type="service" id="sylius.behat.mocker" />
             <argument type="service" id="sylius.behat.response_loader" />
@@ -70,13 +56,7 @@
         </service>
         <service id="sylius.behat.response_loader" class="%sylius.behat.response_loader.class%" scope="scenario" public="false" />
 
-        <service id="sylius.behat.page.admin.crud.index" class="%sylius.behat.page.admin.crud.index.class%" parent="sylius.behat.symfony_page" abstract="true" scope="scenario" public="false">
-            <argument type="service" id="sylius.behat.table_accessor" />
-        </service>
-        <service id="sylius.behat.page.admin.crud.create" class="%sylius.behat.page.admin.crud.create.class%" parent="sylius.behat.symfony_page" abstract="true" scope="scenario" public="false" />
-        <service id="sylius.behat.page.admin.crud.update" class="%sylius.behat.page.admin.crud.update.class%" parent="sylius.behat.symfony_page" abstract="true" scope="scenario" public="false" />
-
-        <service id="sylius.behat.service.accessor.notification_accessor" class="%sylius.behat.service.accessor.notification_accessor.class%" scope="scenario" public="false">
+        <service id="sylius.behat.notification_accessor" class="%sylius.behat.notification_accessor.class%" scope="scenario" public="false">
             <argument type="service" id="mink.default_session" />
         </service>
     </services>
