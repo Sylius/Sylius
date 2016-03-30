@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Core\Factory;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Factory\RuleFactoryInterface;
 use Sylius\Component\Core\Promotion\Checker\TotalOfItemsFromTaxonRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\ContainsTaxonRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\TaxonRuleChecker;
 use Sylius\Component\Promotion\Model\RuleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -79,5 +80,14 @@ class RuleFactorySpec extends ObjectBehavior
         $rule->setConfiguration(['taxon' => 'spears', 'amount' => 1000])->shouldBeCalled();
 
         $this->createItemsFromTaxonTotal('spears', 1000)->shouldReturn($rule);
+    }
+
+    function it_creates_a_contains_taxon_rule($decoratedFactory, RuleInterface $rule)
+    {
+        $decoratedFactory->createNew()->willReturn($rule);
+        $rule->setType(ContainsTaxonRuleChecker::TYPE)->shouldBeCalled();
+        $rule->setConfiguration(['taxon' => 'bows', 'count' => 10])->shouldBeCalled();
+
+        $this->createContainsTaxon('bows', 10)->shouldReturn($rule);
     }
 }

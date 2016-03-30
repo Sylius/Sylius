@@ -313,6 +313,20 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") off if order contains (\d+) products (classified as "[^"]+")$/
+     */
+    public function thePromotionGivesOffIfOrderContainsNumberOfProductsClassifiedAs(
+        PromotionInterface $promotion,
+        $discount,
+        $count,
+        TaxonInterface $taxon
+    ) {
+        $rule = $this->ruleFactory->createContainsTaxon($taxon->getCode(), $count);
+
+        $this->createFixedPromotion($promotion, $discount, [], $rule);
+    }
+
+    /**
      * @param ActionInterface $action
      * @param array $taxonCodes
      *

@@ -362,4 +362,29 @@ class PromotionContextSpec extends ObjectBehavior
 
         $this->thePromotionGivesOffIfOrderContainsProductsClassifiedAsAndPricedAt($promotion, 500, $tanks, 1000);
     }
+
+    function it_creates_a_fixed_discount_promotion_which_contains_a_taxon_rule(
+        ActionFactoryInterface $actionFactory,
+        ActionInterface $action,
+        ObjectManager $objectManager,
+        PromotionInterface $promotion,
+        RuleFactoryInterface $ruleFactory,
+        RuleInterface $rule,
+        TaxonInterface $tanks
+    ) {
+        $tanks->getCode()->willReturn('tanks');
+
+        $ruleFactory->createContainsTaxon('tanks', 10)->willReturn($rule);
+
+        $actionFactory->createFixedDiscount(500)->willReturn($action);
+        $action->getConfiguration()->willReturn([]);
+        $action->setConfiguration([])->shouldBeCalled();
+
+        $promotion->addAction($action)->shouldBeCalled();
+        $promotion->addRule($rule)->shouldBeCalled();
+
+        $objectManager->flush()->shouldBeCalled();
+
+        $this->thePromotionGivesOffIfOrderContainsNumberOfProductsClassifiedAs($promotion, 500, 10, $tanks);
+    }
 }

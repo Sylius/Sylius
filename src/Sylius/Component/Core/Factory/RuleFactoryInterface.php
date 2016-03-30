@@ -48,4 +48,12 @@ interface RuleFactoryInterface extends FactoryInterface
      * @return RuleInterface
      */
     public function createItemsFromTaxonTotal($taxon, $amount);
+
+    /**
+     * @param string $taxon
+     * @param int $count
+     *
+     * @return RuleInterface
+     */
+    public function createContainsTaxon($taxon, $count);
 }
