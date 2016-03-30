@@ -13,6 +13,12 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
+        <parameter key="sylius.behat.page.class">Sylius\Behat\Page\Page</parameter>
+
+        <parameter key="sylius.behat.page.admin.crud.index.class">Sylius\Behat\Page\Admin\Crud\IndexPage</parameter>
+        <parameter key="sylius.behat.page.admin.crud.create.class">Sylius\Behat\Page\Admin\Crud\CreatePage</parameter>
+        <parameter key="sylius.behat.page.admin.crud.update.class">Sylius\Behat\Page\Admin\Crud\UpdatePage</parameter>
+
         <parameter key="sylius.behat.page.shop.cart.cart_summary.class">Sylius\Behat\Page\Shop\Cart\CartSummaryPage</parameter>
         <parameter key="sylius.behat.page.shop.checkout.addressing_step.class">Sylius\Behat\Page\Shop\Checkout\AddressingStep</parameter>
         <parameter key="sylius.behat.page.shop.checkout.finalize_step.class">Sylius\Behat\Page\Shop\Checkout\FinalizeStep</parameter>
@@ -48,9 +54,22 @@
         <parameter key="sylius.behat.page.admin.tax_rate.create.class">Sylius\Behat\Page\Admin\TaxRate\CreatePage</parameter>
         <parameter key="sylius.behat.page.admin.tax_rate.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
         <parameter key="sylius.behat.page.admin.tax_rate.update.class">Sylius\Behat\Page\Admin\TaxRate\UpdatePage</parameter>
+
+        <parameter key="sylius.behat.symfony_page.class">Sylius\Behat\Page\SymfonyPage</parameter>
     </parameters>
 
     <services>
+        <service id="sylius.behat.page" class="%sylius.behat.page.class%" abstract="true" scope="scenario" public="false">
+            <argument type="service" id="mink.default_session" />
+            <argument>%mink.parameters%</argument>
+        </service>
+
+        <service id="sylius.behat.page.admin.crud.index" class="%sylius.behat.page.admin.crud.index.class%" parent="sylius.behat.symfony_page" abstract="true" scope="scenario" public="false">
+            <argument type="service" id="sylius.behat.table_accessor" />
+        </service>
+        <service id="sylius.behat.page.admin.crud.create" class="%sylius.behat.page.admin.crud.create.class%" parent="sylius.behat.symfony_page" abstract="true" scope="scenario" public="false" />
+        <service id="sylius.behat.page.admin.crud.update" class="%sylius.behat.page.admin.crud.update.class%" parent="sylius.behat.symfony_page" abstract="true" scope="scenario" public="false" />
+
         <service id="sylius.behat.page.admin.customer.show" class="%sylius.behat.page.admin.customer.show.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.admin.channel.create" class="%sylius.behat.page.admin.channel.create.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.admin.channel.update" class="%sylius.behat.page.admin.channel.update.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
@@ -119,6 +138,10 @@
 
         <service id="sylius.behat.page.external.paypal_checkout_express" class="%sylius.behat.page.external.paypal_checkout_express.class%" parent="sylius.behat.page" scope="scenario" public="false" >
             <argument type="service" id="sylius.repository.payment_security_token" container="symfony" />
+        </service>
+
+        <service id="sylius.behat.symfony_page" class="%sylius.behat.symfony_page.class%" parent="sylius.behat.page" abstract="true" scope="scenario" public="false">
+            <argument type="service" id="router" container="symfony_shared" />
         </service>
     </services>
 </container>
