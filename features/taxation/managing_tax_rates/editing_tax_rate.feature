@@ -1,6 +1,6 @@
 @managing_tax_rates
 Feature: Editing tax rate
-    In order to change tax classification of my products
+    In order to change taxes applied to products
     As an Administrator
     I want to be able to edit a tax rate
 
