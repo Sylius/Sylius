@@ -47,6 +47,7 @@
         <service id="sylius.behat.context.ui.admin.managing_currency" class="%sylius.behat.context.ui.admin.managing_currency.class%" scope="scenario">
             <argument type="service" id="sylius.behat.page.admin.currency.index" />
             <argument type="service" id="sylius.behat.page.admin.currency.create" />
+            <argument type="service" id="sylius.behat.page.admin.currency.update" />
             <argument type="service" id="sylius.behat.notification_checker" />
             <tag name="sylius.behat.context" />
         </service>

@@ -42,6 +42,7 @@
         <parameter key="sylius.behat.page.admin.country.update.class">Sylius\Behat\Page\Admin\Country\UpdatePage</parameter>
         <parameter key="sylius.behat.page.admin.currency.create.class">Sylius\Behat\Page\Admin\Currency\CreatePage</parameter>
         <parameter key="sylius.behat.page.admin.currency.index.class">Sylius\Behat\Page\Admin\Currency\IndexPage</parameter>
+        <parameter key="sylius.behat.page.admin.currency.update.class">Sylius\Behat\Page\Admin\Currency\UpdatePage</parameter>
         <parameter key="sylius.behat.page.admin.customer.create.class">Sylius\Behat\Page\Admin\Customer\CreatePage</parameter>
         <parameter key="sylius.behat.page.admin.customer.index.class">Sylius\Behat\Page\Admin\Customer\IndexPage</parameter>
         <parameter key="sylius.behat.page.admin.customer.update.class">Sylius\Behat\Page\Admin\Customer\UpdatePage</parameter>
@@ -107,6 +108,9 @@
             <argument type="string">currency</argument>
         </service>
         <service id="sylius.behat.page.admin.currency.index" class="%sylius.behat.page.admin.currency.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
+            <argument type="string">currency</argument>
+        </service>
+        <service id="sylius.behat.page.admin.currency.update" class="%sylius.behat.page.admin.currency.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
             <argument type="string">currency</argument>
         </service>
         <service id="sylius.behat.page.admin.customer.create" class="%sylius.behat.page.admin.customer.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">

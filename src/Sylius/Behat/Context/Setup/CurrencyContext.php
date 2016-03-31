@@ -13,6 +13,7 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Component\Currency\Converter\CurrencyNameConverterInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -37,18 +38,26 @@ final class CurrencyContext implements Context
     private $currencyFactory;
 
     /**
+     * @var CurrencyNameConverterInterface
+     */
+    private $currencyNameConverter;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param RepositoryInterface $currencyRepository
      * @param FactoryInterface $currencyFactory
+     * @param CurrencyNameConverterInterface $currencyNameConverter
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         RepositoryInterface $currencyRepository,
-        FactoryInterface $currencyFactory
+        FactoryInterface $currencyFactory,
+        CurrencyNameConverterInterface $currencyNameConverter
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->currencyRepository = $currencyRepository;
         $this->currencyFactory = $currencyFactory;
+        $this->currencyNameConverter = $currencyNameConverter;
     }
 
     /**
@@ -62,6 +71,40 @@ final class CurrencyContext implements Context
         $channel = $this->sharedStorage->get('channel');
         $channel->setDefaultCurrency($currency);
 
+        $this->currencyRepository->add($currency);
+    }
+
+    /**
+     * @Given the store has currency :currencyName
+     */
+    public function theStoreHasCurrency($currencyName)
+    {
+        $this->createCurrency($currencyName);
+    }
+
+    /**
+     * @Given the store has disabled currency :currencyName
+     */
+    public function theStoreHasDisabledCurrency($currencyName)
+    {
+        $this->createCurrency($currencyName, false);
+    }
+
+    /**
+     * @param string $currencyName
+     * @param bool $enabled
+     * @param float $exchangeRate
+     */
+    private function createCurrency($currencyName, $enabled = true, $exchangeRate = 1.0)
+    {
+        $currency = $this->currencyFactory->createNew();
+        $currency->setCode($this->currencyNameConverter->convertToCode($currencyName));
+        $currency->setExchangeRate($exchangeRate);
+        if (!$enabled) {
+            $currency->disable();
+        }
+
+        $this->sharedStorage->set('currency', $currency);
         $this->currencyRepository->add($currency);
     }
 }
