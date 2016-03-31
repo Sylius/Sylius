@@ -102,7 +102,7 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
     function it_recognizes_subject_as_not_eligible_if_configuration_is_invalid(OrderInterface $subject)
     {
         $this->isEligible($subject, [])->shouldReturn(false);
-        $this->isEligible($subject, ['nth' => '10'])->shouldReturn(false);
+        $this->isEligible($subject, ['nth' => 'string'])->shouldReturn(false);
     }
 
     function it_throws_exception_if_subject_is_not_order(PromotionSubjectInterface $subject)

@@ -191,12 +191,12 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given /^(I) have (\d+) orders already placed$/
+     * @Given /^(I) have already placed an order (\d+) times$/
      */
-    public function iHaveOrdersAlreadyPlaced(UserInterface $user, $ordersNumber)
+    public function iHaveAlreadyPlacedOrderNthTimes(UserInterface $user, $numberOfOrders)
     {
         $customer = $user->getCustomer();
-        for ($i = 0; $i < $ordersNumber; $i++) {
+        for ($i = 0; $i < $numberOfOrders; $i++) {
             $order = $this->createOrder($customer, '#00000'.$i);
             $order->setPaymentState(PaymentInterface::STATE_COMPLETED);
             $order->setCompletedAt(new \DateTime());
