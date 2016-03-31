@@ -121,7 +121,7 @@ class ParameterTransformerListener
      */
     protected function getTransformers(SettingsInterface $settings)
     {
-        $registry = $this->container->get('sylius.settings.schema_registry');
+        $registry = $this->container->get('sylius.registry.settings_schema');
         $schema = $registry->get($settings->getSchemaAlias());
 
         $settingsBuilder = new SettingsBuilder();

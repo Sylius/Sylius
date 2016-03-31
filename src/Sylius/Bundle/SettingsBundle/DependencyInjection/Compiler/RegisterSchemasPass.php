@@ -28,11 +28,11 @@ class RegisterSchemasPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('sylius.settings.schema_registry')) {
+        if (!$container->hasDefinition('sylius.registry.settings_schema')) {
             return;
         }
 
-        $schemaRegistry = $container->getDefinition('sylius.settings.schema_registry');
+        $schemaRegistry = $container->getDefinition('sylius.registry.settings_schema');
         $taggedServicesIds = $container->findTaggedServiceIds('sylius.settings_schema');
 
         foreach ($taggedServicesIds as $id => $tags) {

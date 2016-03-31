@@ -25,14 +25,14 @@ class DefaultSettingsResolver implements SettingsResolverInterface
     /**
      * @var RepositoryInterface
      */
-    protected $settingRepository;
+    protected $settingsRepository;
 
     /**
-     * @param RepositoryInterface $settingRepository
+     * @param RepositoryInterface $settingsRepository
      */
-    public function __construct(RepositoryInterface $settingRepository)
+    public function __construct(RepositoryInterface $settingsRepository)
     {
-        $this->settingRepository = $settingRepository;
+        $this->settingsRepository = $settingsRepository;
     }
 
     /**
@@ -49,7 +49,7 @@ class DefaultSettingsResolver implements SettingsResolverInterface
                 $criteria['namespace'] = $namespace;
             }
 
-            return $this->settingRepository->findOneBy($criteria);
+            return $this->settingsRepository->findOneBy($criteria);
         } catch (NonUniqueResultException $e) {
             throw new \LogicException(sprintf('Multiple schemas found for "%s". You should probably define a custom settings resolver for this schema.', $schemaAlias));
         }

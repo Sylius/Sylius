@@ -20,9 +20,9 @@
         <parameter key="sylius.controller.settings.class">Sylius\Bundle\SettingsBundle\Controller\SettingsController</parameter>
         <parameter key="sylius.settings.form_factory.class">Sylius\Bundle\SettingsBundle\Form\Factory\SettingsFormFactory</parameter>
         <parameter key="sylius.settings.manager.class">Sylius\Bundle\SettingsBundle\Manager\SettingsManager</parameter>
-        <parameter key="sylius.settings.schema_registry.class">Sylius\Component\Registry\ServiceRegistry</parameter>
+        <parameter key="sylius.registry.settings_schema.class">Sylius\Component\Registry\ServiceRegistry</parameter>
         <parameter key="sylius.settings.schema_interface">Sylius\Bundle\SettingsBundle\Schema\SchemaInterface</parameter>
-        <parameter key="sylius.settings.resolver_registry.class">Sylius\Bundle\SettingsBundle\Resolver\ResolverServiceRegistry</parameter>
+        <parameter key="sylius.registry.settings_resolver.class">Sylius\Bundle\SettingsBundle\Resolver\ResolverServiceRegistry</parameter>
         <parameter key="sylius.settings.resolver_interface">Sylius\Bundle\SettingsBundle\Resolver\SettingsResolverInterface</parameter>
         <parameter key="sylius.settings.default_resolver.class">Sylius\Bundle\SettingsBundle\Resolver\DefaultSettingsResolver</parameter>
         <parameter key="sylius.settings.doctrine.parameter_transformer_listener.class">Sylius\Bundle\SettingsBundle\Doctrine\EventListener\ParameterTransformerListener</parameter>
@@ -36,23 +36,23 @@
         </service>
 
         <service id="sylius.settings.form_factory" class="%sylius.settings.form_factory.class%">
-            <argument type="service" id="sylius.settings.schema_registry" />
+            <argument type="service" id="sylius.registry.settings_schema" />
             <argument type="service" id="form.factory" />
         </service>
 
         <service id="sylius.settings.manager" class="%sylius.settings.manager.class%" lazy="true">
-            <argument type="service" id="sylius.settings.schema_registry" />
-            <argument type="service" id="sylius.settings.resolver_registry" />
+            <argument type="service" id="sylius.registry.settings_schema" />
+            <argument type="service" id="sylius.registry.settings_resolver" />
             <argument type="service" id="sylius.manager.settings" />
             <argument type="service" id="sylius.factory.settings" />
             <argument type="service" id="event_dispatcher" />
         </service>
 
-        <service id="sylius.settings.schema_registry" class="%sylius.settings.schema_registry.class%">
+        <service id="sylius.registry.settings_schema" class="%sylius.registry.settings_schema.class%">
             <argument>%sylius.settings.schema_interface%</argument>
         </service>
 
-        <service id="sylius.settings.resolver_registry" class="%sylius.settings.resolver_registry.class%">
+        <service id="sylius.registry.settings_resolver" class="%sylius.registry.settings_resolver.class%">
             <argument>%sylius.settings.resolver_interface%</argument>
             <argument type="service" id="sylius.settings.default_resolver"/>
         </service>

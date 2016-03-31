@@ -25,11 +25,11 @@ class RegisterResolversPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('sylius.settings.resolver_registry')) {
+        if (!$container->hasDefinition('sylius.registry.settings_resolver')) {
             return;
         }
 
-        $resolverRegistry = $container->getDefinition('sylius.settings.resolver_registry');
+        $resolverRegistry = $container->getDefinition('sylius.registry.settings_resolver');
 
         foreach ($container->findTaggedServiceIds('sylius.settings_resolver') as $id => $tags) {
             foreach ($tags as $attributes) {
