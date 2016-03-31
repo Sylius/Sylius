@@ -63,17 +63,14 @@ class TaxonsToCodesTransformer implements DataTransformerInterface
 
         $taxons = $value->get('taxons');
 
-        // ensure not empty / null
-        if ($value->isEmpty() || null === $taxons) {
+        if (null === $taxons) {
             return [];
         }
 
-        // ensure taxons is traversable
         if (!(is_array($taxons) || $taxons instanceof \Traversable)) {
             throw new \InvalidArgumentException('"taxons" element of collection should be Traversable');
         }
 
-        // convert to array of taxon codes
         $taxonCodes = [];
         /** @var TaxonInterface $taxon */
         foreach ($taxons as $taxon) {
