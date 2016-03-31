@@ -40,14 +40,12 @@
         <parameter key="sylius.order_processing.prices_recalculator.class">Sylius\Component\Core\OrderProcessing\PricesRecalculator</parameter>
         <parameter key="sylius.order_processing.order_recalculator.class">Sylius\Component\Core\OrderProcessing\OrderRecalculator</parameter>
 
-        <parameter key="sylius.form.type.tax_calculation_strategy_choice.class">Sylius\Bundle\CoreBundle\Form\Type\Taxation\TaxCalculationStrategyChoiceType</parameter>
-
         <parameter key="sylius.taxation.order_shipment_taxes_applicator.class">Sylius\Component\Core\Taxation\Applicator\OrderShipmentTaxesApplicator</parameter>
         <parameter key="sylius.taxation.order_items_taxes_applicator.class">Sylius\Component\Core\Taxation\Applicator\OrderItemsTaxesApplicator</parameter>
         <parameter key="sylius.taxation.order_item_units_taxes_applicator.class">Sylius\Component\Core\Taxation\Applicator\OrderItemUnitsTaxesApplicator</parameter>
 
         <parameter key="sylius.taxation.order_taxes_processor.class">Sylius\Component\Core\Taxation\Processor\OrderTaxesProcessor</parameter>
-        <parameter key="sylius.taxation.tax_calculation_strategy.class">Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategy</parameter>
+        <parameter key="sylius.taxation.tax_calculation_strategy.class">Sylius\Bundle\CoreBundle\Taxation\Strategy\TaxCalculationStrategy</parameter>
 
         <parameter key="sylius.listener.cart_blamer.class">Sylius\Bundle\CoreBundle\EventListener\CartBlamerListener</parameter>
         <parameter key="sylius.listener.order_currency.class">Sylius\Bundle\CoreBundle\EventListener\OrderCurrencyListener</parameter>
@@ -242,11 +240,6 @@
             <argument type="service" id="sylius.repository.payment_method" />
         </service>
 
-        <service id="sylius.form.type.tax_calculation_strategy_choice" class="%sylius.form.type.tax_calculation_strategy_choice.class%">
-            <argument>%sylius.tax_calculation_strategies%</argument>
-            <tag name="form.type" alias="sylius_tax_calculation_strategy_choice" />
-        </service>
-
         <service id="sylius.taxation.order_shipment_taxes_applicator" class="%sylius.taxation.order_shipment_taxes_applicator.class%">
             <argument type="service" id="sylius.tax_calculator" />
             <argument type="service" id="sylius.factory.adjustment" />
@@ -279,7 +272,7 @@
             <argument type="service">
                 <service
                         factory-service="sylius.settings.manager"
-                        factory-method="loadSettings"
+                        factory-method="load"
                         class="Sylius\Bundle\SettingsBundle\Model\Settings"
                 >
                     <argument>sylius_taxation</argument>
@@ -297,7 +290,7 @@
             <argument type="service">
                 <service
                         factory-service="sylius.settings.manager"
-                        factory-method="loadSettings"
+                        factory-method="load"
                         class="Sylius\Bundle\SettingsBundle\Model\Settings"
                 >
                     <argument>sylius_taxation</argument>

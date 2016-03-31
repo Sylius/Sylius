@@ -68,6 +68,6 @@ class OrderRecalculator implements OrderRecalculatorInterface
         $this->pricesRecalculator->recalculate($order);
         $this->shippingChargesProcessor->applyShippingCharges($order);
         $this->promotionProcessor->process($order);
-        $this->taxesProcessor->applyTaxes($order);
+        $this->taxesProcessor->process($order);
     }
 }

@@ -11,13 +11,13 @@
 
 namespace Sylius\Component\Core\Taxation\Processor;
 
-use Sylius\Bundle\CoreBundle\Taxation\Exception\UnsupportedTaxCalculationStrategyException;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Provider\ZoneProviderInterface;
+use Sylius\Component\Core\Taxation\Exception\UnsupportedTaxCalculationStrategyException;
 use Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategyInterface;
 use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 
@@ -61,7 +61,7 @@ class OrderTaxesProcessor implements OrderTaxesProcessorInterface
     /**
      * {@inheritdoc}
      */
-    public function applyTaxes(OrderInterface $order)
+    public function process(OrderInterface $order)
     {
         $this->clearTaxes($order);
         if ($order->isEmpty()) {

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Taxation\Exception;
+namespace Sylius\Component\Core\Taxation\Exception;
 
 /**
  * @author Mark McKelvie <mark.mckelvie@reiss.com>

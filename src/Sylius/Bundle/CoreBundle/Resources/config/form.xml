@@ -30,6 +30,8 @@
 
         <parameter key="sylius.form.type.shipping_method_choice.class">Sylius\Bundle\CoreBundle\Form\Type\Shipping\ShippingMethodChoiceType</parameter>
 
+        <parameter key="sylius.form.type.tax_calculation_strategy_choice.class">Sylius\Bundle\CoreBundle\Form\Type\TaxCalculationStrategyChoiceType</parameter>
+
         <parameter key="sylius.form.type.customer_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\CustomerFilterType</parameter>
         <parameter key="sylius.form.type.product_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\ProductFilterType</parameter>
         <parameter key="sylius.form.type.order_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\OrderFilterType</parameter>
@@ -111,6 +113,11 @@
             </argument>
             <argument type="service" id="sylius.repository.locale" />
             <tag name="form.type" alias="sylius_locale" />
+        </service>
+
+        <service id="sylius.form.type.tax_calculation_strategy_choice" class="%sylius.form.type.tax_calculation_strategy_choice.class%">
+            <argument>%sylius.tax_calculation_strategies%</argument>
+            <tag name="form.type" alias="sylius_tax_calculation_strategy_choice" />
         </service>
 
         <!-- filters -->

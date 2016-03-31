@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Core\Taxation\Strategy;
 
-use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Taxation\Applicator\OrderTaxesApplicatorInterface;
@@ -19,17 +18,12 @@ use Sylius\Component\Core\Taxation\Applicator\OrderTaxesApplicatorInterface;
 /**
  * @author Mark McKelvie <mark.mckelvie@reiss.com>
  */
-class TaxCalculationStrategy implements TaxCalculationStrategyInterface
+abstract class AbstractTaxCalculationStrategy implements TaxCalculationStrategyInterface
 {
     /**
      * @var string
      */
     protected $type;
-
-    /**
-     * @var Settings|null
-     */
-    protected $settings;
 
     /**
      * @var OrderTaxesApplicatorInterface[]
@@ -39,15 +33,13 @@ class TaxCalculationStrategy implements TaxCalculationStrategyInterface
     /**
      * @param string $type
      * @param OrderTaxesApplicatorInterface[] $applicators
-     * @param Settings $settings
      */
-    public function __construct($type, array $applicators, Settings $settings = null)
+    public function __construct($type, array $applicators)
     {
         $this->assertApplicatorsHaveCorrectType($applicators);
 
         $this->type = $type;
         $this->applicators = $applicators;
-        $this->settings = $settings;
     }
 
     /**
@@ -71,14 +63,7 @@ class TaxCalculationStrategy implements TaxCalculationStrategyInterface
     /**
      * {@inheritdoc}
      */
-    public function supports(OrderInterface $order, ZoneInterface $zone)
-    {
-        if (null !== $this->settings) {
-            return $this->settings->get('default_tax_calculation_strategy') === $this->type;
-        }
-
-        return false;
-    }
+    abstract public function supports(OrderInterface $order, ZoneInterface $zone);
 
     /**
      * @param OrderTaxesApplicatorInterface[] $applicators

@@ -55,7 +55,7 @@ class OrderRecalculatorSpec extends ObjectBehavior
     ) {
         $pricesRecalculator->recalculate($order);
         $promotionProcessor->process($order)->shouldBeCalled();
-        $taxesProcessor->applyTaxes($order)->shouldBeCalled();
+        $taxesProcessor->process($order)->shouldBeCalled();
         $shippingChargesProcessor->applyShippingCharges($order)->shouldBeCalled();
 
         $this->recalculate($order);

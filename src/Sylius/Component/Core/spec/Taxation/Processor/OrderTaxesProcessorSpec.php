@@ -21,10 +21,16 @@ use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Provider\ZoneProviderInterface;
+use Sylius\Component\Core\Taxation\Exception\UnsupportedTaxCalculationStrategyException;
+use Sylius\Component\Core\Taxation\Processor\OrderTaxesProcessor;
 use Sylius\Component\Core\Taxation\Processor\OrderTaxesProcessorInterface;
+use Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategyInterface;
 use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
+use Zend\Stdlib\PriorityQueue;
 
 /**
+ * @mixin OrderTaxesProcessor
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Mark McKelvie <mark.mckelvie@reiss.com>
  */
@@ -48,35 +54,99 @@ class OrderTaxesProcessorSpec extends ObjectBehavior
         $this->shouldImplement(OrderTaxesProcessorInterface::class);
     }
 
-    function it_applies_taxes_for_order_items_units_and_shipment(
-        $zoneMatcher,
+    function it_processes_taxes_using_a_supported_tax_calculation_strategy(
+        ZoneMatcherInterface $zoneMatcher,
         AddressInterface $address,
-        \Iterator $iterator,
+        \Iterator $itemsIterator,
         Collection $items,
         OrderInterface $order,
         OrderItemInterface $orderItem,
-        ZoneInterface $zone
+        ZoneInterface $zone,
+        PrioritizedServiceRegistryInterface $strategyRegistry,
+        PriorityQueue $strategies,
+        \Iterator $strategiesIterator,
+        TaxCalculationStrategyInterface $strategyOne,
+        TaxCalculationStrategyInterface $strategyTwo
     ) {
         $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
         $order->getItems()->willReturn($items);
         $order->isEmpty()->willReturn(false);
 
         $items->count()->willReturn(1);
-        $items->getIterator()->willReturn($iterator, $iterator);
-        $iterator->rewind()->shouldBeCalled();
-        $iterator->valid()->willReturn(true, false, true, false)->shouldBeCalled();
-        $iterator->current()->willReturn($orderItem, $orderItem);
-        $iterator->next()->shouldBeCalled();
+        $items->getIterator()->willReturn($itemsIterator);
+        $itemsIterator->rewind()->shouldBeCalled();
+        $itemsIterator->valid()->willReturn(true, false)->shouldBeCalled();
+        $itemsIterator->current()->willReturn($orderItem);
+        $itemsIterator->next()->shouldBeCalled();
 
         $orderItem->removeAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
 
         $order->getShippingAddress()->willReturn($address);
         $zoneMatcher->match($address)->willReturn($zone);
 
-        $this->apply($order);
+        $strategyRegistry->all()->willReturn($strategies);
+
+        $strategies->count()->willReturn(2);
+        $strategies->getIterator()->willReturn($strategiesIterator);
+        $strategiesIterator->rewind()->shouldBeCalled();
+        $strategiesIterator->valid()->willReturn(true, true, false)->shouldBeCalled();
+        $strategiesIterator->current()->willReturn($strategyOne, $strategyTwo);
+        $strategiesIterator->next()->shouldBeCalled();
+
+        $strategyOne->supports($order, $zone)->willReturn(false)->shouldBeCalled();
+        $strategyOne->applyTaxes($order, $zone)->shouldNotBeCalled();
+
+        $strategyTwo->supports($order, $zone)->willReturn(true)->shouldBeCalled();
+        $strategyTwo->applyTaxes($order, $zone)->shouldBeCalled();
+
+        $this->shouldNotThrow(new UnsupportedTaxCalculationStrategyException())->duringProcess($order);
     }
 
-    function it_does_not_apply_taxes_if_there_is_no_order_item(OrderInterface $order)
+    function it_throws_an_exception_if_there_are_no_supported_tax_calculation_strategies(
+        ZoneMatcherInterface $zoneMatcher,
+        AddressInterface $address,
+        \Iterator $itemsIterator,
+        Collection $items,
+        OrderInterface $order,
+        OrderItemInterface $orderItem,
+        ZoneInterface $zone,
+        PrioritizedServiceRegistryInterface $strategyRegistry,
+        PriorityQueue $strategies,
+        \Iterator $strategiesIterator,
+        TaxCalculationStrategyInterface $strategy
+    ) {
+        $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
+        $order->getItems()->willReturn($items);
+        $order->isEmpty()->willReturn(false);
+
+        $items->count()->willReturn(1);
+        $items->getIterator()->willReturn($itemsIterator);
+        $itemsIterator->rewind()->shouldBeCalled();
+        $itemsIterator->valid()->willReturn(true, false)->shouldBeCalled();
+        $itemsIterator->current()->willReturn($orderItem);
+        $itemsIterator->next()->shouldBeCalled();
+
+        $orderItem->removeAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
+
+        $order->getShippingAddress()->willReturn($address);
+        $zoneMatcher->match($address)->willReturn($zone);
+
+        $strategyRegistry->all()->willReturn($strategies);
+
+        $strategies->count()->willReturn(1);
+        $strategies->getIterator()->willReturn($strategiesIterator);
+        $strategiesIterator->rewind()->shouldBeCalled();
+        $strategiesIterator->valid()->willReturn(true, false)->shouldBeCalled();
+        $strategiesIterator->current()->willReturn($strategy);
+        $strategiesIterator->next()->shouldBeCalled();
+
+        $strategy->supports($order, $zone)->willReturn(false)->shouldBeCalled();
+        $strategy->applyTaxes($order, $zone)->shouldNotBeCalled();
+
+        $this->shouldThrow(new UnsupportedTaxCalculationStrategyException())->duringProcess($order);
+    }
+
+    function it_does_not_process_taxes_if_there_is_no_order_item(OrderInterface $order)
     {
         $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
         $order->getItems()->willReturn([]);
@@ -84,28 +154,29 @@ class OrderTaxesProcessorSpec extends ObjectBehavior
 
         $order->getShippingAddress()->shouldNotBeCalled();
 
-        $this->apply($order);
+        $this->process($order);
     }
 
-    function it_does_not_apply_taxes_if_there_is_no_tax_zone(
-        $defaultTaxZoneProvider,
-        $zoneMatcher,
+    function it_does_not_process_taxes_if_there_is_no_tax_zone(
+        ZoneProviderInterface $defaultTaxZoneProvider,
+        ZoneMatcherInterface $zoneMatcher,
         AddressInterface $address,
-        \Iterator $iterator,
+        \Iterator $itemsIterator,
         Collection $items,
         OrderInterface $order,
-        OrderItemInterface $orderItem
+        OrderItemInterface $orderItem,
+        PrioritizedServiceRegistryInterface $strategyRegistry
     ) {
         $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
         $order->getItems()->willReturn($items);
         $order->isEmpty()->willReturn(false);
 
         $items->count()->willReturn(1);
-        $items->getIterator()->willReturn($iterator);
-        $iterator->rewind()->shouldBeCalled();
-        $iterator->valid()->willReturn(true, false)->shouldBeCalled();
-        $iterator->current()->willReturn($orderItem);
-        $iterator->next()->shouldBeCalled();
+        $items->getIterator()->willReturn($itemsIterator);
+        $itemsIterator->rewind()->shouldBeCalled();
+        $itemsIterator->valid()->willReturn(true, false)->shouldBeCalled();
+        $itemsIterator->current()->willReturn($orderItem);
+        $itemsIterator->next()->shouldBeCalled();
 
         $orderItem->removeAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
 
@@ -113,6 +184,8 @@ class OrderTaxesProcessorSpec extends ObjectBehavior
         $zoneMatcher->match($address)->willReturn(null);
         $defaultTaxZoneProvider->getZone()->willReturn(null);
 
-        $this->apply($order);
+        $strategyRegistry->all()->shouldNotBeCalled();
+
+        $this->process($order);
     }
 }

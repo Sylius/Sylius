@@ -21,5 +21,5 @@ interface OrderTaxesProcessorInterface
     /**
      * @param OrderInterface $order
      */
-    public function applyTaxes(OrderInterface $order);
+    public function process(OrderInterface $order);
 }
