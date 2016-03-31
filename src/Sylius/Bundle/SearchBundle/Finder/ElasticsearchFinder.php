@@ -11,8 +11,25 @@
 
 namespace Sylius\Bundle\SearchBundle\Finder;
 
+use Elastica\Aggregation\Filter;
+use Elastica\Aggregation\Range as AggregationRange;
+use Elastica\Aggregation\Terms as AggregationTerms;
+use Elastica\Query;
+use Elastica\Query\BoolQuery;
+use Elastica\Query\Filtered;
+use Elastica\Query\QueryString;
+use Elastica\Query\Range as QueryRange;
+use Elastica\Query\Term as QueryTerm;
+use Elastica\Filter\BoolFilter;
+use Elastica\Filter\BoolOr;
+use Elastica\Filter\Missing;
+use Elastica\Filter\Nested;
+use Elastica\Filter\Range as FilterRange;
+use Elastica\Filter\Type;
+use Elastica\Filter\Term as FilterTerm;
+use Elastica\Filter\Terms as FilterTerms;
 use Sylius\Bundle\SearchBundle\Doctrine\ORM\SearchIndexRepository;
-use Sylius\Bundle\SearchBundle\Query\Query;
+use Sylius\Bundle\SearchBundle\Query\Query as SyliusSearchQuery;
 use Sylius\Bundle\SearchBundle\Query\SearchStringQuery;
 use Sylius\Bundle\SearchBundle\Query\TaxonQuery;
 use Sylius\Bundle\SearchBundle\QueryLogger\QueryLoggerInterface;
@@ -22,6 +39,7 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
  * Elasticsearch Finder
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
+ * @author Nicolas Adler <nicolas.adler@openizi.com>
  */
 class ElasticsearchFinder extends AbstractFinder
 {
@@ -65,7 +83,7 @@ class ElasticsearchFinder extends AbstractFinder
      * TODO: a simple if does the job for now, in future this should move to a
      * chain of responsibility pattern or something similar.
      */
-    public function find(Query $queryObject)
+    public function find(SyliusSearchQuery $queryObject)
     {
         if ($queryObject instanceof SearchStringQuery) {
             if ($this->queryLogger->isEnabled()) {
@@ -180,32 +198,33 @@ class ElasticsearchFinder extends AbstractFinder
      */
     public function compileElasticaTaxonQuery($facets = null, $configuration, $taxon, $types = null)
     {
-        $elasticaQuery = new \Elastica\Query();
-        $boolFilter = new \Elastica\Filter\BoolFilter();
+        $elasticaQuery = new Query();
+        $boolFilter = new BoolFilter();
+
+        $this->addAvailableProductsFilters($boolFilter);
 
         if (!empty($types)) {
             foreach ($types as $type) {
-                $typeFilter = new \Elastica\Filter\Type($type);
+                $typeFilter = new Type($type);
                 $boolFilter->addMust($typeFilter);
             }
             $elasticaQuery->setPostFilter($boolFilter);
         }
 
         if ($channel = $this->channelContext->getChannel()) {
-            $channelFilter = new \Elastica\Filter\Terms();
+            $channelFilter = new FilterTerms();
             $channelFilter->setTerms('channels', [(string) $channel]);
             $boolFilter->addMust($channelFilter);
             $elasticaQuery->setPostFilter($boolFilter);
         }
 
-        $query = new \Elastica\Query\Filtered();
+        $query = new Filtered();
 
-        $taxonFromRequestFilter = new \Elastica\Filter\Terms();
+        $taxonFromRequestFilter = new FilterTerms();
         $taxonFromRequestFilter->setTerms('taxons', [$taxon]);
         $boolFilter->addMust($taxonFromRequestFilter);
 
         $query->setFilter($boolFilter);
-
         $elasticaQuery->setQuery($query);
 
         return $this->compileElasticsearchQuery($elasticaQuery, $facets, $configuration);
@@ -222,37 +241,35 @@ class ElasticsearchFinder extends AbstractFinder
      */
     public function compileElasticSearchStringQuery($searchTerm, $appliedFilters = null, $configuration, $preSearchTaxonFilter, $types = null)
     {
-        $elasticaQuery = new \Elastica\Query();
-        $boolFilter = new \Elastica\Filter\BoolFilter();
-        $query = new \Elastica\Query\QueryString($searchTerm);
+        $elasticaQuery = new Query();
+        $boolFilter = new BoolFilter();
+        $query = new Filtered();
+        $query->setQuery(new QueryString($searchTerm));
+
+        $this->addAvailableProductsFilters($boolFilter);
 
         if (!empty($types)) {
             foreach ($types as $type) {
-                $typeFilter = new \Elastica\Filter\Type($type);
+                $typeFilter = new Type($type);
                 $boolFilter->addMust($typeFilter);
             }
-            $elasticaQuery->setPostFilter($boolFilter);
         }
 
         if ($channel = $this->channelContext->getChannel()) {
-            $channelFilter = new \Elastica\Filter\Terms();
+            $channelFilter = new FilterTerms();
             $channelFilter->setTerms('channels', [(string) $channel]);
             $boolFilter->addMust($channelFilter);
-            $elasticaQuery->setPostFilter($boolFilter);
         }
 
         // this is currently the only pre search filter and it's a taxon
         // this should be abstracted out if other types of pre search filters are desired
         if ('all' !== $preSearchTaxonFilter) {
-            $query = new \Elastica\Query\Filtered();
-            $query->setQuery(new \Elastica\Query\QueryString($searchTerm));
-
-            $taxonFromRequestFilter = new \Elastica\Filter\Terms();
+            $taxonFromRequestFilter = new FilterTerms();
             $taxonFromRequestFilter->setTerms('taxons', [$preSearchTaxonFilter]);
             $boolFilter->addMust($taxonFromRequestFilter);
-            $elasticaQuery->setPostFilter($boolFilter);
         }
 
+        $query->setFilter($boolFilter);
         $elasticaQuery->setQuery($query);
 
         return $this->compileElasticsearchQuery($elasticaQuery, $appliedFilters, $configuration);
@@ -281,6 +298,21 @@ class ElasticsearchFinder extends AbstractFinder
     }
 
     /**
+     * @param BoolFilter $boolFilter
+     */
+    public function addAvailableProductsFilters(BoolFilter $boolFilter)
+    {
+        $enabledFilter = new FilterTerm(array('enabled' => true));
+        $boolFilter->addMust($enabledFilter);
+
+        $nestedOrFilter = new BoolOr();
+        $this->addAvailableProductsVariantFilters($nestedOrFilter, 'variants');
+        $this->addAvailableProductsVariantFilters($nestedOrFilter, 'masterVariant');
+
+        $boolFilter->addMust($nestedOrFilter);
+    }
+
+    /**
      * @param $elements
      *
      * @return array
@@ -297,7 +329,7 @@ class ElasticsearchFinder extends AbstractFinder
                 $facets[$name] = $facetData['buckets'];
             }
         }
-        
+
         foreach ($facets as &$facet) {
             $facet = array_filter($facet, function($v){
                 return $v["doc_count"] != 0;
@@ -305,18 +337,6 @@ class ElasticsearchFinder extends AbstractFinder
         }
 
         return array_reverse($facets);
-    }
-
-    /**
-     * @param $filterSetName
-     */
-    private function initializeFacetGroup($filterSetName)
-    {
-        foreach ($this->config['filters']['facets'] as $name => $value) {
-            if (!in_array($name, $this->config['filters']['facet_groups'][$filterSetName]['values'])) {
-                unset($this->config['filters']['facets'][$name]);
-            }
-        }
     }
 
     /**
@@ -328,9 +348,9 @@ class ElasticsearchFinder extends AbstractFinder
     public function applyElasticaQueryType($searchTerm, $taxon, $boolFilter, $elasticaQuery)
     {
         if (!$searchTerm) {
-            $query = new \Elastica\Query\Filtered();
+            $query = new Filtered();
 
-            $taxonFromRequestFilter = new \Elastica\Filter\Terms();
+            $taxonFromRequestFilter = new FilterTerms();
             $taxonFromRequestFilter->setTerms('taxons', [$taxon]);
             $boolFilter->addMust($taxonFromRequestFilter);
 
@@ -339,16 +359,16 @@ class ElasticsearchFinder extends AbstractFinder
             $elasticaQuery->setQuery($query);
         } else {
             if ('all' !== $taxon) {
-                $query = new \Elastica\Query\Filtered();
-                $query->setQuery(new \Elastica\Query\QueryString($searchTerm));
+                $query = new Filtered();
+                $query->setQuery(new QueryString($searchTerm));
 
-                $taxonFromRequestFilter = new \Elastica\Filter\Terms();
+                $taxonFromRequestFilter = new FilterTerms();
                 $taxonFromRequestFilter->setTerms('taxons', [$taxon]);
                 $boolFilter->addMust($taxonFromRequestFilter);
 
                 $query->setFilter($boolFilter);
             } else {
-                $query = new \Elastica\Query\QueryString($searchTerm);
+                $query = new QueryString($searchTerm);
             }
 
             $elasticaQuery->setQuery($query);
@@ -366,18 +386,18 @@ class ElasticsearchFinder extends AbstractFinder
         foreach ($configuration['filters']['facets'] as $name => $facet) {
             // terms facet creation
             if ($facet['type'] === 'terms') {
-                ${$name.'AggregationFilter'} = new \Elastica\Aggregation\Filter($name);
+                ${$name.'AggregationFilter'} = new Filter($name);
 
-                ${$name.'Aggregation'} = new \Elastica\Aggregation\Terms($name);
+                ${$name.'Aggregation'} = new AggregationTerms($name);
                 ${$name.'Aggregation'}->setField($name);
                 ${$name.'Aggregation'}->setSize(550);
 
                 ${$name.'AggregationFilter'}->addAggregation(${$name.'Aggregation'});
             } // range facet creation
             elseif ('range' === $facet['type']) {
-                ${$name.'AggregationFilter'} = new \Elastica\Aggregation\Filter($name);
+                ${$name.'AggregationFilter'} = new Filter($name);
 
-                ${$name.'Aggregation'} = new \Elastica\Aggregation\Range($name);
+                ${$name.'Aggregation'} = new AggregationRange($name);
                 foreach ($facet['values'] as $value) {
                     ${$name.'Aggregation'}
                         ->setField($name)
@@ -409,18 +429,18 @@ class ElasticsearchFinder extends AbstractFinder
         foreach ($facets as $name => $facet) {
             $normName = key($facet);
 
-            ${$normName.'BoolFilter'} = new \Elastica\Filter\BoolFilter();
+            ${$normName.'BoolFilter'} = new BoolFilter();
 
             foreach ($appliedFilters as $value) {
                 if (is_array($value[key($value)])) {
-                    ${$normName.'RangeFilter'} = new \Elastica\Filter\Range();
+                    ${$normName.'RangeFilter'} = new FilterRange();
 
                     foreach ($value as $range) {
                         ${$normName.'RangeFilter'}->addField($name, ['gte' => $range['range'][0], 'lte' => $range['range'][1]]);
                         ${$normName.'BoolFilter'}->addMust($rangeFilters);
                     }
                 } else {
-                    ${$normName.'TermFilter'} = new \Elastica\Filter\Term();
+                    ${$normName.'TermFilter'} = new FilterTerm();
                     ${$normName.'TermFilter'}->setTerm($name, $value[key($value)]);
                     ${$normName.'BoolFilter'}->addMust($termFilters);
                 }
@@ -450,8 +470,8 @@ class ElasticsearchFinder extends AbstractFinder
      */
     public function applyFilterToElasticaQuery($appliedFilters, $elasticaQuery)
     {
-        $rangeFilters = new \Elastica\Filter\BoolOr();
-        $boolFilter = new \Elastica\Filter\BoolFilter();
+        $rangeFilters = new BoolOr();
+        $boolFilter = new BoolFilter();
 
         $filters = [];
         $termFilters = [];
@@ -466,13 +486,13 @@ class ElasticsearchFinder extends AbstractFinder
         foreach ($filters as $name => $value) {
             if (is_array($value[0])) {
                 foreach ($value as $range) {
-                    $rangeFilter = new \Elastica\Filter\Range();
+                    $rangeFilter = new FilterRange();
                     $rangeFilter->addField($name, ['gte' => $range['range'][0], 'lte' => $range['range'][1]]);
                     $rangeFilters->addFilter($rangeFilter);
                 }
                 $boolFilter->addShould($rangeFilters);
             } else {
-                $termFilters = new \Elastica\Filter\Terms();
+                $termFilters = new FilterTerms();
                 $termFilters->setTerms($name, $value);
                 $boolFilter->addShould($termFilters);
             }
@@ -503,5 +523,54 @@ class ElasticsearchFinder extends AbstractFinder
                 $elasticaQuery->addAggregation($aggregations[$name]['aggregation']);
             }
         }
+    }
+
+    /**
+     * @param $filterSetName
+     */
+    private function initializeFacetGroup($filterSetName)
+    {
+        foreach ($this->config['filters']['facets'] as $name => $value) {
+            if (!in_array($name, $this->config['filters']['facet_groups'][$filterSetName]['values'])) {
+                unset($this->config['filters']['facets'][$name]);
+            }
+        }
+    }
+
+    /**
+     * @param BoolOr $nestedOrFilter Nested or filter
+     * @param string $nestedProperty Nested property (can be 'variants' or 'masterVariant')
+     */
+    private function addAvailableProductsVariantFilters(BoolOr $nestedOrFilter, $nestedProperty)
+    {
+        $variantsNestedBool = new BoolQuery();
+        $variantsNestedBool->setMinimumNumberShouldMatch(1);
+
+        $availableOn = new QueryRange($nestedProperty . '.availableOn', array('lte' => "now"));
+        $variantsNestedBool->addMust($availableOn);
+
+        $availableUntil = new Filtered();
+        $availableUntilFilter = new BoolOr();
+
+        $availableUntilNull = new Missing($nestedProperty . '.availableUntil');
+        $availableUntilFilter->addFilter($availableUntilNull);
+
+        $availableUntilGte = new FilterRange($nestedProperty . '.availableUntil', array('gte' => time()));
+        $availableUntilFilter->addFilter($availableUntilGte);
+
+        $availableUntil->setFilter($availableUntilFilter);
+        $variantsNestedBool->addMust($availableUntil);
+
+        $availableOnDemand = new QueryTerm(array($nestedProperty . '.availableOnDemand' => true));
+        $variantsNestedBool->addShould($availableOnDemand);
+
+        $onHand = new QueryRange($nestedProperty . '.onHand', array('gt' => 0));
+        $variantsNestedBool->addShould($onHand);
+
+        $nested = new Nested();
+        $nested->setPath($nestedProperty);
+        $nested->setQuery($variantsNestedBool);
+
+        $nestedOrFilter->addFilter($nested);
     }
 }
