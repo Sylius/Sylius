@@ -88,17 +88,9 @@
         <h4>{{ 'sylius.ui.shipping_address'|trans }}</h4>
         {% include 'SyliusWebBundle:Backend/Address:_show.html.twig' with {'address': shipment.order.shippingAddress } %}
     </div>
-    {% if sm_can(shipment, constant('Sylius\\Component\\Shipping\\ShipmentTransitions::SYLIUS_SHIP'), constant('Sylius\\Component\\Shipping\\ShipmentTransitions::GRAPH')) %}
-        <div class="col-md-6">
-            <form action="{{ path('sylius_backend_shipment_ship', {'id': shipment.id}) }}" method="post">
-                {% if shipment_tracking_form is defined %}
-                    {% include 'SyliusWebBundle:Backend/Shipment:trackingForm.html.twig' with {'form': shipment_tracking_form} %}
-                {% else %}
-                    {% render(controller('sylius.controller.backend.form:showAction', {'type': 'sylius_shipment_tracking', 'template': 'SyliusWebBundle:Backend/Shipment:trackingForm.html.twig'})) %}
-                {% endif %}
-            </form>
-        </div>
-    {% endif %}
+    <div class="col-md-12">
+        {{ misc.shipment_form(shipment, shipment_tracking_form is defined ? shipment_tracking_form : null) }}
+    </div>
 </div>
 
 {% if shipment.units|length > 0 %}

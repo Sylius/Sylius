@@ -44,7 +44,7 @@ class ShipmentController extends ResourceController
 
             $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $shipment);
 
-            return $this->redirectHandler->redirectToResource($configuration, $shipment);
+            return $this->redirectHandler->redirectToReferer($configuration);
         }
 
         $view = View::create()

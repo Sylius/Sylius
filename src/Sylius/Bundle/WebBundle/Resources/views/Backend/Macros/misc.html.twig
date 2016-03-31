@@ -85,13 +85,23 @@
     {%- endfor %}
 {% endmacro %}
 
-{% macro shipment_form(shipment) %}
+{% macro shipment_form(shipment, tracking_form = null) %}
     {% for transition in ['hold', 'release', 'backorder', 'prepare', 'ship', 'cancel', 'return'] if sm_can(shipment, transition, 'sylius_shipment') -%}
-        <form action="{{ path('sylius_backend_shipment_update_state', {'id': shipment.id, 'transition': transition}) }}" method="post" style="display: inline">
-            <input type="hidden" name="_method" value="PUT">
-            <button class="btn btn-{{ transition == 'cancel' ? 'warning' : 'primary' }}" type="submit">
-                <i class="glyphicon glyphicon-{{ transition == 'cancel' ? 'remove' : 'share' }}"></i> <span>{{ ('sylius.shipment.transition.'~transition)|trans }}</span>
-            </button>
-        </form>
+        {% if transition == 'ship' %}
+            <form action="{{ path('sylius_backend_shipment_ship', {'id': shipment.id}) }}" method="post">
+                {% if tracking_form is defined and tracking_form is not null %}
+                    {% include 'SyliusWebBundle:Backend/Shipment:trackingForm.html.twig' with {'form': tracking_form} %}
+                {% else %}
+                    {% render(controller('sylius.controller.backend.form:showAction', {'type': 'sylius_shipment_tracking', 'template': 'SyliusWebBundle:Backend/Shipment:trackingForm.html.twig'})) %}
+                {% endif %}
+            </form>
+        {% else %}
+            <form action="{{ path('sylius_backend_shipment_update_state', {'id': shipment.id, 'transition': transition}) }}" method="post" style="display: inline">
+                <input type="hidden" name="_method" value="PUT">
+                <button class="btn btn-{{ transition == 'cancel' ? 'warning' : 'primary' }}" type="submit">
+                    <i class="glyphicon glyphicon-{{ transition == 'cancel' ? 'remove' : 'share' }}"></i> <span>{{ ('sylius.shipment.transition.'~transition)|trans }}</span>
+                </button>
+            </form>
+        {% endif %}
     {%- endfor %}
 {% endmacro %}
