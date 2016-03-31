@@ -118,6 +118,18 @@ final class TaxationContext implements Context
     }
 
     /**
+     * @Given the store does not have any categories defined
+     */
+    public function theStoreDoesNotHaveAnyCategoriesDefined()
+    {
+        $taxCategories = $this->taxCategoryRepository->findAll();
+
+        foreach ($taxCategories as $taxCategory) {
+            $this->taxCategoryRepository->remove($taxCategory);
+        }
+    }
+
+    /**
      * @param string $taxCategoryName
      *
      * @return TaxCategoryInterface
