@@ -48,6 +48,10 @@ class NthOrderRuleChecker implements RuleCheckerInterface
             throw new UnsupportedTypeException($subject, OrderInterface::class);
         }
 
+        if (!isset($configuration['nth']) || !is_int($configuration['nth'])) {
+            return false;
+        }
+
         if (null === $customer = $subject->getCustomer()) {
             return false;
         }
