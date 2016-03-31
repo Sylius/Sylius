@@ -549,16 +549,9 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      */
     protected function getLocaleCodeByEnglishLocaleName($name)
     {
-        $names = Intl::getLocaleBundle()->getLocaleNames('en');
-        $code = array_search(trim($name), $names);
+        $localeNameConverter = $this->getService('sylius.converter.locale_name');
 
-        if (null === $code) {
-            throw new \InvalidArgumentException(sprintf(
-                'Locale "%s" not found! Available names: %s.', $name, implode(', ', $names)
-            ));
-        }
-
-        return $code;
+        return $localeNameConverter->convertToCode($name);
     }
 
     /**

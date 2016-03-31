@@ -12,10 +12,10 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Sylius\Component\Locale\Converter\LocaleNameConverterInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Symfony\Component\Intl\Intl;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -33,6 +33,11 @@ final class LocaleContext implements Context
     private $localeFactory;
 
     /**
+     * @var LocaleNameConverterInterface
+     */
+    private $localeNameConverter;
+
+    /**
      * @var RepositoryInterface
      */
     private $localeRepository;
@@ -40,15 +45,18 @@ final class LocaleContext implements Context
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param FactoryInterface $localeFactory
+     * @param LocaleNameConverterInterface $localeNameConverter
      * @param RepositoryInterface $localeRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         FactoryInterface $localeFactory,
+        LocaleNameConverterInterface $localeNameConverter,
         RepositoryInterface $localeRepository
     ) {
         $this->localeFactory = $localeFactory;
         $this->localeRepository = $localeRepository;
+        $this->localeNameConverter = $localeNameConverter;
         $this->sharedStorage = $sharedStorage;
     }
 
@@ -58,7 +66,7 @@ final class LocaleContext implements Context
     public function theStoreHasLocale($localeName)
     {
         $locale = $this->localeFactory->createNew();
-        $locale->setCode($this->convertToCode($localeName));
+        $locale->setCode($this->localeNameConverter->convertToCode($localeName));
 
         $this->sharedStorage->set('locale', $locale);
         $this->localeRepository->add($locale);
@@ -70,31 +78,10 @@ final class LocaleContext implements Context
     public function theStoreHasDisabledLocale($localeName)
     {
         $locale = $this->localeFactory->createNew();
-        $locale->setCode($this->convertToCode($localeName));
+        $locale->setCode($this->localeNameConverter->convertToCode($localeName));
         $locale->disable();
 
         $this->sharedStorage->set('locale', $locale);
         $this->localeRepository->add($locale);
-    }
-
-    /**
-     * @param string $localeName
-     *
-     * @return string
-     *
-     * @throws \InvalidArgumentException
-     */
-    private function convertToCode($localeName)
-    {
-        $localeNames = Intl::getLocaleBundle()->getLocaleNames('en');
-        $localeCode = array_search($localeName, $localeNames, true);
-
-        if (false === $localeCode) {
-            throw new \InvalidArgumentException(
-                sprintf('Cannot find code for %s locale', $localeName)
-            );
-        }
-
-        return $localeCode;
     }
 }
