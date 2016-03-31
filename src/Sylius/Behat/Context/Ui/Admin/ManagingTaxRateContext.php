@@ -14,7 +14,7 @@ namespace Sylius\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\TaxRate\UpdatePageInterface;
-use Sylius\Behat\Service\Accessor\NotificationAccessorInterface;
+use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Page\Admin\TaxRate\CreatePageInterface;
 use Sylius\Component\Core\Model\TaxRateInterface;
 use Webmozart\Assert\Assert;
@@ -42,26 +42,26 @@ final class ManagingTaxRateContext implements Context
     private $updatePage;
 
     /**
-     * @var NotificationAccessorInterface
+     * @var NotificationCheckerInterface
      */
-    private $notificationAccessor;
+    private $notificationChecker;
 
     /**
      * @param IndexPageInterface $indexPage
      * @param CreatePageInterface $createPage
      * @param UpdatePageInterface $updatePage
-     * @param NotificationAccessorInterface $notificationAccessor
+     * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
         IndexPageInterface $indexPage, 
         CreatePageInterface $createPage, 
         UpdatePageInterface $updatePage, 
-        NotificationAccessorInterface $notificationAccessor
+        NotificationCheckerInterface $notificationChecker
     ) {
         $this->indexPage = $indexPage;
         $this->createPage = $createPage;
         $this->updatePage = $updatePage;
-        $this->notificationAccessor = $notificationAccessor;
+        $this->notificationChecker = $notificationChecker;
     }
 
     /**
@@ -154,15 +154,7 @@ final class ManagingTaxRateContext implements Context
      */
     public function iShouldBeNotifiedItHasBeenSuccessfulCreation()
     {
-        Assert::true(
-            $this->notificationAccessor->hasSuccessMessage(), 
-            'Message type is not positive.'
-        );
-
-        Assert::true(
-            $this->notificationAccessor->isSuccessfullyCreatedFor(self::RESOURCE_NAME), 
-            'Successful creation message does not appear.'
-        );
+        $this->notificationChecker->checkCreationNotification(self::RESOURCE_NAME);
     }
 
     /**
@@ -190,15 +182,7 @@ final class ManagingTaxRateContext implements Context
      */
     public function iShouldBeNotifiedAboutSuccessfulDeletion()
     {
-        Assert::true(
-            $this->notificationAccessor->hasSuccessMessage(),
-            'Message type is not positive.'
-        );
-
-        Assert::true(
-            $this->notificationAccessor->isSuccessfullyDeletedFor(self::RESOURCE_NAME),
-            'Successful deletion message does not appear.'
-        );
+        $this->notificationChecker->checkDeletionNotification(self::RESOURCE_NAME);
     }
 
     /**
@@ -234,15 +218,7 @@ final class ManagingTaxRateContext implements Context
      */
     public function iShouldBeNotifiedAboutSuccessfulEdition()
     {
-        Assert::true(
-            $this->notificationAccessor->hasSuccessMessage(),
-            'Message type is not positive.'
-        );
-
-        Assert::true(
-            $this->notificationAccessor->isSuccessfullyUpdatedFor(self::RESOURCE_NAME),
-            'Successful edition message does not appear.'
-        );
+        $this->notificationChecker->checkEditionNotification(self::RESOURCE_NAME);
     }
 
     /**

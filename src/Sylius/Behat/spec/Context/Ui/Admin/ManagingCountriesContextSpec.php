@@ -18,7 +18,7 @@ use Sylius\Behat\Context\Ui\Admin\ManagingCountriesContext;
 use Sylius\Behat\Page\Admin\Country\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Country\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Country\UpdatePageInterface;
-use Sylius\Behat\Service\Accessor\NotificationAccessorInterface;
+use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 
 /**
@@ -30,13 +30,13 @@ class ManagingCountriesContextSpec extends ObjectBehavior
         IndexPageInterface $countryIndexPage,
         CreatePageInterface $countryCreatePage,
         UpdatePageInterface $countryUpdatePage,
-        NotificationAccessorInterface $notificationAccessor
+        NotificationCheckerInterface $notificationValidator
     ) {
         $this->beConstructedWith(
             $countryIndexPage,
             $countryCreatePage,
             $countryUpdatePage,
-            $notificationAccessor
+            $notificationValidator
         );
     }
 
@@ -71,52 +71,18 @@ class ManagingCountriesContextSpec extends ObjectBehavior
         $this->iAddIt();
     }
 
-    function it_asserts_that_successful_creation_message_appears(NotificationAccessorInterface $notificationAccessor)
+    function it_asserts_that_successful_creation_message_appears(NotificationCheckerInterface $notificationValidator)
     {
-        $notificationAccessor->hasSuccessMessage()->willReturn(true);
-        $notificationAccessor->isSuccessfullyCreatedFor(ManagingCountriesContext::RESOURCE_NAME)->willReturn(true);
+        $notificationValidator->checkCreationNotification('country')->shouldBeCalled();
 
         $this->iShouldBeNotifiedAboutSuccessfulCreation();
     }
 
-    function it_asserts_that_successful_edition_message_appears(NotificationAccessorInterface $notificationAccessor)
+    function it_asserts_that_successful_edition_message_appears(NotificationCheckerInterface $notificationValidator)
     {
-        $notificationAccessor->hasSuccessMessage()->willReturn(true);
-        $notificationAccessor->isSuccessfullyUpdatedFor(ManagingCountriesContext::RESOURCE_NAME)->willReturn(true);
+        $notificationValidator->checkEditionNotification('country')->shouldBeCalled();
 
         $this->iShouldBeNotifiedAboutSuccessfulEdition();
-    }
-
-    function it_throws_not_equal_exception_if_creation_message_is_not_successful(NotificationAccessorInterface $notificationAccessor)
-    {
-        $notificationAccessor->hasSuccessMessage()->willReturn(false);
-        $notificationAccessor->isSuccessfullyCreatedFor(ManagingCountriesContext::RESOURCE_NAME)->willReturn(true);
-
-        $this->shouldThrow(\InvalidArgumentException::class)->during('iShouldBeNotifiedAboutSuccessfulCreation');
-    }
-
-    function it_throws_not_equal_exception_if_edition_message_is_not_successful(NotificationAccessorInterface $notificationAccessor)
-    {
-        $notificationAccessor->hasSuccessMessage()->willReturn(false);
-        $notificationAccessor->isSuccessfullyUpdatedFor(ManagingCountriesContext::RESOURCE_NAME)->willReturn(true);
-
-        $this->shouldThrow(\InvalidArgumentException::class)->during('iShouldBeNotifiedAboutSuccessfulEdition');
-    }
-
-    function it_throws_not_equal_exception_if_successful_creation_message_does_not_appear(NotificationAccessorInterface $notificationAccessor)
-    {
-        $notificationAccessor->hasSuccessMessage()->willReturn(true);
-        $notificationAccessor->isSuccessfullyCreatedFor(ManagingCountriesContext::RESOURCE_NAME)->willReturn(false);
-
-        $this->shouldThrow(\InvalidArgumentException::class)->during('iShouldBeNotifiedAboutSuccessfulCreation');
-    }
-
-    function it_throws_not_equal_exception_if_successful_edition_message_does_not_appear(NotificationAccessorInterface $notificationAccessor)
-    {
-        $notificationAccessor->hasSuccessMessage()->willReturn(true);
-        $notificationAccessor->isSuccessfullyUpdatedFor(ManagingCountriesContext::RESOURCE_NAME)->willReturn(false);
-
-        $this->shouldThrow(\InvalidArgumentException::class)->during('iShouldBeNotifiedAboutSuccessfulEdition');
     }
 
     function it_asserts_that_country_appears_in_the_store(IndexPageInterface $countryIndexPage, CountryInterface $country)
