@@ -26,6 +26,7 @@
         <parameter key="sylius.behat.response_loader.class">Sylius\Behat\Service\ResponseLoader</parameter>
         <parameter key="sylius.behat.notification_accessor.class">Sylius\Behat\Service\Accessor\NotificationAccessor</parameter>
         <parameter key="sylius.behat.notification_checker.class">Sylius\Behat\Service\NotificationChecker</parameter>
+        <parameter key="sylius.behat.current_page_resolver.class">Sylius\Behat\Service\CurrentPageResolver</parameter>
     </parameters>
     <services>
         <service id="mink.default_session" class="Behat\Mink\Session" factory-service="mink" factory-method="getSession" lazy="true" scope="scenario" public="false" />
@@ -62,6 +63,10 @@
         </service>
         <service id="sylius.behat.notification_checker" class="%sylius.behat.notification_checker.class%" scope="scenario" public="false">
             <argument type="service" id="sylius.behat.notification_accessor" />
+        </service>
+        <service id="sylius.behat.current_page_resolver" class="%sylius.behat.current_page_resolver.class%" scope="scenario" public="false">
+            <argument type="service" id="mink.default_session" />
+            <argument type="service" id="router" container="symfony" />
         </service>
     </services>
 </container>

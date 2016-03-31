@@ -49,12 +49,14 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws ElementNotFoundException
      */
     public function checkValidationMessageFor($element, $message)
     {
         $foundedElement = $this->getElement($element)->getParent()->find('css', '.pointing');
-        if(null === $foundedElement) {
-            throw new ElementNotFoundException(sprintf('Element %s was not found, so asserting its validation message was not possible.', $element));
+        if (null === $foundedElement) {
+            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.pointing');
         }
 
         return $message === $foundedElement->getText();
