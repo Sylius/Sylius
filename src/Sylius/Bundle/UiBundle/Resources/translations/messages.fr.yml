@@ -13,6 +13,7 @@ sylius:
         create: Créer
         dashboard: Tableau de bord
         delete: Supprimer
+        disabled: Désactivés
         edit: Modifier
         actions: Actions
         enabled: Activé
@@ -24,6 +25,8 @@ sylius:
         no_results_to_display: "Il n'y a aucun résultat à afficher"
         powered_by: Propulsé par
         tax_categories: Catégories de taxes
+        show: Lister
+        info: Info
         sign_in: Connection
         sign_out: Déconnection
         status: Statut
@@ -33,10 +36,20 @@ sylius:
         save_changes: Enregistrer les modifications
         new_tax_category: Nouvelle catégorie de taxe
         filter: Filtrer
+        clear_filters: Réinitialiser les filtres
+        contains: Contient
+        not_contains: Ne contient pas
+        equal: Egal
         empty: Vide
+        not_empty: Non vide
         starts_with: Commence par
         ends_with: Se termine par
+        in: Dans
+        not_in: Pas dans
         countries: Pays
         manage_country: Gérer le pays
         new_country: Nouveau pays
         locales: Locales
+        new_locale: Nouveaux paramètres régionaux
+        manage_locale: Gérer les paramètres régionaux
+        edit_tax_rate: Modifier le taux de taxe
