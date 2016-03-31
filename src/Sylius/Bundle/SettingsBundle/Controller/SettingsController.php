@@ -36,7 +36,7 @@ class SettingsController extends FOSRestController
      */
     public function showAction(Request $request)
     {
-        $schemaAlias = $request->get('schema');
+        $schemaAlias = $request->attributes->get('schema');
 
         $this->isGrantedOr403($schemaAlias);
 
@@ -57,7 +57,7 @@ class SettingsController extends FOSRestController
      */
     public function updateAction(Request $request)
     {
-        $schemaAlias = $request->get('schema');
+        $schemaAlias = $request->attributes->get('schema');
 
         $this->isGrantedOr403($schemaAlias);
 
