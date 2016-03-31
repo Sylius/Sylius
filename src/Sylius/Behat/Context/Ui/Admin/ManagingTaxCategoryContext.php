@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\TaxCategory\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\TaxCategory\CreatePageInterface;
+use Sylius\Behat\Service\CurrentPageResolverInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Webmozart\Assert\Assert;
@@ -42,6 +43,11 @@ final class ManagingTaxCategoryContext implements Context
     private $updatePage;
 
     /**
+     * @var CurrentPageResolverInterface
+     */
+    private $currentPageResolver;
+
+    /**
      * @var NotificationCheckerInterface
      */
     private $notificationChecker;
@@ -50,17 +56,20 @@ final class ManagingTaxCategoryContext implements Context
      * @param IndexPageInterface $indexPage
      * @param CreatePageInterface $createPage
      * @param UpdatePageInterface $updatePage
+     * @param CurrentPageResolverInterface $currentPageResolver
      * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
         UpdatePageInterface $updatePage,
+        CurrentPageResolverInterface $currentPageResolver,
         NotificationCheckerInterface $notificationChecker
     ) {
         $this->indexPage = $indexPage;
         $this->createPage = $createPage;
         $this->updatePage = $updatePage;
+        $this->currentPageResolver = $currentPageResolver;
         $this->notificationChecker = $notificationChecker;
     }
 
@@ -235,8 +244,10 @@ final class ManagingTaxCategoryContext implements Context
      */
     public function iShouldBeNotifiedThatIsRequired($element)
     {
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+
         Assert::true(
-            $this->createPage->checkValidationMessageFor($element, sprintf('Please enter tax category %s.', $element)),
+            $currentPage->checkValidationMessageFor($element, sprintf('Please enter tax category %s.', $element)),
             sprintf('Tax category %s should be required.', $element)
         );
     }

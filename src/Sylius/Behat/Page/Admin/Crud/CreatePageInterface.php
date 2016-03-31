@@ -17,20 +17,10 @@ use Sylius\Behat\Page\PageInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-interface CreatePageInterface extends PageInterface
+interface CreatePageInterface extends PageInterface, PageWithFormInterface
 {
     /**
      * @throws ElementNotFoundException
      */
     public function create();
-
-    /**
-     * @param string $element
-     * @param string $message
-     *
-     * @return bool
-     *
-     * @throws ElementNotFoundException
-     */
-    public function checkValidationMessageFor($element, $message);
 }

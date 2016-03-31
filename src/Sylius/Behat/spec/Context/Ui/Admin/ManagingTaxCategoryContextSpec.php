@@ -17,6 +17,7 @@ use Sylius\Behat\Context\Ui\Admin\ManagingTaxCategoryContext;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\TaxCategory\CreatePageInterface;
 use Sylius\Behat\Page\Admin\TaxCategory\UpdatePageInterface;
+use Sylius\Behat\Service\CurrentPageResolverInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
@@ -31,12 +32,14 @@ class ManagingTaxCategoryContextSpec extends ObjectBehavior
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
         UpdatePageInterface $updatePage,
+        CurrentPageResolverInterface $currentPageResolver,
         NotificationCheckerInterface $notificationValidator
     ) {
         $this->beConstructedWith(
             $indexPage,
             $createPage,
             $updatePage,
+            $currentPageResolver,
             $notificationValidator
         );
     }
@@ -255,16 +258,23 @@ class ManagingTaxCategoryContextSpec extends ObjectBehavior
         ;
     }
 
-    function it_checks_if_a_resource_was_not_created_because_of_required_code_violation(CreatePageInterface $createPage)
-    {
+    function it_checks_if_a_resource_was_not_created_because_of_required_code_violation(
+        CurrentPageResolverInterface $currentPageResolver,
+        CreatePageInterface $createPage,
+        UpdatePageInterface $updatePage
+    ) {
+        $currentPageResolver->getCurrentPageWithForm($createPage, $updatePage)->willReturn($createPage);
         $createPage->checkValidationMessageFor('code', 'Please enter tax category code.')->willReturn(true);
 
         $this->iShouldBeNotifiedThatIsRequired('code');
     }
 
     function it_throws_an_exception_if_the_message_on_a_page_is_not_related_to_required_code_validation(
-        CreatePageInterface $createPage
+        CurrentPageResolverInterface $currentPageResolver,
+        CreatePageInterface $createPage,
+        UpdatePageInterface $updatePage
     ) {
+        $currentPageResolver->getCurrentPageWithForm($createPage, $updatePage)->willReturn($createPage);
         $createPage->checkValidationMessageFor('code', 'Please enter tax category code.')->willReturn(false);
 
         $this
