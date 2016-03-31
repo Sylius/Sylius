@@ -14,8 +14,9 @@ namespace Sylius\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\TaxCategory\UpdatePageInterface;
-use Sylius\Behat\Service\Accessor\NotificationAccessorInterface;
 use Sylius\Behat\Page\Admin\TaxCategory\CreatePageInterface;
+use Sylius\Behat\Service\CurrentPageResolverInterface;
+use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Webmozart\Assert\Assert;
 
@@ -42,26 +43,34 @@ final class ManagingTaxCategoryContext implements Context
     private $updatePage;
 
     /**
-     * @var NotificationAccessorInterface
+     * @var CurrentPageResolverInterface
      */
-    private $notificationAccessor;
+    private $currentPageResolver;
+
+    /**
+     * @var NotificationCheckerInterface
+     */
+    private $notificationChecker;
 
     /**
      * @param IndexPageInterface $indexPage
      * @param CreatePageInterface $createPage
      * @param UpdatePageInterface $updatePage
-     * @param NotificationAccessorInterface $notificationAccessor
+     * @param CurrentPageResolverInterface $currentPageResolver
+     * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
         UpdatePageInterface $updatePage,
-        NotificationAccessorInterface $notificationAccessor
+        CurrentPageResolverInterface $currentPageResolver,
+        NotificationCheckerInterface $notificationChecker
     ) {
         $this->indexPage = $indexPage;
         $this->createPage = $createPage;
         $this->updatePage = $updatePage;
-        $this->notificationAccessor = $notificationAccessor;
+        $this->currentPageResolver = $currentPageResolver;
+        $this->notificationChecker = $notificationChecker;
     }
 
     /**
@@ -89,15 +98,7 @@ final class ManagingTaxCategoryContext implements Context
      */
     public function iShouldBeNotifiedAboutSuccessfulDeletion()
     {
-        Assert::true(
-            $this->notificationAccessor->hasSuccessMessage(),
-            'Message type is not positive.'
-        );
-
-        Assert::true(
-            $this->notificationAccessor->isSuccessfullyDeletedFor(self::RESOURCE_NAME),
-            'Successful deletion message does not appear.'
-        );
+        $this->notificationChecker->checkDeletionNotification(self::RESOURCE_NAME);
     }
 
     /**
@@ -162,15 +163,7 @@ final class ManagingTaxCategoryContext implements Context
      */
     public function iShouldBeNotifiedItHasBeenSuccessfulCreation()
     {
-        Assert::true(
-            $this->notificationAccessor->hasSuccessMessage(),
-            'Message type is not positive.'
-        );
-
-        Assert::true(
-            $this->notificationAccessor->isSuccessfullyCreatedFor(self::RESOURCE_NAME),
-            'Successful creation message does not appear.'
-        );
+        $this->notificationChecker->checkCreationNotification(self::RESOURCE_NAME);
     }
 
     /**
@@ -207,15 +200,7 @@ final class ManagingTaxCategoryContext implements Context
      */
     public function iShouldBeNotifiedAboutSuccessfulEdition()
     {
-        Assert::true(
-            $this->notificationAccessor->hasSuccessMessage(),
-            'Message type is not positive.'
-        );
-
-        Assert::true(
-            $this->notificationAccessor->isSuccessfullyUpdatedFor(self::RESOURCE_NAME),
-            'Successful edition message does not appear.'
-        );
+        $this->notificationChecker->checkEditionNotification(self::RESOURCE_NAME);
     }
 
     /**
@@ -259,8 +244,10 @@ final class ManagingTaxCategoryContext implements Context
      */
     public function iShouldBeNotifiedThatIsRequired($element)
     {
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+
         Assert::true(
-            $this->createPage->checkValidationMessageFor($element, sprintf('Please enter tax category %s.', $element)),
+            $currentPage->checkValidationMessageFor($element, sprintf('Please enter tax category %s.', $element)),
             sprintf('Tax category %s should be required.', $element)
         );
     }

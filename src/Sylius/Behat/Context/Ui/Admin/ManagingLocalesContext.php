@@ -15,7 +15,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Locale\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Locale\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Locale\UpdatePageInterface;
-use Sylius\Behat\Service\Accessor\NotificationAccessorInterface;
+use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Webmozart\Assert\Assert;
 
@@ -42,26 +42,26 @@ final class ManagingLocalesContext implements Context
     private $updatePage;
 
     /**
-     * @var NotificationAccessorInterface
+     * @var NotificationCheckerInterface
      */
-    private $notificationAccessor;
+    private $notificationChecker;
 
     /**
      * @param CreatePageInterface $createPage
      * @param IndexPageInterface $indexPage
      * @param UpdatePageInterface $updatePage
-     * @param NotificationAccessorInterface $notificationAccessor
+     * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
         UpdatePageInterface $updatePage,
-        NotificationAccessorInterface $notificationAccessor
+        NotificationCheckerInterface $notificationChecker
     ) {
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
-        $this->notificationAccessor = $notificationAccessor;
+        $this->notificationChecker = $notificationChecker;
     }
 
     /**
@@ -126,17 +126,7 @@ final class ManagingLocalesContext implements Context
      */
     public function iShouldBeNotifiedAboutSuccessfulCreation()
     {
-        $doesSuccessMessageAppear = $this->notificationAccessor->hasSuccessMessage();
-        Assert::true(
-            $doesSuccessMessageAppear,
-            sprintf('Message type is not positive')
-        );
-
-        $doesSuccessfulCreationMessageAppear = $this->notificationAccessor->isSuccessfullyCreatedFor(self::RESOURCE_NAME);
-        Assert::true(
-            $doesSuccessfulCreationMessageAppear,
-            sprintf('Successful creation message does not appear')
-        );
+        $this->notificationChecker->checkCreationNotification(self::RESOURCE_NAME);
     }
 
     /**
@@ -144,15 +134,7 @@ final class ManagingLocalesContext implements Context
      */
     public function iShouldBeNotifiedAboutSuccessfulEdition()
     {
-        Assert::true(
-            $this->notificationAccessor->hasSuccessMessage(),
-            'Message type is not positive'
-        );
-
-        Assert::true(
-            $this->notificationAccessor->isSuccessfullyUpdatedFor(self::RESOURCE_NAME),
-            'Successful edition message does not appear'
-        );
+        $this->notificationChecker->checkEditionNotification(self::RESOURCE_NAME);
     }
 
     /**

@@ -37,6 +37,7 @@
         "friendsofsymfony/oauth-server-bundle": "~1.4",
         "friendsofsymfony/rest-bundle": "~1.5",
         "fzaninotto/faker": "~1.2",
+        "gedmo/doctrine-extensions": "^2.4.12",
         "hwi/oauth-bundle": "~0.3",
         "incenteev/composer-parameter-handler": "~2.0",
         "jackalope/jackalope": "^1.1.4",
@@ -52,9 +53,9 @@
         "payum/omnipay-bridge": "~1.0",
         "payum/payum": "~1.0",
         "payum/payum-bundle": "~1.0",
+        "polishsymfonycommunity/symfony-mocker-container": "^1.0",
         "sensio/distribution-bundle": "~3.0",
         "stof/doctrine-extensions-bundle": "~1.1",
-        "gedmo/doctrine-extensions": "^2.4.12",
         "swiftmailer/swiftmailer": "~5.0",
         "symfony-cmf/block-bundle": "~1.2",
         "symfony-cmf/content-bundle": "~1.2",
@@ -80,12 +81,12 @@
         "symfony/twig-bundle": "^2.7",
         "twig/extensions": "~1.0",
         "twig/twig": "~1.11",
+        "webmozart/assert": "^1.0",
         "white-october/pagerfanta-bundle": "~1.0",
         "willdurand/hateoas-bundle": "^0.4|^1.0",
         "winzou/state-machine-bundle": "~0.2",
         "zendframework/zend-hydrator": "^1.0|^2.0",
-        "zendframework/zend-stdlib": "^2.0|^3.0",
-        "webmozart/assert": "^1.0"
+        "zendframework/zend-stdlib": "^2.0|^3.0"
     },
     "require-dev": {
         "akeneo/phpspec-skip-example-extension": "~1.2",

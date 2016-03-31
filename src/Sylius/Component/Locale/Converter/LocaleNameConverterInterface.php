@@ -9,14 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Page\Admin\Crud;
-
-use Sylius\Behat\Page\PageInterface;
+namespace Sylius\Component\Locale\Converter;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-interface UpdatePageInterface extends PageInterface, PageWithFormInterface
+interface LocaleNameConverterInterface
 {
-    public function saveChanges();
+    /**
+     * @param string $name
+     * @param string $locale
+     *
+     * @return string
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function convertToCode($name, $locale = 'en');
 }

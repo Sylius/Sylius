@@ -14,9 +14,15 @@ namespace Sylius\Behat\Page\Admin\Crud;
 use Sylius\Behat\Page\PageInterface;
 
 /**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-interface UpdatePageInterface extends PageInterface, PageWithFormInterface
+interface PageWithFormInterface extends PageInterface
 {
-    public function saveChanges();
+    /**
+     * @param string $element
+     * @param string $message
+     *
+     * @return bool
+     */
+    public function checkValidationMessageFor($element, $message);
 }

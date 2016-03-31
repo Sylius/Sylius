@@ -20,6 +20,7 @@
         <parameter key="sylius.locale_provider.class">Sylius\Component\Locale\Provider\LocaleProvider</parameter>
         <parameter key="sylius.event_subscriber.locale.class">Sylius\Bundle\LocaleBundle\EventListener\LocaleSubscriber</parameter>
         <parameter key="sylius.context.locale.class">Sylius\Component\Locale\Context\LocaleContext</parameter>
+        <parameter key="sylius.converter.locale_name.class">Sylius\Component\Locale\Converter\LocaleNameConverter</parameter>
     </parameters>
 
     <services>
@@ -37,6 +38,8 @@
 
             <tag name="kernel.event_subscriber" />
         </service>
+
+        <service id="sylius.converter.locale_name" class="%sylius.converter.locale_name.class%" />
     </services>
 
 </container>
