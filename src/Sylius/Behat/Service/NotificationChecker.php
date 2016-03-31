@@ -40,7 +40,7 @@ final class NotificationChecker implements NotificationCheckerInterface
      */
     public function checkCreationNotification($resource)
     {
-        $message = sprintf('Success %s has been successfully created.', $this->humanizeResourceName($resource));
+        $message = sprintf('%s has been successfully created.', $this->humanizeResourceName($resource));
 
         $this->checkSuccessNotificationMessage($message);
     }
@@ -52,7 +52,7 @@ final class NotificationChecker implements NotificationCheckerInterface
      */
     public function checkDeletionNotification($resource)
     {
-        $message = sprintf('Success %s has been successfully deleted.', $this->humanizeResourceName($resource));
+        $message = sprintf('%s has been successfully deleted.', $this->humanizeResourceName($resource));
 
         $this->checkSuccessNotificationMessage($message);
     }
@@ -64,7 +64,7 @@ final class NotificationChecker implements NotificationCheckerInterface
      */
     public function checkEditionNotification($resource)
     {
-        $message = sprintf('Success %s has been successfully updated.', $this->humanizeResourceName($resource));
+        $message = sprintf('%s has been successfully updated.', $this->humanizeResourceName($resource));
 
         $this->checkSuccessNotificationMessage($message);
     }

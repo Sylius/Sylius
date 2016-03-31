@@ -57,7 +57,7 @@ final class NotificationAccessor implements NotificationAccessorInterface
             return false;
         }
 
-        return $message === $messageElement->getText();
+        return false !== strpos($messageElement->getText(), $message);
     }
 
     /**
