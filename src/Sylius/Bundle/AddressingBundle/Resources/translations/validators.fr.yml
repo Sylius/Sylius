@@ -52,6 +52,7 @@ sylius:
             min_count: 'Veuillez ajouter au moins {{limit}} zone(s) membre(s).'
         name:
             max_length: Le nom de la zone ne doit pas dépasser les 255 caractères.
+            min_length: Le nom doit comporter au moins 2 caractères|Le nom doit comporter au moins 2 caractères.
             not_blank: Veuillez fournir le nom de la zone.
     zone_member:
         code:
