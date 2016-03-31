@@ -10,10 +10,10 @@ Feature: Receiving discount based on nth order
         And the store ships everywhere for free
         And the store allows paying offline
         And there is a promotion "5 order promotion"
-        And it gives "€20.00" off if placing order is 5 order of ordering customer
+#        And it gives "€20.00" off if placing order is 5 order of ordering customer
         And I am logged in customer
 
-    @todo
+    @ui
     Scenario: Receiving discount on order if it's nth order placed
         Given I have 4 orders already placed
         When I add product "PHP T-Shirt" to the cart
