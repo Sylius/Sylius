@@ -10,7 +10,7 @@ Feature: Receiving discount based on nth order
         And the store ships everywhere for free
         And the store allows paying offline
         And there is a promotion "5 order promotion"
-#        And it gives "€20.00" off if placing order is 5 order of ordering customer
+        And it gives "€20.00" off if placing order is customer's 5th order
         And I am logged in customer
 
     @ui
@@ -20,9 +20,9 @@ Feature: Receiving discount based on nth order
         Then my cart total should be "€80.00"
         And my discount should be "-€20.00"
 
-    @todo
+    @ui
     Scenario: Receiving no discount on order if it's not nth order placed
         Given I have 3 orders already placed
         When I add product "PHP T-Shirt" to the cart
-        Then my cart total should be "€80.00"
-        And my discount should be "-€20.00"
+        Then my cart total should be "€100.00"
+        And there should be no discount

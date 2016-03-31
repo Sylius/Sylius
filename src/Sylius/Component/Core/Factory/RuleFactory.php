@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Factory;
 
+use Sylius\Component\Core\Promotion\Checker\NthOrderRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\TotalOfItemsFromTaxonRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\ContainsTaxonRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\TaxonRuleChecker;
@@ -104,6 +105,19 @@ class RuleFactory implements RuleFactoryInterface
         $rule = $this->createNew();
         $rule->setType(ContainsTaxonRuleChecker::TYPE);
         $rule->setConfiguration(['taxon' => $taxon, 'count' => $count]);
+
+        return $rule;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createNthOrder($nth)
+    {
+        /** @var RuleInterface $rule */
+        $rule = $this->createNew();
+        $rule->setType(NthOrderRuleChecker::TYPE);
+        $rule->setConfiguration(['nth' => $nth]);
 
         return $rule;
     }

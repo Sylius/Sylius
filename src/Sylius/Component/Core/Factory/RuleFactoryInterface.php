@@ -56,4 +56,11 @@ interface RuleFactoryInterface extends FactoryInterface
      * @return RuleInterface
      */
     public function createContainsTaxon($taxon, $count);
+
+    /**
+     * @param int $nth
+     *
+     * @return RuleInterface
+     */
+    public function createNthOrder($nth);
 }

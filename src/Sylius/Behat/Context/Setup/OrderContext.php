@@ -199,6 +199,7 @@ final class OrderContext implements Context
         for ($i = 0; $i < $ordersNumber; $i++) {
             $order = $this->createOrder($customer, '#00000'.$i);
             $order->setPaymentState(PaymentInterface::STATE_COMPLETED);
+            $order->setCompletedAt(new \DateTime());
 
             $this->orderRepository->add($order);
         }
