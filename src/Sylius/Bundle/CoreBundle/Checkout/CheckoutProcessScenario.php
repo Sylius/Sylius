@@ -70,7 +70,7 @@ class CheckoutProcessScenario implements ProcessScenarioInterface
     /**
      * @return mixed
      */
-    private function getLastNewPaymentId()
+    protected function getLastNewPaymentId()
     {
         $lastNewPayment = $this->getCurrentCart()->getLastPayment();
 

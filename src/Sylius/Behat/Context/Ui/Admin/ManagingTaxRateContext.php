@@ -14,7 +14,8 @@ namespace Sylius\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\TaxRate\UpdatePageInterface;
-use Sylius\Behat\Service\Accessor\NotificationAccessorInterface;
+use Sylius\Behat\Service\CurrentPageResolverInterface;
+use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Page\Admin\TaxRate\CreatePageInterface;
 use Sylius\Component\Core\Model\TaxRateInterface;
 use Webmozart\Assert\Assert;
@@ -42,26 +43,34 @@ final class ManagingTaxRateContext implements Context
     private $updatePage;
 
     /**
-     * @var NotificationAccessorInterface
+     * @var CurrentPageResolverInterface
      */
-    private $notificationAccessor;
+    private $currentPageResolver;
+
+    /**
+     * @var NotificationCheckerInterface
+     */
+    private $notificationChecker;
 
     /**
      * @param IndexPageInterface $indexPage
      * @param CreatePageInterface $createPage
      * @param UpdatePageInterface $updatePage
-     * @param NotificationAccessorInterface $notificationAccessor
+     * @param CurrentPageResolverInterface $currentPageResolver
+     * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
-        IndexPageInterface $indexPage, 
+        IndexPageInterface $indexPage,
         CreatePageInterface $createPage, 
         UpdatePageInterface $updatePage, 
-        NotificationAccessorInterface $notificationAccessor
+        CurrentPageResolverInterface $currentPageResolver, 
+        NotificationCheckerInterface $notificationChecker
     ) {
         $this->indexPage = $indexPage;
         $this->createPage = $createPage;
         $this->updatePage = $updatePage;
-        $this->notificationAccessor = $notificationAccessor;
+        $this->currentPageResolver = $currentPageResolver;
+        $this->notificationChecker = $notificationChecker;
     }
 
     /**
@@ -84,8 +93,10 @@ final class ManagingTaxRateContext implements Context
     /**
      * @When I specify its amount as :amount%
      * @When I change its amount to :amount%
+     * @When I do not specify its amount
+     * @When I remove its amount
      */
-    public function iSpecifyItsAmountAs($amount)
+    public function iSpecifyItsAmountAs($amount = null)
     {
         $this->createPage->specifyAmount($amount);
     }
@@ -154,15 +165,7 @@ final class ManagingTaxRateContext implements Context
      */
     public function iShouldBeNotifiedItHasBeenSuccessfulCreation()
     {
-        Assert::true(
-            $this->notificationAccessor->hasSuccessMessage(), 
-            'Message type is not positive.'
-        );
-
-        Assert::true(
-            $this->notificationAccessor->isSuccessfullyCreatedFor(self::RESOURCE_NAME), 
-            'Successful creation message does not appear.'
-        );
+        $this->notificationChecker->checkCreationNotification(self::RESOURCE_NAME);
     }
 
     /**
@@ -190,19 +193,12 @@ final class ManagingTaxRateContext implements Context
      */
     public function iShouldBeNotifiedAboutSuccessfulDeletion()
     {
-        Assert::true(
-            $this->notificationAccessor->hasSuccessMessage(),
-            'Message type is not positive.'
-        );
-
-        Assert::true(
-            $this->notificationAccessor->isSuccessfullyDeletedFor(self::RESOURCE_NAME),
-            'Successful deletion message does not appear.'
-        );
+        $this->notificationChecker->checkDeletionNotification(self::RESOURCE_NAME);
     }
 
     /**
      * @Given I want to modify a tax rate :taxRate
+     * @Given /^I want to modify (this tax rate)$/
      */
     public function iWantToModifyTaxRate(TaxRateInterface $taxRate)
     {
@@ -234,15 +230,7 @@ final class ManagingTaxRateContext implements Context
      */
     public function iShouldBeNotifiedAboutSuccessfulEdition()
     {
-        Assert::true(
-            $this->notificationAccessor->hasSuccessMessage(),
-            'Message type is not positive.'
-        );
-
-        Assert::true(
-            $this->notificationAccessor->isSuccessfullyUpdatedFor(self::RESOURCE_NAME),
-            'Successful edition message does not appear.'
-        );
+        $this->notificationChecker->checkEditionNotification(self::RESOURCE_NAME);
     }
 
     /**
@@ -256,6 +244,7 @@ final class ManagingTaxRateContext implements Context
 
     /**
      * @Then /^(this tax rate) amount should be ([^"]+)%$/
+     * @Then /^(this tax rate) amount should still be ([^"]+)%$/
      */
     public function thisTaxRateAmountShouldBe(TaxRateInterface $taxRate, $taxRateAmount)
     {
@@ -303,6 +292,51 @@ final class ManagingTaxRateContext implements Context
     }
 
     /**
+     * @Then I should be notified that :element has to be selected
+     */
+    public function iShouldBeNotifiedThatElementHasToBeSelected($element)
+    {
+        $this->assertFieldValidationMessage($element, sprintf('Please select tax %s.', $element));
+    }
+
+    /**
+     * @Then I should be notified that :element is required
+     */
+    public function iShouldBeNotifiedThatIsRequired($element)
+    {
+        $this->assertFieldValidationMessage($element, sprintf('Please enter tax rate %s.', $element));
+    }
+
+    /**
+     * @Then tax rate with :element :name should not be added
+     */
+    public function taxRateWithElementValueShouldNotBeAdded($element, $name)
+    {
+        $this->indexPage->open();
+
+        Assert::false(
+            $this->indexPage->isResourceOnPage([$element => $name]),
+            sprintf('Tax rate with %s %s was created, but it should not.', $element, $name)
+        );
+    }
+
+    /**
+     * @When I do not specify its zone
+     */
+    public function iDoNotSpecifyItsZone()
+    {
+        // Intentionally left blank to fulfill context expectation
+    }
+
+    /**
+     * @When I do not specify related tax category
+     */
+    public function iDoNotSpecifyRelatedTaxCategory()
+    {
+        // Intentionally left blank to fulfill context expectation
+    }
+
+    /**
      * @param TaxRateInterface $taxRate
      * @param string $element
      * @param string $taxRateElement
@@ -319,6 +353,20 @@ final class ManagingTaxRateContext implements Context
                 ]
             ),
             sprintf('Tax rate %s %s has not been assigned properly.', $element, $taxRateElement)
+        );
+    }
+
+    /**
+     * @param string $element
+     * @param string $expectedMessage
+     */
+    private function assertFieldValidationMessage($element, $expectedMessage)
+    {
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+
+        Assert::true(
+            $currentPage->checkValidationMessageFor($element, $expectedMessage),
+            sprintf('Tax rate %s should be required.', $element)
         );
     }
 }

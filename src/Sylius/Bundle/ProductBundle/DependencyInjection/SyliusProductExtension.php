@@ -34,8 +34,10 @@ use Sylius\Component\Product\Model\VariantInterface;
 use Sylius\Component\Resource\Factory;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Product catalog extension.
@@ -78,7 +80,7 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
 
     /**
      * @param ContainerBuilder $container
-     * @param array            $config
+     * @param array $config
      */
     private function prependAttribute(ContainerBuilder $container, array $config)
     {
@@ -115,7 +117,7 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
 
     /**
      * @param ContainerBuilder $container
-     * @param array            $config
+     * @param array $config
      */
     private function prependVariation(ContainerBuilder $container, array $config)
     {

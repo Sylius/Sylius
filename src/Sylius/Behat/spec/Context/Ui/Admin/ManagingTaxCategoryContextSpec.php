@@ -17,7 +17,8 @@ use Sylius\Behat\Context\Ui\Admin\ManagingTaxCategoryContext;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\TaxCategory\CreatePageInterface;
 use Sylius\Behat\Page\Admin\TaxCategory\UpdatePageInterface;
-use Sylius\Behat\Service\Accessor\NotificationAccessorInterface;
+use Sylius\Behat\Service\CurrentPageResolverInterface;
+use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 /**
@@ -31,13 +32,15 @@ class ManagingTaxCategoryContextSpec extends ObjectBehavior
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
         UpdatePageInterface $updatePage,
-        NotificationAccessorInterface $notificationAccessor
+        CurrentPageResolverInterface $currentPageResolver,
+        NotificationCheckerInterface $notificationValidator
     ) {
         $this->beConstructedWith(
             $indexPage,
             $createPage,
             $updatePage,
-            $notificationAccessor
+            $currentPageResolver,
+            $notificationValidator
         );
     }
 
@@ -86,35 +89,11 @@ class ManagingTaxCategoryContextSpec extends ObjectBehavior
         ;
     }
 
-    function it_checks_if_a_resource_was_successfully_deleted(NotificationAccessorInterface $notificationAccessor)
+    function it_checks_if_a_resource_was_successfully_deleted(NotificationCheckerInterface $notificationValidator)
     {
-        $notificationAccessor->hasSuccessMessage()->willReturn(true);
-        $notificationAccessor->isSuccessfullyDeletedFor('tax_category')->willReturn(true);
+        $notificationValidator->checkDeletionNotification('tax_category')->shouldBeCalled();
 
         $this->iShouldBeNotifiedAboutSuccessfulDeletion();
-    }
-
-    function it_throws_an_exception_if_the_page_does_not_have_success_message(
-        NotificationAccessorInterface $notificationAccessor
-    ) {
-        $notificationAccessor->hasSuccessMessage()->willReturn(false);
-
-        $this
-            ->shouldThrow(new \InvalidArgumentException('Message type is not positive.'))
-            ->during('iShouldBeNotifiedAboutSuccessfulDeletion', [])
-        ;
-    }
-
-    function it_throws_an_exception_if_the_message_on_a_page_is_not_related_to_deletion(
-        NotificationAccessorInterface $notificationAccessor
-    ) {
-        $notificationAccessor->hasSuccessMessage()->willReturn(true);
-        $notificationAccessor->isSuccessfullyDeletedFor('tax_category')->willReturn(false);
-
-        $this
-            ->shouldThrow(new \InvalidArgumentException('Successful deletion message does not appear.'))
-            ->during('iShouldBeNotifiedAboutSuccessfulDeletion', [])
-        ;
     }
 
     function it_opens_a_create_page(CreatePageInterface $createPage)
@@ -169,35 +148,11 @@ class ManagingTaxCategoryContextSpec extends ObjectBehavior
         ;
     }
 
-    function it_checks_if_a_resource_was_successfully_created(NotificationAccessorInterface $notificationAccessor)
+    function it_checks_if_a_resource_was_successfully_created(NotificationCheckerInterface $notificationValidator)
     {
-        $notificationAccessor->hasSuccessMessage()->willReturn(true);
-        $notificationAccessor->isSuccessfullyCreatedFor('tax_category')->willReturn(true);
+        $notificationValidator->checkCreationNotification('tax_category')->shouldBeCalled();
 
         $this->iShouldBeNotifiedItHasBeenSuccessfulCreation();
-    }
-
-    function it_throws_an_exception_if_the_creation_page_does_not_have_success_message(
-        NotificationAccessorInterface $notificationAccessor
-    ) {
-        $notificationAccessor->hasSuccessMessage()->willReturn(false);
-
-        $this
-            ->shouldThrow(new \InvalidArgumentException('Message type is not positive.'))
-            ->during('iShouldBeNotifiedItHasBeenSuccessfulCreation', [])
-        ;
-    }
-
-    function it_throws_an_exception_if_the_message_on_a_page_is_not_related_to_creation(
-        NotificationAccessorInterface $notificationAccessor
-    ) {
-        $notificationAccessor->hasSuccessMessage()->willReturn(true);
-        $notificationAccessor->isSuccessfullyCreatedFor('tax_category')->willReturn(false);
-
-        $this
-            ->shouldThrow(new \InvalidArgumentException('Successful creation message does not appear.'))
-            ->during('iShouldBeNotifiedItHasBeenSuccessfulCreation', [])
-        ;
     }
 
     function it_opens_an_update_page(UpdatePageInterface $updatePage, TaxCategoryInterface $taxCategory)
@@ -232,35 +187,11 @@ class ManagingTaxCategoryContextSpec extends ObjectBehavior
         $this->iSaveMyChanges();
     }
 
-    function it_checks_if_a_resource_was_successfully_updated(NotificationAccessorInterface $notificationAccessor)
+    function it_checks_if_a_resource_was_successfully_updated(NotificationCheckerInterface $notificationValidator)
     {
-        $notificationAccessor->hasSuccessMessage()->willReturn(true);
-        $notificationAccessor->isSuccessfullyUpdatedFor('tax_category')->willReturn(true);
+        $notificationValidator->checkEditionNotification('tax_category')->shouldBeCalled();
 
         $this->iShouldBeNotifiedAboutSuccessfulEdition();
-    }
-
-    function it_throws_an_exception_if_the_updation_page_does_not_have_success_message(
-        NotificationAccessorInterface $notificationAccessor
-    ) {
-        $notificationAccessor->hasSuccessMessage()->willReturn(false);
-
-        $this
-            ->shouldThrow(new \InvalidArgumentException('Message type is not positive.'))
-            ->during('iShouldBeNotifiedAboutSuccessfulEdition', [])
-        ;
-    }
-
-    function it_throws_an_exception_if_the_message_on_a_page_is_not_related_to_edition(
-        NotificationAccessorInterface $notificationAccessor
-    ) {
-        $notificationAccessor->hasSuccessMessage()->willReturn(true);
-        $notificationAccessor->isSuccessfullyUpdatedFor('tax_category')->willReturn(false);
-
-        $this
-            ->shouldThrow(new \InvalidArgumentException('Successful edition message does not appear.'))
-            ->during('iShouldBeNotifiedAboutSuccessfulEdition', [])
-        ;
     }
 
     function it_asserts_if_a_resource_was_successfully_updated(
@@ -327,16 +258,23 @@ class ManagingTaxCategoryContextSpec extends ObjectBehavior
         ;
     }
 
-    function it_checks_if_a_resource_was_not_created_because_of_required_code_violation(CreatePageInterface $createPage)
-    {
+    function it_checks_if_a_resource_was_not_created_because_of_required_code_violation(
+        CurrentPageResolverInterface $currentPageResolver,
+        CreatePageInterface $createPage,
+        UpdatePageInterface $updatePage
+    ) {
+        $currentPageResolver->getCurrentPageWithForm($createPage, $updatePage)->willReturn($createPage);
         $createPage->checkValidationMessageFor('code', 'Please enter tax category code.')->willReturn(true);
 
         $this->iShouldBeNotifiedThatIsRequired('code');
     }
 
     function it_throws_an_exception_if_the_message_on_a_page_is_not_related_to_required_code_validation(
-        CreatePageInterface $createPage
+        CurrentPageResolverInterface $currentPageResolver,
+        CreatePageInterface $createPage,
+        UpdatePageInterface $updatePage
     ) {
+        $currentPageResolver->getCurrentPageWithForm($createPage, $updatePage)->willReturn($createPage);
         $createPage->checkValidationMessageFor('code', 'Please enter tax category code.')->willReturn(false);
 
         $this

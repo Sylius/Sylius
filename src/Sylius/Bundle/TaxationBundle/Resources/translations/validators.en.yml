@@ -14,6 +14,8 @@ sylius:
             not_blank: Please enter tax rate amount.
         calculator:
             not_blank: Please select tax calculator.
+        zone:
+            not_blank: Please select tax zone.
         code:
             not_blank: Please enter tax rate code.
             unique: The tax rate with given code already exists.

@@ -29,23 +29,12 @@ interface NotificationAccessorInterface
     public function hasMessage($message);
 
     /**
-     * @param string $resourceName
-     *
-     * @return bool
+     * @return string
      */
-    public function isSuccessfullyCreatedFor($resourceName);
+    public function getMessage();
 
     /**
-     * @param string $resourceName
-     *
-     * @return bool
+     * @return string
      */
-    public function isSuccessfullyUpdatedFor($resourceName);
-
-    /**
-     * @param string $resourceName
-     *
-     * @return bool
-     */
-    public function isSuccessfullyDeletedFor($resourceName);
+    public function getMessageType();
 }

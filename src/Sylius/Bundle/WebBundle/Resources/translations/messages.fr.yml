@@ -96,6 +96,7 @@ sylius:
     payment:
         transition:
             cancel: annuler
+            refund: remboursement
     pricing:
         volume_based:
             max: Volume maximum
@@ -110,6 +111,7 @@ sylius:
         no_report: "Il n'y a pas de rapport à afficher"
         renderer: Type de rendu
     review:
+        no_results: Il n’y a aucune évaluation sur ce produit.
         no_reviews: "Il n'y a aucun avis."
     security:
         login:
@@ -120,6 +122,9 @@ sylius:
         no_items: "Il n'y a aucun élément à afficher"
         transition:
             cancel: annuler
+            prepare: préparer
+            return: retour
+            ship: envoi
         update: Modifier
     stockable:
         on_hand: Niveau de stock
@@ -161,7 +166,9 @@ sylius:
         amount: Montant
         archetype: Prototype
         archetypes: Prototype
+        association: Association
         association_types: "Types d'associations"
+        associations: Associations
         assortment: Assortiment
         attributes: Attributs
         author: Auteur
@@ -325,6 +332,7 @@ sylius:
         editing_product: Modification du produit
         editing_promotion: "Edition d'une promotion"
         editing_redirect_route: Modifier la redirection
+        editing_review: "Modifier l'avis"
         editing_role: Modifier rôle
         editing_route: "Mise à jour d'une route"
         editing_shipment: Modifier la livraison
@@ -438,6 +446,7 @@ sylius:
         modified: Date de mise à jour
         move_down: Déplacement vers le bas
         move_up: Déplacement vers le haut
+        n_a: N/A
         name: Nom
         new: Nouveau
         new_archetype: Nouveau prototype
@@ -468,6 +477,7 @@ sylius:
         new_zone: Nouvelle zone
         newest_products: Nouveautés
         next: Suivant
+        "no": Non
         no_account: "Vous n'avez encore pas de compte"
         no_association_types_to_display: "Il n'y a aucun association de défini"
         no_comment: Aucun commentaire
@@ -526,12 +536,14 @@ sylius:
         processing: En cours
         product: Produit
         product_archetypes: Archétypes de produit
+        product_association_index: Association
         product_association_type_index: "Type d'association"
         product_association_types: "Types d'association de produits"
         product_associations: Associations de produit
         product_attributes: Propriété de produit
         product_details_viewing_product_product: Détails du produit
         product_options: Options de produit
+        product_review: Avis produit
         product_reviews: Avis produit
         products: Produits
         products_categorized_as_name: 'Produits classés en tant que « %name% »'
@@ -570,6 +582,7 @@ sylius:
         return: Retour
         returned: Retourné
         revert: Revenir en arrière
+        review_details: Détails
         reviews: Avis
         roles: Rôles
         routes: Chemins

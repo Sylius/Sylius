@@ -20,7 +20,12 @@
         <parameter key="sylius.controller.settings.class">Sylius\Bundle\SettingsBundle\Controller\SettingsController</parameter>
         <parameter key="sylius.settings.form_factory.class">Sylius\Bundle\SettingsBundle\Form\Factory\SettingsFormFactory</parameter>
         <parameter key="sylius.settings.manager.class">Sylius\Bundle\SettingsBundle\Manager\SettingsManager</parameter>
-        <parameter key="sylius.settings.schema_registry.class">Sylius\Bundle\SettingsBundle\Schema\SchemaRegistry</parameter>
+        <parameter key="sylius.registry.settings_schema.class">Sylius\Component\Registry\ServiceRegistry</parameter>
+        <parameter key="sylius.settings.schema_interface">Sylius\Bundle\SettingsBundle\Schema\SchemaInterface</parameter>
+        <parameter key="sylius.registry.settings_resolver.class">Sylius\Bundle\SettingsBundle\Resolver\ResolverServiceRegistry</parameter>
+        <parameter key="sylius.settings.resolver_interface">Sylius\Bundle\SettingsBundle\Resolver\SettingsResolverInterface</parameter>
+        <parameter key="sylius.settings.default_resolver.class">Sylius\Bundle\SettingsBundle\Resolver\DefaultSettingsResolver</parameter>
+        <parameter key="sylius.settings.doctrine.parameter_transformer_listener.class">Sylius\Bundle\SettingsBundle\Doctrine\EventListener\ParameterTransformerListener</parameter>
     </parameters>
 
     <services>
@@ -31,23 +36,37 @@
         </service>
 
         <service id="sylius.settings.form_factory" class="%sylius.settings.form_factory.class%">
-            <argument type="service" id="sylius.settings.schema_registry" />
+            <argument type="service" id="sylius.registry.settings_schema" />
             <argument type="service" id="form.factory" />
         </service>
 
-        <service id="sylius.settings.cache" alias="doctrine_cache.providers.sylius_settings" />
-
         <service id="sylius.settings.manager" class="%sylius.settings.manager.class%" lazy="true">
-            <argument type="service" id="sylius.settings.schema_registry" />
-            <argument type="service" id="sylius.manager.parameter" />
-            <argument type="service" id="sylius.repository.parameter" />
-            <argument type="service" id="sylius.factory.parameter" />
-            <argument type="service" id="sylius.settings.cache" />
-            <argument type="service" id="validator" />
+            <argument type="service" id="sylius.registry.settings_schema" />
+            <argument type="service" id="sylius.registry.settings_resolver" />
+            <argument type="service" id="sylius.manager.settings" />
+            <argument type="service" id="sylius.factory.settings" />
             <argument type="service" id="event_dispatcher" />
         </service>
 
-        <service id="sylius.settings.schema_registry" class="%sylius.settings.schema_registry.class%" />
+        <service id="sylius.registry.settings_schema" class="%sylius.registry.settings_schema.class%">
+            <argument>%sylius.settings.schema_interface%</argument>
+        </service>
+
+        <service id="sylius.registry.settings_resolver" class="%sylius.registry.settings_resolver.class%">
+            <argument>%sylius.settings.resolver_interface%</argument>
+            <argument type="service" id="sylius.settings.default_resolver"/>
+        </service>
+
+        <service id="sylius.settings.default_resolver" class="%sylius.settings.default_resolver.class%">
+            <argument type="service" id="sylius.repository.settings" />
+        </service>
+
+        <service id="sylius.settings.doctrine.transform_settings_listener" class="%sylius.settings.doctrine.parameter_transformer_listener.class%">
+            <argument type="service" id="service_container"/>
+            <tag name="doctrine.event_listener" event="onFlush"/>
+            <tag name="doctrine.event_listener" event="postFlush"/>
+            <tag name="doctrine.event_listener" event="postLoad"/>
+        </service>
     </services>
 
 </container>

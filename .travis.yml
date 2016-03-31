@@ -66,7 +66,7 @@ before_script:
     - php -i | grep -v 'SYMFONY__'
 
 script:
-    - composer validate
+    - composer validate --strict
     - etc/bin/validate-packages
 
     - if [[ $TRAVIS_PHP_VERSION = 7.* ]]; then bin/kawaii gherkin:check --align=left features/; fi;

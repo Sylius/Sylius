@@ -11,11 +11,7 @@
 
 namespace Sylius\Behat\Page\Admin\TaxRate;
 
-use Sylius\Behat\Behaviour\ChoosesCalculator;
-use Sylius\Behat\Behaviour\ChoosesCategory;
-use Sylius\Behat\Behaviour\ChoosesZone;
 use Sylius\Behat\Behaviour\NamesIt;
-use Sylius\Behat\Behaviour\SpecifiesItsAmount;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 
@@ -40,7 +36,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     ];
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function chooseZone($name)
     {
@@ -48,7 +44,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function chooseCategory($name)
     {
@@ -56,7 +52,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function chooseCalculator($name)
     {
@@ -64,7 +60,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function specifyAmount($amount)
     {

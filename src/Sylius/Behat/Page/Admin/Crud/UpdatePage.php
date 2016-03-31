@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Admin\Crud;
 
+use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
 use Symfony\Component\Routing\RouterInterface;
@@ -44,6 +45,21 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     public function saveChanges()
     {
         $this->getDocument()->pressButton('Save changes');
+    }
+
+    /**
+     * {@inheritdoc}
+     * 
+     * @throws ElementNotFoundException
+     */
+    public function checkValidationMessageFor($element, $message)
+    {
+        $foundedElement = $this->getElement($element)->getParent()->find('css', '.pointing');
+        if (null === $foundedElement) {
+            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.pointing');
+        }
+
+        return $message === $foundedElement->getText();
     }
 
     /**

@@ -48,7 +48,9 @@ class TaxationSettingsSchema implements SchemaInterface
     public function buildSettings(SettingsBuilderInterface $builder)
     {
         $builder
-            ->setDefined('default_tax_zone')
+            ->setDefaults([
+                'default_tax_zone' => null,
+            ])
             ->setAllowedTypes('default_tax_zone', ['null', ZoneInterface::class])
             ->setTransformer('default_tax_zone', new ObjectToIdentifierTransformer($this->zoneRepository))
         ;

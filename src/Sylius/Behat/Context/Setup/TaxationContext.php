@@ -88,7 +88,7 @@ final class TaxationContext implements Context
     {
         $taxCategory = $this->getOrCreateTaxCategory($taxCategoryName);
 
-        if(null === $taxRateCode) {
+        if (null === $taxRateCode) {
             $taxRateCode = $this->getCodeFromNameAndZoneCode($taxRateName, $zone->getCode());
         }
 
@@ -115,6 +115,18 @@ final class TaxationContext implements Context
         $taxCategory = $this->createTaxCategory($name, $code);
 
         $this->sharedStorage->set('tax_category', $taxCategory);
+    }
+
+    /**
+     * @Given the store does not have any categories defined
+     */
+    public function theStoreDoesNotHaveAnyCategoriesDefined()
+    {
+        $taxCategories = $this->taxCategoryRepository->findAll();
+
+        foreach ($taxCategories as $taxCategory) {
+            $this->taxCategoryRepository->remove($taxCategory);
+        }
     }
 
     /**

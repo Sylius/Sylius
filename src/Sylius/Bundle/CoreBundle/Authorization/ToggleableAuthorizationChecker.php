@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Authorization;
 
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
-use Sylius\Bundle\SettingsBundle\Model\Settings;
+use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface;
 
 /**
@@ -33,7 +33,7 @@ class ToggleableAuthorizationChecker implements AuthorizationCheckerInterface
     private $settingsManager;
 
     /**
-     * @var Settings
+     * @var SettingsInterface
      */
     private $settings;
 
@@ -53,7 +53,7 @@ class ToggleableAuthorizationChecker implements AuthorizationCheckerInterface
     public function isGranted($permissionCode)
     {
         if (null === $this->settings) {
-            $this->settings = $this->settingsManager->loadSettings('sylius_security');
+            $this->settings = $this->settingsManager->load('sylius_security');
         }
 
         if (false === $this->settings->get('enabled')) {

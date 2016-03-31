@@ -11,11 +11,12 @@
 
 namespace Sylius\Bundle\SettingsBundle\Event;
 
-use Sylius\Bundle\SettingsBundle\Model\Settings;
+use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * @author Aram Alipoor <aram.alipoor@gmail.com>
+ * @author Steffen Brem <steffenbrem@gmail.com>
  */
 class SettingsEvent extends GenericEvent
 {
@@ -23,50 +24,17 @@ class SettingsEvent extends GenericEvent
     const POST_SAVE = 'sylius.settings.post_save';
 
     /**
-     * @var string
-     */
-    private $namespace;
-
-    /**
-     * @var Settings
+     * @var SettingsInterface
      */
     private $settings;
 
-    /**
-     * @var array
-     */
-    private $parameters;
-
-    /**
-     * @param string   $namespace
-     * @param Settings $settings
-     * @param array    $parameters
-     */
-    public function __construct($namespace, Settings $settings, array $parameters)
+    public function __construct(SettingsInterface $settings)
     {
-        $this->namespace = $namespace;
         $this->settings = $settings;
-        $this->parameters = $parameters;
     }
 
     /**
-     * @return string
-     */
-    public function getNamespace()
-    {
-        return $this->namespace;
-    }
-
-    /**
-     * @param string $namespace
-     */
-    public function setNamespace($namespace)
-    {
-        $this->namespace = $namespace;
-    }
-
-    /**
-     * @return Settings
+     * @return SettingsInterface
      */
     public function getSettings()
     {
@@ -74,26 +42,10 @@ class SettingsEvent extends GenericEvent
     }
 
     /**
-     * @param Settings $settings
+     * @param SettingsInterface $settings
      */
     public function setSettings($settings)
     {
         $this->settings = $settings;
-    }
-
-    /**
-     * @return array
-     */
-    public function getParameters()
-    {
-        return $this->parameters;
-    }
-
-    /**
-     * @param array $parameters
-     */
-    public function setParameters($parameters)
-    {
-        $this->parameters = $parameters;
     }
 }
