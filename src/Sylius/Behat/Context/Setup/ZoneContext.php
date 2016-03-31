@@ -114,4 +114,16 @@ final class ZoneContext implements Context
             $this->zoneRepository->remove($zone);
         }
     }
+
+    /**
+     * @Given the store has a zone :zoneName with code :code
+     */
+    public function theStoreHasAZoneWithCode($zoneName, $code)
+    {
+        $zone = $this->zoneFactory->createTyped(ZoneInterface::TYPE_ZONE);
+        $zone->setCode($code);
+        $zone->setName($zoneName);
+
+        $this->zoneRepository->add($zone);
+    }
 }
