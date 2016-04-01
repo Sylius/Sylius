@@ -46,13 +46,13 @@ class SettingsExtension extends \Twig_Extension
     }
 
     /**
-     * @param string $namespace
+     * @param string $schemaAlias
      *
      * @return array
      */
-    public function getSettings($namespace)
+    public function getSettings($schemaAlias)
     {
-        return $this->helper->getSettings($namespace);
+        return $this->helper->getSettings($schemaAlias);
     }
 
     /**
