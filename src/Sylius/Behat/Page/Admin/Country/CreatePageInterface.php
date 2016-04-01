@@ -15,9 +15,15 @@ use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
+ * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
 interface CreatePageInterface extends BaseCreatePageInterface
 {
+    /**
+     * @param string $name
+     */
+    public function chooseNameProperly($name);
+
     /**
      * @param string $name
      */
@@ -25,13 +31,8 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     /**
      * @param string $name
-     */
-    public function selectName($name);
-
-    /**
-     * @param string $name
      * @param string $code
-     * @param string $abbreviation
+     * @param string|null $abbreviation
      */
-    public function fillProvinceData($name, $code, $abbreviation);
+    public function fillProvinceData($name, $code, $abbreviation = null);
 }

@@ -13,7 +13,6 @@ namespace spec\Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
-use PhpSpec\Exception\Example\NotEqualException;
 use PhpSpec\ObjectBehavior;
 use Sylius\Behat\Context\Ui\Admin\ManagingCountriesContext;
 use Sylius\Behat\Page\Admin\Country\CreatePageInterface;
@@ -31,14 +30,12 @@ use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 class ManagingCountriesContextSpec extends ObjectBehavior
 {
     function let(
-        SharedStorageInterface $sharedStorage,
         IndexPageInterface $countryIndexPage,
         CreatePageInterface $countryCreatePage,
         UpdatePageInterface $countryUpdatePage,
         NotificationCheckerInterface $notificationValidator
     ) {
         $this->beConstructedWith(
-            $sharedStorage,
             $countryIndexPage,
             $countryCreatePage,
             $countryUpdatePage,
@@ -65,7 +62,7 @@ class ManagingCountriesContextSpec extends ObjectBehavior
 
     function it_chooses_name_in_creation_form(CreatePageInterface $countryCreatePage)
     {
-        $countryCreatePage->chooseName('France')->shouldBeCalled();
+        $countryCreatePage->chooseNameProperly('France')->shouldBeCalled();
 
         $this->iChoose('France');
     }
@@ -94,19 +91,21 @@ class ManagingCountriesContextSpec extends ObjectBehavior
     function it_asserts_that_country_appears_in_the_store(UpdatePageInterface $countryUpdatePage, CountryInterface $country)
     {
         $country->getId()->willReturn(1);
+        $country->getCode()->willReturn('UK');
         $countryUpdatePage->isOpen(['id' => 1])->willReturn(true);
 
         $this->countryShouldAppearInTheStore($country);
     }
 
-    function it_throws_not_equal_exception_if_country_does_not_appear_in_the_store(
+    function it_throws_an_exception_if_country_does_not_appear_in_the_store(
         UpdatePageInterface $countryUpdatePage,
         CountryInterface $country
     ) {
         $country->getId()->willReturn(1);
+        $country->getCode()->willReturn('UK');
         $countryUpdatePage->isOpen(['id' => 1])->willReturn(false);
 
-        $this->shouldThrow(NotEqualException::class)->during('countryShouldAppearInTheStore', [$country]);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('countryShouldAppearInTheStore', [$country]);
     }
 
     function it_opens_country_update_page(UpdatePageInterface $countryUpdatePage, CountryInterface $country)
@@ -152,7 +151,7 @@ class ManagingCountriesContextSpec extends ObjectBehavior
         $this->thisCountryShouldBeEnabled($country);
     }
 
-    function it_throws_not_equal_exception_if_country_has_not_proper_status(IndexPageInterface $countryIndexPage, CountryInterface $country)
+    function it_throws_an_exception_if_country_has_not_proper_status(IndexPageInterface $countryIndexPage, CountryInterface $country)
     {
         $countryIndexPage->open()->shouldBeCalled();
 
@@ -170,7 +169,7 @@ class ManagingCountriesContextSpec extends ObjectBehavior
         $this->iShouldNotBeAbleToChoose('France');
     }
 
-    function it_throws_exception_if_country_name_can_be_chosen_again(CreatePageInterface $countryCreatePage)
+    function it_throws_an_exception_if_country_name_can_be_chosen_again(CreatePageInterface $countryCreatePage)
     {
         $countryCreatePage->chooseName('France')->willThrow(\Exception::class);
 
@@ -189,23 +188,18 @@ class ManagingCountriesContextSpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->during('theCodeFieldShouldBeDisabled');
     }
 
-    function it_asserts_that_a_country_has_the_province(CountryInterface $country, UpdatePageInterface $countryUpdatePage)
+    function it_asserts_that_a_country_has_the_province(UpdatePageInterface $countryUpdatePage)
     {
-        $country->getId()->willReturn(1);
-        $countryUpdatePage->isOpen(['id' => 1])->willReturn(true);
         $countryUpdatePage->isThereProvince('Scotland')->willReturn(true);
 
-        $this->countryShouldHaveProvince($country, 'Scotland');
+        $this->countryShouldHaveProvince('Scotland');
     }
 
-    function it_throws_exception_if_a_country_does_not_have_the_province(
-        CountryInterface $country,
+    function it_throws_an_exception_if_a_country_does_not_have_the_province(
         UpdatePageInterface $countryUpdatePage
     ) {
-        $country->getId()->willReturn(1);
-        $countryUpdatePage->isOpen(['id' => 1])->willReturn(true);
         $countryUpdatePage->isThereProvince('Scotland')->willReturn(false);
 
-        $this->shouldThrow(\InvalidArgumentException::class)->during('countryShouldHaveProvince', [$country, 'Scotland']);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('countryShouldHaveProvince', ['Scotland']);
     }
 }
