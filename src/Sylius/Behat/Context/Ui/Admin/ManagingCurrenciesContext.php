@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Currency\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Currency\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Currency\UpdatePageInterface;
+use Sylius\Behat\Service\CurrentPageResolverInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Webmozart\Assert\Assert;
@@ -47,20 +48,28 @@ final class ManagingCurrenciesContext implements Context
     private $notificationChecker;
 
     /**
+     * @var CurrentPageResolverInterface
+     */
+    private $currentPageResolver;
+
+    /**
      * @param IndexPageInterface $indexPage
      * @param CreatePageInterface $createPage
      * @param UpdatePageInterface $updatePage
+     * @param CurrentPageResolverInterface $currentPageResolver
      * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
         UpdatePageInterface $updatePage,
+        CurrentPageResolverInterface $currentPageResolver,
         NotificationCheckerInterface $notificationChecker
     ) {
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
+        $this->currentPageResolver = $currentPageResolver;
         $this->notificationChecker = $notificationChecker;
     }
 
@@ -144,6 +153,7 @@ final class ManagingCurrenciesContext implements Context
 
     /**
      * @When I save my changes
+     * @When I try to save my changes
      */
     public function iSaveMyChanges()
     {
@@ -241,6 +251,58 @@ final class ManagingCurrenciesContext implements Context
         Assert::true(
             $this->indexPage->isResourceOnPage([$element => $codeValue]),
             sprintf('Currency with %s %s cannot be found.', $element, $codeValue)
+        );
+    }
+
+    /**
+     * @Then I should be notified that exchange rate is required
+     */
+    public function iShouldBeNotifiedThatExchangeRateIsRequired()
+    {
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+
+        Assert::true(
+            $currentPage->checkValidationMessageFor('exchangeRate', 'Please enter exchange rate.'),
+            'Currency exchange rate should be required.'
+        );
+    }
+
+    /**
+     * @Then the currency :currencyName should not be added
+     */
+    public function theCurrencyShouldNotBeAdded($currencyName)
+    {
+        $this->indexPage->open();
+
+        Assert::false(
+            $this->indexPage->isResourceOnPage(['name' => $currencyName]),
+            sprintf('Currency with name %s was created, but it should not.', $currencyName)
+        );
+    }
+
+    /**
+     * @When I remove its exchange rate
+     */
+    public function iRemoveItsExchangeRate()
+    {
+        $this->updatePage->changeExchangeRate('');
+    }
+
+    /**
+     * @Then /^(this currency) should still have exchange rate equal to ((\d+)\.(\d+))$/
+     */
+    public function theCurrencyShouldStillHaveExchangeRateEquals(CurrencyInterface $currency, $exchangeRate)
+    {
+        $this->updatePage->open(['id' => $currency->getId()]);
+
+        Assert::eq(
+            $exchangeRate,
+            $this->updatePage->getExchangeRateValue(),
+            sprintf(
+                'Currency exchange rate should be equal %s, but was %s.',
+                $exchangeRate,
+                $this->updatePage->getExchangeRateValue()
+            )
         );
     }
 }

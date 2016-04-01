@@ -22,17 +22,21 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     use ChoosesName;
 
     /**
-     * @var array
-     */
-    protected $elements = [
-        'code' => '#sylius_currency_code',
-    ];
-
-    /**
      * @param float $exchangeRate
      */
     public function specifyExchangeRate($exchangeRate)
     {
         $this->getDocument()->fillField('Exchange rate', $exchangeRate);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefinedElements()
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'code' => '#sylius_currency_code',
+            'exchangeRate' => '#sylius_currency_exchangeRate',
+        ]);
     }
 }

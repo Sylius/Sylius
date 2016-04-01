@@ -91,6 +91,14 @@ final class CurrencyContext implements Context
     }
 
     /**
+     * @Given the store has currency :currencyName with exchange rate :exchangeRate
+     */
+    public function theStoreHasCurrencyWithExchangeRate($currencyName, $exchangeRate)
+    {
+        $this->createCurrency($currencyName, true, $exchangeRate);
+    }
+
+    /**
      * @param string $currencyName
      * @param bool $enabled
      * @param float $exchangeRate

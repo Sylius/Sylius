@@ -48,6 +48,7 @@
             <argument type="service" id="sylius.behat.page.admin.currency.index" />
             <argument type="service" id="sylius.behat.page.admin.currency.create" />
             <argument type="service" id="sylius.behat.page.admin.currency.update" />
+            <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="service" id="sylius.behat.notification_checker" />
             <tag name="sylius.behat.context" />
         </service>
