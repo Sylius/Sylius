@@ -1,6 +1,6 @@
 @shipping
 Feature: Deleting a shipping method
-    In order to remove not used or invalid shipping methods
+    In order to remove test, obsolete or incorrect shipping methods
     As an Administrator
     I want to be able to delete a shipping method
 
@@ -9,7 +9,8 @@ Feature: Deleting a shipping method
         And the store allows shipping with "UPS Ground"
         And I am logged in as an administrator
 
-    @ui @javascript
-    Scenario: Successfully deleting a shipping method when it's not used
-        When I try to delete "UPS Ground" shipping method
-        Then it should be successfully removed
+    @ui
+    Scenario: Deleted shipping method should disappear from the registry
+        When I delete shipping method "UPS Ground"
+        Then I should be notified that it has been successfully deleted
+        Then this shipping method should no longer exist in the registry
