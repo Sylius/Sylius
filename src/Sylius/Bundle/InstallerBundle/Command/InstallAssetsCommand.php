@@ -46,10 +46,13 @@ EOT
         }
 
         $commands = [
-            'assets:install',
+            'sylius:theme:assets:install',
             'assetic:dump',
         ];
 
         $this->runCommands($commands, $input, $output);
+        $output->writeln('');
+
+        return 0;
     }
 }
