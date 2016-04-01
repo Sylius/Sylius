@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\ResourceBundle\Form\EventSubscriber;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
@@ -76,7 +77,7 @@ class AddCodeFormSubscriberSpec extends ObjectBehavior
     function it_throws_exception_when_resource_does_not_implement_code_aware_interface(FormEvent $event, $object)
     {
         $event->getData()->willReturn($object);
-        $this->shouldThrow('\UnexpectedTypeException');
+        $this->shouldThrow(UnexpectedTypeException::class)->during('preSetData', [$event]);
     }
 
     function it_sets_code_as_enabled_when_there_is_no_resource(

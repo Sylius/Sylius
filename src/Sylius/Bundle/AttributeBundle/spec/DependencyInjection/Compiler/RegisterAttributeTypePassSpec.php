@@ -54,6 +54,8 @@ class RegisterAttributeTypePassSpec extends ObjectBehavior
     {
         $container->hasDefinition('sylius.registry.attribute_type')->willReturn(false);
         $container->getDefinition('sylius.registry.attribute_type')->shouldNotBeCalled();
+
+        $this->process($container);
     }
 
     function it_throws_exception_if_any_attribute_type_has_improper_attributes(ContainerBuilder $container, Definition $attributeTypeDefinition)
@@ -67,7 +69,9 @@ class RegisterAttributeTypePassSpec extends ObjectBehavior
             ],
         ];
         $container->findTaggedServiceIds('sylius.attribute.type')->willReturn($attributeTypeServices);
-        $this->shouldThrow(new \InvalidArgumentException('Tagged attribute type needs to have `attribute_type` and `label` attributes.'));
         $attributeTypeDefinition->addMethodCall('register', ['test', new Reference('sylius.form.type.attribute_type.test')])->shouldNotBeCalled();
+
+        $this->shouldThrow(new \InvalidArgumentException('Tagged attribute type needs to have `attribute-type` and `label` attributes.'))
+            ->during('process', [$container]);
     }
 }
