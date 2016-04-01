@@ -22,7 +22,6 @@
     "require": {
         "php": "^5.5.9|^7.0",
 
-        "a2lix/translation-form-bundle": "~2.0",
         "hwi/oauth-bundle": "~0.3",
         "jms/serializer-bundle": "^0.13|^1.0",
         "jms/translation-bundle": "1.1.*",
