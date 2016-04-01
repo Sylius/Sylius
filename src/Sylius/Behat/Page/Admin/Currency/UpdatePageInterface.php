@@ -30,4 +30,9 @@ interface UpdatePageInterface extends BaseUpadatePageInterface
      * @return string
      */
     public function getExchangeRateValue();
+
+    /**
+     * @return string
+     */
+    public function getCodeDisabledAttribute();
 }

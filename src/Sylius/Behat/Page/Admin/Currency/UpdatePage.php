@@ -20,15 +20,7 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
     use Toggles;
-
-    /**
-     * @var array
-     */
-    protected $elements = [
-        'enabled' => '#sylius_currency_enabled',
-        'exchangeRate' => '#sylius_currency_exchangeRate',
-    ];
-
+    
     /**
      * {@inheritdoc}
      */
@@ -48,8 +40,28 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function getCodeDisabledAttribute()
+    {
+        return $this->getElement('code')->getAttribute('disabled');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getToggleableElement()
     {
         return $this->getElement('enabled');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefinedElements()
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'enabled' => '#sylius_currency_enabled',
+            'exchangeRate' => '#sylius_currency_exchangeRate',
+            'code' => '#sylius_currency_code',
+        ]);
     }
 }

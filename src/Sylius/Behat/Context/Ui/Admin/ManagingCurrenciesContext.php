@@ -206,4 +206,16 @@ final class ManagingCurrenciesContext implements Context
             )
         );
     }
+
+    /**
+     * @Then the code field should be disabled
+     */
+    public function theCodeFiledShouldBeDisabled()
+    {
+        Assert::eq(
+            'disabled',
+            $this->updatePage->getCodeDisabledAttribute(),
+            'Code field should be disabled but is not.'
+        );
+    }
 }
