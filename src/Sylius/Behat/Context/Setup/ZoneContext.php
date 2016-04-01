@@ -102,4 +102,16 @@ final class ZoneContext implements Context
         $settings->set('default_tax_zone', $zone);
         $this->settingsManager->saveSettings('sylius_taxation', $settings);
     }
+
+    /**
+     * @Given the store does not have any zones defined
+     */
+    public function theStoreDoesNotHaveAnyZonesDefined()
+    {
+        $zones = $this->zoneRepository->findAll();
+
+        foreach ($zones as $zone) {
+            $this->zoneRepository->remove($zone);
+        }
+    }
 }

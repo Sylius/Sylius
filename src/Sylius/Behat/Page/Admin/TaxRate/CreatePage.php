@@ -40,7 +40,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     ];
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function chooseZone($name)
     {
@@ -48,7 +48,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function chooseCategory($name)
     {
@@ -56,7 +56,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function chooseCalculator($name)
     {
@@ -64,7 +64,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function specifyAmount($amount)
     {
