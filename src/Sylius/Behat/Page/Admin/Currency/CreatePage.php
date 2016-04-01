@@ -22,6 +22,13 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     use ChoosesName;
 
     /**
+     * @var array
+     */
+    protected $elements = [
+        'code' => '#sylius_currency_code',
+    ];
+
+    /**
      * @param float $exchangeRate
      */
     public function specifyExchangeRate($exchangeRate)

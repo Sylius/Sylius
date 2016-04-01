@@ -82,6 +82,7 @@ final class ManagingCurrenciesContext implements Context
 
     /**
      * @When I add it
+     * @When I try to add it
      */
     public function iAddIt()
     {
@@ -216,6 +217,30 @@ final class ManagingCurrenciesContext implements Context
             'disabled',
             $this->updatePage->getCodeDisabledAttribute(),
             'Code field should be disabled but is not.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that currency code must be unique
+     */
+    public function iShouldBeNotifiedThatCurrencyCodeMustBeUnique()
+    {
+        Assert::true(
+            $this->createPage->checkValidationMessageFor('code', 'Currency code must be unique.'),
+            'Unique code violation message should appear on page, but it does not.'
+        );
+    }
+
+    /**
+     * @Then there should still be only one currency with :element :code
+     */
+    public function thereShouldStillBeOnlyOneCurrencyWithCode($element, $codeValue)
+    {
+        $this->indexPage->open();
+
+        Assert::true(
+            $this->indexPage->isResourceOnPage([$element => $codeValue]),
+            sprintf('Currency with %s %s cannot be found.', $element, $codeValue)
         );
     }
 }
