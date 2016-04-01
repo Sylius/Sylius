@@ -24,7 +24,6 @@
         "ext-fileinfo": "*",
         "ext-gd": "*",
 
-        "a2lix/translation-form-bundle": "~2.0",
         "doctrine/collections": "~1.2",
         "doctrine/common": "~2.5",
         "doctrine/doctrine-bundle": "~1.3",
