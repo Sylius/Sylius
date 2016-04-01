@@ -11,11 +11,7 @@
 
 namespace Sylius\Behat\Page\Admin\TaxRate;
 
-use Sylius\Behat\Behaviour\ChoosesCalculator;
-use Sylius\Behat\Behaviour\ChoosesCategory;
-use Sylius\Behat\Behaviour\ChoosesZone;
 use Sylius\Behat\Behaviour\NamesIt;
-use Sylius\Behat\Behaviour\SpecifiesItsAmount;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 
