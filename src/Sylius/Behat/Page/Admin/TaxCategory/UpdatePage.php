@@ -11,9 +11,6 @@
 
 namespace Sylius\Behat\Page\Admin\TaxCategory;
 
-use Behat\Mink\Element\NodeElement;
-use Behat\Mink\Exception\Exception;
-use Behat\Mink\Exception\ExpectationException;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Behaviour\NamesIt;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
